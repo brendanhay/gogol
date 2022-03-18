@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,98 +36,91 @@
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.updatePolicy@.
 module Gogol.BinaryAuthorization.Projects.UpdatePolicy
-  ( -- * Resource
-    BinaryAuthorizationProjectsUpdatePolicyResource,
+    (
+    -- * Resource
+      BinaryAuthorizationProjectsUpdatePolicyResource
 
     -- ** Constructing a Request
-    newBinaryAuthorizationProjectsUpdatePolicy,
-    BinaryAuthorizationProjectsUpdatePolicy,
-  )
-where
+    , newBinaryAuthorizationProjectsUpdatePolicy
+    , BinaryAuthorizationProjectsUpdatePolicy
+    ) where
 
-import Gogol.BinaryAuthorization.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BinaryAuthorization.Types
 
 -- | A resource alias for @binaryauthorization.projects.updatePolicy@ method which the
 -- 'BinaryAuthorizationProjectsUpdatePolicy' request conforms to.
-type BinaryAuthorizationProjectsUpdatePolicyResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Policy
-    Core.:> Core.Put '[Core.JSON] Policy
+type BinaryAuthorizationProjectsUpdatePolicyResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] Policy Core.:>
+                       Core.Put '[Core.JSON] Policy
 
 -- | Creates or updates a project\'s policy, and returns a copy of the new policy. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns NOT/FOUND if the project does not exist, INVALID/ARGUMENT if the request is malformed.
 --
 -- /See:/ 'newBinaryAuthorizationProjectsUpdatePolicy' smart constructor.
 data BinaryAuthorizationProjectsUpdatePolicy = BinaryAuthorizationProjectsUpdatePolicy
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Output only. The resource name, in the format @projects\/*\/policy@. There is at most one policy per project.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Policy,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Output only. The resource name, in the format @projects\/*\/policy@. There is at most one policy per project.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: Policy
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BinaryAuthorizationProjectsUpdatePolicy' with the minimum fields required to make a request.
-newBinaryAuthorizationProjectsUpdatePolicy ::
-  -- |  Output only. The resource name, in the format @projects\/*\/policy@. There is at most one policy per project. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Policy ->
-  BinaryAuthorizationProjectsUpdatePolicy
+newBinaryAuthorizationProjectsUpdatePolicy 
+    ::  Core.Text
+       -- ^  Output only. The resource name, in the format @projects\/*\/policy@. There is at most one policy per project. See 'name'.
+    -> Policy
+       -- ^  Multipart request metadata. See 'payload'.
+    -> BinaryAuthorizationProjectsUpdatePolicy
 newBinaryAuthorizationProjectsUpdatePolicy name payload =
   BinaryAuthorizationProjectsUpdatePolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BinaryAuthorizationProjectsUpdatePolicy
-  where
-  type
-    Rs BinaryAuthorizationProjectsUpdatePolicy =
-      Policy
-  type
-    Scopes BinaryAuthorizationProjectsUpdatePolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    BinaryAuthorizationProjectsUpdatePolicy {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        binaryAuthorizationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BinaryAuthorizationProjectsUpdatePolicyResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           BinaryAuthorizationProjectsUpdatePolicy
+         where
+        type Rs BinaryAuthorizationProjectsUpdatePolicy =
+             Policy
+        type Scopes BinaryAuthorizationProjectsUpdatePolicy =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          BinaryAuthorizationProjectsUpdatePolicy{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              binaryAuthorizationService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           BinaryAuthorizationProjectsUpdatePolicyResource)
+                      Core.mempty
+
