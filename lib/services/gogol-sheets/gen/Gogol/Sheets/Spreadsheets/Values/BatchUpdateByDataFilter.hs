@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,102 +30,109 @@
 --
 -- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.batchUpdateByDataFilter@.
 module Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
-    (
-    -- * Resource
-      SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource
+  ( -- * Resource
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource,
 
     -- ** Constructing a Request
-    , newSheetsSpreadsheetsValuesBatchUpdateByDataFilter
-    , SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-    ) where
+    newSheetsSpreadsheetsValuesBatchUpdateByDataFilter,
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchUpdateByDataFilter@ method which the
 -- 'SheetsSpreadsheetsValuesBatchUpdateByDataFilter' request conforms to.
-type SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource
-     =
-     "v4" Core.:>
-       "spreadsheets" Core.:>
-         Core.Capture "spreadsheetId" Core.Text Core.:>
-           "values:batchUpdateByDataFilter" Core.:>
-             Core.QueryParam "$.xgafv" Xgafv Core.:>
-               Core.QueryParam "access_token" Core.Text Core.:>
-                 Core.QueryParam "callback" Core.Text Core.:>
-                   Core.QueryParam "uploadType" Core.Text Core.:>
-                     Core.QueryParam "upload_protocol" Core.Text Core.:>
-                       Core.QueryParam "alt" Core.AltJSON Core.:>
-                         Core.ReqBody '[Core.JSON]
-                           BatchUpdateValuesByDataFilterRequest
-                           Core.:>
-                           Core.Post '[Core.JSON]
-                             BatchUpdateValuesByDataFilterResponse
+type SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource =
+  "v4"
+    Core.:> "spreadsheets"
+    Core.:> Core.Capture "spreadsheetId" Core.Text
+    Core.:> "values:batchUpdateByDataFilter"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              BatchUpdateValuesByDataFilterRequest
+    Core.:> Core.Post
+              '[Core.JSON]
+              BatchUpdateValuesByDataFilterResponse
 
 -- | Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOption, and one or more DataFilterValueRanges.
 --
 -- /See:/ 'newSheetsSpreadsheetsValuesBatchUpdateByDataFilter' smart constructor.
 data SheetsSpreadsheetsValuesBatchUpdateByDataFilter = SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: BatchUpdateValuesByDataFilterRequest
-      -- | The ID of the spreadsheet to update.
-    , spreadsheetId :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: BatchUpdateValuesByDataFilterRequest,
+    -- | The ID of the spreadsheet to update.
+    spreadsheetId :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SheetsSpreadsheetsValuesBatchUpdateByDataFilter' with the minimum fields required to make a request.
-newSheetsSpreadsheetsValuesBatchUpdateByDataFilter 
-    ::  BatchUpdateValuesByDataFilterRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  The ID of the spreadsheet to update. See 'spreadsheetId'.
-    -> SheetsSpreadsheetsValuesBatchUpdateByDataFilter
+newSheetsSpreadsheetsValuesBatchUpdateByDataFilter ::
+  -- |  Multipart request metadata. See 'payload'.
+  BatchUpdateValuesByDataFilterRequest ->
+  -- |  The ID of the spreadsheet to update. See 'spreadsheetId'.
+  Core.Text ->
+  SheetsSpreadsheetsValuesBatchUpdateByDataFilter
 newSheetsSpreadsheetsValuesBatchUpdateByDataFilter payload spreadsheetId =
   SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , spreadsheetId = spreadsheetId
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      spreadsheetId = spreadsheetId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-         where
-        type Rs
-               SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-             = BatchUpdateValuesByDataFilterResponse
-        type Scopes
-               SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-             =
-             '["https://www.googleapis.com/auth/drive",
-               "https://www.googleapis.com/auth/drive.file",
-               "https://www.googleapis.com/auth/spreadsheets"]
-        requestClient
-          SheetsSpreadsheetsValuesBatchUpdateByDataFilter{..}
-          = go spreadsheetId xgafv accessToken callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              sheetsService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter
+  where
+  type
+    Rs
+      SheetsSpreadsheetsValuesBatchUpdateByDataFilter =
+      BatchUpdateValuesByDataFilterResponse
+  type
+    Scopes
+      SheetsSpreadsheetsValuesBatchUpdateByDataFilter =
+      '[ "https://www.googleapis.com/auth/drive",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/spreadsheets"
+       ]
+  requestClient
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter {..} =
+      go
+        spreadsheetId
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        sheetsService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource
+            )
+            Core.mempty
