@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,75 +36,68 @@
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.audiences.list@.
 module Gogol.PlusDomains.Audiences.List
-  ( -- * Resource
-    PlusDomainsAudiencesListResource,
+    (
+    -- * Resource
+      PlusDomainsAudiencesListResource
 
     -- ** Constructing a Request
-    newPlusDomainsAudiencesList,
-    PlusDomainsAudiencesList,
-  )
-where
+    , newPlusDomainsAudiencesList
+    , PlusDomainsAudiencesList
+    ) where
 
-import Gogol.PlusDomains.Types
 import qualified Gogol.Prelude as Core
+import Gogol.PlusDomains.Types
 
 -- | A resource alias for @plusDomains.audiences.list@ method which the
 -- 'PlusDomainsAudiencesList' request conforms to.
 type PlusDomainsAudiencesListResource =
-  "plusDomains"
-    Core.:> "v1"
-    Core.:> "people"
-    Core.:> Core.Capture "userId" Core.Text
-    Core.:> "audiences"
-    Core.:> Core.QueryParam "maxResults" Core.Word32
-    Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AudiencesFeed
+     "plusDomains" Core.:>
+       "v1" Core.:>
+         "people" Core.:>
+           Core.Capture "userId" Core.Text Core.:>
+             "audiences" Core.:>
+               Core.QueryParam "maxResults" Core.Word32 Core.:>
+                 Core.QueryParam "pageToken" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] AudiencesFeed
 
 -- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
 -- /See:/ 'newPlusDomainsAudiencesList' smart constructor.
 data PlusDomainsAudiencesList = PlusDomainsAudiencesList
-  { -- | The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
-    maxResults :: Core.Word32,
-    -- | The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.
-    pageToken :: (Core.Maybe Core.Text),
-    -- | The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user.
-    userId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+      maxResults :: Core.Word32
+      -- | The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.
+    , pageToken :: (Core.Maybe Core.Text)
+      -- | The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user.
+    , userId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PlusDomainsAudiencesList' with the minimum fields required to make a request.
-newPlusDomainsAudiencesList ::
-  -- |  The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user. See 'userId'.
-  Core.Text ->
-  PlusDomainsAudiencesList
+newPlusDomainsAudiencesList 
+    ::  Core.Text
+       -- ^  The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user. See 'userId'.
+    -> PlusDomainsAudiencesList
 newPlusDomainsAudiencesList userId =
   PlusDomainsAudiencesList
-    { maxResults = 20,
-      pageToken = Core.Nothing,
-      userId = userId
-    }
+    {maxResults = 20, pageToken = Core.Nothing, userId = userId}
 
-instance Core.GoogleRequest PlusDomainsAudiencesList where
-  type Rs PlusDomainsAudiencesList = AudiencesFeed
-  type
-    Scopes PlusDomainsAudiencesList =
-      '[ "https://www.googleapis.com/auth/plus.circles.read",
-         "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
-  requestClient PlusDomainsAudiencesList {..} =
-    go
-      userId
-      (Core.Just maxResults)
-      pageToken
-      (Core.Just Core.AltJSON)
-      plusDomainsService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PlusDomainsAudiencesListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest PlusDomainsAudiencesList
+         where
+        type Rs PlusDomainsAudiencesList = AudiencesFeed
+        type Scopes PlusDomainsAudiencesList =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient PlusDomainsAudiencesList{..}
+          = go userId (Core.Just maxResults) pageToken
+              (Core.Just Core.AltJSON)
+              plusDomainsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy PlusDomainsAudiencesListResource)
+                      Core.mempty
+
