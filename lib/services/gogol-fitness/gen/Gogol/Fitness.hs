@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,215 +36,215 @@
 --
 -- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference>
 module Gogol.Fitness
-  ( -- * Configuration
-    fitnessService,
+    (
+    -- * Configuration
+      fitnessService
 
     -- * OAuth Scopes
-    fitnessActivityReadScope,
-    fitnessActivityWriteScope,
-    fitnessBlood_glucoseReadScope,
-    fitnessBlood_glucoseWriteScope,
-    fitnessBlood_pressureReadScope,
-    fitnessBlood_pressureWriteScope,
-    fitnessBodyReadScope,
-    fitnessBodyWriteScope,
-    fitnessBody_temperatureReadScope,
-    fitnessBody_temperatureWriteScope,
-    fitnessHeart_rateReadScope,
-    fitnessHeart_rateWriteScope,
-    fitnessLocationReadScope,
-    fitnessLocationWriteScope,
-    fitnessNutritionReadScope,
-    fitnessNutritionWriteScope,
-    fitnessOxygen_saturationReadScope,
-    fitnessOxygen_saturationWriteScope,
-    fitnessReproductive_healthReadScope,
-    fitnessReproductive_healthWriteScope,
-    fitnessSleepReadScope,
-    fitnessSleepWriteScope,
+    , fitnessActivityReadScope
+    , fitnessActivityWriteScope
+    , fitnessBlood_glucoseReadScope
+    , fitnessBlood_glucoseWriteScope
+    , fitnessBlood_pressureReadScope
+    , fitnessBlood_pressureWriteScope
+    , fitnessBodyReadScope
+    , fitnessBodyWriteScope
+    , fitnessBody_temperatureReadScope
+    , fitnessBody_temperatureWriteScope
+    , fitnessHeart_rateReadScope
+    , fitnessHeart_rateWriteScope
+    , fitnessLocationReadScope
+    , fitnessLocationWriteScope
+    , fitnessNutritionReadScope
+    , fitnessNutritionWriteScope
+    , fitnessOxygen_saturationReadScope
+    , fitnessOxygen_saturationWriteScope
+    , fitnessReproductive_healthReadScope
+    , fitnessReproductive_healthWriteScope
+    , fitnessSleepReadScope
+    , fitnessSleepWriteScope
 
     -- * Resources
 
     -- ** fitness.users.dataSources.create
-    FitnessUsersDataSourcesCreateResource,
-    newFitnessUsersDataSourcesCreate,
-    FitnessUsersDataSourcesCreate,
+    , FitnessUsersDataSourcesCreateResource
+    , newFitnessUsersDataSourcesCreate
+    , FitnessUsersDataSourcesCreate
 
     -- ** fitness.users.dataSources.dataPointChanges.list
-    FitnessUsersDataSourcesDataPointChangesListResource,
-    newFitnessUsersDataSourcesDataPointChangesList,
-    FitnessUsersDataSourcesDataPointChangesList,
+    , FitnessUsersDataSourcesDataPointChangesListResource
+    , newFitnessUsersDataSourcesDataPointChangesList
+    , FitnessUsersDataSourcesDataPointChangesList
 
     -- ** fitness.users.dataSources.datasets.delete
-    FitnessUsersDataSourcesDatasetsDeleteResource,
-    newFitnessUsersDataSourcesDatasetsDelete,
-    FitnessUsersDataSourcesDatasetsDelete,
+    , FitnessUsersDataSourcesDatasetsDeleteResource
+    , newFitnessUsersDataSourcesDatasetsDelete
+    , FitnessUsersDataSourcesDatasetsDelete
 
     -- ** fitness.users.dataSources.datasets.get
-    FitnessUsersDataSourcesDatasetsGetResource,
-    newFitnessUsersDataSourcesDatasetsGet,
-    FitnessUsersDataSourcesDatasetsGet,
+    , FitnessUsersDataSourcesDatasetsGetResource
+    , newFitnessUsersDataSourcesDatasetsGet
+    , FitnessUsersDataSourcesDatasetsGet
 
     -- ** fitness.users.dataSources.datasets.patch
-    FitnessUsersDataSourcesDatasetsPatchResource,
-    newFitnessUsersDataSourcesDatasetsPatch,
-    FitnessUsersDataSourcesDatasetsPatch,
+    , FitnessUsersDataSourcesDatasetsPatchResource
+    , newFitnessUsersDataSourcesDatasetsPatch
+    , FitnessUsersDataSourcesDatasetsPatch
 
     -- ** fitness.users.dataSources.delete
-    FitnessUsersDataSourcesDeleteResource,
-    newFitnessUsersDataSourcesDelete,
-    FitnessUsersDataSourcesDelete,
+    , FitnessUsersDataSourcesDeleteResource
+    , newFitnessUsersDataSourcesDelete
+    , FitnessUsersDataSourcesDelete
 
     -- ** fitness.users.dataSources.get
-    FitnessUsersDataSourcesGetResource,
-    newFitnessUsersDataSourcesGet,
-    FitnessUsersDataSourcesGet,
+    , FitnessUsersDataSourcesGetResource
+    , newFitnessUsersDataSourcesGet
+    , FitnessUsersDataSourcesGet
 
     -- ** fitness.users.dataSources.list
-    FitnessUsersDataSourcesListResource,
-    newFitnessUsersDataSourcesList,
-    FitnessUsersDataSourcesList,
+    , FitnessUsersDataSourcesListResource
+    , newFitnessUsersDataSourcesList
+    , FitnessUsersDataSourcesList
 
     -- ** fitness.users.dataSources.update
-    FitnessUsersDataSourcesUpdateResource,
-    newFitnessUsersDataSourcesUpdate,
-    FitnessUsersDataSourcesUpdate,
+    , FitnessUsersDataSourcesUpdateResource
+    , newFitnessUsersDataSourcesUpdate
+    , FitnessUsersDataSourcesUpdate
 
     -- ** fitness.users.dataset.aggregate
-    FitnessUsersDatasetAggregateResource,
-    newFitnessUsersDatasetAggregate,
-    FitnessUsersDatasetAggregate,
+    , FitnessUsersDatasetAggregateResource
+    , newFitnessUsersDatasetAggregate
+    , FitnessUsersDatasetAggregate
 
     -- ** fitness.users.sessions.delete
-    FitnessUsersSessionsDeleteResource,
-    newFitnessUsersSessionsDelete,
-    FitnessUsersSessionsDelete,
+    , FitnessUsersSessionsDeleteResource
+    , newFitnessUsersSessionsDelete
+    , FitnessUsersSessionsDelete
 
     -- ** fitness.users.sessions.list
-    FitnessUsersSessionsListResource,
-    newFitnessUsersSessionsList,
-    FitnessUsersSessionsList,
+    , FitnessUsersSessionsListResource
+    , newFitnessUsersSessionsList
+    , FitnessUsersSessionsList
 
     -- ** fitness.users.sessions.update
-    FitnessUsersSessionsUpdateResource,
-    newFitnessUsersSessionsUpdate,
-    FitnessUsersSessionsUpdate,
+    , FitnessUsersSessionsUpdateResource
+    , newFitnessUsersSessionsUpdate
+    , FitnessUsersSessionsUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AggregateBucket
-    AggregateBucket (..),
-    newAggregateBucket,
+    , AggregateBucket (..)
+    , newAggregateBucket
 
     -- ** AggregateBucket_Type
-    AggregateBucket_Type (..),
+    , AggregateBucket_Type (..)
 
     -- ** AggregateBy
-    AggregateBy (..),
-    newAggregateBy,
+    , AggregateBy (..)
+    , newAggregateBy
 
     -- ** AggregateRequest
-    AggregateRequest (..),
-    newAggregateRequest,
+    , AggregateRequest (..)
+    , newAggregateRequest
 
     -- ** AggregateRequest_FilteredDataQualityStandardItem
-    AggregateRequest_FilteredDataQualityStandardItem (..),
+    , AggregateRequest_FilteredDataQualityStandardItem (..)
 
     -- ** AggregateResponse
-    AggregateResponse (..),
-    newAggregateResponse,
+    , AggregateResponse (..)
+    , newAggregateResponse
 
     -- ** Application
-    Application (..),
-    newApplication,
+    , Application (..)
+    , newApplication
 
     -- ** BucketByActivity
-    BucketByActivity (..),
-    newBucketByActivity,
+    , BucketByActivity (..)
+    , newBucketByActivity
 
     -- ** BucketBySession
-    BucketBySession (..),
-    newBucketBySession,
+    , BucketBySession (..)
+    , newBucketBySession
 
     -- ** BucketByTime
-    BucketByTime (..),
-    newBucketByTime,
+    , BucketByTime (..)
+    , newBucketByTime
 
     -- ** BucketByTimePeriod
-    BucketByTimePeriod (..),
-    newBucketByTimePeriod,
+    , BucketByTimePeriod (..)
+    , newBucketByTimePeriod
 
     -- ** BucketByTimePeriod_Type
-    BucketByTimePeriod_Type (..),
+    , BucketByTimePeriod_Type (..)
 
     -- ** DataPoint
-    DataPoint (..),
-    newDataPoint,
+    , DataPoint (..)
+    , newDataPoint
 
     -- ** DataSource
-    DataSource (..),
-    newDataSource,
+    , DataSource (..)
+    , newDataSource
 
     -- ** DataSource_DataQualityStandardItem
-    DataSource_DataQualityStandardItem (..),
+    , DataSource_DataQualityStandardItem (..)
 
     -- ** DataSource_Type
-    DataSource_Type (..),
+    , DataSource_Type (..)
 
     -- ** DataType
-    DataType (..),
-    newDataType,
+    , DataType (..)
+    , newDataType
 
     -- ** DataTypeField
-    DataTypeField (..),
-    newDataTypeField,
+    , DataTypeField (..)
+    , newDataTypeField
 
     -- ** DataTypeField_Format
-    DataTypeField_Format (..),
+    , DataTypeField_Format (..)
 
     -- ** Dataset
-    Dataset (..),
-    newDataset,
+    , Dataset (..)
+    , newDataset
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** Device_Type
-    Device_Type (..),
+    , Device_Type (..)
 
     -- ** ListDataPointChangesResponse
-    ListDataPointChangesResponse (..),
-    newListDataPointChangesResponse,
+    , ListDataPointChangesResponse (..)
+    , newListDataPointChangesResponse
 
     -- ** ListDataSourcesResponse
-    ListDataSourcesResponse (..),
-    newListDataSourcesResponse,
+    , ListDataSourcesResponse (..)
+    , newListDataSourcesResponse
 
     -- ** ListSessionsResponse
-    ListSessionsResponse (..),
-    newListSessionsResponse,
+    , ListSessionsResponse (..)
+    , newListSessionsResponse
 
     -- ** MapValue
-    MapValue (..),
-    newMapValue,
+    , MapValue (..)
+    , newMapValue
 
     -- ** Session
-    Session (..),
-    newSession,
+    , Session (..)
+    , newSession
 
     -- ** Value
-    Value (..),
-    newValue,
+    , Value (..)
+    , newValue
 
     -- ** ValueMapValEntry
-    ValueMapValEntry (..),
-    newValueMapValEntry,
-  )
-where
+    , ValueMapValEntry (..)
+    , newValueMapValEntry
+    ) where
 
 import Gogol.Fitness.Types
 import Gogol.Fitness.Users.DataSources.Create
