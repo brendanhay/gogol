@@ -19,34 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeAnalytics.Groups.Delete
+-- Module      : Gogol.YouTubeAnalytics.GroupItems.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a group.
+-- Removes an item from a group.
 --
--- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference> for @youtubeAnalytics.groups.delete@.
-module Network.Google.YouTubeAnalytics.Groups.Delete
+-- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference> for @youtubeAnalytics.groupItems.delete@.
+module Gogol.YouTubeAnalytics.GroupItems.Delete
   ( -- * Resource
-    YouTubeAnalyticsGroupsDeleteResource,
+    YouTubeAnalyticsGroupItemsDeleteResource,
 
     -- ** Constructing a Request
-    newYouTubeAnalyticsGroupsDelete,
-    YouTubeAnalyticsGroupsDelete,
+    newYouTubeAnalyticsGroupItemsDelete,
+    YouTubeAnalyticsGroupItemsDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeAnalytics.Types
+import qualified Gogol.Prelude as Core
+import Gogol.YouTubeAnalytics.Types
 
--- | A resource alias for @youtubeAnalytics.groups.delete@ method which the
--- 'YouTubeAnalyticsGroupsDelete' request conforms to.
-type YouTubeAnalyticsGroupsDeleteResource =
+-- | A resource alias for @youtubeAnalytics.groupItems.delete@ method which the
+-- 'YouTubeAnalyticsGroupItemsDelete' request conforms to.
+type YouTubeAnalyticsGroupItemsDeleteResource =
   "v2"
-    Core.:> "groups"
+    Core.:> "groupItems"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -57,17 +57,17 @@ type YouTubeAnalyticsGroupsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] EmptyResponse
 
--- | Deletes a group.
+-- | Removes an item from a group.
 --
--- /See:/ 'newYouTubeAnalyticsGroupsDelete' smart constructor.
-data YouTubeAnalyticsGroupsDelete = YouTubeAnalyticsGroupsDelete
+-- /See:/ 'newYouTubeAnalyticsGroupItemsDelete' smart constructor.
+data YouTubeAnalyticsGroupItemsDelete = YouTubeAnalyticsGroupItemsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The @id@ parameter specifies the YouTube group ID of the group that is being deleted.
+    -- | The @id@ parameter specifies the YouTube group item ID of the group item that is being deleted.
     id :: (Core.Maybe Core.Text),
     -- | This parameter can only be used in a properly authorized request. __Note:__ This parameter is intended exclusively for YouTube content partners that own and manage many different YouTube channels. The @onBehalfOfContentOwner@ parameter indicates that the request\'s authorization credentials identify a YouTube user who is acting on behalf of the content owner specified in the parameter value. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The account that the user authenticates with must be linked to the specified YouTube content owner.
     onBehalfOfContentOwner :: (Core.Maybe Core.Text),
@@ -78,11 +78,11 @@ data YouTubeAnalyticsGroupsDelete = YouTubeAnalyticsGroupsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'YouTubeAnalyticsGroupsDelete' with the minimum fields required to make a request.
-newYouTubeAnalyticsGroupsDelete ::
-  YouTubeAnalyticsGroupsDelete
-newYouTubeAnalyticsGroupsDelete =
-  YouTubeAnalyticsGroupsDelete
+-- | Creates a value of 'YouTubeAnalyticsGroupItemsDelete' with the minimum fields required to make a request.
+newYouTubeAnalyticsGroupItemsDelete ::
+  YouTubeAnalyticsGroupItemsDelete
+newYouTubeAnalyticsGroupItemsDelete =
+  YouTubeAnalyticsGroupItemsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -94,18 +94,20 @@ newYouTubeAnalyticsGroupsDelete =
 
 instance
   Core.GoogleRequest
-    YouTubeAnalyticsGroupsDelete
+    YouTubeAnalyticsGroupItemsDelete
   where
-  type Rs YouTubeAnalyticsGroupsDelete = EmptyResponse
   type
-    Scopes YouTubeAnalyticsGroupsDelete =
+    Rs YouTubeAnalyticsGroupItemsDelete =
+      EmptyResponse
+  type
+    Scopes YouTubeAnalyticsGroupItemsDelete =
       '[ "https://www.googleapis.com/auth/youtube",
          "https://www.googleapis.com/auth/youtube.readonly",
          "https://www.googleapis.com/auth/youtubepartner",
          "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
          "https://www.googleapis.com/auth/yt-analytics.readonly"
        ]
-  requestClient YouTubeAnalyticsGroupsDelete {..} =
+  requestClient YouTubeAnalyticsGroupItemsDelete {..} =
     go
       xgafv
       accessToken
@@ -120,6 +122,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy YouTubeAnalyticsGroupsDeleteResource
+              Core.Proxy YouTubeAnalyticsGroupItemsDeleteResource
           )
           Core.mempty

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeAnalytics.Reports.Query
+-- Module      : Gogol.YouTubeAnalytics.Reports.Query
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieve your YouTube Analytics reports.
 --
 -- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference> for @youtubeAnalytics.reports.query@.
-module Network.Google.YouTubeAnalytics.Reports.Query
+module Gogol.YouTubeAnalytics.Reports.Query
   ( -- * Resource
     YouTubeAnalyticsReportsQueryResource,
 
@@ -39,8 +39,8 @@ module Network.Google.YouTubeAnalytics.Reports.Query
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeAnalytics.Types
+import qualified Gogol.Prelude as Core
+import Gogol.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.reports.query@ method which the
 -- 'YouTubeAnalyticsReportsQuery' request conforms to.

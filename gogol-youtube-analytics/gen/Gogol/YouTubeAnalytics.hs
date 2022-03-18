@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeAnalytics
+-- Module      : Gogol.YouTubeAnalytics
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves your YouTube Analytics data.
 --
 -- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference>
-module Network.Google.YouTubeAnalytics
+module Gogol.YouTubeAnalytics
   ( -- * Configuration
     youTubeAnalyticsService,
 
@@ -143,12 +143,12 @@ module Network.Google.YouTubeAnalytics
   )
 where
 
-import Network.Google.YouTubeAnalytics.GroupItems.Delete
-import Network.Google.YouTubeAnalytics.GroupItems.Insert
-import Network.Google.YouTubeAnalytics.GroupItems.List
-import Network.Google.YouTubeAnalytics.Groups.Delete
-import Network.Google.YouTubeAnalytics.Groups.Insert
-import Network.Google.YouTubeAnalytics.Groups.List
-import Network.Google.YouTubeAnalytics.Groups.Update
-import Network.Google.YouTubeAnalytics.Reports.Query
-import Network.Google.YouTubeAnalytics.Types
+import Gogol.YouTubeAnalytics.GroupItems.Delete
+import Gogol.YouTubeAnalytics.GroupItems.Insert
+import Gogol.YouTubeAnalytics.GroupItems.List
+import Gogol.YouTubeAnalytics.Groups.Delete
+import Gogol.YouTubeAnalytics.Groups.Insert
+import Gogol.YouTubeAnalytics.Groups.List
+import Gogol.YouTubeAnalytics.Groups.Update
+import Gogol.YouTubeAnalytics.Reports.Query
+import Gogol.YouTubeAnalytics.Types
