@@ -1,48 +1,63 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.PlayCustomApp.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.PlayCustomApp.Types
-    (
-    -- * Service Configuration
-      playCustomAppService
+  ( -- * Configuration
+    playCustomAppService,
 
     -- * OAuth Scopes
-    , androidPublisherScope
+    androidpublisherScope,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- * Types
 
-    -- * CustomApp
-    , CustomApp
-    , customApp
-    , caLanguageCode
-    , caPackageName
-    , caTitle
-    ) where
+    -- ** Xgafv
+    Xgafv (..),
 
-import Network.Google.PlayCustomApp.Types.Product
-import Network.Google.PlayCustomApp.Types.Sum
-import Network.Google.Prelude
+    -- ** CustomApp
+    CustomApp (..),
+    newCustomApp,
 
--- | Default request referring to version 'v1' of the Google Play Custom App Publishing API. This contains the host and root path used as a starting point for constructing service requests.
-playCustomAppService :: ServiceConfig
-playCustomAppService
-  = defaultService (ServiceId "playcustomapp:v1")
-      "playcustomapp.googleapis.com"
+    -- ** Organization
+    Organization (..),
+    newOrganization,
+  )
+where
+
+import Network.Google.PlayCustomApp.Internal.Product
+import Network.Google.PlayCustomApp.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Google Play Custom App Publishing API. This contains the host and root path used as a starting point for constructing service requests.
+playCustomAppService :: Core.ServiceConfig
+playCustomAppService =
+  Core.defaultService
+    (Core.ServiceId "playcustomapp:v1")
+    "playcustomapp.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidPublisherScope = Proxy
+androidpublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+androidpublisherScope = Core.Proxy
