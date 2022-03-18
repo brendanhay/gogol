@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Language
+-- Module      : Gogol.Language
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.
 --
 -- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference>
-module Network.Google.Language
+module Gogol.Language
   ( -- * Configuration
     languageService,
 
@@ -243,10 +243,10 @@ module Network.Google.Language
   )
 where
 
-import Network.Google.Language.Documents.AnalyzeEntities
-import Network.Google.Language.Documents.AnalyzeEntitySentiment
-import Network.Google.Language.Documents.AnalyzeSentiment
-import Network.Google.Language.Documents.AnalyzeSyntax
-import Network.Google.Language.Documents.AnnotateText
-import Network.Google.Language.Documents.ClassifyText
-import Network.Google.Language.Types
+import Gogol.Language.Documents.AnalyzeEntities
+import Gogol.Language.Documents.AnalyzeEntitySentiment
+import Gogol.Language.Documents.AnalyzeSentiment
+import Gogol.Language.Documents.AnalyzeSyntax
+import Gogol.Language.Documents.AnnotateText
+import Gogol.Language.Documents.ClassifyText
+import Gogol.Language.Types

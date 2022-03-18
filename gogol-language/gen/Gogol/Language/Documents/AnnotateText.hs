@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Language.Documents.AnnotateText
+-- Module      : Gogol.Language.Documents.AnnotateText
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- A convenience method that provides all the features that analyzeSentiment, analyzeEntities, and analyzeSyntax provide in one call.
 --
 -- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.annotateText@.
-module Network.Google.Language.Documents.AnnotateText
+module Gogol.Language.Documents.AnnotateText
   ( -- * Resource
     LanguageDocumentsAnnotateTextResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Language.Documents.AnnotateText
   )
 where
 
-import Network.Google.Language.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Language.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @language.documents.annotateText@ method which the
 -- 'LanguageDocumentsAnnotateText' request conforms to.

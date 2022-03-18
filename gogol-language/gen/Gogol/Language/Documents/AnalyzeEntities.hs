@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Language.Documents.AnalyzeEntities
+-- Module      : Gogol.Language.Documents.AnalyzeEntities
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Finds named entities (currently proper names and common nouns) in the text along with entity types, salience, mentions for each entity, and other properties.
 --
 -- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeEntities@.
-module Network.Google.Language.Documents.AnalyzeEntities
+module Gogol.Language.Documents.AnalyzeEntities
   ( -- * Resource
     LanguageDocumentsAnalyzeEntitiesResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Language.Documents.AnalyzeEntities
   )
 where
 
-import Network.Google.Language.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Language.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @language.documents.analyzeEntities@ method which the
 -- 'LanguageDocumentsAnalyzeEntities' request conforms to.
