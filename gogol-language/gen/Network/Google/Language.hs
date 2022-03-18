@@ -1,324 +1,252 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Language
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides natural language understanding technologies, such as sentiment
--- analysis, entity recognition, entity sentiment analysis, and other text
--- annotations, to developers.
+-- Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.
 --
 -- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference>
 module Network.Google.Language
-    (
-    -- * Service Configuration
-      languageService
+  ( -- * Configuration
+    languageService,
 
     -- * OAuth Scopes
-    , cloudLanguageScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , LanguageAPI
+    cloudLanguageScope,
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** language.documents.analyzeEntities
-    , module Network.Google.Resource.Language.Documents.AnalyzeEntities
+    LanguageDocumentsAnalyzeEntitiesResource,
+    newLanguageDocumentsAnalyzeEntities,
+    LanguageDocumentsAnalyzeEntities,
 
     -- ** language.documents.analyzeEntitySentiment
-    , module Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
+    LanguageDocumentsAnalyzeEntitySentimentResource,
+    newLanguageDocumentsAnalyzeEntitySentiment,
+    LanguageDocumentsAnalyzeEntitySentiment,
 
     -- ** language.documents.analyzeSentiment
-    , module Network.Google.Resource.Language.Documents.AnalyzeSentiment
+    LanguageDocumentsAnalyzeSentimentResource,
+    newLanguageDocumentsAnalyzeSentiment,
+    LanguageDocumentsAnalyzeSentiment,
 
     -- ** language.documents.analyzeSyntax
-    , module Network.Google.Resource.Language.Documents.AnalyzeSyntax
+    LanguageDocumentsAnalyzeSyntaxResource,
+    newLanguageDocumentsAnalyzeSyntax,
+    LanguageDocumentsAnalyzeSyntax,
 
     -- ** language.documents.annotateText
-    , module Network.Google.Resource.Language.Documents.AnnotateText
+    LanguageDocumentsAnnotateTextResource,
+    newLanguageDocumentsAnnotateText,
+    LanguageDocumentsAnnotateText,
 
     -- ** language.documents.classifyText
-    , module Network.Google.Resource.Language.Documents.ClassifyText
+    LanguageDocumentsClassifyTextResource,
+    newLanguageDocumentsClassifyText,
+    LanguageDocumentsClassifyText,
 
     -- * Types
 
-    -- ** AnalyzeSyntaxRequest
-    , AnalyzeSyntaxRequest
-    , analyzeSyntaxRequest
-    , asrEncodingType
-    , asrDocument
-
-    -- ** DependencyEdge
-    , DependencyEdge
-    , dependencyEdge
-    , deHeadTokenIndex
-    , deLabel
-
-    -- ** ClassifyTextRequest
-    , ClassifyTextRequest
-    , classifyTextRequest
-    , ctrDocument
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** PartOfSpeechProper
-    , PartOfSpeechProper (..)
-
-    -- ** PartOfSpeechTag
-    , PartOfSpeechTag (..)
-
-    -- ** Sentiment
-    , Sentiment
-    , sentiment
-    , sScore
-    , sMagnitude
-
-    -- ** DocumentType
-    , DocumentType (..)
-
-    -- ** AnalyzeSyntaxRequestEncodingType
-    , AnalyzeSyntaxRequestEncodingType (..)
-
-    -- ** AnalyzeEntitySentimentRequestEncodingType
-    , AnalyzeEntitySentimentRequestEncodingType (..)
-
-    -- ** DependencyEdgeLabel
-    , DependencyEdgeLabel (..)
-
-    -- ** PartOfSpeechVoice
-    , PartOfSpeechVoice (..)
-
-    -- ** PartOfSpeechForm
-    , PartOfSpeechForm (..)
-
-    -- ** PartOfSpeechPerson
-    , PartOfSpeechPerson (..)
-
-    -- ** Token
-    , Token
-    , token
-    , tDependencyEdge
-    , tText
-    , tLemma
-    , tPartOfSpeech
-
-    -- ** EntityType
-    , EntityType (..)
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** ClassificationCategory
-    , ClassificationCategory
-    , classificationCategory
-    , ccConfidence
-    , ccName
-
-    -- ** AnnotateTextRequest
-    , AnnotateTextRequest
-    , annotateTextRequest
-    , atrEncodingType
-    , atrFeatures
-    , atrDocument
-
-    -- ** EntityMention
-    , EntityMention
-    , entityMention
-    , emSentiment
-    , emText
-    , emType
-
-    -- ** TextSpan
-    , TextSpan
-    , textSpan
-    , tsBeginOffSet
-    , tsContent
-
-    -- ** AnalyzeEntitySentimentRequest
-    , AnalyzeEntitySentimentRequest
-    , analyzeEntitySentimentRequest
-    , aesrEncodingType
-    , aesrDocument
-
-    -- ** AnnotateTextResponse
-    , AnnotateTextResponse
-    , annotateTextResponse
-    , atrEntities
-    , atrTokens
-    , atrDocumentSentiment
-    , atrCategories
-    , atrSentences
-    , atrLanguage
-
-    -- ** PartOfSpeechTense
-    , PartOfSpeechTense (..)
-
-    -- ** Features
-    , Features
-    , features
-    , fExtractSyntax
-    , fExtractDocumentSentiment
-    , fClassifyText
-    , fExtractEntitySentiment
-    , fExtractEntities
-
-    -- ** Document
-    , Document
-    , document
-    , dContent
-    , dLanguage
-    , dGcsContentURI
-    , dType
-
-    -- ** PartOfSpeechMood
-    , PartOfSpeechMood (..)
-
-    -- ** PartOfSpeechCase
-    , PartOfSpeechCase (..)
-
-    -- ** AnalyzeSentimentRequest
-    , AnalyzeSentimentRequest
-    , analyzeSentimentRequest
-    , aEncodingType
-    , aDocument
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** AnalyzeEntitiesResponse
-    , AnalyzeEntitiesResponse
-    , analyzeEntitiesResponse
-    , aerEntities
-    , aerLanguage
-
-    -- ** AnnotateTextRequestEncodingType
-    , AnnotateTextRequestEncodingType (..)
-
-    -- ** PartOfSpeechNumber
-    , PartOfSpeechNumber (..)
-
-    -- ** AnalyzeSentimentResponse
-    , AnalyzeSentimentResponse
-    , analyzeSentimentResponse
-    , asrDocumentSentiment
-    , asrSentences
-    , asrLanguage
+    Xgafv (..),
 
     -- ** AnalyzeEntitiesRequest
-    , AnalyzeEntitiesRequest
-    , analyzeEntitiesRequest
-    , aerEncodingType
-    , aerDocument
+    AnalyzeEntitiesRequest (..),
+    newAnalyzeEntitiesRequest,
 
-    -- ** AnalyzeEntitiesRequestEncodingType
-    , AnalyzeEntitiesRequestEncodingType (..)
+    -- ** AnalyzeEntitiesRequest_EncodingType
+    AnalyzeEntitiesRequest_EncodingType (..),
 
-    -- ** Entity
-    , Entity
-    , entity
-    , eSentiment
-    , eName
-    , eSalience
-    , eMetadata
-    , eType
-    , eMentions
+    -- ** AnalyzeEntitiesResponse
+    AnalyzeEntitiesResponse (..),
+    newAnalyzeEntitiesResponse,
+
+    -- ** AnalyzeEntitySentimentRequest
+    AnalyzeEntitySentimentRequest (..),
+    newAnalyzeEntitySentimentRequest,
+
+    -- ** AnalyzeEntitySentimentRequest_EncodingType
+    AnalyzeEntitySentimentRequest_EncodingType (..),
 
     -- ** AnalyzeEntitySentimentResponse
-    , AnalyzeEntitySentimentResponse
-    , analyzeEntitySentimentResponse
-    , aesrEntities
-    , aesrLanguage
+    AnalyzeEntitySentimentResponse (..),
+    newAnalyzeEntitySentimentResponse,
+
+    -- ** AnalyzeSentimentRequest
+    AnalyzeSentimentRequest (..),
+    newAnalyzeSentimentRequest,
+
+    -- ** AnalyzeSentimentRequest_EncodingType
+    AnalyzeSentimentRequest_EncodingType (..),
+
+    -- ** AnalyzeSentimentResponse
+    AnalyzeSentimentResponse (..),
+    newAnalyzeSentimentResponse,
+
+    -- ** AnalyzeSyntaxRequest
+    AnalyzeSyntaxRequest (..),
+    newAnalyzeSyntaxRequest,
+
+    -- ** AnalyzeSyntaxRequest_EncodingType
+    AnalyzeSyntaxRequest_EncodingType (..),
 
     -- ** AnalyzeSyntaxResponse
-    , AnalyzeSyntaxResponse
-    , analyzeSyntaxResponse
-    , aTokens
-    , aSentences
-    , aLanguage
+    AnalyzeSyntaxResponse (..),
+    newAnalyzeSyntaxResponse,
 
-    -- ** EntityMetadata
-    , EntityMetadata
-    , entityMetadata
-    , emAddtional
+    -- ** AnnotateTextRequest
+    AnnotateTextRequest (..),
+    newAnnotateTextRequest,
 
-    -- ** PartOfSpeechAspect
-    , PartOfSpeechAspect (..)
+    -- ** AnnotateTextRequest_EncodingType
+    AnnotateTextRequest_EncodingType (..),
+
+    -- ** AnnotateTextResponse
+    AnnotateTextResponse (..),
+    newAnnotateTextResponse,
+
+    -- ** ClassificationCategory
+    ClassificationCategory (..),
+    newClassificationCategory,
+
+    -- ** ClassifyTextRequest
+    ClassifyTextRequest (..),
+    newClassifyTextRequest,
 
     -- ** ClassifyTextResponse
-    , ClassifyTextResponse
-    , classifyTextResponse
-    , ctrCategories
+    ClassifyTextResponse (..),
+    newClassifyTextResponse,
+
+    -- ** DependencyEdge
+    DependencyEdge (..),
+    newDependencyEdge,
+
+    -- ** DependencyEdge_Label
+    DependencyEdge_Label (..),
+
+    -- ** Document
+    Document (..),
+    newDocument,
+
+    -- ** Document_Type
+    Document_Type (..),
+
+    -- ** Entity
+    Entity (..),
+    newEntity,
+
+    -- ** Entity_Metadata
+    Entity_Metadata (..),
+    newEntity_Metadata,
+
+    -- ** Entity_Type
+    Entity_Type (..),
+
+    -- ** EntityMention
+    EntityMention (..),
+    newEntityMention,
+
+    -- ** EntityMention_Type
+    EntityMention_Type (..),
+
+    -- ** Features
+    Features (..),
+    newFeatures,
 
     -- ** PartOfSpeech
-    , PartOfSpeech
-    , partOfSpeech
-    , posProper
-    , posTag
-    , posPerson
-    , posAspect
-    , posCase
-    , posGender
-    , posReciprocity
-    , posNumber
-    , posVoice
-    , posForm
-    , posTense
-    , posMood
+    PartOfSpeech (..),
+    newPartOfSpeech,
 
-    -- ** PartOfSpeechReciprocity
-    , PartOfSpeechReciprocity (..)
+    -- ** PartOfSpeech_Aspect
+    PartOfSpeech_Aspect (..),
 
-    -- ** PartOfSpeechGender
-    , PartOfSpeechGender (..)
+    -- ** PartOfSpeech_Case
+    PartOfSpeech_Case (..),
 
-    -- ** AnalyzeSentimentRequestEncodingType
-    , AnalyzeSentimentRequestEncodingType (..)
+    -- ** PartOfSpeech_Form
+    PartOfSpeech_Form (..),
 
-    -- ** EntityMentionType
-    , EntityMentionType (..)
+    -- ** PartOfSpeech_Gender
+    PartOfSpeech_Gender (..),
+
+    -- ** PartOfSpeech_Mood
+    PartOfSpeech_Mood (..),
+
+    -- ** PartOfSpeech_Number
+    PartOfSpeech_Number (..),
+
+    -- ** PartOfSpeech_Person
+    PartOfSpeech_Person (..),
+
+    -- ** PartOfSpeech_Proper
+    PartOfSpeech_Proper (..),
+
+    -- ** PartOfSpeech_Reciprocity
+    PartOfSpeech_Reciprocity (..),
+
+    -- ** PartOfSpeech_Tag
+    PartOfSpeech_Tag (..),
+
+    -- ** PartOfSpeech_Tense
+    PartOfSpeech_Tense (..),
+
+    -- ** PartOfSpeech_Voice
+    PartOfSpeech_Voice (..),
 
     -- ** Sentence
-    , Sentence
-    , sentence
-    , sSentiment
-    , sText
-    ) where
+    Sentence (..),
+    newSentence,
 
-import Network.Google.Prelude
+    -- ** Sentiment
+    Sentiment (..),
+    newSentiment,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TextSpan
+    TextSpan (..),
+    newTextSpan,
+
+    -- ** Token
+    Token (..),
+    newToken,
+  )
+where
+
+import Network.Google.Language.Documents.AnalyzeEntities
+import Network.Google.Language.Documents.AnalyzeEntitySentiment
+import Network.Google.Language.Documents.AnalyzeSentiment
+import Network.Google.Language.Documents.AnalyzeSyntax
+import Network.Google.Language.Documents.AnnotateText
+import Network.Google.Language.Documents.ClassifyText
 import Network.Google.Language.Types
-import Network.Google.Resource.Language.Documents.AnalyzeEntities
-import Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
-import Network.Google.Resource.Language.Documents.AnalyzeSentiment
-import Network.Google.Resource.Language.Documents.AnalyzeSyntax
-import Network.Google.Resource.Language.Documents.AnnotateText
-import Network.Google.Resource.Language.Documents.ClassifyText
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Natural Language API service.
-type LanguageAPI =
-     DocumentsAnalyzeSyntaxResource :<|>
-       DocumentsClassifyTextResource
-       :<|> DocumentsAnnotateTextResource
-       :<|> DocumentsAnalyzeEntitySentimentResource
-       :<|> DocumentsAnalyzeSentimentResource
-       :<|> DocumentsAnalyzeEntitiesResource
