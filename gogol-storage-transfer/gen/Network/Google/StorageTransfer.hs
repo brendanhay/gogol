@@ -1,353 +1,351 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.StorageTransfer
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Transfers data from external data sources to a Google Cloud Storage
--- bucket or between Google Cloud Storage buckets.
+-- Transfers data from external data sources to a Google Cloud Storage bucket or between Google Cloud Storage buckets.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference>
 module Network.Google.StorageTransfer
-    (
-    -- * Service Configuration
-      storageTransferService
+  ( -- * Configuration
+    storageTransferService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , StorageTransferAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** storagetransfer.googleServiceAccounts.get
-    , module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
+    StorageTransferGoogleServiceAccountsGetResource,
+    newStorageTransferGoogleServiceAccountsGet,
+    StorageTransferGoogleServiceAccountsGet,
+
+    -- ** storagetransfer.projects.agentPools.create
+    StorageTransferProjectsAgentPoolsCreateResource,
+    newStorageTransferProjectsAgentPoolsCreate,
+    StorageTransferProjectsAgentPoolsCreate,
+
+    -- ** storagetransfer.projects.agentPools.delete
+    StorageTransferProjectsAgentPoolsDeleteResource,
+    newStorageTransferProjectsAgentPoolsDelete,
+    StorageTransferProjectsAgentPoolsDelete,
+
+    -- ** storagetransfer.projects.agentPools.get
+    StorageTransferProjectsAgentPoolsGetResource,
+    newStorageTransferProjectsAgentPoolsGet,
+    StorageTransferProjectsAgentPoolsGet,
+
+    -- ** storagetransfer.projects.agentPools.list
+    StorageTransferProjectsAgentPoolsListResource,
+    newStorageTransferProjectsAgentPoolsList,
+    StorageTransferProjectsAgentPoolsList,
+
+    -- ** storagetransfer.projects.agentPools.patch
+    StorageTransferProjectsAgentPoolsPatchResource,
+    newStorageTransferProjectsAgentPoolsPatch,
+    StorageTransferProjectsAgentPoolsPatch,
 
     -- ** storagetransfer.transferJobs.create
-    , module Network.Google.Resource.StorageTransfer.TransferJobs.Create
+    StorageTransferTransferJobsCreateResource,
+    newStorageTransferTransferJobsCreate,
+    StorageTransferTransferJobsCreate,
 
     -- ** storagetransfer.transferJobs.get
-    , module Network.Google.Resource.StorageTransfer.TransferJobs.Get
+    StorageTransferTransferJobsGetResource,
+    newStorageTransferTransferJobsGet,
+    StorageTransferTransferJobsGet,
 
     -- ** storagetransfer.transferJobs.list
-    , module Network.Google.Resource.StorageTransfer.TransferJobs.List
+    StorageTransferTransferJobsListResource,
+    newStorageTransferTransferJobsList,
+    StorageTransferTransferJobsList,
 
     -- ** storagetransfer.transferJobs.patch
-    , module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
+    StorageTransferTransferJobsPatchResource,
+    newStorageTransferTransferJobsPatch,
+    StorageTransferTransferJobsPatch,
 
     -- ** storagetransfer.transferJobs.run
-    , module Network.Google.Resource.StorageTransfer.TransferJobs.Run
+    StorageTransferTransferJobsRunResource,
+    newStorageTransferTransferJobsRun,
+    StorageTransferTransferJobsRun,
 
     -- ** storagetransfer.transferOperations.cancel
-    , module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
+    StorageTransferTransferOperationsCancelResource,
+    newStorageTransferTransferOperationsCancel,
+    StorageTransferTransferOperationsCancel,
 
     -- ** storagetransfer.transferOperations.get
-    , module Network.Google.Resource.StorageTransfer.TransferOperations.Get
+    StorageTransferTransferOperationsGetResource,
+    newStorageTransferTransferOperationsGet,
+    StorageTransferTransferOperationsGet,
 
     -- ** storagetransfer.transferOperations.list
-    , module Network.Google.Resource.StorageTransfer.TransferOperations.List
+    StorageTransferTransferOperationsListResource,
+    newStorageTransferTransferOperationsList,
+    StorageTransferTransferOperationsList,
 
     -- ** storagetransfer.transferOperations.pause
-    , module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
+    StorageTransferTransferOperationsPauseResource,
+    newStorageTransferTransferOperationsPause,
+    StorageTransferTransferOperationsPause,
 
     -- ** storagetransfer.transferOperations.resume
-    , module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
+    StorageTransferTransferOperationsResumeResource,
+    newStorageTransferTransferOperationsResume,
+    StorageTransferTransferOperationsResume,
 
     -- * Types
 
-    -- ** ErrorSummary
-    , ErrorSummary
-    , errorSummary
-    , esErrorCount
-    , esErrorCode
-    , esErrorLogEntries
-
-    -- ** RunTransferJobRequest
-    , RunTransferJobRequest
-    , runTransferJobRequest
-    , rtjrProjectId
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** NotificationConfig
-    , NotificationConfig
-    , notificationConfig
-    , ncEventTypes
-    , ncPubsubTopic
-    , ncPayloadFormat
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** TransferOperationStatus
-    , TransferOperationStatus (..)
-
-    -- ** NotificationConfigPayloadFormat
-    , NotificationConfigPayloadFormat (..)
-
-    -- ** Schedule
-    , Schedule
-    , schedule
-    , sRepeatInterval
-    , sScheduleEndDate
-    , sScheduleStartDate
-    , sEndTimeOfDay
-    , sStartTimeOfDay
-
-    -- ** ObjectConditions
-    , ObjectConditions
-    , objectConditions
-    , ocLastModifiedBefore
-    , ocMinTimeElapsedSinceLastModification
-    , ocIncludePrefixes
-    , ocMaxTimeElapsedSinceLastModification
-    , ocExcludePrefixes
-    , ocLastModifiedSince
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** PauseTransferOperationRequest
-    , PauseTransferOperationRequest
-    , pauseTransferOperationRequest
-
-    -- ** GoogleServiceAccount
-    , GoogleServiceAccount
-    , googleServiceAccount
-    , gsaAccountEmail
-    , gsaSubjectId
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** AzureCredentials
-    , AzureCredentials
-    , azureCredentials
-    , acSasToken
-
-    -- ** Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- ** UpdateTransferJobRequest
-    , UpdateTransferJobRequest
-    , updateTransferJobRequest
-    , utjrTransferJob
-    , utjrProjectId
-    , utjrUpdateTransferJobFieldMask
-
-    -- ** TransferCounters
-    , TransferCounters
-    , transferCounters
-    , tcBytesFoundOnlyFromSink
-    , tcBytesDeletedFromSink
-    , tcObjectsDeletedFromSource
-    , tcObjectsFoundFromSource
-    , tcBytesFailedToDeleteFromSink
-    , tcBytesFromSourceFailed
-    , tcBytesCopiedToSink
-    , tcBytesFoundFromSource
-    , tcBytesDeletedFromSource
-    , tcObjectsDeletedFromSink
-    , tcObjectsFoundOnlyFromSink
-    , tcBytesFromSourceSkippedBySync
-    , tcObjectsCopiedToSink
-    , tcObjectsFromSourceFailed
-    , tcObjectsFailedToDeleteFromSink
-    , tcObjectsFromSourceSkippedBySync
-
-    -- ** TransferJob
-    , TransferJob
-    , transferJob
-    , tjCreationTime
-    , tjStatus
-    , tjNotificationConfig
-    , tjSchedule
-    , tjDeletionTime
-    , tjName
-    , tjProjectId
-    , tjTransferSpec
-    , tjDescription
-    , tjLastModificationTime
-    , tjLatestOperationName
-
-    -- ** GcsData
-    , GcsData
-    , gcsData
-    , gdPath
-    , gdBucketName
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
-    -- ** NotificationConfigEventTypesItem
-    , NotificationConfigEventTypesItem (..)
+    -- ** AgentPool
+    AgentPool (..),
+    newAgentPool,
 
-    -- ** AwsS3Data
-    , AwsS3Data
-    , awsS3Data
-    , asdPath
-    , asdBucketName
-    , asdAwsAccessKey
-    , asdRoleArn
-
-    -- ** TransferJobStatus
-    , TransferJobStatus (..)
-
-    -- ** HTTPData
-    , HTTPData
-    , hTTPData
-    , httpdListURL
-
-    -- ** TimeOfDay'
-    , TimeOfDay'
-    , timeOfDay
-    , todNanos
-    , todHours
-    , todMinutes
-    , todSeconds
-
-    -- ** ErrorLogEntry
-    , ErrorLogEntry
-    , errorLogEntry
-    , eleURL
-    , eleErrorDetails
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** AzureBlobStorageData
-    , AzureBlobStorageData
-    , azureBlobStorageData
-    , absdPath
-    , absdAzureCredentials
-    , absdContainer
-    , absdStorageAccount
-
-    -- ** TransferOptions
-    , TransferOptions
-    , transferOptions
-    , toDeleteObjectsUniqueInSink
-    , toDeleteObjectsFromSourceAfterTransfer
-    , toOverwriteObjectsAlreadyExistingInSink
-
-    -- ** TransferOperation
-    , TransferOperation
-    , transferOperation
-    , toStatus
-    , toCounters
-    , toNotificationConfig
-    , toStartTime
-    , toTransferJobName
-    , toName
-    , toEndTime
-    , toProjectId
-    , toTransferSpec
-    , toErrorBreakdowns
-
-    -- ** TransferSpec
-    , TransferSpec
-    , transferSpec
-    , tsGcsDataSource
-    , tsObjectConditions
-    , tsHTTPDataSource
-    , tsAwsS3DataSource
-    , tsGcsDataSink
-    , tsTransferOptions
-    , tsAzureBlobStorageDataSource
-
-    -- ** ListTransferJobsResponse
-    , ListTransferJobsResponse
-    , listTransferJobsResponse
-    , ltjrNextPageToken
-    , ltjrTransferJobs
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** ResumeTransferOperationRequest
-    , ResumeTransferOperationRequest
-    , resumeTransferOperationRequest
+    -- ** AgentPool_State
+    AgentPool_State (..),
 
     -- ** AwsAccessKey
-    , AwsAccessKey
-    , awsAccessKey
-    , aakSecretAccessKey
-    , aakAccessKeyId
+    AwsAccessKey (..),
+    newAwsAccessKey,
 
-    -- ** ErrorSummaryErrorCode
-    , ErrorSummaryErrorCode (..)
-    ) where
+    -- ** AwsS3Data
+    AwsS3Data (..),
+    newAwsS3Data,
 
-import Network.Google.Prelude
-import Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
-import Network.Google.Resource.StorageTransfer.TransferJobs.Create
-import Network.Google.Resource.StorageTransfer.TransferJobs.Get
-import Network.Google.Resource.StorageTransfer.TransferJobs.List
-import Network.Google.Resource.StorageTransfer.TransferJobs.Patch
-import Network.Google.Resource.StorageTransfer.TransferJobs.Run
-import Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
-import Network.Google.Resource.StorageTransfer.TransferOperations.Get
-import Network.Google.Resource.StorageTransfer.TransferOperations.List
-import Network.Google.Resource.StorageTransfer.TransferOperations.Pause
-import Network.Google.Resource.StorageTransfer.TransferOperations.Resume
+    -- ** AzureBlobStorageData
+    AzureBlobStorageData (..),
+    newAzureBlobStorageData,
+
+    -- ** AzureCredentials
+    AzureCredentials (..),
+    newAzureCredentials,
+
+    -- ** BandwidthLimit
+    BandwidthLimit (..),
+    newBandwidthLimit,
+
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** ErrorLogEntry
+    ErrorLogEntry (..),
+    newErrorLogEntry,
+
+    -- ** ErrorSummary
+    ErrorSummary (..),
+    newErrorSummary,
+
+    -- ** ErrorSummary_ErrorCode
+    ErrorSummary_ErrorCode (..),
+
+    -- ** GcsData
+    GcsData (..),
+    newGcsData,
+
+    -- ** GoogleServiceAccount
+    GoogleServiceAccount (..),
+    newGoogleServiceAccount,
+
+    -- ** HttpData
+    HttpData (..),
+    newHttpData,
+
+    -- ** ListAgentPoolsResponse
+    ListAgentPoolsResponse (..),
+    newListAgentPoolsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListTransferJobsResponse
+    ListTransferJobsResponse (..),
+    newListTransferJobsResponse,
+
+    -- ** LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
+
+    -- ** LoggingConfig_LogActionStatesItem
+    LoggingConfig_LogActionStatesItem (..),
+
+    -- ** LoggingConfig_LogActionsItem
+    LoggingConfig_LogActionsItem (..),
+
+    -- ** MetadataOptions
+    MetadataOptions (..),
+    newMetadataOptions,
+
+    -- ** MetadataOptions_Acl
+    MetadataOptions_Acl (..),
+
+    -- ** MetadataOptions_Gid
+    MetadataOptions_Gid (..),
+
+    -- ** MetadataOptions_KmsKey
+    MetadataOptions_KmsKey (..),
+
+    -- ** MetadataOptions_Mode
+    MetadataOptions_Mode (..),
+
+    -- ** MetadataOptions_StorageClass
+    MetadataOptions_StorageClass (..),
+
+    -- ** MetadataOptions_Symlink
+    MetadataOptions_Symlink (..),
+
+    -- ** MetadataOptions_TemporaryHold
+    MetadataOptions_TemporaryHold (..),
+
+    -- ** MetadataOptions_TimeCreated
+    MetadataOptions_TimeCreated (..),
+
+    -- ** MetadataOptions_Uid
+    MetadataOptions_Uid (..),
+
+    -- ** NotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
+
+    -- ** NotificationConfig_EventTypesItem
+    NotificationConfig_EventTypesItem (..),
+
+    -- ** NotificationConfig_PayloadFormat
+    NotificationConfig_PayloadFormat (..),
+
+    -- ** ObjectConditions
+    ObjectConditions (..),
+    newObjectConditions,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** PauseTransferOperationRequest
+    PauseTransferOperationRequest (..),
+    newPauseTransferOperationRequest,
+
+    -- ** PosixFilesystem
+    PosixFilesystem (..),
+    newPosixFilesystem,
+
+    -- ** ResumeTransferOperationRequest
+    ResumeTransferOperationRequest (..),
+    newResumeTransferOperationRequest,
+
+    -- ** RunTransferJobRequest
+    RunTransferJobRequest (..),
+    newRunTransferJobRequest,
+
+    -- ** Schedule
+    Schedule (..),
+    newSchedule,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
+
+    -- ** TransferCounters
+    TransferCounters (..),
+    newTransferCounters,
+
+    -- ** TransferJob
+    TransferJob (..),
+    newTransferJob,
+
+    -- ** TransferJob_Status
+    TransferJob_Status (..),
+
+    -- ** TransferManifest
+    TransferManifest (..),
+    newTransferManifest,
+
+    -- ** TransferOperation
+    TransferOperation (..),
+    newTransferOperation,
+
+    -- ** TransferOperation_Status
+    TransferOperation_Status (..),
+
+    -- ** TransferOptions
+    TransferOptions (..),
+    newTransferOptions,
+
+    -- ** TransferSpec
+    TransferSpec (..),
+    newTransferSpec,
+
+    -- ** UpdateTransferJobRequest
+    UpdateTransferJobRequest (..),
+    newUpdateTransferJobRequest,
+  )
+where
+
+import Network.Google.StorageTransfer.GoogleServiceAccounts.Get
+import Network.Google.StorageTransfer.Projects.AgentPools.Create
+import Network.Google.StorageTransfer.Projects.AgentPools.Delete
+import Network.Google.StorageTransfer.Projects.AgentPools.Get
+import Network.Google.StorageTransfer.Projects.AgentPools.List
+import Network.Google.StorageTransfer.Projects.AgentPools.Patch
+import Network.Google.StorageTransfer.TransferJobs.Create
+import Network.Google.StorageTransfer.TransferJobs.Get
+import Network.Google.StorageTransfer.TransferJobs.List
+import Network.Google.StorageTransfer.TransferJobs.Patch
+import Network.Google.StorageTransfer.TransferJobs.Run
+import Network.Google.StorageTransfer.TransferOperations.Cancel
+import Network.Google.StorageTransfer.TransferOperations.Get
+import Network.Google.StorageTransfer.TransferOperations.List
+import Network.Google.StorageTransfer.TransferOperations.Pause
+import Network.Google.StorageTransfer.TransferOperations.Resume
 import Network.Google.StorageTransfer.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Storage Transfer API service.
-type StorageTransferAPI =
-     TransferJobsListResource :<|>
-       TransferJobsPatchResource
-       :<|> TransferJobsGetResource
-       :<|> TransferJobsRunResource
-       :<|> TransferJobsCreateResource
-       :<|> TransferOperationsListResource
-       :<|> TransferOperationsGetResource
-       :<|> TransferOperationsPauseResource
-       :<|> TransferOperationsCancelResource
-       :<|> TransferOperationsResumeResource
-       :<|> GoogleServiceAccountsGetResource

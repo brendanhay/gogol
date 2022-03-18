@@ -1,292 +1,262 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.StorageTransfer.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.StorageTransfer.Types
-    (
-    -- * Service Configuration
-      storageTransferService
+  ( -- * Configuration
+    storageTransferService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * ErrorSummary
-    , ErrorSummary
-    , errorSummary
-    , esErrorCount
-    , esErrorCode
-    , esErrorLogEntries
+    -- * Types
 
-    -- * RunTransferJobRequest
-    , RunTransferJobRequest
-    , runTransferJobRequest
-    , rtjrProjectId
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** AgentPool
+    AgentPool (..),
+    newAgentPool,
 
-    -- * NotificationConfig
-    , NotificationConfig
-    , notificationConfig
-    , ncEventTypes
-    , ncPubsubTopic
-    , ncPayloadFormat
+    -- ** AgentPool_State
+    AgentPool_State (..),
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** AwsAccessKey
+    AwsAccessKey (..),
+    newAwsAccessKey,
 
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
+    -- ** AwsS3Data
+    AwsS3Data (..),
+    newAwsS3Data,
 
-    -- * TransferOperationStatus
-    , TransferOperationStatus (..)
+    -- ** AzureBlobStorageData
+    AzureBlobStorageData (..),
+    newAzureBlobStorageData,
 
-    -- * NotificationConfigPayloadFormat
-    , NotificationConfigPayloadFormat (..)
+    -- ** AzureCredentials
+    AzureCredentials (..),
+    newAzureCredentials,
 
-    -- * Schedule
-    , Schedule
-    , schedule
-    , sRepeatInterval
-    , sScheduleEndDate
-    , sScheduleStartDate
-    , sEndTimeOfDay
-    , sStartTimeOfDay
+    -- ** BandwidthLimit
+    BandwidthLimit (..),
+    newBandwidthLimit,
 
-    -- * ObjectConditions
-    , ObjectConditions
-    , objectConditions
-    , ocLastModifiedBefore
-    , ocMinTimeElapsedSinceLastModification
-    , ocIncludePrefixes
-    , ocMaxTimeElapsedSinceLastModification
-    , ocExcludePrefixes
-    , ocLastModifiedSince
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** Date
+    Date (..),
+    newDate,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * PauseTransferOperationRequest
-    , PauseTransferOperationRequest
-    , pauseTransferOperationRequest
+    -- ** ErrorLogEntry
+    ErrorLogEntry (..),
+    newErrorLogEntry,
 
-    -- * GoogleServiceAccount
-    , GoogleServiceAccount
-    , googleServiceAccount
-    , gsaAccountEmail
-    , gsaSubjectId
+    -- ** ErrorSummary
+    ErrorSummary (..),
+    newErrorSummary,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** ErrorSummary_ErrorCode
+    ErrorSummary_ErrorCode (..),
 
-    -- * AzureCredentials
-    , AzureCredentials
-    , azureCredentials
-    , acSasToken
+    -- ** GcsData
+    GcsData (..),
+    newGcsData,
 
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
+    -- ** GoogleServiceAccount
+    GoogleServiceAccount (..),
+    newGoogleServiceAccount,
 
-    -- * UpdateTransferJobRequest
-    , UpdateTransferJobRequest
-    , updateTransferJobRequest
-    , utjrTransferJob
-    , utjrProjectId
-    , utjrUpdateTransferJobFieldMask
+    -- ** HttpData
+    HttpData (..),
+    newHttpData,
 
-    -- * TransferCounters
-    , TransferCounters
-    , transferCounters
-    , tcBytesFoundOnlyFromSink
-    , tcBytesDeletedFromSink
-    , tcObjectsDeletedFromSource
-    , tcObjectsFoundFromSource
-    , tcBytesFailedToDeleteFromSink
-    , tcBytesFromSourceFailed
-    , tcBytesCopiedToSink
-    , tcBytesFoundFromSource
-    , tcBytesDeletedFromSource
-    , tcObjectsDeletedFromSink
-    , tcObjectsFoundOnlyFromSink
-    , tcBytesFromSourceSkippedBySync
-    , tcObjectsCopiedToSink
-    , tcObjectsFromSourceFailed
-    , tcObjectsFailedToDeleteFromSink
-    , tcObjectsFromSourceSkippedBySync
+    -- ** ListAgentPoolsResponse
+    ListAgentPoolsResponse (..),
+    newListAgentPoolsResponse,
 
-    -- * TransferJob
-    , TransferJob
-    , transferJob
-    , tjCreationTime
-    , tjStatus
-    , tjNotificationConfig
-    , tjSchedule
-    , tjDeletionTime
-    , tjName
-    , tjProjectId
-    , tjTransferSpec
-    , tjDescription
-    , tjLastModificationTime
-    , tjLatestOperationName
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * GcsData
-    , GcsData
-    , gcsData
-    , gdPath
-    , gdBucketName
+    -- ** ListTransferJobsResponse
+    ListTransferJobsResponse (..),
+    newListTransferJobsResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
 
-    -- * NotificationConfigEventTypesItem
-    , NotificationConfigEventTypesItem (..)
+    -- ** LoggingConfig_LogActionStatesItem
+    LoggingConfig_LogActionStatesItem (..),
 
-    -- * AwsS3Data
-    , AwsS3Data
-    , awsS3Data
-    , asdPath
-    , asdBucketName
-    , asdAwsAccessKey
-    , asdRoleArn
+    -- ** LoggingConfig_LogActionsItem
+    LoggingConfig_LogActionsItem (..),
 
-    -- * TransferJobStatus
-    , TransferJobStatus (..)
+    -- ** MetadataOptions
+    MetadataOptions (..),
+    newMetadataOptions,
 
-    -- * HTTPData
-    , HTTPData
-    , hTTPData
-    , httpdListURL
+    -- ** MetadataOptions_Acl
+    MetadataOptions_Acl (..),
 
-    -- * TimeOfDay'
-    , TimeOfDay'
-    , timeOfDay
-    , todNanos
-    , todHours
-    , todMinutes
-    , todSeconds
+    -- ** MetadataOptions_Gid
+    MetadataOptions_Gid (..),
 
-    -- * ErrorLogEntry
-    , ErrorLogEntry
-    , errorLogEntry
-    , eleURL
-    , eleErrorDetails
+    -- ** MetadataOptions_KmsKey
+    MetadataOptions_KmsKey (..),
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** MetadataOptions_Mode
+    MetadataOptions_Mode (..),
 
-    -- * AzureBlobStorageData
-    , AzureBlobStorageData
-    , azureBlobStorageData
-    , absdPath
-    , absdAzureCredentials
-    , absdContainer
-    , absdStorageAccount
+    -- ** MetadataOptions_StorageClass
+    MetadataOptions_StorageClass (..),
 
-    -- * TransferOptions
-    , TransferOptions
-    , transferOptions
-    , toDeleteObjectsUniqueInSink
-    , toDeleteObjectsFromSourceAfterTransfer
-    , toOverwriteObjectsAlreadyExistingInSink
+    -- ** MetadataOptions_Symlink
+    MetadataOptions_Symlink (..),
 
-    -- * TransferOperation
-    , TransferOperation
-    , transferOperation
-    , toStatus
-    , toCounters
-    , toNotificationConfig
-    , toStartTime
-    , toTransferJobName
-    , toName
-    , toEndTime
-    , toProjectId
-    , toTransferSpec
-    , toErrorBreakdowns
+    -- ** MetadataOptions_TemporaryHold
+    MetadataOptions_TemporaryHold (..),
 
-    -- * TransferSpec
-    , TransferSpec
-    , transferSpec
-    , tsGcsDataSource
-    , tsObjectConditions
-    , tsHTTPDataSource
-    , tsAwsS3DataSource
-    , tsGcsDataSink
-    , tsTransferOptions
-    , tsAzureBlobStorageDataSource
+    -- ** MetadataOptions_TimeCreated
+    MetadataOptions_TimeCreated (..),
 
-    -- * ListTransferJobsResponse
-    , ListTransferJobsResponse
-    , listTransferJobsResponse
-    , ltjrNextPageToken
-    , ltjrTransferJobs
+    -- ** MetadataOptions_Uid
+    MetadataOptions_Uid (..),
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** NotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
 
-    -- * ResumeTransferOperationRequest
-    , ResumeTransferOperationRequest
-    , resumeTransferOperationRequest
+    -- ** NotificationConfig_EventTypesItem
+    NotificationConfig_EventTypesItem (..),
 
-    -- * AwsAccessKey
-    , AwsAccessKey
-    , awsAccessKey
-    , aakSecretAccessKey
-    , aakAccessKeyId
+    -- ** NotificationConfig_PayloadFormat
+    NotificationConfig_PayloadFormat (..),
 
-    -- * ErrorSummaryErrorCode
-    , ErrorSummaryErrorCode (..)
-    ) where
+    -- ** ObjectConditions
+    ObjectConditions (..),
+    newObjectConditions,
 
-import Network.Google.Prelude
-import Network.Google.StorageTransfer.Types.Product
-import Network.Google.StorageTransfer.Types.Sum
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
--- | Default request referring to version 'v1' of the Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-storageTransferService :: ServiceConfig
-storageTransferService
-  = defaultService (ServiceId "storagetransfer:v1")
-      "storagetransfer.googleapis.com"
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** PauseTransferOperationRequest
+    PauseTransferOperationRequest (..),
+    newPauseTransferOperationRequest,
+
+    -- ** PosixFilesystem
+    PosixFilesystem (..),
+    newPosixFilesystem,
+
+    -- ** ResumeTransferOperationRequest
+    ResumeTransferOperationRequest (..),
+    newResumeTransferOperationRequest,
+
+    -- ** RunTransferJobRequest
+    RunTransferJobRequest (..),
+    newRunTransferJobRequest,
+
+    -- ** Schedule
+    Schedule (..),
+    newSchedule,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
+
+    -- ** TransferCounters
+    TransferCounters (..),
+    newTransferCounters,
+
+    -- ** TransferJob
+    TransferJob (..),
+    newTransferJob,
+
+    -- ** TransferJob_Status
+    TransferJob_Status (..),
+
+    -- ** TransferManifest
+    TransferManifest (..),
+    newTransferManifest,
+
+    -- ** TransferOperation
+    TransferOperation (..),
+    newTransferOperation,
+
+    -- ** TransferOperation_Status
+    TransferOperation_Status (..),
+
+    -- ** TransferOptions
+    TransferOptions (..),
+    newTransferOptions,
+
+    -- ** TransferSpec
+    TransferSpec (..),
+    newTransferSpec,
+
+    -- ** UpdateTransferJobRequest
+    UpdateTransferJobRequest (..),
+    newUpdateTransferJobRequest,
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.StorageTransfer.Internal.Product
+import Network.Google.StorageTransfer.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
+storageTransferService :: Core.ServiceConfig
+storageTransferService =
+  Core.defaultService
+    (Core.ServiceId "storagetransfer:v1")
+    "storagetransfer.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
