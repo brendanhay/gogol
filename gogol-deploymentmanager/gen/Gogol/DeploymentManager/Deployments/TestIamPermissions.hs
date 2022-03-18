@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.TestIamPermissions
+-- Module      : Gogol.DeploymentManager.Deployments.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.testIamPermissions@.
-module Network.Google.DeploymentManager.Deployments.TestIamPermissions
+module Gogol.DeploymentManager.Deployments.TestIamPermissions
   ( -- * Resource
     DeploymentManagerDeploymentsTestIamPermissionsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DeploymentManager.Deployments.TestIamPermissions
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @deploymentmanager.deployments.testIamPermissions@ method which the
 -- 'DeploymentManagerDeploymentsTestIamPermissions' request conforms to.

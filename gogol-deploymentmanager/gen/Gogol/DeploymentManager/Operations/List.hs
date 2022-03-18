@@ -19,38 +19,38 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.List
+-- Module      : Gogol.DeploymentManager.Operations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all deployments for a given project.
+-- Lists all operations for a project.
 --
--- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.list@.
-module Network.Google.DeploymentManager.Deployments.List
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.operations.list@.
+module Gogol.DeploymentManager.Operations.List
   ( -- * Resource
-    DeploymentManagerDeploymentsListResource,
+    DeploymentManagerOperationsListResource,
 
     -- ** Constructing a Request
-    newDeploymentManagerDeploymentsList,
-    DeploymentManagerDeploymentsList,
+    newDeploymentManagerOperationsList,
+    DeploymentManagerOperationsList,
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @deploymentmanager.deployments.list@ method which the
--- 'DeploymentManagerDeploymentsList' request conforms to.
-type DeploymentManagerDeploymentsListResource =
+-- | A resource alias for @deploymentmanager.operations.list@ method which the
+-- 'DeploymentManagerOperationsList' request conforms to.
+type DeploymentManagerOperationsListResource =
   "deploymentmanager"
     Core.:> "v2"
     Core.:> "projects"
     Core.:> Core.Capture "project" Core.Text
     Core.:> "global"
-    Core.:> "deployments"
+    Core.:> "operations"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -63,12 +63,12 @@ type DeploymentManagerDeploymentsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
-              DeploymentsListResponse
+              OperationsListResponse
 
--- | Lists all deployments for a given project.
+-- | Lists all operations for a project.
 --
--- /See:/ 'newDeploymentManagerDeploymentsList' smart constructor.
-data DeploymentManagerDeploymentsList = DeploymentManagerDeploymentsList
+-- /See:/ 'newDeploymentManagerOperationsList' smart constructor.
+data DeploymentManagerOperationsList = DeploymentManagerOperationsList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -93,13 +93,13 @@ data DeploymentManagerDeploymentsList = DeploymentManagerDeploymentsList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DeploymentManagerDeploymentsList' with the minimum fields required to make a request.
-newDeploymentManagerDeploymentsList ::
+-- | Creates a value of 'DeploymentManagerOperationsList' with the minimum fields required to make a request.
+newDeploymentManagerOperationsList ::
   -- |  The project ID for this request. See 'project'.
   Core.Text ->
-  DeploymentManagerDeploymentsList
-newDeploymentManagerDeploymentsList project =
-  DeploymentManagerDeploymentsList
+  DeploymentManagerOperationsList
+newDeploymentManagerOperationsList project =
+  DeploymentManagerOperationsList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -114,19 +114,19 @@ newDeploymentManagerDeploymentsList project =
 
 instance
   Core.GoogleRequest
-    DeploymentManagerDeploymentsList
+    DeploymentManagerOperationsList
   where
   type
-    Rs DeploymentManagerDeploymentsList =
-      DeploymentsListResponse
+    Rs DeploymentManagerOperationsList =
+      OperationsListResponse
   type
-    Scopes DeploymentManagerDeploymentsList =
+    Scopes DeploymentManagerOperationsList =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-platform.read-only",
          "https://www.googleapis.com/auth/ndev.cloudman",
          "https://www.googleapis.com/auth/ndev.cloudman.readonly"
        ]
-  requestClient DeploymentManagerDeploymentsList {..} =
+  requestClient DeploymentManagerOperationsList {..} =
     go
       project
       xgafv
@@ -144,6 +144,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DeploymentManagerDeploymentsListResource
+              Core.Proxy DeploymentManagerOperationsListResource
           )
           Core.mempty

@@ -19,38 +19,40 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Operations.List
+-- Module      : Gogol.DeploymentManager.Resources.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all operations for a project.
+-- Lists all resources in a given deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.operations.list@.
-module Network.Google.DeploymentManager.Operations.List
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.resources.list@.
+module Gogol.DeploymentManager.Resources.List
   ( -- * Resource
-    DeploymentManagerOperationsListResource,
+    DeploymentManagerResourcesListResource,
 
     -- ** Constructing a Request
-    newDeploymentManagerOperationsList,
-    DeploymentManagerOperationsList,
+    newDeploymentManagerResourcesList,
+    DeploymentManagerResourcesList,
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @deploymentmanager.operations.list@ method which the
--- 'DeploymentManagerOperationsList' request conforms to.
-type DeploymentManagerOperationsListResource =
+-- | A resource alias for @deploymentmanager.resources.list@ method which the
+-- 'DeploymentManagerResourcesList' request conforms to.
+type DeploymentManagerResourcesListResource =
   "deploymentmanager"
     Core.:> "v2"
     Core.:> "projects"
     Core.:> Core.Capture "project" Core.Text
     Core.:> "global"
-    Core.:> "operations"
+    Core.:> "deployments"
+    Core.:> Core.Capture "deployment" Core.Text
+    Core.:> "resources"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -63,18 +65,20 @@ type DeploymentManagerOperationsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
-              OperationsListResponse
+              ResourcesListResponse
 
--- | Lists all operations for a project.
+-- | Lists all resources in a given deployment.
 --
--- /See:/ 'newDeploymentManagerOperationsList' smart constructor.
-data DeploymentManagerOperationsList = DeploymentManagerOperationsList
+-- /See:/ 'newDeploymentManagerResourcesList' smart constructor.
+data DeploymentManagerResourcesList = DeploymentManagerResourcesList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | The name of the deployment for this request.
+    deployment :: Core.Text,
     -- | A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either @=@, @!=@, @>@, @\<@, @\<=@, @>=@ or @:@. For example, if you are filtering Compute Engine instances, you can exclude instances named @example-instance@ by specifying @name != example-instance@. The @:@ operator can be used with string fields to match substrings. For non-string fields it is equivalent to the @=@ operator. The @:*@ comparison can be used to test whether a key has been defined. For example, to find all objects with @owner@ label use: @labels.owner:*@ You can also filter nested fields. For example, you could specify @scheduling.automaticRestart = false@ to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide
     -- each separate expression within parentheses. For example: @(scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")@ By default, each expression is an @AND@ expression. However, you can include @AND@ and @OR@ expressions explicitly. For example: @(cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true)@
     filter :: (Core.Maybe Core.Text),
@@ -93,16 +97,19 @@ data DeploymentManagerOperationsList = DeploymentManagerOperationsList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DeploymentManagerOperationsList' with the minimum fields required to make a request.
-newDeploymentManagerOperationsList ::
+-- | Creates a value of 'DeploymentManagerResourcesList' with the minimum fields required to make a request.
+newDeploymentManagerResourcesList ::
+  -- |  The name of the deployment for this request. See 'deployment'.
+  Core.Text ->
   -- |  The project ID for this request. See 'project'.
   Core.Text ->
-  DeploymentManagerOperationsList
-newDeploymentManagerOperationsList project =
-  DeploymentManagerOperationsList
+  DeploymentManagerResourcesList
+newDeploymentManagerResourcesList deployment project =
+  DeploymentManagerResourcesList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      deployment = deployment,
       filter = Core.Nothing,
       maxResults = 500,
       orderBy = Core.Nothing,
@@ -114,21 +121,22 @@ newDeploymentManagerOperationsList project =
 
 instance
   Core.GoogleRequest
-    DeploymentManagerOperationsList
+    DeploymentManagerResourcesList
   where
   type
-    Rs DeploymentManagerOperationsList =
-      OperationsListResponse
+    Rs DeploymentManagerResourcesList =
+      ResourcesListResponse
   type
-    Scopes DeploymentManagerOperationsList =
+    Scopes DeploymentManagerResourcesList =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-platform.read-only",
          "https://www.googleapis.com/auth/ndev.cloudman",
          "https://www.googleapis.com/auth/ndev.cloudman.readonly"
        ]
-  requestClient DeploymentManagerOperationsList {..} =
+  requestClient DeploymentManagerResourcesList {..} =
     go
       project
+      deployment
       xgafv
       accessToken
       callback
@@ -144,6 +152,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DeploymentManagerOperationsListResource
+              Core.Proxy DeploymentManagerResourcesListResource
           )
           Core.mempty

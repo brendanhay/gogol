@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.CancelPreview
+-- Module      : Gogol.DeploymentManager.Deployments.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels and removes the preview currently associated with the deployment.
+-- Deletes a deployment and all of the resources in the deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.cancelPreview@.
-module Network.Google.DeploymentManager.Deployments.CancelPreview
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.delete@.
+module Gogol.DeploymentManager.Deployments.Delete
   ( -- * Resource
-    DeploymentManagerDeploymentsCancelPreviewResource,
+    DeploymentManagerDeploymentsDeleteResource,
 
     -- ** Constructing a Request
-    newDeploymentManagerDeploymentsCancelPreview,
-    DeploymentManagerDeploymentsCancelPreview,
+    newDeploymentManagerDeploymentsDelete,
+    DeploymentManagerDeploymentsDelete,
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @deploymentmanager.deployments.cancelPreview@ method which the
--- 'DeploymentManagerDeploymentsCancelPreview' request conforms to.
-type DeploymentManagerDeploymentsCancelPreviewResource =
+-- | A resource alias for @deploymentmanager.deployments.delete@ method which the
+-- 'DeploymentManagerDeploymentsDelete' request conforms to.
+type DeploymentManagerDeploymentsDeleteResource =
   "deploymentmanager"
     Core.:> "v2"
     Core.:> "projects"
@@ -52,32 +52,31 @@ type DeploymentManagerDeploymentsCancelPreviewResource =
     Core.:> "global"
     Core.:> "deployments"
     Core.:> Core.Capture "deployment" Core.Text
-    Core.:> "cancelPreview"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "deletePolicy"
+              DeploymentsDeleteDeletePolicy
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              DeploymentsCancelPreviewRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+    Core.:> Core.Delete '[Core.JSON] Operation
 
--- | Cancels and removes the preview currently associated with the deployment.
+-- | Deletes a deployment and all of the resources in the deployment.
 --
--- /See:/ 'newDeploymentManagerDeploymentsCancelPreview' smart constructor.
-data DeploymentManagerDeploymentsCancelPreview = DeploymentManagerDeploymentsCancelPreview
+-- /See:/ 'newDeploymentManagerDeploymentsDelete' smart constructor.
+data DeploymentManagerDeploymentsDelete = DeploymentManagerDeploymentsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Sets the policy to use for deleting resources.
+    deletePolicy :: DeploymentsDeleteDeletePolicy,
     -- | The name of the deployment for this request.
     deployment :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: DeploymentsCancelPreviewRequest,
     -- | The project ID for this request.
     project :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -87,22 +86,20 @@ data DeploymentManagerDeploymentsCancelPreview = DeploymentManagerDeploymentsCan
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DeploymentManagerDeploymentsCancelPreview' with the minimum fields required to make a request.
-newDeploymentManagerDeploymentsCancelPreview ::
+-- | Creates a value of 'DeploymentManagerDeploymentsDelete' with the minimum fields required to make a request.
+newDeploymentManagerDeploymentsDelete ::
   -- |  The name of the deployment for this request. See 'deployment'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  DeploymentsCancelPreviewRequest ->
   -- |  The project ID for this request. See 'project'.
   Core.Text ->
-  DeploymentManagerDeploymentsCancelPreview
-newDeploymentManagerDeploymentsCancelPreview deployment payload project =
-  DeploymentManagerDeploymentsCancelPreview
+  DeploymentManagerDeploymentsDelete
+newDeploymentManagerDeploymentsDelete deployment project =
+  DeploymentManagerDeploymentsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      deletePolicy = DeploymentsDeleteDeletePolicy_Delete',
       deployment = deployment,
-      payload = payload,
       project = project,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -110,34 +107,33 @@ newDeploymentManagerDeploymentsCancelPreview deployment payload project =
 
 instance
   Core.GoogleRequest
-    DeploymentManagerDeploymentsCancelPreview
+    DeploymentManagerDeploymentsDelete
   where
   type
-    Rs DeploymentManagerDeploymentsCancelPreview =
+    Rs DeploymentManagerDeploymentsDelete =
       Operation
   type
-    Scopes DeploymentManagerDeploymentsCancelPreview =
+    Scopes DeploymentManagerDeploymentsDelete =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/ndev.cloudman"
        ]
-  requestClient
-    DeploymentManagerDeploymentsCancelPreview {..} =
-      go
-        project
-        deployment
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        deploymentManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DeploymentManagerDeploymentsCancelPreviewResource
-            )
-            Core.mempty
+  requestClient DeploymentManagerDeploymentsDelete {..} =
+    go
+      project
+      deployment
+      xgafv
+      accessToken
+      callback
+      (Core.Just deletePolicy)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      deploymentManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                DeploymentManagerDeploymentsDeleteResource
+          )
+          Core.mempty

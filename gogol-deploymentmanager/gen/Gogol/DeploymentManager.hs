@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager
+-- Module      : Gogol.DeploymentManager
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Cloud Deployment Manager v2 API provides services for configuring, deploying, and viewing Google Cloud services and APIs via templates which specify deployments of Cloud resources.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference>
-module Network.Google.DeploymentManager
+module Gogol.DeploymentManager
   ( -- * Configuration
     deploymentManagerService,
 
@@ -329,22 +329,22 @@ module Network.Google.DeploymentManager
   )
 where
 
-import Network.Google.DeploymentManager.Deployments.CancelPreview
-import Network.Google.DeploymentManager.Deployments.Delete
-import Network.Google.DeploymentManager.Deployments.Get
-import Network.Google.DeploymentManager.Deployments.GetIamPolicy
-import Network.Google.DeploymentManager.Deployments.Insert
-import Network.Google.DeploymentManager.Deployments.List
-import Network.Google.DeploymentManager.Deployments.Patch
-import Network.Google.DeploymentManager.Deployments.SetIamPolicy
-import Network.Google.DeploymentManager.Deployments.Stop
-import Network.Google.DeploymentManager.Deployments.TestIamPermissions
-import Network.Google.DeploymentManager.Deployments.Update
-import Network.Google.DeploymentManager.Manifests.Get
-import Network.Google.DeploymentManager.Manifests.List
-import Network.Google.DeploymentManager.Operations.Get
-import Network.Google.DeploymentManager.Operations.List
-import Network.Google.DeploymentManager.Resources.Get
-import Network.Google.DeploymentManager.Resources.List
-import Network.Google.DeploymentManager.Types
-import Network.Google.DeploymentManager.Types.List
+import Gogol.DeploymentManager.Deployments.CancelPreview
+import Gogol.DeploymentManager.Deployments.Delete
+import Gogol.DeploymentManager.Deployments.Get
+import Gogol.DeploymentManager.Deployments.GetIamPolicy
+import Gogol.DeploymentManager.Deployments.Insert
+import Gogol.DeploymentManager.Deployments.List
+import Gogol.DeploymentManager.Deployments.Patch
+import Gogol.DeploymentManager.Deployments.SetIamPolicy
+import Gogol.DeploymentManager.Deployments.Stop
+import Gogol.DeploymentManager.Deployments.TestIamPermissions
+import Gogol.DeploymentManager.Deployments.Update
+import Gogol.DeploymentManager.Manifests.Get
+import Gogol.DeploymentManager.Manifests.List
+import Gogol.DeploymentManager.Operations.Get
+import Gogol.DeploymentManager.Operations.List
+import Gogol.DeploymentManager.Resources.Get
+import Gogol.DeploymentManager.Resources.List
+import Gogol.DeploymentManager.Types
+import Gogol.DeploymentManager.Types.List

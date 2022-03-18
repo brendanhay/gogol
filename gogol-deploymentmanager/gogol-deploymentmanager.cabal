@@ -39,35 +39,36 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.DeploymentManager
-    Network.Google.DeploymentManager.Deployments.CancelPreview
-    Network.Google.DeploymentManager.Deployments.Delete
-    Network.Google.DeploymentManager.Deployments.Get
-    Network.Google.DeploymentManager.Deployments.GetIamPolicy
-    Network.Google.DeploymentManager.Deployments.Insert
-    Network.Google.DeploymentManager.Deployments.List
-    Network.Google.DeploymentManager.Deployments.Patch
-    Network.Google.DeploymentManager.Deployments.SetIamPolicy
-    Network.Google.DeploymentManager.Deployments.Stop
-    Network.Google.DeploymentManager.Deployments.TestIamPermissions
-    Network.Google.DeploymentManager.Deployments.Update
-    Network.Google.DeploymentManager.Manifests.Get
-    Network.Google.DeploymentManager.Manifests.List
-    Network.Google.DeploymentManager.Operations.Get
-    Network.Google.DeploymentManager.Operations.List
-    Network.Google.DeploymentManager.Resources.Get
-    Network.Google.DeploymentManager.Resources.List
-    Network.Google.DeploymentManager.Types
-    Network.Google.DeploymentManager.Types.List
+    Gogol.DeploymentManager
+    Gogol.DeploymentManager.Deployments.CancelPreview
+    Gogol.DeploymentManager.Deployments.Delete
+    Gogol.DeploymentManager.Deployments.Get
+    Gogol.DeploymentManager.Deployments.GetIamPolicy
+    Gogol.DeploymentManager.Deployments.Insert
+    Gogol.DeploymentManager.Deployments.List
+    Gogol.DeploymentManager.Deployments.Patch
+    Gogol.DeploymentManager.Deployments.SetIamPolicy
+    Gogol.DeploymentManager.Deployments.Stop
+    Gogol.DeploymentManager.Deployments.TestIamPermissions
+    Gogol.DeploymentManager.Deployments.Update
+    Gogol.DeploymentManager.Manifests.Get
+    Gogol.DeploymentManager.Manifests.List
+    Gogol.DeploymentManager.Operations.Get
+    Gogol.DeploymentManager.Operations.List
+    Gogol.DeploymentManager.Resources.Get
+    Gogol.DeploymentManager.Resources.List
+    Gogol.DeploymentManager.Types
+    Gogol.DeploymentManager.Types.List
 
   other-modules:
-    Network.Google.DeploymentManager.Internal.Product
-    Network.Google.DeploymentManager.Internal.Sum
+    Gogol.DeploymentManager.Internal.Product
+    Gogol.DeploymentManager.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

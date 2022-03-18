@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.Update
+-- Module      : Gogol.DeploymentManager.Deployments.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates a deployment and all of the resources described by the deployment manifest.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.update@.
-module Network.Google.DeploymentManager.Deployments.Update
+module Gogol.DeploymentManager.Deployments.Update
   ( -- * Resource
     DeploymentManagerDeploymentsUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DeploymentManager.Deployments.Update
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @deploymentmanager.deployments.update@ method which the
 -- 'DeploymentManagerDeploymentsUpdate' request conforms to.

@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.Delete
+-- Module      : Gogol.DeploymentManager.Deployments.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a deployment and all of the resources in the deployment.
+-- Gets information about a specific deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.delete@.
-module Network.Google.DeploymentManager.Deployments.Delete
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.get@.
+module Gogol.DeploymentManager.Deployments.Get
   ( -- * Resource
-    DeploymentManagerDeploymentsDeleteResource,
+    DeploymentManagerDeploymentsGetResource,
 
     -- ** Constructing a Request
-    newDeploymentManagerDeploymentsDelete,
-    DeploymentManagerDeploymentsDelete,
+    newDeploymentManagerDeploymentsGet,
+    DeploymentManagerDeploymentsGet,
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @deploymentmanager.deployments.delete@ method which the
--- 'DeploymentManagerDeploymentsDelete' request conforms to.
-type DeploymentManagerDeploymentsDeleteResource =
+-- | A resource alias for @deploymentmanager.deployments.get@ method which the
+-- 'DeploymentManagerDeploymentsGet' request conforms to.
+type DeploymentManagerDeploymentsGetResource =
   "deploymentmanager"
     Core.:> "v2"
     Core.:> "projects"
@@ -55,26 +55,21 @@ type DeploymentManagerDeploymentsDeleteResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "deletePolicy"
-              DeploymentsDeleteDeletePolicy
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Operation
+    Core.:> Core.Get '[Core.JSON] Deployment
 
--- | Deletes a deployment and all of the resources in the deployment.
+-- | Gets information about a specific deployment.
 --
--- /See:/ 'newDeploymentManagerDeploymentsDelete' smart constructor.
-data DeploymentManagerDeploymentsDelete = DeploymentManagerDeploymentsDelete
+-- /See:/ 'newDeploymentManagerDeploymentsGet' smart constructor.
+data DeploymentManagerDeploymentsGet = DeploymentManagerDeploymentsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Sets the policy to use for deleting resources.
-    deletePolicy :: DeploymentsDeleteDeletePolicy,
     -- | The name of the deployment for this request.
     deployment :: Core.Text,
     -- | The project ID for this request.
@@ -86,19 +81,18 @@ data DeploymentManagerDeploymentsDelete = DeploymentManagerDeploymentsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DeploymentManagerDeploymentsDelete' with the minimum fields required to make a request.
-newDeploymentManagerDeploymentsDelete ::
+-- | Creates a value of 'DeploymentManagerDeploymentsGet' with the minimum fields required to make a request.
+newDeploymentManagerDeploymentsGet ::
   -- |  The name of the deployment for this request. See 'deployment'.
   Core.Text ->
   -- |  The project ID for this request. See 'project'.
   Core.Text ->
-  DeploymentManagerDeploymentsDelete
-newDeploymentManagerDeploymentsDelete deployment project =
-  DeploymentManagerDeploymentsDelete
+  DeploymentManagerDeploymentsGet
+newDeploymentManagerDeploymentsGet deployment project =
+  DeploymentManagerDeploymentsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      deletePolicy = DeploymentsDeleteDeletePolicy_Delete',
       deployment = deployment,
       project = project,
       uploadType = Core.Nothing,
@@ -107,24 +101,23 @@ newDeploymentManagerDeploymentsDelete deployment project =
 
 instance
   Core.GoogleRequest
-    DeploymentManagerDeploymentsDelete
+    DeploymentManagerDeploymentsGet
   where
+  type Rs DeploymentManagerDeploymentsGet = Deployment
   type
-    Rs DeploymentManagerDeploymentsDelete =
-      Operation
-  type
-    Scopes DeploymentManagerDeploymentsDelete =
+    Scopes DeploymentManagerDeploymentsGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman"
+         "https://www.googleapis.com/auth/cloud-platform.read-only",
+         "https://www.googleapis.com/auth/ndev.cloudman",
+         "https://www.googleapis.com/auth/ndev.cloudman.readonly"
        ]
-  requestClient DeploymentManagerDeploymentsDelete {..} =
+  requestClient DeploymentManagerDeploymentsGet {..} =
     go
       project
       deployment
       xgafv
       accessToken
       callback
-      (Core.Just deletePolicy)
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -133,7 +126,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                DeploymentManagerDeploymentsDeleteResource
+              Core.Proxy DeploymentManagerDeploymentsGetResource
           )
           Core.mempty

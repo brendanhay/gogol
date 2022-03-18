@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.Insert
+-- Module      : Gogol.DeploymentManager.Deployments.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a deployment and all of the resources described by the deployment manifest.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.insert@.
-module Network.Google.DeploymentManager.Deployments.Insert
+module Gogol.DeploymentManager.Deployments.Insert
   ( -- * Resource
     DeploymentManagerDeploymentsInsertResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DeploymentManager.Deployments.Insert
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @deploymentmanager.deployments.insert@ method which the
 -- 'DeploymentManagerDeploymentsInsert' request conforms to.

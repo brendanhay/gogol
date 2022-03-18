@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Resources.Get
+-- Module      : Gogol.DeploymentManager.Deployments.Stop
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about a single resource.
+-- Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
 --
--- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.resources.get@.
-module Network.Google.DeploymentManager.Resources.Get
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.stop@.
+module Gogol.DeploymentManager.Deployments.Stop
   ( -- * Resource
-    DeploymentManagerResourcesGetResource,
+    DeploymentManagerDeploymentsStopResource,
 
     -- ** Constructing a Request
-    newDeploymentManagerResourcesGet,
-    DeploymentManagerResourcesGet,
+    newDeploymentManagerDeploymentsStop,
+    DeploymentManagerDeploymentsStop,
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @deploymentmanager.resources.get@ method which the
--- 'DeploymentManagerResourcesGet' request conforms to.
-type DeploymentManagerResourcesGetResource =
+-- | A resource alias for @deploymentmanager.deployments.stop@ method which the
+-- 'DeploymentManagerDeploymentsStop' request conforms to.
+type DeploymentManagerDeploymentsStopResource =
   "deploymentmanager"
     Core.:> "v2"
     Core.:> "projects"
@@ -52,20 +52,22 @@ type DeploymentManagerResourcesGetResource =
     Core.:> "global"
     Core.:> "deployments"
     Core.:> Core.Capture "deployment" Core.Text
-    Core.:> "resources"
-    Core.:> Core.Capture "resource" Core.Text
+    Core.:> "stop"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Resource
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              DeploymentsStopRequest
+    Core.:> Core.Post '[Core.JSON] Operation
 
--- | Gets information about a single resource.
+-- | Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
 --
--- /See:/ 'newDeploymentManagerResourcesGet' smart constructor.
-data DeploymentManagerResourcesGet = DeploymentManagerResourcesGet
+-- /See:/ 'newDeploymentManagerDeploymentsStop' smart constructor.
+data DeploymentManagerDeploymentsStop = DeploymentManagerDeploymentsStop
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -74,10 +76,10 @@ data DeploymentManagerResourcesGet = DeploymentManagerResourcesGet
     callback :: (Core.Maybe Core.Text),
     -- | The name of the deployment for this request.
     deployment :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: DeploymentsStopRequest,
     -- | The project ID for this request.
     project :: Core.Text,
-    -- | The name of the resource for this request.
-    resource :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -85,55 +87,53 @@ data DeploymentManagerResourcesGet = DeploymentManagerResourcesGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DeploymentManagerResourcesGet' with the minimum fields required to make a request.
-newDeploymentManagerResourcesGet ::
+-- | Creates a value of 'DeploymentManagerDeploymentsStop' with the minimum fields required to make a request.
+newDeploymentManagerDeploymentsStop ::
   -- |  The name of the deployment for this request. See 'deployment'.
   Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  DeploymentsStopRequest ->
   -- |  The project ID for this request. See 'project'.
   Core.Text ->
-  -- |  The name of the resource for this request. See 'resource'.
-  Core.Text ->
-  DeploymentManagerResourcesGet
-newDeploymentManagerResourcesGet deployment project resource =
-  DeploymentManagerResourcesGet
+  DeploymentManagerDeploymentsStop
+newDeploymentManagerDeploymentsStop deployment payload project =
+  DeploymentManagerDeploymentsStop
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       deployment = deployment,
+      payload = payload,
       project = project,
-      resource = resource,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DeploymentManagerResourcesGet
+    DeploymentManagerDeploymentsStop
   where
-  type Rs DeploymentManagerResourcesGet = Resource
+  type Rs DeploymentManagerDeploymentsStop = Operation
   type
-    Scopes DeploymentManagerResourcesGet =
+    Scopes DeploymentManagerDeploymentsStop =
       '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/ndev.cloudman",
-         "https://www.googleapis.com/auth/ndev.cloudman.readonly"
+         "https://www.googleapis.com/auth/ndev.cloudman"
        ]
-  requestClient DeploymentManagerResourcesGet {..} =
+  requestClient DeploymentManagerDeploymentsStop {..} =
     go
       project
       deployment
-      resource
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       deploymentManagerService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DeploymentManagerResourcesGetResource
+              Core.Proxy DeploymentManagerDeploymentsStopResource
           )
           Core.mempty

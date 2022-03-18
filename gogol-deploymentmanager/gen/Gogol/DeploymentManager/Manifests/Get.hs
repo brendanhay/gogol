@@ -19,59 +19,63 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Operations.Get
+-- Module      : Gogol.DeploymentManager.Manifests.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about a specific operation.
+-- Gets information about a specific manifest.
 --
--- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.operations.get@.
-module Network.Google.DeploymentManager.Operations.Get
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.manifests.get@.
+module Gogol.DeploymentManager.Manifests.Get
   ( -- * Resource
-    DeploymentManagerOperationsGetResource,
+    DeploymentManagerManifestsGetResource,
 
     -- ** Constructing a Request
-    newDeploymentManagerOperationsGet,
-    DeploymentManagerOperationsGet,
+    newDeploymentManagerManifestsGet,
+    DeploymentManagerManifestsGet,
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @deploymentmanager.operations.get@ method which the
--- 'DeploymentManagerOperationsGet' request conforms to.
-type DeploymentManagerOperationsGetResource =
+-- | A resource alias for @deploymentmanager.manifests.get@ method which the
+-- 'DeploymentManagerManifestsGet' request conforms to.
+type DeploymentManagerManifestsGetResource =
   "deploymentmanager"
     Core.:> "v2"
     Core.:> "projects"
     Core.:> Core.Capture "project" Core.Text
     Core.:> "global"
-    Core.:> "operations"
-    Core.:> Core.Capture "operation" Core.Text
+    Core.:> "deployments"
+    Core.:> Core.Capture "deployment" Core.Text
+    Core.:> "manifests"
+    Core.:> Core.Capture "manifest" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Operation
+    Core.:> Core.Get '[Core.JSON] Manifest
 
--- | Gets information about a specific operation.
+-- | Gets information about a specific manifest.
 --
--- /See:/ 'newDeploymentManagerOperationsGet' smart constructor.
-data DeploymentManagerOperationsGet = DeploymentManagerOperationsGet
+-- /See:/ 'newDeploymentManagerManifestsGet' smart constructor.
+data DeploymentManagerManifestsGet = DeploymentManagerManifestsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation for this request.
-    operation :: Core.Text,
+    -- | The name of the deployment for this request.
+    deployment :: Core.Text,
+    -- | The name of the manifest for this request.
+    manifest :: Core.Text,
     -- | The project ID for this request.
     project :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -81,19 +85,22 @@ data DeploymentManagerOperationsGet = DeploymentManagerOperationsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DeploymentManagerOperationsGet' with the minimum fields required to make a request.
-newDeploymentManagerOperationsGet ::
-  -- |  The name of the operation for this request. See 'operation'.
+-- | Creates a value of 'DeploymentManagerManifestsGet' with the minimum fields required to make a request.
+newDeploymentManagerManifestsGet ::
+  -- |  The name of the deployment for this request. See 'deployment'.
+  Core.Text ->
+  -- |  The name of the manifest for this request. See 'manifest'.
   Core.Text ->
   -- |  The project ID for this request. See 'project'.
   Core.Text ->
-  DeploymentManagerOperationsGet
-newDeploymentManagerOperationsGet operation project =
-  DeploymentManagerOperationsGet
+  DeploymentManagerManifestsGet
+newDeploymentManagerManifestsGet deployment manifest project =
+  DeploymentManagerManifestsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      operation = operation,
+      deployment = deployment,
+      manifest = manifest,
       project = project,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -101,20 +108,21 @@ newDeploymentManagerOperationsGet operation project =
 
 instance
   Core.GoogleRequest
-    DeploymentManagerOperationsGet
+    DeploymentManagerManifestsGet
   where
-  type Rs DeploymentManagerOperationsGet = Operation
+  type Rs DeploymentManagerManifestsGet = Manifest
   type
-    Scopes DeploymentManagerOperationsGet =
+    Scopes DeploymentManagerManifestsGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-platform.read-only",
          "https://www.googleapis.com/auth/ndev.cloudman",
          "https://www.googleapis.com/auth/ndev.cloudman.readonly"
        ]
-  requestClient DeploymentManagerOperationsGet {..} =
+  requestClient DeploymentManagerManifestsGet {..} =
     go
       project
-      operation
+      deployment
+      manifest
       xgafv
       accessToken
       callback
@@ -126,6 +134,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DeploymentManagerOperationsGetResource
+              Core.Proxy DeploymentManagerManifestsGetResource
           )
           Core.mempty
