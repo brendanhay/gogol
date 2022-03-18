@@ -39,25 +39,26 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.YouTubeReporting
-    Network.Google.YouTubeReporting.Jobs.Create
-    Network.Google.YouTubeReporting.Jobs.Delete
-    Network.Google.YouTubeReporting.Jobs.Get
-    Network.Google.YouTubeReporting.Jobs.List
-    Network.Google.YouTubeReporting.Jobs.Reports.Get
-    Network.Google.YouTubeReporting.Jobs.Reports.List
-    Network.Google.YouTubeReporting.Media.Download
-    Network.Google.YouTubeReporting.ReportTypes.List
-    Network.Google.YouTubeReporting.Types
+    Gogol.YouTubeReporting
+    Gogol.YouTubeReporting.Jobs.Create
+    Gogol.YouTubeReporting.Jobs.Delete
+    Gogol.YouTubeReporting.Jobs.Get
+    Gogol.YouTubeReporting.Jobs.List
+    Gogol.YouTubeReporting.Jobs.Reports.Get
+    Gogol.YouTubeReporting.Jobs.Reports.List
+    Gogol.YouTubeReporting.Media.Download
+    Gogol.YouTubeReporting.ReportTypes.List
+    Gogol.YouTubeReporting.Types
 
   other-modules:
-    Network.Google.YouTubeReporting.Internal.Product
-    Network.Google.YouTubeReporting.Internal.Sum
+    Gogol.YouTubeReporting.Internal.Product
+    Gogol.YouTubeReporting.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

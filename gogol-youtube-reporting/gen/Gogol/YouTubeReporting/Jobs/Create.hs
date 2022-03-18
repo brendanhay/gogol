@@ -19,35 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeReporting.Jobs.Delete
+-- Module      : Gogol.YouTubeReporting.Jobs.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a job.
+-- Creates a job and returns it.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.delete@.
-module Network.Google.YouTubeReporting.Jobs.Delete
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.create@.
+module Gogol.YouTubeReporting.Jobs.Create
   ( -- * Resource
-    YouTubeReportingJobsDeleteResource,
+    YouTubeReportingJobsCreateResource,
 
     -- ** Constructing a Request
-    newYouTubeReportingJobsDelete,
-    YouTubeReportingJobsDelete,
+    newYouTubeReportingJobsCreate,
+    YouTubeReportingJobsCreate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeReporting.Types
+import qualified Gogol.Prelude as Core
+import Gogol.YouTubeReporting.Types
 
--- | A resource alias for @youtubereporting.jobs.delete@ method which the
--- 'YouTubeReportingJobsDelete' request conforms to.
-type YouTubeReportingJobsDeleteResource =
+-- | A resource alias for @youtubereporting.jobs.create@ method which the
+-- 'YouTubeReportingJobsCreate' request conforms to.
+type YouTubeReportingJobsCreateResource =
   "v1"
     Core.:> "jobs"
-    Core.:> Core.Capture "jobId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -55,22 +54,23 @@ type YouTubeReportingJobsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.ReqBody '[Core.JSON] Job
+    Core.:> Core.Post '[Core.JSON] Job
 
--- | Deletes a job.
+-- | Creates a job and returns it.
 --
--- /See:/ 'newYouTubeReportingJobsDelete' smart constructor.
-data YouTubeReportingJobsDelete = YouTubeReportingJobsDelete
+-- /See:/ 'newYouTubeReportingJobsCreate' smart constructor.
+data YouTubeReportingJobsCreate = YouTubeReportingJobsCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the job to delete.
-    jobId :: Core.Text,
     -- | The content owner\'s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
     onBehalfOfContentOwner :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: Job,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -78,35 +78,34 @@ data YouTubeReportingJobsDelete = YouTubeReportingJobsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'YouTubeReportingJobsDelete' with the minimum fields required to make a request.
-newYouTubeReportingJobsDelete ::
-  -- |  The ID of the job to delete. See 'jobId'.
-  Core.Text ->
-  YouTubeReportingJobsDelete
-newYouTubeReportingJobsDelete jobId =
-  YouTubeReportingJobsDelete
+-- | Creates a value of 'YouTubeReportingJobsCreate' with the minimum fields required to make a request.
+newYouTubeReportingJobsCreate ::
+  -- |  Multipart request metadata. See 'payload'.
+  Job ->
+  YouTubeReportingJobsCreate
+newYouTubeReportingJobsCreate payload =
+  YouTubeReportingJobsCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      jobId = jobId,
       onBehalfOfContentOwner = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    YouTubeReportingJobsDelete
+    YouTubeReportingJobsCreate
   where
-  type Rs YouTubeReportingJobsDelete = Empty
+  type Rs YouTubeReportingJobsCreate = Job
   type
-    Scopes YouTubeReportingJobsDelete =
+    Scopes YouTubeReportingJobsCreate =
       '[ "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
          "https://www.googleapis.com/auth/yt-analytics.readonly"
        ]
-  requestClient YouTubeReportingJobsDelete {..} =
+  requestClient YouTubeReportingJobsCreate {..} =
     go
-      jobId
       xgafv
       accessToken
       callback
@@ -114,11 +113,12 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       youTubeReportingService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy YouTubeReportingJobsDeleteResource
+              Core.Proxy YouTubeReportingJobsCreateResource
           )
           Core.mempty

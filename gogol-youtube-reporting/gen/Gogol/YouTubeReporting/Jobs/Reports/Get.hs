@@ -19,34 +19,37 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeReporting.Jobs.Create
+-- Module      : Gogol.YouTubeReporting.Jobs.Reports.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a job and returns it.
+-- Gets the metadata of a specific report.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.create@.
-module Network.Google.YouTubeReporting.Jobs.Create
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.reports.get@.
+module Gogol.YouTubeReporting.Jobs.Reports.Get
   ( -- * Resource
-    YouTubeReportingJobsCreateResource,
+    YouTubeReportingJobsReportsGetResource,
 
     -- ** Constructing a Request
-    newYouTubeReportingJobsCreate,
-    YouTubeReportingJobsCreate,
+    newYouTubeReportingJobsReportsGet,
+    YouTubeReportingJobsReportsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeReporting.Types
+import qualified Gogol.Prelude as Core
+import Gogol.YouTubeReporting.Types
 
--- | A resource alias for @youtubereporting.jobs.create@ method which the
--- 'YouTubeReportingJobsCreate' request conforms to.
-type YouTubeReportingJobsCreateResource =
+-- | A resource alias for @youtubereporting.jobs.reports.get@ method which the
+-- 'YouTubeReportingJobsReportsGet' request conforms to.
+type YouTubeReportingJobsReportsGetResource =
   "v1"
     Core.:> "jobs"
+    Core.:> Core.Capture "jobId" Core.Text
+    Core.:> "reports"
+    Core.:> Core.Capture "reportId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -54,23 +57,24 @@ type YouTubeReportingJobsCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Job
-    Core.:> Core.Post '[Core.JSON] Job
+    Core.:> Core.Get '[Core.JSON] Report
 
--- | Creates a job and returns it.
+-- | Gets the metadata of a specific report.
 --
--- /See:/ 'newYouTubeReportingJobsCreate' smart constructor.
-data YouTubeReportingJobsCreate = YouTubeReportingJobsCreate
+-- /See:/ 'newYouTubeReportingJobsReportsGet' smart constructor.
+data YouTubeReportingJobsReportsGet = YouTubeReportingJobsReportsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | The ID of the job.
+    jobId :: Core.Text,
     -- | The content owner\'s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
     onBehalfOfContentOwner :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Job,
+    -- | The ID of the report to retrieve.
+    reportId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -78,34 +82,39 @@ data YouTubeReportingJobsCreate = YouTubeReportingJobsCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'YouTubeReportingJobsCreate' with the minimum fields required to make a request.
-newYouTubeReportingJobsCreate ::
-  -- |  Multipart request metadata. See 'payload'.
-  Job ->
-  YouTubeReportingJobsCreate
-newYouTubeReportingJobsCreate payload =
-  YouTubeReportingJobsCreate
+-- | Creates a value of 'YouTubeReportingJobsReportsGet' with the minimum fields required to make a request.
+newYouTubeReportingJobsReportsGet ::
+  -- |  The ID of the job. See 'jobId'.
+  Core.Text ->
+  -- |  The ID of the report to retrieve. See 'reportId'.
+  Core.Text ->
+  YouTubeReportingJobsReportsGet
+newYouTubeReportingJobsReportsGet jobId reportId =
+  YouTubeReportingJobsReportsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      jobId = jobId,
       onBehalfOfContentOwner = Core.Nothing,
-      payload = payload,
+      reportId = reportId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    YouTubeReportingJobsCreate
+    YouTubeReportingJobsReportsGet
   where
-  type Rs YouTubeReportingJobsCreate = Job
+  type Rs YouTubeReportingJobsReportsGet = Report
   type
-    Scopes YouTubeReportingJobsCreate =
+    Scopes YouTubeReportingJobsReportsGet =
       '[ "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
          "https://www.googleapis.com/auth/yt-analytics.readonly"
        ]
-  requestClient YouTubeReportingJobsCreate {..} =
+  requestClient YouTubeReportingJobsReportsGet {..} =
     go
+      jobId
+      reportId
       xgafv
       accessToken
       callback
@@ -113,12 +122,11 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       youTubeReportingService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy YouTubeReportingJobsCreateResource
+              Core.Proxy YouTubeReportingJobsReportsGetResource
           )
           Core.mempty
