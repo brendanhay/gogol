@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,84 +36,79 @@
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.get@.
 module Gogol.IAP.Projects.Brands.Get
-  ( -- * Resource
-    IAPProjectsBrandsGetResource,
+    (
+    -- * Resource
+      IAPProjectsBrandsGetResource
 
     -- ** Constructing a Request
-    newIAPProjectsBrandsGet,
-    IAPProjectsBrandsGet,
-  )
-where
+    , newIAPProjectsBrandsGet
+    , IAPProjectsBrandsGet
+    ) where
 
-import Gogol.IAP.Types
 import qualified Gogol.Prelude as Core
+import Gogol.IAP.Types
 
 -- | A resource alias for @iap.projects.brands.get@ method which the
 -- 'IAPProjectsBrandsGet' request conforms to.
 type IAPProjectsBrandsGetResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Brand
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] Brand
 
 -- | Retrieves the OAuth brand of the project.
 --
 -- /See:/ 'newIAPProjectsBrandsGet' smart constructor.
 data IAPProjectsBrandsGet = IAPProjectsBrandsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Name of the brand to be fetched. In the following format: projects\/{project_number\/id}\/brands\/{brand}.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Name of the brand to be fetched. In the following format: projects\/{project_number\/id}\/brands\/{brand}.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IAPProjectsBrandsGet' with the minimum fields required to make a request.
-newIAPProjectsBrandsGet ::
-  -- |  Required. Name of the brand to be fetched. In the following format: projects\/{project_number\/id}\/brands\/{brand}. See 'name'.
-  Core.Text ->
-  IAPProjectsBrandsGet
+newIAPProjectsBrandsGet 
+    ::  Core.Text
+       -- ^  Required. Name of the brand to be fetched. In the following format: projects\/{project_number\/id}\/brands\/{brand}. See 'name'.
+    -> IAPProjectsBrandsGet
 newIAPProjectsBrandsGet name =
   IAPProjectsBrandsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest IAPProjectsBrandsGet where
-  type Rs IAPProjectsBrandsGet = Brand
-  type
-    Scopes IAPProjectsBrandsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient IAPProjectsBrandsGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      iAPService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy IAPProjectsBrandsGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest IAPProjectsBrandsGet
+         where
+        type Rs IAPProjectsBrandsGet = Brand
+        type Scopes IAPProjectsBrandsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient IAPProjectsBrandsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              iAPService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy IAPProjectsBrandsGetResource)
+                      Core.mempty
+
