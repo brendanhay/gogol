@@ -19,80 +19,80 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness.Users.DataSources.Get
+-- Module      : Gogol.Fitness.Users.Dataset.Aggregate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified data source.
+-- Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggregated into exactly one bucket type per request.
 --
--- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.get@.
-module Network.Google.Fitness.Users.DataSources.Get
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataset.aggregate@.
+module Gogol.Fitness.Users.Dataset.Aggregate
   ( -- * Resource
-    FitnessUsersDataSourcesGetResource,
+    FitnessUsersDatasetAggregateResource,
 
     -- ** Constructing a Request
-    newFitnessUsersDataSourcesGet,
-    FitnessUsersDataSourcesGet,
+    newFitnessUsersDatasetAggregate,
+    FitnessUsersDatasetAggregate,
   )
 where
 
-import Network.Google.Fitness.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fitness.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @fitness.users.dataSources.get@ method which the
--- 'FitnessUsersDataSourcesGet' request conforms to.
-type FitnessUsersDataSourcesGetResource =
+-- | A resource alias for @fitness.users.dataset.aggregate@ method which the
+-- 'FitnessUsersDatasetAggregate' request conforms to.
+type FitnessUsersDatasetAggregateResource =
   "fitness"
     Core.:> "v1"
     Core.:> "users"
     Core.:> Core.Capture "userId" Core.Text
-    Core.:> "dataSources"
-    Core.:> Core.Capture "dataSourceId" Core.Text
+    Core.:> "dataset:aggregate"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] DataSource
+    Core.:> Core.ReqBody '[Core.JSON] AggregateRequest
+    Core.:> Core.Post '[Core.JSON] AggregateResponse
 
--- | Returns the specified data source.
+-- | Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggregated into exactly one bucket type per request.
 --
--- /See:/ 'newFitnessUsersDataSourcesGet' smart constructor.
-data FitnessUsersDataSourcesGet = FitnessUsersDataSourcesGet
+-- /See:/ 'newFitnessUsersDatasetAggregate' smart constructor.
+data FitnessUsersDatasetAggregate = FitnessUsersDatasetAggregate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The data stream ID of the data source to retrieve.
-    dataSourceId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: AggregateRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+    -- | Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
     userId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FitnessUsersDataSourcesGet' with the minimum fields required to make a request.
-newFitnessUsersDataSourcesGet ::
-  -- |  The data stream ID of the data source to retrieve. See 'dataSourceId'.
+-- | Creates a value of 'FitnessUsersDatasetAggregate' with the minimum fields required to make a request.
+newFitnessUsersDatasetAggregate ::
+  -- |  Multipart request metadata. See 'payload'.
+  AggregateRequest ->
+  -- |  Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
   Core.Text ->
-  -- |  Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
-  Core.Text ->
-  FitnessUsersDataSourcesGet
-newFitnessUsersDataSourcesGet dataSourceId userId =
-  FitnessUsersDataSourcesGet
+  FitnessUsersDatasetAggregate
+newFitnessUsersDatasetAggregate payload userId =
+  FitnessUsersDatasetAggregate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      dataSourceId = dataSourceId,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
       userId = userId
@@ -100,11 +100,13 @@ newFitnessUsersDataSourcesGet dataSourceId userId =
 
 instance
   Core.GoogleRequest
-    FitnessUsersDataSourcesGet
+    FitnessUsersDatasetAggregate
   where
-  type Rs FitnessUsersDataSourcesGet = DataSource
   type
-    Scopes FitnessUsersDataSourcesGet =
+    Rs FitnessUsersDatasetAggregate =
+      AggregateResponse
+  type
+    Scopes FitnessUsersDatasetAggregate =
       '[ "https://www.googleapis.com/auth/fitness.activity.read",
          "https://www.googleapis.com/auth/fitness.activity.write",
          "https://www.googleapis.com/auth/fitness.blood_glucose.read",
@@ -128,21 +130,21 @@ instance
          "https://www.googleapis.com/auth/fitness.sleep.read",
          "https://www.googleapis.com/auth/fitness.sleep.write"
        ]
-  requestClient FitnessUsersDataSourcesGet {..} =
+  requestClient FitnessUsersDatasetAggregate {..} =
     go
       userId
-      dataSourceId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       fitnessService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy FitnessUsersDataSourcesGetResource
+              Core.Proxy FitnessUsersDatasetAggregateResource
           )
           Core.mempty

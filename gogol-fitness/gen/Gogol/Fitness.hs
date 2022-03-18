@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness
+-- Module      : Gogol.Fitness
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Fitness API for managing users\' fitness tracking data.
 --
 -- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference>
-module Network.Google.Fitness
+module Gogol.Fitness
   ( -- * Configuration
     fitnessService,
 
@@ -240,17 +240,17 @@ module Network.Google.Fitness
   )
 where
 
-import Network.Google.Fitness.Types
-import Network.Google.Fitness.Users.DataSources.Create
-import Network.Google.Fitness.Users.DataSources.DataPointChanges.List
-import Network.Google.Fitness.Users.DataSources.Datasets.Delete
-import Network.Google.Fitness.Users.DataSources.Datasets.Get
-import Network.Google.Fitness.Users.DataSources.Datasets.Patch
-import Network.Google.Fitness.Users.DataSources.Delete
-import Network.Google.Fitness.Users.DataSources.Get
-import Network.Google.Fitness.Users.DataSources.List
-import Network.Google.Fitness.Users.DataSources.Update
-import Network.Google.Fitness.Users.Dataset.Aggregate
-import Network.Google.Fitness.Users.Sessions.Delete
-import Network.Google.Fitness.Users.Sessions.List
-import Network.Google.Fitness.Users.Sessions.Update
+import Gogol.Fitness.Types
+import Gogol.Fitness.Users.DataSources.Create
+import Gogol.Fitness.Users.DataSources.DataPointChanges.List
+import Gogol.Fitness.Users.DataSources.Datasets.Delete
+import Gogol.Fitness.Users.DataSources.Datasets.Get
+import Gogol.Fitness.Users.DataSources.Datasets.Patch
+import Gogol.Fitness.Users.DataSources.Delete
+import Gogol.Fitness.Users.DataSources.Get
+import Gogol.Fitness.Users.DataSources.List
+import Gogol.Fitness.Users.DataSources.Update
+import Gogol.Fitness.Users.Dataset.Aggregate
+import Gogol.Fitness.Users.Sessions.Delete
+import Gogol.Fitness.Users.Sessions.List
+import Gogol.Fitness.Users.Sessions.Update

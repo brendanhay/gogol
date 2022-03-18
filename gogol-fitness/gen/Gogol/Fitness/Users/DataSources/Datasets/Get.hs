@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness.Users.DataSources.Datasets.Get
+-- Module      : Gogol.Fitness.Users.DataSources.Datasets.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a dataset containing all data points whose start and end times overlap with the specified range of the dataset minimum start time and maximum end time. Specifically, any data point whose start time is less than or equal to the dataset end time and whose end time is greater than or equal to the dataset start time.
 --
 -- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.datasets.get@.
-module Network.Google.Fitness.Users.DataSources.Datasets.Get
+module Gogol.Fitness.Users.DataSources.Datasets.Get
   ( -- * Resource
     FitnessUsersDataSourcesDatasetsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Fitness.Users.DataSources.Datasets.Get
   )
 where
 
-import Network.Google.Fitness.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fitness.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @fitness.users.dataSources.datasets.get@ method which the
 -- 'FitnessUsersDataSourcesDatasetsGet' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness.Users.DataSources.Create
+-- Module      : Gogol.Fitness.Users.DataSources.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -30,7 +30,7 @@
 -- correct format. If a dataStreamId is set, it must match the format that the server would generate. This format is a combination of some fields from the data source, and has a specific order. If it doesn\'t match, the request will fail with an error. Specifying a DataType which is not a known type (beginning with \"com.google.\") will create a DataSource with a /custom data type/. Custom data types are only readable by the application that created them. Custom data types are /deprecated/; use standard data types instead. In addition to the data source fields included in the data source ID, the developer project number that is authenticated when creating the data source is included. This developer project number is obfuscated when read by any other developer reading public data types.
 --
 -- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.create@.
-module Network.Google.Fitness.Users.DataSources.Create
+module Gogol.Fitness.Users.DataSources.Create
   ( -- * Resource
     FitnessUsersDataSourcesCreateResource,
 
@@ -40,8 +40,8 @@ module Network.Google.Fitness.Users.DataSources.Create
   )
 where
 
-import Network.Google.Fitness.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fitness.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @fitness.users.dataSources.create@ method which the
 -- 'FitnessUsersDataSourcesCreate' request conforms to.
