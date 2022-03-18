@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AdExperienceReport.Internal.Product
+-- Module      : Gogol.AdExperienceReport.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AdExperienceReport.Internal.Product
+module Gogol.AdExperienceReport.Internal.Product
   ( -- * PlatformSummary
     PlatformSummary (..),
     newPlatformSummary,
@@ -40,8 +40,8 @@ module Network.Google.AdExperienceReport.Internal.Product
   )
 where
 
-import Network.Google.AdExperienceReport.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AdExperienceReport.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | A site\'s Ad Experience Report summary on a single platform.
 --

@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AdExperienceReport
-    Network.Google.AdExperienceReport.Sites.Get
-    Network.Google.AdExperienceReport.Types
-    Network.Google.AdExperienceReport.ViolatingSites.List
+    Gogol.AdExperienceReport
+    Gogol.AdExperienceReport.Sites.Get
+    Gogol.AdExperienceReport.Types
+    Gogol.AdExperienceReport.ViolatingSites.List
 
   other-modules:
-    Network.Google.AdExperienceReport.Internal.Product
-    Network.Google.AdExperienceReport.Internal.Sum
+    Gogol.AdExperienceReport.Internal.Product
+    Gogol.AdExperienceReport.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
