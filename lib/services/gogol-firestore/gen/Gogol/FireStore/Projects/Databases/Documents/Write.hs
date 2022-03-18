@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,94 +30,101 @@
 --
 -- /See:/ <https://cloud.google.com/firestore Cloud Firestore API Reference> for @firestore.projects.databases.documents.write@.
 module Gogol.FireStore.Projects.Databases.Documents.Write
-    (
-    -- * Resource
-      FireStoreProjectsDatabasesDocumentsWriteResource
+  ( -- * Resource
+    FireStoreProjectsDatabasesDocumentsWriteResource,
 
     -- ** Constructing a Request
-    , newFireStoreProjectsDatabasesDocumentsWrite
-    , FireStoreProjectsDatabasesDocumentsWrite
-    ) where
+    newFireStoreProjectsDatabasesDocumentsWrite,
+    FireStoreProjectsDatabasesDocumentsWrite,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.FireStore.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.write@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsWrite' request conforms to.
-type FireStoreProjectsDatabasesDocumentsWriteResource
-     =
-     "v1" Core.:>
-       Core.Capture "database" Core.Text Core.:>
-         "documents:write" Core.:>
-           Core.QueryParam "$.xgafv" Xgafv Core.:>
-             Core.QueryParam "access_token" Core.Text Core.:>
-               Core.QueryParam "callback" Core.Text Core.:>
-                 Core.QueryParam "uploadType" Core.Text Core.:>
-                   Core.QueryParam "upload_protocol" Core.Text Core.:>
-                     Core.QueryParam "alt" Core.AltJSON Core.:>
-                       Core.ReqBody '[Core.JSON] WriteRequest Core.:>
-                         Core.Post '[Core.JSON] WriteResponse
+type FireStoreProjectsDatabasesDocumentsWriteResource =
+  "v1"
+    Core.:> Core.Capture "database" Core.Text
+    Core.:> "documents:write"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] WriteRequest
+    Core.:> Core.Post '[Core.JSON] WriteResponse
 
 -- | Streams batches of document updates and deletes, in order.
 --
 -- /See:/ 'newFireStoreProjectsDatabasesDocumentsWrite' smart constructor.
 data FireStoreProjectsDatabasesDocumentsWrite = FireStoreProjectsDatabasesDocumentsWrite
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The database name. In the format: @projects\/{project_id}\/databases\/{database_id}@. This is only required in the first message.
-    , database :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: WriteRequest
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The database name. In the format: @projects\/{project_id}\/databases\/{database_id}@. This is only required in the first message.
+    database :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: WriteRequest,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FireStoreProjectsDatabasesDocumentsWrite' with the minimum fields required to make a request.
-newFireStoreProjectsDatabasesDocumentsWrite 
-    ::  Core.Text
-       -- ^  Required. The database name. In the format: @projects\/{project_id}\/databases\/{database_id}@. This is only required in the first message. See 'database'.
-    -> WriteRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> FireStoreProjectsDatabasesDocumentsWrite
+newFireStoreProjectsDatabasesDocumentsWrite ::
+  -- |  Required. The database name. In the format: @projects\/{project_id}\/databases\/{database_id}@. This is only required in the first message. See 'database'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  WriteRequest ->
+  FireStoreProjectsDatabasesDocumentsWrite
 newFireStoreProjectsDatabasesDocumentsWrite database payload =
   FireStoreProjectsDatabasesDocumentsWrite
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , database = database
-    , payload = payload
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      database = database,
+      payload = payload,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           FireStoreProjectsDatabasesDocumentsWrite
-         where
-        type Rs FireStoreProjectsDatabasesDocumentsWrite =
-             WriteResponse
-        type Scopes FireStoreProjectsDatabasesDocumentsWrite
-             =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/datastore"]
-        requestClient
-          FireStoreProjectsDatabasesDocumentsWrite{..}
-          = go database xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              fireStoreService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           FireStoreProjectsDatabasesDocumentsWriteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    FireStoreProjectsDatabasesDocumentsWrite
+  where
+  type
+    Rs FireStoreProjectsDatabasesDocumentsWrite =
+      WriteResponse
+  type
+    Scopes FireStoreProjectsDatabasesDocumentsWrite =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/datastore"
+       ]
+  requestClient
+    FireStoreProjectsDatabasesDocumentsWrite {..} =
+      go
+        database
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        fireStoreService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  FireStoreProjectsDatabasesDocumentsWriteResource
+            )
+            Core.mempty
