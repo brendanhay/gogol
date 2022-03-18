@@ -1,66 +1,69 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AdExperienceReport.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AdExperienceReport.Types
-    (
-    -- * Service Configuration
-      adExperienceReportService
+  ( -- * Configuration
+    adExperienceReportService,
 
-    -- * SiteSummaryResponse
-    , SiteSummaryResponse
-    , siteSummaryResponse
-    , ssrMobileSummary
-    , ssrReviewedSite
-    , ssrDesktopSummary
+    -- * Types
 
-    -- * PlatformSummaryFilterStatus
-    , PlatformSummaryFilterStatus (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ViolatingSitesResponse
-    , ViolatingSitesResponse
-    , violatingSitesResponse
-    , vsrViolatingSites
+    -- ** PlatformSummary
+    PlatformSummary (..),
+    newPlatformSummary,
 
-    -- * PlatformSummaryRegionItem
-    , PlatformSummaryRegionItem (..)
+    -- ** PlatformSummary_BetterAdsStatus
+    PlatformSummary_BetterAdsStatus (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** PlatformSummary_FilterStatus
+    PlatformSummary_FilterStatus (..),
 
-    -- * PlatformSummary
-    , PlatformSummary
-    , platformSummary
-    , psEnforcementTime
-    , psLastChangeTime
-    , psFilterStatus
-    , psUnderReview
-    , psBetterAdsStatus
-    , psReportURL
-    , psRegion
+    -- ** PlatformSummary_RegionItem
+    PlatformSummary_RegionItem (..),
 
-    -- * PlatformSummaryBetterAdsStatus
-    , PlatformSummaryBetterAdsStatus (..)
-    ) where
+    -- ** SiteSummaryResponse
+    SiteSummaryResponse (..),
+    newSiteSummaryResponse,
 
-import Network.Google.AdExperienceReport.Types.Product
-import Network.Google.AdExperienceReport.Types.Sum
-import Network.Google.Prelude
+    -- ** ViolatingSitesResponse
+    ViolatingSitesResponse (..),
+    newViolatingSitesResponse,
+  )
+where
 
--- | Default request referring to version 'v1' of the Ad Experience Report API. This contains the host and root path used as a starting point for constructing service requests.
-adExperienceReportService :: ServiceConfig
-adExperienceReportService
-  = defaultService (ServiceId "adexperiencereport:v1")
-      "adexperiencereport.googleapis.com"
+import Network.Google.AdExperienceReport.Internal.Product
+import Network.Google.AdExperienceReport.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Ad Experience Report API. This contains the host and root path used as a starting point for constructing service requests.
+adExperienceReportService :: Core.ServiceConfig
+adExperienceReportService =
+  Core.defaultService
+    (Core.ServiceId "adexperiencereport:v1")
+    "adexperiencereport.googleapis.com"
