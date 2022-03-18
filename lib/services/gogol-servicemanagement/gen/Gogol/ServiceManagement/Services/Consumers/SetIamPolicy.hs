@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,96 +30,102 @@
 --
 -- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.consumers.setIamPolicy@.
 module Gogol.ServiceManagement.Services.Consumers.SetIamPolicy
-    (
-    -- * Resource
-      ServiceManagementServicesConsumersSetIamPolicyResource
+  ( -- * Resource
+    ServiceManagementServicesConsumersSetIamPolicyResource,
 
     -- ** Constructing a Request
-    , newServiceManagementServicesConsumersSetIamPolicy
-    , ServiceManagementServicesConsumersSetIamPolicy
-    ) where
+    newServiceManagementServicesConsumersSetIamPolicy,
+    ServiceManagementServicesConsumersSetIamPolicy,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.consumers.setIamPolicy@ method which the
 -- 'ServiceManagementServicesConsumersSetIamPolicy' request conforms to.
-type ServiceManagementServicesConsumersSetIamPolicyResource
-     =
-     "v1" Core.:>
-       Core.CaptureMode "resource" "setIamPolicy" Core.Text
-         Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.ReqBody '[Core.JSON] SetIamPolicyRequest Core.:>
-                       Core.Post '[Core.JSON] Policy
+type ServiceManagementServicesConsumersSetIamPolicyResource =
+  "v1"
+    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
+    Core.:> Core.Post '[Core.JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy. Can return @NOT_FOUND@, @INVALID_ARGUMENT@, and @PERMISSION_DENIED@ errors.
 --
 -- /See:/ 'newServiceManagementServicesConsumersSetIamPolicy' smart constructor.
 data ServiceManagementServicesConsumersSetIamPolicy = ServiceManagementServicesConsumersSetIamPolicy
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: SetIamPolicyRequest
-      -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-    , resource :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: SetIamPolicyRequest,
+    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
+    resource :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ServiceManagementServicesConsumersSetIamPolicy' with the minimum fields required to make a request.
-newServiceManagementServicesConsumersSetIamPolicy 
-    ::  SetIamPolicyRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
-    -> ServiceManagementServicesConsumersSetIamPolicy
+newServiceManagementServicesConsumersSetIamPolicy ::
+  -- |  Multipart request metadata. See 'payload'.
+  SetIamPolicyRequest ->
+  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+  Core.Text ->
+  ServiceManagementServicesConsumersSetIamPolicy
 newServiceManagementServicesConsumersSetIamPolicy payload resource =
   ServiceManagementServicesConsumersSetIamPolicy
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , resource = resource
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      resource = resource,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           ServiceManagementServicesConsumersSetIamPolicy
-         where
-        type Rs
-               ServiceManagementServicesConsumersSetIamPolicy
-             = Policy
-        type Scopes
-               ServiceManagementServicesConsumersSetIamPolicy
-             =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/service.management"]
-        requestClient
-          ServiceManagementServicesConsumersSetIamPolicy{..}
-          = go resource xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              serviceManagementService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           ServiceManagementServicesConsumersSetIamPolicyResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    ServiceManagementServicesConsumersSetIamPolicy
+  where
+  type
+    Rs
+      ServiceManagementServicesConsumersSetIamPolicy =
+      Policy
+  type
+    Scopes
+      ServiceManagementServicesConsumersSetIamPolicy =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/service.management"
+       ]
+  requestClient
+    ServiceManagementServicesConsumersSetIamPolicy {..} =
+      go
+        resource
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        serviceManagementService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  ServiceManagementServicesConsumersSetIamPolicyResource
+            )
+            Core.mempty

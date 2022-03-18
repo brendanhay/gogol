@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,584 +30,584 @@
 --
 -- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference>
 module Gogol.ServiceManagement
-    (
-    -- * Configuration
-      serviceManagementService
+  ( -- * Configuration
+    serviceManagementService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
-    , serviceManagementScope
-    , serviceManagementReadOnlyScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    serviceManagementScope,
+    serviceManagementReadOnlyScope,
 
     -- * Resources
 
     -- ** servicemanagement.operations.get
-    , ServiceManagementOperationsGetResource
-    , newServiceManagementOperationsGet
-    , ServiceManagementOperationsGet
+    ServiceManagementOperationsGetResource,
+    newServiceManagementOperationsGet,
+    ServiceManagementOperationsGet,
 
     -- ** servicemanagement.operations.list
-    , ServiceManagementOperationsListResource
-    , newServiceManagementOperationsList
-    , ServiceManagementOperationsList
+    ServiceManagementOperationsListResource,
+    newServiceManagementOperationsList,
+    ServiceManagementOperationsList,
 
     -- ** servicemanagement.services.configs.create
-    , ServiceManagementServicesConfigsCreateResource
-    , newServiceManagementServicesConfigsCreate
-    , ServiceManagementServicesConfigsCreate
+    ServiceManagementServicesConfigsCreateResource,
+    newServiceManagementServicesConfigsCreate,
+    ServiceManagementServicesConfigsCreate,
 
     -- ** servicemanagement.services.configs.get
-    , ServiceManagementServicesConfigsGetResource
-    , newServiceManagementServicesConfigsGet
-    , ServiceManagementServicesConfigsGet
+    ServiceManagementServicesConfigsGetResource,
+    newServiceManagementServicesConfigsGet,
+    ServiceManagementServicesConfigsGet,
 
     -- ** servicemanagement.services.configs.list
-    , ServiceManagementServicesConfigsListResource
-    , newServiceManagementServicesConfigsList
-    , ServiceManagementServicesConfigsList
+    ServiceManagementServicesConfigsListResource,
+    newServiceManagementServicesConfigsList,
+    ServiceManagementServicesConfigsList,
 
     -- ** servicemanagement.services.configs.submit
-    , ServiceManagementServicesConfigsSubmitResource
-    , newServiceManagementServicesConfigsSubmit
-    , ServiceManagementServicesConfigsSubmit
+    ServiceManagementServicesConfigsSubmitResource,
+    newServiceManagementServicesConfigsSubmit,
+    ServiceManagementServicesConfigsSubmit,
 
     -- ** servicemanagement.services.consumers.getIamPolicy
-    , ServiceManagementServicesConsumersGetIamPolicyResource
-    , newServiceManagementServicesConsumersGetIamPolicy
-    , ServiceManagementServicesConsumersGetIamPolicy
+    ServiceManagementServicesConsumersGetIamPolicyResource,
+    newServiceManagementServicesConsumersGetIamPolicy,
+    ServiceManagementServicesConsumersGetIamPolicy,
 
     -- ** servicemanagement.services.consumers.setIamPolicy
-    , ServiceManagementServicesConsumersSetIamPolicyResource
-    , newServiceManagementServicesConsumersSetIamPolicy
-    , ServiceManagementServicesConsumersSetIamPolicy
+    ServiceManagementServicesConsumersSetIamPolicyResource,
+    newServiceManagementServicesConsumersSetIamPolicy,
+    ServiceManagementServicesConsumersSetIamPolicy,
 
     -- ** servicemanagement.services.consumers.testIamPermissions
-    , ServiceManagementServicesConsumersTestIamPermissionsResource
-    , newServiceManagementServicesConsumersTestIamPermissions
-    , ServiceManagementServicesConsumersTestIamPermissions
+    ServiceManagementServicesConsumersTestIamPermissionsResource,
+    newServiceManagementServicesConsumersTestIamPermissions,
+    ServiceManagementServicesConsumersTestIamPermissions,
 
     -- ** servicemanagement.services.create
-    , ServiceManagementServicesCreateResource
-    , newServiceManagementServicesCreate
-    , ServiceManagementServicesCreate
+    ServiceManagementServicesCreateResource,
+    newServiceManagementServicesCreate,
+    ServiceManagementServicesCreate,
 
     -- ** servicemanagement.services.delete
-    , ServiceManagementServicesDeleteResource
-    , newServiceManagementServicesDelete
-    , ServiceManagementServicesDelete
+    ServiceManagementServicesDeleteResource,
+    newServiceManagementServicesDelete,
+    ServiceManagementServicesDelete,
 
     -- ** servicemanagement.services.generateConfigReport
-    , ServiceManagementServicesGenerateConfigReportResource
-    , newServiceManagementServicesGenerateConfigReport
-    , ServiceManagementServicesGenerateConfigReport
+    ServiceManagementServicesGenerateConfigReportResource,
+    newServiceManagementServicesGenerateConfigReport,
+    ServiceManagementServicesGenerateConfigReport,
 
     -- ** servicemanagement.services.get
-    , ServiceManagementServicesGetResource
-    , newServiceManagementServicesGet
-    , ServiceManagementServicesGet
+    ServiceManagementServicesGetResource,
+    newServiceManagementServicesGet,
+    ServiceManagementServicesGet,
 
     -- ** servicemanagement.services.getConfig
-    , ServiceManagementServicesGetConfigResource
-    , newServiceManagementServicesGetConfig
-    , ServiceManagementServicesGetConfig
+    ServiceManagementServicesGetConfigResource,
+    newServiceManagementServicesGetConfig,
+    ServiceManagementServicesGetConfig,
 
     -- ** servicemanagement.services.getIamPolicy
-    , ServiceManagementServicesGetIamPolicyResource
-    , newServiceManagementServicesGetIamPolicy
-    , ServiceManagementServicesGetIamPolicy
+    ServiceManagementServicesGetIamPolicyResource,
+    newServiceManagementServicesGetIamPolicy,
+    ServiceManagementServicesGetIamPolicy,
 
     -- ** servicemanagement.services.list
-    , ServiceManagementServicesListResource
-    , newServiceManagementServicesList
-    , ServiceManagementServicesList
+    ServiceManagementServicesListResource,
+    newServiceManagementServicesList,
+    ServiceManagementServicesList,
 
     -- ** servicemanagement.services.rollouts.create
-    , ServiceManagementServicesRolloutsCreateResource
-    , newServiceManagementServicesRolloutsCreate
-    , ServiceManagementServicesRolloutsCreate
+    ServiceManagementServicesRolloutsCreateResource,
+    newServiceManagementServicesRolloutsCreate,
+    ServiceManagementServicesRolloutsCreate,
 
     -- ** servicemanagement.services.rollouts.get
-    , ServiceManagementServicesRolloutsGetResource
-    , newServiceManagementServicesRolloutsGet
-    , ServiceManagementServicesRolloutsGet
+    ServiceManagementServicesRolloutsGetResource,
+    newServiceManagementServicesRolloutsGet,
+    ServiceManagementServicesRolloutsGet,
 
     -- ** servicemanagement.services.rollouts.list
-    , ServiceManagementServicesRolloutsListResource
-    , newServiceManagementServicesRolloutsList
-    , ServiceManagementServicesRolloutsList
+    ServiceManagementServicesRolloutsListResource,
+    newServiceManagementServicesRolloutsList,
+    ServiceManagementServicesRolloutsList,
 
     -- ** servicemanagement.services.setIamPolicy
-    , ServiceManagementServicesSetIamPolicyResource
-    , newServiceManagementServicesSetIamPolicy
-    , ServiceManagementServicesSetIamPolicy
+    ServiceManagementServicesSetIamPolicyResource,
+    newServiceManagementServicesSetIamPolicy,
+    ServiceManagementServicesSetIamPolicy,
 
     -- ** servicemanagement.services.testIamPermissions
-    , ServiceManagementServicesTestIamPermissionsResource
-    , newServiceManagementServicesTestIamPermissions
-    , ServiceManagementServicesTestIamPermissions
+    ServiceManagementServicesTestIamPermissionsResource,
+    newServiceManagementServicesTestIamPermissions,
+    ServiceManagementServicesTestIamPermissions,
 
     -- ** servicemanagement.services.undelete
-    , ServiceManagementServicesUndeleteResource
-    , newServiceManagementServicesUndelete
-    , ServiceManagementServicesUndelete
+    ServiceManagementServicesUndeleteResource,
+    newServiceManagementServicesUndelete,
+    ServiceManagementServicesUndelete,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Advice
-    , Advice (..)
-    , newAdvice
+    Advice (..),
+    newAdvice,
 
     -- ** Api
-    , Api (..)
-    , newApi
+    Api (..),
+    newApi,
 
     -- ** Api_Syntax
-    , Api_Syntax (..)
+    Api_Syntax (..),
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** AuthProvider
-    , AuthProvider (..)
-    , newAuthProvider
+    AuthProvider (..),
+    newAuthProvider,
 
     -- ** AuthRequirement
-    , AuthRequirement (..)
-    , newAuthRequirement
+    AuthRequirement (..),
+    newAuthRequirement,
 
     -- ** Authentication
-    , Authentication (..)
-    , newAuthentication
+    Authentication (..),
+    newAuthentication,
 
     -- ** AuthenticationRule
-    , AuthenticationRule (..)
-    , newAuthenticationRule
+    AuthenticationRule (..),
+    newAuthenticationRule,
 
     -- ** Backend
-    , Backend (..)
-    , newBackend
+    Backend (..),
+    newBackend,
 
     -- ** BackendRule
-    , BackendRule (..)
-    , newBackendRule
+    BackendRule (..),
+    newBackendRule,
 
     -- ** BackendRule_PathTranslation
-    , BackendRule_PathTranslation (..)
+    BackendRule_PathTranslation (..),
 
     -- ** Billing
-    , Billing (..)
-    , newBilling
+    Billing (..),
+    newBilling,
 
     -- ** BillingDestination
-    , BillingDestination (..)
-    , newBillingDestination
+    BillingDestination (..),
+    newBillingDestination,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** ChangeReport
-    , ChangeReport (..)
-    , newChangeReport
+    ChangeReport (..),
+    newChangeReport,
 
     -- ** ConfigChange
-    , ConfigChange (..)
-    , newConfigChange
+    ConfigChange (..),
+    newConfigChange,
 
     -- ** ConfigChange_ChangeType
-    , ConfigChange_ChangeType (..)
+    ConfigChange_ChangeType (..),
 
     -- ** ConfigFile
-    , ConfigFile (..)
-    , newConfigFile
+    ConfigFile (..),
+    newConfigFile,
 
     -- ** ConfigFile_FileType
-    , ConfigFile_FileType (..)
+    ConfigFile_FileType (..),
 
     -- ** ConfigRef
-    , ConfigRef (..)
-    , newConfigRef
+    ConfigRef (..),
+    newConfigRef,
 
     -- ** ConfigSource
-    , ConfigSource (..)
-    , newConfigSource
+    ConfigSource (..),
+    newConfigSource,
 
     -- ** Context
-    , Context (..)
-    , newContext
+    Context (..),
+    newContext,
 
     -- ** ContextRule
-    , ContextRule (..)
-    , newContextRule
+    ContextRule (..),
+    newContextRule,
 
     -- ** Control
-    , Control (..)
-    , newControl
+    Control (..),
+    newControl,
 
     -- ** CustomError
-    , CustomError (..)
-    , newCustomError
+    CustomError (..),
+    newCustomError,
 
     -- ** CustomErrorRule
-    , CustomErrorRule (..)
-    , newCustomErrorRule
+    CustomErrorRule (..),
+    newCustomErrorRule,
 
     -- ** CustomHttpPattern
-    , CustomHttpPattern (..)
-    , newCustomHttpPattern
+    CustomHttpPattern (..),
+    newCustomHttpPattern,
 
     -- ** DeleteServiceStrategy
-    , DeleteServiceStrategy (..)
-    , newDeleteServiceStrategy
+    DeleteServiceStrategy (..),
+    newDeleteServiceStrategy,
 
     -- ** Diagnostic
-    , Diagnostic (..)
-    , newDiagnostic
+    Diagnostic (..),
+    newDiagnostic,
 
     -- ** Diagnostic_Kind
-    , Diagnostic_Kind (..)
+    Diagnostic_Kind (..),
 
     -- ** Documentation
-    , Documentation (..)
-    , newDocumentation
+    Documentation (..),
+    newDocumentation,
 
     -- ** DocumentationRule
-    , DocumentationRule (..)
-    , newDocumentationRule
+    DocumentationRule (..),
+    newDocumentationRule,
 
     -- ** Endpoint
-    , Endpoint (..)
-    , newEndpoint
+    Endpoint (..),
+    newEndpoint,
 
     -- ** Enum'
-    , Enum' (..)
-    , newEnum
+    Enum' (..),
+    newEnum,
 
     -- ** Enum_Syntax
-    , Enum_Syntax (..)
+    Enum_Syntax (..),
 
     -- ** EnumValue
-    , EnumValue (..)
-    , newEnumValue
+    EnumValue (..),
+    newEnumValue,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** Field
-    , Field (..)
-    , newField
+    Field (..),
+    newField,
 
     -- ** Field_Cardinality
-    , Field_Cardinality (..)
+    Field_Cardinality (..),
 
     -- ** Field_Kind
-    , Field_Kind (..)
+    Field_Kind (..),
 
     -- ** FlowErrorDetails
-    , FlowErrorDetails (..)
-    , newFlowErrorDetails
+    FlowErrorDetails (..),
+    newFlowErrorDetails,
 
     -- ** GenerateConfigReportRequest
-    , GenerateConfigReportRequest (..)
-    , newGenerateConfigReportRequest
+    GenerateConfigReportRequest (..),
+    newGenerateConfigReportRequest,
 
     -- ** GenerateConfigReportRequest_NewConfig
-    , GenerateConfigReportRequest_NewConfig (..)
-    , newGenerateConfigReportRequest_NewConfig
+    GenerateConfigReportRequest_NewConfig (..),
+    newGenerateConfigReportRequest_NewConfig,
 
     -- ** GenerateConfigReportRequest_OldConfig
-    , GenerateConfigReportRequest_OldConfig (..)
-    , newGenerateConfigReportRequest_OldConfig
+    GenerateConfigReportRequest_OldConfig (..),
+    newGenerateConfigReportRequest_OldConfig,
 
     -- ** GenerateConfigReportResponse
-    , GenerateConfigReportResponse (..)
-    , newGenerateConfigReportResponse
+    GenerateConfigReportResponse (..),
+    newGenerateConfigReportResponse,
 
     -- ** GetIamPolicyRequest
-    , GetIamPolicyRequest (..)
-    , newGetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
     -- ** GetPolicyOptions
-    , GetPolicyOptions (..)
-    , newGetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** Http
-    , Http (..)
-    , newHttp
+    Http (..),
+    newHttp,
 
     -- ** HttpRule
-    , HttpRule (..)
-    , newHttpRule
+    HttpRule (..),
+    newHttpRule,
 
     -- ** JwtLocation
-    , JwtLocation (..)
-    , newJwtLocation
+    JwtLocation (..),
+    newJwtLocation,
 
     -- ** LabelDescriptor
-    , LabelDescriptor (..)
-    , newLabelDescriptor
+    LabelDescriptor (..),
+    newLabelDescriptor,
 
     -- ** LabelDescriptor_ValueType
-    , LabelDescriptor_ValueType (..)
+    LabelDescriptor_ValueType (..),
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListServiceConfigsResponse
-    , ListServiceConfigsResponse (..)
-    , newListServiceConfigsResponse
+    ListServiceConfigsResponse (..),
+    newListServiceConfigsResponse,
 
     -- ** ListServiceRolloutsResponse
-    , ListServiceRolloutsResponse (..)
-    , newListServiceRolloutsResponse
+    ListServiceRolloutsResponse (..),
+    newListServiceRolloutsResponse,
 
     -- ** ListServicesResponse
-    , ListServicesResponse (..)
-    , newListServicesResponse
+    ListServicesResponse (..),
+    newListServicesResponse,
 
     -- ** LogDescriptor
-    , LogDescriptor (..)
-    , newLogDescriptor
+    LogDescriptor (..),
+    newLogDescriptor,
 
     -- ** Logging
-    , Logging (..)
-    , newLogging
+    Logging (..),
+    newLogging,
 
     -- ** LoggingDestination
-    , LoggingDestination (..)
-    , newLoggingDestination
+    LoggingDestination (..),
+    newLoggingDestination,
 
     -- ** ManagedService
-    , ManagedService (..)
-    , newManagedService
+    ManagedService (..),
+    newManagedService,
 
     -- ** Method
-    , Method (..)
-    , newMethod
+    Method (..),
+    newMethod,
 
     -- ** Method_Syntax
-    , Method_Syntax (..)
+    Method_Syntax (..),
 
     -- ** MetricDescriptor
-    , MetricDescriptor (..)
-    , newMetricDescriptor
+    MetricDescriptor (..),
+    newMetricDescriptor,
 
     -- ** MetricDescriptor_LaunchStage
-    , MetricDescriptor_LaunchStage (..)
+    MetricDescriptor_LaunchStage (..),
 
     -- ** MetricDescriptor_MetricKind
-    , MetricDescriptor_MetricKind (..)
+    MetricDescriptor_MetricKind (..),
 
     -- ** MetricDescriptor_ValueType
-    , MetricDescriptor_ValueType (..)
+    MetricDescriptor_ValueType (..),
 
     -- ** MetricDescriptorMetadata
-    , MetricDescriptorMetadata (..)
-    , newMetricDescriptorMetadata
+    MetricDescriptorMetadata (..),
+    newMetricDescriptorMetadata,
 
     -- ** MetricDescriptorMetadata_LaunchStage
-    , MetricDescriptorMetadata_LaunchStage (..)
+    MetricDescriptorMetadata_LaunchStage (..),
 
     -- ** MetricRule
-    , MetricRule (..)
-    , newMetricRule
+    MetricRule (..),
+    newMetricRule,
 
     -- ** MetricRule_MetricCosts
-    , MetricRule_MetricCosts (..)
-    , newMetricRule_MetricCosts
+    MetricRule_MetricCosts (..),
+    newMetricRule_MetricCosts,
 
     -- ** Mixin
-    , Mixin (..)
-    , newMixin
+    Mixin (..),
+    newMixin,
 
     -- ** MonitoredResourceDescriptor
-    , MonitoredResourceDescriptor (..)
-    , newMonitoredResourceDescriptor
+    MonitoredResourceDescriptor (..),
+    newMonitoredResourceDescriptor,
 
     -- ** MonitoredResourceDescriptor_LaunchStage
-    , MonitoredResourceDescriptor_LaunchStage (..)
+    MonitoredResourceDescriptor_LaunchStage (..),
 
     -- ** Monitoring
-    , Monitoring (..)
-    , newMonitoring
+    Monitoring (..),
+    newMonitoring,
 
     -- ** MonitoringDestination
-    , MonitoringDestination (..)
-    , newMonitoringDestination
+    MonitoringDestination (..),
+    newMonitoringDestination,
 
     -- ** OAuthRequirements
-    , OAuthRequirements (..)
-    , newOAuthRequirements
+    OAuthRequirements (..),
+    newOAuthRequirements,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationInfo
-    , OperationInfo (..)
-    , newOperationInfo
+    OperationInfo (..),
+    newOperationInfo,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** Option
-    , Option (..)
-    , newOption
+    Option (..),
+    newOption,
 
     -- ** Option_Value
-    , Option_Value (..)
-    , newOption_Value
+    Option_Value (..),
+    newOption_Value,
 
     -- ** Page
-    , Page (..)
-    , newPage
+    Page (..),
+    newPage,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** Quota
-    , Quota (..)
-    , newQuota
+    Quota (..),
+    newQuota,
 
     -- ** QuotaLimit
-    , QuotaLimit (..)
-    , newQuotaLimit
+    QuotaLimit (..),
+    newQuotaLimit,
 
     -- ** QuotaLimit_Values
-    , QuotaLimit_Values (..)
-    , newQuotaLimit_Values
+    QuotaLimit_Values (..),
+    newQuotaLimit_Values,
 
     -- ** ResourceReference
-    , ResourceReference (..)
-    , newResourceReference
+    ResourceReference (..),
+    newResourceReference,
 
     -- ** Rollout
-    , Rollout (..)
-    , newRollout
+    Rollout (..),
+    newRollout,
 
     -- ** Rollout_Status
-    , Rollout_Status (..)
+    Rollout_Status (..),
 
     -- ** Service
-    , Service (..)
-    , newService
+    Service (..),
+    newService,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** SourceContext
-    , SourceContext (..)
-    , newSourceContext
+    SourceContext (..),
+    newSourceContext,
 
     -- ** SourceInfo
-    , SourceInfo (..)
-    , newSourceInfo
+    SourceInfo (..),
+    newSourceInfo,
 
     -- ** SourceInfo_SourceFilesItem
-    , SourceInfo_SourceFilesItem (..)
-    , newSourceInfo_SourceFilesItem
+    SourceInfo_SourceFilesItem (..),
+    newSourceInfo_SourceFilesItem,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Step
-    , Step (..)
-    , newStep
+    Step (..),
+    newStep,
 
     -- ** Step_Status
-    , Step_Status (..)
+    Step_Status (..),
 
     -- ** SubmitConfigSourceRequest
-    , SubmitConfigSourceRequest (..)
-    , newSubmitConfigSourceRequest
+    SubmitConfigSourceRequest (..),
+    newSubmitConfigSourceRequest,
 
     -- ** SubmitConfigSourceResponse
-    , SubmitConfigSourceResponse (..)
-    , newSubmitConfigSourceResponse
+    SubmitConfigSourceResponse (..),
+    newSubmitConfigSourceResponse,
 
     -- ** SystemParameter
-    , SystemParameter (..)
-    , newSystemParameter
+    SystemParameter (..),
+    newSystemParameter,
 
     -- ** SystemParameterRule
-    , SystemParameterRule (..)
-    , newSystemParameterRule
+    SystemParameterRule (..),
+    newSystemParameterRule,
 
     -- ** SystemParameters
-    , SystemParameters (..)
-    , newSystemParameters
+    SystemParameters (..),
+    newSystemParameters,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** TrafficPercentStrategy
-    , TrafficPercentStrategy (..)
-    , newTrafficPercentStrategy
+    TrafficPercentStrategy (..),
+    newTrafficPercentStrategy,
 
     -- ** TrafficPercentStrategy_Percentages
-    , TrafficPercentStrategy_Percentages (..)
-    , newTrafficPercentStrategy_Percentages
+    TrafficPercentStrategy_Percentages (..),
+    newTrafficPercentStrategy_Percentages,
 
     -- ** Type
-    , Type (..)
-    , newType
+    Type (..),
+    newType,
 
     -- ** Type_Syntax
-    , Type_Syntax (..)
+    Type_Syntax (..),
 
     -- ** UndeleteServiceResponse
-    , UndeleteServiceResponse (..)
-    , newUndeleteServiceResponse
+    UndeleteServiceResponse (..),
+    newUndeleteServiceResponse,
 
     -- ** Usage
-    , Usage (..)
-    , newUsage
+    Usage (..),
+    newUsage,
 
     -- ** UsageRule
-    , UsageRule (..)
-    , newUsageRule
+    UsageRule (..),
+    newUsageRule,
 
     -- ** ServicesConfigsGetView
-    , ServicesConfigsGetView (..)
+    ServicesConfigsGetView (..),
 
     -- ** ServicesGetConfigView
-    , ServicesGetConfigView (..)
-    ) where
+    ServicesGetConfigView (..),
+  )
+where
 
 import Gogol.ServiceManagement.Operations.Get
 import Gogol.ServiceManagement.Operations.List
