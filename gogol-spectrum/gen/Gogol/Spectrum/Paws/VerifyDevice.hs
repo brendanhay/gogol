@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Spectrum.Paws.VerifyDevice
+-- Module      : Gogol.Spectrum.Paws.VerifyDevice
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Validates a device for white space use in accordance with regulatory rules. The Google Spectrum Database does not support master\/slave configurations, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.verifyDevice@.
-module Network.Google.Spectrum.Paws.VerifyDevice
+module Gogol.Spectrum.Paws.VerifyDevice
   ( -- * Resource
     SpectrumPawsVerifyDeviceResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Spectrum.Paws.VerifyDevice
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Spectrum.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.verifyDevice@ method which the
 -- 'SpectrumPawsVerifyDevice' request conforms to.

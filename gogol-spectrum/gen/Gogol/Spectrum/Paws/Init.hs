@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Spectrum.Paws.Init
+-- Module      : Gogol.Spectrum.Paws.Init
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Initializes the connection between a white space device and the database.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.init@.
-module Network.Google.Spectrum.Paws.Init
+module Gogol.Spectrum.Paws.Init
   ( -- * Resource
     SpectrumPawsInitResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Spectrum.Paws.Init
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Spectrum.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.init@ method which the
 -- 'SpectrumPawsInit' request conforms to.

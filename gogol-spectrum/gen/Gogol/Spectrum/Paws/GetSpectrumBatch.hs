@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Spectrum.Paws.GetSpectrumBatch
+-- Module      : Gogol.Spectrum.Paws.GetSpectrumBatch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Spectrum Database does not support batch requests, so this method always yields an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.getSpectrumBatch@.
-module Network.Google.Spectrum.Paws.GetSpectrumBatch
+module Gogol.Spectrum.Paws.GetSpectrumBatch
   ( -- * Resource
     SpectrumPawsGetSpectrumBatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Spectrum.Paws.GetSpectrumBatch
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Spectrum.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.getSpectrumBatch@ method which the
 -- 'SpectrumPawsGetSpectrumBatch' request conforms to.

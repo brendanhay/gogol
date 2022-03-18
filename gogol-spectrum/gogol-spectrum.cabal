@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Spectrum
-    Network.Google.Spectrum.Paws.GetSpectrum
-    Network.Google.Spectrum.Paws.GetSpectrumBatch
-    Network.Google.Spectrum.Paws.Init
-    Network.Google.Spectrum.Paws.NotifySpectrumUse
-    Network.Google.Spectrum.Paws.Register
-    Network.Google.Spectrum.Paws.VerifyDevice
-    Network.Google.Spectrum.Types
+    Gogol.Spectrum
+    Gogol.Spectrum.Paws.GetSpectrum
+    Gogol.Spectrum.Paws.GetSpectrumBatch
+    Gogol.Spectrum.Paws.Init
+    Gogol.Spectrum.Paws.NotifySpectrumUse
+    Gogol.Spectrum.Paws.Register
+    Gogol.Spectrum.Paws.VerifyDevice
+    Gogol.Spectrum.Types
 
   other-modules:
-    Network.Google.Spectrum.Internal.Product
-    Network.Google.Spectrum.Internal.Sum
+    Gogol.Spectrum.Internal.Product
+    Gogol.Spectrum.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Spectrum
+-- Module      : Gogol.Spectrum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- API for spectrum-management functions.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference>
-module Network.Google.Spectrum
+module Gogol.Spectrum
   ( -- * Configuration
     spectrumService,
 
@@ -201,10 +201,10 @@ module Network.Google.Spectrum
   )
 where
 
-import Network.Google.Spectrum.Paws.GetSpectrum
-import Network.Google.Spectrum.Paws.GetSpectrumBatch
-import Network.Google.Spectrum.Paws.Init
-import Network.Google.Spectrum.Paws.NotifySpectrumUse
-import Network.Google.Spectrum.Paws.Register
-import Network.Google.Spectrum.Paws.VerifyDevice
-import Network.Google.Spectrum.Types
+import Gogol.Spectrum.Paws.GetSpectrum
+import Gogol.Spectrum.Paws.GetSpectrumBatch
+import Gogol.Spectrum.Paws.Init
+import Gogol.Spectrum.Paws.NotifySpectrumUse
+import Gogol.Spectrum.Paws.Register
+import Gogol.Spectrum.Paws.VerifyDevice
+import Gogol.Spectrum.Types
