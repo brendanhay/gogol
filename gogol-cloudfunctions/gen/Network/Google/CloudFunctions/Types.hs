@@ -1,325 +1,288 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudFunctions.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudFunctions.Types
-    (
-    -- * Service Configuration
-      cloudFunctionsService
+  ( -- * Configuration
+    cloudFunctionsService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * SecretVersion
-    , SecretVersion
-    , secretVersion
-    , svPath
-    , svVersion
+    -- * Types
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- * OperationMetadataV1Type
-    , OperationMetadataV1Type (..)
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** BuildConfig
+    BuildConfig (..),
+    newBuildConfig,
 
-    -- * GenerateUploadURLRequest
-    , GenerateUploadURLRequest
-    , generateUploadURLRequest
+    -- ** BuildConfig_EnvironmentVariables
+    BuildConfig_EnvironmentVariables (..),
+    newBuildConfig_EnvironmentVariables,
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** EventFilter
+    EventFilter (..),
+    newEventFilter,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** EventTrigger
+    EventTrigger (..),
+    newEventTrigger,
 
-    -- * GenerateDownloadURLRequest
-    , GenerateDownloadURLRequest
-    , generateDownloadURLRequest
-    , gdurVersionId
+    -- ** EventTrigger_RetryPolicy
+    EventTrigger_RetryPolicy (..),
 
-    -- * CloudFunctionBuildEnvironmentVariables
-    , CloudFunctionBuildEnvironmentVariables
-    , cloudFunctionBuildEnvironmentVariables
-    , cfbevAddtional
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * CloudFunctionVPCConnectorEgressSettings
-    , CloudFunctionVPCConnectorEgressSettings (..)
+    -- ** Function
+    Function (..),
+    newFunction,
 
-    -- * Retry
-    , Retry
-    , retry
+    -- ** Function_Environment
+    Function_Environment (..),
 
-    -- * GenerateUploadURLResponse
-    , GenerateUploadURLResponse
-    , generateUploadURLResponse
-    , guurUploadURL
+    -- ** Function_Labels
+    Function_Labels (..),
+    newFunction_Labels,
 
-    -- * FailurePolicy
-    , FailurePolicy
-    , failurePolicy
-    , fpRetry
+    -- ** Function_State
+    Function_State (..),
 
-    -- * CallFunctionResponse
-    , CallFunctionResponse
-    , callFunctionResponse
-    , cfrExecutionId
-    , cfrError
-    , cfrResult
+    -- ** GenerateDownloadUrlRequest
+    GenerateDownloadUrlRequest (..),
+    newGenerateDownloadUrlRequest,
 
-    -- * HTTPSTrigger
-    , HTTPSTrigger
-    , httpsTrigger
-    , htSecurityLevel
-    , htURL
+    -- ** GenerateDownloadUrlResponse
+    GenerateDownloadUrlResponse (..),
+    newGenerateDownloadUrlResponse,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** GenerateUploadUrlRequest
+    GenerateUploadUrlRequest (..),
+    newGenerateUploadUrlRequest,
 
-    -- * CloudFunctionEnvironmentVariables
-    , CloudFunctionEnvironmentVariables
-    , cloudFunctionEnvironmentVariables
-    , cfevAddtional
+    -- ** GenerateUploadUrlResponse
+    GenerateUploadUrlResponse (..),
+    newGenerateUploadUrlResponse,
 
-    -- * OperationMetadataV1Request
-    , OperationMetadataV1Request
-    , operationMetadataV1Request
-    , omvrAddtional
+    -- ** GoogleCloudFunctionsV2alphaOperationMetadata
+    GoogleCloudFunctionsV2alphaOperationMetadata (..),
+    newGoogleCloudFunctionsV2alphaOperationMetadata,
 
-    -- * SecretVolume
-    , SecretVolume
-    , secretVolume
-    , svSecret
-    , svVersions
-    , svProjectId
-    , svMountPath
+    -- ** GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
+    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource (..),
+    newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource,
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
+    -- ** GoogleCloudFunctionsV2alphaStage
+    GoogleCloudFunctionsV2alphaStage (..),
+    newGoogleCloudFunctionsV2alphaStage,
 
-    -- * EventTrigger
-    , EventTrigger
-    , eventTrigger
-    , etService
-    , etFailurePolicy
-    , etEventType
-    , etResource
+    -- ** GoogleCloudFunctionsV2alphaStage_Name
+    GoogleCloudFunctionsV2alphaStage_Name (..),
 
-    -- * SourceRepository
-    , SourceRepository
-    , sourceRepository
-    , srURL
-    , srDeployedURL
+    -- ** GoogleCloudFunctionsV2alphaStage_State
+    GoogleCloudFunctionsV2alphaStage_State (..),
 
-    -- * OperationMetadataV1
-    , OperationMetadataV1
-    , operationMetadataV1
-    , omvVersionId
-    , omvBuildId
-    , omvBuildName
-    , omvUpdateTime
-    , omvType
-    , omvSourceToken
-    , omvTarget
-    , omvRequest
+    -- ** GoogleCloudFunctionsV2alphaStateMessage
+    GoogleCloudFunctionsV2alphaStateMessage (..),
+    newGoogleCloudFunctionsV2alphaStateMessage,
 
-    -- * CloudFunctionStatus
-    , CloudFunctionStatus (..)
+    -- ** GoogleCloudFunctionsV2alphaStateMessage_Severity
+    GoogleCloudFunctionsV2alphaStateMessage_Severity (..),
 
-    -- * GenerateDownloadURLResponse
-    , GenerateDownloadURLResponse
-    , generateDownloadURLResponse
-    , gdurDownloadURL
+    -- ** GoogleCloudFunctionsV2betaOperationMetadata
+    GoogleCloudFunctionsV2betaOperationMetadata (..),
+    newGoogleCloudFunctionsV2betaOperationMetadata,
 
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
+    -- ** GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
+    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource (..),
+    newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** GoogleCloudFunctionsV2betaStage
+    GoogleCloudFunctionsV2betaStage (..),
+    newGoogleCloudFunctionsV2betaStage,
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** GoogleCloudFunctionsV2betaStage_Name
+    GoogleCloudFunctionsV2betaStage_Name (..),
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** GoogleCloudFunctionsV2betaStage_State
+    GoogleCloudFunctionsV2betaStage_State (..),
 
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** GoogleCloudFunctionsV2betaStateMessage
+    GoogleCloudFunctionsV2betaStateMessage (..),
+    newGoogleCloudFunctionsV2betaStateMessage,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** GoogleCloudFunctionsV2betaStateMessage_Severity
+    GoogleCloudFunctionsV2betaStateMessage_Severity (..),
 
-    -- * ListFunctionsResponse
-    , ListFunctionsResponse
-    , listFunctionsResponse
-    , lfrNextPageToken
-    , lfrUnreachable
-    , lfrFunctions
+    -- ** ListFunctionsResponse
+    ListFunctionsResponse (..),
+    newListFunctionsResponse,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    -- ** ListRuntimesResponse
+    ListRuntimesResponse (..),
+    newListRuntimesResponse,
 
-    -- * HTTPSTriggerSecurityLevel
-    , HTTPSTriggerSecurityLevel (..)
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * CloudFunction
-    , CloudFunction
-    , cloudFunction
-    , cfRuntime
-    , cfBuildWorkerPool
-    , cfStatus
-    , cfSourceArchiveURL
-    , cfVersionId
-    , cfSecretVolumes
-    , cfSourceUploadURL
-    , cfEntryPoint
-    , cfBuildId
-    , cfHTTPSTrigger
-    , cfNetwork
-    , cfMaxInstances
-    , cfVPCConnectorEgressSettings
-    , cfEventTrigger
-    , cfUpdateTime
-    , cfName
-    , cfSourceRepository
-    , cfAvailableMemoryMb
-    , cfIngressSettings
-    , cfLabels
-    , cfServiceAccountEmail
-    , cfEnvironmentVariables
-    , cfTimeout
-    , cfSourceToken
-    , cfBuildEnvironmentVariables
-    , cfVPCConnector
-    , cfSecretEnvironmentVariables
-    , cfDescription
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * CloudFunctionLabels
-    , CloudFunctionLabels
-    , cloudFunctionLabels
-    , cflAddtional
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * SecretEnvVar
-    , SecretEnvVar
-    , secretEnvVar
-    , sevSecret
-    , sevKey
-    , sevVersion
-    , sevProjectId
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * CallFunctionRequest
-    , CallFunctionRequest
-    , callFunctionRequest
-    , cfrData
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    -- ** OperationMetadataV1
+    OperationMetadataV1 (..),
+    newOperationMetadataV1,
 
-    -- * CloudFunctionIngressSettings
-    , CloudFunctionIngressSettings (..)
-    ) where
+    -- ** OperationMetadataV1_Request
+    OperationMetadataV1_Request (..),
+    newOperationMetadataV1_Request,
 
-import Network.Google.CloudFunctions.Types.Product
-import Network.Google.CloudFunctions.Types.Sum
-import Network.Google.Prelude
+    -- ** OperationMetadataV1_Type
+    OperationMetadataV1_Type (..),
 
--- | Default request referring to version 'v1' of the Cloud Functions API. This contains the host and root path used as a starting point for constructing service requests.
-cloudFunctionsService :: ServiceConfig
-cloudFunctionsService
-  = defaultService (ServiceId "cloudfunctions:v1")
-      "cloudfunctions.googleapis.com"
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** RepoSource
+    RepoSource (..),
+    newRepoSource,
+
+    -- ** Runtime
+    Runtime (..),
+    newRuntime,
+
+    -- ** Runtime_Environment
+    Runtime_Environment (..),
+
+    -- ** Runtime_Stage
+    Runtime_Stage (..),
+
+    -- ** ServiceConfig
+    ServiceConfig (..),
+    newServiceConfig,
+
+    -- ** ServiceConfig_EnvironmentVariables
+    ServiceConfig_EnvironmentVariables (..),
+    newServiceConfig_EnvironmentVariables,
+
+    -- ** ServiceConfig_IngressSettings
+    ServiceConfig_IngressSettings (..),
+
+    -- ** ServiceConfig_VpcConnectorEgressSettings
+    ServiceConfig_VpcConnectorEgressSettings (..),
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Source
+    Source (..),
+    newSource,
+
+    -- ** SourceProvenance
+    SourceProvenance (..),
+    newSourceProvenance,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StorageSource
+    StorageSource (..),
+    newStorageSource,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+  )
+where
+
+import Network.Google.CloudFunctions.Internal.Product
+import Network.Google.CloudFunctions.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2beta@ of the Cloud Functions API. This contains the host and root path used as a starting point for constructing service requests.
+cloudFunctionsService :: Core.ServiceConfig
+cloudFunctionsService =
+  Core.defaultService
+    (Core.ServiceId "cloudfunctions:v2beta")
+    "cloudfunctions.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
