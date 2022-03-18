@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,94 +36,87 @@
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.adunits.getAdcode@.
 module Gogol.AdSense.Accounts.Adclients.Adunits.GetAdcode
-  ( -- * Resource
-    AdSenseAccountsAdclientsAdunitsGetAdcodeResource,
+    (
+    -- * Resource
+      AdSenseAccountsAdclientsAdunitsGetAdcodeResource
 
     -- ** Constructing a Request
-    newAdSenseAccountsAdclientsAdunitsGetAdcode,
-    AdSenseAccountsAdclientsAdunitsGetAdcode,
-  )
-where
+    , newAdSenseAccountsAdclientsAdunitsGetAdcode
+    , AdSenseAccountsAdclientsAdunitsGetAdcode
+    ) where
 
-import Gogol.AdSense.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdSense.Types
 
 -- | A resource alias for @adsense.accounts.adclients.adunits.getAdcode@ method which the
 -- 'AdSenseAccountsAdclientsAdunitsGetAdcode' request conforms to.
-type AdSenseAccountsAdclientsAdunitsGetAdcodeResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> "adcode"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AdUnitAdCode
+type AdSenseAccountsAdclientsAdunitsGetAdcodeResource
+     =
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         "adcode" Core.:>
+           Core.QueryParam "$.xgafv" Xgafv Core.:>
+             Core.QueryParam "access_token" Core.Text Core.:>
+               Core.QueryParam "callback" Core.Text Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.Get '[Core.JSON] AdUnitAdCode
 
 -- | Gets the AdSense code for a given ad unit.
 --
 -- /See:/ 'newAdSenseAccountsAdclientsAdunitsGetAdcode' smart constructor.
 data AdSenseAccountsAdclientsAdunitsGetAdcode = AdSenseAccountsAdclientsAdunitsGetAdcode
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Name of the adunit for which to get the adcode. Format: accounts\/{account}\/adclients\/{adclient}\/adunits\/{adunit}
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Name of the adunit for which to get the adcode. Format: accounts\/{account}\/adclients\/{adclient}\/adunits\/{adunit}
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdSenseAccountsAdclientsAdunitsGetAdcode' with the minimum fields required to make a request.
-newAdSenseAccountsAdclientsAdunitsGetAdcode ::
-  -- |  Required. Name of the adunit for which to get the adcode. Format: accounts\/{account}\/adclients\/{adclient}\/adunits\/{adunit} See 'name'.
-  Core.Text ->
-  AdSenseAccountsAdclientsAdunitsGetAdcode
+newAdSenseAccountsAdclientsAdunitsGetAdcode 
+    ::  Core.Text
+       -- ^  Required. Name of the adunit for which to get the adcode. Format: accounts\/{account}\/adclients\/{adclient}\/adunits\/{adunit} See 'name'.
+    -> AdSenseAccountsAdclientsAdunitsGetAdcode
 newAdSenseAccountsAdclientsAdunitsGetAdcode name =
   AdSenseAccountsAdclientsAdunitsGetAdcode
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdSenseAccountsAdclientsAdunitsGetAdcode
-  where
-  type
-    Rs AdSenseAccountsAdclientsAdunitsGetAdcode =
-      AdUnitAdCode
-  type
-    Scopes AdSenseAccountsAdclientsAdunitsGetAdcode =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
-  requestClient
-    AdSenseAccountsAdclientsAdunitsGetAdcode {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        adSenseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdSenseAccountsAdclientsAdunitsGetAdcodeResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AdSenseAccountsAdclientsAdunitsGetAdcode
+         where
+        type Rs AdSenseAccountsAdclientsAdunitsGetAdcode =
+             AdUnitAdCode
+        type Scopes AdSenseAccountsAdclientsAdunitsGetAdcode
+             =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient
+          AdSenseAccountsAdclientsAdunitsGetAdcode{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              adSenseService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AdSenseAccountsAdclientsAdunitsGetAdcodeResource)
+                      Core.mempty
+
