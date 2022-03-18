@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,353 +36,353 @@
 --
 -- /See:/ <https://developers.google.com/zero-touch/ Android Device Provisioning Partner API Reference>
 module Gogol.AndroidDeviceProvisioning
-  ( -- * Configuration
-    androidDeviceProvisioningService,
+    (
+    -- * Configuration
+      androidDeviceProvisioningService
 
     -- * Resources
 
     -- ** androiddeviceprovisioning.customers.configurations.create
-    AndroidDeviceProvisioningCustomersConfigurationsCreateResource,
-    newAndroidDeviceProvisioningCustomersConfigurationsCreate,
-    AndroidDeviceProvisioningCustomersConfigurationsCreate,
+    , AndroidDeviceProvisioningCustomersConfigurationsCreateResource
+    , newAndroidDeviceProvisioningCustomersConfigurationsCreate
+    , AndroidDeviceProvisioningCustomersConfigurationsCreate
 
     -- ** androiddeviceprovisioning.customers.configurations.delete
-    AndroidDeviceProvisioningCustomersConfigurationsDeleteResource,
-    newAndroidDeviceProvisioningCustomersConfigurationsDelete,
-    AndroidDeviceProvisioningCustomersConfigurationsDelete,
+    , AndroidDeviceProvisioningCustomersConfigurationsDeleteResource
+    , newAndroidDeviceProvisioningCustomersConfigurationsDelete
+    , AndroidDeviceProvisioningCustomersConfigurationsDelete
 
     -- ** androiddeviceprovisioning.customers.configurations.get
-    AndroidDeviceProvisioningCustomersConfigurationsGetResource,
-    newAndroidDeviceProvisioningCustomersConfigurationsGet,
-    AndroidDeviceProvisioningCustomersConfigurationsGet,
+    , AndroidDeviceProvisioningCustomersConfigurationsGetResource
+    , newAndroidDeviceProvisioningCustomersConfigurationsGet
+    , AndroidDeviceProvisioningCustomersConfigurationsGet
 
     -- ** androiddeviceprovisioning.customers.configurations.list
-    AndroidDeviceProvisioningCustomersConfigurationsListResource,
-    newAndroidDeviceProvisioningCustomersConfigurationsList,
-    AndroidDeviceProvisioningCustomersConfigurationsList,
+    , AndroidDeviceProvisioningCustomersConfigurationsListResource
+    , newAndroidDeviceProvisioningCustomersConfigurationsList
+    , AndroidDeviceProvisioningCustomersConfigurationsList
 
     -- ** androiddeviceprovisioning.customers.configurations.patch
-    AndroidDeviceProvisioningCustomersConfigurationsPatchResource,
-    newAndroidDeviceProvisioningCustomersConfigurationsPatch,
-    AndroidDeviceProvisioningCustomersConfigurationsPatch,
+    , AndroidDeviceProvisioningCustomersConfigurationsPatchResource
+    , newAndroidDeviceProvisioningCustomersConfigurationsPatch
+    , AndroidDeviceProvisioningCustomersConfigurationsPatch
 
     -- ** androiddeviceprovisioning.customers.devices.applyConfiguration
-    AndroidDeviceProvisioningCustomersDevicesApplyConfigurationResource,
-    newAndroidDeviceProvisioningCustomersDevicesApplyConfiguration,
-    AndroidDeviceProvisioningCustomersDevicesApplyConfiguration,
+    , AndroidDeviceProvisioningCustomersDevicesApplyConfigurationResource
+    , newAndroidDeviceProvisioningCustomersDevicesApplyConfiguration
+    , AndroidDeviceProvisioningCustomersDevicesApplyConfiguration
 
     -- ** androiddeviceprovisioning.customers.devices.get
-    AndroidDeviceProvisioningCustomersDevicesGetResource,
-    newAndroidDeviceProvisioningCustomersDevicesGet,
-    AndroidDeviceProvisioningCustomersDevicesGet,
+    , AndroidDeviceProvisioningCustomersDevicesGetResource
+    , newAndroidDeviceProvisioningCustomersDevicesGet
+    , AndroidDeviceProvisioningCustomersDevicesGet
 
     -- ** androiddeviceprovisioning.customers.devices.list
-    AndroidDeviceProvisioningCustomersDevicesListResource,
-    newAndroidDeviceProvisioningCustomersDevicesList,
-    AndroidDeviceProvisioningCustomersDevicesList,
+    , AndroidDeviceProvisioningCustomersDevicesListResource
+    , newAndroidDeviceProvisioningCustomersDevicesList
+    , AndroidDeviceProvisioningCustomersDevicesList
 
     -- ** androiddeviceprovisioning.customers.devices.removeConfiguration
-    AndroidDeviceProvisioningCustomersDevicesRemoveConfigurationResource,
-    newAndroidDeviceProvisioningCustomersDevicesRemoveConfiguration,
-    AndroidDeviceProvisioningCustomersDevicesRemoveConfiguration,
+    , AndroidDeviceProvisioningCustomersDevicesRemoveConfigurationResource
+    , newAndroidDeviceProvisioningCustomersDevicesRemoveConfiguration
+    , AndroidDeviceProvisioningCustomersDevicesRemoveConfiguration
 
     -- ** androiddeviceprovisioning.customers.devices.unclaim
-    AndroidDeviceProvisioningCustomersDevicesUnclaimResource,
-    newAndroidDeviceProvisioningCustomersDevicesUnclaim,
-    AndroidDeviceProvisioningCustomersDevicesUnclaim,
+    , AndroidDeviceProvisioningCustomersDevicesUnclaimResource
+    , newAndroidDeviceProvisioningCustomersDevicesUnclaim
+    , AndroidDeviceProvisioningCustomersDevicesUnclaim
 
     -- ** androiddeviceprovisioning.customers.dpcs.list
-    AndroidDeviceProvisioningCustomersDpcsListResource,
-    newAndroidDeviceProvisioningCustomersDpcsList,
-    AndroidDeviceProvisioningCustomersDpcsList,
+    , AndroidDeviceProvisioningCustomersDpcsListResource
+    , newAndroidDeviceProvisioningCustomersDpcsList
+    , AndroidDeviceProvisioningCustomersDpcsList
 
     -- ** androiddeviceprovisioning.customers.list
-    AndroidDeviceProvisioningCustomersListResource,
-    newAndroidDeviceProvisioningCustomersList,
-    AndroidDeviceProvisioningCustomersList,
+    , AndroidDeviceProvisioningCustomersListResource
+    , newAndroidDeviceProvisioningCustomersList
+    , AndroidDeviceProvisioningCustomersList
 
     -- ** androiddeviceprovisioning.operations.get
-    AndroidDeviceProvisioningOperationsGetResource,
-    newAndroidDeviceProvisioningOperationsGet,
-    AndroidDeviceProvisioningOperationsGet,
+    , AndroidDeviceProvisioningOperationsGetResource
+    , newAndroidDeviceProvisioningOperationsGet
+    , AndroidDeviceProvisioningOperationsGet
 
     -- ** androiddeviceprovisioning.partners.customers.create
-    AndroidDeviceProvisioningPartnersCustomersCreateResource,
-    newAndroidDeviceProvisioningPartnersCustomersCreate,
-    AndroidDeviceProvisioningPartnersCustomersCreate,
+    , AndroidDeviceProvisioningPartnersCustomersCreateResource
+    , newAndroidDeviceProvisioningPartnersCustomersCreate
+    , AndroidDeviceProvisioningPartnersCustomersCreate
 
     -- ** androiddeviceprovisioning.partners.customers.list
-    AndroidDeviceProvisioningPartnersCustomersListResource,
-    newAndroidDeviceProvisioningPartnersCustomersList,
-    AndroidDeviceProvisioningPartnersCustomersList,
+    , AndroidDeviceProvisioningPartnersCustomersListResource
+    , newAndroidDeviceProvisioningPartnersCustomersList
+    , AndroidDeviceProvisioningPartnersCustomersList
 
     -- ** androiddeviceprovisioning.partners.devices.claim
-    AndroidDeviceProvisioningPartnersDevicesClaimResource,
-    newAndroidDeviceProvisioningPartnersDevicesClaim,
-    AndroidDeviceProvisioningPartnersDevicesClaim,
+    , AndroidDeviceProvisioningPartnersDevicesClaimResource
+    , newAndroidDeviceProvisioningPartnersDevicesClaim
+    , AndroidDeviceProvisioningPartnersDevicesClaim
 
     -- ** androiddeviceprovisioning.partners.devices.claimAsync
-    AndroidDeviceProvisioningPartnersDevicesClaimAsyncResource,
-    newAndroidDeviceProvisioningPartnersDevicesClaimAsync,
-    AndroidDeviceProvisioningPartnersDevicesClaimAsync,
+    , AndroidDeviceProvisioningPartnersDevicesClaimAsyncResource
+    , newAndroidDeviceProvisioningPartnersDevicesClaimAsync
+    , AndroidDeviceProvisioningPartnersDevicesClaimAsync
 
     -- ** androiddeviceprovisioning.partners.devices.findByIdentifier
-    AndroidDeviceProvisioningPartnersDevicesFindByIdentifierResource,
-    newAndroidDeviceProvisioningPartnersDevicesFindByIdentifier,
-    AndroidDeviceProvisioningPartnersDevicesFindByIdentifier,
+    , AndroidDeviceProvisioningPartnersDevicesFindByIdentifierResource
+    , newAndroidDeviceProvisioningPartnersDevicesFindByIdentifier
+    , AndroidDeviceProvisioningPartnersDevicesFindByIdentifier
 
     -- ** androiddeviceprovisioning.partners.devices.findByOwner
-    AndroidDeviceProvisioningPartnersDevicesFindByOwnerResource,
-    newAndroidDeviceProvisioningPartnersDevicesFindByOwner,
-    AndroidDeviceProvisioningPartnersDevicesFindByOwner,
+    , AndroidDeviceProvisioningPartnersDevicesFindByOwnerResource
+    , newAndroidDeviceProvisioningPartnersDevicesFindByOwner
+    , AndroidDeviceProvisioningPartnersDevicesFindByOwner
 
     -- ** androiddeviceprovisioning.partners.devices.get
-    AndroidDeviceProvisioningPartnersDevicesGetResource,
-    newAndroidDeviceProvisioningPartnersDevicesGet,
-    AndroidDeviceProvisioningPartnersDevicesGet,
+    , AndroidDeviceProvisioningPartnersDevicesGetResource
+    , newAndroidDeviceProvisioningPartnersDevicesGet
+    , AndroidDeviceProvisioningPartnersDevicesGet
 
     -- ** androiddeviceprovisioning.partners.devices.metadata
-    AndroidDeviceProvisioningPartnersDevicesMetadataResource,
-    newAndroidDeviceProvisioningPartnersDevicesMetadata,
-    AndroidDeviceProvisioningPartnersDevicesMetadata,
+    , AndroidDeviceProvisioningPartnersDevicesMetadataResource
+    , newAndroidDeviceProvisioningPartnersDevicesMetadata
+    , AndroidDeviceProvisioningPartnersDevicesMetadata
 
     -- ** androiddeviceprovisioning.partners.devices.unclaim
-    AndroidDeviceProvisioningPartnersDevicesUnclaimResource,
-    newAndroidDeviceProvisioningPartnersDevicesUnclaim,
-    AndroidDeviceProvisioningPartnersDevicesUnclaim,
+    , AndroidDeviceProvisioningPartnersDevicesUnclaimResource
+    , newAndroidDeviceProvisioningPartnersDevicesUnclaim
+    , AndroidDeviceProvisioningPartnersDevicesUnclaim
 
     -- ** androiddeviceprovisioning.partners.devices.unclaimAsync
-    AndroidDeviceProvisioningPartnersDevicesUnclaimAsyncResource,
-    newAndroidDeviceProvisioningPartnersDevicesUnclaimAsync,
-    AndroidDeviceProvisioningPartnersDevicesUnclaimAsync,
+    , AndroidDeviceProvisioningPartnersDevicesUnclaimAsyncResource
+    , newAndroidDeviceProvisioningPartnersDevicesUnclaimAsync
+    , AndroidDeviceProvisioningPartnersDevicesUnclaimAsync
 
     -- ** androiddeviceprovisioning.partners.devices.updateMetadataAsync
-    AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsyncResource,
-    newAndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync,
-    AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync,
+    , AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsyncResource
+    , newAndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync
+    , AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync
 
     -- ** androiddeviceprovisioning.partners.vendors.customers.list
-    AndroidDeviceProvisioningPartnersVendorsCustomersListResource,
-    newAndroidDeviceProvisioningPartnersVendorsCustomersList,
-    AndroidDeviceProvisioningPartnersVendorsCustomersList,
+    , AndroidDeviceProvisioningPartnersVendorsCustomersListResource
+    , newAndroidDeviceProvisioningPartnersVendorsCustomersList
+    , AndroidDeviceProvisioningPartnersVendorsCustomersList
 
     -- ** androiddeviceprovisioning.partners.vendors.list
-    AndroidDeviceProvisioningPartnersVendorsListResource,
-    newAndroidDeviceProvisioningPartnersVendorsList,
-    AndroidDeviceProvisioningPartnersVendorsList,
+    , AndroidDeviceProvisioningPartnersVendorsListResource
+    , newAndroidDeviceProvisioningPartnersVendorsList
+    , AndroidDeviceProvisioningPartnersVendorsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** ClaimDeviceRequest
-    ClaimDeviceRequest (..),
-    newClaimDeviceRequest,
+    , ClaimDeviceRequest (..)
+    , newClaimDeviceRequest
 
     -- ** ClaimDeviceRequest_SectionType
-    ClaimDeviceRequest_SectionType (..),
+    , ClaimDeviceRequest_SectionType (..)
 
     -- ** ClaimDeviceResponse
-    ClaimDeviceResponse (..),
-    newClaimDeviceResponse,
+    , ClaimDeviceResponse (..)
+    , newClaimDeviceResponse
 
     -- ** ClaimDevicesRequest
-    ClaimDevicesRequest (..),
-    newClaimDevicesRequest,
+    , ClaimDevicesRequest (..)
+    , newClaimDevicesRequest
 
     -- ** Company
-    Company (..),
-    newCompany,
+    , Company (..)
+    , newCompany
 
     -- ** Company_TermsStatus
-    Company_TermsStatus (..),
+    , Company_TermsStatus (..)
 
     -- ** Configuration
-    Configuration (..),
-    newConfiguration,
+    , Configuration (..)
+    , newConfiguration
 
     -- ** CreateCustomerRequest
-    CreateCustomerRequest (..),
-    newCreateCustomerRequest,
+    , CreateCustomerRequest (..)
+    , newCreateCustomerRequest
 
     -- ** CustomerApplyConfigurationRequest
-    CustomerApplyConfigurationRequest (..),
-    newCustomerApplyConfigurationRequest,
+    , CustomerApplyConfigurationRequest (..)
+    , newCustomerApplyConfigurationRequest
 
     -- ** CustomerListConfigurationsResponse
-    CustomerListConfigurationsResponse (..),
-    newCustomerListConfigurationsResponse,
+    , CustomerListConfigurationsResponse (..)
+    , newCustomerListConfigurationsResponse
 
     -- ** CustomerListCustomersResponse
-    CustomerListCustomersResponse (..),
-    newCustomerListCustomersResponse,
+    , CustomerListCustomersResponse (..)
+    , newCustomerListCustomersResponse
 
     -- ** CustomerListDevicesResponse
-    CustomerListDevicesResponse (..),
-    newCustomerListDevicesResponse,
+    , CustomerListDevicesResponse (..)
+    , newCustomerListDevicesResponse
 
     -- ** CustomerListDpcsResponse
-    CustomerListDpcsResponse (..),
-    newCustomerListDpcsResponse,
+    , CustomerListDpcsResponse (..)
+    , newCustomerListDpcsResponse
 
     -- ** CustomerRemoveConfigurationRequest
-    CustomerRemoveConfigurationRequest (..),
-    newCustomerRemoveConfigurationRequest,
+    , CustomerRemoveConfigurationRequest (..)
+    , newCustomerRemoveConfigurationRequest
 
     -- ** CustomerUnclaimDeviceRequest
-    CustomerUnclaimDeviceRequest (..),
-    newCustomerUnclaimDeviceRequest,
+    , CustomerUnclaimDeviceRequest (..)
+    , newCustomerUnclaimDeviceRequest
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** DeviceClaim
-    DeviceClaim (..),
-    newDeviceClaim,
+    , DeviceClaim (..)
+    , newDeviceClaim
 
     -- ** DeviceClaim_AdditionalService
-    DeviceClaim_AdditionalService (..),
+    , DeviceClaim_AdditionalService (..)
 
     -- ** DeviceClaim_SectionType
-    DeviceClaim_SectionType (..),
+    , DeviceClaim_SectionType (..)
 
     -- ** DeviceIdentifier
-    DeviceIdentifier (..),
-    newDeviceIdentifier,
+    , DeviceIdentifier (..)
+    , newDeviceIdentifier
 
     -- ** DeviceMetadata
-    DeviceMetadata (..),
-    newDeviceMetadata,
+    , DeviceMetadata (..)
+    , newDeviceMetadata
 
     -- ** DeviceMetadata_Entries
-    DeviceMetadata_Entries (..),
-    newDeviceMetadata_Entries,
+    , DeviceMetadata_Entries (..)
+    , newDeviceMetadata_Entries
 
     -- ** DeviceReference
-    DeviceReference (..),
-    newDeviceReference,
+    , DeviceReference (..)
+    , newDeviceReference
 
     -- ** DevicesLongRunningOperationMetadata
-    DevicesLongRunningOperationMetadata (..),
-    newDevicesLongRunningOperationMetadata,
+    , DevicesLongRunningOperationMetadata (..)
+    , newDevicesLongRunningOperationMetadata
 
     -- ** DevicesLongRunningOperationMetadata_ProcessingStatus
-    DevicesLongRunningOperationMetadata_ProcessingStatus (..),
+    , DevicesLongRunningOperationMetadata_ProcessingStatus (..)
 
     -- ** DevicesLongRunningOperationResponse
-    DevicesLongRunningOperationResponse (..),
-    newDevicesLongRunningOperationResponse,
+    , DevicesLongRunningOperationResponse (..)
+    , newDevicesLongRunningOperationResponse
 
     -- ** Dpc
-    Dpc (..),
-    newDpc,
+    , Dpc (..)
+    , newDpc
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** FindDevicesByDeviceIdentifierRequest
-    FindDevicesByDeviceIdentifierRequest (..),
-    newFindDevicesByDeviceIdentifierRequest,
+    , FindDevicesByDeviceIdentifierRequest (..)
+    , newFindDevicesByDeviceIdentifierRequest
 
     -- ** FindDevicesByDeviceIdentifierResponse
-    FindDevicesByDeviceIdentifierResponse (..),
-    newFindDevicesByDeviceIdentifierResponse,
+    , FindDevicesByDeviceIdentifierResponse (..)
+    , newFindDevicesByDeviceIdentifierResponse
 
     -- ** FindDevicesByOwnerRequest
-    FindDevicesByOwnerRequest (..),
-    newFindDevicesByOwnerRequest,
+    , FindDevicesByOwnerRequest (..)
+    , newFindDevicesByOwnerRequest
 
     -- ** FindDevicesByOwnerRequest_SectionType
-    FindDevicesByOwnerRequest_SectionType (..),
+    , FindDevicesByOwnerRequest_SectionType (..)
 
     -- ** FindDevicesByOwnerResponse
-    FindDevicesByOwnerResponse (..),
-    newFindDevicesByOwnerResponse,
+    , FindDevicesByOwnerResponse (..)
+    , newFindDevicesByOwnerResponse
 
     -- ** ListCustomersResponse
-    ListCustomersResponse (..),
-    newListCustomersResponse,
+    , ListCustomersResponse (..)
+    , newListCustomersResponse
 
     -- ** ListVendorCustomersResponse
-    ListVendorCustomersResponse (..),
-    newListVendorCustomersResponse,
+    , ListVendorCustomersResponse (..)
+    , newListVendorCustomersResponse
 
     -- ** ListVendorsResponse
-    ListVendorsResponse (..),
-    newListVendorsResponse,
+    , ListVendorsResponse (..)
+    , newListVendorsResponse
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OperationPerDevice
-    OperationPerDevice (..),
-    newOperationPerDevice,
+    , OperationPerDevice (..)
+    , newOperationPerDevice
 
     -- ** PartnerClaim
-    PartnerClaim (..),
-    newPartnerClaim,
+    , PartnerClaim (..)
+    , newPartnerClaim
 
     -- ** PartnerClaim_SectionType
-    PartnerClaim_SectionType (..),
+    , PartnerClaim_SectionType (..)
 
     -- ** PartnerUnclaim
-    PartnerUnclaim (..),
-    newPartnerUnclaim,
+    , PartnerUnclaim (..)
+    , newPartnerUnclaim
 
     -- ** PartnerUnclaim_SectionType
-    PartnerUnclaim_SectionType (..),
+    , PartnerUnclaim_SectionType (..)
 
     -- ** PerDeviceStatusInBatch
-    PerDeviceStatusInBatch (..),
-    newPerDeviceStatusInBatch,
+    , PerDeviceStatusInBatch (..)
+    , newPerDeviceStatusInBatch
 
     -- ** PerDeviceStatusInBatch_Status
-    PerDeviceStatusInBatch_Status (..),
+    , PerDeviceStatusInBatch_Status (..)
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** UnclaimDeviceRequest
-    UnclaimDeviceRequest (..),
-    newUnclaimDeviceRequest,
+    , UnclaimDeviceRequest (..)
+    , newUnclaimDeviceRequest
 
     -- ** UnclaimDeviceRequest_SectionType
-    UnclaimDeviceRequest_SectionType (..),
+    , UnclaimDeviceRequest_SectionType (..)
 
     -- ** UnclaimDevicesRequest
-    UnclaimDevicesRequest (..),
-    newUnclaimDevicesRequest,
+    , UnclaimDevicesRequest (..)
+    , newUnclaimDevicesRequest
 
     -- ** UpdateDeviceMetadataInBatchRequest
-    UpdateDeviceMetadataInBatchRequest (..),
-    newUpdateDeviceMetadataInBatchRequest,
+    , UpdateDeviceMetadataInBatchRequest (..)
+    , newUpdateDeviceMetadataInBatchRequest
 
     -- ** UpdateDeviceMetadataRequest
-    UpdateDeviceMetadataRequest (..),
-    newUpdateDeviceMetadataRequest,
+    , UpdateDeviceMetadataRequest (..)
+    , newUpdateDeviceMetadataRequest
 
     -- ** UpdateMetadataArguments
-    UpdateMetadataArguments (..),
-    newUpdateMetadataArguments,
-  )
-where
+    , UpdateMetadataArguments (..)
+    , newUpdateMetadataArguments
+    ) where
 
 import Gogol.AndroidDeviceProvisioning.Customers.Configurations.Create
 import Gogol.AndroidDeviceProvisioning.Customers.Configurations.Delete
