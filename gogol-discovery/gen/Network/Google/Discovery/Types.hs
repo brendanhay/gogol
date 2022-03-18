@@ -1,263 +1,161 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Discovery.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Discovery.Types
-    (
-    -- * Service Configuration
-      discoveryService
+  ( -- * Configuration
+    discoveryService,
 
-    -- * RestMethodResponse
-    , RestMethodResponse
-    , restMethodResponse
-    , rmrRef
+    -- * Types
 
-    -- * RestDescriptionParameters
-    , RestDescriptionParameters
-    , restDescriptionParameters
-    , rdpAddtional
+    -- ** DirectoryList
+    DirectoryList (..),
+    newDirectoryList,
 
-    -- * RestMethod
-    , RestMethod
-    , restMethod
-    , rmSupportsMediaDownload
-    , rmParameterOrder
-    , rmMediaUpload
-    , rmHTTPMethod
-    , rmFlatPath
-    , rmPath
-    , rmResponse
-    , rmSupportsMediaUpload
-    , rmScopes
-    , rmSupportsSubscription
-    , rmParameters
-    , rmId
-    , rmEtagRequired
-    , rmUseMediaDownloadService
-    , rmDescription
-    , rmRequest
+    -- ** DirectoryList_ItemsItem
+    DirectoryList_ItemsItem (..),
+    newDirectoryList_ItemsItem,
 
-    -- * RestResource
-    , RestResource
-    , restResource
-    , rrResources
-    , rrMethods
+    -- ** DirectoryList_ItemsItem_Icons
+    DirectoryList_ItemsItem_Icons (..),
+    newDirectoryList_ItemsItem_Icons,
 
-    -- * RestDescriptionAuthOAuth2Scopes
-    , RestDescriptionAuthOAuth2Scopes
-    , restDescriptionAuthOAuth2Scopes
-    , rdaoasAddtional
+    -- ** JsonSchema
+    JsonSchema (..),
+    newJsonSchema,
 
-    -- * RestDescriptionMethods
-    , RestDescriptionMethods
-    , restDescriptionMethods
-    , rdmAddtional
+    -- ** JsonSchema_Annotations
+    JsonSchema_Annotations (..),
+    newJsonSchema_Annotations,
 
-    -- * DirectoryListItemsItem
-    , DirectoryListItemsItem
-    , directoryListItemsItem
-    , dliiDiscoveryLink
-    , dliiPreferred
-    , dliiKind
-    , dliiIcons
-    , dliiName
-    , dliiVersion
-    , dliiDocumentationLink
-    , dliiId
-    , dliiLabels
-    , dliiTitle
-    , dliiDescription
-    , dliiDiscoveryRestURL
+    -- ** JsonSchema_Properties
+    JsonSchema_Properties (..),
+    newJsonSchema_Properties,
 
-    -- * DirectoryListItemsItemIcons
-    , DirectoryListItemsItemIcons
-    , directoryListItemsItemIcons
-    , dliiiX16
-    , dliiiX32
+    -- ** JsonSchema_Variant
+    JsonSchema_Variant (..),
+    newJsonSchema_Variant,
 
-    -- * RestResourceResources
-    , RestResourceResources
-    , restResourceResources
-    , rrrAddtional
+    -- ** JsonSchema_Variant_MapItem
+    JsonSchema_Variant_MapItem (..),
+    newJsonSchema_Variant_MapItem,
 
-    -- * RestDescriptionAuthOAuth2
-    , RestDescriptionAuthOAuth2
-    , restDescriptionAuthOAuth2
-    , rdaoaScopes
+    -- ** RestDescription
+    RestDescription (..),
+    newRestDescription,
 
-    -- * RestDescriptionAuthOAuth2ScopesAdditional
-    , RestDescriptionAuthOAuth2ScopesAdditional
-    , restDescriptionAuthOAuth2ScopesAdditional
-    , rdaoasaDescription
+    -- ** RestDescription_Auth
+    RestDescription_Auth (..),
+    newRestDescription_Auth,
 
-    -- * RestMethodMediaUploadProtocolsSimple
-    , RestMethodMediaUploadProtocolsSimple
-    , restMethodMediaUploadProtocolsSimple
-    , rmmupsPath
-    , rmmupsMultiPart
+    -- ** RestDescription_Auth_Oauth2
+    RestDescription_Auth_Oauth2 (..),
+    newRestDescription_Auth_Oauth2,
 
-    -- * RestDescriptionIcons
-    , RestDescriptionIcons
-    , restDescriptionIcons
-    , rdiX16
-    , rdiX32
+    -- ** RestDescription_Auth_Oauth2_Scopes
+    RestDescription_Auth_Oauth2_Scopes (..),
+    newRestDescription_Auth_Oauth2_Scopes,
 
-    -- * JSONSchemaVariant
-    , JSONSchemaVariant
-    , jsonSchemaVariant
-    , jsvDiscriminant
-    , jsvMap
+    -- ** RestDescription_Auth_Oauth2_ScopesAdditional
+    RestDescription_Auth_Oauth2_ScopesAdditional (..),
+    newRestDescription_Auth_Oauth2_ScopesAdditional,
 
-    -- * RestResourceMethods
-    , RestResourceMethods
-    , restResourceMethods
-    , rrmAddtional
+    -- ** RestDescription_Icons
+    RestDescription_Icons (..),
+    newRestDescription_Icons,
 
-    -- * RestDescriptionAuth
-    , RestDescriptionAuth
-    , restDescriptionAuth
-    , rdaOAuth2
+    -- ** RestDescription_Methods
+    RestDescription_Methods (..),
+    newRestDescription_Methods,
 
-    -- * RestDescription
-    , RestDescription
-    , restDescription
-    , rdEtag
-    , rdSchemas
-    , rdServicePath
-    , rdBasePath
-    , rdKind
-    , rdExponentialBackoffDefault
-    , rdAuth
-    , rdIcons
-    , rdBaseURL
-    , rdProtocol
-    , rdOwnerName
-    , rdResources
-    , rdOwnerDomain
-    , rdBatchPath
-    , rdMethods
-    , rdName
-    , rdPackagePath
-    , rdFeatures
-    , rdVersionModule
-    , rdVersion
-    , rdParameters
-    , rdDocumentationLink
-    , rdRootURL
-    , rdId
-    , rdCanonicalName
-    , rdLabels
-    , rdDiscoveryVersion
-    , rdTitle
-    , rdRevision
-    , rdDescription
+    -- ** RestDescription_Parameters
+    RestDescription_Parameters (..),
+    newRestDescription_Parameters,
 
-    -- * JSONSchema
-    , JSONSchema
-    , jsonSchema
-    , jsAnnotations
-    , jsVariant
-    , jsLocation
-    , jsRef
-    , jsPattern
-    , jsMaximum
-    , jsDefault
-    , jsFormat
-    , jsItems
-    , jsMinimum
-    , jsRequired
-    , jsId
-    , jsAdditionalProperties
-    , jsType
-    , jsEnum
-    , jsRepeated
-    , jsReadOnly
-    , jsEnumDescriptions
-    , jsDescription
-    , jsProperties
+    -- ** RestDescription_Resources
+    RestDescription_Resources (..),
+    newRestDescription_Resources,
 
-    -- * RestDescriptionSchemas
-    , RestDescriptionSchemas
-    , restDescriptionSchemas
-    , rdsAddtional
+    -- ** RestDescription_Schemas
+    RestDescription_Schemas (..),
+    newRestDescription_Schemas,
 
-    -- * JSONSchemaVariantMapItem
-    , JSONSchemaVariantMapItem
-    , jsonSchemaVariantMapItem
-    , jsvmiRef
-    , jsvmiTypeValue
+    -- ** RestMethod
+    RestMethod (..),
+    newRestMethod,
 
-    -- * RestDescriptionResources
-    , RestDescriptionResources
-    , restDescriptionResources
-    , rdrAddtional
+    -- ** RestMethod_MediaUpload
+    RestMethod_MediaUpload (..),
+    newRestMethod_MediaUpload,
 
-    -- * RestMethodMediaUploadProtocols
-    , RestMethodMediaUploadProtocols
-    , restMethodMediaUploadProtocols
-    , rmmupSimple
-    , rmmupResumable
+    -- ** RestMethod_MediaUpload_Protocols
+    RestMethod_MediaUpload_Protocols (..),
+    newRestMethod_MediaUpload_Protocols,
 
-    -- * JSONSchemaAnnotations
-    , JSONSchemaAnnotations
-    , jsonSchemaAnnotations
-    , jsaRequired
+    -- ** RestMethod_MediaUpload_Protocols_Resumable
+    RestMethod_MediaUpload_Protocols_Resumable (..),
+    newRestMethod_MediaUpload_Protocols_Resumable,
 
-    -- * RestMethodParameters
-    , RestMethodParameters
-    , restMethodParameters
-    , rmpAddtional
+    -- ** RestMethod_MediaUpload_Protocols_Simple
+    RestMethod_MediaUpload_Protocols_Simple (..),
+    newRestMethod_MediaUpload_Protocols_Simple,
 
-    -- * RestMethodMediaUpload
-    , RestMethodMediaUpload
-    , restMethodMediaUpload
-    , rmmuProtocols
-    , rmmuAccept
-    , rmmuMaxSize
+    -- ** RestMethod_Parameters
+    RestMethod_Parameters (..),
+    newRestMethod_Parameters,
 
-    -- * JSONSchemaProperties
-    , JSONSchemaProperties
-    , jsonSchemaProperties
-    , jspAddtional
+    -- ** RestMethod_Request
+    RestMethod_Request (..),
+    newRestMethod_Request,
 
-    -- * RestMethodMediaUploadProtocolsResumable
-    , RestMethodMediaUploadProtocolsResumable
-    , restMethodMediaUploadProtocolsResumable
-    , rmmuprPath
-    , rmmuprMultiPart
+    -- ** RestMethod_Response
+    RestMethod_Response (..),
+    newRestMethod_Response,
 
-    -- * DirectoryList
-    , DirectoryList
-    , directoryList
-    , dlKind
-    , dlItems
-    , dlDiscoveryVersion
+    -- ** RestResource
+    RestResource (..),
+    newRestResource,
 
-    -- * RestMethodRequest
-    , RestMethodRequest
-    , restMethodRequest
-    , rRef
-    , rParameterName
-    ) where
+    -- ** RestResource_Methods
+    RestResource_Methods (..),
+    newRestResource_Methods,
 
-import Network.Google.Discovery.Types.Product
-import Network.Google.Discovery.Types.Sum
-import Network.Google.Prelude
+    -- ** RestResource_Resources
+    RestResource_Resources (..),
+    newRestResource_Resources,
+  )
+where
 
--- | Default request referring to version 'v1' of the API Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
-discoveryService :: ServiceConfig
-discoveryService
-  = defaultService (ServiceId "discovery:v1")
-      "www.googleapis.com"
+import Network.Google.Discovery.Internal.Product
+import Network.Google.Discovery.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the API Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
+discoveryService :: Core.ServiceConfig
+discoveryService =
+  Core.defaultService
+    (Core.ServiceId "discovery:v1")
+    "www.googleapis.com"
