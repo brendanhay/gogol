@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.YouTubeAnalytics
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,172 +30,125 @@
 --
 -- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics
-    (
-    -- * Service Configuration
-      youTubeAnalyticsService
+  ( -- * Configuration
+    youTubeAnalyticsService,
 
     -- * OAuth Scopes
-    , youTubeScope
-    , youTubeAnalyticsReadOnlyScope
-    , youTubePartnerScope
-    , youTubeAnalyticsMonetaryReadOnlyScope
-    , youTubeReadOnlyScope
-
-    -- * API Declaration
-    , YouTubeAnalyticsAPI
+    youtubeScope,
+    youtubeReadOnlyScope,
+    youtubepartnerScope,
+    youtubeAnalyticsMonetaryReadOnlyScope,
+    youtubeAnalyticsReadOnlyScope,
 
     -- * Resources
 
     -- ** youtubeAnalytics.groupItems.delete
-    , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
+    YouTubeAnalyticsGroupItemsDeleteResource,
+    newYouTubeAnalyticsGroupItemsDelete,
+    YouTubeAnalyticsGroupItemsDelete,
 
     -- ** youtubeAnalytics.groupItems.insert
-    , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
+    YouTubeAnalyticsGroupItemsInsertResource,
+    newYouTubeAnalyticsGroupItemsInsert,
+    YouTubeAnalyticsGroupItemsInsert,
 
     -- ** youtubeAnalytics.groupItems.list
-    , module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
+    YouTubeAnalyticsGroupItemsListResource,
+    newYouTubeAnalyticsGroupItemsList,
+    YouTubeAnalyticsGroupItemsList,
 
     -- ** youtubeAnalytics.groups.delete
-    , module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
+    YouTubeAnalyticsGroupsDeleteResource,
+    newYouTubeAnalyticsGroupsDelete,
+    YouTubeAnalyticsGroupsDelete,
 
     -- ** youtubeAnalytics.groups.insert
-    , module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
+    YouTubeAnalyticsGroupsInsertResource,
+    newYouTubeAnalyticsGroupsInsert,
+    YouTubeAnalyticsGroupsInsert,
 
     -- ** youtubeAnalytics.groups.list
-    , module Network.Google.Resource.YouTubeAnalytics.Groups.List
+    YouTubeAnalyticsGroupsListResource,
+    newYouTubeAnalyticsGroupsList,
+    YouTubeAnalyticsGroupsList,
 
     -- ** youtubeAnalytics.groups.update
-    , module Network.Google.Resource.YouTubeAnalytics.Groups.Update
+    YouTubeAnalyticsGroupsUpdateResource,
+    newYouTubeAnalyticsGroupsUpdate,
+    YouTubeAnalyticsGroupsUpdate,
 
     -- ** youtubeAnalytics.reports.query
-    , module Network.Google.Resource.YouTubeAnalytics.Reports.Query
+    YouTubeAnalyticsReportsQueryResource,
+    newYouTubeAnalyticsReportsQuery,
+    YouTubeAnalyticsReportsQuery,
 
     -- * Types
 
-    -- ** GroupContentDetails
-    , GroupContentDetails
-    , groupContentDetails
-    , gcdItemType
-    , gcdItemCount
-
-    -- ** Group
-    , Group
-    , group'
-    , gEtag
-    , gSnippet
-    , gKind
-    , gContentDetails
-    , gId
-    , gErrors
-
-    -- ** ListGroupsResponse
-    , ListGroupsResponse
-    , listGroupsResponse
-    , lgrEtag
-    , lgrNextPageToken
-    , lgrKind
-    , lgrItems
-    , lgrErrors
-
-    -- ** ListGroupItemsResponse
-    , ListGroupItemsResponse
-    , listGroupItemsResponse
-    , lgirEtag
-    , lgirKind
-    , lgirItems
-    , lgirErrors
-
-    -- ** GroupItemResource
-    , GroupItemResource
-    , groupItemResource
-    , girKind
-    , girId
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** GroupSnippet
-    , GroupSnippet
-    , groupSnippet
-    , gsPublishedAt
-    , gsTitle
-
-    -- ** GroupItem
-    , GroupItem
-    , groupItem
-    , giEtag
-    , giKind
-    , giResource
-    , giGroupId
-    , giId
-    , giErrors
-
-    -- ** Errors
-    , Errors
-    , errors
-    , eRequestId
-    , eError
-    , eCode
-
-    -- ** ErrorProtoLocationType
-    , ErrorProtoLocationType (..)
-
-    -- ** ErrorsCode
-    , ErrorsCode (..)
-
-    -- ** ResultTableColumnHeader
-    , ResultTableColumnHeader
-    , resultTableColumnHeader
-    , rtchColumnType
-    , rtchName
-    , rtchDataType
-
-    -- ** ErrorProto
-    , ErrorProto
-    , errorProto
-    , epDebugInfo
-    , epLocation
-    , epDomain
-    , epArgument
-    , epExternalErrorMessage
-    , epCode
-    , epLocationType
+    Xgafv (..),
 
     -- ** EmptyResponse
-    , EmptyResponse
-    , emptyResponse
-    , erErrors
+    EmptyResponse (..),
+    newEmptyResponse,
+
+    -- ** ErrorProto
+    ErrorProto (..),
+    newErrorProto,
+
+    -- ** ErrorProto_LocationType
+    ErrorProto_LocationType (..),
+
+    -- ** Errors
+    Errors (..),
+    newErrors,
+
+    -- ** Errors_Code
+    Errors_Code (..),
+
+    -- ** Group
+    Group (..),
+    newGroup,
+
+    -- ** GroupContentDetails
+    GroupContentDetails (..),
+    newGroupContentDetails,
+
+    -- ** GroupItem
+    GroupItem (..),
+    newGroupItem,
+
+    -- ** GroupItemResource
+    GroupItemResource (..),
+    newGroupItemResource,
+
+    -- ** GroupSnippet
+    GroupSnippet (..),
+    newGroupSnippet,
+
+    -- ** ListGroupItemsResponse
+    ListGroupItemsResponse (..),
+    newListGroupItemsResponse,
+
+    -- ** ListGroupsResponse
+    ListGroupsResponse (..),
+    newListGroupsResponse,
 
     -- ** QueryResponse
-    , QueryResponse
-    , queryResponse
-    , qrKind
-    , qrRows
-    , qrColumnHeaders
-    , qrErrors
-    ) where
+    QueryResponse (..),
+    newQueryResponse,
 
-import Network.Google.Prelude
-import Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
-import Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
-import Network.Google.Resource.YouTubeAnalytics.GroupItems.List
-import Network.Google.Resource.YouTubeAnalytics.Groups.Delete
-import Network.Google.Resource.YouTubeAnalytics.Groups.Insert
-import Network.Google.Resource.YouTubeAnalytics.Groups.List
-import Network.Google.Resource.YouTubeAnalytics.Groups.Update
-import Network.Google.Resource.YouTubeAnalytics.Reports.Query
+    -- ** ResultTableColumnHeader
+    ResultTableColumnHeader (..),
+    newResultTableColumnHeader,
+  )
+where
+
+import Network.Google.YouTubeAnalytics.GroupItems.Delete
+import Network.Google.YouTubeAnalytics.GroupItems.Insert
+import Network.Google.YouTubeAnalytics.GroupItems.List
+import Network.Google.YouTubeAnalytics.Groups.Delete
+import Network.Google.YouTubeAnalytics.Groups.Insert
+import Network.Google.YouTubeAnalytics.Groups.List
+import Network.Google.YouTubeAnalytics.Groups.Update
+import Network.Google.YouTubeAnalytics.Reports.Query
 import Network.Google.YouTubeAnalytics.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the YouTube Analytics API service.
-type YouTubeAnalyticsAPI =
-     GroupsInsertResource :<|> GroupsListResource :<|>
-       GroupsDeleteResource
-       :<|> GroupsUpdateResource
-       :<|> ReportsQueryResource
-       :<|> GroupItemsInsertResource
-       :<|> GroupItemsListResource
-       :<|> GroupItemsDeleteResource
