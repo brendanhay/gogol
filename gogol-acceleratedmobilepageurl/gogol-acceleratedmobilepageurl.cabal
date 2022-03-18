@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AcceleratedMobilePageUrl
-    Network.Google.AcceleratedMobilePageUrl.AmpUrls.BatchGet
-    Network.Google.AcceleratedMobilePageUrl.Types
+    Gogol.AcceleratedMobilePageUrl
+    Gogol.AcceleratedMobilePageUrl.AmpUrls.BatchGet
+    Gogol.AcceleratedMobilePageUrl.Types
 
   other-modules:
-    Network.Google.AcceleratedMobilePageUrl.Internal.Product
-    Network.Google.AcceleratedMobilePageUrl.Internal.Sum
+    Gogol.AcceleratedMobilePageUrl.Internal.Product
+    Gogol.AcceleratedMobilePageUrl.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
