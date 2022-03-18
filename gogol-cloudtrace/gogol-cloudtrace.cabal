@@ -1,52 +1,58 @@
-name:                  gogol-cloudtrace
-version:               0.5.0
-synopsis:              Google Cloud Trace SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudtrace
+version:            0.5.0
+synopsis:           Google Cloud Trace SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Sends application trace data to Cloud Trace for viewing. Trace data is
-    collected for all App Engine applications by default. Trace data from
-    other applications can be provided using this API. This library is used
-    to interact with the Cloud Trace API directly. If you are looking to
-    instrument your application for Cloud Trace, we recommend using
-    OpenCensus.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v2@
-    of the API.
+  Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenTelemetry.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v2@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-cloudtrace
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.CloudTrace
-        , Network.Google.CloudTrace.Types
-        , Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
-        , Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
+  exposed-modules:
+    Network.Google.CloudTrace
+    Network.Google.CloudTrace.Projects.Traces.BatchWrite
+    Network.Google.CloudTrace.Projects.Traces.Spans.CreateSpan
+    Network.Google.CloudTrace.Types
 
-    other-modules:
-          Network.Google.CloudTrace.Types.Product
-        , Network.Google.CloudTrace.Types.Sum
+  other-modules:
+    Network.Google.CloudTrace.Internal.Product
+    Network.Google.CloudTrace.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
