@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.DataTransfer.Transfers.Get
+-- Module      : Gogol.Admin.DataTransfer.Transfers.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves a data transfer request by its resource ID.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @datatransfer.transfers.get@.
-module Network.Google.Admin.DataTransfer.Transfers.Get
+module Gogol.Admin.DataTransfer.Transfers.Get
   ( -- * Resource
     DatatransferTransfersGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Admin.DataTransfer.Transfers.Get
   )
 where
 
-import Network.Google.Admin.DataTransfer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.DataTransfer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datatransfer.transfers.get@ method which the
 -- 'DatatransferTransfersGet' request conforms to.

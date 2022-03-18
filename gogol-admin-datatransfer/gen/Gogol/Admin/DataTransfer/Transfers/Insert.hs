@@ -19,57 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.DataTransfer.Applications.Get
+-- Module      : Gogol.Admin.DataTransfer.Transfers.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves information about an application for the given application ID.
+-- Inserts a data transfer request.
 --
--- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @datatransfer.applications.get@.
-module Network.Google.Admin.DataTransfer.Applications.Get
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @datatransfer.transfers.insert@.
+module Gogol.Admin.DataTransfer.Transfers.Insert
   ( -- * Resource
-    DatatransferApplicationsGetResource,
+    DatatransferTransfersInsertResource,
 
     -- ** Constructing a Request
-    newDatatransferApplicationsGet,
-    DatatransferApplicationsGet,
+    newDatatransferTransfersInsert,
+    DatatransferTransfersInsert,
   )
 where
 
-import Network.Google.Admin.DataTransfer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.DataTransfer.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datatransfer.applications.get@ method which the
--- 'DatatransferApplicationsGet' request conforms to.
-type DatatransferApplicationsGetResource =
+-- | A resource alias for @datatransfer.transfers.insert@ method which the
+-- 'DatatransferTransfersInsert' request conforms to.
+type DatatransferTransfersInsertResource =
   "admin"
     Core.:> "datatransfer"
     Core.:> "v1"
-    Core.:> "applications"
-    Core.:> Core.Capture "applicationId" Core.Int64
+    Core.:> "transfers"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Application
+    Core.:> Core.ReqBody '[Core.JSON] DataTransfer
+    Core.:> Core.Post '[Core.JSON] DataTransfer
 
--- | Retrieves information about an application for the given application ID.
+-- | Inserts a data transfer request.
 --
--- /See:/ 'newDatatransferApplicationsGet' smart constructor.
-data DatatransferApplicationsGet = DatatransferApplicationsGet
+-- /See:/ 'newDatatransferTransfersInsert' smart constructor.
+data DatatransferTransfersInsert = DatatransferTransfersInsert
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | ID of the application resource to be retrieved.
-    applicationId :: Core.Int64,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: DataTransfer,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,45 +77,43 @@ data DatatransferApplicationsGet = DatatransferApplicationsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatatransferApplicationsGet' with the minimum fields required to make a request.
-newDatatransferApplicationsGet ::
-  -- |  ID of the application resource to be retrieved. See 'applicationId'.
-  Core.Int64 ->
-  DatatransferApplicationsGet
-newDatatransferApplicationsGet applicationId =
-  DatatransferApplicationsGet
+-- | Creates a value of 'DatatransferTransfersInsert' with the minimum fields required to make a request.
+newDatatransferTransfersInsert ::
+  -- |  Multipart request metadata. See 'payload'.
+  DataTransfer ->
+  DatatransferTransfersInsert
+newDatatransferTransfersInsert payload =
+  DatatransferTransfersInsert
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
-      applicationId = applicationId,
       callback = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DatatransferApplicationsGet
+    DatatransferTransfersInsert
   where
-  type Rs DatatransferApplicationsGet = Application
+  type Rs DatatransferTransfersInsert = DataTransfer
   type
-    Scopes DatatransferApplicationsGet =
-      '[ "https://www.googleapis.com/auth/admin.datatransfer",
-         "https://www.googleapis.com/auth/admin.datatransfer.readonly"
-       ]
-  requestClient DatatransferApplicationsGet {..} =
+    Scopes DatatransferTransfersInsert =
+      '["https://www.googleapis.com/auth/admin.datatransfer"]
+  requestClient DatatransferTransfersInsert {..} =
     go
-      applicationId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       adminDataTransferService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatatransferApplicationsGetResource
+              Core.Proxy DatatransferTransfersInsertResource
           )
           Core.mempty
