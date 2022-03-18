@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppState
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,79 +30,62 @@
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
 module Network.Google.AppState
-    (
-    -- * Service Configuration
-      appStateService
+  ( -- * Configuration
+    appStateService,
 
     -- * OAuth Scopes
-    , appStateScope
-
-    -- * API Declaration
-    , AppStateAPI
+    appStateScope,
 
     -- * Resources
 
     -- ** appstate.states.clear
-    , module Network.Google.Resource.AppState.States.Clear
+    AppStateStatesClearResource,
+    newAppStateStatesClear,
+    AppStateStatesClear,
 
     -- ** appstate.states.delete
-    , module Network.Google.Resource.AppState.States.Delete
+    AppStateStatesDeleteResource,
+    newAppStateStatesDelete,
+    AppStateStatesDelete,
 
     -- ** appstate.states.get
-    , module Network.Google.Resource.AppState.States.Get
+    AppStateStatesGetResource,
+    newAppStateStatesGet,
+    AppStateStatesGet,
 
     -- ** appstate.states.list
-    , module Network.Google.Resource.AppState.States.List
+    AppStateStatesListResource,
+    newAppStateStatesList,
+    AppStateStatesList,
 
     -- ** appstate.states.update
-    , module Network.Google.Resource.AppState.States.Update
+    AppStateStatesUpdateResource,
+    newAppStateStatesUpdate,
+    AppStateStatesUpdate,
 
     -- * Types
 
-    -- ** WriteResult
-    , WriteResult
-    , writeResult
-    , wrCurrentStateVersion
-    , wrKind
-    , wrStateKey
+    -- ** GetResponse
+    GetResponse (..),
+    newGetResponse,
 
     -- ** ListResponse
-    , ListResponse
-    , listResponse
-    , lrMaximumKeyCount
-    , lrKind
-    , lrItems
-
-    -- ** GetResponse
-    , GetResponse
-    , getResponse
-    , grCurrentStateVersion
-    , grKind
-    , grData
-    , grStateKey
+    ListResponse (..),
+    newListResponse,
 
     -- ** UpdateRequest
-    , UpdateRequest
-    , updateRequest
-    , urKind
-    , urData
-    ) where
+    UpdateRequest (..),
+    newUpdateRequest,
 
-import Network.Google.Prelude
+    -- ** WriteResult
+    WriteResult (..),
+    newWriteResult,
+  )
+where
+
+import Network.Google.AppState.States.Clear
+import Network.Google.AppState.States.Delete
+import Network.Google.AppState.States.Get
+import Network.Google.AppState.States.List
+import Network.Google.AppState.States.Update
 import Network.Google.AppState.Types
-import Network.Google.Resource.AppState.States.Clear
-import Network.Google.Resource.AppState.States.Delete
-import Network.Google.Resource.AppState.States.Get
-import Network.Google.Resource.AppState.States.List
-import Network.Google.Resource.AppState.States.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google App State API service.
-type AppStateAPI =
-     StatesListResource :<|> StatesGetResource :<|>
-       StatesClearResource
-       :<|> StatesDeleteResource
-       :<|> StatesUpdateResource
