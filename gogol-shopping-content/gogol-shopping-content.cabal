@@ -1,204 +1,219 @@
-name:                  gogol-shopping-content
-version:               0.5.0
-synopsis:              Google Content API for Shopping SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-shopping-content
+version:            0.5.0
+synopsis:           Google Content API for Shopping SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manage your product listings and accounts for Google Shopping
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v2.1@
-    of the API.
+  Manage your product listings and accounts for Google Shopping
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v2.1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-shopping-content
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Resource.Content.Accounts.AuthInfo
-        , Network.Google.Resource.Content.Accounts.Claimwebsite
-        , Network.Google.Resource.Content.Accounts.Credentials.Create
-        , Network.Google.Resource.Content.Accounts.Custombatch
-        , Network.Google.Resource.Content.Accounts.Delete
-        , Network.Google.Resource.Content.Accounts.Get
-        , Network.Google.Resource.Content.Accounts.Insert
-        , Network.Google.Resource.Content.Accounts.Labels.Create
-        , Network.Google.Resource.Content.Accounts.Labels.Delete
-        , Network.Google.Resource.Content.Accounts.Labels.List
-        , Network.Google.Resource.Content.Accounts.Labels.Patch
-        , Network.Google.Resource.Content.Accounts.Link
-        , Network.Google.Resource.Content.Accounts.List
-        , Network.Google.Resource.Content.Accounts.Listlinks
-        , Network.Google.Resource.Content.Accounts.Requestphoneverification
-        , Network.Google.Resource.Content.Accounts.Returncarrier.Create
-        , Network.Google.Resource.Content.Accounts.Returncarrier.Delete
-        , Network.Google.Resource.Content.Accounts.Returncarrier.List
-        , Network.Google.Resource.Content.Accounts.Returncarrier.Patch
-        , Network.Google.Resource.Content.Accounts.Update
-        , Network.Google.Resource.Content.Accounts.Updatelabels
-        , Network.Google.Resource.Content.Accounts.Verifyphonenumber
-        , Network.Google.Resource.Content.Accountstatuses.Custombatch
-        , Network.Google.Resource.Content.Accountstatuses.Get
-        , Network.Google.Resource.Content.Accountstatuses.List
-        , Network.Google.Resource.Content.Accounttax.Custombatch
-        , Network.Google.Resource.Content.Accounttax.Get
-        , Network.Google.Resource.Content.Accounttax.List
-        , Network.Google.Resource.Content.Accounttax.Update
-        , Network.Google.Resource.Content.Buyongoogleprograms.Activate
-        , Network.Google.Resource.Content.Buyongoogleprograms.Get
-        , Network.Google.Resource.Content.Buyongoogleprograms.Onboard
-        , Network.Google.Resource.Content.Buyongoogleprograms.Pause
-        , Network.Google.Resource.Content.Buyongoogleprograms.Requestreview
-        , Network.Google.Resource.Content.Collections.Create
-        , Network.Google.Resource.Content.Collections.Delete
-        , Network.Google.Resource.Content.Collections.Get
-        , Network.Google.Resource.Content.Collections.List
-        , Network.Google.Resource.Content.Collectionstatuses.Get
-        , Network.Google.Resource.Content.Collectionstatuses.List
-        , Network.Google.Resource.Content.Csses.Get
-        , Network.Google.Resource.Content.Csses.List
-        , Network.Google.Resource.Content.Csses.Updatelabels
-        , Network.Google.Resource.Content.Datafeeds.Custombatch
-        , Network.Google.Resource.Content.Datafeeds.Delete
-        , Network.Google.Resource.Content.Datafeeds.Fetchnow
-        , Network.Google.Resource.Content.Datafeeds.Get
-        , Network.Google.Resource.Content.Datafeeds.Insert
-        , Network.Google.Resource.Content.Datafeeds.List
-        , Network.Google.Resource.Content.Datafeeds.Update
-        , Network.Google.Resource.Content.Datafeedstatuses.Custombatch
-        , Network.Google.Resource.Content.Datafeedstatuses.Get
-        , Network.Google.Resource.Content.Datafeedstatuses.List
-        , Network.Google.Resource.Content.FreeListingsprogram.Get
-        , Network.Google.Resource.Content.FreeListingsprogram.Requestreview
-        , Network.Google.Resource.Content.LiaSettings.Custombatch
-        , Network.Google.Resource.Content.LiaSettings.Get
-        , Network.Google.Resource.Content.LiaSettings.GetAccessiblegmbAccounts
-        , Network.Google.Resource.Content.LiaSettings.List
-        , Network.Google.Resource.Content.LiaSettings.ListposDataproviders
-        , Network.Google.Resource.Content.LiaSettings.RequestgmbAccess
-        , Network.Google.Resource.Content.LiaSettings.Requestinventoryverification
-        , Network.Google.Resource.Content.LiaSettings.Setinventoryverificationcontact
-        , Network.Google.Resource.Content.LiaSettings.SetposDataprovider
-        , Network.Google.Resource.Content.LiaSettings.Update
-        , Network.Google.Resource.Content.Localinventory.Custombatch
-        , Network.Google.Resource.Content.Localinventory.Insert
-        , Network.Google.Resource.Content.Orderinvoices.Createchargeinvoice
-        , Network.Google.Resource.Content.Orderinvoices.Createrefundinvoice
-        , Network.Google.Resource.Content.Orderreports.Listdisbursements
-        , Network.Google.Resource.Content.Orderreports.Listtransactions
-        , Network.Google.Resource.Content.Orderreturns.Acknowledge
-        , Network.Google.Resource.Content.Orderreturns.CreateOrderreturn
-        , Network.Google.Resource.Content.Orderreturns.Get
-        , Network.Google.Resource.Content.Orderreturns.Labels.Create
-        , Network.Google.Resource.Content.Orderreturns.List
-        , Network.Google.Resource.Content.Orderreturns.Process
-        , Network.Google.Resource.Content.Orders.Acknowledge
-        , Network.Google.Resource.Content.Orders.AdvancetestOrder
-        , Network.Google.Resource.Content.Orders.Cancel
-        , Network.Google.Resource.Content.Orders.Cancellineitem
-        , Network.Google.Resource.Content.Orders.CanceltestOrderbycustomer
-        , Network.Google.Resource.Content.Orders.CreatetestOrder
-        , Network.Google.Resource.Content.Orders.Createtestreturn
-        , Network.Google.Resource.Content.Orders.Get
-        , Network.Google.Resource.Content.Orders.GetbymerchantOrderid
-        , Network.Google.Resource.Content.Orders.GettestOrdertemplate
-        , Network.Google.Resource.Content.Orders.Instorerefundlineitem
-        , Network.Google.Resource.Content.Orders.List
-        , Network.Google.Resource.Content.Orders.RefundOrder
-        , Network.Google.Resource.Content.Orders.Refunditem
-        , Network.Google.Resource.Content.Orders.Rejectreturnlineitem
-        , Network.Google.Resource.Content.Orders.Returnrefundlineitem
-        , Network.Google.Resource.Content.Orders.Setlineitemmetadata
-        , Network.Google.Resource.Content.Orders.Shiplineitems
-        , Network.Google.Resource.Content.Orders.Updatelineitemshippingdetails
-        , Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
-        , Network.Google.Resource.Content.Orders.Updateshipment
-        , Network.Google.Resource.Content.Ordertrackingsignals.Create
-        , Network.Google.Resource.Content.Pos.Custombatch
-        , Network.Google.Resource.Content.Pos.Delete
-        , Network.Google.Resource.Content.Pos.Get
-        , Network.Google.Resource.Content.Pos.Insert
-        , Network.Google.Resource.Content.Pos.Inventory
-        , Network.Google.Resource.Content.Pos.List
-        , Network.Google.Resource.Content.Pos.Sale
-        , Network.Google.Resource.Content.Products.Custombatch
-        , Network.Google.Resource.Content.Products.Delete
-        , Network.Google.Resource.Content.Products.Get
-        , Network.Google.Resource.Content.Products.Insert
-        , Network.Google.Resource.Content.Products.List
-        , Network.Google.Resource.Content.Products.Update
-        , Network.Google.Resource.Content.Productstatuses.Custombatch
-        , Network.Google.Resource.Content.Productstatuses.Get
-        , Network.Google.Resource.Content.Productstatuses.List
-        , Network.Google.Resource.Content.Productstatuses.Repricingreports.List
-        , Network.Google.Resource.Content.PubsubnotificationSettings.Get
-        , Network.Google.Resource.Content.PubsubnotificationSettings.Update
-        , Network.Google.Resource.Content.Regionalinventory.Custombatch
-        , Network.Google.Resource.Content.Regionalinventory.Insert
-        , Network.Google.Resource.Content.Regions.Create
-        , Network.Google.Resource.Content.Regions.Delete
-        , Network.Google.Resource.Content.Regions.Get
-        , Network.Google.Resource.Content.Regions.List
-        , Network.Google.Resource.Content.Regions.Patch
-        , Network.Google.Resource.Content.Reports.Search
-        , Network.Google.Resource.Content.Repricingrules.Create
-        , Network.Google.Resource.Content.Repricingrules.Delete
-        , Network.Google.Resource.Content.Repricingrules.Get
-        , Network.Google.Resource.Content.Repricingrules.List
-        , Network.Google.Resource.Content.Repricingrules.Patch
-        , Network.Google.Resource.Content.Repricingrules.Repricingreports.List
-        , Network.Google.Resource.Content.Returnaddress.Custombatch
-        , Network.Google.Resource.Content.Returnaddress.Delete
-        , Network.Google.Resource.Content.Returnaddress.Get
-        , Network.Google.Resource.Content.Returnaddress.Insert
-        , Network.Google.Resource.Content.Returnaddress.List
-        , Network.Google.Resource.Content.Returnpolicy.Custombatch
-        , Network.Google.Resource.Content.Returnpolicy.Delete
-        , Network.Google.Resource.Content.Returnpolicy.Get
-        , Network.Google.Resource.Content.Returnpolicy.Insert
-        , Network.Google.Resource.Content.Returnpolicy.List
-        , Network.Google.Resource.Content.ReturnpolicyOnline.Create
-        , Network.Google.Resource.Content.ReturnpolicyOnline.Delete
-        , Network.Google.Resource.Content.ReturnpolicyOnline.Get
-        , Network.Google.Resource.Content.ReturnpolicyOnline.List
-        , Network.Google.Resource.Content.ReturnpolicyOnline.Patch
-        , Network.Google.Resource.Content.Settlementreports.Get
-        , Network.Google.Resource.Content.Settlementreports.List
-        , Network.Google.Resource.Content.Settlementtransactions.List
-        , Network.Google.Resource.Content.ShippingSettings.Custombatch
-        , Network.Google.Resource.Content.ShippingSettings.Get
-        , Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
-        , Network.Google.Resource.Content.ShippingSettings.Getsupportedholidays
-        , Network.Google.Resource.Content.ShippingSettings.GetsupportedpickupServices
-        , Network.Google.Resource.Content.ShippingSettings.List
-        , Network.Google.Resource.Content.ShippingSettings.Update
-        , Network.Google.Resource.Content.Shoppingadsprogram.Get
-        , Network.Google.Resource.Content.Shoppingadsprogram.Requestreview
-        , Network.Google.ShoppingContent
-        , Network.Google.ShoppingContent.Types
+  exposed-modules:
+    Network.Google.ShoppingContent
+    Network.Google.ShoppingContent.Content.Accounts.Authinfo
+    Network.Google.ShoppingContent.Content.Accounts.Claimwebsite
+    Network.Google.ShoppingContent.Content.Accounts.Credentials.Create
+    Network.Google.ShoppingContent.Content.Accounts.Custombatch
+    Network.Google.ShoppingContent.Content.Accounts.Delete
+    Network.Google.ShoppingContent.Content.Accounts.Get
+    Network.Google.ShoppingContent.Content.Accounts.Insert
+    Network.Google.ShoppingContent.Content.Accounts.Labels.Create
+    Network.Google.ShoppingContent.Content.Accounts.Labels.Delete
+    Network.Google.ShoppingContent.Content.Accounts.Labels.List
+    Network.Google.ShoppingContent.Content.Accounts.Labels.Patch
+    Network.Google.ShoppingContent.Content.Accounts.Link
+    Network.Google.ShoppingContent.Content.Accounts.List
+    Network.Google.ShoppingContent.Content.Accounts.Listlinks
+    Network.Google.ShoppingContent.Content.Accounts.Requestphoneverification
+    Network.Google.ShoppingContent.Content.Accounts.Returncarrier.Create
+    Network.Google.ShoppingContent.Content.Accounts.Returncarrier.Delete
+    Network.Google.ShoppingContent.Content.Accounts.Returncarrier.List
+    Network.Google.ShoppingContent.Content.Accounts.Returncarrier.Patch
+    Network.Google.ShoppingContent.Content.Accounts.Update
+    Network.Google.ShoppingContent.Content.Accounts.Updatelabels
+    Network.Google.ShoppingContent.Content.Accounts.Verifyphonenumber
+    Network.Google.ShoppingContent.Content.Accountstatuses.Custombatch
+    Network.Google.ShoppingContent.Content.Accountstatuses.Get
+    Network.Google.ShoppingContent.Content.Accountstatuses.List
+    Network.Google.ShoppingContent.Content.Accounttax.Custombatch
+    Network.Google.ShoppingContent.Content.Accounttax.Get
+    Network.Google.ShoppingContent.Content.Accounttax.List
+    Network.Google.ShoppingContent.Content.Accounttax.Update
+    Network.Google.ShoppingContent.Content.Buyongoogleprograms.Activate
+    Network.Google.ShoppingContent.Content.Buyongoogleprograms.Get
+    Network.Google.ShoppingContent.Content.Buyongoogleprograms.Onboard
+    Network.Google.ShoppingContent.Content.Buyongoogleprograms.Patch
+    Network.Google.ShoppingContent.Content.Buyongoogleprograms.Pause
+    Network.Google.ShoppingContent.Content.Buyongoogleprograms.Requestreview
+    Network.Google.ShoppingContent.Content.Collections.Create
+    Network.Google.ShoppingContent.Content.Collections.Delete
+    Network.Google.ShoppingContent.Content.Collections.Get
+    Network.Google.ShoppingContent.Content.Collections.List
+    Network.Google.ShoppingContent.Content.Collectionstatuses.Get
+    Network.Google.ShoppingContent.Content.Collectionstatuses.List
+    Network.Google.ShoppingContent.Content.Csses.Get
+    Network.Google.ShoppingContent.Content.Csses.List
+    Network.Google.ShoppingContent.Content.Csses.Updatelabels
+    Network.Google.ShoppingContent.Content.Datafeeds.Custombatch
+    Network.Google.ShoppingContent.Content.Datafeeds.Delete
+    Network.Google.ShoppingContent.Content.Datafeeds.Fetchnow
+    Network.Google.ShoppingContent.Content.Datafeeds.Get
+    Network.Google.ShoppingContent.Content.Datafeeds.Insert
+    Network.Google.ShoppingContent.Content.Datafeeds.List
+    Network.Google.ShoppingContent.Content.Datafeeds.Update
+    Network.Google.ShoppingContent.Content.Datafeedstatuses.Custombatch
+    Network.Google.ShoppingContent.Content.Datafeedstatuses.Get
+    Network.Google.ShoppingContent.Content.Datafeedstatuses.List
+    Network.Google.ShoppingContent.Content.Freelistingsprogram.Get
+    Network.Google.ShoppingContent.Content.Freelistingsprogram.Requestreview
+    Network.Google.ShoppingContent.Content.Liasettings.Custombatch
+    Network.Google.ShoppingContent.Content.Liasettings.Get
+    Network.Google.ShoppingContent.Content.Liasettings.Getaccessiblegmbaccounts
+    Network.Google.ShoppingContent.Content.Liasettings.List
+    Network.Google.ShoppingContent.Content.Liasettings.Listposdataproviders
+    Network.Google.ShoppingContent.Content.Liasettings.Requestgmbaccess
+    Network.Google.ShoppingContent.Content.Liasettings.Requestinventoryverification
+    Network.Google.ShoppingContent.Content.Liasettings.Setinventoryverificationcontact
+    Network.Google.ShoppingContent.Content.Liasettings.Setposdataprovider
+    Network.Google.ShoppingContent.Content.Liasettings.Update
+    Network.Google.ShoppingContent.Content.Localinventory.Custombatch
+    Network.Google.ShoppingContent.Content.Localinventory.Insert
+    Network.Google.ShoppingContent.Content.Orderinvoices.Createchargeinvoice
+    Network.Google.ShoppingContent.Content.Orderinvoices.Createrefundinvoice
+    Network.Google.ShoppingContent.Content.Orderreports.Listdisbursements
+    Network.Google.ShoppingContent.Content.Orderreports.Listtransactions
+    Network.Google.ShoppingContent.Content.Orderreturns.Acknowledge
+    Network.Google.ShoppingContent.Content.Orderreturns.Createorderreturn
+    Network.Google.ShoppingContent.Content.Orderreturns.Get
+    Network.Google.ShoppingContent.Content.Orderreturns.Labels.Create
+    Network.Google.ShoppingContent.Content.Orderreturns.List
+    Network.Google.ShoppingContent.Content.Orderreturns.Process
+    Network.Google.ShoppingContent.Content.Orders.Acknowledge
+    Network.Google.ShoppingContent.Content.Orders.Advancetestorder
+    Network.Google.ShoppingContent.Content.Orders.Cancel
+    Network.Google.ShoppingContent.Content.Orders.Cancellineitem
+    Network.Google.ShoppingContent.Content.Orders.Canceltestorderbycustomer
+    Network.Google.ShoppingContent.Content.Orders.CaptureOrder
+    Network.Google.ShoppingContent.Content.Orders.Createtestorder
+    Network.Google.ShoppingContent.Content.Orders.Createtestreturn
+    Network.Google.ShoppingContent.Content.Orders.Get
+    Network.Google.ShoppingContent.Content.Orders.Getbymerchantorderid
+    Network.Google.ShoppingContent.Content.Orders.Gettestordertemplate
+    Network.Google.ShoppingContent.Content.Orders.Instorerefundlineitem
+    Network.Google.ShoppingContent.Content.Orders.List
+    Network.Google.ShoppingContent.Content.Orders.Refunditem
+    Network.Google.ShoppingContent.Content.Orders.Refundorder
+    Network.Google.ShoppingContent.Content.Orders.Rejectreturnlineitem
+    Network.Google.ShoppingContent.Content.Orders.Returnrefundlineitem
+    Network.Google.ShoppingContent.Content.Orders.Setlineitemmetadata
+    Network.Google.ShoppingContent.Content.Orders.Shiplineitems
+    Network.Google.ShoppingContent.Content.Orders.Updatelineitemshippingdetails
+    Network.Google.ShoppingContent.Content.Orders.Updatemerchantorderid
+    Network.Google.ShoppingContent.Content.Orders.Updateshipment
+    Network.Google.ShoppingContent.Content.Ordertrackingsignals.Create
+    Network.Google.ShoppingContent.Content.Pos.Custombatch
+    Network.Google.ShoppingContent.Content.Pos.Delete
+    Network.Google.ShoppingContent.Content.Pos.Get
+    Network.Google.ShoppingContent.Content.Pos.Insert
+    Network.Google.ShoppingContent.Content.Pos.Inventory
+    Network.Google.ShoppingContent.Content.Pos.List
+    Network.Google.ShoppingContent.Content.Pos.Sale
+    Network.Google.ShoppingContent.Content.Products.Custombatch
+    Network.Google.ShoppingContent.Content.Products.Delete
+    Network.Google.ShoppingContent.Content.Products.Get
+    Network.Google.ShoppingContent.Content.Products.Insert
+    Network.Google.ShoppingContent.Content.Products.List
+    Network.Google.ShoppingContent.Content.Products.Update
+    Network.Google.ShoppingContent.Content.Productstatuses.Custombatch
+    Network.Google.ShoppingContent.Content.Productstatuses.Get
+    Network.Google.ShoppingContent.Content.Productstatuses.List
+    Network.Google.ShoppingContent.Content.Productstatuses.Repricingreports.List
+    Network.Google.ShoppingContent.Content.Promotions.Create
+    Network.Google.ShoppingContent.Content.Promotions.Get
+    Network.Google.ShoppingContent.Content.Pubsubnotificationsettings.Get
+    Network.Google.ShoppingContent.Content.Pubsubnotificationsettings.Update
+    Network.Google.ShoppingContent.Content.Regionalinventory.Custombatch
+    Network.Google.ShoppingContent.Content.Regionalinventory.Insert
+    Network.Google.ShoppingContent.Content.Regions.Create
+    Network.Google.ShoppingContent.Content.Regions.Delete
+    Network.Google.ShoppingContent.Content.Regions.Get
+    Network.Google.ShoppingContent.Content.Regions.List
+    Network.Google.ShoppingContent.Content.Regions.Patch
+    Network.Google.ShoppingContent.Content.Reports.Search
+    Network.Google.ShoppingContent.Content.Repricingrules.Create
+    Network.Google.ShoppingContent.Content.Repricingrules.Delete
+    Network.Google.ShoppingContent.Content.Repricingrules.Get
+    Network.Google.ShoppingContent.Content.Repricingrules.List
+    Network.Google.ShoppingContent.Content.Repricingrules.Patch
+    Network.Google.ShoppingContent.Content.Repricingrules.Repricingreports.List
+    Network.Google.ShoppingContent.Content.Returnaddress.Custombatch
+    Network.Google.ShoppingContent.Content.Returnaddress.Delete
+    Network.Google.ShoppingContent.Content.Returnaddress.Get
+    Network.Google.ShoppingContent.Content.Returnaddress.Insert
+    Network.Google.ShoppingContent.Content.Returnaddress.List
+    Network.Google.ShoppingContent.Content.Returnpolicy.Custombatch
+    Network.Google.ShoppingContent.Content.Returnpolicy.Delete
+    Network.Google.ShoppingContent.Content.Returnpolicy.Get
+    Network.Google.ShoppingContent.Content.Returnpolicy.Insert
+    Network.Google.ShoppingContent.Content.Returnpolicy.List
+    Network.Google.ShoppingContent.Content.Returnpolicyonline.Create
+    Network.Google.ShoppingContent.Content.Returnpolicyonline.Delete
+    Network.Google.ShoppingContent.Content.Returnpolicyonline.Get
+    Network.Google.ShoppingContent.Content.Returnpolicyonline.List
+    Network.Google.ShoppingContent.Content.Returnpolicyonline.Patch
+    Network.Google.ShoppingContent.Content.Settlementreports.Get
+    Network.Google.ShoppingContent.Content.Settlementreports.List
+    Network.Google.ShoppingContent.Content.Settlementtransactions.List
+    Network.Google.ShoppingContent.Content.Shippingsettings.Custombatch
+    Network.Google.ShoppingContent.Content.Shippingsettings.Get
+    Network.Google.ShoppingContent.Content.Shippingsettings.Getsupportedcarriers
+    Network.Google.ShoppingContent.Content.Shippingsettings.Getsupportedholidays
+    Network.Google.ShoppingContent.Content.Shippingsettings.Getsupportedpickupservices
+    Network.Google.ShoppingContent.Content.Shippingsettings.List
+    Network.Google.ShoppingContent.Content.Shippingsettings.Update
+    Network.Google.ShoppingContent.Content.Shoppingadsprogram.Get
+    Network.Google.ShoppingContent.Content.Shoppingadsprogram.Requestreview
+    Network.Google.ShoppingContent.Types
 
-    other-modules:
-          Network.Google.ShoppingContent.Types.Product
-        , Network.Google.ShoppingContent.Types.Sum
+  other-modules:
+    Network.Google.ShoppingContent.Internal.Product
+    Network.Google.ShoppingContent.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
