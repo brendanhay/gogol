@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,72 +36,68 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.metadata.dimensions.list@.
 module Gogol.AdExchangeSeller.Accounts.Metadata.Dimensions.List
-  ( -- * Resource
-    AdExchangeSellerAccountsMetadataDimensionsListResource,
+    (
+    -- * Resource
+      AdExchangeSellerAccountsMetadataDimensionsListResource
 
     -- ** Constructing a Request
-    newAdExchangeSellerAccountsMetadataDimensionsList,
-    AdExchangeSellerAccountsMetadataDimensionsList,
-  )
-where
+    , newAdExchangeSellerAccountsMetadataDimensionsList
+    , AdExchangeSellerAccountsMetadataDimensionsList
+    ) where
 
-import Gogol.AdExchangeSeller.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdExchangeSeller.Types
 
 -- | A resource alias for @adexchangeseller.accounts.metadata.dimensions.list@ method which the
 -- 'AdExchangeSellerAccountsMetadataDimensionsList' request conforms to.
-type AdExchangeSellerAccountsMetadataDimensionsListResource =
-  "adexchangeseller"
-    Core.:> "v2.0"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "metadata"
-    Core.:> "dimensions"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Metadata
+type AdExchangeSellerAccountsMetadataDimensionsListResource
+     =
+     "adexchangeseller" Core.:>
+       "v2.0" Core.:>
+         "accounts" Core.:>
+           Core.Capture "accountId" Core.Text Core.:>
+             "metadata" Core.:>
+               "dimensions" Core.:>
+                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                   Core.Get '[Core.JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdExchange account.
 --
 -- /See:/ 'newAdExchangeSellerAccountsMetadataDimensionsList' smart constructor.
 newtype AdExchangeSellerAccountsMetadataDimensionsList = AdExchangeSellerAccountsMetadataDimensionsList
-  { -- | Account with visibility to the dimensions.
-    accountId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account with visibility to the dimensions.
+      accountId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeSellerAccountsMetadataDimensionsList' with the minimum fields required to make a request.
-newAdExchangeSellerAccountsMetadataDimensionsList ::
-  -- |  Account with visibility to the dimensions. See 'accountId'.
-  Core.Text ->
-  AdExchangeSellerAccountsMetadataDimensionsList
+newAdExchangeSellerAccountsMetadataDimensionsList 
+    ::  Core.Text
+       -- ^  Account with visibility to the dimensions. See 'accountId'.
+    -> AdExchangeSellerAccountsMetadataDimensionsList
 newAdExchangeSellerAccountsMetadataDimensionsList accountId =
   AdExchangeSellerAccountsMetadataDimensionsList {accountId = accountId}
 
-instance
-  Core.GoogleRequest
-    AdExchangeSellerAccountsMetadataDimensionsList
-  where
-  type
-    Rs
-      AdExchangeSellerAccountsMetadataDimensionsList =
-      Metadata
-  type
-    Scopes
-      AdExchangeSellerAccountsMetadataDimensionsList =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
-  requestClient
-    AdExchangeSellerAccountsMetadataDimensionsList {..} =
-      go
-        accountId
-        (Core.Just Core.AltJSON)
-        adExchangeSellerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeSellerAccountsMetadataDimensionsListResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AdExchangeSellerAccountsMetadataDimensionsList
+         where
+        type Rs
+               AdExchangeSellerAccountsMetadataDimensionsList
+             = Metadata
+        type Scopes
+               AdExchangeSellerAccountsMetadataDimensionsList
+             =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient
+          AdExchangeSellerAccountsMetadataDimensionsList{..}
+          = go accountId (Core.Just Core.AltJSON)
+              adExchangeSellerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AdExchangeSellerAccountsMetadataDimensionsListResource)
+                      Core.mempty
+
