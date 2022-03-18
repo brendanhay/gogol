@@ -132,7 +132,6 @@ packages:
   - gogol-plus
   - gogol-plus-domains
   - gogol-poly
-  - gogol-prediction
   - gogol-proximitybeacon
   - gogol-pubsub
   - gogol-qpxexpress
