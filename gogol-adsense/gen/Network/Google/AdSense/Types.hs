@@ -1,309 +1,239 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AdSense.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AdSense.Types
-    (
-    -- * Service Configuration
-      adSenseService
+  ( -- * Configuration
+    adSenseService,
 
     -- * OAuth Scopes
-    , adSenseReadOnlyScope
-    , adSenseScope
+    adSenseScope,
+    adSenseReadOnlyScope,
 
-    -- * SiteState
-    , SiteState (..)
+    -- * Types
 
-    -- * ListAlertsResponse
-    , ListAlertsResponse
-    , listAlertsResponse
-    , larAlerts
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * AdClientAdCode
-    , AdClientAdCode
-    , adClientAdCode
-    , acacAmpHead
-    , acacAmpBody
-    , acacAdCode
+    -- ** Account
+    Account (..),
+    newAccount,
 
-    -- * AccountsReportsSavedGenerateReportingTimeZone
-    , AccountsReportsSavedGenerateReportingTimeZone (..)
+    -- ** AdClient
+    AdClient (..),
+    newAdClient,
 
-    -- * AccountsReportsSavedGenerateCSVDateRange
-    , AccountsReportsSavedGenerateCSVDateRange (..)
+    -- ** AdClientAdCode
+    AdClientAdCode (..),
+    newAdClientAdCode,
 
-    -- * HTTPBodyExtensionsItem
-    , HTTPBodyExtensionsItem
-    , hTTPBodyExtensionsItem
-    , httpbeiAddtional
+    -- ** AdUnit
+    AdUnit (..),
+    newAdUnit,
 
-    -- * AccountsReportsGenerateCSVReportingTimeZone
-    , AccountsReportsGenerateCSVReportingTimeZone (..)
+    -- ** AdUnit_State
+    AdUnit_State (..),
 
-    -- * AccountsReportsGenerateDimensions
-    , AccountsReportsGenerateDimensions (..)
+    -- ** AdUnitAdCode
+    AdUnitAdCode (..),
+    newAdUnitAdCode,
 
-    -- * HeaderType
-    , HeaderType (..)
+    -- ** Alert
+    Alert (..),
+    newAlert,
 
-    -- * ListURLChannelsResponse
-    , ListURLChannelsResponse
-    , listURLChannelsResponse
-    , lucrNextPageToken
-    , lucrURLChannels
+    -- ** Alert_Severity
+    Alert_Severity (..),
 
-    -- * Payment
-    , Payment
-    , payment
-    , pAmount
-    , pDate
-    , pName
+    -- ** Cell
+    Cell (..),
+    newCell,
 
-    -- * AccountsReportsSavedGenerateCSVReportingTimeZone
-    , AccountsReportsSavedGenerateCSVReportingTimeZone (..)
+    -- ** ContentAdsSettings
+    ContentAdsSettings (..),
+    newContentAdsSettings,
 
-    -- * ContentAdsSettingsType
-    , ContentAdsSettingsType (..)
+    -- ** ContentAdsSettings_Type
+    ContentAdsSettings_Type (..),
 
-    -- * ListCustomChannelsResponse
-    , ListCustomChannelsResponse
-    , listCustomChannelsResponse
-    , lccrNextPageToken
-    , lccrCustomChannels
+    -- ** CustomChannel
+    CustomChannel (..),
+    newCustomChannel,
 
-    -- * AccountsReportsSavedGenerateDateRange
-    , AccountsReportsSavedGenerateDateRange (..)
+    -- ** Date
+    Date (..),
+    newDate,
 
-    -- * AccountsReportsGenerateCSVMetrics
-    , AccountsReportsGenerateCSVMetrics (..)
+    -- ** Header
+    Header (..),
+    newHeader,
 
-    -- * ListLinkedAdUnitsResponse
-    , ListLinkedAdUnitsResponse
-    , listLinkedAdUnitsResponse
-    , llaurNextPageToken
-    , llaurAdUnits
+    -- ** Header_Type
+    Header_Type (..),
 
-    -- * ListAccountsResponse
-    , ListAccountsResponse
-    , listAccountsResponse
-    , larNextPageToken
-    , larAccounts
+    -- ** HttpBody
+    HttpBody (..),
+    newHttpBody,
 
-    -- * SavedReport
-    , SavedReport
-    , savedReport
-    , srName
-    , srTitle
+    -- ** HttpBody_ExtensionsItem
+    HttpBody_ExtensionsItem (..),
+    newHttpBody_ExtensionsItem,
 
-    -- * AdUnit
-    , AdUnit
-    , adUnit
-    , auState
-    , auReportingDimensionId
-    , auName
-    , auContentAdsSettings
-    , auDisplayName
+    -- ** ListAccountsResponse
+    ListAccountsResponse (..),
+    newListAccountsResponse,
 
-    -- * Cell
-    , Cell
-    , cell
-    , cValue
+    -- ** ListAdClientsResponse
+    ListAdClientsResponse (..),
+    newListAdClientsResponse,
 
-    -- * Alert
-    , Alert
-    , alert
-    , aSeverity
-    , aName
-    , aType
-    , aMessage
+    -- ** ListAdUnitsResponse
+    ListAdUnitsResponse (..),
+    newListAdUnitsResponse,
 
-    -- * ListSavedReportsResponse
-    , ListSavedReportsResponse
-    , listSavedReportsResponse
-    , lsrrNextPageToken
-    , lsrrSavedReports
+    -- ** ListAlertsResponse
+    ListAlertsResponse (..),
+    newListAlertsResponse,
 
-    -- * ListChildAccountsResponse
-    , ListChildAccountsResponse
-    , listChildAccountsResponse
-    , lcarNextPageToken
-    , lcarAccounts
+    -- ** ListChildAccountsResponse
+    ListChildAccountsResponse (..),
+    newListChildAccountsResponse,
 
-    -- * Account
-    , Account
-    , account
-    , accPremium
-    , accPendingTasks
-    , accName
-    , accDisplayName
-    , accTimeZone
-    , accCreateTime
+    -- ** ListCustomChannelsResponse
+    ListCustomChannelsResponse (..),
+    newListCustomChannelsResponse,
 
-    -- * AccountsReportsGenerateCSVDateRange
-    , AccountsReportsGenerateCSVDateRange (..)
+    -- ** ListLinkedAdUnitsResponse
+    ListLinkedAdUnitsResponse (..),
+    newListLinkedAdUnitsResponse,
 
-    -- * ListAdUnitsResponse
-    , ListAdUnitsResponse
-    , listAdUnitsResponse
-    , laurNextPageToken
-    , laurAdUnits
+    -- ** ListLinkedCustomChannelsResponse
+    ListLinkedCustomChannelsResponse (..),
+    newListLinkedCustomChannelsResponse,
 
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
+    -- ** ListPaymentsResponse
+    ListPaymentsResponse (..),
+    newListPaymentsResponse,
 
-    -- * AdUnitState
-    , AdUnitState (..)
+    -- ** ListSavedReportsResponse
+    ListSavedReportsResponse (..),
+    newListSavedReportsResponse,
 
-    -- * AdClient
-    , AdClient
-    , adClient
-    , acReportingDimensionId
-    , acName
-    , acProductCode
+    -- ** ListSitesResponse
+    ListSitesResponse (..),
+    newListSitesResponse,
 
-    -- * ReportResult
-    , ReportResult
-    , reportResult
-    , rrAverages
-    , rrEndDate
-    , rrWarnings
-    , rrRows
-    , rrTotals
-    , rrStartDate
-    , rrHeaders
-    , rrTotalMatchedRows
+    -- ** ListUrlChannelsResponse
+    ListUrlChannelsResponse (..),
+    newListUrlChannelsResponse,
 
-    -- * Header
-    , Header
-    , header
-    , hCurrencyCode
-    , hName
-    , hType
+    -- ** Payment
+    Payment (..),
+    newPayment,
 
-    -- * AccountsReportsGenerateDateRange
-    , AccountsReportsGenerateDateRange (..)
+    -- ** ReportResult
+    ReportResult (..),
+    newReportResult,
 
-    -- * ContentAdsSettings
-    , ContentAdsSettings
-    , contentAdsSettings
-    , casSize
-    , casType
+    -- ** Row
+    Row (..),
+    newRow,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** SavedReport
+    SavedReport (..),
+    newSavedReport,
 
-    -- * Row
-    , Row
-    , row
-    , rCells
+    -- ** Site
+    Site (..),
+    newSite,
 
-    -- * AlertSeverity
-    , AlertSeverity (..)
+    -- ** Site_State
+    Site_State (..),
 
-    -- * CustomChannel
-    , CustomChannel
-    , customChannel
-    , ccReportingDimensionId
-    , ccName
-    , ccDisplayName
+    -- ** TimeZone
+    TimeZone (..),
+    newTimeZone,
 
-    -- * URLChannel
-    , URLChannel
-    , urlChannel
-    , ucReportingDimensionId
-    , ucURIPattern
-    , ucName
+    -- ** UrlChannel
+    UrlChannel (..),
+    newUrlChannel,
 
-    -- * ListPaymentsResponse
-    , ListPaymentsResponse
-    , listPaymentsResponse
-    , lprPayments
+    -- ** AccountsReportsGenerateDateRange
+    AccountsReportsGenerateDateRange (..),
 
-    -- * HTTPBody
-    , HTTPBody
-    , hTTPBody
-    , httpbExtensions
-    , httpbData
-    , httpbContentType
+    -- ** AccountsReportsGenerateDimensions
+    AccountsReportsGenerateDimensions (..),
 
-    -- * ListLinkedCustomChannelsResponse
-    , ListLinkedCustomChannelsResponse
-    , listLinkedCustomChannelsResponse
-    , llccrNextPageToken
-    , llccrCustomChannels
+    -- ** AccountsReportsGenerateMetrics
+    AccountsReportsGenerateMetrics (..),
 
-    -- * AdUnitAdCode
-    , AdUnitAdCode
-    , adUnitAdCode
-    , auacAdCode
+    -- ** AccountsReportsGenerateReportingTimeZone
+    AccountsReportsGenerateReportingTimeZone (..),
 
-    -- * TimeZone
-    , TimeZone
-    , timeZone
-    , tzVersion
-    , tzId
+    -- ** AccountsReportsGenerateCsvDateRange
+    AccountsReportsGenerateCsvDateRange (..),
 
-    -- * AccountsReportsGenerateMetrics
-    , AccountsReportsGenerateMetrics (..)
+    -- ** AccountsReportsGenerateCsvDimensions
+    AccountsReportsGenerateCsvDimensions (..),
 
-    -- * Site
-    , Site
-    , site
-    , sAutoAdsEnabled
-    , sState
-    , sDomain
-    , sReportingDimensionId
-    , sName
+    -- ** AccountsReportsGenerateCsvMetrics
+    AccountsReportsGenerateCsvMetrics (..),
 
-    -- * ListAdClientsResponse
-    , ListAdClientsResponse
-    , listAdClientsResponse
-    , lacrNextPageToken
-    , lacrAdClients
+    -- ** AccountsReportsGenerateCsvReportingTimeZone
+    AccountsReportsGenerateCsvReportingTimeZone (..),
 
-    -- * AccountsReportsGenerateCSVDimensions
-    , AccountsReportsGenerateCSVDimensions (..)
+    -- ** AccountsReportsSavedGenerateDateRange
+    AccountsReportsSavedGenerateDateRange (..),
 
-    -- * AccountsReportsGenerateReportingTimeZone
-    , AccountsReportsGenerateReportingTimeZone (..)
+    -- ** AccountsReportsSavedGenerateReportingTimeZone
+    AccountsReportsSavedGenerateReportingTimeZone (..),
 
-    -- * ListSitesResponse
-    , ListSitesResponse
-    , listSitesResponse
-    , lsrNextPageToken
-    , lsrSites
-    ) where
+    -- ** AccountsReportsSavedGenerateCsvDateRange
+    AccountsReportsSavedGenerateCsvDateRange (..),
 
-import Network.Google.AdSense.Types.Product
-import Network.Google.AdSense.Types.Sum
-import Network.Google.Prelude
+    -- ** AccountsReportsSavedGenerateCsvReportingTimeZone
+    AccountsReportsSavedGenerateCsvReportingTimeZone (..),
+  )
+where
 
--- | Default request referring to version 'v2' of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
-adSenseService :: ServiceConfig
-adSenseService
-  = defaultService (ServiceId "adsense:v2")
-      "adsense.googleapis.com"
+import Network.Google.AdSense.Internal.Product
+import Network.Google.AdSense.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View your AdSense data
-adSenseReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adsense.readonly"]
-adSenseReadOnlyScope = Proxy
+-- | Default request referring to version @v2@ of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
+adSenseService :: Core.ServiceConfig
+adSenseService =
+  Core.defaultService
+    (Core.ServiceId "adsense:v2")
+    "adsense.googleapis.com"
 
 -- | View and manage your AdSense data
-adSenseScope :: Proxy '["https://www.googleapis.com/auth/adsense"]
-adSenseScope = Proxy
+adSenseScope :: Core.Proxy '["https://www.googleapis.com/auth/adsense"]
+adSenseScope = Core.Proxy
+
+-- | View your AdSense data
+adSenseReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/adsense.readonly"]
+adSenseReadOnlyScope = Core.Proxy
