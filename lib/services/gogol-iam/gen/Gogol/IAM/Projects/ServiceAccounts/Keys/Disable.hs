@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,98 +36,90 @@
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.disable@.
 module Gogol.IAM.Projects.ServiceAccounts.Keys.Disable
-  ( -- * Resource
-    IAMProjectsServiceAccountsKeysDisableResource,
+    (
+    -- * Resource
+      IAMProjectsServiceAccountsKeysDisableResource
 
     -- ** Constructing a Request
-    newIAMProjectsServiceAccountsKeysDisable,
-    IAMProjectsServiceAccountsKeysDisable,
-  )
-where
+    , newIAMProjectsServiceAccountsKeysDisable
+    , IAMProjectsServiceAccountsKeysDisable
+    ) where
 
-import Gogol.IAM.Types
 import qualified Gogol.Prelude as Core
+import Gogol.IAM.Types
 
 -- | A resource alias for @iam.projects.serviceAccounts.keys.disable@ method which the
 -- 'IAMProjectsServiceAccountsKeysDisable' request conforms to.
 type IAMProjectsServiceAccountsKeysDisableResource =
-  "v1"
-    Core.:> Core.CaptureMode "name" "disable" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              DisableServiceAccountKeyRequest
-    Core.:> Core.Post '[Core.JSON] Empty
+     "v1" Core.:>
+       Core.CaptureMode "name" "disable" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       DisableServiceAccountKeyRequest
+                       Core.:> Core.Post '[Core.JSON] Empty
 
 -- | Disable a ServiceAccountKey. A disabled service account key can be enabled through EnableServiceAccountKey.
 --
 -- /See:/ 'newIAMProjectsServiceAccountsKeysDisable' smart constructor.
 data IAMProjectsServiceAccountsKeysDisable = IAMProjectsServiceAccountsKeysDisable
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: DisableServiceAccountKeyRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: DisableServiceAccountKeyRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IAMProjectsServiceAccountsKeysDisable' with the minimum fields required to make a request.
-newIAMProjectsServiceAccountsKeysDisable ::
-  -- |  Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  DisableServiceAccountKeyRequest ->
-  IAMProjectsServiceAccountsKeysDisable
+newIAMProjectsServiceAccountsKeysDisable 
+    ::  Core.Text
+       -- ^  Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account. See 'name'.
+    -> DisableServiceAccountKeyRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> IAMProjectsServiceAccountsKeysDisable
 newIAMProjectsServiceAccountsKeysDisable name payload =
   IAMProjectsServiceAccountsKeysDisable
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    IAMProjectsServiceAccountsKeysDisable
-  where
-  type Rs IAMProjectsServiceAccountsKeysDisable = Empty
-  type
-    Scopes IAMProjectsServiceAccountsKeysDisable =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    IAMProjectsServiceAccountsKeysDisable {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        iAMService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IAMProjectsServiceAccountsKeysDisableResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           IAMProjectsServiceAccountsKeysDisable
+         where
+        type Rs IAMProjectsServiceAccountsKeysDisable = Empty
+        type Scopes IAMProjectsServiceAccountsKeysDisable =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          IAMProjectsServiceAccountsKeysDisable{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              iAMService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           IAMProjectsServiceAccountsKeysDisableResource)
+                      Core.mempty
+
