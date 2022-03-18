@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.insert@.
 module Gogol.Storage.BucketAccessControls.Insert
-  ( -- * Resource
-    StorageBucketAccessControlsInsertResource,
+    (
+    -- * Resource
+      StorageBucketAccessControlsInsertResource
 
     -- ** Constructing a Request
-    newStorageBucketAccessControlsInsert,
-    StorageBucketAccessControlsInsert,
-  )
-where
+    , newStorageBucketAccessControlsInsert
+    , StorageBucketAccessControlsInsert
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
@@ -45,76 +51,70 @@ import Gogol.Storage.Types
 -- | A resource alias for @storage.bucketAccessControls.insert@ method which the
 -- 'StorageBucketAccessControlsInsert' request conforms to.
 type StorageBucketAccessControlsInsertResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "acl"
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] BucketAccessControl
-    Core.:> Core.Post '[Core.JSON] BucketAccessControl
+     "storage" Core.:>
+       "v1" Core.:>
+         "b" Core.:>
+           Core.Capture "bucket" Core.Text Core.:>
+             "acl" Core.:>
+               Core.QueryParam "provisionalUserProject" Core.Text
+                 Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "userProject" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON] BucketAccessControl Core.:>
+                         Core.Post '[Core.JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.
 --
 -- /See:/ 'newStorageBucketAccessControlsInsert' smart constructor.
 data StorageBucketAccessControlsInsert = StorageBucketAccessControlsInsert
-  { -- | Name of a bucket.
-    bucket :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: BucketAccessControl,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Name of a bucket.
+      bucket :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: BucketAccessControl
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'StorageBucketAccessControlsInsert' with the minimum fields required to make a request.
-newStorageBucketAccessControlsInsert ::
-  -- |  Name of a bucket. See 'bucket'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  BucketAccessControl ->
-  StorageBucketAccessControlsInsert
+newStorageBucketAccessControlsInsert 
+    ::  Core.Text
+       -- ^  Name of a bucket. See 'bucket'.
+    -> BucketAccessControl
+       -- ^  Multipart request metadata. See 'payload'.
+    -> StorageBucketAccessControlsInsert
 newStorageBucketAccessControlsInsert bucket payload =
   StorageBucketAccessControlsInsert
-    { bucket = bucket,
-      payload = payload,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    { bucket = bucket
+    , payload = payload
+    , provisionalUserProject = Core.Nothing
+    , uploadType = Core.Nothing
+    , userProject = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageBucketAccessControlsInsert
-  where
-  type
-    Rs StorageBucketAccessControlsInsert =
-      BucketAccessControl
-  type
-    Scopes StorageBucketAccessControlsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
-  requestClient StorageBucketAccessControlsInsert {..} =
-    go
-      bucket
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      payload
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageBucketAccessControlsInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           StorageBucketAccessControlsInsert
+         where
+        type Rs StorageBucketAccessControlsInsert =
+             BucketAccessControl
+        type Scopes StorageBucketAccessControlsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient StorageBucketAccessControlsInsert{..}
+          = go bucket provisionalUserProject uploadType
+              userProject
+              (Core.Just Core.AltJSON)
+              payload
+              storageService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy StorageBucketAccessControlsInsertResource)
+                      Core.mempty
+
