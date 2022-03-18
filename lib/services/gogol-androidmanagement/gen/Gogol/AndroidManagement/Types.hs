@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,593 +31,594 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AndroidManagement.Types
-  ( -- * Configuration
-    androidManagementService,
+    (
+    -- * Configuration
+      androidManagementService
 
     -- * OAuth Scopes
-    androidManagementScope,
+    , androidManagementScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AdvancedSecurityOverrides
-    AdvancedSecurityOverrides (..),
-    newAdvancedSecurityOverrides,
+    , AdvancedSecurityOverrides (..)
+    , newAdvancedSecurityOverrides
 
     -- ** AdvancedSecurityOverrides_CommonCriteriaMode
-    AdvancedSecurityOverrides_CommonCriteriaMode (..),
+    , AdvancedSecurityOverrides_CommonCriteriaMode (..)
 
     -- ** AdvancedSecurityOverrides_DeveloperSettings
-    AdvancedSecurityOverrides_DeveloperSettings (..),
+    , AdvancedSecurityOverrides_DeveloperSettings (..)
 
     -- ** AdvancedSecurityOverrides_GooglePlayProtectVerifyApps
-    AdvancedSecurityOverrides_GooglePlayProtectVerifyApps (..),
+    , AdvancedSecurityOverrides_GooglePlayProtectVerifyApps (..)
 
     -- ** AdvancedSecurityOverrides_UntrustedAppsPolicy
-    AdvancedSecurityOverrides_UntrustedAppsPolicy (..),
+    , AdvancedSecurityOverrides_UntrustedAppsPolicy (..)
 
     -- ** AlwaysOnVpnPackage
-    AlwaysOnVpnPackage (..),
-    newAlwaysOnVpnPackage,
+    , AlwaysOnVpnPackage (..)
+    , newAlwaysOnVpnPackage
 
     -- ** ApiLevelCondition
-    ApiLevelCondition (..),
-    newApiLevelCondition,
+    , ApiLevelCondition (..)
+    , newApiLevelCondition
 
     -- ** AppTrackInfo
-    AppTrackInfo (..),
-    newAppTrackInfo,
+    , AppTrackInfo (..)
+    , newAppTrackInfo
 
     -- ** AppVersion
-    AppVersion (..),
-    newAppVersion,
+    , AppVersion (..)
+    , newAppVersion
 
     -- ** Application
-    Application (..),
-    newApplication,
+    , Application (..)
+    , newApplication
 
     -- ** Application_AppPricing
-    Application_AppPricing (..),
+    , Application_AppPricing (..)
 
     -- ** Application_ContentRating
-    Application_ContentRating (..),
+    , Application_ContentRating (..)
 
     -- ** Application_DistributionChannel
-    Application_DistributionChannel (..),
+    , Application_DistributionChannel (..)
 
     -- ** Application_FeaturesItem
-    Application_FeaturesItem (..),
+    , Application_FeaturesItem (..)
 
     -- ** ApplicationEvent
-    ApplicationEvent (..),
-    newApplicationEvent,
+    , ApplicationEvent (..)
+    , newApplicationEvent
 
     -- ** ApplicationEvent_EventType
-    ApplicationEvent_EventType (..),
+    , ApplicationEvent_EventType (..)
 
     -- ** ApplicationPermission
-    ApplicationPermission (..),
-    newApplicationPermission,
+    , ApplicationPermission (..)
+    , newApplicationPermission
 
     -- ** ApplicationPolicy
-    ApplicationPolicy (..),
-    newApplicationPolicy,
+    , ApplicationPolicy (..)
+    , newApplicationPolicy
 
     -- ** ApplicationPolicy_AutoUpdateMode
-    ApplicationPolicy_AutoUpdateMode (..),
+    , ApplicationPolicy_AutoUpdateMode (..)
 
     -- ** ApplicationPolicy_ConnectedWorkAndPersonalApp
-    ApplicationPolicy_ConnectedWorkAndPersonalApp (..),
+    , ApplicationPolicy_ConnectedWorkAndPersonalApp (..)
 
     -- ** ApplicationPolicy_DefaultPermissionPolicy
-    ApplicationPolicy_DefaultPermissionPolicy (..),
+    , ApplicationPolicy_DefaultPermissionPolicy (..)
 
     -- ** ApplicationPolicy_DelegatedScopesItem
-    ApplicationPolicy_DelegatedScopesItem (..),
+    , ApplicationPolicy_DelegatedScopesItem (..)
 
     -- ** ApplicationPolicy_InstallType
-    ApplicationPolicy_InstallType (..),
+    , ApplicationPolicy_InstallType (..)
 
     -- ** ApplicationPolicy_ManagedConfiguration
-    ApplicationPolicy_ManagedConfiguration (..),
-    newApplicationPolicy_ManagedConfiguration,
+    , ApplicationPolicy_ManagedConfiguration (..)
+    , newApplicationPolicy_ManagedConfiguration
 
     -- ** ApplicationReport
-    ApplicationReport (..),
-    newApplicationReport,
+    , ApplicationReport (..)
+    , newApplicationReport
 
     -- ** ApplicationReport_ApplicationSource
-    ApplicationReport_ApplicationSource (..),
+    , ApplicationReport_ApplicationSource (..)
 
     -- ** ApplicationReport_State
-    ApplicationReport_State (..),
+    , ApplicationReport_State (..)
 
     -- ** ApplicationReportingSettings
-    ApplicationReportingSettings (..),
-    newApplicationReportingSettings,
+    , ApplicationReportingSettings (..)
+    , newApplicationReportingSettings
 
     -- ** BlockAction
-    BlockAction (..),
-    newBlockAction,
+    , BlockAction (..)
+    , newBlockAction
 
     -- ** BlockAction_BlockScope
-    BlockAction_BlockScope (..),
+    , BlockAction_BlockScope (..)
 
     -- ** ChoosePrivateKeyRule
-    ChoosePrivateKeyRule (..),
-    newChoosePrivateKeyRule,
+    , ChoosePrivateKeyRule (..)
+    , newChoosePrivateKeyRule
 
     -- ** Command
-    Command (..),
-    newCommand,
+    , Command (..)
+    , newCommand
 
     -- ** Command_ErrorCode
-    Command_ErrorCode (..),
+    , Command_ErrorCode (..)
 
     -- ** Command_ResetPasswordFlagsItem
-    Command_ResetPasswordFlagsItem (..),
+    , Command_ResetPasswordFlagsItem (..)
 
     -- ** Command_Type
-    Command_Type (..),
+    , Command_Type (..)
 
     -- ** CommonCriteriaModeInfo
-    CommonCriteriaModeInfo (..),
-    newCommonCriteriaModeInfo,
+    , CommonCriteriaModeInfo (..)
+    , newCommonCriteriaModeInfo
 
     -- ** CommonCriteriaModeInfo_CommonCriteriaModeStatus
-    CommonCriteriaModeInfo_CommonCriteriaModeStatus (..),
+    , CommonCriteriaModeInfo_CommonCriteriaModeStatus (..)
 
     -- ** ComplianceRule
-    ComplianceRule (..),
-    newComplianceRule,
+    , ComplianceRule (..)
+    , newComplianceRule
 
     -- ** ContactInfo
-    ContactInfo (..),
-    newContactInfo,
+    , ContactInfo (..)
+    , newContactInfo
 
     -- ** ContentProviderEndpoint
-    ContentProviderEndpoint (..),
-    newContentProviderEndpoint,
+    , ContentProviderEndpoint (..)
+    , newContentProviderEndpoint
 
     -- ** CrossProfilePolicies
-    CrossProfilePolicies (..),
-    newCrossProfilePolicies,
+    , CrossProfilePolicies (..)
+    , newCrossProfilePolicies
 
     -- ** CrossProfilePolicies_CrossProfileCopyPaste
-    CrossProfilePolicies_CrossProfileCopyPaste (..),
+    , CrossProfilePolicies_CrossProfileCopyPaste (..)
 
     -- ** CrossProfilePolicies_CrossProfileDataSharing
-    CrossProfilePolicies_CrossProfileDataSharing (..),
+    , CrossProfilePolicies_CrossProfileDataSharing (..)
 
     -- ** CrossProfilePolicies_ShowWorkContactsInPersonalProfile
-    CrossProfilePolicies_ShowWorkContactsInPersonalProfile (..),
+    , CrossProfilePolicies_ShowWorkContactsInPersonalProfile (..)
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** Device_AppliedState
-    Device_AppliedState (..),
+    , Device_AppliedState (..)
 
     -- ** Device_ManagementMode
-    Device_ManagementMode (..),
+    , Device_ManagementMode (..)
 
     -- ** Device_Ownership
-    Device_Ownership (..),
+    , Device_Ownership (..)
 
     -- ** Device_State
-    Device_State (..),
+    , Device_State (..)
 
     -- ** Device_SystemProperties
-    Device_SystemProperties (..),
-    newDevice_SystemProperties,
+    , Device_SystemProperties (..)
+    , newDevice_SystemProperties
 
     -- ** DeviceSettings
-    DeviceSettings (..),
-    newDeviceSettings,
+    , DeviceSettings (..)
+    , newDeviceSettings
 
     -- ** DeviceSettings_EncryptionStatus
-    DeviceSettings_EncryptionStatus (..),
+    , DeviceSettings_EncryptionStatus (..)
 
     -- ** Display
-    Display (..),
-    newDisplay,
+    , Display (..)
+    , newDisplay
 
     -- ** Display_State
-    Display_State (..),
+    , Display_State (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EnrollmentToken
-    EnrollmentToken (..),
-    newEnrollmentToken,
+    , EnrollmentToken (..)
+    , newEnrollmentToken
 
     -- ** EnrollmentToken_AllowPersonalUsage
-    EnrollmentToken_AllowPersonalUsage (..),
+    , EnrollmentToken_AllowPersonalUsage (..)
 
     -- ** Enterprise
-    Enterprise (..),
-    newEnterprise,
+    , Enterprise (..)
+    , newEnterprise
 
     -- ** Enterprise_EnabledNotificationTypesItem
-    Enterprise_EnabledNotificationTypesItem (..),
+    , Enterprise_EnabledNotificationTypesItem (..)
 
     -- ** ExtensionConfig
-    ExtensionConfig (..),
-    newExtensionConfig,
+    , ExtensionConfig (..)
+    , newExtensionConfig
 
     -- ** ExternalData
-    ExternalData (..),
-    newExternalData,
+    , ExternalData (..)
+    , newExternalData
 
     -- ** FreezePeriod
-    FreezePeriod (..),
-    newFreezePeriod,
+    , FreezePeriod (..)
+    , newFreezePeriod
 
     -- ** HardwareInfo
-    HardwareInfo (..),
-    newHardwareInfo,
+    , HardwareInfo (..)
+    , newHardwareInfo
 
     -- ** HardwareStatus
-    HardwareStatus (..),
-    newHardwareStatus,
+    , HardwareStatus (..)
+    , newHardwareStatus
 
     -- ** IssueCommandResponse
-    IssueCommandResponse (..),
-    newIssueCommandResponse,
+    , IssueCommandResponse (..)
+    , newIssueCommandResponse
 
     -- ** KeyedAppState
-    KeyedAppState (..),
-    newKeyedAppState,
+    , KeyedAppState (..)
+    , newKeyedAppState
 
     -- ** KeyedAppState_Severity
-    KeyedAppState_Severity (..),
+    , KeyedAppState_Severity (..)
 
     -- ** KioskCustomization
-    KioskCustomization (..),
-    newKioskCustomization,
+    , KioskCustomization (..)
+    , newKioskCustomization
 
     -- ** KioskCustomization_DeviceSettings
-    KioskCustomization_DeviceSettings (..),
+    , KioskCustomization_DeviceSettings (..)
 
     -- ** KioskCustomization_PowerButtonActions
-    KioskCustomization_PowerButtonActions (..),
+    , KioskCustomization_PowerButtonActions (..)
 
     -- ** KioskCustomization_StatusBar
-    KioskCustomization_StatusBar (..),
+    , KioskCustomization_StatusBar (..)
 
     -- ** KioskCustomization_SystemErrorWarnings
-    KioskCustomization_SystemErrorWarnings (..),
+    , KioskCustomization_SystemErrorWarnings (..)
 
     -- ** KioskCustomization_SystemNavigation
-    KioskCustomization_SystemNavigation (..),
+    , KioskCustomization_SystemNavigation (..)
 
     -- ** LaunchAppAction
-    LaunchAppAction (..),
-    newLaunchAppAction,
+    , LaunchAppAction (..)
+    , newLaunchAppAction
 
     -- ** ListDevicesResponse
-    ListDevicesResponse (..),
-    newListDevicesResponse,
+    , ListDevicesResponse (..)
+    , newListDevicesResponse
 
     -- ** ListEnterprisesResponse
-    ListEnterprisesResponse (..),
-    newListEnterprisesResponse,
+    , ListEnterprisesResponse (..)
+    , newListEnterprisesResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListPoliciesResponse
-    ListPoliciesResponse (..),
-    newListPoliciesResponse,
+    , ListPoliciesResponse (..)
+    , newListPoliciesResponse
 
     -- ** ListWebAppsResponse
-    ListWebAppsResponse (..),
-    newListWebAppsResponse,
+    , ListWebAppsResponse (..)
+    , newListWebAppsResponse
 
     -- ** ManagedConfigurationTemplate
-    ManagedConfigurationTemplate (..),
-    newManagedConfigurationTemplate,
+    , ManagedConfigurationTemplate (..)
+    , newManagedConfigurationTemplate
 
     -- ** ManagedConfigurationTemplate_ConfigurationVariables
-    ManagedConfigurationTemplate_ConfigurationVariables (..),
-    newManagedConfigurationTemplate_ConfigurationVariables,
+    , ManagedConfigurationTemplate_ConfigurationVariables (..)
+    , newManagedConfigurationTemplate_ConfigurationVariables
 
     -- ** ManagedProperty
-    ManagedProperty (..),
-    newManagedProperty,
+    , ManagedProperty (..)
+    , newManagedProperty
 
     -- ** ManagedProperty_Type
-    ManagedProperty_Type (..),
+    , ManagedProperty_Type (..)
 
     -- ** ManagedPropertyEntry
-    ManagedPropertyEntry (..),
-    newManagedPropertyEntry,
+    , ManagedPropertyEntry (..)
+    , newManagedPropertyEntry
 
     -- ** MemoryEvent
-    MemoryEvent (..),
-    newMemoryEvent,
+    , MemoryEvent (..)
+    , newMemoryEvent
 
     -- ** MemoryEvent_EventType
-    MemoryEvent_EventType (..),
+    , MemoryEvent_EventType (..)
 
     -- ** MemoryInfo
-    MemoryInfo (..),
-    newMemoryInfo,
+    , MemoryInfo (..)
+    , newMemoryInfo
 
     -- ** NetworkInfo
-    NetworkInfo (..),
-    newNetworkInfo,
+    , NetworkInfo (..)
+    , newNetworkInfo
 
     -- ** NonComplianceDetail
-    NonComplianceDetail (..),
-    newNonComplianceDetail,
+    , NonComplianceDetail (..)
+    , newNonComplianceDetail
 
     -- ** NonComplianceDetail_InstallationFailureReason
-    NonComplianceDetail_InstallationFailureReason (..),
+    , NonComplianceDetail_InstallationFailureReason (..)
 
     -- ** NonComplianceDetail_NonComplianceReason
-    NonComplianceDetail_NonComplianceReason (..),
+    , NonComplianceDetail_NonComplianceReason (..)
 
     -- ** NonComplianceDetailCondition
-    NonComplianceDetailCondition (..),
-    newNonComplianceDetailCondition,
+    , NonComplianceDetailCondition (..)
+    , newNonComplianceDetailCondition
 
     -- ** NonComplianceDetailCondition_NonComplianceReason
-    NonComplianceDetailCondition_NonComplianceReason (..),
+    , NonComplianceDetailCondition_NonComplianceReason (..)
 
     -- ** OncCertificateProvider
-    OncCertificateProvider (..),
-    newOncCertificateProvider,
+    , OncCertificateProvider (..)
+    , newOncCertificateProvider
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** PackageNameList
-    PackageNameList (..),
-    newPackageNameList,
+    , PackageNameList (..)
+    , newPackageNameList
 
     -- ** PasswordRequirements
-    PasswordRequirements (..),
-    newPasswordRequirements,
+    , PasswordRequirements (..)
+    , newPasswordRequirements
 
     -- ** PasswordRequirements_PasswordQuality
-    PasswordRequirements_PasswordQuality (..),
+    , PasswordRequirements_PasswordQuality (..)
 
     -- ** PasswordRequirements_PasswordScope
-    PasswordRequirements_PasswordScope (..),
+    , PasswordRequirements_PasswordScope (..)
 
     -- ** PasswordRequirements_RequirePasswordUnlock
-    PasswordRequirements_RequirePasswordUnlock (..),
+    , PasswordRequirements_RequirePasswordUnlock (..)
 
     -- ** PasswordRequirements_UnifiedLockSettings
-    PasswordRequirements_UnifiedLockSettings (..),
+    , PasswordRequirements_UnifiedLockSettings (..)
 
     -- ** PermissionGrant
-    PermissionGrant (..),
-    newPermissionGrant,
+    , PermissionGrant (..)
+    , newPermissionGrant
 
     -- ** PermissionGrant_Policy
-    PermissionGrant_Policy (..),
+    , PermissionGrant_Policy (..)
 
     -- ** PersistentPreferredActivity
-    PersistentPreferredActivity (..),
-    newPersistentPreferredActivity,
+    , PersistentPreferredActivity (..)
+    , newPersistentPreferredActivity
 
     -- ** PersonalApplicationPolicy
-    PersonalApplicationPolicy (..),
-    newPersonalApplicationPolicy,
+    , PersonalApplicationPolicy (..)
+    , newPersonalApplicationPolicy
 
     -- ** PersonalApplicationPolicy_InstallType
-    PersonalApplicationPolicy_InstallType (..),
+    , PersonalApplicationPolicy_InstallType (..)
 
     -- ** PersonalUsagePolicies
-    PersonalUsagePolicies (..),
-    newPersonalUsagePolicies,
+    , PersonalUsagePolicies (..)
+    , newPersonalUsagePolicies
 
     -- ** PersonalUsagePolicies_PersonalPlayStoreMode
-    PersonalUsagePolicies_PersonalPlayStoreMode (..),
+    , PersonalUsagePolicies_PersonalPlayStoreMode (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Policy_AndroidDevicePolicyTracksItem
-    Policy_AndroidDevicePolicyTracksItem (..),
+    , Policy_AndroidDevicePolicyTracksItem (..)
 
     -- ** Policy_AppAutoUpdatePolicy
-    Policy_AppAutoUpdatePolicy (..),
+    , Policy_AppAutoUpdatePolicy (..)
 
     -- ** Policy_AutoDateAndTimeZone
-    Policy_AutoDateAndTimeZone (..),
+    , Policy_AutoDateAndTimeZone (..)
 
     -- ** Policy_CameraAccess
-    Policy_CameraAccess (..),
+    , Policy_CameraAccess (..)
 
     -- ** Policy_DefaultPermissionPolicy
-    Policy_DefaultPermissionPolicy (..),
+    , Policy_DefaultPermissionPolicy (..)
 
     -- ** Policy_EncryptionPolicy
-    Policy_EncryptionPolicy (..),
+    , Policy_EncryptionPolicy (..)
 
     -- ** Policy_KeyguardDisabledFeaturesItem
-    Policy_KeyguardDisabledFeaturesItem (..),
+    , Policy_KeyguardDisabledFeaturesItem (..)
 
     -- ** Policy_LocationMode
-    Policy_LocationMode (..),
+    , Policy_LocationMode (..)
 
     -- ** Policy_MicrophoneAccess
-    Policy_MicrophoneAccess (..),
+    , Policy_MicrophoneAccess (..)
 
     -- ** Policy_OpenNetworkConfiguration
-    Policy_OpenNetworkConfiguration (..),
-    newPolicy_OpenNetworkConfiguration,
+    , Policy_OpenNetworkConfiguration (..)
+    , newPolicy_OpenNetworkConfiguration
 
     -- ** Policy_PlayStoreMode
-    Policy_PlayStoreMode (..),
+    , Policy_PlayStoreMode (..)
 
     -- ** Policy_PreferentialNetworkService
-    Policy_PreferentialNetworkService (..),
+    , Policy_PreferentialNetworkService (..)
 
     -- ** Policy_StayOnPluggedModesItem
-    Policy_StayOnPluggedModesItem (..),
+    , Policy_StayOnPluggedModesItem (..)
 
     -- ** PolicyEnforcementRule
-    PolicyEnforcementRule (..),
-    newPolicyEnforcementRule,
+    , PolicyEnforcementRule (..)
+    , newPolicyEnforcementRule
 
     -- ** PostureDetail
-    PostureDetail (..),
-    newPostureDetail,
+    , PostureDetail (..)
+    , newPostureDetail
 
     -- ** PostureDetail_SecurityRisk
-    PostureDetail_SecurityRisk (..),
+    , PostureDetail_SecurityRisk (..)
 
     -- ** PowerManagementEvent
-    PowerManagementEvent (..),
-    newPowerManagementEvent,
+    , PowerManagementEvent (..)
+    , newPowerManagementEvent
 
     -- ** PowerManagementEvent_EventType
-    PowerManagementEvent_EventType (..),
+    , PowerManagementEvent_EventType (..)
 
     -- ** ProxyInfo
-    ProxyInfo (..),
-    newProxyInfo,
+    , ProxyInfo (..)
+    , newProxyInfo
 
     -- ** SecurityPosture
-    SecurityPosture (..),
-    newSecurityPosture,
+    , SecurityPosture (..)
+    , newSecurityPosture
 
     -- ** SecurityPosture_DevicePosture
-    SecurityPosture_DevicePosture (..),
+    , SecurityPosture_DevicePosture (..)
 
     -- ** SetupAction
-    SetupAction (..),
-    newSetupAction,
+    , SetupAction (..)
+    , newSetupAction
 
     -- ** SigninDetail
-    SigninDetail (..),
-    newSigninDetail,
+    , SigninDetail (..)
+    , newSigninDetail
 
     -- ** SigninDetail_AllowPersonalUsage
-    SigninDetail_AllowPersonalUsage (..),
+    , SigninDetail_AllowPersonalUsage (..)
 
     -- ** SignupUrl
-    SignupUrl (..),
-    newSignupUrl,
+    , SignupUrl (..)
+    , newSignupUrl
 
     -- ** SoftwareInfo
-    SoftwareInfo (..),
-    newSoftwareInfo,
+    , SoftwareInfo (..)
+    , newSoftwareInfo
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** StatusReportingSettings
-    StatusReportingSettings (..),
-    newStatusReportingSettings,
+    , StatusReportingSettings (..)
+    , newStatusReportingSettings
 
     -- ** SystemUpdate
-    SystemUpdate (..),
-    newSystemUpdate,
+    , SystemUpdate (..)
+    , newSystemUpdate
 
     -- ** SystemUpdate_Type
-    SystemUpdate_Type (..),
+    , SystemUpdate_Type (..)
 
     -- ** SystemUpdateInfo
-    SystemUpdateInfo (..),
-    newSystemUpdateInfo,
+    , SystemUpdateInfo (..)
+    , newSystemUpdateInfo
 
     -- ** SystemUpdateInfo_UpdateStatus
-    SystemUpdateInfo_UpdateStatus (..),
+    , SystemUpdateInfo_UpdateStatus (..)
 
     -- ** TelephonyInfo
-    TelephonyInfo (..),
-    newTelephonyInfo,
+    , TelephonyInfo (..)
+    , newTelephonyInfo
 
     -- ** TermsAndConditions
-    TermsAndConditions (..),
-    newTermsAndConditions,
+    , TermsAndConditions (..)
+    , newTermsAndConditions
 
     -- ** User
-    User (..),
-    newUser,
+    , User (..)
+    , newUser
 
     -- ** UserFacingMessage
-    UserFacingMessage (..),
-    newUserFacingMessage,
+    , UserFacingMessage (..)
+    , newUserFacingMessage
 
     -- ** UserFacingMessage_LocalizedMessages
-    UserFacingMessage_LocalizedMessages (..),
-    newUserFacingMessage_LocalizedMessages,
+    , UserFacingMessage_LocalizedMessages (..)
+    , newUserFacingMessage_LocalizedMessages
 
     -- ** WebApp
-    WebApp (..),
-    newWebApp,
+    , WebApp (..)
+    , newWebApp
 
     -- ** WebApp_DisplayMode
-    WebApp_DisplayMode (..),
+    , WebApp_DisplayMode (..)
 
     -- ** WebAppIcon
-    WebAppIcon (..),
-    newWebAppIcon,
+    , WebAppIcon (..)
+    , newWebAppIcon
 
     -- ** WebToken
-    WebToken (..),
-    newWebToken,
+    , WebToken (..)
+    , newWebToken
 
     -- ** WebToken_EnabledFeaturesItem
-    WebToken_EnabledFeaturesItem (..),
+    , WebToken_EnabledFeaturesItem (..)
 
     -- ** WebToken_PermissionsItem
-    WebToken_PermissionsItem (..),
+    , WebToken_PermissionsItem (..)
 
     -- ** WipeAction
-    WipeAction (..),
-    newWipeAction,
+    , WipeAction (..)
+    , newWipeAction
 
     -- ** EnterprisesDevicesDeleteWipeDataFlags
-    EnterprisesDevicesDeleteWipeDataFlags (..),
+    , EnterprisesDevicesDeleteWipeDataFlags (..)
 
     -- ** EnterprisesListView
-    EnterprisesListView (..),
-  )
-where
+    , EnterprisesListView (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AndroidManagement.Internal.Product
 import Gogol.AndroidManagement.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Android Management API. This contains the host and root path used as a starting point for constructing service requests.
 androidManagementService :: Core.ServiceConfig
-androidManagementService =
-  Core.defaultService
-    (Core.ServiceId "androidmanagement:v1")
-    "androidmanagement.googleapis.com"
+androidManagementService
+  = Core.defaultService
+      (Core.ServiceId "androidmanagement:v1")
+      "androidmanagement.googleapis.com"
 
 -- | Manage Android devices and apps for your customers
 androidManagementScope :: Core.Proxy '["https://www.googleapis.com/auth/androidmanagement"]
