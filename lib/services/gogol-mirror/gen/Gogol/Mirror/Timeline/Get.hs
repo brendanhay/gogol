@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,54 +30,55 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.get@.
 module Gogol.Mirror.Timeline.Get
-    (
-    -- * Resource
-      MirrorTimelineGetResource
+  ( -- * Resource
+    MirrorTimelineGetResource,
 
     -- ** Constructing a Request
-    , newMirrorTimelineGet
-    , MirrorTimelineGet
-    ) where
+    newMirrorTimelineGet,
+    MirrorTimelineGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Mirror.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @mirror.timeline.get@ method which the
 -- 'MirrorTimelineGet' request conforms to.
 type MirrorTimelineGetResource =
-     "mirror" Core.:>
-       "v1" Core.:>
-         "timeline" Core.:>
-           Core.Capture "id" Core.Text Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.Get '[Core.JSON] TimelineItem
+  "mirror"
+    Core.:> "v1"
+    Core.:> "timeline"
+    Core.:> Core.Capture "id" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] TimelineItem
 
 -- | Gets a single timeline item by ID.
 --
 -- /See:/ 'newMirrorTimelineGet' smart constructor.
 newtype MirrorTimelineGet = MirrorTimelineGet
-    {
-      -- | The ID of the timeline item.
-      id :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | The ID of the timeline item.
+    id :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MirrorTimelineGet' with the minimum fields required to make a request.
-newMirrorTimelineGet 
-    ::  Core.Text
-       -- ^  The ID of the timeline item. See 'id'.
-    -> MirrorTimelineGet
+newMirrorTimelineGet ::
+  -- |  The ID of the timeline item. See 'id'.
+  Core.Text ->
+  MirrorTimelineGet
 newMirrorTimelineGet id = MirrorTimelineGet {id = id}
 
 instance Core.GoogleRequest MirrorTimelineGet where
-        type Rs MirrorTimelineGet = TimelineItem
-        type Scopes MirrorTimelineGet =
-             '["https://www.googleapis.com/auth/glass.location",
-               "https://www.googleapis.com/auth/glass.timeline"]
-        requestClient MirrorTimelineGet{..}
-          = go id (Core.Just Core.AltJSON) mirrorService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy MirrorTimelineGetResource)
-                      Core.mempty
-
+  type Rs MirrorTimelineGet = TimelineItem
+  type
+    Scopes MirrorTimelineGet =
+      '[ "https://www.googleapis.com/auth/glass.location",
+         "https://www.googleapis.com/auth/glass.timeline"
+       ]
+  requestClient MirrorTimelineGet {..} =
+    go id (Core.Just Core.AltJSON) mirrorService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy MirrorTimelineGetResource)
+          Core.mempty
