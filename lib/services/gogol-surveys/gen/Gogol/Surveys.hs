@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,127 +30,127 @@
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference>
 module Gogol.Surveys
-    (
-    -- * Configuration
-      surveysService
+  ( -- * Configuration
+    surveysService,
 
     -- * OAuth Scopes
-    , surveysScope
-    , surveysReadOnlyScope
-    , userinfoEmailScope
+    surveysScope,
+    surveysReadOnlyScope,
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** surveys.results.get
-    , SurveysResultsGetResource
-    , newSurveysResultsGet
-    , SurveysResultsGet
+    SurveysResultsGetResource,
+    newSurveysResultsGet,
+    SurveysResultsGet,
 
     -- ** surveys.surveys.delete
-    , SurveysSurveysDeleteResource
-    , newSurveysSurveysDelete
-    , SurveysSurveysDelete
+    SurveysSurveysDeleteResource,
+    newSurveysSurveysDelete,
+    SurveysSurveysDelete,
 
     -- ** surveys.surveys.get
-    , SurveysSurveysGetResource
-    , newSurveysSurveysGet
-    , SurveysSurveysGet
+    SurveysSurveysGetResource,
+    newSurveysSurveysGet,
+    SurveysSurveysGet,
 
     -- ** surveys.surveys.insert
-    , SurveysSurveysInsertResource
-    , newSurveysSurveysInsert
-    , SurveysSurveysInsert
+    SurveysSurveysInsertResource,
+    newSurveysSurveysInsert,
+    SurveysSurveysInsert,
 
     -- ** surveys.surveys.list
-    , SurveysSurveysListResource
-    , newSurveysSurveysList
-    , SurveysSurveysList
+    SurveysSurveysListResource,
+    newSurveysSurveysList,
+    SurveysSurveysList,
 
     -- ** surveys.surveys.start
-    , SurveysSurveysStartResource
-    , newSurveysSurveysStart
-    , SurveysSurveysStart
+    SurveysSurveysStartResource,
+    newSurveysSurveysStart,
+    SurveysSurveysStart,
 
     -- ** surveys.surveys.stop
-    , SurveysSurveysStopResource
-    , newSurveysSurveysStop
-    , SurveysSurveysStop
+    SurveysSurveysStopResource,
+    newSurveysSurveysStop,
+    SurveysSurveysStop,
 
     -- ** surveys.surveys.update
-    , SurveysSurveysUpdateResource
-    , newSurveysSurveysUpdate
-    , SurveysSurveysUpdate
+    SurveysSurveysUpdateResource,
+    newSurveysSurveysUpdate,
+    SurveysSurveysUpdate,
 
     -- * Types
 
     -- ** FieldMask
-    , FieldMask (..)
-    , newFieldMask
+    FieldMask (..),
+    newFieldMask,
 
     -- ** PageInfo
-    , PageInfo (..)
-    , newPageInfo
+    PageInfo (..),
+    newPageInfo,
 
     -- ** ResultsGetRequest
-    , ResultsGetRequest (..)
-    , newResultsGetRequest
+    ResultsGetRequest (..),
+    newResultsGetRequest,
 
     -- ** ResultsMask
-    , ResultsMask (..)
-    , newResultsMask
+    ResultsMask (..),
+    newResultsMask,
 
     -- ** Survey
-    , Survey (..)
-    , newSurvey
+    Survey (..),
+    newSurvey,
 
     -- ** SurveyAudience
-    , SurveyAudience (..)
-    , newSurveyAudience
+    SurveyAudience (..),
+    newSurveyAudience,
 
     -- ** SurveyCost
-    , SurveyCost (..)
-    , newSurveyCost
+    SurveyCost (..),
+    newSurveyCost,
 
     -- ** SurveyQuestion
-    , SurveyQuestion (..)
-    , newSurveyQuestion
+    SurveyQuestion (..),
+    newSurveyQuestion,
 
     -- ** SurveyQuestionImage
-    , SurveyQuestionImage (..)
-    , newSurveyQuestionImage
+    SurveyQuestionImage (..),
+    newSurveyQuestionImage,
 
     -- ** SurveyRejection
-    , SurveyRejection (..)
-    , newSurveyRejection
+    SurveyRejection (..),
+    newSurveyRejection,
 
     -- ** SurveyResults
-    , SurveyResults (..)
-    , newSurveyResults
+    SurveyResults (..),
+    newSurveyResults,
 
     -- ** SurveysDeleteResponse
-    , SurveysDeleteResponse (..)
-    , newSurveysDeleteResponse
+    SurveysDeleteResponse (..),
+    newSurveysDeleteResponse,
 
     -- ** SurveysListResponse
-    , SurveysListResponse (..)
-    , newSurveysListResponse
+    SurveysListResponse (..),
+    newSurveysListResponse,
 
     -- ** SurveysStartRequest
-    , SurveysStartRequest (..)
-    , newSurveysStartRequest
+    SurveysStartRequest (..),
+    newSurveysStartRequest,
 
     -- ** SurveysStartResponse
-    , SurveysStartResponse (..)
-    , newSurveysStartResponse
+    SurveysStartResponse (..),
+    newSurveysStartResponse,
 
     -- ** SurveysStopResponse
-    , SurveysStopResponse (..)
-    , newSurveysStopResponse
+    SurveysStopResponse (..),
+    newSurveysStopResponse,
 
     -- ** TokenPagination
-    , TokenPagination (..)
-    , newTokenPagination
-    ) where
+    TokenPagination (..),
+    newTokenPagination,
+  )
+where
 
 import Gogol.Surveys.Delete
 import Gogol.Surveys.Get

@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,14 +30,14 @@
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.insert@.
 module Gogol.Surveys.Insert
-    (
-    -- * Resource
-      SurveysSurveysInsertResource
+  ( -- * Resource
+    SurveysSurveysInsertResource,
 
     -- ** Constructing a Request
-    , newSurveysSurveysInsert
-    , SurveysSurveysInsert
-    ) where
+    newSurveysSurveysInsert,
+    SurveysSurveysInsert,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Surveys.Types
@@ -51,41 +45,42 @@ import Gogol.Surveys.Types
 -- | A resource alias for @surveys.surveys.insert@ method which the
 -- 'SurveysSurveysInsert' request conforms to.
 type SurveysSurveysInsertResource =
-     "surveys" Core.:>
-       "v2" Core.:>
-         "surveys" Core.:>
-           Core.QueryParam "alt" Core.AltJSON Core.:>
-             Core.ReqBody '[Core.JSON] Survey Core.:>
-               Core.Post '[Core.JSON] Survey
+  "surveys"
+    Core.:> "v2"
+    Core.:> "surveys"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Survey
+    Core.:> Core.Post '[Core.JSON] Survey
 
 -- | Creates a survey.
 --
 -- /See:/ 'newSurveysSurveysInsert' smart constructor.
 newtype SurveysSurveysInsert = SurveysSurveysInsert
-    {
-      -- | Multipart request metadata.
-      payload :: Survey
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: Survey
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SurveysSurveysInsert' with the minimum fields required to make a request.
-newSurveysSurveysInsert 
-    ::  Survey
-       -- ^  Multipart request metadata. See 'payload'.
-    -> SurveysSurveysInsert
+newSurveysSurveysInsert ::
+  -- |  Multipart request metadata. See 'payload'.
+  Survey ->
+  SurveysSurveysInsert
 newSurveysSurveysInsert payload = SurveysSurveysInsert {payload = payload}
 
-instance Core.GoogleRequest SurveysSurveysInsert
-         where
-        type Rs SurveysSurveysInsert = Survey
-        type Scopes SurveysSurveysInsert =
-             '["https://www.googleapis.com/auth/surveys",
-               "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient SurveysSurveysInsert{..}
-          = go (Core.Just Core.AltJSON) payload surveysService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy SurveysSurveysInsertResource)
-                      Core.mempty
-
+instance Core.GoogleRequest SurveysSurveysInsert where
+  type Rs SurveysSurveysInsert = Survey
+  type
+    Scopes SurveysSurveysInsert =
+      '[ "https://www.googleapis.com/auth/surveys",
+         "https://www.googleapis.com/auth/userinfo.email"
+       ]
+  requestClient SurveysSurveysInsert {..} =
+    go (Core.Just Core.AltJSON) payload surveysService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SurveysSurveysInsertResource
+          )
+          Core.mempty
