@@ -56,18 +56,17 @@ renderSchema s = go (_schema s)
     object i (Obj aps ps) = do
       a <- traverse getSolved (aps :: Maybe Global)
       b <- traverse getSolved (ps :: Map Local Global)
+
       let ab = setAdditional <$> a
-          ts = maybe b (flip (Map.insert "addtional") b) ab
-      prod ts
-      where
-        prod ts =
-          Prod (dname k) (i ^. iDescription)
+          ts = maybe b (flip (Map.insert "additional") b) ab
+
+      Prod (dname k) (i ^. iDescription)
             <$> pp None (objDecl k ts)
             <*> pure (objFields ts)
             <*> pp None (objDerive ds)
             <*> traverse (pp Print) (jsonDecls k ts)
             <*> ctor ts
-
+      where
         ctor ts =
           Fun' (cname k) (Just help)
             <$> (pp None (ctorSig k ts) <&> comments ts)
