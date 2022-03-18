@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Redis.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * FailoverInstanceRequest_DataProtectionMode
     FailoverInstanceRequest_DataProtectionMode
-      ( FailoverInstanceRequest_DataProtectionMode_DATAPROTECTIONMODEUNSPECIFIED,
+      (
+        FailoverInstanceRequest_DataProtectionMode_DATAPROTECTIONMODEUNSPECIFIED,
         FailoverInstanceRequest_DataProtectionMode_LIMITEDDATALOSS,
         FailoverInstanceRequest_DataProtectionMode_FORCEDATALOSS,
         ..
@@ -43,7 +54,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * Instance_ConnectMode
     Instance_ConnectMode
-      ( Instance_ConnectMode_CONNECTMODEUNSPECIFIED,
+      (
+        Instance_ConnectMode_CONNECTMODEUNSPECIFIED,
         Instance_ConnectMode_DIRECTPEERING,
         Instance_ConnectMode_PRIVATESERVICEACCESS,
         ..
@@ -51,7 +63,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * Instance_ReadReplicasMode
     Instance_ReadReplicasMode
-      ( Instance_ReadReplicasMode_READREPLICASMODEUNSPECIFIED,
+      (
+        Instance_ReadReplicasMode_READREPLICASMODEUNSPECIFIED,
         Instance_ReadReplicasMode_READREPLICASDISABLED,
         Instance_ReadReplicasMode_READREPLICASENABLED,
         ..
@@ -59,7 +72,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * Instance_State
     Instance_State
-      ( Instance_State_STATEUNSPECIFIED,
+      (
+        Instance_State_STATEUNSPECIFIED,
         Instance_State_Creating,
         Instance_State_Ready,
         Instance_State_Updating,
@@ -73,7 +87,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * Instance_Tier
     Instance_Tier
-      ( Instance_Tier_TIERUNSPECIFIED,
+      (
+        Instance_Tier_TIERUNSPECIFIED,
         Instance_Tier_Basic,
         Instance_Tier_STANDARDHA,
         ..
@@ -81,7 +96,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * Instance_TransitEncryptionMode
     Instance_TransitEncryptionMode
-      ( Instance_TransitEncryptionMode_TRANSITENCRYPTIONMODEUNSPECIFIED,
+      (
+        Instance_TransitEncryptionMode_TRANSITENCRYPTIONMODEUNSPECIFIED,
         Instance_TransitEncryptionMode_SERVERAUTHENTICATION,
         Instance_TransitEncryptionMode_Disabled,
         ..
@@ -89,7 +105,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * PersistenceConfig_PersistenceMode
     PersistenceConfig_PersistenceMode
-      ( PersistenceConfig_PersistenceMode_PERSISTENCEMODEUNSPECIFIED,
+      (
+        PersistenceConfig_PersistenceMode_PERSISTENCEMODEUNSPECIFIED,
         PersistenceConfig_PersistenceMode_Disabled,
         PersistenceConfig_PersistenceMode_Rdb,
         ..
@@ -97,7 +114,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * PersistenceConfig_RdbSnapshotPeriod
     PersistenceConfig_RdbSnapshotPeriod
-      ( PersistenceConfig_RdbSnapshotPeriod_SNAPSHOTPERIODUNSPECIFIED,
+      (
+        PersistenceConfig_RdbSnapshotPeriod_SNAPSHOTPERIODUNSPECIFIED,
         PersistenceConfig_RdbSnapshotPeriod_ONEHOUR,
         PersistenceConfig_RdbSnapshotPeriod_SIXHOURS,
         PersistenceConfig_RdbSnapshotPeriod_TWELVEHOURS,
@@ -107,7 +125,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * RescheduleMaintenanceRequest_RescheduleType
     RescheduleMaintenanceRequest_RescheduleType
-      ( RescheduleMaintenanceRequest_RescheduleType_RESCHEDULETYPEUNSPECIFIED,
+      (
+        RescheduleMaintenanceRequest_RescheduleType_RESCHEDULETYPEUNSPECIFIED,
         RescheduleMaintenanceRequest_RescheduleType_Immediate,
         RescheduleMaintenanceRequest_RescheduleType_NEXTAVAILABLEWINDOW,
         RescheduleMaintenanceRequest_RescheduleType_SPECIFICTIME,
@@ -116,7 +135,8 @@ module Gogol.Redis.Internal.Sum
 
     -- * WeeklyMaintenanceWindow_Day
     WeeklyMaintenanceWindow_Day
-      ( WeeklyMaintenanceWindow_Day_DAYOFWEEKUNSPECIFIED,
+      (
+        WeeklyMaintenanceWindow_Day_DAYOFWEEKUNSPECIFIED,
         WeeklyMaintenanceWindow_Day_Monday,
         WeeklyMaintenanceWindow_Day_Tuesday,
         WeeklyMaintenanceWindow_Day_Wednesday,
@@ -126,23 +146,22 @@ module Gogol.Redis.Internal.Sum
         WeeklyMaintenanceWindow_Day_Sunday,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -155,21 +174,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Optional. Available data protection modes that the user can choose. If it\'s unspecified, data protection mode will be LIMITED/DATA/LOSS by default.
-newtype FailoverInstanceRequest_DataProtectionMode = FailoverInstanceRequest_DataProtectionMode {fromFailoverInstanceRequest_DataProtectionMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FailoverInstanceRequest_DataProtectionMode = FailoverInstanceRequest_DataProtectionMode { fromFailoverInstanceRequest_DataProtectionMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Defaults to LIMITED/DATA/LOSS if a data protection mode is not specified.
 pattern FailoverInstanceRequest_DataProtectionMode_DATAPROTECTIONMODEUNSPECIFIED :: FailoverInstanceRequest_DataProtectionMode
@@ -187,21 +205,20 @@ pattern FailoverInstanceRequest_DataProtectionMode_FORCEDATALOSS = FailoverInsta
   FailoverInstanceRequest_DataProtectionMode_DATAPROTECTIONMODEUNSPECIFIED,
   FailoverInstanceRequest_DataProtectionMode_LIMITEDDATALOSS,
   FailoverInstanceRequest_DataProtectionMode_FORCEDATALOSS,
-  FailoverInstanceRequest_DataProtectionMode
-  #-}
+  FailoverInstanceRequest_DataProtectionMode #-}
 
 -- | Optional. The network connect mode of the Redis instance. If not provided, the connect mode defaults to DIRECT_PEERING.
-newtype Instance_ConnectMode = Instance_ConnectMode {fromInstance_ConnectMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Instance_ConnectMode = Instance_ConnectMode { fromInstance_ConnectMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern Instance_ConnectMode_CONNECTMODEUNSPECIFIED :: Instance_ConnectMode
@@ -219,21 +236,20 @@ pattern Instance_ConnectMode_PRIVATESERVICEACCESS = Instance_ConnectMode "PRIVAT
   Instance_ConnectMode_CONNECTMODEUNSPECIFIED,
   Instance_ConnectMode_DIRECTPEERING,
   Instance_ConnectMode_PRIVATESERVICEACCESS,
-  Instance_ConnectMode
-  #-}
+  Instance_ConnectMode #-}
 
 -- | Optional. Read replicas mode for the instance. Defaults to READ/REPLICAS/DISABLED.
-newtype Instance_ReadReplicasMode = Instance_ReadReplicasMode {fromInstance_ReadReplicasMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Instance_ReadReplicasMode = Instance_ReadReplicasMode { fromInstance_ReadReplicasMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | If not set, Memorystore Redis backend will default to READ/REPLICAS/DISABLED.
 pattern Instance_ReadReplicasMode_READREPLICASMODEUNSPECIFIED :: Instance_ReadReplicasMode
@@ -251,21 +267,20 @@ pattern Instance_ReadReplicasMode_READREPLICASENABLED = Instance_ReadReplicasMod
   Instance_ReadReplicasMode_READREPLICASMODEUNSPECIFIED,
   Instance_ReadReplicasMode_READREPLICASDISABLED,
   Instance_ReadReplicasMode_READREPLICASENABLED,
-  Instance_ReadReplicasMode
-  #-}
+  Instance_ReadReplicasMode #-}
 
 -- | Output only. The current state of this instance.
-newtype Instance_State = Instance_State {fromInstance_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Instance_State = Instance_State { fromInstance_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern Instance_State_STATEUNSPECIFIED :: Instance_State
@@ -313,21 +328,20 @@ pattern Instance_State_FAILINGOVER = Instance_State "FAILING_OVER"
   Instance_State_Maintenance,
   Instance_State_Importing,
   Instance_State_FAILINGOVER,
-  Instance_State
-  #-}
+  Instance_State #-}
 
 -- | Required. The service tier of the instance.
-newtype Instance_Tier = Instance_Tier {fromInstance_Tier :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Instance_Tier = Instance_Tier { fromInstance_Tier :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern Instance_Tier_TIERUNSPECIFIED :: Instance_Tier
@@ -345,21 +359,20 @@ pattern Instance_Tier_STANDARDHA = Instance_Tier "STANDARD_HA"
   Instance_Tier_TIERUNSPECIFIED,
   Instance_Tier_Basic,
   Instance_Tier_STANDARDHA,
-  Instance_Tier
-  #-}
+  Instance_Tier #-}
 
 -- | Optional. The TLS mode of the Redis instance. If not provided, TLS is disabled for the instance.
-newtype Instance_TransitEncryptionMode = Instance_TransitEncryptionMode {fromInstance_TransitEncryptionMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Instance_TransitEncryptionMode = Instance_TransitEncryptionMode { fromInstance_TransitEncryptionMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern Instance_TransitEncryptionMode_TRANSITENCRYPTIONMODEUNSPECIFIED :: Instance_TransitEncryptionMode
@@ -377,21 +390,20 @@ pattern Instance_TransitEncryptionMode_Disabled = Instance_TransitEncryptionMode
   Instance_TransitEncryptionMode_TRANSITENCRYPTIONMODEUNSPECIFIED,
   Instance_TransitEncryptionMode_SERVERAUTHENTICATION,
   Instance_TransitEncryptionMode_Disabled,
-  Instance_TransitEncryptionMode
-  #-}
+  Instance_TransitEncryptionMode #-}
 
 -- | Optional. Controls whether Persistence features are enabled. If not provided, the existing value will be used.
-newtype PersistenceConfig_PersistenceMode = PersistenceConfig_PersistenceMode {fromPersistenceConfig_PersistenceMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PersistenceConfig_PersistenceMode = PersistenceConfig_PersistenceMode { fromPersistenceConfig_PersistenceMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern PersistenceConfig_PersistenceMode_PERSISTENCEMODEUNSPECIFIED :: PersistenceConfig_PersistenceMode
@@ -409,21 +421,20 @@ pattern PersistenceConfig_PersistenceMode_Rdb = PersistenceConfig_PersistenceMod
   PersistenceConfig_PersistenceMode_PERSISTENCEMODEUNSPECIFIED,
   PersistenceConfig_PersistenceMode_Disabled,
   PersistenceConfig_PersistenceMode_Rdb,
-  PersistenceConfig_PersistenceMode
-  #-}
+  PersistenceConfig_PersistenceMode #-}
 
 -- | Optional. Period between RDB snapshots. Snapshots will be attempted every period starting from the provided snapshot start time. For example, a start time of 01\/01\/2033 06:45 and SIX/HOURS snapshot period will do nothing until 01\/01\/2033, and then trigger snapshots every day at 06:45, 12:45, 18:45, and 00:45 the next day, and so on. If not provided, TWENTY/FOUR_HOURS will be used as default.
-newtype PersistenceConfig_RdbSnapshotPeriod = PersistenceConfig_RdbSnapshotPeriod {fromPersistenceConfig_RdbSnapshotPeriod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PersistenceConfig_RdbSnapshotPeriod = PersistenceConfig_RdbSnapshotPeriod { fromPersistenceConfig_RdbSnapshotPeriod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern PersistenceConfig_RdbSnapshotPeriod_SNAPSHOTPERIODUNSPECIFIED :: PersistenceConfig_RdbSnapshotPeriod
@@ -451,21 +462,20 @@ pattern PersistenceConfig_RdbSnapshotPeriod_TWENTYFOURHOURS = PersistenceConfig_
   PersistenceConfig_RdbSnapshotPeriod_SIXHOURS,
   PersistenceConfig_RdbSnapshotPeriod_TWELVEHOURS,
   PersistenceConfig_RdbSnapshotPeriod_TWENTYFOURHOURS,
-  PersistenceConfig_RdbSnapshotPeriod
-  #-}
+  PersistenceConfig_RdbSnapshotPeriod #-}
 
 -- | Required. If reschedule type is SPECIFIC/TIME, must set up schedule/time as well.
-newtype RescheduleMaintenanceRequest_RescheduleType = RescheduleMaintenanceRequest_RescheduleType {fromRescheduleMaintenanceRequest_RescheduleType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RescheduleMaintenanceRequest_RescheduleType = RescheduleMaintenanceRequest_RescheduleType { fromRescheduleMaintenanceRequest_RescheduleType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern RescheduleMaintenanceRequest_RescheduleType_RESCHEDULETYPEUNSPECIFIED :: RescheduleMaintenanceRequest_RescheduleType
@@ -488,21 +498,20 @@ pattern RescheduleMaintenanceRequest_RescheduleType_SPECIFICTIME = RescheduleMai
   RescheduleMaintenanceRequest_RescheduleType_Immediate,
   RescheduleMaintenanceRequest_RescheduleType_NEXTAVAILABLEWINDOW,
   RescheduleMaintenanceRequest_RescheduleType_SPECIFICTIME,
-  RescheduleMaintenanceRequest_RescheduleType
-  #-}
+  RescheduleMaintenanceRequest_RescheduleType #-}
 
 -- | Required. The day of week that maintenance updates occur.
-newtype WeeklyMaintenanceWindow_Day = WeeklyMaintenanceWindow_Day {fromWeeklyMaintenanceWindow_Day :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WeeklyMaintenanceWindow_Day = WeeklyMaintenanceWindow_Day { fromWeeklyMaintenanceWindow_Day :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The day of the week is unspecified.
 pattern WeeklyMaintenanceWindow_Day_DAYOFWEEKUNSPECIFIED :: WeeklyMaintenanceWindow_Day
@@ -545,5 +554,4 @@ pattern WeeklyMaintenanceWindow_Day_Sunday = WeeklyMaintenanceWindow_Day "SUNDAY
   WeeklyMaintenanceWindow_Day_Friday,
   WeeklyMaintenanceWindow_Day_Saturday,
   WeeklyMaintenanceWindow_Day_Sunday,
-  WeeklyMaintenanceWindow_Day
-  #-}
+  WeeklyMaintenanceWindow_Day #-}
