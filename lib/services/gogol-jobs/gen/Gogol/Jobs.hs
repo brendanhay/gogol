@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,469 +30,469 @@
 --
 -- /See:/ <https://cloud.google.com/talent-solution/job-search/docs/ Cloud Talent Solution API Reference>
 module Gogol.Jobs
-    (
-    -- * Configuration
-      jobsService
+  ( -- * Configuration
+    jobsService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , jobsScope
+    cloudPlatformScope,
+    jobsScope,
 
     -- * Resources
 
     -- ** jobs.projects.operations.get
-    , JobsProjectsOperationsGetResource
-    , newJobsProjectsOperationsGet
-    , JobsProjectsOperationsGet
+    JobsProjectsOperationsGetResource,
+    newJobsProjectsOperationsGet,
+    JobsProjectsOperationsGet,
 
     -- ** jobs.projects.tenants.clientEvents.create
-    , JobsProjectsTenantsClientEventsCreateResource
-    , newJobsProjectsTenantsClientEventsCreate
-    , JobsProjectsTenantsClientEventsCreate
+    JobsProjectsTenantsClientEventsCreateResource,
+    newJobsProjectsTenantsClientEventsCreate,
+    JobsProjectsTenantsClientEventsCreate,
 
     -- ** jobs.projects.tenants.companies.create
-    , JobsProjectsTenantsCompaniesCreateResource
-    , newJobsProjectsTenantsCompaniesCreate
-    , JobsProjectsTenantsCompaniesCreate
+    JobsProjectsTenantsCompaniesCreateResource,
+    newJobsProjectsTenantsCompaniesCreate,
+    JobsProjectsTenantsCompaniesCreate,
 
     -- ** jobs.projects.tenants.companies.delete
-    , JobsProjectsTenantsCompaniesDeleteResource
-    , newJobsProjectsTenantsCompaniesDelete
-    , JobsProjectsTenantsCompaniesDelete
+    JobsProjectsTenantsCompaniesDeleteResource,
+    newJobsProjectsTenantsCompaniesDelete,
+    JobsProjectsTenantsCompaniesDelete,
 
     -- ** jobs.projects.tenants.companies.get
-    , JobsProjectsTenantsCompaniesGetResource
-    , newJobsProjectsTenantsCompaniesGet
-    , JobsProjectsTenantsCompaniesGet
+    JobsProjectsTenantsCompaniesGetResource,
+    newJobsProjectsTenantsCompaniesGet,
+    JobsProjectsTenantsCompaniesGet,
 
     -- ** jobs.projects.tenants.companies.list
-    , JobsProjectsTenantsCompaniesListResource
-    , newJobsProjectsTenantsCompaniesList
-    , JobsProjectsTenantsCompaniesList
+    JobsProjectsTenantsCompaniesListResource,
+    newJobsProjectsTenantsCompaniesList,
+    JobsProjectsTenantsCompaniesList,
 
     -- ** jobs.projects.tenants.companies.patch
-    , JobsProjectsTenantsCompaniesPatchResource
-    , newJobsProjectsTenantsCompaniesPatch
-    , JobsProjectsTenantsCompaniesPatch
+    JobsProjectsTenantsCompaniesPatchResource,
+    newJobsProjectsTenantsCompaniesPatch,
+    JobsProjectsTenantsCompaniesPatch,
 
     -- ** jobs.projects.tenants.completeQuery
-    , JobsProjectsTenantsCompleteQueryResource
-    , newJobsProjectsTenantsCompleteQuery
-    , JobsProjectsTenantsCompleteQuery
+    JobsProjectsTenantsCompleteQueryResource,
+    newJobsProjectsTenantsCompleteQuery,
+    JobsProjectsTenantsCompleteQuery,
 
     -- ** jobs.projects.tenants.create
-    , JobsProjectsTenantsCreateResource
-    , newJobsProjectsTenantsCreate
-    , JobsProjectsTenantsCreate
+    JobsProjectsTenantsCreateResource,
+    newJobsProjectsTenantsCreate,
+    JobsProjectsTenantsCreate,
 
     -- ** jobs.projects.tenants.delete
-    , JobsProjectsTenantsDeleteResource
-    , newJobsProjectsTenantsDelete
-    , JobsProjectsTenantsDelete
+    JobsProjectsTenantsDeleteResource,
+    newJobsProjectsTenantsDelete,
+    JobsProjectsTenantsDelete,
 
     -- ** jobs.projects.tenants.get
-    , JobsProjectsTenantsGetResource
-    , newJobsProjectsTenantsGet
-    , JobsProjectsTenantsGet
+    JobsProjectsTenantsGetResource,
+    newJobsProjectsTenantsGet,
+    JobsProjectsTenantsGet,
 
     -- ** jobs.projects.tenants.jobs.batchCreate
-    , JobsProjectsTenantsJobsBatchCreateResource
-    , newJobsProjectsTenantsJobsBatchCreate
-    , JobsProjectsTenantsJobsBatchCreate
+    JobsProjectsTenantsJobsBatchCreateResource,
+    newJobsProjectsTenantsJobsBatchCreate,
+    JobsProjectsTenantsJobsBatchCreate,
 
     -- ** jobs.projects.tenants.jobs.batchDelete
-    , JobsProjectsTenantsJobsBatchDeleteResource
-    , newJobsProjectsTenantsJobsBatchDelete
-    , JobsProjectsTenantsJobsBatchDelete
+    JobsProjectsTenantsJobsBatchDeleteResource,
+    newJobsProjectsTenantsJobsBatchDelete,
+    JobsProjectsTenantsJobsBatchDelete,
 
     -- ** jobs.projects.tenants.jobs.batchUpdate
-    , JobsProjectsTenantsJobsBatchUpdateResource
-    , newJobsProjectsTenantsJobsBatchUpdate
-    , JobsProjectsTenantsJobsBatchUpdate
+    JobsProjectsTenantsJobsBatchUpdateResource,
+    newJobsProjectsTenantsJobsBatchUpdate,
+    JobsProjectsTenantsJobsBatchUpdate,
 
     -- ** jobs.projects.tenants.jobs.create
-    , JobsProjectsTenantsJobsCreateResource
-    , newJobsProjectsTenantsJobsCreate
-    , JobsProjectsTenantsJobsCreate
+    JobsProjectsTenantsJobsCreateResource,
+    newJobsProjectsTenantsJobsCreate,
+    JobsProjectsTenantsJobsCreate,
 
     -- ** jobs.projects.tenants.jobs.delete
-    , JobsProjectsTenantsJobsDeleteResource
-    , newJobsProjectsTenantsJobsDelete
-    , JobsProjectsTenantsJobsDelete
+    JobsProjectsTenantsJobsDeleteResource,
+    newJobsProjectsTenantsJobsDelete,
+    JobsProjectsTenantsJobsDelete,
 
     -- ** jobs.projects.tenants.jobs.get
-    , JobsProjectsTenantsJobsGetResource
-    , newJobsProjectsTenantsJobsGet
-    , JobsProjectsTenantsJobsGet
+    JobsProjectsTenantsJobsGetResource,
+    newJobsProjectsTenantsJobsGet,
+    JobsProjectsTenantsJobsGet,
 
     -- ** jobs.projects.tenants.jobs.list
-    , JobsProjectsTenantsJobsListResource
-    , newJobsProjectsTenantsJobsList
-    , JobsProjectsTenantsJobsList
+    JobsProjectsTenantsJobsListResource,
+    newJobsProjectsTenantsJobsList,
+    JobsProjectsTenantsJobsList,
 
     -- ** jobs.projects.tenants.jobs.patch
-    , JobsProjectsTenantsJobsPatchResource
-    , newJobsProjectsTenantsJobsPatch
-    , JobsProjectsTenantsJobsPatch
+    JobsProjectsTenantsJobsPatchResource,
+    newJobsProjectsTenantsJobsPatch,
+    JobsProjectsTenantsJobsPatch,
 
     -- ** jobs.projects.tenants.jobs.search
-    , JobsProjectsTenantsJobsSearchResource
-    , newJobsProjectsTenantsJobsSearch
-    , JobsProjectsTenantsJobsSearch
+    JobsProjectsTenantsJobsSearchResource,
+    newJobsProjectsTenantsJobsSearch,
+    JobsProjectsTenantsJobsSearch,
 
     -- ** jobs.projects.tenants.jobs.searchForAlert
-    , JobsProjectsTenantsJobsSearchForAlertResource
-    , newJobsProjectsTenantsJobsSearchForAlert
-    , JobsProjectsTenantsJobsSearchForAlert
+    JobsProjectsTenantsJobsSearchForAlertResource,
+    newJobsProjectsTenantsJobsSearchForAlert,
+    JobsProjectsTenantsJobsSearchForAlert,
 
     -- ** jobs.projects.tenants.list
-    , JobsProjectsTenantsListResource
-    , newJobsProjectsTenantsList
-    , JobsProjectsTenantsList
+    JobsProjectsTenantsListResource,
+    newJobsProjectsTenantsList,
+    JobsProjectsTenantsList,
 
     -- ** jobs.projects.tenants.patch
-    , JobsProjectsTenantsPatchResource
-    , newJobsProjectsTenantsPatch
-    , JobsProjectsTenantsPatch
+    JobsProjectsTenantsPatchResource,
+    newJobsProjectsTenantsPatch,
+    JobsProjectsTenantsPatch,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** ApplicationInfo
-    , ApplicationInfo (..)
-    , newApplicationInfo
+    ApplicationInfo (..),
+    newApplicationInfo,
 
     -- ** BatchCreateJobsRequest
-    , BatchCreateJobsRequest (..)
-    , newBatchCreateJobsRequest
+    BatchCreateJobsRequest (..),
+    newBatchCreateJobsRequest,
 
     -- ** BatchCreateJobsResponse
-    , BatchCreateJobsResponse (..)
-    , newBatchCreateJobsResponse
+    BatchCreateJobsResponse (..),
+    newBatchCreateJobsResponse,
 
     -- ** BatchDeleteJobsRequest
-    , BatchDeleteJobsRequest (..)
-    , newBatchDeleteJobsRequest
+    BatchDeleteJobsRequest (..),
+    newBatchDeleteJobsRequest,
 
     -- ** BatchDeleteJobsResponse
-    , BatchDeleteJobsResponse (..)
-    , newBatchDeleteJobsResponse
+    BatchDeleteJobsResponse (..),
+    newBatchDeleteJobsResponse,
 
     -- ** BatchOperationMetadata
-    , BatchOperationMetadata (..)
-    , newBatchOperationMetadata
+    BatchOperationMetadata (..),
+    newBatchOperationMetadata,
 
     -- ** BatchOperationMetadata_State
-    , BatchOperationMetadata_State (..)
+    BatchOperationMetadata_State (..),
 
     -- ** BatchUpdateJobsRequest
-    , BatchUpdateJobsRequest (..)
-    , newBatchUpdateJobsRequest
+    BatchUpdateJobsRequest (..),
+    newBatchUpdateJobsRequest,
 
     -- ** BatchUpdateJobsResponse
-    , BatchUpdateJobsResponse (..)
-    , newBatchUpdateJobsResponse
+    BatchUpdateJobsResponse (..),
+    newBatchUpdateJobsResponse,
 
     -- ** ClientEvent
-    , ClientEvent (..)
-    , newClientEvent
+    ClientEvent (..),
+    newClientEvent,
 
     -- ** CommuteFilter
-    , CommuteFilter (..)
-    , newCommuteFilter
+    CommuteFilter (..),
+    newCommuteFilter,
 
     -- ** CommuteFilter_CommuteMethod
-    , CommuteFilter_CommuteMethod (..)
+    CommuteFilter_CommuteMethod (..),
 
     -- ** CommuteFilter_RoadTraffic
-    , CommuteFilter_RoadTraffic (..)
+    CommuteFilter_RoadTraffic (..),
 
     -- ** CommuteInfo
-    , CommuteInfo (..)
-    , newCommuteInfo
+    CommuteInfo (..),
+    newCommuteInfo,
 
     -- ** Company
-    , Company (..)
-    , newCompany
+    Company (..),
+    newCompany,
 
     -- ** Company_Size
-    , Company_Size (..)
+    Company_Size (..),
 
     -- ** CompanyDerivedInfo
-    , CompanyDerivedInfo (..)
-    , newCompanyDerivedInfo
+    CompanyDerivedInfo (..),
+    newCompanyDerivedInfo,
 
     -- ** CompensationEntry
-    , CompensationEntry (..)
-    , newCompensationEntry
+    CompensationEntry (..),
+    newCompensationEntry,
 
     -- ** CompensationEntry_Type
-    , CompensationEntry_Type (..)
+    CompensationEntry_Type (..),
 
     -- ** CompensationEntry_Unit
-    , CompensationEntry_Unit (..)
+    CompensationEntry_Unit (..),
 
     -- ** CompensationFilter
-    , CompensationFilter (..)
-    , newCompensationFilter
+    CompensationFilter (..),
+    newCompensationFilter,
 
     -- ** CompensationFilter_Type
-    , CompensationFilter_Type (..)
+    CompensationFilter_Type (..),
 
     -- ** CompensationFilter_UnitsItem
-    , CompensationFilter_UnitsItem (..)
+    CompensationFilter_UnitsItem (..),
 
     -- ** CompensationInfo
-    , CompensationInfo (..)
-    , newCompensationInfo
+    CompensationInfo (..),
+    newCompensationInfo,
 
     -- ** CompensationRange
-    , CompensationRange (..)
-    , newCompensationRange
+    CompensationRange (..),
+    newCompensationRange,
 
     -- ** CompleteQueryResponse
-    , CompleteQueryResponse (..)
-    , newCompleteQueryResponse
+    CompleteQueryResponse (..),
+    newCompleteQueryResponse,
 
     -- ** CompletionResult
-    , CompletionResult (..)
-    , newCompletionResult
+    CompletionResult (..),
+    newCompletionResult,
 
     -- ** CompletionResult_Type
-    , CompletionResult_Type (..)
+    CompletionResult_Type (..),
 
     -- ** CustomAttribute
-    , CustomAttribute (..)
-    , newCustomAttribute
+    CustomAttribute (..),
+    newCustomAttribute,
 
     -- ** CustomRankingInfo
-    , CustomRankingInfo (..)
-    , newCustomRankingInfo
+    CustomRankingInfo (..),
+    newCustomRankingInfo,
 
     -- ** CustomRankingInfo_ImportanceLevel
-    , CustomRankingInfo_ImportanceLevel (..)
+    CustomRankingInfo_ImportanceLevel (..),
 
     -- ** DeviceInfo
-    , DeviceInfo (..)
-    , newDeviceInfo
+    DeviceInfo (..),
+    newDeviceInfo,
 
     -- ** DeviceInfo_DeviceType
-    , DeviceInfo_DeviceType (..)
+    DeviceInfo_DeviceType (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** HistogramQuery
-    , HistogramQuery (..)
-    , newHistogramQuery
+    HistogramQuery (..),
+    newHistogramQuery,
 
     -- ** HistogramQueryResult
-    , HistogramQueryResult (..)
-    , newHistogramQueryResult
+    HistogramQueryResult (..),
+    newHistogramQueryResult,
 
     -- ** HistogramQueryResult_Histogram
-    , HistogramQueryResult_Histogram (..)
-    , newHistogramQueryResult_Histogram
+    HistogramQueryResult_Histogram (..),
+    newHistogramQueryResult_Histogram,
 
     -- ** Job
-    , Job (..)
-    , newJob
+    Job (..),
+    newJob,
 
     -- ** Job_CustomAttributes
-    , Job_CustomAttributes (..)
-    , newJob_CustomAttributes
+    Job_CustomAttributes (..),
+    newJob_CustomAttributes,
 
     -- ** Job_DegreeTypesItem
-    , Job_DegreeTypesItem (..)
+    Job_DegreeTypesItem (..),
 
     -- ** Job_EmploymentTypesItem
-    , Job_EmploymentTypesItem (..)
+    Job_EmploymentTypesItem (..),
 
     -- ** Job_JobBenefitsItem
-    , Job_JobBenefitsItem (..)
+    Job_JobBenefitsItem (..),
 
     -- ** Job_JobLevel
-    , Job_JobLevel (..)
+    Job_JobLevel (..),
 
     -- ** Job_PostingRegion
-    , Job_PostingRegion (..)
+    Job_PostingRegion (..),
 
     -- ** Job_Visibility
-    , Job_Visibility (..)
+    Job_Visibility (..),
 
     -- ** JobDerivedInfo
-    , JobDerivedInfo (..)
-    , newJobDerivedInfo
+    JobDerivedInfo (..),
+    newJobDerivedInfo,
 
     -- ** JobDerivedInfo_JobCategoriesItem
-    , JobDerivedInfo_JobCategoriesItem (..)
+    JobDerivedInfo_JobCategoriesItem (..),
 
     -- ** JobEvent
-    , JobEvent (..)
-    , newJobEvent
+    JobEvent (..),
+    newJobEvent,
 
     -- ** JobEvent_Type
-    , JobEvent_Type (..)
+    JobEvent_Type (..),
 
     -- ** JobQuery
-    , JobQuery (..)
-    , newJobQuery
+    JobQuery (..),
+    newJobQuery,
 
     -- ** JobQuery_EmploymentTypesItem
-    , JobQuery_EmploymentTypesItem (..)
+    JobQuery_EmploymentTypesItem (..),
 
     -- ** JobQuery_JobCategoriesItem
-    , JobQuery_JobCategoriesItem (..)
+    JobQuery_JobCategoriesItem (..),
 
     -- ** JobResult
-    , JobResult (..)
-    , newJobResult
+    JobResult (..),
+    newJobResult,
 
     -- ** LatLng
-    , LatLng (..)
-    , newLatLng
+    LatLng (..),
+    newLatLng,
 
     -- ** ListCompaniesResponse
-    , ListCompaniesResponse (..)
-    , newListCompaniesResponse
+    ListCompaniesResponse (..),
+    newListCompaniesResponse,
 
     -- ** ListJobsResponse
-    , ListJobsResponse (..)
-    , newListJobsResponse
+    ListJobsResponse (..),
+    newListJobsResponse,
 
     -- ** ListTenantsResponse
-    , ListTenantsResponse (..)
-    , newListTenantsResponse
+    ListTenantsResponse (..),
+    newListTenantsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_LocationType
-    , Location_LocationType (..)
+    Location_LocationType (..),
 
     -- ** LocationFilter
-    , LocationFilter (..)
-    , newLocationFilter
+    LocationFilter (..),
+    newLocationFilter,
 
     -- ** LocationFilter_TelecommutePreference
-    , LocationFilter_TelecommutePreference (..)
+    LocationFilter_TelecommutePreference (..),
 
     -- ** MatchingJob
-    , MatchingJob (..)
-    , newMatchingJob
+    MatchingJob (..),
+    newMatchingJob,
 
     -- ** MendelDebugInput
-    , MendelDebugInput (..)
-    , newMendelDebugInput
+    MendelDebugInput (..),
+    newMendelDebugInput,
 
     -- ** MendelDebugInput_NamespacedDebugInput
-    , MendelDebugInput_NamespacedDebugInput (..)
-    , newMendelDebugInput_NamespacedDebugInput
+    MendelDebugInput_NamespacedDebugInput (..),
+    newMendelDebugInput_NamespacedDebugInput,
 
     -- ** Money
-    , Money (..)
-    , newMoney
+    Money (..),
+    newMoney,
 
     -- ** NamespacedDebugInput
-    , NamespacedDebugInput (..)
-    , newNamespacedDebugInput
+    NamespacedDebugInput (..),
+    newNamespacedDebugInput,
 
     -- ** NamespacedDebugInput_ForcedFlags
-    , NamespacedDebugInput_ForcedFlags (..)
-    , newNamespacedDebugInput_ForcedFlags
+    NamespacedDebugInput_ForcedFlags (..),
+    newNamespacedDebugInput_ForcedFlags,
 
     -- ** NamespacedDebugInput_ForcedRollouts
-    , NamespacedDebugInput_ForcedRollouts (..)
-    , newNamespacedDebugInput_ForcedRollouts
+    NamespacedDebugInput_ForcedRollouts (..),
+    newNamespacedDebugInput_ForcedRollouts,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** PostalAddress
-    , PostalAddress (..)
-    , newPostalAddress
+    PostalAddress (..),
+    newPostalAddress,
 
     -- ** ProcessingOptions
-    , ProcessingOptions (..)
-    , newProcessingOptions
+    ProcessingOptions (..),
+    newProcessingOptions,
 
     -- ** ProcessingOptions_HtmlSanitization
-    , ProcessingOptions_HtmlSanitization (..)
+    ProcessingOptions_HtmlSanitization (..),
 
     -- ** RequestMetadata
-    , RequestMetadata (..)
-    , newRequestMetadata
+    RequestMetadata (..),
+    newRequestMetadata,
 
     -- ** ResponseMetadata
-    , ResponseMetadata (..)
-    , newResponseMetadata
+    ResponseMetadata (..),
+    newResponseMetadata,
 
     -- ** SearchJobsRequest
-    , SearchJobsRequest (..)
-    , newSearchJobsRequest
+    SearchJobsRequest (..),
+    newSearchJobsRequest,
 
     -- ** SearchJobsRequest_DiversificationLevel
-    , SearchJobsRequest_DiversificationLevel (..)
+    SearchJobsRequest_DiversificationLevel (..),
 
     -- ** SearchJobsRequest_JobView
-    , SearchJobsRequest_JobView (..)
+    SearchJobsRequest_JobView (..),
 
     -- ** SearchJobsRequest_KeywordMatchMode
-    , SearchJobsRequest_KeywordMatchMode (..)
+    SearchJobsRequest_KeywordMatchMode (..),
 
     -- ** SearchJobsRequest_SearchMode
-    , SearchJobsRequest_SearchMode (..)
+    SearchJobsRequest_SearchMode (..),
 
     -- ** SearchJobsResponse
-    , SearchJobsResponse (..)
-    , newSearchJobsResponse
+    SearchJobsResponse (..),
+    newSearchJobsResponse,
 
     -- ** SpellingCorrection
-    , SpellingCorrection (..)
-    , newSpellingCorrection
+    SpellingCorrection (..),
+    newSpellingCorrection,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Tenant
-    , Tenant (..)
-    , newTenant
+    Tenant (..),
+    newTenant,
 
     -- ** TimeOfDay'
-    , TimeOfDay' (..)
-    , newTimeOfDay
+    TimeOfDay' (..),
+    newTimeOfDay,
 
     -- ** TimestampRange
-    , TimestampRange (..)
-    , newTimestampRange
+    TimestampRange (..),
+    newTimestampRange,
 
     -- ** ProjectsTenantsCompleteQueryScope
-    , ProjectsTenantsCompleteQueryScope (..)
+    ProjectsTenantsCompleteQueryScope (..),
 
     -- ** ProjectsTenantsCompleteQueryType
-    , ProjectsTenantsCompleteQueryType (..)
+    ProjectsTenantsCompleteQueryType (..),
 
     -- ** ProjectsTenantsJobsListJobView
-    , ProjectsTenantsJobsListJobView (..)
-    ) where
+    ProjectsTenantsJobsListJobView (..),
+  )
+where
 
 import Gogol.Jobs.Projects.Operations.Get
 import Gogol.Jobs.Projects.Tenants.ClientEvents.Create
