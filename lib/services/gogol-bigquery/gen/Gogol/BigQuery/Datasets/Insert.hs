@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,68 +36,64 @@
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.datasets.insert@.
 module Gogol.BigQuery.Datasets.Insert
-  ( -- * Resource
-    BigQueryDatasetsInsertResource,
+    (
+    -- * Resource
+      BigQueryDatasetsInsertResource
 
     -- ** Constructing a Request
-    newBigQueryDatasetsInsert,
-    BigQueryDatasetsInsert,
-  )
-where
+    , newBigQueryDatasetsInsert
+    , BigQueryDatasetsInsert
+    ) where
 
-import Gogol.BigQuery.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BigQuery.Types
 
 -- | A resource alias for @bigquery.datasets.insert@ method which the
 -- 'BigQueryDatasetsInsert' request conforms to.
 type BigQueryDatasetsInsertResource =
-  "bigquery"
-    Core.:> "v2"
-    Core.:> "projects"
-    Core.:> Core.Capture "projectId" Core.Text
-    Core.:> "datasets"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Dataset
-    Core.:> Core.Post '[Core.JSON] Dataset
+     "bigquery" Core.:>
+       "v2" Core.:>
+         "projects" Core.:>
+           Core.Capture "projectId" Core.Text Core.:>
+             "datasets" Core.:>
+               Core.QueryParam "alt" Core.AltJSON Core.:>
+                 Core.ReqBody '[Core.JSON] Dataset Core.:>
+                   Core.Post '[Core.JSON] Dataset
 
 -- | Creates a new empty dataset.
 --
 -- /See:/ 'newBigQueryDatasetsInsert' smart constructor.
 data BigQueryDatasetsInsert = BigQueryDatasetsInsert
-  { -- | Multipart request metadata.
-    payload :: Dataset,
-    -- | Project ID of the new dataset
-    projectId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: Dataset
+      -- | Project ID of the new dataset
+    , projectId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryDatasetsInsert' with the minimum fields required to make a request.
-newBigQueryDatasetsInsert ::
-  -- |  Multipart request metadata. See 'payload'.
-  Dataset ->
-  -- |  Project ID of the new dataset See 'projectId'.
-  Core.Text ->
-  BigQueryDatasetsInsert
+newBigQueryDatasetsInsert 
+    ::  Dataset
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  Project ID of the new dataset See 'projectId'.
+    -> BigQueryDatasetsInsert
 newBigQueryDatasetsInsert payload projectId =
   BigQueryDatasetsInsert {payload = payload, projectId = projectId}
 
-instance Core.GoogleRequest BigQueryDatasetsInsert where
-  type Rs BigQueryDatasetsInsert = Dataset
-  type
-    Scopes BigQueryDatasetsInsert =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
-  requestClient BigQueryDatasetsInsert {..} =
-    go
-      projectId
-      (Core.Just Core.AltJSON)
-      payload
-      bigQueryService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigQueryDatasetsInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest BigQueryDatasetsInsert
+         where
+        type Rs BigQueryDatasetsInsert = Dataset
+        type Scopes BigQueryDatasetsInsert =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient BigQueryDatasetsInsert{..}
+          = go projectId (Core.Just Core.AltJSON) payload
+              bigQueryService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy BigQueryDatasetsInsertResource)
+                      Core.mempty
+
