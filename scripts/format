@@ -24,6 +24,26 @@ format_haskell() {
 export -f say
 export -f format_haskell
 
+# Whether include generated code in the formatting run.
+all="false"
+
+case "${1:-}" in
+--all)
+  all="true"
+  ;;
+esac
+
+targets=(
+  gogol
+  core
+  gen
+  examples
+)
+
+if [ "$all" = "true" ]; then
+  targets+=(gogol-*)
+fi
+
 say "Formatting shell"
 
 find scripts gen/scripts -type f -print0 |
@@ -37,4 +57,5 @@ find . -type f -name '*.nix' -print0 |
 say "Formatting haskell"
 
 # Run the format and copy/replace steps in parallel.
-parallel --halt-on-error 2 format_haskell ::: core gen examples gogol gogol-*
+printf '%s\n' "${targets[@]}" |
+  parallel --halt-on-error 2 format_haskell
