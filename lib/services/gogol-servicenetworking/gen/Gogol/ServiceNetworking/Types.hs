@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,499 +25,498 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ServiceNetworking.Types
-    (
-    -- * Configuration
-      serviceNetworkingService
+  ( -- * Configuration
+    serviceNetworkingService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , serviceManagementScope
+    cloudPlatformScope,
+    serviceManagementScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AddDnsRecordSetMetadata
-    , AddDnsRecordSetMetadata (..)
-    , newAddDnsRecordSetMetadata
+    AddDnsRecordSetMetadata (..),
+    newAddDnsRecordSetMetadata,
 
     -- ** AddDnsRecordSetRequest
-    , AddDnsRecordSetRequest (..)
-    , newAddDnsRecordSetRequest
+    AddDnsRecordSetRequest (..),
+    newAddDnsRecordSetRequest,
 
     -- ** AddDnsZoneMetadata
-    , AddDnsZoneMetadata (..)
-    , newAddDnsZoneMetadata
+    AddDnsZoneMetadata (..),
+    newAddDnsZoneMetadata,
 
     -- ** AddDnsZoneRequest
-    , AddDnsZoneRequest (..)
-    , newAddDnsZoneRequest
+    AddDnsZoneRequest (..),
+    newAddDnsZoneRequest,
 
     -- ** AddDnsZoneResponse
-    , AddDnsZoneResponse (..)
-    , newAddDnsZoneResponse
+    AddDnsZoneResponse (..),
+    newAddDnsZoneResponse,
 
     -- ** AddRolesMetadata
-    , AddRolesMetadata (..)
-    , newAddRolesMetadata
+    AddRolesMetadata (..),
+    newAddRolesMetadata,
 
     -- ** AddRolesRequest
-    , AddRolesRequest (..)
-    , newAddRolesRequest
+    AddRolesRequest (..),
+    newAddRolesRequest,
 
     -- ** AddRolesResponse
-    , AddRolesResponse (..)
-    , newAddRolesResponse
+    AddRolesResponse (..),
+    newAddRolesResponse,
 
     -- ** AddSubnetworkRequest
-    , AddSubnetworkRequest (..)
-    , newAddSubnetworkRequest
+    AddSubnetworkRequest (..),
+    newAddSubnetworkRequest,
 
     -- ** Api
-    , Api (..)
-    , newApi
+    Api (..),
+    newApi,
 
     -- ** Api_Syntax
-    , Api_Syntax (..)
+    Api_Syntax (..),
 
     -- ** AuthProvider
-    , AuthProvider (..)
-    , newAuthProvider
+    AuthProvider (..),
+    newAuthProvider,
 
     -- ** AuthRequirement
-    , AuthRequirement (..)
-    , newAuthRequirement
+    AuthRequirement (..),
+    newAuthRequirement,
 
     -- ** Authentication
-    , Authentication (..)
-    , newAuthentication
+    Authentication (..),
+    newAuthentication,
 
     -- ** AuthenticationRule
-    , AuthenticationRule (..)
-    , newAuthenticationRule
+    AuthenticationRule (..),
+    newAuthenticationRule,
 
     -- ** Backend
-    , Backend (..)
-    , newBackend
+    Backend (..),
+    newBackend,
 
     -- ** BackendRule
-    , BackendRule (..)
-    , newBackendRule
+    BackendRule (..),
+    newBackendRule,
 
     -- ** BackendRule_PathTranslation
-    , BackendRule_PathTranslation (..)
+    BackendRule_PathTranslation (..),
 
     -- ** Billing
-    , Billing (..)
-    , newBilling
+    Billing (..),
+    newBilling,
 
     -- ** BillingDestination
-    , BillingDestination (..)
-    , newBillingDestination
+    BillingDestination (..),
+    newBillingDestination,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Connection
-    , Connection (..)
-    , newConnection
+    Connection (..),
+    newConnection,
 
     -- ** ConsumerConfig
-    , ConsumerConfig (..)
-    , newConsumerConfig
+    ConsumerConfig (..),
+    newConsumerConfig,
 
     -- ** ConsumerConfigMetadata
-    , ConsumerConfigMetadata (..)
-    , newConsumerConfigMetadata
+    ConsumerConfigMetadata (..),
+    newConsumerConfigMetadata,
 
     -- ** ConsumerProject
-    , ConsumerProject (..)
-    , newConsumerProject
+    ConsumerProject (..),
+    newConsumerProject,
 
     -- ** Context
-    , Context (..)
-    , newContext
+    Context (..),
+    newContext,
 
     -- ** ContextRule
-    , ContextRule (..)
-    , newContextRule
+    ContextRule (..),
+    newContextRule,
 
     -- ** Control
-    , Control (..)
-    , newControl
+    Control (..),
+    newControl,
 
     -- ** CustomError
-    , CustomError (..)
-    , newCustomError
+    CustomError (..),
+    newCustomError,
 
     -- ** CustomErrorRule
-    , CustomErrorRule (..)
-    , newCustomErrorRule
+    CustomErrorRule (..),
+    newCustomErrorRule,
 
     -- ** CustomHttpPattern
-    , CustomHttpPattern (..)
-    , newCustomHttpPattern
+    CustomHttpPattern (..),
+    newCustomHttpPattern,
 
     -- ** DeleteConnectionMetadata
-    , DeleteConnectionMetadata (..)
-    , newDeleteConnectionMetadata
+    DeleteConnectionMetadata (..),
+    newDeleteConnectionMetadata,
 
     -- ** DeleteConnectionRequest
-    , DeleteConnectionRequest (..)
-    , newDeleteConnectionRequest
+    DeleteConnectionRequest (..),
+    newDeleteConnectionRequest,
 
     -- ** DeletePeeredDnsDomainMetadata
-    , DeletePeeredDnsDomainMetadata (..)
-    , newDeletePeeredDnsDomainMetadata
+    DeletePeeredDnsDomainMetadata (..),
+    newDeletePeeredDnsDomainMetadata,
 
     -- ** DisableVpcServiceControlsRequest
-    , DisableVpcServiceControlsRequest (..)
-    , newDisableVpcServiceControlsRequest
+    DisableVpcServiceControlsRequest (..),
+    newDisableVpcServiceControlsRequest,
 
     -- ** DnsRecordSet
-    , DnsRecordSet (..)
-    , newDnsRecordSet
+    DnsRecordSet (..),
+    newDnsRecordSet,
 
     -- ** DnsZone
-    , DnsZone (..)
-    , newDnsZone
+    DnsZone (..),
+    newDnsZone,
 
     -- ** Documentation
-    , Documentation (..)
-    , newDocumentation
+    Documentation (..),
+    newDocumentation,
 
     -- ** DocumentationRule
-    , DocumentationRule (..)
-    , newDocumentationRule
+    DocumentationRule (..),
+    newDocumentationRule,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EnableVpcServiceControlsRequest
-    , EnableVpcServiceControlsRequest (..)
-    , newEnableVpcServiceControlsRequest
+    EnableVpcServiceControlsRequest (..),
+    newEnableVpcServiceControlsRequest,
 
     -- ** Endpoint
-    , Endpoint (..)
-    , newEndpoint
+    Endpoint (..),
+    newEndpoint,
 
     -- ** Enum'
-    , Enum' (..)
-    , newEnum
+    Enum' (..),
+    newEnum,
 
     -- ** Enum_Syntax
-    , Enum_Syntax (..)
+    Enum_Syntax (..),
 
     -- ** EnumValue
-    , EnumValue (..)
-    , newEnumValue
+    EnumValue (..),
+    newEnumValue,
 
     -- ** Field
-    , Field (..)
-    , newField
+    Field (..),
+    newField,
 
     -- ** Field_Cardinality
-    , Field_Cardinality (..)
+    Field_Cardinality (..),
 
     -- ** Field_Kind
-    , Field_Kind (..)
+    Field_Kind (..),
 
     -- ** GoogleCloudServicenetworkingV1ConsumerConfigReservedRange
-    , GoogleCloudServicenetworkingV1ConsumerConfigReservedRange (..)
-    , newGoogleCloudServicenetworkingV1ConsumerConfigReservedRange
+    GoogleCloudServicenetworkingV1ConsumerConfigReservedRange (..),
+    newGoogleCloudServicenetworkingV1ConsumerConfigReservedRange,
 
     -- ** GoogleCloudServicenetworkingV1betaConnection
-    , GoogleCloudServicenetworkingV1betaConnection (..)
-    , newGoogleCloudServicenetworkingV1betaConnection
+    GoogleCloudServicenetworkingV1betaConnection (..),
+    newGoogleCloudServicenetworkingV1betaConnection,
 
     -- ** GoogleCloudServicenetworkingV1betaSubnetwork
-    , GoogleCloudServicenetworkingV1betaSubnetwork (..)
-    , newGoogleCloudServicenetworkingV1betaSubnetwork
+    GoogleCloudServicenetworkingV1betaSubnetwork (..),
+    newGoogleCloudServicenetworkingV1betaSubnetwork,
 
     -- ** Http
-    , Http (..)
-    , newHttp
+    Http (..),
+    newHttp,
 
     -- ** HttpRule
-    , HttpRule (..)
-    , newHttpRule
+    HttpRule (..),
+    newHttpRule,
 
     -- ** JwtLocation
-    , JwtLocation (..)
-    , newJwtLocation
+    JwtLocation (..),
+    newJwtLocation,
 
     -- ** LabelDescriptor
-    , LabelDescriptor (..)
-    , newLabelDescriptor
+    LabelDescriptor (..),
+    newLabelDescriptor,
 
     -- ** LabelDescriptor_ValueType
-    , LabelDescriptor_ValueType (..)
+    LabelDescriptor_ValueType (..),
 
     -- ** ListConnectionsResponse
-    , ListConnectionsResponse (..)
-    , newListConnectionsResponse
+    ListConnectionsResponse (..),
+    newListConnectionsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListPeeredDnsDomainsResponse
-    , ListPeeredDnsDomainsResponse (..)
-    , newListPeeredDnsDomainsResponse
+    ListPeeredDnsDomainsResponse (..),
+    newListPeeredDnsDomainsResponse,
 
     -- ** LogDescriptor
-    , LogDescriptor (..)
-    , newLogDescriptor
+    LogDescriptor (..),
+    newLogDescriptor,
 
     -- ** Logging
-    , Logging (..)
-    , newLogging
+    Logging (..),
+    newLogging,
 
     -- ** LoggingDestination
-    , LoggingDestination (..)
-    , newLoggingDestination
+    LoggingDestination (..),
+    newLoggingDestination,
 
     -- ** Method
-    , Method (..)
-    , newMethod
+    Method (..),
+    newMethod,
 
     -- ** Method_Syntax
-    , Method_Syntax (..)
+    Method_Syntax (..),
 
     -- ** MetricDescriptor
-    , MetricDescriptor (..)
-    , newMetricDescriptor
+    MetricDescriptor (..),
+    newMetricDescriptor,
 
     -- ** MetricDescriptor_LaunchStage
-    , MetricDescriptor_LaunchStage (..)
+    MetricDescriptor_LaunchStage (..),
 
     -- ** MetricDescriptor_MetricKind
-    , MetricDescriptor_MetricKind (..)
+    MetricDescriptor_MetricKind (..),
 
     -- ** MetricDescriptor_ValueType
-    , MetricDescriptor_ValueType (..)
+    MetricDescriptor_ValueType (..),
 
     -- ** MetricDescriptorMetadata
-    , MetricDescriptorMetadata (..)
-    , newMetricDescriptorMetadata
+    MetricDescriptorMetadata (..),
+    newMetricDescriptorMetadata,
 
     -- ** MetricDescriptorMetadata_LaunchStage
-    , MetricDescriptorMetadata_LaunchStage (..)
+    MetricDescriptorMetadata_LaunchStage (..),
 
     -- ** MetricRule
-    , MetricRule (..)
-    , newMetricRule
+    MetricRule (..),
+    newMetricRule,
 
     -- ** MetricRule_MetricCosts
-    , MetricRule_MetricCosts (..)
-    , newMetricRule_MetricCosts
+    MetricRule_MetricCosts (..),
+    newMetricRule_MetricCosts,
 
     -- ** Mixin
-    , Mixin (..)
-    , newMixin
+    Mixin (..),
+    newMixin,
 
     -- ** MonitoredResourceDescriptor
-    , MonitoredResourceDescriptor (..)
-    , newMonitoredResourceDescriptor
+    MonitoredResourceDescriptor (..),
+    newMonitoredResourceDescriptor,
 
     -- ** MonitoredResourceDescriptor_LaunchStage
-    , MonitoredResourceDescriptor_LaunchStage (..)
+    MonitoredResourceDescriptor_LaunchStage (..),
 
     -- ** Monitoring
-    , Monitoring (..)
-    , newMonitoring
+    Monitoring (..),
+    newMonitoring,
 
     -- ** MonitoringDestination
-    , MonitoringDestination (..)
-    , newMonitoringDestination
+    MonitoringDestination (..),
+    newMonitoringDestination,
 
     -- ** OAuthRequirements
-    , OAuthRequirements (..)
-    , newOAuthRequirements
+    OAuthRequirements (..),
+    newOAuthRequirements,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Option
-    , Option (..)
-    , newOption
+    Option (..),
+    newOption,
 
     -- ** Option_Value
-    , Option_Value (..)
-    , newOption_Value
+    Option_Value (..),
+    newOption_Value,
 
     -- ** Page
-    , Page (..)
-    , newPage
+    Page (..),
+    newPage,
 
     -- ** PartialDeleteConnectionMetadata
-    , PartialDeleteConnectionMetadata (..)
-    , newPartialDeleteConnectionMetadata
+    PartialDeleteConnectionMetadata (..),
+    newPartialDeleteConnectionMetadata,
 
     -- ** PeeredDnsDomain
-    , PeeredDnsDomain (..)
-    , newPeeredDnsDomain
+    PeeredDnsDomain (..),
+    newPeeredDnsDomain,
 
     -- ** PeeredDnsDomainMetadata
-    , PeeredDnsDomainMetadata (..)
-    , newPeeredDnsDomainMetadata
+    PeeredDnsDomainMetadata (..),
+    newPeeredDnsDomainMetadata,
 
     -- ** PolicyBinding
-    , PolicyBinding (..)
-    , newPolicyBinding
+    PolicyBinding (..),
+    newPolicyBinding,
 
     -- ** Quota
-    , Quota (..)
-    , newQuota
+    Quota (..),
+    newQuota,
 
     -- ** QuotaLimit
-    , QuotaLimit (..)
-    , newQuotaLimit
+    QuotaLimit (..),
+    newQuotaLimit,
 
     -- ** QuotaLimit_Values
-    , QuotaLimit_Values (..)
-    , newQuotaLimit_Values
+    QuotaLimit_Values (..),
+    newQuotaLimit_Values,
 
     -- ** Range
-    , Range (..)
-    , newRange
+    Range (..),
+    newRange,
 
     -- ** RangeReservation
-    , RangeReservation (..)
-    , newRangeReservation
+    RangeReservation (..),
+    newRangeReservation,
 
     -- ** RemoveDnsRecordSetMetadata
-    , RemoveDnsRecordSetMetadata (..)
-    , newRemoveDnsRecordSetMetadata
+    RemoveDnsRecordSetMetadata (..),
+    newRemoveDnsRecordSetMetadata,
 
     -- ** RemoveDnsRecordSetRequest
-    , RemoveDnsRecordSetRequest (..)
-    , newRemoveDnsRecordSetRequest
+    RemoveDnsRecordSetRequest (..),
+    newRemoveDnsRecordSetRequest,
 
     -- ** RemoveDnsRecordSetResponse
-    , RemoveDnsRecordSetResponse (..)
-    , newRemoveDnsRecordSetResponse
+    RemoveDnsRecordSetResponse (..),
+    newRemoveDnsRecordSetResponse,
 
     -- ** RemoveDnsZoneMetadata
-    , RemoveDnsZoneMetadata (..)
-    , newRemoveDnsZoneMetadata
+    RemoveDnsZoneMetadata (..),
+    newRemoveDnsZoneMetadata,
 
     -- ** RemoveDnsZoneRequest
-    , RemoveDnsZoneRequest (..)
-    , newRemoveDnsZoneRequest
+    RemoveDnsZoneRequest (..),
+    newRemoveDnsZoneRequest,
 
     -- ** RemoveDnsZoneResponse
-    , RemoveDnsZoneResponse (..)
-    , newRemoveDnsZoneResponse
+    RemoveDnsZoneResponse (..),
+    newRemoveDnsZoneResponse,
 
     -- ** Route
-    , Route (..)
-    , newRoute
+    Route (..),
+    newRoute,
 
     -- ** SearchRangeRequest
-    , SearchRangeRequest (..)
-    , newSearchRangeRequest
+    SearchRangeRequest (..),
+    newSearchRangeRequest,
 
     -- ** SecondaryIpRange
-    , SecondaryIpRange (..)
-    , newSecondaryIpRange
+    SecondaryIpRange (..),
+    newSecondaryIpRange,
 
     -- ** SecondaryIpRangeSpec
-    , SecondaryIpRangeSpec (..)
-    , newSecondaryIpRangeSpec
+    SecondaryIpRangeSpec (..),
+    newSecondaryIpRangeSpec,
 
     -- ** Service
-    , Service (..)
-    , newService
+    Service (..),
+    newService,
 
     -- ** SourceContext
-    , SourceContext (..)
-    , newSourceContext
+    SourceContext (..),
+    newSourceContext,
 
     -- ** SourceInfo
-    , SourceInfo (..)
-    , newSourceInfo
+    SourceInfo (..),
+    newSourceInfo,
 
     -- ** SourceInfo_SourceFilesItem
-    , SourceInfo_SourceFilesItem (..)
-    , newSourceInfo_SourceFilesItem
+    SourceInfo_SourceFilesItem (..),
+    newSourceInfo_SourceFilesItem,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Subnetwork
-    , Subnetwork (..)
-    , newSubnetwork
+    Subnetwork (..),
+    newSubnetwork,
 
     -- ** SystemParameter
-    , SystemParameter (..)
-    , newSystemParameter
+    SystemParameter (..),
+    newSystemParameter,
 
     -- ** SystemParameterRule
-    , SystemParameterRule (..)
-    , newSystemParameterRule
+    SystemParameterRule (..),
+    newSystemParameterRule,
 
     -- ** SystemParameters
-    , SystemParameters (..)
-    , newSystemParameters
+    SystemParameters (..),
+    newSystemParameters,
 
     -- ** Type
-    , Type (..)
-    , newType
+    Type (..),
+    newType,
 
     -- ** Type_Syntax
-    , Type_Syntax (..)
+    Type_Syntax (..),
 
     -- ** UpdateConsumerConfigRequest
-    , UpdateConsumerConfigRequest (..)
-    , newUpdateConsumerConfigRequest
+    UpdateConsumerConfigRequest (..),
+    newUpdateConsumerConfigRequest,
 
     -- ** UpdateDnsRecordSetMetadata
-    , UpdateDnsRecordSetMetadata (..)
-    , newUpdateDnsRecordSetMetadata
+    UpdateDnsRecordSetMetadata (..),
+    newUpdateDnsRecordSetMetadata,
 
     -- ** UpdateDnsRecordSetRequest
-    , UpdateDnsRecordSetRequest (..)
-    , newUpdateDnsRecordSetRequest
+    UpdateDnsRecordSetRequest (..),
+    newUpdateDnsRecordSetRequest,
 
     -- ** Usage
-    , Usage (..)
-    , newUsage
+    Usage (..),
+    newUsage,
 
     -- ** UsageRule
-    , UsageRule (..)
-    , newUsageRule
+    UsageRule (..),
+    newUsageRule,
 
     -- ** ValidateConsumerConfigRequest
-    , ValidateConsumerConfigRequest (..)
-    , newValidateConsumerConfigRequest
+    ValidateConsumerConfigRequest (..),
+    newValidateConsumerConfigRequest,
 
     -- ** ValidateConsumerConfigResponse
-    , ValidateConsumerConfigResponse (..)
-    , newValidateConsumerConfigResponse
+    ValidateConsumerConfigResponse (..),
+    newValidateConsumerConfigResponse,
 
     -- ** ValidateConsumerConfigResponse_ValidationError
-    , ValidateConsumerConfigResponse_ValidationError (..)
-    ) where
+    ValidateConsumerConfigResponse_ValidationError (..),
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ServiceNetworking.Internal.Product
@@ -531,10 +524,10 @@ import Gogol.ServiceNetworking.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Service Networking API. This contains the host and root path used as a starting point for constructing service requests.
 serviceNetworkingService :: Core.ServiceConfig
-serviceNetworkingService
-  = Core.defaultService
-      (Core.ServiceId "servicenetworking:v1")
-      "servicenetworking.googleapis.com"
+serviceNetworkingService =
+  Core.defaultService
+    (Core.ServiceId "servicenetworking:v1")
+    "servicenetworking.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
