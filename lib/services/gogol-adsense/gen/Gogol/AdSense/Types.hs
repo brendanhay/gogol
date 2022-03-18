@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,210 +25,210 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AdSense.Types
-    (
-    -- * Configuration
-      adSenseService
+  ( -- * Configuration
+    adSenseService,
 
     -- * OAuth Scopes
-    , adSenseScope
-    , adSenseReadOnlyScope
+    adSenseScope,
+    adSenseReadOnlyScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** AdClient
-    , AdClient (..)
-    , newAdClient
+    AdClient (..),
+    newAdClient,
 
     -- ** AdClientAdCode
-    , AdClientAdCode (..)
-    , newAdClientAdCode
+    AdClientAdCode (..),
+    newAdClientAdCode,
 
     -- ** AdUnit
-    , AdUnit (..)
-    , newAdUnit
+    AdUnit (..),
+    newAdUnit,
 
     -- ** AdUnit_State
-    , AdUnit_State (..)
+    AdUnit_State (..),
 
     -- ** AdUnitAdCode
-    , AdUnitAdCode (..)
-    , newAdUnitAdCode
+    AdUnitAdCode (..),
+    newAdUnitAdCode,
 
     -- ** Alert
-    , Alert (..)
-    , newAlert
+    Alert (..),
+    newAlert,
 
     -- ** Alert_Severity
-    , Alert_Severity (..)
+    Alert_Severity (..),
 
     -- ** Cell
-    , Cell (..)
-    , newCell
+    Cell (..),
+    newCell,
 
     -- ** ContentAdsSettings
-    , ContentAdsSettings (..)
-    , newContentAdsSettings
+    ContentAdsSettings (..),
+    newContentAdsSettings,
 
     -- ** ContentAdsSettings_Type
-    , ContentAdsSettings_Type (..)
+    ContentAdsSettings_Type (..),
 
     -- ** CustomChannel
-    , CustomChannel (..)
-    , newCustomChannel
+    CustomChannel (..),
+    newCustomChannel,
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** Header
-    , Header (..)
-    , newHeader
+    Header (..),
+    newHeader,
 
     -- ** Header_Type
-    , Header_Type (..)
+    Header_Type (..),
 
     -- ** HttpBody
-    , HttpBody (..)
-    , newHttpBody
+    HttpBody (..),
+    newHttpBody,
 
     -- ** HttpBody_ExtensionsItem
-    , HttpBody_ExtensionsItem (..)
-    , newHttpBody_ExtensionsItem
+    HttpBody_ExtensionsItem (..),
+    newHttpBody_ExtensionsItem,
 
     -- ** ListAccountsResponse
-    , ListAccountsResponse (..)
-    , newListAccountsResponse
+    ListAccountsResponse (..),
+    newListAccountsResponse,
 
     -- ** ListAdClientsResponse
-    , ListAdClientsResponse (..)
-    , newListAdClientsResponse
+    ListAdClientsResponse (..),
+    newListAdClientsResponse,
 
     -- ** ListAdUnitsResponse
-    , ListAdUnitsResponse (..)
-    , newListAdUnitsResponse
+    ListAdUnitsResponse (..),
+    newListAdUnitsResponse,
 
     -- ** ListAlertsResponse
-    , ListAlertsResponse (..)
-    , newListAlertsResponse
+    ListAlertsResponse (..),
+    newListAlertsResponse,
 
     -- ** ListChildAccountsResponse
-    , ListChildAccountsResponse (..)
-    , newListChildAccountsResponse
+    ListChildAccountsResponse (..),
+    newListChildAccountsResponse,
 
     -- ** ListCustomChannelsResponse
-    , ListCustomChannelsResponse (..)
-    , newListCustomChannelsResponse
+    ListCustomChannelsResponse (..),
+    newListCustomChannelsResponse,
 
     -- ** ListLinkedAdUnitsResponse
-    , ListLinkedAdUnitsResponse (..)
-    , newListLinkedAdUnitsResponse
+    ListLinkedAdUnitsResponse (..),
+    newListLinkedAdUnitsResponse,
 
     -- ** ListLinkedCustomChannelsResponse
-    , ListLinkedCustomChannelsResponse (..)
-    , newListLinkedCustomChannelsResponse
+    ListLinkedCustomChannelsResponse (..),
+    newListLinkedCustomChannelsResponse,
 
     -- ** ListPaymentsResponse
-    , ListPaymentsResponse (..)
-    , newListPaymentsResponse
+    ListPaymentsResponse (..),
+    newListPaymentsResponse,
 
     -- ** ListSavedReportsResponse
-    , ListSavedReportsResponse (..)
-    , newListSavedReportsResponse
+    ListSavedReportsResponse (..),
+    newListSavedReportsResponse,
 
     -- ** ListSitesResponse
-    , ListSitesResponse (..)
-    , newListSitesResponse
+    ListSitesResponse (..),
+    newListSitesResponse,
 
     -- ** ListUrlChannelsResponse
-    , ListUrlChannelsResponse (..)
-    , newListUrlChannelsResponse
+    ListUrlChannelsResponse (..),
+    newListUrlChannelsResponse,
 
     -- ** Payment
-    , Payment (..)
-    , newPayment
+    Payment (..),
+    newPayment,
 
     -- ** ReportResult
-    , ReportResult (..)
-    , newReportResult
+    ReportResult (..),
+    newReportResult,
 
     -- ** Row
-    , Row (..)
-    , newRow
+    Row (..),
+    newRow,
 
     -- ** SavedReport
-    , SavedReport (..)
-    , newSavedReport
+    SavedReport (..),
+    newSavedReport,
 
     -- ** Site
-    , Site (..)
-    , newSite
+    Site (..),
+    newSite,
 
     -- ** Site_State
-    , Site_State (..)
+    Site_State (..),
 
     -- ** TimeZone
-    , TimeZone (..)
-    , newTimeZone
+    TimeZone (..),
+    newTimeZone,
 
     -- ** UrlChannel
-    , UrlChannel (..)
-    , newUrlChannel
+    UrlChannel (..),
+    newUrlChannel,
 
     -- ** AccountsReportsGenerateDateRange
-    , AccountsReportsGenerateDateRange (..)
+    AccountsReportsGenerateDateRange (..),
 
     -- ** AccountsReportsGenerateDimensions
-    , AccountsReportsGenerateDimensions (..)
+    AccountsReportsGenerateDimensions (..),
 
     -- ** AccountsReportsGenerateMetrics
-    , AccountsReportsGenerateMetrics (..)
+    AccountsReportsGenerateMetrics (..),
 
     -- ** AccountsReportsGenerateReportingTimeZone
-    , AccountsReportsGenerateReportingTimeZone (..)
+    AccountsReportsGenerateReportingTimeZone (..),
 
     -- ** AccountsReportsGenerateCsvDateRange
-    , AccountsReportsGenerateCsvDateRange (..)
+    AccountsReportsGenerateCsvDateRange (..),
 
     -- ** AccountsReportsGenerateCsvDimensions
-    , AccountsReportsGenerateCsvDimensions (..)
+    AccountsReportsGenerateCsvDimensions (..),
 
     -- ** AccountsReportsGenerateCsvMetrics
-    , AccountsReportsGenerateCsvMetrics (..)
+    AccountsReportsGenerateCsvMetrics (..),
 
     -- ** AccountsReportsGenerateCsvReportingTimeZone
-    , AccountsReportsGenerateCsvReportingTimeZone (..)
+    AccountsReportsGenerateCsvReportingTimeZone (..),
 
     -- ** AccountsReportsSavedGenerateDateRange
-    , AccountsReportsSavedGenerateDateRange (..)
+    AccountsReportsSavedGenerateDateRange (..),
 
     -- ** AccountsReportsSavedGenerateReportingTimeZone
-    , AccountsReportsSavedGenerateReportingTimeZone (..)
+    AccountsReportsSavedGenerateReportingTimeZone (..),
 
     -- ** AccountsReportsSavedGenerateCsvDateRange
-    , AccountsReportsSavedGenerateCsvDateRange (..)
+    AccountsReportsSavedGenerateCsvDateRange (..),
 
     -- ** AccountsReportsSavedGenerateCsvReportingTimeZone
-    , AccountsReportsSavedGenerateCsvReportingTimeZone (..)
-    ) where
+    AccountsReportsSavedGenerateCsvReportingTimeZone (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AdSense.Internal.Product
 import Gogol.AdSense.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
 adSenseService :: Core.ServiceConfig
-adSenseService
-  = Core.defaultService (Core.ServiceId "adsense:v2")
-      "adsense.googleapis.com"
+adSenseService =
+  Core.defaultService
+    (Core.ServiceId "adsense:v2")
+    "adsense.googleapis.com"
 
 -- | View and manage your AdSense data
 adSenseScope :: Core.Proxy '["https://www.googleapis.com/auth/adsense"]
