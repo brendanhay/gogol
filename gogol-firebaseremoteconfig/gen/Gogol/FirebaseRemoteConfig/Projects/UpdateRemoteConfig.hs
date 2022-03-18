@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
+-- Module      : Gogol.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -30,7 +30,7 @@
 -- other internal errors.
 --
 -- /See:/ <https://firebase.google.com/docs/remote-config/ Firebase Remote Config API Reference> for @firebaseremoteconfig.projects.updateRemoteConfig@.
-module Network.Google.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
+module Gogol.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
   ( -- * Resource
     FirebaseRemoteConfigProjectsUpdateRemoteConfigResource,
 
@@ -40,8 +40,8 @@ module Network.Google.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
   )
 where
 
-import Network.Google.FirebaseRemoteConfig.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRemoteConfig.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebaseremoteconfig.projects.updateRemoteConfig@ method which the
 -- 'FirebaseRemoteConfigProjectsUpdateRemoteConfig' request conforms to.

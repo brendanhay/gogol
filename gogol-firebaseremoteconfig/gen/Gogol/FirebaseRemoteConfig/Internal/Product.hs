@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRemoteConfig.Internal.Product
+-- Module      : Gogol.FirebaseRemoteConfig.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FirebaseRemoteConfig.Internal.Product
+module Gogol.FirebaseRemoteConfig.Internal.Product
   ( -- * RemoteConfig
     RemoteConfig (..),
     newRemoteConfig,
@@ -52,8 +52,8 @@ module Network.Google.FirebaseRemoteConfig.Internal.Product
   )
 where
 
-import Network.Google.FirebaseRemoteConfig.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRemoteConfig.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | -   The RemoteConfig consists of a list of conditions (which can be thought of as named \"if\" statements) and a map of parameters (parameter key to a structure containing an optional default value, as well as a optional submap of (condition name to value when that condition is true).
 --

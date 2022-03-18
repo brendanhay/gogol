@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRemoteConfig
+-- Module      : Gogol.FirebaseRemoteConfig
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Firebase Remote Config API allows the 3P clients to manage Remote Config conditions and parameters for Firebase applications.
 --
 -- /See:/ <https://firebase.google.com/docs/remote-config/ Firebase Remote Config API Reference>
-module Network.Google.FirebaseRemoteConfig
+module Gogol.FirebaseRemoteConfig
   ( -- * Configuration
     firebaseRemoteConfigService,
 
@@ -79,6 +79,6 @@ module Network.Google.FirebaseRemoteConfig
   )
 where
 
-import Network.Google.FirebaseRemoteConfig.Projects.GetRemoteConfig
-import Network.Google.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
-import Network.Google.FirebaseRemoteConfig.Types
+import Gogol.FirebaseRemoteConfig.Projects.GetRemoteConfig
+import Gogol.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
+import Gogol.FirebaseRemoteConfig.Types
