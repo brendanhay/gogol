@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit
+-- Module      : Gogol.IdentityToolkit
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Help the third party sites to implement federated login.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference>
-module Network.Google.IdentityToolkit
+module Gogol.IdentityToolkit
   ( -- * Configuration
     identityToolkitService,
 
@@ -319,24 +319,24 @@ module Network.Google.IdentityToolkit
   )
 where
 
-import Network.Google.IdentityToolkit.Relyingparty.CreateAuthUri
-import Network.Google.IdentityToolkit.Relyingparty.DeleteAccount
-import Network.Google.IdentityToolkit.Relyingparty.DownloadAccount
-import Network.Google.IdentityToolkit.Relyingparty.EmailLinkSignin
-import Network.Google.IdentityToolkit.Relyingparty.GetAccountInfo
-import Network.Google.IdentityToolkit.Relyingparty.GetOobConfirmationCode
-import Network.Google.IdentityToolkit.Relyingparty.GetProjectConfig
-import Network.Google.IdentityToolkit.Relyingparty.GetPublicKeys
-import Network.Google.IdentityToolkit.Relyingparty.GetRecaptchaParam
-import Network.Google.IdentityToolkit.Relyingparty.ResetPassword
-import Network.Google.IdentityToolkit.Relyingparty.SendVerificationCode
-import Network.Google.IdentityToolkit.Relyingparty.SetAccountInfo
-import Network.Google.IdentityToolkit.Relyingparty.SetProjectConfig
-import Network.Google.IdentityToolkit.Relyingparty.SignOutUser
-import Network.Google.IdentityToolkit.Relyingparty.SignupNewUser
-import Network.Google.IdentityToolkit.Relyingparty.UploadAccount
-import Network.Google.IdentityToolkit.Relyingparty.VerifyAssertion
-import Network.Google.IdentityToolkit.Relyingparty.VerifyCustomToken
-import Network.Google.IdentityToolkit.Relyingparty.VerifyPassword
-import Network.Google.IdentityToolkit.Relyingparty.VerifyPhoneNumber
-import Network.Google.IdentityToolkit.Types
+import Gogol.IdentityToolkit.Relyingparty.CreateAuthUri
+import Gogol.IdentityToolkit.Relyingparty.DeleteAccount
+import Gogol.IdentityToolkit.Relyingparty.DownloadAccount
+import Gogol.IdentityToolkit.Relyingparty.EmailLinkSignin
+import Gogol.IdentityToolkit.Relyingparty.GetAccountInfo
+import Gogol.IdentityToolkit.Relyingparty.GetOobConfirmationCode
+import Gogol.IdentityToolkit.Relyingparty.GetProjectConfig
+import Gogol.IdentityToolkit.Relyingparty.GetPublicKeys
+import Gogol.IdentityToolkit.Relyingparty.GetRecaptchaParam
+import Gogol.IdentityToolkit.Relyingparty.ResetPassword
+import Gogol.IdentityToolkit.Relyingparty.SendVerificationCode
+import Gogol.IdentityToolkit.Relyingparty.SetAccountInfo
+import Gogol.IdentityToolkit.Relyingparty.SetProjectConfig
+import Gogol.IdentityToolkit.Relyingparty.SignOutUser
+import Gogol.IdentityToolkit.Relyingparty.SignupNewUser
+import Gogol.IdentityToolkit.Relyingparty.UploadAccount
+import Gogol.IdentityToolkit.Relyingparty.VerifyAssertion
+import Gogol.IdentityToolkit.Relyingparty.VerifyCustomToken
+import Gogol.IdentityToolkit.Relyingparty.VerifyPassword
+import Gogol.IdentityToolkit.Relyingparty.VerifyPhoneNumber
+import Gogol.IdentityToolkit.Types

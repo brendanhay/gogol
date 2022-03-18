@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit.Relyingparty.SetProjectConfig
+-- Module      : Gogol.IdentityToolkit.Relyingparty.SetProjectConfig
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Set project configuration.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.setProjectConfig@.
-module Network.Google.IdentityToolkit.Relyingparty.SetProjectConfig
+module Gogol.IdentityToolkit.Relyingparty.SetProjectConfig
   ( -- * Resource
     IdentityToolkitRelyingpartySetProjectConfigResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IdentityToolkit.Relyingparty.SetProjectConfig
   )
 where
 
-import Network.Google.IdentityToolkit.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.setProjectConfig@ method which the
 -- 'IdentityToolkitRelyingpartySetProjectConfig' request conforms to.

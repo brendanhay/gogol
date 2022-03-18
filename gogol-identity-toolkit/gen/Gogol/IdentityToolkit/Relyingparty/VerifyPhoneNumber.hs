@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit.Relyingparty.VerifyPhoneNumber
+-- Module      : Gogol.IdentityToolkit.Relyingparty.VerifyPhoneNumber
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Verifies ownership of a phone number and creates\/updates the user account accordingly.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.verifyPhoneNumber@.
-module Network.Google.IdentityToolkit.Relyingparty.VerifyPhoneNumber
+module Gogol.IdentityToolkit.Relyingparty.VerifyPhoneNumber
   ( -- * Resource
     IdentityToolkitRelyingpartyVerifyPhoneNumberResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IdentityToolkit.Relyingparty.VerifyPhoneNumber
   )
 where
 
-import Network.Google.IdentityToolkit.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.verifyPhoneNumber@ method which the
 -- 'IdentityToolkitRelyingpartyVerifyPhoneNumber' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit.Relyingparty.SignupNewUser
+-- Module      : Gogol.IdentityToolkit.Relyingparty.SignupNewUser
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Signup new user.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.signupNewUser@.
-module Network.Google.IdentityToolkit.Relyingparty.SignupNewUser
+module Gogol.IdentityToolkit.Relyingparty.SignupNewUser
   ( -- * Resource
     IdentityToolkitRelyingpartySignupNewUserResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IdentityToolkit.Relyingparty.SignupNewUser
   )
 where
 
-import Network.Google.IdentityToolkit.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.signupNewUser@ method which the
 -- 'IdentityToolkitRelyingpartySignupNewUser' request conforms to.

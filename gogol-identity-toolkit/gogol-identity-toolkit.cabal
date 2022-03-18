@@ -39,37 +39,38 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.IdentityToolkit
-    Network.Google.IdentityToolkit.Relyingparty.CreateAuthUri
-    Network.Google.IdentityToolkit.Relyingparty.DeleteAccount
-    Network.Google.IdentityToolkit.Relyingparty.DownloadAccount
-    Network.Google.IdentityToolkit.Relyingparty.EmailLinkSignin
-    Network.Google.IdentityToolkit.Relyingparty.GetAccountInfo
-    Network.Google.IdentityToolkit.Relyingparty.GetOobConfirmationCode
-    Network.Google.IdentityToolkit.Relyingparty.GetProjectConfig
-    Network.Google.IdentityToolkit.Relyingparty.GetPublicKeys
-    Network.Google.IdentityToolkit.Relyingparty.GetRecaptchaParam
-    Network.Google.IdentityToolkit.Relyingparty.ResetPassword
-    Network.Google.IdentityToolkit.Relyingparty.SendVerificationCode
-    Network.Google.IdentityToolkit.Relyingparty.SetAccountInfo
-    Network.Google.IdentityToolkit.Relyingparty.SetProjectConfig
-    Network.Google.IdentityToolkit.Relyingparty.SignOutUser
-    Network.Google.IdentityToolkit.Relyingparty.SignupNewUser
-    Network.Google.IdentityToolkit.Relyingparty.UploadAccount
-    Network.Google.IdentityToolkit.Relyingparty.VerifyAssertion
-    Network.Google.IdentityToolkit.Relyingparty.VerifyCustomToken
-    Network.Google.IdentityToolkit.Relyingparty.VerifyPassword
-    Network.Google.IdentityToolkit.Relyingparty.VerifyPhoneNumber
-    Network.Google.IdentityToolkit.Types
+    Gogol.IdentityToolkit
+    Gogol.IdentityToolkit.Relyingparty.CreateAuthUri
+    Gogol.IdentityToolkit.Relyingparty.DeleteAccount
+    Gogol.IdentityToolkit.Relyingparty.DownloadAccount
+    Gogol.IdentityToolkit.Relyingparty.EmailLinkSignin
+    Gogol.IdentityToolkit.Relyingparty.GetAccountInfo
+    Gogol.IdentityToolkit.Relyingparty.GetOobConfirmationCode
+    Gogol.IdentityToolkit.Relyingparty.GetProjectConfig
+    Gogol.IdentityToolkit.Relyingparty.GetPublicKeys
+    Gogol.IdentityToolkit.Relyingparty.GetRecaptchaParam
+    Gogol.IdentityToolkit.Relyingparty.ResetPassword
+    Gogol.IdentityToolkit.Relyingparty.SendVerificationCode
+    Gogol.IdentityToolkit.Relyingparty.SetAccountInfo
+    Gogol.IdentityToolkit.Relyingparty.SetProjectConfig
+    Gogol.IdentityToolkit.Relyingparty.SignOutUser
+    Gogol.IdentityToolkit.Relyingparty.SignupNewUser
+    Gogol.IdentityToolkit.Relyingparty.UploadAccount
+    Gogol.IdentityToolkit.Relyingparty.VerifyAssertion
+    Gogol.IdentityToolkit.Relyingparty.VerifyCustomToken
+    Gogol.IdentityToolkit.Relyingparty.VerifyPassword
+    Gogol.IdentityToolkit.Relyingparty.VerifyPhoneNumber
+    Gogol.IdentityToolkit.Types
 
   other-modules:
-    Network.Google.IdentityToolkit.Internal.Product
-    Network.Google.IdentityToolkit.Internal.Sum
+    Gogol.IdentityToolkit.Internal.Product
+    Gogol.IdentityToolkit.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
