@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Script
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,444 +30,343 @@
 --
 -- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference>
 module Network.Google.Script
-    (
-    -- * Service Configuration
-      scriptService
+  ( -- * Configuration
+    scriptService,
 
     -- * OAuth Scopes
-    , mailGoogleComScope
-    , m8FeedsScope
-    , adminDirectoryUserScope
-    , scriptProjectsScope
-    , userInfoEmailScope
-    , scriptMetricsScope
-    , formsCurrentOnlyScope
-    , scriptDeploymentsScope
-    , driveScope
-    , adminDirectoryGroupScope
-    , scriptProjectsReadOnlyScope
-    , calendarFeedsScope
-    , formsScope
-    , spreadsheetsScope
-    , scriptDeploymentsReadOnlyScope
-    , groupsScope
-    , scriptProcessesScope
-    , documentsScope
-
-    -- * API Declaration
-    , ScriptAPI
+    mailGoogleComScope,
+    calendarFeedsScope,
+    m8FeedsScope,
+    adminDirectoryGroupScope,
+    adminDirectoryUserScope,
+    documentsScope,
+    driveScope,
+    formsScope,
+    formsCurrentOnlyScope,
+    groupsScope,
+    scriptDeploymentsScope,
+    scriptDeploymentsReadOnlyScope,
+    scriptMetricsScope,
+    scriptProcessesScope,
+    scriptProjectsScope,
+    scriptProjectsReadOnlyScope,
+    spreadsheetsScope,
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** script.processes.list
-    , module Network.Google.Resource.Script.Processes.List
+    ScriptProcessesListResource,
+    newScriptProcessesList,
+    ScriptProcessesList,
 
     -- ** script.processes.listScriptProcesses
-    , module Network.Google.Resource.Script.Processes.ListScriptProcesses
+    ScriptProcessesListScriptProcessesResource,
+    newScriptProcessesListScriptProcesses,
+    ScriptProcessesListScriptProcesses,
 
     -- ** script.projects.create
-    , module Network.Google.Resource.Script.Projects.Create
+    ScriptProjectsCreateResource,
+    newScriptProjectsCreate,
+    ScriptProjectsCreate,
 
     -- ** script.projects.deployments.create
-    , module Network.Google.Resource.Script.Projects.Deployments.Create
+    ScriptProjectsDeploymentsCreateResource,
+    newScriptProjectsDeploymentsCreate,
+    ScriptProjectsDeploymentsCreate,
 
     -- ** script.projects.deployments.delete
-    , module Network.Google.Resource.Script.Projects.Deployments.Delete
+    ScriptProjectsDeploymentsDeleteResource,
+    newScriptProjectsDeploymentsDelete,
+    ScriptProjectsDeploymentsDelete,
 
     -- ** script.projects.deployments.get
-    , module Network.Google.Resource.Script.Projects.Deployments.Get
+    ScriptProjectsDeploymentsGetResource,
+    newScriptProjectsDeploymentsGet,
+    ScriptProjectsDeploymentsGet,
 
     -- ** script.projects.deployments.list
-    , module Network.Google.Resource.Script.Projects.Deployments.List
+    ScriptProjectsDeploymentsListResource,
+    newScriptProjectsDeploymentsList,
+    ScriptProjectsDeploymentsList,
 
     -- ** script.projects.deployments.update
-    , module Network.Google.Resource.Script.Projects.Deployments.Update
+    ScriptProjectsDeploymentsUpdateResource,
+    newScriptProjectsDeploymentsUpdate,
+    ScriptProjectsDeploymentsUpdate,
 
     -- ** script.projects.get
-    , module Network.Google.Resource.Script.Projects.Get
+    ScriptProjectsGetResource,
+    newScriptProjectsGet,
+    ScriptProjectsGet,
 
     -- ** script.projects.getContent
-    , module Network.Google.Resource.Script.Projects.GetContent
+    ScriptProjectsGetContentResource,
+    newScriptProjectsGetContent,
+    ScriptProjectsGetContent,
 
     -- ** script.projects.getMetrics
-    , module Network.Google.Resource.Script.Projects.GetMetrics
+    ScriptProjectsGetMetricsResource,
+    newScriptProjectsGetMetrics,
+    ScriptProjectsGetMetrics,
 
     -- ** script.projects.updateContent
-    , module Network.Google.Resource.Script.Projects.UpdateContent
+    ScriptProjectsUpdateContentResource,
+    newScriptProjectsUpdateContent,
+    ScriptProjectsUpdateContent,
 
     -- ** script.projects.versions.create
-    , module Network.Google.Resource.Script.Projects.Versions.Create
+    ScriptProjectsVersionsCreateResource,
+    newScriptProjectsVersionsCreate,
+    ScriptProjectsVersionsCreate,
 
     -- ** script.projects.versions.get
-    , module Network.Google.Resource.Script.Projects.Versions.Get
+    ScriptProjectsVersionsGetResource,
+    newScriptProjectsVersionsGet,
+    ScriptProjectsVersionsGet,
 
     -- ** script.projects.versions.list
-    , module Network.Google.Resource.Script.Projects.Versions.List
+    ScriptProjectsVersionsListResource,
+    newScriptProjectsVersionsList,
+    ScriptProjectsVersionsList,
 
     -- ** script.scripts.run
-    , module Network.Google.Resource.Script.Scripts.Run
+    ScriptScriptsRunResource,
+    newScriptScriptsRun,
+    ScriptScriptsRun,
 
     -- * Types
 
-    -- ** GoogleAppsScriptTypeFunctionSet
-    , GoogleAppsScriptTypeFunctionSet
-    , googleAppsScriptTypeFunctionSet
-    , gastfsValues
-
-    -- ** GoogleAppsScriptTypeExecutionAPIConfig
-    , GoogleAppsScriptTypeExecutionAPIConfig
-    , googleAppsScriptTypeExecutionAPIConfig
-    , gasteacAccess
-
-    -- ** GoogleAppsScriptTypeProcessProcessType
-    , GoogleAppsScriptTypeProcessProcessType (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** GoogleAppsScriptTypeProcessUserAccessLevel
-    , GoogleAppsScriptTypeProcessUserAccessLevel (..)
-
-    -- ** ScriptExecutionResult
-    , ScriptExecutionResult
-    , scriptExecutionResult
-    , serReturnValue
-
-    -- ** Metrics
-    , Metrics
-    , metrics
-    , mActiveUsers
-    , mFailedExecutions
-    , mTotalExecutions
-
-    -- ** GoogleAppsScriptTypeProcess
-    , GoogleAppsScriptTypeProcess
-    , googleAppsScriptTypeProcess
-    , gastpProcessStatus
-    , gastpStartTime
-    , gastpProjectName
-    , gastpFunctionName
-    , gastpUserAccessLevel
-    , gastpProcessType
-    , gastpDuration
-
-    -- ** Struct
-    , Struct
-    , struct
-    , sFields
-
-    -- ** ProcessesListScriptProcessesScriptProcessFilterTypes
-    , ProcessesListScriptProcessesScriptProcessFilterTypes (..)
-
-    -- ** GoogleAppsScriptTypeWebAppConfigExecuteAs
-    , GoogleAppsScriptTypeWebAppConfigExecuteAs (..)
-
-    -- ** Project
-    , Project
-    , project
-    , pCreator
-    , pLastModifyUser
-    , pUpdateTime
-    , pScriptId
-    , pTitle
-    , pParentId
-    , pCreateTime
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-
-    -- ** ListUserProcessesResponse
-    , ListUserProcessesResponse
-    , listUserProcessesResponse
-    , luprNextPageToken
-    , luprProcesses
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** GoogleAppsScriptTypeUser
-    , GoogleAppsScriptTypeUser
-    , googleAppsScriptTypeUser
-    , gastuEmail
-    , gastuPhotoURL
-    , gastuDomain
-    , gastuName
-
-    -- ** ExecuteStreamResponse
-    , ExecuteStreamResponse
-    , executeStreamResponse
-    , esrResult
-
-    -- ** EntryPoint
-    , EntryPoint
-    , entryPoint
-    , epExecutionAPI
-    , epAddOn
-    , epEntryPointType
-    , epWebApp
-
-    -- ** ListVersionsResponse
-    , ListVersionsResponse
-    , listVersionsResponse
-    , lvrNextPageToken
-    , lvrVersions
-
-    -- ** GoogleAppsScriptTypeExecutionAPIConfigAccess
-    , GoogleAppsScriptTypeExecutionAPIConfigAccess (..)
-
-    -- ** ProcessesListScriptProcessesScriptProcessFilterStatuses
-    , ProcessesListScriptProcessesScriptProcessFilterStatuses (..)
-
-    -- ** ExecutionRequest
-    , ExecutionRequest
-    , executionRequest
-    , erFunction
-    , erSessionState
-    , erDevMode
-    , erParameters
-
-    -- ** ListScriptProcessesResponse
-    , ListScriptProcessesResponse
-    , listScriptProcessesResponse
-    , lsprNextPageToken
-    , lsprProcesses
-
-    -- ** Value
-    , Value
-    , value
-    , vBytesValue
-    , vProtoValue
-    , vBoolValue
-    , vNumberValue
-    , vStringValue
-    , vListValue
-    , vStructValue
-    , vDateValue
-    , vNullValue
-
-    -- ** ValueNullValue
-    , ValueNullValue (..)
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** FileType
-    , FileType (..)
-
-    -- ** ScriptStackTraceElement
-    , ScriptStackTraceElement
-    , scriptStackTraceElement
-    , ssteFunction
-    , ssteLineNumber
-
-    -- ** StructFields
-    , StructFields
-    , structFields
-    , sfAddtional
-
-    -- ** ProcessesListUserProcessFilterTypes
-    , ProcessesListUserProcessFilterTypes (..)
-
-    -- ** ListValue
-    , ListValue
-    , listValue
-    , lvValues
-
-    -- ** ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
-    , ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Content
-    , Content
-    , content
-    , cScriptId
-    , cFiles
-
-    -- ** ProjectsGetMetricsMetricsGranularity
-    , ProjectsGetMetricsMetricsGranularity (..)
-
-    -- ** GoogleAppsScriptTypeAddOnEntryPointAddOnType
-    , GoogleAppsScriptTypeAddOnEntryPointAddOnType (..)
-
-    -- ** MetricsValue
-    , MetricsValue
-    , metricsValue
-    , mvStartTime
-    , mvValue
-    , mvEndTime
-
-    -- ** GoogleAppsScriptTypeAddOnEntryPoint
-    , GoogleAppsScriptTypeAddOnEntryPoint
-    , googleAppsScriptTypeAddOnEntryPoint
-    , gastaoepPostInstallTipURL
-    , gastaoepAddOnType
-    , gastaoepReportIssueURL
-    , gastaoepHelpURL
-    , gastaoepTitle
-    , gastaoepDescription
-
-    -- ** ProcessesListUserProcessFilterStatuses
-    , ProcessesListUserProcessFilterStatuses (..)
-
-    -- ** GoogleAppsScriptTypeWebAppConfig
-    , GoogleAppsScriptTypeWebAppConfig
-    , googleAppsScriptTypeWebAppConfig
-    , gastwacAccess
-    , gastwacExecuteAs
-
-    -- ** Version
-    , Version
-    , version
-    , vVersionNumber
-    , vScriptId
-    , vDescription
-    , vCreateTime
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ExecutionError
-    , ExecutionError
-    , executionError
-    , eeScriptStackTraceElements
-    , eeErrorType
-    , eeErrorMessage
-
-    -- ** GoogleAppsScriptTypeWebAppEntryPoint
-    , GoogleAppsScriptTypeWebAppEntryPoint
-    , googleAppsScriptTypeWebAppEntryPoint
-    , gastwaepEntryPointConfig
-    , gastwaepURL
-
-    -- ** ProcessesListUserProcessFilterUserAccessLevels
-    , ProcessesListUserProcessFilterUserAccessLevels (..)
-
-    -- ** EntryPointEntryPointType
-    , EntryPointEntryPointType (..)
+    Content (..),
+    newContent,
 
     -- ** CreateProjectRequest
-    , CreateProjectRequest
-    , createProjectRequest
-    , cprTitle
-    , cprParentId
-
-    -- ** GoogleAppsScriptTypeProcessProcessStatus
-    , GoogleAppsScriptTypeProcessProcessStatus (..)
-
-    -- ** DeploymentConfig
-    , DeploymentConfig
-    , deploymentConfig
-    , dcVersionNumber
-    , dcScriptId
-    , dcManifestFileName
-    , dcDescription
-
-    -- ** GoogleAppsScriptTypeWebAppConfigAccess
-    , GoogleAppsScriptTypeWebAppConfigAccess (..)
-
-    -- ** ListDeploymentsResponse
-    , ListDeploymentsResponse
-    , listDeploymentsResponse
-    , ldrNextPageToken
-    , ldrDeployments
-
-    -- ** GoogleAppsScriptTypeFunction
-    , GoogleAppsScriptTypeFunction
-    , googleAppsScriptTypeFunction
-    , gastfName
-
-    -- ** ValueProtoValue
-    , ValueProtoValue
-    , valueProtoValue
-    , vpvAddtional
-
-    -- ** File
-    , File
-    , file
-    , fFunctionSet
-    , fLastModifyUser
-    , fUpdateTime
-    , fName
-    , fSource
-    , fType
-    , fCreateTime
-
-    -- ** GoogleAppsScriptTypeExecutionAPIEntryPoint
-    , GoogleAppsScriptTypeExecutionAPIEntryPoint
-    , googleAppsScriptTypeExecutionAPIEntryPoint
-    , gasteaepEntryPointConfig
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** ExecutionResponse
-    , ExecutionResponse
-    , executionResponse
-    , erResult
+    CreateProjectRequest (..),
+    newCreateProjectRequest,
 
     -- ** Deployment
-    , Deployment
-    , deployment
-    , dDeploymentId
-    , dUpdateTime
-    , dEntryPoints
-    , dDeploymentConfig
+    Deployment (..),
+    newDeployment,
+
+    -- ** DeploymentConfig
+    DeploymentConfig (..),
+    newDeploymentConfig,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EntryPoint
+    EntryPoint (..),
+    newEntryPoint,
+
+    -- ** EntryPoint_EntryPointType
+    EntryPoint_EntryPointType (..),
+
+    -- ** ExecuteStreamResponse
+    ExecuteStreamResponse (..),
+    newExecuteStreamResponse,
+
+    -- ** ExecutionError
+    ExecutionError (..),
+    newExecutionError,
+
+    -- ** ExecutionRequest
+    ExecutionRequest (..),
+    newExecutionRequest,
+
+    -- ** ExecutionResponse
+    ExecutionResponse (..),
+    newExecutionResponse,
+
+    -- ** File
+    File (..),
+    newFile,
+
+    -- ** File_Type
+    File_Type (..),
+
+    -- ** GoogleAppsScriptTypeAddOnEntryPoint
+    GoogleAppsScriptTypeAddOnEntryPoint (..),
+    newGoogleAppsScriptTypeAddOnEntryPoint,
+
+    -- ** GoogleAppsScriptTypeAddOnEntryPoint_AddOnType
+    GoogleAppsScriptTypeAddOnEntryPoint_AddOnType (..),
+
+    -- ** GoogleAppsScriptTypeExecutionApiConfig
+    GoogleAppsScriptTypeExecutionApiConfig (..),
+    newGoogleAppsScriptTypeExecutionApiConfig,
+
+    -- ** GoogleAppsScriptTypeExecutionApiConfig_Access
+    GoogleAppsScriptTypeExecutionApiConfig_Access (..),
+
+    -- ** GoogleAppsScriptTypeExecutionApiEntryPoint
+    GoogleAppsScriptTypeExecutionApiEntryPoint (..),
+    newGoogleAppsScriptTypeExecutionApiEntryPoint,
+
+    -- ** GoogleAppsScriptTypeFunction
+    GoogleAppsScriptTypeFunction (..),
+    newGoogleAppsScriptTypeFunction,
+
+    -- ** GoogleAppsScriptTypeFunctionSet
+    GoogleAppsScriptTypeFunctionSet (..),
+    newGoogleAppsScriptTypeFunctionSet,
+
+    -- ** GoogleAppsScriptTypeProcess
+    GoogleAppsScriptTypeProcess (..),
+    newGoogleAppsScriptTypeProcess,
+
+    -- ** GoogleAppsScriptTypeProcess_ProcessStatus
+    GoogleAppsScriptTypeProcess_ProcessStatus (..),
+
+    -- ** GoogleAppsScriptTypeProcess_ProcessType
+    GoogleAppsScriptTypeProcess_ProcessType (..),
+
+    -- ** GoogleAppsScriptTypeProcess_UserAccessLevel
+    GoogleAppsScriptTypeProcess_UserAccessLevel (..),
+
+    -- ** GoogleAppsScriptTypeUser
+    GoogleAppsScriptTypeUser (..),
+    newGoogleAppsScriptTypeUser,
+
+    -- ** GoogleAppsScriptTypeWebAppConfig
+    GoogleAppsScriptTypeWebAppConfig (..),
+    newGoogleAppsScriptTypeWebAppConfig,
+
+    -- ** GoogleAppsScriptTypeWebAppConfig_Access
+    GoogleAppsScriptTypeWebAppConfig_Access (..),
+
+    -- ** GoogleAppsScriptTypeWebAppConfig_ExecuteAs
+    GoogleAppsScriptTypeWebAppConfig_ExecuteAs (..),
+
+    -- ** GoogleAppsScriptTypeWebAppEntryPoint
+    GoogleAppsScriptTypeWebAppEntryPoint (..),
+    newGoogleAppsScriptTypeWebAppEntryPoint,
+
+    -- ** ListDeploymentsResponse
+    ListDeploymentsResponse (..),
+    newListDeploymentsResponse,
+
+    -- ** ListScriptProcessesResponse
+    ListScriptProcessesResponse (..),
+    newListScriptProcessesResponse,
+
+    -- ** ListUserProcessesResponse
+    ListUserProcessesResponse (..),
+    newListUserProcessesResponse,
+
+    -- ** ListValue
+    ListValue (..),
+    newListValue,
+
+    -- ** ListVersionsResponse
+    ListVersionsResponse (..),
+    newListVersionsResponse,
+
+    -- ** Metrics
+    Metrics (..),
+    newMetrics,
+
+    -- ** MetricsValue
+    MetricsValue (..),
+    newMetricsValue,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** Project
+    Project (..),
+    newProject,
+
+    -- ** ScriptExecutionResult
+    ScriptExecutionResult (..),
+    newScriptExecutionResult,
+
+    -- ** ScriptStackTraceElement
+    ScriptStackTraceElement (..),
+    newScriptStackTraceElement,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** Struct
+    Struct (..),
+    newStruct,
+
+    -- ** Struct_Fields
+    Struct_Fields (..),
+    newStruct_Fields,
 
     -- ** UpdateDeploymentRequest
-    , UpdateDeploymentRequest
-    , updateDeploymentRequest
-    , udrDeploymentConfig
-    ) where
+    UpdateDeploymentRequest (..),
+    newUpdateDeploymentRequest,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Script.Processes.List
-import Network.Google.Resource.Script.Processes.ListScriptProcesses
-import Network.Google.Resource.Script.Projects.Create
-import Network.Google.Resource.Script.Projects.Deployments.Create
-import Network.Google.Resource.Script.Projects.Deployments.Delete
-import Network.Google.Resource.Script.Projects.Deployments.Get
-import Network.Google.Resource.Script.Projects.Deployments.List
-import Network.Google.Resource.Script.Projects.Deployments.Update
-import Network.Google.Resource.Script.Projects.Get
-import Network.Google.Resource.Script.Projects.GetContent
-import Network.Google.Resource.Script.Projects.GetMetrics
-import Network.Google.Resource.Script.Projects.UpdateContent
-import Network.Google.Resource.Script.Projects.Versions.Create
-import Network.Google.Resource.Script.Projects.Versions.Get
-import Network.Google.Resource.Script.Projects.Versions.List
-import Network.Google.Resource.Script.Scripts.Run
+    -- ** Value
+    Value (..),
+    newValue,
+
+    -- ** Value_NullValue
+    Value_NullValue (..),
+
+    -- ** Value_ProtoValue
+    Value_ProtoValue (..),
+    newValue_ProtoValue,
+
+    -- ** Version
+    Version (..),
+    newVersion,
+
+    -- ** ProcessesListUserProcessFilterStatuses
+    ProcessesListUserProcessFilterStatuses (..),
+
+    -- ** ProcessesListUserProcessFilterTypes
+    ProcessesListUserProcessFilterTypes (..),
+
+    -- ** ProcessesListUserProcessFilterUserAccessLevels
+    ProcessesListUserProcessFilterUserAccessLevels (..),
+
+    -- ** ProcessesListScriptProcessesScriptProcessFilterStatuses
+    ProcessesListScriptProcessesScriptProcessFilterStatuses (..),
+
+    -- ** ProcessesListScriptProcessesScriptProcessFilterTypes
+    ProcessesListScriptProcessesScriptProcessFilterTypes (..),
+
+    -- ** ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
+    ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels (..),
+
+    -- ** ProjectsGetMetricsMetricsGranularity
+    ProjectsGetMetricsMetricsGranularity (..),
+  )
+where
+
+import Network.Google.Script.Processes.List
+import Network.Google.Script.Processes.ListScriptProcesses
+import Network.Google.Script.Projects.Create
+import Network.Google.Script.Projects.Deployments.Create
+import Network.Google.Script.Projects.Deployments.Delete
+import Network.Google.Script.Projects.Deployments.Get
+import Network.Google.Script.Projects.Deployments.List
+import Network.Google.Script.Projects.Deployments.Update
+import Network.Google.Script.Projects.Get
+import Network.Google.Script.Projects.GetContent
+import Network.Google.Script.Projects.GetMetrics
+import Network.Google.Script.Projects.UpdateContent
+import Network.Google.Script.Projects.Versions.Create
+import Network.Google.Script.Projects.Versions.Get
+import Network.Google.Script.Projects.Versions.List
+import Network.Google.Script.Scripts.Run
 import Network.Google.Script.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Apps Script API service.
-type ScriptAPI =
-     ScriptsRunResource :<|> ProcessesListResource :<|>
-       ProcessesListScriptProcessesResource
-       :<|> ProjectsVersionsListResource
-       :<|> ProjectsVersionsGetResource
-       :<|> ProjectsVersionsCreateResource
-       :<|> ProjectsDeploymentsListResource
-       :<|> ProjectsDeploymentsGetResource
-       :<|> ProjectsDeploymentsCreateResource
-       :<|> ProjectsDeploymentsDeleteResource
-       :<|> ProjectsDeploymentsUpdateResource
-       :<|> ProjectsUpdateContentResource
-       :<|> ProjectsGetResource
-       :<|> ProjectsCreateResource
-       :<|> ProjectsGetContentResource
-       :<|> ProjectsGetMetricsResource

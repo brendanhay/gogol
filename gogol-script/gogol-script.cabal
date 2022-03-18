@@ -1,61 +1,72 @@
-name:                  gogol-script
-version:               0.5.0
-synopsis:              Google Apps Script SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-script
+version:            0.5.0
+synopsis:           Google Apps Script SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manages and executes Google Apps Script projects.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Manages and executes Google Apps Script projects.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-script
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Resource.Script.Processes.List
-        , Network.Google.Resource.Script.Processes.ListScriptProcesses
-        , Network.Google.Resource.Script.Projects.Create
-        , Network.Google.Resource.Script.Projects.Deployments.Create
-        , Network.Google.Resource.Script.Projects.Deployments.Delete
-        , Network.Google.Resource.Script.Projects.Deployments.Get
-        , Network.Google.Resource.Script.Projects.Deployments.List
-        , Network.Google.Resource.Script.Projects.Deployments.Update
-        , Network.Google.Resource.Script.Projects.Get
-        , Network.Google.Resource.Script.Projects.GetContent
-        , Network.Google.Resource.Script.Projects.GetMetrics
-        , Network.Google.Resource.Script.Projects.UpdateContent
-        , Network.Google.Resource.Script.Projects.Versions.Create
-        , Network.Google.Resource.Script.Projects.Versions.Get
-        , Network.Google.Resource.Script.Projects.Versions.List
-        , Network.Google.Resource.Script.Scripts.Run
-        , Network.Google.Script
-        , Network.Google.Script.Types
+  exposed-modules:
+    Network.Google.Script
+    Network.Google.Script.Processes.List
+    Network.Google.Script.Processes.ListScriptProcesses
+    Network.Google.Script.Projects.Create
+    Network.Google.Script.Projects.Deployments.Create
+    Network.Google.Script.Projects.Deployments.Delete
+    Network.Google.Script.Projects.Deployments.Get
+    Network.Google.Script.Projects.Deployments.List
+    Network.Google.Script.Projects.Deployments.Update
+    Network.Google.Script.Projects.Get
+    Network.Google.Script.Projects.GetContent
+    Network.Google.Script.Projects.GetMetrics
+    Network.Google.Script.Projects.UpdateContent
+    Network.Google.Script.Projects.Versions.Create
+    Network.Google.Script.Projects.Versions.Get
+    Network.Google.Script.Projects.Versions.List
+    Network.Google.Script.Scripts.Run
+    Network.Google.Script.Types
 
-    other-modules:
-          Network.Google.Script.Types.Product
-        , Network.Google.Script.Types.Sum
+  other-modules:
+    Network.Google.Script.Internal.Product
+    Network.Google.Script.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
