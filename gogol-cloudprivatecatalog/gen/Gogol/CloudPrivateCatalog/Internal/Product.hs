@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudPrivateCatalog.Internal.Product
+-- Module      : Gogol.CloudPrivateCatalog.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudPrivateCatalog.Internal.Product
+module Gogol.CloudPrivateCatalog.Internal.Product
   ( -- * GoogleCloudPrivatecatalogV1beta1Catalog
     GoogleCloudPrivatecatalogV1beta1Catalog (..),
     newGoogleCloudPrivatecatalogV1beta1Catalog,
@@ -60,8 +60,8 @@ module Network.Google.CloudPrivateCatalog.Internal.Product
   )
 where
 
-import Network.Google.CloudPrivateCatalog.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudPrivateCatalog.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | The readonly representation of a catalog computed with a given resource context.
 --

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudPrivateCatalog
+-- Module      : Gogol.CloudPrivateCatalog
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Enable cloud users to discover enterprise catalogs and products in their organizations.
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference>
-module Network.Google.CloudPrivateCatalog
+module Gogol.CloudPrivateCatalog
   ( -- * Configuration
     cloudPrivateCatalogService,
 
@@ -122,13 +122,13 @@ module Network.Google.CloudPrivateCatalog
   )
 where
 
-import Network.Google.CloudPrivateCatalog.Folders.Catalogs.Search
-import Network.Google.CloudPrivateCatalog.Folders.Products.Search
-import Network.Google.CloudPrivateCatalog.Folders.Versions.Search
-import Network.Google.CloudPrivateCatalog.Organizations.Catalogs.Search
-import Network.Google.CloudPrivateCatalog.Organizations.Products.Search
-import Network.Google.CloudPrivateCatalog.Organizations.Versions.Search
-import Network.Google.CloudPrivateCatalog.Projects.Catalogs.Search
-import Network.Google.CloudPrivateCatalog.Projects.Products.Search
-import Network.Google.CloudPrivateCatalog.Projects.Versions.Search
-import Network.Google.CloudPrivateCatalog.Types
+import Gogol.CloudPrivateCatalog.Folders.Catalogs.Search
+import Gogol.CloudPrivateCatalog.Folders.Products.Search
+import Gogol.CloudPrivateCatalog.Folders.Versions.Search
+import Gogol.CloudPrivateCatalog.Organizations.Catalogs.Search
+import Gogol.CloudPrivateCatalog.Organizations.Products.Search
+import Gogol.CloudPrivateCatalog.Organizations.Versions.Search
+import Gogol.CloudPrivateCatalog.Projects.Catalogs.Search
+import Gogol.CloudPrivateCatalog.Projects.Products.Search
+import Gogol.CloudPrivateCatalog.Projects.Versions.Search
+import Gogol.CloudPrivateCatalog.Types

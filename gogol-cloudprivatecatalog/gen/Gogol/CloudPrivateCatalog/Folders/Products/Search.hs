@@ -19,35 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudPrivateCatalog.Projects.Versions.Search
+-- Module      : Gogol.CloudPrivateCatalog.Folders.Products.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search Version resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.
+-- Search Product resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.
 --
--- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.projects.versions.search@.
-module Network.Google.CloudPrivateCatalog.Projects.Versions.Search
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.products.search@.
+module Gogol.CloudPrivateCatalog.Folders.Products.Search
   ( -- * Resource
-    CloudPrivateCatalogProjectsVersionsSearchResource,
+    CloudPrivateCatalogFoldersProductsSearchResource,
 
     -- ** Constructing a Request
-    newCloudPrivateCatalogProjectsVersionsSearch,
-    CloudPrivateCatalogProjectsVersionsSearch,
+    newCloudPrivateCatalogFoldersProductsSearch,
+    CloudPrivateCatalogFoldersProductsSearch,
   )
 where
 
-import Network.Google.CloudPrivateCatalog.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudPrivateCatalog.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudprivatecatalog.projects.versions.search@ method which the
--- 'CloudPrivateCatalogProjectsVersionsSearch' request conforms to.
-type CloudPrivateCatalogProjectsVersionsSearchResource =
+-- | A resource alias for @cloudprivatecatalog.folders.products.search@ method which the
+-- 'CloudPrivateCatalogFoldersProductsSearch' request conforms to.
+type CloudPrivateCatalogFoldersProductsSearchResource =
   "v1beta1"
     Core.:> Core.Capture "resource" Core.Text
-    Core.:> "versions:search"
+    Core.:> "products:search"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -59,12 +59,12 @@ type CloudPrivateCatalogProjectsVersionsSearchResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
-              GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
+              GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
 
--- | Search Version resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.
+-- | Search Product resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.
 --
--- /See:/ 'newCloudPrivateCatalogProjectsVersionsSearch' smart constructor.
-data CloudPrivateCatalogProjectsVersionsSearch = CloudPrivateCatalogProjectsVersionsSearch
+-- /See:/ 'newCloudPrivateCatalogFoldersProductsSearch' smart constructor.
+data CloudPrivateCatalogFoldersProductsSearch = CloudPrivateCatalogFoldersProductsSearch
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -73,11 +73,11 @@ data CloudPrivateCatalogProjectsVersionsSearch = CloudPrivateCatalogProjectsVers
     callback :: (Core.Maybe Core.Text),
     -- | The maximum number of entries that are requested.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A pagination token returned from a previous call to SearchVersions that indicates where this listing should continue from. This field is optional.
+    -- | A pagination token returned from a previous call to SearchProducts that indicates where this listing should continue from. This field is optional.
     pageToken :: (Core.Maybe Core.Text),
-    -- | The query to filter the versions. Required.
+    -- | The query to filter the products.
     --
-    -- The supported queries are: * List versions under a product: @parent=catalogs\/{catalog_id}\/products\/{product_id}@ * Get a version by name: @name=catalogs\/{catalog_id}\/products\/{product_id}\/versions\/{version_id}@
+    -- The supported queries are: * List products of all catalogs: empty * List products under a catalog: @parent=catalogs\/{catalog_id}@ * Get a product by name: @name=catalogs\/{catalog_id}\/products\/{product_id}@
     query :: (Core.Maybe Core.Text),
     -- | Required. The name of the resource context. See SearchCatalogsRequest.resource for details.
     resource :: Core.Text,
@@ -88,13 +88,13 @@ data CloudPrivateCatalogProjectsVersionsSearch = CloudPrivateCatalogProjectsVers
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudPrivateCatalogProjectsVersionsSearch' with the minimum fields required to make a request.
-newCloudPrivateCatalogProjectsVersionsSearch ::
+-- | Creates a value of 'CloudPrivateCatalogFoldersProductsSearch' with the minimum fields required to make a request.
+newCloudPrivateCatalogFoldersProductsSearch ::
   -- |  Required. The name of the resource context. See SearchCatalogsRequest.resource for details. See 'resource'.
   Core.Text ->
-  CloudPrivateCatalogProjectsVersionsSearch
-newCloudPrivateCatalogProjectsVersionsSearch resource =
-  CloudPrivateCatalogProjectsVersionsSearch
+  CloudPrivateCatalogFoldersProductsSearch
+newCloudPrivateCatalogFoldersProductsSearch resource =
+  CloudPrivateCatalogFoldersProductsSearch
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -108,16 +108,16 @@ newCloudPrivateCatalogProjectsVersionsSearch resource =
 
 instance
   Core.GoogleRequest
-    CloudPrivateCatalogProjectsVersionsSearch
+    CloudPrivateCatalogFoldersProductsSearch
   where
   type
-    Rs CloudPrivateCatalogProjectsVersionsSearch =
-      GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
+    Rs CloudPrivateCatalogFoldersProductsSearch =
+      GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
   type
-    Scopes CloudPrivateCatalogProjectsVersionsSearch =
+    Scopes CloudPrivateCatalogFoldersProductsSearch =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudPrivateCatalogProjectsVersionsSearch {..} =
+    CloudPrivateCatalogFoldersProductsSearch {..} =
       go
         resource
         xgafv
@@ -135,6 +135,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudPrivateCatalogProjectsVersionsSearchResource
+                  CloudPrivateCatalogFoldersProductsSearchResource
             )
             Core.mempty

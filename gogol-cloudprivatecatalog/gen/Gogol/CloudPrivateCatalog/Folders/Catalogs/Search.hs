@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudPrivateCatalog.Folders.Catalogs.Search
+-- Module      : Gogol.CloudPrivateCatalog.Folders.Catalogs.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Search Catalog resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.catalogs.search@.
-module Network.Google.CloudPrivateCatalog.Folders.Catalogs.Search
+module Gogol.CloudPrivateCatalog.Folders.Catalogs.Search
   ( -- * Resource
     CloudPrivateCatalogFoldersCatalogsSearchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudPrivateCatalog.Folders.Catalogs.Search
   )
 where
 
-import Network.Google.CloudPrivateCatalog.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudPrivateCatalog.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudprivatecatalog.folders.catalogs.search@ method which the
 -- 'CloudPrivateCatalogFoldersCatalogsSearch' request conforms to.
