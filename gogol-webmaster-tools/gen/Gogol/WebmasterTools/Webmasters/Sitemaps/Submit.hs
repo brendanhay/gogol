@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebmasterTools.Webmasters.Sitemaps.Get
+-- Module      : Gogol.WebmasterTools.Webmasters.Sitemaps.Submit
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves information about a specific sitemap.
+-- Submits a sitemap for a site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.get@.
-module Network.Google.WebmasterTools.Webmasters.Sitemaps.Get
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.submit@.
+module Gogol.WebmasterTools.Webmasters.Sitemaps.Submit
   ( -- * Resource
-    WebmastersSitemapsGetResource,
+    WebmastersSitemapsSubmitResource,
 
     -- ** Constructing a Request
-    newWebmastersSitemapsGet,
-    WebmastersSitemapsGet,
+    newWebmastersSitemapsSubmit,
+    WebmastersSitemapsSubmit,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebmasterTools.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebmasterTools.Types
 
--- | A resource alias for @webmasters.sitemaps.get@ method which the
--- 'WebmastersSitemapsGet' request conforms to.
-type WebmastersSitemapsGetResource =
+-- | A resource alias for @webmasters.sitemaps.submit@ method which the
+-- 'WebmastersSitemapsSubmit' request conforms to.
+type WebmastersSitemapsSubmitResource =
   "webmasters"
     Core.:> "v3"
     Core.:> "sites"
@@ -52,37 +52,35 @@ type WebmastersSitemapsGetResource =
     Core.:> "sitemaps"
     Core.:> Core.Capture "feedpath" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] WmxSitemap
+    Core.:> Core.Put '[Core.JSON] ()
 
--- | Retrieves information about a specific sitemap.
+-- | Submits a sitemap for a site.
 --
--- /See:/ 'newWebmastersSitemapsGet' smart constructor.
-data WebmastersSitemapsGet = WebmastersSitemapsGet
-  { -- | The URL of the actual sitemap. For example: http:\/\/www.example.com\/sitemap.xml
+-- /See:/ 'newWebmastersSitemapsSubmit' smart constructor.
+data WebmastersSitemapsSubmit = WebmastersSitemapsSubmit
+  { -- | The URL of the sitemap to add. For example: http:\/\/www.example.com\/sitemap.xml
     feedpath :: Core.Text,
     -- | The site\'s URL, including protocol. For example: http:\/\/www.example.com\/
     siteUrl :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebmastersSitemapsGet' with the minimum fields required to make a request.
-newWebmastersSitemapsGet ::
-  -- |  The URL of the actual sitemap. For example: http:\/\/www.example.com\/sitemap.xml See 'feedpath'.
+-- | Creates a value of 'WebmastersSitemapsSubmit' with the minimum fields required to make a request.
+newWebmastersSitemapsSubmit ::
+  -- |  The URL of the sitemap to add. For example: http:\/\/www.example.com\/sitemap.xml See 'feedpath'.
   Core.Text ->
   -- |  The site\'s URL, including protocol. For example: http:\/\/www.example.com\/ See 'siteUrl'.
   Core.Text ->
-  WebmastersSitemapsGet
-newWebmastersSitemapsGet feedpath siteUrl =
-  WebmastersSitemapsGet {feedpath = feedpath, siteUrl = siteUrl}
+  WebmastersSitemapsSubmit
+newWebmastersSitemapsSubmit feedpath siteUrl =
+  WebmastersSitemapsSubmit {feedpath = feedpath, siteUrl = siteUrl}
 
-instance Core.GoogleRequest WebmastersSitemapsGet where
-  type Rs WebmastersSitemapsGet = WmxSitemap
+instance Core.GoogleRequest WebmastersSitemapsSubmit where
+  type Rs WebmastersSitemapsSubmit = ()
   type
-    Scopes WebmastersSitemapsGet =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
-  requestClient WebmastersSitemapsGet {..} =
+    Scopes WebmastersSitemapsSubmit =
+      '["https://www.googleapis.com/auth/webmasters"]
+  requestClient WebmastersSitemapsSubmit {..} =
     go
       siteUrl
       feedpath
@@ -92,6 +90,6 @@ instance Core.GoogleRequest WebmastersSitemapsGet where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy WebmastersSitemapsGetResource
+              Core.Proxy WebmastersSitemapsSubmitResource
           )
           Core.mempty

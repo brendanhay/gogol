@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebmasterTools.Types
+-- Module      : Gogol.WebmasterTools.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.WebmasterTools.Types
+module Gogol.WebmasterTools.Types
   ( -- * Configuration
     webmasterToolsService,
 
@@ -77,9 +77,9 @@ module Network.Google.WebmasterTools.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebmasterTools.Internal.Product
-import Network.Google.WebmasterTools.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.WebmasterTools.Internal.Product
+import Gogol.WebmasterTools.Internal.Sum
 
 -- | Default request referring to version @v3@ of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
 webmasterToolsService :: Core.ServiceConfig

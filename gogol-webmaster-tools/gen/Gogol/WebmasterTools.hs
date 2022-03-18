@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebmasterTools
+-- Module      : Gogol.WebmasterTools
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- View Google Search Console data for your verified sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference>
-module Network.Google.WebmasterTools
+module Gogol.WebmasterTools
   ( -- * Configuration
     webmasterToolsService,
 
@@ -128,13 +128,13 @@ module Network.Google.WebmasterTools
   )
 where
 
-import Network.Google.WebmasterTools.Types
-import Network.Google.WebmasterTools.Webmasters.Searchanalytics.Query
-import Network.Google.WebmasterTools.Webmasters.Sitemaps.Delete
-import Network.Google.WebmasterTools.Webmasters.Sitemaps.Get
-import Network.Google.WebmasterTools.Webmasters.Sitemaps.List
-import Network.Google.WebmasterTools.Webmasters.Sitemaps.Submit
-import Network.Google.WebmasterTools.Webmasters.Sites.Add
-import Network.Google.WebmasterTools.Webmasters.Sites.Delete
-import Network.Google.WebmasterTools.Webmasters.Sites.Get
-import Network.Google.WebmasterTools.Webmasters.Sites.List
+import Gogol.WebmasterTools.Types
+import Gogol.WebmasterTools.Webmasters.Searchanalytics.Query
+import Gogol.WebmasterTools.Webmasters.Sitemaps.Delete
+import Gogol.WebmasterTools.Webmasters.Sitemaps.Get
+import Gogol.WebmasterTools.Webmasters.Sitemaps.List
+import Gogol.WebmasterTools.Webmasters.Sitemaps.Submit
+import Gogol.WebmasterTools.Webmasters.Sites.Add
+import Gogol.WebmasterTools.Webmasters.Sites.Delete
+import Gogol.WebmasterTools.Webmasters.Sites.Get
+import Gogol.WebmasterTools.Webmasters.Sites.List

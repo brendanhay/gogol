@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebmasterTools.Webmasters.Sites.Get
+-- Module      : Gogol.WebmasterTools.Webmasters.Sites.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves information about specific site.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.get@.
-module Network.Google.WebmasterTools.Webmasters.Sites.Get
+module Gogol.WebmasterTools.Webmasters.Sites.Get
   ( -- * Resource
     WebmastersSitesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.WebmasterTools.Webmasters.Sites.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebmasterTools.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.get@ method which the
 -- 'WebmastersSitesGet' request conforms to.

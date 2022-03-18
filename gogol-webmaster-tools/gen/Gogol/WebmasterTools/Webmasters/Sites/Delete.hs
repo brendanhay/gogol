@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebmasterTools.Webmasters.Sites.Delete
+-- Module      : Gogol.WebmasterTools.Webmasters.Sites.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Removes a site from the set of the user\'s Search Console sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.delete@.
-module Network.Google.WebmasterTools.Webmasters.Sites.Delete
+module Gogol.WebmasterTools.Webmasters.Sites.Delete
   ( -- * Resource
     WebmastersSitesDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.WebmasterTools.Webmasters.Sites.Delete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebmasterTools.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.delete@ method which the
 -- 'WebmastersSitesDelete' request conforms to.
