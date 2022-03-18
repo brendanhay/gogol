@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement
+-- Module      : Gogol.ServiceConsumerManagement
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Manages the service consumers of a Service Infrastructure service.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference>
-module Network.Google.ServiceConsumerManagement
+module Gogol.ServiceConsumerManagement
   ( -- * Configuration
     serviceConsumerManagementService,
 
@@ -560,18 +560,18 @@ module Network.Google.ServiceConsumerManagement
   )
 where
 
-import Network.Google.ServiceConsumerManagement.Operations.Cancel
-import Network.Google.ServiceConsumerManagement.Operations.Delete
-import Network.Google.ServiceConsumerManagement.Operations.Get
-import Network.Google.ServiceConsumerManagement.Operations.List
-import Network.Google.ServiceConsumerManagement.Services.Search
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AddProject
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.Create
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.Delete
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.DeleteProject
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.List
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
-import Network.Google.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
-import Network.Google.ServiceConsumerManagement.Types
+import Gogol.ServiceConsumerManagement.Operations.Cancel
+import Gogol.ServiceConsumerManagement.Operations.Delete
+import Gogol.ServiceConsumerManagement.Operations.Get
+import Gogol.ServiceConsumerManagement.Operations.List
+import Gogol.ServiceConsumerManagement.Services.Search
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.AddProject
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.Create
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.Delete
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.DeleteProject
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.List
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
+import Gogol.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
+import Gogol.ServiceConsumerManagement.Types

@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Operations.Delete
+-- Module      : Gogol.ServiceConsumerManagement.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.operations.delete@.
-module Network.Google.ServiceConsumerManagement.Operations.Delete
+-- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.operations.get@.
+module Gogol.ServiceConsumerManagement.Operations.Get
   ( -- * Resource
-    ServiceConsumerManagementOperationsDeleteResource,
+    ServiceConsumerManagementOperationsGetResource,
 
     -- ** Constructing a Request
-    newServiceConsumerManagementOperationsDelete,
-    ServiceConsumerManagementOperationsDelete,
+    newServiceConsumerManagementOperationsGet,
+    ServiceConsumerManagementOperationsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
--- | A resource alias for @serviceconsumermanagement.operations.delete@ method which the
--- 'ServiceConsumerManagementOperationsDelete' request conforms to.
-type ServiceConsumerManagementOperationsDeleteResource =
+-- | A resource alias for @serviceconsumermanagement.operations.get@ method which the
+-- 'ServiceConsumerManagementOperationsGet' request conforms to.
+type ServiceConsumerManagementOperationsGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type ServiceConsumerManagementOperationsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] Operation
 
--- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ 'newServiceConsumerManagementOperationsDelete' smart constructor.
-data ServiceConsumerManagementOperationsDelete = ServiceConsumerManagementOperationsDelete
+-- /See:/ 'newServiceConsumerManagementOperationsGet' smart constructor.
+data ServiceConsumerManagementOperationsGet = ServiceConsumerManagementOperationsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource to be deleted.
+    -- | The name of the operation resource.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data ServiceConsumerManagementOperationsDelete = ServiceConsumerManagementOperat
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ServiceConsumerManagementOperationsDelete' with the minimum fields required to make a request.
-newServiceConsumerManagementOperationsDelete ::
-  -- |  The name of the operation resource to be deleted. See 'name'.
+-- | Creates a value of 'ServiceConsumerManagementOperationsGet' with the minimum fields required to make a request.
+newServiceConsumerManagementOperationsGet ::
+  -- |  The name of the operation resource. See 'name'.
   Core.Text ->
-  ServiceConsumerManagementOperationsDelete
-newServiceConsumerManagementOperationsDelete name =
-  ServiceConsumerManagementOperationsDelete
+  ServiceConsumerManagementOperationsGet
+newServiceConsumerManagementOperationsGet name =
+  ServiceConsumerManagementOperationsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,16 +91,16 @@ newServiceConsumerManagementOperationsDelete name =
 
 instance
   Core.GoogleRequest
-    ServiceConsumerManagementOperationsDelete
+    ServiceConsumerManagementOperationsGet
   where
   type
-    Rs ServiceConsumerManagementOperationsDelete =
-      Empty
+    Rs ServiceConsumerManagementOperationsGet =
+      Operation
   type
-    Scopes ServiceConsumerManagementOperationsDelete =
+    Scopes ServiceConsumerManagementOperationsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    ServiceConsumerManagementOperationsDelete {..} =
+    ServiceConsumerManagementOperationsGet {..} =
       go
         name
         xgafv
@@ -115,6 +115,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  ServiceConsumerManagementOperationsDeleteResource
+                  ServiceConsumerManagementOperationsGetResource
             )
             Core.mempty

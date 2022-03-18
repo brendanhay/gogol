@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
+-- Module      : Gogol.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Removes the specified project resource identified by a tenant resource tag. The method removes the project lien with \'TenantManager\' origin if that was added. It then attempts to delete the project. If that operation fails, this method also fails. Calls to remove already removed or non-existent tenant project succeed. After the project has been deleted, or if was already in a DELETED state, resource metadata is permanently removed from the tenancy unit. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.removeProject@.
-module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
+module Gogol.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
   ( -- * Resource
     ServiceConsumerManagementServicesTenancyUnitsRemoveProjectResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.RemoveProj
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.removeProject@ method which the
 -- 'ServiceConsumerManagementServicesTenancyUnitsRemoveProject' request conforms to.

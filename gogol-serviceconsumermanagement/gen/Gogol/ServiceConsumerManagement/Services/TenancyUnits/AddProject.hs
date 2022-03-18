@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AddProject
+-- Module      : Gogol.ServiceConsumerManagement.Services.TenancyUnits.AddProject
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Add a new tenant project to the tenancy unit. There can be a maximum of 1024 tenant projects in a tenancy unit. If there are previously failed @AddTenantProject@ calls, you might need to call @RemoveTenantProject@ first to resolve them before you can make another call to @AddTenantProject@ with the same tag. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.addProject@.
-module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AddProject
+module Gogol.ServiceConsumerManagement.Services.TenancyUnits.AddProject
   ( -- * Resource
     ServiceConsumerManagementServicesTenancyUnitsAddProjectResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AddProject
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.addProject@ method which the
 -- 'ServiceConsumerManagementServicesTenancyUnitsAddProject' request conforms to.

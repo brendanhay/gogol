@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
+-- Module      : Gogol.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Attempts to undelete a previously deleted tenant project. The project must be in a DELETED state. There are no guarantees that an undeleted project will be in a fully restored and functional state. Call the @ApplyTenantProjectConfig@ method to update its configuration and then validate all managed service resources. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.undeleteProject@.
-module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
+module Gogol.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
   ( -- * Resource
     ServiceConsumerManagementServicesTenancyUnitsUndeleteProjectResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.UndeletePr
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.undeleteProject@ method which the
 -- 'ServiceConsumerManagementServicesTenancyUnitsUndeleteProject' request conforms to.

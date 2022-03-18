@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
+-- Module      : Gogol.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Apply a configuration to an existing tenant project. This project must exist in an active state and have the original owner account. The caller must have permission to add a project to the given tenancy unit. The configuration is applied, but any existing settings on the project aren\'t modified. Specified policy bindings are applied. Existing bindings aren\'t modified. Specified services are activated. No service is deactivated. If specified, new billing configuration is applied. Omit a billing configuration to keep the existing one. A service account in the project is created if previously non existed. Specified labels will be appended to tenant project, note that the value of existing label key will be updated if the same label key is requested. The specified folder is ignored, as moving a tenant project to a different folder isn\'t supported. The operation fails if any of the steps fail, but no rollback of already applied configuration changes is attempted. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.applyProjectConfig@.
-module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
+module Gogol.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
   ( -- * Resource
     ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfigResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.ApplyProje
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.applyProjectConfig@ method which the
 -- 'ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig' request conforms to.

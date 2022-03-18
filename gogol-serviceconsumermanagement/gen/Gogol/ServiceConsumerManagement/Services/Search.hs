@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.Search
+-- Module      : Gogol.ServiceConsumerManagement.Services.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Search tenancy units for a managed service.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.search@.
-module Network.Google.ServiceConsumerManagement.Services.Search
+module Gogol.ServiceConsumerManagement.Services.Search
   ( -- * Resource
     ServiceConsumerManagementServicesSearchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.Search
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.search@ method which the
 -- 'ServiceConsumerManagementServicesSearch' request conforms to.
