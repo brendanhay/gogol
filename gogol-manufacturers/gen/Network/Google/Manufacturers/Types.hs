@@ -1,182 +1,124 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Manufacturers.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Manufacturers.Types
-    (
-    -- * Service Configuration
-      manufacturersService
+  ( -- * Configuration
+    manufacturersService,
 
     -- * OAuth Scopes
-    , manufacturercenterScope
+    manufacturercenterScope,
 
-    -- * DestinationStatusStatus
-    , DestinationStatusStatus (..)
+    -- * Types
 
-    -- * IssueResolution
-    , IssueResolution (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Image
-    , Image
-    , image
-    , iStatus
-    , iImageURL
-    , iType
+    -- ** Attributes
+    Attributes (..),
+    newAttributes,
 
-    -- * FeatureDescription
-    , FeatureDescription
-    , featureDescription
-    , fdImage
-    , fdText
-    , fdHeadline
+    -- ** Capacity
+    Capacity (..),
+    newCapacity,
 
-    -- * ProductDetail
-    , ProductDetail
-    , productDetail
-    , pdAttributeValue
-    , pdAttributeName
-    , pdSectionName
+    -- ** Count
+    Count (..),
+    newCount,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** DestinationStatus
+    DestinationStatus (..),
+    newDestinationStatus,
 
-    -- * DestinationStatus
-    , DestinationStatus
-    , destinationStatus
-    , dsDestination
-    , dsStatus
+    -- ** DestinationStatus_Status
+    DestinationStatus_Status (..),
 
-    -- * AccountsProductsGetInclude
-    , AccountsProductsGetInclude (..)
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * ImageStatus
-    , ImageStatus (..)
+    -- ** FeatureDescription
+    FeatureDescription (..),
+    newFeatureDescription,
 
-    -- * Count
-    , Count
-    , count
-    , cValue
-    , cUnit
+    -- ** Image
+    Image (..),
+    newImage,
 
-    -- * AccountsProductsListInclude
-    , AccountsProductsListInclude (..)
+    -- ** Image_Status
+    Image_Status (..),
 
-    -- * Capacity
-    , Capacity
-    , capacity
-    , capValue
-    , capUnit
+    -- ** Image_Type
+    Image_Type (..),
 
-    -- * ImageType
-    , ImageType (..)
+    -- ** Issue
+    Issue (..),
+    newIssue,
 
-    -- * Attributes
-    , Attributes
-    , attributes
-    , aProductName
-    , aScent
-    , aImageLink
-    , aFeatureDescription
-    , aProductDetail
-    , aProductLine
-    , aColor
-    , aSize
-    , aFlavor
-    , aPattern
-    , aSizeSystem
-    , aProductHighlight
-    , aMaterial
-    , aFormat
-    , aProductType
-    , aCount
-    , aDisclosureDate
-    , aBrand
-    , aAdditionalImageLink
-    , aExcludedDestination
-    , aVideoLink
-    , aCapacity
-    , aGtin
-    , aAgeGroup
-    , aIncludedDestination
-    , aGender
-    , aSuggestedRetailPrice
-    , aItemGroupId
-    , aRichProductContent
-    , aTargetClientId
-    , aSizeType
-    , aReleaseDate
-    , aTitle
-    , aMpn
-    , aProductPageURL
-    , aDescription
-    , aTheme
+    -- ** Issue_Resolution
+    Issue_Resolution (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Issue_Severity
+    Issue_Severity (..),
 
-    -- * IssueSeverity
-    , IssueSeverity (..)
+    -- ** ListProductsResponse
+    ListProductsResponse (..),
+    newListProductsResponse,
 
-    -- * Price
-    , Price
-    , price
-    , pAmount
-    , pCurrency
+    -- ** Price
+    Price (..),
+    newPrice,
 
-    -- * Product
-    , Product
-    , product
-    , pParent
-    , pDestinationStatuses
-    , pTargetCountry
-    , pName
-    , pAttributes
-    , pIssues
-    , pContentLanguage
-    , pProductId
+    -- ** Product
+    Product (..),
+    newProduct,
 
-    -- * Issue
-    , Issue
-    , issue
-    , issAttribute
-    , issDestination
-    , issSeverity
-    , issResolution
-    , issTitle
-    , issType
-    , issTimestamp
-    , issDescription
+    -- ** ProductDetail
+    ProductDetail (..),
+    newProductDetail,
 
-    -- * ListProductsResponse
-    , ListProductsResponse
-    , listProductsResponse
-    , lprNextPageToken
-    , lprProducts
-    ) where
+    -- ** AccountsProductsGetInclude
+    AccountsProductsGetInclude (..),
 
-import Network.Google.Manufacturers.Types.Product
-import Network.Google.Manufacturers.Types.Sum
-import Network.Google.Prelude
+    -- ** AccountsProductsListInclude
+    AccountsProductsListInclude (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Manufacturer Center API. This contains the host and root path used as a starting point for constructing service requests.
-manufacturersService :: ServiceConfig
-manufacturersService
-  = defaultService (ServiceId "manufacturers:v1")
-      "manufacturers.googleapis.com"
+import Network.Google.Manufacturers.Internal.Product
+import Network.Google.Manufacturers.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Manufacturer Center API. This contains the host and root path used as a starting point for constructing service requests.
+manufacturersService :: Core.ServiceConfig
+manufacturersService =
+  Core.defaultService
+    (Core.ServiceId "manufacturers:v1")
+    "manufacturers.googleapis.com"
 
 -- | Manage your product listings for Google Manufacturer Center
-manufacturercenterScope :: Proxy '["https://www.googleapis.com/auth/manufacturercenter"]
-manufacturercenterScope = Proxy
+manufacturercenterScope :: Core.Proxy '["https://www.googleapis.com/auth/manufacturercenter"]
+manufacturercenterScope = Core.Proxy
