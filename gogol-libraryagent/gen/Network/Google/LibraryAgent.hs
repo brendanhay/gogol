@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.LibraryAgent
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,86 +30,71 @@
 --
 -- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference>
 module Network.Google.LibraryAgent
-    (
-    -- * Service Configuration
-      libraryAgentService
+  ( -- * Configuration
+    libraryAgentService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , LibraryAgentAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** libraryagent.shelves.books.borrow
-    , module Network.Google.Resource.LibraryAgent.Shelves.Books.Borrow
+    LibraryAgentShelvesBooksBorrowResource,
+    newLibraryAgentShelvesBooksBorrow,
+    LibraryAgentShelvesBooksBorrow,
 
     -- ** libraryagent.shelves.books.get
-    , module Network.Google.Resource.LibraryAgent.Shelves.Books.Get
+    LibraryAgentShelvesBooksGetResource,
+    newLibraryAgentShelvesBooksGet,
+    LibraryAgentShelvesBooksGet,
 
     -- ** libraryagent.shelves.books.list
-    , module Network.Google.Resource.LibraryAgent.Shelves.Books.List
+    LibraryAgentShelvesBooksListResource,
+    newLibraryAgentShelvesBooksList,
+    LibraryAgentShelvesBooksList,
 
     -- ** libraryagent.shelves.books.return
-    , module Network.Google.Resource.LibraryAgent.Shelves.Books.Return
+    LibraryAgentShelvesBooksReturnResource,
+    newLibraryAgentShelvesBooksReturn,
+    LibraryAgentShelvesBooksReturn,
 
     -- ** libraryagent.shelves.get
-    , module Network.Google.Resource.LibraryAgent.Shelves.Get
+    LibraryAgentShelvesGetResource,
+    newLibraryAgentShelvesGet,
+    LibraryAgentShelvesGet,
 
     -- ** libraryagent.shelves.list
-    , module Network.Google.Resource.LibraryAgent.Shelves.List
+    LibraryAgentShelvesListResource,
+    newLibraryAgentShelvesList,
+    LibraryAgentShelvesList,
 
     -- * Types
 
-    -- ** GoogleExampleLibraryagentV1Shelf
-    , GoogleExampleLibraryagentV1Shelf
-    , googleExampleLibraryagentV1Shelf
-    , gelvsName
-    , gelvsTheme
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** GoogleExampleLibraryagentV1ListShelvesResponse
-    , GoogleExampleLibraryagentV1ListShelvesResponse
-    , googleExampleLibraryagentV1ListShelvesResponse
-    , gelvlsrNextPageToken
-    , gelvlsrShelves
-
-    -- ** GoogleExampleLibraryagentV1ListBooksResponse
-    , GoogleExampleLibraryagentV1ListBooksResponse
-    , googleExampleLibraryagentV1ListBooksResponse
-    , gelvlbrNextPageToken
-    , gelvlbrBooks
+    Xgafv (..),
 
     -- ** GoogleExampleLibraryagentV1Book
-    , GoogleExampleLibraryagentV1Book
-    , googleExampleLibraryagentV1Book
-    , gelvbRead
-    , gelvbName
-    , gelvbAuthor
-    , gelvbTitle
-    ) where
+    GoogleExampleLibraryagentV1Book (..),
+    newGoogleExampleLibraryagentV1Book,
 
-import Network.Google.Prelude
+    -- ** GoogleExampleLibraryagentV1ListBooksResponse
+    GoogleExampleLibraryagentV1ListBooksResponse (..),
+    newGoogleExampleLibraryagentV1ListBooksResponse,
+
+    -- ** GoogleExampleLibraryagentV1ListShelvesResponse
+    GoogleExampleLibraryagentV1ListShelvesResponse (..),
+    newGoogleExampleLibraryagentV1ListShelvesResponse,
+
+    -- ** GoogleExampleLibraryagentV1Shelf
+    GoogleExampleLibraryagentV1Shelf (..),
+    newGoogleExampleLibraryagentV1Shelf,
+  )
+where
+
+import Network.Google.LibraryAgent.Shelves.Books.Borrow
+import Network.Google.LibraryAgent.Shelves.Books.Get
+import Network.Google.LibraryAgent.Shelves.Books.List
+import Network.Google.LibraryAgent.Shelves.Books.Return
+import Network.Google.LibraryAgent.Shelves.Get
+import Network.Google.LibraryAgent.Shelves.List
 import Network.Google.LibraryAgent.Types
-import Network.Google.Resource.LibraryAgent.Shelves.Books.Borrow
-import Network.Google.Resource.LibraryAgent.Shelves.Books.Get
-import Network.Google.Resource.LibraryAgent.Shelves.Books.List
-import Network.Google.Resource.LibraryAgent.Shelves.Books.Return
-import Network.Google.Resource.LibraryAgent.Shelves.Get
-import Network.Google.Resource.LibraryAgent.Shelves.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Library Agent API service.
-type LibraryAgentAPI =
-     ShelvesBooksReturnResource :<|>
-       ShelvesBooksListResource
-       :<|> ShelvesBooksBorrowResource
-       :<|> ShelvesBooksGetResource
-       :<|> ShelvesListResource
-       :<|> ShelvesGetResource
