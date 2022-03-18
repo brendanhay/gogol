@@ -39,24 +39,25 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.SiteVerification
-    Network.Google.SiteVerification.Types
-    Network.Google.SiteVerification.WebResource.Delete
-    Network.Google.SiteVerification.WebResource.Get
-    Network.Google.SiteVerification.WebResource.GetToken
-    Network.Google.SiteVerification.WebResource.Insert
-    Network.Google.SiteVerification.WebResource.List
-    Network.Google.SiteVerification.WebResource.Patch
-    Network.Google.SiteVerification.WebResource.Update
+    Gogol.SiteVerification
+    Gogol.SiteVerification.Types
+    Gogol.SiteVerification.WebResource.Delete
+    Gogol.SiteVerification.WebResource.Get
+    Gogol.SiteVerification.WebResource.GetToken
+    Gogol.SiteVerification.WebResource.Insert
+    Gogol.SiteVerification.WebResource.List
+    Gogol.SiteVerification.WebResource.Patch
+    Gogol.SiteVerification.WebResource.Update
 
   other-modules:
-    Network.Google.SiteVerification.Internal.Product
-    Network.Google.SiteVerification.Internal.Sum
+    Gogol.SiteVerification.Internal.Product
+    Gogol.SiteVerification.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

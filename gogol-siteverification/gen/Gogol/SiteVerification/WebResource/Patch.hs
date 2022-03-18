@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SiteVerification.WebResource.Patch
+-- Module      : Gogol.SiteVerification.WebResource.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Modify the list of owners for your website or domain. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.patch@.
-module Network.Google.SiteVerification.WebResource.Patch
+module Gogol.SiteVerification.WebResource.Patch
   ( -- * Resource
     SiteVerificationWebResourcePatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SiteVerification.WebResource.Patch
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SiteVerification.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.patch@ method which the
 -- 'SiteVerificationWebResourcePatch' request conforms to.
