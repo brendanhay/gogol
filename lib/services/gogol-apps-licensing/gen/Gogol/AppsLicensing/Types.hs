@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,46 +25,46 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AppsLicensing.Types
-    (
-    -- * Configuration
-      appsLicensingService
+  ( -- * Configuration
+    appsLicensingService,
 
     -- * OAuth Scopes
-    , appsLicensingScope
+    appsLicensingScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** LicenseAssignment
-    , LicenseAssignment (..)
-    , newLicenseAssignment
+    LicenseAssignment (..),
+    newLicenseAssignment,
 
     -- ** LicenseAssignmentInsert
-    , LicenseAssignmentInsert (..)
-    , newLicenseAssignmentInsert
+    LicenseAssignmentInsert (..),
+    newLicenseAssignmentInsert,
 
     -- ** LicenseAssignmentList
-    , LicenseAssignmentList (..)
-    , newLicenseAssignmentList
-    ) where
+    LicenseAssignmentList (..),
+    newLicenseAssignmentList,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AppsLicensing.Internal.Product
 import Gogol.AppsLicensing.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Enterprise License Manager API. This contains the host and root path used as a starting point for constructing service requests.
 appsLicensingService :: Core.ServiceConfig
-appsLicensingService
-  = Core.defaultService (Core.ServiceId "licensing:v1")
-      "licensing.googleapis.com"
+appsLicensingService =
+  Core.defaultService
+    (Core.ServiceId "licensing:v1")
+    "licensing.googleapis.com"
 
 -- | View and manage G Suite licenses for your domain
 appsLicensingScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.licensing"]
