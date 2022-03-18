@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.KnowledgeGraphSearch
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,38 +30,26 @@
 --
 -- /See:/ <https://developers.google.com/knowledge-graph/ Knowledge Graph Search API Reference>
 module Network.Google.KnowledgeGraphSearch
-    (
-    -- * Service Configuration
-      knowledgeGraphSearchService
-
-    -- * API Declaration
-    , KnowledgeGraphSearchAPI
+  ( -- * Configuration
+    knowledgeGraphSearchService,
 
     -- * Resources
 
     -- ** kgsearch.entities.search
-    , module Network.Google.Resource.Kgsearch.Entities.Search
+    KgsearchEntitiesSearchResource,
+    newKgsearchEntitiesSearch,
+    KgsearchEntitiesSearch,
 
     -- * Types
 
-    -- ** SearchResponse
-    , SearchResponse
-    , searchResponse
-    , srContext
-    , srItemListElement
-    , srType
-
     -- ** Xgafv
-    , Xgafv (..)
-    ) where
+    Xgafv (..),
 
-import Network.Google.Prelude
+    -- ** SearchResponse
+    SearchResponse (..),
+    newSearchResponse,
+  )
+where
+
+import Network.Google.KnowledgeGraphSearch.Kgsearch.Entities.Search
 import Network.Google.KnowledgeGraphSearch.Types
-import Network.Google.Resource.Kgsearch.Entities.Search
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Knowledge Graph Search API service.
-type KnowledgeGraphSearchAPI = EntitiesSearchResource
