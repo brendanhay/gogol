@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.GroupsMigration
-    Network.Google.GroupsMigration.Archive.Insert
-    Network.Google.GroupsMigration.Types
+    Gogol.GroupsMigration
+    Gogol.GroupsMigration.Archive.Insert
+    Gogol.GroupsMigration.Types
 
   other-modules:
-    Network.Google.GroupsMigration.Internal.Product
-    Network.Google.GroupsMigration.Internal.Sum
+    Gogol.GroupsMigration.Internal.Product
+    Gogol.GroupsMigration.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
