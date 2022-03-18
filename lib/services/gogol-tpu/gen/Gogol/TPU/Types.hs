@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,183 +25,182 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.TPU.Types
-    (
-    -- * Configuration
-      tPUService
+  ( -- * Configuration
+    tPUService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AcceleratorType
-    , AcceleratorType (..)
-    , newAcceleratorType
+    AcceleratorType (..),
+    newAcceleratorType,
 
     -- ** AccessConfig
-    , AccessConfig (..)
-    , newAccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
     -- ** AttachedDisk
-    , AttachedDisk (..)
-    , newAttachedDisk
+    AttachedDisk (..),
+    newAttachedDisk,
 
     -- ** AttachedDisk_Mode
-    , AttachedDisk_Mode (..)
+    AttachedDisk_Mode (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** GenerateServiceIdentityRequest
-    , GenerateServiceIdentityRequest (..)
-    , newGenerateServiceIdentityRequest
+    GenerateServiceIdentityRequest (..),
+    newGenerateServiceIdentityRequest,
 
     -- ** GenerateServiceIdentityResponse
-    , GenerateServiceIdentityResponse (..)
-    , newGenerateServiceIdentityResponse
+    GenerateServiceIdentityResponse (..),
+    newGenerateServiceIdentityResponse,
 
     -- ** GetGuestAttributesRequest
-    , GetGuestAttributesRequest (..)
-    , newGetGuestAttributesRequest
+    GetGuestAttributesRequest (..),
+    newGetGuestAttributesRequest,
 
     -- ** GetGuestAttributesResponse
-    , GetGuestAttributesResponse (..)
-    , newGetGuestAttributesResponse
+    GetGuestAttributesResponse (..),
+    newGetGuestAttributesResponse,
 
     -- ** GuestAttributes
-    , GuestAttributes (..)
-    , newGuestAttributes
+    GuestAttributes (..),
+    newGuestAttributes,
 
     -- ** GuestAttributesEntry
-    , GuestAttributesEntry (..)
-    , newGuestAttributesEntry
+    GuestAttributesEntry (..),
+    newGuestAttributesEntry,
 
     -- ** GuestAttributesValue
-    , GuestAttributesValue (..)
-    , newGuestAttributesValue
+    GuestAttributesValue (..),
+    newGuestAttributesValue,
 
     -- ** ListAcceleratorTypesResponse
-    , ListAcceleratorTypesResponse (..)
-    , newListAcceleratorTypesResponse
+    ListAcceleratorTypesResponse (..),
+    newListAcceleratorTypesResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListNodesResponse
-    , ListNodesResponse (..)
-    , newListNodesResponse
+    ListNodesResponse (..),
+    newListNodesResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListRuntimeVersionsResponse
-    , ListRuntimeVersionsResponse (..)
-    , newListRuntimeVersionsResponse
+    ListRuntimeVersionsResponse (..),
+    newListRuntimeVersionsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** NetworkConfig
-    , NetworkConfig (..)
-    , newNetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
 
     -- ** NetworkEndpoint
-    , NetworkEndpoint (..)
-    , newNetworkEndpoint
+    NetworkEndpoint (..),
+    newNetworkEndpoint,
 
     -- ** Node
-    , Node (..)
-    , newNode
+    Node (..),
+    newNode,
 
     -- ** Node_ApiVersion
-    , Node_ApiVersion (..)
+    Node_ApiVersion (..),
 
     -- ** Node_Health
-    , Node_Health (..)
+    Node_Health (..),
 
     -- ** Node_Labels
-    , Node_Labels (..)
-    , newNode_Labels
+    Node_Labels (..),
+    newNode_Labels,
 
     -- ** Node_Metadata
-    , Node_Metadata (..)
-    , newNode_Metadata
+    Node_Metadata (..),
+    newNode_Metadata,
 
     -- ** Node_State
-    , Node_State (..)
+    Node_State (..),
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** RuntimeVersion
-    , RuntimeVersion (..)
-    , newRuntimeVersion
+    RuntimeVersion (..),
+    newRuntimeVersion,
 
     -- ** SchedulingConfig
-    , SchedulingConfig (..)
-    , newSchedulingConfig
+    SchedulingConfig (..),
+    newSchedulingConfig,
 
     -- ** ServiceAccount
-    , ServiceAccount (..)
-    , newServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
     -- ** ServiceIdentity
-    , ServiceIdentity (..)
-    , newServiceIdentity
+    ServiceIdentity (..),
+    newServiceIdentity,
 
     -- ** StartNodeRequest
-    , StartNodeRequest (..)
-    , newStartNodeRequest
+    StartNodeRequest (..),
+    newStartNodeRequest,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** StopNodeRequest
-    , StopNodeRequest (..)
-    , newStopNodeRequest
+    StopNodeRequest (..),
+    newStopNodeRequest,
 
     -- ** Symptom
-    , Symptom (..)
-    , newSymptom
+    Symptom (..),
+    newSymptom,
 
     -- ** Symptom_SymptomType
-    , Symptom_SymptomType (..)
-    ) where
+    Symptom_SymptomType (..),
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TPU.Internal.Product
@@ -215,9 +208,10 @@ import Gogol.TPU.Internal.Sum
 
 -- | Default request referring to version @v2alpha1@ of the Cloud TPU API. This contains the host and root path used as a starting point for constructing service requests.
 tPUService :: Core.ServiceConfig
-tPUService
-  = Core.defaultService (Core.ServiceId "tpu:v2alpha1")
-      "tpu.googleapis.com"
+tPUService =
+  Core.defaultService
+    (Core.ServiceId "tpu:v2alpha1")
+    "tpu.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]

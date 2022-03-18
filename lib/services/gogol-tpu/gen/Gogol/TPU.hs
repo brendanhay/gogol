@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,278 +30,278 @@
 --
 -- /See:/ <https://cloud.google.com/tpu/ Cloud TPU API Reference>
 module Gogol.TPU
-    (
-    -- * Configuration
-      tPUService
+  ( -- * Configuration
+    tPUService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** tpu.projects.locations.acceleratorTypes.get
-    , TPUProjectsLocationsAcceleratorTypesGetResource
-    , newTPUProjectsLocationsAcceleratorTypesGet
-    , TPUProjectsLocationsAcceleratorTypesGet
+    TPUProjectsLocationsAcceleratorTypesGetResource,
+    newTPUProjectsLocationsAcceleratorTypesGet,
+    TPUProjectsLocationsAcceleratorTypesGet,
 
     -- ** tpu.projects.locations.acceleratorTypes.list
-    , TPUProjectsLocationsAcceleratorTypesListResource
-    , newTPUProjectsLocationsAcceleratorTypesList
-    , TPUProjectsLocationsAcceleratorTypesList
+    TPUProjectsLocationsAcceleratorTypesListResource,
+    newTPUProjectsLocationsAcceleratorTypesList,
+    TPUProjectsLocationsAcceleratorTypesList,
 
     -- ** tpu.projects.locations.generateServiceIdentity
-    , TPUProjectsLocationsGenerateServiceIdentityResource
-    , newTPUProjectsLocationsGenerateServiceIdentity
-    , TPUProjectsLocationsGenerateServiceIdentity
+    TPUProjectsLocationsGenerateServiceIdentityResource,
+    newTPUProjectsLocationsGenerateServiceIdentity,
+    TPUProjectsLocationsGenerateServiceIdentity,
 
     -- ** tpu.projects.locations.get
-    , TPUProjectsLocationsGetResource
-    , newTPUProjectsLocationsGet
-    , TPUProjectsLocationsGet
+    TPUProjectsLocationsGetResource,
+    newTPUProjectsLocationsGet,
+    TPUProjectsLocationsGet,
 
     -- ** tpu.projects.locations.list
-    , TPUProjectsLocationsListResource
-    , newTPUProjectsLocationsList
-    , TPUProjectsLocationsList
+    TPUProjectsLocationsListResource,
+    newTPUProjectsLocationsList,
+    TPUProjectsLocationsList,
 
     -- ** tpu.projects.locations.nodes.create
-    , TPUProjectsLocationsNodesCreateResource
-    , newTPUProjectsLocationsNodesCreate
-    , TPUProjectsLocationsNodesCreate
+    TPUProjectsLocationsNodesCreateResource,
+    newTPUProjectsLocationsNodesCreate,
+    TPUProjectsLocationsNodesCreate,
 
     -- ** tpu.projects.locations.nodes.delete
-    , TPUProjectsLocationsNodesDeleteResource
-    , newTPUProjectsLocationsNodesDelete
-    , TPUProjectsLocationsNodesDelete
+    TPUProjectsLocationsNodesDeleteResource,
+    newTPUProjectsLocationsNodesDelete,
+    TPUProjectsLocationsNodesDelete,
 
     -- ** tpu.projects.locations.nodes.get
-    , TPUProjectsLocationsNodesGetResource
-    , newTPUProjectsLocationsNodesGet
-    , TPUProjectsLocationsNodesGet
+    TPUProjectsLocationsNodesGetResource,
+    newTPUProjectsLocationsNodesGet,
+    TPUProjectsLocationsNodesGet,
 
     -- ** tpu.projects.locations.nodes.getGuestAttributes
-    , TPUProjectsLocationsNodesGetGuestAttributesResource
-    , newTPUProjectsLocationsNodesGetGuestAttributes
-    , TPUProjectsLocationsNodesGetGuestAttributes
+    TPUProjectsLocationsNodesGetGuestAttributesResource,
+    newTPUProjectsLocationsNodesGetGuestAttributes,
+    TPUProjectsLocationsNodesGetGuestAttributes,
 
     -- ** tpu.projects.locations.nodes.list
-    , TPUProjectsLocationsNodesListResource
-    , newTPUProjectsLocationsNodesList
-    , TPUProjectsLocationsNodesList
+    TPUProjectsLocationsNodesListResource,
+    newTPUProjectsLocationsNodesList,
+    TPUProjectsLocationsNodesList,
 
     -- ** tpu.projects.locations.nodes.patch
-    , TPUProjectsLocationsNodesPatchResource
-    , newTPUProjectsLocationsNodesPatch
-    , TPUProjectsLocationsNodesPatch
+    TPUProjectsLocationsNodesPatchResource,
+    newTPUProjectsLocationsNodesPatch,
+    TPUProjectsLocationsNodesPatch,
 
     -- ** tpu.projects.locations.nodes.start
-    , TPUProjectsLocationsNodesStartResource
-    , newTPUProjectsLocationsNodesStart
-    , TPUProjectsLocationsNodesStart
+    TPUProjectsLocationsNodesStartResource,
+    newTPUProjectsLocationsNodesStart,
+    TPUProjectsLocationsNodesStart,
 
     -- ** tpu.projects.locations.nodes.stop
-    , TPUProjectsLocationsNodesStopResource
-    , newTPUProjectsLocationsNodesStop
-    , TPUProjectsLocationsNodesStop
+    TPUProjectsLocationsNodesStopResource,
+    newTPUProjectsLocationsNodesStop,
+    TPUProjectsLocationsNodesStop,
 
     -- ** tpu.projects.locations.operations.cancel
-    , TPUProjectsLocationsOperationsCancelResource
-    , newTPUProjectsLocationsOperationsCancel
-    , TPUProjectsLocationsOperationsCancel
+    TPUProjectsLocationsOperationsCancelResource,
+    newTPUProjectsLocationsOperationsCancel,
+    TPUProjectsLocationsOperationsCancel,
 
     -- ** tpu.projects.locations.operations.delete
-    , TPUProjectsLocationsOperationsDeleteResource
-    , newTPUProjectsLocationsOperationsDelete
-    , TPUProjectsLocationsOperationsDelete
+    TPUProjectsLocationsOperationsDeleteResource,
+    newTPUProjectsLocationsOperationsDelete,
+    TPUProjectsLocationsOperationsDelete,
 
     -- ** tpu.projects.locations.operations.get
-    , TPUProjectsLocationsOperationsGetResource
-    , newTPUProjectsLocationsOperationsGet
-    , TPUProjectsLocationsOperationsGet
+    TPUProjectsLocationsOperationsGetResource,
+    newTPUProjectsLocationsOperationsGet,
+    TPUProjectsLocationsOperationsGet,
 
     -- ** tpu.projects.locations.operations.list
-    , TPUProjectsLocationsOperationsListResource
-    , newTPUProjectsLocationsOperationsList
-    , TPUProjectsLocationsOperationsList
+    TPUProjectsLocationsOperationsListResource,
+    newTPUProjectsLocationsOperationsList,
+    TPUProjectsLocationsOperationsList,
 
     -- ** tpu.projects.locations.runtimeVersions.get
-    , TPUProjectsLocationsRuntimeVersionsGetResource
-    , newTPUProjectsLocationsRuntimeVersionsGet
-    , TPUProjectsLocationsRuntimeVersionsGet
+    TPUProjectsLocationsRuntimeVersionsGetResource,
+    newTPUProjectsLocationsRuntimeVersionsGet,
+    TPUProjectsLocationsRuntimeVersionsGet,
 
     -- ** tpu.projects.locations.runtimeVersions.list
-    , TPUProjectsLocationsRuntimeVersionsListResource
-    , newTPUProjectsLocationsRuntimeVersionsList
-    , TPUProjectsLocationsRuntimeVersionsList
+    TPUProjectsLocationsRuntimeVersionsListResource,
+    newTPUProjectsLocationsRuntimeVersionsList,
+    TPUProjectsLocationsRuntimeVersionsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AcceleratorType
-    , AcceleratorType (..)
-    , newAcceleratorType
+    AcceleratorType (..),
+    newAcceleratorType,
 
     -- ** AccessConfig
-    , AccessConfig (..)
-    , newAccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
     -- ** AttachedDisk
-    , AttachedDisk (..)
-    , newAttachedDisk
+    AttachedDisk (..),
+    newAttachedDisk,
 
     -- ** AttachedDisk_Mode
-    , AttachedDisk_Mode (..)
+    AttachedDisk_Mode (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** GenerateServiceIdentityRequest
-    , GenerateServiceIdentityRequest (..)
-    , newGenerateServiceIdentityRequest
+    GenerateServiceIdentityRequest (..),
+    newGenerateServiceIdentityRequest,
 
     -- ** GenerateServiceIdentityResponse
-    , GenerateServiceIdentityResponse (..)
-    , newGenerateServiceIdentityResponse
+    GenerateServiceIdentityResponse (..),
+    newGenerateServiceIdentityResponse,
 
     -- ** GetGuestAttributesRequest
-    , GetGuestAttributesRequest (..)
-    , newGetGuestAttributesRequest
+    GetGuestAttributesRequest (..),
+    newGetGuestAttributesRequest,
 
     -- ** GetGuestAttributesResponse
-    , GetGuestAttributesResponse (..)
-    , newGetGuestAttributesResponse
+    GetGuestAttributesResponse (..),
+    newGetGuestAttributesResponse,
 
     -- ** GuestAttributes
-    , GuestAttributes (..)
-    , newGuestAttributes
+    GuestAttributes (..),
+    newGuestAttributes,
 
     -- ** GuestAttributesEntry
-    , GuestAttributesEntry (..)
-    , newGuestAttributesEntry
+    GuestAttributesEntry (..),
+    newGuestAttributesEntry,
 
     -- ** GuestAttributesValue
-    , GuestAttributesValue (..)
-    , newGuestAttributesValue
+    GuestAttributesValue (..),
+    newGuestAttributesValue,
 
     -- ** ListAcceleratorTypesResponse
-    , ListAcceleratorTypesResponse (..)
-    , newListAcceleratorTypesResponse
+    ListAcceleratorTypesResponse (..),
+    newListAcceleratorTypesResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListNodesResponse
-    , ListNodesResponse (..)
-    , newListNodesResponse
+    ListNodesResponse (..),
+    newListNodesResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListRuntimeVersionsResponse
-    , ListRuntimeVersionsResponse (..)
-    , newListRuntimeVersionsResponse
+    ListRuntimeVersionsResponse (..),
+    newListRuntimeVersionsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** NetworkConfig
-    , NetworkConfig (..)
-    , newNetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
 
     -- ** NetworkEndpoint
-    , NetworkEndpoint (..)
-    , newNetworkEndpoint
+    NetworkEndpoint (..),
+    newNetworkEndpoint,
 
     -- ** Node
-    , Node (..)
-    , newNode
+    Node (..),
+    newNode,
 
     -- ** Node_ApiVersion
-    , Node_ApiVersion (..)
+    Node_ApiVersion (..),
 
     -- ** Node_Health
-    , Node_Health (..)
+    Node_Health (..),
 
     -- ** Node_Labels
-    , Node_Labels (..)
-    , newNode_Labels
+    Node_Labels (..),
+    newNode_Labels,
 
     -- ** Node_Metadata
-    , Node_Metadata (..)
-    , newNode_Metadata
+    Node_Metadata (..),
+    newNode_Metadata,
 
     -- ** Node_State
-    , Node_State (..)
+    Node_State (..),
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** RuntimeVersion
-    , RuntimeVersion (..)
-    , newRuntimeVersion
+    RuntimeVersion (..),
+    newRuntimeVersion,
 
     -- ** SchedulingConfig
-    , SchedulingConfig (..)
-    , newSchedulingConfig
+    SchedulingConfig (..),
+    newSchedulingConfig,
 
     -- ** ServiceAccount
-    , ServiceAccount (..)
-    , newServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
     -- ** ServiceIdentity
-    , ServiceIdentity (..)
-    , newServiceIdentity
+    ServiceIdentity (..),
+    newServiceIdentity,
 
     -- ** StartNodeRequest
-    , StartNodeRequest (..)
-    , newStartNodeRequest
+    StartNodeRequest (..),
+    newStartNodeRequest,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** StopNodeRequest
-    , StopNodeRequest (..)
-    , newStopNodeRequest
+    StopNodeRequest (..),
+    newStopNodeRequest,
 
     -- ** Symptom
-    , Symptom (..)
-    , newSymptom
+    Symptom (..),
+    newSymptom,
 
     -- ** Symptom_SymptomType
-    , Symptom_SymptomType (..)
-    ) where
+    Symptom_SymptomType (..),
+  )
+where
 
 import Gogol.TPU.Projects.Locations.AcceleratorTypes.Get
 import Gogol.TPU.Projects.Locations.AcceleratorTypes.List
