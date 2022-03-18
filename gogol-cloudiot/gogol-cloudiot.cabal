@@ -1,69 +1,79 @@
-name:                  gogol-cloudiot
-version:               0.5.0
-synopsis:              Google Cloud IoT SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudiot
+version:            0.5.0
+synopsis:           Google Cloud IoT SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Registers and manages IoT (Internet of Things) devices that connect to
-    the Google Cloud Platform.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-cloudiot
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.CloudIOT
-        , Network.Google.CloudIOT.Types
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Create
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Delete
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Create
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Delete
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Get
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.List
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Patch
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.States.List
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Get
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.GetIAMPolicy
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.GetIAMPolicy
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.SetIAMPolicy
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.TestIAMPermissions
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.List
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Patch
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.SetIAMPolicy
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.TestIAMPermissions
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
+  exposed-modules:
+    Network.Google.CloudIOT
+    Network.Google.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
+    Network.Google.CloudIOT.Projects.Locations.Registries.Create
+    Network.Google.CloudIOT.Projects.Locations.Registries.Delete
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Create
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Delete
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Get
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.List
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Patch
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
+    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.States.List
+    Network.Google.CloudIOT.Projects.Locations.Registries.Get
+    Network.Google.CloudIOT.Projects.Locations.Registries.GetIamPolicy
+    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
+    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
+    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.SetIamPolicy
+    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.TestIamPermissions
+    Network.Google.CloudIOT.Projects.Locations.Registries.List
+    Network.Google.CloudIOT.Projects.Locations.Registries.Patch
+    Network.Google.CloudIOT.Projects.Locations.Registries.SetIamPolicy
+    Network.Google.CloudIOT.Projects.Locations.Registries.TestIamPermissions
+    Network.Google.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
+    Network.Google.CloudIOT.Types
 
-    other-modules:
-          Network.Google.CloudIOT.Types.Product
-        , Network.Google.CloudIOT.Types.Sum
+  other-modules:
+    Network.Google.CloudIOT.Internal.Product
+    Network.Google.CloudIOT.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
