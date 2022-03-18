@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceControl
+-- Module      : Gogol.ServiceControl
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Provides admission control and telemetry reporting for services integrated with Service Infrastructure.
 --
 -- /See:/ <https://cloud.google.com/service-control/ Service Control API Reference>
-module Network.Google.ServiceControl
+module Gogol.ServiceControl
   ( -- * Configuration
     serviceControlService,
 
@@ -247,6 +247,6 @@ module Network.Google.ServiceControl
   )
 where
 
-import Network.Google.ServiceControl.Services.Check
-import Network.Google.ServiceControl.Services.Report
-import Network.Google.ServiceControl.Types
+import Gogol.ServiceControl.Services.Check
+import Gogol.ServiceControl.Services.Report
+import Gogol.ServiceControl.Types

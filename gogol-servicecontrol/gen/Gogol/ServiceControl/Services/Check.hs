@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceControl.Services.Check
+-- Module      : Gogol.ServiceControl.Services.Check
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Private Preview. This feature is only available for approved services. This method provides admission control for services that are integrated with </service-infrastructure Service Infrastructure>. It checks whether an operation should be allowed based on the service configuration and relevant policies. It must be called before the operation is executed. For more information, see </service-infrastructure/docs/admission-control Admission Control>. NOTE: The admission control has an expected policy propagation delay of 60s. The caller __must__ not depend on the most recent policy changes. NOTE: The admission control has a hard limit of 1 referenced resources per call. If an operation refers to more than 1 resources, the caller must call the Check method multiple times. This method requires the @servicemanagement.services.check@ permission on the specified service. For more information, see <https://cloud.google.com/service-infrastructure/docs/service-control/access-control Service Control API Access Control>.
 --
 -- /See:/ <https://cloud.google.com/service-control/ Service Control API Reference> for @servicecontrol.services.check@.
-module Network.Google.ServiceControl.Services.Check
+module Gogol.ServiceControl.Services.Check
   ( -- * Resource
     ServiceControlServicesCheckResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceControl.Services.Check
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceControl.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceControl.Types
 
 -- | A resource alias for @servicecontrol.services.check@ method which the
 -- 'ServiceControlServicesCheck' request conforms to.
