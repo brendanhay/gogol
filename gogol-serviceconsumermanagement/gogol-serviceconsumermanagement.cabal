@@ -39,31 +39,32 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ServiceConsumerManagement
-    Network.Google.ServiceConsumerManagement.Operations.Cancel
-    Network.Google.ServiceConsumerManagement.Operations.Delete
-    Network.Google.ServiceConsumerManagement.Operations.Get
-    Network.Google.ServiceConsumerManagement.Operations.List
-    Network.Google.ServiceConsumerManagement.Services.Search
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AddProject
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.Create
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.Delete
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.DeleteProject
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.List
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
-    Network.Google.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
-    Network.Google.ServiceConsumerManagement.Types
+    Gogol.ServiceConsumerManagement
+    Gogol.ServiceConsumerManagement.Operations.Cancel
+    Gogol.ServiceConsumerManagement.Operations.Delete
+    Gogol.ServiceConsumerManagement.Operations.Get
+    Gogol.ServiceConsumerManagement.Operations.List
+    Gogol.ServiceConsumerManagement.Services.Search
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.AddProject
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.Create
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.Delete
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.DeleteProject
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.List
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
+    Gogol.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
+    Gogol.ServiceConsumerManagement.Types
 
   other-modules:
-    Network.Google.ServiceConsumerManagement.Internal.Product
-    Network.Google.ServiceConsumerManagement.Internal.Sum
+    Gogol.ServiceConsumerManagement.Internal.Product
+    Gogol.ServiceConsumerManagement.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

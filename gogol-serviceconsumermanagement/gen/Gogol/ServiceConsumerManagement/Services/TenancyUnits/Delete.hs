@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.TenancyUnits.Delete
+-- Module      : Gogol.ServiceConsumerManagement.Services.TenancyUnits.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Delete a tenancy unit. Before you delete the tenancy unit, there should be no tenant resources in it that aren\'t in a DELETED state. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.delete@.
-module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.Delete
+module Gogol.ServiceConsumerManagement.Services.TenancyUnits.Delete
   ( -- * Resource
     ServiceConsumerManagementServicesTenancyUnitsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.Delete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.delete@ method which the
 -- 'ServiceConsumerManagementServicesTenancyUnitsDelete' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.TenancyUnits.List
+-- Module      : Gogol.ServiceConsumerManagement.Services.TenancyUnits.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Find the tenancy unit for a managed service and service consumer. This method shouldn\'t be used in a service producer\'s runtime path, for example to find the tenant project number when creating VMs. Service producers must persist the tenant project\'s information after the project is created.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.list@.
-module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.List
+module Gogol.ServiceConsumerManagement.Services.TenancyUnits.List
   ( -- * Resource
     ServiceConsumerManagementServicesTenancyUnitsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.list@ method which the
 -- 'ServiceConsumerManagementServicesTenancyUnitsList' request conforms to.

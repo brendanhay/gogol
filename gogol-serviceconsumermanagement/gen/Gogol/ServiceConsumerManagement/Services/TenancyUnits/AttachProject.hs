@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
+-- Module      : Gogol.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Attach an existing project to the tenancy unit as a new tenant resource. The project could either be the tenant project reserved by calling @AddTenantProject@ under a tenancy unit of a service producer\'s project of a managed service, or from a separate project. The caller is checked against a set of permissions as if calling @AddTenantProject@ on the same service consumer. To trigger the attachment, the targeted tenant project must be in a folder. Make sure the ServiceConsumerManagement service account is the owner of that project. These two requirements are already met if the project is reserved by calling @AddTenantProject@. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.attachProject@.
-module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
+module Gogol.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
   ( -- * Resource
     ServiceConsumerManagementServicesTenancyUnitsAttachProjectResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceConsumerManagement.Services.TenancyUnits.AttachProj
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceConsumerManagement.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.attachProject@ method which the
 -- 'ServiceConsumerManagementServicesTenancyUnitsAttachProject' request conforms to.
