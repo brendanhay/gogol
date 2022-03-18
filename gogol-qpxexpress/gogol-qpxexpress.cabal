@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.QPXExpress
-    Network.Google.QPXExpress.Trips.Search
-    Network.Google.QPXExpress.Types
+    Gogol.QPXExpress
+    Gogol.QPXExpress.Trips.Search
+    Gogol.QPXExpress.Types
 
   other-modules:
-    Network.Google.QPXExpress.Internal.Product
-    Network.Google.QPXExpress.Internal.Sum
+    Gogol.QPXExpress.Internal.Product
+    Gogol.QPXExpress.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

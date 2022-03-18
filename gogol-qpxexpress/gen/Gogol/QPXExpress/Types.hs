@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.QPXExpress.Types
+-- Module      : Gogol.QPXExpress.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.QPXExpress.Types
+module Gogol.QPXExpress.Types
   ( -- * Configuration
     qPXExpressService,
 
@@ -129,9 +129,9 @@ module Network.Google.QPXExpress.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.QPXExpress.Internal.Product
-import Network.Google.QPXExpress.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.QPXExpress.Internal.Product
+import Gogol.QPXExpress.Internal.Sum
 
 -- | Default request referring to version @v1@ of the QPX Express API. This contains the host and root path used as a starting point for constructing service requests.
 qPXExpressService :: Core.ServiceConfig

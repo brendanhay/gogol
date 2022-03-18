@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.QPXExpress
+-- Module      : Gogol.QPXExpress
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Finds the least expensive flights between an origin and a destination.
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
-module Network.Google.QPXExpress
+module Gogol.QPXExpress
   ( -- * Configuration
     qPXExpressService,
 
@@ -140,5 +140,5 @@ module Network.Google.QPXExpress
   )
 where
 
-import Network.Google.QPXExpress.Trips.Search
-import Network.Google.QPXExpress.Types
+import Gogol.QPXExpress.Trips.Search
+import Gogol.QPXExpress.Types
