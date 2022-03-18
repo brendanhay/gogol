@@ -1,634 +1,290 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Drive.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Drive.Types
-    (
-    -- * Service Configuration
-      driveService
+  ( -- * Configuration
+    driveService,
 
     -- * OAuth Scopes
-    , driveMetadataReadOnlyScope
-    , drivePhotosReadOnlyScope
-    , driveAppDataScope
-    , driveReadOnlyScope
-    , driveScope
-    , driveFileScope
-    , driveMetadataScope
-    , driveScriptsScope
+    driveScope,
+    driveAppdataScope,
+    driveFileScope,
+    driveMetadataScope,
+    driveMetadataReadOnlyScope,
+    drivePhotosReadOnlyScope,
+    driveReadOnlyScope,
+    driveScriptsScope,
 
-    -- * FileList
-    , FileList
-    , fileList
-    , flNextPageToken
-    , flIncompleteSearch
-    , flKind
-    , flFiles
+    -- * Types
 
-    -- * FileShortcutDetails
-    , FileShortcutDetails
-    , fileShortcutDetails
-    , fsdTargetId
-    , fsdTargetResourceKey
-    , fsdTargetMimeType
+    -- ** About
+    About (..),
+    newAbout,
 
-    -- * Drive
-    , Drive
-    , drive
-    , dThemeId
-    , dBackgRoundImageFile
-    , dColorRgb
-    , dCreatedTime
-    , dKind
-    , dBackgRoundImageLink
-    , dName
-    , dRestrictions
-    , dHidden
-    , dId
-    , dCapabilities
+    -- ** About_DriveThemesItem
+    About_DriveThemesItem (..),
+    newAbout_DriveThemesItem,
 
-    -- * TeamDriveCapabilities
-    , TeamDriveCapabilities
-    , teamDriveCapabilities
-    , tdcCanRename
-    , tdcCanChangeTeamMembersOnlyRestriction
-    , tdcCanComment
-    , tdcCanRenameTeamDrive
-    , tdcCanChangeTeamDriveBackgRound
-    , tdcCanDownload
-    , tdcCanChangeDomainUsersOnlyRestriction
-    , tdcCanTrashChildren
-    , tdcCanAddChildren
-    , tdcCanRemoveChildren
-    , tdcCanChangeCopyRequiresWriterPermissionRestriction
-    , tdcCanDeleteTeamDrive
-    , tdcCanListChildren
-    , tdcCanEdit
-    , tdcCanManageMembers
-    , tdcCanReadRevisions
-    , tdcCanDeleteChildren
-    , tdcCanCopy
-    , tdcCanShare
+    -- ** About_ExportFormats
+    About_ExportFormats (..),
+    newAbout_ExportFormats,
 
-    -- * PermissionPermissionDetailsItem
-    , PermissionPermissionDetailsItem
-    , permissionPermissionDetailsItem
-    , ppdiInherited
-    , ppdiPermissionType
-    , ppdiRole
-    , ppdiInheritedFrom
+    -- ** About_ImportFormats
+    About_ImportFormats (..),
+    newAbout_ImportFormats,
 
-    -- * FilesListCorpus
-    , FilesListCorpus (..)
+    -- ** About_MaxImportSizes
+    About_MaxImportSizes (..),
+    newAbout_MaxImportSizes,
 
-    -- * CommentQuotedFileContent
-    , CommentQuotedFileContent
-    , commentQuotedFileContent
-    , cqfcValue
-    , cqfcMimeType
+    -- ** About_StorageQuota
+    About_StorageQuota (..),
+    newAbout_StorageQuota,
 
-    -- * DriveCapabilities
-    , DriveCapabilities
-    , driveCapabilities
-    , dcCanRename
-    , dcCanComment
-    , dcCanChangeDriveBackgRound
-    , dcCanRenameDrive
-    , dcCanDownload
-    , dcCanChangeDomainUsersOnlyRestriction
-    , dcCanTrashChildren
-    , dcCanAddChildren
-    , dcCanChangeCopyRequiresWriterPermissionRestriction
-    , dcCanChangeDriveMembersOnlyRestriction
-    , dcCanListChildren
-    , dcCanEdit
-    , dcCanManageMembers
-    , dcCanReadRevisions
-    , dcCanDeleteChildren
-    , dcCanCopy
-    , dcCanDeleteDrive
-    , dcCanShare
+    -- ** About_TeamDriveThemesItem
+    About_TeamDriveThemesItem (..),
+    newAbout_TeamDriveThemesItem,
 
-    -- * AboutStorageQuota
-    , AboutStorageQuota
-    , aboutStorageQuota
-    , asqUsageInDriveTrash
-    , asqLimit
-    , asqUsage
-    , asqUsageInDrive
+    -- ** Change
+    Change (..),
+    newChange,
 
-    -- * Reply
-    , Reply
-    , reply
-    , rHTMLContent
-    , rModifiedTime
-    , rCreatedTime
-    , rKind
-    , rAction
-    , rContent
-    , rAuthor
-    , rId
-    , rDeleted
+    -- ** ChangeList
+    ChangeList (..),
+    newChangeList,
 
-    -- * AboutImportFormats
-    , AboutImportFormats
-    , aboutImportFormats
-    , aifAddtional
+    -- ** Channel
+    Channel (..),
+    newChannel,
 
-    -- * FileCapabilities
-    , FileCapabilities
-    , fileCapabilities
-    , fcCanRename
-    , fcCanComment
-    , fcCanMoveChildrenWithinDrive
-    , fcCanMoveChildrenWithinTeamDrive
-    , fcCanModifyContent
-    , fcCanDelete
-    , fcCanMoveItemIntoTeamDrive
-    , fcCanChangeSecurityUpdateEnabled
-    , fcCanDownload
-    , fcCanTrash
-    , fcCanUntrash
-    , fcCanTrashChildren
-    , fcCanMoveItemOutOfDrive
-    , fcCanAddChildren
-    , fcCanAddMyDriveParent
-    , fcCanRemoveChildren
-    , fcCanMoveTeamDriveItem
-    , fcCanMoveItemWithinTeamDrive
-    , fcCanReadTeamDrive
-    , fcCanReadDrive
-    , fcCanAddFolderFromAnotherDrive
-    , fcCanChangeCopyRequiresWriterPermission
-    , fcCanMoveChildrenOutOfDrive
-    , fcCanListChildren
-    , fcCanMoveChildrenOutOfTeamDrive
-    , fcCanEdit
-    , fcCanChangeViewersCanCopyContent
-    , fcCanReadRevisions
-    , fcCanDeleteChildren
-    , fcCanMoveItemOutOfTeamDrive
-    , fcCanRemoveMyDriveParent
-    , fcCanModifyContentRestriction
-    , fcCanCopy
-    , fcCanMoveItemWithinDrive
-    , fcCanShare
+    -- ** Channel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
-    -- * ReplyList
-    , ReplyList
-    , replyList
-    , rlNextPageToken
-    , rlKind
-    , rlReplies
+    -- ** Comment
+    Comment (..),
+    newComment,
 
-    -- * DriveBackgRoundImageFile
-    , DriveBackgRoundImageFile
-    , driveBackgRoundImageFile
-    , dbrifXCoordinate
-    , dbrifYCoordinate
-    , dbrifWidth
-    , dbrifId
+    -- ** Comment_QuotedFileContent
+    Comment_QuotedFileContent (..),
+    newComment_QuotedFileContent,
 
-    -- * FileContentHintsThumbnail
-    , FileContentHintsThumbnail
-    , fileContentHintsThumbnail
-    , fchtImage
-    , fchtMimeType
+    -- ** CommentList
+    CommentList (..),
+    newCommentList,
 
-    -- * TeamDriveList
-    , TeamDriveList
-    , teamDriveList
-    , tdlNextPageToken
-    , tdlTeamDrives
-    , tdlKind
+    -- ** ContentRestriction
+    ContentRestriction (..),
+    newContentRestriction,
 
-    -- * Channel
-    , Channel
-    , channel
-    , cResourceURI
-    , cResourceId
-    , cKind
-    , cExpiration
-    , cToken
-    , cAddress
-    , cPayload
-    , cParams
-    , cId
-    , cType
+    -- ** Drive
+    Drive (..),
+    newDrive,
 
-    -- * AboutTeamDriveThemesItem
-    , AboutTeamDriveThemesItem
-    , aboutTeamDriveThemesItem
-    , atdtiColorRgb
-    , atdtiBackgRoundImageLink
-    , atdtiId
+    -- ** Drive_BackgroundImageFile
+    Drive_BackgroundImageFile (..),
+    newDrive_BackgroundImageFile,
 
-    -- * TeamDriveRestrictions
-    , TeamDriveRestrictions
-    , teamDriveRestrictions
-    , tdrTeamMembersOnly
-    , tdrAdminManagedRestrictions
-    , tdrCopyRequiresWriterPermission
-    , tdrDomainUsersOnly
+    -- ** Drive_Capabilities
+    Drive_Capabilities (..),
+    newDrive_Capabilities,
 
-    -- * TeamDriveBackgRoundImageFile
-    , TeamDriveBackgRoundImageFile
-    , teamDriveBackgRoundImageFile
-    , tdbrifXCoordinate
-    , tdbrifYCoordinate
-    , tdbrifWidth
-    , tdbrifId
+    -- ** Drive_Restrictions
+    Drive_Restrictions (..),
+    newDrive_Restrictions,
 
-    -- * FileVideoMediaMetadata
-    , FileVideoMediaMetadata
-    , fileVideoMediaMetadata
-    , fvmmHeight
-    , fvmmWidth
-    , fvmmDurationMillis
+    -- ** DriveList
+    DriveList (..),
+    newDriveList,
 
-    -- * FileAppProperties
-    , FileAppProperties
-    , fileAppProperties
-    , fapAddtional
+    -- ** File
+    File (..),
+    newFile,
 
-    -- * FileLinkShareMetadata
-    , FileLinkShareMetadata
-    , fileLinkShareMetadata
-    , flsmSecurityUpdateEnabled
-    , flsmSecurityUpdateEligible
+    -- ** File_AppProperties
+    File_AppProperties (..),
+    newFile_AppProperties,
 
-    -- * Change
-    , Change
-    , change
-    , chaDrive
-    , chaRemoved
-    , chaTime
-    , chaKind
-    , chaTeamDrive
-    , chaTeamDriveId
-    , chaType
-    , chaFileId
-    , chaFile
-    , chaChangeType
-    , chaDriveId
+    -- ** File_Capabilities
+    File_Capabilities (..),
+    newFile_Capabilities,
 
-    -- * TeamDrive
-    , TeamDrive
-    , teamDrive
-    , tdThemeId
-    , tdBackgRoundImageFile
-    , tdColorRgb
-    , tdCreatedTime
-    , tdKind
-    , tdBackgRoundImageLink
-    , tdName
-    , tdRestrictions
-    , tdId
-    , tdCapabilities
+    -- ** File_ContentHints
+    File_ContentHints (..),
+    newFile_ContentHints,
 
-    -- * AboutExportFormats
-    , AboutExportFormats
-    , aboutExportFormats
-    , aefAddtional
+    -- ** File_ContentHints_Thumbnail
+    File_ContentHints_Thumbnail (..),
+    newFile_ContentHints_Thumbnail,
 
-    -- * User
-    , User
-    , user
-    , uPhotoLink
-    , uMe
-    , uKind
-    , uEmailAddress
-    , uDisplayName
-    , uPermissionId
+    -- ** File_ExportLinks
+    File_ExportLinks (..),
+    newFile_ExportLinks,
 
-    -- * ChangeList
-    , ChangeList
-    , changeList
-    , clNewStartPageToken
-    , clNextPageToken
-    , clChanges
-    , clKind
+    -- ** File_ImageMediaMetadata
+    File_ImageMediaMetadata (..),
+    newFile_ImageMediaMetadata,
 
-    -- * RevisionExportLinks
-    , RevisionExportLinks
-    , revisionExportLinks
-    , relAddtional
+    -- ** File_ImageMediaMetadata_Location
+    File_ImageMediaMetadata_Location (..),
+    newFile_ImageMediaMetadata_Location,
 
-    -- * FileContentHints
-    , FileContentHints
-    , fileContentHints
-    , fchThumbnail
-    , fchIndexableText
+    -- ** File_LinkShareMetadata
+    File_LinkShareMetadata (..),
+    newFile_LinkShareMetadata,
 
-    -- * ChannelParams
-    , ChannelParams
-    , channelParams
-    , cpAddtional
+    -- ** File_Properties
+    File_Properties (..),
+    newFile_Properties,
 
-    -- * FileProperties
-    , FileProperties
-    , fileProperties
-    , fpAddtional
+    -- ** File_ShortcutDetails
+    File_ShortcutDetails (..),
+    newFile_ShortcutDetails,
 
-    -- * AboutMaxImportSizes
-    , AboutMaxImportSizes
-    , aboutMaxImportSizes
-    , amisAddtional
+    -- ** File_VideoMediaMetadata
+    File_VideoMediaMetadata (..),
+    newFile_VideoMediaMetadata,
 
-    -- * About
-    , About
-    , about
-    , aExportFormats
-    , aMaxImportSizes
-    , aCanCreateTeamDrives
-    , aImportFormats
-    , aKind
-    , aDriveThemes
-    , aAppInstalled
-    , aUser
-    , aStorageQuota
-    , aCanCreateDrives
-    , aMaxUploadSize
-    , aTeamDriveThemes
-    , aFolderColorPalette
+    -- ** FileList
+    FileList (..),
+    newFileList,
 
-    -- * FileImageMediaMetadataLocation
-    , FileImageMediaMetadataLocation
-    , fileImageMediaMetadataLocation
-    , fimmlLatitude
-    , fimmlAltitude
-    , fimmlLongitude
+    -- ** GeneratedIds
+    GeneratedIds (..),
+    newGeneratedIds,
 
-    -- * ContentRestriction
-    , ContentRestriction
-    , contentRestriction
-    , crRestrictingUser
-    , crRestrictionTime
-    , crReason
-    , crType
-    , crReadOnly
+    -- ** Permission
+    Permission (..),
+    newPermission,
 
-    -- * StartPageToken
-    , StartPageToken
-    , startPageToken
-    , sptKind
-    , sptStartPageToken
+    -- ** Permission_PermissionDetailsItem
+    Permission_PermissionDetailsItem (..),
+    newPermission_PermissionDetailsItem,
 
-    -- * FileImageMediaMetadata
-    , FileImageMediaMetadata
-    , fileImageMediaMetadata
-    , fimmRotation
-    , fimmHeight
-    , fimmSubjectDistance
-    , fimmMaxApertureValue
-    , fimmIsoSpeed
-    , fimmTime
-    , fimmLocation
-    , fimmAperture
-    , fimmFocalLength
-    , fimmCameraMake
-    , fimmWidth
-    , fimmExposureTime
-    , fimmCameraModel
-    , fimmWhiteBalance
-    , fimmLens
-    , fimmFlashUsed
-    , fimmExposureBias
-    , fimmMeteringMode
-    , fimmExposureMode
-    , fimmSensor
-    , fimmColorSpace
+    -- ** Permission_TeamDrivePermissionDetailsItem
+    Permission_TeamDrivePermissionDetailsItem (..),
+    newPermission_TeamDrivePermissionDetailsItem,
 
-    -- * Comment
-    , Comment
-    , comment
-    , comHTMLContent
-    , comModifiedTime
-    , comCreatedTime
-    , comKind
-    , comResolved
-    , comQuotedFileContent
-    , comAnchor
-    , comContent
-    , comReplies
-    , comAuthor
-    , comId
-    , comDeleted
+    -- ** PermissionList
+    PermissionList (..),
+    newPermissionList,
 
-    -- * Revision
-    , Revision
-    , revision
-    , revModifiedTime
-    , revSize
-    , revOriginalFilename
-    , revKind
-    , revPublishedLink
-    , revPublished
-    , revLastModifyingUser
-    , revPublishAuto
-    , revMD5Checksum
-    , revKeepForever
-    , revMimeType
-    , revExportLinks
-    , revPublishedOutsideDomain
-    , revId
+    -- ** Reply
+    Reply (..),
+    newReply,
 
-    -- * Permission
-    , Permission
-    , permission
-    , pPhotoLink
-    , pTeamDrivePermissionDetails
-    , pKind
-    , pDomain
-    , pRole
-    , pEmailAddress
-    , pAllowFileDiscovery
-    , pDisplayName
-    , pView
-    , pId
-    , pDeleted
-    , pType
-    , pExpirationTime
-    , pPermissionDetails
+    -- ** ReplyList
+    ReplyList (..),
+    newReplyList,
 
-    -- * DriveRestrictions
-    , DriveRestrictions
-    , driveRestrictions
-    , drAdminManagedRestrictions
-    , drDriveMembersOnly
-    , drCopyRequiresWriterPermission
-    , drDomainUsersOnly
+    -- ** Revision
+    Revision (..),
+    newRevision,
 
-    -- * File
-    , File
-    , file
-    , fOwnedByMe
-    , fThumbnailLink
-    , fFullFileExtension
-    , fModifiedTime
-    , fModifiedByMeTime
-    , fFileExtension
-    , fViewedByMe
-    , fShortcutDetails
-    , fOwners
-    , fViewedByMeTime
-    , fModifiedByMe
-    , fSize
-    , fTrashed
-    , fResourceKey
-    , fWebViewLink
-    , fCreatedTime
-    , fTrashedTime
-    , fOriginalFilename
-    , fKind
-    , fLastModifyingUser
-    , fIconLink
-    , fHasThumbnail
-    , fThumbnailVersion
-    , fContentRestrictions
-    , fImageMediaMetadata
-    , fExplicitlyTrashed
-    , fShared
-    , fMD5Checksum
-    , fTeamDriveId
-    , fFolderColorRgb
-    , fMimeType
-    , fIsAppAuthorized
-    , fCopyRequiresWriterPermission
-    , fName
-    , fExportLinks
-    , fParents
-    , fStarred
-    , fSpaces
-    , fVersion
-    , fHasAugmentedPermissions
-    , fWritersCanShare
-    , fTrashingUser
-    , fId
-    , fPermissionIds
-    , fPermissions
-    , fQuotaBytesUsed
-    , fLinkShareMetadata
-    , fAppProperties
-    , fVideoMediaMetadata
-    , fSharedWithMeTime
-    , fHeadRevisionId
-    , fCapabilities
-    , fDescription
-    , fViewersCanCopyContent
-    , fDriveId
-    , fSharingUser
-    , fWebContentLink
-    , fContentHints
-    , fProperties
+    -- ** Revision_ExportLinks
+    Revision_ExportLinks (..),
+    newRevision_ExportLinks,
 
-    -- * AboutDriveThemesItem
-    , AboutDriveThemesItem
-    , aboutDriveThemesItem
-    , adtiColorRgb
-    , adtiBackgRoundImageLink
-    , adtiId
+    -- ** RevisionList
+    RevisionList (..),
+    newRevisionList,
 
-    -- * PermissionTeamDrivePermissionDetailsItem
-    , PermissionTeamDrivePermissionDetailsItem
-    , permissionTeamDrivePermissionDetailsItem
-    , ptdpdiInherited
-    , ptdpdiTeamDrivePermissionType
-    , ptdpdiRole
-    , ptdpdiInheritedFrom
+    -- ** StartPageToken
+    StartPageToken (..),
+    newStartPageToken,
 
-    -- * DriveList
-    , DriveList
-    , driveList
-    , dlNextPageToken
-    , dlKind
-    , dlDrives
+    -- ** TeamDrive
+    TeamDrive (..),
+    newTeamDrive,
 
-    -- * GeneratedIds
-    , GeneratedIds
-    , generatedIds
-    , giSpace
-    , giKind
-    , giIds
+    -- ** TeamDrive_BackgroundImageFile
+    TeamDrive_BackgroundImageFile (..),
+    newTeamDrive_BackgroundImageFile,
 
-    -- * FileExportLinks
-    , FileExportLinks
-    , fileExportLinks
-    , felAddtional
+    -- ** TeamDrive_Capabilities
+    TeamDrive_Capabilities (..),
+    newTeamDrive_Capabilities,
 
-    -- * CommentList
-    , CommentList
-    , commentList
-    , cllNextPageToken
-    , cllKind
-    , cllComments
+    -- ** TeamDrive_Restrictions
+    TeamDrive_Restrictions (..),
+    newTeamDrive_Restrictions,
 
-    -- * RevisionList
-    , RevisionList
-    , revisionList
-    , rllNextPageToken
-    , rllKind
-    , rllRevisions
+    -- ** TeamDriveList
+    TeamDriveList (..),
+    newTeamDriveList,
 
-    -- * PermissionList
-    , PermissionList
-    , permissionList
-    , plNextPageToken
-    , plKind
-    , plPermissions
-    ) where
+    -- ** User
+    User (..),
+    newUser,
 
-import Network.Google.Drive.Types.Product
-import Network.Google.Drive.Types.Sum
-import Network.Google.Prelude
+    -- ** FilesListCorpus
+    FilesListCorpus (..),
+  )
+where
 
--- | Default request referring to version 'v3' of the Drive API. This contains the host and root path used as a starting point for constructing service requests.
-driveService :: ServiceConfig
-driveService
-  = defaultService (ServiceId "drive:v3")
-      "www.googleapis.com"
+import Network.Google.Drive.Internal.Product
+import Network.Google.Drive.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See information about your Google Drive files
-driveMetadataReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
-driveMetadataReadOnlyScope = Proxy
-
--- | View the photos, videos and albums in your Google Photos
-drivePhotosReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.photos.readonly"]
-drivePhotosReadOnlyScope = Proxy
-
--- | See, create, and delete its own configuration data in your Google Drive
-driveAppDataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
-driveAppDataScope = Proxy
-
--- | See and download all your Google Drive files
-driveReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Proxy
+-- | Default request referring to version @v3@ of the Drive API. This contains the host and root path used as a starting point for constructing service requests.
+driveService :: Core.ServiceConfig
+driveService =
+  Core.defaultService
+    (Core.ServiceId "drive:v3")
+    "www.googleapis.com"
 
 -- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Proxy
+driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
+driveScope = Core.Proxy
 
--- | See, edit, create, and delete only the specific Google Drive files you
--- use with this app
-driveFileScope :: Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Proxy
+-- | See, create, and delete its own configuration data in your Google Drive
+driveAppdataScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.appdata"]
+driveAppdataScope = Core.Proxy
+
+-- | See, edit, create, and delete only the specific Google Drive files you use with this app
+driveFileScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.file"]
+driveFileScope = Core.Proxy
 
 -- | View and manage metadata of files in your Google Drive
-driveMetadataScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata"]
-driveMetadataScope = Proxy
+driveMetadataScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.metadata"]
+driveMetadataScope = Core.Proxy
+
+-- | See information about your Google Drive files
+driveMetadataReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
+driveMetadataReadOnlyScope = Core.Proxy
+
+-- | View the photos, videos and albums in your Google Photos
+drivePhotosReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.photos.readonly"]
+drivePhotosReadOnlyScope = Core.Proxy
+
+-- | See and download all your Google Drive files
+driveReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.readonly"]
+driveReadOnlyScope = Core.Proxy
 
 -- | Modify your Google Apps Script scripts\' behavior
-driveScriptsScope :: Proxy '["https://www.googleapis.com/auth/drive.scripts"]
-driveScriptsScope = Proxy
+driveScriptsScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.scripts"]
+driveScriptsScope = Core.Proxy

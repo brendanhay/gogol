@@ -1,92 +1,102 @@
-name:                  gogol-drive
-version:               0.5.0
-synopsis:              Google Drive SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-drive
+version:            0.5.0
+synopsis:           Google Drive SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manages files in Drive including uploading, downloading, searching,
-    detecting changes, and updating sharing permissions.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v3@
-    of the API.
+  Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v3@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-drive
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Drive
-        , Network.Google.Drive.Types
-        , Network.Google.Resource.Drive.About.Get
-        , Network.Google.Resource.Drive.Changes.GetStartPageToken
-        , Network.Google.Resource.Drive.Changes.List
-        , Network.Google.Resource.Drive.Changes.Watch
-        , Network.Google.Resource.Drive.Channels.Stop
-        , Network.Google.Resource.Drive.Comments.Create
-        , Network.Google.Resource.Drive.Comments.Delete
-        , Network.Google.Resource.Drive.Comments.Get
-        , Network.Google.Resource.Drive.Comments.List
-        , Network.Google.Resource.Drive.Comments.Update
-        , Network.Google.Resource.Drive.Drives.Create
-        , Network.Google.Resource.Drive.Drives.Delete
-        , Network.Google.Resource.Drive.Drives.Get
-        , Network.Google.Resource.Drive.Drives.Hide
-        , Network.Google.Resource.Drive.Drives.List
-        , Network.Google.Resource.Drive.Drives.Unhide
-        , Network.Google.Resource.Drive.Drives.Update
-        , Network.Google.Resource.Drive.Files.Copy
-        , Network.Google.Resource.Drive.Files.Create
-        , Network.Google.Resource.Drive.Files.Delete
-        , Network.Google.Resource.Drive.Files.EmptyTrash
-        , Network.Google.Resource.Drive.Files.Export
-        , Network.Google.Resource.Drive.Files.GenerateIds
-        , Network.Google.Resource.Drive.Files.Get
-        , Network.Google.Resource.Drive.Files.List
-        , Network.Google.Resource.Drive.Files.Update
-        , Network.Google.Resource.Drive.Files.Watch
-        , Network.Google.Resource.Drive.Permissions.Create
-        , Network.Google.Resource.Drive.Permissions.Delete
-        , Network.Google.Resource.Drive.Permissions.Get
-        , Network.Google.Resource.Drive.Permissions.List
-        , Network.Google.Resource.Drive.Permissions.Update
-        , Network.Google.Resource.Drive.Replies.Create
-        , Network.Google.Resource.Drive.Replies.Delete
-        , Network.Google.Resource.Drive.Replies.Get
-        , Network.Google.Resource.Drive.Replies.List
-        , Network.Google.Resource.Drive.Replies.Update
-        , Network.Google.Resource.Drive.Revisions.Delete
-        , Network.Google.Resource.Drive.Revisions.Get
-        , Network.Google.Resource.Drive.Revisions.List
-        , Network.Google.Resource.Drive.Revisions.Update
-        , Network.Google.Resource.Drive.Teamdrives.Create
-        , Network.Google.Resource.Drive.Teamdrives.Delete
-        , Network.Google.Resource.Drive.Teamdrives.Get
-        , Network.Google.Resource.Drive.Teamdrives.List
-        , Network.Google.Resource.Drive.Teamdrives.Update
+  exposed-modules:
+    Network.Google.Drive
+    Network.Google.Drive.About.Get
+    Network.Google.Drive.Changes.GetStartPageToken
+    Network.Google.Drive.Changes.List
+    Network.Google.Drive.Changes.Watch
+    Network.Google.Drive.Channels.Stop
+    Network.Google.Drive.Comments.Create
+    Network.Google.Drive.Comments.Delete
+    Network.Google.Drive.Comments.Get
+    Network.Google.Drive.Comments.List
+    Network.Google.Drive.Comments.Update
+    Network.Google.Drive.Drives.Create
+    Network.Google.Drive.Drives.Delete
+    Network.Google.Drive.Drives.Get
+    Network.Google.Drive.Drives.Hide
+    Network.Google.Drive.Drives.List
+    Network.Google.Drive.Drives.Unhide
+    Network.Google.Drive.Drives.Update
+    Network.Google.Drive.Files.Copy
+    Network.Google.Drive.Files.Create
+    Network.Google.Drive.Files.Delete
+    Network.Google.Drive.Files.EmptyTrash
+    Network.Google.Drive.Files.Export
+    Network.Google.Drive.Files.GenerateIds
+    Network.Google.Drive.Files.Get
+    Network.Google.Drive.Files.List
+    Network.Google.Drive.Files.Update
+    Network.Google.Drive.Files.Watch
+    Network.Google.Drive.Permissions.Create
+    Network.Google.Drive.Permissions.Delete
+    Network.Google.Drive.Permissions.Get
+    Network.Google.Drive.Permissions.List
+    Network.Google.Drive.Permissions.Update
+    Network.Google.Drive.Replies.Create
+    Network.Google.Drive.Replies.Delete
+    Network.Google.Drive.Replies.Get
+    Network.Google.Drive.Replies.List
+    Network.Google.Drive.Replies.Update
+    Network.Google.Drive.Revisions.Delete
+    Network.Google.Drive.Revisions.Get
+    Network.Google.Drive.Revisions.List
+    Network.Google.Drive.Revisions.Update
+    Network.Google.Drive.Teamdrives.Create
+    Network.Google.Drive.Teamdrives.Delete
+    Network.Google.Drive.Teamdrives.Get
+    Network.Google.Drive.Teamdrives.List
+    Network.Google.Drive.Teamdrives.Update
+    Network.Google.Drive.Types
 
-    other-modules:
-          Network.Google.Drive.Types.Product
-        , Network.Google.Drive.Types.Sum
+  other-modules:
+    Network.Google.Drive.Internal.Product
+    Network.Google.Drive.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

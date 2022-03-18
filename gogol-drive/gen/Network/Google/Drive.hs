@@ -1,840 +1,531 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Drive
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages files in Drive including uploading, downloading, searching,
--- detecting changes, and updating sharing permissions.
+-- Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference>
 module Network.Google.Drive
-    (
-    -- * Service Configuration
-      driveService
+  ( -- * Configuration
+    driveService,
 
     -- * OAuth Scopes
-    , driveMetadataReadOnlyScope
-    , drivePhotosReadOnlyScope
-    , driveAppDataScope
-    , driveReadOnlyScope
-    , driveScope
-    , driveFileScope
-    , driveMetadataScope
-    , driveScriptsScope
-
-    -- * API Declaration
-    , DriveAPI
+    driveScope,
+    driveAppdataScope,
+    driveFileScope,
+    driveMetadataScope,
+    driveMetadataReadOnlyScope,
+    drivePhotosReadOnlyScope,
+    driveReadOnlyScope,
+    driveScriptsScope,
 
     -- * Resources
 
     -- ** drive.about.get
-    , module Network.Google.Resource.Drive.About.Get
+    DriveAboutGetResource,
+    newDriveAboutGet,
+    DriveAboutGet,
 
     -- ** drive.changes.getStartPageToken
-    , module Network.Google.Resource.Drive.Changes.GetStartPageToken
+    DriveChangesGetStartPageTokenResource,
+    newDriveChangesGetStartPageToken,
+    DriveChangesGetStartPageToken,
 
     -- ** drive.changes.list
-    , module Network.Google.Resource.Drive.Changes.List
+    DriveChangesListResource,
+    newDriveChangesList,
+    DriveChangesList,
 
     -- ** drive.changes.watch
-    , module Network.Google.Resource.Drive.Changes.Watch
+    DriveChangesWatchResource,
+    newDriveChangesWatch,
+    DriveChangesWatch,
 
     -- ** drive.channels.stop
-    , module Network.Google.Resource.Drive.Channels.Stop
+    DriveChannelsStopResource,
+    newDriveChannelsStop,
+    DriveChannelsStop,
 
     -- ** drive.comments.create
-    , module Network.Google.Resource.Drive.Comments.Create
+    DriveCommentsCreateResource,
+    newDriveCommentsCreate,
+    DriveCommentsCreate,
 
     -- ** drive.comments.delete
-    , module Network.Google.Resource.Drive.Comments.Delete
+    DriveCommentsDeleteResource,
+    newDriveCommentsDelete,
+    DriveCommentsDelete,
 
     -- ** drive.comments.get
-    , module Network.Google.Resource.Drive.Comments.Get
+    DriveCommentsGetResource,
+    newDriveCommentsGet,
+    DriveCommentsGet,
 
     -- ** drive.comments.list
-    , module Network.Google.Resource.Drive.Comments.List
+    DriveCommentsListResource,
+    newDriveCommentsList,
+    DriveCommentsList,
 
     -- ** drive.comments.update
-    , module Network.Google.Resource.Drive.Comments.Update
+    DriveCommentsUpdateResource,
+    newDriveCommentsUpdate,
+    DriveCommentsUpdate,
 
     -- ** drive.drives.create
-    , module Network.Google.Resource.Drive.Drives.Create
+    DriveDrivesCreateResource,
+    newDriveDrivesCreate,
+    DriveDrivesCreate,
 
     -- ** drive.drives.delete
-    , module Network.Google.Resource.Drive.Drives.Delete
+    DriveDrivesDeleteResource,
+    newDriveDrivesDelete,
+    DriveDrivesDelete,
 
     -- ** drive.drives.get
-    , module Network.Google.Resource.Drive.Drives.Get
+    DriveDrivesGetResource,
+    newDriveDrivesGet,
+    DriveDrivesGet,
 
     -- ** drive.drives.hide
-    , module Network.Google.Resource.Drive.Drives.Hide
+    DriveDrivesHideResource,
+    newDriveDrivesHide,
+    DriveDrivesHide,
 
     -- ** drive.drives.list
-    , module Network.Google.Resource.Drive.Drives.List
+    DriveDrivesListResource,
+    newDriveDrivesList,
+    DriveDrivesList,
 
     -- ** drive.drives.unhide
-    , module Network.Google.Resource.Drive.Drives.Unhide
+    DriveDrivesUnhideResource,
+    newDriveDrivesUnhide,
+    DriveDrivesUnhide,
 
     -- ** drive.drives.update
-    , module Network.Google.Resource.Drive.Drives.Update
+    DriveDrivesUpdateResource,
+    newDriveDrivesUpdate,
+    DriveDrivesUpdate,
 
     -- ** drive.files.copy
-    , module Network.Google.Resource.Drive.Files.Copy
+    DriveFilesCopyResource,
+    newDriveFilesCopy,
+    DriveFilesCopy,
 
     -- ** drive.files.create
-    , module Network.Google.Resource.Drive.Files.Create
+    DriveFilesCreateResource,
+    newDriveFilesCreate,
+    DriveFilesCreate,
 
     -- ** drive.files.delete
-    , module Network.Google.Resource.Drive.Files.Delete
+    DriveFilesDeleteResource,
+    newDriveFilesDelete,
+    DriveFilesDelete,
 
     -- ** drive.files.emptyTrash
-    , module Network.Google.Resource.Drive.Files.EmptyTrash
+    DriveFilesEmptyTrashResource,
+    newDriveFilesEmptyTrash,
+    DriveFilesEmptyTrash,
 
     -- ** drive.files.export
-    , module Network.Google.Resource.Drive.Files.Export
+    DriveFilesExportResource,
+    newDriveFilesExport,
+    DriveFilesExport,
 
     -- ** drive.files.generateIds
-    , module Network.Google.Resource.Drive.Files.GenerateIds
+    DriveFilesGenerateIdsResource,
+    newDriveFilesGenerateIds,
+    DriveFilesGenerateIds,
 
     -- ** drive.files.get
-    , module Network.Google.Resource.Drive.Files.Get
+    DriveFilesGetResource,
+    newDriveFilesGet,
+    DriveFilesGet,
 
     -- ** drive.files.list
-    , module Network.Google.Resource.Drive.Files.List
+    DriveFilesListResource,
+    newDriveFilesList,
+    DriveFilesList,
 
     -- ** drive.files.update
-    , module Network.Google.Resource.Drive.Files.Update
+    DriveFilesUpdateResource,
+    newDriveFilesUpdate,
+    DriveFilesUpdate,
 
     -- ** drive.files.watch
-    , module Network.Google.Resource.Drive.Files.Watch
+    DriveFilesWatchResource,
+    newDriveFilesWatch,
+    DriveFilesWatch,
 
     -- ** drive.permissions.create
-    , module Network.Google.Resource.Drive.Permissions.Create
+    DrivePermissionsCreateResource,
+    newDrivePermissionsCreate,
+    DrivePermissionsCreate,
 
     -- ** drive.permissions.delete
-    , module Network.Google.Resource.Drive.Permissions.Delete
+    DrivePermissionsDeleteResource,
+    newDrivePermissionsDelete,
+    DrivePermissionsDelete,
 
     -- ** drive.permissions.get
-    , module Network.Google.Resource.Drive.Permissions.Get
+    DrivePermissionsGetResource,
+    newDrivePermissionsGet,
+    DrivePermissionsGet,
 
     -- ** drive.permissions.list
-    , module Network.Google.Resource.Drive.Permissions.List
+    DrivePermissionsListResource,
+    newDrivePermissionsList,
+    DrivePermissionsList,
 
     -- ** drive.permissions.update
-    , module Network.Google.Resource.Drive.Permissions.Update
+    DrivePermissionsUpdateResource,
+    newDrivePermissionsUpdate,
+    DrivePermissionsUpdate,
 
     -- ** drive.replies.create
-    , module Network.Google.Resource.Drive.Replies.Create
+    DriveRepliesCreateResource,
+    newDriveRepliesCreate,
+    DriveRepliesCreate,
 
     -- ** drive.replies.delete
-    , module Network.Google.Resource.Drive.Replies.Delete
+    DriveRepliesDeleteResource,
+    newDriveRepliesDelete,
+    DriveRepliesDelete,
 
     -- ** drive.replies.get
-    , module Network.Google.Resource.Drive.Replies.Get
+    DriveRepliesGetResource,
+    newDriveRepliesGet,
+    DriveRepliesGet,
 
     -- ** drive.replies.list
-    , module Network.Google.Resource.Drive.Replies.List
+    DriveRepliesListResource,
+    newDriveRepliesList,
+    DriveRepliesList,
 
     -- ** drive.replies.update
-    , module Network.Google.Resource.Drive.Replies.Update
+    DriveRepliesUpdateResource,
+    newDriveRepliesUpdate,
+    DriveRepliesUpdate,
 
     -- ** drive.revisions.delete
-    , module Network.Google.Resource.Drive.Revisions.Delete
+    DriveRevisionsDeleteResource,
+    newDriveRevisionsDelete,
+    DriveRevisionsDelete,
 
     -- ** drive.revisions.get
-    , module Network.Google.Resource.Drive.Revisions.Get
+    DriveRevisionsGetResource,
+    newDriveRevisionsGet,
+    DriveRevisionsGet,
 
     -- ** drive.revisions.list
-    , module Network.Google.Resource.Drive.Revisions.List
+    DriveRevisionsListResource,
+    newDriveRevisionsList,
+    DriveRevisionsList,
 
     -- ** drive.revisions.update
-    , module Network.Google.Resource.Drive.Revisions.Update
+    DriveRevisionsUpdateResource,
+    newDriveRevisionsUpdate,
+    DriveRevisionsUpdate,
 
     -- ** drive.teamdrives.create
-    , module Network.Google.Resource.Drive.Teamdrives.Create
+    DriveTeamdrivesCreateResource,
+    newDriveTeamdrivesCreate,
+    DriveTeamdrivesCreate,
 
     -- ** drive.teamdrives.delete
-    , module Network.Google.Resource.Drive.Teamdrives.Delete
+    DriveTeamdrivesDeleteResource,
+    newDriveTeamdrivesDelete,
+    DriveTeamdrivesDelete,
 
     -- ** drive.teamdrives.get
-    , module Network.Google.Resource.Drive.Teamdrives.Get
+    DriveTeamdrivesGetResource,
+    newDriveTeamdrivesGet,
+    DriveTeamdrivesGet,
 
     -- ** drive.teamdrives.list
-    , module Network.Google.Resource.Drive.Teamdrives.List
+    DriveTeamdrivesListResource,
+    newDriveTeamdrivesList,
+    DriveTeamdrivesList,
 
     -- ** drive.teamdrives.update
-    , module Network.Google.Resource.Drive.Teamdrives.Update
+    DriveTeamdrivesUpdateResource,
+    newDriveTeamdrivesUpdate,
+    DriveTeamdrivesUpdate,
 
     -- * Types
 
-    -- ** FileList
-    , FileList
-    , fileList
-    , flNextPageToken
-    , flIncompleteSearch
-    , flKind
-    , flFiles
+    -- ** About
+    About (..),
+    newAbout,
 
-    -- ** FileShortcutDetails
-    , FileShortcutDetails
-    , fileShortcutDetails
-    , fsdTargetId
-    , fsdTargetResourceKey
-    , fsdTargetMimeType
+    -- ** About_DriveThemesItem
+    About_DriveThemesItem (..),
+    newAbout_DriveThemesItem,
 
-    -- ** Drive
-    , Drive
-    , drive
-    , dThemeId
-    , dBackgRoundImageFile
-    , dColorRgb
-    , dCreatedTime
-    , dKind
-    , dBackgRoundImageLink
-    , dName
-    , dRestrictions
-    , dHidden
-    , dId
-    , dCapabilities
+    -- ** About_ExportFormats
+    About_ExportFormats (..),
+    newAbout_ExportFormats,
 
-    -- ** TeamDriveCapabilities
-    , TeamDriveCapabilities
-    , teamDriveCapabilities
-    , tdcCanRename
-    , tdcCanChangeTeamMembersOnlyRestriction
-    , tdcCanComment
-    , tdcCanRenameTeamDrive
-    , tdcCanChangeTeamDriveBackgRound
-    , tdcCanDownload
-    , tdcCanChangeDomainUsersOnlyRestriction
-    , tdcCanTrashChildren
-    , tdcCanAddChildren
-    , tdcCanRemoveChildren
-    , tdcCanChangeCopyRequiresWriterPermissionRestriction
-    , tdcCanDeleteTeamDrive
-    , tdcCanListChildren
-    , tdcCanEdit
-    , tdcCanManageMembers
-    , tdcCanReadRevisions
-    , tdcCanDeleteChildren
-    , tdcCanCopy
-    , tdcCanShare
+    -- ** About_ImportFormats
+    About_ImportFormats (..),
+    newAbout_ImportFormats,
 
-    -- ** PermissionPermissionDetailsItem
-    , PermissionPermissionDetailsItem
-    , permissionPermissionDetailsItem
-    , ppdiInherited
-    , ppdiPermissionType
-    , ppdiRole
-    , ppdiInheritedFrom
+    -- ** About_MaxImportSizes
+    About_MaxImportSizes (..),
+    newAbout_MaxImportSizes,
 
-    -- ** FilesListCorpus
-    , FilesListCorpus (..)
+    -- ** About_StorageQuota
+    About_StorageQuota (..),
+    newAbout_StorageQuota,
 
-    -- ** CommentQuotedFileContent
-    , CommentQuotedFileContent
-    , commentQuotedFileContent
-    , cqfcValue
-    , cqfcMimeType
-
-    -- ** DriveCapabilities
-    , DriveCapabilities
-    , driveCapabilities
-    , dcCanRename
-    , dcCanComment
-    , dcCanChangeDriveBackgRound
-    , dcCanRenameDrive
-    , dcCanDownload
-    , dcCanChangeDomainUsersOnlyRestriction
-    , dcCanTrashChildren
-    , dcCanAddChildren
-    , dcCanChangeCopyRequiresWriterPermissionRestriction
-    , dcCanChangeDriveMembersOnlyRestriction
-    , dcCanListChildren
-    , dcCanEdit
-    , dcCanManageMembers
-    , dcCanReadRevisions
-    , dcCanDeleteChildren
-    , dcCanCopy
-    , dcCanDeleteDrive
-    , dcCanShare
-
-    -- ** AboutStorageQuota
-    , AboutStorageQuota
-    , aboutStorageQuota
-    , asqUsageInDriveTrash
-    , asqLimit
-    , asqUsage
-    , asqUsageInDrive
-
-    -- ** Reply
-    , Reply
-    , reply
-    , rHTMLContent
-    , rModifiedTime
-    , rCreatedTime
-    , rKind
-    , rAction
-    , rContent
-    , rAuthor
-    , rId
-    , rDeleted
-
-    -- ** AboutImportFormats
-    , AboutImportFormats
-    , aboutImportFormats
-    , aifAddtional
-
-    -- ** FileCapabilities
-    , FileCapabilities
-    , fileCapabilities
-    , fcCanRename
-    , fcCanComment
-    , fcCanMoveChildrenWithinDrive
-    , fcCanMoveChildrenWithinTeamDrive
-    , fcCanModifyContent
-    , fcCanDelete
-    , fcCanMoveItemIntoTeamDrive
-    , fcCanChangeSecurityUpdateEnabled
-    , fcCanDownload
-    , fcCanTrash
-    , fcCanUntrash
-    , fcCanTrashChildren
-    , fcCanMoveItemOutOfDrive
-    , fcCanAddChildren
-    , fcCanAddMyDriveParent
-    , fcCanRemoveChildren
-    , fcCanMoveTeamDriveItem
-    , fcCanMoveItemWithinTeamDrive
-    , fcCanReadTeamDrive
-    , fcCanReadDrive
-    , fcCanAddFolderFromAnotherDrive
-    , fcCanChangeCopyRequiresWriterPermission
-    , fcCanMoveChildrenOutOfDrive
-    , fcCanListChildren
-    , fcCanMoveChildrenOutOfTeamDrive
-    , fcCanEdit
-    , fcCanChangeViewersCanCopyContent
-    , fcCanReadRevisions
-    , fcCanDeleteChildren
-    , fcCanMoveItemOutOfTeamDrive
-    , fcCanRemoveMyDriveParent
-    , fcCanModifyContentRestriction
-    , fcCanCopy
-    , fcCanMoveItemWithinDrive
-    , fcCanShare
-
-    -- ** ReplyList
-    , ReplyList
-    , replyList
-    , rlNextPageToken
-    , rlKind
-    , rlReplies
-
-    -- ** DriveBackgRoundImageFile
-    , DriveBackgRoundImageFile
-    , driveBackgRoundImageFile
-    , dbrifXCoordinate
-    , dbrifYCoordinate
-    , dbrifWidth
-    , dbrifId
-
-    -- ** FileContentHintsThumbnail
-    , FileContentHintsThumbnail
-    , fileContentHintsThumbnail
-    , fchtImage
-    , fchtMimeType
-
-    -- ** TeamDriveList
-    , TeamDriveList
-    , teamDriveList
-    , tdlNextPageToken
-    , tdlTeamDrives
-    , tdlKind
-
-    -- ** Channel
-    , Channel
-    , channel
-    , cResourceURI
-    , cResourceId
-    , cKind
-    , cExpiration
-    , cToken
-    , cAddress
-    , cPayload
-    , cParams
-    , cId
-    , cType
-
-    -- ** AboutTeamDriveThemesItem
-    , AboutTeamDriveThemesItem
-    , aboutTeamDriveThemesItem
-    , atdtiColorRgb
-    , atdtiBackgRoundImageLink
-    , atdtiId
-
-    -- ** TeamDriveRestrictions
-    , TeamDriveRestrictions
-    , teamDriveRestrictions
-    , tdrTeamMembersOnly
-    , tdrAdminManagedRestrictions
-    , tdrCopyRequiresWriterPermission
-    , tdrDomainUsersOnly
-
-    -- ** TeamDriveBackgRoundImageFile
-    , TeamDriveBackgRoundImageFile
-    , teamDriveBackgRoundImageFile
-    , tdbrifXCoordinate
-    , tdbrifYCoordinate
-    , tdbrifWidth
-    , tdbrifId
-
-    -- ** FileVideoMediaMetadata
-    , FileVideoMediaMetadata
-    , fileVideoMediaMetadata
-    , fvmmHeight
-    , fvmmWidth
-    , fvmmDurationMillis
-
-    -- ** FileAppProperties
-    , FileAppProperties
-    , fileAppProperties
-    , fapAddtional
-
-    -- ** FileLinkShareMetadata
-    , FileLinkShareMetadata
-    , fileLinkShareMetadata
-    , flsmSecurityUpdateEnabled
-    , flsmSecurityUpdateEligible
+    -- ** About_TeamDriveThemesItem
+    About_TeamDriveThemesItem (..),
+    newAbout_TeamDriveThemesItem,
 
     -- ** Change
-    , Change
-    , change
-    , chaDrive
-    , chaRemoved
-    , chaTime
-    , chaKind
-    , chaTeamDrive
-    , chaTeamDriveId
-    , chaType
-    , chaFileId
-    , chaFile
-    , chaChangeType
-    , chaDriveId
-
-    -- ** TeamDrive
-    , TeamDrive
-    , teamDrive
-    , tdThemeId
-    , tdBackgRoundImageFile
-    , tdColorRgb
-    , tdCreatedTime
-    , tdKind
-    , tdBackgRoundImageLink
-    , tdName
-    , tdRestrictions
-    , tdId
-    , tdCapabilities
-
-    -- ** AboutExportFormats
-    , AboutExportFormats
-    , aboutExportFormats
-    , aefAddtional
-
-    -- ** User
-    , User
-    , user
-    , uPhotoLink
-    , uMe
-    , uKind
-    , uEmailAddress
-    , uDisplayName
-    , uPermissionId
+    Change (..),
+    newChange,
 
     -- ** ChangeList
-    , ChangeList
-    , changeList
-    , clNewStartPageToken
-    , clNextPageToken
-    , clChanges
-    , clKind
+    ChangeList (..),
+    newChangeList,
 
-    -- ** RevisionExportLinks
-    , RevisionExportLinks
-    , revisionExportLinks
-    , relAddtional
+    -- ** Channel
+    Channel (..),
+    newChannel,
 
-    -- ** FileContentHints
-    , FileContentHints
-    , fileContentHints
-    , fchThumbnail
-    , fchIndexableText
-
-    -- ** ChannelParams
-    , ChannelParams
-    , channelParams
-    , cpAddtional
-
-    -- ** FileProperties
-    , FileProperties
-    , fileProperties
-    , fpAddtional
-
-    -- ** AboutMaxImportSizes
-    , AboutMaxImportSizes
-    , aboutMaxImportSizes
-    , amisAddtional
-
-    -- ** About
-    , About
-    , about
-    , aExportFormats
-    , aMaxImportSizes
-    , aCanCreateTeamDrives
-    , aImportFormats
-    , aKind
-    , aDriveThemes
-    , aAppInstalled
-    , aUser
-    , aStorageQuota
-    , aCanCreateDrives
-    , aMaxUploadSize
-    , aTeamDriveThemes
-    , aFolderColorPalette
-
-    -- ** FileImageMediaMetadataLocation
-    , FileImageMediaMetadataLocation
-    , fileImageMediaMetadataLocation
-    , fimmlLatitude
-    , fimmlAltitude
-    , fimmlLongitude
-
-    -- ** ContentRestriction
-    , ContentRestriction
-    , contentRestriction
-    , crRestrictingUser
-    , crRestrictionTime
-    , crReason
-    , crType
-    , crReadOnly
-
-    -- ** StartPageToken
-    , StartPageToken
-    , startPageToken
-    , sptKind
-    , sptStartPageToken
-
-    -- ** FileImageMediaMetadata
-    , FileImageMediaMetadata
-    , fileImageMediaMetadata
-    , fimmRotation
-    , fimmHeight
-    , fimmSubjectDistance
-    , fimmMaxApertureValue
-    , fimmIsoSpeed
-    , fimmTime
-    , fimmLocation
-    , fimmAperture
-    , fimmFocalLength
-    , fimmCameraMake
-    , fimmWidth
-    , fimmExposureTime
-    , fimmCameraModel
-    , fimmWhiteBalance
-    , fimmLens
-    , fimmFlashUsed
-    , fimmExposureBias
-    , fimmMeteringMode
-    , fimmExposureMode
-    , fimmSensor
-    , fimmColorSpace
+    -- ** Channel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
     -- ** Comment
-    , Comment
-    , comment
-    , comHTMLContent
-    , comModifiedTime
-    , comCreatedTime
-    , comKind
-    , comResolved
-    , comQuotedFileContent
-    , comAnchor
-    , comContent
-    , comReplies
-    , comAuthor
-    , comId
-    , comDeleted
+    Comment (..),
+    newComment,
 
-    -- ** Revision
-    , Revision
-    , revision
-    , revModifiedTime
-    , revSize
-    , revOriginalFilename
-    , revKind
-    , revPublishedLink
-    , revPublished
-    , revLastModifyingUser
-    , revPublishAuto
-    , revMD5Checksum
-    , revKeepForever
-    , revMimeType
-    , revExportLinks
-    , revPublishedOutsideDomain
-    , revId
-
-    -- ** Permission
-    , Permission
-    , permission
-    , pPhotoLink
-    , pTeamDrivePermissionDetails
-    , pKind
-    , pDomain
-    , pRole
-    , pEmailAddress
-    , pAllowFileDiscovery
-    , pDisplayName
-    , pView
-    , pId
-    , pDeleted
-    , pType
-    , pExpirationTime
-    , pPermissionDetails
-
-    -- ** DriveRestrictions
-    , DriveRestrictions
-    , driveRestrictions
-    , drAdminManagedRestrictions
-    , drDriveMembersOnly
-    , drCopyRequiresWriterPermission
-    , drDomainUsersOnly
-
-    -- ** File
-    , File
-    , file
-    , fOwnedByMe
-    , fThumbnailLink
-    , fFullFileExtension
-    , fModifiedTime
-    , fModifiedByMeTime
-    , fFileExtension
-    , fViewedByMe
-    , fShortcutDetails
-    , fOwners
-    , fViewedByMeTime
-    , fModifiedByMe
-    , fSize
-    , fTrashed
-    , fResourceKey
-    , fWebViewLink
-    , fCreatedTime
-    , fTrashedTime
-    , fOriginalFilename
-    , fKind
-    , fLastModifyingUser
-    , fIconLink
-    , fHasThumbnail
-    , fThumbnailVersion
-    , fContentRestrictions
-    , fImageMediaMetadata
-    , fExplicitlyTrashed
-    , fShared
-    , fMD5Checksum
-    , fTeamDriveId
-    , fFolderColorRgb
-    , fMimeType
-    , fIsAppAuthorized
-    , fCopyRequiresWriterPermission
-    , fName
-    , fExportLinks
-    , fParents
-    , fStarred
-    , fSpaces
-    , fVersion
-    , fHasAugmentedPermissions
-    , fWritersCanShare
-    , fTrashingUser
-    , fId
-    , fPermissionIds
-    , fPermissions
-    , fQuotaBytesUsed
-    , fLinkShareMetadata
-    , fAppProperties
-    , fVideoMediaMetadata
-    , fSharedWithMeTime
-    , fHeadRevisionId
-    , fCapabilities
-    , fDescription
-    , fViewersCanCopyContent
-    , fDriveId
-    , fSharingUser
-    , fWebContentLink
-    , fContentHints
-    , fProperties
-
-    -- ** AboutDriveThemesItem
-    , AboutDriveThemesItem
-    , aboutDriveThemesItem
-    , adtiColorRgb
-    , adtiBackgRoundImageLink
-    , adtiId
-
-    -- ** PermissionTeamDrivePermissionDetailsItem
-    , PermissionTeamDrivePermissionDetailsItem
-    , permissionTeamDrivePermissionDetailsItem
-    , ptdpdiInherited
-    , ptdpdiTeamDrivePermissionType
-    , ptdpdiRole
-    , ptdpdiInheritedFrom
-
-    -- ** DriveList
-    , DriveList
-    , driveList
-    , dlNextPageToken
-    , dlKind
-    , dlDrives
-
-    -- ** GeneratedIds
-    , GeneratedIds
-    , generatedIds
-    , giSpace
-    , giKind
-    , giIds
-
-    -- ** FileExportLinks
-    , FileExportLinks
-    , fileExportLinks
-    , felAddtional
+    -- ** Comment_QuotedFileContent
+    Comment_QuotedFileContent (..),
+    newComment_QuotedFileContent,
 
     -- ** CommentList
-    , CommentList
-    , commentList
-    , cllNextPageToken
-    , cllKind
-    , cllComments
+    CommentList (..),
+    newCommentList,
 
-    -- ** RevisionList
-    , RevisionList
-    , revisionList
-    , rllNextPageToken
-    , rllKind
-    , rllRevisions
+    -- ** ContentRestriction
+    ContentRestriction (..),
+    newContentRestriction,
+
+    -- ** Drive
+    Drive (..),
+    newDrive,
+
+    -- ** Drive_BackgroundImageFile
+    Drive_BackgroundImageFile (..),
+    newDrive_BackgroundImageFile,
+
+    -- ** Drive_Capabilities
+    Drive_Capabilities (..),
+    newDrive_Capabilities,
+
+    -- ** Drive_Restrictions
+    Drive_Restrictions (..),
+    newDrive_Restrictions,
+
+    -- ** DriveList
+    DriveList (..),
+    newDriveList,
+
+    -- ** File
+    File (..),
+    newFile,
+
+    -- ** File_AppProperties
+    File_AppProperties (..),
+    newFile_AppProperties,
+
+    -- ** File_Capabilities
+    File_Capabilities (..),
+    newFile_Capabilities,
+
+    -- ** File_ContentHints
+    File_ContentHints (..),
+    newFile_ContentHints,
+
+    -- ** File_ContentHints_Thumbnail
+    File_ContentHints_Thumbnail (..),
+    newFile_ContentHints_Thumbnail,
+
+    -- ** File_ExportLinks
+    File_ExportLinks (..),
+    newFile_ExportLinks,
+
+    -- ** File_ImageMediaMetadata
+    File_ImageMediaMetadata (..),
+    newFile_ImageMediaMetadata,
+
+    -- ** File_ImageMediaMetadata_Location
+    File_ImageMediaMetadata_Location (..),
+    newFile_ImageMediaMetadata_Location,
+
+    -- ** File_LinkShareMetadata
+    File_LinkShareMetadata (..),
+    newFile_LinkShareMetadata,
+
+    -- ** File_Properties
+    File_Properties (..),
+    newFile_Properties,
+
+    -- ** File_ShortcutDetails
+    File_ShortcutDetails (..),
+    newFile_ShortcutDetails,
+
+    -- ** File_VideoMediaMetadata
+    File_VideoMediaMetadata (..),
+    newFile_VideoMediaMetadata,
+
+    -- ** FileList
+    FileList (..),
+    newFileList,
+
+    -- ** GeneratedIds
+    GeneratedIds (..),
+    newGeneratedIds,
+
+    -- ** Permission
+    Permission (..),
+    newPermission,
+
+    -- ** Permission_PermissionDetailsItem
+    Permission_PermissionDetailsItem (..),
+    newPermission_PermissionDetailsItem,
+
+    -- ** Permission_TeamDrivePermissionDetailsItem
+    Permission_TeamDrivePermissionDetailsItem (..),
+    newPermission_TeamDrivePermissionDetailsItem,
 
     -- ** PermissionList
-    , PermissionList
-    , permissionList
-    , plNextPageToken
-    , plKind
-    , plPermissions
-    ) where
+    PermissionList (..),
+    newPermissionList,
 
-import Network.Google.Prelude
+    -- ** Reply
+    Reply (..),
+    newReply,
+
+    -- ** ReplyList
+    ReplyList (..),
+    newReplyList,
+
+    -- ** Revision
+    Revision (..),
+    newRevision,
+
+    -- ** Revision_ExportLinks
+    Revision_ExportLinks (..),
+    newRevision_ExportLinks,
+
+    -- ** RevisionList
+    RevisionList (..),
+    newRevisionList,
+
+    -- ** StartPageToken
+    StartPageToken (..),
+    newStartPageToken,
+
+    -- ** TeamDrive
+    TeamDrive (..),
+    newTeamDrive,
+
+    -- ** TeamDrive_BackgroundImageFile
+    TeamDrive_BackgroundImageFile (..),
+    newTeamDrive_BackgroundImageFile,
+
+    -- ** TeamDrive_Capabilities
+    TeamDrive_Capabilities (..),
+    newTeamDrive_Capabilities,
+
+    -- ** TeamDrive_Restrictions
+    TeamDrive_Restrictions (..),
+    newTeamDrive_Restrictions,
+
+    -- ** TeamDriveList
+    TeamDriveList (..),
+    newTeamDriveList,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** FilesListCorpus
+    FilesListCorpus (..),
+  )
+where
+
+import Network.Google.Drive.About.Get
+import Network.Google.Drive.Changes.GetStartPageToken
+import Network.Google.Drive.Changes.List
+import Network.Google.Drive.Changes.Watch
+import Network.Google.Drive.Channels.Stop
+import Network.Google.Drive.Comments.Create
+import Network.Google.Drive.Comments.Delete
+import Network.Google.Drive.Comments.Get
+import Network.Google.Drive.Comments.List
+import Network.Google.Drive.Comments.Update
+import Network.Google.Drive.Drives.Create
+import Network.Google.Drive.Drives.Delete
+import Network.Google.Drive.Drives.Get
+import Network.Google.Drive.Drives.Hide
+import Network.Google.Drive.Drives.List
+import Network.Google.Drive.Drives.Unhide
+import Network.Google.Drive.Drives.Update
+import Network.Google.Drive.Files.Copy
+import Network.Google.Drive.Files.Create
+import Network.Google.Drive.Files.Delete
+import Network.Google.Drive.Files.EmptyTrash
+import Network.Google.Drive.Files.Export
+import Network.Google.Drive.Files.GenerateIds
+import Network.Google.Drive.Files.Get
+import Network.Google.Drive.Files.List
+import Network.Google.Drive.Files.Update
+import Network.Google.Drive.Files.Watch
+import Network.Google.Drive.Permissions.Create
+import Network.Google.Drive.Permissions.Delete
+import Network.Google.Drive.Permissions.Get
+import Network.Google.Drive.Permissions.List
+import Network.Google.Drive.Permissions.Update
+import Network.Google.Drive.Replies.Create
+import Network.Google.Drive.Replies.Delete
+import Network.Google.Drive.Replies.Get
+import Network.Google.Drive.Replies.List
+import Network.Google.Drive.Replies.Update
+import Network.Google.Drive.Revisions.Delete
+import Network.Google.Drive.Revisions.Get
+import Network.Google.Drive.Revisions.List
+import Network.Google.Drive.Revisions.Update
+import Network.Google.Drive.Teamdrives.Create
+import Network.Google.Drive.Teamdrives.Delete
+import Network.Google.Drive.Teamdrives.Get
+import Network.Google.Drive.Teamdrives.List
+import Network.Google.Drive.Teamdrives.Update
 import Network.Google.Drive.Types
-import Network.Google.Resource.Drive.About.Get
-import Network.Google.Resource.Drive.Changes.GetStartPageToken
-import Network.Google.Resource.Drive.Changes.List
-import Network.Google.Resource.Drive.Changes.Watch
-import Network.Google.Resource.Drive.Channels.Stop
-import Network.Google.Resource.Drive.Comments.Create
-import Network.Google.Resource.Drive.Comments.Delete
-import Network.Google.Resource.Drive.Comments.Get
-import Network.Google.Resource.Drive.Comments.List
-import Network.Google.Resource.Drive.Comments.Update
-import Network.Google.Resource.Drive.Drives.Create
-import Network.Google.Resource.Drive.Drives.Delete
-import Network.Google.Resource.Drive.Drives.Get
-import Network.Google.Resource.Drive.Drives.Hide
-import Network.Google.Resource.Drive.Drives.List
-import Network.Google.Resource.Drive.Drives.Unhide
-import Network.Google.Resource.Drive.Drives.Update
-import Network.Google.Resource.Drive.Files.Copy
-import Network.Google.Resource.Drive.Files.Create
-import Network.Google.Resource.Drive.Files.Delete
-import Network.Google.Resource.Drive.Files.EmptyTrash
-import Network.Google.Resource.Drive.Files.Export
-import Network.Google.Resource.Drive.Files.GenerateIds
-import Network.Google.Resource.Drive.Files.Get
-import Network.Google.Resource.Drive.Files.List
-import Network.Google.Resource.Drive.Files.Update
-import Network.Google.Resource.Drive.Files.Watch
-import Network.Google.Resource.Drive.Permissions.Create
-import Network.Google.Resource.Drive.Permissions.Delete
-import Network.Google.Resource.Drive.Permissions.Get
-import Network.Google.Resource.Drive.Permissions.List
-import Network.Google.Resource.Drive.Permissions.Update
-import Network.Google.Resource.Drive.Replies.Create
-import Network.Google.Resource.Drive.Replies.Delete
-import Network.Google.Resource.Drive.Replies.Get
-import Network.Google.Resource.Drive.Replies.List
-import Network.Google.Resource.Drive.Replies.Update
-import Network.Google.Resource.Drive.Revisions.Delete
-import Network.Google.Resource.Drive.Revisions.Get
-import Network.Google.Resource.Drive.Revisions.List
-import Network.Google.Resource.Drive.Revisions.Update
-import Network.Google.Resource.Drive.Teamdrives.Create
-import Network.Google.Resource.Drive.Teamdrives.Delete
-import Network.Google.Resource.Drive.Teamdrives.Get
-import Network.Google.Resource.Drive.Teamdrives.List
-import Network.Google.Resource.Drive.Teamdrives.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Drive API service.
-type DriveAPI =
-     TeamdrivesListResource :<|> TeamdrivesGetResource
-       :<|> TeamdrivesCreateResource
-       :<|> TeamdrivesDeleteResource
-       :<|> TeamdrivesUpdateResource
-       :<|> ChangesListResource
-       :<|> ChangesGetStartPageTokenResource
-       :<|> ChangesWatchResource
-       :<|> ChannelsStopResource
-       :<|> RepliesListResource
-       :<|> RepliesGetResource
-       :<|> RepliesCreateResource
-       :<|> RepliesDeleteResource
-       :<|> RepliesUpdateResource
-       :<|> DrivesListResource
-       :<|> DrivesHideResource
-       :<|> DrivesGetResource
-       :<|> DrivesCreateResource
-       :<|> DrivesUnhideResource
-       :<|> DrivesDeleteResource
-       :<|> DrivesUpdateResource
-       :<|> AboutGetResource
-       :<|> FilesExportResource
-       :<|> FilesListResource
-       :<|> FilesCopyResource
-       :<|> FilesGetResource
-       :<|> FilesEmptyTrashResource
-       :<|> FilesCreateResource
-       :<|> FilesGenerateIdsResource
-       :<|> FilesDeleteResource
-       :<|> FilesUpdateResource
-       :<|> FilesWatchResource
-       :<|> PermissionsListResource
-       :<|> PermissionsGetResource
-       :<|> PermissionsCreateResource
-       :<|> PermissionsDeleteResource
-       :<|> PermissionsUpdateResource
-       :<|> CommentsListResource
-       :<|> CommentsGetResource
-       :<|> CommentsCreateResource
-       :<|> CommentsDeleteResource
-       :<|> CommentsUpdateResource
-       :<|> RevisionsListResource
-       :<|> RevisionsGetResource
-       :<|> RevisionsDeleteResource
-       :<|> RevisionsUpdateResource
