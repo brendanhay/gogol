@@ -1,211 +1,160 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudScheduler.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudScheduler.Types
-    (
-    -- * Service Configuration
-      cloudSchedulerService
+  ( -- * Configuration
+    cloudSchedulerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * OAuthToken
-    , OAuthToken
-    , oAuthToken
-    , oatScope
-    , oatServiceAccountEmail
+    -- * Types
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * PauseJobRequest
-    , PauseJobRequest
-    , pauseJobRequest
+    -- ** AppEngineHttpTarget
+    AppEngineHttpTarget (..),
+    newAppEngineHttpTarget,
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** AppEngineHttpTarget_Headers
+    AppEngineHttpTarget_Headers (..),
+    newAppEngineHttpTarget_Headers,
 
-    -- * ResumeJobRequest
-    , ResumeJobRequest
-    , resumeJobRequest
+    -- ** AppEngineHttpTarget_HttpMethod
+    AppEngineHttpTarget_HttpMethod (..),
 
-    -- * OidcToken
-    , OidcToken
-    , oidcToken
-    , otAudience
-    , otServiceAccountEmail
+    -- ** AppEngineRouting
+    AppEngineRouting (..),
+    newAppEngineRouting,
 
-    -- * AppEngineHTTPTargetHeaders
-    , AppEngineHTTPTargetHeaders
-    , appEngineHTTPTargetHeaders
-    , aehttpthAddtional
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * RetryConfig
-    , RetryConfig
-    , retryConfig
-    , rcMaxDoublings
-    , rcMaxRetryDuration
-    , rcMinBackoffDuration
-    , rcRetryCount
-    , rcMaxBackoffDuration
+    -- ** HttpTarget
+    HttpTarget (..),
+    newHttpTarget,
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** HttpTarget_Headers
+    HttpTarget_Headers (..),
+    newHttpTarget_Headers,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** HttpTarget_HttpMethod
+    HttpTarget_HttpMethod (..),
 
-    -- * PubsubTargetAttributes
-    , PubsubTargetAttributes
-    , pubsubTargetAttributes
-    , ptaAddtional
+    -- ** Job
+    Job (..),
+    newJob,
 
-    -- * HTTPTargetHeaders
-    , HTTPTargetHeaders
-    , hTTPTargetHeaders
-    , httpthAddtional
+    -- ** Job_State
+    Job_State (..),
 
-    -- * PubsubMessage
-    , PubsubMessage
-    , pubsubMessage
-    , pmData
-    , pmPublishTime
-    , pmAttributes
-    , pmMessageId
-    , pmOrderingKey
+    -- ** ListJobsResponse
+    ListJobsResponse (..),
+    newListJobsResponse,
 
-    -- * JobState
-    , JobState (..)
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * AppEngineHTTPTarget
-    , AppEngineHTTPTarget
-    , appEngineHTTPTarget
-    , aehttptHTTPMethod
-    , aehttptRelativeURI
-    , aehttptBody
-    , aehttptHeaders
-    , aehttptAppEngineRouting
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * HTTPTarget
-    , HTTPTarget
-    , hTTPTarget
-    , httptOAuthToken
-    , httptHTTPMethod
-    , httptOidcToken
-    , httptBody
-    , httptURI
-    , httptHeaders
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * RunJobRequest
-    , RunJobRequest
-    , runJobRequest
+    -- ** OAuthToken
+    OAuthToken (..),
+    newOAuthToken,
 
-    -- * Job
-    , Job
-    , job
-    , jStatus
-    , jAttemptDeadline
-    , jState
-    , jLastAttemptTime
-    , jRetryConfig
-    , jSchedule
-    , jScheduleTime
-    , jAppEngineHTTPTarget
-    , jHTTPTarget
-    , jName
-    , jPubsubTarget
-    , jUserUpdateTime
-    , jTimeZone
-    , jDescription
+    -- ** OidcToken
+    OidcToken (..),
+    newOidcToken,
 
-    -- * PubsubMessageAttributes
-    , PubsubMessageAttributes
-    , pubsubMessageAttributes
-    , pmaAddtional
+    -- ** PauseJobRequest
+    PauseJobRequest (..),
+    newPauseJobRequest,
 
-    -- * PubsubTarget
-    , PubsubTarget
-    , pubsubTarget
-    , ptData
-    , ptTopicName
-    , ptAttributes
+    -- ** PubsubMessage
+    PubsubMessage (..),
+    newPubsubMessage,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** PubsubMessage_Attributes
+    PubsubMessage_Attributes (..),
+    newPubsubMessage_Attributes,
 
-    -- * ListJobsResponse
-    , ListJobsResponse
-    , listJobsResponse
-    , ljrNextPageToken
-    , ljrJobs
+    -- ** PubsubTarget
+    PubsubTarget (..),
+    newPubsubTarget,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** PubsubTarget_Attributes
+    PubsubTarget_Attributes (..),
+    newPubsubTarget_Attributes,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** ResumeJobRequest
+    ResumeJobRequest (..),
+    newResumeJobRequest,
 
-    -- * AppEngineRouting
-    , AppEngineRouting
-    , appEngineRouting
-    , aerService
-    , aerVersion
-    , aerHost
-    , aerInstance
+    -- ** RetryConfig
+    RetryConfig (..),
+    newRetryConfig,
 
-    -- * HTTPTargetHTTPMethod
-    , HTTPTargetHTTPMethod (..)
+    -- ** RunJobRequest
+    RunJobRequest (..),
+    newRunJobRequest,
 
-    -- * AppEngineHTTPTargetHTTPMethod
-    , AppEngineHTTPTargetHTTPMethod (..)
-    ) where
+    -- ** Status
+    Status (..),
+    newStatus,
 
-import Network.Google.CloudScheduler.Types.Product
-import Network.Google.CloudScheduler.Types.Sum
-import Network.Google.Prelude
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
 
--- | Default request referring to version 'v1' of the Cloud Scheduler API. This contains the host and root path used as a starting point for constructing service requests.
-cloudSchedulerService :: ServiceConfig
-cloudSchedulerService
-  = defaultService (ServiceId "cloudscheduler:v1")
-      "cloudscheduler.googleapis.com"
+import Network.Google.CloudScheduler.Internal.Product
+import Network.Google.CloudScheduler.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v1@ of the Cloud Scheduler API. This contains the host and root path used as a starting point for constructing service requests.
+cloudSchedulerService :: Core.ServiceConfig
+cloudSchedulerService =
+  Core.defaultService
+    (Core.ServiceId "cloudscheduler:v1")
+    "cloudscheduler.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
