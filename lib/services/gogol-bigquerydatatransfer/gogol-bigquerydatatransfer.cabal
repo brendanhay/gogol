@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-bigquerydatatransfer
-version:            0.5.0
-synopsis:           Google BigQuery Data Transfer SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-bigquerydatatransfer
+version:               0.5.0
+synopsis:              Google BigQuery Data Transfer SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis.
+    Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,59 +28,62 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.BigQueryDataTransfer
-    Gogol.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
-    Gogol.BigQueryDataTransfer.Projects.DataSources.Get
-    Gogol.BigQueryDataTransfer.Projects.DataSources.List
-    Gogol.BigQueryDataTransfer.Projects.EnrollDataSources
-    Gogol.BigQueryDataTransfer.Projects.Locations.DataSources.CheckValidCreds
-    Gogol.BigQueryDataTransfer.Projects.Locations.DataSources.Get
-    Gogol.BigQueryDataTransfer.Projects.Locations.DataSources.List
-    Gogol.BigQueryDataTransfer.Projects.Locations.EnrollDataSources
-    Gogol.BigQueryDataTransfer.Projects.Locations.Get
-    Gogol.BigQueryDataTransfer.Projects.Locations.List
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Create
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Delete
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Get
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.List
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Get
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
-    Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Create
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Delete
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Get
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.List
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Patch
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Delete
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Get
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
-    Gogol.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
-    Gogol.BigQueryDataTransfer.Types
+      Gogol.BigQueryDataTransfer
+    , Gogol.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
+    , Gogol.BigQueryDataTransfer.Projects.DataSources.Get
+    , Gogol.BigQueryDataTransfer.Projects.DataSources.List
+    , Gogol.BigQueryDataTransfer.Projects.EnrollDataSources
+    , Gogol.BigQueryDataTransfer.Projects.Locations.DataSources.CheckValidCreds
+    , Gogol.BigQueryDataTransfer.Projects.Locations.DataSources.Get
+    , Gogol.BigQueryDataTransfer.Projects.Locations.DataSources.List
+    , Gogol.BigQueryDataTransfer.Projects.Locations.EnrollDataSources
+    , Gogol.BigQueryDataTransfer.Projects.Locations.Get
+    , Gogol.BigQueryDataTransfer.Projects.Locations.List
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Create
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Delete
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Get
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.List
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Get
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
+    , Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Create
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Delete
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Get
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.List
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Patch
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Delete
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Get
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
+    , Gogol.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
+    , Gogol.BigQueryDataTransfer.Types
 
   other-modules:
-    Gogol.BigQueryDataTransfer.Internal.Product
-    Gogol.BigQueryDataTransfer.Internal.Sum
+      Gogol.BigQueryDataTransfer.Internal.Product
+    , Gogol.BigQueryDataTransfer.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
