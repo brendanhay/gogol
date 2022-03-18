@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,64 +30,69 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.clientId.hashClientId@.
 module Gogol.Analytics.Management.ClientId.HashClientId
-    (
-    -- * Resource
-      AnalyticsManagementClientIdHashClientIdResource
+  ( -- * Resource
+    AnalyticsManagementClientIdHashClientIdResource,
 
     -- ** Constructing a Request
-    , newAnalyticsManagementClientIdHashClientId
-    , AnalyticsManagementClientIdHashClientId
-    ) where
+    newAnalyticsManagementClientIdHashClientId,
+    AnalyticsManagementClientIdHashClientId,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Analytics.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @analytics.management.clientId.hashClientId@ method which the
 -- 'AnalyticsManagementClientIdHashClientId' request conforms to.
-type AnalyticsManagementClientIdHashClientIdResource
-     =
-     "analytics" Core.:>
-       "v3" Core.:>
-         "management" Core.:>
-           "clientId:hashClientId" Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON] HashClientIdRequest Core.:>
-                 Core.Post '[Core.JSON] HashClientIdResponse
+type AnalyticsManagementClientIdHashClientIdResource =
+  "analytics"
+    Core.:> "v3"
+    Core.:> "management"
+    Core.:> "clientId:hashClientId"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] HashClientIdRequest
+    Core.:> Core.Post '[Core.JSON] HashClientIdResponse
 
 -- | Hashes the given Client ID.
 --
 -- /See:/ 'newAnalyticsManagementClientIdHashClientId' smart constructor.
 newtype AnalyticsManagementClientIdHashClientId = AnalyticsManagementClientIdHashClientId
-    {
-      -- | Multipart request metadata.
-      payload :: HashClientIdRequest
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: HashClientIdRequest
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementClientIdHashClientId' with the minimum fields required to make a request.
-newAnalyticsManagementClientIdHashClientId 
-    ::  HashClientIdRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> AnalyticsManagementClientIdHashClientId
+newAnalyticsManagementClientIdHashClientId ::
+  -- |  Multipart request metadata. See 'payload'.
+  HashClientIdRequest ->
+  AnalyticsManagementClientIdHashClientId
 newAnalyticsManagementClientIdHashClientId payload =
   AnalyticsManagementClientIdHashClientId {payload = payload}
 
-instance Core.GoogleRequest
-           AnalyticsManagementClientIdHashClientId
-         where
-        type Rs AnalyticsManagementClientIdHashClientId =
-             HashClientIdResponse
-        type Scopes AnalyticsManagementClientIdHashClientId =
-             '["https://www.googleapis.com/auth/analytics.edit",
-               "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient
-          AnalyticsManagementClientIdHashClientId{..}
-          = go (Core.Just Core.AltJSON) payload
-              analyticsService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           AnalyticsManagementClientIdHashClientIdResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AnalyticsManagementClientIdHashClientId
+  where
+  type
+    Rs AnalyticsManagementClientIdHashClientId =
+      HashClientIdResponse
+  type
+    Scopes AnalyticsManagementClientIdHashClientId =
+      '[ "https://www.googleapis.com/auth/analytics.edit",
+         "https://www.googleapis.com/auth/analytics.readonly"
+       ]
+  requestClient
+    AnalyticsManagementClientIdHashClientId {..} =
+      go
+        (Core.Just Core.AltJSON)
+        payload
+        analyticsService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  AnalyticsManagementClientIdHashClientIdResource
+            )
+            Core.mempty

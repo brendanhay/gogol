@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-analytics
-version:               0.5.0
-synopsis:              Google Analytics SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-analytics
+version:            0.5.0
+synopsis:           Google Analytics SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Views and manages your Google Analytics data.
+  Views and manages your Google Analytics data.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,118 +31,115 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Analytics
-    , Gogol.Analytics.Data.Ga.Get
-    , Gogol.Analytics.Data.Mcf.Get
-    , Gogol.Analytics.Data.Realtime.Get
-    , Gogol.Analytics.Management.AccountSummaries.List
-    , Gogol.Analytics.Management.AccountUserLinks.Delete
-    , Gogol.Analytics.Management.AccountUserLinks.Insert
-    , Gogol.Analytics.Management.AccountUserLinks.List
-    , Gogol.Analytics.Management.AccountUserLinks.Update
-    , Gogol.Analytics.Management.Accounts.List
-    , Gogol.Analytics.Management.ClientId.HashClientId
-    , Gogol.Analytics.Management.CustomDataSources.List
-    , Gogol.Analytics.Management.CustomDimensions.Get
-    , Gogol.Analytics.Management.CustomDimensions.Insert
-    , Gogol.Analytics.Management.CustomDimensions.List
-    , Gogol.Analytics.Management.CustomDimensions.Patch
-    , Gogol.Analytics.Management.CustomDimensions.Update
-    , Gogol.Analytics.Management.CustomMetrics.Get
-    , Gogol.Analytics.Management.CustomMetrics.Insert
-    , Gogol.Analytics.Management.CustomMetrics.List
-    , Gogol.Analytics.Management.CustomMetrics.Patch
-    , Gogol.Analytics.Management.CustomMetrics.Update
-    , Gogol.Analytics.Management.Experiments.Delete
-    , Gogol.Analytics.Management.Experiments.Get
-    , Gogol.Analytics.Management.Experiments.Insert
-    , Gogol.Analytics.Management.Experiments.List
-    , Gogol.Analytics.Management.Experiments.Patch
-    , Gogol.Analytics.Management.Experiments.Update
-    , Gogol.Analytics.Management.Filters.Delete
-    , Gogol.Analytics.Management.Filters.Get
-    , Gogol.Analytics.Management.Filters.Insert
-    , Gogol.Analytics.Management.Filters.List
-    , Gogol.Analytics.Management.Filters.Patch
-    , Gogol.Analytics.Management.Filters.Update
-    , Gogol.Analytics.Management.Goals.Get
-    , Gogol.Analytics.Management.Goals.Insert
-    , Gogol.Analytics.Management.Goals.List
-    , Gogol.Analytics.Management.Goals.Patch
-    , Gogol.Analytics.Management.Goals.Update
-    , Gogol.Analytics.Management.ProfileFilterLinks.Delete
-    , Gogol.Analytics.Management.ProfileFilterLinks.Get
-    , Gogol.Analytics.Management.ProfileFilterLinks.Insert
-    , Gogol.Analytics.Management.ProfileFilterLinks.List
-    , Gogol.Analytics.Management.ProfileFilterLinks.Patch
-    , Gogol.Analytics.Management.ProfileFilterLinks.Update
-    , Gogol.Analytics.Management.ProfileUserLinks.Delete
-    , Gogol.Analytics.Management.ProfileUserLinks.Insert
-    , Gogol.Analytics.Management.ProfileUserLinks.List
-    , Gogol.Analytics.Management.ProfileUserLinks.Update
-    , Gogol.Analytics.Management.Profiles.Delete
-    , Gogol.Analytics.Management.Profiles.Get
-    , Gogol.Analytics.Management.Profiles.Insert
-    , Gogol.Analytics.Management.Profiles.List
-    , Gogol.Analytics.Management.Profiles.Patch
-    , Gogol.Analytics.Management.Profiles.Update
-    , Gogol.Analytics.Management.RemarketingAudience.Delete
-    , Gogol.Analytics.Management.RemarketingAudience.Get
-    , Gogol.Analytics.Management.RemarketingAudience.Insert
-    , Gogol.Analytics.Management.RemarketingAudience.List
-    , Gogol.Analytics.Management.RemarketingAudience.Patch
-    , Gogol.Analytics.Management.RemarketingAudience.Update
-    , Gogol.Analytics.Management.Segments.List
-    , Gogol.Analytics.Management.UnsampledReports.Delete
-    , Gogol.Analytics.Management.UnsampledReports.Get
-    , Gogol.Analytics.Management.UnsampledReports.Insert
-    , Gogol.Analytics.Management.UnsampledReports.List
-    , Gogol.Analytics.Management.Uploads.DeleteUploadData
-    , Gogol.Analytics.Management.Uploads.Get
-    , Gogol.Analytics.Management.Uploads.List
-    , Gogol.Analytics.Management.Uploads.UploadData
-    , Gogol.Analytics.Management.WebPropertyAdWordsLinks.Delete
-    , Gogol.Analytics.Management.WebPropertyAdWordsLinks.Get
-    , Gogol.Analytics.Management.WebPropertyAdWordsLinks.Insert
-    , Gogol.Analytics.Management.WebPropertyAdWordsLinks.List
-    , Gogol.Analytics.Management.WebPropertyAdWordsLinks.Patch
-    , Gogol.Analytics.Management.WebPropertyAdWordsLinks.Update
-    , Gogol.Analytics.Management.Webproperties.Get
-    , Gogol.Analytics.Management.Webproperties.Insert
-    , Gogol.Analytics.Management.Webproperties.List
-    , Gogol.Analytics.Management.Webproperties.Patch
-    , Gogol.Analytics.Management.Webproperties.Update
-    , Gogol.Analytics.Management.WebpropertyUserLinks.Delete
-    , Gogol.Analytics.Management.WebpropertyUserLinks.Insert
-    , Gogol.Analytics.Management.WebpropertyUserLinks.List
-    , Gogol.Analytics.Management.WebpropertyUserLinks.Update
-    , Gogol.Analytics.Metadata.Columns.List
-    , Gogol.Analytics.Provisioning.CreateAccountTicket
-    , Gogol.Analytics.Provisioning.CreateAccountTree
-    , Gogol.Analytics.Types
-    , Gogol.Analytics.UserDeletion.UserDeletionRequest.Upsert
+    Gogol.Analytics
+    Gogol.Analytics.Data.Ga.Get
+    Gogol.Analytics.Data.Mcf.Get
+    Gogol.Analytics.Data.Realtime.Get
+    Gogol.Analytics.Management.Accounts.List
+    Gogol.Analytics.Management.AccountSummaries.List
+    Gogol.Analytics.Management.AccountUserLinks.Delete
+    Gogol.Analytics.Management.AccountUserLinks.Insert
+    Gogol.Analytics.Management.AccountUserLinks.List
+    Gogol.Analytics.Management.AccountUserLinks.Update
+    Gogol.Analytics.Management.ClientId.HashClientId
+    Gogol.Analytics.Management.CustomDataSources.List
+    Gogol.Analytics.Management.CustomDimensions.Get
+    Gogol.Analytics.Management.CustomDimensions.Insert
+    Gogol.Analytics.Management.CustomDimensions.List
+    Gogol.Analytics.Management.CustomDimensions.Patch
+    Gogol.Analytics.Management.CustomDimensions.Update
+    Gogol.Analytics.Management.CustomMetrics.Get
+    Gogol.Analytics.Management.CustomMetrics.Insert
+    Gogol.Analytics.Management.CustomMetrics.List
+    Gogol.Analytics.Management.CustomMetrics.Patch
+    Gogol.Analytics.Management.CustomMetrics.Update
+    Gogol.Analytics.Management.Experiments.Delete
+    Gogol.Analytics.Management.Experiments.Get
+    Gogol.Analytics.Management.Experiments.Insert
+    Gogol.Analytics.Management.Experiments.List
+    Gogol.Analytics.Management.Experiments.Patch
+    Gogol.Analytics.Management.Experiments.Update
+    Gogol.Analytics.Management.Filters.Delete
+    Gogol.Analytics.Management.Filters.Get
+    Gogol.Analytics.Management.Filters.Insert
+    Gogol.Analytics.Management.Filters.List
+    Gogol.Analytics.Management.Filters.Patch
+    Gogol.Analytics.Management.Filters.Update
+    Gogol.Analytics.Management.Goals.Get
+    Gogol.Analytics.Management.Goals.Insert
+    Gogol.Analytics.Management.Goals.List
+    Gogol.Analytics.Management.Goals.Patch
+    Gogol.Analytics.Management.Goals.Update
+    Gogol.Analytics.Management.ProfileFilterLinks.Delete
+    Gogol.Analytics.Management.ProfileFilterLinks.Get
+    Gogol.Analytics.Management.ProfileFilterLinks.Insert
+    Gogol.Analytics.Management.ProfileFilterLinks.List
+    Gogol.Analytics.Management.ProfileFilterLinks.Patch
+    Gogol.Analytics.Management.ProfileFilterLinks.Update
+    Gogol.Analytics.Management.Profiles.Delete
+    Gogol.Analytics.Management.Profiles.Get
+    Gogol.Analytics.Management.Profiles.Insert
+    Gogol.Analytics.Management.Profiles.List
+    Gogol.Analytics.Management.Profiles.Patch
+    Gogol.Analytics.Management.Profiles.Update
+    Gogol.Analytics.Management.ProfileUserLinks.Delete
+    Gogol.Analytics.Management.ProfileUserLinks.Insert
+    Gogol.Analytics.Management.ProfileUserLinks.List
+    Gogol.Analytics.Management.ProfileUserLinks.Update
+    Gogol.Analytics.Management.RemarketingAudience.Delete
+    Gogol.Analytics.Management.RemarketingAudience.Get
+    Gogol.Analytics.Management.RemarketingAudience.Insert
+    Gogol.Analytics.Management.RemarketingAudience.List
+    Gogol.Analytics.Management.RemarketingAudience.Patch
+    Gogol.Analytics.Management.RemarketingAudience.Update
+    Gogol.Analytics.Management.Segments.List
+    Gogol.Analytics.Management.UnsampledReports.Delete
+    Gogol.Analytics.Management.UnsampledReports.Get
+    Gogol.Analytics.Management.UnsampledReports.Insert
+    Gogol.Analytics.Management.UnsampledReports.List
+    Gogol.Analytics.Management.Uploads.DeleteUploadData
+    Gogol.Analytics.Management.Uploads.Get
+    Gogol.Analytics.Management.Uploads.List
+    Gogol.Analytics.Management.Uploads.UploadData
+    Gogol.Analytics.Management.Webproperties.Get
+    Gogol.Analytics.Management.Webproperties.Insert
+    Gogol.Analytics.Management.Webproperties.List
+    Gogol.Analytics.Management.Webproperties.Patch
+    Gogol.Analytics.Management.Webproperties.Update
+    Gogol.Analytics.Management.WebPropertyAdWordsLinks.Delete
+    Gogol.Analytics.Management.WebPropertyAdWordsLinks.Get
+    Gogol.Analytics.Management.WebPropertyAdWordsLinks.Insert
+    Gogol.Analytics.Management.WebPropertyAdWordsLinks.List
+    Gogol.Analytics.Management.WebPropertyAdWordsLinks.Patch
+    Gogol.Analytics.Management.WebPropertyAdWordsLinks.Update
+    Gogol.Analytics.Management.WebpropertyUserLinks.Delete
+    Gogol.Analytics.Management.WebpropertyUserLinks.Insert
+    Gogol.Analytics.Management.WebpropertyUserLinks.List
+    Gogol.Analytics.Management.WebpropertyUserLinks.Update
+    Gogol.Analytics.Metadata.Columns.List
+    Gogol.Analytics.Provisioning.CreateAccountTicket
+    Gogol.Analytics.Provisioning.CreateAccountTree
+    Gogol.Analytics.Types
+    Gogol.Analytics.UserDeletion.UserDeletionRequest.Upsert
 
   other-modules:
-      Gogol.Analytics.Internal.Product
-    , Gogol.Analytics.Internal.Sum
+    Gogol.Analytics.Internal.Product
+    Gogol.Analytics.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

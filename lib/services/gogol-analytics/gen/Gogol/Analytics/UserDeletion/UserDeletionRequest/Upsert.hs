@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,66 +30,69 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.userDeletion.userDeletionRequest.upsert@.
 module Gogol.Analytics.UserDeletion.UserDeletionRequest.Upsert
-    (
-    -- * Resource
-      AnalyticsUserDeletionUserDeletionRequestUpsertResource
+  ( -- * Resource
+    AnalyticsUserDeletionUserDeletionRequestUpsertResource,
 
     -- ** Constructing a Request
-    , newAnalyticsUserDeletionUserDeletionRequestUpsert
-    , AnalyticsUserDeletionUserDeletionRequestUpsert
-    ) where
+    newAnalyticsUserDeletionUserDeletionRequestUpsert,
+    AnalyticsUserDeletionUserDeletionRequestUpsert,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Analytics.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @analytics.userDeletion.userDeletionRequest.upsert@ method which the
 -- 'AnalyticsUserDeletionUserDeletionRequestUpsert' request conforms to.
-type AnalyticsUserDeletionUserDeletionRequestUpsertResource
-     =
-     "analytics" Core.:>
-       "v3" Core.:>
-         "userDeletion" Core.:>
-           "userDeletionRequests:upsert" Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON] UserDeletionRequest Core.:>
-                 Core.Post '[Core.JSON] UserDeletionRequest
+type AnalyticsUserDeletionUserDeletionRequestUpsertResource =
+  "analytics"
+    Core.:> "v3"
+    Core.:> "userDeletion"
+    Core.:> "userDeletionRequests:upsert"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] UserDeletionRequest
+    Core.:> Core.Post '[Core.JSON] UserDeletionRequest
 
 -- | Insert or update a user deletion requests.
 --
 -- /See:/ 'newAnalyticsUserDeletionUserDeletionRequestUpsert' smart constructor.
 newtype AnalyticsUserDeletionUserDeletionRequestUpsert = AnalyticsUserDeletionUserDeletionRequestUpsert
-    {
-      -- | Multipart request metadata.
-      payload :: UserDeletionRequest
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: UserDeletionRequest
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsUserDeletionUserDeletionRequestUpsert' with the minimum fields required to make a request.
-newAnalyticsUserDeletionUserDeletionRequestUpsert 
-    ::  UserDeletionRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> AnalyticsUserDeletionUserDeletionRequestUpsert
+newAnalyticsUserDeletionUserDeletionRequestUpsert ::
+  -- |  Multipart request metadata. See 'payload'.
+  UserDeletionRequest ->
+  AnalyticsUserDeletionUserDeletionRequestUpsert
 newAnalyticsUserDeletionUserDeletionRequestUpsert payload =
   AnalyticsUserDeletionUserDeletionRequestUpsert {payload = payload}
 
-instance Core.GoogleRequest
-           AnalyticsUserDeletionUserDeletionRequestUpsert
-         where
-        type Rs
-               AnalyticsUserDeletionUserDeletionRequestUpsert
-             = UserDeletionRequest
-        type Scopes
-               AnalyticsUserDeletionUserDeletionRequestUpsert
-             =
-             '["https://www.googleapis.com/auth/analytics.user.deletion"]
-        requestClient
-          AnalyticsUserDeletionUserDeletionRequestUpsert{..}
-          = go (Core.Just Core.AltJSON) payload
-              analyticsService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           AnalyticsUserDeletionUserDeletionRequestUpsertResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AnalyticsUserDeletionUserDeletionRequestUpsert
+  where
+  type
+    Rs
+      AnalyticsUserDeletionUserDeletionRequestUpsert =
+      UserDeletionRequest
+  type
+    Scopes
+      AnalyticsUserDeletionUserDeletionRequestUpsert =
+      '["https://www.googleapis.com/auth/analytics.user.deletion"]
+  requestClient
+    AnalyticsUserDeletionUserDeletionRequestUpsert {..} =
+      go
+        (Core.Just Core.AltJSON)
+        payload
+        analyticsService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  AnalyticsUserDeletionUserDeletionRequestUpsertResource
+            )
+            Core.mempty

@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,486 +25,486 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Analytics.Types
-    (
-    -- * Configuration
-      analyticsService
+  ( -- * Configuration
+    analyticsService,
 
     -- * OAuth Scopes
-    , analyticsScope
-    , analyticsEditScope
-    , analyticsManageUsersScope
-    , analyticsManageUsersReadOnlyScope
-    , analyticsProvisionScope
-    , analyticsReadOnlyScope
-    , analyticsUserDeletionScope
+    analyticsScope,
+    analyticsEditScope,
+    analyticsManageUsersScope,
+    analyticsManageUsersReadOnlyScope,
+    analyticsProvisionScope,
+    analyticsReadOnlyScope,
+    analyticsUserDeletionScope,
 
     -- * Types
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Account_ChildLink
-    , Account_ChildLink (..)
-    , newAccount_ChildLink
+    Account_ChildLink (..),
+    newAccount_ChildLink,
 
     -- ** Account_Permissions
-    , Account_Permissions (..)
-    , newAccount_Permissions
+    Account_Permissions (..),
+    newAccount_Permissions,
 
     -- ** AccountRef
-    , AccountRef (..)
-    , newAccountRef
+    AccountRef (..),
+    newAccountRef,
 
     -- ** AccountSummaries
-    , AccountSummaries (..)
-    , newAccountSummaries
+    AccountSummaries (..),
+    newAccountSummaries,
 
     -- ** AccountSummary
-    , AccountSummary (..)
-    , newAccountSummary
+    AccountSummary (..),
+    newAccountSummary,
 
     -- ** AccountTicket
-    , AccountTicket (..)
-    , newAccountTicket
+    AccountTicket (..),
+    newAccountTicket,
 
     -- ** AccountTreeRequest
-    , AccountTreeRequest (..)
-    , newAccountTreeRequest
+    AccountTreeRequest (..),
+    newAccountTreeRequest,
 
     -- ** AccountTreeResponse
-    , AccountTreeResponse (..)
-    , newAccountTreeResponse
+    AccountTreeResponse (..),
+    newAccountTreeResponse,
 
     -- ** Accounts
-    , Accounts (..)
-    , newAccounts
+    Accounts (..),
+    newAccounts,
 
     -- ** AdWordsAccount
-    , AdWordsAccount (..)
-    , newAdWordsAccount
+    AdWordsAccount (..),
+    newAdWordsAccount,
 
     -- ** AnalyticsDataimportDeleteUploadDataRequest
-    , AnalyticsDataimportDeleteUploadDataRequest (..)
-    , newAnalyticsDataimportDeleteUploadDataRequest
+    AnalyticsDataimportDeleteUploadDataRequest (..),
+    newAnalyticsDataimportDeleteUploadDataRequest,
 
     -- ** Column
-    , Column (..)
-    , newColumn
+    Column (..),
+    newColumn,
 
     -- ** Column_Attributes
-    , Column_Attributes (..)
-    , newColumn_Attributes
+    Column_Attributes (..),
+    newColumn_Attributes,
 
     -- ** Columns
-    , Columns (..)
-    , newColumns
+    Columns (..),
+    newColumns,
 
     -- ** CustomDataSource
-    , CustomDataSource (..)
-    , newCustomDataSource
+    CustomDataSource (..),
+    newCustomDataSource,
 
     -- ** CustomDataSource_ChildLink
-    , CustomDataSource_ChildLink (..)
-    , newCustomDataSource_ChildLink
+    CustomDataSource_ChildLink (..),
+    newCustomDataSource_ChildLink,
 
     -- ** CustomDataSource_ParentLink
-    , CustomDataSource_ParentLink (..)
-    , newCustomDataSource_ParentLink
+    CustomDataSource_ParentLink (..),
+    newCustomDataSource_ParentLink,
 
     -- ** CustomDataSources
-    , CustomDataSources (..)
-    , newCustomDataSources
+    CustomDataSources (..),
+    newCustomDataSources,
 
     -- ** CustomDimension
-    , CustomDimension (..)
-    , newCustomDimension
+    CustomDimension (..),
+    newCustomDimension,
 
     -- ** CustomDimension_ParentLink
-    , CustomDimension_ParentLink (..)
-    , newCustomDimension_ParentLink
+    CustomDimension_ParentLink (..),
+    newCustomDimension_ParentLink,
 
     -- ** CustomDimensions
-    , CustomDimensions (..)
-    , newCustomDimensions
+    CustomDimensions (..),
+    newCustomDimensions,
 
     -- ** CustomMetric
-    , CustomMetric (..)
-    , newCustomMetric
+    CustomMetric (..),
+    newCustomMetric,
 
     -- ** CustomMetric_ParentLink
-    , CustomMetric_ParentLink (..)
-    , newCustomMetric_ParentLink
+    CustomMetric_ParentLink (..),
+    newCustomMetric_ParentLink,
 
     -- ** CustomMetrics
-    , CustomMetrics (..)
-    , newCustomMetrics
+    CustomMetrics (..),
+    newCustomMetrics,
 
     -- ** EntityAdWordsLink
-    , EntityAdWordsLink (..)
-    , newEntityAdWordsLink
+    EntityAdWordsLink (..),
+    newEntityAdWordsLink,
 
     -- ** EntityAdWordsLink_Entity
-    , EntityAdWordsLink_Entity (..)
-    , newEntityAdWordsLink_Entity
+    EntityAdWordsLink_Entity (..),
+    newEntityAdWordsLink_Entity,
 
     -- ** EntityAdWordsLinks
-    , EntityAdWordsLinks (..)
-    , newEntityAdWordsLinks
+    EntityAdWordsLinks (..),
+    newEntityAdWordsLinks,
 
     -- ** EntityUserLink
-    , EntityUserLink (..)
-    , newEntityUserLink
+    EntityUserLink (..),
+    newEntityUserLink,
 
     -- ** EntityUserLink_Entity
-    , EntityUserLink_Entity (..)
-    , newEntityUserLink_Entity
+    EntityUserLink_Entity (..),
+    newEntityUserLink_Entity,
 
     -- ** EntityUserLink_Permissions
-    , EntityUserLink_Permissions (..)
-    , newEntityUserLink_Permissions
+    EntityUserLink_Permissions (..),
+    newEntityUserLink_Permissions,
 
     -- ** EntityUserLinks
-    , EntityUserLinks (..)
-    , newEntityUserLinks
+    EntityUserLinks (..),
+    newEntityUserLinks,
 
     -- ** Experiment
-    , Experiment (..)
-    , newExperiment
+    Experiment (..),
+    newExperiment,
 
     -- ** Experiment_ParentLink
-    , Experiment_ParentLink (..)
-    , newExperiment_ParentLink
+    Experiment_ParentLink (..),
+    newExperiment_ParentLink,
 
     -- ** Experiment_VariationsItem
-    , Experiment_VariationsItem (..)
-    , newExperiment_VariationsItem
+    Experiment_VariationsItem (..),
+    newExperiment_VariationsItem,
 
     -- ** Experiments
-    , Experiments (..)
-    , newExperiments
+    Experiments (..),
+    newExperiments,
 
     -- ** Filter
-    , Filter (..)
-    , newFilter
+    Filter (..),
+    newFilter,
 
     -- ** Filter_AdvancedDetails
-    , Filter_AdvancedDetails (..)
-    , newFilter_AdvancedDetails
+    Filter_AdvancedDetails (..),
+    newFilter_AdvancedDetails,
 
     -- ** Filter_LowercaseDetails
-    , Filter_LowercaseDetails (..)
-    , newFilter_LowercaseDetails
+    Filter_LowercaseDetails (..),
+    newFilter_LowercaseDetails,
 
     -- ** Filter_ParentLink
-    , Filter_ParentLink (..)
-    , newFilter_ParentLink
+    Filter_ParentLink (..),
+    newFilter_ParentLink,
 
     -- ** Filter_SearchAndReplaceDetails
-    , Filter_SearchAndReplaceDetails (..)
-    , newFilter_SearchAndReplaceDetails
+    Filter_SearchAndReplaceDetails (..),
+    newFilter_SearchAndReplaceDetails,
 
     -- ** Filter_UppercaseDetails
-    , Filter_UppercaseDetails (..)
-    , newFilter_UppercaseDetails
+    Filter_UppercaseDetails (..),
+    newFilter_UppercaseDetails,
 
     -- ** FilterExpression
-    , FilterExpression (..)
-    , newFilterExpression
+    FilterExpression (..),
+    newFilterExpression,
 
     -- ** FilterRef
-    , FilterRef (..)
-    , newFilterRef
+    FilterRef (..),
+    newFilterRef,
 
     -- ** Filters
-    , Filters (..)
-    , newFilters
+    Filters (..),
+    newFilters,
 
     -- ** GaData
-    , GaData (..)
-    , newGaData
+    GaData (..),
+    newGaData,
 
     -- ** GaData_ColumnHeadersItem
-    , GaData_ColumnHeadersItem (..)
-    , newGaData_ColumnHeadersItem
+    GaData_ColumnHeadersItem (..),
+    newGaData_ColumnHeadersItem,
 
     -- ** GaData_DataTable
-    , GaData_DataTable (..)
-    , newGaData_DataTable
+    GaData_DataTable (..),
+    newGaData_DataTable,
 
     -- ** GaData_DataTable_ColsItem
-    , GaData_DataTable_ColsItem (..)
-    , newGaData_DataTable_ColsItem
+    GaData_DataTable_ColsItem (..),
+    newGaData_DataTable_ColsItem,
 
     -- ** GaData_DataTable_RowsItem
-    , GaData_DataTable_RowsItem (..)
-    , newGaData_DataTable_RowsItem
+    GaData_DataTable_RowsItem (..),
+    newGaData_DataTable_RowsItem,
 
     -- ** GaData_DataTable_RowsItem_CItem
-    , GaData_DataTable_RowsItem_CItem (..)
-    , newGaData_DataTable_RowsItem_CItem
+    GaData_DataTable_RowsItem_CItem (..),
+    newGaData_DataTable_RowsItem_CItem,
 
     -- ** GaData_ProfileInfo
-    , GaData_ProfileInfo (..)
-    , newGaData_ProfileInfo
+    GaData_ProfileInfo (..),
+    newGaData_ProfileInfo,
 
     -- ** GaData_Query
-    , GaData_Query (..)
-    , newGaData_Query
+    GaData_Query (..),
+    newGaData_Query,
 
     -- ** GaData_TotalsForAllResults
-    , GaData_TotalsForAllResults (..)
-    , newGaData_TotalsForAllResults
+    GaData_TotalsForAllResults (..),
+    newGaData_TotalsForAllResults,
 
     -- ** Goal
-    , Goal (..)
-    , newGoal
+    Goal (..),
+    newGoal,
 
     -- ** Goal_EventDetails
-    , Goal_EventDetails (..)
-    , newGoal_EventDetails
+    Goal_EventDetails (..),
+    newGoal_EventDetails,
 
     -- ** Goal_EventDetails_EventConditionsItem
-    , Goal_EventDetails_EventConditionsItem (..)
-    , newGoal_EventDetails_EventConditionsItem
+    Goal_EventDetails_EventConditionsItem (..),
+    newGoal_EventDetails_EventConditionsItem,
 
     -- ** Goal_ParentLink
-    , Goal_ParentLink (..)
-    , newGoal_ParentLink
+    Goal_ParentLink (..),
+    newGoal_ParentLink,
 
     -- ** Goal_UrlDestinationDetails
-    , Goal_UrlDestinationDetails (..)
-    , newGoal_UrlDestinationDetails
+    Goal_UrlDestinationDetails (..),
+    newGoal_UrlDestinationDetails,
 
     -- ** Goal_UrlDestinationDetails_StepsItem
-    , Goal_UrlDestinationDetails_StepsItem (..)
-    , newGoal_UrlDestinationDetails_StepsItem
+    Goal_UrlDestinationDetails_StepsItem (..),
+    newGoal_UrlDestinationDetails_StepsItem,
 
     -- ** Goal_VisitNumPagesDetails
-    , Goal_VisitNumPagesDetails (..)
-    , newGoal_VisitNumPagesDetails
+    Goal_VisitNumPagesDetails (..),
+    newGoal_VisitNumPagesDetails,
 
     -- ** Goal_VisitTimeOnSiteDetails
-    , Goal_VisitTimeOnSiteDetails (..)
-    , newGoal_VisitTimeOnSiteDetails
+    Goal_VisitTimeOnSiteDetails (..),
+    newGoal_VisitTimeOnSiteDetails,
 
     -- ** Goals
-    , Goals (..)
-    , newGoals
+    Goals (..),
+    newGoals,
 
     -- ** HashClientIdRequest
-    , HashClientIdRequest (..)
-    , newHashClientIdRequest
+    HashClientIdRequest (..),
+    newHashClientIdRequest,
 
     -- ** HashClientIdResponse
-    , HashClientIdResponse (..)
-    , newHashClientIdResponse
+    HashClientIdResponse (..),
+    newHashClientIdResponse,
 
     -- ** IncludeConditions
-    , IncludeConditions (..)
-    , newIncludeConditions
+    IncludeConditions (..),
+    newIncludeConditions,
 
     -- ** LinkedForeignAccount
-    , LinkedForeignAccount (..)
-    , newLinkedForeignAccount
+    LinkedForeignAccount (..),
+    newLinkedForeignAccount,
 
     -- ** McfData
-    , McfData (..)
-    , newMcfData
+    McfData (..),
+    newMcfData,
 
     -- ** McfData_ColumnHeadersItem
-    , McfData_ColumnHeadersItem (..)
-    , newMcfData_ColumnHeadersItem
+    McfData_ColumnHeadersItem (..),
+    newMcfData_ColumnHeadersItem,
 
     -- ** McfData_ProfileInfo
-    , McfData_ProfileInfo (..)
-    , newMcfData_ProfileInfo
+    McfData_ProfileInfo (..),
+    newMcfData_ProfileInfo,
 
     -- ** McfData_Query
-    , McfData_Query (..)
-    , newMcfData_Query
+    McfData_Query (..),
+    newMcfData_Query,
 
     -- ** McfData_RowsItemItem
-    , McfData_RowsItemItem (..)
-    , newMcfData_RowsItemItem
+    McfData_RowsItemItem (..),
+    newMcfData_RowsItemItem,
 
     -- ** McfData_RowsItemItem_ConversionPathValueItem
-    , McfData_RowsItemItem_ConversionPathValueItem (..)
-    , newMcfData_RowsItemItem_ConversionPathValueItem
+    McfData_RowsItemItem_ConversionPathValueItem (..),
+    newMcfData_RowsItemItem_ConversionPathValueItem,
 
     -- ** McfData_TotalsForAllResults
-    , McfData_TotalsForAllResults (..)
-    , newMcfData_TotalsForAllResults
+    McfData_TotalsForAllResults (..),
+    newMcfData_TotalsForAllResults,
 
     -- ** Profile
-    , Profile (..)
-    , newProfile
+    Profile (..),
+    newProfile,
 
     -- ** Profile_ChildLink
-    , Profile_ChildLink (..)
-    , newProfile_ChildLink
+    Profile_ChildLink (..),
+    newProfile_ChildLink,
 
     -- ** Profile_ParentLink
-    , Profile_ParentLink (..)
-    , newProfile_ParentLink
+    Profile_ParentLink (..),
+    newProfile_ParentLink,
 
     -- ** Profile_Permissions
-    , Profile_Permissions (..)
-    , newProfile_Permissions
+    Profile_Permissions (..),
+    newProfile_Permissions,
 
     -- ** ProfileFilterLink
-    , ProfileFilterLink (..)
-    , newProfileFilterLink
+    ProfileFilterLink (..),
+    newProfileFilterLink,
 
     -- ** ProfileFilterLinks
-    , ProfileFilterLinks (..)
-    , newProfileFilterLinks
+    ProfileFilterLinks (..),
+    newProfileFilterLinks,
 
     -- ** ProfileRef
-    , ProfileRef (..)
-    , newProfileRef
+    ProfileRef (..),
+    newProfileRef,
 
     -- ** ProfileSummary
-    , ProfileSummary (..)
-    , newProfileSummary
+    ProfileSummary (..),
+    newProfileSummary,
 
     -- ** Profiles
-    , Profiles (..)
-    , newProfiles
+    Profiles (..),
+    newProfiles,
 
     -- ** RealtimeData
-    , RealtimeData (..)
-    , newRealtimeData
+    RealtimeData (..),
+    newRealtimeData,
 
     -- ** RealtimeData_ColumnHeadersItem
-    , RealtimeData_ColumnHeadersItem (..)
-    , newRealtimeData_ColumnHeadersItem
+    RealtimeData_ColumnHeadersItem (..),
+    newRealtimeData_ColumnHeadersItem,
 
     -- ** RealtimeData_ProfileInfo
-    , RealtimeData_ProfileInfo (..)
-    , newRealtimeData_ProfileInfo
+    RealtimeData_ProfileInfo (..),
+    newRealtimeData_ProfileInfo,
 
     -- ** RealtimeData_Query
-    , RealtimeData_Query (..)
-    , newRealtimeData_Query
+    RealtimeData_Query (..),
+    newRealtimeData_Query,
 
     -- ** RealtimeData_TotalsForAllResults
-    , RealtimeData_TotalsForAllResults (..)
-    , newRealtimeData_TotalsForAllResults
+    RealtimeData_TotalsForAllResults (..),
+    newRealtimeData_TotalsForAllResults,
 
     -- ** RemarketingAudience
-    , RemarketingAudience (..)
-    , newRemarketingAudience
+    RemarketingAudience (..),
+    newRemarketingAudience,
 
     -- ** RemarketingAudience_AudienceDefinition
-    , RemarketingAudience_AudienceDefinition (..)
-    , newRemarketingAudience_AudienceDefinition
+    RemarketingAudience_AudienceDefinition (..),
+    newRemarketingAudience_AudienceDefinition,
 
     -- ** RemarketingAudience_StateBasedAudienceDefinition
-    , RemarketingAudience_StateBasedAudienceDefinition (..)
-    , newRemarketingAudience_StateBasedAudienceDefinition
+    RemarketingAudience_StateBasedAudienceDefinition (..),
+    newRemarketingAudience_StateBasedAudienceDefinition,
 
     -- ** RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
-    , RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions (..)
-    , newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
+    RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions (..),
+    newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions,
 
     -- ** RemarketingAudiences
-    , RemarketingAudiences (..)
-    , newRemarketingAudiences
+    RemarketingAudiences (..),
+    newRemarketingAudiences,
 
     -- ** Segment
-    , Segment (..)
-    , newSegment
+    Segment (..),
+    newSegment,
 
     -- ** Segments
-    , Segments (..)
-    , newSegments
+    Segments (..),
+    newSegments,
 
     -- ** UnsampledReport
-    , UnsampledReport (..)
-    , newUnsampledReport
+    UnsampledReport (..),
+    newUnsampledReport,
 
     -- ** UnsampledReport_CloudStorageDownloadDetails
-    , UnsampledReport_CloudStorageDownloadDetails (..)
-    , newUnsampledReport_CloudStorageDownloadDetails
+    UnsampledReport_CloudStorageDownloadDetails (..),
+    newUnsampledReport_CloudStorageDownloadDetails,
 
     -- ** UnsampledReport_DriveDownloadDetails
-    , UnsampledReport_DriveDownloadDetails (..)
-    , newUnsampledReport_DriveDownloadDetails
+    UnsampledReport_DriveDownloadDetails (..),
+    newUnsampledReport_DriveDownloadDetails,
 
     -- ** UnsampledReports
-    , UnsampledReports (..)
-    , newUnsampledReports
+    UnsampledReports (..),
+    newUnsampledReports,
 
     -- ** Upload
-    , Upload (..)
-    , newUpload
+    Upload (..),
+    newUpload,
 
     -- ** Uploads
-    , Uploads (..)
-    , newUploads
+    Uploads (..),
+    newUploads,
 
     -- ** UserDeletionRequest
-    , UserDeletionRequest (..)
-    , newUserDeletionRequest
+    UserDeletionRequest (..),
+    newUserDeletionRequest,
 
     -- ** UserDeletionRequest_Id
-    , UserDeletionRequest_Id (..)
-    , newUserDeletionRequest_Id
+    UserDeletionRequest_Id (..),
+    newUserDeletionRequest_Id,
 
     -- ** UserRef
-    , UserRef (..)
-    , newUserRef
+    UserRef (..),
+    newUserRef,
 
     -- ** WebPropertyRef
-    , WebPropertyRef (..)
-    , newWebPropertyRef
+    WebPropertyRef (..),
+    newWebPropertyRef,
 
     -- ** WebPropertySummary
-    , WebPropertySummary (..)
-    , newWebPropertySummary
+    WebPropertySummary (..),
+    newWebPropertySummary,
 
     -- ** Webproperties
-    , Webproperties (..)
-    , newWebproperties
+    Webproperties (..),
+    newWebproperties,
 
     -- ** Webproperty
-    , Webproperty (..)
-    , newWebproperty
+    Webproperty (..),
+    newWebproperty,
 
     -- ** Webproperty_ChildLink
-    , Webproperty_ChildLink (..)
-    , newWebproperty_ChildLink
+    Webproperty_ChildLink (..),
+    newWebproperty_ChildLink,
 
     -- ** Webproperty_ParentLink
-    , Webproperty_ParentLink (..)
-    , newWebproperty_ParentLink
+    Webproperty_ParentLink (..),
+    newWebproperty_ParentLink,
 
     -- ** Webproperty_Permissions
-    , Webproperty_Permissions (..)
-    , newWebproperty_Permissions
+    Webproperty_Permissions (..),
+    newWebproperty_Permissions,
 
     -- ** DataGaGetOutput
-    , DataGaGetOutput (..)
+    DataGaGetOutput (..),
 
     -- ** DataGaGetSamplingLevel
-    , DataGaGetSamplingLevel (..)
+    DataGaGetSamplingLevel (..),
 
     -- ** DataMcfGetSamplingLevel
-    , DataMcfGetSamplingLevel (..)
-    ) where
+    DataMcfGetSamplingLevel (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Analytics.Internal.Product
 import Gogol.Analytics.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v3@ of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 analyticsService :: Core.ServiceConfig
-analyticsService
-  = Core.defaultService (Core.ServiceId "analytics:v3")
-      "analytics.googleapis.com"
+analyticsService =
+  Core.defaultService
+    (Core.ServiceId "analytics:v3")
+    "analytics.googleapis.com"
 
 -- | View and manage your Google Analytics data
 analyticsScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics"]

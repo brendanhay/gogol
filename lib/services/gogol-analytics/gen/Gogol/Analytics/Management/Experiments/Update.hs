@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,94 +30,102 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.update@.
 module Gogol.Analytics.Management.Experiments.Update
-    (
-    -- * Resource
-      AnalyticsManagementExperimentsUpdateResource
+  ( -- * Resource
+    AnalyticsManagementExperimentsUpdateResource,
 
     -- ** Constructing a Request
-    , newAnalyticsManagementExperimentsUpdate
-    , AnalyticsManagementExperimentsUpdate
-    ) where
+    newAnalyticsManagementExperimentsUpdate,
+    AnalyticsManagementExperimentsUpdate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Analytics.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @analytics.management.experiments.update@ method which the
 -- 'AnalyticsManagementExperimentsUpdate' request conforms to.
 type AnalyticsManagementExperimentsUpdateResource =
-     "analytics" Core.:>
-       "v3" Core.:>
-         "management" Core.:>
-           "accounts" Core.:>
-             Core.Capture "accountId" Core.Text Core.:>
-               "webproperties" Core.:>
-                 Core.Capture "webPropertyId" Core.Text Core.:>
-                   "profiles" Core.:>
-                     Core.Capture "profileId" Core.Text Core.:>
-                       "experiments" Core.:>
-                         Core.Capture "experimentId" Core.Text Core.:>
-                           Core.QueryParam "alt" Core.AltJSON Core.:>
-                             Core.ReqBody '[Core.JSON] Experiment Core.:>
-                               Core.Put '[Core.JSON] Experiment
+  "analytics"
+    Core.:> "v3"
+    Core.:> "management"
+    Core.:> "accounts"
+    Core.:> Core.Capture "accountId" Core.Text
+    Core.:> "webproperties"
+    Core.:> Core.Capture "webPropertyId" Core.Text
+    Core.:> "profiles"
+    Core.:> Core.Capture "profileId" Core.Text
+    Core.:> "experiments"
+    Core.:> Core.Capture "experimentId" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Experiment
+    Core.:> Core.Put '[Core.JSON] Experiment
 
 -- | Update an existing experiment.
 --
 -- /See:/ 'newAnalyticsManagementExperimentsUpdate' smart constructor.
 data AnalyticsManagementExperimentsUpdate = AnalyticsManagementExperimentsUpdate
-    {
-      -- | Account ID of the experiment to update.
-      accountId :: Core.Text
-      -- | Experiment ID of the experiment to update.
-    , experimentId :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: Experiment
-      -- | View (Profile) ID of the experiment to update.
-    , profileId :: Core.Text
-      -- | Web property ID of the experiment to update.
-    , webPropertyId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Account ID of the experiment to update.
+    accountId :: Core.Text,
+    -- | Experiment ID of the experiment to update.
+    experimentId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: Experiment,
+    -- | View (Profile) ID of the experiment to update.
+    profileId :: Core.Text,
+    -- | Web property ID of the experiment to update.
+    webPropertyId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementExperimentsUpdate' with the minimum fields required to make a request.
-newAnalyticsManagementExperimentsUpdate 
-    ::  Core.Text
-       -- ^  Account ID of the experiment to update. See 'accountId'.
-    -> Core.Text
-       -- ^  Experiment ID of the experiment to update. See 'experimentId'.
-    -> Experiment
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  View (Profile) ID of the experiment to update. See 'profileId'.
-    -> Core.Text
-       -- ^  Web property ID of the experiment to update. See 'webPropertyId'.
-    -> AnalyticsManagementExperimentsUpdate
+newAnalyticsManagementExperimentsUpdate ::
+  -- |  Account ID of the experiment to update. See 'accountId'.
+  Core.Text ->
+  -- |  Experiment ID of the experiment to update. See 'experimentId'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  Experiment ->
+  -- |  View (Profile) ID of the experiment to update. See 'profileId'.
+  Core.Text ->
+  -- |  Web property ID of the experiment to update. See 'webPropertyId'.
+  Core.Text ->
+  AnalyticsManagementExperimentsUpdate
 newAnalyticsManagementExperimentsUpdate accountId experimentId payload profileId webPropertyId =
   AnalyticsManagementExperimentsUpdate
-    { accountId = accountId
-    , experimentId = experimentId
-    , payload = payload
-    , profileId = profileId
-    , webPropertyId = webPropertyId
+    { accountId = accountId,
+      experimentId = experimentId,
+      payload = payload,
+      profileId = profileId,
+      webPropertyId = webPropertyId
     }
 
-instance Core.GoogleRequest
-           AnalyticsManagementExperimentsUpdate
-         where
-        type Rs AnalyticsManagementExperimentsUpdate =
-             Experiment
-        type Scopes AnalyticsManagementExperimentsUpdate =
-             '["https://www.googleapis.com/auth/analytics",
-               "https://www.googleapis.com/auth/analytics.edit"]
-        requestClient
-          AnalyticsManagementExperimentsUpdate{..}
-          = go accountId webPropertyId profileId experimentId
-              (Core.Just Core.AltJSON)
-              payload
-              analyticsService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           AnalyticsManagementExperimentsUpdateResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AnalyticsManagementExperimentsUpdate
+  where
+  type
+    Rs AnalyticsManagementExperimentsUpdate =
+      Experiment
+  type
+    Scopes AnalyticsManagementExperimentsUpdate =
+      '[ "https://www.googleapis.com/auth/analytics",
+         "https://www.googleapis.com/auth/analytics.edit"
+       ]
+  requestClient
+    AnalyticsManagementExperimentsUpdate {..} =
+      go
+        accountId
+        webPropertyId
+        profileId
+        experimentId
+        (Core.Just Core.AltJSON)
+        payload
+        analyticsService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  AnalyticsManagementExperimentsUpdateResource
+            )
+            Core.mempty
