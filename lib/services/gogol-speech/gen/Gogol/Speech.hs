@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,74 +30,74 @@
 --
 -- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference>
 module Gogol.Speech
-    (
-    -- * Configuration
-      speechService
+  ( -- * Configuration
+    speechService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** speech.projects.locations.operations.get
-    , SpeechProjectsLocationsOperationsGetResource
-    , newSpeechProjectsLocationsOperationsGet
-    , SpeechProjectsLocationsOperationsGet
+    SpeechProjectsLocationsOperationsGetResource,
+    newSpeechProjectsLocationsOperationsGet,
+    SpeechProjectsLocationsOperationsGet,
 
     -- ** speech.projects.locations.operations.list
-    , SpeechProjectsLocationsOperationsListResource
-    , newSpeechProjectsLocationsOperationsList
-    , SpeechProjectsLocationsOperationsList
+    SpeechProjectsLocationsOperationsListResource,
+    newSpeechProjectsLocationsOperationsList,
+    SpeechProjectsLocationsOperationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** LongRunningRecognizeMetadata
-    , LongRunningRecognizeMetadata (..)
-    , newLongRunningRecognizeMetadata
+    LongRunningRecognizeMetadata (..),
+    newLongRunningRecognizeMetadata,
 
     -- ** LongRunningRecognizeResponse
-    , LongRunningRecognizeResponse (..)
-    , newLongRunningRecognizeResponse
+    LongRunningRecognizeResponse (..),
+    newLongRunningRecognizeResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** SpeechRecognitionAlternative
-    , SpeechRecognitionAlternative (..)
-    , newSpeechRecognitionAlternative
+    SpeechRecognitionAlternative (..),
+    newSpeechRecognitionAlternative,
 
     -- ** SpeechRecognitionResult
-    , SpeechRecognitionResult (..)
-    , newSpeechRecognitionResult
+    SpeechRecognitionResult (..),
+    newSpeechRecognitionResult,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** WordInfo
-    , WordInfo (..)
-    , newWordInfo
-    ) where
+    WordInfo (..),
+    newWordInfo,
+  )
+where
 
 import Gogol.Speech.Projects.Locations.Operations.Get
 import Gogol.Speech.Projects.Locations.Operations.List
