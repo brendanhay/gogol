@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Genomics.Pipelines.Run
+-- Module      : Gogol.Genomics.Pipelines.Run
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Runs a pipeline. The returned Operation\'s metadata field will contain a google.genomics.v2alpha1.Metadata object describing the status of the pipeline execution. The [response] field will contain a google.genomics.v2alpha1.RunPipelineResponse object if the pipeline completes successfully. __Note:__ Before you can use this method, the Genomics Service Agent must have access to your project. This is done automatically when the Cloud Genomics API is first enabled, but if you delete this permission, or if you enabled the Cloud Genomics API before the v2alpha1 API launch, you must disable and re-enable the API to grant the Genomics Service Agent the required permissions. Authorization requires the following <https://cloud.google.com/iam/ Google IAM> permission: * @genomics.operations.create@ [1]: \/genomics\/gsa
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.pipelines.run@.
-module Network.Google.Genomics.Pipelines.Run
+module Gogol.Genomics.Pipelines.Run
   ( -- * Resource
     GenomicsPipelinesRunResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Genomics.Pipelines.Run
   )
 where
 
-import Network.Google.Genomics.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Genomics.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @genomics.pipelines.run@ method which the
 -- 'GenomicsPipelinesRun' request conforms to.

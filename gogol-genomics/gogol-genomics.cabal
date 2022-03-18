@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Genomics
-    Network.Google.Genomics.Pipelines.Run
-    Network.Google.Genomics.Projects.Operations.Cancel
-    Network.Google.Genomics.Projects.Operations.Get
-    Network.Google.Genomics.Projects.Operations.List
-    Network.Google.Genomics.Projects.Workers.CheckIn
-    Network.Google.Genomics.Types
-    Network.Google.Genomics.Workers.CheckIn
+    Gogol.Genomics
+    Gogol.Genomics.Pipelines.Run
+    Gogol.Genomics.Projects.Operations.Cancel
+    Gogol.Genomics.Projects.Operations.Get
+    Gogol.Genomics.Projects.Operations.List
+    Gogol.Genomics.Projects.Workers.CheckIn
+    Gogol.Genomics.Types
+    Gogol.Genomics.Workers.CheckIn
 
   other-modules:
-    Network.Google.Genomics.Internal.Product
-    Network.Google.Genomics.Internal.Sum
+    Gogol.Genomics.Internal.Product
+    Gogol.Genomics.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

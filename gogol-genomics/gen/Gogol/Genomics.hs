@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Genomics
+-- Module      : Gogol.Genomics
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Uploads, processes, queries, and searches Genomics data in the cloud.
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference>
-module Network.Google.Genomics
+module Gogol.Genomics
   ( -- * Configuration
     genomicsService,
 
@@ -302,10 +302,10 @@ module Network.Google.Genomics
   )
 where
 
-import Network.Google.Genomics.Pipelines.Run
-import Network.Google.Genomics.Projects.Operations.Cancel
-import Network.Google.Genomics.Projects.Operations.Get
-import Network.Google.Genomics.Projects.Operations.List
-import Network.Google.Genomics.Projects.Workers.CheckIn
-import Network.Google.Genomics.Types
-import Network.Google.Genomics.Workers.CheckIn
+import Gogol.Genomics.Pipelines.Run
+import Gogol.Genomics.Projects.Operations.Cancel
+import Gogol.Genomics.Projects.Operations.Get
+import Gogol.Genomics.Projects.Operations.List
+import Gogol.Genomics.Projects.Workers.CheckIn
+import Gogol.Genomics.Types
+import Gogol.Genomics.Workers.CheckIn

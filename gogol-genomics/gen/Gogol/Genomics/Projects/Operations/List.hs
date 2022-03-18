@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Genomics.Projects.Operations.List
+-- Module      : Gogol.Genomics.Projects.Operations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists operations that match the specified filter in the request. Authorization requires the following <https://cloud.google.com/iam Google IAM> permission: * @genomics.operations.list@
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.projects.operations.list@.
-module Network.Google.Genomics.Projects.Operations.List
+module Gogol.Genomics.Projects.Operations.List
   ( -- * Resource
     GenomicsProjectsOperationsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Genomics.Projects.Operations.List
   )
 where
 
-import Network.Google.Genomics.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Genomics.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @genomics.projects.operations.list@ method which the
 -- 'GenomicsProjectsOperationsList' request conforms to.

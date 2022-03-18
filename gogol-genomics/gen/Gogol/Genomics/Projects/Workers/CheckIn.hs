@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Genomics.Projects.Workers.CheckIn
+-- Module      : Gogol.Genomics.Projects.Workers.CheckIn
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The worker uses this method to retrieve the assigned operation and provide periodic status updates.
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.projects.workers.checkIn@.
-module Network.Google.Genomics.Projects.Workers.CheckIn
+module Gogol.Genomics.Projects.Workers.CheckIn
   ( -- * Resource
     GenomicsProjectsWorkersCheckInResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Genomics.Projects.Workers.CheckIn
   )
 where
 
-import Network.Google.Genomics.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Genomics.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @genomics.projects.workers.checkIn@ method which the
 -- 'GenomicsProjectsWorkersCheckIn' request conforms to.

@@ -19,54 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Genomics.Projects.Operations.Get
+-- Module      : Gogol.Genomics.Workers.CheckIn
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service. Authorization requires the following <https://cloud.google.com/iam Google IAM> permission: * @genomics.operations.get@
+-- The worker uses this method to retrieve the assigned operation and provide periodic status updates.
 --
--- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.projects.operations.get@.
-module Network.Google.Genomics.Projects.Operations.Get
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.workers.checkIn@.
+module Gogol.Genomics.Workers.CheckIn
   ( -- * Resource
-    GenomicsProjectsOperationsGetResource,
+    GenomicsWorkersCheckInResource,
 
     -- ** Constructing a Request
-    newGenomicsProjectsOperationsGet,
-    GenomicsProjectsOperationsGet,
+    newGenomicsWorkersCheckIn,
+    GenomicsWorkersCheckIn,
   )
 where
 
-import Network.Google.Genomics.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Genomics.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @genomics.projects.operations.get@ method which the
--- 'GenomicsProjectsOperationsGet' request conforms to.
-type GenomicsProjectsOperationsGetResource =
+-- | A resource alias for @genomics.workers.checkIn@ method which the
+-- 'GenomicsWorkersCheckIn' request conforms to.
+type GenomicsWorkersCheckInResource =
   "v2alpha1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> "workers"
+    Core.:> Core.CaptureMode "id" "checkIn" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Operation
+    Core.:> Core.ReqBody '[Core.JSON] CheckInRequest
+    Core.:> Core.Post '[Core.JSON] CheckInResponse
 
--- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service. Authorization requires the following <https://cloud.google.com/iam Google IAM> permission: * @genomics.operations.get@
+-- | The worker uses this method to retrieve the assigned operation and provide periodic status updates.
 --
--- /See:/ 'newGenomicsProjectsOperationsGet' smart constructor.
-data GenomicsProjectsOperationsGet = GenomicsProjectsOperationsGet
+-- /See:/ 'newGenomicsWorkersCheckIn' smart constructor.
+data GenomicsWorkersCheckIn = GenomicsWorkersCheckIn
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
-    name :: Core.Text,
+    -- | The VM identity token for authenticating the VM instance. https:\/\/cloud.google.com\/compute\/docs\/instances\/verifying-instance-identity
+    id :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: CheckInRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,45 +78,46 @@ data GenomicsProjectsOperationsGet = GenomicsProjectsOperationsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GenomicsProjectsOperationsGet' with the minimum fields required to make a request.
-newGenomicsProjectsOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
+-- | Creates a value of 'GenomicsWorkersCheckIn' with the minimum fields required to make a request.
+newGenomicsWorkersCheckIn ::
+  -- |  The VM identity token for authenticating the VM instance. https:\/\/cloud.google.com\/compute\/docs\/instances\/verifying-instance-identity See 'id'.
   Core.Text ->
-  GenomicsProjectsOperationsGet
-newGenomicsProjectsOperationsGet name =
-  GenomicsProjectsOperationsGet
+  -- |  Multipart request metadata. See 'payload'.
+  CheckInRequest ->
+  GenomicsWorkersCheckIn
+newGenomicsWorkersCheckIn id payload =
+  GenomicsWorkersCheckIn
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
+      id = id,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GenomicsProjectsOperationsGet
-  where
-  type Rs GenomicsProjectsOperationsGet = Operation
+instance Core.GoogleRequest GenomicsWorkersCheckIn where
+  type Rs GenomicsWorkersCheckIn = CheckInResponse
   type
-    Scopes GenomicsProjectsOperationsGet =
+    Scopes GenomicsWorkersCheckIn =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/genomics"
        ]
-  requestClient GenomicsProjectsOperationsGet {..} =
+  requestClient GenomicsWorkersCheckIn {..} =
     go
-      name
+      id
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       genomicsService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy GenomicsProjectsOperationsGetResource
+              Core.Proxy GenomicsWorkersCheckInResource
           )
           Core.mempty
