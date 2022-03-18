@@ -1,19 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE ExtendedDefaultRules #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# OPTIONS_GHC -fno-warn-type-defaults #-}
-
--- Module      : Gen.Types.Data
--- Copyright   : (c) 2015-2022 Brendan Hay
--- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
--- Stability   : provisional
--- Portability : non-portable (GHC extensions)
-
 module Gen.Types.Data where
 
 import Data.Aeson hiding (Array, Bool, String)
@@ -79,14 +63,14 @@ instance ToJSON Data where
     Sum name help branches ->
       object
         [ "name" .= Syn name,
-          "type" .= "sum",
+          "type" .= Text.pack "sum",
           "help" .= help,
           "branches" .= branches
         ]
     Prod name help decl fields derive inst ctor ->
       object
         [ "name" .= Syn name,
-          "type" .= "prod",
+          "type" .= Text.pack "prod",
           "help" .= help,
           "decl" .= decl,
           "fields" .= fields,

@@ -1,18 +1,3 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TupleSections #-}
-
--- Module      : Gen.Types.Id
--- Copyright   : (c) 2015-2022 Brendan Hay
--- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
--- Stability   : provisional
--- Portability : non-portable (GHC extensions)
-
 module Gen.Types.Id
   ( -- * Properties
     Prefix (..),
@@ -59,7 +44,6 @@ import qualified Data.Text.Lazy.Builder as Build
 import Data.Text.Manipulate
 import Formatting
 import GHC.Generics (Generic)
-import GHC.Stack (HasCallStack)
 import Gen.Text
 import Gen.Types.NS
 import Language.Haskell.Exts.Build
@@ -70,7 +54,7 @@ aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
 mname :: Text -> Suffix -> Global -> (Name (), Global, [Text])
 mname canonical (Suffix suf) (Global method) =
-  ( resourceType, dataType, namespace)
+  (resourceType, dataType, namespace)
   where
     resourceType = name (Text.unpack (mconcat namespace <> suf))
     dataType = Global namespace
@@ -80,7 +64,7 @@ mname canonical (Suffix suf) (Global method) =
     -- by a canonicalName, which typically correctly cased due to coming from
     -- the ./annex/*.json configurations.
     squeeze = \case
-      (x:xs, y:ys) | CI.mk x == CI.mk y -> x : squeeze (xs, ys)
+      (x : xs, y : ys) | CI.mk x == CI.mk y -> x : squeeze (xs, ys)
       (_xs, ys) -> ys
 
 dname :: Global -> Name ()

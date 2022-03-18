@@ -1,19 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE ViewPatterns #-}
-
--- Module      : Gen.AST.Render
--- Copyright   : (c) 2015-2022 Brendan Hay
--- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
--- Stability   : provisional
--- Portability : non-portable (GHC extensions)
-
 module Gen.AST.Render
   ( render,
   )
@@ -81,13 +65,13 @@ renderSchema s = go (_schema s)
             <$> pp None (objDecl k ts)
             <*> pure (objFields ts)
             <*> pp None (objDerive ds)
-            <*> traverse (pp Print) (jsonDecls k p ts)
+            <*> traverse (pp Print) (jsonDecls k ts)
             <*> ctor ts
 
         ctor ts =
           Fun' (cname k) (Just help)
             <$> (pp None (ctorSig k ts) <&> comments ts)
-            <*> pp Indent (ctorDecl k p ts)
+            <*> pp Indent (ctorDecl k ts)
 
         help =
           rawHelpText $
@@ -145,9 +129,9 @@ renderMethod s suf m@Method {..} = do
       Nothing -> error "failed to render the schema"
       Just ok -> pure ok
 
-  i <- pp Print $ requestDecl _unique _prefix alias url (props _schema) m
-  dl <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
-  ul <- pp Print $ uploadDecl _unique _prefix alias url (props _schema) m
+  i <- pp Print $ requestDecl _unique alias url (props _schema) m
+  dl <- pp Print $ downloadDecl _unique alias url (props _schema) m
+  ul <- pp Print $ uploadDecl _unique alias url (props _schema) m
 
   let inst = i : [dl | _mSupportsMediaDownload && not _mSupportsMediaUpload] ++ [ul | _mSupportsMediaUpload]
 
@@ -155,9 +139,9 @@ renderMethod s suf m@Method {..} = do
     <$> pp Print (verbAlias s alias m)
     <*> pure (insts inst d)
   where
-    root = collapseNS (tocNS s <> UnsafeNS parts)
+    root = collapseNS (tocNS s <> UnsafeNS namespace)
 
-    (alias, typ', parts) = mname (_sCanonicalName s) suf _mId
+    (alias, typ', namespace) = mname (_sCanonicalName s) suf _mId
 
     url = name (serviceName s)
 

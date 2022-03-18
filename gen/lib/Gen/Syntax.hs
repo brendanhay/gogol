@@ -1,14 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ViewPatterns #-}
-
--- Module      : Gen.Syntax
--- Copyright   : (c) 2015-2022 Brendan Hay
--- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
--- Stability   : provisional
--- Portability : non-portable (GHC extensions)
-
 module Gen.Syntax where
 
 import Control.Lens hiding (iso, mapping, op, pre, strict)
@@ -265,14 +254,13 @@ uploadPat = pattern' 3
 
 downloadDecl ::
   Global ->
-  Prefix ->
   Name () ->
   Name () ->
   [Local] ->
   Method Solved ->
   Decl ()
-downloadDecl n pre api url fs m =
-  googleRequestDecl (TyParen () ty) [rs, ss] [alt] pre api url m pat prec
+downloadDecl n api url fs m =
+  googleRequestDecl (TyParen () ty) [rs, ss] [alt] api url m pat prec
   where
     ty = TyApp () (TyCon () "Core.MediaDownload") (tycon n)
 
@@ -294,14 +282,13 @@ downloadDecl n pre api url fs m =
 
 uploadDecl ::
   Global ->
-  Prefix ->
   Name () ->
   Name () ->
   [Local] ->
   Method Solved ->
   Decl ()
-uploadDecl n pre api url fs m =
-  googleRequestDecl (TyParen () ty) [rs, ss] extras pre api url m pat prec
+uploadDecl n api url fs m =
+  googleRequestDecl (TyParen () ty) [rs, ss] extras api url m pat prec
   where
     ty = TyApp () (TyCon () "Core.MediaUpload") (tycon n)
 
@@ -343,14 +330,13 @@ uploadDecl n pre api url fs m =
 
 requestDecl ::
   Global ->
-  Prefix ->
   Name () ->
   Name () ->
   [Local] ->
   Method Solved ->
   Decl ()
-requestDecl n pre api url fs m =
-  googleRequestDecl (tycon n) [rs, ss] extras pre api url m pat prec
+requestDecl n api url fs m =
+  googleRequestDecl (tycon n) [rs, ss] extras api url m pat prec
   where
     rs :: InstDecl ()
     rs =
@@ -382,14 +368,13 @@ googleRequestDecl ::
   Type () ->
   [InstDecl ()] ->
   [Exp ()] ->
-  Prefix ->
   Name () ->
   Name () ->
   Method Solved ->
   Pat () ->
   Pat () ->
   Decl ()
-googleRequestDecl n assoc extras pre api url m pat prec =
+googleRequestDecl n assoc extras api url m pat prec =
   InstDecl () Nothing (instrule "Core.GoogleRequest" n) (Just (assoc ++ [request]))
   where
     request = InsDecl () (FunBind () [match])
@@ -437,8 +422,8 @@ googleRequestDecl n assoc extras pre api url m pat prec =
         . nub
         $ map fst (rights (extractPath (_mPath m))) ++ _mParameterOrder m
 
-jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl ()]
-jsonDecls g p (Map.toList -> rs) = [from', to']
+jsonDecls :: Global -> Map Local Solved -> [Decl ()]
+jsonDecls g (Map.toList -> rs) = [from', to']
   where
     from' =
       InstDecl
@@ -573,8 +558,8 @@ ctorSig n rs = TypeSig () [cname n] ts
     ts = foldr' (TyFun ()) (TyCon () (UnQual () (dname n))) ps
     ps = parameters (Map.elems rs)
 
-ctorDecl :: Global -> Prefix -> Map Local Solved -> Decl ()
-ctorDecl n p rs = sfun c ps (UnGuardedRhs () rhs) noBinds
+ctorDecl :: Global -> Map Local Solved -> Decl ()
+ctorDecl n = sfun c ps (UnGuardedRhs () rhs) noBinds
   where
     c = cname n
     d = dname n

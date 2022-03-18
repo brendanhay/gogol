@@ -1,13 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-
--- Module      : Gen.Types.NS
--- Copyright   : (c) 2015-2022 Brendan Hay
--- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
--- Stability   : provisional
--- Portability : non-portable (GHC extensions)
-
 module Gen.Types.NS
   ( NS (UnsafeNS),
     mkNS,
@@ -48,7 +38,7 @@ collapseNS (UnsafeNS xs) = UnsafeNS (map CI.original (squeeze (map CI.mk xs)))
   where
     squeeze = \case
       x : y : ys | x == y -> squeeze (x : ys)
-      x : xs -> x : squeeze xs
+      x : ys -> x : squeeze ys
       [] -> []
 
 instance FromJSON NS where
