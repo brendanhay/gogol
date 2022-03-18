@@ -1,64 +1,74 @@
-name:                  gogol-games-management
-version:               0.5.0
-synopsis:              Google Play Game Management SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-games-management
+version:            0.5.0
+synopsis:           Google Play Game Management SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    The Google Play Game Management API allows developers to manage
-    resources from the Google Play Game service.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1management@
-    of the API.
+  The Google Play Game Management API allows developers to manage resources from the Google Play Game service.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1management@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-games-management
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.GamesManagement
-        , Network.Google.GamesManagement.Types
-        , Network.Google.Resource.GamesManagement.Achievements.Reset
-        , Network.Google.Resource.GamesManagement.Achievements.ResetAll
-        , Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayers
-        , Network.Google.Resource.GamesManagement.Achievements.ResetForAllPlayers
-        , Network.Google.Resource.GamesManagement.Achievements.ResetMultipleForAllPlayers
-        , Network.Google.Resource.GamesManagement.Applications.ListHidden
-        , Network.Google.Resource.GamesManagement.Events.Reset
-        , Network.Google.Resource.GamesManagement.Events.ResetAll
-        , Network.Google.Resource.GamesManagement.Events.ResetAllForAllPlayers
-        , Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
-        , Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
-        , Network.Google.Resource.GamesManagement.Players.Hide
-        , Network.Google.Resource.GamesManagement.Players.Unhide
-        , Network.Google.Resource.GamesManagement.Scores.Reset
-        , Network.Google.Resource.GamesManagement.Scores.ResetAll
-        , Network.Google.Resource.GamesManagement.Scores.ResetAllForAllPlayers
-        , Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
-        , Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
+  exposed-modules:
+    Network.Google.GamesManagement
+    Network.Google.GamesManagement.Achievements.Reset
+    Network.Google.GamesManagement.Achievements.ResetAll
+    Network.Google.GamesManagement.Achievements.ResetAllForAllPlayers
+    Network.Google.GamesManagement.Achievements.ResetForAllPlayers
+    Network.Google.GamesManagement.Achievements.ResetMultipleForAllPlayers
+    Network.Google.GamesManagement.Applications.ListHidden
+    Network.Google.GamesManagement.Events.Reset
+    Network.Google.GamesManagement.Events.ResetAll
+    Network.Google.GamesManagement.Events.ResetAllForAllPlayers
+    Network.Google.GamesManagement.Events.ResetForAllPlayers
+    Network.Google.GamesManagement.Events.ResetMultipleForAllPlayers
+    Network.Google.GamesManagement.Players.Hide
+    Network.Google.GamesManagement.Players.Unhide
+    Network.Google.GamesManagement.Scores.Reset
+    Network.Google.GamesManagement.Scores.ResetAll
+    Network.Google.GamesManagement.Scores.ResetAllForAllPlayers
+    Network.Google.GamesManagement.Scores.ResetForAllPlayers
+    Network.Google.GamesManagement.Scores.ResetMultipleForAllPlayers
+    Network.Google.GamesManagement.Types
 
-    other-modules:
-          Network.Google.GamesManagement.Types.Product
-        , Network.Google.GamesManagement.Types.Sum
+  other-modules:
+    Network.Google.GamesManagement.Internal.Product
+    Network.Google.GamesManagement.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

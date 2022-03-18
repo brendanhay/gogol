@@ -1,143 +1,111 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.GamesManagement.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.GamesManagement.Types
-    (
-    -- * Service Configuration
-      gamesManagementService
+  ( -- * Configuration
+    gamesManagementService,
 
     -- * OAuth Scopes
-    , gamesScope
+    gamesScope,
 
-    -- * GamesPlayerExperienceInfoResource
-    , GamesPlayerExperienceInfoResource
-    , gamesPlayerExperienceInfoResource
-    , gpeirCurrentExperiencePoints
-    , gpeirCurrentLevel
-    , gpeirNextLevel
-    , gpeirLastLevelUpTimestampMillis
+    -- * Types
 
-    -- * PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * PlayerScoreResetAllResponse
-    , PlayerScoreResetAllResponse
-    , playerScoreResetAllResponse
-    , psrarResults
-    , psrarKind
+    -- ** AchievementResetAllResponse
+    AchievementResetAllResponse (..),
+    newAchievementResetAllResponse,
 
-    -- * GamesPlayerLevelResource
-    , GamesPlayerLevelResource
-    , gamesPlayerLevelResource
-    , gplrMaxExperiencePoints
-    , gplrMinExperiencePoints
-    , gplrLevel
+    -- ** AchievementResetMultipleForAllRequest
+    AchievementResetMultipleForAllRequest (..),
+    newAchievementResetMultipleForAllRequest,
 
-    -- * PlayerScoreResetResponse
-    , PlayerScoreResetResponse
-    , playerScoreResetResponse
-    , psrrKind
-    , psrrResetScoreTimeSpans
-    , psrrDefinitionId
+    -- ** AchievementResetResponse
+    AchievementResetResponse (..),
+    newAchievementResetResponse,
 
-    -- * ScoresResetMultipleForAllRequest
-    , ScoresResetMultipleForAllRequest
-    , scoresResetMultipleForAllRequest
-    , srmfarKind
-    , srmfarLeaderboardIds
+    -- ** EventsResetMultipleForAllRequest
+    EventsResetMultipleForAllRequest (..),
+    newEventsResetMultipleForAllRequest,
 
-    -- * HiddenPlayerList
-    , HiddenPlayerList
-    , hiddenPlayerList
-    , hplNextPageToken
-    , hplKind
-    , hplItems
+    -- ** GamesPlayerExperienceInfoResource
+    GamesPlayerExperienceInfoResource (..),
+    newGamesPlayerExperienceInfoResource,
 
-    -- * EventsResetMultipleForAllRequest
-    , EventsResetMultipleForAllRequest
-    , eventsResetMultipleForAllRequest
-    , ermfarKind
-    , ermfarEventIds
+    -- ** GamesPlayerLevelResource
+    GamesPlayerLevelResource (..),
+    newGamesPlayerLevelResource,
 
-    -- * AchievementResetMultipleForAllRequest
-    , AchievementResetMultipleForAllRequest
-    , achievementResetMultipleForAllRequest
-    , armfarKind
-    , armfarAchievementIds
+    -- ** HiddenPlayer
+    HiddenPlayer (..),
+    newHiddenPlayer,
 
-    -- * HiddenPlayer
-    , HiddenPlayer
-    , hiddenPlayer
-    , hpKind
-    , hpHiddenTimeMillis
-    , hpPlayer
+    -- ** HiddenPlayerList
+    HiddenPlayerList (..),
+    newHiddenPlayerList,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Player
+    Player (..),
+    newPlayer,
 
-    -- * AchievementResetAllResponse
-    , AchievementResetAllResponse
-    , achievementResetAllResponse
-    , ararResults
-    , ararKind
+    -- ** Player_Name
+    Player_Name (..),
+    newPlayer_Name,
 
-    -- * Player
-    , Player
-    , player
-    , pBannerURLLandscape
-    , pAvatarImageURL
-    , pKind
-    , pExperienceInfo
-    , pName
-    , pOriginalPlayerId
-    , pDisplayName
-    , pTitle
-    , pBannerURLPortrait
-    , pPlayerId
-    , pProFileSettings
+    -- ** PlayerScoreResetAllResponse
+    PlayerScoreResetAllResponse (..),
+    newPlayerScoreResetAllResponse,
 
-    -- * ProFileSettings
-    , ProFileSettings
-    , proFileSettings
-    , pfsProFileVisible
-    , pfsKind
+    -- ** PlayerScoreResetResponse
+    PlayerScoreResetResponse (..),
+    newPlayerScoreResetResponse,
 
-    -- * AchievementResetResponse
-    , AchievementResetResponse
-    , achievementResetResponse
-    , arrUpdateOccurred
-    , arrKind
-    , arrCurrentState
-    , arrDefinitionId
-    ) where
+    -- ** ProfileSettings
+    ProfileSettings (..),
+    newProfileSettings,
 
-import Network.Google.GamesManagement.Types.Product
-import Network.Google.GamesManagement.Types.Sum
-import Network.Google.Prelude
+    -- ** ScoresResetMultipleForAllRequest
+    ScoresResetMultipleForAllRequest (..),
+    newScoresResetMultipleForAllRequest,
+  )
+where
 
--- | Default request referring to version 'v1management' of the Google Play Game Management. This contains the host and root path used as a starting point for constructing service requests.
-gamesManagementService :: ServiceConfig
-gamesManagementService
-  = defaultService
-      (ServiceId "gamesManagement:v1management")
-      "gamesmanagement.googleapis.com"
+import Network.Google.GamesManagement.Internal.Product
+import Network.Google.GamesManagement.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1management@ of the Google Play Game Management. This contains the host and root path used as a starting point for constructing service requests.
+gamesManagementService :: Core.ServiceConfig
+gamesManagementService =
+  Core.defaultService
+    (Core.ServiceId "gamesManagement:v1management")
+    "gamesmanagement.googleapis.com"
 
 -- | Create, edit, and delete your Google Play Games activity
-gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
-gamesScope = Proxy
+gamesScope :: Core.Proxy '["https://www.googleapis.com/auth/games"]
+gamesScope = Core.Proxy

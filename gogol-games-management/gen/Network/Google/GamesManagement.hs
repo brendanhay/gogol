@@ -1,238 +1,212 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.GamesManagement
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Play Game Management API allows developers to manage
--- resources from the Google Play Game service.
+-- The Google Play Game Management API allows developers to manage resources from the Google Play Game service.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference>
 module Network.Google.GamesManagement
-    (
-    -- * Service Configuration
-      gamesManagementService
+  ( -- * Configuration
+    gamesManagementService,
 
     -- * OAuth Scopes
-    , gamesScope
-
-    -- * API Declaration
-    , GamesManagementAPI
+    gamesScope,
 
     -- * Resources
 
     -- ** gamesManagement.achievements.reset
-    , module Network.Google.Resource.GamesManagement.Achievements.Reset
+    GamesManagementAchievementsResetResource,
+    newGamesManagementAchievementsReset,
+    GamesManagementAchievementsReset,
 
     -- ** gamesManagement.achievements.resetAll
-    , module Network.Google.Resource.GamesManagement.Achievements.ResetAll
+    GamesManagementAchievementsResetAllResource,
+    newGamesManagementAchievementsResetAll,
+    GamesManagementAchievementsResetAll,
 
     -- ** gamesManagement.achievements.resetAllForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayers
+    GamesManagementAchievementsResetAllForAllPlayersResource,
+    newGamesManagementAchievementsResetAllForAllPlayers,
+    GamesManagementAchievementsResetAllForAllPlayers,
 
     -- ** gamesManagement.achievements.resetForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Achievements.ResetForAllPlayers
+    GamesManagementAchievementsResetForAllPlayersResource,
+    newGamesManagementAchievementsResetForAllPlayers,
+    GamesManagementAchievementsResetForAllPlayers,
 
     -- ** gamesManagement.achievements.resetMultipleForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Achievements.ResetMultipleForAllPlayers
+    GamesManagementAchievementsResetMultipleForAllPlayersResource,
+    newGamesManagementAchievementsResetMultipleForAllPlayers,
+    GamesManagementAchievementsResetMultipleForAllPlayers,
 
     -- ** gamesManagement.applications.listHidden
-    , module Network.Google.Resource.GamesManagement.Applications.ListHidden
+    GamesManagementApplicationsListHiddenResource,
+    newGamesManagementApplicationsListHidden,
+    GamesManagementApplicationsListHidden,
 
     -- ** gamesManagement.events.reset
-    , module Network.Google.Resource.GamesManagement.Events.Reset
+    GamesManagementEventsResetResource,
+    newGamesManagementEventsReset,
+    GamesManagementEventsReset,
 
     -- ** gamesManagement.events.resetAll
-    , module Network.Google.Resource.GamesManagement.Events.ResetAll
+    GamesManagementEventsResetAllResource,
+    newGamesManagementEventsResetAll,
+    GamesManagementEventsResetAll,
 
     -- ** gamesManagement.events.resetAllForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Events.ResetAllForAllPlayers
+    GamesManagementEventsResetAllForAllPlayersResource,
+    newGamesManagementEventsResetAllForAllPlayers,
+    GamesManagementEventsResetAllForAllPlayers,
 
     -- ** gamesManagement.events.resetForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
+    GamesManagementEventsResetForAllPlayersResource,
+    newGamesManagementEventsResetForAllPlayers,
+    GamesManagementEventsResetForAllPlayers,
 
     -- ** gamesManagement.events.resetMultipleForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
+    GamesManagementEventsResetMultipleForAllPlayersResource,
+    newGamesManagementEventsResetMultipleForAllPlayers,
+    GamesManagementEventsResetMultipleForAllPlayers,
 
     -- ** gamesManagement.players.hide
-    , module Network.Google.Resource.GamesManagement.Players.Hide
+    GamesManagementPlayersHideResource,
+    newGamesManagementPlayersHide,
+    GamesManagementPlayersHide,
 
     -- ** gamesManagement.players.unhide
-    , module Network.Google.Resource.GamesManagement.Players.Unhide
+    GamesManagementPlayersUnhideResource,
+    newGamesManagementPlayersUnhide,
+    GamesManagementPlayersUnhide,
 
     -- ** gamesManagement.scores.reset
-    , module Network.Google.Resource.GamesManagement.Scores.Reset
+    GamesManagementScoresResetResource,
+    newGamesManagementScoresReset,
+    GamesManagementScoresReset,
 
     -- ** gamesManagement.scores.resetAll
-    , module Network.Google.Resource.GamesManagement.Scores.ResetAll
+    GamesManagementScoresResetAllResource,
+    newGamesManagementScoresResetAll,
+    GamesManagementScoresResetAll,
 
     -- ** gamesManagement.scores.resetAllForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Scores.ResetAllForAllPlayers
+    GamesManagementScoresResetAllForAllPlayersResource,
+    newGamesManagementScoresResetAllForAllPlayers,
+    GamesManagementScoresResetAllForAllPlayers,
 
     -- ** gamesManagement.scores.resetForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
+    GamesManagementScoresResetForAllPlayersResource,
+    newGamesManagementScoresResetForAllPlayers,
+    GamesManagementScoresResetForAllPlayers,
 
     -- ** gamesManagement.scores.resetMultipleForAllPlayers
-    , module Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
+    GamesManagementScoresResetMultipleForAllPlayersResource,
+    newGamesManagementScoresResetMultipleForAllPlayers,
+    GamesManagementScoresResetMultipleForAllPlayers,
 
     -- * Types
 
-    -- ** GamesPlayerExperienceInfoResource
-    , GamesPlayerExperienceInfoResource
-    , gamesPlayerExperienceInfoResource
-    , gpeirCurrentExperiencePoints
-    , gpeirCurrentLevel
-    , gpeirNextLevel
-    , gpeirLastLevelUpTimestampMillis
-
-    -- ** PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
-
-    -- ** PlayerScoreResetAllResponse
-    , PlayerScoreResetAllResponse
-    , playerScoreResetAllResponse
-    , psrarResults
-    , psrarKind
-
-    -- ** GamesPlayerLevelResource
-    , GamesPlayerLevelResource
-    , gamesPlayerLevelResource
-    , gplrMaxExperiencePoints
-    , gplrMinExperiencePoints
-    , gplrLevel
-
-    -- ** PlayerScoreResetResponse
-    , PlayerScoreResetResponse
-    , playerScoreResetResponse
-    , psrrKind
-    , psrrResetScoreTimeSpans
-    , psrrDefinitionId
-
-    -- ** ScoresResetMultipleForAllRequest
-    , ScoresResetMultipleForAllRequest
-    , scoresResetMultipleForAllRequest
-    , srmfarKind
-    , srmfarLeaderboardIds
-
-    -- ** HiddenPlayerList
-    , HiddenPlayerList
-    , hiddenPlayerList
-    , hplNextPageToken
-    , hplKind
-    , hplItems
-
-    -- ** EventsResetMultipleForAllRequest
-    , EventsResetMultipleForAllRequest
-    , eventsResetMultipleForAllRequest
-    , ermfarKind
-    , ermfarEventIds
-
-    -- ** AchievementResetMultipleForAllRequest
-    , AchievementResetMultipleForAllRequest
-    , achievementResetMultipleForAllRequest
-    , armfarKind
-    , armfarAchievementIds
-
-    -- ** HiddenPlayer
-    , HiddenPlayer
-    , hiddenPlayer
-    , hpKind
-    , hpHiddenTimeMillis
-    , hpPlayer
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AchievementResetAllResponse
-    , AchievementResetAllResponse
-    , achievementResetAllResponse
-    , ararResults
-    , ararKind
+    AchievementResetAllResponse (..),
+    newAchievementResetAllResponse,
 
-    -- ** Player
-    , Player
-    , player
-    , pBannerURLLandscape
-    , pAvatarImageURL
-    , pKind
-    , pExperienceInfo
-    , pName
-    , pOriginalPlayerId
-    , pDisplayName
-    , pTitle
-    , pBannerURLPortrait
-    , pPlayerId
-    , pProFileSettings
-
-    -- ** ProFileSettings
-    , ProFileSettings
-    , proFileSettings
-    , pfsProFileVisible
-    , pfsKind
+    -- ** AchievementResetMultipleForAllRequest
+    AchievementResetMultipleForAllRequest (..),
+    newAchievementResetMultipleForAllRequest,
 
     -- ** AchievementResetResponse
-    , AchievementResetResponse
-    , achievementResetResponse
-    , arrUpdateOccurred
-    , arrKind
-    , arrCurrentState
-    , arrDefinitionId
-    ) where
+    AchievementResetResponse (..),
+    newAchievementResetResponse,
 
-import Network.Google.Prelude
+    -- ** EventsResetMultipleForAllRequest
+    EventsResetMultipleForAllRequest (..),
+    newEventsResetMultipleForAllRequest,
+
+    -- ** GamesPlayerExperienceInfoResource
+    GamesPlayerExperienceInfoResource (..),
+    newGamesPlayerExperienceInfoResource,
+
+    -- ** GamesPlayerLevelResource
+    GamesPlayerLevelResource (..),
+    newGamesPlayerLevelResource,
+
+    -- ** HiddenPlayer
+    HiddenPlayer (..),
+    newHiddenPlayer,
+
+    -- ** HiddenPlayerList
+    HiddenPlayerList (..),
+    newHiddenPlayerList,
+
+    -- ** Player
+    Player (..),
+    newPlayer,
+
+    -- ** Player_Name
+    Player_Name (..),
+    newPlayer_Name,
+
+    -- ** PlayerScoreResetAllResponse
+    PlayerScoreResetAllResponse (..),
+    newPlayerScoreResetAllResponse,
+
+    -- ** PlayerScoreResetResponse
+    PlayerScoreResetResponse (..),
+    newPlayerScoreResetResponse,
+
+    -- ** ProfileSettings
+    ProfileSettings (..),
+    newProfileSettings,
+
+    -- ** ScoresResetMultipleForAllRequest
+    ScoresResetMultipleForAllRequest (..),
+    newScoresResetMultipleForAllRequest,
+  )
+where
+
+import Network.Google.GamesManagement.Achievements.Reset
+import Network.Google.GamesManagement.Achievements.ResetAll
+import Network.Google.GamesManagement.Achievements.ResetAllForAllPlayers
+import Network.Google.GamesManagement.Achievements.ResetForAllPlayers
+import Network.Google.GamesManagement.Achievements.ResetMultipleForAllPlayers
+import Network.Google.GamesManagement.Applications.ListHidden
+import Network.Google.GamesManagement.Events.Reset
+import Network.Google.GamesManagement.Events.ResetAll
+import Network.Google.GamesManagement.Events.ResetAllForAllPlayers
+import Network.Google.GamesManagement.Events.ResetForAllPlayers
+import Network.Google.GamesManagement.Events.ResetMultipleForAllPlayers
+import Network.Google.GamesManagement.Players.Hide
+import Network.Google.GamesManagement.Players.Unhide
+import Network.Google.GamesManagement.Scores.Reset
+import Network.Google.GamesManagement.Scores.ResetAll
+import Network.Google.GamesManagement.Scores.ResetAllForAllPlayers
+import Network.Google.GamesManagement.Scores.ResetForAllPlayers
+import Network.Google.GamesManagement.Scores.ResetMultipleForAllPlayers
 import Network.Google.GamesManagement.Types
-import Network.Google.Resource.GamesManagement.Achievements.Reset
-import Network.Google.Resource.GamesManagement.Achievements.ResetAll
-import Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayers
-import Network.Google.Resource.GamesManagement.Achievements.ResetForAllPlayers
-import Network.Google.Resource.GamesManagement.Achievements.ResetMultipleForAllPlayers
-import Network.Google.Resource.GamesManagement.Applications.ListHidden
-import Network.Google.Resource.GamesManagement.Events.Reset
-import Network.Google.Resource.GamesManagement.Events.ResetAll
-import Network.Google.Resource.GamesManagement.Events.ResetAllForAllPlayers
-import Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
-import Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
-import Network.Google.Resource.GamesManagement.Players.Hide
-import Network.Google.Resource.GamesManagement.Players.Unhide
-import Network.Google.Resource.GamesManagement.Scores.Reset
-import Network.Google.Resource.GamesManagement.Scores.ResetAll
-import Network.Google.Resource.GamesManagement.Scores.ResetAllForAllPlayers
-import Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
-import Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Play Game Management service.
-type GamesManagementAPI =
-     AchievementsResetAllResource :<|>
-       AchievementsResetAllForAllPlayersResource
-       :<|> AchievementsResetMultipleForAllPlayersResource
-       :<|> AchievementsResetForAllPlayersResource
-       :<|> AchievementsResetResource
-       :<|> EventsResetAllResource
-       :<|> EventsResetAllForAllPlayersResource
-       :<|> EventsResetMultipleForAllPlayersResource
-       :<|> EventsResetForAllPlayersResource
-       :<|> EventsResetResource
-       :<|> PlayersHideResource
-       :<|> PlayersUnhideResource
-       :<|> ScoresResetAllResource
-       :<|> ScoresResetAllForAllPlayersResource
-       :<|> ScoresResetMultipleForAllPlayersResource
-       :<|> ScoresResetForAllPlayersResource
-       :<|> ScoresResetResource
-       :<|> ApplicationsListHiddenResource
