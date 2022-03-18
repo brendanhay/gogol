@@ -19,55 +19,59 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Slides.Presentations.Create
+-- Module      : Gogol.Slides.Presentations.Pages.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a blank presentation using the title given in the request. If a @presentationId@ is provided, it is used as the ID of the new presentation. Otherwise, a new ID is generated. Other fields in the request, including any provided content, are ignored. Returns the created presentation.
+-- Gets the latest version of the specified page in the presentation.
 --
--- /See:/ <https://developers.google.com/slides/ Google Slides API Reference> for @slides.presentations.create@.
-module Network.Google.Slides.Presentations.Create
+-- /See:/ <https://developers.google.com/slides/ Google Slides API Reference> for @slides.presentations.pages.get@.
+module Gogol.Slides.Presentations.Pages.Get
   ( -- * Resource
-    SlidesPresentationsCreateResource,
+    SlidesPresentationsPagesGetResource,
 
     -- ** Constructing a Request
-    newSlidesPresentationsCreate,
-    SlidesPresentationsCreate,
+    newSlidesPresentationsPagesGet,
+    SlidesPresentationsPagesGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Slides.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Slides.Types
 
--- | A resource alias for @slides.presentations.create@ method which the
--- 'SlidesPresentationsCreate' request conforms to.
-type SlidesPresentationsCreateResource =
+-- | A resource alias for @slides.presentations.pages.get@ method which the
+-- 'SlidesPresentationsPagesGet' request conforms to.
+type SlidesPresentationsPagesGetResource =
   "v1"
     Core.:> "presentations"
+    Core.:> Core.Capture "presentationId" Core.Text
+    Core.:> "pages"
+    Core.:> Core.Capture "pageObjectId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Presentation
-    Core.:> Core.Post '[Core.JSON] Presentation
+    Core.:> Core.Get '[Core.JSON] Page
 
--- | Creates a blank presentation using the title given in the request. If a @presentationId@ is provided, it is used as the ID of the new presentation. Otherwise, a new ID is generated. Other fields in the request, including any provided content, are ignored. Returns the created presentation.
+-- | Gets the latest version of the specified page in the presentation.
 --
--- /See:/ 'newSlidesPresentationsCreate' smart constructor.
-data SlidesPresentationsCreate = SlidesPresentationsCreate
+-- /See:/ 'newSlidesPresentationsPagesGet' smart constructor.
+data SlidesPresentationsPagesGet = SlidesPresentationsPagesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Presentation,
+    -- | The object ID of the page to retrieve.
+    pageObjectId :: Core.Text,
+    -- | The ID of the presentation to retrieve.
+    presentationId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,43 +79,52 @@ data SlidesPresentationsCreate = SlidesPresentationsCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SlidesPresentationsCreate' with the minimum fields required to make a request.
-newSlidesPresentationsCreate ::
-  -- |  Multipart request metadata. See 'payload'.
-  Presentation ->
-  SlidesPresentationsCreate
-newSlidesPresentationsCreate payload =
-  SlidesPresentationsCreate
+-- | Creates a value of 'SlidesPresentationsPagesGet' with the minimum fields required to make a request.
+newSlidesPresentationsPagesGet ::
+  -- |  The object ID of the page to retrieve. See 'pageObjectId'.
+  Core.Text ->
+  -- |  The ID of the presentation to retrieve. See 'presentationId'.
+  Core.Text ->
+  SlidesPresentationsPagesGet
+newSlidesPresentationsPagesGet pageObjectId presentationId =
+  SlidesPresentationsPagesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      pageObjectId = pageObjectId,
+      presentationId = presentationId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest SlidesPresentationsCreate where
-  type Rs SlidesPresentationsCreate = Presentation
+instance
+  Core.GoogleRequest
+    SlidesPresentationsPagesGet
+  where
+  type Rs SlidesPresentationsPagesGet = Page
   type
-    Scopes SlidesPresentationsCreate =
+    Scopes SlidesPresentationsPagesGet =
       '[ "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/presentations"
+         "https://www.googleapis.com/auth/drive.readonly",
+         "https://www.googleapis.com/auth/presentations",
+         "https://www.googleapis.com/auth/presentations.readonly"
        ]
-  requestClient SlidesPresentationsCreate {..} =
+  requestClient SlidesPresentationsPagesGet {..} =
     go
+      presentationId
+      pageObjectId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       slidesService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SlidesPresentationsCreateResource
+              Core.Proxy SlidesPresentationsPagesGetResource
           )
           Core.mempty

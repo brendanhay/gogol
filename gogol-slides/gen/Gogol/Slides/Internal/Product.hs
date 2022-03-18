@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Slides.Internal.Product
+-- Module      : Gogol.Slides.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Slides.Internal.Product
+module Gogol.Slides.Internal.Product
   ( -- * AffineTransform
     AffineTransform (..),
     newAffineTransform,
@@ -576,8 +576,8 @@ module Network.Google.Slides.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Slides.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Slides.Internal.Sum
 
 -- | AffineTransform uses a 3x3 matrix with an implied last row of [ 0 0 1 ] to transform source coordinates (x,y) into destination coordinates (x\', y\') according to: x\' x = shear/y scale/y translate/y 1 [ 1 ] After transformation, x\' = scale/x * x + shear/x * y + translate/x; y\' = scale/y * y + shear/y * x + translate_y; This message is therefore composed of these six matrix elements.
 --
