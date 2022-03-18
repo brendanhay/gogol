@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.BigQuery
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,1668 +30,1027 @@
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference>
 module Network.Google.BigQuery
-    (
-    -- * Service Configuration
-      bigQueryService
+  ( -- * Configuration
+    bigQueryService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , storageReadOnlyScope
-    , bigQueryInsertDataScope
-    , storageReadWriteScope
-    , bigQueryScope
-    , storageFullControlScope
-
-    -- * API Declaration
-    , BigQueryAPI
+    bigQueryScope,
+    bigQueryInsertdataScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    storageFull_controlScope,
+    storageRead_OnlyScope,
+    storageRead_writeScope,
 
     -- * Resources
 
     -- ** bigquery.datasets.delete
-    , module Network.Google.Resource.BigQuery.DataSets.Delete
+    BigQueryDatasetsDeleteResource,
+    newBigQueryDatasetsDelete,
+    BigQueryDatasetsDelete,
 
     -- ** bigquery.datasets.get
-    , module Network.Google.Resource.BigQuery.DataSets.Get
+    BigQueryDatasetsGetResource,
+    newBigQueryDatasetsGet,
+    BigQueryDatasetsGet,
 
     -- ** bigquery.datasets.insert
-    , module Network.Google.Resource.BigQuery.DataSets.Insert
+    BigQueryDatasetsInsertResource,
+    newBigQueryDatasetsInsert,
+    BigQueryDatasetsInsert,
 
     -- ** bigquery.datasets.list
-    , module Network.Google.Resource.BigQuery.DataSets.List
+    BigQueryDatasetsListResource,
+    newBigQueryDatasetsList,
+    BigQueryDatasetsList,
 
     -- ** bigquery.datasets.patch
-    , module Network.Google.Resource.BigQuery.DataSets.Patch
+    BigQueryDatasetsPatchResource,
+    newBigQueryDatasetsPatch,
+    BigQueryDatasetsPatch,
 
     -- ** bigquery.datasets.update
-    , module Network.Google.Resource.BigQuery.DataSets.Update
+    BigQueryDatasetsUpdateResource,
+    newBigQueryDatasetsUpdate,
+    BigQueryDatasetsUpdate,
 
     -- ** bigquery.jobs.cancel
-    , module Network.Google.Resource.BigQuery.Jobs.Cancel
+    BigQueryJobsCancelResource,
+    newBigQueryJobsCancel,
+    BigQueryJobsCancel,
 
     -- ** bigquery.jobs.delete
-    , module Network.Google.Resource.BigQuery.Jobs.Delete
+    BigQueryJobsDeleteResource,
+    newBigQueryJobsDelete,
+    BigQueryJobsDelete,
 
     -- ** bigquery.jobs.get
-    , module Network.Google.Resource.BigQuery.Jobs.Get
+    BigQueryJobsGetResource,
+    newBigQueryJobsGet,
+    BigQueryJobsGet,
 
     -- ** bigquery.jobs.getQueryResults
-    , module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
+    BigQueryJobsGetQueryResultsResource,
+    newBigQueryJobsGetQueryResults,
+    BigQueryJobsGetQueryResults,
 
     -- ** bigquery.jobs.insert
-    , module Network.Google.Resource.BigQuery.Jobs.Insert
+    BigQueryJobsInsertResource,
+    newBigQueryJobsInsert,
+    BigQueryJobsInsert,
 
     -- ** bigquery.jobs.list
-    , module Network.Google.Resource.BigQuery.Jobs.List
+    BigQueryJobsListResource,
+    newBigQueryJobsList,
+    BigQueryJobsList,
 
     -- ** bigquery.jobs.query
-    , module Network.Google.Resource.BigQuery.Jobs.Query
+    BigQueryJobsQueryResource,
+    newBigQueryJobsQuery,
+    BigQueryJobsQuery,
 
     -- ** bigquery.models.delete
-    , module Network.Google.Resource.BigQuery.Models.Delete
+    BigQueryModelsDeleteResource,
+    newBigQueryModelsDelete,
+    BigQueryModelsDelete,
 
     -- ** bigquery.models.get
-    , module Network.Google.Resource.BigQuery.Models.Get
+    BigQueryModelsGetResource,
+    newBigQueryModelsGet,
+    BigQueryModelsGet,
 
     -- ** bigquery.models.list
-    , module Network.Google.Resource.BigQuery.Models.List
+    BigQueryModelsListResource,
+    newBigQueryModelsList,
+    BigQueryModelsList,
 
     -- ** bigquery.models.patch
-    , module Network.Google.Resource.BigQuery.Models.Patch
+    BigQueryModelsPatchResource,
+    newBigQueryModelsPatch,
+    BigQueryModelsPatch,
 
     -- ** bigquery.projects.getServiceAccount
-    , module Network.Google.Resource.BigQuery.Projects.GetServiceAccount
+    BigQueryProjectsGetServiceAccountResource,
+    newBigQueryProjectsGetServiceAccount,
+    BigQueryProjectsGetServiceAccount,
 
     -- ** bigquery.projects.list
-    , module Network.Google.Resource.BigQuery.Projects.List
+    BigQueryProjectsListResource,
+    newBigQueryProjectsList,
+    BigQueryProjectsList,
 
     -- ** bigquery.routines.delete
-    , module Network.Google.Resource.BigQuery.Routines.Delete
+    BigQueryRoutinesDeleteResource,
+    newBigQueryRoutinesDelete,
+    BigQueryRoutinesDelete,
 
     -- ** bigquery.routines.get
-    , module Network.Google.Resource.BigQuery.Routines.Get
+    BigQueryRoutinesGetResource,
+    newBigQueryRoutinesGet,
+    BigQueryRoutinesGet,
 
     -- ** bigquery.routines.insert
-    , module Network.Google.Resource.BigQuery.Routines.Insert
+    BigQueryRoutinesInsertResource,
+    newBigQueryRoutinesInsert,
+    BigQueryRoutinesInsert,
 
     -- ** bigquery.routines.list
-    , module Network.Google.Resource.BigQuery.Routines.List
+    BigQueryRoutinesListResource,
+    newBigQueryRoutinesList,
+    BigQueryRoutinesList,
 
     -- ** bigquery.routines.update
-    , module Network.Google.Resource.BigQuery.Routines.Update
+    BigQueryRoutinesUpdateResource,
+    newBigQueryRoutinesUpdate,
+    BigQueryRoutinesUpdate,
 
     -- ** bigquery.rowAccessPolicies.getIamPolicy
-    , module Network.Google.Resource.BigQuery.RowAccessPolicies.GetIAMPolicy
+    BigQueryRowAccessPoliciesGetIamPolicyResource,
+    newBigQueryRowAccessPoliciesGetIamPolicy,
+    BigQueryRowAccessPoliciesGetIamPolicy,
 
     -- ** bigquery.rowAccessPolicies.list
-    , module Network.Google.Resource.BigQuery.RowAccessPolicies.List
+    BigQueryRowAccessPoliciesListResource,
+    newBigQueryRowAccessPoliciesList,
+    BigQueryRowAccessPoliciesList,
 
     -- ** bigquery.rowAccessPolicies.setIamPolicy
-    , module Network.Google.Resource.BigQuery.RowAccessPolicies.SetIAMPolicy
+    BigQueryRowAccessPoliciesSetIamPolicyResource,
+    newBigQueryRowAccessPoliciesSetIamPolicy,
+    BigQueryRowAccessPoliciesSetIamPolicy,
 
     -- ** bigquery.rowAccessPolicies.testIamPermissions
-    , module Network.Google.Resource.BigQuery.RowAccessPolicies.TestIAMPermissions
+    BigQueryRowAccessPoliciesTestIamPermissionsResource,
+    newBigQueryRowAccessPoliciesTestIamPermissions,
+    BigQueryRowAccessPoliciesTestIamPermissions,
 
     -- ** bigquery.tabledata.insertAll
-    , module Network.Google.Resource.BigQuery.TableData.InsertAll
+    BigQueryTabledataInsertAllResource,
+    newBigQueryTabledataInsertAll,
+    BigQueryTabledataInsertAll,
 
     -- ** bigquery.tabledata.list
-    , module Network.Google.Resource.BigQuery.TableData.List
+    BigQueryTabledataListResource,
+    newBigQueryTabledataList,
+    BigQueryTabledataList,
 
     -- ** bigquery.tables.delete
-    , module Network.Google.Resource.BigQuery.Tables.Delete
+    BigQueryTablesDeleteResource,
+    newBigQueryTablesDelete,
+    BigQueryTablesDelete,
 
     -- ** bigquery.tables.get
-    , module Network.Google.Resource.BigQuery.Tables.Get
+    BigQueryTablesGetResource,
+    newBigQueryTablesGet,
+    BigQueryTablesGet,
 
     -- ** bigquery.tables.getIamPolicy
-    , module Network.Google.Resource.BigQuery.Tables.GetIAMPolicy
+    BigQueryTablesGetIamPolicyResource,
+    newBigQueryTablesGetIamPolicy,
+    BigQueryTablesGetIamPolicy,
 
     -- ** bigquery.tables.insert
-    , module Network.Google.Resource.BigQuery.Tables.Insert
+    BigQueryTablesInsertResource,
+    newBigQueryTablesInsert,
+    BigQueryTablesInsert,
 
     -- ** bigquery.tables.list
-    , module Network.Google.Resource.BigQuery.Tables.List
+    BigQueryTablesListResource,
+    newBigQueryTablesList,
+    BigQueryTablesList,
 
     -- ** bigquery.tables.patch
-    , module Network.Google.Resource.BigQuery.Tables.Patch
+    BigQueryTablesPatchResource,
+    newBigQueryTablesPatch,
+    BigQueryTablesPatch,
 
     -- ** bigquery.tables.setIamPolicy
-    , module Network.Google.Resource.BigQuery.Tables.SetIAMPolicy
+    BigQueryTablesSetIamPolicyResource,
+    newBigQueryTablesSetIamPolicy,
+    BigQueryTablesSetIamPolicy,
 
     -- ** bigquery.tables.testIamPermissions
-    , module Network.Google.Resource.BigQuery.Tables.TestIAMPermissions
+    BigQueryTablesTestIamPermissionsResource,
+    newBigQueryTablesTestIamPermissions,
+    BigQueryTablesTestIamPermissions,
 
     -- ** bigquery.tables.update
-    , module Network.Google.Resource.BigQuery.Tables.Update
+    BigQueryTablesUpdateResource,
+    newBigQueryTablesUpdate,
+    BigQueryTablesUpdate,
 
     -- * Types
 
-    -- ** ModelReference
-    , ModelReference
-    , modelReference
-    , mrModelId
-    , mrDataSetId
-    , mrProjectId
-
-    -- ** TrainingOptionsDataFrequency
-    , TrainingOptionsDataFrequency (..)
-
-    -- ** JobReference
-    , JobReference
-    , jobReference
-    , jrJobId
-    , jrLocation
-    , jrProjectId
-
-    -- ** ArimaSingleModelForecastingMetricsSeasonalPeriodsItem
-    , ArimaSingleModelForecastingMetricsSeasonalPeriodsItem (..)
-
-    -- ** TableList
-    , TableList
-    , tableList
-    , tlTotalItems
-    , tlEtag
-    , tlNextPageToken
-    , tlKind
-    , tlTables
-
-    -- ** ArimaResultSeasonalPeriodsItem
-    , ArimaResultSeasonalPeriodsItem (..)
-
-    -- ** DataSetListDataSetsItem
-    , DataSetListDataSetsItem
-    , dataSetListDataSetsItem
-    , dsldsiLocation
-    , dsldsiFriendlyName
-    , dsldsiKind
-    , dsldsiDataSetReference
-    , dsldsiId
-    , dsldsiLabels
-
-    -- ** ClusterInfo
-    , ClusterInfo
-    , clusterInfo
-    , ciClusterSize
-    , ciClusterRadius
-    , ciCentroidId
-
-    -- ** TableDataList
-    , TableDataList
-    , tableDataList
-    , tdlEtag
-    , tdlKind
-    , tdlRows
-    , tdlPageToken
-    , tdlTotalRows
-
-    -- ** JobConfigurationTableCopy
-    , JobConfigurationTableCopy
-    , jobConfigurationTableCopy
-    , jctcDestinationTable
-    , jctcDestinationExpirationTime
-    , jctcWriteDisPosition
-    , jctcSourceTables
-    , jctcCreateDisPosition
-    , jctcSourceTable
-    , jctcOperationType
-    , jctcDestinationEncryptionConfiguration
-
-    -- ** TableListTablesItem
-    , TableListTablesItem
-    , tableListTablesItem
-    , tltiCreationTime
-    , tltiClustering
-    , tltiRangePartitioning
-    , tltiTableReference
-    , tltiFriendlyName
-    , tltiKind
-    , tltiTimePartitioning
-    , tltiView
-    , tltiId
-    , tltiLabels
-    , tltiType
-    , tltiExpirationTime
-
-    -- ** TableFieldSchemaPolicyTags
-    , TableFieldSchemaPolicyTags
-    , tableFieldSchemaPolicyTags
-    , tfsptNames
-
-    -- ** TableSchema
-    , TableSchema
-    , tableSchema
-    , tsFields
-
-    -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** ProjectList
-    , ProjectList
-    , projectList
-    , plTotalItems
-    , plEtag
-    , plNextPageToken
-    , plKind
-    , plProjects
-
-    -- ** ArimaModelInfo
-    , ArimaModelInfo
-    , arimaModelInfo
-    , amiHasStepChanges
-    , amiHasSpikesAndDips
-    , amiSeasonalPeriods
-    , amiNonSeasonalOrder
-    , amiHasDrift
-    , amiArimaCoefficients
-    , amiTimeSeriesIds
-    , amiHasHolidayEffect
-    , amiTimeSeriesId
-    , amiArimaFittingMetrics
-
-    -- ** RowLevelSecurityStatistics
-    , RowLevelSecurityStatistics
-    , rowLevelSecurityStatistics
-    , rlssRowLevelSecurityApplied
-
-    -- ** FeatureValue
-    , FeatureValue
-    , featureValue
-    , fvFeatureColumn
-    , fvNumericalValue
-    , fvCategoricalValue
-
-    -- ** RoutineDeterminismLevel
-    , RoutineDeterminismLevel (..)
-
-    -- ** ExplainQueryStep
-    , ExplainQueryStep
-    , explainQueryStep
-    , eqsSubsteps
-    , eqsKind
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** StandardSQLField
-    , StandardSQLField
-    , standardSQLField
-    , ssqlfName
-    , ssqlfType
-
-    -- ** QueryTimelineSample
-    , QueryTimelineSample
-    , queryTimelineSample
-    , qtsPendingUnits
-    , qtsTotalSlotMs
-    , qtsActiveUnits
-    , qtsElapsedMs
-    , qtsCompletedUnits
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** QueryParameterTypeStructTypesItem
-    , QueryParameterTypeStructTypesItem
-    , queryParameterTypeStructTypesItem
-    , qptstiName
-    , qptstiType
-    , qptstiDescription
-
-    -- ** Cluster
-    , Cluster
-    , cluster
-    , cFeatureValues
-    , cCount
-    , cCentroidId
-
-    -- ** BigtableColumnFamily
-    , BigtableColumnFamily
-    , bigtableColumnFamily
-    , bcfFamilyId
-    , bcfColumns
-    , bcfOnlyReadLatest
-    , bcfType
-    , bcfEncoding
-
-    -- ** JobStatistics
-    , JobStatistics
-    , jobStatistics
-    , jsCreationTime
-    , jsRowLevelSecurityStatistics
-    , jsReservationId
-    , jsStartTime
-    , jsCompletionRatio
-    , jsSessionInfo
-    , jsNumChildJobs
-    , jsTotalSlotMs
-    , jsLoad
-    , jsTotalBytesProcessed
-    , jsQuotaDeferments
-    , jsEndTime
-    , jsQuery
-    , jsScriptStatistics
-    , jsTransactionInfo
-    , jsExtract
-    , jsReservationUsage
-    , jsParentJobId
-
-    -- ** JobConfigurationLabels
-    , JobConfigurationLabels
-    , jobConfigurationLabels
-    , jclAddtional
-
-    -- ** DataSet
-    , DataSet
-    , dataSet
-    , dsCreationTime
-    , dsDefaultPartitionExpirationMs
-    , dsAccess
-    , dsSatisfiesPZS
-    , dsDefaultEncryptionConfiguration
-    , dsEtag
-    , dsLocation
-    , dsFriendlyName
-    , dsKind
-    , dsLastModifiedTime
-    , dsDataSetReference
-    , dsSelfLink
-    , dsId
-    , dsLabels
-    , dsDefaultTableExpirationMs
-    , dsDescription
-
-    -- ** ModelLabels
-    , ModelLabels
-    , modelLabels
-    , mlAddtional
-
-    -- ** RangePartitioningRange
-    , RangePartitioningRange
-    , rangePartitioningRange
-    , rprStart
-    , rprInterval
-    , rprEnd
-
-    -- ** JobStatisticsReservationUsageItem
-    , JobStatisticsReservationUsageItem
-    , jobStatisticsReservationUsageItem
-    , jsruiName
-    , jsruiSlotMs
-
-    -- ** BigtableOptions
-    , BigtableOptions
-    , bigtableOptions
-    , boReadRowkeyAsString
-    , boIgnoreUnspecifiedColumnFamilies
-    , boColumnFamilies
-
-    -- ** Clustering
-    , Clustering
-    , clustering
-    , cFields
-
-    -- ** StandardSQLStructType
-    , StandardSQLStructType
-    , standardSQLStructType
-    , ssqlstFields
-
-    -- ** CategoricalValue
-    , CategoricalValue
-    , categoricalValue
-    , cvCategoryCounts
-
-    -- ** StandardSQLDataType
-    , StandardSQLDataType
-    , standardSQLDataType
-    , ssqldtArrayElementType
-    , ssqldtStructType
-    , ssqldtTypeKind
-
-    -- ** ExternalDataConfiguration
-    , ExternalDataConfiguration
-    , externalDataConfiguration
-    , edcBigtableOptions
-    , edcIgnoreUnknownValues
-    , edcConnectionId
-    , edcCompression
-    , edcSourceFormat
-    , edcDecimalTargetTypes
-    , edcSchema
-    , edcMaxBadRecords
-    , edcGoogleSheetsOptions
-    , edcAutodetect
-    , edcHivePartitioningOptions
-    , edcSourceURIs
-    , edcParquetOptions
-    , edcCSVOptions
-
-    -- ** TableReference
-    , TableReference
-    , tableReference
-    , trDataSetId
-    , trProjectId
-    , trTableId
-
-    -- ** ModelDefinitionModelOptions
-    , ModelDefinitionModelOptions
-    , modelDefinitionModelOptions
-    , mdmoModelType
-    , mdmoLabels
-    , mdmoLossType
-
-    -- ** RowAccessPolicyReference
-    , RowAccessPolicyReference
-    , rowAccessPolicyReference
-    , raprPolicyId
-    , raprDataSetId
-    , raprProjectId
-    , raprTableId
-
-    -- ** ClusteringMetrics
-    , ClusteringMetrics
-    , clusteringMetrics
-    , cmDaviesBouldinIndex
-    , cmMeanSquaredDistance
-    , cmClusters
-
-    -- ** RoutineReference
-    , RoutineReference
-    , routineReference
-    , rrDataSetId
-    , rrProjectId
-    , rrRoutineId
-
-    -- ** RangePartitioning
-    , RangePartitioning
-    , rangePartitioning
-    , rpField
-    , rpRange
-
-    -- ** TableFieldSchema
-    , TableFieldSchema
-    , tableFieldSchema
-    , tfsMaxLength
-    , tfsScale
-    , tfsMode
-    , tfsPrecision
-    , tfsCategories
-    , tfsPolicyTags
-    , tfsName
-    , tfsType
-    , tfsDescription
-    , tfsFields
-
-    -- ** GetQueryResultsResponse
-    , GetQueryResultsResponse
-    , getQueryResultsResponse
-    , gqrrJobReference
-    , gqrrEtag
-    , gqrrKind
-    , gqrrSchema
-    , gqrrTotalBytesProcessed
-    , gqrrRows
-    , gqrrPageToken
-    , gqrrNumDmlAffectedRows
-    , gqrrTotalRows
-    , gqrrErrors
-    , gqrrJobComplete
-    , gqrrCacheHit
-
-    -- ** RegressionMetrics
-    , RegressionMetrics
-    , regressionMetrics
-    , rmMeanAbsoluteError
-    , rmMeanSquaredLogError
-    , rmRSquared
-    , rmMeanSquaredError
-    , rmMedianAbsoluteError
-
-    -- ** BiEngineStatistics
-    , BiEngineStatistics
-    , biEngineStatistics
-    , besBiEngineReasons
-    , besBiEngineMode
-
-    -- ** TrainingOptionsKmeansInitializationMethod
-    , TrainingOptionsKmeansInitializationMethod (..)
-
-    -- ** ArgumentArgumentKind
-    , ArgumentArgumentKind (..)
-
-    -- ** ArgumentMode
-    , ArgumentMode (..)
-
-    -- ** TrainingOptions
-    , TrainingOptions
-    , trainingOptions
-    , toDataFrequency
-    , toDataSplitColumn
-    , toHiddenUnits
-    , toUserColumn
-    , toMaxTreeDepth
-    , toNumClusters
-    , toCleanSpikesAndDips
-    , toDecomposeTimeSeries
-    , toL2Regularization
-    , toSubSample
-    , toAdjustStepChanges
-    , toInputLabelColumns
-    , toWalsAlpha
-    , toTimeSeriesDataColumn
-    , toKmeansInitializationMethod
-    , toAutoArimaMaxOrder
-    , toMinRelativeProgress
-    , toTimeSeriesIdColumns
-    , toDataSplitEvalFraction
-    , toLearnRate
-    , toHolidayRegion
-    , toBatchSize
-    , toIncludeDrift
-    , toFeedbackType
-    , toAutoArima
-    , toNonSeasonalOrder
-    , toDropout
-    , toHorizon
-    , toPreserveInputStructs
-    , toOptimizationStrategy
-    , toDataSplitMethod
-    , toLearnRateStrategy
-    , toTimeSeriesIdColumn
-    , toMaxIterations
-    , toInitialLearnRate
-    , toNumFactors
-    , toEarlyStop
-    , toLabelClassWeights
-    , toLossType
-    , toDistanceType
-    , toItemColumn
-    , toMinSplitLoss
-    , toTimeSeriesTimestampColumn
-    , toKmeansInitializationColumn
-    , toWarmStart
-    , toModelURI
-    , toL1Regularization
-
-    -- ** DataSetList
-    , DataSetList
-    , dataSetList
-    , dslEtag
-    , dslNextPageToken
-    , dslKind
-    , dslDataSets
-
-    -- ** SessionInfo
-    , SessionInfo
-    , sessionInfo
-    , siSessionId
-
     -- ** AggregateClassificationMetrics
-    , AggregateClassificationMetrics
-    , aggregateClassificationMetrics
-    , acmLogLoss
-    , acmRecall
-    , acmPrecision
-    , acmThreshold
-    , acmF1Score
-    , acmAccuracy
-    , acmRocAuc
-
-    -- ** ModelModelType
-    , ModelModelType (..)
-
-    -- ** DataSplitResult
-    , DataSplitResult
-    , dataSplitResult
-    , dsrEvaluationTable
-    , dsrTrainingTable
-
-    -- ** QueryRequest
-    , QueryRequest
-    , queryRequest
-    , qrRequestId
-    , qrConnectionProperties
-    , qrLocation
-    , qrUseQueryCache
-    , qrPreserveNulls
-    , qrKind
-    , qrQueryParameters
-    , qrMaximumBytesBilled
-    , qrQuery
-    , qrParameterMode
-    , qrCreateSession
-    , qrTimeoutMs
-    , qrLabels
-    , qrUseLegacySQL
-    , qrDryRun
-    , qrMaxResults
-    , qrDefaultDataSet
-
-    -- ** JobsListProjection
-    , JobsListProjection (..)
+    AggregateClassificationMetrics (..),
+    newAggregateClassificationMetrics,
 
     -- ** Argument
-    , Argument
-    , argument
-    , aArgumentKind
-    , aMode
-    , aName
-    , aDataType
+    Argument (..),
+    newArgument,
 
-    -- ** BqmlTrainingRunTrainingOptions
-    , BqmlTrainingRunTrainingOptions
-    , bqmlTrainingRunTrainingOptions
-    , btrtoLineSearchInitLearnRate
-    , btrtoMinRelProgress
-    , btrtoL1Reg
-    , btrtoLearnRate
-    , btrtoLearnRateStrategy
-    , btrtoMaxIteration
-    , btrtoEarlyStop
-    , btrtoL2Reg
-    , btrtoWarmStart
+    -- ** Argument_ArgumentKind
+    Argument_ArgumentKind (..),
 
-    -- ** QueryParameter
-    , QueryParameter
-    , queryParameter
-    , qpParameterValue
-    , qpParameterType
-    , qpName
-
-    -- ** CategoryCount
-    , CategoryCount
-    , categoryCount
-    , ccCategory
-    , ccCount
-
-    -- ** IterationResult
-    , IterationResult
-    , iterationResult
-    , irDurationMs
-    , irLearnRate
-    , irArimaResult
-    , irClusterInfos
-    , irEvalLoss
-    , irTrainingLoss
-    , irIndex
-
-    -- ** BinaryClassificationMetrics
-    , BinaryClassificationMetrics
-    , binaryClassificationMetrics
-    , bcmPositiveLabel
-    , bcmAggregateClassificationMetrics
-    , bcmBinaryConfusionMatrixList
-    , bcmNegativeLabel
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** JobStatistics4
-    , JobStatistics4
-    , jobStatistics4
-    , jsInputBytes
-    , jsDestinationURIFileCounts
-
-    -- ** QueryRequestLabels
-    , QueryRequestLabels
-    , queryRequestLabels
-    , qrlAddtional
-
-    -- ** MultiClassClassificationMetrics
-    , MultiClassClassificationMetrics
-    , multiClassClassificationMetrics
-    , mccmAggregateClassificationMetrics
-    , mccmConfusionMatrixList
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** BinaryConfusionMatrix
-    , BinaryConfusionMatrix
-    , binaryConfusionMatrix
-    , bcmPositiveClassThreshold
-    , bcmFalsePositives
-    , bcmRecall
-    , bcmPrecision
-    , bcmTrueNegatives
-    , bcmF1Score
-    , bcmFalseNegatives
-    , bcmAccuracy
-    , bcmTruePositives
-
-    -- ** TrainingOptionsHolidayRegion
-    , TrainingOptionsHolidayRegion (..)
-
-    -- ** ProjectReference
-    , ProjectReference
-    , projectReference
-    , prProjectId
-
-    -- ** ExplainQueryStage
-    , ExplainQueryStage
-    , explainQueryStage
-    , eqsReadMsAvg
-    , eqsStatus
-    , eqsShuffleOutputBytesSpilled
-    , eqsReadMsMax
-    , eqsCompletedParallelInputs
-    , eqsWaitRatioMax
-    , eqsParallelInputs
-    , eqsShuffleOutputBytes
-    , eqsRecordsWritten
-    , eqsSteps
-    , eqsInputStages
-    , eqsWriteRatioAvg
-    , eqsRecordsRead
-    , eqsComputeRatioAvg
-    , eqsName
-    , eqsComputeMsMax
-    , eqsReadRatioMax
-    , eqsWriteMsMax
-    , eqsWaitRatioAvg
-    , eqsSlotMs
-    , eqsWaitMsAvg
-    , eqsId
-    , eqsComputeRatioMax
-    , eqsWriteRatioMax
-    , eqsComputeMsAvg
-    , eqsReadRatioAvg
-    , eqsWriteMsAvg
-    , eqsStartMs
-    , eqsEndMs
-    , eqsWaitMsMax
-
-    -- ** SnapshotDefinition
-    , SnapshotDefinition
-    , snapshotDefinition
-    , sdBaseTableReference
-    , sdSnapshotTime
-
-    -- ** BiEngineReason
-    , BiEngineReason
-    , biEngineReason
-    , berCode
-    , berMessage
-
-    -- ** BigQueryModelTraining
-    , BigQueryModelTraining
-    , bigQueryModelTraining
-    , bqmtExpectedTotalIterations
-    , bqmtCurrentIteration
-
-    -- ** JobConfigurationLoad
-    , JobConfigurationLoad
-    , jobConfigurationLoad
-    , jclSkipLeadingRows
-    , jclProjectionFields
-    , jclDestinationTable
-    , jclWriteDisPosition
-    , jclAllowJaggedRows
-    , jclClustering
-    , jclRangePartitioning
-    , jclSchemaInline
-    , jclIgnoreUnknownValues
-    , jclSchemaUpdateOptions
-    , jclCreateDisPosition
-    , jclSchemaInlineFormat
-    , jclAllowQuotedNewlines
-    , jclSourceFormat
-    , jclJSONExtension
-    , jclUseAvroLogicalTypes
-    , jclDecimalTargetTypes
-    , jclSchema
-    , jclTimePartitioning
-    , jclQuote
-    , jclMaxBadRecords
-    , jclAutodetect
-    , jclHivePartitioningOptions
-    , jclSourceURIs
-    , jclEncoding
-    , jclDestinationTableProperties
-    , jclDestinationEncryptionConfiguration
-    , jclParquetOptions
-    , jclFieldDelimiter
-    , jclNullMarker
-
-    -- ** JobsListStateFilter
-    , JobsListStateFilter (..)
-
-    -- ** RankingMetrics
-    , RankingMetrics
-    , rankingMetrics
-    , rMeanAveragePrecision
-    , rAverageRank
-    , rNormalizedDiscountedCumulativeGain
-    , rMeanSquaredError
-
-    -- ** EvaluationMetrics
-    , EvaluationMetrics
-    , evaluationMetrics
-    , emClusteringMetrics
-    , emRegressionMetrics
-    , emBinaryClassificationMetrics
-    , emMultiClassClassificationMetrics
-    , emRankingMetrics
-    , emArimaForecastingMetrics
-
-    -- ** DataSetReference
-    , DataSetReference
-    , dataSetReference
-    , dsrDataSetId
-    , dsrProjectId
-
-    -- ** MaterializedViewDefinition
-    , MaterializedViewDefinition
-    , materializedViewDefinition
-    , mvdEnableRefresh
-    , mvdRefreshIntervalMs
-    , mvdQuery
-    , mvdLastRefreshTime
-
-    -- ** TableDataInsertAllRequest
-    , TableDataInsertAllRequest
-    , tableDataInsertAllRequest
-    , tdiarKind
-    , tdiarIgnoreUnknownValues
-    , tdiarRows
-    , tdiarTemplateSuffix
-    , tdiarSkipInvalidRows
-
-    -- ** TrainingOptionsFeedbackType
-    , TrainingOptionsFeedbackType (..)
-
-    -- ** GetServiceAccountResponse
-    , GetServiceAccountResponse
-    , getServiceAccountResponse
-    , gsarEmail
-    , gsarKind
-
-    -- ** ProjectListProjectsItem
-    , ProjectListProjectsItem
-    , projectListProjectsItem
-    , plpiFriendlyName
-    , plpiKind
-    , plpiProjectReference
-    , plpiId
-    , plpiNumericId
-
-    -- ** RoutineLanguage
-    , RoutineLanguage (..)
-
-    -- ** BqmlIterationResult
-    , BqmlIterationResult
-    , bqmlIterationResult
-    , birDurationMs
-    , birLearnRate
-    , birEvalLoss
-    , birTrainingLoss
-    , birIndex
-
-    -- ** BigtableColumn
-    , BigtableColumn
-    , bigtableColumn
-    , bcQualifierEncoded
-    , bcFieldName
-    , bcQualifierString
-    , bcOnlyReadLatest
-    , bcType
-    , bcEncoding
-
-    -- ** Streamingbuffer
-    , Streamingbuffer
-    , streamingbuffer
-    , sEstimatedBytes
-    , sOldestEntryTime
-    , sEstimatedRows
-
-    -- ** ListRoutinesResponse
-    , ListRoutinesResponse
-    , listRoutinesResponse
-    , lrrNextPageToken
-    , lrrRoutines
-
-    -- ** ArimaModelInfoSeasonalPeriodsItem
-    , ArimaModelInfoSeasonalPeriodsItem (..)
-
-    -- ** TableRow
-    , TableRow
-    , tableRow
-    , trF
-
-    -- ** ScriptStackFrame
-    , ScriptStackFrame
-    , scriptStackFrame
-    , ssfText
-    , ssfProcedureId
-    , ssfStartLine
-    , ssfEndLine
-    , ssfStartColumn
-    , ssfEndColumn
-
-    -- ** Entry
-    , Entry
-    , entry
-    , ePredictedLabel
-    , eItemCount
-
-    -- ** JobListJobsItem
-    , JobListJobsItem
-    , jobListJobsItem
-    , jljiJobReference
-    , jljiStatus
-    , jljiState
-    , jljiUserEmail
-    , jljiKind
-    , jljiErrorResult
-    , jljiId
-    , jljiStatistics
-    , jljiConfiguration
-
-    -- ** ArimaResult
-    , ArimaResult
-    , arimaResult
-    , arArimaModelInfo
-    , arSeasonalPeriods
-
-    -- ** ArimaSingleModelForecastingMetrics
-    , ArimaSingleModelForecastingMetrics
-    , arimaSingleModelForecastingMetrics
-    , asmfmHasStepChanges
-    , asmfmHasSpikesAndDips
-    , asmfmSeasonalPeriods
-    , asmfmNonSeasonalOrder
-    , asmfmHasDrift
-    , asmfmTimeSeriesIds
-    , asmfmHasHolidayEffect
-    , asmfmTimeSeriesId
-    , asmfmArimaFittingMetrics
-
-    -- ** TimePartitioning
-    , TimePartitioning
-    , timePartitioning
-    , tpField
-    , tpExpirationMs
-    , tpRequirePartitionFilter
-    , tpType
-
-    -- ** QueryParameterValueStructValues
-    , QueryParameterValueStructValues
-    , queryParameterValueStructValues
-    , qpvsvAddtional
-
-    -- ** DataSetLabels
-    , DataSetLabels
-    , dataSetLabels
-    , dslAddtional
-
-    -- ** Model
-    , Model
-    , model
-    , mCreationTime
-    , mModelReference
-    , mBestTrialId
-    , mModelType
-    , mEtag
-    , mLocation
-    , mFriendlyName
-    , mLastModifiedTime
-    , mEncryptionConfiguration
-    , mTrainingRuns
-    , mLabels
-    , mLabelColumns
-    , mExpirationTime
-    , mDescription
-    , mFeatureColumns
-
-    -- ** JobConfiguration
-    , JobConfiguration
-    , jobConfiguration
-    , jcJobType
-    , jcCopy
-    , jcLoad
-    , jcQuery
-    , jcJobTimeoutMs
-    , jcExtract
-    , jcLabels
-    , jcDryRun
-
-    -- ** Job
-    , Job
-    , job
-    , jJobReference
-    , jStatus
-    , jEtag
-    , jUserEmail
-    , jKind
-    , jSelfLink
-    , jId
-    , jStatistics
-    , jConfiguration
-
-    -- ** EncryptionConfiguration
-    , EncryptionConfiguration
-    , encryptionConfiguration
-    , ecKmsKeyName
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** TableDataInsertAllResponseInsertErrorsItem
-    , TableDataInsertAllResponseInsertErrorsItem
-    , tableDataInsertAllResponseInsertErrorsItem
-    , tdiarieiErrors
-    , tdiarieiIndex
-
-    -- ** DataSetAccessEntryTarget_typesItem
-    , DataSetAccessEntryTarget_typesItem
-    , dataSetAccessEntryTarget_typesItem
-    , dsaetiTargetType
-
-    -- ** JobConfigurationExtract
-    , JobConfigurationExtract
-    , jobConfigurationExtract
-    , jceDestinationFormat
-    , jceSourceTable
-    , jcePrintHeader
-    , jceCompression
-    , jceUseAvroLogicalTypes
-    , jceDestinationURIs
-    , jceDestinationURI
-    , jceSourceModel
-    , jceFieldDelimiter
-
-    -- ** ScriptStatistics
-    , ScriptStatistics
-    , scriptStatistics
-    , ssStackFrames
-    , ssEvaluationKind
-
-    -- ** DataSetAccessEntry
-    , DataSetAccessEntry
-    , dataSetAccessEntry
-    , dsaeDataSet
-    , dsaeTargetTypes
-
-    -- ** TransactionInfo
-    , TransactionInfo
-    , transactionInfo
-    , tiTransactionId
-
-    -- ** Row
-    , Row
-    , row
-    , rEntries
-    , rActualLabel
-
-    -- ** TrainingOptionsOptimizationStrategy
-    , TrainingOptionsOptimizationStrategy (..)
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** ModelDefinition
-    , ModelDefinition
-    , modelDefinition
-    , mdModelOptions
-    , mdTrainingRuns
-
-    -- ** ArimaForecastingMetrics
-    , ArimaForecastingMetrics
-    , arimaForecastingMetrics
-    , afmSeasonalPeriods
-    , afmNonSeasonalOrder
-    , afmHasDrift
-    , afmArimaSingleModelForecastingMetrics
-    , afmTimeSeriesId
-    , afmArimaFittingMetrics
-
-    -- ** JobCancelResponse
-    , JobCancelResponse
-    , jobCancelResponse
-    , jcrKind
-    , jcrJob
-
-    -- ** JSONObject
-    , JSONObject
-    , jsonObject
-    , joAddtional
-
-    -- ** JobConfigurationQuery
-    , JobConfigurationQuery
-    , jobConfigurationQuery
-    , jcqConnectionProperties
-    , jcqDestinationTable
-    , jcqWriteDisPosition
-    , jcqPriority
-    , jcqClustering
-    , jcqRangePartitioning
-    , jcqUseQueryCache
-    , jcqPreserveNulls
-    , jcqTableDefinitions
-    , jcqQueryParameters
-    , jcqSchemaUpdateOptions
-    , jcqMaximumBytesBilled
-    , jcqCreateDisPosition
-    , jcqUserDefinedFunctionResources
-    , jcqAllowLargeResults
-    , jcqMaximumBillingTier
-    , jcqTimePartitioning
-    , jcqQuery
-    , jcqFlattenResults
-    , jcqParameterMode
-    , jcqCreateSession
-    , jcqUseLegacySQL
-    , jcqDestinationEncryptionConfiguration
-    , jcqDefaultDataSet
-
-    -- ** TrainingOptionsDataSplitMethod
-    , TrainingOptionsDataSplitMethod (..)
-
-    -- ** GoogleSheetsOptions
-    , GoogleSheetsOptions
-    , googleSheetsOptions
-    , gsoSkipLeadingRows
-    , gsoRange
-
-    -- ** ListModelsResponse
-    , ListModelsResponse
-    , listModelsResponse
-    , lmrNextPageToken
-    , lmrModels
-
-    -- ** StandardSQLDataTypeTypeKind
-    , StandardSQLDataTypeTypeKind (..)
-
-    -- ** TableDataInsertAllRequestRowsItem
-    , TableDataInsertAllRequestRowsItem
-    , tableDataInsertAllRequestRowsItem
-    , tdiarriJSON
-    , tdiarriInsertId
-
-    -- ** JobList
-    , JobList
-    , jobList
-    , jlEtag
-    , jlNextPageToken
-    , jlKind
-    , jlJobs
-
-    -- ** JobConfigurationQueryTableDefinitions
-    , JobConfigurationQueryTableDefinitions
-    , jobConfigurationQueryTableDefinitions
-    , jcqtdAddtional
-
-    -- ** TrainingOptionsLearnRateStrategy
-    , TrainingOptionsLearnRateStrategy (..)
-
-    -- ** RoutineRoutineType
-    , RoutineRoutineType (..)
-
-    -- ** TableCell
-    , TableCell
-    , tableCell
-    , tcV
-
-    -- ** ArimaOrder
-    , ArimaOrder
-    , arimaOrder
-    , aoP
-    , aoQ
-    , aoD
-
-    -- ** JobStatistics2ReservationUsageItem
-    , JobStatistics2ReservationUsageItem
-    , jobStatistics2ReservationUsageItem
-    , jName
-    , jSlotMs
-
-    -- ** DmlStatistics
-    , DmlStatistics
-    , dmlStatistics
-    , dsDeletedRowCount
-    , dsUpdatedRowCount
-    , dsInsertedRowCount
-
-    -- ** QueryParameterValue
-    , QueryParameterValue
-    , queryParameterValue
-    , qpvStructValues
-    , qpvValue
-    , qpvArrayValues
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** ViewDefinition
-    , ViewDefinition
-    , viewDefinition
-    , vdUserDefinedFunctionResources
-    , vdUseExplicitColumnNames
-    , vdQuery
-    , vdUseLegacySQL
-
-    -- ** UserDefinedFunctionResource
-    , UserDefinedFunctionResource
-    , userDefinedFunctionResource
-    , udfrResourceURI
-    , udfrInlineCode
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** JobStatistics2
-    , JobStatistics2
-    , jobStatistics2
-    , jModelTrainingExpectedTotalIteration
-    , jModelTraining
-    , jDdlTargetDataSet
-    , jBiEngineStatistics
-    , jTotalSlotMs
-    , jDdlTargetRoutine
-    , jDdlAffectedRowAccessPolicyCount
-    , jDdlTargetTable
-    , jDdlTargetRowAccessPolicy
-    , jEstimatedBytesProcessed
-    , jModelTrainingCurrentIteration
-    , jSchema
-    , jTotalBytesProcessed
-    , jBillingTier
-    , jTotalBytesProcessedAccuracy
-    , jDmlStats
-    , jUndeclaredQueryParameters
-    , jReferencedTables
-    , jReferencedRoutines
-    , jStatementType
-    , jReservationUsage
-    , jNumDmlAffectedRows
-    , jTimeline
-    , jDdlDestinationTable
-    , jQueryPlan
-    , jCacheHit
-    , jTotalBytesBilled
-    , jDdlOperationPerformed
-    , jTotalPartitionsProcessed
+    -- ** Argument_Mode
+    Argument_Mode (..),
 
     -- ** ArimaCoefficients
-    , ArimaCoefficients
-    , arimaCoefficients
-    , acInterceptCoefficient
-    , acMovingAverageCoefficients
-    , acAutoRegressiveCoefficients
-
-    -- ** HivePartitioningOptions
-    , HivePartitioningOptions
-    , hivePartitioningOptions
-    , hpoMode
-    , hpoRequirePartitionFilter
-    , hpoSourceURIPrefix
-
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmLegacyLocationId
-
-    -- ** TableFieldSchemaCategories
-    , TableFieldSchemaCategories
-    , tableFieldSchemaCategories
-    , tfscNames
-
-    -- ** TrainingOptionsLossType
-    , TrainingOptionsLossType (..)
-
-    -- ** JobStatus
-    , JobStatus
-    , jobStatus
-    , jsState
-    , jsErrorResult
-    , jsErrors
-
-    -- ** TrainingOptionsLabelClassWeights
-    , TrainingOptionsLabelClassWeights
-    , trainingOptionsLabelClassWeights
-    , tolcwAddtional
-
-    -- ** TableLabels
-    , TableLabels
-    , tableLabels
-    , tlAddtional
-
-    -- ** DestinationTableProperties
-    , DestinationTableProperties
-    , destinationTableProperties
-    , dtpFriendlyName
-    , dtpLabels
-    , dtpDescription
-
-    -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
-
-    -- ** DataSetAccessItem
-    , DataSetAccessItem
-    , dataSetAccessItem
-    , dsaiDataSet
-    , dsaiGroupByEmail
-    , dsaiDomain
-    , dsaiSpecialGroup
-    , dsaiRole
-    , dsaiIAMMember
-    , dsaiView
-    , dsaiRoutine
-    , dsaiUserByEmail
-
-    -- ** TrainingOptionsDistanceType
-    , TrainingOptionsDistanceType (..)
-
-    -- ** BqmlTrainingRun
-    , BqmlTrainingRun
-    , bqmlTrainingRun
-    , btrState
-    , btrStartTime
-    , btrIterationResults
-    , btrTrainingOptions
-
-    -- ** StandardSQLTableType
-    , StandardSQLTableType
-    , standardSQLTableType
-    , ssqlttColumns
-
-    -- ** TableDataInsertAllResponse
-    , TableDataInsertAllResponse
-    , tableDataInsertAllResponse
-    , tKind
-    , tInsertErrors
-
-    -- ** QueryParameterType
-    , QueryParameterType
-    , queryParameterType
-    , qptStructTypes
-    , qptType
-    , qptArrayType
-
-    -- ** Table
-    , Table
-    , table
-    , tabMaterializedView
-    , tabCreationTime
-    , tabEtag
-    , tabNumBytes
-    , tabClustering
-    , tabExternalDataConfiguration
-    , tabRangePartitioning
-    , tabLocation
-    , tabTableReference
-    , tabFriendlyName
-    , tabKind
-    , tabLastModifiedTime
-    , tabSchema
-    , tabSnapshotDefinition
-    , tabStreamingBuffer
-    , tabSelfLink
-    , tabRequirePartitionFilter
-    , tabEncryptionConfiguration
-    , tabModel
-    , tabTimePartitioning
-    , tabNumRows
-    , tabNumPhysicalBytes
-    , tabView
-    , tabId
-    , tabLabels
-    , tabType
-    , tabNumLongTermBytes
-    , tabExpirationTime
-    , tabDescription
+    ArimaCoefficients (..),
+    newArimaCoefficients,
 
     -- ** ArimaFittingMetrics
-    , ArimaFittingMetrics
-    , arimaFittingMetrics
-    , afmLogLikelihood
-    , afmVariance
-    , afmAic
+    ArimaFittingMetrics (..),
+    newArimaFittingMetrics,
 
-    -- ** ParquetOptions
-    , ParquetOptions
-    , parquetOptions
-    , poEnableListInference
-    , poEnumAsString
+    -- ** ArimaForecastingMetrics
+    ArimaForecastingMetrics (..),
+    newArimaForecastingMetrics,
 
-    -- ** Routine
-    , Routine
-    , routine
-    , rCreationTime
-    , rEtag
-    , rDefinitionBody
-    , rRoutineReference
-    , rArguments
-    , rLastModifiedTime
-    , rRoutineType
-    , rDeterminismLevel
-    , rReturnTableType
-    , rLanguage
-    , rReturnType
-    , rImportedLibraries
-    , rDescription
+    -- ** ArimaForecastingMetrics_SeasonalPeriodsItem
+    ArimaForecastingMetrics_SeasonalPeriodsItem (..),
 
-    -- ** RowAccessPolicy
-    , RowAccessPolicy
-    , rowAccessPolicy
-    , rapCreationTime
-    , rapEtag
-    , rapRowAccessPolicyReference
-    , rapLastModifiedTime
-    , rapFilterPredicate
+    -- ** ArimaModelInfo
+    ArimaModelInfo (..),
+    newArimaModelInfo,
 
-    -- ** ErrorProto
-    , ErrorProto
-    , errorProto
-    , epDebugInfo
-    , epLocation
-    , epReason
-    , epMessage
+    -- ** ArimaModelInfo_SeasonalPeriodsItem
+    ArimaModelInfo_SeasonalPeriodsItem (..),
 
-    -- ** CSVOptions
-    , CSVOptions
-    , csvOptions
-    , coSkipLeadingRows
-    , coAllowJaggedRows
-    , coAllowQuotedNewlines
-    , coQuote
-    , coEncoding
-    , coFieldDelimiter
+    -- ** ArimaOrder
+    ArimaOrder (..),
+    newArimaOrder,
 
-    -- ** DestinationTablePropertiesLabels
-    , DestinationTablePropertiesLabels
-    , destinationTablePropertiesLabels
-    , dtplAddtional
+    -- ** ArimaResult
+    ArimaResult (..),
+    newArimaResult,
 
-    -- ** ListRowAccessPoliciesResponse
-    , ListRowAccessPoliciesResponse
-    , listRowAccessPoliciesResponse
-    , lraprNextPageToken
-    , lraprRowAccessPolicies
+    -- ** ArimaResult_SeasonalPeriodsItem
+    ArimaResult_SeasonalPeriodsItem (..),
 
-    -- ** JobStatistics3
-    , JobStatistics3
-    , jobStatistics3
-    , jsInputFiles
-    , jsOutputRows
-    , jsOutputBytes
-    , jsInputFileBytes
-    , jsBadRecords
+    -- ** ArimaSingleModelForecastingMetrics
+    ArimaSingleModelForecastingMetrics (..),
+    newArimaSingleModelForecastingMetrics,
 
-    -- ** ArimaForecastingMetricsSeasonalPeriodsItem
-    , ArimaForecastingMetricsSeasonalPeriodsItem (..)
+    -- ** ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
+    ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem (..),
 
-    -- ** QueryResponse
-    , QueryResponse
-    , queryResponse
-    , qJobReference
-    , qKind
-    , qSchema
-    , qTotalBytesProcessed
-    , qRows
-    , qDmlStats
-    , qPageToken
-    , qSessionInfoTemplate
-    , qNumDmlAffectedRows
-    , qTotalRows
-    , qErrors
-    , qJobComplete
-    , qCacheHit
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- ** DataSetListDataSetsItemLabels
-    , DataSetListDataSetsItemLabels
-    , dataSetListDataSetsItemLabels
-    , dsldsilAddtional
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** ConnectionProperty
-    , ConnectionProperty
-    , connectionProperty
-    , cpValue
-    , cpKey
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- ** TrainingRun
-    , TrainingRun
-    , trainingRun
-    , trResults
-    , trStartTime
-    , trTrainingOptions
-    , trDataSplitResult
-    , trEvaluationMetrics
+    -- ** AvroOptions
+    AvroOptions (..),
+    newAvroOptions,
+
+    -- ** BiEngineReason
+    BiEngineReason (..),
+    newBiEngineReason,
+
+    -- ** BiEngineStatistics
+    BiEngineStatistics (..),
+    newBiEngineStatistics,
+
+    -- ** BigQueryModelTraining
+    BigQueryModelTraining (..),
+    newBigQueryModelTraining,
+
+    -- ** BigtableColumn
+    BigtableColumn (..),
+    newBigtableColumn,
+
+    -- ** BigtableColumnFamily
+    BigtableColumnFamily (..),
+    newBigtableColumnFamily,
+
+    -- ** BigtableOptions
+    BigtableOptions (..),
+    newBigtableOptions,
+
+    -- ** BinaryClassificationMetrics
+    BinaryClassificationMetrics (..),
+    newBinaryClassificationMetrics,
+
+    -- ** BinaryConfusionMatrix
+    BinaryConfusionMatrix (..),
+    newBinaryConfusionMatrix,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
 
-    -- ** TableListTablesItemView
-    , TableListTablesItemView
-    , tableListTablesItemView
-    , tltivUseLegacySQL
+    -- ** BqmlIterationResult
+    BqmlIterationResult (..),
+    newBqmlIterationResult,
 
-    -- ** TableListTablesItemLabels
-    , TableListTablesItemLabels
-    , tableListTablesItemLabels
-    , tltilAddtional
+    -- ** BqmlTrainingRun
+    BqmlTrainingRun (..),
+    newBqmlTrainingRun,
+
+    -- ** BqmlTrainingRun_TrainingOptions
+    BqmlTrainingRun_TrainingOptions (..),
+    newBqmlTrainingRun_TrainingOptions,
+
+    -- ** CategoricalValue
+    CategoricalValue (..),
+    newCategoricalValue,
+
+    -- ** CategoryCount
+    CategoryCount (..),
+    newCategoryCount,
+
+    -- ** CloneDefinition
+    CloneDefinition (..),
+    newCloneDefinition,
+
+    -- ** Cluster
+    Cluster (..),
+    newCluster,
+
+    -- ** ClusterInfo
+    ClusterInfo (..),
+    newClusterInfo,
+
+    -- ** Clustering
+    Clustering (..),
+    newClustering,
+
+    -- ** ClusteringMetrics
+    ClusteringMetrics (..),
+    newClusteringMetrics,
 
     -- ** ConfusionMatrix
-    , ConfusionMatrix
-    , confusionMatrix
-    , cmConfidenceThreshold
-    , cmRows
-    ) where
+    ConfusionMatrix (..),
+    newConfusionMatrix,
 
-import Network.Google.Prelude
+    -- ** ConnectionProperty
+    ConnectionProperty (..),
+    newConnectionProperty,
+
+    -- ** CsvOptions
+    CsvOptions (..),
+    newCsvOptions,
+
+    -- ** DataSplitResult
+    DataSplitResult (..),
+    newDataSplitResult,
+
+    -- ** Dataset
+    Dataset (..),
+    newDataset,
+
+    -- ** Dataset_AccessItem
+    Dataset_AccessItem (..),
+    newDataset_AccessItem,
+
+    -- ** Dataset_Labels
+    Dataset_Labels (..),
+    newDataset_Labels,
+
+    -- ** Dataset_TagsItem
+    Dataset_TagsItem (..),
+    newDataset_TagsItem,
+
+    -- ** DatasetAccessEntry
+    DatasetAccessEntry (..),
+    newDatasetAccessEntry,
+
+    -- ** DatasetAccessEntry_TargetTypesItem
+    DatasetAccessEntry_TargetTypesItem (..),
+
+    -- ** DatasetList
+    DatasetList (..),
+    newDatasetList,
+
+    -- ** DatasetList_DatasetsItem
+    DatasetList_DatasetsItem (..),
+    newDatasetList_DatasetsItem,
+
+    -- ** DatasetList_DatasetsItem_Labels
+    DatasetList_DatasetsItem_Labels (..),
+    newDatasetList_DatasetsItem_Labels,
+
+    -- ** DatasetReference
+    DatasetReference (..),
+    newDatasetReference,
+
+    -- ** DestinationTableProperties
+    DestinationTableProperties (..),
+    newDestinationTableProperties,
+
+    -- ** DestinationTableProperties_Labels
+    DestinationTableProperties_Labels (..),
+    newDestinationTableProperties_Labels,
+
+    -- ** DimensionalityReductionMetrics
+    DimensionalityReductionMetrics (..),
+    newDimensionalityReductionMetrics,
+
+    -- ** DmlStatistics
+    DmlStatistics (..),
+    newDmlStatistics,
+
+    -- ** DoubleCandidates
+    DoubleCandidates (..),
+    newDoubleCandidates,
+
+    -- ** DoubleHparamSearchSpace
+    DoubleHparamSearchSpace (..),
+    newDoubleHparamSearchSpace,
+
+    -- ** DoubleRange
+    DoubleRange (..),
+    newDoubleRange,
+
+    -- ** EncryptionConfiguration
+    EncryptionConfiguration (..),
+    newEncryptionConfiguration,
+
+    -- ** Entry
+    Entry (..),
+    newEntry,
+
+    -- ** ErrorProto
+    ErrorProto (..),
+    newErrorProto,
+
+    -- ** EvaluationMetrics
+    EvaluationMetrics (..),
+    newEvaluationMetrics,
+
+    -- ** ExplainQueryStage
+    ExplainQueryStage (..),
+    newExplainQueryStage,
+
+    -- ** ExplainQueryStep
+    ExplainQueryStep (..),
+    newExplainQueryStep,
+
+    -- ** Explanation
+    Explanation (..),
+    newExplanation,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** ExternalDataConfiguration
+    ExternalDataConfiguration (..),
+    newExternalDataConfiguration,
+
+    -- ** FeatureValue
+    FeatureValue (..),
+    newFeatureValue,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
+
+    -- ** GetQueryResultsResponse
+    GetQueryResultsResponse (..),
+    newGetQueryResultsResponse,
+
+    -- ** GetServiceAccountResponse
+    GetServiceAccountResponse (..),
+    newGetServiceAccountResponse,
+
+    -- ** GlobalExplanation
+    GlobalExplanation (..),
+    newGlobalExplanation,
+
+    -- ** GoogleSheetsOptions
+    GoogleSheetsOptions (..),
+    newGoogleSheetsOptions,
+
+    -- ** HivePartitioningOptions
+    HivePartitioningOptions (..),
+    newHivePartitioningOptions,
+
+    -- ** HparamSearchSpaces
+    HparamSearchSpaces (..),
+    newHparamSearchSpaces,
+
+    -- ** HparamTuningTrial
+    HparamTuningTrial (..),
+    newHparamTuningTrial,
+
+    -- ** HparamTuningTrial_Status
+    HparamTuningTrial_Status (..),
+
+    -- ** IntArray
+    IntArray (..),
+    newIntArray,
+
+    -- ** IntArrayHparamSearchSpace
+    IntArrayHparamSearchSpace (..),
+    newIntArrayHparamSearchSpace,
+
+    -- ** IntCandidates
+    IntCandidates (..),
+    newIntCandidates,
+
+    -- ** IntHparamSearchSpace
+    IntHparamSearchSpace (..),
+    newIntHparamSearchSpace,
+
+    -- ** IntRange
+    IntRange (..),
+    newIntRange,
+
+    -- ** IterationResult
+    IterationResult (..),
+    newIterationResult,
+
+    -- ** Job
+    Job (..),
+    newJob,
+
+    -- ** JobCancelResponse
+    JobCancelResponse (..),
+    newJobCancelResponse,
+
+    -- ** JobConfiguration
+    JobConfiguration (..),
+    newJobConfiguration,
+
+    -- ** JobConfiguration_Labels
+    JobConfiguration_Labels (..),
+    newJobConfiguration_Labels,
+
+    -- ** JobConfigurationExtract
+    JobConfigurationExtract (..),
+    newJobConfigurationExtract,
+
+    -- ** JobConfigurationLoad
+    JobConfigurationLoad (..),
+    newJobConfigurationLoad,
+
+    -- ** JobConfigurationQuery
+    JobConfigurationQuery (..),
+    newJobConfigurationQuery,
+
+    -- ** JobConfigurationQuery_TableDefinitions
+    JobConfigurationQuery_TableDefinitions (..),
+    newJobConfigurationQuery_TableDefinitions,
+
+    -- ** JobConfigurationTableCopy
+    JobConfigurationTableCopy (..),
+    newJobConfigurationTableCopy,
+
+    -- ** JobList
+    JobList (..),
+    newJobList,
+
+    -- ** JobList_JobsItem
+    JobList_JobsItem (..),
+    newJobList_JobsItem,
+
+    -- ** JobReference
+    JobReference (..),
+    newJobReference,
+
+    -- ** JobStatistics
+    JobStatistics (..),
+    newJobStatistics,
+
+    -- ** JobStatistics_ReservationUsageItem
+    JobStatistics_ReservationUsageItem (..),
+    newJobStatistics_ReservationUsageItem,
+
+    -- ** JobStatistics2
+    JobStatistics2 (..),
+    newJobStatistics2,
+
+    -- ** JobStatistics2_ReservationUsageItem
+    JobStatistics2_ReservationUsageItem (..),
+    newJobStatistics2_ReservationUsageItem,
+
+    -- ** JobStatistics3
+    JobStatistics3 (..),
+    newJobStatistics3,
+
+    -- ** JobStatistics4
+    JobStatistics4 (..),
+    newJobStatistics4,
+
+    -- ** JobStatus
+    JobStatus (..),
+    newJobStatus,
+
+    -- ** JsonObject
+    JsonObject (..),
+    newJsonObject,
+
+    -- ** ListModelsResponse
+    ListModelsResponse (..),
+    newListModelsResponse,
+
+    -- ** ListRoutinesResponse
+    ListRoutinesResponse (..),
+    newListRoutinesResponse,
+
+    -- ** ListRowAccessPoliciesResponse
+    ListRowAccessPoliciesResponse (..),
+    newListRowAccessPoliciesResponse,
+
+    -- ** LocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
+
+    -- ** MaterializedViewDefinition
+    MaterializedViewDefinition (..),
+    newMaterializedViewDefinition,
+
+    -- ** MlStatistics
+    MlStatistics (..),
+    newMlStatistics,
+
+    -- ** Model
+    Model (..),
+    newModel,
+
+    -- ** Model_Labels
+    Model_Labels (..),
+    newModel_Labels,
+
+    -- ** Model_ModelType
+    Model_ModelType (..),
+
+    -- ** ModelDefinition
+    ModelDefinition (..),
+    newModelDefinition,
+
+    -- ** ModelDefinition_ModelOptions
+    ModelDefinition_ModelOptions (..),
+    newModelDefinition_ModelOptions,
+
+    -- ** ModelReference
+    ModelReference (..),
+    newModelReference,
+
+    -- ** MultiClassClassificationMetrics
+    MultiClassClassificationMetrics (..),
+    newMultiClassClassificationMetrics,
+
+    -- ** ParquetOptions
+    ParquetOptions (..),
+    newParquetOptions,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PrincipalComponentInfo
+    PrincipalComponentInfo (..),
+    newPrincipalComponentInfo,
+
+    -- ** ProjectList
+    ProjectList (..),
+    newProjectList,
+
+    -- ** ProjectList_ProjectsItem
+    ProjectList_ProjectsItem (..),
+    newProjectList_ProjectsItem,
+
+    -- ** ProjectReference
+    ProjectReference (..),
+    newProjectReference,
+
+    -- ** QueryParameter
+    QueryParameter (..),
+    newQueryParameter,
+
+    -- ** QueryParameterType
+    QueryParameterType (..),
+    newQueryParameterType,
+
+    -- ** QueryParameterType_StructTypesItem
+    QueryParameterType_StructTypesItem (..),
+    newQueryParameterType_StructTypesItem,
+
+    -- ** QueryParameterValue
+    QueryParameterValue (..),
+    newQueryParameterValue,
+
+    -- ** QueryParameterValue_StructValues
+    QueryParameterValue_StructValues (..),
+    newQueryParameterValue_StructValues,
+
+    -- ** QueryRequest
+    QueryRequest (..),
+    newQueryRequest,
+
+    -- ** QueryRequest_Labels
+    QueryRequest_Labels (..),
+    newQueryRequest_Labels,
+
+    -- ** QueryResponse
+    QueryResponse (..),
+    newQueryResponse,
+
+    -- ** QueryTimelineSample
+    QueryTimelineSample (..),
+    newQueryTimelineSample,
+
+    -- ** RangePartitioning
+    RangePartitioning (..),
+    newRangePartitioning,
+
+    -- ** RangePartitioning_Range
+    RangePartitioning_Range (..),
+    newRangePartitioning_Range,
+
+    -- ** RankingMetrics
+    RankingMetrics (..),
+    newRankingMetrics,
+
+    -- ** RegressionMetrics
+    RegressionMetrics (..),
+    newRegressionMetrics,
+
+    -- ** Routine
+    Routine (..),
+    newRoutine,
+
+    -- ** Routine_DeterminismLevel
+    Routine_DeterminismLevel (..),
+
+    -- ** Routine_Language
+    Routine_Language (..),
+
+    -- ** Routine_RoutineType
+    Routine_RoutineType (..),
+
+    -- ** RoutineReference
+    RoutineReference (..),
+    newRoutineReference,
+
+    -- ** Row
+    Row (..),
+    newRow,
+
+    -- ** RowAccessPolicy
+    RowAccessPolicy (..),
+    newRowAccessPolicy,
+
+    -- ** RowAccessPolicyReference
+    RowAccessPolicyReference (..),
+    newRowAccessPolicyReference,
+
+    -- ** RowLevelSecurityStatistics
+    RowLevelSecurityStatistics (..),
+    newRowLevelSecurityStatistics,
+
+    -- ** ScriptStackFrame
+    ScriptStackFrame (..),
+    newScriptStackFrame,
+
+    -- ** ScriptStatistics
+    ScriptStatistics (..),
+    newScriptStatistics,
+
+    -- ** SessionInfo
+    SessionInfo (..),
+    newSessionInfo,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** SnapshotDefinition
+    SnapshotDefinition (..),
+    newSnapshotDefinition,
+
+    -- ** StandardSqlDataType
+    StandardSqlDataType (..),
+    newStandardSqlDataType,
+
+    -- ** StandardSqlDataType_TypeKind
+    StandardSqlDataType_TypeKind (..),
+
+    -- ** StandardSqlField
+    StandardSqlField (..),
+    newStandardSqlField,
+
+    -- ** StandardSqlStructType
+    StandardSqlStructType (..),
+    newStandardSqlStructType,
+
+    -- ** StandardSqlTableType
+    StandardSqlTableType (..),
+    newStandardSqlTableType,
+
+    -- ** Streamingbuffer
+    Streamingbuffer (..),
+    newStreamingbuffer,
+
+    -- ** StringHparamSearchSpace
+    StringHparamSearchSpace (..),
+    newStringHparamSearchSpace,
+
+    -- ** Table
+    Table (..),
+    newTable,
+
+    -- ** Table_Labels
+    Table_Labels (..),
+    newTable_Labels,
+
+    -- ** TableCell
+    TableCell (..),
+    newTableCell,
+
+    -- ** TableDataInsertAllRequest
+    TableDataInsertAllRequest (..),
+    newTableDataInsertAllRequest,
+
+    -- ** TableDataInsertAllRequest_RowsItem
+    TableDataInsertAllRequest_RowsItem (..),
+    newTableDataInsertAllRequest_RowsItem,
+
+    -- ** TableDataInsertAllResponse
+    TableDataInsertAllResponse (..),
+    newTableDataInsertAllResponse,
+
+    -- ** TableDataInsertAllResponse_InsertErrorsItem
+    TableDataInsertAllResponse_InsertErrorsItem (..),
+    newTableDataInsertAllResponse_InsertErrorsItem,
+
+    -- ** TableDataList
+    TableDataList (..),
+    newTableDataList,
+
+    -- ** TableFieldSchema
+    TableFieldSchema (..),
+    newTableFieldSchema,
+
+    -- ** TableFieldSchema_Categories
+    TableFieldSchema_Categories (..),
+    newTableFieldSchema_Categories,
+
+    -- ** TableFieldSchema_PolicyTags
+    TableFieldSchema_PolicyTags (..),
+    newTableFieldSchema_PolicyTags,
+
+    -- ** TableList
+    TableList (..),
+    newTableList,
+
+    -- ** TableList_TablesItem
+    TableList_TablesItem (..),
+    newTableList_TablesItem,
+
+    -- ** TableList_TablesItem_Labels
+    TableList_TablesItem_Labels (..),
+    newTableList_TablesItem_Labels,
+
+    -- ** TableList_TablesItem_View
+    TableList_TablesItem_View (..),
+    newTableList_TablesItem_View,
+
+    -- ** TableReference
+    TableReference (..),
+    newTableReference,
+
+    -- ** TableRow
+    TableRow (..),
+    newTableRow,
+
+    -- ** TableSchema
+    TableSchema (..),
+    newTableSchema,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** TimePartitioning
+    TimePartitioning (..),
+    newTimePartitioning,
+
+    -- ** TrainingOptions
+    TrainingOptions (..),
+    newTrainingOptions,
+
+    -- ** TrainingOptions_BoosterType
+    TrainingOptions_BoosterType (..),
+
+    -- ** TrainingOptions_DartNormalizeType
+    TrainingOptions_DartNormalizeType (..),
+
+    -- ** TrainingOptions_DataFrequency
+    TrainingOptions_DataFrequency (..),
+
+    -- ** TrainingOptions_DataSplitMethod
+    TrainingOptions_DataSplitMethod (..),
+
+    -- ** TrainingOptions_DistanceType
+    TrainingOptions_DistanceType (..),
+
+    -- ** TrainingOptions_FeedbackType
+    TrainingOptions_FeedbackType (..),
+
+    -- ** TrainingOptions_HolidayRegion
+    TrainingOptions_HolidayRegion (..),
+
+    -- ** TrainingOptions_HparamTuningObjectivesItem
+    TrainingOptions_HparamTuningObjectivesItem (..),
+
+    -- ** TrainingOptions_KmeansInitializationMethod
+    TrainingOptions_KmeansInitializationMethod (..),
+
+    -- ** TrainingOptions_LabelClassWeights
+    TrainingOptions_LabelClassWeights (..),
+    newTrainingOptions_LabelClassWeights,
+
+    -- ** TrainingOptions_LearnRateStrategy
+    TrainingOptions_LearnRateStrategy (..),
+
+    -- ** TrainingOptions_LossType
+    TrainingOptions_LossType (..),
+
+    -- ** TrainingOptions_OptimizationStrategy
+    TrainingOptions_OptimizationStrategy (..),
+
+    -- ** TrainingOptions_TreeMethod
+    TrainingOptions_TreeMethod (..),
+
+    -- ** TrainingRun
+    TrainingRun (..),
+    newTrainingRun,
+
+    -- ** TransactionInfo
+    TransactionInfo (..),
+    newTransactionInfo,
+
+    -- ** UserDefinedFunctionResource
+    UserDefinedFunctionResource (..),
+    newUserDefinedFunctionResource,
+
+    -- ** ViewDefinition
+    ViewDefinition (..),
+    newViewDefinition,
+
+    -- ** JobsListProjection
+    JobsListProjection (..),
+
+    -- ** JobsListStateFilter
+    JobsListStateFilter (..),
+  )
+where
+
+import Network.Google.BigQuery.Datasets.Delete
+import Network.Google.BigQuery.Datasets.Get
+import Network.Google.BigQuery.Datasets.Insert
+import Network.Google.BigQuery.Datasets.List
+import Network.Google.BigQuery.Datasets.Patch
+import Network.Google.BigQuery.Datasets.Update
+import Network.Google.BigQuery.Jobs.Cancel
+import Network.Google.BigQuery.Jobs.Delete
+import Network.Google.BigQuery.Jobs.Get
+import Network.Google.BigQuery.Jobs.GetQueryResults
+import Network.Google.BigQuery.Jobs.Insert
+import Network.Google.BigQuery.Jobs.List
+import Network.Google.BigQuery.Jobs.Query
+import Network.Google.BigQuery.Models.Delete
+import Network.Google.BigQuery.Models.Get
+import Network.Google.BigQuery.Models.List
+import Network.Google.BigQuery.Models.Patch
+import Network.Google.BigQuery.Projects.GetServiceAccount
+import Network.Google.BigQuery.Projects.List
+import Network.Google.BigQuery.Routines.Delete
+import Network.Google.BigQuery.Routines.Get
+import Network.Google.BigQuery.Routines.Insert
+import Network.Google.BigQuery.Routines.List
+import Network.Google.BigQuery.Routines.Update
+import Network.Google.BigQuery.RowAccessPolicies.GetIamPolicy
+import Network.Google.BigQuery.RowAccessPolicies.List
+import Network.Google.BigQuery.RowAccessPolicies.SetIamPolicy
+import Network.Google.BigQuery.RowAccessPolicies.TestIamPermissions
+import Network.Google.BigQuery.Tabledata.InsertAll
+import Network.Google.BigQuery.Tabledata.List
+import Network.Google.BigQuery.Tables.Delete
+import Network.Google.BigQuery.Tables.Get
+import Network.Google.BigQuery.Tables.GetIamPolicy
+import Network.Google.BigQuery.Tables.Insert
+import Network.Google.BigQuery.Tables.List
+import Network.Google.BigQuery.Tables.Patch
+import Network.Google.BigQuery.Tables.SetIamPolicy
+import Network.Google.BigQuery.Tables.TestIamPermissions
+import Network.Google.BigQuery.Tables.Update
 import Network.Google.BigQuery.Types
-import Network.Google.Resource.BigQuery.DataSets.Delete
-import Network.Google.Resource.BigQuery.DataSets.Get
-import Network.Google.Resource.BigQuery.DataSets.Insert
-import Network.Google.Resource.BigQuery.DataSets.List
-import Network.Google.Resource.BigQuery.DataSets.Patch
-import Network.Google.Resource.BigQuery.DataSets.Update
-import Network.Google.Resource.BigQuery.Jobs.Cancel
-import Network.Google.Resource.BigQuery.Jobs.Delete
-import Network.Google.Resource.BigQuery.Jobs.Get
-import Network.Google.Resource.BigQuery.Jobs.GetQueryResults
-import Network.Google.Resource.BigQuery.Jobs.Insert
-import Network.Google.Resource.BigQuery.Jobs.List
-import Network.Google.Resource.BigQuery.Jobs.Query
-import Network.Google.Resource.BigQuery.Models.Delete
-import Network.Google.Resource.BigQuery.Models.Get
-import Network.Google.Resource.BigQuery.Models.List
-import Network.Google.Resource.BigQuery.Models.Patch
-import Network.Google.Resource.BigQuery.Projects.GetServiceAccount
-import Network.Google.Resource.BigQuery.Projects.List
-import Network.Google.Resource.BigQuery.Routines.Delete
-import Network.Google.Resource.BigQuery.Routines.Get
-import Network.Google.Resource.BigQuery.Routines.Insert
-import Network.Google.Resource.BigQuery.Routines.List
-import Network.Google.Resource.BigQuery.Routines.Update
-import Network.Google.Resource.BigQuery.RowAccessPolicies.GetIAMPolicy
-import Network.Google.Resource.BigQuery.RowAccessPolicies.List
-import Network.Google.Resource.BigQuery.RowAccessPolicies.SetIAMPolicy
-import Network.Google.Resource.BigQuery.RowAccessPolicies.TestIAMPermissions
-import Network.Google.Resource.BigQuery.TableData.InsertAll
-import Network.Google.Resource.BigQuery.TableData.List
-import Network.Google.Resource.BigQuery.Tables.Delete
-import Network.Google.Resource.BigQuery.Tables.Get
-import Network.Google.Resource.BigQuery.Tables.GetIAMPolicy
-import Network.Google.Resource.BigQuery.Tables.Insert
-import Network.Google.Resource.BigQuery.Tables.List
-import Network.Google.Resource.BigQuery.Tables.Patch
-import Network.Google.Resource.BigQuery.Tables.SetIAMPolicy
-import Network.Google.Resource.BigQuery.Tables.TestIAMPermissions
-import Network.Google.Resource.BigQuery.Tables.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the BigQuery API service.
-type BigQueryAPI =
-     ModelsListResource :<|> ModelsPatchResource :<|>
-       ModelsGetResource
-       :<|> ModelsDeleteResource
-       :<|> JobsInsertResource
-       :<|> JobsListResource
-       :<|> JobsGetResource
-       :<|> JobsQueryResource
-       :<|> JobsCancelResource
-       :<|> JobsGetQueryResultsResource
-       :<|> JobsDeleteResource
-       :<|> TablesInsertResource
-       :<|> TablesListResource
-       :<|> TablesGetIAMPolicyResource
-       :<|> TablesPatchResource
-       :<|> TablesGetResource
-       :<|> TablesSetIAMPolicyResource
-       :<|> TablesTestIAMPermissionsResource
-       :<|> TablesDeleteResource
-       :<|> TablesUpdateResource
-       :<|> RoutinesInsertResource
-       :<|> RoutinesListResource
-       :<|> RoutinesGetResource
-       :<|> RoutinesDeleteResource
-       :<|> RoutinesUpdateResource
-       :<|> RowAccessPoliciesListResource
-       :<|> RowAccessPoliciesGetIAMPolicyResource
-       :<|> RowAccessPoliciesSetIAMPolicyResource
-       :<|> RowAccessPoliciesTestIAMPermissionsResource
-       :<|> TableDataListResource
-       :<|> TableDataInsertAllResource
-       :<|> ProjectsGetServiceAccountResource
-       :<|> ProjectsListResource
-       :<|> DataSetsInsertResource
-       :<|> DataSetsListResource
-       :<|> DataSetsPatchResource
-       :<|> DataSetsGetResource
-       :<|> DataSetsDeleteResource
-       :<|> DataSetsUpdateResource
