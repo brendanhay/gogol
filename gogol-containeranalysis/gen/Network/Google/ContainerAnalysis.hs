@@ -1,885 +1,853 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ContainerAnalysis
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An implementation of the Grafeas API, which stores, and enables querying
--- and retrieval of critical metadata about all of your software artifacts.
+-- An implementation of the Grafeas API, which stores, and enables querying and retrieval of critical metadata about all of your software artifacts.
 --
 -- /See:/ <https://cloud.google.com/container-analysis/api/reference/rest/ Container Analysis API Reference>
 module Network.Google.ContainerAnalysis
-    (
-    -- * Service Configuration
-      containerAnalysisService
+  ( -- * Configuration
+    containerAnalysisService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , ContainerAnalysisAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** containeranalysis.projects.notes.batchCreate
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.BatchCreate
+    ContainerAnalysisProjectsNotesBatchCreateResource,
+    newContainerAnalysisProjectsNotesBatchCreate,
+    ContainerAnalysisProjectsNotesBatchCreate,
 
     -- ** containeranalysis.projects.notes.create
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Create
+    ContainerAnalysisProjectsNotesCreateResource,
+    newContainerAnalysisProjectsNotesCreate,
+    ContainerAnalysisProjectsNotesCreate,
 
     -- ** containeranalysis.projects.notes.delete
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Delete
+    ContainerAnalysisProjectsNotesDeleteResource,
+    newContainerAnalysisProjectsNotesDelete,
+    ContainerAnalysisProjectsNotesDelete,
 
     -- ** containeranalysis.projects.notes.get
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Get
+    ContainerAnalysisProjectsNotesGetResource,
+    newContainerAnalysisProjectsNotesGet,
+    ContainerAnalysisProjectsNotesGet,
 
     -- ** containeranalysis.projects.notes.getIamPolicy
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.GetIAMPolicy
+    ContainerAnalysisProjectsNotesGetIamPolicyResource,
+    newContainerAnalysisProjectsNotesGetIamPolicy,
+    ContainerAnalysisProjectsNotesGetIamPolicy,
 
     -- ** containeranalysis.projects.notes.list
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.List
+    ContainerAnalysisProjectsNotesListResource,
+    newContainerAnalysisProjectsNotesList,
+    ContainerAnalysisProjectsNotesList,
 
     -- ** containeranalysis.projects.notes.occurrences.list
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Occurrences.List
+    ContainerAnalysisProjectsNotesOccurrencesListResource,
+    newContainerAnalysisProjectsNotesOccurrencesList,
+    ContainerAnalysisProjectsNotesOccurrencesList,
 
     -- ** containeranalysis.projects.notes.patch
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Patch
+    ContainerAnalysisProjectsNotesPatchResource,
+    newContainerAnalysisProjectsNotesPatch,
+    ContainerAnalysisProjectsNotesPatch,
 
     -- ** containeranalysis.projects.notes.setIamPolicy
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.SetIAMPolicy
+    ContainerAnalysisProjectsNotesSetIamPolicyResource,
+    newContainerAnalysisProjectsNotesSetIamPolicy,
+    ContainerAnalysisProjectsNotesSetIamPolicy,
 
     -- ** containeranalysis.projects.notes.testIamPermissions
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Notes.TestIAMPermissions
+    ContainerAnalysisProjectsNotesTestIamPermissionsResource,
+    newContainerAnalysisProjectsNotesTestIamPermissions,
+    ContainerAnalysisProjectsNotesTestIamPermissions,
 
     -- ** containeranalysis.projects.occurrences.batchCreate
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.BatchCreate
+    ContainerAnalysisProjectsOccurrencesBatchCreateResource,
+    newContainerAnalysisProjectsOccurrencesBatchCreate,
+    ContainerAnalysisProjectsOccurrencesBatchCreate,
 
     -- ** containeranalysis.projects.occurrences.create
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Create
+    ContainerAnalysisProjectsOccurrencesCreateResource,
+    newContainerAnalysisProjectsOccurrencesCreate,
+    ContainerAnalysisProjectsOccurrencesCreate,
 
     -- ** containeranalysis.projects.occurrences.delete
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Delete
+    ContainerAnalysisProjectsOccurrencesDeleteResource,
+    newContainerAnalysisProjectsOccurrencesDelete,
+    ContainerAnalysisProjectsOccurrencesDelete,
 
     -- ** containeranalysis.projects.occurrences.get
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Get
+    ContainerAnalysisProjectsOccurrencesGetResource,
+    newContainerAnalysisProjectsOccurrencesGet,
+    ContainerAnalysisProjectsOccurrencesGet,
 
     -- ** containeranalysis.projects.occurrences.getIamPolicy
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetIAMPolicy
+    ContainerAnalysisProjectsOccurrencesGetIamPolicyResource,
+    newContainerAnalysisProjectsOccurrencesGetIamPolicy,
+    ContainerAnalysisProjectsOccurrencesGetIamPolicy,
 
     -- ** containeranalysis.projects.occurrences.getNotes
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetNotes
+    ContainerAnalysisProjectsOccurrencesGetNotesResource,
+    newContainerAnalysisProjectsOccurrencesGetNotes,
+    ContainerAnalysisProjectsOccurrencesGetNotes,
 
     -- ** containeranalysis.projects.occurrences.getVulnerabilitySummary
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
+    ContainerAnalysisProjectsOccurrencesGetVulnerabilitySummaryResource,
+    newContainerAnalysisProjectsOccurrencesGetVulnerabilitySummary,
+    ContainerAnalysisProjectsOccurrencesGetVulnerabilitySummary,
 
     -- ** containeranalysis.projects.occurrences.list
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.List
+    ContainerAnalysisProjectsOccurrencesListResource,
+    newContainerAnalysisProjectsOccurrencesList,
+    ContainerAnalysisProjectsOccurrencesList,
 
     -- ** containeranalysis.projects.occurrences.patch
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Patch
+    ContainerAnalysisProjectsOccurrencesPatchResource,
+    newContainerAnalysisProjectsOccurrencesPatch,
+    ContainerAnalysisProjectsOccurrencesPatch,
 
     -- ** containeranalysis.projects.occurrences.setIamPolicy
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.SetIAMPolicy
+    ContainerAnalysisProjectsOccurrencesSetIamPolicyResource,
+    newContainerAnalysisProjectsOccurrencesSetIamPolicy,
+    ContainerAnalysisProjectsOccurrencesSetIamPolicy,
 
     -- ** containeranalysis.projects.occurrences.testIamPermissions
-    , module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.TestIAMPermissions
-
-    -- ** containeranalysis.projects.scanConfigs.get
-    , module Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.Get
-
-    -- ** containeranalysis.projects.scanConfigs.list
-    , module Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.List
-
-    -- ** containeranalysis.projects.scanConfigs.update
-    , module Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.Update
+    ContainerAnalysisProjectsOccurrencesTestIamPermissionsResource,
+    newContainerAnalysisProjectsOccurrencesTestIamPermissions,
+    ContainerAnalysisProjectsOccurrencesTestIamPermissions,
 
     -- * Types
 
-    -- ** SigningKey
-    , SigningKey
-    , signingKey
-    , skKeyType
-    , skKeyId
-    , skKeyScheme
-    , skPublicKeyValue
-
-    -- ** LayerDirective
-    , LayerDirective (..)
-
-    -- ** CVSSv3AttackComplexity
-    , CVSSv3AttackComplexity (..)
-
-    -- ** DiscoveredAnalysisStatus
-    , DiscoveredAnalysisStatus (..)
-
-    -- ** Installation
-    , Installation
-    , installation
-    , iLocation
-    , iName
-
-    -- ** Signature
-    , Signature
-    , signature
-    , sSignature
-    , sPublicKeyId
-
-    -- ** Vulnerability
-    , Vulnerability
-    , vulnerability
-    , vCvssScore
-    , vCvssV3
-    , vSeverity
-    , vSourceUpdateTime
-    , vDetails
-    , vWindowsDetails
-
-    -- ** GrafeasV1beta1VulnerabilityDetailsSeverity
-    , GrafeasV1beta1VulnerabilityDetailsSeverity (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** VulnerabilityOccurrencesSummary
-    , VulnerabilityOccurrencesSummary
-    , vulnerabilityOccurrencesSummary
-    , vosCounts
-
-    -- ** OccurrenceKind
-    , OccurrenceKind (..)
-
-    -- ** BuildProvenance
-    , BuildProvenance
-    , buildProvenance
-    , bpCreator
-    , bpSourceProvenance
-    , bpCommands
-    , bpTriggerId
-    , bpStartTime
-    , bpBuilderVersion
-    , bpEndTime
-    , bpId
-    , bpProjectId
-    , bpBuiltArtifacts
-    , bpBuildOptions
-    , bpCreateTime
-    , bpLogsURI
-
-    -- ** Occurrence
-    , Occurrence
-    , occurrence
-    , oInstallation
-    , oVulnerability
-    , oDerivedImage
-    , oKind
-    , oBuild
-    , oAttestation
-    , oUpdateTime
-    , oName
-    , oNoteName
-    , oRemediation
-    , oIntoto
-    , oResource
-    , oDiscovered
-    , oCreateTime
-    , oDeployment
-
-    -- ** GrafeasV1beta1VulnerabilityDetails
-    , GrafeasV1beta1VulnerabilityDetails
-    , grafeasV1beta1VulnerabilityDetails
-    , gvvdLongDescription
-    , gvvdRelatedURLs
-    , gvvdCvssScore
-    , gvvdPackageIssue
-    , gvvdSeverity
-    , gvvdEffectiveSeverity
-    , gvvdShortDescription
-    , gvvdType
-
-    -- ** VulnerabilitySeverity
-    , VulnerabilitySeverity (..)
-
-    -- ** SourceFileHashes
-    , SourceFileHashes
-    , sourceFileHashes
-    , sfhAddtional
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** Command
-    , Command
-    , command
-    , cDir
-    , cArgs
-    , cEnv
-    , cWaitFor
-    , cName
-    , cId
-
-    -- ** KnowledgeBase
-    , KnowledgeBase
-    , knowledgeBase
-    , kbURL
-    , kbName
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** Discovery
-    , Discovery
-    , discovery
-    , dAnalysisKind
-
-    -- ** Hash
-    , Hash
-    , hash
-    , hValue
-    , hType
-
-    -- ** Basis
-    , Basis
-    , basis
-    , bFingerprint
-    , bResourceURL
-
-    -- ** GrafeasV1beta1IntotoSignature
-    , GrafeasV1beta1IntotoSignature
-    , grafeasV1beta1IntotoSignature
-    , gvisKeyid
-    , gvisSig
-
-    -- ** BatchCreateNotesRequest
-    , BatchCreateNotesRequest
-    , batchCreateNotesRequest
-    , bcnrNotes
-
-    -- ** ArtifactHashes
-    , ArtifactHashes
-    , artifactHashes
-    , ahSha256
-
-    -- ** SourceContext
-    , SourceContext
-    , sourceContext
-    , scCloudRepo
-    , scGerrit
-    , scGit
-    , scLabels
-
-    -- ** Distribution
-    , Distribution
-    , distribution
-    , dURL
-    , dMaintainer
-    , dArchitecture
-    , dCpeURI
-    , dDescription
-    , dLatestVersion
-
-    -- ** BatchCreateOccurrencesRequest
-    , BatchCreateOccurrencesRequest
-    , batchCreateOccurrencesRequest
-    , bcorOccurrences
-
-    -- ** ListOccurrencesResponse
-    , ListOccurrencesResponse
-    , listOccurrencesResponse
-    , lorOccurrences
-    , lorNextPageToken
-
-    -- ** CVSSv3IntegrityImpact
-    , CVSSv3IntegrityImpact (..)
-
-    -- ** Location
-    , Location
-    , location
-    , lPath
-    , lVersion
-    , lCpeURI
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** GerritSourceContext
-    , GerritSourceContext
-    , gerritSourceContext
-    , gscGerritProject
-    , gscRevisionId
-    , gscHostURI
-    , gscAliasContext
-
-    -- ** RepoId
-    , RepoId
-    , repoId
-    , riUid
-    , riProjectRepoId
-
-    -- ** DiscoveredContinuousAnalysis
-    , DiscoveredContinuousAnalysis (..)
-
-    -- ** Environment
-    , Environment
-    , environment
-    , eCustomValues
-
-    -- ** CVSSv3PrivilegesRequired
-    , CVSSv3PrivilegesRequired (..)
-
-    -- ** ListNoteOccurrencesResponse
-    , ListNoteOccurrencesResponse
-    , listNoteOccurrencesResponse
-    , lnorOccurrences
-    , lnorNextPageToken
-
-    -- ** NoteKind
-    , NoteKind (..)
-
-    -- ** Note
-    , Note
-    , note
-    , nVulnerability
-    , nLongDescription
-    , nAttestationAuthority
-    , nDiscovery
-    , nKind
-    , nRelatedNoteNames
-    , nBuild
-    , nDeployable
-    , nRelatedURL
-    , nUpdateTime
-    , nShortDescription
-    , nName
-    , nIntoto
-    , nBaseImage
-    , nPackage
-    , nExpirationTime
-    , nCreateTime
-
-    -- ** CVSSv3
-    , CVSSv3
-    , cVSSv3
-    , cvssAttackComplexity
-    , cvssIntegrityImpact
-    , cvssPrivilegesRequired
-    , cvssUserInteraction
-    , cvssAttackVector
-    , cvssConfidentialityImpact
-    , cvssScope
-    , cvssImpactScore
-    , cvssBaseScore
-    , cvssAvailabilityImpact
-    , cvssExploitabilityScore
-
-    -- ** Link
-    , Link
-    , link
-    , lCommand
-    , lEnvironment
-    , lMaterials
-    , lProducts
-    , lByProducts
-
-    -- ** BatchCreateNotesResponse
-    , BatchCreateNotesResponse
-    , batchCreateNotesResponse
-    , bNotes
-
-    -- ** ProjectRepoId
-    , ProjectRepoId
-    , projectRepoId
-    , priRepoName
-    , priProjectId
-
-    -- ** Fingerprint
-    , Fingerprint
-    , fingerprint
-    , fV2Name
-    , fV2Blob
-    , fV1Name
-
-    -- ** ArtifactRule
-    , ArtifactRule
-    , artifactRule
-    , arArtifactRule
-
-    -- ** CVSSv3UserInteraction
-    , CVSSv3UserInteraction (..)
-
-    -- ** Hint
-    , Hint
-    , hint
-    , hHumanReadableName
-
-    -- ** PackageIssue
-    , PackageIssue
-    , packageIssue
-    , piAffectedLocation
-    , piFixedLocation
-    , piSeverityName
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** Build
-    , Build
-    , build
-    , bSignature
-    , bBuilderVersion
-
-    -- ** Attestation
-    , Attestation
-    , attestation
-    , aGenericSignedAttestation
-    , aPgpSignedAttestation
-
-    -- ** DeploymentPlatform
-    , DeploymentPlatform (..)
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** Artifact
-    , Artifact
-    , artifact
-    , aChecksum
-    , aNames
-    , aId
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
-
-    -- ** GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity
-    , GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity (..)
-
-    -- ** BuildProvenanceBuildOptions
-    , BuildProvenanceBuildOptions
-    , buildProvenanceBuildOptions
-    , bpboAddtional
-
-    -- ** Deployable
-    , Deployable
-    , deployable
-    , dResourceURI
-
-    -- ** GrafeasV1beta1DiscoveryDetails
-    , GrafeasV1beta1DiscoveryDetails
-    , grafeasV1beta1DiscoveryDetails
-    , gvddDiscovered
-
-    -- ** VulnerabilityLocation
-    , VulnerabilityLocation
-    , vulnerabilityLocation
-    , vlVersion
-    , vlPackage
-    , vlCpeURI
-
-    -- ** CVSSv3AttackVector
-    , CVSSv3AttackVector (..)
-
-    -- ** GenericSignedAttestationContentType
-    , GenericSignedAttestationContentType (..)
-
-    -- ** CVSSv3ConfidentialityImpact
-    , CVSSv3ConfidentialityImpact (..)
-
-    -- ** FixableTotalByDigest
-    , FixableTotalByDigest
-    , fixableTotalByDigest
-    , ftbdSeverity
-    , ftbdFixableCount
-    , ftbdResource
-    , ftbdTotalCount
-
-    -- ** RelatedURL
-    , RelatedURL
-    , relatedURL
-    , ruURL
-    , ruLabel
-
-    -- ** GrafeasV1beta1IntotoDetails
-    , GrafeasV1beta1IntotoDetails
-    , grafeasV1beta1IntotoDetails
-    , gvidSigned
-    , gvidSignatures
-
-    -- ** GrafeasV1beta1ImageDetails
-    , GrafeasV1beta1ImageDetails
-    , grafeasV1beta1ImageDetails
-    , gvidDerivedImage
-
-    -- ** BatchCreateOccurrencesResponse
-    , BatchCreateOccurrencesResponse
-    , batchCreateOccurrencesResponse
-    , bOccurrences
-
-    -- ** SourceContextLabels
-    , SourceContextLabels
-    , sourceContextLabels
-    , sclAddtional
-
-    -- ** DistributionArchitecture
-    , DistributionArchitecture (..)
-
-    -- ** ListScanConfigsResponse
-    , ListScanConfigsResponse
-    , listScanConfigsResponse
-    , lscrNextPageToken
-    , lscrScanConfigs
-
-    -- ** InToto
-    , InToto
-    , inToto
-    , itStepName
-    , itExpectedProducts
-    , itExpectedCommand
-    , itThreshold
-    , itSigningKeys
-    , itExpectedMaterials
-
-    -- ** FixableTotalByDigestSeverity
-    , FixableTotalByDigestSeverity (..)
-
-    -- ** Version
-    , Version
-    , version
-    , vInclusive
-    , vKind
-    , vName
-    , vRevision
-    , vEpoch
-
-    -- ** FileHashes
-    , FileHashes
-    , fileHashes
-    , fhFileHash
-
-    -- ** Resource
-    , Resource
-    , resource
-    , rContentHash
-    , rURI
-    , rName
-
-    -- ** GrafeasV1beta1DeploymentDetails
-    , GrafeasV1beta1DeploymentDetails
-    , grafeasV1beta1DeploymentDetails
-    , gvddDeployment
-
-    -- ** GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
-    , GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
-    , googleDevtoolsContaineranalysisV1alpha1OperationMetadata
-    , gdcvomEndTime
-    , gdcvomCreateTime
-
-    -- ** CVSSv3Scope
-    , CVSSv3Scope (..)
-
-    -- ** PgpSignedAttestationContentType
-    , PgpSignedAttestationContentType (..)
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** Details
-    , Details
-    , details
-    , dAttestation
-
-    -- ** Package
-    , Package
-    , package
-    , pDistribution
-    , pName
-
-    -- ** ListNotesResponse
-    , ListNotesResponse
-    , listNotesResponse
-    , lnrNextPageToken
-    , lnrNotes
-
-    -- ** BuildSignature
-    , BuildSignature
-    , buildSignature
-    , bsSignature
-    , bsKeyType
-    , bsKeyId
-    , bsPublicKey
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** VersionKind
-    , VersionKind (..)
-
-    -- ** HashType
-    , HashType (..)
-
-    -- ** Discovered
-    , Discovered
-    , discovered
-    , dLastAnalysisTime
-    , dAnalysisStatusError
-    , dAnalysisStatus
-    , dContinuousAnalysis
-
-    -- ** BuildSignatureKeyType
-    , BuildSignatureKeyType (..)
-
-    -- ** Derived
-    , Derived
-    , derived
-    , dBaseResourceURL
-    , dFingerprint
-    , dDistance
-    , dLayerInfo
-
-    -- ** GrafeasV1beta1BuildDetails
-    , GrafeasV1beta1BuildDetails
-    , grafeasV1beta1BuildDetails
-    , gvbdProvenanceBytes
-    , gvbdProvenance
-
-    -- ** Source
-    , Source
-    , source
-    , sContext
-    , sAdditionalContexts
-    , sArtifactStorageSourceURI
-    , sFileHashes
-
-    -- ** ScanConfig
-    , ScanConfig
-    , scanConfig
-    , scEnabled
-    , scUpdateTime
-    , scName
-    , scDescription
-    , scCreateTime
-
-    -- ** GenericSignedAttestation
-    , GenericSignedAttestation
-    , genericSignedAttestation
-    , gsaSerializedPayload
-    , gsaSignatures
-    , gsaContentType
-
-    -- ** GrafeasV1beta1IntotoArtifact
-    , GrafeasV1beta1IntotoArtifact
-    , grafeasV1beta1IntotoArtifact
-    , gviaResourceURI
-    , gviaHashes
-
-    -- ** GitSourceContext
-    , GitSourceContext
-    , gitSourceContext
-    , gURL
-    , gRevisionId
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** ByProductsCustomValues
-    , ByProductsCustomValues
-    , byProductsCustomValues
-    , bpcvAddtional
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** DiscoveryAnalysisKind
-    , DiscoveryAnalysisKind (..)
-
-    -- ** Layer
-    , Layer
-    , layer
-    , lDirective
-    , lArguments
-
-    -- ** CloudRepoSourceContext
-    , CloudRepoSourceContext
-    , cloudRepoSourceContext
-    , crscRepoId
-    , crscRevisionId
-    , crscAliasContext
-
-    -- ** PgpSignedAttestation
-    , PgpSignedAttestation
-    , pgpSignedAttestation
-    , psaSignature
-    , psaPgpKeyId
-    , psaContentType
-
-    -- ** ByProducts
-    , ByProducts
-    , byProducts
-    , bpCustomValues
-
-    -- ** CVSSv3AvailabilityImpact
-    , CVSSv3AvailabilityImpact (..)
-
-    -- ** WindowsDetail
-    , WindowsDetail
-    , windowsDetail
-    , wdName
-    , wdFixingKbs
-    , wdCpeURI
-    , wdDescription
-
-    -- ** EnvironmentCustomValues
-    , EnvironmentCustomValues
-    , environmentCustomValues
-    , ecvAddtional
-
-    -- ** BatchCreateNotesRequestNotes
-    , BatchCreateNotesRequestNotes
-    , batchCreateNotesRequestNotes
-    , bcnrnAddtional
+    Xgafv (..),
 
     -- ** AliasContext
-    , AliasContext
-    , aliasContext
-    , acKind
-    , acName
+    AliasContext (..),
+    newAliasContext,
 
-    -- ** AliasContextKind
-    , AliasContextKind (..)
+    -- ** AliasContext_Kind
+    AliasContext_Kind (..),
+
+    -- ** Artifact
+    Artifact (..),
+    newArtifact,
+
+    -- ** AttestationNote
+    AttestationNote (..),
+    newAttestationNote,
+
+    -- ** AttestationOccurrence
+    AttestationOccurrence (..),
+    newAttestationOccurrence,
+
+    -- ** BatchCreateNotesRequest
+    BatchCreateNotesRequest (..),
+    newBatchCreateNotesRequest,
+
+    -- ** BatchCreateNotesRequest_Notes
+    BatchCreateNotesRequest_Notes (..),
+    newBatchCreateNotesRequest_Notes,
+
+    -- ** BatchCreateNotesResponse
+    BatchCreateNotesResponse (..),
+    newBatchCreateNotesResponse,
+
+    -- ** BatchCreateOccurrencesRequest
+    BatchCreateOccurrencesRequest (..),
+    newBatchCreateOccurrencesRequest,
+
+    -- ** BatchCreateOccurrencesResponse
+    BatchCreateOccurrencesResponse (..),
+    newBatchCreateOccurrencesResponse,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** BuildNote
+    BuildNote (..),
+    newBuildNote,
+
+    -- ** BuildOccurrence
+    BuildOccurrence (..),
+    newBuildOccurrence,
+
+    -- ** BuildProvenance
+    BuildProvenance (..),
+    newBuildProvenance,
+
+    -- ** BuildProvenance_BuildOptions
+    BuildProvenance_BuildOptions (..),
+    newBuildProvenance_BuildOptions,
+
+    -- ** BuilderConfig
+    BuilderConfig (..),
+    newBuilderConfig,
+
+    -- ** CVSS
+    CVSS (..),
+    newCVSS,
+
+    -- ** CVSS_AttackComplexity
+    CVSS_AttackComplexity (..),
+
+    -- ** CVSS_AttackVector
+    CVSS_AttackVector (..),
+
+    -- ** CVSS_Authentication
+    CVSS_Authentication (..),
+
+    -- ** CVSS_AvailabilityImpact
+    CVSS_AvailabilityImpact (..),
+
+    -- ** CVSS_ConfidentialityImpact
+    CVSS_ConfidentialityImpact (..),
+
+    -- ** CVSS_IntegrityImpact
+    CVSS_IntegrityImpact (..),
+
+    -- ** CVSS_PrivilegesRequired
+    CVSS_PrivilegesRequired (..),
+
+    -- ** CVSS_Scope
+    CVSS_Scope (..),
+
+    -- ** CVSS_UserInteraction
+    CVSS_UserInteraction (..),
+
+    -- ** CVSSv3
+    CVSSv3 (..),
+    newCVSSv3,
+
+    -- ** CVSSv3_AttackComplexity
+    CVSSv3_AttackComplexity (..),
+
+    -- ** CVSSv3_AttackVector
+    CVSSv3_AttackVector (..),
+
+    -- ** CVSSv3_AvailabilityImpact
+    CVSSv3_AvailabilityImpact (..),
+
+    -- ** CVSSv3_ConfidentialityImpact
+    CVSSv3_ConfidentialityImpact (..),
+
+    -- ** CVSSv3_IntegrityImpact
+    CVSSv3_IntegrityImpact (..),
+
+    -- ** CVSSv3_PrivilegesRequired
+    CVSSv3_PrivilegesRequired (..),
+
+    -- ** CVSSv3_Scope
+    CVSSv3_Scope (..),
+
+    -- ** CVSSv3_UserInteraction
+    CVSSv3_UserInteraction (..),
+
+    -- ** Category
+    Category (..),
+    newCategory,
+
+    -- ** CisBenchmark
+    CisBenchmark (..),
+    newCisBenchmark,
+
+    -- ** CisBenchmark_Severity
+    CisBenchmark_Severity (..),
+
+    -- ** CloudRepoSourceContext
+    CloudRepoSourceContext (..),
+    newCloudRepoSourceContext,
+
+    -- ** Command
+    Command (..),
+    newCommand,
+
+    -- ** Completeness
+    Completeness (..),
+    newCompleteness,
+
+    -- ** ComplianceNote
+    ComplianceNote (..),
+    newComplianceNote,
+
+    -- ** ComplianceOccurrence
+    ComplianceOccurrence (..),
+    newComplianceOccurrence,
+
+    -- ** ComplianceVersion
+    ComplianceVersion (..),
+    newComplianceVersion,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalConfig
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalConfig (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalConfig,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Build
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Build (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Build,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Substitutions
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Substitutions (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Build_Substitutions,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Timing
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Timing (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Build_Timing,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptionsPoolOption
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptionsPoolOption (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptionsPoolOption,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes
+    ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Hash
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Hash (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Hash,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type (..),
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1InlineSecret
+    ContaineranalysisGoogleDevtoolsCloudbuildV1InlineSecret (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1InlineSecret,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1InlineSecret_EnvMap
+    ContaineranalysisGoogleDevtoolsCloudbuildV1InlineSecret_EnvMap (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1InlineSecret_EnvMap,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1RepoSource
+    ContaineranalysisGoogleDevtoolsCloudbuildV1RepoSource (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1RepoSource,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1RepoSource_Substitutions
+    ContaineranalysisGoogleDevtoolsCloudbuildV1RepoSource_Substitutions (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1RepoSource_Substitutions,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Results
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Results (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Results,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Secret
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Secret (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Secret,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Secret_SecretEnv
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Secret_SecretEnv (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Secret_SecretEnv,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1SecretManagerSecret
+    ContaineranalysisGoogleDevtoolsCloudbuildV1SecretManagerSecret (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1SecretManagerSecret,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Secrets
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Secrets (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Secrets,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Source
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Source (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Source,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1SourceProvenance
+    ContaineranalysisGoogleDevtoolsCloudbuildV1SourceProvenance (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1SourceProvenance,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1SourceProvenance_FileHashes
+    ContaineranalysisGoogleDevtoolsCloudbuildV1SourceProvenance_FileHashes (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1SourceProvenance_FileHashes,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource
+    ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest
+    ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan
+    ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Volume
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Volume (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Volume,
+
+    -- ** DSSEAttestationNote
+    DSSEAttestationNote (..),
+    newDSSEAttestationNote,
+
+    -- ** DSSEAttestationOccurrence
+    DSSEAttestationOccurrence (..),
+    newDSSEAttestationOccurrence,
+
+    -- ** DSSEHint
+    DSSEHint (..),
+    newDSSEHint,
+
+    -- ** DeploymentNote
+    DeploymentNote (..),
+    newDeploymentNote,
+
+    -- ** DeploymentOccurrence
+    DeploymentOccurrence (..),
+    newDeploymentOccurrence,
+
+    -- ** DeploymentOccurrence_Platform
+    DeploymentOccurrence_Platform (..),
 
     -- ** Detail
-    , Detail
-    , detail
-    , detVendor
-    , detMinAffectedVersion
-    , detPackageType
-    , detIsObsolete
-    , detFixedLocation
-    , detSourceUpdateTime
-    , detSeverityName
-    , detMaxAffectedVersion
-    , detPackage
-    , detSource
-    , detCpeURI
-    , detDescription
+    Detail (..),
+    newDetail,
 
-    -- ** Authority
-    , Authority
-    , authority
-    , aHint
+    -- ** DiscoveryNote
+    DiscoveryNote (..),
+    newDiscoveryNote,
 
-    -- ** GrafeasV1beta1PackageDetails
-    , GrafeasV1beta1PackageDetails
-    , grafeasV1beta1PackageDetails
-    , gvpdInstallation
+    -- ** DiscoveryNote_AnalysisKind
+    DiscoveryNote_AnalysisKind (..),
 
-    -- ** Deployment
-    , Deployment
-    , deployment
-    , depResourceURI
-    , depPlatform
-    , depConfig
-    , depUndeployTime
-    , depDeployTime
-    , depAddress
-    , depUserEmail
-    ) where
+    -- ** DiscoveryOccurrence
+    DiscoveryOccurrence (..),
+    newDiscoveryOccurrence,
 
-import Network.Google.Prelude
+    -- ** DiscoveryOccurrence_AnalysisStatus
+    DiscoveryOccurrence_AnalysisStatus (..),
+
+    -- ** DiscoveryOccurrence_ContinuousAnalysis
+    DiscoveryOccurrence_ContinuousAnalysis (..),
+
+    -- ** Distribution
+    Distribution (..),
+    newDistribution,
+
+    -- ** Distribution_Architecture
+    Distribution_Architecture (..),
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Envelope
+    Envelope (..),
+    newEnvelope,
+
+    -- ** EnvelopeSignature
+    EnvelopeSignature (..),
+    newEnvelopeSignature,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** FileHashes
+    FileHashes (..),
+    newFileHashes,
+
+    -- ** Fingerprint
+    Fingerprint (..),
+    newFingerprint,
+
+    -- ** FixableTotalByDigest
+    FixableTotalByDigest (..),
+    newFixableTotalByDigest,
+
+    -- ** FixableTotalByDigest_Severity
+    FixableTotalByDigest_Severity (..),
+
+    -- ** GerritSourceContext
+    GerritSourceContext (..),
+    newGerritSourceContext,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
+
+    -- ** GitSourceContext
+    GitSourceContext (..),
+    newGitSourceContext,
+
+    -- ** GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
+    GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata (..),
+    newGoogleDevtoolsContaineranalysisV1alpha1OperationMetadata,
+
+    -- ** Hash
+    Hash (..),
+    newHash,
+
+    -- ** Hint
+    Hint (..),
+    newHint,
+
+    -- ** Identity
+    Identity (..),
+    newIdentity,
+
+    -- ** ImageNote
+    ImageNote (..),
+    newImageNote,
+
+    -- ** ImageOccurrence
+    ImageOccurrence (..),
+    newImageOccurrence,
+
+    -- ** InTotoProvenance
+    InTotoProvenance (..),
+    newInTotoProvenance,
+
+    -- ** InTotoStatement
+    InTotoStatement (..),
+    newInTotoStatement,
+
+    -- ** Jwt
+    Jwt (..),
+    newJwt,
+
+    -- ** KnowledgeBase
+    KnowledgeBase (..),
+    newKnowledgeBase,
+
+    -- ** Layer
+    Layer (..),
+    newLayer,
+
+    -- ** ListNoteOccurrencesResponse
+    ListNoteOccurrencesResponse (..),
+    newListNoteOccurrencesResponse,
+
+    -- ** ListNotesResponse
+    ListNotesResponse (..),
+    newListNotesResponse,
+
+    -- ** ListOccurrencesResponse
+    ListOccurrencesResponse (..),
+    newListOccurrencesResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Material
+    Material (..),
+    newMaterial,
+
+    -- ** Material_Digest
+    Material_Digest (..),
+    newMaterial_Digest,
+
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
+
+    -- ** NonCompliantFile
+    NonCompliantFile (..),
+    newNonCompliantFile,
+
+    -- ** Note
+    Note (..),
+    newNote,
+
+    -- ** Note_Kind
+    Note_Kind (..),
+
+    -- ** Occurrence
+    Occurrence (..),
+    newOccurrence,
+
+    -- ** Occurrence_Kind
+    Occurrence_Kind (..),
+
+    -- ** PackageIssue
+    PackageIssue (..),
+    newPackageIssue,
+
+    -- ** PackageIssue_EffectiveSeverity
+    PackageIssue_EffectiveSeverity (..),
+
+    -- ** PackageNote
+    PackageNote (..),
+    newPackageNote,
+
+    -- ** PackageOccurrence
+    PackageOccurrence (..),
+    newPackageOccurrence,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** ProjectRepoId
+    ProjectRepoId (..),
+    newProjectRepoId,
+
+    -- ** Recipe
+    Recipe (..),
+    newRecipe,
+
+    -- ** Recipe_ArgumentsItem
+    Recipe_ArgumentsItem (..),
+    newRecipe_ArgumentsItem,
+
+    -- ** Recipe_EnvironmentItem
+    Recipe_EnvironmentItem (..),
+    newRecipe_EnvironmentItem,
+
+    -- ** RelatedUrl
+    RelatedUrl (..),
+    newRelatedUrl,
+
+    -- ** RepoId
+    RepoId (..),
+    newRepoId,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Signature
+    Signature (..),
+    newSignature,
+
+    -- ** SlsaBuilder
+    SlsaBuilder (..),
+    newSlsaBuilder,
+
+    -- ** SlsaCompleteness
+    SlsaCompleteness (..),
+    newSlsaCompleteness,
+
+    -- ** SlsaMetadata
+    SlsaMetadata (..),
+    newSlsaMetadata,
+
+    -- ** SlsaProvenance
+    SlsaProvenance (..),
+    newSlsaProvenance,
+
+    -- ** SlsaRecipe
+    SlsaRecipe (..),
+    newSlsaRecipe,
+
+    -- ** SlsaRecipe_Arguments
+    SlsaRecipe_Arguments (..),
+    newSlsaRecipe_Arguments,
+
+    -- ** SlsaRecipe_Environment
+    SlsaRecipe_Environment (..),
+    newSlsaRecipe_Environment,
+
+    -- ** Source
+    Source (..),
+    newSource,
+
+    -- ** Source_FileHashes
+    Source_FileHashes (..),
+    newSource_FileHashes,
+
+    -- ** SourceContext
+    SourceContext (..),
+    newSourceContext,
+
+    -- ** SourceContext_Labels
+    SourceContext_Labels (..),
+    newSourceContext_Labels,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** Subject
+    Subject (..),
+    newSubject,
+
+    -- ** Subject_Digest
+    Subject_Digest (..),
+    newSubject_Digest,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** UpgradeDistribution
+    UpgradeDistribution (..),
+    newUpgradeDistribution,
+
+    -- ** UpgradeNote
+    UpgradeNote (..),
+    newUpgradeNote,
+
+    -- ** UpgradeOccurrence
+    UpgradeOccurrence (..),
+    newUpgradeOccurrence,
+
+    -- ** Version
+    Version (..),
+    newVersion,
+
+    -- ** Version_Kind
+    Version_Kind (..),
+
+    -- ** VulnerabilityNote
+    VulnerabilityNote (..),
+    newVulnerabilityNote,
+
+    -- ** VulnerabilityNote_Severity
+    VulnerabilityNote_Severity (..),
+
+    -- ** VulnerabilityOccurrence
+    VulnerabilityOccurrence (..),
+    newVulnerabilityOccurrence,
+
+    -- ** VulnerabilityOccurrence_EffectiveSeverity
+    VulnerabilityOccurrence_EffectiveSeverity (..),
+
+    -- ** VulnerabilityOccurrence_Severity
+    VulnerabilityOccurrence_Severity (..),
+
+    -- ** VulnerabilityOccurrencesSummary
+    VulnerabilityOccurrencesSummary (..),
+    newVulnerabilityOccurrencesSummary,
+
+    -- ** WindowsDetail
+    WindowsDetail (..),
+    newWindowsDetail,
+
+    -- ** WindowsUpdate
+    WindowsUpdate (..),
+    newWindowsUpdate,
+  )
+where
+
+import Network.Google.ContainerAnalysis.Projects.Notes.BatchCreate
+import Network.Google.ContainerAnalysis.Projects.Notes.Create
+import Network.Google.ContainerAnalysis.Projects.Notes.Delete
+import Network.Google.ContainerAnalysis.Projects.Notes.Get
+import Network.Google.ContainerAnalysis.Projects.Notes.GetIamPolicy
+import Network.Google.ContainerAnalysis.Projects.Notes.List
+import Network.Google.ContainerAnalysis.Projects.Notes.Occurrences.List
+import Network.Google.ContainerAnalysis.Projects.Notes.Patch
+import Network.Google.ContainerAnalysis.Projects.Notes.SetIamPolicy
+import Network.Google.ContainerAnalysis.Projects.Notes.TestIamPermissions
+import Network.Google.ContainerAnalysis.Projects.Occurrences.BatchCreate
+import Network.Google.ContainerAnalysis.Projects.Occurrences.Create
+import Network.Google.ContainerAnalysis.Projects.Occurrences.Delete
+import Network.Google.ContainerAnalysis.Projects.Occurrences.Get
+import Network.Google.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
+import Network.Google.ContainerAnalysis.Projects.Occurrences.GetNotes
+import Network.Google.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
+import Network.Google.ContainerAnalysis.Projects.Occurrences.List
+import Network.Google.ContainerAnalysis.Projects.Occurrences.Patch
+import Network.Google.ContainerAnalysis.Projects.Occurrences.SetIamPolicy
+import Network.Google.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
 import Network.Google.ContainerAnalysis.Types
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.BatchCreate
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.Create
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.Delete
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.Get
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.GetIAMPolicy
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.List
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.Occurrences.List
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.Patch
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.SetIAMPolicy
-import Network.Google.Resource.ContainerAnalysis.Projects.Notes.TestIAMPermissions
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.BatchCreate
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Create
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Delete
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Get
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetIAMPolicy
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetNotes
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.List
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Patch
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.SetIAMPolicy
-import Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.TestIAMPermissions
-import Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.Get
-import Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.List
-import Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Container Analysis API service.
-type ContainerAnalysisAPI =
-     ProjectsOccurrencesListResource :<|>
-       ProjectsOccurrencesGetNotesResource
-       :<|> ProjectsOccurrencesGetIAMPolicyResource
-       :<|> ProjectsOccurrencesPatchResource
-       :<|> ProjectsOccurrencesGetResource
-       :<|>
-       ProjectsOccurrencesGetVulnerabilitySummaryResource
-       :<|> ProjectsOccurrencesCreateResource
-       :<|> ProjectsOccurrencesSetIAMPolicyResource
-       :<|> ProjectsOccurrencesBatchCreateResource
-       :<|> ProjectsOccurrencesTestIAMPermissionsResource
-       :<|> ProjectsOccurrencesDeleteResource
-       :<|> ProjectsScanConfigsListResource
-       :<|> ProjectsScanConfigsGetResource
-       :<|> ProjectsScanConfigsUpdateResource
-       :<|> ProjectsNotesOccurrencesListResource
-       :<|> ProjectsNotesListResource
-       :<|> ProjectsNotesGetIAMPolicyResource
-       :<|> ProjectsNotesPatchResource
-       :<|> ProjectsNotesGetResource
-       :<|> ProjectsNotesCreateResource
-       :<|> ProjectsNotesSetIAMPolicyResource
-       :<|> ProjectsNotesBatchCreateResource
-       :<|> ProjectsNotesTestIAMPermissionsResource
-       :<|> ProjectsNotesDeleteResource
