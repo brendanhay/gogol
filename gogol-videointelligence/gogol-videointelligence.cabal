@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.VideoIntelligence
-    Network.Google.VideoIntelligence.Types
-    Network.Google.VideoIntelligence.Videos.Annotate
+    Gogol.VideoIntelligence
+    Gogol.VideoIntelligence.Types
+    Gogol.VideoIntelligence.Videos.Annotate
 
   other-modules:
-    Network.Google.VideoIntelligence.Internal.Product
-    Network.Google.VideoIntelligence.Internal.Sum
+    Gogol.VideoIntelligence.Internal.Product
+    Gogol.VideoIntelligence.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
