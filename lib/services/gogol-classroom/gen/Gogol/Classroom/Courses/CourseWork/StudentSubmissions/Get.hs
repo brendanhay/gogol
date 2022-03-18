@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,116 +36,109 @@
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.courseWork.studentSubmissions.get@.
 module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Get
-  ( -- * Resource
-    ClassroomCoursesCourseWorkStudentSubmissionsGetResource,
+    (
+    -- * Resource
+      ClassroomCoursesCourseWorkStudentSubmissionsGetResource
 
     -- ** Constructing a Request
-    newClassroomCoursesCourseWorkStudentSubmissionsGet,
-    ClassroomCoursesCourseWorkStudentSubmissionsGet,
-  )
-where
+    , newClassroomCoursesCourseWorkStudentSubmissionsGet
+    , ClassroomCoursesCourseWorkStudentSubmissionsGet
+    ) where
 
-import Gogol.Classroom.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Classroom.Types
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.get@ method which the
 -- 'ClassroomCoursesCourseWorkStudentSubmissionsGet' request conforms to.
-type ClassroomCoursesCourseWorkStudentSubmissionsGetResource =
-  "v1"
-    Core.:> "courses"
-    Core.:> Core.Capture "courseId" Core.Text
-    Core.:> "courseWork"
-    Core.:> Core.Capture "courseWorkId" Core.Text
-    Core.:> "studentSubmissions"
-    Core.:> Core.Capture "id" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] StudentSubmission
+type ClassroomCoursesCourseWorkStudentSubmissionsGetResource
+     =
+     "v1" Core.:>
+       "courses" Core.:>
+         Core.Capture "courseId" Core.Text Core.:>
+           "courseWork" Core.:>
+             Core.Capture "courseWorkId" Core.Text Core.:>
+               "studentSubmissions" Core.:>
+                 Core.Capture "id" Core.Text Core.:>
+                   Core.QueryParam "$.xgafv" Xgafv Core.:>
+                     Core.QueryParam "access_token" Core.Text Core.:>
+                       Core.QueryParam "callback" Core.Text Core.:>
+                         Core.QueryParam "uploadType" Core.Text Core.:>
+                           Core.QueryParam "upload_protocol" Core.Text Core.:>
+                             Core.QueryParam "alt" Core.AltJSON Core.:>
+                               Core.Get '[Core.JSON] StudentSubmission
 
 -- | Returns a student submission. * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course, course work, or student submission or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course, course work, or student submission does not exist.
 --
 -- /See:/ 'newClassroomCoursesCourseWorkStudentSubmissionsGet' smart constructor.
 data ClassroomCoursesCourseWorkStudentSubmissionsGet = ClassroomCoursesCourseWorkStudentSubmissionsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias.
-    courseId :: Core.Text,
-    -- | Identifier of the course work.
-    courseWorkId :: Core.Text,
-    -- | Identifier of the student submission.
-    id :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias.
+    , courseId :: Core.Text
+      -- | Identifier of the course work.
+    , courseWorkId :: Core.Text
+      -- | Identifier of the student submission.
+    , id :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ClassroomCoursesCourseWorkStudentSubmissionsGet' with the minimum fields required to make a request.
-newClassroomCoursesCourseWorkStudentSubmissionsGet ::
-  -- |  Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias. See 'courseId'.
-  Core.Text ->
-  -- |  Identifier of the course work. See 'courseWorkId'.
-  Core.Text ->
-  -- |  Identifier of the student submission. See 'id'.
-  Core.Text ->
-  ClassroomCoursesCourseWorkStudentSubmissionsGet
+newClassroomCoursesCourseWorkStudentSubmissionsGet 
+    ::  Core.Text
+       -- ^  Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias. See 'courseId'.
+    -> Core.Text
+       -- ^  Identifier of the course work. See 'courseWorkId'.
+    -> Core.Text
+       -- ^  Identifier of the student submission. See 'id'.
+    -> ClassroomCoursesCourseWorkStudentSubmissionsGet
 newClassroomCoursesCourseWorkStudentSubmissionsGet courseId courseWorkId id =
   ClassroomCoursesCourseWorkStudentSubmissionsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      courseId = courseId,
-      courseWorkId = courseWorkId,
-      id = id,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , courseId = courseId
+    , courseWorkId = courseWorkId
+    , id = id
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesCourseWorkStudentSubmissionsGet
-  where
-  type
-    Rs
-      ClassroomCoursesCourseWorkStudentSubmissionsGet =
-      StudentSubmission
-  type
-    Scopes
-      ClassroomCoursesCourseWorkStudentSubmissionsGet =
-      '[ "https://www.googleapis.com/auth/classroom.coursework.me",
-         "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
-         "https://www.googleapis.com/auth/classroom.coursework.students",
-         "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
-         "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly",
-         "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"
-       ]
-  requestClient
-    ClassroomCoursesCourseWorkStudentSubmissionsGet {..} =
-      go
-        courseId
-        courseWorkId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesCourseWorkStudentSubmissionsGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           ClassroomCoursesCourseWorkStudentSubmissionsGet
+         where
+        type Rs
+               ClassroomCoursesCourseWorkStudentSubmissionsGet
+             = StudentSubmission
+        type Scopes
+               ClassroomCoursesCourseWorkStudentSubmissionsGet
+             =
+             '["https://www.googleapis.com/auth/classroom.coursework.me",
+               "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+               "https://www.googleapis.com/auth/classroom.coursework.students",
+               "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+               "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly",
+               "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"]
+        requestClient
+          ClassroomCoursesCourseWorkStudentSubmissionsGet{..}
+          = go courseId courseWorkId id xgafv accessToken
+              callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              classroomService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           ClassroomCoursesCourseWorkStudentSubmissionsGetResource)
+                      Core.mempty
+
