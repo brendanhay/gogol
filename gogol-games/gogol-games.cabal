@@ -39,46 +39,47 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Games
-    Network.Google.Games.AchievementDefinitions.List
-    Network.Google.Games.Achievements.Increment
-    Network.Google.Games.Achievements.List
-    Network.Google.Games.Achievements.Reveal
-    Network.Google.Games.Achievements.SetStepsAtLeast
-    Network.Google.Games.Achievements.Unlock
-    Network.Google.Games.Achievements.UpdateMultiple
-    Network.Google.Games.Applications.Get
-    Network.Google.Games.Applications.GetEndPoint
-    Network.Google.Games.Applications.Played
-    Network.Google.Games.Applications.Verify
-    Network.Google.Games.Events.ListByPlayer
-    Network.Google.Games.Events.ListDefinitions
-    Network.Google.Games.Events.Record
-    Network.Google.Games.Leaderboards.Get
-    Network.Google.Games.Leaderboards.List
-    Network.Google.Games.Metagame.GetMetagameConfig
-    Network.Google.Games.Metagame.ListCategoriesByPlayer
-    Network.Google.Games.Players.Get
-    Network.Google.Games.Players.List
-    Network.Google.Games.Revisions.Check
-    Network.Google.Games.Scores.Get
-    Network.Google.Games.Scores.List
-    Network.Google.Games.Scores.ListWindow
-    Network.Google.Games.Scores.Submit
-    Network.Google.Games.Scores.SubmitMultiple
-    Network.Google.Games.Snapshots.Get
-    Network.Google.Games.Snapshots.List
-    Network.Google.Games.Stats.Get
-    Network.Google.Games.Types
+    Gogol.Games
+    Gogol.Games.AchievementDefinitions.List
+    Gogol.Games.Achievements.Increment
+    Gogol.Games.Achievements.List
+    Gogol.Games.Achievements.Reveal
+    Gogol.Games.Achievements.SetStepsAtLeast
+    Gogol.Games.Achievements.Unlock
+    Gogol.Games.Achievements.UpdateMultiple
+    Gogol.Games.Applications.Get
+    Gogol.Games.Applications.GetEndPoint
+    Gogol.Games.Applications.Played
+    Gogol.Games.Applications.Verify
+    Gogol.Games.Events.ListByPlayer
+    Gogol.Games.Events.ListDefinitions
+    Gogol.Games.Events.Record
+    Gogol.Games.Leaderboards.Get
+    Gogol.Games.Leaderboards.List
+    Gogol.Games.Metagame.GetMetagameConfig
+    Gogol.Games.Metagame.ListCategoriesByPlayer
+    Gogol.Games.Players.Get
+    Gogol.Games.Players.List
+    Gogol.Games.Revisions.Check
+    Gogol.Games.Scores.Get
+    Gogol.Games.Scores.List
+    Gogol.Games.Scores.ListWindow
+    Gogol.Games.Scores.Submit
+    Gogol.Games.Scores.SubmitMultiple
+    Gogol.Games.Snapshots.Get
+    Gogol.Games.Snapshots.List
+    Gogol.Games.Stats.Get
+    Gogol.Games.Types
 
   other-modules:
-    Network.Google.Games.Internal.Product
-    Network.Google.Games.Internal.Sum
+    Gogol.Games.Internal.Product
+    Gogol.Games.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
