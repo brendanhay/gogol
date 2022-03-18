@@ -1,307 +1,154 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CustomSearch.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CustomSearch.Types
-    (
-    -- * Service Configuration
-      customSearchService
+  ( -- * Configuration
+    customSearchService,
 
-    -- * CSEListImgType
-    , CSEListImgType (..)
+    -- * Types
 
-    -- * PromotionImage
-    , PromotionImage
-    , promotionImage
-    , piHeight
-    , piWidth
-    , piSource
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * CSEListSiteSearchFilter
-    , CSEListSiteSearchFilter (..)
+    -- ** Promotion
+    Promotion (..),
+    newPromotion,
 
-    -- * SearchQueries
-    , SearchQueries
-    , searchQueries
-    , sqNextPage
-    , sqPreviousPage
-    , sqRequest
+    -- ** Promotion_BodyLinesItem
+    Promotion_BodyLinesItem (..),
+    newPromotion_BodyLinesItem,
 
-    -- * SearchQueriesPreviousPageItem
-    , SearchQueriesPreviousPageItem
-    , searchQueriesPreviousPageItem
-    , sqppiImgDominantColor
-    , sqppiOutputEncoding
-    , sqppiSiteSearchFilter
-    , sqppiInputEncoding
-    , sqppiOrTerms
-    , sqppiSearchTerms
-    , sqppiStartPage
-    , sqppiRights
-    , sqppiCount
-    , sqppiExcludeTerms
-    , sqppiFileType
-    , sqppiSearchType
-    , sqppiGoogleHost
-    , sqppiDisableCnTwTranslation
-    , sqppiRelatedSite
-    , sqppiHl
-    , sqppiSort
-    , sqppiLanguage
-    , sqppiSiteSearch
-    , sqppiFilter
-    , sqppiTotalResults
-    , sqppiDateRestrict
-    , sqppiTitle
-    , sqppiLinkSite
-    , sqppiLowRange
-    , sqppiImgType
-    , sqppiGl
-    , sqppiCx
-    , sqppiImgColorType
-    , sqppiImgSize
-    , sqppiExactTerms
-    , sqppiStartIndex
-    , sqppiCr
-    , sqppiSafe
-    , sqppiHq
-    , sqppiHighRange
+    -- ** Promotion_Image
+    Promotion_Image (..),
+    newPromotion_Image,
 
-    -- * SearchURL
-    , SearchURL
-    , searchURL
-    , suType
-    , suTemplate
+    -- ** Result
+    Result (..),
+    newResult,
 
-    -- * SearchSpelling
-    , SearchSpelling
-    , searchSpelling
-    , ssCorrectedQuery
-    , ssHTMLCorrectedQuery
+    -- ** Result_Image
+    Result_Image (..),
+    newResult_Image,
 
-    -- * CSESiterestrictListImgType
-    , CSESiterestrictListImgType (..)
+    -- ** Result_LabelsItem
+    Result_LabelsItem (..),
+    newResult_LabelsItem,
 
-    -- * CSEListImgDominantColor
-    , CSEListImgDominantColor (..)
+    -- ** Result_Pagemap
+    Result_Pagemap (..),
+    newResult_Pagemap,
 
-    -- * ResultImage
-    , ResultImage
-    , resultImage
-    , riThumbnailLink
-    , riHeight
-    , riByteSize
-    , riContextLink
-    , riThumbnailHeight
-    , riWidth
-    , riThumbnailWidth
+    -- ** Search
+    Search (..),
+    newSearch,
 
-    -- * CSEListSafe
-    , CSEListSafe (..)
+    -- ** Search_Context
+    Search_Context (..),
+    newSearch_Context,
 
-    -- * CSESiterestrictListImgSize
-    , CSESiterestrictListImgSize (..)
+    -- ** Search_Queries
+    Search_Queries (..),
+    newSearch_Queries,
 
-    -- * ResultPagemap
-    , ResultPagemap
-    , resultPagemap
-    , rpAddtional
+    -- ** Search_Queries_NextPageItem
+    Search_Queries_NextPageItem (..),
+    newSearch_Queries_NextPageItem,
 
-    -- * CSESiterestrictListImgColorType
-    , CSESiterestrictListImgColorType (..)
+    -- ** Search_Queries_PreviousPageItem
+    Search_Queries_PreviousPageItem (..),
+    newSearch_Queries_PreviousPageItem,
 
-    -- * CSEListImgColorType
-    , CSEListImgColorType (..)
+    -- ** Search_Queries_RequestItem
+    Search_Queries_RequestItem (..),
+    newSearch_Queries_RequestItem,
 
-    -- * CSESiterestrictListSafe
-    , CSESiterestrictListSafe (..)
+    -- ** Search_SearchInformation
+    Search_SearchInformation (..),
+    newSearch_SearchInformation,
 
-    -- * Result
-    , Result
-    , result
-    , rMime
-    , rImage
-    , rPagemap
-    , rDisplayLink
-    , rFileFormat
-    , rSnippet
-    , rKind
-    , rLink
-    , rHTMLSnippet
-    , rHTMLFormattedURL
-    , rCacheId
-    , rFormattedURL
-    , rHTMLTitle
-    , rLabels
-    , rTitle
+    -- ** Search_Spelling
+    Search_Spelling (..),
+    newSearch_Spelling,
 
-    -- * ResultLabelsItem
-    , ResultLabelsItem
-    , resultLabelsItem
-    , rliName
-    , rliDisplayName
-    , rliLabelWithOp
+    -- ** Search_Url
+    Search_Url (..),
+    newSearch_Url,
 
-    -- * SearchContext
-    , SearchContext
-    , searchContext
-    , scAddtional
+    -- ** CseListImgColorType
+    CseListImgColorType (..),
 
-    -- * CSESiterestrictListImgDominantColor
-    , CSESiterestrictListImgDominantColor (..)
+    -- ** CseListImgDominantColor
+    CseListImgDominantColor (..),
 
-    -- * SearchSearchInformation
-    , SearchSearchInformation
-    , searchSearchInformation
-    , ssiSearchTime
-    , ssiFormattedSearchTime
-    , ssiTotalResults
-    , ssiFormattedTotalResults
+    -- ** CseListImgSize
+    CseListImgSize (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** CseListImgType
+    CseListImgType (..),
 
-    -- * CSESiterestrictListSiteSearchFilter
-    , CSESiterestrictListSiteSearchFilter (..)
+    -- ** CseListSafe
+    CseListSafe (..),
 
-    -- * SearchQueriesNextPageItem
-    , SearchQueriesNextPageItem
-    , searchQueriesNextPageItem
-    , sqnpiImgDominantColor
-    , sqnpiOutputEncoding
-    , sqnpiSiteSearchFilter
-    , sqnpiInputEncoding
-    , sqnpiOrTerms
-    , sqnpiSearchTerms
-    , sqnpiStartPage
-    , sqnpiRights
-    , sqnpiCount
-    , sqnpiExcludeTerms
-    , sqnpiFileType
-    , sqnpiSearchType
-    , sqnpiGoogleHost
-    , sqnpiDisableCnTwTranslation
-    , sqnpiRelatedSite
-    , sqnpiHl
-    , sqnpiSort
-    , sqnpiLanguage
-    , sqnpiSiteSearch
-    , sqnpiFilter
-    , sqnpiTotalResults
-    , sqnpiDateRestrict
-    , sqnpiTitle
-    , sqnpiLinkSite
-    , sqnpiLowRange
-    , sqnpiImgType
-    , sqnpiGl
-    , sqnpiCx
-    , sqnpiImgColorType
-    , sqnpiImgSize
-    , sqnpiExactTerms
-    , sqnpiStartIndex
-    , sqnpiCr
-    , sqnpiSafe
-    , sqnpiHq
-    , sqnpiHighRange
+    -- ** CseListSearchType
+    CseListSearchType (..),
 
-    -- * PromotionBodyLinesItem
-    , PromotionBodyLinesItem
-    , promotionBodyLinesItem
-    , pbliLink
-    , pbliURL
-    , pbliHTMLTitle
-    , pbliTitle
+    -- ** CseListSiteSearchFilter
+    CseListSiteSearchFilter (..),
 
-    -- * Promotion
-    , Promotion
-    , promotion
-    , pImage
-    , pDisplayLink
-    , pBodyLines
-    , pLink
-    , pHTMLTitle
-    , pTitle
+    -- ** CseSiterestrictListImgColorType
+    CseSiterestrictListImgColorType (..),
 
-    -- * SearchQueriesRequestItem
-    , SearchQueriesRequestItem
-    , searchQueriesRequestItem
-    , sqriImgDominantColor
-    , sqriOutputEncoding
-    , sqriSiteSearchFilter
-    , sqriInputEncoding
-    , sqriOrTerms
-    , sqriSearchTerms
-    , sqriStartPage
-    , sqriRights
-    , sqriCount
-    , sqriExcludeTerms
-    , sqriFileType
-    , sqriSearchType
-    , sqriGoogleHost
-    , sqriDisableCnTwTranslation
-    , sqriRelatedSite
-    , sqriHl
-    , sqriSort
-    , sqriLanguage
-    , sqriSiteSearch
-    , sqriFilter
-    , sqriTotalResults
-    , sqriDateRestrict
-    , sqriTitle
-    , sqriLinkSite
-    , sqriLowRange
-    , sqriImgType
-    , sqriGl
-    , sqriCx
-    , sqriImgColorType
-    , sqriImgSize
-    , sqriExactTerms
-    , sqriStartIndex
-    , sqriCr
-    , sqriSafe
-    , sqriHq
-    , sqriHighRange
+    -- ** CseSiterestrictListImgDominantColor
+    CseSiterestrictListImgDominantColor (..),
 
-    -- * CSESiterestrictListSearchType
-    , CSESiterestrictListSearchType (..)
+    -- ** CseSiterestrictListImgSize
+    CseSiterestrictListImgSize (..),
 
-    -- * Search
-    , Search
-    , search
-    , sQueries
-    , sContext
-    , sKind
-    , sURL
-    , sItems
-    , sSearchInformation
-    , sPromotions
-    , sSpelling
+    -- ** CseSiterestrictListImgType
+    CseSiterestrictListImgType (..),
 
-    -- * CSEListSearchType
-    , CSEListSearchType (..)
+    -- ** CseSiterestrictListSafe
+    CseSiterestrictListSafe (..),
 
-    -- * CSEListImgSize
-    , CSEListImgSize (..)
-    ) where
+    -- ** CseSiterestrictListSearchType
+    CseSiterestrictListSearchType (..),
 
-import Network.Google.CustomSearch.Types.Product
-import Network.Google.CustomSearch.Types.Sum
-import Network.Google.Prelude
+    -- ** CseSiterestrictListSiteSearchFilter
+    CseSiterestrictListSiteSearchFilter (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Custom Search API. This contains the host and root path used as a starting point for constructing service requests.
-customSearchService :: ServiceConfig
-customSearchService
-  = defaultService (ServiceId "customsearch:v1")
-      "customsearch.googleapis.com"
+import Network.Google.CustomSearch.Internal.Product
+import Network.Google.CustomSearch.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Custom Search API. This contains the host and root path used as a starting point for constructing service requests.
+customSearchService :: Core.ServiceConfig
+customSearchService =
+  Core.defaultService
+    (Core.ServiceId "customsearch:v1")
+    "customsearch.googleapis.com"
