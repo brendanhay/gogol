@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,59 +25,58 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudProfiler.Types
-    (
-    -- * Configuration
-      cloudProfilerService
+  ( -- * Configuration
+    cloudProfilerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , monitoringScope
-    , monitoringWriteScope
+    cloudPlatformScope,
+    monitoringScope,
+    monitoringWriteScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CreateProfileRequest
-    , CreateProfileRequest (..)
-    , newCreateProfileRequest
+    CreateProfileRequest (..),
+    newCreateProfileRequest,
 
     -- ** CreateProfileRequest_ProfileTypeItem
-    , CreateProfileRequest_ProfileTypeItem (..)
+    CreateProfileRequest_ProfileTypeItem (..),
 
     -- ** Deployment
-    , Deployment (..)
-    , newDeployment
+    Deployment (..),
+    newDeployment,
 
     -- ** Deployment_Labels
-    , Deployment_Labels (..)
-    , newDeployment_Labels
+    Deployment_Labels (..),
+    newDeployment_Labels,
 
     -- ** Profile
-    , Profile (..)
-    , newProfile
+    Profile (..),
+    newProfile,
 
     -- ** Profile_Labels
-    , Profile_Labels (..)
-    , newProfile_Labels
+    Profile_Labels (..),
+    newProfile_Labels,
 
     -- ** Profile_ProfileType
-    , Profile_ProfileType (..)
-    ) where
+    Profile_ProfileType (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudProfiler.Internal.Product
 import Gogol.CloudProfiler.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Stackdriver Profiler API. This contains the host and root path used as a starting point for constructing service requests.
 cloudProfilerService :: Core.ServiceConfig
-cloudProfilerService
-  = Core.defaultService
-      (Core.ServiceId "cloudprofiler:v2")
-      "cloudprofiler.googleapis.com"
+cloudProfilerService =
+  Core.defaultService
+    (Core.ServiceId "cloudprofiler:v2")
+    "cloudprofiler.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
