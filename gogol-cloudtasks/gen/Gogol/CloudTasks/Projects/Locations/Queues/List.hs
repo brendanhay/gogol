@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Projects.Locations.Queues.List
+-- Module      : Gogol.CloudTasks.Projects.Locations.Queues.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists queues. Queues are returned in lexicographical order.
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.list@.
-module Network.Google.CloudTasks.Projects.Locations.Queues.List
+module Gogol.CloudTasks.Projects.Locations.Queues.List
   ( -- * Resource
     CloudTasksProjectsLocationsQueuesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudTasks.Projects.Locations.Queues.List
   )
 where
 
-import Network.Google.CloudTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.list@ method which the
 -- 'CloudTasksProjectsLocationsQueuesList' request conforms to.

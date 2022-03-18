@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Types
+-- Module      : Gogol.CloudTasks.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudTasks.Types
+module Gogol.CloudTasks.Types
   ( -- * Configuration
     cloudTasksService,
 
@@ -203,9 +203,9 @@ module Network.Google.CloudTasks.Types
   )
 where
 
-import Network.Google.CloudTasks.Internal.Product
-import Network.Google.CloudTasks.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Internal.Product
+import Gogol.CloudTasks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Cloud Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 cloudTasksService :: Core.ServiceConfig

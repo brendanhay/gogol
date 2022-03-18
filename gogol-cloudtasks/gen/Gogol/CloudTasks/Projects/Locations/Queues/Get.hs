@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Projects.Locations.Get
+-- Module      : Gogol.CloudTasks.Projects.Locations.Queues.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about a location.
+-- Gets a queue.
 --
--- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.get@.
-module Network.Google.CloudTasks.Projects.Locations.Get
+-- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.get@.
+module Gogol.CloudTasks.Projects.Locations.Queues.Get
   ( -- * Resource
-    CloudTasksProjectsLocationsGetResource,
+    CloudTasksProjectsLocationsQueuesGetResource,
 
     -- ** Constructing a Request
-    newCloudTasksProjectsLocationsGet,
-    CloudTasksProjectsLocationsGet,
+    newCloudTasksProjectsLocationsQueuesGet,
+    CloudTasksProjectsLocationsQueuesGet,
   )
 where
 
-import Network.Google.CloudTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudtasks.projects.locations.get@ method which the
--- 'CloudTasksProjectsLocationsGet' request conforms to.
-type CloudTasksProjectsLocationsGetResource =
+-- | A resource alias for @cloudtasks.projects.locations.queues.get@ method which the
+-- 'CloudTasksProjectsLocationsQueuesGet' request conforms to.
+type CloudTasksProjectsLocationsQueuesGetResource =
   "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type CloudTasksProjectsLocationsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Location
+    Core.:> Core.Get '[Core.JSON] Queue
 
--- | Gets information about a location.
+-- | Gets a queue.
 --
--- /See:/ 'newCloudTasksProjectsLocationsGet' smart constructor.
-data CloudTasksProjectsLocationsGet = CloudTasksProjectsLocationsGet
+-- /See:/ 'newCloudTasksProjectsLocationsQueuesGet' smart constructor.
+data CloudTasksProjectsLocationsQueuesGet = CloudTasksProjectsLocationsQueuesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name for the location.
+    -- | Required. The resource name of the queue. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID@
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data CloudTasksProjectsLocationsGet = CloudTasksProjectsLocationsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudTasksProjectsLocationsGet' with the minimum fields required to make a request.
-newCloudTasksProjectsLocationsGet ::
-  -- |  Resource name for the location. See 'name'.
+-- | Creates a value of 'CloudTasksProjectsLocationsQueuesGet' with the minimum fields required to make a request.
+newCloudTasksProjectsLocationsQueuesGet ::
+  -- |  Required. The resource name of the queue. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID@ See 'name'.
   Core.Text ->
-  CloudTasksProjectsLocationsGet
-newCloudTasksProjectsLocationsGet name =
-  CloudTasksProjectsLocationsGet
+  CloudTasksProjectsLocationsQueuesGet
+newCloudTasksProjectsLocationsQueuesGet name =
+  CloudTasksProjectsLocationsQueuesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,26 +91,28 @@ newCloudTasksProjectsLocationsGet name =
 
 instance
   Core.GoogleRequest
-    CloudTasksProjectsLocationsGet
+    CloudTasksProjectsLocationsQueuesGet
   where
-  type Rs CloudTasksProjectsLocationsGet = Location
+  type Rs CloudTasksProjectsLocationsQueuesGet = Queue
   type
-    Scopes CloudTasksProjectsLocationsGet =
+    Scopes CloudTasksProjectsLocationsQueuesGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient CloudTasksProjectsLocationsGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      cloudTasksService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudTasksProjectsLocationsGetResource
-          )
-          Core.mempty
+  requestClient
+    CloudTasksProjectsLocationsQueuesGet {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        cloudTasksService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  CloudTasksProjectsLocationsQueuesGetResource
+            )
+            Core.mempty

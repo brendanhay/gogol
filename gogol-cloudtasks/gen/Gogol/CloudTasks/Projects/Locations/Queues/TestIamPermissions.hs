@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Projects.Locations.Queues.TestIamPermissions
+-- Module      : Gogol.CloudTasks.Projects.Locations.Queues.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns permissions that a caller has on a Queue. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.testIamPermissions@.
-module Network.Google.CloudTasks.Projects.Locations.Queues.TestIamPermissions
+module Gogol.CloudTasks.Projects.Locations.Queues.TestIamPermissions
   ( -- * Resource
     CloudTasksProjectsLocationsQueuesTestIamPermissionsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudTasks.Projects.Locations.Queues.TestIamPermissions
   )
 where
 
-import Network.Google.CloudTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.testIamPermissions@ method which the
 -- 'CloudTasksProjectsLocationsQueuesTestIamPermissions' request conforms to.

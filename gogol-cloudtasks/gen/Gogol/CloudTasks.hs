@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks
+-- Module      : Gogol.CloudTasks
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Manages the execution of large numbers of distributed requests.
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference>
-module Network.Google.CloudTasks
+module Gogol.CloudTasks
   ( -- * Configuration
     cloudTasksService,
 
@@ -299,22 +299,22 @@ module Network.Google.CloudTasks
   )
 where
 
-import Network.Google.CloudTasks.Projects.Locations.Get
-import Network.Google.CloudTasks.Projects.Locations.List
-import Network.Google.CloudTasks.Projects.Locations.Queues.Create
-import Network.Google.CloudTasks.Projects.Locations.Queues.Delete
-import Network.Google.CloudTasks.Projects.Locations.Queues.Get
-import Network.Google.CloudTasks.Projects.Locations.Queues.GetIamPolicy
-import Network.Google.CloudTasks.Projects.Locations.Queues.List
-import Network.Google.CloudTasks.Projects.Locations.Queues.Patch
-import Network.Google.CloudTasks.Projects.Locations.Queues.Pause
-import Network.Google.CloudTasks.Projects.Locations.Queues.Purge
-import Network.Google.CloudTasks.Projects.Locations.Queues.Resume
-import Network.Google.CloudTasks.Projects.Locations.Queues.SetIamPolicy
-import Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Create
-import Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Delete
-import Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Get
-import Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.List
-import Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Run
-import Network.Google.CloudTasks.Projects.Locations.Queues.TestIamPermissions
-import Network.Google.CloudTasks.Types
+import Gogol.CloudTasks.Projects.Locations.Get
+import Gogol.CloudTasks.Projects.Locations.List
+import Gogol.CloudTasks.Projects.Locations.Queues.Create
+import Gogol.CloudTasks.Projects.Locations.Queues.Delete
+import Gogol.CloudTasks.Projects.Locations.Queues.Get
+import Gogol.CloudTasks.Projects.Locations.Queues.GetIamPolicy
+import Gogol.CloudTasks.Projects.Locations.Queues.List
+import Gogol.CloudTasks.Projects.Locations.Queues.Patch
+import Gogol.CloudTasks.Projects.Locations.Queues.Pause
+import Gogol.CloudTasks.Projects.Locations.Queues.Purge
+import Gogol.CloudTasks.Projects.Locations.Queues.Resume
+import Gogol.CloudTasks.Projects.Locations.Queues.SetIamPolicy
+import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Create
+import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Delete
+import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Get
+import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.List
+import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Run
+import Gogol.CloudTasks.Projects.Locations.Queues.TestIamPermissions
+import Gogol.CloudTasks.Types

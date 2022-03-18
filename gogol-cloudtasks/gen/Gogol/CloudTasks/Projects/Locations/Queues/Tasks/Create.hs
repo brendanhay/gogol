@@ -19,57 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Projects.Locations.Queues.Purge
+-- Module      : Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Purges a queue by deleting all of its tasks. All tasks created before this method is called are permanently deleted. Purge operations can take up to one minute to take effect. Tasks might be dispatched before the purge takes effect. A purge is irreversible.
+-- Creates a task and adds it to a queue. Tasks cannot be updated after creation; there is no UpdateTask command. * The maximum task size is 100KB.
 --
--- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.purge@.
-module Network.Google.CloudTasks.Projects.Locations.Queues.Purge
+-- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.tasks.create@.
+module Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Create
   ( -- * Resource
-    CloudTasksProjectsLocationsQueuesPurgeResource,
+    CloudTasksProjectsLocationsQueuesTasksCreateResource,
 
     -- ** Constructing a Request
-    newCloudTasksProjectsLocationsQueuesPurge,
-    CloudTasksProjectsLocationsQueuesPurge,
+    newCloudTasksProjectsLocationsQueuesTasksCreate,
+    CloudTasksProjectsLocationsQueuesTasksCreate,
   )
 where
 
-import Network.Google.CloudTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudtasks.projects.locations.queues.purge@ method which the
--- 'CloudTasksProjectsLocationsQueuesPurge' request conforms to.
-type CloudTasksProjectsLocationsQueuesPurgeResource =
+-- | A resource alias for @cloudtasks.projects.locations.queues.tasks.create@ method which the
+-- 'CloudTasksProjectsLocationsQueuesTasksCreate' request conforms to.
+type CloudTasksProjectsLocationsQueuesTasksCreateResource =
   "v2"
-    Core.:> Core.CaptureMode "name" "purge" Core.Text
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "tasks"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] PurgeQueueRequest
-    Core.:> Core.Post '[Core.JSON] Queue
+    Core.:> Core.ReqBody '[Core.JSON] CreateTaskRequest
+    Core.:> Core.Post '[Core.JSON] Task
 
--- | Purges a queue by deleting all of its tasks. All tasks created before this method is called are permanently deleted. Purge operations can take up to one minute to take effect. Tasks might be dispatched before the purge takes effect. A purge is irreversible.
+-- | Creates a task and adds it to a queue. Tasks cannot be updated after creation; there is no UpdateTask command. * The maximum task size is 100KB.
 --
--- /See:/ 'newCloudTasksProjectsLocationsQueuesPurge' smart constructor.
-data CloudTasksProjectsLocationsQueuesPurge = CloudTasksProjectsLocationsQueuesPurge
+-- /See:/ 'newCloudTasksProjectsLocationsQueuesTasksCreate' smart constructor.
+data CloudTasksProjectsLocationsQueuesTasksCreate = CloudTasksProjectsLocationsQueuesTasksCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The queue name. For example: @projects\/PROJECT_ID\/location\/LOCATION_ID\/queues\/QUEUE_ID@
-    name :: Core.Text,
+    -- | Required. The queue name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID@ The queue must already exist.
+    parent :: Core.Text,
     -- | Multipart request metadata.
-    payload :: PurgeQueueRequest,
+    payload :: CreateTaskRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,19 +78,19 @@ data CloudTasksProjectsLocationsQueuesPurge = CloudTasksProjectsLocationsQueuesP
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudTasksProjectsLocationsQueuesPurge' with the minimum fields required to make a request.
-newCloudTasksProjectsLocationsQueuesPurge ::
-  -- |  Required. The queue name. For example: @projects\/PROJECT_ID\/location\/LOCATION_ID\/queues\/QUEUE_ID@ See 'name'.
+-- | Creates a value of 'CloudTasksProjectsLocationsQueuesTasksCreate' with the minimum fields required to make a request.
+newCloudTasksProjectsLocationsQueuesTasksCreate ::
+  -- |  Required. The queue name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID@ The queue must already exist. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  PurgeQueueRequest ->
-  CloudTasksProjectsLocationsQueuesPurge
-newCloudTasksProjectsLocationsQueuesPurge name payload =
-  CloudTasksProjectsLocationsQueuesPurge
+  CreateTaskRequest ->
+  CloudTasksProjectsLocationsQueuesTasksCreate
+newCloudTasksProjectsLocationsQueuesTasksCreate parent payload =
+  CloudTasksProjectsLocationsQueuesTasksCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
+      parent = parent,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -97,18 +98,19 @@ newCloudTasksProjectsLocationsQueuesPurge name payload =
 
 instance
   Core.GoogleRequest
-    CloudTasksProjectsLocationsQueuesPurge
+    CloudTasksProjectsLocationsQueuesTasksCreate
   where
   type
-    Rs CloudTasksProjectsLocationsQueuesPurge =
-      Queue
+    Rs CloudTasksProjectsLocationsQueuesTasksCreate =
+      Task
   type
-    Scopes CloudTasksProjectsLocationsQueuesPurge =
+    Scopes
+      CloudTasksProjectsLocationsQueuesTasksCreate =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudTasksProjectsLocationsQueuesPurge {..} =
+    CloudTasksProjectsLocationsQueuesTasksCreate {..} =
       go
-        name
+        parent
         xgafv
         accessToken
         callback
@@ -122,6 +124,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudTasksProjectsLocationsQueuesPurgeResource
+                  CloudTasksProjectsLocationsQueuesTasksCreateResource
             )
             Core.mempty
