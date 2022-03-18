@@ -1,222 +1,200 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudShell
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows users to start, configure, and connect to interactive shell
--- sessions running in the cloud.
+-- Allows users to start, configure, and connect to interactive shell sessions running in the cloud.
 --
 -- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference>
 module Network.Google.CloudShell
-    (
-    -- * Service Configuration
-      cloudShellService
+  ( -- * Configuration
+    cloudShellService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , CloudShellAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** cloudshell.operations.cancel
-    , module Network.Google.Resource.CloudShell.Operations.Cancel
+    CloudShellOperationsCancelResource,
+    newCloudShellOperationsCancel,
+    CloudShellOperationsCancel,
 
     -- ** cloudshell.operations.delete
-    , module Network.Google.Resource.CloudShell.Operations.Delete
+    CloudShellOperationsDeleteResource,
+    newCloudShellOperationsDelete,
+    CloudShellOperationsDelete,
 
     -- ** cloudshell.operations.get
-    , module Network.Google.Resource.CloudShell.Operations.Get
+    CloudShellOperationsGetResource,
+    newCloudShellOperationsGet,
+    CloudShellOperationsGet,
 
     -- ** cloudshell.operations.list
-    , module Network.Google.Resource.CloudShell.Operations.List
+    CloudShellOperationsListResource,
+    newCloudShellOperationsList,
+    CloudShellOperationsList,
 
     -- ** cloudshell.users.environments.addPublicKey
-    , module Network.Google.Resource.CloudShell.Users.Environments.AddPublicKey
+    CloudShellUsersEnvironmentsAddPublicKeyResource,
+    newCloudShellUsersEnvironmentsAddPublicKey,
+    CloudShellUsersEnvironmentsAddPublicKey,
 
     -- ** cloudshell.users.environments.authorize
-    , module Network.Google.Resource.CloudShell.Users.Environments.Authorize
+    CloudShellUsersEnvironmentsAuthorizeResource,
+    newCloudShellUsersEnvironmentsAuthorize,
+    CloudShellUsersEnvironmentsAuthorize,
 
     -- ** cloudshell.users.environments.get
-    , module Network.Google.Resource.CloudShell.Users.Environments.Get
+    CloudShellUsersEnvironmentsGetResource,
+    newCloudShellUsersEnvironmentsGet,
+    CloudShellUsersEnvironmentsGet,
 
     -- ** cloudshell.users.environments.removePublicKey
-    , module Network.Google.Resource.CloudShell.Users.Environments.RemovePublicKey
+    CloudShellUsersEnvironmentsRemovePublicKeyResource,
+    newCloudShellUsersEnvironmentsRemovePublicKey,
+    CloudShellUsersEnvironmentsRemovePublicKey,
 
     -- ** cloudshell.users.environments.start
-    , module Network.Google.Resource.CloudShell.Users.Environments.Start
+    CloudShellUsersEnvironmentsStartResource,
+    newCloudShellUsersEnvironmentsStart,
+    CloudShellUsersEnvironmentsStart,
 
     -- * Types
 
-    -- ** AddPublicKeyResponse
-    , AddPublicKeyResponse
-    , addPublicKeyResponse
-    , apkrKey
-
-    -- ** CreateEnvironmentMetadata
-    , CreateEnvironmentMetadata
-    , createEnvironmentMetadata
-
-    -- ** StartEnvironmentRequest
-    , StartEnvironmentRequest
-    , startEnvironmentRequest
-    , serAccessToken
-    , serPublicKeys
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** AuthorizeEnvironmentRequest
-    , AuthorizeEnvironmentRequest
-    , authorizeEnvironmentRequest
-    , aerAccessToken
-    , aerExpireTime
-    , aerIdToken
-
-    -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** Environment
-    , Environment
-    , environment
-    , eState
-    , ePublicKeys
-    , eWebHost
-    , eSSHUsername
-    , eName
-    , eId
-    , eSSHHost
-    , eDockerImage
-    , eSSHPort
-
-    -- ** AuthorizeEnvironmentMetadata
-    , AuthorizeEnvironmentMetadata
-    , authorizeEnvironmentMetadata
-
-    -- ** RemovePublicKeyResponse
-    , RemovePublicKeyResponse
-    , removePublicKeyResponse
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** StartEnvironmentMetadataState
-    , StartEnvironmentMetadataState (..)
-
-    -- ** EnvironmentState
-    , EnvironmentState (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AddPublicKeyMetadata
-    , AddPublicKeyMetadata
-    , addPublicKeyMetadata
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** AuthorizeEnvironmentResponse
-    , AuthorizeEnvironmentResponse
-    , authorizeEnvironmentResponse
-
-    -- ** RemovePublicKeyMetadata
-    , RemovePublicKeyMetadata
-    , removePublicKeyMetadata
-
-    -- ** StartEnvironmentMetadata
-    , StartEnvironmentMetadata
-    , startEnvironmentMetadata
-    , semState
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    AddPublicKeyMetadata (..),
+    newAddPublicKeyMetadata,
 
     -- ** AddPublicKeyRequest
-    , AddPublicKeyRequest
-    , addPublicKeyRequest
-    , aKey
+    AddPublicKeyRequest (..),
+    newAddPublicKeyRequest,
 
-    -- ** StartEnvironmentResponse
-    , StartEnvironmentResponse
-    , startEnvironmentResponse
-    , serEnvironment
+    -- ** AddPublicKeyResponse
+    AddPublicKeyResponse (..),
+    newAddPublicKeyResponse,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** AuthorizeEnvironmentMetadata
+    AuthorizeEnvironmentMetadata (..),
+    newAuthorizeEnvironmentMetadata,
 
-    -- ** RemovePublicKeyRequest
-    , RemovePublicKeyRequest
-    , removePublicKeyRequest
-    , rpkrKey
+    -- ** AuthorizeEnvironmentRequest
+    AuthorizeEnvironmentRequest (..),
+    newAuthorizeEnvironmentRequest,
+
+    -- ** AuthorizeEnvironmentResponse
+    AuthorizeEnvironmentResponse (..),
+    newAuthorizeEnvironmentResponse,
+
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** CreateEnvironmentMetadata
+    CreateEnvironmentMetadata (..),
+    newCreateEnvironmentMetadata,
 
     -- ** DeleteEnvironmentMetadata
-    , DeleteEnvironmentMetadata
-    , deleteEnvironmentMetadata
-    ) where
+    DeleteEnvironmentMetadata (..),
+    newDeleteEnvironmentMetadata,
 
-import Network.Google.Prelude
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
+
+    -- ** Environment_State
+    Environment_State (..),
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** RemovePublicKeyMetadata
+    RemovePublicKeyMetadata (..),
+    newRemovePublicKeyMetadata,
+
+    -- ** RemovePublicKeyRequest
+    RemovePublicKeyRequest (..),
+    newRemovePublicKeyRequest,
+
+    -- ** RemovePublicKeyResponse
+    RemovePublicKeyResponse (..),
+    newRemovePublicKeyResponse,
+
+    -- ** StartEnvironmentMetadata
+    StartEnvironmentMetadata (..),
+    newStartEnvironmentMetadata,
+
+    -- ** StartEnvironmentMetadata_State
+    StartEnvironmentMetadata_State (..),
+
+    -- ** StartEnvironmentRequest
+    StartEnvironmentRequest (..),
+    newStartEnvironmentRequest,
+
+    -- ** StartEnvironmentResponse
+    StartEnvironmentResponse (..),
+    newStartEnvironmentResponse,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
+
+import Network.Google.CloudShell.Operations.Cancel
+import Network.Google.CloudShell.Operations.Delete
+import Network.Google.CloudShell.Operations.Get
+import Network.Google.CloudShell.Operations.List
 import Network.Google.CloudShell.Types
-import Network.Google.Resource.CloudShell.Operations.Cancel
-import Network.Google.Resource.CloudShell.Operations.Delete
-import Network.Google.Resource.CloudShell.Operations.Get
-import Network.Google.Resource.CloudShell.Operations.List
-import Network.Google.Resource.CloudShell.Users.Environments.AddPublicKey
-import Network.Google.Resource.CloudShell.Users.Environments.Authorize
-import Network.Google.Resource.CloudShell.Users.Environments.Get
-import Network.Google.Resource.CloudShell.Users.Environments.RemovePublicKey
-import Network.Google.Resource.CloudShell.Users.Environments.Start
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Shell API service.
-type CloudShellAPI =
-     UsersEnvironmentsAddPublicKeyResource :<|>
-       UsersEnvironmentsRemovePublicKeyResource
-       :<|> UsersEnvironmentsStartResource
-       :<|> UsersEnvironmentsAuthorizeResource
-       :<|> UsersEnvironmentsGetResource
-       :<|> OperationsListResource
-       :<|> OperationsGetResource
-       :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource
+import Network.Google.CloudShell.Users.Environments.AddPublicKey
+import Network.Google.CloudShell.Users.Environments.Authorize
+import Network.Google.CloudShell.Users.Environments.Get
+import Network.Google.CloudShell.Users.Environments.RemovePublicKey
+import Network.Google.CloudShell.Users.Environments.Start

@@ -1,171 +1,153 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudShell.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudShell.Types
-    (
-    -- * Service Configuration
-      cloudShellService
+  ( -- * Configuration
+    cloudShellService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * AddPublicKeyResponse
-    , AddPublicKeyResponse
-    , addPublicKeyResponse
-    , apkrKey
+    -- * Types
 
-    -- * CreateEnvironmentMetadata
-    , CreateEnvironmentMetadata
-    , createEnvironmentMetadata
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * StartEnvironmentRequest
-    , StartEnvironmentRequest
-    , startEnvironmentRequest
-    , serAccessToken
-    , serPublicKeys
+    -- ** AddPublicKeyMetadata
+    AddPublicKeyMetadata (..),
+    newAddPublicKeyMetadata,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** AddPublicKeyRequest
+    AddPublicKeyRequest (..),
+    newAddPublicKeyRequest,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** AddPublicKeyResponse
+    AddPublicKeyResponse (..),
+    newAddPublicKeyResponse,
 
-    -- * AuthorizeEnvironmentRequest
-    , AuthorizeEnvironmentRequest
-    , authorizeEnvironmentRequest
-    , aerAccessToken
-    , aerExpireTime
-    , aerIdToken
+    -- ** AuthorizeEnvironmentMetadata
+    AuthorizeEnvironmentMetadata (..),
+    newAuthorizeEnvironmentMetadata,
 
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
+    -- ** AuthorizeEnvironmentRequest
+    AuthorizeEnvironmentRequest (..),
+    newAuthorizeEnvironmentRequest,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** AuthorizeEnvironmentResponse
+    AuthorizeEnvironmentResponse (..),
+    newAuthorizeEnvironmentResponse,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- * Environment
-    , Environment
-    , environment
-    , eState
-    , ePublicKeys
-    , eWebHost
-    , eSSHUsername
-    , eName
-    , eId
-    , eSSHHost
-    , eDockerImage
-    , eSSHPort
+    -- ** CreateEnvironmentMetadata
+    CreateEnvironmentMetadata (..),
+    newCreateEnvironmentMetadata,
 
-    -- * AuthorizeEnvironmentMetadata
-    , AuthorizeEnvironmentMetadata
-    , authorizeEnvironmentMetadata
+    -- ** DeleteEnvironmentMetadata
+    DeleteEnvironmentMetadata (..),
+    newDeleteEnvironmentMetadata,
 
-    -- * RemovePublicKeyResponse
-    , RemovePublicKeyResponse
-    , removePublicKeyResponse
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
 
-    -- * StartEnvironmentMetadataState
-    , StartEnvironmentMetadataState (..)
+    -- ** Environment_State
+    Environment_State (..),
 
-    -- * EnvironmentState
-    , EnvironmentState (..)
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * AddPublicKeyMetadata
-    , AddPublicKeyMetadata
-    , addPublicKeyMetadata
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * AuthorizeEnvironmentResponse
-    , AuthorizeEnvironmentResponse
-    , authorizeEnvironmentResponse
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * RemovePublicKeyMetadata
-    , RemovePublicKeyMetadata
-    , removePublicKeyMetadata
+    -- ** RemovePublicKeyMetadata
+    RemovePublicKeyMetadata (..),
+    newRemovePublicKeyMetadata,
 
-    -- * StartEnvironmentMetadata
-    , StartEnvironmentMetadata
-    , startEnvironmentMetadata
-    , semState
+    -- ** RemovePublicKeyRequest
+    RemovePublicKeyRequest (..),
+    newRemovePublicKeyRequest,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** RemovePublicKeyResponse
+    RemovePublicKeyResponse (..),
+    newRemovePublicKeyResponse,
 
-    -- * AddPublicKeyRequest
-    , AddPublicKeyRequest
-    , addPublicKeyRequest
-    , aKey
+    -- ** StartEnvironmentMetadata
+    StartEnvironmentMetadata (..),
+    newStartEnvironmentMetadata,
 
-    -- * StartEnvironmentResponse
-    , StartEnvironmentResponse
-    , startEnvironmentResponse
-    , serEnvironment
+    -- ** StartEnvironmentMetadata_State
+    StartEnvironmentMetadata_State (..),
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** StartEnvironmentRequest
+    StartEnvironmentRequest (..),
+    newStartEnvironmentRequest,
 
-    -- * RemovePublicKeyRequest
-    , RemovePublicKeyRequest
-    , removePublicKeyRequest
-    , rpkrKey
+    -- ** StartEnvironmentResponse
+    StartEnvironmentResponse (..),
+    newStartEnvironmentResponse,
 
-    -- * DeleteEnvironmentMetadata
-    , DeleteEnvironmentMetadata
-    , deleteEnvironmentMetadata
-    ) where
+    -- ** Status
+    Status (..),
+    newStatus,
 
-import Network.Google.CloudShell.Types.Product
-import Network.Google.CloudShell.Types.Sum
-import Network.Google.Prelude
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
 
--- | Default request referring to version 'v1' of the Cloud Shell API. This contains the host and root path used as a starting point for constructing service requests.
-cloudShellService :: ServiceConfig
-cloudShellService
-  = defaultService (ServiceId "cloudshell:v1")
-      "cloudshell.googleapis.com"
+import Network.Google.CloudShell.Internal.Product
+import Network.Google.CloudShell.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v1@ of the Cloud Shell API. This contains the host and root path used as a starting point for constructing service requests.
+cloudShellService :: Core.ServiceConfig
+cloudShellService =
+  Core.defaultService
+    (Core.ServiceId "cloudshell:v1")
+    "cloudshell.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
