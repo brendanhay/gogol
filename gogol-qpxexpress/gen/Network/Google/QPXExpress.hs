@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.QPXExpress
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,260 +30,115 @@
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
 module Network.Google.QPXExpress
-    (
-    -- * Service Configuration
-      qPXExpressService
-
-    -- * API Declaration
-    , QPXExpressAPI
+  ( -- * Configuration
+    qPXExpressService,
 
     -- * Resources
 
     -- ** qpxExpress.trips.search
-    , module Network.Google.Resource.QPXExpress.Trips.Search
+    QPXExpressTripsSearchResource,
+    newQPXExpressTripsSearch,
+    QPXExpressTripsSearch,
 
     -- * Types
 
-    -- ** TripOptionsResponse
-    , TripOptionsResponse
-    , tripOptionsResponse
-    , torRequestId
-    , torKind
-    , torData
-    , torTripOption
-
-    -- ** CarrierData
-    , CarrierData
-    , carrierData
-    , cdKind
-    , cdName
-    , cdCode
-
-    -- ** FreeBaggageAllowance
-    , FreeBaggageAllowance
-    , freeBaggageAllowance
-    , fbaKind
-    , fbaPounds
-    , fbaBagDescriptor
-    , fbaKilosPerPiece
-    , fbaKilos
-    , fbaPieces
-
-    -- ** TimeOfDayRange
-    , TimeOfDayRange
-    , timeOfDayRange
-    , todrKind
-    , todrLatestTime
-    , todrEarliestTime
-
-    -- ** Data'
-    , Data'
-    , data'
-    , dCarrier
-    , dKind
-    , dAircraft
-    , dAirport
-    , dCity
-    , dTax
-
     -- ** AircraftData
-    , AircraftData
-    , aircraftData
-    , adKind
-    , adName
-    , adCode
-
-    -- ** LegInfo
-    , LegInfo
-    , legInfo
-    , liDestination
-    , liOrigin
-    , liSecure
-    , liKind
-    , liAircraft
-    , liArrivalTime
-    , liOnTimePerformance
-    , liOperatingDisclosure
-    , liMeal
-    , liId
-    , liOriginTerminal
-    , liChangePlane
-    , liDestinationTerminal
-    , liConnectionDuration
-    , liDuration
-    , liMileage
-    , liDePartureTime
+    AircraftData (..),
+    newAircraftData,
 
     -- ** AirportData
-    , AirportData
-    , airportData
-    , aKind
-    , aName
-    , aCity
-    , aCode
-
-    -- ** SegmentPricing
-    , SegmentPricing
-    , segmentPricing
-    , spFreeBaggageOption
-    , spKind
-    , spFareId
-    , spSegmentId
-
-    -- ** SliceInfo
-    , SliceInfo
-    , sliceInfo
-    , siKind
-    , siSegment
-    , siDuration
-
-    -- ** TripsSearchResponse
-    , TripsSearchResponse
-    , tripsSearchResponse
-    , tsrTrips
-    , tsrKind
-
-    -- ** TripOption
-    , TripOption
-    , tripOption
-    , toPricing
-    , toKind
-    , toId
-    , toSlice
-    , toSaleTotal
+    AirportData (..),
+    newAirportData,
 
     -- ** BagDescriptor
-    , BagDescriptor
-    , bagDescriptor
-    , bdKind
-    , bdCommercialName
-    , bdCount
-    , bdDescription
-    , bdSubcode
+    BagDescriptor (..),
+    newBagDescriptor,
+
+    -- ** CarrierData
+    CarrierData (..),
+    newCarrierData,
 
     -- ** CityData
-    , CityData
-    , cityData
-    , cCountry
-    , cKind
-    , cName
-    , cCode
+    CityData (..),
+    newCityData,
 
-    -- ** PassengerCounts
-    , PassengerCounts
-    , passengerCounts
-    , pcSeniorCount
-    , pcKind
-    , pcInfantInLapCount
-    , pcChildCount
-    , pcInfantInSeatCount
-    , pcAdultCount
-
-    -- ** SegmentInfo
-    , SegmentInfo
-    , segmentInfo
-    , sBookingCode
-    , sCabin
-    , sBookingCodeCount
-    , sSubjectToGovernmentApproval
-    , sKind
-    , sFlight
-    , sId
-    , sMarriedSegmentGroup
-    , sConnectionDuration
-    , sDuration
-    , sLeg
-
-    -- ** TaxData
-    , TaxData
-    , taxData
-    , tdKind
-    , tdName
-    , tdId
-
-    -- ** TripsSearchRequest
-    , TripsSearchRequest
-    , tripsSearchRequest
-    , tsrRequest
-
-    -- ** TaxInfo
-    , TaxInfo
-    , taxInfo
-    , tiChargeType
-    , tiCountry
-    , tiKind
-    , tiSalePrice
-    , tiCode
-    , tiId
-
-    -- ** PricingInfo
-    , PricingInfo
-    , pricingInfo
-    , piSaleTaxTotal
-    , piRefundable
-    , piPtc
-    , piBaseFareTotal
-    , piFare
-    , piKind
-    , piSegmentPricing
-    , piPassengers
-    , piFareCalculation
-    , piLatestTicketingTime
-    , piTax
-    , piSaleTotal
-    , piSaleFareTotal
-
-    -- ** FlightInfo
-    , FlightInfo
-    , flightInfo
-    , fiCarrier
-    , fiNumber
+    -- ** Data'
+    Data' (..),
+    newData,
 
     -- ** FareInfo
-    , FareInfo
-    , fareInfo
-    , fCarrier
-    , fDestination
-    , fOrigin
-    , fPrivate
-    , fKind
-    , fBasisCode
-    , fId
+    FareInfo (..),
+    newFareInfo,
 
-    -- ** TripOptionsRequest
-    , TripOptionsRequest
-    , tripOptionsRequest
-    , torRefundable
-    , torSaleCountry
-    , torPassengers
-    , torTicketingCountry
-    , torSolutions
-    , torSlice
-    , torMaxPrice
+    -- ** FlightInfo
+    FlightInfo (..),
+    newFlightInfo,
+
+    -- ** FreeBaggageAllowance
+    FreeBaggageAllowance (..),
+    newFreeBaggageAllowance,
+
+    -- ** LegInfo
+    LegInfo (..),
+    newLegInfo,
+
+    -- ** PassengerCounts
+    PassengerCounts (..),
+    newPassengerCounts,
+
+    -- ** PricingInfo
+    PricingInfo (..),
+    newPricingInfo,
+
+    -- ** SegmentInfo
+    SegmentInfo (..),
+    newSegmentInfo,
+
+    -- ** SegmentPricing
+    SegmentPricing (..),
+    newSegmentPricing,
+
+    -- ** SliceInfo
+    SliceInfo (..),
+    newSliceInfo,
 
     -- ** SliceInput
-    , SliceInput
-    , sliceInput
-    , sliDestination
-    , sliOrigin
-    , sliMaxStops
-    , sliKind
-    , sliProhibitedCarrier
-    , sliDate
-    , sliMaxConnectionDuration
-    , sliPreferredCabin
-    , sliPermittedDePartureTime
-    , sliPermittedCarrier
-    , sliAlliance
-    ) where
+    SliceInput (..),
+    newSliceInput,
 
-import Network.Google.Prelude
+    -- ** TaxData
+    TaxData (..),
+    newTaxData,
+
+    -- ** TaxInfo
+    TaxInfo (..),
+    newTaxInfo,
+
+    -- ** TimeOfDayRange
+    TimeOfDayRange (..),
+    newTimeOfDayRange,
+
+    -- ** TripOption
+    TripOption (..),
+    newTripOption,
+
+    -- ** TripOptionsRequest
+    TripOptionsRequest (..),
+    newTripOptionsRequest,
+
+    -- ** TripOptionsResponse
+    TripOptionsResponse (..),
+    newTripOptionsResponse,
+
+    -- ** TripsSearchRequest
+    TripsSearchRequest (..),
+    newTripsSearchRequest,
+
+    -- ** TripsSearchResponse
+    TripsSearchResponse (..),
+    newTripsSearchResponse,
+  )
+where
+
+import Network.Google.QPXExpress.Trips.Search
 import Network.Google.QPXExpress.Types
-import Network.Google.Resource.QPXExpress.Trips.Search
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the QPX Express API service.
-type QPXExpressAPI = TripsSearchResource
