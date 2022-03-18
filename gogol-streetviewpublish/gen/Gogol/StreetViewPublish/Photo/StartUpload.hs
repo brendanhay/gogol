@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photo.StartUpload
+-- Module      : Gogol.StreetViewPublish.Photo.StartUpload
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates an upload session to start uploading photo bytes. The method uses the upload URL of the returned UploadRef to upload the bytes for the Photo. In addition to the photo requirements shown in https:\/\/support.google.com\/maps\/answer\/7012050?ref/topic=6275604, the photo must meet the following requirements: * Photo Sphere XMP metadata must be included in the photo metadata. See https:\/\/developers.google.com\/streetview\/spherical-metadata for the required fields. * The pixel size of the photo must meet the size requirements listed in https:\/\/support.google.com\/maps\/answer\/7012050?ref/topic=6275604, and the photo must be a full 360 horizontally. After the upload completes, the method uses UploadRef with CreatePhoto to create the Photo object entry.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photo.startUpload@.
-module Network.Google.StreetViewPublish.Photo.StartUpload
+module Gogol.StreetViewPublish.Photo.StartUpload
   ( -- * Resource
     StreetViewPublishPhotoStartUploadResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photo.StartUpload
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.startUpload@ method which the
 -- 'StreetViewPublishPhotoStartUpload' request conforms to.

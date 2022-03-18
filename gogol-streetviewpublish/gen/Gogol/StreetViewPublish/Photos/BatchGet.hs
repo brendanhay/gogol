@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photos.BatchGet
+-- Module      : Gogol.StreetViewPublish.Photos.BatchGet
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the metadata of the specified Photo batch. Note that if BatchGetPhotos fails, either critical fields are missing or there is an authentication error. Even if BatchGetPhotos succeeds, individual photos in the batch may have failures. These failures are specified in each PhotoResponse.status in BatchGetPhotosResponse.results. See GetPhoto for specific failures that can occur per photo.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photos.batchGet@.
-module Network.Google.StreetViewPublish.Photos.BatchGet
+module Gogol.StreetViewPublish.Photos.BatchGet
   ( -- * Resource
     StreetViewPublishPhotosBatchGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photos.BatchGet
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.batchGet@ method which the
 -- 'StreetViewPublishPhotosBatchGet' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photo.Create
+-- Module      : Gogol.StreetViewPublish.Photo.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- After the client finishes uploading the photo with the returned UploadRef, CreatePhoto publishes the uploaded Photo to Street View on Google Maps. Currently, the only way to set heading, pitch, and roll in CreatePhoto is through the <https://developers.google.com/streetview/spherical-metadata Photo Sphere XMP metadata> in the photo bytes. CreatePhoto ignores the @pose.heading@, @pose.pitch@, @pose.roll@, @pose.altitude@, and @pose.level@ fields in Pose. This method returns the following error codes: * google.rpc.Code.INVALID/ARGUMENT if the request is malformed or if the uploaded photo is not a 360 photo. * google.rpc.Code.NOT/FOUND if the upload reference does not exist. * google.rpc.Code.RESOURCE_EXHAUSTED if the account has reached the storage limit.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photo.create@.
-module Network.Google.StreetViewPublish.Photo.Create
+module Gogol.StreetViewPublish.Photo.Create
   ( -- * Resource
     StreetViewPublishPhotoCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photo.Create
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.create@ method which the
 -- 'StreetViewPublishPhotoCreate' request conforms to.

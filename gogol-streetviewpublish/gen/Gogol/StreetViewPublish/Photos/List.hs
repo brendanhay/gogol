@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photos.List
+-- Module      : Gogol.StreetViewPublish.Photos.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists all the Photos that belong to the user. > Note: Recently created photos that are still being indexed are not returned in the response.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photos.list@.
-module Network.Google.StreetViewPublish.Photos.List
+module Gogol.StreetViewPublish.Photos.List
   ( -- * Resource
     StreetViewPublishPhotosListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photos.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.list@ method which the
 -- 'StreetViewPublishPhotosList' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photo.Update
+-- Module      : Gogol.StreetViewPublish.Photo.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates the metadata of a Photo, such as pose, place association, connections, etc. Changing the pixels of a photo is not supported. Only the fields specified in the updateMask field are used. If @updateMask@ is not present, the update applies to all fields. This method returns the following error codes: * google.rpc.Code.PERMISSION/DENIED if the requesting user did not create the requested photo. * google.rpc.Code.INVALID/ARGUMENT if the request is malformed. * google.rpc.Code.NOT_FOUND if the requested photo does not exist. * google.rpc.Code.UNAVAILABLE if the requested Photo is still being indexed.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photo.update@.
-module Network.Google.StreetViewPublish.Photo.Update
+module Gogol.StreetViewPublish.Photo.Update
   ( -- * Resource
     StreetViewPublishPhotoUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photo.Update
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.update@ method which the
 -- 'StreetViewPublishPhotoUpdate' request conforms to.

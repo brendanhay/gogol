@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photo.Get
+-- Module      : Gogol.StreetViewPublish.Photo.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the metadata of the specified Photo. This method returns the following error codes: * google.rpc.Code.PERMISSION/DENIED if the requesting user did not create the requested Photo. * google.rpc.Code.NOT/FOUND if the requested Photo does not exist. * google.rpc.Code.UNAVAILABLE if the requested Photo is still being indexed.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photo.get@.
-module Network.Google.StreetViewPublish.Photo.Get
+module Gogol.StreetViewPublish.Photo.Get
   ( -- * Resource
     StreetViewPublishPhotoGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photo.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.get@ method which the
 -- 'StreetViewPublishPhotoGet' request conforms to.

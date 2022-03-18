@@ -19,18 +19,69 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Types
+-- Module      : Gogol.StreetViewPublish
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.StreetViewPublish.Types
+--
+-- Publishes 360 photos to Google Maps, along with position, orientation, and connectivity metadata. Apps can offer an interface for positioning, connecting, and uploading user-generated Street View images.
+--
+-- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference>
+module Gogol.StreetViewPublish
   ( -- * Configuration
     streetViewPublishService,
 
     -- * OAuth Scopes
     streetViewPublishScope,
+
+    -- * Resources
+
+    -- ** streetviewpublish.photo.create
+    StreetViewPublishPhotoCreateResource,
+    newStreetViewPublishPhotoCreate,
+    StreetViewPublishPhotoCreate,
+
+    -- ** streetviewpublish.photo.delete
+    StreetViewPublishPhotoDeleteResource,
+    newStreetViewPublishPhotoDelete,
+    StreetViewPublishPhotoDelete,
+
+    -- ** streetviewpublish.photo.get
+    StreetViewPublishPhotoGetResource,
+    newStreetViewPublishPhotoGet,
+    StreetViewPublishPhotoGet,
+
+    -- ** streetviewpublish.photo.startUpload
+    StreetViewPublishPhotoStartUploadResource,
+    newStreetViewPublishPhotoStartUpload,
+    StreetViewPublishPhotoStartUpload,
+
+    -- ** streetviewpublish.photo.update
+    StreetViewPublishPhotoUpdateResource,
+    newStreetViewPublishPhotoUpdate,
+    StreetViewPublishPhotoUpdate,
+
+    -- ** streetviewpublish.photos.batchDelete
+    StreetViewPublishPhotosBatchDeleteResource,
+    newStreetViewPublishPhotosBatchDelete,
+    StreetViewPublishPhotosBatchDelete,
+
+    -- ** streetviewpublish.photos.batchGet
+    StreetViewPublishPhotosBatchGetResource,
+    newStreetViewPublishPhotosBatchGet,
+    StreetViewPublishPhotosBatchGet,
+
+    -- ** streetviewpublish.photos.batchUpdate
+    StreetViewPublishPhotosBatchUpdateResource,
+    newStreetViewPublishPhotosBatchUpdate,
+    StreetViewPublishPhotosBatchUpdate,
+
+    -- ** streetviewpublish.photos.list
+    StreetViewPublishPhotosListResource,
+    newStreetViewPublishPhotosList,
+    StreetViewPublishPhotosList,
 
     -- * Types
 
@@ -142,17 +193,13 @@ module Network.Google.StreetViewPublish.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Internal.Product
-import Network.Google.StreetViewPublish.Internal.Sum
-
--- | Default request referring to version @v1@ of the Street View Publish API. This contains the host and root path used as a starting point for constructing service requests.
-streetViewPublishService :: Core.ServiceConfig
-streetViewPublishService =
-  Core.defaultService
-    (Core.ServiceId "streetviewpublish:v1")
-    "streetviewpublish.googleapis.com"
-
--- | Publish and manage your 360 photos on Google Street View
-streetViewPublishScope :: Core.Proxy '["https://www.googleapis.com/auth/streetviewpublish"]
-streetViewPublishScope = Core.Proxy
+import Gogol.StreetViewPublish.Photo.Create
+import Gogol.StreetViewPublish.Photo.Delete
+import Gogol.StreetViewPublish.Photo.Get
+import Gogol.StreetViewPublish.Photo.StartUpload
+import Gogol.StreetViewPublish.Photo.Update
+import Gogol.StreetViewPublish.Photos.BatchDelete
+import Gogol.StreetViewPublish.Photos.BatchGet
+import Gogol.StreetViewPublish.Photos.BatchUpdate
+import Gogol.StreetViewPublish.Photos.List
+import Gogol.StreetViewPublish.Types

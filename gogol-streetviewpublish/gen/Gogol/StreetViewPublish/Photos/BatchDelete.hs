@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photos.BatchDelete
+-- Module      : Gogol.StreetViewPublish.Photos.BatchDelete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a list of Photos and their metadata. Note that if BatchDeletePhotos fails, either critical fields are missing or there is an authentication error. Even if BatchDeletePhotos succeeds, individual photos in the batch may have failures. These failures are specified in each PhotoResponse.status in BatchDeletePhotosResponse.results. See DeletePhoto for specific failures that can occur per photo.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photos.batchDelete@.
-module Network.Google.StreetViewPublish.Photos.BatchDelete
+module Gogol.StreetViewPublish.Photos.BatchDelete
   ( -- * Resource
     StreetViewPublishPhotosBatchDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photos.BatchDelete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.batchDelete@ method which the
 -- 'StreetViewPublishPhotosBatchDelete' request conforms to.
