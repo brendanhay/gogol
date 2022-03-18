@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,96 +36,89 @@
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @partners.companies.leads.create@.
 module Gogol.Partners.Companies.Leads.Create
-  ( -- * Resource
-    PartnersCompaniesLeadsCreateResource,
+    (
+    -- * Resource
+      PartnersCompaniesLeadsCreateResource
 
     -- ** Constructing a Request
-    newPartnersCompaniesLeadsCreate,
-    PartnersCompaniesLeadsCreate,
-  )
-where
+    , newPartnersCompaniesLeadsCreate
+    , PartnersCompaniesLeadsCreate
+    ) where
 
-import Gogol.Partners.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Partners.Types
 
 -- | A resource alias for @partners.companies.leads.create@ method which the
 -- 'PartnersCompaniesLeadsCreate' request conforms to.
 type PartnersCompaniesLeadsCreateResource =
-  "v2"
-    Core.:> "companies"
-    Core.:> Core.Capture "companyId" Core.Text
-    Core.:> "leads"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CreateLeadRequest
-    Core.:> Core.Post '[Core.JSON] CreateLeadResponse
+     "v2" Core.:>
+       "companies" Core.:>
+         Core.Capture "companyId" Core.Text Core.:>
+           "leads" Core.:>
+             Core.QueryParam "$.xgafv" Xgafv Core.:>
+               Core.QueryParam "access_token" Core.Text Core.:>
+                 Core.QueryParam "callback" Core.Text Core.:>
+                   Core.QueryParam "uploadType" Core.Text Core.:>
+                     Core.QueryParam "upload_protocol" Core.Text Core.:>
+                       Core.QueryParam "alt" Core.AltJSON Core.:>
+                         Core.ReqBody '[Core.JSON] CreateLeadRequest Core.:>
+                           Core.Post '[Core.JSON] CreateLeadResponse
 
 -- | Creates an advertiser lead for the given company ID.
 --
 -- /See:/ 'newPartnersCompaniesLeadsCreate' smart constructor.
 data PartnersCompaniesLeadsCreate = PartnersCompaniesLeadsCreate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The ID of the company to contact.
-    companyId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: CreateLeadRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The ID of the company to contact.
+    , companyId :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: CreateLeadRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PartnersCompaniesLeadsCreate' with the minimum fields required to make a request.
-newPartnersCompaniesLeadsCreate ::
-  -- |  The ID of the company to contact. See 'companyId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  CreateLeadRequest ->
-  PartnersCompaniesLeadsCreate
+newPartnersCompaniesLeadsCreate 
+    ::  Core.Text
+       -- ^  The ID of the company to contact. See 'companyId'.
+    -> CreateLeadRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> PartnersCompaniesLeadsCreate
 newPartnersCompaniesLeadsCreate companyId payload =
   PartnersCompaniesLeadsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      companyId = companyId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , companyId = companyId
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PartnersCompaniesLeadsCreate
-  where
-  type
-    Rs PartnersCompaniesLeadsCreate =
-      CreateLeadResponse
-  type Scopes PartnersCompaniesLeadsCreate = '[]
-  requestClient PartnersCompaniesLeadsCreate {..} =
-    go
-      companyId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      partnersService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PartnersCompaniesLeadsCreateResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           PartnersCompaniesLeadsCreate
+         where
+        type Rs PartnersCompaniesLeadsCreate =
+             CreateLeadResponse
+        type Scopes PartnersCompaniesLeadsCreate = '[]
+        requestClient PartnersCompaniesLeadsCreate{..}
+          = go companyId xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              partnersService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy PartnersCompaniesLeadsCreateResource)
+                      Core.mempty
+
