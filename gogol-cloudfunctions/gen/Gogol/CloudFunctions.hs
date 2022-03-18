@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions
+-- Module      : Gogol.CloudFunctions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Manages lightweight user-provided functions executed in response to events.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference>
-module Network.Google.CloudFunctions
+module Gogol.CloudFunctions
   ( -- * Configuration
     cloudFunctionsService,
 
@@ -348,18 +348,18 @@ module Network.Google.CloudFunctions
   )
 where
 
-import Network.Google.CloudFunctions.Projects.Locations.Functions.Create
-import Network.Google.CloudFunctions.Projects.Locations.Functions.Delete
-import Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
-import Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
-import Network.Google.CloudFunctions.Projects.Locations.Functions.Get
-import Network.Google.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
-import Network.Google.CloudFunctions.Projects.Locations.Functions.List
-import Network.Google.CloudFunctions.Projects.Locations.Functions.Patch
-import Network.Google.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
-import Network.Google.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
-import Network.Google.CloudFunctions.Projects.Locations.List
-import Network.Google.CloudFunctions.Projects.Locations.Operations.Get
-import Network.Google.CloudFunctions.Projects.Locations.Operations.List
-import Network.Google.CloudFunctions.Projects.Locations.Runtimes.List
-import Network.Google.CloudFunctions.Types
+import Gogol.CloudFunctions.Projects.Locations.Functions.Create
+import Gogol.CloudFunctions.Projects.Locations.Functions.Delete
+import Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
+import Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
+import Gogol.CloudFunctions.Projects.Locations.Functions.Get
+import Gogol.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
+import Gogol.CloudFunctions.Projects.Locations.Functions.List
+import Gogol.CloudFunctions.Projects.Locations.Functions.Patch
+import Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
+import Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
+import Gogol.CloudFunctions.Projects.Locations.List
+import Gogol.CloudFunctions.Projects.Locations.Operations.Get
+import Gogol.CloudFunctions.Projects.Locations.Operations.List
+import Gogol.CloudFunctions.Projects.Locations.Runtimes.List
+import Gogol.CloudFunctions.Types

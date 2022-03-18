@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Runtimes.List
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Runtimes.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a list of runtimes that are supported for the requested project.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.runtimes.list@.
-module Network.Google.CloudFunctions.Projects.Locations.Runtimes.List
+module Gogol.CloudFunctions.Projects.Locations.Runtimes.List
   ( -- * Resource
     CloudFunctionsProjectsLocationsRuntimesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Runtimes.List
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.runtimes.list@ method which the
 -- 'CloudFunctionsProjectsLocationsRuntimesList' request conforms to.

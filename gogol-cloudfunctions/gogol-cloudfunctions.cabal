@@ -39,31 +39,32 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudFunctions
-    Network.Google.CloudFunctions.Projects.Locations.Functions.Create
-    Network.Google.CloudFunctions.Projects.Locations.Functions.Delete
-    Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
-    Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
-    Network.Google.CloudFunctions.Projects.Locations.Functions.Get
-    Network.Google.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
-    Network.Google.CloudFunctions.Projects.Locations.Functions.List
-    Network.Google.CloudFunctions.Projects.Locations.Functions.Patch
-    Network.Google.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
-    Network.Google.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
-    Network.Google.CloudFunctions.Projects.Locations.List
-    Network.Google.CloudFunctions.Projects.Locations.Operations.Get
-    Network.Google.CloudFunctions.Projects.Locations.Operations.List
-    Network.Google.CloudFunctions.Projects.Locations.Runtimes.List
-    Network.Google.CloudFunctions.Types
+    Gogol.CloudFunctions
+    Gogol.CloudFunctions.Projects.Locations.Functions.Create
+    Gogol.CloudFunctions.Projects.Locations.Functions.Delete
+    Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
+    Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
+    Gogol.CloudFunctions.Projects.Locations.Functions.Get
+    Gogol.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
+    Gogol.CloudFunctions.Projects.Locations.Functions.List
+    Gogol.CloudFunctions.Projects.Locations.Functions.Patch
+    Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
+    Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
+    Gogol.CloudFunctions.Projects.Locations.List
+    Gogol.CloudFunctions.Projects.Locations.Operations.Get
+    Gogol.CloudFunctions.Projects.Locations.Operations.List
+    Gogol.CloudFunctions.Projects.Locations.Runtimes.List
+    Gogol.CloudFunctions.Types
 
   other-modules:
-    Network.Google.CloudFunctions.Internal.Product
-    Network.Google.CloudFunctions.Internal.Sum
+    Gogol.CloudFunctions.Internal.Product
+    Gogol.CloudFunctions.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
