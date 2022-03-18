@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppEngine
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,936 +30,662 @@
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference>
 module Network.Google.AppEngine
-    (
-    -- * Service Configuration
-      appEngineService
+  ( -- * Configuration
+    appEngineService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , appEngineAdminScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , AppEngineAPI
+    appEngineAdminScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
     -- * Resources
 
     -- ** appengine.apps.authorizedCertificates.create
-    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Create
+    AppEngineAppsAuthorizedCertificatesCreateResource,
+    newAppEngineAppsAuthorizedCertificatesCreate,
+    AppEngineAppsAuthorizedCertificatesCreate,
 
     -- ** appengine.apps.authorizedCertificates.delete
-    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Delete
+    AppEngineAppsAuthorizedCertificatesDeleteResource,
+    newAppEngineAppsAuthorizedCertificatesDelete,
+    AppEngineAppsAuthorizedCertificatesDelete,
 
     -- ** appengine.apps.authorizedCertificates.get
-    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Get
+    AppEngineAppsAuthorizedCertificatesGetResource,
+    newAppEngineAppsAuthorizedCertificatesGet,
+    AppEngineAppsAuthorizedCertificatesGet,
 
     -- ** appengine.apps.authorizedCertificates.list
-    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.List
+    AppEngineAppsAuthorizedCertificatesListResource,
+    newAppEngineAppsAuthorizedCertificatesList,
+    AppEngineAppsAuthorizedCertificatesList,
 
     -- ** appengine.apps.authorizedCertificates.patch
-    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Patch
+    AppEngineAppsAuthorizedCertificatesPatchResource,
+    newAppEngineAppsAuthorizedCertificatesPatch,
+    AppEngineAppsAuthorizedCertificatesPatch,
 
     -- ** appengine.apps.authorizedDomains.list
-    , module Network.Google.Resource.AppEngine.Apps.AuthorizedDomains.List
+    AppEngineAppsAuthorizedDomainsListResource,
+    newAppEngineAppsAuthorizedDomainsList,
+    AppEngineAppsAuthorizedDomainsList,
 
     -- ** appengine.apps.create
-    , module Network.Google.Resource.AppEngine.Apps.Create
+    AppEngineAppsCreateResource,
+    newAppEngineAppsCreate,
+    AppEngineAppsCreate,
 
     -- ** appengine.apps.domainMappings.create
-    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Create
+    AppEngineAppsDomainMappingsCreateResource,
+    newAppEngineAppsDomainMappingsCreate,
+    AppEngineAppsDomainMappingsCreate,
 
     -- ** appengine.apps.domainMappings.delete
-    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Delete
+    AppEngineAppsDomainMappingsDeleteResource,
+    newAppEngineAppsDomainMappingsDelete,
+    AppEngineAppsDomainMappingsDelete,
 
     -- ** appengine.apps.domainMappings.get
-    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Get
+    AppEngineAppsDomainMappingsGetResource,
+    newAppEngineAppsDomainMappingsGet,
+    AppEngineAppsDomainMappingsGet,
 
     -- ** appengine.apps.domainMappings.list
-    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.List
+    AppEngineAppsDomainMappingsListResource,
+    newAppEngineAppsDomainMappingsList,
+    AppEngineAppsDomainMappingsList,
 
     -- ** appengine.apps.domainMappings.patch
-    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Patch
+    AppEngineAppsDomainMappingsPatchResource,
+    newAppEngineAppsDomainMappingsPatch,
+    AppEngineAppsDomainMappingsPatch,
 
     -- ** appengine.apps.firewall.ingressRules.batchUpdate
-    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
+    AppEngineAppsFirewallIngressRulesBatchUpdateResource,
+    newAppEngineAppsFirewallIngressRulesBatchUpdate,
+    AppEngineAppsFirewallIngressRulesBatchUpdate,
 
     -- ** appengine.apps.firewall.ingressRules.create
-    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Create
+    AppEngineAppsFirewallIngressRulesCreateResource,
+    newAppEngineAppsFirewallIngressRulesCreate,
+    AppEngineAppsFirewallIngressRulesCreate,
 
     -- ** appengine.apps.firewall.ingressRules.delete
-    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Delete
+    AppEngineAppsFirewallIngressRulesDeleteResource,
+    newAppEngineAppsFirewallIngressRulesDelete,
+    AppEngineAppsFirewallIngressRulesDelete,
 
     -- ** appengine.apps.firewall.ingressRules.get
-    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Get
+    AppEngineAppsFirewallIngressRulesGetResource,
+    newAppEngineAppsFirewallIngressRulesGet,
+    AppEngineAppsFirewallIngressRulesGet,
 
     -- ** appengine.apps.firewall.ingressRules.list
-    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.List
+    AppEngineAppsFirewallIngressRulesListResource,
+    newAppEngineAppsFirewallIngressRulesList,
+    AppEngineAppsFirewallIngressRulesList,
 
     -- ** appengine.apps.firewall.ingressRules.patch
-    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Patch
+    AppEngineAppsFirewallIngressRulesPatchResource,
+    newAppEngineAppsFirewallIngressRulesPatch,
+    AppEngineAppsFirewallIngressRulesPatch,
 
     -- ** appengine.apps.get
-    , module Network.Google.Resource.AppEngine.Apps.Get
+    AppEngineAppsGetResource,
+    newAppEngineAppsGet,
+    AppEngineAppsGet,
 
     -- ** appengine.apps.locations.get
-    , module Network.Google.Resource.AppEngine.Apps.Locations.Get
+    AppEngineAppsLocationsGetResource,
+    newAppEngineAppsLocationsGet,
+    AppEngineAppsLocationsGet,
 
     -- ** appengine.apps.locations.list
-    , module Network.Google.Resource.AppEngine.Apps.Locations.List
+    AppEngineAppsLocationsListResource,
+    newAppEngineAppsLocationsList,
+    AppEngineAppsLocationsList,
 
     -- ** appengine.apps.operations.get
-    , module Network.Google.Resource.AppEngine.Apps.Operations.Get
+    AppEngineAppsOperationsGetResource,
+    newAppEngineAppsOperationsGet,
+    AppEngineAppsOperationsGet,
 
     -- ** appengine.apps.operations.list
-    , module Network.Google.Resource.AppEngine.Apps.Operations.List
+    AppEngineAppsOperationsListResource,
+    newAppEngineAppsOperationsList,
+    AppEngineAppsOperationsList,
 
     -- ** appengine.apps.patch
-    , module Network.Google.Resource.AppEngine.Apps.Patch
+    AppEngineAppsPatchResource,
+    newAppEngineAppsPatch,
+    AppEngineAppsPatch,
 
     -- ** appengine.apps.repair
-    , module Network.Google.Resource.AppEngine.Apps.Repair
+    AppEngineAppsRepairResource,
+    newAppEngineAppsRepair,
+    AppEngineAppsRepair,
 
     -- ** appengine.apps.services.delete
-    , module Network.Google.Resource.AppEngine.Apps.Services.Delete
+    AppEngineAppsServicesDeleteResource,
+    newAppEngineAppsServicesDelete,
+    AppEngineAppsServicesDelete,
 
     -- ** appengine.apps.services.get
-    , module Network.Google.Resource.AppEngine.Apps.Services.Get
+    AppEngineAppsServicesGetResource,
+    newAppEngineAppsServicesGet,
+    AppEngineAppsServicesGet,
 
     -- ** appengine.apps.services.list
-    , module Network.Google.Resource.AppEngine.Apps.Services.List
+    AppEngineAppsServicesListResource,
+    newAppEngineAppsServicesList,
+    AppEngineAppsServicesList,
 
     -- ** appengine.apps.services.patch
-    , module Network.Google.Resource.AppEngine.Apps.Services.Patch
+    AppEngineAppsServicesPatchResource,
+    newAppEngineAppsServicesPatch,
+    AppEngineAppsServicesPatch,
 
     -- ** appengine.apps.services.versions.create
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
+    AppEngineAppsServicesVersionsCreateResource,
+    newAppEngineAppsServicesVersionsCreate,
+    AppEngineAppsServicesVersionsCreate,
 
     -- ** appengine.apps.services.versions.delete
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
+    AppEngineAppsServicesVersionsDeleteResource,
+    newAppEngineAppsServicesVersionsDelete,
+    AppEngineAppsServicesVersionsDelete,
 
     -- ** appengine.apps.services.versions.get
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+    AppEngineAppsServicesVersionsGetResource,
+    newAppEngineAppsServicesVersionsGet,
+    AppEngineAppsServicesVersionsGet,
 
     -- ** appengine.apps.services.versions.instances.debug
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
+    AppEngineAppsServicesVersionsInstancesDebugResource,
+    newAppEngineAppsServicesVersionsInstancesDebug,
+    AppEngineAppsServicesVersionsInstancesDebug,
 
     -- ** appengine.apps.services.versions.instances.delete
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
+    AppEngineAppsServicesVersionsInstancesDeleteResource,
+    newAppEngineAppsServicesVersionsInstancesDelete,
+    AppEngineAppsServicesVersionsInstancesDelete,
 
     -- ** appengine.apps.services.versions.instances.get
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Get
+    AppEngineAppsServicesVersionsInstancesGetResource,
+    newAppEngineAppsServicesVersionsInstancesGet,
+    AppEngineAppsServicesVersionsInstancesGet,
 
     -- ** appengine.apps.services.versions.instances.list
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
+    AppEngineAppsServicesVersionsInstancesListResource,
+    newAppEngineAppsServicesVersionsInstancesList,
+    AppEngineAppsServicesVersionsInstancesList,
 
     -- ** appengine.apps.services.versions.list
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.List
+    AppEngineAppsServicesVersionsListResource,
+    newAppEngineAppsServicesVersionsList,
+    AppEngineAppsServicesVersionsList,
 
     -- ** appengine.apps.services.versions.patch
-    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
+    AppEngineAppsServicesVersionsPatchResource,
+    newAppEngineAppsServicesVersionsPatch,
+    AppEngineAppsServicesVersionsPatch,
 
     -- * Types
 
-    -- ** ApplicationServingStatus
-    , ApplicationServingStatus (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- ** AppsAuthorizedCertificatesListView
-    , AppsAuthorizedCertificatesListView (..)
+    -- ** ApiConfigHandler
+    ApiConfigHandler (..),
+    newApiConfigHandler,
 
-    -- ** VersionInboundServicesItem
-    , VersionInboundServicesItem (..)
+    -- ** ApiConfigHandler_AuthFailAction
+    ApiConfigHandler_AuthFailAction (..),
 
-    -- ** URLMapLogin
-    , URLMapLogin (..)
+    -- ** ApiConfigHandler_Login
+    ApiConfigHandler_Login (..),
 
-    -- ** NetworkUtilization
-    , NetworkUtilization
-    , networkUtilization
-    , nuTargetReceivedBytesPerSecond
-    , nuTargetSentPacketsPerSecond
-    , nuTargetReceivedPacketsPerSecond
-    , nuTargetSentBytesPerSecond
+    -- ** ApiConfigHandler_SecurityLevel
+    ApiConfigHandler_SecurityLevel (..),
 
-    -- ** ManagedCertificateStatus
-    , ManagedCertificateStatus (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** LocationSchema
-    , LocationSchema
-    , locationSchema
-    , lsAddtional
-
-    -- ** AuthorizedDomain
-    , AuthorizedDomain
-    , authorizedDomain
-    , adName
-    , adId
-
-    -- ** InstanceVMLiveness
-    , InstanceVMLiveness (..)
-
-    -- ** TrafficSplit
-    , TrafficSplit
-    , trafficSplit
-    , tsShardBy
-    , tsAllocations
-
-    -- ** ScriptHandler
-    , ScriptHandler
-    , scriptHandler
-    , shScriptPath
-
-    -- ** ListServicesResponse
-    , ListServicesResponse
-    , listServicesResponse
-    , lsrNextPageToken
-    , lsrServices
-
-    -- ** URLMap
-    , URLMap
-    , urlMap
-    , umScript
-    , umSecurityLevel
-    , umAPIEndpoint
-    , umURLRegex
-    , umRedirectHTTPResponseCode
-    , umAuthFailAction
-    , umStaticFiles
-    , umLogin
-
-    -- ** Library
-    , Library
-    , library
-    , lName
-    , lVersion
-
-    -- ** ResourceRecord
-    , ResourceRecord
-    , resourceRecord
-    , rrRrData
-    , rrName
-    , rrType
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- ** DiskUtilization
-    , DiskUtilization
-    , diskUtilization
-    , duTargetReadBytesPerSecond
-    , duTargetReadOpsPerSecond
-    , duTargetWriteOpsPerSecond
-    , duTargetWriteBytesPerSecond
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** HealthCheck
-    , HealthCheck
-    , healthCheck
-    , hcHealthyThreshold
-    , hcDisableHealthCheck
-    , hcCheckInterval
-    , hcRestartThreshold
-    , hcHost
-    , hcTimeout
-    , hcUnhealthyThreshold
-
-    -- ** AuthorizedCertificate
-    , AuthorizedCertificate
-    , authorizedCertificate
-    , acManagedCertificate
-    , acCertificateRawData
-    , acDomainNames
-    , acDomainMAppingsCount
-    , acName
-    , acDisplayName
-    , acId
-    , acExpireTime
-    , acVisibleDomainMAppings
-
-    -- ** VPCAccessConnector
-    , VPCAccessConnector
-    , vpcAccessConnector
-    , vacName
-    , vacEgressSetting
-
-    -- ** APIConfigHandler
-    , APIConfigHandler
-    , apiConfigHandler
-    , achScript
-    , achSecurityLevel
-    , achURL
-    , achAuthFailAction
-    , achLogin
-
-    -- ** VersionEnvVariables
-    , VersionEnvVariables
-    , versionEnvVariables
-    , vevAddtional
-
-    -- ** APIConfigHandlerSecurityLevel
-    , APIConfigHandlerSecurityLevel (..)
+    -- ** ApiEndpointHandler
+    ApiEndpointHandler (..),
+    newApiEndpointHandler,
 
     -- ** Application
-    , Application
-    , application
-    , aDefaultHostname
-    , aDefaultCookieExpiration
-    , aIap
-    , aAuthDomain
-    , aCodeBucket
-    , aGcrDomain
-    , aFeatureSettings
-    , aName
-    , aDatabaseType
-    , aDispatchRules
-    , aDefaultBucket
-    , aId
-    , aLocationId
-    , aServingStatus
+    Application (..),
+    newApplication,
 
-    -- ** VersionBetaSettings
-    , VersionBetaSettings
-    , versionBetaSettings
-    , vbsAddtional
+    -- ** Application_DatabaseType
+    Application_DatabaseType (..),
 
-    -- ** Service
-    , Service
-    , service
-    , sSplit
-    , sName
-    , sId
-    , sNetworkSettings
+    -- ** Application_ServingStatus
+    Application_ServingStatus (..),
 
-    -- ** ErrorHandlerErrorCode
-    , ErrorHandlerErrorCode (..)
+    -- ** AuthorizedCertificate
+    AuthorizedCertificate (..),
+    newAuthorizedCertificate,
 
-    -- ** EndpointsAPIService
-    , EndpointsAPIService
-    , endpointsAPIService
-    , easDisableTraceSampling
-    , easName
-    , easConfigId
-    , easRolloutStrategy
-
-    -- ** Location
-    , Location
-    , location
-    , locName
-    , locMetadata
-    , locDisplayName
-    , locLabels
-    , locLocationId
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** EndpointsAPIServiceRolloutStrategy
-    , EndpointsAPIServiceRolloutStrategy (..)
-
-    -- ** ZipInfo
-    , ZipInfo
-    , zipInfo
-    , ziFilesCount
-    , ziSourceURL
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** URLDispatchRule
-    , URLDispatchRule
-    , urlDispatchRule
-    , udrPath
-    , udrService
-    , udrDomain
-
-    -- ** OperationMetadataV1Beta
-    , OperationMetadataV1Beta
-    , operationMetadataV1Beta
-    , omvbEphemeralMessage
-    , omvbInsertTime
-    , omvbUser
-    , omvbMethod
-    , omvbEndTime
-    , omvbWarning
-    , omvbCreateVersionMetadata
-    , omvbTarget
-
-    -- ** ListAuthorizedDomainsResponse
-    , ListAuthorizedDomainsResponse
-    , listAuthorizedDomainsResponse
-    , ladrNextPageToken
-    , ladrDomains
-
-    -- ** Entrypoint
-    , Entrypoint
-    , entrypoint
-    , eShell
-
-    -- ** ListVersionsResponse
-    , ListVersionsResponse
-    , listVersionsResponse
-    , lvrNextPageToken
-    , lvrVersions
-
-    -- ** ManagedCertificate
-    , ManagedCertificate
-    , managedCertificate
-    , mcStatus
-    , mcLastRenewalTime
-
-    -- ** CreateVersionMetadataV1Alpha
-    , CreateVersionMetadataV1Alpha
-    , createVersionMetadataV1Alpha
-    , cvmvaCloudBuildId
-
-    -- ** AppsAuthorizedCertificatesGetView
-    , AppsAuthorizedCertificatesGetView (..)
-
-    -- ** FileInfo
-    , FileInfo
-    , fileInfo
-    , fiSha1Sum
-    , fiMimeType
-    , fiSourceURL
+    -- ** AuthorizedDomain
+    AuthorizedDomain (..),
+    newAuthorizedDomain,
 
     -- ** AutomaticScaling
-    , AutomaticScaling
-    , automaticScaling
-    , asNetworkUtilization
-    , asMaxTotalInstances
-    , asMinIdleInstances
-    , asDiskUtilization
-    , asMinPendingLatency
-    , asCPUUtilization
-    , asMaxIdleInstances
-    , asMinTotalInstances
-    , asMaxConcurrentRequests
-    , asCoolDownPeriod
-    , asRequestUtilization
-    , asMaxPendingLatency
-    , asStandardSchedulerSettings
-
-    -- ** Volume
-    , Volume
-    , volume
-    , vSizeGb
-    , vName
-    , vVolumeType
-
-    -- ** APIEndpointHandler
-    , APIEndpointHandler
-    , apiEndpointHandler
-    , aehScriptPath
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** ListIngressRulesResponse
-    , ListIngressRulesResponse
-    , listIngressRulesResponse
-    , lirrNextPageToken
-    , lirrIngressRules
-
-    -- ** Network
-    , Network
-    , network
-    , nSessionAffinity
-    , nSubnetworkName
-    , nForwardedPorts
-    , nInstanceTag
-    , nName
-
-    -- ** AppsServicesVersionsGetView
-    , AppsServicesVersionsGetView (..)
-
-    -- ** APIConfigHandlerAuthFailAction
-    , APIConfigHandlerAuthFailAction (..)
-
-    -- ** ReadinessCheck
-    , ReadinessCheck
-    , readinessCheck
-    , rcSuccessThreshold
-    , rcFailureThreshold
-    , rcPath
-    , rcCheckInterval
-    , rcAppStartTimeout
-    , rcHost
-    , rcTimeout
-
-    -- ** BatchUpdateIngressRulesRequest
-    , BatchUpdateIngressRulesRequest
-    , batchUpdateIngressRulesRequest
-    , buirrIngressRules
-
-    -- ** DebugInstanceRequest
-    , DebugInstanceRequest
-    , debugInstanceRequest
-    , dirSSHKey
-
-    -- ** StaticFilesHandlerHTTPHeaders
-    , StaticFilesHandlerHTTPHeaders
-    , staticFilesHandlerHTTPHeaders
-    , sfhhttphAddtional
-
-    -- ** Resources
-    , Resources
-    , resources
-    , rMemoryGb
-    , rDiskGb
-    , rKmsKeyReference
-    , rVolumes
-    , rCPU
-
-    -- ** FeatureSettings
-    , FeatureSettings
-    , featureSettings
-    , fsUseContainerOptimizedOS
-    , fsSplitHealthChecks
-
-    -- ** CertificateRawData
-    , CertificateRawData
-    , certificateRawData
-    , crdPrivateKey
-    , crdPublicCertificate
-
-    -- ** NetworkSettingsIngressTrafficAllowed
-    , NetworkSettingsIngressTrafficAllowed (..)
-
-    -- ** DomainMApping
-    , DomainMApping
-    , domainMApping
-    , dmaResourceRecords
-    , dmaName
-    , dmaId
-    , dmaSSLSettings
-
-    -- ** VersionServingStatus
-    , VersionServingStatus (..)
-
-    -- ** DeploymentFiles
-    , DeploymentFiles
-    , deploymentFiles
-    , dfAddtional
-
-    -- ** BatchUpdateIngressRulesResponse
-    , BatchUpdateIngressRulesResponse
-    , batchUpdateIngressRulesResponse
-    , bIngressRules
-
-    -- ** CPUUtilization
-    , CPUUtilization
-    , cpuUtilization
-    , cuAggregationWindowLength
-    , cuTargetUtilization
-
-    -- ** VersionBuildEnvVariables
-    , VersionBuildEnvVariables
-    , versionBuildEnvVariables
-    , vbevAddtional
-
-    -- ** CreateVersionMetadataV1
-    , CreateVersionMetadataV1
-    , createVersionMetadataV1
-    , cvmvCloudBuildId
-
-    -- ** TrafficSplitAllocations
-    , TrafficSplitAllocations
-    , trafficSplitAllocations
-    , tsaAddtional
-
-    -- ** CloudBuildOptions
-    , CloudBuildOptions
-    , cloudBuildOptions
-    , cboCloudBuildTimeout
-    , cboAppYamlPath
-
-    -- ** ApplicationDatabaseType
-    , ApplicationDatabaseType (..)
-
-    -- ** ManualScaling
-    , ManualScaling
-    , manualScaling
-    , msInstances
+    AutomaticScaling (..),
+    newAutomaticScaling,
 
     -- ** BasicScaling
-    , BasicScaling
-    , basicScaling
-    , bsMaxInstances
-    , bsIdleTimeout
+    BasicScaling (..),
+    newBasicScaling,
 
-    -- ** URLMapSecurityLevel
-    , URLMapSecurityLevel (..)
+    -- ** BatchUpdateIngressRulesRequest
+    BatchUpdateIngressRulesRequest (..),
+    newBatchUpdateIngressRulesRequest,
 
-    -- ** ResourceRecordType
-    , ResourceRecordType (..)
+    -- ** BatchUpdateIngressRulesResponse
+    BatchUpdateIngressRulesResponse (..),
+    newBatchUpdateIngressRulesResponse,
 
-    -- ** OperationMetadataV1
-    , OperationMetadataV1
-    , operationMetadataV1
-    , omvEphemeralMessage
-    , omvInsertTime
-    , omvUser
-    , omvMethod
-    , omvEndTime
-    , omvWarning
-    , omvCreateVersionMetadata
-    , omvTarget
+    -- ** CertificateRawData
+    CertificateRawData (..),
+    newCertificateRawData,
 
-    -- ** Version
-    , Version
-    , version
-    , verRuntime
-    , verNobuildFilesRegex
-    , verInstanceClass
-    , verRuntimeChannel
-    , verRuntimeMainExecutablePath
-    , verVPCAccessConnector
-    , verHealthCheck
-    , verEndpointsAPIService
-    , verEnv
-    , verZones
-    , verEntrypoint
-    , verDefaultExpiration
-    , verAutomaticScaling
-    , verErrorHandlers
-    , verCreatedBy
-    , verVM
-    , verHandlers
-    , verInboundServices
-    , verReadinessCheck
-    , verNetwork
-    , verResources
-    , verServiceAccount
-    , verName
-    , verThreadsafe
-    , verBetaSettings
-    , verBasicScaling
-    , verManualScaling
-    , verAPIConfig
-    , verId
-    , verEnvVariables
-    , verLivenessCheck
-    , verBuildEnvVariables
-    , verRuntimeAPIVersion
-    , verServingStatus
-    , verDiskUsageBytes
-    , verCreateTime
-    , verLibraries
-    , verVersionURL
-    , verDeployment
-
-    -- ** AppsServicesVersionsListView
-    , AppsServicesVersionsListView (..)
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** IdentityAwareProxy
-    , IdentityAwareProxy
-    , identityAwareProxy
-    , iapEnabled
-    , iapOAuth2ClientSecretSha256
-    , iapOAuth2ClientSecret
-    , iapOAuth2ClientId
-
-    -- ** StaticFilesHandler
-    , StaticFilesHandler
-    , staticFilesHandler
-    , sfhHTTPHeaders
-    , sfhPath
-    , sfhRequireMatchingFile
-    , sfhExpiration
-    , sfhMimeType
-    , sfhApplicationReadable
-    , sfhUploadPathRegex
-
-    -- ** ErrorHandler
-    , ErrorHandler
-    , errorHandler
-    , ehMimeType
-    , ehErrorCode
-    , ehStaticFile
-
-    -- ** TrafficSplitShardBy
-    , TrafficSplitShardBy (..)
-
-    -- ** InstanceAvailability
-    , InstanceAvailability (..)
-
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- ** ListAuthorizedCertificatesResponse
-    , ListAuthorizedCertificatesResponse
-    , listAuthorizedCertificatesResponse
-    , lacrNextPageToken
-    , lacrCertificates
-
-    -- ** FirewallRule
-    , FirewallRule
-    , firewallRule
-    , frPriority
-    , frAction
-    , frSourceRange
-    , frDescription
-
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmStandardEnvironmentAvailable
-    , lmSearchAPIAvailable
-    , lmFlexibleEnvironmentAvailable
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** GoogleAppEngineV1betaLocationMetadata
-    , GoogleAppEngineV1betaLocationMetadata
-    , googleAppEngineV1betaLocationMetadata
-    , gaevlmStandardEnvironmentAvailable
-    , gaevlmSearchAPIAvailable
-    , gaevlmFlexibleEnvironmentAvailable
-
-    -- ** URLMapAuthFailAction
-    , URLMapAuthFailAction (..)
-
-    -- ** ListInstancesResponse
-    , ListInstancesResponse
-    , listInstancesResponse
-    , lirNextPageToken
-    , lirInstances
-
-    -- ** OperationMetadataV1Alpha
-    , OperationMetadataV1Alpha
-    , operationMetadataV1Alpha
-    , omvaEphemeralMessage
-    , omvaInsertTime
-    , omvaUser
-    , omvaMethod
-    , omvaEndTime
-    , omvaWarning
-    , omvaCreateVersionMetadata
-    , omvaTarget
-
-    -- ** LivenessCheck
-    , LivenessCheck
-    , livenessCheck
-    , lcSuccessThreshold
-    , lcFailureThreshold
-    , lcPath
-    , lcCheckInterval
-    , lcHost
-    , lcInitialDelay
-    , lcTimeout
-
-    -- ** URLMapRedirectHTTPResponseCode
-    , URLMapRedirectHTTPResponseCode (..)
-
-    -- ** NetworkSettings
-    , NetworkSettings
-    , networkSettings
-    , nsIngressTrafficAllowed
-
-    -- ** RequestUtilization
-    , RequestUtilization
-    , requestUtilization
-    , ruTargetConcurrentRequests
-    , ruTargetRequestCountPerSecond
-
-    -- ** AppsDomainMAppingsCreateOverrideStrategy
-    , AppsDomainMAppingsCreateOverrideStrategy (..)
-
-    -- ** FirewallRuleAction
-    , FirewallRuleAction (..)
-
-    -- ** SSLSettingsSSLManagementType
-    , SSLSettingsSSLManagementType (..)
-
-    -- ** RepairApplicationRequest
-    , RepairApplicationRequest
-    , repairApplicationRequest
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** CreateVersionMetadataV1Beta
-    , CreateVersionMetadataV1Beta
-    , createVersionMetadataV1Beta
-    , cvmvbCloudBuildId
-
-    -- ** ListDomainMAppingsResponse
-    , ListDomainMAppingsResponse
-    , listDomainMAppingsResponse
-    , ldmarDomainMAppings
-    , ldmarNextPageToken
-
-    -- ** StandardSchedulerSettings
-    , StandardSchedulerSettings
-    , standardSchedulerSettings
-    , sssTargetCPUUtilization
-    , sssMinInstances
-    , sssMaxInstances
-    , sssTargetThroughputUtilization
-
-    -- ** APIConfigHandlerLogin
-    , APIConfigHandlerLogin (..)
-
-    -- ** VPCAccessConnectorEgressSetting
-    , VPCAccessConnectorEgressSetting (..)
+    -- ** CloudBuildOptions
+    CloudBuildOptions (..),
+    newCloudBuildOptions,
 
     -- ** ContainerInfo
-    , ContainerInfo
-    , containerInfo
-    , ciImage
+    ContainerInfo (..),
+    newContainerInfo,
 
-    -- ** Instance
-    , Instance
-    , instance'
-    , iMemoryUsage
-    , iVMStatus
-    , iVMZoneName
-    , iVMIP
-    , iStartTime
-    , iVMId
-    , iVMLiveness
-    , iAvailability
-    , iVMName
-    , iName
-    , iVMDebugEnabled
-    , iRequests
-    , iQps
-    , iId
-    , iErrors
-    , iAverageLatency
-    , iAppEngineRelease
+    -- ** CpuUtilization
+    CpuUtilization (..),
+    newCpuUtilization,
 
-    -- ** SSLSettings
-    , SSLSettings
-    , sslSettings
-    , ssSSLManagementType
-    , ssCertificateId
-    , ssPendingManagedCertificateId
+    -- ** CreateVersionMetadataV1
+    CreateVersionMetadataV1 (..),
+    newCreateVersionMetadataV1,
+
+    -- ** CreateVersionMetadataV1Alpha
+    CreateVersionMetadataV1Alpha (..),
+    newCreateVersionMetadataV1Alpha,
+
+    -- ** CreateVersionMetadataV1Beta
+    CreateVersionMetadataV1Beta (..),
+    newCreateVersionMetadataV1Beta,
+
+    -- ** DebugInstanceRequest
+    DebugInstanceRequest (..),
+    newDebugInstanceRequest,
 
     -- ** Deployment
-    , Deployment
-    , deployment
-    , dZip
-    , dCloudBuildOptions
-    , dContainer
-    , dFiles
-    ) where
+    Deployment (..),
+    newDeployment,
 
-import Network.Google.Prelude
+    -- ** Deployment_Files
+    Deployment_Files (..),
+    newDeployment_Files,
+
+    -- ** DiskUtilization
+    DiskUtilization (..),
+    newDiskUtilization,
+
+    -- ** DomainMapping
+    DomainMapping (..),
+    newDomainMapping,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EndpointsApiService
+    EndpointsApiService (..),
+    newEndpointsApiService,
+
+    -- ** EndpointsApiService_RolloutStrategy
+    EndpointsApiService_RolloutStrategy (..),
+
+    -- ** Entrypoint
+    Entrypoint (..),
+    newEntrypoint,
+
+    -- ** ErrorHandler
+    ErrorHandler (..),
+    newErrorHandler,
+
+    -- ** ErrorHandler_ErrorCode
+    ErrorHandler_ErrorCode (..),
+
+    -- ** FeatureSettings
+    FeatureSettings (..),
+    newFeatureSettings,
+
+    -- ** FileInfo
+    FileInfo (..),
+    newFileInfo,
+
+    -- ** FirewallRule
+    FirewallRule (..),
+    newFirewallRule,
+
+    -- ** FirewallRule_Action
+    FirewallRule_Action (..),
+
+    -- ** GoogleAppengineV1betaLocationMetadata
+    GoogleAppengineV1betaLocationMetadata (..),
+    newGoogleAppengineV1betaLocationMetadata,
+
+    -- ** HealthCheck
+    HealthCheck (..),
+    newHealthCheck,
+
+    -- ** IdentityAwareProxy
+    IdentityAwareProxy (..),
+    newIdentityAwareProxy,
+
+    -- ** Instance
+    Instance (..),
+    newInstance,
+
+    -- ** Instance_Availability
+    Instance_Availability (..),
+
+    -- ** Instance_VmLiveness
+    Instance_VmLiveness (..),
+
+    -- ** Library
+    Library (..),
+    newLibrary,
+
+    -- ** ListAuthorizedCertificatesResponse
+    ListAuthorizedCertificatesResponse (..),
+    newListAuthorizedCertificatesResponse,
+
+    -- ** ListAuthorizedDomainsResponse
+    ListAuthorizedDomainsResponse (..),
+    newListAuthorizedDomainsResponse,
+
+    -- ** ListDomainMappingsResponse
+    ListDomainMappingsResponse (..),
+    newListDomainMappingsResponse,
+
+    -- ** ListIngressRulesResponse
+    ListIngressRulesResponse (..),
+    newListIngressRulesResponse,
+
+    -- ** ListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListServicesResponse
+    ListServicesResponse (..),
+    newListServicesResponse,
+
+    -- ** ListVersionsResponse
+    ListVersionsResponse (..),
+    newListVersionsResponse,
+
+    -- ** LivenessCheck
+    LivenessCheck (..),
+    newLivenessCheck,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** LocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
+
+    -- ** ManagedCertificate
+    ManagedCertificate (..),
+    newManagedCertificate,
+
+    -- ** ManagedCertificate_Status
+    ManagedCertificate_Status (..),
+
+    -- ** ManualScaling
+    ManualScaling (..),
+    newManualScaling,
+
+    -- ** Network
+    Network (..),
+    newNetwork,
+
+    -- ** NetworkSettings
+    NetworkSettings (..),
+    newNetworkSettings,
+
+    -- ** NetworkSettings_IngressTrafficAllowed
+    NetworkSettings_IngressTrafficAllowed (..),
+
+    -- ** NetworkUtilization
+    NetworkUtilization (..),
+    newNetworkUtilization,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationMetadataV1
+    OperationMetadataV1 (..),
+    newOperationMetadataV1,
+
+    -- ** OperationMetadataV1Alpha
+    OperationMetadataV1Alpha (..),
+    newOperationMetadataV1Alpha,
+
+    -- ** OperationMetadataV1Beta
+    OperationMetadataV1Beta (..),
+    newOperationMetadataV1Beta,
+
+    -- ** ReadinessCheck
+    ReadinessCheck (..),
+    newReadinessCheck,
+
+    -- ** RepairApplicationRequest
+    RepairApplicationRequest (..),
+    newRepairApplicationRequest,
+
+    -- ** RequestUtilization
+    RequestUtilization (..),
+    newRequestUtilization,
+
+    -- ** ResourceRecord
+    ResourceRecord (..),
+    newResourceRecord,
+
+    -- ** ResourceRecord_Type
+    ResourceRecord_Type (..),
+
+    -- ** Resources
+    Resources (..),
+    newResources,
+
+    -- ** ScriptHandler
+    ScriptHandler (..),
+    newScriptHandler,
+
+    -- ** Service
+    Service (..),
+    newService,
+
+    -- ** Service_Labels
+    Service_Labels (..),
+    newService_Labels,
+
+    -- ** SslSettings
+    SslSettings (..),
+    newSslSettings,
+
+    -- ** SslSettings_SslManagementType
+    SslSettings_SslManagementType (..),
+
+    -- ** StandardSchedulerSettings
+    StandardSchedulerSettings (..),
+    newStandardSchedulerSettings,
+
+    -- ** StaticFilesHandler
+    StaticFilesHandler (..),
+    newStaticFilesHandler,
+
+    -- ** StaticFilesHandler_HttpHeaders
+    StaticFilesHandler_HttpHeaders (..),
+    newStaticFilesHandler_HttpHeaders,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TrafficSplit
+    TrafficSplit (..),
+    newTrafficSplit,
+
+    -- ** TrafficSplit_Allocations
+    TrafficSplit_Allocations (..),
+    newTrafficSplit_Allocations,
+
+    -- ** TrafficSplit_ShardBy
+    TrafficSplit_ShardBy (..),
+
+    -- ** UrlDispatchRule
+    UrlDispatchRule (..),
+    newUrlDispatchRule,
+
+    -- ** UrlMap
+    UrlMap (..),
+    newUrlMap,
+
+    -- ** UrlMap_AuthFailAction
+    UrlMap_AuthFailAction (..),
+
+    -- ** UrlMap_Login
+    UrlMap_Login (..),
+
+    -- ** UrlMap_RedirectHttpResponseCode
+    UrlMap_RedirectHttpResponseCode (..),
+
+    -- ** UrlMap_SecurityLevel
+    UrlMap_SecurityLevel (..),
+
+    -- ** Version
+    Version (..),
+    newVersion,
+
+    -- ** Version_BetaSettings
+    Version_BetaSettings (..),
+    newVersion_BetaSettings,
+
+    -- ** Version_BuildEnvVariables
+    Version_BuildEnvVariables (..),
+    newVersion_BuildEnvVariables,
+
+    -- ** Version_EnvVariables
+    Version_EnvVariables (..),
+    newVersion_EnvVariables,
+
+    -- ** Version_InboundServicesItem
+    Version_InboundServicesItem (..),
+
+    -- ** Version_ServingStatus
+    Version_ServingStatus (..),
+
+    -- ** Volume
+    Volume (..),
+    newVolume,
+
+    -- ** VpcAccessConnector
+    VpcAccessConnector (..),
+    newVpcAccessConnector,
+
+    -- ** VpcAccessConnector_EgressSetting
+    VpcAccessConnector_EgressSetting (..),
+
+    -- ** ZipInfo
+    ZipInfo (..),
+    newZipInfo,
+
+    -- ** AppsAuthorizedCertificatesGetView
+    AppsAuthorizedCertificatesGetView (..),
+
+    -- ** AppsAuthorizedCertificatesListView
+    AppsAuthorizedCertificatesListView (..),
+
+    -- ** AppsDomainMappingsCreateOverrideStrategy
+    AppsDomainMappingsCreateOverrideStrategy (..),
+
+    -- ** AppsServicesVersionsGetView
+    AppsServicesVersionsGetView (..),
+
+    -- ** AppsServicesVersionsListView
+    AppsServicesVersionsListView (..),
+  )
+where
+
+import Network.Google.AppEngine.Apps.AuthorizedCertificates.Create
+import Network.Google.AppEngine.Apps.AuthorizedCertificates.Delete
+import Network.Google.AppEngine.Apps.AuthorizedCertificates.Get
+import Network.Google.AppEngine.Apps.AuthorizedCertificates.List
+import Network.Google.AppEngine.Apps.AuthorizedCertificates.Patch
+import Network.Google.AppEngine.Apps.AuthorizedDomains.List
+import Network.Google.AppEngine.Apps.Create
+import Network.Google.AppEngine.Apps.DomainMappings.Create
+import Network.Google.AppEngine.Apps.DomainMappings.Delete
+import Network.Google.AppEngine.Apps.DomainMappings.Get
+import Network.Google.AppEngine.Apps.DomainMappings.List
+import Network.Google.AppEngine.Apps.DomainMappings.Patch
+import Network.Google.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
+import Network.Google.AppEngine.Apps.Firewall.IngressRules.Create
+import Network.Google.AppEngine.Apps.Firewall.IngressRules.Delete
+import Network.Google.AppEngine.Apps.Firewall.IngressRules.Get
+import Network.Google.AppEngine.Apps.Firewall.IngressRules.List
+import Network.Google.AppEngine.Apps.Firewall.IngressRules.Patch
+import Network.Google.AppEngine.Apps.Get
+import Network.Google.AppEngine.Apps.Locations.Get
+import Network.Google.AppEngine.Apps.Locations.List
+import Network.Google.AppEngine.Apps.Operations.Get
+import Network.Google.AppEngine.Apps.Operations.List
+import Network.Google.AppEngine.Apps.Patch
+import Network.Google.AppEngine.Apps.Repair
+import Network.Google.AppEngine.Apps.Services.Delete
+import Network.Google.AppEngine.Apps.Services.Get
+import Network.Google.AppEngine.Apps.Services.List
+import Network.Google.AppEngine.Apps.Services.Patch
+import Network.Google.AppEngine.Apps.Services.Versions.Create
+import Network.Google.AppEngine.Apps.Services.Versions.Delete
+import Network.Google.AppEngine.Apps.Services.Versions.Get
+import Network.Google.AppEngine.Apps.Services.Versions.Instances.Debug
+import Network.Google.AppEngine.Apps.Services.Versions.Instances.Delete
+import Network.Google.AppEngine.Apps.Services.Versions.Instances.Get
+import Network.Google.AppEngine.Apps.Services.Versions.Instances.List
+import Network.Google.AppEngine.Apps.Services.Versions.List
+import Network.Google.AppEngine.Apps.Services.Versions.Patch
 import Network.Google.AppEngine.Types
-import Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Create
-import Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Delete
-import Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Get
-import Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.List
-import Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Patch
-import Network.Google.Resource.AppEngine.Apps.AuthorizedDomains.List
-import Network.Google.Resource.AppEngine.Apps.Create
-import Network.Google.Resource.AppEngine.Apps.DomainMAppings.Create
-import Network.Google.Resource.AppEngine.Apps.DomainMAppings.Delete
-import Network.Google.Resource.AppEngine.Apps.DomainMAppings.Get
-import Network.Google.Resource.AppEngine.Apps.DomainMAppings.List
-import Network.Google.Resource.AppEngine.Apps.DomainMAppings.Patch
-import Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
-import Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Create
-import Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Delete
-import Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Get
-import Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.List
-import Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Patch
-import Network.Google.Resource.AppEngine.Apps.Get
-import Network.Google.Resource.AppEngine.Apps.Locations.Get
-import Network.Google.Resource.AppEngine.Apps.Locations.List
-import Network.Google.Resource.AppEngine.Apps.Operations.Get
-import Network.Google.Resource.AppEngine.Apps.Operations.List
-import Network.Google.Resource.AppEngine.Apps.Patch
-import Network.Google.Resource.AppEngine.Apps.Repair
-import Network.Google.Resource.AppEngine.Apps.Services.Delete
-import Network.Google.Resource.AppEngine.Apps.Services.Get
-import Network.Google.Resource.AppEngine.Apps.Services.List
-import Network.Google.Resource.AppEngine.Apps.Services.Patch
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Get
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.List
-import Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the App Engine Admin API service.
-type AppEngineAPI =
-     AppsAuthorizedDomainsListResource :<|>
-       AppsDomainMAppingsListResource
-       :<|> AppsDomainMAppingsPatchResource
-       :<|> AppsDomainMAppingsGetResource
-       :<|> AppsDomainMAppingsCreateResource
-       :<|> AppsDomainMAppingsDeleteResource
-       :<|> AppsFirewallIngressRulesListResource
-       :<|> AppsFirewallIngressRulesPatchResource
-       :<|> AppsFirewallIngressRulesGetResource
-       :<|> AppsFirewallIngressRulesCreateResource
-       :<|> AppsFirewallIngressRulesBatchUpdateResource
-       :<|> AppsFirewallIngressRulesDeleteResource
-       :<|> AppsOperationsListResource
-       :<|> AppsOperationsGetResource
-       :<|> AppsLocationsListResource
-       :<|> AppsLocationsGetResource
-       :<|> AppsServicesVersionsInstancesListResource
-       :<|> AppsServicesVersionsInstancesGetResource
-       :<|> AppsServicesVersionsInstancesDebugResource
-       :<|> AppsServicesVersionsInstancesDeleteResource
-       :<|> AppsServicesVersionsListResource
-       :<|> AppsServicesVersionsPatchResource
-       :<|> AppsServicesVersionsGetResource
-       :<|> AppsServicesVersionsCreateResource
-       :<|> AppsServicesVersionsDeleteResource
-       :<|> AppsServicesListResource
-       :<|> AppsServicesPatchResource
-       :<|> AppsServicesGetResource
-       :<|> AppsServicesDeleteResource
-       :<|> AppsAuthorizedCertificatesListResource
-       :<|> AppsAuthorizedCertificatesPatchResource
-       :<|> AppsAuthorizedCertificatesGetResource
-       :<|> AppsAuthorizedCertificatesCreateResource
-       :<|> AppsAuthorizedCertificatesDeleteResource
-       :<|> AppsPatchResource
-       :<|> AppsGetResource
-       :<|> AppsCreateResource
-       :<|> AppsRepairResource
