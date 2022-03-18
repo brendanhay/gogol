@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AndroidEnterprise.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AdministratorWebTokenSpec_PermissionItem
     AdministratorWebTokenSpec_PermissionItem
-      (
-        AdministratorWebTokenSpec_PermissionItem_Unknown,
+      ( AdministratorWebTokenSpec_PermissionItem_Unknown,
         AdministratorWebTokenSpec_PermissionItem_ApproveApps,
         AdministratorWebTokenSpec_PermissionItem_ManageMcm,
         ..
@@ -54,8 +43,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * AppRestrictionsSchemaRestriction_RestrictionType
     AppRestrictionsSchemaRestriction_RestrictionType
-      (
-        AppRestrictionsSchemaRestriction_RestrictionType_Bool,
+      ( AppRestrictionsSchemaRestriction_RestrictionType_Bool,
         AppRestrictionsSchemaRestriction_RestrictionType_String,
         AppRestrictionsSchemaRestriction_RestrictionType_Integer,
         AppRestrictionsSchemaRestriction_RestrictionType_Choice,
@@ -68,8 +56,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * AppRestrictionsSchemaRestrictionRestrictionValue_Type
     AppRestrictionsSchemaRestrictionRestrictionValue_Type
-      (
-        AppRestrictionsSchemaRestrictionRestrictionValue_Type_Bool,
+      ( AppRestrictionsSchemaRestrictionRestrictionValue_Type_Bool,
         AppRestrictionsSchemaRestrictionRestrictionValue_Type_String,
         AppRestrictionsSchemaRestrictionRestrictionValue_Type_Integer,
         AppRestrictionsSchemaRestrictionRestrictionValue_Type_Choice,
@@ -82,8 +69,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * AppVersion_Track
     AppVersion_Track
-      (
-        AppVersion_Track_AppTrackUnspecified,
+      ( AppVersion_Track_AppTrackUnspecified,
         AppVersion_Track_Production,
         AppVersion_Track_Beta,
         AppVersion_Track_Alpha,
@@ -92,8 +78,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * AutoInstallConstraint_ChargingStateConstraint
     AutoInstallConstraint_ChargingStateConstraint
-      (
-        AutoInstallConstraint_ChargingStateConstraint_ChargingStateConstraintUnspecified,
+      ( AutoInstallConstraint_ChargingStateConstraint_ChargingStateConstraintUnspecified,
         AutoInstallConstraint_ChargingStateConstraint_ChargingNotRequired,
         AutoInstallConstraint_ChargingStateConstraint_ChargingRequired,
         ..
@@ -101,8 +86,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * AutoInstallConstraint_DeviceIdleStateConstraint
     AutoInstallConstraint_DeviceIdleStateConstraint
-      (
-        AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleStateConstraintUnspecified,
+      ( AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleStateConstraintUnspecified,
         AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleNotRequired,
         AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleRequired,
         ..
@@ -110,8 +94,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * AutoInstallConstraint_NetworkTypeConstraint
     AutoInstallConstraint_NetworkTypeConstraint
-      (
-        AutoInstallConstraint_NetworkTypeConstraint_NetworkTypeConstraintUnspecified,
+      ( AutoInstallConstraint_NetworkTypeConstraint_NetworkTypeConstraintUnspecified,
         AutoInstallConstraint_NetworkTypeConstraint_AnyNetwork,
         AutoInstallConstraint_NetworkTypeConstraint_UnmeteredNetwork,
         ..
@@ -119,8 +102,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * AutoInstallPolicy_AutoInstallMode
     AutoInstallPolicy_AutoInstallMode
-      (
-        AutoInstallPolicy_AutoInstallMode_AutoInstallModeUnspecified,
+      ( AutoInstallPolicy_AutoInstallMode_AutoInstallModeUnspecified,
         AutoInstallPolicy_AutoInstallMode_DoNotAutoInstall,
         AutoInstallPolicy_AutoInstallMode_AutoInstallOnce,
         AutoInstallPolicy_AutoInstallMode_ForceAutoInstall,
@@ -129,8 +111,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Device_ManagementType
     Device_ManagementType
-      (
-        Device_ManagementType_ManagedDevice,
+      ( Device_ManagementType_ManagedDevice,
         Device_ManagementType_ManagedProfile,
         Device_ManagementType_ContainerApp,
         Device_ManagementType_UnmanagedProfile,
@@ -139,16 +120,14 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * DeviceState_AccountState
     DeviceState_AccountState
-      (
-        DeviceState_AccountState_Enabled,
+      ( DeviceState_AccountState_Enabled,
         DeviceState_AccountState_Disabled,
         ..
       ),
 
     -- * Entitlement_Reason
     Entitlement_Reason
-      (
-        Entitlement_Reason_Free,
+      ( Entitlement_Reason_Free,
         Entitlement_Reason_GroupLicense,
         Entitlement_Reason_UserPurchase,
         ..
@@ -156,24 +135,21 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * GroupLicense_AcquisitionKind
     GroupLicense_AcquisitionKind
-      (
-        GroupLicense_AcquisitionKind_Free,
+      ( GroupLicense_AcquisitionKind_Free,
         GroupLicense_AcquisitionKind_BulkPurchase,
         ..
       ),
 
     -- * GroupLicense_Approval
     GroupLicense_Approval
-      (
-        GroupLicense_Approval_Approved,
+      ( GroupLicense_Approval_Approved,
         GroupLicense_Approval_Unapproved,
         ..
       ),
 
     -- * GroupLicense_Permissions
     GroupLicense_Permissions
-      (
-        GroupLicense_Permissions_CurrentApproved,
+      ( GroupLicense_Permissions_CurrentApproved,
         GroupLicense_Permissions_NeedsReapproval,
         GroupLicense_Permissions_AllCurrentAndFutureApproved,
         ..
@@ -181,24 +157,21 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Install_InstallState
     Install_InstallState
-      (
-        Install_InstallState_Installed,
+      ( Install_InstallState_Installed,
         Install_InstallState_InstallPending,
         ..
       ),
 
     -- * InstallFailureEvent_FailureReason
     InstallFailureEvent_FailureReason
-      (
-        InstallFailureEvent_FailureReason_Unknown,
+      ( InstallFailureEvent_FailureReason_Unknown,
         InstallFailureEvent_FailureReason_Timeout,
         ..
       ),
 
     -- * KeyedAppState_Severity
     KeyedAppState_Severity
-      (
-        KeyedAppState_Severity_SeverityUnknown,
+      ( KeyedAppState_Severity_SeverityUnknown,
         KeyedAppState_Severity_SeverityInfo,
         KeyedAppState_Severity_SeverityError,
         ..
@@ -206,16 +179,14 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * NewDeviceEvent_ManagementType
     NewDeviceEvent_ManagementType
-      (
-        NewDeviceEvent_ManagementType_ManagedDevice,
+      ( NewDeviceEvent_ManagementType_ManagedDevice,
         NewDeviceEvent_ManagementType_ManagedProfile,
         ..
       ),
 
     -- * Notification_NotificationType
     Notification_NotificationType
-      (
-        Notification_NotificationType_Unknown,
+      ( Notification_NotificationType_Unknown,
         Notification_NotificationType_TestNotification,
         Notification_NotificationType_ProductApproval,
         Notification_NotificationType_InstallFailure,
@@ -230,8 +201,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Policy_AutoUpdatePolicy
     Policy_AutoUpdatePolicy
-      (
-        Policy_AutoUpdatePolicy_AutoUpdatePolicyUnspecified,
+      ( Policy_AutoUpdatePolicy_AutoUpdatePolicyUnspecified,
         Policy_AutoUpdatePolicy_ChoiceToTheUser,
         Policy_AutoUpdatePolicy_Never,
         Policy_AutoUpdatePolicy_WifiOnly,
@@ -241,8 +211,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Policy_DeviceReportPolicy
     Policy_DeviceReportPolicy
-      (
-        Policy_DeviceReportPolicy_DeviceReportPolicyUnspecified,
+      ( Policy_DeviceReportPolicy_DeviceReportPolicyUnspecified,
         Policy_DeviceReportPolicy_DeviceReportDisabled,
         Policy_DeviceReportPolicy_DeviceReportEnabled,
         ..
@@ -250,8 +219,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Policy_ProductAvailabilityPolicy
     Policy_ProductAvailabilityPolicy
-      (
-        Policy_ProductAvailabilityPolicy_ProductAvailabilityPolicyUnspecified,
+      ( Policy_ProductAvailabilityPolicy_ProductAvailabilityPolicyUnspecified,
         Policy_ProductAvailabilityPolicy_Whitelist,
         Policy_ProductAvailabilityPolicy_All,
         ..
@@ -259,8 +227,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Product_AvailableTracksItem
     Product_AvailableTracksItem
-      (
-        Product_AvailableTracksItem_AppTrackUnspecified,
+      ( Product_AvailableTracksItem_AppTrackUnspecified,
         Product_AvailableTracksItem_Production,
         Product_AvailableTracksItem_Beta,
         Product_AvailableTracksItem_Alpha,
@@ -269,8 +236,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Product_ContentRating
     Product_ContentRating
-      (
-        Product_ContentRating_RatingUnknown,
+      ( Product_ContentRating_RatingUnknown,
         Product_ContentRating_All,
         Product_ContentRating_PreTeen,
         Product_ContentRating_Teen,
@@ -280,8 +246,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Product_DistributionChannel
     Product_DistributionChannel
-      (
-        Product_DistributionChannel_PublicGoogleHosted,
+      ( Product_DistributionChannel_PublicGoogleHosted,
         Product_DistributionChannel_PrivateGoogleHosted,
         Product_DistributionChannel_PrivateSelfHosted,
         ..
@@ -289,16 +254,14 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * Product_FeaturesItem
     Product_FeaturesItem
-      (
-        Product_FeaturesItem_FeatureUnknown,
+      ( Product_FeaturesItem_FeatureUnknown,
         Product_FeaturesItem_VpnApp,
         ..
       ),
 
     -- * Product_ProductPricing
     Product_ProductPricing
-      (
-        Product_ProductPricing_Unknown,
+      ( Product_ProductPricing_Unknown,
         Product_ProductPricing_Free,
         Product_ProductPricing_FreeWithInAppPurchase,
         Product_ProductPricing_Paid,
@@ -307,8 +270,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * ProductApprovalEvent_Approved
     ProductApprovalEvent_Approved
-      (
-        ProductApprovalEvent_Approved_Unknown,
+      ( ProductApprovalEvent_Approved_Unknown,
         ProductApprovalEvent_Approved_Approved,
         ProductApprovalEvent_Approved_Unapproved,
         ..
@@ -316,8 +278,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * ProductAvailabilityChangeEvent_AvailabilityStatus
     ProductAvailabilityChangeEvent_AvailabilityStatus
-      (
-        ProductAvailabilityChangeEvent_AvailabilityStatus_Unknown,
+      ( ProductAvailabilityChangeEvent_AvailabilityStatus_Unknown,
         ProductAvailabilityChangeEvent_AvailabilityStatus_Available,
         ProductAvailabilityChangeEvent_AvailabilityStatus_Removed,
         ProductAvailabilityChangeEvent_AvailabilityStatus_Unpublished,
@@ -326,16 +287,14 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * ProductPermission_State
     ProductPermission_State
-      (
-        ProductPermission_State_Required,
+      ( ProductPermission_State_Required,
         ProductPermission_State_Accepted,
         ..
       ),
 
     -- * ProductPolicy_AutoUpdateMode
     ProductPolicy_AutoUpdateMode
-      (
-        ProductPolicy_AutoUpdateMode_AutoUpdateModeUnspecified,
+      ( ProductPolicy_AutoUpdateMode_AutoUpdateModeUnspecified,
         ProductPolicy_AutoUpdateMode_AutoUpdateDefault,
         ProductPolicy_AutoUpdateMode_AutoUpdatePostponed,
         ProductPolicy_AutoUpdateMode_AutoUpdateHighPriority,
@@ -344,8 +303,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * ProductPolicy_TracksItem
     ProductPolicy_TracksItem
-      (
-        ProductPolicy_TracksItem_AppTrackUnspecified,
+      ( ProductPolicy_TracksItem_AppTrackUnspecified,
         ProductPolicy_TracksItem_Production,
         ProductPolicy_TracksItem_Beta,
         ProductPolicy_TracksItem_Alpha,
@@ -354,8 +312,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * ProductSet_ProductSetBehavior
     ProductSet_ProductSetBehavior
-      (
-        ProductSet_ProductSetBehavior_Unknown,
+      ( ProductSet_ProductSetBehavior_Unknown,
         ProductSet_ProductSetBehavior_Whitelist,
         ProductSet_ProductSetBehavior_IncludeAll,
         ProductSet_ProductSetBehavior_AllApproved,
@@ -364,8 +321,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * ProductVisibility_TracksItem
     ProductVisibility_TracksItem
-      (
-        ProductVisibility_TracksItem_AppTrackUnspecified,
+      ( ProductVisibility_TracksItem_AppTrackUnspecified,
         ProductVisibility_TracksItem_Production,
         ProductVisibility_TracksItem_Beta,
         ProductVisibility_TracksItem_Alpha,
@@ -374,24 +330,21 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * ProductsApproveRequest_ApprovedPermissions
     ProductsApproveRequest_ApprovedPermissions
-      (
-        ProductsApproveRequest_ApprovedPermissions_CurrentPermissionsOnly,
+      ( ProductsApproveRequest_ApprovedPermissions_CurrentPermissionsOnly,
         ProductsApproveRequest_ApprovedPermissions_AllPermissions,
         ..
       ),
 
     -- * ServiceAccountKey_Type
     ServiceAccountKey_Type
-      (
-        ServiceAccountKey_Type_GoogleCredentials,
+      ( ServiceAccountKey_Type_GoogleCredentials,
         ServiceAccountKey_Type_PKCS12,
         ..
       ),
 
     -- * StoreLayout_StoreLayoutType
     StoreLayout_StoreLayoutType
-      (
-        StoreLayout_StoreLayoutType_Unknown,
+      ( StoreLayout_StoreLayoutType_Unknown,
         StoreLayout_StoreLayoutType_Basic,
         StoreLayout_StoreLayoutType_Custom,
         ..
@@ -399,24 +352,21 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * User_AccountType
     User_AccountType
-      (
-        User_AccountType_DeviceAccount,
+      ( User_AccountType_DeviceAccount,
         User_AccountType_UserAccount,
         ..
       ),
 
     -- * User_ManagementType
     User_ManagementType
-      (
-        User_ManagementType_GoogleManaged,
+      ( User_ManagementType_GoogleManaged,
         User_ManagementType_EmmManaged,
         ..
       ),
 
     -- * WebApp_DisplayMode
     WebApp_DisplayMode
-      (
-        WebApp_DisplayMode_DisplayModeUnspecified,
+      ( WebApp_DisplayMode_DisplayModeUnspecified,
         WebApp_DisplayMode_MinimalUi,
         WebApp_DisplayMode_Standalone,
         WebApp_DisplayMode_FullScreen,
@@ -425,35 +375,34 @@ module Gogol.AndroidEnterprise.Internal.Sum
 
     -- * EnterprisesGetServiceAccountKeyType
     EnterprisesGetServiceAccountKeyType
-      (
-        EnterprisesGetServiceAccountKeyType_GoogleCredentials,
+      ( EnterprisesGetServiceAccountKeyType_GoogleCredentials,
         EnterprisesGetServiceAccountKeyType_PKCS12,
         ..
       ),
 
     -- * EnterprisesPullNotificationSetRequestMode
     EnterprisesPullNotificationSetRequestMode
-      (
-        EnterprisesPullNotificationSetRequestMode_WaitForNotifications,
+      ( EnterprisesPullNotificationSetRequestMode_WaitForNotifications,
         EnterprisesPullNotificationSetRequestMode_ReturnImmediately,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -466,19 +415,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
-newtype AdministratorWebTokenSpec_PermissionItem = AdministratorWebTokenSpec_PermissionItem { fromAdministratorWebTokenSpec_PermissionItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AdministratorWebTokenSpec_PermissionItem = AdministratorWebTokenSpec_PermissionItem {fromAdministratorWebTokenSpec_PermissionItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown permission.
 pattern AdministratorWebTokenSpec_PermissionItem_Unknown :: AdministratorWebTokenSpec_PermissionItem
@@ -496,20 +446,21 @@ pattern AdministratorWebTokenSpec_PermissionItem_ManageMcm = AdministratorWebTok
   AdministratorWebTokenSpec_PermissionItem_Unknown,
   AdministratorWebTokenSpec_PermissionItem_ApproveApps,
   AdministratorWebTokenSpec_PermissionItem_ManageMcm,
-  AdministratorWebTokenSpec_PermissionItem #-}
+  AdministratorWebTokenSpec_PermissionItem
+  #-}
 
 -- | The type of the restriction.
-newtype AppRestrictionsSchemaRestriction_RestrictionType = AppRestrictionsSchemaRestriction_RestrictionType { fromAppRestrictionsSchemaRestriction_RestrictionType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppRestrictionsSchemaRestriction_RestrictionType = AppRestrictionsSchemaRestriction_RestrictionType {fromAppRestrictionsSchemaRestriction_RestrictionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A restriction of boolean type.
 pattern AppRestrictionsSchemaRestriction_RestrictionType_Bool :: AppRestrictionsSchemaRestriction_RestrictionType
@@ -552,20 +503,21 @@ pattern AppRestrictionsSchemaRestriction_RestrictionType_BundleArray = AppRestri
   AppRestrictionsSchemaRestriction_RestrictionType_Hidden,
   AppRestrictionsSchemaRestriction_RestrictionType_Bundle,
   AppRestrictionsSchemaRestriction_RestrictionType_BundleArray,
-  AppRestrictionsSchemaRestriction_RestrictionType #-}
+  AppRestrictionsSchemaRestriction_RestrictionType
+  #-}
 
 -- | The type of the value being provided.
-newtype AppRestrictionsSchemaRestrictionRestrictionValue_Type = AppRestrictionsSchemaRestrictionRestrictionValue_Type { fromAppRestrictionsSchemaRestrictionRestrictionValue_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppRestrictionsSchemaRestrictionRestrictionValue_Type = AppRestrictionsSchemaRestrictionRestrictionValue_Type {fromAppRestrictionsSchemaRestrictionRestrictionValue_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A restriction of boolean type.
 pattern AppRestrictionsSchemaRestrictionRestrictionValue_Type_Bool :: AppRestrictionsSchemaRestrictionRestrictionValue_Type
@@ -608,34 +560,35 @@ pattern AppRestrictionsSchemaRestrictionRestrictionValue_Type_BundleArray = AppR
   AppRestrictionsSchemaRestrictionRestrictionValue_Type_Hidden,
   AppRestrictionsSchemaRestrictionRestrictionValue_Type_Bundle,
   AppRestrictionsSchemaRestrictionRestrictionValue_Type_BundleArray,
-  AppRestrictionsSchemaRestrictionRestrictionValue_Type #-}
+  AppRestrictionsSchemaRestrictionRestrictionValue_Type
+  #-}
 
 -- | Deprecated, use trackId instead.
-newtype AppVersion_Track = AppVersion_Track { fromAppVersion_Track :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppVersion_Track = AppVersion_Track {fromAppVersion_Track :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AppVersion_Track_AppTrackUnspecified :: AppVersion_Track
 pattern AppVersion_Track_AppTrackUnspecified = AppVersion_Track "appTrackUnspecified"
 
--- | 
+-- |
 pattern AppVersion_Track_Production :: AppVersion_Track
 pattern AppVersion_Track_Production = AppVersion_Track "production"
 
--- | 
+-- |
 pattern AppVersion_Track_Beta :: AppVersion_Track
 pattern AppVersion_Track_Beta = AppVersion_Track "beta"
 
--- | 
+-- |
 pattern AppVersion_Track_Alpha :: AppVersion_Track
 pattern AppVersion_Track_Alpha = AppVersion_Track "alpha"
 
@@ -644,22 +597,23 @@ pattern AppVersion_Track_Alpha = AppVersion_Track "alpha"
   AppVersion_Track_Production,
   AppVersion_Track_Beta,
   AppVersion_Track_Alpha,
-  AppVersion_Track #-}
+  AppVersion_Track
+  #-}
 
 -- | Charging state constraint.
-newtype AutoInstallConstraint_ChargingStateConstraint = AutoInstallConstraint_ChargingStateConstraint { fromAutoInstallConstraint_ChargingStateConstraint :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoInstallConstraint_ChargingStateConstraint = AutoInstallConstraint_ChargingStateConstraint {fromAutoInstallConstraint_ChargingStateConstraint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AutoInstallConstraint_ChargingStateConstraint_ChargingStateConstraintUnspecified :: AutoInstallConstraint_ChargingStateConstraint
 pattern AutoInstallConstraint_ChargingStateConstraint_ChargingStateConstraintUnspecified = AutoInstallConstraint_ChargingStateConstraint "chargingStateConstraintUnspecified"
 
@@ -675,22 +629,23 @@ pattern AutoInstallConstraint_ChargingStateConstraint_ChargingRequired = AutoIns
   AutoInstallConstraint_ChargingStateConstraint_ChargingStateConstraintUnspecified,
   AutoInstallConstraint_ChargingStateConstraint_ChargingNotRequired,
   AutoInstallConstraint_ChargingStateConstraint_ChargingRequired,
-  AutoInstallConstraint_ChargingStateConstraint #-}
+  AutoInstallConstraint_ChargingStateConstraint
+  #-}
 
 -- | Device idle state constraint.
-newtype AutoInstallConstraint_DeviceIdleStateConstraint = AutoInstallConstraint_DeviceIdleStateConstraint { fromAutoInstallConstraint_DeviceIdleStateConstraint :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoInstallConstraint_DeviceIdleStateConstraint = AutoInstallConstraint_DeviceIdleStateConstraint {fromAutoInstallConstraint_DeviceIdleStateConstraint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleStateConstraintUnspecified :: AutoInstallConstraint_DeviceIdleStateConstraint
 pattern AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleStateConstraintUnspecified = AutoInstallConstraint_DeviceIdleStateConstraint "deviceIdleStateConstraintUnspecified"
 
@@ -706,22 +661,23 @@ pattern AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleRequired = Aut
   AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleStateConstraintUnspecified,
   AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleNotRequired,
   AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleRequired,
-  AutoInstallConstraint_DeviceIdleStateConstraint #-}
+  AutoInstallConstraint_DeviceIdleStateConstraint
+  #-}
 
 -- | Network type constraint.
-newtype AutoInstallConstraint_NetworkTypeConstraint = AutoInstallConstraint_NetworkTypeConstraint { fromAutoInstallConstraint_NetworkTypeConstraint :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoInstallConstraint_NetworkTypeConstraint = AutoInstallConstraint_NetworkTypeConstraint {fromAutoInstallConstraint_NetworkTypeConstraint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AutoInstallConstraint_NetworkTypeConstraint_NetworkTypeConstraintUnspecified :: AutoInstallConstraint_NetworkTypeConstraint
 pattern AutoInstallConstraint_NetworkTypeConstraint_NetworkTypeConstraintUnspecified = AutoInstallConstraint_NetworkTypeConstraint "networkTypeConstraintUnspecified"
 
@@ -737,22 +693,23 @@ pattern AutoInstallConstraint_NetworkTypeConstraint_UnmeteredNetwork = AutoInsta
   AutoInstallConstraint_NetworkTypeConstraint_NetworkTypeConstraintUnspecified,
   AutoInstallConstraint_NetworkTypeConstraint_AnyNetwork,
   AutoInstallConstraint_NetworkTypeConstraint_UnmeteredNetwork,
-  AutoInstallConstraint_NetworkTypeConstraint #-}
+  AutoInstallConstraint_NetworkTypeConstraint
+  #-}
 
 -- | The auto-install mode. If unset defaults to \"doNotAutoInstall\".
-newtype AutoInstallPolicy_AutoInstallMode = AutoInstallPolicy_AutoInstallMode { fromAutoInstallPolicy_AutoInstallMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoInstallPolicy_AutoInstallMode = AutoInstallPolicy_AutoInstallMode {fromAutoInstallPolicy_AutoInstallMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AutoInstallPolicy_AutoInstallMode_AutoInstallModeUnspecified :: AutoInstallPolicy_AutoInstallMode
 pattern AutoInstallPolicy_AutoInstallMode_AutoInstallModeUnspecified = AutoInstallPolicy_AutoInstallMode "autoInstallModeUnspecified"
 
@@ -773,34 +730,35 @@ pattern AutoInstallPolicy_AutoInstallMode_ForceAutoInstall = AutoInstallPolicy_A
   AutoInstallPolicy_AutoInstallMode_DoNotAutoInstall,
   AutoInstallPolicy_AutoInstallMode_AutoInstallOnce,
   AutoInstallPolicy_AutoInstallMode_ForceAutoInstall,
-  AutoInstallPolicy_AutoInstallMode #-}
+  AutoInstallPolicy_AutoInstallMode
+  #-}
 
 -- | Identifies the extent to which the device is controlled by a managed Google Play EMM in various deployment configurations. Possible values include: - \"managedDevice\", a device that has the EMM\'s device policy controller (DPC) as the device owner. - \"managedProfile\", a device that has a profile managed by the DPC (DPC is profile owner) in addition to a separate, personal profile that is unavailable to the DPC. - \"containerApp\", no longer used (deprecated). - \"unmanagedProfile\", a device that has been allowed (by the domain\'s admin, using the Admin Console to enable the privilege) to use managed Google Play, but the profile is itself not owned by a DPC.
-newtype Device_ManagementType = Device_ManagementType { fromDevice_ManagementType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Device_ManagementType = Device_ManagementType {fromDevice_ManagementType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Device_ManagementType_ManagedDevice :: Device_ManagementType
 pattern Device_ManagementType_ManagedDevice = Device_ManagementType "managedDevice"
 
--- | 
+-- |
 pattern Device_ManagementType_ManagedProfile :: Device_ManagementType
 pattern Device_ManagementType_ManagedProfile = Device_ManagementType "managedProfile"
 
--- | 
+-- |
 pattern Device_ManagementType_ContainerApp :: Device_ManagementType
 pattern Device_ManagementType_ContainerApp = Device_ManagementType "containerApp"
 
--- | 
+-- |
 pattern Device_ManagementType_UnmanagedProfile :: Device_ManagementType
 pattern Device_ManagementType_UnmanagedProfile = Device_ManagementType "unmanagedProfile"
 
@@ -809,56 +767,58 @@ pattern Device_ManagementType_UnmanagedProfile = Device_ManagementType "unmanage
   Device_ManagementType_ManagedProfile,
   Device_ManagementType_ContainerApp,
   Device_ManagementType_UnmanagedProfile,
-  Device_ManagementType #-}
+  Device_ManagementType
+  #-}
 
 -- | The state of the Google account on the device. \"enabled\" indicates that the Google account on the device can be used to access Google services (including Google Play), while \"disabled\" means that it cannot. A new device is initially in the \"disabled\" state.
-newtype DeviceState_AccountState = DeviceState_AccountState { fromDeviceState_AccountState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeviceState_AccountState = DeviceState_AccountState {fromDeviceState_AccountState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeviceState_AccountState_Enabled :: DeviceState_AccountState
 pattern DeviceState_AccountState_Enabled = DeviceState_AccountState "enabled"
 
--- | 
+-- |
 pattern DeviceState_AccountState_Disabled :: DeviceState_AccountState
 pattern DeviceState_AccountState_Disabled = DeviceState_AccountState "disabled"
 
 {-# COMPLETE
   DeviceState_AccountState_Enabled,
   DeviceState_AccountState_Disabled,
-  DeviceState_AccountState #-}
+  DeviceState_AccountState
+  #-}
 
 -- | The reason for the entitlement. For example, \"free\" for free apps. This property is temporary: it will be replaced by the acquisition kind field of group licenses.
-newtype Entitlement_Reason = Entitlement_Reason { fromEntitlement_Reason :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Entitlement_Reason = Entitlement_Reason {fromEntitlement_Reason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Entitlement_Reason_Free :: Entitlement_Reason
 pattern Entitlement_Reason_Free = Entitlement_Reason "free"
 
--- | 
+-- |
 pattern Entitlement_Reason_GroupLicense :: Entitlement_Reason
 pattern Entitlement_Reason_GroupLicense = Entitlement_Reason "groupLicense"
 
--- | 
+-- |
 pattern Entitlement_Reason_UserPurchase :: Entitlement_Reason
 pattern Entitlement_Reason_UserPurchase = Entitlement_Reason "userPurchase"
 
@@ -866,82 +826,85 @@ pattern Entitlement_Reason_UserPurchase = Entitlement_Reason "userPurchase"
   Entitlement_Reason_Free,
   Entitlement_Reason_GroupLicense,
   Entitlement_Reason_UserPurchase,
-  Entitlement_Reason #-}
+  Entitlement_Reason
+  #-}
 
 -- | How this group license was acquired. \"bulkPurchase\" means that this Grouplicenses resource was created because the enterprise purchased licenses for this product; otherwise, the value is \"free\" (for free products).
-newtype GroupLicense_AcquisitionKind = GroupLicense_AcquisitionKind { fromGroupLicense_AcquisitionKind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupLicense_AcquisitionKind = GroupLicense_AcquisitionKind {fromGroupLicense_AcquisitionKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern GroupLicense_AcquisitionKind_Free :: GroupLicense_AcquisitionKind
 pattern GroupLicense_AcquisitionKind_Free = GroupLicense_AcquisitionKind "free"
 
--- | 
+-- |
 pattern GroupLicense_AcquisitionKind_BulkPurchase :: GroupLicense_AcquisitionKind
 pattern GroupLicense_AcquisitionKind_BulkPurchase = GroupLicense_AcquisitionKind "bulkPurchase"
 
 {-# COMPLETE
   GroupLicense_AcquisitionKind_Free,
   GroupLicense_AcquisitionKind_BulkPurchase,
-  GroupLicense_AcquisitionKind #-}
+  GroupLicense_AcquisitionKind
+  #-}
 
 -- | Whether the product to which this group license relates is currently approved by the enterprise. Products are approved when a group license is first created, but this approval may be revoked by an enterprise admin via Google Play. Unapproved products will not be visible to end users in collections, and new entitlements to them should not normally be created.
-newtype GroupLicense_Approval = GroupLicense_Approval { fromGroupLicense_Approval :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupLicense_Approval = GroupLicense_Approval {fromGroupLicense_Approval :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern GroupLicense_Approval_Approved :: GroupLicense_Approval
 pattern GroupLicense_Approval_Approved = GroupLicense_Approval "approved"
 
--- | 
+-- |
 pattern GroupLicense_Approval_Unapproved :: GroupLicense_Approval
 pattern GroupLicense_Approval_Unapproved = GroupLicense_Approval "unapproved"
 
 {-# COMPLETE
   GroupLicense_Approval_Approved,
   GroupLicense_Approval_Unapproved,
-  GroupLicense_Approval #-}
+  GroupLicense_Approval
+  #-}
 
 -- | The permission approval status of the product. This field is only set if the product is approved. Possible states are: - \"currentApproved\", the current set of permissions is approved, but additional permissions will require the administrator to reapprove the product (If the product was approved without specifying the approved permissions setting, then this is the default behavior.), - \"needsReapproval\", the product has unapproved permissions. No additional product licenses can be assigned until the product is reapproved, - \"allCurrentAndFutureApproved\", the current permissions are approved and any future permission updates will be automatically approved without administrator review.
-newtype GroupLicense_Permissions = GroupLicense_Permissions { fromGroupLicense_Permissions :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupLicense_Permissions = GroupLicense_Permissions {fromGroupLicense_Permissions :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern GroupLicense_Permissions_CurrentApproved :: GroupLicense_Permissions
 pattern GroupLicense_Permissions_CurrentApproved = GroupLicense_Permissions "currentApproved"
 
--- | 
+-- |
 pattern GroupLicense_Permissions_NeedsReapproval :: GroupLicense_Permissions
 pattern GroupLicense_Permissions_NeedsReapproval = GroupLicense_Permissions "needsReapproval"
 
--- | 
+-- |
 pattern GroupLicense_Permissions_AllCurrentAndFutureApproved :: GroupLicense_Permissions
 pattern GroupLicense_Permissions_AllCurrentAndFutureApproved = GroupLicense_Permissions "allCurrentAndFutureApproved"
 
@@ -949,46 +912,48 @@ pattern GroupLicense_Permissions_AllCurrentAndFutureApproved = GroupLicense_Perm
   GroupLicense_Permissions_CurrentApproved,
   GroupLicense_Permissions_NeedsReapproval,
   GroupLicense_Permissions_AllCurrentAndFutureApproved,
-  GroupLicense_Permissions #-}
+  GroupLicense_Permissions
+  #-}
 
 -- | Install state. The state \"installPending\" means that an install request has recently been made and download to the device is in progress. The state \"installed\" means that the app has been installed. This field is read-only.
-newtype Install_InstallState = Install_InstallState { fromInstall_InstallState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Install_InstallState = Install_InstallState {fromInstall_InstallState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Install_InstallState_Installed :: Install_InstallState
 pattern Install_InstallState_Installed = Install_InstallState "installed"
 
--- | 
+-- |
 pattern Install_InstallState_InstallPending :: Install_InstallState
 pattern Install_InstallState_InstallPending = Install_InstallState "installPending"
 
 {-# COMPLETE
   Install_InstallState_Installed,
   Install_InstallState_InstallPending,
-  Install_InstallState #-}
+  Install_InstallState
+  #-}
 
 -- | The reason for the installation failure. This field will always be present.
-newtype InstallFailureEvent_FailureReason = InstallFailureEvent_FailureReason { fromInstallFailureEvent_FailureReason :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstallFailureEvent_FailureReason = InstallFailureEvent_FailureReason {fromInstallFailureEvent_FailureReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Used whenever no better reason for failure can be provided.
 pattern InstallFailureEvent_FailureReason_Unknown :: InstallFailureEvent_FailureReason
@@ -1001,30 +966,31 @@ pattern InstallFailureEvent_FailureReason_Timeout = InstallFailureEvent_FailureR
 {-# COMPLETE
   InstallFailureEvent_FailureReason_Unknown,
   InstallFailureEvent_FailureReason_Timeout,
-  InstallFailureEvent_FailureReason #-}
+  InstallFailureEvent_FailureReason
+  #-}
 
 -- | Severity of the app state. This field will always be present.
-newtype KeyedAppState_Severity = KeyedAppState_Severity { fromKeyedAppState_Severity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype KeyedAppState_Severity = KeyedAppState_Severity {fromKeyedAppState_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern KeyedAppState_Severity_SeverityUnknown :: KeyedAppState_Severity
 pattern KeyedAppState_Severity_SeverityUnknown = KeyedAppState_Severity "severityUnknown"
 
--- | 
+-- |
 pattern KeyedAppState_Severity_SeverityInfo :: KeyedAppState_Severity
 pattern KeyedAppState_Severity_SeverityInfo = KeyedAppState_Severity "severityInfo"
 
--- | 
+-- |
 pattern KeyedAppState_Severity_SeverityError :: KeyedAppState_Severity
 pattern KeyedAppState_Severity_SeverityError = KeyedAppState_Severity "severityError"
 
@@ -1032,48 +998,50 @@ pattern KeyedAppState_Severity_SeverityError = KeyedAppState_Severity "severityE
   KeyedAppState_Severity_SeverityUnknown,
   KeyedAppState_Severity_SeverityInfo,
   KeyedAppState_Severity_SeverityError,
-  KeyedAppState_Severity #-}
+  KeyedAppState_Severity
+  #-}
 
 -- | Identifies the extent to which the device is controlled by an Android EMM in various deployment configurations. Possible values include: - \"managedDevice\", a device where the DPC is set as device owner, - \"managedProfile\", a device where the DPC is set as profile owner.
-newtype NewDeviceEvent_ManagementType = NewDeviceEvent_ManagementType { fromNewDeviceEvent_ManagementType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NewDeviceEvent_ManagementType = NewDeviceEvent_ManagementType {fromNewDeviceEvent_ManagementType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NewDeviceEvent_ManagementType_ManagedDevice :: NewDeviceEvent_ManagementType
 pattern NewDeviceEvent_ManagementType_ManagedDevice = NewDeviceEvent_ManagementType "managedDevice"
 
--- | 
+-- |
 pattern NewDeviceEvent_ManagementType_ManagedProfile :: NewDeviceEvent_ManagementType
 pattern NewDeviceEvent_ManagementType_ManagedProfile = NewDeviceEvent_ManagementType "managedProfile"
 
 {-# COMPLETE
   NewDeviceEvent_ManagementType_ManagedDevice,
   NewDeviceEvent_ManagementType_ManagedProfile,
-  NewDeviceEvent_ManagementType #-}
+  NewDeviceEvent_ManagementType
+  #-}
 
 -- | Type of the notification.
-newtype Notification_NotificationType = Notification_NotificationType { fromNotification_NotificationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Notification_NotificationType = Notification_NotificationType {fromNotification_NotificationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Notification_NotificationType_Unknown :: Notification_NotificationType
 pattern Notification_NotificationType_Unknown = Notification_NotificationType "unknown"
 
@@ -1124,20 +1092,21 @@ pattern Notification_NotificationType_DeviceReportUpdate = Notification_Notifica
   Notification_NotificationType_ProductAvailabilityChange,
   Notification_NotificationType_NewDevice,
   Notification_NotificationType_DeviceReportUpdate,
-  Notification_NotificationType #-}
+  Notification_NotificationType
+  #-}
 
 -- | Deprecated. Use autoUpdateMode instead. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect. \"choiceToTheUser\" allows the device\'s user to configure the app update policy. \"always\" enables auto updates. \"never\" disables auto updates. \"wifiOnly\" enables auto updates only when the device is connected to wifi.
-newtype Policy_AutoUpdatePolicy = Policy_AutoUpdatePolicy { fromPolicy_AutoUpdatePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Policy_AutoUpdatePolicy = Policy_AutoUpdatePolicy {fromPolicy_AutoUpdatePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The auto update policy is not set.
 pattern Policy_AutoUpdatePolicy_AutoUpdatePolicyUnspecified :: Policy_AutoUpdatePolicy
@@ -1165,20 +1134,21 @@ pattern Policy_AutoUpdatePolicy_Always = Policy_AutoUpdatePolicy "always"
   Policy_AutoUpdatePolicy_Never,
   Policy_AutoUpdatePolicy_WifiOnly,
   Policy_AutoUpdatePolicy_Always,
-  Policy_AutoUpdatePolicy #-}
+  Policy_AutoUpdatePolicy
+  #-}
 
 -- | Whether the device reports app states to the EMM. The default value is \"deviceReportDisabled\".
-newtype Policy_DeviceReportPolicy = Policy_DeviceReportPolicy { fromPolicy_DeviceReportPolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Policy_DeviceReportPolicy = Policy_DeviceReportPolicy {fromPolicy_DeviceReportPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The device report policy is not set.
 pattern Policy_DeviceReportPolicy_DeviceReportPolicyUnspecified :: Policy_DeviceReportPolicy
@@ -1196,20 +1166,21 @@ pattern Policy_DeviceReportPolicy_DeviceReportEnabled = Policy_DeviceReportPolic
   Policy_DeviceReportPolicy_DeviceReportPolicyUnspecified,
   Policy_DeviceReportPolicy_DeviceReportDisabled,
   Policy_DeviceReportPolicy_DeviceReportEnabled,
-  Policy_DeviceReportPolicy #-}
+  Policy_DeviceReportPolicy
+  #-}
 
 -- | The availability granted to the device for the specified products. \"all\" gives the device access to all products, regardless of approval status. \"all\" does not enable automatic visibility of \"alpha\" or \"beta\" tracks. \"whitelist\" grants the device access the products specified in productPolicy[]. Only products that are approved or products that were previously approved (products with revoked approval) by the enterprise can be whitelisted. If no value is provided, the availability set at the user level is applied by default.
-newtype Policy_ProductAvailabilityPolicy = Policy_ProductAvailabilityPolicy { fromPolicy_ProductAvailabilityPolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Policy_ProductAvailabilityPolicy = Policy_ProductAvailabilityPolicy {fromPolicy_ProductAvailabilityPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified, applies the user available product set by default.
 pattern Policy_ProductAvailabilityPolicy_ProductAvailabilityPolicyUnspecified :: Policy_ProductAvailabilityPolicy
@@ -1227,33 +1198,34 @@ pattern Policy_ProductAvailabilityPolicy_All = Policy_ProductAvailabilityPolicy 
   Policy_ProductAvailabilityPolicy_ProductAvailabilityPolicyUnspecified,
   Policy_ProductAvailabilityPolicy_Whitelist,
   Policy_ProductAvailabilityPolicy_All,
-  Policy_ProductAvailabilityPolicy #-}
+  Policy_ProductAvailabilityPolicy
+  #-}
 
-newtype Product_AvailableTracksItem = Product_AvailableTracksItem { fromProduct_AvailableTracksItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Product_AvailableTracksItem = Product_AvailableTracksItem {fromProduct_AvailableTracksItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Product_AvailableTracksItem_AppTrackUnspecified :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_AppTrackUnspecified = Product_AvailableTracksItem "appTrackUnspecified"
 
--- | 
+-- |
 pattern Product_AvailableTracksItem_Production :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_Production = Product_AvailableTracksItem "production"
 
--- | 
+-- |
 pattern Product_AvailableTracksItem_Beta :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_Beta = Product_AvailableTracksItem "beta"
 
--- | 
+-- |
 pattern Product_AvailableTracksItem_Alpha :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_Alpha = Product_AvailableTracksItem "alpha"
 
@@ -1262,38 +1234,39 @@ pattern Product_AvailableTracksItem_Alpha = Product_AvailableTracksItem "alpha"
   Product_AvailableTracksItem_Production,
   Product_AvailableTracksItem_Beta,
   Product_AvailableTracksItem_Alpha,
-  Product_AvailableTracksItem #-}
+  Product_AvailableTracksItem
+  #-}
 
 -- | The content rating for this app.
-newtype Product_ContentRating = Product_ContentRating { fromProduct_ContentRating :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Product_ContentRating = Product_ContentRating {fromProduct_ContentRating :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Product_ContentRating_RatingUnknown :: Product_ContentRating
 pattern Product_ContentRating_RatingUnknown = Product_ContentRating "ratingUnknown"
 
--- | 
+-- |
 pattern Product_ContentRating_All :: Product_ContentRating
 pattern Product_ContentRating_All = Product_ContentRating "all"
 
--- | 
+-- |
 pattern Product_ContentRating_PreTeen :: Product_ContentRating
 pattern Product_ContentRating_PreTeen = Product_ContentRating "preTeen"
 
--- | 
+-- |
 pattern Product_ContentRating_Teen :: Product_ContentRating
 pattern Product_ContentRating_Teen = Product_ContentRating "teen"
 
--- | 
+-- |
 pattern Product_ContentRating_Mature :: Product_ContentRating
 pattern Product_ContentRating_Mature = Product_ContentRating "mature"
 
@@ -1303,30 +1276,31 @@ pattern Product_ContentRating_Mature = Product_ContentRating "mature"
   Product_ContentRating_PreTeen,
   Product_ContentRating_Teen,
   Product_ContentRating_Mature,
-  Product_ContentRating #-}
+  Product_ContentRating
+  #-}
 
 -- | How and to whom the package is made available. The value publicGoogleHosted means that the package is available through the Play store and not restricted to a specific enterprise. The value privateGoogleHosted means that the package is a private app (restricted to an enterprise) but hosted by Google. The value privateSelfHosted means that the package is a private app (restricted to an enterprise) and is privately hosted.
-newtype Product_DistributionChannel = Product_DistributionChannel { fromProduct_DistributionChannel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Product_DistributionChannel = Product_DistributionChannel {fromProduct_DistributionChannel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Product_DistributionChannel_PublicGoogleHosted :: Product_DistributionChannel
 pattern Product_DistributionChannel_PublicGoogleHosted = Product_DistributionChannel "publicGoogleHosted"
 
--- | 
+-- |
 pattern Product_DistributionChannel_PrivateGoogleHosted :: Product_DistributionChannel
 pattern Product_DistributionChannel_PrivateGoogleHosted = Product_DistributionChannel "privateGoogleHosted"
 
--- | 
+-- |
 pattern Product_DistributionChannel_PrivateSelfHosted :: Product_DistributionChannel
 pattern Product_DistributionChannel_PrivateSelfHosted = Product_DistributionChannel "privateSelfHosted"
 
@@ -1334,21 +1308,22 @@ pattern Product_DistributionChannel_PrivateSelfHosted = Product_DistributionChan
   Product_DistributionChannel_PublicGoogleHosted,
   Product_DistributionChannel_PrivateGoogleHosted,
   Product_DistributionChannel_PrivateSelfHosted,
-  Product_DistributionChannel #-}
+  Product_DistributionChannel
+  #-}
 
-newtype Product_FeaturesItem = Product_FeaturesItem { fromProduct_FeaturesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Product_FeaturesItem = Product_FeaturesItem {fromProduct_FeaturesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Product_FeaturesItem_FeatureUnknown :: Product_FeaturesItem
 pattern Product_FeaturesItem_FeatureUnknown = Product_FeaturesItem "featureUnknown"
 
@@ -1359,20 +1334,21 @@ pattern Product_FeaturesItem_VpnApp = Product_FeaturesItem "vpnApp"
 {-# COMPLETE
   Product_FeaturesItem_FeatureUnknown,
   Product_FeaturesItem_VpnApp,
-  Product_FeaturesItem #-}
+  Product_FeaturesItem
+  #-}
 
 -- | Whether this product is free, free with in-app purchases, or paid. If the pricing is unknown, this means the product is not generally available anymore (even though it might still be available to people who own it).
-newtype Product_ProductPricing = Product_ProductPricing { fromProduct_ProductPricing :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Product_ProductPricing = Product_ProductPricing {fromProduct_ProductPricing :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown pricing, used to denote an approved product that is not generally available.
 pattern Product_ProductPricing_Unknown :: Product_ProductPricing
@@ -1395,20 +1371,21 @@ pattern Product_ProductPricing_Paid = Product_ProductPricing "paid"
   Product_ProductPricing_Free,
   Product_ProductPricing_FreeWithInAppPurchase,
   Product_ProductPricing_Paid,
-  Product_ProductPricing #-}
+  Product_ProductPricing
+  #-}
 
 -- | Whether the product was approved or unapproved. This field will always be present.
-newtype ProductApprovalEvent_Approved = ProductApprovalEvent_Approved { fromProductApprovalEvent_Approved :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductApprovalEvent_Approved = ProductApprovalEvent_Approved {fromProductApprovalEvent_Approved :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Conveys no information.
 pattern ProductApprovalEvent_Approved_Unknown :: ProductApprovalEvent_Approved
@@ -1426,20 +1403,21 @@ pattern ProductApprovalEvent_Approved_Unapproved = ProductApprovalEvent_Approved
   ProductApprovalEvent_Approved_Unknown,
   ProductApprovalEvent_Approved_Approved,
   ProductApprovalEvent_Approved_Unapproved,
-  ProductApprovalEvent_Approved #-}
+  ProductApprovalEvent_Approved
+  #-}
 
 -- | The new state of the product. This field will always be present.
-newtype ProductAvailabilityChangeEvent_AvailabilityStatus = ProductAvailabilityChangeEvent_AvailabilityStatus { fromProductAvailabilityChangeEvent_AvailabilityStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductAvailabilityChangeEvent_AvailabilityStatus = ProductAvailabilityChangeEvent_AvailabilityStatus {fromProductAvailabilityChangeEvent_AvailabilityStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Conveys no information.
 pattern ProductAvailabilityChangeEvent_AvailabilityStatus_Unknown :: ProductAvailabilityChangeEvent_AvailabilityStatus
@@ -1462,20 +1440,21 @@ pattern ProductAvailabilityChangeEvent_AvailabilityStatus_Unpublished = ProductA
   ProductAvailabilityChangeEvent_AvailabilityStatus_Available,
   ProductAvailabilityChangeEvent_AvailabilityStatus_Removed,
   ProductAvailabilityChangeEvent_AvailabilityStatus_Unpublished,
-  ProductAvailabilityChangeEvent_AvailabilityStatus #-}
+  ProductAvailabilityChangeEvent_AvailabilityStatus
+  #-}
 
 -- | Whether the permission has been accepted or not.
-newtype ProductPermission_State = ProductPermission_State { fromProductPermission_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductPermission_State = ProductPermission_State {fromProductPermission_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The permission is required by the app but has not yet been accepted by the enterprise.
 pattern ProductPermission_State_Required :: ProductPermission_State
@@ -1488,20 +1467,21 @@ pattern ProductPermission_State_Accepted = ProductPermission_State "accepted"
 {-# COMPLETE
   ProductPermission_State_Required,
   ProductPermission_State_Accepted,
-  ProductPermission_State #-}
+  ProductPermission_State
+  #-}
 
 -- | The auto-update mode for the product.
-newtype ProductPolicy_AutoUpdateMode = ProductPolicy_AutoUpdateMode { fromProductPolicy_AutoUpdateMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductPolicy_AutoUpdateMode = ProductPolicy_AutoUpdateMode {fromProductPolicy_AutoUpdateMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Defaults to AUTO/UPDATE/DEFAULT.
 pattern ProductPolicy_AutoUpdateMode_AutoUpdateModeUnspecified :: ProductPolicy_AutoUpdateMode
@@ -1524,33 +1504,34 @@ pattern ProductPolicy_AutoUpdateMode_AutoUpdateHighPriority = ProductPolicy_Auto
   ProductPolicy_AutoUpdateMode_AutoUpdateDefault,
   ProductPolicy_AutoUpdateMode_AutoUpdatePostponed,
   ProductPolicy_AutoUpdateMode_AutoUpdateHighPriority,
-  ProductPolicy_AutoUpdateMode #-}
+  ProductPolicy_AutoUpdateMode
+  #-}
 
-newtype ProductPolicy_TracksItem = ProductPolicy_TracksItem { fromProductPolicy_TracksItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductPolicy_TracksItem = ProductPolicy_TracksItem {fromProductPolicy_TracksItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ProductPolicy_TracksItem_AppTrackUnspecified :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_AppTrackUnspecified = ProductPolicy_TracksItem "appTrackUnspecified"
 
--- | 
+-- |
 pattern ProductPolicy_TracksItem_Production :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_Production = ProductPolicy_TracksItem "production"
 
--- | 
+-- |
 pattern ProductPolicy_TracksItem_Beta :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_Beta = ProductPolicy_TracksItem "beta"
 
--- | 
+-- |
 pattern ProductPolicy_TracksItem_Alpha :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_Alpha = ProductPolicy_TracksItem "alpha"
 
@@ -1559,20 +1540,21 @@ pattern ProductPolicy_TracksItem_Alpha = ProductPolicy_TracksItem "alpha"
   ProductPolicy_TracksItem_Production,
   ProductPolicy_TracksItem_Beta,
   ProductPolicy_TracksItem_Alpha,
-  ProductPolicy_TracksItem #-}
+  ProductPolicy_TracksItem
+  #-}
 
 -- | The interpretation of this product set. \"unknown\" should never be sent and is ignored if received. \"whitelist\" means that the user is entitled to access the product set. \"includeAll\" means that all products are accessible, including products that are approved, products with revoked approval, and products that have never been approved. \"allApproved\" means that the user is entitled to access all products that are approved for the enterprise. If the value is \"allApproved\" or \"includeAll\", the productId field is ignored. If no value is provided, it is interpreted as \"whitelist\" for backwards compatibility. Further \"allApproved\" or \"includeAll\" does not enable automatic visibility of \"alpha\" or \"beta\" tracks for Android app. Use ProductVisibility to enable \"alpha\" or \"beta\" tracks per user.
-newtype ProductSet_ProductSetBehavior = ProductSet_ProductSetBehavior { fromProductSet_ProductSetBehavior :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductSet_ProductSetBehavior = ProductSet_ProductSetBehavior {fromProductSet_ProductSetBehavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This value should never be sent and ignored if received.
 pattern ProductSet_ProductSetBehavior_Unknown :: ProductSet_ProductSetBehavior
@@ -1595,33 +1577,34 @@ pattern ProductSet_ProductSetBehavior_AllApproved = ProductSet_ProductSetBehavio
   ProductSet_ProductSetBehavior_Whitelist,
   ProductSet_ProductSetBehavior_IncludeAll,
   ProductSet_ProductSetBehavior_AllApproved,
-  ProductSet_ProductSetBehavior #-}
+  ProductSet_ProductSetBehavior
+  #-}
 
-newtype ProductVisibility_TracksItem = ProductVisibility_TracksItem { fromProductVisibility_TracksItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductVisibility_TracksItem = ProductVisibility_TracksItem {fromProductVisibility_TracksItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ProductVisibility_TracksItem_AppTrackUnspecified :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_AppTrackUnspecified = ProductVisibility_TracksItem "appTrackUnspecified"
 
--- | 
+-- |
 pattern ProductVisibility_TracksItem_Production :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_Production = ProductVisibility_TracksItem "production"
 
--- | 
+-- |
 pattern ProductVisibility_TracksItem_Beta :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_Beta = ProductVisibility_TracksItem "beta"
 
--- | 
+-- |
 pattern ProductVisibility_TracksItem_Alpha :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_Alpha = ProductVisibility_TracksItem "alpha"
 
@@ -1630,20 +1613,21 @@ pattern ProductVisibility_TracksItem_Alpha = ProductVisibility_TracksItem "alpha
   ProductVisibility_TracksItem_Production,
   ProductVisibility_TracksItem_Beta,
   ProductVisibility_TracksItem_Alpha,
-  ProductVisibility_TracksItem #-}
+  ProductVisibility_TracksItem
+  #-}
 
 -- | Sets how new permission requests for the product are handled. \"allPermissions\" automatically approves all current and future permissions for the product. \"currentPermissionsOnly\" approves the current set of permissions for the product, but any future permissions added through updates will require manual reapproval. If not specified, only the current set of permissions will be approved.
-newtype ProductsApproveRequest_ApprovedPermissions = ProductsApproveRequest_ApprovedPermissions { fromProductsApproveRequest_ApprovedPermissions :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProductsApproveRequest_ApprovedPermissions = ProductsApproveRequest_ApprovedPermissions {fromProductsApproveRequest_ApprovedPermissions :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Approve only the permissions the product requires at approval time. If an update requires additional permissions, the app will not be updated on devices associated with enterprise users until the additional permissions are approved.
 pattern ProductsApproveRequest_ApprovedPermissions_CurrentPermissionsOnly :: ProductsApproveRequest_ApprovedPermissions
@@ -1656,20 +1640,21 @@ pattern ProductsApproveRequest_ApprovedPermissions_AllPermissions = ProductsAppr
 {-# COMPLETE
   ProductsApproveRequest_ApprovedPermissions_CurrentPermissionsOnly,
   ProductsApproveRequest_ApprovedPermissions_AllPermissions,
-  ProductsApproveRequest_ApprovedPermissions #-}
+  ProductsApproveRequest_ApprovedPermissions
+  #-}
 
 -- | The file format of the generated key data.
-newtype ServiceAccountKey_Type = ServiceAccountKey_Type { fromServiceAccountKey_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAccountKey_Type = ServiceAccountKey_Type {fromServiceAccountKey_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Google Credentials File format.
 pattern ServiceAccountKey_Type_GoogleCredentials :: ServiceAccountKey_Type
@@ -1682,30 +1667,31 @@ pattern ServiceAccountKey_Type_PKCS12 = ServiceAccountKey_Type "pkcs12"
 {-# COMPLETE
   ServiceAccountKey_Type_GoogleCredentials,
   ServiceAccountKey_Type_PKCS12,
-  ServiceAccountKey_Type #-}
+  ServiceAccountKey_Type
+  #-}
 
 -- | The store layout type. By default, this value is set to \"basic\" if the homepageId field is not set, and to \"custom\" otherwise. If set to \"basic\", the layout will consist of all approved apps that have been whitelisted for the user.
-newtype StoreLayout_StoreLayoutType = StoreLayout_StoreLayoutType { fromStoreLayout_StoreLayoutType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StoreLayout_StoreLayoutType = StoreLayout_StoreLayoutType {fromStoreLayout_StoreLayoutType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern StoreLayout_StoreLayoutType_Unknown :: StoreLayout_StoreLayoutType
 pattern StoreLayout_StoreLayoutType_Unknown = StoreLayout_StoreLayoutType "unknown"
 
--- | 
+-- |
 pattern StoreLayout_StoreLayoutType_Basic :: StoreLayout_StoreLayoutType
 pattern StoreLayout_StoreLayoutType_Basic = StoreLayout_StoreLayoutType "basic"
 
--- | 
+-- |
 pattern StoreLayout_StoreLayoutType_Custom :: StoreLayout_StoreLayoutType
 pattern StoreLayout_StoreLayoutType_Custom = StoreLayout_StoreLayoutType "custom"
 
@@ -1713,74 +1699,77 @@ pattern StoreLayout_StoreLayoutType_Custom = StoreLayout_StoreLayoutType "custom
   StoreLayout_StoreLayoutType_Unknown,
   StoreLayout_StoreLayoutType_Basic,
   StoreLayout_StoreLayoutType_Custom,
-  StoreLayout_StoreLayoutType #-}
+  StoreLayout_StoreLayoutType
+  #-}
 
 -- | The type of account that this user represents. A userAccount can be installed on multiple devices, but a deviceAccount is specific to a single device. An EMM-managed user (emmManaged) can be either type (userAccount, deviceAccount), but a Google-managed user (googleManaged) is always a userAccount.
-newtype User_AccountType = User_AccountType { fromUser_AccountType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype User_AccountType = User_AccountType {fromUser_AccountType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern User_AccountType_DeviceAccount :: User_AccountType
 pattern User_AccountType_DeviceAccount = User_AccountType "deviceAccount"
 
--- | 
+-- |
 pattern User_AccountType_UserAccount :: User_AccountType
 pattern User_AccountType_UserAccount = User_AccountType "userAccount"
 
 {-# COMPLETE
   User_AccountType_DeviceAccount,
   User_AccountType_UserAccount,
-  User_AccountType #-}
+  User_AccountType
+  #-}
 
 -- | The entity that manages the user. With googleManaged users, the source of truth is Google so EMMs have to make sure a Google Account exists for the user. With emmManaged users, the EMM is in charge.
-newtype User_ManagementType = User_ManagementType { fromUser_ManagementType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype User_ManagementType = User_ManagementType {fromUser_ManagementType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern User_ManagementType_GoogleManaged :: User_ManagementType
 pattern User_ManagementType_GoogleManaged = User_ManagementType "googleManaged"
 
--- | 
+-- |
 pattern User_ManagementType_EmmManaged :: User_ManagementType
 pattern User_ManagementType_EmmManaged = User_ManagementType "emmManaged"
 
 {-# COMPLETE
   User_ManagementType_GoogleManaged,
   User_ManagementType_EmmManaged,
-  User_ManagementType #-}
+  User_ManagementType
+  #-}
 
 -- | The display mode of the web app. Possible values include: - \"minimalUi\", the device\'s status bar, navigation bar, the app\'s URL, and a refresh button are visible when the app is open. For HTTP URLs, you can only select this option. - \"standalone\", the device\'s status bar and navigation bar are visible when the app is open. - \"fullScreen\", the app opens in full screen mode, hiding the device\'s status and navigation bars. All browser UI elements, page URL, system status bar and back button are not visible, and the web app takes up the entirety of the available display area.
-newtype WebApp_DisplayMode = WebApp_DisplayMode { fromWebApp_DisplayMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WebApp_DisplayMode = WebApp_DisplayMode {fromWebApp_DisplayMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern WebApp_DisplayMode_DisplayModeUnspecified :: WebApp_DisplayMode
 pattern WebApp_DisplayMode_DisplayModeUnspecified = WebApp_DisplayMode "displayModeUnspecified"
 
@@ -1801,20 +1790,21 @@ pattern WebApp_DisplayMode_FullScreen = WebApp_DisplayMode "fullScreen"
   WebApp_DisplayMode_MinimalUi,
   WebApp_DisplayMode_Standalone,
   WebApp_DisplayMode_FullScreen,
-  WebApp_DisplayMode #-}
+  WebApp_DisplayMode
+  #-}
 
 -- | The type of credential to return with the service account. Required.
-newtype EnterprisesGetServiceAccountKeyType = EnterprisesGetServiceAccountKeyType { fromEnterprisesGetServiceAccountKeyType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EnterprisesGetServiceAccountKeyType = EnterprisesGetServiceAccountKeyType {fromEnterprisesGetServiceAccountKeyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Google Credentials File format.
 pattern EnterprisesGetServiceAccountKeyType_GoogleCredentials :: EnterprisesGetServiceAccountKeyType
@@ -1827,20 +1817,21 @@ pattern EnterprisesGetServiceAccountKeyType_PKCS12 = EnterprisesGetServiceAccoun
 {-# COMPLETE
   EnterprisesGetServiceAccountKeyType_GoogleCredentials,
   EnterprisesGetServiceAccountKeyType_PKCS12,
-  EnterprisesGetServiceAccountKeyType #-}
+  EnterprisesGetServiceAccountKeyType
+  #-}
 
 -- | The request mode for pulling notifications. Specifying waitForNotifications will cause the request to block and wait until one or more notifications are present, or return an empty notification list if no notifications are present after some time. Speciying returnImmediately will cause the request to immediately return the pending notifications, or an empty list if no notifications are present. If omitted, defaults to waitForNotifications.
-newtype EnterprisesPullNotificationSetRequestMode = EnterprisesPullNotificationSetRequestMode { fromEnterprisesPullNotificationSetRequestMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EnterprisesPullNotificationSetRequestMode = EnterprisesPullNotificationSetRequestMode {fromEnterprisesPullNotificationSetRequestMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Wait until one or more notifications are present.
 pattern EnterprisesPullNotificationSetRequestMode_WaitForNotifications :: EnterprisesPullNotificationSetRequestMode
@@ -1853,4 +1844,5 @@ pattern EnterprisesPullNotificationSetRequestMode_ReturnImmediately = Enterprise
 {-# COMPLETE
   EnterprisesPullNotificationSetRequestMode_WaitForNotifications,
   EnterprisesPullNotificationSetRequestMode_ReturnImmediately,
-  EnterprisesPullNotificationSetRequestMode #-}
+  EnterprisesPullNotificationSetRequestMode
+  #-}
