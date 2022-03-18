@@ -1,120 +1,131 @@
-name:                  gogol-android-enterprise
-version:               0.5.0
-synopsis:              Google Play EMM SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-android-enterprise
+version:            0.5.0
+synopsis:           Google Play EMM SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manages the deployment of apps to Android Enterprise devices.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Manages the deployment of apps to Android Enterprise devices.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-android-enterprise
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.AndroidEnterprise
-        , Network.Google.AndroidEnterprise.Types
-        , Network.Google.Resource.AndroidEnterprise.Devices.ForceReportUpload
-        , Network.Google.Resource.AndroidEnterprise.Devices.Get
-        , Network.Google.Resource.AndroidEnterprise.Devices.GetState
-        , Network.Google.Resource.AndroidEnterprise.Devices.List
-        , Network.Google.Resource.AndroidEnterprise.Devices.SetState
-        , Network.Google.Resource.AndroidEnterprise.Devices.Update
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.CompleteSignup
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.CreateWebToken
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.GenerateSignupURL
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.Get
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.List
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.PullNotificationSet
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
-        , Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
-        , Network.Google.Resource.AndroidEnterprise.Entitlements.Get
-        , Network.Google.Resource.AndroidEnterprise.Entitlements.List
-        , Network.Google.Resource.AndroidEnterprise.Entitlements.Update
-        , Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
-        , Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get
-        , Network.Google.Resource.AndroidEnterprise.Grouplicenses.List
-        , Network.Google.Resource.AndroidEnterprise.Installs.Delete
-        , Network.Google.Resource.AndroidEnterprise.Installs.Get
-        , Network.Google.Resource.AndroidEnterprise.Installs.List
-        , Network.Google.Resource.AndroidEnterprise.Installs.Update
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.Delete
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.Get
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.List
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.Update
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Delete
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Get
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.List
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Update
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationssettings.List
-        , Network.Google.Resource.AndroidEnterprise.Permissions.Get
-        , Network.Google.Resource.AndroidEnterprise.Products.Approve
-        , Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
-        , Network.Google.Resource.AndroidEnterprise.Products.Get
-        , Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
-        , Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
-        , Network.Google.Resource.AndroidEnterprise.Products.List
-        , Network.Google.Resource.AndroidEnterprise.Products.UnApprove
-        , Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.Delete
-        , Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.Insert
-        , Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.List
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Delete
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Get
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Insert
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.List
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Update
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Delete
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Get
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Insert
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.List
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Update
-        , Network.Google.Resource.AndroidEnterprise.Users.Delete
-        , Network.Google.Resource.AndroidEnterprise.Users.GenerateAuthenticationToken
-        , Network.Google.Resource.AndroidEnterprise.Users.Get
-        , Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
-        , Network.Google.Resource.AndroidEnterprise.Users.Insert
-        , Network.Google.Resource.AndroidEnterprise.Users.List
-        , Network.Google.Resource.AndroidEnterprise.Users.RevokeDeviceAccess
-        , Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
-        , Network.Google.Resource.AndroidEnterprise.Users.Update
-        , Network.Google.Resource.AndroidEnterprise.WebApps.Delete
-        , Network.Google.Resource.AndroidEnterprise.WebApps.Get
-        , Network.Google.Resource.AndroidEnterprise.WebApps.Insert
-        , Network.Google.Resource.AndroidEnterprise.WebApps.List
-        , Network.Google.Resource.AndroidEnterprise.WebApps.Update
+  exposed-modules:
+    Network.Google.AndroidEnterprise
+    Network.Google.AndroidEnterprise.Devices.ForceReportUpload
+    Network.Google.AndroidEnterprise.Devices.Get
+    Network.Google.AndroidEnterprise.Devices.GetState
+    Network.Google.AndroidEnterprise.Devices.List
+    Network.Google.AndroidEnterprise.Devices.SetState
+    Network.Google.AndroidEnterprise.Devices.Update
+    Network.Google.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
+    Network.Google.AndroidEnterprise.Enterprises.CompleteSignup
+    Network.Google.AndroidEnterprise.Enterprises.CreateWebToken
+    Network.Google.AndroidEnterprise.Enterprises.Enroll
+    Network.Google.AndroidEnterprise.Enterprises.GenerateSignupUrl
+    Network.Google.AndroidEnterprise.Enterprises.Get
+    Network.Google.AndroidEnterprise.Enterprises.GetServiceAccount
+    Network.Google.AndroidEnterprise.Enterprises.GetStoreLayout
+    Network.Google.AndroidEnterprise.Enterprises.List
+    Network.Google.AndroidEnterprise.Enterprises.PullNotificationSet
+    Network.Google.AndroidEnterprise.Enterprises.SendTestPushNotification
+    Network.Google.AndroidEnterprise.Enterprises.SetAccount
+    Network.Google.AndroidEnterprise.Enterprises.SetStoreLayout
+    Network.Google.AndroidEnterprise.Enterprises.Unenroll
+    Network.Google.AndroidEnterprise.Entitlements.Delete
+    Network.Google.AndroidEnterprise.Entitlements.Get
+    Network.Google.AndroidEnterprise.Entitlements.List
+    Network.Google.AndroidEnterprise.Entitlements.Update
+    Network.Google.AndroidEnterprise.Grouplicenses.Get
+    Network.Google.AndroidEnterprise.Grouplicenses.List
+    Network.Google.AndroidEnterprise.Grouplicenseusers.List
+    Network.Google.AndroidEnterprise.Installs.Delete
+    Network.Google.AndroidEnterprise.Installs.Get
+    Network.Google.AndroidEnterprise.Installs.List
+    Network.Google.AndroidEnterprise.Installs.Update
+    Network.Google.AndroidEnterprise.Managedconfigurationsfordevice.Delete
+    Network.Google.AndroidEnterprise.Managedconfigurationsfordevice.Get
+    Network.Google.AndroidEnterprise.Managedconfigurationsfordevice.List
+    Network.Google.AndroidEnterprise.Managedconfigurationsfordevice.Update
+    Network.Google.AndroidEnterprise.Managedconfigurationsforuser.Delete
+    Network.Google.AndroidEnterprise.Managedconfigurationsforuser.Get
+    Network.Google.AndroidEnterprise.Managedconfigurationsforuser.List
+    Network.Google.AndroidEnterprise.Managedconfigurationsforuser.Update
+    Network.Google.AndroidEnterprise.Managedconfigurationssettings.List
+    Network.Google.AndroidEnterprise.Permissions.Get
+    Network.Google.AndroidEnterprise.Products.Approve
+    Network.Google.AndroidEnterprise.Products.GenerateApprovalUrl
+    Network.Google.AndroidEnterprise.Products.Get
+    Network.Google.AndroidEnterprise.Products.GetAppRestrictionsSchema
+    Network.Google.AndroidEnterprise.Products.GetPermissions
+    Network.Google.AndroidEnterprise.Products.List
+    Network.Google.AndroidEnterprise.Products.Unapprove
+    Network.Google.AndroidEnterprise.Serviceaccountkeys.Delete
+    Network.Google.AndroidEnterprise.Serviceaccountkeys.Insert
+    Network.Google.AndroidEnterprise.Serviceaccountkeys.List
+    Network.Google.AndroidEnterprise.Storelayoutclusters.Delete
+    Network.Google.AndroidEnterprise.Storelayoutclusters.Get
+    Network.Google.AndroidEnterprise.Storelayoutclusters.Insert
+    Network.Google.AndroidEnterprise.Storelayoutclusters.List
+    Network.Google.AndroidEnterprise.Storelayoutclusters.Update
+    Network.Google.AndroidEnterprise.Storelayoutpages.Delete
+    Network.Google.AndroidEnterprise.Storelayoutpages.Get
+    Network.Google.AndroidEnterprise.Storelayoutpages.Insert
+    Network.Google.AndroidEnterprise.Storelayoutpages.List
+    Network.Google.AndroidEnterprise.Storelayoutpages.Update
+    Network.Google.AndroidEnterprise.Types
+    Network.Google.AndroidEnterprise.Users.Delete
+    Network.Google.AndroidEnterprise.Users.GenerateAuthenticationToken
+    Network.Google.AndroidEnterprise.Users.Get
+    Network.Google.AndroidEnterprise.Users.GetAvailableProductSet
+    Network.Google.AndroidEnterprise.Users.Insert
+    Network.Google.AndroidEnterprise.Users.List
+    Network.Google.AndroidEnterprise.Users.RevokeDeviceAccess
+    Network.Google.AndroidEnterprise.Users.SetAvailableProductSet
+    Network.Google.AndroidEnterprise.Users.Update
+    Network.Google.AndroidEnterprise.Webapps.Delete
+    Network.Google.AndroidEnterprise.Webapps.Get
+    Network.Google.AndroidEnterprise.Webapps.Insert
+    Network.Google.AndroidEnterprise.Webapps.List
+    Network.Google.AndroidEnterprise.Webapps.Update
 
-    other-modules:
-          Network.Google.AndroidEnterprise.Types.Product
-        , Network.Google.AndroidEnterprise.Types.Sum
+  other-modules:
+    Network.Google.AndroidEnterprise.Internal.Product
+    Network.Google.AndroidEnterprise.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
