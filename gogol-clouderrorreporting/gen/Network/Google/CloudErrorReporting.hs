@@ -1,202 +1,159 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudErrorReporting
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Groups and counts similar errors from cloud services and applications,
--- reports new errors, and provides access to error groups and their
--- associated errors.
+-- Groups and counts similar errors from cloud services and applications, reports new errors, and provides access to error groups and their associated errors.
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference>
 module Network.Google.CloudErrorReporting
-    (
-    -- * Service Configuration
-      cloudErrorReportingService
+  ( -- * Configuration
+    cloudErrorReportingService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , CloudErrorReportingAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** clouderrorreporting.projects.deleteEvents
-    , module Network.Google.Resource.CloudErrorReporting.Projects.DeleteEvents
+    CloudErrorReportingProjectsDeleteEventsResource,
+    newCloudErrorReportingProjectsDeleteEvents,
+    CloudErrorReportingProjectsDeleteEvents,
 
     -- ** clouderrorreporting.projects.events.list
-    , module Network.Google.Resource.CloudErrorReporting.Projects.Events.List
+    CloudErrorReportingProjectsEventsListResource,
+    newCloudErrorReportingProjectsEventsList,
+    CloudErrorReportingProjectsEventsList,
 
     -- ** clouderrorreporting.projects.events.report
-    , module Network.Google.Resource.CloudErrorReporting.Projects.Events.Report
+    CloudErrorReportingProjectsEventsReportResource,
+    newCloudErrorReportingProjectsEventsReport,
+    CloudErrorReportingProjectsEventsReport,
 
     -- ** clouderrorreporting.projects.groupStats.list
-    , module Network.Google.Resource.CloudErrorReporting.Projects.GroupStats.List
+    CloudErrorReportingProjectsGroupStatsListResource,
+    newCloudErrorReportingProjectsGroupStatsList,
+    CloudErrorReportingProjectsGroupStatsList,
 
     -- ** clouderrorreporting.projects.groups.get
-    , module Network.Google.Resource.CloudErrorReporting.Projects.Groups.Get
+    CloudErrorReportingProjectsGroupsGetResource,
+    newCloudErrorReportingProjectsGroupsGet,
+    CloudErrorReportingProjectsGroupsGet,
 
     -- ** clouderrorreporting.projects.groups.update
-    , module Network.Google.Resource.CloudErrorReporting.Projects.Groups.Update
+    CloudErrorReportingProjectsGroupsUpdateResource,
+    newCloudErrorReportingProjectsGroupsUpdate,
+    CloudErrorReportingProjectsGroupsUpdate,
 
     -- * Types
 
-    -- ** ProjectsEventsListTimeRangePeriod
-    , ProjectsEventsListTimeRangePeriod (..)
-
-    -- ** ErrorEvent
-    , ErrorEvent
-    , errorEvent
-    , eeContext
-    , eeEventTime
-    , eeServiceContext
-    , eeMessage
-
-    -- ** ErrorContext
-    , ErrorContext
-    , errorContext
-    , ecHTTPRequest
-    , ecUser
-    , ecSourceReferences
-    , ecReportLocation
-
-    -- ** ErrorGroup
-    , ErrorGroup
-    , errorGroup
-    , egTrackingIssues
-    , egName
-    , egGroupId
-    , egResolutionStatus
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** DeleteEventsResponse
-    , DeleteEventsResponse
-    , deleteEventsResponse
+    DeleteEventsResponse (..),
+    newDeleteEventsResponse,
 
-    -- ** ProjectsGroupStatsListAlignment
-    , ProjectsGroupStatsListAlignment (..)
+    -- ** ErrorContext
+    ErrorContext (..),
+    newErrorContext,
 
-    -- ** ReportedErrorEvent
-    , ReportedErrorEvent
-    , reportedErrorEvent
-    , reeContext
-    , reeEventTime
-    , reeServiceContext
-    , reeMessage
+    -- ** ErrorEvent
+    ErrorEvent (..),
+    newErrorEvent,
 
-    -- ** HTTPRequestContext
-    , HTTPRequestContext
-    , hTTPRequestContext
-    , httprcRemoteIP
-    , httprcURL
-    , httprcReferrer
-    , httprcMethod
-    , httprcResponseStatusCode
-    , httprcUserAgent
+    -- ** ErrorGroup
+    ErrorGroup (..),
+    newErrorGroup,
 
-    -- ** TrackingIssue
-    , TrackingIssue
-    , trackingIssue
-    , tiURL
-
-    -- ** ListEventsResponse
-    , ListEventsResponse
-    , listEventsResponse
-    , lerNextPageToken
-    , lerTimeRangeBegin
-    , lerErrorEvents
+    -- ** ErrorGroup_ResolutionStatus
+    ErrorGroup_ResolutionStatus (..),
 
     -- ** ErrorGroupStats
-    , ErrorGroupStats
-    , errorGroupStats
-    , egsAffectedServices
-    , egsGroup
-    , egsFirstSeenTime
-    , egsAffectedUsersCount
-    , egsCount
-    , egsTimedCounts
-    , egsNumAffectedServices
-    , egsLastSeenTime
-    , egsRepresentative
+    ErrorGroupStats (..),
+    newErrorGroupStats,
 
-    -- ** ProjectsGroupStatsListOrder
-    , ProjectsGroupStatsListOrder (..)
+    -- ** HttpRequestContext
+    HttpRequestContext (..),
+    newHttpRequestContext,
+
+    -- ** ListEventsResponse
+    ListEventsResponse (..),
+    newListEventsResponse,
 
     -- ** ListGroupStatsResponse
-    , ListGroupStatsResponse
-    , listGroupStatsResponse
-    , lgsrNextPageToken
-    , lgsrTimeRangeBegin
-    , lgsrErrorGroupStats
-
-    -- ** ServiceContext
-    , ServiceContext
-    , serviceContext
-    , scResourceType
-    , scService
-    , scVersion
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** TimedCount
-    , TimedCount
-    , timedCount
-    , tcStartTime
-    , tcCount
-    , tcEndTime
-
-    -- ** ProjectsGroupStatsListTimeRangePeriod
-    , ProjectsGroupStatsListTimeRangePeriod (..)
-
-    -- ** ErrorGroupResolutionStatus
-    , ErrorGroupResolutionStatus (..)
-
-    -- ** SourceLocation
-    , SourceLocation
-    , sourceLocation
-    , slLineNumber
-    , slFilePath
-    , slFunctionName
-
-    -- ** SourceReference
-    , SourceReference
-    , sourceReference
-    , srRepository
-    , srRevisionId
+    ListGroupStatsResponse (..),
+    newListGroupStatsResponse,
 
     -- ** ReportErrorEventResponse
-    , ReportErrorEventResponse
-    , reportErrorEventResponse
-    ) where
+    ReportErrorEventResponse (..),
+    newReportErrorEventResponse,
 
-import Network.Google.Prelude
+    -- ** ReportedErrorEvent
+    ReportedErrorEvent (..),
+    newReportedErrorEvent,
+
+    -- ** ServiceContext
+    ServiceContext (..),
+    newServiceContext,
+
+    -- ** SourceLocation
+    SourceLocation (..),
+    newSourceLocation,
+
+    -- ** SourceReference
+    SourceReference (..),
+    newSourceReference,
+
+    -- ** TimedCount
+    TimedCount (..),
+    newTimedCount,
+
+    -- ** TrackingIssue
+    TrackingIssue (..),
+    newTrackingIssue,
+
+    -- ** ProjectsEventsListTimeRangePeriod
+    ProjectsEventsListTimeRangePeriod (..),
+
+    -- ** ProjectsGroupStatsListAlignment
+    ProjectsGroupStatsListAlignment (..),
+
+    -- ** ProjectsGroupStatsListOrder
+    ProjectsGroupStatsListOrder (..),
+
+    -- ** ProjectsGroupStatsListTimeRangePeriod
+    ProjectsGroupStatsListTimeRangePeriod (..),
+  )
+where
+
+import Network.Google.CloudErrorReporting.Projects.DeleteEvents
+import Network.Google.CloudErrorReporting.Projects.Events.List
+import Network.Google.CloudErrorReporting.Projects.Events.Report
+import Network.Google.CloudErrorReporting.Projects.GroupStats.List
+import Network.Google.CloudErrorReporting.Projects.Groups.Get
+import Network.Google.CloudErrorReporting.Projects.Groups.Update
 import Network.Google.CloudErrorReporting.Types
-import Network.Google.Resource.CloudErrorReporting.Projects.DeleteEvents
-import Network.Google.Resource.CloudErrorReporting.Projects.Events.List
-import Network.Google.Resource.CloudErrorReporting.Projects.Events.Report
-import Network.Google.Resource.CloudErrorReporting.Projects.GroupStats.List
-import Network.Google.Resource.CloudErrorReporting.Projects.Groups.Get
-import Network.Google.Resource.CloudErrorReporting.Projects.Groups.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Error Reporting API service.
-type CloudErrorReportingAPI =
-     ProjectsGroupsGetResource :<|>
-       ProjectsGroupsUpdateResource
-       :<|> ProjectsGroupStatsListResource
-       :<|> ProjectsEventsListResource
-       :<|> ProjectsEventsReportResource
-       :<|> ProjectsDeleteEventsResource
