@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ContainerBuilder.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * ApprovalResult_Decision
     ApprovalResult_Decision
-      ( ApprovalResult_Decision_DECISIONUNSPECIFIED,
+      (
+        ApprovalResult_Decision_DECISIONUNSPECIFIED,
         ApprovalResult_Decision_Approved,
         ApprovalResult_Decision_Rejected,
         ..
@@ -43,7 +54,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * Build_Status
     Build_Status
-      ( Build_Status_STATUSUNKNOWN,
+      (
+        Build_Status_STATUSUNKNOWN,
         Build_Status_Pending,
         Build_Status_Queued,
         Build_Status_Working,
@@ -58,7 +70,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * BuildApproval_State
     BuildApproval_State
-      ( BuildApproval_State_STATEUNSPECIFIED,
+      (
+        BuildApproval_State_STATEUNSPECIFIED,
         BuildApproval_State_Pending,
         BuildApproval_State_Approved,
         BuildApproval_State_Rejected,
@@ -68,7 +81,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * BuildOptions_LogStreamingOption
     BuildOptions_LogStreamingOption
-      ( BuildOptions_LogStreamingOption_STREAMDEFAULT,
+      (
+        BuildOptions_LogStreamingOption_STREAMDEFAULT,
         BuildOptions_LogStreamingOption_STREAMON,
         BuildOptions_LogStreamingOption_STREAMOFF,
         ..
@@ -76,7 +90,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * BuildOptions_Logging
     BuildOptions_Logging
-      ( BuildOptions_Logging_LOGGINGUNSPECIFIED,
+      (
+        BuildOptions_Logging_LOGGINGUNSPECIFIED,
         BuildOptions_Logging_Legacy,
         BuildOptions_Logging_GCSONLY,
         BuildOptions_Logging_STACKDRIVERONLY,
@@ -87,7 +102,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * BuildOptions_MachineType
     BuildOptions_MachineType
-      ( BuildOptions_MachineType_Unspecified,
+      (
+        BuildOptions_MachineType_Unspecified,
         BuildOptions_MachineType_N1_HIGHCPU_8,
         BuildOptions_MachineType_N1_HIGHCPU_32,
         BuildOptions_MachineType_E2_HIGHCPU_8,
@@ -97,14 +113,16 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * BuildOptions_RequestedVerifyOption
     BuildOptions_RequestedVerifyOption
-      ( BuildOptions_RequestedVerifyOption_NOTVERIFIED,
+      (
+        BuildOptions_RequestedVerifyOption_NOTVERIFIED,
         BuildOptions_RequestedVerifyOption_Verified,
         ..
       ),
 
     -- * BuildOptions_SourceProvenanceHashItem
     BuildOptions_SourceProvenanceHashItem
-      ( BuildOptions_SourceProvenanceHashItem_None,
+      (
+        BuildOptions_SourceProvenanceHashItem_None,
         BuildOptions_SourceProvenanceHashItem_SHA256,
         BuildOptions_SourceProvenanceHashItem_MD5,
         ..
@@ -112,14 +130,16 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * BuildOptions_SubstitutionOption
     BuildOptions_SubstitutionOption
-      ( BuildOptions_SubstitutionOption_MUSTMATCH,
+      (
+        BuildOptions_SubstitutionOption_MUSTMATCH,
         BuildOptions_SubstitutionOption_ALLOWLOOSE,
         ..
       ),
 
     -- * BuildStep_Status
     BuildStep_Status
-      ( BuildStep_Status_STATUSUNKNOWN,
+      (
+        BuildStep_Status_STATUSUNKNOWN,
         BuildStep_Status_Pending,
         BuildStep_Status_Queued,
         BuildStep_Status_Working,
@@ -134,7 +154,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * BuildTrigger_EventType
     BuildTrigger_EventType
-      ( BuildTrigger_EventType_EVENTTYPEUNSPECIFIED,
+      (
+        BuildTrigger_EventType_EVENTTYPEUNSPECIFIED,
         BuildTrigger_EventType_Repo,
         BuildTrigger_EventType_Webhook,
         BuildTrigger_EventType_Pubsub,
@@ -144,7 +165,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * FailureInfo_Type
     FailureInfo_Type
-      ( FailureInfo_Type_FAILURETYPEUNSPECIFIED,
+      (
+        FailureInfo_Type_FAILURETYPEUNSPECIFIED,
         FailureInfo_Type_PUSHFAILED,
         FailureInfo_Type_PUSHIMAGENOTFOUND,
         FailureInfo_Type_PUSHNOTAUTHORIZED,
@@ -156,7 +178,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * GitFileSource_RepoType
     GitFileSource_RepoType
-      ( GitFileSource_RepoType_Unknown,
+      (
+        GitFileSource_RepoType_Unknown,
         GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES,
         GitFileSource_RepoType_Github,
         GitFileSource_RepoType_BITBUCKETSERVER,
@@ -165,7 +188,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * GitRepoSource_RepoType
     GitRepoSource_RepoType
-      ( GitRepoSource_RepoType_Unknown,
+      (
+        GitRepoSource_RepoType_Unknown,
         GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES,
         GitRepoSource_RepoType_Github,
         GitRepoSource_RepoType_BITBUCKETSERVER,
@@ -174,7 +198,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * Hash_Type
     Hash_Type
-      ( Hash_Type_None,
+      (
+        Hash_Type_None,
         Hash_Type_SHA256,
         Hash_Type_MD5,
         ..
@@ -182,7 +207,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * NetworkConfig_EgressOption
     NetworkConfig_EgressOption
-      ( NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED,
+      (
+        NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED,
         NetworkConfig_EgressOption_NOPUBLICEGRESS,
         NetworkConfig_EgressOption_PUBLICEGRESS,
         ..
@@ -190,7 +216,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * PubsubConfig_State
     PubsubConfig_State
-      ( PubsubConfig_State_STATEUNSPECIFIED,
+      (
+        PubsubConfig_State_STATEUNSPECIFIED,
         PubsubConfig_State_OK,
         PubsubConfig_State_SUBSCRIPTIONDELETED,
         PubsubConfig_State_TOPICDELETED,
@@ -200,7 +227,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * PullRequestFilter_CommentControl
     PullRequestFilter_CommentControl
-      ( PullRequestFilter_CommentControl_COMMENTSDISABLED,
+      (
+        PullRequestFilter_CommentControl_COMMENTSDISABLED,
         PullRequestFilter_CommentControl_COMMENTSENABLED,
         PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY,
         ..
@@ -208,7 +236,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * Warning_Priority
     Warning_Priority
-      ( Warning_Priority_PRIORITYUNSPECIFIED,
+      (
+        Warning_Priority_PRIORITYUNSPECIFIED,
         Warning_Priority_Info,
         Warning_Priority_Warning,
         Warning_Priority_Alert,
@@ -217,7 +246,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * WebhookConfig_State
     WebhookConfig_State
-      ( WebhookConfig_State_STATEUNSPECIFIED,
+      (
+        WebhookConfig_State_STATEUNSPECIFIED,
         WebhookConfig_State_OK,
         WebhookConfig_State_SECRETDELETED,
         ..
@@ -225,7 +255,8 @@ module Gogol.ContainerBuilder.Internal.Sum
 
     -- * WorkerPool_State
     WorkerPool_State
-      ( WorkerPool_State_STATEUNSPECIFIED,
+      (
+        WorkerPool_State_STATEUNSPECIFIED,
         WorkerPool_State_Creating,
         WorkerPool_State_Running,
         WorkerPool_State_Deleting,
@@ -233,23 +264,22 @@ module Gogol.ContainerBuilder.Internal.Sum
         WorkerPool_State_Updating,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -262,21 +292,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Required. The decision of this manual approval.
-newtype ApprovalResult_Decision = ApprovalResult_Decision {fromApprovalResult_Decision :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ApprovalResult_Decision = ApprovalResult_Decision { fromApprovalResult_Decision :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default enum type. This should not be used.
 pattern ApprovalResult_Decision_DECISIONUNSPECIFIED :: ApprovalResult_Decision
@@ -294,21 +323,20 @@ pattern ApprovalResult_Decision_Rejected = ApprovalResult_Decision "REJECTED"
   ApprovalResult_Decision_DECISIONUNSPECIFIED,
   ApprovalResult_Decision_Approved,
   ApprovalResult_Decision_Rejected,
-  ApprovalResult_Decision
-  #-}
+  ApprovalResult_Decision #-}
 
 -- | Output only. Status of the build.
-newtype Build_Status = Build_Status {fromBuild_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Build_Status = Build_Status { fromBuild_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Status of the build is unknown.
 pattern Build_Status_STATUSUNKNOWN :: Build_Status
@@ -361,21 +389,20 @@ pattern Build_Status_Expired = Build_Status "EXPIRED"
   Build_Status_Timeout,
   Build_Status_Cancelled,
   Build_Status_Expired,
-  Build_Status
-  #-}
+  Build_Status #-}
 
 -- | Output only. The state of this build\'s approval.
-newtype BuildApproval_State = BuildApproval_State {fromBuildApproval_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildApproval_State = BuildApproval_State { fromBuildApproval_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default enum type. This should not be used.
 pattern BuildApproval_State_STATEUNSPECIFIED :: BuildApproval_State
@@ -403,21 +430,20 @@ pattern BuildApproval_State_Cancelled = BuildApproval_State "CANCELLED"
   BuildApproval_State_Approved,
   BuildApproval_State_Rejected,
   BuildApproval_State_Cancelled,
-  BuildApproval_State
-  #-}
+  BuildApproval_State #-}
 
 -- | Option to define build log streaming behavior to Google Cloud Storage.
-newtype BuildOptions_LogStreamingOption = BuildOptions_LogStreamingOption {fromBuildOptions_LogStreamingOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildOptions_LogStreamingOption = BuildOptions_LogStreamingOption { fromBuildOptions_LogStreamingOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Service may automatically determine build log streaming behavior.
 pattern BuildOptions_LogStreamingOption_STREAMDEFAULT :: BuildOptions_LogStreamingOption
@@ -435,21 +461,20 @@ pattern BuildOptions_LogStreamingOption_STREAMOFF = BuildOptions_LogStreamingOpt
   BuildOptions_LogStreamingOption_STREAMDEFAULT,
   BuildOptions_LogStreamingOption_STREAMON,
   BuildOptions_LogStreamingOption_STREAMOFF,
-  BuildOptions_LogStreamingOption
-  #-}
+  BuildOptions_LogStreamingOption #-}
 
 -- | Option to specify the logging mode, which determines if and where build logs are stored.
-newtype BuildOptions_Logging = BuildOptions_Logging {fromBuildOptions_Logging :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildOptions_Logging = BuildOptions_Logging { fromBuildOptions_Logging :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The service determines the logging mode. The default is @LEGACY@. Do not rely on the default logging behavior as it may change in the future.
 pattern BuildOptions_Logging_LOGGINGUNSPECIFIED :: BuildOptions_Logging
@@ -482,21 +507,20 @@ pattern BuildOptions_Logging_None = BuildOptions_Logging "NONE"
   BuildOptions_Logging_STACKDRIVERONLY,
   BuildOptions_Logging_CLOUDLOGGINGONLY,
   BuildOptions_Logging_None,
-  BuildOptions_Logging
-  #-}
+  BuildOptions_Logging #-}
 
 -- | Compute Engine machine type on which to run the build.
-newtype BuildOptions_MachineType = BuildOptions_MachineType {fromBuildOptions_MachineType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildOptions_MachineType = BuildOptions_MachineType { fromBuildOptions_MachineType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Standard machine type.
 pattern BuildOptions_MachineType_Unspecified :: BuildOptions_MachineType
@@ -524,21 +548,20 @@ pattern BuildOptions_MachineType_E2_HIGHCPU_32 = BuildOptions_MachineType "E2_HI
   BuildOptions_MachineType_N1_HIGHCPU_32,
   BuildOptions_MachineType_E2_HIGHCPU_8,
   BuildOptions_MachineType_E2_HIGHCPU_32,
-  BuildOptions_MachineType
-  #-}
+  BuildOptions_MachineType #-}
 
 -- | Requested verifiability options.
-newtype BuildOptions_RequestedVerifyOption = BuildOptions_RequestedVerifyOption {fromBuildOptions_RequestedVerifyOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildOptions_RequestedVerifyOption = BuildOptions_RequestedVerifyOption { fromBuildOptions_RequestedVerifyOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not a verifiable build. (default)
 pattern BuildOptions_RequestedVerifyOption_NOTVERIFIED :: BuildOptions_RequestedVerifyOption
@@ -551,20 +574,19 @@ pattern BuildOptions_RequestedVerifyOption_Verified = BuildOptions_RequestedVeri
 {-# COMPLETE
   BuildOptions_RequestedVerifyOption_NOTVERIFIED,
   BuildOptions_RequestedVerifyOption_Verified,
-  BuildOptions_RequestedVerifyOption
-  #-}
+  BuildOptions_RequestedVerifyOption #-}
 
-newtype BuildOptions_SourceProvenanceHashItem = BuildOptions_SourceProvenanceHashItem {fromBuildOptions_SourceProvenanceHashItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildOptions_SourceProvenanceHashItem = BuildOptions_SourceProvenanceHashItem { fromBuildOptions_SourceProvenanceHashItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No hash requested.
 pattern BuildOptions_SourceProvenanceHashItem_None :: BuildOptions_SourceProvenanceHashItem
@@ -582,21 +604,20 @@ pattern BuildOptions_SourceProvenanceHashItem_MD5 = BuildOptions_SourceProvenanc
   BuildOptions_SourceProvenanceHashItem_None,
   BuildOptions_SourceProvenanceHashItem_SHA256,
   BuildOptions_SourceProvenanceHashItem_MD5,
-  BuildOptions_SourceProvenanceHashItem
-  #-}
+  BuildOptions_SourceProvenanceHashItem #-}
 
 -- | Option to specify behavior when there is an error in the substitution checks. NOTE: this is always set to ALLOW_LOOSE for triggered builds and cannot be overridden in the build configuration file.
-newtype BuildOptions_SubstitutionOption = BuildOptions_SubstitutionOption {fromBuildOptions_SubstitutionOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildOptions_SubstitutionOption = BuildOptions_SubstitutionOption { fromBuildOptions_SubstitutionOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Fails the build if error in substitutions checks, like missing a substitution in the template or in the map.
 pattern BuildOptions_SubstitutionOption_MUSTMATCH :: BuildOptions_SubstitutionOption
@@ -609,21 +630,20 @@ pattern BuildOptions_SubstitutionOption_ALLOWLOOSE = BuildOptions_SubstitutionOp
 {-# COMPLETE
   BuildOptions_SubstitutionOption_MUSTMATCH,
   BuildOptions_SubstitutionOption_ALLOWLOOSE,
-  BuildOptions_SubstitutionOption
-  #-}
+  BuildOptions_SubstitutionOption #-}
 
 -- | Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
-newtype BuildStep_Status = BuildStep_Status {fromBuildStep_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildStep_Status = BuildStep_Status { fromBuildStep_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Status of the build is unknown.
 pattern BuildStep_Status_STATUSUNKNOWN :: BuildStep_Status
@@ -676,21 +696,20 @@ pattern BuildStep_Status_Expired = BuildStep_Status "EXPIRED"
   BuildStep_Status_Timeout,
   BuildStep_Status_Cancelled,
   BuildStep_Status_Expired,
-  BuildStep_Status
-  #-}
+  BuildStep_Status #-}
 
 -- | EventType allows the user to explicitly set the type of event to which this BuildTrigger should respond. This field will be validated against the rest of the configuration if it is set.
-newtype BuildTrigger_EventType = BuildTrigger_EventType {fromBuildTrigger_EventType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildTrigger_EventType = BuildTrigger_EventType { fromBuildTrigger_EventType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | EVENT/TYPE/UNSPECIFIED event_types are ignored.
 pattern BuildTrigger_EventType_EVENTTYPEUNSPECIFIED :: BuildTrigger_EventType
@@ -718,21 +737,20 @@ pattern BuildTrigger_EventType_Manual = BuildTrigger_EventType "MANUAL"
   BuildTrigger_EventType_Webhook,
   BuildTrigger_EventType_Pubsub,
   BuildTrigger_EventType_Manual,
-  BuildTrigger_EventType
-  #-}
+  BuildTrigger_EventType #-}
 
 -- | The name of the failure.
-newtype FailureInfo_Type = FailureInfo_Type {fromFailureInfo_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FailureInfo_Type = FailureInfo_Type { fromFailureInfo_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Type unspecified
 pattern FailureInfo_Type_FAILURETYPEUNSPECIFIED :: FailureInfo_Type
@@ -770,21 +788,20 @@ pattern FailureInfo_Type_FETCHSOURCEFAILED = FailureInfo_Type "FETCH_SOURCE_FAIL
   FailureInfo_Type_LOGGINGFAILURE,
   FailureInfo_Type_USERBUILDSTEP,
   FailureInfo_Type_FETCHSOURCEFAILED,
-  FailureInfo_Type
-  #-}
+  FailureInfo_Type #-}
 
 -- | See RepoType above.
-newtype GitFileSource_RepoType = GitFileSource_RepoType {fromGitFileSource_RepoType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GitFileSource_RepoType = GitFileSource_RepoType { fromGitFileSource_RepoType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The default, unknown repo type.
 pattern GitFileSource_RepoType_Unknown :: GitFileSource_RepoType
@@ -807,21 +824,20 @@ pattern GitFileSource_RepoType_BITBUCKETSERVER = GitFileSource_RepoType "BITBUCK
   GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES,
   GitFileSource_RepoType_Github,
   GitFileSource_RepoType_BITBUCKETSERVER,
-  GitFileSource_RepoType
-  #-}
+  GitFileSource_RepoType #-}
 
 -- | See RepoType below.
-newtype GitRepoSource_RepoType = GitRepoSource_RepoType {fromGitRepoSource_RepoType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GitRepoSource_RepoType = GitRepoSource_RepoType { fromGitRepoSource_RepoType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The default, unknown repo type.
 pattern GitRepoSource_RepoType_Unknown :: GitRepoSource_RepoType
@@ -844,21 +860,20 @@ pattern GitRepoSource_RepoType_BITBUCKETSERVER = GitRepoSource_RepoType "BITBUCK
   GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES,
   GitRepoSource_RepoType_Github,
   GitRepoSource_RepoType_BITBUCKETSERVER,
-  GitRepoSource_RepoType
-  #-}
+  GitRepoSource_RepoType #-}
 
 -- | The type of hash that was performed.
-newtype Hash_Type = Hash_Type {fromHash_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Hash_Type = Hash_Type { fromHash_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No hash requested.
 pattern Hash_Type_None :: Hash_Type
@@ -876,21 +891,20 @@ pattern Hash_Type_MD5 = Hash_Type "MD5"
   Hash_Type_None,
   Hash_Type_SHA256,
   Hash_Type_MD5,
-  Hash_Type
-  #-}
+  Hash_Type #-}
 
 -- | Option to configure network egress for the workers.
-newtype NetworkConfig_EgressOption = NetworkConfig_EgressOption {fromNetworkConfig_EgressOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NetworkConfig_EgressOption = NetworkConfig_EgressOption { fromNetworkConfig_EgressOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | If set, defaults to PUBLIC_EGRESS.
 pattern NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED :: NetworkConfig_EgressOption
@@ -908,21 +922,20 @@ pattern NetworkConfig_EgressOption_PUBLICEGRESS = NetworkConfig_EgressOption "PU
   NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED,
   NetworkConfig_EgressOption_NOPUBLICEGRESS,
   NetworkConfig_EgressOption_PUBLICEGRESS,
-  NetworkConfig_EgressOption
-  #-}
+  NetworkConfig_EgressOption #-}
 
 -- | Potential issues with the underlying Pub\/Sub subscription configuration. Only populated on get requests.
-newtype PubsubConfig_State = PubsubConfig_State {fromPubsubConfig_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PubsubConfig_State = PubsubConfig_State { fromPubsubConfig_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The subscription configuration has not been checked.
 pattern PubsubConfig_State_STATEUNSPECIFIED :: PubsubConfig_State
@@ -950,21 +963,20 @@ pattern PubsubConfig_State_SUBSCRIPTIONMISCONFIGURED = PubsubConfig_State "SUBSC
   PubsubConfig_State_SUBSCRIPTIONDELETED,
   PubsubConfig_State_TOPICDELETED,
   PubsubConfig_State_SUBSCRIPTIONMISCONFIGURED,
-  PubsubConfig_State
-  #-}
+  PubsubConfig_State #-}
 
 -- | Configure builds to run whether a repository owner or collaborator need to comment @\/gcbrun@.
-newtype PullRequestFilter_CommentControl = PullRequestFilter_CommentControl {fromPullRequestFilter_CommentControl :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PullRequestFilter_CommentControl = PullRequestFilter_CommentControl { fromPullRequestFilter_CommentControl :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not require comments on Pull Requests before builds are triggered.
 pattern PullRequestFilter_CommentControl_COMMENTSDISABLED :: PullRequestFilter_CommentControl
@@ -982,21 +994,20 @@ pattern PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSO
   PullRequestFilter_CommentControl_COMMENTSDISABLED,
   PullRequestFilter_CommentControl_COMMENTSENABLED,
   PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY,
-  PullRequestFilter_CommentControl
-  #-}
+  PullRequestFilter_CommentControl #-}
 
 -- | The priority for this warning.
-newtype Warning_Priority = Warning_Priority {fromWarning_Priority :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Warning_Priority = Warning_Priority { fromWarning_Priority :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Should not be used.
 pattern Warning_Priority_PRIORITYUNSPECIFIED :: Warning_Priority
@@ -1019,21 +1030,20 @@ pattern Warning_Priority_Alert = Warning_Priority "ALERT"
   Warning_Priority_Info,
   Warning_Priority_Warning,
   Warning_Priority_Alert,
-  Warning_Priority
-  #-}
+  Warning_Priority #-}
 
 -- | Potential issues with the underlying Pub\/Sub subscription configuration. Only populated on get requests.
-newtype WebhookConfig_State = WebhookConfig_State {fromWebhookConfig_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WebhookConfig_State = WebhookConfig_State { fromWebhookConfig_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The webhook auth configuration not been checked.
 pattern WebhookConfig_State_STATEUNSPECIFIED :: WebhookConfig_State
@@ -1051,21 +1061,20 @@ pattern WebhookConfig_State_SECRETDELETED = WebhookConfig_State "SECRET_DELETED"
   WebhookConfig_State_STATEUNSPECIFIED,
   WebhookConfig_State_OK,
   WebhookConfig_State_SECRETDELETED,
-  WebhookConfig_State
-  #-}
+  WebhookConfig_State #-}
 
 -- | Output only. @WorkerPool@ state.
-newtype WorkerPool_State = WorkerPool_State {fromWorkerPool_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WorkerPool_State = WorkerPool_State { fromWorkerPool_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State of the @WorkerPool@ is unknown.
 pattern WorkerPool_State_STATEUNSPECIFIED :: WorkerPool_State
@@ -1098,5 +1107,4 @@ pattern WorkerPool_State_Updating = WorkerPool_State "UPDATING"
   WorkerPool_State_Deleting,
   WorkerPool_State_Deleted,
   WorkerPool_State_Updating,
-  WorkerPool_State
-  #-}
+  WorkerPool_State #-}
