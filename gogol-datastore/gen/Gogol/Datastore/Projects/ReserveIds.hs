@@ -19,48 +19,48 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.RunQuery
+-- Module      : Gogol.Datastore.Projects.ReserveIds
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Queries for entities.
+-- Prevents the supplied keys\' IDs from being auto-allocated by Cloud Datastore.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.runQuery@.
-module Network.Google.Datastore.Projects.RunQuery
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.reserveIds@.
+module Gogol.Datastore.Projects.ReserveIds
   ( -- * Resource
-    DatastoreProjectsRunQueryResource,
+    DatastoreProjectsReserveIdsResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsRunQuery,
-    DatastoreProjectsRunQuery,
+    newDatastoreProjectsReserveIds,
+    DatastoreProjectsReserveIds,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.runQuery@ method which the
--- 'DatastoreProjectsRunQuery' request conforms to.
-type DatastoreProjectsRunQueryResource =
+-- | A resource alias for @datastore.projects.reserveIds@ method which the
+-- 'DatastoreProjectsReserveIds' request conforms to.
+type DatastoreProjectsReserveIdsResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.CaptureMode "projectId" "runQuery" Core.Text
+    Core.:> Core.CaptureMode "projectId" "reserveIds" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] RunQueryRequest
-    Core.:> Core.Post '[Core.JSON] RunQueryResponse
+    Core.:> Core.ReqBody '[Core.JSON] ReserveIdsRequest
+    Core.:> Core.Post '[Core.JSON] ReserveIdsResponse
 
--- | Queries for entities.
+-- | Prevents the supplied keys\' IDs from being auto-allocated by Cloud Datastore.
 --
--- /See:/ 'newDatastoreProjectsRunQuery' smart constructor.
-data DatastoreProjectsRunQuery = DatastoreProjectsRunQuery
+-- /See:/ 'newDatastoreProjectsReserveIds' smart constructor.
+data DatastoreProjectsReserveIds = DatastoreProjectsReserveIds
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +68,7 @@ data DatastoreProjectsRunQuery = DatastoreProjectsRunQuery
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: RunQueryRequest,
+    payload :: ReserveIdsRequest,
     -- | Required. The ID of the project against which to make the request.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -78,15 +78,15 @@ data DatastoreProjectsRunQuery = DatastoreProjectsRunQuery
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsRunQuery' with the minimum fields required to make a request.
-newDatastoreProjectsRunQuery ::
+-- | Creates a value of 'DatastoreProjectsReserveIds' with the minimum fields required to make a request.
+newDatastoreProjectsReserveIds ::
   -- |  Multipart request metadata. See 'payload'.
-  RunQueryRequest ->
+  ReserveIdsRequest ->
   -- |  Required. The ID of the project against which to make the request. See 'projectId'.
   Core.Text ->
-  DatastoreProjectsRunQuery
-newDatastoreProjectsRunQuery payload projectId =
-  DatastoreProjectsRunQuery
+  DatastoreProjectsReserveIds
+newDatastoreProjectsReserveIds payload projectId =
+  DatastoreProjectsReserveIds
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,14 +96,19 @@ newDatastoreProjectsRunQuery payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest DatastoreProjectsRunQuery where
-  type Rs DatastoreProjectsRunQuery = RunQueryResponse
+instance
+  Core.GoogleRequest
+    DatastoreProjectsReserveIds
+  where
   type
-    Scopes DatastoreProjectsRunQuery =
+    Rs DatastoreProjectsReserveIds =
+      ReserveIdsResponse
+  type
+    Scopes DatastoreProjectsReserveIds =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsRunQuery {..} =
+  requestClient DatastoreProjectsReserveIds {..} =
     go
       projectId
       xgafv
@@ -118,6 +123,6 @@ instance Core.GoogleRequest DatastoreProjectsRunQuery where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsRunQueryResource
+              Core.Proxy DatastoreProjectsReserveIdsResource
           )
           Core.mempty

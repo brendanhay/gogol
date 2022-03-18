@@ -39,34 +39,35 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Datastore
-    Network.Google.Datastore.Projects.AllocateIds
-    Network.Google.Datastore.Projects.BeginTransaction
-    Network.Google.Datastore.Projects.Commit
-    Network.Google.Datastore.Projects.Export
-    Network.Google.Datastore.Projects.Import
-    Network.Google.Datastore.Projects.Indexes.Create
-    Network.Google.Datastore.Projects.Indexes.Delete
-    Network.Google.Datastore.Projects.Indexes.Get
-    Network.Google.Datastore.Projects.Indexes.List
-    Network.Google.Datastore.Projects.Lookup
-    Network.Google.Datastore.Projects.Operations.Cancel
-    Network.Google.Datastore.Projects.Operations.Delete
-    Network.Google.Datastore.Projects.Operations.Get
-    Network.Google.Datastore.Projects.Operations.List
-    Network.Google.Datastore.Projects.ReserveIds
-    Network.Google.Datastore.Projects.Rollback
-    Network.Google.Datastore.Projects.RunQuery
-    Network.Google.Datastore.Types
+    Gogol.Datastore
+    Gogol.Datastore.Projects.AllocateIds
+    Gogol.Datastore.Projects.BeginTransaction
+    Gogol.Datastore.Projects.Commit
+    Gogol.Datastore.Projects.Export
+    Gogol.Datastore.Projects.Import
+    Gogol.Datastore.Projects.Indexes.Create
+    Gogol.Datastore.Projects.Indexes.Delete
+    Gogol.Datastore.Projects.Indexes.Get
+    Gogol.Datastore.Projects.Indexes.List
+    Gogol.Datastore.Projects.Lookup
+    Gogol.Datastore.Projects.Operations.Cancel
+    Gogol.Datastore.Projects.Operations.Delete
+    Gogol.Datastore.Projects.Operations.Get
+    Gogol.Datastore.Projects.Operations.List
+    Gogol.Datastore.Projects.ReserveIds
+    Gogol.Datastore.Projects.Rollback
+    Gogol.Datastore.Projects.RunQuery
+    Gogol.Datastore.Types
 
   other-modules:
-    Network.Google.Datastore.Internal.Product
-    Network.Google.Datastore.Internal.Sum
+    Gogol.Datastore.Internal.Product
+    Gogol.Datastore.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

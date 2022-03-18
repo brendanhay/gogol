@@ -19,48 +19,51 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Rollback
+-- Module      : Gogol.Datastore.Projects.BeginTransaction
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Rolls back a transaction.
+-- Begins a new transaction.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.rollback@.
-module Network.Google.Datastore.Projects.Rollback
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.beginTransaction@.
+module Gogol.Datastore.Projects.BeginTransaction
   ( -- * Resource
-    DatastoreProjectsRollbackResource,
+    DatastoreProjectsBeginTransactionResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsRollback,
-    DatastoreProjectsRollback,
+    newDatastoreProjectsBeginTransaction,
+    DatastoreProjectsBeginTransaction,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.rollback@ method which the
--- 'DatastoreProjectsRollback' request conforms to.
-type DatastoreProjectsRollbackResource =
+-- | A resource alias for @datastore.projects.beginTransaction@ method which the
+-- 'DatastoreProjectsBeginTransaction' request conforms to.
+type DatastoreProjectsBeginTransactionResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.CaptureMode "projectId" "rollback" Core.Text
+    Core.:> Core.CaptureMode
+              "projectId"
+              "beginTransaction"
+              Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] RollbackRequest
-    Core.:> Core.Post '[Core.JSON] RollbackResponse
+    Core.:> Core.ReqBody '[Core.JSON] BeginTransactionRequest
+    Core.:> Core.Post '[Core.JSON] BeginTransactionResponse
 
--- | Rolls back a transaction.
+-- | Begins a new transaction.
 --
--- /See:/ 'newDatastoreProjectsRollback' smart constructor.
-data DatastoreProjectsRollback = DatastoreProjectsRollback
+-- /See:/ 'newDatastoreProjectsBeginTransaction' smart constructor.
+data DatastoreProjectsBeginTransaction = DatastoreProjectsBeginTransaction
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +71,7 @@ data DatastoreProjectsRollback = DatastoreProjectsRollback
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: RollbackRequest,
+    payload :: BeginTransactionRequest,
     -- | Required. The ID of the project against which to make the request.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -78,15 +81,15 @@ data DatastoreProjectsRollback = DatastoreProjectsRollback
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsRollback' with the minimum fields required to make a request.
-newDatastoreProjectsRollback ::
+-- | Creates a value of 'DatastoreProjectsBeginTransaction' with the minimum fields required to make a request.
+newDatastoreProjectsBeginTransaction ::
   -- |  Multipart request metadata. See 'payload'.
-  RollbackRequest ->
+  BeginTransactionRequest ->
   -- |  Required. The ID of the project against which to make the request. See 'projectId'.
   Core.Text ->
-  DatastoreProjectsRollback
-newDatastoreProjectsRollback payload projectId =
-  DatastoreProjectsRollback
+  DatastoreProjectsBeginTransaction
+newDatastoreProjectsBeginTransaction payload projectId =
+  DatastoreProjectsBeginTransaction
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,14 +99,19 @@ newDatastoreProjectsRollback payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest DatastoreProjectsRollback where
-  type Rs DatastoreProjectsRollback = RollbackResponse
+instance
+  Core.GoogleRequest
+    DatastoreProjectsBeginTransaction
+  where
   type
-    Scopes DatastoreProjectsRollback =
+    Rs DatastoreProjectsBeginTransaction =
+      BeginTransactionResponse
+  type
+    Scopes DatastoreProjectsBeginTransaction =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsRollback {..} =
+  requestClient DatastoreProjectsBeginTransaction {..} =
     go
       projectId
       xgafv
@@ -118,6 +126,6 @@ instance Core.GoogleRequest DatastoreProjectsRollback where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsRollbackResource
+              Core.Proxy DatastoreProjectsBeginTransactionResource
           )
           Core.mempty

@@ -19,48 +19,48 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Lookup
+-- Module      : Gogol.Datastore.Projects.Rollback
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up entities by key.
+-- Rolls back a transaction.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.lookup@.
-module Network.Google.Datastore.Projects.Lookup
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.rollback@.
+module Gogol.Datastore.Projects.Rollback
   ( -- * Resource
-    DatastoreProjectsLookupResource,
+    DatastoreProjectsRollbackResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsLookup,
-    DatastoreProjectsLookup,
+    newDatastoreProjectsRollback,
+    DatastoreProjectsRollback,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.lookup@ method which the
--- 'DatastoreProjectsLookup' request conforms to.
-type DatastoreProjectsLookupResource =
+-- | A resource alias for @datastore.projects.rollback@ method which the
+-- 'DatastoreProjectsRollback' request conforms to.
+type DatastoreProjectsRollbackResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.CaptureMode "projectId" "lookup" Core.Text
+    Core.:> Core.CaptureMode "projectId" "rollback" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] LookupRequest
-    Core.:> Core.Post '[Core.JSON] LookupResponse
+    Core.:> Core.ReqBody '[Core.JSON] RollbackRequest
+    Core.:> Core.Post '[Core.JSON] RollbackResponse
 
--- | Looks up entities by key.
+-- | Rolls back a transaction.
 --
--- /See:/ 'newDatastoreProjectsLookup' smart constructor.
-data DatastoreProjectsLookup = DatastoreProjectsLookup
+-- /See:/ 'newDatastoreProjectsRollback' smart constructor.
+data DatastoreProjectsRollback = DatastoreProjectsRollback
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +68,7 @@ data DatastoreProjectsLookup = DatastoreProjectsLookup
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: LookupRequest,
+    payload :: RollbackRequest,
     -- | Required. The ID of the project against which to make the request.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -78,15 +78,15 @@ data DatastoreProjectsLookup = DatastoreProjectsLookup
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsLookup' with the minimum fields required to make a request.
-newDatastoreProjectsLookup ::
+-- | Creates a value of 'DatastoreProjectsRollback' with the minimum fields required to make a request.
+newDatastoreProjectsRollback ::
   -- |  Multipart request metadata. See 'payload'.
-  LookupRequest ->
+  RollbackRequest ->
   -- |  Required. The ID of the project against which to make the request. See 'projectId'.
   Core.Text ->
-  DatastoreProjectsLookup
-newDatastoreProjectsLookup payload projectId =
-  DatastoreProjectsLookup
+  DatastoreProjectsRollback
+newDatastoreProjectsRollback payload projectId =
+  DatastoreProjectsRollback
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,14 +96,14 @@ newDatastoreProjectsLookup payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest DatastoreProjectsLookup where
-  type Rs DatastoreProjectsLookup = LookupResponse
+instance Core.GoogleRequest DatastoreProjectsRollback where
+  type Rs DatastoreProjectsRollback = RollbackResponse
   type
-    Scopes DatastoreProjectsLookup =
+    Scopes DatastoreProjectsRollback =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsLookup {..} =
+  requestClient DatastoreProjectsRollback {..} =
     go
       projectId
       xgafv
@@ -118,6 +118,6 @@ instance Core.GoogleRequest DatastoreProjectsLookup where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsLookupResource
+              Core.Proxy DatastoreProjectsRollbackResource
           )
           Core.mempty

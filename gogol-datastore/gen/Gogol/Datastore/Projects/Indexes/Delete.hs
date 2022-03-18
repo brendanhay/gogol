@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Indexes.Delete
+-- Module      : Gogol.Datastore.Projects.Indexes.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes an existing index. An index can only be deleted if it is in a @READY@ or @ERROR@ state. On successful execution of the request, the index will be in a @DELETING@ state. And on completion of the returned google.longrunning.Operation, the index will be removed. During index deletion, the process could result in an error, in which case the index will move to the @ERROR@ state. The process can be recovered by fixing the data that caused the error, followed by calling delete again.
 --
 -- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.indexes.delete@.
-module Network.Google.Datastore.Projects.Indexes.Delete
+module Gogol.Datastore.Projects.Indexes.Delete
   ( -- * Resource
     DatastoreProjectsIndexesDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Datastore.Projects.Indexes.Delete
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datastore.projects.indexes.delete@ method which the
 -- 'DatastoreProjectsIndexesDelete' request conforms to.

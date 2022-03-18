@@ -19,58 +19,54 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.ReserveIds
+-- Module      : Gogol.Datastore.Projects.Operations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Prevents the supplied keys\' IDs from being auto-allocated by Cloud Datastore.
+-- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.reserveIds@.
-module Network.Google.Datastore.Projects.ReserveIds
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.operations.delete@.
+module Gogol.Datastore.Projects.Operations.Delete
   ( -- * Resource
-    DatastoreProjectsReserveIdsResource,
+    DatastoreProjectsOperationsDeleteResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsReserveIds,
-    DatastoreProjectsReserveIds,
+    newDatastoreProjectsOperationsDelete,
+    DatastoreProjectsOperationsDelete,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.reserveIds@ method which the
--- 'DatastoreProjectsReserveIds' request conforms to.
-type DatastoreProjectsReserveIdsResource =
+-- | A resource alias for @datastore.projects.operations.delete@ method which the
+-- 'DatastoreProjectsOperationsDelete' request conforms to.
+type DatastoreProjectsOperationsDeleteResource =
   "v1"
-    Core.:> "projects"
-    Core.:> Core.CaptureMode "projectId" "reserveIds" Core.Text
+    Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ReserveIdsRequest
-    Core.:> Core.Post '[Core.JSON] ReserveIdsResponse
+    Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Prevents the supplied keys\' IDs from being auto-allocated by Cloud Datastore.
+-- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ 'newDatastoreProjectsReserveIds' smart constructor.
-data DatastoreProjectsReserveIds = DatastoreProjectsReserveIds
+-- /See:/ 'newDatastoreProjectsOperationsDelete' smart constructor.
+data DatastoreProjectsOperationsDelete = DatastoreProjectsOperationsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: ReserveIdsRequest,
-    -- | Required. The ID of the project against which to make the request.
-    projectId :: Core.Text,
+    -- | The name of the operation resource to be deleted.
+    name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -78,51 +74,45 @@ data DatastoreProjectsReserveIds = DatastoreProjectsReserveIds
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsReserveIds' with the minimum fields required to make a request.
-newDatastoreProjectsReserveIds ::
-  -- |  Multipart request metadata. See 'payload'.
-  ReserveIdsRequest ->
-  -- |  Required. The ID of the project against which to make the request. See 'projectId'.
+-- | Creates a value of 'DatastoreProjectsOperationsDelete' with the minimum fields required to make a request.
+newDatastoreProjectsOperationsDelete ::
+  -- |  The name of the operation resource to be deleted. See 'name'.
   Core.Text ->
-  DatastoreProjectsReserveIds
-newDatastoreProjectsReserveIds payload projectId =
-  DatastoreProjectsReserveIds
+  DatastoreProjectsOperationsDelete
+newDatastoreProjectsOperationsDelete name =
+  DatastoreProjectsOperationsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
-      projectId = projectId,
+      name = name,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DatastoreProjectsReserveIds
+    DatastoreProjectsOperationsDelete
   where
+  type Rs DatastoreProjectsOperationsDelete = Empty
   type
-    Rs DatastoreProjectsReserveIds =
-      ReserveIdsResponse
-  type
-    Scopes DatastoreProjectsReserveIds =
+    Scopes DatastoreProjectsOperationsDelete =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsReserveIds {..} =
+  requestClient DatastoreProjectsOperationsDelete {..} =
     go
-      projectId
+      name
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       datastoreService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsReserveIdsResource
+              Core.Proxy DatastoreProjectsOperationsDeleteResource
           )
           Core.mempty
