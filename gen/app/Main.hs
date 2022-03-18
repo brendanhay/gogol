@@ -66,11 +66,12 @@ parser =
           <> metavar "DIR"
           <> help "Directory containing static files to copy to generated libraries."
       )
-    <*> option version
-              ( long "version"
-                  <> metavar "VER"
-                  <> help "Version of the library to generate."
-              )
+    <*> option
+      version
+      ( long "version"
+          <> metavar "VER"
+          <> help "Version of the library to generate."
+      )
 
 isPath :: ReadM Path
 isPath = eitherReader (Right . fromText . Text.dropWhileEnd (== '/') . fromString)

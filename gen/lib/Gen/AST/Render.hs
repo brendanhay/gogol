@@ -61,11 +61,11 @@ renderSchema s = go (_schema s)
           ts = maybe b (flip (Map.insert "additional") b) ab
 
       Prod (dname k) (i ^. iDescription)
-            <$> pp None (objDecl k ts)
-            <*> pure (objFields ts)
-            <*> pp None (objDerive ds)
-            <*> traverse (pp Print) (jsonDecls k ts)
-            <*> ctor ts
+        <$> pp None (objDecl k ts)
+        <*> pure (objFields ts)
+        <*> pp None (objDerive ds)
+        <*> traverse (pp Print) (jsonDecls k ts)
+        <*> ctor ts
       where
         ctor ts =
           Fun' (cname k) (Just help)
