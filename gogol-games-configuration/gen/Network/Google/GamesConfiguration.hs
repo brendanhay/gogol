@@ -1,216 +1,176 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.GamesConfiguration
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Play Game Services Publishing API allows developers to
--- configure their games in Game Services.
+-- The Google Play Game Services Publishing API allows developers to configure their games in Game Services.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference>
 module Network.Google.GamesConfiguration
-    (
-    -- * Service Configuration
-      gamesConfigurationService
+  ( -- * Configuration
+    gamesConfigurationService,
 
     -- * OAuth Scopes
-    , androidPublisherScope
-
-    -- * API Declaration
-    , GamesConfigurationAPI
+    androidpublisherScope,
 
     -- * Resources
 
     -- ** gamesConfiguration.achievementConfigurations.delete
-    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
+    GamesConfigurationAchievementConfigurationsDeleteResource,
+    newGamesConfigurationAchievementConfigurationsDelete,
+    GamesConfigurationAchievementConfigurationsDelete,
 
     -- ** gamesConfiguration.achievementConfigurations.get
-    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
+    GamesConfigurationAchievementConfigurationsGetResource,
+    newGamesConfigurationAchievementConfigurationsGet,
+    GamesConfigurationAchievementConfigurationsGet,
 
     -- ** gamesConfiguration.achievementConfigurations.insert
-    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
+    GamesConfigurationAchievementConfigurationsInsertResource,
+    newGamesConfigurationAchievementConfigurationsInsert,
+    GamesConfigurationAchievementConfigurationsInsert,
 
     -- ** gamesConfiguration.achievementConfigurations.list
-    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
+    GamesConfigurationAchievementConfigurationsListResource,
+    newGamesConfigurationAchievementConfigurationsList,
+    GamesConfigurationAchievementConfigurationsList,
 
     -- ** gamesConfiguration.achievementConfigurations.update
-    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
+    GamesConfigurationAchievementConfigurationsUpdateResource,
+    newGamesConfigurationAchievementConfigurationsUpdate,
+    GamesConfigurationAchievementConfigurationsUpdate,
 
     -- ** gamesConfiguration.imageConfigurations.upload
-    , module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
+    GamesConfigurationImageConfigurationsUploadResource,
+    newGamesConfigurationImageConfigurationsUpload,
+    GamesConfigurationImageConfigurationsUpload,
 
     -- ** gamesConfiguration.leaderboardConfigurations.delete
-    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
+    GamesConfigurationLeaderboardConfigurationsDeleteResource,
+    newGamesConfigurationLeaderboardConfigurationsDelete,
+    GamesConfigurationLeaderboardConfigurationsDelete,
 
     -- ** gamesConfiguration.leaderboardConfigurations.get
-    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
+    GamesConfigurationLeaderboardConfigurationsGetResource,
+    newGamesConfigurationLeaderboardConfigurationsGet,
+    GamesConfigurationLeaderboardConfigurationsGet,
 
     -- ** gamesConfiguration.leaderboardConfigurations.insert
-    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
+    GamesConfigurationLeaderboardConfigurationsInsertResource,
+    newGamesConfigurationLeaderboardConfigurationsInsert,
+    GamesConfigurationLeaderboardConfigurationsInsert,
 
     -- ** gamesConfiguration.leaderboardConfigurations.list
-    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
+    GamesConfigurationLeaderboardConfigurationsListResource,
+    newGamesConfigurationLeaderboardConfigurationsList,
+    GamesConfigurationLeaderboardConfigurationsList,
 
     -- ** gamesConfiguration.leaderboardConfigurations.update
-    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
+    GamesConfigurationLeaderboardConfigurationsUpdateResource,
+    newGamesConfigurationLeaderboardConfigurationsUpdate,
+    GamesConfigurationLeaderboardConfigurationsUpdate,
 
     -- * Types
 
-    -- ** LeaderboardConfigurationScoreOrder
-    , LeaderboardConfigurationScoreOrder (..)
-
-    -- ** ImageConfiguration
-    , ImageConfiguration
-    , imageConfiguration
-    , icResourceId
-    , icKind
-    , icURL
-    , icImageType
-
-    -- ** AchievementConfigurationAchievementType
-    , AchievementConfigurationAchievementType (..)
-
-    -- ** ImageConfigurationImageType
-    , ImageConfigurationImageType (..)
-
-    -- ** LeaderboardConfigurationListResponse
-    , LeaderboardConfigurationListResponse
-    , leaderboardConfigurationListResponse
-    , lclrNextPageToken
-    , lclrKind
-    , lclrItems
-
-    -- ** GamesNumberAffixConfiguration
-    , GamesNumberAffixConfiguration
-    , gamesNumberAffixConfiguration
-    , gnacFew
-    , gnacOther
-    , gnacTwo
-    , gnacOne
-    , gnacZero
-    , gnacMany
-
-    -- ** AchievementConfigurationInitialState
-    , AchievementConfigurationInitialState (..)
-
-    -- ** AchievementConfigurationListResponse
-    , AchievementConfigurationListResponse
-    , achievementConfigurationListResponse
-    , aclrNextPageToken
-    , aclrKind
-    , aclrItems
-
-    -- ** LeaderboardConfiguration
-    , LeaderboardConfiguration
-    , leaderboardConfiguration
-    , lcScoreMax
-    , lcKind
-    , lcPublished
-    , lcToken
-    , lcScoreMin
-    , lcDraft
-    , lcId
-    , lcScoreOrder
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AchievementConfiguration
-    , AchievementConfiguration
-    , achievementConfiguration
-    , acAchievementType
-    , acStepsToUnlock
-    , acKind
-    , acPublished
-    , acToken
-    , acInitialState
-    , acDraft
-    , acId
+    AchievementConfiguration (..),
+    newAchievementConfiguration,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** AchievementConfiguration_AchievementType
+    AchievementConfiguration_AchievementType (..),
 
-    -- ** LocalizedString
-    , LocalizedString
-    , localizedString
-    , lsKind
-    , lsLocale
-    , lsValue
-
-    -- ** GamesNumberFormatConfiguration
-    , GamesNumberFormatConfiguration
-    , gamesNumberFormatConfiguration
-    , gnfcSuffix
-    , gnfcCurrencyCode
-    , gnfcNumberFormatType
-    , gnfcNumDecimalPlaces
-
-    -- ** GamesNumberFormatConfigurationNumberFormatType
-    , GamesNumberFormatConfigurationNumberFormatType (..)
-
-    -- ** ImageConfigurationsUploadImageType
-    , ImageConfigurationsUploadImageType (..)
-
-    -- ** LeaderboardConfigurationDetail
-    , LeaderboardConfigurationDetail
-    , leaderboardConfigurationDetail
-    , lcdKind
-    , lcdScoreFormat
-    , lcdSortRank
-    , lcdName
-    , lcdIconURL
+    -- ** AchievementConfiguration_InitialState
+    AchievementConfiguration_InitialState (..),
 
     -- ** AchievementConfigurationDetail
-    , AchievementConfigurationDetail
-    , achievementConfigurationDetail
-    , acdKind
-    , acdSortRank
-    , acdName
-    , acdPointValue
-    , acdIconURL
-    , acdDescription
+    AchievementConfigurationDetail (..),
+    newAchievementConfigurationDetail,
+
+    -- ** AchievementConfigurationListResponse
+    AchievementConfigurationListResponse (..),
+    newAchievementConfigurationListResponse,
+
+    -- ** GamesNumberAffixConfiguration
+    GamesNumberAffixConfiguration (..),
+    newGamesNumberAffixConfiguration,
+
+    -- ** GamesNumberFormatConfiguration
+    GamesNumberFormatConfiguration (..),
+    newGamesNumberFormatConfiguration,
+
+    -- ** GamesNumberFormatConfiguration_NumberFormatType
+    GamesNumberFormatConfiguration_NumberFormatType (..),
+
+    -- ** ImageConfiguration
+    ImageConfiguration (..),
+    newImageConfiguration,
+
+    -- ** ImageConfiguration_ImageType
+    ImageConfiguration_ImageType (..),
+
+    -- ** LeaderboardConfiguration
+    LeaderboardConfiguration (..),
+    newLeaderboardConfiguration,
+
+    -- ** LeaderboardConfiguration_ScoreOrder
+    LeaderboardConfiguration_ScoreOrder (..),
+
+    -- ** LeaderboardConfigurationDetail
+    LeaderboardConfigurationDetail (..),
+    newLeaderboardConfigurationDetail,
+
+    -- ** LeaderboardConfigurationListResponse
+    LeaderboardConfigurationListResponse (..),
+    newLeaderboardConfigurationListResponse,
+
+    -- ** LocalizedString
+    LocalizedString (..),
+    newLocalizedString,
 
     -- ** LocalizedStringBundle
-    , LocalizedStringBundle
-    , localizedStringBundle
-    , lsbKind
-    , lsbTranslations
-    ) where
+    LocalizedStringBundle (..),
+    newLocalizedStringBundle,
 
-import Network.Google.Prelude
+    -- ** ImageConfigurationsUploadImageType
+    ImageConfigurationsUploadImageType (..),
+  )
+where
+
+import Network.Google.GamesConfiguration.AchievementConfigurations.Delete
+import Network.Google.GamesConfiguration.AchievementConfigurations.Get
+import Network.Google.GamesConfiguration.AchievementConfigurations.Insert
+import Network.Google.GamesConfiguration.AchievementConfigurations.List
+import Network.Google.GamesConfiguration.AchievementConfigurations.Update
+import Network.Google.GamesConfiguration.ImageConfigurations.Upload
+import Network.Google.GamesConfiguration.LeaderboardConfigurations.Delete
+import Network.Google.GamesConfiguration.LeaderboardConfigurations.Get
+import Network.Google.GamesConfiguration.LeaderboardConfigurations.Insert
+import Network.Google.GamesConfiguration.LeaderboardConfigurations.List
+import Network.Google.GamesConfiguration.LeaderboardConfigurations.Update
 import Network.Google.GamesConfiguration.Types
-import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
-import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
-import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
-import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
-import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
-import Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
-import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
-import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
-import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
-import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
-import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Play Game Services Publishing API service.
-type GamesConfigurationAPI =
-     ImageConfigurationsUploadResource :<|>
-       LeaderboardConfigurationsInsertResource
-       :<|> LeaderboardConfigurationsListResource
-       :<|> LeaderboardConfigurationsGetResource
-       :<|> LeaderboardConfigurationsDeleteResource
-       :<|> LeaderboardConfigurationsUpdateResource
-       :<|> AchievementConfigurationsInsertResource
-       :<|> AchievementConfigurationsListResource
-       :<|> AchievementConfigurationsGetResource
-       :<|> AchievementConfigurationsDeleteResource
-       :<|> AchievementConfigurationsUpdateResource
