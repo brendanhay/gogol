@@ -39,45 +39,46 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AndroidManagement
-    Network.Google.AndroidManagement.Enterprises.Applications.Get
-    Network.Google.AndroidManagement.Enterprises.Create
-    Network.Google.AndroidManagement.Enterprises.Delete
-    Network.Google.AndroidManagement.Enterprises.Devices.Delete
-    Network.Google.AndroidManagement.Enterprises.Devices.Get
-    Network.Google.AndroidManagement.Enterprises.Devices.IssueCommand
-    Network.Google.AndroidManagement.Enterprises.Devices.List
-    Network.Google.AndroidManagement.Enterprises.Devices.Operations.Cancel
-    Network.Google.AndroidManagement.Enterprises.Devices.Operations.Delete
-    Network.Google.AndroidManagement.Enterprises.Devices.Operations.Get
-    Network.Google.AndroidManagement.Enterprises.Devices.Operations.List
-    Network.Google.AndroidManagement.Enterprises.Devices.Patch
-    Network.Google.AndroidManagement.Enterprises.EnrollmentTokens.Create
-    Network.Google.AndroidManagement.Enterprises.EnrollmentTokens.Delete
-    Network.Google.AndroidManagement.Enterprises.Get
-    Network.Google.AndroidManagement.Enterprises.List
-    Network.Google.AndroidManagement.Enterprises.Patch
-    Network.Google.AndroidManagement.Enterprises.Policies.Delete
-    Network.Google.AndroidManagement.Enterprises.Policies.Get
-    Network.Google.AndroidManagement.Enterprises.Policies.List
-    Network.Google.AndroidManagement.Enterprises.Policies.Patch
-    Network.Google.AndroidManagement.Enterprises.WebApps.Create
-    Network.Google.AndroidManagement.Enterprises.WebApps.Delete
-    Network.Google.AndroidManagement.Enterprises.WebApps.Get
-    Network.Google.AndroidManagement.Enterprises.WebApps.List
-    Network.Google.AndroidManagement.Enterprises.WebApps.Patch
-    Network.Google.AndroidManagement.Enterprises.WebTokens.Create
-    Network.Google.AndroidManagement.SignupUrls.Create
-    Network.Google.AndroidManagement.Types
+    Gogol.AndroidManagement
+    Gogol.AndroidManagement.Enterprises.Applications.Get
+    Gogol.AndroidManagement.Enterprises.Create
+    Gogol.AndroidManagement.Enterprises.Delete
+    Gogol.AndroidManagement.Enterprises.Devices.Delete
+    Gogol.AndroidManagement.Enterprises.Devices.Get
+    Gogol.AndroidManagement.Enterprises.Devices.IssueCommand
+    Gogol.AndroidManagement.Enterprises.Devices.List
+    Gogol.AndroidManagement.Enterprises.Devices.Operations.Cancel
+    Gogol.AndroidManagement.Enterprises.Devices.Operations.Delete
+    Gogol.AndroidManagement.Enterprises.Devices.Operations.Get
+    Gogol.AndroidManagement.Enterprises.Devices.Operations.List
+    Gogol.AndroidManagement.Enterprises.Devices.Patch
+    Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Create
+    Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Delete
+    Gogol.AndroidManagement.Enterprises.Get
+    Gogol.AndroidManagement.Enterprises.List
+    Gogol.AndroidManagement.Enterprises.Patch
+    Gogol.AndroidManagement.Enterprises.Policies.Delete
+    Gogol.AndroidManagement.Enterprises.Policies.Get
+    Gogol.AndroidManagement.Enterprises.Policies.List
+    Gogol.AndroidManagement.Enterprises.Policies.Patch
+    Gogol.AndroidManagement.Enterprises.WebApps.Create
+    Gogol.AndroidManagement.Enterprises.WebApps.Delete
+    Gogol.AndroidManagement.Enterprises.WebApps.Get
+    Gogol.AndroidManagement.Enterprises.WebApps.List
+    Gogol.AndroidManagement.Enterprises.WebApps.Patch
+    Gogol.AndroidManagement.Enterprises.WebTokens.Create
+    Gogol.AndroidManagement.SignupUrls.Create
+    Gogol.AndroidManagement.Types
 
   other-modules:
-    Network.Google.AndroidManagement.Internal.Product
-    Network.Google.AndroidManagement.Internal.Sum
+    Gogol.AndroidManagement.Internal.Product
+    Gogol.AndroidManagement.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
