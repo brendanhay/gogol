@@ -1,1045 +1,855 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.TagManager
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This API allows clients to access and modify container and tag
--- configuration.
+-- This API allows clients to access and modify container and tag configuration.
 --
 -- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference>
 module Network.Google.TagManager
-    (
-    -- * Service Configuration
-      tagManagerService
+  ( -- * Configuration
+    tagManagerService,
 
     -- * OAuth Scopes
-    , tagManagerReadOnlyScope
-    , tagManagerEditContainersScope
-    , tagManagerManageAccountsScope
-    , tagManagerDeleteContainersScope
-    , tagManagerManageUsersScope
-    , tagManagerPublishScope
-    , tagManagerEditContainerversionsScope
-
-    -- * API Declaration
-    , TagManagerAPI
+    tagManagerDeleteContainersScope,
+    tagManagerEditContainersScope,
+    tagManagerEditContainerversionsScope,
+    tagManagerManageAccountsScope,
+    tagManagerManageUsersScope,
+    tagManagerPublishScope,
+    tagManagerReadOnlyScope,
 
     -- * Resources
 
     -- ** tagmanager.accounts.containers.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Create
+    TagManagerAccountsContainersCreateResource,
+    newTagManagerAccountsContainersCreate,
+    TagManagerAccountsContainersCreate,
 
     -- ** tagmanager.accounts.containers.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Delete
+    TagManagerAccountsContainersDeleteResource,
+    newTagManagerAccountsContainersDelete,
+    TagManagerAccountsContainersDelete,
 
     -- ** tagmanager.accounts.containers.environments.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
+    TagManagerAccountsContainersEnvironmentsCreateResource,
+    newTagManagerAccountsContainersEnvironmentsCreate,
+    TagManagerAccountsContainersEnvironmentsCreate,
 
     -- ** tagmanager.accounts.containers.environments.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
+    TagManagerAccountsContainersEnvironmentsDeleteResource,
+    newTagManagerAccountsContainersEnvironmentsDelete,
+    TagManagerAccountsContainersEnvironmentsDelete,
 
     -- ** tagmanager.accounts.containers.environments.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
+    TagManagerAccountsContainersEnvironmentsGetResource,
+    newTagManagerAccountsContainersEnvironmentsGet,
+    TagManagerAccountsContainersEnvironmentsGet,
 
     -- ** tagmanager.accounts.containers.environments.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
+    TagManagerAccountsContainersEnvironmentsListResource,
+    newTagManagerAccountsContainersEnvironmentsList,
+    TagManagerAccountsContainersEnvironmentsList,
 
     -- ** tagmanager.accounts.containers.environments.reauthorize
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Reauthorize
+    TagManagerAccountsContainersEnvironmentsReauthorizeResource,
+    newTagManagerAccountsContainersEnvironmentsReauthorize,
+    TagManagerAccountsContainersEnvironmentsReauthorize,
 
     -- ** tagmanager.accounts.containers.environments.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
+    TagManagerAccountsContainersEnvironmentsUpdateResource,
+    newTagManagerAccountsContainersEnvironmentsUpdate,
+    TagManagerAccountsContainersEnvironmentsUpdate,
 
     -- ** tagmanager.accounts.containers.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Get
+    TagManagerAccountsContainersGetResource,
+    newTagManagerAccountsContainersGet,
+    TagManagerAccountsContainersGet,
 
     -- ** tagmanager.accounts.containers.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.List
+    TagManagerAccountsContainersListResource,
+    newTagManagerAccountsContainersList,
+    TagManagerAccountsContainersList,
 
     -- ** tagmanager.accounts.containers.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Update
+    TagManagerAccountsContainersUpdateResource,
+    newTagManagerAccountsContainersUpdate,
+    TagManagerAccountsContainersUpdate,
 
     -- ** tagmanager.accounts.containers.version_headers.latest
-    , module Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.Latest
+    TagManagerAccountsContainersVersion_headersLatestResource,
+    newTagManagerAccountsContainersVersion_headersLatest,
+    TagManagerAccountsContainersVersion_headersLatest,
 
     -- ** tagmanager.accounts.containers.version_headers.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.List
+    TagManagerAccountsContainersVersion_headersListResource,
+    newTagManagerAccountsContainersVersion_headersList,
+    TagManagerAccountsContainersVersion_headersList,
 
     -- ** tagmanager.accounts.containers.versions.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
+    TagManagerAccountsContainersVersionsDeleteResource,
+    newTagManagerAccountsContainersVersionsDelete,
+    TagManagerAccountsContainersVersionsDelete,
 
     -- ** tagmanager.accounts.containers.versions.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
+    TagManagerAccountsContainersVersionsGetResource,
+    newTagManagerAccountsContainersVersionsGet,
+    TagManagerAccountsContainersVersionsGet,
 
     -- ** tagmanager.accounts.containers.versions.live
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Live
+    TagManagerAccountsContainersVersionsLiveResource,
+    newTagManagerAccountsContainersVersionsLive,
+    TagManagerAccountsContainersVersionsLive,
 
     -- ** tagmanager.accounts.containers.versions.publish
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
+    TagManagerAccountsContainersVersionsPublishResource,
+    newTagManagerAccountsContainersVersionsPublish,
+    TagManagerAccountsContainersVersionsPublish,
 
     -- ** tagmanager.accounts.containers.versions.set_latest
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.SetLatest
+    TagManagerAccountsContainersVersionsSet_latestResource,
+    newTagManagerAccountsContainersVersionsSet_latest,
+    TagManagerAccountsContainersVersionsSet_latest,
 
     -- ** tagmanager.accounts.containers.versions.undelete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
+    TagManagerAccountsContainersVersionsUndeleteResource,
+    newTagManagerAccountsContainersVersionsUndelete,
+    TagManagerAccountsContainersVersionsUndelete,
 
     -- ** tagmanager.accounts.containers.versions.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
+    TagManagerAccountsContainersVersionsUpdateResource,
+    newTagManagerAccountsContainersVersionsUpdate,
+    TagManagerAccountsContainersVersionsUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Create
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesCreateResource,
+    newTagManagerAccountsContainersWorkspacesBuilt_in_variablesCreate,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Delete
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesDeleteResource,
+    newTagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.List
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesListResource,
+    newTagManagerAccountsContainersWorkspacesBuilt_in_variablesList,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesList,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.revert
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Revert
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevertResource,
+    newTagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert,
+
+    -- ** tagmanager.accounts.containers.workspaces.clients.create
+    TagManagerAccountsContainersWorkspacesClientsCreateResource,
+    newTagManagerAccountsContainersWorkspacesClientsCreate,
+    TagManagerAccountsContainersWorkspacesClientsCreate,
+
+    -- ** tagmanager.accounts.containers.workspaces.clients.delete
+    TagManagerAccountsContainersWorkspacesClientsDeleteResource,
+    newTagManagerAccountsContainersWorkspacesClientsDelete,
+    TagManagerAccountsContainersWorkspacesClientsDelete,
+
+    -- ** tagmanager.accounts.containers.workspaces.clients.get
+    TagManagerAccountsContainersWorkspacesClientsGetResource,
+    newTagManagerAccountsContainersWorkspacesClientsGet,
+    TagManagerAccountsContainersWorkspacesClientsGet,
+
+    -- ** tagmanager.accounts.containers.workspaces.clients.list
+    TagManagerAccountsContainersWorkspacesClientsListResource,
+    newTagManagerAccountsContainersWorkspacesClientsList,
+    TagManagerAccountsContainersWorkspacesClientsList,
+
+    -- ** tagmanager.accounts.containers.workspaces.clients.revert
+    TagManagerAccountsContainersWorkspacesClientsRevertResource,
+    newTagManagerAccountsContainersWorkspacesClientsRevert,
+    TagManagerAccountsContainersWorkspacesClientsRevert,
+
+    -- ** tagmanager.accounts.containers.workspaces.clients.update
+    TagManagerAccountsContainersWorkspacesClientsUpdateResource,
+    newTagManagerAccountsContainersWorkspacesClientsUpdate,
+    TagManagerAccountsContainersWorkspacesClientsUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Create
+    TagManagerAccountsContainersWorkspacesCreateResource,
+    newTagManagerAccountsContainersWorkspacesCreate,
+    TagManagerAccountsContainersWorkspacesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.create_version
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.CreateVersion
+    TagManagerAccountsContainersWorkspacesCreate_versionResource,
+    newTagManagerAccountsContainersWorkspacesCreate_version,
+    TagManagerAccountsContainersWorkspacesCreate_version,
 
     -- ** tagmanager.accounts.containers.workspaces.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Delete
+    TagManagerAccountsContainersWorkspacesDeleteResource,
+    newTagManagerAccountsContainersWorkspacesDelete,
+    TagManagerAccountsContainersWorkspacesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Create
+    TagManagerAccountsContainersWorkspacesFoldersCreateResource,
+    newTagManagerAccountsContainersWorkspacesFoldersCreate,
+    TagManagerAccountsContainersWorkspacesFoldersCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Delete
+    TagManagerAccountsContainersWorkspacesFoldersDeleteResource,
+    newTagManagerAccountsContainersWorkspacesFoldersDelete,
+    TagManagerAccountsContainersWorkspacesFoldersDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.entities
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Entities
+    TagManagerAccountsContainersWorkspacesFoldersEntitiesResource,
+    newTagManagerAccountsContainersWorkspacesFoldersEntities,
+    TagManagerAccountsContainersWorkspacesFoldersEntities,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Get
+    TagManagerAccountsContainersWorkspacesFoldersGetResource,
+    newTagManagerAccountsContainersWorkspacesFoldersGet,
+    TagManagerAccountsContainersWorkspacesFoldersGet,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.List
+    TagManagerAccountsContainersWorkspacesFoldersListResource,
+    newTagManagerAccountsContainersWorkspacesFoldersList,
+    TagManagerAccountsContainersWorkspacesFoldersList,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.move_entities_to_folder
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.MoveEntitiesToFolder
+    TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folderResource,
+    newTagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder,
+    TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.revert
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Revert
+    TagManagerAccountsContainersWorkspacesFoldersRevertResource,
+    newTagManagerAccountsContainersWorkspacesFoldersRevert,
+    TagManagerAccountsContainersWorkspacesFoldersRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Update
+    TagManagerAccountsContainersWorkspacesFoldersUpdateResource,
+    newTagManagerAccountsContainersWorkspacesFoldersUpdate,
+    TagManagerAccountsContainersWorkspacesFoldersUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
+    TagManagerAccountsContainersWorkspacesGetResource,
+    newTagManagerAccountsContainersWorkspacesGet,
+    TagManagerAccountsContainersWorkspacesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.getStatus
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetStatus
+    TagManagerAccountsContainersWorkspacesGetStatusResource,
+    newTagManagerAccountsContainersWorkspacesGetStatus,
+    TagManagerAccountsContainersWorkspacesGetStatus,
 
     -- ** tagmanager.accounts.containers.workspaces.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.List
+    TagManagerAccountsContainersWorkspacesListResource,
+    newTagManagerAccountsContainersWorkspacesList,
+    TagManagerAccountsContainersWorkspacesList,
 
     -- ** tagmanager.accounts.containers.workspaces.quick_preview
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.QuickPreview
+    TagManagerAccountsContainersWorkspacesQuick_previewResource,
+    newTagManagerAccountsContainersWorkspacesQuick_preview,
+    TagManagerAccountsContainersWorkspacesQuick_preview,
 
     -- ** tagmanager.accounts.containers.workspaces.resolve_conflict
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.ResolveConflict
+    TagManagerAccountsContainersWorkspacesResolve_conflictResource,
+    newTagManagerAccountsContainersWorkspacesResolve_conflict,
+    TagManagerAccountsContainersWorkspacesResolve_conflict,
 
     -- ** tagmanager.accounts.containers.workspaces.sync
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Sync
+    TagManagerAccountsContainersWorkspacesSyncResource,
+    newTagManagerAccountsContainersWorkspacesSync,
+    TagManagerAccountsContainersWorkspacesSync,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Create
+    TagManagerAccountsContainersWorkspacesTagsCreateResource,
+    newTagManagerAccountsContainersWorkspacesTagsCreate,
+    TagManagerAccountsContainersWorkspacesTagsCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Delete
+    TagManagerAccountsContainersWorkspacesTagsDeleteResource,
+    newTagManagerAccountsContainersWorkspacesTagsDelete,
+    TagManagerAccountsContainersWorkspacesTagsDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Get
+    TagManagerAccountsContainersWorkspacesTagsGetResource,
+    newTagManagerAccountsContainersWorkspacesTagsGet,
+    TagManagerAccountsContainersWorkspacesTagsGet,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.List
+    TagManagerAccountsContainersWorkspacesTagsListResource,
+    newTagManagerAccountsContainersWorkspacesTagsList,
+    TagManagerAccountsContainersWorkspacesTagsList,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.revert
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Revert
+    TagManagerAccountsContainersWorkspacesTagsRevertResource,
+    newTagManagerAccountsContainersWorkspacesTagsRevert,
+    TagManagerAccountsContainersWorkspacesTagsRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
+    TagManagerAccountsContainersWorkspacesTagsUpdateResource,
+    newTagManagerAccountsContainersWorkspacesTagsUpdate,
+    TagManagerAccountsContainersWorkspacesTagsUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Create
+    TagManagerAccountsContainersWorkspacesTemplatesCreateResource,
+    newTagManagerAccountsContainersWorkspacesTemplatesCreate,
+    TagManagerAccountsContainersWorkspacesTemplatesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Delete
+    TagManagerAccountsContainersWorkspacesTemplatesDeleteResource,
+    newTagManagerAccountsContainersWorkspacesTemplatesDelete,
+    TagManagerAccountsContainersWorkspacesTemplatesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Get
+    TagManagerAccountsContainersWorkspacesTemplatesGetResource,
+    newTagManagerAccountsContainersWorkspacesTemplatesGet,
+    TagManagerAccountsContainersWorkspacesTemplatesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.List
+    TagManagerAccountsContainersWorkspacesTemplatesListResource,
+    newTagManagerAccountsContainersWorkspacesTemplatesList,
+    TagManagerAccountsContainersWorkspacesTemplatesList,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.revert
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Revert
+    TagManagerAccountsContainersWorkspacesTemplatesRevertResource,
+    newTagManagerAccountsContainersWorkspacesTemplatesRevert,
+    TagManagerAccountsContainersWorkspacesTemplatesRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Update
+    TagManagerAccountsContainersWorkspacesTemplatesUpdateResource,
+    newTagManagerAccountsContainersWorkspacesTemplatesUpdate,
+    TagManagerAccountsContainersWorkspacesTemplatesUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Create
+    TagManagerAccountsContainersWorkspacesTriggersCreateResource,
+    newTagManagerAccountsContainersWorkspacesTriggersCreate,
+    TagManagerAccountsContainersWorkspacesTriggersCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
+    TagManagerAccountsContainersWorkspacesTriggersDeleteResource,
+    newTagManagerAccountsContainersWorkspacesTriggersDelete,
+    TagManagerAccountsContainersWorkspacesTriggersDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Get
+    TagManagerAccountsContainersWorkspacesTriggersGetResource,
+    newTagManagerAccountsContainersWorkspacesTriggersGet,
+    TagManagerAccountsContainersWorkspacesTriggersGet,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.List
+    TagManagerAccountsContainersWorkspacesTriggersListResource,
+    newTagManagerAccountsContainersWorkspacesTriggersList,
+    TagManagerAccountsContainersWorkspacesTriggersList,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.revert
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
+    TagManagerAccountsContainersWorkspacesTriggersRevertResource,
+    newTagManagerAccountsContainersWorkspacesTriggersRevert,
+    TagManagerAccountsContainersWorkspacesTriggersRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Update
+    TagManagerAccountsContainersWorkspacesTriggersUpdateResource,
+    newTagManagerAccountsContainersWorkspacesTriggersUpdate,
+    TagManagerAccountsContainersWorkspacesTriggersUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Update
+    TagManagerAccountsContainersWorkspacesUpdateResource,
+    newTagManagerAccountsContainersWorkspacesUpdate,
+    TagManagerAccountsContainersWorkspacesUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Create
+    TagManagerAccountsContainersWorkspacesVariablesCreateResource,
+    newTagManagerAccountsContainersWorkspacesVariablesCreate,
+    TagManagerAccountsContainersWorkspacesVariablesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Delete
+    TagManagerAccountsContainersWorkspacesVariablesDeleteResource,
+    newTagManagerAccountsContainersWorkspacesVariablesDelete,
+    TagManagerAccountsContainersWorkspacesVariablesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Get
+    TagManagerAccountsContainersWorkspacesVariablesGetResource,
+    newTagManagerAccountsContainersWorkspacesVariablesGet,
+    TagManagerAccountsContainersWorkspacesVariablesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.List
+    TagManagerAccountsContainersWorkspacesVariablesListResource,
+    newTagManagerAccountsContainersWorkspacesVariablesList,
+    TagManagerAccountsContainersWorkspacesVariablesList,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.revert
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Revert
+    TagManagerAccountsContainersWorkspacesVariablesRevertResource,
+    newTagManagerAccountsContainersWorkspacesVariablesRevert,
+    TagManagerAccountsContainersWorkspacesVariablesRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Update
+    TagManagerAccountsContainersWorkspacesVariablesUpdateResource,
+    newTagManagerAccountsContainersWorkspacesVariablesUpdate,
+    TagManagerAccountsContainersWorkspacesVariablesUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.create
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Create
+    TagManagerAccountsContainersWorkspacesZonesCreateResource,
+    newTagManagerAccountsContainersWorkspacesZonesCreate,
+    TagManagerAccountsContainersWorkspacesZonesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.delete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Delete
+    TagManagerAccountsContainersWorkspacesZonesDeleteResource,
+    newTagManagerAccountsContainersWorkspacesZonesDelete,
+    TagManagerAccountsContainersWorkspacesZonesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.get
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Get
+    TagManagerAccountsContainersWorkspacesZonesGetResource,
+    newTagManagerAccountsContainersWorkspacesZonesGet,
+    TagManagerAccountsContainersWorkspacesZonesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.list
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.List
+    TagManagerAccountsContainersWorkspacesZonesListResource,
+    newTagManagerAccountsContainersWorkspacesZonesList,
+    TagManagerAccountsContainersWorkspacesZonesList,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.revert
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Revert
+    TagManagerAccountsContainersWorkspacesZonesRevertResource,
+    newTagManagerAccountsContainersWorkspacesZonesRevert,
+    TagManagerAccountsContainersWorkspacesZonesRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.update
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Update
+    TagManagerAccountsContainersWorkspacesZonesUpdateResource,
+    newTagManagerAccountsContainersWorkspacesZonesUpdate,
+    TagManagerAccountsContainersWorkspacesZonesUpdate,
 
     -- ** tagmanager.accounts.get
-    , module Network.Google.Resource.TagManager.Accounts.Get
+    TagManagerAccountsGetResource,
+    newTagManagerAccountsGet,
+    TagManagerAccountsGet,
 
     -- ** tagmanager.accounts.list
-    , module Network.Google.Resource.TagManager.Accounts.List
+    TagManagerAccountsListResource,
+    newTagManagerAccountsList,
+    TagManagerAccountsList,
 
     -- ** tagmanager.accounts.update
-    , module Network.Google.Resource.TagManager.Accounts.Update
+    TagManagerAccountsUpdateResource,
+    newTagManagerAccountsUpdate,
+    TagManagerAccountsUpdate,
 
     -- ** tagmanager.accounts.user_permissions.create
-    , module Network.Google.Resource.TagManager.Accounts.UserPermissions.Create
+    TagManagerAccountsUser_permissionsCreateResource,
+    newTagManagerAccountsUser_permissionsCreate,
+    TagManagerAccountsUser_permissionsCreate,
 
     -- ** tagmanager.accounts.user_permissions.delete
-    , module Network.Google.Resource.TagManager.Accounts.UserPermissions.Delete
+    TagManagerAccountsUser_permissionsDeleteResource,
+    newTagManagerAccountsUser_permissionsDelete,
+    TagManagerAccountsUser_permissionsDelete,
 
     -- ** tagmanager.accounts.user_permissions.get
-    , module Network.Google.Resource.TagManager.Accounts.UserPermissions.Get
+    TagManagerAccountsUser_permissionsGetResource,
+    newTagManagerAccountsUser_permissionsGet,
+    TagManagerAccountsUser_permissionsGet,
 
     -- ** tagmanager.accounts.user_permissions.list
-    , module Network.Google.Resource.TagManager.Accounts.UserPermissions.List
+    TagManagerAccountsUser_permissionsListResource,
+    newTagManagerAccountsUser_permissionsList,
+    TagManagerAccountsUser_permissionsList,
 
     -- ** tagmanager.accounts.user_permissions.update
-    , module Network.Google.Resource.TagManager.Accounts.UserPermissions.Update
+    TagManagerAccountsUser_permissionsUpdateResource,
+    newTagManagerAccountsUser_permissionsUpdate,
+    TagManagerAccountsUser_permissionsUpdate,
 
     -- * Types
 
-    -- ** ListVariablesResponse
-    , ListVariablesResponse
-    , listVariablesResponse
-    , lvrNextPageToken
-    , lvrVariable
-
-    -- ** ListFoldersResponse
-    , ListFoldersResponse
-    , listFoldersResponse
-    , lfrNextPageToken
-    , lfrFolder
-
-    -- ** ListZonesResponse
-    , ListZonesResponse
-    , listZonesResponse
-    , lzrNextPageToken
-    , lzrZone
-
-    -- ** RevertZoneResponse
-    , RevertZoneResponse
-    , revertZoneResponse
-    , rzrZone
-
-    -- ** ListEnvironmentsResponse
-    , ListEnvironmentsResponse
-    , listEnvironmentsResponse
-    , lerNextPageToken
-    , lerEnvironment
-
-    -- ** RevertFolderResponse
-    , RevertFolderResponse
-    , revertFolderResponse
-    , rfrFolder
-
-    -- ** BuiltInVariableType
-    , BuiltInVariableType (..)
-
-    -- ** RevertVariableResponse
-    , RevertVariableResponse
-    , revertVariableResponse
-    , rvrVariable
-
-    -- ** PublishContainerVersionResponse
-    , PublishContainerVersionResponse
-    , publishContainerVersionResponse
-    , pcvrCompilerError
-    , pcvrContainerVersion
-
-    -- ** ListWorkspacesResponse
-    , ListWorkspacesResponse
-    , listWorkspacesResponse
-    , lwrNextPageToken
-    , lwrWorkspace
-
-    -- ** ContainerVersionHeader
-    , ContainerVersionHeader
-    , containerVersionHeader
-    , cvhNumClients
-    , cvhNumTags
-    , cvhNumMacros
-    , cvhContainerId
-    , cvhPath
-    , cvhContainerVersionId
-    , cvhAccountId
-    , cvhName
-    , cvhNumTriggers
-    , cvhDeleted
-    , cvhNumZones
-    , cvhNumRules
-    , cvhNumVariables
-    , cvhNumCustomTemplates
-
-    -- ** TeardownTag
-    , TeardownTag
-    , teardownTag
-    , ttStopTeardownOnFailure
-    , ttTagName
-
-    -- ** ListTemplatesResponse
-    , ListTemplatesResponse
-    , listTemplatesResponse
-    , ltrNextPageToken
-    , ltrTemplate
-
-    -- ** ListTriggersResponse
-    , ListTriggersResponse
-    , listTriggersResponse
-    , lNextPageToken
-    , lTrigger
-
-    -- ** Tag
-    , Tag
-    , tag
-    , tBlockingTriggerId
-    , tScheduleEndMs
-    , tParentFolderId
-    , tLiveOnly
-    , tContainerId
-    , tPriority
-    , tTeardownTag
-    , tPath
-    , tFingerprint
-    , tMonitoringMetadata
-    , tTagFiringOption
-    , tAccountId
-    , tTagId
-    , tName
-    , tTagManagerURL
-    , tBlockingRuleId
-    , tSetupTag
-    , tFiringTriggerId
-    , tWorkspaceId
-    , tType
-    , tScheduleStartMs
-    , tMonitoringMetadataTagNameKey
-    , tNotes
-    , tPaused
-    , tFiringRuleId
-    , tParameter
-
-    -- ** ZoneTypeRestriction
-    , ZoneTypeRestriction
-    , zoneTypeRestriction
-    , ztrEnable
-    , ztrWhiteListedTypeId
-
-    -- ** CreateContainerVersionResponse
-    , CreateContainerVersionResponse
-    , createContainerVersionResponse
-    , ccvrCompilerError
-    , ccvrNewWorkspacePath
-    , ccvrContainerVersion
-    , ccvrSyncStatus
-
-    -- ** CreateContainerVersionRequestVersionOptions
-    , CreateContainerVersionRequestVersionOptions
-    , createContainerVersionRequestVersionOptions
-    , ccvrvoName
-    , ccvrvoNotes
-
-    -- ** Workspace
-    , Workspace
-    , workspace
-    , wContainerId
-    , wPath
-    , wFingerprint
-    , wAccountId
-    , wName
-    , wTagManagerURL
-    , wWorkspaceId
-    , wDescription
-
-    -- ** AccountsContainersWorkspacesBuilt_in_variablesDeleteType
-    , AccountsContainersWorkspacesBuilt_in_variablesDeleteType (..)
-
-    -- ** Environment
-    , Environment
-    , environment
-    , eContainerId
-    , ePath
-    , eFingerprint
-    , eContainerVersionId
-    , eURL
-    , eAuthorizationCode
-    , eAccountId
-    , eName
-    , eTagManagerURL
-    , eAuthorizationTimestamp
-    , eEnableDebug
-    , eEnvironmentId
-    , eWorkspaceId
-    , eType
-    , eDescription
-
-    -- ** AccountAccess
-    , AccountAccess
-    , accountAccess
-    , aaPermission
-
-    -- ** TriggerType
-    , TriggerType (..)
-
-    -- ** ListUserPermissionsResponse
-    , ListUserPermissionsResponse
-    , listUserPermissionsResponse
-    , luprNextPageToken
-    , luprUserPermission
-
-    -- ** ContainerAccessPermission
-    , ContainerAccessPermission (..)
-
-    -- ** ContainerUsageContextItem
-    , ContainerUsageContextItem (..)
-
-    -- ** AccountsContainersWorkspacesBuilt_in_variablesCreateType
-    , AccountsContainersWorkspacesBuilt_in_variablesCreateType (..)
-
-    -- ** CreateBuiltInVariableResponse
-    , CreateBuiltInVariableResponse
-    , createBuiltInVariableResponse
-    , cbivrBuiltInVariable
-
-    -- ** ZoneChildContainer
-    , ZoneChildContainer
-    , zoneChildContainer
-    , zccPublicId
-    , zccNickname
-
-    -- ** ConditionType
-    , ConditionType (..)
-
-    -- ** ListAccountsResponse
-    , ListAccountsResponse
-    , listAccountsResponse
-    , larNextPageToken
-    , larAccount
-
-    -- ** GalleryReference
-    , GalleryReference
-    , galleryReference
-    , grSignature
-    , grRepository
-    , grOwner
-    , grVersion
-    , grHost
-    , grIsModified
-
-    -- ** MergeConflict
-    , MergeConflict
-    , mergeConflict
-    , mcEntityInBaseVersion
-    , mcEntityInWorkspace
-
-    -- ** TagTagFiringOption
-    , TagTagFiringOption (..)
-
-    -- ** Folder
-    , Folder
-    , folder
-    , fContainerId
-    , fPath
-    , fFingerprint
-    , fFolderId
-    , fAccountId
-    , fName
-    , fTagManagerURL
-    , fWorkspaceId
-    , fNotes
-
-    -- ** ZoneBoundary
-    , ZoneBoundary
-    , zoneBoundary
-    , zbCustomEvaluationTriggerId
-    , zbCondition
-
-    -- ** Variable
-    , Variable
-    , variable
-    , vScheduleEndMs
-    , vParentFolderId
-    , vContainerId
-    , vPath
-    , vFingerprint
-    , vVariableId
-    , vAccountId
-    , vDisablingTriggerId
-    , vName
-    , vTagManagerURL
-    , vFormatValue
-    , vWorkspaceId
-    , vType
-    , vScheduleStartMs
-    , vNotes
-    , vEnablingTriggerId
-    , vParameter
-
-    -- ** Zone
-    , Zone
-    , zone
-    , zContainerId
-    , zPath
-    , zBoundary
-    , zFingerprint
-    , zZoneId
-    , zTypeRestriction
-    , zAccountId
-    , zName
-    , zTagManagerURL
-    , zChildContainer
-    , zWorkspaceId
-    , zNotes
-
-    -- ** AccountAccessPermission
-    , AccountAccessPermission (..)
-
-    -- ** RevertTemplateResponse
-    , RevertTemplateResponse
-    , revertTemplateResponse
-    , rtrTemplate
-
-    -- ** SyncWorkspaceResponse
-    , SyncWorkspaceResponse
-    , syncWorkspaceResponse
-    , swrMergeConflict
-    , swrSyncStatus
-
-    -- ** RevertTriggerResponse
-    , RevertTriggerResponse
-    , revertTriggerResponse
-    , rtrTrigger
-
-    -- ** ParameterType
-    , ParameterType (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Account
-    , Account
-    , account
-    , aPath
-    , aShareData
-    , aFingerprint
-    , aAccountId
-    , aName
-    , aTagManagerURL
+    Account (..),
+    newAccount,
 
-    -- ** EntityChangeStatus
-    , EntityChangeStatus (..)
+    -- ** AccountAccess
+    AccountAccess (..),
+    newAccountAccess,
 
-    -- ** GetWorkspaceStatusResponse
-    , GetWorkspaceStatusResponse
-    , getWorkspaceStatusResponse
-    , gwsrMergeConflict
-    , gwsrWorkspaceChange
-
-    -- ** QuickPreviewResponse
-    , QuickPreviewResponse
-    , quickPreviewResponse
-    , qprCompilerError
-    , qprContainerVersion
-    , qprSyncStatus
-
-    -- ** ListContainerVersionsResponse
-    , ListContainerVersionsResponse
-    , listContainerVersionsResponse
-    , lcvrNextPageToken
-    , lcvrContainerVersionHeader
-
-    -- ** Container
-    , Container
-    , container
-    , cPublicId
-    , cUsageContext
-    , cContainerId
-    , cPath
-    , cFingerprint
-    , cAccountId
-    , cDomainName
-    , cName
-    , cTagManagerURL
-    , cNotes
+    -- ** AccountAccess_Permission
+    AccountAccess_Permission (..),
 
     -- ** BuiltInVariable
-    , BuiltInVariable
-    , builtInVariable
-    , bivContainerId
-    , bivPath
-    , bivAccountId
-    , bivName
-    , bivWorkspaceId
-    , bivType
+    BuiltInVariable (..),
+    newBuiltInVariable,
 
-    -- ** UserPermission
-    , UserPermission
-    , userPermission
-    , upPath
-    , upAccountAccess
-    , upAccountId
-    , upEmailAddress
-    , upContainerAccess
-
-    -- ** VariableFormatValueCaseConversionType
-    , VariableFormatValueCaseConversionType (..)
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ContainerVersion
-    , ContainerVersion
-    , containerVersion
-    , cvTag
-    , cvContainerId
-    , cvPath
-    , cvFingerprint
-    , cvContainerVersionId
-    , cvFolder
-    , cvVariable
-    , cvZone
-    , cvAccountId
-    , cvName
-    , cvContainer
-    , cvBuiltInVariable
-    , cvTagManagerURL
-    , cvDeleted
-    , cvTrigger
-    , cvCustomTemplate
-    , cvDescription
-    , cvClient
-
-    -- ** EnvironmentType
-    , EnvironmentType (..)
-
-    -- ** SetupTag
-    , SetupTag
-    , setupTag
-    , stTagName
-    , stStopOnSetupFailure
-
-    -- ** ListContainersResponse
-    , ListContainersResponse
-    , listContainersResponse
-    , lcrNextPageToken
-    , lcrContainer
-
-    -- ** Trigger
-    , Trigger
-    , trigger
-    , triContinuousTimeMinMilliseconds
-    , triMaxTimerLengthSeconds
-    , triCustomEventFilter
-    , triParentFolderId
-    , triVisiblePercentageMax
-    , triContainerId
-    , triPath
-    , triSelector
-    , triTriggerId
-    , triCheckValidation
-    , triFingerprint
-    , triTotalTimeMinMilliseconds
-    , triAutoEventFilter
-    , triUniqueTriggerId
-    , triHorizontalScrollPercentageList
-    , triIntervalSeconds
-    , triVisiblePercentageMin
-    , triAccountId
-    , triName
-    , triInterval
-    , triTagManagerURL
-    , triWaitForTagsTimeout
-    , triLimit
-    , triVerticalScrollPercentageList
-    , triFilter
-    , triWorkspaceId
-    , triType
-    , triNotes
-    , triVisibilitySelector
-    , triEventName
-    , triWaitForTags
-    , triParameter
-
-    -- ** ListTagsResponse
-    , ListTagsResponse
-    , listTagsResponse
-    , lisNextPageToken
-    , lisTag
-
-    -- ** ListEnabledBuiltInVariablesResponse
-    , ListEnabledBuiltInVariablesResponse
-    , listEnabledBuiltInVariablesResponse
-    , lebivrNextPageToken
-    , lebivrBuiltInVariable
-
-    -- ** CustomTemplate
-    , CustomTemplate
-    , customTemplate
-    , ctContainerId
-    , ctPath
-    , ctTemplateId
-    , ctFingerprint
-    , ctGalleryReference
-    , ctAccountId
-    , ctName
-    , ctTagManagerURL
-    , ctTemplateData
-    , ctWorkspaceId
-
-    -- ** FolderEntities
-    , FolderEntities
-    , folderEntities
-    , feNextPageToken
-    , feTag
-    , feVariable
-    , feTrigger
-
-    -- ** SyncStatus
-    , SyncStatus
-    , syncStatus
-    , ssSyncError
-    , ssMergeConflict
-
-    -- ** RevertTagResponse
-    , RevertTagResponse
-    , revertTagResponse
-    , rtrTag
-
-    -- ** Condition
-    , Condition
-    , condition
-    , cType
-    , cParameter
-
-    -- ** Entity
-    , Entity
-    , entity
-    , eTag
-    , eFolder
-    , eVariable
-    , eChangeStatus
-    , eTrigger
-    , eClient
-
-    -- ** ContainerAccess
-    , ContainerAccess
-    , containerAccess
-    , caContainerId
-    , caPermission
-
-    -- ** VariableFormatValue
-    , VariableFormatValue
-    , variableFormatValue
-    , vfvConvertNullToValue
-    , vfvConvertTrueToValue
-    , vfvCaseConversionType
-    , vfvConvertFalseToValue
-    , vfvConvertUndefinedToValue
-
-    -- ** RevertBuiltInVariableResponse
-    , RevertBuiltInVariableResponse
-    , revertBuiltInVariableResponse
-    , rbivrEnabled
-
-    -- ** AccountsContainersWorkspacesBuilt_in_variablesRevertType
-    , AccountsContainersWorkspacesBuilt_in_variablesRevertType (..)
+    -- ** BuiltInVariable_Type
+    BuiltInVariable_Type (..),
 
     -- ** Client
-    , Client
-    , client
-    , cliClientId
-    , cliParentFolderId
-    , cliContainerId
-    , cliPriority
-    , cliPath
-    , cliFingerprint
-    , cliAccountId
-    , cliName
-    , cliTagManagerURL
-    , cliWorkspaceId
-    , cliType
-    , cliNotes
-    , cliParameter
+    Client (..),
+    newClient,
+
+    -- ** Condition
+    Condition (..),
+    newCondition,
+
+    -- ** Condition_Type
+    Condition_Type (..),
+
+    -- ** Container
+    Container (..),
+    newContainer,
+
+    -- ** Container_UsageContextItem
+    Container_UsageContextItem (..),
+
+    -- ** ContainerAccess
+    ContainerAccess (..),
+    newContainerAccess,
+
+    -- ** ContainerAccess_Permission
+    ContainerAccess_Permission (..),
+
+    -- ** ContainerVersion
+    ContainerVersion (..),
+    newContainerVersion,
+
+    -- ** ContainerVersionHeader
+    ContainerVersionHeader (..),
+    newContainerVersionHeader,
+
+    -- ** CreateBuiltInVariableResponse
+    CreateBuiltInVariableResponse (..),
+    newCreateBuiltInVariableResponse,
+
+    -- ** CreateContainerVersionRequestVersionOptions
+    CreateContainerVersionRequestVersionOptions (..),
+    newCreateContainerVersionRequestVersionOptions,
+
+    -- ** CreateContainerVersionResponse
+    CreateContainerVersionResponse (..),
+    newCreateContainerVersionResponse,
+
+    -- ** CustomTemplate
+    CustomTemplate (..),
+    newCustomTemplate,
+
+    -- ** Entity
+    Entity (..),
+    newEntity,
+
+    -- ** Entity_ChangeStatus
+    Entity_ChangeStatus (..),
+
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
+
+    -- ** Environment_Type
+    Environment_Type (..),
+
+    -- ** Folder
+    Folder (..),
+    newFolder,
+
+    -- ** FolderEntities
+    FolderEntities (..),
+    newFolderEntities,
+
+    -- ** GalleryReference
+    GalleryReference (..),
+    newGalleryReference,
+
+    -- ** GetWorkspaceStatusResponse
+    GetWorkspaceStatusResponse (..),
+    newGetWorkspaceStatusResponse,
+
+    -- ** ListAccountsResponse
+    ListAccountsResponse (..),
+    newListAccountsResponse,
+
+    -- ** ListClientsResponse
+    ListClientsResponse (..),
+    newListClientsResponse,
+
+    -- ** ListContainerVersionsResponse
+    ListContainerVersionsResponse (..),
+    newListContainerVersionsResponse,
+
+    -- ** ListContainersResponse
+    ListContainersResponse (..),
+    newListContainersResponse,
+
+    -- ** ListEnabledBuiltInVariablesResponse
+    ListEnabledBuiltInVariablesResponse (..),
+    newListEnabledBuiltInVariablesResponse,
+
+    -- ** ListEnvironmentsResponse
+    ListEnvironmentsResponse (..),
+    newListEnvironmentsResponse,
+
+    -- ** ListFoldersResponse
+    ListFoldersResponse (..),
+    newListFoldersResponse,
+
+    -- ** ListTagsResponse
+    ListTagsResponse (..),
+    newListTagsResponse,
+
+    -- ** ListTemplatesResponse
+    ListTemplatesResponse (..),
+    newListTemplatesResponse,
+
+    -- ** ListTriggersResponse
+    ListTriggersResponse (..),
+    newListTriggersResponse,
+
+    -- ** ListUserPermissionsResponse
+    ListUserPermissionsResponse (..),
+    newListUserPermissionsResponse,
+
+    -- ** ListVariablesResponse
+    ListVariablesResponse (..),
+    newListVariablesResponse,
+
+    -- ** ListWorkspacesResponse
+    ListWorkspacesResponse (..),
+    newListWorkspacesResponse,
+
+    -- ** ListZonesResponse
+    ListZonesResponse (..),
+    newListZonesResponse,
+
+    -- ** MergeConflict
+    MergeConflict (..),
+    newMergeConflict,
 
     -- ** Parameter
-    , Parameter
-    , parameter
-    , pList
-    , pValue
-    , pMap
-    , pKey
-    , pType
-    ) where
+    Parameter (..),
+    newParameter,
 
-import Network.Google.Prelude
-import Network.Google.Resource.TagManager.Accounts.Containers.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Reauthorize
-import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.Latest
-import Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Live
-import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
-import Network.Google.Resource.TagManager.Accounts.Containers.Versions.SetLatest
-import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
-import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Revert
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.CreateVersion
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Entities
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.MoveEntitiesToFolder
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Revert
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetStatus
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.QuickPreview
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.ResolveConflict
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Sync
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Revert
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Revert
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Revert
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Update
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Create
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Delete
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Get
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.List
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Revert
-import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Update
-import Network.Google.Resource.TagManager.Accounts.Get
-import Network.Google.Resource.TagManager.Accounts.List
-import Network.Google.Resource.TagManager.Accounts.Update
-import Network.Google.Resource.TagManager.Accounts.UserPermissions.Create
-import Network.Google.Resource.TagManager.Accounts.UserPermissions.Delete
-import Network.Google.Resource.TagManager.Accounts.UserPermissions.Get
-import Network.Google.Resource.TagManager.Accounts.UserPermissions.List
-import Network.Google.Resource.TagManager.Accounts.UserPermissions.Update
+    -- ** Parameter_Type
+    Parameter_Type (..),
+
+    -- ** PublishContainerVersionResponse
+    PublishContainerVersionResponse (..),
+    newPublishContainerVersionResponse,
+
+    -- ** QuickPreviewResponse
+    QuickPreviewResponse (..),
+    newQuickPreviewResponse,
+
+    -- ** RevertBuiltInVariableResponse
+    RevertBuiltInVariableResponse (..),
+    newRevertBuiltInVariableResponse,
+
+    -- ** RevertClientResponse
+    RevertClientResponse (..),
+    newRevertClientResponse,
+
+    -- ** RevertFolderResponse
+    RevertFolderResponse (..),
+    newRevertFolderResponse,
+
+    -- ** RevertTagResponse
+    RevertTagResponse (..),
+    newRevertTagResponse,
+
+    -- ** RevertTemplateResponse
+    RevertTemplateResponse (..),
+    newRevertTemplateResponse,
+
+    -- ** RevertTriggerResponse
+    RevertTriggerResponse (..),
+    newRevertTriggerResponse,
+
+    -- ** RevertVariableResponse
+    RevertVariableResponse (..),
+    newRevertVariableResponse,
+
+    -- ** RevertZoneResponse
+    RevertZoneResponse (..),
+    newRevertZoneResponse,
+
+    -- ** SetupTag
+    SetupTag (..),
+    newSetupTag,
+
+    -- ** SyncStatus
+    SyncStatus (..),
+    newSyncStatus,
+
+    -- ** SyncWorkspaceResponse
+    SyncWorkspaceResponse (..),
+    newSyncWorkspaceResponse,
+
+    -- ** Tag
+    Tag (..),
+    newTag,
+
+    -- ** Tag_TagFiringOption
+    Tag_TagFiringOption (..),
+
+    -- ** TagConsentSetting
+    TagConsentSetting (..),
+    newTagConsentSetting,
+
+    -- ** TagConsentSetting_ConsentStatus
+    TagConsentSetting_ConsentStatus (..),
+
+    -- ** TeardownTag
+    TeardownTag (..),
+    newTeardownTag,
+
+    -- ** Trigger
+    Trigger (..),
+    newTrigger,
+
+    -- ** Trigger_Type
+    Trigger_Type (..),
+
+    -- ** UserPermission
+    UserPermission (..),
+    newUserPermission,
+
+    -- ** Variable
+    Variable (..),
+    newVariable,
+
+    -- ** VariableFormatValue
+    VariableFormatValue (..),
+    newVariableFormatValue,
+
+    -- ** VariableFormatValue_CaseConversionType
+    VariableFormatValue_CaseConversionType (..),
+
+    -- ** Workspace
+    Workspace (..),
+    newWorkspace,
+
+    -- ** Zone
+    Zone (..),
+    newZone,
+
+    -- ** ZoneBoundary
+    ZoneBoundary (..),
+    newZoneBoundary,
+
+    -- ** ZoneChildContainer
+    ZoneChildContainer (..),
+    newZoneChildContainer,
+
+    -- ** ZoneTypeRestriction
+    ZoneTypeRestriction (..),
+    newZoneTypeRestriction,
+
+    -- ** AccountsContainersWorkspacesBuilt_in_variablesCreateType
+    AccountsContainersWorkspacesBuilt_in_variablesCreateType (..),
+
+    -- ** AccountsContainersWorkspacesBuilt_in_variablesDeleteType
+    AccountsContainersWorkspacesBuilt_in_variablesDeleteType (..),
+
+    -- ** AccountsContainersWorkspacesBuilt_in_variablesRevertType
+    AccountsContainersWorkspacesBuilt_in_variablesRevertType (..),
+  )
+where
+
+import Network.Google.TagManager.Accounts.Containers.Create
+import Network.Google.TagManager.Accounts.Containers.Delete
+import Network.Google.TagManager.Accounts.Containers.Environments.Create
+import Network.Google.TagManager.Accounts.Containers.Environments.Delete
+import Network.Google.TagManager.Accounts.Containers.Environments.Get
+import Network.Google.TagManager.Accounts.Containers.Environments.List
+import Network.Google.TagManager.Accounts.Containers.Environments.Reauthorize
+import Network.Google.TagManager.Accounts.Containers.Environments.Update
+import Network.Google.TagManager.Accounts.Containers.Get
+import Network.Google.TagManager.Accounts.Containers.List
+import Network.Google.TagManager.Accounts.Containers.Update
+import Network.Google.TagManager.Accounts.Containers.Version_headers.Latest
+import Network.Google.TagManager.Accounts.Containers.Version_headers.List
+import Network.Google.TagManager.Accounts.Containers.Versions.Delete
+import Network.Google.TagManager.Accounts.Containers.Versions.Get
+import Network.Google.TagManager.Accounts.Containers.Versions.Live
+import Network.Google.TagManager.Accounts.Containers.Versions.Publish
+import Network.Google.TagManager.Accounts.Containers.Versions.Set_latest
+import Network.Google.TagManager.Accounts.Containers.Versions.Undelete
+import Network.Google.TagManager.Accounts.Containers.Versions.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Built_in_variables.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Clients.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Clients.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Clients.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Clients.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Clients.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Clients.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Create_version
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.Entities
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.Move_entities_to_folder
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Folders.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.GetStatus
+import Network.Google.TagManager.Accounts.Containers.Workspaces.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Quick_preview
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Resolve_conflict
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Sync
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Tags.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Tags.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Tags.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Tags.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Tags.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Tags.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Templates.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Templates.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Templates.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Templates.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Templates.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Templates.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Triggers.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Triggers.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Triggers.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Triggers.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Variables.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Variables.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Variables.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Variables.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Variables.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Variables.Update
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Zones.Create
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Zones.Delete
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Zones.Get
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Zones.List
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Zones.Revert
+import Network.Google.TagManager.Accounts.Containers.Workspaces.Zones.Update
+import Network.Google.TagManager.Accounts.Get
+import Network.Google.TagManager.Accounts.List
+import Network.Google.TagManager.Accounts.Update
+import Network.Google.TagManager.Accounts.User_permissions.Create
+import Network.Google.TagManager.Accounts.User_permissions.Delete
+import Network.Google.TagManager.Accounts.User_permissions.Get
+import Network.Google.TagManager.Accounts.User_permissions.List
+import Network.Google.TagManager.Accounts.User_permissions.Update
 import Network.Google.TagManager.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Tag Manager API service.
-type TagManagerAPI =
-     AccountsUserPermissionsListResource :<|>
-       AccountsUserPermissionsGetResource
-       :<|> AccountsUserPermissionsCreateResource
-       :<|> AccountsUserPermissionsDeleteResource
-       :<|> AccountsUserPermissionsUpdateResource
-       :<|> AccountsContainersVersionsUndeleteResource
-       :<|> AccountsContainersVersionsGetResource
-       :<|> AccountsContainersVersionsSetLatestResource
-       :<|> AccountsContainersVersionsLiveResource
-       :<|> AccountsContainersVersionsDeleteResource
-       :<|> AccountsContainersVersionsUpdateResource
-       :<|> AccountsContainersVersionsPublishResource
-       :<|> AccountsContainersVersionHeadersListResource
-       :<|> AccountsContainersVersionHeadersLatestResource
-       :<|> AccountsContainersEnvironmentsListResource
-       :<|> AccountsContainersEnvironmentsGetResource
-       :<|> AccountsContainersEnvironmentsCreateResource
-       :<|>
-       AccountsContainersEnvironmentsReauthorizeResource
-       :<|> AccountsContainersEnvironmentsDeleteResource
-       :<|> AccountsContainersEnvironmentsUpdateResource
-       :<|> AccountsContainersWorkspacesZonesListResource
-       :<|> AccountsContainersWorkspacesZonesGetResource
-       :<|> AccountsContainersWorkspacesZonesCreateResource
-       :<|> AccountsContainersWorkspacesZonesRevertResource
-       :<|> AccountsContainersWorkspacesZonesDeleteResource
-       :<|> AccountsContainersWorkspacesZonesUpdateResource
-       :<|>
-       AccountsContainersWorkspacesVariablesListResource
-       :<|> AccountsContainersWorkspacesVariablesGetResource
-       :<|>
-       AccountsContainersWorkspacesVariablesCreateResource
-       :<|>
-       AccountsContainersWorkspacesVariablesRevertResource
-       :<|>
-       AccountsContainersWorkspacesVariablesDeleteResource
-       :<|>
-       AccountsContainersWorkspacesVariablesUpdateResource
-       :<|> AccountsContainersWorkspacesFoldersListResource
-       :<|>
-       AccountsContainersWorkspacesFoldersEntitiesResource
-       :<|> AccountsContainersWorkspacesFoldersGetResource
-       :<|>
-       AccountsContainersWorkspacesFoldersCreateResource
-       :<|>
-       AccountsContainersWorkspacesFoldersRevertResource
-       :<|>
-       AccountsContainersWorkspacesFoldersMoveEntitiesToFolderResource
-       :<|>
-       AccountsContainersWorkspacesFoldersDeleteResource
-       :<|>
-       AccountsContainersWorkspacesFoldersUpdateResource
-       :<|>
-       AccountsContainersWorkspacesTemplatesListResource
-       :<|> AccountsContainersWorkspacesTemplatesGetResource
-       :<|>
-       AccountsContainersWorkspacesTemplatesCreateResource
-       :<|>
-       AccountsContainersWorkspacesTemplatesRevertResource
-       :<|>
-       AccountsContainersWorkspacesTemplatesDeleteResource
-       :<|>
-       AccountsContainersWorkspacesTemplatesUpdateResource
-       :<|> AccountsContainersWorkspacesTriggersListResource
-       :<|> AccountsContainersWorkspacesTriggersGetResource
-       :<|>
-       AccountsContainersWorkspacesTriggersCreateResource
-       :<|>
-       AccountsContainersWorkspacesTriggersRevertResource
-       :<|>
-       AccountsContainersWorkspacesTriggersDeleteResource
-       :<|>
-       AccountsContainersWorkspacesTriggersUpdateResource
-       :<|>
-       AccountsContainersWorkspacesBuiltInVariablesListResource
-       :<|>
-       AccountsContainersWorkspacesBuiltInVariablesCreateResource
-       :<|>
-       AccountsContainersWorkspacesBuiltInVariablesRevertResource
-       :<|>
-       AccountsContainersWorkspacesBuiltInVariablesDeleteResource
-       :<|> AccountsContainersWorkspacesTagsListResource
-       :<|> AccountsContainersWorkspacesTagsGetResource
-       :<|> AccountsContainersWorkspacesTagsCreateResource
-       :<|> AccountsContainersWorkspacesTagsRevertResource
-       :<|> AccountsContainersWorkspacesTagsDeleteResource
-       :<|> AccountsContainersWorkspacesTagsUpdateResource
-       :<|> AccountsContainersWorkspacesListResource
-       :<|>
-       AccountsContainersWorkspacesResolveConflictResource
-       :<|> AccountsContainersWorkspacesQuickPreviewResource
-       :<|> AccountsContainersWorkspacesGetResource
-       :<|>
-       AccountsContainersWorkspacesCreateVersionResource
-       :<|> AccountsContainersWorkspacesCreateResource
-       :<|> AccountsContainersWorkspacesSyncResource
-       :<|> AccountsContainersWorkspacesGetStatusResource
-       :<|> AccountsContainersWorkspacesDeleteResource
-       :<|> AccountsContainersWorkspacesUpdateResource
-       :<|> AccountsContainersListResource
-       :<|> AccountsContainersGetResource
-       :<|> AccountsContainersCreateResource
-       :<|> AccountsContainersDeleteResource
-       :<|> AccountsContainersUpdateResource
-       :<|> AccountsListResource
-       :<|> AccountsGetResource
-       :<|> AccountsUpdateResource

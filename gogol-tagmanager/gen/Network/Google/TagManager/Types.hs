@@ -1,637 +1,370 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.TagManager.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.TagManager.Types
-    (
-    -- * Service Configuration
-      tagManagerService
+  ( -- * Configuration
+    tagManagerService,
 
     -- * OAuth Scopes
-    , tagManagerReadOnlyScope
-    , tagManagerEditContainersScope
-    , tagManagerManageAccountsScope
-    , tagManagerDeleteContainersScope
-    , tagManagerManageUsersScope
-    , tagManagerPublishScope
-    , tagManagerEditContainerversionsScope
-
-    -- * ListVariablesResponse
-    , ListVariablesResponse
-    , listVariablesResponse
-    , lvrNextPageToken
-    , lvrVariable
-
-    -- * ListFoldersResponse
-    , ListFoldersResponse
-    , listFoldersResponse
-    , lfrNextPageToken
-    , lfrFolder
-
-    -- * ListZonesResponse
-    , ListZonesResponse
-    , listZonesResponse
-    , lzrNextPageToken
-    , lzrZone
-
-    -- * RevertZoneResponse
-    , RevertZoneResponse
-    , revertZoneResponse
-    , rzrZone
-
-    -- * ListEnvironmentsResponse
-    , ListEnvironmentsResponse
-    , listEnvironmentsResponse
-    , lerNextPageToken
-    , lerEnvironment
-
-    -- * RevertFolderResponse
-    , RevertFolderResponse
-    , revertFolderResponse
-    , rfrFolder
-
-    -- * BuiltInVariableType
-    , BuiltInVariableType (..)
-
-    -- * RevertVariableResponse
-    , RevertVariableResponse
-    , revertVariableResponse
-    , rvrVariable
-
-    -- * PublishContainerVersionResponse
-    , PublishContainerVersionResponse
-    , publishContainerVersionResponse
-    , pcvrCompilerError
-    , pcvrContainerVersion
-
-    -- * ListWorkspacesResponse
-    , ListWorkspacesResponse
-    , listWorkspacesResponse
-    , lwrNextPageToken
-    , lwrWorkspace
-
-    -- * ContainerVersionHeader
-    , ContainerVersionHeader
-    , containerVersionHeader
-    , cvhNumClients
-    , cvhNumTags
-    , cvhNumMacros
-    , cvhContainerId
-    , cvhPath
-    , cvhContainerVersionId
-    , cvhAccountId
-    , cvhName
-    , cvhNumTriggers
-    , cvhDeleted
-    , cvhNumZones
-    , cvhNumRules
-    , cvhNumVariables
-    , cvhNumCustomTemplates
-
-    -- * TeardownTag
-    , TeardownTag
-    , teardownTag
-    , ttStopTeardownOnFailure
-    , ttTagName
-
-    -- * ListTemplatesResponse
-    , ListTemplatesResponse
-    , listTemplatesResponse
-    , ltrNextPageToken
-    , ltrTemplate
-
-    -- * ListTriggersResponse
-    , ListTriggersResponse
-    , listTriggersResponse
-    , lNextPageToken
-    , lTrigger
-
-    -- * Tag
-    , Tag
-    , tag
-    , tBlockingTriggerId
-    , tScheduleEndMs
-    , tParentFolderId
-    , tLiveOnly
-    , tContainerId
-    , tPriority
-    , tTeardownTag
-    , tPath
-    , tFingerprint
-    , tMonitoringMetadata
-    , tTagFiringOption
-    , tAccountId
-    , tTagId
-    , tName
-    , tTagManagerURL
-    , tBlockingRuleId
-    , tSetupTag
-    , tFiringTriggerId
-    , tWorkspaceId
-    , tType
-    , tScheduleStartMs
-    , tMonitoringMetadataTagNameKey
-    , tNotes
-    , tPaused
-    , tFiringRuleId
-    , tParameter
-
-    -- * ZoneTypeRestriction
-    , ZoneTypeRestriction
-    , zoneTypeRestriction
-    , ztrEnable
-    , ztrWhiteListedTypeId
-
-    -- * CreateContainerVersionResponse
-    , CreateContainerVersionResponse
-    , createContainerVersionResponse
-    , ccvrCompilerError
-    , ccvrNewWorkspacePath
-    , ccvrContainerVersion
-    , ccvrSyncStatus
-
-    -- * CreateContainerVersionRequestVersionOptions
-    , CreateContainerVersionRequestVersionOptions
-    , createContainerVersionRequestVersionOptions
-    , ccvrvoName
-    , ccvrvoNotes
-
-    -- * Workspace
-    , Workspace
-    , workspace
-    , wContainerId
-    , wPath
-    , wFingerprint
-    , wAccountId
-    , wName
-    , wTagManagerURL
-    , wWorkspaceId
-    , wDescription
-
-    -- * AccountsContainersWorkspacesBuilt_in_variablesDeleteType
-    , AccountsContainersWorkspacesBuilt_in_variablesDeleteType (..)
-
-    -- * Environment
-    , Environment
-    , environment
-    , eContainerId
-    , ePath
-    , eFingerprint
-    , eContainerVersionId
-    , eURL
-    , eAuthorizationCode
-    , eAccountId
-    , eName
-    , eTagManagerURL
-    , eAuthorizationTimestamp
-    , eEnableDebug
-    , eEnvironmentId
-    , eWorkspaceId
-    , eType
-    , eDescription
-
-    -- * AccountAccess
-    , AccountAccess
-    , accountAccess
-    , aaPermission
-
-    -- * TriggerType
-    , TriggerType (..)
-
-    -- * ListUserPermissionsResponse
-    , ListUserPermissionsResponse
-    , listUserPermissionsResponse
-    , luprNextPageToken
-    , luprUserPermission
-
-    -- * ContainerAccessPermission
-    , ContainerAccessPermission (..)
-
-    -- * ContainerUsageContextItem
-    , ContainerUsageContextItem (..)
-
-    -- * AccountsContainersWorkspacesBuilt_in_variablesCreateType
-    , AccountsContainersWorkspacesBuilt_in_variablesCreateType (..)
-
-    -- * CreateBuiltInVariableResponse
-    , CreateBuiltInVariableResponse
-    , createBuiltInVariableResponse
-    , cbivrBuiltInVariable
-
-    -- * ZoneChildContainer
-    , ZoneChildContainer
-    , zoneChildContainer
-    , zccPublicId
-    , zccNickname
-
-    -- * ConditionType
-    , ConditionType (..)
-
-    -- * ListAccountsResponse
-    , ListAccountsResponse
-    , listAccountsResponse
-    , larNextPageToken
-    , larAccount
-
-    -- * GalleryReference
-    , GalleryReference
-    , galleryReference
-    , grSignature
-    , grRepository
-    , grOwner
-    , grVersion
-    , grHost
-    , grIsModified
-
-    -- * MergeConflict
-    , MergeConflict
-    , mergeConflict
-    , mcEntityInBaseVersion
-    , mcEntityInWorkspace
-
-    -- * TagTagFiringOption
-    , TagTagFiringOption (..)
-
-    -- * Folder
-    , Folder
-    , folder
-    , fContainerId
-    , fPath
-    , fFingerprint
-    , fFolderId
-    , fAccountId
-    , fName
-    , fTagManagerURL
-    , fWorkspaceId
-    , fNotes
-
-    -- * ZoneBoundary
-    , ZoneBoundary
-    , zoneBoundary
-    , zbCustomEvaluationTriggerId
-    , zbCondition
-
-    -- * Variable
-    , Variable
-    , variable
-    , vScheduleEndMs
-    , vParentFolderId
-    , vContainerId
-    , vPath
-    , vFingerprint
-    , vVariableId
-    , vAccountId
-    , vDisablingTriggerId
-    , vName
-    , vTagManagerURL
-    , vFormatValue
-    , vWorkspaceId
-    , vType
-    , vScheduleStartMs
-    , vNotes
-    , vEnablingTriggerId
-    , vParameter
-
-    -- * Zone
-    , Zone
-    , zone
-    , zContainerId
-    , zPath
-    , zBoundary
-    , zFingerprint
-    , zZoneId
-    , zTypeRestriction
-    , zAccountId
-    , zName
-    , zTagManagerURL
-    , zChildContainer
-    , zWorkspaceId
-    , zNotes
-
-    -- * AccountAccessPermission
-    , AccountAccessPermission (..)
-
-    -- * RevertTemplateResponse
-    , RevertTemplateResponse
-    , revertTemplateResponse
-    , rtrTemplate
-
-    -- * SyncWorkspaceResponse
-    , SyncWorkspaceResponse
-    , syncWorkspaceResponse
-    , swrMergeConflict
-    , swrSyncStatus
-
-    -- * RevertTriggerResponse
-    , RevertTriggerResponse
-    , revertTriggerResponse
-    , rtrTrigger
-
-    -- * ParameterType
-    , ParameterType (..)
-
-    -- * Account
-    , Account
-    , account
-    , aPath
-    , aShareData
-    , aFingerprint
-    , aAccountId
-    , aName
-    , aTagManagerURL
-
-    -- * EntityChangeStatus
-    , EntityChangeStatus (..)
-
-    -- * GetWorkspaceStatusResponse
-    , GetWorkspaceStatusResponse
-    , getWorkspaceStatusResponse
-    , gwsrMergeConflict
-    , gwsrWorkspaceChange
-
-    -- * QuickPreviewResponse
-    , QuickPreviewResponse
-    , quickPreviewResponse
-    , qprCompilerError
-    , qprContainerVersion
-    , qprSyncStatus
-
-    -- * ListContainerVersionsResponse
-    , ListContainerVersionsResponse
-    , listContainerVersionsResponse
-    , lcvrNextPageToken
-    , lcvrContainerVersionHeader
-
-    -- * Container
-    , Container
-    , container
-    , cPublicId
-    , cUsageContext
-    , cContainerId
-    , cPath
-    , cFingerprint
-    , cAccountId
-    , cDomainName
-    , cName
-    , cTagManagerURL
-    , cNotes
-
-    -- * BuiltInVariable
-    , BuiltInVariable
-    , builtInVariable
-    , bivContainerId
-    , bivPath
-    , bivAccountId
-    , bivName
-    , bivWorkspaceId
-    , bivType
-
-    -- * UserPermission
-    , UserPermission
-    , userPermission
-    , upPath
-    , upAccountAccess
-    , upAccountId
-    , upEmailAddress
-    , upContainerAccess
-
-    -- * VariableFormatValueCaseConversionType
-    , VariableFormatValueCaseConversionType (..)
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * ContainerVersion
-    , ContainerVersion
-    , containerVersion
-    , cvTag
-    , cvContainerId
-    , cvPath
-    , cvFingerprint
-    , cvContainerVersionId
-    , cvFolder
-    , cvVariable
-    , cvZone
-    , cvAccountId
-    , cvName
-    , cvContainer
-    , cvBuiltInVariable
-    , cvTagManagerURL
-    , cvDeleted
-    , cvTrigger
-    , cvCustomTemplate
-    , cvDescription
-    , cvClient
-
-    -- * EnvironmentType
-    , EnvironmentType (..)
-
-    -- * SetupTag
-    , SetupTag
-    , setupTag
-    , stTagName
-    , stStopOnSetupFailure
-
-    -- * ListContainersResponse
-    , ListContainersResponse
-    , listContainersResponse
-    , lcrNextPageToken
-    , lcrContainer
-
-    -- * Trigger
-    , Trigger
-    , trigger
-    , triContinuousTimeMinMilliseconds
-    , triMaxTimerLengthSeconds
-    , triCustomEventFilter
-    , triParentFolderId
-    , triVisiblePercentageMax
-    , triContainerId
-    , triPath
-    , triSelector
-    , triTriggerId
-    , triCheckValidation
-    , triFingerprint
-    , triTotalTimeMinMilliseconds
-    , triAutoEventFilter
-    , triUniqueTriggerId
-    , triHorizontalScrollPercentageList
-    , triIntervalSeconds
-    , triVisiblePercentageMin
-    , triAccountId
-    , triName
-    , triInterval
-    , triTagManagerURL
-    , triWaitForTagsTimeout
-    , triLimit
-    , triVerticalScrollPercentageList
-    , triFilter
-    , triWorkspaceId
-    , triType
-    , triNotes
-    , triVisibilitySelector
-    , triEventName
-    , triWaitForTags
-    , triParameter
-
-    -- * ListTagsResponse
-    , ListTagsResponse
-    , listTagsResponse
-    , lisNextPageToken
-    , lisTag
-
-    -- * ListEnabledBuiltInVariablesResponse
-    , ListEnabledBuiltInVariablesResponse
-    , listEnabledBuiltInVariablesResponse
-    , lebivrNextPageToken
-    , lebivrBuiltInVariable
-
-    -- * CustomTemplate
-    , CustomTemplate
-    , customTemplate
-    , ctContainerId
-    , ctPath
-    , ctTemplateId
-    , ctFingerprint
-    , ctGalleryReference
-    , ctAccountId
-    , ctName
-    , ctTagManagerURL
-    , ctTemplateData
-    , ctWorkspaceId
-
-    -- * FolderEntities
-    , FolderEntities
-    , folderEntities
-    , feNextPageToken
-    , feTag
-    , feVariable
-    , feTrigger
-
-    -- * SyncStatus
-    , SyncStatus
-    , syncStatus
-    , ssSyncError
-    , ssMergeConflict
-
-    -- * RevertTagResponse
-    , RevertTagResponse
-    , revertTagResponse
-    , rtrTag
-
-    -- * Condition
-    , Condition
-    , condition
-    , cType
-    , cParameter
-
-    -- * Entity
-    , Entity
-    , entity
-    , eTag
-    , eFolder
-    , eVariable
-    , eChangeStatus
-    , eTrigger
-    , eClient
-
-    -- * ContainerAccess
-    , ContainerAccess
-    , containerAccess
-    , caContainerId
-    , caPermission
-
-    -- * VariableFormatValue
-    , VariableFormatValue
-    , variableFormatValue
-    , vfvConvertNullToValue
-    , vfvConvertTrueToValue
-    , vfvCaseConversionType
-    , vfvConvertFalseToValue
-    , vfvConvertUndefinedToValue
-
-    -- * RevertBuiltInVariableResponse
-    , RevertBuiltInVariableResponse
-    , revertBuiltInVariableResponse
-    , rbivrEnabled
-
-    -- * AccountsContainersWorkspacesBuilt_in_variablesRevertType
-    , AccountsContainersWorkspacesBuilt_in_variablesRevertType (..)
-
-    -- * Client
-    , Client
-    , client
-    , cliClientId
-    , cliParentFolderId
-    , cliContainerId
-    , cliPriority
-    , cliPath
-    , cliFingerprint
-    , cliAccountId
-    , cliName
-    , cliTagManagerURL
-    , cliWorkspaceId
-    , cliType
-    , cliNotes
-    , cliParameter
-
-    -- * Parameter
-    , Parameter
-    , parameter
-    , pList
-    , pValue
-    , pMap
-    , pKey
-    , pType
-    ) where
-
-import Network.Google.Prelude
-import Network.Google.TagManager.Types.Product
-import Network.Google.TagManager.Types.Sum
-
--- | Default request referring to version 'v2' of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
-tagManagerService :: ServiceConfig
-tagManagerService
-  = defaultService (ServiceId "tagmanager:v2")
-      "tagmanager.googleapis.com"
-
--- | View your Google Tag Manager container and its subcomponents
-tagManagerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
-tagManagerReadOnlyScope = Proxy
-
--- | Manage your Google Tag Manager container and its subcomponents,
--- excluding versioning and publishing
-tagManagerEditContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-tagManagerEditContainersScope = Proxy
-
--- | View and manage your Google Tag Manager accounts
-tagManagerManageAccountsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
-tagManagerManageAccountsScope = Proxy
+    tagManagerDeleteContainersScope,
+    tagManagerEditContainersScope,
+    tagManagerEditContainerversionsScope,
+    tagManagerManageAccountsScope,
+    tagManagerManageUsersScope,
+    tagManagerPublishScope,
+    tagManagerReadOnlyScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** Account
+    Account (..),
+    newAccount,
+
+    -- ** AccountAccess
+    AccountAccess (..),
+    newAccountAccess,
+
+    -- ** AccountAccess_Permission
+    AccountAccess_Permission (..),
+
+    -- ** BuiltInVariable
+    BuiltInVariable (..),
+    newBuiltInVariable,
+
+    -- ** BuiltInVariable_Type
+    BuiltInVariable_Type (..),
+
+    -- ** Client
+    Client (..),
+    newClient,
+
+    -- ** Condition
+    Condition (..),
+    newCondition,
+
+    -- ** Condition_Type
+    Condition_Type (..),
+
+    -- ** Container
+    Container (..),
+    newContainer,
+
+    -- ** Container_UsageContextItem
+    Container_UsageContextItem (..),
+
+    -- ** ContainerAccess
+    ContainerAccess (..),
+    newContainerAccess,
+
+    -- ** ContainerAccess_Permission
+    ContainerAccess_Permission (..),
+
+    -- ** ContainerVersion
+    ContainerVersion (..),
+    newContainerVersion,
+
+    -- ** ContainerVersionHeader
+    ContainerVersionHeader (..),
+    newContainerVersionHeader,
+
+    -- ** CreateBuiltInVariableResponse
+    CreateBuiltInVariableResponse (..),
+    newCreateBuiltInVariableResponse,
+
+    -- ** CreateContainerVersionRequestVersionOptions
+    CreateContainerVersionRequestVersionOptions (..),
+    newCreateContainerVersionRequestVersionOptions,
+
+    -- ** CreateContainerVersionResponse
+    CreateContainerVersionResponse (..),
+    newCreateContainerVersionResponse,
+
+    -- ** CustomTemplate
+    CustomTemplate (..),
+    newCustomTemplate,
+
+    -- ** Entity
+    Entity (..),
+    newEntity,
+
+    -- ** Entity_ChangeStatus
+    Entity_ChangeStatus (..),
+
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
+
+    -- ** Environment_Type
+    Environment_Type (..),
+
+    -- ** Folder
+    Folder (..),
+    newFolder,
+
+    -- ** FolderEntities
+    FolderEntities (..),
+    newFolderEntities,
+
+    -- ** GalleryReference
+    GalleryReference (..),
+    newGalleryReference,
+
+    -- ** GetWorkspaceStatusResponse
+    GetWorkspaceStatusResponse (..),
+    newGetWorkspaceStatusResponse,
+
+    -- ** ListAccountsResponse
+    ListAccountsResponse (..),
+    newListAccountsResponse,
+
+    -- ** ListClientsResponse
+    ListClientsResponse (..),
+    newListClientsResponse,
+
+    -- ** ListContainerVersionsResponse
+    ListContainerVersionsResponse (..),
+    newListContainerVersionsResponse,
+
+    -- ** ListContainersResponse
+    ListContainersResponse (..),
+    newListContainersResponse,
+
+    -- ** ListEnabledBuiltInVariablesResponse
+    ListEnabledBuiltInVariablesResponse (..),
+    newListEnabledBuiltInVariablesResponse,
+
+    -- ** ListEnvironmentsResponse
+    ListEnvironmentsResponse (..),
+    newListEnvironmentsResponse,
+
+    -- ** ListFoldersResponse
+    ListFoldersResponse (..),
+    newListFoldersResponse,
+
+    -- ** ListTagsResponse
+    ListTagsResponse (..),
+    newListTagsResponse,
+
+    -- ** ListTemplatesResponse
+    ListTemplatesResponse (..),
+    newListTemplatesResponse,
+
+    -- ** ListTriggersResponse
+    ListTriggersResponse (..),
+    newListTriggersResponse,
+
+    -- ** ListUserPermissionsResponse
+    ListUserPermissionsResponse (..),
+    newListUserPermissionsResponse,
+
+    -- ** ListVariablesResponse
+    ListVariablesResponse (..),
+    newListVariablesResponse,
+
+    -- ** ListWorkspacesResponse
+    ListWorkspacesResponse (..),
+    newListWorkspacesResponse,
+
+    -- ** ListZonesResponse
+    ListZonesResponse (..),
+    newListZonesResponse,
+
+    -- ** MergeConflict
+    MergeConflict (..),
+    newMergeConflict,
+
+    -- ** Parameter
+    Parameter (..),
+    newParameter,
+
+    -- ** Parameter_Type
+    Parameter_Type (..),
+
+    -- ** PublishContainerVersionResponse
+    PublishContainerVersionResponse (..),
+    newPublishContainerVersionResponse,
+
+    -- ** QuickPreviewResponse
+    QuickPreviewResponse (..),
+    newQuickPreviewResponse,
+
+    -- ** RevertBuiltInVariableResponse
+    RevertBuiltInVariableResponse (..),
+    newRevertBuiltInVariableResponse,
+
+    -- ** RevertClientResponse
+    RevertClientResponse (..),
+    newRevertClientResponse,
+
+    -- ** RevertFolderResponse
+    RevertFolderResponse (..),
+    newRevertFolderResponse,
+
+    -- ** RevertTagResponse
+    RevertTagResponse (..),
+    newRevertTagResponse,
+
+    -- ** RevertTemplateResponse
+    RevertTemplateResponse (..),
+    newRevertTemplateResponse,
+
+    -- ** RevertTriggerResponse
+    RevertTriggerResponse (..),
+    newRevertTriggerResponse,
+
+    -- ** RevertVariableResponse
+    RevertVariableResponse (..),
+    newRevertVariableResponse,
+
+    -- ** RevertZoneResponse
+    RevertZoneResponse (..),
+    newRevertZoneResponse,
+
+    -- ** SetupTag
+    SetupTag (..),
+    newSetupTag,
+
+    -- ** SyncStatus
+    SyncStatus (..),
+    newSyncStatus,
+
+    -- ** SyncWorkspaceResponse
+    SyncWorkspaceResponse (..),
+    newSyncWorkspaceResponse,
+
+    -- ** Tag
+    Tag (..),
+    newTag,
+
+    -- ** Tag_TagFiringOption
+    Tag_TagFiringOption (..),
+
+    -- ** TagConsentSetting
+    TagConsentSetting (..),
+    newTagConsentSetting,
+
+    -- ** TagConsentSetting_ConsentStatus
+    TagConsentSetting_ConsentStatus (..),
+
+    -- ** TeardownTag
+    TeardownTag (..),
+    newTeardownTag,
+
+    -- ** Trigger
+    Trigger (..),
+    newTrigger,
+
+    -- ** Trigger_Type
+    Trigger_Type (..),
+
+    -- ** UserPermission
+    UserPermission (..),
+    newUserPermission,
+
+    -- ** Variable
+    Variable (..),
+    newVariable,
+
+    -- ** VariableFormatValue
+    VariableFormatValue (..),
+    newVariableFormatValue,
+
+    -- ** VariableFormatValue_CaseConversionType
+    VariableFormatValue_CaseConversionType (..),
+
+    -- ** Workspace
+    Workspace (..),
+    newWorkspace,
+
+    -- ** Zone
+    Zone (..),
+    newZone,
+
+    -- ** ZoneBoundary
+    ZoneBoundary (..),
+    newZoneBoundary,
+
+    -- ** ZoneChildContainer
+    ZoneChildContainer (..),
+    newZoneChildContainer,
+
+    -- ** ZoneTypeRestriction
+    ZoneTypeRestriction (..),
+    newZoneTypeRestriction,
+
+    -- ** AccountsContainersWorkspacesBuilt_in_variablesCreateType
+    AccountsContainersWorkspacesBuilt_in_variablesCreateType (..),
+
+    -- ** AccountsContainersWorkspacesBuilt_in_variablesDeleteType
+    AccountsContainersWorkspacesBuilt_in_variablesDeleteType (..),
+
+    -- ** AccountsContainersWorkspacesBuilt_in_variablesRevertType
+    AccountsContainersWorkspacesBuilt_in_variablesRevertType (..),
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.TagManager.Internal.Product
+import Network.Google.TagManager.Internal.Sum
+
+-- | Default request referring to version @v2@ of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
+tagManagerService :: Core.ServiceConfig
+tagManagerService =
+  Core.defaultService
+    (Core.ServiceId "tagmanager:v2")
+    "tagmanager.googleapis.com"
 
 -- | Delete your Google Tag Manager containers
-tagManagerDeleteContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
-tagManagerDeleteContainersScope = Proxy
+tagManagerDeleteContainersScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
+tagManagerDeleteContainersScope = Core.Proxy
 
--- | Manage user permissions of your Google Tag Manager account and container
-tagManagerManageUsersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-tagManagerManageUsersScope = Proxy
-
--- | Publish your Google Tag Manager container versions
-tagManagerPublishScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
-tagManagerPublishScope = Proxy
+-- | Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing
+tagManagerEditContainersScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+tagManagerEditContainersScope = Core.Proxy
 
 -- | Manage your Google Tag Manager container versions
-tagManagerEditContainerversionsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-tagManagerEditContainerversionsScope = Proxy
+tagManagerEditContainerversionsScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
+tagManagerEditContainerversionsScope = Core.Proxy
+
+-- | View and manage your Google Tag Manager accounts
+tagManagerManageAccountsScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
+tagManagerManageAccountsScope = Core.Proxy
+
+-- | Manage user permissions of your Google Tag Manager account and container
+tagManagerManageUsersScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+tagManagerManageUsersScope = Core.Proxy
+
+-- | Publish your Google Tag Manager container versions
+tagManagerPublishScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
+tagManagerPublishScope = Core.Proxy
+
+-- | View your Google Tag Manager container and its subcomponents
+tagManagerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
+tagManagerReadOnlyScope = Core.Proxy
