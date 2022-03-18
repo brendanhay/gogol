@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Versions.List
+-- Module      : Gogol.DataFusion.Projects.Locations.Versions.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists possible versions for Data Fusion instances in the specified project and location.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.versions.list@.
-module Network.Google.DataFusion.Projects.Locations.Versions.List
+module Gogol.DataFusion.Projects.Locations.Versions.List
   ( -- * Resource
     DataFusionProjectsLocationsVersionsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DataFusion.Projects.Locations.Versions.List
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datafusion.projects.locations.versions.list@ method which the
 -- 'DataFusionProjectsLocationsVersionsList' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion
+-- Module      : Gogol.DataFusion
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Cloud Data Fusion is a fully-managed, cloud native, enterprise data integration service for quickly building and managing data pipelines. It provides a graphical interface to increase time efficiency and reduce complexity, and allows business users, developers, and data scientists to easily and reliably build scalable data integration solutions to cleanse, prepare, blend, transfer and transform data without having to wrestle with infrastructure.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference>
-module Network.Google.DataFusion
+module Gogol.DataFusion
   ( -- * Configuration
     dataFusionService,
 
@@ -274,20 +274,20 @@ module Network.Google.DataFusion
   )
 where
 
-import Network.Google.DataFusion.Projects.Locations.Get
-import Network.Google.DataFusion.Projects.Locations.Instances.Create
-import Network.Google.DataFusion.Projects.Locations.Instances.Delete
-import Network.Google.DataFusion.Projects.Locations.Instances.Get
-import Network.Google.DataFusion.Projects.Locations.Instances.GetIamPolicy
-import Network.Google.DataFusion.Projects.Locations.Instances.List
-import Network.Google.DataFusion.Projects.Locations.Instances.Patch
-import Network.Google.DataFusion.Projects.Locations.Instances.Restart
-import Network.Google.DataFusion.Projects.Locations.Instances.SetIamPolicy
-import Network.Google.DataFusion.Projects.Locations.Instances.TestIamPermissions
-import Network.Google.DataFusion.Projects.Locations.List
-import Network.Google.DataFusion.Projects.Locations.Operations.Cancel
-import Network.Google.DataFusion.Projects.Locations.Operations.Delete
-import Network.Google.DataFusion.Projects.Locations.Operations.Get
-import Network.Google.DataFusion.Projects.Locations.Operations.List
-import Network.Google.DataFusion.Projects.Locations.Versions.List
-import Network.Google.DataFusion.Types
+import Gogol.DataFusion.Projects.Locations.Get
+import Gogol.DataFusion.Projects.Locations.Instances.Create
+import Gogol.DataFusion.Projects.Locations.Instances.Delete
+import Gogol.DataFusion.Projects.Locations.Instances.Get
+import Gogol.DataFusion.Projects.Locations.Instances.GetIamPolicy
+import Gogol.DataFusion.Projects.Locations.Instances.List
+import Gogol.DataFusion.Projects.Locations.Instances.Patch
+import Gogol.DataFusion.Projects.Locations.Instances.Restart
+import Gogol.DataFusion.Projects.Locations.Instances.SetIamPolicy
+import Gogol.DataFusion.Projects.Locations.Instances.TestIamPermissions
+import Gogol.DataFusion.Projects.Locations.List
+import Gogol.DataFusion.Projects.Locations.Operations.Cancel
+import Gogol.DataFusion.Projects.Locations.Operations.Delete
+import Gogol.DataFusion.Projects.Locations.Operations.Get
+import Gogol.DataFusion.Projects.Locations.Operations.List
+import Gogol.DataFusion.Projects.Locations.Versions.List
+import Gogol.DataFusion.Types

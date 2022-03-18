@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Get
+-- Module      : Gogol.DataFusion.Projects.Locations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets information about a location.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.get@.
-module Network.Google.DataFusion.Projects.Locations.Get
+module Gogol.DataFusion.Projects.Locations.Get
   ( -- * Resource
     DataFusionProjectsLocationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DataFusion.Projects.Locations.Get
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datafusion.projects.locations.get@ method which the
 -- 'DataFusionProjectsLocationsGet' request conforms to.

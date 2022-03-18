@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Internal.Product
+-- Module      : Gogol.DataFusion.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.DataFusion.Internal.Product
+module Gogol.DataFusion.Internal.Product
   ( -- * Accelerator
     Accelerator (..),
     newAccelerator,
@@ -156,8 +156,8 @@ module Network.Google.DataFusion.Internal.Product
   )
 where
 
-import Network.Google.DataFusion.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Identifies Data Fusion accelerators for an instance.
 --
