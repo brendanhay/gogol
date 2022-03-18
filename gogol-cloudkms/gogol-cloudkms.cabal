@@ -39,61 +39,62 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudKMS
-    Network.Google.CloudKMS.Projects.Locations.EkmConnections.Create
-    Network.Google.CloudKMS.Projects.Locations.EkmConnections.Get
-    Network.Google.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.EkmConnections.List
-    Network.Google.CloudKMS.Projects.Locations.EkmConnections.Patch
-    Network.Google.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
-    Network.Google.CloudKMS.Projects.Locations.GenerateRandomBytes
-    Network.Google.CloudKMS.Projects.Locations.Get
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.Create
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricSign
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Create
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacSign
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacVerify
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.GetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.TestIamPermissions
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.Get
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.GetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIamPermissions
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.List
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
-    Network.Google.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
-    Network.Google.CloudKMS.Projects.Locations.List
-    Network.Google.CloudKMS.Types
+    Gogol.CloudKMS
+    Gogol.CloudKMS.Projects.Locations.EkmConnections.Create
+    Gogol.CloudKMS.Projects.Locations.EkmConnections.Get
+    Gogol.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.EkmConnections.List
+    Gogol.CloudKMS.Projects.Locations.EkmConnections.Patch
+    Gogol.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
+    Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
+    Gogol.CloudKMS.Projects.Locations.Get
+    Gogol.CloudKMS.Projects.Locations.KeyRings.Create
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricSign
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Create
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacSign
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacVerify
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.GetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.TestIamPermissions
+    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
+    Gogol.CloudKMS.Projects.Locations.KeyRings.Get
+    Gogol.CloudKMS.Projects.Locations.KeyRings.GetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
+    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
+    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
+    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIamPermissions
+    Gogol.CloudKMS.Projects.Locations.KeyRings.List
+    Gogol.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
+    Gogol.CloudKMS.Projects.Locations.List
+    Gogol.CloudKMS.Types
 
   other-modules:
-    Network.Google.CloudKMS.Internal.Product
-    Network.Google.CloudKMS.Internal.Sum
+    Gogol.CloudKMS.Internal.Product
+    Gogol.CloudKMS.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
