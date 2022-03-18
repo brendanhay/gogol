@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceControl.Internal.Product
+-- Module      : Gogol.ServiceControl.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ServiceControl.Internal.Product
+module Gogol.ServiceControl.Internal.Product
   ( -- * Api
     Api (..),
     newApi,
@@ -216,8 +216,8 @@ module Network.Google.ServiceControl.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceControl.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceControl.Internal.Sum
 
 -- | This message defines attributes associated with API operations, such as a network API request. The terminology is based on the conventions used by Google APIs, Istio, and OpenAPI.
 --

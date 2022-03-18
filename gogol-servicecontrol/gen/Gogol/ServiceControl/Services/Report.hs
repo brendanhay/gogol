@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceControl.Services.Report
+-- Module      : Gogol.ServiceControl.Services.Report
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Private Preview. This feature is only available for approved services. This method provides telemetry reporting for services that are integrated with </service-infrastructure Service Infrastructure>. It reports a list of operations that have occurred on a service. It must be called after the operations have been executed. For more information, see </service-infrastructure/docs/telemetry-reporting Telemetry Reporting>. NOTE: The telemetry reporting has a hard limit of 1000 operations and 1MB per Report call. It is recommended to have no more than 100 operations per call. This method requires the @servicemanagement.services.report@ permission on the specified service. For more information, see <https://cloud.google.com/service-infrastructure/docs/service-control/access-control Service Control API Access Control>.
 --
 -- /See:/ <https://cloud.google.com/service-control/ Service Control API Reference> for @servicecontrol.services.report@.
-module Network.Google.ServiceControl.Services.Report
+module Gogol.ServiceControl.Services.Report
   ( -- * Resource
     ServiceControlServicesReportResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceControl.Services.Report
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceControl.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceControl.Types
 
 -- | A resource alias for @servicecontrol.services.report@ method which the
 -- 'ServiceControlServicesReport' request conforms to.
