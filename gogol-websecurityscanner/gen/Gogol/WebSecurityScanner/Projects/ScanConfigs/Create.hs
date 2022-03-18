@@ -19,57 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
+-- Module      : Gogol.WebSecurityScanner.Projects.ScanConfigs.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops a ScanRun. The stopped ScanRun is returned.
+-- Creates a new ScanConfig.
 --
--- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.stop@.
-module Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.create@.
+module Gogol.WebSecurityScanner.Projects.ScanConfigs.Create
   ( -- * Resource
-    WebSecurityScannerProjectsScanConfigsScanRunsStopResource,
+    WebSecurityScannerProjectsScanConfigsCreateResource,
 
     -- ** Constructing a Request
-    newWebSecurityScannerProjectsScanConfigsScanRunsStop,
-    WebSecurityScannerProjectsScanConfigsScanRunsStop,
+    newWebSecurityScannerProjectsScanConfigsCreate,
+    WebSecurityScannerProjectsScanConfigsCreate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebSecurityScanner.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebSecurityScanner.Types
 
--- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.stop@ method which the
--- 'WebSecurityScannerProjectsScanConfigsScanRunsStop' request conforms to.
-type WebSecurityScannerProjectsScanConfigsScanRunsStopResource =
+-- | A resource alias for @websecurityscanner.projects.scanConfigs.create@ method which the
+-- 'WebSecurityScannerProjectsScanConfigsCreate' request conforms to.
+type WebSecurityScannerProjectsScanConfigsCreateResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "stop" Core.Text
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "scanConfigs"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] StopScanRunRequest
-    Core.:> Core.Post '[Core.JSON] ScanRun
+    Core.:> Core.ReqBody '[Core.JSON] ScanConfig
+    Core.:> Core.Post '[Core.JSON] ScanConfig
 
--- | Stops a ScanRun. The stopped ScanRun is returned.
+-- | Creates a new ScanConfig.
 --
--- /See:/ 'newWebSecurityScannerProjectsScanConfigsScanRunsStop' smart constructor.
-data WebSecurityScannerProjectsScanConfigsScanRunsStop = WebSecurityScannerProjectsScanConfigsScanRunsStop
+-- /See:/ 'newWebSecurityScannerProjectsScanConfigsCreate' smart constructor.
+data WebSecurityScannerProjectsScanConfigsCreate = WebSecurityScannerProjectsScanConfigsCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the ScanRun to be stopped. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\/scanRuns\/{scanRunId}\'.
-    name :: Core.Text,
+    -- | Required. The parent resource name where the scan is created, which should be a project resource name in the format \'projects\/{projectId}\'.
+    parent :: Core.Text,
     -- | Multipart request metadata.
-    payload :: StopScanRunRequest,
+    payload :: ScanConfig,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,19 +78,19 @@ data WebSecurityScannerProjectsScanConfigsScanRunsStop = WebSecurityScannerProje
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebSecurityScannerProjectsScanConfigsScanRunsStop' with the minimum fields required to make a request.
-newWebSecurityScannerProjectsScanConfigsScanRunsStop ::
-  -- |  Required. The resource name of the ScanRun to be stopped. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\/scanRuns\/{scanRunId}\'. See 'name'.
+-- | Creates a value of 'WebSecurityScannerProjectsScanConfigsCreate' with the minimum fields required to make a request.
+newWebSecurityScannerProjectsScanConfigsCreate ::
+  -- |  Required. The parent resource name where the scan is created, which should be a project resource name in the format \'projects\/{projectId}\'. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  StopScanRunRequest ->
-  WebSecurityScannerProjectsScanConfigsScanRunsStop
-newWebSecurityScannerProjectsScanConfigsScanRunsStop name payload =
-  WebSecurityScannerProjectsScanConfigsScanRunsStop
+  ScanConfig ->
+  WebSecurityScannerProjectsScanConfigsCreate
+newWebSecurityScannerProjectsScanConfigsCreate parent payload =
+  WebSecurityScannerProjectsScanConfigsCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
+      parent = parent,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -97,20 +98,19 @@ newWebSecurityScannerProjectsScanConfigsScanRunsStop name payload =
 
 instance
   Core.GoogleRequest
-    WebSecurityScannerProjectsScanConfigsScanRunsStop
+    WebSecurityScannerProjectsScanConfigsCreate
   where
   type
-    Rs
-      WebSecurityScannerProjectsScanConfigsScanRunsStop =
-      ScanRun
+    Rs WebSecurityScannerProjectsScanConfigsCreate =
+      ScanConfig
   type
     Scopes
-      WebSecurityScannerProjectsScanConfigsScanRunsStop =
+      WebSecurityScannerProjectsScanConfigsCreate =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    WebSecurityScannerProjectsScanConfigsScanRunsStop {..} =
+    WebSecurityScannerProjectsScanConfigsCreate {..} =
       go
-        name
+        parent
         xgafv
         accessToken
         callback
@@ -124,6 +124,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  WebSecurityScannerProjectsScanConfigsScanRunsStopResource
+                  WebSecurityScannerProjectsScanConfigsCreateResource
             )
             Core.mempty

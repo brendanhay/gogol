@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebSecurityScanner.Projects.ScanConfigs.Start
+-- Module      : Gogol.WebSecurityScanner.Projects.ScanConfigs.Start
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Start a ScanRun according to the given ScanConfig.
 --
 -- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.start@.
-module Network.Google.WebSecurityScanner.Projects.ScanConfigs.Start
+module Gogol.WebSecurityScanner.Projects.ScanConfigs.Start
   ( -- * Resource
     WebSecurityScannerProjectsScanConfigsStartResource,
 
@@ -39,8 +39,8 @@ module Network.Google.WebSecurityScanner.Projects.ScanConfigs.Start
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebSecurityScanner.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.start@ method which the
 -- 'WebSecurityScannerProjectsScanConfigsStart' request conforms to.

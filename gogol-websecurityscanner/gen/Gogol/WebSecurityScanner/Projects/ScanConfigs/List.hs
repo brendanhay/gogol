@@ -19,35 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.List
+-- Module      : Gogol.WebSecurityScanner.Projects.ScanConfigs.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists ScanRuns under a given ScanConfig, in descending order of ScanRun stop time.
+-- Lists ScanConfigs under a given project.
 --
--- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.list@.
-module Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.List
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.list@.
+module Gogol.WebSecurityScanner.Projects.ScanConfigs.List
   ( -- * Resource
-    WebSecurityScannerProjectsScanConfigsScanRunsListResource,
+    WebSecurityScannerProjectsScanConfigsListResource,
 
     -- ** Constructing a Request
-    newWebSecurityScannerProjectsScanConfigsScanRunsList,
-    WebSecurityScannerProjectsScanConfigsScanRunsList,
+    newWebSecurityScannerProjectsScanConfigsList,
+    WebSecurityScannerProjectsScanConfigsList,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebSecurityScanner.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebSecurityScanner.Types
 
--- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.list@ method which the
--- 'WebSecurityScannerProjectsScanConfigsScanRunsList' request conforms to.
-type WebSecurityScannerProjectsScanConfigsScanRunsListResource =
+-- | A resource alias for @websecurityscanner.projects.scanConfigs.list@ method which the
+-- 'WebSecurityScannerProjectsScanConfigsList' request conforms to.
+type WebSecurityScannerProjectsScanConfigsListResource =
   "v1"
     Core.:> Core.Capture "parent" Core.Text
-    Core.:> "scanRuns"
+    Core.:> "scanConfigs"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -56,23 +56,23 @@ type WebSecurityScannerProjectsScanConfigsScanRunsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListScanRunsResponse
+    Core.:> Core.Get '[Core.JSON] ListScanConfigsResponse
 
--- | Lists ScanRuns under a given ScanConfig, in descending order of ScanRun stop time.
+-- | Lists ScanConfigs under a given project.
 --
--- /See:/ 'newWebSecurityScannerProjectsScanConfigsScanRunsList' smart constructor.
-data WebSecurityScannerProjectsScanConfigsScanRunsList = WebSecurityScannerProjectsScanConfigsScanRunsList
+-- /See:/ 'newWebSecurityScannerProjectsScanConfigsList' smart constructor.
+data WebSecurityScannerProjectsScanConfigsList = WebSecurityScannerProjectsScanConfigsList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The maximum number of ScanRuns to return, can be limited by server. If not specified or not positive, the implementation will select a reasonable value.
+    -- | The maximum number of ScanConfigs to return, can be limited by server. If not specified or not positive, the implementation will select a reasonable value.
     pageSize :: (Core.Maybe Core.Int32),
     -- | A token identifying a page of results to be returned. This should be a @next_page_token@ value returned from a previous List request. If unspecified, the first page of results is returned.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The parent resource name, which should be a scan resource name in the format \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'.
+    -- | Required. The parent resource name, which should be a project resource name in the format \'projects\/{projectId}\'.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,13 +81,13 @@ data WebSecurityScannerProjectsScanConfigsScanRunsList = WebSecurityScannerProje
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebSecurityScannerProjectsScanConfigsScanRunsList' with the minimum fields required to make a request.
-newWebSecurityScannerProjectsScanConfigsScanRunsList ::
-  -- |  Required. The parent resource name, which should be a scan resource name in the format \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'. See 'parent'.
+-- | Creates a value of 'WebSecurityScannerProjectsScanConfigsList' with the minimum fields required to make a request.
+newWebSecurityScannerProjectsScanConfigsList ::
+  -- |  Required. The parent resource name, which should be a project resource name in the format \'projects\/{projectId}\'. See 'parent'.
   Core.Text ->
-  WebSecurityScannerProjectsScanConfigsScanRunsList
-newWebSecurityScannerProjectsScanConfigsScanRunsList parent =
-  WebSecurityScannerProjectsScanConfigsScanRunsList
+  WebSecurityScannerProjectsScanConfigsList
+newWebSecurityScannerProjectsScanConfigsList parent =
+  WebSecurityScannerProjectsScanConfigsList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -100,18 +100,16 @@ newWebSecurityScannerProjectsScanConfigsScanRunsList parent =
 
 instance
   Core.GoogleRequest
-    WebSecurityScannerProjectsScanConfigsScanRunsList
+    WebSecurityScannerProjectsScanConfigsList
   where
   type
-    Rs
-      WebSecurityScannerProjectsScanConfigsScanRunsList =
-      ListScanRunsResponse
+    Rs WebSecurityScannerProjectsScanConfigsList =
+      ListScanConfigsResponse
   type
-    Scopes
-      WebSecurityScannerProjectsScanConfigsScanRunsList =
+    Scopes WebSecurityScannerProjectsScanConfigsList =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    WebSecurityScannerProjectsScanConfigsScanRunsList {..} =
+    WebSecurityScannerProjectsScanConfigsList {..} =
       go
         parent
         xgafv
@@ -128,6 +126,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  WebSecurityScannerProjectsScanConfigsScanRunsListResource
+                  WebSecurityScannerProjectsScanConfigsListResource
             )
             Core.mempty

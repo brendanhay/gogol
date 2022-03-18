@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
+-- Module      : Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets a ScanRun.
 --
 -- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.get@.
-module Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
+module Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
   ( -- * Resource
     WebSecurityScannerProjectsScanConfigsScanRunsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebSecurityScanner.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.get@ method which the
 -- 'WebSecurityScannerProjectsScanConfigsScanRunsGet' request conforms to.
