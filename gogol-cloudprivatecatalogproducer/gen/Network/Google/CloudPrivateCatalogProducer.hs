@@ -1,386 +1,349 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudPrivateCatalogProducer
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables cloud users to manage and share enterprise catalogs intheir
--- organizations.
+-- Enables cloud users to manage and share enterprise catalogs intheir organizations.
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference>
 module Network.Google.CloudPrivateCatalogProducer
-    (
-    -- * Service Configuration
-      cloudPrivateCatalogProducerService
+  ( -- * Configuration
+    cloudPrivateCatalogProducerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , CloudPrivateCatalogProducerAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.create
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Create
+    CloudPrivateCatalogProducerCatalogsAssociationsCreateResource,
+    newCloudPrivateCatalogProducerCatalogsAssociationsCreate,
+    CloudPrivateCatalogProducerCatalogsAssociationsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.delete
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
+    CloudPrivateCatalogProducerCatalogsAssociationsDeleteResource,
+    newCloudPrivateCatalogProducerCatalogsAssociationsDelete,
+    CloudPrivateCatalogProducerCatalogsAssociationsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.get
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Get
+    CloudPrivateCatalogProducerCatalogsAssociationsGetResource,
+    newCloudPrivateCatalogProducerCatalogsAssociationsGet,
+    CloudPrivateCatalogProducerCatalogsAssociationsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.list
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.List
+    CloudPrivateCatalogProducerCatalogsAssociationsListResource,
+    newCloudPrivateCatalogProducerCatalogsAssociationsList,
+    CloudPrivateCatalogProducerCatalogsAssociationsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.create
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Create
+    CloudPrivateCatalogProducerCatalogsCreateResource,
+    newCloudPrivateCatalogProducerCatalogsCreate,
+    CloudPrivateCatalogProducerCatalogsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.delete
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Delete
+    CloudPrivateCatalogProducerCatalogsDeleteResource,
+    newCloudPrivateCatalogProducerCatalogsDelete,
+    CloudPrivateCatalogProducerCatalogsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.get
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Get
+    CloudPrivateCatalogProducerCatalogsGetResource,
+    newCloudPrivateCatalogProducerCatalogsGet,
+    CloudPrivateCatalogProducerCatalogsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.getIamPolicy
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
+    CloudPrivateCatalogProducerCatalogsGetIamPolicyResource,
+    newCloudPrivateCatalogProducerCatalogsGetIamPolicy,
+    CloudPrivateCatalogProducerCatalogsGetIamPolicy,
 
     -- ** cloudprivatecatalogproducer.catalogs.list
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.List
+    CloudPrivateCatalogProducerCatalogsListResource,
+    newCloudPrivateCatalogProducerCatalogsList,
+    CloudPrivateCatalogProducerCatalogsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.patch
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Patch
+    CloudPrivateCatalogProducerCatalogsPatchResource,
+    newCloudPrivateCatalogProducerCatalogsPatch,
+    CloudPrivateCatalogProducerCatalogsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.copy
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Copy
+    CloudPrivateCatalogProducerCatalogsProductsCopyResource,
+    newCloudPrivateCatalogProducerCatalogsProductsCopy,
+    CloudPrivateCatalogProducerCatalogsProductsCopy,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.create
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Create
+    CloudPrivateCatalogProducerCatalogsProductsCreateResource,
+    newCloudPrivateCatalogProducerCatalogsProductsCreate,
+    CloudPrivateCatalogProducerCatalogsProductsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.delete
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Delete
+    CloudPrivateCatalogProducerCatalogsProductsDeleteResource,
+    newCloudPrivateCatalogProducerCatalogsProductsDelete,
+    CloudPrivateCatalogProducerCatalogsProductsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.get
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Get
+    CloudPrivateCatalogProducerCatalogsProductsGetResource,
+    newCloudPrivateCatalogProducerCatalogsProductsGet,
+    CloudPrivateCatalogProducerCatalogsProductsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.icons.upload
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
+    CloudPrivateCatalogProducerCatalogsProductsIconsUploadResource,
+    newCloudPrivateCatalogProducerCatalogsProductsIconsUpload,
+    CloudPrivateCatalogProducerCatalogsProductsIconsUpload,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.list
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.List
+    CloudPrivateCatalogProducerCatalogsProductsListResource,
+    newCloudPrivateCatalogProducerCatalogsProductsList,
+    CloudPrivateCatalogProducerCatalogsProductsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.patch
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Patch
+    CloudPrivateCatalogProducerCatalogsProductsPatchResource,
+    newCloudPrivateCatalogProducerCatalogsProductsPatch,
+    CloudPrivateCatalogProducerCatalogsProductsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.create
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
+    CloudPrivateCatalogProducerCatalogsProductsVersionsCreateResource,
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsCreate,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.delete
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
+    CloudPrivateCatalogProducerCatalogsProductsVersionsDeleteResource,
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsDelete,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.get
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
+    CloudPrivateCatalogProducerCatalogsProductsVersionsGetResource,
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsGet,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.list
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
+    CloudPrivateCatalogProducerCatalogsProductsVersionsListResource,
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsList,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.patch
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
+    CloudPrivateCatalogProducerCatalogsProductsVersionsPatchResource,
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsPatch,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.setIamPolicy
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.SetIAMPolicy
+    CloudPrivateCatalogProducerCatalogsSetIamPolicyResource,
+    newCloudPrivateCatalogProducerCatalogsSetIamPolicy,
+    CloudPrivateCatalogProducerCatalogsSetIamPolicy,
 
     -- ** cloudprivatecatalogproducer.catalogs.testIamPermissions
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.TestIAMPermissions
+    CloudPrivateCatalogProducerCatalogsTestIamPermissionsResource,
+    newCloudPrivateCatalogProducerCatalogsTestIamPermissions,
+    CloudPrivateCatalogProducerCatalogsTestIamPermissions,
 
     -- ** cloudprivatecatalogproducer.catalogs.undelete
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Undelete
+    CloudPrivateCatalogProducerCatalogsUndeleteResource,
+    newCloudPrivateCatalogProducerCatalogsUndelete,
+    CloudPrivateCatalogProducerCatalogsUndelete,
 
     -- ** cloudprivatecatalogproducer.operations.cancel
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Cancel
+    CloudPrivateCatalogProducerOperationsCancelResource,
+    newCloudPrivateCatalogProducerOperationsCancel,
+    CloudPrivateCatalogProducerOperationsCancel,
 
     -- ** cloudprivatecatalogproducer.operations.delete
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Delete
+    CloudPrivateCatalogProducerOperationsDeleteResource,
+    newCloudPrivateCatalogProducerOperationsDelete,
+    CloudPrivateCatalogProducerOperationsDelete,
 
     -- ** cloudprivatecatalogproducer.operations.get
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Get
+    CloudPrivateCatalogProducerOperationsGetResource,
+    newCloudPrivateCatalogProducerOperationsGet,
+    CloudPrivateCatalogProducerOperationsGet,
 
     -- ** cloudprivatecatalogproducer.operations.list
-    , module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.List
+    CloudPrivateCatalogProducerOperationsListResource,
+    newCloudPrivateCatalogProducerOperationsList,
+    CloudPrivateCatalogProducerOperationsList,
 
     -- * Types
 
-    -- ** GoogleRpcStatus
-    , GoogleRpcStatus
-    , googleRpcStatus
-    , grsDetails
-    , grsCode
-    , grsMessage
-
-    -- ** GoogleIAMV1AuditLogConfigLogType
-    , GoogleIAMV1AuditLogConfigLogType (..)
-
-    -- ** GoogleLongrunningOperationMetadata
-    , GoogleLongrunningOperationMetadata
-    , googleLongrunningOperationMetadata
-    , glomAddtional
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    , gcpvlvrNextPageToken
-    , gcpvlvrVersions
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-    , googleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-
-    -- ** GoogleIAMV1Binding
-    , GoogleIAMV1Binding
-    , googleIAMV1Binding
-    , givbMembers
-    , givbRole
-    , givbCondition
-
-    -- ** GoogleIAMV1SetIAMPolicyRequest
-    , GoogleIAMV1SetIAMPolicyRequest
-    , googleIAMV1SetIAMPolicyRequest
-    , givsiprUpdateMask
-    , givsiprPolicy
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    , gcpvlcrNextPageToken
-    , gcpvlcrCatalogs
-
-    -- ** GoogleProtobufEmpty
-    , GoogleProtobufEmpty
-    , googleProtobufEmpty
-
-    -- ** GoogleRpcStatusDetailsItem
-    , GoogleRpcStatusDetailsItem
-    , googleRpcStatusDetailsItem
-    , grsdiAddtional
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , googleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , gcpvuirIcon
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1ProductDisplayMetadata
-    , GoogleCloudPrivatecatalogproducerV1beta1ProductDisplayMetadata
-    , googleCloudPrivatecatalogproducerV1beta1ProductDisplayMetadata
-    , gcpvpdmAddtional
-
-    -- ** GoogleLongrunningCancelOperationRequest
-    , GoogleLongrunningCancelOperationRequest
-    , googleLongrunningCancelOperationRequest
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    , GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    , googleCloudPrivatecatalogproducerV1beta1Catalog
-    , gcpvcParent
-    , gcpvcUpdateTime
-    , gcpvcName
-    , gcpvcDisplayName
-    , gcpvcDescription
-    , gcpvcCreateTime
-
-    -- ** GoogleIAMV1TestIAMPermissionsRequest
-    , GoogleIAMV1TestIAMPermissionsRequest
-    , googleIAMV1TestIAMPermissionsRequest
-    , givtiprPermissions
-
-    -- ** GoogleIAMV1AuditConfig
-    , GoogleIAMV1AuditConfig
-    , googleIAMV1AuditConfig
-    , givacService
-    , givacAuditLogConfigs
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** GoogleLongrunningOperationResponse
-    , GoogleLongrunningOperationResponse
-    , googleLongrunningOperationResponse
-    , glorAddtional
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , googleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , gcpvcprDestinationProductName
-
-    -- ** GoogleIAMV1AuditLogConfig
-    , GoogleIAMV1AuditLogConfig
-    , googleIAMV1AuditLogConfig
-    , givalcLogType
-    , givalcExemptedMembers
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1Version
-    , GoogleCloudPrivatecatalogproducerV1beta1Version
-    , googleCloudPrivatecatalogproducerV1beta1Version
-    , gcpvvAsset
-    , gcpvvOriginalAsset
-    , gcpvvUpdateTime
-    , gcpvvName
-    , gcpvvDescription
-    , gcpvvCreateTime
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1VersionAsset
-    , GoogleCloudPrivatecatalogproducerV1beta1VersionAsset
-    , googleCloudPrivatecatalogproducerV1beta1VersionAsset
-    , gcpvvaAddtional
-
-    -- ** GoogleLongrunningListOperationsResponse
-    , GoogleLongrunningListOperationsResponse
-    , googleLongrunningListOperationsResponse
-    , gllorNextPageToken
-    , gllorOperations
-
-    -- ** GoogleIAMV1Policy
-    , GoogleIAMV1Policy
-    , googleIAMV1Policy
-    , givpAuditConfigs
-    , givpEtag
-    , givpVersion
-    , givpBindings
+    Xgafv (..),
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Association
-    , GoogleCloudPrivatecatalogproducerV1beta1Association
-    , googleCloudPrivatecatalogproducerV1beta1Association
-    , gcpvaName
-    , gcpvaResource
-    , gcpvaCreateTime
+    GoogleCloudPrivatecatalogproducerV1beta1Association (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Association,
 
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    , gcpvlprNextPageToken
-    , gcpvlprProducts
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Catalog
+    GoogleCloudPrivatecatalogproducerV1beta1Catalog (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Catalog,
 
-    -- ** GoogleIAMV1TestIAMPermissionsResponse
-    , GoogleIAMV1TestIAMPermissionsResponse
-    , googleIAMV1TestIAMPermissionsResponse
-    , giamvtiamprPermissions
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
+    GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , googleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , gcpvcarAssociation
-
-    -- ** GoogleTypeExpr
-    , GoogleTypeExpr
-    , googleTypeExpr
-    , gteLocation
-    , gteExpression
-    , gteTitle
-    , gteDescription
-
-    -- ** GoogleLongrunningOperation
-    , GoogleLongrunningOperation
-    , googleLongrunningOperation
-    , gloDone
-    , gloError
-    , gloResponse
-    , gloName
-    , gloMetadata
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1Product
-    , GoogleCloudPrivatecatalogproducerV1beta1Product
-    , googleCloudPrivatecatalogproducerV1beta1Product
-    , gcpvpIconURI
-    , gcpvpUpdateTime
-    , gcpvpDisplayMetadata
-    , gcpvpName
-    , gcpvpAssetType
-    , gcpvpCreateTime
-
-    -- ** GoogleCloudPrivatecatalogproducerV1beta1VersionOriginalAsset
-    , GoogleCloudPrivatecatalogproducerV1beta1VersionOriginalAsset
-    , googleCloudPrivatecatalogproducerV1beta1VersionOriginalAsset
-    , gcpvvoaAddtional
+    GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    , gcpvlarNextPageToken
-    , gcpvlarAssociations
-    ) where
+    GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse,
 
-import Network.Google.Prelude
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Product
+    GoogleCloudPrivatecatalogproducerV1beta1Product (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Product,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
+    GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+    GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
+    GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Version
+    GoogleCloudPrivatecatalogproducerV1beta1Version (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Version_Asset
+    GoogleCloudPrivatecatalogproducerV1beta1Version_Asset (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version_Asset,
+
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
+    GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset,
+
+    -- ** GoogleIamV1AuditConfig
+    GoogleIamV1AuditConfig (..),
+    newGoogleIamV1AuditConfig,
+
+    -- ** GoogleIamV1AuditLogConfig
+    GoogleIamV1AuditLogConfig (..),
+    newGoogleIamV1AuditLogConfig,
+
+    -- ** GoogleIamV1AuditLogConfig_LogType
+    GoogleIamV1AuditLogConfig_LogType (..),
+
+    -- ** GoogleIamV1Binding
+    GoogleIamV1Binding (..),
+    newGoogleIamV1Binding,
+
+    -- ** GoogleIamV1Policy
+    GoogleIamV1Policy (..),
+    newGoogleIamV1Policy,
+
+    -- ** GoogleIamV1SetIamPolicyRequest
+    GoogleIamV1SetIamPolicyRequest (..),
+    newGoogleIamV1SetIamPolicyRequest,
+
+    -- ** GoogleIamV1TestIamPermissionsRequest
+    GoogleIamV1TestIamPermissionsRequest (..),
+    newGoogleIamV1TestIamPermissionsRequest,
+
+    -- ** GoogleIamV1TestIamPermissionsResponse
+    GoogleIamV1TestIamPermissionsResponse (..),
+    newGoogleIamV1TestIamPermissionsResponse,
+
+    -- ** GoogleLongrunningCancelOperationRequest
+    GoogleLongrunningCancelOperationRequest (..),
+    newGoogleLongrunningCancelOperationRequest,
+
+    -- ** GoogleLongrunningListOperationsResponse
+    GoogleLongrunningListOperationsResponse (..),
+    newGoogleLongrunningListOperationsResponse,
+
+    -- ** GoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
+
+    -- ** GoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
+
+    -- ** GoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
+
+    -- ** GoogleProtobufEmpty
+    GoogleProtobufEmpty (..),
+    newGoogleProtobufEmpty,
+
+    -- ** GoogleRpcStatus
+    GoogleRpcStatus (..),
+    newGoogleRpcStatus,
+
+    -- ** GoogleRpcStatus_DetailsItem
+    GoogleRpcStatus_DetailsItem (..),
+    newGoogleRpcStatus_DetailsItem,
+
+    -- ** GoogleTypeExpr
+    GoogleTypeExpr (..),
+    newGoogleTypeExpr,
+  )
+where
+
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Create
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Get
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.List
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Create
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Delete
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Get
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.GetIamPolicy
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.List
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Patch
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Copy
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Create
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Delete
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Get
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.List
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Patch
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.SetIamPolicy
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.TestIamPermissions
+import Network.Google.CloudPrivateCatalogProducer.Catalogs.Undelete
+import Network.Google.CloudPrivateCatalogProducer.Operations.Cancel
+import Network.Google.CloudPrivateCatalogProducer.Operations.Delete
+import Network.Google.CloudPrivateCatalogProducer.Operations.Get
+import Network.Google.CloudPrivateCatalogProducer.Operations.List
 import Network.Google.CloudPrivateCatalogProducer.Types
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Create
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Get
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.List
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Create
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Delete
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Get
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.List
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Patch
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Copy
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Create
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Delete
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Get
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.List
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Patch
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.SetIAMPolicy
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.TestIAMPermissions
-import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Undelete
-import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Cancel
-import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Delete
-import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Get
-import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Private Catalog Producer API service.
-type CloudPrivateCatalogProducerAPI =
-     CatalogsAssociationsListResource :<|>
-       CatalogsAssociationsGetResource
-       :<|> CatalogsAssociationsCreateResource
-       :<|> CatalogsAssociationsDeleteResource
-       :<|> CatalogsProductsIconsUploadResource
-       :<|> CatalogsProductsVersionsListResource
-       :<|> CatalogsProductsVersionsPatchResource
-       :<|> CatalogsProductsVersionsGetResource
-       :<|> CatalogsProductsVersionsCreateResource
-       :<|> CatalogsProductsVersionsDeleteResource
-       :<|> CatalogsProductsListResource
-       :<|> CatalogsProductsCopyResource
-       :<|> CatalogsProductsPatchResource
-       :<|> CatalogsProductsGetResource
-       :<|> CatalogsProductsCreateResource
-       :<|> CatalogsProductsDeleteResource
-       :<|> CatalogsListResource
-       :<|> CatalogsUndeleteResource
-       :<|> CatalogsGetIAMPolicyResource
-       :<|> CatalogsPatchResource
-       :<|> CatalogsGetResource
-       :<|> CatalogsCreateResource
-       :<|> CatalogsSetIAMPolicyResource
-       :<|> CatalogsTestIAMPermissionsResource
-       :<|> CatalogsDeleteResource
-       :<|> OperationsListResource
-       :<|> OperationsGetResource
-       :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource

@@ -1,75 +1,85 @@
-name:                  gogol-cloudprivatecatalogproducer
-version:               0.5.0
-synopsis:              Google Cloud Private Catalog Producer SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudprivatecatalogproducer
+version:            0.5.0
+synopsis:           Google Cloud Private Catalog Producer SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Enables cloud users to manage and share enterprise catalogs intheir
-    organizations.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1beta1@
-    of the API.
+  Enables cloud users to manage and share enterprise catalogs intheir organizations.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1beta1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-cloudprivatecatalogproducer
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.CloudPrivateCatalogProducer
-        , Network.Google.CloudPrivateCatalogProducer.Types
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Create
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Get
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.List
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Create
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Delete
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Get
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.List
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Patch
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Copy
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Create
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Delete
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Get
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.List
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Patch
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.SetIAMPolicy
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.TestIAMPermissions
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Undelete
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Cancel
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Delete
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Get
-        , Network.Google.Resource.CloudPrivateCatalogProducer.Operations.List
+  exposed-modules:
+    Network.Google.CloudPrivateCatalogProducer
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Create
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Get
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.List
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Create
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Delete
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Get
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.GetIamPolicy
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.List
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Patch
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Copy
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Create
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Delete
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Get
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.List
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Patch
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.SetIamPolicy
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.TestIamPermissions
+    Network.Google.CloudPrivateCatalogProducer.Catalogs.Undelete
+    Network.Google.CloudPrivateCatalogProducer.Operations.Cancel
+    Network.Google.CloudPrivateCatalogProducer.Operations.Delete
+    Network.Google.CloudPrivateCatalogProducer.Operations.Get
+    Network.Google.CloudPrivateCatalogProducer.Operations.List
+    Network.Google.CloudPrivateCatalogProducer.Types
 
-    other-modules:
-          Network.Google.CloudPrivateCatalogProducer.Types.Product
-        , Network.Google.CloudPrivateCatalogProducer.Types.Sum
+  other-modules:
+    Network.Google.CloudPrivateCatalogProducer.Internal.Product
+    Network.Google.CloudPrivateCatalogProducer.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
