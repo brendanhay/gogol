@@ -1,276 +1,204 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DataFusion.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.DataFusion.Types
-    (
-    -- * Service Configuration
-      dataFusionService
+  ( -- * Configuration
+    dataFusionService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * InstanceLabels
-    , InstanceLabels
-    , instanceLabels
-    , ilAddtional
+    -- * Types
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
+    -- ** Accelerator
+    Accelerator (..),
+    newAccelerator,
 
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
+    -- ** Accelerator_AcceleratorType
+    Accelerator_AcceleratorType (..),
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** Accelerator_State
+    Accelerator_State (..),
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** CryptoKeyConfig
+    CryptoKeyConfig (..),
+    newCryptoKeyConfig,
 
-    -- * AcceleratorAcceleratorType
-    , AcceleratorAcceleratorType (..)
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * AcceleratorState
-    , AcceleratorState (..)
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Instance
+    Instance (..),
+    newInstance,
 
-    -- * CryptoKeyConfig
-    , CryptoKeyConfig
-    , cryptoKeyConfig
-    , ckcKeyReference
+    -- ** Instance_DisabledReasonItem
+    Instance_DisabledReasonItem (..),
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
+    -- ** Instance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
 
-    -- * InstanceType
-    , InstanceType (..)
+    -- ** Instance_Options
+    Instance_Options (..),
+    newInstance_Options,
 
-    -- * NetworkConfig
-    , NetworkConfig
-    , networkConfig
-    , ncNetwork
-    , ncIPAllocation
+    -- ** Instance_State
+    Instance_State (..),
 
-    -- * Accelerator
-    , Accelerator
-    , accelerator
-    , aAcceleratorType
-    , aState
+    -- ** Instance_Type
+    Instance_Type (..),
 
-    -- * RestartInstanceRequest
-    , RestartInstanceRequest
-    , restartInstanceRequest
+    -- ** ListAvailableVersionsResponse
+    ListAvailableVersionsResponse (..),
+    newListAvailableVersionsResponse,
 
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
+    -- ** ListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
 
-    -- * Version
-    , Version
-    , version
-    , vDefaultVersion
-    , vVersionNumber
-    , vAvailableFeatures
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * OperationMetadataAdditionalStatus
-    , OperationMetadataAdditionalStatus
-    , operationMetadataAdditionalStatus
-    , omasAddtional
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** NetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAPIVersion
-    , omAdditionalStatus
-    , omRequestedCancellation
-    , omEndTime
-    , omStatusDetail
-    , omVerb
-    , omTarget
-    , omCreateTime
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
-    -- * ListInstancesResponse
-    , ListInstancesResponse
-    , listInstancesResponse
-    , lirNextPageToken
-    , lirUnreachable
-    , lirInstances
+    -- ** OperationMetadata_AdditionalStatus
+    OperationMetadata_AdditionalStatus (..),
+    newOperationMetadata_AdditionalStatus,
 
-    -- * InstanceState
-    , InstanceState (..)
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** RestartInstanceRequest
+    RestartInstanceRequest (..),
+    newRestartInstanceRequest,
 
-    -- * InstanceOptions
-    , InstanceOptions
-    , instanceOptions
-    , ioAddtional
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * Instance
-    , Instance
-    , instance'
-    , iStateMessage
-    , iTenantProjectId
-    , iState
-    , iEnableStackdriverLogging
-    , iP4ServiceAccount
-    , iEnableRbac
-    , iAPIEndpoint
-    , iCryptoKeyConfig
-    , iServiceEndpoint
-    , iZone
-    , iGcsBucket
-    , iServiceAccount
-    , iNetworkConfig
-    , iUpdateTime
-    , iAccelerators
-    , iPrivateInstance
-    , iName
-    , iVersion
-    , iDataprocServiceAccount
-    , iDisplayName
-    , iEnableStackdriverMonitoring
-    , iLabels
-    , iOptions
-    , iType
-    , iAvailableVersion
-    , iDescription
-    , iCreateTime
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * ListAvailableVersionsResponse
-    , ListAvailableVersionsResponse
-    , listAvailableVersionsResponse
-    , lavrNextPageToken
-    , lavrAvailableVersions
-    ) where
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
-import Network.Google.DataFusion.Types.Product
-import Network.Google.DataFusion.Types.Sum
-import Network.Google.Prelude
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
--- | Default request referring to version 'v1' of the Cloud Data Fusion API. This contains the host and root path used as a starting point for constructing service requests.
-dataFusionService :: ServiceConfig
-dataFusionService
-  = defaultService (ServiceId "datafusion:v1")
-      "datafusion.googleapis.com"
+    -- ** Version
+    Version (..),
+    newVersion,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** Version_Type
+    Version_Type (..),
+  )
+where
+
+import Network.Google.DataFusion.Internal.Product
+import Network.Google.DataFusion.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Data Fusion API. This contains the host and root path used as a starting point for constructing service requests.
+dataFusionService :: Core.ServiceConfig
+dataFusionService =
+  Core.defaultService
+    (Core.ServiceId "datafusion:v1")
+    "datafusion.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy

@@ -1,368 +1,293 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DataFusion
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cloud Data Fusion is a fully-managed, cloud native, enterprise data
--- integration service for quickly building and managing data pipelines. It
--- provides a graphical interface to increase time efficiency and reduce
--- complexity, and allows business users, developers, and data scientists
--- to easily and reliably build scalable data integration solutions to
--- cleanse, prepare, blend, transfer and transform data without having to
--- wrestle with infrastructure.
+-- Cloud Data Fusion is a fully-managed, cloud native, enterprise data integration service for quickly building and managing data pipelines. It provides a graphical interface to increase time efficiency and reduce complexity, and allows business users, developers, and data scientists to easily and reliably build scalable data integration solutions to cleanse, prepare, blend, transfer and transform data without having to wrestle with infrastructure.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference>
 module Network.Google.DataFusion
-    (
-    -- * Service Configuration
-      dataFusionService
+  ( -- * Configuration
+    dataFusionService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , DataFusionAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** datafusion.projects.locations.get
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Get
+    DataFusionProjectsLocationsGetResource,
+    newDataFusionProjectsLocationsGet,
+    DataFusionProjectsLocationsGet,
 
     -- ** datafusion.projects.locations.instances.create
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.Create
+    DataFusionProjectsLocationsInstancesCreateResource,
+    newDataFusionProjectsLocationsInstancesCreate,
+    DataFusionProjectsLocationsInstancesCreate,
 
     -- ** datafusion.projects.locations.instances.delete
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.Delete
+    DataFusionProjectsLocationsInstancesDeleteResource,
+    newDataFusionProjectsLocationsInstancesDelete,
+    DataFusionProjectsLocationsInstancesDelete,
 
     -- ** datafusion.projects.locations.instances.get
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.Get
+    DataFusionProjectsLocationsInstancesGetResource,
+    newDataFusionProjectsLocationsInstancesGet,
+    DataFusionProjectsLocationsInstancesGet,
 
     -- ** datafusion.projects.locations.instances.getIamPolicy
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.GetIAMPolicy
+    DataFusionProjectsLocationsInstancesGetIamPolicyResource,
+    newDataFusionProjectsLocationsInstancesGetIamPolicy,
+    DataFusionProjectsLocationsInstancesGetIamPolicy,
 
     -- ** datafusion.projects.locations.instances.list
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.List
+    DataFusionProjectsLocationsInstancesListResource,
+    newDataFusionProjectsLocationsInstancesList,
+    DataFusionProjectsLocationsInstancesList,
 
     -- ** datafusion.projects.locations.instances.patch
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.Patch
+    DataFusionProjectsLocationsInstancesPatchResource,
+    newDataFusionProjectsLocationsInstancesPatch,
+    DataFusionProjectsLocationsInstancesPatch,
 
     -- ** datafusion.projects.locations.instances.restart
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.Restart
+    DataFusionProjectsLocationsInstancesRestartResource,
+    newDataFusionProjectsLocationsInstancesRestart,
+    DataFusionProjectsLocationsInstancesRestart,
 
     -- ** datafusion.projects.locations.instances.setIamPolicy
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.SetIAMPolicy
+    DataFusionProjectsLocationsInstancesSetIamPolicyResource,
+    newDataFusionProjectsLocationsInstancesSetIamPolicy,
+    DataFusionProjectsLocationsInstancesSetIamPolicy,
 
     -- ** datafusion.projects.locations.instances.testIamPermissions
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Instances.TestIAMPermissions
+    DataFusionProjectsLocationsInstancesTestIamPermissionsResource,
+    newDataFusionProjectsLocationsInstancesTestIamPermissions,
+    DataFusionProjectsLocationsInstancesTestIamPermissions,
 
     -- ** datafusion.projects.locations.list
-    , module Network.Google.Resource.DataFusion.Projects.Locations.List
+    DataFusionProjectsLocationsListResource,
+    newDataFusionProjectsLocationsList,
+    DataFusionProjectsLocationsList,
 
     -- ** datafusion.projects.locations.operations.cancel
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Operations.Cancel
+    DataFusionProjectsLocationsOperationsCancelResource,
+    newDataFusionProjectsLocationsOperationsCancel,
+    DataFusionProjectsLocationsOperationsCancel,
 
     -- ** datafusion.projects.locations.operations.delete
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Operations.Delete
+    DataFusionProjectsLocationsOperationsDeleteResource,
+    newDataFusionProjectsLocationsOperationsDelete,
+    DataFusionProjectsLocationsOperationsDelete,
 
     -- ** datafusion.projects.locations.operations.get
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Operations.Get
+    DataFusionProjectsLocationsOperationsGetResource,
+    newDataFusionProjectsLocationsOperationsGet,
+    DataFusionProjectsLocationsOperationsGet,
 
     -- ** datafusion.projects.locations.operations.list
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Operations.List
+    DataFusionProjectsLocationsOperationsListResource,
+    newDataFusionProjectsLocationsOperationsList,
+    DataFusionProjectsLocationsOperationsList,
 
     -- ** datafusion.projects.locations.versions.list
-    , module Network.Google.Resource.DataFusion.Projects.Locations.Versions.List
+    DataFusionProjectsLocationsVersionsListResource,
+    newDataFusionProjectsLocationsVersionsList,
+    DataFusionProjectsLocationsVersionsList,
 
     -- * Types
 
-    -- ** InstanceLabels
-    , InstanceLabels
-    , instanceLabels
-    , ilAddtional
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
-
-    -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** AcceleratorAcceleratorType
-    , AcceleratorAcceleratorType (..)
-
-    -- ** AcceleratorState
-    , AcceleratorState (..)
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** CryptoKeyConfig
-    , CryptoKeyConfig
-    , cryptoKeyConfig
-    , ckcKeyReference
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** InstanceType
-    , InstanceType (..)
-
-    -- ** NetworkConfig
-    , NetworkConfig
-    , networkConfig
-    , ncNetwork
-    , ncIPAllocation
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Accelerator
-    , Accelerator
-    , accelerator
-    , aAcceleratorType
-    , aState
+    Accelerator (..),
+    newAccelerator,
 
-    -- ** RestartInstanceRequest
-    , RestartInstanceRequest
-    , restartInstanceRequest
+    -- ** Accelerator_AcceleratorType
+    Accelerator_AcceleratorType (..),
 
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
+    -- ** Accelerator_State
+    Accelerator_State (..),
 
-    -- ** Version
-    , Version
-    , version
-    , vDefaultVersion
-    , vVersionNumber
-    , vAvailableFeatures
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** OperationMetadataAdditionalStatus
-    , OperationMetadataAdditionalStatus
-    , operationMetadataAdditionalStatus
-    , omasAddtional
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAPIVersion
-    , omAdditionalStatus
-    , omRequestedCancellation
-    , omEndTime
-    , omStatusDetail
-    , omVerb
-    , omTarget
-    , omCreateTime
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** ListInstancesResponse
-    , ListInstancesResponse
-    , listInstancesResponse
-    , lirNextPageToken
-    , lirUnreachable
-    , lirInstances
-
-    -- ** InstanceState
-    , InstanceState (..)
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** InstanceOptions
-    , InstanceOptions
-    , instanceOptions
-    , ioAddtional
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** CryptoKeyConfig
+    CryptoKeyConfig (..),
+    newCryptoKeyConfig,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
     -- ** Instance
-    , Instance
-    , instance'
-    , iStateMessage
-    , iTenantProjectId
-    , iState
-    , iEnableStackdriverLogging
-    , iP4ServiceAccount
-    , iEnableRbac
-    , iAPIEndpoint
-    , iCryptoKeyConfig
-    , iServiceEndpoint
-    , iZone
-    , iGcsBucket
-    , iServiceAccount
-    , iNetworkConfig
-    , iUpdateTime
-    , iAccelerators
-    , iPrivateInstance
-    , iName
-    , iVersion
-    , iDataprocServiceAccount
-    , iDisplayName
-    , iEnableStackdriverMonitoring
-    , iLabels
-    , iOptions
-    , iType
-    , iAvailableVersion
-    , iDescription
-    , iCreateTime
+    Instance (..),
+    newInstance,
+
+    -- ** Instance_DisabledReasonItem
+    Instance_DisabledReasonItem (..),
+
+    -- ** Instance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
+
+    -- ** Instance_Options
+    Instance_Options (..),
+    newInstance_Options,
+
+    -- ** Instance_State
+    Instance_State (..),
+
+    -- ** Instance_Type
+    Instance_Type (..),
 
     -- ** ListAvailableVersionsResponse
-    , ListAvailableVersionsResponse
-    , listAvailableVersionsResponse
-    , lavrNextPageToken
-    , lavrAvailableVersions
-    ) where
+    ListAvailableVersionsResponse (..),
+    newListAvailableVersionsResponse,
 
-import Network.Google.Prelude
+    -- ** ListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** NetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
+
+    -- ** OperationMetadata_AdditionalStatus
+    OperationMetadata_AdditionalStatus (..),
+    newOperationMetadata_AdditionalStatus,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** RestartInstanceRequest
+    RestartInstanceRequest (..),
+    newRestartInstanceRequest,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** Version
+    Version (..),
+    newVersion,
+
+    -- ** Version_Type
+    Version_Type (..),
+  )
+where
+
+import Network.Google.DataFusion.Projects.Locations.Get
+import Network.Google.DataFusion.Projects.Locations.Instances.Create
+import Network.Google.DataFusion.Projects.Locations.Instances.Delete
+import Network.Google.DataFusion.Projects.Locations.Instances.Get
+import Network.Google.DataFusion.Projects.Locations.Instances.GetIamPolicy
+import Network.Google.DataFusion.Projects.Locations.Instances.List
+import Network.Google.DataFusion.Projects.Locations.Instances.Patch
+import Network.Google.DataFusion.Projects.Locations.Instances.Restart
+import Network.Google.DataFusion.Projects.Locations.Instances.SetIamPolicy
+import Network.Google.DataFusion.Projects.Locations.Instances.TestIamPermissions
+import Network.Google.DataFusion.Projects.Locations.List
+import Network.Google.DataFusion.Projects.Locations.Operations.Cancel
+import Network.Google.DataFusion.Projects.Locations.Operations.Delete
+import Network.Google.DataFusion.Projects.Locations.Operations.Get
+import Network.Google.DataFusion.Projects.Locations.Operations.List
+import Network.Google.DataFusion.Projects.Locations.Versions.List
 import Network.Google.DataFusion.Types
-import Network.Google.Resource.DataFusion.Projects.Locations.Get
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.Create
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.Delete
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.Get
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.GetIAMPolicy
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.List
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.Patch
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.Restart
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.SetIAMPolicy
-import Network.Google.Resource.DataFusion.Projects.Locations.Instances.TestIAMPermissions
-import Network.Google.Resource.DataFusion.Projects.Locations.List
-import Network.Google.Resource.DataFusion.Projects.Locations.Operations.Cancel
-import Network.Google.Resource.DataFusion.Projects.Locations.Operations.Delete
-import Network.Google.Resource.DataFusion.Projects.Locations.Operations.Get
-import Network.Google.Resource.DataFusion.Projects.Locations.Operations.List
-import Network.Google.Resource.DataFusion.Projects.Locations.Versions.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Data Fusion API service.
-type DataFusionAPI =
-     ProjectsLocationsVersionsListResource :<|>
-       ProjectsLocationsInstancesListResource
-       :<|> ProjectsLocationsInstancesGetIAMPolicyResource
-       :<|> ProjectsLocationsInstancesPatchResource
-       :<|> ProjectsLocationsInstancesGetResource
-       :<|> ProjectsLocationsInstancesCreateResource
-       :<|> ProjectsLocationsInstancesSetIAMPolicyResource
-       :<|> ProjectsLocationsInstancesRestartResource
-       :<|>
-       ProjectsLocationsInstancesTestIAMPermissionsResource
-       :<|> ProjectsLocationsInstancesDeleteResource
-       :<|> ProjectsLocationsOperationsListResource
-       :<|> ProjectsLocationsOperationsGetResource
-       :<|> ProjectsLocationsOperationsCancelResource
-       :<|> ProjectsLocationsOperationsDeleteResource
-       :<|> ProjectsLocationsListResource
-       :<|> ProjectsLocationsGetResource
