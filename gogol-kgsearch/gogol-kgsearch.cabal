@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.KnowledgeGraphSearch
-    Network.Google.KnowledgeGraphSearch.Kgsearch.Entities.Search
-    Network.Google.KnowledgeGraphSearch.Types
+    Gogol.KnowledgeGraphSearch
+    Gogol.KnowledgeGraphSearch.Kgsearch.Entities.Search
+    Gogol.KnowledgeGraphSearch.Types
 
   other-modules:
-    Network.Google.KnowledgeGraphSearch.Internal.Product
-    Network.Google.KnowledgeGraphSearch.Internal.Sum
+    Gogol.KnowledgeGraphSearch.Internal.Product
+    Gogol.KnowledgeGraphSearch.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

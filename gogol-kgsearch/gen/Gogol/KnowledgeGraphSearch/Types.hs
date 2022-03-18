@@ -19,47 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.KnowledgeGraphSearch.Internal.Sum
+-- Module      : Gogol.KnowledgeGraphSearch.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.KnowledgeGraphSearch.Internal.Sum
-  ( -- * Xgafv
-    Xgafv
-      ( Xgafv_1,
-        Xgafv_2,
-        ..
-      ),
+module Gogol.KnowledgeGraphSearch.Types
+  ( -- * Configuration
+    knowledgeGraphSearchService,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** SearchResponse
+    SearchResponse (..),
+    newSearchResponse,
   )
 where
 
-import qualified Network.Google.Prelude as Core
+import Gogol.KnowledgeGraphSearch.Internal.Product
+import Gogol.KnowledgeGraphSearch.Internal.Sum
+import qualified Gogol.Prelude as Core
 
--- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | v1 error format
-pattern Xgafv_1 :: Xgafv
-pattern Xgafv_1 = Xgafv "1"
-
--- | v2 error format
-pattern Xgafv_2 :: Xgafv
-pattern Xgafv_2 = Xgafv "2"
-
-{-# COMPLETE
-  Xgafv_1,
-  Xgafv_2,
-  Xgafv
-  #-}
+-- | Default request referring to version @v1@ of the Knowledge Graph Search API. This contains the host and root path used as a starting point for constructing service requests.
+knowledgeGraphSearchService :: Core.ServiceConfig
+knowledgeGraphSearchService =
+  Core.defaultService
+    (Core.ServiceId "kgsearch:v1")
+    "kgsearch.googleapis.com"
