@@ -11,7 +11,6 @@ module Gen.Types
   )
 where
 
-import GHC.Stack (HassCallStack)
 import Control.Applicative
 import Control.Lens hiding ((.=))
 import Control.Monad.Except
@@ -38,6 +37,7 @@ import qualified Data.Text.Lazy.Builder as Build
 import Data.Text.Manipulate
 import qualified Filesystem.Path.CurrentOS as Path
 import Formatting
+import GHC.Stack (HasCallStack)
 import GHC.TypeLits (Symbol)
 import Gen.Orphans ()
 import Gen.Text
@@ -156,7 +156,7 @@ instance Ord Model where
     on compare modelPrefix a b
       <> on compare (Down . modelVersion) a b
 
-modelFromPath :: HassCallStack => Path -> Model
+modelFromPath :: HasCallStack => Path -> Model
 modelFromPath x = Model n p v x
   where
     n =
