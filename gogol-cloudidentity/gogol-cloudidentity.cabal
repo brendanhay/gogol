@@ -1,79 +1,92 @@
-name:                  gogol-cloudidentity
-version:               0.5.0
-synopsis:              Google Cloud Identity SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudidentity
+version:            0.5.0
+synopsis:           Google Cloud Identity SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    API for provisioning and managing identity resources.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  API for provisioning and managing identity resources.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-cloudidentity
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.CloudIdentity
-        , Network.Google.CloudIdentity.Types
-        , Network.Google.Resource.CloudIdentity.Devices.CancelWipe
-        , Network.Google.Resource.CloudIdentity.Devices.Create
-        , Network.Google.Resource.CloudIdentity.Devices.Delete
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Approve
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Block
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.CancelWipe
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.List
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Delete
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Get
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.List
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Lookup
-        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Wipe
-        , Network.Google.Resource.CloudIdentity.Devices.Get
-        , Network.Google.Resource.CloudIdentity.Devices.List
-        , Network.Google.Resource.CloudIdentity.Devices.Wipe
-        , Network.Google.Resource.CloudIdentity.Groups.Create
-        , Network.Google.Resource.CloudIdentity.Groups.Delete
-        , Network.Google.Resource.CloudIdentity.Groups.Get
-        , Network.Google.Resource.CloudIdentity.Groups.List
-        , Network.Google.Resource.CloudIdentity.Groups.Lookup
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.Create
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.Delete
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.Get
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.GetMembershipGraph
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.List
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.Lookup
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
-        , Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
-        , Network.Google.Resource.CloudIdentity.Groups.Patch
-        , Network.Google.Resource.CloudIdentity.Groups.Search
+  exposed-modules:
+    Network.Google.CloudIdentity
+    Network.Google.CloudIdentity.Devices.CancelWipe
+    Network.Google.CloudIdentity.Devices.Create
+    Network.Google.CloudIdentity.Devices.Delete
+    Network.Google.CloudIdentity.Devices.DeviceUsers.Approve
+    Network.Google.CloudIdentity.Devices.DeviceUsers.Block
+    Network.Google.CloudIdentity.Devices.DeviceUsers.CancelWipe
+    Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
+    Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.List
+    Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
+    Network.Google.CloudIdentity.Devices.DeviceUsers.Delete
+    Network.Google.CloudIdentity.Devices.DeviceUsers.Get
+    Network.Google.CloudIdentity.Devices.DeviceUsers.List
+    Network.Google.CloudIdentity.Devices.DeviceUsers.Lookup
+    Network.Google.CloudIdentity.Devices.DeviceUsers.Wipe
+    Network.Google.CloudIdentity.Devices.Get
+    Network.Google.CloudIdentity.Devices.List
+    Network.Google.CloudIdentity.Devices.Wipe
+    Network.Google.CloudIdentity.Groups.Create
+    Network.Google.CloudIdentity.Groups.Delete
+    Network.Google.CloudIdentity.Groups.Get
+    Network.Google.CloudIdentity.Groups.GetSecuritySettings
+    Network.Google.CloudIdentity.Groups.List
+    Network.Google.CloudIdentity.Groups.Lookup
+    Network.Google.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
+    Network.Google.CloudIdentity.Groups.Memberships.Create
+    Network.Google.CloudIdentity.Groups.Memberships.Delete
+    Network.Google.CloudIdentity.Groups.Memberships.Get
+    Network.Google.CloudIdentity.Groups.Memberships.GetMembershipGraph
+    Network.Google.CloudIdentity.Groups.Memberships.List
+    Network.Google.CloudIdentity.Groups.Memberships.Lookup
+    Network.Google.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
+    Network.Google.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
+    Network.Google.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
+    Network.Google.CloudIdentity.Groups.Patch
+    Network.Google.CloudIdentity.Groups.Search
+    Network.Google.CloudIdentity.Groups.UpdateSecuritySettings
+    Network.Google.CloudIdentity.Types
 
-    other-modules:
-          Network.Google.CloudIdentity.Types.Product
-        , Network.Google.CloudIdentity.Types.Sum
+  other-modules:
+    Network.Google.CloudIdentity.Internal.Product
+    Network.Google.CloudIdentity.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
