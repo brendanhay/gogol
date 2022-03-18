@@ -1,156 +1,117 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.GamesConfiguration.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.GamesConfiguration.Types
-    (
-    -- * Service Configuration
-      gamesConfigurationService
+  ( -- * Configuration
+    gamesConfigurationService,
 
     -- * OAuth Scopes
-    , androidPublisherScope
+    androidpublisherScope,
 
-    -- * LeaderboardConfigurationScoreOrder
-    , LeaderboardConfigurationScoreOrder (..)
+    -- * Types
 
-    -- * ImageConfiguration
-    , ImageConfiguration
-    , imageConfiguration
-    , icResourceId
-    , icKind
-    , icURL
-    , icImageType
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * AchievementConfigurationAchievementType
-    , AchievementConfigurationAchievementType (..)
+    -- ** AchievementConfiguration
+    AchievementConfiguration (..),
+    newAchievementConfiguration,
 
-    -- * ImageConfigurationImageType
-    , ImageConfigurationImageType (..)
+    -- ** AchievementConfiguration_AchievementType
+    AchievementConfiguration_AchievementType (..),
 
-    -- * LeaderboardConfigurationListResponse
-    , LeaderboardConfigurationListResponse
-    , leaderboardConfigurationListResponse
-    , lclrNextPageToken
-    , lclrKind
-    , lclrItems
+    -- ** AchievementConfiguration_InitialState
+    AchievementConfiguration_InitialState (..),
 
-    -- * GamesNumberAffixConfiguration
-    , GamesNumberAffixConfiguration
-    , gamesNumberAffixConfiguration
-    , gnacFew
-    , gnacOther
-    , gnacTwo
-    , gnacOne
-    , gnacZero
-    , gnacMany
+    -- ** AchievementConfigurationDetail
+    AchievementConfigurationDetail (..),
+    newAchievementConfigurationDetail,
 
-    -- * AchievementConfigurationInitialState
-    , AchievementConfigurationInitialState (..)
+    -- ** AchievementConfigurationListResponse
+    AchievementConfigurationListResponse (..),
+    newAchievementConfigurationListResponse,
 
-    -- * AchievementConfigurationListResponse
-    , AchievementConfigurationListResponse
-    , achievementConfigurationListResponse
-    , aclrNextPageToken
-    , aclrKind
-    , aclrItems
+    -- ** GamesNumberAffixConfiguration
+    GamesNumberAffixConfiguration (..),
+    newGamesNumberAffixConfiguration,
 
-    -- * LeaderboardConfiguration
-    , LeaderboardConfiguration
-    , leaderboardConfiguration
-    , lcScoreMax
-    , lcKind
-    , lcPublished
-    , lcToken
-    , lcScoreMin
-    , lcDraft
-    , lcId
-    , lcScoreOrder
+    -- ** GamesNumberFormatConfiguration
+    GamesNumberFormatConfiguration (..),
+    newGamesNumberFormatConfiguration,
 
-    -- * AchievementConfiguration
-    , AchievementConfiguration
-    , achievementConfiguration
-    , acAchievementType
-    , acStepsToUnlock
-    , acKind
-    , acPublished
-    , acToken
-    , acInitialState
-    , acDraft
-    , acId
+    -- ** GamesNumberFormatConfiguration_NumberFormatType
+    GamesNumberFormatConfiguration_NumberFormatType (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ImageConfiguration
+    ImageConfiguration (..),
+    newImageConfiguration,
 
-    -- * LocalizedString
-    , LocalizedString
-    , localizedString
-    , lsKind
-    , lsLocale
-    , lsValue
+    -- ** ImageConfiguration_ImageType
+    ImageConfiguration_ImageType (..),
 
-    -- * GamesNumberFormatConfiguration
-    , GamesNumberFormatConfiguration
-    , gamesNumberFormatConfiguration
-    , gnfcSuffix
-    , gnfcCurrencyCode
-    , gnfcNumberFormatType
-    , gnfcNumDecimalPlaces
+    -- ** LeaderboardConfiguration
+    LeaderboardConfiguration (..),
+    newLeaderboardConfiguration,
 
-    -- * GamesNumberFormatConfigurationNumberFormatType
-    , GamesNumberFormatConfigurationNumberFormatType (..)
+    -- ** LeaderboardConfiguration_ScoreOrder
+    LeaderboardConfiguration_ScoreOrder (..),
 
-    -- * ImageConfigurationsUploadImageType
-    , ImageConfigurationsUploadImageType (..)
+    -- ** LeaderboardConfigurationDetail
+    LeaderboardConfigurationDetail (..),
+    newLeaderboardConfigurationDetail,
 
-    -- * LeaderboardConfigurationDetail
-    , LeaderboardConfigurationDetail
-    , leaderboardConfigurationDetail
-    , lcdKind
-    , lcdScoreFormat
-    , lcdSortRank
-    , lcdName
-    , lcdIconURL
+    -- ** LeaderboardConfigurationListResponse
+    LeaderboardConfigurationListResponse (..),
+    newLeaderboardConfigurationListResponse,
 
-    -- * AchievementConfigurationDetail
-    , AchievementConfigurationDetail
-    , achievementConfigurationDetail
-    , acdKind
-    , acdSortRank
-    , acdName
-    , acdPointValue
-    , acdIconURL
-    , acdDescription
+    -- ** LocalizedString
+    LocalizedString (..),
+    newLocalizedString,
 
-    -- * LocalizedStringBundle
-    , LocalizedStringBundle
-    , localizedStringBundle
-    , lsbKind
-    , lsbTranslations
-    ) where
+    -- ** LocalizedStringBundle
+    LocalizedStringBundle (..),
+    newLocalizedStringBundle,
 
-import Network.Google.GamesConfiguration.Types.Product
-import Network.Google.GamesConfiguration.Types.Sum
-import Network.Google.Prelude
+    -- ** ImageConfigurationsUploadImageType
+    ImageConfigurationsUploadImageType (..),
+  )
+where
 
--- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
-gamesConfigurationService :: ServiceConfig
-gamesConfigurationService
-  = defaultService
-      (ServiceId "gamesConfiguration:v1configuration")
-      "gamesconfiguration.googleapis.com"
+import Network.Google.GamesConfiguration.Internal.Product
+import Network.Google.GamesConfiguration.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1configuration@ of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
+gamesConfigurationService :: Core.ServiceConfig
+gamesConfigurationService =
+  Core.defaultService
+    (Core.ServiceId "gamesConfiguration:v1configuration")
+    "gamesconfiguration.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidPublisherScope = Proxy
+androidpublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+androidpublisherScope = Core.Proxy
