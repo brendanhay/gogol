@@ -1,91 +1,92 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.RuntimeConfig.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.RuntimeConfig.Types
-    (
-    -- * Service Configuration
-      runtimeConfigService
+  ( -- * Configuration
+    runtimeConfigService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudruntimeConfigScope
+    cloudPlatformScope,
+    cloudruntimeconfigScope,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- * Types
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-    ) where
+    -- ** Status
+    Status (..),
+    newStatus,
 
-import Network.Google.Prelude
-import Network.Google.RuntimeConfig.Types.Product
-import Network.Google.RuntimeConfig.Types.Sum
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
 
--- | Default request referring to version 'v1' of the Cloud Runtime Configuration API. This contains the host and root path used as a starting point for constructing service requests.
-runtimeConfigService :: ServiceConfig
-runtimeConfigService
-  = defaultService (ServiceId "runtimeconfig:v1")
-      "runtimeconfig.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.RuntimeConfig.Internal.Product
+import Network.Google.RuntimeConfig.Internal.Sum
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v1@ of the Cloud Runtime Configuration API. This contains the host and root path used as a starting point for constructing service requests.
+runtimeConfigService :: Core.ServiceConfig
+runtimeConfigService =
+  Core.defaultService
+    (Core.ServiceId "runtimeconfig:v1")
+    "runtimeconfig.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | Manage your Google Cloud Platform services\' runtime configuration
-cloudruntimeConfigScope :: Proxy '["https://www.googleapis.com/auth/cloudruntimeconfig"]
-cloudruntimeConfigScope = Proxy
+cloudruntimeconfigScope :: Core.Proxy '["https://www.googleapis.com/auth/cloudruntimeconfig"]
+cloudruntimeconfigScope = Core.Proxy

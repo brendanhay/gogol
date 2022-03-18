@@ -1,109 +1,99 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.RuntimeConfig
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Runtime Configurator allows you to dynamically configure and expose
--- variables through Google Cloud Platform. In addition, you can also set
--- Watchers and Waiters that will watch for changes to your data and return
--- based on certain conditions.
+-- The Runtime Configurator allows you to dynamically configure and expose variables through Google Cloud Platform. In addition, you can also set Watchers and Waiters that will watch for changes to your data and return based on certain conditions.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference>
 module Network.Google.RuntimeConfig
-    (
-    -- * Service Configuration
-      runtimeConfigService
+  ( -- * Configuration
+    runtimeConfigService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudruntimeConfigScope
-
-    -- * API Declaration
-    , RuntimeConfigAPI
+    cloudPlatformScope,
+    cloudruntimeconfigScope,
 
     -- * Resources
 
     -- ** runtimeconfig.operations.cancel
-    , module Network.Google.Resource.RuntimeConfig.Operations.Cancel
+    RuntimeConfigOperationsCancelResource,
+    newRuntimeConfigOperationsCancel,
+    RuntimeConfigOperationsCancel,
 
     -- ** runtimeconfig.operations.delete
-    , module Network.Google.Resource.RuntimeConfig.Operations.Delete
+    RuntimeConfigOperationsDeleteResource,
+    newRuntimeConfigOperationsDelete,
+    RuntimeConfigOperationsDelete,
 
     -- ** runtimeconfig.operations.list
-    , module Network.Google.Resource.RuntimeConfig.Operations.List
+    RuntimeConfigOperationsListResource,
+    newRuntimeConfigOperationsList,
+    RuntimeConfigOperationsList,
 
     -- * Types
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Empty
-    , Empty
-    , empty
+    Empty (..),
+    newEmpty,
 
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-    ) where
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-import Network.Google.Prelude
-import Network.Google.Resource.RuntimeConfig.Operations.Cancel
-import Network.Google.Resource.RuntimeConfig.Operations.Delete
-import Network.Google.Resource.RuntimeConfig.Operations.List
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
+
+import Network.Google.RuntimeConfig.Operations.Cancel
+import Network.Google.RuntimeConfig.Operations.Delete
+import Network.Google.RuntimeConfig.Operations.List
 import Network.Google.RuntimeConfig.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Runtime Configuration API service.
-type RuntimeConfigAPI =
-     OperationsListResource :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource
