@@ -39,46 +39,47 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudPrivateCatalogProducer
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Create
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.Get
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Associations.List
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Create
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Delete
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Get
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.GetIamPolicy
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.List
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Patch
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Copy
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Create
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Delete
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Get
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.List
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Patch
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.SetIamPolicy
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.TestIamPermissions
-    Network.Google.CloudPrivateCatalogProducer.Catalogs.Undelete
-    Network.Google.CloudPrivateCatalogProducer.Operations.Cancel
-    Network.Google.CloudPrivateCatalogProducer.Operations.Delete
-    Network.Google.CloudPrivateCatalogProducer.Operations.Get
-    Network.Google.CloudPrivateCatalogProducer.Operations.List
-    Network.Google.CloudPrivateCatalogProducer.Types
+    Gogol.CloudPrivateCatalogProducer
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Associations.Create
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Associations.Get
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Associations.List
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Create
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Delete
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Get
+    Gogol.CloudPrivateCatalogProducer.Catalogs.GetIamPolicy
+    Gogol.CloudPrivateCatalogProducer.Catalogs.List
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Patch
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Copy
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Create
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Delete
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Get
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.List
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Patch
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
+    Gogol.CloudPrivateCatalogProducer.Catalogs.SetIamPolicy
+    Gogol.CloudPrivateCatalogProducer.Catalogs.TestIamPermissions
+    Gogol.CloudPrivateCatalogProducer.Catalogs.Undelete
+    Gogol.CloudPrivateCatalogProducer.Operations.Cancel
+    Gogol.CloudPrivateCatalogProducer.Operations.Delete
+    Gogol.CloudPrivateCatalogProducer.Operations.Get
+    Gogol.CloudPrivateCatalogProducer.Operations.List
+    Gogol.CloudPrivateCatalogProducer.Types
 
   other-modules:
-    Network.Google.CloudPrivateCatalogProducer.Internal.Product
-    Network.Google.CloudPrivateCatalogProducer.Internal.Sum
+    Gogol.CloudPrivateCatalogProducer.Internal.Product
+    Gogol.CloudPrivateCatalogProducer.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
