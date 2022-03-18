@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-games-management
-version:               0.5.0
-synopsis:              Google Play Game Management SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-games-management
+version:            0.5.0
+synopsis:           Google Play Game Management SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    The Google Play Game Management API allows developers to manage resources from the Google Play Game service.
+  The Google Play Game Management API allows developers to manage resources from the Google Play Game service.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,48 +31,45 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.GamesManagement
-    , Gogol.GamesManagement.Achievements.Reset
-    , Gogol.GamesManagement.Achievements.ResetAll
-    , Gogol.GamesManagement.Achievements.ResetAllForAllPlayers
-    , Gogol.GamesManagement.Achievements.ResetForAllPlayers
-    , Gogol.GamesManagement.Achievements.ResetMultipleForAllPlayers
-    , Gogol.GamesManagement.Applications.ListHidden
-    , Gogol.GamesManagement.Events.Reset
-    , Gogol.GamesManagement.Events.ResetAll
-    , Gogol.GamesManagement.Events.ResetAllForAllPlayers
-    , Gogol.GamesManagement.Events.ResetForAllPlayers
-    , Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
-    , Gogol.GamesManagement.Players.Hide
-    , Gogol.GamesManagement.Players.Unhide
-    , Gogol.GamesManagement.Scores.Reset
-    , Gogol.GamesManagement.Scores.ResetAll
-    , Gogol.GamesManagement.Scores.ResetAllForAllPlayers
-    , Gogol.GamesManagement.Scores.ResetForAllPlayers
-    , Gogol.GamesManagement.Scores.ResetMultipleForAllPlayers
-    , Gogol.GamesManagement.Types
+    Gogol.GamesManagement
+    Gogol.GamesManagement.Achievements.Reset
+    Gogol.GamesManagement.Achievements.ResetAll
+    Gogol.GamesManagement.Achievements.ResetAllForAllPlayers
+    Gogol.GamesManagement.Achievements.ResetForAllPlayers
+    Gogol.GamesManagement.Achievements.ResetMultipleForAllPlayers
+    Gogol.GamesManagement.Applications.ListHidden
+    Gogol.GamesManagement.Events.Reset
+    Gogol.GamesManagement.Events.ResetAll
+    Gogol.GamesManagement.Events.ResetAllForAllPlayers
+    Gogol.GamesManagement.Events.ResetForAllPlayers
+    Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
+    Gogol.GamesManagement.Players.Hide
+    Gogol.GamesManagement.Players.Unhide
+    Gogol.GamesManagement.Scores.Reset
+    Gogol.GamesManagement.Scores.ResetAll
+    Gogol.GamesManagement.Scores.ResetAllForAllPlayers
+    Gogol.GamesManagement.Scores.ResetForAllPlayers
+    Gogol.GamesManagement.Scores.ResetMultipleForAllPlayers
+    Gogol.GamesManagement.Types
 
   other-modules:
-      Gogol.GamesManagement.Internal.Product
-    , Gogol.GamesManagement.Internal.Sum
+    Gogol.GamesManagement.Internal.Product
+    Gogol.GamesManagement.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

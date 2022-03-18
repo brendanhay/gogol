@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,78 +30,85 @@
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.scores.resetAll@.
 module Gogol.GamesManagement.Scores.ResetAll
-    (
-    -- * Resource
-      GamesManagementScoresResetAllResource
+  ( -- * Resource
+    GamesManagementScoresResetAllResource,
 
     -- ** Constructing a Request
-    , newGamesManagementScoresResetAll
-    , GamesManagementScoresResetAll
-    ) where
+    newGamesManagementScoresResetAll,
+    GamesManagementScoresResetAll,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @gamesManagement.scores.resetAll@ method which the
 -- 'GamesManagementScoresResetAll' request conforms to.
 type GamesManagementScoresResetAllResource =
-     "games" Core.:>
-       "v1management" Core.:>
-         "scores" Core.:>
-           "reset" Core.:>
-             Core.QueryParam "$.xgafv" Xgafv Core.:>
-               Core.QueryParam "access_token" Core.Text Core.:>
-                 Core.QueryParam "callback" Core.Text Core.:>
-                   Core.QueryParam "uploadType" Core.Text Core.:>
-                     Core.QueryParam "upload_protocol" Core.Text Core.:>
-                       Core.QueryParam "alt" Core.AltJSON Core.:>
-                         Core.Post '[Core.JSON] PlayerScoreResetAllResponse
+  "games"
+    Core.:> "v1management"
+    Core.:> "scores"
+    Core.:> "reset"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Post '[Core.JSON] PlayerScoreResetAllResponse
 
 -- | Resets all scores for all leaderboards for the currently authenticated players. This method is only accessible to whitelisted tester accounts for your application.
 --
 -- /See:/ 'newGamesManagementScoresResetAll' smart constructor.
 data GamesManagementScoresResetAll = GamesManagementScoresResetAll
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GamesManagementScoresResetAll' with the minimum fields required to make a request.
-newGamesManagementScoresResetAll 
-    ::  GamesManagementScoresResetAll
+newGamesManagementScoresResetAll ::
+  GamesManagementScoresResetAll
 newGamesManagementScoresResetAll =
   GamesManagementScoresResetAll
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           GamesManagementScoresResetAll
-         where
-        type Rs GamesManagementScoresResetAll =
-             PlayerScoreResetAllResponse
-        type Scopes GamesManagementScoresResetAll =
-             '["https://www.googleapis.com/auth/games"]
-        requestClient GamesManagementScoresResetAll{..}
-          = go xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              gamesManagementService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy GamesManagementScoresResetAllResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    GamesManagementScoresResetAll
+  where
+  type
+    Rs GamesManagementScoresResetAll =
+      PlayerScoreResetAllResponse
+  type
+    Scopes GamesManagementScoresResetAll =
+      '["https://www.googleapis.com/auth/games"]
+  requestClient GamesManagementScoresResetAll {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      gamesManagementService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy GamesManagementScoresResetAllResource
+          )
+          Core.mempty
