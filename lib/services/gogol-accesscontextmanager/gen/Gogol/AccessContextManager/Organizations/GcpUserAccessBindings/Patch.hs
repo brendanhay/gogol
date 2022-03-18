@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,105 +36,98 @@
 --
 -- /See:/ <https://cloud.google.com/access-context-manager/docs/reference/rest/ Access Context Manager API Reference> for @accesscontextmanager.organizations.gcpUserAccessBindings.patch@.
 module Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
-  ( -- * Resource
-    AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource,
+    (
+    -- * Resource
+      AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource
 
     -- ** Constructing a Request
-    newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsPatch,
-  )
-where
+    , newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+    , AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+    ) where
 
-import Gogol.AccessContextManager.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AccessContextManager.Types
 
 -- | A resource alias for @accesscontextmanager.organizations.gcpUserAccessBindings.patch@ method which the
 -- 'AccessContextManagerOrganizationsGcpUserAccessBindingsPatch' request conforms to.
-type AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] GcpUserAccessBinding
-    Core.:> Core.Patch '[Core.JSON] Operation
+type AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "updateMask" Core.GFieldMask Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON] GcpUserAccessBinding
+                         Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Updates a GcpUserAccessBinding. Completion of this long-running operation does not necessarily signify that the changed binding is deployed onto all affected users, which may take more time.
 --
 -- /See:/ 'newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch' smart constructor.
 data AccessContextManagerOrganizationsGcpUserAccessBindingsPatch = AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by <https://tools.ietf.org/html/rfc3986#section-2.3 RFC 3986 Section 2.3>). Should not be specified by the client during creation. Example: \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\"
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: GcpUserAccessBinding,
-    -- | Required. Only the fields specified in this mask are updated. Because name and group/key cannot be changed, update/mask is required and must always be: update/mask { paths: \"access/levels\" }
-    updateMask :: (Core.Maybe Core.GFieldMask),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by <https://tools.ietf.org/html/rfc3986#section-2.3 RFC 3986 Section 2.3>). Should not be specified by the client during creation. Example: \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\"
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: GcpUserAccessBinding
+      -- | Required. Only the fields specified in this mask are updated. Because name and group/key cannot be changed, update/mask is required and must always be: update/mask { paths: \"access/levels\" }
+    , updateMask :: (Core.Maybe Core.GFieldMask)
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AccessContextManagerOrganizationsGcpUserAccessBindingsPatch' with the minimum fields required to make a request.
-newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch ::
-  -- |  Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by <https://tools.ietf.org/html/rfc3986#section-2.3 RFC 3986 Section 2.3>). Should not be specified by the client during creation. Example: \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\" See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  GcpUserAccessBinding ->
-  AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch 
+    ::  Core.Text
+       -- ^  Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by <https://tools.ietf.org/html/rfc3986#section-2.3 RFC 3986 Section 2.3>). Should not be specified by the client during creation. Example: \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\" See 'name'.
+    -> GcpUserAccessBinding
+       -- ^  Multipart request metadata. See 'payload'.
+    -> AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
 newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch name payload =
   AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , updateMask = Core.Nothing
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
-  where
-  type
-    Rs
-      AccessContextManagerOrganizationsGcpUserAccessBindingsPatch =
-      Operation
-  type
-    Scopes
-      AccessContextManagerOrganizationsGcpUserAccessBindingsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    AccessContextManagerOrganizationsGcpUserAccessBindingsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        accessContextManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+         where
+        type Rs
+               AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+             = Operation
+        type Scopes
+               AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          AccessContextManagerOrganizationsGcpUserAccessBindingsPatch{..}
+          = go name xgafv accessToken callback updateMask
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              accessContextManagerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource)
+                      Core.mempty
+

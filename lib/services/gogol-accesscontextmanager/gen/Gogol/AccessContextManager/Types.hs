@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,260 +31,261 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AccessContextManager.Types
-  ( -- * Configuration
-    accessContextManagerService,
+    (
+    -- * Configuration
+      accessContextManagerService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AccessContextManagerOperationMetadata
-    AccessContextManagerOperationMetadata (..),
-    newAccessContextManagerOperationMetadata,
+    , AccessContextManagerOperationMetadata (..)
+    , newAccessContextManagerOperationMetadata
 
     -- ** AccessLevel
-    AccessLevel (..),
-    newAccessLevel,
+    , AccessLevel (..)
+    , newAccessLevel
 
     -- ** AccessPolicy
-    AccessPolicy (..),
-    newAccessPolicy,
+    , AccessPolicy (..)
+    , newAccessPolicy
 
     -- ** ApiOperation
-    ApiOperation (..),
-    newApiOperation,
+    , ApiOperation (..)
+    , newApiOperation
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** BasicLevel
-    BasicLevel (..),
-    newBasicLevel,
+    , BasicLevel (..)
+    , newBasicLevel
 
     -- ** BasicLevel_CombiningFunction
-    BasicLevel_CombiningFunction (..),
+    , BasicLevel_CombiningFunction (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** CommitServicePerimetersRequest
-    CommitServicePerimetersRequest (..),
-    newCommitServicePerimetersRequest,
+    , CommitServicePerimetersRequest (..)
+    , newCommitServicePerimetersRequest
 
     -- ** CommitServicePerimetersResponse
-    CommitServicePerimetersResponse (..),
-    newCommitServicePerimetersResponse,
+    , CommitServicePerimetersResponse (..)
+    , newCommitServicePerimetersResponse
 
     -- ** Condition
-    Condition (..),
-    newCondition,
+    , Condition (..)
+    , newCondition
 
     -- ** CustomLevel
-    CustomLevel (..),
-    newCustomLevel,
+    , CustomLevel (..)
+    , newCustomLevel
 
     -- ** DevicePolicy
-    DevicePolicy (..),
-    newDevicePolicy,
+    , DevicePolicy (..)
+    , newDevicePolicy
 
     -- ** DevicePolicy_AllowedDeviceManagementLevelsItem
-    DevicePolicy_AllowedDeviceManagementLevelsItem (..),
+    , DevicePolicy_AllowedDeviceManagementLevelsItem (..)
 
     -- ** DevicePolicy_AllowedEncryptionStatusesItem
-    DevicePolicy_AllowedEncryptionStatusesItem (..),
+    , DevicePolicy_AllowedEncryptionStatusesItem (..)
 
     -- ** EgressFrom
-    EgressFrom (..),
-    newEgressFrom,
+    , EgressFrom (..)
+    , newEgressFrom
 
     -- ** EgressFrom_IdentityType
-    EgressFrom_IdentityType (..),
+    , EgressFrom_IdentityType (..)
 
     -- ** EgressPolicy
-    EgressPolicy (..),
-    newEgressPolicy,
+    , EgressPolicy (..)
+    , newEgressPolicy
 
     -- ** EgressTo
-    EgressTo (..),
-    newEgressTo,
+    , EgressTo (..)
+    , newEgressTo
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** GcpUserAccessBinding
-    GcpUserAccessBinding (..),
-    newGcpUserAccessBinding,
+    , GcpUserAccessBinding (..)
+    , newGcpUserAccessBinding
 
     -- ** GcpUserAccessBindingOperationMetadata
-    GcpUserAccessBindingOperationMetadata (..),
-    newGcpUserAccessBindingOperationMetadata,
+    , GcpUserAccessBindingOperationMetadata (..)
+    , newGcpUserAccessBindingOperationMetadata
 
     -- ** GetIamPolicyRequest
-    GetIamPolicyRequest (..),
-    newGetIamPolicyRequest,
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
 
     -- ** GetPolicyOptions
-    GetPolicyOptions (..),
-    newGetPolicyOptions,
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** IngressFrom
-    IngressFrom (..),
-    newIngressFrom,
+    , IngressFrom (..)
+    , newIngressFrom
 
     -- ** IngressFrom_IdentityType
-    IngressFrom_IdentityType (..),
+    , IngressFrom_IdentityType (..)
 
     -- ** IngressPolicy
-    IngressPolicy (..),
-    newIngressPolicy,
+    , IngressPolicy (..)
+    , newIngressPolicy
 
     -- ** IngressSource
-    IngressSource (..),
-    newIngressSource,
+    , IngressSource (..)
+    , newIngressSource
 
     -- ** IngressTo
-    IngressTo (..),
-    newIngressTo,
+    , IngressTo (..)
+    , newIngressTo
 
     -- ** ListAccessLevelsResponse
-    ListAccessLevelsResponse (..),
-    newListAccessLevelsResponse,
+    , ListAccessLevelsResponse (..)
+    , newListAccessLevelsResponse
 
     -- ** ListAccessPoliciesResponse
-    ListAccessPoliciesResponse (..),
-    newListAccessPoliciesResponse,
+    , ListAccessPoliciesResponse (..)
+    , newListAccessPoliciesResponse
 
     -- ** ListGcpUserAccessBindingsResponse
-    ListGcpUserAccessBindingsResponse (..),
-    newListGcpUserAccessBindingsResponse,
+    , ListGcpUserAccessBindingsResponse (..)
+    , newListGcpUserAccessBindingsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListServicePerimetersResponse
-    ListServicePerimetersResponse (..),
-    newListServicePerimetersResponse,
+    , ListServicePerimetersResponse (..)
+    , newListServicePerimetersResponse
 
     -- ** MethodSelector
-    MethodSelector (..),
-    newMethodSelector,
+    , MethodSelector (..)
+    , newMethodSelector
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OsConstraint
-    OsConstraint (..),
-    newOsConstraint,
+    , OsConstraint (..)
+    , newOsConstraint
 
     -- ** OsConstraint_OsType
-    OsConstraint_OsType (..),
+    , OsConstraint_OsType (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** ReplaceAccessLevelsRequest
-    ReplaceAccessLevelsRequest (..),
-    newReplaceAccessLevelsRequest,
+    , ReplaceAccessLevelsRequest (..)
+    , newReplaceAccessLevelsRequest
 
     -- ** ReplaceAccessLevelsResponse
-    ReplaceAccessLevelsResponse (..),
-    newReplaceAccessLevelsResponse,
+    , ReplaceAccessLevelsResponse (..)
+    , newReplaceAccessLevelsResponse
 
     -- ** ReplaceServicePerimetersRequest
-    ReplaceServicePerimetersRequest (..),
-    newReplaceServicePerimetersRequest,
+    , ReplaceServicePerimetersRequest (..)
+    , newReplaceServicePerimetersRequest
 
     -- ** ReplaceServicePerimetersResponse
-    ReplaceServicePerimetersResponse (..),
-    newReplaceServicePerimetersResponse,
+    , ReplaceServicePerimetersResponse (..)
+    , newReplaceServicePerimetersResponse
 
     -- ** ServicePerimeter
-    ServicePerimeter (..),
-    newServicePerimeter,
+    , ServicePerimeter (..)
+    , newServicePerimeter
 
     -- ** ServicePerimeter_PerimeterType
-    ServicePerimeter_PerimeterType (..),
+    , ServicePerimeter_PerimeterType (..)
 
     -- ** ServicePerimeterConfig
-    ServicePerimeterConfig (..),
-    newServicePerimeterConfig,
+    , ServicePerimeterConfig (..)
+    , newServicePerimeterConfig
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** VpcAccessibleServices
-    VpcAccessibleServices (..),
-    newVpcAccessibleServices,
+    , VpcAccessibleServices (..)
+    , newVpcAccessibleServices
 
     -- ** AccessPoliciesAccessLevelsGetAccessLevelFormat
-    AccessPoliciesAccessLevelsGetAccessLevelFormat (..),
+    , AccessPoliciesAccessLevelsGetAccessLevelFormat (..)
 
     -- ** AccessPoliciesAccessLevelsListAccessLevelFormat
-    AccessPoliciesAccessLevelsListAccessLevelFormat (..),
-  )
-where
+    , AccessPoliciesAccessLevelsListAccessLevelFormat (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AccessContextManager.Internal.Product
 import Gogol.AccessContextManager.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Access Context Manager API. This contains the host and root path used as a starting point for constructing service requests.
 accessContextManagerService :: Core.ServiceConfig
-accessContextManagerService =
-  Core.defaultService
-    (Core.ServiceId "accesscontextmanager:v1")
-    "accesscontextmanager.googleapis.com"
+accessContextManagerService
+  = Core.defaultService
+      (Core.ServiceId "accesscontextmanager:v1")
+      "accesscontextmanager.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
