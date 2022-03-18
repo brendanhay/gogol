@@ -1,234 +1,168 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ReplicaPoolUpdater
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- [Deprecated. Please use compute.instanceGroupManagers.update method.
--- replicapoolupdater API will be disabled after December 30th, 2016]
--- Updates groups of Compute Engine instances.
+-- [Deprecated. Please use compute.instanceGroupManagers.update method. replicapoolupdater API will be disabled after December 30th, 2016] Updates groups of Compute Engine instances.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference>
 module Network.Google.ReplicaPoolUpdater
-    (
-    -- * Service Configuration
-      replicaPoolUpdaterService
+  ( -- * Configuration
+    replicaPoolUpdaterService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , replicapoolScope
-    , replicapoolReadOnlyScope
-
-    -- * API Declaration
-    , ReplicaPoolUpdaterAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    replicapoolScope,
+    replicapoolReadOnlyScope,
 
     -- * Resources
 
     -- ** replicapoolupdater.rollingUpdates.cancel
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
+    ReplicaPoolUpdaterRollingUpdatesCancelResource,
+    newReplicaPoolUpdaterRollingUpdatesCancel,
+    ReplicaPoolUpdaterRollingUpdatesCancel,
 
     -- ** replicapoolupdater.rollingUpdates.get
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
+    ReplicaPoolUpdaterRollingUpdatesGetResource,
+    newReplicaPoolUpdaterRollingUpdatesGet,
+    ReplicaPoolUpdaterRollingUpdatesGet,
 
     -- ** replicapoolupdater.rollingUpdates.insert
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
+    ReplicaPoolUpdaterRollingUpdatesInsertResource,
+    newReplicaPoolUpdaterRollingUpdatesInsert,
+    ReplicaPoolUpdaterRollingUpdatesInsert,
 
     -- ** replicapoolupdater.rollingUpdates.list
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
+    ReplicaPoolUpdaterRollingUpdatesListResource,
+    newReplicaPoolUpdaterRollingUpdatesList,
+    ReplicaPoolUpdaterRollingUpdatesList,
 
     -- ** replicapoolupdater.rollingUpdates.listInstanceUpdates
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
+    ReplicaPoolUpdaterRollingUpdatesListInstanceUpdatesResource,
+    newReplicaPoolUpdaterRollingUpdatesListInstanceUpdates,
+    ReplicaPoolUpdaterRollingUpdatesListInstanceUpdates,
 
     -- ** replicapoolupdater.rollingUpdates.pause
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
+    ReplicaPoolUpdaterRollingUpdatesPauseResource,
+    newReplicaPoolUpdaterRollingUpdatesPause,
+    ReplicaPoolUpdaterRollingUpdatesPause,
 
     -- ** replicapoolupdater.rollingUpdates.resume
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
+    ReplicaPoolUpdaterRollingUpdatesResumeResource,
+    newReplicaPoolUpdaterRollingUpdatesResume,
+    ReplicaPoolUpdaterRollingUpdatesResume,
 
     -- ** replicapoolupdater.rollingUpdates.rollback
-    , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
+    ReplicaPoolUpdaterRollingUpdatesRollbackResource,
+    newReplicaPoolUpdaterRollingUpdatesRollback,
+    ReplicaPoolUpdaterRollingUpdatesRollback,
 
     -- ** replicapoolupdater.zoneOperations.get
-    , module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.Get
+    ReplicaPoolUpdaterZoneOperationsGetResource,
+    newReplicaPoolUpdaterZoneOperationsGet,
+    ReplicaPoolUpdaterZoneOperationsGet,
 
     -- ** replicapoolupdater.zoneOperations.list
-    , module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
+    ReplicaPoolUpdaterZoneOperationsListResource,
+    newReplicaPoolUpdaterZoneOperationsList,
+    ReplicaPoolUpdaterZoneOperationsList,
 
     -- * Types
 
-    -- ** OperationWarningsItemDataItem
-    , OperationWarningsItemDataItem
-    , operationWarningsItemDataItem
-    , owidiValue
-    , owidiKey
+    -- ** InstanceUpdate
+    InstanceUpdate (..),
+    newInstanceUpdate,
 
-    -- ** RollingUpdate
-    , RollingUpdate
-    , rollingUpdate
-    , ruStatus
-    , ruProgress
-    , ruInstanceGroupManager
-    , ruKind
-    , ruError
-    , ruInstanceTemplate
-    , ruUser
-    , ruSelfLink
-    , ruStatusMessage
-    , ruCreationTimestamp
-    , ruId
-    , ruPolicy
-    , ruActionType
-    , ruOldInstanceTemplate
-    , ruDescription
-    , ruInstanceGroup
+    -- ** InstanceUpdate_Error
+    InstanceUpdate_Error (..),
+    newInstanceUpdate_Error,
 
-    -- ** RollingUpdateError
-    , RollingUpdateError
-    , rollingUpdateError
-    , rueErrors
-
-    -- ** OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
+    -- ** InstanceUpdate_Error_ErrorsItem
+    InstanceUpdate_Error_ErrorsItem (..),
+    newInstanceUpdate_Error_ErrorsItem,
 
     -- ** InstanceUpdateList
-    , InstanceUpdateList
-    , instanceUpdateList
-    , iulNextPageToken
-    , iulKind
-    , iulItems
-    , iulSelfLink
-
-    -- ** RollingUpdateErrorErrorsItem
-    , RollingUpdateErrorErrorsItem
-    , rollingUpdateErrorErrorsItem
-    , rueeiLocation
-    , rueeiCode
-    , rueeiMessage
+    InstanceUpdateList (..),
+    newInstanceUpdateList,
 
     -- ** Operation
-    , Operation
-    , operation
-    , oTargetId
-    , oStatus
-    , oInsertTime
-    , oProgress
-    , oStartTime
-    , oKind
-    , oError
-    , oHTTPErrorMessage
-    , oZone
-    , oWarnings
-    , oHTTPErrorStatusCode
-    , oUser
-    , oSelfLink
-    , oName
-    , oStatusMessage
-    , oCreationTimestamp
-    , oEndTime
-    , oId
-    , oOperationType
-    , oRegion
-    , oTargetLink
-    , oClientOperationId
+    Operation (..),
+    newOperation,
 
-    -- ** InstanceUpdate
-    , InstanceUpdate
-    , instanceUpdate
-    , iuStatus
-    , iuError
-    , iuInstance
+    -- ** Operation_Error
+    Operation_Error (..),
+    newOperation_Error,
 
-    -- ** InstanceUpdateError
-    , InstanceUpdateError
-    , instanceUpdateError
-    , iueErrors
+    -- ** Operation_Error_ErrorsItem
+    Operation_Error_ErrorsItem (..),
+    newOperation_Error_ErrorsItem,
 
-    -- ** RollingUpdatePolicy
-    , RollingUpdatePolicy
-    , rollingUpdatePolicy
-    , rupMinInstanceUpdateTimeSec
-    , rupInstanceStartupTimeoutSec
-    , rupMaxNumFailedInstances
-    , rupAutoPauseAfterInstances
-    , rupMaxNumConcurrentInstances
+    -- ** Operation_WarningsItem
+    Operation_WarningsItem (..),
+    newOperation_WarningsItem,
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** Operation_WarningsItem_DataItem
+    Operation_WarningsItem_DataItem (..),
+    newOperation_WarningsItem_DataItem,
 
-    -- ** OperationErrorErrorsItem
-    , OperationErrorErrorsItem
-    , operationErrorErrorsItem
-    , oeeiLocation
-    , oeeiCode
-    , oeeiMessage
+    -- ** OperationList
+    OperationList (..),
+    newOperationList,
 
-    -- ** InstanceUpdateErrorErrorsItem
-    , InstanceUpdateErrorErrorsItem
-    , instanceUpdateErrorErrorsItem
-    , iueeiLocation
-    , iueeiCode
-    , iueeiMessage
+    -- ** RollingUpdate
+    RollingUpdate (..),
+    newRollingUpdate,
+
+    -- ** RollingUpdate_Error
+    RollingUpdate_Error (..),
+    newRollingUpdate_Error,
+
+    -- ** RollingUpdate_Error_ErrorsItem
+    RollingUpdate_Error_ErrorsItem (..),
+    newRollingUpdate_Error_ErrorsItem,
+
+    -- ** RollingUpdate_Policy
+    RollingUpdate_Policy (..),
+    newRollingUpdate_Policy,
 
     -- ** RollingUpdateList
-    , RollingUpdateList
-    , rollingUpdateList
-    , rulNextPageToken
-    , rulKind
-    , rulItems
-    , rulSelfLink
+    RollingUpdateList (..),
+    newRollingUpdateList,
+  )
+where
 
-    -- ** OperationWarningsItem
-    , OperationWarningsItem
-    , operationWarningsItem
-    , owiData
-    , owiCode
-    , owiMessage
-    ) where
-
-import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.Cancel
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.Get
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.Insert
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.List
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.Pause
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.Resume
+import Network.Google.ReplicaPoolUpdater.RollingUpdates.Rollback
 import Network.Google.ReplicaPoolUpdater.Types
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
-import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
-import Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.Get
-import Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Compute Engine Instance Group Updater API service.
-type ReplicaPoolUpdaterAPI =
-     RollingUpdatesInsertResource :<|>
-       RollingUpdatesListResource
-       :<|> RollingUpdatesGetResource
-       :<|> RollingUpdatesRollbackResource
-       :<|> RollingUpdatesPauseResource
-       :<|> RollingUpdatesCancelResource
-       :<|> RollingUpdatesListInstanceUpdatesResource
-       :<|> RollingUpdatesResumeResource
-       :<|> ZoneOperationsListResource
-       :<|> ZoneOperationsGetResource
+import Network.Google.ReplicaPoolUpdater.ZoneOperations.Get
+import Network.Google.ReplicaPoolUpdater.ZoneOperations.List
