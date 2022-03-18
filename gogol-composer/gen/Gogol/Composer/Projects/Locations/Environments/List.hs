@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Composer.Projects.Locations.Environments.List
+-- Module      : Gogol.Composer.Projects.Locations.Environments.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List environments.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.list@.
-module Network.Google.Composer.Projects.Locations.Environments.List
+module Gogol.Composer.Projects.Locations.Environments.List
   ( -- * Resource
     ComposerProjectsLocationsEnvironmentsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Composer.Projects.Locations.Environments.List
   )
 where
 
-import Network.Google.Composer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Composer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @composer.projects.locations.environments.list@ method which the
 -- 'ComposerProjectsLocationsEnvironmentsList' request conforms to.

@@ -19,58 +19,54 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Composer.Projects.Locations.Environments.Create
+-- Module      : Gogol.Composer.Projects.Locations.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Create a new environment.
+-- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.create@.
-module Network.Google.Composer.Projects.Locations.Environments.Create
+-- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.operations.get@.
+module Gogol.Composer.Projects.Locations.Operations.Get
   ( -- * Resource
-    ComposerProjectsLocationsEnvironmentsCreateResource,
+    ComposerProjectsLocationsOperationsGetResource,
 
     -- ** Constructing a Request
-    newComposerProjectsLocationsEnvironmentsCreate,
-    ComposerProjectsLocationsEnvironmentsCreate,
+    newComposerProjectsLocationsOperationsGet,
+    ComposerProjectsLocationsOperationsGet,
   )
 where
 
-import Network.Google.Composer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Composer.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @composer.projects.locations.environments.create@ method which the
--- 'ComposerProjectsLocationsEnvironmentsCreate' request conforms to.
-type ComposerProjectsLocationsEnvironmentsCreateResource =
+-- | A resource alias for @composer.projects.locations.operations.get@ method which the
+-- 'ComposerProjectsLocationsOperationsGet' request conforms to.
+type ComposerProjectsLocationsOperationsGetResource =
   "v1"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "environments"
+    Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Environment
-    Core.:> Core.Post '[Core.JSON] Operation
+    Core.:> Core.Get '[Core.JSON] Operation
 
--- | Create a new environment.
+-- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ 'newComposerProjectsLocationsEnvironmentsCreate' smart constructor.
-data ComposerProjectsLocationsEnvironmentsCreate = ComposerProjectsLocationsEnvironmentsCreate
+-- /See:/ 'newComposerProjectsLocationsOperationsGet' smart constructor.
+data ComposerProjectsLocationsOperationsGet = ComposerProjectsLocationsOperationsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The parent must be of the form \"projects\/{projectId}\/locations\/{locationId}\".
-    parent :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Environment,
+    -- | The name of the operation resource.
+    name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -78,52 +74,47 @@ data ComposerProjectsLocationsEnvironmentsCreate = ComposerProjectsLocationsEnvi
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ComposerProjectsLocationsEnvironmentsCreate' with the minimum fields required to make a request.
-newComposerProjectsLocationsEnvironmentsCreate ::
-  -- |  The parent must be of the form \"projects\/{projectId}\/locations\/{locationId}\". See 'parent'.
+-- | Creates a value of 'ComposerProjectsLocationsOperationsGet' with the minimum fields required to make a request.
+newComposerProjectsLocationsOperationsGet ::
+  -- |  The name of the operation resource. See 'name'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Environment ->
-  ComposerProjectsLocationsEnvironmentsCreate
-newComposerProjectsLocationsEnvironmentsCreate parent payload =
-  ComposerProjectsLocationsEnvironmentsCreate
+  ComposerProjectsLocationsOperationsGet
+newComposerProjectsLocationsOperationsGet name =
+  ComposerProjectsLocationsOperationsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
+      name = name,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    ComposerProjectsLocationsEnvironmentsCreate
+    ComposerProjectsLocationsOperationsGet
   where
   type
-    Rs ComposerProjectsLocationsEnvironmentsCreate =
+    Rs ComposerProjectsLocationsOperationsGet =
       Operation
   type
-    Scopes
-      ComposerProjectsLocationsEnvironmentsCreate =
+    Scopes ComposerProjectsLocationsOperationsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    ComposerProjectsLocationsEnvironmentsCreate {..} =
+    ComposerProjectsLocationsOperationsGet {..} =
       go
-        parent
+        name
         xgafv
         accessToken
         callback
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         composerService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  ComposerProjectsLocationsEnvironmentsCreateResource
+                  ComposerProjectsLocationsOperationsGetResource
             )
             Core.mempty

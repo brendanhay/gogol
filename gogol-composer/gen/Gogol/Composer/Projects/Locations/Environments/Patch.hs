@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Composer.Projects.Locations.Environments.Patch
+-- Module      : Gogol.Composer.Projects.Locations.Environments.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Update an environment.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.patch@.
-module Network.Google.Composer.Projects.Locations.Environments.Patch
+module Gogol.Composer.Projects.Locations.Environments.Patch
   ( -- * Resource
     ComposerProjectsLocationsEnvironmentsPatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Composer.Projects.Locations.Environments.Patch
   )
 where
 
-import Network.Google.Composer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Composer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @composer.projects.locations.environments.patch@ method which the
 -- 'ComposerProjectsLocationsEnvironmentsPatch' request conforms to.

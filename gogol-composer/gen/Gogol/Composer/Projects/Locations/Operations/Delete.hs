@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Composer.Projects.Locations.Environments.Get
+-- Module      : Gogol.Composer.Projects.Locations.Operations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an existing environment.
+-- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.get@.
-module Network.Google.Composer.Projects.Locations.Environments.Get
+-- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.operations.delete@.
+module Gogol.Composer.Projects.Locations.Operations.Delete
   ( -- * Resource
-    ComposerProjectsLocationsEnvironmentsGetResource,
+    ComposerProjectsLocationsOperationsDeleteResource,
 
     -- ** Constructing a Request
-    newComposerProjectsLocationsEnvironmentsGet,
-    ComposerProjectsLocationsEnvironmentsGet,
+    newComposerProjectsLocationsOperationsDelete,
+    ComposerProjectsLocationsOperationsDelete,
   )
 where
 
-import Network.Google.Composer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Composer.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @composer.projects.locations.environments.get@ method which the
--- 'ComposerProjectsLocationsEnvironmentsGet' request conforms to.
-type ComposerProjectsLocationsEnvironmentsGetResource =
+-- | A resource alias for @composer.projects.locations.operations.delete@ method which the
+-- 'ComposerProjectsLocationsOperationsDelete' request conforms to.
+type ComposerProjectsLocationsOperationsDeleteResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type ComposerProjectsLocationsEnvironmentsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Environment
+    Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Get an existing environment.
+-- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ 'newComposerProjectsLocationsEnvironmentsGet' smart constructor.
-data ComposerProjectsLocationsEnvironmentsGet = ComposerProjectsLocationsEnvironmentsGet
+-- /See:/ 'newComposerProjectsLocationsOperationsDelete' smart constructor.
+data ComposerProjectsLocationsOperationsDelete = ComposerProjectsLocationsOperationsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name of the environment to get, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\"
+    -- | The name of the operation resource to be deleted.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data ComposerProjectsLocationsEnvironmentsGet = ComposerProjectsLocationsEnviron
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ComposerProjectsLocationsEnvironmentsGet' with the minimum fields required to make a request.
-newComposerProjectsLocationsEnvironmentsGet ::
-  -- |  The resource name of the environment to get, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\" See 'name'.
+-- | Creates a value of 'ComposerProjectsLocationsOperationsDelete' with the minimum fields required to make a request.
+newComposerProjectsLocationsOperationsDelete ::
+  -- |  The name of the operation resource to be deleted. See 'name'.
   Core.Text ->
-  ComposerProjectsLocationsEnvironmentsGet
-newComposerProjectsLocationsEnvironmentsGet name =
-  ComposerProjectsLocationsEnvironmentsGet
+  ComposerProjectsLocationsOperationsDelete
+newComposerProjectsLocationsOperationsDelete name =
+  ComposerProjectsLocationsOperationsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,16 +91,16 @@ newComposerProjectsLocationsEnvironmentsGet name =
 
 instance
   Core.GoogleRequest
-    ComposerProjectsLocationsEnvironmentsGet
+    ComposerProjectsLocationsOperationsDelete
   where
   type
-    Rs ComposerProjectsLocationsEnvironmentsGet =
-      Environment
+    Rs ComposerProjectsLocationsOperationsDelete =
+      Empty
   type
-    Scopes ComposerProjectsLocationsEnvironmentsGet =
+    Scopes ComposerProjectsLocationsOperationsDelete =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    ComposerProjectsLocationsEnvironmentsGet {..} =
+    ComposerProjectsLocationsOperationsDelete {..} =
       go
         name
         xgafv
@@ -115,6 +115,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  ComposerProjectsLocationsEnvironmentsGetResource
+                  ComposerProjectsLocationsOperationsDeleteResource
             )
             Core.mempty

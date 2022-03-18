@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Composer
-    Network.Google.Composer.Projects.Locations.Environments.Create
-    Network.Google.Composer.Projects.Locations.Environments.Delete
-    Network.Google.Composer.Projects.Locations.Environments.Get
-    Network.Google.Composer.Projects.Locations.Environments.List
-    Network.Google.Composer.Projects.Locations.Environments.Patch
-    Network.Google.Composer.Projects.Locations.ImageVersions.List
-    Network.Google.Composer.Projects.Locations.Operations.Delete
-    Network.Google.Composer.Projects.Locations.Operations.Get
-    Network.Google.Composer.Projects.Locations.Operations.List
-    Network.Google.Composer.Types
+    Gogol.Composer
+    Gogol.Composer.Projects.Locations.Environments.Create
+    Gogol.Composer.Projects.Locations.Environments.Delete
+    Gogol.Composer.Projects.Locations.Environments.Get
+    Gogol.Composer.Projects.Locations.Environments.List
+    Gogol.Composer.Projects.Locations.Environments.Patch
+    Gogol.Composer.Projects.Locations.ImageVersions.List
+    Gogol.Composer.Projects.Locations.Operations.Delete
+    Gogol.Composer.Projects.Locations.Operations.Get
+    Gogol.Composer.Projects.Locations.Operations.List
+    Gogol.Composer.Types
 
   other-modules:
-    Network.Google.Composer.Internal.Product
-    Network.Google.Composer.Internal.Sum
+    Gogol.Composer.Internal.Product
+    Gogol.Composer.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
