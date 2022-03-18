@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch
+-- Module      : Gogol.DoubleClickSearch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Search Ads 360 API allows developers to automate uploading conversions and downloading reports from Search Ads 360.
 --
 -- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference>
-module Network.Google.DoubleClickSearch
+module Gogol.DoubleClickSearch
   ( -- * Configuration
     doubleClickSearchService,
 
@@ -162,13 +162,13 @@ module Network.Google.DoubleClickSearch
   )
 where
 
-import Network.Google.DoubleClickSearch.Conversion.Get
-import Network.Google.DoubleClickSearch.Conversion.Insert
-import Network.Google.DoubleClickSearch.Conversion.Update
-import Network.Google.DoubleClickSearch.Conversion.UpdateAvailability
-import Network.Google.DoubleClickSearch.Reports.Generate
-import Network.Google.DoubleClickSearch.Reports.Get
-import Network.Google.DoubleClickSearch.Reports.GetFile
-import Network.Google.DoubleClickSearch.Reports.Request
-import Network.Google.DoubleClickSearch.SavedColumns.List
-import Network.Google.DoubleClickSearch.Types
+import Gogol.DoubleClickSearch.Conversion.Get
+import Gogol.DoubleClickSearch.Conversion.Insert
+import Gogol.DoubleClickSearch.Conversion.Update
+import Gogol.DoubleClickSearch.Conversion.UpdateAvailability
+import Gogol.DoubleClickSearch.Reports.Generate
+import Gogol.DoubleClickSearch.Reports.Get
+import Gogol.DoubleClickSearch.Reports.GetFile
+import Gogol.DoubleClickSearch.Reports.Request
+import Gogol.DoubleClickSearch.SavedColumns.List
+import Gogol.DoubleClickSearch.Types

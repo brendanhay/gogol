@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.Reports.GetFile
+-- Module      : Gogol.DoubleClickSearch.Reports.GetFile
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Downloads a report file encoded in UTF-8.
 --
 -- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.reports.getFile@.
-module Network.Google.DoubleClickSearch.Reports.GetFile
+module Gogol.DoubleClickSearch.Reports.GetFile
   ( -- * Resource
     DoubleClickSearchReportsGetFileResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DoubleClickSearch.Reports.GetFile
   )
 where
 
-import Network.Google.DoubleClickSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @doubleclicksearch.reports.getFile@ method which the
 -- 'DoubleClickSearchReportsGetFile' request conforms to.

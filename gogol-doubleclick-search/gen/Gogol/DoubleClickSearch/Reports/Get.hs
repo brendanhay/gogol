@@ -19,57 +19,56 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.Reports.Generate
+-- Module      : Gogol.DoubleClickSearch.Reports.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates and returns a report immediately.
+-- Polls for the status of a report request.
 --
--- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.reports.generate@.
-module Network.Google.DoubleClickSearch.Reports.Generate
+-- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.reports.get@.
+module Gogol.DoubleClickSearch.Reports.Get
   ( -- * Resource
-    DoubleClickSearchReportsGenerateResource,
+    DoubleClickSearchReportsGetResource,
 
     -- ** Constructing a Request
-    newDoubleClickSearchReportsGenerate,
-    DoubleClickSearchReportsGenerate,
+    newDoubleClickSearchReportsGet,
+    DoubleClickSearchReportsGet,
   )
 where
 
-import Network.Google.DoubleClickSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclicksearch.reports.generate@ method which the
--- 'DoubleClickSearchReportsGenerate' request conforms to.
-type DoubleClickSearchReportsGenerateResource =
+-- | A resource alias for @doubleclicksearch.reports.get@ method which the
+-- 'DoubleClickSearchReportsGet' request conforms to.
+type DoubleClickSearchReportsGetResource =
   "doubleclicksearch"
     Core.:> "v2"
     Core.:> "reports"
-    Core.:> "generate"
+    Core.:> Core.Capture "reportId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ReportRequest
-    Core.:> Core.Post '[Core.JSON] Report
+    Core.:> Core.Get '[Core.JSON] Report
 
--- | Generates and returns a report immediately.
+-- | Polls for the status of a report request.
 --
--- /See:/ 'newDoubleClickSearchReportsGenerate' smart constructor.
-data DoubleClickSearchReportsGenerate = DoubleClickSearchReportsGenerate
+-- /See:/ 'newDoubleClickSearchReportsGet' smart constructor.
+data DoubleClickSearchReportsGet = DoubleClickSearchReportsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: ReportRequest,
+    -- | ID of the report request being polled.
+    reportId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,43 +76,43 @@ data DoubleClickSearchReportsGenerate = DoubleClickSearchReportsGenerate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleClickSearchReportsGenerate' with the minimum fields required to make a request.
-newDoubleClickSearchReportsGenerate ::
-  -- |  Multipart request metadata. See 'payload'.
-  ReportRequest ->
-  DoubleClickSearchReportsGenerate
-newDoubleClickSearchReportsGenerate payload =
-  DoubleClickSearchReportsGenerate
+-- | Creates a value of 'DoubleClickSearchReportsGet' with the minimum fields required to make a request.
+newDoubleClickSearchReportsGet ::
+  -- |  ID of the report request being polled. See 'reportId'.
+  Core.Text ->
+  DoubleClickSearchReportsGet
+newDoubleClickSearchReportsGet reportId =
+  DoubleClickSearchReportsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      reportId = reportId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DoubleClickSearchReportsGenerate
+    DoubleClickSearchReportsGet
   where
-  type Rs DoubleClickSearchReportsGenerate = Report
+  type Rs DoubleClickSearchReportsGet = Report
   type
-    Scopes DoubleClickSearchReportsGenerate =
+    Scopes DoubleClickSearchReportsGet =
       '["https://www.googleapis.com/auth/doubleclicksearch"]
-  requestClient DoubleClickSearchReportsGenerate {..} =
+  requestClient DoubleClickSearchReportsGet {..} =
     go
+      reportId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       doubleClickSearchService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DoubleClickSearchReportsGenerateResource
+              Core.Proxy DoubleClickSearchReportsGetResource
           )
           Core.mempty

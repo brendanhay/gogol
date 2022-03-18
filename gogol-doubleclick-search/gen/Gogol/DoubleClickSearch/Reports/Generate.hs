@@ -19,48 +19,49 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.Conversion.Insert
+-- Module      : Gogol.DoubleClickSearch.Reports.Generate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts a batch of new conversions into DoubleClick Search.
+-- Generates and returns a report immediately.
 --
--- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.conversion.insert@.
-module Network.Google.DoubleClickSearch.Conversion.Insert
+-- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.reports.generate@.
+module Gogol.DoubleClickSearch.Reports.Generate
   ( -- * Resource
-    DoubleClickSearchConversionInsertResource,
+    DoubleClickSearchReportsGenerateResource,
 
     -- ** Constructing a Request
-    newDoubleClickSearchConversionInsert,
-    DoubleClickSearchConversionInsert,
+    newDoubleClickSearchReportsGenerate,
+    DoubleClickSearchReportsGenerate,
   )
 where
 
-import Network.Google.DoubleClickSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclicksearch.conversion.insert@ method which the
--- 'DoubleClickSearchConversionInsert' request conforms to.
-type DoubleClickSearchConversionInsertResource =
+-- | A resource alias for @doubleclicksearch.reports.generate@ method which the
+-- 'DoubleClickSearchReportsGenerate' request conforms to.
+type DoubleClickSearchReportsGenerateResource =
   "doubleclicksearch"
     Core.:> "v2"
-    Core.:> "conversion"
+    Core.:> "reports"
+    Core.:> "generate"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ConversionList
-    Core.:> Core.Post '[Core.JSON] ConversionList
+    Core.:> Core.ReqBody '[Core.JSON] ReportRequest
+    Core.:> Core.Post '[Core.JSON] Report
 
--- | Inserts a batch of new conversions into DoubleClick Search.
+-- | Generates and returns a report immediately.
 --
--- /See:/ 'newDoubleClickSearchConversionInsert' smart constructor.
-data DoubleClickSearchConversionInsert = DoubleClickSearchConversionInsert
+-- /See:/ 'newDoubleClickSearchReportsGenerate' smart constructor.
+data DoubleClickSearchReportsGenerate = DoubleClickSearchReportsGenerate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +69,7 @@ data DoubleClickSearchConversionInsert = DoubleClickSearchConversionInsert
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: ConversionList,
+    payload :: ReportRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -76,13 +77,13 @@ data DoubleClickSearchConversionInsert = DoubleClickSearchConversionInsert
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleClickSearchConversionInsert' with the minimum fields required to make a request.
-newDoubleClickSearchConversionInsert ::
+-- | Creates a value of 'DoubleClickSearchReportsGenerate' with the minimum fields required to make a request.
+newDoubleClickSearchReportsGenerate ::
   -- |  Multipart request metadata. See 'payload'.
-  ConversionList ->
-  DoubleClickSearchConversionInsert
-newDoubleClickSearchConversionInsert payload =
-  DoubleClickSearchConversionInsert
+  ReportRequest ->
+  DoubleClickSearchReportsGenerate
+newDoubleClickSearchReportsGenerate payload =
+  DoubleClickSearchReportsGenerate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -93,15 +94,13 @@ newDoubleClickSearchConversionInsert payload =
 
 instance
   Core.GoogleRequest
-    DoubleClickSearchConversionInsert
+    DoubleClickSearchReportsGenerate
   where
+  type Rs DoubleClickSearchReportsGenerate = Report
   type
-    Rs DoubleClickSearchConversionInsert =
-      ConversionList
-  type
-    Scopes DoubleClickSearchConversionInsert =
+    Scopes DoubleClickSearchReportsGenerate =
       '["https://www.googleapis.com/auth/doubleclicksearch"]
-  requestClient DoubleClickSearchConversionInsert {..} =
+  requestClient DoubleClickSearchReportsGenerate {..} =
     go
       xgafv
       accessToken
@@ -115,6 +114,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DoubleClickSearchConversionInsertResource
+              Core.Proxy DoubleClickSearchReportsGenerateResource
           )
           Core.mempty

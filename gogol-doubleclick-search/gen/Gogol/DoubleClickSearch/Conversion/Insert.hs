@@ -19,61 +19,56 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.SavedColumns.List
+-- Module      : Gogol.DoubleClickSearch.Conversion.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve the list of saved columns for a specified advertiser.
+-- Inserts a batch of new conversions into DoubleClick Search.
 --
--- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.savedColumns.list@.
-module Network.Google.DoubleClickSearch.SavedColumns.List
+-- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.conversion.insert@.
+module Gogol.DoubleClickSearch.Conversion.Insert
   ( -- * Resource
-    DoubleClickSearchSavedColumnsListResource,
+    DoubleClickSearchConversionInsertResource,
 
     -- ** Constructing a Request
-    newDoubleClickSearchSavedColumnsList,
-    DoubleClickSearchSavedColumnsList,
+    newDoubleClickSearchConversionInsert,
+    DoubleClickSearchConversionInsert,
   )
 where
 
-import Network.Google.DoubleClickSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclicksearch.savedColumns.list@ method which the
--- 'DoubleClickSearchSavedColumnsList' request conforms to.
-type DoubleClickSearchSavedColumnsListResource =
+-- | A resource alias for @doubleclicksearch.conversion.insert@ method which the
+-- 'DoubleClickSearchConversionInsert' request conforms to.
+type DoubleClickSearchConversionInsertResource =
   "doubleclicksearch"
     Core.:> "v2"
-    Core.:> "agency"
-    Core.:> Core.Capture "agencyId" Core.Int64
-    Core.:> "advertiser"
-    Core.:> Core.Capture "advertiserId" Core.Int64
-    Core.:> "savedcolumns"
+    Core.:> "conversion"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] SavedColumnList
+    Core.:> Core.ReqBody '[Core.JSON] ConversionList
+    Core.:> Core.Post '[Core.JSON] ConversionList
 
--- | Retrieve the list of saved columns for a specified advertiser.
+-- | Inserts a batch of new conversions into DoubleClick Search.
 --
--- /See:/ 'newDoubleClickSearchSavedColumnsList' smart constructor.
-data DoubleClickSearchSavedColumnsList = DoubleClickSearchSavedColumnsList
+-- /See:/ 'newDoubleClickSearchConversionInsert' smart constructor.
+data DoubleClickSearchConversionInsert = DoubleClickSearchConversionInsert
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | DS ID of the advertiser.
-    advertiserId :: Core.Int64,
-    -- | DS ID of the agency.
-    agencyId :: Core.Int64,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: ConversionList,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -81,49 +76,45 @@ data DoubleClickSearchSavedColumnsList = DoubleClickSearchSavedColumnsList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleClickSearchSavedColumnsList' with the minimum fields required to make a request.
-newDoubleClickSearchSavedColumnsList ::
-  -- |  DS ID of the advertiser. See 'advertiserId'.
-  Core.Int64 ->
-  -- |  DS ID of the agency. See 'agencyId'.
-  Core.Int64 ->
-  DoubleClickSearchSavedColumnsList
-newDoubleClickSearchSavedColumnsList advertiserId agencyId =
-  DoubleClickSearchSavedColumnsList
+-- | Creates a value of 'DoubleClickSearchConversionInsert' with the minimum fields required to make a request.
+newDoubleClickSearchConversionInsert ::
+  -- |  Multipart request metadata. See 'payload'.
+  ConversionList ->
+  DoubleClickSearchConversionInsert
+newDoubleClickSearchConversionInsert payload =
+  DoubleClickSearchConversionInsert
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
-      advertiserId = advertiserId,
-      agencyId = agencyId,
       callback = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DoubleClickSearchSavedColumnsList
+    DoubleClickSearchConversionInsert
   where
   type
-    Rs DoubleClickSearchSavedColumnsList =
-      SavedColumnList
+    Rs DoubleClickSearchConversionInsert =
+      ConversionList
   type
-    Scopes DoubleClickSearchSavedColumnsList =
+    Scopes DoubleClickSearchConversionInsert =
       '["https://www.googleapis.com/auth/doubleclicksearch"]
-  requestClient DoubleClickSearchSavedColumnsList {..} =
+  requestClient DoubleClickSearchConversionInsert {..} =
     go
-      agencyId
-      advertiserId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       doubleClickSearchService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DoubleClickSearchSavedColumnsListResource
+              Core.Proxy DoubleClickSearchConversionInsertResource
           )
           Core.mempty

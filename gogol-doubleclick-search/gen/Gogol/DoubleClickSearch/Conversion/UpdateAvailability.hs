@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.Conversion.UpdateAvailability
+-- Module      : Gogol.DoubleClickSearch.Conversion.UpdateAvailability
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates the availabilities of a batch of floodlight activities in DoubleClick Search.
 --
 -- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.conversion.updateAvailability@.
-module Network.Google.DoubleClickSearch.Conversion.UpdateAvailability
+module Gogol.DoubleClickSearch.Conversion.UpdateAvailability
   ( -- * Resource
     DoubleClickSearchConversionUpdateAvailabilityResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DoubleClickSearch.Conversion.UpdateAvailability
   )
 where
 
-import Network.Google.DoubleClickSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @doubleclicksearch.conversion.updateAvailability@ method which the
 -- 'DoubleClickSearchConversionUpdateAvailability' request conforms to.

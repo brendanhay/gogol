@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.DoubleClickSearch
-    Network.Google.DoubleClickSearch.Conversion.Get
-    Network.Google.DoubleClickSearch.Conversion.Insert
-    Network.Google.DoubleClickSearch.Conversion.Update
-    Network.Google.DoubleClickSearch.Conversion.UpdateAvailability
-    Network.Google.DoubleClickSearch.Reports.Generate
-    Network.Google.DoubleClickSearch.Reports.Get
-    Network.Google.DoubleClickSearch.Reports.GetFile
-    Network.Google.DoubleClickSearch.Reports.Request
-    Network.Google.DoubleClickSearch.SavedColumns.List
-    Network.Google.DoubleClickSearch.Types
+    Gogol.DoubleClickSearch
+    Gogol.DoubleClickSearch.Conversion.Get
+    Gogol.DoubleClickSearch.Conversion.Insert
+    Gogol.DoubleClickSearch.Conversion.Update
+    Gogol.DoubleClickSearch.Conversion.UpdateAvailability
+    Gogol.DoubleClickSearch.Reports.Generate
+    Gogol.DoubleClickSearch.Reports.Get
+    Gogol.DoubleClickSearch.Reports.GetFile
+    Gogol.DoubleClickSearch.Reports.Request
+    Gogol.DoubleClickSearch.SavedColumns.List
+    Gogol.DoubleClickSearch.Types
 
   other-modules:
-    Network.Google.DoubleClickSearch.Internal.Product
-    Network.Google.DoubleClickSearch.Internal.Sum
+    Gogol.DoubleClickSearch.Internal.Product
+    Gogol.DoubleClickSearch.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

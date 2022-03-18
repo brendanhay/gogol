@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.Conversion.Get
+-- Module      : Gogol.DoubleClickSearch.Conversion.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves a list of conversions from a DoubleClick Search engine account.
 --
 -- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.conversion.get@.
-module Network.Google.DoubleClickSearch.Conversion.Get
+module Gogol.DoubleClickSearch.Conversion.Get
   ( -- * Resource
     DoubleClickSearchConversionGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DoubleClickSearch.Conversion.Get
   )
 where
 
-import Network.Google.DoubleClickSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @doubleclicksearch.conversion.get@ method which the
 -- 'DoubleClickSearchConversionGet' request conforms to.
