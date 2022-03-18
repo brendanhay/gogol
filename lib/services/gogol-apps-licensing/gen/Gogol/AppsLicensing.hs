@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,71 +36,71 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference>
 module Gogol.AppsLicensing
-  ( -- * Configuration
-    appsLicensingService,
+    (
+    -- * Configuration
+      appsLicensingService
 
     -- * OAuth Scopes
-    appsLicensingScope,
+    , appsLicensingScope
 
     -- * Resources
 
     -- ** licensing.licenseAssignments.delete
-    LicensingLicenseAssignmentsDeleteResource,
-    newLicensingLicenseAssignmentsDelete,
-    LicensingLicenseAssignmentsDelete,
+    , LicensingLicenseAssignmentsDeleteResource
+    , newLicensingLicenseAssignmentsDelete
+    , LicensingLicenseAssignmentsDelete
 
     -- ** licensing.licenseAssignments.get
-    LicensingLicenseAssignmentsGetResource,
-    newLicensingLicenseAssignmentsGet,
-    LicensingLicenseAssignmentsGet,
+    , LicensingLicenseAssignmentsGetResource
+    , newLicensingLicenseAssignmentsGet
+    , LicensingLicenseAssignmentsGet
 
     -- ** licensing.licenseAssignments.insert
-    LicensingLicenseAssignmentsInsertResource,
-    newLicensingLicenseAssignmentsInsert,
-    LicensingLicenseAssignmentsInsert,
+    , LicensingLicenseAssignmentsInsertResource
+    , newLicensingLicenseAssignmentsInsert
+    , LicensingLicenseAssignmentsInsert
 
     -- ** licensing.licenseAssignments.listForProduct
-    LicensingLicenseAssignmentsListForProductResource,
-    newLicensingLicenseAssignmentsListForProduct,
-    LicensingLicenseAssignmentsListForProduct,
+    , LicensingLicenseAssignmentsListForProductResource
+    , newLicensingLicenseAssignmentsListForProduct
+    , LicensingLicenseAssignmentsListForProduct
 
     -- ** licensing.licenseAssignments.listForProductAndSku
-    LicensingLicenseAssignmentsListForProductAndSkuResource,
-    newLicensingLicenseAssignmentsListForProductAndSku,
-    LicensingLicenseAssignmentsListForProductAndSku,
+    , LicensingLicenseAssignmentsListForProductAndSkuResource
+    , newLicensingLicenseAssignmentsListForProductAndSku
+    , LicensingLicenseAssignmentsListForProductAndSku
 
     -- ** licensing.licenseAssignments.patch
-    LicensingLicenseAssignmentsPatchResource,
-    newLicensingLicenseAssignmentsPatch,
-    LicensingLicenseAssignmentsPatch,
+    , LicensingLicenseAssignmentsPatchResource
+    , newLicensingLicenseAssignmentsPatch
+    , LicensingLicenseAssignmentsPatch
 
     -- ** licensing.licenseAssignments.update
-    LicensingLicenseAssignmentsUpdateResource,
-    newLicensingLicenseAssignmentsUpdate,
-    LicensingLicenseAssignmentsUpdate,
+    , LicensingLicenseAssignmentsUpdateResource
+    , newLicensingLicenseAssignmentsUpdate
+    , LicensingLicenseAssignmentsUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** LicenseAssignment
-    LicenseAssignment (..),
-    newLicenseAssignment,
+    , LicenseAssignment (..)
+    , newLicenseAssignment
 
     -- ** LicenseAssignmentInsert
-    LicenseAssignmentInsert (..),
-    newLicenseAssignmentInsert,
+    , LicenseAssignmentInsert (..)
+    , newLicenseAssignmentInsert
 
     -- ** LicenseAssignmentList
-    LicenseAssignmentList (..),
-    newLicenseAssignmentList,
-  )
-where
+    , LicenseAssignmentList (..)
+    , newLicenseAssignmentList
+    ) where
 
 import Gogol.AppsLicensing.Licensing.LicenseAssignments.Delete
 import Gogol.AppsLicensing.Licensing.LicenseAssignments.Get
