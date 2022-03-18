@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,38 +25,31 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.SQLAdmin.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * ApiWarning_Code
     ApiWarning_Code
-      (
-        ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED,
+      ( ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED,
         ApiWarning_Code_REGIONUNREACHABLE,
         ..
       ),
 
     -- * BackupRetentionSettings_RetentionUnit
     BackupRetentionSettings_RetentionUnit
-      (
-        BackupRetentionSettings_RetentionUnit_RETENTIONUNITUNSPECIFIED,
+      ( BackupRetentionSettings_RetentionUnit_RETENTIONUNITUNSPECIFIED,
         BackupRetentionSettings_RetentionUnit_Count,
         ..
       ),
 
     -- * BackupRun_BackupKind
     BackupRun_BackupKind
-      (
-        BackupRun_BackupKind_SQLBACKUPKINDUNSPECIFIED,
+      ( BackupRun_BackupKind_SQLBACKUPKINDUNSPECIFIED,
         BackupRun_BackupKind_Snapshot,
         BackupRun_BackupKind_Physical,
         ..
@@ -70,8 +57,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * BackupRun_Status
     BackupRun_Status
-      (
-        BackupRun_Status_SQLBACKUPRUNSTATUSUNSPECIFIED,
+      ( BackupRun_Status_SQLBACKUPRUNSTATUSUNSPECIFIED,
         BackupRun_Status_Enqueued,
         BackupRun_Status_Overdue,
         BackupRun_Status_Running,
@@ -86,8 +72,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * BackupRun_Type
     BackupRun_Type
-      (
-        BackupRun_Type_SQLBACKUPRUNTYPEUNSPECIFIED,
+      ( BackupRun_Type_SQLBACKUPRUNTYPEUNSPECIFIED,
         BackupRun_Type_Automated,
         BackupRun_Type_ONDEMAND,
         ..
@@ -95,8 +80,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * ConnectSettings_BackendType
     ConnectSettings_BackendType
-      (
-        ConnectSettings_BackendType_SQLBACKENDTYPEUNSPECIFIED,
+      ( ConnectSettings_BackendType_SQLBACKENDTYPEUNSPECIFIED,
         ConnectSettings_BackendType_FIRSTGEN,
         ConnectSettings_BackendType_SECONDGEN,
         ConnectSettings_BackendType_External,
@@ -105,8 +89,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * ConnectSettings_DatabaseVersion
     ConnectSettings_DatabaseVersion
-      (
-        ConnectSettings_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED,
+      ( ConnectSettings_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED,
         ConnectSettings_DatabaseVersion_MYSQL_5_1,
         ConnectSettings_DatabaseVersion_MYSQL_5_5,
         ConnectSettings_DatabaseVersion_MYSQL_5_6,
@@ -133,8 +116,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * DatabaseInstance_BackendType
     DatabaseInstance_BackendType
-      (
-        DatabaseInstance_BackendType_SQLBACKENDTYPEUNSPECIFIED,
+      ( DatabaseInstance_BackendType_SQLBACKENDTYPEUNSPECIFIED,
         DatabaseInstance_BackendType_FIRSTGEN,
         DatabaseInstance_BackendType_SECONDGEN,
         DatabaseInstance_BackendType_External,
@@ -143,8 +125,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * DatabaseInstance_DatabaseVersion
     DatabaseInstance_DatabaseVersion
-      (
-        DatabaseInstance_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED,
+      ( DatabaseInstance_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED,
         DatabaseInstance_DatabaseVersion_MYSQL_5_1,
         DatabaseInstance_DatabaseVersion_MYSQL_5_5,
         DatabaseInstance_DatabaseVersion_MYSQL_5_6,
@@ -171,8 +152,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * DatabaseInstance_InstanceType
     DatabaseInstance_InstanceType
-      (
-        DatabaseInstance_InstanceType_SQLINSTANCETYPEUNSPECIFIED,
+      ( DatabaseInstance_InstanceType_SQLINSTANCETYPEUNSPECIFIED,
         DatabaseInstance_InstanceType_CLOUDSQLINSTANCE,
         DatabaseInstance_InstanceType_ONPREMISESINSTANCE,
         DatabaseInstance_InstanceType_READREPLICAINSTANCE,
@@ -181,8 +161,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * DatabaseInstance_State
     DatabaseInstance_State
-      (
-        DatabaseInstance_State_SQLINSTANCESTATEUNSPECIFIED,
+      ( DatabaseInstance_State_SQLINSTANCESTATEUNSPECIFIED,
         DatabaseInstance_State_Runnable,
         DatabaseInstance_State_Suspended,
         DatabaseInstance_State_PENDINGDELETE,
@@ -195,8 +174,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * DatabaseInstance_SuspensionReasonItem
     DatabaseInstance_SuspensionReasonItem
-      (
-        DatabaseInstance_SuspensionReasonItem_SQLSUSPENSIONREASONUNSPECIFIED,
+      ( DatabaseInstance_SuspensionReasonItem_SQLSUSPENSIONREASONUNSPECIFIED,
         DatabaseInstance_SuspensionReasonItem_BILLINGISSUE,
         DatabaseInstance_SuspensionReasonItem_LEGALISSUE,
         DatabaseInstance_SuspensionReasonItem_OPERATIONALISSUE,
@@ -206,8 +184,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * ExportContext_FileType
     ExportContext_FileType
-      (
-        ExportContext_FileType_SQLFILETYPEUNSPECIFIED,
+      ( ExportContext_FileType_SQLFILETYPEUNSPECIFIED,
         ExportContext_FileType_Sql,
         ExportContext_FileType_Csv,
         ExportContext_FileType_Bak,
@@ -216,8 +193,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Flag_AppliesToItem
     Flag_AppliesToItem
-      (
-        Flag_AppliesToItem_SQLDATABASEVERSIONUNSPECIFIED,
+      ( Flag_AppliesToItem_SQLDATABASEVERSIONUNSPECIFIED,
         Flag_AppliesToItem_MYSQL_5_1,
         Flag_AppliesToItem_MYSQL_5_5,
         Flag_AppliesToItem_MYSQL_5_6,
@@ -244,8 +220,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Flag_Type
     Flag_Type
-      (
-        Flag_Type_SQLFLAGTYPEUNSPECIFIED,
+      ( Flag_Type_SQLFLAGTYPEUNSPECIFIED,
         Flag_Type_Boolean,
         Flag_Type_String,
         Flag_Type_Integer,
@@ -258,8 +233,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * ImportContext_FileType
     ImportContext_FileType
-      (
-        ImportContext_FileType_SQLFILETYPEUNSPECIFIED,
+      ( ImportContext_FileType_SQLFILETYPEUNSPECIFIED,
         ImportContext_FileType_Sql,
         ImportContext_FileType_Csv,
         ImportContext_FileType_Bak,
@@ -268,8 +242,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * IpMapping_Type
     IpMapping_Type
-      (
-        IpMapping_Type_SQLIPADDRESSTYPEUNSPECIFIED,
+      ( IpMapping_Type_SQLIPADDRESSTYPEUNSPECIFIED,
         IpMapping_Type_Primary,
         IpMapping_Type_Outgoing,
         IpMapping_Type_Private,
@@ -279,8 +252,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * MaintenanceWindow_UpdateTrack
     MaintenanceWindow_UpdateTrack
-      (
-        MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED,
+      ( MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED,
         MaintenanceWindow_UpdateTrack_Canary,
         MaintenanceWindow_UpdateTrack_Stable,
         ..
@@ -288,8 +260,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Operation_OperationType
     Operation_OperationType
-      (
-        Operation_OperationType_SQLOPERATIONTYPEUNSPECIFIED,
+      ( Operation_OperationType_SQLOPERATIONTYPEUNSPECIFIED,
         Operation_OperationType_Import,
         Operation_OperationType_Export,
         Operation_OperationType_Create,
@@ -329,8 +300,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Operation_Status
     Operation_Status
-      (
-        Operation_Status_SQLOPERATIONSTATUSUNSPECIFIED,
+      ( Operation_Status_SQLOPERATIONSTATUSUNSPECIFIED,
         Operation_Status_Pending,
         Operation_Status_Running,
         Operation_Status_Done,
@@ -339,16 +309,14 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * PasswordValidationPolicy_Complexity
     PasswordValidationPolicy_Complexity
-      (
-        PasswordValidationPolicy_Complexity_COMPLEXITYUNSPECIFIED,
+      ( PasswordValidationPolicy_Complexity_COMPLEXITYUNSPECIFIED,
         PasswordValidationPolicy_Complexity_COMPLEXITYDEFAULT,
         ..
       ),
 
     -- * Reschedule_RescheduleType
     Reschedule_RescheduleType
-      (
-        Reschedule_RescheduleType_RESCHEDULETYPEUNSPECIFIED,
+      ( Reschedule_RescheduleType_RESCHEDULETYPEUNSPECIFIED,
         Reschedule_RescheduleType_Immediate,
         Reschedule_RescheduleType_NEXTAVAILABLEWINDOW,
         Reschedule_RescheduleType_SPECIFICTIME,
@@ -357,8 +325,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Settings_ActivationPolicy
     Settings_ActivationPolicy
-      (
-        Settings_ActivationPolicy_SQLACTIVATIONPOLICYUNSPECIFIED,
+      ( Settings_ActivationPolicy_SQLACTIVATIONPOLICYUNSPECIFIED,
         Settings_ActivationPolicy_Always,
         Settings_ActivationPolicy_Never,
         Settings_ActivationPolicy_ONDEMAND,
@@ -367,8 +334,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Settings_AvailabilityType
     Settings_AvailabilityType
-      (
-        Settings_AvailabilityType_SQLAVAILABILITYTYPEUNSPECIFIED,
+      ( Settings_AvailabilityType_SQLAVAILABILITYTYPEUNSPECIFIED,
         Settings_AvailabilityType_Zonal,
         Settings_AvailabilityType_Regional,
         ..
@@ -376,8 +342,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Settings_DataDiskType
     Settings_DataDiskType
-      (
-        Settings_DataDiskType_SQLDATADISKTYPEUNSPECIFIED,
+      ( Settings_DataDiskType_SQLDATADISKTYPEUNSPECIFIED,
         Settings_DataDiskType_PDSSD,
         Settings_DataDiskType_PDHDD,
         Settings_DataDiskType_OBSOLETELOCALSSD,
@@ -386,8 +351,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Settings_PricingPlan
     Settings_PricingPlan
-      (
-        Settings_PricingPlan_SQLPRICINGPLANUNSPECIFIED,
+      ( Settings_PricingPlan_SQLPRICINGPLANUNSPECIFIED,
         Settings_PricingPlan_Package,
         Settings_PricingPlan_PERUSE,
         ..
@@ -395,8 +359,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * Settings_ReplicationType
     Settings_ReplicationType
-      (
-        Settings_ReplicationType_SQLREPLICATIONTYPEUNSPECIFIED,
+      ( Settings_ReplicationType_SQLREPLICATIONTYPEUNSPECIFIED,
         Settings_ReplicationType_Synchronous,
         Settings_ReplicationType_Asynchronous,
         ..
@@ -404,8 +367,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * SqlExternalSyncSettingError_Type
     SqlExternalSyncSettingError_Type
-      (
-        SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED,
+      ( SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED,
         SqlExternalSyncSettingError_Type_CONNECTIONFAILURE,
         SqlExternalSyncSettingError_Type_BINLOGNOTENABLED,
         SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEVERSION,
@@ -436,8 +398,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * SqlInstancesStartExternalSyncRequest_SyncMode
     SqlInstancesStartExternalSyncRequest_SyncMode
-      (
-        SqlInstancesStartExternalSyncRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED,
+      ( SqlInstancesStartExternalSyncRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED,
         SqlInstancesStartExternalSyncRequest_SyncMode_Online,
         SqlInstancesStartExternalSyncRequest_SyncMode_Offline,
         ..
@@ -445,8 +406,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
     SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
-      (
-        SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED,
+      ( SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED,
         SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_Online,
         SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_Offline,
         ..
@@ -454,8 +414,7 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * SqlOutOfDiskReport_SqlOutOfDiskState
     SqlOutOfDiskReport_SqlOutOfDiskState
-      (
-        SqlOutOfDiskReport_SqlOutOfDiskState_SQLOUTOFDISKSTATEUNSPECIFIED,
+      ( SqlOutOfDiskReport_SqlOutOfDiskState_SQLOUTOFDISKSTATEUNSPECIFIED,
         SqlOutOfDiskReport_SqlOutOfDiskState_Normal,
         SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN,
         ..
@@ -463,28 +422,28 @@ module Gogol.SQLAdmin.Internal.Sum
 
     -- * User_Type
     User_Type
-      (
-        User_Type_BUILTIN,
+      ( User_Type_BUILTIN,
         User_Type_CLOUDIAMUSER,
         User_Type_CLOUDIAMSERVICEACCOUNT,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -497,20 +456,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Code to uniquely identify the warning type.
-newtype ApiWarning_Code = ApiWarning_Code { fromApiWarning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApiWarning_Code = ApiWarning_Code {fromApiWarning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unknown or unset warning type from Cloud SQL API.
 pattern ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED :: ApiWarning_Code
@@ -523,20 +483,21 @@ pattern ApiWarning_Code_REGIONUNREACHABLE = ApiWarning_Code "REGION_UNREACHABLE"
 {-# COMPLETE
   ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED,
   ApiWarning_Code_REGIONUNREACHABLE,
-  ApiWarning_Code #-}
+  ApiWarning_Code
+  #-}
 
 -- | The unit that \'retained_backups\' represents.
-newtype BackupRetentionSettings_RetentionUnit = BackupRetentionSettings_RetentionUnit { fromBackupRetentionSettings_RetentionUnit :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackupRetentionSettings_RetentionUnit = BackupRetentionSettings_RetentionUnit {fromBackupRetentionSettings_RetentionUnit :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Backup retention unit is unspecified, will be treated as COUNT.
 pattern BackupRetentionSettings_RetentionUnit_RETENTIONUNITUNSPECIFIED :: BackupRetentionSettings_RetentionUnit
@@ -549,20 +510,21 @@ pattern BackupRetentionSettings_RetentionUnit_Count = BackupRetentionSettings_Re
 {-# COMPLETE
   BackupRetentionSettings_RetentionUnit_RETENTIONUNITUNSPECIFIED,
   BackupRetentionSettings_RetentionUnit_Count,
-  BackupRetentionSettings_RetentionUnit #-}
+  BackupRetentionSettings_RetentionUnit
+  #-}
 
 -- | Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
-newtype BackupRun_BackupKind = BackupRun_BackupKind { fromBackupRun_BackupKind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackupRun_BackupKind = BackupRun_BackupKind {fromBackupRun_BackupKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown BackupKind.
 pattern BackupRun_BackupKind_SQLBACKUPKINDUNSPECIFIED :: BackupRun_BackupKind
@@ -580,20 +542,21 @@ pattern BackupRun_BackupKind_Physical = BackupRun_BackupKind "PHYSICAL"
   BackupRun_BackupKind_SQLBACKUPKINDUNSPECIFIED,
   BackupRun_BackupKind_Snapshot,
   BackupRun_BackupKind_Physical,
-  BackupRun_BackupKind #-}
+  BackupRun_BackupKind
+  #-}
 
 -- | The status of this run.
-newtype BackupRun_Status = BackupRun_Status { fromBackupRun_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackupRun_Status = BackupRun_Status {fromBackupRun_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The status of the run is unknown.
 pattern BackupRun_Status_SQLBACKUPRUNSTATUSUNSPECIFIED :: BackupRun_Status
@@ -646,20 +609,21 @@ pattern BackupRun_Status_Deleted = BackupRun_Status "DELETED"
   BackupRun_Status_DELETIONPENDING,
   BackupRun_Status_DELETIONFAILED,
   BackupRun_Status_Deleted,
-  BackupRun_Status #-}
+  BackupRun_Status
+  #-}
 
 -- | The type of this run; can be either \"AUTOMATED\" or \"ON/DEMAND\". This field defaults to \"ON/DEMAND\" and is ignored, when specified for insert requests.
-newtype BackupRun_Type = BackupRun_Type { fromBackupRun_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackupRun_Type = BackupRun_Type {fromBackupRun_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown BackupRun type.
 pattern BackupRun_Type_SQLBACKUPRUNTYPEUNSPECIFIED :: BackupRun_Type
@@ -677,20 +641,21 @@ pattern BackupRun_Type_ONDEMAND = BackupRun_Type "ON_DEMAND"
   BackupRun_Type_SQLBACKUPRUNTYPEUNSPECIFIED,
   BackupRun_Type_Automated,
   BackupRun_Type_ONDEMAND,
-  BackupRun_Type #-}
+  BackupRun_Type
+  #-}
 
 -- | @SECOND_GEN@: Cloud SQL database instance. @EXTERNAL@: A database server that is not managed by Google. This property is read-only; use the @tier@ property in the @settings@ object to determine the database type.
-newtype ConnectSettings_BackendType = ConnectSettings_BackendType { fromConnectSettings_BackendType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ConnectSettings_BackendType = ConnectSettings_BackendType {fromConnectSettings_BackendType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown backend type for instance.
 pattern ConnectSettings_BackendType_SQLBACKENDTYPEUNSPECIFIED :: ConnectSettings_BackendType
@@ -713,20 +678,21 @@ pattern ConnectSettings_BackendType_External = ConnectSettings_BackendType "EXTE
   ConnectSettings_BackendType_FIRSTGEN,
   ConnectSettings_BackendType_SECONDGEN,
   ConnectSettings_BackendType_External,
-  ConnectSettings_BackendType #-}
+  ConnectSettings_BackendType
+  #-}
 
 -- | The database engine type and version. The @databaseVersion@ field cannot be changed after instance creation. MySQL instances: @MYSQL_8_0@, @MYSQL_5_7@ (default), or @MYSQL_5_6@. PostgreSQL instances: @POSTGRES_9_6@, @POSTGRES_10@, @POSTGRES_11@, @POSTGRES_12@ (default), @POSTGRES_13@, or @POSTGRES_14@. SQL Server instances: @SQLSERVER_2017_STANDARD@ (default), @SQLSERVER_2017_ENTERPRISE@, @SQLSERVER_2017_EXPRESS@, @SQLSERVER_2017_WEB@, @SQLSERVER_2019_STANDARD@, @SQLSERVER_2019_ENTERPRISE@, @SQLSERVER_2019_EXPRESS@, or @SQLSERVER_2019_WEB@.
-newtype ConnectSettings_DatabaseVersion = ConnectSettings_DatabaseVersion { fromConnectSettings_DatabaseVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ConnectSettings_DatabaseVersion = ConnectSettings_DatabaseVersion {fromConnectSettings_DatabaseVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown database version.
 pattern ConnectSettings_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED :: ConnectSettings_DatabaseVersion
@@ -839,20 +805,21 @@ pattern ConnectSettings_DatabaseVersion_SQLSERVER2019WEB = ConnectSettings_Datab
   ConnectSettings_DatabaseVersion_SQLSERVER2019ENTERPRISE,
   ConnectSettings_DatabaseVersion_SQLSERVER2019EXPRESS,
   ConnectSettings_DatabaseVersion_SQLSERVER2019WEB,
-  ConnectSettings_DatabaseVersion #-}
+  ConnectSettings_DatabaseVersion
+  #-}
 
 -- | The backend type. @SECOND_GEN@: Cloud SQL database instance. @EXTERNAL@: A database server that is not managed by Google. This property is read-only; use the @tier@ property in the @settings@ object to determine the database type.
-newtype DatabaseInstance_BackendType = DatabaseInstance_BackendType { fromDatabaseInstance_BackendType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DatabaseInstance_BackendType = DatabaseInstance_BackendType {fromDatabaseInstance_BackendType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown backend type for instance.
 pattern DatabaseInstance_BackendType_SQLBACKENDTYPEUNSPECIFIED :: DatabaseInstance_BackendType
@@ -875,20 +842,21 @@ pattern DatabaseInstance_BackendType_External = DatabaseInstance_BackendType "EX
   DatabaseInstance_BackendType_FIRSTGEN,
   DatabaseInstance_BackendType_SECONDGEN,
   DatabaseInstance_BackendType_External,
-  DatabaseInstance_BackendType #-}
+  DatabaseInstance_BackendType
+  #-}
 
 -- | The database engine type and version. The @databaseVersion@ field cannot be changed after instance creation.
-newtype DatabaseInstance_DatabaseVersion = DatabaseInstance_DatabaseVersion { fromDatabaseInstance_DatabaseVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DatabaseInstance_DatabaseVersion = DatabaseInstance_DatabaseVersion {fromDatabaseInstance_DatabaseVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown database version.
 pattern DatabaseInstance_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED :: DatabaseInstance_DatabaseVersion
@@ -1001,20 +969,21 @@ pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB = DatabaseInstance_Dat
   DatabaseInstance_DatabaseVersion_SQLSERVER2019ENTERPRISE,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019EXPRESS,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB,
-  DatabaseInstance_DatabaseVersion #-}
+  DatabaseInstance_DatabaseVersion
+  #-}
 
 -- | The instance type.
-newtype DatabaseInstance_InstanceType = DatabaseInstance_InstanceType { fromDatabaseInstance_InstanceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DatabaseInstance_InstanceType = DatabaseInstance_InstanceType {fromDatabaseInstance_InstanceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown Cloud SQL instance type.
 pattern DatabaseInstance_InstanceType_SQLINSTANCETYPEUNSPECIFIED :: DatabaseInstance_InstanceType
@@ -1037,20 +1006,21 @@ pattern DatabaseInstance_InstanceType_READREPLICAINSTANCE = DatabaseInstance_Ins
   DatabaseInstance_InstanceType_CLOUDSQLINSTANCE,
   DatabaseInstance_InstanceType_ONPREMISESINSTANCE,
   DatabaseInstance_InstanceType_READREPLICAINSTANCE,
-  DatabaseInstance_InstanceType #-}
+  DatabaseInstance_InstanceType
+  #-}
 
 -- | The current serving state of the Cloud SQL instance.
-newtype DatabaseInstance_State = DatabaseInstance_State { fromDatabaseInstance_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DatabaseInstance_State = DatabaseInstance_State {fromDatabaseInstance_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The state of the instance is unknown.
 pattern DatabaseInstance_State_SQLINSTANCESTATEUNSPECIFIED :: DatabaseInstance_State
@@ -1093,19 +1063,20 @@ pattern DatabaseInstance_State_ONLINEMAINTENANCE = DatabaseInstance_State "ONLIN
   DatabaseInstance_State_Maintenance,
   DatabaseInstance_State_Failed,
   DatabaseInstance_State_ONLINEMAINTENANCE,
-  DatabaseInstance_State #-}
+  DatabaseInstance_State
+  #-}
 
-newtype DatabaseInstance_SuspensionReasonItem = DatabaseInstance_SuspensionReasonItem { fromDatabaseInstance_SuspensionReasonItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DatabaseInstance_SuspensionReasonItem = DatabaseInstance_SuspensionReasonItem {fromDatabaseInstance_SuspensionReasonItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown suspension reason.
 pattern DatabaseInstance_SuspensionReasonItem_SQLSUSPENSIONREASONUNSPECIFIED :: DatabaseInstance_SuspensionReasonItem
@@ -1133,20 +1104,21 @@ pattern DatabaseInstance_SuspensionReasonItem_KMSKEYISSUE = DatabaseInstance_Sus
   DatabaseInstance_SuspensionReasonItem_LEGALISSUE,
   DatabaseInstance_SuspensionReasonItem_OPERATIONALISSUE,
   DatabaseInstance_SuspensionReasonItem_KMSKEYISSUE,
-  DatabaseInstance_SuspensionReasonItem #-}
+  DatabaseInstance_SuspensionReasonItem
+  #-}
 
 -- | The file type for the specified uri.
-newtype ExportContext_FileType = ExportContext_FileType { fromExportContext_FileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExportContext_FileType = ExportContext_FileType {fromExportContext_FileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown file type.
 pattern ExportContext_FileType_SQLFILETYPEUNSPECIFIED :: ExportContext_FileType
@@ -1160,7 +1132,7 @@ pattern ExportContext_FileType_Sql = ExportContext_FileType "SQL"
 pattern ExportContext_FileType_Csv :: ExportContext_FileType
 pattern ExportContext_FileType_Csv = ExportContext_FileType "CSV"
 
--- | 
+-- |
 pattern ExportContext_FileType_Bak :: ExportContext_FileType
 pattern ExportContext_FileType_Bak = ExportContext_FileType "BAK"
 
@@ -1169,19 +1141,20 @@ pattern ExportContext_FileType_Bak = ExportContext_FileType "BAK"
   ExportContext_FileType_Sql,
   ExportContext_FileType_Csv,
   ExportContext_FileType_Bak,
-  ExportContext_FileType #-}
+  ExportContext_FileType
+  #-}
 
-newtype Flag_AppliesToItem = Flag_AppliesToItem { fromFlag_AppliesToItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Flag_AppliesToItem = Flag_AppliesToItem {fromFlag_AppliesToItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown database version.
 pattern Flag_AppliesToItem_SQLDATABASEVERSIONUNSPECIFIED :: Flag_AppliesToItem
@@ -1294,20 +1267,21 @@ pattern Flag_AppliesToItem_SQLSERVER2019WEB = Flag_AppliesToItem "SQLSERVER_2019
   Flag_AppliesToItem_SQLSERVER2019ENTERPRISE,
   Flag_AppliesToItem_SQLSERVER2019EXPRESS,
   Flag_AppliesToItem_SQLSERVER2019WEB,
-  Flag_AppliesToItem #-}
+  Flag_AppliesToItem
+  #-}
 
 -- | The type of the flag. Flags are typed to being @BOOLEAN@, @STRING@, @INTEGER@ or @NONE@. @NONE@ is used for flags that do not take a value, such as @skip_grant_tables@.
-newtype Flag_Type = Flag_Type { fromFlag_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Flag_Type = Flag_Type {fromFlag_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown flag type.
 pattern Flag_Type_SQLFLAGTYPEUNSPECIFIED :: Flag_Type
@@ -1350,20 +1324,21 @@ pattern Flag_Type_REPEATEDSTRING = Flag_Type "REPEATED_STRING"
   Flag_Type_MYSQLTIMEZONEOFFSET,
   Flag_Type_Float,
   Flag_Type_REPEATEDSTRING,
-  Flag_Type #-}
+  Flag_Type
+  #-}
 
 -- | The file type for the specified uri.\`SQL@: The file contains SQL statements. \\@CSV\`: The file contains CSV data.
-newtype ImportContext_FileType = ImportContext_FileType { fromImportContext_FileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ImportContext_FileType = ImportContext_FileType {fromImportContext_FileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown file type.
 pattern ImportContext_FileType_SQLFILETYPEUNSPECIFIED :: ImportContext_FileType
@@ -1377,7 +1352,7 @@ pattern ImportContext_FileType_Sql = ImportContext_FileType "SQL"
 pattern ImportContext_FileType_Csv :: ImportContext_FileType
 pattern ImportContext_FileType_Csv = ImportContext_FileType "CSV"
 
--- | 
+-- |
 pattern ImportContext_FileType_Bak :: ImportContext_FileType
 pattern ImportContext_FileType_Bak = ImportContext_FileType "BAK"
 
@@ -1386,20 +1361,21 @@ pattern ImportContext_FileType_Bak = ImportContext_FileType "BAK"
   ImportContext_FileType_Sql,
   ImportContext_FileType_Csv,
   ImportContext_FileType_Bak,
-  ImportContext_FileType #-}
+  ImportContext_FileType
+  #-}
 
 -- | The type of this IP address. A @PRIMARY@ address is a public address that can accept incoming connections. A @PRIVATE@ address is a private address that can accept incoming connections. An @OUTGOING@ address is the source address of connections originating from the instance, if supported.
-newtype IpMapping_Type = IpMapping_Type { fromIpMapping_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IpMapping_Type = IpMapping_Type {fromIpMapping_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown IP address type.
 pattern IpMapping_Type_SQLIPADDRESSTYPEUNSPECIFIED :: IpMapping_Type
@@ -1427,20 +1403,21 @@ pattern IpMapping_Type_MIGRATED1STGEN = IpMapping_Type "MIGRATED_1ST_GEN"
   IpMapping_Type_Outgoing,
   IpMapping_Type_Private,
   IpMapping_Type_MIGRATED1STGEN,
-  IpMapping_Type #-}
+  IpMapping_Type
+  #-}
 
 -- | Maintenance timing setting: @canary@ (Earlier) or @stable@ (Later). <https://cloud.google.com/sql/docs/mysql/instance-settings#maintenance-timing-2ndgen Learn more>.
-newtype MaintenanceWindow_UpdateTrack = MaintenanceWindow_UpdateTrack { fromMaintenanceWindow_UpdateTrack :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MaintenanceWindow_UpdateTrack = MaintenanceWindow_UpdateTrack {fromMaintenanceWindow_UpdateTrack :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown maintenance timing preference.
 pattern MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED :: MaintenanceWindow_UpdateTrack
@@ -1458,20 +1435,21 @@ pattern MaintenanceWindow_UpdateTrack_Stable = MaintenanceWindow_UpdateTrack "st
   MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED,
   MaintenanceWindow_UpdateTrack_Canary,
   MaintenanceWindow_UpdateTrack_Stable,
-  MaintenanceWindow_UpdateTrack #-}
+  MaintenanceWindow_UpdateTrack
+  #-}
 
 -- | The type of the operation. Valid values are: * @CREATE@ * @DELETE@ * @UPDATE@ * @RESTART@ * @IMPORT@ * @EXPORT@ * @BACKUP_VOLUME@ * @RESTORE_VOLUME@ * @CREATE_USER@ * @DELETE_USER@ * @CREATE_DATABASE@ * @DELETE_DATABASE@
-newtype Operation_OperationType = Operation_OperationType { fromOperation_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Operation_OperationType = Operation_OperationType {fromOperation_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown operation type.
 pattern Operation_OperationType_SQLOPERATIONTYPEUNSPECIFIED :: Operation_OperationType
@@ -1501,11 +1479,11 @@ pattern Operation_OperationType_Delete' = Operation_OperationType "DELETE"
 pattern Operation_OperationType_Restart :: Operation_OperationType
 pattern Operation_OperationType_Restart = Operation_OperationType "RESTART"
 
--- | 
+-- |
 pattern Operation_OperationType_Backup :: Operation_OperationType
 pattern Operation_OperationType_Backup = Operation_OperationType "BACKUP"
 
--- | 
+-- |
 pattern Operation_OperationType_Snapshot :: Operation_OperationType
 pattern Operation_OperationType_Snapshot = Operation_OperationType "SNAPSHOT"
 
@@ -1577,7 +1555,7 @@ pattern Operation_OperationType_Failover = Operation_OperationType "FAILOVER"
 pattern Operation_OperationType_DELETEBACKUP :: Operation_OperationType
 pattern Operation_OperationType_DELETEBACKUP = Operation_OperationType "DELETE_BACKUP"
 
--- | 
+-- |
 pattern Operation_OperationType_RECREATEREPLICA :: Operation_OperationType
 pattern Operation_OperationType_RECREATEREPLICA = Operation_OperationType "RECREATE_REPLICA"
 
@@ -1597,7 +1575,7 @@ pattern Operation_OperationType_Maintenance = Operation_OperationType "MAINTENAN
 pattern Operation_OperationType_ENABLEPRIVATEIP :: Operation_OperationType
 pattern Operation_OperationType_ENABLEPRIVATEIP = Operation_OperationType "ENABLE_PRIVATE_IP"
 
--- | 
+-- |
 pattern Operation_OperationType_DEFERMAINTENANCE :: Operation_OperationType
 pattern Operation_OperationType_DEFERMAINTENANCE = Operation_OperationType "DEFER_MAINTENANCE"
 
@@ -1649,20 +1627,21 @@ pattern Operation_OperationType_STARTEXTERNALSYNC = Operation_OperationType "STA
   Operation_OperationType_CREATECLONE,
   Operation_OperationType_RESCHEDULEMAINTENANCE,
   Operation_OperationType_STARTEXTERNALSYNC,
-  Operation_OperationType #-}
+  Operation_OperationType
+  #-}
 
 -- | The status of an operation.
-newtype Operation_Status = Operation_Status { fromOperation_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Operation_Status = Operation_Status {fromOperation_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The state of the operation is unknown.
 pattern Operation_Status_SQLOPERATIONSTATUSUNSPECIFIED :: Operation_Status
@@ -1685,20 +1664,21 @@ pattern Operation_Status_Done = Operation_Status "DONE"
   Operation_Status_Pending,
   Operation_Status_Running,
   Operation_Status_Done,
-  Operation_Status #-}
+  Operation_Status
+  #-}
 
 -- | The complexity of the password.
-newtype PasswordValidationPolicy_Complexity = PasswordValidationPolicy_Complexity { fromPasswordValidationPolicy_Complexity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PasswordValidationPolicy_Complexity = PasswordValidationPolicy_Complexity {fromPasswordValidationPolicy_Complexity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Complexity check is not specified.
 pattern PasswordValidationPolicy_Complexity_COMPLEXITYUNSPECIFIED :: PasswordValidationPolicy_Complexity
@@ -1711,22 +1691,23 @@ pattern PasswordValidationPolicy_Complexity_COMPLEXITYDEFAULT = PasswordValidati
 {-# COMPLETE
   PasswordValidationPolicy_Complexity_COMPLEXITYUNSPECIFIED,
   PasswordValidationPolicy_Complexity_COMPLEXITYDEFAULT,
-  PasswordValidationPolicy_Complexity #-}
+  PasswordValidationPolicy_Complexity
+  #-}
 
 -- | Required. The type of the reschedule.
-newtype Reschedule_RescheduleType = Reschedule_RescheduleType { fromReschedule_RescheduleType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Reschedule_RescheduleType = Reschedule_RescheduleType {fromReschedule_RescheduleType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Reschedule_RescheduleType_RESCHEDULETYPEUNSPECIFIED :: Reschedule_RescheduleType
 pattern Reschedule_RescheduleType_RESCHEDULETYPEUNSPECIFIED = Reschedule_RescheduleType "RESCHEDULE_TYPE_UNSPECIFIED"
 
@@ -1747,20 +1728,21 @@ pattern Reschedule_RescheduleType_SPECIFICTIME = Reschedule_RescheduleType "SPEC
   Reschedule_RescheduleType_Immediate,
   Reschedule_RescheduleType_NEXTAVAILABLEWINDOW,
   Reschedule_RescheduleType_SPECIFICTIME,
-  Reschedule_RescheduleType #-}
+  Reschedule_RescheduleType
+  #-}
 
 -- | The activation policy specifies when the instance is activated; it is applicable only when the instance state is RUNNABLE. Valid values: * @ALWAYS@: The instance is on, and remains so even in the absence of connection requests. * @NEVER@: The instance is off; it is not activated, even if a connection request arrives.
-newtype Settings_ActivationPolicy = Settings_ActivationPolicy { fromSettings_ActivationPolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Settings_ActivationPolicy = Settings_ActivationPolicy {fromSettings_ActivationPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown activation plan.
 pattern Settings_ActivationPolicy_SQLACTIVATIONPOLICYUNSPECIFIED :: Settings_ActivationPolicy
@@ -1783,20 +1765,21 @@ pattern Settings_ActivationPolicy_ONDEMAND = Settings_ActivationPolicy "ON_DEMAN
   Settings_ActivationPolicy_Always,
   Settings_ActivationPolicy_Never,
   Settings_ActivationPolicy_ONDEMAND,
-  Settings_ActivationPolicy #-}
+  Settings_ActivationPolicy
+  #-}
 
 -- | Availability type. Potential values: * @ZONAL@: The instance serves data from only one zone. Outages in that zone affect data accessibility. * @REGIONAL@: The instance can serve data from more than one zone in a region (it is highly available).\/ For more information, see <https://cloud.google.com/sql/docs/mysql/high-availability Overview of the High Availability Configuration>.
-newtype Settings_AvailabilityType = Settings_AvailabilityType { fromSettings_AvailabilityType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Settings_AvailabilityType = Settings_AvailabilityType {fromSettings_AvailabilityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown Availability type.
 pattern Settings_AvailabilityType_SQLAVAILABILITYTYPEUNSPECIFIED :: Settings_AvailabilityType
@@ -1814,20 +1797,21 @@ pattern Settings_AvailabilityType_Regional = Settings_AvailabilityType "REGIONAL
   Settings_AvailabilityType_SQLAVAILABILITYTYPEUNSPECIFIED,
   Settings_AvailabilityType_Zonal,
   Settings_AvailabilityType_Regional,
-  Settings_AvailabilityType #-}
+  Settings_AvailabilityType
+  #-}
 
 -- | The type of data disk: @PD_SSD@ (default) or @PD_HDD@. Not used for First Generation instances.
-newtype Settings_DataDiskType = Settings_DataDiskType { fromSettings_DataDiskType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Settings_DataDiskType = Settings_DataDiskType {fromSettings_DataDiskType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown data disk type.
 pattern Settings_DataDiskType_SQLDATADISKTYPEUNSPECIFIED :: Settings_DataDiskType
@@ -1850,20 +1834,21 @@ pattern Settings_DataDiskType_OBSOLETELOCALSSD = Settings_DataDiskType "OBSOLETE
   Settings_DataDiskType_PDSSD,
   Settings_DataDiskType_PDHDD,
   Settings_DataDiskType_OBSOLETELOCALSSD,
-  Settings_DataDiskType #-}
+  Settings_DataDiskType
+  #-}
 
 -- | The pricing plan for this instance. This can be either @PER_USE@ or @PACKAGE@. Only @PER_USE@ is supported for Second Generation instances.
-newtype Settings_PricingPlan = Settings_PricingPlan { fromSettings_PricingPlan :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Settings_PricingPlan = Settings_PricingPlan {fromSettings_PricingPlan :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown pricing plan for this instance.
 pattern Settings_PricingPlan_SQLPRICINGPLANUNSPECIFIED :: Settings_PricingPlan
@@ -1881,20 +1866,21 @@ pattern Settings_PricingPlan_PERUSE = Settings_PricingPlan "PER_USE"
   Settings_PricingPlan_SQLPRICINGPLANUNSPECIFIED,
   Settings_PricingPlan_Package,
   Settings_PricingPlan_PERUSE,
-  Settings_PricingPlan #-}
+  Settings_PricingPlan
+  #-}
 
 -- | The type of replication this instance uses. This can be either @ASYNCHRONOUS@ or @SYNCHRONOUS@. (Deprecated) This property was only applicable to First Generation instances.
-newtype Settings_ReplicationType = Settings_ReplicationType { fromSettings_ReplicationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Settings_ReplicationType = Settings_ReplicationType {fromSettings_ReplicationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown replication type for a Cloud SQL instance.
 pattern Settings_ReplicationType_SQLREPLICATIONTYPEUNSPECIFIED :: Settings_ReplicationType
@@ -1912,42 +1898,43 @@ pattern Settings_ReplicationType_Asynchronous = Settings_ReplicationType "ASYNCH
   Settings_ReplicationType_SQLREPLICATIONTYPEUNSPECIFIED,
   Settings_ReplicationType_Synchronous,
   Settings_ReplicationType_Asynchronous,
-  Settings_ReplicationType #-}
+  Settings_ReplicationType
+  #-}
 
 -- | Identifies the specific error that occurred.
-newtype SqlExternalSyncSettingError_Type = SqlExternalSyncSettingError_Type { fromSqlExternalSyncSettingError_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SqlExternalSyncSettingError_Type = SqlExternalSyncSettingError_Type {fromSqlExternalSyncSettingError_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED = SqlExternalSyncSettingError_Type "SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED"
 
--- | 
+-- |
 pattern SqlExternalSyncSettingError_Type_CONNECTIONFAILURE :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_CONNECTIONFAILURE = SqlExternalSyncSettingError_Type "CONNECTION_FAILURE"
 
--- | 
+-- |
 pattern SqlExternalSyncSettingError_Type_BINLOGNOTENABLED :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_BINLOGNOTENABLED = SqlExternalSyncSettingError_Type "BINLOG_NOT_ENABLED"
 
--- | 
+-- |
 pattern SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEVERSION :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEVERSION = SqlExternalSyncSettingError_Type "INCOMPATIBLE_DATABASE_VERSION"
 
--- | 
+-- |
 pattern SqlExternalSyncSettingError_Type_REPLICAALREADYSETUP :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_REPLICAALREADYSETUP = SqlExternalSyncSettingError_Type "REPLICA_ALREADY_SETUP"
 
--- | 
+-- |
 pattern SqlExternalSyncSettingError_Type_INSUFFICIENTPRIVILEGE :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_INSUFFICIENTPRIVILEGE = SqlExternalSyncSettingError_Type "INSUFFICIENT_PRIVILEGE"
 
@@ -2058,20 +2045,21 @@ pattern SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING = SqlExternalSyn
   SqlExternalSyncSettingError_Type_PRIMARYALREADYSETUP,
   SqlExternalSyncSettingError_Type_UNSUPPORTEDBINLOGFORMAT,
   SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING,
-  SqlExternalSyncSettingError_Type #-}
+  SqlExternalSyncSettingError_Type
+  #-}
 
 -- | External sync mode.
-newtype SqlInstancesStartExternalSyncRequest_SyncMode = SqlInstancesStartExternalSyncRequest_SyncMode { fromSqlInstancesStartExternalSyncRequest_SyncMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SqlInstancesStartExternalSyncRequest_SyncMode = SqlInstancesStartExternalSyncRequest_SyncMode {fromSqlInstancesStartExternalSyncRequest_SyncMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown external sync mode, will be defaulted to ONLINE mode
 pattern SqlInstancesStartExternalSyncRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED :: SqlInstancesStartExternalSyncRequest_SyncMode
@@ -2089,20 +2077,21 @@ pattern SqlInstancesStartExternalSyncRequest_SyncMode_Offline = SqlInstancesStar
   SqlInstancesStartExternalSyncRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED,
   SqlInstancesStartExternalSyncRequest_SyncMode_Online,
   SqlInstancesStartExternalSyncRequest_SyncMode_Offline,
-  SqlInstancesStartExternalSyncRequest_SyncMode #-}
+  SqlInstancesStartExternalSyncRequest_SyncMode
+  #-}
 
 -- | External sync mode
-newtype SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode = SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode { fromSqlInstancesVerifyExternalSyncSettingsRequest_SyncMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode = SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode {fromSqlInstancesVerifyExternalSyncSettingsRequest_SyncMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown external sync mode, will be defaulted to ONLINE mode
 pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED :: SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
@@ -2120,20 +2109,21 @@ pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_Offline = SqlInst
   SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED,
   SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_Online,
   SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_Offline,
-  SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode #-}
+  SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
+  #-}
 
 -- | This field represents the state generated by the proactive database wellness job for OutOfDisk issues. * Writers: * the proactive database wellness job for OOD. * Readers: * the proactive database wellness job
-newtype SqlOutOfDiskReport_SqlOutOfDiskState = SqlOutOfDiskReport_SqlOutOfDiskState { fromSqlOutOfDiskReport_SqlOutOfDiskState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SqlOutOfDiskReport_SqlOutOfDiskState = SqlOutOfDiskReport_SqlOutOfDiskState {fromSqlOutOfDiskReport_SqlOutOfDiskState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified state
 pattern SqlOutOfDiskReport_SqlOutOfDiskState_SQLOUTOFDISKSTATEUNSPECIFIED :: SqlOutOfDiskReport_SqlOutOfDiskState
@@ -2151,20 +2141,21 @@ pattern SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN = SqlOutOfDiskReport_S
   SqlOutOfDiskReport_SqlOutOfDiskState_SQLOUTOFDISKSTATEUNSPECIFIED,
   SqlOutOfDiskReport_SqlOutOfDiskState_Normal,
   SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN,
-  SqlOutOfDiskReport_SqlOutOfDiskState #-}
+  SqlOutOfDiskReport_SqlOutOfDiskState
+  #-}
 
 -- | The user type. It determines the method to authenticate the user during login. The default is the database\'s built-in user type.
-newtype User_Type = User_Type { fromUser_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype User_Type = User_Type {fromUser_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The database\'s built-in user type.
 pattern User_Type_BUILTIN :: User_Type
@@ -2182,4 +2173,5 @@ pattern User_Type_CLOUDIAMSERVICEACCOUNT = User_Type "CLOUD_IAM_SERVICE_ACCOUNT"
   User_Type_BUILTIN,
   User_Type_CLOUDIAMUSER,
   User_Type_CLOUDIAMSERVICEACCOUNT,
-  User_Type #-}
+  User_Type
+  #-}
