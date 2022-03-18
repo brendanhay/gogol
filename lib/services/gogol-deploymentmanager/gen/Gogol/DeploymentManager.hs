@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,304 +36,304 @@
 --
 -- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference>
 module Gogol.DeploymentManager
-  ( -- * Configuration
-    deploymentManagerService,
+    (
+    -- * Configuration
+      deploymentManagerService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    ndevCloudmanScope,
-    ndevCloudmanReadOnlyScope,
+    , cloudPlatformScope
+    , cloudPlatformReadOnlyScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
 
     -- * Resources
 
     -- ** deploymentmanager.deployments.cancelPreview
-    DeploymentManagerDeploymentsCancelPreviewResource,
-    newDeploymentManagerDeploymentsCancelPreview,
-    DeploymentManagerDeploymentsCancelPreview,
+    , DeploymentManagerDeploymentsCancelPreviewResource
+    , newDeploymentManagerDeploymentsCancelPreview
+    , DeploymentManagerDeploymentsCancelPreview
 
     -- ** deploymentmanager.deployments.delete
-    DeploymentManagerDeploymentsDeleteResource,
-    newDeploymentManagerDeploymentsDelete,
-    DeploymentManagerDeploymentsDelete,
+    , DeploymentManagerDeploymentsDeleteResource
+    , newDeploymentManagerDeploymentsDelete
+    , DeploymentManagerDeploymentsDelete
 
     -- ** deploymentmanager.deployments.get
-    DeploymentManagerDeploymentsGetResource,
-    newDeploymentManagerDeploymentsGet,
-    DeploymentManagerDeploymentsGet,
+    , DeploymentManagerDeploymentsGetResource
+    , newDeploymentManagerDeploymentsGet
+    , DeploymentManagerDeploymentsGet
 
     -- ** deploymentmanager.deployments.getIamPolicy
-    DeploymentManagerDeploymentsGetIamPolicyResource,
-    newDeploymentManagerDeploymentsGetIamPolicy,
-    DeploymentManagerDeploymentsGetIamPolicy,
+    , DeploymentManagerDeploymentsGetIamPolicyResource
+    , newDeploymentManagerDeploymentsGetIamPolicy
+    , DeploymentManagerDeploymentsGetIamPolicy
 
     -- ** deploymentmanager.deployments.insert
-    DeploymentManagerDeploymentsInsertResource,
-    newDeploymentManagerDeploymentsInsert,
-    DeploymentManagerDeploymentsInsert,
+    , DeploymentManagerDeploymentsInsertResource
+    , newDeploymentManagerDeploymentsInsert
+    , DeploymentManagerDeploymentsInsert
 
     -- ** deploymentmanager.deployments.list
-    DeploymentManagerDeploymentsListResource,
-    newDeploymentManagerDeploymentsList,
-    DeploymentManagerDeploymentsList,
+    , DeploymentManagerDeploymentsListResource
+    , newDeploymentManagerDeploymentsList
+    , DeploymentManagerDeploymentsList
 
     -- ** deploymentmanager.deployments.patch
-    DeploymentManagerDeploymentsPatchResource,
-    newDeploymentManagerDeploymentsPatch,
-    DeploymentManagerDeploymentsPatch,
+    , DeploymentManagerDeploymentsPatchResource
+    , newDeploymentManagerDeploymentsPatch
+    , DeploymentManagerDeploymentsPatch
 
     -- ** deploymentmanager.deployments.setIamPolicy
-    DeploymentManagerDeploymentsSetIamPolicyResource,
-    newDeploymentManagerDeploymentsSetIamPolicy,
-    DeploymentManagerDeploymentsSetIamPolicy,
+    , DeploymentManagerDeploymentsSetIamPolicyResource
+    , newDeploymentManagerDeploymentsSetIamPolicy
+    , DeploymentManagerDeploymentsSetIamPolicy
 
     -- ** deploymentmanager.deployments.stop
-    DeploymentManagerDeploymentsStopResource,
-    newDeploymentManagerDeploymentsStop,
-    DeploymentManagerDeploymentsStop,
+    , DeploymentManagerDeploymentsStopResource
+    , newDeploymentManagerDeploymentsStop
+    , DeploymentManagerDeploymentsStop
 
     -- ** deploymentmanager.deployments.testIamPermissions
-    DeploymentManagerDeploymentsTestIamPermissionsResource,
-    newDeploymentManagerDeploymentsTestIamPermissions,
-    DeploymentManagerDeploymentsTestIamPermissions,
+    , DeploymentManagerDeploymentsTestIamPermissionsResource
+    , newDeploymentManagerDeploymentsTestIamPermissions
+    , DeploymentManagerDeploymentsTestIamPermissions
 
     -- ** deploymentmanager.deployments.update
-    DeploymentManagerDeploymentsUpdateResource,
-    newDeploymentManagerDeploymentsUpdate,
-    DeploymentManagerDeploymentsUpdate,
+    , DeploymentManagerDeploymentsUpdateResource
+    , newDeploymentManagerDeploymentsUpdate
+    , DeploymentManagerDeploymentsUpdate
 
     -- ** deploymentmanager.manifests.get
-    DeploymentManagerManifestsGetResource,
-    newDeploymentManagerManifestsGet,
-    DeploymentManagerManifestsGet,
+    , DeploymentManagerManifestsGetResource
+    , newDeploymentManagerManifestsGet
+    , DeploymentManagerManifestsGet
 
     -- ** deploymentmanager.manifests.list
-    DeploymentManagerManifestsListResource,
-    newDeploymentManagerManifestsList,
-    DeploymentManagerManifestsList,
+    , DeploymentManagerManifestsListResource
+    , newDeploymentManagerManifestsList
+    , DeploymentManagerManifestsList
 
     -- ** deploymentmanager.operations.get
-    DeploymentManagerOperationsGetResource,
-    newDeploymentManagerOperationsGet,
-    DeploymentManagerOperationsGet,
+    , DeploymentManagerOperationsGetResource
+    , newDeploymentManagerOperationsGet
+    , DeploymentManagerOperationsGet
 
     -- ** deploymentmanager.operations.list
-    DeploymentManagerOperationsListResource,
-    newDeploymentManagerOperationsList,
-    DeploymentManagerOperationsList,
+    , DeploymentManagerOperationsListResource
+    , newDeploymentManagerOperationsList
+    , DeploymentManagerOperationsList
 
     -- ** deploymentmanager.resources.get
-    DeploymentManagerResourcesGetResource,
-    newDeploymentManagerResourcesGet,
-    DeploymentManagerResourcesGet,
+    , DeploymentManagerResourcesGetResource
+    , newDeploymentManagerResourcesGet
+    , DeploymentManagerResourcesGet
 
     -- ** deploymentmanager.resources.list
-    DeploymentManagerResourcesListResource,
-    newDeploymentManagerResourcesList,
-    DeploymentManagerResourcesList,
+    , DeploymentManagerResourcesListResource
+    , newDeploymentManagerResourcesList
+    , DeploymentManagerResourcesList
 
     -- ** deploymentmanager.types.list
-    DeploymentManagerTypesListResource,
-    newDeploymentManagerTypesList,
-    DeploymentManagerTypesList,
+    , DeploymentManagerTypesListResource
+    , newDeploymentManagerTypesList
+    , DeploymentManagerTypesList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** ConfigFile
-    ConfigFile (..),
-    newConfigFile,
+    , ConfigFile (..)
+    , newConfigFile
 
     -- ** Deployment
-    Deployment (..),
-    newDeployment,
+    , Deployment (..)
+    , newDeployment
 
     -- ** DeploymentLabelEntry
-    DeploymentLabelEntry (..),
-    newDeploymentLabelEntry,
+    , DeploymentLabelEntry (..)
+    , newDeploymentLabelEntry
 
     -- ** DeploymentUpdate
-    DeploymentUpdate (..),
-    newDeploymentUpdate,
+    , DeploymentUpdate (..)
+    , newDeploymentUpdate
 
     -- ** DeploymentUpdateLabelEntry
-    DeploymentUpdateLabelEntry (..),
-    newDeploymentUpdateLabelEntry,
+    , DeploymentUpdateLabelEntry (..)
+    , newDeploymentUpdateLabelEntry
 
     -- ** DeploymentsCancelPreviewRequest
-    DeploymentsCancelPreviewRequest (..),
-    newDeploymentsCancelPreviewRequest,
+    , DeploymentsCancelPreviewRequest (..)
+    , newDeploymentsCancelPreviewRequest
 
     -- ** DeploymentsListResponse
-    DeploymentsListResponse (..),
-    newDeploymentsListResponse,
+    , DeploymentsListResponse (..)
+    , newDeploymentsListResponse
 
     -- ** DeploymentsStopRequest
-    DeploymentsStopRequest (..),
-    newDeploymentsStopRequest,
+    , DeploymentsStopRequest (..)
+    , newDeploymentsStopRequest
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** GlobalSetPolicyRequest
-    GlobalSetPolicyRequest (..),
-    newGlobalSetPolicyRequest,
+    , GlobalSetPolicyRequest (..)
+    , newGlobalSetPolicyRequest
 
     -- ** ImportFile
-    ImportFile (..),
-    newImportFile,
+    , ImportFile (..)
+    , newImportFile
 
     -- ** Manifest
-    Manifest (..),
-    newManifest,
+    , Manifest (..)
+    , newManifest
 
     -- ** ManifestsListResponse
-    ManifestsListResponse (..),
-    newManifestsListResponse,
+    , ManifestsListResponse (..)
+    , newManifestsListResponse
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Error
-    Operation_Error (..),
-    newOperation_Error,
+    , Operation_Error (..)
+    , newOperation_Error
 
     -- ** Operation_Error_ErrorsItem
-    Operation_Error_ErrorsItem (..),
-    newOperation_Error_ErrorsItem,
+    , Operation_Error_ErrorsItem (..)
+    , newOperation_Error_ErrorsItem
 
     -- ** Operation_Status
-    Operation_Status (..),
+    , Operation_Status (..)
 
     -- ** Operation_WarningsItem
-    Operation_WarningsItem (..),
-    newOperation_WarningsItem,
+    , Operation_WarningsItem (..)
+    , newOperation_WarningsItem
 
     -- ** Operation_WarningsItem_Code
-    Operation_WarningsItem_Code (..),
+    , Operation_WarningsItem_Code (..)
 
     -- ** Operation_WarningsItem_DataItem
-    Operation_WarningsItem_DataItem (..),
-    newOperation_WarningsItem_DataItem,
+    , Operation_WarningsItem_DataItem (..)
+    , newOperation_WarningsItem_DataItem
 
     -- ** OperationsListResponse
-    OperationsListResponse (..),
-    newOperationsListResponse,
+    , OperationsListResponse (..)
+    , newOperationsListResponse
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Resource
-    Resource (..),
-    newResource,
+    , Resource (..)
+    , newResource
 
     -- ** Resource_WarningsItem
-    Resource_WarningsItem (..),
-    newResource_WarningsItem,
+    , Resource_WarningsItem (..)
+    , newResource_WarningsItem
 
     -- ** Resource_WarningsItem_Code
-    Resource_WarningsItem_Code (..),
+    , Resource_WarningsItem_Code (..)
 
     -- ** Resource_WarningsItem_DataItem
-    Resource_WarningsItem_DataItem (..),
-    newResource_WarningsItem_DataItem,
+    , Resource_WarningsItem_DataItem (..)
+    , newResource_WarningsItem_DataItem
 
     -- ** ResourceAccessControl
-    ResourceAccessControl (..),
-    newResourceAccessControl,
+    , ResourceAccessControl (..)
+    , newResourceAccessControl
 
     -- ** ResourceUpdate
-    ResourceUpdate (..),
-    newResourceUpdate,
+    , ResourceUpdate (..)
+    , newResourceUpdate
 
     -- ** ResourceUpdate_Error
-    ResourceUpdate_Error (..),
-    newResourceUpdate_Error,
+    , ResourceUpdate_Error (..)
+    , newResourceUpdate_Error
 
     -- ** ResourceUpdate_Error_ErrorsItem
-    ResourceUpdate_Error_ErrorsItem (..),
-    newResourceUpdate_Error_ErrorsItem,
+    , ResourceUpdate_Error_ErrorsItem (..)
+    , newResourceUpdate_Error_ErrorsItem
 
     -- ** ResourceUpdate_Intent
-    ResourceUpdate_Intent (..),
+    , ResourceUpdate_Intent (..)
 
     -- ** ResourceUpdate_State
-    ResourceUpdate_State (..),
+    , ResourceUpdate_State (..)
 
     -- ** ResourceUpdate_WarningsItem
-    ResourceUpdate_WarningsItem (..),
-    newResourceUpdate_WarningsItem,
+    , ResourceUpdate_WarningsItem (..)
+    , newResourceUpdate_WarningsItem
 
     -- ** ResourceUpdate_WarningsItem_Code
-    ResourceUpdate_WarningsItem_Code (..),
+    , ResourceUpdate_WarningsItem_Code (..)
 
     -- ** ResourceUpdate_WarningsItem_DataItem
-    ResourceUpdate_WarningsItem_DataItem (..),
-    newResourceUpdate_WarningsItem_DataItem,
+    , ResourceUpdate_WarningsItem_DataItem (..)
+    , newResourceUpdate_WarningsItem_DataItem
 
     -- ** ResourcesListResponse
-    ResourcesListResponse (..),
-    newResourcesListResponse,
+    , ResourcesListResponse (..)
+    , newResourcesListResponse
 
     -- ** TargetConfiguration
-    TargetConfiguration (..),
-    newTargetConfiguration,
+    , TargetConfiguration (..)
+    , newTargetConfiguration
 
     -- ** TestPermissionsRequest
-    TestPermissionsRequest (..),
-    newTestPermissionsRequest,
+    , TestPermissionsRequest (..)
+    , newTestPermissionsRequest
 
     -- ** TestPermissionsResponse
-    TestPermissionsResponse (..),
-    newTestPermissionsResponse,
+    , TestPermissionsResponse (..)
+    , newTestPermissionsResponse
 
     -- ** Type
-    Type (..),
-    newType,
+    , Type (..)
+    , newType
 
     -- ** TypesListResponse
-    TypesListResponse (..),
-    newTypesListResponse,
+    , TypesListResponse (..)
+    , newTypesListResponse
 
     -- ** DeploymentsDeleteDeletePolicy
-    DeploymentsDeleteDeletePolicy (..),
+    , DeploymentsDeleteDeletePolicy (..)
 
     -- ** DeploymentsInsertCreatePolicy
-    DeploymentsInsertCreatePolicy (..),
+    , DeploymentsInsertCreatePolicy (..)
 
     -- ** DeploymentsPatchCreatePolicy
-    DeploymentsPatchCreatePolicy (..),
+    , DeploymentsPatchCreatePolicy (..)
 
     -- ** DeploymentsPatchDeletePolicy
-    DeploymentsPatchDeletePolicy (..),
+    , DeploymentsPatchDeletePolicy (..)
 
     -- ** DeploymentsUpdateCreatePolicy
-    DeploymentsUpdateCreatePolicy (..),
+    , DeploymentsUpdateCreatePolicy (..)
 
     -- ** DeploymentsUpdateDeletePolicy
-    DeploymentsUpdateDeletePolicy (..),
-  )
-where
+    , DeploymentsUpdateDeletePolicy (..)
+    ) where
 
 import Gogol.DeploymentManager.Deployments.CancelPreview
 import Gogol.DeploymentManager.Deployments.Delete
