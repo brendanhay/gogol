@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Spectrum.Paws.Register
+-- Module      : Gogol.Spectrum.Paws.Register
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Spectrum Database implements registration in the getSpectrum method. As such this always returns an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.register@.
-module Network.Google.Spectrum.Paws.Register
+module Gogol.Spectrum.Paws.Register
   ( -- * Resource
     SpectrumPawsRegisterResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Spectrum.Paws.Register
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Spectrum.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.register@ method which the
 -- 'SpectrumPawsRegister' request conforms to.

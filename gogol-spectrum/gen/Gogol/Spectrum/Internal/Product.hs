@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Spectrum.Internal.Product
+-- Module      : Gogol.Spectrum.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Spectrum.Internal.Product
+module Gogol.Spectrum.Internal.Product
   ( -- * AntennaCharacteristics
     AntennaCharacteristics (..),
     newAntennaCharacteristics,
@@ -160,8 +160,8 @@ module Network.Google.Spectrum.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Spectrum.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Spectrum.Internal.Sum
 
 -- | Antenna characteristics provide additional information, such as the antenna height, antenna type, etc. Whether antenna characteristics must be provided in a request depends on the device type and regulatory domain.
 --

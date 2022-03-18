@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Spectrum.Paws.NotifySpectrumUse
+-- Module      : Gogol.Spectrum.Paws.NotifySpectrumUse
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Notifies the database that the device has selected certain frequency ranges for transmission. Only to be invoked when required by the regulator. The Google Spectrum Database does not operate in domains that require notification, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.notifySpectrumUse@.
-module Network.Google.Spectrum.Paws.NotifySpectrumUse
+module Gogol.Spectrum.Paws.NotifySpectrumUse
   ( -- * Resource
     SpectrumPawsNotifySpectrumUseResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Spectrum.Paws.NotifySpectrumUse
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Spectrum.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.notifySpectrumUse@ method which the
 -- 'SpectrumPawsNotifySpectrumUse' request conforms to.
