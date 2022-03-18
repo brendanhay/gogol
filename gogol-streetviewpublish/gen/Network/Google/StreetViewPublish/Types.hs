@@ -1,195 +1,158 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.StreetViewPublish.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.StreetViewPublish.Types
-    (
-    -- * Service Configuration
-      streetViewPublishService
+  ( -- * Configuration
+    streetViewPublishService,
 
     -- * OAuth Scopes
-    , streetViewPublishScope
+    streetViewPublishScope,
 
-    -- * LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
+    -- * Types
 
-    -- * Photo
-    , Photo
-    , photo
-    , pThumbnailURL
-    , pMapsPublishStatus
-    , pConnections
-    , pShareLink
-    , pUploadReference
-    , pCaptureTime
-    , pPose
-    , pDownloadURL
-    , pTransferStatus
-    , pPlaces
-    , pViewCount
-    , pPhotoId
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * UpdatePhotoRequest
-    , UpdatePhotoRequest
-    , updatePhotoRequest
-    , uprPhoto
-    , uprUpdateMask
+    -- ** BatchDeletePhotosRequest
+    BatchDeletePhotosRequest (..),
+    newBatchDeletePhotosRequest,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** BatchDeletePhotosResponse
+    BatchDeletePhotosResponse (..),
+    newBatchDeletePhotosResponse,
 
-    -- * PhotoGetView
-    , PhotoGetView (..)
+    -- ** BatchGetPhotosResponse
+    BatchGetPhotosResponse (..),
+    newBatchGetPhotosResponse,
 
-    -- * PhotoResponse
-    , PhotoResponse
-    , photoResponse
-    , prPhoto
-    , prStatus
+    -- ** BatchUpdatePhotosRequest
+    BatchUpdatePhotosRequest (..),
+    newBatchUpdatePhotosRequest,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** BatchUpdatePhotosResponse
+    BatchUpdatePhotosResponse (..),
+    newBatchUpdatePhotosResponse,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Connection
+    Connection (..),
+    newConnection,
 
-    -- * PhotosListView
-    , PhotosListView (..)
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** LatLng
+    LatLng (..),
+    newLatLng,
 
-    -- * ListPhotosResponse
-    , ListPhotosResponse
-    , listPhotosResponse
-    , lprNextPageToken
-    , lprPhotos
+    -- ** Level
+    Level (..),
+    newLevel,
 
-    -- * Connection
-    , Connection
-    , connection
-    , cTarget
+    -- ** ListPhotosResponse
+    ListPhotosResponse (..),
+    newListPhotosResponse,
 
-    -- * BatchUpdatePhotosResponse
-    , BatchUpdatePhotosResponse
-    , batchUpdatePhotosResponse
-    , buprResults
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * BatchDeletePhotosResponse
-    , BatchDeletePhotosResponse
-    , batchDeletePhotosResponse
-    , bdprStatus
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * Pose
-    , Pose
-    , pose
-    , pRoll
-    , pHeading
-    , pLatLngPair
-    , pAccuracyMeters
-    , pAltitude
-    , pLevel
-    , pPitch
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * UploadRef
-    , UploadRef
-    , uploadRef
-    , urUploadURL
+    -- ** Photo
+    Photo (..),
+    newPhoto,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Photo_MapsPublishStatus
+    Photo_MapsPublishStatus (..),
 
-    -- * PhotosBatchGetView
-    , PhotosBatchGetView (..)
+    -- ** Photo_TransferStatus
+    Photo_TransferStatus (..),
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** PhotoId
+    PhotoId (..),
+    newPhotoId,
 
-    -- * PhotoTransferStatus
-    , PhotoTransferStatus (..)
+    -- ** PhotoResponse
+    PhotoResponse (..),
+    newPhotoResponse,
 
-    -- * BatchUpdatePhotosRequest
-    , BatchUpdatePhotosRequest
-    , batchUpdatePhotosRequest
-    , buprUpdatePhotoRequests
+    -- ** Place
+    Place (..),
+    newPlace,
 
-    -- * BatchDeletePhotosRequest
-    , BatchDeletePhotosRequest
-    , batchDeletePhotosRequest
-    , bdprPhotoIds
+    -- ** Pose
+    Pose (..),
+    newPose,
 
-    -- * Place
-    , Place
-    , place
-    , pLanguageCode
-    , pName
-    , pPlaceId
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * PhotoMapsPublishStatus
-    , PhotoMapsPublishStatus (..)
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * Level
-    , Level
-    , level
-    , lName
-    , lNumber
+    -- ** UpdatePhotoRequest
+    UpdatePhotoRequest (..),
+    newUpdatePhotoRequest,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** UploadRef
+    UploadRef (..),
+    newUploadRef,
 
-    -- * BatchGetPhotosResponse
-    , BatchGetPhotosResponse
-    , batchGetPhotosResponse
-    , bgprResults
+    -- ** PhotoGetView
+    PhotoGetView (..),
 
-    -- * PhotoId
-    , PhotoId
-    , photoId
-    , piId
-    ) where
+    -- ** PhotosBatchGetView
+    PhotosBatchGetView (..),
 
-import Network.Google.Prelude
-import Network.Google.StreetViewPublish.Types.Product
-import Network.Google.StreetViewPublish.Types.Sum
+    -- ** PhotosListView
+    PhotosListView (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Street View Publish API. This contains the host and root path used as a starting point for constructing service requests.
-streetViewPublishService :: ServiceConfig
-streetViewPublishService
-  = defaultService (ServiceId "streetviewpublish:v1")
-      "streetviewpublish.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.StreetViewPublish.Internal.Product
+import Network.Google.StreetViewPublish.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Street View Publish API. This contains the host and root path used as a starting point for constructing service requests.
+streetViewPublishService :: Core.ServiceConfig
+streetViewPublishService =
+  Core.defaultService
+    (Core.ServiceId "streetviewpublish:v1")
+    "streetviewpublish.googleapis.com"
 
 -- | Publish and manage your 360 photos on Google Street View
-streetViewPublishScope :: Proxy '["https://www.googleapis.com/auth/streetviewpublish"]
-streetViewPublishScope = Proxy
+streetViewPublishScope :: Core.Proxy '["https://www.googleapis.com/auth/streetviewpublish"]
+streetViewPublishScope = Core.Proxy

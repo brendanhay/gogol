@@ -1,246 +1,205 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.StreetViewPublish
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Publishes 360 photos to Google Maps, along with position, orientation,
--- and connectivity metadata. Apps can offer an interface for positioning,
--- connecting, and uploading user-generated Street View images.
+-- Publishes 360 photos to Google Maps, along with position, orientation, and connectivity metadata. Apps can offer an interface for positioning, connecting, and uploading user-generated Street View images.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference>
 module Network.Google.StreetViewPublish
-    (
-    -- * Service Configuration
-      streetViewPublishService
+  ( -- * Configuration
+    streetViewPublishService,
 
     -- * OAuth Scopes
-    , streetViewPublishScope
-
-    -- * API Declaration
-    , StreetViewPublishAPI
+    streetViewPublishScope,
 
     -- * Resources
 
     -- ** streetviewpublish.photo.create
-    , module Network.Google.Resource.StreetViewPublish.Photo.Create
+    StreetViewPublishPhotoCreateResource,
+    newStreetViewPublishPhotoCreate,
+    StreetViewPublishPhotoCreate,
 
     -- ** streetviewpublish.photo.delete
-    , module Network.Google.Resource.StreetViewPublish.Photo.Delete
+    StreetViewPublishPhotoDeleteResource,
+    newStreetViewPublishPhotoDelete,
+    StreetViewPublishPhotoDelete,
 
     -- ** streetviewpublish.photo.get
-    , module Network.Google.Resource.StreetViewPublish.Photo.Get
+    StreetViewPublishPhotoGetResource,
+    newStreetViewPublishPhotoGet,
+    StreetViewPublishPhotoGet,
 
     -- ** streetviewpublish.photo.startUpload
-    , module Network.Google.Resource.StreetViewPublish.Photo.StartUpload
+    StreetViewPublishPhotoStartUploadResource,
+    newStreetViewPublishPhotoStartUpload,
+    StreetViewPublishPhotoStartUpload,
 
     -- ** streetviewpublish.photo.update
-    , module Network.Google.Resource.StreetViewPublish.Photo.Update
+    StreetViewPublishPhotoUpdateResource,
+    newStreetViewPublishPhotoUpdate,
+    StreetViewPublishPhotoUpdate,
 
     -- ** streetviewpublish.photos.batchDelete
-    , module Network.Google.Resource.StreetViewPublish.Photos.BatchDelete
+    StreetViewPublishPhotosBatchDeleteResource,
+    newStreetViewPublishPhotosBatchDelete,
+    StreetViewPublishPhotosBatchDelete,
 
     -- ** streetviewpublish.photos.batchGet
-    , module Network.Google.Resource.StreetViewPublish.Photos.BatchGet
+    StreetViewPublishPhotosBatchGetResource,
+    newStreetViewPublishPhotosBatchGet,
+    StreetViewPublishPhotosBatchGet,
 
     -- ** streetviewpublish.photos.batchUpdate
-    , module Network.Google.Resource.StreetViewPublish.Photos.BatchUpdate
+    StreetViewPublishPhotosBatchUpdateResource,
+    newStreetViewPublishPhotosBatchUpdate,
+    StreetViewPublishPhotosBatchUpdate,
 
     -- ** streetviewpublish.photos.list
-    , module Network.Google.Resource.StreetViewPublish.Photos.List
+    StreetViewPublishPhotosListResource,
+    newStreetViewPublishPhotosList,
+    StreetViewPublishPhotosList,
 
     -- * Types
 
-    -- ** LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
-
-    -- ** Photo
-    , Photo
-    , photo
-    , pThumbnailURL
-    , pMapsPublishStatus
-    , pConnections
-    , pShareLink
-    , pUploadReference
-    , pCaptureTime
-    , pPose
-    , pDownloadURL
-    , pTransferStatus
-    , pPlaces
-    , pViewCount
-    , pPhotoId
-
-    -- ** UpdatePhotoRequest
-    , UpdatePhotoRequest
-    , updatePhotoRequest
-    , uprPhoto
-    , uprUpdateMask
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** PhotoGetView
-    , PhotoGetView (..)
-
-    -- ** PhotoResponse
-    , PhotoResponse
-    , photoResponse
-    , prPhoto
-    , prStatus
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** PhotosListView
-    , PhotosListView (..)
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** ListPhotosResponse
-    , ListPhotosResponse
-    , listPhotosResponse
-    , lprNextPageToken
-    , lprPhotos
-
-    -- ** Connection
-    , Connection
-    , connection
-    , cTarget
-
-    -- ** BatchUpdatePhotosResponse
-    , BatchUpdatePhotosResponse
-    , batchUpdatePhotosResponse
-    , buprResults
-
-    -- ** BatchDeletePhotosResponse
-    , BatchDeletePhotosResponse
-    , batchDeletePhotosResponse
-    , bdprStatus
-
-    -- ** Pose
-    , Pose
-    , pose
-    , pRoll
-    , pHeading
-    , pLatLngPair
-    , pAccuracyMeters
-    , pAltitude
-    , pLevel
-    , pPitch
-
-    -- ** UploadRef
-    , UploadRef
-    , uploadRef
-    , urUploadURL
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** PhotosBatchGetView
-    , PhotosBatchGetView (..)
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** PhotoTransferStatus
-    , PhotoTransferStatus (..)
-
-    -- ** BatchUpdatePhotosRequest
-    , BatchUpdatePhotosRequest
-    , batchUpdatePhotosRequest
-    , buprUpdatePhotoRequests
+    Xgafv (..),
 
     -- ** BatchDeletePhotosRequest
-    , BatchDeletePhotosRequest
-    , batchDeletePhotosRequest
-    , bdprPhotoIds
+    BatchDeletePhotosRequest (..),
+    newBatchDeletePhotosRequest,
 
-    -- ** Place
-    , Place
-    , place
-    , pLanguageCode
-    , pName
-    , pPlaceId
-
-    -- ** PhotoMapsPublishStatus
-    , PhotoMapsPublishStatus (..)
-
-    -- ** Level
-    , Level
-    , level
-    , lName
-    , lNumber
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** BatchDeletePhotosResponse
+    BatchDeletePhotosResponse (..),
+    newBatchDeletePhotosResponse,
 
     -- ** BatchGetPhotosResponse
-    , BatchGetPhotosResponse
-    , batchGetPhotosResponse
-    , bgprResults
+    BatchGetPhotosResponse (..),
+    newBatchGetPhotosResponse,
+
+    -- ** BatchUpdatePhotosRequest
+    BatchUpdatePhotosRequest (..),
+    newBatchUpdatePhotosRequest,
+
+    -- ** BatchUpdatePhotosResponse
+    BatchUpdatePhotosResponse (..),
+    newBatchUpdatePhotosResponse,
+
+    -- ** Connection
+    Connection (..),
+    newConnection,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** LatLng
+    LatLng (..),
+    newLatLng,
+
+    -- ** Level
+    Level (..),
+    newLevel,
+
+    -- ** ListPhotosResponse
+    ListPhotosResponse (..),
+    newListPhotosResponse,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** Photo
+    Photo (..),
+    newPhoto,
+
+    -- ** Photo_MapsPublishStatus
+    Photo_MapsPublishStatus (..),
+
+    -- ** Photo_TransferStatus
+    Photo_TransferStatus (..),
 
     -- ** PhotoId
-    , PhotoId
-    , photoId
-    , piId
-    ) where
+    PhotoId (..),
+    newPhotoId,
 
-import Network.Google.Prelude
-import Network.Google.Resource.StreetViewPublish.Photo.Create
-import Network.Google.Resource.StreetViewPublish.Photo.Delete
-import Network.Google.Resource.StreetViewPublish.Photo.Get
-import Network.Google.Resource.StreetViewPublish.Photo.StartUpload
-import Network.Google.Resource.StreetViewPublish.Photo.Update
-import Network.Google.Resource.StreetViewPublish.Photos.BatchDelete
-import Network.Google.Resource.StreetViewPublish.Photos.BatchGet
-import Network.Google.Resource.StreetViewPublish.Photos.BatchUpdate
-import Network.Google.Resource.StreetViewPublish.Photos.List
+    -- ** PhotoResponse
+    PhotoResponse (..),
+    newPhotoResponse,
+
+    -- ** Place
+    Place (..),
+    newPlace,
+
+    -- ** Pose
+    Pose (..),
+    newPose,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** UpdatePhotoRequest
+    UpdatePhotoRequest (..),
+    newUpdatePhotoRequest,
+
+    -- ** UploadRef
+    UploadRef (..),
+    newUploadRef,
+
+    -- ** PhotoGetView
+    PhotoGetView (..),
+
+    -- ** PhotosBatchGetView
+    PhotosBatchGetView (..),
+
+    -- ** PhotosListView
+    PhotosListView (..),
+  )
+where
+
+import Network.Google.StreetViewPublish.Photo.Create
+import Network.Google.StreetViewPublish.Photo.Delete
+import Network.Google.StreetViewPublish.Photo.Get
+import Network.Google.StreetViewPublish.Photo.StartUpload
+import Network.Google.StreetViewPublish.Photo.Update
+import Network.Google.StreetViewPublish.Photos.BatchDelete
+import Network.Google.StreetViewPublish.Photos.BatchGet
+import Network.Google.StreetViewPublish.Photos.BatchUpdate
+import Network.Google.StreetViewPublish.Photos.List
 import Network.Google.StreetViewPublish.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Street View Publish API service.
-type StreetViewPublishAPI =
-     PhotoGetResource :<|> PhotoCreateResource :<|>
-       PhotoStartUploadResource
-       :<|> PhotoDeleteResource
-       :<|> PhotoUpdateResource
-       :<|> PhotosListResource
-       :<|> PhotosBatchGetResource
-       :<|> PhotosBatchUpdateResource
-       :<|> PhotosBatchDeleteResource
