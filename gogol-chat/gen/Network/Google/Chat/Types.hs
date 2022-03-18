@@ -1,620 +1,457 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Chat.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Chat.Types
-    (
-    -- * Service Configuration
-      chatService
-
-    -- * Card
-    , Card
-    , card
-    , cCardActions
-    , cName
-    , cHeader
-    , cSections
-
-    -- * GoogleAppsCardV1ButtonList
-    , GoogleAppsCardV1ButtonList
-    , googleAppsCardV1ButtonList
-    , gacvblButtons
-
-    -- * GoogleAppsCardV1CardHeaderImageType
-    , GoogleAppsCardV1CardHeaderImageType (..)
-
-    -- * Space
-    , Space
-    , space
-    , sName
-    , sThreaded
-    , sDisplayName
-    , sType
-    , sSingleUserBotDm
-
-    -- * KeyValue
-    , KeyValue
-    , keyValue
-    , kvOnClick
-    , kvTopLabel
-    , kvIcon
-    , kvButton
-    , kvContent
-    , kvIconURL
-    , kvContentMultiline
-    , kvBottomLabel
-
-    -- * GoogleAppsCardV1OpenLink
-    , GoogleAppsCardV1OpenLink
-    , googleAppsCardV1OpenLink
-    , gacvolURL
-    , gacvolOpenAs
-    , gacvolOnClose
-
-    -- * WidgetMarkup
-    , WidgetMarkup
-    , widgetMarkup
-    , wmKeyValue
-    , wmImage
-    , wmButtons
-    , wmTextParagraph
-
-    -- * GoogleAppsCardV1CardFixedFooter
-    , GoogleAppsCardV1CardFixedFooter
-    , googleAppsCardV1CardFixedFooter
-    , gacvcffPrimaryButton
-    , gacvcffSecondaryButton
-
-    -- * GoogleAppsCardV1DateTimePicker
-    , GoogleAppsCardV1DateTimePicker
-    , googleAppsCardV1DateTimePicker
-    , gacvdtpValueMsEpoch
-    , gacvdtpTimezoneOffSetDate
-    , gacvdtpName
-    , gacvdtpType
-    , gacvdtpLabel
-    , gacvdtpOnChangeAction
-
-    -- * OnClick
-    , OnClick
-    , onClick
-    , ocAction
-    , ocOpenLink
-
-    -- * Annotation
-    , Annotation
-    , annotation
-    , aLength
-    , aSlashCommand
-    , aType
-    , aUserMention
-    , aStartIndex
-
-    -- * Image
-    , Image
-    , image
-    , iOnClick
-    , iAspectRatio
-    , iImageURL
-
-    -- * GoogleAppsCardV1Suggestions
-    , GoogleAppsCardV1Suggestions
-    , googleAppsCardV1Suggestions
-    , gacvsItems
-
-    -- * KeyValueIcon
-    , KeyValueIcon (..)
-
-    -- * ActionParameter
-    , ActionParameter
-    , actionParameter
-    , apValue
-    , apKey
-
-    -- * SlashCommandMetadata
-    , SlashCommandMetadata
-    , slashCommandMetadata
-    , scmBot
-    , scmCommandId
-    , scmCommandName
-    , scmType
-    , scmTriggersDialog
-
-    -- * GoogleAppsCardV1GridItemTextAlignment
-    , GoogleAppsCardV1GridItemTextAlignment (..)
-
-    -- * GoogleAppsCardV1CardAction
-    , GoogleAppsCardV1CardAction
-    , googleAppsCardV1CardAction
-    , gacvcaOnClick
-    , gacvcaActionLabel
-
-    -- * Membership
-    , Membership
-    , membership
-    , mState
-    , mName
-    , mMember
-    , mCreateTime
-
-    -- * ActionResponseType
-    , ActionResponseType (..)
-
-    -- * GoogleAppsCardV1WidgetHorizontalAlignment
-    , GoogleAppsCardV1WidgetHorizontalAlignment (..)
-
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * Color
-    , Color
-    , color
-    , cRed
-    , cAlpha
-    , cGreen
-    , cBlue
-
-    -- * DeprecatedEvent
-    , DeprecatedEvent
-    , deprecatedEvent
-    , deSpace
-    , deToken
-    , deAction
-    , deEventTime
-    , deUser
-    , deConfigCompleteRedirectURL
-    , deType
-    , deMessage
-    , deThreadKey
-
-    -- * MembershipState
-    , MembershipState (..)
-
-    -- * GoogleAppsCardV1Grid
-    , GoogleAppsCardV1Grid
-    , googleAppsCardV1Grid
-    , gacvgOnClick
-    , gacvgColumnCount
-    , gacvgItems
-    , gacvgTitle
-    , gacvgBOrderStyle
-
-    -- * GoogleAppsCardV1ImageComponent
-    , GoogleAppsCardV1ImageComponent
-    , googleAppsCardV1ImageComponent
-    , gacvicImageURI
-    , gacvicAltText
-    , gacvicBOrderStyle
-    , gacvicCropStyle
-
-    -- * AttachmentDataRef
-    , AttachmentDataRef
-    , attachmentDataRef
-    , adrResourceName
-
-    -- * GoogleAppsCardV1BOrderStyle
-    , GoogleAppsCardV1BOrderStyle
-    , googleAppsCardV1BOrderStyle
-    , gacvbosCornerRadius
-    , gacvbosType
-    , gacvbosStrokeColor
-
-    -- * ActionStatusStatusCode
-    , ActionStatusStatusCode (..)
-
-    -- * GoogleAppsCardV1CardHeader
-    , GoogleAppsCardV1CardHeader
-    , googleAppsCardV1CardHeader
-    , gacvchImageAltText
-    , gacvchSubtitle
-    , gacvchImageURL
-    , gacvchImageType
-    , gacvchTitle
-
-    -- * CardHeaderImageStyle
-    , CardHeaderImageStyle (..)
-
-    -- * GoogleAppsCardV1TextInputType
-    , GoogleAppsCardV1TextInputType (..)
-
-    -- * TextParagraph
-    , TextParagraph
-    , textParagraph
-    , tpText
-
-    -- * GoogleAppsCardV1ImageCropStyle
-    , GoogleAppsCardV1ImageCropStyle
-    , googleAppsCardV1ImageCropStyle
-    , gacvicsAspectRatio
-    , gacvicsType
-
-    -- * Button
-    , Button
-    , button
-    , bTextButton
-    , bImageButton
-
-    -- * UserMentionMetadataType
-    , UserMentionMetadataType (..)
-
-    -- * ListSpacesResponse
-    , ListSpacesResponse
-    , listSpacesResponse
-    , lsrNextPageToken
-    , lsrSpaces
-
-    -- * GoogleAppsCardV1SelectionInput
-    , GoogleAppsCardV1SelectionInput
-    , googleAppsCardV1SelectionInput
-    , gacvsiItems
-    , gacvsiName
-    , gacvsiType
-    , gacvsiLabel
-    , gacvsiOnChangeAction
-
-    -- * GoogleAppsCardV1DecoratedText
-    , GoogleAppsCardV1DecoratedText
-    , googleAppsCardV1DecoratedText
-    , gacvdtOnClick
-    , gacvdtTopLabel
-    , gacvdtSwitchControl
-    , gacvdtText
-    , gacvdtStartIcon
-    , gacvdtIcon
-    , gacvdtButton
-    , gacvdtEndIcon
-    , gacvdtWrapText
-    , gacvdtBottomLabel
-
-    -- * GoogleAppsCardV1SuggestionItem
-    , GoogleAppsCardV1SuggestionItem
-    , googleAppsCardV1SuggestionItem
-    , gacvsiText
-
-    -- * GoogleAppsCardV1Divider
-    , GoogleAppsCardV1Divider
-    , googleAppsCardV1Divider
-
-    -- * GoogleAppsCardV1Section
-    , GoogleAppsCardV1Section
-    , googleAppsCardV1Section
-    , gacvsCollapsible
-    , gacvsUncollapsibleWidgetsCount
-    , gacvsWidgets
-    , gacvsHeader
-
-    -- * Attachment
-    , Attachment
-    , attachment
-    , aDownloadURI
-    , aAttachmentDataRef
-    , aContentName
-    , aName
-    , aThumbnailURI
-    , aSource
-    , aDriveDataRef
-    , aContentType
-
-    -- * GoogleAppsCardV1ActionLoadIndicator
-    , GoogleAppsCardV1ActionLoadIndicator (..)
-
-    -- * User
-    , User
-    , user
-    , uIsAnonymous
-    , uName
-    , uDisplayName
-    , uDomainId
-    , uType
-
-    -- * Media
-    , Media
-    , media
-    , mResourceName
-
-    -- * GoogleAppsCardV1Card
-    , GoogleAppsCardV1Card
-    , googleAppsCardV1Card
-    , gacvcDisplayStyle
-    , gacvcPeekCardHeader
-    , gacvcCardActions
-    , gacvcName
-    , gacvcHeader
-    , gacvcSections
-    , gacvcFixedFooter
-
-    -- * GoogleAppsCardV1Widget
-    , GoogleAppsCardV1Widget
-    , googleAppsCardV1Widget
-    , gacvwImage
-    , gacvwTextInput
-    , gacvwTextParagraph
-    , gacvwButtonList
-    , gacvwDateTimePicker
-    , gacvwGrid
-    , gacvwSelectionInput
-    , gacvwDecoratedText
-    , gacvwHorizontalAlignment
-    , gacvwDivider
-
-    -- * AttachmentSource
-    , AttachmentSource (..)
-
-    -- * SpaceType
-    , SpaceType (..)
-
-    -- * GoogleAppsCardV1IconImageType
-    , GoogleAppsCardV1IconImageType (..)
-
-    -- * OpenLink
-    , OpenLink
-    , openLink
-    , olURL
-
-    -- * GoogleAppsCardV1GridItemLayout
-    , GoogleAppsCardV1GridItemLayout (..)
-
-    -- * GoogleAppsCardV1DateTimePickerType
-    , GoogleAppsCardV1DateTimePickerType (..)
-
-    -- * GoogleAppsCardV1ActionParameter
-    , GoogleAppsCardV1ActionParameter
-    , googleAppsCardV1ActionParameter
-    , gacvapValue
-    , gacvapKey
-
-    -- * GoogleAppsCardV1Image
-    , GoogleAppsCardV1Image
-    , googleAppsCardV1Image
-    , gacviOnClick
-    , gacviAltText
-    , gacviImageURL
-
-    -- * AnnotationType
-    , AnnotationType (..)
-
-    -- * GoogleAppsCardV1OnClick
-    , GoogleAppsCardV1OnClick
-    , googleAppsCardV1OnClick
-    , gacvocCard
-    , gacvocOpenDynamicLinkAction
-    , gacvocAction
-    , gacvocOpenLink
-
-    -- * SlashCommandMetadataType
-    , SlashCommandMetadataType (..)
-
-    -- * SlashCommand
-    , SlashCommand
-    , slashCommand
-    , scCommandId
-
-    -- * GoogleAppsCardV1SwitchControlControlType
-    , GoogleAppsCardV1SwitchControlControlType (..)
-
-    -- * ImageButtonIcon
-    , ImageButtonIcon (..)
-
-    -- * CardAction
-    , CardAction
-    , cardAction
-    , caOnClick
-    , caActionLabel
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * GoogleAppsCardV1OpenLinkOpenAs
-    , GoogleAppsCardV1OpenLinkOpenAs (..)
-
-    -- * ActionStatus
-    , ActionStatus
-    , actionStatus
-    , asUserFacingMessage
-    , asStatusCode
-
-    -- * GoogleAppsCardV1SelectionItem
-    , GoogleAppsCardV1SelectionItem
-    , googleAppsCardV1SelectionItem
-    , gText
-    , gValue
-    , gSelected
-
-    -- * DeprecatedEventType
-    , DeprecatedEventType (..)
-
-    -- * ActionResponse
-    , ActionResponse
-    , actionResponse
-    , arURL
-    , arType
-    , arDialogAction
-
-    -- * GoogleAppsCardV1GridItem
-    , GoogleAppsCardV1GridItem
-    , googleAppsCardV1GridItem
-    , gacvgiImage
-    , gacvgiLayout
-    , gacvgiTextAlignment
-    , gacvgiSubtitle
-    , gacvgiId
-    , gacvgiTitle
-
-    -- * GoogleAppsCardV1SwitchControl
-    , GoogleAppsCardV1SwitchControl
-    , googleAppsCardV1SwitchControl
-    , gacvscValue
-    , gacvscSelected
-    , gacvscName
-    , gacvscControlType
-    , gacvscOnChangeAction
-
-    -- * DriveDataRef
-    , DriveDataRef
-    , driveDataRef
-    , ddrDriveFileId
-
-    -- * FormAction
-    , FormAction
-    , formAction
-    , faActionMethodName
-    , faParameters
-
-    -- * ListMembershipsResponse
-    , ListMembershipsResponse
-    , listMembershipsResponse
-    , lmrNextPageToken
-    , lmrMemberships
-
-    -- * Dialog
-    , Dialog
-    , dialog
-    , dBody
-
-    -- * Message
-    , Message
-    , message
-    , mesAnnotations
-    , mesSpace
-    , mesText
-    , mesSender
-    , mesAttachment
-    , mesName
-    , mesPreviewText
-    , mesCards
-    , mesSlashCommand
-    , mesActionResponse
-    , mesArgumentText
-    , mesThread
-    , mesFallbackText
-    , mesCreateTime
-
-    -- * GoogleAppsCardV1Icon
-    , GoogleAppsCardV1Icon
-    , googleAppsCardV1Icon
-    , gKnownIcon
-    , gAltText
-    , gImageType
-    , gIconURL
-
-    -- * GoogleAppsCardV1OpenLinkOnClose
-    , GoogleAppsCardV1OpenLinkOnClose (..)
-
-    -- * CardHeader
-    , CardHeader
-    , cardHeader
-    , chSubtitle
-    , chImageURL
-    , chTitle
-    , chImageStyle
-
-    -- * GoogleAppsCardV1TextInput
-    , GoogleAppsCardV1TextInput
-    , googleAppsCardV1TextInput
-    , gacvtiAutoCompleteAction
-    , gacvtiValue
-    , gacvtiName
-    , gacvtiType
-    , gacvtiHintText
-    , gacvtiLabel
-    , gacvtiInitialSuggestions
-    , gacvtiOnChangeAction
-
-    -- * TextButton
-    , TextButton
-    , textButton
-    , tbOnClick
-    , tbText
-
-    -- * GoogleAppsCardV1BOrderStyleType
-    , GoogleAppsCardV1BOrderStyleType (..)
-
-    -- * GoogleAppsCardV1TextParagraph
-    , GoogleAppsCardV1TextParagraph
-    , googleAppsCardV1TextParagraph
-    , gacvtpText
-
-    -- * DialogAction
-    , DialogAction
-    , dialogAction
-    , daActionStatus
-    , daDialog
-
-    -- * GoogleAppsCardV1Button
-    , GoogleAppsCardV1Button
-    , googleAppsCardV1Button
-    , gacvbOnClick
-    , gacvbColor
-    , gacvbText
-    , gacvbDisabled
-    , gacvbIcon
-    , gacvbAltText
-
-    -- * GoogleAppsCardV1Action
-    , GoogleAppsCardV1Action
-    , googleAppsCardV1Action
-    , gacvaLoadIndicator
-    , gacvaFunction
-    , gacvaParameters
-    , gacvaPersistValues
-
-    -- * Thread
-    , Thread
-    , thread
-    , tName
-
-    -- * UserMentionMetadata
-    , UserMentionMetadata
-    , userMentionMetadata
-    , ummUser
-    , ummType
-
-    -- * GoogleAppsCardV1SelectionInputType
-    , GoogleAppsCardV1SelectionInputType (..)
-
-    -- * GoogleAppsCardV1ImageCropStyleType
-    , GoogleAppsCardV1ImageCropStyleType (..)
-
-    -- * ImageButton
-    , ImageButton
-    , imageButton
-    , ibOnClick
-    , ibIcon
-    , ibName
-    , ibIconURL
-
-    -- * Section
-    , Section
-    , section
-    , sWidgets
-    , sHeader
-
-    -- * GoogleAppsCardV1CardDisplayStyle
-    , GoogleAppsCardV1CardDisplayStyle (..)
-
-    -- * UserType
-    , UserType (..)
-    ) where
-
-import Network.Google.Chat.Types.Product
-import Network.Google.Chat.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v1' of the Google Chat API. This contains the host and root path used as a starting point for constructing service requests.
-chatService :: ServiceConfig
-chatService
-  = defaultService (ServiceId "chat:v1")
-      "chat.googleapis.com"
+  ( -- * Configuration
+    chatService,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** ActionParameter
+    ActionParameter (..),
+    newActionParameter,
+
+    -- ** ActionResponse
+    ActionResponse (..),
+    newActionResponse,
+
+    -- ** ActionResponse_Type
+    ActionResponse_Type (..),
+
+    -- ** ActionStatus
+    ActionStatus (..),
+    newActionStatus,
+
+    -- ** ActionStatus_StatusCode
+    ActionStatus_StatusCode (..),
+
+    -- ** Annotation
+    Annotation (..),
+    newAnnotation,
+
+    -- ** Annotation_Type
+    Annotation_Type (..),
+
+    -- ** Attachment
+    Attachment (..),
+    newAttachment,
+
+    -- ** Attachment_Source
+    Attachment_Source (..),
+
+    -- ** AttachmentDataRef
+    AttachmentDataRef (..),
+    newAttachmentDataRef,
+
+    -- ** Button
+    Button (..),
+    newButton,
+
+    -- ** Card
+    Card (..),
+    newCard,
+
+    -- ** CardAction
+    CardAction (..),
+    newCardAction,
+
+    -- ** CardHeader
+    CardHeader (..),
+    newCardHeader,
+
+    -- ** CardHeader_ImageStyle
+    CardHeader_ImageStyle (..),
+
+    -- ** Color
+    Color (..),
+    newColor,
+
+    -- ** CommonEventObject
+    CommonEventObject (..),
+    newCommonEventObject,
+
+    -- ** CommonEventObject_FormInputs
+    CommonEventObject_FormInputs (..),
+    newCommonEventObject_FormInputs,
+
+    -- ** CommonEventObject_HostApp
+    CommonEventObject_HostApp (..),
+
+    -- ** CommonEventObject_Parameters
+    CommonEventObject_Parameters (..),
+    newCommonEventObject_Parameters,
+
+    -- ** CommonEventObject_Platform
+    CommonEventObject_Platform (..),
+
+    -- ** DateInput
+    DateInput (..),
+    newDateInput,
+
+    -- ** DateTimeInput
+    DateTimeInput (..),
+    newDateTimeInput,
+
+    -- ** DeprecatedEvent
+    DeprecatedEvent (..),
+    newDeprecatedEvent,
+
+    -- ** DeprecatedEvent_DialogEventType
+    DeprecatedEvent_DialogEventType (..),
+
+    -- ** DeprecatedEvent_Type
+    DeprecatedEvent_Type (..),
+
+    -- ** Dialog
+    Dialog (..),
+    newDialog,
+
+    -- ** DialogAction
+    DialogAction (..),
+    newDialogAction,
+
+    -- ** DriveDataRef
+    DriveDataRef (..),
+    newDriveDataRef,
+
+    -- ** DynamiteIntegrationLogEntry
+    DynamiteIntegrationLogEntry (..),
+    newDynamiteIntegrationLogEntry,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** FormAction
+    FormAction (..),
+    newFormAction,
+
+    -- ** GoogleAppsCardV1Action
+    GoogleAppsCardV1Action (..),
+    newGoogleAppsCardV1Action,
+
+    -- ** GoogleAppsCardV1Action_LoadIndicator
+    GoogleAppsCardV1Action_LoadIndicator (..),
+
+    -- ** GoogleAppsCardV1ActionParameter
+    GoogleAppsCardV1ActionParameter (..),
+    newGoogleAppsCardV1ActionParameter,
+
+    -- ** GoogleAppsCardV1BorderStyle
+    GoogleAppsCardV1BorderStyle (..),
+    newGoogleAppsCardV1BorderStyle,
+
+    -- ** GoogleAppsCardV1BorderStyle_Type
+    GoogleAppsCardV1BorderStyle_Type (..),
+
+    -- ** GoogleAppsCardV1Button
+    GoogleAppsCardV1Button (..),
+    newGoogleAppsCardV1Button,
+
+    -- ** GoogleAppsCardV1ButtonList
+    GoogleAppsCardV1ButtonList (..),
+    newGoogleAppsCardV1ButtonList,
+
+    -- ** GoogleAppsCardV1Card
+    GoogleAppsCardV1Card (..),
+    newGoogleAppsCardV1Card,
+
+    -- ** GoogleAppsCardV1Card_DisplayStyle
+    GoogleAppsCardV1Card_DisplayStyle (..),
+
+    -- ** GoogleAppsCardV1CardAction
+    GoogleAppsCardV1CardAction (..),
+    newGoogleAppsCardV1CardAction,
+
+    -- ** GoogleAppsCardV1CardFixedFooter
+    GoogleAppsCardV1CardFixedFooter (..),
+    newGoogleAppsCardV1CardFixedFooter,
+
+    -- ** GoogleAppsCardV1CardHeader
+    GoogleAppsCardV1CardHeader (..),
+    newGoogleAppsCardV1CardHeader,
+
+    -- ** GoogleAppsCardV1CardHeader_ImageType
+    GoogleAppsCardV1CardHeader_ImageType (..),
+
+    -- ** GoogleAppsCardV1DateTimePicker
+    GoogleAppsCardV1DateTimePicker (..),
+    newGoogleAppsCardV1DateTimePicker,
+
+    -- ** GoogleAppsCardV1DateTimePicker_Type
+    GoogleAppsCardV1DateTimePicker_Type (..),
+
+    -- ** GoogleAppsCardV1DecoratedText
+    GoogleAppsCardV1DecoratedText (..),
+    newGoogleAppsCardV1DecoratedText,
+
+    -- ** GoogleAppsCardV1Divider
+    GoogleAppsCardV1Divider (..),
+    newGoogleAppsCardV1Divider,
+
+    -- ** GoogleAppsCardV1Grid
+    GoogleAppsCardV1Grid (..),
+    newGoogleAppsCardV1Grid,
+
+    -- ** GoogleAppsCardV1GridItem
+    GoogleAppsCardV1GridItem (..),
+    newGoogleAppsCardV1GridItem,
+
+    -- ** GoogleAppsCardV1GridItem_Layout
+    GoogleAppsCardV1GridItem_Layout (..),
+
+    -- ** GoogleAppsCardV1GridItem_TextAlignment
+    GoogleAppsCardV1GridItem_TextAlignment (..),
+
+    -- ** GoogleAppsCardV1Icon
+    GoogleAppsCardV1Icon (..),
+    newGoogleAppsCardV1Icon,
+
+    -- ** GoogleAppsCardV1Icon_ImageType
+    GoogleAppsCardV1Icon_ImageType (..),
+
+    -- ** GoogleAppsCardV1Image
+    GoogleAppsCardV1Image (..),
+    newGoogleAppsCardV1Image,
+
+    -- ** GoogleAppsCardV1ImageComponent
+    GoogleAppsCardV1ImageComponent (..),
+    newGoogleAppsCardV1ImageComponent,
+
+    -- ** GoogleAppsCardV1ImageCropStyle
+    GoogleAppsCardV1ImageCropStyle (..),
+    newGoogleAppsCardV1ImageCropStyle,
+
+    -- ** GoogleAppsCardV1ImageCropStyle_Type
+    GoogleAppsCardV1ImageCropStyle_Type (..),
+
+    -- ** GoogleAppsCardV1OnClick
+    GoogleAppsCardV1OnClick (..),
+    newGoogleAppsCardV1OnClick,
+
+    -- ** GoogleAppsCardV1OpenLink
+    GoogleAppsCardV1OpenLink (..),
+    newGoogleAppsCardV1OpenLink,
+
+    -- ** GoogleAppsCardV1OpenLink_OnClose
+    GoogleAppsCardV1OpenLink_OnClose (..),
+
+    -- ** GoogleAppsCardV1OpenLink_OpenAs
+    GoogleAppsCardV1OpenLink_OpenAs (..),
+
+    -- ** GoogleAppsCardV1Section
+    GoogleAppsCardV1Section (..),
+    newGoogleAppsCardV1Section,
+
+    -- ** GoogleAppsCardV1SelectionInput
+    GoogleAppsCardV1SelectionInput (..),
+    newGoogleAppsCardV1SelectionInput,
+
+    -- ** GoogleAppsCardV1SelectionInput_Type
+    GoogleAppsCardV1SelectionInput_Type (..),
+
+    -- ** GoogleAppsCardV1SelectionItem
+    GoogleAppsCardV1SelectionItem (..),
+    newGoogleAppsCardV1SelectionItem,
+
+    -- ** GoogleAppsCardV1SuggestionItem
+    GoogleAppsCardV1SuggestionItem (..),
+    newGoogleAppsCardV1SuggestionItem,
+
+    -- ** GoogleAppsCardV1Suggestions
+    GoogleAppsCardV1Suggestions (..),
+    newGoogleAppsCardV1Suggestions,
+
+    -- ** GoogleAppsCardV1SwitchControl
+    GoogleAppsCardV1SwitchControl (..),
+    newGoogleAppsCardV1SwitchControl,
+
+    -- ** GoogleAppsCardV1SwitchControl_ControlType
+    GoogleAppsCardV1SwitchControl_ControlType (..),
+
+    -- ** GoogleAppsCardV1TextInput
+    GoogleAppsCardV1TextInput (..),
+    newGoogleAppsCardV1TextInput,
+
+    -- ** GoogleAppsCardV1TextInput_Type
+    GoogleAppsCardV1TextInput_Type (..),
+
+    -- ** GoogleAppsCardV1TextParagraph
+    GoogleAppsCardV1TextParagraph (..),
+    newGoogleAppsCardV1TextParagraph,
+
+    -- ** GoogleAppsCardV1Widget
+    GoogleAppsCardV1Widget (..),
+    newGoogleAppsCardV1Widget,
+
+    -- ** GoogleAppsCardV1Widget_HorizontalAlignment
+    GoogleAppsCardV1Widget_HorizontalAlignment (..),
+
+    -- ** Image
+    Image (..),
+    newImage,
+
+    -- ** ImageButton
+    ImageButton (..),
+    newImageButton,
+
+    -- ** ImageButton_Icon
+    ImageButton_Icon (..),
+
+    -- ** Inputs
+    Inputs (..),
+    newInputs,
+
+    -- ** KeyValue
+    KeyValue (..),
+    newKeyValue,
+
+    -- ** KeyValue_Icon
+    KeyValue_Icon (..),
+
+    -- ** ListMembershipsResponse
+    ListMembershipsResponse (..),
+    newListMembershipsResponse,
+
+    -- ** ListSpacesResponse
+    ListSpacesResponse (..),
+    newListSpacesResponse,
+
+    -- ** MatchedUrl
+    MatchedUrl (..),
+    newMatchedUrl,
+
+    -- ** Media
+    Media (..),
+    newMedia,
+
+    -- ** Membership
+    Membership (..),
+    newMembership,
+
+    -- ** Membership_State
+    Membership_State (..),
+
+    -- ** Message
+    Message (..),
+    newMessage,
+
+    -- ** OnClick
+    OnClick (..),
+    newOnClick,
+
+    -- ** OpenLink
+    OpenLink (..),
+    newOpenLink,
+
+    -- ** Section
+    Section (..),
+    newSection,
+
+    -- ** SlashCommand
+    SlashCommand (..),
+    newSlashCommand,
+
+    -- ** SlashCommandMetadata
+    SlashCommandMetadata (..),
+    newSlashCommandMetadata,
+
+    -- ** SlashCommandMetadata_Type
+    SlashCommandMetadata_Type (..),
+
+    -- ** Space
+    Space (..),
+    newSpace,
+
+    -- ** Space_Type
+    Space_Type (..),
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StringInputs
+    StringInputs (..),
+    newStringInputs,
+
+    -- ** TextButton
+    TextButton (..),
+    newTextButton,
+
+    -- ** TextParagraph
+    TextParagraph (..),
+    newTextParagraph,
+
+    -- ** Thread
+    Thread (..),
+    newThread,
+
+    -- ** TimeInput
+    TimeInput (..),
+    newTimeInput,
+
+    -- ** TimeZone
+    TimeZone (..),
+    newTimeZone,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_Type
+    User_Type (..),
+
+    -- ** UserMentionMetadata
+    UserMentionMetadata (..),
+    newUserMentionMetadata,
+
+    -- ** UserMentionMetadata_Type
+    UserMentionMetadata_Type (..),
+
+    -- ** WidgetMarkup
+    WidgetMarkup (..),
+    newWidgetMarkup,
+  )
+where
+
+import Network.Google.Chat.Internal.Product
+import Network.Google.Chat.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Google Chat API. This contains the host and root path used as a starting point for constructing service requests.
+chatService :: Core.ServiceConfig
+chatService =
+  Core.defaultService
+    (Core.ServiceId "chat:v1")
+    "chat.googleapis.com"
