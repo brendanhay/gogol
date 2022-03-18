@@ -38,54 +38,55 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.DNS
-    Network.Google.DNS.Changes.Create
-    Network.Google.DNS.Changes.Get
-    Network.Google.DNS.Changes.List
-    Network.Google.DNS.DnsKeys.Get
-    Network.Google.DNS.DnsKeys.List
-    Network.Google.DNS.ManagedZoneOperations.Get
-    Network.Google.DNS.ManagedZoneOperations.List
-    Network.Google.DNS.ManagedZones.Create
-    Network.Google.DNS.ManagedZones.Delete
-    Network.Google.DNS.ManagedZones.Get
-    Network.Google.DNS.ManagedZones.List
-    Network.Google.DNS.ManagedZones.Patch
-    Network.Google.DNS.ManagedZones.Update
-    Network.Google.DNS.Policies.Create
-    Network.Google.DNS.Policies.Delete
-    Network.Google.DNS.Policies.Get
-    Network.Google.DNS.Policies.List
-    Network.Google.DNS.Policies.Patch
-    Network.Google.DNS.Policies.Update
-    Network.Google.DNS.Projects.Get
-    Network.Google.DNS.ResourceRecordSets.Create
-    Network.Google.DNS.ResourceRecordSets.Delete
-    Network.Google.DNS.ResourceRecordSets.Get
-    Network.Google.DNS.ResourceRecordSets.List
-    Network.Google.DNS.ResourceRecordSets.Patch
-    Network.Google.DNS.ResponsePolicies.Create
-    Network.Google.DNS.ResponsePolicies.Delete
-    Network.Google.DNS.ResponsePolicies.Get
-    Network.Google.DNS.ResponsePolicies.List
-    Network.Google.DNS.ResponsePolicies.Patch
-    Network.Google.DNS.ResponsePolicies.Update
-    Network.Google.DNS.ResponsePolicyRules.Create
-    Network.Google.DNS.ResponsePolicyRules.Delete
-    Network.Google.DNS.ResponsePolicyRules.Get
-    Network.Google.DNS.ResponsePolicyRules.List
-    Network.Google.DNS.ResponsePolicyRules.Patch
-    Network.Google.DNS.ResponsePolicyRules.Update
-    Network.Google.DNS.Types
+    Gogol.DNS
+    Gogol.DNS.Changes.Create
+    Gogol.DNS.Changes.Get
+    Gogol.DNS.Changes.List
+    Gogol.DNS.DnsKeys.Get
+    Gogol.DNS.DnsKeys.List
+    Gogol.DNS.ManagedZoneOperations.Get
+    Gogol.DNS.ManagedZoneOperations.List
+    Gogol.DNS.ManagedZones.Create
+    Gogol.DNS.ManagedZones.Delete
+    Gogol.DNS.ManagedZones.Get
+    Gogol.DNS.ManagedZones.List
+    Gogol.DNS.ManagedZones.Patch
+    Gogol.DNS.ManagedZones.Update
+    Gogol.DNS.Policies.Create
+    Gogol.DNS.Policies.Delete
+    Gogol.DNS.Policies.Get
+    Gogol.DNS.Policies.List
+    Gogol.DNS.Policies.Patch
+    Gogol.DNS.Policies.Update
+    Gogol.DNS.Projects.Get
+    Gogol.DNS.ResourceRecordSets.Create
+    Gogol.DNS.ResourceRecordSets.Delete
+    Gogol.DNS.ResourceRecordSets.Get
+    Gogol.DNS.ResourceRecordSets.List
+    Gogol.DNS.ResourceRecordSets.Patch
+    Gogol.DNS.ResponsePolicies.Create
+    Gogol.DNS.ResponsePolicies.Delete
+    Gogol.DNS.ResponsePolicies.Get
+    Gogol.DNS.ResponsePolicies.List
+    Gogol.DNS.ResponsePolicies.Patch
+    Gogol.DNS.ResponsePolicies.Update
+    Gogol.DNS.ResponsePolicyRules.Create
+    Gogol.DNS.ResponsePolicyRules.Delete
+    Gogol.DNS.ResponsePolicyRules.Get
+    Gogol.DNS.ResponsePolicyRules.List
+    Gogol.DNS.ResponsePolicyRules.Patch
+    Gogol.DNS.ResponsePolicyRules.Update
+    Gogol.DNS.Types
 
   other-modules:
-    Network.Google.DNS.Internal.Product
-    Network.Google.DNS.Internal.Sum
+    Gogol.DNS.Internal.Product
+    Gogol.DNS.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
