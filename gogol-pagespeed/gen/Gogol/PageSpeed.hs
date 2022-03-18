@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PageSpeed
+-- Module      : Gogol.PageSpeed
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The PageSpeed Insights API lets you analyze the performance of your website with a simple API. It offers tailored suggestions for how you can optimize your site, and lets you easily integrate PageSpeed Insights analysis into your development tools and workflow.
 --
 -- /See:/ <https://developers.google.com/speed/docs/insights/v5/about PageSpeed Insights API Reference>
-module Network.Google.PageSpeed
+module Gogol.PageSpeed
   ( -- * Configuration
     pageSpeedService,
 
@@ -148,5 +148,5 @@ module Network.Google.PageSpeed
   )
 where
 
-import Network.Google.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
-import Network.Google.PageSpeed.Types
+import Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
+import Gogol.PageSpeed.Types
