@@ -1,168 +1,125 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CommentAnalyzer
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Perspective Comment Analyzer API provides information about the
--- potential impact of a comment on a conversation (e.g. it can provide a
--- score for the \"toxicity\" of a comment). Users can leverage the
--- \"SuggestCommentScore\" method to submit corrections to improve
--- Perspective over time. Users can set the \"doNotStore\" flag to ensure
--- that all submitted comments are automatically deleted after scores are
--- returned.
+-- The Perspective Comment Analyzer API provides information about the potential impact of a comment on a conversation (e.g. it can provide a score for the \"toxicity\" of a comment). Users can leverage the \"SuggestCommentScore\" method to submit corrections to improve Perspective over time. Users can set the \"doNotStore\" flag to ensure that all submitted comments are automatically deleted after scores are returned.
 --
 -- /See:/ <https://github.com/conversationai/perspectiveapi/blob/master/README.md Perspective Comment Analyzer API Reference>
 module Network.Google.CommentAnalyzer
-    (
-    -- * Service Configuration
-      commentAnalyzerService
+  ( -- * Configuration
+    commentAnalyzerService,
 
     -- * OAuth Scopes
-    , userInfoEmailScope
-
-    -- * API Declaration
-    , CommentAnalyzerAPI
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** commentanalyzer.comments.analyze
-    , module Network.Google.Resource.CommentAnalyzer.Comments.Analyze
+    CommentAnalyzerCommentsAnalyzeResource,
+    newCommentAnalyzerCommentsAnalyze,
+    CommentAnalyzerCommentsAnalyze,
 
     -- ** commentanalyzer.comments.suggestscore
-    , module Network.Google.Resource.CommentAnalyzer.Comments.Suggestscore
+    CommentAnalyzerCommentsSuggestscoreResource,
+    newCommentAnalyzerCommentsSuggestscore,
+    CommentAnalyzerCommentsSuggestscore,
 
     -- * Types
 
-    -- ** SpanScore
-    , SpanScore
-    , spanScore
-    , ssBegin
-    , ssScore
-    , ssEnd
-
-    -- ** AnalyzeCommentResponse
-    , AnalyzeCommentResponse
-    , analyzeCommentResponse
-    , acrDetectedLanguages
-    , acrClientToken
-    , acrLanguages
-    , acrAttributeScores
-
-    -- ** SuggestCommentScoreResponse
-    , SuggestCommentScoreResponse
-    , suggestCommentScoreResponse
-    , scsrDetectedLanguages
-    , scsrClientToken
-    , scsrRequestedLanguages
-
-    -- ** Context
-    , Context
-    , context
-    , cEntries
-    , cArticleAndParentComment
-
-    -- ** Score
-    , Score
-    , score
-    , sValue
-    , sType
-
-    -- ** ArticleAndParentComment
-    , ArticleAndParentComment
-    , articleAndParentComment
-    , aapcArticle
-    , aapcParentComment
-
-    -- ** AttributeParameters
-    , AttributeParameters
-    , attributeParameters
-    , apScoreThreshold
-    , apScoreType
-
-    -- ** TextEntry
-    , TextEntry
-    , textEntry
-    , teText
-    , teType
-
-    -- ** AttributeScores
-    , AttributeScores
-    , attributeScores
-    , asSummaryScore
-    , asSpanScores
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ScoreType
-    , ScoreType (..)
-
-    -- ** AnalyzeCommentResponseAttributeScores
-    , AnalyzeCommentResponseAttributeScores
-    , analyzeCommentResponseAttributeScores
-    , acrasAddtional
-
-    -- ** SuggestCommentScoreRequest
-    , SuggestCommentScoreRequest
-    , suggestCommentScoreRequest
-    , sContext
-    , sClientToken
-    , sLanguages
-    , sAttributeScores
-    , sSessionId
-    , sComment
-    , sCommUnityId
-
-    -- ** AttributeParametersScoreType
-    , AttributeParametersScoreType (..)
+    Xgafv (..),
 
     -- ** AnalyzeCommentRequest
-    , AnalyzeCommentRequest
-    , analyzeCommentRequest
-    , aContext
-    , aClientToken
-    , aSpanAnnotations
-    , aDoNotStore
-    , aLanguages
-    , aRequestedAttributes
-    , aSessionId
-    , aComment
-    , aCommUnityId
+    AnalyzeCommentRequest (..),
+    newAnalyzeCommentRequest,
 
-    -- ** SuggestCommentScoreRequestAttributeScores
-    , SuggestCommentScoreRequestAttributeScores
-    , suggestCommentScoreRequestAttributeScores
-    , scsrasAddtional
+    -- ** AnalyzeCommentRequest_RequestedAttributes
+    AnalyzeCommentRequest_RequestedAttributes (..),
+    newAnalyzeCommentRequest_RequestedAttributes,
 
-    -- ** AnalyzeCommentRequestRequestedAttributes
-    , AnalyzeCommentRequestRequestedAttributes
-    , analyzeCommentRequestRequestedAttributes
-    , acrraAddtional
+    -- ** AnalyzeCommentResponse
+    AnalyzeCommentResponse (..),
+    newAnalyzeCommentResponse,
 
-    -- ** TextEntryType
-    , TextEntryType (..)
-    ) where
+    -- ** AnalyzeCommentResponse_AttributeScores
+    AnalyzeCommentResponse_AttributeScores (..),
+    newAnalyzeCommentResponse_AttributeScores,
 
-import Network.Google.Prelude
+    -- ** ArticleAndParentComment
+    ArticleAndParentComment (..),
+    newArticleAndParentComment,
+
+    -- ** AttributeParameters
+    AttributeParameters (..),
+    newAttributeParameters,
+
+    -- ** AttributeParameters_ScoreType
+    AttributeParameters_ScoreType (..),
+
+    -- ** AttributeScores
+    AttributeScores (..),
+    newAttributeScores,
+
+    -- ** Context
+    Context (..),
+    newContext,
+
+    -- ** Score
+    Score (..),
+    newScore,
+
+    -- ** Score_Type
+    Score_Type (..),
+
+    -- ** SpanScore
+    SpanScore (..),
+    newSpanScore,
+
+    -- ** SuggestCommentScoreRequest
+    SuggestCommentScoreRequest (..),
+    newSuggestCommentScoreRequest,
+
+    -- ** SuggestCommentScoreRequest_AttributeScores
+    SuggestCommentScoreRequest_AttributeScores (..),
+    newSuggestCommentScoreRequest_AttributeScores,
+
+    -- ** SuggestCommentScoreResponse
+    SuggestCommentScoreResponse (..),
+    newSuggestCommentScoreResponse,
+
+    -- ** TextEntry
+    TextEntry (..),
+    newTextEntry,
+
+    -- ** TextEntry_Type
+    TextEntry_Type (..),
+  )
+where
+
+import Network.Google.CommentAnalyzer.Comments.Analyze
+import Network.Google.CommentAnalyzer.Comments.Suggestscore
 import Network.Google.CommentAnalyzer.Types
-import Network.Google.Resource.CommentAnalyzer.Comments.Analyze
-import Network.Google.Resource.CommentAnalyzer.Comments.Suggestscore
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Perspective Comment Analyzer API service.
-type CommentAnalyzerAPI =
-     CommentsSuggestscoreResource :<|>
-       CommentsAnalyzeResource
