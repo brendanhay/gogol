@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.StreetViewPublish
-    Network.Google.StreetViewPublish.Photo.Create
-    Network.Google.StreetViewPublish.Photo.Delete
-    Network.Google.StreetViewPublish.Photo.Get
-    Network.Google.StreetViewPublish.Photo.StartUpload
-    Network.Google.StreetViewPublish.Photo.Update
-    Network.Google.StreetViewPublish.Photos.BatchDelete
-    Network.Google.StreetViewPublish.Photos.BatchGet
-    Network.Google.StreetViewPublish.Photos.BatchUpdate
-    Network.Google.StreetViewPublish.Photos.List
-    Network.Google.StreetViewPublish.Types
+    Gogol.StreetViewPublish
+    Gogol.StreetViewPublish.Photo.Create
+    Gogol.StreetViewPublish.Photo.Delete
+    Gogol.StreetViewPublish.Photo.Get
+    Gogol.StreetViewPublish.Photo.StartUpload
+    Gogol.StreetViewPublish.Photo.Update
+    Gogol.StreetViewPublish.Photos.BatchDelete
+    Gogol.StreetViewPublish.Photos.BatchGet
+    Gogol.StreetViewPublish.Photos.BatchUpdate
+    Gogol.StreetViewPublish.Photos.List
+    Gogol.StreetViewPublish.Types
 
   other-modules:
-    Network.Google.StreetViewPublish.Internal.Product
-    Network.Google.StreetViewPublish.Internal.Sum
+    Gogol.StreetViewPublish.Internal.Product
+    Gogol.StreetViewPublish.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Internal.Product
+-- Module      : Gogol.StreetViewPublish.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.StreetViewPublish.Internal.Product
+module Gogol.StreetViewPublish.Internal.Product
   ( -- * BatchDeletePhotosRequest
     BatchDeletePhotosRequest (..),
     newBatchDeletePhotosRequest,
@@ -116,8 +116,8 @@ module Network.Google.StreetViewPublish.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Internal.Sum
 
 -- | Request to delete multiple Photos.
 --

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StreetViewPublish.Photo.Delete
+-- Module      : Gogol.StreetViewPublish.Photo.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a Photo and its metadata. This method returns the following error codes: * google.rpc.Code.PERMISSION/DENIED if the requesting user did not create the requested photo. * google.rpc.Code.NOT/FOUND if the photo ID does not exist.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photo.delete@.
-module Network.Google.StreetViewPublish.Photo.Delete
+module Gogol.StreetViewPublish.Photo.Delete
   ( -- * Resource
     StreetViewPublishPhotoDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StreetViewPublish.Photo.Delete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StreetViewPublish.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.delete@ method which the
 -- 'StreetViewPublishPhotoDelete' request conforms to.
