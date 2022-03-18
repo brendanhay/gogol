@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudProfiler
-    Network.Google.CloudProfiler.Projects.Profiles.Create
-    Network.Google.CloudProfiler.Projects.Profiles.CreateOffline
-    Network.Google.CloudProfiler.Projects.Profiles.Patch
-    Network.Google.CloudProfiler.Types
+    Gogol.CloudProfiler
+    Gogol.CloudProfiler.Projects.Profiles.Create
+    Gogol.CloudProfiler.Projects.Profiles.CreateOffline
+    Gogol.CloudProfiler.Projects.Profiles.Patch
+    Gogol.CloudProfiler.Types
 
   other-modules:
-    Network.Google.CloudProfiler.Internal.Product
-    Network.Google.CloudProfiler.Internal.Sum
+    Gogol.CloudProfiler.Internal.Product
+    Gogol.CloudProfiler.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

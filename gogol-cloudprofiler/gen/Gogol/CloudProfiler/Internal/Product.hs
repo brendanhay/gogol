@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudProfiler.Internal.Product
+-- Module      : Gogol.CloudProfiler.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudProfiler.Internal.Product
+module Gogol.CloudProfiler.Internal.Product
   ( -- * CreateProfileRequest
     CreateProfileRequest (..),
     newCreateProfileRequest,
@@ -48,8 +48,8 @@ module Network.Google.CloudProfiler.Internal.Product
   )
 where
 
-import Network.Google.CloudProfiler.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudProfiler.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | CreateProfileRequest describes a profile resource online creation request. The deployment field must be populated. The profile_type specifies the list of profile types supported by the agent. The creation call will hang until a profile of one of these types needs to be collected.
 --

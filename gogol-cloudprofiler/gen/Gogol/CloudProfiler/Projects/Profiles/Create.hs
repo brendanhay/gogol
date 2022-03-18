@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudProfiler.Projects.Profiles.Create
+-- Module      : Gogol.CloudProfiler.Projects.Profiles.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- CreateProfile creates a new profile resource in the online mode. The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named \"google.rpc.retryinfo-bin\".
 --
 -- /See:/ <https://cloud.google.com/profiler/ Stackdriver Profiler API Reference> for @cloudprofiler.projects.profiles.create@.
-module Network.Google.CloudProfiler.Projects.Profiles.Create
+module Gogol.CloudProfiler.Projects.Profiles.Create
   ( -- * Resource
     CloudProfilerProjectsProfilesCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudProfiler.Projects.Profiles.Create
   )
 where
 
-import Network.Google.CloudProfiler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudProfiler.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudprofiler.projects.profiles.create@ method which the
 -- 'CloudProfilerProjectsProfilesCreate' request conforms to.
