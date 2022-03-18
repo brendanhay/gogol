@@ -1,703 +1,627 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ResourceManager
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates, reads, and updates metadata for Google Cloud Platform resource
--- containers.
+-- Creates, reads, and updates metadata for Google Cloud Platform resource containers.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference>
 module Network.Google.ResourceManager
-    (
-    -- * Service Configuration
-      resourceManagerService
+  ( -- * Configuration
+    resourceManagerService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , ResourceManagerAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
     -- * Resources
 
     -- ** cloudresourcemanager.folders.create
-    , module Network.Google.Resource.CloudResourceManager.Folders.Create
+    CloudresourcemanagerFoldersCreateResource,
+    newCloudresourcemanagerFoldersCreate,
+    CloudresourcemanagerFoldersCreate,
 
     -- ** cloudresourcemanager.folders.delete
-    , module Network.Google.Resource.CloudResourceManager.Folders.Delete
+    CloudresourcemanagerFoldersDeleteResource,
+    newCloudresourcemanagerFoldersDelete,
+    CloudresourcemanagerFoldersDelete,
 
     -- ** cloudresourcemanager.folders.get
-    , module Network.Google.Resource.CloudResourceManager.Folders.Get
+    CloudresourcemanagerFoldersGetResource,
+    newCloudresourcemanagerFoldersGet,
+    CloudresourcemanagerFoldersGet,
 
     -- ** cloudresourcemanager.folders.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Folders.GetIAMPolicy
+    CloudresourcemanagerFoldersGetIamPolicyResource,
+    newCloudresourcemanagerFoldersGetIamPolicy,
+    CloudresourcemanagerFoldersGetIamPolicy,
 
     -- ** cloudresourcemanager.folders.list
-    , module Network.Google.Resource.CloudResourceManager.Folders.List
+    CloudresourcemanagerFoldersListResource,
+    newCloudresourcemanagerFoldersList,
+    CloudresourcemanagerFoldersList,
 
     -- ** cloudresourcemanager.folders.move
-    , module Network.Google.Resource.CloudResourceManager.Folders.Move
+    CloudresourcemanagerFoldersMoveResource,
+    newCloudresourcemanagerFoldersMove,
+    CloudresourcemanagerFoldersMove,
 
     -- ** cloudresourcemanager.folders.patch
-    , module Network.Google.Resource.CloudResourceManager.Folders.Patch
+    CloudresourcemanagerFoldersPatchResource,
+    newCloudresourcemanagerFoldersPatch,
+    CloudresourcemanagerFoldersPatch,
 
     -- ** cloudresourcemanager.folders.search
-    , module Network.Google.Resource.CloudResourceManager.Folders.Search
+    CloudresourcemanagerFoldersSearchResource,
+    newCloudresourcemanagerFoldersSearch,
+    CloudresourcemanagerFoldersSearch,
 
     -- ** cloudresourcemanager.folders.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Folders.SetIAMPolicy
+    CloudresourcemanagerFoldersSetIamPolicyResource,
+    newCloudresourcemanagerFoldersSetIamPolicy,
+    CloudresourcemanagerFoldersSetIamPolicy,
 
     -- ** cloudresourcemanager.folders.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.Folders.TestIAMPermissions
+    CloudresourcemanagerFoldersTestIamPermissionsResource,
+    newCloudresourcemanagerFoldersTestIamPermissions,
+    CloudresourcemanagerFoldersTestIamPermissions,
 
     -- ** cloudresourcemanager.folders.undelete
-    , module Network.Google.Resource.CloudResourceManager.Folders.Undelete
+    CloudresourcemanagerFoldersUndeleteResource,
+    newCloudresourcemanagerFoldersUndelete,
+    CloudresourcemanagerFoldersUndelete,
 
     -- ** cloudresourcemanager.liens.create
-    , module Network.Google.Resource.CloudResourceManager.Liens.Create
+    CloudresourcemanagerLiensCreateResource,
+    newCloudresourcemanagerLiensCreate,
+    CloudresourcemanagerLiensCreate,
 
     -- ** cloudresourcemanager.liens.delete
-    , module Network.Google.Resource.CloudResourceManager.Liens.Delete
+    CloudresourcemanagerLiensDeleteResource,
+    newCloudresourcemanagerLiensDelete,
+    CloudresourcemanagerLiensDelete,
 
     -- ** cloudresourcemanager.liens.get
-    , module Network.Google.Resource.CloudResourceManager.Liens.Get
+    CloudresourcemanagerLiensGetResource,
+    newCloudresourcemanagerLiensGet,
+    CloudresourcemanagerLiensGet,
 
     -- ** cloudresourcemanager.liens.list
-    , module Network.Google.Resource.CloudResourceManager.Liens.List
+    CloudresourcemanagerLiensListResource,
+    newCloudresourcemanagerLiensList,
+    CloudresourcemanagerLiensList,
 
     -- ** cloudresourcemanager.operations.get
-    , module Network.Google.Resource.CloudResourceManager.Operations.Get
+    CloudresourcemanagerOperationsGetResource,
+    newCloudresourcemanagerOperationsGet,
+    CloudresourcemanagerOperationsGet,
 
     -- ** cloudresourcemanager.organizations.get
-    , module Network.Google.Resource.CloudResourceManager.Organizations.Get
+    CloudresourcemanagerOrganizationsGetResource,
+    newCloudresourcemanagerOrganizationsGet,
+    CloudresourcemanagerOrganizationsGet,
 
     -- ** cloudresourcemanager.organizations.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
+    CloudresourcemanagerOrganizationsGetIamPolicyResource,
+    newCloudresourcemanagerOrganizationsGetIamPolicy,
+    CloudresourcemanagerOrganizationsGetIamPolicy,
 
     -- ** cloudresourcemanager.organizations.search
-    , module Network.Google.Resource.CloudResourceManager.Organizations.Search
+    CloudresourcemanagerOrganizationsSearchResource,
+    newCloudresourcemanagerOrganizationsSearch,
+    CloudresourcemanagerOrganizationsSearch,
 
     -- ** cloudresourcemanager.organizations.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
+    CloudresourcemanagerOrganizationsSetIamPolicyResource,
+    newCloudresourcemanagerOrganizationsSetIamPolicy,
+    CloudresourcemanagerOrganizationsSetIamPolicy,
 
     -- ** cloudresourcemanager.organizations.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
+    CloudresourcemanagerOrganizationsTestIamPermissionsResource,
+    newCloudresourcemanagerOrganizationsTestIamPermissions,
+    CloudresourcemanagerOrganizationsTestIamPermissions,
 
     -- ** cloudresourcemanager.projects.create
-    , module Network.Google.Resource.CloudResourceManager.Projects.Create
+    CloudresourcemanagerProjectsCreateResource,
+    newCloudresourcemanagerProjectsCreate,
+    CloudresourcemanagerProjectsCreate,
 
     -- ** cloudresourcemanager.projects.delete
-    , module Network.Google.Resource.CloudResourceManager.Projects.Delete
+    CloudresourcemanagerProjectsDeleteResource,
+    newCloudresourcemanagerProjectsDelete,
+    CloudresourcemanagerProjectsDelete,
 
     -- ** cloudresourcemanager.projects.get
-    , module Network.Google.Resource.CloudResourceManager.Projects.Get
+    CloudresourcemanagerProjectsGetResource,
+    newCloudresourcemanagerProjectsGet,
+    CloudresourcemanagerProjectsGet,
 
     -- ** cloudresourcemanager.projects.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
+    CloudresourcemanagerProjectsGetIamPolicyResource,
+    newCloudresourcemanagerProjectsGetIamPolicy,
+    CloudresourcemanagerProjectsGetIamPolicy,
 
     -- ** cloudresourcemanager.projects.list
-    , module Network.Google.Resource.CloudResourceManager.Projects.List
+    CloudresourcemanagerProjectsListResource,
+    newCloudresourcemanagerProjectsList,
+    CloudresourcemanagerProjectsList,
 
     -- ** cloudresourcemanager.projects.move
-    , module Network.Google.Resource.CloudResourceManager.Projects.Move
+    CloudresourcemanagerProjectsMoveResource,
+    newCloudresourcemanagerProjectsMove,
+    CloudresourcemanagerProjectsMove,
 
     -- ** cloudresourcemanager.projects.patch
-    , module Network.Google.Resource.CloudResourceManager.Projects.Patch
+    CloudresourcemanagerProjectsPatchResource,
+    newCloudresourcemanagerProjectsPatch,
+    CloudresourcemanagerProjectsPatch,
 
     -- ** cloudresourcemanager.projects.search
-    , module Network.Google.Resource.CloudResourceManager.Projects.Search
+    CloudresourcemanagerProjectsSearchResource,
+    newCloudresourcemanagerProjectsSearch,
+    CloudresourcemanagerProjectsSearch,
 
     -- ** cloudresourcemanager.projects.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
+    CloudresourcemanagerProjectsSetIamPolicyResource,
+    newCloudresourcemanagerProjectsSetIamPolicy,
+    CloudresourcemanagerProjectsSetIamPolicy,
 
     -- ** cloudresourcemanager.projects.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
+    CloudresourcemanagerProjectsTestIamPermissionsResource,
+    newCloudresourcemanagerProjectsTestIamPermissions,
+    CloudresourcemanagerProjectsTestIamPermissions,
 
     -- ** cloudresourcemanager.projects.undelete
-    , module Network.Google.Resource.CloudResourceManager.Projects.Undelete
+    CloudresourcemanagerProjectsUndeleteResource,
+    newCloudresourcemanagerProjectsUndelete,
+    CloudresourcemanagerProjectsUndelete,
 
     -- ** cloudresourcemanager.tagBindings.create
-    , module Network.Google.Resource.CloudResourceManager.TagBindings.Create
+    CloudresourcemanagerTagBindingsCreateResource,
+    newCloudresourcemanagerTagBindingsCreate,
+    CloudresourcemanagerTagBindingsCreate,
 
     -- ** cloudresourcemanager.tagBindings.delete
-    , module Network.Google.Resource.CloudResourceManager.TagBindings.Delete
+    CloudresourcemanagerTagBindingsDeleteResource,
+    newCloudresourcemanagerTagBindingsDelete,
+    CloudresourcemanagerTagBindingsDelete,
 
     -- ** cloudresourcemanager.tagBindings.list
-    , module Network.Google.Resource.CloudResourceManager.TagBindings.List
+    CloudresourcemanagerTagBindingsListResource,
+    newCloudresourcemanagerTagBindingsList,
+    CloudresourcemanagerTagBindingsList,
 
     -- ** cloudresourcemanager.tagKeys.create
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.Create
+    CloudresourcemanagerTagKeysCreateResource,
+    newCloudresourcemanagerTagKeysCreate,
+    CloudresourcemanagerTagKeysCreate,
 
     -- ** cloudresourcemanager.tagKeys.delete
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.Delete
+    CloudresourcemanagerTagKeysDeleteResource,
+    newCloudresourcemanagerTagKeysDelete,
+    CloudresourcemanagerTagKeysDelete,
 
     -- ** cloudresourcemanager.tagKeys.get
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.Get
+    CloudresourcemanagerTagKeysGetResource,
+    newCloudresourcemanagerTagKeysGet,
+    CloudresourcemanagerTagKeysGet,
 
     -- ** cloudresourcemanager.tagKeys.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.GetIAMPolicy
+    CloudresourcemanagerTagKeysGetIamPolicyResource,
+    newCloudresourcemanagerTagKeysGetIamPolicy,
+    CloudresourcemanagerTagKeysGetIamPolicy,
 
     -- ** cloudresourcemanager.tagKeys.list
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.List
+    CloudresourcemanagerTagKeysListResource,
+    newCloudresourcemanagerTagKeysList,
+    CloudresourcemanagerTagKeysList,
 
     -- ** cloudresourcemanager.tagKeys.patch
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.Patch
+    CloudresourcemanagerTagKeysPatchResource,
+    newCloudresourcemanagerTagKeysPatch,
+    CloudresourcemanagerTagKeysPatch,
 
     -- ** cloudresourcemanager.tagKeys.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.SetIAMPolicy
+    CloudresourcemanagerTagKeysSetIamPolicyResource,
+    newCloudresourcemanagerTagKeysSetIamPolicy,
+    CloudresourcemanagerTagKeysSetIamPolicy,
 
     -- ** cloudresourcemanager.tagKeys.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.TagKeys.TestIAMPermissions
+    CloudresourcemanagerTagKeysTestIamPermissionsResource,
+    newCloudresourcemanagerTagKeysTestIamPermissions,
+    CloudresourcemanagerTagKeysTestIamPermissions,
 
     -- ** cloudresourcemanager.tagValues.create
-    , module Network.Google.Resource.CloudResourceManager.TagValues.Create
+    CloudresourcemanagerTagValuesCreateResource,
+    newCloudresourcemanagerTagValuesCreate,
+    CloudresourcemanagerTagValuesCreate,
 
     -- ** cloudresourcemanager.tagValues.delete
-    , module Network.Google.Resource.CloudResourceManager.TagValues.Delete
+    CloudresourcemanagerTagValuesDeleteResource,
+    newCloudresourcemanagerTagValuesDelete,
+    CloudresourcemanagerTagValuesDelete,
 
     -- ** cloudresourcemanager.tagValues.get
-    , module Network.Google.Resource.CloudResourceManager.TagValues.Get
+    CloudresourcemanagerTagValuesGetResource,
+    newCloudresourcemanagerTagValuesGet,
+    CloudresourcemanagerTagValuesGet,
 
     -- ** cloudresourcemanager.tagValues.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.TagValues.GetIAMPolicy
+    CloudresourcemanagerTagValuesGetIamPolicyResource,
+    newCloudresourcemanagerTagValuesGetIamPolicy,
+    CloudresourcemanagerTagValuesGetIamPolicy,
 
     -- ** cloudresourcemanager.tagValues.list
-    , module Network.Google.Resource.CloudResourceManager.TagValues.List
+    CloudresourcemanagerTagValuesListResource,
+    newCloudresourcemanagerTagValuesList,
+    CloudresourcemanagerTagValuesList,
 
     -- ** cloudresourcemanager.tagValues.patch
-    , module Network.Google.Resource.CloudResourceManager.TagValues.Patch
+    CloudresourcemanagerTagValuesPatchResource,
+    newCloudresourcemanagerTagValuesPatch,
+    CloudresourcemanagerTagValuesPatch,
 
     -- ** cloudresourcemanager.tagValues.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.TagValues.SetIAMPolicy
+    CloudresourcemanagerTagValuesSetIamPolicyResource,
+    newCloudresourcemanagerTagValuesSetIamPolicy,
+    CloudresourcemanagerTagValuesSetIamPolicy,
 
     -- ** cloudresourcemanager.tagValues.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.TagValues.TestIAMPermissions
+    CloudresourcemanagerTagValuesTestIamPermissionsResource,
+    newCloudresourcemanagerTagValuesTestIamPermissions,
+    CloudresourcemanagerTagValuesTestIamPermissions,
 
     -- * Types
 
-    -- ** UndeleteOrganizationMetadata
-    , UndeleteOrganizationMetadata
-    , undeleteOrganizationMetadata
-
-    -- ** ListFoldersResponse
-    , ListFoldersResponse
-    , listFoldersResponse
-    , lfrNextPageToken
-    , lfrFolders
-
-    -- ** CreateProjectMetadata
-    , CreateProjectMetadata
-    , createProjectMetadata
-    , cpmGettable
-    , cpmReady
-    , cpmCreateTime
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** OrganizationState
-    , OrganizationState (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ListProjectsResponse
-    , ListProjectsResponse
-    , listProjectsResponse
-    , lprNextPageToken
-    , lprProjects
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** UndeleteFolderRequest
-    , UndeleteFolderRequest
-    , undeleteFolderRequest
-
-    -- ** DeleteTagValueMetadata
-    , DeleteTagValueMetadata
-    , deleteTagValueMetadata
-
-    -- ** UpdateTagValueMetadata
-    , UpdateTagValueMetadata
-    , updateTagValueMetadata
-
-    -- ** Project
-    , Project
-    , project
-    , pParent
-    , pEtag
-    , pState
-    , pUpdateTime
-    , pDeleteTime
-    , pName
-    , pDisplayName
-    , pLabels
-    , pProjectId
-    , pCreateTime
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** FolderOperationErrorErrorMessageId
-    , FolderOperationErrorErrorMessageId (..)
-
-    -- ** SearchFoldersResponse
-    , SearchFoldersResponse
-    , searchFoldersResponse
-    , sfrNextPageToken
-    , sfrFolders
-
-    -- ** ProjectCreationStatus
-    , ProjectCreationStatus
-    , projectCreationStatus
-    , pcsGettable
-    , pcsReady
-    , pcsCreateTime
-
-    -- ** CreateTagValueMetadata
-    , CreateTagValueMetadata
-    , createTagValueMetadata
-
-    -- ** ListTagValuesResponse
-    , ListTagValuesResponse
-    , listTagValuesResponse
-    , ltvrNextPageToken
-    , ltvrTagValues
-
-    -- ** CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperation
-    , CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperation
-    , cloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperation
-    , crmgcrmvfoDestinationParent
-    , crmgcrmvfoDisplayName
-    , crmgcrmvfoOperationType
-    , crmgcrmvfoSourceParent
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** SearchProjectsResponse
-    , SearchProjectsResponse
-    , searchProjectsResponse
-    , sprNextPageToken
-    , sprProjects
-
-    -- ** FolderOperationError
-    , FolderOperationError
-    , folderOperationError
-    , foeErrorMessageId
-
-    -- ** Folder
-    , Folder
-    , folder
-    , fParent
-    , fEtag
-    , fState
-    , fUpdateTime
-    , fDeleteTime
-    , fName
-    , fDisplayName
-    , fCreateTime
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** FolderOperationOperationType
-    , FolderOperationOperationType (..)
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** TagValue
-    , TagValue
-    , tagValue
-    , tvParent
-    , tvEtag
-    , tvShortName
-    , tvUpdateTime
-    , tvName
-    , tvNamespacedName
-    , tvDescription
-    , tvCreateTime
-
-    -- ** UndeleteFolderMetadata
-    , UndeleteFolderMetadata
-    , undeleteFolderMetadata
-
-    -- ** ListLiensResponse
-    , ListLiensResponse
-    , listLiensResponse
-    , llrNextPageToken
-    , llrLiens
-
-    -- ** CreateTagKeyMetadata
-    , CreateTagKeyMetadata
-    , createTagKeyMetadata
-
-    -- ** CreateFolderMetadata
-    , CreateFolderMetadata
-    , createFolderMetadata
-    , cfmParent
-    , cfmDisplayName
-
-    -- ** DeleteOrganizationMetadata
-    , DeleteOrganizationMetadata
-    , deleteOrganizationMetadata
-
-    -- ** DeleteTagBindingMetadata
-    , DeleteTagBindingMetadata
-    , deleteTagBindingMetadata
-
-    -- ** ListTagKeysResponse
-    , ListTagKeysResponse
-    , listTagKeysResponse
-    , ltkrNextPageToken
-    , ltkrTagKeys
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** MoveFolderMetadata
-    , MoveFolderMetadata
-    , moveFolderMetadata
-    , mfmDestinationParent
-    , mfmDisplayName
-    , mfmSourceParent
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** UndeleteProjectMetadata
-    , UndeleteProjectMetadata
-    , undeleteProjectMetadata
-
-    -- ** CreateTagBindingMetadata
-    , CreateTagBindingMetadata
-    , createTagBindingMetadata
-
-    -- ** ProjectState
-    , ProjectState (..)
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** DeleteFolderMetadata
-    , DeleteFolderMetadata
-    , deleteFolderMetadata
-
-    -- ** UpdateFolderMetadata
-    , UpdateFolderMetadata
-    , updateFolderMetadata
-
-    -- ** MoveProjectRequest
-    , MoveProjectRequest
-    , moveProjectRequest
-    , mprDestinationParent
-
-    -- ** TagKey
-    , TagKey
-    , tagKey
-    , tkParent
-    , tkEtag
-    , tkShortName
-    , tkUpdateTime
-    , tkName
-    , tkNamespacedName
-    , tkDescription
-    , tkCreateTime
-
-    -- ** CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperation
-    , CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperation
-    , cloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperation
-    , cDestinationParent
-    , cDisplayName
-    , cOperationType
-    , cSourceParent
-
-    -- ** SearchOrganizationsResponse
-    , SearchOrganizationsResponse
-    , searchOrganizationsResponse
-    , sorNextPageToken
-    , sorOrganizations
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** Policy
-    , Policy
-    , policy
-    , polAuditConfigs
-    , polEtag
-    , polVersion
-    , polBindings
-
-    -- ** ProjectLabels
-    , ProjectLabels
-    , projectLabels
-    , plAddtional
-
-    -- ** CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType
-    , CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType (..)
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** FolderOperation
-    , FolderOperation
-    , folderOperation
-    , foDestinationParent
-    , foDisplayName
-    , foOperationType
-    , foSourceParent
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** TagBinding
-    , TagBinding
-    , tagBinding
-    , tbParent
-    , tbTagValue
-    , tbName
-
-    -- ** Organization
-    , Organization
-    , organization
-    , orgEtag
-    , orgState
-    , orgUpdateTime
-    , orgDeleteTime
-    , orgName
-    , orgDisplayName
-    , orgDirectoryCustomerId
-    , orgCreateTime
-
-    -- ** CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType
-    , CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType (..)
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** UndeleteProjectRequest
-    , UndeleteProjectRequest
-    , undeleteProjectRequest
-
-    -- ** Lien
-    , Lien
-    , lien
-    , lParent
-    , lOrigin
-    , lReason
-    , lName
-    , lRestrictions
-    , lCreateTime
-
-    -- ** MoveFolderRequest
-    , MoveFolderRequest
-    , moveFolderRequest
-    , mfrDestinationParent
-
-    -- ** DeleteProjectMetadata
-    , DeleteProjectMetadata
-    , deleteProjectMetadata
-
-    -- ** UpdateProjectMetadata
-    , UpdateProjectMetadata
-    , updateProjectMetadata
-
-    -- ** FolderState
-    , FolderState (..)
-
-    -- ** MoveProjectMetadata
-    , MoveProjectMetadata
-    , moveProjectMetadata
-
-    -- ** UpdateTagKeyMetadata
-    , UpdateTagKeyMetadata
-    , updateTagKeyMetadata
-
-    -- ** DeleteTagKeyMetadata
-    , DeleteTagKeyMetadata
-    , deleteTagKeyMetadata
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation
+    CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation (..),
+    newCloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation,
+
+    -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType
+    CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType (..),
+
+    -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation
+    CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation (..),
+    newCloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation,
+
+    -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType
+    CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType (..),
+
+    -- ** CreateFolderMetadata
+    CreateFolderMetadata (..),
+    newCreateFolderMetadata,
+
+    -- ** CreateProjectMetadata
+    CreateProjectMetadata (..),
+    newCreateProjectMetadata,
+
+    -- ** CreateTagBindingMetadata
+    CreateTagBindingMetadata (..),
+    newCreateTagBindingMetadata,
+
+    -- ** CreateTagKeyMetadata
+    CreateTagKeyMetadata (..),
+    newCreateTagKeyMetadata,
+
+    -- ** CreateTagValueMetadata
+    CreateTagValueMetadata (..),
+    newCreateTagValueMetadata,
+
+    -- ** DeleteFolderMetadata
+    DeleteFolderMetadata (..),
+    newDeleteFolderMetadata,
+
+    -- ** DeleteOrganizationMetadata
+    DeleteOrganizationMetadata (..),
+    newDeleteOrganizationMetadata,
+
+    -- ** DeleteProjectMetadata
+    DeleteProjectMetadata (..),
+    newDeleteProjectMetadata,
+
+    -- ** DeleteTagBindingMetadata
+    DeleteTagBindingMetadata (..),
+    newDeleteTagBindingMetadata,
+
+    -- ** DeleteTagKeyMetadata
+    DeleteTagKeyMetadata (..),
+    newDeleteTagKeyMetadata,
+
+    -- ** DeleteTagValueMetadata
+    DeleteTagValueMetadata (..),
+    newDeleteTagValueMetadata,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** Folder
+    Folder (..),
+    newFolder,
+
+    -- ** Folder_State
+    Folder_State (..),
+
+    -- ** FolderOperation
+    FolderOperation (..),
+    newFolderOperation,
+
+    -- ** FolderOperation_OperationType
+    FolderOperation_OperationType (..),
+
+    -- ** FolderOperationError
+    FolderOperationError (..),
+    newFolderOperationError,
+
+    -- ** FolderOperationError_ErrorMessageId
+    FolderOperationError_ErrorMessageId (..),
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
+
+    -- ** Lien
+    Lien (..),
+    newLien,
+
+    -- ** ListFoldersResponse
+    ListFoldersResponse (..),
+    newListFoldersResponse,
+
+    -- ** ListLiensResponse
+    ListLiensResponse (..),
+    newListLiensResponse,
+
+    -- ** ListProjectsResponse
+    ListProjectsResponse (..),
+    newListProjectsResponse,
 
     -- ** ListTagBindingsResponse
-    , ListTagBindingsResponse
-    , listTagBindingsResponse
-    , ltbrNextPageToken
-    , ltbrTagBindings
-    ) where
+    ListTagBindingsResponse (..),
+    newListTagBindingsResponse,
 
-import Network.Google.Prelude
-import Network.Google.Resource.CloudResourceManager.Folders.Create
-import Network.Google.Resource.CloudResourceManager.Folders.Delete
-import Network.Google.Resource.CloudResourceManager.Folders.Get
-import Network.Google.Resource.CloudResourceManager.Folders.GetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.Folders.List
-import Network.Google.Resource.CloudResourceManager.Folders.Move
-import Network.Google.Resource.CloudResourceManager.Folders.Patch
-import Network.Google.Resource.CloudResourceManager.Folders.Search
-import Network.Google.Resource.CloudResourceManager.Folders.SetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.Folders.TestIAMPermissions
-import Network.Google.Resource.CloudResourceManager.Folders.Undelete
-import Network.Google.Resource.CloudResourceManager.Liens.Create
-import Network.Google.Resource.CloudResourceManager.Liens.Delete
-import Network.Google.Resource.CloudResourceManager.Liens.Get
-import Network.Google.Resource.CloudResourceManager.Liens.List
-import Network.Google.Resource.CloudResourceManager.Operations.Get
-import Network.Google.Resource.CloudResourceManager.Organizations.Get
-import Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.Organizations.Search
-import Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
-import Network.Google.Resource.CloudResourceManager.Projects.Create
-import Network.Google.Resource.CloudResourceManager.Projects.Delete
-import Network.Google.Resource.CloudResourceManager.Projects.Get
-import Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.Projects.List
-import Network.Google.Resource.CloudResourceManager.Projects.Move
-import Network.Google.Resource.CloudResourceManager.Projects.Patch
-import Network.Google.Resource.CloudResourceManager.Projects.Search
-import Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
-import Network.Google.Resource.CloudResourceManager.Projects.Undelete
-import Network.Google.Resource.CloudResourceManager.TagBindings.Create
-import Network.Google.Resource.CloudResourceManager.TagBindings.Delete
-import Network.Google.Resource.CloudResourceManager.TagBindings.List
-import Network.Google.Resource.CloudResourceManager.TagKeys.Create
-import Network.Google.Resource.CloudResourceManager.TagKeys.Delete
-import Network.Google.Resource.CloudResourceManager.TagKeys.Get
-import Network.Google.Resource.CloudResourceManager.TagKeys.GetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.TagKeys.List
-import Network.Google.Resource.CloudResourceManager.TagKeys.Patch
-import Network.Google.Resource.CloudResourceManager.TagKeys.SetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.TagKeys.TestIAMPermissions
-import Network.Google.Resource.CloudResourceManager.TagValues.Create
-import Network.Google.Resource.CloudResourceManager.TagValues.Delete
-import Network.Google.Resource.CloudResourceManager.TagValues.Get
-import Network.Google.Resource.CloudResourceManager.TagValues.GetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.TagValues.List
-import Network.Google.Resource.CloudResourceManager.TagValues.Patch
-import Network.Google.Resource.CloudResourceManager.TagValues.SetIAMPolicy
-import Network.Google.Resource.CloudResourceManager.TagValues.TestIAMPermissions
+    -- ** ListTagKeysResponse
+    ListTagKeysResponse (..),
+    newListTagKeysResponse,
+
+    -- ** ListTagValuesResponse
+    ListTagValuesResponse (..),
+    newListTagValuesResponse,
+
+    -- ** MoveFolderMetadata
+    MoveFolderMetadata (..),
+    newMoveFolderMetadata,
+
+    -- ** MoveFolderRequest
+    MoveFolderRequest (..),
+    newMoveFolderRequest,
+
+    -- ** MoveProjectMetadata
+    MoveProjectMetadata (..),
+    newMoveProjectMetadata,
+
+    -- ** MoveProjectRequest
+    MoveProjectRequest (..),
+    newMoveProjectRequest,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** Organization
+    Organization (..),
+    newOrganization,
+
+    -- ** Organization_State
+    Organization_State (..),
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** Project
+    Project (..),
+    newProject,
+
+    -- ** Project_Labels
+    Project_Labels (..),
+    newProject_Labels,
+
+    -- ** Project_State
+    Project_State (..),
+
+    -- ** ProjectCreationStatus
+    ProjectCreationStatus (..),
+    newProjectCreationStatus,
+
+    -- ** SearchFoldersResponse
+    SearchFoldersResponse (..),
+    newSearchFoldersResponse,
+
+    -- ** SearchOrganizationsResponse
+    SearchOrganizationsResponse (..),
+    newSearchOrganizationsResponse,
+
+    -- ** SearchProjectsResponse
+    SearchProjectsResponse (..),
+    newSearchProjectsResponse,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TagBinding
+    TagBinding (..),
+    newTagBinding,
+
+    -- ** TagKey
+    TagKey (..),
+    newTagKey,
+
+    -- ** TagValue
+    TagValue (..),
+    newTagValue,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** UndeleteFolderMetadata
+    UndeleteFolderMetadata (..),
+    newUndeleteFolderMetadata,
+
+    -- ** UndeleteFolderRequest
+    UndeleteFolderRequest (..),
+    newUndeleteFolderRequest,
+
+    -- ** UndeleteOrganizationMetadata
+    UndeleteOrganizationMetadata (..),
+    newUndeleteOrganizationMetadata,
+
+    -- ** UndeleteProjectMetadata
+    UndeleteProjectMetadata (..),
+    newUndeleteProjectMetadata,
+
+    -- ** UndeleteProjectRequest
+    UndeleteProjectRequest (..),
+    newUndeleteProjectRequest,
+
+    -- ** UpdateFolderMetadata
+    UpdateFolderMetadata (..),
+    newUpdateFolderMetadata,
+
+    -- ** UpdateProjectMetadata
+    UpdateProjectMetadata (..),
+    newUpdateProjectMetadata,
+
+    -- ** UpdateTagKeyMetadata
+    UpdateTagKeyMetadata (..),
+    newUpdateTagKeyMetadata,
+
+    -- ** UpdateTagValueMetadata
+    UpdateTagValueMetadata (..),
+    newUpdateTagValueMetadata,
+  )
+where
+
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.Create
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.Delete
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.Get
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.GetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.List
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.Move
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.Patch
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.Search
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.SetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.TestIamPermissions
+import Network.Google.ResourceManager.Cloudresourcemanager.Folders.Undelete
+import Network.Google.ResourceManager.Cloudresourcemanager.Liens.Create
+import Network.Google.ResourceManager.Cloudresourcemanager.Liens.Delete
+import Network.Google.ResourceManager.Cloudresourcemanager.Liens.Get
+import Network.Google.ResourceManager.Cloudresourcemanager.Liens.List
+import Network.Google.ResourceManager.Cloudresourcemanager.Operations.Get
+import Network.Google.ResourceManager.Cloudresourcemanager.Organizations.Get
+import Network.Google.ResourceManager.Cloudresourcemanager.Organizations.GetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.Organizations.Search
+import Network.Google.ResourceManager.Cloudresourcemanager.Organizations.SetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.Organizations.TestIamPermissions
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.Create
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.Delete
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.Get
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.GetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.List
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.Move
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.Patch
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.Search
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.SetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.TestIamPermissions
+import Network.Google.ResourceManager.Cloudresourcemanager.Projects.Undelete
+import Network.Google.ResourceManager.Cloudresourcemanager.TagBindings.Create
+import Network.Google.ResourceManager.Cloudresourcemanager.TagBindings.Delete
+import Network.Google.ResourceManager.Cloudresourcemanager.TagBindings.List
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.Create
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.Delete
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.Get
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.GetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.List
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.Patch
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.SetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.TagKeys.TestIamPermissions
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.Create
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.Delete
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.Get
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.GetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.List
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.Patch
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.SetIamPolicy
+import Network.Google.ResourceManager.Cloudresourcemanager.TagValues.TestIamPermissions
 import Network.Google.ResourceManager.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Resource Manager API service.
-type ResourceManagerAPI =
-     TagValuesListResource :<|>
-       TagValuesGetIAMPolicyResource
-       :<|> TagValuesPatchResource
-       :<|> TagValuesGetResource
-       :<|> TagValuesCreateResource
-       :<|> TagValuesSetIAMPolicyResource
-       :<|> TagValuesTestIAMPermissionsResource
-       :<|> TagValuesDeleteResource
-       :<|> FoldersListResource
-       :<|> FoldersUndeleteResource
-       :<|> FoldersGetIAMPolicyResource
-       :<|> FoldersPatchResource
-       :<|> FoldersGetResource
-       :<|> FoldersCreateResource
-       :<|> FoldersSetIAMPolicyResource
-       :<|> FoldersTestIAMPermissionsResource
-       :<|> FoldersSearchResource
-       :<|> FoldersDeleteResource
-       :<|> FoldersMoveResource
-       :<|> TagKeysListResource
-       :<|> TagKeysGetIAMPolicyResource
-       :<|> TagKeysPatchResource
-       :<|> TagKeysGetResource
-       :<|> TagKeysCreateResource
-       :<|> TagKeysSetIAMPolicyResource
-       :<|> TagKeysTestIAMPermissionsResource
-       :<|> TagKeysDeleteResource
-       :<|> LiensListResource
-       :<|> LiensGetResource
-       :<|> LiensCreateResource
-       :<|> LiensDeleteResource
-       :<|> TagBindingsListResource
-       :<|> TagBindingsCreateResource
-       :<|> TagBindingsDeleteResource
-       :<|> OrganizationsGetIAMPolicyResource
-       :<|> OrganizationsGetResource
-       :<|> OrganizationsSetIAMPolicyResource
-       :<|> OrganizationsTestIAMPermissionsResource
-       :<|> OrganizationsSearchResource
-       :<|> OperationsGetResource
-       :<|> ProjectsListResource
-       :<|> ProjectsUndeleteResource
-       :<|> ProjectsGetIAMPolicyResource
-       :<|> ProjectsPatchResource
-       :<|> ProjectsGetResource
-       :<|> ProjectsCreateResource
-       :<|> ProjectsSetIAMPolicyResource
-       :<|> ProjectsTestIAMPermissionsResource
-       :<|> ProjectsSearchResource
-       :<|> ProjectsDeleteResource
-       :<|> ProjectsMoveResource
