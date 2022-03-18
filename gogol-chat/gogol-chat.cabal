@@ -39,34 +39,35 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Chat
-    Network.Google.Chat.Dms.Conversations.Messages
-    Network.Google.Chat.Dms.Messages
-    Network.Google.Chat.Dms.Webhooks
-    Network.Google.Chat.Media.Download
-    Network.Google.Chat.Rooms.Conversations.Messages
-    Network.Google.Chat.Rooms.Messages
-    Network.Google.Chat.Rooms.Webhooks
-    Network.Google.Chat.Spaces.Get
-    Network.Google.Chat.Spaces.List
-    Network.Google.Chat.Spaces.Members.Get
-    Network.Google.Chat.Spaces.Members.List
-    Network.Google.Chat.Spaces.Messages.Attachments.Get
-    Network.Google.Chat.Spaces.Messages.Create
-    Network.Google.Chat.Spaces.Messages.Delete
-    Network.Google.Chat.Spaces.Messages.Get
-    Network.Google.Chat.Spaces.Messages.Update
-    Network.Google.Chat.Spaces.Webhooks
-    Network.Google.Chat.Types
+    Gogol.Chat
+    Gogol.Chat.Dms.Conversations.Messages
+    Gogol.Chat.Dms.Messages
+    Gogol.Chat.Dms.Webhooks
+    Gogol.Chat.Media.Download
+    Gogol.Chat.Rooms.Conversations.Messages
+    Gogol.Chat.Rooms.Messages
+    Gogol.Chat.Rooms.Webhooks
+    Gogol.Chat.Spaces.Get
+    Gogol.Chat.Spaces.List
+    Gogol.Chat.Spaces.Members.Get
+    Gogol.Chat.Spaces.Members.List
+    Gogol.Chat.Spaces.Messages.Attachments.Get
+    Gogol.Chat.Spaces.Messages.Create
+    Gogol.Chat.Spaces.Messages.Delete
+    Gogol.Chat.Spaces.Messages.Get
+    Gogol.Chat.Spaces.Messages.Update
+    Gogol.Chat.Spaces.Webhooks
+    Gogol.Chat.Types
 
   other-modules:
-    Network.Google.Chat.Internal.Product
-    Network.Google.Chat.Internal.Sum
+    Gogol.Chat.Internal.Product
+    Gogol.Chat.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
