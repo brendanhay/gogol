@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.OAuth2
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,71 +30,44 @@
 --
 -- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference>
 module Network.Google.OAuth2
-    (
-    -- * Service Configuration
-      oAuth2Service
+  ( -- * Configuration
+    oAuth2Service,
 
     -- * OAuth Scopes
-    , userInfoProFileScope
-    , userInfoEmailScope
-    , openidScope
-
-    -- * API Declaration
-    , OAuth2API
-
-    -- * Methods
-
-    -- ** oauth2.tokeninfo
-    , module Network.Google.Method.OAuth2.TokenInfo
+    userinfoEmailScope,
+    userinfoProfileScope,
+    openidScope,
 
     -- * Resources
 
+    -- ** oauth2.tokeninfo
+    OAuth2TokeninfoMethod,
+    newOAuth2Tokeninfo,
+    OAuth2Tokeninfo,
+
     -- ** oauth2.userinfo.get
-    , module Network.Google.Resource.OAuth2.UserInfo.Get
+    OAuth2UserinfoGetResource,
+    newOAuth2UserinfoGet,
+    OAuth2UserinfoGet,
 
     -- ** oauth2.userinfo.v2.me.get
-    , module Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
+    OAuth2UserinfoV2MeGetResource,
+    newOAuth2UserinfoV2MeGet,
+    OAuth2UserinfoV2MeGet,
 
     -- * Types
 
-    -- ** UserInfo
-    , UserInfo
-    , userInfo
-    , uiHd
-    , uiEmail
-    , uiLink
-    , uiLocale
-    , uiGivenName
-    , uiFamilyName
-    , uiPicture
-    , uiGender
-    , uiName
-    , uiVerifiedEmail
-    , uiId
+    -- ** Tokeninfo
+    Tokeninfo (..),
+    newTokeninfo,
 
-    -- ** TokenInfo
-    , TokenInfo
-    , tokenInfo
-    , tiAudience
-    , tiEmail
-    , tiExpiresIn
-    , tiScope
-    , tiVerifiedEmail
-    , tiUserId
-    , tiIssuedTo
-    ) where
+    -- ** Userinfo
+    Userinfo (..),
+    newUserinfo,
+  )
+where
 
-import Network.Google.Prelude
-import Network.Google.Method.OAuth2.TokenInfo
+import Network.Google.OAuth2.Tokeninfo
 import Network.Google.OAuth2.Types
-import Network.Google.Resource.OAuth2.UserInfo.Get
-import Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google OAuth2 API service.
-type OAuth2API =
-     UserInfoV2MeGetResource :<|> UserInfoGetResource :<|>
-       TokenInfoMethod
+import Network.Google.OAuth2.Userinfo.Get
+import Network.Google.OAuth2.Userinfo.V2.Me.Get
