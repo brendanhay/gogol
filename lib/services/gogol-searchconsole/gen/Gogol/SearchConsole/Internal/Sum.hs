@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.SearchConsole.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AmpInspectionResult_AmpIndexStatusVerdict
     AmpInspectionResult_AmpIndexStatusVerdict
-      (
-        AmpInspectionResult_AmpIndexStatusVerdict_VERDICTUNSPECIFIED,
+      ( AmpInspectionResult_AmpIndexStatusVerdict_VERDICTUNSPECIFIED,
         AmpInspectionResult_AmpIndexStatusVerdict_Pass,
         AmpInspectionResult_AmpIndexStatusVerdict_Partial,
         AmpInspectionResult_AmpIndexStatusVerdict_Fail,
@@ -56,8 +45,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * AmpInspectionResult_IndexingState
     AmpInspectionResult_IndexingState
-      (
-        AmpInspectionResult_IndexingState_AMPINDEXINGSTATEUNSPECIFIED,
+      ( AmpInspectionResult_IndexingState_AMPINDEXINGSTATEUNSPECIFIED,
         AmpInspectionResult_IndexingState_AMPINDEXINGALLOWED,
         AmpInspectionResult_IndexingState_BLOCKEDDUETONOINDEX,
         AmpInspectionResult_IndexingState_BLOCKEDDUETOEXPIREDUNAVAILABLEAFTER,
@@ -66,8 +54,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * AmpInspectionResult_PageFetchState
     AmpInspectionResult_PageFetchState
-      (
-        AmpInspectionResult_PageFetchState_PAGEFETCHSTATEUNSPECIFIED,
+      ( AmpInspectionResult_PageFetchState_PAGEFETCHSTATEUNSPECIFIED,
         AmpInspectionResult_PageFetchState_Successful,
         AmpInspectionResult_PageFetchState_SOFT_404,
         AmpInspectionResult_PageFetchState_BLOCKEDROBOTSTXT,
@@ -84,8 +71,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * AmpInspectionResult_RobotsTxtState
     AmpInspectionResult_RobotsTxtState
-      (
-        AmpInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED,
+      ( AmpInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED,
         AmpInspectionResult_RobotsTxtState_Allowed,
         AmpInspectionResult_RobotsTxtState_Disallowed,
         ..
@@ -93,8 +79,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * AmpInspectionResult_Verdict
     AmpInspectionResult_Verdict
-      (
-        AmpInspectionResult_Verdict_VERDICTUNSPECIFIED,
+      ( AmpInspectionResult_Verdict_VERDICTUNSPECIFIED,
         AmpInspectionResult_Verdict_Pass,
         AmpInspectionResult_Verdict_Partial,
         AmpInspectionResult_Verdict_Fail,
@@ -104,8 +89,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * AmpIssue_Severity
     AmpIssue_Severity
-      (
-        AmpIssue_Severity_SEVERITYUNSPECIFIED,
+      ( AmpIssue_Severity_SEVERITYUNSPECIFIED,
         AmpIssue_Severity_Warning,
         AmpIssue_Severity_Error',
         ..
@@ -113,8 +97,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * ApiDimensionFilter_Dimension
     ApiDimensionFilter_Dimension
-      (
-        ApiDimensionFilter_Dimension_Query,
+      ( ApiDimensionFilter_Dimension_Query,
         ApiDimensionFilter_Dimension_Page,
         ApiDimensionFilter_Dimension_Country,
         ApiDimensionFilter_Dimension_Device,
@@ -124,8 +107,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * ApiDimensionFilter_Operator
     ApiDimensionFilter_Operator
-      (
-        ApiDimensionFilter_Operator_Equals,
+      ( ApiDimensionFilter_Operator_Equals,
         ApiDimensionFilter_Operator_NOTEQUALS,
         ApiDimensionFilter_Operator_Contains,
         ApiDimensionFilter_Operator_NOTCONTAINS,
@@ -136,15 +118,13 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * ApiDimensionFilterGroup_GroupType
     ApiDimensionFilterGroup_GroupType
-      (
-        ApiDimensionFilterGroup_GroupType_And,
+      ( ApiDimensionFilterGroup_GroupType_And,
         ..
       ),
 
     -- * IndexStatusInspectionResult_CrawledAs
     IndexStatusInspectionResult_CrawledAs
-      (
-        IndexStatusInspectionResult_CrawledAs_CRAWLINGUSERAGENTUNSPECIFIED,
+      ( IndexStatusInspectionResult_CrawledAs_CRAWLINGUSERAGENTUNSPECIFIED,
         IndexStatusInspectionResult_CrawledAs_Desktop,
         IndexStatusInspectionResult_CrawledAs_Mobile,
         ..
@@ -152,8 +132,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * IndexStatusInspectionResult_IndexingState
     IndexStatusInspectionResult_IndexingState
-      (
-        IndexStatusInspectionResult_IndexingState_INDEXINGSTATEUNSPECIFIED,
+      ( IndexStatusInspectionResult_IndexingState_INDEXINGSTATEUNSPECIFIED,
         IndexStatusInspectionResult_IndexingState_INDEXINGALLOWED,
         IndexStatusInspectionResult_IndexingState_BLOCKEDBYMETATAG,
         IndexStatusInspectionResult_IndexingState_BLOCKEDBYHTTPHEADER,
@@ -163,8 +142,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * IndexStatusInspectionResult_PageFetchState
     IndexStatusInspectionResult_PageFetchState
-      (
-        IndexStatusInspectionResult_PageFetchState_PAGEFETCHSTATEUNSPECIFIED,
+      ( IndexStatusInspectionResult_PageFetchState_PAGEFETCHSTATEUNSPECIFIED,
         IndexStatusInspectionResult_PageFetchState_Successful,
         IndexStatusInspectionResult_PageFetchState_SOFT_404,
         IndexStatusInspectionResult_PageFetchState_BLOCKEDROBOTSTXT,
@@ -181,8 +159,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * IndexStatusInspectionResult_RobotsTxtState
     IndexStatusInspectionResult_RobotsTxtState
-      (
-        IndexStatusInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED,
+      ( IndexStatusInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED,
         IndexStatusInspectionResult_RobotsTxtState_Allowed,
         IndexStatusInspectionResult_RobotsTxtState_Disallowed,
         ..
@@ -190,8 +167,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * IndexStatusInspectionResult_Verdict
     IndexStatusInspectionResult_Verdict
-      (
-        IndexStatusInspectionResult_Verdict_VERDICTUNSPECIFIED,
+      ( IndexStatusInspectionResult_Verdict_VERDICTUNSPECIFIED,
         IndexStatusInspectionResult_Verdict_Pass,
         IndexStatusInspectionResult_Verdict_Partial,
         IndexStatusInspectionResult_Verdict_Fail,
@@ -201,8 +177,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * MobileFriendlyIssue_Rule
     MobileFriendlyIssue_Rule
-      (
-        MobileFriendlyIssue_Rule_MOBILEFRIENDLYRULEUNSPECIFIED,
+      ( MobileFriendlyIssue_Rule_MOBILEFRIENDLYRULEUNSPECIFIED,
         MobileFriendlyIssue_Rule_USESINCOMPATIBLEPLUGINS,
         MobileFriendlyIssue_Rule_CONFIGUREVIEWPORT,
         MobileFriendlyIssue_Rule_FIXEDWIDTHVIEWPORT,
@@ -214,8 +189,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * MobileUsabilityInspectionResult_Verdict
     MobileUsabilityInspectionResult_Verdict
-      (
-        MobileUsabilityInspectionResult_Verdict_VERDICTUNSPECIFIED,
+      ( MobileUsabilityInspectionResult_Verdict_VERDICTUNSPECIFIED,
         MobileUsabilityInspectionResult_Verdict_Pass,
         MobileUsabilityInspectionResult_Verdict_Partial,
         MobileUsabilityInspectionResult_Verdict_Fail,
@@ -225,8 +199,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * MobileUsabilityIssue_IssueType
     MobileUsabilityIssue_IssueType
-      (
-        MobileUsabilityIssue_IssueType_MOBILEUSABILITYISSUETYPEUNSPECIFIED,
+      ( MobileUsabilityIssue_IssueType_MOBILEUSABILITYISSUETYPEUNSPECIFIED,
         MobileUsabilityIssue_IssueType_USESINCOMPATIBLEPLUGINS,
         MobileUsabilityIssue_IssueType_CONFIGUREVIEWPORT,
         MobileUsabilityIssue_IssueType_FIXEDWIDTHVIEWPORT,
@@ -238,8 +211,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * MobileUsabilityIssue_Severity
     MobileUsabilityIssue_Severity
-      (
-        MobileUsabilityIssue_Severity_SEVERITYUNSPECIFIED,
+      ( MobileUsabilityIssue_Severity_SEVERITYUNSPECIFIED,
         MobileUsabilityIssue_Severity_Warning,
         MobileUsabilityIssue_Severity_Error',
         ..
@@ -247,8 +219,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * RichResultsInspectionResult_Verdict
     RichResultsInspectionResult_Verdict
-      (
-        RichResultsInspectionResult_Verdict_VERDICTUNSPECIFIED,
+      ( RichResultsInspectionResult_Verdict_VERDICTUNSPECIFIED,
         RichResultsInspectionResult_Verdict_Pass,
         RichResultsInspectionResult_Verdict_Partial,
         RichResultsInspectionResult_Verdict_Fail,
@@ -258,8 +229,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * RichResultsIssue_Severity
     RichResultsIssue_Severity
-      (
-        RichResultsIssue_Severity_SEVERITYUNSPECIFIED,
+      ( RichResultsIssue_Severity_SEVERITYUNSPECIFIED,
         RichResultsIssue_Severity_Warning,
         RichResultsIssue_Severity_Error',
         ..
@@ -267,8 +237,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * RunMobileFriendlyTestResponse_MobileFriendliness
     RunMobileFriendlyTestResponse_MobileFriendliness
-      (
-        RunMobileFriendlyTestResponse_MobileFriendliness_MOBILEFRIENDLYTESTRESULTUNSPECIFIED,
+      ( RunMobileFriendlyTestResponse_MobileFriendliness_MOBILEFRIENDLYTESTRESULTUNSPECIFIED,
         RunMobileFriendlyTestResponse_MobileFriendliness_MOBILEFRIENDLY,
         RunMobileFriendlyTestResponse_MobileFriendliness_NOTMOBILEFRIENDLY,
         ..
@@ -276,8 +245,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * SearchAnalyticsQueryRequest_AggregationType
     SearchAnalyticsQueryRequest_AggregationType
-      (
-        SearchAnalyticsQueryRequest_AggregationType_Auto,
+      ( SearchAnalyticsQueryRequest_AggregationType_Auto,
         SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY,
         SearchAnalyticsQueryRequest_AggregationType_BYPAGE,
         ..
@@ -285,8 +253,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * SearchAnalyticsQueryRequest_DataState
     SearchAnalyticsQueryRequest_DataState
-      (
-        SearchAnalyticsQueryRequest_DataState_DATASTATEUNSPECIFIED,
+      ( SearchAnalyticsQueryRequest_DataState_DATASTATEUNSPECIFIED,
         SearchAnalyticsQueryRequest_DataState_Final,
         SearchAnalyticsQueryRequest_DataState_All,
         ..
@@ -294,8 +261,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * SearchAnalyticsQueryRequest_DimensionsItem
     SearchAnalyticsQueryRequest_DimensionsItem
-      (
-        SearchAnalyticsQueryRequest_DimensionsItem_Date,
+      ( SearchAnalyticsQueryRequest_DimensionsItem_Date,
         SearchAnalyticsQueryRequest_DimensionsItem_Query,
         SearchAnalyticsQueryRequest_DimensionsItem_Page,
         SearchAnalyticsQueryRequest_DimensionsItem_Country,
@@ -306,8 +272,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * SearchAnalyticsQueryRequest_SearchType
     SearchAnalyticsQueryRequest_SearchType
-      (
-        SearchAnalyticsQueryRequest_SearchType_Web,
+      ( SearchAnalyticsQueryRequest_SearchType_Web,
         SearchAnalyticsQueryRequest_SearchType_Image,
         SearchAnalyticsQueryRequest_SearchType_Video,
         SearchAnalyticsQueryRequest_SearchType_News,
@@ -318,8 +283,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * SearchAnalyticsQueryRequest_Type
     SearchAnalyticsQueryRequest_Type
-      (
-        SearchAnalyticsQueryRequest_Type_Web,
+      ( SearchAnalyticsQueryRequest_Type_Web,
         SearchAnalyticsQueryRequest_Type_Image,
         SearchAnalyticsQueryRequest_Type_Video,
         SearchAnalyticsQueryRequest_Type_News,
@@ -330,8 +294,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * SearchAnalyticsQueryResponse_ResponseAggregationType
     SearchAnalyticsQueryResponse_ResponseAggregationType
-      (
-        SearchAnalyticsQueryResponse_ResponseAggregationType_Auto,
+      ( SearchAnalyticsQueryResponse_ResponseAggregationType_Auto,
         SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY,
         SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE,
         ..
@@ -339,8 +302,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * TestStatus_Status
     TestStatus_Status
-      (
-        TestStatus_Status_TESTSTATUSUNSPECIFIED,
+      ( TestStatus_Status_TESTSTATUSUNSPECIFIED,
         TestStatus_Status_Complete,
         TestStatus_Status_INTERNALERROR,
         TestStatus_Status_PAGEUNREACHABLE,
@@ -349,8 +311,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * WmxSite_PermissionLevel
     WmxSite_PermissionLevel
-      (
-        WmxSite_PermissionLevel_SITEPERMISSIONLEVELUNSPECIFIED,
+      ( WmxSite_PermissionLevel_SITEPERMISSIONLEVELUNSPECIFIED,
         WmxSite_PermissionLevel_SITEOWNER,
         WmxSite_PermissionLevel_SITEFULLUSER,
         WmxSite_PermissionLevel_SITERESTRICTEDUSER,
@@ -360,8 +321,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * WmxSitemap_Type
     WmxSitemap_Type
-      (
-        WmxSitemap_Type_NOTSITEMAP,
+      ( WmxSitemap_Type_NOTSITEMAP,
         WmxSitemap_Type_URLLIST,
         WmxSitemap_Type_Sitemap,
         WmxSitemap_Type_RSSFEED,
@@ -373,8 +333,7 @@ module Gogol.SearchConsole.Internal.Sum
 
     -- * WmxSitemapContent_Type
     WmxSitemapContent_Type
-      (
-        WmxSitemapContent_Type_Web,
+      ( WmxSitemapContent_Type_Web,
         WmxSitemapContent_Type_Image,
         WmxSitemapContent_Type_Video,
         WmxSitemapContent_Type_News,
@@ -385,22 +344,23 @@ module Gogol.SearchConsole.Internal.Sum
         WmxSitemapContent_Type_DATAFEEDELEMENT,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -413,20 +373,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Index status of the AMP URL.
-newtype AmpInspectionResult_AmpIndexStatusVerdict = AmpInspectionResult_AmpIndexStatusVerdict { fromAmpInspectionResult_AmpIndexStatusVerdict :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AmpInspectionResult_AmpIndexStatusVerdict = AmpInspectionResult_AmpIndexStatusVerdict {fromAmpInspectionResult_AmpIndexStatusVerdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown verdict.
 pattern AmpInspectionResult_AmpIndexStatusVerdict_VERDICTUNSPECIFIED :: AmpInspectionResult_AmpIndexStatusVerdict
@@ -454,20 +415,21 @@ pattern AmpInspectionResult_AmpIndexStatusVerdict_Neutral = AmpInspectionResult_
   AmpInspectionResult_AmpIndexStatusVerdict_Partial,
   AmpInspectionResult_AmpIndexStatusVerdict_Fail,
   AmpInspectionResult_AmpIndexStatusVerdict_Neutral,
-  AmpInspectionResult_AmpIndexStatusVerdict #-}
+  AmpInspectionResult_AmpIndexStatusVerdict
+  #-}
 
 -- | Whether or not the page blocks indexing through a noindex rule.
-newtype AmpInspectionResult_IndexingState = AmpInspectionResult_IndexingState { fromAmpInspectionResult_IndexingState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AmpInspectionResult_IndexingState = AmpInspectionResult_IndexingState {fromAmpInspectionResult_IndexingState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown indexing status.
 pattern AmpInspectionResult_IndexingState_AMPINDEXINGSTATEUNSPECIFIED :: AmpInspectionResult_IndexingState
@@ -490,20 +452,21 @@ pattern AmpInspectionResult_IndexingState_BLOCKEDDUETOEXPIREDUNAVAILABLEAFTER = 
   AmpInspectionResult_IndexingState_AMPINDEXINGALLOWED,
   AmpInspectionResult_IndexingState_BLOCKEDDUETONOINDEX,
   AmpInspectionResult_IndexingState_BLOCKEDDUETOEXPIREDUNAVAILABLEAFTER,
-  AmpInspectionResult_IndexingState #-}
+  AmpInspectionResult_IndexingState
+  #-}
 
 -- | Whether or not Google could fetch the AMP.
-newtype AmpInspectionResult_PageFetchState = AmpInspectionResult_PageFetchState { fromAmpInspectionResult_PageFetchState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AmpInspectionResult_PageFetchState = AmpInspectionResult_PageFetchState {fromAmpInspectionResult_PageFetchState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown fetch state.
 pattern AmpInspectionResult_PageFetchState_PAGEFETCHSTATEUNSPECIFIED :: AmpInspectionResult_PageFetchState
@@ -566,20 +529,21 @@ pattern AmpInspectionResult_PageFetchState_INVALIDURL = AmpInspectionResult_Page
   AmpInspectionResult_PageFetchState_BLOCKED4XX,
   AmpInspectionResult_PageFetchState_INTERNALCRAWLERROR,
   AmpInspectionResult_PageFetchState_INVALIDURL,
-  AmpInspectionResult_PageFetchState #-}
+  AmpInspectionResult_PageFetchState
+  #-}
 
 -- | Whether or not the page is blocked to Google by a robots.txt rule.
-newtype AmpInspectionResult_RobotsTxtState = AmpInspectionResult_RobotsTxtState { fromAmpInspectionResult_RobotsTxtState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AmpInspectionResult_RobotsTxtState = AmpInspectionResult_RobotsTxtState {fromAmpInspectionResult_RobotsTxtState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown robots.txt state, typically because the page wasn\'t fetched or found, or because robots.txt itself couldn\'t be reached.
 pattern AmpInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED :: AmpInspectionResult_RobotsTxtState
@@ -597,20 +561,21 @@ pattern AmpInspectionResult_RobotsTxtState_Disallowed = AmpInspectionResult_Robo
   AmpInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED,
   AmpInspectionResult_RobotsTxtState_Allowed,
   AmpInspectionResult_RobotsTxtState_Disallowed,
-  AmpInspectionResult_RobotsTxtState #-}
+  AmpInspectionResult_RobotsTxtState
+  #-}
 
 -- | The status of the most severe error on the page. If a page has both warnings and errors, the page status is error. Error status means the page cannot be shown in Search results.
-newtype AmpInspectionResult_Verdict = AmpInspectionResult_Verdict { fromAmpInspectionResult_Verdict :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AmpInspectionResult_Verdict = AmpInspectionResult_Verdict {fromAmpInspectionResult_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown verdict.
 pattern AmpInspectionResult_Verdict_VERDICTUNSPECIFIED :: AmpInspectionResult_Verdict
@@ -638,20 +603,21 @@ pattern AmpInspectionResult_Verdict_Neutral = AmpInspectionResult_Verdict "NEUTR
   AmpInspectionResult_Verdict_Partial,
   AmpInspectionResult_Verdict_Fail,
   AmpInspectionResult_Verdict_Neutral,
-  AmpInspectionResult_Verdict #-}
+  AmpInspectionResult_Verdict
+  #-}
 
 -- | Severity of this issue: WARNING or ERROR.
-newtype AmpIssue_Severity = AmpIssue_Severity { fromAmpIssue_Severity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AmpIssue_Severity = AmpIssue_Severity {fromAmpIssue_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown severity.
 pattern AmpIssue_Severity_SEVERITYUNSPECIFIED :: AmpIssue_Severity
@@ -669,37 +635,38 @@ pattern AmpIssue_Severity_Error' = AmpIssue_Severity "ERROR"
   AmpIssue_Severity_SEVERITYUNSPECIFIED,
   AmpIssue_Severity_Warning,
   AmpIssue_Severity_Error',
-  AmpIssue_Severity #-}
+  AmpIssue_Severity
+  #-}
 
-newtype ApiDimensionFilter_Dimension = ApiDimensionFilter_Dimension { fromApiDimensionFilter_Dimension :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApiDimensionFilter_Dimension = ApiDimensionFilter_Dimension {fromApiDimensionFilter_Dimension :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ApiDimensionFilter_Dimension_Query :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Query = ApiDimensionFilter_Dimension "QUERY"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Dimension_Page :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Page = ApiDimensionFilter_Dimension "PAGE"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Dimension_Country :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Country = ApiDimensionFilter_Dimension "COUNTRY"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Dimension_Device :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Device = ApiDimensionFilter_Dimension "DEVICE"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Dimension_SEARCHAPPEARANCE :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_SEARCHAPPEARANCE = ApiDimensionFilter_Dimension "SEARCH_APPEARANCE"
 
@@ -709,41 +676,42 @@ pattern ApiDimensionFilter_Dimension_SEARCHAPPEARANCE = ApiDimensionFilter_Dimen
   ApiDimensionFilter_Dimension_Country,
   ApiDimensionFilter_Dimension_Device,
   ApiDimensionFilter_Dimension_SEARCHAPPEARANCE,
-  ApiDimensionFilter_Dimension #-}
+  ApiDimensionFilter_Dimension
+  #-}
 
-newtype ApiDimensionFilter_Operator = ApiDimensionFilter_Operator { fromApiDimensionFilter_Operator :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApiDimensionFilter_Operator = ApiDimensionFilter_Operator {fromApiDimensionFilter_Operator :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ApiDimensionFilter_Operator_Equals :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_Equals = ApiDimensionFilter_Operator "EQUALS"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Operator_NOTEQUALS :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_NOTEQUALS = ApiDimensionFilter_Operator "NOT_EQUALS"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Operator_Contains :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_Contains = ApiDimensionFilter_Operator "CONTAINS"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Operator_NOTCONTAINS :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_NOTCONTAINS = ApiDimensionFilter_Operator "NOT_CONTAINS"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Operator_INCLUDINGREGEX :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_INCLUDINGREGEX = ApiDimensionFilter_Operator "INCLUDING_REGEX"
 
--- | 
+-- |
 pattern ApiDimensionFilter_Operator_EXCLUDINGREGEX :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_EXCLUDINGREGEX = ApiDimensionFilter_Operator "EXCLUDING_REGEX"
 
@@ -754,40 +722,42 @@ pattern ApiDimensionFilter_Operator_EXCLUDINGREGEX = ApiDimensionFilter_Operator
   ApiDimensionFilter_Operator_NOTCONTAINS,
   ApiDimensionFilter_Operator_INCLUDINGREGEX,
   ApiDimensionFilter_Operator_EXCLUDINGREGEX,
-  ApiDimensionFilter_Operator #-}
+  ApiDimensionFilter_Operator
+  #-}
 
-newtype ApiDimensionFilterGroup_GroupType = ApiDimensionFilterGroup_GroupType { fromApiDimensionFilterGroup_GroupType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApiDimensionFilterGroup_GroupType = ApiDimensionFilterGroup_GroupType {fromApiDimensionFilterGroup_GroupType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ApiDimensionFilterGroup_GroupType_And :: ApiDimensionFilterGroup_GroupType
 pattern ApiDimensionFilterGroup_GroupType_And = ApiDimensionFilterGroup_GroupType "AND"
 
 {-# COMPLETE
   ApiDimensionFilterGroup_GroupType_And,
-  ApiDimensionFilterGroup_GroupType #-}
+  ApiDimensionFilterGroup_GroupType
+  #-}
 
 -- | Primary crawler that was used by Google to crawl your site.
-newtype IndexStatusInspectionResult_CrawledAs = IndexStatusInspectionResult_CrawledAs { fromIndexStatusInspectionResult_CrawledAs :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IndexStatusInspectionResult_CrawledAs = IndexStatusInspectionResult_CrawledAs {fromIndexStatusInspectionResult_CrawledAs :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown user agent.
 pattern IndexStatusInspectionResult_CrawledAs_CRAWLINGUSERAGENTUNSPECIFIED :: IndexStatusInspectionResult_CrawledAs
@@ -805,20 +775,21 @@ pattern IndexStatusInspectionResult_CrawledAs_Mobile = IndexStatusInspectionResu
   IndexStatusInspectionResult_CrawledAs_CRAWLINGUSERAGENTUNSPECIFIED,
   IndexStatusInspectionResult_CrawledAs_Desktop,
   IndexStatusInspectionResult_CrawledAs_Mobile,
-  IndexStatusInspectionResult_CrawledAs #-}
+  IndexStatusInspectionResult_CrawledAs
+  #-}
 
 -- | Whether or not the page blocks indexing through a noindex rule.
-newtype IndexStatusInspectionResult_IndexingState = IndexStatusInspectionResult_IndexingState { fromIndexStatusInspectionResult_IndexingState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IndexStatusInspectionResult_IndexingState = IndexStatusInspectionResult_IndexingState {fromIndexStatusInspectionResult_IndexingState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown indexing status.
 pattern IndexStatusInspectionResult_IndexingState_INDEXINGSTATEUNSPECIFIED :: IndexStatusInspectionResult_IndexingState
@@ -846,20 +817,21 @@ pattern IndexStatusInspectionResult_IndexingState_BLOCKEDBYROBOTSTXT = IndexStat
   IndexStatusInspectionResult_IndexingState_BLOCKEDBYMETATAG,
   IndexStatusInspectionResult_IndexingState_BLOCKEDBYHTTPHEADER,
   IndexStatusInspectionResult_IndexingState_BLOCKEDBYROBOTSTXT,
-  IndexStatusInspectionResult_IndexingState #-}
+  IndexStatusInspectionResult_IndexingState
+  #-}
 
 -- | Whether or not Google could retrieve the page from your server. Equivalent to <https://support.google.com/webmasters/answer/9012289#index_coverage \"page fetch\"> in the URL inspection report.
-newtype IndexStatusInspectionResult_PageFetchState = IndexStatusInspectionResult_PageFetchState { fromIndexStatusInspectionResult_PageFetchState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IndexStatusInspectionResult_PageFetchState = IndexStatusInspectionResult_PageFetchState {fromIndexStatusInspectionResult_PageFetchState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown fetch state.
 pattern IndexStatusInspectionResult_PageFetchState_PAGEFETCHSTATEUNSPECIFIED :: IndexStatusInspectionResult_PageFetchState
@@ -922,20 +894,21 @@ pattern IndexStatusInspectionResult_PageFetchState_INVALIDURL = IndexStatusInspe
   IndexStatusInspectionResult_PageFetchState_BLOCKED4XX,
   IndexStatusInspectionResult_PageFetchState_INTERNALCRAWLERROR,
   IndexStatusInspectionResult_PageFetchState_INVALIDURL,
-  IndexStatusInspectionResult_PageFetchState #-}
+  IndexStatusInspectionResult_PageFetchState
+  #-}
 
 -- | Whether or not the page is blocked to Google by a robots.txt rule.
-newtype IndexStatusInspectionResult_RobotsTxtState = IndexStatusInspectionResult_RobotsTxtState { fromIndexStatusInspectionResult_RobotsTxtState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IndexStatusInspectionResult_RobotsTxtState = IndexStatusInspectionResult_RobotsTxtState {fromIndexStatusInspectionResult_RobotsTxtState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown robots.txt state, typically because the page wasn\'t fetched or found, or because robots.txt itself couldn\'t be reached.
 pattern IndexStatusInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED :: IndexStatusInspectionResult_RobotsTxtState
@@ -953,20 +926,21 @@ pattern IndexStatusInspectionResult_RobotsTxtState_Disallowed = IndexStatusInspe
   IndexStatusInspectionResult_RobotsTxtState_ROBOTSTXTSTATEUNSPECIFIED,
   IndexStatusInspectionResult_RobotsTxtState_Allowed,
   IndexStatusInspectionResult_RobotsTxtState_Disallowed,
-  IndexStatusInspectionResult_RobotsTxtState #-}
+  IndexStatusInspectionResult_RobotsTxtState
+  #-}
 
 -- | High level verdict about whether the URL /is/ indexed (indexed status), or /can be/ indexed (live inspection).
-newtype IndexStatusInspectionResult_Verdict = IndexStatusInspectionResult_Verdict { fromIndexStatusInspectionResult_Verdict :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IndexStatusInspectionResult_Verdict = IndexStatusInspectionResult_Verdict {fromIndexStatusInspectionResult_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown verdict.
 pattern IndexStatusInspectionResult_Verdict_VERDICTUNSPECIFIED :: IndexStatusInspectionResult_Verdict
@@ -994,20 +968,21 @@ pattern IndexStatusInspectionResult_Verdict_Neutral = IndexStatusInspectionResul
   IndexStatusInspectionResult_Verdict_Partial,
   IndexStatusInspectionResult_Verdict_Fail,
   IndexStatusInspectionResult_Verdict_Neutral,
-  IndexStatusInspectionResult_Verdict #-}
+  IndexStatusInspectionResult_Verdict
+  #-}
 
 -- | Rule violated.
-newtype MobileFriendlyIssue_Rule = MobileFriendlyIssue_Rule { fromMobileFriendlyIssue_Rule :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobileFriendlyIssue_Rule = MobileFriendlyIssue_Rule {fromMobileFriendlyIssue_Rule :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown rule. Sorry, we don\'t have any description for the rule that was broken.
 pattern MobileFriendlyIssue_Rule_MOBILEFRIENDLYRULEUNSPECIFIED :: MobileFriendlyIssue_Rule
@@ -1045,20 +1020,21 @@ pattern MobileFriendlyIssue_Rule_TAPTARGETSTOOCLOSE = MobileFriendlyIssue_Rule "
   MobileFriendlyIssue_Rule_SIZECONTENTTOVIEWPORT,
   MobileFriendlyIssue_Rule_USELEGIBLEFONTSIZES,
   MobileFriendlyIssue_Rule_TAPTARGETSTOOCLOSE,
-  MobileFriendlyIssue_Rule #-}
+  MobileFriendlyIssue_Rule
+  #-}
 
 -- | High-level mobile-usability inspection result for this URL.
-newtype MobileUsabilityInspectionResult_Verdict = MobileUsabilityInspectionResult_Verdict { fromMobileUsabilityInspectionResult_Verdict :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobileUsabilityInspectionResult_Verdict = MobileUsabilityInspectionResult_Verdict {fromMobileUsabilityInspectionResult_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown verdict.
 pattern MobileUsabilityInspectionResult_Verdict_VERDICTUNSPECIFIED :: MobileUsabilityInspectionResult_Verdict
@@ -1086,20 +1062,21 @@ pattern MobileUsabilityInspectionResult_Verdict_Neutral = MobileUsabilityInspect
   MobileUsabilityInspectionResult_Verdict_Partial,
   MobileUsabilityInspectionResult_Verdict_Fail,
   MobileUsabilityInspectionResult_Verdict_Neutral,
-  MobileUsabilityInspectionResult_Verdict #-}
+  MobileUsabilityInspectionResult_Verdict
+  #-}
 
 -- | Mobile-usability issue type.
-newtype MobileUsabilityIssue_IssueType = MobileUsabilityIssue_IssueType { fromMobileUsabilityIssue_IssueType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobileUsabilityIssue_IssueType = MobileUsabilityIssue_IssueType {fromMobileUsabilityIssue_IssueType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown issue. Sorry, we don\'t have any description for the rule that was broken.
 pattern MobileUsabilityIssue_IssueType_MOBILEUSABILITYISSUETYPEUNSPECIFIED :: MobileUsabilityIssue_IssueType
@@ -1137,20 +1114,21 @@ pattern MobileUsabilityIssue_IssueType_TAPTARGETSTOOCLOSE = MobileUsabilityIssue
   MobileUsabilityIssue_IssueType_SIZECONTENTTOVIEWPORT,
   MobileUsabilityIssue_IssueType_USELEGIBLEFONTSIZES,
   MobileUsabilityIssue_IssueType_TAPTARGETSTOOCLOSE,
-  MobileUsabilityIssue_IssueType #-}
+  MobileUsabilityIssue_IssueType
+  #-}
 
 -- | Not returned; reserved for future use.
-newtype MobileUsabilityIssue_Severity = MobileUsabilityIssue_Severity { fromMobileUsabilityIssue_Severity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobileUsabilityIssue_Severity = MobileUsabilityIssue_Severity {fromMobileUsabilityIssue_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown severity.
 pattern MobileUsabilityIssue_Severity_SEVERITYUNSPECIFIED :: MobileUsabilityIssue_Severity
@@ -1168,20 +1146,21 @@ pattern MobileUsabilityIssue_Severity_Error' = MobileUsabilityIssue_Severity "ER
   MobileUsabilityIssue_Severity_SEVERITYUNSPECIFIED,
   MobileUsabilityIssue_Severity_Warning,
   MobileUsabilityIssue_Severity_Error',
-  MobileUsabilityIssue_Severity #-}
+  MobileUsabilityIssue_Severity
+  #-}
 
 -- | High-level rich results inspection result for this URL.
-newtype RichResultsInspectionResult_Verdict = RichResultsInspectionResult_Verdict { fromRichResultsInspectionResult_Verdict :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RichResultsInspectionResult_Verdict = RichResultsInspectionResult_Verdict {fromRichResultsInspectionResult_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown verdict.
 pattern RichResultsInspectionResult_Verdict_VERDICTUNSPECIFIED :: RichResultsInspectionResult_Verdict
@@ -1209,20 +1188,21 @@ pattern RichResultsInspectionResult_Verdict_Neutral = RichResultsInspectionResul
   RichResultsInspectionResult_Verdict_Partial,
   RichResultsInspectionResult_Verdict_Fail,
   RichResultsInspectionResult_Verdict_Neutral,
-  RichResultsInspectionResult_Verdict #-}
+  RichResultsInspectionResult_Verdict
+  #-}
 
 -- | Severity of this issue: WARNING, or ERROR. Items with an issue of status ERROR cannot appear with rich result features in Google Search results.
-newtype RichResultsIssue_Severity = RichResultsIssue_Severity { fromRichResultsIssue_Severity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RichResultsIssue_Severity = RichResultsIssue_Severity {fromRichResultsIssue_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown severity.
 pattern RichResultsIssue_Severity_SEVERITYUNSPECIFIED :: RichResultsIssue_Severity
@@ -1240,20 +1220,21 @@ pattern RichResultsIssue_Severity_Error' = RichResultsIssue_Severity "ERROR"
   RichResultsIssue_Severity_SEVERITYUNSPECIFIED,
   RichResultsIssue_Severity_Warning,
   RichResultsIssue_Severity_Error',
-  RichResultsIssue_Severity #-}
+  RichResultsIssue_Severity
+  #-}
 
 -- | Test verdict, whether the page is mobile friendly or not.
-newtype RunMobileFriendlyTestResponse_MobileFriendliness = RunMobileFriendlyTestResponse_MobileFriendliness { fromRunMobileFriendlyTestResponse_MobileFriendliness :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RunMobileFriendlyTestResponse_MobileFriendliness = RunMobileFriendlyTestResponse_MobileFriendliness {fromRunMobileFriendlyTestResponse_MobileFriendliness :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Internal error when running this test. Please try running the test again.
 pattern RunMobileFriendlyTestResponse_MobileFriendliness_MOBILEFRIENDLYTESTRESULTUNSPECIFIED :: RunMobileFriendlyTestResponse_MobileFriendliness
@@ -1271,30 +1252,31 @@ pattern RunMobileFriendlyTestResponse_MobileFriendliness_NOTMOBILEFRIENDLY = Run
   RunMobileFriendlyTestResponse_MobileFriendliness_MOBILEFRIENDLYTESTRESULTUNSPECIFIED,
   RunMobileFriendlyTestResponse_MobileFriendliness_MOBILEFRIENDLY,
   RunMobileFriendlyTestResponse_MobileFriendliness_NOTMOBILEFRIENDLY,
-  RunMobileFriendlyTestResponse_MobileFriendliness #-}
+  RunMobileFriendlyTestResponse_MobileFriendliness
+  #-}
 
 -- | [Optional; Default is \"auto\"] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see the help documentation to learn how data is calculated differently by site versus by page. __Note:__ If you group or filter by page, you cannot aggregate by property. If you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid.
-newtype SearchAnalyticsQueryRequest_AggregationType = SearchAnalyticsQueryRequest_AggregationType { fromSearchAnalyticsQueryRequest_AggregationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SearchAnalyticsQueryRequest_AggregationType = SearchAnalyticsQueryRequest_AggregationType {fromSearchAnalyticsQueryRequest_AggregationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_AggregationType_Auto :: SearchAnalyticsQueryRequest_AggregationType
 pattern SearchAnalyticsQueryRequest_AggregationType_Auto = SearchAnalyticsQueryRequest_AggregationType "AUTO"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY :: SearchAnalyticsQueryRequest_AggregationType
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY = SearchAnalyticsQueryRequest_AggregationType "BY_PROPERTY"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPAGE :: SearchAnalyticsQueryRequest_AggregationType
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPAGE = SearchAnalyticsQueryRequest_AggregationType "BY_PAGE"
 
@@ -1302,20 +1284,21 @@ pattern SearchAnalyticsQueryRequest_AggregationType_BYPAGE = SearchAnalyticsQuer
   SearchAnalyticsQueryRequest_AggregationType_Auto,
   SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY,
   SearchAnalyticsQueryRequest_AggregationType_BYPAGE,
-  SearchAnalyticsQueryRequest_AggregationType #-}
+  SearchAnalyticsQueryRequest_AggregationType
+  #-}
 
 -- | The data state to be fetched, can be full or all, the latter including full and partial data.
-newtype SearchAnalyticsQueryRequest_DataState = SearchAnalyticsQueryRequest_DataState { fromSearchAnalyticsQueryRequest_DataState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SearchAnalyticsQueryRequest_DataState = SearchAnalyticsQueryRequest_DataState {fromSearchAnalyticsQueryRequest_DataState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, should not be used.
 pattern SearchAnalyticsQueryRequest_DataState_DATASTATEUNSPECIFIED :: SearchAnalyticsQueryRequest_DataState
@@ -1333,41 +1316,42 @@ pattern SearchAnalyticsQueryRequest_DataState_All = SearchAnalyticsQueryRequest_
   SearchAnalyticsQueryRequest_DataState_DATASTATEUNSPECIFIED,
   SearchAnalyticsQueryRequest_DataState_Final,
   SearchAnalyticsQueryRequest_DataState_All,
-  SearchAnalyticsQueryRequest_DataState #-}
+  SearchAnalyticsQueryRequest_DataState
+  #-}
 
-newtype SearchAnalyticsQueryRequest_DimensionsItem = SearchAnalyticsQueryRequest_DimensionsItem { fromSearchAnalyticsQueryRequest_DimensionsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SearchAnalyticsQueryRequest_DimensionsItem = SearchAnalyticsQueryRequest_DimensionsItem {fromSearchAnalyticsQueryRequest_DimensionsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Date :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Date = SearchAnalyticsQueryRequest_DimensionsItem "DATE"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Query :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Query = SearchAnalyticsQueryRequest_DimensionsItem "QUERY"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Page :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Page = SearchAnalyticsQueryRequest_DimensionsItem "PAGE"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Country :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Country = SearchAnalyticsQueryRequest_DimensionsItem "COUNTRY"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Device :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Device = SearchAnalyticsQueryRequest_DimensionsItem "DEVICE"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_SEARCHAPPEARANCE :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_SEARCHAPPEARANCE = SearchAnalyticsQueryRequest_DimensionsItem "SEARCH_APPEARANCE"
 
@@ -1378,30 +1362,31 @@ pattern SearchAnalyticsQueryRequest_DimensionsItem_SEARCHAPPEARANCE = SearchAnal
   SearchAnalyticsQueryRequest_DimensionsItem_Country,
   SearchAnalyticsQueryRequest_DimensionsItem_Device,
   SearchAnalyticsQueryRequest_DimensionsItem_SEARCHAPPEARANCE,
-  SearchAnalyticsQueryRequest_DimensionsItem #-}
+  SearchAnalyticsQueryRequest_DimensionsItem
+  #-}
 
 -- | [Optional; Default is \"web\"] The search type to filter for.
-newtype SearchAnalyticsQueryRequest_SearchType = SearchAnalyticsQueryRequest_SearchType { fromSearchAnalyticsQueryRequest_SearchType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SearchAnalyticsQueryRequest_SearchType = SearchAnalyticsQueryRequest_SearchType {fromSearchAnalyticsQueryRequest_SearchType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_SearchType_Web :: SearchAnalyticsQueryRequest_SearchType
 pattern SearchAnalyticsQueryRequest_SearchType_Web = SearchAnalyticsQueryRequest_SearchType "WEB"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_SearchType_Image :: SearchAnalyticsQueryRequest_SearchType
 pattern SearchAnalyticsQueryRequest_SearchType_Image = SearchAnalyticsQueryRequest_SearchType "IMAGE"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_SearchType_Video :: SearchAnalyticsQueryRequest_SearchType
 pattern SearchAnalyticsQueryRequest_SearchType_Video = SearchAnalyticsQueryRequest_SearchType "VIDEO"
 
@@ -1424,30 +1409,31 @@ pattern SearchAnalyticsQueryRequest_SearchType_GOOGLENEWS = SearchAnalyticsQuery
   SearchAnalyticsQueryRequest_SearchType_News,
   SearchAnalyticsQueryRequest_SearchType_Discover,
   SearchAnalyticsQueryRequest_SearchType_GOOGLENEWS,
-  SearchAnalyticsQueryRequest_SearchType #-}
+  SearchAnalyticsQueryRequest_SearchType
+  #-}
 
 -- | Optional. [Optional; Default is \"web\"] Type of report: search type, or either Discover or Gnews.
-newtype SearchAnalyticsQueryRequest_Type = SearchAnalyticsQueryRequest_Type { fromSearchAnalyticsQueryRequest_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SearchAnalyticsQueryRequest_Type = SearchAnalyticsQueryRequest_Type {fromSearchAnalyticsQueryRequest_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_Type_Web :: SearchAnalyticsQueryRequest_Type
 pattern SearchAnalyticsQueryRequest_Type_Web = SearchAnalyticsQueryRequest_Type "WEB"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_Type_Image :: SearchAnalyticsQueryRequest_Type
 pattern SearchAnalyticsQueryRequest_Type_Image = SearchAnalyticsQueryRequest_Type "IMAGE"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryRequest_Type_Video :: SearchAnalyticsQueryRequest_Type
 pattern SearchAnalyticsQueryRequest_Type_Video = SearchAnalyticsQueryRequest_Type "VIDEO"
 
@@ -1470,30 +1456,31 @@ pattern SearchAnalyticsQueryRequest_Type_GOOGLENEWS = SearchAnalyticsQueryReques
   SearchAnalyticsQueryRequest_Type_News,
   SearchAnalyticsQueryRequest_Type_Discover,
   SearchAnalyticsQueryRequest_Type_GOOGLENEWS,
-  SearchAnalyticsQueryRequest_Type #-}
+  SearchAnalyticsQueryRequest_Type
+  #-}
 
 -- | How the results were aggregated.
-newtype SearchAnalyticsQueryResponse_ResponseAggregationType = SearchAnalyticsQueryResponse_ResponseAggregationType { fromSearchAnalyticsQueryResponse_ResponseAggregationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SearchAnalyticsQueryResponse_ResponseAggregationType = SearchAnalyticsQueryResponse_ResponseAggregationType {fromSearchAnalyticsQueryResponse_ResponseAggregationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_Auto :: SearchAnalyticsQueryResponse_ResponseAggregationType
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_Auto = SearchAnalyticsQueryResponse_ResponseAggregationType "AUTO"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY :: SearchAnalyticsQueryResponse_ResponseAggregationType
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY = SearchAnalyticsQueryResponse_ResponseAggregationType "BY_PROPERTY"
 
--- | 
+-- |
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE :: SearchAnalyticsQueryResponse_ResponseAggregationType
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE = SearchAnalyticsQueryResponse_ResponseAggregationType "BY_PAGE"
 
@@ -1501,20 +1488,21 @@ pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE = SearchAnal
   SearchAnalyticsQueryResponse_ResponseAggregationType_Auto,
   SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY,
   SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE,
-  SearchAnalyticsQueryResponse_ResponseAggregationType #-}
+  SearchAnalyticsQueryResponse_ResponseAggregationType
+  #-}
 
 -- | Status of the test.
-newtype TestStatus_Status = TestStatus_Status { fromTestStatus_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TestStatus_Status = TestStatus_Status {fromTestStatus_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Internal error when running this test. Please try running the test again.
 pattern TestStatus_Status_TESTSTATUSUNSPECIFIED :: TestStatus_Status
@@ -1537,22 +1525,23 @@ pattern TestStatus_Status_PAGEUNREACHABLE = TestStatus_Status "PAGE_UNREACHABLE"
   TestStatus_Status_Complete,
   TestStatus_Status_INTERNALERROR,
   TestStatus_Status_PAGEUNREACHABLE,
-  TestStatus_Status #-}
+  TestStatus_Status
+  #-}
 
 -- | The user\'s permission level for the site.
-newtype WmxSite_PermissionLevel = WmxSite_PermissionLevel { fromWmxSite_PermissionLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WmxSite_PermissionLevel = WmxSite_PermissionLevel {fromWmxSite_PermissionLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern WmxSite_PermissionLevel_SITEPERMISSIONLEVELUNSPECIFIED :: WmxSite_PermissionLevel
 pattern WmxSite_PermissionLevel_SITEPERMISSIONLEVELUNSPECIFIED = WmxSite_PermissionLevel "SITE_PERMISSION_LEVEL_UNSPECIFIED"
 
@@ -1578,38 +1567,39 @@ pattern WmxSite_PermissionLevel_SITEUNVERIFIEDUSER = WmxSite_PermissionLevel "SI
   WmxSite_PermissionLevel_SITEFULLUSER,
   WmxSite_PermissionLevel_SITERESTRICTEDUSER,
   WmxSite_PermissionLevel_SITEUNVERIFIEDUSER,
-  WmxSite_PermissionLevel #-}
+  WmxSite_PermissionLevel
+  #-}
 
 -- | The type of the sitemap. For example: @rssFeed@.
-newtype WmxSitemap_Type = WmxSitemap_Type { fromWmxSitemap_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WmxSitemap_Type = WmxSitemap_Type {fromWmxSitemap_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern WmxSitemap_Type_NOTSITEMAP :: WmxSitemap_Type
 pattern WmxSitemap_Type_NOTSITEMAP = WmxSitemap_Type "NOT_SITEMAP"
 
--- | 
+-- |
 pattern WmxSitemap_Type_URLLIST :: WmxSitemap_Type
 pattern WmxSitemap_Type_URLLIST = WmxSitemap_Type "URL_LIST"
 
--- | 
+-- |
 pattern WmxSitemap_Type_Sitemap :: WmxSitemap_Type
 pattern WmxSitemap_Type_Sitemap = WmxSitemap_Type "SITEMAP"
 
--- | 
+-- |
 pattern WmxSitemap_Type_RSSFEED :: WmxSitemap_Type
 pattern WmxSitemap_Type_RSSFEED = WmxSitemap_Type "RSS_FEED"
 
--- | 
+-- |
 pattern WmxSitemap_Type_ATOMFEED :: WmxSitemap_Type
 pattern WmxSitemap_Type_ATOMFEED = WmxSitemap_Type "ATOM_FEED"
 
@@ -1617,7 +1607,7 @@ pattern WmxSitemap_Type_ATOMFEED = WmxSitemap_Type "ATOM_FEED"
 pattern WmxSitemap_Type_PATTERNSITEMAP :: WmxSitemap_Type
 pattern WmxSitemap_Type_PATTERNSITEMAP = WmxSitemap_Type "PATTERN_SITEMAP"
 
--- | 
+-- |
 pattern WmxSitemap_Type_Oceanfront :: WmxSitemap_Type
 pattern WmxSitemap_Type_Oceanfront = WmxSitemap_Type "OCEANFRONT"
 
@@ -1629,42 +1619,43 @@ pattern WmxSitemap_Type_Oceanfront = WmxSitemap_Type "OCEANFRONT"
   WmxSitemap_Type_ATOMFEED,
   WmxSitemap_Type_PATTERNSITEMAP,
   WmxSitemap_Type_Oceanfront,
-  WmxSitemap_Type #-}
+  WmxSitemap_Type
+  #-}
 
 -- | The specific type of content in this sitemap. For example: @web@.
-newtype WmxSitemapContent_Type = WmxSitemapContent_Type { fromWmxSitemapContent_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WmxSitemapContent_Type = WmxSitemapContent_Type {fromWmxSitemapContent_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern WmxSitemapContent_Type_Web :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Web = WmxSitemapContent_Type "WEB"
 
--- | 
+-- |
 pattern WmxSitemapContent_Type_Image :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Image = WmxSitemapContent_Type "IMAGE"
 
--- | 
+-- |
 pattern WmxSitemapContent_Type_Video :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Video = WmxSitemapContent_Type "VIDEO"
 
--- | 
+-- |
 pattern WmxSitemapContent_Type_News :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_News = WmxSitemapContent_Type "NEWS"
 
--- | 
+-- |
 pattern WmxSitemapContent_Type_Mobile :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Mobile = WmxSitemapContent_Type "MOBILE"
 
--- | 
+-- |
 pattern WmxSitemapContent_Type_ANDROIDAPP :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_ANDROIDAPP = WmxSitemapContent_Type "ANDROID_APP"
 
@@ -1672,7 +1663,7 @@ pattern WmxSitemapContent_Type_ANDROIDAPP = WmxSitemapContent_Type "ANDROID_APP"
 pattern WmxSitemapContent_Type_Pattern :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Pattern = WmxSitemapContent_Type "PATTERN"
 
--- | 
+-- |
 pattern WmxSitemapContent_Type_IOSAPP :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_IOSAPP = WmxSitemapContent_Type "IOS_APP"
 
@@ -1690,4 +1681,5 @@ pattern WmxSitemapContent_Type_DATAFEEDELEMENT = WmxSitemapContent_Type "DATA_FE
   WmxSitemapContent_Type_Pattern,
   WmxSitemapContent_Type_IOSAPP,
   WmxSitemapContent_Type_DATAFEEDELEMENT,
-  WmxSitemapContent_Type #-}
+  WmxSitemapContent_Type
+  #-}
