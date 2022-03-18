@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,99 +36,93 @@
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.getIamPolicy@.
 module Gogol.CloudTasks.Projects.Locations.Queues.GetIamPolicy
-  ( -- * Resource
-    CloudTasksProjectsLocationsQueuesGetIamPolicyResource,
+    (
+    -- * Resource
+      CloudTasksProjectsLocationsQueuesGetIamPolicyResource
 
     -- ** Constructing a Request
-    newCloudTasksProjectsLocationsQueuesGetIamPolicy,
-    CloudTasksProjectsLocationsQueuesGetIamPolicy,
-  )
-where
+    , newCloudTasksProjectsLocationsQueuesGetIamPolicy
+    , CloudTasksProjectsLocationsQueuesGetIamPolicy
+    ) where
 
-import Gogol.CloudTasks.Types
 import qualified Gogol.Prelude as Core
+import Gogol.CloudTasks.Types
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.getIamPolicy@ method which the
 -- 'CloudTasksProjectsLocationsQueuesGetIamPolicy' request conforms to.
-type CloudTasksProjectsLocationsQueuesGetIamPolicyResource =
-  "v2"
-    Core.:> Core.CaptureMode "resource" "getIamPolicy" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] GetIamPolicyRequest
-    Core.:> Core.Post '[Core.JSON] Policy
+type CloudTasksProjectsLocationsQueuesGetIamPolicyResource
+     =
+     "v2" Core.:>
+       Core.CaptureMode "resource" "getIamPolicy" Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] GetIamPolicyRequest Core.:>
+                       Core.Post '[Core.JSON] Policy
 
 -- | Gets the access control policy for a Queue. Returns an empty policy if the resource exists and does not have a policy set. Authorization requires the following <https://cloud.google.com/iam Google IAM> permission on the specified resource parent: * @cloudtasks.queues.getIamPolicy@
 --
 -- /See:/ 'newCloudTasksProjectsLocationsQueuesGetIamPolicy' smart constructor.
 data CloudTasksProjectsLocationsQueuesGetIamPolicy = CloudTasksProjectsLocationsQueuesGetIamPolicy
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: GetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: GetIamPolicyRequest
+      -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudTasksProjectsLocationsQueuesGetIamPolicy' with the minimum fields required to make a request.
-newCloudTasksProjectsLocationsQueuesGetIamPolicy ::
-  -- |  Multipart request metadata. See 'payload'.
-  GetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  CloudTasksProjectsLocationsQueuesGetIamPolicy
+newCloudTasksProjectsLocationsQueuesGetIamPolicy 
+    ::  GetIamPolicyRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+    -> CloudTasksProjectsLocationsQueuesGetIamPolicy
 newCloudTasksProjectsLocationsQueuesGetIamPolicy payload resource =
   CloudTasksProjectsLocationsQueuesGetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudTasksProjectsLocationsQueuesGetIamPolicy
-  where
-  type
-    Rs CloudTasksProjectsLocationsQueuesGetIamPolicy =
-      Policy
-  type
-    Scopes
-      CloudTasksProjectsLocationsQueuesGetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    CloudTasksProjectsLocationsQueuesGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudTasksService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudTasksProjectsLocationsQueuesGetIamPolicyResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           CloudTasksProjectsLocationsQueuesGetIamPolicy
+         where
+        type Rs CloudTasksProjectsLocationsQueuesGetIamPolicy
+             = Policy
+        type Scopes
+               CloudTasksProjectsLocationsQueuesGetIamPolicy
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          CloudTasksProjectsLocationsQueuesGetIamPolicy{..}
+          = go resource xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              cloudTasksService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           CloudTasksProjectsLocationsQueuesGetIamPolicyResource)
+                      Core.mempty
+
