@@ -19,57 +19,59 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Achievements.ResetForAllPlayers
+-- Module      : Gogol.GamesManagement.Achievements.ResetMultipleForAllPlayers
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resets the achievement with the given ID for all players. This method is only available to user accounts for your developer console. Only draft achievements can be reset.
+-- Resets achievements with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft achievements may be reset.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.achievements.resetForAllPlayers@.
-module Network.Google.GamesManagement.Achievements.ResetForAllPlayers
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.achievements.resetMultipleForAllPlayers@.
+module Gogol.GamesManagement.Achievements.ResetMultipleForAllPlayers
   ( -- * Resource
-    GamesManagementAchievementsResetForAllPlayersResource,
+    GamesManagementAchievementsResetMultipleForAllPlayersResource,
 
     -- ** Constructing a Request
-    newGamesManagementAchievementsResetForAllPlayers,
-    GamesManagementAchievementsResetForAllPlayers,
+    newGamesManagementAchievementsResetMultipleForAllPlayers,
+    GamesManagementAchievementsResetMultipleForAllPlayers,
   )
 where
 
-import Network.Google.GamesManagement.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesManagement.achievements.resetForAllPlayers@ method which the
--- 'GamesManagementAchievementsResetForAllPlayers' request conforms to.
-type GamesManagementAchievementsResetForAllPlayersResource =
+-- | A resource alias for @gamesManagement.achievements.resetMultipleForAllPlayers@ method which the
+-- 'GamesManagementAchievementsResetMultipleForAllPlayers' request conforms to.
+type GamesManagementAchievementsResetMultipleForAllPlayersResource =
   "games"
     Core.:> "v1management"
     Core.:> "achievements"
-    Core.:> Core.Capture "achievementId" Core.Text
-    Core.:> "resetForAllPlayers"
+    Core.:> "resetMultipleForAllPlayers"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              AchievementResetMultipleForAllRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Resets the achievement with the given ID for all players. This method is only available to user accounts for your developer console. Only draft achievements can be reset.
+-- | Resets achievements with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft achievements may be reset.
 --
--- /See:/ 'newGamesManagementAchievementsResetForAllPlayers' smart constructor.
-data GamesManagementAchievementsResetForAllPlayers = GamesManagementAchievementsResetForAllPlayers
+-- /See:/ 'newGamesManagementAchievementsResetMultipleForAllPlayers' smart constructor.
+data GamesManagementAchievementsResetMultipleForAllPlayers = GamesManagementAchievementsResetMultipleForAllPlayers
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | The ID of the achievement used by this method.
-    achievementId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: AchievementResetMultipleForAllRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,48 +79,49 @@ data GamesManagementAchievementsResetForAllPlayers = GamesManagementAchievements
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesManagementAchievementsResetForAllPlayers' with the minimum fields required to make a request.
-newGamesManagementAchievementsResetForAllPlayers ::
-  -- |  The ID of the achievement used by this method. See 'achievementId'.
-  Core.Text ->
-  GamesManagementAchievementsResetForAllPlayers
-newGamesManagementAchievementsResetForAllPlayers achievementId =
-  GamesManagementAchievementsResetForAllPlayers
+-- | Creates a value of 'GamesManagementAchievementsResetMultipleForAllPlayers' with the minimum fields required to make a request.
+newGamesManagementAchievementsResetMultipleForAllPlayers ::
+  -- |  Multipart request metadata. See 'payload'.
+  AchievementResetMultipleForAllRequest ->
+  GamesManagementAchievementsResetMultipleForAllPlayers
+newGamesManagementAchievementsResetMultipleForAllPlayers payload =
+  GamesManagementAchievementsResetMultipleForAllPlayers
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
-      achievementId = achievementId,
       callback = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    GamesManagementAchievementsResetForAllPlayers
+    GamesManagementAchievementsResetMultipleForAllPlayers
   where
   type
-    Rs GamesManagementAchievementsResetForAllPlayers =
+    Rs
+      GamesManagementAchievementsResetMultipleForAllPlayers =
       ()
   type
     Scopes
-      GamesManagementAchievementsResetForAllPlayers =
+      GamesManagementAchievementsResetMultipleForAllPlayers =
       '["https://www.googleapis.com/auth/games"]
   requestClient
-    GamesManagementAchievementsResetForAllPlayers {..} =
+    GamesManagementAchievementsResetMultipleForAllPlayers {..} =
       go
-        achievementId
         xgafv
         accessToken
         callback
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         gamesManagementService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesManagementAchievementsResetForAllPlayersResource
+                  GamesManagementAchievementsResetMultipleForAllPlayersResource
             )
             Core.mempty

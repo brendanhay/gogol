@@ -19,35 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Achievements.ResetAllForAllPlayers
+-- Module      : Gogol.GamesManagement.Scores.ResetAllForAllPlayers
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resets all draft achievements for all players. This method is only available to user accounts for your developer console.
+-- Resets scores for all draft leaderboards for all players. This method is only available to user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.achievements.resetAllForAllPlayers@.
-module Network.Google.GamesManagement.Achievements.ResetAllForAllPlayers
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.scores.resetAllForAllPlayers@.
+module Gogol.GamesManagement.Scores.ResetAllForAllPlayers
   ( -- * Resource
-    GamesManagementAchievementsResetAllForAllPlayersResource,
+    GamesManagementScoresResetAllForAllPlayersResource,
 
     -- ** Constructing a Request
-    newGamesManagementAchievementsResetAllForAllPlayers,
-    GamesManagementAchievementsResetAllForAllPlayers,
+    newGamesManagementScoresResetAllForAllPlayers,
+    GamesManagementScoresResetAllForAllPlayers,
   )
 where
 
-import Network.Google.GamesManagement.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesManagement.achievements.resetAllForAllPlayers@ method which the
--- 'GamesManagementAchievementsResetAllForAllPlayers' request conforms to.
-type GamesManagementAchievementsResetAllForAllPlayersResource =
+-- | A resource alias for @gamesManagement.scores.resetAllForAllPlayers@ method which the
+-- 'GamesManagementScoresResetAllForAllPlayers' request conforms to.
+type GamesManagementScoresResetAllForAllPlayersResource =
   "games"
     Core.:> "v1management"
-    Core.:> "achievements"
+    Core.:> "scores"
     Core.:> "resetAllForAllPlayers"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -57,10 +57,10 @@ type GamesManagementAchievementsResetAllForAllPlayersResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Resets all draft achievements for all players. This method is only available to user accounts for your developer console.
+-- | Resets scores for all draft leaderboards for all players. This method is only available to user accounts for your developer console.
 --
--- /See:/ 'newGamesManagementAchievementsResetAllForAllPlayers' smart constructor.
-data GamesManagementAchievementsResetAllForAllPlayers = GamesManagementAchievementsResetAllForAllPlayers
+-- /See:/ 'newGamesManagementScoresResetAllForAllPlayers' smart constructor.
+data GamesManagementScoresResetAllForAllPlayers = GamesManagementScoresResetAllForAllPlayers
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -74,11 +74,11 @@ data GamesManagementAchievementsResetAllForAllPlayers = GamesManagementAchieveme
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesManagementAchievementsResetAllForAllPlayers' with the minimum fields required to make a request.
-newGamesManagementAchievementsResetAllForAllPlayers ::
-  GamesManagementAchievementsResetAllForAllPlayers
-newGamesManagementAchievementsResetAllForAllPlayers =
-  GamesManagementAchievementsResetAllForAllPlayers
+-- | Creates a value of 'GamesManagementScoresResetAllForAllPlayers' with the minimum fields required to make a request.
+newGamesManagementScoresResetAllForAllPlayers ::
+  GamesManagementScoresResetAllForAllPlayers
+newGamesManagementScoresResetAllForAllPlayers =
+  GamesManagementScoresResetAllForAllPlayers
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -88,18 +88,17 @@ newGamesManagementAchievementsResetAllForAllPlayers =
 
 instance
   Core.GoogleRequest
-    GamesManagementAchievementsResetAllForAllPlayers
+    GamesManagementScoresResetAllForAllPlayers
   where
   type
-    Rs
-      GamesManagementAchievementsResetAllForAllPlayers =
+    Rs GamesManagementScoresResetAllForAllPlayers =
       ()
   type
     Scopes
-      GamesManagementAchievementsResetAllForAllPlayers =
+      GamesManagementScoresResetAllForAllPlayers =
       '["https://www.googleapis.com/auth/games"]
   requestClient
-    GamesManagementAchievementsResetAllForAllPlayers {..} =
+    GamesManagementScoresResetAllForAllPlayers {..} =
       go
         xgafv
         accessToken
@@ -113,6 +112,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesManagementAchievementsResetAllForAllPlayersResource
+                  GamesManagementScoresResetAllForAllPlayersResource
             )
             Core.mempty

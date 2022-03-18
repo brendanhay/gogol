@@ -19,61 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Players.Unhide
+-- Module      : Gogol.GamesManagement.Achievements.Reset
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Unhide the given player\'s leaderboard scores from the given application. This method is only available to user accounts for your developer console.
+-- Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.players.unhide@.
-module Network.Google.GamesManagement.Players.Unhide
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.achievements.reset@.
+module Gogol.GamesManagement.Achievements.Reset
   ( -- * Resource
-    GamesManagementPlayersUnhideResource,
+    GamesManagementAchievementsResetResource,
 
     -- ** Constructing a Request
-    newGamesManagementPlayersUnhide,
-    GamesManagementPlayersUnhide,
+    newGamesManagementAchievementsReset,
+    GamesManagementAchievementsReset,
   )
 where
 
-import Network.Google.GamesManagement.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesManagement.players.unhide@ method which the
--- 'GamesManagementPlayersUnhide' request conforms to.
-type GamesManagementPlayersUnhideResource =
+-- | A resource alias for @gamesManagement.achievements.reset@ method which the
+-- 'GamesManagementAchievementsReset' request conforms to.
+type GamesManagementAchievementsResetResource =
   "games"
     Core.:> "v1management"
-    Core.:> "applications"
-    Core.:> Core.Capture "applicationId" Core.Text
-    Core.:> "players"
-    Core.:> "hidden"
-    Core.:> Core.Capture "playerId" Core.Text
+    Core.:> "achievements"
+    Core.:> Core.Capture "achievementId" Core.Text
+    Core.:> "reset"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+    Core.:> Core.Post '[Core.JSON] AchievementResetResponse
 
--- | Unhide the given player\'s leaderboard scores from the given application. This method is only available to user accounts for your developer console.
+-- | Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
 --
--- /See:/ 'newGamesManagementPlayersUnhide' smart constructor.
-data GamesManagementPlayersUnhide = GamesManagementPlayersUnhide
+-- /See:/ 'newGamesManagementAchievementsReset' smart constructor.
+data GamesManagementAchievementsReset = GamesManagementAchievementsReset
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | The application ID from the Google Play developer console.
-    applicationId :: Core.Text,
+    -- | The ID of the achievement used by this method.
+    achievementId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | A player ID. A value of @me@ may be used in place of the authenticated player\'s ID.
-    playerId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -81,36 +77,34 @@ data GamesManagementPlayersUnhide = GamesManagementPlayersUnhide
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesManagementPlayersUnhide' with the minimum fields required to make a request.
-newGamesManagementPlayersUnhide ::
-  -- |  The application ID from the Google Play developer console. See 'applicationId'.
+-- | Creates a value of 'GamesManagementAchievementsReset' with the minimum fields required to make a request.
+newGamesManagementAchievementsReset ::
+  -- |  The ID of the achievement used by this method. See 'achievementId'.
   Core.Text ->
-  -- |  A player ID. A value of @me@ may be used in place of the authenticated player\'s ID. See 'playerId'.
-  Core.Text ->
-  GamesManagementPlayersUnhide
-newGamesManagementPlayersUnhide applicationId playerId =
-  GamesManagementPlayersUnhide
+  GamesManagementAchievementsReset
+newGamesManagementAchievementsReset achievementId =
+  GamesManagementAchievementsReset
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
-      applicationId = applicationId,
+      achievementId = achievementId,
       callback = Core.Nothing,
-      playerId = playerId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    GamesManagementPlayersUnhide
+    GamesManagementAchievementsReset
   where
-  type Rs GamesManagementPlayersUnhide = ()
   type
-    Scopes GamesManagementPlayersUnhide =
+    Rs GamesManagementAchievementsReset =
+      AchievementResetResponse
+  type
+    Scopes GamesManagementAchievementsReset =
       '["https://www.googleapis.com/auth/games"]
-  requestClient GamesManagementPlayersUnhide {..} =
+  requestClient GamesManagementAchievementsReset {..} =
     go
-      applicationId
-      playerId
+      achievementId
       xgafv
       accessToken
       callback
@@ -122,6 +116,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy GamesManagementPlayersUnhideResource
+              Core.Proxy GamesManagementAchievementsResetResource
           )
           Core.mempty

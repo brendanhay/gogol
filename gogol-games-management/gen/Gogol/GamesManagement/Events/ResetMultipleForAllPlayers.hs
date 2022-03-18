@@ -19,54 +19,59 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Scores.ResetAllForAllPlayers
+-- Module      : Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resets scores for all draft leaderboards for all players. This method is only available to user accounts for your developer console.
+-- Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.scores.resetAllForAllPlayers@.
-module Network.Google.GamesManagement.Scores.ResetAllForAllPlayers
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.events.resetMultipleForAllPlayers@.
+module Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
   ( -- * Resource
-    GamesManagementScoresResetAllForAllPlayersResource,
+    GamesManagementEventsResetMultipleForAllPlayersResource,
 
     -- ** Constructing a Request
-    newGamesManagementScoresResetAllForAllPlayers,
-    GamesManagementScoresResetAllForAllPlayers,
+    newGamesManagementEventsResetMultipleForAllPlayers,
+    GamesManagementEventsResetMultipleForAllPlayers,
   )
 where
 
-import Network.Google.GamesManagement.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesManagement.scores.resetAllForAllPlayers@ method which the
--- 'GamesManagementScoresResetAllForAllPlayers' request conforms to.
-type GamesManagementScoresResetAllForAllPlayersResource =
+-- | A resource alias for @gamesManagement.events.resetMultipleForAllPlayers@ method which the
+-- 'GamesManagementEventsResetMultipleForAllPlayers' request conforms to.
+type GamesManagementEventsResetMultipleForAllPlayersResource =
   "games"
     Core.:> "v1management"
-    Core.:> "scores"
-    Core.:> "resetAllForAllPlayers"
+    Core.:> "events"
+    Core.:> "resetMultipleForAllPlayers"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              EventsResetMultipleForAllRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Resets scores for all draft leaderboards for all players. This method is only available to user accounts for your developer console.
+-- | Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset.
 --
--- /See:/ 'newGamesManagementScoresResetAllForAllPlayers' smart constructor.
-data GamesManagementScoresResetAllForAllPlayers = GamesManagementScoresResetAllForAllPlayers
+-- /See:/ 'newGamesManagementEventsResetMultipleForAllPlayers' smart constructor.
+data GamesManagementEventsResetMultipleForAllPlayers = GamesManagementEventsResetMultipleForAllPlayers
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: EventsResetMultipleForAllRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,31 +79,35 @@ data GamesManagementScoresResetAllForAllPlayers = GamesManagementScoresResetAllF
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesManagementScoresResetAllForAllPlayers' with the minimum fields required to make a request.
-newGamesManagementScoresResetAllForAllPlayers ::
-  GamesManagementScoresResetAllForAllPlayers
-newGamesManagementScoresResetAllForAllPlayers =
-  GamesManagementScoresResetAllForAllPlayers
+-- | Creates a value of 'GamesManagementEventsResetMultipleForAllPlayers' with the minimum fields required to make a request.
+newGamesManagementEventsResetMultipleForAllPlayers ::
+  -- |  Multipart request metadata. See 'payload'.
+  EventsResetMultipleForAllRequest ->
+  GamesManagementEventsResetMultipleForAllPlayers
+newGamesManagementEventsResetMultipleForAllPlayers payload =
+  GamesManagementEventsResetMultipleForAllPlayers
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    GamesManagementScoresResetAllForAllPlayers
+    GamesManagementEventsResetMultipleForAllPlayers
   where
   type
-    Rs GamesManagementScoresResetAllForAllPlayers =
+    Rs
+      GamesManagementEventsResetMultipleForAllPlayers =
       ()
   type
     Scopes
-      GamesManagementScoresResetAllForAllPlayers =
+      GamesManagementEventsResetMultipleForAllPlayers =
       '["https://www.googleapis.com/auth/games"]
   requestClient
-    GamesManagementScoresResetAllForAllPlayers {..} =
+    GamesManagementEventsResetMultipleForAllPlayers {..} =
       go
         xgafv
         accessToken
@@ -106,12 +115,13 @@ instance
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         gamesManagementService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesManagementScoresResetAllForAllPlayersResource
+                  GamesManagementEventsResetMultipleForAllPlayersResource
             )
             Core.mempty

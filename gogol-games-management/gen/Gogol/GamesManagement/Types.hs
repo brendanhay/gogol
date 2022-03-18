@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Types
+-- Module      : Gogol.GamesManagement.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.GamesManagement.Types
+module Gogol.GamesManagement.Types
   ( -- * Configuration
     gamesManagementService,
 
@@ -95,9 +95,9 @@ module Network.Google.GamesManagement.Types
   )
 where
 
-import Network.Google.GamesManagement.Internal.Product
-import Network.Google.GamesManagement.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Internal.Product
+import Gogol.GamesManagement.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1management@ of the Google Play Game Management. This contains the host and root path used as a starting point for constructing service requests.
 gamesManagementService :: Core.ServiceConfig

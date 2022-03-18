@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Internal.Product
+-- Module      : Gogol.GamesManagement.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.GamesManagement.Internal.Product
+module Gogol.GamesManagement.Internal.Product
   ( -- * AchievementResetAllResponse
     AchievementResetAllResponse (..),
     newAchievementResetAllResponse,
@@ -84,8 +84,8 @@ module Network.Google.GamesManagement.Internal.Product
   )
 where
 
-import Network.Google.GamesManagement.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Achievement reset all response.
 --

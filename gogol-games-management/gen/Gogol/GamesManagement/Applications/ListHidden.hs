@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Applications.ListHidden
+-- Module      : Gogol.GamesManagement.Applications.ListHidden
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get the list of players hidden from the given application. This method is only available to user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.applications.listHidden@.
-module Network.Google.GamesManagement.Applications.ListHidden
+module Gogol.GamesManagement.Applications.ListHidden
   ( -- * Resource
     GamesManagementApplicationsListHiddenResource,
 
@@ -39,8 +39,8 @@ module Network.Google.GamesManagement.Applications.ListHidden
   )
 where
 
-import Network.Google.GamesManagement.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @gamesManagement.applications.listHidden@ method which the
 -- 'GamesManagementApplicationsListHidden' request conforms to.
