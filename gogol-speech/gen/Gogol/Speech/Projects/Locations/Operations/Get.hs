@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Speech.Projects.Locations.Operations.Get
+-- Module      : Gogol.Speech.Projects.Locations.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.projects.locations.operations.get@.
-module Network.Google.Speech.Projects.Locations.Operations.Get
+module Gogol.Speech.Projects.Locations.Operations.Get
   ( -- * Resource
     SpeechProjectsLocationsOperationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Speech.Projects.Locations.Operations.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Speech.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Speech.Types
 
 -- | A resource alias for @speech.projects.locations.operations.get@ method which the
 -- 'SpeechProjectsLocationsOperationsGet' request conforms to.
