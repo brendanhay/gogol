@@ -39,21 +39,22 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ServiceUser
-    Network.Google.ServiceUser.Projects.Services.Disable
-    Network.Google.ServiceUser.Projects.Services.Enable
-    Network.Google.ServiceUser.Projects.Services.List
-    Network.Google.ServiceUser.Services.Search
-    Network.Google.ServiceUser.Types
+    Gogol.ServiceUser
+    Gogol.ServiceUser.Projects.Services.Disable
+    Gogol.ServiceUser.Projects.Services.Enable
+    Gogol.ServiceUser.Projects.Services.List
+    Gogol.ServiceUser.Services.Search
+    Gogol.ServiceUser.Types
 
   other-modules:
-    Network.Google.ServiceUser.Internal.Product
-    Network.Google.ServiceUser.Internal.Sum
+    Gogol.ServiceUser.Internal.Product
+    Gogol.ServiceUser.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,36 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUser.Services.Search
+-- Module      : Gogol.ServiceUser.Projects.Services.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search available services.
+-- List enabled services for the specified consumer.
 --
--- When no filter is specified, returns all accessible services. For authenticated users, also returns all services the calling user has \"servicemanagement.services.bind\" permission for.
---
--- /See:/ <https://cloud.google.com/service-management/ Service User API Reference> for @serviceuser.services.search@.
-module Network.Google.ServiceUser.Services.Search
+-- /See:/ <https://cloud.google.com/service-management/ Service User API Reference> for @serviceuser.projects.services.list@.
+module Gogol.ServiceUser.Projects.Services.List
   ( -- * Resource
-    ServiceUserServicesSearchResource,
+    ServiceUserProjectsServicesListResource,
 
     -- ** Constructing a Request
-    newServiceUserServicesSearch,
-    ServiceUserServicesSearch,
+    newServiceUserProjectsServicesList,
+    ServiceUserProjectsServicesList,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUser.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUser.Types
 
--- | A resource alias for @serviceuser.services.search@ method which the
--- 'ServiceUserServicesSearch' request conforms to.
-type ServiceUserServicesSearchResource =
+-- | A resource alias for @serviceuser.projects.services.list@ method which the
+-- 'ServiceUserProjectsServicesList' request conforms to.
+type ServiceUserProjectsServicesListResource =
   "v1"
-    Core.:> "services:search"
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "services"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -57,14 +56,12 @@ type ServiceUserServicesSearchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] SearchServicesResponse
+    Core.:> Core.Get '[Core.JSON] ListEnabledServicesResponse
 
--- | Search available services.
+-- | List enabled services for the specified consumer.
 --
--- When no filter is specified, returns all accessible services. For authenticated users, also returns all services the calling user has \"servicemanagement.services.bind\" permission for.
---
--- /See:/ 'newServiceUserServicesSearch' smart constructor.
-data ServiceUserServicesSearch = ServiceUserServicesSearch
+-- /See:/ 'newServiceUserProjectsServicesList' smart constructor.
+data ServiceUserProjectsServicesList = ServiceUserProjectsServicesList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -75,6 +72,10 @@ data ServiceUserServicesSearch = ServiceUserServicesSearch
     pageSize :: (Core.Maybe Core.Int32),
     -- | Token identifying which result to start with; returned by a previous list call.
     pageToken :: (Core.Maybe Core.Text),
+    -- | List enabled services for the specified parent.
+    --
+    -- An example valid parent would be: - projects\/my-project
+    parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -82,31 +83,40 @@ data ServiceUserServicesSearch = ServiceUserServicesSearch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ServiceUserServicesSearch' with the minimum fields required to make a request.
-newServiceUserServicesSearch ::
-  ServiceUserServicesSearch
-newServiceUserServicesSearch =
-  ServiceUserServicesSearch
+-- | Creates a value of 'ServiceUserProjectsServicesList' with the minimum fields required to make a request.
+newServiceUserProjectsServicesList ::
+  -- |  List enabled services for the specified parent.
+  --
+  -- An example valid parent would be: - projects\/my-project See 'parent'.
+  Core.Text ->
+  ServiceUserProjectsServicesList
+newServiceUserProjectsServicesList parent =
+  ServiceUserProjectsServicesList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
+      parent = parent,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest ServiceUserServicesSearch where
+instance
+  Core.GoogleRequest
+    ServiceUserProjectsServicesList
+  where
   type
-    Rs ServiceUserServicesSearch =
-      SearchServicesResponse
+    Rs ServiceUserProjectsServicesList =
+      ListEnabledServicesResponse
   type
-    Scopes ServiceUserServicesSearch =
+    Scopes ServiceUserProjectsServicesList =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-platform.read-only"
        ]
-  requestClient ServiceUserServicesSearch {..} =
+  requestClient ServiceUserProjectsServicesList {..} =
     go
+      parent
       xgafv
       accessToken
       callback
@@ -120,6 +130,6 @@ instance Core.GoogleRequest ServiceUserServicesSearch where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ServiceUserServicesSearchResource
+              Core.Proxy ServiceUserProjectsServicesListResource
           )
           Core.mempty

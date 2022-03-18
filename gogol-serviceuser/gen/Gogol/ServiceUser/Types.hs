@@ -19,17 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUser
+-- Module      : Gogol.ServiceUser.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use.
---
--- /See:/ <https://cloud.google.com/service-management/ Service User API Reference>
-module Network.Google.ServiceUser
+module Gogol.ServiceUser.Types
   ( -- * Configuration
     serviceUserService,
 
@@ -37,28 +33,6 @@ module Network.Google.ServiceUser
     cloudPlatformScope,
     cloudPlatformReadOnlyScope,
     serviceManagementScope,
-
-    -- * Resources
-
-    -- ** serviceuser.projects.services.disable
-    ServiceUserProjectsServicesDisableResource,
-    newServiceUserProjectsServicesDisable,
-    ServiceUserProjectsServicesDisable,
-
-    -- ** serviceuser.projects.services.enable
-    ServiceUserProjectsServicesEnableResource,
-    newServiceUserProjectsServicesEnable,
-    ServiceUserProjectsServicesEnable,
-
-    -- ** serviceuser.projects.services.list
-    ServiceUserProjectsServicesListResource,
-    newServiceUserProjectsServicesList,
-    ServiceUserProjectsServicesList,
-
-    -- ** serviceuser.services.search
-    ServiceUserServicesSearchResource,
-    newServiceUserServicesSearch,
-    ServiceUserServicesSearch,
 
     -- * Types
 
@@ -368,8 +342,25 @@ module Network.Google.ServiceUser
   )
 where
 
-import Network.Google.ServiceUser.Projects.Services.Disable
-import Network.Google.ServiceUser.Projects.Services.Enable
-import Network.Google.ServiceUser.Projects.Services.List
-import Network.Google.ServiceUser.Services.Search
-import Network.Google.ServiceUser.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUser.Internal.Product
+import Gogol.ServiceUser.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Service User API. This contains the host and root path used as a starting point for constructing service requests.
+serviceUserService :: Core.ServiceConfig
+serviceUserService =
+  Core.defaultService
+    (Core.ServiceId "serviceuser:v1")
+    "serviceuser.googleapis.com"
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Core.Proxy
+
+-- | Manage your Google API service configuration
+serviceManagementScope :: Core.Proxy '["https://www.googleapis.com/auth/service.management"]
+serviceManagementScope = Core.Proxy
