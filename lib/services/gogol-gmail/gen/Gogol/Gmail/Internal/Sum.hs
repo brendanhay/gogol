@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Gmail.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AutoForwarding_Disposition
     AutoForwarding_Disposition
-      (
-        AutoForwarding_Disposition_DispositionUnspecified,
+      ( AutoForwarding_Disposition_DispositionUnspecified,
         AutoForwarding_Disposition_LeaveInInbox,
         AutoForwarding_Disposition_Archive,
         AutoForwarding_Disposition_Trash,
@@ -56,8 +45,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * Delegate_VerificationStatus
     Delegate_VerificationStatus
-      (
-        Delegate_VerificationStatus_VerificationStatusUnspecified,
+      ( Delegate_VerificationStatus_VerificationStatusUnspecified,
         Delegate_VerificationStatus_Accepted,
         Delegate_VerificationStatus_Pending,
         Delegate_VerificationStatus_Rejected,
@@ -67,8 +55,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * FilterCriteria_SizeComparison
     FilterCriteria_SizeComparison
-      (
-        FilterCriteria_SizeComparison_Unspecified,
+      ( FilterCriteria_SizeComparison_Unspecified,
         FilterCriteria_SizeComparison_Smaller,
         FilterCriteria_SizeComparison_Larger,
         ..
@@ -76,8 +63,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * ForwardingAddress_VerificationStatus
     ForwardingAddress_VerificationStatus
-      (
-        ForwardingAddress_VerificationStatus_VerificationStatusUnspecified,
+      ( ForwardingAddress_VerificationStatus_VerificationStatusUnspecified,
         ForwardingAddress_VerificationStatus_Accepted,
         ForwardingAddress_VerificationStatus_Pending,
         ..
@@ -85,8 +71,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * ImapSettings_ExpungeBehavior
     ImapSettings_ExpungeBehavior
-      (
-        ImapSettings_ExpungeBehavior_ExpungeBehaviorUnspecified,
+      ( ImapSettings_ExpungeBehavior_ExpungeBehaviorUnspecified,
         ImapSettings_ExpungeBehavior_Archive,
         ImapSettings_ExpungeBehavior_Trash,
         ImapSettings_ExpungeBehavior_DeleteForever,
@@ -95,8 +80,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * Label_LabelListVisibility
     Label_LabelListVisibility
-      (
-        Label_LabelListVisibility_LabelShow,
+      ( Label_LabelListVisibility_LabelShow,
         Label_LabelListVisibility_LabelShowIfUnread,
         Label_LabelListVisibility_LabelHide,
         ..
@@ -104,24 +88,21 @@ module Gogol.Gmail.Internal.Sum
 
     -- * Label_MessageListVisibility
     Label_MessageListVisibility
-      (
-        Label_MessageListVisibility_Show,
+      ( Label_MessageListVisibility_Show,
         Label_MessageListVisibility_Hide,
         ..
       ),
 
     -- * Label_Type
     Label_Type
-      (
-        Label_Type_System,
+      ( Label_Type_System,
         Label_Type_User,
         ..
       ),
 
     -- * PopSettings_AccessWindow
     PopSettings_AccessWindow
-      (
-        PopSettings_AccessWindow_AccessWindowUnspecified,
+      ( PopSettings_AccessWindow_AccessWindowUnspecified,
         PopSettings_AccessWindow_Disabled,
         PopSettings_AccessWindow_FromNowOn,
         PopSettings_AccessWindow_AllMail,
@@ -130,8 +111,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * PopSettings_Disposition
     PopSettings_Disposition
-      (
-        PopSettings_Disposition_DispositionUnspecified,
+      ( PopSettings_Disposition_DispositionUnspecified,
         PopSettings_Disposition_LeaveInInbox,
         PopSettings_Disposition_Archive,
         PopSettings_Disposition_Trash,
@@ -141,8 +121,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * SendAs_VerificationStatus
     SendAs_VerificationStatus
-      (
-        SendAs_VerificationStatus_VerificationStatusUnspecified,
+      ( SendAs_VerificationStatus_VerificationStatusUnspecified,
         SendAs_VerificationStatus_Accepted,
         SendAs_VerificationStatus_Pending,
         ..
@@ -150,8 +129,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * SmtpMsa_SecurityMode
     SmtpMsa_SecurityMode
-      (
-        SmtpMsa_SecurityMode_SecurityModeUnspecified,
+      ( SmtpMsa_SecurityMode_SecurityModeUnspecified,
         SmtpMsa_SecurityMode_None,
         SmtpMsa_SecurityMode_Ssl,
         SmtpMsa_SecurityMode_Starttls,
@@ -160,16 +138,14 @@ module Gogol.Gmail.Internal.Sum
 
     -- * WatchRequest_LabelFilterAction
     WatchRequest_LabelFilterAction
-      (
-        WatchRequest_LabelFilterAction_Include,
+      ( WatchRequest_LabelFilterAction_Include,
         WatchRequest_LabelFilterAction_Exclude,
         ..
       ),
 
     -- * UsersDraftsGetFormat
     UsersDraftsGetFormat
-      (
-        UsersDraftsGetFormat_Minimal,
+      ( UsersDraftsGetFormat_Minimal,
         UsersDraftsGetFormat_Full,
         UsersDraftsGetFormat_Raw,
         UsersDraftsGetFormat_Metadata,
@@ -178,8 +154,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * UsersHistoryListHistoryTypes
     UsersHistoryListHistoryTypes
-      (
-        UsersHistoryListHistoryTypes_MessageAdded,
+      ( UsersHistoryListHistoryTypes_MessageAdded,
         UsersHistoryListHistoryTypes_MessageDeleted,
         UsersHistoryListHistoryTypes_LabelAdded,
         UsersHistoryListHistoryTypes_LabelRemoved,
@@ -188,8 +163,7 @@ module Gogol.Gmail.Internal.Sum
 
     -- * UsersMessagesGetFormat
     UsersMessagesGetFormat
-      (
-        UsersMessagesGetFormat_Minimal,
+      ( UsersMessagesGetFormat_Minimal,
         UsersMessagesGetFormat_Full,
         UsersMessagesGetFormat_Raw,
         UsersMessagesGetFormat_Metadata,
@@ -198,44 +172,42 @@ module Gogol.Gmail.Internal.Sum
 
     -- * UsersMessagesImportInternalDateSource
     UsersMessagesImportInternalDateSource
-      (
-        UsersMessagesImportInternalDateSource_ReceivedTime,
+      ( UsersMessagesImportInternalDateSource_ReceivedTime,
         UsersMessagesImportInternalDateSource_DateHeader,
         ..
       ),
 
     -- * UsersMessagesInsertInternalDateSource
     UsersMessagesInsertInternalDateSource
-      (
-        UsersMessagesInsertInternalDateSource_ReceivedTime,
+      ( UsersMessagesInsertInternalDateSource_ReceivedTime,
         UsersMessagesInsertInternalDateSource_DateHeader,
         ..
       ),
 
     -- * UsersThreadsGetFormat
     UsersThreadsGetFormat
-      (
-        UsersThreadsGetFormat_Full,
+      ( UsersThreadsGetFormat_Full,
         UsersThreadsGetFormat_Metadata,
         UsersThreadsGetFormat_Minimal,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -248,20 +220,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The state that a message should be left in after it has been forwarded.
-newtype AutoForwarding_Disposition = AutoForwarding_Disposition { fromAutoForwarding_Disposition :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoForwarding_Disposition = AutoForwarding_Disposition {fromAutoForwarding_Disposition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified disposition.
 pattern AutoForwarding_Disposition_DispositionUnspecified :: AutoForwarding_Disposition
@@ -289,20 +262,21 @@ pattern AutoForwarding_Disposition_MarkRead = AutoForwarding_Disposition "markRe
   AutoForwarding_Disposition_Archive,
   AutoForwarding_Disposition_Trash,
   AutoForwarding_Disposition_MarkRead,
-  AutoForwarding_Disposition #-}
+  AutoForwarding_Disposition
+  #-}
 
 -- | Indicates whether this address has been verified and can act as a delegate for the account. Read-only.
-newtype Delegate_VerificationStatus = Delegate_VerificationStatus { fromDelegate_VerificationStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Delegate_VerificationStatus = Delegate_VerificationStatus {fromDelegate_VerificationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified verification status.
 pattern Delegate_VerificationStatus_VerificationStatusUnspecified :: Delegate_VerificationStatus
@@ -330,22 +304,23 @@ pattern Delegate_VerificationStatus_Expired = Delegate_VerificationStatus "expir
   Delegate_VerificationStatus_Pending,
   Delegate_VerificationStatus_Rejected,
   Delegate_VerificationStatus_Expired,
-  Delegate_VerificationStatus #-}
+  Delegate_VerificationStatus
+  #-}
 
 -- | How the message size in bytes should be in relation to the size field.
-newtype FilterCriteria_SizeComparison = FilterCriteria_SizeComparison { fromFilterCriteria_SizeComparison :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FilterCriteria_SizeComparison = FilterCriteria_SizeComparison {fromFilterCriteria_SizeComparison :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern FilterCriteria_SizeComparison_Unspecified :: FilterCriteria_SizeComparison
 pattern FilterCriteria_SizeComparison_Unspecified = FilterCriteria_SizeComparison "unspecified"
 
@@ -361,20 +336,21 @@ pattern FilterCriteria_SizeComparison_Larger = FilterCriteria_SizeComparison "la
   FilterCriteria_SizeComparison_Unspecified,
   FilterCriteria_SizeComparison_Smaller,
   FilterCriteria_SizeComparison_Larger,
-  FilterCriteria_SizeComparison #-}
+  FilterCriteria_SizeComparison
+  #-}
 
 -- | Indicates whether this address has been verified and is usable for forwarding. Read-only.
-newtype ForwardingAddress_VerificationStatus = ForwardingAddress_VerificationStatus { fromForwardingAddress_VerificationStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingAddress_VerificationStatus = ForwardingAddress_VerificationStatus {fromForwardingAddress_VerificationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified verification status.
 pattern ForwardingAddress_VerificationStatus_VerificationStatusUnspecified :: ForwardingAddress_VerificationStatus
@@ -392,20 +368,21 @@ pattern ForwardingAddress_VerificationStatus_Pending = ForwardingAddress_Verific
   ForwardingAddress_VerificationStatus_VerificationStatusUnspecified,
   ForwardingAddress_VerificationStatus_Accepted,
   ForwardingAddress_VerificationStatus_Pending,
-  ForwardingAddress_VerificationStatus #-}
+  ForwardingAddress_VerificationStatus
+  #-}
 
 -- | The action that will be executed on a message when it is marked as deleted and expunged from the last visible IMAP folder.
-newtype ImapSettings_ExpungeBehavior = ImapSettings_ExpungeBehavior { fromImapSettings_ExpungeBehavior :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ImapSettings_ExpungeBehavior = ImapSettings_ExpungeBehavior {fromImapSettings_ExpungeBehavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified behavior.
 pattern ImapSettings_ExpungeBehavior_ExpungeBehaviorUnspecified :: ImapSettings_ExpungeBehavior
@@ -428,20 +405,21 @@ pattern ImapSettings_ExpungeBehavior_DeleteForever = ImapSettings_ExpungeBehavio
   ImapSettings_ExpungeBehavior_Archive,
   ImapSettings_ExpungeBehavior_Trash,
   ImapSettings_ExpungeBehavior_DeleteForever,
-  ImapSettings_ExpungeBehavior #-}
+  ImapSettings_ExpungeBehavior
+  #-}
 
 -- | The visibility of the label in the label list in the Gmail web interface.
-newtype Label_LabelListVisibility = Label_LabelListVisibility { fromLabel_LabelListVisibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Label_LabelListVisibility = Label_LabelListVisibility {fromLabel_LabelListVisibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Show the label in the label list.
 pattern Label_LabelListVisibility_LabelShow :: Label_LabelListVisibility
@@ -459,20 +437,21 @@ pattern Label_LabelListVisibility_LabelHide = Label_LabelListVisibility "labelHi
   Label_LabelListVisibility_LabelShow,
   Label_LabelListVisibility_LabelShowIfUnread,
   Label_LabelListVisibility_LabelHide,
-  Label_LabelListVisibility #-}
+  Label_LabelListVisibility
+  #-}
 
 -- | The visibility of messages with this label in the message list in the Gmail web interface.
-newtype Label_MessageListVisibility = Label_MessageListVisibility { fromLabel_MessageListVisibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Label_MessageListVisibility = Label_MessageListVisibility {fromLabel_MessageListVisibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Show the label in the message list.
 pattern Label_MessageListVisibility_Show :: Label_MessageListVisibility
@@ -485,20 +464,21 @@ pattern Label_MessageListVisibility_Hide = Label_MessageListVisibility "hide"
 {-# COMPLETE
   Label_MessageListVisibility_Show,
   Label_MessageListVisibility_Hide,
-  Label_MessageListVisibility #-}
+  Label_MessageListVisibility
+  #-}
 
 -- | The owner type for the label. User labels are created by the user and can be modified and deleted by the user and can be applied to any message or thread. System labels are internally created and cannot be added, modified, or deleted. System labels may be able to be applied to or removed from messages and threads under some circumstances but this is not guaranteed. For example, users can apply and remove the @INBOX@ and @UNREAD@ labels from messages and threads, but cannot apply or remove the @DRAFTS@ or @SENT@ labels from messages or threads.
-newtype Label_Type = Label_Type { fromLabel_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Label_Type = Label_Type {fromLabel_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Labels created by Gmail.
 pattern Label_Type_System :: Label_Type
@@ -511,20 +491,21 @@ pattern Label_Type_User = Label_Type "user"
 {-# COMPLETE
   Label_Type_System,
   Label_Type_User,
-  Label_Type #-}
+  Label_Type
+  #-}
 
 -- | The range of messages which are accessible via POP.
-newtype PopSettings_AccessWindow = PopSettings_AccessWindow { fromPopSettings_AccessWindow :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PopSettings_AccessWindow = PopSettings_AccessWindow {fromPopSettings_AccessWindow :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified range.
 pattern PopSettings_AccessWindow_AccessWindowUnspecified :: PopSettings_AccessWindow
@@ -547,20 +528,21 @@ pattern PopSettings_AccessWindow_AllMail = PopSettings_AccessWindow "allMail"
   PopSettings_AccessWindow_Disabled,
   PopSettings_AccessWindow_FromNowOn,
   PopSettings_AccessWindow_AllMail,
-  PopSettings_AccessWindow #-}
+  PopSettings_AccessWindow
+  #-}
 
 -- | The action that will be executed on a message after it has been fetched via POP.
-newtype PopSettings_Disposition = PopSettings_Disposition { fromPopSettings_Disposition :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PopSettings_Disposition = PopSettings_Disposition {fromPopSettings_Disposition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified disposition.
 pattern PopSettings_Disposition_DispositionUnspecified :: PopSettings_Disposition
@@ -588,20 +570,21 @@ pattern PopSettings_Disposition_MarkRead = PopSettings_Disposition "markRead"
   PopSettings_Disposition_Archive,
   PopSettings_Disposition_Trash,
   PopSettings_Disposition_MarkRead,
-  PopSettings_Disposition #-}
+  PopSettings_Disposition
+  #-}
 
 -- | Indicates whether this address has been verified for use as a send-as alias. Read-only. This setting only applies to custom \"from\" aliases.
-newtype SendAs_VerificationStatus = SendAs_VerificationStatus { fromSendAs_VerificationStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SendAs_VerificationStatus = SendAs_VerificationStatus {fromSendAs_VerificationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified verification status.
 pattern SendAs_VerificationStatus_VerificationStatusUnspecified :: SendAs_VerificationStatus
@@ -619,20 +602,21 @@ pattern SendAs_VerificationStatus_Pending = SendAs_VerificationStatus "pending"
   SendAs_VerificationStatus_VerificationStatusUnspecified,
   SendAs_VerificationStatus_Accepted,
   SendAs_VerificationStatus_Pending,
-  SendAs_VerificationStatus #-}
+  SendAs_VerificationStatus
+  #-}
 
 -- | The protocol that will be used to secure communication with the SMTP service. Required.
-newtype SmtpMsa_SecurityMode = SmtpMsa_SecurityMode { fromSmtpMsa_SecurityMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SmtpMsa_SecurityMode = SmtpMsa_SecurityMode {fromSmtpMsa_SecurityMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified security mode.
 pattern SmtpMsa_SecurityMode_SecurityModeUnspecified :: SmtpMsa_SecurityMode
@@ -655,20 +639,21 @@ pattern SmtpMsa_SecurityMode_Starttls = SmtpMsa_SecurityMode "starttls"
   SmtpMsa_SecurityMode_None,
   SmtpMsa_SecurityMode_Ssl,
   SmtpMsa_SecurityMode_Starttls,
-  SmtpMsa_SecurityMode #-}
+  SmtpMsa_SecurityMode
+  #-}
 
 -- | Filtering behavior of labelIds list specified.
-newtype WatchRequest_LabelFilterAction = WatchRequest_LabelFilterAction { fromWatchRequest_LabelFilterAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WatchRequest_LabelFilterAction = WatchRequest_LabelFilterAction {fromWatchRequest_LabelFilterAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Only get push notifications for message changes relating to labelIds specified.
 pattern WatchRequest_LabelFilterAction_Include :: WatchRequest_LabelFilterAction
@@ -681,20 +666,21 @@ pattern WatchRequest_LabelFilterAction_Exclude = WatchRequest_LabelFilterAction 
 {-# COMPLETE
   WatchRequest_LabelFilterAction_Include,
   WatchRequest_LabelFilterAction_Exclude,
-  WatchRequest_LabelFilterAction #-}
+  WatchRequest_LabelFilterAction
+  #-}
 
 -- | The format to return the draft in.
-newtype UsersDraftsGetFormat = UsersDraftsGetFormat { fromUsersDraftsGetFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersDraftsGetFormat = UsersDraftsGetFormat {fromUsersDraftsGetFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Returns only email message ID and labels; does not return the email headers, body, or payload.
 pattern UsersDraftsGetFormat_Minimal :: UsersDraftsGetFormat
@@ -717,34 +703,35 @@ pattern UsersDraftsGetFormat_Metadata = UsersDraftsGetFormat "metadata"
   UsersDraftsGetFormat_Full,
   UsersDraftsGetFormat_Raw,
   UsersDraftsGetFormat_Metadata,
-  UsersDraftsGetFormat #-}
+  UsersDraftsGetFormat
+  #-}
 
 -- | History types to be returned by the function
-newtype UsersHistoryListHistoryTypes = UsersHistoryListHistoryTypes { fromUsersHistoryListHistoryTypes :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersHistoryListHistoryTypes = UsersHistoryListHistoryTypes {fromUsersHistoryListHistoryTypes :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern UsersHistoryListHistoryTypes_MessageAdded :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_MessageAdded = UsersHistoryListHistoryTypes "messageAdded"
 
--- | 
+-- |
 pattern UsersHistoryListHistoryTypes_MessageDeleted :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_MessageDeleted = UsersHistoryListHistoryTypes "messageDeleted"
 
--- | 
+-- |
 pattern UsersHistoryListHistoryTypes_LabelAdded :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_LabelAdded = UsersHistoryListHistoryTypes "labelAdded"
 
--- | 
+-- |
 pattern UsersHistoryListHistoryTypes_LabelRemoved :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_LabelRemoved = UsersHistoryListHistoryTypes "labelRemoved"
 
@@ -753,20 +740,21 @@ pattern UsersHistoryListHistoryTypes_LabelRemoved = UsersHistoryListHistoryTypes
   UsersHistoryListHistoryTypes_MessageDeleted,
   UsersHistoryListHistoryTypes_LabelAdded,
   UsersHistoryListHistoryTypes_LabelRemoved,
-  UsersHistoryListHistoryTypes #-}
+  UsersHistoryListHistoryTypes
+  #-}
 
 -- | The format to return the message in.
-newtype UsersMessagesGetFormat = UsersMessagesGetFormat { fromUsersMessagesGetFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersMessagesGetFormat = UsersMessagesGetFormat {fromUsersMessagesGetFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Returns only email message ID and labels; does not return the email headers, body, or payload.
 pattern UsersMessagesGetFormat_Minimal :: UsersMessagesGetFormat
@@ -789,20 +777,21 @@ pattern UsersMessagesGetFormat_Metadata = UsersMessagesGetFormat "metadata"
   UsersMessagesGetFormat_Full,
   UsersMessagesGetFormat_Raw,
   UsersMessagesGetFormat_Metadata,
-  UsersMessagesGetFormat #-}
+  UsersMessagesGetFormat
+  #-}
 
 -- | Source for Gmail\'s internal date of the message.
-newtype UsersMessagesImportInternalDateSource = UsersMessagesImportInternalDateSource { fromUsersMessagesImportInternalDateSource :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersMessagesImportInternalDateSource = UsersMessagesImportInternalDateSource {fromUsersMessagesImportInternalDateSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Internal message date set to current time when received by Gmail.
 pattern UsersMessagesImportInternalDateSource_ReceivedTime :: UsersMessagesImportInternalDateSource
@@ -815,20 +804,21 @@ pattern UsersMessagesImportInternalDateSource_DateHeader = UsersMessagesImportIn
 {-# COMPLETE
   UsersMessagesImportInternalDateSource_ReceivedTime,
   UsersMessagesImportInternalDateSource_DateHeader,
-  UsersMessagesImportInternalDateSource #-}
+  UsersMessagesImportInternalDateSource
+  #-}
 
 -- | Source for Gmail\'s internal date of the message.
-newtype UsersMessagesInsertInternalDateSource = UsersMessagesInsertInternalDateSource { fromUsersMessagesInsertInternalDateSource :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersMessagesInsertInternalDateSource = UsersMessagesInsertInternalDateSource {fromUsersMessagesInsertInternalDateSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Internal message date set to current time when received by Gmail.
 pattern UsersMessagesInsertInternalDateSource_ReceivedTime :: UsersMessagesInsertInternalDateSource
@@ -841,20 +831,21 @@ pattern UsersMessagesInsertInternalDateSource_DateHeader = UsersMessagesInsertIn
 {-# COMPLETE
   UsersMessagesInsertInternalDateSource_ReceivedTime,
   UsersMessagesInsertInternalDateSource_DateHeader,
-  UsersMessagesInsertInternalDateSource #-}
+  UsersMessagesInsertInternalDateSource
+  #-}
 
 -- | The format to return the messages in.
-newtype UsersThreadsGetFormat = UsersThreadsGetFormat { fromUsersThreadsGetFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersThreadsGetFormat = UsersThreadsGetFormat {fromUsersThreadsGetFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Returns the full email message data with body content parsed in the @payload@ field; the @raw@ field is not used. Format cannot be used when accessing the api using the gmail.metadata scope.
 pattern UsersThreadsGetFormat_Full :: UsersThreadsGetFormat
@@ -872,4 +863,5 @@ pattern UsersThreadsGetFormat_Minimal = UsersThreadsGetFormat "minimal"
   UsersThreadsGetFormat_Full,
   UsersThreadsGetFormat_Metadata,
   UsersThreadsGetFormat_Minimal,
-  UsersThreadsGetFormat #-}
+  UsersThreadsGetFormat
+  #-}

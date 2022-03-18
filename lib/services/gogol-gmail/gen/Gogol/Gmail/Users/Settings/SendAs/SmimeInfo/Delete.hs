@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,101 +30,108 @@
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.sendAs.smimeInfo.delete@.
 module Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
-    (
-    -- * Resource
-      GmailUsersSettingsSendAsSmimeInfoDeleteResource
+  ( -- * Resource
+    GmailUsersSettingsSendAsSmimeInfoDeleteResource,
 
     -- ** Constructing a Request
-    , newGmailUsersSettingsSendAsSmimeInfoDelete
-    , GmailUsersSettingsSendAsSmimeInfoDelete
-    ) where
+    newGmailUsersSettingsSendAsSmimeInfoDelete,
+    GmailUsersSettingsSendAsSmimeInfoDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Gmail.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @gmail.users.settings.sendAs.smimeInfo.delete@ method which the
 -- 'GmailUsersSettingsSendAsSmimeInfoDelete' request conforms to.
-type GmailUsersSettingsSendAsSmimeInfoDeleteResource
-     =
-     "gmail" Core.:>
-       "v1" Core.:>
-         "users" Core.:>
-           Core.Capture "userId" Core.Text Core.:>
-             "settings" Core.:>
-               "sendAs" Core.:>
-                 Core.Capture "sendAsEmail" Core.Text Core.:>
-                   "smimeInfo" Core.:>
-                     Core.Capture "id" Core.Text Core.:>
-                       Core.QueryParam "$.xgafv" Xgafv Core.:>
-                         Core.QueryParam "access_token" Core.Text Core.:>
-                           Core.QueryParam "callback" Core.Text Core.:>
-                             Core.QueryParam "uploadType" Core.Text Core.:>
-                               Core.QueryParam "upload_protocol" Core.Text
-                                 Core.:>
-                                 Core.QueryParam "alt" Core.AltJSON Core.:>
-                                   Core.Delete '[Core.JSON] ()
+type GmailUsersSettingsSendAsSmimeInfoDeleteResource =
+  "gmail"
+    Core.:> "v1"
+    Core.:> "users"
+    Core.:> Core.Capture "userId" Core.Text
+    Core.:> "settings"
+    Core.:> "sendAs"
+    Core.:> Core.Capture "sendAsEmail" Core.Text
+    Core.:> "smimeInfo"
+    Core.:> Core.Capture "id" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Deletes the specified S\/MIME config for the specified send-as alias.
 --
 -- /See:/ 'newGmailUsersSettingsSendAsSmimeInfoDelete' smart constructor.
 data GmailUsersSettingsSendAsSmimeInfoDelete = GmailUsersSettingsSendAsSmimeInfoDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The immutable ID for the SmimeInfo.
-    , id :: Core.Text
-      -- | The email address that appears in the \"From:\" header for mail sent using this alias.
-    , sendAsEmail :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-      -- | The user\'s email address. The special value @me@ can be used to indicate the authenticated user.
-    , userId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The immutable ID for the SmimeInfo.
+    id :: Core.Text,
+    -- | The email address that appears in the \"From:\" header for mail sent using this alias.
+    sendAsEmail :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | The user\'s email address. The special value @me@ can be used to indicate the authenticated user.
+    userId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GmailUsersSettingsSendAsSmimeInfoDelete' with the minimum fields required to make a request.
-newGmailUsersSettingsSendAsSmimeInfoDelete 
-    ::  Core.Text
-       -- ^  The immutable ID for the SmimeInfo. See 'id'.
-    -> Core.Text
-       -- ^  The email address that appears in the \"From:\" header for mail sent using this alias. See 'sendAsEmail'.
-    -> GmailUsersSettingsSendAsSmimeInfoDelete
+newGmailUsersSettingsSendAsSmimeInfoDelete ::
+  -- |  The immutable ID for the SmimeInfo. See 'id'.
+  Core.Text ->
+  -- |  The email address that appears in the \"From:\" header for mail sent using this alias. See 'sendAsEmail'.
+  Core.Text ->
+  GmailUsersSettingsSendAsSmimeInfoDelete
 newGmailUsersSettingsSendAsSmimeInfoDelete id sendAsEmail =
   GmailUsersSettingsSendAsSmimeInfoDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , id = id
-    , sendAsEmail = sendAsEmail
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
-    , userId = "me"
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      id = id,
+      sendAsEmail = sendAsEmail,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing,
+      userId = "me"
     }
 
-instance Core.GoogleRequest
-           GmailUsersSettingsSendAsSmimeInfoDelete
-         where
-        type Rs GmailUsersSettingsSendAsSmimeInfoDelete = ()
-        type Scopes GmailUsersSettingsSendAsSmimeInfoDelete =
-             '["https://www.googleapis.com/auth/gmail.settings.basic",
-               "https://www.googleapis.com/auth/gmail.settings.sharing"]
-        requestClient
-          GmailUsersSettingsSendAsSmimeInfoDelete{..}
-          = go userId sendAsEmail id xgafv accessToken callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              gmailService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           GmailUsersSettingsSendAsSmimeInfoDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    GmailUsersSettingsSendAsSmimeInfoDelete
+  where
+  type Rs GmailUsersSettingsSendAsSmimeInfoDelete = ()
+  type
+    Scopes GmailUsersSettingsSendAsSmimeInfoDelete =
+      '[ "https://www.googleapis.com/auth/gmail.settings.basic",
+         "https://www.googleapis.com/auth/gmail.settings.sharing"
+       ]
+  requestClient
+    GmailUsersSettingsSendAsSmimeInfoDelete {..} =
+      go
+        userId
+        sendAsEmail
+        id
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        gmailService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  GmailUsersSettingsSendAsSmimeInfoDeleteResource
+            )
+            Core.mempty
