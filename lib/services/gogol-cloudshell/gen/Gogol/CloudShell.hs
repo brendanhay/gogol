@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,163 +36,163 @@
 --
 -- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference>
 module Gogol.CloudShell
-  ( -- * Configuration
-    cloudShellService,
+    (
+    -- * Configuration
+      cloudShellService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** cloudshell.operations.cancel
-    CloudShellOperationsCancelResource,
-    newCloudShellOperationsCancel,
-    CloudShellOperationsCancel,
+    , CloudShellOperationsCancelResource
+    , newCloudShellOperationsCancel
+    , CloudShellOperationsCancel
 
     -- ** cloudshell.operations.delete
-    CloudShellOperationsDeleteResource,
-    newCloudShellOperationsDelete,
-    CloudShellOperationsDelete,
+    , CloudShellOperationsDeleteResource
+    , newCloudShellOperationsDelete
+    , CloudShellOperationsDelete
 
     -- ** cloudshell.operations.get
-    CloudShellOperationsGetResource,
-    newCloudShellOperationsGet,
-    CloudShellOperationsGet,
+    , CloudShellOperationsGetResource
+    , newCloudShellOperationsGet
+    , CloudShellOperationsGet
 
     -- ** cloudshell.operations.list
-    CloudShellOperationsListResource,
-    newCloudShellOperationsList,
-    CloudShellOperationsList,
+    , CloudShellOperationsListResource
+    , newCloudShellOperationsList
+    , CloudShellOperationsList
 
     -- ** cloudshell.users.environments.addPublicKey
-    CloudShellUsersEnvironmentsAddPublicKeyResource,
-    newCloudShellUsersEnvironmentsAddPublicKey,
-    CloudShellUsersEnvironmentsAddPublicKey,
+    , CloudShellUsersEnvironmentsAddPublicKeyResource
+    , newCloudShellUsersEnvironmentsAddPublicKey
+    , CloudShellUsersEnvironmentsAddPublicKey
 
     -- ** cloudshell.users.environments.authorize
-    CloudShellUsersEnvironmentsAuthorizeResource,
-    newCloudShellUsersEnvironmentsAuthorize,
-    CloudShellUsersEnvironmentsAuthorize,
+    , CloudShellUsersEnvironmentsAuthorizeResource
+    , newCloudShellUsersEnvironmentsAuthorize
+    , CloudShellUsersEnvironmentsAuthorize
 
     -- ** cloudshell.users.environments.get
-    CloudShellUsersEnvironmentsGetResource,
-    newCloudShellUsersEnvironmentsGet,
-    CloudShellUsersEnvironmentsGet,
+    , CloudShellUsersEnvironmentsGetResource
+    , newCloudShellUsersEnvironmentsGet
+    , CloudShellUsersEnvironmentsGet
 
     -- ** cloudshell.users.environments.removePublicKey
-    CloudShellUsersEnvironmentsRemovePublicKeyResource,
-    newCloudShellUsersEnvironmentsRemovePublicKey,
-    CloudShellUsersEnvironmentsRemovePublicKey,
+    , CloudShellUsersEnvironmentsRemovePublicKeyResource
+    , newCloudShellUsersEnvironmentsRemovePublicKey
+    , CloudShellUsersEnvironmentsRemovePublicKey
 
     -- ** cloudshell.users.environments.start
-    CloudShellUsersEnvironmentsStartResource,
-    newCloudShellUsersEnvironmentsStart,
-    CloudShellUsersEnvironmentsStart,
+    , CloudShellUsersEnvironmentsStartResource
+    , newCloudShellUsersEnvironmentsStart
+    , CloudShellUsersEnvironmentsStart
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AddPublicKeyMetadata
-    AddPublicKeyMetadata (..),
-    newAddPublicKeyMetadata,
+    , AddPublicKeyMetadata (..)
+    , newAddPublicKeyMetadata
 
     -- ** AddPublicKeyRequest
-    AddPublicKeyRequest (..),
-    newAddPublicKeyRequest,
+    , AddPublicKeyRequest (..)
+    , newAddPublicKeyRequest
 
     -- ** AddPublicKeyResponse
-    AddPublicKeyResponse (..),
-    newAddPublicKeyResponse,
+    , AddPublicKeyResponse (..)
+    , newAddPublicKeyResponse
 
     -- ** AuthorizeEnvironmentMetadata
-    AuthorizeEnvironmentMetadata (..),
-    newAuthorizeEnvironmentMetadata,
+    , AuthorizeEnvironmentMetadata (..)
+    , newAuthorizeEnvironmentMetadata
 
     -- ** AuthorizeEnvironmentRequest
-    AuthorizeEnvironmentRequest (..),
-    newAuthorizeEnvironmentRequest,
+    , AuthorizeEnvironmentRequest (..)
+    , newAuthorizeEnvironmentRequest
 
     -- ** AuthorizeEnvironmentResponse
-    AuthorizeEnvironmentResponse (..),
-    newAuthorizeEnvironmentResponse,
+    , AuthorizeEnvironmentResponse (..)
+    , newAuthorizeEnvironmentResponse
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** CreateEnvironmentMetadata
-    CreateEnvironmentMetadata (..),
-    newCreateEnvironmentMetadata,
+    , CreateEnvironmentMetadata (..)
+    , newCreateEnvironmentMetadata
 
     -- ** DeleteEnvironmentMetadata
-    DeleteEnvironmentMetadata (..),
-    newDeleteEnvironmentMetadata,
+    , DeleteEnvironmentMetadata (..)
+    , newDeleteEnvironmentMetadata
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Environment
-    Environment (..),
-    newEnvironment,
+    , Environment (..)
+    , newEnvironment
 
     -- ** Environment_State
-    Environment_State (..),
+    , Environment_State (..)
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** RemovePublicKeyMetadata
-    RemovePublicKeyMetadata (..),
-    newRemovePublicKeyMetadata,
+    , RemovePublicKeyMetadata (..)
+    , newRemovePublicKeyMetadata
 
     -- ** RemovePublicKeyRequest
-    RemovePublicKeyRequest (..),
-    newRemovePublicKeyRequest,
+    , RemovePublicKeyRequest (..)
+    , newRemovePublicKeyRequest
 
     -- ** RemovePublicKeyResponse
-    RemovePublicKeyResponse (..),
-    newRemovePublicKeyResponse,
+    , RemovePublicKeyResponse (..)
+    , newRemovePublicKeyResponse
 
     -- ** StartEnvironmentMetadata
-    StartEnvironmentMetadata (..),
-    newStartEnvironmentMetadata,
+    , StartEnvironmentMetadata (..)
+    , newStartEnvironmentMetadata
 
     -- ** StartEnvironmentMetadata_State
-    StartEnvironmentMetadata_State (..),
+    , StartEnvironmentMetadata_State (..)
 
     -- ** StartEnvironmentRequest
-    StartEnvironmentRequest (..),
-    newStartEnvironmentRequest,
+    , StartEnvironmentRequest (..)
+    , newStartEnvironmentRequest
 
     -- ** StartEnvironmentResponse
-    StartEnvironmentResponse (..),
-    newStartEnvironmentResponse,
+    , StartEnvironmentResponse (..)
+    , newStartEnvironmentResponse
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
-  )
-where
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
+    ) where
 
 import Gogol.CloudShell.Operations.Cancel
 import Gogol.CloudShell.Operations.Delete
