@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,118 +30,118 @@
 --
 -- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference>
 module Gogol.YouTubeAnalytics
-    (
-    -- * Configuration
-      youTubeAnalyticsService
+  ( -- * Configuration
+    youTubeAnalyticsService,
 
     -- * OAuth Scopes
-    , youtubeScope
-    , youtubeReadOnlyScope
-    , youtubepartnerScope
-    , youtubeAnalyticsMonetaryReadOnlyScope
-    , youtubeAnalyticsReadOnlyScope
+    youtubeScope,
+    youtubeReadOnlyScope,
+    youtubepartnerScope,
+    youtubeAnalyticsMonetaryReadOnlyScope,
+    youtubeAnalyticsReadOnlyScope,
 
     -- * Resources
 
     -- ** youtubeAnalytics.groupItems.delete
-    , YouTubeAnalyticsGroupItemsDeleteResource
-    , newYouTubeAnalyticsGroupItemsDelete
-    , YouTubeAnalyticsGroupItemsDelete
+    YouTubeAnalyticsGroupItemsDeleteResource,
+    newYouTubeAnalyticsGroupItemsDelete,
+    YouTubeAnalyticsGroupItemsDelete,
 
     -- ** youtubeAnalytics.groupItems.insert
-    , YouTubeAnalyticsGroupItemsInsertResource
-    , newYouTubeAnalyticsGroupItemsInsert
-    , YouTubeAnalyticsGroupItemsInsert
+    YouTubeAnalyticsGroupItemsInsertResource,
+    newYouTubeAnalyticsGroupItemsInsert,
+    YouTubeAnalyticsGroupItemsInsert,
 
     -- ** youtubeAnalytics.groupItems.list
-    , YouTubeAnalyticsGroupItemsListResource
-    , newYouTubeAnalyticsGroupItemsList
-    , YouTubeAnalyticsGroupItemsList
+    YouTubeAnalyticsGroupItemsListResource,
+    newYouTubeAnalyticsGroupItemsList,
+    YouTubeAnalyticsGroupItemsList,
 
     -- ** youtubeAnalytics.groups.delete
-    , YouTubeAnalyticsGroupsDeleteResource
-    , newYouTubeAnalyticsGroupsDelete
-    , YouTubeAnalyticsGroupsDelete
+    YouTubeAnalyticsGroupsDeleteResource,
+    newYouTubeAnalyticsGroupsDelete,
+    YouTubeAnalyticsGroupsDelete,
 
     -- ** youtubeAnalytics.groups.insert
-    , YouTubeAnalyticsGroupsInsertResource
-    , newYouTubeAnalyticsGroupsInsert
-    , YouTubeAnalyticsGroupsInsert
+    YouTubeAnalyticsGroupsInsertResource,
+    newYouTubeAnalyticsGroupsInsert,
+    YouTubeAnalyticsGroupsInsert,
 
     -- ** youtubeAnalytics.groups.list
-    , YouTubeAnalyticsGroupsListResource
-    , newYouTubeAnalyticsGroupsList
-    , YouTubeAnalyticsGroupsList
+    YouTubeAnalyticsGroupsListResource,
+    newYouTubeAnalyticsGroupsList,
+    YouTubeAnalyticsGroupsList,
 
     -- ** youtubeAnalytics.groups.update
-    , YouTubeAnalyticsGroupsUpdateResource
-    , newYouTubeAnalyticsGroupsUpdate
-    , YouTubeAnalyticsGroupsUpdate
+    YouTubeAnalyticsGroupsUpdateResource,
+    newYouTubeAnalyticsGroupsUpdate,
+    YouTubeAnalyticsGroupsUpdate,
 
     -- ** youtubeAnalytics.reports.query
-    , YouTubeAnalyticsReportsQueryResource
-    , newYouTubeAnalyticsReportsQuery
-    , YouTubeAnalyticsReportsQuery
+    YouTubeAnalyticsReportsQueryResource,
+    newYouTubeAnalyticsReportsQuery,
+    YouTubeAnalyticsReportsQuery,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** EmptyResponse
-    , EmptyResponse (..)
-    , newEmptyResponse
+    EmptyResponse (..),
+    newEmptyResponse,
 
     -- ** ErrorProto
-    , ErrorProto (..)
-    , newErrorProto
+    ErrorProto (..),
+    newErrorProto,
 
     -- ** ErrorProto_LocationType
-    , ErrorProto_LocationType (..)
+    ErrorProto_LocationType (..),
 
     -- ** Errors
-    , Errors (..)
-    , newErrors
+    Errors (..),
+    newErrors,
 
     -- ** Errors_Code
-    , Errors_Code (..)
+    Errors_Code (..),
 
     -- ** Group
-    , Group (..)
-    , newGroup
+    Group (..),
+    newGroup,
 
     -- ** GroupContentDetails
-    , GroupContentDetails (..)
-    , newGroupContentDetails
+    GroupContentDetails (..),
+    newGroupContentDetails,
 
     -- ** GroupItem
-    , GroupItem (..)
-    , newGroupItem
+    GroupItem (..),
+    newGroupItem,
 
     -- ** GroupItemResource
-    , GroupItemResource (..)
-    , newGroupItemResource
+    GroupItemResource (..),
+    newGroupItemResource,
 
     -- ** GroupSnippet
-    , GroupSnippet (..)
-    , newGroupSnippet
+    GroupSnippet (..),
+    newGroupSnippet,
 
     -- ** ListGroupItemsResponse
-    , ListGroupItemsResponse (..)
-    , newListGroupItemsResponse
+    ListGroupItemsResponse (..),
+    newListGroupItemsResponse,
 
     -- ** ListGroupsResponse
-    , ListGroupsResponse (..)
-    , newListGroupsResponse
+    ListGroupsResponse (..),
+    newListGroupsResponse,
 
     -- ** QueryResponse
-    , QueryResponse (..)
-    , newQueryResponse
+    QueryResponse (..),
+    newQueryResponse,
 
     -- ** ResultTableColumnHeader
-    , ResultTableColumnHeader (..)
-    , newResultTableColumnHeader
-    ) where
+    ResultTableColumnHeader (..),
+    newResultTableColumnHeader,
+  )
+where
 
 import Gogol.YouTubeAnalytics.GroupItems.Delete
 import Gogol.YouTubeAnalytics.GroupItems.Insert
