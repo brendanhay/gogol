@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Tracing
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,205 +30,139 @@
 --
 -- /See:/ <https://cloud.google.com/trace Google Tracing API Reference>
 module Network.Google.Tracing
-    (
-    -- * Service Configuration
-      tracingService
+  ( -- * Configuration
+    tracingService,
 
     -- * OAuth Scopes
-    , traceAppendScope
-    , traceReadOnlyScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , TracingAPI
+    cloudPlatformScope,
+    traceAppendScope,
+    traceReadOnlyScope,
 
     -- * Resources
 
     -- ** tracing.projects.traces.batchWrite
-    , module Network.Google.Resource.Tracing.Projects.Traces.BatchWrite
+    TracingProjectsTracesBatchWriteResource,
+    newTracingProjectsTracesBatchWrite,
+    TracingProjectsTracesBatchWrite,
 
     -- ** tracing.projects.traces.list
-    , module Network.Google.Resource.Tracing.Projects.Traces.List
+    TracingProjectsTracesListResource,
+    newTracingProjectsTracesList,
+    TracingProjectsTracesList,
 
     -- ** tracing.projects.traces.listSpans
-    , module Network.Google.Resource.Tracing.Projects.Traces.ListSpans
+    TracingProjectsTracesListSpansResource,
+    newTracingProjectsTracesListSpans,
+    TracingProjectsTracesListSpans,
 
     -- ** tracing.projects.traces.spans.create
-    , module Network.Google.Resource.Tracing.Projects.Traces.Spans.Create
+    TracingProjectsTracesSpansCreateResource,
+    newTracingProjectsTracesSpansCreate,
+    TracingProjectsTracesSpansCreate,
 
     -- * Types
 
-    -- ** Span
-    , Span
-    , span
-    , sStatus
-    , sStartTime
-    , sName
-    , sStackTrace
-    , sAttributes
-    , sEndTime
-    , sTimeEvents
-    , sDisplayName
-    , sParentSpanId
-    , sLinks
-    , sSpanId
-
-    -- ** TruncatableString
-    , TruncatableString
-    , truncatableString
-    , tsTruncatedCharacterCount
-    , tsValue
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** AttributesAttributeMap
-    , AttributesAttributeMap
-    , attributesAttributeMap
-    , aamAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Annotation
-    , Annotation
-    , annotation
-    , aAttributes
-    , aDescription
+    Annotation (..),
+    newAnnotation,
 
     -- ** AttributeValue
-    , AttributeValue
-    , attributeValue
-    , avBoolValue
-    , avIntValue
-    , avStringValue
-
-    -- ** NetworkEventType
-    , NetworkEventType (..)
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** Link
-    , Link
-    , link
-    , lTraceId
-    , lType
-    , lSpanId
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** ListSpansResponse
-    , ListSpansResponse
-    , listSpansResponse
-    , lsrNextPageToken
-    , lsrSpans
-
-    -- ** StackTrace
-    , StackTrace
-    , stackTrace
-    , stStackTraceHashId
-    , stStackFrames
-
-    -- ** BatchWriteSpansRequest
-    , BatchWriteSpansRequest
-    , batchWriteSpansRequest
-    , bwsrSpans
+    AttributeValue (..),
+    newAttributeValue,
 
     -- ** Attributes
-    , Attributes
-    , attributes
-    , aDroppedAttributesCount
-    , aAttributeMap
+    Attributes (..),
+    newAttributes,
 
-    -- ** NetworkEvent
-    , NetworkEvent
-    , networkEvent
-    , neTime
-    , neMessageSize
-    , neType
-    , neMessageId
+    -- ** Attributes_AttributeMap
+    Attributes_AttributeMap (..),
+    newAttributes_AttributeMap,
 
-    -- ** Module
-    , Module
-    , module'
-    , mBuildId
-    , mModule
+    -- ** BatchWriteSpansRequest
+    BatchWriteSpansRequest (..),
+    newBatchWriteSpansRequest,
 
-    -- ** TimeEvents
-    , TimeEvents
-    , timeEvents
-    , teDroppedAnnotationsCount
-    , teDroppedNetworkEventsCount
-    , teTimeEvent
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** Link
+    Link (..),
+    newLink,
 
-    -- ** StackFrames
-    , StackFrames
-    , stackFrames
-    , sfDroppedFramesCount
-    , sfFrame
-
-    -- ** LinkType
-    , LinkType (..)
-
-    -- ** StackFrame
-    , StackFrame
-    , stackFrame
-    , sfLoadModule
-    , sfOriginalFunctionName
-    , sfLineNumber
-    , sfSourceVersion
-    , sfFunctionName
-    , sfColumnNumber
-    , sfFileName
+    -- ** Link_Type
+    Link_Type (..),
 
     -- ** Links
-    , Links
-    , links
-    , lDroppedLinksCount
-    , lLink
+    Links (..),
+    newLinks,
+
+    -- ** ListSpansResponse
+    ListSpansResponse (..),
+    newListSpansResponse,
 
     -- ** ListTracesResponse
-    , ListTracesResponse
-    , listTracesResponse
-    , ltrNextPageToken
-    , ltrTraces
+    ListTracesResponse (..),
+    newListTracesResponse,
+
+    -- ** Module
+    Module (..),
+    newModule,
+
+    -- ** NetworkEvent
+    NetworkEvent (..),
+    newNetworkEvent,
+
+    -- ** NetworkEvent_Type
+    NetworkEvent_Type (..),
+
+    -- ** Span
+    Span (..),
+    newSpan,
+
+    -- ** StackFrame
+    StackFrame (..),
+    newStackFrame,
+
+    -- ** StackFrames
+    StackFrames (..),
+    newStackFrames,
+
+    -- ** StackTrace
+    StackTrace (..),
+    newStackTrace,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TimeEvent
-    , TimeEvent
-    , timeEvent
-    , teAnnotation
-    , teTime
-    , teNetworkEvent
+    TimeEvent (..),
+    newTimeEvent,
+
+    -- ** TimeEvents
+    TimeEvents (..),
+    newTimeEvents,
 
     -- ** Trace
-    , Trace
-    , trace
-    , tName
-    ) where
+    Trace (..),
+    newTrace,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Tracing.Projects.Traces.BatchWrite
-import Network.Google.Resource.Tracing.Projects.Traces.List
-import Network.Google.Resource.Tracing.Projects.Traces.ListSpans
-import Network.Google.Resource.Tracing.Projects.Traces.Spans.Create
+    -- ** TruncatableString
+    TruncatableString (..),
+    newTruncatableString,
+  )
+where
+
+import Network.Google.Tracing.Projects.Traces.BatchWrite
+import Network.Google.Tracing.Projects.Traces.List
+import Network.Google.Tracing.Projects.Traces.ListSpans
+import Network.Google.Tracing.Projects.Traces.Spans.Create
 import Network.Google.Tracing.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Tracing API service.
-type TracingAPI =
-     ProjectsTracesSpansCreateResource :<|>
-       ProjectsTracesListResource
-       :<|> ProjectsTracesBatchWriteResource
-       :<|> ProjectsTracesListSpansResource
