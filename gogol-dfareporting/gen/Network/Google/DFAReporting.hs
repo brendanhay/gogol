@@ -1,4048 +1,2848 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DFAReporting
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Build applications to efficiently manage large or complex trafficking,
--- reporting, and attribution workflows for Campaign Manager 360.
+-- Build applications to efficiently manage large or complex trafficking, reporting, and attribution workflows for Campaign Manager 360.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference>
 module Network.Google.DFAReporting
-    (
-    -- * Service Configuration
-      dFAReportingService
+  ( -- * Configuration
+    dFAReportingService,
 
     -- * OAuth Scopes
-    , dFAReportingScope
-    , ddmconversionsScope
-    , dfatraffickingScope
-
-    -- * API Declaration
-    , DFAReportingAPI
+    ddmconversionsScope,
+    dFAReportingScope,
+    dfatraffickingScope,
 
     -- * Resources
 
     -- ** dfareporting.accountActiveAdSummaries.get
-    , module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
+    DFAReportingAccountActiveAdSummariesGetResource,
+    newDFAReportingAccountActiveAdSummariesGet,
+    DFAReportingAccountActiveAdSummariesGet,
 
     -- ** dfareporting.accountPermissionGroups.get
-    , module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
+    DFAReportingAccountPermissionGroupsGetResource,
+    newDFAReportingAccountPermissionGroupsGet,
+    DFAReportingAccountPermissionGroupsGet,
 
     -- ** dfareporting.accountPermissionGroups.list
-    , module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
+    DFAReportingAccountPermissionGroupsListResource,
+    newDFAReportingAccountPermissionGroupsList,
+    DFAReportingAccountPermissionGroupsList,
 
     -- ** dfareporting.accountPermissions.get
-    , module Network.Google.Resource.DFAReporting.AccountPermissions.Get
+    DFAReportingAccountPermissionsGetResource,
+    newDFAReportingAccountPermissionsGet,
+    DFAReportingAccountPermissionsGet,
 
     -- ** dfareporting.accountPermissions.list
-    , module Network.Google.Resource.DFAReporting.AccountPermissions.List
+    DFAReportingAccountPermissionsListResource,
+    newDFAReportingAccountPermissionsList,
+    DFAReportingAccountPermissionsList,
 
     -- ** dfareporting.accountUserProfiles.get
-    , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Get
+    DFAReportingAccountUserProfilesGetResource,
+    newDFAReportingAccountUserProfilesGet,
+    DFAReportingAccountUserProfilesGet,
 
     -- ** dfareporting.accountUserProfiles.insert
-    , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
+    DFAReportingAccountUserProfilesInsertResource,
+    newDFAReportingAccountUserProfilesInsert,
+    DFAReportingAccountUserProfilesInsert,
 
     -- ** dfareporting.accountUserProfiles.list
-    , module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
+    DFAReportingAccountUserProfilesListResource,
+    newDFAReportingAccountUserProfilesList,
+    DFAReportingAccountUserProfilesList,
 
     -- ** dfareporting.accountUserProfiles.patch
-    , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
+    DFAReportingAccountUserProfilesPatchResource,
+    newDFAReportingAccountUserProfilesPatch,
+    DFAReportingAccountUserProfilesPatch,
 
     -- ** dfareporting.accountUserProfiles.update
-    , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
+    DFAReportingAccountUserProfilesUpdateResource,
+    newDFAReportingAccountUserProfilesUpdate,
+    DFAReportingAccountUserProfilesUpdate,
 
     -- ** dfareporting.accounts.get
-    , module Network.Google.Resource.DFAReporting.Accounts.Get
+    DFAReportingAccountsGetResource,
+    newDFAReportingAccountsGet,
+    DFAReportingAccountsGet,
 
     -- ** dfareporting.accounts.list
-    , module Network.Google.Resource.DFAReporting.Accounts.List
+    DFAReportingAccountsListResource,
+    newDFAReportingAccountsList,
+    DFAReportingAccountsList,
 
     -- ** dfareporting.accounts.patch
-    , module Network.Google.Resource.DFAReporting.Accounts.Patch
+    DFAReportingAccountsPatchResource,
+    newDFAReportingAccountsPatch,
+    DFAReportingAccountsPatch,
 
     -- ** dfareporting.accounts.update
-    , module Network.Google.Resource.DFAReporting.Accounts.Update
+    DFAReportingAccountsUpdateResource,
+    newDFAReportingAccountsUpdate,
+    DFAReportingAccountsUpdate,
 
     -- ** dfareporting.ads.get
-    , module Network.Google.Resource.DFAReporting.Ads.Get
+    DFAReportingAdsGetResource,
+    newDFAReportingAdsGet,
+    DFAReportingAdsGet,
 
     -- ** dfareporting.ads.insert
-    , module Network.Google.Resource.DFAReporting.Ads.Insert
+    DFAReportingAdsInsertResource,
+    newDFAReportingAdsInsert,
+    DFAReportingAdsInsert,
 
     -- ** dfareporting.ads.list
-    , module Network.Google.Resource.DFAReporting.Ads.List
+    DFAReportingAdsListResource,
+    newDFAReportingAdsList,
+    DFAReportingAdsList,
 
     -- ** dfareporting.ads.patch
-    , module Network.Google.Resource.DFAReporting.Ads.Patch
+    DFAReportingAdsPatchResource,
+    newDFAReportingAdsPatch,
+    DFAReportingAdsPatch,
 
     -- ** dfareporting.ads.update
-    , module Network.Google.Resource.DFAReporting.Ads.Update
+    DFAReportingAdsUpdateResource,
+    newDFAReportingAdsUpdate,
+    DFAReportingAdsUpdate,
 
     -- ** dfareporting.advertiserGroups.delete
-    , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
+    DFAReportingAdvertiserGroupsDeleteResource,
+    newDFAReportingAdvertiserGroupsDelete,
+    DFAReportingAdvertiserGroupsDelete,
 
     -- ** dfareporting.advertiserGroups.get
-    , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
+    DFAReportingAdvertiserGroupsGetResource,
+    newDFAReportingAdvertiserGroupsGet,
+    DFAReportingAdvertiserGroupsGet,
 
     -- ** dfareporting.advertiserGroups.insert
-    , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
+    DFAReportingAdvertiserGroupsInsertResource,
+    newDFAReportingAdvertiserGroupsInsert,
+    DFAReportingAdvertiserGroupsInsert,
 
     -- ** dfareporting.advertiserGroups.list
-    , module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
+    DFAReportingAdvertiserGroupsListResource,
+    newDFAReportingAdvertiserGroupsList,
+    DFAReportingAdvertiserGroupsList,
 
     -- ** dfareporting.advertiserGroups.patch
-    , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
+    DFAReportingAdvertiserGroupsPatchResource,
+    newDFAReportingAdvertiserGroupsPatch,
+    DFAReportingAdvertiserGroupsPatch,
 
     -- ** dfareporting.advertiserGroups.update
-    , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
+    DFAReportingAdvertiserGroupsUpdateResource,
+    newDFAReportingAdvertiserGroupsUpdate,
+    DFAReportingAdvertiserGroupsUpdate,
 
     -- ** dfareporting.advertiserLandingPages.get
-    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Get
+    DFAReportingAdvertiserLandingPagesGetResource,
+    newDFAReportingAdvertiserLandingPagesGet,
+    DFAReportingAdvertiserLandingPagesGet,
 
     -- ** dfareporting.advertiserLandingPages.insert
-    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Insert
+    DFAReportingAdvertiserLandingPagesInsertResource,
+    newDFAReportingAdvertiserLandingPagesInsert,
+    DFAReportingAdvertiserLandingPagesInsert,
 
     -- ** dfareporting.advertiserLandingPages.list
-    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
+    DFAReportingAdvertiserLandingPagesListResource,
+    newDFAReportingAdvertiserLandingPagesList,
+    DFAReportingAdvertiserLandingPagesList,
 
     -- ** dfareporting.advertiserLandingPages.patch
-    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Patch
+    DFAReportingAdvertiserLandingPagesPatchResource,
+    newDFAReportingAdvertiserLandingPagesPatch,
+    DFAReportingAdvertiserLandingPagesPatch,
 
     -- ** dfareporting.advertiserLandingPages.update
-    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Update
+    DFAReportingAdvertiserLandingPagesUpdateResource,
+    newDFAReportingAdvertiserLandingPagesUpdate,
+    DFAReportingAdvertiserLandingPagesUpdate,
 
     -- ** dfareporting.advertisers.get
-    , module Network.Google.Resource.DFAReporting.Advertisers.Get
+    DFAReportingAdvertisersGetResource,
+    newDFAReportingAdvertisersGet,
+    DFAReportingAdvertisersGet,
 
     -- ** dfareporting.advertisers.insert
-    , module Network.Google.Resource.DFAReporting.Advertisers.Insert
+    DFAReportingAdvertisersInsertResource,
+    newDFAReportingAdvertisersInsert,
+    DFAReportingAdvertisersInsert,
 
     -- ** dfareporting.advertisers.list
-    , module Network.Google.Resource.DFAReporting.Advertisers.List
+    DFAReportingAdvertisersListResource,
+    newDFAReportingAdvertisersList,
+    DFAReportingAdvertisersList,
 
     -- ** dfareporting.advertisers.patch
-    , module Network.Google.Resource.DFAReporting.Advertisers.Patch
+    DFAReportingAdvertisersPatchResource,
+    newDFAReportingAdvertisersPatch,
+    DFAReportingAdvertisersPatch,
 
     -- ** dfareporting.advertisers.update
-    , module Network.Google.Resource.DFAReporting.Advertisers.Update
+    DFAReportingAdvertisersUpdateResource,
+    newDFAReportingAdvertisersUpdate,
+    DFAReportingAdvertisersUpdate,
 
     -- ** dfareporting.browsers.list
-    , module Network.Google.Resource.DFAReporting.Browsers.List
+    DFAReportingBrowsersListResource,
+    newDFAReportingBrowsersList,
+    DFAReportingBrowsersList,
 
     -- ** dfareporting.campaignCreativeAssociations.insert
-    , module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
+    DFAReportingCampaignCreativeAssociationsInsertResource,
+    newDFAReportingCampaignCreativeAssociationsInsert,
+    DFAReportingCampaignCreativeAssociationsInsert,
 
     -- ** dfareporting.campaignCreativeAssociations.list
-    , module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
+    DFAReportingCampaignCreativeAssociationsListResource,
+    newDFAReportingCampaignCreativeAssociationsList,
+    DFAReportingCampaignCreativeAssociationsList,
 
     -- ** dfareporting.campaigns.get
-    , module Network.Google.Resource.DFAReporting.Campaigns.Get
+    DFAReportingCampaignsGetResource,
+    newDFAReportingCampaignsGet,
+    DFAReportingCampaignsGet,
 
     -- ** dfareporting.campaigns.insert
-    , module Network.Google.Resource.DFAReporting.Campaigns.Insert
+    DFAReportingCampaignsInsertResource,
+    newDFAReportingCampaignsInsert,
+    DFAReportingCampaignsInsert,
 
     -- ** dfareporting.campaigns.list
-    , module Network.Google.Resource.DFAReporting.Campaigns.List
+    DFAReportingCampaignsListResource,
+    newDFAReportingCampaignsList,
+    DFAReportingCampaignsList,
 
     -- ** dfareporting.campaigns.patch
-    , module Network.Google.Resource.DFAReporting.Campaigns.Patch
+    DFAReportingCampaignsPatchResource,
+    newDFAReportingCampaignsPatch,
+    DFAReportingCampaignsPatch,
 
     -- ** dfareporting.campaigns.update
-    , module Network.Google.Resource.DFAReporting.Campaigns.Update
+    DFAReportingCampaignsUpdateResource,
+    newDFAReportingCampaignsUpdate,
+    DFAReportingCampaignsUpdate,
 
     -- ** dfareporting.changeLogs.get
-    , module Network.Google.Resource.DFAReporting.ChangeLogs.Get
+    DFAReportingChangeLogsGetResource,
+    newDFAReportingChangeLogsGet,
+    DFAReportingChangeLogsGet,
 
     -- ** dfareporting.changeLogs.list
-    , module Network.Google.Resource.DFAReporting.ChangeLogs.List
+    DFAReportingChangeLogsListResource,
+    newDFAReportingChangeLogsList,
+    DFAReportingChangeLogsList,
 
     -- ** dfareporting.cities.list
-    , module Network.Google.Resource.DFAReporting.Cities.List
+    DFAReportingCitiesListResource,
+    newDFAReportingCitiesList,
+    DFAReportingCitiesList,
 
     -- ** dfareporting.connectionTypes.get
-    , module Network.Google.Resource.DFAReporting.ConnectionTypes.Get
+    DFAReportingConnectionTypesGetResource,
+    newDFAReportingConnectionTypesGet,
+    DFAReportingConnectionTypesGet,
 
     -- ** dfareporting.connectionTypes.list
-    , module Network.Google.Resource.DFAReporting.ConnectionTypes.List
+    DFAReportingConnectionTypesListResource,
+    newDFAReportingConnectionTypesList,
+    DFAReportingConnectionTypesList,
 
     -- ** dfareporting.contentCategories.delete
-    , module Network.Google.Resource.DFAReporting.ContentCategories.Delete
+    DFAReportingContentCategoriesDeleteResource,
+    newDFAReportingContentCategoriesDelete,
+    DFAReportingContentCategoriesDelete,
 
     -- ** dfareporting.contentCategories.get
-    , module Network.Google.Resource.DFAReporting.ContentCategories.Get
+    DFAReportingContentCategoriesGetResource,
+    newDFAReportingContentCategoriesGet,
+    DFAReportingContentCategoriesGet,
 
     -- ** dfareporting.contentCategories.insert
-    , module Network.Google.Resource.DFAReporting.ContentCategories.Insert
+    DFAReportingContentCategoriesInsertResource,
+    newDFAReportingContentCategoriesInsert,
+    DFAReportingContentCategoriesInsert,
 
     -- ** dfareporting.contentCategories.list
-    , module Network.Google.Resource.DFAReporting.ContentCategories.List
+    DFAReportingContentCategoriesListResource,
+    newDFAReportingContentCategoriesList,
+    DFAReportingContentCategoriesList,
 
     -- ** dfareporting.contentCategories.patch
-    , module Network.Google.Resource.DFAReporting.ContentCategories.Patch
+    DFAReportingContentCategoriesPatchResource,
+    newDFAReportingContentCategoriesPatch,
+    DFAReportingContentCategoriesPatch,
 
     -- ** dfareporting.contentCategories.update
-    , module Network.Google.Resource.DFAReporting.ContentCategories.Update
+    DFAReportingContentCategoriesUpdateResource,
+    newDFAReportingContentCategoriesUpdate,
+    DFAReportingContentCategoriesUpdate,
 
     -- ** dfareporting.conversions.batchinsert
-    , module Network.Google.Resource.DFAReporting.Conversions.Batchinsert
+    DFAReportingConversionsBatchinsertResource,
+    newDFAReportingConversionsBatchinsert,
+    DFAReportingConversionsBatchinsert,
 
     -- ** dfareporting.conversions.batchupdate
-    , module Network.Google.Resource.DFAReporting.Conversions.Batchupdate
+    DFAReportingConversionsBatchupdateResource,
+    newDFAReportingConversionsBatchupdate,
+    DFAReportingConversionsBatchupdate,
 
     -- ** dfareporting.countries.get
-    , module Network.Google.Resource.DFAReporting.Countries.Get
+    DFAReportingCountriesGetResource,
+    newDFAReportingCountriesGet,
+    DFAReportingCountriesGet,
 
     -- ** dfareporting.countries.list
-    , module Network.Google.Resource.DFAReporting.Countries.List
+    DFAReportingCountriesListResource,
+    newDFAReportingCountriesList,
+    DFAReportingCountriesList,
 
     -- ** dfareporting.creativeAssets.insert
-    , module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
+    DFAReportingCreativeAssetsInsertResource,
+    newDFAReportingCreativeAssetsInsert,
+    DFAReportingCreativeAssetsInsert,
 
     -- ** dfareporting.creativeFieldValues.delete
-    , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
+    DFAReportingCreativeFieldValuesDeleteResource,
+    newDFAReportingCreativeFieldValuesDelete,
+    DFAReportingCreativeFieldValuesDelete,
 
     -- ** dfareporting.creativeFieldValues.get
-    , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
+    DFAReportingCreativeFieldValuesGetResource,
+    newDFAReportingCreativeFieldValuesGet,
+    DFAReportingCreativeFieldValuesGet,
 
     -- ** dfareporting.creativeFieldValues.insert
-    , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
+    DFAReportingCreativeFieldValuesInsertResource,
+    newDFAReportingCreativeFieldValuesInsert,
+    DFAReportingCreativeFieldValuesInsert,
 
     -- ** dfareporting.creativeFieldValues.list
-    , module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
+    DFAReportingCreativeFieldValuesListResource,
+    newDFAReportingCreativeFieldValuesList,
+    DFAReportingCreativeFieldValuesList,
 
     -- ** dfareporting.creativeFieldValues.patch
-    , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
+    DFAReportingCreativeFieldValuesPatchResource,
+    newDFAReportingCreativeFieldValuesPatch,
+    DFAReportingCreativeFieldValuesPatch,
 
     -- ** dfareporting.creativeFieldValues.update
-    , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
+    DFAReportingCreativeFieldValuesUpdateResource,
+    newDFAReportingCreativeFieldValuesUpdate,
+    DFAReportingCreativeFieldValuesUpdate,
 
     -- ** dfareporting.creativeFields.delete
-    , module Network.Google.Resource.DFAReporting.CreativeFields.Delete
+    DFAReportingCreativeFieldsDeleteResource,
+    newDFAReportingCreativeFieldsDelete,
+    DFAReportingCreativeFieldsDelete,
 
     -- ** dfareporting.creativeFields.get
-    , module Network.Google.Resource.DFAReporting.CreativeFields.Get
+    DFAReportingCreativeFieldsGetResource,
+    newDFAReportingCreativeFieldsGet,
+    DFAReportingCreativeFieldsGet,
 
     -- ** dfareporting.creativeFields.insert
-    , module Network.Google.Resource.DFAReporting.CreativeFields.Insert
+    DFAReportingCreativeFieldsInsertResource,
+    newDFAReportingCreativeFieldsInsert,
+    DFAReportingCreativeFieldsInsert,
 
     -- ** dfareporting.creativeFields.list
-    , module Network.Google.Resource.DFAReporting.CreativeFields.List
+    DFAReportingCreativeFieldsListResource,
+    newDFAReportingCreativeFieldsList,
+    DFAReportingCreativeFieldsList,
 
     -- ** dfareporting.creativeFields.patch
-    , module Network.Google.Resource.DFAReporting.CreativeFields.Patch
+    DFAReportingCreativeFieldsPatchResource,
+    newDFAReportingCreativeFieldsPatch,
+    DFAReportingCreativeFieldsPatch,
 
     -- ** dfareporting.creativeFields.update
-    , module Network.Google.Resource.DFAReporting.CreativeFields.Update
+    DFAReportingCreativeFieldsUpdateResource,
+    newDFAReportingCreativeFieldsUpdate,
+    DFAReportingCreativeFieldsUpdate,
 
     -- ** dfareporting.creativeGroups.get
-    , module Network.Google.Resource.DFAReporting.CreativeGroups.Get
+    DFAReportingCreativeGroupsGetResource,
+    newDFAReportingCreativeGroupsGet,
+    DFAReportingCreativeGroupsGet,
 
     -- ** dfareporting.creativeGroups.insert
-    , module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
+    DFAReportingCreativeGroupsInsertResource,
+    newDFAReportingCreativeGroupsInsert,
+    DFAReportingCreativeGroupsInsert,
 
     -- ** dfareporting.creativeGroups.list
-    , module Network.Google.Resource.DFAReporting.CreativeGroups.List
+    DFAReportingCreativeGroupsListResource,
+    newDFAReportingCreativeGroupsList,
+    DFAReportingCreativeGroupsList,
 
     -- ** dfareporting.creativeGroups.patch
-    , module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
+    DFAReportingCreativeGroupsPatchResource,
+    newDFAReportingCreativeGroupsPatch,
+    DFAReportingCreativeGroupsPatch,
 
     -- ** dfareporting.creativeGroups.update
-    , module Network.Google.Resource.DFAReporting.CreativeGroups.Update
+    DFAReportingCreativeGroupsUpdateResource,
+    newDFAReportingCreativeGroupsUpdate,
+    DFAReportingCreativeGroupsUpdate,
 
     -- ** dfareporting.creatives.get
-    , module Network.Google.Resource.DFAReporting.Creatives.Get
+    DFAReportingCreativesGetResource,
+    newDFAReportingCreativesGet,
+    DFAReportingCreativesGet,
 
     -- ** dfareporting.creatives.insert
-    , module Network.Google.Resource.DFAReporting.Creatives.Insert
+    DFAReportingCreativesInsertResource,
+    newDFAReportingCreativesInsert,
+    DFAReportingCreativesInsert,
 
     -- ** dfareporting.creatives.list
-    , module Network.Google.Resource.DFAReporting.Creatives.List
+    DFAReportingCreativesListResource,
+    newDFAReportingCreativesList,
+    DFAReportingCreativesList,
 
     -- ** dfareporting.creatives.patch
-    , module Network.Google.Resource.DFAReporting.Creatives.Patch
+    DFAReportingCreativesPatchResource,
+    newDFAReportingCreativesPatch,
+    DFAReportingCreativesPatch,
 
     -- ** dfareporting.creatives.update
-    , module Network.Google.Resource.DFAReporting.Creatives.Update
+    DFAReportingCreativesUpdateResource,
+    newDFAReportingCreativesUpdate,
+    DFAReportingCreativesUpdate,
 
     -- ** dfareporting.dimensionValues.query
-    , module Network.Google.Resource.DFAReporting.DimensionValues.Query
+    DFAReportingDimensionValuesQueryResource,
+    newDFAReportingDimensionValuesQuery,
+    DFAReportingDimensionValuesQuery,
 
     -- ** dfareporting.directorySites.get
-    , module Network.Google.Resource.DFAReporting.DirectorySites.Get
+    DFAReportingDirectorySitesGetResource,
+    newDFAReportingDirectorySitesGet,
+    DFAReportingDirectorySitesGet,
 
     -- ** dfareporting.directorySites.insert
-    , module Network.Google.Resource.DFAReporting.DirectorySites.Insert
+    DFAReportingDirectorySitesInsertResource,
+    newDFAReportingDirectorySitesInsert,
+    DFAReportingDirectorySitesInsert,
 
     -- ** dfareporting.directorySites.list
-    , module Network.Google.Resource.DFAReporting.DirectorySites.List
+    DFAReportingDirectorySitesListResource,
+    newDFAReportingDirectorySitesList,
+    DFAReportingDirectorySitesList,
 
     -- ** dfareporting.dynamicTargetingKeys.delete
-    , module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
+    DFAReportingDynamicTargetingKeysDeleteResource,
+    newDFAReportingDynamicTargetingKeysDelete,
+    DFAReportingDynamicTargetingKeysDelete,
 
     -- ** dfareporting.dynamicTargetingKeys.insert
-    , module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
+    DFAReportingDynamicTargetingKeysInsertResource,
+    newDFAReportingDynamicTargetingKeysInsert,
+    DFAReportingDynamicTargetingKeysInsert,
 
     -- ** dfareporting.dynamicTargetingKeys.list
-    , module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
+    DFAReportingDynamicTargetingKeysListResource,
+    newDFAReportingDynamicTargetingKeysList,
+    DFAReportingDynamicTargetingKeysList,
 
     -- ** dfareporting.eventTags.delete
-    , module Network.Google.Resource.DFAReporting.EventTags.Delete
+    DFAReportingEventTagsDeleteResource,
+    newDFAReportingEventTagsDelete,
+    DFAReportingEventTagsDelete,
 
     -- ** dfareporting.eventTags.get
-    , module Network.Google.Resource.DFAReporting.EventTags.Get
+    DFAReportingEventTagsGetResource,
+    newDFAReportingEventTagsGet,
+    DFAReportingEventTagsGet,
 
     -- ** dfareporting.eventTags.insert
-    , module Network.Google.Resource.DFAReporting.EventTags.Insert
+    DFAReportingEventTagsInsertResource,
+    newDFAReportingEventTagsInsert,
+    DFAReportingEventTagsInsert,
 
     -- ** dfareporting.eventTags.list
-    , module Network.Google.Resource.DFAReporting.EventTags.List
+    DFAReportingEventTagsListResource,
+    newDFAReportingEventTagsList,
+    DFAReportingEventTagsList,
 
     -- ** dfareporting.eventTags.patch
-    , module Network.Google.Resource.DFAReporting.EventTags.Patch
+    DFAReportingEventTagsPatchResource,
+    newDFAReportingEventTagsPatch,
+    DFAReportingEventTagsPatch,
 
     -- ** dfareporting.eventTags.update
-    , module Network.Google.Resource.DFAReporting.EventTags.Update
+    DFAReportingEventTagsUpdateResource,
+    newDFAReportingEventTagsUpdate,
+    DFAReportingEventTagsUpdate,
 
     -- ** dfareporting.files.get
-    , module Network.Google.Resource.DFAReporting.Files.Get
+    DFAReportingFilesGetResource,
+    newDFAReportingFilesGet,
+    DFAReportingFilesGet,
 
     -- ** dfareporting.files.list
-    , module Network.Google.Resource.DFAReporting.Files.List
+    DFAReportingFilesListResource,
+    newDFAReportingFilesList,
+    DFAReportingFilesList,
 
     -- ** dfareporting.floodlightActivities.delete
-    , module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
+    DFAReportingFloodlightActivitiesDeleteResource,
+    newDFAReportingFloodlightActivitiesDelete,
+    DFAReportingFloodlightActivitiesDelete,
 
     -- ** dfareporting.floodlightActivities.generatetag
-    , module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
+    DFAReportingFloodlightActivitiesGeneratetagResource,
+    newDFAReportingFloodlightActivitiesGeneratetag,
+    DFAReportingFloodlightActivitiesGeneratetag,
 
     -- ** dfareporting.floodlightActivities.get
-    , module Network.Google.Resource.DFAReporting.FloodlightActivities.Get
+    DFAReportingFloodlightActivitiesGetResource,
+    newDFAReportingFloodlightActivitiesGet,
+    DFAReportingFloodlightActivitiesGet,
 
     -- ** dfareporting.floodlightActivities.insert
-    , module Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
+    DFAReportingFloodlightActivitiesInsertResource,
+    newDFAReportingFloodlightActivitiesInsert,
+    DFAReportingFloodlightActivitiesInsert,
 
     -- ** dfareporting.floodlightActivities.list
-    , module Network.Google.Resource.DFAReporting.FloodlightActivities.List
+    DFAReportingFloodlightActivitiesListResource,
+    newDFAReportingFloodlightActivitiesList,
+    DFAReportingFloodlightActivitiesList,
 
     -- ** dfareporting.floodlightActivities.patch
-    , module Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
+    DFAReportingFloodlightActivitiesPatchResource,
+    newDFAReportingFloodlightActivitiesPatch,
+    DFAReportingFloodlightActivitiesPatch,
 
     -- ** dfareporting.floodlightActivities.update
-    , module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
+    DFAReportingFloodlightActivitiesUpdateResource,
+    newDFAReportingFloodlightActivitiesUpdate,
+    DFAReportingFloodlightActivitiesUpdate,
 
     -- ** dfareporting.floodlightActivityGroups.get
-    , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
+    DFAReportingFloodlightActivityGroupsGetResource,
+    newDFAReportingFloodlightActivityGroupsGet,
+    DFAReportingFloodlightActivityGroupsGet,
 
     -- ** dfareporting.floodlightActivityGroups.insert
-    , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
+    DFAReportingFloodlightActivityGroupsInsertResource,
+    newDFAReportingFloodlightActivityGroupsInsert,
+    DFAReportingFloodlightActivityGroupsInsert,
 
     -- ** dfareporting.floodlightActivityGroups.list
-    , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
+    DFAReportingFloodlightActivityGroupsListResource,
+    newDFAReportingFloodlightActivityGroupsList,
+    DFAReportingFloodlightActivityGroupsList,
 
     -- ** dfareporting.floodlightActivityGroups.patch
-    , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
+    DFAReportingFloodlightActivityGroupsPatchResource,
+    newDFAReportingFloodlightActivityGroupsPatch,
+    DFAReportingFloodlightActivityGroupsPatch,
 
     -- ** dfareporting.floodlightActivityGroups.update
-    , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
+    DFAReportingFloodlightActivityGroupsUpdateResource,
+    newDFAReportingFloodlightActivityGroupsUpdate,
+    DFAReportingFloodlightActivityGroupsUpdate,
 
     -- ** dfareporting.floodlightConfigurations.get
-    , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
+    DFAReportingFloodlightConfigurationsGetResource,
+    newDFAReportingFloodlightConfigurationsGet,
+    DFAReportingFloodlightConfigurationsGet,
 
     -- ** dfareporting.floodlightConfigurations.list
-    , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
+    DFAReportingFloodlightConfigurationsListResource,
+    newDFAReportingFloodlightConfigurationsList,
+    DFAReportingFloodlightConfigurationsList,
 
     -- ** dfareporting.floodlightConfigurations.patch
-    , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
+    DFAReportingFloodlightConfigurationsPatchResource,
+    newDFAReportingFloodlightConfigurationsPatch,
+    DFAReportingFloodlightConfigurationsPatch,
 
     -- ** dfareporting.floodlightConfigurations.update
-    , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
+    DFAReportingFloodlightConfigurationsUpdateResource,
+    newDFAReportingFloodlightConfigurationsUpdate,
+    DFAReportingFloodlightConfigurationsUpdate,
 
     -- ** dfareporting.inventoryItems.get
-    , module Network.Google.Resource.DFAReporting.InventoryItems.Get
+    DFAReportingInventoryItemsGetResource,
+    newDFAReportingInventoryItemsGet,
+    DFAReportingInventoryItemsGet,
 
     -- ** dfareporting.inventoryItems.list
-    , module Network.Google.Resource.DFAReporting.InventoryItems.List
+    DFAReportingInventoryItemsListResource,
+    newDFAReportingInventoryItemsList,
+    DFAReportingInventoryItemsList,
 
     -- ** dfareporting.languages.list
-    , module Network.Google.Resource.DFAReporting.Languages.List
+    DFAReportingLanguagesListResource,
+    newDFAReportingLanguagesList,
+    DFAReportingLanguagesList,
 
     -- ** dfareporting.metros.list
-    , module Network.Google.Resource.DFAReporting.Metros.List
+    DFAReportingMetrosListResource,
+    newDFAReportingMetrosList,
+    DFAReportingMetrosList,
 
     -- ** dfareporting.mobileApps.get
-    , module Network.Google.Resource.DFAReporting.MobileApps.Get
+    DFAReportingMobileAppsGetResource,
+    newDFAReportingMobileAppsGet,
+    DFAReportingMobileAppsGet,
 
     -- ** dfareporting.mobileApps.list
-    , module Network.Google.Resource.DFAReporting.MobileApps.List
+    DFAReportingMobileAppsListResource,
+    newDFAReportingMobileAppsList,
+    DFAReportingMobileAppsList,
 
     -- ** dfareporting.mobileCarriers.get
-    , module Network.Google.Resource.DFAReporting.MobileCarriers.Get
+    DFAReportingMobileCarriersGetResource,
+    newDFAReportingMobileCarriersGet,
+    DFAReportingMobileCarriersGet,
 
     -- ** dfareporting.mobileCarriers.list
-    , module Network.Google.Resource.DFAReporting.MobileCarriers.List
+    DFAReportingMobileCarriersListResource,
+    newDFAReportingMobileCarriersList,
+    DFAReportingMobileCarriersList,
 
     -- ** dfareporting.operatingSystemVersions.get
-    , module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
+    DFAReportingOperatingSystemVersionsGetResource,
+    newDFAReportingOperatingSystemVersionsGet,
+    DFAReportingOperatingSystemVersionsGet,
 
     -- ** dfareporting.operatingSystemVersions.list
-    , module Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
+    DFAReportingOperatingSystemVersionsListResource,
+    newDFAReportingOperatingSystemVersionsList,
+    DFAReportingOperatingSystemVersionsList,
 
     -- ** dfareporting.operatingSystems.get
-    , module Network.Google.Resource.DFAReporting.OperatingSystems.Get
+    DFAReportingOperatingSystemsGetResource,
+    newDFAReportingOperatingSystemsGet,
+    DFAReportingOperatingSystemsGet,
 
     -- ** dfareporting.operatingSystems.list
-    , module Network.Google.Resource.DFAReporting.OperatingSystems.List
+    DFAReportingOperatingSystemsListResource,
+    newDFAReportingOperatingSystemsList,
+    DFAReportingOperatingSystemsList,
 
     -- ** dfareporting.orderDocuments.get
-    , module Network.Google.Resource.DFAReporting.OrderDocuments.Get
+    DFAReportingOrderDocumentsGetResource,
+    newDFAReportingOrderDocumentsGet,
+    DFAReportingOrderDocumentsGet,
 
     -- ** dfareporting.orderDocuments.list
-    , module Network.Google.Resource.DFAReporting.OrderDocuments.List
+    DFAReportingOrderDocumentsListResource,
+    newDFAReportingOrderDocumentsList,
+    DFAReportingOrderDocumentsList,
 
     -- ** dfareporting.orders.get
-    , module Network.Google.Resource.DFAReporting.Orders.Get
+    DFAReportingOrdersGetResource,
+    newDFAReportingOrdersGet,
+    DFAReportingOrdersGet,
 
     -- ** dfareporting.orders.list
-    , module Network.Google.Resource.DFAReporting.Orders.List
+    DFAReportingOrdersListResource,
+    newDFAReportingOrdersList,
+    DFAReportingOrdersList,
 
     -- ** dfareporting.placementGroups.get
-    , module Network.Google.Resource.DFAReporting.PlacementGroups.Get
+    DFAReportingPlacementGroupsGetResource,
+    newDFAReportingPlacementGroupsGet,
+    DFAReportingPlacementGroupsGet,
 
     -- ** dfareporting.placementGroups.insert
-    , module Network.Google.Resource.DFAReporting.PlacementGroups.Insert
+    DFAReportingPlacementGroupsInsertResource,
+    newDFAReportingPlacementGroupsInsert,
+    DFAReportingPlacementGroupsInsert,
 
     -- ** dfareporting.placementGroups.list
-    , module Network.Google.Resource.DFAReporting.PlacementGroups.List
+    DFAReportingPlacementGroupsListResource,
+    newDFAReportingPlacementGroupsList,
+    DFAReportingPlacementGroupsList,
 
     -- ** dfareporting.placementGroups.patch
-    , module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
+    DFAReportingPlacementGroupsPatchResource,
+    newDFAReportingPlacementGroupsPatch,
+    DFAReportingPlacementGroupsPatch,
 
     -- ** dfareporting.placementGroups.update
-    , module Network.Google.Resource.DFAReporting.PlacementGroups.Update
+    DFAReportingPlacementGroupsUpdateResource,
+    newDFAReportingPlacementGroupsUpdate,
+    DFAReportingPlacementGroupsUpdate,
 
     -- ** dfareporting.placementStrategies.delete
-    , module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
+    DFAReportingPlacementStrategiesDeleteResource,
+    newDFAReportingPlacementStrategiesDelete,
+    DFAReportingPlacementStrategiesDelete,
 
     -- ** dfareporting.placementStrategies.get
-    , module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
+    DFAReportingPlacementStrategiesGetResource,
+    newDFAReportingPlacementStrategiesGet,
+    DFAReportingPlacementStrategiesGet,
 
     -- ** dfareporting.placementStrategies.insert
-    , module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
+    DFAReportingPlacementStrategiesInsertResource,
+    newDFAReportingPlacementStrategiesInsert,
+    DFAReportingPlacementStrategiesInsert,
 
     -- ** dfareporting.placementStrategies.list
-    , module Network.Google.Resource.DFAReporting.PlacementStrategies.List
+    DFAReportingPlacementStrategiesListResource,
+    newDFAReportingPlacementStrategiesList,
+    DFAReportingPlacementStrategiesList,
 
     -- ** dfareporting.placementStrategies.patch
-    , module Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
+    DFAReportingPlacementStrategiesPatchResource,
+    newDFAReportingPlacementStrategiesPatch,
+    DFAReportingPlacementStrategiesPatch,
 
     -- ** dfareporting.placementStrategies.update
-    , module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
+    DFAReportingPlacementStrategiesUpdateResource,
+    newDFAReportingPlacementStrategiesUpdate,
+    DFAReportingPlacementStrategiesUpdate,
 
     -- ** dfareporting.placements.generatetags
-    , module Network.Google.Resource.DFAReporting.Placements.Generatetags
+    DFAReportingPlacementsGeneratetagsResource,
+    newDFAReportingPlacementsGeneratetags,
+    DFAReportingPlacementsGeneratetags,
 
     -- ** dfareporting.placements.get
-    , module Network.Google.Resource.DFAReporting.Placements.Get
+    DFAReportingPlacementsGetResource,
+    newDFAReportingPlacementsGet,
+    DFAReportingPlacementsGet,
 
     -- ** dfareporting.placements.insert
-    , module Network.Google.Resource.DFAReporting.Placements.Insert
+    DFAReportingPlacementsInsertResource,
+    newDFAReportingPlacementsInsert,
+    DFAReportingPlacementsInsert,
 
     -- ** dfareporting.placements.list
-    , module Network.Google.Resource.DFAReporting.Placements.List
+    DFAReportingPlacementsListResource,
+    newDFAReportingPlacementsList,
+    DFAReportingPlacementsList,
 
     -- ** dfareporting.placements.patch
-    , module Network.Google.Resource.DFAReporting.Placements.Patch
+    DFAReportingPlacementsPatchResource,
+    newDFAReportingPlacementsPatch,
+    DFAReportingPlacementsPatch,
 
     -- ** dfareporting.placements.update
-    , module Network.Google.Resource.DFAReporting.Placements.Update
+    DFAReportingPlacementsUpdateResource,
+    newDFAReportingPlacementsUpdate,
+    DFAReportingPlacementsUpdate,
 
     -- ** dfareporting.platformTypes.get
-    , module Network.Google.Resource.DFAReporting.PlatformTypes.Get
+    DFAReportingPlatformTypesGetResource,
+    newDFAReportingPlatformTypesGet,
+    DFAReportingPlatformTypesGet,
 
     -- ** dfareporting.platformTypes.list
-    , module Network.Google.Resource.DFAReporting.PlatformTypes.List
+    DFAReportingPlatformTypesListResource,
+    newDFAReportingPlatformTypesList,
+    DFAReportingPlatformTypesList,
 
     -- ** dfareporting.postalCodes.get
-    , module Network.Google.Resource.DFAReporting.PostalCodes.Get
+    DFAReportingPostalCodesGetResource,
+    newDFAReportingPostalCodesGet,
+    DFAReportingPostalCodesGet,
 
     -- ** dfareporting.postalCodes.list
-    , module Network.Google.Resource.DFAReporting.PostalCodes.List
+    DFAReportingPostalCodesListResource,
+    newDFAReportingPostalCodesList,
+    DFAReportingPostalCodesList,
 
     -- ** dfareporting.projects.get
-    , module Network.Google.Resource.DFAReporting.Projects.Get
+    DFAReportingProjectsGetResource,
+    newDFAReportingProjectsGet,
+    DFAReportingProjectsGet,
 
     -- ** dfareporting.projects.list
-    , module Network.Google.Resource.DFAReporting.Projects.List
+    DFAReportingProjectsListResource,
+    newDFAReportingProjectsList,
+    DFAReportingProjectsList,
 
     -- ** dfareporting.regions.list
-    , module Network.Google.Resource.DFAReporting.Regions.List
+    DFAReportingRegionsListResource,
+    newDFAReportingRegionsList,
+    DFAReportingRegionsList,
 
     -- ** dfareporting.remarketingListShares.get
-    , module Network.Google.Resource.DFAReporting.RemarketingListShares.Get
+    DFAReportingRemarketingListSharesGetResource,
+    newDFAReportingRemarketingListSharesGet,
+    DFAReportingRemarketingListSharesGet,
 
     -- ** dfareporting.remarketingListShares.patch
-    , module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
+    DFAReportingRemarketingListSharesPatchResource,
+    newDFAReportingRemarketingListSharesPatch,
+    DFAReportingRemarketingListSharesPatch,
 
     -- ** dfareporting.remarketingListShares.update
-    , module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
+    DFAReportingRemarketingListSharesUpdateResource,
+    newDFAReportingRemarketingListSharesUpdate,
+    DFAReportingRemarketingListSharesUpdate,
 
     -- ** dfareporting.remarketingLists.get
-    , module Network.Google.Resource.DFAReporting.RemarketingLists.Get
+    DFAReportingRemarketingListsGetResource,
+    newDFAReportingRemarketingListsGet,
+    DFAReportingRemarketingListsGet,
 
     -- ** dfareporting.remarketingLists.insert
-    , module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
+    DFAReportingRemarketingListsInsertResource,
+    newDFAReportingRemarketingListsInsert,
+    DFAReportingRemarketingListsInsert,
 
     -- ** dfareporting.remarketingLists.list
-    , module Network.Google.Resource.DFAReporting.RemarketingLists.List
+    DFAReportingRemarketingListsListResource,
+    newDFAReportingRemarketingListsList,
+    DFAReportingRemarketingListsList,
 
     -- ** dfareporting.remarketingLists.patch
-    , module Network.Google.Resource.DFAReporting.RemarketingLists.Patch
+    DFAReportingRemarketingListsPatchResource,
+    newDFAReportingRemarketingListsPatch,
+    DFAReportingRemarketingListsPatch,
 
     -- ** dfareporting.remarketingLists.update
-    , module Network.Google.Resource.DFAReporting.RemarketingLists.Update
+    DFAReportingRemarketingListsUpdateResource,
+    newDFAReportingRemarketingListsUpdate,
+    DFAReportingRemarketingListsUpdate,
 
     -- ** dfareporting.reports.compatibleFields.query
-    , module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
+    DFAReportingReportsCompatibleFieldsQueryResource,
+    newDFAReportingReportsCompatibleFieldsQuery,
+    DFAReportingReportsCompatibleFieldsQuery,
 
     -- ** dfareporting.reports.delete
-    , module Network.Google.Resource.DFAReporting.Reports.Delete
+    DFAReportingReportsDeleteResource,
+    newDFAReportingReportsDelete,
+    DFAReportingReportsDelete,
 
     -- ** dfareporting.reports.files.get
-    , module Network.Google.Resource.DFAReporting.Reports.Files.Get
+    DFAReportingReportsFilesGetResource,
+    newDFAReportingReportsFilesGet,
+    DFAReportingReportsFilesGet,
 
     -- ** dfareporting.reports.files.list
-    , module Network.Google.Resource.DFAReporting.Reports.Files.List
+    DFAReportingReportsFilesListResource,
+    newDFAReportingReportsFilesList,
+    DFAReportingReportsFilesList,
 
     -- ** dfareporting.reports.get
-    , module Network.Google.Resource.DFAReporting.Reports.Get
+    DFAReportingReportsGetResource,
+    newDFAReportingReportsGet,
+    DFAReportingReportsGet,
 
     -- ** dfareporting.reports.insert
-    , module Network.Google.Resource.DFAReporting.Reports.Insert
+    DFAReportingReportsInsertResource,
+    newDFAReportingReportsInsert,
+    DFAReportingReportsInsert,
 
     -- ** dfareporting.reports.list
-    , module Network.Google.Resource.DFAReporting.Reports.List
+    DFAReportingReportsListResource,
+    newDFAReportingReportsList,
+    DFAReportingReportsList,
 
     -- ** dfareporting.reports.patch
-    , module Network.Google.Resource.DFAReporting.Reports.Patch
+    DFAReportingReportsPatchResource,
+    newDFAReportingReportsPatch,
+    DFAReportingReportsPatch,
 
     -- ** dfareporting.reports.run
-    , module Network.Google.Resource.DFAReporting.Reports.Run
+    DFAReportingReportsRunResource,
+    newDFAReportingReportsRun,
+    DFAReportingReportsRun,
 
     -- ** dfareporting.reports.update
-    , module Network.Google.Resource.DFAReporting.Reports.Update
+    DFAReportingReportsUpdateResource,
+    newDFAReportingReportsUpdate,
+    DFAReportingReportsUpdate,
 
     -- ** dfareporting.sites.get
-    , module Network.Google.Resource.DFAReporting.Sites.Get
+    DFAReportingSitesGetResource,
+    newDFAReportingSitesGet,
+    DFAReportingSitesGet,
 
     -- ** dfareporting.sites.insert
-    , module Network.Google.Resource.DFAReporting.Sites.Insert
+    DFAReportingSitesInsertResource,
+    newDFAReportingSitesInsert,
+    DFAReportingSitesInsert,
 
     -- ** dfareporting.sites.list
-    , module Network.Google.Resource.DFAReporting.Sites.List
+    DFAReportingSitesListResource,
+    newDFAReportingSitesList,
+    DFAReportingSitesList,
 
     -- ** dfareporting.sites.patch
-    , module Network.Google.Resource.DFAReporting.Sites.Patch
+    DFAReportingSitesPatchResource,
+    newDFAReportingSitesPatch,
+    DFAReportingSitesPatch,
 
     -- ** dfareporting.sites.update
-    , module Network.Google.Resource.DFAReporting.Sites.Update
+    DFAReportingSitesUpdateResource,
+    newDFAReportingSitesUpdate,
+    DFAReportingSitesUpdate,
 
     -- ** dfareporting.sizes.get
-    , module Network.Google.Resource.DFAReporting.Sizes.Get
+    DFAReportingSizesGetResource,
+    newDFAReportingSizesGet,
+    DFAReportingSizesGet,
 
     -- ** dfareporting.sizes.insert
-    , module Network.Google.Resource.DFAReporting.Sizes.Insert
+    DFAReportingSizesInsertResource,
+    newDFAReportingSizesInsert,
+    DFAReportingSizesInsert,
 
     -- ** dfareporting.sizes.list
-    , module Network.Google.Resource.DFAReporting.Sizes.List
+    DFAReportingSizesListResource,
+    newDFAReportingSizesList,
+    DFAReportingSizesList,
 
     -- ** dfareporting.subaccounts.get
-    , module Network.Google.Resource.DFAReporting.SubAccounts.Get
+    DFAReportingSubaccountsGetResource,
+    newDFAReportingSubaccountsGet,
+    DFAReportingSubaccountsGet,
 
     -- ** dfareporting.subaccounts.insert
-    , module Network.Google.Resource.DFAReporting.SubAccounts.Insert
+    DFAReportingSubaccountsInsertResource,
+    newDFAReportingSubaccountsInsert,
+    DFAReportingSubaccountsInsert,
 
     -- ** dfareporting.subaccounts.list
-    , module Network.Google.Resource.DFAReporting.SubAccounts.List
+    DFAReportingSubaccountsListResource,
+    newDFAReportingSubaccountsList,
+    DFAReportingSubaccountsList,
 
     -- ** dfareporting.subaccounts.patch
-    , module Network.Google.Resource.DFAReporting.SubAccounts.Patch
+    DFAReportingSubaccountsPatchResource,
+    newDFAReportingSubaccountsPatch,
+    DFAReportingSubaccountsPatch,
 
     -- ** dfareporting.subaccounts.update
-    , module Network.Google.Resource.DFAReporting.SubAccounts.Update
+    DFAReportingSubaccountsUpdateResource,
+    newDFAReportingSubaccountsUpdate,
+    DFAReportingSubaccountsUpdate,
 
     -- ** dfareporting.targetableRemarketingLists.get
-    , module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
+    DFAReportingTargetableRemarketingListsGetResource,
+    newDFAReportingTargetableRemarketingListsGet,
+    DFAReportingTargetableRemarketingListsGet,
 
     -- ** dfareporting.targetableRemarketingLists.list
-    , module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
+    DFAReportingTargetableRemarketingListsListResource,
+    newDFAReportingTargetableRemarketingListsList,
+    DFAReportingTargetableRemarketingListsList,
 
     -- ** dfareporting.targetingTemplates.get
-    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Get
+    DFAReportingTargetingTemplatesGetResource,
+    newDFAReportingTargetingTemplatesGet,
+    DFAReportingTargetingTemplatesGet,
 
     -- ** dfareporting.targetingTemplates.insert
-    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
+    DFAReportingTargetingTemplatesInsertResource,
+    newDFAReportingTargetingTemplatesInsert,
+    DFAReportingTargetingTemplatesInsert,
 
     -- ** dfareporting.targetingTemplates.list
-    , module Network.Google.Resource.DFAReporting.TargetingTemplates.List
+    DFAReportingTargetingTemplatesListResource,
+    newDFAReportingTargetingTemplatesList,
+    DFAReportingTargetingTemplatesList,
 
     -- ** dfareporting.targetingTemplates.patch
-    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
+    DFAReportingTargetingTemplatesPatchResource,
+    newDFAReportingTargetingTemplatesPatch,
+    DFAReportingTargetingTemplatesPatch,
 
     -- ** dfareporting.targetingTemplates.update
-    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Update
+    DFAReportingTargetingTemplatesUpdateResource,
+    newDFAReportingTargetingTemplatesUpdate,
+    DFAReportingTargetingTemplatesUpdate,
 
     -- ** dfareporting.userProfiles.get
-    , module Network.Google.Resource.DFAReporting.UserProFiles.Get
+    DFAReportingUserProfilesGetResource,
+    newDFAReportingUserProfilesGet,
+    DFAReportingUserProfilesGet,
 
     -- ** dfareporting.userProfiles.list
-    , module Network.Google.Resource.DFAReporting.UserProFiles.List
+    DFAReportingUserProfilesListResource,
+    newDFAReportingUserProfilesList,
+    DFAReportingUserProfilesList,
 
     -- ** dfareporting.userRolePermissionGroups.get
-    , module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
+    DFAReportingUserRolePermissionGroupsGetResource,
+    newDFAReportingUserRolePermissionGroupsGet,
+    DFAReportingUserRolePermissionGroupsGet,
 
     -- ** dfareporting.userRolePermissionGroups.list
-    , module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
+    DFAReportingUserRolePermissionGroupsListResource,
+    newDFAReportingUserRolePermissionGroupsList,
+    DFAReportingUserRolePermissionGroupsList,
 
     -- ** dfareporting.userRolePermissions.get
-    , module Network.Google.Resource.DFAReporting.UserRolePermissions.Get
+    DFAReportingUserRolePermissionsGetResource,
+    newDFAReportingUserRolePermissionsGet,
+    DFAReportingUserRolePermissionsGet,
 
     -- ** dfareporting.userRolePermissions.list
-    , module Network.Google.Resource.DFAReporting.UserRolePermissions.List
+    DFAReportingUserRolePermissionsListResource,
+    newDFAReportingUserRolePermissionsList,
+    DFAReportingUserRolePermissionsList,
 
     -- ** dfareporting.userRoles.delete
-    , module Network.Google.Resource.DFAReporting.UserRoles.Delete
+    DFAReportingUserRolesDeleteResource,
+    newDFAReportingUserRolesDelete,
+    DFAReportingUserRolesDelete,
 
     -- ** dfareporting.userRoles.get
-    , module Network.Google.Resource.DFAReporting.UserRoles.Get
+    DFAReportingUserRolesGetResource,
+    newDFAReportingUserRolesGet,
+    DFAReportingUserRolesGet,
 
     -- ** dfareporting.userRoles.insert
-    , module Network.Google.Resource.DFAReporting.UserRoles.Insert
+    DFAReportingUserRolesInsertResource,
+    newDFAReportingUserRolesInsert,
+    DFAReportingUserRolesInsert,
 
     -- ** dfareporting.userRoles.list
-    , module Network.Google.Resource.DFAReporting.UserRoles.List
+    DFAReportingUserRolesListResource,
+    newDFAReportingUserRolesList,
+    DFAReportingUserRolesList,
 
     -- ** dfareporting.userRoles.patch
-    , module Network.Google.Resource.DFAReporting.UserRoles.Patch
+    DFAReportingUserRolesPatchResource,
+    newDFAReportingUserRolesPatch,
+    DFAReportingUserRolesPatch,
 
     -- ** dfareporting.userRoles.update
-    , module Network.Google.Resource.DFAReporting.UserRoles.Update
+    DFAReportingUserRolesUpdateResource,
+    newDFAReportingUserRolesUpdate,
+    DFAReportingUserRolesUpdate,
 
     -- ** dfareporting.videoFormats.get
-    , module Network.Google.Resource.DFAReporting.VideoFormats.Get
+    DFAReportingVideoFormatsGetResource,
+    newDFAReportingVideoFormatsGet,
+    DFAReportingVideoFormatsGet,
 
     -- ** dfareporting.videoFormats.list
-    , module Network.Google.Resource.DFAReporting.VideoFormats.List
+    DFAReportingVideoFormatsListResource,
+    newDFAReportingVideoFormatsList,
+    DFAReportingVideoFormatsList,
 
     -- * Types
 
-    -- ** VideoOffSet
-    , VideoOffSet
-    , videoOffSet
-    , vosOffSetPercentage
-    , vosOffSetSeconds
-
-    -- ** DeepLink
-    , DeepLink
-    , deepLink
-    , dlRemarketingListIds
-    , dlKind
-    , dlFallbackURL
-    , dlAppURL
-    , dlMobileApp
-
-    -- ** DisjunctiveMatchStatement
-    , DisjunctiveMatchStatement
-    , disjunctiveMatchStatement
-    , dmsEventFilters
-    , dmsKind
-
-    -- ** PlacementsListSortOrder
-    , PlacementsListSortOrder (..)
-
-    -- ** DateRangeRelativeDateRange
-    , DateRangeRelativeDateRange (..)
-
-    -- ** AdvertisersListSortField
-    , AdvertisersListSortField (..)
-
-    -- ** CreativeFieldsListSortOrder
-    , CreativeFieldsListSortOrder (..)
-
-    -- ** FileList
-    , FileList
-    , fileList
-    , flEtag
-    , flNextPageToken
-    , flKind
-    , flItems
-
-    -- ** TargetingTemplatesListSortOrder
-    , TargetingTemplatesListSortOrder (..)
-
-    -- ** PathReportCompatibleFields
-    , PathReportCompatibleFields
-    , pathReportCompatibleFields
-    , prcfMetrics
-    , prcfChannelGroupings
-    , prcfKind
-    , prcfPathFilters
-    , prcfDimensions
-
-    -- ** OptimizationActivity
-    , OptimizationActivity
-    , optimizationActivity
-    , oaWeight
-    , oaFloodlightActivityId
-    , oaFloodlightActivityIdDimensionValue
-
-    -- ** ListPopulationClause
-    , ListPopulationClause
-    , listPopulationClause
-    , lpcTerms
-
-    -- ** AdBlockingConfiguration
-    , AdBlockingConfiguration
-    , adBlockingConfiguration
-    , abcEnabled
-
-    -- ** AdvertiserLandingPagesListSortOrder
-    , AdvertiserLandingPagesListSortOrder (..)
-
-    -- ** CreativeCustomEvent
-    , CreativeCustomEvent
-    , creativeCustomEvent
-    , cceAdvertiserCustomEventId
-    , cceAdvertiserCustomEventType
-    , cceAdvertiserCustomEventName
-    , cceExitClickThroughURL
-    , cceTargetType
-    , ccePopupWindowProperties
-    , cceVideoReportingId
-    , cceId
-    , cceArtworkLabel
-    , cceArtworkType
-
-    -- ** ClickTag
-    , ClickTag
-    , clickTag
-    , ctClickThroughURL
-    , ctName
-    , ctEventName
-
-    -- ** CampaignsListResponse
-    , CampaignsListResponse
-    , campaignsListResponse
-    , clrNextPageToken
-    , clrCampaigns
-    , clrKind
-
-    -- ** GeoTargeting
-    , GeoTargeting
-    , geoTargeting
-    , gtRegions
-    , gtCountries
-    , gtCities
-    , gtMetros
-    , gtExcludeCountries
-    , gtPostalCodes
-
-    -- ** UserRolesListSortField
-    , UserRolesListSortField (..)
-
-    -- ** VideoSettings
-    , VideoSettings
-    , videoSettings
-    , vsKind
-    , vsCompanionSettings
-    , vsObaSettings
-    , vsObaEnabled
-    , vsTranscodeSettings
-    , vsDurationSeconds
-    , vsOrientation
-    , vsSkippableSettings
-
-    -- ** ReachReportCompatibleFields
-    , ReachReportCompatibleFields
-    , reachReportCompatibleFields
-    , rrcfMetrics
-    , rrcfReachByFrequencyMetrics
-    , rrcfKind
-    , rrcfDimensionFilters
-    , rrcfPivotedActivityMetrics
-    , rrcfDimensions
-
-    -- ** Browser
-    , Browser
-    , browser
-    , bMinorVersion
-    , bKind
-    , bBrowserVersionId
-    , bMajorVersion
-    , bName
-    , bDartId
-
-    -- ** FloodlightActivityTagFormat
-    , FloodlightActivityTagFormat (..)
-
-    -- ** OrderDocumentsListSortOrder
-    , OrderDocumentsListSortOrder (..)
-
-    -- ** CreativeGroupAssignment
-    , CreativeGroupAssignment
-    , creativeGroupAssignment
-    , cgaCreativeGroupNumber
-    , cgaCreativeGroupId
-
-    -- ** CreativeAssetRole
-    , CreativeAssetRole (..)
-
-    -- ** DynamicTargetingKeysListObjectType
-    , DynamicTargetingKeysListObjectType (..)
-
-    -- ** RecipientDeliveryType
-    , RecipientDeliveryType (..)
-
-    -- ** ThirdPartyTrackingURLThirdPartyURLType
-    , ThirdPartyTrackingURLThirdPartyURLType (..)
-
-    -- ** DirectorySiteSettings
-    , DirectorySiteSettings
-    , directorySiteSettings
-    , dssInterstitialPlacementAccepted
-    , dssInstreamVideoPlacementAccepted
-    , dssActiveViewOptOut
-    , dssDfpSettings
-
-    -- ** TargetableRemarketingListsListSortOrder
-    , TargetableRemarketingListsListSortOrder (..)
-
-    -- ** CreativeAssetPositionLeftUnit
-    , CreativeAssetPositionLeftUnit (..)
-
-    -- ** PricingScheduleCapCostOption
-    , PricingScheduleCapCostOption (..)
-
-    -- ** ObaIcon
-    , ObaIcon
-    , obaIcon
-    , oiSize
-    , oiIconClickThroughURL
-    , oiYPosition
-    , oiIconClickTrackingURL
-    , oiXPosition
-    , oiProgram
-    , oiIconViewTrackingURL
-    , oiResourceURL
-
-    -- ** ListPopulationRule
-    , ListPopulationRule
-    , listPopulationRule
-    , lprFloodlightActivityName
-    , lprFloodlightActivityId
-    , lprListPopulationClauses
-
-    -- ** UserRolePermissionAvailability
-    , UserRolePermissionAvailability (..)
-
-    -- ** PlacementVpaidAdapterChoice
-    , PlacementVpaidAdapterChoice (..)
-
-    -- ** SizesListResponse
-    , SizesListResponse
-    , sizesListResponse
-    , slrKind
-    , slrSizes
-
-    -- ** PlacementCompatibility
-    , PlacementCompatibility (..)
-
-    -- ** CreativeRotation
-    , CreativeRotation
-    , creativeRotation
-    , crWeightCalculationStrategy
-    , crCreativeAssignments
-    , crCreativeOptimizationConfigurationId
-    , crType
-
-    -- ** TechnologyTargeting
-    , TechnologyTargeting
-    , technologyTargeting
-    , ttMobileCarriers
-    , ttOperatingSystemVersions
-    , ttPlatformTypes
-    , ttBrowsers
-    , ttConnectionTypes
-    , ttOperatingSystems
-
-    -- ** ListPopulationTermOperator
-    , ListPopulationTermOperator (..)
-
-    -- ** PlacementsListPaymentSource
-    , PlacementsListPaymentSource (..)
-
-    -- ** InventoryItem
-    , InventoryItem
-    , inventoryItem
-    , iiPlacementStrategyId
-    , iiEstimatedClickThroughRate
-    , iiPricing
-    , iiKind
-    , iiAdvertiserId
-    , iiRfpId
-    , iiContentCategoryId
-    , iiInPlan
-    , iiAccountId
-    , iiName
-    , iiAdSlots
-    , iiNegotiationChannelId
-    , iiLastModifiedInfo
-    , iiId
-    , iiEstimatedConversionRate
-    , iiProjectId
-    , iiSubAccountId
-    , iiType
-    , iiOrderId
-    , iiSiteId
-
-    -- ** ProjectsListResponse
-    , ProjectsListResponse
-    , projectsListResponse
-    , plrNextPageToken
-    , plrKind
-    , plrProjects
-
-    -- ** AdsListResponse
-    , AdsListResponse
-    , adsListResponse
-    , alrNextPageToken
-    , alrKind
-    , alrAds
-
-    -- ** ReportsListSortField
-    , ReportsListSortField (..)
-
-    -- ** AdSlotCompatibility
-    , AdSlotCompatibility (..)
-
-    -- ** SiteVideoSettings
-    , SiteVideoSettings
-    , siteVideoSettings
-    , svsKind
-    , svsCompanionSettings
-    , svsObaSettings
-    , svsObaEnabled
-    , svsTranscodeSettings
-    , svsOrientation
-    , svsSkippableSettings
-
-    -- ** ListPopulationTerm
-    , ListPopulationTerm
-    , listPopulationTerm
-    , lptOperator
-    , lptValue
-    , lptVariableFriendlyName
-    , lptNegation
-    , lptVariableName
-    , lptRemarketingListId
-    , lptType
-    , lptContains
-
-    -- ** TagSettings
-    , TagSettings
-    , tagSettings
-    , tsDynamicTagEnabled
-    , tsImageTagEnabled
-
-    -- ** SubAccountsListResponse
-    , SubAccountsListResponse
-    , subAccountsListResponse
-    , salrNextPageToken
-    , salrKind
-    , salrSubAccounts
-
-    -- ** CampaignsListSortField
-    , CampaignsListSortField (..)
-
-    -- ** VideoSettingsOrientation
-    , VideoSettingsOrientation (..)
-
-    -- ** RegionsListResponse
-    , RegionsListResponse
-    , regionsListResponse
-    , rlrKind
-    , rlrRegions
-
-    -- ** FloodlightActivityDynamicTag
-    , FloodlightActivityDynamicTag
-    , floodlightActivityDynamicTag
-    , fadtTag
-    , fadtName
-    , fadtId
-
-    -- ** VideoFormat
-    , VideoFormat
-    , videoFormat
-    , vfKind
-    , vfFileType
-    , vfResolution
-    , vfTargetBitRate
-    , vfId
-
-    -- ** AccountUserProFileTraffickerType
-    , AccountUserProFileTraffickerType (..)
-
-    -- ** DirectorySite
-    , DirectorySite
-    , directorySite
-    , dsSettings
-    , dsInterstitialTagFormats
-    , dsKind
-    , dsURL
-    , dsIdDimensionValue
-    , dsInpageTagFormats
-    , dsName
-    , dsId
-
-    -- ** CreativeAssetMetadataDetectedFeaturesItem
-    , CreativeAssetMetadataDetectedFeaturesItem (..)
-
-    -- ** ReportFloodlightCriteriaReportProperties
-    , ReportFloodlightCriteriaReportProperties
-    , reportFloodlightCriteriaReportProperties
-    , rfcrpIncludeUnattributedIPConversions
-    , rfcrpIncludeUnattributedCookieConversions
-    , rfcrpIncludeAttributedIPConversions
-
-    -- ** FloodlightActivityGroup
-    , FloodlightActivityGroup
-    , floodlightActivityGroup
-    , fagTagString
-    , fagFloodlightConfigurationId
-    , fagKind
-    , fagAdvertiserId
-    , fagAdvertiserIdDimensionValue
-    , fagIdDimensionValue
-    , fagAccountId
-    , fagName
-    , fagId
-    , fagSubAccountId
-    , fagType
-    , fagFloodlightConfigurationIdDimensionValue
-
-    -- ** AdsListCompatibility
-    , AdsListCompatibility (..)
-
-    -- ** CrossDimensionReachReportCompatibleFields
-    , CrossDimensionReachReportCompatibleFields
-    , crossDimensionReachReportCompatibleFields
-    , cdrrcfMetrics
-    , cdrrcfBreakdown
-    , cdrrcfKind
-    , cdrrcfDimensionFilters
-    , cdrrcfOverlapMetrics
-
-    -- ** ChannelGroupingRule
-    , ChannelGroupingRule
-    , channelGroupingRule
-    , cgrKind
-    , cgrName
-    , cgrDisjunctiveMatchStatements
-
-    -- ** FsCommand
-    , FsCommand
-    , fsCommand
-    , fcPositionOption
-    , fcLeft
-    , fcWindowHeight
-    , fcWindowWidth
-    , fcTop
-
-    -- ** PlacementAssignment
-    , PlacementAssignment
-    , placementAssignment
-    , paPlacementId
-    , paPlacementIdDimensionValue
-    , paActive
-    , paSSLRequired
-
-    -- ** CreativeFieldValue
-    , CreativeFieldValue
-    , creativeFieldValue
-    , cfvKind
-    , cfvValue
-    , cfvId
-
-    -- ** EventTagStatus
-    , EventTagStatus (..)
-
-    -- ** SitesListSortField
-    , SitesListSortField (..)
-
-    -- ** DimensionValueRequest
-    , DimensionValueRequest
-    , dimensionValueRequest
-    , dvrKind
-    , dvrEndDate
-    , dvrFilters
-    , dvrStartDate
-    , dvrDimensionName
-
-    -- ** EventTagsListEventTagTypes
-    , EventTagsListEventTagTypes (..)
-
-    -- ** FloodlightConfigurationsListResponse
-    , FloodlightConfigurationsListResponse
-    , floodlightConfigurationsListResponse
-    , fclrKind
-    , fclrFloodlightConfigurations
-
-    -- ** FloodlightActivitiesListResponse
-    , FloodlightActivitiesListResponse
-    , floodlightActivitiesListResponse
-    , falrNextPageToken
-    , falrKind
-    , falrFloodlightActivities
-
-    -- ** FileStatus
-    , FileStatus (..)
-
-    -- ** CreativeCustomEventArtworkType
-    , CreativeCustomEventArtworkType (..)
-
-    -- ** CreativeFieldAssignment
-    , CreativeFieldAssignment
-    , creativeFieldAssignment
-    , cfaCreativeFieldId
-    , cfaCreativeFieldValueId
-
-    -- ** AdvertiserGroup
-    , AdvertiserGroup
-    , advertiserGroup
-    , agKind
-    , agAccountId
-    , agName
-    , agId
-
-    -- ** TagData
-    , TagData
-    , tagData
-    , tdClickTag
-    , tdFormat
-    , tdCreativeId
-    , tdAdId
-    , tdImpressionTag
-
-    -- ** DayPartTargeting
-    , DayPartTargeting
-    , dayPartTargeting
-    , dptDaysOfWeek
-    , dptHoursOfDay
-    , dptUserLocalTime
-
-    -- ** CreativeOptimizationConfiguration
-    , CreativeOptimizationConfiguration
-    , creativeOptimizationConfiguration
-    , cocOptimizationModel
-    , cocName
-    , cocOptimizationActivitys
-    , cocId
-
-    -- ** SiteTranscodeSetting
-    , SiteTranscodeSetting
-    , siteTranscodeSetting
-    , stsKind
-    , stsEnabledVideoFormats
-
-    -- ** CreativeClickThroughURL
-    , CreativeClickThroughURL
-    , creativeClickThroughURL
-    , cctuComputedClickThroughURL
-    , cctuCustomClickThroughURL
-    , cctuLandingPageId
-
-    -- ** ReportCriteria
-    , ReportCriteria
-    , reportCriteria
-    , rcMetricNames
-    , rcCustomRichMediaEvents
-    , rcDimensionFilters
-    , rcActivities
-    , rcDateRange
-    , rcDimensions
-
-    -- ** FloodlightConfigurationNATuralSearchConversionAttributionOption
-    , FloodlightConfigurationNATuralSearchConversionAttributionOption (..)
-
-    -- ** MeasurementPartnerWrAppingDataTagWrAppingMode
-    , MeasurementPartnerWrAppingDataTagWrAppingMode (..)
-
-    -- ** PlacementStrategiesListResponse
-    , PlacementStrategiesListResponse
-    , placementStrategiesListResponse
-    , pslrPlacementStrategies
-    , pslrNextPageToken
-    , pslrKind
-
-    -- ** ConversionsBatchUpdateResponse
-    , ConversionsBatchUpdateResponse
-    , conversionsBatchUpdateResponse
-    , cburStatus
-    , cburKind
-    , cburHasFailures
-
-    -- ** CreativeAssetArtworkType
-    , CreativeAssetArtworkType (..)
-
-    -- ** SubAccount
-    , SubAccount
-    , subAccount
-    , saKind
-    , saAvailablePermissionIds
-    , saAccountId
-    , saName
-    , saId
-
-    -- ** InventoryItemsListResponse
-    , InventoryItemsListResponse
-    , inventoryItemsListResponse
-    , iilrInventoryItems
-    , iilrNextPageToken
-    , iilrKind
-
-    -- ** UniversalAdId
-    , UniversalAdId
-    , universalAdId
-    , uaiValue
-    , uaiRegistry
-
-    -- ** CustomFloodlightVariableType
-    , CustomFloodlightVariableType (..)
-
-    -- ** Ad
-    , Ad
-    , ad
-    , aTargetingTemplateId
-    , aCreativeGroupAssignments
-    , aGeoTargeting
-    , aCreativeRotation
-    , aTechnologyTargeting
-    , aAudienceSegmentId
-    , aDayPartTargeting
-    , aSize
-    , aStartTime
-    , aKind
-    , aClickThroughURLSuffixProperties
-    , aCampaignIdDimensionValue
-    , aAdvertiserId
-    , aAdvertiserIdDimensionValue
-    , aSSLCompliant
-    , aCampaignId
-    , aIdDimensionValue
-    , aClickThroughURL
-    , aDeliverySchedule
-    , aEventTagOverrides
-    , aActive
-    , aAccountId
-    , aName
-    , aKeyValueTargetingExpression
-    , aEndTime
-    , aCreateInfo
-    , aLastModifiedInfo
-    , aId
-    , aSSLRequired
-    , aComments
-    , aSubAccountId
-    , aType
-    , aRemarketingListExpression
-    , aLanguageTargeting
-    , aDynamicClickTracker
-    , aCompatibility
-    , aArchived
-    , aDefaultClickThroughEventTagProperties
-    , aPlacementAssignments
-
-    -- ** ConversionErrorCode
-    , ConversionErrorCode (..)
-
-    -- ** FloodlightActivitiesListSortOrder
-    , FloodlightActivitiesListSortOrder (..)
-
-    -- ** Project
-    , Project
-    , project
-    , pTargetClicks
-    , pClientBillingCode
-    , pTargetCpmNanos
-    , pTargetConversions
-    , pBudget
-    , pKind
-    , pAdvertiserId
-    , pEndDate
-    , pOverview
-    , pTargetImpressions
-    , pStartDate
-    , pTargetCpcNanos
-    , pAccountId
-    , pName
-    , pLastModifiedInfo
-    , pId
-    , pAudienceAgeGroup
-    , pSubAccountId
-    , pTargetCpmActiveViewNanos
-    , pAudienceGender
-    , pClientName
-    , pTargetCpaNanos
-
-    -- ** FileFormat
-    , FileFormat (..)
-
-    -- ** EncryptionInfoEncryptionEntityType
-    , EncryptionInfoEncryptionEntityType (..)
-
-    -- ** PricingSchedulePricingType
-    , PricingSchedulePricingType (..)
-
-    -- ** ReportFloodlightCriteria
-    , ReportFloodlightCriteria
-    , reportFloodlightCriteria
-    , rfcReportProperties
-    , rfcMetricNames
-    , rfcCustomRichMediaEvents
-    , rfcDimensionFilters
-    , rfcDateRange
-    , rfcFloodlightConfigId
-    , rfcDimensions
-
-    -- ** CreativeCustomEventTargetType
-    , CreativeCustomEventTargetType (..)
-
-    -- ** ReportsListScope
-    , ReportsListScope (..)
-
-    -- ** Size
-    , Size
-    , size
-    , sHeight
-    , sKind
-    , sWidth
-    , sIab
-    , sId
-
-    -- ** CreativeAssetOrientation
-    , CreativeAssetOrientation (..)
-
-    -- ** CreativeAssetDurationType
-    , CreativeAssetDurationType (..)
-
-    -- ** TargetableRemarketingListListSource
-    , TargetableRemarketingListListSource (..)
-
-    -- ** ObjectFilter
-    , ObjectFilter
-    , objectFilter
-    , ofStatus
-    , ofKind
-    , ofObjectIds
-
-    -- ** SkippableSetting
-    , SkippableSetting
-    , skippableSetting
-    , ssSkipOffSet
-    , ssProgressOffSet
-    , ssKind
-    , ssSkippable
-
-    -- ** CreativeGroupsListSortField
-    , CreativeGroupsListSortField (..)
-
-    -- ** ReportsConfiguration
-    , ReportsConfiguration
-    , reportsConfiguration
-    , rcExposureToConversionEnabled
-    , rcReportGenerationTimeZoneId
-    , rcLookbackConfiguration
-
-    -- ** PricingSchedule
-    , PricingSchedule
-    , pricingSchedule
-    , psTestingStartDate
-    , psFloodlightActivityId
-    , psEndDate
-    , psStartDate
-    , psCapCostOption
-    , psPricingType
-    , psPricingPeriods
-    , psFlighted
-
-    -- ** PostalCode
-    , PostalCode
-    , postalCode
-    , pcKind
-    , pcCode
-    , pcCountryCode
-    , pcId
-    , pcCountryDartId
-
-    -- ** AccountPermissionsListResponse
-    , AccountPermissionsListResponse
-    , accountPermissionsListResponse
-    , aplrKind
-    , aplrAccountPermissions
-
-    -- ** Country
-    , Country
-    , country
-    , cKind
-    , cName
-    , cCountryCode
-    , cDartId
-    , cSSLEnabled
-
-    -- ** PlacementsListSortField
-    , PlacementsListSortField (..)
-
-    -- ** CreativeBackupImageFeaturesItem
-    , CreativeBackupImageFeaturesItem (..)
-
-    -- ** OperatingSystemVersionsListResponse
-    , OperatingSystemVersionsListResponse
-    , operatingSystemVersionsListResponse
-    , osvlrKind
-    , osvlrOperatingSystemVersions
-
-    -- ** ClickThroughURLSuffixProperties
-    , ClickThroughURLSuffixProperties
-    , clickThroughURLSuffixProperties
-    , ctuspOverrideInheritedSuffix
-    , ctuspClickThroughURLSuffix
-
-    -- ** AdvertisersListSortOrder
-    , AdvertisersListSortOrder (..)
-
-    -- ** TargetingTemplatesListSortField
-    , TargetingTemplatesListSortField (..)
-
-    -- ** CreativeFieldsListSortField
-    , CreativeFieldsListSortField (..)
-
-    -- ** Pricing
-    , Pricing
-    , pricing
-    , priEndDate
-    , priStartDate
-    , priGroupType
-    , priPricingType
-    , priFlights
-    , priCapCostType
-
-    -- ** AudienceSegmentGroup
-    , AudienceSegmentGroup
-    , audienceSegmentGroup
-    , asgAudienceSegments
-    , asgName
-    , asgId
-
-    -- ** OperatingSystem
-    , OperatingSystem
-    , operatingSystem
-    , osDesktop
-    , osKind
-    , osName
-    , osMobile
-    , osDartId
-
-    -- ** Flight
-    , Flight
-    , flight
-    , fRateOrCost
-    , fEndDate
-    , fStartDate
-    , fUnits
-
-    -- ** UserDefinedVariableConfigurationVariableType
-    , UserDefinedVariableConfigurationVariableType (..)
-
-    -- ** FsCommandPositionOption
-    , FsCommandPositionOption (..)
-
-    -- ** CitiesListResponse
-    , CitiesListResponse
-    , citiesListResponse
-    , citKind
-    , citCities
-
-    -- ** AdvertiserLandingPagesListSortField
-    , AdvertiserLandingPagesListSortField (..)
-
-    -- ** Dimension
-    , Dimension
-    , dimension
-    , dKind
-    , dName
-
-    -- ** ReportReachCriteria
-    , ReportReachCriteria
-    , reportReachCriteria
-    , rrcReachByFrequencyMetricNames
-    , rrcEnableAllDimensionCombinations
-    , rrcMetricNames
-    , rrcCustomRichMediaEvents
-    , rrcDimensionFilters
-    , rrcActivities
-    , rrcDateRange
-    , rrcDimensions
-
-    -- ** CustomRichMediaEvents
-    , CustomRichMediaEvents
-    , customRichMediaEvents
-    , crmeKind
-    , crmeFilteredEventIds
-
-    -- ** LanguagesListResponse
-    , LanguagesListResponse
-    , languagesListResponse
-    , llrKind
-    , llrLanguages
-
-    -- ** CustomViewabilityMetricConfiguration
-    , CustomViewabilityMetricConfiguration
-    , customViewabilityMetricConfiguration
-    , cvmcViewabilityPercent
-    , cvmcTimePercent
-    , cvmcAudible
-    , cvmcTimeMillis
-
-    -- ** UserRolesListSortOrder
-    , UserRolesListSortOrder (..)
-
-    -- ** PlacementsListCompatibilities
-    , PlacementsListCompatibilities (..)
-
-    -- ** ReportPathCriteria
-    , ReportPathCriteria
-    , reportPathCriteria
-    , rpcCustomChannelGrouping
-    , rpcMetricNames
-    , rpcDateRange
-    , rpcPathFilters
-    , rpcFloodlightConfigId
-    , rpcDimensions
-    , rpcActivityFilters
-
-    -- ** TargetableRemarketingListsListResponse
-    , TargetableRemarketingListsListResponse
-    , targetableRemarketingListsListResponse
-    , trllrNextPageToken
-    , trllrKind
-    , trllrTargetableRemarketingLists
-
-    -- ** OrderDocumentsListSortField
-    , OrderDocumentsListSortField (..)
-
-    -- ** CreativeCompatibilityItem
-    , CreativeCompatibilityItem (..)
-
-    -- ** ChangeLogsListResponse
-    , ChangeLogsListResponse
-    , changeLogsListResponse
-    , cllrNextPageToken
-    , cllrKind
-    , cllrChangeLogs
-
-    -- ** ReportDeliveryEmailOwnerDeliveryType
-    , ReportDeliveryEmailOwnerDeliveryType (..)
-
-    -- ** SiteContactContactType
-    , SiteContactContactType (..)
-
-    -- ** AccountUserProFile
-    , AccountUserProFile
-    , accountUserProFile
-    , aupfEmail
-    , aupfUserRoleFilter
-    , aupfAdvertiserFilter
-    , aupfUserRoleId
-    , aupfKind
-    , aupfLocale
-    , aupfSiteFilter
-    , aupfTraffickerType
-    , aupfActive
-    , aupfAccountId
-    , aupfName
-    , aupfId
-    , aupfUserAccessType
-    , aupfComments
-    , aupfSubAccountId
-    , aupfCampaignFilter
-
-    -- ** ReportsListSortOrder
-    , ReportsListSortOrder (..)
-
-    -- ** DimensionValue
-    , DimensionValue
-    , dimensionValue
-    , dvEtag
-    , dvKind
-    , dvValue
-    , dvMatchType
-    , dvDimensionName
-    , dvId
-
-    -- ** TargetableRemarketingListsListSortField
-    , TargetableRemarketingListsListSortField (..)
-
-    -- ** CampaignsListSortOrder
-    , CampaignsListSortOrder (..)
-
-    -- ** Activities
-    , Activities
-    , activities
-    , actKind
-    , actMetricNames
-    , actFilters
-
-    -- ** FloodlightActivityGroupsListType
-    , FloodlightActivityGroupsListType (..)
-
-    -- ** FloodlightConfigurationFirstDayOfWeek
-    , FloodlightConfigurationFirstDayOfWeek (..)
-
-    -- ** UserRolePermissionGroupsListResponse
-    , UserRolePermissionGroupsListResponse
-    , userRolePermissionGroupsListResponse
-    , urpglrUserRolePermissionGroups
-    , urpglrKind
-
-    -- ** PlacementTag
-    , PlacementTag
-    , placementTag
-    , ptPlacementId
-    , ptTagDatas
-
-    -- ** DeliverySchedulePriority
-    , DeliverySchedulePriority (..)
-
-    -- ** FloodlightActivitiesListFloodlightActivityGroupType
-    , FloodlightActivitiesListFloodlightActivityGroupType (..)
-
-    -- ** RemarketingListsListResponse
-    , RemarketingListsListResponse
-    , remarketingListsListResponse
-    , rllrNextPageToken
-    , rllrRemarketingLists
-    , rllrKind
-
-    -- ** DynamicTargetingKey
-    , DynamicTargetingKey
-    , dynamicTargetingKey
-    , dtkObjectType
-    , dtkKind
-    , dtkObjectId
-    , dtkName
-
-    -- ** Creative
-    , Creative
-    , creative
-    , creConvertFlashToHTML5
-    , creBackupImageTargetWindow
-    , creRenderingIdDimensionValue
-    , creCustomKeyValues
-    , creSkipOffSet
-    , creObaIcon
-    , creRenderingId
-    , creThirdPartyBackupImageImpressionsURL
-    , creFsCommand
-    , creAllowScriptAccess
-    , creHTMLCodeLocked
-    , creRequiredFlashPluginVersion
-    , creUniversalAdId
-    , creAuthoringTool
-    , creSize
-    , creThirdPartyURLs
-    , creProgressOffSet
-    , creCounterCustomEvents
-    , creKind
-    , creSSLOverride
-    , creHTMLCode
-    , creAdvertiserId
-    , creRequiredFlashVersion
-    , creBackgRoundColor
-    , creAdTagKeys
-    , creSkippable
-    , creSSLCompliant
-    , creIdDimensionValue
-    , creBackupImageReportingLabel
-    , creCommercialId
-    , creActive
-    , creExitCustomEvents
-    , creAccountId
-    , creBackupImageClickThroughURL
-    , creName
-    , creOverrideCss
-    , creAdditionalSizes
-    , creClickTags
-    , creAdParameters
-    , creVersion
-    , creMediaDescription
-    , creMediaDuration
-    , creLatestTraffickedCreativeId
-    , creThirdPartyRichMediaImpressionsURL
-    , creDynamicAssetSelection
-    , creLastModifiedInfo
-    , creId
-    , creAuthoringSource
-    , creStudioAdvertiserId
-    , creCreativeAssets
-    , creSubAccountId
-    , creType
-    , creTimerCustomEvents
-    , creCreativeAssetSelection
-    , creStudioCreativeId
-    , creCompatibility
-    , creBackupImageFeatures
-    , creArtworkType
-    , creArchived
-    , creCompanionCreatives
-    , creTotalFileSize
-    , creStudioTraffickedCreativeId
-    , creAutoAdvanceImages
-    , creRedirectURL
-    , creCreativeFieldAssignments
-
-    -- ** SiteCompanionSetting
-    , SiteCompanionSetting
-    , siteCompanionSetting
-    , scsKind
-    , scsImageOnly
-    , scsCompanionsDisabled
-    , scsEnabledSizes
-
-    -- ** SiteContact
-    , SiteContact
-    , siteContact
-    , scEmail
-    , scPhone
-    , scLastName
-    , scAddress
-    , scFirstName
-    , scId
-    , scTitle
-    , scContactType
-
-    -- ** CreativeAuthoringSource
-    , CreativeAuthoringSource (..)
-
-    -- ** AccountsListResponse
-    , AccountsListResponse
-    , accountsListResponse
-    , accNextPageToken
-    , accAccounts
-    , accKind
-
-    -- ** DateRange
-    , DateRange
-    , dateRange
-    , drKind
-    , drEndDate
-    , drStartDate
-    , drRelativeDateRange
-
-    -- ** Report
-    , Report
-    , report
-    , rDelivery
-    , rEtag
-    , rOwnerProFileId
-    , rSchedule
-    , rPathToConversionCriteria
-    , rKind
-    , rFormat
-    , rPathCriteria
-    , rReachCriteria
-    , rLastModifiedTime
-    , rAccountId
-    , rName
-    , rPathAttributionCriteria
-    , rId
-    , rCrossDimensionReachCriteria
-    , rType
-    , rSubAccountId
-    , rFloodlightCriteria
-    , rCriteria
-    , rFileName
-
-    -- ** PlacementPaymentSource
-    , PlacementPaymentSource (..)
-
-    -- ** SiteSkippableSetting
-    , SiteSkippableSetting
-    , siteSkippableSetting
-    , sssSkipOffSet
-    , sssProgressOffSet
-    , sssKind
-    , sssSkippable
-
-    -- ** Rule
-    , Rule
-    , rule
-    , rulTargetingTemplateId
-    , rulName
-    , rulAssetId
-
-    -- ** ReportsFilesListSortOrder
-    , ReportsFilesListSortOrder (..)
-
-    -- ** Campaign
-    , Campaign
-    , campaign
-    , camMeasurementPartnerLink
-    , camAdBlockingConfiguration
-    , camCreativeOptimizationConfiguration
-    , camCreativeGroupIds
-    , camNielsenOCREnabled
-    , camKind
-    , camClickThroughURLSuffixProperties
-    , camAdvertiserId
-    , camEndDate
-    , camAdvertiserIdDimensionValue
-    , camIdDimensionValue
-    , camEventTagOverrides
-    , camStartDate
-    , camAccountId
-    , camName
-    , camAdvertiserGroupId
-    , camBillingInvoiceCode
-    , camDefaultLandingPageId
-    , camCreateInfo
-    , camLastModifiedInfo
-    , camId
-    , camSubAccountId
-    , camAdditionalCreativeOptimizationConfigurations
-    , camExternalId
-    , camComment
-    , camAudienceSegmentGroups
-    , camArchived
-    , camTraffickerEmails
-    , camDefaultClickThroughEventTagProperties
-
-    -- ** InventoryItemsListSortField
-    , InventoryItemsListSortField (..)
-
-    -- ** EventTagType
-    , EventTagType (..)
-
-    -- ** CreativesListSortOrder
-    , CreativesListSortOrder (..)
-
-    -- ** MeasurementPartnerCampaignLinkMeasurementPartner
-    , MeasurementPartnerCampaignLinkMeasurementPartner (..)
-
-    -- ** InventoryItemsListType
-    , InventoryItemsListType (..)
-
-    -- ** ThirdPartyAuthenticationToken
-    , ThirdPartyAuthenticationToken
-    , thirdPartyAuthenticationToken
-    , tpatValue
-    , tpatName
-
-    -- ** PopupWindowPropertiesPositionType
-    , PopupWindowPropertiesPositionType (..)
-
-    -- ** ClickThroughURL
-    , ClickThroughURL
-    , clickThroughURL
-    , ctuDefaultLandingPage
-    , ctuComputedClickThroughURL
-    , ctuCustomClickThroughURL
-    , ctuLandingPageId
-
-    -- ** TagSettingKeywordOption
-    , TagSettingKeywordOption (..)
-
-    -- ** CreativeAuthoringTool
-    , CreativeAuthoringTool (..)
-
-    -- ** OrderContactContactType
-    , OrderContactContactType (..)
-
-    -- ** CreativeAssetIdType
-    , CreativeAssetIdType (..)
-
-    -- ** AccountUserProFilesListSortOrder
-    , AccountUserProFilesListSortOrder (..)
-
-    -- ** RemarketingListListSource
-    , RemarketingListListSource (..)
-
-    -- ** MeasurementPartnerCampaignLinkLinkStatus
-    , MeasurementPartnerCampaignLinkLinkStatus (..)
-
-    -- ** BrowsersListResponse
-    , BrowsersListResponse
-    , browsersListResponse
-    , blrKind
-    , blrBrowsers
-
-    -- ** AccountUserProFileUserAccessType
-    , AccountUserProFileUserAccessType (..)
-
-    -- ** CreativeAssetStartTimeType
-    , CreativeAssetStartTimeType (..)
-
-    -- ** ProjectAudienceGender
-    , ProjectAudienceGender (..)
-
-    -- ** SiteSettings
-    , SiteSettings
-    , siteSettings
-    , ssDisableNewCookie
-    , ssVideoActiveViewOptOutTemplate
-    , ssAdBlockingOptOut
-    , ssTagSetting
-    , ssActiveViewOptOut
-    , ssVpaidAdapterChoiceTemplate
-
-    -- ** PlacementStrategiesListSortField
-    , PlacementStrategiesListSortField (..)
-
-    -- ** ContentCategoriesListResponse
-    , ContentCategoriesListResponse
-    , contentCategoriesListResponse
-    , cclrNextPageToken
-    , cclrKind
-    , cclrContentCategories
-
-    -- ** UserDefinedVariableConfigurationDataType
-    , UserDefinedVariableConfigurationDataType (..)
-
-    -- ** ReportPathAttributionCriteria
-    , ReportPathAttributionCriteria
-    , reportPathAttributionCriteria
-    , rpacCustomChannelGrouping
-    , rpacMetricNames
-    , rpacDateRange
-    , rpacPathFilters
-    , rpacFloodlightConfigId
-    , rpacDimensions
-    , rpacActivityFilters
-
-    -- ** FloodlightActivityCacheBustingType
-    , FloodlightActivityCacheBustingType (..)
-
-    -- ** CreativesListResponse
-    , CreativesListResponse
-    , creativesListResponse
-    , clrlNextPageToken
-    , clrlKind
-    , clrlCreatives
-
-    -- ** CreativeGroupsListSortOrder
-    , CreativeGroupsListSortOrder (..)
-
-    -- ** OrderDocumentType
-    , OrderDocumentType (..)
-
-    -- ** TagDataFormat
-    , TagDataFormat (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Account
-    , Account
-    , account
-    , aaAccountPermissionIds
-    , aaMaximumImageSize
-    , aaCurrencyId
-    , aaReportsConfiguration
-    , aaNielsenOCREnabled
-    , aaKind
-    , aaLocale
-    , aaActive
-    , aaAvailablePermissionIds
-    , aaTeaserSizeLimit
-    , aaActiveViewOptOut
-    , aaShareReportsWithTwitter
-    , aaName
-    , aaAccountProFile
-    , aaId
-    , aaCountryId
-    , aaActiveAdsLimitTier
-    , aaDefaultCreativeSizeId
-    , aaDescription
+    Account (..),
+    newAccount,
 
-    -- ** ConversionsBatchInsertRequest
-    , ConversionsBatchInsertRequest
-    , conversionsBatchInsertRequest
-    , cbirKind
-    , cbirConversions
-    , cbirEncryptionInfo
+    -- ** Account_AccountProfile
+    Account_AccountProfile (..),
 
-    -- ** AccountActiveAdSummaryActiveAdsLimitTier
-    , AccountActiveAdSummaryActiveAdsLimitTier (..)
-
-    -- ** CreativeAssetChildAssetType
-    , CreativeAssetChildAssetType (..)
-
-    -- ** PlacementGroupsListPlacementGroupType
-    , PlacementGroupsListPlacementGroupType (..)
-
-    -- ** AccountUserProFilesListResponse
-    , AccountUserProFilesListResponse
-    , accountUserProFilesListResponse
-    , aupflrNextPageToken
-    , aupflrAccountUserProFiles
-    , aupflrKind
-
-    -- ** ContentCategory
-    , ContentCategory
-    , contentCategory
-    , conKind
-    , conAccountId
-    , conName
-    , conId
-
-    -- ** ObjectFilterStatus
-    , ObjectFilterStatus (..)
-
-    -- ** ReportCompatibleFields
-    , ReportCompatibleFields
-    , reportCompatibleFields
-    , rcfMetrics
-    , rcfKind
-    , rcfDimensionFilters
-    , rcfPivotedActivityMetrics
-    , rcfDimensions
-
-    -- ** CampaignCreativeAssociationsListSortOrder
-    , CampaignCreativeAssociationsListSortOrder (..)
-
-    -- ** DeliverySchedule
-    , DeliverySchedule
-    , deliverySchedule
-    , dsHardCutoff
-    , dsPriority
-    , dsImpressionRatio
-    , dsFrequencyCap
-
-    -- ** RemarketingList
-    , RemarketingList
-    , remarketingList
-    , rlListSize
-    , rlListPopulationRule
-    , rlLifeSpan
-    , rlKind
-    , rlAdvertiserId
-    , rlAdvertiserIdDimensionValue
-    , rlActive
-    , rlAccountId
-    , rlName
-    , rlListSource
-    , rlId
-    , rlSubAccountId
-    , rlDescription
-
-    -- ** FloodlightActivitiesListSortField
-    , FloodlightActivitiesListSortField (..)
-
-    -- ** DynamicTargetingKeysListResponse
-    , DynamicTargetingKeysListResponse
-    , dynamicTargetingKeysListResponse
-    , dtklrKind
-    , dtklrDynamicTargetingKeys
-
-    -- ** DimensionValueList
-    , DimensionValueList
-    , dimensionValueList
-    , dvlEtag
-    , dvlNextPageToken
-    , dvlKind
-    , dvlItems
-
-    -- ** FloodlightReportCompatibleFields
-    , FloodlightReportCompatibleFields
-    , floodlightReportCompatibleFields
-    , frcfMetrics
-    , frcfKind
-    , frcfDimensionFilters
-    , frcfDimensions
-
-    -- ** UserRolePermissionGroup
-    , UserRolePermissionGroup
-    , userRolePermissionGroup
-    , urpgKind
-    , urpgName
-    , urpgId
-
-    -- ** CreativesListTypes
-    , CreativesListTypes (..)
-
-    -- ** DirectorySiteInpageTagFormatsItem
-    , DirectorySiteInpageTagFormatsItem (..)
-
-    -- ** TagSetting
-    , TagSetting
-    , tagSetting
-    , tsKeywordOption
-    , tsIncludeClickThroughURLs
-    , tsIncludeClickTracking
-    , tsAdditionalKeyValues
-
-    -- ** CreativeAssetWindowMode
-    , CreativeAssetWindowMode (..)
-
-    -- ** CreativeAssetAlignment
-    , CreativeAssetAlignment (..)
-
-    -- ** RemarketingListsListSortOrder
-    , RemarketingListsListSortOrder (..)
-
-    -- ** ReportPathToConversionCriteriaReportProperties
-    , ReportPathToConversionCriteriaReportProperties
-    , reportPathToConversionCriteriaReportProperties
-    , rptccrpMaximumInteractionGap
-    , rptccrpMaximumClickInteractions
-    , rptccrpPivotOnInteractionPath
-    , rptccrpMaximumImpressionInteractions
-    , rptccrpIncludeUnattributedIPConversions
-    , rptccrpImpressionsLookbackWindow
-    , rptccrpClicksLookbackWindow
-    , rptccrpIncludeUnattributedCookieConversions
-    , rptccrpIncludeAttributedIPConversions
-
-    -- ** MeasurementPartnerWrAppingDataLinkStatus
-    , MeasurementPartnerWrAppingDataLinkStatus (..)
-
-    -- ** UserRolePermissionsListResponse
-    , UserRolePermissionsListResponse
-    , userRolePermissionsListResponse
-    , urplrKind
-    , urplrUserRolePermissions
-
-    -- ** PlacementGroupsListPricingTypes
-    , PlacementGroupsListPricingTypes (..)
-
-    -- ** DynamicTargetingKeysDeleteObjectType
-    , DynamicTargetingKeysDeleteObjectType (..)
-
-    -- ** AccountActiveAdsLimitTier
-    , AccountActiveAdsLimitTier (..)
-
-    -- ** AccountsListSortOrder
-    , AccountsListSortOrder (..)
-
-    -- ** PlacementGroupsListResponse
-    , PlacementGroupsListResponse
-    , placementGroupsListResponse
-    , pglrNextPageToken
-    , pglrKind
-    , pglrPlacementGroups
-
-    -- ** MobileCarrier
-    , MobileCarrier
-    , mobileCarrier
-    , mcKind
-    , mcName
-    , mcCountryCode
-    , mcId
-    , mcCountryDartId
-
-    -- ** LandingPage
-    , LandingPage
-    , landingPage
-    , lpKind
-    , lpAdvertiserId
-    , lpURL
-    , lpName
-    , lpDeepLinks
-    , lpId
-    , lpArchived
-
-    -- ** ConnectionTypesListResponse
-    , ConnectionTypesListResponse
-    , connectionTypesListResponse
-    , ctlrKind
-    , ctlrConnectionTypes
-
-    -- ** EventFilter
-    , EventFilter
-    , eventFilter
-    , efKind
-    , efDimensionFilter
-
-    -- ** MeasurementPartnerWrAppingDataMeasurementPartner
-    , MeasurementPartnerWrAppingDataMeasurementPartner (..)
-
-    -- ** OrdersListResponse
-    , OrdersListResponse
-    , ordersListResponse
-    , olrNextPageToken
-    , olrKind
-    , olrOrders
-
-    -- ** ReportList
-    , ReportList
-    , reportList
-    , repEtag
-    , repNextPageToken
-    , repKind
-    , repItems
-
-    -- ** CreativeGroup
-    , CreativeGroup
-    , creativeGroup
-    , cgKind
-    , cgAdvertiserId
-    , cgAdvertiserIdDimensionValue
-    , cgGroupNumber
-    , cgAccountId
-    , cgName
-    , cgId
-    , cgSubAccountId
-
-    -- ** ChannelGrouping
-    , ChannelGrouping
-    , channelGrouping
-    , chaRules
-    , chaKind
-    , chaFallbackName
-    , chaName
-
-    -- ** SubAccountsListSortField
-    , SubAccountsListSortField (..)
-
-    -- ** CampaignCreativeAssociation
-    , CampaignCreativeAssociation
-    , campaignCreativeAssociation
-    , ccaKind
-    , ccaCreativeId
-
-    -- ** ConversionStatus
-    , ConversionStatus
-    , conversionStatus
-    , csKind
-    , csConversion
-    , csErrors
-
-    -- ** LookbackConfiguration
-    , LookbackConfiguration
-    , lookbackConfiguration
-    , lcClickDuration
-    , lcPostImpressionActivitiesDuration
-
-    -- ** VideoFormatFileType
-    , VideoFormatFileType (..)
-
-    -- ** AdsListSortField
-    , AdsListSortField (..)
-
-    -- ** ProjectsListSortField
-    , ProjectsListSortField (..)
-
-    -- ** FloodlightActivityPublisherDynamicTag
-    , FloodlightActivityPublisherDynamicTag
-    , floodlightActivityPublisherDynamicTag
-    , fapdtClickThrough
-    , fapdtSiteIdDimensionValue
-    , fapdtDynamicTag
-    , fapdtDirectorySiteId
-    , fapdtSiteId
-    , fapdtViewThrough
-
-    -- ** AdsListType
-    , AdsListType (..)
+    -- ** Account_ActiveAdsLimitTier
+    Account_ActiveAdsLimitTier (..),
 
     -- ** AccountActiveAdSummary
-    , AccountActiveAdSummary
-    , accountActiveAdSummary
-    , aaasAvailableAds
-    , aaasKind
-    , aaasAccountId
-    , aaasActiveAds
-    , aaasActiveAdsLimitTier
+    AccountActiveAdSummary (..),
+    newAccountActiveAdSummary,
 
-    -- ** CreativeOptimizationConfigurationOptimizationModel
-    , CreativeOptimizationConfigurationOptimizationModel (..)
-
-    -- ** AccountPermissionLevel
-    , AccountPermissionLevel (..)
-
-    -- ** OffSetPosition
-    , OffSetPosition
-    , offSetPosition
-    , ospLeft
-    , ospTop
-
-    -- ** Metric
-    , Metric
-    , metric
-    , mKind
-    , mName
-
-    -- ** RemarketingListShare
-    , RemarketingListShare
-    , remarketingListShare
-    , rlsSharedAdvertiserIds
-    , rlsKind
-    , rlsRemarketingListId
-    , rlsSharedAccountIds
-
-    -- ** EventTagsListResponse
-    , EventTagsListResponse
-    , eventTagsListResponse
-    , etlrKind
-    , etlrEventTags
-
-    -- ** UserRolesListResponse
-    , UserRolesListResponse
-    , userRolesListResponse
-    , urlrNextPageToken
-    , urlrKind
-    , urlrUserRoles
-
-    -- ** ListPopulationTermType
-    , ListPopulationTermType (..)
-
-    -- ** AdvertiserGroupsListSortOrder
-    , AdvertiserGroupsListSortOrder (..)
-
-    -- ** CreativeFieldValuesListSortOrder
-    , CreativeFieldValuesListSortOrder (..)
-
-    -- ** SortedDimensionSortOrder
-    , SortedDimensionSortOrder (..)
-
-    -- ** MobileAppsListDirectories
-    , MobileAppsListDirectories (..)
-
-    -- ** CompatibleFields
-    , CompatibleFields
-    , compatibleFields
-    , cfPathReportCompatibleFields
-    , cfReachReportCompatibleFields
-    , cfCrossDimensionReachReportCompatibleFields
-    , cfPathAttributionReportCompatibleFields
-    , cfKind
-    , cfFloodlightReportCompatibleFields
-    , cfReportCompatibleFields
-    , cfPathToConversionReportCompatibleFields
-
-    -- ** AudienceSegment
-    , AudienceSegment
-    , audienceSegment
-    , asName
-    , asId
-    , asAllocation
-
-    -- ** FilesListSortField
-    , FilesListSortField (..)
-
-    -- ** ConversionsBatchUpdateRequest
-    , ConversionsBatchUpdateRequest
-    , conversionsBatchUpdateRequest
-    , cburbKind
-    , cburbConversions
-    , cburbEncryptionInfo
-
-    -- ** DirectorySiteInterstitialTagFormatsItem
-    , DirectorySiteInterstitialTagFormatsItem (..)
-
-    -- ** DfpSettings
-    , DfpSettings
-    , dfpSettings
-    , dsPubPaidPlacementAccepted
-    , dsDfpNetworkName
-    , dsPublisherPortalOnly
-    , dsProgrammaticPlacementAccepted
-    , dsDfpNetworkCode
-
-    -- ** EventTagsListSortField
-    , EventTagsListSortField (..)
-
-    -- ** PathToConversionReportCompatibleFields
-    , PathToConversionReportCompatibleFields
-    , pathToConversionReportCompatibleFields
-    , ptcrcfMetrics
-    , ptcrcfKind
-    , ptcrcfConversionDimensions
-    , ptcrcfCustomFloodlightVariables
-    , ptcrcfPerInteractionDimensions
-
-    -- ** InventoryItemType
-    , InventoryItemType (..)
-
-    -- ** CreativeAssetPositionTopUnit
-    , CreativeAssetPositionTopUnit (..)
-
-    -- ** City
-    , City
-    , city
-    , ccMetroCode
-    , ccRegionCode
-    , ccKind
-    , ccRegionDartId
-    , ccMetroDmaId
-    , ccName
-    , ccCountryCode
-    , ccCountryDartId
-    , ccDartId
-
-    -- ** PlatformType
-    , PlatformType
-    , platformType
-    , ptKind
-    , ptName
-    , ptId
-
-    -- ** FloodlightActivityFloodlightActivityGroupType
-    , FloodlightActivityFloodlightActivityGroupType (..)
-
-    -- ** PricingGroupType
-    , PricingGroupType (..)
-
-    -- ** KeyValueTargetingExpression
-    , KeyValueTargetingExpression
-    , keyValueTargetingExpression
-    , kvteExpression
-
-    -- ** CompanionClickThroughOverride
-    , CompanionClickThroughOverride
-    , companionClickThroughOverride
-    , cctoCreativeId
-    , cctoClickThroughURL
-
-    -- ** FloodlightActivityFloodlightTagType
-    , FloodlightActivityFloodlightTagType (..)
-
-    -- ** FloodlightActivityGroupsListSortOrder
-    , FloodlightActivityGroupsListSortOrder (..)
-
-    -- ** CreativeRotationType
-    , CreativeRotationType (..)
-
-    -- ** OrdersListSortField
-    , OrdersListSortField (..)
-
-    -- ** PlacementGroupsListSortField
-    , PlacementGroupsListSortField (..)
-
-    -- ** DirectorySitesListSortOrder
-    , DirectorySitesListSortOrder (..)
-
-    -- ** AdvertisersListResponse
-    , AdvertisersListResponse
-    , advertisersListResponse
-    , advNextPageToken
-    , advKind
-    , advAdvertisers
-
-    -- ** CountriesListResponse
-    , CountriesListResponse
-    , countriesListResponse
-    , couKind
-    , couCountries
-
-    -- ** AccountPermissionGroupsListResponse
-    , AccountPermissionGroupsListResponse
-    , accountPermissionGroupsListResponse
-    , apglrKind
-    , apglrAccountPermissionGroups
-
-    -- ** PopupWindowProperties
-    , PopupWindowProperties
-    , popupWindowProperties
-    , pwpOffSet
-    , pwpDimension
-    , pwpShowStatusBar
-    , pwpShowMenuBar
-    , pwpPositionType
-    , pwpShowAddressBar
-    , pwpShowScrollBar
-    , pwpShowToolBar
-    , pwpTitle
-
-    -- ** CreativeAssetDetectedFeaturesItem
-    , CreativeAssetDetectedFeaturesItem (..)
-
-    -- ** FloodlightActivityGroupType
-    , FloodlightActivityGroupType (..)
-
-    -- ** EventTagOverride
-    , EventTagOverride
-    , eventTagOverride
-    , etoEnabled
-    , etoId
-
-    -- ** PlacementsGeneratetagsTagFormats
-    , PlacementsGeneratetagsTagFormats (..)
-
-    -- ** AccountUserProFilesListSortField
-    , AccountUserProFilesListSortField (..)
-
-    -- ** OperatingSystemVersion
-    , OperatingSystemVersion
-    , operatingSystemVersion
-    , osvMinorVersion
-    , osvKind
-    , osvOperatingSystem
-    , osvMajorVersion
-    , osvName
-    , osvId
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** PathFilterPathMatchPosition
-    , PathFilterPathMatchPosition (..)
-
-    -- ** InventoryItemsListSortOrder
-    , InventoryItemsListSortOrder (..)
-
-    -- ** PlacementStrategiesListSortOrder
-    , PlacementStrategiesListSortOrder (..)
+    -- ** AccountActiveAdSummary_ActiveAdsLimitTier
+    AccountActiveAdSummary_ActiveAdsLimitTier (..),
 
     -- ** AccountPermission
-    , AccountPermission
-    , accountPermission
-    , acccKind
-    , acccAccountProFiles
-    , acccName
-    , acccId
-    , acccLevel
-    , acccPermissionGroupId
+    AccountPermission (..),
+    newAccountPermission,
 
-    -- ** MeasurementPartnerCampaignLink
-    , MeasurementPartnerCampaignLink
-    , measurementPartnerCampaignLink
-    , mpclLinkStatus
-    , mpclMeasurementPartner
-    , mpclPartnerCampaignId
+    -- ** AccountPermission_AccountProfilesItem
+    AccountPermission_AccountProfilesItem (..),
 
-    -- ** UserProFile
-    , UserProFile
-    , userProFile
-    , upfEtag
-    , upfKind
-    , upfAccountName
-    , upfProFileId
-    , upfUserName
-    , upfAccountId
-    , upfSubAccountName
-    , upfSubAccountId
-
-    -- ** OperatingSystemsListResponse
-    , OperatingSystemsListResponse
-    , operatingSystemsListResponse
-    , oslrKind
-    , oslrOperatingSystems
-
-    -- ** ReportDelivery
-    , ReportDelivery
-    , reportDelivery
-    , rdEmailOwner
-    , rdRecipients
-    , rdMessage
-    , rdEmailOwnerDeliveryType
-
-    -- ** TargetableRemarketingList
-    , TargetableRemarketingList
-    , targetableRemarketingList
-    , trlListSize
-    , trlLifeSpan
-    , trlKind
-    , trlAdvertiserId
-    , trlAdvertiserIdDimensionValue
-    , trlActive
-    , trlAccountId
-    , trlName
-    , trlListSource
-    , trlId
-    , trlSubAccountId
-    , trlDescription
-
-    -- ** ReportsFilesListSortField
-    , ReportsFilesListSortField (..)
-
-    -- ** PostalCodesListResponse
-    , PostalCodesListResponse
-    , postalCodesListResponse
-    , pclrKind
-    , pclrPostalCodes
-
-    -- ** ChangeLog
-    , ChangeLog
-    , changeLog
-    , chahUserProFileId
-    , chahObjectType
-    , chahUserProFileName
-    , chahKind
-    , chahObjectId
-    , chahAction
-    , chahTransactionId
-    , chahOldValue
-    , chahAccountId
-    , chahNewValue
-    , chahFieldName
-    , chahId
-    , chahSubAccountId
-    , chahChangeTime
-
-    -- ** Language
-    , Language
-    , language
-    , lLanguageCode
-    , lKind
-    , lName
-    , lId
-
-    -- ** CreativesListSortField
-    , CreativesListSortField (..)
-
-    -- ** PlacementStrategy
-    , PlacementStrategy
-    , placementStrategy
-    , psKind
-    , psAccountId
-    , psName
-    , psId
-
-    -- ** FloodlightActivity
-    , FloodlightActivity
-    , floodlightActivity
-    , faCountingMethod
-    , faAttributionEnabled
-    , faStatus
-    , faTagString
-    , faSecure
-    , faExpectedURL
-    , faFloodlightActivityGroupTagString
-    , faFloodlightConfigurationId
-    , faKind
-    , faAdvertiserId
-    , faAdvertiserIdDimensionValue
-    , faSSLCompliant
-    , faIdDimensionValue
-    , faTagFormat
-    , faCacheBustingType
-    , faAccountId
-    , faName
-    , faPublisherTags
-    , faFloodlightActivityGroupId
-    , faFloodlightActivityGroupType
-    , faDefaultTags
-    , faFloodlightTagType
-    , faFloodlightActivityGroupName
-    , faId
-    , faSSLRequired
-    , faUserDefinedVariableTypes
-    , faSubAccountId
-    , faNotes
-    , faFloodlightConfigurationIdDimensionValue
-
-    -- ** DayPartTargetingDaysOfWeekItem
-    , DayPartTargetingDaysOfWeekItem (..)
-
-    -- ** CustomFloodlightVariable
-    , CustomFloodlightVariable
-    , customFloodlightVariable
-    , cusKind
-    , cusValue
-    , cusType
-
-    -- ** CreativeRotationWeightCalculationStrategy
-    , CreativeRotationWeightCalculationStrategy (..)
-
-    -- ** FilesListScope
-    , FilesListScope (..)
-
-    -- ** ContentCategoriesListSortField
-    , ContentCategoriesListSortField (..)
-
-    -- ** ProjectAudienceAgeGroup
-    , ProjectAudienceAgeGroup (..)
-
-    -- ** PlatformTypesListResponse
-    , PlatformTypesListResponse
-    , platformTypesListResponse
-    , ptlrKind
-    , ptlrPlatformTypes
-
-    -- ** AdType
-    , AdType (..)
-
-    -- ** LastModifiedInfo
-    , LastModifiedInfo
-    , lastModifiedInfo
-    , lmiTime
-
-    -- ** MeasurementPartnerAdvertiserLinkLinkStatus
-    , MeasurementPartnerAdvertiserLinkLinkStatus (..)
-
-    -- ** TargetWindow
-    , TargetWindow
-    , targetWindow
-    , twCustomHTML
-    , twTargetWindowOption
-
-    -- ** ChangeLogsListAction
-    , ChangeLogsListAction (..)
-
-    -- ** CreativeArtworkType
-    , CreativeArtworkType (..)
-
-    -- ** PlacementStatus
-    , PlacementStatus (..)
+    -- ** AccountPermission_Level
+    AccountPermission_Level (..),
 
     -- ** AccountPermissionGroup
-    , AccountPermissionGroup
-    , accountPermissionGroup
-    , apgpKind
-    , apgpName
-    , apgpId
+    AccountPermissionGroup (..),
+    newAccountPermissionGroup,
 
-    -- ** Advertiser
-    , Advertiser
-    , advertiser
-    , advdMeasurementPartnerLink
-    , advdOriginalFloodlightConfigurationId
-    , advdStatus
-    , advdFloodlightConfigurationId
-    , advdKind
-    , advdSuspended
-    , advdIdDimensionValue
-    , advdAccountId
-    , advdDefaultEmail
-    , advdName
-    , advdAdvertiserGroupId
-    , advdDefaultClickThroughEventTagId
-    , advdId
-    , advdSubAccountId
-    , advdFloodlightConfigurationIdDimensionValue
-    , advdClickThroughURLSuffix
+    -- ** AccountPermissionGroupsListResponse
+    AccountPermissionGroupsListResponse (..),
+    newAccountPermissionGroupsListResponse,
 
-    -- ** ReportScheduleRunsOnDayOfMonth
-    , ReportScheduleRunsOnDayOfMonth (..)
+    -- ** AccountPermissionsListResponse
+    AccountPermissionsListResponse (..),
+    newAccountPermissionsListResponse,
 
-    -- ** UserRole
-    , UserRole
-    , userRole
-    , urParentUserRoleId
-    , urKind
-    , urDefaultUserRole
-    , urAccountId
-    , urName
-    , urId
-    , urPermissions
-    , urSubAccountId
+    -- ** AccountUserProfile
+    AccountUserProfile (..),
+    newAccountUserProfile,
 
-    -- ** PathFilter
-    , PathFilter
-    , pathFilter
-    , pfEventFilters
-    , pfKind
-    , pfPathMatchPosition
+    -- ** AccountUserProfile_TraffickerType
+    AccountUserProfile_TraffickerType (..),
 
-    -- ** MeasurementPartnerAdvertiserLinkMeasurementPartner
-    , MeasurementPartnerAdvertiserLinkMeasurementPartner (..)
+    -- ** AccountUserProfile_UserAccessType
+    AccountUserProfile_UserAccessType (..),
 
-    -- ** FloodlightActivityUserDefinedVariableTypesItem
-    , FloodlightActivityUserDefinedVariableTypesItem (..)
+    -- ** AccountUserProfilesListResponse
+    AccountUserProfilesListResponse (..),
+    newAccountUserProfilesListResponse,
 
-    -- ** EventTagSiteFilterType
-    , EventTagSiteFilterType (..)
+    -- ** AccountsListResponse
+    AccountsListResponse (..),
+    newAccountsListResponse,
 
-    -- ** ReportFormat
-    , ReportFormat (..)
+    -- ** Activities
+    Activities (..),
+    newActivities,
 
-    -- ** PlacementGroupPlacementGroupType
-    , PlacementGroupPlacementGroupType (..)
+    -- ** Ad
+    Ad (..),
+    newAd,
 
-    -- ** VideoFormatsListResponse
-    , VideoFormatsListResponse
-    , videoFormatsListResponse
-    , vflrKind
-    , vflrVideoFormats
+    -- ** Ad_Compatibility
+    Ad_Compatibility (..),
 
-    -- ** DirectorySitesListResponse
-    , DirectorySitesListResponse
-    , directorySitesListResponse
-    , dslrNextPageToken
-    , dslrKind
-    , dslrDirectorySites
+    -- ** Ad_Type
+    Ad_Type (..),
 
-    -- ** ConversionError
-    , ConversionError
-    , conversionError
-    , ceKind
-    , ceCode
-    , ceMessage
-
-    -- ** PricingPricingType
-    , PricingPricingType (..)
-
-    -- ** PricingSchedulePricingPeriod
-    , PricingSchedulePricingPeriod
-    , pricingSchedulePricingPeriod
-    , psppEndDate
-    , psppRateOrCostNanos
-    , psppStartDate
-    , psppUnits
-    , psppPricingComment
-
-    -- ** SubAccountsListSortOrder
-    , SubAccountsListSortOrder (..)
-
-    -- ** Region
-    , Region
-    , region
-    , regRegionCode
-    , regKind
-    , regName
-    , regCountryCode
-    , regCountryDartId
-    , regDartId
-
-    -- ** UniversalAdIdRegistry
-    , UniversalAdIdRegistry (..)
-
-    -- ** AdvertiserGroupsListResponse
-    , AdvertiserGroupsListResponse
-    , advertiserGroupsListResponse
-    , aglrNextPageToken
-    , aglrKind
-    , aglrAdvertiserGroups
-
-    -- ** AdsListSortOrder
-    , AdsListSortOrder (..)
-
-    -- ** ProjectsListSortOrder
-    , ProjectsListSortOrder (..)
-
-    -- ** CreativeAssignment
-    , CreativeAssignment
-    , creativeAssignment
-    , caCreativeGroupAssignments
-    , caStartTime
-    , caWeight
-    , caRichMediaExitOverrides
-    , caSSLCompliant
-    , caCreativeId
-    , caClickThroughURL
-    , caApplyEventTags
-    , caActive
-    , caSequence
-    , caEndTime
-    , caCompanionCreativeOverrides
-    , caCreativeIdDimensionValue
-
-    -- ** DimensionFilter
-    , DimensionFilter
-    , dimensionFilter
-    , dfKind
-    , dfValue
-    , dfDimensionName
-
-    -- ** PathReportDimensionValue
-    , PathReportDimensionValue
-    , pathReportDimensionValue
-    , prdvKind
-    , prdvValues
-    , prdvMatchType
-    , prdvIds
-    , prdvDimensionName
-
-    -- ** UserProFileList
-    , UserProFileList
-    , userProFileList
-    , upflEtag
-    , upflKind
-    , upflItems
-
-    -- ** RemarketingListsListSortField
-    , RemarketingListsListSortField (..)
-
-    -- ** FloodlightConfiguration
-    , FloodlightConfiguration
-    , floodlightConfiguration
-    , fcTagSettings
-    , fcExposureToConversionEnabled
-    , fcInAppAttributionTrackingEnabled
-    , fcThirdPartyAuthenticationTokens
-    , fcKind
-    , fcAdvertiserId
-    , fcAnalyticsDataSharingEnabled
-    , fcAdvertiserIdDimensionValue
-    , fcIdDimensionValue
-    , fcLookbackConfiguration
-    , fcAccountId
-    , fcId
-    , fcNATuralSearchConversionAttributionOption
-    , fcUserDefinedVariableConfigurations
-    , fcSubAccountId
-    , fcCustomViewabilityMetric
-    , fcFirstDayOfWeek
-    , fcOmnitureSettings
-
-    -- ** MobileAppDirectory
-    , MobileAppDirectory (..)
-
-    -- ** CompanionSetting
-    , CompanionSetting
-    , companionSetting
-    , comKind
-    , comImageOnly
-    , comCompanionsDisabled
-    , comEnabledSizes
-
-    -- ** ReportScheduleRepeatsOnWeekDaysItem
-    , ReportScheduleRepeatsOnWeekDaysItem (..)
-
-    -- ** FloodlightActivityGroupsListResponse
-    , FloodlightActivityGroupsListResponse
-    , floodlightActivityGroupsListResponse
-    , faglrNextPageToken
-    , faglrKind
-    , faglrFloodlightActivityGroups
-
-    -- ** CreativeGroupAssignmentCreativeGroupNumber
-    , CreativeGroupAssignmentCreativeGroupNumber (..)
-
-    -- ** Conversion
-    , Conversion
-    , conversion
-    , conoTreatmentForUnderage
-    , conoEncryptedUserIdCandidates
-    , conoTimestampMicros
-    , conoLimitAdTracking
-    , conoEncryptedUserId
-    , conoMobileDeviceId
-    , conoFloodlightConfigurationId
-    , conoKind
-    , conoFloodlightActivityId
-    , conoNonPersonalizedAd
-    , conoQuantity
-    , conoValue
-    , conoCustomVariables
-    , conoChildDirectedTreatment
-    , conoGclid
-    , conoOrdinal
-    , conoDclid
-    , conoMatchId
-
-    -- ** CreativeFieldValuesListResponse
-    , CreativeFieldValuesListResponse
-    , creativeFieldValuesListResponse
-    , cfvlrNextPageToken
-    , cfvlrKind
-    , cfvlrCreativeFieldValues
-
-    -- ** SiteSettingsVpaidAdapterChoiceTemplate
-    , SiteSettingsVpaidAdapterChoiceTemplate (..)
-
-    -- ** MeasurementPartnerWrAppingData
-    , MeasurementPartnerWrAppingData
-    , measurementPartnerWrAppingData
-    , mpwadLinkStatus
-    , mpwadMeasurementPartner
-    , mpwadWrAppedTag
-    , mpwadTagWrAppingMode
-
-    -- ** AccountsListSortField
-    , AccountsListSortField (..)
-
-    -- ** RichMediaExitOverride
-    , RichMediaExitOverride
-    , richMediaExitOverride
-    , rmeoEnabled
-    , rmeoClickThroughURL
-    , rmeoExitId
-
-    -- ** AdvertisersListStatus
-    , AdvertisersListStatus (..)
-
-    -- ** CustomViewabilityMetric
-    , CustomViewabilityMetric
-    , customViewabilityMetric
-    , cvmName
-    , cvmId
-    , cvmConfiguration
-
-    -- ** DimensionValueMatchType
-    , DimensionValueMatchType (..)
-
-    -- ** AdvertiserLandingPagesListResponse
-    , AdvertiserLandingPagesListResponse
-    , advertiserLandingPagesListResponse
-    , alplrLandingPages
-    , alplrNextPageToken
-    , alplrKind
-
-    -- ** MobileAppsListResponse
-    , MobileAppsListResponse
-    , mobileAppsListResponse
-    , malrNextPageToken
-    , malrKind
-    , malrMobileApps
-
-    -- ** SortedDimension
-    , SortedDimension
-    , sortedDimension
-    , sdKind
-    , sdSortOrder
-    , sdName
-
-    -- ** PathReportDimensionValueMatchType
-    , PathReportDimensionValueMatchType (..)
-
-    -- ** PlacementGroupsListSortOrder
-    , PlacementGroupsListSortOrder (..)
-
-    -- ** CreativeFieldsListResponse
-    , CreativeFieldsListResponse
-    , creativeFieldsListResponse
-    , cflrNextPageToken
-    , cflrKind
-    , cflrCreativeFields
-
-    -- ** TargetingTemplatesListResponse
-    , TargetingTemplatesListResponse
-    , targetingTemplatesListResponse
-    , ttlrNextPageToken
-    , ttlrKind
-    , ttlrTargetingTemplates
-
-    -- ** PlacementsGenerateTagsResponse
-    , PlacementsGenerateTagsResponse
-    , placementsGenerateTagsResponse
-    , pgtrKind
-    , pgtrPlacementTags
-
-    -- ** CreativeAsset
-    , CreativeAsset
-    , creativeAsset
-    , caaZIndex
-    , caaPushdown
-    , caaFrameRate
-    , caaOriginalBackup
-    , caaWindowMode
-    , caaFlashVersion
-    , caaPushdownDuration
-    , caaSize
-    , caaVerticallyLocked
-    , caaOffSet
-    , caaStreamingServingURL
-    , caaZipFilesize
-    , caaTransparency
-    , caaHideSelectionBoxes
-    , caaSSLCompliant
-    , caaFileSize
-    , caaAssetIdentifier
-    , caaCompanionCreativeIds
-    , caaDurationType
-    , caaProgressiveServingURL
-    , caaIdDimensionValue
-    , caaActive
-    , caaRole
-    , caaMimeType
-    , caaPositionTopUnit
-    , caaPositionLeftUnit
-    , caaAlignment
-    , caaExpandedDimension
-    , caaAdditionalSizes
-    , caaZipFilename
-    , caaMediaDuration
-    , caaActionScript3
-    , caaDisplayType
-    , caaChildAssetType
-    , caaCollapsedSize
-    , caaAudioSampleRate
-    , caaId
-    , caaBitRate
-    , caaPoliteLoad
-    , caaCustomStartTimeValue
-    , caaStartTimeType
-    , caaAudioBitRate
-    , caaDuration
-    , caaOrientation
-    , caaArtworkType
-    , caaHideFlashObjects
-    , caaDetectedFeatures
-    , caaBackupImageExit
-    , caaPosition
-    , caaHorizontallyLocked
-
-    -- ** AdCompatibility
-    , AdCompatibility (..)
-
-    -- ** CreativeFieldValuesListSortField
-    , CreativeFieldValuesListSortField (..)
-
-    -- ** LanguageTargeting
-    , LanguageTargeting
-    , languageTargeting
-    , ltLanguages
-
-    -- ** CreativeAssetSelection
-    , CreativeAssetSelection
-    , creativeAssetSelection
-    , casRules
-    , casDefaultAssetId
-
-    -- ** PlacementsListResponse
-    , PlacementsListResponse
-    , placementsListResponse
-    , plaNextPageToken
-    , plaKind
-    , plaPlacements
-
-    -- ** FloodlightActivityGroupsListSortField
-    , FloodlightActivityGroupsListSortField (..)
-
-    -- ** OrdersListSortOrder
-    , OrdersListSortOrder (..)
-
-    -- ** ReportSchedule
-    , ReportSchedule
-    , reportSchedule
-    , rsEvery
-    , rsActive
-    , rsRepeats
-    , rsStartDate
-    , rsExpirationDate
-    , rsRunsOnDayOfMonth
-    , rsRepeatsOnWeekDays
-
-    -- ** ReportPathToConversionCriteria
-    , ReportPathToConversionCriteria
-    , reportPathToConversionCriteria
-    , rptccReportProperties
-    , rptccMetricNames
-    , rptccCustomRichMediaEvents
-    , rptccDateRange
-    , rptccConversionDimensions
-    , rptccCustomFloodlightVariables
-    , rptccFloodlightConfigId
-    , rptccActivityFilters
-    , rptccPerInteractionDimensions
-
-    -- ** MetrosListResponse
-    , MetrosListResponse
-    , metrosListResponse
-    , mlrKind
-    , mlrMetros
-
-    -- ** AccountAccountProFile
-    , AccountAccountProFile (..)
-
-    -- ** ConversionsBatchInsertResponse
-    , ConversionsBatchInsertResponse
-    , conversionsBatchInsertResponse
-    , cbirbStatus
-    , cbirbKind
-    , cbirbHasFailures
-
-    -- ** OrderDocumentsListResponse
-    , OrderDocumentsListResponse
-    , orderDocumentsListResponse
-    , odlrNextPageToken
-    , odlrKind
-    , odlrOrderDocuments
-
-    -- ** Recipient
-    , Recipient
-    , recipient
-    , recEmail
-    , recKind
-    , recDeliveryType
-
-    -- ** CreativeType
-    , CreativeType (..)
-
-    -- ** FilesListSortOrder
-    , FilesListSortOrder (..)
-
-    -- ** AdvertiserGroupsListSortField
-    , AdvertiserGroupsListSortField (..)
-
-    -- ** TargetWindowTargetWindowOption
-    , TargetWindowTargetWindowOption (..)
-
-    -- ** PlacementsListPricingTypes
-    , PlacementsListPricingTypes (..)
-
-    -- ** EventTagsListSortOrder
-    , EventTagsListSortOrder (..)
-
-    -- ** EncryptionInfoEncryptionSource
-    , EncryptionInfoEncryptionSource (..)
-
-    -- ** DirectorySitesListSortField
-    , DirectorySitesListSortField (..)
-
-    -- ** Site
-    , Site
-    , site
-    , sitiVideoSettings
-    , sitiKind
-    , sitiKeyName
-    , sitiSiteContacts
-    , sitiSiteSettings
-    , sitiIdDimensionValue
-    , sitiDirectorySiteIdDimensionValue
-    , sitiAccountId
-    , sitiName
-    , sitiDirectorySiteId
-    , sitiId
-    , sitiSubAccountId
-    , sitiApproved
-
-    -- ** ReportCrossDimensionReachCriteriaDimension
-    , ReportCrossDimensionReachCriteriaDimension (..)
-
-    -- ** SitesListSortOrder
-    , SitesListSortOrder (..)
-
-    -- ** UserDefinedVariableConfiguration
-    , UserDefinedVariableConfiguration
-    , userDefinedVariableConfiguration
-    , udvcReportName
-    , udvcDataType
-    , udvcVariableType
-
-    -- ** ReportCrossDimensionReachCriteria
-    , ReportCrossDimensionReachCriteria
-    , reportCrossDimensionReachCriteria
-    , rcdrcPivoted
-    , rcdrcBreakdown
-    , rcdrcDimension
-    , rcdrcMetricNames
-    , rcdrcDimensionFilters
-    , rcdrcDateRange
-    , rcdrcOverlapMetricNames
-
-    -- ** FileURLs
-    , FileURLs
-    , fileURLs
-    , fuBrowserURL
-    , fuAPIURL
-
-    -- ** CampaignCreativeAssociationsListResponse
-    , CampaignCreativeAssociationsListResponse
-    , campaignCreativeAssociationsListResponse
-    , ccalrCampaignCreativeAssociations
-    , ccalrNextPageToken
-    , ccalrKind
-
-    -- ** PlacementTagFormatsItem
-    , PlacementTagFormatsItem (..)
-
-    -- ** Order
-    , Order
-    , order
-    , oSellerOrderId
-    , oSellerOrganizationName
-    , oKind
-    , oAdvertiserId
-    , oPlanningTermId
-    , oAccountId
-    , oName
-    , oSiteNames
-    , oLastModifiedInfo
-    , oBuyerOrganizationName
-    , oId
-    , oBuyerInvoiceId
-    , oComments
-    , oProjectId
-    , oSubAccountId
-    , oNotes
-    , oContacts
-    , oSiteId
-    , oTermsAndConditions
-    , oApproverUserProFileIds
-
-    -- ** CreativeAssetId
-    , CreativeAssetId
-    , creativeAssetId
-    , caiName
-    , caiType
-
-    -- ** FrequencyCap
-    , FrequencyCap
-    , frequencyCap
-    , fcImpressions
-    , fcDuration
-
-    -- ** File
-    , File
-    , file
-    , filStatus
-    , filEtag
-    , filKind
-    , filURLs
-    , filReportId
-    , filDateRange
-    , filFormat
-    , filLastModifiedTime
-    , filId
-    , filFileName
-
-    -- ** DynamicTargetingKeyObjectType
-    , DynamicTargetingKeyObjectType (..)
-
-    -- ** ReportType
-    , ReportType (..)
-
-    -- ** CreativeAssetMetadataWarnedValidationRulesItem
-    , CreativeAssetMetadataWarnedValidationRulesItem (..)
-
-    -- ** CreativeGroupsListResponse
-    , CreativeGroupsListResponse
-    , creativeGroupsListResponse
-    , cglrCreativeGroups
-    , cglrNextPageToken
-    , cglrKind
-
-    -- ** AdSlotPaymentSourceType
-    , AdSlotPaymentSourceType (..)
-
-    -- ** MobileCarriersListResponse
-    , MobileCarriersListResponse
-    , mobileCarriersListResponse
-    , mclrMobileCarriers
-    , mclrKind
-
-    -- ** AccountPermissionAccountProFilesItem
-    , AccountPermissionAccountProFilesItem (..)
-
-    -- ** CreativeAssetMetadata
-    , CreativeAssetMetadata
-    , creativeAssetMetadata
-    , camaRichMedia
-    , camaCounterCustomEvents
-    , camaKind
-    , camaAssetIdentifier
-    , camaIdDimensionValue
-    , camaExitCustomEvents
-    , camaClickTags
-    , camaWarnedValidationRules
-    , camaId
-    , camaTimerCustomEvents
-    , camaDetectedFeatures
-
-    -- ** OmnitureSettings
-    , OmnitureSettings
-    , omnitureSettings
-    , osOmnitureCostDataEnabled
-    , osOmnitureIntegrationEnabled
-
-    -- ** ConnectionType
-    , ConnectionType
-    , connectionType
-    , cttKind
-    , cttName
-    , cttId
-
-    -- ** CreativeCustomEventAdvertiserCustomEventType
-    , CreativeCustomEventAdvertiserCustomEventType (..)
-
-    -- ** PlacementGroup
-    , PlacementGroup
-    , placementGroup
-    , plalPlacementStrategyId
-    , plalSiteIdDimensionValue
-    , plalPricingSchedule
-    , plalKind
-    , plalCampaignIdDimensionValue
-    , plalAdvertiserId
-    , plalAdvertiserIdDimensionValue
-    , plalCampaignId
-    , plalIdDimensionValue
-    , plalPlacementGroupType
-    , plalContentCategoryId
-    , plalDirectorySiteIdDimensionValue
-    , plalAccountId
-    , plalName
-    , plalDirectorySiteId
-    , plalCreateInfo
-    , plalChildPlacementIds
-    , plalLastModifiedInfo
-    , plalId
-    , plalPrimaryPlacementId
-    , plalSubAccountId
-    , plalExternalId
-    , plalComment
-    , plalPrimaryPlacementIdDimensionValue
-    , plalSiteId
-    , plalArchived
-
-    -- ** EventTag
-    , EventTag
-    , eventTag
-    , etStatus
-    , etExcludeFromAdxRequests
-    , etEnabledByDefault
-    , etKind
-    , etCampaignIdDimensionValue
-    , etAdvertiserId
-    , etURL
-    , etAdvertiserIdDimensionValue
-    , etSSLCompliant
-    , etCampaignId
-    , etAccountId
-    , etName
-    , etURLEscapeLevels
-    , etSiteIds
-    , etId
-    , etSubAccountId
-    , etType
-    , etSiteFilterType
-
-    -- ** UserRolePermission
-    , UserRolePermission
-    , userRolePermission
-    , useKind
-    , useAvailability
-    , useName
-    , useId
-    , usePermissionGroupId
-
-    -- ** ChangeLogsListObjectType
-    , ChangeLogsListObjectType (..)
-
-    -- ** OrderContact
-    , OrderContact
-    , orderContact
-    , ocSignatureUserProFileId
-    , ocContactName
-    , ocContactTitle
-    , ocContactType
-    , ocContactInfo
-
-    -- ** TranscodeSetting
-    , TranscodeSetting
-    , transcodeSetting
-    , tsKind
-    , tsEnabledVideoFormats
-
-    -- ** FloodlightActivitiesGenerateTagResponse
-    , FloodlightActivitiesGenerateTagResponse
-    , floodlightActivitiesGenerateTagResponse
-    , fagtrGlobalSiteTagGlobalSnippet
-    , fagtrFloodlightActivityTag
-    , fagtrKind
+    -- ** AdBlockingConfiguration
+    AdBlockingConfiguration (..),
+    newAdBlockingConfiguration,
 
     -- ** AdSlot
-    , AdSlot
-    , adSlot
-    , assHeight
-    , assPaymentSourceType
-    , assLinkedPlacementId
-    , assWidth
-    , assPrimary
-    , assName
-    , assComment
-    , assCompatibility
+    AdSlot (..),
+    newAdSlot,
 
-    -- ** MeasurementPartnerAdvertiserLink
-    , MeasurementPartnerAdvertiserLink
-    , measurementPartnerAdvertiserLink
-    , mpalLinkStatus
-    , mpalMeasurementPartner
-    , mpalPartnerAdvertiserId
+    -- ** AdSlot_Compatibility
+    AdSlot_Compatibility (..),
 
-    -- ** FloodlightActivityStatus
-    , FloodlightActivityStatus (..)
+    -- ** AdSlot_PaymentSourceType
+    AdSlot_PaymentSourceType (..),
 
-    -- ** ThirdPartyTrackingURL
-    , ThirdPartyTrackingURL
-    , thirdPartyTrackingURL
-    , tptuURL
-    , tptuThirdPartyURLType
+    -- ** AdsListResponse
+    AdsListResponse (..),
+    newAdsListResponse,
 
-    -- ** SiteVideoSettingsOrientation
-    , SiteVideoSettingsOrientation (..)
+    -- ** Advertiser
+    Advertiser (..),
+    newAdvertiser,
 
-    -- ** PricingCapCostType
-    , PricingCapCostType (..)
+    -- ** Advertiser_Status
+    Advertiser_Status (..),
 
-    -- ** OrderDocument
-    , OrderDocument
-    , orderDocument
-    , odSigned
-    , odKind
-    , odAdvertiserId
-    , odLastSentTime
-    , odAmendedOrderDocumentId
-    , odLastSentRecipients
-    , odEffectiveDate
-    , odApprovedByUserProFileIds
-    , odAccountId
-    , odId
-    , odProjectId
-    , odTitle
-    , odSubAccountId
-    , odType
-    , odOrderId
-    , odCancelled
-    , odCreatedInfo
+    -- ** AdvertiserGroup
+    AdvertiserGroup (..),
+    newAdvertiserGroup,
 
-    -- ** Metro
-    , Metro
-    , metro
-    , metMetroCode
-    , metKind
-    , metName
-    , metCountryCode
-    , metDmaId
-    , metCountryDartId
-    , metDartId
+    -- ** AdvertiserGroupsListResponse
+    AdvertiserGroupsListResponse (..),
+    newAdvertiserGroupsListResponse,
 
-    -- ** MobileApp
-    , MobileApp
-    , mobileApp
-    , maKind
-    , maId
-    , maTitle
-    , maPublisherName
-    , maDirectory
+    -- ** AdvertiserLandingPagesListResponse
+    AdvertiserLandingPagesListResponse (..),
+    newAdvertiserLandingPagesListResponse,
 
-    -- ** CreativeAssetDisplayType
-    , CreativeAssetDisplayType (..)
+    -- ** AdvertisersListResponse
+    AdvertisersListResponse (..),
+    newAdvertisersListResponse,
 
-    -- ** Placement
-    , Placement
-    , placement
-    , p1Status
-    , p1VideoSettings
-    , p1PlacementStrategyId
-    , p1PartnerWrAppingData
-    , p1TagFormats
-    , p1SiteIdDimensionValue
-    , p1PricingSchedule
-    , p1Size
-    , p1Kind
-    , p1KeyName
-    , p1CampaignIdDimensionValue
-    , p1AdvertiserId
-    , p1AdvertiserIdDimensionValue
-    , p1CampaignId
-    , p1IdDimensionValue
-    , p1VpaidAdapterChoice
-    , p1AdBlockingOptOut
-    , p1WrAppingOptOut
-    , p1Primary
-    , p1LookbackConfiguration
-    , p1TagSetting
-    , p1ContentCategoryId
-    , p1DirectorySiteIdDimensionValue
-    , p1AccountId
-    , p1PaymentSource
-    , p1Name
-    , p1AdditionalSizes
-    , p1DirectorySiteId
-    , p1CreateInfo
-    , p1VideoActiveViewOptOut
-    , p1LastModifiedInfo
-    , p1Id
-    , p1SSLRequired
-    , p1SubAccountId
-    , p1PlacementGroupIdDimensionValue
-    , p1ExternalId
-    , p1PlacementGroupId
-    , p1Comment
-    , p1SiteId
-    , p1Compatibility
-    , p1Archived
-    , p1PaymentApproved
-    , p1PublisherUpdateInfo
+    -- ** AudienceSegment
+    AudienceSegment (..),
+    newAudienceSegment,
 
-    -- ** FloodlightActivityCountingMethod
-    , FloodlightActivityCountingMethod (..)
+    -- ** AudienceSegmentGroup
+    AudienceSegmentGroup (..),
+    newAudienceSegmentGroup,
 
-    -- ** EncryptionInfo
-    , EncryptionInfo
-    , encryptionInfo
-    , eiEncryptionSource
-    , eiKind
-    , eiEncryptionEntityType
-    , eiEncryptionEntityId
+    -- ** Browser
+    Browser (..),
+    newBrowser,
 
-    -- ** SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , sitNextPageToken
-    , sitKind
-    , sitSites
+    -- ** BrowsersListResponse
+    BrowsersListResponse (..),
+    newBrowsersListResponse,
 
-    -- ** ContentCategoriesListSortOrder
-    , ContentCategoriesListSortOrder (..)
+    -- ** Campaign
+    Campaign (..),
+    newCampaign,
 
-    -- ** TargetingTemplate
-    , TargetingTemplate
-    , targetingTemplate
-    , ttGeoTargeting
-    , ttTechnologyTargeting
-    , ttDayPartTargeting
-    , ttKind
-    , ttAdvertiserId
-    , ttAdvertiserIdDimensionValue
-    , ttAccountId
-    , ttName
-    , ttKeyValueTargetingExpression
-    , ttId
-    , ttSubAccountId
-    , ttLanguageTargeting
-    , ttListTargetingExpression
+    -- ** CampaignCreativeAssociation
+    CampaignCreativeAssociation (..),
+    newCampaignCreativeAssociation,
+
+    -- ** CampaignCreativeAssociationsListResponse
+    CampaignCreativeAssociationsListResponse (..),
+    newCampaignCreativeAssociationsListResponse,
+
+    -- ** CampaignsListResponse
+    CampaignsListResponse (..),
+    newCampaignsListResponse,
+
+    -- ** ChangeLog
+    ChangeLog (..),
+    newChangeLog,
+
+    -- ** ChangeLogsListResponse
+    ChangeLogsListResponse (..),
+    newChangeLogsListResponse,
+
+    -- ** ChannelGrouping
+    ChannelGrouping (..),
+    newChannelGrouping,
+
+    -- ** ChannelGroupingRule
+    ChannelGroupingRule (..),
+    newChannelGroupingRule,
+
+    -- ** CitiesListResponse
+    CitiesListResponse (..),
+    newCitiesListResponse,
+
+    -- ** City
+    City (..),
+    newCity,
+
+    -- ** ClickTag
+    ClickTag (..),
+    newClickTag,
+
+    -- ** ClickThroughUrl
+    ClickThroughUrl (..),
+    newClickThroughUrl,
+
+    -- ** ClickThroughUrlSuffixProperties
+    ClickThroughUrlSuffixProperties (..),
+    newClickThroughUrlSuffixProperties,
+
+    -- ** CompanionClickThroughOverride
+    CompanionClickThroughOverride (..),
+    newCompanionClickThroughOverride,
+
+    -- ** CompanionSetting
+    CompanionSetting (..),
+    newCompanionSetting,
+
+    -- ** CompatibleFields
+    CompatibleFields (..),
+    newCompatibleFields,
+
+    -- ** ConnectionType
+    ConnectionType (..),
+    newConnectionType,
+
+    -- ** ConnectionTypesListResponse
+    ConnectionTypesListResponse (..),
+    newConnectionTypesListResponse,
+
+    -- ** ContentCategoriesListResponse
+    ContentCategoriesListResponse (..),
+    newContentCategoriesListResponse,
+
+    -- ** ContentCategory
+    ContentCategory (..),
+    newContentCategory,
+
+    -- ** Conversion
+    Conversion (..),
+    newConversion,
+
+    -- ** ConversionError
+    ConversionError (..),
+    newConversionError,
+
+    -- ** ConversionError_Code
+    ConversionError_Code (..),
+
+    -- ** ConversionStatus
+    ConversionStatus (..),
+    newConversionStatus,
+
+    -- ** ConversionsBatchInsertRequest
+    ConversionsBatchInsertRequest (..),
+    newConversionsBatchInsertRequest,
+
+    -- ** ConversionsBatchInsertResponse
+    ConversionsBatchInsertResponse (..),
+    newConversionsBatchInsertResponse,
+
+    -- ** ConversionsBatchUpdateRequest
+    ConversionsBatchUpdateRequest (..),
+    newConversionsBatchUpdateRequest,
+
+    -- ** ConversionsBatchUpdateResponse
+    ConversionsBatchUpdateResponse (..),
+    newConversionsBatchUpdateResponse,
+
+    -- ** CountriesListResponse
+    CountriesListResponse (..),
+    newCountriesListResponse,
+
+    -- ** Country
+    Country (..),
+    newCountry,
+
+    -- ** Creative
+    Creative (..),
+    newCreative,
+
+    -- ** Creative_ArtworkType
+    Creative_ArtworkType (..),
+
+    -- ** Creative_AuthoringSource
+    Creative_AuthoringSource (..),
+
+    -- ** Creative_AuthoringTool
+    Creative_AuthoringTool (..),
+
+    -- ** Creative_BackupImageFeaturesItem
+    Creative_BackupImageFeaturesItem (..),
+
+    -- ** Creative_CompatibilityItem
+    Creative_CompatibilityItem (..),
+
+    -- ** Creative_Type
+    Creative_Type (..),
+
+    -- ** CreativeAsset
+    CreativeAsset (..),
+    newCreativeAsset,
+
+    -- ** CreativeAsset_Alignment
+    CreativeAsset_Alignment (..),
+
+    -- ** CreativeAsset_ArtworkType
+    CreativeAsset_ArtworkType (..),
+
+    -- ** CreativeAsset_ChildAssetType
+    CreativeAsset_ChildAssetType (..),
+
+    -- ** CreativeAsset_DetectedFeaturesItem
+    CreativeAsset_DetectedFeaturesItem (..),
+
+    -- ** CreativeAsset_DisplayType
+    CreativeAsset_DisplayType (..),
+
+    -- ** CreativeAsset_DurationType
+    CreativeAsset_DurationType (..),
+
+    -- ** CreativeAsset_Orientation
+    CreativeAsset_Orientation (..),
+
+    -- ** CreativeAsset_PositionLeftUnit
+    CreativeAsset_PositionLeftUnit (..),
+
+    -- ** CreativeAsset_PositionTopUnit
+    CreativeAsset_PositionTopUnit (..),
+
+    -- ** CreativeAsset_Role
+    CreativeAsset_Role (..),
+
+    -- ** CreativeAsset_StartTimeType
+    CreativeAsset_StartTimeType (..),
+
+    -- ** CreativeAsset_WindowMode
+    CreativeAsset_WindowMode (..),
+
+    -- ** CreativeAssetId
+    CreativeAssetId (..),
+    newCreativeAssetId,
+
+    -- ** CreativeAssetId_Type
+    CreativeAssetId_Type (..),
+
+    -- ** CreativeAssetMetadata
+    CreativeAssetMetadata (..),
+    newCreativeAssetMetadata,
+
+    -- ** CreativeAssetMetadata_DetectedFeaturesItem
+    CreativeAssetMetadata_DetectedFeaturesItem (..),
+
+    -- ** CreativeAssetMetadata_WarnedValidationRulesItem
+    CreativeAssetMetadata_WarnedValidationRulesItem (..),
+
+    -- ** CreativeAssetSelection
+    CreativeAssetSelection (..),
+    newCreativeAssetSelection,
+
+    -- ** CreativeAssignment
+    CreativeAssignment (..),
+    newCreativeAssignment,
+
+    -- ** CreativeClickThroughUrl
+    CreativeClickThroughUrl (..),
+    newCreativeClickThroughUrl,
+
+    -- ** CreativeCustomEvent
+    CreativeCustomEvent (..),
+    newCreativeCustomEvent,
+
+    -- ** CreativeCustomEvent_AdvertiserCustomEventType
+    CreativeCustomEvent_AdvertiserCustomEventType (..),
+
+    -- ** CreativeCustomEvent_ArtworkType
+    CreativeCustomEvent_ArtworkType (..),
+
+    -- ** CreativeCustomEvent_TargetType
+    CreativeCustomEvent_TargetType (..),
 
     -- ** CreativeField
-    , CreativeField
-    , creativeField
-    , cffKind
-    , cffAdvertiserId
-    , cffAdvertiserIdDimensionValue
-    , cffAccountId
-    , cffName
-    , cffId
-    , cffSubAccountId
+    CreativeField (..),
+    newCreativeField,
 
-    -- ** AdvertiserStatus
-    , AdvertiserStatus (..)
+    -- ** CreativeFieldAssignment
+    CreativeFieldAssignment (..),
+    newCreativeFieldAssignment,
+
+    -- ** CreativeFieldValue
+    CreativeFieldValue (..),
+    newCreativeFieldValue,
+
+    -- ** CreativeFieldValuesListResponse
+    CreativeFieldValuesListResponse (..),
+    newCreativeFieldValuesListResponse,
+
+    -- ** CreativeFieldsListResponse
+    CreativeFieldsListResponse (..),
+    newCreativeFieldsListResponse,
+
+    -- ** CreativeGroup
+    CreativeGroup (..),
+    newCreativeGroup,
+
+    -- ** CreativeGroupAssignment
+    CreativeGroupAssignment (..),
+    newCreativeGroupAssignment,
+
+    -- ** CreativeGroupAssignment_CreativeGroupNumber
+    CreativeGroupAssignment_CreativeGroupNumber (..),
+
+    -- ** CreativeGroupsListResponse
+    CreativeGroupsListResponse (..),
+    newCreativeGroupsListResponse,
+
+    -- ** CreativeOptimizationConfiguration
+    CreativeOptimizationConfiguration (..),
+    newCreativeOptimizationConfiguration,
+
+    -- ** CreativeOptimizationConfiguration_OptimizationModel
+    CreativeOptimizationConfiguration_OptimizationModel (..),
+
+    -- ** CreativeRotation
+    CreativeRotation (..),
+    newCreativeRotation,
+
+    -- ** CreativeRotation_Type
+    CreativeRotation_Type (..),
+
+    -- ** CreativeRotation_WeightCalculationStrategy
+    CreativeRotation_WeightCalculationStrategy (..),
+
+    -- ** CreativesListResponse
+    CreativesListResponse (..),
+    newCreativesListResponse,
+
+    -- ** CrossDimensionReachReportCompatibleFields
+    CrossDimensionReachReportCompatibleFields (..),
+    newCrossDimensionReachReportCompatibleFields,
+
+    -- ** CustomFloodlightVariable
+    CustomFloodlightVariable (..),
+    newCustomFloodlightVariable,
+
+    -- ** CustomFloodlightVariable_Type
+    CustomFloodlightVariable_Type (..),
+
+    -- ** CustomRichMediaEvents
+    CustomRichMediaEvents (..),
+    newCustomRichMediaEvents,
+
+    -- ** CustomViewabilityMetric
+    CustomViewabilityMetric (..),
+    newCustomViewabilityMetric,
+
+    -- ** CustomViewabilityMetricConfiguration
+    CustomViewabilityMetricConfiguration (..),
+    newCustomViewabilityMetricConfiguration,
+
+    -- ** DateRange
+    DateRange (..),
+    newDateRange,
+
+    -- ** DateRange_RelativeDateRange
+    DateRange_RelativeDateRange (..),
+
+    -- ** DayPartTargeting
+    DayPartTargeting (..),
+    newDayPartTargeting,
+
+    -- ** DayPartTargeting_DaysOfWeekItem
+    DayPartTargeting_DaysOfWeekItem (..),
+
+    -- ** DeepLink
+    DeepLink (..),
+    newDeepLink,
 
     -- ** DefaultClickThroughEventTagProperties
-    , DefaultClickThroughEventTagProperties
-    , defaultClickThroughEventTagProperties
-    , dctetpOverrideInheritedEventTag
-    , dctetpDefaultClickThroughEventTagId
+    DefaultClickThroughEventTagProperties (..),
+    newDefaultClickThroughEventTagProperties,
+
+    -- ** DeliverySchedule
+    DeliverySchedule (..),
+    newDeliverySchedule,
+
+    -- ** DeliverySchedule_Priority
+    DeliverySchedule_Priority (..),
+
+    -- ** DfpSettings
+    DfpSettings (..),
+    newDfpSettings,
+
+    -- ** Dimension
+    Dimension (..),
+    newDimension,
+
+    -- ** DimensionFilter
+    DimensionFilter (..),
+    newDimensionFilter,
+
+    -- ** DimensionValue
+    DimensionValue (..),
+    newDimensionValue,
+
+    -- ** DimensionValue_MatchType
+    DimensionValue_MatchType (..),
+
+    -- ** DimensionValueList
+    DimensionValueList (..),
+    newDimensionValueList,
+
+    -- ** DimensionValueRequest
+    DimensionValueRequest (..),
+    newDimensionValueRequest,
+
+    -- ** DirectorySite
+    DirectorySite (..),
+    newDirectorySite,
+
+    -- ** DirectorySite_InpageTagFormatsItem
+    DirectorySite_InpageTagFormatsItem (..),
+
+    -- ** DirectorySite_InterstitialTagFormatsItem
+    DirectorySite_InterstitialTagFormatsItem (..),
+
+    -- ** DirectorySiteSettings
+    DirectorySiteSettings (..),
+    newDirectorySiteSettings,
+
+    -- ** DirectorySitesListResponse
+    DirectorySitesListResponse (..),
+    newDirectorySitesListResponse,
+
+    -- ** DisjunctiveMatchStatement
+    DisjunctiveMatchStatement (..),
+    newDisjunctiveMatchStatement,
+
+    -- ** DynamicTargetingKey
+    DynamicTargetingKey (..),
+    newDynamicTargetingKey,
+
+    -- ** DynamicTargetingKey_ObjectType
+    DynamicTargetingKey_ObjectType (..),
+
+    -- ** DynamicTargetingKeysListResponse
+    DynamicTargetingKeysListResponse (..),
+    newDynamicTargetingKeysListResponse,
+
+    -- ** EncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
+
+    -- ** EncryptionInfo_EncryptionEntityType
+    EncryptionInfo_EncryptionEntityType (..),
+
+    -- ** EncryptionInfo_EncryptionSource
+    EncryptionInfo_EncryptionSource (..),
+
+    -- ** EventFilter
+    EventFilter (..),
+    newEventFilter,
+
+    -- ** EventTag
+    EventTag (..),
+    newEventTag,
+
+    -- ** EventTag_SiteFilterType
+    EventTag_SiteFilterType (..),
+
+    -- ** EventTag_Status
+    EventTag_Status (..),
+
+    -- ** EventTag_Type
+    EventTag_Type (..),
+
+    -- ** EventTagOverride
+    EventTagOverride (..),
+    newEventTagOverride,
+
+    -- ** EventTagsListResponse
+    EventTagsListResponse (..),
+    newEventTagsListResponse,
+
+    -- ** File
+    File (..),
+    newFile,
+
+    -- ** File_Format
+    File_Format (..),
+
+    -- ** File_Status
+    File_Status (..),
+
+    -- ** File_Urls
+    File_Urls (..),
+    newFile_Urls,
+
+    -- ** FileList
+    FileList (..),
+    newFileList,
+
+    -- ** Flight
+    Flight (..),
+    newFlight,
+
+    -- ** FloodlightActivitiesGenerateTagResponse
+    FloodlightActivitiesGenerateTagResponse (..),
+    newFloodlightActivitiesGenerateTagResponse,
+
+    -- ** FloodlightActivitiesListResponse
+    FloodlightActivitiesListResponse (..),
+    newFloodlightActivitiesListResponse,
+
+    -- ** FloodlightActivity
+    FloodlightActivity (..),
+    newFloodlightActivity,
+
+    -- ** FloodlightActivity_CacheBustingType
+    FloodlightActivity_CacheBustingType (..),
+
+    -- ** FloodlightActivity_CountingMethod
+    FloodlightActivity_CountingMethod (..),
+
+    -- ** FloodlightActivity_FloodlightActivityGroupType
+    FloodlightActivity_FloodlightActivityGroupType (..),
+
+    -- ** FloodlightActivity_FloodlightTagType
+    FloodlightActivity_FloodlightTagType (..),
+
+    -- ** FloodlightActivity_Status
+    FloodlightActivity_Status (..),
+
+    -- ** FloodlightActivity_TagFormat
+    FloodlightActivity_TagFormat (..),
+
+    -- ** FloodlightActivity_UserDefinedVariableTypesItem
+    FloodlightActivity_UserDefinedVariableTypesItem (..),
+
+    -- ** FloodlightActivityDynamicTag
+    FloodlightActivityDynamicTag (..),
+    newFloodlightActivityDynamicTag,
+
+    -- ** FloodlightActivityGroup
+    FloodlightActivityGroup (..),
+    newFloodlightActivityGroup,
+
+    -- ** FloodlightActivityGroup_Type
+    FloodlightActivityGroup_Type (..),
+
+    -- ** FloodlightActivityGroupsListResponse
+    FloodlightActivityGroupsListResponse (..),
+    newFloodlightActivityGroupsListResponse,
+
+    -- ** FloodlightActivityPublisherDynamicTag
+    FloodlightActivityPublisherDynamicTag (..),
+    newFloodlightActivityPublisherDynamicTag,
+
+    -- ** FloodlightConfiguration
+    FloodlightConfiguration (..),
+    newFloodlightConfiguration,
+
+    -- ** FloodlightConfiguration_FirstDayOfWeek
+    FloodlightConfiguration_FirstDayOfWeek (..),
+
+    -- ** FloodlightConfiguration_NaturalSearchConversionAttributionOption
+    FloodlightConfiguration_NaturalSearchConversionAttributionOption (..),
+
+    -- ** FloodlightConfigurationsListResponse
+    FloodlightConfigurationsListResponse (..),
+    newFloodlightConfigurationsListResponse,
+
+    -- ** FloodlightReportCompatibleFields
+    FloodlightReportCompatibleFields (..),
+    newFloodlightReportCompatibleFields,
+
+    -- ** FrequencyCap
+    FrequencyCap (..),
+    newFrequencyCap,
+
+    -- ** FsCommand
+    FsCommand (..),
+    newFsCommand,
+
+    -- ** FsCommand_PositionOption
+    FsCommand_PositionOption (..),
+
+    -- ** GeoTargeting
+    GeoTargeting (..),
+    newGeoTargeting,
+
+    -- ** InventoryItem
+    InventoryItem (..),
+    newInventoryItem,
+
+    -- ** InventoryItem_Type
+    InventoryItem_Type (..),
+
+    -- ** InventoryItemsListResponse
+    InventoryItemsListResponse (..),
+    newInventoryItemsListResponse,
+
+    -- ** KeyValueTargetingExpression
+    KeyValueTargetingExpression (..),
+    newKeyValueTargetingExpression,
+
+    -- ** LandingPage
+    LandingPage (..),
+    newLandingPage,
+
+    -- ** Language
+    Language (..),
+    newLanguage,
+
+    -- ** LanguageTargeting
+    LanguageTargeting (..),
+    newLanguageTargeting,
+
+    -- ** LanguagesListResponse
+    LanguagesListResponse (..),
+    newLanguagesListResponse,
+
+    -- ** LastModifiedInfo
+    LastModifiedInfo (..),
+    newLastModifiedInfo,
+
+    -- ** ListPopulationClause
+    ListPopulationClause (..),
+    newListPopulationClause,
+
+    -- ** ListPopulationRule
+    ListPopulationRule (..),
+    newListPopulationRule,
+
+    -- ** ListPopulationTerm
+    ListPopulationTerm (..),
+    newListPopulationTerm,
+
+    -- ** ListPopulationTerm_Operator
+    ListPopulationTerm_Operator (..),
+
+    -- ** ListPopulationTerm_Type
+    ListPopulationTerm_Type (..),
 
     -- ** ListTargetingExpression
-    , ListTargetingExpression
-    , listTargetingExpression
-    , lteExpression
-    ) where
+    ListTargetingExpression (..),
+    newListTargetingExpression,
 
-import Network.Google.Prelude
+    -- ** LookbackConfiguration
+    LookbackConfiguration (..),
+    newLookbackConfiguration,
+
+    -- ** MeasurementPartnerAdvertiserLink
+    MeasurementPartnerAdvertiserLink (..),
+    newMeasurementPartnerAdvertiserLink,
+
+    -- ** MeasurementPartnerAdvertiserLink_LinkStatus
+    MeasurementPartnerAdvertiserLink_LinkStatus (..),
+
+    -- ** MeasurementPartnerAdvertiserLink_MeasurementPartner
+    MeasurementPartnerAdvertiserLink_MeasurementPartner (..),
+
+    -- ** MeasurementPartnerCampaignLink
+    MeasurementPartnerCampaignLink (..),
+    newMeasurementPartnerCampaignLink,
+
+    -- ** MeasurementPartnerCampaignLink_LinkStatus
+    MeasurementPartnerCampaignLink_LinkStatus (..),
+
+    -- ** MeasurementPartnerCampaignLink_MeasurementPartner
+    MeasurementPartnerCampaignLink_MeasurementPartner (..),
+
+    -- ** MeasurementPartnerWrappingData
+    MeasurementPartnerWrappingData (..),
+    newMeasurementPartnerWrappingData,
+
+    -- ** MeasurementPartnerWrappingData_LinkStatus
+    MeasurementPartnerWrappingData_LinkStatus (..),
+
+    -- ** MeasurementPartnerWrappingData_MeasurementPartner
+    MeasurementPartnerWrappingData_MeasurementPartner (..),
+
+    -- ** MeasurementPartnerWrappingData_TagWrappingMode
+    MeasurementPartnerWrappingData_TagWrappingMode (..),
+
+    -- ** Metric
+    Metric (..),
+    newMetric,
+
+    -- ** Metro
+    Metro (..),
+    newMetro,
+
+    -- ** MetrosListResponse
+    MetrosListResponse (..),
+    newMetrosListResponse,
+
+    -- ** MobileApp
+    MobileApp (..),
+    newMobileApp,
+
+    -- ** MobileApp_Directory
+    MobileApp_Directory (..),
+
+    -- ** MobileAppsListResponse
+    MobileAppsListResponse (..),
+    newMobileAppsListResponse,
+
+    -- ** MobileCarrier
+    MobileCarrier (..),
+    newMobileCarrier,
+
+    -- ** MobileCarriersListResponse
+    MobileCarriersListResponse (..),
+    newMobileCarriersListResponse,
+
+    -- ** ObaIcon
+    ObaIcon (..),
+    newObaIcon,
+
+    -- ** ObjectFilter
+    ObjectFilter (..),
+    newObjectFilter,
+
+    -- ** ObjectFilter_Status
+    ObjectFilter_Status (..),
+
+    -- ** OffsetPosition
+    OffsetPosition (..),
+    newOffsetPosition,
+
+    -- ** OmnitureSettings
+    OmnitureSettings (..),
+    newOmnitureSettings,
+
+    -- ** OperatingSystem
+    OperatingSystem (..),
+    newOperatingSystem,
+
+    -- ** OperatingSystemVersion
+    OperatingSystemVersion (..),
+    newOperatingSystemVersion,
+
+    -- ** OperatingSystemVersionsListResponse
+    OperatingSystemVersionsListResponse (..),
+    newOperatingSystemVersionsListResponse,
+
+    -- ** OperatingSystemsListResponse
+    OperatingSystemsListResponse (..),
+    newOperatingSystemsListResponse,
+
+    -- ** OptimizationActivity
+    OptimizationActivity (..),
+    newOptimizationActivity,
+
+    -- ** Order
+    Order (..),
+    newOrder,
+
+    -- ** OrderContact
+    OrderContact (..),
+    newOrderContact,
+
+    -- ** OrderContact_ContactType
+    OrderContact_ContactType (..),
+
+    -- ** OrderDocument
+    OrderDocument (..),
+    newOrderDocument,
+
+    -- ** OrderDocument_Type
+    OrderDocument_Type (..),
+
+    -- ** OrderDocumentsListResponse
+    OrderDocumentsListResponse (..),
+    newOrderDocumentsListResponse,
+
+    -- ** OrdersListResponse
+    OrdersListResponse (..),
+    newOrdersListResponse,
+
+    -- ** PathFilter
+    PathFilter (..),
+    newPathFilter,
+
+    -- ** PathFilter_PathMatchPosition
+    PathFilter_PathMatchPosition (..),
+
+    -- ** PathReportCompatibleFields
+    PathReportCompatibleFields (..),
+    newPathReportCompatibleFields,
+
+    -- ** PathReportDimensionValue
+    PathReportDimensionValue (..),
+    newPathReportDimensionValue,
+
+    -- ** PathReportDimensionValue_MatchType
+    PathReportDimensionValue_MatchType (..),
+
+    -- ** PathToConversionReportCompatibleFields
+    PathToConversionReportCompatibleFields (..),
+    newPathToConversionReportCompatibleFields,
+
+    -- ** Placement
+    Placement (..),
+    newPlacement,
+
+    -- ** Placement_Compatibility
+    Placement_Compatibility (..),
+
+    -- ** Placement_PaymentSource
+    Placement_PaymentSource (..),
+
+    -- ** Placement_Status
+    Placement_Status (..),
+
+    -- ** Placement_TagFormatsItem
+    Placement_TagFormatsItem (..),
+
+    -- ** Placement_VpaidAdapterChoice
+    Placement_VpaidAdapterChoice (..),
+
+    -- ** PlacementAssignment
+    PlacementAssignment (..),
+    newPlacementAssignment,
+
+    -- ** PlacementGroup
+    PlacementGroup (..),
+    newPlacementGroup,
+
+    -- ** PlacementGroup_PlacementGroupType
+    PlacementGroup_PlacementGroupType (..),
+
+    -- ** PlacementGroupsListResponse
+    PlacementGroupsListResponse (..),
+    newPlacementGroupsListResponse,
+
+    -- ** PlacementStrategiesListResponse
+    PlacementStrategiesListResponse (..),
+    newPlacementStrategiesListResponse,
+
+    -- ** PlacementStrategy
+    PlacementStrategy (..),
+    newPlacementStrategy,
+
+    -- ** PlacementTag
+    PlacementTag (..),
+    newPlacementTag,
+
+    -- ** PlacementsGenerateTagsResponse
+    PlacementsGenerateTagsResponse (..),
+    newPlacementsGenerateTagsResponse,
+
+    -- ** PlacementsListResponse
+    PlacementsListResponse (..),
+    newPlacementsListResponse,
+
+    -- ** PlatformType
+    PlatformType (..),
+    newPlatformType,
+
+    -- ** PlatformTypesListResponse
+    PlatformTypesListResponse (..),
+    newPlatformTypesListResponse,
+
+    -- ** PopupWindowProperties
+    PopupWindowProperties (..),
+    newPopupWindowProperties,
+
+    -- ** PopupWindowProperties_PositionType
+    PopupWindowProperties_PositionType (..),
+
+    -- ** PostalCode
+    PostalCode (..),
+    newPostalCode,
+
+    -- ** PostalCodesListResponse
+    PostalCodesListResponse (..),
+    newPostalCodesListResponse,
+
+    -- ** Pricing
+    Pricing (..),
+    newPricing,
+
+    -- ** Pricing_CapCostType
+    Pricing_CapCostType (..),
+
+    -- ** Pricing_GroupType
+    Pricing_GroupType (..),
+
+    -- ** Pricing_PricingType
+    Pricing_PricingType (..),
+
+    -- ** PricingSchedule
+    PricingSchedule (..),
+    newPricingSchedule,
+
+    -- ** PricingSchedule_CapCostOption
+    PricingSchedule_CapCostOption (..),
+
+    -- ** PricingSchedule_PricingType
+    PricingSchedule_PricingType (..),
+
+    -- ** PricingSchedulePricingPeriod
+    PricingSchedulePricingPeriod (..),
+    newPricingSchedulePricingPeriod,
+
+    -- ** Project
+    Project (..),
+    newProject,
+
+    -- ** Project_AudienceAgeGroup
+    Project_AudienceAgeGroup (..),
+
+    -- ** Project_AudienceGender
+    Project_AudienceGender (..),
+
+    -- ** ProjectsListResponse
+    ProjectsListResponse (..),
+    newProjectsListResponse,
+
+    -- ** ReachReportCompatibleFields
+    ReachReportCompatibleFields (..),
+    newReachReportCompatibleFields,
+
+    -- ** Recipient
+    Recipient (..),
+    newRecipient,
+
+    -- ** Recipient_DeliveryType
+    Recipient_DeliveryType (..),
+
+    -- ** Region
+    Region (..),
+    newRegion,
+
+    -- ** RegionsListResponse
+    RegionsListResponse (..),
+    newRegionsListResponse,
+
+    -- ** RemarketingList
+    RemarketingList (..),
+    newRemarketingList,
+
+    -- ** RemarketingList_ListSource
+    RemarketingList_ListSource (..),
+
+    -- ** RemarketingListShare
+    RemarketingListShare (..),
+    newRemarketingListShare,
+
+    -- ** RemarketingListsListResponse
+    RemarketingListsListResponse (..),
+    newRemarketingListsListResponse,
+
+    -- ** Report
+    Report (..),
+    newReport,
+
+    -- ** Report_Criteria
+    Report_Criteria (..),
+    newReport_Criteria,
+
+    -- ** Report_CrossDimensionReachCriteria
+    Report_CrossDimensionReachCriteria (..),
+    newReport_CrossDimensionReachCriteria,
+
+    -- ** Report_CrossDimensionReachCriteria_Dimension
+    Report_CrossDimensionReachCriteria_Dimension (..),
+
+    -- ** Report_Delivery
+    Report_Delivery (..),
+    newReport_Delivery,
+
+    -- ** Report_Delivery_EmailOwnerDeliveryType
+    Report_Delivery_EmailOwnerDeliveryType (..),
+
+    -- ** Report_FloodlightCriteria
+    Report_FloodlightCriteria (..),
+    newReport_FloodlightCriteria,
+
+    -- ** Report_FloodlightCriteria_ReportProperties
+    Report_FloodlightCriteria_ReportProperties (..),
+    newReport_FloodlightCriteria_ReportProperties,
+
+    -- ** Report_Format
+    Report_Format (..),
+
+    -- ** Report_PathAttributionCriteria
+    Report_PathAttributionCriteria (..),
+    newReport_PathAttributionCriteria,
+
+    -- ** Report_PathCriteria
+    Report_PathCriteria (..),
+    newReport_PathCriteria,
+
+    -- ** Report_PathToConversionCriteria
+    Report_PathToConversionCriteria (..),
+    newReport_PathToConversionCriteria,
+
+    -- ** Report_PathToConversionCriteria_ReportProperties
+    Report_PathToConversionCriteria_ReportProperties (..),
+    newReport_PathToConversionCriteria_ReportProperties,
+
+    -- ** Report_ReachCriteria
+    Report_ReachCriteria (..),
+    newReport_ReachCriteria,
+
+    -- ** Report_Schedule
+    Report_Schedule (..),
+    newReport_Schedule,
+
+    -- ** Report_Schedule_RepeatsOnWeekDaysItem
+    Report_Schedule_RepeatsOnWeekDaysItem (..),
+
+    -- ** Report_Schedule_RunsOnDayOfMonth
+    Report_Schedule_RunsOnDayOfMonth (..),
+
+    -- ** Report_Type
+    Report_Type (..),
+
+    -- ** ReportCompatibleFields
+    ReportCompatibleFields (..),
+    newReportCompatibleFields,
+
+    -- ** ReportList
+    ReportList (..),
+    newReportList,
+
+    -- ** ReportsConfiguration
+    ReportsConfiguration (..),
+    newReportsConfiguration,
+
+    -- ** RichMediaExitOverride
+    RichMediaExitOverride (..),
+    newRichMediaExitOverride,
+
+    -- ** Rule
+    Rule (..),
+    newRule,
+
+    -- ** Site
+    Site (..),
+    newSite,
+
+    -- ** SiteCompanionSetting
+    SiteCompanionSetting (..),
+    newSiteCompanionSetting,
+
+    -- ** SiteContact
+    SiteContact (..),
+    newSiteContact,
+
+    -- ** SiteContact_ContactType
+    SiteContact_ContactType (..),
+
+    -- ** SiteSettings
+    SiteSettings (..),
+    newSiteSettings,
+
+    -- ** SiteSettings_VpaidAdapterChoiceTemplate
+    SiteSettings_VpaidAdapterChoiceTemplate (..),
+
+    -- ** SiteSkippableSetting
+    SiteSkippableSetting (..),
+    newSiteSkippableSetting,
+
+    -- ** SiteTranscodeSetting
+    SiteTranscodeSetting (..),
+    newSiteTranscodeSetting,
+
+    -- ** SiteVideoSettings
+    SiteVideoSettings (..),
+    newSiteVideoSettings,
+
+    -- ** SiteVideoSettings_Orientation
+    SiteVideoSettings_Orientation (..),
+
+    -- ** SitesListResponse
+    SitesListResponse (..),
+    newSitesListResponse,
+
+    -- ** Size
+    Size (..),
+    newSize,
+
+    -- ** SizesListResponse
+    SizesListResponse (..),
+    newSizesListResponse,
+
+    -- ** SkippableSetting
+    SkippableSetting (..),
+    newSkippableSetting,
+
+    -- ** SortedDimension
+    SortedDimension (..),
+    newSortedDimension,
+
+    -- ** SortedDimension_SortOrder
+    SortedDimension_SortOrder (..),
+
+    -- ** Subaccount
+    Subaccount (..),
+    newSubaccount,
+
+    -- ** SubaccountsListResponse
+    SubaccountsListResponse (..),
+    newSubaccountsListResponse,
+
+    -- ** TagData
+    TagData (..),
+    newTagData,
+
+    -- ** TagData_Format
+    TagData_Format (..),
+
+    -- ** TagSetting
+    TagSetting (..),
+    newTagSetting,
+
+    -- ** TagSetting_KeywordOption
+    TagSetting_KeywordOption (..),
+
+    -- ** TagSettings
+    TagSettings (..),
+    newTagSettings,
+
+    -- ** TargetWindow
+    TargetWindow (..),
+    newTargetWindow,
+
+    -- ** TargetWindow_TargetWindowOption
+    TargetWindow_TargetWindowOption (..),
+
+    -- ** TargetableRemarketingList
+    TargetableRemarketingList (..),
+    newTargetableRemarketingList,
+
+    -- ** TargetableRemarketingList_ListSource
+    TargetableRemarketingList_ListSource (..),
+
+    -- ** TargetableRemarketingListsListResponse
+    TargetableRemarketingListsListResponse (..),
+    newTargetableRemarketingListsListResponse,
+
+    -- ** TargetingTemplate
+    TargetingTemplate (..),
+    newTargetingTemplate,
+
+    -- ** TargetingTemplatesListResponse
+    TargetingTemplatesListResponse (..),
+    newTargetingTemplatesListResponse,
+
+    -- ** TechnologyTargeting
+    TechnologyTargeting (..),
+    newTechnologyTargeting,
+
+    -- ** ThirdPartyAuthenticationToken
+    ThirdPartyAuthenticationToken (..),
+    newThirdPartyAuthenticationToken,
+
+    -- ** ThirdPartyTrackingUrl
+    ThirdPartyTrackingUrl (..),
+    newThirdPartyTrackingUrl,
+
+    -- ** ThirdPartyTrackingUrl_ThirdPartyUrlType
+    ThirdPartyTrackingUrl_ThirdPartyUrlType (..),
+
+    -- ** TranscodeSetting
+    TranscodeSetting (..),
+    newTranscodeSetting,
+
+    -- ** UniversalAdId
+    UniversalAdId (..),
+    newUniversalAdId,
+
+    -- ** UniversalAdId_Registry
+    UniversalAdId_Registry (..),
+
+    -- ** UserDefinedVariableConfiguration
+    UserDefinedVariableConfiguration (..),
+    newUserDefinedVariableConfiguration,
+
+    -- ** UserDefinedVariableConfiguration_DataType
+    UserDefinedVariableConfiguration_DataType (..),
+
+    -- ** UserDefinedVariableConfiguration_VariableType
+    UserDefinedVariableConfiguration_VariableType (..),
+
+    -- ** UserProfile
+    UserProfile (..),
+    newUserProfile,
+
+    -- ** UserProfileList
+    UserProfileList (..),
+    newUserProfileList,
+
+    -- ** UserRole
+    UserRole (..),
+    newUserRole,
+
+    -- ** UserRolePermission
+    UserRolePermission (..),
+    newUserRolePermission,
+
+    -- ** UserRolePermission_Availability
+    UserRolePermission_Availability (..),
+
+    -- ** UserRolePermissionGroup
+    UserRolePermissionGroup (..),
+    newUserRolePermissionGroup,
+
+    -- ** UserRolePermissionGroupsListResponse
+    UserRolePermissionGroupsListResponse (..),
+    newUserRolePermissionGroupsListResponse,
+
+    -- ** UserRolePermissionsListResponse
+    UserRolePermissionsListResponse (..),
+    newUserRolePermissionsListResponse,
+
+    -- ** UserRolesListResponse
+    UserRolesListResponse (..),
+    newUserRolesListResponse,
+
+    -- ** VideoFormat
+    VideoFormat (..),
+    newVideoFormat,
+
+    -- ** VideoFormat_FileType
+    VideoFormat_FileType (..),
+
+    -- ** VideoFormatsListResponse
+    VideoFormatsListResponse (..),
+    newVideoFormatsListResponse,
+
+    -- ** VideoOffset
+    VideoOffset (..),
+    newVideoOffset,
+
+    -- ** VideoSettings
+    VideoSettings (..),
+    newVideoSettings,
+
+    -- ** VideoSettings_Orientation
+    VideoSettings_Orientation (..),
+
+    -- ** AccountUserProfilesListSortField
+    AccountUserProfilesListSortField (..),
+
+    -- ** AccountUserProfilesListSortOrder
+    AccountUserProfilesListSortOrder (..),
+
+    -- ** AccountsListSortField
+    AccountsListSortField (..),
+
+    -- ** AccountsListSortOrder
+    AccountsListSortOrder (..),
+
+    -- ** AdsListCompatibility
+    AdsListCompatibility (..),
+
+    -- ** AdsListSortField
+    AdsListSortField (..),
+
+    -- ** AdsListSortOrder
+    AdsListSortOrder (..),
+
+    -- ** AdsListType
+    AdsListType (..),
+
+    -- ** AdvertiserGroupsListSortField
+    AdvertiserGroupsListSortField (..),
+
+    -- ** AdvertiserGroupsListSortOrder
+    AdvertiserGroupsListSortOrder (..),
+
+    -- ** AdvertiserLandingPagesListSortField
+    AdvertiserLandingPagesListSortField (..),
+
+    -- ** AdvertiserLandingPagesListSortOrder
+    AdvertiserLandingPagesListSortOrder (..),
+
+    -- ** AdvertisersListSortField
+    AdvertisersListSortField (..),
+
+    -- ** AdvertisersListSortOrder
+    AdvertisersListSortOrder (..),
+
+    -- ** AdvertisersListStatus
+    AdvertisersListStatus (..),
+
+    -- ** CampaignCreativeAssociationsListSortOrder
+    CampaignCreativeAssociationsListSortOrder (..),
+
+    -- ** CampaignsListSortField
+    CampaignsListSortField (..),
+
+    -- ** CampaignsListSortOrder
+    CampaignsListSortOrder (..),
+
+    -- ** ChangeLogsListAction
+    ChangeLogsListAction (..),
+
+    -- ** ChangeLogsListObjectType
+    ChangeLogsListObjectType (..),
+
+    -- ** ContentCategoriesListSortField
+    ContentCategoriesListSortField (..),
+
+    -- ** ContentCategoriesListSortOrder
+    ContentCategoriesListSortOrder (..),
+
+    -- ** CreativeFieldValuesListSortField
+    CreativeFieldValuesListSortField (..),
+
+    -- ** CreativeFieldValuesListSortOrder
+    CreativeFieldValuesListSortOrder (..),
+
+    -- ** CreativeFieldsListSortField
+    CreativeFieldsListSortField (..),
+
+    -- ** CreativeFieldsListSortOrder
+    CreativeFieldsListSortOrder (..),
+
+    -- ** CreativeGroupsListSortField
+    CreativeGroupsListSortField (..),
+
+    -- ** CreativeGroupsListSortOrder
+    CreativeGroupsListSortOrder (..),
+
+    -- ** CreativesListSortField
+    CreativesListSortField (..),
+
+    -- ** CreativesListSortOrder
+    CreativesListSortOrder (..),
+
+    -- ** CreativesListTypes
+    CreativesListTypes (..),
+
+    -- ** DirectorySitesListSortField
+    DirectorySitesListSortField (..),
+
+    -- ** DirectorySitesListSortOrder
+    DirectorySitesListSortOrder (..),
+
+    -- ** DynamicTargetingKeysDeleteObjectType
+    DynamicTargetingKeysDeleteObjectType (..),
+
+    -- ** DynamicTargetingKeysListObjectType
+    DynamicTargetingKeysListObjectType (..),
+
+    -- ** EventTagsListEventTagTypes
+    EventTagsListEventTagTypes (..),
+
+    -- ** EventTagsListSortField
+    EventTagsListSortField (..),
+
+    -- ** EventTagsListSortOrder
+    EventTagsListSortOrder (..),
+
+    -- ** FilesListScope
+    FilesListScope (..),
+
+    -- ** FilesListSortField
+    FilesListSortField (..),
+
+    -- ** FilesListSortOrder
+    FilesListSortOrder (..),
+
+    -- ** FloodlightActivitiesListFloodlightActivityGroupType
+    FloodlightActivitiesListFloodlightActivityGroupType (..),
+
+    -- ** FloodlightActivitiesListSortField
+    FloodlightActivitiesListSortField (..),
+
+    -- ** FloodlightActivitiesListSortOrder
+    FloodlightActivitiesListSortOrder (..),
+
+    -- ** FloodlightActivityGroupsListSortField
+    FloodlightActivityGroupsListSortField (..),
+
+    -- ** FloodlightActivityGroupsListSortOrder
+    FloodlightActivityGroupsListSortOrder (..),
+
+    -- ** FloodlightActivityGroupsListType
+    FloodlightActivityGroupsListType (..),
+
+    -- ** InventoryItemsListSortField
+    InventoryItemsListSortField (..),
+
+    -- ** InventoryItemsListSortOrder
+    InventoryItemsListSortOrder (..),
+
+    -- ** InventoryItemsListType
+    InventoryItemsListType (..),
+
+    -- ** MobileAppsListDirectories
+    MobileAppsListDirectories (..),
+
+    -- ** OrderDocumentsListSortField
+    OrderDocumentsListSortField (..),
+
+    -- ** OrderDocumentsListSortOrder
+    OrderDocumentsListSortOrder (..),
+
+    -- ** OrdersListSortField
+    OrdersListSortField (..),
+
+    -- ** OrdersListSortOrder
+    OrdersListSortOrder (..),
+
+    -- ** PlacementGroupsListPlacementGroupType
+    PlacementGroupsListPlacementGroupType (..),
+
+    -- ** PlacementGroupsListPricingTypes
+    PlacementGroupsListPricingTypes (..),
+
+    -- ** PlacementGroupsListSortField
+    PlacementGroupsListSortField (..),
+
+    -- ** PlacementGroupsListSortOrder
+    PlacementGroupsListSortOrder (..),
+
+    -- ** PlacementStrategiesListSortField
+    PlacementStrategiesListSortField (..),
+
+    -- ** PlacementStrategiesListSortOrder
+    PlacementStrategiesListSortOrder (..),
+
+    -- ** PlacementsGeneratetagsTagFormats
+    PlacementsGeneratetagsTagFormats (..),
+
+    -- ** PlacementsListCompatibilities
+    PlacementsListCompatibilities (..),
+
+    -- ** PlacementsListPaymentSource
+    PlacementsListPaymentSource (..),
+
+    -- ** PlacementsListPricingTypes
+    PlacementsListPricingTypes (..),
+
+    -- ** PlacementsListSortField
+    PlacementsListSortField (..),
+
+    -- ** PlacementsListSortOrder
+    PlacementsListSortOrder (..),
+
+    -- ** ProjectsListSortField
+    ProjectsListSortField (..),
+
+    -- ** ProjectsListSortOrder
+    ProjectsListSortOrder (..),
+
+    -- ** RemarketingListsListSortField
+    RemarketingListsListSortField (..),
+
+    -- ** RemarketingListsListSortOrder
+    RemarketingListsListSortOrder (..),
+
+    -- ** ReportsFilesListSortField
+    ReportsFilesListSortField (..),
+
+    -- ** ReportsFilesListSortOrder
+    ReportsFilesListSortOrder (..),
+
+    -- ** ReportsListScope
+    ReportsListScope (..),
+
+    -- ** ReportsListSortField
+    ReportsListSortField (..),
+
+    -- ** ReportsListSortOrder
+    ReportsListSortOrder (..),
+
+    -- ** SitesListSortField
+    SitesListSortField (..),
+
+    -- ** SitesListSortOrder
+    SitesListSortOrder (..),
+
+    -- ** SubaccountsListSortField
+    SubaccountsListSortField (..),
+
+    -- ** SubaccountsListSortOrder
+    SubaccountsListSortOrder (..),
+
+    -- ** TargetableRemarketingListsListSortField
+    TargetableRemarketingListsListSortField (..),
+
+    -- ** TargetableRemarketingListsListSortOrder
+    TargetableRemarketingListsListSortOrder (..),
+
+    -- ** TargetingTemplatesListSortField
+    TargetingTemplatesListSortField (..),
+
+    -- ** TargetingTemplatesListSortOrder
+    TargetingTemplatesListSortOrder (..),
+
+    -- ** UserRolesListSortField
+    UserRolesListSortField (..),
+
+    -- ** UserRolesListSortOrder
+    UserRolesListSortOrder (..),
+  )
+where
+
+import Network.Google.DFAReporting.AccountActiveAdSummaries.Get
+import Network.Google.DFAReporting.AccountPermissionGroups.Get
+import Network.Google.DFAReporting.AccountPermissionGroups.List
+import Network.Google.DFAReporting.AccountPermissions.Get
+import Network.Google.DFAReporting.AccountPermissions.List
+import Network.Google.DFAReporting.AccountUserProfiles.Get
+import Network.Google.DFAReporting.AccountUserProfiles.Insert
+import Network.Google.DFAReporting.AccountUserProfiles.List
+import Network.Google.DFAReporting.AccountUserProfiles.Patch
+import Network.Google.DFAReporting.AccountUserProfiles.Update
+import Network.Google.DFAReporting.Accounts.Get
+import Network.Google.DFAReporting.Accounts.List
+import Network.Google.DFAReporting.Accounts.Patch
+import Network.Google.DFAReporting.Accounts.Update
+import Network.Google.DFAReporting.Ads.Get
+import Network.Google.DFAReporting.Ads.Insert
+import Network.Google.DFAReporting.Ads.List
+import Network.Google.DFAReporting.Ads.Patch
+import Network.Google.DFAReporting.Ads.Update
+import Network.Google.DFAReporting.AdvertiserGroups.Delete
+import Network.Google.DFAReporting.AdvertiserGroups.Get
+import Network.Google.DFAReporting.AdvertiserGroups.Insert
+import Network.Google.DFAReporting.AdvertiserGroups.List
+import Network.Google.DFAReporting.AdvertiserGroups.Patch
+import Network.Google.DFAReporting.AdvertiserGroups.Update
+import Network.Google.DFAReporting.AdvertiserLandingPages.Get
+import Network.Google.DFAReporting.AdvertiserLandingPages.Insert
+import Network.Google.DFAReporting.AdvertiserLandingPages.List
+import Network.Google.DFAReporting.AdvertiserLandingPages.Patch
+import Network.Google.DFAReporting.AdvertiserLandingPages.Update
+import Network.Google.DFAReporting.Advertisers.Get
+import Network.Google.DFAReporting.Advertisers.Insert
+import Network.Google.DFAReporting.Advertisers.List
+import Network.Google.DFAReporting.Advertisers.Patch
+import Network.Google.DFAReporting.Advertisers.Update
+import Network.Google.DFAReporting.Browsers.List
+import Network.Google.DFAReporting.CampaignCreativeAssociations.Insert
+import Network.Google.DFAReporting.CampaignCreativeAssociations.List
+import Network.Google.DFAReporting.Campaigns.Get
+import Network.Google.DFAReporting.Campaigns.Insert
+import Network.Google.DFAReporting.Campaigns.List
+import Network.Google.DFAReporting.Campaigns.Patch
+import Network.Google.DFAReporting.Campaigns.Update
+import Network.Google.DFAReporting.ChangeLogs.Get
+import Network.Google.DFAReporting.ChangeLogs.List
+import Network.Google.DFAReporting.Cities.List
+import Network.Google.DFAReporting.ConnectionTypes.Get
+import Network.Google.DFAReporting.ConnectionTypes.List
+import Network.Google.DFAReporting.ContentCategories.Delete
+import Network.Google.DFAReporting.ContentCategories.Get
+import Network.Google.DFAReporting.ContentCategories.Insert
+import Network.Google.DFAReporting.ContentCategories.List
+import Network.Google.DFAReporting.ContentCategories.Patch
+import Network.Google.DFAReporting.ContentCategories.Update
+import Network.Google.DFAReporting.Conversions.Batchinsert
+import Network.Google.DFAReporting.Conversions.Batchupdate
+import Network.Google.DFAReporting.Countries.Get
+import Network.Google.DFAReporting.Countries.List
+import Network.Google.DFAReporting.CreativeAssets.Insert
+import Network.Google.DFAReporting.CreativeFieldValues.Delete
+import Network.Google.DFAReporting.CreativeFieldValues.Get
+import Network.Google.DFAReporting.CreativeFieldValues.Insert
+import Network.Google.DFAReporting.CreativeFieldValues.List
+import Network.Google.DFAReporting.CreativeFieldValues.Patch
+import Network.Google.DFAReporting.CreativeFieldValues.Update
+import Network.Google.DFAReporting.CreativeFields.Delete
+import Network.Google.DFAReporting.CreativeFields.Get
+import Network.Google.DFAReporting.CreativeFields.Insert
+import Network.Google.DFAReporting.CreativeFields.List
+import Network.Google.DFAReporting.CreativeFields.Patch
+import Network.Google.DFAReporting.CreativeFields.Update
+import Network.Google.DFAReporting.CreativeGroups.Get
+import Network.Google.DFAReporting.CreativeGroups.Insert
+import Network.Google.DFAReporting.CreativeGroups.List
+import Network.Google.DFAReporting.CreativeGroups.Patch
+import Network.Google.DFAReporting.CreativeGroups.Update
+import Network.Google.DFAReporting.Creatives.Get
+import Network.Google.DFAReporting.Creatives.Insert
+import Network.Google.DFAReporting.Creatives.List
+import Network.Google.DFAReporting.Creatives.Patch
+import Network.Google.DFAReporting.Creatives.Update
+import Network.Google.DFAReporting.DimensionValues.Query
+import Network.Google.DFAReporting.DirectorySites.Get
+import Network.Google.DFAReporting.DirectorySites.Insert
+import Network.Google.DFAReporting.DirectorySites.List
+import Network.Google.DFAReporting.DynamicTargetingKeys.Delete
+import Network.Google.DFAReporting.DynamicTargetingKeys.Insert
+import Network.Google.DFAReporting.DynamicTargetingKeys.List
+import Network.Google.DFAReporting.EventTags.Delete
+import Network.Google.DFAReporting.EventTags.Get
+import Network.Google.DFAReporting.EventTags.Insert
+import Network.Google.DFAReporting.EventTags.List
+import Network.Google.DFAReporting.EventTags.Patch
+import Network.Google.DFAReporting.EventTags.Update
+import Network.Google.DFAReporting.Files.Get
+import Network.Google.DFAReporting.Files.List
+import Network.Google.DFAReporting.FloodlightActivities.Delete
+import Network.Google.DFAReporting.FloodlightActivities.Generatetag
+import Network.Google.DFAReporting.FloodlightActivities.Get
+import Network.Google.DFAReporting.FloodlightActivities.Insert
+import Network.Google.DFAReporting.FloodlightActivities.List
+import Network.Google.DFAReporting.FloodlightActivities.Patch
+import Network.Google.DFAReporting.FloodlightActivities.Update
+import Network.Google.DFAReporting.FloodlightActivityGroups.Get
+import Network.Google.DFAReporting.FloodlightActivityGroups.Insert
+import Network.Google.DFAReporting.FloodlightActivityGroups.List
+import Network.Google.DFAReporting.FloodlightActivityGroups.Patch
+import Network.Google.DFAReporting.FloodlightActivityGroups.Update
+import Network.Google.DFAReporting.FloodlightConfigurations.Get
+import Network.Google.DFAReporting.FloodlightConfigurations.List
+import Network.Google.DFAReporting.FloodlightConfigurations.Patch
+import Network.Google.DFAReporting.FloodlightConfigurations.Update
+import Network.Google.DFAReporting.InventoryItems.Get
+import Network.Google.DFAReporting.InventoryItems.List
+import Network.Google.DFAReporting.Languages.List
+import Network.Google.DFAReporting.Metros.List
+import Network.Google.DFAReporting.MobileApps.Get
+import Network.Google.DFAReporting.MobileApps.List
+import Network.Google.DFAReporting.MobileCarriers.Get
+import Network.Google.DFAReporting.MobileCarriers.List
+import Network.Google.DFAReporting.OperatingSystemVersions.Get
+import Network.Google.DFAReporting.OperatingSystemVersions.List
+import Network.Google.DFAReporting.OperatingSystems.Get
+import Network.Google.DFAReporting.OperatingSystems.List
+import Network.Google.DFAReporting.OrderDocuments.Get
+import Network.Google.DFAReporting.OrderDocuments.List
+import Network.Google.DFAReporting.Orders.Get
+import Network.Google.DFAReporting.Orders.List
+import Network.Google.DFAReporting.PlacementGroups.Get
+import Network.Google.DFAReporting.PlacementGroups.Insert
+import Network.Google.DFAReporting.PlacementGroups.List
+import Network.Google.DFAReporting.PlacementGroups.Patch
+import Network.Google.DFAReporting.PlacementGroups.Update
+import Network.Google.DFAReporting.PlacementStrategies.Delete
+import Network.Google.DFAReporting.PlacementStrategies.Get
+import Network.Google.DFAReporting.PlacementStrategies.Insert
+import Network.Google.DFAReporting.PlacementStrategies.List
+import Network.Google.DFAReporting.PlacementStrategies.Patch
+import Network.Google.DFAReporting.PlacementStrategies.Update
+import Network.Google.DFAReporting.Placements.Generatetags
+import Network.Google.DFAReporting.Placements.Get
+import Network.Google.DFAReporting.Placements.Insert
+import Network.Google.DFAReporting.Placements.List
+import Network.Google.DFAReporting.Placements.Patch
+import Network.Google.DFAReporting.Placements.Update
+import Network.Google.DFAReporting.PlatformTypes.Get
+import Network.Google.DFAReporting.PlatformTypes.List
+import Network.Google.DFAReporting.PostalCodes.Get
+import Network.Google.DFAReporting.PostalCodes.List
+import Network.Google.DFAReporting.Projects.Get
+import Network.Google.DFAReporting.Projects.List
+import Network.Google.DFAReporting.Regions.List
+import Network.Google.DFAReporting.RemarketingListShares.Get
+import Network.Google.DFAReporting.RemarketingListShares.Patch
+import Network.Google.DFAReporting.RemarketingListShares.Update
+import Network.Google.DFAReporting.RemarketingLists.Get
+import Network.Google.DFAReporting.RemarketingLists.Insert
+import Network.Google.DFAReporting.RemarketingLists.List
+import Network.Google.DFAReporting.RemarketingLists.Patch
+import Network.Google.DFAReporting.RemarketingLists.Update
+import Network.Google.DFAReporting.Reports.CompatibleFields.Query
+import Network.Google.DFAReporting.Reports.Delete
+import Network.Google.DFAReporting.Reports.Files.Get
+import Network.Google.DFAReporting.Reports.Files.List
+import Network.Google.DFAReporting.Reports.Get
+import Network.Google.DFAReporting.Reports.Insert
+import Network.Google.DFAReporting.Reports.List
+import Network.Google.DFAReporting.Reports.Patch
+import Network.Google.DFAReporting.Reports.Run
+import Network.Google.DFAReporting.Reports.Update
+import Network.Google.DFAReporting.Sites.Get
+import Network.Google.DFAReporting.Sites.Insert
+import Network.Google.DFAReporting.Sites.List
+import Network.Google.DFAReporting.Sites.Patch
+import Network.Google.DFAReporting.Sites.Update
+import Network.Google.DFAReporting.Sizes.Get
+import Network.Google.DFAReporting.Sizes.Insert
+import Network.Google.DFAReporting.Sizes.List
+import Network.Google.DFAReporting.Subaccounts.Get
+import Network.Google.DFAReporting.Subaccounts.Insert
+import Network.Google.DFAReporting.Subaccounts.List
+import Network.Google.DFAReporting.Subaccounts.Patch
+import Network.Google.DFAReporting.Subaccounts.Update
+import Network.Google.DFAReporting.TargetableRemarketingLists.Get
+import Network.Google.DFAReporting.TargetableRemarketingLists.List
+import Network.Google.DFAReporting.TargetingTemplates.Get
+import Network.Google.DFAReporting.TargetingTemplates.Insert
+import Network.Google.DFAReporting.TargetingTemplates.List
+import Network.Google.DFAReporting.TargetingTemplates.Patch
+import Network.Google.DFAReporting.TargetingTemplates.Update
 import Network.Google.DFAReporting.Types
-import Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
-import Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
-import Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
-import Network.Google.Resource.DFAReporting.AccountPermissions.Get
-import Network.Google.Resource.DFAReporting.AccountPermissions.List
-import Network.Google.Resource.DFAReporting.AccountUserProFiles.Get
-import Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
-import Network.Google.Resource.DFAReporting.AccountUserProFiles.List
-import Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
-import Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
-import Network.Google.Resource.DFAReporting.Accounts.Get
-import Network.Google.Resource.DFAReporting.Accounts.List
-import Network.Google.Resource.DFAReporting.Accounts.Patch
-import Network.Google.Resource.DFAReporting.Accounts.Update
-import Network.Google.Resource.DFAReporting.Ads.Get
-import Network.Google.Resource.DFAReporting.Ads.Insert
-import Network.Google.Resource.DFAReporting.Ads.List
-import Network.Google.Resource.DFAReporting.Ads.Patch
-import Network.Google.Resource.DFAReporting.Ads.Update
-import Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
-import Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
-import Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
-import Network.Google.Resource.DFAReporting.AdvertiserGroups.List
-import Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
-import Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
-import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Get
-import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Insert
-import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
-import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Patch
-import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Update
-import Network.Google.Resource.DFAReporting.Advertisers.Get
-import Network.Google.Resource.DFAReporting.Advertisers.Insert
-import Network.Google.Resource.DFAReporting.Advertisers.List
-import Network.Google.Resource.DFAReporting.Advertisers.Patch
-import Network.Google.Resource.DFAReporting.Advertisers.Update
-import Network.Google.Resource.DFAReporting.Browsers.List
-import Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
-import Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
-import Network.Google.Resource.DFAReporting.Campaigns.Get
-import Network.Google.Resource.DFAReporting.Campaigns.Insert
-import Network.Google.Resource.DFAReporting.Campaigns.List
-import Network.Google.Resource.DFAReporting.Campaigns.Patch
-import Network.Google.Resource.DFAReporting.Campaigns.Update
-import Network.Google.Resource.DFAReporting.ChangeLogs.Get
-import Network.Google.Resource.DFAReporting.ChangeLogs.List
-import Network.Google.Resource.DFAReporting.Cities.List
-import Network.Google.Resource.DFAReporting.ConnectionTypes.Get
-import Network.Google.Resource.DFAReporting.ConnectionTypes.List
-import Network.Google.Resource.DFAReporting.ContentCategories.Delete
-import Network.Google.Resource.DFAReporting.ContentCategories.Get
-import Network.Google.Resource.DFAReporting.ContentCategories.Insert
-import Network.Google.Resource.DFAReporting.ContentCategories.List
-import Network.Google.Resource.DFAReporting.ContentCategories.Patch
-import Network.Google.Resource.DFAReporting.ContentCategories.Update
-import Network.Google.Resource.DFAReporting.Conversions.Batchinsert
-import Network.Google.Resource.DFAReporting.Conversions.Batchupdate
-import Network.Google.Resource.DFAReporting.Countries.Get
-import Network.Google.Resource.DFAReporting.Countries.List
-import Network.Google.Resource.DFAReporting.CreativeAssets.Insert
-import Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
-import Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
-import Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
-import Network.Google.Resource.DFAReporting.CreativeFieldValues.List
-import Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
-import Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
-import Network.Google.Resource.DFAReporting.CreativeFields.Delete
-import Network.Google.Resource.DFAReporting.CreativeFields.Get
-import Network.Google.Resource.DFAReporting.CreativeFields.Insert
-import Network.Google.Resource.DFAReporting.CreativeFields.List
-import Network.Google.Resource.DFAReporting.CreativeFields.Patch
-import Network.Google.Resource.DFAReporting.CreativeFields.Update
-import Network.Google.Resource.DFAReporting.CreativeGroups.Get
-import Network.Google.Resource.DFAReporting.CreativeGroups.Insert
-import Network.Google.Resource.DFAReporting.CreativeGroups.List
-import Network.Google.Resource.DFAReporting.CreativeGroups.Patch
-import Network.Google.Resource.DFAReporting.CreativeGroups.Update
-import Network.Google.Resource.DFAReporting.Creatives.Get
-import Network.Google.Resource.DFAReporting.Creatives.Insert
-import Network.Google.Resource.DFAReporting.Creatives.List
-import Network.Google.Resource.DFAReporting.Creatives.Patch
-import Network.Google.Resource.DFAReporting.Creatives.Update
-import Network.Google.Resource.DFAReporting.DimensionValues.Query
-import Network.Google.Resource.DFAReporting.DirectorySites.Get
-import Network.Google.Resource.DFAReporting.DirectorySites.Insert
-import Network.Google.Resource.DFAReporting.DirectorySites.List
-import Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
-import Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
-import Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
-import Network.Google.Resource.DFAReporting.EventTags.Delete
-import Network.Google.Resource.DFAReporting.EventTags.Get
-import Network.Google.Resource.DFAReporting.EventTags.Insert
-import Network.Google.Resource.DFAReporting.EventTags.List
-import Network.Google.Resource.DFAReporting.EventTags.Patch
-import Network.Google.Resource.DFAReporting.EventTags.Update
-import Network.Google.Resource.DFAReporting.Files.Get
-import Network.Google.Resource.DFAReporting.Files.List
-import Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
-import Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
-import Network.Google.Resource.DFAReporting.FloodlightActivities.Get
-import Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
-import Network.Google.Resource.DFAReporting.FloodlightActivities.List
-import Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
-import Network.Google.Resource.DFAReporting.FloodlightActivities.Update
-import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
-import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
-import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
-import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
-import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
-import Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
-import Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
-import Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
-import Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
-import Network.Google.Resource.DFAReporting.InventoryItems.Get
-import Network.Google.Resource.DFAReporting.InventoryItems.List
-import Network.Google.Resource.DFAReporting.Languages.List
-import Network.Google.Resource.DFAReporting.Metros.List
-import Network.Google.Resource.DFAReporting.MobileApps.Get
-import Network.Google.Resource.DFAReporting.MobileApps.List
-import Network.Google.Resource.DFAReporting.MobileCarriers.Get
-import Network.Google.Resource.DFAReporting.MobileCarriers.List
-import Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
-import Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
-import Network.Google.Resource.DFAReporting.OperatingSystems.Get
-import Network.Google.Resource.DFAReporting.OperatingSystems.List
-import Network.Google.Resource.DFAReporting.OrderDocuments.Get
-import Network.Google.Resource.DFAReporting.OrderDocuments.List
-import Network.Google.Resource.DFAReporting.Orders.Get
-import Network.Google.Resource.DFAReporting.Orders.List
-import Network.Google.Resource.DFAReporting.PlacementGroups.Get
-import Network.Google.Resource.DFAReporting.PlacementGroups.Insert
-import Network.Google.Resource.DFAReporting.PlacementGroups.List
-import Network.Google.Resource.DFAReporting.PlacementGroups.Patch
-import Network.Google.Resource.DFAReporting.PlacementGroups.Update
-import Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
-import Network.Google.Resource.DFAReporting.PlacementStrategies.Get
-import Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
-import Network.Google.Resource.DFAReporting.PlacementStrategies.List
-import Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
-import Network.Google.Resource.DFAReporting.PlacementStrategies.Update
-import Network.Google.Resource.DFAReporting.Placements.Generatetags
-import Network.Google.Resource.DFAReporting.Placements.Get
-import Network.Google.Resource.DFAReporting.Placements.Insert
-import Network.Google.Resource.DFAReporting.Placements.List
-import Network.Google.Resource.DFAReporting.Placements.Patch
-import Network.Google.Resource.DFAReporting.Placements.Update
-import Network.Google.Resource.DFAReporting.PlatformTypes.Get
-import Network.Google.Resource.DFAReporting.PlatformTypes.List
-import Network.Google.Resource.DFAReporting.PostalCodes.Get
-import Network.Google.Resource.DFAReporting.PostalCodes.List
-import Network.Google.Resource.DFAReporting.Projects.Get
-import Network.Google.Resource.DFAReporting.Projects.List
-import Network.Google.Resource.DFAReporting.Regions.List
-import Network.Google.Resource.DFAReporting.RemarketingListShares.Get
-import Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
-import Network.Google.Resource.DFAReporting.RemarketingListShares.Update
-import Network.Google.Resource.DFAReporting.RemarketingLists.Get
-import Network.Google.Resource.DFAReporting.RemarketingLists.Insert
-import Network.Google.Resource.DFAReporting.RemarketingLists.List
-import Network.Google.Resource.DFAReporting.RemarketingLists.Patch
-import Network.Google.Resource.DFAReporting.RemarketingLists.Update
-import Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
-import Network.Google.Resource.DFAReporting.Reports.Delete
-import Network.Google.Resource.DFAReporting.Reports.Files.Get
-import Network.Google.Resource.DFAReporting.Reports.Files.List
-import Network.Google.Resource.DFAReporting.Reports.Get
-import Network.Google.Resource.DFAReporting.Reports.Insert
-import Network.Google.Resource.DFAReporting.Reports.List
-import Network.Google.Resource.DFAReporting.Reports.Patch
-import Network.Google.Resource.DFAReporting.Reports.Run
-import Network.Google.Resource.DFAReporting.Reports.Update
-import Network.Google.Resource.DFAReporting.Sites.Get
-import Network.Google.Resource.DFAReporting.Sites.Insert
-import Network.Google.Resource.DFAReporting.Sites.List
-import Network.Google.Resource.DFAReporting.Sites.Patch
-import Network.Google.Resource.DFAReporting.Sites.Update
-import Network.Google.Resource.DFAReporting.Sizes.Get
-import Network.Google.Resource.DFAReporting.Sizes.Insert
-import Network.Google.Resource.DFAReporting.Sizes.List
-import Network.Google.Resource.DFAReporting.SubAccounts.Get
-import Network.Google.Resource.DFAReporting.SubAccounts.Insert
-import Network.Google.Resource.DFAReporting.SubAccounts.List
-import Network.Google.Resource.DFAReporting.SubAccounts.Patch
-import Network.Google.Resource.DFAReporting.SubAccounts.Update
-import Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
-import Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
-import Network.Google.Resource.DFAReporting.TargetingTemplates.Get
-import Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
-import Network.Google.Resource.DFAReporting.TargetingTemplates.List
-import Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
-import Network.Google.Resource.DFAReporting.TargetingTemplates.Update
-import Network.Google.Resource.DFAReporting.UserProFiles.Get
-import Network.Google.Resource.DFAReporting.UserProFiles.List
-import Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
-import Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
-import Network.Google.Resource.DFAReporting.UserRolePermissions.Get
-import Network.Google.Resource.DFAReporting.UserRolePermissions.List
-import Network.Google.Resource.DFAReporting.UserRoles.Delete
-import Network.Google.Resource.DFAReporting.UserRoles.Get
-import Network.Google.Resource.DFAReporting.UserRoles.Insert
-import Network.Google.Resource.DFAReporting.UserRoles.List
-import Network.Google.Resource.DFAReporting.UserRoles.Patch
-import Network.Google.Resource.DFAReporting.UserRoles.Update
-import Network.Google.Resource.DFAReporting.VideoFormats.Get
-import Network.Google.Resource.DFAReporting.VideoFormats.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Campaign Manager 360 API service.
-type DFAReportingAPI =
-     InventoryItemsListResource :<|>
-       InventoryItemsGetResource
-       :<|> PlacementStrategiesInsertResource
-       :<|> PlacementStrategiesListResource
-       :<|> PlacementStrategiesPatchResource
-       :<|> PlacementStrategiesGetResource
-       :<|> PlacementStrategiesDeleteResource
-       :<|> PlacementStrategiesUpdateResource
-       :<|> CampaignCreativeAssociationsInsertResource
-       :<|> CampaignCreativeAssociationsListResource
-       :<|> RemarketingListSharesPatchResource
-       :<|> RemarketingListSharesGetResource
-       :<|> RemarketingListSharesUpdateResource
-       :<|> MobileCarriersListResource
-       :<|> MobileCarriersGetResource
-       :<|> CreativeGroupsInsertResource
-       :<|> CreativeGroupsListResource
-       :<|> CreativeGroupsPatchResource
-       :<|> CreativeGroupsGetResource
-       :<|> CreativeGroupsUpdateResource
-       :<|> RemarketingListsInsertResource
-       :<|> RemarketingListsListResource
-       :<|> RemarketingListsPatchResource
-       :<|> RemarketingListsGetResource
-       :<|> RemarketingListsUpdateResource
-       :<|> AccountActiveAdSummariesGetResource
-       :<|> UserRolePermissionGroupsListResource
-       :<|> UserRolePermissionGroupsGetResource
-       :<|> AccountsListResource
-       :<|> AccountsPatchResource
-       :<|> AccountsGetResource
-       :<|> AccountsUpdateResource
-       :<|> ReportsCompatibleFieldsQueryResource
-       :<|> ReportsFilesListResource
-       :<|> ReportsFilesGetResource
-       :<|> ReportsInsertResource
-       :<|> ReportsListResource
-       :<|> ReportsPatchResource
-       :<|> ReportsGetResource
-       :<|> ReportsRunResource
-       :<|> ReportsDeleteResource
-       :<|> ReportsUpdateResource
-       :<|> CampaignsInsertResource
-       :<|> CampaignsListResource
-       :<|> CampaignsPatchResource
-       :<|> CampaignsGetResource
-       :<|> CampaignsUpdateResource
-       :<|> DynamicTargetingKeysInsertResource
-       :<|> DynamicTargetingKeysListResource
-       :<|> DynamicTargetingKeysDeleteResource
-       :<|> AccountUserProFilesInsertResource
-       :<|> AccountUserProFilesListResource
-       :<|> AccountUserProFilesPatchResource
-       :<|> AccountUserProFilesGetResource
-       :<|> AccountUserProFilesUpdateResource
-       :<|> CreativesInsertResource
-       :<|> CreativesListResource
-       :<|> CreativesPatchResource
-       :<|> CreativesGetResource
-       :<|> CreativesUpdateResource
-       :<|> DimensionValuesQueryResource
-       :<|> RegionsListResource
-       :<|> FloodlightConfigurationsListResource
-       :<|> FloodlightConfigurationsPatchResource
-       :<|> FloodlightConfigurationsGetResource
-       :<|> FloodlightConfigurationsUpdateResource
-       :<|> ConversionsBatchinsertResource
-       :<|> ConversionsBatchupdateResource
-       :<|> FloodlightActivitiesInsertResource
-       :<|> FloodlightActivitiesListResource
-       :<|> FloodlightActivitiesPatchResource
-       :<|> FloodlightActivitiesGetResource
-       :<|> FloodlightActivitiesGeneratetagResource
-       :<|> FloodlightActivitiesDeleteResource
-       :<|> FloodlightActivitiesUpdateResource
-       :<|> UserRolesInsertResource
-       :<|> UserRolesListResource
-       :<|> UserRolesPatchResource
-       :<|> UserRolesGetResource
-       :<|> UserRolesDeleteResource
-       :<|> UserRolesUpdateResource
-       :<|> AccountPermissionGroupsListResource
-       :<|> AccountPermissionGroupsGetResource
-       :<|> AdvertisersInsertResource
-       :<|> AdvertisersListResource
-       :<|> AdvertisersPatchResource
-       :<|> AdvertisersGetResource
-       :<|> AdvertisersUpdateResource
-       :<|> CountriesListResource
-       :<|> CountriesGetResource
-       :<|> AccountPermissionsListResource
-       :<|> AccountPermissionsGetResource
-       :<|> UserProFilesListResource
-       :<|> UserProFilesGetResource
-       :<|> OperatingSystemVersionsListResource
-       :<|> OperatingSystemVersionsGetResource
-       :<|> ChangeLogsListResource
-       :<|> ChangeLogsGetResource
-       :<|> CitiesListResource
-       :<|> LanguagesListResource
-       :<|> TargetableRemarketingListsListResource
-       :<|> TargetableRemarketingListsGetResource
-       :<|> PlatformTypesListResource
-       :<|> PlatformTypesGetResource
-       :<|> BrowsersListResource
-       :<|> ContentCategoriesInsertResource
-       :<|> ContentCategoriesListResource
-       :<|> ContentCategoriesPatchResource
-       :<|> ContentCategoriesGetResource
-       :<|> ContentCategoriesDeleteResource
-       :<|> ContentCategoriesUpdateResource
-       :<|> PlacementsInsertResource
-       :<|> PlacementsGeneratetagsResource
-       :<|> PlacementsListResource
-       :<|> PlacementsPatchResource
-       :<|> PlacementsGetResource
-       :<|> PlacementsUpdateResource
-       :<|> MetrosListResource
-       :<|> OrderDocumentsListResource
-       :<|> OrderDocumentsGetResource
-       :<|> AdvertiserLandingPagesInsertResource
-       :<|> AdvertiserLandingPagesListResource
-       :<|> AdvertiserLandingPagesPatchResource
-       :<|> AdvertiserLandingPagesGetResource
-       :<|> AdvertiserLandingPagesUpdateResource
-       :<|> MobileAppsListResource
-       :<|> MobileAppsGetResource
-       :<|> CreativeFieldsInsertResource
-       :<|> CreativeFieldsListResource
-       :<|> CreativeFieldsPatchResource
-       :<|> CreativeFieldsGetResource
-       :<|> CreativeFieldsDeleteResource
-       :<|> CreativeFieldsUpdateResource
-       :<|> TargetingTemplatesInsertResource
-       :<|> TargetingTemplatesListResource
-       :<|> TargetingTemplatesPatchResource
-       :<|> TargetingTemplatesGetResource
-       :<|> TargetingTemplatesUpdateResource
-       :<|> EventTagsInsertResource
-       :<|> EventTagsListResource
-       :<|> EventTagsPatchResource
-       :<|> EventTagsGetResource
-       :<|> EventTagsDeleteResource
-       :<|> EventTagsUpdateResource
-       :<|> FilesListResource
-       :<|> FilesGetResource
-       :<|> UserRolePermissionsListResource
-       :<|> UserRolePermissionsGetResource
-       :<|> PlacementGroupsInsertResource
-       :<|> PlacementGroupsListResource
-       :<|> PlacementGroupsPatchResource
-       :<|> PlacementGroupsGetResource
-       :<|> PlacementGroupsUpdateResource
-       :<|> OrdersListResource
-       :<|> OrdersGetResource
-       :<|> ConnectionTypesListResource
-       :<|> ConnectionTypesGetResource
-       :<|> CreativeAssetsInsertResource
-       :<|> SitesInsertResource
-       :<|> SitesListResource
-       :<|> SitesPatchResource
-       :<|> SitesGetResource
-       :<|> SitesUpdateResource
-       :<|> PostalCodesListResource
-       :<|> PostalCodesGetResource
-       :<|> OperatingSystemsListResource
-       :<|> OperatingSystemsGetResource
-       :<|> SizesInsertResource
-       :<|> SizesListResource
-       :<|> SizesGetResource
-       :<|> AdsInsertResource
-       :<|> AdsListResource
-       :<|> AdsPatchResource
-       :<|> AdsGetResource
-       :<|> AdsUpdateResource
-       :<|> ProjectsListResource
-       :<|> ProjectsGetResource
-       :<|> SubAccountsInsertResource
-       :<|> SubAccountsListResource
-       :<|> SubAccountsPatchResource
-       :<|> SubAccountsGetResource
-       :<|> SubAccountsUpdateResource
-       :<|> VideoFormatsListResource
-       :<|> VideoFormatsGetResource
-       :<|> CreativeFieldValuesInsertResource
-       :<|> CreativeFieldValuesListResource
-       :<|> CreativeFieldValuesPatchResource
-       :<|> CreativeFieldValuesGetResource
-       :<|> CreativeFieldValuesDeleteResource
-       :<|> CreativeFieldValuesUpdateResource
-       :<|> DirectorySitesInsertResource
-       :<|> DirectorySitesListResource
-       :<|> DirectorySitesGetResource
-       :<|> AdvertiserGroupsInsertResource
-       :<|> AdvertiserGroupsListResource
-       :<|> AdvertiserGroupsPatchResource
-       :<|> AdvertiserGroupsGetResource
-       :<|> AdvertiserGroupsDeleteResource
-       :<|> AdvertiserGroupsUpdateResource
-       :<|> FloodlightActivityGroupsInsertResource
-       :<|> FloodlightActivityGroupsListResource
-       :<|> FloodlightActivityGroupsPatchResource
-       :<|> FloodlightActivityGroupsGetResource
-       :<|> FloodlightActivityGroupsUpdateResource
+import Network.Google.DFAReporting.UserProfiles.Get
+import Network.Google.DFAReporting.UserProfiles.List
+import Network.Google.DFAReporting.UserRolePermissionGroups.Get
+import Network.Google.DFAReporting.UserRolePermissionGroups.List
+import Network.Google.DFAReporting.UserRolePermissions.Get
+import Network.Google.DFAReporting.UserRolePermissions.List
+import Network.Google.DFAReporting.UserRoles.Delete
+import Network.Google.DFAReporting.UserRoles.Get
+import Network.Google.DFAReporting.UserRoles.Insert
+import Network.Google.DFAReporting.UserRoles.List
+import Network.Google.DFAReporting.UserRoles.Patch
+import Network.Google.DFAReporting.UserRoles.Update
+import Network.Google.DFAReporting.VideoFormats.Get
+import Network.Google.DFAReporting.VideoFormats.List
