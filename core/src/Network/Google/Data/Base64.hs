@@ -14,26 +14,28 @@ module Network.Google.Data.Base64
   )
 where
 
-import qualified Data.ByteString.Base64 as Base64
 import Control.Lens (Iso', iso)
 import Data.Aeson (FromJSON (..), ToJSON (..))
 import Data.ByteString (ByteString)
+import qualified Data.ByteString.Base64 as Base64
 import Data.Hashable
 import qualified Data.Text.Encoding as Text
 import GHC.Generics (Generic)
 import Network.Google.Data.JSON (parseJSONText, toJSONText)
-import Web.HttpApiData ( FromHttpApiData (..), ToHttpApiData (..))
+import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
 
-newtype Base64 = Base64 {unBase64 :: ByteString}
+-- | Raw bytes that will be transparently base64 encoded\/decoded
+-- on tramission to\/from a remote API.
+newtype Base64 = Base64 {fromBase64 :: ByteString}
   deriving (Eq, Show, Read, Ord, Generic, Hashable)
 
 _Base64 :: Iso' Base64 ByteString
-_Base64 = iso unBase64 Base64
+_Base64 = iso fromBase64 Base64
 
 instance ToHttpApiData Base64 where
-  toUrlPiece = Base64.encodeBase64 . unBase64
-  toQueryParam = Base64.encodeBase64 . unBase64
-  toHeader = Base64.encodeBase64' . unBase64
+  toUrlPiece = Base64.encodeBase64 . fromBase64
+  toQueryParam = Base64.encodeBase64 . fromBase64
+  toHeader = Base64.encodeBase64' . fromBase64
 
 instance FromHttpApiData Base64 where
   parseUrlPiece = fmap Base64 . Base64.decodeBase64 . Text.encodeUtf8

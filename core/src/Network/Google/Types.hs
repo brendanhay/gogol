@@ -51,17 +51,23 @@ import Network.HTTP.Types hiding (Header)
 import qualified Network.HTTP.Types as HTTP
 import Servant.API hiding (Stream)
 
-data AltJSON = AltJSON deriving (Eq, Ord, Show, Read, Generic)
+data AltJSON = AltJSON
+  deriving (Eq, Ord, Show, Read, Generic)
 
-data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic)
+instance ToHttpApiData AltJSON where
+  toQueryParam = const "json"
 
-data Multipart = Multipart deriving (Eq, Ord, Show, Read, Generic)
+data AltMedia = AltMedia
+  deriving (Eq, Ord, Show, Read, Generic)
 
-instance ToHttpApiData AltJSON where toQueryParam = const "json"
+instance ToHttpApiData AltMedia where
+  toQueryParam = const "media"
 
-instance ToHttpApiData AltMedia where toQueryParam = const "media"
+data Multipart = Multipart
+  deriving (Eq, Ord, Show, Read, Generic)
 
-instance ToHttpApiData Multipart where toQueryParam = const "multipart"
+instance ToHttpApiData Multipart where
+  toQueryParam = const "multipart"
 
 -- | An OAuth2 scope.
 newtype OAuthScope = OAuthScope Text

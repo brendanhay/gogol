@@ -1,4 +1,5 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
@@ -9,7 +10,7 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 module Network.Google.Data.JSON
-  ( JSONValue,
+  ( Value,
     AsText (..),
     parseJSONObject,
     parseJSONText,
@@ -32,12 +33,14 @@ where
 
 import Data.Aeson
 import Data.Aeson.Types
-import Data.HashMap.Strict (HashMap)
-import Data.Text (Text)
 import qualified Data.Text as Text
 import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
-
-type JSONValue = Value
+#if MIN_VERSION_aeson(2,0,0)
+import Data.Aeson.KeyMap (KeyMap)
+#else
+import Data.HashMap.Strict (HashMap)
+import Data.Text (Text)
+#endif
 
 newtype AsText a = AsText a
   deriving (Eq, Ord, Read, Show, Num, Fractional, ToHttpApiData, FromHttpApiData)
@@ -49,8 +52,12 @@ instance (FromJSON a, FromHttpApiData a) => FromJSON (AsText a) where
 instance ToHttpApiData a => ToJSON (AsText a) where
   toJSON (AsText x) = String (toQueryParam x)
 
+#if MIN_VERSION_aeson(2,0,0)
+parseJSONObject :: FromJSON a => KeyMap Value -> Parser a
+#else
 parseJSONObject :: FromJSON a => HashMap Text Value -> Parser a
-parseJSONObject = parseJSON . Object
+#endif
+parseJSONObject = parseJSON . toJSON
 
 parseJSONText :: FromHttpApiData a => String -> Value -> Parser a
 parseJSONText n = withText n (either (fail . f) pure . parseQueryParam)
