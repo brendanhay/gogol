@@ -1,762 +1,491 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.People.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.People.Types
-    (
-    -- * Service Configuration
-      peopleService
+  ( -- * Configuration
+    peopleService,
 
     -- * OAuth Scopes
-    , contactsOtherReadOnlyScope
-    , directoryReadOnlyScope
-    , userBirthdayReadScope
-    , userInfoProFileScope
-    , userPhoneNumbersReadScope
-    , userInfoEmailScope
-    , contactsReadOnlyScope
-    , userAddressesReadScope
-    , userOrganizationReadScope
-    , contactsScope
-    , userEmailsReadScope
-    , userGenderReadScope
-
-    -- * BatchUpdateContactsRequestSourcesItem
-    , BatchUpdateContactsRequestSourcesItem (..)
-
-    -- * PeopleUpdateContactSources
-    , PeopleUpdateContactSources (..)
-
-    -- * SipAddress
-    , SipAddress
-    , sipAddress
-    , saValue
-    , saMetadata
-    , saType
-    , saFormattedType
-
-    -- * BatchUpdateContactsRequestContacts
-    , BatchUpdateContactsRequestContacts
-    , batchUpdateContactsRequestContacts
-    , bucrcAddtional
-
-    -- * Photo
-    , Photo
-    , photo
-    , pDefault
-    , pURL
-    , pMetadata
-
-    -- * Event
-    , Event
-    , event
-    , eDate
-    , eMetadata
-    , eType
-    , eFormattedType
-
-    -- * ListConnectionsResponse
-    , ListConnectionsResponse
-    , listConnectionsResponse
-    , lcrTotalItems
-    , lcrNextPageToken
-    , lcrConnections
-    , lcrNextSyncToken
-    , lcrTotalPeople
-
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- * ContactGroupResponse
-    , ContactGroupResponse
-    , contactGroupResponse
-    , cgrStatus
-    , cgrContactGroup
-    , cgrRequestedResourceName
-
-    -- * FileAs
-    , FileAs
-    , fileAs
-    , faValue
-    , faMetadata
-
-    -- * ContactGroup
-    , ContactGroup
-    , contactGroup
-    , cgEtag
-    , cgResourceName
-    , cgMemberResourceNames
-    , cgFormattedName
-    , cgName
-    , cgGroupType
-    , cgMetadata
-    , cgMemberCount
-    , cgClientData
-
-    -- * ModifyContactGroupMembersResponse
-    , ModifyContactGroupMembersResponse
-    , modifyContactGroupMembersResponse
-    , mcgmrCanNotRemoveLastContactGroupResourceNames
-    , mcgmrNotFoundResourceNames
-
-    -- * UpdateContactGroupRequest
-    , UpdateContactGroupRequest
-    , updateContactGroupRequest
-    , ucgrContactGroup
-    , ucgrReadGroupFields
-    , ucgrUpdateGroupFields
-
-    -- * SearchResult
-    , SearchResult
-    , searchResult
-    , srPerson
-
-    -- * DomainMembership
-    , DomainMembership
-    , domainMembership
-    , dmInViewerDomain
-
-    -- * PeopleConnectionsListSources
-    , PeopleConnectionsListSources (..)
-
-    -- * RelationshipInterest
-    , RelationshipInterest
-    , relationshipInterest
-    , riValue
-    , riMetadata
-    , riFormattedValue
-
-    -- * BraggingRights
-    , BraggingRights
-    , braggingRights
-    , brValue
-    , brMetadata
-
-    -- * BatchCreateContactsRequest
-    , BatchCreateContactsRequest
-    , batchCreateContactsRequest
-    , bccrReadMask
-    , bccrSources
-    , bccrContacts
-
-    -- * Membership
-    , Membership
-    , membership
-    , mDomainMembership
-    , mContactGroupMembership
-    , mMetadata
-
-    -- * SearchResponse
-    , SearchResponse
-    , searchResponse
-    , srResults
-
-    -- * PeopleListDirectoryPeopleMergeSources
-    , PeopleListDirectoryPeopleMergeSources (..)
-
-    -- * BatchUpdateContactsResponse
-    , BatchUpdateContactsResponse
-    , batchUpdateContactsResponse
-    , bucrUpdateResult
-
-    -- * Location
-    , Location
-    , location
-    , lFloor
-    , lBuildingId
-    , lValue
-    , lCurrent
-    , lDeskCode
-    , lMetadata
-    , lType
-    , lFloorSection
-
-    -- * Person
-    , Person
-    , person
-    , perEmailAddresses
-    , perAgeRange
-    , perEtag
-    , perResidences
-    , perBiographies
-    , perTaglines
-    , perBraggingRights
-    , perBirthdays
-    , perResourceName
-    , perRelations
-    , perURLs
-    , perAddresses
-    , perUserDefined
-    , perNicknames
-    , perExternalIds
-    , perRelationshipStatuses
-    , perImClients
-    , perPhoneNumbers
-    , perOccupations
-    , perNames
-    , perGenders
-    , perPhotos
-    , perAgeRanges
-    , perEvents
-    , perCalendarURLs
-    , perFileAses
-    , perCoverPhotos
-    , perSkills
-    , perSipAddresses
-    , perMetadata
-    , perInterests
-    , perOrganizations
-    , perLocales
-    , perLocations
-    , perMiscKeywords
-    , perMemberships
-    , perRelationshipInterests
-    , perClientData
-
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * PeopleListDirectoryPeopleSources
-    , PeopleListDirectoryPeopleSources (..)
-
-    -- * SourceType
-    , SourceType (..)
-
-    -- * ListContactGroupsResponse
-    , ListContactGroupsResponse
-    , listContactGroupsResponse
-    , lcgrContactGroups
-    , lcgrTotalItems
-    , lcgrNextPageToken
-    , lcgrNextSyncToken
-
-    -- * ContactGroupMembership
-    , ContactGroupMembership
-    , contactGroupMembership
-    , cgmContactGroupResourceName
-    , cgmContactGroupId
-
-    -- * MiscKeyword
-    , MiscKeyword
-    , miscKeyword
-    , mkValue
-    , mkMetadata
-    , mkType
-    , mkFormattedType
-
-    -- * BatchCreateContactsResponse
-    , BatchCreateContactsResponse
-    , batchCreateContactsResponse
-    , bccrCreatedPeople
-
-    -- * ContactGroupGroupType
-    , ContactGroupGroupType (..)
-
-    -- * UserDefined
-    , UserDefined
-    , userDefined
-    , udValue
-    , udKey
-    , udMetadata
-
-    -- * PeopleSearchContactsSources
-    , PeopleSearchContactsSources (..)
-
-    -- * CopyOtherContactToMyContactsGroupRequestSourcesItem
-    , CopyOtherContactToMyContactsGroupRequestSourcesItem (..)
-
-    -- * NicknameType
-    , NicknameType (..)
-
-    -- * Locale
-    , Locale
-    , locale
-    , locValue
-    , locMetadata
-
-    -- * PeopleConnectionsListSortOrder
-    , PeopleConnectionsListSortOrder (..)
-
-    -- * RelationshipStatus
-    , RelationshipStatus
-    , relationshipStatus
-    , rsValue
-    , rsMetadata
-    , rsFormattedValue
-
-    -- * PeopleDeleteContactPhotoSources
-    , PeopleDeleteContactPhotoSources (..)
-
-    -- * URL
-    , URL
-    , url
-    , uValue
-    , uMetadata
-    , uType
-    , uFormattedType
-
-    -- * PeopleGetSources
-    , PeopleGetSources (..)
-
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- * DeleteContactPhotoResponse
-    , DeleteContactPhotoResponse
-    , deleteContactPhotoResponse
-    , dcprPerson
-
-    -- * UpdateContactPhotoResponse
-    , UpdateContactPhotoResponse
-    , updateContactPhotoResponse
-    , ucprPerson
-
-    -- * GroupClientData
-    , GroupClientData
-    , groupClientData
-    , gcdValue
-    , gcdKey
-
-    -- * Address
-    , Address
-    , address
-    , aStreetAddress
-    , aPoBox
-    , aCountry
-    , aPostalCode
-    , aExtendedAddress
-    , aCity
-    , aMetadata
-    , aCountryCode
-    , aFormattedValue
-    , aRegion
-    , aType
-    , aFormattedType
-
-    -- * ProFileMetadata
-    , ProFileMetadata
-    , proFileMetadata
-    , pfmObjectType
-    , pfmUserTypes
-
-    -- * Relation
-    , Relation
-    , relation
-    , rPerson
-    , rMetadata
-    , rType
-    , rFormattedType
-
-    -- * GetPeopleResponse
-    , GetPeopleResponse
-    , getPeopleResponse
-    , gprResponses
-
-    -- * ListOtherContactsResponse
-    , ListOtherContactsResponse
-    , listOtherContactsResponse
-    , locrNextPageToken
-    , locrOtherContacts
-    , locrTotalSize
-    , locrNextSyncToken
-
-    -- * PeopleSearchDirectoryPeopleSources
-    , PeopleSearchDirectoryPeopleSources (..)
-
-    -- * BatchCreateContactsRequestSourcesItem
-    , BatchCreateContactsRequestSourcesItem (..)
-
-    -- * Birthday
-    , Birthday
-    , birthday
-    , bText
-    , bDate
-    , bMetadata
-
-    -- * PeopleCreateContactSources
-    , PeopleCreateContactSources (..)
-
-    -- * PersonAgeRange
-    , PersonAgeRange (..)
-
-    -- * PeopleSearchDirectoryPeopleMergeSources
-    , PeopleSearchDirectoryPeopleMergeSources (..)
-
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- * Tagline
-    , Tagline
-    , tagline
-    , tValue
-    , tMetadata
-
-    -- * Residence
-    , Residence
-    , residence
-    , resValue
-    , resCurrent
-    , resMetadata
-
-    -- * UpdateContactPhotoRequest
-    , UpdateContactPhotoRequest
-    , updateContactPhotoRequest
-    , ucprSources
-    , ucprPersonFields
-    , ucprPhotoBytes
-
-    -- * AgeRangeType
-    , AgeRangeType
-    , ageRangeType
-    , artAgeRange
-    , artMetadata
-
-    -- * Gender
-    , Gender
-    , gender
-    , gValue
-    , gAddressMeAs
-    , gMetadata
-    , gFormattedValue
-
-    -- * UpdateContactPhotoRequestSourcesItem
-    , UpdateContactPhotoRequestSourcesItem (..)
-
-    -- * Name
-    , Name
-    , name
-    , nGivenName
-    , nPhoneticHonorificSuffix
-    , nMiddleName
-    , nUnstructuredName
-    , nPhoneticMiddleName
-    , nPhoneticFamilyName
-    , nPhoneticHonorificPrefix
-    , nHonorificPrefix
-    , nFamilyName
-    , nMetadata
-    , nDisplayName
-    , nDisplayNameLastFirst
-    , nPhoneticGivenName
-    , nHonorificSuffix
-    , nPhoneticFullName
-
-    -- * BatchDeleteContactsRequest
-    , BatchDeleteContactsRequest
-    , batchDeleteContactsRequest
-    , bdcrResourceNames
-
-    -- * FieldMetadata
-    , FieldMetadata
-    , fieldMetadata
-    , fmVerified
-    , fmPrimary
-    , fmSource
-    , fmSourcePrimary
-
-    -- * BatchUpdateContactsRequest
-    , BatchUpdateContactsRequest
-    , batchUpdateContactsRequest
-    , bucrUpdateMask
-    , bucrReadMask
-    , bucrSources
-    , bucrContacts
-
-    -- * SearchDirectoryPeopleResponse
-    , SearchDirectoryPeopleResponse
-    , searchDirectoryPeopleResponse
-    , sdprNextPageToken
-    , sdprPeople
-    , sdprTotalSize
-
-    -- * PhoneNumber
-    , PhoneNumber
-    , phoneNumber
-    , pnCanonicalForm
-    , pnValue
-    , pnMetadata
-    , pnType
-    , pnFormattedType
-
-    -- * ContactToCreate
-    , ContactToCreate
-    , contactToCreate
-    , ctcContactPerson
-
-    -- * Occupation
-    , Occupation
-    , occupation
-    , oValue
-    , oMetadata
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * EmailAddress
-    , EmailAddress
-    , emailAddress
-    , eaValue
-    , eaMetadata
-    , eaDisplayName
-    , eaType
-    , eaFormattedType
-
-    -- * CreateContactGroupRequest
-    , CreateContactGroupRequest
-    , createContactGroupRequest
-    , ccgrContactGroup
-    , ccgrReadGroupFields
-
-    -- * ContactGroupMetadata
-    , ContactGroupMetadata
-    , contactGroupMetadata
-    , cgmUpdateTime
-    , cgmDeleted
-
-    -- * ModifyContactGroupMembersRequest
-    , ModifyContactGroupMembersRequest
-    , modifyContactGroupMembersRequest
-    , mcgmrResourceNamesToAdd
-    , mcgmrResourceNamesToRemove
-
-    -- * BatchUpdateContactsResponseUpdateResult
-    , BatchUpdateContactsResponseUpdateResult
-    , batchUpdateContactsResponseUpdateResult
-    , bucrurAddtional
-
-    -- * PersonMetadataObjectType
-    , PersonMetadataObjectType (..)
-
-    -- * Source
-    , Source
-    , source
-    , sEtag
-    , sProFileMetadata
-    , sUpdateTime
-    , sId
-    , sType
-
-    -- * MiscKeywordType
-    , MiscKeywordType (..)
-
-    -- * ImClient
-    , ImClient
-    , imClient
-    , icFormattedProtocol
-    , icUsername
-    , icProtocol
-    , icMetadata
-    , icType
-    , icFormattedType
-
-    -- * BatchGetContactGroupsResponse
-    , BatchGetContactGroupsResponse
-    , batchGetContactGroupsResponse
-    , bgcgrResponses
-
-    -- * BiographyContentType
-    , BiographyContentType (..)
-
-    -- * PersonMetadata
-    , PersonMetadata
-    , personMetadata
-    , pmPreviousResourceNames
-    , pmObjectType
-    , pmSources
-    , pmLinkedPeopleResourceNames
-    , pmDeleted
-
-    -- * AgeRangeTypeAgeRange
-    , AgeRangeTypeAgeRange (..)
-
-    -- * Nickname
-    , Nickname
-    , nickname
-    , nicValue
-    , nicMetadata
-    , nicType
-
-    -- * ExternalId
-    , ExternalId
-    , externalId
-    , eiValue
-    , eiMetadata
-    , eiType
-    , eiFormattedType
-
-    -- * ProFileMetadataObjectType
-    , ProFileMetadataObjectType (..)
-
-    -- * ListDirectoryPeopleResponse
-    , ListDirectoryPeopleResponse
-    , listDirectoryPeopleResponse
-    , ldprNextPageToken
-    , ldprPeople
-    , ldprNextSyncToken
-
-    -- * CopyOtherContactToMyContactsGroupRequest
-    , CopyOtherContactToMyContactsGroupRequest
-    , copyOtherContactToMyContactsGroupRequest
-    , coctmcgrReadMask
-    , coctmcgrSources
-    , coctmcgrCopyMask
-
-    -- * Organization
-    , Organization
-    , organization
-    , orgDePartment
-    , orgLocation
-    , orgDomain
-    , orgEndDate
-    , orgSymbol
-    , orgJobDescription
-    , orgCurrent
-    , orgStartDate
-    , orgName
-    , orgMetadata
-    , orgPhoneticName
-    , orgTitle
-    , orgType
-    , orgFormattedType
-
-    -- * OtherContactsListSources
-    , OtherContactsListSources (..)
-
-    -- * Interest
-    , Interest
-    , interest
-    , iValue
-    , iMetadata
-
-    -- * PersonResponse
-    , PersonResponse
-    , personResponse
-    , prStatus
-    , prRequestedResourceName
-    , prPerson
-    , prHTTPStatusCode
-
-    -- * CalendarURL
-    , CalendarURL
-    , calendarURL
-    , cuURL
-    , cuMetadata
-    , cuType
-    , cuFormattedType
-
-    -- * ClientData
-    , ClientData
-    , clientData
-    , cdValue
-    , cdKey
-    , cdMetadata
-
-    -- * PeopleGetBatchGetSources
-    , PeopleGetBatchGetSources (..)
-
-    -- * ProFileMetadataUserTypesItem
-    , ProFileMetadataUserTypesItem (..)
-
-    -- * Skill
-    , Skill
-    , skill
-    , sValue
-    , sMetadata
-
-    -- * Biography
-    , Biography
-    , biography
-    , bioValue
-    , bioMetadata
-    , bioContentType
-
-    -- * CoverPhoto
-    , CoverPhoto
-    , coverPhoto
-    , cpDefault
-    , cpURL
-    , cpMetadata
-    ) where
-
-import Network.Google.People.Types.Product
-import Network.Google.People.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v1' of the People API. This contains the host and root path used as a starting point for constructing service requests.
-peopleService :: ServiceConfig
-peopleService
-  = defaultService (ServiceId "people:v1")
-      "people.googleapis.com"
-
--- | See and download contact info automatically saved in your \"Other
--- contacts\"
-contactsOtherReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/contacts.other.readonly"]
-contactsOtherReadOnlyScope = Proxy
-
--- | See and download your organization\'s GSuite directory
-directoryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/directory.readonly"]
-directoryReadOnlyScope = Proxy
-
--- | See and download your exact date of birth
-userBirthdayReadScope :: Proxy '["https://www.googleapis.com/auth/user.birthday.read"]
-userBirthdayReadScope = Proxy
-
--- | See your personal info, including any personal info you\'ve made
--- publicly available
-userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userInfoProFileScope = Proxy
-
--- | See and download your personal phone numbers
-userPhoneNumbersReadScope :: Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]
-userPhoneNumbersReadScope = Proxy
-
--- | See your primary Google Account email address
-userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy
-
--- | See and download your contacts
-contactsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/contacts.readonly"]
-contactsReadOnlyScope = Proxy
-
--- | View your street addresses
-userAddressesReadScope :: Proxy '["https://www.googleapis.com/auth/user.addresses.read"]
-userAddressesReadScope = Proxy
-
--- | See your education, work history and org info
-userOrganizationReadScope :: Proxy '["https://www.googleapis.com/auth/user.organization.read"]
-userOrganizationReadScope = Proxy
+    contactsScope,
+    contactsOtherReadOnlyScope,
+    contactsReadOnlyScope,
+    directoryReadOnlyScope,
+    userAddressesReadScope,
+    userBirthdayReadScope,
+    userEmailsReadScope,
+    userGenderReadScope,
+    userOrganizationReadScope,
+    userPhoneNumbersReadScope,
+    userinfoEmailScope,
+    userinfoProfileScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** Address
+    Address (..),
+    newAddress,
+
+    -- ** AgeRangeType
+    AgeRangeType (..),
+    newAgeRangeType,
+
+    -- ** AgeRangeType_AgeRange
+    AgeRangeType_AgeRange (..),
+
+    -- ** BatchCreateContactsRequest
+    BatchCreateContactsRequest (..),
+    newBatchCreateContactsRequest,
+
+    -- ** BatchCreateContactsRequest_SourcesItem
+    BatchCreateContactsRequest_SourcesItem (..),
+
+    -- ** BatchCreateContactsResponse
+    BatchCreateContactsResponse (..),
+    newBatchCreateContactsResponse,
+
+    -- ** BatchDeleteContactsRequest
+    BatchDeleteContactsRequest (..),
+    newBatchDeleteContactsRequest,
+
+    -- ** BatchGetContactGroupsResponse
+    BatchGetContactGroupsResponse (..),
+    newBatchGetContactGroupsResponse,
+
+    -- ** BatchUpdateContactsRequest
+    BatchUpdateContactsRequest (..),
+    newBatchUpdateContactsRequest,
+
+    -- ** BatchUpdateContactsRequest_Contacts
+    BatchUpdateContactsRequest_Contacts (..),
+    newBatchUpdateContactsRequest_Contacts,
+
+    -- ** BatchUpdateContactsRequest_SourcesItem
+    BatchUpdateContactsRequest_SourcesItem (..),
+
+    -- ** BatchUpdateContactsResponse
+    BatchUpdateContactsResponse (..),
+    newBatchUpdateContactsResponse,
+
+    -- ** BatchUpdateContactsResponse_UpdateResult
+    BatchUpdateContactsResponse_UpdateResult (..),
+    newBatchUpdateContactsResponse_UpdateResult,
+
+    -- ** Biography
+    Biography (..),
+    newBiography,
+
+    -- ** Biography_ContentType
+    Biography_ContentType (..),
+
+    -- ** Birthday
+    Birthday (..),
+    newBirthday,
+
+    -- ** BraggingRights
+    BraggingRights (..),
+    newBraggingRights,
+
+    -- ** CalendarUrl
+    CalendarUrl (..),
+    newCalendarUrl,
+
+    -- ** ClientData
+    ClientData (..),
+    newClientData,
+
+    -- ** ContactGroup
+    ContactGroup (..),
+    newContactGroup,
+
+    -- ** ContactGroup_GroupType
+    ContactGroup_GroupType (..),
+
+    -- ** ContactGroupMembership
+    ContactGroupMembership (..),
+    newContactGroupMembership,
+
+    -- ** ContactGroupMetadata
+    ContactGroupMetadata (..),
+    newContactGroupMetadata,
+
+    -- ** ContactGroupResponse
+    ContactGroupResponse (..),
+    newContactGroupResponse,
+
+    -- ** ContactToCreate
+    ContactToCreate (..),
+    newContactToCreate,
+
+    -- ** CopyOtherContactToMyContactsGroupRequest
+    CopyOtherContactToMyContactsGroupRequest (..),
+    newCopyOtherContactToMyContactsGroupRequest,
+
+    -- ** CopyOtherContactToMyContactsGroupRequest_SourcesItem
+    CopyOtherContactToMyContactsGroupRequest_SourcesItem (..),
+
+    -- ** CoverPhoto
+    CoverPhoto (..),
+    newCoverPhoto,
+
+    -- ** CreateContactGroupRequest
+    CreateContactGroupRequest (..),
+    newCreateContactGroupRequest,
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DeleteContactPhotoResponse
+    DeleteContactPhotoResponse (..),
+    newDeleteContactPhotoResponse,
+
+    -- ** DomainMembership
+    DomainMembership (..),
+    newDomainMembership,
+
+    -- ** EmailAddress
+    EmailAddress (..),
+    newEmailAddress,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Event
+    Event (..),
+    newEvent,
+
+    -- ** ExternalId
+    ExternalId (..),
+    newExternalId,
+
+    -- ** FieldMetadata
+    FieldMetadata (..),
+    newFieldMetadata,
+
+    -- ** FileAs
+    FileAs (..),
+    newFileAs,
+
+    -- ** Gender
+    Gender (..),
+    newGender,
+
+    -- ** GetPeopleResponse
+    GetPeopleResponse (..),
+    newGetPeopleResponse,
+
+    -- ** GroupClientData
+    GroupClientData (..),
+    newGroupClientData,
+
+    -- ** ImClient
+    ImClient (..),
+    newImClient,
+
+    -- ** Interest
+    Interest (..),
+    newInterest,
+
+    -- ** ListConnectionsResponse
+    ListConnectionsResponse (..),
+    newListConnectionsResponse,
+
+    -- ** ListContactGroupsResponse
+    ListContactGroupsResponse (..),
+    newListContactGroupsResponse,
+
+    -- ** ListDirectoryPeopleResponse
+    ListDirectoryPeopleResponse (..),
+    newListDirectoryPeopleResponse,
+
+    -- ** ListOtherContactsResponse
+    ListOtherContactsResponse (..),
+    newListOtherContactsResponse,
+
+    -- ** Locale
+    Locale (..),
+    newLocale,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Membership
+    Membership (..),
+    newMembership,
+
+    -- ** MiscKeyword
+    MiscKeyword (..),
+    newMiscKeyword,
+
+    -- ** MiscKeyword_Type
+    MiscKeyword_Type (..),
+
+    -- ** ModifyContactGroupMembersRequest
+    ModifyContactGroupMembersRequest (..),
+    newModifyContactGroupMembersRequest,
+
+    -- ** ModifyContactGroupMembersResponse
+    ModifyContactGroupMembersResponse (..),
+    newModifyContactGroupMembersResponse,
+
+    -- ** Name
+    Name (..),
+    newName,
+
+    -- ** Nickname
+    Nickname (..),
+    newNickname,
+
+    -- ** Nickname_Type
+    Nickname_Type (..),
+
+    -- ** Occupation
+    Occupation (..),
+    newOccupation,
+
+    -- ** Organization
+    Organization (..),
+    newOrganization,
+
+    -- ** Person
+    Person (..),
+    newPerson,
+
+    -- ** Person_AgeRange
+    Person_AgeRange (..),
+
+    -- ** PersonMetadata
+    PersonMetadata (..),
+    newPersonMetadata,
+
+    -- ** PersonMetadata_ObjectType
+    PersonMetadata_ObjectType (..),
+
+    -- ** PersonResponse
+    PersonResponse (..),
+    newPersonResponse,
+
+    -- ** PhoneNumber
+    PhoneNumber (..),
+    newPhoneNumber,
+
+    -- ** Photo
+    Photo (..),
+    newPhoto,
+
+    -- ** ProfileMetadata
+    ProfileMetadata (..),
+    newProfileMetadata,
+
+    -- ** ProfileMetadata_ObjectType
+    ProfileMetadata_ObjectType (..),
+
+    -- ** ProfileMetadata_UserTypesItem
+    ProfileMetadata_UserTypesItem (..),
+
+    -- ** Relation
+    Relation (..),
+    newRelation,
+
+    -- ** RelationshipInterest
+    RelationshipInterest (..),
+    newRelationshipInterest,
+
+    -- ** RelationshipStatus
+    RelationshipStatus (..),
+    newRelationshipStatus,
+
+    -- ** Residence
+    Residence (..),
+    newResidence,
+
+    -- ** SearchDirectoryPeopleResponse
+    SearchDirectoryPeopleResponse (..),
+    newSearchDirectoryPeopleResponse,
+
+    -- ** SearchResponse
+    SearchResponse (..),
+    newSearchResponse,
+
+    -- ** SearchResult
+    SearchResult (..),
+    newSearchResult,
+
+    -- ** SipAddress
+    SipAddress (..),
+    newSipAddress,
+
+    -- ** Skill
+    Skill (..),
+    newSkill,
+
+    -- ** Source
+    Source (..),
+    newSource,
+
+    -- ** Source_Type
+    Source_Type (..),
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** Tagline
+    Tagline (..),
+    newTagline,
+
+    -- ** UpdateContactGroupRequest
+    UpdateContactGroupRequest (..),
+    newUpdateContactGroupRequest,
+
+    -- ** UpdateContactPhotoRequest
+    UpdateContactPhotoRequest (..),
+    newUpdateContactPhotoRequest,
+
+    -- ** UpdateContactPhotoRequest_SourcesItem
+    UpdateContactPhotoRequest_SourcesItem (..),
+
+    -- ** UpdateContactPhotoResponse
+    UpdateContactPhotoResponse (..),
+    newUpdateContactPhotoResponse,
+
+    -- ** Url
+    Url (..),
+    newUrl,
+
+    -- ** UserDefined
+    UserDefined (..),
+    newUserDefined,
+
+    -- ** OtherContactsListSources
+    OtherContactsListSources (..),
+
+    -- ** PeopleConnectionsListSortOrder
+    PeopleConnectionsListSortOrder (..),
+
+    -- ** PeopleConnectionsListSources
+    PeopleConnectionsListSources (..),
+
+    -- ** PeopleCreateContactSources
+    PeopleCreateContactSources (..),
+
+    -- ** PeopleDeleteContactPhotoSources
+    PeopleDeleteContactPhotoSources (..),
+
+    -- ** PeopleGetSources
+    PeopleGetSources (..),
+
+    -- ** PeopleGetBatchGetSources
+    PeopleGetBatchGetSources (..),
+
+    -- ** PeopleListDirectoryPeopleMergeSources
+    PeopleListDirectoryPeopleMergeSources (..),
+
+    -- ** PeopleListDirectoryPeopleSources
+    PeopleListDirectoryPeopleSources (..),
+
+    -- ** PeopleSearchContactsSources
+    PeopleSearchContactsSources (..),
+
+    -- ** PeopleSearchDirectoryPeopleMergeSources
+    PeopleSearchDirectoryPeopleMergeSources (..),
+
+    -- ** PeopleSearchDirectoryPeopleSources
+    PeopleSearchDirectoryPeopleSources (..),
+
+    -- ** PeopleUpdateContactSources
+    PeopleUpdateContactSources (..),
+  )
+where
+
+import Network.Google.People.Internal.Product
+import Network.Google.People.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the People API. This contains the host and root path used as a starting point for constructing service requests.
+peopleService :: Core.ServiceConfig
+peopleService =
+  Core.defaultService
+    (Core.ServiceId "people:v1")
+    "people.googleapis.com"
 
 -- | See, edit, download, and permanently delete your contacts
-contactsScope :: Proxy '["https://www.googleapis.com/auth/contacts"]
-contactsScope = Proxy
+contactsScope :: Core.Proxy '["https://www.googleapis.com/auth/contacts"]
+contactsScope = Core.Proxy
+
+-- | See and download contact info automatically saved in your \"Other contacts\"
+contactsOtherReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/contacts.other.readonly"]
+contactsOtherReadOnlyScope = Core.Proxy
+
+-- | See and download your contacts
+contactsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/contacts.readonly"]
+contactsReadOnlyScope = Core.Proxy
+
+-- | See and download your organization\'s GSuite directory
+directoryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/directory.readonly"]
+directoryReadOnlyScope = Core.Proxy
+
+-- | View your street addresses
+userAddressesReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.addresses.read"]
+userAddressesReadScope = Core.Proxy
+
+-- | See and download your exact date of birth
+userBirthdayReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.birthday.read"]
+userBirthdayReadScope = Core.Proxy
 
 -- | See and download all of your Google Account email addresses
-userEmailsReadScope :: Proxy '["https://www.googleapis.com/auth/user.emails.read"]
-userEmailsReadScope = Proxy
+userEmailsReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.emails.read"]
+userEmailsReadScope = Core.Proxy
 
 -- | See your gender
-userGenderReadScope :: Proxy '["https://www.googleapis.com/auth/user.gender.read"]
-userGenderReadScope = Proxy
+userGenderReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.gender.read"]
+userGenderReadScope = Core.Proxy
+
+-- | See your education, work history and org info
+userOrganizationReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.organization.read"]
+userOrganizationReadScope = Core.Proxy
+
+-- | See and download your personal phone numbers
+userPhoneNumbersReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]
+userPhoneNumbersReadScope = Core.Proxy
+
+-- | See your primary Google Account email address
+userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userinfoEmailScope = Core.Proxy
+
+-- | See your personal info, including any personal info you\'ve made publicly available
+userinfoProfileScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
+userinfoProfileScope = Core.Proxy
