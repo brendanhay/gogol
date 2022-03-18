@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,176 +30,176 @@
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Gogol.DoubleClickBids
-    (
-    -- * Configuration
-      doubleClickBidsService
+  ( -- * Configuration
+    doubleClickBidsService,
 
     -- * OAuth Scopes
-    , doubleclickbidManagerScope
+    doubleclickbidManagerScope,
 
     -- * Resources
 
     -- ** doubleclickbidmanager.queries.createquery
-    , DoubleclickbidmanagerQueriesCreatequeryResource
-    , newDoubleclickbidmanagerQueriesCreatequery
-    , DoubleclickbidmanagerQueriesCreatequery
+    DoubleclickbidmanagerQueriesCreatequeryResource,
+    newDoubleclickbidmanagerQueriesCreatequery,
+    DoubleclickbidmanagerQueriesCreatequery,
 
     -- ** doubleclickbidmanager.queries.deletequery
-    , DoubleclickbidmanagerQueriesDeletequeryResource
-    , newDoubleclickbidmanagerQueriesDeletequery
-    , DoubleclickbidmanagerQueriesDeletequery
+    DoubleclickbidmanagerQueriesDeletequeryResource,
+    newDoubleclickbidmanagerQueriesDeletequery,
+    DoubleclickbidmanagerQueriesDeletequery,
 
     -- ** doubleclickbidmanager.queries.getquery
-    , DoubleclickbidmanagerQueriesGetqueryResource
-    , newDoubleclickbidmanagerQueriesGetquery
-    , DoubleclickbidmanagerQueriesGetquery
+    DoubleclickbidmanagerQueriesGetqueryResource,
+    newDoubleclickbidmanagerQueriesGetquery,
+    DoubleclickbidmanagerQueriesGetquery,
 
     -- ** doubleclickbidmanager.queries.listqueries
-    , DoubleclickbidmanagerQueriesListqueriesResource
-    , newDoubleclickbidmanagerQueriesListqueries
-    , DoubleclickbidmanagerQueriesListqueries
+    DoubleclickbidmanagerQueriesListqueriesResource,
+    newDoubleclickbidmanagerQueriesListqueries,
+    DoubleclickbidmanagerQueriesListqueries,
 
     -- ** doubleclickbidmanager.queries.runquery
-    , DoubleclickbidmanagerQueriesRunqueryResource
-    , newDoubleclickbidmanagerQueriesRunquery
-    , DoubleclickbidmanagerQueriesRunquery
+    DoubleclickbidmanagerQueriesRunqueryResource,
+    newDoubleclickbidmanagerQueriesRunquery,
+    DoubleclickbidmanagerQueriesRunquery,
 
     -- ** doubleclickbidmanager.reports.listreports
-    , DoubleclickbidmanagerReportsListreportsResource
-    , newDoubleclickbidmanagerReportsListreports
-    , DoubleclickbidmanagerReportsListreports
+    DoubleclickbidmanagerReportsListreportsResource,
+    newDoubleclickbidmanagerReportsListreports,
+    DoubleclickbidmanagerReportsListreports,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** ChannelGrouping
-    , ChannelGrouping (..)
-    , newChannelGrouping
+    ChannelGrouping (..),
+    newChannelGrouping,
 
     -- ** DisjunctiveMatchStatement
-    , DisjunctiveMatchStatement (..)
-    , newDisjunctiveMatchStatement
+    DisjunctiveMatchStatement (..),
+    newDisjunctiveMatchStatement,
 
     -- ** EventFilter
-    , EventFilter (..)
-    , newEventFilter
+    EventFilter (..),
+    newEventFilter,
 
     -- ** FilterPair
-    , FilterPair (..)
-    , newFilterPair
+    FilterPair (..),
+    newFilterPair,
 
     -- ** FilterPair_Type
-    , FilterPair_Type (..)
+    FilterPair_Type (..),
 
     -- ** ListQueriesResponse
-    , ListQueriesResponse (..)
-    , newListQueriesResponse
+    ListQueriesResponse (..),
+    newListQueriesResponse,
 
     -- ** ListReportsResponse
-    , ListReportsResponse (..)
-    , newListReportsResponse
+    ListReportsResponse (..),
+    newListReportsResponse,
 
     -- ** Options
-    , Options (..)
-    , newOptions
+    Options (..),
+    newOptions,
 
     -- ** Parameters
-    , Parameters (..)
-    , newParameters
+    Parameters (..),
+    newParameters,
 
     -- ** Parameters_GroupBysItem
-    , Parameters_GroupBysItem (..)
+    Parameters_GroupBysItem (..),
 
     -- ** Parameters_MetricsItem
-    , Parameters_MetricsItem (..)
+    Parameters_MetricsItem (..),
 
     -- ** Parameters_Type
-    , Parameters_Type (..)
+    Parameters_Type (..),
 
     -- ** PathFilter
-    , PathFilter (..)
-    , newPathFilter
+    PathFilter (..),
+    newPathFilter,
 
     -- ** PathFilter_PathMatchPosition
-    , PathFilter_PathMatchPosition (..)
+    PathFilter_PathMatchPosition (..),
 
     -- ** PathQueryOptions
-    , PathQueryOptions (..)
-    , newPathQueryOptions
+    PathQueryOptions (..),
+    newPathQueryOptions,
 
     -- ** PathQueryOptionsFilter
-    , PathQueryOptionsFilter (..)
-    , newPathQueryOptionsFilter
+    PathQueryOptionsFilter (..),
+    newPathQueryOptionsFilter,
 
     -- ** PathQueryOptionsFilter_Filter
-    , PathQueryOptionsFilter_Filter (..)
+    PathQueryOptionsFilter_Filter (..),
 
     -- ** PathQueryOptionsFilter_Match
-    , PathQueryOptionsFilter_Match (..)
+    PathQueryOptionsFilter_Match (..),
 
     -- ** Query
-    , Query (..)
-    , newQuery
+    Query (..),
+    newQuery,
 
     -- ** QueryMetadata
-    , QueryMetadata (..)
-    , newQueryMetadata
+    QueryMetadata (..),
+    newQueryMetadata,
 
     -- ** QueryMetadata_DataRange
-    , QueryMetadata_DataRange (..)
+    QueryMetadata_DataRange (..),
 
     -- ** QueryMetadata_Format
-    , QueryMetadata_Format (..)
+    QueryMetadata_Format (..),
 
     -- ** QuerySchedule
-    , QuerySchedule (..)
-    , newQuerySchedule
+    QuerySchedule (..),
+    newQuerySchedule,
 
     -- ** QuerySchedule_Frequency
-    , QuerySchedule_Frequency (..)
+    QuerySchedule_Frequency (..),
 
     -- ** Report
-    , Report (..)
-    , newReport
+    Report (..),
+    newReport,
 
     -- ** ReportFailure
-    , ReportFailure (..)
-    , newReportFailure
+    ReportFailure (..),
+    newReportFailure,
 
     -- ** ReportFailure_ErrorCode
-    , ReportFailure_ErrorCode (..)
+    ReportFailure_ErrorCode (..),
 
     -- ** ReportKey
-    , ReportKey (..)
-    , newReportKey
+    ReportKey (..),
+    newReportKey,
 
     -- ** ReportMetadata
-    , ReportMetadata (..)
-    , newReportMetadata
+    ReportMetadata (..),
+    newReportMetadata,
 
     -- ** ReportStatus
-    , ReportStatus (..)
-    , newReportStatus
+    ReportStatus (..),
+    newReportStatus,
 
     -- ** ReportStatus_Format
-    , ReportStatus_Format (..)
+    ReportStatus_Format (..),
 
     -- ** ReportStatus_State
-    , ReportStatus_State (..)
+    ReportStatus_State (..),
 
     -- ** Rule
-    , Rule (..)
-    , newRule
+    Rule (..),
+    newRule,
 
     -- ** RunQueryRequest
-    , RunQueryRequest (..)
-    , newRunQueryRequest
+    RunQueryRequest (..),
+    newRunQueryRequest,
 
     -- ** RunQueryRequest_DataRange
-    , RunQueryRequest_DataRange (..)
-    ) where
+    RunQueryRequest_DataRange (..),
+  )
+where
 
 import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
 import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
