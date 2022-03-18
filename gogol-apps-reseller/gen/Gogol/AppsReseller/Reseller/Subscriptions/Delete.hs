@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Subscriptions.Delete
+-- Module      : Gogol.AppsReseller.Reseller.Subscriptions.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Cancels, suspends, or transfers a subscription to direct.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.delete@.
-module Network.Google.AppsReseller.Reseller.Subscriptions.Delete
+module Gogol.AppsReseller.Reseller.Subscriptions.Delete
   ( -- * Resource
     ResellerSubscriptionsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsReseller.Reseller.Subscriptions.Delete
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reseller.subscriptions.delete@ method which the
 -- 'ResellerSubscriptionsDelete' request conforms to.

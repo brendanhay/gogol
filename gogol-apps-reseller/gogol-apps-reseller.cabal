@@ -39,34 +39,35 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AppsReseller
-    Network.Google.AppsReseller.Reseller.Customers.Get
-    Network.Google.AppsReseller.Reseller.Customers.Insert
-    Network.Google.AppsReseller.Reseller.Customers.Patch
-    Network.Google.AppsReseller.Reseller.Customers.Update
-    Network.Google.AppsReseller.Reseller.Resellernotify.Getwatchdetails
-    Network.Google.AppsReseller.Reseller.Resellernotify.Register
-    Network.Google.AppsReseller.Reseller.Resellernotify.Unregister
-    Network.Google.AppsReseller.Reseller.Subscriptions.Activate
-    Network.Google.AppsReseller.Reseller.Subscriptions.ChangePlan
-    Network.Google.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
-    Network.Google.AppsReseller.Reseller.Subscriptions.ChangeSeats
-    Network.Google.AppsReseller.Reseller.Subscriptions.Delete
-    Network.Google.AppsReseller.Reseller.Subscriptions.Get
-    Network.Google.AppsReseller.Reseller.Subscriptions.Insert
-    Network.Google.AppsReseller.Reseller.Subscriptions.List
-    Network.Google.AppsReseller.Reseller.Subscriptions.StartPaidService
-    Network.Google.AppsReseller.Reseller.Subscriptions.Suspend
-    Network.Google.AppsReseller.Types
+    Gogol.AppsReseller
+    Gogol.AppsReseller.Reseller.Customers.Get
+    Gogol.AppsReseller.Reseller.Customers.Insert
+    Gogol.AppsReseller.Reseller.Customers.Patch
+    Gogol.AppsReseller.Reseller.Customers.Update
+    Gogol.AppsReseller.Reseller.Resellernotify.Getwatchdetails
+    Gogol.AppsReseller.Reseller.Resellernotify.Register
+    Gogol.AppsReseller.Reseller.Resellernotify.Unregister
+    Gogol.AppsReseller.Reseller.Subscriptions.Activate
+    Gogol.AppsReseller.Reseller.Subscriptions.ChangePlan
+    Gogol.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
+    Gogol.AppsReseller.Reseller.Subscriptions.ChangeSeats
+    Gogol.AppsReseller.Reseller.Subscriptions.Delete
+    Gogol.AppsReseller.Reseller.Subscriptions.Get
+    Gogol.AppsReseller.Reseller.Subscriptions.Insert
+    Gogol.AppsReseller.Reseller.Subscriptions.List
+    Gogol.AppsReseller.Reseller.Subscriptions.StartPaidService
+    Gogol.AppsReseller.Reseller.Subscriptions.Suspend
+    Gogol.AppsReseller.Types
 
   other-modules:
-    Network.Google.AppsReseller.Internal.Product
-    Network.Google.AppsReseller.Internal.Sum
+    Gogol.AppsReseller.Internal.Product
+    Gogol.AppsReseller.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
