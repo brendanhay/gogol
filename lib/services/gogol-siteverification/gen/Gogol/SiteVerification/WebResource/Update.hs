@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.update@.
 module Gogol.SiteVerification.WebResource.Update
-  ( -- * Resource
-    SiteVerificationWebResourceUpdateResource,
+    (
+    -- * Resource
+      SiteVerificationWebResourceUpdateResource
 
     -- ** Constructing a Request
-    newSiteVerificationWebResourceUpdate,
-    SiteVerificationWebResourceUpdate,
-  )
-where
+    , newSiteVerificationWebResourceUpdate
+    , SiteVerificationWebResourceUpdate
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.SiteVerification.Types
@@ -45,59 +51,52 @@ import Gogol.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.update@ method which the
 -- 'SiteVerificationWebResourceUpdate' request conforms to.
 type SiteVerificationWebResourceUpdateResource =
-  "siteVerification"
-    Core.:> "v1"
-    Core.:> "webResource"
-    Core.:> Core.Capture "id" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SiteVerificationWebResourceResource
-    Core.:> Core.Put
-              '[Core.JSON]
-              SiteVerificationWebResourceResource
+     "siteVerification" Core.:>
+       "v1" Core.:>
+         "webResource" Core.:>
+           Core.Capture "id" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON]
+                 SiteVerificationWebResourceResource
+                 Core.:>
+                 Core.Put '[Core.JSON]
+                   SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain.
 --
 -- /See:/ 'newSiteVerificationWebResourceUpdate' smart constructor.
 data SiteVerificationWebResourceUpdate = SiteVerificationWebResourceUpdate
-  { -- | The id of a verified site or domain.
-    id :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: SiteVerificationWebResourceResource
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The id of a verified site or domain.
+      id :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: SiteVerificationWebResourceResource
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SiteVerificationWebResourceUpdate' with the minimum fields required to make a request.
-newSiteVerificationWebResourceUpdate ::
-  -- |  The id of a verified site or domain. See 'id'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  SiteVerificationWebResourceResource ->
-  SiteVerificationWebResourceUpdate
+newSiteVerificationWebResourceUpdate 
+    ::  Core.Text
+       -- ^  The id of a verified site or domain. See 'id'.
+    -> SiteVerificationWebResourceResource
+       -- ^  Multipart request metadata. See 'payload'.
+    -> SiteVerificationWebResourceUpdate
 newSiteVerificationWebResourceUpdate id payload =
   SiteVerificationWebResourceUpdate {id = id, payload = payload}
 
-instance
-  Core.GoogleRequest
-    SiteVerificationWebResourceUpdate
-  where
-  type
-    Rs SiteVerificationWebResourceUpdate =
-      SiteVerificationWebResourceResource
-  type
-    Scopes SiteVerificationWebResourceUpdate =
-      '["https://www.googleapis.com/auth/siteverification"]
-  requestClient SiteVerificationWebResourceUpdate {..} =
-    go
-      id
-      (Core.Just Core.AltJSON)
-      payload
-      siteVerificationService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SiteVerificationWebResourceUpdateResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           SiteVerificationWebResourceUpdate
+         where
+        type Rs SiteVerificationWebResourceUpdate =
+             SiteVerificationWebResourceResource
+        type Scopes SiteVerificationWebResourceUpdate =
+             '["https://www.googleapis.com/auth/siteverification"]
+        requestClient SiteVerificationWebResourceUpdate{..}
+          = go id (Core.Just Core.AltJSON) payload
+              siteVerificationService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy SiteVerificationWebResourceUpdateResource)
+                      Core.mempty
+
