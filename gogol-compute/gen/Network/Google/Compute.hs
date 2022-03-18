@@ -1,11126 +1,8904 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Compute
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates and runs virtual machines on Google Cloud Platform.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference>
+-- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference>
 module Network.Google.Compute
-    (
-    -- * Service Configuration
-      computeService
+  ( -- * Configuration
+    computeService,
 
     -- * OAuth Scopes
-    , computeScope
-    , cloudPlatformScope
-    , storageReadOnlyScope
-    , storageReadWriteScope
-    , computeReadOnlyScope
-    , storageFullControlScope
-
-    -- * API Declaration
-    , ComputeAPI
+    cloudPlatformScope,
+    computeScope,
+    computeReadOnlyScope,
+    storageFull_controlScope,
+    storageRead_OnlyScope,
+    storageRead_writeScope,
 
     -- * Resources
 
     -- ** compute.acceleratorTypes.aggregatedList
-    , module Network.Google.Resource.Compute.AcceleratorTypes.AggregatedList
+    ComputeAcceleratorTypesAggregatedListResource,
+    newComputeAcceleratorTypesAggregatedList,
+    ComputeAcceleratorTypesAggregatedList,
 
     -- ** compute.acceleratorTypes.get
-    , module Network.Google.Resource.Compute.AcceleratorTypes.Get
+    ComputeAcceleratorTypesGetResource,
+    newComputeAcceleratorTypesGet,
+    ComputeAcceleratorTypesGet,
 
     -- ** compute.acceleratorTypes.list
-    , module Network.Google.Resource.Compute.AcceleratorTypes.List
+    ComputeAcceleratorTypesListResource,
+    newComputeAcceleratorTypesList,
+    ComputeAcceleratorTypesList,
 
     -- ** compute.addresses.aggregatedList
-    , module Network.Google.Resource.Compute.Addresses.AggregatedList
+    ComputeAddressesAggregatedListResource,
+    newComputeAddressesAggregatedList,
+    ComputeAddressesAggregatedList,
 
     -- ** compute.addresses.delete
-    , module Network.Google.Resource.Compute.Addresses.Delete
+    ComputeAddressesDeleteResource,
+    newComputeAddressesDelete,
+    ComputeAddressesDelete,
 
     -- ** compute.addresses.get
-    , module Network.Google.Resource.Compute.Addresses.Get
+    ComputeAddressesGetResource,
+    newComputeAddressesGet,
+    ComputeAddressesGet,
 
     -- ** compute.addresses.insert
-    , module Network.Google.Resource.Compute.Addresses.Insert
+    ComputeAddressesInsertResource,
+    newComputeAddressesInsert,
+    ComputeAddressesInsert,
 
     -- ** compute.addresses.list
-    , module Network.Google.Resource.Compute.Addresses.List
+    ComputeAddressesListResource,
+    newComputeAddressesList,
+    ComputeAddressesList,
 
     -- ** compute.autoscalers.aggregatedList
-    , module Network.Google.Resource.Compute.Autoscalers.AggregatedList
+    ComputeAutoscalersAggregatedListResource,
+    newComputeAutoscalersAggregatedList,
+    ComputeAutoscalersAggregatedList,
 
     -- ** compute.autoscalers.delete
-    , module Network.Google.Resource.Compute.Autoscalers.Delete
+    ComputeAutoscalersDeleteResource,
+    newComputeAutoscalersDelete,
+    ComputeAutoscalersDelete,
 
     -- ** compute.autoscalers.get
-    , module Network.Google.Resource.Compute.Autoscalers.Get
+    ComputeAutoscalersGetResource,
+    newComputeAutoscalersGet,
+    ComputeAutoscalersGet,
 
     -- ** compute.autoscalers.insert
-    , module Network.Google.Resource.Compute.Autoscalers.Insert
+    ComputeAutoscalersInsertResource,
+    newComputeAutoscalersInsert,
+    ComputeAutoscalersInsert,
 
     -- ** compute.autoscalers.list
-    , module Network.Google.Resource.Compute.Autoscalers.List
+    ComputeAutoscalersListResource,
+    newComputeAutoscalersList,
+    ComputeAutoscalersList,
 
     -- ** compute.autoscalers.patch
-    , module Network.Google.Resource.Compute.Autoscalers.Patch
+    ComputeAutoscalersPatchResource,
+    newComputeAutoscalersPatch,
+    ComputeAutoscalersPatch,
 
     -- ** compute.autoscalers.update
-    , module Network.Google.Resource.Compute.Autoscalers.Update
+    ComputeAutoscalersUpdateResource,
+    newComputeAutoscalersUpdate,
+    ComputeAutoscalersUpdate,
 
     -- ** compute.backendBuckets.addSignedUrlKey
-    , module Network.Google.Resource.Compute.BackendBuckets.AddSignedURLKey
+    ComputeBackendBucketsAddSignedUrlKeyResource,
+    newComputeBackendBucketsAddSignedUrlKey,
+    ComputeBackendBucketsAddSignedUrlKey,
 
     -- ** compute.backendBuckets.delete
-    , module Network.Google.Resource.Compute.BackendBuckets.Delete
+    ComputeBackendBucketsDeleteResource,
+    newComputeBackendBucketsDelete,
+    ComputeBackendBucketsDelete,
 
     -- ** compute.backendBuckets.deleteSignedUrlKey
-    , module Network.Google.Resource.Compute.BackendBuckets.DeleteSignedURLKey
+    ComputeBackendBucketsDeleteSignedUrlKeyResource,
+    newComputeBackendBucketsDeleteSignedUrlKey,
+    ComputeBackendBucketsDeleteSignedUrlKey,
 
     -- ** compute.backendBuckets.get
-    , module Network.Google.Resource.Compute.BackendBuckets.Get
+    ComputeBackendBucketsGetResource,
+    newComputeBackendBucketsGet,
+    ComputeBackendBucketsGet,
 
     -- ** compute.backendBuckets.insert
-    , module Network.Google.Resource.Compute.BackendBuckets.Insert
+    ComputeBackendBucketsInsertResource,
+    newComputeBackendBucketsInsert,
+    ComputeBackendBucketsInsert,
 
     -- ** compute.backendBuckets.list
-    , module Network.Google.Resource.Compute.BackendBuckets.List
+    ComputeBackendBucketsListResource,
+    newComputeBackendBucketsList,
+    ComputeBackendBucketsList,
 
     -- ** compute.backendBuckets.patch
-    , module Network.Google.Resource.Compute.BackendBuckets.Patch
+    ComputeBackendBucketsPatchResource,
+    newComputeBackendBucketsPatch,
+    ComputeBackendBucketsPatch,
+
+    -- ** compute.backendBuckets.setEdgeSecurityPolicy
+    ComputeBackendBucketsSetEdgeSecurityPolicyResource,
+    newComputeBackendBucketsSetEdgeSecurityPolicy,
+    ComputeBackendBucketsSetEdgeSecurityPolicy,
 
     -- ** compute.backendBuckets.update
-    , module Network.Google.Resource.Compute.BackendBuckets.Update
+    ComputeBackendBucketsUpdateResource,
+    newComputeBackendBucketsUpdate,
+    ComputeBackendBucketsUpdate,
 
     -- ** compute.backendServices.addSignedUrlKey
-    , module Network.Google.Resource.Compute.BackendServices.AddSignedURLKey
+    ComputeBackendServicesAddSignedUrlKeyResource,
+    newComputeBackendServicesAddSignedUrlKey,
+    ComputeBackendServicesAddSignedUrlKey,
 
     -- ** compute.backendServices.aggregatedList
-    , module Network.Google.Resource.Compute.BackendServices.AggregatedList
+    ComputeBackendServicesAggregatedListResource,
+    newComputeBackendServicesAggregatedList,
+    ComputeBackendServicesAggregatedList,
 
     -- ** compute.backendServices.delete
-    , module Network.Google.Resource.Compute.BackendServices.Delete
+    ComputeBackendServicesDeleteResource,
+    newComputeBackendServicesDelete,
+    ComputeBackendServicesDelete,
 
     -- ** compute.backendServices.deleteSignedUrlKey
-    , module Network.Google.Resource.Compute.BackendServices.DeleteSignedURLKey
+    ComputeBackendServicesDeleteSignedUrlKeyResource,
+    newComputeBackendServicesDeleteSignedUrlKey,
+    ComputeBackendServicesDeleteSignedUrlKey,
 
     -- ** compute.backendServices.get
-    , module Network.Google.Resource.Compute.BackendServices.Get
+    ComputeBackendServicesGetResource,
+    newComputeBackendServicesGet,
+    ComputeBackendServicesGet,
 
     -- ** compute.backendServices.getHealth
-    , module Network.Google.Resource.Compute.BackendServices.GetHealth
+    ComputeBackendServicesGetHealthResource,
+    newComputeBackendServicesGetHealth,
+    ComputeBackendServicesGetHealth,
 
     -- ** compute.backendServices.insert
-    , module Network.Google.Resource.Compute.BackendServices.Insert
+    ComputeBackendServicesInsertResource,
+    newComputeBackendServicesInsert,
+    ComputeBackendServicesInsert,
 
     -- ** compute.backendServices.list
-    , module Network.Google.Resource.Compute.BackendServices.List
+    ComputeBackendServicesListResource,
+    newComputeBackendServicesList,
+    ComputeBackendServicesList,
 
     -- ** compute.backendServices.patch
-    , module Network.Google.Resource.Compute.BackendServices.Patch
+    ComputeBackendServicesPatchResource,
+    newComputeBackendServicesPatch,
+    ComputeBackendServicesPatch,
+
+    -- ** compute.backendServices.setEdgeSecurityPolicy
+    ComputeBackendServicesSetEdgeSecurityPolicyResource,
+    newComputeBackendServicesSetEdgeSecurityPolicy,
+    ComputeBackendServicesSetEdgeSecurityPolicy,
 
     -- ** compute.backendServices.setSecurityPolicy
-    , module Network.Google.Resource.Compute.BackendServices.SetSecurityPolicy
+    ComputeBackendServicesSetSecurityPolicyResource,
+    newComputeBackendServicesSetSecurityPolicy,
+    ComputeBackendServicesSetSecurityPolicy,
 
     -- ** compute.backendServices.update
-    , module Network.Google.Resource.Compute.BackendServices.Update
+    ComputeBackendServicesUpdateResource,
+    newComputeBackendServicesUpdate,
+    ComputeBackendServicesUpdate,
 
     -- ** compute.diskTypes.aggregatedList
-    , module Network.Google.Resource.Compute.DiskTypes.AggregatedList
+    ComputeDiskTypesAggregatedListResource,
+    newComputeDiskTypesAggregatedList,
+    ComputeDiskTypesAggregatedList,
 
     -- ** compute.diskTypes.get
-    , module Network.Google.Resource.Compute.DiskTypes.Get
+    ComputeDiskTypesGetResource,
+    newComputeDiskTypesGet,
+    ComputeDiskTypesGet,
 
     -- ** compute.diskTypes.list
-    , module Network.Google.Resource.Compute.DiskTypes.List
+    ComputeDiskTypesListResource,
+    newComputeDiskTypesList,
+    ComputeDiskTypesList,
 
     -- ** compute.disks.addResourcePolicies
-    , module Network.Google.Resource.Compute.Disks.AddResourcePolicies
+    ComputeDisksAddResourcePoliciesResource,
+    newComputeDisksAddResourcePolicies,
+    ComputeDisksAddResourcePolicies,
 
     -- ** compute.disks.aggregatedList
-    , module Network.Google.Resource.Compute.Disks.AggregatedList
+    ComputeDisksAggregatedListResource,
+    newComputeDisksAggregatedList,
+    ComputeDisksAggregatedList,
 
     -- ** compute.disks.createSnapshot
-    , module Network.Google.Resource.Compute.Disks.CreateSnapshot
+    ComputeDisksCreateSnapshotResource,
+    newComputeDisksCreateSnapshot,
+    ComputeDisksCreateSnapshot,
 
     -- ** compute.disks.delete
-    , module Network.Google.Resource.Compute.Disks.Delete
+    ComputeDisksDeleteResource,
+    newComputeDisksDelete,
+    ComputeDisksDelete,
 
     -- ** compute.disks.get
-    , module Network.Google.Resource.Compute.Disks.Get
+    ComputeDisksGetResource,
+    newComputeDisksGet,
+    ComputeDisksGet,
 
     -- ** compute.disks.getIamPolicy
-    , module Network.Google.Resource.Compute.Disks.GetIAMPolicy
+    ComputeDisksGetIamPolicyResource,
+    newComputeDisksGetIamPolicy,
+    ComputeDisksGetIamPolicy,
 
     -- ** compute.disks.insert
-    , module Network.Google.Resource.Compute.Disks.Insert
+    ComputeDisksInsertResource,
+    newComputeDisksInsert,
+    ComputeDisksInsert,
 
     -- ** compute.disks.list
-    , module Network.Google.Resource.Compute.Disks.List
+    ComputeDisksListResource,
+    newComputeDisksList,
+    ComputeDisksList,
 
     -- ** compute.disks.removeResourcePolicies
-    , module Network.Google.Resource.Compute.Disks.RemoveResourcePolicies
+    ComputeDisksRemoveResourcePoliciesResource,
+    newComputeDisksRemoveResourcePolicies,
+    ComputeDisksRemoveResourcePolicies,
 
     -- ** compute.disks.resize
-    , module Network.Google.Resource.Compute.Disks.Resize
+    ComputeDisksResizeResource,
+    newComputeDisksResize,
+    ComputeDisksResize,
 
     -- ** compute.disks.setIamPolicy
-    , module Network.Google.Resource.Compute.Disks.SetIAMPolicy
+    ComputeDisksSetIamPolicyResource,
+    newComputeDisksSetIamPolicy,
+    ComputeDisksSetIamPolicy,
 
     -- ** compute.disks.setLabels
-    , module Network.Google.Resource.Compute.Disks.SetLabels
+    ComputeDisksSetLabelsResource,
+    newComputeDisksSetLabels,
+    ComputeDisksSetLabels,
 
     -- ** compute.disks.testIamPermissions
-    , module Network.Google.Resource.Compute.Disks.TestIAMPermissions
+    ComputeDisksTestIamPermissionsResource,
+    newComputeDisksTestIamPermissions,
+    ComputeDisksTestIamPermissions,
 
     -- ** compute.externalVpnGateways.delete
-    , module Network.Google.Resource.Compute.ExternalVPNGateways.Delete
+    ComputeExternalVpnGatewaysDeleteResource,
+    newComputeExternalVpnGatewaysDelete,
+    ComputeExternalVpnGatewaysDelete,
 
     -- ** compute.externalVpnGateways.get
-    , module Network.Google.Resource.Compute.ExternalVPNGateways.Get
+    ComputeExternalVpnGatewaysGetResource,
+    newComputeExternalVpnGatewaysGet,
+    ComputeExternalVpnGatewaysGet,
 
     -- ** compute.externalVpnGateways.insert
-    , module Network.Google.Resource.Compute.ExternalVPNGateways.Insert
+    ComputeExternalVpnGatewaysInsertResource,
+    newComputeExternalVpnGatewaysInsert,
+    ComputeExternalVpnGatewaysInsert,
 
     -- ** compute.externalVpnGateways.list
-    , module Network.Google.Resource.Compute.ExternalVPNGateways.List
+    ComputeExternalVpnGatewaysListResource,
+    newComputeExternalVpnGatewaysList,
+    ComputeExternalVpnGatewaysList,
 
     -- ** compute.externalVpnGateways.setLabels
-    , module Network.Google.Resource.Compute.ExternalVPNGateways.SetLabels
+    ComputeExternalVpnGatewaysSetLabelsResource,
+    newComputeExternalVpnGatewaysSetLabels,
+    ComputeExternalVpnGatewaysSetLabels,
 
     -- ** compute.externalVpnGateways.testIamPermissions
-    , module Network.Google.Resource.Compute.ExternalVPNGateways.TestIAMPermissions
+    ComputeExternalVpnGatewaysTestIamPermissionsResource,
+    newComputeExternalVpnGatewaysTestIamPermissions,
+    ComputeExternalVpnGatewaysTestIamPermissions,
 
     -- ** compute.firewallPolicies.addAssociation
-    , module Network.Google.Resource.Compute.FirewallPolicies.AddAssociation
+    ComputeFirewallPoliciesAddAssociationResource,
+    newComputeFirewallPoliciesAddAssociation,
+    ComputeFirewallPoliciesAddAssociation,
 
     -- ** compute.firewallPolicies.addRule
-    , module Network.Google.Resource.Compute.FirewallPolicies.AddRule
+    ComputeFirewallPoliciesAddRuleResource,
+    newComputeFirewallPoliciesAddRule,
+    ComputeFirewallPoliciesAddRule,
 
     -- ** compute.firewallPolicies.cloneRules
-    , module Network.Google.Resource.Compute.FirewallPolicies.CloneRules
+    ComputeFirewallPoliciesCloneRulesResource,
+    newComputeFirewallPoliciesCloneRules,
+    ComputeFirewallPoliciesCloneRules,
 
     -- ** compute.firewallPolicies.delete
-    , module Network.Google.Resource.Compute.FirewallPolicies.Delete
+    ComputeFirewallPoliciesDeleteResource,
+    newComputeFirewallPoliciesDelete,
+    ComputeFirewallPoliciesDelete,
 
     -- ** compute.firewallPolicies.get
-    , module Network.Google.Resource.Compute.FirewallPolicies.Get
+    ComputeFirewallPoliciesGetResource,
+    newComputeFirewallPoliciesGet,
+    ComputeFirewallPoliciesGet,
 
     -- ** compute.firewallPolicies.getAssociation
-    , module Network.Google.Resource.Compute.FirewallPolicies.GetAssociation
+    ComputeFirewallPoliciesGetAssociationResource,
+    newComputeFirewallPoliciesGetAssociation,
+    ComputeFirewallPoliciesGetAssociation,
 
     -- ** compute.firewallPolicies.getIamPolicy
-    , module Network.Google.Resource.Compute.FirewallPolicies.GetIAMPolicy
+    ComputeFirewallPoliciesGetIamPolicyResource,
+    newComputeFirewallPoliciesGetIamPolicy,
+    ComputeFirewallPoliciesGetIamPolicy,
 
     -- ** compute.firewallPolicies.getRule
-    , module Network.Google.Resource.Compute.FirewallPolicies.GetRule
+    ComputeFirewallPoliciesGetRuleResource,
+    newComputeFirewallPoliciesGetRule,
+    ComputeFirewallPoliciesGetRule,
 
     -- ** compute.firewallPolicies.insert
-    , module Network.Google.Resource.Compute.FirewallPolicies.Insert
+    ComputeFirewallPoliciesInsertResource,
+    newComputeFirewallPoliciesInsert,
+    ComputeFirewallPoliciesInsert,
 
     -- ** compute.firewallPolicies.list
-    , module Network.Google.Resource.Compute.FirewallPolicies.List
+    ComputeFirewallPoliciesListResource,
+    newComputeFirewallPoliciesList,
+    ComputeFirewallPoliciesList,
 
     -- ** compute.firewallPolicies.listAssociations
-    , module Network.Google.Resource.Compute.FirewallPolicies.ListAssociations
+    ComputeFirewallPoliciesListAssociationsResource,
+    newComputeFirewallPoliciesListAssociations,
+    ComputeFirewallPoliciesListAssociations,
 
     -- ** compute.firewallPolicies.move
-    , module Network.Google.Resource.Compute.FirewallPolicies.Move
+    ComputeFirewallPoliciesMoveResource,
+    newComputeFirewallPoliciesMove,
+    ComputeFirewallPoliciesMove,
 
     -- ** compute.firewallPolicies.patch
-    , module Network.Google.Resource.Compute.FirewallPolicies.Patch
+    ComputeFirewallPoliciesPatchResource,
+    newComputeFirewallPoliciesPatch,
+    ComputeFirewallPoliciesPatch,
 
     -- ** compute.firewallPolicies.patchRule
-    , module Network.Google.Resource.Compute.FirewallPolicies.PatchRule
+    ComputeFirewallPoliciesPatchRuleResource,
+    newComputeFirewallPoliciesPatchRule,
+    ComputeFirewallPoliciesPatchRule,
 
     -- ** compute.firewallPolicies.removeAssociation
-    , module Network.Google.Resource.Compute.FirewallPolicies.RemoveAssociation
+    ComputeFirewallPoliciesRemoveAssociationResource,
+    newComputeFirewallPoliciesRemoveAssociation,
+    ComputeFirewallPoliciesRemoveAssociation,
 
     -- ** compute.firewallPolicies.removeRule
-    , module Network.Google.Resource.Compute.FirewallPolicies.RemoveRule
+    ComputeFirewallPoliciesRemoveRuleResource,
+    newComputeFirewallPoliciesRemoveRule,
+    ComputeFirewallPoliciesRemoveRule,
 
     -- ** compute.firewallPolicies.setIamPolicy
-    , module Network.Google.Resource.Compute.FirewallPolicies.SetIAMPolicy
+    ComputeFirewallPoliciesSetIamPolicyResource,
+    newComputeFirewallPoliciesSetIamPolicy,
+    ComputeFirewallPoliciesSetIamPolicy,
 
     -- ** compute.firewallPolicies.testIamPermissions
-    , module Network.Google.Resource.Compute.FirewallPolicies.TestIAMPermissions
+    ComputeFirewallPoliciesTestIamPermissionsResource,
+    newComputeFirewallPoliciesTestIamPermissions,
+    ComputeFirewallPoliciesTestIamPermissions,
 
     -- ** compute.firewalls.delete
-    , module Network.Google.Resource.Compute.Firewalls.Delete
+    ComputeFirewallsDeleteResource,
+    newComputeFirewallsDelete,
+    ComputeFirewallsDelete,
 
     -- ** compute.firewalls.get
-    , module Network.Google.Resource.Compute.Firewalls.Get
+    ComputeFirewallsGetResource,
+    newComputeFirewallsGet,
+    ComputeFirewallsGet,
 
     -- ** compute.firewalls.insert
-    , module Network.Google.Resource.Compute.Firewalls.Insert
+    ComputeFirewallsInsertResource,
+    newComputeFirewallsInsert,
+    ComputeFirewallsInsert,
 
     -- ** compute.firewalls.list
-    , module Network.Google.Resource.Compute.Firewalls.List
+    ComputeFirewallsListResource,
+    newComputeFirewallsList,
+    ComputeFirewallsList,
 
     -- ** compute.firewalls.patch
-    , module Network.Google.Resource.Compute.Firewalls.Patch
+    ComputeFirewallsPatchResource,
+    newComputeFirewallsPatch,
+    ComputeFirewallsPatch,
 
     -- ** compute.firewalls.update
-    , module Network.Google.Resource.Compute.Firewalls.Update
+    ComputeFirewallsUpdateResource,
+    newComputeFirewallsUpdate,
+    ComputeFirewallsUpdate,
 
     -- ** compute.forwardingRules.aggregatedList
-    , module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
+    ComputeForwardingRulesAggregatedListResource,
+    newComputeForwardingRulesAggregatedList,
+    ComputeForwardingRulesAggregatedList,
 
     -- ** compute.forwardingRules.delete
-    , module Network.Google.Resource.Compute.ForwardingRules.Delete
+    ComputeForwardingRulesDeleteResource,
+    newComputeForwardingRulesDelete,
+    ComputeForwardingRulesDelete,
 
     -- ** compute.forwardingRules.get
-    , module Network.Google.Resource.Compute.ForwardingRules.Get
+    ComputeForwardingRulesGetResource,
+    newComputeForwardingRulesGet,
+    ComputeForwardingRulesGet,
 
     -- ** compute.forwardingRules.insert
-    , module Network.Google.Resource.Compute.ForwardingRules.Insert
+    ComputeForwardingRulesInsertResource,
+    newComputeForwardingRulesInsert,
+    ComputeForwardingRulesInsert,
 
     -- ** compute.forwardingRules.list
-    , module Network.Google.Resource.Compute.ForwardingRules.List
+    ComputeForwardingRulesListResource,
+    newComputeForwardingRulesList,
+    ComputeForwardingRulesList,
 
     -- ** compute.forwardingRules.patch
-    , module Network.Google.Resource.Compute.ForwardingRules.Patch
+    ComputeForwardingRulesPatchResource,
+    newComputeForwardingRulesPatch,
+    ComputeForwardingRulesPatch,
 
     -- ** compute.forwardingRules.setLabels
-    , module Network.Google.Resource.Compute.ForwardingRules.SetLabels
+    ComputeForwardingRulesSetLabelsResource,
+    newComputeForwardingRulesSetLabels,
+    ComputeForwardingRulesSetLabels,
 
     -- ** compute.forwardingRules.setTarget
-    , module Network.Google.Resource.Compute.ForwardingRules.SetTarget
+    ComputeForwardingRulesSetTargetResource,
+    newComputeForwardingRulesSetTarget,
+    ComputeForwardingRulesSetTarget,
 
     -- ** compute.globalAddresses.delete
-    , module Network.Google.Resource.Compute.GlobalAddresses.Delete
+    ComputeGlobalAddressesDeleteResource,
+    newComputeGlobalAddressesDelete,
+    ComputeGlobalAddressesDelete,
 
     -- ** compute.globalAddresses.get
-    , module Network.Google.Resource.Compute.GlobalAddresses.Get
+    ComputeGlobalAddressesGetResource,
+    newComputeGlobalAddressesGet,
+    ComputeGlobalAddressesGet,
 
     -- ** compute.globalAddresses.insert
-    , module Network.Google.Resource.Compute.GlobalAddresses.Insert
+    ComputeGlobalAddressesInsertResource,
+    newComputeGlobalAddressesInsert,
+    ComputeGlobalAddressesInsert,
 
     -- ** compute.globalAddresses.list
-    , module Network.Google.Resource.Compute.GlobalAddresses.List
+    ComputeGlobalAddressesListResource,
+    newComputeGlobalAddressesList,
+    ComputeGlobalAddressesList,
 
     -- ** compute.globalForwardingRules.delete
-    , module Network.Google.Resource.Compute.GlobalForwardingRules.Delete
+    ComputeGlobalForwardingRulesDeleteResource,
+    newComputeGlobalForwardingRulesDelete,
+    ComputeGlobalForwardingRulesDelete,
 
     -- ** compute.globalForwardingRules.get
-    , module Network.Google.Resource.Compute.GlobalForwardingRules.Get
+    ComputeGlobalForwardingRulesGetResource,
+    newComputeGlobalForwardingRulesGet,
+    ComputeGlobalForwardingRulesGet,
 
     -- ** compute.globalForwardingRules.insert
-    , module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
+    ComputeGlobalForwardingRulesInsertResource,
+    newComputeGlobalForwardingRulesInsert,
+    ComputeGlobalForwardingRulesInsert,
 
     -- ** compute.globalForwardingRules.list
-    , module Network.Google.Resource.Compute.GlobalForwardingRules.List
+    ComputeGlobalForwardingRulesListResource,
+    newComputeGlobalForwardingRulesList,
+    ComputeGlobalForwardingRulesList,
 
     -- ** compute.globalForwardingRules.patch
-    , module Network.Google.Resource.Compute.GlobalForwardingRules.Patch
+    ComputeGlobalForwardingRulesPatchResource,
+    newComputeGlobalForwardingRulesPatch,
+    ComputeGlobalForwardingRulesPatch,
 
     -- ** compute.globalForwardingRules.setLabels
-    , module Network.Google.Resource.Compute.GlobalForwardingRules.SetLabels
+    ComputeGlobalForwardingRulesSetLabelsResource,
+    newComputeGlobalForwardingRulesSetLabels,
+    ComputeGlobalForwardingRulesSetLabels,
 
     -- ** compute.globalForwardingRules.setTarget
-    , module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
+    ComputeGlobalForwardingRulesSetTargetResource,
+    newComputeGlobalForwardingRulesSetTarget,
+    ComputeGlobalForwardingRulesSetTarget,
 
     -- ** compute.globalNetworkEndpointGroups.attachNetworkEndpoints
-    , module Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
+    ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpointsResource,
+    newComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints,
+    ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints,
 
     -- ** compute.globalNetworkEndpointGroups.delete
-    , module Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Delete
+    ComputeGlobalNetworkEndpointGroupsDeleteResource,
+    newComputeGlobalNetworkEndpointGroupsDelete,
+    ComputeGlobalNetworkEndpointGroupsDelete,
 
     -- ** compute.globalNetworkEndpointGroups.detachNetworkEndpoints
-    , module Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.DetachNetworkEndpoints
+    ComputeGlobalNetworkEndpointGroupsDetachNetworkEndpointsResource,
+    newComputeGlobalNetworkEndpointGroupsDetachNetworkEndpoints,
+    ComputeGlobalNetworkEndpointGroupsDetachNetworkEndpoints,
 
     -- ** compute.globalNetworkEndpointGroups.get
-    , module Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Get
+    ComputeGlobalNetworkEndpointGroupsGetResource,
+    newComputeGlobalNetworkEndpointGroupsGet,
+    ComputeGlobalNetworkEndpointGroupsGet,
 
     -- ** compute.globalNetworkEndpointGroups.insert
-    , module Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Insert
+    ComputeGlobalNetworkEndpointGroupsInsertResource,
+    newComputeGlobalNetworkEndpointGroupsInsert,
+    ComputeGlobalNetworkEndpointGroupsInsert,
 
     -- ** compute.globalNetworkEndpointGroups.list
-    , module Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.List
+    ComputeGlobalNetworkEndpointGroupsListResource,
+    newComputeGlobalNetworkEndpointGroupsList,
+    ComputeGlobalNetworkEndpointGroupsList,
 
     -- ** compute.globalNetworkEndpointGroups.listNetworkEndpoints
-    , module Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
+    ComputeGlobalNetworkEndpointGroupsListNetworkEndpointsResource,
+    newComputeGlobalNetworkEndpointGroupsListNetworkEndpoints,
+    ComputeGlobalNetworkEndpointGroupsListNetworkEndpoints,
 
     -- ** compute.globalOperations.aggregatedList
-    , module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
+    ComputeGlobalOperationsAggregatedListResource,
+    newComputeGlobalOperationsAggregatedList,
+    ComputeGlobalOperationsAggregatedList,
 
     -- ** compute.globalOperations.delete
-    , module Network.Google.Resource.Compute.GlobalOperations.Delete
+    ComputeGlobalOperationsDeleteResource,
+    newComputeGlobalOperationsDelete,
+    ComputeGlobalOperationsDelete,
 
     -- ** compute.globalOperations.get
-    , module Network.Google.Resource.Compute.GlobalOperations.Get
+    ComputeGlobalOperationsGetResource,
+    newComputeGlobalOperationsGet,
+    ComputeGlobalOperationsGet,
 
     -- ** compute.globalOperations.list
-    , module Network.Google.Resource.Compute.GlobalOperations.List
+    ComputeGlobalOperationsListResource,
+    newComputeGlobalOperationsList,
+    ComputeGlobalOperationsList,
 
     -- ** compute.globalOperations.wait
-    , module Network.Google.Resource.Compute.GlobalOperations.Wait
+    ComputeGlobalOperationsWaitResource,
+    newComputeGlobalOperationsWait,
+    ComputeGlobalOperationsWait,
 
     -- ** compute.globalOrganizationOperations.delete
-    , module Network.Google.Resource.Compute.GlobalOrganizationOperations.Delete
+    ComputeGlobalOrganizationOperationsDeleteResource,
+    newComputeGlobalOrganizationOperationsDelete,
+    ComputeGlobalOrganizationOperationsDelete,
 
     -- ** compute.globalOrganizationOperations.get
-    , module Network.Google.Resource.Compute.GlobalOrganizationOperations.Get
+    ComputeGlobalOrganizationOperationsGetResource,
+    newComputeGlobalOrganizationOperationsGet,
+    ComputeGlobalOrganizationOperationsGet,
 
     -- ** compute.globalOrganizationOperations.list
-    , module Network.Google.Resource.Compute.GlobalOrganizationOperations.List
+    ComputeGlobalOrganizationOperationsListResource,
+    newComputeGlobalOrganizationOperationsList,
+    ComputeGlobalOrganizationOperationsList,
 
     -- ** compute.globalPublicDelegatedPrefixes.delete
-    , module Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Delete
+    ComputeGlobalPublicDelegatedPrefixesDeleteResource,
+    newComputeGlobalPublicDelegatedPrefixesDelete,
+    ComputeGlobalPublicDelegatedPrefixesDelete,
 
     -- ** compute.globalPublicDelegatedPrefixes.get
-    , module Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Get
+    ComputeGlobalPublicDelegatedPrefixesGetResource,
+    newComputeGlobalPublicDelegatedPrefixesGet,
+    ComputeGlobalPublicDelegatedPrefixesGet,
 
     -- ** compute.globalPublicDelegatedPrefixes.insert
-    , module Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Insert
+    ComputeGlobalPublicDelegatedPrefixesInsertResource,
+    newComputeGlobalPublicDelegatedPrefixesInsert,
+    ComputeGlobalPublicDelegatedPrefixesInsert,
 
     -- ** compute.globalPublicDelegatedPrefixes.list
-    , module Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.List
+    ComputeGlobalPublicDelegatedPrefixesListResource,
+    newComputeGlobalPublicDelegatedPrefixesList,
+    ComputeGlobalPublicDelegatedPrefixesList,
 
     -- ** compute.globalPublicDelegatedPrefixes.patch
-    , module Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Patch
+    ComputeGlobalPublicDelegatedPrefixesPatchResource,
+    newComputeGlobalPublicDelegatedPrefixesPatch,
+    ComputeGlobalPublicDelegatedPrefixesPatch,
 
     -- ** compute.healthChecks.aggregatedList
-    , module Network.Google.Resource.Compute.HealthChecks.AggregatedList
+    ComputeHealthChecksAggregatedListResource,
+    newComputeHealthChecksAggregatedList,
+    ComputeHealthChecksAggregatedList,
 
     -- ** compute.healthChecks.delete
-    , module Network.Google.Resource.Compute.HealthChecks.Delete
+    ComputeHealthChecksDeleteResource,
+    newComputeHealthChecksDelete,
+    ComputeHealthChecksDelete,
 
     -- ** compute.healthChecks.get
-    , module Network.Google.Resource.Compute.HealthChecks.Get
+    ComputeHealthChecksGetResource,
+    newComputeHealthChecksGet,
+    ComputeHealthChecksGet,
 
     -- ** compute.healthChecks.insert
-    , module Network.Google.Resource.Compute.HealthChecks.Insert
+    ComputeHealthChecksInsertResource,
+    newComputeHealthChecksInsert,
+    ComputeHealthChecksInsert,
 
     -- ** compute.healthChecks.list
-    , module Network.Google.Resource.Compute.HealthChecks.List
+    ComputeHealthChecksListResource,
+    newComputeHealthChecksList,
+    ComputeHealthChecksList,
 
     -- ** compute.healthChecks.patch
-    , module Network.Google.Resource.Compute.HealthChecks.Patch
+    ComputeHealthChecksPatchResource,
+    newComputeHealthChecksPatch,
+    ComputeHealthChecksPatch,
 
     -- ** compute.healthChecks.update
-    , module Network.Google.Resource.Compute.HealthChecks.Update
+    ComputeHealthChecksUpdateResource,
+    newComputeHealthChecksUpdate,
+    ComputeHealthChecksUpdate,
 
     -- ** compute.httpHealthChecks.delete
-    , module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
+    ComputeHttpHealthChecksDeleteResource,
+    newComputeHttpHealthChecksDelete,
+    ComputeHttpHealthChecksDelete,
 
     -- ** compute.httpHealthChecks.get
-    , module Network.Google.Resource.Compute.HTTPHealthChecks.Get
+    ComputeHttpHealthChecksGetResource,
+    newComputeHttpHealthChecksGet,
+    ComputeHttpHealthChecksGet,
 
     -- ** compute.httpHealthChecks.insert
-    , module Network.Google.Resource.Compute.HTTPHealthChecks.Insert
+    ComputeHttpHealthChecksInsertResource,
+    newComputeHttpHealthChecksInsert,
+    ComputeHttpHealthChecksInsert,
 
     -- ** compute.httpHealthChecks.list
-    , module Network.Google.Resource.Compute.HTTPHealthChecks.List
+    ComputeHttpHealthChecksListResource,
+    newComputeHttpHealthChecksList,
+    ComputeHttpHealthChecksList,
 
     -- ** compute.httpHealthChecks.patch
-    , module Network.Google.Resource.Compute.HTTPHealthChecks.Patch
+    ComputeHttpHealthChecksPatchResource,
+    newComputeHttpHealthChecksPatch,
+    ComputeHttpHealthChecksPatch,
 
     -- ** compute.httpHealthChecks.update
-    , module Network.Google.Resource.Compute.HTTPHealthChecks.Update
+    ComputeHttpHealthChecksUpdateResource,
+    newComputeHttpHealthChecksUpdate,
+    ComputeHttpHealthChecksUpdate,
 
     -- ** compute.httpsHealthChecks.delete
-    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
+    ComputeHttpsHealthChecksDeleteResource,
+    newComputeHttpsHealthChecksDelete,
+    ComputeHttpsHealthChecksDelete,
 
     -- ** compute.httpsHealthChecks.get
-    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Get
+    ComputeHttpsHealthChecksGetResource,
+    newComputeHttpsHealthChecksGet,
+    ComputeHttpsHealthChecksGet,
 
     -- ** compute.httpsHealthChecks.insert
-    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
+    ComputeHttpsHealthChecksInsertResource,
+    newComputeHttpsHealthChecksInsert,
+    ComputeHttpsHealthChecksInsert,
 
     -- ** compute.httpsHealthChecks.list
-    , module Network.Google.Resource.Compute.HTTPSHealthChecks.List
+    ComputeHttpsHealthChecksListResource,
+    newComputeHttpsHealthChecksList,
+    ComputeHttpsHealthChecksList,
 
     -- ** compute.httpsHealthChecks.patch
-    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
+    ComputeHttpsHealthChecksPatchResource,
+    newComputeHttpsHealthChecksPatch,
+    ComputeHttpsHealthChecksPatch,
 
     -- ** compute.httpsHealthChecks.update
-    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Update
+    ComputeHttpsHealthChecksUpdateResource,
+    newComputeHttpsHealthChecksUpdate,
+    ComputeHttpsHealthChecksUpdate,
+
+    -- ** compute.imageFamilyViews.get
+    ComputeImageFamilyViewsGetResource,
+    newComputeImageFamilyViewsGet,
+    ComputeImageFamilyViewsGet,
 
     -- ** compute.images.delete
-    , module Network.Google.Resource.Compute.Images.Delete
+    ComputeImagesDeleteResource,
+    newComputeImagesDelete,
+    ComputeImagesDelete,
 
     -- ** compute.images.deprecate
-    , module Network.Google.Resource.Compute.Images.Deprecate
+    ComputeImagesDeprecateResource,
+    newComputeImagesDeprecate,
+    ComputeImagesDeprecate,
 
     -- ** compute.images.get
-    , module Network.Google.Resource.Compute.Images.Get
+    ComputeImagesGetResource,
+    newComputeImagesGet,
+    ComputeImagesGet,
 
     -- ** compute.images.getFromFamily
-    , module Network.Google.Resource.Compute.Images.GetFromFamily
+    ComputeImagesGetFromFamilyResource,
+    newComputeImagesGetFromFamily,
+    ComputeImagesGetFromFamily,
 
     -- ** compute.images.getIamPolicy
-    , module Network.Google.Resource.Compute.Images.GetIAMPolicy
+    ComputeImagesGetIamPolicyResource,
+    newComputeImagesGetIamPolicy,
+    ComputeImagesGetIamPolicy,
 
     -- ** compute.images.insert
-    , module Network.Google.Resource.Compute.Images.Insert
+    ComputeImagesInsertResource,
+    newComputeImagesInsert,
+    ComputeImagesInsert,
 
     -- ** compute.images.list
-    , module Network.Google.Resource.Compute.Images.List
+    ComputeImagesListResource,
+    newComputeImagesList,
+    ComputeImagesList,
 
     -- ** compute.images.patch
-    , module Network.Google.Resource.Compute.Images.Patch
+    ComputeImagesPatchResource,
+    newComputeImagesPatch,
+    ComputeImagesPatch,
 
     -- ** compute.images.setIamPolicy
-    , module Network.Google.Resource.Compute.Images.SetIAMPolicy
+    ComputeImagesSetIamPolicyResource,
+    newComputeImagesSetIamPolicy,
+    ComputeImagesSetIamPolicy,
 
     -- ** compute.images.setLabels
-    , module Network.Google.Resource.Compute.Images.SetLabels
+    ComputeImagesSetLabelsResource,
+    newComputeImagesSetLabels,
+    ComputeImagesSetLabels,
 
     -- ** compute.images.testIamPermissions
-    , module Network.Google.Resource.Compute.Images.TestIAMPermissions
+    ComputeImagesTestIamPermissionsResource,
+    newComputeImagesTestIamPermissions,
+    ComputeImagesTestIamPermissions,
 
     -- ** compute.instanceGroupManagers.abandonInstances
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
+    ComputeInstanceGroupManagersAbandonInstancesResource,
+    newComputeInstanceGroupManagersAbandonInstances,
+    ComputeInstanceGroupManagersAbandonInstances,
 
     -- ** compute.instanceGroupManagers.aggregatedList
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
+    ComputeInstanceGroupManagersAggregatedListResource,
+    newComputeInstanceGroupManagersAggregatedList,
+    ComputeInstanceGroupManagersAggregatedList,
 
     -- ** compute.instanceGroupManagers.applyUpdatesToInstances
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
+    ComputeInstanceGroupManagersApplyUpdatesToInstancesResource,
+    newComputeInstanceGroupManagersApplyUpdatesToInstances,
+    ComputeInstanceGroupManagersApplyUpdatesToInstances,
 
     -- ** compute.instanceGroupManagers.createInstances
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.CreateInstances
+    ComputeInstanceGroupManagersCreateInstancesResource,
+    newComputeInstanceGroupManagersCreateInstances,
+    ComputeInstanceGroupManagersCreateInstances,
 
     -- ** compute.instanceGroupManagers.delete
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
+    ComputeInstanceGroupManagersDeleteResource,
+    newComputeInstanceGroupManagersDelete,
+    ComputeInstanceGroupManagersDelete,
 
     -- ** compute.instanceGroupManagers.deleteInstances
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
+    ComputeInstanceGroupManagersDeleteInstancesResource,
+    newComputeInstanceGroupManagersDeleteInstances,
+    ComputeInstanceGroupManagersDeleteInstances,
 
     -- ** compute.instanceGroupManagers.deletePerInstanceConfigs
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.DeletePerInstanceConfigs
+    ComputeInstanceGroupManagersDeletePerInstanceConfigsResource,
+    newComputeInstanceGroupManagersDeletePerInstanceConfigs,
+    ComputeInstanceGroupManagersDeletePerInstanceConfigs,
 
     -- ** compute.instanceGroupManagers.get
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.Get
+    ComputeInstanceGroupManagersGetResource,
+    newComputeInstanceGroupManagersGet,
+    ComputeInstanceGroupManagersGet,
 
     -- ** compute.instanceGroupManagers.insert
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
+    ComputeInstanceGroupManagersInsertResource,
+    newComputeInstanceGroupManagersInsert,
+    ComputeInstanceGroupManagersInsert,
 
     -- ** compute.instanceGroupManagers.list
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.List
+    ComputeInstanceGroupManagersListResource,
+    newComputeInstanceGroupManagersList,
+    ComputeInstanceGroupManagersList,
 
     -- ** compute.instanceGroupManagers.listErrors
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.ListErrors
+    ComputeInstanceGroupManagersListErrorsResource,
+    newComputeInstanceGroupManagersListErrors,
+    ComputeInstanceGroupManagersListErrors,
 
     -- ** compute.instanceGroupManagers.listManagedInstances
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
+    ComputeInstanceGroupManagersListManagedInstancesResource,
+    newComputeInstanceGroupManagersListManagedInstances,
+    ComputeInstanceGroupManagersListManagedInstances,
 
     -- ** compute.instanceGroupManagers.listPerInstanceConfigs
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.ListPerInstanceConfigs
+    ComputeInstanceGroupManagersListPerInstanceConfigsResource,
+    newComputeInstanceGroupManagersListPerInstanceConfigs,
+    ComputeInstanceGroupManagersListPerInstanceConfigs,
 
     -- ** compute.instanceGroupManagers.patch
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.Patch
+    ComputeInstanceGroupManagersPatchResource,
+    newComputeInstanceGroupManagersPatch,
+    ComputeInstanceGroupManagersPatch,
 
     -- ** compute.instanceGroupManagers.patchPerInstanceConfigs
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
+    ComputeInstanceGroupManagersPatchPerInstanceConfigsResource,
+    newComputeInstanceGroupManagersPatchPerInstanceConfigs,
+    ComputeInstanceGroupManagersPatchPerInstanceConfigs,
 
     -- ** compute.instanceGroupManagers.recreateInstances
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
+    ComputeInstanceGroupManagersRecreateInstancesResource,
+    newComputeInstanceGroupManagersRecreateInstances,
+    ComputeInstanceGroupManagersRecreateInstances,
 
     -- ** compute.instanceGroupManagers.resize
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
+    ComputeInstanceGroupManagersResizeResource,
+    newComputeInstanceGroupManagersResize,
+    ComputeInstanceGroupManagersResize,
 
     -- ** compute.instanceGroupManagers.setInstanceTemplate
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
+    ComputeInstanceGroupManagersSetInstanceTemplateResource,
+    newComputeInstanceGroupManagersSetInstanceTemplate,
+    ComputeInstanceGroupManagersSetInstanceTemplate,
 
     -- ** compute.instanceGroupManagers.setTargetPools
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
+    ComputeInstanceGroupManagersSetTargetPoolsResource,
+    newComputeInstanceGroupManagersSetTargetPools,
+    ComputeInstanceGroupManagersSetTargetPools,
 
     -- ** compute.instanceGroupManagers.updatePerInstanceConfigs
-    , module Network.Google.Resource.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
+    ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource,
+    newComputeInstanceGroupManagersUpdatePerInstanceConfigs,
+    ComputeInstanceGroupManagersUpdatePerInstanceConfigs,
 
     -- ** compute.instanceGroups.addInstances
-    , module Network.Google.Resource.Compute.InstanceGroups.AddInstances
+    ComputeInstanceGroupsAddInstancesResource,
+    newComputeInstanceGroupsAddInstances,
+    ComputeInstanceGroupsAddInstances,
 
     -- ** compute.instanceGroups.aggregatedList
-    , module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
+    ComputeInstanceGroupsAggregatedListResource,
+    newComputeInstanceGroupsAggregatedList,
+    ComputeInstanceGroupsAggregatedList,
 
     -- ** compute.instanceGroups.delete
-    , module Network.Google.Resource.Compute.InstanceGroups.Delete
+    ComputeInstanceGroupsDeleteResource,
+    newComputeInstanceGroupsDelete,
+    ComputeInstanceGroupsDelete,
 
     -- ** compute.instanceGroups.get
-    , module Network.Google.Resource.Compute.InstanceGroups.Get
+    ComputeInstanceGroupsGetResource,
+    newComputeInstanceGroupsGet,
+    ComputeInstanceGroupsGet,
 
     -- ** compute.instanceGroups.insert
-    , module Network.Google.Resource.Compute.InstanceGroups.Insert
+    ComputeInstanceGroupsInsertResource,
+    newComputeInstanceGroupsInsert,
+    ComputeInstanceGroupsInsert,
 
     -- ** compute.instanceGroups.list
-    , module Network.Google.Resource.Compute.InstanceGroups.List
+    ComputeInstanceGroupsListResource,
+    newComputeInstanceGroupsList,
+    ComputeInstanceGroupsList,
 
     -- ** compute.instanceGroups.listInstances
-    , module Network.Google.Resource.Compute.InstanceGroups.ListInstances
+    ComputeInstanceGroupsListInstancesResource,
+    newComputeInstanceGroupsListInstances,
+    ComputeInstanceGroupsListInstances,
 
     -- ** compute.instanceGroups.removeInstances
-    , module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
+    ComputeInstanceGroupsRemoveInstancesResource,
+    newComputeInstanceGroupsRemoveInstances,
+    ComputeInstanceGroupsRemoveInstances,
 
     -- ** compute.instanceGroups.setNamedPorts
-    , module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
+    ComputeInstanceGroupsSetNamedPortsResource,
+    newComputeInstanceGroupsSetNamedPorts,
+    ComputeInstanceGroupsSetNamedPorts,
 
     -- ** compute.instanceTemplates.delete
-    , module Network.Google.Resource.Compute.InstanceTemplates.Delete
+    ComputeInstanceTemplatesDeleteResource,
+    newComputeInstanceTemplatesDelete,
+    ComputeInstanceTemplatesDelete,
 
     -- ** compute.instanceTemplates.get
-    , module Network.Google.Resource.Compute.InstanceTemplates.Get
+    ComputeInstanceTemplatesGetResource,
+    newComputeInstanceTemplatesGet,
+    ComputeInstanceTemplatesGet,
 
     -- ** compute.instanceTemplates.getIamPolicy
-    , module Network.Google.Resource.Compute.InstanceTemplates.GetIAMPolicy
+    ComputeInstanceTemplatesGetIamPolicyResource,
+    newComputeInstanceTemplatesGetIamPolicy,
+    ComputeInstanceTemplatesGetIamPolicy,
 
     -- ** compute.instanceTemplates.insert
-    , module Network.Google.Resource.Compute.InstanceTemplates.Insert
+    ComputeInstanceTemplatesInsertResource,
+    newComputeInstanceTemplatesInsert,
+    ComputeInstanceTemplatesInsert,
 
     -- ** compute.instanceTemplates.list
-    , module Network.Google.Resource.Compute.InstanceTemplates.List
+    ComputeInstanceTemplatesListResource,
+    newComputeInstanceTemplatesList,
+    ComputeInstanceTemplatesList,
 
     -- ** compute.instanceTemplates.setIamPolicy
-    , module Network.Google.Resource.Compute.InstanceTemplates.SetIAMPolicy
+    ComputeInstanceTemplatesSetIamPolicyResource,
+    newComputeInstanceTemplatesSetIamPolicy,
+    ComputeInstanceTemplatesSetIamPolicy,
 
     -- ** compute.instanceTemplates.testIamPermissions
-    , module Network.Google.Resource.Compute.InstanceTemplates.TestIAMPermissions
+    ComputeInstanceTemplatesTestIamPermissionsResource,
+    newComputeInstanceTemplatesTestIamPermissions,
+    ComputeInstanceTemplatesTestIamPermissions,
 
     -- ** compute.instances.addAccessConfig
-    , module Network.Google.Resource.Compute.Instances.AddAccessConfig
+    ComputeInstancesAddAccessConfigResource,
+    newComputeInstancesAddAccessConfig,
+    ComputeInstancesAddAccessConfig,
 
     -- ** compute.instances.addResourcePolicies
-    , module Network.Google.Resource.Compute.Instances.AddResourcePolicies
+    ComputeInstancesAddResourcePoliciesResource,
+    newComputeInstancesAddResourcePolicies,
+    ComputeInstancesAddResourcePolicies,
 
     -- ** compute.instances.aggregatedList
-    , module Network.Google.Resource.Compute.Instances.AggregatedList
+    ComputeInstancesAggregatedListResource,
+    newComputeInstancesAggregatedList,
+    ComputeInstancesAggregatedList,
 
     -- ** compute.instances.attachDisk
-    , module Network.Google.Resource.Compute.Instances.AttachDisk
+    ComputeInstancesAttachDiskResource,
+    newComputeInstancesAttachDisk,
+    ComputeInstancesAttachDisk,
 
     -- ** compute.instances.bulkInsert
-    , module Network.Google.Resource.Compute.Instances.BulkInsert
+    ComputeInstancesBulkInsertResource,
+    newComputeInstancesBulkInsert,
+    ComputeInstancesBulkInsert,
 
     -- ** compute.instances.delete
-    , module Network.Google.Resource.Compute.Instances.Delete
+    ComputeInstancesDeleteResource,
+    newComputeInstancesDelete,
+    ComputeInstancesDelete,
 
     -- ** compute.instances.deleteAccessConfig
-    , module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
+    ComputeInstancesDeleteAccessConfigResource,
+    newComputeInstancesDeleteAccessConfig,
+    ComputeInstancesDeleteAccessConfig,
 
     -- ** compute.instances.detachDisk
-    , module Network.Google.Resource.Compute.Instances.DetachDisk
+    ComputeInstancesDetachDiskResource,
+    newComputeInstancesDetachDisk,
+    ComputeInstancesDetachDisk,
 
     -- ** compute.instances.get
-    , module Network.Google.Resource.Compute.Instances.Get
+    ComputeInstancesGetResource,
+    newComputeInstancesGet,
+    ComputeInstancesGet,
 
     -- ** compute.instances.getEffectiveFirewalls
-    , module Network.Google.Resource.Compute.Instances.GetEffectiveFirewalls
+    ComputeInstancesGetEffectiveFirewallsResource,
+    newComputeInstancesGetEffectiveFirewalls,
+    ComputeInstancesGetEffectiveFirewalls,
 
     -- ** compute.instances.getGuestAttributes
-    , module Network.Google.Resource.Compute.Instances.GetGuestAttributes
+    ComputeInstancesGetGuestAttributesResource,
+    newComputeInstancesGetGuestAttributes,
+    ComputeInstancesGetGuestAttributes,
 
     -- ** compute.instances.getIamPolicy
-    , module Network.Google.Resource.Compute.Instances.GetIAMPolicy
+    ComputeInstancesGetIamPolicyResource,
+    newComputeInstancesGetIamPolicy,
+    ComputeInstancesGetIamPolicy,
 
     -- ** compute.instances.getScreenshot
-    , module Network.Google.Resource.Compute.Instances.GetScreenshot
+    ComputeInstancesGetScreenshotResource,
+    newComputeInstancesGetScreenshot,
+    ComputeInstancesGetScreenshot,
 
     -- ** compute.instances.getSerialPortOutput
-    , module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
+    ComputeInstancesGetSerialPortOutputResource,
+    newComputeInstancesGetSerialPortOutput,
+    ComputeInstancesGetSerialPortOutput,
 
     -- ** compute.instances.getShieldedInstanceIdentity
-    , module Network.Google.Resource.Compute.Instances.GetShieldedInstanceIdentity
+    ComputeInstancesGetShieldedInstanceIdentityResource,
+    newComputeInstancesGetShieldedInstanceIdentity,
+    ComputeInstancesGetShieldedInstanceIdentity,
 
     -- ** compute.instances.insert
-    , module Network.Google.Resource.Compute.Instances.Insert
+    ComputeInstancesInsertResource,
+    newComputeInstancesInsert,
+    ComputeInstancesInsert,
 
     -- ** compute.instances.list
-    , module Network.Google.Resource.Compute.Instances.List
+    ComputeInstancesListResource,
+    newComputeInstancesList,
+    ComputeInstancesList,
 
     -- ** compute.instances.listReferrers
-    , module Network.Google.Resource.Compute.Instances.ListReferrers
+    ComputeInstancesListReferrersResource,
+    newComputeInstancesListReferrers,
+    ComputeInstancesListReferrers,
 
     -- ** compute.instances.removeResourcePolicies
-    , module Network.Google.Resource.Compute.Instances.RemoveResourcePolicies
+    ComputeInstancesRemoveResourcePoliciesResource,
+    newComputeInstancesRemoveResourcePolicies,
+    ComputeInstancesRemoveResourcePolicies,
 
     -- ** compute.instances.reset
-    , module Network.Google.Resource.Compute.Instances.Reset
+    ComputeInstancesResetResource,
+    newComputeInstancesReset,
+    ComputeInstancesReset,
+
+    -- ** compute.instances.resume
+    ComputeInstancesResumeResource,
+    newComputeInstancesResume,
+    ComputeInstancesResume,
+
+    -- ** compute.instances.sendDiagnosticInterrupt
+    ComputeInstancesSendDiagnosticInterruptResource,
+    newComputeInstancesSendDiagnosticInterrupt,
+    ComputeInstancesSendDiagnosticInterrupt,
 
     -- ** compute.instances.setDeletionProtection
-    , module Network.Google.Resource.Compute.Instances.SetDeletionProtection
+    ComputeInstancesSetDeletionProtectionResource,
+    newComputeInstancesSetDeletionProtection,
+    ComputeInstancesSetDeletionProtection,
 
     -- ** compute.instances.setDiskAutoDelete
-    , module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
+    ComputeInstancesSetDiskAutoDeleteResource,
+    newComputeInstancesSetDiskAutoDelete,
+    ComputeInstancesSetDiskAutoDelete,
 
     -- ** compute.instances.setIamPolicy
-    , module Network.Google.Resource.Compute.Instances.SetIAMPolicy
+    ComputeInstancesSetIamPolicyResource,
+    newComputeInstancesSetIamPolicy,
+    ComputeInstancesSetIamPolicy,
 
     -- ** compute.instances.setLabels
-    , module Network.Google.Resource.Compute.Instances.SetLabels
+    ComputeInstancesSetLabelsResource,
+    newComputeInstancesSetLabels,
+    ComputeInstancesSetLabels,
 
     -- ** compute.instances.setMachineResources
-    , module Network.Google.Resource.Compute.Instances.SetMachineResources
+    ComputeInstancesSetMachineResourcesResource,
+    newComputeInstancesSetMachineResources,
+    ComputeInstancesSetMachineResources,
 
     -- ** compute.instances.setMachineType
-    , module Network.Google.Resource.Compute.Instances.SetMachineType
+    ComputeInstancesSetMachineTypeResource,
+    newComputeInstancesSetMachineType,
+    ComputeInstancesSetMachineType,
 
     -- ** compute.instances.setMetadata
-    , module Network.Google.Resource.Compute.Instances.SetMetadata
+    ComputeInstancesSetMetadataResource,
+    newComputeInstancesSetMetadata,
+    ComputeInstancesSetMetadata,
 
     -- ** compute.instances.setMinCpuPlatform
-    , module Network.Google.Resource.Compute.Instances.SetMinCPUPlatform
+    ComputeInstancesSetMinCpuPlatformResource,
+    newComputeInstancesSetMinCpuPlatform,
+    ComputeInstancesSetMinCpuPlatform,
 
     -- ** compute.instances.setScheduling
-    , module Network.Google.Resource.Compute.Instances.SetScheduling
+    ComputeInstancesSetSchedulingResource,
+    newComputeInstancesSetScheduling,
+    ComputeInstancesSetScheduling,
 
     -- ** compute.instances.setServiceAccount
-    , module Network.Google.Resource.Compute.Instances.SetServiceAccount
+    ComputeInstancesSetServiceAccountResource,
+    newComputeInstancesSetServiceAccount,
+    ComputeInstancesSetServiceAccount,
 
     -- ** compute.instances.setShieldedInstanceIntegrityPolicy
-    , module Network.Google.Resource.Compute.Instances.SetShieldedInstanceIntegrityPolicy
+    ComputeInstancesSetShieldedInstanceIntegrityPolicyResource,
+    newComputeInstancesSetShieldedInstanceIntegrityPolicy,
+    ComputeInstancesSetShieldedInstanceIntegrityPolicy,
 
     -- ** compute.instances.setTags
-    , module Network.Google.Resource.Compute.Instances.SetTags
+    ComputeInstancesSetTagsResource,
+    newComputeInstancesSetTags,
+    ComputeInstancesSetTags,
 
     -- ** compute.instances.simulateMaintenanceEvent
-    , module Network.Google.Resource.Compute.Instances.SimulateMaintenanceEvent
+    ComputeInstancesSimulateMaintenanceEventResource,
+    newComputeInstancesSimulateMaintenanceEvent,
+    ComputeInstancesSimulateMaintenanceEvent,
 
     -- ** compute.instances.start
-    , module Network.Google.Resource.Compute.Instances.Start
+    ComputeInstancesStartResource,
+    newComputeInstancesStart,
+    ComputeInstancesStart,
 
     -- ** compute.instances.startWithEncryptionKey
-    , module Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
+    ComputeInstancesStartWithEncryptionKeyResource,
+    newComputeInstancesStartWithEncryptionKey,
+    ComputeInstancesStartWithEncryptionKey,
 
     -- ** compute.instances.stop
-    , module Network.Google.Resource.Compute.Instances.Stop
+    ComputeInstancesStopResource,
+    newComputeInstancesStop,
+    ComputeInstancesStop,
+
+    -- ** compute.instances.suspend
+    ComputeInstancesSuspendResource,
+    newComputeInstancesSuspend,
+    ComputeInstancesSuspend,
 
     -- ** compute.instances.testIamPermissions
-    , module Network.Google.Resource.Compute.Instances.TestIAMPermissions
+    ComputeInstancesTestIamPermissionsResource,
+    newComputeInstancesTestIamPermissions,
+    ComputeInstancesTestIamPermissions,
 
     -- ** compute.instances.update
-    , module Network.Google.Resource.Compute.Instances.Update
+    ComputeInstancesUpdateResource,
+    newComputeInstancesUpdate,
+    ComputeInstancesUpdate,
 
     -- ** compute.instances.updateAccessConfig
-    , module Network.Google.Resource.Compute.Instances.UpdateAccessConfig
+    ComputeInstancesUpdateAccessConfigResource,
+    newComputeInstancesUpdateAccessConfig,
+    ComputeInstancesUpdateAccessConfig,
 
     -- ** compute.instances.updateDisplayDevice
-    , module Network.Google.Resource.Compute.Instances.UpdateDisplayDevice
+    ComputeInstancesUpdateDisplayDeviceResource,
+    newComputeInstancesUpdateDisplayDevice,
+    ComputeInstancesUpdateDisplayDevice,
 
     -- ** compute.instances.updateNetworkInterface
-    , module Network.Google.Resource.Compute.Instances.UpdateNetworkInterface
+    ComputeInstancesUpdateNetworkInterfaceResource,
+    newComputeInstancesUpdateNetworkInterface,
+    ComputeInstancesUpdateNetworkInterface,
 
     -- ** compute.instances.updateShieldedInstanceConfig
-    , module Network.Google.Resource.Compute.Instances.UpdateShieldedInstanceConfig
+    ComputeInstancesUpdateShieldedInstanceConfigResource,
+    newComputeInstancesUpdateShieldedInstanceConfig,
+    ComputeInstancesUpdateShieldedInstanceConfig,
 
     -- ** compute.interconnectAttachments.aggregatedList
-    , module Network.Google.Resource.Compute.InterconnectAttachments.AggregatedList
+    ComputeInterconnectAttachmentsAggregatedListResource,
+    newComputeInterconnectAttachmentsAggregatedList,
+    ComputeInterconnectAttachmentsAggregatedList,
 
     -- ** compute.interconnectAttachments.delete
-    , module Network.Google.Resource.Compute.InterconnectAttachments.Delete
+    ComputeInterconnectAttachmentsDeleteResource,
+    newComputeInterconnectAttachmentsDelete,
+    ComputeInterconnectAttachmentsDelete,
 
     -- ** compute.interconnectAttachments.get
-    , module Network.Google.Resource.Compute.InterconnectAttachments.Get
+    ComputeInterconnectAttachmentsGetResource,
+    newComputeInterconnectAttachmentsGet,
+    ComputeInterconnectAttachmentsGet,
 
     -- ** compute.interconnectAttachments.insert
-    , module Network.Google.Resource.Compute.InterconnectAttachments.Insert
+    ComputeInterconnectAttachmentsInsertResource,
+    newComputeInterconnectAttachmentsInsert,
+    ComputeInterconnectAttachmentsInsert,
 
     -- ** compute.interconnectAttachments.list
-    , module Network.Google.Resource.Compute.InterconnectAttachments.List
+    ComputeInterconnectAttachmentsListResource,
+    newComputeInterconnectAttachmentsList,
+    ComputeInterconnectAttachmentsList,
 
     -- ** compute.interconnectAttachments.patch
-    , module Network.Google.Resource.Compute.InterconnectAttachments.Patch
+    ComputeInterconnectAttachmentsPatchResource,
+    newComputeInterconnectAttachmentsPatch,
+    ComputeInterconnectAttachmentsPatch,
 
     -- ** compute.interconnectLocations.get
-    , module Network.Google.Resource.Compute.InterconnectLocations.Get
+    ComputeInterconnectLocationsGetResource,
+    newComputeInterconnectLocationsGet,
+    ComputeInterconnectLocationsGet,
 
     -- ** compute.interconnectLocations.list
-    , module Network.Google.Resource.Compute.InterconnectLocations.List
+    ComputeInterconnectLocationsListResource,
+    newComputeInterconnectLocationsList,
+    ComputeInterconnectLocationsList,
 
     -- ** compute.interconnects.delete
-    , module Network.Google.Resource.Compute.Interconnects.Delete
+    ComputeInterconnectsDeleteResource,
+    newComputeInterconnectsDelete,
+    ComputeInterconnectsDelete,
 
     -- ** compute.interconnects.get
-    , module Network.Google.Resource.Compute.Interconnects.Get
+    ComputeInterconnectsGetResource,
+    newComputeInterconnectsGet,
+    ComputeInterconnectsGet,
 
     -- ** compute.interconnects.getDiagnostics
-    , module Network.Google.Resource.Compute.Interconnects.GetDiagnostics
+    ComputeInterconnectsGetDiagnosticsResource,
+    newComputeInterconnectsGetDiagnostics,
+    ComputeInterconnectsGetDiagnostics,
 
     -- ** compute.interconnects.insert
-    , module Network.Google.Resource.Compute.Interconnects.Insert
+    ComputeInterconnectsInsertResource,
+    newComputeInterconnectsInsert,
+    ComputeInterconnectsInsert,
 
     -- ** compute.interconnects.list
-    , module Network.Google.Resource.Compute.Interconnects.List
+    ComputeInterconnectsListResource,
+    newComputeInterconnectsList,
+    ComputeInterconnectsList,
 
     -- ** compute.interconnects.patch
-    , module Network.Google.Resource.Compute.Interconnects.Patch
+    ComputeInterconnectsPatchResource,
+    newComputeInterconnectsPatch,
+    ComputeInterconnectsPatch,
 
     -- ** compute.licenseCodes.get
-    , module Network.Google.Resource.Compute.LicenseCodes.Get
+    ComputeLicenseCodesGetResource,
+    newComputeLicenseCodesGet,
+    ComputeLicenseCodesGet,
 
     -- ** compute.licenseCodes.testIamPermissions
-    , module Network.Google.Resource.Compute.LicenseCodes.TestIAMPermissions
+    ComputeLicenseCodesTestIamPermissionsResource,
+    newComputeLicenseCodesTestIamPermissions,
+    ComputeLicenseCodesTestIamPermissions,
 
     -- ** compute.licenses.delete
-    , module Network.Google.Resource.Compute.Licenses.Delete
+    ComputeLicensesDeleteResource,
+    newComputeLicensesDelete,
+    ComputeLicensesDelete,
 
     -- ** compute.licenses.get
-    , module Network.Google.Resource.Compute.Licenses.Get
+    ComputeLicensesGetResource,
+    newComputeLicensesGet,
+    ComputeLicensesGet,
 
     -- ** compute.licenses.getIamPolicy
-    , module Network.Google.Resource.Compute.Licenses.GetIAMPolicy
+    ComputeLicensesGetIamPolicyResource,
+    newComputeLicensesGetIamPolicy,
+    ComputeLicensesGetIamPolicy,
 
     -- ** compute.licenses.insert
-    , module Network.Google.Resource.Compute.Licenses.Insert
+    ComputeLicensesInsertResource,
+    newComputeLicensesInsert,
+    ComputeLicensesInsert,
 
     -- ** compute.licenses.list
-    , module Network.Google.Resource.Compute.Licenses.List
+    ComputeLicensesListResource,
+    newComputeLicensesList,
+    ComputeLicensesList,
 
     -- ** compute.licenses.setIamPolicy
-    , module Network.Google.Resource.Compute.Licenses.SetIAMPolicy
+    ComputeLicensesSetIamPolicyResource,
+    newComputeLicensesSetIamPolicy,
+    ComputeLicensesSetIamPolicy,
 
     -- ** compute.licenses.testIamPermissions
-    , module Network.Google.Resource.Compute.Licenses.TestIAMPermissions
+    ComputeLicensesTestIamPermissionsResource,
+    newComputeLicensesTestIamPermissions,
+    ComputeLicensesTestIamPermissions,
+
+    -- ** compute.machineImages.delete
+    ComputeMachineImagesDeleteResource,
+    newComputeMachineImagesDelete,
+    ComputeMachineImagesDelete,
+
+    -- ** compute.machineImages.get
+    ComputeMachineImagesGetResource,
+    newComputeMachineImagesGet,
+    ComputeMachineImagesGet,
+
+    -- ** compute.machineImages.getIamPolicy
+    ComputeMachineImagesGetIamPolicyResource,
+    newComputeMachineImagesGetIamPolicy,
+    ComputeMachineImagesGetIamPolicy,
+
+    -- ** compute.machineImages.insert
+    ComputeMachineImagesInsertResource,
+    newComputeMachineImagesInsert,
+    ComputeMachineImagesInsert,
+
+    -- ** compute.machineImages.list
+    ComputeMachineImagesListResource,
+    newComputeMachineImagesList,
+    ComputeMachineImagesList,
+
+    -- ** compute.machineImages.setIamPolicy
+    ComputeMachineImagesSetIamPolicyResource,
+    newComputeMachineImagesSetIamPolicy,
+    ComputeMachineImagesSetIamPolicy,
+
+    -- ** compute.machineImages.testIamPermissions
+    ComputeMachineImagesTestIamPermissionsResource,
+    newComputeMachineImagesTestIamPermissions,
+    ComputeMachineImagesTestIamPermissions,
 
     -- ** compute.machineTypes.aggregatedList
-    , module Network.Google.Resource.Compute.MachineTypes.AggregatedList
+    ComputeMachineTypesAggregatedListResource,
+    newComputeMachineTypesAggregatedList,
+    ComputeMachineTypesAggregatedList,
 
     -- ** compute.machineTypes.get
-    , module Network.Google.Resource.Compute.MachineTypes.Get
+    ComputeMachineTypesGetResource,
+    newComputeMachineTypesGet,
+    ComputeMachineTypesGet,
 
     -- ** compute.machineTypes.list
-    , module Network.Google.Resource.Compute.MachineTypes.List
+    ComputeMachineTypesListResource,
+    newComputeMachineTypesList,
+    ComputeMachineTypesList,
 
     -- ** compute.networkEndpointGroups.aggregatedList
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.AggregatedList
+    ComputeNetworkEndpointGroupsAggregatedListResource,
+    newComputeNetworkEndpointGroupsAggregatedList,
+    ComputeNetworkEndpointGroupsAggregatedList,
 
     -- ** compute.networkEndpointGroups.attachNetworkEndpoints
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
+    ComputeNetworkEndpointGroupsAttachNetworkEndpointsResource,
+    newComputeNetworkEndpointGroupsAttachNetworkEndpoints,
+    ComputeNetworkEndpointGroupsAttachNetworkEndpoints,
 
     -- ** compute.networkEndpointGroups.delete
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.Delete
+    ComputeNetworkEndpointGroupsDeleteResource,
+    newComputeNetworkEndpointGroupsDelete,
+    ComputeNetworkEndpointGroupsDelete,
 
     -- ** compute.networkEndpointGroups.detachNetworkEndpoints
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
+    ComputeNetworkEndpointGroupsDetachNetworkEndpointsResource,
+    newComputeNetworkEndpointGroupsDetachNetworkEndpoints,
+    ComputeNetworkEndpointGroupsDetachNetworkEndpoints,
 
     -- ** compute.networkEndpointGroups.get
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.Get
+    ComputeNetworkEndpointGroupsGetResource,
+    newComputeNetworkEndpointGroupsGet,
+    ComputeNetworkEndpointGroupsGet,
 
     -- ** compute.networkEndpointGroups.insert
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.Insert
+    ComputeNetworkEndpointGroupsInsertResource,
+    newComputeNetworkEndpointGroupsInsert,
+    ComputeNetworkEndpointGroupsInsert,
 
     -- ** compute.networkEndpointGroups.list
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.List
+    ComputeNetworkEndpointGroupsListResource,
+    newComputeNetworkEndpointGroupsList,
+    ComputeNetworkEndpointGroupsList,
 
     -- ** compute.networkEndpointGroups.listNetworkEndpoints
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.ListNetworkEndpoints
+    ComputeNetworkEndpointGroupsListNetworkEndpointsResource,
+    newComputeNetworkEndpointGroupsListNetworkEndpoints,
+    ComputeNetworkEndpointGroupsListNetworkEndpoints,
 
     -- ** compute.networkEndpointGroups.testIamPermissions
-    , module Network.Google.Resource.Compute.NetworkEndpointGroups.TestIAMPermissions
+    ComputeNetworkEndpointGroupsTestIamPermissionsResource,
+    newComputeNetworkEndpointGroupsTestIamPermissions,
+    ComputeNetworkEndpointGroupsTestIamPermissions,
+
+    -- ** compute.networkFirewallPolicies.addAssociation
+    ComputeNetworkFirewallPoliciesAddAssociationResource,
+    newComputeNetworkFirewallPoliciesAddAssociation,
+    ComputeNetworkFirewallPoliciesAddAssociation,
+
+    -- ** compute.networkFirewallPolicies.addRule
+    ComputeNetworkFirewallPoliciesAddRuleResource,
+    newComputeNetworkFirewallPoliciesAddRule,
+    ComputeNetworkFirewallPoliciesAddRule,
+
+    -- ** compute.networkFirewallPolicies.cloneRules
+    ComputeNetworkFirewallPoliciesCloneRulesResource,
+    newComputeNetworkFirewallPoliciesCloneRules,
+    ComputeNetworkFirewallPoliciesCloneRules,
+
+    -- ** compute.networkFirewallPolicies.delete
+    ComputeNetworkFirewallPoliciesDeleteResource,
+    newComputeNetworkFirewallPoliciesDelete,
+    ComputeNetworkFirewallPoliciesDelete,
+
+    -- ** compute.networkFirewallPolicies.get
+    ComputeNetworkFirewallPoliciesGetResource,
+    newComputeNetworkFirewallPoliciesGet,
+    ComputeNetworkFirewallPoliciesGet,
+
+    -- ** compute.networkFirewallPolicies.getAssociation
+    ComputeNetworkFirewallPoliciesGetAssociationResource,
+    newComputeNetworkFirewallPoliciesGetAssociation,
+    ComputeNetworkFirewallPoliciesGetAssociation,
+
+    -- ** compute.networkFirewallPolicies.getIamPolicy
+    ComputeNetworkFirewallPoliciesGetIamPolicyResource,
+    newComputeNetworkFirewallPoliciesGetIamPolicy,
+    ComputeNetworkFirewallPoliciesGetIamPolicy,
+
+    -- ** compute.networkFirewallPolicies.getRule
+    ComputeNetworkFirewallPoliciesGetRuleResource,
+    newComputeNetworkFirewallPoliciesGetRule,
+    ComputeNetworkFirewallPoliciesGetRule,
+
+    -- ** compute.networkFirewallPolicies.insert
+    ComputeNetworkFirewallPoliciesInsertResource,
+    newComputeNetworkFirewallPoliciesInsert,
+    ComputeNetworkFirewallPoliciesInsert,
+
+    -- ** compute.networkFirewallPolicies.list
+    ComputeNetworkFirewallPoliciesListResource,
+    newComputeNetworkFirewallPoliciesList,
+    ComputeNetworkFirewallPoliciesList,
+
+    -- ** compute.networkFirewallPolicies.patch
+    ComputeNetworkFirewallPoliciesPatchResource,
+    newComputeNetworkFirewallPoliciesPatch,
+    ComputeNetworkFirewallPoliciesPatch,
+
+    -- ** compute.networkFirewallPolicies.patchRule
+    ComputeNetworkFirewallPoliciesPatchRuleResource,
+    newComputeNetworkFirewallPoliciesPatchRule,
+    ComputeNetworkFirewallPoliciesPatchRule,
+
+    -- ** compute.networkFirewallPolicies.removeAssociation
+    ComputeNetworkFirewallPoliciesRemoveAssociationResource,
+    newComputeNetworkFirewallPoliciesRemoveAssociation,
+    ComputeNetworkFirewallPoliciesRemoveAssociation,
+
+    -- ** compute.networkFirewallPolicies.removeRule
+    ComputeNetworkFirewallPoliciesRemoveRuleResource,
+    newComputeNetworkFirewallPoliciesRemoveRule,
+    ComputeNetworkFirewallPoliciesRemoveRule,
+
+    -- ** compute.networkFirewallPolicies.setIamPolicy
+    ComputeNetworkFirewallPoliciesSetIamPolicyResource,
+    newComputeNetworkFirewallPoliciesSetIamPolicy,
+    ComputeNetworkFirewallPoliciesSetIamPolicy,
+
+    -- ** compute.networkFirewallPolicies.testIamPermissions
+    ComputeNetworkFirewallPoliciesTestIamPermissionsResource,
+    newComputeNetworkFirewallPoliciesTestIamPermissions,
+    ComputeNetworkFirewallPoliciesTestIamPermissions,
 
     -- ** compute.networks.addPeering
-    , module Network.Google.Resource.Compute.Networks.AddPeering
+    ComputeNetworksAddPeeringResource,
+    newComputeNetworksAddPeering,
+    ComputeNetworksAddPeering,
 
     -- ** compute.networks.delete
-    , module Network.Google.Resource.Compute.Networks.Delete
+    ComputeNetworksDeleteResource,
+    newComputeNetworksDelete,
+    ComputeNetworksDelete,
 
     -- ** compute.networks.get
-    , module Network.Google.Resource.Compute.Networks.Get
+    ComputeNetworksGetResource,
+    newComputeNetworksGet,
+    ComputeNetworksGet,
 
     -- ** compute.networks.getEffectiveFirewalls
-    , module Network.Google.Resource.Compute.Networks.GetEffectiveFirewalls
+    ComputeNetworksGetEffectiveFirewallsResource,
+    newComputeNetworksGetEffectiveFirewalls,
+    ComputeNetworksGetEffectiveFirewalls,
 
     -- ** compute.networks.insert
-    , module Network.Google.Resource.Compute.Networks.Insert
+    ComputeNetworksInsertResource,
+    newComputeNetworksInsert,
+    ComputeNetworksInsert,
 
     -- ** compute.networks.list
-    , module Network.Google.Resource.Compute.Networks.List
+    ComputeNetworksListResource,
+    newComputeNetworksList,
+    ComputeNetworksList,
 
     -- ** compute.networks.listPeeringRoutes
-    , module Network.Google.Resource.Compute.Networks.ListPeeringRoutes
+    ComputeNetworksListPeeringRoutesResource,
+    newComputeNetworksListPeeringRoutes,
+    ComputeNetworksListPeeringRoutes,
 
     -- ** compute.networks.patch
-    , module Network.Google.Resource.Compute.Networks.Patch
+    ComputeNetworksPatchResource,
+    newComputeNetworksPatch,
+    ComputeNetworksPatch,
 
     -- ** compute.networks.removePeering
-    , module Network.Google.Resource.Compute.Networks.RemovePeering
+    ComputeNetworksRemovePeeringResource,
+    newComputeNetworksRemovePeering,
+    ComputeNetworksRemovePeering,
 
     -- ** compute.networks.switchToCustomMode
-    , module Network.Google.Resource.Compute.Networks.SwitchToCustomMode
+    ComputeNetworksSwitchToCustomModeResource,
+    newComputeNetworksSwitchToCustomMode,
+    ComputeNetworksSwitchToCustomMode,
 
     -- ** compute.networks.updatePeering
-    , module Network.Google.Resource.Compute.Networks.UpdatePeering
+    ComputeNetworksUpdatePeeringResource,
+    newComputeNetworksUpdatePeering,
+    ComputeNetworksUpdatePeering,
 
     -- ** compute.nodeGroups.addNodes
-    , module Network.Google.Resource.Compute.NodeGroups.AddNodes
+    ComputeNodeGroupsAddNodesResource,
+    newComputeNodeGroupsAddNodes,
+    ComputeNodeGroupsAddNodes,
 
     -- ** compute.nodeGroups.aggregatedList
-    , module Network.Google.Resource.Compute.NodeGroups.AggregatedList
+    ComputeNodeGroupsAggregatedListResource,
+    newComputeNodeGroupsAggregatedList,
+    ComputeNodeGroupsAggregatedList,
 
     -- ** compute.nodeGroups.delete
-    , module Network.Google.Resource.Compute.NodeGroups.Delete
+    ComputeNodeGroupsDeleteResource,
+    newComputeNodeGroupsDelete,
+    ComputeNodeGroupsDelete,
 
     -- ** compute.nodeGroups.deleteNodes
-    , module Network.Google.Resource.Compute.NodeGroups.DeleteNodes
+    ComputeNodeGroupsDeleteNodesResource,
+    newComputeNodeGroupsDeleteNodes,
+    ComputeNodeGroupsDeleteNodes,
 
     -- ** compute.nodeGroups.get
-    , module Network.Google.Resource.Compute.NodeGroups.Get
+    ComputeNodeGroupsGetResource,
+    newComputeNodeGroupsGet,
+    ComputeNodeGroupsGet,
 
     -- ** compute.nodeGroups.getIamPolicy
-    , module Network.Google.Resource.Compute.NodeGroups.GetIAMPolicy
+    ComputeNodeGroupsGetIamPolicyResource,
+    newComputeNodeGroupsGetIamPolicy,
+    ComputeNodeGroupsGetIamPolicy,
 
     -- ** compute.nodeGroups.insert
-    , module Network.Google.Resource.Compute.NodeGroups.Insert
+    ComputeNodeGroupsInsertResource,
+    newComputeNodeGroupsInsert,
+    ComputeNodeGroupsInsert,
 
     -- ** compute.nodeGroups.list
-    , module Network.Google.Resource.Compute.NodeGroups.List
+    ComputeNodeGroupsListResource,
+    newComputeNodeGroupsList,
+    ComputeNodeGroupsList,
 
     -- ** compute.nodeGroups.listNodes
-    , module Network.Google.Resource.Compute.NodeGroups.ListNodes
+    ComputeNodeGroupsListNodesResource,
+    newComputeNodeGroupsListNodes,
+    ComputeNodeGroupsListNodes,
 
     -- ** compute.nodeGroups.patch
-    , module Network.Google.Resource.Compute.NodeGroups.Patch
+    ComputeNodeGroupsPatchResource,
+    newComputeNodeGroupsPatch,
+    ComputeNodeGroupsPatch,
 
     -- ** compute.nodeGroups.setIamPolicy
-    , module Network.Google.Resource.Compute.NodeGroups.SetIAMPolicy
+    ComputeNodeGroupsSetIamPolicyResource,
+    newComputeNodeGroupsSetIamPolicy,
+    ComputeNodeGroupsSetIamPolicy,
 
     -- ** compute.nodeGroups.setNodeTemplate
-    , module Network.Google.Resource.Compute.NodeGroups.SetNodeTemplate
+    ComputeNodeGroupsSetNodeTemplateResource,
+    newComputeNodeGroupsSetNodeTemplate,
+    ComputeNodeGroupsSetNodeTemplate,
 
     -- ** compute.nodeGroups.testIamPermissions
-    , module Network.Google.Resource.Compute.NodeGroups.TestIAMPermissions
+    ComputeNodeGroupsTestIamPermissionsResource,
+    newComputeNodeGroupsTestIamPermissions,
+    ComputeNodeGroupsTestIamPermissions,
 
     -- ** compute.nodeTemplates.aggregatedList
-    , module Network.Google.Resource.Compute.NodeTemplates.AggregatedList
+    ComputeNodeTemplatesAggregatedListResource,
+    newComputeNodeTemplatesAggregatedList,
+    ComputeNodeTemplatesAggregatedList,
 
     -- ** compute.nodeTemplates.delete
-    , module Network.Google.Resource.Compute.NodeTemplates.Delete
+    ComputeNodeTemplatesDeleteResource,
+    newComputeNodeTemplatesDelete,
+    ComputeNodeTemplatesDelete,
 
     -- ** compute.nodeTemplates.get
-    , module Network.Google.Resource.Compute.NodeTemplates.Get
+    ComputeNodeTemplatesGetResource,
+    newComputeNodeTemplatesGet,
+    ComputeNodeTemplatesGet,
 
     -- ** compute.nodeTemplates.getIamPolicy
-    , module Network.Google.Resource.Compute.NodeTemplates.GetIAMPolicy
+    ComputeNodeTemplatesGetIamPolicyResource,
+    newComputeNodeTemplatesGetIamPolicy,
+    ComputeNodeTemplatesGetIamPolicy,
 
     -- ** compute.nodeTemplates.insert
-    , module Network.Google.Resource.Compute.NodeTemplates.Insert
+    ComputeNodeTemplatesInsertResource,
+    newComputeNodeTemplatesInsert,
+    ComputeNodeTemplatesInsert,
 
     -- ** compute.nodeTemplates.list
-    , module Network.Google.Resource.Compute.NodeTemplates.List
+    ComputeNodeTemplatesListResource,
+    newComputeNodeTemplatesList,
+    ComputeNodeTemplatesList,
 
     -- ** compute.nodeTemplates.setIamPolicy
-    , module Network.Google.Resource.Compute.NodeTemplates.SetIAMPolicy
+    ComputeNodeTemplatesSetIamPolicyResource,
+    newComputeNodeTemplatesSetIamPolicy,
+    ComputeNodeTemplatesSetIamPolicy,
 
     -- ** compute.nodeTemplates.testIamPermissions
-    , module Network.Google.Resource.Compute.NodeTemplates.TestIAMPermissions
+    ComputeNodeTemplatesTestIamPermissionsResource,
+    newComputeNodeTemplatesTestIamPermissions,
+    ComputeNodeTemplatesTestIamPermissions,
 
     -- ** compute.nodeTypes.aggregatedList
-    , module Network.Google.Resource.Compute.NodeTypes.AggregatedList
+    ComputeNodeTypesAggregatedListResource,
+    newComputeNodeTypesAggregatedList,
+    ComputeNodeTypesAggregatedList,
 
     -- ** compute.nodeTypes.get
-    , module Network.Google.Resource.Compute.NodeTypes.Get
+    ComputeNodeTypesGetResource,
+    newComputeNodeTypesGet,
+    ComputeNodeTypesGet,
 
     -- ** compute.nodeTypes.list
-    , module Network.Google.Resource.Compute.NodeTypes.List
+    ComputeNodeTypesListResource,
+    newComputeNodeTypesList,
+    ComputeNodeTypesList,
 
     -- ** compute.packetMirrorings.aggregatedList
-    , module Network.Google.Resource.Compute.PacketMirrorings.AggregatedList
+    ComputePacketMirroringsAggregatedListResource,
+    newComputePacketMirroringsAggregatedList,
+    ComputePacketMirroringsAggregatedList,
 
     -- ** compute.packetMirrorings.delete
-    , module Network.Google.Resource.Compute.PacketMirrorings.Delete
+    ComputePacketMirroringsDeleteResource,
+    newComputePacketMirroringsDelete,
+    ComputePacketMirroringsDelete,
 
     -- ** compute.packetMirrorings.get
-    , module Network.Google.Resource.Compute.PacketMirrorings.Get
+    ComputePacketMirroringsGetResource,
+    newComputePacketMirroringsGet,
+    ComputePacketMirroringsGet,
 
     -- ** compute.packetMirrorings.insert
-    , module Network.Google.Resource.Compute.PacketMirrorings.Insert
+    ComputePacketMirroringsInsertResource,
+    newComputePacketMirroringsInsert,
+    ComputePacketMirroringsInsert,
 
     -- ** compute.packetMirrorings.list
-    , module Network.Google.Resource.Compute.PacketMirrorings.List
+    ComputePacketMirroringsListResource,
+    newComputePacketMirroringsList,
+    ComputePacketMirroringsList,
 
     -- ** compute.packetMirrorings.patch
-    , module Network.Google.Resource.Compute.PacketMirrorings.Patch
+    ComputePacketMirroringsPatchResource,
+    newComputePacketMirroringsPatch,
+    ComputePacketMirroringsPatch,
 
     -- ** compute.packetMirrorings.testIamPermissions
-    , module Network.Google.Resource.Compute.PacketMirrorings.TestIAMPermissions
+    ComputePacketMirroringsTestIamPermissionsResource,
+    newComputePacketMirroringsTestIamPermissions,
+    ComputePacketMirroringsTestIamPermissions,
 
     -- ** compute.projects.disableXpnHost
-    , module Network.Google.Resource.Compute.Projects.DisableXpnHost
+    ComputeProjectsDisableXpnHostResource,
+    newComputeProjectsDisableXpnHost,
+    ComputeProjectsDisableXpnHost,
 
     -- ** compute.projects.disableXpnResource
-    , module Network.Google.Resource.Compute.Projects.DisableXpnResource
+    ComputeProjectsDisableXpnResourceResource,
+    newComputeProjectsDisableXpnResource,
+    ComputeProjectsDisableXpnResource,
 
     -- ** compute.projects.enableXpnHost
-    , module Network.Google.Resource.Compute.Projects.EnableXpnHost
+    ComputeProjectsEnableXpnHostResource,
+    newComputeProjectsEnableXpnHost,
+    ComputeProjectsEnableXpnHost,
 
     -- ** compute.projects.enableXpnResource
-    , module Network.Google.Resource.Compute.Projects.EnableXpnResource
+    ComputeProjectsEnableXpnResourceResource,
+    newComputeProjectsEnableXpnResource,
+    ComputeProjectsEnableXpnResource,
 
     -- ** compute.projects.get
-    , module Network.Google.Resource.Compute.Projects.Get
+    ComputeProjectsGetResource,
+    newComputeProjectsGet,
+    ComputeProjectsGet,
 
     -- ** compute.projects.getXpnHost
-    , module Network.Google.Resource.Compute.Projects.GetXpnHost
+    ComputeProjectsGetXpnHostResource,
+    newComputeProjectsGetXpnHost,
+    ComputeProjectsGetXpnHost,
 
     -- ** compute.projects.getXpnResources
-    , module Network.Google.Resource.Compute.Projects.GetXpnResources
+    ComputeProjectsGetXpnResourcesResource,
+    newComputeProjectsGetXpnResources,
+    ComputeProjectsGetXpnResources,
 
     -- ** compute.projects.listXpnHosts
-    , module Network.Google.Resource.Compute.Projects.ListXpnHosts
+    ComputeProjectsListXpnHostsResource,
+    newComputeProjectsListXpnHosts,
+    ComputeProjectsListXpnHosts,
 
     -- ** compute.projects.moveDisk
-    , module Network.Google.Resource.Compute.Projects.MoveDisk
+    ComputeProjectsMoveDiskResource,
+    newComputeProjectsMoveDisk,
+    ComputeProjectsMoveDisk,
 
     -- ** compute.projects.moveInstance
-    , module Network.Google.Resource.Compute.Projects.MoveInstance
+    ComputeProjectsMoveInstanceResource,
+    newComputeProjectsMoveInstance,
+    ComputeProjectsMoveInstance,
 
     -- ** compute.projects.setCommonInstanceMetadata
-    , module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
+    ComputeProjectsSetCommonInstanceMetadataResource,
+    newComputeProjectsSetCommonInstanceMetadata,
+    ComputeProjectsSetCommonInstanceMetadata,
 
     -- ** compute.projects.setDefaultNetworkTier
-    , module Network.Google.Resource.Compute.Projects.SetDefaultNetworkTier
+    ComputeProjectsSetDefaultNetworkTierResource,
+    newComputeProjectsSetDefaultNetworkTier,
+    ComputeProjectsSetDefaultNetworkTier,
 
     -- ** compute.projects.setUsageExportBucket
-    , module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
+    ComputeProjectsSetUsageExportBucketResource,
+    newComputeProjectsSetUsageExportBucket,
+    ComputeProjectsSetUsageExportBucket,
 
     -- ** compute.publicAdvertisedPrefixes.delete
-    , module Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Delete
+    ComputePublicAdvertisedPrefixesDeleteResource,
+    newComputePublicAdvertisedPrefixesDelete,
+    ComputePublicAdvertisedPrefixesDelete,
 
     -- ** compute.publicAdvertisedPrefixes.get
-    , module Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Get
+    ComputePublicAdvertisedPrefixesGetResource,
+    newComputePublicAdvertisedPrefixesGet,
+    ComputePublicAdvertisedPrefixesGet,
 
     -- ** compute.publicAdvertisedPrefixes.insert
-    , module Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Insert
+    ComputePublicAdvertisedPrefixesInsertResource,
+    newComputePublicAdvertisedPrefixesInsert,
+    ComputePublicAdvertisedPrefixesInsert,
 
     -- ** compute.publicAdvertisedPrefixes.list
-    , module Network.Google.Resource.Compute.PublicAdvertisedPrefixes.List
+    ComputePublicAdvertisedPrefixesListResource,
+    newComputePublicAdvertisedPrefixesList,
+    ComputePublicAdvertisedPrefixesList,
 
     -- ** compute.publicAdvertisedPrefixes.patch
-    , module Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Patch
+    ComputePublicAdvertisedPrefixesPatchResource,
+    newComputePublicAdvertisedPrefixesPatch,
+    ComputePublicAdvertisedPrefixesPatch,
 
     -- ** compute.publicDelegatedPrefixes.aggregatedList
-    , module Network.Google.Resource.Compute.PublicDelegatedPrefixes.AggregatedList
+    ComputePublicDelegatedPrefixesAggregatedListResource,
+    newComputePublicDelegatedPrefixesAggregatedList,
+    ComputePublicDelegatedPrefixesAggregatedList,
 
     -- ** compute.publicDelegatedPrefixes.delete
-    , module Network.Google.Resource.Compute.PublicDelegatedPrefixes.Delete
+    ComputePublicDelegatedPrefixesDeleteResource,
+    newComputePublicDelegatedPrefixesDelete,
+    ComputePublicDelegatedPrefixesDelete,
 
     -- ** compute.publicDelegatedPrefixes.get
-    , module Network.Google.Resource.Compute.PublicDelegatedPrefixes.Get
+    ComputePublicDelegatedPrefixesGetResource,
+    newComputePublicDelegatedPrefixesGet,
+    ComputePublicDelegatedPrefixesGet,
 
     -- ** compute.publicDelegatedPrefixes.insert
-    , module Network.Google.Resource.Compute.PublicDelegatedPrefixes.Insert
+    ComputePublicDelegatedPrefixesInsertResource,
+    newComputePublicDelegatedPrefixesInsert,
+    ComputePublicDelegatedPrefixesInsert,
 
     -- ** compute.publicDelegatedPrefixes.list
-    , module Network.Google.Resource.Compute.PublicDelegatedPrefixes.List
+    ComputePublicDelegatedPrefixesListResource,
+    newComputePublicDelegatedPrefixesList,
+    ComputePublicDelegatedPrefixesList,
 
     -- ** compute.publicDelegatedPrefixes.patch
-    , module Network.Google.Resource.Compute.PublicDelegatedPrefixes.Patch
+    ComputePublicDelegatedPrefixesPatchResource,
+    newComputePublicDelegatedPrefixesPatch,
+    ComputePublicDelegatedPrefixesPatch,
 
     -- ** compute.regionAutoscalers.delete
-    , module Network.Google.Resource.Compute.RegionAutoscalers.Delete
+    ComputeRegionAutoscalersDeleteResource,
+    newComputeRegionAutoscalersDelete,
+    ComputeRegionAutoscalersDelete,
 
     -- ** compute.regionAutoscalers.get
-    , module Network.Google.Resource.Compute.RegionAutoscalers.Get
+    ComputeRegionAutoscalersGetResource,
+    newComputeRegionAutoscalersGet,
+    ComputeRegionAutoscalersGet,
 
     -- ** compute.regionAutoscalers.insert
-    , module Network.Google.Resource.Compute.RegionAutoscalers.Insert
+    ComputeRegionAutoscalersInsertResource,
+    newComputeRegionAutoscalersInsert,
+    ComputeRegionAutoscalersInsert,
 
     -- ** compute.regionAutoscalers.list
-    , module Network.Google.Resource.Compute.RegionAutoscalers.List
+    ComputeRegionAutoscalersListResource,
+    newComputeRegionAutoscalersList,
+    ComputeRegionAutoscalersList,
 
     -- ** compute.regionAutoscalers.patch
-    , module Network.Google.Resource.Compute.RegionAutoscalers.Patch
+    ComputeRegionAutoscalersPatchResource,
+    newComputeRegionAutoscalersPatch,
+    ComputeRegionAutoscalersPatch,
 
     -- ** compute.regionAutoscalers.update
-    , module Network.Google.Resource.Compute.RegionAutoscalers.Update
+    ComputeRegionAutoscalersUpdateResource,
+    newComputeRegionAutoscalersUpdate,
+    ComputeRegionAutoscalersUpdate,
 
     -- ** compute.regionBackendServices.delete
-    , module Network.Google.Resource.Compute.RegionBackendServices.Delete
+    ComputeRegionBackendServicesDeleteResource,
+    newComputeRegionBackendServicesDelete,
+    ComputeRegionBackendServicesDelete,
 
     -- ** compute.regionBackendServices.get
-    , module Network.Google.Resource.Compute.RegionBackendServices.Get
+    ComputeRegionBackendServicesGetResource,
+    newComputeRegionBackendServicesGet,
+    ComputeRegionBackendServicesGet,
 
     -- ** compute.regionBackendServices.getHealth
-    , module Network.Google.Resource.Compute.RegionBackendServices.GetHealth
+    ComputeRegionBackendServicesGetHealthResource,
+    newComputeRegionBackendServicesGetHealth,
+    ComputeRegionBackendServicesGetHealth,
 
     -- ** compute.regionBackendServices.insert
-    , module Network.Google.Resource.Compute.RegionBackendServices.Insert
+    ComputeRegionBackendServicesInsertResource,
+    newComputeRegionBackendServicesInsert,
+    ComputeRegionBackendServicesInsert,
 
     -- ** compute.regionBackendServices.list
-    , module Network.Google.Resource.Compute.RegionBackendServices.List
+    ComputeRegionBackendServicesListResource,
+    newComputeRegionBackendServicesList,
+    ComputeRegionBackendServicesList,
 
     -- ** compute.regionBackendServices.patch
-    , module Network.Google.Resource.Compute.RegionBackendServices.Patch
+    ComputeRegionBackendServicesPatchResource,
+    newComputeRegionBackendServicesPatch,
+    ComputeRegionBackendServicesPatch,
 
     -- ** compute.regionBackendServices.update
-    , module Network.Google.Resource.Compute.RegionBackendServices.Update
+    ComputeRegionBackendServicesUpdateResource,
+    newComputeRegionBackendServicesUpdate,
+    ComputeRegionBackendServicesUpdate,
 
     -- ** compute.regionCommitments.aggregatedList
-    , module Network.Google.Resource.Compute.RegionCommitments.AggregatedList
+    ComputeRegionCommitmentsAggregatedListResource,
+    newComputeRegionCommitmentsAggregatedList,
+    ComputeRegionCommitmentsAggregatedList,
 
     -- ** compute.regionCommitments.get
-    , module Network.Google.Resource.Compute.RegionCommitments.Get
+    ComputeRegionCommitmentsGetResource,
+    newComputeRegionCommitmentsGet,
+    ComputeRegionCommitmentsGet,
 
     -- ** compute.regionCommitments.insert
-    , module Network.Google.Resource.Compute.RegionCommitments.Insert
+    ComputeRegionCommitmentsInsertResource,
+    newComputeRegionCommitmentsInsert,
+    ComputeRegionCommitmentsInsert,
 
     -- ** compute.regionCommitments.list
-    , module Network.Google.Resource.Compute.RegionCommitments.List
+    ComputeRegionCommitmentsListResource,
+    newComputeRegionCommitmentsList,
+    ComputeRegionCommitmentsList,
+
+    -- ** compute.regionCommitments.update
+    ComputeRegionCommitmentsUpdateResource,
+    newComputeRegionCommitmentsUpdate,
+    ComputeRegionCommitmentsUpdate,
 
     -- ** compute.regionDiskTypes.get
-    , module Network.Google.Resource.Compute.RegionDiskTypes.Get
+    ComputeRegionDiskTypesGetResource,
+    newComputeRegionDiskTypesGet,
+    ComputeRegionDiskTypesGet,
 
     -- ** compute.regionDiskTypes.list
-    , module Network.Google.Resource.Compute.RegionDiskTypes.List
+    ComputeRegionDiskTypesListResource,
+    newComputeRegionDiskTypesList,
+    ComputeRegionDiskTypesList,
 
     -- ** compute.regionDisks.addResourcePolicies
-    , module Network.Google.Resource.Compute.RegionDisks.AddResourcePolicies
+    ComputeRegionDisksAddResourcePoliciesResource,
+    newComputeRegionDisksAddResourcePolicies,
+    ComputeRegionDisksAddResourcePolicies,
 
     -- ** compute.regionDisks.createSnapshot
-    , module Network.Google.Resource.Compute.RegionDisks.CreateSnapshot
+    ComputeRegionDisksCreateSnapshotResource,
+    newComputeRegionDisksCreateSnapshot,
+    ComputeRegionDisksCreateSnapshot,
 
     -- ** compute.regionDisks.delete
-    , module Network.Google.Resource.Compute.RegionDisks.Delete
+    ComputeRegionDisksDeleteResource,
+    newComputeRegionDisksDelete,
+    ComputeRegionDisksDelete,
 
     -- ** compute.regionDisks.get
-    , module Network.Google.Resource.Compute.RegionDisks.Get
+    ComputeRegionDisksGetResource,
+    newComputeRegionDisksGet,
+    ComputeRegionDisksGet,
 
     -- ** compute.regionDisks.getIamPolicy
-    , module Network.Google.Resource.Compute.RegionDisks.GetIAMPolicy
+    ComputeRegionDisksGetIamPolicyResource,
+    newComputeRegionDisksGetIamPolicy,
+    ComputeRegionDisksGetIamPolicy,
 
     -- ** compute.regionDisks.insert
-    , module Network.Google.Resource.Compute.RegionDisks.Insert
+    ComputeRegionDisksInsertResource,
+    newComputeRegionDisksInsert,
+    ComputeRegionDisksInsert,
 
     -- ** compute.regionDisks.list
-    , module Network.Google.Resource.Compute.RegionDisks.List
+    ComputeRegionDisksListResource,
+    newComputeRegionDisksList,
+    ComputeRegionDisksList,
 
     -- ** compute.regionDisks.removeResourcePolicies
-    , module Network.Google.Resource.Compute.RegionDisks.RemoveResourcePolicies
+    ComputeRegionDisksRemoveResourcePoliciesResource,
+    newComputeRegionDisksRemoveResourcePolicies,
+    ComputeRegionDisksRemoveResourcePolicies,
 
     -- ** compute.regionDisks.resize
-    , module Network.Google.Resource.Compute.RegionDisks.Resize
+    ComputeRegionDisksResizeResource,
+    newComputeRegionDisksResize,
+    ComputeRegionDisksResize,
 
     -- ** compute.regionDisks.setIamPolicy
-    , module Network.Google.Resource.Compute.RegionDisks.SetIAMPolicy
+    ComputeRegionDisksSetIamPolicyResource,
+    newComputeRegionDisksSetIamPolicy,
+    ComputeRegionDisksSetIamPolicy,
 
     -- ** compute.regionDisks.setLabels
-    , module Network.Google.Resource.Compute.RegionDisks.SetLabels
+    ComputeRegionDisksSetLabelsResource,
+    newComputeRegionDisksSetLabels,
+    ComputeRegionDisksSetLabels,
 
     -- ** compute.regionDisks.testIamPermissions
-    , module Network.Google.Resource.Compute.RegionDisks.TestIAMPermissions
+    ComputeRegionDisksTestIamPermissionsResource,
+    newComputeRegionDisksTestIamPermissions,
+    ComputeRegionDisksTestIamPermissions,
 
     -- ** compute.regionHealthCheckServices.delete
-    , module Network.Google.Resource.Compute.RegionHealthCheckServices.Delete
+    ComputeRegionHealthCheckServicesDeleteResource,
+    newComputeRegionHealthCheckServicesDelete,
+    ComputeRegionHealthCheckServicesDelete,
 
     -- ** compute.regionHealthCheckServices.get
-    , module Network.Google.Resource.Compute.RegionHealthCheckServices.Get
+    ComputeRegionHealthCheckServicesGetResource,
+    newComputeRegionHealthCheckServicesGet,
+    ComputeRegionHealthCheckServicesGet,
 
     -- ** compute.regionHealthCheckServices.insert
-    , module Network.Google.Resource.Compute.RegionHealthCheckServices.Insert
+    ComputeRegionHealthCheckServicesInsertResource,
+    newComputeRegionHealthCheckServicesInsert,
+    ComputeRegionHealthCheckServicesInsert,
 
     -- ** compute.regionHealthCheckServices.list
-    , module Network.Google.Resource.Compute.RegionHealthCheckServices.List
+    ComputeRegionHealthCheckServicesListResource,
+    newComputeRegionHealthCheckServicesList,
+    ComputeRegionHealthCheckServicesList,
 
     -- ** compute.regionHealthCheckServices.patch
-    , module Network.Google.Resource.Compute.RegionHealthCheckServices.Patch
+    ComputeRegionHealthCheckServicesPatchResource,
+    newComputeRegionHealthCheckServicesPatch,
+    ComputeRegionHealthCheckServicesPatch,
 
     -- ** compute.regionHealthChecks.delete
-    , module Network.Google.Resource.Compute.RegionHealthChecks.Delete
+    ComputeRegionHealthChecksDeleteResource,
+    newComputeRegionHealthChecksDelete,
+    ComputeRegionHealthChecksDelete,
 
     -- ** compute.regionHealthChecks.get
-    , module Network.Google.Resource.Compute.RegionHealthChecks.Get
+    ComputeRegionHealthChecksGetResource,
+    newComputeRegionHealthChecksGet,
+    ComputeRegionHealthChecksGet,
 
     -- ** compute.regionHealthChecks.insert
-    , module Network.Google.Resource.Compute.RegionHealthChecks.Insert
+    ComputeRegionHealthChecksInsertResource,
+    newComputeRegionHealthChecksInsert,
+    ComputeRegionHealthChecksInsert,
 
     -- ** compute.regionHealthChecks.list
-    , module Network.Google.Resource.Compute.RegionHealthChecks.List
+    ComputeRegionHealthChecksListResource,
+    newComputeRegionHealthChecksList,
+    ComputeRegionHealthChecksList,
 
     -- ** compute.regionHealthChecks.patch
-    , module Network.Google.Resource.Compute.RegionHealthChecks.Patch
+    ComputeRegionHealthChecksPatchResource,
+    newComputeRegionHealthChecksPatch,
+    ComputeRegionHealthChecksPatch,
 
     -- ** compute.regionHealthChecks.update
-    , module Network.Google.Resource.Compute.RegionHealthChecks.Update
+    ComputeRegionHealthChecksUpdateResource,
+    newComputeRegionHealthChecksUpdate,
+    ComputeRegionHealthChecksUpdate,
 
     -- ** compute.regionInstanceGroupManagers.abandonInstances
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.AbandonInstances
+    ComputeRegionInstanceGroupManagersAbandonInstancesResource,
+    newComputeRegionInstanceGroupManagersAbandonInstances,
+    ComputeRegionInstanceGroupManagersAbandonInstances,
 
     -- ** compute.regionInstanceGroupManagers.applyUpdatesToInstances
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
+    ComputeRegionInstanceGroupManagersApplyUpdatesToInstancesResource,
+    newComputeRegionInstanceGroupManagersApplyUpdatesToInstances,
+    ComputeRegionInstanceGroupManagersApplyUpdatesToInstances,
 
     -- ** compute.regionInstanceGroupManagers.createInstances
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.CreateInstances
+    ComputeRegionInstanceGroupManagersCreateInstancesResource,
+    newComputeRegionInstanceGroupManagersCreateInstances,
+    ComputeRegionInstanceGroupManagersCreateInstances,
 
     -- ** compute.regionInstanceGroupManagers.delete
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Delete
+    ComputeRegionInstanceGroupManagersDeleteResource,
+    newComputeRegionInstanceGroupManagersDelete,
+    ComputeRegionInstanceGroupManagersDelete,
 
     -- ** compute.regionInstanceGroupManagers.deleteInstances
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeleteInstances
+    ComputeRegionInstanceGroupManagersDeleteInstancesResource,
+    newComputeRegionInstanceGroupManagersDeleteInstances,
+    ComputeRegionInstanceGroupManagersDeleteInstances,
 
     -- ** compute.regionInstanceGroupManagers.deletePerInstanceConfigs
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
+    ComputeRegionInstanceGroupManagersDeletePerInstanceConfigsResource,
+    newComputeRegionInstanceGroupManagersDeletePerInstanceConfigs,
+    ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs,
 
     -- ** compute.regionInstanceGroupManagers.get
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Get
+    ComputeRegionInstanceGroupManagersGetResource,
+    newComputeRegionInstanceGroupManagersGet,
+    ComputeRegionInstanceGroupManagersGet,
 
     -- ** compute.regionInstanceGroupManagers.insert
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
+    ComputeRegionInstanceGroupManagersInsertResource,
+    newComputeRegionInstanceGroupManagersInsert,
+    ComputeRegionInstanceGroupManagersInsert,
 
     -- ** compute.regionInstanceGroupManagers.list
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
+    ComputeRegionInstanceGroupManagersListResource,
+    newComputeRegionInstanceGroupManagersList,
+    ComputeRegionInstanceGroupManagersList,
 
     -- ** compute.regionInstanceGroupManagers.listErrors
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListErrors
+    ComputeRegionInstanceGroupManagersListErrorsResource,
+    newComputeRegionInstanceGroupManagersListErrors,
+    ComputeRegionInstanceGroupManagersListErrors,
 
     -- ** compute.regionInstanceGroupManagers.listManagedInstances
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListManagedInstances
+    ComputeRegionInstanceGroupManagersListManagedInstancesResource,
+    newComputeRegionInstanceGroupManagersListManagedInstances,
+    ComputeRegionInstanceGroupManagersListManagedInstances,
 
     -- ** compute.regionInstanceGroupManagers.listPerInstanceConfigs
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListPerInstanceConfigs
+    ComputeRegionInstanceGroupManagersListPerInstanceConfigsResource,
+    newComputeRegionInstanceGroupManagersListPerInstanceConfigs,
+    ComputeRegionInstanceGroupManagersListPerInstanceConfigs,
 
     -- ** compute.regionInstanceGroupManagers.patch
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Patch
+    ComputeRegionInstanceGroupManagersPatchResource,
+    newComputeRegionInstanceGroupManagersPatch,
+    ComputeRegionInstanceGroupManagersPatch,
 
     -- ** compute.regionInstanceGroupManagers.patchPerInstanceConfigs
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
+    ComputeRegionInstanceGroupManagersPatchPerInstanceConfigsResource,
+    newComputeRegionInstanceGroupManagersPatchPerInstanceConfigs,
+    ComputeRegionInstanceGroupManagersPatchPerInstanceConfigs,
 
     -- ** compute.regionInstanceGroupManagers.recreateInstances
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.RecreateInstances
+    ComputeRegionInstanceGroupManagersRecreateInstancesResource,
+    newComputeRegionInstanceGroupManagersRecreateInstances,
+    ComputeRegionInstanceGroupManagersRecreateInstances,
 
     -- ** compute.regionInstanceGroupManagers.resize
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Resize
+    ComputeRegionInstanceGroupManagersResizeResource,
+    newComputeRegionInstanceGroupManagersResize,
+    ComputeRegionInstanceGroupManagersResize,
 
     -- ** compute.regionInstanceGroupManagers.setInstanceTemplate
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
+    ComputeRegionInstanceGroupManagersSetInstanceTemplateResource,
+    newComputeRegionInstanceGroupManagersSetInstanceTemplate,
+    ComputeRegionInstanceGroupManagersSetInstanceTemplate,
 
     -- ** compute.regionInstanceGroupManagers.setTargetPools
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetTargetPools
+    ComputeRegionInstanceGroupManagersSetTargetPoolsResource,
+    newComputeRegionInstanceGroupManagersSetTargetPools,
+    ComputeRegionInstanceGroupManagersSetTargetPools,
 
     -- ** compute.regionInstanceGroupManagers.updatePerInstanceConfigs
-    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
+    ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigsResource,
+    newComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs,
+    ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs,
 
     -- ** compute.regionInstanceGroups.get
-    , module Network.Google.Resource.Compute.RegionInstanceGroups.Get
+    ComputeRegionInstanceGroupsGetResource,
+    newComputeRegionInstanceGroupsGet,
+    ComputeRegionInstanceGroupsGet,
 
     -- ** compute.regionInstanceGroups.list
-    , module Network.Google.Resource.Compute.RegionInstanceGroups.List
+    ComputeRegionInstanceGroupsListResource,
+    newComputeRegionInstanceGroupsList,
+    ComputeRegionInstanceGroupsList,
 
     -- ** compute.regionInstanceGroups.listInstances
-    , module Network.Google.Resource.Compute.RegionInstanceGroups.ListInstances
+    ComputeRegionInstanceGroupsListInstancesResource,
+    newComputeRegionInstanceGroupsListInstances,
+    ComputeRegionInstanceGroupsListInstances,
 
     -- ** compute.regionInstanceGroups.setNamedPorts
-    , module Network.Google.Resource.Compute.RegionInstanceGroups.SetNamedPorts
+    ComputeRegionInstanceGroupsSetNamedPortsResource,
+    newComputeRegionInstanceGroupsSetNamedPorts,
+    ComputeRegionInstanceGroupsSetNamedPorts,
 
     -- ** compute.regionInstances.bulkInsert
-    , module Network.Google.Resource.Compute.RegionInstances.BulkInsert
+    ComputeRegionInstancesBulkInsertResource,
+    newComputeRegionInstancesBulkInsert,
+    ComputeRegionInstancesBulkInsert,
 
     -- ** compute.regionNetworkEndpointGroups.delete
-    , module Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Delete
+    ComputeRegionNetworkEndpointGroupsDeleteResource,
+    newComputeRegionNetworkEndpointGroupsDelete,
+    ComputeRegionNetworkEndpointGroupsDelete,
 
     -- ** compute.regionNetworkEndpointGroups.get
-    , module Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Get
+    ComputeRegionNetworkEndpointGroupsGetResource,
+    newComputeRegionNetworkEndpointGroupsGet,
+    ComputeRegionNetworkEndpointGroupsGet,
 
     -- ** compute.regionNetworkEndpointGroups.insert
-    , module Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Insert
+    ComputeRegionNetworkEndpointGroupsInsertResource,
+    newComputeRegionNetworkEndpointGroupsInsert,
+    ComputeRegionNetworkEndpointGroupsInsert,
 
     -- ** compute.regionNetworkEndpointGroups.list
-    , module Network.Google.Resource.Compute.RegionNetworkEndpointGroups.List
+    ComputeRegionNetworkEndpointGroupsListResource,
+    newComputeRegionNetworkEndpointGroupsList,
+    ComputeRegionNetworkEndpointGroupsList,
+
+    -- ** compute.regionNetworkFirewallPolicies.addAssociation
+    ComputeRegionNetworkFirewallPoliciesAddAssociationResource,
+    newComputeRegionNetworkFirewallPoliciesAddAssociation,
+    ComputeRegionNetworkFirewallPoliciesAddAssociation,
+
+    -- ** compute.regionNetworkFirewallPolicies.addRule
+    ComputeRegionNetworkFirewallPoliciesAddRuleResource,
+    newComputeRegionNetworkFirewallPoliciesAddRule,
+    ComputeRegionNetworkFirewallPoliciesAddRule,
+
+    -- ** compute.regionNetworkFirewallPolicies.cloneRules
+    ComputeRegionNetworkFirewallPoliciesCloneRulesResource,
+    newComputeRegionNetworkFirewallPoliciesCloneRules,
+    ComputeRegionNetworkFirewallPoliciesCloneRules,
+
+    -- ** compute.regionNetworkFirewallPolicies.delete
+    ComputeRegionNetworkFirewallPoliciesDeleteResource,
+    newComputeRegionNetworkFirewallPoliciesDelete,
+    ComputeRegionNetworkFirewallPoliciesDelete,
+
+    -- ** compute.regionNetworkFirewallPolicies.get
+    ComputeRegionNetworkFirewallPoliciesGetResource,
+    newComputeRegionNetworkFirewallPoliciesGet,
+    ComputeRegionNetworkFirewallPoliciesGet,
+
+    -- ** compute.regionNetworkFirewallPolicies.getAssociation
+    ComputeRegionNetworkFirewallPoliciesGetAssociationResource,
+    newComputeRegionNetworkFirewallPoliciesGetAssociation,
+    ComputeRegionNetworkFirewallPoliciesGetAssociation,
+
+    -- ** compute.regionNetworkFirewallPolicies.getEffectiveFirewalls
+    ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewallsResource,
+    newComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls,
+    ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls,
+
+    -- ** compute.regionNetworkFirewallPolicies.getIamPolicy
+    ComputeRegionNetworkFirewallPoliciesGetIamPolicyResource,
+    newComputeRegionNetworkFirewallPoliciesGetIamPolicy,
+    ComputeRegionNetworkFirewallPoliciesGetIamPolicy,
+
+    -- ** compute.regionNetworkFirewallPolicies.getRule
+    ComputeRegionNetworkFirewallPoliciesGetRuleResource,
+    newComputeRegionNetworkFirewallPoliciesGetRule,
+    ComputeRegionNetworkFirewallPoliciesGetRule,
+
+    -- ** compute.regionNetworkFirewallPolicies.insert
+    ComputeRegionNetworkFirewallPoliciesInsertResource,
+    newComputeRegionNetworkFirewallPoliciesInsert,
+    ComputeRegionNetworkFirewallPoliciesInsert,
+
+    -- ** compute.regionNetworkFirewallPolicies.list
+    ComputeRegionNetworkFirewallPoliciesListResource,
+    newComputeRegionNetworkFirewallPoliciesList,
+    ComputeRegionNetworkFirewallPoliciesList,
+
+    -- ** compute.regionNetworkFirewallPolicies.patch
+    ComputeRegionNetworkFirewallPoliciesPatchResource,
+    newComputeRegionNetworkFirewallPoliciesPatch,
+    ComputeRegionNetworkFirewallPoliciesPatch,
+
+    -- ** compute.regionNetworkFirewallPolicies.patchRule
+    ComputeRegionNetworkFirewallPoliciesPatchRuleResource,
+    newComputeRegionNetworkFirewallPoliciesPatchRule,
+    ComputeRegionNetworkFirewallPoliciesPatchRule,
+
+    -- ** compute.regionNetworkFirewallPolicies.removeAssociation
+    ComputeRegionNetworkFirewallPoliciesRemoveAssociationResource,
+    newComputeRegionNetworkFirewallPoliciesRemoveAssociation,
+    ComputeRegionNetworkFirewallPoliciesRemoveAssociation,
+
+    -- ** compute.regionNetworkFirewallPolicies.removeRule
+    ComputeRegionNetworkFirewallPoliciesRemoveRuleResource,
+    newComputeRegionNetworkFirewallPoliciesRemoveRule,
+    ComputeRegionNetworkFirewallPoliciesRemoveRule,
+
+    -- ** compute.regionNetworkFirewallPolicies.setIamPolicy
+    ComputeRegionNetworkFirewallPoliciesSetIamPolicyResource,
+    newComputeRegionNetworkFirewallPoliciesSetIamPolicy,
+    ComputeRegionNetworkFirewallPoliciesSetIamPolicy,
+
+    -- ** compute.regionNetworkFirewallPolicies.testIamPermissions
+    ComputeRegionNetworkFirewallPoliciesTestIamPermissionsResource,
+    newComputeRegionNetworkFirewallPoliciesTestIamPermissions,
+    ComputeRegionNetworkFirewallPoliciesTestIamPermissions,
 
     -- ** compute.regionNotificationEndpoints.delete
-    , module Network.Google.Resource.Compute.RegionNotificationEndpoints.Delete
+    ComputeRegionNotificationEndpointsDeleteResource,
+    newComputeRegionNotificationEndpointsDelete,
+    ComputeRegionNotificationEndpointsDelete,
 
     -- ** compute.regionNotificationEndpoints.get
-    , module Network.Google.Resource.Compute.RegionNotificationEndpoints.Get
+    ComputeRegionNotificationEndpointsGetResource,
+    newComputeRegionNotificationEndpointsGet,
+    ComputeRegionNotificationEndpointsGet,
 
     -- ** compute.regionNotificationEndpoints.insert
-    , module Network.Google.Resource.Compute.RegionNotificationEndpoints.Insert
+    ComputeRegionNotificationEndpointsInsertResource,
+    newComputeRegionNotificationEndpointsInsert,
+    ComputeRegionNotificationEndpointsInsert,
 
     -- ** compute.regionNotificationEndpoints.list
-    , module Network.Google.Resource.Compute.RegionNotificationEndpoints.List
+    ComputeRegionNotificationEndpointsListResource,
+    newComputeRegionNotificationEndpointsList,
+    ComputeRegionNotificationEndpointsList,
 
     -- ** compute.regionOperations.delete
-    , module Network.Google.Resource.Compute.RegionOperations.Delete
+    ComputeRegionOperationsDeleteResource,
+    newComputeRegionOperationsDelete,
+    ComputeRegionOperationsDelete,
 
     -- ** compute.regionOperations.get
-    , module Network.Google.Resource.Compute.RegionOperations.Get
+    ComputeRegionOperationsGetResource,
+    newComputeRegionOperationsGet,
+    ComputeRegionOperationsGet,
 
     -- ** compute.regionOperations.list
-    , module Network.Google.Resource.Compute.RegionOperations.List
+    ComputeRegionOperationsListResource,
+    newComputeRegionOperationsList,
+    ComputeRegionOperationsList,
 
     -- ** compute.regionOperations.wait
-    , module Network.Google.Resource.Compute.RegionOperations.Wait
+    ComputeRegionOperationsWaitResource,
+    newComputeRegionOperationsWait,
+    ComputeRegionOperationsWait,
 
     -- ** compute.regionSslCertificates.delete
-    , module Network.Google.Resource.Compute.RegionSSLCertificates.Delete
+    ComputeRegionSslCertificatesDeleteResource,
+    newComputeRegionSslCertificatesDelete,
+    ComputeRegionSslCertificatesDelete,
 
     -- ** compute.regionSslCertificates.get
-    , module Network.Google.Resource.Compute.RegionSSLCertificates.Get
+    ComputeRegionSslCertificatesGetResource,
+    newComputeRegionSslCertificatesGet,
+    ComputeRegionSslCertificatesGet,
 
     -- ** compute.regionSslCertificates.insert
-    , module Network.Google.Resource.Compute.RegionSSLCertificates.Insert
+    ComputeRegionSslCertificatesInsertResource,
+    newComputeRegionSslCertificatesInsert,
+    ComputeRegionSslCertificatesInsert,
 
     -- ** compute.regionSslCertificates.list
-    , module Network.Google.Resource.Compute.RegionSSLCertificates.List
+    ComputeRegionSslCertificatesListResource,
+    newComputeRegionSslCertificatesList,
+    ComputeRegionSslCertificatesList,
 
     -- ** compute.regionTargetHttpProxies.delete
-    , module Network.Google.Resource.Compute.RegionTargetHTTPProxies.Delete
+    ComputeRegionTargetHttpProxiesDeleteResource,
+    newComputeRegionTargetHttpProxiesDelete,
+    ComputeRegionTargetHttpProxiesDelete,
 
     -- ** compute.regionTargetHttpProxies.get
-    , module Network.Google.Resource.Compute.RegionTargetHTTPProxies.Get
+    ComputeRegionTargetHttpProxiesGetResource,
+    newComputeRegionTargetHttpProxiesGet,
+    ComputeRegionTargetHttpProxiesGet,
 
     -- ** compute.regionTargetHttpProxies.insert
-    , module Network.Google.Resource.Compute.RegionTargetHTTPProxies.Insert
+    ComputeRegionTargetHttpProxiesInsertResource,
+    newComputeRegionTargetHttpProxiesInsert,
+    ComputeRegionTargetHttpProxiesInsert,
 
     -- ** compute.regionTargetHttpProxies.list
-    , module Network.Google.Resource.Compute.RegionTargetHTTPProxies.List
+    ComputeRegionTargetHttpProxiesListResource,
+    newComputeRegionTargetHttpProxiesList,
+    ComputeRegionTargetHttpProxiesList,
 
     -- ** compute.regionTargetHttpProxies.setUrlMap
-    , module Network.Google.Resource.Compute.RegionTargetHTTPProxies.SetURLMap
+    ComputeRegionTargetHttpProxiesSetUrlMapResource,
+    newComputeRegionTargetHttpProxiesSetUrlMap,
+    ComputeRegionTargetHttpProxiesSetUrlMap,
 
     -- ** compute.regionTargetHttpsProxies.delete
-    , module Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Delete
+    ComputeRegionTargetHttpsProxiesDeleteResource,
+    newComputeRegionTargetHttpsProxiesDelete,
+    ComputeRegionTargetHttpsProxiesDelete,
 
     -- ** compute.regionTargetHttpsProxies.get
-    , module Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Get
+    ComputeRegionTargetHttpsProxiesGetResource,
+    newComputeRegionTargetHttpsProxiesGet,
+    ComputeRegionTargetHttpsProxiesGet,
 
     -- ** compute.regionTargetHttpsProxies.insert
-    , module Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Insert
+    ComputeRegionTargetHttpsProxiesInsertResource,
+    newComputeRegionTargetHttpsProxiesInsert,
+    ComputeRegionTargetHttpsProxiesInsert,
 
     -- ** compute.regionTargetHttpsProxies.list
-    , module Network.Google.Resource.Compute.RegionTargetHTTPSProxies.List
+    ComputeRegionTargetHttpsProxiesListResource,
+    newComputeRegionTargetHttpsProxiesList,
+    ComputeRegionTargetHttpsProxiesList,
+
+    -- ** compute.regionTargetHttpsProxies.patch
+    ComputeRegionTargetHttpsProxiesPatchResource,
+    newComputeRegionTargetHttpsProxiesPatch,
+    ComputeRegionTargetHttpsProxiesPatch,
 
     -- ** compute.regionTargetHttpsProxies.setSslCertificates
-    , module Network.Google.Resource.Compute.RegionTargetHTTPSProxies.SetSSLCertificates
+    ComputeRegionTargetHttpsProxiesSetSslCertificatesResource,
+    newComputeRegionTargetHttpsProxiesSetSslCertificates,
+    ComputeRegionTargetHttpsProxiesSetSslCertificates,
 
     -- ** compute.regionTargetHttpsProxies.setUrlMap
-    , module Network.Google.Resource.Compute.RegionTargetHTTPSProxies.SetURLMap
+    ComputeRegionTargetHttpsProxiesSetUrlMapResource,
+    newComputeRegionTargetHttpsProxiesSetUrlMap,
+    ComputeRegionTargetHttpsProxiesSetUrlMap,
 
     -- ** compute.regionUrlMaps.delete
-    , module Network.Google.Resource.Compute.RegionURLMaps.Delete
+    ComputeRegionUrlMapsDeleteResource,
+    newComputeRegionUrlMapsDelete,
+    ComputeRegionUrlMapsDelete,
 
     -- ** compute.regionUrlMaps.get
-    , module Network.Google.Resource.Compute.RegionURLMaps.Get
+    ComputeRegionUrlMapsGetResource,
+    newComputeRegionUrlMapsGet,
+    ComputeRegionUrlMapsGet,
 
     -- ** compute.regionUrlMaps.insert
-    , module Network.Google.Resource.Compute.RegionURLMaps.Insert
+    ComputeRegionUrlMapsInsertResource,
+    newComputeRegionUrlMapsInsert,
+    ComputeRegionUrlMapsInsert,
 
     -- ** compute.regionUrlMaps.list
-    , module Network.Google.Resource.Compute.RegionURLMaps.List
+    ComputeRegionUrlMapsListResource,
+    newComputeRegionUrlMapsList,
+    ComputeRegionUrlMapsList,
 
     -- ** compute.regionUrlMaps.patch
-    , module Network.Google.Resource.Compute.RegionURLMaps.Patch
+    ComputeRegionUrlMapsPatchResource,
+    newComputeRegionUrlMapsPatch,
+    ComputeRegionUrlMapsPatch,
 
     -- ** compute.regionUrlMaps.update
-    , module Network.Google.Resource.Compute.RegionURLMaps.Update
+    ComputeRegionUrlMapsUpdateResource,
+    newComputeRegionUrlMapsUpdate,
+    ComputeRegionUrlMapsUpdate,
 
     -- ** compute.regionUrlMaps.validate
-    , module Network.Google.Resource.Compute.RegionURLMaps.Validate
+    ComputeRegionUrlMapsValidateResource,
+    newComputeRegionUrlMapsValidate,
+    ComputeRegionUrlMapsValidate,
 
     -- ** compute.regions.get
-    , module Network.Google.Resource.Compute.Regions.Get
+    ComputeRegionsGetResource,
+    newComputeRegionsGet,
+    ComputeRegionsGet,
 
     -- ** compute.regions.list
-    , module Network.Google.Resource.Compute.Regions.List
+    ComputeRegionsListResource,
+    newComputeRegionsList,
+    ComputeRegionsList,
 
     -- ** compute.reservations.aggregatedList
-    , module Network.Google.Resource.Compute.Reservations.AggregatedList
+    ComputeReservationsAggregatedListResource,
+    newComputeReservationsAggregatedList,
+    ComputeReservationsAggregatedList,
 
     -- ** compute.reservations.delete
-    , module Network.Google.Resource.Compute.Reservations.Delete
+    ComputeReservationsDeleteResource,
+    newComputeReservationsDelete,
+    ComputeReservationsDelete,
 
     -- ** compute.reservations.get
-    , module Network.Google.Resource.Compute.Reservations.Get
+    ComputeReservationsGetResource,
+    newComputeReservationsGet,
+    ComputeReservationsGet,
 
     -- ** compute.reservations.getIamPolicy
-    , module Network.Google.Resource.Compute.Reservations.GetIAMPolicy
+    ComputeReservationsGetIamPolicyResource,
+    newComputeReservationsGetIamPolicy,
+    ComputeReservationsGetIamPolicy,
 
     -- ** compute.reservations.insert
-    , module Network.Google.Resource.Compute.Reservations.Insert
+    ComputeReservationsInsertResource,
+    newComputeReservationsInsert,
+    ComputeReservationsInsert,
 
     -- ** compute.reservations.list
-    , module Network.Google.Resource.Compute.Reservations.List
+    ComputeReservationsListResource,
+    newComputeReservationsList,
+    ComputeReservationsList,
 
     -- ** compute.reservations.resize
-    , module Network.Google.Resource.Compute.Reservations.Resize
+    ComputeReservationsResizeResource,
+    newComputeReservationsResize,
+    ComputeReservationsResize,
 
     -- ** compute.reservations.setIamPolicy
-    , module Network.Google.Resource.Compute.Reservations.SetIAMPolicy
+    ComputeReservationsSetIamPolicyResource,
+    newComputeReservationsSetIamPolicy,
+    ComputeReservationsSetIamPolicy,
 
     -- ** compute.reservations.testIamPermissions
-    , module Network.Google.Resource.Compute.Reservations.TestIAMPermissions
+    ComputeReservationsTestIamPermissionsResource,
+    newComputeReservationsTestIamPermissions,
+    ComputeReservationsTestIamPermissions,
+
+    -- ** compute.reservations.update
+    ComputeReservationsUpdateResource,
+    newComputeReservationsUpdate,
+    ComputeReservationsUpdate,
 
     -- ** compute.resourcePolicies.aggregatedList
-    , module Network.Google.Resource.Compute.ResourcePolicies.AggregatedList
+    ComputeResourcePoliciesAggregatedListResource,
+    newComputeResourcePoliciesAggregatedList,
+    ComputeResourcePoliciesAggregatedList,
 
     -- ** compute.resourcePolicies.delete
-    , module Network.Google.Resource.Compute.ResourcePolicies.Delete
+    ComputeResourcePoliciesDeleteResource,
+    newComputeResourcePoliciesDelete,
+    ComputeResourcePoliciesDelete,
 
     -- ** compute.resourcePolicies.get
-    , module Network.Google.Resource.Compute.ResourcePolicies.Get
+    ComputeResourcePoliciesGetResource,
+    newComputeResourcePoliciesGet,
+    ComputeResourcePoliciesGet,
 
     -- ** compute.resourcePolicies.getIamPolicy
-    , module Network.Google.Resource.Compute.ResourcePolicies.GetIAMPolicy
+    ComputeResourcePoliciesGetIamPolicyResource,
+    newComputeResourcePoliciesGetIamPolicy,
+    ComputeResourcePoliciesGetIamPolicy,
 
     -- ** compute.resourcePolicies.insert
-    , module Network.Google.Resource.Compute.ResourcePolicies.Insert
+    ComputeResourcePoliciesInsertResource,
+    newComputeResourcePoliciesInsert,
+    ComputeResourcePoliciesInsert,
 
     -- ** compute.resourcePolicies.list
-    , module Network.Google.Resource.Compute.ResourcePolicies.List
+    ComputeResourcePoliciesListResource,
+    newComputeResourcePoliciesList,
+    ComputeResourcePoliciesList,
 
     -- ** compute.resourcePolicies.setIamPolicy
-    , module Network.Google.Resource.Compute.ResourcePolicies.SetIAMPolicy
+    ComputeResourcePoliciesSetIamPolicyResource,
+    newComputeResourcePoliciesSetIamPolicy,
+    ComputeResourcePoliciesSetIamPolicy,
 
     -- ** compute.resourcePolicies.testIamPermissions
-    , module Network.Google.Resource.Compute.ResourcePolicies.TestIAMPermissions
+    ComputeResourcePoliciesTestIamPermissionsResource,
+    newComputeResourcePoliciesTestIamPermissions,
+    ComputeResourcePoliciesTestIamPermissions,
 
     -- ** compute.routers.aggregatedList
-    , module Network.Google.Resource.Compute.Routers.AggregatedList
+    ComputeRoutersAggregatedListResource,
+    newComputeRoutersAggregatedList,
+    ComputeRoutersAggregatedList,
 
     -- ** compute.routers.delete
-    , module Network.Google.Resource.Compute.Routers.Delete
+    ComputeRoutersDeleteResource,
+    newComputeRoutersDelete,
+    ComputeRoutersDelete,
 
     -- ** compute.routers.get
-    , module Network.Google.Resource.Compute.Routers.Get
+    ComputeRoutersGetResource,
+    newComputeRoutersGet,
+    ComputeRoutersGet,
 
     -- ** compute.routers.getNatMappingInfo
-    , module Network.Google.Resource.Compute.Routers.GetNATMAppingInfo
+    ComputeRoutersGetNatMappingInfoResource,
+    newComputeRoutersGetNatMappingInfo,
+    ComputeRoutersGetNatMappingInfo,
 
     -- ** compute.routers.getRouterStatus
-    , module Network.Google.Resource.Compute.Routers.GetRouterStatus
+    ComputeRoutersGetRouterStatusResource,
+    newComputeRoutersGetRouterStatus,
+    ComputeRoutersGetRouterStatus,
 
     -- ** compute.routers.insert
-    , module Network.Google.Resource.Compute.Routers.Insert
+    ComputeRoutersInsertResource,
+    newComputeRoutersInsert,
+    ComputeRoutersInsert,
 
     -- ** compute.routers.list
-    , module Network.Google.Resource.Compute.Routers.List
+    ComputeRoutersListResource,
+    newComputeRoutersList,
+    ComputeRoutersList,
 
     -- ** compute.routers.patch
-    , module Network.Google.Resource.Compute.Routers.Patch
+    ComputeRoutersPatchResource,
+    newComputeRoutersPatch,
+    ComputeRoutersPatch,
 
     -- ** compute.routers.preview
-    , module Network.Google.Resource.Compute.Routers.Preview
+    ComputeRoutersPreviewResource,
+    newComputeRoutersPreview,
+    ComputeRoutersPreview,
 
     -- ** compute.routers.update
-    , module Network.Google.Resource.Compute.Routers.Update
+    ComputeRoutersUpdateResource,
+    newComputeRoutersUpdate,
+    ComputeRoutersUpdate,
 
     -- ** compute.routes.delete
-    , module Network.Google.Resource.Compute.Routes.Delete
+    ComputeRoutesDeleteResource,
+    newComputeRoutesDelete,
+    ComputeRoutesDelete,
 
     -- ** compute.routes.get
-    , module Network.Google.Resource.Compute.Routes.Get
+    ComputeRoutesGetResource,
+    newComputeRoutesGet,
+    ComputeRoutesGet,
 
     -- ** compute.routes.insert
-    , module Network.Google.Resource.Compute.Routes.Insert
+    ComputeRoutesInsertResource,
+    newComputeRoutesInsert,
+    ComputeRoutesInsert,
 
     -- ** compute.routes.list
-    , module Network.Google.Resource.Compute.Routes.List
+    ComputeRoutesListResource,
+    newComputeRoutesList,
+    ComputeRoutesList,
 
     -- ** compute.securityPolicies.addRule
-    , module Network.Google.Resource.Compute.SecurityPolicies.AddRule
+    ComputeSecurityPoliciesAddRuleResource,
+    newComputeSecurityPoliciesAddRule,
+    ComputeSecurityPoliciesAddRule,
 
     -- ** compute.securityPolicies.delete
-    , module Network.Google.Resource.Compute.SecurityPolicies.Delete
+    ComputeSecurityPoliciesDeleteResource,
+    newComputeSecurityPoliciesDelete,
+    ComputeSecurityPoliciesDelete,
 
     -- ** compute.securityPolicies.get
-    , module Network.Google.Resource.Compute.SecurityPolicies.Get
+    ComputeSecurityPoliciesGetResource,
+    newComputeSecurityPoliciesGet,
+    ComputeSecurityPoliciesGet,
 
     -- ** compute.securityPolicies.getRule
-    , module Network.Google.Resource.Compute.SecurityPolicies.GetRule
+    ComputeSecurityPoliciesGetRuleResource,
+    newComputeSecurityPoliciesGetRule,
+    ComputeSecurityPoliciesGetRule,
 
     -- ** compute.securityPolicies.insert
-    , module Network.Google.Resource.Compute.SecurityPolicies.Insert
+    ComputeSecurityPoliciesInsertResource,
+    newComputeSecurityPoliciesInsert,
+    ComputeSecurityPoliciesInsert,
 
     -- ** compute.securityPolicies.list
-    , module Network.Google.Resource.Compute.SecurityPolicies.List
+    ComputeSecurityPoliciesListResource,
+    newComputeSecurityPoliciesList,
+    ComputeSecurityPoliciesList,
 
     -- ** compute.securityPolicies.listPreconfiguredExpressionSets
-    , module Network.Google.Resource.Compute.SecurityPolicies.ListPreConfiguredExpressionSets
+    ComputeSecurityPoliciesListPreconfiguredExpressionSetsResource,
+    newComputeSecurityPoliciesListPreconfiguredExpressionSets,
+    ComputeSecurityPoliciesListPreconfiguredExpressionSets,
 
     -- ** compute.securityPolicies.patch
-    , module Network.Google.Resource.Compute.SecurityPolicies.Patch
+    ComputeSecurityPoliciesPatchResource,
+    newComputeSecurityPoliciesPatch,
+    ComputeSecurityPoliciesPatch,
 
     -- ** compute.securityPolicies.patchRule
-    , module Network.Google.Resource.Compute.SecurityPolicies.PatchRule
+    ComputeSecurityPoliciesPatchRuleResource,
+    newComputeSecurityPoliciesPatchRule,
+    ComputeSecurityPoliciesPatchRule,
 
     -- ** compute.securityPolicies.removeRule
-    , module Network.Google.Resource.Compute.SecurityPolicies.RemoveRule
+    ComputeSecurityPoliciesRemoveRuleResource,
+    newComputeSecurityPoliciesRemoveRule,
+    ComputeSecurityPoliciesRemoveRule,
+
+    -- ** compute.serviceAttachments.aggregatedList
+    ComputeServiceAttachmentsAggregatedListResource,
+    newComputeServiceAttachmentsAggregatedList,
+    ComputeServiceAttachmentsAggregatedList,
+
+    -- ** compute.serviceAttachments.delete
+    ComputeServiceAttachmentsDeleteResource,
+    newComputeServiceAttachmentsDelete,
+    ComputeServiceAttachmentsDelete,
+
+    -- ** compute.serviceAttachments.get
+    ComputeServiceAttachmentsGetResource,
+    newComputeServiceAttachmentsGet,
+    ComputeServiceAttachmentsGet,
+
+    -- ** compute.serviceAttachments.getIamPolicy
+    ComputeServiceAttachmentsGetIamPolicyResource,
+    newComputeServiceAttachmentsGetIamPolicy,
+    ComputeServiceAttachmentsGetIamPolicy,
+
+    -- ** compute.serviceAttachments.insert
+    ComputeServiceAttachmentsInsertResource,
+    newComputeServiceAttachmentsInsert,
+    ComputeServiceAttachmentsInsert,
+
+    -- ** compute.serviceAttachments.list
+    ComputeServiceAttachmentsListResource,
+    newComputeServiceAttachmentsList,
+    ComputeServiceAttachmentsList,
+
+    -- ** compute.serviceAttachments.patch
+    ComputeServiceAttachmentsPatchResource,
+    newComputeServiceAttachmentsPatch,
+    ComputeServiceAttachmentsPatch,
+
+    -- ** compute.serviceAttachments.setIamPolicy
+    ComputeServiceAttachmentsSetIamPolicyResource,
+    newComputeServiceAttachmentsSetIamPolicy,
+    ComputeServiceAttachmentsSetIamPolicy,
+
+    -- ** compute.serviceAttachments.testIamPermissions
+    ComputeServiceAttachmentsTestIamPermissionsResource,
+    newComputeServiceAttachmentsTestIamPermissions,
+    ComputeServiceAttachmentsTestIamPermissions,
 
     -- ** compute.snapshots.delete
-    , module Network.Google.Resource.Compute.Snapshots.Delete
+    ComputeSnapshotsDeleteResource,
+    newComputeSnapshotsDelete,
+    ComputeSnapshotsDelete,
 
     -- ** compute.snapshots.get
-    , module Network.Google.Resource.Compute.Snapshots.Get
+    ComputeSnapshotsGetResource,
+    newComputeSnapshotsGet,
+    ComputeSnapshotsGet,
 
     -- ** compute.snapshots.getIamPolicy
-    , module Network.Google.Resource.Compute.Snapshots.GetIAMPolicy
+    ComputeSnapshotsGetIamPolicyResource,
+    newComputeSnapshotsGetIamPolicy,
+    ComputeSnapshotsGetIamPolicy,
+
+    -- ** compute.snapshots.insert
+    ComputeSnapshotsInsertResource,
+    newComputeSnapshotsInsert,
+    ComputeSnapshotsInsert,
 
     -- ** compute.snapshots.list
-    , module Network.Google.Resource.Compute.Snapshots.List
+    ComputeSnapshotsListResource,
+    newComputeSnapshotsList,
+    ComputeSnapshotsList,
 
     -- ** compute.snapshots.setIamPolicy
-    , module Network.Google.Resource.Compute.Snapshots.SetIAMPolicy
+    ComputeSnapshotsSetIamPolicyResource,
+    newComputeSnapshotsSetIamPolicy,
+    ComputeSnapshotsSetIamPolicy,
 
     -- ** compute.snapshots.setLabels
-    , module Network.Google.Resource.Compute.Snapshots.SetLabels
+    ComputeSnapshotsSetLabelsResource,
+    newComputeSnapshotsSetLabels,
+    ComputeSnapshotsSetLabels,
 
     -- ** compute.snapshots.testIamPermissions
-    , module Network.Google.Resource.Compute.Snapshots.TestIAMPermissions
+    ComputeSnapshotsTestIamPermissionsResource,
+    newComputeSnapshotsTestIamPermissions,
+    ComputeSnapshotsTestIamPermissions,
 
     -- ** compute.sslCertificates.aggregatedList
-    , module Network.Google.Resource.Compute.SSLCertificates.AggregatedList
+    ComputeSslCertificatesAggregatedListResource,
+    newComputeSslCertificatesAggregatedList,
+    ComputeSslCertificatesAggregatedList,
 
     -- ** compute.sslCertificates.delete
-    , module Network.Google.Resource.Compute.SSLCertificates.Delete
+    ComputeSslCertificatesDeleteResource,
+    newComputeSslCertificatesDelete,
+    ComputeSslCertificatesDelete,
 
     -- ** compute.sslCertificates.get
-    , module Network.Google.Resource.Compute.SSLCertificates.Get
+    ComputeSslCertificatesGetResource,
+    newComputeSslCertificatesGet,
+    ComputeSslCertificatesGet,
 
     -- ** compute.sslCertificates.insert
-    , module Network.Google.Resource.Compute.SSLCertificates.Insert
+    ComputeSslCertificatesInsertResource,
+    newComputeSslCertificatesInsert,
+    ComputeSslCertificatesInsert,
 
     -- ** compute.sslCertificates.list
-    , module Network.Google.Resource.Compute.SSLCertificates.List
+    ComputeSslCertificatesListResource,
+    newComputeSslCertificatesList,
+    ComputeSslCertificatesList,
 
     -- ** compute.sslPolicies.delete
-    , module Network.Google.Resource.Compute.SSLPolicies.Delete
+    ComputeSslPoliciesDeleteResource,
+    newComputeSslPoliciesDelete,
+    ComputeSslPoliciesDelete,
 
     -- ** compute.sslPolicies.get
-    , module Network.Google.Resource.Compute.SSLPolicies.Get
+    ComputeSslPoliciesGetResource,
+    newComputeSslPoliciesGet,
+    ComputeSslPoliciesGet,
 
     -- ** compute.sslPolicies.insert
-    , module Network.Google.Resource.Compute.SSLPolicies.Insert
+    ComputeSslPoliciesInsertResource,
+    newComputeSslPoliciesInsert,
+    ComputeSslPoliciesInsert,
 
     -- ** compute.sslPolicies.list
-    , module Network.Google.Resource.Compute.SSLPolicies.List
+    ComputeSslPoliciesListResource,
+    newComputeSslPoliciesList,
+    ComputeSslPoliciesList,
 
     -- ** compute.sslPolicies.listAvailableFeatures
-    , module Network.Google.Resource.Compute.SSLPolicies.ListAvailableFeatures
+    ComputeSslPoliciesListAvailableFeaturesResource,
+    newComputeSslPoliciesListAvailableFeatures,
+    ComputeSslPoliciesListAvailableFeatures,
 
     -- ** compute.sslPolicies.patch
-    , module Network.Google.Resource.Compute.SSLPolicies.Patch
+    ComputeSslPoliciesPatchResource,
+    newComputeSslPoliciesPatch,
+    ComputeSslPoliciesPatch,
 
     -- ** compute.subnetworks.aggregatedList
-    , module Network.Google.Resource.Compute.Subnetworks.AggregatedList
+    ComputeSubnetworksAggregatedListResource,
+    newComputeSubnetworksAggregatedList,
+    ComputeSubnetworksAggregatedList,
 
     -- ** compute.subnetworks.delete
-    , module Network.Google.Resource.Compute.Subnetworks.Delete
+    ComputeSubnetworksDeleteResource,
+    newComputeSubnetworksDelete,
+    ComputeSubnetworksDelete,
 
     -- ** compute.subnetworks.expandIpCidrRange
-    , module Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
+    ComputeSubnetworksExpandIpCidrRangeResource,
+    newComputeSubnetworksExpandIpCidrRange,
+    ComputeSubnetworksExpandIpCidrRange,
 
     -- ** compute.subnetworks.get
-    , module Network.Google.Resource.Compute.Subnetworks.Get
+    ComputeSubnetworksGetResource,
+    newComputeSubnetworksGet,
+    ComputeSubnetworksGet,
 
     -- ** compute.subnetworks.getIamPolicy
-    , module Network.Google.Resource.Compute.Subnetworks.GetIAMPolicy
+    ComputeSubnetworksGetIamPolicyResource,
+    newComputeSubnetworksGetIamPolicy,
+    ComputeSubnetworksGetIamPolicy,
 
     -- ** compute.subnetworks.insert
-    , module Network.Google.Resource.Compute.Subnetworks.Insert
+    ComputeSubnetworksInsertResource,
+    newComputeSubnetworksInsert,
+    ComputeSubnetworksInsert,
 
     -- ** compute.subnetworks.list
-    , module Network.Google.Resource.Compute.Subnetworks.List
+    ComputeSubnetworksListResource,
+    newComputeSubnetworksList,
+    ComputeSubnetworksList,
 
     -- ** compute.subnetworks.listUsable
-    , module Network.Google.Resource.Compute.Subnetworks.ListUsable
+    ComputeSubnetworksListUsableResource,
+    newComputeSubnetworksListUsable,
+    ComputeSubnetworksListUsable,
 
     -- ** compute.subnetworks.patch
-    , module Network.Google.Resource.Compute.Subnetworks.Patch
+    ComputeSubnetworksPatchResource,
+    newComputeSubnetworksPatch,
+    ComputeSubnetworksPatch,
 
     -- ** compute.subnetworks.setIamPolicy
-    , module Network.Google.Resource.Compute.Subnetworks.SetIAMPolicy
+    ComputeSubnetworksSetIamPolicyResource,
+    newComputeSubnetworksSetIamPolicy,
+    ComputeSubnetworksSetIamPolicy,
 
     -- ** compute.subnetworks.setPrivateIpGoogleAccess
-    , module Network.Google.Resource.Compute.Subnetworks.SetPrivateIPGoogleAccess
+    ComputeSubnetworksSetPrivateIpGoogleAccessResource,
+    newComputeSubnetworksSetPrivateIpGoogleAccess,
+    ComputeSubnetworksSetPrivateIpGoogleAccess,
 
     -- ** compute.subnetworks.testIamPermissions
-    , module Network.Google.Resource.Compute.Subnetworks.TestIAMPermissions
+    ComputeSubnetworksTestIamPermissionsResource,
+    newComputeSubnetworksTestIamPermissions,
+    ComputeSubnetworksTestIamPermissions,
 
     -- ** compute.targetGrpcProxies.delete
-    , module Network.Google.Resource.Compute.TargetGrpcProxies.Delete
+    ComputeTargetGrpcProxiesDeleteResource,
+    newComputeTargetGrpcProxiesDelete,
+    ComputeTargetGrpcProxiesDelete,
 
     -- ** compute.targetGrpcProxies.get
-    , module Network.Google.Resource.Compute.TargetGrpcProxies.Get
+    ComputeTargetGrpcProxiesGetResource,
+    newComputeTargetGrpcProxiesGet,
+    ComputeTargetGrpcProxiesGet,
 
     -- ** compute.targetGrpcProxies.insert
-    , module Network.Google.Resource.Compute.TargetGrpcProxies.Insert
+    ComputeTargetGrpcProxiesInsertResource,
+    newComputeTargetGrpcProxiesInsert,
+    ComputeTargetGrpcProxiesInsert,
 
     -- ** compute.targetGrpcProxies.list
-    , module Network.Google.Resource.Compute.TargetGrpcProxies.List
+    ComputeTargetGrpcProxiesListResource,
+    newComputeTargetGrpcProxiesList,
+    ComputeTargetGrpcProxiesList,
 
     -- ** compute.targetGrpcProxies.patch
-    , module Network.Google.Resource.Compute.TargetGrpcProxies.Patch
+    ComputeTargetGrpcProxiesPatchResource,
+    newComputeTargetGrpcProxiesPatch,
+    ComputeTargetGrpcProxiesPatch,
 
     -- ** compute.targetHttpProxies.aggregatedList
-    , module Network.Google.Resource.Compute.TargetHTTPProxies.AggregatedList
+    ComputeTargetHttpProxiesAggregatedListResource,
+    newComputeTargetHttpProxiesAggregatedList,
+    ComputeTargetHttpProxiesAggregatedList,
 
     -- ** compute.targetHttpProxies.delete
-    , module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
+    ComputeTargetHttpProxiesDeleteResource,
+    newComputeTargetHttpProxiesDelete,
+    ComputeTargetHttpProxiesDelete,
 
     -- ** compute.targetHttpProxies.get
-    , module Network.Google.Resource.Compute.TargetHTTPProxies.Get
+    ComputeTargetHttpProxiesGetResource,
+    newComputeTargetHttpProxiesGet,
+    ComputeTargetHttpProxiesGet,
 
     -- ** compute.targetHttpProxies.insert
-    , module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
+    ComputeTargetHttpProxiesInsertResource,
+    newComputeTargetHttpProxiesInsert,
+    ComputeTargetHttpProxiesInsert,
 
     -- ** compute.targetHttpProxies.list
-    , module Network.Google.Resource.Compute.TargetHTTPProxies.List
+    ComputeTargetHttpProxiesListResource,
+    newComputeTargetHttpProxiesList,
+    ComputeTargetHttpProxiesList,
 
     -- ** compute.targetHttpProxies.patch
-    , module Network.Google.Resource.Compute.TargetHTTPProxies.Patch
+    ComputeTargetHttpProxiesPatchResource,
+    newComputeTargetHttpProxiesPatch,
+    ComputeTargetHttpProxiesPatch,
 
     -- ** compute.targetHttpProxies.setUrlMap
-    , module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
+    ComputeTargetHttpProxiesSetUrlMapResource,
+    newComputeTargetHttpProxiesSetUrlMap,
+    ComputeTargetHttpProxiesSetUrlMap,
 
     -- ** compute.targetHttpsProxies.aggregatedList
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.AggregatedList
+    ComputeTargetHttpsProxiesAggregatedListResource,
+    newComputeTargetHttpsProxiesAggregatedList,
+    ComputeTargetHttpsProxiesAggregatedList,
 
     -- ** compute.targetHttpsProxies.delete
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
+    ComputeTargetHttpsProxiesDeleteResource,
+    newComputeTargetHttpsProxiesDelete,
+    ComputeTargetHttpsProxiesDelete,
 
     -- ** compute.targetHttpsProxies.get
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.Get
+    ComputeTargetHttpsProxiesGetResource,
+    newComputeTargetHttpsProxiesGet,
+    ComputeTargetHttpsProxiesGet,
 
     -- ** compute.targetHttpsProxies.insert
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
+    ComputeTargetHttpsProxiesInsertResource,
+    newComputeTargetHttpsProxiesInsert,
+    ComputeTargetHttpsProxiesInsert,
 
     -- ** compute.targetHttpsProxies.list
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.List
+    ComputeTargetHttpsProxiesListResource,
+    newComputeTargetHttpsProxiesList,
+    ComputeTargetHttpsProxiesList,
 
     -- ** compute.targetHttpsProxies.patch
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.Patch
+    ComputeTargetHttpsProxiesPatchResource,
+    newComputeTargetHttpsProxiesPatch,
+    ComputeTargetHttpsProxiesPatch,
 
     -- ** compute.targetHttpsProxies.setQuicOverride
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetQuicOverride
+    ComputeTargetHttpsProxiesSetQuicOverrideResource,
+    newComputeTargetHttpsProxiesSetQuicOverride,
+    ComputeTargetHttpsProxiesSetQuicOverride,
 
     -- ** compute.targetHttpsProxies.setSslCertificates
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
+    ComputeTargetHttpsProxiesSetSslCertificatesResource,
+    newComputeTargetHttpsProxiesSetSslCertificates,
+    ComputeTargetHttpsProxiesSetSslCertificates,
 
     -- ** compute.targetHttpsProxies.setSslPolicy
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLPolicy
+    ComputeTargetHttpsProxiesSetSslPolicyResource,
+    newComputeTargetHttpsProxiesSetSslPolicy,
+    ComputeTargetHttpsProxiesSetSslPolicy,
 
     -- ** compute.targetHttpsProxies.setUrlMap
-    , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
+    ComputeTargetHttpsProxiesSetUrlMapResource,
+    newComputeTargetHttpsProxiesSetUrlMap,
+    ComputeTargetHttpsProxiesSetUrlMap,
 
     -- ** compute.targetInstances.aggregatedList
-    , module Network.Google.Resource.Compute.TargetInstances.AggregatedList
+    ComputeTargetInstancesAggregatedListResource,
+    newComputeTargetInstancesAggregatedList,
+    ComputeTargetInstancesAggregatedList,
 
     -- ** compute.targetInstances.delete
-    , module Network.Google.Resource.Compute.TargetInstances.Delete
+    ComputeTargetInstancesDeleteResource,
+    newComputeTargetInstancesDelete,
+    ComputeTargetInstancesDelete,
 
     -- ** compute.targetInstances.get
-    , module Network.Google.Resource.Compute.TargetInstances.Get
+    ComputeTargetInstancesGetResource,
+    newComputeTargetInstancesGet,
+    ComputeTargetInstancesGet,
 
     -- ** compute.targetInstances.insert
-    , module Network.Google.Resource.Compute.TargetInstances.Insert
+    ComputeTargetInstancesInsertResource,
+    newComputeTargetInstancesInsert,
+    ComputeTargetInstancesInsert,
 
     -- ** compute.targetInstances.list
-    , module Network.Google.Resource.Compute.TargetInstances.List
+    ComputeTargetInstancesListResource,
+    newComputeTargetInstancesList,
+    ComputeTargetInstancesList,
 
     -- ** compute.targetPools.addHealthCheck
-    , module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
+    ComputeTargetPoolsAddHealthCheckResource,
+    newComputeTargetPoolsAddHealthCheck,
+    ComputeTargetPoolsAddHealthCheck,
 
     -- ** compute.targetPools.addInstance
-    , module Network.Google.Resource.Compute.TargetPools.AddInstance
+    ComputeTargetPoolsAddInstanceResource,
+    newComputeTargetPoolsAddInstance,
+    ComputeTargetPoolsAddInstance,
 
     -- ** compute.targetPools.aggregatedList
-    , module Network.Google.Resource.Compute.TargetPools.AggregatedList
+    ComputeTargetPoolsAggregatedListResource,
+    newComputeTargetPoolsAggregatedList,
+    ComputeTargetPoolsAggregatedList,
 
     -- ** compute.targetPools.delete
-    , module Network.Google.Resource.Compute.TargetPools.Delete
+    ComputeTargetPoolsDeleteResource,
+    newComputeTargetPoolsDelete,
+    ComputeTargetPoolsDelete,
 
     -- ** compute.targetPools.get
-    , module Network.Google.Resource.Compute.TargetPools.Get
+    ComputeTargetPoolsGetResource,
+    newComputeTargetPoolsGet,
+    ComputeTargetPoolsGet,
 
     -- ** compute.targetPools.getHealth
-    , module Network.Google.Resource.Compute.TargetPools.GetHealth
+    ComputeTargetPoolsGetHealthResource,
+    newComputeTargetPoolsGetHealth,
+    ComputeTargetPoolsGetHealth,
 
     -- ** compute.targetPools.insert
-    , module Network.Google.Resource.Compute.TargetPools.Insert
+    ComputeTargetPoolsInsertResource,
+    newComputeTargetPoolsInsert,
+    ComputeTargetPoolsInsert,
 
     -- ** compute.targetPools.list
-    , module Network.Google.Resource.Compute.TargetPools.List
+    ComputeTargetPoolsListResource,
+    newComputeTargetPoolsList,
+    ComputeTargetPoolsList,
 
     -- ** compute.targetPools.removeHealthCheck
-    , module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
+    ComputeTargetPoolsRemoveHealthCheckResource,
+    newComputeTargetPoolsRemoveHealthCheck,
+    ComputeTargetPoolsRemoveHealthCheck,
 
     -- ** compute.targetPools.removeInstance
-    , module Network.Google.Resource.Compute.TargetPools.RemoveInstance
+    ComputeTargetPoolsRemoveInstanceResource,
+    newComputeTargetPoolsRemoveInstance,
+    ComputeTargetPoolsRemoveInstance,
 
     -- ** compute.targetPools.setBackup
-    , module Network.Google.Resource.Compute.TargetPools.SetBackup
+    ComputeTargetPoolsSetBackupResource,
+    newComputeTargetPoolsSetBackup,
+    ComputeTargetPoolsSetBackup,
 
     -- ** compute.targetSslProxies.delete
-    , module Network.Google.Resource.Compute.TargetSSLProxies.Delete
+    ComputeTargetSslProxiesDeleteResource,
+    newComputeTargetSslProxiesDelete,
+    ComputeTargetSslProxiesDelete,
 
     -- ** compute.targetSslProxies.get
-    , module Network.Google.Resource.Compute.TargetSSLProxies.Get
+    ComputeTargetSslProxiesGetResource,
+    newComputeTargetSslProxiesGet,
+    ComputeTargetSslProxiesGet,
 
     -- ** compute.targetSslProxies.insert
-    , module Network.Google.Resource.Compute.TargetSSLProxies.Insert
+    ComputeTargetSslProxiesInsertResource,
+    newComputeTargetSslProxiesInsert,
+    ComputeTargetSslProxiesInsert,
 
     -- ** compute.targetSslProxies.list
-    , module Network.Google.Resource.Compute.TargetSSLProxies.List
+    ComputeTargetSslProxiesListResource,
+    newComputeTargetSslProxiesList,
+    ComputeTargetSslProxiesList,
 
     -- ** compute.targetSslProxies.setBackendService
-    , module Network.Google.Resource.Compute.TargetSSLProxies.SetBackendService
+    ComputeTargetSslProxiesSetBackendServiceResource,
+    newComputeTargetSslProxiesSetBackendService,
+    ComputeTargetSslProxiesSetBackendService,
 
     -- ** compute.targetSslProxies.setProxyHeader
-    , module Network.Google.Resource.Compute.TargetSSLProxies.SetProxyHeader
+    ComputeTargetSslProxiesSetProxyHeaderResource,
+    newComputeTargetSslProxiesSetProxyHeader,
+    ComputeTargetSslProxiesSetProxyHeader,
 
     -- ** compute.targetSslProxies.setSslCertificates
-    , module Network.Google.Resource.Compute.TargetSSLProxies.SetSSLCertificates
+    ComputeTargetSslProxiesSetSslCertificatesResource,
+    newComputeTargetSslProxiesSetSslCertificates,
+    ComputeTargetSslProxiesSetSslCertificates,
 
     -- ** compute.targetSslProxies.setSslPolicy
-    , module Network.Google.Resource.Compute.TargetSSLProxies.SetSSLPolicy
+    ComputeTargetSslProxiesSetSslPolicyResource,
+    newComputeTargetSslProxiesSetSslPolicy,
+    ComputeTargetSslProxiesSetSslPolicy,
 
     -- ** compute.targetTcpProxies.delete
-    , module Network.Google.Resource.Compute.TargetTCPProxies.Delete
+    ComputeTargetTcpProxiesDeleteResource,
+    newComputeTargetTcpProxiesDelete,
+    ComputeTargetTcpProxiesDelete,
 
     -- ** compute.targetTcpProxies.get
-    , module Network.Google.Resource.Compute.TargetTCPProxies.Get
+    ComputeTargetTcpProxiesGetResource,
+    newComputeTargetTcpProxiesGet,
+    ComputeTargetTcpProxiesGet,
 
     -- ** compute.targetTcpProxies.insert
-    , module Network.Google.Resource.Compute.TargetTCPProxies.Insert
+    ComputeTargetTcpProxiesInsertResource,
+    newComputeTargetTcpProxiesInsert,
+    ComputeTargetTcpProxiesInsert,
 
     -- ** compute.targetTcpProxies.list
-    , module Network.Google.Resource.Compute.TargetTCPProxies.List
+    ComputeTargetTcpProxiesListResource,
+    newComputeTargetTcpProxiesList,
+    ComputeTargetTcpProxiesList,
 
     -- ** compute.targetTcpProxies.setBackendService
-    , module Network.Google.Resource.Compute.TargetTCPProxies.SetBackendService
+    ComputeTargetTcpProxiesSetBackendServiceResource,
+    newComputeTargetTcpProxiesSetBackendService,
+    ComputeTargetTcpProxiesSetBackendService,
 
     -- ** compute.targetTcpProxies.setProxyHeader
-    , module Network.Google.Resource.Compute.TargetTCPProxies.SetProxyHeader
+    ComputeTargetTcpProxiesSetProxyHeaderResource,
+    newComputeTargetTcpProxiesSetProxyHeader,
+    ComputeTargetTcpProxiesSetProxyHeader,
 
     -- ** compute.targetVpnGateways.aggregatedList
-    , module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
+    ComputeTargetVpnGatewaysAggregatedListResource,
+    newComputeTargetVpnGatewaysAggregatedList,
+    ComputeTargetVpnGatewaysAggregatedList,
 
     -- ** compute.targetVpnGateways.delete
-    , module Network.Google.Resource.Compute.TargetVPNGateways.Delete
+    ComputeTargetVpnGatewaysDeleteResource,
+    newComputeTargetVpnGatewaysDelete,
+    ComputeTargetVpnGatewaysDelete,
 
     -- ** compute.targetVpnGateways.get
-    , module Network.Google.Resource.Compute.TargetVPNGateways.Get
+    ComputeTargetVpnGatewaysGetResource,
+    newComputeTargetVpnGatewaysGet,
+    ComputeTargetVpnGatewaysGet,
 
     -- ** compute.targetVpnGateways.insert
-    , module Network.Google.Resource.Compute.TargetVPNGateways.Insert
+    ComputeTargetVpnGatewaysInsertResource,
+    newComputeTargetVpnGatewaysInsert,
+    ComputeTargetVpnGatewaysInsert,
 
     -- ** compute.targetVpnGateways.list
-    , module Network.Google.Resource.Compute.TargetVPNGateways.List
+    ComputeTargetVpnGatewaysListResource,
+    newComputeTargetVpnGatewaysList,
+    ComputeTargetVpnGatewaysList,
 
     -- ** compute.urlMaps.aggregatedList
-    , module Network.Google.Resource.Compute.URLMaps.AggregatedList
+    ComputeUrlMapsAggregatedListResource,
+    newComputeUrlMapsAggregatedList,
+    ComputeUrlMapsAggregatedList,
 
     -- ** compute.urlMaps.delete
-    , module Network.Google.Resource.Compute.URLMaps.Delete
+    ComputeUrlMapsDeleteResource,
+    newComputeUrlMapsDelete,
+    ComputeUrlMapsDelete,
 
     -- ** compute.urlMaps.get
-    , module Network.Google.Resource.Compute.URLMaps.Get
+    ComputeUrlMapsGetResource,
+    newComputeUrlMapsGet,
+    ComputeUrlMapsGet,
 
     -- ** compute.urlMaps.insert
-    , module Network.Google.Resource.Compute.URLMaps.Insert
+    ComputeUrlMapsInsertResource,
+    newComputeUrlMapsInsert,
+    ComputeUrlMapsInsert,
 
     -- ** compute.urlMaps.invalidateCache
-    , module Network.Google.Resource.Compute.URLMaps.InvalidateCache
+    ComputeUrlMapsInvalidateCacheResource,
+    newComputeUrlMapsInvalidateCache,
+    ComputeUrlMapsInvalidateCache,
 
     -- ** compute.urlMaps.list
-    , module Network.Google.Resource.Compute.URLMaps.List
+    ComputeUrlMapsListResource,
+    newComputeUrlMapsList,
+    ComputeUrlMapsList,
 
     -- ** compute.urlMaps.patch
-    , module Network.Google.Resource.Compute.URLMaps.Patch
+    ComputeUrlMapsPatchResource,
+    newComputeUrlMapsPatch,
+    ComputeUrlMapsPatch,
 
     -- ** compute.urlMaps.update
-    , module Network.Google.Resource.Compute.URLMaps.Update
+    ComputeUrlMapsUpdateResource,
+    newComputeUrlMapsUpdate,
+    ComputeUrlMapsUpdate,
 
     -- ** compute.urlMaps.validate
-    , module Network.Google.Resource.Compute.URLMaps.Validate
+    ComputeUrlMapsValidateResource,
+    newComputeUrlMapsValidate,
+    ComputeUrlMapsValidate,
 
     -- ** compute.vpnGateways.aggregatedList
-    , module Network.Google.Resource.Compute.VPNGateways.AggregatedList
+    ComputeVpnGatewaysAggregatedListResource,
+    newComputeVpnGatewaysAggregatedList,
+    ComputeVpnGatewaysAggregatedList,
 
     -- ** compute.vpnGateways.delete
-    , module Network.Google.Resource.Compute.VPNGateways.Delete
+    ComputeVpnGatewaysDeleteResource,
+    newComputeVpnGatewaysDelete,
+    ComputeVpnGatewaysDelete,
 
     -- ** compute.vpnGateways.get
-    , module Network.Google.Resource.Compute.VPNGateways.Get
+    ComputeVpnGatewaysGetResource,
+    newComputeVpnGatewaysGet,
+    ComputeVpnGatewaysGet,
 
     -- ** compute.vpnGateways.getStatus
-    , module Network.Google.Resource.Compute.VPNGateways.GetStatus
+    ComputeVpnGatewaysGetStatusResource,
+    newComputeVpnGatewaysGetStatus,
+    ComputeVpnGatewaysGetStatus,
 
     -- ** compute.vpnGateways.insert
-    , module Network.Google.Resource.Compute.VPNGateways.Insert
+    ComputeVpnGatewaysInsertResource,
+    newComputeVpnGatewaysInsert,
+    ComputeVpnGatewaysInsert,
 
     -- ** compute.vpnGateways.list
-    , module Network.Google.Resource.Compute.VPNGateways.List
+    ComputeVpnGatewaysListResource,
+    newComputeVpnGatewaysList,
+    ComputeVpnGatewaysList,
 
     -- ** compute.vpnGateways.setLabels
-    , module Network.Google.Resource.Compute.VPNGateways.SetLabels
+    ComputeVpnGatewaysSetLabelsResource,
+    newComputeVpnGatewaysSetLabels,
+    ComputeVpnGatewaysSetLabels,
 
     -- ** compute.vpnGateways.testIamPermissions
-    , module Network.Google.Resource.Compute.VPNGateways.TestIAMPermissions
+    ComputeVpnGatewaysTestIamPermissionsResource,
+    newComputeVpnGatewaysTestIamPermissions,
+    ComputeVpnGatewaysTestIamPermissions,
 
     -- ** compute.vpnTunnels.aggregatedList
-    , module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
+    ComputeVpnTunnelsAggregatedListResource,
+    newComputeVpnTunnelsAggregatedList,
+    ComputeVpnTunnelsAggregatedList,
 
     -- ** compute.vpnTunnels.delete
-    , module Network.Google.Resource.Compute.VPNTunnels.Delete
+    ComputeVpnTunnelsDeleteResource,
+    newComputeVpnTunnelsDelete,
+    ComputeVpnTunnelsDelete,
 
     -- ** compute.vpnTunnels.get
-    , module Network.Google.Resource.Compute.VPNTunnels.Get
+    ComputeVpnTunnelsGetResource,
+    newComputeVpnTunnelsGet,
+    ComputeVpnTunnelsGet,
 
     -- ** compute.vpnTunnels.insert
-    , module Network.Google.Resource.Compute.VPNTunnels.Insert
+    ComputeVpnTunnelsInsertResource,
+    newComputeVpnTunnelsInsert,
+    ComputeVpnTunnelsInsert,
 
     -- ** compute.vpnTunnels.list
-    , module Network.Google.Resource.Compute.VPNTunnels.List
+    ComputeVpnTunnelsListResource,
+    newComputeVpnTunnelsList,
+    ComputeVpnTunnelsList,
 
     -- ** compute.zoneOperations.delete
-    , module Network.Google.Resource.Compute.ZoneOperations.Delete
+    ComputeZoneOperationsDeleteResource,
+    newComputeZoneOperationsDelete,
+    ComputeZoneOperationsDelete,
 
     -- ** compute.zoneOperations.get
-    , module Network.Google.Resource.Compute.ZoneOperations.Get
+    ComputeZoneOperationsGetResource,
+    newComputeZoneOperationsGet,
+    ComputeZoneOperationsGet,
 
     -- ** compute.zoneOperations.list
-    , module Network.Google.Resource.Compute.ZoneOperations.List
+    ComputeZoneOperationsListResource,
+    newComputeZoneOperationsList,
+    ComputeZoneOperationsList,
 
     -- ** compute.zoneOperations.wait
-    , module Network.Google.Resource.Compute.ZoneOperations.Wait
+    ComputeZoneOperationsWaitResource,
+    newComputeZoneOperationsWait,
+    ComputeZoneOperationsWait,
 
     -- ** compute.zones.get
-    , module Network.Google.Resource.Compute.Zones.Get
+    ComputeZonesGetResource,
+    newComputeZonesGet,
+    ComputeZonesGet,
 
     -- ** compute.zones.list
-    , module Network.Google.Resource.Compute.Zones.List
+    ComputeZonesListResource,
+    newComputeZonesList,
+    ComputeZonesList,
 
     -- * Types
 
-    -- ** HTTPSHealthCheckListWarningCode
-    , HTTPSHealthCheckListWarningCode (..)
-
-    -- ** RegionInstanceGroupManagersListErrorsResponse
-    , RegionInstanceGroupManagersListErrorsResponse
-    , regionInstanceGroupManagersListErrorsResponse
-    , rigmlerNextPageToken
-    , rigmlerItems
-
-    -- ** InstanceAggregatedListWarning
-    , InstanceAggregatedListWarning
-    , instanceAggregatedListWarning
-    , ialwData
-    , ialwCode
-    , ialwMessage
-
-    -- ** TargetHTTPSProxyList
-    , TargetHTTPSProxyList
-    , targetHTTPSProxyList
-    , thplNextPageToken
-    , thplKind
-    , thplItems
-    , thplSelfLink
-    , thplWarning
-    , thplId
-
-    -- ** RoutersScopedList
-    , RoutersScopedList
-    , routersScopedList
-    , rslRouters
-    , rslWarning
-
-    -- ** RouterStatusResponse
-    , RouterStatusResponse
-    , routerStatusResponse
-    , rsrKind
-    , rsrResult
-
-    -- ** RegionInstanceGroupManagersDeleteInstancesRequest
-    , RegionInstanceGroupManagersDeleteInstancesRequest
-    , regionInstanceGroupManagersDeleteInstancesRequest
-    , rigmdirInstances
-
-    -- ** BackendBucketCdnPolicyCacheMode
-    , BackendBucketCdnPolicyCacheMode (..)
-
-    -- ** InterconnectDiagnosticsLinkLACPStatus
-    , InterconnectDiagnosticsLinkLACPStatus
-    , interconnectDiagnosticsLinkLACPStatus
-    , idllacpsState
-    , idllacpsNeighborSystemId
-    , idllacpsGoogleSystemId
-
-    -- ** AdvancedMachineFeatures
-    , AdvancedMachineFeatures
-    , advancedMachineFeatures
-    , amfThreadsPerCore
-    , amfEnableNestedVirtualization
-
-    -- ** InterconnectAttachmentState
-    , InterconnectAttachmentState (..)
-
-    -- ** AddressesScopedList
-    , AddressesScopedList
-    , addressesScopedList
-    , aslAddresses
-    , aslWarning
-
-    -- ** OperationWarningsItemDataItem
-    , OperationWarningsItemDataItem
-    , operationWarningsItemDataItem
-    , owidiValue
-    , owidiKey
-
-    -- ** SchedulingOnHostMaintenance
-    , SchedulingOnHostMaintenance (..)
-
-    -- ** InstanceGroupManagerUpdatePolicy
-    , InstanceGroupManagerUpdatePolicy
-    , instanceGroupManagerUpdatePolicy
-    , igmupInstanceRedistributionType
-    , igmupMaxSurge
-    , igmupMaxUnavailable
-    , igmupMinimalAction
-    , igmupType
-    , igmupReplacementMethod
-
-    -- ** RegionInstanceGroupsListInstancesRequest
-    , RegionInstanceGroupsListInstancesRequest
-    , regionInstanceGroupsListInstancesRequest
-    , riglirInstanceState
-    , riglirPortName
-
-    -- ** HTTPHeaderMatch
-    , HTTPHeaderMatch
-    , hTTPHeaderMatch
-    , httphmSuffixMatch
-    , httphmHeaderName
-    , httphmRangeMatch
-    , httphmPresentMatch
-    , httphmExactMatch
-    , httphmPrefixMatch
-    , httphmRegexMatch
-    , httphmInvertMatch
-
-    -- ** PacketMirroringsScopedListWarning
-    , PacketMirroringsScopedListWarning
-    , packetMirroringsScopedListWarning
-    , pmslwData
-    , pmslwCode
-    , pmslwMessage
-
-    -- ** RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction
-    , RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction (..)
-
-    -- ** BackendServiceAggregatedListWarning
-    , BackendServiceAggregatedListWarning
-    , backendServiceAggregatedListWarning
-    , bsalwData
-    , bsalwCode
-    , bsalwMessage
-
-    -- ** ExchangedPeeringRoute
-    , ExchangedPeeringRoute
-    , exchangedPeeringRoute
-    , eprImported
-    , eprPriority
-    , eprDestRange
-    , eprNextHopRegion
-    , eprType
-
-    -- ** SSLPolicy
-    , SSLPolicy
-    , sslPolicy
-    , spKind
-    , spFingerprint
-    , spProFile
-    , spWarnings
-    , spCustomFeatures
-    , spSelfLink
-    , spName
-    , spCreationTimestamp
-    , spEnabledFeatures
-    , spId
-    , spMinTLSVersion
-    , spDescription
-
-    -- ** AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
-    , AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType (..)
-
-    -- ** BackendServiceListWarningDataItem
-    , BackendServiceListWarningDataItem
-    , backendServiceListWarningDataItem
-    , bslwdiValue
-    , bslwdiKey
-
-    -- ** FirewallDeniedItem
-    , FirewallDeniedItem
-    , firewallDeniedItem
-    , fdiIPProtocol
-    , fdiPorts
-
-    -- ** InstanceGroupManagersAbandonInstancesRequest
-    , InstanceGroupManagersAbandonInstancesRequest
-    , instanceGroupManagersAbandonInstancesRequest
-    , igmairInstances
-
-    -- ** MachineTypeAggregatedListItems
-    , MachineTypeAggregatedListItems
-    , machineTypeAggregatedListItems
-    , mtaliAddtional
-
-    -- ** TargetHTTPProxyAggregatedListItems
-    , TargetHTTPProxyAggregatedListItems
-    , targetHTTPProxyAggregatedListItems
-    , thttppaliAddtional
-
-    -- ** BackendServiceListWarningCode
-    , BackendServiceListWarningCode (..)
-
-    -- ** SubnetworkStackType
-    , SubnetworkStackType (..)
-
-    -- ** DiskTypeAggregatedListItems
-    , DiskTypeAggregatedListItems
-    , diskTypeAggregatedListItems
-    , dtaliAddtional
-
-    -- ** PreservedStatePreservedDiskAutoDelete
-    , PreservedStatePreservedDiskAutoDelete (..)
-
-    -- ** DistributionPolicyTargetShape
-    , DistributionPolicyTargetShape (..)
-
-    -- ** InstancesSetLabelsRequest
-    , InstancesSetLabelsRequest
-    , instancesSetLabelsRequest
-    , islrLabels
-    , islrLabelFingerprint
-
-    -- ** RouterAggregatedList
-    , RouterAggregatedList
-    , routerAggregatedList
-    , ralUnreachables
-    , ralNextPageToken
-    , ralKind
-    , ralItems
-    , ralSelfLink
-    , ralWarning
-    , ralId
-
-    -- ** GlobalNetworkEndpointGroupsDetachEndpointsRequest
-    , GlobalNetworkEndpointGroupsDetachEndpointsRequest
-    , globalNetworkEndpointGroupsDetachEndpointsRequest
-    , gnegderNetworkEndpoints
-
-    -- ** FirewallList
-    , FirewallList
-    , firewallList
-    , flNextPageToken
-    , flKind
-    , flItems
-    , flSelfLink
-    , flWarning
-    , flId
-
-    -- ** InstancesScopedListWarning
-    , InstancesScopedListWarning
-    , instancesScopedListWarning
-    , islwData
-    , islwCode
-    , islwMessage
-
-    -- ** RegionInstanceGroupManagersRecreateRequest
-    , RegionInstanceGroupManagersRecreateRequest
-    , regionInstanceGroupManagersRecreateRequest
-    , rigmrrInstances
-
-    -- ** InstanceLabels
-    , InstanceLabels
-    , instanceLabels
-    , ilAddtional
-
-    -- ** HealthCheckLogConfig
-    , HealthCheckLogConfig
-    , healthCheckLogConfig
-    , hclcEnable
-
-    -- ** InstanceListWarningCode
-    , InstanceListWarningCode (..)
-
-    -- ** TargetHTTPSProxyQuicOverride
-    , TargetHTTPSProxyQuicOverride (..)
-
-    -- ** BackendServicesScopedListWarning
-    , BackendServicesScopedListWarning
-    , backendServicesScopedListWarning
-    , bsslwData
-    , bsslwCode
-    , bsslwMessage
-
-    -- ** PacketMirroringAggregatedListWarning
-    , PacketMirroringAggregatedListWarning
-    , packetMirroringAggregatedListWarning
-    , pmalwData
-    , pmalwCode
-    , pmalwMessage
-
-    -- ** PacketMirroringListWarningDataItem
-    , PacketMirroringListWarningDataItem
-    , packetMirroringListWarningDataItem
-    , pmlwdiValue
-    , pmlwdiKey
-
-    -- ** SecurityPolicyRuleMatcher
-    , SecurityPolicyRuleMatcher
-    , securityPolicyRuleMatcher
-    , sprmVersionedExpr
-    , sprmExpr
-    , sprmConfig
-
-    -- ** PublicDelegatedPrefixPublicDelegatedSubPrefix
-    , PublicDelegatedPrefixPublicDelegatedSubPrefix
-    , publicDelegatedPrefixPublicDelegatedSubPrefix
-    , pdppdspIsAddress
-    , pdppdspStatus
-    , pdppdspDelegateeProject
-    , pdppdspName
-    , pdppdspIPCIdRRange
-    , pdppdspRegion
-    , pdppdspDescription
-
-    -- ** SubnetworkPurpose
-    , SubnetworkPurpose (..)
-
-    -- ** HealthChecksAggregatedListWarning
-    , HealthChecksAggregatedListWarning
-    , healthChecksAggregatedListWarning
-    , hcalwData
-    , hcalwCode
-    , hcalwMessage
-
-    -- ** PerInstanceConfig
-    , PerInstanceConfig
-    , perInstanceConfig
-    , picStatus
-    , picFingerprint
-    , picName
-    , picPreservedState
-
-    -- ** PacketMirroringListWarningCode
-    , PacketMirroringListWarningCode (..)
-
-    -- ** InstanceGroupList
-    , InstanceGroupList
-    , instanceGroupList
-    , iglNextPageToken
-    , iglKind
-    , iglItems
-    , iglSelfLink
-    , iglWarning
-    , iglId
-
-    -- ** InstancesSetMachineTypeRequest
-    , InstancesSetMachineTypeRequest
-    , instancesSetMachineTypeRequest
-    , ismtrMachineType
-
-    -- ** VMEndpointNATMAppings
-    , VMEndpointNATMAppings
-    , vMEndpointNATMAppings
-    , vmenatmaInstanceName
-    , vmenatmaInterfaceNATMAppings
-
-    -- ** ReservationStatus
-    , ReservationStatus (..)
-
-    -- ** CustomerEncryptionKey
-    , CustomerEncryptionKey
-    , customerEncryptionKey
-    , cekKmsKeyServiceAccount
-    , cekKmsKeyName
-    , cekSha256
-    , cekRawKey
-
-    -- ** AutoscalerAggregatedListItems
-    , AutoscalerAggregatedListItems
-    , autoscalerAggregatedListItems
-    , aaliAddtional
-
-    -- ** InstanceListWarningDataItem
-    , InstanceListWarningDataItem
-    , instanceListWarningDataItem
-    , ilwdiValue
-    , ilwdiKey
-
-    -- ** InstanceGroupManagersSetInstanceTemplateRequest
-    , InstanceGroupManagersSetInstanceTemplateRequest
-    , instanceGroupManagersSetInstanceTemplateRequest
-    , igmsitrInstanceTemplate
-
-    -- ** InterconnectAttachmentEncryption
-    , InterconnectAttachmentEncryption (..)
-
-    -- ** RouterNATNATIPAllocateOption
-    , RouterNATNATIPAllocateOption (..)
-
-    -- ** Screenshot
-    , Screenshot
-    , screenshot
-    , sContents
-    , sKind
-
-    -- ** GuestAttributesValue
-    , GuestAttributesValue
-    , guestAttributesValue
-    , gavItems
-
-    -- ** InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
-    , InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
-    , instancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
-    , igefrefpRules
-    , igefrefpShortName
-    , igefrefpName
-    , igefrefpDisplayName
-    , igefrefpType
-
-    -- ** DeprecationStatus
-    , DeprecationStatus
-    , deprecationStatus
-    , dsState
-    , dsDeleted
-    , dsReplacement
-    , dsObsolete
-    , dsDeprecated
-
-    -- ** HTTPRouteRuleMatch
-    , HTTPRouteRuleMatch
-    , hTTPRouteRuleMatch
-    , httprrmHeaderMatches
-    , httprrmFullPathMatch
-    , httprrmQueryParameterMatches
-    , httprrmIgnoreCase
-    , httprrmPrefixMatch
-    , httprrmMetadataFilters
-    , httprrmRegexMatch
-
-    -- ** HTTPSHealthCheckListWarningDataItem
-    , HTTPSHealthCheckListWarningDataItem
-    , httpsHealthCheckListWarningDataItem
-    , hhclwdiValue
-    , hhclwdiKey
-
-    -- ** ServerBindingType
-    , ServerBindingType (..)
-
-    -- ** BulkInsertInstanceResource
-    , BulkInsertInstanceResource
-    , bulkInsertInstanceResource
-    , biirNamePattern
-    , biirInstanceProperties
-    , biirCount
-    , biirSourceInstanceTemplate
-    , biirPerInstanceProperties
-    , biirLocationPolicy
-    , biirMinCount
-
-    -- ** OperationWarningsItemCode
-    , OperationWarningsItemCode (..)
-
-    -- ** FirewallPolicyRuleMatcher
-    , FirewallPolicyRuleMatcher
-    , firewallPolicyRuleMatcher
-    , fprmSrcIPRanges
-    , fprmDestIPRanges
-    , fprmLayer4Configs
-
-    -- ** Snapshot
-    , Snapshot
-    , snapshot
-    , snaStorageBytesStatus
-    , snaSatisfiesPzs
-    , snaStatus
-    , snaChainName
-    , snaDiskSizeGb
-    , snaDownloadBytes
-    , snaSourceDiskId
-    , snaKind
-    , snaSourceDiskEncryptionKey
-    , snaStorageBytes
-    , snaSelfLink
-    , snaSnapshotEncryptionKey
-    , snaAutoCreated
-    , snaName
-    , snaStorageLocations
-    , snaCreationTimestamp
-    , snaLicenseCodes
-    , snaId
-    , snaLabels
-    , snaLicenses
-    , snaSourceDisk
-    , snaLocationHint
-    , snaLabelFingerprint
-    , snaDescription
-
-    -- ** InstancesUpdateMostDisruptiveAllowedAction
-    , InstancesUpdateMostDisruptiveAllowedAction (..)
-
-    -- ** RouterStatus
-    , RouterStatus
-    , routerStatus
-    , rsBestRoutesForRouter
-    , rsBGPPeerStatus
-    , rsNetwork
-    , rsNATStatus
-    , rsBestRoutes
-
-    -- ** InstanceManagedByIgmErrorInstanceActionDetailsAction
-    , InstanceManagedByIgmErrorInstanceActionDetailsAction (..)
-
-    -- ** AutoscalingPolicyCustomMetricUtilization
-    , AutoscalingPolicyCustomMetricUtilization
-    , autoscalingPolicyCustomMetricUtilization
-    , apcmuUtilizationTarget
-    , apcmuMetric
-    , apcmuFilter
-    , apcmuSingleInstanceAssignment
-    , apcmuUtilizationTargetType
-
-    -- ** NodeGroupAggregatedListWarningCode
-    , NodeGroupAggregatedListWarningCode (..)
-
-    -- ** ForwardingRuleList
-    , ForwardingRuleList
-    , forwardingRuleList
-    , frlNextPageToken
-    , frlKind
-    , frlItems
-    , frlSelfLink
-    , frlWarning
-    , frlId
-
-    -- ** NodeGroup
-    , NodeGroup
-    , nodeGroup
-    , ngStatus
-    , ngSize
-    , ngKind
-    , ngFingerprint
-    , ngZone
-    , ngMaintenanceWindow
-    , ngSelfLink
-    , ngName
-    , ngCreationTimestamp
-    , ngAutoscalingPolicy
-    , ngId
-    , ngMaintenancePolicy
-    , ngNodeTemplate
-    , ngLocationHint
-    , ngDescription
-
-    -- ** SubnetworkIPv6AccessType
-    , SubnetworkIPv6AccessType (..)
-
-    -- ** VPNTunnelsScopedList
-    , VPNTunnelsScopedList
-    , vpnTunnelsScopedList
-    , vtslVPNTunnels
-    , vtslWarning
-
-    -- ** URLMapsScopedListWarningCode
-    , URLMapsScopedListWarningCode (..)
-
-    -- ** ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete
-    , ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete (..)
-
-    -- ** SubnetworkSecondaryRange
-    , SubnetworkSecondaryRange
-    , subnetworkSecondaryRange
-    , ssrRangeName
-    , ssrIPCIdRRange
-
-    -- ** NodeTypesScopedList
-    , NodeTypesScopedList
-    , nodeTypesScopedList
-    , ntslNodeTypes
-    , ntslWarning
-
-    -- ** BackendServiceProtocol
-    , BackendServiceProtocol (..)
-
-    -- ** FirewallPolicyAssociation
-    , FirewallPolicyAssociation
-    , firewallPolicyAssociation
-    , fpaShortName
-    , fpaFirewallPolicyId
-    , fpaName
-    , fpaDisplayName
-    , fpaAttachmentTarget
-
-    -- ** RegionInstanceGroupsListInstancesWarning
-    , RegionInstanceGroupsListInstancesWarning
-    , regionInstanceGroupsListInstancesWarning
-    , rigliwData
-    , rigliwCode
-    , rigliwMessage
-
-    -- ** NetworkEndpointGroupsDetachEndpointsRequest
-    , NetworkEndpointGroupsDetachEndpointsRequest
-    , networkEndpointGroupsDetachEndpointsRequest
-    , negderNetworkEndpoints
-
-    -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-    , acExemptedMembers
-
-    -- ** NetworkEndpointGroupNetworkEndpointType
-    , NetworkEndpointGroupNetworkEndpointType (..)
-
-    -- ** BackendBucketListWarningCode
-    , BackendBucketListWarningCode (..)
-
-    -- ** AcceleratorTypeAggregatedListWarningDataItem
-    , AcceleratorTypeAggregatedListWarningDataItem
-    , acceleratorTypeAggregatedListWarningDataItem
-    , atalwdiValue
-    , atalwdiKey
-
-    -- ** InstanceGroupsSetNamedPortsRequest
-    , InstanceGroupsSetNamedPortsRequest
-    , instanceGroupsSetNamedPortsRequest
-    , igsnprFingerprint
-    , igsnprNamedPorts
-
-    -- ** PublicDelegatedPrefixAggregatedListWarning
-    , PublicDelegatedPrefixAggregatedListWarning
-    , publicDelegatedPrefixAggregatedListWarning
-    , pdpalwData
-    , pdpalwCode
-    , pdpalwMessage
-
-    -- ** AcceleratorTypesScopedListWarningCode
-    , AcceleratorTypesScopedListWarningCode (..)
-
-    -- ** NodeTemplateNodeAffinityLabels
-    , NodeTemplateNodeAffinityLabels
-    , nodeTemplateNodeAffinityLabels
-    , ntnalAddtional
-
-    -- ** PublicDelegatedPrefixListWarningCode
-    , PublicDelegatedPrefixListWarningCode (..)
-
-    -- ** OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olWarning
-    , olId
-
-    -- ** NodeGroupListWarning
-    , NodeGroupListWarning
-    , nodeGroupListWarning
-    , nglwData
-    , nglwCode
-    , nglwMessage
-
-    -- ** DiskList
-    , DiskList
-    , diskList
-    , dlNextPageToken
-    , dlKind
-    , dlItems
-    , dlSelfLink
-    , dlWarning
-    , dlId
-
-    -- ** NetworkEndpointGroupsListNetworkEndpointsWarning
-    , NetworkEndpointGroupsListNetworkEndpointsWarning
-    , networkEndpointGroupsListNetworkEndpointsWarning
-    , neglnewData
-    , neglnewCode
-    , neglnewMessage
-
-    -- ** RegionInstanceGroupManagersListInstanceConfigsRespWarningDataItem
-    , RegionInstanceGroupManagersListInstanceConfigsRespWarningDataItem
-    , regionInstanceGroupManagersListInstanceConfigsRespWarningDataItem
-    , rigmlicrwdiValue
-    , rigmlicrwdiKey
-
-    -- ** NodeGroupsScopedListWarningCode
-    , NodeGroupsScopedListWarningCode (..)
-
-    -- ** PublicAdvertisedPrefixListWarningCode
-    , PublicAdvertisedPrefixListWarningCode (..)
-
-    -- ** TargetPoolsAddInstanceRequest
-    , TargetPoolsAddInstanceRequest
-    , targetPoolsAddInstanceRequest
-    , tpairInstances
-
-    -- ** NodeGroupsDeleteNodesRequest
-    , NodeGroupsDeleteNodesRequest
-    , nodeGroupsDeleteNodesRequest
-    , ngdnrNodes
-
-    -- ** RegionAutoscalerList
-    , RegionAutoscalerList
-    , regionAutoscalerList
-    , rNextPageToken
-    , rKind
-    , rItems
-    , rSelfLink
-    , rWarning
-    , rId
-
-    -- ** HealthCheckListWarningDataItem
-    , HealthCheckListWarningDataItem
-    , healthCheckListWarningDataItem
-    , hclwdiValue
-    , hclwdiKey
-
-    -- ** VPNGatewaysScopedList
-    , VPNGatewaysScopedList
-    , vpnGatewaysScopedList
-    , vgslVPNGateways
-    , vgslWarning
-
-    -- ** HTTPRouteRule
-    , HTTPRouteRule
-    , hTTPRouteRule
-    , httprrPriority
-    , httprrService
-    , httprrHeaderAction
-    , httprrRouteAction
-    , httprrMatchRules
-    , httprrDescription
-    , httprrURLRedirect
-
-    -- ** ResourcePolicyListWarningDataItem
-    , ResourcePolicyListWarningDataItem
-    , resourcePolicyListWarningDataItem
-    , rplwdiValue
-    , rplwdiKey
-
-    -- ** NetworksUpdatePeeringRequest
-    , NetworksUpdatePeeringRequest
-    , networksUpdatePeeringRequest
-    , nuprNetworkPeering
-
-    -- ** NodeGroupAggregatedListWarningDataItem
-    , NodeGroupAggregatedListWarningDataItem
-    , nodeGroupAggregatedListWarningDataItem
-    , ngalwdiValue
-    , ngalwdiKey
-
-    -- ** InstanceGroupsAddInstancesRequest
-    , InstanceGroupsAddInstancesRequest
-    , instanceGroupsAddInstancesRequest
-    , igairInstances
-
-    -- ** TargetHTTPSProxyAggregatedListItems
-    , TargetHTTPSProxyAggregatedListItems
-    , targetHTTPSProxyAggregatedListItems
-    , thpaliAddtional
-
-    -- ** HealthCheckService
-    , HealthCheckService
-    , healthCheckService
-    , hcsNotificationEndpoints
-    , hcsKind
-    , hcsFingerprint
-    , hcsNetworkEndpointGroups
-    , hcsHealthStatusAggregationPolicy
-    , hcsSelfLink
-    , hcsName
-    , hcsCreationTimestamp
-    , hcsId
-    , hcsRegion
-    , hcsDescription
-    , hcsHealthChecks
-
-    -- ** NodeGroupNode
-    , NodeGroupNode
-    , nodeGroupNode
-    , ngnSatisfiesPzs
-    , ngnStatus
-    , ngnServerId
-    , ngnServerBinding
-    , ngnAccelerators
-    , ngnName
-    , ngnInstances
-    , ngnNodeType
-    , ngnDisks
-    , ngnCPUOvercommitType
-
-    -- ** TargetTCPProxiesSetProxyHeaderRequestProxyHeader
-    , TargetTCPProxiesSetProxyHeaderRequestProxyHeader (..)
-
-    -- ** ReservationAggregatedList
-    , ReservationAggregatedList
-    , reservationAggregatedList
-    , resUnreachables
-    , resNextPageToken
-    , resKind
-    , resItems
-    , resSelfLink
-    , resWarning
-    , resId
-
-    -- ** InstanceGroupManagerList
-    , InstanceGroupManagerList
-    , instanceGroupManagerList
-    , igmlNextPageToken
-    , igmlKind
-    , igmlItems
-    , igmlSelfLink
-    , igmlWarning
-    , igmlId
-
-    -- ** InstanceGroupManagerVersion
-    , InstanceGroupManagerVersion
-    , instanceGroupManagerVersion
-    , igmvInstanceTemplate
-    , igmvTargetSize
-    , igmvName
-
-    -- ** NetworkEndpointGroupsScopedListWarning
-    , NetworkEndpointGroupsScopedListWarning
-    , networkEndpointGroupsScopedListWarning
-    , negslwData
-    , negslwCode
-    , negslwMessage
-
-    -- ** SubnetworksScopedListWarning
-    , SubnetworksScopedListWarning
-    , subnetworksScopedListWarning
-    , sslwData
-    , sslwCode
-    , sslwMessage
-
-    -- ** NodeGroupsSetNodeTemplateRequest
-    , NodeGroupsSetNodeTemplateRequest
-    , nodeGroupsSetNodeTemplateRequest
-    , ngsntrNodeTemplate
-
-    -- ** BackendServiceLogConfig
-    , BackendServiceLogConfig
-    , backendServiceLogConfig
-    , bslcEnable
-    , bslcSampleRate
-
-    -- ** AcceleratorTypeListWarning
-    , AcceleratorTypeListWarning
-    , acceleratorTypeListWarning
-    , atlwData
-    , atlwCode
-    , atlwMessage
-
-    -- ** AttachedDiskType
-    , AttachedDiskType (..)
-
-    -- ** Image
-    , Image
-    , image
-    , iSatisfiesPzs
-    , iStatus
-    , iSourceSnapshotId
-    , iImageEncryptionKey
-    , iSourceImage
-    , iDiskSizeGb
-    , iSourceType
-    , iSourceDiskId
-    , iKind
-    , iSourceDiskEncryptionKey
-    , iGuestOSFeatures
-    , iArchiveSizeBytes
-    , iShieldedInstanceInitialState
-    , iFamily
-    , iRawDisk
-    , iSelfLink
-    , iName
-    , iSourceImageId
-    , iStorageLocations
-    , iCreationTimestamp
-    , iSourceImageEncryptionKey
-    , iLicenseCodes
-    , iId
-    , iLabels
-    , iLicenses
-    , iSourceDisk
-    , iLabelFingerprint
-    , iDescription
-    , iSourceSnapshotEncryptionKey
-    , iDeprecated
-    , iSourceSnapshot
-
-    -- ** RouterBGPPeerManagementType
-    , RouterBGPPeerManagementType (..)
-
-    -- ** RouterNATSubnetworkToNATSourceIPRangesToNATItem
-    , RouterNATSubnetworkToNATSourceIPRangesToNATItem (..)
-
-    -- ** AcceleratorTypeAggregatedListWarningCode
-    , AcceleratorTypeAggregatedListWarningCode (..)
-
-    -- ** NetworksAddPeeringRequest
-    , NetworksAddPeeringRequest
-    , networksAddPeeringRequest
-    , naprNetworkPeering
-    , naprPeerNetwork
-    , naprName
-    , naprAutoCreateRoutes
-
-    -- ** PublicAdvertisedPrefixListWarningDataItem
-    , PublicAdvertisedPrefixListWarningDataItem
-    , publicAdvertisedPrefixListWarningDataItem
-    , paplwdiValue
-    , paplwdiKey
-
-    -- ** NodeTemplatesScopedList
-    , NodeTemplatesScopedList
-    , nodeTemplatesScopedList
-    , nNodeTemplates
-    , nWarning
-
-    -- ** URLMapListWarning
-    , URLMapListWarning
-    , urlMapListWarning
-    , umlwData
-    , umlwCode
-    , umlwMessage
-
-    -- ** NodeGroupsScopedListWarningDataItem
-    , NodeGroupsScopedListWarningDataItem
-    , nodeGroupsScopedListWarningDataItem
-    , ngslwdiValue
-    , ngslwdiKey
-
-    -- ** ResourcePolicyListWarningCode
-    , ResourcePolicyListWarningCode (..)
-
-    -- ** URLMap
-    , URLMap
-    , urlMap
-    , umDefaultRouteAction
-    , umDefaultURLRedirect
-    , umTests
-    , umKind
-    , umFingerprint
-    , umDefaultService
-    , umHeaderAction
-    , umSelfLink
-    , umName
-    , umCreationTimestamp
-    , umPathMatchers
-    , umId
-    , umHostRules
-    , umRegion
-    , umDescription
-
-    -- ** ResourcePolicyAggregatedListWarning
-    , ResourcePolicyAggregatedListWarning
-    , resourcePolicyAggregatedListWarning
-    , rpalwData
-    , rpalwCode
-    , rpalwMessage
-
-    -- ** ImageListWarning
-    , ImageListWarning
-    , imageListWarning
-    , ilwData
-    , ilwCode
-    , ilwMessage
-
-    -- ** HealthCheckListWarningCode
-    , HealthCheckListWarningCode (..)
-
-    -- ** URLMapsScopedListWarningDataItem
-    , URLMapsScopedListWarningDataItem
-    , urlMapsScopedListWarningDataItem
-    , umslwdiValue
-    , umslwdiKey
-
-    -- ** NetworkInterfaceNicType
-    , NetworkInterfaceNicType (..)
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** SSLPolicyReference
-    , SSLPolicyReference
-    , sslPolicyReference
-    , sprSSLPolicy
-
-    -- ** ResourcePolicyHourlyCycle
-    , ResourcePolicyHourlyCycle
-    , resourcePolicyHourlyCycle
-    , rphcHoursInCycle
-    , rphcStartTime
-    , rphcDuration
-
-    -- ** InstanceGroupAggregatedListItems
-    , InstanceGroupAggregatedListItems
-    , instanceGroupAggregatedListItems
-    , igaliAddtional
-
-    -- ** PublicDelegatedPrefixListWarningDataItem
-    , PublicDelegatedPrefixListWarningDataItem
-    , publicDelegatedPrefixListWarningDataItem
-    , pdplwdiValue
-    , pdplwdiKey
-
-    -- ** TargetPoolList
-    , TargetPoolList
-    , targetPoolList
-    , tplNextPageToken
-    , tplKind
-    , tplItems
-    , tplSelfLink
-    , tplWarning
-    , tplId
-
-    -- ** SSLPolicyProFile
-    , SSLPolicyProFile (..)
-
-    -- ** AcceleratorType
-    , AcceleratorType
-    , acceleratorType
-    , atKind
-    , atZone
-    , atMaximumCardsPerInstance
-    , atSelfLink
-    , atName
-    , atCreationTimestamp
-    , atId
-    , atDescription
-    , atDeprecated
-
-    -- ** BackendBucketListWarningDataItem
-    , BackendBucketListWarningDataItem
-    , backendBucketListWarningDataItem
-    , bblwdiValue
-    , bblwdiKey
-
-    -- ** HTTPRouteAction
-    , HTTPRouteAction
-    , hTTPRouteAction
-    , httpraFaultInjectionPolicy
-    , httpraCORSPolicy
-    , httpraURLRewrite
-    , httpraRequestMirrorPolicy
-    , httpraRetryPolicy
-    , httpraWeightedBackendServices
-    , httpraTimeout
-    , httpraMaxStreamDuration
-
-    -- ** AcceleratorTypesScopedListWarningDataItem
-    , AcceleratorTypesScopedListWarningDataItem
-    , acceleratorTypesScopedListWarningDataItem
-    , atslwdiValue
-    , atslwdiKey
-
-    -- ** RegionInstanceGroupManagersListInstanceConfigsRespWarningCode
-    , RegionInstanceGroupManagersListInstanceConfigsRespWarningCode (..)
-
-    -- ** TargetHTTPProxiesScopedList
-    , TargetHTTPProxiesScopedList
-    , targetHTTPProxiesScopedList
-    , thttppslTargetHTTPProxies
-    , thttppslWarning
-
-    -- ** InterconnectOutageNotificationSource
-    , InterconnectOutageNotificationSource (..)
-
-    -- ** RegionDiskTypeList
-    , RegionDiskTypeList
-    , regionDiskTypeList
-    , rdtlNextPageToken
-    , rdtlKind
-    , rdtlItems
-    , rdtlSelfLink
-    , rdtlWarning
-    , rdtlId
-
-    -- ** TargetInstanceAggregatedList
-    , TargetInstanceAggregatedList
-    , targetInstanceAggregatedList
-    , tialUnreachables
-    , tialNextPageToken
-    , tialKind
-    , tialItems
-    , tialSelfLink
-    , tialWarning
-    , tialId
-
-    -- ** NodeGroupsListNodesWarningDataItem
-    , NodeGroupsListNodesWarningDataItem
-    , nodeGroupsListNodesWarningDataItem
-    , nglnwdiValue
-    , nglnwdiKey
-
-    -- ** UsableSubnetworksAggregatedList
-    , UsableSubnetworksAggregatedList
-    , usableSubnetworksAggregatedList
-    , usalNextPageToken
-    , usalKind
-    , usalItems
-    , usalSelfLink
-    , usalWarning
-    , usalId
-
-    -- ** ReservationList
-    , ReservationList
-    , reservationList
-    , rlNextPageToken
-    , rlKind
-    , rlItems
-    , rlSelfLink
-    , rlWarning
-    , rlId
-
-    -- ** NetworksListPeeringRoutesDirection
-    , NetworksListPeeringRoutesDirection (..)
-
-    -- ** InterconnectLinkType
-    , InterconnectLinkType (..)
-
-    -- ** DisksScopedList
-    , DisksScopedList
-    , disksScopedList
-    , dslWarning
-    , dslDisks
-
-    -- ** InterconnectLocationListWarningDataItem
-    , InterconnectLocationListWarningDataItem
-    , interconnectLocationListWarningDataItem
-    , illwdiValue
-    , illwdiKey
-
-    -- ** InstanceGroupManagersScopedList
-    , InstanceGroupManagersScopedList
-    , instanceGroupManagersScopedList
-    , igmslWarning
-    , igmslInstanceGroupManagers
-
-    -- ** SubnetworkListWarning
-    , SubnetworkListWarning
-    , subnetworkListWarning
-    , slwData
-    , slwCode
-    , slwMessage
-
-    -- ** NetworkEndpointGroupListWarning
-    , NetworkEndpointGroupListWarning
-    , networkEndpointGroupListWarning
-    , neglwData
-    , neglwCode
-    , neglwMessage
-
-    -- ** ResourcePolicy
-    , ResourcePolicy
-    , resourcePolicy
-    , rpInstanceSchedulePolicy
-    , rpStatus
-    , rpKind
-    , rpResourceStatus
-    , rpGroupPlacementPolicy
-    , rpSelfLink
-    , rpName
-    , rpCreationTimestamp
-    , rpId
-    , rpRegion
-    , rpDescription
-    , rpSnapshotSchedulePolicy
-
-    -- ** HealthCheck
-    , HealthCheck
-    , healthCheck
-    , hcHealthyThreshold
-    , hcTCPHealthCheck
-    , hcHTTP2HealthCheck
-    , hcKind
-    , hcSSLHealthCheck
-    , hcGrpcHealthCheck
-    , hcSelfLink
-    , hcCheckIntervalSec
-    , hcName
-    , hcCreationTimestamp
-    , hcHTTPHealthCheck
-    , hcId
-    , hcRegion
-    , hcType
-    , hcTimeoutSec
-    , hcLogConfig
-    , hcDescription
-    , hcUnhealthyThreshold
-    , hcHTTPSHealthCheck
-
-    -- ** ExchangedPeeringRoutesListWarningCode
-    , ExchangedPeeringRoutesListWarningCode (..)
-
-    -- ** TargetSSLProxyProxyHeader
-    , TargetSSLProxyProxyHeader (..)
-
-    -- ** HTTPHealthCheckListWarning
-    , HTTPHealthCheckListWarning
-    , hTTPHealthCheckListWarning
-    , httphclwData
-    , httphclwCode
-    , httphclwMessage
-
-    -- ** SSLPoliciesListWarning
-    , SSLPoliciesListWarning
-    , sslPoliciesListWarning
-    , splwData
-    , splwCode
-    , splwMessage
-
-    -- ** CommitmentAggregatedListItems
-    , CommitmentAggregatedListItems
-    , commitmentAggregatedListItems
-    , caliAddtional
-
-    -- ** DiskAggregatedList
-    , DiskAggregatedList
-    , diskAggregatedList
-    , dalUnreachables
-    , dalNextPageToken
-    , dalKind
-    , dalItems
-    , dalSelfLink
-    , dalWarning
-    , dalId
-
-    -- ** InstanceGroupsListInstancesWarningDataItem
-    , InstanceGroupsListInstancesWarningDataItem
-    , instanceGroupsListInstancesWarningDataItem
-    , igliwdiValue
-    , igliwdiKey
-
-    -- ** AutoscalingPolicyScalingSchedule
-    , AutoscalingPolicyScalingSchedule
-    , autoscalingPolicyScalingSchedule
-    , apssSchedule
-    , apssDisabled
-    , apssMinRequiredReplicas
-    , apssDurationSec
-    , apssTimeZone
-    , apssDescription
-
-    -- ** InstanceWithNamedPorts
-    , InstanceWithNamedPorts
-    , instanceWithNamedPorts
-    , iwnpStatus
-    , iwnpNamedPorts
-    , iwnpInstance
-
-    -- ** DisplayDevice
-    , DisplayDevice
-    , displayDevice
-    , ddEnableDisplay
-
-    -- ** InterconnectListWarning
-    , InterconnectListWarning
-    , interconnectListWarning
-    , iData
-    , iCode
-    , iMessage
-
-    -- ** RegionDisksAddResourcePoliciesRequest
-    , RegionDisksAddResourcePoliciesRequest
-    , regionDisksAddResourcePoliciesRequest
-    , rdarprResourcePolicies
-
-    -- ** ForwardingRulesScopedList
-    , ForwardingRulesScopedList
-    , forwardingRulesScopedList
-    , frslWarning
-    , frslForwardingRules
-
-    -- ** RouterBGPAdvertiseMode
-    , RouterBGPAdvertiseMode (..)
-
-    -- ** NodeGroupsListNodesWarningCode
-    , NodeGroupsListNodesWarningCode (..)
-
-    -- ** InstanceReference
-    , InstanceReference
-    , instanceReference
-    , iInstance
-
-    -- ** InterconnectDiagnosticsLinkOpticalPowerState
-    , InterconnectDiagnosticsLinkOpticalPowerState (..)
-
-    -- ** OperationAggregatedList
-    , OperationAggregatedList
-    , operationAggregatedList
-    , oalUnreachables
-    , oalNextPageToken
-    , oalKind
-    , oalItems
-    , oalSelfLink
-    , oalWarning
-    , oalId
-
-    -- ** OperationsScopedList
-    , OperationsScopedList
-    , operationsScopedList
-    , oslWarning
-    , oslOperations
-
-    -- ** NamedPort
-    , NamedPort
-    , namedPort
-    , npName
-    , npPort
-
-    -- ** HealthChecksScopedListWarningDataItem
-    , HealthChecksScopedListWarningDataItem
-    , healthChecksScopedListWarningDataItem
-    , hcslwdiValue
-    , hcslwdiKey
-
-    -- ** NetworkEndpointGroupsListEndpointsRequest
-    , NetworkEndpointGroupsListEndpointsRequest
-    , networkEndpointGroupsListEndpointsRequest
-    , neglerHealthStatus
-
-    -- ** InterconnectLocationListWarningCode
-    , InterconnectLocationListWarningCode (..)
-
-    -- ** InstanceGroupsListInstancesWarningCode
-    , InstanceGroupsListInstancesWarningCode (..)
-
-    -- ** NodeGroupMaintenancePolicy
-    , NodeGroupMaintenancePolicy (..)
-
-    -- ** RegionInstanceGroupsListInstancesRequestInstanceState
-    , RegionInstanceGroupsListInstancesRequestInstanceState (..)
-
-    -- ** SubnetworkAggregatedListWarningDataItem
-    , SubnetworkAggregatedListWarningDataItem
-    , subnetworkAggregatedListWarningDataItem
-    , salwdiValue
-    , salwdiKey
-
-    -- ** ProjectXpnProjectStatus
-    , ProjectXpnProjectStatus (..)
-
-    -- ** InterconnectDiagnosticsLinkStatus
-    , InterconnectDiagnosticsLinkStatus
-    , interconnectDiagnosticsLinkStatus
-    , idlsLacpStatus
-    , idlsReceivingOpticalPower
-    , idlsGoogleDemarc
-    , idlsCircuitId
-    , idlsArpCaches
-    , idlsTransmittingOpticalPower
-
-    -- ** BackendServiceReference
-    , BackendServiceReference
-    , backendServiceReference
-    , bsrBackendService
-
-    -- ** NetworkEndpointGroupAggregatedListWarningDataItem
-    , NetworkEndpointGroupAggregatedListWarningDataItem
-    , networkEndpointGroupAggregatedListWarningDataItem
-    , negalwdiValue
-    , negalwdiKey
-
-    -- ** SSLHealthCheckPortSpecification
-    , SSLHealthCheckPortSpecification (..)
-
-    -- ** TargetInstanceList
-    , TargetInstanceList
-    , targetInstanceList
-    , tilNextPageToken
-    , tilKind
-    , tilItems
-    , tilSelfLink
-    , tilWarning
-    , tilId
-
-    -- ** PublicDelegatedPrefix
-    , PublicDelegatedPrefix
-    , publicDelegatedPrefix
-    , pdpParentPrefix
-    , pdpStatus
-    , pdpKind
-    , pdpFingerprint
-    , pdpSelfLink
-    , pdpName
-    , pdpCreationTimestamp
-    , pdpIPCIdRRange
-    , pdpPublicDelegatedSubPrefixs
-    , pdpId
-    , pdpRegion
-    , pdpIsLiveMigration
-    , pdpDescription
-
-    -- ** TargetTCPProxyListWarning
-    , TargetTCPProxyListWarning
-    , targetTCPProxyListWarning
-    , ttplwData
-    , ttplwCode
-    , ttplwMessage
-
-    -- ** InstanceGroupManagerAggregatedList
-    , InstanceGroupManagerAggregatedList
-    , instanceGroupManagerAggregatedList
-    , igmalUnreachables
-    , igmalNextPageToken
-    , igmalKind
-    , igmalItems
-    , igmalSelfLink
-    , igmalWarning
-    , igmalId
-
-    -- ** BackendBucket
-    , BackendBucket
-    , backendBucket
-    , bbKind
-    , bbEnableCdn
-    , bbBucketName
-    , bbCdnPolicy
-    , bbCustomResponseHeaders
-    , bbSelfLink
-    , bbName
-    , bbCreationTimestamp
-    , bbId
-    , bbDescription
-
-    -- ** PublicDelegatedPrefixesScopedListWarning
-    , PublicDelegatedPrefixesScopedListWarning
-    , publicDelegatedPrefixesScopedListWarning
-    , pdpslwData
-    , pdpslwCode
-    , pdpslwMessage
-
-    -- ** AccessConfigNetworkTier
-    , AccessConfigNetworkTier (..)
-
-    -- ** ProjectsEnableXpnResourceRequest
-    , ProjectsEnableXpnResourceRequest
-    , projectsEnableXpnResourceRequest
-    , pexrrXpnResource
-
-    -- ** PublicAdvertisedPrefix
-    , PublicAdvertisedPrefix
-    , publicAdvertisedPrefix
-    , papStatus
-    , papKind
-    , papFingerprint
-    , papDNSVerificationIP
-    , papSelfLink
-    , papSharedSecret
-    , papName
-    , papCreationTimestamp
-    , papIPCIdRRange
-    , papId
-    , papDescription
-    , papPublicDelegatedPrefixs
-
-    -- ** BackendServiceCdnPolicyNegativeCachingPolicy
-    , BackendServiceCdnPolicyNegativeCachingPolicy
-    , backendServiceCdnPolicyNegativeCachingPolicy
-    , bscpncpTtl
-    , bscpncpCode
-
-    -- ** ConditionSys
-    , ConditionSys (..)
-
-    -- ** HealthChecksScopedListWarningCode
-    , HealthChecksScopedListWarningCode (..)
-
-    -- ** ImageSourceType
-    , ImageSourceType (..)
-
-    -- ** TargetPoolsScopedList
-    , TargetPoolsScopedList
-    , targetPoolsScopedList
-    , tpslWarning
-    , tpslTargetPools
-
-    -- ** InterconnectAttachmentAggregatedListItems
-    , InterconnectAttachmentAggregatedListItems
-    , interconnectAttachmentAggregatedListItems
-    , iaaliAddtional
-
-    -- ** InstanceGroupManagerAutoHealingPolicy
-    , InstanceGroupManagerAutoHealingPolicy
-    , instanceGroupManagerAutoHealingPolicy
-    , igmahpHealthCheck
-    , igmahpInitialDelaySec
-
-    -- ** LogConfigCounterOptions
-    , LogConfigCounterOptions
-    , logConfigCounterOptions
-    , lccoField
-    , lccoMetric
-    , lccoCustomFields
-
-    -- ** ExchangedPeeringRoutesListWarningDataItem
-    , ExchangedPeeringRoutesListWarningDataItem
-    , exchangedPeeringRoutesListWarningDataItem
-    , eprlwdiValue
-    , eprlwdiKey
-
-    -- ** SubnetworkAggregatedListWarningCode
-    , SubnetworkAggregatedListWarningCode (..)
-
-    -- ** BackendBucketCdnPolicyBypassCacheOnRequestHeader
-    , BackendBucketCdnPolicyBypassCacheOnRequestHeader
-    , backendBucketCdnPolicyBypassCacheOnRequestHeader
-    , bbcpbcorhHeaderName
-
-    -- ** InstancesSetMinCPUPlatformRequest
-    , InstancesSetMinCPUPlatformRequest
-    , instancesSetMinCPUPlatformRequest
-    , ismcprMinCPUPlatform
-
-    -- ** NetworkEndpointGroupAggregatedListWarningCode
-    , NetworkEndpointGroupAggregatedListWarningCode (..)
-
-    -- ** VPNGatewaysGetStatusResponse
-    , VPNGatewaysGetStatusResponse
-    , vpnGatewaysGetStatusResponse
-    , vggsrResult
-
-    -- ** ForwardingRuleAggregatedList
-    , ForwardingRuleAggregatedList
-    , forwardingRuleAggregatedList
-    , fralUnreachables
-    , fralNextPageToken
-    , fralKind
-    , fralItems
-    , fralSelfLink
-    , fralWarning
-    , fralId
-
-    -- ** ResourcePoliciesScopedListWarning
-    , ResourcePoliciesScopedListWarning
-    , resourcePoliciesScopedListWarning
-    , rpslwData
-    , rpslwCode
-    , rpslwMessage
-
-    -- ** ReservationAffinity
-    , ReservationAffinity
-    , reservationAffinity
-    , raConsumeReservationType
-    , raValues
-    , raKey
-
-    -- ** TargetReference
-    , TargetReference
-    , targetReference
-    , trTarget
-
-    -- ** TargetPoolAggregatedList
-    , TargetPoolAggregatedList
-    , targetPoolAggregatedList
-    , tpalUnreachables
-    , tpalNextPageToken
-    , tpalKind
-    , tpalItems
-    , tpalSelfLink
-    , tpalWarning
-    , tpalId
-
-    -- ** OperationsScopedListWarningDataItem
-    , OperationsScopedListWarningDataItem
-    , operationsScopedListWarningDataItem
-    , oslwdiValue
-    , oslwdiKey
-
-    -- ** BackendServiceSessionAffinity
-    , BackendServiceSessionAffinity (..)
-
-    -- ** GlobalSetLabelsRequest
-    , GlobalSetLabelsRequest
-    , globalSetLabelsRequest
-    , gslrLabels
-    , gslrLabelFingerprint
-
-    -- ** HTTPFaultInjection
-    , HTTPFaultInjection
-    , hTTPFaultInjection
-    , httpfiAbort
-    , httpfiDelay
-
-    -- ** TargetPool
-    , TargetPool
-    , targetPool
-    , tpSessionAffinity
-    , tpBackupPool
-    , tpKind
-    , tpSelfLink
-    , tpName
-    , tpCreationTimestamp
-    , tpInstances
-    , tpId
-    , tpFailoverRatio
-    , tpRegion
-    , tpDescription
-    , tpHealthChecks
-
-    -- ** ImageList
-    , ImageList
-    , imageList
-    , ilNextPageToken
-    , ilKind
-    , ilItems
-    , ilSelfLink
-    , ilWarning
-    , ilId
-
-    -- ** OperationAggregatedListWarningDataItem
-    , OperationAggregatedListWarningDataItem
-    , operationAggregatedListWarningDataItem
-    , oalwdiValue
-    , oalwdiKey
-
-    -- ** ResourcePolicyAggregatedList
-    , ResourcePolicyAggregatedList
-    , resourcePolicyAggregatedList
-    , rpalEtag
-    , rpalUnreachables
-    , rpalNextPageToken
-    , rpalKind
-    , rpalItems
-    , rpalSelfLink
-    , rpalWarning
-    , rpalId
-
-    -- ** ForwardingRuleListWarning
-    , ForwardingRuleListWarning
-    , forwardingRuleListWarning
-    , frlwData
-    , frlwCode
-    , frlwMessage
-
-    -- ** VPNTunnelsScopedListWarning
-    , VPNTunnelsScopedListWarning
-    , vpnTunnelsScopedListWarning
-    , vtslwData
-    , vtslwCode
-    , vtslwMessage
-
-    -- ** RegionDisksResizeRequest
-    , RegionDisksResizeRequest
-    , regionDisksResizeRequest
-    , rdrrSizeGb
-
-    -- ** NodeTypesScopedListWarning
-    , NodeTypesScopedListWarning
-    , nodeTypesScopedListWarning
-    , ntslwData
-    , ntslwCode
-    , ntslwMessage
-
-    -- ** TargetHTTPProxiesScopedListWarning
-    , TargetHTTPProxiesScopedListWarning
-    , targetHTTPProxiesScopedListWarning
-    , thttppslwData
-    , thttppslwCode
-    , thttppslwMessage
-
-    -- ** NetworkInterfaceStackType
-    , NetworkInterfaceStackType (..)
-
-    -- ** URLMapsAggregatedListItems
-    , URLMapsAggregatedListItems
-    , urlMapsAggregatedListItems
-    , umaliAddtional
-
-    -- ** NodeTemplateNodeTypeFlexibility
-    , NodeTemplateNodeTypeFlexibility
-    , nodeTemplateNodeTypeFlexibility
-    , ntntfMemory
-    , ntntfCPUs
-    , ntntfLocalSsd
-
-    -- ** ForwardingRulesScopedListWarningCode
-    , ForwardingRulesScopedListWarningCode (..)
-
-    -- ** HealthStatusForNetworkEndpointHealthState
-    , HealthStatusForNetworkEndpointHealthState (..)
-
-    -- ** LicenseResourceRequirements
-    , LicenseResourceRequirements
-    , licenseResourceRequirements
-    , lrrMinMemoryMb
-    , lrrMinGuestCPUCount
-
-    -- ** RegionDiskTypeListWarning
-    , RegionDiskTypeListWarning
-    , regionDiskTypeListWarning
-    , rdtlwData
-    , rdtlwCode
-    , rdtlwMessage
-
-    -- ** OperationsScopedListWarningCode
-    , OperationsScopedListWarningCode (..)
-
-    -- ** OperationAggregatedListWarningCode
-    , OperationAggregatedListWarningCode (..)
-
-    -- ** StatefulPolicyPreservedStateDisks
-    , StatefulPolicyPreservedStateDisks
-    , statefulPolicyPreservedStateDisks
-    , sppsdAddtional
-
-    -- ** TargetSSLProxiesSetBackendServiceRequest
-    , TargetSSLProxiesSetBackendServiceRequest
-    , targetSSLProxiesSetBackendServiceRequest
-    , tspsbsrService
-
-    -- ** ForwardingRule
-    , ForwardingRule
-    , forwardingRule
-    , frNetworkTier
-    , frIPAddress
-    , frLoadBalancingScheme
-    , frKind
-    , frIsMirroringCollector
-    , frFingerprint
-    , frIPVersion
-    , frAllPorts
-    , frAllowGlobalAccess
-    , frNetwork
-    , frPortRange
-    , frServiceDirectoryRegistrations
-    , frSelfLink
-    , frName
-    , frIPProtocol
-    , frCreationTimestamp
-    , frServiceName
-    , frSubnetwork
-    , frPorts
-    , frId
-    , frLabels
-    , frRegion
-    , frPscConnectionId
-    , frServiceLabel
-    , frMetadataFilters
-    , frLabelFingerprint
-    , frDescription
-    , frTarget
-    , frBackendService
-
-    -- ** URLMapList
-    , URLMapList
-    , urlMapList
-    , umlNextPageToken
-    , umlKind
-    , umlItems
-    , umlSelfLink
-    , umlWarning
-    , umlId
-
-    -- ** ForwardingRulesScopedListWarningDataItem
-    , ForwardingRulesScopedListWarningDataItem
-    , forwardingRulesScopedListWarningDataItem
-    , frslwdiValue
-    , frslwdiKey
-
-    -- ** TargetInstanceAggregatedListWarning
-    , TargetInstanceAggregatedListWarning
-    , targetInstanceAggregatedListWarning
-    , tialwData
-    , tialwCode
-    , tialwMessage
-
-    -- ** InstanceGroupManagersScopedListWarningDataItem
-    , InstanceGroupManagersScopedListWarningDataItem
-    , instanceGroupManagersScopedListWarningDataItem
-    , igmslwdiValue
-    , igmslwdiKey
-
-    -- ** SubnetworksScopedList
-    , SubnetworksScopedList
-    , subnetworksScopedList
-    , sslSubnetworks
-    , sslWarning
-
-    -- ** CORSPolicy
-    , CORSPolicy
-    , corsPolicy
-    , cpMaxAge
-    , cpAllowMethods
-    , cpAllowHeaders
-    , cpDisabled
-    , cpExposeHeaders
-    , cpAllowOriginRegexes
-    , cpAllowOrigins
-    , cpAllowCredentials
-
-    -- ** NetworkEndpointGroupsScopedList
-    , NetworkEndpointGroupsScopedList
-    , networkEndpointGroupsScopedList
-    , negslNetworkEndpointGroups
-    , negslWarning
-
-    -- ** NotificationEndpointGrpcSettings
-    , NotificationEndpointGrpcSettings
-    , notificationEndpointGrpcSettings
-    , negsResendInterval
-    , negsRetryDurationSec
-    , negsPayloadName
-    , negsEndpoint
-    , negsAuthority
-
-    -- ** DiskAggregatedListWarningCode
-    , DiskAggregatedListWarningCode (..)
-
-    -- ** AcceleratorTypeList
-    , AcceleratorTypeList
-    , acceleratorTypeList
-    , atlNextPageToken
-    , atlKind
-    , atlItems
-    , atlSelfLink
-    , atlWarning
-    , atlId
-
-    -- ** DiskAggregatedListWarningDataItem
-    , DiskAggregatedListWarningDataItem
-    , diskAggregatedListWarningDataItem
-    , dalwdiValue
-    , dalwdiKey
-
-    -- ** TargetPoolListWarning
-    , TargetPoolListWarning
-    , targetPoolListWarning
-    , tplwData
-    , tplwCode
-    , tplwMessage
-
-    -- ** BulkInsertInstanceResourceSchema
-    , BulkInsertInstanceResourceSchema
-    , bulkInsertInstanceResourceSchema
-    , biirsAddtional
-
-    -- ** UsableSubnetworksAggregatedListWarningCode
-    , UsableSubnetworksAggregatedListWarningCode (..)
-
-    -- ** ReservationListWarningCode
-    , ReservationListWarningCode (..)
-
-    -- ** NodeTemplatesScopedListWarning
-    , NodeTemplatesScopedListWarning
-    , nodeTemplatesScopedListWarning
-    , nData
-    , nCode
-    , nMessage
-
-    -- ** TargetPoolAggregatedListWarningDataItem
-    , TargetPoolAggregatedListWarningDataItem
-    , targetPoolAggregatedListWarningDataItem
-    , tpalwdiValue
-    , tpalwdiKey
-
-    -- ** DisksScopedListWarningCode
-    , DisksScopedListWarningCode (..)
-
-    -- ** Project
-    , Project
-    , project
-    , pXpnProjectStatus
-    , pKind
-    , pUsageExportLocation
-    , pSelfLink
-    , pName
-    , pDefaultServiceAccount
-    , pDefaultNetworkTier
-    , pCreationTimestamp
-    , pEnabledFeatures
-    , pQuotas
-    , pId
-    , pDescription
-    , pCommonInstanceMetadata
-
-    -- ** RegionInstanceGroupManagersListInstancesResponse
-    , RegionInstanceGroupManagersListInstancesResponse
-    , regionInstanceGroupManagersListInstancesResponse
-    , rigmlirNextPageToken
-    , rigmlirManagedInstances
-
-    -- ** VPNGatewayLabels
-    , VPNGatewayLabels
-    , vpnGatewayLabels
-    , vglAddtional
-
-    -- ** NodeGroupAutoscalingPolicy
-    , NodeGroupAutoscalingPolicy
-    , nodeGroupAutoscalingPolicy
-    , ngapMode
-    , ngapMinNodes
-    , ngapMaxNodes
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oTargetId
-    , oStatus
-    , oOperationGroupId
-    , oInsertTime
-    , oProgress
-    , oStartTime
-    , oKind
-    , oError
-    , oHTTPErrorMessage
-    , oZone
-    , oWarnings
-    , oHTTPErrorStatusCode
-    , oUser
-    , oSelfLink
-    , oName
-    , oStatusMessage
-    , oCreationTimestamp
-    , oEndTime
-    , oId
-    , oOperationType
-    , oRegion
-    , oDescription
-    , oTargetLink
-    , oClientOperationId
-
-    -- ** NetworkEndpoint
-    , NetworkEndpoint
-    , networkEndpoint
-    , neAnnotations
-    , neIPAddress
-    , neFqdn
-    , nePort
-    , neInstance
-
-    -- ** DisksScopedListWarningDataItem
-    , DisksScopedListWarningDataItem
-    , disksScopedListWarningDataItem
-    , dslwdiValue
-    , dslwdiKey
-
-    -- ** RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction
-    , RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction (..)
-
-    -- ** InstanceGroupManagersScopedListWarningCode
-    , InstanceGroupManagersScopedListWarningCode (..)
-
-    -- ** Disk
-    , Disk
-    , disk
-    , dSatisfiesPzs
-    , dStatus
-    , dSourceSnapshotId
-    , dLastAttachTimestamp
-    , dUsers
-    , dSourceImage
-    , dProvisionedIops
-    , dReplicaZones
-    , dSourceDiskId
-    , dDiskEncryptionKey
-    , dSizeGb
-    , dKind
-    , dLastDetachTimestamp
-    , dGuestOSFeatures
-    , dZone
-    , dResourcePolicies
-    , dSelfLink
-    , dName
-    , dSourceImageId
-    , dCreationTimestamp
-    , dSourceImageEncryptionKey
-    , dLicenseCodes
-    , dId
-    , dLabels
-    , dLicenses
-    , dRegion
-    , dOptions
-    , dSourceDisk
-    , dPhysicalBlockSizeBytes
-    , dType
-    , dLocationHint
-    , dLabelFingerprint
-    , dDescription
-    , dSourceSnapshotEncryptionKey
-    , dSourceStorageObject
-    , dSourceSnapshot
-
-    -- ** ReservationListWarningDataItem
-    , ReservationListWarningDataItem
-    , reservationListWarningDataItem
-    , rlwdiValue
-    , rlwdiKey
-
-    -- ** UsableSubnetworksAggregatedListWarningDataItem
-    , UsableSubnetworksAggregatedListWarningDataItem
-    , usableSubnetworksAggregatedListWarningDataItem
-    , usalwdiValue
-    , usalwdiKey
-
-    -- ** NodeGroupList
-    , NodeGroupList
-    , nodeGroupList
-    , nglNextPageToken
-    , nglKind
-    , nglItems
-    , nglSelfLink
-    , nglWarning
-    , nglId
-
-    -- ** SSLPolicyWarningsItemCode
-    , SSLPolicyWarningsItemCode (..)
-
-    -- ** PublicDelegatedPrefixAggregatedList
-    , PublicDelegatedPrefixAggregatedList
-    , publicDelegatedPrefixAggregatedList
-    , pdpalUnreachables
-    , pdpalNextPageToken
-    , pdpalKind
-    , pdpalItems
-    , pdpalSelfLink
-    , pdpalWarning
-    , pdpalId
-
-    -- ** FirewallPolicyRuleDirection
-    , FirewallPolicyRuleDirection (..)
-
-    -- ** DiskMoveRequest
-    , DiskMoveRequest
-    , diskMoveRequest
-    , dmrTargetDisk
-    , dmrDestinationZone
-
-    -- ** ForwardingRuleAggregatedListWarningCode
-    , ForwardingRuleAggregatedListWarningCode (..)
-
-    -- ** SSLPolicyWarningsItemDataItem
-    , SSLPolicyWarningsItemDataItem
-    , sslPolicyWarningsItemDataItem
-    , spwidiValue
-    , spwidiKey
-
-    -- ** AutoscalingPolicyLoadBalancingUtilization
-    , AutoscalingPolicyLoadBalancingUtilization
-    , autoscalingPolicyLoadBalancingUtilization
-    , aplbuUtilizationTarget
-
-    -- ** TargetPoolAggregatedListWarningCode
-    , TargetPoolAggregatedListWarningCode (..)
-
-    -- ** NetworkEndpointGroupsListNetworkEndpoints
-    , NetworkEndpointGroupsListNetworkEndpoints
-    , networkEndpointGroupsListNetworkEndpoints
-    , neglneNextPageToken
-    , neglneKind
-    , neglneItems
-    , neglneWarning
-    , neglneId
-
-    -- ** ForwardingRuleAggregatedListWarningDataItem
-    , ForwardingRuleAggregatedListWarningDataItem
-    , forwardingRuleAggregatedListWarningDataItem
-    , fralwdiValue
-    , fralwdiKey
-
-    -- ** TargetPoolsScopedListWarningDataItem
-    , TargetPoolsScopedListWarningDataItem
-    , targetPoolsScopedListWarningDataItem
-    , tpslwdiValue
-    , tpslwdiKey
-
-    -- ** InstanceGroupManager
-    , InstanceGroupManager
-    , instanceGroupManager
-    , igmStatus
-    , igmKind
-    , igmStatefulPolicy
-    , igmFingerprint
-    , igmBaseInstanceName
-    , igmZone
-    , igmAutoHealingPolicies
-    , igmVersions
-    , igmInstanceTemplate
-    , igmUpdatePolicy
-    , igmTargetSize
-    , igmSelfLink
-    , igmCurrentActions
-    , igmName
-    , igmCreationTimestamp
-    , igmDistributionPolicy
-    , igmId
-    , igmRegion
-    , igmTargetPools
-    , igmDescription
-    , igmInstanceGroup
-    , igmNamedPorts
-
-    -- ** PacketMirroringMirroredResourceInfo
-    , PacketMirroringMirroredResourceInfo
-    , packetMirroringMirroredResourceInfo
-    , pmmriSubnetworks
-    , pmmriInstances
-    , pmmriTags
-
-    -- ** InstanceGroupManagerListWarning
-    , InstanceGroupManagerListWarning
-    , instanceGroupManagerListWarning
-    , igmlwData
-    , igmlwCode
-    , igmlwMessage
-
-    -- ** MetadataFilter
-    , MetadataFilter
-    , metadataFilter
-    , mfFilterLabels
-    , mfFilterMatchCriteria
-
-    -- ** RegionInstanceGroupsListInstances
-    , RegionInstanceGroupsListInstances
-    , regionInstanceGroupsListInstances
-    , rigliNextPageToken
-    , rigliKind
-    , rigliItems
-    , rigliSelfLink
-    , rigliWarning
-    , rigliId
-
-    -- ** RegionDisksRemoveResourcePoliciesRequest
-    , RegionDisksRemoveResourcePoliciesRequest
-    , regionDisksRemoveResourcePoliciesRequest
-    , rdrrprResourcePolicies
-
-    -- ** ReservationAggregatedListWarning
-    , ReservationAggregatedListWarning
-    , reservationAggregatedListWarning
-    , ralwData
-    , ralwCode
-    , ralwMessage
-
-    -- ** DiskListWarning
-    , DiskListWarning
-    , diskListWarning
-    , dlwData
-    , dlwCode
-    , dlwMessage
-
-    -- ** TCPHealthCheck
-    , TCPHealthCheck
-    , tcpHealthCheck
-    , thcResponse
-    , thcPortSpecification
-    , thcProxyHeader
-    , thcPortName
-    , thcPort
-    , thcRequest
-
-    -- ** InstanceGroupManagerAggregatedListWarningDataItem
-    , InstanceGroupManagerAggregatedListWarningDataItem
-    , instanceGroupManagerAggregatedListWarningDataItem
-    , igmalwdiValue
-    , igmalwdiKey
-
-    -- ** TestPermissionsResponse
-    , TestPermissionsResponse
-    , testPermissionsResponse
-    , tprPermissions
-
-    -- ** VPNGatewaysScopedListWarning
-    , VPNGatewaysScopedListWarning
-    , vpnGatewaysScopedListWarning
-    , vgslwData
-    , vgslwCode
-    , vgslwMessage
-
-    -- ** TargetPoolsScopedListWarningCode
-    , TargetPoolsScopedListWarningCode (..)
-
-    -- ** RegionAutoscalerListWarning
-    , RegionAutoscalerListWarning
-    , regionAutoscalerListWarning
-    , rData
-    , rCode
-    , rMessage
-
-    -- ** NetworkEndpointGroupAppEngine
-    , NetworkEndpointGroupAppEngine
-    , networkEndpointGroupAppEngine
-    , negaeService
-    , negaeURLMask
-    , negaeVersion
-
-    -- ** PreservedStateDisks
-    , PreservedStateDisks
-    , preservedStateDisks
-    , psdAddtional
-
-    -- ** TargetInstanceListWarningCode
-    , TargetInstanceListWarningCode (..)
-
-    -- ** InterconnectLocationRegionInfoLocationPresence
-    , InterconnectLocationRegionInfoLocationPresence (..)
-
-    -- ** SSLHealthCheckProxyHeader
-    , SSLHealthCheckProxyHeader (..)
-
-    -- ** TargetVPNGatewayStatus
-    , TargetVPNGatewayStatus (..)
-
-    -- ** TargetInstanceListWarningDataItem
-    , TargetInstanceListWarningDataItem
-    , targetInstanceListWarningDataItem
-    , tilwdiValue
-    , tilwdiKey
-
-    -- ** MetadataFilterFilterMatchCriteria
-    , MetadataFilterFilterMatchCriteria (..)
-
-    -- ** InstanceGroupManagerAggregatedListWarningCode
-    , InstanceGroupManagerAggregatedListWarningCode (..)
-
-    -- ** OperationListWarning
-    , OperationListWarning
-    , operationListWarning
-    , olwData
-    , olwCode
-    , olwMessage
-
-    -- ** InstanceGroupsRemoveInstancesRequest
-    , InstanceGroupsRemoveInstancesRequest
-    , instanceGroupsRemoveInstancesRequest
-    , igrirInstances
-
-    -- ** InstanceGroupManagersListPerInstanceConfigsRespWarningCode
-    , InstanceGroupManagersListPerInstanceConfigsRespWarningCode (..)
-
-    -- ** InterconnectAttachmentPartnerMetadata
-    , InterconnectAttachmentPartnerMetadata
-    , interconnectAttachmentPartnerMetadata
-    , iapmPortalURL
-    , iapmInterconnectName
-    , iapmPartnerName
-
-    -- ** SnapshotStatus
-    , SnapshotStatus (..)
-
-    -- ** SecurityPolicyRuleMatcherVersionedExpr
-    , SecurityPolicyRuleMatcherVersionedExpr (..)
-
-    -- ** MachineTypeListWarningDataItem
-    , MachineTypeListWarningDataItem
-    , machineTypeListWarningDataItem
-    , mtlwdiValue
-    , mtlwdiKey
-
-    -- ** NetworksRemovePeeringRequest
-    , NetworksRemovePeeringRequest
-    , networksRemovePeeringRequest
-    , nrprName
-
-    -- ** ExternalVPNGatewayLabels
-    , ExternalVPNGatewayLabels
-    , externalVPNGatewayLabels
-    , evglAddtional
-
-    -- ** TargetHTTPProxyListWarningDataItem
-    , TargetHTTPProxyListWarningDataItem
-    , targetHTTPProxyListWarningDataItem
-    , thttpplwdiValue
-    , thttpplwdiKey
-
-    -- ** MachineTypeAggregatedListWarning
-    , MachineTypeAggregatedListWarning
-    , machineTypeAggregatedListWarning
-    , mtalwData
-    , mtalwCode
-    , mtalwMessage
-
-    -- ** CircuitBreakers
-    , CircuitBreakers
-    , circuitBreakers
-    , cbMaxRequests
-    , cbMaxConnections
-    , cbMaxRequestsPerConnection
-    , cbMaxRetries
-    , cbMaxPendingRequests
-
-    -- ** FirewallPolicyRule
-    , FirewallPolicyRule
-    , firewallPolicyRule
-    , fprEnableLogging
-    , fprPriority
-    , fprDirection
-    , fprTargetResources
-    , fprKind
-    , fprDisabled
-    , fprAction
-    , fprRuleTupleCount
-    , fprMatch
-    , fprTargetServiceAccounts
-    , fprDescription
-
-    -- ** AutoscalerListWarningCode
-    , AutoscalerListWarningCode (..)
-
-    -- ** NodeTemplateAggregatedListWarningDataItem
-    , NodeTemplateAggregatedListWarningDataItem
-    , nodeTemplateAggregatedListWarningDataItem
-    , ntalwdiValue
-    , ntalwdiKey
-
-    -- ** BackendBucketList
-    , BackendBucketList
-    , backendBucketList
-    , bblNextPageToken
-    , bblKind
-    , bblItems
-    , bblSelfLink
-    , bblWarning
-    , bblId
-
-    -- ** InterconnectAttachmentPrivateInfo
-    , InterconnectAttachmentPrivateInfo
-    , interconnectAttachmentPrivateInfo
-    , iapiTag8021q
-
-    -- ** AcceleratorTypesScopedList
-    , AcceleratorTypesScopedList
-    , acceleratorTypesScopedList
-    , atslAcceleratorTypes
-    , atslWarning
-
-    -- ** ExternalVPNGatewayListWarningDataItem
-    , ExternalVPNGatewayListWarningDataItem
-    , externalVPNGatewayListWarningDataItem
-    , evglwdiValue
-    , evglwdiKey
-
-    -- ** PublicDelegatedPrefixList
-    , PublicDelegatedPrefixList
-    , publicDelegatedPrefixList
-    , pdplNextPageToken
-    , pdplKind
-    , pdplItems
-    , pdplSelfLink
-    , pdplWarning
-    , pdplId
-
-    -- ** BackendServiceCdnPolicy
-    , BackendServiceCdnPolicy
-    , backendServiceCdnPolicy
-    , bscpServeWhileStale
-    , bscpSignedURLCacheMaxAgeSec
-    , bscpNegativeCachingPolicy
-    , bscpBypassCacheOnRequestHeaders
-    , bscpRequestCoalescing
-    , bscpClientTtl
-    , bscpMaxTtl
-    , bscpCacheMode
-    , bscpDefaultTtl
-    , bscpNegativeCaching
-    , bscpSignedURLKeyNames
-    , bscpCacheKeyPolicy
-
-    -- ** DiskTypeListWarningCode
-    , DiskTypeListWarningCode (..)
-
-    -- ** RouteWarningsItemDataItem
-    , RouteWarningsItemDataItem
-    , routeWarningsItemDataItem
-    , rwidiValue
-    , rwidiKey
-
-    -- ** NodeGroupAggregatedList
-    , NodeGroupAggregatedList
-    , nodeGroupAggregatedList
-    , ngalUnreachables
-    , ngalNextPageToken
-    , ngalKind
-    , ngalItems
-    , ngalSelfLink
-    , ngalWarning
-    , ngalId
-
-    -- ** AddressPurpose
-    , AddressPurpose (..)
-
-    -- ** NodeTypeAggregatedListWarningCode
-    , NodeTypeAggregatedListWarningCode (..)
-
-    -- ** TargetInstancesScopedListWarningCode
-    , TargetInstancesScopedListWarningCode (..)
-
-    -- ** VPNTunnelListWarning
-    , VPNTunnelListWarning
-    , vpnTunnelListWarning
-    , vtlwData
-    , vtlwCode
-    , vtlwMessage
-
-    -- ** BackendServiceAggregatedListItems
-    , BackendServiceAggregatedListItems
-    , backendServiceAggregatedListItems
-    , bsaliAddtional
-
-    -- ** ReservationsScopedListWarningDataItem
-    , ReservationsScopedListWarningDataItem
-    , reservationsScopedListWarningDataItem
-    , rslwdiValue
-    , rslwdiKey
-
-    -- ** VPNTunnelAggregatedListWarningCode
-    , VPNTunnelAggregatedListWarningCode (..)
-
-    -- ** Reservation
-    , Reservation
-    , reservation
-    , rrSatisfiesPzs
-    , rrStatus
-    , rrKind
-    , rrSpecificReservation
-    , rrZone
-    , rrSpecificReservationRequired
-    , rrSelfLink
-    , rrName
-    , rrCreationTimestamp
-    , rrId
-    , rrCommitment
-    , rrDescription
-
-    -- ** InstanceManagedByIgmErrorManagedInstanceError
-    , InstanceManagedByIgmErrorManagedInstanceError
-    , instanceManagedByIgmErrorManagedInstanceError
-    , imbiemieCode
-    , imbiemieMessage
-
-    -- ** InstanceAggregatedListItems
-    , InstanceAggregatedListItems
-    , instanceAggregatedListItems
-    , ialiAddtional
-
-    -- ** AutoscalersScopedListWarning
-    , AutoscalersScopedListWarning
-    , autoscalersScopedListWarning
-    , aslwData
-    , aslwCode
-    , aslwMessage
-
-    -- ** URLMapsScopedList
-    , URLMapsScopedList
-    , urlMapsScopedList
-    , umslURLMaps
-    , umslWarning
-
-    -- ** DiskInstantiationConfig
-    , DiskInstantiationConfig
-    , diskInstantiationConfig
-    , dicAutoDelete
-    , dicInstantiateFrom
-    , dicCustomImage
-    , dicDeviceName
-
-    -- ** RegionInstanceGroupManagersListInstanceConfigsResp
-    , RegionInstanceGroupManagersListInstanceConfigsResp
-    , regionInstanceGroupManagersListInstanceConfigsResp
-    , rigmlicrNextPageToken
-    , rigmlicrItems
-    , rigmlicrWarning
-
-    -- ** LocalDisk
-    , LocalDisk
-    , localDisk
-    , ldDiskSizeGb
-    , ldDiskCount
-    , ldDiskType
-
-    -- ** DiskTypeAggregatedListWarning
-    , DiskTypeAggregatedListWarning
-    , diskTypeAggregatedListWarning
-    , dtalwData
-    , dtalwCode
-    , dtalwMessage
-
-    -- ** PublicDelegatedPrefixPublicDelegatedSubPrefixStatus
-    , PublicDelegatedPrefixPublicDelegatedSubPrefixStatus (..)
-
-    -- ** PerInstanceConfigStatus
-    , PerInstanceConfigStatus (..)
-
-    -- ** DiskTypeListWarningDataItem
-    , DiskTypeListWarningDataItem
-    , diskTypeListWarningDataItem
-    , dtlwdiValue
-    , dtlwdiKey
-
-    -- ** HTTPRetryPolicy
-    , HTTPRetryPolicy
-    , hTTPRetryPolicy
-    , httprpNumRetries
-    , httprpPerTryTimeout
-    , httprpRetryConditions
-
-    -- ** WafExpressionSet
-    , WafExpressionSet
-    , wafExpressionSet
-    , wesAliases
-    , wesExpressions
-    , wesId
-
-    -- ** SecurityPolicyRule
-    , SecurityPolicyRule
-    , securityPolicyRule
-    , sprPriority
-    , sprKind
-    , sprAction
-    , sprPreview
-    , sprMatch
-    , sprDescription
-
-    -- ** VPNGatewayAggregatedListWarningCode
-    , VPNGatewayAggregatedListWarningCode (..)
-
-    -- ** StatefulPolicyPreservedStateDiskDeviceAutoDelete
-    , StatefulPolicyPreservedStateDiskDeviceAutoDelete (..)
-
-    -- ** InterconnectsGetDiagnosticsResponse
-    , InterconnectsGetDiagnosticsResponse
-    , interconnectsGetDiagnosticsResponse
-    , igdrResult
-
-    -- ** WeightedBackendService
-    , WeightedBackendService
-    , weightedBackendService
-    , wbsWeight
-    , wbsHeaderAction
-    , wbsBackendService
-
-    -- ** VPNTunnelAggregatedListWarningDataItem
-    , VPNTunnelAggregatedListWarningDataItem
-    , vpnTunnelAggregatedListWarningDataItem
-    , vtalwdiValue
-    , vtalwdiKey
-
-    -- ** FixedOrPercent
-    , FixedOrPercent
-    , fixedOrPercent
-    , fopCalculated
-    , fopPercent
-    , fopFixed
-
-    -- ** FirewallLogConfig
-    , FirewallLogConfig
-    , firewallLogConfig
-    , flcEnable
-    , flcMetadata
-
-    -- ** ShieldedInstanceIntegrityPolicy
-    , ShieldedInstanceIntegrityPolicy
-    , shieldedInstanceIntegrityPolicy
-    , siipUpdateAutoLearnPolicy
-
-    -- ** TargetHTTPProxyListWarningCode
-    , TargetHTTPProxyListWarningCode (..)
-
-    -- ** RouterNAT
-    , RouterNAT
-    , routerNAT
-    , rnatNATIPAllocateOption
-    , rnatICMPIdleTimeoutSec
-    , rnatEnableEndpointIndependentMApping
-    , rnatUdpIdleTimeoutSec
-    , rnatNATIPs
-    , rnatSubnetworks
-    , rnatMinPortsPerVM
-    , rnatName
-    , rnatSourceSubnetworkIPRangesToNAT
-    , rnatTCPEstablishedIdleTimeoutSec
-    , rnatLogConfig
-    , rnatTCPTransitoryIdleTimeoutSec
-    , rnatDrainNATIPs
-
-    -- ** AutoscalerAggregatedListWarning
-    , AutoscalerAggregatedListWarning
-    , autoscalerAggregatedListWarning
-    , aalwData
-    , aalwCode
-    , aalwMessage
-
-    -- ** GRPCHealthCheckPortSpecification
-    , GRPCHealthCheckPortSpecification (..)
-
-    -- ** AutoscalerListWarningDataItem
-    , AutoscalerListWarningDataItem
-    , autoscalerListWarningDataItem
-    , alwdiValue
-    , alwdiKey
-
-    -- ** PacketMirroringAggregatedListItems
-    , PacketMirroringAggregatedListItems
-    , packetMirroringAggregatedListItems
-    , pmaliAddtional
-
-    -- ** InstanceGroupManagersListPerInstanceConfigsRespWarningDataItem
-    , InstanceGroupManagersListPerInstanceConfigsRespWarningDataItem
-    , instanceGroupManagersListPerInstanceConfigsRespWarningDataItem
-    , igmlpicrwdiValue
-    , igmlpicrwdiKey
-
-    -- ** MachineTypeListWarningCode
-    , MachineTypeListWarningCode (..)
-
-    -- ** ResourcePolicyList
-    , ResourcePolicyList
-    , resourcePolicyList
-    , rplEtag
-    , rplNextPageToken
-    , rplKind
-    , rplItems
-    , rplSelfLink
-    , rplWarning
-    , rplId
-
-    -- ** NodeTypeListWarning
-    , NodeTypeListWarning
-    , nodeTypeListWarning
-    , ntlwData
-    , ntlwCode
-    , ntlwMessage
-
-    -- ** PacketMirroringMirroredResourceInfoSubnetInfo
-    , PacketMirroringMirroredResourceInfoSubnetInfo
-    , packetMirroringMirroredResourceInfoSubnetInfo
-    , pmmrisiURL
-    , pmmrisiCanonicalURL
-
-    -- ** HealthCheckList
-    , HealthCheckList
-    , healthCheckList
-    , hclNextPageToken
-    , hclKind
-    , hclItems
-    , hclSelfLink
-    , hclWarning
-    , hclId
-
-    -- ** ManagedInstanceLastAttemptErrors
-    , ManagedInstanceLastAttemptErrors
-    , managedInstanceLastAttemptErrors
-    , milaeErrors
-
-    -- ** GuestOSFeatureType
-    , GuestOSFeatureType (..)
-
-    -- ** RouteWarningsItemCode
-    , RouteWarningsItemCode (..)
-
-    -- ** RouterStatusNATStatus
-    , RouterStatusNATStatus
-    , routerStatusNATStatus
-    , rsnatsDrainAutoAllocatedNATIPs
-    , rsnatsUserAllocatedNATIPResources
-    , rsnatsDrainUserAllocatedNATIPs
-    , rsnatsName
-    , rsnatsAutoAllocatedNATIPs
-    , rsnatsMinExtraNATIPsNeeded
-    , rsnatsNumVMEndpointsWithNATMAppings
-    , rsnatsUserAllocatedNATIPs
-
-    -- ** PublicAdvertisedPrefixPublicDelegatedPrefix
-    , PublicAdvertisedPrefixPublicDelegatedPrefix
-    , publicAdvertisedPrefixPublicDelegatedPrefix
-    , pAppdpStatus
-    , pAppdpProject
-    , pAppdpName
-    , pAppdpRegion
-    , pAppdpIPRange
-
-    -- ** TargetPoolsRemoveInstanceRequest
-    , TargetPoolsRemoveInstanceRequest
-    , targetPoolsRemoveInstanceRequest
-    , tprirInstances
-
-    -- ** NodeTypeAggregatedListWarningDataItem
-    , NodeTypeAggregatedListWarningDataItem
-    , nodeTypeAggregatedListWarningDataItem
-    , nValue
-    , nKey
-
-    -- ** GlobalNetworkEndpointGroupsAttachEndpointsRequest
-    , GlobalNetworkEndpointGroupsAttachEndpointsRequest
-    , globalNetworkEndpointGroupsAttachEndpointsRequest
-    , gnegaerNetworkEndpoints
-
-    -- ** TargetInstancesScopedListWarningDataItem
-    , TargetInstancesScopedListWarningDataItem
-    , targetInstancesScopedListWarningDataItem
-    , tislwdiValue
-    , tislwdiKey
-
-    -- ** ReservationsScopedListWarningCode
-    , ReservationsScopedListWarningCode (..)
-
-    -- ** MachineTypesScopedListWarning
-    , MachineTypesScopedListWarning
-    , machineTypesScopedListWarning
-    , mtslwData
-    , mtslwCode
-    , mtslwMessage
-
-    -- ** ZoneSetLabelsRequest
-    , ZoneSetLabelsRequest
-    , zoneSetLabelsRequest
-    , zslrLabels
-    , zslrLabelFingerprint
-
-    -- ** TargetInstance
-    , TargetInstance
-    , targetInstance
-    , tiKind
-    , tiNATPolicy
-    , tiZone
-    , tiSelfLink
-    , tiName
-    , tiCreationTimestamp
-    , tiId
-    , tiDescription
-    , tiInstance
-
-    -- ** TargetPoolInstanceHealth
-    , TargetPoolInstanceHealth
-    , targetPoolInstanceHealth
-    , tpihKind
-    , tpihHealthStatus
-
-    -- ** RouterBGPPeerAdvertiseMode
-    , RouterBGPPeerAdvertiseMode (..)
-
-    -- ** RegionInstanceGroupManagerListWarningCode
-    , RegionInstanceGroupManagerListWarningCode (..)
-
-    -- ** AcceleratorTypeAggregatedList
-    , AcceleratorTypeAggregatedList
-    , acceleratorTypeAggregatedList
-    , atalUnreachables
-    , atalNextPageToken
-    , atalKind
-    , atalItems
-    , atalSelfLink
-    , atalWarning
-    , atalId
-
-    -- ** SnapshotStorageBytesStatus
-    , SnapshotStorageBytesStatus (..)
-
-    -- ** NetworkRoutingConfig
-    , NetworkRoutingConfig
-    , networkRoutingConfig
-    , nrcRoutingMode
-
-    -- ** NodeTemplateListWarning
-    , NodeTemplateListWarning
-    , nodeTemplateListWarning
-    , nodData
-    , nodCode
-    , nodMessage
-
-    -- ** InstanceGroupManagersListManagedInstancesResponse
-    , InstanceGroupManagersListManagedInstancesResponse
-    , instanceGroupManagersListManagedInstancesResponse
-    , igmlmirNextPageToken
-    , igmlmirManagedInstances
-
-    -- ** InstanceProperties
-    , InstanceProperties
-    , instanceProperties
-    , ipAdvancedMachineFeatures
-    , ipServiceAccounts
-    , ipReservationAffinity
-    , ipNetworkInterfaces
-    , ipConfidentialInstanceConfig
-    , ipResourcePolicies
-    , ipGuestAccelerators
-    , ipMachineType
-    , ipMetadata
-    , ipShieldedInstanceConfig
-    , ipLabels
-    , ipScheduling
-    , ipMinCPUPlatform
-    , ipDisks
-    , ipCanIPForward
-    , ipDescription
-    , ipTags
-    , ipPrivateIPv6GoogleAccess
-
-    -- ** ExternalVPNGatewayListWarningCode
-    , ExternalVPNGatewayListWarningCode (..)
-
-    -- ** ProjectsListXpnHostsRequest
-    , ProjectsListXpnHostsRequest
-    , projectsListXpnHostsRequest
-    , plxhrOrganization
-
-    -- ** VPNGatewayListWarning
-    , VPNGatewayListWarning
-    , vpnGatewayListWarning
-    , vglwData
-    , vglwCode
-    , vglwMessage
-
-    -- ** RegionListWarning
-    , RegionListWarning
-    , regionListWarning
-    , rlwData
-    , rlwCode
-    , rlwMessage
-
-    -- ** HealthChecksAggregatedListItems
-    , HealthChecksAggregatedListItems
-    , healthChecksAggregatedListItems
-    , hcaliAddtional
-
-    -- ** HTTP2HealthCheck
-    , HTTP2HealthCheck
-    , hTTP2HealthCheck
-    , httphcResponse
-    , httphcPortSpecification
-    , httphcRequestPath
-    , httphcHost
-    , httphcProxyHeader
-    , httphcPortName
-    , httphcPort
-
-    -- ** NodeTemplateAggregatedListWarningCode
-    , NodeTemplateAggregatedListWarningCode (..)
-
-    -- ** VPNGatewayAggregatedListWarningDataItem
-    , VPNGatewayAggregatedListWarningDataItem
-    , vpnGatewayAggregatedListWarningDataItem
-    , vgalwdiValue
-    , vgalwdiKey
-
-    -- ** NodeGroupsScopedList
-    , NodeGroupsScopedList
-    , nodeGroupsScopedList
-    , ngslNodeGroups
-    , ngslWarning
-
-    -- ** PublicAdvertisedPrefixList
-    , PublicAdvertisedPrefixList
-    , publicAdvertisedPrefixList
-    , paplNextPageToken
-    , paplKind
-    , paplItems
-    , paplSelfLink
-    , paplWarning
-    , paplId
-
-    -- ** DiskTypesScopedListWarning
-    , DiskTypesScopedListWarning
-    , diskTypesScopedListWarning
-    , dtslwData
-    , dtslwCode
-    , dtslwMessage
-
-    -- ** InstanceGroupManagerUpdatePolicyInstanceRedistributionType
-    , InstanceGroupManagerUpdatePolicyInstanceRedistributionType (..)
-
-    -- ** HTTPFaultAbort
-    , HTTPFaultAbort
-    , hTTPFaultAbort
-    , httpfaHTTPStatus
-    , httpfaPercentage
-
-    -- ** RegionInstanceGroupManagerListWarningDataItem
-    , RegionInstanceGroupManagerListWarningDataItem
-    , regionInstanceGroupManagerListWarningDataItem
-    , rigmlwdiValue
-    , rigmlwdiKey
-
-    -- ** StatefulPolicy
-    , StatefulPolicy
-    , statefulPolicy
-    , spPreservedState
-
-    -- ** RuleAction
-    , RuleAction (..)
-
-    -- ** AddressesScopedListWarningCode
-    , AddressesScopedListWarningCode (..)
-
-    -- ** AttachedDiskInitializeParams
-    , AttachedDiskInitializeParams
-    , attachedDiskInitializeParams
-    , adipSourceImage
-    , adipDiskSizeGb
-    , adipProvisionedIops
-    , adipOnUpdateAction
-    , adipResourcePolicies
-    , adipDiskName
-    , adipSourceImageEncryptionKey
-    , adipDiskType
-    , adipLabels
-    , adipDescription
-    , adipSourceSnapshotEncryptionKey
-    , adipSourceSnapshot
-
-    -- ** UsableSubnetworkSecondaryRange
-    , UsableSubnetworkSecondaryRange
-    , usableSubnetworkSecondaryRange
-    , ussrRangeName
-    , ussrIPCIdRRange
-
-    -- ** NetworkEndpointGroupsAttachEndpointsRequest
-    , NetworkEndpointGroupsAttachEndpointsRequest
-    , networkEndpointGroupsAttachEndpointsRequest
-    , negaerNetworkEndpoints
-
-    -- ** AddressesScopedListWarningDataItem
-    , AddressesScopedListWarningDataItem
-    , addressesScopedListWarningDataItem
-    , aslwdiValue
-    , aslwdiKey
-
-    -- ** ImageStatus
-    , ImageStatus (..)
-
-    -- ** InstanceGroupListWarningCode
-    , InstanceGroupListWarningCode (..)
-
-    -- ** InstanceGroupListWarningDataItem
-    , InstanceGroupListWarningDataItem
-    , instanceGroupListWarningDataItem
-    , iglwdiValue
-    , iglwdiKey
-
-    -- ** NetworkInterface
-    , NetworkInterface
-    , networkInterface
-    , niIPv6AccessConfigs
-    , niIPv6Address
-    , niKind
-    , niFingerprint
-    , niAliasIPRanges
-    , niNetwork
-    , niStackType
-    , niNicType
-    , niName
-    , niNetworkIP
-    , niSubnetwork
-    , niIPv6AccessType
-    , niAccessConfigs
-
-    -- ** TargetHTTPSProxyAggregatedListWarning
-    , TargetHTTPSProxyAggregatedListWarning
-    , targetHTTPSProxyAggregatedListWarning
-    , thpalwData
-    , thpalwCode
-    , thpalwMessage
-
-    -- ** InitialStateConfig
-    , InitialStateConfig
-    , initialStateConfig
-    , iscDBxs
-    , iscPk
-    , iscDBs
-    , iscKeks
-
-    -- ** FirewallListWarningCode
-    , FirewallListWarningCode (..)
-
-    -- ** RouterListWarning
-    , RouterListWarning
-    , routerListWarning
-    , rouData
-    , rouCode
-    , rouMessage
-
-    -- ** FirewallListWarningDataItem
-    , FirewallListWarningDataItem
-    , firewallListWarningDataItem
-    , flwdiValue
-    , flwdiKey
-
-    -- ** InterconnectAttachmentType
-    , InterconnectAttachmentType (..)
-
-    -- ** ResourcePolicyAggregatedListItems
-    , ResourcePolicyAggregatedListItems
-    , resourcePolicyAggregatedListItems
-    , rpaliAddtional
-
-    -- ** TargetPoolsRemoveHealthCheckRequest
-    , TargetPoolsRemoveHealthCheckRequest
-    , targetPoolsRemoveHealthCheckRequest
-    , tprhcrHealthChecks
-
-    -- ** AutoscalerStatusDetailsType
-    , AutoscalerStatusDetailsType (..)
-
-    -- ** FirewallDirection
-    , FirewallDirection (..)
-
-    -- ** NodeGroupNodeStatus
-    , NodeGroupNodeStatus (..)
-
-    -- ** TargetHTTPSProxiesSetQuicOverrideRequestQuicOverride
-    , TargetHTTPSProxiesSetQuicOverrideRequestQuicOverride (..)
-
-    -- ** RegionInstanceGroupManagersSetTargetPoolsRequest
-    , RegionInstanceGroupManagersSetTargetPoolsRequest
-    , regionInstanceGroupManagersSetTargetPoolsRequest
-    , rigmstprFingerprint
-    , rigmstprTargetPools
-
-    -- ** BackendBucketCdnPolicy
-    , BackendBucketCdnPolicy
-    , backendBucketCdnPolicy
-    , bbcpServeWhileStale
-    , bbcpSignedURLCacheMaxAgeSec
-    , bbcpNegativeCachingPolicy
-    , bbcpBypassCacheOnRequestHeaders
-    , bbcpRequestCoalescing
-    , bbcpClientTtl
-    , bbcpMaxTtl
-    , bbcpCacheMode
-    , bbcpDefaultTtl
-    , bbcpNegativeCaching
-    , bbcpSignedURLKeyNames
-
-    -- ** ResourcePolicyDailyCycle
-    , ResourcePolicyDailyCycle
-    , resourcePolicyDailyCycle
-    , rpdcStartTime
-    , rpdcDaysInCycle
-    , rpdcDuration
-
-    -- ** TargetSSLProxyList
-    , TargetSSLProxyList
-    , targetSSLProxyList
-    , tsplNextPageToken
-    , tsplKind
-    , tsplItems
-    , tsplSelfLink
-    , tsplWarning
-    , tsplId
-
-    -- ** CustomerEncryptionKeyProtectedDisk
-    , CustomerEncryptionKeyProtectedDisk
-    , customerEncryptionKeyProtectedDisk
-    , cekpdDiskEncryptionKey
-    , cekpdSource
-
-    -- ** GlobalOrganizationSetPolicyRequest
-    , GlobalOrganizationSetPolicyRequest
-    , globalOrganizationSetPolicyRequest
-    , gosprEtag
-    , gosprBindings
-    , gosprPolicy
-
-    -- ** HealthStatusHealthState
-    , HealthStatusHealthState (..)
-
-    -- ** InstanceTemplateList
-    , InstanceTemplateList
-    , instanceTemplateList
-    , itlNextPageToken
-    , itlKind
-    , itlItems
-    , itlSelfLink
-    , itlWarning
-    , itlId
-
-    -- ** Reference
-    , Reference
-    , reference
-    , refKind
-    , refReferrer
-    , refReferenceType
-    , refTarget
-
-    -- ** HealthCheckServiceHealthStatusAggregationPolicy
-    , HealthCheckServiceHealthStatusAggregationPolicy (..)
-
-    -- ** InstanceGroupAggregatedListWarning
-    , InstanceGroupAggregatedListWarning
-    , instanceGroupAggregatedListWarning
-    , igalwData
-    , igalwCode
-    , igalwMessage
-
-    -- ** RouteList
-    , RouteList
-    , routeList
-    , rouNextPageToken
-    , rouKind
-    , rouItems
-    , rouSelfLink
-    , rouWarning
-    , rouId
-
-    -- ** DeprecationStatusState
-    , DeprecationStatusState (..)
-
-    -- ** URLMapsAggregatedList
-    , URLMapsAggregatedList
-    , urlMapsAggregatedList
-    , umalUnreachables
-    , umalNextPageToken
-    , umalKind
-    , umalItems
-    , umalSelfLink
-    , umalWarning
-    , umalId
-
-    -- ** InstanceListReferrers
-    , InstanceListReferrers
-    , instanceListReferrers
-    , ilrNextPageToken
-    , ilrKind
-    , ilrItems
-    , ilrSelfLink
-    , ilrWarning
-    , ilrId
-
-    -- ** NodeGroupStatus
-    , NodeGroupStatus (..)
-
-    -- ** OutlierDetection
-    , OutlierDetection
-    , outlierDetection
-    , odEnforcingConsecutiveErrors
-    , odSuccessRateMinimumHosts
-    , odConsecutiveGatewayFailure
-    , odConsecutiveErrors
-    , odEnforcingConsecutiveGatewayFailure
-    , odBaseEjectionTime
-    , odSuccessRateStdevFactor
-    , odInterval
-    , odEnforcingSuccessRate
-    , odMaxEjectionPercent
-    , odSuccessRateRequestVolume
-
-    -- ** ResourcePolicyInstanceSchedulePolicySchedule
-    , ResourcePolicyInstanceSchedulePolicySchedule
-    , resourcePolicyInstanceSchedulePolicySchedule
-    , rpispsSchedule
-
-    -- ** SubnetworkPrivateIPv6GoogleAccess
-    , SubnetworkPrivateIPv6GoogleAccess (..)
-
-    -- ** Router
-    , Router
-    , router
-    , rouoBGPPeers
-    , rouoEncryptedInterconnectRouter
-    , rouoBGP
-    , rouoKind
-    , rouoNetwork
-    , rouoInterfaces
-    , rouoSelfLink
-    , rouoName
-    , rouoCreationTimestamp
-    , rouoId
-    , rouoRegion
-    , rouoNATs
-    , rouoDescription
-
-    -- ** NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType
-    , NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType (..)
-
-    -- ** LocationPolicyLocations
-    , LocationPolicyLocations
-    , locationPolicyLocations
-    , lplAddtional
-
-    -- ** RouterAggregatedListWarningCode
-    , RouterAggregatedListWarningCode (..)
-
-    -- ** RoutersScopedListWarningCode
-    , RoutersScopedListWarningCode (..)
-
-    -- ** RouterAggregatedListWarningDataItem
-    , RouterAggregatedListWarningDataItem
-    , routerAggregatedListWarningDataItem
-    , ralwdiValue
-    , ralwdiKey
-
-    -- ** TargetHTTPSProxyListWarningCode
-    , TargetHTTPSProxyListWarningCode (..)
-
-    -- ** RoutersScopedListWarningDataItem
-    , RoutersScopedListWarningDataItem
-    , routersScopedListWarningDataItem
-    , rValue
-    , rKey
-
-    -- ** SubnetworksSetPrivateIPGoogleAccessRequest
-    , SubnetworksSetPrivateIPGoogleAccessRequest
-    , subnetworksSetPrivateIPGoogleAccessRequest
-    , sspigarPrivateIPGoogleAccess
-
-    -- ** TargetHTTPSProxyListWarningDataItem
-    , TargetHTTPSProxyListWarningDataItem
-    , targetHTTPSProxyListWarningDataItem
-    , thplwdiValue
-    , thplwdiKey
-
-    -- ** InterconnectDiagnosticsLinkLACPStatusState
-    , InterconnectDiagnosticsLinkLACPStatusState (..)
-
-    -- ** VPNGatewayStatusHighAvailabilityRequirementState
-    , VPNGatewayStatusHighAvailabilityRequirementState
-    , vpnGatewayStatusHighAvailabilityRequirementState
-    , vgsharsState
-    , vgsharsUnsatisfiedReason
-
-    -- ** PublicDelegatedPrefixAggregatedListItems
-    , PublicDelegatedPrefixAggregatedListItems
-    , publicDelegatedPrefixAggregatedListItems
-    , pdpaliAddtional
-
-    -- ** ManagedInstanceCurrentAction
-    , ManagedInstanceCurrentAction (..)
-
-    -- ** TargetVPNGatewayList
-    , TargetVPNGatewayList
-    , targetVPNGatewayList
-    , tvglNextPageToken
-    , tvglKind
-    , tvglItems
-    , tvglSelfLink
-    , tvglWarning
-    , tvglId
-
-    -- ** TargetInstanceNATPolicy
-    , TargetInstanceNATPolicy (..)
-
-    -- ** RegionURLMapsValidateRequest
-    , RegionURLMapsValidateRequest
-    , regionURLMapsValidateRequest
-    , rumvrResource
-
-    -- ** SSLCertificateList
-    , SSLCertificateList
-    , sslCertificateList
-    , sclNextPageToken
-    , sclKind
-    , sclItems
-    , sclSelfLink
-    , sclWarning
-    , sclId
-
-    -- ** SecuritySettings
-    , SecuritySettings
-    , securitySettings
-    , ssClientTLSPolicy
-    , ssSubjectAltNames
-
-    -- ** FirewallAllowedItem
-    , FirewallAllowedItem
-    , firewallAllowedItem
-    , faiIPProtocol
-    , faiPorts
-
-    -- ** RouterAdvertisedIPRange
-    , RouterAdvertisedIPRange
-    , routerAdvertisedIPRange
-    , rairRange
-    , rairDescription
-
-    -- ** ResourcePolicySnapshotSchedulePolicySchedule
-    , ResourcePolicySnapshotSchedulePolicySchedule
-    , resourcePolicySnapshotSchedulePolicySchedule
-    , rpsspsDailySchedule
-    , rpsspsHourlySchedule
-    , rpsspsWeeklySchedule
-
-    -- ** RouterListWarningDataItem
-    , RouterListWarningDataItem
-    , routerListWarningDataItem
-    , rouValue
-    , rouKey
-
-    -- ** Rule
-    , Rule
-    , rule
-    , rAction
-    , rNotIns
-    , rIns
-    , rLogConfigs
-    , rConditions
-    , rPermissions
-    , rDescription
-
-    -- ** PacketMirroringsScopedList
-    , PacketMirroringsScopedList
-    , packetMirroringsScopedList
-    , pmslPacketMirrorings
-    , pmslWarning
-
-    -- ** BackendServiceAggregatedList
-    , BackendServiceAggregatedList
-    , backendServiceAggregatedList
-    , bsalUnreachables
-    , bsalNextPageToken
-    , bsalKind
-    , bsalItems
-    , bsalSelfLink
-    , bsalWarning
-    , bsalId
-
-    -- ** Network
-    , Network
-    , network
-    , nMtu
-    , nAutoCreateSubnetworks
-    , nKind
-    , nRoutingConfig
-    , nSubnetworks
-    , nIPv4Range
-    , nSelfLink
-    , nName
-    , nCreationTimestamp
-    , nId
-    , nGatewayIPv4
-    , nDescription
-    , nPeerings
-
-    -- ** NetworkEndpointGroupAnnotations
-    , NetworkEndpointGroupAnnotations
-    , networkEndpointGroupAnnotations
-    , negaAddtional
-
-    -- ** RoutersScopedListWarning
-    , RoutersScopedListWarning
-    , routersScopedListWarning
-    , rslwData
-    , rslwCode
-    , rslwMessage
-
-    -- ** TargetHTTPSProxyAggregatedListWarningCode
-    , TargetHTTPSProxyAggregatedListWarningCode (..)
-
-    -- ** UsableSubnetwork
-    , UsableSubnetwork
-    , usableSubnetwork
-    , usNetwork
-    , usSecondaryIPRanges
-    , usIPCIdRRange
-    , usSubnetwork
-
-    -- ** RouterBGPPeerAdvertisedGroupsItem
-    , RouterBGPPeerAdvertisedGroupsItem (..)
-
-    -- ** AutoscalingPolicyCPUUtilizationPredictiveMethod
-    , AutoscalingPolicyCPUUtilizationPredictiveMethod (..)
-
-    -- ** AccessConfigType
-    , AccessConfigType (..)
-
-    -- ** TargetHTTPSProxyListWarning
-    , TargetHTTPSProxyListWarning
-    , targetHTTPSProxyListWarning
-    , thplwData
-    , thplwCode
-    , thplwMessage
-
-    -- ** AddressesScopedListWarning
-    , AddressesScopedListWarning
-    , addressesScopedListWarning
-    , aData
-    , aCode
-    , aMessage
-
-    -- ** SecurityPolicy
-    , SecurityPolicy
-    , securityPolicy
-    , secAdvancedOptionsConfig
-    , secRules
-    , secKind
-    , secFingerprint
-    , secSelfLink
-    , secName
-    , secCreationTimestamp
-    , secId
-    , secDescription
-
-    -- ** InstanceGroupAggregatedListWarningDataItem
-    , InstanceGroupAggregatedListWarningDataItem
-    , instanceGroupAggregatedListWarningDataItem
-    , igalwdiValue
-    , igalwdiKey
-
-    -- ** BackendServiceLocalityLbPolicy
-    , BackendServiceLocalityLbPolicy (..)
-
-    -- ** ForwardingRuleIPVersion
-    , ForwardingRuleIPVersion (..)
-
-    -- ** NodeGroupMaintenanceWindow
-    , NodeGroupMaintenanceWindow
-    , nodeGroupMaintenanceWindow
-    , ngmwStartTime
-    , ngmwMaintenanceDuration
-
-    -- ** RouterNATLogConfigFilter
-    , RouterNATLogConfigFilter (..)
-
-    -- ** RouterListWarningCode
-    , RouterListWarningCode (..)
-
-    -- ** ImageRawDisk
-    , ImageRawDisk
-    , imageRawDisk
-    , irdContainerType
-    , irdSource
-    , irdSha1Checksum
-
-    -- ** InstanceAggregatedList
-    , InstanceAggregatedList
-    , instanceAggregatedList
-    , ialUnreachables
-    , ialNextPageToken
-    , ialKind
-    , ialItems
-    , ialSelfLink
-    , ialWarning
-    , ialId
-
-    -- ** ForwardingRuleReference
-    , ForwardingRuleReference
-    , forwardingRuleReference
-    , frrForwardingRule
-
-    -- ** NotificationEndpoint
-    , NotificationEndpoint
-    , notificationEndpoint
-    , neKind
-    , neSelfLink
-    , neName
-    , neCreationTimestamp
-    , neId
-    , neRegion
-    , neGrpcSettings
-    , neDescription
-
-    -- ** TargetTCPProxiesSetBackendServiceRequest
-    , TargetTCPProxiesSetBackendServiceRequest
-    , targetTCPProxiesSetBackendServiceRequest
-    , ttpsbsrService
-
-    -- ** RegionInstanceGroupManagerPatchInstanceConfigReq
-    , RegionInstanceGroupManagerPatchInstanceConfigReq
-    , regionInstanceGroupManagerPatchInstanceConfigReq
-    , rigmpicrPerInstanceConfigs
-
-    -- ** SSLHealthCheck
-    , SSLHealthCheck
-    , sslHealthCheck
-    , shcResponse
-    , shcPortSpecification
-    , shcProxyHeader
-    , shcPortName
-    , shcPort
-    , shcRequest
-
-    -- ** Address
-    , Address
-    , address
-    , aPrefixLength
-    , aNetworkTier
-    , aStatus
-    , aUsers
-    , aKind
-    , aIPVersion
-    , aNetwork
-    , aAddress
-    , aPurpose
-    , aSelfLink
-    , aName
-    , aCreationTimestamp
-    , aSubnetwork
-    , aId
-    , aRegion
-    , aDescription
-    , aAddressType
-
-    -- ** NodeGroupAggregatedListItems
-    , NodeGroupAggregatedListItems
-    , nodeGroupAggregatedListItems
-    , ngaliAddtional
-
-    -- ** InstanceGroupAggregatedListWarningCode
-    , InstanceGroupAggregatedListWarningCode (..)
-
-    -- ** InstanceGroupListWarning
-    , InstanceGroupListWarning
-    , instanceGroupListWarning
-    , iglwData
-    , iglwCode
-    , iglwMessage
-
-    -- ** AttachedDiskInitializeParamsLabels
-    , AttachedDiskInitializeParamsLabels
-    , attachedDiskInitializeParamsLabels
-    , adiplAddtional
-
-    -- ** InstanceGroupManagersDeletePerInstanceConfigsReq
-    , InstanceGroupManagersDeletePerInstanceConfigsReq
-    , instanceGroupManagersDeletePerInstanceConfigsReq
-    , igmdpicrNames
-
-    -- ** NetworkInterfaceIPv6AccessType
-    , NetworkInterfaceIPv6AccessType (..)
-
-    -- ** StatefulPolicyPreservedStateDiskDevice
-    , StatefulPolicyPreservedStateDiskDevice
-    , statefulPolicyPreservedStateDiskDevice
-    , sppsddAutoDelete
-
-    -- ** Zone
-    , Zone
-    , zone
-    , zStatus
-    , zKind
-    , zSelfLink
-    , zName
-    , zCreationTimestamp
-    , zSupportsPzs
-    , zId
-    , zRegion
-    , zAvailableCPUPlatforms
-    , zDescription
-    , zDeprecated
-
-    -- ** RouterBGP
-    , RouterBGP
-    , routerBGP
-    , rbKeepaliveInterval
-    , rbASN
-    , rbAdvertiseMode
-    , rbAdvertisedGroups
-    , rbAdvertisedIPRanges
-
-    -- ** ProjectsSetDefaultNetworkTierRequestNetworkTier
-    , ProjectsSetDefaultNetworkTierRequestNetworkTier (..)
-
-    -- ** FirewallListWarning
-    , FirewallListWarning
-    , firewallListWarning
-    , flwData
-    , flwCode
-    , flwMessage
-
-    -- ** BackendServicesScopedList
-    , BackendServicesScopedList
-    , backendServicesScopedList
-    , bsslWarning
-    , bsslBackendServices
-
-    -- ** PacketMirroringAggregatedList
-    , PacketMirroringAggregatedList
-    , packetMirroringAggregatedList
-    , pmalUnreachables
-    , pmalNextPageToken
-    , pmalKind
-    , pmalItems
-    , pmalSelfLink
-    , pmalWarning
-    , pmalId
-
-    -- ** InstanceGroupManagersRecreateInstancesRequest
-    , InstanceGroupManagersRecreateInstancesRequest
-    , instanceGroupManagersRecreateInstancesRequest
-    , igmrirInstances
-
-    -- ** BackendServiceGroupHealthAnnotations
-    , BackendServiceGroupHealthAnnotations
-    , backendServiceGroupHealthAnnotations
-    , bsghaAddtional
-
-    -- ** HealthChecksAggregatedList
-    , HealthChecksAggregatedList
-    , healthChecksAggregatedList
-    , hcalUnreachables
-    , hcalNextPageToken
-    , hcalKind
-    , hcalItems
-    , hcalSelfLink
-    , hcalWarning
-    , hcalId
-
-    -- ** InstanceGroupManagersUpdatePerInstanceConfigsReq
-    , InstanceGroupManagersUpdatePerInstanceConfigsReq
-    , instanceGroupManagersUpdatePerInstanceConfigsReq
-    , igmupicrPerInstanceConfigs
-
-    -- ** TargetSSLProxiesSetSSLCertificatesRequest
-    , TargetSSLProxiesSetSSLCertificatesRequest
-    , targetSSLProxiesSetSSLCertificatesRequest
-    , tspsscrSSLCertificates
-
-    -- ** HealthStatusForNetworkEndpoint
-    , HealthStatusForNetworkEndpoint
-    , healthStatusForNetworkEndpoint
-    , hsfneHealthCheckService
-    , hsfneHealthCheck
-    , hsfneForwardingRule
-    , hsfneHealthState
-    , hsfneBackendService
-
-    -- ** FirewallPolicy
-    , FirewallPolicy
-    , firewallPolicy
-    , fpParent
-    , fpRules
-    , fpShortName
-    , fpKind
-    , fpFingerprint
-    , fpSelfLinkWithId
-    , fpSelfLink
-    , fpName
-    , fpCreationTimestamp
-    , fpAssociations
-    , fpDisplayName
-    , fpId
-    , fpRuleTupleCount
-    , fpDescription
-
-    -- ** RouterAggregatedListWarning
-    , RouterAggregatedListWarning
-    , routerAggregatedListWarning
-    , ralwaData
-    , ralwaCode
-    , ralwaMessage
-
-    -- ** TargetHTTPSProxyAggregatedListWarningDataItem
-    , TargetHTTPSProxyAggregatedListWarningDataItem
-    , targetHTTPSProxyAggregatedListWarningDataItem
-    , thpalwdiValue
-    , thpalwdiKey
-
-    -- ** InstancesScopedList
-    , InstancesScopedList
-    , instancesScopedList
-    , islWarning
-    , islInstances
-
-    -- ** AcceleratorTypeAggregatedListItems
-    , AcceleratorTypeAggregatedListItems
-    , acceleratorTypeAggregatedListItems
-    , ataliAddtional
-
-    -- ** TargetVPNGatewayAggregatedListWarningDataItem
-    , TargetVPNGatewayAggregatedListWarningDataItem
-    , targetVPNGatewayAggregatedListWarningDataItem
-    , tvgalwdiValue
-    , tvgalwdiKey
-
-    -- ** BackendServiceLoadBalancingScheme
-    , BackendServiceLoadBalancingScheme (..)
-
-    -- ** HealthCheckReference
-    , HealthCheckReference
-    , healthCheckReference
-    , hcrHealthCheck
-
-    -- ** ConfidentialInstanceConfig
-    , ConfidentialInstanceConfig
-    , confidentialInstanceConfig
-    , cicEnableConfidentialCompute
-
-    -- ** TargetInstanceAggregatedListItems
-    , TargetInstanceAggregatedListItems
-    , targetInstanceAggregatedListItems
-    , tialiAddtional
-
-    -- ** SSLCertificatesScopedListWarningCode
-    , SSLCertificatesScopedListWarningCode (..)
-
-    -- ** TargetHTTPSProxiesSetQuicOverrideRequest
-    , TargetHTTPSProxiesSetQuicOverrideRequest
-    , targetHTTPSProxiesSetQuicOverrideRequest
-    , thpsqorQuicOverride
-
-    -- ** TargetSSLProxyListWarning
-    , TargetSSLProxyListWarning
-    , targetSSLProxyListWarning
-    , tsplwData
-    , tsplwCode
-    , tsplwMessage
-
-    -- ** InstanceTemplateListWarning
-    , InstanceTemplateListWarning
-    , instanceTemplateListWarning
-    , itlwData
-    , itlwCode
-    , itlwMessage
-
-    -- ** InstanceListReferrersWarning
-    , InstanceListReferrersWarning
-    , instanceListReferrersWarning
-    , ilrwData
-    , ilrwCode
-    , ilrwMessage
-
-    -- ** URLMapsAggregatedListWarning
-    , URLMapsAggregatedListWarning
-    , urlMapsAggregatedListWarning
-    , umalwData
-    , umalwCode
-    , umalwMessage
-
-    -- ** RouteListWarning
-    , RouteListWarning
-    , routeListWarning
-    , rlwlData
-    , rlwlCode
-    , rlwlMessage
-
-    -- ** ResourcePolicyGroupPlacementPolicyCollocation
-    , ResourcePolicyGroupPlacementPolicyCollocation (..)
-
-    -- ** TargetTCPProxyProxyHeader
-    , TargetTCPProxyProxyHeader (..)
-
-    -- ** InstanceGroupAggregatedList
-    , InstanceGroupAggregatedList
-    , instanceGroupAggregatedList
-    , igalUnreachables
-    , igalNextPageToken
-    , igalKind
-    , igalItems
-    , igalSelfLink
-    , igalWarning
-    , igalId
-
-    -- ** TargetVPNGatewayAggregatedListWarningCode
-    , TargetVPNGatewayAggregatedListWarningCode (..)
-
-    -- ** OperationStatus
-    , OperationStatus (..)
-
-    -- ** Route
-    , Route
-    , route
-    , r1NextHopIlb
-    , r1NextHopPeering
-    , r1Priority
-    , r1Kind
-    , r1NextHopGateway
-    , r1NextHopNetwork
-    , r1Network
-    , r1Warnings
-    , r1NextHopIP
-    , r1DestRange
-    , r1SelfLink
-    , r1Name
-    , r1CreationTimestamp
-    , r1Id
-    , r1NextHopVPNTunnel
-    , r1Description
-    , r1Tags
-    , r1NextHopInstance
-
-    -- ** URLRewrite
-    , URLRewrite
-    , urlRewrite
-    , urPathPrefixRewrite
-    , urHostRewrite
-
-    -- ** TargetVPNGatewaysScopedListWarningDataItem
-    , TargetVPNGatewaysScopedListWarningDataItem
-    , targetVPNGatewaysScopedListWarningDataItem
-    , tvgslwdiValue
-    , tvgslwdiKey
-
-    -- ** LogConfigCloudAuditOptionsLogName
-    , LogConfigCloudAuditOptionsLogName (..)
-
-    -- ** AllocationSpecificSKUAllocationReservedInstanceProperties
-    , AllocationSpecificSKUAllocationReservedInstanceProperties
-    , allocationSpecificSKUAllocationReservedInstanceProperties
-    , asskuaripGuestAccelerators
-    , asskuaripLocalSsds
-    , asskuaripMachineType
-    , asskuaripMinCPUPlatform
-    , asskuaripLocationHint
-
-    -- ** LicenseCodeState
-    , LicenseCodeState (..)
-
-    -- ** InterconnectLocationRegionInfo
-    , InterconnectLocationRegionInfo
-    , interconnectLocationRegionInfo
-    , ilriLocationPresence
-    , ilriExpectedRttMs
-    , ilriRegion
-
-    -- ** NetworkEndpointGroupCloudFunction
-    , NetworkEndpointGroupCloudFunction
-    , networkEndpointGroupCloudFunction
-    , negcfFunction
-    , negcfURLMask
-
-    -- ** TCPHealthCheckPortSpecification
-    , TCPHealthCheckPortSpecification (..)
-
-    -- ** TargetVPNGatewaysScopedListWarningCode
-    , TargetVPNGatewaysScopedListWarningCode (..)
-
-    -- ** TargetHTTPSProxiesSetSSLCertificatesRequest
-    , TargetHTTPSProxiesSetSSLCertificatesRequest
-    , targetHTTPSProxiesSetSSLCertificatesRequest
-    , thpsscrSSLCertificates
-
-    -- ** InstancesRemoveResourcePoliciesRequest
-    , InstancesRemoveResourcePoliciesRequest
-    , instancesRemoveResourcePoliciesRequest
-    , irrprResourcePolicies
-
-    -- ** FileContentBufferFileType
-    , FileContentBufferFileType (..)
-
-    -- ** InstanceGroupManagersPatchPerInstanceConfigsReq
-    , InstanceGroupManagersPatchPerInstanceConfigsReq
-    , instanceGroupManagersPatchPerInstanceConfigsReq
-    , igmppicrPerInstanceConfigs
-
-    -- ** InstanceTemplate
-    , InstanceTemplate
-    , instanceTemplate
-    , itSourceInstance
-    , itKind
-    , itSelfLink
-    , itName
-    , itCreationTimestamp
-    , itId
-    , itSourceInstanceParams
-    , itDescription
-    , itProperties
-
-    -- ** XpnResourceId
-    , XpnResourceId
-    , xpnResourceId
-    , xriId
-    , xriType
-
-    -- ** RouterList
-    , RouterList
-    , routerList
-    , rllNextPageToken
-    , rllKind
-    , rllItems
-    , rllSelfLink
-    , rllWarning
-    , rllId
-
-    -- ** TargetSSLProxy
-    , TargetSSLProxy
-    , targetSSLProxy
-    , tspSSLPolicy
-    , tspSSLCertificates
-    , tspService
-    , tspKind
-    , tspSelfLink
-    , tspName
-    , tspCreationTimestamp
-    , tspId
-    , tspProxyHeader
-    , tspDescription
-
-    -- ** InstanceGroupManagerStatus
-    , InstanceGroupManagerStatus
-    , instanceGroupManagerStatus
-    , igmsVersionTarget
-    , igmsIsStable
-    , igmsAutoscaler
-    , igmsStateful
-
-    -- ** TargetHTTPSProxyAggregatedList
-    , TargetHTTPSProxyAggregatedList
-    , targetHTTPSProxyAggregatedList
-    , thpalUnreachables
-    , thpalNextPageToken
-    , thpalKind
-    , thpalItems
-    , thpalSelfLink
-    , thpalWarning
-    , thpalId
-
-    -- ** ReservationAggregatedListItems
-    , ReservationAggregatedListItems
-    , reservationAggregatedListItems
-    , raliAddtional
-
-    -- ** RegionInstanceGroupManagersCreateInstancesRequest
-    , RegionInstanceGroupManagersCreateInstancesRequest
-    , regionInstanceGroupManagersCreateInstancesRequest
-    , rigmcirInstances
-
-    -- ** SSLCertificateListWarning
-    , SSLCertificateListWarning
-    , sslCertificateListWarning
-    , sclwData
-    , sclwCode
-    , sclwMessage
-
-    -- ** SnapshotListWarningDataItem
-    , SnapshotListWarningDataItem
-    , snapshotListWarningDataItem
-    , slwdiValue
-    , slwdiKey
-
-    -- ** TargetVPNGateway
-    , TargetVPNGateway
-    , targetVPNGateway
-    , tvgStatus
-    , tvgKind
-    , tvgNetwork
-    , tvgSelfLink
-    , tvgName
-    , tvgCreationTimestamp
-    , tvgId
-    , tvgRegion
-    , tvgTunnels
-    , tvgDescription
-    , tvgForwardingRules
-
-    -- ** BackendServiceCdnPolicyBypassCacheOnRequestHeader
-    , BackendServiceCdnPolicyBypassCacheOnRequestHeader
-    , backendServiceCdnPolicyBypassCacheOnRequestHeader
-    , bscpbcorhHeaderName
-
-    -- ** SSLCertificateSelfManagedSSLCertificate
-    , SSLCertificateSelfManagedSSLCertificate
-    , sslCertificateSelfManagedSSLCertificate
-    , scsmscPrivateKey
-    , scsmscCertificate
-
-    -- ** DiskStatus
-    , DiskStatus (..)
-
-    -- ** ResourceCommitment
-    , ResourceCommitment
-    , resourceCommitment
-    , rcAmount
-    , rcAcceleratorType
-    , rcType
-
-    -- ** ConsistentHashLoadBalancerSettingsHTTPCookie
-    , ConsistentHashLoadBalancerSettingsHTTPCookie
-    , consistentHashLoadBalancerSettingsHTTPCookie
-    , chlbshttpcTtl
-    , chlbshttpcPath
-    , chlbshttpcName
-
-    -- ** SnapshotListWarningCode
-    , SnapshotListWarningCode (..)
-
-    -- ** SubnetworkLogConfigMetadata
-    , SubnetworkLogConfigMetadata (..)
-
-    -- ** BackendServiceIAP
-    , BackendServiceIAP
-    , backendServiceIAP
-    , bsiapEnabled
-    , bsiapOAuth2ClientSecretSha256
-    , bsiapOAuth2ClientSecret
-    , bsiapOAuth2ClientId
-
-    -- ** TargetVPNGatewayListWarning
-    , TargetVPNGatewayListWarning
-    , targetVPNGatewayListWarning
-    , tvglwData
-    , tvglwCode
-    , tvglwMessage
-
-    -- ** InterconnectAttachmentEdgeAvailabilityDomain
-    , InterconnectAttachmentEdgeAvailabilityDomain (..)
-
-    -- ** SecurityPoliciesListPreConfiguredExpressionSetsResponse
-    , SecurityPoliciesListPreConfiguredExpressionSetsResponse
-    , securityPoliciesListPreConfiguredExpressionSetsResponse
-    , splpcesrPreConfiguredExpressionSets
-
-    -- ** ManagedInstanceInstanceStatus
-    , ManagedInstanceInstanceStatus (..)
-
-    -- ** HTTPHealthCheckProxyHeader
-    , HTTPHealthCheckProxyHeader (..)
-
-    -- ** SSLCertificateAggregatedListWarningDataItem
-    , SSLCertificateAggregatedListWarningDataItem
-    , sslCertificateAggregatedListWarningDataItem
-    , scalwdiValue
-    , scalwdiKey
-
-    -- ** VMEndpointNATMAppingsListWarningDataItem
-    , VMEndpointNATMAppingsListWarningDataItem
-    , vMEndpointNATMAppingsListWarningDataItem
-    , vmenatmalwdiValue
-    , vmenatmalwdiKey
-
-    -- ** HealthCheckServicesListWarningDataItem
-    , HealthCheckServicesListWarningDataItem
-    , healthCheckServicesListWarningDataItem
-    , hValue
-    , hKey
-
-    -- ** InterconnectLocationContinent
-    , InterconnectLocationContinent (..)
-
-    -- ** URLMapsValidateResponse
-    , URLMapsValidateResponse
-    , urlMapsValidateResponse
-    , umvrResult
-
-    -- ** SSLCertificate
-    , SSLCertificate
-    , sslCertificate
-    , scSubjectAlternativeNames
-    , scPrivateKey
-    , scManaged
-    , scKind
-    , scSelfLink
-    , scName
-    , scCreationTimestamp
-    , scId
-    , scCertificate
-    , scRegion
-    , scType
-    , scExpireTime
-    , scDescription
-    , scSelfManaged
-
-    -- ** SSLCertificatesScopedListWarningDataItem
-    , SSLCertificatesScopedListWarningDataItem
-    , sslCertificatesScopedListWarningDataItem
-    , scslwdiValue
-    , scslwdiKey
-
-    -- ** PacketMirroringFilter
-    , PacketMirroringFilter
-    , packetMirroringFilter
-    , pmfDirection
-    , pmfCIdRRanges
-    , pmfIPProtocols
-
-    -- ** RegionInstanceGroupManagersApplyUpdatesRequest
-    , RegionInstanceGroupManagersApplyUpdatesRequest
-    , regionInstanceGroupManagersApplyUpdatesRequest
-    , rigmaurAllInstances
-    , rigmaurMostDisruptiveAllowedAction
-    , rigmaurInstances
-    , rigmaurMinimalAction
-
-    -- ** SSLCertificateAggregatedListWarningCode
-    , SSLCertificateAggregatedListWarningCode (..)
-
-    -- ** NodeTemplateCPUOvercommitType
-    , NodeTemplateCPUOvercommitType (..)
-
-    -- ** VMEndpointNATMAppingsListWarningCode
-    , VMEndpointNATMAppingsListWarningCode (..)
-
-    -- ** HealthCheckServicesListWarningCode
-    , HealthCheckServicesListWarningCode (..)
-
-    -- ** ResourcePolicyGroupPlacementPolicy
-    , ResourcePolicyGroupPlacementPolicy
-    , resourcePolicyGroupPlacementPolicy
-    , rpgppAvailabilityDomainCount
-    , rpgppCollocation
-    , rpgppVMCount
-
-    -- ** RouterStatusBGPPeerStatus
-    , RouterStatusBGPPeerStatus
-    , routerStatusBGPPeerStatus
-    , rsbpsStatus
-    , rsbpsIPAddress
-    , rsbpsState
-    , rsbpsPeerIPAddress
-    , rsbpsUptime
-    , rsbpsNumLearnedRoutes
-    , rsbpsName
-    , rsbpsUptimeSeconds
-    , rsbpsAdvertisedRoutes
-    , rsbpsLinkedVPNTunnel
-
-    -- ** SSLCertificatesScopedListWarning
-    , SSLCertificatesScopedListWarning
-    , sslCertificatesScopedListWarning
-    , scslwData
-    , scslwCode
-    , scslwMessage
-
-    -- ** NodeTemplateStatus
-    , NodeTemplateStatus (..)
-
-    -- ** URLMapReference
-    , URLMapReference
-    , urlMapReference
-    , umrURLMap
-
-    -- ** AttachedDiskMode
-    , AttachedDiskMode (..)
-
-    -- ** TargetPoolsAddHealthCheckRequest
-    , TargetPoolsAddHealthCheckRequest
-    , targetPoolsAddHealthCheckRequest
-    , tpahcrHealthChecks
-
-    -- ** InstanceGroupManagersApplyUpdatesRequestMinimalAction
-    , InstanceGroupManagersApplyUpdatesRequestMinimalAction (..)
-
-    -- ** InstanceGroupManagerUpdatePolicyType
-    , InstanceGroupManagerUpdatePolicyType (..)
-
-    -- ** HTTPRedirectAction
-    , HTTPRedirectAction
-    , hTTPRedirectAction
-    , httpraRedirectResponseCode
-    , httpraHostRedirect
-    , httpraPathRedirect
-    , httpraPrefixRedirect
-    , httpraStripQuery
-    , httpraHTTPSRedirect
-
-    -- ** ServerBinding
-    , ServerBinding
-    , serverBinding
-    , sbType
-
-    -- ** CommitmentsScopedList
-    , CommitmentsScopedList
-    , commitmentsScopedList
-    , cslWarning
-    , cslCommitments
-
-    -- ** TargetVPNGatewayListWarningCode
-    , TargetVPNGatewayListWarningCode (..)
-
-    -- ** DiskAggregatedListItems
-    , DiskAggregatedListItems
-    , diskAggregatedListItems
-    , daliAddtional
-
-    -- ** TargetVPNGatewayAggregatedListWarning
-    , TargetVPNGatewayAggregatedListWarning
-    , targetVPNGatewayAggregatedListWarning
-    , tvgalwData
-    , tvgalwCode
-    , tvgalwMessage
-
-    -- ** UsageExportLocation
-    , UsageExportLocation
-    , usageExportLocation
-    , uelReportNamePrefix
-    , uelBucketName
-
-    -- ** InstanceTemplateListWarningCode
-    , InstanceTemplateListWarningCode (..)
-
-    -- ** VPNGatewayStatusHighAvailabilityRequirementStateState
-    , VPNGatewayStatusHighAvailabilityRequirementStateState (..)
-
-    -- ** ZoneList
-    , ZoneList
-    , zoneList
-    , zlNextPageToken
-    , zlKind
-    , zlItems
-    , zlSelfLink
-    , zlWarning
-    , zlId
-
-    -- ** SSLCertificateListWarningDataItem
-    , SSLCertificateListWarningDataItem
-    , sslCertificateListWarningDataItem
-    , sclwdiValue
-    , sclwdiKey
-
-    -- ** GRPCHealthCheck
-    , GRPCHealthCheck
-    , gRPCHealthCheck
-    , grpchcGrpcServiceName
-    , grpchcPortSpecification
-    , grpchcPortName
-    , grpchcPort
-
-    -- ** HealthStatusAnnotations
-    , HealthStatusAnnotations
-    , healthStatusAnnotations
-    , hsaAddtional
-
-    -- ** TargetSSLProxyListWarningCode
-    , TargetSSLProxyListWarningCode (..)
-
-    -- ** NotificationEndpointList
-    , NotificationEndpointList
-    , notificationEndpointList
-    , nelNextPageToken
-    , nelKind
-    , nelItems
-    , nelSelfLink
-    , nelWarning
-    , nelId
-
-    -- ** DistributionPolicyZoneConfiguration
-    , DistributionPolicyZoneConfiguration
-    , distributionPolicyZoneConfiguration
-    , dpzcZone
-
-    -- ** RegionStatus
-    , RegionStatus (..)
-
-    -- ** ResourcePolicyResourceStatus
-    , ResourcePolicyResourceStatus
-    , resourcePolicyResourceStatus
-    , rprsInstanceSchedulePolicy
-
-    -- ** TargetTCPProxiesSetProxyHeaderRequest
-    , TargetTCPProxiesSetProxyHeaderRequest
-    , targetTCPProxiesSetProxyHeaderRequest
-    , ttpsphrProxyHeader
-
-    -- ** InterconnectAttachmentBandwidth
-    , InterconnectAttachmentBandwidth (..)
-
-    -- ** VPNGatewayStatus
-    , VPNGatewayStatus
-    , vpnGatewayStatus
-    , vgsVPNConnections
-
-    -- ** RouterBGPPeer
-    , RouterBGPPeer
-    , routerBGPPeer
-    , rbpIPAddress
-    , rbpInterfaceName
-    , rbpPeerIPAddress
-    , rbpAdvertisedRoutePriority
-    , rbpPeerASN
-    , rbpEnable
-    , rbpAdvertiseMode
-    , rbpName
-    , rbpAdvertisedGroups
-    , rbpManagementType
-    , rbpAdvertisedIPRanges
-
-    -- ** SubnetworksExpandIPCIdRRangeRequest
-    , SubnetworksExpandIPCIdRRangeRequest
-    , subnetworksExpandIPCIdRRangeRequest
-    , seicirrrIPCIdRRange
-
-    -- ** ManagedInstance
-    , ManagedInstance
-    , managedInstance
-    , miLastAttempt
-    , miPreservedStateFromConfig
-    , miInstanceHealth
-    , miCurrentAction
-    , miVersion
-    , miPreservedStateFromPolicy
-    , miId
-    , miInstanceStatus
-    , miInstance
-
-    -- ** InstanceGroupManagerAggregatedListItems
-    , InstanceGroupManagerAggregatedListItems
-    , instanceGroupManagerAggregatedListItems
-    , igmaliAddtional
-
-    -- ** HTTPHeaderOption
-    , HTTPHeaderOption
-    , hTTPHeaderOption
-    , httphoReplace
-    , httphoHeaderValue
-    , httphoHeaderName
-
-    -- ** InstanceGroupManagersDeleteInstancesRequest
-    , InstanceGroupManagersDeleteInstancesRequest
-    , instanceGroupManagersDeleteInstancesRequest
-    , igmdirInstances
-
-    -- ** HealthCheckServiceReference
-    , HealthCheckServiceReference
-    , healthCheckServiceReference
-    , hcsrHealthCheckService
-
-    -- ** Backend
-    , Backend
-    , backend
-    , bGroup
-    , bBalancingMode
-    , bMaxUtilization
-    , bMaxRate
-    , bMaxConnections
-    , bFailover
-    , bMaxConnectionsPerInstance
-    , bMaxRatePerEndpoint
-    , bMaxConnectionsPerEndpoint
-    , bMaxRatePerInstance
-    , bDescription
-    , bCapacityScaler
-
-    -- ** TargetVPNGatewaysScopedListWarning
-    , TargetVPNGatewaysScopedListWarning
-    , targetVPNGatewaysScopedListWarning
-    , tvgslwData
-    , tvgslwCode
-    , tvgslwMessage
-
-    -- ** TargetSSLProxiesSetProxyHeaderRequestProxyHeader
-    , TargetSSLProxiesSetProxyHeaderRequestProxyHeader (..)
-
-    -- ** AddressList
-    , AddressList
-    , addressList
-    , alNextPageToken
-    , alKind
-    , alItems
-    , alSelfLink
-    , alWarning
-    , alId
-
-    -- ** PacketMirroringFilterDirection
-    , PacketMirroringFilterDirection (..)
-
-    -- ** TargetHTTPSProxiesScopedList
-    , TargetHTTPSProxiesScopedList
-    , targetHTTPSProxiesScopedList
-    , thpslWarning
-    , thpslTargetHTTPSProxies
-
-    -- ** TargetVPNGatewayListWarningDataItem
-    , TargetVPNGatewayListWarningDataItem
-    , targetVPNGatewayListWarningDataItem
-    , tvglwdiValue
-    , tvglwdiKey
-
-    -- ** ForwardingRuleAggregatedListItems
-    , ForwardingRuleAggregatedListItems
-    , forwardingRuleAggregatedListItems
-    , fraliAddtional
-
-    -- ** HTTP2HealthCheckPortSpecification
-    , HTTP2HealthCheckPortSpecification (..)
-
-    -- ** InterconnectAttachmentAggregatedList
-    , InterconnectAttachmentAggregatedList
-    , interconnectAttachmentAggregatedList
-    , iaalUnreachables
-    , iaalNextPageToken
-    , iaalKind
-    , iaalItems
-    , iaalSelfLink
-    , iaalWarning
-    , iaalId
-
-    -- ** FirewallPolicyList
-    , FirewallPolicyList
-    , firewallPolicyList
-    , fplNextPageToken
-    , fplKind
-    , fplItems
-    , fplWarning
-    , fplId
-
-    -- ** ExchangedPeeringRouteType
-    , ExchangedPeeringRouteType (..)
-
-    -- ** ScalingScheduleStatus
-    , ScalingScheduleStatus
-    , scalingScheduleStatus
-    , sssState
-    , sssLastStartTime
-    , sssNextStartTime
-
-    -- ** URLMapsAggregatedListWarningCode
-    , URLMapsAggregatedListWarningCode (..)
-
-    -- ** InstanceListReferrersWarningCode
-    , InstanceListReferrersWarningCode (..)
-
-    -- ** ConditionOp
-    , ConditionOp (..)
-
-    -- ** RouteListWarningCode
-    , RouteListWarningCode (..)
-
-    -- ** OperationAggregatedListItems
-    , OperationAggregatedListItems
-    , operationAggregatedListItems
-    , oaliAddtional
-
-    -- ** InstanceGroupManagerActionsSummary
-    , InstanceGroupManagerActionsSummary
-    , instanceGroupManagerActionsSummary
-    , igmasDeleting
-    , igmasRestarting
-    , igmasNone
-    , igmasCreating
-    , igmasVerifying
-    , igmasRefreshing
-    , igmasCreatingWithoutRetries
-    , igmasRecreating
-    , igmasAbandoning
-
-    -- ** XpnHostList
-    , XpnHostList
-    , xpnHostList
-    , xhlNextPageToken
-    , xhlKind
-    , xhlItems
-    , xhlSelfLink
-    , xhlWarning
-    , xhlId
-
-    -- ** VPNTunnelStatus
-    , VPNTunnelStatus (..)
-
-    -- ** InstanceManagedByIgmError
-    , InstanceManagedByIgmError
-    , instanceManagedByIgmError
-    , imbieInstanceActionDetails
-    , imbieError
-    , imbieTimestamp
-
-    -- ** InstanceTemplateListWarningDataItem
-    , InstanceTemplateListWarningDataItem
-    , instanceTemplateListWarningDataItem
-    , itlwdiValue
-    , itlwdiKey
-
-    -- ** SSLCertificateListWarningCode
-    , SSLCertificateListWarningCode (..)
-
-    -- ** ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
-
-    -- ** SnapshotListWarning
-    , SnapshotListWarning
-    , snapshotListWarning
-    , sData
-    , sCode
-    , sMessage
-
-    -- ** RegionInstanceGroupManagersAbandonInstancesRequest
-    , RegionInstanceGroupManagersAbandonInstancesRequest
-    , regionInstanceGroupManagersAbandonInstancesRequest
-    , rigmairInstances
-
-    -- ** NetworkList
-    , NetworkList
-    , networkList
-    , nlNextPageToken
-    , nlKind
-    , nlItems
-    , nlSelfLink
-    , nlWarning
-    , nlId
-
-    -- ** NetworkPeering
-    , NetworkPeering
-    , networkPeering
-    , netState
-    , netExchangeSubnetRoutes
-    , netExportCustomRoutes
-    , netStateDetails
-    , netNetwork
-    , netImportCustomRoutes
-    , netName
-    , netExportSubnetRoutesWithPublicIP
-    , netImportSubnetRoutesWithPublicIP
-    , netPeerMtu
-    , netAutoCreateRoutes
-
-    -- ** TargetSSLProxyListWarningDataItem
-    , TargetSSLProxyListWarningDataItem
-    , targetSSLProxyListWarningDataItem
-    , tsplwdiValue
-    , tsplwdiKey
-
-    -- ** InstanceGroupsListInstancesRequest
-    , InstanceGroupsListInstancesRequest
-    , instanceGroupsListInstancesRequest
-    , iglirInstanceState
-
-    -- ** DiskInstantiationConfigInstantiateFrom
-    , DiskInstantiationConfigInstantiateFrom (..)
-
-    -- ** ExternalVPNGatewayRedundancyType
-    , ExternalVPNGatewayRedundancyType (..)
-
-    -- ** MachineTypeAcceleratorsItem
-    , MachineTypeAcceleratorsItem
-    , machineTypeAcceleratorsItem
-    , mtaiGuestAcceleratorCount
-    , mtaiGuestAcceleratorType
-
-    -- ** VPNGatewayStatusTunnel
-    , VPNGatewayStatusTunnel
-    , vpnGatewayStatusTunnel
-    , vgstTunnelURL
-    , vgstPeerGatewayInterface
-    , vgstLocalGatewayInterface
-
-    -- ** URLMapsAggregatedListWarningDataItem
-    , URLMapsAggregatedListWarningDataItem
-    , urlMapsAggregatedListWarningDataItem
-    , umalwdiValue
-    , umalwdiKey
-
-    -- ** InstanceListReferrersWarningDataItem
-    , InstanceListReferrersWarningDataItem
-    , instanceListReferrersWarningDataItem
-    , ilrwdiValue
-    , ilrwdiKey
-
-    -- ** RouteListWarningDataItem
-    , RouteListWarningDataItem
-    , routeListWarningDataItem
-    , rlwdilValue
-    , rlwdilKey
-
-    -- ** InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType
-    , InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType (..)
-
-    -- ** InterconnectAttachmentsScopedList
-    , InterconnectAttachmentsScopedList
-    , interconnectAttachmentsScopedList
-    , iaslWarning
-    , iaslInterconnectAttachments
-
-    -- ** SecurityPolicyList
-    , SecurityPolicyList
-    , securityPolicyList
-    , splNextPageToken
-    , splKind
-    , splItems
-    , splWarning
-    , splId
-
-    -- ** BackendBalancingMode
-    , BackendBalancingMode (..)
-
-    -- ** RouterBGPAdvertisedGroupsItem
-    , RouterBGPAdvertisedGroupsItem (..)
-
-    -- ** CommitmentAggregatedList
-    , CommitmentAggregatedList
-    , commitmentAggregatedList
-    , calUnreachables
-    , calNextPageToken
-    , calKind
-    , calItems
-    , calSelfLink
-    , calWarning
-    , calId
-
-    -- ** InstanceGroupManagersListErrorsResponse
-    , InstanceGroupManagersListErrorsResponse
-    , instanceGroupManagersListErrorsResponse
-    , igmlerNextPageToken
-    , igmlerItems
-
-    -- ** RegionInstanceGroupList
-    , RegionInstanceGroupList
-    , regionInstanceGroupList
-    , riglNextPageToken
-    , riglKind
-    , riglItems
-    , riglSelfLink
-    , riglWarning
-    , riglId
-
-    -- ** SubnetworkLogConfig
-    , SubnetworkLogConfig
-    , subnetworkLogConfig
-    , slcMetadataFields
-    , slcAggregationInterval
-    , slcEnable
-    , slcFilterExpr
-    , slcMetadata
-    , slcFlowSampling
-
-    -- ** VMEndpointNATMAppingsListWarning
-    , VMEndpointNATMAppingsListWarning
-    , vMEndpointNATMAppingsListWarning
-    , vmenatmalwData
-    , vmenatmalwCode
-    , vmenatmalwMessage
-
-    -- ** HealthCheckServicesListWarning
-    , HealthCheckServicesListWarning
-    , healthCheckServicesListWarning
-    , hcslwData
-    , hcslwCode
-    , hcslwMessage
-
-    -- ** SSLCertificateAggregatedListWarning
-    , SSLCertificateAggregatedListWarning
-    , sslCertificateAggregatedListWarning
-    , scalwData
-    , scalwCode
-    , scalwMessage
-
-    -- ** ResourcePolicyResourceStatusInstanceSchedulePolicyStatus
-    , ResourcePolicyResourceStatusInstanceSchedulePolicyStatus
-    , resourcePolicyResourceStatusInstanceSchedulePolicyStatus
-    , rprsispsNextRunStartTime
-    , rprsispsLastRunStartTime
-
-    -- ** TargetPoolAggregatedListItems
-    , TargetPoolAggregatedListItems
-    , targetPoolAggregatedListItems
-    , tpaliAddtional
-
-    -- ** ResourcePoliciesScopedListWarningCode
-    , ResourcePoliciesScopedListWarningCode (..)
-
-    -- ** PublicDelegatedPrefixesScopedListWarningDataItem
-    , PublicDelegatedPrefixesScopedListWarningDataItem
-    , publicDelegatedPrefixesScopedListWarningDataItem
-    , pdpslwdiValue
-    , pdpslwdiKey
-
-    -- ** ResourcePoliciesScopedListWarningDataItem
-    , ResourcePoliciesScopedListWarningDataItem
-    , resourcePoliciesScopedListWarningDataItem
-    , rpslwdiValue
-    , rpslwdiKey
-
-    -- ** NodeGroupsAddNodesRequest
-    , NodeGroupsAddNodesRequest
-    , nodeGroupsAddNodesRequest
-    , nganrAdditionalNodeCount
-
-    -- ** NodeTypeAggregatedList
-    , NodeTypeAggregatedList
-    , nodeTypeAggregatedList
-    , ntalUnreachables
-    , ntalNextPageToken
-    , ntalKind
-    , ntalItems
-    , ntalSelfLink
-    , ntalWarning
-    , ntalId
-
-    -- ** TargetInstancesScopedList
-    , TargetInstancesScopedList
-    , targetInstancesScopedList
-    , tislWarning
-    , tislTargetInstances
-
-    -- ** NetworkEndpointGroupListWarningCode
-    , NetworkEndpointGroupListWarningCode (..)
-
-    -- ** NetworkRoutingConfigRoutingMode
-    , NetworkRoutingConfigRoutingMode (..)
-
-    -- ** SubnetworkListWarningCode
-    , SubnetworkListWarningCode (..)
-
-    -- ** HealthChecksScopedListWarning
-    , HealthChecksScopedListWarning
-    , healthChecksScopedListWarning
-    , hData
-    , hCode
-    , hMessage
-
-    -- ** SubnetworkListWarningDataItem
-    , SubnetworkListWarningDataItem
-    , subnetworkListWarningDataItem
-    , sValue
-    , sKey
-
-    -- ** NetworkEndpointGroupListWarningDataItem
-    , NetworkEndpointGroupListWarningDataItem
-    , networkEndpointGroupListWarningDataItem
-    , neglwdiValue
-    , neglwdiKey
-
-    -- ** ProjectsDisableXpnResourceRequest
-    , ProjectsDisableXpnResourceRequest
-    , projectsDisableXpnResourceRequest
-    , pdxrrXpnResource
-
-    -- ** CommitmentStatus
-    , CommitmentStatus (..)
-
-    -- ** AddressAggregatedListItems
-    , AddressAggregatedListItems
-    , addressAggregatedListItems
-    , aAddtional
-
-    -- ** InstanceGroupManagersListPerInstanceConfigsResp
-    , InstanceGroupManagersListPerInstanceConfigsResp
-    , instanceGroupManagersListPerInstanceConfigsResp
-    , igmlpicrNextPageToken
-    , igmlpicrItems
-    , igmlpicrWarning
-
-    -- ** InterconnectListWarningCode
-    , InterconnectListWarningCode (..)
-
-    -- ** AutoscalerList
-    , AutoscalerList
-    , autoscalerList
-    , autNextPageToken
-    , autKind
-    , autItems
-    , autSelfLink
-    , autWarning
-    , autId
-
-    -- ** NetworkEndpointGroupAggregatedListWarning
-    , NetworkEndpointGroupAggregatedListWarning
-    , networkEndpointGroupAggregatedListWarning
-    , negalwData
-    , negalwCode
-    , negalwMessage
-
-    -- ** SSLPolicyMinTLSVersion
-    , SSLPolicyMinTLSVersion (..)
-
-    -- ** InterconnectListWarningDataItem
-    , InterconnectListWarningDataItem
-    , interconnectListWarningDataItem
-    , iValue
-    , iKey
-
-    -- ** SubnetworkAggregatedListWarning
-    , SubnetworkAggregatedListWarning
-    , subnetworkAggregatedListWarning
-    , salwData
-    , salwCode
-    , salwMessage
-
-    -- ** FileContentBuffer
-    , FileContentBuffer
-    , fileContentBuffer
-    , fcbFileType
-    , fcbContent
-
-    -- ** InterconnectLocation
-    , InterconnectLocation
-    , interconnectLocation
-    , intFacilityProviderFacilityId
-    , intStatus
-    , intRegionInfos
-    , intKind
-    , intAddress
-    , intFacilityProvider
-    , intSelfLink
-    , intPeeringdbFacilityId
-    , intName
-    , intCity
-    , intAvailabilityZone
-    , intCreationTimestamp
-    , intId
-    , intContinent
-    , intDescription
-
-    -- ** TargetSSLProxiesSetProxyHeaderRequest
-    , TargetSSLProxiesSetProxyHeaderRequest
-    , targetSSLProxiesSetProxyHeaderRequest
-    , tspsphrProxyHeader
-
-    -- ** HTTPHealthCheckListWarningCode
-    , HTTPHealthCheckListWarningCode (..)
-
-    -- ** SSLPoliciesListWarningCode
-    , SSLPoliciesListWarningCode (..)
-
-    -- ** VPNTunnelAggregatedList
-    , VPNTunnelAggregatedList
-    , vpnTunnelAggregatedList
-    , vtalUnreachables
-    , vtalNextPageToken
-    , vtalKind
-    , vtalItems
-    , vtalSelfLink
-    , vtalWarning
-    , vtalId
-
-    -- ** SSLPoliciesListWarningDataItem
-    , SSLPoliciesListWarningDataItem
-    , sslPoliciesListWarningDataItem
-    , splwdiValue
-    , splwdiKey
-
-    -- ** InterconnectCircuitInfo
-    , InterconnectCircuitInfo
-    , interconnectCircuitInfo
-    , iciGoogleCircuitId
-    , iciCustomerDemarcId
-    , iciGoogleDemarcId
-
-    -- ** AttachedDisk
-    , AttachedDisk
-    , attachedDisk
-    , adDiskSizeGb
-    , adDiskEncryptionKey
-    , adKind
-    , adMode
-    , adGuestOSFeatures
-    , adShieldedInstanceInitialState
-    , adBoot
-    , adAutoDelete
-    , adInitializeParams
-    , adDeviceName
-    , adInterface
-    , adSource
-    , adLicenses
-    , adType
-    , adIndex
-
-    -- ** HTTPFaultDelay
-    , HTTPFaultDelay
-    , hTTPFaultDelay
-    , httpfdPercentage
-    , httpfdFixedDelay
-
-    -- ** HTTPHealthCheckListWarningDataItem
-    , HTTPHealthCheckListWarningDataItem
-    , hTTPHealthCheckListWarningDataItem
-    , httphclwdiValue
-    , httphclwdiKey
-
-    -- ** BackendServiceCdnPolicyCacheMode
-    , BackendServiceCdnPolicyCacheMode (..)
-
-    -- ** InterconnectAttachmentOperationalStatus
-    , InterconnectAttachmentOperationalStatus (..)
-
-    -- ** ExchangedPeeringRoutesListWarning
-    , ExchangedPeeringRoutesListWarning
-    , exchangedPeeringRoutesListWarning
-    , eprlwData
-    , eprlwCode
-    , eprlwMessage
-
-    -- ** ResourcePolicySnapshotSchedulePolicyRetentionPolicy
-    , ResourcePolicySnapshotSchedulePolicyRetentionPolicy
-    , resourcePolicySnapshotSchedulePolicyRetentionPolicy
-    , rpssprpMaxRetentionDays
-    , rpssprpOnSourceDiskDelete
-
-    -- ** DiskTypeList
-    , DiskTypeList
-    , diskTypeList
-    , dtlNextPageToken
-    , dtlKind
-    , dtlItems
-    , dtlSelfLink
-    , dtlWarning
-    , dtlId
-
-    -- ** TargetTCPProxyListWarningCode
-    , TargetTCPProxyListWarningCode (..)
-
-    -- ** RegionInstanceGroupsSetNamedPortsRequest
-    , RegionInstanceGroupsSetNamedPortsRequest
-    , regionInstanceGroupsSetNamedPortsRequest
-    , rigsnprFingerprint
-    , rigsnprNamedPorts
-
-    -- ** ReservationsScopedList
-    , ReservationsScopedList
-    , reservationsScopedList
-    , rslsWarning
-    , rslsReservations
-
-    -- ** SubnetworkLogConfigAggregationInterval
-    , SubnetworkLogConfigAggregationInterval (..)
-
-    -- ** TestPermissionsRequest
-    , TestPermissionsRequest
-    , testPermissionsRequest
-    , tPermissions
-
-    -- ** TargetTCPProxyListWarningDataItem
-    , TargetTCPProxyListWarningDataItem
-    , targetTCPProxyListWarningDataItem
-    , ttplwdiValue
-    , ttplwdiKey
-
-    -- ** GuestAttributes
-    , GuestAttributes
-    , guestAttributes
-    , gaKind
-    , gaVariableKey
-    , gaSelfLink
-    , gaQueryPath
-    , gaVariableValue
-    , gaQueryValue
-
-    -- ** ProjectsGetXpnResources
-    , ProjectsGetXpnResources
-    , projectsGetXpnResources
-    , pgxrNextPageToken
-    , pgxrKind
-    , pgxrResources
-
-    -- ** NetworkEndpointWithHealthStatus
-    , NetworkEndpointWithHealthStatus
-    , networkEndpointWithHealthStatus
-    , newhsHealths
-    , newhsNetworkEndpoint
-
-    -- ** MachineTypeList
-    , MachineTypeList
-    , machineTypeList
-    , mtlNextPageToken
-    , mtlKind
-    , mtlItems
-    , mtlSelfLink
-    , mtlWarning
-    , mtlId
-
-    -- ** TargetHTTPProxyList
-    , TargetHTTPProxyList
-    , targetHTTPProxyList
-    , thttpplNextPageToken
-    , thttpplKind
-    , thttpplItems
-    , thttpplSelfLink
-    , thttpplWarning
-    , thttpplId
-
-    -- ** NodeGroupsListNodesWarning
-    , NodeGroupsListNodesWarning
-    , nodeGroupsListNodesWarning
-    , nglnwData
-    , nglnwCode
-    , nglnwMessage
-
-    -- ** NodeTemplateAggregatedList
-    , NodeTemplateAggregatedList
-    , nodeTemplateAggregatedList
-    , nodUnreachables
-    , nodNextPageToken
-    , nodKind
-    , nodItems
-    , nodSelfLink
-    , nodWarning
-    , nodId
-
-    -- ** ExternalVPNGatewayList
-    , ExternalVPNGatewayList
-    , externalVPNGatewayList
-    , evglEtag
-    , evglNextPageToken
-    , evglKind
-    , evglItems
-    , evglSelfLink
-    , evglWarning
-    , evglId
-
-    -- ** VPNGatewayAggregatedList
-    , VPNGatewayAggregatedList
-    , vpnGatewayAggregatedList
-    , vgalUnreachables
-    , vgalNextPageToken
-    , vgalKind
-    , vgalItems
-    , vgalSelfLink
-    , vgalWarning
-    , vgalId
-
-    -- ** InterconnectLocationListWarning
-    , InterconnectLocationListWarning
-    , interconnectLocationListWarning
-    , illwData
-    , illwCode
-    , illwMessage
-
-    -- ** InstancesGetEffectiveFirewallsResponse
-    , InstancesGetEffectiveFirewallsResponse
-    , instancesGetEffectiveFirewallsResponse
-    , igefrFirewallPolicys
-    , igefrFirewalls
-
-    -- ** InstanceGroupsListInstancesWarning
-    , InstanceGroupsListInstancesWarning
-    , instanceGroupsListInstancesWarning
-    , igliwData
-    , igliwCode
-    , igliwMessage
-
-    -- ** PublicDelegatedPrefixesScopedListWarningCode
-    , PublicDelegatedPrefixesScopedListWarningCode (..)
-
-    -- ** RegionInstanceGroupManagerList
-    , RegionInstanceGroupManagerList
-    , regionInstanceGroupManagerList
-    , rigmlNextPageToken
-    , rigmlKind
-    , rigmlItems
-    , rigmlSelfLink
-    , rigmlWarning
-    , rigmlId
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** ForwardingRuleIPProtocol
-    , ForwardingRuleIPProtocol (..)
-
-    -- ** DiskTypesScopedList
-    , DiskTypesScopedList
-    , diskTypesScopedList
-    , dtslDiskTypes
-    , dtslWarning
-
-    -- ** NetworkEndpointGroupsListEndpointsRequestHealthStatus
-    , NetworkEndpointGroupsListEndpointsRequestHealthStatus (..)
-
-    -- ** PreservedStatePreservedDisk
-    , PreservedStatePreservedDisk
-    , preservedStatePreservedDisk
-    , pspdMode
-    , pspdAutoDelete
-    , pspdSource
-
-    -- ** SecurityPolicyAdvancedOptionsConfigJSONParsing
-    , SecurityPolicyAdvancedOptionsConfigJSONParsing (..)
-
-    -- ** LogConfigCloudAuditOptions
-    , LogConfigCloudAuditOptions
-    , logConfigCloudAuditOptions
-    , lccaoAuthorizationLoggingOptions
-    , lccaoLogName
-
-    -- ** ImageListWarningCode
-    , ImageListWarningCode (..)
-
-    -- ** ResourcePolicyAggregatedListWarningDataItem
-    , ResourcePolicyAggregatedListWarningDataItem
-    , resourcePolicyAggregatedListWarningDataItem
-    , rpalwdiValue
-    , rpalwdiKey
-
-    -- ** AddressStatus
-    , AddressStatus (..)
-
-    -- ** ProjectsSetDefaultNetworkTierRequest
-    , ProjectsSetDefaultNetworkTierRequest
-    , projectsSetDefaultNetworkTierRequest
-    , psdntrNetworkTier
-
-    -- ** ResourcePolicyAggregatedListWarningCode
-    , ResourcePolicyAggregatedListWarningCode (..)
-
-    -- ** ImageListWarningDataItem
-    , ImageListWarningDataItem
-    , imageListWarningDataItem
-    , imaValue
-    , imaKey
-
-    -- ** SecurityPolicyAdvancedOptionsConfig
-    , SecurityPolicyAdvancedOptionsConfig
-    , securityPolicyAdvancedOptionsConfig
-    , spaocLogLevel
-    , spaocJSONParsing
-
-    -- ** AcceleratorTypeListWarningDataItem
-    , AcceleratorTypeListWarningDataItem
-    , acceleratorTypeListWarningDataItem
-    , atlwdiValue
-    , atlwdiKey
-
-    -- ** InterconnectOutageNotification
-    , InterconnectOutageNotification
-    , interconnectOutageNotification
-    , ionState
-    , ionAffectedCircuits
-    , ionStartTime
-    , ionIssueType
-    , ionName
-    , ionEndTime
-    , ionSource
-    , ionDescription
-
-    -- ** NodeTemplateList
-    , NodeTemplateList
-    , nodeTemplateList
-    , ntlNextPageToken
-    , ntlKind
-    , ntlItems
-    , ntlSelfLink
-    , ntlWarning
-    , ntlId
-
-    -- ** AcceleratorTypeListWarningCode
-    , AcceleratorTypeListWarningCode (..)
-
-    -- ** DiskTypeAggregatedList
-    , DiskTypeAggregatedList
-    , diskTypeAggregatedList
-    , dtalUnreachables
-    , dtalNextPageToken
-    , dtalKind
-    , dtalItems
-    , dtalSelfLink
-    , dtalWarning
-    , dtalId
-
-    -- ** HTTPHealthCheck
-    , HTTPHealthCheck
-    , hTTPHealthCheck
-    , hResponse
-    , hPortSpecification
-    , hRequestPath
-    , hHost
-    , hProxyHeader
-    , hPortName
-    , hPort
-
-    -- ** URLMapListWarningDataItem
-    , URLMapListWarningDataItem
-    , urlMapListWarningDataItem
-    , umlwdiValue
-    , umlwdiKey
-
-    -- ** AddressNetworkTier
-    , AddressNetworkTier (..)
-
-    -- ** URLMapsScopedListWarning
-    , URLMapsScopedListWarning
-    , urlMapsScopedListWarning
-    , umslwData
-    , umslwCode
-    , umslwMessage
-
-    -- ** RouterNATSubnetworkToNAT
-    , RouterNATSubnetworkToNAT
-    , routerNATSubnetworkToNAT
-    , rnatstnatSourceIPRangesToNAT
-    , rnatstnatName
-    , rnatstnatSecondaryIPRangeNames
-
-    -- ** BackendServiceGroupHealth
-    , BackendServiceGroupHealth
-    , backendServiceGroupHealth
-    , bsghAnnotations
-    , bsghKind
-    , bsghHealthStatus
-
-    -- ** URLMapListWarningCode
-    , URLMapListWarningCode (..)
-
-    -- ** InstanceGroupsListInstancesRequestInstanceState
-    , InstanceGroupsListInstancesRequestInstanceState (..)
-
-    -- ** WafExpressionSetExpression
-    , WafExpressionSetExpression
-    , wafExpressionSetExpression
-    , weseId
-
-    -- ** VPNGatewayStatusVPNConnection
-    , VPNGatewayStatusVPNConnection
-    , vpnGatewayStatusVPNConnection
-    , vgsvcState
-    , vgsvcPeerExternalGateway
-    , vgsvcTunnels
-    , vgsvcPeerGcpGateway
-
-    -- ** AutoscalersScopedList
-    , AutoscalersScopedList
-    , autoscalersScopedList
-    , aAutoscalers
-    , aWarning
-
-    -- ** SecurityPoliciesWafConfig
-    , SecurityPoliciesWafConfig
-    , securityPoliciesWafConfig
-    , spwcWafRules
-
-    -- ** LogConfigDataAccessOptions
-    , LogConfigDataAccessOptions
-    , logConfigDataAccessOptions
-    , lcdaoLogMode
-
-    -- ** AutoscalerAggregatedList
-    , AutoscalerAggregatedList
-    , autoscalerAggregatedList
-    , aalUnreachables
-    , aalNextPageToken
-    , aalKind
-    , aalItems
-    , aalSelfLink
-    , aalWarning
-    , aalId
-
-    -- ** RouterAggregatedListItems
-    , RouterAggregatedListItems
-    , routerAggregatedListItems
-    , rAddtional
-
-    -- ** AcceleratorTypesScopedListWarning
-    , AcceleratorTypesScopedListWarning
-    , acceleratorTypesScopedListWarning
-    , atslwData
-    , atslwCode
-    , atslwMessage
-
-    -- ** PublicDelegatedPrefixListWarning
-    , PublicDelegatedPrefixListWarning
-    , publicDelegatedPrefixListWarning
-    , pdplwData
-    , pdplwCode
-    , pdplwMessage
-
-    -- ** TargetTCPProxy
-    , TargetTCPProxy
-    , targetTCPProxy
-    , ttpService
-    , ttpProxyBind
-    , ttpKind
-    , ttpSelfLink
-    , ttpName
-    , ttpCreationTimestamp
-    , ttpId
-    , ttpProxyHeader
-    , ttpDescription
-
-    -- ** SchedulingNodeAffinityOperator
-    , SchedulingNodeAffinityOperator (..)
-
-    -- ** BackendBucketListWarning
-    , BackendBucketListWarning
-    , backendBucketListWarning
-    , bblwData
-    , bblwCode
-    , bblwMessage
-
-    -- ** NetworkEndpointGroupCloudRun
-    , NetworkEndpointGroupCloudRun
-    , networkEndpointGroupCloudRun
-    , negcrTag
-    , negcrService
-    , negcrURLMask
-
-    -- ** ProjectDefaultNetworkTier
-    , ProjectDefaultNetworkTier (..)
-
-    -- ** ImageLabels
-    , ImageLabels
-    , imageLabels
-    , iAddtional
-
-    -- ** PublicDelegatedPrefixAggregatedListWarningDataItem
-    , PublicDelegatedPrefixAggregatedListWarningDataItem
-    , publicDelegatedPrefixAggregatedListWarningDataItem
-    , pdpalwdiValue
-    , pdpalwdiKey
-
-    -- ** NodeGroupListWarningCode
-    , NodeGroupListWarningCode (..)
-
-    -- ** DistributionPolicy
-    , DistributionPolicy
-    , distributionPolicy
-    , dpZones
-    , dpTargetShape
-
-    -- ** PublicDelegatedPrefixAggregatedListWarningCode
-    , PublicDelegatedPrefixAggregatedListWarningCode (..)
-
-    -- ** RouterNATSourceSubnetworkIPRangesToNAT
-    , RouterNATSourceSubnetworkIPRangesToNAT (..)
-
-    -- ** RegionInstanceGroupManagersListInstanceConfigsRespWarning
-    , RegionInstanceGroupManagersListInstanceConfigsRespWarning
-    , regionInstanceGroupManagersListInstanceConfigsRespWarning
-    , rigmlicrwData
-    , rigmlicrwCode
-    , rigmlicrwMessage
-
-    -- ** NodeGroupListWarningDataItem
-    , NodeGroupListWarningDataItem
-    , nodeGroupListWarningDataItem
-    , nglwdiValue
-    , nglwdiKey
-
-    -- ** HTTPSHealthCheckProxyHeader
-    , HTTPSHealthCheckProxyHeader (..)
-
-    -- ** LicenseResourceCommitment
-    , LicenseResourceCommitment
-    , licenseResourceCommitment
-    , lrcCoresPerLicense
-    , lrcAmount
-    , lrcLicense
-
-    -- ** PacketMirroringMirroredResourceInfoInstanceInfo
-    , PacketMirroringMirroredResourceInfoInstanceInfo
-    , packetMirroringMirroredResourceInfoInstanceInfo
-    , pmmriiiURL
-    , pmmriiiCanonicalURL
-
-    -- ** AutoscalingPolicy
-    , AutoscalingPolicy
-    , autoscalingPolicy
-    , apScaleInControl
-    , apMode
-    , apScalingSchedules
-    , apCustomMetricUtilizations
-    , apMaxNumReplicas
-    , apCPUUtilization
-    , apLoadBalancingUtilization
-    , apMinNumReplicas
-    , apCoolDownPeriodSec
-
-    -- ** PacketMirroringForwardingRuleInfo
-    , PacketMirroringForwardingRuleInfo
-    , packetMirroringForwardingRuleInfo
-    , pmfriURL
-    , pmfriCanonicalURL
-
-    -- ** NodeGroupAggregatedListWarning
-    , NodeGroupAggregatedListWarning
-    , nodeGroupAggregatedListWarning
-    , ngalwData
-    , ngalwCode
-    , ngalwMessage
-
-    -- ** RegionList
-    , RegionList
-    , regionList
-    , regNextPageToken
-    , regKind
-    , regItems
-    , regSelfLink
-    , regWarning
-    , regId
-
-    -- ** AttachedDiskInterface
-    , AttachedDiskInterface (..)
-
-    -- ** AutoscalingPolicyScaleInControl
-    , AutoscalingPolicyScaleInControl
-    , autoscalingPolicyScaleInControl
-    , apsicTimeWindowSec
-    , apsicMaxScaledInReplicas
-
-    -- ** VPNGatewayList
-    , VPNGatewayList
-    , vpnGatewayList
-    , vglNextPageToken
-    , vglKind
-    , vglItems
-    , vglSelfLink
-    , vglWarning
-    , vglId
-
-    -- ** ManagedInstanceInstanceHealthDetailedHealthState
-    , ManagedInstanceInstanceHealthDetailedHealthState (..)
-
-    -- ** SchedulingNodeAffinity
-    , SchedulingNodeAffinity
-    , schedulingNodeAffinity
-    , snaOperator
-    , snaValues
-    , snaKey
-
-    -- ** HealthCheckType
-    , HealthCheckType (..)
-
-    -- ** RegionInstanceGroupsListInstancesWarningCode
-    , RegionInstanceGroupsListInstancesWarningCode (..)
-
-    -- ** ZoneStatus
-    , ZoneStatus (..)
-
-    -- ** VPNTunnelList
-    , VPNTunnelList
-    , vpnTunnelList
-    , vtlNextPageToken
-    , vtlKind
-    , vtlItems
-    , vtlSelfLink
-    , vtlWarning
-    , vtlId
-
-    -- ** AcceleratorTypeAggregatedListWarning
-    , AcceleratorTypeAggregatedListWarning
-    , acceleratorTypeAggregatedListWarning
-    , atalwData
-    , atalwCode
-    , atalwMessage
-
-    -- ** RegionInstanceGroupsListInstancesWarningDataItem
-    , RegionInstanceGroupsListInstancesWarningDataItem
-    , regionInstanceGroupsListInstancesWarningDataItem
-    , rigliwdiValue
-    , rigliwdiKey
-
-    -- ** Interconnect
-    , Interconnect
-    , interconnect
-    , iiState
-    , iiInterconnectType
-    , iiLocation
-    , iiPeerIPAddress
-    , iiKind
-    , iiExpectedOutages
-    , iiProvisionedLinkCount
-    , iiCustomerName
-    , iiRequestedLinkCount
-    , iiOperationalStatus
-    , iiSelfLink
-    , iiName
-    , iiGoogleReferenceId
-    , iiCreationTimestamp
-    , iiAdminEnabled
-    , iiId
-    , iiInterconnectAttachments
-    , iiLinkType
-    , iiGoogleIPAddress
-    , iiDescription
-    , iiNocContactEmail
-    , iiCircuitInfos
-
-    -- ** MachineTypeScratchDisksItem
-    , MachineTypeScratchDisksItem
-    , machineTypeScratchDisksItem
-    , mtsdiDiskGb
-
-    -- ** DisksAddResourcePoliciesRequest
-    , DisksAddResourcePoliciesRequest
-    , disksAddResourcePoliciesRequest
-    , darprResourcePolicies
-
-    -- ** NetworkEndpointGroupsScopedListWarningDataItem
-    , NetworkEndpointGroupsScopedListWarningDataItem
-    , networkEndpointGroupsScopedListWarningDataItem
-    , negslwdiValue
-    , negslwdiKey
-
-    -- ** SubnetworksScopedListWarningDataItem
-    , SubnetworksScopedListWarningDataItem
-    , subnetworksScopedListWarningDataItem
-    , sslwdiValue
-    , sslwdiKey
-
-    -- ** NetworkEndpointGroupsScopedListWarningCode
-    , NetworkEndpointGroupsScopedListWarningCode (..)
-
-    -- ** MachineTypesScopedList
-    , MachineTypesScopedList
-    , machineTypesScopedList
-    , mtslMachineTypes
-    , mtslWarning
-
-    -- ** SubnetworksScopedListWarningCode
-    , SubnetworksScopedListWarningCode (..)
-
-    -- ** ResourcePolicyListWarning
-    , ResourcePolicyListWarning
-    , resourcePolicyListWarning
-    , rplwData
-    , rplwCode
-    , rplwMessage
-
-    -- ** InstanceGroupManagerStatusVersionTarget
-    , InstanceGroupManagerStatusVersionTarget
-    , instanceGroupManagerStatusVersionTarget
-    , igmsvtIsReached
-
-    -- ** NetworkEndpointGroup
-    , NetworkEndpointGroup
-    , networkEndpointGroup
-    , negAnnotations
-    , negSize
-    , negKind
-    , negCloudRun
-    , negNetwork
-    , negZone
-    , negSelfLink
-    , negName
-    , negAppEngine
-    , negCreationTimestamp
-    , negDefaultPort
-    , negSubnetwork
-    , negNetworkEndpointType
-    , negId
-    , negRegion
-    , negCloudFunction
-    , negDescription
-
-    -- ** TargetHTTPProxyAggregatedList
-    , TargetHTTPProxyAggregatedList
-    , targetHTTPProxyAggregatedList
-    , thttppalUnreachables
-    , thttppalNextPageToken
-    , thttppalKind
-    , thttppalItems
-    , thttppalSelfLink
-    , thttppalId
-
-    -- ** NetworkEndpointGroupsListNetworkEndpointsWarningCode
-    , NetworkEndpointGroupsListNetworkEndpointsWarningCode (..)
-
-    -- ** Subnetwork
-    , Subnetwork
-    , subnetwork
-    , subExternalIPv6Prefix
-    , subState
-    , subKind
-    , subFingerprint
-    , subNetwork
-    , subStackType
-    , subGatewayAddress
-    , subPurpose
-    , subRole
-    , subSelfLink
-    , subEnableFlowLogs
-    , subName
-    , subSecondaryIPRanges
-    , subCreationTimestamp
-    , subIPCIdRRange
-    , subIPv6CIdRRange
-    , subIPv6AccessType
-    , subId
-    , subRegion
-    , subLogConfig
-    , subDescription
-    , subPrivateIPGoogleAccess
-    , subPrivateIPv6GoogleAccess
-
-    -- ** HealthCheckListWarning
-    , HealthCheckListWarning
-    , healthCheckListWarning
-    , hclwData
-    , hclwCode
-    , hclwMessage
-
-    -- ** MachineTypeAggregatedList
-    , MachineTypeAggregatedList
-    , machineTypeAggregatedList
-    , mtalUnreachables
-    , mtalNextPageToken
-    , mtalKind
-    , mtalItems
-    , mtalSelfLink
-    , mtalWarning
-    , mtalId
-
-    -- ** NetworkEndpointGroupsListNetworkEndpointsWarningDataItem
-    , NetworkEndpointGroupsListNetworkEndpointsWarningDataItem
-    , networkEndpointGroupsListNetworkEndpointsWarningDataItem
-    , neglnewdiValue
-    , neglnewdiKey
-
-    -- ** ResourcePolicyWeeklyCycleDayOfWeek
-    , ResourcePolicyWeeklyCycleDayOfWeek
-    , resourcePolicyWeeklyCycleDayOfWeek
-    , rpwcdowStartTime
-    , rpwcdowDay
-    , rpwcdowDuration
-
-    -- ** NodeGroupsScopedListWarning
-    , NodeGroupsScopedListWarning
-    , nodeGroupsScopedListWarning
-    , ngslwData
-    , ngslwCode
-    , ngslwMessage
-
-    -- ** NodeTypeList
-    , NodeTypeList
-    , nodeTypeList
-    , ntltNextPageToken
-    , ntltKind
-    , ntltItems
-    , ntltSelfLink
-    , ntltWarning
-    , ntltId
-
-    -- ** QuotaMetric
-    , QuotaMetric (..)
-
-    -- ** PublicAdvertisedPrefixListWarning
-    , PublicAdvertisedPrefixListWarning
-    , publicAdvertisedPrefixListWarning
-    , paplwData
-    , paplwCode
-    , paplwMessage
-
-    -- ** ExternalVPNGatewayListWarning
-    , ExternalVPNGatewayListWarning
-    , externalVPNGatewayListWarning
-    , evglwData
-    , evglwCode
-    , evglwMessage
-
-    -- ** DiskType
-    , DiskType
-    , diskType
-    , dtKind
-    , dtZone
-    , dtSelfLink
-    , dtName
-    , dtCreationTimestamp
-    , dtId
-    , dtRegion
-    , dtValidDiskSize
-    , dtDescription
-    , dtDefaultDiskSizeGb
-    , dtDeprecated
-
-    -- ** NodeTemplateAggregatedListWarning
-    , NodeTemplateAggregatedListWarning
-    , nodeTemplateAggregatedListWarning
-    , ntalwData
-    , ntalwCode
-    , ntalwMessage
-
-    -- ** AutoscalerAggregatedListWarningDataItem
-    , AutoscalerAggregatedListWarningDataItem
-    , autoscalerAggregatedListWarningDataItem
-    , aalwdiValue
-    , aalwdiKey
-
-    -- ** ZoneSetLabelsRequestLabels
-    , ZoneSetLabelsRequestLabels
-    , zoneSetLabelsRequestLabels
-    , zslrlAddtional
-
-    -- ** InterconnectState
-    , InterconnectState (..)
-
-    -- ** NodeTypeListWarningDataItem
-    , NodeTypeListWarningDataItem
-    , nodeTypeListWarningDataItem
-    , ntlwdiValue
-    , ntlwdiKey
-
-    -- ** URLMapValidationResult
-    , URLMapValidationResult
-    , urlMapValidationResult
-    , umvrLoadErrors
-    , umvrLoadSucceeded
-    , umvrTestPassed
-    , umvrTestFailures
-
-    -- ** ReservationsScopedListWarning
-    , ReservationsScopedListWarning
-    , reservationsScopedListWarning
-    , resData
-    , resCode
-    , resMessage
-
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mFingerprint
-    , mItems
-
-    -- ** RouteWarningsItem
-    , RouteWarningsItem
-    , routeWarningsItem
-    , rwiData
-    , rwiCode
-    , rwiMessage
-
-    -- ** NodeGroupsListNodes
-    , NodeGroupsListNodes
-    , nodeGroupsListNodes
-    , nglnNextPageToken
-    , nglnKind
-    , nglnItems
-    , nglnSelfLink
-    , nglnWarning
-    , nglnId
-
-    -- ** BackendServiceFailoverPolicy
-    , BackendServiceFailoverPolicy
-    , backendServiceFailoverPolicy
-    , bsfpDisableConnectionDrainOnFailover
-    , bsfpDropTrafficIfUnhealthy
-    , bsfpFailoverRatio
-
-    -- ** InterconnectLocationList
-    , InterconnectLocationList
-    , interconnectLocationList
-    , illNextPageToken
-    , illKind
-    , illItems
-    , illSelfLink
-    , illWarning
-    , illId
-
-    -- ** SSLPoliciesListAvailableFeaturesResponse
-    , SSLPoliciesListAvailableFeaturesResponse
-    , sslPoliciesListAvailableFeaturesResponse
-    , splafrFeatures
-
-    -- ** InstancePropertiesLabels
-    , InstancePropertiesLabels
-    , instancePropertiesLabels
-    , iplAddtional
-
-    -- ** RouterBGPPeerEnable
-    , RouterBGPPeerEnable (..)
-
-    -- ** AutoscalerAggregatedListWarningCode
-    , AutoscalerAggregatedListWarningCode (..)
-
-    -- ** FirewallLogConfigMetadata
-    , FirewallLogConfigMetadata (..)
-
-    -- ** InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction
-    , InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction (..)
-
-    -- ** AddressIPVersion
-    , AddressIPVersion (..)
-
-    -- ** MachineTypesScopedListWarningDataItem
-    , MachineTypesScopedListWarningDataItem
-    , machineTypesScopedListWarningDataItem
-    , mtslwdiValue
-    , mtslwdiKey
-
-    -- ** InstanceStatus
-    , InstanceStatus (..)
-
-    -- ** NodeTypeListWarningCode
-    , NodeTypeListWarningCode (..)
-
-    -- ** DiskTypeListWarning
-    , DiskTypeListWarning
-    , diskTypeListWarning
-    , dtlwData
-    , dtlwCode
-    , dtlwMessage
-
-    -- ** ExternalVPNGateway
-    , ExternalVPNGateway
-    , externalVPNGateway
-    , evgKind
-    , evgInterfaces
-    , evgRedundancyType
-    , evgSelfLink
-    , evgName
-    , evgCreationTimestamp
-    , evgId
-    , evgLabels
-    , evgLabelFingerprint
-    , evgDescription
-
-    -- ** NodeTemplateListWarningDataItem
-    , NodeTemplateListWarningDataItem
-    , nodeTemplateListWarningDataItem
-    , nodValue
-    , nodKey
-
-    -- ** InstanceGroupManagerUpdatePolicyReplacementMethod
-    , InstanceGroupManagerUpdatePolicyReplacementMethod (..)
-
-    -- ** VPNGatewayListWarningDataItem
-    , VPNGatewayListWarningDataItem
-    , vpnGatewayListWarningDataItem
-    , vglwdiValue
-    , vglwdiKey
-
-    -- ** RegionListWarningDataItem
-    , RegionListWarningDataItem
-    , regionListWarningDataItem
-    , regValue
-    , regKey
-
-    -- ** MachineTypesScopedListWarningCode
-    , MachineTypesScopedListWarningCode (..)
-
-    -- ** InstancesSetMachineResourcesRequest
-    , InstancesSetMachineResourcesRequest
-    , instancesSetMachineResourcesRequest
-    , ismrrGuestAccelerators
-
-    -- ** ExchangedPeeringRoutesList
-    , ExchangedPeeringRoutesList
-    , exchangedPeeringRoutesList
-    , eprlNextPageToken
-    , eprlKind
-    , eprlItems
-    , eprlSelfLink
-    , eprlWarning
-    , eprlId
-
-    -- ** InstancesSetServiceAccountRequest
-    , InstancesSetServiceAccountRequest
-    , instancesSetServiceAccountRequest
-    , issarEmail
-    , issarScopes
-
-    -- ** SecurityPolicyReference
-    , SecurityPolicyReference
-    , securityPolicyReference
-    , sprSecurityPolicy
-
-    -- ** DiskTypesScopedListWarningDataItem
-    , DiskTypesScopedListWarningDataItem
-    , diskTypesScopedListWarningDataItem
-    , dtslwdiValue
-    , dtslwdiKey
-
-    -- ** AllocationSpecificSKUReservation
-    , AllocationSpecificSKUReservation
-    , allocationSpecificSKUReservation
-    , asskurInUseCount
-    , asskurInstanceProperties
-    , asskurCount
-
-    -- ** NodeTemplateListWarningCode
-    , NodeTemplateListWarningCode (..)
-
-    -- ** VMEndpointNATMAppingsInterfaceNATMAppings
-    , VMEndpointNATMAppingsInterfaceNATMAppings
-    , vMEndpointNATMAppingsInterfaceNATMAppings
-    , vmenatmainatmaDrainNATIPPortRanges
-    , vmenatmainatmaSourceAliasIPRange
-    , vmenatmainatmaNumTotalDrainNATPorts
-    , vmenatmainatmaSourceVirtualIP
-    , vmenatmainatmaNATIPPortRanges
-    , vmenatmainatmaNumTotalNATPorts
-
-    -- ** VPNTunnelAggregatedListWarning
-    , VPNTunnelAggregatedListWarning
-    , vpnTunnelAggregatedListWarning
-    , vtalwData
-    , vtalwCode
-    , vtalwMessage
-
-    -- ** InstanceGroupManagersListPerInstanceConfigsRespWarning
-    , InstanceGroupManagersListPerInstanceConfigsRespWarning
-    , instanceGroupManagersListPerInstanceConfigsRespWarning
-    , igmlpicrwData
-    , igmlpicrwCode
-    , igmlpicrwMessage
-
-    -- ** TargetHTTPProxy
-    , TargetHTTPProxy
-    , targetHTTPProxy
-    , thttppURLMap
-    , thttppProxyBind
-    , thttppKind
-    , thttppFingerprint
-    , thttppSelfLink
-    , thttppName
-    , thttppCreationTimestamp
-    , thttppId
-    , thttppRegion
-    , thttppDescription
-
-    -- ** ShieldedInstanceConfig
-    , ShieldedInstanceConfig
-    , shieldedInstanceConfig
-    , sicEnableVtpm
-    , sicEnableIntegrityMonitoring
-    , sicEnableSecureBoot
-
-    -- ** MachineType
-    , MachineType
-    , machineType
-    , mtIsSharedCPU
-    , mtKind
-    , mtImageSpaceGb
-    , mtZone
-    , mtSelfLink
-    , mtAccelerators
-    , mtName
-    , mtCreationTimestamp
-    , mtScratchDisks
-    , mtId
-    , mtGuestCPUs
-    , mtMaximumPersistentDisksSizeGb
-    , mtMaximumPersistentDisks
-    , mtMemoryMb
-    , mtDescription
-    , mtDeprecated
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AcceleratorConfig
-    , AcceleratorConfig
-    , acceleratorConfig
-    , acAcceleratorCount
-    , acAcceleratorType
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
 
-    -- ** VPNGatewayListWarningCode
-    , VPNGatewayListWarningCode (..)
+    -- ** AcceleratorType
+    AcceleratorType (..),
+    newAcceleratorType,
 
-    -- ** AutoscalerListWarning
-    , AutoscalerListWarning
-    , autoscalerListWarning
-    , alwData
-    , alwCode
-    , alwMessage
+    -- ** AcceleratorTypeAggregatedList
+    AcceleratorTypeAggregatedList (..),
+    newAcceleratorTypeAggregatedList,
 
-    -- ** RegionListWarningCode
-    , RegionListWarningCode (..)
+    -- ** AcceleratorTypeAggregatedList_Items
+    AcceleratorTypeAggregatedList_Items (..),
+    newAcceleratorTypeAggregatedList_Items,
 
-    -- ** RouterInterfaceManagementType
-    , RouterInterfaceManagementType (..)
+    -- ** AcceleratorTypeAggregatedList_Warning
+    AcceleratorTypeAggregatedList_Warning (..),
+    newAcceleratorTypeAggregatedList_Warning,
 
-    -- ** DiskTypesScopedListWarningCode
-    , DiskTypesScopedListWarningCode (..)
+    -- ** AcceleratorTypeAggregatedList_Warning_Code
+    AcceleratorTypeAggregatedList_Warning_Code (..),
 
-    -- ** MachineTypeAggregatedListWarningDataItem
-    , MachineTypeAggregatedListWarningDataItem
-    , machineTypeAggregatedListWarningDataItem
-    , mtalwdiValue
-    , mtalwdiKey
+    -- ** AcceleratorTypeAggregatedList_Warning_DataItem
+    AcceleratorTypeAggregatedList_Warning_DataItem (..),
+    newAcceleratorTypeAggregatedList_Warning_DataItem,
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** AcceleratorTypeList
+    AcceleratorTypeList (..),
+    newAcceleratorTypeList,
 
-    -- ** LocationPolicy
-    , LocationPolicy
-    , locationPolicy
-    , lpLocations
+    -- ** AcceleratorTypeList_Warning
+    AcceleratorTypeList_Warning (..),
+    newAcceleratorTypeList_Warning,
 
-    -- ** Int64RangeMatch
-    , Int64RangeMatch
-    , int64RangeMatch
-    , irmRangeStart
-    , irmRangeEnd
+    -- ** AcceleratorTypeList_Warning_Code
+    AcceleratorTypeList_Warning_Code (..),
 
-    -- ** NodeTypeAggregatedListWarning
-    , NodeTypeAggregatedListWarning
-    , nodeTypeAggregatedListWarning
-    , ntalwtData
-    , ntalwtCode
-    , ntalwtMessage
+    -- ** AcceleratorTypeList_Warning_DataItem
+    AcceleratorTypeList_Warning_DataItem (..),
+    newAcceleratorTypeList_Warning_DataItem,
 
-    -- ** TargetInstancesScopedListWarning
-    , TargetInstancesScopedListWarning
-    , targetInstancesScopedListWarning
-    , tislwData
-    , tislwCode
-    , tislwMessage
+    -- ** AcceleratorTypesScopedList
+    AcceleratorTypesScopedList (..),
+    newAcceleratorTypesScopedList,
 
-    -- ** SSLCertificateManagedSSLCertificate
-    , SSLCertificateManagedSSLCertificate
-    , sslCertificateManagedSSLCertificate
-    , scmscDomainStatus
-    , scmscStatus
-    , scmscDomains
+    -- ** AcceleratorTypesScopedList_Warning
+    AcceleratorTypesScopedList_Warning (..),
+    newAcceleratorTypesScopedList_Warning,
 
-    -- ** NetworkEndpointGroupAggregatedList
-    , NetworkEndpointGroupAggregatedList
-    , networkEndpointGroupAggregatedList
-    , negalUnreachables
-    , negalNextPageToken
-    , negalKind
-    , negalItems
-    , negalSelfLink
-    , negalWarning
-    , negalId
+    -- ** AcceleratorTypesScopedList_Warning_Code
+    AcceleratorTypesScopedList_Warning_Code (..),
 
-    -- ** SubnetworkAggregatedList
-    , SubnetworkAggregatedList
-    , subnetworkAggregatedList
-    , salUnreachables
-    , salNextPageToken
-    , salKind
-    , salItems
-    , salSelfLink
-    , salWarning
-    , salId
-
-    -- ** MachineTypeAggregatedListWarningCode
-    , MachineTypeAggregatedListWarningCode (..)
-
-    -- ** VPNTunnelListWarningDataItem
-    , VPNTunnelListWarningDataItem
-    , vpnTunnelListWarningDataItem
-    , vtlwdiValue
-    , vtlwdiKey
-
-    -- ** InterconnectDiagnosticsLinkOpticalPower
-    , InterconnectDiagnosticsLinkOpticalPower
-    , interconnectDiagnosticsLinkOpticalPower
-    , idlopState
-    , idlopValue
-
-    -- ** DisksResizeRequest
-    , DisksResizeRequest
-    , disksResizeRequest
-    , drrSizeGb
-
-    -- ** HealthChecksScopedList
-    , HealthChecksScopedList
-    , healthChecksScopedList
-    , hcslWarning
-    , hcslHealthChecks
-
-    -- ** AutoscalersScopedListWarningDataItem
-    , AutoscalersScopedListWarningDataItem
-    , autoscalersScopedListWarningDataItem
-    , aValue
-    , aKey
-
-    -- ** DisksRemoveResourcePoliciesRequest
-    , DisksRemoveResourcePoliciesRequest
-    , disksRemoveResourcePoliciesRequest
-    , drrprResourcePolicies
-
-    -- ** LogConfigDataAccessOptionsLogMode
-    , LogConfigDataAccessOptionsLogMode (..)
-
-    -- ** InterconnectOutageNotificationState
-    , InterconnectOutageNotificationState (..)
-
-    -- ** ZoneSetPolicyRequest
-    , ZoneSetPolicyRequest
-    , zoneSetPolicyRequest
-    , zsprEtag
-    , zsprBindings
-    , zsprPolicy
-
-    -- ** VPNTunnelListWarningCode
-    , VPNTunnelListWarningCode (..)
-
-    -- ** AttachedDiskInitializeParamsOnUpdateAction
-    , AttachedDiskInitializeParamsOnUpdateAction (..)
-
-    -- ** AutoscalersScopedListWarningCode
-    , AutoscalersScopedListWarningCode (..)
-
-    -- ** HTTPSHealthCheckPortSpecification
-    , HTTPSHealthCheckPortSpecification (..)
-
-    -- ** VPNGatewayAggregatedListWarning
-    , VPNGatewayAggregatedListWarning
-    , vpnGatewayAggregatedListWarning
-    , vgalwData
-    , vgalwCode
-    , vgalwMessage
-
-    -- ** DiskTypeAggregatedListWarningDataItem
-    , DiskTypeAggregatedListWarningDataItem
-    , diskTypeAggregatedListWarningDataItem
-    , dtalwdiValue
-    , dtalwdiKey
-
-    -- ** ShieldedInstanceIdentityEntry
-    , ShieldedInstanceIdentityEntry
-    , shieldedInstanceIdentityEntry
-    , siieEkCert
-    , siieEkPub
-
-    -- ** ForwardingRuleLoadBalancingScheme
-    , ForwardingRuleLoadBalancingScheme (..)
-
-    -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
-    , AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
-    , allocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
-    , asskuaaiprdDiskSizeGb
-    , asskuaaiprdInterface
-
-    -- ** RegionInstanceGroupManagerListWarning
-    , RegionInstanceGroupManagerListWarning
-    , regionInstanceGroupManagerListWarning
-    , rigmlwData
-    , rigmlwCode
-    , rigmlwMessage
-
-    -- ** RegionInstanceGroupManagersSetTemplateRequest
-    , RegionInstanceGroupManagersSetTemplateRequest
-    , regionInstanceGroupManagersSetTemplateRequest
-    , rigmstrInstanceTemplate
-
-    -- ** InstanceGroupsListInstances
-    , InstanceGroupsListInstances
-    , instanceGroupsListInstances
-    , igliNextPageToken
-    , igliKind
-    , igliItems
-    , igliSelfLink
-    , igliWarning
-    , igliId
-
-    -- ** DiskTypeAggregatedListWarningCode
-    , DiskTypeAggregatedListWarningCode (..)
-
-    -- ** Autoscaler
-    , Autoscaler
-    , autoscaler
-    , aaStatus
-    , aaKind
-    , aaZone
-    , aaStatusDetails
-    , aaScalingScheduleStatus
-    , aaSelfLink
-    , aaName
-    , aaCreationTimestamp
-    , aaAutoscalingPolicy
-    , aaId
-    , aaRegion
-    , aaRecommendedSize
-    , aaDescription
-    , aaTarget
-
-    -- ** ConsistentHashLoadBalancerSettings
-    , ConsistentHashLoadBalancerSettings
-    , consistentHashLoadBalancerSettings
-    , chlbsMinimumRingSize
-    , chlbsHTTPCookie
-    , chlbsHTTPHeaderName
-
-    -- ** SubnetworkState
-    , SubnetworkState (..)
-
-    -- ** VPNGatewayVPNGatewayInterface
-    , VPNGatewayVPNGatewayInterface
-    , vpnGatewayVPNGatewayInterface
-    , vgvgiIPAddress
-    , vgvgiId
-    , vgvgiInterconnectAttachment
-
-    -- ** MachineTypeListWarning
-    , MachineTypeListWarning
-    , machineTypeListWarning
-    , mtlwData
-    , mtlwCode
-    , mtlwMessage
-
-    -- ** TargetHTTPProxyListWarning
-    , TargetHTTPProxyListWarning
-    , targetHTTPProxyListWarning
-    , thttpplwData
-    , thttpplwCode
-    , thttpplwMessage
-
-    -- ** DiskAggregatedListWarning
-    , DiskAggregatedListWarning
-    , diskAggregatedListWarning
-    , dalwData
-    , dalwCode
-    , dalwMessage
-
-    -- ** ResourcePoliciesScopedList
-    , ResourcePoliciesScopedList
-    , resourcePoliciesScopedList
-    , rpslResourcePolicies
-    , rpslWarning
-
-    -- ** PacketMirroringEnable
-    , PacketMirroringEnable (..)
-
-    -- ** TargetPoolAggregatedListWarning
-    , TargetPoolAggregatedListWarning
-    , targetPoolAggregatedListWarning
-    , tpalwData
-    , tpalwCode
-    , tpalwMessage
-
-    -- ** HTTPQueryParameterMatch
-    , HTTPQueryParameterMatch
-    , hTTPQueryParameterMatch
-    , httpqpmName
-    , httpqpmPresentMatch
-    , httpqpmExactMatch
-    , httpqpmRegexMatch
-
-    -- ** ReservationListWarning
-    , ReservationListWarning
-    , reservationListWarning
-    , rrData
-    , rrCode
-    , rrMessage
-
-    -- ** UsableSubnetworksAggregatedListWarning
-    , UsableSubnetworksAggregatedListWarning
-    , usableSubnetworksAggregatedListWarning
-    , usalwData
-    , usalwCode
-    , usalwMessage
-
-    -- ** ReservationsResizeRequest
-    , ReservationsResizeRequest
-    , reservationsResizeRequest
-    , rrrSpecificSKUCount
-
-    -- ** DisksScopedListWarning
-    , DisksScopedListWarning
-    , disksScopedListWarning
-    , dslwData
-    , dslwCode
-    , dslwMessage
-
-    -- ** NodeTemplatesScopedListWarningDataItem
-    , NodeTemplatesScopedListWarningDataItem
-    , nodeTemplatesScopedListWarningDataItem
-    , ntslwdiValue
-    , ntslwdiKey
-
-    -- ** TargetVPNGatewayAggregatedListItems
-    , TargetVPNGatewayAggregatedListItems
-    , targetVPNGatewayAggregatedListItems
-    , tvgaliAddtional
-
-    -- ** DiskLabels
-    , DiskLabels
-    , diskLabels
-    , dlAddtional
-
-    -- ** InstanceGroupManagerListWarningDataItem
-    , InstanceGroupManagerListWarningDataItem
-    , instanceGroupManagerListWarningDataItem
-    , igmlwdiValue
-    , igmlwdiKey
-
-    -- ** HTTPRedirectActionRedirectResponseCode
-    , HTTPRedirectActionRedirectResponseCode (..)
-
-    -- ** ReservationAggregatedListWarningDataItem
-    , ReservationAggregatedListWarningDataItem
-    , reservationAggregatedListWarningDataItem
-    , resValue
-    , resKey
-
-    -- ** SSLCertificateAggregatedListItems
-    , SSLCertificateAggregatedListItems
-    , sslCertificateAggregatedListItems
-    , scaliAddtional
-
-    -- ** InterconnectInterconnectType
-    , InterconnectInterconnectType (..)
-
-    -- ** MetadataFilterLabelMatch
-    , MetadataFilterLabelMatch
-    , metadataFilterLabelMatch
-    , mflmValue
-    , mflmName
-
-    -- ** ForwardingRuleAggregatedListWarning
-    , ForwardingRuleAggregatedListWarning
-    , forwardingRuleAggregatedListWarning
-    , fralwData
-    , fralwCode
-    , fralwMessage
-
-    -- ** ReservationAggregatedListWarningCode
-    , ReservationAggregatedListWarningCode (..)
-
-    -- ** ExternalVPNGatewayInterface
-    , ExternalVPNGatewayInterface
-    , externalVPNGatewayInterface
-    , evgiIPAddress
-    , evgiId
-
-    -- ** InstanceGroupManagerListWarningCode
-    , InstanceGroupManagerListWarningCode (..)
-
-    -- ** SSLPolicyWarningsItem
-    , SSLPolicyWarningsItem
-    , sslPolicyWarningsItem
-    , spwiData
-    , spwiCode
-    , spwiMessage
-
-    -- ** RouterStatusBGPPeerStatusStatus
-    , RouterStatusBGPPeerStatusStatus (..)
-
-    -- ** GlobalSetPolicyRequest
-    , GlobalSetPolicyRequest
-    , globalSetPolicyRequest
-    , gsprEtag
-    , gsprBindings
-    , gsprPolicy
-
-    -- ** RegionAutoscalerListWarningDataItem
-    , RegionAutoscalerListWarningDataItem
-    , regionAutoscalerListWarningDataItem
-    , ralwdiaValue
-    , ralwdiaKey
-
-    -- ** DiskListWarningCode
-    , DiskListWarningCode (..)
-
-    -- ** GlobalSetLabelsRequestLabels
-    , GlobalSetLabelsRequestLabels
-    , globalSetLabelsRequestLabels
-    , gslrlAddtional
-
-    -- ** TargetPoolsScopedListWarning
-    , TargetPoolsScopedListWarning
-    , targetPoolsScopedListWarning
-    , tpslwData
-    , tpslwCode
-    , tpslwMessage
-
-    -- ** HealthStatus
-    , HealthStatus
-    , healthStatus
-    , hsAnnotations
-    , hsForwardingRuleIP
-    , hsIPAddress
-    , hsForwardingRule
-    , hsWeight
-    , hsWeightError
-    , hsHealthState
-    , hsPort
-    , hsInstance
-
-    -- ** VPNGatewaysScopedListWarningDataItem
-    , VPNGatewaysScopedListWarningDataItem
-    , vpnGatewaysScopedListWarningDataItem
-    , vgslwdiValue
-    , vgslwdiKey
-
-    -- ** TargetTCPProxyList
-    , TargetTCPProxyList
-    , targetTCPProxyList
-    , ttplNextPageToken
-    , ttplKind
-    , ttplItems
-    , ttplSelfLink
-    , ttplWarning
-    , ttplId
-
-    -- ** VPNGatewaysScopedListWarningCode
-    , VPNGatewaysScopedListWarningCode (..)
-
-    -- ** Region
-    , Region
-    , region
-    , regeStatus
-    , regeZones
-    , regeKind
-    , regeSelfLink
-    , regeName
-    , regeCreationTimestamp
-    , regeSupportsPzs
-    , regeQuotas
-    , regeId
-    , regeDescription
-    , regeDeprecated
-
-    -- ** VPNGateway
-    , VPNGateway
-    , vpnGateway
-    , vgKind
-    , vgNetwork
-    , vgSelfLink
-    , vgName
-    , vgCreationTimestamp
-    , vgId
-    , vgLabels
-    , vgRegion
-    , vgLabelFingerprint
-    , vgDescription
-    , vgVPNInterfaces
-
-    -- ** RegionAutoscalerListWarningCode
-    , RegionAutoscalerListWarningCode (..)
-
-    -- ** RequestMirrorPolicy
-    , RequestMirrorPolicy
-    , requestMirrorPolicy
-    , rmpBackendService
-
-    -- ** PublicDelegatedPrefixesScopedList
-    , PublicDelegatedPrefixesScopedList
-    , publicDelegatedPrefixesScopedList
-    , pdpslPublicDelegatedPrefixes
-    , pdpslWarning
-
-    -- ** OperationListWarningDataItem
-    , OperationListWarningDataItem
-    , operationListWarningDataItem
-    , olwdiValue
-    , olwdiKey
-
-    -- ** GuestOSFeature
-    , GuestOSFeature
-    , guestOSFeature
-    , gofType
-
-    -- ** VPNTunnel
-    , VPNTunnel
-    , vpnTunnel
-    , vtDetailedStatus
-    , vtStatus
-    , vtLocalTrafficSelector
-    , vtVPNGatewayInterface
-    , vtKind
-    , vtPeerIP
-    , vtRouter
-    , vtTargetVPNGateway
-    , vtRemoteTrafficSelector
-    , vtSelfLink
-    , vtSharedSecret
-    , vtName
-    , vtPeerExternalGateway
-    , vtCreationTimestamp
-    , vtPeerExternalGatewayInterface
-    , vtSharedSecretHash
-    , vtId
-    , vtIkeVersion
-    , vtRegion
-    , vtVPNGateway
-    , vtPeerGcpGateway
-    , vtDescription
-
-    -- ** InstanceGroupManagerAggregatedListWarning
-    , InstanceGroupManagerAggregatedListWarning
-    , instanceGroupManagerAggregatedListWarning
-    , igmalwData
-    , igmalwCode
-    , igmalwMessage
-
-    -- ** DiskListWarningDataItem
-    , DiskListWarningDataItem
-    , diskListWarningDataItem
-    , dlwdiValue
-    , dlwdiKey
-
-    -- ** CommitmentPlan
-    , CommitmentPlan (..)
-
-    -- ** OperationListWarningCode
-    , OperationListWarningCode (..)
-
-    -- ** SourceInstanceParams
-    , SourceInstanceParams
-    , sourceInstanceParams
-    , sipDiskConfigs
-
-    -- ** HealthStatusWeightError
-    , HealthStatusWeightError (..)
-
-    -- ** AliasIPRange
-    , AliasIPRange
-    , aliasIPRange
-    , airIPCIdRRange
-    , airSubnetworkRangeName
-
-    -- ** LocationPolicyLocation
-    , LocationPolicyLocation
-    , locationPolicyLocation
-    , lplPreference
-
-    -- ** ForwardingRuleListWarningCode
-    , ForwardingRuleListWarningCode (..)
-
-    -- ** SSLCertificateManagedSSLCertificateDomainStatusAdditional
-    , SSLCertificateManagedSSLCertificateDomainStatusAdditional (..)
-
-    -- ** NodeTypesScopedListWarningDataItem
-    , NodeTypesScopedListWarningDataItem
-    , nodeTypesScopedListWarningDataItem
-    , ntslwditValue
-    , ntslwditKey
-
-    -- ** VPNTunnelsScopedListWarningCode
-    , VPNTunnelsScopedListWarningCode (..)
-
-    -- ** ForwardingRuleServiceDirectoryRegistration
-    , ForwardingRuleServiceDirectoryRegistration
-    , forwardingRuleServiceDirectoryRegistration
-    , frsdrService
-    , frsdrNamespace
-    , frsdrServiceDirectoryRegion
-
-    -- ** TargetInstanceListWarning
-    , TargetInstanceListWarning
-    , targetInstanceListWarning
-    , tilwData
-    , tilwCode
-    , tilwMessage
-
-    -- ** NodeTypesScopedListWarningCode
-    , NodeTypesScopedListWarningCode (..)
-
-    -- ** NodeType
-    , NodeType
-    , nodeType
-    , ntKind
-    , ntZone
-    , ntCPUPlatform
-    , ntLocalSsdGb
-    , ntSelfLink
-    , ntName
-    , ntCreationTimestamp
-    , ntId
-    , ntGuestCPUs
-    , ntMemoryMb
-    , ntDescription
-    , ntDeprecated
-
-    -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface
-    , AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface (..)
-
-    -- ** AuthorizationLoggingOptions
-    , AuthorizationLoggingOptions
-    , authorizationLoggingOptions
-    , aloPermissionType
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pRules
-    , pVersion
-    , pBindings
-    , pIAMOwned
-
-    -- ** OperationAggregatedListWarning
-    , OperationAggregatedListWarning
-    , operationAggregatedListWarning
-    , oalwData
-    , oalwCode
-    , oalwMessage
-
-    -- ** TargetHTTPProxiesScopedListWarningCode
-    , TargetHTTPProxiesScopedListWarningCode (..)
-
-    -- ** TargetInstanceAggregatedListWarningDataItem
-    , TargetInstanceAggregatedListWarningDataItem
-    , targetInstanceAggregatedListWarningDataItem
-    , tialwdiValue
-    , tialwdiKey
-
-    -- ** OperationsScopedListWarning
-    , OperationsScopedListWarning
-    , operationsScopedListWarning
-    , oslwData
-    , oslwCode
-    , oslwMessage
-
-    -- ** RegionDiskTypeListWarningDataItem
-    , RegionDiskTypeListWarningDataItem
-    , regionDiskTypeListWarningDataItem
-    , rdtlwdiValue
-    , rdtlwdiKey
-
-    -- ** ForwardingRuleListWarningDataItem
-    , ForwardingRuleListWarningDataItem
-    , forwardingRuleListWarningDataItem
-    , frlwdiValue
-    , frlwdiKey
-
-    -- ** Scheduling
-    , Scheduling
-    , scheduling
-    , sMinNodeCPUs
-    , sAutomaticRestart
-    , sNodeAffinities
-    , sOnHostMaintenance
-    , sLocationHint
-    , sPreemptible
-
-    -- ** TargetInstanceAggregatedListWarningCode
-    , TargetInstanceAggregatedListWarningCode (..)
-
-    -- ** RegionDiskTypeListWarningCode
-    , RegionDiskTypeListWarningCode (..)
-
-    -- ** InstancePrivateIPv6GoogleAccess
-    , InstancePrivateIPv6GoogleAccess (..)
-
-    -- ** VPNTunnelsScopedListWarningDataItem
-    , VPNTunnelsScopedListWarningDataItem
-    , vpnTunnelsScopedListWarningDataItem
-    , vtslwdiValue
-    , vtslwdiKey
-
-    -- ** InterconnectList
-    , InterconnectList
-    , interconnectList
-    , intnNextPageToken
-    , intnKind
-    , intnItems
-    , intnSelfLink
-    , intnWarning
-    , intnId
-
-    -- ** TargetPoolListWarningDataItem
-    , TargetPoolListWarningDataItem
-    , targetPoolListWarningDataItem
-    , tplwdiValue
-    , tplwdiKey
-
-    -- ** NodeTemplate
-    , NodeTemplate
-    , nodeTemplate
-    , nttStatus
-    , nttKind
-    , nttSelfLink
-    , nttServerBinding
-    , nttAccelerators
-    , nttName
-    , nttStatusMessage
-    , nttCreationTimestamp
-    , nttNodeAffinityLabels
-    , nttId
-    , nttNodeTypeFlexibility
-    , nttNodeType
-    , nttRegion
-    , nttDisks
-    , nttDescription
-    , nttCPUOvercommitType
-
-    -- ** NetworksGetEffectiveFirewallsResponse
-    , NetworksGetEffectiveFirewallsResponse
-    , networksGetEffectiveFirewallsResponse
-    , ngefrFirewallPolicys
-    , ngefrFirewalls
-
-    -- ** NetworkEndpointGroupList
-    , NetworkEndpointGroupList
-    , networkEndpointGroupList
-    , neglNextPageToken
-    , neglKind
-    , neglItems
-    , neglSelfLink
-    , neglWarning
-    , neglId
-
-    -- ** TargetHTTPProxiesScopedListWarningDataItem
-    , TargetHTTPProxiesScopedListWarningDataItem
-    , targetHTTPProxiesScopedListWarningDataItem
-    , thttppslwdiValue
-    , thttppslwdiKey
-
-    -- ** SubnetworkList
-    , SubnetworkList
-    , subnetworkList
-    , slNextPageToken
-    , slKind
-    , slItems
-    , slSelfLink
-    , slWarning
-    , slId
-
-    -- ** SecurityPolicyAdvancedOptionsConfigLogLevel
-    , SecurityPolicyAdvancedOptionsConfigLogLevel (..)
-
-    -- ** AddressAddressType
-    , AddressAddressType (..)
-
-    -- ** TargetPoolListWarningCode
-    , TargetPoolListWarningCode (..)
-
-    -- ** ForwardingRuleLabels
-    , ForwardingRuleLabels
-    , forwardingRuleLabels
-    , frlAddtional
-
-    -- ** ForwardingRulesScopedListWarning
-    , ForwardingRulesScopedListWarning
-    , forwardingRulesScopedListWarning
-    , frslwData
-    , frslwCode
-    , frslwMessage
-
-    -- ** HTTPHealthCheckList
-    , HTTPHealthCheckList
-    , hTTPHealthCheckList
-    , httphclNextPageToken
-    , httphclKind
-    , httphclItems
-    , httphclSelfLink
-    , httphclWarning
-    , httphclId
-
-    -- ** InstanceGroupManagersScopedListWarning
-    , InstanceGroupManagersScopedListWarning
-    , instanceGroupManagersScopedListWarning
-    , igmslwData
-    , igmslwCode
-    , igmslwMessage
-
-    -- ** SSLPoliciesList
-    , SSLPoliciesList
-    , sslPoliciesList
-    , sslplNextPageToken
-    , sslplKind
-    , sslplItems
-    , sslplSelfLink
-    , sslplWarning
-    , sslplId
-
-    -- ** NodeTemplatesScopedListWarningCode
-    , NodeTemplatesScopedListWarningCode (..)
-
-    -- ** URLMapsValidateRequest
-    , URLMapsValidateRequest
-    , urlMapsValidateRequest
-    , umvrResource
-
-    -- ** InstanceGroupManagersSetTargetPoolsRequest
-    , InstanceGroupManagersSetTargetPoolsRequest
-    , instanceGroupManagersSetTargetPoolsRequest
-    , igmstprFingerprint
-    , igmstprTargetPools
-
-    -- ** NetworkListWarningCode
-    , NetworkListWarningCode (..)
-
-    -- ** ResourcePolicySnapshotSchedulePolicy
-    , ResourcePolicySnapshotSchedulePolicy
-    , resourcePolicySnapshotSchedulePolicy
-    , rpsspSchedule
-    , rpsspRetentionPolicy
-    , rpsspSnapshotProperties
-
-    -- ** BulkInsertInstanceResourcePerInstanceProperties
-    , BulkInsertInstanceResourcePerInstanceProperties
-    , bulkInsertInstanceResourcePerInstanceProperties
-    , biirpipName
-
-    -- ** TargetHTTPSProxiesScopedListWarningDataItem
-    , TargetHTTPSProxiesScopedListWarningDataItem
-    , targetHTTPSProxiesScopedListWarningDataItem
-    , thpslwdiValue
-    , thpslwdiKey
-
-    -- ** LocationPolicyLocationPreference
-    , LocationPolicyLocationPreference (..)
-
-    -- ** NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
-    , NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
-    , networksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
-    , ngefrefpRules
-    , ngefrefpShortName
-    , ngefrefpName
-    , ngefrefpDisplayName
-    , ngefrefpType
-
-    -- ** Commitment
-    , Commitment
-    , commitment
-    , cStatus
-    , cKind
-    , cCategory
-    , cPlan
-    , cResources
-    , cLicenseResource
-    , cEndTimestamp
-    , cSelfLink
-    , cName
-    , cStatusMessage
-    , cCreationTimestamp
-    , cId
-    , cRegion
-    , cReservations
-    , cStartTimestamp
-    , cDescription
-
-    -- ** HTTPSHealthCheckList
-    , HTTPSHealthCheckList
-    , httpsHealthCheckList
-    , hhclNextPageToken
-    , hhclKind
-    , hhclItems
-    , hhclSelfLink
-    , hhclWarning
-    , hhclId
-
-    -- ** AddressListWarningDataItem
-    , AddressListWarningDataItem
-    , addressListWarningDataItem
-    , addValue
-    , addKey
-
-    -- ** OperationErrorErrorsItem
-    , OperationErrorErrorsItem
-    , operationErrorErrorsItem
-    , oeeiLocation
-    , oeeiCode
-    , oeeiMessage
-
-    -- ** CommitmentListWarning
-    , CommitmentListWarning
-    , commitmentListWarning
-    , clwData
-    , clwCode
-    , clwMessage
-
-    -- ** License
-    , License
-    , license
-    , lChargesUseFee
-    , lKind
-    , lResourceRequirements
-    , lTransferable
-    , lSelfLink
-    , lName
-    , lCreationTimestamp
-    , lId
-    , lDescription
-    , lLicenseCode
-
-    -- ** PathRule
-    , PathRule
-    , pathRule
-    , prService
-    , prRouteAction
-    , prPaths
-    , prURLRedirect
-
-    -- ** ScalingScheduleStatusState
-    , ScalingScheduleStatusState (..)
-
-    -- ** LicenseCodeLicenseAlias
-    , LicenseCodeLicenseAlias
-    , licenseCodeLicenseAlias
-    , lclaSelfLink
-    , lclaDescription
-
-    -- ** XpnHostListWarningCode
-    , XpnHostListWarningCode (..)
-
-    -- ** NotificationEndpointListWarningDataItem
-    , NotificationEndpointListWarningDataItem
-    , notificationEndpointListWarningDataItem
-    , nelwdiValue
-    , nelwdiKey
-
-    -- ** InterconnectAttachmentsScopedListWarningDataItem
-    , InterconnectAttachmentsScopedListWarningDataItem
-    , interconnectAttachmentsScopedListWarningDataItem
-    , iaslwdiValue
-    , iaslwdiKey
-
-    -- ** SecurityPolicyListWarningDataItem
-    , SecurityPolicyListWarningDataItem
-    , securityPolicyListWarningDataItem
-    , secValue
-    , secKey
-
-    -- ** InterconnectAttachmentAggregatedListWarningCode
-    , InterconnectAttachmentAggregatedListWarningCode (..)
-
-    -- ** FirewallPolicyListWarningCode
-    , FirewallPolicyListWarningCode (..)
-
-    -- ** StatefulPolicyPreservedState
-    , StatefulPolicyPreservedState
-    , statefulPolicyPreservedState
-    , sppsDisks
-
-    -- ** TargetGrpcProxy
-    , TargetGrpcProxy
-    , targetGrpcProxy
-    , tgpURLMap
-    , tgpKind
-    , tgpValidateForProxyless
-    , tgpFingerprint
-    , tgpSelfLinkWithId
-    , tgpSelfLink
-    , tgpName
-    , tgpCreationTimestamp
-    , tgpId
-    , tgpDescription
-
-    -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcIgnoreChildExemptions
-    , alcExemptedMembers
-
-    -- ** GuestAttributesEntry
-    , GuestAttributesEntry
-    , guestAttributesEntry
-    , gaeValue
-    , gaeNamespace
-    , gaeKey
-
-    -- ** CommitmentsScopedListWarningDataItem
-    , CommitmentsScopedListWarningDataItem
-    , commitmentsScopedListWarningDataItem
-    , cslwdiValue
-    , cslwdiKey
-
-    -- ** InterconnectAttachment
-    , InterconnectAttachment
-    , interconnectAttachment
-    , iaMtu
-    , iaState
-    , iaPartnerASN
-    , iaPairingKey
-    , iaKind
-    , iaCustomerRouterIPAddress
-    , iaIPsecInternalAddresses
-    , iaPartnerMetadata
-    , iaRouter
-    , iaOperationalStatus
-    , iaDataplaneVersion
-    , iaSelfLink
-    , iaName
-    , iaBandwidth
-    , iaEncryption
-    , iaGoogleReferenceId
-    , iaCreationTimestamp
-    , iaEdgeAvailabilityDomain
-    , iaInterconnect
-    , iaAdminEnabled
-    , iaVLANTag8021q
-    , iaCloudRouterIPAddress
-    , iaId
-    , iaCandidateSubnets
-    , iaRegion
-    , iaType
-    , iaDescription
-    , iaPrivateInterconnectInfo
-
-    -- ** InstanceList
-    , InstanceList
-    , instanceList
-    , insNextPageToken
-    , insKind
-    , insItems
-    , insSelfLink
-    , insWarning
-    , insId
-
-    -- ** ResourcePolicySnapshotSchedulePolicySnapshotPropertiesLabels
-    , ResourcePolicySnapshotSchedulePolicySnapshotPropertiesLabels
-    , resourcePolicySnapshotSchedulePolicySnapshotPropertiesLabels
-    , rpsspsplAddtional
-
-    -- ** RegionSetLabelsRequestLabels
-    , RegionSetLabelsRequestLabels
-    , regionSetLabelsRequestLabels
-    , rslrlAddtional
-
-    -- ** NetworkListWarningDataItem
-    , NetworkListWarningDataItem
-    , networkListWarningDataItem
-    , nlwdiValue
-    , nlwdiKey
-
-    -- ** AddressListWarningCode
-    , AddressListWarningCode (..)
-
-    -- ** TargetHTTPSProxiesScopedListWarningCode
-    , TargetHTTPSProxiesScopedListWarningCode (..)
-
-    -- ** NetworkPeeringState
-    , NetworkPeeringState (..)
-
-    -- ** PacketMirroringList
-    , PacketMirroringList
-    , packetMirroringList
-    , pmlNextPageToken
-    , pmlKind
-    , pmlItems
-    , pmlSelfLink
-    , pmlWarning
-    , pmlId
-
-    -- ** CacheKeyPolicy
-    , CacheKeyPolicy
-    , cacheKeyPolicy
-    , ckpQueryStringWhiteList
-    , ckpIncludeHost
-    , ckpIncludeProtocol
-    , ckpQueryStringBlackList
-    , ckpIncludeQueryString
-
-    -- ** ZoneListWarningCode
-    , ZoneListWarningCode (..)
-
-    -- ** CommitmentCategory
-    , CommitmentCategory (..)
-
-    -- ** NotificationEndpointListWarningCode
-    , NotificationEndpointListWarningCode (..)
-
-    -- ** CommitmentAggregatedListWarningDataItem
-    , CommitmentAggregatedListWarningDataItem
-    , commitmentAggregatedListWarningDataItem
-    , calwdiValue
-    , calwdiKey
-
-    -- ** RegionInstanceGroupListWarningDataItem
-    , RegionInstanceGroupListWarningDataItem
-    , regionInstanceGroupListWarningDataItem
-    , riglwdiValue
-    , riglwdiKey
-
-    -- ** SubnetworkAggregatedListItems
-    , SubnetworkAggregatedListItems
-    , subnetworkAggregatedListItems
-    , saliAddtional
-
-    -- ** FirewallPoliciesListAssociationsResponse
-    , FirewallPoliciesListAssociationsResponse
-    , firewallPoliciesListAssociationsResponse
-    , fplarKind
-    , fplarAssociations
-
-    -- ** NetworkEndpointGroupAggregatedListItems
-    , NetworkEndpointGroupAggregatedListItems
-    , networkEndpointGroupAggregatedListItems
-    , negaliAddtional
-
-    -- ** InterconnectAttachmentAggregatedListWarningDataItem
-    , InterconnectAttachmentAggregatedListWarningDataItem
-    , interconnectAttachmentAggregatedListWarningDataItem
-    , iaalwdiValue
-    , iaalwdiKey
-
-    -- ** AuthorizationLoggingOptionsPermissionType
-    , AuthorizationLoggingOptionsPermissionType (..)
-
-    -- ** FirewallPolicyListWarningDataItem
-    , FirewallPolicyListWarningDataItem
-    , firewallPolicyListWarningDataItem
-    , fplwdiValue
-    , fplwdiKey
-
-    -- ** ResourcePolicyWeeklyCycle
-    , ResourcePolicyWeeklyCycle
-    , resourcePolicyWeeklyCycle
-    , rpwcDayOfWeeks
-
-    -- ** InterconnectAttachmentListWarning
-    , InterconnectAttachmentListWarning
-    , interconnectAttachmentListWarning
-    , intData
-    , intCode
-    , intMessage
-
-    -- ** InterconnectOutageNotificationIssueType
-    , InterconnectOutageNotificationIssueType (..)
-
-    -- ** CommitmentsScopedListWarningCode
-    , CommitmentsScopedListWarningCode (..)
-
-    -- ** Condition
-    , Condition
-    , condition
-    , cOp
-    , cIAM
-    , cValues
-    , cSys
-    , cSvc
-
-    -- ** AddressAggregatedListWarning
-    , AddressAggregatedListWarning
-    , addressAggregatedListWarning
-    , addData
-    , addCode
-    , addMessage
-
-    -- ** ManagedInstanceLastAttempt
-    , ManagedInstanceLastAttempt
-    , managedInstanceLastAttempt
-    , milaErrors
-
-    -- ** LicensesListResponseWarning
-    , LicensesListResponseWarning
-    , licensesListResponseWarning
-    , llrwData
-    , llrwCode
-    , llrwMessage
-
-    -- ** AutoscalerStatusDetails
-    , AutoscalerStatusDetails
-    , autoscalerStatusDetails
-    , asdType
-    , asdMessage
-
-    -- ** TargetGrpcProxyListWarning
-    , TargetGrpcProxyListWarning
-    , targetGrpcProxyListWarning
-    , tgplwData
-    , tgplwCode
-    , tgplwMessage
-
-    -- ** HTTP2HealthCheckProxyHeader
-    , HTTP2HealthCheckProxyHeader (..)
-
-    -- ** BackendServiceList
-    , BackendServiceList
-    , backendServiceList
-    , bslNextPageToken
-    , bslKind
-    , bslItems
-    , bslSelfLink
-    , bslWarning
-    , bslId
-
-    -- ** XpnHostListWarningDataItem
-    , XpnHostListWarningDataItem
-    , xpnHostListWarningDataItem
-    , xhlwdiValue
-    , xhlwdiKey
-
-    -- ** LogConfigCounterOptionsCustomField
-    , LogConfigCounterOptionsCustomField
-    , logConfigCounterOptionsCustomField
-    , lccocfValue
-    , lccocfName
-
-    -- ** InterconnectAttachmentsScopedListWarningCode
-    , InterconnectAttachmentsScopedListWarningCode (..)
-
-    -- ** SecurityPolicyListWarningCode
-    , SecurityPolicyListWarningCode (..)
-
-    -- ** ZoneListWarningDataItem
-    , ZoneListWarningDataItem
-    , zoneListWarningDataItem
-    , zlwdiValue
-    , zlwdiKey
-
-    -- ** RegionSetPolicyRequest
-    , RegionSetPolicyRequest
-    , regionSetPolicyRequest
-    , rsprEtag
-    , rsprBindings
-    , rsprPolicy
-
-    -- ** CommitmentAggregatedListWarningCode
-    , CommitmentAggregatedListWarningCode (..)
-
-    -- ** RegionInstanceGroupListWarningCode
-    , RegionInstanceGroupListWarningCode (..)
-
-    -- ** InstanceGroupsScopedListWarning
-    , InstanceGroupsScopedListWarning
-    , instanceGroupsScopedListWarning
-    , igslwData
-    , igslwCode
-    , igslwMessage
-
-    -- ** PreservedState
-    , PreservedState
-    , preservedState
-    , psMetadata
-    , psDisks
-
-    -- ** InterconnectLocationStatus
-    , InterconnectLocationStatus (..)
-
-    -- ** AutoscalingPolicyCPUUtilization
-    , AutoscalingPolicyCPUUtilization
-    , autoscalingPolicyCPUUtilization
-    , apcuUtilizationTarget
-    , apcuPredictiveMethod
-
-    -- ** InstanceGroupsScopedListWarningCode
-    , InstanceGroupsScopedListWarningCode (..)
-
-    -- ** InterconnectOperationalStatus
-    , InterconnectOperationalStatus (..)
-
-    -- ** InstanceGroupsScopedListWarningDataItem
-    , InstanceGroupsScopedListWarningDataItem
-    , instanceGroupsScopedListWarningDataItem
-    , igslwdiValue
-    , igslwdiKey
-
-    -- ** SecurityPolicyRuleMatcherConfig
-    , SecurityPolicyRuleMatcherConfig
-    , securityPolicyRuleMatcherConfig
-    , sprmcSrcIPRanges
-
-    -- ** LicensesListResponseWarningDataItem
-    , LicensesListResponseWarningDataItem
-    , licensesListResponseWarningDataItem
-    , llrwdiValue
-    , llrwdiKey
-
-    -- ** LicensesListResponseWarningCode
-    , LicensesListResponseWarningCode (..)
-
-    -- ** XpnHostListWarning
-    , XpnHostListWarning
-    , xpnHostListWarning
-    , xhlwData
-    , xhlwCode
-    , xhlwMessage
-
-    -- ** SubnetworkRole
-    , SubnetworkRole (..)
-
-    -- ** Duration
-    , Duration
-    , duration
-    , dNanos
-    , dSeconds
-
-    -- ** PublicDelegatedPrefixStatus
-    , PublicDelegatedPrefixStatus (..)
-
-    -- ** ResourceGroupReference
-    , ResourceGroupReference
-    , resourceGroupReference
-    , rgrGroup
-
-    -- ** VMEndpointNATMAppingsList
-    , VMEndpointNATMAppingsList
-    , vMEndpointNATMAppingsList
-    , vmenatmalNextPageToken
-    , vmenatmalKind
-    , vmenatmalResult
-    , vmenatmalSelfLink
-    , vmenatmalWarning
-    , vmenatmalId
-
-    -- ** SSLCertificateAggregatedList
-    , SSLCertificateAggregatedList
-    , sslCertificateAggregatedList
-    , scalUnreachables
-    , scalNextPageToken
-    , scalKind
-    , scalItems
-    , scalSelfLink
-    , scalWarning
-    , scalId
-
-    -- ** Firewall
-    , Firewall
-    , firewall
-    , fSourceTags
-    , fSourceServiceAccounts
-    , fPriority
-    , fDirection
-    , fKind
-    , fDisabled
-    , fTargetTags
-    , fNetwork
-    , fSourceRanges
-    , fSelfLink
-    , fName
-    , fDenied
-    , fCreationTimestamp
-    , fId
-    , fAllowed
-    , fDestinationRanges
-    , fLogConfig
-    , fTargetServiceAccounts
-    , fDescription
-
-    -- ** HealthCheckServicesList
-    , HealthCheckServicesList
-    , healthCheckServicesList
-    , hNextPageToken
-    , hKind
-    , hItems
-    , hSelfLink
-    , hWarning
-    , hId
-
-    -- ** InterconnectAttachmentsScopedListWarning
-    , InterconnectAttachmentsScopedListWarning
-    , interconnectAttachmentsScopedListWarning
-    , iaslwData
-    , iaslwCode
-    , iaslwMessage
-
-    -- ** HostRule
-    , HostRule
-    , hostRule
-    , hrHosts
-    , hrDescription
-    , hrPathMatcher
-
-    -- ** SecurityPolicyListWarning
-    , SecurityPolicyListWarning
-    , securityPolicyListWarning
-    , secData
-    , secCode
-    , secMessage
-
-    -- ** Quota
-    , Quota
-    , quota
-    , qOwner
-    , qMetric
-    , qLimit
-    , qUsage
-
-    -- ** InstanceGroup
-    , InstanceGroup
-    , instanceGroup
-    , ig1Size
-    , ig1Kind
-    , ig1Fingerprint
-    , ig1Network
-    , ig1Zone
-    , ig1SelfLink
-    , ig1Name
-    , ig1CreationTimestamp
-    , ig1Subnetwork
-    , ig1Id
-    , ig1Region
-    , ig1Description
-    , ig1NamedPorts
-
-    -- ** AddressListWarning
-    , AddressListWarning
-    , addressListWarning
-    , alwlData
-    , alwlCode
-    , alwlMessage
-
-    -- ** ResourcePolicySnapshotSchedulePolicySnapshotProperties
-    , ResourcePolicySnapshotSchedulePolicySnapshotProperties
-    , resourcePolicySnapshotSchedulePolicySnapshotProperties
-    , rpsspspGuestFlush
-    , rpsspspChainName
-    , rpsspspStorageLocations
-    , rpsspspLabels
-
-    -- ** RegionSetLabelsRequest
-    , RegionSetLabelsRequest
-    , regionSetLabelsRequest
-    , rslrLabels
-    , rslrLabelFingerprint
-
-    -- ** TargetHTTPSProxiesScopedListWarning
-    , TargetHTTPSProxiesScopedListWarning
-    , targetHTTPSProxiesScopedListWarning
-    , thpslwData
-    , thpslwCode
-    , thpslwMessage
-
-    -- ** RouterInterface
-    , RouterInterface
-    , routerInterface
-    , riLinkedInterconnectAttachment
-    , riName
-    , riManagementType
-    , riIPRange
-    , riLinkedVPNTunnel
-
-    -- ** ResourcePolicyWeeklyCycleDayOfWeekDay
-    , ResourcePolicyWeeklyCycleDayOfWeekDay (..)
-
-    -- ** InstanceWithNamedPortsStatus
-    , InstanceWithNamedPortsStatus (..)
-
-    -- ** NetworkListWarning
-    , NetworkListWarning
-    , networkListWarning
-    , nlwData
-    , nlwCode
-    , nlwMessage
-
-    -- ** TCPHealthCheckProxyHeader
-    , TCPHealthCheckProxyHeader (..)
-
-    -- ** SnapshotList
-    , SnapshotList
-    , snapshotList
-    , sllNextPageToken
-    , sllKind
-    , sllItems
-    , sllSelfLink
-    , sllWarning
-    , sllId
-
-    -- ** InterconnectDiagnostics
-    , InterconnectDiagnostics
-    , interconnectDiagnostics
-    , idMACAddress
-    , idArpCaches
-    , idLinks
-
-    -- ** CommitmentListWarningCode
-    , CommitmentListWarningCode (..)
-
-    -- ** HTTPHealthCheckPortSpecification
-    , HTTPHealthCheckPortSpecification (..)
-
-    -- ** LicenseCode
-    , LicenseCode
-    , licenseCode
-    , lcState
-    , lcKind
-    , lcTransferable
-    , lcSelfLink
-    , lcName
-    , lcCreationTimestamp
-    , lcId
-    , lcLicenseAlias
-    , lcDescription
-
-    -- ** TestFailure
-    , TestFailure
-    , testFailure
-    , tfExpectedOutputURL
-    , tfExpectedRedirectResponseCode
-    , tfPath
-    , tfExpectedService
-    , tfHeaders
-    , tfActualOutputURL
-    , tfActualRedirectResponseCode
-    , tfHost
-    , tfActualService
-
-    -- ** NodeGroupAutoscalingPolicyMode
-    , NodeGroupAutoscalingPolicyMode (..)
-
-    -- ** NotificationEndpointListWarning
-    , NotificationEndpointListWarning
-    , notificationEndpointListWarning
-    , nelwData
-    , nelwCode
-    , nelwMessage
-
-    -- ** CommitmentListWarningDataItem
-    , CommitmentListWarningDataItem
-    , commitmentListWarningDataItem
-    , clwdiValue
-    , clwdiKey
-
-    -- ** ConditionIAM
-    , ConditionIAM (..)
-
-    -- ** ManagedInstanceVersion
-    , ManagedInstanceVersion
-    , managedInstanceVersion
-    , mivInstanceTemplate
-    , mivName
-
-    -- ** CommitmentsScopedListWarning
-    , CommitmentsScopedListWarning
-    , commitmentsScopedListWarning
-    , cslwData
-    , cslwCode
-    , cslwMessage
-
-    -- ** SerialPortOutput
-    , SerialPortOutput
-    , serialPortOutput
-    , spoNext
-    , spoContents
-    , spoKind
-    , spoStart
-    , spoSelfLink
-
-    -- ** InstanceGroupManagerStatusStatefulPerInstanceConfigs
-    , InstanceGroupManagerStatusStatefulPerInstanceConfigs
-    , instanceGroupManagerStatusStatefulPerInstanceConfigs
-    , igmsspicAllEffective
-
-    -- ** ResourcePolicyStatus
-    , ResourcePolicyStatus (..)
-
-    -- ** PreservedStateMetadata
-    , PreservedStateMetadata
-    , preservedStateMetadata
-    , psmAddtional
-
-    -- ** TargetVPNGatewayAggregatedList
-    , TargetVPNGatewayAggregatedList
-    , targetVPNGatewayAggregatedList
-    , tvgalUnreachables
-    , tvgalNextPageToken
-    , tvgalKind
-    , tvgalItems
-    , tvgalSelfLink
-    , tvgalWarning
-    , tvgalId
-
-    -- ** InterconnectAttachmentAggregatedListWarning
-    , InterconnectAttachmentAggregatedListWarning
-    , interconnectAttachmentAggregatedListWarning
-    , iaalwData
-    , iaalwCode
-    , iaalwMessage
-
-    -- ** FirewallPolicyListWarning
-    , FirewallPolicyListWarning
-    , firewallPolicyListWarning
-    , fplwData
-    , fplwCode
-    , fplwMessage
-
-    -- ** MetadataItemsItem
-    , MetadataItemsItem
-    , metadataItemsItem
-    , miiValue
-    , miiKey
-
-    -- ** InstancesAddResourcePoliciesRequest
-    , InstancesAddResourcePoliciesRequest
-    , instancesAddResourcePoliciesRequest
-    , iarprResourcePolicies
-
-    -- ** SignedURLKey
-    , SignedURLKey
-    , signedURLKey
-    , sukKeyValue
-    , sukKeyName
-
-    -- ** TargetHTTPSProxy
-    , TargetHTTPSProxy
-    , targetHTTPSProxy
-    , thpSSLPolicy
-    , thpURLMap
-    , thpSSLCertificates
-    , thpQuicOverride
-    , thpProxyBind
-    , thpKind
-    , thpFingerprint
-    , thpServerTLSPolicy
-    , thpSelfLink
-    , thpName
-    , thpCreationTimestamp
-    , thpId
-    , thpRegion
-    , thpAuthorizationPolicy
-    , thpDescription
-
-    -- ** ConnectionDraining
-    , ConnectionDraining
-    , connectionDraining
-    , cdDrainingTimeoutSec
-
-    -- ** ResourcePolicyInstanceSchedulePolicy
-    , ResourcePolicyInstanceSchedulePolicy
-    , resourcePolicyInstanceSchedulePolicy
-    , rpispStartTime
-    , rpispVMStartSchedule
-    , rpispVMStopSchedule
-    , rpispTimeZone
-    , rpispExpirationTime
-
-    -- ** URLMapTestHeader
-    , URLMapTestHeader
-    , urlMapTestHeader
-    , umthValue
-    , umthName
-
-    -- ** InterconnectAttachmentListWarningDataItem
-    , InterconnectAttachmentListWarningDataItem
-    , interconnectAttachmentListWarningDataItem
-    , ialwdiValue
-    , ialwdiKey
-
-    -- ** VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason
-    , VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason (..)
-
-    -- ** AddressAggregatedListWarningCode
-    , AddressAggregatedListWarningCode (..)
-
-    -- ** CacheInvalidationRule
-    , CacheInvalidationRule
-    , cacheInvalidationRule
-    , cirPath
-    , cirHost
-
-    -- ** SSLCertificatesScopedList
-    , SSLCertificatesScopedList
-    , sslCertificatesScopedList
-    , scslSSLCertificates
-    , scslWarning
-
-    -- ** AddressAggregatedListWarningDataItem
-    , AddressAggregatedListWarningDataItem
-    , addressAggregatedListWarningDataItem
-    , aalwdiaValue
-    , aalwdiaKey
-
-    -- ** InterconnectAttachmentListWarningCode
-    , InterconnectAttachmentListWarningCode (..)
-
-    -- ** TargetVPNGatewaysScopedList
-    , TargetVPNGatewaysScopedList
-    , targetVPNGatewaysScopedList
-    , tvgslTargetVPNGateways
-    , tvgslWarning
-
-    -- ** CommitmentAggregatedListWarning
-    , CommitmentAggregatedListWarning
-    , commitmentAggregatedListWarning
-    , calwData
-    , calwCode
-    , calwMessage
-
-    -- ** RegionInstanceGroupListWarning
-    , RegionInstanceGroupListWarning
-    , regionInstanceGroupListWarning
-    , riglwData
-    , riglwCode
-    , riglwMessage
-
-    -- ** PublicAdvertisedPrefixStatus
-    , PublicAdvertisedPrefixStatus (..)
+    -- ** AcceleratorTypesScopedList_Warning_DataItem
+    AcceleratorTypesScopedList_Warning_DataItem (..),
+    newAcceleratorTypesScopedList_Warning_DataItem,
 
     -- ** AccessConfig
-    , AccessConfig
-    , accessConfig
-    , acNetworkTier
-    , acExternalIPv6
-    , acSetPublicPtr
-    , acKind
-    , acExternalIPv6PrefixLength
-    , acName
-    , acNATIP
-    , acPublicPtrDomainName
-    , acType
+    AccessConfig (..),
+    newAccessConfig,
 
-    -- ** LogConfig
-    , LogConfig
-    , logConfig
-    , lcCloudAudit
-    , lcDataAccess
-    , lcCounter
+    -- ** AccessConfig_NetworkTier
+    AccessConfig_NetworkTier (..),
 
-    -- ** TargetGrpcProxyListWarningCode
-    , TargetGrpcProxyListWarningCode (..)
+    -- ** AccessConfig_Type
+    AccessConfig_Type (..),
 
-    -- ** TargetGrpcProxyListWarningDataItem
-    , TargetGrpcProxyListWarningDataItem
-    , targetGrpcProxyListWarningDataItem
-    , tgplwdiValue
-    , tgplwdiKey
+    -- ** Address
+    Address (..),
+    newAddress,
 
-    -- ** NodeGroupNodeCPUOvercommitType
-    , NodeGroupNodeCPUOvercommitType (..)
+    -- ** Address_AddressType
+    Address_AddressType (..),
 
-    -- ** ZoneListWarning
-    , ZoneListWarning
-    , zoneListWarning
-    , zlwData
-    , zlwCode
-    , zlwMessage
+    -- ** Address_IpVersion
+    Address_IpVersion (..),
 
-    -- ** InstancesUpdateMinimalAction
-    , InstancesUpdateMinimalAction (..)
+    -- ** Address_NetworkTier
+    Address_NetworkTier (..),
 
-    -- ** RouterNATLogConfig
-    , RouterNATLogConfig
-    , routerNATLogConfig
-    , rnatlcEnable
-    , rnatlcFilter
+    -- ** Address_Purpose
+    Address_Purpose (..),
 
-    -- ** ManagedInstanceLastAttemptErrorsErrorsItem
-    , ManagedInstanceLastAttemptErrorsErrorsItem
-    , managedInstanceLastAttemptErrorsErrorsItem
-    , milaeeiLocation
-    , milaeeiCode
-    , milaeeiMessage
-
-    -- ** ReservationAffinityConsumeReservationType
-    , ReservationAffinityConsumeReservationType (..)
-
-    -- ** InstancesScopedListWarningCode
-    , InstancesScopedListWarningCode (..)
-
-    -- ** InstancesScopedListWarningDataItem
-    , InstancesScopedListWarningDataItem
-    , instancesScopedListWarningDataItem
-    , islwdiValue
-    , islwdiKey
-
-    -- ** PacketMirroringNetworkInfo
-    , PacketMirroringNetworkInfo
-    , packetMirroringNetworkInfo
-    , pmniURL
-    , pmniCanonicalURL
-
-    -- ** SnapshotLabels
-    , SnapshotLabels
-    , snapshotLabels
-    , slAddtional
-
-    -- ** InstancePropertiesPrivateIPv6GoogleAccess
-    , InstancePropertiesPrivateIPv6GoogleAccess (..)
-
-    -- ** SSLCertificateManagedSSLCertificateStatus
-    , SSLCertificateManagedSSLCertificateStatus (..)
-
-    -- ** ManagedInstanceInstanceHealth
-    , ManagedInstanceInstanceHealth
-    , managedInstanceInstanceHealth
-    , miihHealthCheck
-    , miihDetailedHealthState
-
-    -- ** HealthChecksAggregatedListWarningCode
-    , HealthChecksAggregatedListWarningCode (..)
-
-    -- ** BackendServicesScopedListWarningDataItem
-    , BackendServicesScopedListWarningDataItem
-    , backendServicesScopedListWarningDataItem
-    , bsslwdiValue
-    , bsslwdiKey
-
-    -- ** PacketMirroringAggregatedListWarningDataItem
-    , PacketMirroringAggregatedListWarningDataItem
-    , packetMirroringAggregatedListWarningDataItem
-    , pmalwdiValue
-    , pmalwdiKey
-
-    -- ** NodeTemplateAggregatedListItems
-    , NodeTemplateAggregatedListItems
-    , nodeTemplateAggregatedListItems
-    , ntaliAddtional
-
-    -- ** HealthChecksAggregatedListWarningDataItem
-    , HealthChecksAggregatedListWarningDataItem
-    , healthChecksAggregatedListWarningDataItem
-    , hcalwdiValue
-    , hcalwdiKey
-
-    -- ** RegionInstanceGroupManagerDeleteInstanceConfigReq
-    , RegionInstanceGroupManagerDeleteInstanceConfigReq
-    , regionInstanceGroupManagerDeleteInstanceConfigReq
-    , rigmdicrNames
-
-    -- ** InstanceGroupManagersApplyUpdatesRequest
-    , InstanceGroupManagersApplyUpdatesRequest
-    , instanceGroupManagersApplyUpdatesRequest
-    , igmaurAllInstances
-    , igmaurMostDisruptiveAllowedAction
-    , igmaurInstances
-    , igmaurMinimalAction
-
-    -- ** BackendService
-    , BackendService
-    , backendService
-    , bsSessionAffinity
-    , bsFailoverPolicy
-    , bsBackends
-    , bsLocalityLbPolicy
-    , bsAffinityCookieTtlSec
-    , bsConsistentHash
-    , bsIap
-    , bsLoadBalancingScheme
-    , bsKind
-    , bsEnableCDN
-    , bsCircuitBreakers
-    , bsFingerprint
-    , bsSecuritySettings
-    , bsOutlierDetection
-    , bsNetwork
-    , bsProtocol
-    , bsCustomRequestHeaders
-    , bsSecurityPolicy
-    , bsCdnPolicy
-    , bsCustomResponseHeaders
-    , bsSelfLink
-    , bsName
-    , bsCreationTimestamp
-    , bsId
-    , bsRegion
-    , bsMaxStreamDuration
-    , bsConnectionDraining
-    , bsTimeoutSec
-    , bsLogConfig
-    , bsDescription
-    , bsPortName
-    , bsHealthChecks
-    , bsPort
-
-    -- ** InstanceListWarning
-    , InstanceListWarning
-    , instanceListWarning
-    , insData
-    , insCode
-    , insMessage
-
-    -- ** InstanceMoveRequest
-    , InstanceMoveRequest
-    , instanceMoveRequest
-    , imrTargetInstance
-    , imrDestinationZone
-
-    -- ** XpnResourceIdType
-    , XpnResourceIdType (..)
-
-    -- ** InstanceManagedByIgmErrorInstanceActionDetails
-    , InstanceManagedByIgmErrorInstanceActionDetails
-    , instanceManagedByIgmErrorInstanceActionDetails
-    , imbieiadAction
-    , imbieiadVersion
-    , imbieiadInstance
-
-    -- ** RegionTargetHTTPSProxiesSetSSLCertificatesRequest
-    , RegionTargetHTTPSProxiesSetSSLCertificatesRequest
-    , regionTargetHTTPSProxiesSetSSLCertificatesRequest
-    , rthpsscrSSLCertificates
-
-    -- ** InterconnectDiagnosticsARPEntry
-    , InterconnectDiagnosticsARPEntry
-    , interconnectDiagnosticsARPEntry
-    , idarpeIPAddress
-    , idarpeMACAddress
-
-    -- ** ShieldedInstanceIdentity
-    , ShieldedInstanceIdentity
-    , shieldedInstanceIdentity
-    , siiSigningKey
-    , siiKind
-    , siiEncryptionKey
-
-    -- ** SSLCertificateManagedSSLCertificateDomainStatus
-    , SSLCertificateManagedSSLCertificateDomainStatus
-    , sslCertificateManagedSSLCertificateDomainStatus
-    , scmscdsAddtional
-
-    -- ** PreservedStatePreservedDiskMode
-    , PreservedStatePreservedDiskMode (..)
-
-    -- ** BackendServicesScopedListWarningCode
-    , BackendServicesScopedListWarningCode (..)
-
-    -- ** PacketMirroringAggregatedListWarningCode
-    , PacketMirroringAggregatedListWarningCode (..)
-
-    -- ** CommitmentList
-    , CommitmentList
-    , commitmentList
-    , clNextPageToken
-    , clKind
-    , clItems
-    , clSelfLink
-    , clWarning
-    , clId
-
-    -- ** PacketMirroringListWarning
-    , PacketMirroringListWarning
-    , packetMirroringListWarning
-    , pmlwData
-    , pmlwCode
-    , pmlwMessage
-
-    -- ** FirewallPolicyRuleMatcherLayer4Config
-    , FirewallPolicyRuleMatcherLayer4Config
-    , firewallPolicyRuleMatcherLayer4Config
-    , fprmlcIPProtocol
-    , fprmlcPorts
-
-    -- ** TargetPoolSessionAffinity
-    , TargetPoolSessionAffinity (..)
-
-    -- ** InstanceGroupManagersCreateInstancesRequest
-    , InstanceGroupManagersCreateInstancesRequest
-    , instanceGroupManagersCreateInstancesRequest
-    , igmcirInstances
-
-    -- ** InstancesSetLabelsRequestLabels
-    , InstancesSetLabelsRequestLabels
-    , instancesSetLabelsRequestLabels
-    , islrlAddtional
-
-    -- ** InstanceGroupsScopedList
-    , InstanceGroupsScopedList
-    , instanceGroupsScopedList
-    , igslWarning
-    , igslInstanceGroups
-
-    -- ** InstancesStartWithEncryptionKeyRequest
-    , InstancesStartWithEncryptionKeyRequest
-    , instancesStartWithEncryptionKeyRequest
-    , iswekrDisks
-
-    -- ** HTTPSHealthCheck
-    , HTTPSHealthCheck
-    , httpsHealthCheck
-    , hhcResponse
-    , hhcPortSpecification
-    , hhcRequestPath
-    , hhcHost
-    , hhcProxyHeader
-    , hhcPortName
-    , hhcPort
-
-    -- ** HTTPHeaderAction
-    , HTTPHeaderAction
-    , hTTPHeaderAction
-    , httphaResponseHeadersToAdd
-    , httphaRequestHeadersToRemove
-    , httphaRequestHeadersToAdd
-    , httphaResponseHeadersToRemove
-
-    -- ** AutoscalerStatus
-    , AutoscalerStatus (..)
-
-    -- ** ImageRawDiskContainerType
-    , ImageRawDiskContainerType (..)
-
-    -- ** TargetGrpcProxyList
-    , TargetGrpcProxyList
-    , targetGrpcProxyList
-    , tgplNextPageToken
-    , tgplKind
-    , tgplItems
-    , tgplSelfLink
-    , tgplWarning
-    , tgplId
-
-    -- ** AutoscalerScalingScheduleStatus
-    , AutoscalerScalingScheduleStatus
-    , autoscalerScalingScheduleStatus
-    , asssAddtional
-
-    -- ** InstanceAggregatedListWarningCode
-    , InstanceAggregatedListWarningCode (..)
-
-    -- ** VPNTunnelAggregatedListItems
-    , VPNTunnelAggregatedListItems
-    , vpnTunnelAggregatedListItems
-    , vtaliAddtional
-
-    -- ** ResourceCommitmentType
-    , ResourceCommitmentType (..)
-
-    -- ** InstanceAggregatedListWarningDataItem
-    , InstanceAggregatedListWarningDataItem
-    , instanceAggregatedListWarningDataItem
-    , insValue
-    , insKey
-
-    -- ** RegionInstanceGroupManagerUpdateInstanceConfigReq
-    , RegionInstanceGroupManagerUpdateInstanceConfigReq
-    , regionInstanceGroupManagerUpdateInstanceConfigReq
-    , rigmuicrPerInstanceConfigs
-
-    -- ** Tags
-    , Tags
-    , tags
-    , tFingerprint
-    , tItems
+    -- ** Address_Status
+    Address_Status (..),
 
     -- ** AddressAggregatedList
-    , AddressAggregatedList
-    , addressAggregatedList
-    , addUnreachables
-    , addNextPageToken
-    , addKind
-    , addItems
-    , addSelfLink
-    , addWarning
-    , addId
+    AddressAggregatedList (..),
+    newAddressAggregatedList,
 
-    -- ** InterconnectAttachmentList
-    , InterconnectAttachmentList
-    , interconnectAttachmentList
-    , ialaNextPageToken
-    , ialaKind
-    , ialaItems
-    , ialaSelfLink
-    , ialaWarning
-    , ialaId
+    -- ** AddressAggregatedList_Items
+    AddressAggregatedList_Items (..),
+    newAddressAggregatedList_Items,
+
+    -- ** AddressAggregatedList_Warning
+    AddressAggregatedList_Warning (..),
+    newAddressAggregatedList_Warning,
+
+    -- ** AddressAggregatedList_Warning_Code
+    AddressAggregatedList_Warning_Code (..),
+
+    -- ** AddressAggregatedList_Warning_DataItem
+    AddressAggregatedList_Warning_DataItem (..),
+    newAddressAggregatedList_Warning_DataItem,
+
+    -- ** AddressList
+    AddressList (..),
+    newAddressList,
+
+    -- ** AddressList_Warning
+    AddressList_Warning (..),
+    newAddressList_Warning,
+
+    -- ** AddressList_Warning_Code
+    AddressList_Warning_Code (..),
+
+    -- ** AddressList_Warning_DataItem
+    AddressList_Warning_DataItem (..),
+    newAddressList_Warning_DataItem,
+
+    -- ** AddressesScopedList
+    AddressesScopedList (..),
+    newAddressesScopedList,
+
+    -- ** AddressesScopedList_Warning
+    AddressesScopedList_Warning (..),
+    newAddressesScopedList_Warning,
+
+    -- ** AddressesScopedList_Warning_Code
+    AddressesScopedList_Warning_Code (..),
+
+    -- ** AddressesScopedList_Warning_DataItem
+    AddressesScopedList_Warning_DataItem (..),
+    newAddressesScopedList_Warning_DataItem,
+
+    -- ** AdvancedMachineFeatures
+    AdvancedMachineFeatures (..),
+    newAdvancedMachineFeatures,
+
+    -- ** AliasIpRange
+    AliasIpRange (..),
+    newAliasIpRange,
+
+    -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
+    AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk (..),
+    newAllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk,
+
+    -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface
+    AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface (..),
+
+    -- ** AllocationSpecificSKUAllocationReservedInstanceProperties
+    AllocationSpecificSKUAllocationReservedInstanceProperties (..),
+    newAllocationSpecificSKUAllocationReservedInstanceProperties,
+
+    -- ** AllocationSpecificSKUReservation
+    AllocationSpecificSKUReservation (..),
+    newAllocationSpecificSKUReservation,
+
+    -- ** AttachedDisk
+    AttachedDisk (..),
+    newAttachedDisk,
+
+    -- ** AttachedDisk_Interface
+    AttachedDisk_Interface (..),
+
+    -- ** AttachedDisk_Mode
+    AttachedDisk_Mode (..),
+
+    -- ** AttachedDisk_Type
+    AttachedDisk_Type (..),
+
+    -- ** AttachedDiskInitializeParams
+    AttachedDiskInitializeParams (..),
+    newAttachedDiskInitializeParams,
+
+    -- ** AttachedDiskInitializeParams_Labels
+    AttachedDiskInitializeParams_Labels (..),
+    newAttachedDiskInitializeParams_Labels,
+
+    -- ** AttachedDiskInitializeParams_OnUpdateAction
+    AttachedDiskInitializeParams_OnUpdateAction (..),
+
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
+
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
+
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
+
+    -- ** AuthorizationLoggingOptions
+    AuthorizationLoggingOptions (..),
+    newAuthorizationLoggingOptions,
+
+    -- ** AuthorizationLoggingOptions_PermissionType
+    AuthorizationLoggingOptions_PermissionType (..),
+
+    -- ** Autoscaler
+    Autoscaler (..),
+    newAutoscaler,
+
+    -- ** Autoscaler_ScalingScheduleStatus
+    Autoscaler_ScalingScheduleStatus (..),
+    newAutoscaler_ScalingScheduleStatus,
+
+    -- ** Autoscaler_Status
+    Autoscaler_Status (..),
+
+    -- ** AutoscalerAggregatedList
+    AutoscalerAggregatedList (..),
+    newAutoscalerAggregatedList,
+
+    -- ** AutoscalerAggregatedList_Items
+    AutoscalerAggregatedList_Items (..),
+    newAutoscalerAggregatedList_Items,
+
+    -- ** AutoscalerAggregatedList_Warning
+    AutoscalerAggregatedList_Warning (..),
+    newAutoscalerAggregatedList_Warning,
+
+    -- ** AutoscalerAggregatedList_Warning_Code
+    AutoscalerAggregatedList_Warning_Code (..),
+
+    -- ** AutoscalerAggregatedList_Warning_DataItem
+    AutoscalerAggregatedList_Warning_DataItem (..),
+    newAutoscalerAggregatedList_Warning_DataItem,
+
+    -- ** AutoscalerList
+    AutoscalerList (..),
+    newAutoscalerList,
+
+    -- ** AutoscalerList_Warning
+    AutoscalerList_Warning (..),
+    newAutoscalerList_Warning,
+
+    -- ** AutoscalerList_Warning_Code
+    AutoscalerList_Warning_Code (..),
+
+    -- ** AutoscalerList_Warning_DataItem
+    AutoscalerList_Warning_DataItem (..),
+    newAutoscalerList_Warning_DataItem,
+
+    -- ** AutoscalerStatusDetails
+    AutoscalerStatusDetails (..),
+    newAutoscalerStatusDetails,
+
+    -- ** AutoscalerStatusDetails_Type
+    AutoscalerStatusDetails_Type (..),
+
+    -- ** AutoscalersScopedList
+    AutoscalersScopedList (..),
+    newAutoscalersScopedList,
+
+    -- ** AutoscalersScopedList_Warning
+    AutoscalersScopedList_Warning (..),
+    newAutoscalersScopedList_Warning,
+
+    -- ** AutoscalersScopedList_Warning_Code
+    AutoscalersScopedList_Warning_Code (..),
+
+    -- ** AutoscalersScopedList_Warning_DataItem
+    AutoscalersScopedList_Warning_DataItem (..),
+    newAutoscalersScopedList_Warning_DataItem,
+
+    -- ** AutoscalingPolicy
+    AutoscalingPolicy (..),
+    newAutoscalingPolicy,
+
+    -- ** AutoscalingPolicy_Mode
+    AutoscalingPolicy_Mode (..),
+
+    -- ** AutoscalingPolicy_ScalingSchedules
+    AutoscalingPolicy_ScalingSchedules (..),
+    newAutoscalingPolicy_ScalingSchedules,
+
+    -- ** AutoscalingPolicyCpuUtilization
+    AutoscalingPolicyCpuUtilization (..),
+    newAutoscalingPolicyCpuUtilization,
+
+    -- ** AutoscalingPolicyCpuUtilization_PredictiveMethod
+    AutoscalingPolicyCpuUtilization_PredictiveMethod (..),
+
+    -- ** AutoscalingPolicyCustomMetricUtilization
+    AutoscalingPolicyCustomMetricUtilization (..),
+    newAutoscalingPolicyCustomMetricUtilization,
+
+    -- ** AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType
+    AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType (..),
+
+    -- ** AutoscalingPolicyLoadBalancingUtilization
+    AutoscalingPolicyLoadBalancingUtilization (..),
+    newAutoscalingPolicyLoadBalancingUtilization,
+
+    -- ** AutoscalingPolicyScaleInControl
+    AutoscalingPolicyScaleInControl (..),
+    newAutoscalingPolicyScaleInControl,
+
+    -- ** AutoscalingPolicyScalingSchedule
+    AutoscalingPolicyScalingSchedule (..),
+    newAutoscalingPolicyScalingSchedule,
+
+    -- ** Backend
+    Backend (..),
+    newBackend,
+
+    -- ** Backend_BalancingMode
+    Backend_BalancingMode (..),
+
+    -- ** BackendBucket
+    BackendBucket (..),
+    newBackendBucket,
+
+    -- ** BackendBucketCdnPolicy
+    BackendBucketCdnPolicy (..),
+    newBackendBucketCdnPolicy,
+
+    -- ** BackendBucketCdnPolicy_CacheMode
+    BackendBucketCdnPolicy_CacheMode (..),
+
+    -- ** BackendBucketCdnPolicyBypassCacheOnRequestHeader
+    BackendBucketCdnPolicyBypassCacheOnRequestHeader (..),
+    newBackendBucketCdnPolicyBypassCacheOnRequestHeader,
+
+    -- ** BackendBucketCdnPolicyCacheKeyPolicy
+    BackendBucketCdnPolicyCacheKeyPolicy (..),
+    newBackendBucketCdnPolicyCacheKeyPolicy,
 
     -- ** BackendBucketCdnPolicyNegativeCachingPolicy
-    , BackendBucketCdnPolicyNegativeCachingPolicy
-    , backendBucketCdnPolicyNegativeCachingPolicy
-    , bbcpncpTtl
-    , bbcpncpCode
+    BackendBucketCdnPolicyNegativeCachingPolicy (..),
+    newBackendBucketCdnPolicyNegativeCachingPolicy,
 
-    -- ** InstanceGroupManagerStatusStateful
-    , InstanceGroupManagerStatusStateful
-    , instanceGroupManagerStatusStateful
-    , igmssHasStatefulConfig
-    , igmssPerInstanceConfigs
+    -- ** BackendBucketList
+    BackendBucketList (..),
+    newBackendBucketList,
 
-    -- ** OperationWarningsItem
-    , OperationWarningsItem
-    , operationWarningsItem
-    , owiData
-    , owiCode
-    , owiMessage
+    -- ** BackendBucketList_Warning
+    BackendBucketList_Warning (..),
+    newBackendBucketList_Warning,
 
-    -- ** AutoscalingPolicyScalingSchedules
-    , AutoscalingPolicyScalingSchedules
-    , autoscalingPolicyScalingSchedules
-    , apssAddtional
+    -- ** BackendBucketList_Warning_Code
+    BackendBucketList_Warning_Code (..),
 
-    -- ** PreConfiguredWafSet
-    , PreConfiguredWafSet
-    , preConfiguredWafSet
-    , pcwsExpressionSets
+    -- ** BackendBucketList_Warning_DataItem
+    BackendBucketList_Warning_DataItem (..),
+    newBackendBucketList_Warning_DataItem,
+
+    -- ** BackendService
+    BackendService (..),
+    newBackendService,
+
+    -- ** BackendService_LoadBalancingScheme
+    BackendService_LoadBalancingScheme (..),
+
+    -- ** BackendService_LocalityLbPolicy
+    BackendService_LocalityLbPolicy (..),
+
+    -- ** BackendService_Protocol
+    BackendService_Protocol (..),
+
+    -- ** BackendService_SessionAffinity
+    BackendService_SessionAffinity (..),
+
+    -- ** BackendServiceAggregatedList
+    BackendServiceAggregatedList (..),
+    newBackendServiceAggregatedList,
+
+    -- ** BackendServiceAggregatedList_Items
+    BackendServiceAggregatedList_Items (..),
+    newBackendServiceAggregatedList_Items,
+
+    -- ** BackendServiceAggregatedList_Warning
+    BackendServiceAggregatedList_Warning (..),
+    newBackendServiceAggregatedList_Warning,
+
+    -- ** BackendServiceAggregatedList_Warning_Code
+    BackendServiceAggregatedList_Warning_Code (..),
+
+    -- ** BackendServiceAggregatedList_Warning_DataItem
+    BackendServiceAggregatedList_Warning_DataItem (..),
+    newBackendServiceAggregatedList_Warning_DataItem,
+
+    -- ** BackendServiceCdnPolicy
+    BackendServiceCdnPolicy (..),
+    newBackendServiceCdnPolicy,
+
+    -- ** BackendServiceCdnPolicy_CacheMode
+    BackendServiceCdnPolicy_CacheMode (..),
+
+    -- ** BackendServiceCdnPolicyBypassCacheOnRequestHeader
+    BackendServiceCdnPolicyBypassCacheOnRequestHeader (..),
+    newBackendServiceCdnPolicyBypassCacheOnRequestHeader,
+
+    -- ** BackendServiceCdnPolicyNegativeCachingPolicy
+    BackendServiceCdnPolicyNegativeCachingPolicy (..),
+    newBackendServiceCdnPolicyNegativeCachingPolicy,
+
+    -- ** BackendServiceConnectionTrackingPolicy
+    BackendServiceConnectionTrackingPolicy (..),
+    newBackendServiceConnectionTrackingPolicy,
+
+    -- ** BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends
+    BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends (..),
+
+    -- ** BackendServiceConnectionTrackingPolicy_TrackingMode
+    BackendServiceConnectionTrackingPolicy_TrackingMode (..),
+
+    -- ** BackendServiceFailoverPolicy
+    BackendServiceFailoverPolicy (..),
+    newBackendServiceFailoverPolicy,
+
+    -- ** BackendServiceGroupHealth
+    BackendServiceGroupHealth (..),
+    newBackendServiceGroupHealth,
+
+    -- ** BackendServiceGroupHealth_Annotations
+    BackendServiceGroupHealth_Annotations (..),
+    newBackendServiceGroupHealth_Annotations,
+
+    -- ** BackendServiceIAP
+    BackendServiceIAP (..),
+    newBackendServiceIAP,
+
+    -- ** BackendServiceList
+    BackendServiceList (..),
+    newBackendServiceList,
+
+    -- ** BackendServiceList_Warning
+    BackendServiceList_Warning (..),
+    newBackendServiceList_Warning,
+
+    -- ** BackendServiceList_Warning_Code
+    BackendServiceList_Warning_Code (..),
+
+    -- ** BackendServiceList_Warning_DataItem
+    BackendServiceList_Warning_DataItem (..),
+    newBackendServiceList_Warning_DataItem,
+
+    -- ** BackendServiceLogConfig
+    BackendServiceLogConfig (..),
+    newBackendServiceLogConfig,
+
+    -- ** BackendServiceReference
+    BackendServiceReference (..),
+    newBackendServiceReference,
+
+    -- ** BackendServicesScopedList
+    BackendServicesScopedList (..),
+    newBackendServicesScopedList,
+
+    -- ** BackendServicesScopedList_Warning
+    BackendServicesScopedList_Warning (..),
+    newBackendServicesScopedList_Warning,
+
+    -- ** BackendServicesScopedList_Warning_Code
+    BackendServicesScopedList_Warning_Code (..),
+
+    -- ** BackendServicesScopedList_Warning_DataItem
+    BackendServicesScopedList_Warning_DataItem (..),
+    newBackendServicesScopedList_Warning_DataItem,
+
+    -- ** BfdPacket
+    BfdPacket (..),
+    newBfdPacket,
+
+    -- ** BfdPacket_Diagnostic
+    BfdPacket_Diagnostic (..),
+
+    -- ** BfdPacket_State
+    BfdPacket_State (..),
+
+    -- ** BfdStatus
+    BfdStatus (..),
+    newBfdStatus,
+
+    -- ** BfdStatus_BfdSessionInitializationMode
+    BfdStatus_BfdSessionInitializationMode (..),
+
+    -- ** BfdStatus_LocalDiagnostic
+    BfdStatus_LocalDiagnostic (..),
+
+    -- ** BfdStatus_LocalState
+    BfdStatus_LocalState (..),
+
+    -- ** BfdStatusPacketCounts
+    BfdStatusPacketCounts (..),
+    newBfdStatusPacketCounts,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bBindingId
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
 
-    -- ** ForwardingRuleNetworkTier
-    , ForwardingRuleNetworkTier (..)
+    -- ** BulkInsertInstanceResource
+    BulkInsertInstanceResource (..),
+    newBulkInsertInstanceResource,
 
-    -- ** URLMapTest
-    , URLMapTest
-    , urlMapTest
-    , umtExpectedOutputURL
-    , umtExpectedRedirectResponseCode
-    , umtPath
-    , umtService
-    , umtHeaders
-    , umtHost
-    , umtDescription
+    -- ** BulkInsertInstanceResource_PerInstanceProperties
+    BulkInsertInstanceResource_PerInstanceProperties (..),
+    newBulkInsertInstanceResource_PerInstanceProperties,
 
-    -- ** HTTPSHealthCheckListWarning
-    , HTTPSHealthCheckListWarning
-    , httpsHealthCheckListWarning
-    , hhclwData
-    , hhclwCode
-    , hhclwMessage
+    -- ** BulkInsertInstanceResourcePerInstanceProperties
+    BulkInsertInstanceResourcePerInstanceProperties (..),
+    newBulkInsertInstanceResourcePerInstanceProperties,
 
-    -- ** NodeTypeAggregatedListItems
-    , NodeTypeAggregatedListItems
-    , nodeTypeAggregatedListItems
-    , nAddtional
+    -- ** CacheInvalidationRule
+    CacheInvalidationRule (..),
+    newCacheInvalidationRule,
 
-    -- ** RoutersPreviewResponse
-    , RoutersPreviewResponse
-    , routersPreviewResponse
-    , rprResource
+    -- ** CacheKeyPolicy
+    CacheKeyPolicy (..),
+    newCacheKeyPolicy,
 
-    -- ** LicensesListResponse
-    , LicensesListResponse
-    , licensesListResponse
-    , llrNextPageToken
-    , llrItems
-    , llrSelfLink
-    , llrWarning
-    , llrId
+    -- ** CircuitBreakers
+    CircuitBreakers (..),
+    newCircuitBreakers,
 
-    -- ** PacketMirroringsScopedListWarningDataItem
-    , PacketMirroringsScopedListWarningDataItem
-    , packetMirroringsScopedListWarningDataItem
-    , pmslwdiValue
-    , pmslwdiKey
+    -- ** Commitment
+    Commitment (..),
+    newCommitment,
 
-    -- ** SSLCertificateType
-    , SSLCertificateType (..)
+    -- ** Commitment_Category
+    Commitment_Category (..),
 
-    -- ** BackendServiceAggregatedListWarningDataItem
-    , BackendServiceAggregatedListWarningDataItem
-    , backendServiceAggregatedListWarningDataItem
-    , bsalwdiValue
-    , bsalwdiKey
+    -- ** Commitment_Plan
+    Commitment_Plan (..),
+
+    -- ** Commitment_Status
+    Commitment_Status (..),
+
+    -- ** Commitment_Type
+    Commitment_Type (..),
+
+    -- ** CommitmentAggregatedList
+    CommitmentAggregatedList (..),
+    newCommitmentAggregatedList,
+
+    -- ** CommitmentAggregatedList_Items
+    CommitmentAggregatedList_Items (..),
+    newCommitmentAggregatedList_Items,
+
+    -- ** CommitmentAggregatedList_Warning
+    CommitmentAggregatedList_Warning (..),
+    newCommitmentAggregatedList_Warning,
+
+    -- ** CommitmentAggregatedList_Warning_Code
+    CommitmentAggregatedList_Warning_Code (..),
+
+    -- ** CommitmentAggregatedList_Warning_DataItem
+    CommitmentAggregatedList_Warning_DataItem (..),
+    newCommitmentAggregatedList_Warning_DataItem,
+
+    -- ** CommitmentList
+    CommitmentList (..),
+    newCommitmentList,
+
+    -- ** CommitmentList_Warning
+    CommitmentList_Warning (..),
+    newCommitmentList_Warning,
+
+    -- ** CommitmentList_Warning_Code
+    CommitmentList_Warning_Code (..),
+
+    -- ** CommitmentList_Warning_DataItem
+    CommitmentList_Warning_DataItem (..),
+    newCommitmentList_Warning_DataItem,
+
+    -- ** CommitmentsScopedList
+    CommitmentsScopedList (..),
+    newCommitmentsScopedList,
+
+    -- ** CommitmentsScopedList_Warning
+    CommitmentsScopedList_Warning (..),
+    newCommitmentsScopedList_Warning,
+
+    -- ** CommitmentsScopedList_Warning_Code
+    CommitmentsScopedList_Warning_Code (..),
+
+    -- ** CommitmentsScopedList_Warning_DataItem
+    CommitmentsScopedList_Warning_DataItem (..),
+    newCommitmentsScopedList_Warning_DataItem,
+
+    -- ** Condition
+    Condition (..),
+    newCondition,
+
+    -- ** Condition_Iam
+    Condition_Iam (..),
+
+    -- ** Condition_Op
+    Condition_Op (..),
+
+    -- ** Condition_Sys
+    Condition_Sys (..),
+
+    -- ** ConfidentialInstanceConfig
+    ConfidentialInstanceConfig (..),
+    newConfidentialInstanceConfig,
+
+    -- ** ConnectionDraining
+    ConnectionDraining (..),
+    newConnectionDraining,
+
+    -- ** ConsistentHashLoadBalancerSettings
+    ConsistentHashLoadBalancerSettings (..),
+    newConsistentHashLoadBalancerSettings,
+
+    -- ** ConsistentHashLoadBalancerSettingsHttpCookie
+    ConsistentHashLoadBalancerSettingsHttpCookie (..),
+    newConsistentHashLoadBalancerSettingsHttpCookie,
+
+    -- ** CorsPolicy
+    CorsPolicy (..),
+    newCorsPolicy,
+
+    -- ** CustomerEncryptionKey
+    CustomerEncryptionKey (..),
+    newCustomerEncryptionKey,
+
+    -- ** CustomerEncryptionKeyProtectedDisk
+    CustomerEncryptionKeyProtectedDisk (..),
+    newCustomerEncryptionKeyProtectedDisk,
+
+    -- ** DeprecationStatus
+    DeprecationStatus (..),
+    newDeprecationStatus,
+
+    -- ** DeprecationStatus_State
+    DeprecationStatus_State (..),
+
+    -- ** Disk
+    Disk (..),
+    newDisk,
+
+    -- ** Disk_Labels
+    Disk_Labels (..),
+    newDisk_Labels,
+
+    -- ** Disk_Status
+    Disk_Status (..),
+
+    -- ** DiskAggregatedList
+    DiskAggregatedList (..),
+    newDiskAggregatedList,
+
+    -- ** DiskAggregatedList_Items
+    DiskAggregatedList_Items (..),
+    newDiskAggregatedList_Items,
+
+    -- ** DiskAggregatedList_Warning
+    DiskAggregatedList_Warning (..),
+    newDiskAggregatedList_Warning,
+
+    -- ** DiskAggregatedList_Warning_Code
+    DiskAggregatedList_Warning_Code (..),
+
+    -- ** DiskAggregatedList_Warning_DataItem
+    DiskAggregatedList_Warning_DataItem (..),
+    newDiskAggregatedList_Warning_DataItem,
+
+    -- ** DiskInstantiationConfig
+    DiskInstantiationConfig (..),
+    newDiskInstantiationConfig,
+
+    -- ** DiskInstantiationConfig_InstantiateFrom
+    DiskInstantiationConfig_InstantiateFrom (..),
+
+    -- ** DiskList
+    DiskList (..),
+    newDiskList,
+
+    -- ** DiskList_Warning
+    DiskList_Warning (..),
+    newDiskList_Warning,
+
+    -- ** DiskList_Warning_Code
+    DiskList_Warning_Code (..),
+
+    -- ** DiskList_Warning_DataItem
+    DiskList_Warning_DataItem (..),
+    newDiskList_Warning_DataItem,
+
+    -- ** DiskMoveRequest
+    DiskMoveRequest (..),
+    newDiskMoveRequest,
+
+    -- ** DiskType
+    DiskType (..),
+    newDiskType,
+
+    -- ** DiskTypeAggregatedList
+    DiskTypeAggregatedList (..),
+    newDiskTypeAggregatedList,
+
+    -- ** DiskTypeAggregatedList_Items
+    DiskTypeAggregatedList_Items (..),
+    newDiskTypeAggregatedList_Items,
+
+    -- ** DiskTypeAggregatedList_Warning
+    DiskTypeAggregatedList_Warning (..),
+    newDiskTypeAggregatedList_Warning,
+
+    -- ** DiskTypeAggregatedList_Warning_Code
+    DiskTypeAggregatedList_Warning_Code (..),
+
+    -- ** DiskTypeAggregatedList_Warning_DataItem
+    DiskTypeAggregatedList_Warning_DataItem (..),
+    newDiskTypeAggregatedList_Warning_DataItem,
+
+    -- ** DiskTypeList
+    DiskTypeList (..),
+    newDiskTypeList,
+
+    -- ** DiskTypeList_Warning
+    DiskTypeList_Warning (..),
+    newDiskTypeList_Warning,
+
+    -- ** DiskTypeList_Warning_Code
+    DiskTypeList_Warning_Code (..),
+
+    -- ** DiskTypeList_Warning_DataItem
+    DiskTypeList_Warning_DataItem (..),
+    newDiskTypeList_Warning_DataItem,
+
+    -- ** DiskTypesScopedList
+    DiskTypesScopedList (..),
+    newDiskTypesScopedList,
+
+    -- ** DiskTypesScopedList_Warning
+    DiskTypesScopedList_Warning (..),
+    newDiskTypesScopedList_Warning,
+
+    -- ** DiskTypesScopedList_Warning_Code
+    DiskTypesScopedList_Warning_Code (..),
+
+    -- ** DiskTypesScopedList_Warning_DataItem
+    DiskTypesScopedList_Warning_DataItem (..),
+    newDiskTypesScopedList_Warning_DataItem,
+
+    -- ** DisksAddResourcePoliciesRequest
+    DisksAddResourcePoliciesRequest (..),
+    newDisksAddResourcePoliciesRequest,
+
+    -- ** DisksRemoveResourcePoliciesRequest
+    DisksRemoveResourcePoliciesRequest (..),
+    newDisksRemoveResourcePoliciesRequest,
+
+    -- ** DisksResizeRequest
+    DisksResizeRequest (..),
+    newDisksResizeRequest,
+
+    -- ** DisksScopedList
+    DisksScopedList (..),
+    newDisksScopedList,
+
+    -- ** DisksScopedList_Warning
+    DisksScopedList_Warning (..),
+    newDisksScopedList_Warning,
+
+    -- ** DisksScopedList_Warning_Code
+    DisksScopedList_Warning_Code (..),
+
+    -- ** DisksScopedList_Warning_DataItem
+    DisksScopedList_Warning_DataItem (..),
+    newDisksScopedList_Warning_DataItem,
+
+    -- ** DisplayDevice
+    DisplayDevice (..),
+    newDisplayDevice,
+
+    -- ** DistributionPolicy
+    DistributionPolicy (..),
+    newDistributionPolicy,
+
+    -- ** DistributionPolicy_TargetShape
+    DistributionPolicy_TargetShape (..),
+
+    -- ** DistributionPolicyZoneConfiguration
+    DistributionPolicyZoneConfiguration (..),
+    newDistributionPolicyZoneConfiguration,
+
+    -- ** Duration
+    Duration (..),
+    newDuration,
+
+    -- ** ExchangedPeeringRoute
+    ExchangedPeeringRoute (..),
+    newExchangedPeeringRoute,
+
+    -- ** ExchangedPeeringRoute_Type
+    ExchangedPeeringRoute_Type (..),
+
+    -- ** ExchangedPeeringRoutesList
+    ExchangedPeeringRoutesList (..),
+    newExchangedPeeringRoutesList,
+
+    -- ** ExchangedPeeringRoutesList_Warning
+    ExchangedPeeringRoutesList_Warning (..),
+    newExchangedPeeringRoutesList_Warning,
+
+    -- ** ExchangedPeeringRoutesList_Warning_Code
+    ExchangedPeeringRoutesList_Warning_Code (..),
+
+    -- ** ExchangedPeeringRoutesList_Warning_DataItem
+    ExchangedPeeringRoutesList_Warning_DataItem (..),
+    newExchangedPeeringRoutesList_Warning_DataItem,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** ExternalVpnGateway
+    ExternalVpnGateway (..),
+    newExternalVpnGateway,
+
+    -- ** ExternalVpnGateway_Labels
+    ExternalVpnGateway_Labels (..),
+    newExternalVpnGateway_Labels,
+
+    -- ** ExternalVpnGateway_RedundancyType
+    ExternalVpnGateway_RedundancyType (..),
+
+    -- ** ExternalVpnGatewayInterface
+    ExternalVpnGatewayInterface (..),
+    newExternalVpnGatewayInterface,
+
+    -- ** ExternalVpnGatewayList
+    ExternalVpnGatewayList (..),
+    newExternalVpnGatewayList,
+
+    -- ** ExternalVpnGatewayList_Warning
+    ExternalVpnGatewayList_Warning (..),
+    newExternalVpnGatewayList_Warning,
+
+    -- ** ExternalVpnGatewayList_Warning_Code
+    ExternalVpnGatewayList_Warning_Code (..),
+
+    -- ** ExternalVpnGatewayList_Warning_DataItem
+    ExternalVpnGatewayList_Warning_DataItem (..),
+    newExternalVpnGatewayList_Warning_DataItem,
+
+    -- ** FileContentBuffer
+    FileContentBuffer (..),
+    newFileContentBuffer,
+
+    -- ** FileContentBuffer_FileType
+    FileContentBuffer_FileType (..),
+
+    -- ** Firewall
+    Firewall (..),
+    newFirewall,
+
+    -- ** Firewall_AllowedItem
+    Firewall_AllowedItem (..),
+    newFirewall_AllowedItem,
+
+    -- ** Firewall_DeniedItem
+    Firewall_DeniedItem (..),
+    newFirewall_DeniedItem,
+
+    -- ** Firewall_Direction
+    Firewall_Direction (..),
+
+    -- ** FirewallList
+    FirewallList (..),
+    newFirewallList,
+
+    -- ** FirewallList_Warning
+    FirewallList_Warning (..),
+    newFirewallList_Warning,
+
+    -- ** FirewallList_Warning_Code
+    FirewallList_Warning_Code (..),
+
+    -- ** FirewallList_Warning_DataItem
+    FirewallList_Warning_DataItem (..),
+    newFirewallList_Warning_DataItem,
+
+    -- ** FirewallLogConfig
+    FirewallLogConfig (..),
+    newFirewallLogConfig,
+
+    -- ** FirewallLogConfig_Metadata
+    FirewallLogConfig_Metadata (..),
+
+    -- ** FirewallPoliciesListAssociationsResponse
+    FirewallPoliciesListAssociationsResponse (..),
+    newFirewallPoliciesListAssociationsResponse,
+
+    -- ** FirewallPolicy
+    FirewallPolicy (..),
+    newFirewallPolicy,
+
+    -- ** FirewallPolicyAssociation
+    FirewallPolicyAssociation (..),
+    newFirewallPolicyAssociation,
+
+    -- ** FirewallPolicyList
+    FirewallPolicyList (..),
+    newFirewallPolicyList,
+
+    -- ** FirewallPolicyList_Warning
+    FirewallPolicyList_Warning (..),
+    newFirewallPolicyList_Warning,
+
+    -- ** FirewallPolicyList_Warning_Code
+    FirewallPolicyList_Warning_Code (..),
+
+    -- ** FirewallPolicyList_Warning_DataItem
+    FirewallPolicyList_Warning_DataItem (..),
+    newFirewallPolicyList_Warning_DataItem,
+
+    -- ** FirewallPolicyRule
+    FirewallPolicyRule (..),
+    newFirewallPolicyRule,
+
+    -- ** FirewallPolicyRule_Direction
+    FirewallPolicyRule_Direction (..),
+
+    -- ** FirewallPolicyRuleMatcher
+    FirewallPolicyRuleMatcher (..),
+    newFirewallPolicyRuleMatcher,
+
+    -- ** FirewallPolicyRuleMatcherLayer4Config
+    FirewallPolicyRuleMatcherLayer4Config (..),
+    newFirewallPolicyRuleMatcherLayer4Config,
+
+    -- ** FirewallPolicyRuleSecureTag
+    FirewallPolicyRuleSecureTag (..),
+    newFirewallPolicyRuleSecureTag,
+
+    -- ** FirewallPolicyRuleSecureTag_State
+    FirewallPolicyRuleSecureTag_State (..),
+
+    -- ** FixedOrPercent
+    FixedOrPercent (..),
+    newFixedOrPercent,
+
+    -- ** ForwardingRule
+    ForwardingRule (..),
+    newForwardingRule,
+
+    -- ** ForwardingRule_IPProtocol
+    ForwardingRule_IPProtocol (..),
+
+    -- ** ForwardingRule_IpVersion
+    ForwardingRule_IpVersion (..),
+
+    -- ** ForwardingRule_Labels
+    ForwardingRule_Labels (..),
+    newForwardingRule_Labels,
+
+    -- ** ForwardingRule_LoadBalancingScheme
+    ForwardingRule_LoadBalancingScheme (..),
+
+    -- ** ForwardingRule_NetworkTier
+    ForwardingRule_NetworkTier (..),
+
+    -- ** ForwardingRule_PscConnectionStatus
+    ForwardingRule_PscConnectionStatus (..),
+
+    -- ** ForwardingRuleAggregatedList
+    ForwardingRuleAggregatedList (..),
+    newForwardingRuleAggregatedList,
+
+    -- ** ForwardingRuleAggregatedList_Items
+    ForwardingRuleAggregatedList_Items (..),
+    newForwardingRuleAggregatedList_Items,
+
+    -- ** ForwardingRuleAggregatedList_Warning
+    ForwardingRuleAggregatedList_Warning (..),
+    newForwardingRuleAggregatedList_Warning,
+
+    -- ** ForwardingRuleAggregatedList_Warning_Code
+    ForwardingRuleAggregatedList_Warning_Code (..),
+
+    -- ** ForwardingRuleAggregatedList_Warning_DataItem
+    ForwardingRuleAggregatedList_Warning_DataItem (..),
+    newForwardingRuleAggregatedList_Warning_DataItem,
+
+    -- ** ForwardingRuleList
+    ForwardingRuleList (..),
+    newForwardingRuleList,
+
+    -- ** ForwardingRuleList_Warning
+    ForwardingRuleList_Warning (..),
+    newForwardingRuleList_Warning,
+
+    -- ** ForwardingRuleList_Warning_Code
+    ForwardingRuleList_Warning_Code (..),
+
+    -- ** ForwardingRuleList_Warning_DataItem
+    ForwardingRuleList_Warning_DataItem (..),
+    newForwardingRuleList_Warning_DataItem,
+
+    -- ** ForwardingRuleReference
+    ForwardingRuleReference (..),
+    newForwardingRuleReference,
+
+    -- ** ForwardingRuleServiceDirectoryRegistration
+    ForwardingRuleServiceDirectoryRegistration (..),
+    newForwardingRuleServiceDirectoryRegistration,
+
+    -- ** ForwardingRulesScopedList
+    ForwardingRulesScopedList (..),
+    newForwardingRulesScopedList,
+
+    -- ** ForwardingRulesScopedList_Warning
+    ForwardingRulesScopedList_Warning (..),
+    newForwardingRulesScopedList_Warning,
+
+    -- ** ForwardingRulesScopedList_Warning_Code
+    ForwardingRulesScopedList_Warning_Code (..),
+
+    -- ** ForwardingRulesScopedList_Warning_DataItem
+    ForwardingRulesScopedList_Warning_DataItem (..),
+    newForwardingRulesScopedList_Warning_DataItem,
+
+    -- ** GRPCHealthCheck
+    GRPCHealthCheck (..),
+    newGRPCHealthCheck,
+
+    -- ** GRPCHealthCheck_PortSpecification
+    GRPCHealthCheck_PortSpecification (..),
+
+    -- ** GlobalNetworkEndpointGroupsAttachEndpointsRequest
+    GlobalNetworkEndpointGroupsAttachEndpointsRequest (..),
+    newGlobalNetworkEndpointGroupsAttachEndpointsRequest,
+
+    -- ** GlobalNetworkEndpointGroupsDetachEndpointsRequest
+    GlobalNetworkEndpointGroupsDetachEndpointsRequest (..),
+    newGlobalNetworkEndpointGroupsDetachEndpointsRequest,
+
+    -- ** GlobalOrganizationSetPolicyRequest
+    GlobalOrganizationSetPolicyRequest (..),
+    newGlobalOrganizationSetPolicyRequest,
+
+    -- ** GlobalSetLabelsRequest
+    GlobalSetLabelsRequest (..),
+    newGlobalSetLabelsRequest,
+
+    -- ** GlobalSetLabelsRequest_Labels
+    GlobalSetLabelsRequest_Labels (..),
+    newGlobalSetLabelsRequest_Labels,
+
+    -- ** GlobalSetPolicyRequest
+    GlobalSetPolicyRequest (..),
+    newGlobalSetPolicyRequest,
+
+    -- ** GuestAttributes
+    GuestAttributes (..),
+    newGuestAttributes,
+
+    -- ** GuestAttributesEntry
+    GuestAttributesEntry (..),
+    newGuestAttributesEntry,
+
+    -- ** GuestAttributesValue
+    GuestAttributesValue (..),
+    newGuestAttributesValue,
+
+    -- ** GuestOsFeature
+    GuestOsFeature (..),
+    newGuestOsFeature,
+
+    -- ** GuestOsFeature_Type
+    GuestOsFeature_Type (..),
+
+    -- ** HTTP2HealthCheck
+    HTTP2HealthCheck (..),
+    newHTTP2HealthCheck,
+
+    -- ** HTTP2HealthCheck_PortSpecification
+    HTTP2HealthCheck_PortSpecification (..),
+
+    -- ** HTTP2HealthCheck_ProxyHeader
+    HTTP2HealthCheck_ProxyHeader (..),
+
+    -- ** HTTPHealthCheck
+    HTTPHealthCheck (..),
+    newHTTPHealthCheck,
+
+    -- ** HTTPHealthCheck_PortSpecification
+    HTTPHealthCheck_PortSpecification (..),
+
+    -- ** HTTPHealthCheck_ProxyHeader
+    HTTPHealthCheck_ProxyHeader (..),
+
+    -- ** HTTPSHealthCheck
+    HTTPSHealthCheck (..),
+    newHTTPSHealthCheck,
+
+    -- ** HTTPSHealthCheck_PortSpecification
+    HTTPSHealthCheck_PortSpecification (..),
+
+    -- ** HTTPSHealthCheck_ProxyHeader
+    HTTPSHealthCheck_ProxyHeader (..),
+
+    -- ** HealthCheck
+    HealthCheck (..),
+    newHealthCheck,
+
+    -- ** HealthCheck_Type
+    HealthCheck_Type (..),
+
+    -- ** HealthCheckList
+    HealthCheckList (..),
+    newHealthCheckList,
+
+    -- ** HealthCheckList_Warning
+    HealthCheckList_Warning (..),
+    newHealthCheckList_Warning,
+
+    -- ** HealthCheckList_Warning_Code
+    HealthCheckList_Warning_Code (..),
+
+    -- ** HealthCheckList_Warning_DataItem
+    HealthCheckList_Warning_DataItem (..),
+    newHealthCheckList_Warning_DataItem,
+
+    -- ** HealthCheckLogConfig
+    HealthCheckLogConfig (..),
+    newHealthCheckLogConfig,
+
+    -- ** HealthCheckReference
+    HealthCheckReference (..),
+    newHealthCheckReference,
+
+    -- ** HealthCheckService
+    HealthCheckService (..),
+    newHealthCheckService,
+
+    -- ** HealthCheckService_HealthStatusAggregationPolicy
+    HealthCheckService_HealthStatusAggregationPolicy (..),
+
+    -- ** HealthCheckServiceReference
+    HealthCheckServiceReference (..),
+    newHealthCheckServiceReference,
+
+    -- ** HealthCheckServicesList
+    HealthCheckServicesList (..),
+    newHealthCheckServicesList,
+
+    -- ** HealthCheckServicesList_Warning
+    HealthCheckServicesList_Warning (..),
+    newHealthCheckServicesList_Warning,
+
+    -- ** HealthCheckServicesList_Warning_Code
+    HealthCheckServicesList_Warning_Code (..),
+
+    -- ** HealthCheckServicesList_Warning_DataItem
+    HealthCheckServicesList_Warning_DataItem (..),
+    newHealthCheckServicesList_Warning_DataItem,
+
+    -- ** HealthChecksAggregatedList
+    HealthChecksAggregatedList (..),
+    newHealthChecksAggregatedList,
+
+    -- ** HealthChecksAggregatedList_Items
+    HealthChecksAggregatedList_Items (..),
+    newHealthChecksAggregatedList_Items,
+
+    -- ** HealthChecksAggregatedList_Warning
+    HealthChecksAggregatedList_Warning (..),
+    newHealthChecksAggregatedList_Warning,
+
+    -- ** HealthChecksAggregatedList_Warning_Code
+    HealthChecksAggregatedList_Warning_Code (..),
+
+    -- ** HealthChecksAggregatedList_Warning_DataItem
+    HealthChecksAggregatedList_Warning_DataItem (..),
+    newHealthChecksAggregatedList_Warning_DataItem,
+
+    -- ** HealthChecksScopedList
+    HealthChecksScopedList (..),
+    newHealthChecksScopedList,
+
+    -- ** HealthChecksScopedList_Warning
+    HealthChecksScopedList_Warning (..),
+    newHealthChecksScopedList_Warning,
+
+    -- ** HealthChecksScopedList_Warning_Code
+    HealthChecksScopedList_Warning_Code (..),
+
+    -- ** HealthChecksScopedList_Warning_DataItem
+    HealthChecksScopedList_Warning_DataItem (..),
+    newHealthChecksScopedList_Warning_DataItem,
+
+    -- ** HealthStatus
+    HealthStatus (..),
+    newHealthStatus,
+
+    -- ** HealthStatus_Annotations
+    HealthStatus_Annotations (..),
+    newHealthStatus_Annotations,
+
+    -- ** HealthStatus_HealthState
+    HealthStatus_HealthState (..),
+
+    -- ** HealthStatus_WeightError
+    HealthStatus_WeightError (..),
+
+    -- ** HealthStatusForNetworkEndpoint
+    HealthStatusForNetworkEndpoint (..),
+    newHealthStatusForNetworkEndpoint,
+
+    -- ** HealthStatusForNetworkEndpoint_HealthState
+    HealthStatusForNetworkEndpoint_HealthState (..),
+
+    -- ** HostRule
+    HostRule (..),
+    newHostRule,
+
+    -- ** HttpFaultAbort
+    HttpFaultAbort (..),
+    newHttpFaultAbort,
+
+    -- ** HttpFaultDelay
+    HttpFaultDelay (..),
+    newHttpFaultDelay,
+
+    -- ** HttpFaultInjection
+    HttpFaultInjection (..),
+    newHttpFaultInjection,
+
+    -- ** HttpHeaderAction
+    HttpHeaderAction (..),
+    newHttpHeaderAction,
+
+    -- ** HttpHeaderMatch
+    HttpHeaderMatch (..),
+    newHttpHeaderMatch,
+
+    -- ** HttpHeaderOption
+    HttpHeaderOption (..),
+    newHttpHeaderOption,
+
+    -- ** HttpHealthCheck
+    HttpHealthCheck (..),
+    newHttpHealthCheck,
+
+    -- ** HttpHealthCheckList
+    HttpHealthCheckList (..),
+    newHttpHealthCheckList,
+
+    -- ** HttpHealthCheckList_Warning
+    HttpHealthCheckList_Warning (..),
+    newHttpHealthCheckList_Warning,
+
+    -- ** HttpHealthCheckList_Warning_Code
+    HttpHealthCheckList_Warning_Code (..),
+
+    -- ** HttpHealthCheckList_Warning_DataItem
+    HttpHealthCheckList_Warning_DataItem (..),
+    newHttpHealthCheckList_Warning_DataItem,
+
+    -- ** HttpQueryParameterMatch
+    HttpQueryParameterMatch (..),
+    newHttpQueryParameterMatch,
+
+    -- ** HttpRedirectAction
+    HttpRedirectAction (..),
+    newHttpRedirectAction,
+
+    -- ** HttpRedirectAction_RedirectResponseCode
+    HttpRedirectAction_RedirectResponseCode (..),
+
+    -- ** HttpRetryPolicy
+    HttpRetryPolicy (..),
+    newHttpRetryPolicy,
+
+    -- ** HttpRouteAction
+    HttpRouteAction (..),
+    newHttpRouteAction,
+
+    -- ** HttpRouteRule
+    HttpRouteRule (..),
+    newHttpRouteRule,
+
+    -- ** HttpRouteRuleMatch
+    HttpRouteRuleMatch (..),
+    newHttpRouteRuleMatch,
+
+    -- ** HttpsHealthCheck
+    HttpsHealthCheck (..),
+    newHttpsHealthCheck,
+
+    -- ** HttpsHealthCheckList
+    HttpsHealthCheckList (..),
+    newHttpsHealthCheckList,
+
+    -- ** HttpsHealthCheckList_Warning
+    HttpsHealthCheckList_Warning (..),
+    newHttpsHealthCheckList_Warning,
+
+    -- ** HttpsHealthCheckList_Warning_Code
+    HttpsHealthCheckList_Warning_Code (..),
+
+    -- ** HttpsHealthCheckList_Warning_DataItem
+    HttpsHealthCheckList_Warning_DataItem (..),
+    newHttpsHealthCheckList_Warning_DataItem,
+
+    -- ** Image
+    Image (..),
+    newImage,
+
+    -- ** Image_Labels
+    Image_Labels (..),
+    newImage_Labels,
+
+    -- ** Image_RawDisk
+    Image_RawDisk (..),
+    newImage_RawDisk,
+
+    -- ** Image_RawDisk_ContainerType
+    Image_RawDisk_ContainerType (..),
+
+    -- ** Image_SourceType
+    Image_SourceType (..),
+
+    -- ** Image_Status
+    Image_Status (..),
+
+    -- ** ImageFamilyView
+    ImageFamilyView (..),
+    newImageFamilyView,
+
+    -- ** ImageList
+    ImageList (..),
+    newImageList,
+
+    -- ** ImageList_Warning
+    ImageList_Warning (..),
+    newImageList_Warning,
+
+    -- ** ImageList_Warning_Code
+    ImageList_Warning_Code (..),
+
+    -- ** ImageList_Warning_DataItem
+    ImageList_Warning_DataItem (..),
+    newImageList_Warning_DataItem,
+
+    -- ** InitialStateConfig
+    InitialStateConfig (..),
+    newInitialStateConfig,
 
     -- ** Instance
-    , Instance
-    , instance'
-    , i1AdvancedMachineFeatures
-    , i1SatisfiesPzs
-    , i1Status
-    , i1LastStopTimestamp
-    , i1ServiceAccounts
-    , i1LastSuspendedTimestamp
-    , i1DeletionProtection
-    , i1Hostname
-    , i1ReservationAffinity
-    , i1DisplayDevice
-    , i1NetworkInterfaces
-    , i1ShieldedInstanceIntegrityPolicy
-    , i1Kind
-    , i1Fingerprint
-    , i1Zone
-    , i1ConfidentialInstanceConfig
-    , i1CPUPlatform
-    , i1ResourcePolicies
-    , i1SelfLink
-    , i1GuestAccelerators
-    , i1LastStartTimestamp
-    , i1Name
-    , i1StatusMessage
-    , i1CreationTimestamp
-    , i1MachineType
-    , i1Metadata
-    , i1ShieldedInstanceConfig
-    , i1Id
-    , i1Labels
-    , i1StartRestricted
-    , i1Scheduling
-    , i1MinCPUPlatform
-    , i1Disks
-    , i1CanIPForward
-    , i1LabelFingerprint
-    , i1Description
-    , i1Tags
-    , i1PrivateIPv6GoogleAccess
+    Instance (..),
+    newInstance,
 
-    -- ** NetworkEndpointAnnotations
-    , NetworkEndpointAnnotations
-    , networkEndpointAnnotations
-    , neaAddtional
+    -- ** Instance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
 
-    -- ** PathMatcher
-    , PathMatcher
-    , pathMatcher
-    , pmDefaultRouteAction
-    , pmDefaultURLRedirect
-    , pmDefaultService
-    , pmHeaderAction
-    , pmRouteRules
-    , pmName
-    , pmPathRules
-    , pmDescription
+    -- ** Instance_PrivateIpv6GoogleAccess
+    Instance_PrivateIpv6GoogleAccess (..),
+
+    -- ** Instance_Status
+    Instance_Status (..),
+
+    -- ** InstanceAggregatedList
+    InstanceAggregatedList (..),
+    newInstanceAggregatedList,
+
+    -- ** InstanceAggregatedList_Items
+    InstanceAggregatedList_Items (..),
+    newInstanceAggregatedList_Items,
+
+    -- ** InstanceAggregatedList_Warning
+    InstanceAggregatedList_Warning (..),
+    newInstanceAggregatedList_Warning,
+
+    -- ** InstanceAggregatedList_Warning_Code
+    InstanceAggregatedList_Warning_Code (..),
+
+    -- ** InstanceAggregatedList_Warning_DataItem
+    InstanceAggregatedList_Warning_DataItem (..),
+    newInstanceAggregatedList_Warning_DataItem,
+
+    -- ** InstanceGroup
+    InstanceGroup (..),
+    newInstanceGroup,
+
+    -- ** InstanceGroupAggregatedList
+    InstanceGroupAggregatedList (..),
+    newInstanceGroupAggregatedList,
+
+    -- ** InstanceGroupAggregatedList_Items
+    InstanceGroupAggregatedList_Items (..),
+    newInstanceGroupAggregatedList_Items,
+
+    -- ** InstanceGroupAggregatedList_Warning
+    InstanceGroupAggregatedList_Warning (..),
+    newInstanceGroupAggregatedList_Warning,
+
+    -- ** InstanceGroupAggregatedList_Warning_Code
+    InstanceGroupAggregatedList_Warning_Code (..),
+
+    -- ** InstanceGroupAggregatedList_Warning_DataItem
+    InstanceGroupAggregatedList_Warning_DataItem (..),
+    newInstanceGroupAggregatedList_Warning_DataItem,
+
+    -- ** InstanceGroupList
+    InstanceGroupList (..),
+    newInstanceGroupList,
+
+    -- ** InstanceGroupList_Warning
+    InstanceGroupList_Warning (..),
+    newInstanceGroupList_Warning,
+
+    -- ** InstanceGroupList_Warning_Code
+    InstanceGroupList_Warning_Code (..),
+
+    -- ** InstanceGroupList_Warning_DataItem
+    InstanceGroupList_Warning_DataItem (..),
+    newInstanceGroupList_Warning_DataItem,
+
+    -- ** InstanceGroupManager
+    InstanceGroupManager (..),
+    newInstanceGroupManager,
+
+    -- ** InstanceGroupManagerActionsSummary
+    InstanceGroupManagerActionsSummary (..),
+    newInstanceGroupManagerActionsSummary,
+
+    -- ** InstanceGroupManagerAggregatedList
+    InstanceGroupManagerAggregatedList (..),
+    newInstanceGroupManagerAggregatedList,
+
+    -- ** InstanceGroupManagerAggregatedList_Items
+    InstanceGroupManagerAggregatedList_Items (..),
+    newInstanceGroupManagerAggregatedList_Items,
+
+    -- ** InstanceGroupManagerAggregatedList_Warning
+    InstanceGroupManagerAggregatedList_Warning (..),
+    newInstanceGroupManagerAggregatedList_Warning,
+
+    -- ** InstanceGroupManagerAggregatedList_Warning_Code
+    InstanceGroupManagerAggregatedList_Warning_Code (..),
+
+    -- ** InstanceGroupManagerAggregatedList_Warning_DataItem
+    InstanceGroupManagerAggregatedList_Warning_DataItem (..),
+    newInstanceGroupManagerAggregatedList_Warning_DataItem,
+
+    -- ** InstanceGroupManagerAutoHealingPolicy
+    InstanceGroupManagerAutoHealingPolicy (..),
+    newInstanceGroupManagerAutoHealingPolicy,
+
+    -- ** InstanceGroupManagerList
+    InstanceGroupManagerList (..),
+    newInstanceGroupManagerList,
+
+    -- ** InstanceGroupManagerList_Warning
+    InstanceGroupManagerList_Warning (..),
+    newInstanceGroupManagerList_Warning,
+
+    -- ** InstanceGroupManagerList_Warning_Code
+    InstanceGroupManagerList_Warning_Code (..),
+
+    -- ** InstanceGroupManagerList_Warning_DataItem
+    InstanceGroupManagerList_Warning_DataItem (..),
+    newInstanceGroupManagerList_Warning_DataItem,
+
+    -- ** InstanceGroupManagerStatus
+    InstanceGroupManagerStatus (..),
+    newInstanceGroupManagerStatus,
+
+    -- ** InstanceGroupManagerStatusStateful
+    InstanceGroupManagerStatusStateful (..),
+    newInstanceGroupManagerStatusStateful,
+
+    -- ** InstanceGroupManagerStatusStatefulPerInstanceConfigs
+    InstanceGroupManagerStatusStatefulPerInstanceConfigs (..),
+    newInstanceGroupManagerStatusStatefulPerInstanceConfigs,
+
+    -- ** InstanceGroupManagerStatusVersionTarget
+    InstanceGroupManagerStatusVersionTarget (..),
+    newInstanceGroupManagerStatusVersionTarget,
+
+    -- ** InstanceGroupManagerUpdatePolicy
+    InstanceGroupManagerUpdatePolicy (..),
+    newInstanceGroupManagerUpdatePolicy,
+
+    -- ** InstanceGroupManagerUpdatePolicy_InstanceRedistributionType
+    InstanceGroupManagerUpdatePolicy_InstanceRedistributionType (..),
+
+    -- ** InstanceGroupManagerUpdatePolicy_MinimalAction
+    InstanceGroupManagerUpdatePolicy_MinimalAction (..),
+
+    -- ** InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction
+    InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction (..),
+
+    -- ** InstanceGroupManagerUpdatePolicy_ReplacementMethod
+    InstanceGroupManagerUpdatePolicy_ReplacementMethod (..),
+
+    -- ** InstanceGroupManagerUpdatePolicy_Type
+    InstanceGroupManagerUpdatePolicy_Type (..),
+
+    -- ** InstanceGroupManagerVersion
+    InstanceGroupManagerVersion (..),
+    newInstanceGroupManagerVersion,
+
+    -- ** InstanceGroupManagersAbandonInstancesRequest
+    InstanceGroupManagersAbandonInstancesRequest (..),
+    newInstanceGroupManagersAbandonInstancesRequest,
+
+    -- ** InstanceGroupManagersApplyUpdatesRequest
+    InstanceGroupManagersApplyUpdatesRequest (..),
+    newInstanceGroupManagersApplyUpdatesRequest,
+
+    -- ** InstanceGroupManagersApplyUpdatesRequest_MinimalAction
+    InstanceGroupManagersApplyUpdatesRequest_MinimalAction (..),
+
+    -- ** InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
+    InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction (..),
+
+    -- ** InstanceGroupManagersCreateInstancesRequest
+    InstanceGroupManagersCreateInstancesRequest (..),
+    newInstanceGroupManagersCreateInstancesRequest,
+
+    -- ** InstanceGroupManagersDeleteInstancesRequest
+    InstanceGroupManagersDeleteInstancesRequest (..),
+    newInstanceGroupManagersDeleteInstancesRequest,
+
+    -- ** InstanceGroupManagersDeletePerInstanceConfigsReq
+    InstanceGroupManagersDeletePerInstanceConfigsReq (..),
+    newInstanceGroupManagersDeletePerInstanceConfigsReq,
+
+    -- ** InstanceGroupManagersListErrorsResponse
+    InstanceGroupManagersListErrorsResponse (..),
+    newInstanceGroupManagersListErrorsResponse,
+
+    -- ** InstanceGroupManagersListManagedInstancesResponse
+    InstanceGroupManagersListManagedInstancesResponse (..),
+    newInstanceGroupManagersListManagedInstancesResponse,
+
+    -- ** InstanceGroupManagersListPerInstanceConfigsResp
+    InstanceGroupManagersListPerInstanceConfigsResp (..),
+    newInstanceGroupManagersListPerInstanceConfigsResp,
+
+    -- ** InstanceGroupManagersListPerInstanceConfigsResp_Warning
+    InstanceGroupManagersListPerInstanceConfigsResp_Warning (..),
+    newInstanceGroupManagersListPerInstanceConfigsResp_Warning,
+
+    -- ** InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
+    InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code (..),
+
+    -- ** InstanceGroupManagersListPerInstanceConfigsResp_Warning_DataItem
+    InstanceGroupManagersListPerInstanceConfigsResp_Warning_DataItem (..),
+    newInstanceGroupManagersListPerInstanceConfigsResp_Warning_DataItem,
+
+    -- ** InstanceGroupManagersPatchPerInstanceConfigsReq
+    InstanceGroupManagersPatchPerInstanceConfigsReq (..),
+    newInstanceGroupManagersPatchPerInstanceConfigsReq,
+
+    -- ** InstanceGroupManagersRecreateInstancesRequest
+    InstanceGroupManagersRecreateInstancesRequest (..),
+    newInstanceGroupManagersRecreateInstancesRequest,
+
+    -- ** InstanceGroupManagersScopedList
+    InstanceGroupManagersScopedList (..),
+    newInstanceGroupManagersScopedList,
+
+    -- ** InstanceGroupManagersScopedList_Warning
+    InstanceGroupManagersScopedList_Warning (..),
+    newInstanceGroupManagersScopedList_Warning,
+
+    -- ** InstanceGroupManagersScopedList_Warning_Code
+    InstanceGroupManagersScopedList_Warning_Code (..),
+
+    -- ** InstanceGroupManagersScopedList_Warning_DataItem
+    InstanceGroupManagersScopedList_Warning_DataItem (..),
+    newInstanceGroupManagersScopedList_Warning_DataItem,
+
+    -- ** InstanceGroupManagersSetInstanceTemplateRequest
+    InstanceGroupManagersSetInstanceTemplateRequest (..),
+    newInstanceGroupManagersSetInstanceTemplateRequest,
+
+    -- ** InstanceGroupManagersSetTargetPoolsRequest
+    InstanceGroupManagersSetTargetPoolsRequest (..),
+    newInstanceGroupManagersSetTargetPoolsRequest,
+
+    -- ** InstanceGroupManagersUpdatePerInstanceConfigsReq
+    InstanceGroupManagersUpdatePerInstanceConfigsReq (..),
+    newInstanceGroupManagersUpdatePerInstanceConfigsReq,
+
+    -- ** InstanceGroupsAddInstancesRequest
+    InstanceGroupsAddInstancesRequest (..),
+    newInstanceGroupsAddInstancesRequest,
+
+    -- ** InstanceGroupsListInstances
+    InstanceGroupsListInstances (..),
+    newInstanceGroupsListInstances,
+
+    -- ** InstanceGroupsListInstances_Warning
+    InstanceGroupsListInstances_Warning (..),
+    newInstanceGroupsListInstances_Warning,
+
+    -- ** InstanceGroupsListInstances_Warning_Code
+    InstanceGroupsListInstances_Warning_Code (..),
+
+    -- ** InstanceGroupsListInstances_Warning_DataItem
+    InstanceGroupsListInstances_Warning_DataItem (..),
+    newInstanceGroupsListInstances_Warning_DataItem,
+
+    -- ** InstanceGroupsListInstancesRequest
+    InstanceGroupsListInstancesRequest (..),
+    newInstanceGroupsListInstancesRequest,
+
+    -- ** InstanceGroupsListInstancesRequest_InstanceState
+    InstanceGroupsListInstancesRequest_InstanceState (..),
+
+    -- ** InstanceGroupsRemoveInstancesRequest
+    InstanceGroupsRemoveInstancesRequest (..),
+    newInstanceGroupsRemoveInstancesRequest,
+
+    -- ** InstanceGroupsScopedList
+    InstanceGroupsScopedList (..),
+    newInstanceGroupsScopedList,
+
+    -- ** InstanceGroupsScopedList_Warning
+    InstanceGroupsScopedList_Warning (..),
+    newInstanceGroupsScopedList_Warning,
+
+    -- ** InstanceGroupsScopedList_Warning_Code
+    InstanceGroupsScopedList_Warning_Code (..),
+
+    -- ** InstanceGroupsScopedList_Warning_DataItem
+    InstanceGroupsScopedList_Warning_DataItem (..),
+    newInstanceGroupsScopedList_Warning_DataItem,
+
+    -- ** InstanceGroupsSetNamedPortsRequest
+    InstanceGroupsSetNamedPortsRequest (..),
+    newInstanceGroupsSetNamedPortsRequest,
+
+    -- ** InstanceList
+    InstanceList (..),
+    newInstanceList,
+
+    -- ** InstanceList_Warning
+    InstanceList_Warning (..),
+    newInstanceList_Warning,
+
+    -- ** InstanceList_Warning_Code
+    InstanceList_Warning_Code (..),
+
+    -- ** InstanceList_Warning_DataItem
+    InstanceList_Warning_DataItem (..),
+    newInstanceList_Warning_DataItem,
+
+    -- ** InstanceListReferrers
+    InstanceListReferrers (..),
+    newInstanceListReferrers,
+
+    -- ** InstanceListReferrers_Warning
+    InstanceListReferrers_Warning (..),
+    newInstanceListReferrers_Warning,
+
+    -- ** InstanceListReferrers_Warning_Code
+    InstanceListReferrers_Warning_Code (..),
+
+    -- ** InstanceListReferrers_Warning_DataItem
+    InstanceListReferrers_Warning_DataItem (..),
+    newInstanceListReferrers_Warning_DataItem,
+
+    -- ** InstanceManagedByIgmError
+    InstanceManagedByIgmError (..),
+    newInstanceManagedByIgmError,
+
+    -- ** InstanceManagedByIgmErrorInstanceActionDetails
+    InstanceManagedByIgmErrorInstanceActionDetails (..),
+    newInstanceManagedByIgmErrorInstanceActionDetails,
+
+    -- ** InstanceManagedByIgmErrorInstanceActionDetails_Action
+    InstanceManagedByIgmErrorInstanceActionDetails_Action (..),
+
+    -- ** InstanceManagedByIgmErrorManagedInstanceError
+    InstanceManagedByIgmErrorManagedInstanceError (..),
+    newInstanceManagedByIgmErrorManagedInstanceError,
+
+    -- ** InstanceMoveRequest
+    InstanceMoveRequest (..),
+    newInstanceMoveRequest,
+
+    -- ** InstanceParams
+    InstanceParams (..),
+    newInstanceParams,
+
+    -- ** InstanceParams_ResourceManagerTags
+    InstanceParams_ResourceManagerTags (..),
+    newInstanceParams_ResourceManagerTags,
+
+    -- ** InstanceProperties
+    InstanceProperties (..),
+    newInstanceProperties,
+
+    -- ** InstanceProperties_Labels
+    InstanceProperties_Labels (..),
+    newInstanceProperties_Labels,
+
+    -- ** InstanceProperties_PrivateIpv6GoogleAccess
+    InstanceProperties_PrivateIpv6GoogleAccess (..),
+
+    -- ** InstanceProperties_ResourceManagerTags
+    InstanceProperties_ResourceManagerTags (..),
+    newInstanceProperties_ResourceManagerTags,
+
+    -- ** InstanceReference
+    InstanceReference (..),
+    newInstanceReference,
+
+    -- ** InstanceTemplate
+    InstanceTemplate (..),
+    newInstanceTemplate,
+
+    -- ** InstanceTemplateList
+    InstanceTemplateList (..),
+    newInstanceTemplateList,
+
+    -- ** InstanceTemplateList_Warning
+    InstanceTemplateList_Warning (..),
+    newInstanceTemplateList_Warning,
+
+    -- ** InstanceTemplateList_Warning_Code
+    InstanceTemplateList_Warning_Code (..),
+
+    -- ** InstanceTemplateList_Warning_DataItem
+    InstanceTemplateList_Warning_DataItem (..),
+    newInstanceTemplateList_Warning_DataItem,
+
+    -- ** InstanceWithNamedPorts
+    InstanceWithNamedPorts (..),
+    newInstanceWithNamedPorts,
+
+    -- ** InstanceWithNamedPorts_Status
+    InstanceWithNamedPorts_Status (..),
+
+    -- ** InstancesAddResourcePoliciesRequest
+    InstancesAddResourcePoliciesRequest (..),
+    newInstancesAddResourcePoliciesRequest,
+
+    -- ** InstancesGetEffectiveFirewallsResponse
+    InstancesGetEffectiveFirewallsResponse (..),
+    newInstancesGetEffectiveFirewallsResponse,
+
+    -- ** InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
+    InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy (..),
+    newInstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy,
+
+    -- ** InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+    InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type (..),
+
+    -- ** InstancesRemoveResourcePoliciesRequest
+    InstancesRemoveResourcePoliciesRequest (..),
+    newInstancesRemoveResourcePoliciesRequest,
+
+    -- ** InstancesScopedList
+    InstancesScopedList (..),
+    newInstancesScopedList,
+
+    -- ** InstancesScopedList_Warning
+    InstancesScopedList_Warning (..),
+    newInstancesScopedList_Warning,
+
+    -- ** InstancesScopedList_Warning_Code
+    InstancesScopedList_Warning_Code (..),
+
+    -- ** InstancesScopedList_Warning_DataItem
+    InstancesScopedList_Warning_DataItem (..),
+    newInstancesScopedList_Warning_DataItem,
+
+    -- ** InstancesSetLabelsRequest
+    InstancesSetLabelsRequest (..),
+    newInstancesSetLabelsRequest,
+
+    -- ** InstancesSetLabelsRequest_Labels
+    InstancesSetLabelsRequest_Labels (..),
+    newInstancesSetLabelsRequest_Labels,
+
+    -- ** InstancesSetMachineResourcesRequest
+    InstancesSetMachineResourcesRequest (..),
+    newInstancesSetMachineResourcesRequest,
+
+    -- ** InstancesSetMachineTypeRequest
+    InstancesSetMachineTypeRequest (..),
+    newInstancesSetMachineTypeRequest,
+
+    -- ** InstancesSetMinCpuPlatformRequest
+    InstancesSetMinCpuPlatformRequest (..),
+    newInstancesSetMinCpuPlatformRequest,
+
+    -- ** InstancesSetServiceAccountRequest
+    InstancesSetServiceAccountRequest (..),
+    newInstancesSetServiceAccountRequest,
+
+    -- ** InstancesStartWithEncryptionKeyRequest
+    InstancesStartWithEncryptionKeyRequest (..),
+    newInstancesStartWithEncryptionKeyRequest,
+
+    -- ** Int64RangeMatch
+    Int64RangeMatch (..),
+    newInt64RangeMatch,
+
+    -- ** Interconnect
+    Interconnect (..),
+    newInterconnect,
+
+    -- ** Interconnect_InterconnectType
+    Interconnect_InterconnectType (..),
+
+    -- ** Interconnect_LinkType
+    Interconnect_LinkType (..),
+
+    -- ** Interconnect_OperationalStatus
+    Interconnect_OperationalStatus (..),
+
+    -- ** Interconnect_State
+    Interconnect_State (..),
+
+    -- ** InterconnectAttachment
+    InterconnectAttachment (..),
+    newInterconnectAttachment,
+
+    -- ** InterconnectAttachment_Bandwidth
+    InterconnectAttachment_Bandwidth (..),
+
+    -- ** InterconnectAttachment_EdgeAvailabilityDomain
+    InterconnectAttachment_EdgeAvailabilityDomain (..),
+
+    -- ** InterconnectAttachment_Encryption
+    InterconnectAttachment_Encryption (..),
+
+    -- ** InterconnectAttachment_OperationalStatus
+    InterconnectAttachment_OperationalStatus (..),
+
+    -- ** InterconnectAttachment_StackType
+    InterconnectAttachment_StackType (..),
+
+    -- ** InterconnectAttachment_State
+    InterconnectAttachment_State (..),
+
+    -- ** InterconnectAttachment_Type
+    InterconnectAttachment_Type (..),
+
+    -- ** InterconnectAttachmentAggregatedList
+    InterconnectAttachmentAggregatedList (..),
+    newInterconnectAttachmentAggregatedList,
+
+    -- ** InterconnectAttachmentAggregatedList_Items
+    InterconnectAttachmentAggregatedList_Items (..),
+    newInterconnectAttachmentAggregatedList_Items,
+
+    -- ** InterconnectAttachmentAggregatedList_Warning
+    InterconnectAttachmentAggregatedList_Warning (..),
+    newInterconnectAttachmentAggregatedList_Warning,
+
+    -- ** InterconnectAttachmentAggregatedList_Warning_Code
+    InterconnectAttachmentAggregatedList_Warning_Code (..),
+
+    -- ** InterconnectAttachmentAggregatedList_Warning_DataItem
+    InterconnectAttachmentAggregatedList_Warning_DataItem (..),
+    newInterconnectAttachmentAggregatedList_Warning_DataItem,
+
+    -- ** InterconnectAttachmentList
+    InterconnectAttachmentList (..),
+    newInterconnectAttachmentList,
+
+    -- ** InterconnectAttachmentList_Warning
+    InterconnectAttachmentList_Warning (..),
+    newInterconnectAttachmentList_Warning,
+
+    -- ** InterconnectAttachmentList_Warning_Code
+    InterconnectAttachmentList_Warning_Code (..),
+
+    -- ** InterconnectAttachmentList_Warning_DataItem
+    InterconnectAttachmentList_Warning_DataItem (..),
+    newInterconnectAttachmentList_Warning_DataItem,
+
+    -- ** InterconnectAttachmentPartnerMetadata
+    InterconnectAttachmentPartnerMetadata (..),
+    newInterconnectAttachmentPartnerMetadata,
+
+    -- ** InterconnectAttachmentPrivateInfo
+    InterconnectAttachmentPrivateInfo (..),
+    newInterconnectAttachmentPrivateInfo,
+
+    -- ** InterconnectAttachmentsScopedList
+    InterconnectAttachmentsScopedList (..),
+    newInterconnectAttachmentsScopedList,
+
+    -- ** InterconnectAttachmentsScopedList_Warning
+    InterconnectAttachmentsScopedList_Warning (..),
+    newInterconnectAttachmentsScopedList_Warning,
+
+    -- ** InterconnectAttachmentsScopedList_Warning_Code
+    InterconnectAttachmentsScopedList_Warning_Code (..),
+
+    -- ** InterconnectAttachmentsScopedList_Warning_DataItem
+    InterconnectAttachmentsScopedList_Warning_DataItem (..),
+    newInterconnectAttachmentsScopedList_Warning_DataItem,
+
+    -- ** InterconnectCircuitInfo
+    InterconnectCircuitInfo (..),
+    newInterconnectCircuitInfo,
+
+    -- ** InterconnectDiagnostics
+    InterconnectDiagnostics (..),
+    newInterconnectDiagnostics,
+
+    -- ** InterconnectDiagnosticsARPEntry
+    InterconnectDiagnosticsARPEntry (..),
+    newInterconnectDiagnosticsARPEntry,
+
+    -- ** InterconnectDiagnosticsLinkLACPStatus
+    InterconnectDiagnosticsLinkLACPStatus (..),
+    newInterconnectDiagnosticsLinkLACPStatus,
+
+    -- ** InterconnectDiagnosticsLinkLACPStatus_State
+    InterconnectDiagnosticsLinkLACPStatus_State (..),
+
+    -- ** InterconnectDiagnosticsLinkOpticalPower
+    InterconnectDiagnosticsLinkOpticalPower (..),
+    newInterconnectDiagnosticsLinkOpticalPower,
+
+    -- ** InterconnectDiagnosticsLinkOpticalPower_State
+    InterconnectDiagnosticsLinkOpticalPower_State (..),
+
+    -- ** InterconnectDiagnosticsLinkStatus
+    InterconnectDiagnosticsLinkStatus (..),
+    newInterconnectDiagnosticsLinkStatus,
+
+    -- ** InterconnectList
+    InterconnectList (..),
+    newInterconnectList,
+
+    -- ** InterconnectList_Warning
+    InterconnectList_Warning (..),
+    newInterconnectList_Warning,
+
+    -- ** InterconnectList_Warning_Code
+    InterconnectList_Warning_Code (..),
+
+    -- ** InterconnectList_Warning_DataItem
+    InterconnectList_Warning_DataItem (..),
+    newInterconnectList_Warning_DataItem,
+
+    -- ** InterconnectLocation
+    InterconnectLocation (..),
+    newInterconnectLocation,
+
+    -- ** InterconnectLocation_Continent
+    InterconnectLocation_Continent (..),
+
+    -- ** InterconnectLocation_Status
+    InterconnectLocation_Status (..),
+
+    -- ** InterconnectLocationList
+    InterconnectLocationList (..),
+    newInterconnectLocationList,
+
+    -- ** InterconnectLocationList_Warning
+    InterconnectLocationList_Warning (..),
+    newInterconnectLocationList_Warning,
+
+    -- ** InterconnectLocationList_Warning_Code
+    InterconnectLocationList_Warning_Code (..),
+
+    -- ** InterconnectLocationList_Warning_DataItem
+    InterconnectLocationList_Warning_DataItem (..),
+    newInterconnectLocationList_Warning_DataItem,
+
+    -- ** InterconnectLocationRegionInfo
+    InterconnectLocationRegionInfo (..),
+    newInterconnectLocationRegionInfo,
+
+    -- ** InterconnectLocationRegionInfo_LocationPresence
+    InterconnectLocationRegionInfo_LocationPresence (..),
+
+    -- ** InterconnectOutageNotification
+    InterconnectOutageNotification (..),
+    newInterconnectOutageNotification,
+
+    -- ** InterconnectOutageNotification_IssueType
+    InterconnectOutageNotification_IssueType (..),
+
+    -- ** InterconnectOutageNotification_Source
+    InterconnectOutageNotification_Source (..),
+
+    -- ** InterconnectOutageNotification_State
+    InterconnectOutageNotification_State (..),
+
+    -- ** InterconnectsGetDiagnosticsResponse
+    InterconnectsGetDiagnosticsResponse (..),
+    newInterconnectsGetDiagnosticsResponse,
+
+    -- ** License
+    License (..),
+    newLicense,
+
+    -- ** LicenseCode
+    LicenseCode (..),
+    newLicenseCode,
+
+    -- ** LicenseCode_State
+    LicenseCode_State (..),
+
+    -- ** LicenseCodeLicenseAlias
+    LicenseCodeLicenseAlias (..),
+    newLicenseCodeLicenseAlias,
+
+    -- ** LicenseResourceCommitment
+    LicenseResourceCommitment (..),
+    newLicenseResourceCommitment,
+
+    -- ** LicenseResourceRequirements
+    LicenseResourceRequirements (..),
+    newLicenseResourceRequirements,
+
+    -- ** LicensesListResponse
+    LicensesListResponse (..),
+    newLicensesListResponse,
+
+    -- ** LicensesListResponse_Warning
+    LicensesListResponse_Warning (..),
+    newLicensesListResponse_Warning,
+
+    -- ** LicensesListResponse_Warning_Code
+    LicensesListResponse_Warning_Code (..),
+
+    -- ** LicensesListResponse_Warning_DataItem
+    LicensesListResponse_Warning_DataItem (..),
+    newLicensesListResponse_Warning_DataItem,
+
+    -- ** LocalDisk
+    LocalDisk (..),
+    newLocalDisk,
+
+    -- ** LocationPolicy
+    LocationPolicy (..),
+    newLocationPolicy,
+
+    -- ** LocationPolicy_Locations
+    LocationPolicy_Locations (..),
+    newLocationPolicy_Locations,
+
+    -- ** LocationPolicyLocation
+    LocationPolicyLocation (..),
+    newLocationPolicyLocation,
+
+    -- ** LocationPolicyLocation_Preference
+    LocationPolicyLocation_Preference (..),
+
+    -- ** LogConfig
+    LogConfig (..),
+    newLogConfig,
+
+    -- ** LogConfigCloudAuditOptions
+    LogConfigCloudAuditOptions (..),
+    newLogConfigCloudAuditOptions,
+
+    -- ** LogConfigCloudAuditOptions_LogName
+    LogConfigCloudAuditOptions_LogName (..),
+
+    -- ** LogConfigCounterOptions
+    LogConfigCounterOptions (..),
+    newLogConfigCounterOptions,
+
+    -- ** LogConfigCounterOptionsCustomField
+    LogConfigCounterOptionsCustomField (..),
+    newLogConfigCounterOptionsCustomField,
+
+    -- ** LogConfigDataAccessOptions
+    LogConfigDataAccessOptions (..),
+    newLogConfigDataAccessOptions,
+
+    -- ** LogConfigDataAccessOptions_LogMode
+    LogConfigDataAccessOptions_LogMode (..),
+
+    -- ** MachineImage
+    MachineImage (..),
+    newMachineImage,
+
+    -- ** MachineImage_Status
+    MachineImage_Status (..),
+
+    -- ** MachineImageList
+    MachineImageList (..),
+    newMachineImageList,
+
+    -- ** MachineImageList_Warning
+    MachineImageList_Warning (..),
+    newMachineImageList_Warning,
+
+    -- ** MachineImageList_Warning_Code
+    MachineImageList_Warning_Code (..),
+
+    -- ** MachineImageList_Warning_DataItem
+    MachineImageList_Warning_DataItem (..),
+    newMachineImageList_Warning_DataItem,
+
+    -- ** MachineType
+    MachineType (..),
+    newMachineType,
+
+    -- ** MachineType_AcceleratorsItem
+    MachineType_AcceleratorsItem (..),
+    newMachineType_AcceleratorsItem,
+
+    -- ** MachineType_ScratchDisksItem
+    MachineType_ScratchDisksItem (..),
+    newMachineType_ScratchDisksItem,
+
+    -- ** MachineTypeAggregatedList
+    MachineTypeAggregatedList (..),
+    newMachineTypeAggregatedList,
+
+    -- ** MachineTypeAggregatedList_Items
+    MachineTypeAggregatedList_Items (..),
+    newMachineTypeAggregatedList_Items,
+
+    -- ** MachineTypeAggregatedList_Warning
+    MachineTypeAggregatedList_Warning (..),
+    newMachineTypeAggregatedList_Warning,
+
+    -- ** MachineTypeAggregatedList_Warning_Code
+    MachineTypeAggregatedList_Warning_Code (..),
+
+    -- ** MachineTypeAggregatedList_Warning_DataItem
+    MachineTypeAggregatedList_Warning_DataItem (..),
+    newMachineTypeAggregatedList_Warning_DataItem,
+
+    -- ** MachineTypeList
+    MachineTypeList (..),
+    newMachineTypeList,
+
+    -- ** MachineTypeList_Warning
+    MachineTypeList_Warning (..),
+    newMachineTypeList_Warning,
+
+    -- ** MachineTypeList_Warning_Code
+    MachineTypeList_Warning_Code (..),
+
+    -- ** MachineTypeList_Warning_DataItem
+    MachineTypeList_Warning_DataItem (..),
+    newMachineTypeList_Warning_DataItem,
+
+    -- ** MachineTypesScopedList
+    MachineTypesScopedList (..),
+    newMachineTypesScopedList,
+
+    -- ** MachineTypesScopedList_Warning
+    MachineTypesScopedList_Warning (..),
+    newMachineTypesScopedList_Warning,
+
+    -- ** MachineTypesScopedList_Warning_Code
+    MachineTypesScopedList_Warning_Code (..),
+
+    -- ** MachineTypesScopedList_Warning_DataItem
+    MachineTypesScopedList_Warning_DataItem (..),
+    newMachineTypesScopedList_Warning_DataItem,
+
+    -- ** ManagedInstance
+    ManagedInstance (..),
+    newManagedInstance,
+
+    -- ** ManagedInstance_CurrentAction
+    ManagedInstance_CurrentAction (..),
+
+    -- ** ManagedInstance_InstanceStatus
+    ManagedInstance_InstanceStatus (..),
+
+    -- ** ManagedInstanceInstanceHealth
+    ManagedInstanceInstanceHealth (..),
+    newManagedInstanceInstanceHealth,
+
+    -- ** ManagedInstanceInstanceHealth_DetailedHealthState
+    ManagedInstanceInstanceHealth_DetailedHealthState (..),
+
+    -- ** ManagedInstanceLastAttempt
+    ManagedInstanceLastAttempt (..),
+    newManagedInstanceLastAttempt,
+
+    -- ** ManagedInstanceLastAttempt_Errors
+    ManagedInstanceLastAttempt_Errors (..),
+    newManagedInstanceLastAttempt_Errors,
+
+    -- ** ManagedInstanceLastAttempt_Errors_ErrorsItem
+    ManagedInstanceLastAttempt_Errors_ErrorsItem (..),
+    newManagedInstanceLastAttempt_Errors_ErrorsItem,
+
+    -- ** ManagedInstanceVersion
+    ManagedInstanceVersion (..),
+    newManagedInstanceVersion,
+
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
+
+    -- ** Metadata_ItemsItem
+    Metadata_ItemsItem (..),
+    newMetadata_ItemsItem,
+
+    -- ** MetadataFilter
+    MetadataFilter (..),
+    newMetadataFilter,
+
+    -- ** MetadataFilter_FilterMatchCriteria
+    MetadataFilter_FilterMatchCriteria (..),
+
+    -- ** MetadataFilterLabelMatch
+    MetadataFilterLabelMatch (..),
+    newMetadataFilterLabelMatch,
+
+    -- ** NamedPort
+    NamedPort (..),
+    newNamedPort,
+
+    -- ** Network
+    Network (..),
+    newNetwork,
+
+    -- ** Network_NetworkFirewallPolicyEnforcementOrder
+    Network_NetworkFirewallPolicyEnforcementOrder (..),
+
+    -- ** NetworkEndpoint
+    NetworkEndpoint (..),
+    newNetworkEndpoint,
+
+    -- ** NetworkEndpoint_Annotations
+    NetworkEndpoint_Annotations (..),
+    newNetworkEndpoint_Annotations,
+
+    -- ** NetworkEndpointGroup
+    NetworkEndpointGroup (..),
+    newNetworkEndpointGroup,
+
+    -- ** NetworkEndpointGroup_Annotations
+    NetworkEndpointGroup_Annotations (..),
+    newNetworkEndpointGroup_Annotations,
+
+    -- ** NetworkEndpointGroup_NetworkEndpointType
+    NetworkEndpointGroup_NetworkEndpointType (..),
+
+    -- ** NetworkEndpointGroupAggregatedList
+    NetworkEndpointGroupAggregatedList (..),
+    newNetworkEndpointGroupAggregatedList,
+
+    -- ** NetworkEndpointGroupAggregatedList_Items
+    NetworkEndpointGroupAggregatedList_Items (..),
+    newNetworkEndpointGroupAggregatedList_Items,
+
+    -- ** NetworkEndpointGroupAggregatedList_Warning
+    NetworkEndpointGroupAggregatedList_Warning (..),
+    newNetworkEndpointGroupAggregatedList_Warning,
+
+    -- ** NetworkEndpointGroupAggregatedList_Warning_Code
+    NetworkEndpointGroupAggregatedList_Warning_Code (..),
+
+    -- ** NetworkEndpointGroupAggregatedList_Warning_DataItem
+    NetworkEndpointGroupAggregatedList_Warning_DataItem (..),
+    newNetworkEndpointGroupAggregatedList_Warning_DataItem,
+
+    -- ** NetworkEndpointGroupAppEngine
+    NetworkEndpointGroupAppEngine (..),
+    newNetworkEndpointGroupAppEngine,
+
+    -- ** NetworkEndpointGroupCloudFunction
+    NetworkEndpointGroupCloudFunction (..),
+    newNetworkEndpointGroupCloudFunction,
+
+    -- ** NetworkEndpointGroupCloudRun
+    NetworkEndpointGroupCloudRun (..),
+    newNetworkEndpointGroupCloudRun,
+
+    -- ** NetworkEndpointGroupList
+    NetworkEndpointGroupList (..),
+    newNetworkEndpointGroupList,
+
+    -- ** NetworkEndpointGroupList_Warning
+    NetworkEndpointGroupList_Warning (..),
+    newNetworkEndpointGroupList_Warning,
+
+    -- ** NetworkEndpointGroupList_Warning_Code
+    NetworkEndpointGroupList_Warning_Code (..),
+
+    -- ** NetworkEndpointGroupList_Warning_DataItem
+    NetworkEndpointGroupList_Warning_DataItem (..),
+    newNetworkEndpointGroupList_Warning_DataItem,
+
+    -- ** NetworkEndpointGroupsAttachEndpointsRequest
+    NetworkEndpointGroupsAttachEndpointsRequest (..),
+    newNetworkEndpointGroupsAttachEndpointsRequest,
+
+    -- ** NetworkEndpointGroupsDetachEndpointsRequest
+    NetworkEndpointGroupsDetachEndpointsRequest (..),
+    newNetworkEndpointGroupsDetachEndpointsRequest,
+
+    -- ** NetworkEndpointGroupsListEndpointsRequest
+    NetworkEndpointGroupsListEndpointsRequest (..),
+    newNetworkEndpointGroupsListEndpointsRequest,
+
+    -- ** NetworkEndpointGroupsListEndpointsRequest_HealthStatus
+    NetworkEndpointGroupsListEndpointsRequest_HealthStatus (..),
+
+    -- ** NetworkEndpointGroupsListNetworkEndpoints
+    NetworkEndpointGroupsListNetworkEndpoints (..),
+    newNetworkEndpointGroupsListNetworkEndpoints,
+
+    -- ** NetworkEndpointGroupsListNetworkEndpoints_Warning
+    NetworkEndpointGroupsListNetworkEndpoints_Warning (..),
+    newNetworkEndpointGroupsListNetworkEndpoints_Warning,
+
+    -- ** NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
+    NetworkEndpointGroupsListNetworkEndpoints_Warning_Code (..),
+
+    -- ** NetworkEndpointGroupsListNetworkEndpoints_Warning_DataItem
+    NetworkEndpointGroupsListNetworkEndpoints_Warning_DataItem (..),
+    newNetworkEndpointGroupsListNetworkEndpoints_Warning_DataItem,
+
+    -- ** NetworkEndpointGroupsScopedList
+    NetworkEndpointGroupsScopedList (..),
+    newNetworkEndpointGroupsScopedList,
+
+    -- ** NetworkEndpointGroupsScopedList_Warning
+    NetworkEndpointGroupsScopedList_Warning (..),
+    newNetworkEndpointGroupsScopedList_Warning,
+
+    -- ** NetworkEndpointGroupsScopedList_Warning_Code
+    NetworkEndpointGroupsScopedList_Warning_Code (..),
+
+    -- ** NetworkEndpointGroupsScopedList_Warning_DataItem
+    NetworkEndpointGroupsScopedList_Warning_DataItem (..),
+    newNetworkEndpointGroupsScopedList_Warning_DataItem,
+
+    -- ** NetworkEndpointWithHealthStatus
+    NetworkEndpointWithHealthStatus (..),
+    newNetworkEndpointWithHealthStatus,
+
+    -- ** NetworkInterface
+    NetworkInterface (..),
+    newNetworkInterface,
+
+    -- ** NetworkInterface_Ipv6AccessType
+    NetworkInterface_Ipv6AccessType (..),
+
+    -- ** NetworkInterface_NicType
+    NetworkInterface_NicType (..),
+
+    -- ** NetworkInterface_StackType
+    NetworkInterface_StackType (..),
+
+    -- ** NetworkList
+    NetworkList (..),
+    newNetworkList,
+
+    -- ** NetworkList_Warning
+    NetworkList_Warning (..),
+    newNetworkList_Warning,
+
+    -- ** NetworkList_Warning_Code
+    NetworkList_Warning_Code (..),
+
+    -- ** NetworkList_Warning_DataItem
+    NetworkList_Warning_DataItem (..),
+    newNetworkList_Warning_DataItem,
+
+    -- ** NetworkPeering
+    NetworkPeering (..),
+    newNetworkPeering,
+
+    -- ** NetworkPeering_State
+    NetworkPeering_State (..),
+
+    -- ** NetworkPerformanceConfig
+    NetworkPerformanceConfig (..),
+    newNetworkPerformanceConfig,
+
+    -- ** NetworkPerformanceConfig_TotalEgressBandwidthTier
+    NetworkPerformanceConfig_TotalEgressBandwidthTier (..),
+
+    -- ** NetworkRoutingConfig
+    NetworkRoutingConfig (..),
+    newNetworkRoutingConfig,
+
+    -- ** NetworkRoutingConfig_RoutingMode
+    NetworkRoutingConfig_RoutingMode (..),
+
+    -- ** NetworksAddPeeringRequest
+    NetworksAddPeeringRequest (..),
+    newNetworksAddPeeringRequest,
+
+    -- ** NetworksGetEffectiveFirewallsResponse
+    NetworksGetEffectiveFirewallsResponse (..),
+    newNetworksGetEffectiveFirewallsResponse,
+
+    -- ** NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
+    NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy (..),
+    newNetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy,
+
+    -- ** NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+    NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type (..),
+
+    -- ** NetworksRemovePeeringRequest
+    NetworksRemovePeeringRequest (..),
+    newNetworksRemovePeeringRequest,
+
+    -- ** NetworksUpdatePeeringRequest
+    NetworksUpdatePeeringRequest (..),
+    newNetworksUpdatePeeringRequest,
+
+    -- ** NodeGroup
+    NodeGroup (..),
+    newNodeGroup,
+
+    -- ** NodeGroup_MaintenancePolicy
+    NodeGroup_MaintenancePolicy (..),
+
+    -- ** NodeGroup_Status
+    NodeGroup_Status (..),
+
+    -- ** NodeGroupAggregatedList
+    NodeGroupAggregatedList (..),
+    newNodeGroupAggregatedList,
+
+    -- ** NodeGroupAggregatedList_Items
+    NodeGroupAggregatedList_Items (..),
+    newNodeGroupAggregatedList_Items,
+
+    -- ** NodeGroupAggregatedList_Warning
+    NodeGroupAggregatedList_Warning (..),
+    newNodeGroupAggregatedList_Warning,
+
+    -- ** NodeGroupAggregatedList_Warning_Code
+    NodeGroupAggregatedList_Warning_Code (..),
+
+    -- ** NodeGroupAggregatedList_Warning_DataItem
+    NodeGroupAggregatedList_Warning_DataItem (..),
+    newNodeGroupAggregatedList_Warning_DataItem,
+
+    -- ** NodeGroupAutoscalingPolicy
+    NodeGroupAutoscalingPolicy (..),
+    newNodeGroupAutoscalingPolicy,
+
+    -- ** NodeGroupAutoscalingPolicy_Mode
+    NodeGroupAutoscalingPolicy_Mode (..),
+
+    -- ** NodeGroupList
+    NodeGroupList (..),
+    newNodeGroupList,
+
+    -- ** NodeGroupList_Warning
+    NodeGroupList_Warning (..),
+    newNodeGroupList_Warning,
+
+    -- ** NodeGroupList_Warning_Code
+    NodeGroupList_Warning_Code (..),
+
+    -- ** NodeGroupList_Warning_DataItem
+    NodeGroupList_Warning_DataItem (..),
+    newNodeGroupList_Warning_DataItem,
+
+    -- ** NodeGroupMaintenanceWindow
+    NodeGroupMaintenanceWindow (..),
+    newNodeGroupMaintenanceWindow,
+
+    -- ** NodeGroupNode
+    NodeGroupNode (..),
+    newNodeGroupNode,
+
+    -- ** NodeGroupNode_CpuOvercommitType
+    NodeGroupNode_CpuOvercommitType (..),
+
+    -- ** NodeGroupNode_Status
+    NodeGroupNode_Status (..),
+
+    -- ** NodeGroupsAddNodesRequest
+    NodeGroupsAddNodesRequest (..),
+    newNodeGroupsAddNodesRequest,
+
+    -- ** NodeGroupsDeleteNodesRequest
+    NodeGroupsDeleteNodesRequest (..),
+    newNodeGroupsDeleteNodesRequest,
+
+    -- ** NodeGroupsListNodes
+    NodeGroupsListNodes (..),
+    newNodeGroupsListNodes,
+
+    -- ** NodeGroupsListNodes_Warning
+    NodeGroupsListNodes_Warning (..),
+    newNodeGroupsListNodes_Warning,
+
+    -- ** NodeGroupsListNodes_Warning_Code
+    NodeGroupsListNodes_Warning_Code (..),
+
+    -- ** NodeGroupsListNodes_Warning_DataItem
+    NodeGroupsListNodes_Warning_DataItem (..),
+    newNodeGroupsListNodes_Warning_DataItem,
+
+    -- ** NodeGroupsScopedList
+    NodeGroupsScopedList (..),
+    newNodeGroupsScopedList,
+
+    -- ** NodeGroupsScopedList_Warning
+    NodeGroupsScopedList_Warning (..),
+    newNodeGroupsScopedList_Warning,
+
+    -- ** NodeGroupsScopedList_Warning_Code
+    NodeGroupsScopedList_Warning_Code (..),
+
+    -- ** NodeGroupsScopedList_Warning_DataItem
+    NodeGroupsScopedList_Warning_DataItem (..),
+    newNodeGroupsScopedList_Warning_DataItem,
+
+    -- ** NodeGroupsSetNodeTemplateRequest
+    NodeGroupsSetNodeTemplateRequest (..),
+    newNodeGroupsSetNodeTemplateRequest,
+
+    -- ** NodeTemplate
+    NodeTemplate (..),
+    newNodeTemplate,
+
+    -- ** NodeTemplate_CpuOvercommitType
+    NodeTemplate_CpuOvercommitType (..),
+
+    -- ** NodeTemplate_NodeAffinityLabels
+    NodeTemplate_NodeAffinityLabels (..),
+    newNodeTemplate_NodeAffinityLabels,
+
+    -- ** NodeTemplate_Status
+    NodeTemplate_Status (..),
+
+    -- ** NodeTemplateAggregatedList
+    NodeTemplateAggregatedList (..),
+    newNodeTemplateAggregatedList,
+
+    -- ** NodeTemplateAggregatedList_Items
+    NodeTemplateAggregatedList_Items (..),
+    newNodeTemplateAggregatedList_Items,
+
+    -- ** NodeTemplateAggregatedList_Warning
+    NodeTemplateAggregatedList_Warning (..),
+    newNodeTemplateAggregatedList_Warning,
+
+    -- ** NodeTemplateAggregatedList_Warning_Code
+    NodeTemplateAggregatedList_Warning_Code (..),
+
+    -- ** NodeTemplateAggregatedList_Warning_DataItem
+    NodeTemplateAggregatedList_Warning_DataItem (..),
+    newNodeTemplateAggregatedList_Warning_DataItem,
+
+    -- ** NodeTemplateList
+    NodeTemplateList (..),
+    newNodeTemplateList,
+
+    -- ** NodeTemplateList_Warning
+    NodeTemplateList_Warning (..),
+    newNodeTemplateList_Warning,
+
+    -- ** NodeTemplateList_Warning_Code
+    NodeTemplateList_Warning_Code (..),
+
+    -- ** NodeTemplateList_Warning_DataItem
+    NodeTemplateList_Warning_DataItem (..),
+    newNodeTemplateList_Warning_DataItem,
+
+    -- ** NodeTemplateNodeTypeFlexibility
+    NodeTemplateNodeTypeFlexibility (..),
+    newNodeTemplateNodeTypeFlexibility,
+
+    -- ** NodeTemplatesScopedList
+    NodeTemplatesScopedList (..),
+    newNodeTemplatesScopedList,
+
+    -- ** NodeTemplatesScopedList_Warning
+    NodeTemplatesScopedList_Warning (..),
+    newNodeTemplatesScopedList_Warning,
+
+    -- ** NodeTemplatesScopedList_Warning_Code
+    NodeTemplatesScopedList_Warning_Code (..),
+
+    -- ** NodeTemplatesScopedList_Warning_DataItem
+    NodeTemplatesScopedList_Warning_DataItem (..),
+    newNodeTemplatesScopedList_Warning_DataItem,
+
+    -- ** NodeType
+    NodeType (..),
+    newNodeType,
+
+    -- ** NodeTypeAggregatedList
+    NodeTypeAggregatedList (..),
+    newNodeTypeAggregatedList,
+
+    -- ** NodeTypeAggregatedList_Items
+    NodeTypeAggregatedList_Items (..),
+    newNodeTypeAggregatedList_Items,
+
+    -- ** NodeTypeAggregatedList_Warning
+    NodeTypeAggregatedList_Warning (..),
+    newNodeTypeAggregatedList_Warning,
+
+    -- ** NodeTypeAggregatedList_Warning_Code
+    NodeTypeAggregatedList_Warning_Code (..),
+
+    -- ** NodeTypeAggregatedList_Warning_DataItem
+    NodeTypeAggregatedList_Warning_DataItem (..),
+    newNodeTypeAggregatedList_Warning_DataItem,
+
+    -- ** NodeTypeList
+    NodeTypeList (..),
+    newNodeTypeList,
+
+    -- ** NodeTypeList_Warning
+    NodeTypeList_Warning (..),
+    newNodeTypeList_Warning,
+
+    -- ** NodeTypeList_Warning_Code
+    NodeTypeList_Warning_Code (..),
+
+    -- ** NodeTypeList_Warning_DataItem
+    NodeTypeList_Warning_DataItem (..),
+    newNodeTypeList_Warning_DataItem,
+
+    -- ** NodeTypesScopedList
+    NodeTypesScopedList (..),
+    newNodeTypesScopedList,
+
+    -- ** NodeTypesScopedList_Warning
+    NodeTypesScopedList_Warning (..),
+    newNodeTypesScopedList_Warning,
+
+    -- ** NodeTypesScopedList_Warning_Code
+    NodeTypesScopedList_Warning_Code (..),
+
+    -- ** NodeTypesScopedList_Warning_DataItem
+    NodeTypesScopedList_Warning_DataItem (..),
+    newNodeTypesScopedList_Warning_DataItem,
+
+    -- ** NotificationEndpoint
+    NotificationEndpoint (..),
+    newNotificationEndpoint,
+
+    -- ** NotificationEndpointGrpcSettings
+    NotificationEndpointGrpcSettings (..),
+    newNotificationEndpointGrpcSettings,
+
+    -- ** NotificationEndpointList
+    NotificationEndpointList (..),
+    newNotificationEndpointList,
+
+    -- ** NotificationEndpointList_Warning
+    NotificationEndpointList_Warning (..),
+    newNotificationEndpointList_Warning,
+
+    -- ** NotificationEndpointList_Warning_Code
+    NotificationEndpointList_Warning_Code (..),
+
+    -- ** NotificationEndpointList_Warning_DataItem
+    NotificationEndpointList_Warning_DataItem (..),
+    newNotificationEndpointList_Warning_DataItem,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Error
+    Operation_Error (..),
+    newOperation_Error,
+
+    -- ** Operation_Error_ErrorsItem
+    Operation_Error_ErrorsItem (..),
+    newOperation_Error_ErrorsItem,
+
+    -- ** Operation_Status
+    Operation_Status (..),
+
+    -- ** Operation_WarningsItem
+    Operation_WarningsItem (..),
+    newOperation_WarningsItem,
+
+    -- ** Operation_WarningsItem_Code
+    Operation_WarningsItem_Code (..),
+
+    -- ** Operation_WarningsItem_DataItem
+    Operation_WarningsItem_DataItem (..),
+    newOperation_WarningsItem_DataItem,
+
+    -- ** OperationAggregatedList
+    OperationAggregatedList (..),
+    newOperationAggregatedList,
+
+    -- ** OperationAggregatedList_Items
+    OperationAggregatedList_Items (..),
+    newOperationAggregatedList_Items,
+
+    -- ** OperationAggregatedList_Warning
+    OperationAggregatedList_Warning (..),
+    newOperationAggregatedList_Warning,
+
+    -- ** OperationAggregatedList_Warning_Code
+    OperationAggregatedList_Warning_Code (..),
+
+    -- ** OperationAggregatedList_Warning_DataItem
+    OperationAggregatedList_Warning_DataItem (..),
+    newOperationAggregatedList_Warning_DataItem,
+
+    -- ** OperationList
+    OperationList (..),
+    newOperationList,
+
+    -- ** OperationList_Warning
+    OperationList_Warning (..),
+    newOperationList_Warning,
+
+    -- ** OperationList_Warning_Code
+    OperationList_Warning_Code (..),
+
+    -- ** OperationList_Warning_DataItem
+    OperationList_Warning_DataItem (..),
+    newOperationList_Warning_DataItem,
+
+    -- ** OperationsScopedList
+    OperationsScopedList (..),
+    newOperationsScopedList,
+
+    -- ** OperationsScopedList_Warning
+    OperationsScopedList_Warning (..),
+    newOperationsScopedList_Warning,
+
+    -- ** OperationsScopedList_Warning_Code
+    OperationsScopedList_Warning_Code (..),
+
+    -- ** OperationsScopedList_Warning_DataItem
+    OperationsScopedList_Warning_DataItem (..),
+    newOperationsScopedList_Warning_DataItem,
+
+    -- ** OutlierDetection
+    OutlierDetection (..),
+    newOutlierDetection,
+
+    -- ** PacketIntervals
+    PacketIntervals (..),
+    newPacketIntervals,
+
+    -- ** PacketIntervals_Duration
+    PacketIntervals_Duration (..),
+
+    -- ** PacketIntervals_Type
+    PacketIntervals_Type (..),
 
     -- ** PacketMirroring
-    , PacketMirroring
-    , packetMirroring
-    , pacPriority
-    , pacKind
-    , pacNetwork
-    , pacMirroredResources
-    , pacEnable
-    , pacCollectorIlb
-    , pacSelfLink
-    , pacName
-    , pacCreationTimestamp
-    , pacId
-    , pacFilter
-    , pacRegion
-    , pacDescription
+    PacketMirroring (..),
+    newPacketMirroring,
 
-    -- ** InstanceGroupManagerUpdatePolicyMinimalAction
-    , InstanceGroupManagerUpdatePolicyMinimalAction (..)
+    -- ** PacketMirroring_Enable
+    PacketMirroring_Enable (..),
 
-    -- ** BackendServiceListWarning
-    , BackendServiceListWarning
-    , backendServiceListWarning
-    , bslwData
-    , bslwCode
-    , bslwMessage
+    -- ** PacketMirroringAggregatedList
+    PacketMirroringAggregatedList (..),
+    newPacketMirroringAggregatedList,
 
-    -- ** PacketMirroringsScopedListWarningCode
-    , PacketMirroringsScopedListWarningCode (..)
+    -- ** PacketMirroringAggregatedList_Items
+    PacketMirroringAggregatedList_Items (..),
+    newPacketMirroringAggregatedList_Items,
 
-    -- ** BackendServiceAggregatedListWarningCode
-    , BackendServiceAggregatedListWarningCode (..)
+    -- ** PacketMirroringAggregatedList_Warning
+    PacketMirroringAggregatedList_Warning (..),
+    newPacketMirroringAggregatedList_Warning,
 
-    -- ** VPNGatewayAggregatedListItems
-    , VPNGatewayAggregatedListItems
-    , vpnGatewayAggregatedListItems
-    , vgaliAddtional
+    -- ** PacketMirroringAggregatedList_Warning_Code
+    PacketMirroringAggregatedList_Warning_Code (..),
 
-    -- ** AutoscalingPolicyMode
-    , AutoscalingPolicyMode (..)
-    ) where
+    -- ** PacketMirroringAggregatedList_Warning_DataItem
+    PacketMirroringAggregatedList_Warning_DataItem (..),
+    newPacketMirroringAggregatedList_Warning_DataItem,
 
-import Network.Google.Prelude
+    -- ** PacketMirroringFilter
+    PacketMirroringFilter (..),
+    newPacketMirroringFilter,
+
+    -- ** PacketMirroringFilter_Direction
+    PacketMirroringFilter_Direction (..),
+
+    -- ** PacketMirroringForwardingRuleInfo
+    PacketMirroringForwardingRuleInfo (..),
+    newPacketMirroringForwardingRuleInfo,
+
+    -- ** PacketMirroringList
+    PacketMirroringList (..),
+    newPacketMirroringList,
+
+    -- ** PacketMirroringList_Warning
+    PacketMirroringList_Warning (..),
+    newPacketMirroringList_Warning,
+
+    -- ** PacketMirroringList_Warning_Code
+    PacketMirroringList_Warning_Code (..),
+
+    -- ** PacketMirroringList_Warning_DataItem
+    PacketMirroringList_Warning_DataItem (..),
+    newPacketMirroringList_Warning_DataItem,
+
+    -- ** PacketMirroringMirroredResourceInfo
+    PacketMirroringMirroredResourceInfo (..),
+    newPacketMirroringMirroredResourceInfo,
+
+    -- ** PacketMirroringMirroredResourceInfoInstanceInfo
+    PacketMirroringMirroredResourceInfoInstanceInfo (..),
+    newPacketMirroringMirroredResourceInfoInstanceInfo,
+
+    -- ** PacketMirroringMirroredResourceInfoSubnetInfo
+    PacketMirroringMirroredResourceInfoSubnetInfo (..),
+    newPacketMirroringMirroredResourceInfoSubnetInfo,
+
+    -- ** PacketMirroringNetworkInfo
+    PacketMirroringNetworkInfo (..),
+    newPacketMirroringNetworkInfo,
+
+    -- ** PacketMirroringsScopedList
+    PacketMirroringsScopedList (..),
+    newPacketMirroringsScopedList,
+
+    -- ** PacketMirroringsScopedList_Warning
+    PacketMirroringsScopedList_Warning (..),
+    newPacketMirroringsScopedList_Warning,
+
+    -- ** PacketMirroringsScopedList_Warning_Code
+    PacketMirroringsScopedList_Warning_Code (..),
+
+    -- ** PacketMirroringsScopedList_Warning_DataItem
+    PacketMirroringsScopedList_Warning_DataItem (..),
+    newPacketMirroringsScopedList_Warning_DataItem,
+
+    -- ** PathMatcher
+    PathMatcher (..),
+    newPathMatcher,
+
+    -- ** PathRule
+    PathRule (..),
+    newPathRule,
+
+    -- ** PerInstanceConfig
+    PerInstanceConfig (..),
+    newPerInstanceConfig,
+
+    -- ** PerInstanceConfig_Status
+    PerInstanceConfig_Status (..),
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PreconfiguredWafSet
+    PreconfiguredWafSet (..),
+    newPreconfiguredWafSet,
+
+    -- ** PreservedState
+    PreservedState (..),
+    newPreservedState,
+
+    -- ** PreservedState_Disks
+    PreservedState_Disks (..),
+    newPreservedState_Disks,
+
+    -- ** PreservedState_Metadata
+    PreservedState_Metadata (..),
+    newPreservedState_Metadata,
+
+    -- ** PreservedStatePreservedDisk
+    PreservedStatePreservedDisk (..),
+    newPreservedStatePreservedDisk,
+
+    -- ** PreservedStatePreservedDisk_AutoDelete
+    PreservedStatePreservedDisk_AutoDelete (..),
+
+    -- ** PreservedStatePreservedDisk_Mode
+    PreservedStatePreservedDisk_Mode (..),
+
+    -- ** Project
+    Project (..),
+    newProject,
+
+    -- ** Project_DefaultNetworkTier
+    Project_DefaultNetworkTier (..),
+
+    -- ** Project_XpnProjectStatus
+    Project_XpnProjectStatus (..),
+
+    -- ** ProjectsDisableXpnResourceRequest
+    ProjectsDisableXpnResourceRequest (..),
+    newProjectsDisableXpnResourceRequest,
+
+    -- ** ProjectsEnableXpnResourceRequest
+    ProjectsEnableXpnResourceRequest (..),
+    newProjectsEnableXpnResourceRequest,
+
+    -- ** ProjectsGetXpnResources
+    ProjectsGetXpnResources (..),
+    newProjectsGetXpnResources,
+
+    -- ** ProjectsListXpnHostsRequest
+    ProjectsListXpnHostsRequest (..),
+    newProjectsListXpnHostsRequest,
+
+    -- ** ProjectsSetDefaultNetworkTierRequest
+    ProjectsSetDefaultNetworkTierRequest (..),
+    newProjectsSetDefaultNetworkTierRequest,
+
+    -- ** ProjectsSetDefaultNetworkTierRequest_NetworkTier
+    ProjectsSetDefaultNetworkTierRequest_NetworkTier (..),
+
+    -- ** PublicAdvertisedPrefix
+    PublicAdvertisedPrefix (..),
+    newPublicAdvertisedPrefix,
+
+    -- ** PublicAdvertisedPrefix_Status
+    PublicAdvertisedPrefix_Status (..),
+
+    -- ** PublicAdvertisedPrefixList
+    PublicAdvertisedPrefixList (..),
+    newPublicAdvertisedPrefixList,
+
+    -- ** PublicAdvertisedPrefixList_Warning
+    PublicAdvertisedPrefixList_Warning (..),
+    newPublicAdvertisedPrefixList_Warning,
+
+    -- ** PublicAdvertisedPrefixList_Warning_Code
+    PublicAdvertisedPrefixList_Warning_Code (..),
+
+    -- ** PublicAdvertisedPrefixList_Warning_DataItem
+    PublicAdvertisedPrefixList_Warning_DataItem (..),
+    newPublicAdvertisedPrefixList_Warning_DataItem,
+
+    -- ** PublicAdvertisedPrefixPublicDelegatedPrefix
+    PublicAdvertisedPrefixPublicDelegatedPrefix (..),
+    newPublicAdvertisedPrefixPublicDelegatedPrefix,
+
+    -- ** PublicDelegatedPrefix
+    PublicDelegatedPrefix (..),
+    newPublicDelegatedPrefix,
+
+    -- ** PublicDelegatedPrefix_Status
+    PublicDelegatedPrefix_Status (..),
+
+    -- ** PublicDelegatedPrefixAggregatedList
+    PublicDelegatedPrefixAggregatedList (..),
+    newPublicDelegatedPrefixAggregatedList,
+
+    -- ** PublicDelegatedPrefixAggregatedList_Items
+    PublicDelegatedPrefixAggregatedList_Items (..),
+    newPublicDelegatedPrefixAggregatedList_Items,
+
+    -- ** PublicDelegatedPrefixAggregatedList_Warning
+    PublicDelegatedPrefixAggregatedList_Warning (..),
+    newPublicDelegatedPrefixAggregatedList_Warning,
+
+    -- ** PublicDelegatedPrefixAggregatedList_Warning_Code
+    PublicDelegatedPrefixAggregatedList_Warning_Code (..),
+
+    -- ** PublicDelegatedPrefixAggregatedList_Warning_DataItem
+    PublicDelegatedPrefixAggregatedList_Warning_DataItem (..),
+    newPublicDelegatedPrefixAggregatedList_Warning_DataItem,
+
+    -- ** PublicDelegatedPrefixList
+    PublicDelegatedPrefixList (..),
+    newPublicDelegatedPrefixList,
+
+    -- ** PublicDelegatedPrefixList_Warning
+    PublicDelegatedPrefixList_Warning (..),
+    newPublicDelegatedPrefixList_Warning,
+
+    -- ** PublicDelegatedPrefixList_Warning_Code
+    PublicDelegatedPrefixList_Warning_Code (..),
+
+    -- ** PublicDelegatedPrefixList_Warning_DataItem
+    PublicDelegatedPrefixList_Warning_DataItem (..),
+    newPublicDelegatedPrefixList_Warning_DataItem,
+
+    -- ** PublicDelegatedPrefixPublicDelegatedSubPrefix
+    PublicDelegatedPrefixPublicDelegatedSubPrefix (..),
+    newPublicDelegatedPrefixPublicDelegatedSubPrefix,
+
+    -- ** PublicDelegatedPrefixPublicDelegatedSubPrefix_Status
+    PublicDelegatedPrefixPublicDelegatedSubPrefix_Status (..),
+
+    -- ** PublicDelegatedPrefixesScopedList
+    PublicDelegatedPrefixesScopedList (..),
+    newPublicDelegatedPrefixesScopedList,
+
+    -- ** PublicDelegatedPrefixesScopedList_Warning
+    PublicDelegatedPrefixesScopedList_Warning (..),
+    newPublicDelegatedPrefixesScopedList_Warning,
+
+    -- ** PublicDelegatedPrefixesScopedList_Warning_Code
+    PublicDelegatedPrefixesScopedList_Warning_Code (..),
+
+    -- ** PublicDelegatedPrefixesScopedList_Warning_DataItem
+    PublicDelegatedPrefixesScopedList_Warning_DataItem (..),
+    newPublicDelegatedPrefixesScopedList_Warning_DataItem,
+
+    -- ** Quota
+    Quota (..),
+    newQuota,
+
+    -- ** Quota_Metric
+    Quota_Metric (..),
+
+    -- ** Reference
+    Reference (..),
+    newReference,
+
+    -- ** Region
+    Region (..),
+    newRegion,
+
+    -- ** Region_Status
+    Region_Status (..),
+
+    -- ** RegionAutoscalerList
+    RegionAutoscalerList (..),
+    newRegionAutoscalerList,
+
+    -- ** RegionAutoscalerList_Warning
+    RegionAutoscalerList_Warning (..),
+    newRegionAutoscalerList_Warning,
+
+    -- ** RegionAutoscalerList_Warning_Code
+    RegionAutoscalerList_Warning_Code (..),
+
+    -- ** RegionAutoscalerList_Warning_DataItem
+    RegionAutoscalerList_Warning_DataItem (..),
+    newRegionAutoscalerList_Warning_DataItem,
+
+    -- ** RegionDiskTypeList
+    RegionDiskTypeList (..),
+    newRegionDiskTypeList,
+
+    -- ** RegionDiskTypeList_Warning
+    RegionDiskTypeList_Warning (..),
+    newRegionDiskTypeList_Warning,
+
+    -- ** RegionDiskTypeList_Warning_Code
+    RegionDiskTypeList_Warning_Code (..),
+
+    -- ** RegionDiskTypeList_Warning_DataItem
+    RegionDiskTypeList_Warning_DataItem (..),
+    newRegionDiskTypeList_Warning_DataItem,
+
+    -- ** RegionDisksAddResourcePoliciesRequest
+    RegionDisksAddResourcePoliciesRequest (..),
+    newRegionDisksAddResourcePoliciesRequest,
+
+    -- ** RegionDisksRemoveResourcePoliciesRequest
+    RegionDisksRemoveResourcePoliciesRequest (..),
+    newRegionDisksRemoveResourcePoliciesRequest,
+
+    -- ** RegionDisksResizeRequest
+    RegionDisksResizeRequest (..),
+    newRegionDisksResizeRequest,
+
+    -- ** RegionInstanceGroupList
+    RegionInstanceGroupList (..),
+    newRegionInstanceGroupList,
+
+    -- ** RegionInstanceGroupList_Warning
+    RegionInstanceGroupList_Warning (..),
+    newRegionInstanceGroupList_Warning,
+
+    -- ** RegionInstanceGroupList_Warning_Code
+    RegionInstanceGroupList_Warning_Code (..),
+
+    -- ** RegionInstanceGroupList_Warning_DataItem
+    RegionInstanceGroupList_Warning_DataItem (..),
+    newRegionInstanceGroupList_Warning_DataItem,
+
+    -- ** RegionInstanceGroupManagerDeleteInstanceConfigReq
+    RegionInstanceGroupManagerDeleteInstanceConfigReq (..),
+    newRegionInstanceGroupManagerDeleteInstanceConfigReq,
+
+    -- ** RegionInstanceGroupManagerList
+    RegionInstanceGroupManagerList (..),
+    newRegionInstanceGroupManagerList,
+
+    -- ** RegionInstanceGroupManagerList_Warning
+    RegionInstanceGroupManagerList_Warning (..),
+    newRegionInstanceGroupManagerList_Warning,
+
+    -- ** RegionInstanceGroupManagerList_Warning_Code
+    RegionInstanceGroupManagerList_Warning_Code (..),
+
+    -- ** RegionInstanceGroupManagerList_Warning_DataItem
+    RegionInstanceGroupManagerList_Warning_DataItem (..),
+    newRegionInstanceGroupManagerList_Warning_DataItem,
+
+    -- ** RegionInstanceGroupManagerPatchInstanceConfigReq
+    RegionInstanceGroupManagerPatchInstanceConfigReq (..),
+    newRegionInstanceGroupManagerPatchInstanceConfigReq,
+
+    -- ** RegionInstanceGroupManagerUpdateInstanceConfigReq
+    RegionInstanceGroupManagerUpdateInstanceConfigReq (..),
+    newRegionInstanceGroupManagerUpdateInstanceConfigReq,
+
+    -- ** RegionInstanceGroupManagersAbandonInstancesRequest
+    RegionInstanceGroupManagersAbandonInstancesRequest (..),
+    newRegionInstanceGroupManagersAbandonInstancesRequest,
+
+    -- ** RegionInstanceGroupManagersApplyUpdatesRequest
+    RegionInstanceGroupManagersApplyUpdatesRequest (..),
+    newRegionInstanceGroupManagersApplyUpdatesRequest,
+
+    -- ** RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction
+    RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction (..),
+
+    -- ** RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
+    RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction (..),
+
+    -- ** RegionInstanceGroupManagersCreateInstancesRequest
+    RegionInstanceGroupManagersCreateInstancesRequest (..),
+    newRegionInstanceGroupManagersCreateInstancesRequest,
+
+    -- ** RegionInstanceGroupManagersDeleteInstancesRequest
+    RegionInstanceGroupManagersDeleteInstancesRequest (..),
+    newRegionInstanceGroupManagersDeleteInstancesRequest,
+
+    -- ** RegionInstanceGroupManagersListErrorsResponse
+    RegionInstanceGroupManagersListErrorsResponse (..),
+    newRegionInstanceGroupManagersListErrorsResponse,
+
+    -- ** RegionInstanceGroupManagersListInstanceConfigsResp
+    RegionInstanceGroupManagersListInstanceConfigsResp (..),
+    newRegionInstanceGroupManagersListInstanceConfigsResp,
+
+    -- ** RegionInstanceGroupManagersListInstanceConfigsResp_Warning
+    RegionInstanceGroupManagersListInstanceConfigsResp_Warning (..),
+    newRegionInstanceGroupManagersListInstanceConfigsResp_Warning,
+
+    -- ** RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
+    RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code (..),
+
+    -- ** RegionInstanceGroupManagersListInstanceConfigsResp_Warning_DataItem
+    RegionInstanceGroupManagersListInstanceConfigsResp_Warning_DataItem (..),
+    newRegionInstanceGroupManagersListInstanceConfigsResp_Warning_DataItem,
+
+    -- ** RegionInstanceGroupManagersListInstancesResponse
+    RegionInstanceGroupManagersListInstancesResponse (..),
+    newRegionInstanceGroupManagersListInstancesResponse,
+
+    -- ** RegionInstanceGroupManagersRecreateRequest
+    RegionInstanceGroupManagersRecreateRequest (..),
+    newRegionInstanceGroupManagersRecreateRequest,
+
+    -- ** RegionInstanceGroupManagersSetTargetPoolsRequest
+    RegionInstanceGroupManagersSetTargetPoolsRequest (..),
+    newRegionInstanceGroupManagersSetTargetPoolsRequest,
+
+    -- ** RegionInstanceGroupManagersSetTemplateRequest
+    RegionInstanceGroupManagersSetTemplateRequest (..),
+    newRegionInstanceGroupManagersSetTemplateRequest,
+
+    -- ** RegionInstanceGroupsListInstances
+    RegionInstanceGroupsListInstances (..),
+    newRegionInstanceGroupsListInstances,
+
+    -- ** RegionInstanceGroupsListInstances_Warning
+    RegionInstanceGroupsListInstances_Warning (..),
+    newRegionInstanceGroupsListInstances_Warning,
+
+    -- ** RegionInstanceGroupsListInstances_Warning_Code
+    RegionInstanceGroupsListInstances_Warning_Code (..),
+
+    -- ** RegionInstanceGroupsListInstances_Warning_DataItem
+    RegionInstanceGroupsListInstances_Warning_DataItem (..),
+    newRegionInstanceGroupsListInstances_Warning_DataItem,
+
+    -- ** RegionInstanceGroupsListInstancesRequest
+    RegionInstanceGroupsListInstancesRequest (..),
+    newRegionInstanceGroupsListInstancesRequest,
+
+    -- ** RegionInstanceGroupsListInstancesRequest_InstanceState
+    RegionInstanceGroupsListInstancesRequest_InstanceState (..),
+
+    -- ** RegionInstanceGroupsSetNamedPortsRequest
+    RegionInstanceGroupsSetNamedPortsRequest (..),
+    newRegionInstanceGroupsSetNamedPortsRequest,
+
+    -- ** RegionList
+    RegionList (..),
+    newRegionList,
+
+    -- ** RegionList_Warning
+    RegionList_Warning (..),
+    newRegionList_Warning,
+
+    -- ** RegionList_Warning_Code
+    RegionList_Warning_Code (..),
+
+    -- ** RegionList_Warning_DataItem
+    RegionList_Warning_DataItem (..),
+    newRegionList_Warning_DataItem,
+
+    -- ** RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse
+    RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse (..),
+    newRegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse,
+
+    -- ** RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
+    RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy (..),
+    newRegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy,
+
+    -- ** RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+    RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type (..),
+
+    -- ** RegionSetLabelsRequest
+    RegionSetLabelsRequest (..),
+    newRegionSetLabelsRequest,
+
+    -- ** RegionSetLabelsRequest_Labels
+    RegionSetLabelsRequest_Labels (..),
+    newRegionSetLabelsRequest_Labels,
+
+    -- ** RegionSetPolicyRequest
+    RegionSetPolicyRequest (..),
+    newRegionSetPolicyRequest,
+
+    -- ** RegionTargetHttpsProxiesSetSslCertificatesRequest
+    RegionTargetHttpsProxiesSetSslCertificatesRequest (..),
+    newRegionTargetHttpsProxiesSetSslCertificatesRequest,
+
+    -- ** RegionUrlMapsValidateRequest
+    RegionUrlMapsValidateRequest (..),
+    newRegionUrlMapsValidateRequest,
+
+    -- ** RequestMirrorPolicy
+    RequestMirrorPolicy (..),
+    newRequestMirrorPolicy,
+
+    -- ** Reservation
+    Reservation (..),
+    newReservation,
+
+    -- ** Reservation_Status
+    Reservation_Status (..),
+
+    -- ** ReservationAffinity
+    ReservationAffinity (..),
+    newReservationAffinity,
+
+    -- ** ReservationAffinity_ConsumeReservationType
+    ReservationAffinity_ConsumeReservationType (..),
+
+    -- ** ReservationAggregatedList
+    ReservationAggregatedList (..),
+    newReservationAggregatedList,
+
+    -- ** ReservationAggregatedList_Items
+    ReservationAggregatedList_Items (..),
+    newReservationAggregatedList_Items,
+
+    -- ** ReservationAggregatedList_Warning
+    ReservationAggregatedList_Warning (..),
+    newReservationAggregatedList_Warning,
+
+    -- ** ReservationAggregatedList_Warning_Code
+    ReservationAggregatedList_Warning_Code (..),
+
+    -- ** ReservationAggregatedList_Warning_DataItem
+    ReservationAggregatedList_Warning_DataItem (..),
+    newReservationAggregatedList_Warning_DataItem,
+
+    -- ** ReservationList
+    ReservationList (..),
+    newReservationList,
+
+    -- ** ReservationList_Warning
+    ReservationList_Warning (..),
+    newReservationList_Warning,
+
+    -- ** ReservationList_Warning_Code
+    ReservationList_Warning_Code (..),
+
+    -- ** ReservationList_Warning_DataItem
+    ReservationList_Warning_DataItem (..),
+    newReservationList_Warning_DataItem,
+
+    -- ** ReservationsResizeRequest
+    ReservationsResizeRequest (..),
+    newReservationsResizeRequest,
+
+    -- ** ReservationsScopedList
+    ReservationsScopedList (..),
+    newReservationsScopedList,
+
+    -- ** ReservationsScopedList_Warning
+    ReservationsScopedList_Warning (..),
+    newReservationsScopedList_Warning,
+
+    -- ** ReservationsScopedList_Warning_Code
+    ReservationsScopedList_Warning_Code (..),
+
+    -- ** ReservationsScopedList_Warning_DataItem
+    ReservationsScopedList_Warning_DataItem (..),
+    newReservationsScopedList_Warning_DataItem,
+
+    -- ** ResourceCommitment
+    ResourceCommitment (..),
+    newResourceCommitment,
+
+    -- ** ResourceCommitment_Type
+    ResourceCommitment_Type (..),
+
+    -- ** ResourceGroupReference
+    ResourceGroupReference (..),
+    newResourceGroupReference,
+
+    -- ** ResourcePoliciesScopedList
+    ResourcePoliciesScopedList (..),
+    newResourcePoliciesScopedList,
+
+    -- ** ResourcePoliciesScopedList_Warning
+    ResourcePoliciesScopedList_Warning (..),
+    newResourcePoliciesScopedList_Warning,
+
+    -- ** ResourcePoliciesScopedList_Warning_Code
+    ResourcePoliciesScopedList_Warning_Code (..),
+
+    -- ** ResourcePoliciesScopedList_Warning_DataItem
+    ResourcePoliciesScopedList_Warning_DataItem (..),
+    newResourcePoliciesScopedList_Warning_DataItem,
+
+    -- ** ResourcePolicy
+    ResourcePolicy (..),
+    newResourcePolicy,
+
+    -- ** ResourcePolicy_Status
+    ResourcePolicy_Status (..),
+
+    -- ** ResourcePolicyAggregatedList
+    ResourcePolicyAggregatedList (..),
+    newResourcePolicyAggregatedList,
+
+    -- ** ResourcePolicyAggregatedList_Items
+    ResourcePolicyAggregatedList_Items (..),
+    newResourcePolicyAggregatedList_Items,
+
+    -- ** ResourcePolicyAggregatedList_Warning
+    ResourcePolicyAggregatedList_Warning (..),
+    newResourcePolicyAggregatedList_Warning,
+
+    -- ** ResourcePolicyAggregatedList_Warning_Code
+    ResourcePolicyAggregatedList_Warning_Code (..),
+
+    -- ** ResourcePolicyAggregatedList_Warning_DataItem
+    ResourcePolicyAggregatedList_Warning_DataItem (..),
+    newResourcePolicyAggregatedList_Warning_DataItem,
+
+    -- ** ResourcePolicyDailyCycle
+    ResourcePolicyDailyCycle (..),
+    newResourcePolicyDailyCycle,
+
+    -- ** ResourcePolicyGroupPlacementPolicy
+    ResourcePolicyGroupPlacementPolicy (..),
+    newResourcePolicyGroupPlacementPolicy,
+
+    -- ** ResourcePolicyGroupPlacementPolicy_Collocation
+    ResourcePolicyGroupPlacementPolicy_Collocation (..),
+
+    -- ** ResourcePolicyHourlyCycle
+    ResourcePolicyHourlyCycle (..),
+    newResourcePolicyHourlyCycle,
+
+    -- ** ResourcePolicyInstanceSchedulePolicy
+    ResourcePolicyInstanceSchedulePolicy (..),
+    newResourcePolicyInstanceSchedulePolicy,
+
+    -- ** ResourcePolicyInstanceSchedulePolicySchedule
+    ResourcePolicyInstanceSchedulePolicySchedule (..),
+    newResourcePolicyInstanceSchedulePolicySchedule,
+
+    -- ** ResourcePolicyList
+    ResourcePolicyList (..),
+    newResourcePolicyList,
+
+    -- ** ResourcePolicyList_Warning
+    ResourcePolicyList_Warning (..),
+    newResourcePolicyList_Warning,
+
+    -- ** ResourcePolicyList_Warning_Code
+    ResourcePolicyList_Warning_Code (..),
+
+    -- ** ResourcePolicyList_Warning_DataItem
+    ResourcePolicyList_Warning_DataItem (..),
+    newResourcePolicyList_Warning_DataItem,
+
+    -- ** ResourcePolicyResourceStatus
+    ResourcePolicyResourceStatus (..),
+    newResourcePolicyResourceStatus,
+
+    -- ** ResourcePolicyResourceStatusInstanceSchedulePolicyStatus
+    ResourcePolicyResourceStatusInstanceSchedulePolicyStatus (..),
+    newResourcePolicyResourceStatusInstanceSchedulePolicyStatus,
+
+    -- ** ResourcePolicySnapshotSchedulePolicy
+    ResourcePolicySnapshotSchedulePolicy (..),
+    newResourcePolicySnapshotSchedulePolicy,
+
+    -- ** ResourcePolicySnapshotSchedulePolicyRetentionPolicy
+    ResourcePolicySnapshotSchedulePolicyRetentionPolicy (..),
+    newResourcePolicySnapshotSchedulePolicyRetentionPolicy,
+
+    -- ** ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete
+    ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete (..),
+
+    -- ** ResourcePolicySnapshotSchedulePolicySchedule
+    ResourcePolicySnapshotSchedulePolicySchedule (..),
+    newResourcePolicySnapshotSchedulePolicySchedule,
+
+    -- ** ResourcePolicySnapshotSchedulePolicySnapshotProperties
+    ResourcePolicySnapshotSchedulePolicySnapshotProperties (..),
+    newResourcePolicySnapshotSchedulePolicySnapshotProperties,
+
+    -- ** ResourcePolicySnapshotSchedulePolicySnapshotProperties_Labels
+    ResourcePolicySnapshotSchedulePolicySnapshotProperties_Labels (..),
+    newResourcePolicySnapshotSchedulePolicySnapshotProperties_Labels,
+
+    -- ** ResourcePolicyWeeklyCycle
+    ResourcePolicyWeeklyCycle (..),
+    newResourcePolicyWeeklyCycle,
+
+    -- ** ResourcePolicyWeeklyCycleDayOfWeek
+    ResourcePolicyWeeklyCycleDayOfWeek (..),
+    newResourcePolicyWeeklyCycleDayOfWeek,
+
+    -- ** ResourcePolicyWeeklyCycleDayOfWeek_Day
+    ResourcePolicyWeeklyCycleDayOfWeek_Day (..),
+
+    -- ** Route
+    Route (..),
+    newRoute,
+
+    -- ** Route_RouteType
+    Route_RouteType (..),
+
+    -- ** Route_WarningsItem
+    Route_WarningsItem (..),
+    newRoute_WarningsItem,
+
+    -- ** Route_WarningsItem_Code
+    Route_WarningsItem_Code (..),
+
+    -- ** Route_WarningsItem_DataItem
+    Route_WarningsItem_DataItem (..),
+    newRoute_WarningsItem_DataItem,
+
+    -- ** RouteAsPath
+    RouteAsPath (..),
+    newRouteAsPath,
+
+    -- ** RouteAsPath_PathSegmentType
+    RouteAsPath_PathSegmentType (..),
+
+    -- ** RouteList
+    RouteList (..),
+    newRouteList,
+
+    -- ** RouteList_Warning
+    RouteList_Warning (..),
+    newRouteList_Warning,
+
+    -- ** RouteList_Warning_Code
+    RouteList_Warning_Code (..),
+
+    -- ** RouteList_Warning_DataItem
+    RouteList_Warning_DataItem (..),
+    newRouteList_Warning_DataItem,
+
+    -- ** Router
+    Router (..),
+    newRouter,
+
+    -- ** RouterAdvertisedIpRange
+    RouterAdvertisedIpRange (..),
+    newRouterAdvertisedIpRange,
+
+    -- ** RouterAggregatedList
+    RouterAggregatedList (..),
+    newRouterAggregatedList,
+
+    -- ** RouterAggregatedList_Items
+    RouterAggregatedList_Items (..),
+    newRouterAggregatedList_Items,
+
+    -- ** RouterAggregatedList_Warning
+    RouterAggregatedList_Warning (..),
+    newRouterAggregatedList_Warning,
+
+    -- ** RouterAggregatedList_Warning_Code
+    RouterAggregatedList_Warning_Code (..),
+
+    -- ** RouterAggregatedList_Warning_DataItem
+    RouterAggregatedList_Warning_DataItem (..),
+    newRouterAggregatedList_Warning_DataItem,
+
+    -- ** RouterBgp
+    RouterBgp (..),
+    newRouterBgp,
+
+    -- ** RouterBgp_AdvertiseMode
+    RouterBgp_AdvertiseMode (..),
+
+    -- ** RouterBgp_AdvertisedGroupsItem
+    RouterBgp_AdvertisedGroupsItem (..),
+
+    -- ** RouterBgpPeer
+    RouterBgpPeer (..),
+    newRouterBgpPeer,
+
+    -- ** RouterBgpPeer_AdvertiseMode
+    RouterBgpPeer_AdvertiseMode (..),
+
+    -- ** RouterBgpPeer_AdvertisedGroupsItem
+    RouterBgpPeer_AdvertisedGroupsItem (..),
+
+    -- ** RouterBgpPeer_Enable
+    RouterBgpPeer_Enable (..),
+
+    -- ** RouterBgpPeer_ManagementType
+    RouterBgpPeer_ManagementType (..),
+
+    -- ** RouterBgpPeerBfd
+    RouterBgpPeerBfd (..),
+    newRouterBgpPeerBfd,
+
+    -- ** RouterBgpPeerBfd_SessionInitializationMode
+    RouterBgpPeerBfd_SessionInitializationMode (..),
+
+    -- ** RouterInterface
+    RouterInterface (..),
+    newRouterInterface,
+
+    -- ** RouterInterface_ManagementType
+    RouterInterface_ManagementType (..),
+
+    -- ** RouterList
+    RouterList (..),
+    newRouterList,
+
+    -- ** RouterList_Warning
+    RouterList_Warning (..),
+    newRouterList_Warning,
+
+    -- ** RouterList_Warning_Code
+    RouterList_Warning_Code (..),
+
+    -- ** RouterList_Warning_DataItem
+    RouterList_Warning_DataItem (..),
+    newRouterList_Warning_DataItem,
+
+    -- ** RouterNat
+    RouterNat (..),
+    newRouterNat,
+
+    -- ** RouterNat_NatIpAllocateOption
+    RouterNat_NatIpAllocateOption (..),
+
+    -- ** RouterNat_SourceSubnetworkIpRangesToNat
+    RouterNat_SourceSubnetworkIpRangesToNat (..),
+
+    -- ** RouterNatLogConfig
+    RouterNatLogConfig (..),
+    newRouterNatLogConfig,
+
+    -- ** RouterNatLogConfig_Filter
+    RouterNatLogConfig_Filter (..),
+
+    -- ** RouterNatRule
+    RouterNatRule (..),
+    newRouterNatRule,
+
+    -- ** RouterNatRuleAction
+    RouterNatRuleAction (..),
+    newRouterNatRuleAction,
+
+    -- ** RouterNatSubnetworkToNat
+    RouterNatSubnetworkToNat (..),
+    newRouterNatSubnetworkToNat,
+
+    -- ** RouterNatSubnetworkToNat_SourceIpRangesToNatItem
+    RouterNatSubnetworkToNat_SourceIpRangesToNatItem (..),
+
+    -- ** RouterStatus
+    RouterStatus (..),
+    newRouterStatus,
+
+    -- ** RouterStatusBgpPeerStatus
+    RouterStatusBgpPeerStatus (..),
+    newRouterStatusBgpPeerStatus,
+
+    -- ** RouterStatusBgpPeerStatus_Status
+    RouterStatusBgpPeerStatus_Status (..),
+
+    -- ** RouterStatusNatStatus
+    RouterStatusNatStatus (..),
+    newRouterStatusNatStatus,
+
+    -- ** RouterStatusNatStatusNatRuleStatus
+    RouterStatusNatStatusNatRuleStatus (..),
+    newRouterStatusNatStatusNatRuleStatus,
+
+    -- ** RouterStatusResponse
+    RouterStatusResponse (..),
+    newRouterStatusResponse,
+
+    -- ** RoutersPreviewResponse
+    RoutersPreviewResponse (..),
+    newRoutersPreviewResponse,
+
+    -- ** RoutersScopedList
+    RoutersScopedList (..),
+    newRoutersScopedList,
+
+    -- ** RoutersScopedList_Warning
+    RoutersScopedList_Warning (..),
+    newRoutersScopedList_Warning,
+
+    -- ** RoutersScopedList_Warning_Code
+    RoutersScopedList_Warning_Code (..),
+
+    -- ** RoutersScopedList_Warning_DataItem
+    RoutersScopedList_Warning_DataItem (..),
+    newRoutersScopedList_Warning_DataItem,
+
+    -- ** Rule
+    Rule (..),
+    newRule,
+
+    -- ** Rule_Action
+    Rule_Action (..),
+
+    -- ** SSLHealthCheck
+    SSLHealthCheck (..),
+    newSSLHealthCheck,
+
+    -- ** SSLHealthCheck_PortSpecification
+    SSLHealthCheck_PortSpecification (..),
+
+    -- ** SSLHealthCheck_ProxyHeader
+    SSLHealthCheck_ProxyHeader (..),
+
+    -- ** SavedAttachedDisk
+    SavedAttachedDisk (..),
+    newSavedAttachedDisk,
+
+    -- ** SavedAttachedDisk_Interface
+    SavedAttachedDisk_Interface (..),
+
+    -- ** SavedAttachedDisk_Mode
+    SavedAttachedDisk_Mode (..),
+
+    -- ** SavedAttachedDisk_StorageBytesStatus
+    SavedAttachedDisk_StorageBytesStatus (..),
+
+    -- ** SavedAttachedDisk_Type
+    SavedAttachedDisk_Type (..),
+
+    -- ** SavedDisk
+    SavedDisk (..),
+    newSavedDisk,
+
+    -- ** SavedDisk_StorageBytesStatus
+    SavedDisk_StorageBytesStatus (..),
+
+    -- ** ScalingScheduleStatus
+    ScalingScheduleStatus (..),
+    newScalingScheduleStatus,
+
+    -- ** ScalingScheduleStatus_State
+    ScalingScheduleStatus_State (..),
+
+    -- ** Scheduling
+    Scheduling (..),
+    newScheduling,
+
+    -- ** Scheduling_InstanceTerminationAction
+    Scheduling_InstanceTerminationAction (..),
+
+    -- ** Scheduling_OnHostMaintenance
+    Scheduling_OnHostMaintenance (..),
+
+    -- ** Scheduling_ProvisioningModel
+    Scheduling_ProvisioningModel (..),
+
+    -- ** SchedulingNodeAffinity
+    SchedulingNodeAffinity (..),
+    newSchedulingNodeAffinity,
+
+    -- ** SchedulingNodeAffinity_Operator
+    SchedulingNodeAffinity_Operator (..),
+
+    -- ** Screenshot
+    Screenshot (..),
+    newScreenshot,
+
+    -- ** SecurityPoliciesListPreconfiguredExpressionSetsResponse
+    SecurityPoliciesListPreconfiguredExpressionSetsResponse (..),
+    newSecurityPoliciesListPreconfiguredExpressionSetsResponse,
+
+    -- ** SecurityPoliciesWafConfig
+    SecurityPoliciesWafConfig (..),
+    newSecurityPoliciesWafConfig,
+
+    -- ** SecurityPolicy
+    SecurityPolicy (..),
+    newSecurityPolicy,
+
+    -- ** SecurityPolicy_Type
+    SecurityPolicy_Type (..),
+
+    -- ** SecurityPolicyAdaptiveProtectionConfig
+    SecurityPolicyAdaptiveProtectionConfig (..),
+    newSecurityPolicyAdaptiveProtectionConfig,
+
+    -- ** SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig
+    SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig (..),
+    newSecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig,
+
+    -- ** SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility
+    SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility (..),
+
+    -- ** SecurityPolicyAdvancedOptionsConfig
+    SecurityPolicyAdvancedOptionsConfig (..),
+    newSecurityPolicyAdvancedOptionsConfig,
+
+    -- ** SecurityPolicyAdvancedOptionsConfig_JsonParsing
+    SecurityPolicyAdvancedOptionsConfig_JsonParsing (..),
+
+    -- ** SecurityPolicyAdvancedOptionsConfig_LogLevel
+    SecurityPolicyAdvancedOptionsConfig_LogLevel (..),
+
+    -- ** SecurityPolicyList
+    SecurityPolicyList (..),
+    newSecurityPolicyList,
+
+    -- ** SecurityPolicyList_Warning
+    SecurityPolicyList_Warning (..),
+    newSecurityPolicyList_Warning,
+
+    -- ** SecurityPolicyList_Warning_Code
+    SecurityPolicyList_Warning_Code (..),
+
+    -- ** SecurityPolicyList_Warning_DataItem
+    SecurityPolicyList_Warning_DataItem (..),
+    newSecurityPolicyList_Warning_DataItem,
+
+    -- ** SecurityPolicyRecaptchaOptionsConfig
+    SecurityPolicyRecaptchaOptionsConfig (..),
+    newSecurityPolicyRecaptchaOptionsConfig,
+
+    -- ** SecurityPolicyReference
+    SecurityPolicyReference (..),
+    newSecurityPolicyReference,
+
+    -- ** SecurityPolicyRule
+    SecurityPolicyRule (..),
+    newSecurityPolicyRule,
+
+    -- ** SecurityPolicyRuleHttpHeaderAction
+    SecurityPolicyRuleHttpHeaderAction (..),
+    newSecurityPolicyRuleHttpHeaderAction,
+
+    -- ** SecurityPolicyRuleHttpHeaderActionHttpHeaderOption
+    SecurityPolicyRuleHttpHeaderActionHttpHeaderOption (..),
+    newSecurityPolicyRuleHttpHeaderActionHttpHeaderOption,
+
+    -- ** SecurityPolicyRuleMatcher
+    SecurityPolicyRuleMatcher (..),
+    newSecurityPolicyRuleMatcher,
+
+    -- ** SecurityPolicyRuleMatcher_VersionedExpr
+    SecurityPolicyRuleMatcher_VersionedExpr (..),
+
+    -- ** SecurityPolicyRuleMatcherConfig
+    SecurityPolicyRuleMatcherConfig (..),
+    newSecurityPolicyRuleMatcherConfig,
+
+    -- ** SecurityPolicyRuleRateLimitOptions
+    SecurityPolicyRuleRateLimitOptions (..),
+    newSecurityPolicyRuleRateLimitOptions,
+
+    -- ** SecurityPolicyRuleRateLimitOptions_EnforceOnKey
+    SecurityPolicyRuleRateLimitOptions_EnforceOnKey (..),
+
+    -- ** SecurityPolicyRuleRateLimitOptionsThreshold
+    SecurityPolicyRuleRateLimitOptionsThreshold (..),
+    newSecurityPolicyRuleRateLimitOptionsThreshold,
+
+    -- ** SecurityPolicyRuleRedirectOptions
+    SecurityPolicyRuleRedirectOptions (..),
+    newSecurityPolicyRuleRedirectOptions,
+
+    -- ** SecurityPolicyRuleRedirectOptions_Type
+    SecurityPolicyRuleRedirectOptions_Type (..),
+
+    -- ** SecuritySettings
+    SecuritySettings (..),
+    newSecuritySettings,
+
+    -- ** SerialPortOutput
+    SerialPortOutput (..),
+    newSerialPortOutput,
+
+    -- ** ServerBinding
+    ServerBinding (..),
+    newServerBinding,
+
+    -- ** ServerBinding_Type
+    ServerBinding_Type (..),
+
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
+
+    -- ** ServiceAttachment
+    ServiceAttachment (..),
+    newServiceAttachment,
+
+    -- ** ServiceAttachment_ConnectionPreference
+    ServiceAttachment_ConnectionPreference (..),
+
+    -- ** ServiceAttachmentAggregatedList
+    ServiceAttachmentAggregatedList (..),
+    newServiceAttachmentAggregatedList,
+
+    -- ** ServiceAttachmentAggregatedList_Items
+    ServiceAttachmentAggregatedList_Items (..),
+    newServiceAttachmentAggregatedList_Items,
+
+    -- ** ServiceAttachmentAggregatedList_Warning
+    ServiceAttachmentAggregatedList_Warning (..),
+    newServiceAttachmentAggregatedList_Warning,
+
+    -- ** ServiceAttachmentAggregatedList_Warning_Code
+    ServiceAttachmentAggregatedList_Warning_Code (..),
+
+    -- ** ServiceAttachmentAggregatedList_Warning_DataItem
+    ServiceAttachmentAggregatedList_Warning_DataItem (..),
+    newServiceAttachmentAggregatedList_Warning_DataItem,
+
+    -- ** ServiceAttachmentConnectedEndpoint
+    ServiceAttachmentConnectedEndpoint (..),
+    newServiceAttachmentConnectedEndpoint,
+
+    -- ** ServiceAttachmentConnectedEndpoint_Status
+    ServiceAttachmentConnectedEndpoint_Status (..),
+
+    -- ** ServiceAttachmentConsumerProjectLimit
+    ServiceAttachmentConsumerProjectLimit (..),
+    newServiceAttachmentConsumerProjectLimit,
+
+    -- ** ServiceAttachmentList
+    ServiceAttachmentList (..),
+    newServiceAttachmentList,
+
+    -- ** ServiceAttachmentList_Warning
+    ServiceAttachmentList_Warning (..),
+    newServiceAttachmentList_Warning,
+
+    -- ** ServiceAttachmentList_Warning_Code
+    ServiceAttachmentList_Warning_Code (..),
+
+    -- ** ServiceAttachmentList_Warning_DataItem
+    ServiceAttachmentList_Warning_DataItem (..),
+    newServiceAttachmentList_Warning_DataItem,
+
+    -- ** ServiceAttachmentsScopedList
+    ServiceAttachmentsScopedList (..),
+    newServiceAttachmentsScopedList,
+
+    -- ** ServiceAttachmentsScopedList_Warning
+    ServiceAttachmentsScopedList_Warning (..),
+    newServiceAttachmentsScopedList_Warning,
+
+    -- ** ServiceAttachmentsScopedList_Warning_Code
+    ServiceAttachmentsScopedList_Warning_Code (..),
+
+    -- ** ServiceAttachmentsScopedList_Warning_DataItem
+    ServiceAttachmentsScopedList_Warning_DataItem (..),
+    newServiceAttachmentsScopedList_Warning_DataItem,
+
+    -- ** ShareSettings
+    ShareSettings (..),
+    newShareSettings,
+
+    -- ** ShareSettings_ProjectMap
+    ShareSettings_ProjectMap (..),
+    newShareSettings_ProjectMap,
+
+    -- ** ShareSettings_ShareType
+    ShareSettings_ShareType (..),
+
+    -- ** ShareSettingsProjectConfig
+    ShareSettingsProjectConfig (..),
+    newShareSettingsProjectConfig,
+
+    -- ** ShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
+
+    -- ** ShieldedInstanceIdentity
+    ShieldedInstanceIdentity (..),
+    newShieldedInstanceIdentity,
+
+    -- ** ShieldedInstanceIdentityEntry
+    ShieldedInstanceIdentityEntry (..),
+    newShieldedInstanceIdentityEntry,
+
+    -- ** ShieldedInstanceIntegrityPolicy
+    ShieldedInstanceIntegrityPolicy (..),
+    newShieldedInstanceIntegrityPolicy,
+
+    -- ** SignedUrlKey
+    SignedUrlKey (..),
+    newSignedUrlKey,
+
+    -- ** Snapshot
+    Snapshot (..),
+    newSnapshot,
+
+    -- ** Snapshot_Labels
+    Snapshot_Labels (..),
+    newSnapshot_Labels,
+
+    -- ** Snapshot_Status
+    Snapshot_Status (..),
+
+    -- ** Snapshot_StorageBytesStatus
+    Snapshot_StorageBytesStatus (..),
+
+    -- ** SnapshotList
+    SnapshotList (..),
+    newSnapshotList,
+
+    -- ** SnapshotList_Warning
+    SnapshotList_Warning (..),
+    newSnapshotList_Warning,
+
+    -- ** SnapshotList_Warning_Code
+    SnapshotList_Warning_Code (..),
+
+    -- ** SnapshotList_Warning_DataItem
+    SnapshotList_Warning_DataItem (..),
+    newSnapshotList_Warning_DataItem,
+
+    -- ** SourceDiskEncryptionKey
+    SourceDiskEncryptionKey (..),
+    newSourceDiskEncryptionKey,
+
+    -- ** SourceInstanceParams
+    SourceInstanceParams (..),
+    newSourceInstanceParams,
+
+    -- ** SourceInstanceProperties
+    SourceInstanceProperties (..),
+    newSourceInstanceProperties,
+
+    -- ** SourceInstanceProperties_Labels
+    SourceInstanceProperties_Labels (..),
+    newSourceInstanceProperties_Labels,
+
+    -- ** SslCertificate
+    SslCertificate (..),
+    newSslCertificate,
+
+    -- ** SslCertificate_Type
+    SslCertificate_Type (..),
+
+    -- ** SslCertificateAggregatedList
+    SslCertificateAggregatedList (..),
+    newSslCertificateAggregatedList,
+
+    -- ** SslCertificateAggregatedList_Items
+    SslCertificateAggregatedList_Items (..),
+    newSslCertificateAggregatedList_Items,
+
+    -- ** SslCertificateAggregatedList_Warning
+    SslCertificateAggregatedList_Warning (..),
+    newSslCertificateAggregatedList_Warning,
+
+    -- ** SslCertificateAggregatedList_Warning_Code
+    SslCertificateAggregatedList_Warning_Code (..),
+
+    -- ** SslCertificateAggregatedList_Warning_DataItem
+    SslCertificateAggregatedList_Warning_DataItem (..),
+    newSslCertificateAggregatedList_Warning_DataItem,
+
+    -- ** SslCertificateList
+    SslCertificateList (..),
+    newSslCertificateList,
+
+    -- ** SslCertificateList_Warning
+    SslCertificateList_Warning (..),
+    newSslCertificateList_Warning,
+
+    -- ** SslCertificateList_Warning_Code
+    SslCertificateList_Warning_Code (..),
+
+    -- ** SslCertificateList_Warning_DataItem
+    SslCertificateList_Warning_DataItem (..),
+    newSslCertificateList_Warning_DataItem,
+
+    -- ** SslCertificateManagedSslCertificate
+    SslCertificateManagedSslCertificate (..),
+    newSslCertificateManagedSslCertificate,
+
+    -- ** SslCertificateManagedSslCertificate_DomainStatus
+    SslCertificateManagedSslCertificate_DomainStatus (..),
+    newSslCertificateManagedSslCertificate_DomainStatus,
+
+    -- ** SslCertificateManagedSslCertificate_DomainStatusAdditional
+    SslCertificateManagedSslCertificate_DomainStatusAdditional (..),
+
+    -- ** SslCertificateManagedSslCertificate_Status
+    SslCertificateManagedSslCertificate_Status (..),
+
+    -- ** SslCertificateSelfManagedSslCertificate
+    SslCertificateSelfManagedSslCertificate (..),
+    newSslCertificateSelfManagedSslCertificate,
+
+    -- ** SslCertificatesScopedList
+    SslCertificatesScopedList (..),
+    newSslCertificatesScopedList,
+
+    -- ** SslCertificatesScopedList_Warning
+    SslCertificatesScopedList_Warning (..),
+    newSslCertificatesScopedList_Warning,
+
+    -- ** SslCertificatesScopedList_Warning_Code
+    SslCertificatesScopedList_Warning_Code (..),
+
+    -- ** SslCertificatesScopedList_Warning_DataItem
+    SslCertificatesScopedList_Warning_DataItem (..),
+    newSslCertificatesScopedList_Warning_DataItem,
+
+    -- ** SslPoliciesList
+    SslPoliciesList (..),
+    newSslPoliciesList,
+
+    -- ** SslPoliciesList_Warning
+    SslPoliciesList_Warning (..),
+    newSslPoliciesList_Warning,
+
+    -- ** SslPoliciesList_Warning_Code
+    SslPoliciesList_Warning_Code (..),
+
+    -- ** SslPoliciesList_Warning_DataItem
+    SslPoliciesList_Warning_DataItem (..),
+    newSslPoliciesList_Warning_DataItem,
+
+    -- ** SslPoliciesListAvailableFeaturesResponse
+    SslPoliciesListAvailableFeaturesResponse (..),
+    newSslPoliciesListAvailableFeaturesResponse,
+
+    -- ** SslPolicy
+    SslPolicy (..),
+    newSslPolicy,
+
+    -- ** SslPolicy_MinTlsVersion
+    SslPolicy_MinTlsVersion (..),
+
+    -- ** SslPolicy_Profile
+    SslPolicy_Profile (..),
+
+    -- ** SslPolicy_WarningsItem
+    SslPolicy_WarningsItem (..),
+    newSslPolicy_WarningsItem,
+
+    -- ** SslPolicy_WarningsItem_Code
+    SslPolicy_WarningsItem_Code (..),
+
+    -- ** SslPolicy_WarningsItem_DataItem
+    SslPolicy_WarningsItem_DataItem (..),
+    newSslPolicy_WarningsItem_DataItem,
+
+    -- ** SslPolicyReference
+    SslPolicyReference (..),
+    newSslPolicyReference,
+
+    -- ** StatefulPolicy
+    StatefulPolicy (..),
+    newStatefulPolicy,
+
+    -- ** StatefulPolicyPreservedState
+    StatefulPolicyPreservedState (..),
+    newStatefulPolicyPreservedState,
+
+    -- ** StatefulPolicyPreservedState_Disks
+    StatefulPolicyPreservedState_Disks (..),
+    newStatefulPolicyPreservedState_Disks,
+
+    -- ** StatefulPolicyPreservedStateDiskDevice
+    StatefulPolicyPreservedStateDiskDevice (..),
+    newStatefulPolicyPreservedStateDiskDevice,
+
+    -- ** StatefulPolicyPreservedStateDiskDevice_AutoDelete
+    StatefulPolicyPreservedStateDiskDevice_AutoDelete (..),
+
+    -- ** Subnetwork
+    Subnetwork (..),
+    newSubnetwork,
+
+    -- ** Subnetwork_Ipv6AccessType
+    Subnetwork_Ipv6AccessType (..),
+
+    -- ** Subnetwork_PrivateIpv6GoogleAccess
+    Subnetwork_PrivateIpv6GoogleAccess (..),
+
+    -- ** Subnetwork_Purpose
+    Subnetwork_Purpose (..),
+
+    -- ** Subnetwork_Role
+    Subnetwork_Role (..),
+
+    -- ** Subnetwork_StackType
+    Subnetwork_StackType (..),
+
+    -- ** Subnetwork_State
+    Subnetwork_State (..),
+
+    -- ** SubnetworkAggregatedList
+    SubnetworkAggregatedList (..),
+    newSubnetworkAggregatedList,
+
+    -- ** SubnetworkAggregatedList_Items
+    SubnetworkAggregatedList_Items (..),
+    newSubnetworkAggregatedList_Items,
+
+    -- ** SubnetworkAggregatedList_Warning
+    SubnetworkAggregatedList_Warning (..),
+    newSubnetworkAggregatedList_Warning,
+
+    -- ** SubnetworkAggregatedList_Warning_Code
+    SubnetworkAggregatedList_Warning_Code (..),
+
+    -- ** SubnetworkAggregatedList_Warning_DataItem
+    SubnetworkAggregatedList_Warning_DataItem (..),
+    newSubnetworkAggregatedList_Warning_DataItem,
+
+    -- ** SubnetworkList
+    SubnetworkList (..),
+    newSubnetworkList,
+
+    -- ** SubnetworkList_Warning
+    SubnetworkList_Warning (..),
+    newSubnetworkList_Warning,
+
+    -- ** SubnetworkList_Warning_Code
+    SubnetworkList_Warning_Code (..),
+
+    -- ** SubnetworkList_Warning_DataItem
+    SubnetworkList_Warning_DataItem (..),
+    newSubnetworkList_Warning_DataItem,
+
+    -- ** SubnetworkLogConfig
+    SubnetworkLogConfig (..),
+    newSubnetworkLogConfig,
+
+    -- ** SubnetworkLogConfig_AggregationInterval
+    SubnetworkLogConfig_AggregationInterval (..),
+
+    -- ** SubnetworkLogConfig_Metadata
+    SubnetworkLogConfig_Metadata (..),
+
+    -- ** SubnetworkSecondaryRange
+    SubnetworkSecondaryRange (..),
+    newSubnetworkSecondaryRange,
+
+    -- ** SubnetworksExpandIpCidrRangeRequest
+    SubnetworksExpandIpCidrRangeRequest (..),
+    newSubnetworksExpandIpCidrRangeRequest,
+
+    -- ** SubnetworksScopedList
+    SubnetworksScopedList (..),
+    newSubnetworksScopedList,
+
+    -- ** SubnetworksScopedList_Warning
+    SubnetworksScopedList_Warning (..),
+    newSubnetworksScopedList_Warning,
+
+    -- ** SubnetworksScopedList_Warning_Code
+    SubnetworksScopedList_Warning_Code (..),
+
+    -- ** SubnetworksScopedList_Warning_DataItem
+    SubnetworksScopedList_Warning_DataItem (..),
+    newSubnetworksScopedList_Warning_DataItem,
+
+    -- ** SubnetworksSetPrivateIpGoogleAccessRequest
+    SubnetworksSetPrivateIpGoogleAccessRequest (..),
+    newSubnetworksSetPrivateIpGoogleAccessRequest,
+
+    -- ** Subsetting
+    Subsetting (..),
+    newSubsetting,
+
+    -- ** Subsetting_Policy
+    Subsetting_Policy (..),
+
+    -- ** TCPHealthCheck
+    TCPHealthCheck (..),
+    newTCPHealthCheck,
+
+    -- ** TCPHealthCheck_PortSpecification
+    TCPHealthCheck_PortSpecification (..),
+
+    -- ** TCPHealthCheck_ProxyHeader
+    TCPHealthCheck_ProxyHeader (..),
+
+    -- ** Tags
+    Tags (..),
+    newTags,
+
+    -- ** TargetGrpcProxy
+    TargetGrpcProxy (..),
+    newTargetGrpcProxy,
+
+    -- ** TargetGrpcProxyList
+    TargetGrpcProxyList (..),
+    newTargetGrpcProxyList,
+
+    -- ** TargetGrpcProxyList_Warning
+    TargetGrpcProxyList_Warning (..),
+    newTargetGrpcProxyList_Warning,
+
+    -- ** TargetGrpcProxyList_Warning_Code
+    TargetGrpcProxyList_Warning_Code (..),
+
+    -- ** TargetGrpcProxyList_Warning_DataItem
+    TargetGrpcProxyList_Warning_DataItem (..),
+    newTargetGrpcProxyList_Warning_DataItem,
+
+    -- ** TargetHttpProxiesScopedList
+    TargetHttpProxiesScopedList (..),
+    newTargetHttpProxiesScopedList,
+
+    -- ** TargetHttpProxiesScopedList_Warning
+    TargetHttpProxiesScopedList_Warning (..),
+    newTargetHttpProxiesScopedList_Warning,
+
+    -- ** TargetHttpProxiesScopedList_Warning_Code
+    TargetHttpProxiesScopedList_Warning_Code (..),
+
+    -- ** TargetHttpProxiesScopedList_Warning_DataItem
+    TargetHttpProxiesScopedList_Warning_DataItem (..),
+    newTargetHttpProxiesScopedList_Warning_DataItem,
+
+    -- ** TargetHttpProxy
+    TargetHttpProxy (..),
+    newTargetHttpProxy,
+
+    -- ** TargetHttpProxyAggregatedList
+    TargetHttpProxyAggregatedList (..),
+    newTargetHttpProxyAggregatedList,
+
+    -- ** TargetHttpProxyAggregatedList_Items
+    TargetHttpProxyAggregatedList_Items (..),
+    newTargetHttpProxyAggregatedList_Items,
+
+    -- ** TargetHttpProxyList
+    TargetHttpProxyList (..),
+    newTargetHttpProxyList,
+
+    -- ** TargetHttpProxyList_Warning
+    TargetHttpProxyList_Warning (..),
+    newTargetHttpProxyList_Warning,
+
+    -- ** TargetHttpProxyList_Warning_Code
+    TargetHttpProxyList_Warning_Code (..),
+
+    -- ** TargetHttpProxyList_Warning_DataItem
+    TargetHttpProxyList_Warning_DataItem (..),
+    newTargetHttpProxyList_Warning_DataItem,
+
+    -- ** TargetHttpsProxiesScopedList
+    TargetHttpsProxiesScopedList (..),
+    newTargetHttpsProxiesScopedList,
+
+    -- ** TargetHttpsProxiesScopedList_Warning
+    TargetHttpsProxiesScopedList_Warning (..),
+    newTargetHttpsProxiesScopedList_Warning,
+
+    -- ** TargetHttpsProxiesScopedList_Warning_Code
+    TargetHttpsProxiesScopedList_Warning_Code (..),
+
+    -- ** TargetHttpsProxiesScopedList_Warning_DataItem
+    TargetHttpsProxiesScopedList_Warning_DataItem (..),
+    newTargetHttpsProxiesScopedList_Warning_DataItem,
+
+    -- ** TargetHttpsProxiesSetQuicOverrideRequest
+    TargetHttpsProxiesSetQuicOverrideRequest (..),
+    newTargetHttpsProxiesSetQuicOverrideRequest,
+
+    -- ** TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride
+    TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride (..),
+
+    -- ** TargetHttpsProxiesSetSslCertificatesRequest
+    TargetHttpsProxiesSetSslCertificatesRequest (..),
+    newTargetHttpsProxiesSetSslCertificatesRequest,
+
+    -- ** TargetHttpsProxy
+    TargetHttpsProxy (..),
+    newTargetHttpsProxy,
+
+    -- ** TargetHttpsProxy_QuicOverride
+    TargetHttpsProxy_QuicOverride (..),
+
+    -- ** TargetHttpsProxyAggregatedList
+    TargetHttpsProxyAggregatedList (..),
+    newTargetHttpsProxyAggregatedList,
+
+    -- ** TargetHttpsProxyAggregatedList_Items
+    TargetHttpsProxyAggregatedList_Items (..),
+    newTargetHttpsProxyAggregatedList_Items,
+
+    -- ** TargetHttpsProxyAggregatedList_Warning
+    TargetHttpsProxyAggregatedList_Warning (..),
+    newTargetHttpsProxyAggregatedList_Warning,
+
+    -- ** TargetHttpsProxyAggregatedList_Warning_Code
+    TargetHttpsProxyAggregatedList_Warning_Code (..),
+
+    -- ** TargetHttpsProxyAggregatedList_Warning_DataItem
+    TargetHttpsProxyAggregatedList_Warning_DataItem (..),
+    newTargetHttpsProxyAggregatedList_Warning_DataItem,
+
+    -- ** TargetHttpsProxyList
+    TargetHttpsProxyList (..),
+    newTargetHttpsProxyList,
+
+    -- ** TargetHttpsProxyList_Warning
+    TargetHttpsProxyList_Warning (..),
+    newTargetHttpsProxyList_Warning,
+
+    -- ** TargetHttpsProxyList_Warning_Code
+    TargetHttpsProxyList_Warning_Code (..),
+
+    -- ** TargetHttpsProxyList_Warning_DataItem
+    TargetHttpsProxyList_Warning_DataItem (..),
+    newTargetHttpsProxyList_Warning_DataItem,
+
+    -- ** TargetInstance
+    TargetInstance (..),
+    newTargetInstance,
+
+    -- ** TargetInstance_NatPolicy
+    TargetInstance_NatPolicy (..),
+
+    -- ** TargetInstanceAggregatedList
+    TargetInstanceAggregatedList (..),
+    newTargetInstanceAggregatedList,
+
+    -- ** TargetInstanceAggregatedList_Items
+    TargetInstanceAggregatedList_Items (..),
+    newTargetInstanceAggregatedList_Items,
+
+    -- ** TargetInstanceAggregatedList_Warning
+    TargetInstanceAggregatedList_Warning (..),
+    newTargetInstanceAggregatedList_Warning,
+
+    -- ** TargetInstanceAggregatedList_Warning_Code
+    TargetInstanceAggregatedList_Warning_Code (..),
+
+    -- ** TargetInstanceAggregatedList_Warning_DataItem
+    TargetInstanceAggregatedList_Warning_DataItem (..),
+    newTargetInstanceAggregatedList_Warning_DataItem,
+
+    -- ** TargetInstanceList
+    TargetInstanceList (..),
+    newTargetInstanceList,
+
+    -- ** TargetInstanceList_Warning
+    TargetInstanceList_Warning (..),
+    newTargetInstanceList_Warning,
+
+    -- ** TargetInstanceList_Warning_Code
+    TargetInstanceList_Warning_Code (..),
+
+    -- ** TargetInstanceList_Warning_DataItem
+    TargetInstanceList_Warning_DataItem (..),
+    newTargetInstanceList_Warning_DataItem,
+
+    -- ** TargetInstancesScopedList
+    TargetInstancesScopedList (..),
+    newTargetInstancesScopedList,
+
+    -- ** TargetInstancesScopedList_Warning
+    TargetInstancesScopedList_Warning (..),
+    newTargetInstancesScopedList_Warning,
+
+    -- ** TargetInstancesScopedList_Warning_Code
+    TargetInstancesScopedList_Warning_Code (..),
+
+    -- ** TargetInstancesScopedList_Warning_DataItem
+    TargetInstancesScopedList_Warning_DataItem (..),
+    newTargetInstancesScopedList_Warning_DataItem,
+
+    -- ** TargetPool
+    TargetPool (..),
+    newTargetPool,
+
+    -- ** TargetPool_SessionAffinity
+    TargetPool_SessionAffinity (..),
+
+    -- ** TargetPoolAggregatedList
+    TargetPoolAggregatedList (..),
+    newTargetPoolAggregatedList,
+
+    -- ** TargetPoolAggregatedList_Items
+    TargetPoolAggregatedList_Items (..),
+    newTargetPoolAggregatedList_Items,
+
+    -- ** TargetPoolAggregatedList_Warning
+    TargetPoolAggregatedList_Warning (..),
+    newTargetPoolAggregatedList_Warning,
+
+    -- ** TargetPoolAggregatedList_Warning_Code
+    TargetPoolAggregatedList_Warning_Code (..),
+
+    -- ** TargetPoolAggregatedList_Warning_DataItem
+    TargetPoolAggregatedList_Warning_DataItem (..),
+    newTargetPoolAggregatedList_Warning_DataItem,
+
+    -- ** TargetPoolInstanceHealth
+    TargetPoolInstanceHealth (..),
+    newTargetPoolInstanceHealth,
+
+    -- ** TargetPoolList
+    TargetPoolList (..),
+    newTargetPoolList,
+
+    -- ** TargetPoolList_Warning
+    TargetPoolList_Warning (..),
+    newTargetPoolList_Warning,
+
+    -- ** TargetPoolList_Warning_Code
+    TargetPoolList_Warning_Code (..),
+
+    -- ** TargetPoolList_Warning_DataItem
+    TargetPoolList_Warning_DataItem (..),
+    newTargetPoolList_Warning_DataItem,
+
+    -- ** TargetPoolsAddHealthCheckRequest
+    TargetPoolsAddHealthCheckRequest (..),
+    newTargetPoolsAddHealthCheckRequest,
+
+    -- ** TargetPoolsAddInstanceRequest
+    TargetPoolsAddInstanceRequest (..),
+    newTargetPoolsAddInstanceRequest,
+
+    -- ** TargetPoolsRemoveHealthCheckRequest
+    TargetPoolsRemoveHealthCheckRequest (..),
+    newTargetPoolsRemoveHealthCheckRequest,
+
+    -- ** TargetPoolsRemoveInstanceRequest
+    TargetPoolsRemoveInstanceRequest (..),
+    newTargetPoolsRemoveInstanceRequest,
+
+    -- ** TargetPoolsScopedList
+    TargetPoolsScopedList (..),
+    newTargetPoolsScopedList,
+
+    -- ** TargetPoolsScopedList_Warning
+    TargetPoolsScopedList_Warning (..),
+    newTargetPoolsScopedList_Warning,
+
+    -- ** TargetPoolsScopedList_Warning_Code
+    TargetPoolsScopedList_Warning_Code (..),
+
+    -- ** TargetPoolsScopedList_Warning_DataItem
+    TargetPoolsScopedList_Warning_DataItem (..),
+    newTargetPoolsScopedList_Warning_DataItem,
+
+    -- ** TargetReference
+    TargetReference (..),
+    newTargetReference,
+
+    -- ** TargetSslProxiesSetBackendServiceRequest
+    TargetSslProxiesSetBackendServiceRequest (..),
+    newTargetSslProxiesSetBackendServiceRequest,
+
+    -- ** TargetSslProxiesSetProxyHeaderRequest
+    TargetSslProxiesSetProxyHeaderRequest (..),
+    newTargetSslProxiesSetProxyHeaderRequest,
+
+    -- ** TargetSslProxiesSetProxyHeaderRequest_ProxyHeader
+    TargetSslProxiesSetProxyHeaderRequest_ProxyHeader (..),
+
+    -- ** TargetSslProxiesSetSslCertificatesRequest
+    TargetSslProxiesSetSslCertificatesRequest (..),
+    newTargetSslProxiesSetSslCertificatesRequest,
+
+    -- ** TargetSslProxy
+    TargetSslProxy (..),
+    newTargetSslProxy,
+
+    -- ** TargetSslProxy_ProxyHeader
+    TargetSslProxy_ProxyHeader (..),
+
+    -- ** TargetSslProxyList
+    TargetSslProxyList (..),
+    newTargetSslProxyList,
+
+    -- ** TargetSslProxyList_Warning
+    TargetSslProxyList_Warning (..),
+    newTargetSslProxyList_Warning,
+
+    -- ** TargetSslProxyList_Warning_Code
+    TargetSslProxyList_Warning_Code (..),
+
+    -- ** TargetSslProxyList_Warning_DataItem
+    TargetSslProxyList_Warning_DataItem (..),
+    newTargetSslProxyList_Warning_DataItem,
+
+    -- ** TargetTcpProxiesSetBackendServiceRequest
+    TargetTcpProxiesSetBackendServiceRequest (..),
+    newTargetTcpProxiesSetBackendServiceRequest,
+
+    -- ** TargetTcpProxiesSetProxyHeaderRequest
+    TargetTcpProxiesSetProxyHeaderRequest (..),
+    newTargetTcpProxiesSetProxyHeaderRequest,
+
+    -- ** TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader
+    TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader (..),
+
+    -- ** TargetTcpProxy
+    TargetTcpProxy (..),
+    newTargetTcpProxy,
+
+    -- ** TargetTcpProxy_ProxyHeader
+    TargetTcpProxy_ProxyHeader (..),
+
+    -- ** TargetTcpProxyList
+    TargetTcpProxyList (..),
+    newTargetTcpProxyList,
+
+    -- ** TargetTcpProxyList_Warning
+    TargetTcpProxyList_Warning (..),
+    newTargetTcpProxyList_Warning,
+
+    -- ** TargetTcpProxyList_Warning_Code
+    TargetTcpProxyList_Warning_Code (..),
+
+    -- ** TargetTcpProxyList_Warning_DataItem
+    TargetTcpProxyList_Warning_DataItem (..),
+    newTargetTcpProxyList_Warning_DataItem,
+
+    -- ** TargetVpnGateway
+    TargetVpnGateway (..),
+    newTargetVpnGateway,
+
+    -- ** TargetVpnGateway_Status
+    TargetVpnGateway_Status (..),
+
+    -- ** TargetVpnGatewayAggregatedList
+    TargetVpnGatewayAggregatedList (..),
+    newTargetVpnGatewayAggregatedList,
+
+    -- ** TargetVpnGatewayAggregatedList_Items
+    TargetVpnGatewayAggregatedList_Items (..),
+    newTargetVpnGatewayAggregatedList_Items,
+
+    -- ** TargetVpnGatewayAggregatedList_Warning
+    TargetVpnGatewayAggregatedList_Warning (..),
+    newTargetVpnGatewayAggregatedList_Warning,
+
+    -- ** TargetVpnGatewayAggregatedList_Warning_Code
+    TargetVpnGatewayAggregatedList_Warning_Code (..),
+
+    -- ** TargetVpnGatewayAggregatedList_Warning_DataItem
+    TargetVpnGatewayAggregatedList_Warning_DataItem (..),
+    newTargetVpnGatewayAggregatedList_Warning_DataItem,
+
+    -- ** TargetVpnGatewayList
+    TargetVpnGatewayList (..),
+    newTargetVpnGatewayList,
+
+    -- ** TargetVpnGatewayList_Warning
+    TargetVpnGatewayList_Warning (..),
+    newTargetVpnGatewayList_Warning,
+
+    -- ** TargetVpnGatewayList_Warning_Code
+    TargetVpnGatewayList_Warning_Code (..),
+
+    -- ** TargetVpnGatewayList_Warning_DataItem
+    TargetVpnGatewayList_Warning_DataItem (..),
+    newTargetVpnGatewayList_Warning_DataItem,
+
+    -- ** TargetVpnGatewaysScopedList
+    TargetVpnGatewaysScopedList (..),
+    newTargetVpnGatewaysScopedList,
+
+    -- ** TargetVpnGatewaysScopedList_Warning
+    TargetVpnGatewaysScopedList_Warning (..),
+    newTargetVpnGatewaysScopedList_Warning,
+
+    -- ** TargetVpnGatewaysScopedList_Warning_Code
+    TargetVpnGatewaysScopedList_Warning_Code (..),
+
+    -- ** TargetVpnGatewaysScopedList_Warning_DataItem
+    TargetVpnGatewaysScopedList_Warning_DataItem (..),
+    newTargetVpnGatewaysScopedList_Warning_DataItem,
+
+    -- ** TestFailure
+    TestFailure (..),
+    newTestFailure,
+
+    -- ** TestPermissionsRequest
+    TestPermissionsRequest (..),
+    newTestPermissionsRequest,
+
+    -- ** TestPermissionsResponse
+    TestPermissionsResponse (..),
+    newTestPermissionsResponse,
+
+    -- ** Uint128
+    Uint128 (..),
+    newUint128,
+
+    -- ** UrlMap
+    UrlMap (..),
+    newUrlMap,
+
+    -- ** UrlMapList
+    UrlMapList (..),
+    newUrlMapList,
+
+    -- ** UrlMapList_Warning
+    UrlMapList_Warning (..),
+    newUrlMapList_Warning,
+
+    -- ** UrlMapList_Warning_Code
+    UrlMapList_Warning_Code (..),
+
+    -- ** UrlMapList_Warning_DataItem
+    UrlMapList_Warning_DataItem (..),
+    newUrlMapList_Warning_DataItem,
+
+    -- ** UrlMapReference
+    UrlMapReference (..),
+    newUrlMapReference,
+
+    -- ** UrlMapTest
+    UrlMapTest (..),
+    newUrlMapTest,
+
+    -- ** UrlMapTestHeader
+    UrlMapTestHeader (..),
+    newUrlMapTestHeader,
+
+    -- ** UrlMapValidationResult
+    UrlMapValidationResult (..),
+    newUrlMapValidationResult,
+
+    -- ** UrlMapsAggregatedList
+    UrlMapsAggregatedList (..),
+    newUrlMapsAggregatedList,
+
+    -- ** UrlMapsAggregatedList_Items
+    UrlMapsAggregatedList_Items (..),
+    newUrlMapsAggregatedList_Items,
+
+    -- ** UrlMapsAggregatedList_Warning
+    UrlMapsAggregatedList_Warning (..),
+    newUrlMapsAggregatedList_Warning,
+
+    -- ** UrlMapsAggregatedList_Warning_Code
+    UrlMapsAggregatedList_Warning_Code (..),
+
+    -- ** UrlMapsAggregatedList_Warning_DataItem
+    UrlMapsAggregatedList_Warning_DataItem (..),
+    newUrlMapsAggregatedList_Warning_DataItem,
+
+    -- ** UrlMapsScopedList
+    UrlMapsScopedList (..),
+    newUrlMapsScopedList,
+
+    -- ** UrlMapsScopedList_Warning
+    UrlMapsScopedList_Warning (..),
+    newUrlMapsScopedList_Warning,
+
+    -- ** UrlMapsScopedList_Warning_Code
+    UrlMapsScopedList_Warning_Code (..),
+
+    -- ** UrlMapsScopedList_Warning_DataItem
+    UrlMapsScopedList_Warning_DataItem (..),
+    newUrlMapsScopedList_Warning_DataItem,
+
+    -- ** UrlMapsValidateRequest
+    UrlMapsValidateRequest (..),
+    newUrlMapsValidateRequest,
+
+    -- ** UrlMapsValidateRequest_LoadBalancingSchemesItem
+    UrlMapsValidateRequest_LoadBalancingSchemesItem (..),
+
+    -- ** UrlMapsValidateResponse
+    UrlMapsValidateResponse (..),
+    newUrlMapsValidateResponse,
+
+    -- ** UrlRewrite
+    UrlRewrite (..),
+    newUrlRewrite,
+
+    -- ** UsableSubnetwork
+    UsableSubnetwork (..),
+    newUsableSubnetwork,
+
+    -- ** UsableSubnetworkSecondaryRange
+    UsableSubnetworkSecondaryRange (..),
+    newUsableSubnetworkSecondaryRange,
+
+    -- ** UsableSubnetworksAggregatedList
+    UsableSubnetworksAggregatedList (..),
+    newUsableSubnetworksAggregatedList,
+
+    -- ** UsableSubnetworksAggregatedList_Warning
+    UsableSubnetworksAggregatedList_Warning (..),
+    newUsableSubnetworksAggregatedList_Warning,
+
+    -- ** UsableSubnetworksAggregatedList_Warning_Code
+    UsableSubnetworksAggregatedList_Warning_Code (..),
+
+    -- ** UsableSubnetworksAggregatedList_Warning_DataItem
+    UsableSubnetworksAggregatedList_Warning_DataItem (..),
+    newUsableSubnetworksAggregatedList_Warning_DataItem,
+
+    -- ** UsageExportLocation
+    UsageExportLocation (..),
+    newUsageExportLocation,
+
+    -- ** VmEndpointNatMappings
+    VmEndpointNatMappings (..),
+    newVmEndpointNatMappings,
+
+    -- ** VmEndpointNatMappingsInterfaceNatMappings
+    VmEndpointNatMappingsInterfaceNatMappings (..),
+    newVmEndpointNatMappingsInterfaceNatMappings,
+
+    -- ** VmEndpointNatMappingsList
+    VmEndpointNatMappingsList (..),
+    newVmEndpointNatMappingsList,
+
+    -- ** VmEndpointNatMappingsList_Warning
+    VmEndpointNatMappingsList_Warning (..),
+    newVmEndpointNatMappingsList_Warning,
+
+    -- ** VmEndpointNatMappingsList_Warning_Code
+    VmEndpointNatMappingsList_Warning_Code (..),
+
+    -- ** VmEndpointNatMappingsList_Warning_DataItem
+    VmEndpointNatMappingsList_Warning_DataItem (..),
+    newVmEndpointNatMappingsList_Warning_DataItem,
+
+    -- ** VpnGateway
+    VpnGateway (..),
+    newVpnGateway,
+
+    -- ** VpnGateway_Labels
+    VpnGateway_Labels (..),
+    newVpnGateway_Labels,
+
+    -- ** VpnGateway_StackType
+    VpnGateway_StackType (..),
+
+    -- ** VpnGatewayAggregatedList
+    VpnGatewayAggregatedList (..),
+    newVpnGatewayAggregatedList,
+
+    -- ** VpnGatewayAggregatedList_Items
+    VpnGatewayAggregatedList_Items (..),
+    newVpnGatewayAggregatedList_Items,
+
+    -- ** VpnGatewayAggregatedList_Warning
+    VpnGatewayAggregatedList_Warning (..),
+    newVpnGatewayAggregatedList_Warning,
+
+    -- ** VpnGatewayAggregatedList_Warning_Code
+    VpnGatewayAggregatedList_Warning_Code (..),
+
+    -- ** VpnGatewayAggregatedList_Warning_DataItem
+    VpnGatewayAggregatedList_Warning_DataItem (..),
+    newVpnGatewayAggregatedList_Warning_DataItem,
+
+    -- ** VpnGatewayList
+    VpnGatewayList (..),
+    newVpnGatewayList,
+
+    -- ** VpnGatewayList_Warning
+    VpnGatewayList_Warning (..),
+    newVpnGatewayList_Warning,
+
+    -- ** VpnGatewayList_Warning_Code
+    VpnGatewayList_Warning_Code (..),
+
+    -- ** VpnGatewayList_Warning_DataItem
+    VpnGatewayList_Warning_DataItem (..),
+    newVpnGatewayList_Warning_DataItem,
+
+    -- ** VpnGatewayStatus
+    VpnGatewayStatus (..),
+    newVpnGatewayStatus,
+
+    -- ** VpnGatewayStatusHighAvailabilityRequirementState
+    VpnGatewayStatusHighAvailabilityRequirementState (..),
+    newVpnGatewayStatusHighAvailabilityRequirementState,
+
+    -- ** VpnGatewayStatusHighAvailabilityRequirementState_State
+    VpnGatewayStatusHighAvailabilityRequirementState_State (..),
+
+    -- ** VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason
+    VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason (..),
+
+    -- ** VpnGatewayStatusTunnel
+    VpnGatewayStatusTunnel (..),
+    newVpnGatewayStatusTunnel,
+
+    -- ** VpnGatewayStatusVpnConnection
+    VpnGatewayStatusVpnConnection (..),
+    newVpnGatewayStatusVpnConnection,
+
+    -- ** VpnGatewayVpnGatewayInterface
+    VpnGatewayVpnGatewayInterface (..),
+    newVpnGatewayVpnGatewayInterface,
+
+    -- ** VpnGatewaysGetStatusResponse
+    VpnGatewaysGetStatusResponse (..),
+    newVpnGatewaysGetStatusResponse,
+
+    -- ** VpnGatewaysScopedList
+    VpnGatewaysScopedList (..),
+    newVpnGatewaysScopedList,
+
+    -- ** VpnGatewaysScopedList_Warning
+    VpnGatewaysScopedList_Warning (..),
+    newVpnGatewaysScopedList_Warning,
+
+    -- ** VpnGatewaysScopedList_Warning_Code
+    VpnGatewaysScopedList_Warning_Code (..),
+
+    -- ** VpnGatewaysScopedList_Warning_DataItem
+    VpnGatewaysScopedList_Warning_DataItem (..),
+    newVpnGatewaysScopedList_Warning_DataItem,
+
+    -- ** VpnTunnel
+    VpnTunnel (..),
+    newVpnTunnel,
+
+    -- ** VpnTunnel_Status
+    VpnTunnel_Status (..),
+
+    -- ** VpnTunnelAggregatedList
+    VpnTunnelAggregatedList (..),
+    newVpnTunnelAggregatedList,
+
+    -- ** VpnTunnelAggregatedList_Items
+    VpnTunnelAggregatedList_Items (..),
+    newVpnTunnelAggregatedList_Items,
+
+    -- ** VpnTunnelAggregatedList_Warning
+    VpnTunnelAggregatedList_Warning (..),
+    newVpnTunnelAggregatedList_Warning,
+
+    -- ** VpnTunnelAggregatedList_Warning_Code
+    VpnTunnelAggregatedList_Warning_Code (..),
+
+    -- ** VpnTunnelAggregatedList_Warning_DataItem
+    VpnTunnelAggregatedList_Warning_DataItem (..),
+    newVpnTunnelAggregatedList_Warning_DataItem,
+
+    -- ** VpnTunnelList
+    VpnTunnelList (..),
+    newVpnTunnelList,
+
+    -- ** VpnTunnelList_Warning
+    VpnTunnelList_Warning (..),
+    newVpnTunnelList_Warning,
+
+    -- ** VpnTunnelList_Warning_Code
+    VpnTunnelList_Warning_Code (..),
+
+    -- ** VpnTunnelList_Warning_DataItem
+    VpnTunnelList_Warning_DataItem (..),
+    newVpnTunnelList_Warning_DataItem,
+
+    -- ** VpnTunnelsScopedList
+    VpnTunnelsScopedList (..),
+    newVpnTunnelsScopedList,
+
+    -- ** VpnTunnelsScopedList_Warning
+    VpnTunnelsScopedList_Warning (..),
+    newVpnTunnelsScopedList_Warning,
+
+    -- ** VpnTunnelsScopedList_Warning_Code
+    VpnTunnelsScopedList_Warning_Code (..),
+
+    -- ** VpnTunnelsScopedList_Warning_DataItem
+    VpnTunnelsScopedList_Warning_DataItem (..),
+    newVpnTunnelsScopedList_Warning_DataItem,
+
+    -- ** WafExpressionSet
+    WafExpressionSet (..),
+    newWafExpressionSet,
+
+    -- ** WafExpressionSetExpression
+    WafExpressionSetExpression (..),
+    newWafExpressionSetExpression,
+
+    -- ** WeightedBackendService
+    WeightedBackendService (..),
+    newWeightedBackendService,
+
+    -- ** XpnHostList
+    XpnHostList (..),
+    newXpnHostList,
+
+    -- ** XpnHostList_Warning
+    XpnHostList_Warning (..),
+    newXpnHostList_Warning,
+
+    -- ** XpnHostList_Warning_Code
+    XpnHostList_Warning_Code (..),
+
+    -- ** XpnHostList_Warning_DataItem
+    XpnHostList_Warning_DataItem (..),
+    newXpnHostList_Warning_DataItem,
+
+    -- ** XpnResourceId
+    XpnResourceId (..),
+    newXpnResourceId,
+
+    -- ** XpnResourceId_Type
+    XpnResourceId_Type (..),
+
+    -- ** Zone
+    Zone (..),
+    newZone,
+
+    -- ** Zone_Status
+    Zone_Status (..),
+
+    -- ** ZoneList
+    ZoneList (..),
+    newZoneList,
+
+    -- ** ZoneList_Warning
+    ZoneList_Warning (..),
+    newZoneList_Warning,
+
+    -- ** ZoneList_Warning_Code
+    ZoneList_Warning_Code (..),
+
+    -- ** ZoneList_Warning_DataItem
+    ZoneList_Warning_DataItem (..),
+    newZoneList_Warning_DataItem,
+
+    -- ** ZoneSetLabelsRequest
+    ZoneSetLabelsRequest (..),
+    newZoneSetLabelsRequest,
+
+    -- ** ZoneSetLabelsRequest_Labels
+    ZoneSetLabelsRequest_Labels (..),
+    newZoneSetLabelsRequest_Labels,
+
+    -- ** ZoneSetPolicyRequest
+    ZoneSetPolicyRequest (..),
+    newZoneSetPolicyRequest,
+
+    -- ** InstancesUpdateMinimalAction
+    InstancesUpdateMinimalAction (..),
+
+    -- ** InstancesUpdateMostDisruptiveAllowedAction
+    InstancesUpdateMostDisruptiveAllowedAction (..),
+
+    -- ** NetworksListPeeringRoutesDirection
+    NetworksListPeeringRoutesDirection (..),
+  )
+where
+
+import Network.Google.Compute.AcceleratorTypes.AggregatedList
+import Network.Google.Compute.AcceleratorTypes.Get
+import Network.Google.Compute.AcceleratorTypes.List
+import Network.Google.Compute.Addresses.AggregatedList
+import Network.Google.Compute.Addresses.Delete
+import Network.Google.Compute.Addresses.Get
+import Network.Google.Compute.Addresses.Insert
+import Network.Google.Compute.Addresses.List
+import Network.Google.Compute.Autoscalers.AggregatedList
+import Network.Google.Compute.Autoscalers.Delete
+import Network.Google.Compute.Autoscalers.Get
+import Network.Google.Compute.Autoscalers.Insert
+import Network.Google.Compute.Autoscalers.List
+import Network.Google.Compute.Autoscalers.Patch
+import Network.Google.Compute.Autoscalers.Update
+import Network.Google.Compute.BackendBuckets.AddSignedUrlKey
+import Network.Google.Compute.BackendBuckets.Delete
+import Network.Google.Compute.BackendBuckets.DeleteSignedUrlKey
+import Network.Google.Compute.BackendBuckets.Get
+import Network.Google.Compute.BackendBuckets.Insert
+import Network.Google.Compute.BackendBuckets.List
+import Network.Google.Compute.BackendBuckets.Patch
+import Network.Google.Compute.BackendBuckets.SetEdgeSecurityPolicy
+import Network.Google.Compute.BackendBuckets.Update
+import Network.Google.Compute.BackendServices.AddSignedUrlKey
+import Network.Google.Compute.BackendServices.AggregatedList
+import Network.Google.Compute.BackendServices.Delete
+import Network.Google.Compute.BackendServices.DeleteSignedUrlKey
+import Network.Google.Compute.BackendServices.Get
+import Network.Google.Compute.BackendServices.GetHealth
+import Network.Google.Compute.BackendServices.Insert
+import Network.Google.Compute.BackendServices.List
+import Network.Google.Compute.BackendServices.Patch
+import Network.Google.Compute.BackendServices.SetEdgeSecurityPolicy
+import Network.Google.Compute.BackendServices.SetSecurityPolicy
+import Network.Google.Compute.BackendServices.Update
+import Network.Google.Compute.DiskTypes.AggregatedList
+import Network.Google.Compute.DiskTypes.Get
+import Network.Google.Compute.DiskTypes.List
+import Network.Google.Compute.Disks.AddResourcePolicies
+import Network.Google.Compute.Disks.AggregatedList
+import Network.Google.Compute.Disks.CreateSnapshot
+import Network.Google.Compute.Disks.Delete
+import Network.Google.Compute.Disks.Get
+import Network.Google.Compute.Disks.GetIamPolicy
+import Network.Google.Compute.Disks.Insert
+import Network.Google.Compute.Disks.List
+import Network.Google.Compute.Disks.RemoveResourcePolicies
+import Network.Google.Compute.Disks.Resize
+import Network.Google.Compute.Disks.SetIamPolicy
+import Network.Google.Compute.Disks.SetLabels
+import Network.Google.Compute.Disks.TestIamPermissions
+import Network.Google.Compute.ExternalVpnGateways.Delete
+import Network.Google.Compute.ExternalVpnGateways.Get
+import Network.Google.Compute.ExternalVpnGateways.Insert
+import Network.Google.Compute.ExternalVpnGateways.List
+import Network.Google.Compute.ExternalVpnGateways.SetLabels
+import Network.Google.Compute.ExternalVpnGateways.TestIamPermissions
+import Network.Google.Compute.FirewallPolicies.AddAssociation
+import Network.Google.Compute.FirewallPolicies.AddRule
+import Network.Google.Compute.FirewallPolicies.CloneRules
+import Network.Google.Compute.FirewallPolicies.Delete
+import Network.Google.Compute.FirewallPolicies.Get
+import Network.Google.Compute.FirewallPolicies.GetAssociation
+import Network.Google.Compute.FirewallPolicies.GetIamPolicy
+import Network.Google.Compute.FirewallPolicies.GetRule
+import Network.Google.Compute.FirewallPolicies.Insert
+import Network.Google.Compute.FirewallPolicies.List
+import Network.Google.Compute.FirewallPolicies.ListAssociations
+import Network.Google.Compute.FirewallPolicies.Move
+import Network.Google.Compute.FirewallPolicies.Patch
+import Network.Google.Compute.FirewallPolicies.PatchRule
+import Network.Google.Compute.FirewallPolicies.RemoveAssociation
+import Network.Google.Compute.FirewallPolicies.RemoveRule
+import Network.Google.Compute.FirewallPolicies.SetIamPolicy
+import Network.Google.Compute.FirewallPolicies.TestIamPermissions
+import Network.Google.Compute.Firewalls.Delete
+import Network.Google.Compute.Firewalls.Get
+import Network.Google.Compute.Firewalls.Insert
+import Network.Google.Compute.Firewalls.List
+import Network.Google.Compute.Firewalls.Patch
+import Network.Google.Compute.Firewalls.Update
+import Network.Google.Compute.ForwardingRules.AggregatedList
+import Network.Google.Compute.ForwardingRules.Delete
+import Network.Google.Compute.ForwardingRules.Get
+import Network.Google.Compute.ForwardingRules.Insert
+import Network.Google.Compute.ForwardingRules.List
+import Network.Google.Compute.ForwardingRules.Patch
+import Network.Google.Compute.ForwardingRules.SetLabels
+import Network.Google.Compute.ForwardingRules.SetTarget
+import Network.Google.Compute.GlobalAddresses.Delete
+import Network.Google.Compute.GlobalAddresses.Get
+import Network.Google.Compute.GlobalAddresses.Insert
+import Network.Google.Compute.GlobalAddresses.List
+import Network.Google.Compute.GlobalForwardingRules.Delete
+import Network.Google.Compute.GlobalForwardingRules.Get
+import Network.Google.Compute.GlobalForwardingRules.Insert
+import Network.Google.Compute.GlobalForwardingRules.List
+import Network.Google.Compute.GlobalForwardingRules.Patch
+import Network.Google.Compute.GlobalForwardingRules.SetLabels
+import Network.Google.Compute.GlobalForwardingRules.SetTarget
+import Network.Google.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
+import Network.Google.Compute.GlobalNetworkEndpointGroups.Delete
+import Network.Google.Compute.GlobalNetworkEndpointGroups.DetachNetworkEndpoints
+import Network.Google.Compute.GlobalNetworkEndpointGroups.Get
+import Network.Google.Compute.GlobalNetworkEndpointGroups.Insert
+import Network.Google.Compute.GlobalNetworkEndpointGroups.List
+import Network.Google.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
+import Network.Google.Compute.GlobalOperations.AggregatedList
+import Network.Google.Compute.GlobalOperations.Delete
+import Network.Google.Compute.GlobalOperations.Get
+import Network.Google.Compute.GlobalOperations.List
+import Network.Google.Compute.GlobalOperations.Wait
+import Network.Google.Compute.GlobalOrganizationOperations.Delete
+import Network.Google.Compute.GlobalOrganizationOperations.Get
+import Network.Google.Compute.GlobalOrganizationOperations.List
+import Network.Google.Compute.GlobalPublicDelegatedPrefixes.Delete
+import Network.Google.Compute.GlobalPublicDelegatedPrefixes.Get
+import Network.Google.Compute.GlobalPublicDelegatedPrefixes.Insert
+import Network.Google.Compute.GlobalPublicDelegatedPrefixes.List
+import Network.Google.Compute.GlobalPublicDelegatedPrefixes.Patch
+import Network.Google.Compute.HealthChecks.AggregatedList
+import Network.Google.Compute.HealthChecks.Delete
+import Network.Google.Compute.HealthChecks.Get
+import Network.Google.Compute.HealthChecks.Insert
+import Network.Google.Compute.HealthChecks.List
+import Network.Google.Compute.HealthChecks.Patch
+import Network.Google.Compute.HealthChecks.Update
+import Network.Google.Compute.HttpHealthChecks.Delete
+import Network.Google.Compute.HttpHealthChecks.Get
+import Network.Google.Compute.HttpHealthChecks.Insert
+import Network.Google.Compute.HttpHealthChecks.List
+import Network.Google.Compute.HttpHealthChecks.Patch
+import Network.Google.Compute.HttpHealthChecks.Update
+import Network.Google.Compute.HttpsHealthChecks.Delete
+import Network.Google.Compute.HttpsHealthChecks.Get
+import Network.Google.Compute.HttpsHealthChecks.Insert
+import Network.Google.Compute.HttpsHealthChecks.List
+import Network.Google.Compute.HttpsHealthChecks.Patch
+import Network.Google.Compute.HttpsHealthChecks.Update
+import Network.Google.Compute.ImageFamilyViews.Get
+import Network.Google.Compute.Images.Delete
+import Network.Google.Compute.Images.Deprecate
+import Network.Google.Compute.Images.Get
+import Network.Google.Compute.Images.GetFromFamily
+import Network.Google.Compute.Images.GetIamPolicy
+import Network.Google.Compute.Images.Insert
+import Network.Google.Compute.Images.List
+import Network.Google.Compute.Images.Patch
+import Network.Google.Compute.Images.SetIamPolicy
+import Network.Google.Compute.Images.SetLabels
+import Network.Google.Compute.Images.TestIamPermissions
+import Network.Google.Compute.InstanceGroupManagers.AbandonInstances
+import Network.Google.Compute.InstanceGroupManagers.AggregatedList
+import Network.Google.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
+import Network.Google.Compute.InstanceGroupManagers.CreateInstances
+import Network.Google.Compute.InstanceGroupManagers.Delete
+import Network.Google.Compute.InstanceGroupManagers.DeleteInstances
+import Network.Google.Compute.InstanceGroupManagers.DeletePerInstanceConfigs
+import Network.Google.Compute.InstanceGroupManagers.Get
+import Network.Google.Compute.InstanceGroupManagers.Insert
+import Network.Google.Compute.InstanceGroupManagers.List
+import Network.Google.Compute.InstanceGroupManagers.ListErrors
+import Network.Google.Compute.InstanceGroupManagers.ListManagedInstances
+import Network.Google.Compute.InstanceGroupManagers.ListPerInstanceConfigs
+import Network.Google.Compute.InstanceGroupManagers.Patch
+import Network.Google.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
+import Network.Google.Compute.InstanceGroupManagers.RecreateInstances
+import Network.Google.Compute.InstanceGroupManagers.Resize
+import Network.Google.Compute.InstanceGroupManagers.SetInstanceTemplate
+import Network.Google.Compute.InstanceGroupManagers.SetTargetPools
+import Network.Google.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
+import Network.Google.Compute.InstanceGroups.AddInstances
+import Network.Google.Compute.InstanceGroups.AggregatedList
+import Network.Google.Compute.InstanceGroups.Delete
+import Network.Google.Compute.InstanceGroups.Get
+import Network.Google.Compute.InstanceGroups.Insert
+import Network.Google.Compute.InstanceGroups.List
+import Network.Google.Compute.InstanceGroups.ListInstances
+import Network.Google.Compute.InstanceGroups.RemoveInstances
+import Network.Google.Compute.InstanceGroups.SetNamedPorts
+import Network.Google.Compute.InstanceTemplates.Delete
+import Network.Google.Compute.InstanceTemplates.Get
+import Network.Google.Compute.InstanceTemplates.GetIamPolicy
+import Network.Google.Compute.InstanceTemplates.Insert
+import Network.Google.Compute.InstanceTemplates.List
+import Network.Google.Compute.InstanceTemplates.SetIamPolicy
+import Network.Google.Compute.InstanceTemplates.TestIamPermissions
+import Network.Google.Compute.Instances.AddAccessConfig
+import Network.Google.Compute.Instances.AddResourcePolicies
+import Network.Google.Compute.Instances.AggregatedList
+import Network.Google.Compute.Instances.AttachDisk
+import Network.Google.Compute.Instances.BulkInsert
+import Network.Google.Compute.Instances.Delete
+import Network.Google.Compute.Instances.DeleteAccessConfig
+import Network.Google.Compute.Instances.DetachDisk
+import Network.Google.Compute.Instances.Get
+import Network.Google.Compute.Instances.GetEffectiveFirewalls
+import Network.Google.Compute.Instances.GetGuestAttributes
+import Network.Google.Compute.Instances.GetIamPolicy
+import Network.Google.Compute.Instances.GetScreenshot
+import Network.Google.Compute.Instances.GetSerialPortOutput
+import Network.Google.Compute.Instances.GetShieldedInstanceIdentity
+import Network.Google.Compute.Instances.Insert
+import Network.Google.Compute.Instances.List
+import Network.Google.Compute.Instances.ListReferrers
+import Network.Google.Compute.Instances.RemoveResourcePolicies
+import Network.Google.Compute.Instances.Reset
+import Network.Google.Compute.Instances.Resume
+import Network.Google.Compute.Instances.SendDiagnosticInterrupt
+import Network.Google.Compute.Instances.SetDeletionProtection
+import Network.Google.Compute.Instances.SetDiskAutoDelete
+import Network.Google.Compute.Instances.SetIamPolicy
+import Network.Google.Compute.Instances.SetLabels
+import Network.Google.Compute.Instances.SetMachineResources
+import Network.Google.Compute.Instances.SetMachineType
+import Network.Google.Compute.Instances.SetMetadata
+import Network.Google.Compute.Instances.SetMinCpuPlatform
+import Network.Google.Compute.Instances.SetScheduling
+import Network.Google.Compute.Instances.SetServiceAccount
+import Network.Google.Compute.Instances.SetShieldedInstanceIntegrityPolicy
+import Network.Google.Compute.Instances.SetTags
+import Network.Google.Compute.Instances.SimulateMaintenanceEvent
+import Network.Google.Compute.Instances.Start
+import Network.Google.Compute.Instances.StartWithEncryptionKey
+import Network.Google.Compute.Instances.Stop
+import Network.Google.Compute.Instances.Suspend
+import Network.Google.Compute.Instances.TestIamPermissions
+import Network.Google.Compute.Instances.Update
+import Network.Google.Compute.Instances.UpdateAccessConfig
+import Network.Google.Compute.Instances.UpdateDisplayDevice
+import Network.Google.Compute.Instances.UpdateNetworkInterface
+import Network.Google.Compute.Instances.UpdateShieldedInstanceConfig
+import Network.Google.Compute.InterconnectAttachments.AggregatedList
+import Network.Google.Compute.InterconnectAttachments.Delete
+import Network.Google.Compute.InterconnectAttachments.Get
+import Network.Google.Compute.InterconnectAttachments.Insert
+import Network.Google.Compute.InterconnectAttachments.List
+import Network.Google.Compute.InterconnectAttachments.Patch
+import Network.Google.Compute.InterconnectLocations.Get
+import Network.Google.Compute.InterconnectLocations.List
+import Network.Google.Compute.Interconnects.Delete
+import Network.Google.Compute.Interconnects.Get
+import Network.Google.Compute.Interconnects.GetDiagnostics
+import Network.Google.Compute.Interconnects.Insert
+import Network.Google.Compute.Interconnects.List
+import Network.Google.Compute.Interconnects.Patch
+import Network.Google.Compute.LicenseCodes.Get
+import Network.Google.Compute.LicenseCodes.TestIamPermissions
+import Network.Google.Compute.Licenses.Delete
+import Network.Google.Compute.Licenses.Get
+import Network.Google.Compute.Licenses.GetIamPolicy
+import Network.Google.Compute.Licenses.Insert
+import Network.Google.Compute.Licenses.List
+import Network.Google.Compute.Licenses.SetIamPolicy
+import Network.Google.Compute.Licenses.TestIamPermissions
+import Network.Google.Compute.MachineImages.Delete
+import Network.Google.Compute.MachineImages.Get
+import Network.Google.Compute.MachineImages.GetIamPolicy
+import Network.Google.Compute.MachineImages.Insert
+import Network.Google.Compute.MachineImages.List
+import Network.Google.Compute.MachineImages.SetIamPolicy
+import Network.Google.Compute.MachineImages.TestIamPermissions
+import Network.Google.Compute.MachineTypes.AggregatedList
+import Network.Google.Compute.MachineTypes.Get
+import Network.Google.Compute.MachineTypes.List
+import Network.Google.Compute.NetworkEndpointGroups.AggregatedList
+import Network.Google.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
+import Network.Google.Compute.NetworkEndpointGroups.Delete
+import Network.Google.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
+import Network.Google.Compute.NetworkEndpointGroups.Get
+import Network.Google.Compute.NetworkEndpointGroups.Insert
+import Network.Google.Compute.NetworkEndpointGroups.List
+import Network.Google.Compute.NetworkEndpointGroups.ListNetworkEndpoints
+import Network.Google.Compute.NetworkEndpointGroups.TestIamPermissions
+import Network.Google.Compute.NetworkFirewallPolicies.AddAssociation
+import Network.Google.Compute.NetworkFirewallPolicies.AddRule
+import Network.Google.Compute.NetworkFirewallPolicies.CloneRules
+import Network.Google.Compute.NetworkFirewallPolicies.Delete
+import Network.Google.Compute.NetworkFirewallPolicies.Get
+import Network.Google.Compute.NetworkFirewallPolicies.GetAssociation
+import Network.Google.Compute.NetworkFirewallPolicies.GetIamPolicy
+import Network.Google.Compute.NetworkFirewallPolicies.GetRule
+import Network.Google.Compute.NetworkFirewallPolicies.Insert
+import Network.Google.Compute.NetworkFirewallPolicies.List
+import Network.Google.Compute.NetworkFirewallPolicies.Patch
+import Network.Google.Compute.NetworkFirewallPolicies.PatchRule
+import Network.Google.Compute.NetworkFirewallPolicies.RemoveAssociation
+import Network.Google.Compute.NetworkFirewallPolicies.RemoveRule
+import Network.Google.Compute.NetworkFirewallPolicies.SetIamPolicy
+import Network.Google.Compute.NetworkFirewallPolicies.TestIamPermissions
+import Network.Google.Compute.Networks.AddPeering
+import Network.Google.Compute.Networks.Delete
+import Network.Google.Compute.Networks.Get
+import Network.Google.Compute.Networks.GetEffectiveFirewalls
+import Network.Google.Compute.Networks.Insert
+import Network.Google.Compute.Networks.List
+import Network.Google.Compute.Networks.ListPeeringRoutes
+import Network.Google.Compute.Networks.Patch
+import Network.Google.Compute.Networks.RemovePeering
+import Network.Google.Compute.Networks.SwitchToCustomMode
+import Network.Google.Compute.Networks.UpdatePeering
+import Network.Google.Compute.NodeGroups.AddNodes
+import Network.Google.Compute.NodeGroups.AggregatedList
+import Network.Google.Compute.NodeGroups.Delete
+import Network.Google.Compute.NodeGroups.DeleteNodes
+import Network.Google.Compute.NodeGroups.Get
+import Network.Google.Compute.NodeGroups.GetIamPolicy
+import Network.Google.Compute.NodeGroups.Insert
+import Network.Google.Compute.NodeGroups.List
+import Network.Google.Compute.NodeGroups.ListNodes
+import Network.Google.Compute.NodeGroups.Patch
+import Network.Google.Compute.NodeGroups.SetIamPolicy
+import Network.Google.Compute.NodeGroups.SetNodeTemplate
+import Network.Google.Compute.NodeGroups.TestIamPermissions
+import Network.Google.Compute.NodeTemplates.AggregatedList
+import Network.Google.Compute.NodeTemplates.Delete
+import Network.Google.Compute.NodeTemplates.Get
+import Network.Google.Compute.NodeTemplates.GetIamPolicy
+import Network.Google.Compute.NodeTemplates.Insert
+import Network.Google.Compute.NodeTemplates.List
+import Network.Google.Compute.NodeTemplates.SetIamPolicy
+import Network.Google.Compute.NodeTemplates.TestIamPermissions
+import Network.Google.Compute.NodeTypes.AggregatedList
+import Network.Google.Compute.NodeTypes.Get
+import Network.Google.Compute.NodeTypes.List
+import Network.Google.Compute.PacketMirrorings.AggregatedList
+import Network.Google.Compute.PacketMirrorings.Delete
+import Network.Google.Compute.PacketMirrorings.Get
+import Network.Google.Compute.PacketMirrorings.Insert
+import Network.Google.Compute.PacketMirrorings.List
+import Network.Google.Compute.PacketMirrorings.Patch
+import Network.Google.Compute.PacketMirrorings.TestIamPermissions
+import Network.Google.Compute.Projects.DisableXpnHost
+import Network.Google.Compute.Projects.DisableXpnResource
+import Network.Google.Compute.Projects.EnableXpnHost
+import Network.Google.Compute.Projects.EnableXpnResource
+import Network.Google.Compute.Projects.Get
+import Network.Google.Compute.Projects.GetXpnHost
+import Network.Google.Compute.Projects.GetXpnResources
+import Network.Google.Compute.Projects.ListXpnHosts
+import Network.Google.Compute.Projects.MoveDisk
+import Network.Google.Compute.Projects.MoveInstance
+import Network.Google.Compute.Projects.SetCommonInstanceMetadata
+import Network.Google.Compute.Projects.SetDefaultNetworkTier
+import Network.Google.Compute.Projects.SetUsageExportBucket
+import Network.Google.Compute.PublicAdvertisedPrefixes.Delete
+import Network.Google.Compute.PublicAdvertisedPrefixes.Get
+import Network.Google.Compute.PublicAdvertisedPrefixes.Insert
+import Network.Google.Compute.PublicAdvertisedPrefixes.List
+import Network.Google.Compute.PublicAdvertisedPrefixes.Patch
+import Network.Google.Compute.PublicDelegatedPrefixes.AggregatedList
+import Network.Google.Compute.PublicDelegatedPrefixes.Delete
+import Network.Google.Compute.PublicDelegatedPrefixes.Get
+import Network.Google.Compute.PublicDelegatedPrefixes.Insert
+import Network.Google.Compute.PublicDelegatedPrefixes.List
+import Network.Google.Compute.PublicDelegatedPrefixes.Patch
+import Network.Google.Compute.RegionAutoscalers.Delete
+import Network.Google.Compute.RegionAutoscalers.Get
+import Network.Google.Compute.RegionAutoscalers.Insert
+import Network.Google.Compute.RegionAutoscalers.List
+import Network.Google.Compute.RegionAutoscalers.Patch
+import Network.Google.Compute.RegionAutoscalers.Update
+import Network.Google.Compute.RegionBackendServices.Delete
+import Network.Google.Compute.RegionBackendServices.Get
+import Network.Google.Compute.RegionBackendServices.GetHealth
+import Network.Google.Compute.RegionBackendServices.Insert
+import Network.Google.Compute.RegionBackendServices.List
+import Network.Google.Compute.RegionBackendServices.Patch
+import Network.Google.Compute.RegionBackendServices.Update
+import Network.Google.Compute.RegionCommitments.AggregatedList
+import Network.Google.Compute.RegionCommitments.Get
+import Network.Google.Compute.RegionCommitments.Insert
+import Network.Google.Compute.RegionCommitments.List
+import Network.Google.Compute.RegionCommitments.Update
+import Network.Google.Compute.RegionDiskTypes.Get
+import Network.Google.Compute.RegionDiskTypes.List
+import Network.Google.Compute.RegionDisks.AddResourcePolicies
+import Network.Google.Compute.RegionDisks.CreateSnapshot
+import Network.Google.Compute.RegionDisks.Delete
+import Network.Google.Compute.RegionDisks.Get
+import Network.Google.Compute.RegionDisks.GetIamPolicy
+import Network.Google.Compute.RegionDisks.Insert
+import Network.Google.Compute.RegionDisks.List
+import Network.Google.Compute.RegionDisks.RemoveResourcePolicies
+import Network.Google.Compute.RegionDisks.Resize
+import Network.Google.Compute.RegionDisks.SetIamPolicy
+import Network.Google.Compute.RegionDisks.SetLabels
+import Network.Google.Compute.RegionDisks.TestIamPermissions
+import Network.Google.Compute.RegionHealthCheckServices.Delete
+import Network.Google.Compute.RegionHealthCheckServices.Get
+import Network.Google.Compute.RegionHealthCheckServices.Insert
+import Network.Google.Compute.RegionHealthCheckServices.List
+import Network.Google.Compute.RegionHealthCheckServices.Patch
+import Network.Google.Compute.RegionHealthChecks.Delete
+import Network.Google.Compute.RegionHealthChecks.Get
+import Network.Google.Compute.RegionHealthChecks.Insert
+import Network.Google.Compute.RegionHealthChecks.List
+import Network.Google.Compute.RegionHealthChecks.Patch
+import Network.Google.Compute.RegionHealthChecks.Update
+import Network.Google.Compute.RegionInstanceGroupManagers.AbandonInstances
+import Network.Google.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
+import Network.Google.Compute.RegionInstanceGroupManagers.CreateInstances
+import Network.Google.Compute.RegionInstanceGroupManagers.Delete
+import Network.Google.Compute.RegionInstanceGroupManagers.DeleteInstances
+import Network.Google.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
+import Network.Google.Compute.RegionInstanceGroupManagers.Get
+import Network.Google.Compute.RegionInstanceGroupManagers.Insert
+import Network.Google.Compute.RegionInstanceGroupManagers.List
+import Network.Google.Compute.RegionInstanceGroupManagers.ListErrors
+import Network.Google.Compute.RegionInstanceGroupManagers.ListManagedInstances
+import Network.Google.Compute.RegionInstanceGroupManagers.ListPerInstanceConfigs
+import Network.Google.Compute.RegionInstanceGroupManagers.Patch
+import Network.Google.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
+import Network.Google.Compute.RegionInstanceGroupManagers.RecreateInstances
+import Network.Google.Compute.RegionInstanceGroupManagers.Resize
+import Network.Google.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
+import Network.Google.Compute.RegionInstanceGroupManagers.SetTargetPools
+import Network.Google.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
+import Network.Google.Compute.RegionInstanceGroups.Get
+import Network.Google.Compute.RegionInstanceGroups.List
+import Network.Google.Compute.RegionInstanceGroups.ListInstances
+import Network.Google.Compute.RegionInstanceGroups.SetNamedPorts
+import Network.Google.Compute.RegionInstances.BulkInsert
+import Network.Google.Compute.RegionNetworkEndpointGroups.Delete
+import Network.Google.Compute.RegionNetworkEndpointGroups.Get
+import Network.Google.Compute.RegionNetworkEndpointGroups.Insert
+import Network.Google.Compute.RegionNetworkEndpointGroups.List
+import Network.Google.Compute.RegionNetworkFirewallPolicies.AddAssociation
+import Network.Google.Compute.RegionNetworkFirewallPolicies.AddRule
+import Network.Google.Compute.RegionNetworkFirewallPolicies.CloneRules
+import Network.Google.Compute.RegionNetworkFirewallPolicies.Delete
+import Network.Google.Compute.RegionNetworkFirewallPolicies.Get
+import Network.Google.Compute.RegionNetworkFirewallPolicies.GetAssociation
+import Network.Google.Compute.RegionNetworkFirewallPolicies.GetEffectiveFirewalls
+import Network.Google.Compute.RegionNetworkFirewallPolicies.GetIamPolicy
+import Network.Google.Compute.RegionNetworkFirewallPolicies.GetRule
+import Network.Google.Compute.RegionNetworkFirewallPolicies.Insert
+import Network.Google.Compute.RegionNetworkFirewallPolicies.List
+import Network.Google.Compute.RegionNetworkFirewallPolicies.Patch
+import Network.Google.Compute.RegionNetworkFirewallPolicies.PatchRule
+import Network.Google.Compute.RegionNetworkFirewallPolicies.RemoveAssociation
+import Network.Google.Compute.RegionNetworkFirewallPolicies.RemoveRule
+import Network.Google.Compute.RegionNetworkFirewallPolicies.SetIamPolicy
+import Network.Google.Compute.RegionNetworkFirewallPolicies.TestIamPermissions
+import Network.Google.Compute.RegionNotificationEndpoints.Delete
+import Network.Google.Compute.RegionNotificationEndpoints.Get
+import Network.Google.Compute.RegionNotificationEndpoints.Insert
+import Network.Google.Compute.RegionNotificationEndpoints.List
+import Network.Google.Compute.RegionOperations.Delete
+import Network.Google.Compute.RegionOperations.Get
+import Network.Google.Compute.RegionOperations.List
+import Network.Google.Compute.RegionOperations.Wait
+import Network.Google.Compute.RegionSslCertificates.Delete
+import Network.Google.Compute.RegionSslCertificates.Get
+import Network.Google.Compute.RegionSslCertificates.Insert
+import Network.Google.Compute.RegionSslCertificates.List
+import Network.Google.Compute.RegionTargetHttpProxies.Delete
+import Network.Google.Compute.RegionTargetHttpProxies.Get
+import Network.Google.Compute.RegionTargetHttpProxies.Insert
+import Network.Google.Compute.RegionTargetHttpProxies.List
+import Network.Google.Compute.RegionTargetHttpProxies.SetUrlMap
+import Network.Google.Compute.RegionTargetHttpsProxies.Delete
+import Network.Google.Compute.RegionTargetHttpsProxies.Get
+import Network.Google.Compute.RegionTargetHttpsProxies.Insert
+import Network.Google.Compute.RegionTargetHttpsProxies.List
+import Network.Google.Compute.RegionTargetHttpsProxies.Patch
+import Network.Google.Compute.RegionTargetHttpsProxies.SetSslCertificates
+import Network.Google.Compute.RegionTargetHttpsProxies.SetUrlMap
+import Network.Google.Compute.RegionUrlMaps.Delete
+import Network.Google.Compute.RegionUrlMaps.Get
+import Network.Google.Compute.RegionUrlMaps.Insert
+import Network.Google.Compute.RegionUrlMaps.List
+import Network.Google.Compute.RegionUrlMaps.Patch
+import Network.Google.Compute.RegionUrlMaps.Update
+import Network.Google.Compute.RegionUrlMaps.Validate
+import Network.Google.Compute.Regions.Get
+import Network.Google.Compute.Regions.List
+import Network.Google.Compute.Reservations.AggregatedList
+import Network.Google.Compute.Reservations.Delete
+import Network.Google.Compute.Reservations.Get
+import Network.Google.Compute.Reservations.GetIamPolicy
+import Network.Google.Compute.Reservations.Insert
+import Network.Google.Compute.Reservations.List
+import Network.Google.Compute.Reservations.Resize
+import Network.Google.Compute.Reservations.SetIamPolicy
+import Network.Google.Compute.Reservations.TestIamPermissions
+import Network.Google.Compute.Reservations.Update
+import Network.Google.Compute.ResourcePolicies.AggregatedList
+import Network.Google.Compute.ResourcePolicies.Delete
+import Network.Google.Compute.ResourcePolicies.Get
+import Network.Google.Compute.ResourcePolicies.GetIamPolicy
+import Network.Google.Compute.ResourcePolicies.Insert
+import Network.Google.Compute.ResourcePolicies.List
+import Network.Google.Compute.ResourcePolicies.SetIamPolicy
+import Network.Google.Compute.ResourcePolicies.TestIamPermissions
+import Network.Google.Compute.Routers.AggregatedList
+import Network.Google.Compute.Routers.Delete
+import Network.Google.Compute.Routers.Get
+import Network.Google.Compute.Routers.GetNatMappingInfo
+import Network.Google.Compute.Routers.GetRouterStatus
+import Network.Google.Compute.Routers.Insert
+import Network.Google.Compute.Routers.List
+import Network.Google.Compute.Routers.Patch
+import Network.Google.Compute.Routers.Preview
+import Network.Google.Compute.Routers.Update
+import Network.Google.Compute.Routes.Delete
+import Network.Google.Compute.Routes.Get
+import Network.Google.Compute.Routes.Insert
+import Network.Google.Compute.Routes.List
+import Network.Google.Compute.SecurityPolicies.AddRule
+import Network.Google.Compute.SecurityPolicies.Delete
+import Network.Google.Compute.SecurityPolicies.Get
+import Network.Google.Compute.SecurityPolicies.GetRule
+import Network.Google.Compute.SecurityPolicies.Insert
+import Network.Google.Compute.SecurityPolicies.List
+import Network.Google.Compute.SecurityPolicies.ListPreconfiguredExpressionSets
+import Network.Google.Compute.SecurityPolicies.Patch
+import Network.Google.Compute.SecurityPolicies.PatchRule
+import Network.Google.Compute.SecurityPolicies.RemoveRule
+import Network.Google.Compute.ServiceAttachments.AggregatedList
+import Network.Google.Compute.ServiceAttachments.Delete
+import Network.Google.Compute.ServiceAttachments.Get
+import Network.Google.Compute.ServiceAttachments.GetIamPolicy
+import Network.Google.Compute.ServiceAttachments.Insert
+import Network.Google.Compute.ServiceAttachments.List
+import Network.Google.Compute.ServiceAttachments.Patch
+import Network.Google.Compute.ServiceAttachments.SetIamPolicy
+import Network.Google.Compute.ServiceAttachments.TestIamPermissions
+import Network.Google.Compute.Snapshots.Delete
+import Network.Google.Compute.Snapshots.Get
+import Network.Google.Compute.Snapshots.GetIamPolicy
+import Network.Google.Compute.Snapshots.Insert
+import Network.Google.Compute.Snapshots.List
+import Network.Google.Compute.Snapshots.SetIamPolicy
+import Network.Google.Compute.Snapshots.SetLabels
+import Network.Google.Compute.Snapshots.TestIamPermissions
+import Network.Google.Compute.SslCertificates.AggregatedList
+import Network.Google.Compute.SslCertificates.Delete
+import Network.Google.Compute.SslCertificates.Get
+import Network.Google.Compute.SslCertificates.Insert
+import Network.Google.Compute.SslCertificates.List
+import Network.Google.Compute.SslPolicies.Delete
+import Network.Google.Compute.SslPolicies.Get
+import Network.Google.Compute.SslPolicies.Insert
+import Network.Google.Compute.SslPolicies.List
+import Network.Google.Compute.SslPolicies.ListAvailableFeatures
+import Network.Google.Compute.SslPolicies.Patch
+import Network.Google.Compute.Subnetworks.AggregatedList
+import Network.Google.Compute.Subnetworks.Delete
+import Network.Google.Compute.Subnetworks.ExpandIpCidrRange
+import Network.Google.Compute.Subnetworks.Get
+import Network.Google.Compute.Subnetworks.GetIamPolicy
+import Network.Google.Compute.Subnetworks.Insert
+import Network.Google.Compute.Subnetworks.List
+import Network.Google.Compute.Subnetworks.ListUsable
+import Network.Google.Compute.Subnetworks.Patch
+import Network.Google.Compute.Subnetworks.SetIamPolicy
+import Network.Google.Compute.Subnetworks.SetPrivateIpGoogleAccess
+import Network.Google.Compute.Subnetworks.TestIamPermissions
+import Network.Google.Compute.TargetGrpcProxies.Delete
+import Network.Google.Compute.TargetGrpcProxies.Get
+import Network.Google.Compute.TargetGrpcProxies.Insert
+import Network.Google.Compute.TargetGrpcProxies.List
+import Network.Google.Compute.TargetGrpcProxies.Patch
+import Network.Google.Compute.TargetHttpProxies.AggregatedList
+import Network.Google.Compute.TargetHttpProxies.Delete
+import Network.Google.Compute.TargetHttpProxies.Get
+import Network.Google.Compute.TargetHttpProxies.Insert
+import Network.Google.Compute.TargetHttpProxies.List
+import Network.Google.Compute.TargetHttpProxies.Patch
+import Network.Google.Compute.TargetHttpProxies.SetUrlMap
+import Network.Google.Compute.TargetHttpsProxies.AggregatedList
+import Network.Google.Compute.TargetHttpsProxies.Delete
+import Network.Google.Compute.TargetHttpsProxies.Get
+import Network.Google.Compute.TargetHttpsProxies.Insert
+import Network.Google.Compute.TargetHttpsProxies.List
+import Network.Google.Compute.TargetHttpsProxies.Patch
+import Network.Google.Compute.TargetHttpsProxies.SetQuicOverride
+import Network.Google.Compute.TargetHttpsProxies.SetSslCertificates
+import Network.Google.Compute.TargetHttpsProxies.SetSslPolicy
+import Network.Google.Compute.TargetHttpsProxies.SetUrlMap
+import Network.Google.Compute.TargetInstances.AggregatedList
+import Network.Google.Compute.TargetInstances.Delete
+import Network.Google.Compute.TargetInstances.Get
+import Network.Google.Compute.TargetInstances.Insert
+import Network.Google.Compute.TargetInstances.List
+import Network.Google.Compute.TargetPools.AddHealthCheck
+import Network.Google.Compute.TargetPools.AddInstance
+import Network.Google.Compute.TargetPools.AggregatedList
+import Network.Google.Compute.TargetPools.Delete
+import Network.Google.Compute.TargetPools.Get
+import Network.Google.Compute.TargetPools.GetHealth
+import Network.Google.Compute.TargetPools.Insert
+import Network.Google.Compute.TargetPools.List
+import Network.Google.Compute.TargetPools.RemoveHealthCheck
+import Network.Google.Compute.TargetPools.RemoveInstance
+import Network.Google.Compute.TargetPools.SetBackup
+import Network.Google.Compute.TargetSslProxies.Delete
+import Network.Google.Compute.TargetSslProxies.Get
+import Network.Google.Compute.TargetSslProxies.Insert
+import Network.Google.Compute.TargetSslProxies.List
+import Network.Google.Compute.TargetSslProxies.SetBackendService
+import Network.Google.Compute.TargetSslProxies.SetProxyHeader
+import Network.Google.Compute.TargetSslProxies.SetSslCertificates
+import Network.Google.Compute.TargetSslProxies.SetSslPolicy
+import Network.Google.Compute.TargetTcpProxies.Delete
+import Network.Google.Compute.TargetTcpProxies.Get
+import Network.Google.Compute.TargetTcpProxies.Insert
+import Network.Google.Compute.TargetTcpProxies.List
+import Network.Google.Compute.TargetTcpProxies.SetBackendService
+import Network.Google.Compute.TargetTcpProxies.SetProxyHeader
+import Network.Google.Compute.TargetVpnGateways.AggregatedList
+import Network.Google.Compute.TargetVpnGateways.Delete
+import Network.Google.Compute.TargetVpnGateways.Get
+import Network.Google.Compute.TargetVpnGateways.Insert
+import Network.Google.Compute.TargetVpnGateways.List
 import Network.Google.Compute.Types
-import Network.Google.Resource.Compute.AcceleratorTypes.AggregatedList
-import Network.Google.Resource.Compute.AcceleratorTypes.Get
-import Network.Google.Resource.Compute.AcceleratorTypes.List
-import Network.Google.Resource.Compute.Addresses.AggregatedList
-import Network.Google.Resource.Compute.Addresses.Delete
-import Network.Google.Resource.Compute.Addresses.Get
-import Network.Google.Resource.Compute.Addresses.Insert
-import Network.Google.Resource.Compute.Addresses.List
-import Network.Google.Resource.Compute.Autoscalers.AggregatedList
-import Network.Google.Resource.Compute.Autoscalers.Delete
-import Network.Google.Resource.Compute.Autoscalers.Get
-import Network.Google.Resource.Compute.Autoscalers.Insert
-import Network.Google.Resource.Compute.Autoscalers.List
-import Network.Google.Resource.Compute.Autoscalers.Patch
-import Network.Google.Resource.Compute.Autoscalers.Update
-import Network.Google.Resource.Compute.BackendBuckets.AddSignedURLKey
-import Network.Google.Resource.Compute.BackendBuckets.Delete
-import Network.Google.Resource.Compute.BackendBuckets.DeleteSignedURLKey
-import Network.Google.Resource.Compute.BackendBuckets.Get
-import Network.Google.Resource.Compute.BackendBuckets.Insert
-import Network.Google.Resource.Compute.BackendBuckets.List
-import Network.Google.Resource.Compute.BackendBuckets.Patch
-import Network.Google.Resource.Compute.BackendBuckets.Update
-import Network.Google.Resource.Compute.BackendServices.AddSignedURLKey
-import Network.Google.Resource.Compute.BackendServices.AggregatedList
-import Network.Google.Resource.Compute.BackendServices.Delete
-import Network.Google.Resource.Compute.BackendServices.DeleteSignedURLKey
-import Network.Google.Resource.Compute.BackendServices.Get
-import Network.Google.Resource.Compute.BackendServices.GetHealth
-import Network.Google.Resource.Compute.BackendServices.Insert
-import Network.Google.Resource.Compute.BackendServices.List
-import Network.Google.Resource.Compute.BackendServices.Patch
-import Network.Google.Resource.Compute.BackendServices.SetSecurityPolicy
-import Network.Google.Resource.Compute.BackendServices.Update
-import Network.Google.Resource.Compute.DiskTypes.AggregatedList
-import Network.Google.Resource.Compute.DiskTypes.Get
-import Network.Google.Resource.Compute.DiskTypes.List
-import Network.Google.Resource.Compute.Disks.AddResourcePolicies
-import Network.Google.Resource.Compute.Disks.AggregatedList
-import Network.Google.Resource.Compute.Disks.CreateSnapshot
-import Network.Google.Resource.Compute.Disks.Delete
-import Network.Google.Resource.Compute.Disks.Get
-import Network.Google.Resource.Compute.Disks.GetIAMPolicy
-import Network.Google.Resource.Compute.Disks.Insert
-import Network.Google.Resource.Compute.Disks.List
-import Network.Google.Resource.Compute.Disks.RemoveResourcePolicies
-import Network.Google.Resource.Compute.Disks.Resize
-import Network.Google.Resource.Compute.Disks.SetIAMPolicy
-import Network.Google.Resource.Compute.Disks.SetLabels
-import Network.Google.Resource.Compute.Disks.TestIAMPermissions
-import Network.Google.Resource.Compute.ExternalVPNGateways.Delete
-import Network.Google.Resource.Compute.ExternalVPNGateways.Get
-import Network.Google.Resource.Compute.ExternalVPNGateways.Insert
-import Network.Google.Resource.Compute.ExternalVPNGateways.List
-import Network.Google.Resource.Compute.ExternalVPNGateways.SetLabels
-import Network.Google.Resource.Compute.ExternalVPNGateways.TestIAMPermissions
-import Network.Google.Resource.Compute.FirewallPolicies.AddAssociation
-import Network.Google.Resource.Compute.FirewallPolicies.AddRule
-import Network.Google.Resource.Compute.FirewallPolicies.CloneRules
-import Network.Google.Resource.Compute.FirewallPolicies.Delete
-import Network.Google.Resource.Compute.FirewallPolicies.Get
-import Network.Google.Resource.Compute.FirewallPolicies.GetAssociation
-import Network.Google.Resource.Compute.FirewallPolicies.GetIAMPolicy
-import Network.Google.Resource.Compute.FirewallPolicies.GetRule
-import Network.Google.Resource.Compute.FirewallPolicies.Insert
-import Network.Google.Resource.Compute.FirewallPolicies.List
-import Network.Google.Resource.Compute.FirewallPolicies.ListAssociations
-import Network.Google.Resource.Compute.FirewallPolicies.Move
-import Network.Google.Resource.Compute.FirewallPolicies.Patch
-import Network.Google.Resource.Compute.FirewallPolicies.PatchRule
-import Network.Google.Resource.Compute.FirewallPolicies.RemoveAssociation
-import Network.Google.Resource.Compute.FirewallPolicies.RemoveRule
-import Network.Google.Resource.Compute.FirewallPolicies.SetIAMPolicy
-import Network.Google.Resource.Compute.FirewallPolicies.TestIAMPermissions
-import Network.Google.Resource.Compute.Firewalls.Delete
-import Network.Google.Resource.Compute.Firewalls.Get
-import Network.Google.Resource.Compute.Firewalls.Insert
-import Network.Google.Resource.Compute.Firewalls.List
-import Network.Google.Resource.Compute.Firewalls.Patch
-import Network.Google.Resource.Compute.Firewalls.Update
-import Network.Google.Resource.Compute.ForwardingRules.AggregatedList
-import Network.Google.Resource.Compute.ForwardingRules.Delete
-import Network.Google.Resource.Compute.ForwardingRules.Get
-import Network.Google.Resource.Compute.ForwardingRules.Insert
-import Network.Google.Resource.Compute.ForwardingRules.List
-import Network.Google.Resource.Compute.ForwardingRules.Patch
-import Network.Google.Resource.Compute.ForwardingRules.SetLabels
-import Network.Google.Resource.Compute.ForwardingRules.SetTarget
-import Network.Google.Resource.Compute.GlobalAddresses.Delete
-import Network.Google.Resource.Compute.GlobalAddresses.Get
-import Network.Google.Resource.Compute.GlobalAddresses.Insert
-import Network.Google.Resource.Compute.GlobalAddresses.List
-import Network.Google.Resource.Compute.GlobalForwardingRules.Delete
-import Network.Google.Resource.Compute.GlobalForwardingRules.Get
-import Network.Google.Resource.Compute.GlobalForwardingRules.Insert
-import Network.Google.Resource.Compute.GlobalForwardingRules.List
-import Network.Google.Resource.Compute.GlobalForwardingRules.Patch
-import Network.Google.Resource.Compute.GlobalForwardingRules.SetLabels
-import Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
-import Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
-import Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Delete
-import Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.DetachNetworkEndpoints
-import Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Get
-import Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Insert
-import Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.List
-import Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
-import Network.Google.Resource.Compute.GlobalOperations.AggregatedList
-import Network.Google.Resource.Compute.GlobalOperations.Delete
-import Network.Google.Resource.Compute.GlobalOperations.Get
-import Network.Google.Resource.Compute.GlobalOperations.List
-import Network.Google.Resource.Compute.GlobalOperations.Wait
-import Network.Google.Resource.Compute.GlobalOrganizationOperations.Delete
-import Network.Google.Resource.Compute.GlobalOrganizationOperations.Get
-import Network.Google.Resource.Compute.GlobalOrganizationOperations.List
-import Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Delete
-import Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Get
-import Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Insert
-import Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.List
-import Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Patch
-import Network.Google.Resource.Compute.HTTPHealthChecks.Delete
-import Network.Google.Resource.Compute.HTTPHealthChecks.Get
-import Network.Google.Resource.Compute.HTTPHealthChecks.Insert
-import Network.Google.Resource.Compute.HTTPHealthChecks.List
-import Network.Google.Resource.Compute.HTTPHealthChecks.Patch
-import Network.Google.Resource.Compute.HTTPHealthChecks.Update
-import Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
-import Network.Google.Resource.Compute.HTTPSHealthChecks.Get
-import Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
-import Network.Google.Resource.Compute.HTTPSHealthChecks.List
-import Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
-import Network.Google.Resource.Compute.HTTPSHealthChecks.Update
-import Network.Google.Resource.Compute.HealthChecks.AggregatedList
-import Network.Google.Resource.Compute.HealthChecks.Delete
-import Network.Google.Resource.Compute.HealthChecks.Get
-import Network.Google.Resource.Compute.HealthChecks.Insert
-import Network.Google.Resource.Compute.HealthChecks.List
-import Network.Google.Resource.Compute.HealthChecks.Patch
-import Network.Google.Resource.Compute.HealthChecks.Update
-import Network.Google.Resource.Compute.Images.Delete
-import Network.Google.Resource.Compute.Images.Deprecate
-import Network.Google.Resource.Compute.Images.Get
-import Network.Google.Resource.Compute.Images.GetFromFamily
-import Network.Google.Resource.Compute.Images.GetIAMPolicy
-import Network.Google.Resource.Compute.Images.Insert
-import Network.Google.Resource.Compute.Images.List
-import Network.Google.Resource.Compute.Images.Patch
-import Network.Google.Resource.Compute.Images.SetIAMPolicy
-import Network.Google.Resource.Compute.Images.SetLabels
-import Network.Google.Resource.Compute.Images.TestIAMPermissions
-import Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
-import Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
-import Network.Google.Resource.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
-import Network.Google.Resource.Compute.InstanceGroupManagers.CreateInstances
-import Network.Google.Resource.Compute.InstanceGroupManagers.Delete
-import Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
-import Network.Google.Resource.Compute.InstanceGroupManagers.DeletePerInstanceConfigs
-import Network.Google.Resource.Compute.InstanceGroupManagers.Get
-import Network.Google.Resource.Compute.InstanceGroupManagers.Insert
-import Network.Google.Resource.Compute.InstanceGroupManagers.List
-import Network.Google.Resource.Compute.InstanceGroupManagers.ListErrors
-import Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
-import Network.Google.Resource.Compute.InstanceGroupManagers.ListPerInstanceConfigs
-import Network.Google.Resource.Compute.InstanceGroupManagers.Patch
-import Network.Google.Resource.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
-import Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
-import Network.Google.Resource.Compute.InstanceGroupManagers.Resize
-import Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
-import Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
-import Network.Google.Resource.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
-import Network.Google.Resource.Compute.InstanceGroups.AddInstances
-import Network.Google.Resource.Compute.InstanceGroups.AggregatedList
-import Network.Google.Resource.Compute.InstanceGroups.Delete
-import Network.Google.Resource.Compute.InstanceGroups.Get
-import Network.Google.Resource.Compute.InstanceGroups.Insert
-import Network.Google.Resource.Compute.InstanceGroups.List
-import Network.Google.Resource.Compute.InstanceGroups.ListInstances
-import Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
-import Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
-import Network.Google.Resource.Compute.InstanceTemplates.Delete
-import Network.Google.Resource.Compute.InstanceTemplates.Get
-import Network.Google.Resource.Compute.InstanceTemplates.GetIAMPolicy
-import Network.Google.Resource.Compute.InstanceTemplates.Insert
-import Network.Google.Resource.Compute.InstanceTemplates.List
-import Network.Google.Resource.Compute.InstanceTemplates.SetIAMPolicy
-import Network.Google.Resource.Compute.InstanceTemplates.TestIAMPermissions
-import Network.Google.Resource.Compute.Instances.AddAccessConfig
-import Network.Google.Resource.Compute.Instances.AddResourcePolicies
-import Network.Google.Resource.Compute.Instances.AggregatedList
-import Network.Google.Resource.Compute.Instances.AttachDisk
-import Network.Google.Resource.Compute.Instances.BulkInsert
-import Network.Google.Resource.Compute.Instances.Delete
-import Network.Google.Resource.Compute.Instances.DeleteAccessConfig
-import Network.Google.Resource.Compute.Instances.DetachDisk
-import Network.Google.Resource.Compute.Instances.Get
-import Network.Google.Resource.Compute.Instances.GetEffectiveFirewalls
-import Network.Google.Resource.Compute.Instances.GetGuestAttributes
-import Network.Google.Resource.Compute.Instances.GetIAMPolicy
-import Network.Google.Resource.Compute.Instances.GetScreenshot
-import Network.Google.Resource.Compute.Instances.GetSerialPortOutput
-import Network.Google.Resource.Compute.Instances.GetShieldedInstanceIdentity
-import Network.Google.Resource.Compute.Instances.Insert
-import Network.Google.Resource.Compute.Instances.List
-import Network.Google.Resource.Compute.Instances.ListReferrers
-import Network.Google.Resource.Compute.Instances.RemoveResourcePolicies
-import Network.Google.Resource.Compute.Instances.Reset
-import Network.Google.Resource.Compute.Instances.SetDeletionProtection
-import Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
-import Network.Google.Resource.Compute.Instances.SetIAMPolicy
-import Network.Google.Resource.Compute.Instances.SetLabels
-import Network.Google.Resource.Compute.Instances.SetMachineResources
-import Network.Google.Resource.Compute.Instances.SetMachineType
-import Network.Google.Resource.Compute.Instances.SetMetadata
-import Network.Google.Resource.Compute.Instances.SetMinCPUPlatform
-import Network.Google.Resource.Compute.Instances.SetScheduling
-import Network.Google.Resource.Compute.Instances.SetServiceAccount
-import Network.Google.Resource.Compute.Instances.SetShieldedInstanceIntegrityPolicy
-import Network.Google.Resource.Compute.Instances.SetTags
-import Network.Google.Resource.Compute.Instances.SimulateMaintenanceEvent
-import Network.Google.Resource.Compute.Instances.Start
-import Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
-import Network.Google.Resource.Compute.Instances.Stop
-import Network.Google.Resource.Compute.Instances.TestIAMPermissions
-import Network.Google.Resource.Compute.Instances.Update
-import Network.Google.Resource.Compute.Instances.UpdateAccessConfig
-import Network.Google.Resource.Compute.Instances.UpdateDisplayDevice
-import Network.Google.Resource.Compute.Instances.UpdateNetworkInterface
-import Network.Google.Resource.Compute.Instances.UpdateShieldedInstanceConfig
-import Network.Google.Resource.Compute.InterconnectAttachments.AggregatedList
-import Network.Google.Resource.Compute.InterconnectAttachments.Delete
-import Network.Google.Resource.Compute.InterconnectAttachments.Get
-import Network.Google.Resource.Compute.InterconnectAttachments.Insert
-import Network.Google.Resource.Compute.InterconnectAttachments.List
-import Network.Google.Resource.Compute.InterconnectAttachments.Patch
-import Network.Google.Resource.Compute.InterconnectLocations.Get
-import Network.Google.Resource.Compute.InterconnectLocations.List
-import Network.Google.Resource.Compute.Interconnects.Delete
-import Network.Google.Resource.Compute.Interconnects.Get
-import Network.Google.Resource.Compute.Interconnects.GetDiagnostics
-import Network.Google.Resource.Compute.Interconnects.Insert
-import Network.Google.Resource.Compute.Interconnects.List
-import Network.Google.Resource.Compute.Interconnects.Patch
-import Network.Google.Resource.Compute.LicenseCodes.Get
-import Network.Google.Resource.Compute.LicenseCodes.TestIAMPermissions
-import Network.Google.Resource.Compute.Licenses.Delete
-import Network.Google.Resource.Compute.Licenses.Get
-import Network.Google.Resource.Compute.Licenses.GetIAMPolicy
-import Network.Google.Resource.Compute.Licenses.Insert
-import Network.Google.Resource.Compute.Licenses.List
-import Network.Google.Resource.Compute.Licenses.SetIAMPolicy
-import Network.Google.Resource.Compute.Licenses.TestIAMPermissions
-import Network.Google.Resource.Compute.MachineTypes.AggregatedList
-import Network.Google.Resource.Compute.MachineTypes.Get
-import Network.Google.Resource.Compute.MachineTypes.List
-import Network.Google.Resource.Compute.NetworkEndpointGroups.AggregatedList
-import Network.Google.Resource.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
-import Network.Google.Resource.Compute.NetworkEndpointGroups.Delete
-import Network.Google.Resource.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
-import Network.Google.Resource.Compute.NetworkEndpointGroups.Get
-import Network.Google.Resource.Compute.NetworkEndpointGroups.Insert
-import Network.Google.Resource.Compute.NetworkEndpointGroups.List
-import Network.Google.Resource.Compute.NetworkEndpointGroups.ListNetworkEndpoints
-import Network.Google.Resource.Compute.NetworkEndpointGroups.TestIAMPermissions
-import Network.Google.Resource.Compute.Networks.AddPeering
-import Network.Google.Resource.Compute.Networks.Delete
-import Network.Google.Resource.Compute.Networks.Get
-import Network.Google.Resource.Compute.Networks.GetEffectiveFirewalls
-import Network.Google.Resource.Compute.Networks.Insert
-import Network.Google.Resource.Compute.Networks.List
-import Network.Google.Resource.Compute.Networks.ListPeeringRoutes
-import Network.Google.Resource.Compute.Networks.Patch
-import Network.Google.Resource.Compute.Networks.RemovePeering
-import Network.Google.Resource.Compute.Networks.SwitchToCustomMode
-import Network.Google.Resource.Compute.Networks.UpdatePeering
-import Network.Google.Resource.Compute.NodeGroups.AddNodes
-import Network.Google.Resource.Compute.NodeGroups.AggregatedList
-import Network.Google.Resource.Compute.NodeGroups.Delete
-import Network.Google.Resource.Compute.NodeGroups.DeleteNodes
-import Network.Google.Resource.Compute.NodeGroups.Get
-import Network.Google.Resource.Compute.NodeGroups.GetIAMPolicy
-import Network.Google.Resource.Compute.NodeGroups.Insert
-import Network.Google.Resource.Compute.NodeGroups.List
-import Network.Google.Resource.Compute.NodeGroups.ListNodes
-import Network.Google.Resource.Compute.NodeGroups.Patch
-import Network.Google.Resource.Compute.NodeGroups.SetIAMPolicy
-import Network.Google.Resource.Compute.NodeGroups.SetNodeTemplate
-import Network.Google.Resource.Compute.NodeGroups.TestIAMPermissions
-import Network.Google.Resource.Compute.NodeTemplates.AggregatedList
-import Network.Google.Resource.Compute.NodeTemplates.Delete
-import Network.Google.Resource.Compute.NodeTemplates.Get
-import Network.Google.Resource.Compute.NodeTemplates.GetIAMPolicy
-import Network.Google.Resource.Compute.NodeTemplates.Insert
-import Network.Google.Resource.Compute.NodeTemplates.List
-import Network.Google.Resource.Compute.NodeTemplates.SetIAMPolicy
-import Network.Google.Resource.Compute.NodeTemplates.TestIAMPermissions
-import Network.Google.Resource.Compute.NodeTypes.AggregatedList
-import Network.Google.Resource.Compute.NodeTypes.Get
-import Network.Google.Resource.Compute.NodeTypes.List
-import Network.Google.Resource.Compute.PacketMirrorings.AggregatedList
-import Network.Google.Resource.Compute.PacketMirrorings.Delete
-import Network.Google.Resource.Compute.PacketMirrorings.Get
-import Network.Google.Resource.Compute.PacketMirrorings.Insert
-import Network.Google.Resource.Compute.PacketMirrorings.List
-import Network.Google.Resource.Compute.PacketMirrorings.Patch
-import Network.Google.Resource.Compute.PacketMirrorings.TestIAMPermissions
-import Network.Google.Resource.Compute.Projects.DisableXpnHost
-import Network.Google.Resource.Compute.Projects.DisableXpnResource
-import Network.Google.Resource.Compute.Projects.EnableXpnHost
-import Network.Google.Resource.Compute.Projects.EnableXpnResource
-import Network.Google.Resource.Compute.Projects.Get
-import Network.Google.Resource.Compute.Projects.GetXpnHost
-import Network.Google.Resource.Compute.Projects.GetXpnResources
-import Network.Google.Resource.Compute.Projects.ListXpnHosts
-import Network.Google.Resource.Compute.Projects.MoveDisk
-import Network.Google.Resource.Compute.Projects.MoveInstance
-import Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
-import Network.Google.Resource.Compute.Projects.SetDefaultNetworkTier
-import Network.Google.Resource.Compute.Projects.SetUsageExportBucket
-import Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Delete
-import Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Get
-import Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Insert
-import Network.Google.Resource.Compute.PublicAdvertisedPrefixes.List
-import Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Patch
-import Network.Google.Resource.Compute.PublicDelegatedPrefixes.AggregatedList
-import Network.Google.Resource.Compute.PublicDelegatedPrefixes.Delete
-import Network.Google.Resource.Compute.PublicDelegatedPrefixes.Get
-import Network.Google.Resource.Compute.PublicDelegatedPrefixes.Insert
-import Network.Google.Resource.Compute.PublicDelegatedPrefixes.List
-import Network.Google.Resource.Compute.PublicDelegatedPrefixes.Patch
-import Network.Google.Resource.Compute.RegionAutoscalers.Delete
-import Network.Google.Resource.Compute.RegionAutoscalers.Get
-import Network.Google.Resource.Compute.RegionAutoscalers.Insert
-import Network.Google.Resource.Compute.RegionAutoscalers.List
-import Network.Google.Resource.Compute.RegionAutoscalers.Patch
-import Network.Google.Resource.Compute.RegionAutoscalers.Update
-import Network.Google.Resource.Compute.RegionBackendServices.Delete
-import Network.Google.Resource.Compute.RegionBackendServices.Get
-import Network.Google.Resource.Compute.RegionBackendServices.GetHealth
-import Network.Google.Resource.Compute.RegionBackendServices.Insert
-import Network.Google.Resource.Compute.RegionBackendServices.List
-import Network.Google.Resource.Compute.RegionBackendServices.Patch
-import Network.Google.Resource.Compute.RegionBackendServices.Update
-import Network.Google.Resource.Compute.RegionCommitments.AggregatedList
-import Network.Google.Resource.Compute.RegionCommitments.Get
-import Network.Google.Resource.Compute.RegionCommitments.Insert
-import Network.Google.Resource.Compute.RegionCommitments.List
-import Network.Google.Resource.Compute.RegionDiskTypes.Get
-import Network.Google.Resource.Compute.RegionDiskTypes.List
-import Network.Google.Resource.Compute.RegionDisks.AddResourcePolicies
-import Network.Google.Resource.Compute.RegionDisks.CreateSnapshot
-import Network.Google.Resource.Compute.RegionDisks.Delete
-import Network.Google.Resource.Compute.RegionDisks.Get
-import Network.Google.Resource.Compute.RegionDisks.GetIAMPolicy
-import Network.Google.Resource.Compute.RegionDisks.Insert
-import Network.Google.Resource.Compute.RegionDisks.List
-import Network.Google.Resource.Compute.RegionDisks.RemoveResourcePolicies
-import Network.Google.Resource.Compute.RegionDisks.Resize
-import Network.Google.Resource.Compute.RegionDisks.SetIAMPolicy
-import Network.Google.Resource.Compute.RegionDisks.SetLabels
-import Network.Google.Resource.Compute.RegionDisks.TestIAMPermissions
-import Network.Google.Resource.Compute.RegionHealthCheckServices.Delete
-import Network.Google.Resource.Compute.RegionHealthCheckServices.Get
-import Network.Google.Resource.Compute.RegionHealthCheckServices.Insert
-import Network.Google.Resource.Compute.RegionHealthCheckServices.List
-import Network.Google.Resource.Compute.RegionHealthCheckServices.Patch
-import Network.Google.Resource.Compute.RegionHealthChecks.Delete
-import Network.Google.Resource.Compute.RegionHealthChecks.Get
-import Network.Google.Resource.Compute.RegionHealthChecks.Insert
-import Network.Google.Resource.Compute.RegionHealthChecks.List
-import Network.Google.Resource.Compute.RegionHealthChecks.Patch
-import Network.Google.Resource.Compute.RegionHealthChecks.Update
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.AbandonInstances
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.CreateInstances
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.Delete
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeleteInstances
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.Get
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListErrors
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListManagedInstances
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListPerInstanceConfigs
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.Patch
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.RecreateInstances
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.Resize
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetTargetPools
-import Network.Google.Resource.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
-import Network.Google.Resource.Compute.RegionInstanceGroups.Get
-import Network.Google.Resource.Compute.RegionInstanceGroups.List
-import Network.Google.Resource.Compute.RegionInstanceGroups.ListInstances
-import Network.Google.Resource.Compute.RegionInstanceGroups.SetNamedPorts
-import Network.Google.Resource.Compute.RegionInstances.BulkInsert
-import Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Delete
-import Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Get
-import Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Insert
-import Network.Google.Resource.Compute.RegionNetworkEndpointGroups.List
-import Network.Google.Resource.Compute.RegionNotificationEndpoints.Delete
-import Network.Google.Resource.Compute.RegionNotificationEndpoints.Get
-import Network.Google.Resource.Compute.RegionNotificationEndpoints.Insert
-import Network.Google.Resource.Compute.RegionNotificationEndpoints.List
-import Network.Google.Resource.Compute.RegionOperations.Delete
-import Network.Google.Resource.Compute.RegionOperations.Get
-import Network.Google.Resource.Compute.RegionOperations.List
-import Network.Google.Resource.Compute.RegionOperations.Wait
-import Network.Google.Resource.Compute.RegionSSLCertificates.Delete
-import Network.Google.Resource.Compute.RegionSSLCertificates.Get
-import Network.Google.Resource.Compute.RegionSSLCertificates.Insert
-import Network.Google.Resource.Compute.RegionSSLCertificates.List
-import Network.Google.Resource.Compute.RegionTargetHTTPProxies.Delete
-import Network.Google.Resource.Compute.RegionTargetHTTPProxies.Get
-import Network.Google.Resource.Compute.RegionTargetHTTPProxies.Insert
-import Network.Google.Resource.Compute.RegionTargetHTTPProxies.List
-import Network.Google.Resource.Compute.RegionTargetHTTPProxies.SetURLMap
-import Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Delete
-import Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Get
-import Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Insert
-import Network.Google.Resource.Compute.RegionTargetHTTPSProxies.List
-import Network.Google.Resource.Compute.RegionTargetHTTPSProxies.SetSSLCertificates
-import Network.Google.Resource.Compute.RegionTargetHTTPSProxies.SetURLMap
-import Network.Google.Resource.Compute.RegionURLMaps.Delete
-import Network.Google.Resource.Compute.RegionURLMaps.Get
-import Network.Google.Resource.Compute.RegionURLMaps.Insert
-import Network.Google.Resource.Compute.RegionURLMaps.List
-import Network.Google.Resource.Compute.RegionURLMaps.Patch
-import Network.Google.Resource.Compute.RegionURLMaps.Update
-import Network.Google.Resource.Compute.RegionURLMaps.Validate
-import Network.Google.Resource.Compute.Regions.Get
-import Network.Google.Resource.Compute.Regions.List
-import Network.Google.Resource.Compute.Reservations.AggregatedList
-import Network.Google.Resource.Compute.Reservations.Delete
-import Network.Google.Resource.Compute.Reservations.Get
-import Network.Google.Resource.Compute.Reservations.GetIAMPolicy
-import Network.Google.Resource.Compute.Reservations.Insert
-import Network.Google.Resource.Compute.Reservations.List
-import Network.Google.Resource.Compute.Reservations.Resize
-import Network.Google.Resource.Compute.Reservations.SetIAMPolicy
-import Network.Google.Resource.Compute.Reservations.TestIAMPermissions
-import Network.Google.Resource.Compute.ResourcePolicies.AggregatedList
-import Network.Google.Resource.Compute.ResourcePolicies.Delete
-import Network.Google.Resource.Compute.ResourcePolicies.Get
-import Network.Google.Resource.Compute.ResourcePolicies.GetIAMPolicy
-import Network.Google.Resource.Compute.ResourcePolicies.Insert
-import Network.Google.Resource.Compute.ResourcePolicies.List
-import Network.Google.Resource.Compute.ResourcePolicies.SetIAMPolicy
-import Network.Google.Resource.Compute.ResourcePolicies.TestIAMPermissions
-import Network.Google.Resource.Compute.Routers.AggregatedList
-import Network.Google.Resource.Compute.Routers.Delete
-import Network.Google.Resource.Compute.Routers.Get
-import Network.Google.Resource.Compute.Routers.GetNATMAppingInfo
-import Network.Google.Resource.Compute.Routers.GetRouterStatus
-import Network.Google.Resource.Compute.Routers.Insert
-import Network.Google.Resource.Compute.Routers.List
-import Network.Google.Resource.Compute.Routers.Patch
-import Network.Google.Resource.Compute.Routers.Preview
-import Network.Google.Resource.Compute.Routers.Update
-import Network.Google.Resource.Compute.Routes.Delete
-import Network.Google.Resource.Compute.Routes.Get
-import Network.Google.Resource.Compute.Routes.Insert
-import Network.Google.Resource.Compute.Routes.List
-import Network.Google.Resource.Compute.SSLCertificates.AggregatedList
-import Network.Google.Resource.Compute.SSLCertificates.Delete
-import Network.Google.Resource.Compute.SSLCertificates.Get
-import Network.Google.Resource.Compute.SSLCertificates.Insert
-import Network.Google.Resource.Compute.SSLCertificates.List
-import Network.Google.Resource.Compute.SSLPolicies.Delete
-import Network.Google.Resource.Compute.SSLPolicies.Get
-import Network.Google.Resource.Compute.SSLPolicies.Insert
-import Network.Google.Resource.Compute.SSLPolicies.List
-import Network.Google.Resource.Compute.SSLPolicies.ListAvailableFeatures
-import Network.Google.Resource.Compute.SSLPolicies.Patch
-import Network.Google.Resource.Compute.SecurityPolicies.AddRule
-import Network.Google.Resource.Compute.SecurityPolicies.Delete
-import Network.Google.Resource.Compute.SecurityPolicies.Get
-import Network.Google.Resource.Compute.SecurityPolicies.GetRule
-import Network.Google.Resource.Compute.SecurityPolicies.Insert
-import Network.Google.Resource.Compute.SecurityPolicies.List
-import Network.Google.Resource.Compute.SecurityPolicies.ListPreConfiguredExpressionSets
-import Network.Google.Resource.Compute.SecurityPolicies.Patch
-import Network.Google.Resource.Compute.SecurityPolicies.PatchRule
-import Network.Google.Resource.Compute.SecurityPolicies.RemoveRule
-import Network.Google.Resource.Compute.Snapshots.Delete
-import Network.Google.Resource.Compute.Snapshots.Get
-import Network.Google.Resource.Compute.Snapshots.GetIAMPolicy
-import Network.Google.Resource.Compute.Snapshots.List
-import Network.Google.Resource.Compute.Snapshots.SetIAMPolicy
-import Network.Google.Resource.Compute.Snapshots.SetLabels
-import Network.Google.Resource.Compute.Snapshots.TestIAMPermissions
-import Network.Google.Resource.Compute.Subnetworks.AggregatedList
-import Network.Google.Resource.Compute.Subnetworks.Delete
-import Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
-import Network.Google.Resource.Compute.Subnetworks.Get
-import Network.Google.Resource.Compute.Subnetworks.GetIAMPolicy
-import Network.Google.Resource.Compute.Subnetworks.Insert
-import Network.Google.Resource.Compute.Subnetworks.List
-import Network.Google.Resource.Compute.Subnetworks.ListUsable
-import Network.Google.Resource.Compute.Subnetworks.Patch
-import Network.Google.Resource.Compute.Subnetworks.SetIAMPolicy
-import Network.Google.Resource.Compute.Subnetworks.SetPrivateIPGoogleAccess
-import Network.Google.Resource.Compute.Subnetworks.TestIAMPermissions
-import Network.Google.Resource.Compute.TargetGrpcProxies.Delete
-import Network.Google.Resource.Compute.TargetGrpcProxies.Get
-import Network.Google.Resource.Compute.TargetGrpcProxies.Insert
-import Network.Google.Resource.Compute.TargetGrpcProxies.List
-import Network.Google.Resource.Compute.TargetGrpcProxies.Patch
-import Network.Google.Resource.Compute.TargetHTTPProxies.AggregatedList
-import Network.Google.Resource.Compute.TargetHTTPProxies.Delete
-import Network.Google.Resource.Compute.TargetHTTPProxies.Get
-import Network.Google.Resource.Compute.TargetHTTPProxies.Insert
-import Network.Google.Resource.Compute.TargetHTTPProxies.List
-import Network.Google.Resource.Compute.TargetHTTPProxies.Patch
-import Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
-import Network.Google.Resource.Compute.TargetHTTPSProxies.AggregatedList
-import Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
-import Network.Google.Resource.Compute.TargetHTTPSProxies.Get
-import Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
-import Network.Google.Resource.Compute.TargetHTTPSProxies.List
-import Network.Google.Resource.Compute.TargetHTTPSProxies.Patch
-import Network.Google.Resource.Compute.TargetHTTPSProxies.SetQuicOverride
-import Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
-import Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLPolicy
-import Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
-import Network.Google.Resource.Compute.TargetInstances.AggregatedList
-import Network.Google.Resource.Compute.TargetInstances.Delete
-import Network.Google.Resource.Compute.TargetInstances.Get
-import Network.Google.Resource.Compute.TargetInstances.Insert
-import Network.Google.Resource.Compute.TargetInstances.List
-import Network.Google.Resource.Compute.TargetPools.AddHealthCheck
-import Network.Google.Resource.Compute.TargetPools.AddInstance
-import Network.Google.Resource.Compute.TargetPools.AggregatedList
-import Network.Google.Resource.Compute.TargetPools.Delete
-import Network.Google.Resource.Compute.TargetPools.Get
-import Network.Google.Resource.Compute.TargetPools.GetHealth
-import Network.Google.Resource.Compute.TargetPools.Insert
-import Network.Google.Resource.Compute.TargetPools.List
-import Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
-import Network.Google.Resource.Compute.TargetPools.RemoveInstance
-import Network.Google.Resource.Compute.TargetPools.SetBackup
-import Network.Google.Resource.Compute.TargetSSLProxies.Delete
-import Network.Google.Resource.Compute.TargetSSLProxies.Get
-import Network.Google.Resource.Compute.TargetSSLProxies.Insert
-import Network.Google.Resource.Compute.TargetSSLProxies.List
-import Network.Google.Resource.Compute.TargetSSLProxies.SetBackendService
-import Network.Google.Resource.Compute.TargetSSLProxies.SetProxyHeader
-import Network.Google.Resource.Compute.TargetSSLProxies.SetSSLCertificates
-import Network.Google.Resource.Compute.TargetSSLProxies.SetSSLPolicy
-import Network.Google.Resource.Compute.TargetTCPProxies.Delete
-import Network.Google.Resource.Compute.TargetTCPProxies.Get
-import Network.Google.Resource.Compute.TargetTCPProxies.Insert
-import Network.Google.Resource.Compute.TargetTCPProxies.List
-import Network.Google.Resource.Compute.TargetTCPProxies.SetBackendService
-import Network.Google.Resource.Compute.TargetTCPProxies.SetProxyHeader
-import Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
-import Network.Google.Resource.Compute.TargetVPNGateways.Delete
-import Network.Google.Resource.Compute.TargetVPNGateways.Get
-import Network.Google.Resource.Compute.TargetVPNGateways.Insert
-import Network.Google.Resource.Compute.TargetVPNGateways.List
-import Network.Google.Resource.Compute.URLMaps.AggregatedList
-import Network.Google.Resource.Compute.URLMaps.Delete
-import Network.Google.Resource.Compute.URLMaps.Get
-import Network.Google.Resource.Compute.URLMaps.Insert
-import Network.Google.Resource.Compute.URLMaps.InvalidateCache
-import Network.Google.Resource.Compute.URLMaps.List
-import Network.Google.Resource.Compute.URLMaps.Patch
-import Network.Google.Resource.Compute.URLMaps.Update
-import Network.Google.Resource.Compute.URLMaps.Validate
-import Network.Google.Resource.Compute.VPNGateways.AggregatedList
-import Network.Google.Resource.Compute.VPNGateways.Delete
-import Network.Google.Resource.Compute.VPNGateways.Get
-import Network.Google.Resource.Compute.VPNGateways.GetStatus
-import Network.Google.Resource.Compute.VPNGateways.Insert
-import Network.Google.Resource.Compute.VPNGateways.List
-import Network.Google.Resource.Compute.VPNGateways.SetLabels
-import Network.Google.Resource.Compute.VPNGateways.TestIAMPermissions
-import Network.Google.Resource.Compute.VPNTunnels.AggregatedList
-import Network.Google.Resource.Compute.VPNTunnels.Delete
-import Network.Google.Resource.Compute.VPNTunnels.Get
-import Network.Google.Resource.Compute.VPNTunnels.Insert
-import Network.Google.Resource.Compute.VPNTunnels.List
-import Network.Google.Resource.Compute.ZoneOperations.Delete
-import Network.Google.Resource.Compute.ZoneOperations.Get
-import Network.Google.Resource.Compute.ZoneOperations.List
-import Network.Google.Resource.Compute.ZoneOperations.Wait
-import Network.Google.Resource.Compute.Zones.Get
-import Network.Google.Resource.Compute.Zones.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Compute Engine API service.
-type ComputeAPI =
-     ImagesInsertResource :<|> ImagesListResource :<|>
-       ImagesGetIAMPolicyResource
-       :<|> ImagesPatchResource
-       :<|> ImagesGetResource
-       :<|> ImagesGetFromFamilyResource
-       :<|> ImagesSetIAMPolicyResource
-       :<|> ImagesSetLabelsResource
-       :<|> ImagesDeprecateResource
-       :<|> ImagesTestIAMPermissionsResource
-       :<|> ImagesDeleteResource
-       :<|> AcceleratorTypesAggregatedListResource
-       :<|> AcceleratorTypesListResource
-       :<|> AcceleratorTypesGetResource
-       :<|> URLMapsAggregatedListResource
-       :<|> URLMapsInsertResource
-       :<|> URLMapsListResource
-       :<|> URLMapsPatchResource
-       :<|> URLMapsGetResource
-       :<|> URLMapsInvalidateCacheResource
-       :<|> URLMapsValidateResource
-       :<|> URLMapsDeleteResource
-       :<|> URLMapsUpdateResource
-       :<|> NodeGroupsAggregatedListResource
-       :<|> NodeGroupsInsertResource
-       :<|> NodeGroupsListResource
-       :<|> NodeGroupsAddNodesResource
-       :<|> NodeGroupsGetIAMPolicyResource
-       :<|> NodeGroupsPatchResource
-       :<|> NodeGroupsGetResource
-       :<|> NodeGroupsSetIAMPolicyResource
-       :<|> NodeGroupsDeleteNodesResource
-       :<|> NodeGroupsSetNodeTemplateResource
-       :<|> NodeGroupsTestIAMPermissionsResource
-       :<|> NodeGroupsDeleteResource
-       :<|> NodeGroupsListNodesResource
-       :<|> TargetTCPProxiesInsertResource
-       :<|> TargetTCPProxiesListResource
-       :<|> TargetTCPProxiesGetResource
-       :<|> TargetTCPProxiesSetBackendServiceResource
-       :<|> TargetTCPProxiesDeleteResource
-       :<|> TargetTCPProxiesSetProxyHeaderResource
-       :<|> RoutesInsertResource
-       :<|> RoutesListResource
-       :<|> RoutesGetResource
-       :<|> RoutesDeleteResource
-       :<|> RegionInstancesBulkInsertResource
-       :<|> RegionBackendServicesInsertResource
-       :<|> RegionBackendServicesListResource
-       :<|> RegionBackendServicesGetHealthResource
-       :<|> RegionBackendServicesPatchResource
-       :<|> RegionBackendServicesGetResource
-       :<|> RegionBackendServicesDeleteResource
-       :<|> RegionBackendServicesUpdateResource
-       :<|> InstanceTemplatesInsertResource
-       :<|> InstanceTemplatesListResource
-       :<|> InstanceTemplatesGetIAMPolicyResource
-       :<|> InstanceTemplatesGetResource
-       :<|> InstanceTemplatesSetIAMPolicyResource
-       :<|> InstanceTemplatesTestIAMPermissionsResource
-       :<|> InstanceTemplatesDeleteResource
-       :<|>
-       GlobalNetworkEndpointGroupsListNetworkEndpointsResource
-       :<|> GlobalNetworkEndpointGroupsInsertResource
-       :<|> GlobalNetworkEndpointGroupsListResource
-       :<|>
-       GlobalNetworkEndpointGroupsAttachNetworkEndpointsResource
-       :<|> GlobalNetworkEndpointGroupsGetResource
-       :<|>
-       GlobalNetworkEndpointGroupsDetachNetworkEndpointsResource
-       :<|> GlobalNetworkEndpointGroupsDeleteResource
-       :<|> TargetVPNGatewaysAggregatedListResource
-       :<|> TargetVPNGatewaysInsertResource
-       :<|> TargetVPNGatewaysListResource
-       :<|> TargetVPNGatewaysGetResource
-       :<|> TargetVPNGatewaysDeleteResource
-       :<|> SSLCertificatesAggregatedListResource
-       :<|> SSLCertificatesInsertResource
-       :<|> SSLCertificatesListResource
-       :<|> SSLCertificatesGetResource
-       :<|> SSLCertificatesDeleteResource
-       :<|> TargetGrpcProxiesInsertResource
-       :<|> TargetGrpcProxiesListResource
-       :<|> TargetGrpcProxiesPatchResource
-       :<|> TargetGrpcProxiesGetResource
-       :<|> TargetGrpcProxiesDeleteResource
-       :<|> ZonesListResource
-       :<|> ZonesGetResource
-       :<|> RegionInstanceGroupsListResource
-       :<|> RegionInstanceGroupsGetResource
-       :<|> RegionInstanceGroupsListInstancesResource
-       :<|> RegionInstanceGroupsSetNamedPortsResource
-       :<|> GlobalForwardingRulesInsertResource
-       :<|> GlobalForwardingRulesListResource
-       :<|> GlobalForwardingRulesPatchResource
-       :<|> GlobalForwardingRulesGetResource
-       :<|> GlobalForwardingRulesSetLabelsResource
-       :<|> GlobalForwardingRulesSetTargetResource
-       :<|> GlobalForwardingRulesDeleteResource
-       :<|> NetworksInsertResource
-       :<|> NetworksListPeeringRoutesResource
-       :<|> NetworksListResource
-       :<|> NetworksUpdatePeeringResource
-       :<|> NetworksPatchResource
-       :<|> NetworksGetResource
-       :<|> NetworksSwitchToCustomModeResource
-       :<|> NetworksRemovePeeringResource
-       :<|> NetworksAddPeeringResource
-       :<|> NetworksGetEffectiveFirewallsResource
-       :<|> NetworksDeleteResource
-       :<|> RoutersGetNATMAppingInfoResource
-       :<|> RoutersAggregatedListResource
-       :<|> RoutersInsertResource
-       :<|> RoutersListResource
-       :<|> RoutersPatchResource
-       :<|> RoutersGetResource
-       :<|> RoutersPreviewResource
-       :<|> RoutersDeleteResource
-       :<|> RoutersUpdateResource
-       :<|> RoutersGetRouterStatusResource
-       :<|> SecurityPoliciesInsertResource
-       :<|>
-       SecurityPoliciesListPreConfiguredExpressionSetsResource
-       :<|> SecurityPoliciesListResource
-       :<|> SecurityPoliciesRemoveRuleResource
-       :<|> SecurityPoliciesPatchRuleResource
-       :<|> SecurityPoliciesGetRuleResource
-       :<|> SecurityPoliciesPatchResource
-       :<|> SecurityPoliciesGetResource
-       :<|> SecurityPoliciesAddRuleResource
-       :<|> SecurityPoliciesDeleteResource
-       :<|> RegionTargetHTTPSProxiesInsertResource
-       :<|> RegionTargetHTTPSProxiesListResource
-       :<|> RegionTargetHTTPSProxiesSetURLMapResource
-       :<|>
-       RegionTargetHTTPSProxiesSetSSLCertificatesResource
-       :<|> RegionTargetHTTPSProxiesGetResource
-       :<|> RegionTargetHTTPSProxiesDeleteResource
-       :<|> AddressesAggregatedListResource
-       :<|> AddressesInsertResource
-       :<|> AddressesListResource
-       :<|> AddressesGetResource
-       :<|> AddressesDeleteResource
-       :<|> FirewallPoliciesRemoveAssociationResource
-       :<|> FirewallPoliciesInsertResource
-       :<|> FirewallPoliciesGetAssociationResource
-       :<|> FirewallPoliciesListResource
-       :<|> FirewallPoliciesRemoveRuleResource
-       :<|> FirewallPoliciesAddAssociationResource
-       :<|> FirewallPoliciesPatchRuleResource
-       :<|> FirewallPoliciesGetRuleResource
-       :<|> FirewallPoliciesGetIAMPolicyResource
-       :<|> FirewallPoliciesPatchResource
-       :<|> FirewallPoliciesCloneRulesResource
-       :<|> FirewallPoliciesGetResource
-       :<|> FirewallPoliciesSetIAMPolicyResource
-       :<|> FirewallPoliciesAddRuleResource
-       :<|> FirewallPoliciesListAssociationsResource
-       :<|> FirewallPoliciesTestIAMPermissionsResource
-       :<|> FirewallPoliciesDeleteResource
-       :<|> FirewallPoliciesMoveResource
-       :<|> RegionCommitmentsAggregatedListResource
-       :<|> RegionCommitmentsInsertResource
-       :<|> RegionCommitmentsListResource
-       :<|> RegionCommitmentsGetResource
-       :<|> NodeTypesAggregatedListResource
-       :<|> NodeTypesListResource
-       :<|> NodeTypesGetResource
-       :<|> GlobalAddressesInsertResource
-       :<|> GlobalAddressesListResource
-       :<|> GlobalAddressesGetResource
-       :<|> GlobalAddressesDeleteResource
-       :<|> VPNGatewaysAggregatedListResource
-       :<|> VPNGatewaysInsertResource
-       :<|> VPNGatewaysListResource
-       :<|> VPNGatewaysGetResource
-       :<|> VPNGatewaysSetLabelsResource
-       :<|> VPNGatewaysGetStatusResource
-       :<|> VPNGatewaysTestIAMPermissionsResource
-       :<|> VPNGatewaysDeleteResource
-       :<|> RegionsListResource
-       :<|> RegionsGetResource
-       :<|> NodeTemplatesAggregatedListResource
-       :<|> NodeTemplatesInsertResource
-       :<|> NodeTemplatesListResource
-       :<|> NodeTemplatesGetIAMPolicyResource
-       :<|> NodeTemplatesGetResource
-       :<|> NodeTemplatesSetIAMPolicyResource
-       :<|> NodeTemplatesTestIAMPermissionsResource
-       :<|> NodeTemplatesDeleteResource
-       :<|> TargetHTTPProxiesAggregatedListResource
-       :<|> TargetHTTPProxiesInsertResource
-       :<|> TargetHTTPProxiesListResource
-       :<|> TargetHTTPProxiesSetURLMapResource
-       :<|> TargetHTTPProxiesPatchResource
-       :<|> TargetHTTPProxiesGetResource
-       :<|> TargetHTTPProxiesDeleteResource
-       :<|> VPNTunnelsAggregatedListResource
-       :<|> VPNTunnelsInsertResource
-       :<|> VPNTunnelsListResource
-       :<|> VPNTunnelsGetResource
-       :<|> VPNTunnelsDeleteResource
-       :<|> RegionDisksInsertResource
-       :<|> RegionDisksResizeResource
-       :<|> RegionDisksListResource
-       :<|> RegionDisksRemoveResourcePoliciesResource
-       :<|> RegionDisksGetIAMPolicyResource
-       :<|> RegionDisksGetResource
-       :<|> RegionDisksSetIAMPolicyResource
-       :<|> RegionDisksSetLabelsResource
-       :<|> RegionDisksAddResourcePoliciesResource
-       :<|> RegionDisksCreateSnapshotResource
-       :<|> RegionDisksTestIAMPermissionsResource
-       :<|> RegionDisksDeleteResource
-       :<|> AutoscalersAggregatedListResource
-       :<|> AutoscalersInsertResource
-       :<|> AutoscalersListResource
-       :<|> AutoscalersPatchResource
-       :<|> AutoscalersGetResource
-       :<|> AutoscalersDeleteResource
-       :<|> AutoscalersUpdateResource
-       :<|>
-       RegionInstanceGroupManagersSetTargetPoolsResource
-       :<|>
-       RegionInstanceGroupManagersApplyUpdatesToInstancesResource
-       :<|> RegionInstanceGroupManagersInsertResource
-       :<|> RegionInstanceGroupManagersResizeResource
-       :<|> RegionInstanceGroupManagersListResource
-       :<|>
-       RegionInstanceGroupManagersListManagedInstancesResource
-       :<|>
-       RegionInstanceGroupManagersAbandonInstancesResource
-       :<|>
-       RegionInstanceGroupManagersSetInstanceTemplateResource
-       :<|> RegionInstanceGroupManagersPatchResource
-       :<|> RegionInstanceGroupManagersGetResource
-       :<|>
-       RegionInstanceGroupManagersPatchPerInstanceConfigsResource
-       :<|>
-       RegionInstanceGroupManagersListPerInstanceConfigsResource
-       :<|>
-       RegionInstanceGroupManagersDeleteInstancesResource
-       :<|>
-       RegionInstanceGroupManagersCreateInstancesResource
-       :<|>
-       RegionInstanceGroupManagersUpdatePerInstanceConfigsResource
-       :<|>
-       RegionInstanceGroupManagersDeletePerInstanceConfigsResource
-       :<|> RegionInstanceGroupManagersDeleteResource
-       :<|>
-       RegionInstanceGroupManagersRecreateInstancesResource
-       :<|> RegionInstanceGroupManagersListErrorsResource
-       :<|> ExternalVPNGatewaysInsertResource
-       :<|> ExternalVPNGatewaysListResource
-       :<|> ExternalVPNGatewaysGetResource
-       :<|> ExternalVPNGatewaysSetLabelsResource
-       :<|> ExternalVPNGatewaysTestIAMPermissionsResource
-       :<|> ExternalVPNGatewaysDeleteResource
-       :<|> DiskTypesAggregatedListResource
-       :<|> DiskTypesListResource
-       :<|> DiskTypesGetResource
-       :<|> RegionOperationsListResource
-       :<|> RegionOperationsWaitResource
-       :<|> RegionOperationsGetResource
-       :<|> RegionOperationsDeleteResource
-       :<|> MachineTypesAggregatedListResource
-       :<|> MachineTypesListResource
-       :<|> MachineTypesGetResource
-       :<|> HTTPHealthChecksInsertResource
-       :<|> HTTPHealthChecksListResource
-       :<|> HTTPHealthChecksPatchResource
-       :<|> HTTPHealthChecksGetResource
-       :<|> HTTPHealthChecksDeleteResource
-       :<|> HTTPHealthChecksUpdateResource
-       :<|> RegionHealthChecksInsertResource
-       :<|> RegionHealthChecksListResource
-       :<|> RegionHealthChecksPatchResource
-       :<|> RegionHealthChecksGetResource
-       :<|> RegionHealthChecksDeleteResource
-       :<|> RegionHealthChecksUpdateResource
-       :<|> SubnetworksExpandIPCIdRRangeResource
-       :<|> SubnetworksAggregatedListResource
-       :<|> SubnetworksInsertResource
-       :<|> SubnetworksListResource
-       :<|> SubnetworksGetIAMPolicyResource
-       :<|> SubnetworksPatchResource
-       :<|> SubnetworksGetResource
-       :<|> SubnetworksSetIAMPolicyResource
-       :<|> SubnetworksTestIAMPermissionsResource
-       :<|> SubnetworksSetPrivateIPGoogleAccessResource
-       :<|> SubnetworksListUsableResource
-       :<|> SubnetworksDeleteResource
-       :<|>
-       NetworkEndpointGroupsListNetworkEndpointsResource
-       :<|> NetworkEndpointGroupsAggregatedListResource
-       :<|> NetworkEndpointGroupsInsertResource
-       :<|> NetworkEndpointGroupsListResource
-       :<|>
-       NetworkEndpointGroupsAttachNetworkEndpointsResource
-       :<|> NetworkEndpointGroupsGetResource
-       :<|>
-       NetworkEndpointGroupsDetachNetworkEndpointsResource
-       :<|> NetworkEndpointGroupsTestIAMPermissionsResource
-       :<|> NetworkEndpointGroupsDeleteResource
-       :<|> InterconnectsInsertResource
-       :<|> InterconnectsGetDiagnosticsResource
-       :<|> InterconnectsListResource
-       :<|> InterconnectsPatchResource
-       :<|> InterconnectsGetResource
-       :<|> InterconnectsDeleteResource
-       :<|> RegionHealthCheckServicesInsertResource
-       :<|> RegionHealthCheckServicesListResource
-       :<|> RegionHealthCheckServicesPatchResource
-       :<|> RegionHealthCheckServicesGetResource
-       :<|> RegionHealthCheckServicesDeleteResource
-       :<|> InterconnectLocationsListResource
-       :<|> InterconnectLocationsGetResource
-       :<|> PublicAdvertisedPrefixesInsertResource
-       :<|> PublicAdvertisedPrefixesListResource
-       :<|> PublicAdvertisedPrefixesPatchResource
-       :<|> PublicAdvertisedPrefixesGetResource
-       :<|> PublicAdvertisedPrefixesDeleteResource
-       :<|> PublicDelegatedPrefixesAggregatedListResource
-       :<|> PublicDelegatedPrefixesInsertResource
-       :<|> PublicDelegatedPrefixesListResource
-       :<|> PublicDelegatedPrefixesPatchResource
-       :<|> PublicDelegatedPrefixesGetResource
-       :<|> PublicDelegatedPrefixesDeleteResource
-       :<|> ResourcePoliciesAggregatedListResource
-       :<|> ResourcePoliciesInsertResource
-       :<|> ResourcePoliciesListResource
-       :<|> ResourcePoliciesGetIAMPolicyResource
-       :<|> ResourcePoliciesGetResource
-       :<|> ResourcePoliciesSetIAMPolicyResource
-       :<|> ResourcePoliciesTestIAMPermissionsResource
-       :<|> ResourcePoliciesDeleteResource
-       :<|> RegionURLMapsInsertResource
-       :<|> RegionURLMapsListResource
-       :<|> RegionURLMapsPatchResource
-       :<|> RegionURLMapsGetResource
-       :<|> RegionURLMapsValidateResource
-       :<|> RegionURLMapsDeleteResource
-       :<|> RegionURLMapsUpdateResource
-       :<|> SnapshotsListResource
-       :<|> SnapshotsGetIAMPolicyResource
-       :<|> SnapshotsGetResource
-       :<|> SnapshotsSetIAMPolicyResource
-       :<|> SnapshotsSetLabelsResource
-       :<|> SnapshotsTestIAMPermissionsResource
-       :<|> SnapshotsDeleteResource
-       :<|> GlobalPublicDelegatedPrefixesInsertResource
-       :<|> GlobalPublicDelegatedPrefixesListResource
-       :<|> GlobalPublicDelegatedPrefixesPatchResource
-       :<|> GlobalPublicDelegatedPrefixesGetResource
-       :<|> GlobalPublicDelegatedPrefixesDeleteResource
-       :<|> TargetSSLProxiesInsertResource
-       :<|> TargetSSLProxiesListResource
-       :<|> TargetSSLProxiesSetSSLCertificatesResource
-       :<|> TargetSSLProxiesGetResource
-       :<|> TargetSSLProxiesSetBackendServiceResource
-       :<|> TargetSSLProxiesSetSSLPolicyResource
-       :<|> TargetSSLProxiesDeleteResource
-       :<|> TargetSSLProxiesSetProxyHeaderResource
-       :<|> HTTPSHealthChecksInsertResource
-       :<|> HTTPSHealthChecksListResource
-       :<|> HTTPSHealthChecksPatchResource
-       :<|> HTTPSHealthChecksGetResource
-       :<|> HTTPSHealthChecksDeleteResource
-       :<|> HTTPSHealthChecksUpdateResource
-       :<|> SSLPoliciesListAvailableFeaturesResource
-       :<|> SSLPoliciesInsertResource
-       :<|> SSLPoliciesListResource
-       :<|> SSLPoliciesPatchResource
-       :<|> SSLPoliciesGetResource
-       :<|> SSLPoliciesDeleteResource
-       :<|> InstancesUpdateShieldedInstanceConfigResource
-       :<|> InstancesGetShieldedInstanceIdentityResource
-       :<|> InstancesAddAccessConfigResource
-       :<|> InstancesBulkInsertResource
-       :<|> InstancesSimulateMaintenanceEventResource
-       :<|> InstancesAggregatedListResource
-       :<|> InstancesInsertResource
-       :<|> InstancesListReferrersResource
-       :<|> InstancesDetachDiskResource
-       :<|> InstancesListResource
-       :<|>
-       InstancesSetShieldedInstanceIntegrityPolicyResource
-       :<|> InstancesRemoveResourcePoliciesResource
-       :<|> InstancesSetDeletionProtectionResource
-       :<|> InstancesStartResource
-       :<|> InstancesUpdateDisplayDeviceResource
-       :<|> InstancesGetIAMPolicyResource
-       :<|> InstancesSetServiceAccountResource
-       :<|> InstancesGetResource
-       :<|> InstancesSetMachineResourcesResource
-       :<|> InstancesGetGuestAttributesResource
-       :<|> InstancesSetIAMPolicyResource
-       :<|> InstancesSetLabelsResource
-       :<|> InstancesSetMachineTypeResource
-       :<|> InstancesUpdateAccessConfigResource
-       :<|> InstancesDeleteAccessConfigResource
-       :<|> InstancesSetMetadataResource
-       :<|> InstancesSetSchedulingResource
-       :<|> InstancesStartWithEncryptionKeyResource
-       :<|> InstancesUpdateNetworkInterfaceResource
-       :<|> InstancesGetScreenshotResource
-       :<|> InstancesResetResource
-       :<|> InstancesAddResourcePoliciesResource
-       :<|> InstancesStopResource
-       :<|> InstancesGetSerialPortOutputResource
-       :<|> InstancesTestIAMPermissionsResource
-       :<|> InstancesSetTagsResource
-       :<|> InstancesAttachDiskResource
-       :<|> InstancesGetEffectiveFirewallsResource
-       :<|> InstancesDeleteResource
-       :<|> InstancesUpdateResource
-       :<|> InstancesSetDiskAutoDeleteResource
-       :<|> InstancesSetMinCPUPlatformResource
-       :<|> BackendServicesAddSignedURLKeyResource
-       :<|> BackendServicesAggregatedListResource
-       :<|> BackendServicesInsertResource
-       :<|> BackendServicesListResource
-       :<|> BackendServicesGetHealthResource
-       :<|> BackendServicesPatchResource
-       :<|> BackendServicesGetResource
-       :<|> BackendServicesSetSecurityPolicyResource
-       :<|> BackendServicesDeleteSignedURLKeyResource
-       :<|> BackendServicesDeleteResource
-       :<|> BackendServicesUpdateResource
-       :<|> PacketMirroringsAggregatedListResource
-       :<|> PacketMirroringsInsertResource
-       :<|> PacketMirroringsListResource
-       :<|> PacketMirroringsPatchResource
-       :<|> PacketMirroringsGetResource
-       :<|> PacketMirroringsTestIAMPermissionsResource
-       :<|> PacketMirroringsDeleteResource
-       :<|> RegionSSLCertificatesInsertResource
-       :<|> RegionSSLCertificatesListResource
-       :<|> RegionSSLCertificatesGetResource
-       :<|> RegionSSLCertificatesDeleteResource
-       :<|> RegionNotificationEndpointsInsertResource
-       :<|> RegionNotificationEndpointsListResource
-       :<|> RegionNotificationEndpointsGetResource
-       :<|> RegionNotificationEndpointsDeleteResource
-       :<|> LicenseCodesGetResource
-       :<|> LicenseCodesTestIAMPermissionsResource
-       :<|> InstanceGroupsRemoveInstancesResource
-       :<|> InstanceGroupsAggregatedListResource
-       :<|> InstanceGroupsInsertResource
-       :<|> InstanceGroupsListResource
-       :<|> InstanceGroupsAddInstancesResource
-       :<|> InstanceGroupsGetResource
-       :<|> InstanceGroupsListInstancesResource
-       :<|> InstanceGroupsSetNamedPortsResource
-       :<|> InstanceGroupsDeleteResource
-       :<|> FirewallsInsertResource
-       :<|> FirewallsListResource
-       :<|> FirewallsPatchResource
-       :<|> FirewallsGetResource
-       :<|> FirewallsDeleteResource
-       :<|> FirewallsUpdateResource
-       :<|> GlobalOperationsAggregatedListResource
-       :<|> GlobalOperationsListResource
-       :<|> GlobalOperationsWaitResource
-       :<|> GlobalOperationsGetResource
-       :<|> GlobalOperationsDeleteResource
-       :<|> LicensesInsertResource
-       :<|> LicensesListResource
-       :<|> LicensesGetIAMPolicyResource
-       :<|> LicensesGetResource
-       :<|> LicensesSetIAMPolicyResource
-       :<|> LicensesTestIAMPermissionsResource
-       :<|> LicensesDeleteResource
-       :<|> ZoneOperationsListResource
-       :<|> ZoneOperationsWaitResource
-       :<|> ZoneOperationsGetResource
-       :<|> ZoneOperationsDeleteResource
-       :<|> InterconnectAttachmentsAggregatedListResource
-       :<|> InterconnectAttachmentsInsertResource
-       :<|> InterconnectAttachmentsListResource
-       :<|> InterconnectAttachmentsPatchResource
-       :<|> InterconnectAttachmentsGetResource
-       :<|> InterconnectAttachmentsDeleteResource
-       :<|> TargetHTTPSProxiesAggregatedListResource
-       :<|> TargetHTTPSProxiesInsertResource
-       :<|> TargetHTTPSProxiesListResource
-       :<|> TargetHTTPSProxiesSetURLMapResource
-       :<|> TargetHTTPSProxiesSetSSLCertificatesResource
-       :<|> TargetHTTPSProxiesSetQuicOverrideResource
-       :<|> TargetHTTPSProxiesPatchResource
-       :<|> TargetHTTPSProxiesGetResource
-       :<|> TargetHTTPSProxiesSetSSLPolicyResource
-       :<|> TargetHTTPSProxiesDeleteResource
-       :<|> RegionTargetHTTPProxiesInsertResource
-       :<|> RegionTargetHTTPProxiesListResource
-       :<|> RegionTargetHTTPProxiesSetURLMapResource
-       :<|> RegionTargetHTTPProxiesGetResource
-       :<|> RegionTargetHTTPProxiesDeleteResource
-       :<|> ReservationsAggregatedListResource
-       :<|> ReservationsInsertResource
-       :<|> ReservationsResizeResource
-       :<|> ReservationsListResource
-       :<|> ReservationsGetIAMPolicyResource
-       :<|> ReservationsGetResource
-       :<|> ReservationsSetIAMPolicyResource
-       :<|> ReservationsTestIAMPermissionsResource
-       :<|> ReservationsDeleteResource
-       :<|> TargetInstancesAggregatedListResource
-       :<|> TargetInstancesInsertResource
-       :<|> TargetInstancesListResource
-       :<|> TargetInstancesGetResource
-       :<|> TargetInstancesDeleteResource
-       :<|> DisksAggregatedListResource
-       :<|> DisksInsertResource
-       :<|> DisksResizeResource
-       :<|> DisksListResource
-       :<|> DisksRemoveResourcePoliciesResource
-       :<|> DisksGetIAMPolicyResource
-       :<|> DisksGetResource
-       :<|> DisksSetIAMPolicyResource
-       :<|> DisksSetLabelsResource
-       :<|> DisksAddResourcePoliciesResource
-       :<|> DisksCreateSnapshotResource
-       :<|> DisksTestIAMPermissionsResource
-       :<|> DisksDeleteResource
-       :<|> ForwardingRulesAggregatedListResource
-       :<|> ForwardingRulesInsertResource
-       :<|> ForwardingRulesListResource
-       :<|> ForwardingRulesPatchResource
-       :<|> ForwardingRulesGetResource
-       :<|> ForwardingRulesSetLabelsResource
-       :<|> ForwardingRulesSetTargetResource
-       :<|> ForwardingRulesDeleteResource
-       :<|> InstanceGroupManagersSetTargetPoolsResource
-       :<|> InstanceGroupManagersAggregatedListResource
-       :<|>
-       InstanceGroupManagersApplyUpdatesToInstancesResource
-       :<|> InstanceGroupManagersInsertResource
-       :<|> InstanceGroupManagersResizeResource
-       :<|> InstanceGroupManagersListResource
-       :<|>
-       InstanceGroupManagersListManagedInstancesResource
-       :<|> InstanceGroupManagersAbandonInstancesResource
-       :<|> InstanceGroupManagersSetInstanceTemplateResource
-       :<|> InstanceGroupManagersPatchResource
-       :<|> InstanceGroupManagersGetResource
-       :<|>
-       InstanceGroupManagersPatchPerInstanceConfigsResource
-       :<|>
-       InstanceGroupManagersListPerInstanceConfigsResource
-       :<|> InstanceGroupManagersDeleteInstancesResource
-       :<|> InstanceGroupManagersCreateInstancesResource
-       :<|>
-       InstanceGroupManagersUpdatePerInstanceConfigsResource
-       :<|>
-       InstanceGroupManagersDeletePerInstanceConfigsResource
-       :<|> InstanceGroupManagersDeleteResource
-       :<|> InstanceGroupManagersRecreateInstancesResource
-       :<|> InstanceGroupManagersListErrorsResource
-       :<|> RegionAutoscalersInsertResource
-       :<|> RegionAutoscalersListResource
-       :<|> RegionAutoscalersPatchResource
-       :<|> RegionAutoscalersGetResource
-       :<|> RegionAutoscalersDeleteResource
-       :<|> RegionAutoscalersUpdateResource
-       :<|> ProjectsEnableXpnHostResource
-       :<|> ProjectsListXpnHostsResource
-       :<|> ProjectsDisableXpnHostResource
-       :<|> ProjectsEnableXpnResourceResource
-       :<|> ProjectsSetUsageExportBucketResource
-       :<|> ProjectsMoveInstanceResource
-       :<|> ProjectsDisableXpnResourceResource
-       :<|> ProjectsGetXpnHostResource
-       :<|> ProjectsGetResource
-       :<|> ProjectsMoveDiskResource
-       :<|> ProjectsSetDefaultNetworkTierResource
-       :<|> ProjectsSetCommonInstanceMetadataResource
-       :<|> ProjectsGetXpnResourcesResource
-       :<|> GlobalOrganizationOperationsListResource
-       :<|> GlobalOrganizationOperationsGetResource
-       :<|> GlobalOrganizationOperationsDeleteResource
-       :<|> RegionDiskTypesListResource
-       :<|> RegionDiskTypesGetResource
-       :<|> TargetPoolsAggregatedListResource
-       :<|> TargetPoolsRemoveInstanceResource
-       :<|> TargetPoolsInsertResource
-       :<|> TargetPoolsListResource
-       :<|> TargetPoolsGetHealthResource
-       :<|> TargetPoolsGetResource
-       :<|> TargetPoolsRemoveHealthCheckResource
-       :<|> TargetPoolsSetBackupResource
-       :<|> TargetPoolsAddInstanceResource
-       :<|> TargetPoolsAddHealthCheckResource
-       :<|> TargetPoolsDeleteResource
-       :<|> HealthChecksAggregatedListResource
-       :<|> HealthChecksInsertResource
-       :<|> HealthChecksListResource
-       :<|> HealthChecksPatchResource
-       :<|> HealthChecksGetResource
-       :<|> HealthChecksDeleteResource
-       :<|> HealthChecksUpdateResource
-       :<|> RegionNetworkEndpointGroupsInsertResource
-       :<|> RegionNetworkEndpointGroupsListResource
-       :<|> RegionNetworkEndpointGroupsGetResource
-       :<|> RegionNetworkEndpointGroupsDeleteResource
-       :<|> BackendBucketsAddSignedURLKeyResource
-       :<|> BackendBucketsInsertResource
-       :<|> BackendBucketsListResource
-       :<|> BackendBucketsPatchResource
-       :<|> BackendBucketsGetResource
-       :<|> BackendBucketsDeleteSignedURLKeyResource
-       :<|> BackendBucketsDeleteResource
-       :<|> BackendBucketsUpdateResource
+import Network.Google.Compute.UrlMaps.AggregatedList
+import Network.Google.Compute.UrlMaps.Delete
+import Network.Google.Compute.UrlMaps.Get
+import Network.Google.Compute.UrlMaps.Insert
+import Network.Google.Compute.UrlMaps.InvalidateCache
+import Network.Google.Compute.UrlMaps.List
+import Network.Google.Compute.UrlMaps.Patch
+import Network.Google.Compute.UrlMaps.Update
+import Network.Google.Compute.UrlMaps.Validate
+import Network.Google.Compute.VpnGateways.AggregatedList
+import Network.Google.Compute.VpnGateways.Delete
+import Network.Google.Compute.VpnGateways.Get
+import Network.Google.Compute.VpnGateways.GetStatus
+import Network.Google.Compute.VpnGateways.Insert
+import Network.Google.Compute.VpnGateways.List
+import Network.Google.Compute.VpnGateways.SetLabels
+import Network.Google.Compute.VpnGateways.TestIamPermissions
+import Network.Google.Compute.VpnTunnels.AggregatedList
+import Network.Google.Compute.VpnTunnels.Delete
+import Network.Google.Compute.VpnTunnels.Get
+import Network.Google.Compute.VpnTunnels.Insert
+import Network.Google.Compute.VpnTunnels.List
+import Network.Google.Compute.ZoneOperations.Delete
+import Network.Google.Compute.ZoneOperations.Get
+import Network.Google.Compute.ZoneOperations.List
+import Network.Google.Compute.ZoneOperations.Wait
+import Network.Google.Compute.Zones.Get
+import Network.Google.Compute.Zones.List

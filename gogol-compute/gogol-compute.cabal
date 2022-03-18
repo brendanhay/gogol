@@ -1,631 +1,701 @@
-name:                  gogol-compute
-version:               0.5.0
-synopsis:              Google Compute Engine SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-compute
+version:            0.5.0
+synopsis:           Google Compute Engine SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Creates and runs virtual machines on Google Cloud Platform.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Creates and runs virtual machines on Google Cloud Platform.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-compute
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Compute
-        , Network.Google.Compute.Types
-        , Network.Google.Resource.Compute.AcceleratorTypes.AggregatedList
-        , Network.Google.Resource.Compute.AcceleratorTypes.Get
-        , Network.Google.Resource.Compute.AcceleratorTypes.List
-        , Network.Google.Resource.Compute.Addresses.AggregatedList
-        , Network.Google.Resource.Compute.Addresses.Delete
-        , Network.Google.Resource.Compute.Addresses.Get
-        , Network.Google.Resource.Compute.Addresses.Insert
-        , Network.Google.Resource.Compute.Addresses.List
-        , Network.Google.Resource.Compute.Autoscalers.AggregatedList
-        , Network.Google.Resource.Compute.Autoscalers.Delete
-        , Network.Google.Resource.Compute.Autoscalers.Get
-        , Network.Google.Resource.Compute.Autoscalers.Insert
-        , Network.Google.Resource.Compute.Autoscalers.List
-        , Network.Google.Resource.Compute.Autoscalers.Patch
-        , Network.Google.Resource.Compute.Autoscalers.Update
-        , Network.Google.Resource.Compute.BackendBuckets.AddSignedURLKey
-        , Network.Google.Resource.Compute.BackendBuckets.Delete
-        , Network.Google.Resource.Compute.BackendBuckets.DeleteSignedURLKey
-        , Network.Google.Resource.Compute.BackendBuckets.Get
-        , Network.Google.Resource.Compute.BackendBuckets.Insert
-        , Network.Google.Resource.Compute.BackendBuckets.List
-        , Network.Google.Resource.Compute.BackendBuckets.Patch
-        , Network.Google.Resource.Compute.BackendBuckets.Update
-        , Network.Google.Resource.Compute.BackendServices.AddSignedURLKey
-        , Network.Google.Resource.Compute.BackendServices.AggregatedList
-        , Network.Google.Resource.Compute.BackendServices.Delete
-        , Network.Google.Resource.Compute.BackendServices.DeleteSignedURLKey
-        , Network.Google.Resource.Compute.BackendServices.Get
-        , Network.Google.Resource.Compute.BackendServices.GetHealth
-        , Network.Google.Resource.Compute.BackendServices.Insert
-        , Network.Google.Resource.Compute.BackendServices.List
-        , Network.Google.Resource.Compute.BackendServices.Patch
-        , Network.Google.Resource.Compute.BackendServices.SetSecurityPolicy
-        , Network.Google.Resource.Compute.BackendServices.Update
-        , Network.Google.Resource.Compute.DiskTypes.AggregatedList
-        , Network.Google.Resource.Compute.DiskTypes.Get
-        , Network.Google.Resource.Compute.DiskTypes.List
-        , Network.Google.Resource.Compute.Disks.AddResourcePolicies
-        , Network.Google.Resource.Compute.Disks.AggregatedList
-        , Network.Google.Resource.Compute.Disks.CreateSnapshot
-        , Network.Google.Resource.Compute.Disks.Delete
-        , Network.Google.Resource.Compute.Disks.Get
-        , Network.Google.Resource.Compute.Disks.GetIAMPolicy
-        , Network.Google.Resource.Compute.Disks.Insert
-        , Network.Google.Resource.Compute.Disks.List
-        , Network.Google.Resource.Compute.Disks.RemoveResourcePolicies
-        , Network.Google.Resource.Compute.Disks.Resize
-        , Network.Google.Resource.Compute.Disks.SetIAMPolicy
-        , Network.Google.Resource.Compute.Disks.SetLabels
-        , Network.Google.Resource.Compute.Disks.TestIAMPermissions
-        , Network.Google.Resource.Compute.ExternalVPNGateways.Delete
-        , Network.Google.Resource.Compute.ExternalVPNGateways.Get
-        , Network.Google.Resource.Compute.ExternalVPNGateways.Insert
-        , Network.Google.Resource.Compute.ExternalVPNGateways.List
-        , Network.Google.Resource.Compute.ExternalVPNGateways.SetLabels
-        , Network.Google.Resource.Compute.ExternalVPNGateways.TestIAMPermissions
-        , Network.Google.Resource.Compute.FirewallPolicies.AddAssociation
-        , Network.Google.Resource.Compute.FirewallPolicies.AddRule
-        , Network.Google.Resource.Compute.FirewallPolicies.CloneRules
-        , Network.Google.Resource.Compute.FirewallPolicies.Delete
-        , Network.Google.Resource.Compute.FirewallPolicies.Get
-        , Network.Google.Resource.Compute.FirewallPolicies.GetAssociation
-        , Network.Google.Resource.Compute.FirewallPolicies.GetIAMPolicy
-        , Network.Google.Resource.Compute.FirewallPolicies.GetRule
-        , Network.Google.Resource.Compute.FirewallPolicies.Insert
-        , Network.Google.Resource.Compute.FirewallPolicies.List
-        , Network.Google.Resource.Compute.FirewallPolicies.ListAssociations
-        , Network.Google.Resource.Compute.FirewallPolicies.Move
-        , Network.Google.Resource.Compute.FirewallPolicies.Patch
-        , Network.Google.Resource.Compute.FirewallPolicies.PatchRule
-        , Network.Google.Resource.Compute.FirewallPolicies.RemoveAssociation
-        , Network.Google.Resource.Compute.FirewallPolicies.RemoveRule
-        , Network.Google.Resource.Compute.FirewallPolicies.SetIAMPolicy
-        , Network.Google.Resource.Compute.FirewallPolicies.TestIAMPermissions
-        , Network.Google.Resource.Compute.Firewalls.Delete
-        , Network.Google.Resource.Compute.Firewalls.Get
-        , Network.Google.Resource.Compute.Firewalls.Insert
-        , Network.Google.Resource.Compute.Firewalls.List
-        , Network.Google.Resource.Compute.Firewalls.Patch
-        , Network.Google.Resource.Compute.Firewalls.Update
-        , Network.Google.Resource.Compute.ForwardingRules.AggregatedList
-        , Network.Google.Resource.Compute.ForwardingRules.Delete
-        , Network.Google.Resource.Compute.ForwardingRules.Get
-        , Network.Google.Resource.Compute.ForwardingRules.Insert
-        , Network.Google.Resource.Compute.ForwardingRules.List
-        , Network.Google.Resource.Compute.ForwardingRules.Patch
-        , Network.Google.Resource.Compute.ForwardingRules.SetLabels
-        , Network.Google.Resource.Compute.ForwardingRules.SetTarget
-        , Network.Google.Resource.Compute.GlobalAddresses.Delete
-        , Network.Google.Resource.Compute.GlobalAddresses.Get
-        , Network.Google.Resource.Compute.GlobalAddresses.Insert
-        , Network.Google.Resource.Compute.GlobalAddresses.List
-        , Network.Google.Resource.Compute.GlobalForwardingRules.Delete
-        , Network.Google.Resource.Compute.GlobalForwardingRules.Get
-        , Network.Google.Resource.Compute.GlobalForwardingRules.Insert
-        , Network.Google.Resource.Compute.GlobalForwardingRules.List
-        , Network.Google.Resource.Compute.GlobalForwardingRules.Patch
-        , Network.Google.Resource.Compute.GlobalForwardingRules.SetLabels
-        , Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
-        , Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
-        , Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Delete
-        , Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.DetachNetworkEndpoints
-        , Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Get
-        , Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.Insert
-        , Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.List
-        , Network.Google.Resource.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
-        , Network.Google.Resource.Compute.GlobalOperations.AggregatedList
-        , Network.Google.Resource.Compute.GlobalOperations.Delete
-        , Network.Google.Resource.Compute.GlobalOperations.Get
-        , Network.Google.Resource.Compute.GlobalOperations.List
-        , Network.Google.Resource.Compute.GlobalOperations.Wait
-        , Network.Google.Resource.Compute.GlobalOrganizationOperations.Delete
-        , Network.Google.Resource.Compute.GlobalOrganizationOperations.Get
-        , Network.Google.Resource.Compute.GlobalOrganizationOperations.List
-        , Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Delete
-        , Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Get
-        , Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Insert
-        , Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.List
-        , Network.Google.Resource.Compute.GlobalPublicDelegatedPrefixes.Patch
-        , Network.Google.Resource.Compute.HTTPHealthChecks.Delete
-        , Network.Google.Resource.Compute.HTTPHealthChecks.Get
-        , Network.Google.Resource.Compute.HTTPHealthChecks.Insert
-        , Network.Google.Resource.Compute.HTTPHealthChecks.List
-        , Network.Google.Resource.Compute.HTTPHealthChecks.Patch
-        , Network.Google.Resource.Compute.HTTPHealthChecks.Update
-        , Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
-        , Network.Google.Resource.Compute.HTTPSHealthChecks.Get
-        , Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
-        , Network.Google.Resource.Compute.HTTPSHealthChecks.List
-        , Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
-        , Network.Google.Resource.Compute.HTTPSHealthChecks.Update
-        , Network.Google.Resource.Compute.HealthChecks.AggregatedList
-        , Network.Google.Resource.Compute.HealthChecks.Delete
-        , Network.Google.Resource.Compute.HealthChecks.Get
-        , Network.Google.Resource.Compute.HealthChecks.Insert
-        , Network.Google.Resource.Compute.HealthChecks.List
-        , Network.Google.Resource.Compute.HealthChecks.Patch
-        , Network.Google.Resource.Compute.HealthChecks.Update
-        , Network.Google.Resource.Compute.Images.Delete
-        , Network.Google.Resource.Compute.Images.Deprecate
-        , Network.Google.Resource.Compute.Images.Get
-        , Network.Google.Resource.Compute.Images.GetFromFamily
-        , Network.Google.Resource.Compute.Images.GetIAMPolicy
-        , Network.Google.Resource.Compute.Images.Insert
-        , Network.Google.Resource.Compute.Images.List
-        , Network.Google.Resource.Compute.Images.Patch
-        , Network.Google.Resource.Compute.Images.SetIAMPolicy
-        , Network.Google.Resource.Compute.Images.SetLabels
-        , Network.Google.Resource.Compute.Images.TestIAMPermissions
-        , Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
-        , Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
-        , Network.Google.Resource.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
-        , Network.Google.Resource.Compute.InstanceGroupManagers.CreateInstances
-        , Network.Google.Resource.Compute.InstanceGroupManagers.Delete
-        , Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
-        , Network.Google.Resource.Compute.InstanceGroupManagers.DeletePerInstanceConfigs
-        , Network.Google.Resource.Compute.InstanceGroupManagers.Get
-        , Network.Google.Resource.Compute.InstanceGroupManagers.Insert
-        , Network.Google.Resource.Compute.InstanceGroupManagers.List
-        , Network.Google.Resource.Compute.InstanceGroupManagers.ListErrors
-        , Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
-        , Network.Google.Resource.Compute.InstanceGroupManagers.ListPerInstanceConfigs
-        , Network.Google.Resource.Compute.InstanceGroupManagers.Patch
-        , Network.Google.Resource.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
-        , Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
-        , Network.Google.Resource.Compute.InstanceGroupManagers.Resize
-        , Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
-        , Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
-        , Network.Google.Resource.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
-        , Network.Google.Resource.Compute.InstanceGroups.AddInstances
-        , Network.Google.Resource.Compute.InstanceGroups.AggregatedList
-        , Network.Google.Resource.Compute.InstanceGroups.Delete
-        , Network.Google.Resource.Compute.InstanceGroups.Get
-        , Network.Google.Resource.Compute.InstanceGroups.Insert
-        , Network.Google.Resource.Compute.InstanceGroups.List
-        , Network.Google.Resource.Compute.InstanceGroups.ListInstances
-        , Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
-        , Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
-        , Network.Google.Resource.Compute.InstanceTemplates.Delete
-        , Network.Google.Resource.Compute.InstanceTemplates.Get
-        , Network.Google.Resource.Compute.InstanceTemplates.GetIAMPolicy
-        , Network.Google.Resource.Compute.InstanceTemplates.Insert
-        , Network.Google.Resource.Compute.InstanceTemplates.List
-        , Network.Google.Resource.Compute.InstanceTemplates.SetIAMPolicy
-        , Network.Google.Resource.Compute.InstanceTemplates.TestIAMPermissions
-        , Network.Google.Resource.Compute.Instances.AddAccessConfig
-        , Network.Google.Resource.Compute.Instances.AddResourcePolicies
-        , Network.Google.Resource.Compute.Instances.AggregatedList
-        , Network.Google.Resource.Compute.Instances.AttachDisk
-        , Network.Google.Resource.Compute.Instances.BulkInsert
-        , Network.Google.Resource.Compute.Instances.Delete
-        , Network.Google.Resource.Compute.Instances.DeleteAccessConfig
-        , Network.Google.Resource.Compute.Instances.DetachDisk
-        , Network.Google.Resource.Compute.Instances.Get
-        , Network.Google.Resource.Compute.Instances.GetEffectiveFirewalls
-        , Network.Google.Resource.Compute.Instances.GetGuestAttributes
-        , Network.Google.Resource.Compute.Instances.GetIAMPolicy
-        , Network.Google.Resource.Compute.Instances.GetScreenshot
-        , Network.Google.Resource.Compute.Instances.GetSerialPortOutput
-        , Network.Google.Resource.Compute.Instances.GetShieldedInstanceIdentity
-        , Network.Google.Resource.Compute.Instances.Insert
-        , Network.Google.Resource.Compute.Instances.List
-        , Network.Google.Resource.Compute.Instances.ListReferrers
-        , Network.Google.Resource.Compute.Instances.RemoveResourcePolicies
-        , Network.Google.Resource.Compute.Instances.Reset
-        , Network.Google.Resource.Compute.Instances.SetDeletionProtection
-        , Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
-        , Network.Google.Resource.Compute.Instances.SetIAMPolicy
-        , Network.Google.Resource.Compute.Instances.SetLabels
-        , Network.Google.Resource.Compute.Instances.SetMachineResources
-        , Network.Google.Resource.Compute.Instances.SetMachineType
-        , Network.Google.Resource.Compute.Instances.SetMetadata
-        , Network.Google.Resource.Compute.Instances.SetMinCPUPlatform
-        , Network.Google.Resource.Compute.Instances.SetScheduling
-        , Network.Google.Resource.Compute.Instances.SetServiceAccount
-        , Network.Google.Resource.Compute.Instances.SetShieldedInstanceIntegrityPolicy
-        , Network.Google.Resource.Compute.Instances.SetTags
-        , Network.Google.Resource.Compute.Instances.SimulateMaintenanceEvent
-        , Network.Google.Resource.Compute.Instances.Start
-        , Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
-        , Network.Google.Resource.Compute.Instances.Stop
-        , Network.Google.Resource.Compute.Instances.TestIAMPermissions
-        , Network.Google.Resource.Compute.Instances.Update
-        , Network.Google.Resource.Compute.Instances.UpdateAccessConfig
-        , Network.Google.Resource.Compute.Instances.UpdateDisplayDevice
-        , Network.Google.Resource.Compute.Instances.UpdateNetworkInterface
-        , Network.Google.Resource.Compute.Instances.UpdateShieldedInstanceConfig
-        , Network.Google.Resource.Compute.InterconnectAttachments.AggregatedList
-        , Network.Google.Resource.Compute.InterconnectAttachments.Delete
-        , Network.Google.Resource.Compute.InterconnectAttachments.Get
-        , Network.Google.Resource.Compute.InterconnectAttachments.Insert
-        , Network.Google.Resource.Compute.InterconnectAttachments.List
-        , Network.Google.Resource.Compute.InterconnectAttachments.Patch
-        , Network.Google.Resource.Compute.InterconnectLocations.Get
-        , Network.Google.Resource.Compute.InterconnectLocations.List
-        , Network.Google.Resource.Compute.Interconnects.Delete
-        , Network.Google.Resource.Compute.Interconnects.Get
-        , Network.Google.Resource.Compute.Interconnects.GetDiagnostics
-        , Network.Google.Resource.Compute.Interconnects.Insert
-        , Network.Google.Resource.Compute.Interconnects.List
-        , Network.Google.Resource.Compute.Interconnects.Patch
-        , Network.Google.Resource.Compute.LicenseCodes.Get
-        , Network.Google.Resource.Compute.LicenseCodes.TestIAMPermissions
-        , Network.Google.Resource.Compute.Licenses.Delete
-        , Network.Google.Resource.Compute.Licenses.Get
-        , Network.Google.Resource.Compute.Licenses.GetIAMPolicy
-        , Network.Google.Resource.Compute.Licenses.Insert
-        , Network.Google.Resource.Compute.Licenses.List
-        , Network.Google.Resource.Compute.Licenses.SetIAMPolicy
-        , Network.Google.Resource.Compute.Licenses.TestIAMPermissions
-        , Network.Google.Resource.Compute.MachineTypes.AggregatedList
-        , Network.Google.Resource.Compute.MachineTypes.Get
-        , Network.Google.Resource.Compute.MachineTypes.List
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.AggregatedList
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.Delete
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.Get
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.Insert
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.List
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.ListNetworkEndpoints
-        , Network.Google.Resource.Compute.NetworkEndpointGroups.TestIAMPermissions
-        , Network.Google.Resource.Compute.Networks.AddPeering
-        , Network.Google.Resource.Compute.Networks.Delete
-        , Network.Google.Resource.Compute.Networks.Get
-        , Network.Google.Resource.Compute.Networks.GetEffectiveFirewalls
-        , Network.Google.Resource.Compute.Networks.Insert
-        , Network.Google.Resource.Compute.Networks.List
-        , Network.Google.Resource.Compute.Networks.ListPeeringRoutes
-        , Network.Google.Resource.Compute.Networks.Patch
-        , Network.Google.Resource.Compute.Networks.RemovePeering
-        , Network.Google.Resource.Compute.Networks.SwitchToCustomMode
-        , Network.Google.Resource.Compute.Networks.UpdatePeering
-        , Network.Google.Resource.Compute.NodeGroups.AddNodes
-        , Network.Google.Resource.Compute.NodeGroups.AggregatedList
-        , Network.Google.Resource.Compute.NodeGroups.Delete
-        , Network.Google.Resource.Compute.NodeGroups.DeleteNodes
-        , Network.Google.Resource.Compute.NodeGroups.Get
-        , Network.Google.Resource.Compute.NodeGroups.GetIAMPolicy
-        , Network.Google.Resource.Compute.NodeGroups.Insert
-        , Network.Google.Resource.Compute.NodeGroups.List
-        , Network.Google.Resource.Compute.NodeGroups.ListNodes
-        , Network.Google.Resource.Compute.NodeGroups.Patch
-        , Network.Google.Resource.Compute.NodeGroups.SetIAMPolicy
-        , Network.Google.Resource.Compute.NodeGroups.SetNodeTemplate
-        , Network.Google.Resource.Compute.NodeGroups.TestIAMPermissions
-        , Network.Google.Resource.Compute.NodeTemplates.AggregatedList
-        , Network.Google.Resource.Compute.NodeTemplates.Delete
-        , Network.Google.Resource.Compute.NodeTemplates.Get
-        , Network.Google.Resource.Compute.NodeTemplates.GetIAMPolicy
-        , Network.Google.Resource.Compute.NodeTemplates.Insert
-        , Network.Google.Resource.Compute.NodeTemplates.List
-        , Network.Google.Resource.Compute.NodeTemplates.SetIAMPolicy
-        , Network.Google.Resource.Compute.NodeTemplates.TestIAMPermissions
-        , Network.Google.Resource.Compute.NodeTypes.AggregatedList
-        , Network.Google.Resource.Compute.NodeTypes.Get
-        , Network.Google.Resource.Compute.NodeTypes.List
-        , Network.Google.Resource.Compute.PacketMirrorings.AggregatedList
-        , Network.Google.Resource.Compute.PacketMirrorings.Delete
-        , Network.Google.Resource.Compute.PacketMirrorings.Get
-        , Network.Google.Resource.Compute.PacketMirrorings.Insert
-        , Network.Google.Resource.Compute.PacketMirrorings.List
-        , Network.Google.Resource.Compute.PacketMirrorings.Patch
-        , Network.Google.Resource.Compute.PacketMirrorings.TestIAMPermissions
-        , Network.Google.Resource.Compute.Projects.DisableXpnHost
-        , Network.Google.Resource.Compute.Projects.DisableXpnResource
-        , Network.Google.Resource.Compute.Projects.EnableXpnHost
-        , Network.Google.Resource.Compute.Projects.EnableXpnResource
-        , Network.Google.Resource.Compute.Projects.Get
-        , Network.Google.Resource.Compute.Projects.GetXpnHost
-        , Network.Google.Resource.Compute.Projects.GetXpnResources
-        , Network.Google.Resource.Compute.Projects.ListXpnHosts
-        , Network.Google.Resource.Compute.Projects.MoveDisk
-        , Network.Google.Resource.Compute.Projects.MoveInstance
-        , Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
-        , Network.Google.Resource.Compute.Projects.SetDefaultNetworkTier
-        , Network.Google.Resource.Compute.Projects.SetUsageExportBucket
-        , Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Delete
-        , Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Get
-        , Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Insert
-        , Network.Google.Resource.Compute.PublicAdvertisedPrefixes.List
-        , Network.Google.Resource.Compute.PublicAdvertisedPrefixes.Patch
-        , Network.Google.Resource.Compute.PublicDelegatedPrefixes.AggregatedList
-        , Network.Google.Resource.Compute.PublicDelegatedPrefixes.Delete
-        , Network.Google.Resource.Compute.PublicDelegatedPrefixes.Get
-        , Network.Google.Resource.Compute.PublicDelegatedPrefixes.Insert
-        , Network.Google.Resource.Compute.PublicDelegatedPrefixes.List
-        , Network.Google.Resource.Compute.PublicDelegatedPrefixes.Patch
-        , Network.Google.Resource.Compute.RegionAutoscalers.Delete
-        , Network.Google.Resource.Compute.RegionAutoscalers.Get
-        , Network.Google.Resource.Compute.RegionAutoscalers.Insert
-        , Network.Google.Resource.Compute.RegionAutoscalers.List
-        , Network.Google.Resource.Compute.RegionAutoscalers.Patch
-        , Network.Google.Resource.Compute.RegionAutoscalers.Update
-        , Network.Google.Resource.Compute.RegionBackendServices.Delete
-        , Network.Google.Resource.Compute.RegionBackendServices.Get
-        , Network.Google.Resource.Compute.RegionBackendServices.GetHealth
-        , Network.Google.Resource.Compute.RegionBackendServices.Insert
-        , Network.Google.Resource.Compute.RegionBackendServices.List
-        , Network.Google.Resource.Compute.RegionBackendServices.Patch
-        , Network.Google.Resource.Compute.RegionBackendServices.Update
-        , Network.Google.Resource.Compute.RegionCommitments.AggregatedList
-        , Network.Google.Resource.Compute.RegionCommitments.Get
-        , Network.Google.Resource.Compute.RegionCommitments.Insert
-        , Network.Google.Resource.Compute.RegionCommitments.List
-        , Network.Google.Resource.Compute.RegionDiskTypes.Get
-        , Network.Google.Resource.Compute.RegionDiskTypes.List
-        , Network.Google.Resource.Compute.RegionDisks.AddResourcePolicies
-        , Network.Google.Resource.Compute.RegionDisks.CreateSnapshot
-        , Network.Google.Resource.Compute.RegionDisks.Delete
-        , Network.Google.Resource.Compute.RegionDisks.Get
-        , Network.Google.Resource.Compute.RegionDisks.GetIAMPolicy
-        , Network.Google.Resource.Compute.RegionDisks.Insert
-        , Network.Google.Resource.Compute.RegionDisks.List
-        , Network.Google.Resource.Compute.RegionDisks.RemoveResourcePolicies
-        , Network.Google.Resource.Compute.RegionDisks.Resize
-        , Network.Google.Resource.Compute.RegionDisks.SetIAMPolicy
-        , Network.Google.Resource.Compute.RegionDisks.SetLabels
-        , Network.Google.Resource.Compute.RegionDisks.TestIAMPermissions
-        , Network.Google.Resource.Compute.RegionHealthCheckServices.Delete
-        , Network.Google.Resource.Compute.RegionHealthCheckServices.Get
-        , Network.Google.Resource.Compute.RegionHealthCheckServices.Insert
-        , Network.Google.Resource.Compute.RegionHealthCheckServices.List
-        , Network.Google.Resource.Compute.RegionHealthCheckServices.Patch
-        , Network.Google.Resource.Compute.RegionHealthChecks.Delete
-        , Network.Google.Resource.Compute.RegionHealthChecks.Get
-        , Network.Google.Resource.Compute.RegionHealthChecks.Insert
-        , Network.Google.Resource.Compute.RegionHealthChecks.List
-        , Network.Google.Resource.Compute.RegionHealthChecks.Patch
-        , Network.Google.Resource.Compute.RegionHealthChecks.Update
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.AbandonInstances
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.CreateInstances
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Delete
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeleteInstances
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Get
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListErrors
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListManagedInstances
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListPerInstanceConfigs
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Patch
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.RecreateInstances
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Resize
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetTargetPools
-        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
-        , Network.Google.Resource.Compute.RegionInstanceGroups.Get
-        , Network.Google.Resource.Compute.RegionInstanceGroups.List
-        , Network.Google.Resource.Compute.RegionInstanceGroups.ListInstances
-        , Network.Google.Resource.Compute.RegionInstanceGroups.SetNamedPorts
-        , Network.Google.Resource.Compute.RegionInstances.BulkInsert
-        , Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Delete
-        , Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Get
-        , Network.Google.Resource.Compute.RegionNetworkEndpointGroups.Insert
-        , Network.Google.Resource.Compute.RegionNetworkEndpointGroups.List
-        , Network.Google.Resource.Compute.RegionNotificationEndpoints.Delete
-        , Network.Google.Resource.Compute.RegionNotificationEndpoints.Get
-        , Network.Google.Resource.Compute.RegionNotificationEndpoints.Insert
-        , Network.Google.Resource.Compute.RegionNotificationEndpoints.List
-        , Network.Google.Resource.Compute.RegionOperations.Delete
-        , Network.Google.Resource.Compute.RegionOperations.Get
-        , Network.Google.Resource.Compute.RegionOperations.List
-        , Network.Google.Resource.Compute.RegionOperations.Wait
-        , Network.Google.Resource.Compute.RegionSSLCertificates.Delete
-        , Network.Google.Resource.Compute.RegionSSLCertificates.Get
-        , Network.Google.Resource.Compute.RegionSSLCertificates.Insert
-        , Network.Google.Resource.Compute.RegionSSLCertificates.List
-        , Network.Google.Resource.Compute.RegionTargetHTTPProxies.Delete
-        , Network.Google.Resource.Compute.RegionTargetHTTPProxies.Get
-        , Network.Google.Resource.Compute.RegionTargetHTTPProxies.Insert
-        , Network.Google.Resource.Compute.RegionTargetHTTPProxies.List
-        , Network.Google.Resource.Compute.RegionTargetHTTPProxies.SetURLMap
-        , Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Delete
-        , Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Get
-        , Network.Google.Resource.Compute.RegionTargetHTTPSProxies.Insert
-        , Network.Google.Resource.Compute.RegionTargetHTTPSProxies.List
-        , Network.Google.Resource.Compute.RegionTargetHTTPSProxies.SetSSLCertificates
-        , Network.Google.Resource.Compute.RegionTargetHTTPSProxies.SetURLMap
-        , Network.Google.Resource.Compute.RegionURLMaps.Delete
-        , Network.Google.Resource.Compute.RegionURLMaps.Get
-        , Network.Google.Resource.Compute.RegionURLMaps.Insert
-        , Network.Google.Resource.Compute.RegionURLMaps.List
-        , Network.Google.Resource.Compute.RegionURLMaps.Patch
-        , Network.Google.Resource.Compute.RegionURLMaps.Update
-        , Network.Google.Resource.Compute.RegionURLMaps.Validate
-        , Network.Google.Resource.Compute.Regions.Get
-        , Network.Google.Resource.Compute.Regions.List
-        , Network.Google.Resource.Compute.Reservations.AggregatedList
-        , Network.Google.Resource.Compute.Reservations.Delete
-        , Network.Google.Resource.Compute.Reservations.Get
-        , Network.Google.Resource.Compute.Reservations.GetIAMPolicy
-        , Network.Google.Resource.Compute.Reservations.Insert
-        , Network.Google.Resource.Compute.Reservations.List
-        , Network.Google.Resource.Compute.Reservations.Resize
-        , Network.Google.Resource.Compute.Reservations.SetIAMPolicy
-        , Network.Google.Resource.Compute.Reservations.TestIAMPermissions
-        , Network.Google.Resource.Compute.ResourcePolicies.AggregatedList
-        , Network.Google.Resource.Compute.ResourcePolicies.Delete
-        , Network.Google.Resource.Compute.ResourcePolicies.Get
-        , Network.Google.Resource.Compute.ResourcePolicies.GetIAMPolicy
-        , Network.Google.Resource.Compute.ResourcePolicies.Insert
-        , Network.Google.Resource.Compute.ResourcePolicies.List
-        , Network.Google.Resource.Compute.ResourcePolicies.SetIAMPolicy
-        , Network.Google.Resource.Compute.ResourcePolicies.TestIAMPermissions
-        , Network.Google.Resource.Compute.Routers.AggregatedList
-        , Network.Google.Resource.Compute.Routers.Delete
-        , Network.Google.Resource.Compute.Routers.Get
-        , Network.Google.Resource.Compute.Routers.GetNATMAppingInfo
-        , Network.Google.Resource.Compute.Routers.GetRouterStatus
-        , Network.Google.Resource.Compute.Routers.Insert
-        , Network.Google.Resource.Compute.Routers.List
-        , Network.Google.Resource.Compute.Routers.Patch
-        , Network.Google.Resource.Compute.Routers.Preview
-        , Network.Google.Resource.Compute.Routers.Update
-        , Network.Google.Resource.Compute.Routes.Delete
-        , Network.Google.Resource.Compute.Routes.Get
-        , Network.Google.Resource.Compute.Routes.Insert
-        , Network.Google.Resource.Compute.Routes.List
-        , Network.Google.Resource.Compute.SSLCertificates.AggregatedList
-        , Network.Google.Resource.Compute.SSLCertificates.Delete
-        , Network.Google.Resource.Compute.SSLCertificates.Get
-        , Network.Google.Resource.Compute.SSLCertificates.Insert
-        , Network.Google.Resource.Compute.SSLCertificates.List
-        , Network.Google.Resource.Compute.SSLPolicies.Delete
-        , Network.Google.Resource.Compute.SSLPolicies.Get
-        , Network.Google.Resource.Compute.SSLPolicies.Insert
-        , Network.Google.Resource.Compute.SSLPolicies.List
-        , Network.Google.Resource.Compute.SSLPolicies.ListAvailableFeatures
-        , Network.Google.Resource.Compute.SSLPolicies.Patch
-        , Network.Google.Resource.Compute.SecurityPolicies.AddRule
-        , Network.Google.Resource.Compute.SecurityPolicies.Delete
-        , Network.Google.Resource.Compute.SecurityPolicies.Get
-        , Network.Google.Resource.Compute.SecurityPolicies.GetRule
-        , Network.Google.Resource.Compute.SecurityPolicies.Insert
-        , Network.Google.Resource.Compute.SecurityPolicies.List
-        , Network.Google.Resource.Compute.SecurityPolicies.ListPreConfiguredExpressionSets
-        , Network.Google.Resource.Compute.SecurityPolicies.Patch
-        , Network.Google.Resource.Compute.SecurityPolicies.PatchRule
-        , Network.Google.Resource.Compute.SecurityPolicies.RemoveRule
-        , Network.Google.Resource.Compute.Snapshots.Delete
-        , Network.Google.Resource.Compute.Snapshots.Get
-        , Network.Google.Resource.Compute.Snapshots.GetIAMPolicy
-        , Network.Google.Resource.Compute.Snapshots.List
-        , Network.Google.Resource.Compute.Snapshots.SetIAMPolicy
-        , Network.Google.Resource.Compute.Snapshots.SetLabels
-        , Network.Google.Resource.Compute.Snapshots.TestIAMPermissions
-        , Network.Google.Resource.Compute.Subnetworks.AggregatedList
-        , Network.Google.Resource.Compute.Subnetworks.Delete
-        , Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
-        , Network.Google.Resource.Compute.Subnetworks.Get
-        , Network.Google.Resource.Compute.Subnetworks.GetIAMPolicy
-        , Network.Google.Resource.Compute.Subnetworks.Insert
-        , Network.Google.Resource.Compute.Subnetworks.List
-        , Network.Google.Resource.Compute.Subnetworks.ListUsable
-        , Network.Google.Resource.Compute.Subnetworks.Patch
-        , Network.Google.Resource.Compute.Subnetworks.SetIAMPolicy
-        , Network.Google.Resource.Compute.Subnetworks.SetPrivateIPGoogleAccess
-        , Network.Google.Resource.Compute.Subnetworks.TestIAMPermissions
-        , Network.Google.Resource.Compute.TargetGrpcProxies.Delete
-        , Network.Google.Resource.Compute.TargetGrpcProxies.Get
-        , Network.Google.Resource.Compute.TargetGrpcProxies.Insert
-        , Network.Google.Resource.Compute.TargetGrpcProxies.List
-        , Network.Google.Resource.Compute.TargetGrpcProxies.Patch
-        , Network.Google.Resource.Compute.TargetHTTPProxies.AggregatedList
-        , Network.Google.Resource.Compute.TargetHTTPProxies.Delete
-        , Network.Google.Resource.Compute.TargetHTTPProxies.Get
-        , Network.Google.Resource.Compute.TargetHTTPProxies.Insert
-        , Network.Google.Resource.Compute.TargetHTTPProxies.List
-        , Network.Google.Resource.Compute.TargetHTTPProxies.Patch
-        , Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.AggregatedList
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.Get
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.List
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.Patch
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.SetQuicOverride
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLPolicy
-        , Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
-        , Network.Google.Resource.Compute.TargetInstances.AggregatedList
-        , Network.Google.Resource.Compute.TargetInstances.Delete
-        , Network.Google.Resource.Compute.TargetInstances.Get
-        , Network.Google.Resource.Compute.TargetInstances.Insert
-        , Network.Google.Resource.Compute.TargetInstances.List
-        , Network.Google.Resource.Compute.TargetPools.AddHealthCheck
-        , Network.Google.Resource.Compute.TargetPools.AddInstance
-        , Network.Google.Resource.Compute.TargetPools.AggregatedList
-        , Network.Google.Resource.Compute.TargetPools.Delete
-        , Network.Google.Resource.Compute.TargetPools.Get
-        , Network.Google.Resource.Compute.TargetPools.GetHealth
-        , Network.Google.Resource.Compute.TargetPools.Insert
-        , Network.Google.Resource.Compute.TargetPools.List
-        , Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
-        , Network.Google.Resource.Compute.TargetPools.RemoveInstance
-        , Network.Google.Resource.Compute.TargetPools.SetBackup
-        , Network.Google.Resource.Compute.TargetSSLProxies.Delete
-        , Network.Google.Resource.Compute.TargetSSLProxies.Get
-        , Network.Google.Resource.Compute.TargetSSLProxies.Insert
-        , Network.Google.Resource.Compute.TargetSSLProxies.List
-        , Network.Google.Resource.Compute.TargetSSLProxies.SetBackendService
-        , Network.Google.Resource.Compute.TargetSSLProxies.SetProxyHeader
-        , Network.Google.Resource.Compute.TargetSSLProxies.SetSSLCertificates
-        , Network.Google.Resource.Compute.TargetSSLProxies.SetSSLPolicy
-        , Network.Google.Resource.Compute.TargetTCPProxies.Delete
-        , Network.Google.Resource.Compute.TargetTCPProxies.Get
-        , Network.Google.Resource.Compute.TargetTCPProxies.Insert
-        , Network.Google.Resource.Compute.TargetTCPProxies.List
-        , Network.Google.Resource.Compute.TargetTCPProxies.SetBackendService
-        , Network.Google.Resource.Compute.TargetTCPProxies.SetProxyHeader
-        , Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
-        , Network.Google.Resource.Compute.TargetVPNGateways.Delete
-        , Network.Google.Resource.Compute.TargetVPNGateways.Get
-        , Network.Google.Resource.Compute.TargetVPNGateways.Insert
-        , Network.Google.Resource.Compute.TargetVPNGateways.List
-        , Network.Google.Resource.Compute.URLMaps.AggregatedList
-        , Network.Google.Resource.Compute.URLMaps.Delete
-        , Network.Google.Resource.Compute.URLMaps.Get
-        , Network.Google.Resource.Compute.URLMaps.Insert
-        , Network.Google.Resource.Compute.URLMaps.InvalidateCache
-        , Network.Google.Resource.Compute.URLMaps.List
-        , Network.Google.Resource.Compute.URLMaps.Patch
-        , Network.Google.Resource.Compute.URLMaps.Update
-        , Network.Google.Resource.Compute.URLMaps.Validate
-        , Network.Google.Resource.Compute.VPNGateways.AggregatedList
-        , Network.Google.Resource.Compute.VPNGateways.Delete
-        , Network.Google.Resource.Compute.VPNGateways.Get
-        , Network.Google.Resource.Compute.VPNGateways.GetStatus
-        , Network.Google.Resource.Compute.VPNGateways.Insert
-        , Network.Google.Resource.Compute.VPNGateways.List
-        , Network.Google.Resource.Compute.VPNGateways.SetLabels
-        , Network.Google.Resource.Compute.VPNGateways.TestIAMPermissions
-        , Network.Google.Resource.Compute.VPNTunnels.AggregatedList
-        , Network.Google.Resource.Compute.VPNTunnels.Delete
-        , Network.Google.Resource.Compute.VPNTunnels.Get
-        , Network.Google.Resource.Compute.VPNTunnels.Insert
-        , Network.Google.Resource.Compute.VPNTunnels.List
-        , Network.Google.Resource.Compute.ZoneOperations.Delete
-        , Network.Google.Resource.Compute.ZoneOperations.Get
-        , Network.Google.Resource.Compute.ZoneOperations.List
-        , Network.Google.Resource.Compute.ZoneOperations.Wait
-        , Network.Google.Resource.Compute.Zones.Get
-        , Network.Google.Resource.Compute.Zones.List
+  exposed-modules:
+    Network.Google.Compute
+    Network.Google.Compute.AcceleratorTypes.AggregatedList
+    Network.Google.Compute.AcceleratorTypes.Get
+    Network.Google.Compute.AcceleratorTypes.List
+    Network.Google.Compute.Addresses.AggregatedList
+    Network.Google.Compute.Addresses.Delete
+    Network.Google.Compute.Addresses.Get
+    Network.Google.Compute.Addresses.Insert
+    Network.Google.Compute.Addresses.List
+    Network.Google.Compute.Autoscalers.AggregatedList
+    Network.Google.Compute.Autoscalers.Delete
+    Network.Google.Compute.Autoscalers.Get
+    Network.Google.Compute.Autoscalers.Insert
+    Network.Google.Compute.Autoscalers.List
+    Network.Google.Compute.Autoscalers.Patch
+    Network.Google.Compute.Autoscalers.Update
+    Network.Google.Compute.BackendBuckets.AddSignedUrlKey
+    Network.Google.Compute.BackendBuckets.Delete
+    Network.Google.Compute.BackendBuckets.DeleteSignedUrlKey
+    Network.Google.Compute.BackendBuckets.Get
+    Network.Google.Compute.BackendBuckets.Insert
+    Network.Google.Compute.BackendBuckets.List
+    Network.Google.Compute.BackendBuckets.Patch
+    Network.Google.Compute.BackendBuckets.SetEdgeSecurityPolicy
+    Network.Google.Compute.BackendBuckets.Update
+    Network.Google.Compute.BackendServices.AddSignedUrlKey
+    Network.Google.Compute.BackendServices.AggregatedList
+    Network.Google.Compute.BackendServices.Delete
+    Network.Google.Compute.BackendServices.DeleteSignedUrlKey
+    Network.Google.Compute.BackendServices.Get
+    Network.Google.Compute.BackendServices.GetHealth
+    Network.Google.Compute.BackendServices.Insert
+    Network.Google.Compute.BackendServices.List
+    Network.Google.Compute.BackendServices.Patch
+    Network.Google.Compute.BackendServices.SetEdgeSecurityPolicy
+    Network.Google.Compute.BackendServices.SetSecurityPolicy
+    Network.Google.Compute.BackendServices.Update
+    Network.Google.Compute.Disks.AddResourcePolicies
+    Network.Google.Compute.Disks.AggregatedList
+    Network.Google.Compute.Disks.CreateSnapshot
+    Network.Google.Compute.Disks.Delete
+    Network.Google.Compute.Disks.Get
+    Network.Google.Compute.Disks.GetIamPolicy
+    Network.Google.Compute.Disks.Insert
+    Network.Google.Compute.Disks.List
+    Network.Google.Compute.Disks.RemoveResourcePolicies
+    Network.Google.Compute.Disks.Resize
+    Network.Google.Compute.Disks.SetIamPolicy
+    Network.Google.Compute.Disks.SetLabels
+    Network.Google.Compute.Disks.TestIamPermissions
+    Network.Google.Compute.DiskTypes.AggregatedList
+    Network.Google.Compute.DiskTypes.Get
+    Network.Google.Compute.DiskTypes.List
+    Network.Google.Compute.ExternalVpnGateways.Delete
+    Network.Google.Compute.ExternalVpnGateways.Get
+    Network.Google.Compute.ExternalVpnGateways.Insert
+    Network.Google.Compute.ExternalVpnGateways.List
+    Network.Google.Compute.ExternalVpnGateways.SetLabels
+    Network.Google.Compute.ExternalVpnGateways.TestIamPermissions
+    Network.Google.Compute.FirewallPolicies.AddAssociation
+    Network.Google.Compute.FirewallPolicies.AddRule
+    Network.Google.Compute.FirewallPolicies.CloneRules
+    Network.Google.Compute.FirewallPolicies.Delete
+    Network.Google.Compute.FirewallPolicies.Get
+    Network.Google.Compute.FirewallPolicies.GetAssociation
+    Network.Google.Compute.FirewallPolicies.GetIamPolicy
+    Network.Google.Compute.FirewallPolicies.GetRule
+    Network.Google.Compute.FirewallPolicies.Insert
+    Network.Google.Compute.FirewallPolicies.List
+    Network.Google.Compute.FirewallPolicies.ListAssociations
+    Network.Google.Compute.FirewallPolicies.Move
+    Network.Google.Compute.FirewallPolicies.Patch
+    Network.Google.Compute.FirewallPolicies.PatchRule
+    Network.Google.Compute.FirewallPolicies.RemoveAssociation
+    Network.Google.Compute.FirewallPolicies.RemoveRule
+    Network.Google.Compute.FirewallPolicies.SetIamPolicy
+    Network.Google.Compute.FirewallPolicies.TestIamPermissions
+    Network.Google.Compute.Firewalls.Delete
+    Network.Google.Compute.Firewalls.Get
+    Network.Google.Compute.Firewalls.Insert
+    Network.Google.Compute.Firewalls.List
+    Network.Google.Compute.Firewalls.Patch
+    Network.Google.Compute.Firewalls.Update
+    Network.Google.Compute.ForwardingRules.AggregatedList
+    Network.Google.Compute.ForwardingRules.Delete
+    Network.Google.Compute.ForwardingRules.Get
+    Network.Google.Compute.ForwardingRules.Insert
+    Network.Google.Compute.ForwardingRules.List
+    Network.Google.Compute.ForwardingRules.Patch
+    Network.Google.Compute.ForwardingRules.SetLabels
+    Network.Google.Compute.ForwardingRules.SetTarget
+    Network.Google.Compute.GlobalAddresses.Delete
+    Network.Google.Compute.GlobalAddresses.Get
+    Network.Google.Compute.GlobalAddresses.Insert
+    Network.Google.Compute.GlobalAddresses.List
+    Network.Google.Compute.GlobalForwardingRules.Delete
+    Network.Google.Compute.GlobalForwardingRules.Get
+    Network.Google.Compute.GlobalForwardingRules.Insert
+    Network.Google.Compute.GlobalForwardingRules.List
+    Network.Google.Compute.GlobalForwardingRules.Patch
+    Network.Google.Compute.GlobalForwardingRules.SetLabels
+    Network.Google.Compute.GlobalForwardingRules.SetTarget
+    Network.Google.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
+    Network.Google.Compute.GlobalNetworkEndpointGroups.Delete
+    Network.Google.Compute.GlobalNetworkEndpointGroups.DetachNetworkEndpoints
+    Network.Google.Compute.GlobalNetworkEndpointGroups.Get
+    Network.Google.Compute.GlobalNetworkEndpointGroups.Insert
+    Network.Google.Compute.GlobalNetworkEndpointGroups.List
+    Network.Google.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
+    Network.Google.Compute.GlobalOperations.AggregatedList
+    Network.Google.Compute.GlobalOperations.Delete
+    Network.Google.Compute.GlobalOperations.Get
+    Network.Google.Compute.GlobalOperations.List
+    Network.Google.Compute.GlobalOperations.Wait
+    Network.Google.Compute.GlobalOrganizationOperations.Delete
+    Network.Google.Compute.GlobalOrganizationOperations.Get
+    Network.Google.Compute.GlobalOrganizationOperations.List
+    Network.Google.Compute.GlobalPublicDelegatedPrefixes.Delete
+    Network.Google.Compute.GlobalPublicDelegatedPrefixes.Get
+    Network.Google.Compute.GlobalPublicDelegatedPrefixes.Insert
+    Network.Google.Compute.GlobalPublicDelegatedPrefixes.List
+    Network.Google.Compute.GlobalPublicDelegatedPrefixes.Patch
+    Network.Google.Compute.HealthChecks.AggregatedList
+    Network.Google.Compute.HealthChecks.Delete
+    Network.Google.Compute.HealthChecks.Get
+    Network.Google.Compute.HealthChecks.Insert
+    Network.Google.Compute.HealthChecks.List
+    Network.Google.Compute.HealthChecks.Patch
+    Network.Google.Compute.HealthChecks.Update
+    Network.Google.Compute.HttpHealthChecks.Delete
+    Network.Google.Compute.HttpHealthChecks.Get
+    Network.Google.Compute.HttpHealthChecks.Insert
+    Network.Google.Compute.HttpHealthChecks.List
+    Network.Google.Compute.HttpHealthChecks.Patch
+    Network.Google.Compute.HttpHealthChecks.Update
+    Network.Google.Compute.HttpsHealthChecks.Delete
+    Network.Google.Compute.HttpsHealthChecks.Get
+    Network.Google.Compute.HttpsHealthChecks.Insert
+    Network.Google.Compute.HttpsHealthChecks.List
+    Network.Google.Compute.HttpsHealthChecks.Patch
+    Network.Google.Compute.HttpsHealthChecks.Update
+    Network.Google.Compute.ImageFamilyViews.Get
+    Network.Google.Compute.Images.Delete
+    Network.Google.Compute.Images.Deprecate
+    Network.Google.Compute.Images.Get
+    Network.Google.Compute.Images.GetFromFamily
+    Network.Google.Compute.Images.GetIamPolicy
+    Network.Google.Compute.Images.Insert
+    Network.Google.Compute.Images.List
+    Network.Google.Compute.Images.Patch
+    Network.Google.Compute.Images.SetIamPolicy
+    Network.Google.Compute.Images.SetLabels
+    Network.Google.Compute.Images.TestIamPermissions
+    Network.Google.Compute.InstanceGroupManagers.AbandonInstances
+    Network.Google.Compute.InstanceGroupManagers.AggregatedList
+    Network.Google.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
+    Network.Google.Compute.InstanceGroupManagers.CreateInstances
+    Network.Google.Compute.InstanceGroupManagers.Delete
+    Network.Google.Compute.InstanceGroupManagers.DeleteInstances
+    Network.Google.Compute.InstanceGroupManagers.DeletePerInstanceConfigs
+    Network.Google.Compute.InstanceGroupManagers.Get
+    Network.Google.Compute.InstanceGroupManagers.Insert
+    Network.Google.Compute.InstanceGroupManagers.List
+    Network.Google.Compute.InstanceGroupManagers.ListErrors
+    Network.Google.Compute.InstanceGroupManagers.ListManagedInstances
+    Network.Google.Compute.InstanceGroupManagers.ListPerInstanceConfigs
+    Network.Google.Compute.InstanceGroupManagers.Patch
+    Network.Google.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
+    Network.Google.Compute.InstanceGroupManagers.RecreateInstances
+    Network.Google.Compute.InstanceGroupManagers.Resize
+    Network.Google.Compute.InstanceGroupManagers.SetInstanceTemplate
+    Network.Google.Compute.InstanceGroupManagers.SetTargetPools
+    Network.Google.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
+    Network.Google.Compute.InstanceGroups.AddInstances
+    Network.Google.Compute.InstanceGroups.AggregatedList
+    Network.Google.Compute.InstanceGroups.Delete
+    Network.Google.Compute.InstanceGroups.Get
+    Network.Google.Compute.InstanceGroups.Insert
+    Network.Google.Compute.InstanceGroups.List
+    Network.Google.Compute.InstanceGroups.ListInstances
+    Network.Google.Compute.InstanceGroups.RemoveInstances
+    Network.Google.Compute.InstanceGroups.SetNamedPorts
+    Network.Google.Compute.Instances.AddAccessConfig
+    Network.Google.Compute.Instances.AddResourcePolicies
+    Network.Google.Compute.Instances.AggregatedList
+    Network.Google.Compute.Instances.AttachDisk
+    Network.Google.Compute.Instances.BulkInsert
+    Network.Google.Compute.Instances.Delete
+    Network.Google.Compute.Instances.DeleteAccessConfig
+    Network.Google.Compute.Instances.DetachDisk
+    Network.Google.Compute.Instances.Get
+    Network.Google.Compute.Instances.GetEffectiveFirewalls
+    Network.Google.Compute.Instances.GetGuestAttributes
+    Network.Google.Compute.Instances.GetIamPolicy
+    Network.Google.Compute.Instances.GetScreenshot
+    Network.Google.Compute.Instances.GetSerialPortOutput
+    Network.Google.Compute.Instances.GetShieldedInstanceIdentity
+    Network.Google.Compute.Instances.Insert
+    Network.Google.Compute.Instances.List
+    Network.Google.Compute.Instances.ListReferrers
+    Network.Google.Compute.Instances.RemoveResourcePolicies
+    Network.Google.Compute.Instances.Reset
+    Network.Google.Compute.Instances.Resume
+    Network.Google.Compute.Instances.SendDiagnosticInterrupt
+    Network.Google.Compute.Instances.SetDeletionProtection
+    Network.Google.Compute.Instances.SetDiskAutoDelete
+    Network.Google.Compute.Instances.SetIamPolicy
+    Network.Google.Compute.Instances.SetLabels
+    Network.Google.Compute.Instances.SetMachineResources
+    Network.Google.Compute.Instances.SetMachineType
+    Network.Google.Compute.Instances.SetMetadata
+    Network.Google.Compute.Instances.SetMinCpuPlatform
+    Network.Google.Compute.Instances.SetScheduling
+    Network.Google.Compute.Instances.SetServiceAccount
+    Network.Google.Compute.Instances.SetShieldedInstanceIntegrityPolicy
+    Network.Google.Compute.Instances.SetTags
+    Network.Google.Compute.Instances.SimulateMaintenanceEvent
+    Network.Google.Compute.Instances.Start
+    Network.Google.Compute.Instances.StartWithEncryptionKey
+    Network.Google.Compute.Instances.Stop
+    Network.Google.Compute.Instances.Suspend
+    Network.Google.Compute.Instances.TestIamPermissions
+    Network.Google.Compute.Instances.Update
+    Network.Google.Compute.Instances.UpdateAccessConfig
+    Network.Google.Compute.Instances.UpdateDisplayDevice
+    Network.Google.Compute.Instances.UpdateNetworkInterface
+    Network.Google.Compute.Instances.UpdateShieldedInstanceConfig
+    Network.Google.Compute.InstanceTemplates.Delete
+    Network.Google.Compute.InstanceTemplates.Get
+    Network.Google.Compute.InstanceTemplates.GetIamPolicy
+    Network.Google.Compute.InstanceTemplates.Insert
+    Network.Google.Compute.InstanceTemplates.List
+    Network.Google.Compute.InstanceTemplates.SetIamPolicy
+    Network.Google.Compute.InstanceTemplates.TestIamPermissions
+    Network.Google.Compute.InterconnectAttachments.AggregatedList
+    Network.Google.Compute.InterconnectAttachments.Delete
+    Network.Google.Compute.InterconnectAttachments.Get
+    Network.Google.Compute.InterconnectAttachments.Insert
+    Network.Google.Compute.InterconnectAttachments.List
+    Network.Google.Compute.InterconnectAttachments.Patch
+    Network.Google.Compute.InterconnectLocations.Get
+    Network.Google.Compute.InterconnectLocations.List
+    Network.Google.Compute.Interconnects.Delete
+    Network.Google.Compute.Interconnects.Get
+    Network.Google.Compute.Interconnects.GetDiagnostics
+    Network.Google.Compute.Interconnects.Insert
+    Network.Google.Compute.Interconnects.List
+    Network.Google.Compute.Interconnects.Patch
+    Network.Google.Compute.LicenseCodes.Get
+    Network.Google.Compute.LicenseCodes.TestIamPermissions
+    Network.Google.Compute.Licenses.Delete
+    Network.Google.Compute.Licenses.Get
+    Network.Google.Compute.Licenses.GetIamPolicy
+    Network.Google.Compute.Licenses.Insert
+    Network.Google.Compute.Licenses.List
+    Network.Google.Compute.Licenses.SetIamPolicy
+    Network.Google.Compute.Licenses.TestIamPermissions
+    Network.Google.Compute.MachineImages.Delete
+    Network.Google.Compute.MachineImages.Get
+    Network.Google.Compute.MachineImages.GetIamPolicy
+    Network.Google.Compute.MachineImages.Insert
+    Network.Google.Compute.MachineImages.List
+    Network.Google.Compute.MachineImages.SetIamPolicy
+    Network.Google.Compute.MachineImages.TestIamPermissions
+    Network.Google.Compute.MachineTypes.AggregatedList
+    Network.Google.Compute.MachineTypes.Get
+    Network.Google.Compute.MachineTypes.List
+    Network.Google.Compute.NetworkEndpointGroups.AggregatedList
+    Network.Google.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
+    Network.Google.Compute.NetworkEndpointGroups.Delete
+    Network.Google.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
+    Network.Google.Compute.NetworkEndpointGroups.Get
+    Network.Google.Compute.NetworkEndpointGroups.Insert
+    Network.Google.Compute.NetworkEndpointGroups.List
+    Network.Google.Compute.NetworkEndpointGroups.ListNetworkEndpoints
+    Network.Google.Compute.NetworkEndpointGroups.TestIamPermissions
+    Network.Google.Compute.NetworkFirewallPolicies.AddAssociation
+    Network.Google.Compute.NetworkFirewallPolicies.AddRule
+    Network.Google.Compute.NetworkFirewallPolicies.CloneRules
+    Network.Google.Compute.NetworkFirewallPolicies.Delete
+    Network.Google.Compute.NetworkFirewallPolicies.Get
+    Network.Google.Compute.NetworkFirewallPolicies.GetAssociation
+    Network.Google.Compute.NetworkFirewallPolicies.GetIamPolicy
+    Network.Google.Compute.NetworkFirewallPolicies.GetRule
+    Network.Google.Compute.NetworkFirewallPolicies.Insert
+    Network.Google.Compute.NetworkFirewallPolicies.List
+    Network.Google.Compute.NetworkFirewallPolicies.Patch
+    Network.Google.Compute.NetworkFirewallPolicies.PatchRule
+    Network.Google.Compute.NetworkFirewallPolicies.RemoveAssociation
+    Network.Google.Compute.NetworkFirewallPolicies.RemoveRule
+    Network.Google.Compute.NetworkFirewallPolicies.SetIamPolicy
+    Network.Google.Compute.NetworkFirewallPolicies.TestIamPermissions
+    Network.Google.Compute.Networks.AddPeering
+    Network.Google.Compute.Networks.Delete
+    Network.Google.Compute.Networks.Get
+    Network.Google.Compute.Networks.GetEffectiveFirewalls
+    Network.Google.Compute.Networks.Insert
+    Network.Google.Compute.Networks.List
+    Network.Google.Compute.Networks.ListPeeringRoutes
+    Network.Google.Compute.Networks.Patch
+    Network.Google.Compute.Networks.RemovePeering
+    Network.Google.Compute.Networks.SwitchToCustomMode
+    Network.Google.Compute.Networks.UpdatePeering
+    Network.Google.Compute.NodeGroups.AddNodes
+    Network.Google.Compute.NodeGroups.AggregatedList
+    Network.Google.Compute.NodeGroups.Delete
+    Network.Google.Compute.NodeGroups.DeleteNodes
+    Network.Google.Compute.NodeGroups.Get
+    Network.Google.Compute.NodeGroups.GetIamPolicy
+    Network.Google.Compute.NodeGroups.Insert
+    Network.Google.Compute.NodeGroups.List
+    Network.Google.Compute.NodeGroups.ListNodes
+    Network.Google.Compute.NodeGroups.Patch
+    Network.Google.Compute.NodeGroups.SetIamPolicy
+    Network.Google.Compute.NodeGroups.SetNodeTemplate
+    Network.Google.Compute.NodeGroups.TestIamPermissions
+    Network.Google.Compute.NodeTemplates.AggregatedList
+    Network.Google.Compute.NodeTemplates.Delete
+    Network.Google.Compute.NodeTemplates.Get
+    Network.Google.Compute.NodeTemplates.GetIamPolicy
+    Network.Google.Compute.NodeTemplates.Insert
+    Network.Google.Compute.NodeTemplates.List
+    Network.Google.Compute.NodeTemplates.SetIamPolicy
+    Network.Google.Compute.NodeTemplates.TestIamPermissions
+    Network.Google.Compute.NodeTypes.AggregatedList
+    Network.Google.Compute.NodeTypes.Get
+    Network.Google.Compute.NodeTypes.List
+    Network.Google.Compute.PacketMirrorings.AggregatedList
+    Network.Google.Compute.PacketMirrorings.Delete
+    Network.Google.Compute.PacketMirrorings.Get
+    Network.Google.Compute.PacketMirrorings.Insert
+    Network.Google.Compute.PacketMirrorings.List
+    Network.Google.Compute.PacketMirrorings.Patch
+    Network.Google.Compute.PacketMirrorings.TestIamPermissions
+    Network.Google.Compute.Projects.DisableXpnHost
+    Network.Google.Compute.Projects.DisableXpnResource
+    Network.Google.Compute.Projects.EnableXpnHost
+    Network.Google.Compute.Projects.EnableXpnResource
+    Network.Google.Compute.Projects.Get
+    Network.Google.Compute.Projects.GetXpnHost
+    Network.Google.Compute.Projects.GetXpnResources
+    Network.Google.Compute.Projects.ListXpnHosts
+    Network.Google.Compute.Projects.MoveDisk
+    Network.Google.Compute.Projects.MoveInstance
+    Network.Google.Compute.Projects.SetCommonInstanceMetadata
+    Network.Google.Compute.Projects.SetDefaultNetworkTier
+    Network.Google.Compute.Projects.SetUsageExportBucket
+    Network.Google.Compute.PublicAdvertisedPrefixes.Delete
+    Network.Google.Compute.PublicAdvertisedPrefixes.Get
+    Network.Google.Compute.PublicAdvertisedPrefixes.Insert
+    Network.Google.Compute.PublicAdvertisedPrefixes.List
+    Network.Google.Compute.PublicAdvertisedPrefixes.Patch
+    Network.Google.Compute.PublicDelegatedPrefixes.AggregatedList
+    Network.Google.Compute.PublicDelegatedPrefixes.Delete
+    Network.Google.Compute.PublicDelegatedPrefixes.Get
+    Network.Google.Compute.PublicDelegatedPrefixes.Insert
+    Network.Google.Compute.PublicDelegatedPrefixes.List
+    Network.Google.Compute.PublicDelegatedPrefixes.Patch
+    Network.Google.Compute.RegionAutoscalers.Delete
+    Network.Google.Compute.RegionAutoscalers.Get
+    Network.Google.Compute.RegionAutoscalers.Insert
+    Network.Google.Compute.RegionAutoscalers.List
+    Network.Google.Compute.RegionAutoscalers.Patch
+    Network.Google.Compute.RegionAutoscalers.Update
+    Network.Google.Compute.RegionBackendServices.Delete
+    Network.Google.Compute.RegionBackendServices.Get
+    Network.Google.Compute.RegionBackendServices.GetHealth
+    Network.Google.Compute.RegionBackendServices.Insert
+    Network.Google.Compute.RegionBackendServices.List
+    Network.Google.Compute.RegionBackendServices.Patch
+    Network.Google.Compute.RegionBackendServices.Update
+    Network.Google.Compute.RegionCommitments.AggregatedList
+    Network.Google.Compute.RegionCommitments.Get
+    Network.Google.Compute.RegionCommitments.Insert
+    Network.Google.Compute.RegionCommitments.List
+    Network.Google.Compute.RegionCommitments.Update
+    Network.Google.Compute.RegionDisks.AddResourcePolicies
+    Network.Google.Compute.RegionDisks.CreateSnapshot
+    Network.Google.Compute.RegionDisks.Delete
+    Network.Google.Compute.RegionDisks.Get
+    Network.Google.Compute.RegionDisks.GetIamPolicy
+    Network.Google.Compute.RegionDisks.Insert
+    Network.Google.Compute.RegionDisks.List
+    Network.Google.Compute.RegionDisks.RemoveResourcePolicies
+    Network.Google.Compute.RegionDisks.Resize
+    Network.Google.Compute.RegionDisks.SetIamPolicy
+    Network.Google.Compute.RegionDisks.SetLabels
+    Network.Google.Compute.RegionDisks.TestIamPermissions
+    Network.Google.Compute.RegionDiskTypes.Get
+    Network.Google.Compute.RegionDiskTypes.List
+    Network.Google.Compute.RegionHealthChecks.Delete
+    Network.Google.Compute.RegionHealthChecks.Get
+    Network.Google.Compute.RegionHealthChecks.Insert
+    Network.Google.Compute.RegionHealthChecks.List
+    Network.Google.Compute.RegionHealthChecks.Patch
+    Network.Google.Compute.RegionHealthChecks.Update
+    Network.Google.Compute.RegionHealthCheckServices.Delete
+    Network.Google.Compute.RegionHealthCheckServices.Get
+    Network.Google.Compute.RegionHealthCheckServices.Insert
+    Network.Google.Compute.RegionHealthCheckServices.List
+    Network.Google.Compute.RegionHealthCheckServices.Patch
+    Network.Google.Compute.RegionInstanceGroupManagers.AbandonInstances
+    Network.Google.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
+    Network.Google.Compute.RegionInstanceGroupManagers.CreateInstances
+    Network.Google.Compute.RegionInstanceGroupManagers.Delete
+    Network.Google.Compute.RegionInstanceGroupManagers.DeleteInstances
+    Network.Google.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
+    Network.Google.Compute.RegionInstanceGroupManagers.Get
+    Network.Google.Compute.RegionInstanceGroupManagers.Insert
+    Network.Google.Compute.RegionInstanceGroupManagers.List
+    Network.Google.Compute.RegionInstanceGroupManagers.ListErrors
+    Network.Google.Compute.RegionInstanceGroupManagers.ListManagedInstances
+    Network.Google.Compute.RegionInstanceGroupManagers.ListPerInstanceConfigs
+    Network.Google.Compute.RegionInstanceGroupManagers.Patch
+    Network.Google.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
+    Network.Google.Compute.RegionInstanceGroupManagers.RecreateInstances
+    Network.Google.Compute.RegionInstanceGroupManagers.Resize
+    Network.Google.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
+    Network.Google.Compute.RegionInstanceGroupManagers.SetTargetPools
+    Network.Google.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
+    Network.Google.Compute.RegionInstanceGroups.Get
+    Network.Google.Compute.RegionInstanceGroups.List
+    Network.Google.Compute.RegionInstanceGroups.ListInstances
+    Network.Google.Compute.RegionInstanceGroups.SetNamedPorts
+    Network.Google.Compute.RegionInstances.BulkInsert
+    Network.Google.Compute.RegionNetworkEndpointGroups.Delete
+    Network.Google.Compute.RegionNetworkEndpointGroups.Get
+    Network.Google.Compute.RegionNetworkEndpointGroups.Insert
+    Network.Google.Compute.RegionNetworkEndpointGroups.List
+    Network.Google.Compute.RegionNetworkFirewallPolicies.AddAssociation
+    Network.Google.Compute.RegionNetworkFirewallPolicies.AddRule
+    Network.Google.Compute.RegionNetworkFirewallPolicies.CloneRules
+    Network.Google.Compute.RegionNetworkFirewallPolicies.Delete
+    Network.Google.Compute.RegionNetworkFirewallPolicies.Get
+    Network.Google.Compute.RegionNetworkFirewallPolicies.GetAssociation
+    Network.Google.Compute.RegionNetworkFirewallPolicies.GetEffectiveFirewalls
+    Network.Google.Compute.RegionNetworkFirewallPolicies.GetIamPolicy
+    Network.Google.Compute.RegionNetworkFirewallPolicies.GetRule
+    Network.Google.Compute.RegionNetworkFirewallPolicies.Insert
+    Network.Google.Compute.RegionNetworkFirewallPolicies.List
+    Network.Google.Compute.RegionNetworkFirewallPolicies.Patch
+    Network.Google.Compute.RegionNetworkFirewallPolicies.PatchRule
+    Network.Google.Compute.RegionNetworkFirewallPolicies.RemoveAssociation
+    Network.Google.Compute.RegionNetworkFirewallPolicies.RemoveRule
+    Network.Google.Compute.RegionNetworkFirewallPolicies.SetIamPolicy
+    Network.Google.Compute.RegionNetworkFirewallPolicies.TestIamPermissions
+    Network.Google.Compute.RegionNotificationEndpoints.Delete
+    Network.Google.Compute.RegionNotificationEndpoints.Get
+    Network.Google.Compute.RegionNotificationEndpoints.Insert
+    Network.Google.Compute.RegionNotificationEndpoints.List
+    Network.Google.Compute.RegionOperations.Delete
+    Network.Google.Compute.RegionOperations.Get
+    Network.Google.Compute.RegionOperations.List
+    Network.Google.Compute.RegionOperations.Wait
+    Network.Google.Compute.Regions.Get
+    Network.Google.Compute.Regions.List
+    Network.Google.Compute.RegionSslCertificates.Delete
+    Network.Google.Compute.RegionSslCertificates.Get
+    Network.Google.Compute.RegionSslCertificates.Insert
+    Network.Google.Compute.RegionSslCertificates.List
+    Network.Google.Compute.RegionTargetHttpProxies.Delete
+    Network.Google.Compute.RegionTargetHttpProxies.Get
+    Network.Google.Compute.RegionTargetHttpProxies.Insert
+    Network.Google.Compute.RegionTargetHttpProxies.List
+    Network.Google.Compute.RegionTargetHttpProxies.SetUrlMap
+    Network.Google.Compute.RegionTargetHttpsProxies.Delete
+    Network.Google.Compute.RegionTargetHttpsProxies.Get
+    Network.Google.Compute.RegionTargetHttpsProxies.Insert
+    Network.Google.Compute.RegionTargetHttpsProxies.List
+    Network.Google.Compute.RegionTargetHttpsProxies.Patch
+    Network.Google.Compute.RegionTargetHttpsProxies.SetSslCertificates
+    Network.Google.Compute.RegionTargetHttpsProxies.SetUrlMap
+    Network.Google.Compute.RegionUrlMaps.Delete
+    Network.Google.Compute.RegionUrlMaps.Get
+    Network.Google.Compute.RegionUrlMaps.Insert
+    Network.Google.Compute.RegionUrlMaps.List
+    Network.Google.Compute.RegionUrlMaps.Patch
+    Network.Google.Compute.RegionUrlMaps.Update
+    Network.Google.Compute.RegionUrlMaps.Validate
+    Network.Google.Compute.Reservations.AggregatedList
+    Network.Google.Compute.Reservations.Delete
+    Network.Google.Compute.Reservations.Get
+    Network.Google.Compute.Reservations.GetIamPolicy
+    Network.Google.Compute.Reservations.Insert
+    Network.Google.Compute.Reservations.List
+    Network.Google.Compute.Reservations.Resize
+    Network.Google.Compute.Reservations.SetIamPolicy
+    Network.Google.Compute.Reservations.TestIamPermissions
+    Network.Google.Compute.Reservations.Update
+    Network.Google.Compute.ResourcePolicies.AggregatedList
+    Network.Google.Compute.ResourcePolicies.Delete
+    Network.Google.Compute.ResourcePolicies.Get
+    Network.Google.Compute.ResourcePolicies.GetIamPolicy
+    Network.Google.Compute.ResourcePolicies.Insert
+    Network.Google.Compute.ResourcePolicies.List
+    Network.Google.Compute.ResourcePolicies.SetIamPolicy
+    Network.Google.Compute.ResourcePolicies.TestIamPermissions
+    Network.Google.Compute.Routers.AggregatedList
+    Network.Google.Compute.Routers.Delete
+    Network.Google.Compute.Routers.Get
+    Network.Google.Compute.Routers.GetNatMappingInfo
+    Network.Google.Compute.Routers.GetRouterStatus
+    Network.Google.Compute.Routers.Insert
+    Network.Google.Compute.Routers.List
+    Network.Google.Compute.Routers.Patch
+    Network.Google.Compute.Routers.Preview
+    Network.Google.Compute.Routers.Update
+    Network.Google.Compute.Routes.Delete
+    Network.Google.Compute.Routes.Get
+    Network.Google.Compute.Routes.Insert
+    Network.Google.Compute.Routes.List
+    Network.Google.Compute.SecurityPolicies.AddRule
+    Network.Google.Compute.SecurityPolicies.Delete
+    Network.Google.Compute.SecurityPolicies.Get
+    Network.Google.Compute.SecurityPolicies.GetRule
+    Network.Google.Compute.SecurityPolicies.Insert
+    Network.Google.Compute.SecurityPolicies.List
+    Network.Google.Compute.SecurityPolicies.ListPreconfiguredExpressionSets
+    Network.Google.Compute.SecurityPolicies.Patch
+    Network.Google.Compute.SecurityPolicies.PatchRule
+    Network.Google.Compute.SecurityPolicies.RemoveRule
+    Network.Google.Compute.ServiceAttachments.AggregatedList
+    Network.Google.Compute.ServiceAttachments.Delete
+    Network.Google.Compute.ServiceAttachments.Get
+    Network.Google.Compute.ServiceAttachments.GetIamPolicy
+    Network.Google.Compute.ServiceAttachments.Insert
+    Network.Google.Compute.ServiceAttachments.List
+    Network.Google.Compute.ServiceAttachments.Patch
+    Network.Google.Compute.ServiceAttachments.SetIamPolicy
+    Network.Google.Compute.ServiceAttachments.TestIamPermissions
+    Network.Google.Compute.Snapshots.Delete
+    Network.Google.Compute.Snapshots.Get
+    Network.Google.Compute.Snapshots.GetIamPolicy
+    Network.Google.Compute.Snapshots.Insert
+    Network.Google.Compute.Snapshots.List
+    Network.Google.Compute.Snapshots.SetIamPolicy
+    Network.Google.Compute.Snapshots.SetLabels
+    Network.Google.Compute.Snapshots.TestIamPermissions
+    Network.Google.Compute.SslCertificates.AggregatedList
+    Network.Google.Compute.SslCertificates.Delete
+    Network.Google.Compute.SslCertificates.Get
+    Network.Google.Compute.SslCertificates.Insert
+    Network.Google.Compute.SslCertificates.List
+    Network.Google.Compute.SslPolicies.Delete
+    Network.Google.Compute.SslPolicies.Get
+    Network.Google.Compute.SslPolicies.Insert
+    Network.Google.Compute.SslPolicies.List
+    Network.Google.Compute.SslPolicies.ListAvailableFeatures
+    Network.Google.Compute.SslPolicies.Patch
+    Network.Google.Compute.Subnetworks.AggregatedList
+    Network.Google.Compute.Subnetworks.Delete
+    Network.Google.Compute.Subnetworks.ExpandIpCidrRange
+    Network.Google.Compute.Subnetworks.Get
+    Network.Google.Compute.Subnetworks.GetIamPolicy
+    Network.Google.Compute.Subnetworks.Insert
+    Network.Google.Compute.Subnetworks.List
+    Network.Google.Compute.Subnetworks.ListUsable
+    Network.Google.Compute.Subnetworks.Patch
+    Network.Google.Compute.Subnetworks.SetIamPolicy
+    Network.Google.Compute.Subnetworks.SetPrivateIpGoogleAccess
+    Network.Google.Compute.Subnetworks.TestIamPermissions
+    Network.Google.Compute.TargetGrpcProxies.Delete
+    Network.Google.Compute.TargetGrpcProxies.Get
+    Network.Google.Compute.TargetGrpcProxies.Insert
+    Network.Google.Compute.TargetGrpcProxies.List
+    Network.Google.Compute.TargetGrpcProxies.Patch
+    Network.Google.Compute.TargetHttpProxies.AggregatedList
+    Network.Google.Compute.TargetHttpProxies.Delete
+    Network.Google.Compute.TargetHttpProxies.Get
+    Network.Google.Compute.TargetHttpProxies.Insert
+    Network.Google.Compute.TargetHttpProxies.List
+    Network.Google.Compute.TargetHttpProxies.Patch
+    Network.Google.Compute.TargetHttpProxies.SetUrlMap
+    Network.Google.Compute.TargetHttpsProxies.AggregatedList
+    Network.Google.Compute.TargetHttpsProxies.Delete
+    Network.Google.Compute.TargetHttpsProxies.Get
+    Network.Google.Compute.TargetHttpsProxies.Insert
+    Network.Google.Compute.TargetHttpsProxies.List
+    Network.Google.Compute.TargetHttpsProxies.Patch
+    Network.Google.Compute.TargetHttpsProxies.SetQuicOverride
+    Network.Google.Compute.TargetHttpsProxies.SetSslCertificates
+    Network.Google.Compute.TargetHttpsProxies.SetSslPolicy
+    Network.Google.Compute.TargetHttpsProxies.SetUrlMap
+    Network.Google.Compute.TargetInstances.AggregatedList
+    Network.Google.Compute.TargetInstances.Delete
+    Network.Google.Compute.TargetInstances.Get
+    Network.Google.Compute.TargetInstances.Insert
+    Network.Google.Compute.TargetInstances.List
+    Network.Google.Compute.TargetPools.AddHealthCheck
+    Network.Google.Compute.TargetPools.AddInstance
+    Network.Google.Compute.TargetPools.AggregatedList
+    Network.Google.Compute.TargetPools.Delete
+    Network.Google.Compute.TargetPools.Get
+    Network.Google.Compute.TargetPools.GetHealth
+    Network.Google.Compute.TargetPools.Insert
+    Network.Google.Compute.TargetPools.List
+    Network.Google.Compute.TargetPools.RemoveHealthCheck
+    Network.Google.Compute.TargetPools.RemoveInstance
+    Network.Google.Compute.TargetPools.SetBackup
+    Network.Google.Compute.TargetSslProxies.Delete
+    Network.Google.Compute.TargetSslProxies.Get
+    Network.Google.Compute.TargetSslProxies.Insert
+    Network.Google.Compute.TargetSslProxies.List
+    Network.Google.Compute.TargetSslProxies.SetBackendService
+    Network.Google.Compute.TargetSslProxies.SetProxyHeader
+    Network.Google.Compute.TargetSslProxies.SetSslCertificates
+    Network.Google.Compute.TargetSslProxies.SetSslPolicy
+    Network.Google.Compute.TargetTcpProxies.Delete
+    Network.Google.Compute.TargetTcpProxies.Get
+    Network.Google.Compute.TargetTcpProxies.Insert
+    Network.Google.Compute.TargetTcpProxies.List
+    Network.Google.Compute.TargetTcpProxies.SetBackendService
+    Network.Google.Compute.TargetTcpProxies.SetProxyHeader
+    Network.Google.Compute.TargetVpnGateways.AggregatedList
+    Network.Google.Compute.TargetVpnGateways.Delete
+    Network.Google.Compute.TargetVpnGateways.Get
+    Network.Google.Compute.TargetVpnGateways.Insert
+    Network.Google.Compute.TargetVpnGateways.List
+    Network.Google.Compute.Types
+    Network.Google.Compute.UrlMaps.AggregatedList
+    Network.Google.Compute.UrlMaps.Delete
+    Network.Google.Compute.UrlMaps.Get
+    Network.Google.Compute.UrlMaps.Insert
+    Network.Google.Compute.UrlMaps.InvalidateCache
+    Network.Google.Compute.UrlMaps.List
+    Network.Google.Compute.UrlMaps.Patch
+    Network.Google.Compute.UrlMaps.Update
+    Network.Google.Compute.UrlMaps.Validate
+    Network.Google.Compute.VpnGateways.AggregatedList
+    Network.Google.Compute.VpnGateways.Delete
+    Network.Google.Compute.VpnGateways.Get
+    Network.Google.Compute.VpnGateways.GetStatus
+    Network.Google.Compute.VpnGateways.Insert
+    Network.Google.Compute.VpnGateways.List
+    Network.Google.Compute.VpnGateways.SetLabels
+    Network.Google.Compute.VpnGateways.TestIamPermissions
+    Network.Google.Compute.VpnTunnels.AggregatedList
+    Network.Google.Compute.VpnTunnels.Delete
+    Network.Google.Compute.VpnTunnels.Get
+    Network.Google.Compute.VpnTunnels.Insert
+    Network.Google.Compute.VpnTunnels.List
+    Network.Google.Compute.ZoneOperations.Delete
+    Network.Google.Compute.ZoneOperations.Get
+    Network.Google.Compute.ZoneOperations.List
+    Network.Google.Compute.ZoneOperations.Wait
+    Network.Google.Compute.Zones.Get
+    Network.Google.Compute.Zones.List
 
-    other-modules:
-          Network.Google.Compute.Types.Product
-        , Network.Google.Compute.Types.Sum
+  other-modules:
+    Network.Google.Compute.Internal.Product
+    Network.Google.Compute.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
