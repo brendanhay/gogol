@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlusDomains.Internal.Product
+-- Module      : Gogol.PlusDomains.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.PlusDomains.Internal.Product
+module Gogol.PlusDomains.Internal.Product
   ( -- * Acl
     Acl (..),
     newAcl,
@@ -276,8 +276,8 @@ module Network.Google.PlusDomains.Internal.Product
   )
 where
 
-import Network.Google.PlusDomains.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.PlusDomains.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 --
 -- /See:/ 'newAcl' smart constructor.

@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlusDomains.Types
+-- Module      : Gogol.PlusDomains.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.PlusDomains.Types
+module Gogol.PlusDomains.Types
   ( -- * Configuration
     plusDomainsService,
 
@@ -309,9 +309,9 @@ module Network.Google.PlusDomains.Types
   )
 where
 
-import Network.Google.PlusDomains.Internal.Product
-import Network.Google.PlusDomains.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.PlusDomains.Internal.Product
+import Gogol.PlusDomains.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Google+ Domains API. This contains the host and root path used as a starting point for constructing service requests.
 plusDomainsService :: Core.ServiceConfig

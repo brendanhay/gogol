@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlusDomains.People.List
+-- Module      : Gogol.PlusDomains.People.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List all of the people in the specified collection.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.people.list@.
-module Network.Google.PlusDomains.People.List
+module Gogol.PlusDomains.People.List
   ( -- * Resource
     PlusDomainsPeopleListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.PlusDomains.People.List
   )
 where
 
-import Network.Google.PlusDomains.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlusDomains.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @plusDomains.people.list@ method which the
 -- 'PlusDomainsPeopleList' request conforms to.
