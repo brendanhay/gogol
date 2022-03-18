@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,66 +30,72 @@
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.get@.
 module Gogol.AdSenseHost.Customchannels.Get
-    (
-    -- * Resource
-      AdSenseHostCustomchannelsGetResource
+  ( -- * Resource
+    AdSenseHostCustomchannelsGetResource,
 
     -- ** Constructing a Request
-    , newAdSenseHostCustomchannelsGet
-    , AdSenseHostCustomchannelsGet
-    ) where
+    newAdSenseHostCustomchannelsGet,
+    AdSenseHostCustomchannelsGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AdSenseHost.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @adsensehost.customchannels.get@ method which the
 -- 'AdSenseHostCustomchannelsGet' request conforms to.
 type AdSenseHostCustomchannelsGetResource =
-     "adsensehost" Core.:>
-       "v4.1" Core.:>
-         "adclients" Core.:>
-           Core.Capture "adClientId" Core.Text Core.:>
-             "customchannels" Core.:>
-               Core.Capture "customChannelId" Core.Text Core.:>
-                 Core.QueryParam "alt" Core.AltJSON Core.:>
-                   Core.Get '[Core.JSON] CustomChannel
+  "adsensehost"
+    Core.:> "v4.1"
+    Core.:> "adclients"
+    Core.:> Core.Capture "adClientId" Core.Text
+    Core.:> "customchannels"
+    Core.:> Core.Capture "customChannelId" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] CustomChannel
 
 -- | Get a specific custom channel from the host AdSense account.
 --
 -- /See:/ 'newAdSenseHostCustomchannelsGet' smart constructor.
 data AdSenseHostCustomchannelsGet = AdSenseHostCustomchannelsGet
-    {
-      -- | Ad client from which to get the custom channel.
-      adClientId :: Core.Text
-      -- | Custom channel to get.
-    , customChannelId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Ad client from which to get the custom channel.
+    adClientId :: Core.Text,
+    -- | Custom channel to get.
+    customChannelId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdSenseHostCustomchannelsGet' with the minimum fields required to make a request.
-newAdSenseHostCustomchannelsGet 
-    ::  Core.Text
-       -- ^  Ad client from which to get the custom channel. See 'adClientId'.
-    -> Core.Text
-       -- ^  Custom channel to get. See 'customChannelId'.
-    -> AdSenseHostCustomchannelsGet
+newAdSenseHostCustomchannelsGet ::
+  -- |  Ad client from which to get the custom channel. See 'adClientId'.
+  Core.Text ->
+  -- |  Custom channel to get. See 'customChannelId'.
+  Core.Text ->
+  AdSenseHostCustomchannelsGet
 newAdSenseHostCustomchannelsGet adClientId customChannelId =
   AdSenseHostCustomchannelsGet
-    {adClientId = adClientId, customChannelId = customChannelId}
+    { adClientId = adClientId,
+      customChannelId = customChannelId
+    }
 
-instance Core.GoogleRequest
-           AdSenseHostCustomchannelsGet
-         where
-        type Rs AdSenseHostCustomchannelsGet = CustomChannel
-        type Scopes AdSenseHostCustomchannelsGet =
-             '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AdSenseHostCustomchannelsGet{..}
-          = go adClientId customChannelId
-              (Core.Just Core.AltJSON)
-              adSenseHostService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy AdSenseHostCustomchannelsGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AdSenseHostCustomchannelsGet
+  where
+  type Rs AdSenseHostCustomchannelsGet = CustomChannel
+  type
+    Scopes AdSenseHostCustomchannelsGet =
+      '["https://www.googleapis.com/auth/adsensehost"]
+  requestClient AdSenseHostCustomchannelsGet {..} =
+    go
+      adClientId
+      customChannelId
+      (Core.Just Core.AltJSON)
+      adSenseHostService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdSenseHostCustomchannelsGetResource
+          )
+          Core.mempty

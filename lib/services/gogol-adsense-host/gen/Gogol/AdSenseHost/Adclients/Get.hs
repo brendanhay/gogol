@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,57 +30,59 @@
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.adclients.get@.
 module Gogol.AdSenseHost.Adclients.Get
-    (
-    -- * Resource
-      AdSenseHostAdclientsGetResource
+  ( -- * Resource
+    AdSenseHostAdclientsGetResource,
 
     -- ** Constructing a Request
-    , newAdSenseHostAdclientsGet
-    , AdSenseHostAdclientsGet
-    ) where
+    newAdSenseHostAdclientsGet,
+    AdSenseHostAdclientsGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AdSenseHost.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @adsensehost.adclients.get@ method which the
 -- 'AdSenseHostAdclientsGet' request conforms to.
 type AdSenseHostAdclientsGetResource =
-     "adsensehost" Core.:>
-       "v4.1" Core.:>
-         "adclients" Core.:>
-           Core.Capture "adClientId" Core.Text Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.Get '[Core.JSON] AdClient
+  "adsensehost"
+    Core.:> "v4.1"
+    Core.:> "adclients"
+    Core.:> Core.Capture "adClientId" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] AdClient
 
 -- | Get information about one of the ad clients in the Host AdSense account.
 --
 -- /See:/ 'newAdSenseHostAdclientsGet' smart constructor.
 newtype AdSenseHostAdclientsGet = AdSenseHostAdclientsGet
-    {
-      -- | Ad client to get.
-      adClientId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Ad client to get.
+    adClientId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdSenseHostAdclientsGet' with the minimum fields required to make a request.
-newAdSenseHostAdclientsGet 
-    ::  Core.Text
-       -- ^  Ad client to get. See 'adClientId'.
-    -> AdSenseHostAdclientsGet
+newAdSenseHostAdclientsGet ::
+  -- |  Ad client to get. See 'adClientId'.
+  Core.Text ->
+  AdSenseHostAdclientsGet
 newAdSenseHostAdclientsGet adClientId =
   AdSenseHostAdclientsGet {adClientId = adClientId}
 
-instance Core.GoogleRequest AdSenseHostAdclientsGet
-         where
-        type Rs AdSenseHostAdclientsGet = AdClient
-        type Scopes AdSenseHostAdclientsGet =
-             '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AdSenseHostAdclientsGet{..}
-          = go adClientId (Core.Just Core.AltJSON)
-              adSenseHostService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy AdSenseHostAdclientsGetResource)
-                      Core.mempty
-
+instance Core.GoogleRequest AdSenseHostAdclientsGet where
+  type Rs AdSenseHostAdclientsGet = AdClient
+  type
+    Scopes AdSenseHostAdclientsGet =
+      '["https://www.googleapis.com/auth/adsensehost"]
+  requestClient AdSenseHostAdclientsGet {..} =
+    go
+      adClientId
+      (Core.Just Core.AltJSON)
+      adSenseHostService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdSenseHostAdclientsGetResource
+          )
+          Core.mempty
