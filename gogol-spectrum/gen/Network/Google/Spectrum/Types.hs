@@ -1,299 +1,177 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Spectrum.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Spectrum.Types
-    (
-    -- * Service Configuration
-      spectrumService
+  ( -- * Configuration
+    spectrumService,
 
-    -- * GeoLocationPolygon
-    , GeoLocationPolygon
-    , geoLocationPolygon
-    , glpExterior
+    -- * Types
 
-    -- * GeoLocationPoint
-    , GeoLocationPoint
-    , geoLocationPoint
-    , glpLatitude
-    , glpLongitude
+    -- ** AntennaCharacteristics
+    AntennaCharacteristics (..),
+    newAntennaCharacteristics,
 
-    -- * PawsInitResponse
-    , PawsInitResponse
-    , pawsInitResponse
-    , pirKind
-    , pirVersion
-    , pirRulesetInfo
-    , pirType
-    , pirDatabaseChange
+    -- ** DatabaseSpec
+    DatabaseSpec (..),
+    newDatabaseSpec,
 
-    -- * PawsRegisterResponse
-    , PawsRegisterResponse
-    , pawsRegisterResponse
-    , prrKind
-    , prrVersion
-    , prrType
-    , prrDatabaseChange
+    -- ** DbUpdateSpec
+    DbUpdateSpec (..),
+    newDbUpdateSpec,
 
-    -- * PawsNotifySpectrumUseRequest
-    , PawsNotifySpectrumUseRequest
-    , pawsNotifySpectrumUseRequest
-    , pnsurSpectra
-    , pnsurLocation
-    , pnsurVersion
-    , pnsurType
-    , pnsurDeviceDesc
+    -- ** DeviceCapabilities
+    DeviceCapabilities (..),
+    newDeviceCapabilities,
 
-    -- * Vcard
-    , Vcard
-    , vcard
-    , vEmail
-    , vAdr
-    , vOrg
-    , vTel
-    , vFn
+    -- ** DeviceDescriptor
+    DeviceDescriptor (..),
+    newDeviceDescriptor,
 
-    -- * DBUpdateSpec
-    , DBUpdateSpec
-    , dbUpdateSpec
-    , dusDatabases
+    -- ** DeviceOwner
+    DeviceOwner (..),
+    newDeviceOwner,
 
-    -- * PawsGetSpectrumBatchRequest
-    , PawsGetSpectrumBatchRequest
-    , pawsGetSpectrumBatchRequest
-    , pgsbrAntenna
-    , pgsbrMasterDeviceDesc
-    , pgsbrOwner
-    , pgsbrRequestType
-    , pgsbrVersion
-    , pgsbrType
-    , pgsbrLocations
-    , pgsbrCapabilities
-    , pgsbrDeviceDesc
+    -- ** DeviceValidity
+    DeviceValidity (..),
+    newDeviceValidity,
 
-    -- * GeoSpectrumSchedule
-    , GeoSpectrumSchedule
-    , geoSpectrumSchedule
-    , gssLocation
-    , gssSpectrumSchedules
+    -- ** EventTime
+    EventTime (..),
+    newEventTime,
 
-    -- * VcardTypedText
-    , VcardTypedText
-    , vcardTypedText
-    , vttText
+    -- ** FrequencyRange
+    FrequencyRange (..),
+    newFrequencyRange,
 
-    -- * SpectrumSchedule
-    , SpectrumSchedule
-    , spectrumSchedule
-    , ssSpectra
-    , ssEventTime
+    -- ** GeoLocation
+    GeoLocation (..),
+    newGeoLocation,
 
-    -- * VcardTelephone
-    , VcardTelephone
-    , vcardTelephone
-    , vtURI
+    -- ** GeoLocationEllipse
+    GeoLocationEllipse (..),
+    newGeoLocationEllipse,
 
-    -- * DeviceOwner
-    , DeviceOwner
-    , deviceOwner
-    , doOperator
-    , doOwner
+    -- ** GeoLocationPoint
+    GeoLocationPoint (..),
+    newGeoLocationPoint,
 
-    -- * EventTime
-    , EventTime
-    , eventTime
-    , etStartTime
-    , etStopTime
+    -- ** GeoLocationPolygon
+    GeoLocationPolygon (..),
+    newGeoLocationPolygon,
 
-    -- * PawsGetSpectrumRequest
-    , PawsGetSpectrumRequest
-    , pawsGetSpectrumRequest
-    , pgsrAntenna
-    , pgsrMasterDeviceDesc
-    , pgsrLocation
-    , pgsrOwner
-    , pgsrRequestType
-    , pgsrVersion
-    , pgsrType
-    , pgsrCapabilities
-    , pgsrDeviceDesc
+    -- ** GeoSpectrumSchedule
+    GeoSpectrumSchedule (..),
+    newGeoSpectrumSchedule,
 
-    -- * AntennaCharacteristics
-    , AntennaCharacteristics
-    , antennaCharacteristics
-    , acHeight
-    , acHeightType
-    , acHeightUncertainty
+    -- ** PawsGetSpectrumBatchRequest
+    PawsGetSpectrumBatchRequest (..),
+    newPawsGetSpectrumBatchRequest,
 
-    -- * PawsVerifyDeviceResponse
-    , PawsVerifyDeviceResponse
-    , pawsVerifyDeviceResponse
-    , pvdrDeviceValidities
-    , pvdrKind
-    , pvdrVersion
-    , pvdrType
-    , pvdrDatabaseChange
+    -- ** PawsGetSpectrumBatchResponse
+    PawsGetSpectrumBatchResponse (..),
+    newPawsGetSpectrumBatchResponse,
 
-    -- * VcardAddress
-    , VcardAddress
-    , vcardAddress
-    , vaPobox
-    , vaCountry
-    , vaStreet
-    , vaLocality
-    , vaCode
-    , vaRegion
+    -- ** PawsGetSpectrumRequest
+    PawsGetSpectrumRequest (..),
+    newPawsGetSpectrumRequest,
 
-    -- * PawsGetSpectrumBatchResponse
-    , PawsGetSpectrumBatchResponse
-    , pawsGetSpectrumBatchResponse
-    , pNeedsSpectrumReport
-    , pKind
-    , pGeoSpectrumSchedules
-    , pMaxContiguousBwHz
-    , pVersion
-    , pRulesetInfo
-    , pType
-    , pDatabaseChange
-    , pTimestamp
-    , pDeviceDesc
-    , pMaxTotalBwHz
+    -- ** PawsGetSpectrumResponse
+    PawsGetSpectrumResponse (..),
+    newPawsGetSpectrumResponse,
 
-    -- * DeviceValidity
-    , DeviceValidity
-    , deviceValidity
-    , dvIsValid
-    , dvReason
-    , dvDeviceDesc
+    -- ** PawsInitRequest
+    PawsInitRequest (..),
+    newPawsInitRequest,
 
-    -- * GeoLocationEllipse
-    , GeoLocationEllipse
-    , geoLocationEllipse
-    , gleSemiMajorAxis
-    , gleCenter
-    , gleOrientation
-    , gleSemiMinorAxis
+    -- ** PawsInitResponse
+    PawsInitResponse (..),
+    newPawsInitResponse,
 
-    -- * RulesetInfo
-    , RulesetInfo
-    , rulesetInfo
-    , riRulesetIds
-    , riMaxPollingSecs
-    , riMaxLocationChange
-    , riAuthority
+    -- ** PawsNotifySpectrumUseRequest
+    PawsNotifySpectrumUseRequest (..),
+    newPawsNotifySpectrumUseRequest,
 
-    -- * PawsRegisterRequest
-    , PawsRegisterRequest
-    , pawsRegisterRequest
-    , pawAntenna
-    , pawLocation
-    , pawDeviceOwner
-    , pawVersion
-    , pawType
-    , pawDeviceDesc
+    -- ** PawsNotifySpectrumUseResponse
+    PawsNotifySpectrumUseResponse (..),
+    newPawsNotifySpectrumUseResponse,
 
-    -- * PawsNotifySpectrumUseResponse
-    , PawsNotifySpectrumUseResponse
-    , pawsNotifySpectrumUseResponse
-    , pnsurnKind
-    , pnsurnVersion
-    , pnsurnType
+    -- ** PawsRegisterRequest
+    PawsRegisterRequest (..),
+    newPawsRegisterRequest,
 
-    -- * DatabaseSpec
-    , DatabaseSpec
-    , databaseSpec
-    , dsURI
-    , dsName
+    -- ** PawsRegisterResponse
+    PawsRegisterResponse (..),
+    newPawsRegisterResponse,
 
-    -- * SpectrumMessage
-    , SpectrumMessage
-    , spectrumMessage
-    , smBandwidth
-    , smFrequencyRanges
+    -- ** PawsVerifyDeviceRequest
+    PawsVerifyDeviceRequest (..),
+    newPawsVerifyDeviceRequest,
 
-    -- * GeoLocation
-    , GeoLocation
-    , geoLocation
-    , glConfidence
-    , glPoint
-    , glRegion
+    -- ** PawsVerifyDeviceResponse
+    PawsVerifyDeviceResponse (..),
+    newPawsVerifyDeviceResponse,
 
-    -- * FrequencyRange
-    , FrequencyRange
-    , frequencyRange
-    , frStopHz
-    , frMaxPowerDBm
-    , frChannelId
-    , frStartHz
+    -- ** RulesetInfo
+    RulesetInfo (..),
+    newRulesetInfo,
 
-    -- * PawsGetSpectrumResponse
-    , PawsGetSpectrumResponse
-    , pawsGetSpectrumResponse
-    , pgsrgNeedsSpectrumReport
-    , pgsrgSpectrumSchedules
-    , pgsrgKind
-    , pgsrgMaxContiguousBwHz
-    , pgsrgVersion
-    , pgsrgRulesetInfo
-    , pgsrgType
-    , pgsrgDatabaseChange
-    , pgsrgTimestamp
-    , pgsrgDeviceDesc
-    , pgsrgMaxTotalBwHz
+    -- ** SpectrumMessage
+    SpectrumMessage (..),
+    newSpectrumMessage,
 
-    -- * PawsVerifyDeviceRequest
-    , PawsVerifyDeviceRequest
-    , pawsVerifyDeviceRequest
-    , pvdrvVersion
-    , pvdrvDeviceDescs
-    , pvdrvType
+    -- ** SpectrumSchedule
+    SpectrumSchedule (..),
+    newSpectrumSchedule,
 
-    -- * DeviceDescriptor
-    , DeviceDescriptor
-    , deviceDescriptor
-    , ddEtsiEnDeviceEmissionsClass
-    , ddRulesetIds
-    , ddModelId
-    , ddEtsiEnDeviceType
-    , ddEtsiEnTechnologyId
-    , ddFccId
-    , ddManufacturerId
-    , ddFccTvbdDeviceType
-    , ddEtsiEnDeviceCategory
-    , ddSerialNumber
+    -- ** Vcard
+    Vcard (..),
+    newVcard,
 
-    -- * PawsInitRequest
-    , PawsInitRequest
-    , pawsInitRequest
-    , piriLocation
-    , piriVersion
-    , piriType
-    , piriDeviceDesc
+    -- ** VcardAddress
+    VcardAddress (..),
+    newVcardAddress,
 
-    -- * DeviceCapabilities
-    , DeviceCapabilities
-    , deviceCapabilities
-    , dcFrequencyRanges
-    ) where
+    -- ** VcardTelephone
+    VcardTelephone (..),
+    newVcardTelephone,
 
-import Network.Google.Prelude
-import Network.Google.Spectrum.Types.Product
-import Network.Google.Spectrum.Types.Sum
+    -- ** VcardTypedText
+    VcardTypedText (..),
+    newVcardTypedText,
+  )
+where
 
--- | Default request referring to version 'v1explorer' of the Google Spectrum Database API. This contains the host and root path used as a starting point for constructing service requests.
-spectrumService :: ServiceConfig
-spectrumService
-  = defaultService (ServiceId "spectrum:v1explorer")
-      "www.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.Spectrum.Internal.Product
+import Network.Google.Spectrum.Internal.Sum
+
+-- | Default request referring to version @v1explorer@ of the Google Spectrum Database API. This contains the host and root path used as a starting point for constructing service requests.
+spectrumService :: Core.ServiceConfig
+spectrumService =
+  Core.defaultService
+    (Core.ServiceId "spectrum:v1explorer")
+    "www.googleapis.com"

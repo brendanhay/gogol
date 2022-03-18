@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Spectrum
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,321 +30,181 @@
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference>
 module Network.Google.Spectrum
-    (
-    -- * Service Configuration
-      spectrumService
-
-    -- * API Declaration
-    , SpectrumAPI
+  ( -- * Configuration
+    spectrumService,
 
     -- * Resources
 
     -- ** spectrum.paws.getSpectrum
-    , module Network.Google.Resource.Spectrum.Paws.GetSpectrum
+    SpectrumPawsGetSpectrumResource,
+    newSpectrumPawsGetSpectrum,
+    SpectrumPawsGetSpectrum,
 
     -- ** spectrum.paws.getSpectrumBatch
-    , module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
+    SpectrumPawsGetSpectrumBatchResource,
+    newSpectrumPawsGetSpectrumBatch,
+    SpectrumPawsGetSpectrumBatch,
 
     -- ** spectrum.paws.init
-    , module Network.Google.Resource.Spectrum.Paws.Init
+    SpectrumPawsInitResource,
+    newSpectrumPawsInit,
+    SpectrumPawsInit,
 
     -- ** spectrum.paws.notifySpectrumUse
-    , module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
+    SpectrumPawsNotifySpectrumUseResource,
+    newSpectrumPawsNotifySpectrumUse,
+    SpectrumPawsNotifySpectrumUse,
 
     -- ** spectrum.paws.register
-    , module Network.Google.Resource.Spectrum.Paws.Register
+    SpectrumPawsRegisterResource,
+    newSpectrumPawsRegister,
+    SpectrumPawsRegister,
 
     -- ** spectrum.paws.verifyDevice
-    , module Network.Google.Resource.Spectrum.Paws.VerifyDevice
+    SpectrumPawsVerifyDeviceResource,
+    newSpectrumPawsVerifyDevice,
+    SpectrumPawsVerifyDevice,
 
     -- * Types
 
-    -- ** GeoLocationPolygon
-    , GeoLocationPolygon
-    , geoLocationPolygon
-    , glpExterior
-
-    -- ** GeoLocationPoint
-    , GeoLocationPoint
-    , geoLocationPoint
-    , glpLatitude
-    , glpLongitude
-
-    -- ** PawsInitResponse
-    , PawsInitResponse
-    , pawsInitResponse
-    , pirKind
-    , pirVersion
-    , pirRulesetInfo
-    , pirType
-    , pirDatabaseChange
-
-    -- ** PawsRegisterResponse
-    , PawsRegisterResponse
-    , pawsRegisterResponse
-    , prrKind
-    , prrVersion
-    , prrType
-    , prrDatabaseChange
-
-    -- ** PawsNotifySpectrumUseRequest
-    , PawsNotifySpectrumUseRequest
-    , pawsNotifySpectrumUseRequest
-    , pnsurSpectra
-    , pnsurLocation
-    , pnsurVersion
-    , pnsurType
-    , pnsurDeviceDesc
-
-    -- ** Vcard
-    , Vcard
-    , vcard
-    , vEmail
-    , vAdr
-    , vOrg
-    , vTel
-    , vFn
-
-    -- ** DBUpdateSpec
-    , DBUpdateSpec
-    , dbUpdateSpec
-    , dusDatabases
-
-    -- ** PawsGetSpectrumBatchRequest
-    , PawsGetSpectrumBatchRequest
-    , pawsGetSpectrumBatchRequest
-    , pgsbrAntenna
-    , pgsbrMasterDeviceDesc
-    , pgsbrOwner
-    , pgsbrRequestType
-    , pgsbrVersion
-    , pgsbrType
-    , pgsbrLocations
-    , pgsbrCapabilities
-    , pgsbrDeviceDesc
-
-    -- ** GeoSpectrumSchedule
-    , GeoSpectrumSchedule
-    , geoSpectrumSchedule
-    , gssLocation
-    , gssSpectrumSchedules
-
-    -- ** VcardTypedText
-    , VcardTypedText
-    , vcardTypedText
-    , vttText
-
-    -- ** SpectrumSchedule
-    , SpectrumSchedule
-    , spectrumSchedule
-    , ssSpectra
-    , ssEventTime
-
-    -- ** VcardTelephone
-    , VcardTelephone
-    , vcardTelephone
-    , vtURI
-
-    -- ** DeviceOwner
-    , DeviceOwner
-    , deviceOwner
-    , doOperator
-    , doOwner
-
-    -- ** EventTime
-    , EventTime
-    , eventTime
-    , etStartTime
-    , etStopTime
-
-    -- ** PawsGetSpectrumRequest
-    , PawsGetSpectrumRequest
-    , pawsGetSpectrumRequest
-    , pgsrAntenna
-    , pgsrMasterDeviceDesc
-    , pgsrLocation
-    , pgsrOwner
-    , pgsrRequestType
-    , pgsrVersion
-    , pgsrType
-    , pgsrCapabilities
-    , pgsrDeviceDesc
-
     -- ** AntennaCharacteristics
-    , AntennaCharacteristics
-    , antennaCharacteristics
-    , acHeight
-    , acHeightType
-    , acHeightUncertainty
-
-    -- ** PawsVerifyDeviceResponse
-    , PawsVerifyDeviceResponse
-    , pawsVerifyDeviceResponse
-    , pvdrDeviceValidities
-    , pvdrKind
-    , pvdrVersion
-    , pvdrType
-    , pvdrDatabaseChange
-
-    -- ** VcardAddress
-    , VcardAddress
-    , vcardAddress
-    , vaPobox
-    , vaCountry
-    , vaStreet
-    , vaLocality
-    , vaCode
-    , vaRegion
-
-    -- ** PawsGetSpectrumBatchResponse
-    , PawsGetSpectrumBatchResponse
-    , pawsGetSpectrumBatchResponse
-    , pNeedsSpectrumReport
-    , pKind
-    , pGeoSpectrumSchedules
-    , pMaxContiguousBwHz
-    , pVersion
-    , pRulesetInfo
-    , pType
-    , pDatabaseChange
-    , pTimestamp
-    , pDeviceDesc
-    , pMaxTotalBwHz
-
-    -- ** DeviceValidity
-    , DeviceValidity
-    , deviceValidity
-    , dvIsValid
-    , dvReason
-    , dvDeviceDesc
-
-    -- ** GeoLocationEllipse
-    , GeoLocationEllipse
-    , geoLocationEllipse
-    , gleSemiMajorAxis
-    , gleCenter
-    , gleOrientation
-    , gleSemiMinorAxis
-
-    -- ** RulesetInfo
-    , RulesetInfo
-    , rulesetInfo
-    , riRulesetIds
-    , riMaxPollingSecs
-    , riMaxLocationChange
-    , riAuthority
-
-    -- ** PawsRegisterRequest
-    , PawsRegisterRequest
-    , pawsRegisterRequest
-    , pawAntenna
-    , pawLocation
-    , pawDeviceOwner
-    , pawVersion
-    , pawType
-    , pawDeviceDesc
-
-    -- ** PawsNotifySpectrumUseResponse
-    , PawsNotifySpectrumUseResponse
-    , pawsNotifySpectrumUseResponse
-    , pnsurnKind
-    , pnsurnVersion
-    , pnsurnType
+    AntennaCharacteristics (..),
+    newAntennaCharacteristics,
 
     -- ** DatabaseSpec
-    , DatabaseSpec
-    , databaseSpec
-    , dsURI
-    , dsName
+    DatabaseSpec (..),
+    newDatabaseSpec,
 
-    -- ** SpectrumMessage
-    , SpectrumMessage
-    , spectrumMessage
-    , smBandwidth
-    , smFrequencyRanges
-
-    -- ** GeoLocation
-    , GeoLocation
-    , geoLocation
-    , glConfidence
-    , glPoint
-    , glRegion
-
-    -- ** FrequencyRange
-    , FrequencyRange
-    , frequencyRange
-    , frStopHz
-    , frMaxPowerDBm
-    , frChannelId
-    , frStartHz
-
-    -- ** PawsGetSpectrumResponse
-    , PawsGetSpectrumResponse
-    , pawsGetSpectrumResponse
-    , pgsrgNeedsSpectrumReport
-    , pgsrgSpectrumSchedules
-    , pgsrgKind
-    , pgsrgMaxContiguousBwHz
-    , pgsrgVersion
-    , pgsrgRulesetInfo
-    , pgsrgType
-    , pgsrgDatabaseChange
-    , pgsrgTimestamp
-    , pgsrgDeviceDesc
-    , pgsrgMaxTotalBwHz
-
-    -- ** PawsVerifyDeviceRequest
-    , PawsVerifyDeviceRequest
-    , pawsVerifyDeviceRequest
-    , pvdrvVersion
-    , pvdrvDeviceDescs
-    , pvdrvType
-
-    -- ** DeviceDescriptor
-    , DeviceDescriptor
-    , deviceDescriptor
-    , ddEtsiEnDeviceEmissionsClass
-    , ddRulesetIds
-    , ddModelId
-    , ddEtsiEnDeviceType
-    , ddEtsiEnTechnologyId
-    , ddFccId
-    , ddManufacturerId
-    , ddFccTvbdDeviceType
-    , ddEtsiEnDeviceCategory
-    , ddSerialNumber
-
-    -- ** PawsInitRequest
-    , PawsInitRequest
-    , pawsInitRequest
-    , piriLocation
-    , piriVersion
-    , piriType
-    , piriDeviceDesc
+    -- ** DbUpdateSpec
+    DbUpdateSpec (..),
+    newDbUpdateSpec,
 
     -- ** DeviceCapabilities
-    , DeviceCapabilities
-    , deviceCapabilities
-    , dcFrequencyRanges
-    ) where
+    DeviceCapabilities (..),
+    newDeviceCapabilities,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Spectrum.Paws.GetSpectrum
-import Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
-import Network.Google.Resource.Spectrum.Paws.Init
-import Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
-import Network.Google.Resource.Spectrum.Paws.Register
-import Network.Google.Resource.Spectrum.Paws.VerifyDevice
+    -- ** DeviceDescriptor
+    DeviceDescriptor (..),
+    newDeviceDescriptor,
+
+    -- ** DeviceOwner
+    DeviceOwner (..),
+    newDeviceOwner,
+
+    -- ** DeviceValidity
+    DeviceValidity (..),
+    newDeviceValidity,
+
+    -- ** EventTime
+    EventTime (..),
+    newEventTime,
+
+    -- ** FrequencyRange
+    FrequencyRange (..),
+    newFrequencyRange,
+
+    -- ** GeoLocation
+    GeoLocation (..),
+    newGeoLocation,
+
+    -- ** GeoLocationEllipse
+    GeoLocationEllipse (..),
+    newGeoLocationEllipse,
+
+    -- ** GeoLocationPoint
+    GeoLocationPoint (..),
+    newGeoLocationPoint,
+
+    -- ** GeoLocationPolygon
+    GeoLocationPolygon (..),
+    newGeoLocationPolygon,
+
+    -- ** GeoSpectrumSchedule
+    GeoSpectrumSchedule (..),
+    newGeoSpectrumSchedule,
+
+    -- ** PawsGetSpectrumBatchRequest
+    PawsGetSpectrumBatchRequest (..),
+    newPawsGetSpectrumBatchRequest,
+
+    -- ** PawsGetSpectrumBatchResponse
+    PawsGetSpectrumBatchResponse (..),
+    newPawsGetSpectrumBatchResponse,
+
+    -- ** PawsGetSpectrumRequest
+    PawsGetSpectrumRequest (..),
+    newPawsGetSpectrumRequest,
+
+    -- ** PawsGetSpectrumResponse
+    PawsGetSpectrumResponse (..),
+    newPawsGetSpectrumResponse,
+
+    -- ** PawsInitRequest
+    PawsInitRequest (..),
+    newPawsInitRequest,
+
+    -- ** PawsInitResponse
+    PawsInitResponse (..),
+    newPawsInitResponse,
+
+    -- ** PawsNotifySpectrumUseRequest
+    PawsNotifySpectrumUseRequest (..),
+    newPawsNotifySpectrumUseRequest,
+
+    -- ** PawsNotifySpectrumUseResponse
+    PawsNotifySpectrumUseResponse (..),
+    newPawsNotifySpectrumUseResponse,
+
+    -- ** PawsRegisterRequest
+    PawsRegisterRequest (..),
+    newPawsRegisterRequest,
+
+    -- ** PawsRegisterResponse
+    PawsRegisterResponse (..),
+    newPawsRegisterResponse,
+
+    -- ** PawsVerifyDeviceRequest
+    PawsVerifyDeviceRequest (..),
+    newPawsVerifyDeviceRequest,
+
+    -- ** PawsVerifyDeviceResponse
+    PawsVerifyDeviceResponse (..),
+    newPawsVerifyDeviceResponse,
+
+    -- ** RulesetInfo
+    RulesetInfo (..),
+    newRulesetInfo,
+
+    -- ** SpectrumMessage
+    SpectrumMessage (..),
+    newSpectrumMessage,
+
+    -- ** SpectrumSchedule
+    SpectrumSchedule (..),
+    newSpectrumSchedule,
+
+    -- ** Vcard
+    Vcard (..),
+    newVcard,
+
+    -- ** VcardAddress
+    VcardAddress (..),
+    newVcardAddress,
+
+    -- ** VcardTelephone
+    VcardTelephone (..),
+    newVcardTelephone,
+
+    -- ** VcardTypedText
+    VcardTypedText (..),
+    newVcardTypedText,
+  )
+where
+
+import Network.Google.Spectrum.Paws.GetSpectrum
+import Network.Google.Spectrum.Paws.GetSpectrumBatch
+import Network.Google.Spectrum.Paws.Init
+import Network.Google.Spectrum.Paws.NotifySpectrumUse
+import Network.Google.Spectrum.Paws.Register
+import Network.Google.Spectrum.Paws.VerifyDevice
 import Network.Google.Spectrum.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Spectrum Database API service.
-type SpectrumAPI =
-     PawsVerifyDeviceResource :<|> PawsInitResource :<|>
-       PawsGetSpectrumResource
-       :<|> PawsNotifySpectrumUseResource
-       :<|> PawsRegisterResource
-       :<|> PawsGetSpectrumBatchResource
