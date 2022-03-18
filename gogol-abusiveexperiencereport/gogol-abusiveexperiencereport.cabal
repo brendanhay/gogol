@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AbusiveExperienceReport
-    Network.Google.AbusiveExperienceReport.Sites.Get
-    Network.Google.AbusiveExperienceReport.Types
-    Network.Google.AbusiveExperienceReport.ViolatingSites.List
+    Gogol.AbusiveExperienceReport
+    Gogol.AbusiveExperienceReport.Sites.Get
+    Gogol.AbusiveExperienceReport.Types
+    Gogol.AbusiveExperienceReport.ViolatingSites.List
 
   other-modules:
-    Network.Google.AbusiveExperienceReport.Internal.Product
-    Network.Google.AbusiveExperienceReport.Internal.Sum
+    Gogol.AbusiveExperienceReport.Internal.Product
+    Gogol.AbusiveExperienceReport.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

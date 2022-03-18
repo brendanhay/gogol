@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AbusiveExperienceReport.ViolatingSites.List
+-- Module      : Gogol.AbusiveExperienceReport.ViolatingSites.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists sites that are failing in the Abusive Experience Report.
 --
 -- /See:/ <https://developers.google.com/abusive-experience-report/ Abusive Experience Report API Reference> for @abusiveexperiencereport.violatingSites.list@.
-module Network.Google.AbusiveExperienceReport.ViolatingSites.List
+module Gogol.AbusiveExperienceReport.ViolatingSites.List
   ( -- * Resource
     AbusiveExperienceReportViolatingSitesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AbusiveExperienceReport.ViolatingSites.List
   )
 where
 
-import Network.Google.AbusiveExperienceReport.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AbusiveExperienceReport.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @abusiveexperiencereport.violatingSites.list@ method which the
 -- 'AbusiveExperienceReportViolatingSitesList' request conforms to.

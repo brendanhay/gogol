@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AbusiveExperienceReport.Sites.Get
+-- Module      : Gogol.AbusiveExperienceReport.Sites.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets a site\'s Abusive Experience Report summary.
 --
 -- /See:/ <https://developers.google.com/abusive-experience-report/ Abusive Experience Report API Reference> for @abusiveexperiencereport.sites.get@.
-module Network.Google.AbusiveExperienceReport.Sites.Get
+module Gogol.AbusiveExperienceReport.Sites.Get
   ( -- * Resource
     AbusiveExperienceReportSitesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AbusiveExperienceReport.Sites.Get
   )
 where
 
-import Network.Google.AbusiveExperienceReport.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AbusiveExperienceReport.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @abusiveexperiencereport.sites.get@ method which the
 -- 'AbusiveExperienceReportSitesGet' request conforms to.
