@@ -14,9 +14,7 @@ CLIENT_VERSION = $(call version,$(TOP)/gen/gogol-gen.cabal)
 
 MODELS ?= $(shell find $(MODEL_DIR) -type f -name '*.json' | sort)
 
-.PHONY: gen format $(BIN)/gogol-gen
-
-release: gen # format
+.PHONY: gen $(BIN)/gogol-gen
 
 gen: $(BIN)/gogol-gen $(MODEL_DIR)
 	$(BIN)/gogol-gen \
@@ -28,12 +26,6 @@ gen: $(BIN)/gogol-gen $(MODEL_DIR)
  --templates=template \
  --static=static \
  $(addprefix --model=,$(MODELS))
-
-format:
-	@echo -e '\nFormatting...'
-	@find $(wildcard $(OUT_DIR)/gogol-*) -type f -name '*.cabal' -printf ' -> %p\n' -exec cabal-fmt -i {} \;
-	@find $(wildcard $(OUT_DIR)/gogol-*/gen) -type f -name '*.hs' -printf ' -> %p\n' -exec ormolu -i {} \;
-	@echo "Formatting completed."
 
 $(BIN)/gogol-gen: $(BIN)
 	stack build gogol-gen --nix --copy-bins --local-bin-path $(BIN)

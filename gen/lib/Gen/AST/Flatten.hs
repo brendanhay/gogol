@@ -19,7 +19,6 @@ module Gen.AST.Flatten
   )
 where
 
-import GHC.Stack (HasCallStack)
 import Control.Applicative
 import Control.Error
 import Control.Lens hiding (lens)
@@ -28,15 +27,19 @@ import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Maybe
 import qualified Data.Set as Set
+import Data.Text (Text)
+import GHC.Stack (HasCallStack)
 import Gen.Formatting
 import Gen.Types
 import Prelude hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
+  let canonical = _sCanonicalName s
+
   ps <- kvTraverseMaybe globalParam (s ^. dParameters)
-  rs <- Map.traverseWithKey (resource ps "Resource") (s ^. dResources)
-  ms <- traverse (method ps "Method") (s ^. dMethods)
+  rs <- Map.traverseWithKey (resource canonical ps "Resource") (s ^. dResources)
+  ms <- traverse (method canonical ps "Method") (s ^. dMethods)
   _ <- Map.traverseWithKey globalSchema (s ^. dSchemas)
 
   -- The horror.
@@ -139,14 +142,15 @@ localParam g l p = do
 
 resource ::
   HasCallStack =>
+  Text ->
   Map Local (Param Global) ->
   Suffix ->
   Global ->
   Resource (Fix Schema) ->
   AST (Resource Global)
-resource qs suf g r@Resource {..} = do
-  rs <- Map.traverseWithKey (resource qs suf . reference g) _rResources
-  ms <- traverse (method qs suf) _rMethods
+resource canonical qs suf g r@Resource {..} = do
+  rs <- Map.traverseWithKey (resource canonical qs suf . reference g) _rResources
+  ms <- traverse (method canonical qs suf) _rMethods
   pure
     $! r
       { _rResources = rs,
@@ -155,14 +159,15 @@ resource qs suf g r@Resource {..} = do
 
 method ::
   HasCallStack =>
+  Text ->
   Map Local (Param Global) ->
   Suffix ->
   Method (Fix Schema) ->
   AST (Method Global)
-method qs suf m@Method {..} = do
+method canonical qs suf m@Method {..} = do
   ps <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
 
-  let (_, typ', _) = mname suf _mId
+  let (_, typ', _) = mname canonical suf _mId
 
   typ <- reserveType typ'
   b <- body typ
