@@ -1,88 +1,78 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.URLShortener.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.URLShortener.Types
-    (
-    -- * Service Configuration
-      uRLShortenerService
+  ( -- * Configuration
+    uRLShortenerService,
 
     -- * OAuth Scopes
-    , urlShortenerScope
+    uRLShortenerScope,
 
-    -- * URL
-    , URL
-    , url
-    , uStatus
-    , uKind
-    , uCreated
-    , uAnalytics
-    , uLongURL
-    , uId
+    -- * Types
 
-    -- * StringCount
-    , StringCount
-    , stringCount
-    , scCount
-    , scId
+    -- ** AnalyticsSnapshot
+    AnalyticsSnapshot (..),
+    newAnalyticsSnapshot,
 
-    -- * URLListProjection
-    , URLListProjection (..)
+    -- ** AnalyticsSummary
+    AnalyticsSummary (..),
+    newAnalyticsSummary,
 
-    -- * AnalyticsSnapshot
-    , AnalyticsSnapshot
-    , analyticsSnapshot
-    , asPlatforms
-    , asShortURLClicks
-    , asReferrers
-    , asCountries
-    , asLongURLClicks
-    , asBrowsers
+    -- ** StringCount
+    StringCount (..),
+    newStringCount,
 
-    -- * AnalyticsSummary
-    , AnalyticsSummary
-    , analyticsSummary
-    , asWeek
-    , asAllTime
-    , asDay
-    , asTwoHours
-    , asMonth
+    -- ** Url
+    Url (..),
+    newUrl,
 
-    -- * URLGetProjection
-    , URLGetProjection (..)
+    -- ** UrlHistory
+    UrlHistory (..),
+    newUrlHistory,
 
-    -- * URLHistory
-    , URLHistory
-    , urlHistory
-    , uhTotalItems
-    , uhNextPageToken
-    , uhItemsPerPage
-    , uhKind
-    , uhItems
-    ) where
+    -- ** UrlGetProjection
+    UrlGetProjection (..),
 
-import Network.Google.Prelude
-import Network.Google.URLShortener.Types.Product
-import Network.Google.URLShortener.Types.Sum
+    -- ** UrlListProjection
+    UrlListProjection (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
-uRLShortenerService :: ServiceConfig
-uRLShortenerService
-  = defaultService (ServiceId "urlshortener:v1")
-      "www.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.URLShortener.Internal.Product
+import Network.Google.URLShortener.Internal.Sum
+
+-- | Default request referring to version @v1@ of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
+uRLShortenerService :: Core.ServiceConfig
+uRLShortenerService =
+  Core.defaultService
+    (Core.ServiceId "urlshortener:v1")
+    "www.googleapis.com"
 
 -- | Manage your goo.gl short URLs
-urlShortenerScope :: Proxy '["https://www.googleapis.com/auth/urlshortener"]
-urlShortenerScope = Proxy
+uRLShortenerScope :: Core.Proxy '["https://www.googleapis.com/auth/urlshortener"]
+uRLShortenerScope = Core.Proxy
