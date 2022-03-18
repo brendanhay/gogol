@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules.Projects.Releases.Patch
+-- Module      : Gogol.FirebaseRules.Projects.Releases.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a @Release@ via PATCH. Only updates to @ruleset_name@ will be honored. @Release@ rename is not supported. To create a @Release@ use the CreateRelease method.
+-- Get a @Release@ by name.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.patch@.
-module Network.Google.FirebaseRules.Projects.Releases.Patch
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.get@.
+module Gogol.FirebaseRules.Projects.Releases.Get
   ( -- * Resource
-    FirebaseRulesProjectsReleasesPatchResource,
+    FirebaseRulesProjectsReleasesGetResource,
 
     -- ** Constructing a Request
-    newFirebaseRulesProjectsReleasesPatch,
-    FirebaseRulesProjectsReleasesPatch,
+    newFirebaseRulesProjectsReleasesGet,
+    FirebaseRulesProjectsReleasesGet,
   )
 where
 
-import Network.Google.FirebaseRules.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRules.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @firebaserules.projects.releases.patch@ method which the
--- 'FirebaseRulesProjectsReleasesPatch' request conforms to.
-type FirebaseRulesProjectsReleasesPatchResource =
+-- | A resource alias for @firebaserules.projects.releases.get@ method which the
+-- 'FirebaseRulesProjectsReleasesGet' request conforms to.
+type FirebaseRulesProjectsReleasesGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,23 +53,20 @@ type FirebaseRulesProjectsReleasesPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] UpdateReleaseRequest
-    Core.:> Core.Patch '[Core.JSON] Release
+    Core.:> Core.Get '[Core.JSON] Release
 
--- | Update a @Release@ via PATCH. Only updates to @ruleset_name@ will be honored. @Release@ rename is not supported. To create a @Release@ use the CreateRelease method.
+-- | Get a @Release@ by name.
 --
--- /See:/ 'newFirebaseRulesProjectsReleasesPatch' smart constructor.
-data FirebaseRulesProjectsReleasesPatch = FirebaseRulesProjectsReleasesPatch
+-- /See:/ 'newFirebaseRulesProjectsReleasesGet' smart constructor.
+data FirebaseRulesProjectsReleasesGet = FirebaseRulesProjectsReleasesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the project which owns this @Release@. Format: @projects\/{project_id}@
+    -- | Required. Resource name of the @Release@. Format: @projects\/{project_id}\/releases\/{release_id}@
     name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: UpdateReleaseRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,35 +74,33 @@ data FirebaseRulesProjectsReleasesPatch = FirebaseRulesProjectsReleasesPatch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FirebaseRulesProjectsReleasesPatch' with the minimum fields required to make a request.
-newFirebaseRulesProjectsReleasesPatch ::
-  -- |  Required. Resource name for the project which owns this @Release@. Format: @projects\/{project_id}@ See 'name'.
+-- | Creates a value of 'FirebaseRulesProjectsReleasesGet' with the minimum fields required to make a request.
+newFirebaseRulesProjectsReleasesGet ::
+  -- |  Required. Resource name of the @Release@. Format: @projects\/{project_id}\/releases\/{release_id}@ See 'name'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  UpdateReleaseRequest ->
-  FirebaseRulesProjectsReleasesPatch
-newFirebaseRulesProjectsReleasesPatch name payload =
-  FirebaseRulesProjectsReleasesPatch
+  FirebaseRulesProjectsReleasesGet
+newFirebaseRulesProjectsReleasesGet name =
+  FirebaseRulesProjectsReleasesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
-      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    FirebaseRulesProjectsReleasesPatch
+    FirebaseRulesProjectsReleasesGet
   where
-  type Rs FirebaseRulesProjectsReleasesPatch = Release
+  type Rs FirebaseRulesProjectsReleasesGet = Release
   type
-    Scopes FirebaseRulesProjectsReleasesPatch =
+    Scopes FirebaseRulesProjectsReleasesGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
+         "https://www.googleapis.com/auth/firebase",
+         "https://www.googleapis.com/auth/firebase.readonly"
        ]
-  requestClient FirebaseRulesProjectsReleasesPatch {..} =
+  requestClient FirebaseRulesProjectsReleasesGet {..} =
     go
       name
       xgafv
@@ -114,13 +109,11 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       firebaseRulesService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                FirebaseRulesProjectsReleasesPatchResource
+              Core.Proxy FirebaseRulesProjectsReleasesGetResource
           )
           Core.mempty

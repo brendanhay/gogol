@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules.Types
+-- Module      : Gogol.FirebaseRules.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FirebaseRules.Types
+module Gogol.FirebaseRules.Types
   ( -- * Configuration
     firebaseRulesService,
 
@@ -161,9 +161,9 @@ module Network.Google.FirebaseRules.Types
   )
 where
 
-import Network.Google.FirebaseRules.Internal.Product
-import Network.Google.FirebaseRules.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRules.Internal.Product
+import Gogol.FirebaseRules.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Firebase Rules API. This contains the host and root path used as a starting point for constructing service requests.
 firebaseRulesService :: Core.ServiceConfig

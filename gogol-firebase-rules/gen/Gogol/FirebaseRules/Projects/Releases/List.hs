@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules.Projects.Releases.List
+-- Module      : Gogol.FirebaseRules.Projects.Releases.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List the @Release@ values for a project. This list may optionally be filtered by @Release@ name, @Ruleset@ name, @TestSuite@ name, or any combination thereof.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.list@.
-module Network.Google.FirebaseRules.Projects.Releases.List
+module Gogol.FirebaseRules.Projects.Releases.List
   ( -- * Resource
     FirebaseRulesProjectsReleasesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FirebaseRules.Projects.Releases.List
   )
 where
 
-import Network.Google.FirebaseRules.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRules.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebaserules.projects.releases.list@ method which the
 -- 'FirebaseRulesProjectsReleasesList' request conforms to.

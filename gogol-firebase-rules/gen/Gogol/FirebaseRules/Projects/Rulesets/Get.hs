@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules.Projects.Rulesets.Get
+-- Module      : Gogol.FirebaseRules.Projects.Rulesets.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get a @Ruleset@ by name including the full @Source@ contents.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.rulesets.get@.
-module Network.Google.FirebaseRules.Projects.Rulesets.Get
+module Gogol.FirebaseRules.Projects.Rulesets.Get
   ( -- * Resource
     FirebaseRulesProjectsRulesetsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FirebaseRules.Projects.Rulesets.Get
   )
 where
 
-import Network.Google.FirebaseRules.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRules.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebaserules.projects.rulesets.get@ method which the
 -- 'FirebaseRulesProjectsRulesetsGet' request conforms to.
