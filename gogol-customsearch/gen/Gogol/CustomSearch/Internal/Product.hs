@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CustomSearch.Internal.Product
+-- Module      : Gogol.CustomSearch.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CustomSearch.Internal.Product
+module Gogol.CustomSearch.Internal.Product
   ( -- * Promotion
     Promotion (..),
     newPromotion,
@@ -92,8 +92,8 @@ module Network.Google.CustomSearch.Internal.Product
   )
 where
 
-import Network.Google.CustomSearch.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CustomSearch.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Promotion result.
 --

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CustomSearch.Search.Cse.List
+-- Module      : Gogol.CustomSearch.Search.Cse.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns metadata about the search performed, metadata about the engine used for the search, and the search results.
 --
 -- /See:/ <https://developers.google.com/custom-search/v1/introduction Custom Search API Reference> for @search.cse.list@.
-module Network.Google.CustomSearch.Search.Cse.List
+module Gogol.CustomSearch.Search.Cse.List
   ( -- * Resource
     SearchCseListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CustomSearch.Search.Cse.List
   )
 where
 
-import Network.Google.CustomSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CustomSearch.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @search.cse.list@ method which the
 -- 'SearchCseList' request conforms to.
