@@ -1,586 +1,474 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Blogger
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Blogger API provides access to posts, comments and pages of a
--- Blogger blog.
+-- The Blogger API provides access to posts, comments and pages of a Blogger blog.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference>
 module Network.Google.Blogger
-    (
-    -- * Service Configuration
-      bloggerService
+  ( -- * Configuration
+    bloggerService,
 
     -- * OAuth Scopes
-    , bloggerScope
-    , bloggerReadOnlyScope
-
-    -- * API Declaration
-    , BloggerAPI
+    bloggerScope,
+    bloggerReadOnlyScope,
 
     -- * Resources
 
     -- ** blogger.blogUserInfos.get
-    , module Network.Google.Resource.Blogger.BlogUserInfos.Get
+    BloggerBlogUserInfosGetResource,
+    newBloggerBlogUserInfosGet,
+    BloggerBlogUserInfosGet,
 
     -- ** blogger.blogs.get
-    , module Network.Google.Resource.Blogger.Blogs.Get
+    BloggerBlogsGetResource,
+    newBloggerBlogsGet,
+    BloggerBlogsGet,
 
     -- ** blogger.blogs.getByUrl
-    , module Network.Google.Resource.Blogger.Blogs.GetByURL
+    BloggerBlogsGetByUrlResource,
+    newBloggerBlogsGetByUrl,
+    BloggerBlogsGetByUrl,
 
     -- ** blogger.blogs.listByUser
-    , module Network.Google.Resource.Blogger.Blogs.ListByUser
+    BloggerBlogsListByUserResource,
+    newBloggerBlogsListByUser,
+    BloggerBlogsListByUser,
 
     -- ** blogger.comments.approve
-    , module Network.Google.Resource.Blogger.Comments.Approve
+    BloggerCommentsApproveResource,
+    newBloggerCommentsApprove,
+    BloggerCommentsApprove,
 
     -- ** blogger.comments.delete
-    , module Network.Google.Resource.Blogger.Comments.Delete
+    BloggerCommentsDeleteResource,
+    newBloggerCommentsDelete,
+    BloggerCommentsDelete,
 
     -- ** blogger.comments.get
-    , module Network.Google.Resource.Blogger.Comments.Get
+    BloggerCommentsGetResource,
+    newBloggerCommentsGet,
+    BloggerCommentsGet,
 
     -- ** blogger.comments.list
-    , module Network.Google.Resource.Blogger.Comments.List
+    BloggerCommentsListResource,
+    newBloggerCommentsList,
+    BloggerCommentsList,
 
     -- ** blogger.comments.listByBlog
-    , module Network.Google.Resource.Blogger.Comments.ListByBlog
+    BloggerCommentsListByBlogResource,
+    newBloggerCommentsListByBlog,
+    BloggerCommentsListByBlog,
 
     -- ** blogger.comments.markAsSpam
-    , module Network.Google.Resource.Blogger.Comments.MarkAsSpam
+    BloggerCommentsMarkAsSpamResource,
+    newBloggerCommentsMarkAsSpam,
+    BloggerCommentsMarkAsSpam,
 
     -- ** blogger.comments.removeContent
-    , module Network.Google.Resource.Blogger.Comments.RemoveContent
+    BloggerCommentsRemoveContentResource,
+    newBloggerCommentsRemoveContent,
+    BloggerCommentsRemoveContent,
 
     -- ** blogger.pageViews.get
-    , module Network.Google.Resource.Blogger.PageViews.Get
+    BloggerPageViewsGetResource,
+    newBloggerPageViewsGet,
+    BloggerPageViewsGet,
 
     -- ** blogger.pages.delete
-    , module Network.Google.Resource.Blogger.Pages.Delete
+    BloggerPagesDeleteResource,
+    newBloggerPagesDelete,
+    BloggerPagesDelete,
 
     -- ** blogger.pages.get
-    , module Network.Google.Resource.Blogger.Pages.Get
+    BloggerPagesGetResource,
+    newBloggerPagesGet,
+    BloggerPagesGet,
 
     -- ** blogger.pages.insert
-    , module Network.Google.Resource.Blogger.Pages.Insert
+    BloggerPagesInsertResource,
+    newBloggerPagesInsert,
+    BloggerPagesInsert,
 
     -- ** blogger.pages.list
-    , module Network.Google.Resource.Blogger.Pages.List
+    BloggerPagesListResource,
+    newBloggerPagesList,
+    BloggerPagesList,
 
     -- ** blogger.pages.patch
-    , module Network.Google.Resource.Blogger.Pages.Patch
+    BloggerPagesPatchResource,
+    newBloggerPagesPatch,
+    BloggerPagesPatch,
 
     -- ** blogger.pages.publish
-    , module Network.Google.Resource.Blogger.Pages.Publish
+    BloggerPagesPublishResource,
+    newBloggerPagesPublish,
+    BloggerPagesPublish,
 
     -- ** blogger.pages.revert
-    , module Network.Google.Resource.Blogger.Pages.Revert
+    BloggerPagesRevertResource,
+    newBloggerPagesRevert,
+    BloggerPagesRevert,
 
     -- ** blogger.pages.update
-    , module Network.Google.Resource.Blogger.Pages.Update
+    BloggerPagesUpdateResource,
+    newBloggerPagesUpdate,
+    BloggerPagesUpdate,
 
     -- ** blogger.postUserInfos.get
-    , module Network.Google.Resource.Blogger.PostUserInfos.Get
+    BloggerPostUserInfosGetResource,
+    newBloggerPostUserInfosGet,
+    BloggerPostUserInfosGet,
 
     -- ** blogger.postUserInfos.list
-    , module Network.Google.Resource.Blogger.PostUserInfos.List
+    BloggerPostUserInfosListResource,
+    newBloggerPostUserInfosList,
+    BloggerPostUserInfosList,
 
     -- ** blogger.posts.delete
-    , module Network.Google.Resource.Blogger.Posts.Delete
+    BloggerPostsDeleteResource,
+    newBloggerPostsDelete,
+    BloggerPostsDelete,
 
     -- ** blogger.posts.get
-    , module Network.Google.Resource.Blogger.Posts.Get
+    BloggerPostsGetResource,
+    newBloggerPostsGet,
+    BloggerPostsGet,
 
     -- ** blogger.posts.getByPath
-    , module Network.Google.Resource.Blogger.Posts.GetByPath
+    BloggerPostsGetByPathResource,
+    newBloggerPostsGetByPath,
+    BloggerPostsGetByPath,
 
     -- ** blogger.posts.insert
-    , module Network.Google.Resource.Blogger.Posts.Insert
+    BloggerPostsInsertResource,
+    newBloggerPostsInsert,
+    BloggerPostsInsert,
 
     -- ** blogger.posts.list
-    , module Network.Google.Resource.Blogger.Posts.List
+    BloggerPostsListResource,
+    newBloggerPostsList,
+    BloggerPostsList,
 
     -- ** blogger.posts.patch
-    , module Network.Google.Resource.Blogger.Posts.Patch
+    BloggerPostsPatchResource,
+    newBloggerPostsPatch,
+    BloggerPostsPatch,
 
     -- ** blogger.posts.publish
-    , module Network.Google.Resource.Blogger.Posts.Publish
+    BloggerPostsPublishResource,
+    newBloggerPostsPublish,
+    BloggerPostsPublish,
 
     -- ** blogger.posts.revert
-    , module Network.Google.Resource.Blogger.Posts.Revert
+    BloggerPostsRevertResource,
+    newBloggerPostsRevert,
+    BloggerPostsRevert,
 
     -- ** blogger.posts.search
-    , module Network.Google.Resource.Blogger.Posts.Search
+    BloggerPostsSearchResource,
+    newBloggerPostsSearch,
+    BloggerPostsSearch,
 
     -- ** blogger.posts.update
-    , module Network.Google.Resource.Blogger.Posts.Update
+    BloggerPostsUpdateResource,
+    newBloggerPostsUpdate,
+    BloggerPostsUpdate,
 
     -- ** blogger.users.get
-    , module Network.Google.Resource.Blogger.Users.Get
+    BloggerUsersGetResource,
+    newBloggerUsersGet,
+    BloggerUsersGet,
 
     -- * Types
 
-    -- ** PostStatus
-    , PostStatus (..)
-
-    -- ** PostsListOrderBy
-    , PostsListOrderBy (..)
-
-    -- ** PostsListView
-    , PostsListView (..)
-
-    -- ** PageViewsGetRange
-    , PageViewsGetRange (..)
-
-    -- ** PostUserInfo
-    , PostUserInfo
-    , postUserInfo
-    , puiPostUserInfo
-    , puiPost
-    , puiKind
-
-    -- ** PageStatus
-    , PageStatus (..)
-
-    -- ** CommentsListView
-    , CommentsListView (..)
-
-    -- ** PostAuthorImage
-    , PostAuthorImage
-    , postAuthorImage
-    , paiURL
-
-    -- ** PostUserInfosListStatus
-    , PostUserInfosListStatus (..)
-
-    -- ** PostList
-    , PostList
-    , postList
-    , plEtag
-    , plNextPageToken
-    , plKind
-    , plItems
-    , plPrevPageToken
-
-    -- ** CommentInReplyTo
-    , CommentInReplyTo
-    , commentInReplyTo
-    , cirtId
-
-    -- ** CommentBlog
-    , CommentBlog
-    , commentBlog
-    , cbId
-
-    -- ** PostReaderComments
-    , PostReaderComments (..)
-
-    -- ** Pageviews
-    , Pageviews
-    , pageviews
-    , pKind
-    , pCounts
-    , pBlogId
-
-    -- ** PostLocation
-    , PostLocation
-    , postLocation
-    , plSpan
-    , plLat
-    , plName
-    , plLng
-
-    -- ** BlogPosts
-    , BlogPosts
-    , blogPosts
-    , bpTotalItems
-    , bpItems
-    , bpSelfLink
-
-    -- ** PostsGetView
-    , PostsGetView (..)
-
-    -- ** Post'
-    , Post'
-    , post
-    , posImages
-    , posStatus
-    , posEtag
-    , posReaderComments
-    , posLocation
-    , posKind
-    , posPublished
-    , posURL
-    , posBlog
-    , posCustomMetaData
-    , posContent
-    , posReplies
-    , posSelfLink
-    , posAuthor
-    , posId
-    , posLabels
-    , posUpdated
-    , posTitleLink
-    , posTitle
-
-    -- ** PostsSearchOrderBy
-    , PostsSearchOrderBy (..)
-
-    -- ** CommentsListByBlogStatus
-    , CommentsListByBlogStatus (..)
-
-    -- ** PagesGetView
-    , PagesGetView (..)
-
-    -- ** PostUserInfosListOrderBy
-    , PostUserInfosListOrderBy (..)
-
-    -- ** Page
-    , Page
-    , page
-    , pagStatus
-    , pagEtag
-    , pagKind
-    , pagPublished
-    , pagURL
-    , pagBlog
-    , pagContent
-    , pagSelfLink
-    , pagAuthor
-    , pagId
-    , pagUpdated
-    , pagTitle
-
-    -- ** BlogLocale
-    , BlogLocale
-    , blogLocale
-    , blVariant
-    , blCountry
-    , blLanguage
-
-    -- ** PageAuthor
-    , PageAuthor
-    , pageAuthor
-    , paImage
-    , paURL
-    , paDisplayName
-    , paId
-
-    -- ** BlogsGetView
-    , BlogsGetView (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Blog
-    , Blog
-    , blog
-    , bStatus
-    , bKind
-    , bPages
-    , bLocale
-    , bPublished
-    , bURL
-    , bCustomMetaData
-    , bSelfLink
-    , bName
-    , bId
-    , bUpdated
-    , bPosts
-    , bDescription
+    Blog (..),
+    newBlog,
 
-    -- ** BlogsGetByURLView
-    , BlogsGetByURLView (..)
+    -- ** Blog_Locale
+    Blog_Locale (..),
+    newBlog_Locale,
 
-    -- ** CommentsListStatus
-    , CommentsListStatus (..)
+    -- ** Blog_Pages
+    Blog_Pages (..),
+    newBlog_Pages,
 
-    -- ** BlogPages
-    , BlogPages
-    , blogPages
-    , bpsTotalItems
-    , bpsSelfLink
+    -- ** Blog_Posts
+    Blog_Posts (..),
+    newBlog_Posts,
 
-    -- ** PostBlog
-    , PostBlog
-    , postBlog
-    , pbId
-
-    -- ** BlogsListByUserStatus
-    , BlogsListByUserStatus (..)
-
-    -- ** PageList
-    , PageList
-    , pageList
-    , pllEtag
-    , pllNextPageToken
-    , pllKind
-    , pllItems
-
-    -- ** UserLocale
-    , UserLocale
-    , userLocale
-    , ulVariant
-    , ulCountry
-    , ulLanguage
-
-    -- ** CommentAuthorImage
-    , CommentAuthorImage
-    , commentAuthorImage
-    , caiURL
-
-    -- ** User
-    , User
-    , user
-    , uBlogs
-    , uKind
-    , uCreated
-    , uLocale
-    , uURL
-    , uSelfLink
-    , uAbout
-    , uDisplayName
-    , uId
-
-    -- ** UserBlogs
-    , UserBlogs
-    , userBlogs
-    , ubSelfLink
-
-    -- ** PostReplies
-    , PostReplies
-    , postReplies
-    , prTotalItems
-    , prItems
-    , prSelfLink
+    -- ** Blog_Status
+    Blog_Status (..),
 
     -- ** BlogList
-    , BlogList
-    , blogList
-    , blKind
-    , blItems
-    , blBlogUserInfos
-
-    -- ** CommentStatus
-    , CommentStatus (..)
-
-    -- ** PagesListView
-    , PagesListView (..)
-
-    -- ** PageviewsCountsItemTimeRange
-    , PageviewsCountsItemTimeRange (..)
-
-    -- ** BlogStatus
-    , BlogStatus (..)
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** BlogPerUserInfoRole
-    , BlogPerUserInfoRole (..)
-
-    -- ** PageBlog
-    , PageBlog
-    , pageBlog
-    , pId
-
-    -- ** PostsListStatus
-    , PostsListStatus (..)
-
-    -- ** PostAuthor
-    , PostAuthor
-    , postAuthor
-    , paaImage
-    , paaURL
-    , paaDisplayName
-    , paaId
-
-    -- ** PostPerUserInfo
-    , PostPerUserInfo
-    , postPerUserInfo
-    , ppuiKind
-    , ppuiBlogId
-    , ppuiUserId
-    , ppuiHasEditAccess
-    , ppuiPostId
-
-    -- ** BlogsListByUserView
-    , BlogsListByUserView (..)
-
-    -- ** PageviewsCountsItem
-    , PageviewsCountsItem
-    , pageviewsCountsItem
-    , pciTimeRange
-    , pciCount
-
-    -- ** PostUserInfosListView
-    , PostUserInfosListView (..)
-
-    -- ** Comment
-    , Comment
-    , comment
-    , cStatus
-    , cPost
-    , cKind
-    , cPublished
-    , cBlog
-    , cContent
-    , cSelfLink
-    , cAuthor
-    , cId
-    , cUpdated
-    , cInReplyTo
-
-    -- ** CommentsGetView
-    , CommentsGetView (..)
-
-    -- ** CommentPost
-    , CommentPost
-    , commentPost
-    , cpId
-
-    -- ** PostsGetByPathView
-    , PostsGetByPathView (..)
+    BlogList (..),
+    newBlogList,
 
     -- ** BlogPerUserInfo
-    , BlogPerUserInfo
-    , blogPerUserInfo
-    , bpuiPhotosAlbumKey
-    , bpuiKind
-    , bpuiBlogId
-    , bpuiUserId
-    , bpuiRole
-    , bpuiHasAdminAccess
+    BlogPerUserInfo (..),
+    newBlogPerUserInfo,
 
-    -- ** PostUserInfosList
-    , PostUserInfosList
-    , postUserInfosList
-    , puilNextPageToken
-    , puilKind
-    , puilItems
-
-    -- ** PagesListStatus
-    , PagesListStatus (..)
-
-    -- ** CommentAuthor
-    , CommentAuthor
-    , commentAuthor
-    , caImage
-    , caURL
-    , caDisplayName
-    , caId
-
-    -- ** BlogsListByUserRole
-    , BlogsListByUserRole (..)
+    -- ** BlogPerUserInfo_Role
+    BlogPerUserInfo_Role (..),
 
     -- ** BlogUserInfo
-    , BlogUserInfo
-    , blogUserInfo
-    , buiKind
-    , buiBlog
-    , buiBlogUserInfo
+    BlogUserInfo (..),
+    newBlogUserInfo,
 
-    -- ** PageAuthorImage
-    , PageAuthorImage
-    , pageAuthorImage
-    , pURL
+    -- ** Comment
+    Comment (..),
+    newComment,
+
+    -- ** Comment_Author
+    Comment_Author (..),
+    newComment_Author,
+
+    -- ** Comment_Author_Image
+    Comment_Author_Image (..),
+    newComment_Author_Image,
+
+    -- ** Comment_Blog
+    Comment_Blog (..),
+    newComment_Blog,
+
+    -- ** Comment_InReplyTo
+    Comment_InReplyTo (..),
+    newComment_InReplyTo,
+
+    -- ** Comment_Post
+    Comment_Post (..),
+    newComment_Post,
+
+    -- ** Comment_Status
+    Comment_Status (..),
 
     -- ** CommentList
-    , CommentList
-    , commentList
-    , clEtag
-    , clNextPageToken
-    , clKind
-    , clItems
-    , clPrevPageToken
+    CommentList (..),
+    newCommentList,
 
-    -- ** PostImagesItem
-    , PostImagesItem
-    , postImagesItem
-    , piiURL
-    ) where
+    -- ** Page
+    Page (..),
+    newPage,
 
-import Network.Google.Prelude
+    -- ** Page_Author
+    Page_Author (..),
+    newPage_Author,
+
+    -- ** Page_Author_Image
+    Page_Author_Image (..),
+    newPage_Author_Image,
+
+    -- ** Page_Blog
+    Page_Blog (..),
+    newPage_Blog,
+
+    -- ** Page_Status
+    Page_Status (..),
+
+    -- ** PageList
+    PageList (..),
+    newPageList,
+
+    -- ** Pageviews
+    Pageviews (..),
+    newPageviews,
+
+    -- ** Pageviews_CountsItem
+    Pageviews_CountsItem (..),
+    newPageviews_CountsItem,
+
+    -- ** Pageviews_CountsItem_TimeRange
+    Pageviews_CountsItem_TimeRange (..),
+
+    -- ** Post'
+    Post' (..),
+    newPost,
+
+    -- ** Post_Author
+    Post_Author (..),
+    newPost_Author,
+
+    -- ** Post_Author_Image
+    Post_Author_Image (..),
+    newPost_Author_Image,
+
+    -- ** Post_Blog
+    Post_Blog (..),
+    newPost_Blog,
+
+    -- ** Post_ImagesItem
+    Post_ImagesItem (..),
+    newPost_ImagesItem,
+
+    -- ** Post_Location
+    Post_Location (..),
+    newPost_Location,
+
+    -- ** Post_ReaderComments
+    Post_ReaderComments (..),
+
+    -- ** Post_Replies
+    Post_Replies (..),
+    newPost_Replies,
+
+    -- ** Post_Status
+    Post_Status (..),
+
+    -- ** PostList
+    PostList (..),
+    newPostList,
+
+    -- ** PostPerUserInfo
+    PostPerUserInfo (..),
+    newPostPerUserInfo,
+
+    -- ** PostUserInfo
+    PostUserInfo (..),
+    newPostUserInfo,
+
+    -- ** PostUserInfosList
+    PostUserInfosList (..),
+    newPostUserInfosList,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_Blogs
+    User_Blogs (..),
+    newUser_Blogs,
+
+    -- ** User_Locale
+    User_Locale (..),
+    newUser_Locale,
+
+    -- ** BlogsGetView
+    BlogsGetView (..),
+
+    -- ** BlogsGetByUrlView
+    BlogsGetByUrlView (..),
+
+    -- ** BlogsListByUserRole
+    BlogsListByUserRole (..),
+
+    -- ** BlogsListByUserStatus
+    BlogsListByUserStatus (..),
+
+    -- ** BlogsListByUserView
+    BlogsListByUserView (..),
+
+    -- ** CommentsGetView
+    CommentsGetView (..),
+
+    -- ** CommentsListStatus
+    CommentsListStatus (..),
+
+    -- ** CommentsListView
+    CommentsListView (..),
+
+    -- ** CommentsListByBlogStatus
+    CommentsListByBlogStatus (..),
+
+    -- ** PageViewsGetRange
+    PageViewsGetRange (..),
+
+    -- ** PagesGetView
+    PagesGetView (..),
+
+    -- ** PagesListStatus
+    PagesListStatus (..),
+
+    -- ** PagesListView
+    PagesListView (..),
+
+    -- ** PostUserInfosListOrderBy
+    PostUserInfosListOrderBy (..),
+
+    -- ** PostUserInfosListStatus
+    PostUserInfosListStatus (..),
+
+    -- ** PostUserInfosListView
+    PostUserInfosListView (..),
+
+    -- ** PostsGetView
+    PostsGetView (..),
+
+    -- ** PostsGetByPathView
+    PostsGetByPathView (..),
+
+    -- ** PostsListOrderBy
+    PostsListOrderBy (..),
+
+    -- ** PostsListStatus
+    PostsListStatus (..),
+
+    -- ** PostsListView
+    PostsListView (..),
+
+    -- ** PostsSearchOrderBy
+    PostsSearchOrderBy (..),
+  )
+where
+
+import Network.Google.Blogger.BlogUserInfos.Get
+import Network.Google.Blogger.Blogs.Get
+import Network.Google.Blogger.Blogs.GetByUrl
+import Network.Google.Blogger.Blogs.ListByUser
+import Network.Google.Blogger.Comments.Approve
+import Network.Google.Blogger.Comments.Delete
+import Network.Google.Blogger.Comments.Get
+import Network.Google.Blogger.Comments.List
+import Network.Google.Blogger.Comments.ListByBlog
+import Network.Google.Blogger.Comments.MarkAsSpam
+import Network.Google.Blogger.Comments.RemoveContent
+import Network.Google.Blogger.PageViews.Get
+import Network.Google.Blogger.Pages.Delete
+import Network.Google.Blogger.Pages.Get
+import Network.Google.Blogger.Pages.Insert
+import Network.Google.Blogger.Pages.List
+import Network.Google.Blogger.Pages.Patch
+import Network.Google.Blogger.Pages.Publish
+import Network.Google.Blogger.Pages.Revert
+import Network.Google.Blogger.Pages.Update
+import Network.Google.Blogger.PostUserInfos.Get
+import Network.Google.Blogger.PostUserInfos.List
+import Network.Google.Blogger.Posts.Delete
+import Network.Google.Blogger.Posts.Get
+import Network.Google.Blogger.Posts.GetByPath
+import Network.Google.Blogger.Posts.Insert
+import Network.Google.Blogger.Posts.List
+import Network.Google.Blogger.Posts.Patch
+import Network.Google.Blogger.Posts.Publish
+import Network.Google.Blogger.Posts.Revert
+import Network.Google.Blogger.Posts.Search
+import Network.Google.Blogger.Posts.Update
 import Network.Google.Blogger.Types
-import Network.Google.Resource.Blogger.BlogUserInfos.Get
-import Network.Google.Resource.Blogger.Blogs.Get
-import Network.Google.Resource.Blogger.Blogs.GetByURL
-import Network.Google.Resource.Blogger.Blogs.ListByUser
-import Network.Google.Resource.Blogger.Comments.Approve
-import Network.Google.Resource.Blogger.Comments.Delete
-import Network.Google.Resource.Blogger.Comments.Get
-import Network.Google.Resource.Blogger.Comments.List
-import Network.Google.Resource.Blogger.Comments.ListByBlog
-import Network.Google.Resource.Blogger.Comments.MarkAsSpam
-import Network.Google.Resource.Blogger.Comments.RemoveContent
-import Network.Google.Resource.Blogger.PageViews.Get
-import Network.Google.Resource.Blogger.Pages.Delete
-import Network.Google.Resource.Blogger.Pages.Get
-import Network.Google.Resource.Blogger.Pages.Insert
-import Network.Google.Resource.Blogger.Pages.List
-import Network.Google.Resource.Blogger.Pages.Patch
-import Network.Google.Resource.Blogger.Pages.Publish
-import Network.Google.Resource.Blogger.Pages.Revert
-import Network.Google.Resource.Blogger.Pages.Update
-import Network.Google.Resource.Blogger.PostUserInfos.Get
-import Network.Google.Resource.Blogger.PostUserInfos.List
-import Network.Google.Resource.Blogger.Posts.Delete
-import Network.Google.Resource.Blogger.Posts.Get
-import Network.Google.Resource.Blogger.Posts.GetByPath
-import Network.Google.Resource.Blogger.Posts.Insert
-import Network.Google.Resource.Blogger.Posts.List
-import Network.Google.Resource.Blogger.Posts.Patch
-import Network.Google.Resource.Blogger.Posts.Publish
-import Network.Google.Resource.Blogger.Posts.Revert
-import Network.Google.Resource.Blogger.Posts.Search
-import Network.Google.Resource.Blogger.Posts.Update
-import Network.Google.Resource.Blogger.Users.Get
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Blogger API v3 service.
-type BloggerAPI =
-     PostUserInfosListResource :<|>
-       PostUserInfosGetResource
-       :<|> UsersGetResource
-       :<|> PageViewsGetResource
-       :<|> BlogsListByUserResource
-       :<|> BlogsGetResource
-       :<|> BlogsGetByURLResource
-       :<|> PagesInsertResource
-       :<|> PagesListResource
-       :<|> PagesPatchResource
-       :<|> PagesGetResource
-       :<|> PagesRevertResource
-       :<|> PagesDeleteResource
-       :<|> PagesUpdateResource
-       :<|> PagesPublishResource
-       :<|> BlogUserInfosGetResource
-       :<|> CommentsListResource
-       :<|> CommentsGetResource
-       :<|> CommentsListByBlogResource
-       :<|> CommentsRemoveContentResource
-       :<|> CommentsApproveResource
-       :<|> CommentsMarkAsSpamResource
-       :<|> CommentsDeleteResource
-       :<|> PostsInsertResource
-       :<|> PostsListResource
-       :<|> PostsPatchResource
-       :<|> PostsGetResource
-       :<|> PostsRevertResource
-       :<|> PostsGetByPathResource
-       :<|> PostsSearchResource
-       :<|> PostsDeleteResource
-       :<|> PostsUpdateResource
-       :<|> PostsPublishResource
+import Network.Google.Blogger.Users.Get

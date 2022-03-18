@@ -1,79 +1,89 @@
-name:                  gogol-blogger
-version:               0.5.0
-synopsis:              Google Blogger API v3 SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-blogger
+version:            0.5.0
+synopsis:           Google Blogger API v3 SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    The Blogger API provides access to posts, comments and pages of a
-    Blogger blog.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v3@
-    of the API.
+  The Blogger API provides access to posts, comments and pages of a Blogger blog.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v3@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-blogger
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Blogger
-        , Network.Google.Blogger.Types
-        , Network.Google.Resource.Blogger.BlogUserInfos.Get
-        , Network.Google.Resource.Blogger.Blogs.Get
-        , Network.Google.Resource.Blogger.Blogs.GetByURL
-        , Network.Google.Resource.Blogger.Blogs.ListByUser
-        , Network.Google.Resource.Blogger.Comments.Approve
-        , Network.Google.Resource.Blogger.Comments.Delete
-        , Network.Google.Resource.Blogger.Comments.Get
-        , Network.Google.Resource.Blogger.Comments.List
-        , Network.Google.Resource.Blogger.Comments.ListByBlog
-        , Network.Google.Resource.Blogger.Comments.MarkAsSpam
-        , Network.Google.Resource.Blogger.Comments.RemoveContent
-        , Network.Google.Resource.Blogger.PageViews.Get
-        , Network.Google.Resource.Blogger.Pages.Delete
-        , Network.Google.Resource.Blogger.Pages.Get
-        , Network.Google.Resource.Blogger.Pages.Insert
-        , Network.Google.Resource.Blogger.Pages.List
-        , Network.Google.Resource.Blogger.Pages.Patch
-        , Network.Google.Resource.Blogger.Pages.Publish
-        , Network.Google.Resource.Blogger.Pages.Revert
-        , Network.Google.Resource.Blogger.Pages.Update
-        , Network.Google.Resource.Blogger.PostUserInfos.Get
-        , Network.Google.Resource.Blogger.PostUserInfos.List
-        , Network.Google.Resource.Blogger.Posts.Delete
-        , Network.Google.Resource.Blogger.Posts.Get
-        , Network.Google.Resource.Blogger.Posts.GetByPath
-        , Network.Google.Resource.Blogger.Posts.Insert
-        , Network.Google.Resource.Blogger.Posts.List
-        , Network.Google.Resource.Blogger.Posts.Patch
-        , Network.Google.Resource.Blogger.Posts.Publish
-        , Network.Google.Resource.Blogger.Posts.Revert
-        , Network.Google.Resource.Blogger.Posts.Search
-        , Network.Google.Resource.Blogger.Posts.Update
-        , Network.Google.Resource.Blogger.Users.Get
+  exposed-modules:
+    Network.Google.Blogger
+    Network.Google.Blogger.Blogs.Get
+    Network.Google.Blogger.Blogs.GetByUrl
+    Network.Google.Blogger.Blogs.ListByUser
+    Network.Google.Blogger.BlogUserInfos.Get
+    Network.Google.Blogger.Comments.Approve
+    Network.Google.Blogger.Comments.Delete
+    Network.Google.Blogger.Comments.Get
+    Network.Google.Blogger.Comments.List
+    Network.Google.Blogger.Comments.ListByBlog
+    Network.Google.Blogger.Comments.MarkAsSpam
+    Network.Google.Blogger.Comments.RemoveContent
+    Network.Google.Blogger.Pages.Delete
+    Network.Google.Blogger.Pages.Get
+    Network.Google.Blogger.Pages.Insert
+    Network.Google.Blogger.Pages.List
+    Network.Google.Blogger.Pages.Patch
+    Network.Google.Blogger.Pages.Publish
+    Network.Google.Blogger.Pages.Revert
+    Network.Google.Blogger.Pages.Update
+    Network.Google.Blogger.PageViews.Get
+    Network.Google.Blogger.Posts.Delete
+    Network.Google.Blogger.Posts.Get
+    Network.Google.Blogger.Posts.GetByPath
+    Network.Google.Blogger.Posts.Insert
+    Network.Google.Blogger.Posts.List
+    Network.Google.Blogger.Posts.Patch
+    Network.Google.Blogger.Posts.Publish
+    Network.Google.Blogger.Posts.Revert
+    Network.Google.Blogger.Posts.Search
+    Network.Google.Blogger.Posts.Update
+    Network.Google.Blogger.PostUserInfos.Get
+    Network.Google.Blogger.PostUserInfos.List
+    Network.Google.Blogger.Types
+    Network.Google.Blogger.Users.Get
 
-    other-modules:
-          Network.Google.Blogger.Types.Product
-        , Network.Google.Blogger.Types.Sum
+  other-modules:
+    Network.Google.Blogger.Internal.Product
+    Network.Google.Blogger.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
