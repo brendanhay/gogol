@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Composer
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,300 +30,228 @@
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference>
 module Network.Google.Composer
-    (
-    -- * Service Configuration
-      composerService
+  ( -- * Configuration
+    composerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , ComposerAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** composer.projects.locations.environments.create
-    , module Network.Google.Resource.Composer.Projects.Locations.Environments.Create
+    ComposerProjectsLocationsEnvironmentsCreateResource,
+    newComposerProjectsLocationsEnvironmentsCreate,
+    ComposerProjectsLocationsEnvironmentsCreate,
 
     -- ** composer.projects.locations.environments.delete
-    , module Network.Google.Resource.Composer.Projects.Locations.Environments.Delete
+    ComposerProjectsLocationsEnvironmentsDeleteResource,
+    newComposerProjectsLocationsEnvironmentsDelete,
+    ComposerProjectsLocationsEnvironmentsDelete,
 
     -- ** composer.projects.locations.environments.get
-    , module Network.Google.Resource.Composer.Projects.Locations.Environments.Get
+    ComposerProjectsLocationsEnvironmentsGetResource,
+    newComposerProjectsLocationsEnvironmentsGet,
+    ComposerProjectsLocationsEnvironmentsGet,
 
     -- ** composer.projects.locations.environments.list
-    , module Network.Google.Resource.Composer.Projects.Locations.Environments.List
+    ComposerProjectsLocationsEnvironmentsListResource,
+    newComposerProjectsLocationsEnvironmentsList,
+    ComposerProjectsLocationsEnvironmentsList,
 
     -- ** composer.projects.locations.environments.patch
-    , module Network.Google.Resource.Composer.Projects.Locations.Environments.Patch
+    ComposerProjectsLocationsEnvironmentsPatchResource,
+    newComposerProjectsLocationsEnvironmentsPatch,
+    ComposerProjectsLocationsEnvironmentsPatch,
 
     -- ** composer.projects.locations.imageVersions.list
-    , module Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
+    ComposerProjectsLocationsImageVersionsListResource,
+    newComposerProjectsLocationsImageVersionsList,
+    ComposerProjectsLocationsImageVersionsList,
 
     -- ** composer.projects.locations.operations.delete
-    , module Network.Google.Resource.Composer.Projects.Locations.Operations.Delete
+    ComposerProjectsLocationsOperationsDeleteResource,
+    newComposerProjectsLocationsOperationsDelete,
+    ComposerProjectsLocationsOperationsDelete,
 
     -- ** composer.projects.locations.operations.get
-    , module Network.Google.Resource.Composer.Projects.Locations.Operations.Get
+    ComposerProjectsLocationsOperationsGetResource,
+    newComposerProjectsLocationsOperationsGet,
+    ComposerProjectsLocationsOperationsGet,
 
     -- ** composer.projects.locations.operations.list
-    , module Network.Google.Resource.Composer.Projects.Locations.Operations.List
+    ComposerProjectsLocationsOperationsListResource,
+    newComposerProjectsLocationsOperationsList,
+    ComposerProjectsLocationsOperationsList,
 
     -- * Types
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
-
-    -- ** ListImageVersionsResponse
-    , ListImageVersionsResponse
-    , listImageVersionsResponse
-    , livrNextPageToken
-    , livrImageVersions
-
-    -- ** ListEnvironmentsResponse
-    , ListEnvironmentsResponse
-    , listEnvironmentsResponse
-    , lerNextPageToken
-    , lerEnvironments
-
-    -- ** WebServerConfig
-    , WebServerConfig
-    , webServerConfig
-    , wscMachineType
-
-    -- ** DatabaseConfig
-    , DatabaseConfig
-    , databaseConfig
-    , dcMachineType
-
-    -- ** EnvironmentConfig
-    , EnvironmentConfig
-    , environmentConfig
-    , ecDatabaseConfig
-    , ecWebServerConfig
-    , ecNodeConfig
-    , ecNodeCount
-    , ecPrivateEnvironmentConfig
-    , ecEncryptionConfig
-    , ecSoftwareConfig
-    , ecDagGcsPrefix
-    , ecWebServerNetworkAccessControl
-    , ecGkeCluster
-    , ecAirflowURI
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** NodeConfig
-    , NodeConfig
-    , nodeConfig
-    , ncDiskSizeGb
-    , ncLocation
-    , ncNetwork
-    , ncOAuthScopes
-    , ncIPAllocationPolicy
-    , ncServiceAccount
-    , ncSubnetwork
-    , ncMachineType
-    , ncTags
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** OperationMetadataOperationType
-    , OperationMetadataOperationType (..)
-
-    -- ** SoftwareConfigEnvVariables
-    , SoftwareConfigEnvVariables
-    , softwareConfigEnvVariables
-    , scevAddtional
-
-    -- ** ImageVersion
-    , ImageVersion
-    , imageVersion
-    , ivUpgradeDisabled
-    , ivCreationDisabled
-    , ivReleaseDate
-    , ivImageVersionId
-    , ivSupportedPythonVersions
-    , ivIsDefault
-
-    -- ** Environment
-    , Environment
-    , environment
-    , eState
-    , eConfig
-    , eUuid
-    , eUpdateTime
-    , eName
-    , eLabels
-    , eCreateTime
-
-    -- ** SoftwareConfigAirflowConfigOverrides
-    , SoftwareConfigAirflowConfigOverrides
-    , softwareConfigAirflowConfigOverrides
-    , scacoAddtional
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** AllowedIPRange
-    , AllowedIPRange
-    , allowedIPRange
-    , airValue
-    , airDescription
-
-    -- ** IPAllocationPolicy
-    , IPAllocationPolicy
-    , ipAllocationPolicy
-    , iapServicesSecondaryRangeName
-    , iapUseIPAliases
-    , iapClusterSecondaryRangeName
-    , iapClusterIPv4CIdRBlock
-    , iapServicesIPv4CIdRBlock
-
-    -- ** CheckUpgradeResponseContainsPypiModulesConflict
-    , CheckUpgradeResponseContainsPypiModulesConflict (..)
-
-    -- ** Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- ** CheckUpgradeResponsePypiDependencies
-    , CheckUpgradeResponsePypiDependencies
-    , checkUpgradeResponsePypiDependencies
-    , curpdAddtional
-
-    -- ** SoftwareConfigPypiPackages
-    , SoftwareConfigPypiPackages
-    , softwareConfigPypiPackages
-    , scppAddtional
-
-    -- ** OperationMetadataState
-    , OperationMetadataState (..)
-
-    -- ** EnvironmentState
-    , EnvironmentState (..)
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
-    -- ** PrivateEnvironmentConfig
-    , PrivateEnvironmentConfig
-    , privateEnvironmentConfig
-    , pecWebServerIPv4CIdRBlock
-    , pecCloudSQLIPv4CIdRBlock
-    , pecWebServerIPv4ReservedRange
-    , pecPrivateClusterConfig
-    , pecEnablePrivateEnvironment
-
-    -- ** SoftwareConfig
-    , SoftwareConfig
-    , softwareConfig
-    , scImageVersion
-    , scPythonVersion
-    , scPypiPackages
-    , scAirflowConfigOverrides
-    , scEnvVariables
-
-    -- ** PrivateClusterConfig
-    , PrivateClusterConfig
-    , privateClusterConfig
-    , pccEnablePrivateEndpoint
-    , pccMasterIPv4CIdRBlock
-    , pccMasterIPv4ReservedRange
-
-    -- ** EncryptionConfig
-    , EncryptionConfig
-    , encryptionConfig
-    , ecKmsKeyName
+    -- ** AllowedIpRange
+    AllowedIpRange (..),
+    newAllowedIpRange,
 
     -- ** CheckUpgradeResponse
-    , CheckUpgradeResponse
-    , checkUpgradeResponse
-    , curContainsPypiModulesConflict
-    , curBuildLogURI
-    , curImageVersion
-    , curPypiDependencies
-    , curPypiConflictBuildLogExtract
+    CheckUpgradeResponse (..),
+    newCheckUpgradeResponse,
 
-    -- ** WebServerNetworkAccessControl
-    , WebServerNetworkAccessControl
-    , webServerNetworkAccessControl
-    , wsnacAllowedIPRanges
+    -- ** CheckUpgradeResponse_ContainsPypiModulesConflict
+    CheckUpgradeResponse_ContainsPypiModulesConflict (..),
 
-    -- ** EnvironmentLabels
-    , EnvironmentLabels
-    , environmentLabels
-    , elAddtional
+    -- ** CheckUpgradeResponse_PypiDependencies
+    CheckUpgradeResponse_PypiDependencies (..),
+    newCheckUpgradeResponse_PypiDependencies,
+
+    -- ** DatabaseConfig
+    DatabaseConfig (..),
+    newDatabaseConfig,
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
+
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
+
+    -- ** Environment_Labels
+    Environment_Labels (..),
+    newEnvironment_Labels,
+
+    -- ** Environment_State
+    Environment_State (..),
+
+    -- ** EnvironmentConfig
+    EnvironmentConfig (..),
+    newEnvironmentConfig,
+
+    -- ** EnvironmentConfig_EnvironmentSize
+    EnvironmentConfig_EnvironmentSize (..),
+
+    -- ** IPAllocationPolicy
+    IPAllocationPolicy (..),
+    newIPAllocationPolicy,
+
+    -- ** ImageVersion
+    ImageVersion (..),
+    newImageVersion,
+
+    -- ** ListEnvironmentsResponse
+    ListEnvironmentsResponse (..),
+    newListEnvironmentsResponse,
+
+    -- ** ListImageVersionsResponse
+    ListImageVersionsResponse (..),
+    newListImageVersionsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** MaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
+
+    -- ** NodeConfig
+    NodeConfig (..),
+    newNodeConfig,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omState
-    , omResourceUuid
-    , omResource
-    , omEndTime
-    , omOperationType
-    , omCreateTime
+    OperationMetadata (..),
+    newOperationMetadata,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-    ) where
+    -- ** OperationMetadata_OperationType
+    OperationMetadata_OperationType (..),
 
-import Network.Google.Prelude
+    -- ** OperationMetadata_State
+    OperationMetadata_State (..),
+
+    -- ** PrivateClusterConfig
+    PrivateClusterConfig (..),
+    newPrivateClusterConfig,
+
+    -- ** PrivateEnvironmentConfig
+    PrivateEnvironmentConfig (..),
+    newPrivateEnvironmentConfig,
+
+    -- ** SchedulerResource
+    SchedulerResource (..),
+    newSchedulerResource,
+
+    -- ** SoftwareConfig
+    SoftwareConfig (..),
+    newSoftwareConfig,
+
+    -- ** SoftwareConfig_AirflowConfigOverrides
+    SoftwareConfig_AirflowConfigOverrides (..),
+    newSoftwareConfig_AirflowConfigOverrides,
+
+    -- ** SoftwareConfig_EnvVariables
+    SoftwareConfig_EnvVariables (..),
+    newSoftwareConfig_EnvVariables,
+
+    -- ** SoftwareConfig_PypiPackages
+    SoftwareConfig_PypiPackages (..),
+    newSoftwareConfig_PypiPackages,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** WebServerConfig
+    WebServerConfig (..),
+    newWebServerConfig,
+
+    -- ** WebServerNetworkAccessControl
+    WebServerNetworkAccessControl (..),
+    newWebServerNetworkAccessControl,
+
+    -- ** WebServerResource
+    WebServerResource (..),
+    newWebServerResource,
+
+    -- ** WorkerResource
+    WorkerResource (..),
+    newWorkerResource,
+
+    -- ** WorkloadsConfig
+    WorkloadsConfig (..),
+    newWorkloadsConfig,
+  )
+where
+
+import Network.Google.Composer.Projects.Locations.Environments.Create
+import Network.Google.Composer.Projects.Locations.Environments.Delete
+import Network.Google.Composer.Projects.Locations.Environments.Get
+import Network.Google.Composer.Projects.Locations.Environments.List
+import Network.Google.Composer.Projects.Locations.Environments.Patch
+import Network.Google.Composer.Projects.Locations.ImageVersions.List
+import Network.Google.Composer.Projects.Locations.Operations.Delete
+import Network.Google.Composer.Projects.Locations.Operations.Get
+import Network.Google.Composer.Projects.Locations.Operations.List
 import Network.Google.Composer.Types
-import Network.Google.Resource.Composer.Projects.Locations.Environments.Create
-import Network.Google.Resource.Composer.Projects.Locations.Environments.Delete
-import Network.Google.Resource.Composer.Projects.Locations.Environments.Get
-import Network.Google.Resource.Composer.Projects.Locations.Environments.List
-import Network.Google.Resource.Composer.Projects.Locations.Environments.Patch
-import Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
-import Network.Google.Resource.Composer.Projects.Locations.Operations.Delete
-import Network.Google.Resource.Composer.Projects.Locations.Operations.Get
-import Network.Google.Resource.Composer.Projects.Locations.Operations.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Composer API service.
-type ComposerAPI =
-     ProjectsLocationsOperationsListResource :<|>
-       ProjectsLocationsOperationsGetResource
-       :<|> ProjectsLocationsOperationsDeleteResource
-       :<|> ProjectsLocationsImageVersionsListResource
-       :<|> ProjectsLocationsEnvironmentsListResource
-       :<|> ProjectsLocationsEnvironmentsPatchResource
-       :<|> ProjectsLocationsEnvironmentsGetResource
-       :<|> ProjectsLocationsEnvironmentsCreateResource
-       :<|> ProjectsLocationsEnvironmentsDeleteResource

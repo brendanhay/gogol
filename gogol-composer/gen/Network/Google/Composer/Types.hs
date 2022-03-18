@@ -1,266 +1,210 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Composer.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Composer.Types
-    (
-    -- * Service Configuration
-      composerService
+  ( -- * Configuration
+    composerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- * Types
 
-    -- * OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ListImageVersionsResponse
-    , ListImageVersionsResponse
-    , listImageVersionsResponse
-    , livrNextPageToken
-    , livrImageVersions
+    -- ** AllowedIpRange
+    AllowedIpRange (..),
+    newAllowedIpRange,
 
-    -- * ListEnvironmentsResponse
-    , ListEnvironmentsResponse
-    , listEnvironmentsResponse
-    , lerNextPageToken
-    , lerEnvironments
+    -- ** CheckUpgradeResponse
+    CheckUpgradeResponse (..),
+    newCheckUpgradeResponse,
 
-    -- * WebServerConfig
-    , WebServerConfig
-    , webServerConfig
-    , wscMachineType
+    -- ** CheckUpgradeResponse_ContainsPypiModulesConflict
+    CheckUpgradeResponse_ContainsPypiModulesConflict (..),
 
-    -- * DatabaseConfig
-    , DatabaseConfig
-    , databaseConfig
-    , dcMachineType
+    -- ** CheckUpgradeResponse_PypiDependencies
+    CheckUpgradeResponse_PypiDependencies (..),
+    newCheckUpgradeResponse_PypiDependencies,
 
-    -- * EnvironmentConfig
-    , EnvironmentConfig
-    , environmentConfig
-    , ecDatabaseConfig
-    , ecWebServerConfig
-    , ecNodeConfig
-    , ecNodeCount
-    , ecPrivateEnvironmentConfig
-    , ecEncryptionConfig
-    , ecSoftwareConfig
-    , ecDagGcsPrefix
-    , ecWebServerNetworkAccessControl
-    , ecGkeCluster
-    , ecAirflowURI
+    -- ** DatabaseConfig
+    DatabaseConfig (..),
+    newDatabaseConfig,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** Date
+    Date (..),
+    newDate,
 
-    -- * NodeConfig
-    , NodeConfig
-    , nodeConfig
-    , ncDiskSizeGb
-    , ncLocation
-    , ncNetwork
-    , ncOAuthScopes
-    , ncIPAllocationPolicy
-    , ncServiceAccount
-    , ncSubnetwork
-    , ncMachineType
-    , ncTags
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** EncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
 
-    -- * OperationMetadataOperationType
-    , OperationMetadataOperationType (..)
+    -- ** Environment_Labels
+    Environment_Labels (..),
+    newEnvironment_Labels,
 
-    -- * SoftwareConfigEnvVariables
-    , SoftwareConfigEnvVariables
-    , softwareConfigEnvVariables
-    , scevAddtional
+    -- ** Environment_State
+    Environment_State (..),
 
-    -- * ImageVersion
-    , ImageVersion
-    , imageVersion
-    , ivUpgradeDisabled
-    , ivCreationDisabled
-    , ivReleaseDate
-    , ivImageVersionId
-    , ivSupportedPythonVersions
-    , ivIsDefault
+    -- ** EnvironmentConfig
+    EnvironmentConfig (..),
+    newEnvironmentConfig,
 
-    -- * Environment
-    , Environment
-    , environment
-    , eState
-    , eConfig
-    , eUuid
-    , eUpdateTime
-    , eName
-    , eLabels
-    , eCreateTime
+    -- ** EnvironmentConfig_EnvironmentSize
+    EnvironmentConfig_EnvironmentSize (..),
 
-    -- * SoftwareConfigAirflowConfigOverrides
-    , SoftwareConfigAirflowConfigOverrides
-    , softwareConfigAirflowConfigOverrides
-    , scacoAddtional
+    -- ** IPAllocationPolicy
+    IPAllocationPolicy (..),
+    newIPAllocationPolicy,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** ImageVersion
+    ImageVersion (..),
+    newImageVersion,
 
-    -- * AllowedIPRange
-    , AllowedIPRange
-    , allowedIPRange
-    , airValue
-    , airDescription
+    -- ** ListEnvironmentsResponse
+    ListEnvironmentsResponse (..),
+    newListEnvironmentsResponse,
 
-    -- * IPAllocationPolicy
-    , IPAllocationPolicy
-    , ipAllocationPolicy
-    , iapServicesSecondaryRangeName
-    , iapUseIPAliases
-    , iapClusterSecondaryRangeName
-    , iapClusterIPv4CIdRBlock
-    , iapServicesIPv4CIdRBlock
+    -- ** ListImageVersionsResponse
+    ListImageVersionsResponse (..),
+    newListImageVersionsResponse,
 
-    -- * CheckUpgradeResponseContainsPypiModulesConflict
-    , CheckUpgradeResponseContainsPypiModulesConflict (..)
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
+    -- ** MaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
 
-    -- * CheckUpgradeResponsePypiDependencies
-    , CheckUpgradeResponsePypiDependencies
-    , checkUpgradeResponsePypiDependencies
-    , curpdAddtional
+    -- ** NodeConfig
+    NodeConfig (..),
+    newNodeConfig,
 
-    -- * SoftwareConfigPypiPackages
-    , SoftwareConfigPypiPackages
-    , softwareConfigPypiPackages
-    , scppAddtional
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * OperationMetadataState
-    , OperationMetadataState (..)
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * EnvironmentState
-    , EnvironmentState (..)
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
-    -- * PrivateEnvironmentConfig
-    , PrivateEnvironmentConfig
-    , privateEnvironmentConfig
-    , pecWebServerIPv4CIdRBlock
-    , pecCloudSQLIPv4CIdRBlock
-    , pecWebServerIPv4ReservedRange
-    , pecPrivateClusterConfig
-    , pecEnablePrivateEnvironment
+    -- ** OperationMetadata_OperationType
+    OperationMetadata_OperationType (..),
 
-    -- * SoftwareConfig
-    , SoftwareConfig
-    , softwareConfig
-    , scImageVersion
-    , scPythonVersion
-    , scPypiPackages
-    , scAirflowConfigOverrides
-    , scEnvVariables
+    -- ** OperationMetadata_State
+    OperationMetadata_State (..),
 
-    -- * PrivateClusterConfig
-    , PrivateClusterConfig
-    , privateClusterConfig
-    , pccEnablePrivateEndpoint
-    , pccMasterIPv4CIdRBlock
-    , pccMasterIPv4ReservedRange
+    -- ** PrivateClusterConfig
+    PrivateClusterConfig (..),
+    newPrivateClusterConfig,
 
-    -- * EncryptionConfig
-    , EncryptionConfig
-    , encryptionConfig
-    , ecKmsKeyName
+    -- ** PrivateEnvironmentConfig
+    PrivateEnvironmentConfig (..),
+    newPrivateEnvironmentConfig,
 
-    -- * CheckUpgradeResponse
-    , CheckUpgradeResponse
-    , checkUpgradeResponse
-    , curContainsPypiModulesConflict
-    , curBuildLogURI
-    , curImageVersion
-    , curPypiDependencies
-    , curPypiConflictBuildLogExtract
+    -- ** SchedulerResource
+    SchedulerResource (..),
+    newSchedulerResource,
 
-    -- * WebServerNetworkAccessControl
-    , WebServerNetworkAccessControl
-    , webServerNetworkAccessControl
-    , wsnacAllowedIPRanges
+    -- ** SoftwareConfig
+    SoftwareConfig (..),
+    newSoftwareConfig,
 
-    -- * EnvironmentLabels
-    , EnvironmentLabels
-    , environmentLabels
-    , elAddtional
+    -- ** SoftwareConfig_AirflowConfigOverrides
+    SoftwareConfig_AirflowConfigOverrides (..),
+    newSoftwareConfig_AirflowConfigOverrides,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omState
-    , omResourceUuid
-    , omResource
-    , omEndTime
-    , omOperationType
-    , omCreateTime
+    -- ** SoftwareConfig_EnvVariables
+    SoftwareConfig_EnvVariables (..),
+    newSoftwareConfig_EnvVariables,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-    ) where
+    -- ** SoftwareConfig_PypiPackages
+    SoftwareConfig_PypiPackages (..),
+    newSoftwareConfig_PypiPackages,
 
-import Network.Google.Composer.Types.Product
-import Network.Google.Composer.Types.Sum
-import Network.Google.Prelude
+    -- ** Status
+    Status (..),
+    newStatus,
 
--- | Default request referring to version 'v1' of the Cloud Composer API. This contains the host and root path used as a starting point for constructing service requests.
-composerService :: ServiceConfig
-composerService
-  = defaultService (ServiceId "composer:v1")
-      "composer.googleapis.com"
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** WebServerConfig
+    WebServerConfig (..),
+    newWebServerConfig,
+
+    -- ** WebServerNetworkAccessControl
+    WebServerNetworkAccessControl (..),
+    newWebServerNetworkAccessControl,
+
+    -- ** WebServerResource
+    WebServerResource (..),
+    newWebServerResource,
+
+    -- ** WorkerResource
+    WorkerResource (..),
+    newWorkerResource,
+
+    -- ** WorkloadsConfig
+    WorkloadsConfig (..),
+    newWorkloadsConfig,
+  )
+where
+
+import Network.Google.Composer.Internal.Product
+import Network.Google.Composer.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Composer API. This contains the host and root path used as a starting point for constructing service requests.
+composerService :: Core.ServiceConfig
+composerService =
+  Core.defaultService
+    (Core.ServiceId "composer:v1")
+    "composer.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
