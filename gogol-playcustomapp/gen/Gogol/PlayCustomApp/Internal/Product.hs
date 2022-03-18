@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayCustomApp.Internal.Product
+-- Module      : Gogol.PlayCustomApp.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.PlayCustomApp.Internal.Product
+module Gogol.PlayCustomApp.Internal.Product
   ( -- * CustomApp
     CustomApp (..),
     newCustomApp,
@@ -36,8 +36,8 @@ module Network.Google.PlayCustomApp.Internal.Product
   )
 where
 
-import Network.Google.PlayCustomApp.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.PlayCustomApp.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | This resource represents a custom app.
 --

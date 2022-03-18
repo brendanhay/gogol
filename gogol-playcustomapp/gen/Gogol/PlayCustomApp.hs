@@ -19,18 +19,29 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayCustomApp.Types
+-- Module      : Gogol.PlayCustomApp
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.PlayCustomApp.Types
+--
+-- API to create and publish custom Android apps
+--
+-- /See:/ <https://developers.google.com/android/work/play/custom-app-api/ Google Play Custom App Publishing API Reference>
+module Gogol.PlayCustomApp
   ( -- * Configuration
     playCustomAppService,
 
     -- * OAuth Scopes
     androidpublisherScope,
+
+    -- * Resources
+
+    -- ** playcustomapp.accounts.customApps.create
+    PlayCustomAppAccountsCustomAppsCreateResource,
+    newPlayCustomAppAccountsCustomAppsCreate,
+    PlayCustomAppAccountsCustomAppsCreate,
 
     -- * Types
 
@@ -47,17 +58,5 @@ module Network.Google.PlayCustomApp.Types
   )
 where
 
-import Network.Google.PlayCustomApp.Internal.Product
-import Network.Google.PlayCustomApp.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Google Play Custom App Publishing API. This contains the host and root path used as a starting point for constructing service requests.
-playCustomAppService :: Core.ServiceConfig
-playCustomAppService =
-  Core.defaultService
-    (Core.ServiceId "playcustomapp:v1")
-    "playcustomapp.googleapis.com"
-
--- | View and manage your Google Play Developer account
-androidpublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidpublisherScope = Core.Proxy
+import Gogol.PlayCustomApp.Accounts.CustomApps.Create
+import Gogol.PlayCustomApp.Types

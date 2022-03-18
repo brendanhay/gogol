@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayCustomApp.Accounts.CustomApps.Create
+-- Module      : Gogol.PlayCustomApp.Accounts.CustomApps.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a new custom app.
 --
 -- /See:/ <https://developers.google.com/android/work/play/custom-app-api/ Google Play Custom App Publishing API Reference> for @playcustomapp.accounts.customApps.create@.
-module Network.Google.PlayCustomApp.Accounts.CustomApps.Create
+module Gogol.PlayCustomApp.Accounts.CustomApps.Create
   ( -- * Resource
     PlayCustomAppAccountsCustomAppsCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.PlayCustomApp.Accounts.CustomApps.Create
   )
 where
 
-import Network.Google.PlayCustomApp.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlayCustomApp.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @playcustomapp.accounts.customApps.create@ method which the
 -- 'PlayCustomAppAccountsCustomAppsCreate' request conforms to.
