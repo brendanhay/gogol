@@ -1,276 +1,208 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.WebSecurityScanner.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.WebSecurityScanner.Types
-    (
-    -- * Service Configuration
-      webSecurityScannerService
+  ( -- * Configuration
+    webSecurityScannerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * FindingTypeStats
-    , FindingTypeStats
-    , findingTypeStats
-    , ftsFindingCount
-    , ftsFindingType
+    -- * Types
 
-    -- * IapTestServiceAccountInfo
-    , IapTestServiceAccountInfo
-    , iapTestServiceAccountInfo
-    , itsaiTargetAudienceClientId
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ListFindingsResponse
-    , ListFindingsResponse
-    , listFindingsResponse
-    , lfrNextPageToken
-    , lfrFindings
+    -- ** Authentication
+    Authentication (..),
+    newAuthentication,
 
-    -- * StopScanRunRequest
-    , StopScanRunRequest
-    , stopScanRunRequest
+    -- ** CrawledUrl
+    CrawledUrl (..),
+    newCrawledUrl,
 
-    -- * ScanRunErrorTraceCode
-    , ScanRunErrorTraceCode (..)
+    -- ** CustomAccount
+    CustomAccount (..),
+    newCustomAccount,
 
-    -- * ScanConfigError
-    , ScanConfigError
-    , scanConfigError
-    , sceFieldName
-    , sceCode
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Schedule
-    , Schedule
-    , schedule
-    , sScheduleTime
-    , sIntervalDurationDays
+    -- ** Finding
+    Finding (..),
+    newFinding,
 
-    -- * Finding
-    , Finding
-    , finding
-    , fFinalURL
-    , fHTTPMethod
-    , fReProductionURL
-    , fTrackingId
-    , fBody
-    , fXss
-    , fSeverity
-    , fVulnerableParameters
-    , fOutdatedLibrary
-    , fFuzzedURL
-    , fName
-    , fFindingType
-    , fVulnerableHeaders
-    , fViolatingResource
-    , fForm
-    , fFrameURL
-    , fDescription
+    -- ** Finding_Severity
+    Finding_Severity (..),
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** FindingTypeStats
+    FindingTypeStats (..),
+    newFindingTypeStats,
 
-    -- * ScanRunWarningTrace
-    , ScanRunWarningTrace
-    , scanRunWarningTrace
-    , srwtCode
+    -- ** Form
+    Form (..),
+    newForm,
 
-    -- * ListFindingTypeStatsResponse
-    , ListFindingTypeStatsResponse
-    , listFindingTypeStatsResponse
-    , lftsrFindingTypeStats
+    -- ** GoogleAccount
+    GoogleAccount (..),
+    newGoogleAccount,
 
-    -- * GoogleAccount
-    , GoogleAccount
-    , googleAccount
-    , gaUsername
-    , gaPassword
+    -- ** Header
+    Header (..),
+    newHeader,
 
-    -- * Xss
-    , Xss
-    , xss
-    , xStoredXssSeedingURL
-    , xAttackVector
-    , xStackTraces
-    , xErrorMessage
+    -- ** IapCredential
+    IapCredential (..),
+    newIapCredential,
 
-    -- * Authentication
-    , Authentication
-    , authentication
-    , aGoogleAccount
-    , aIapCredential
-    , aCustomAccount
+    -- ** IapTestServiceAccountInfo
+    IapTestServiceAccountInfo (..),
+    newIapTestServiceAccountInfo,
 
-    -- * ListCrawledURLsResponse
-    , ListCrawledURLsResponse
-    , listCrawledURLsResponse
-    , lcurNextPageToken
-    , lcurCrawledURLs
+    -- ** ListCrawledUrlsResponse
+    ListCrawledUrlsResponse (..),
+    newListCrawledUrlsResponse,
 
-    -- * IapCredential
-    , IapCredential
-    , iapCredential
-    , icIapTestServiceAccountInfo
+    -- ** ListFindingTypeStatsResponse
+    ListFindingTypeStatsResponse (..),
+    newListFindingTypeStatsResponse,
 
-    -- * VulnerableParameters
-    , VulnerableParameters
-    , vulnerableParameters
-    , vpParameterNames
+    -- ** ListFindingsResponse
+    ListFindingsResponse (..),
+    newListFindingsResponse,
 
-    -- * XssAttackVector
-    , XssAttackVector (..)
+    -- ** ListScanConfigsResponse
+    ListScanConfigsResponse (..),
+    newListScanConfigsResponse,
 
-    -- * CrawledURL
-    , CrawledURL
-    , crawledURL
-    , cuHTTPMethod
-    , cuBody
-    , cuURL
+    -- ** ListScanRunsResponse
+    ListScanRunsResponse (..),
+    newListScanRunsResponse,
 
-    -- * OutdatedLibrary
-    , OutdatedLibrary
-    , outdatedLibrary
-    , olLearnMoreURLs
-    , olVersion
-    , olLibraryName
+    -- ** OutdatedLibrary
+    OutdatedLibrary (..),
+    newOutdatedLibrary,
 
-    -- * ListScanRunsResponse
-    , ListScanRunsResponse
-    , listScanRunsResponse
-    , lsrrNextPageToken
-    , lsrrScanRuns
+    -- ** ScanConfig
+    ScanConfig (..),
+    newScanConfig,
 
-    -- * Header
-    , Header
-    , header
-    , hValue
-    , hName
+    -- ** ScanConfig_ExportToSecurityCommandCenter
+    ScanConfig_ExportToSecurityCommandCenter (..),
 
-    -- * ScanRunErrorTrace
-    , ScanRunErrorTrace
-    , scanRunErrorTrace
-    , sretMostCommonHTTPErrorCode
-    , sretScanConfigError
-    , sretCode
+    -- ** ScanConfig_RiskLevel
+    ScanConfig_RiskLevel (..),
 
-    -- * ListScanConfigsResponse
-    , ListScanConfigsResponse
-    , listScanConfigsResponse
-    , lscrNextPageToken
-    , lscrScanConfigs
+    -- ** ScanConfig_UserAgent
+    ScanConfig_UserAgent (..),
 
-    -- * StartScanRunRequest
-    , StartScanRunRequest
-    , startScanRunRequest
+    -- ** ScanConfigError
+    ScanConfigError (..),
+    newScanConfigError,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ScanConfigError_Code
+    ScanConfigError_Code (..),
 
-    -- * CustomAccount
-    , CustomAccount
-    , customAccount
-    , caLoginURL
-    , caUsername
-    , caPassword
+    -- ** ScanRun
+    ScanRun (..),
+    newScanRun,
 
-    -- * ScanConfigUserAgent
-    , ScanConfigUserAgent (..)
+    -- ** ScanRun_ExecutionState
+    ScanRun_ExecutionState (..),
 
-    -- * ScanConfig
-    , ScanConfig
-    , scanConfig
-    , scIgnoreHTTPStatusErrors
-    , scSchedule
-    , scStartingURLs
-    , scAuthentication
-    , scStaticIPScan
-    , scMaxQps
-    , scName
-    , scManagedScan
-    , scExportToSecurityCommandCenter
-    , scDisplayName
-    , scRiskLevel
-    , scUserAgent
-    , scBlackListPatterns
+    -- ** ScanRun_ResultState
+    ScanRun_ResultState (..),
 
-    -- * ScanRunWarningTraceCode
-    , ScanRunWarningTraceCode (..)
+    -- ** ScanRunErrorTrace
+    ScanRunErrorTrace (..),
+    newScanRunErrorTrace,
 
-    -- * ScanConfigExportToSecurityCommandCenter
-    , ScanConfigExportToSecurityCommandCenter (..)
+    -- ** ScanRunErrorTrace_Code
+    ScanRunErrorTrace_Code (..),
 
-    -- * ScanConfigErrorCode
-    , ScanConfigErrorCode (..)
+    -- ** ScanRunWarningTrace
+    ScanRunWarningTrace (..),
+    newScanRunWarningTrace,
 
-    -- * ScanRunResultState
-    , ScanRunResultState (..)
+    -- ** ScanRunWarningTrace_Code
+    ScanRunWarningTrace_Code (..),
 
-    -- * ScanConfigRiskLevel
-    , ScanConfigRiskLevel (..)
+    -- ** Schedule
+    Schedule (..),
+    newSchedule,
 
-    -- * VulnerableHeaders
-    , VulnerableHeaders
-    , vulnerableHeaders
-    , vhMissingHeaders
-    , vhHeaders
+    -- ** StartScanRunRequest
+    StartScanRunRequest (..),
+    newStartScanRunRequest,
 
-    -- * ViolatingResource
-    , ViolatingResource
-    , violatingResource
-    , vrContentType
-    , vrResourceURL
+    -- ** StopScanRunRequest
+    StopScanRunRequest (..),
+    newStopScanRunRequest,
 
-    -- * ScanRunExecutionState
-    , ScanRunExecutionState (..)
+    -- ** ViolatingResource
+    ViolatingResource (..),
+    newViolatingResource,
 
-    -- * Form
-    , Form
-    , form
-    , fActionURI
-    , fFields
+    -- ** VulnerableHeaders
+    VulnerableHeaders (..),
+    newVulnerableHeaders,
 
-    -- * ScanRun
-    , ScanRun
-    , scanRun
-    , srStartTime
-    , srHasVulnerabilities
-    , srWarningTraces
-    , srResultState
-    , srProgressPercent
-    , srURLsCrawledCount
-    , srURLsTestedCount
-    , srName
-    , srEndTime
-    , srExecutionState
-    , srErrorTrace
+    -- ** VulnerableParameters
+    VulnerableParameters (..),
+    newVulnerableParameters,
 
-    -- * FindingSeverity
-    , FindingSeverity (..)
-    ) where
+    -- ** Xss
+    Xss (..),
+    newXss,
 
-import Network.Google.Prelude
-import Network.Google.WebSecurityScanner.Types.Product
-import Network.Google.WebSecurityScanner.Types.Sum
+    -- ** Xss_AttackVector
+    Xss_AttackVector (..),
 
--- | Default request referring to version 'v1' of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
-webSecurityScannerService :: ServiceConfig
-webSecurityScannerService
-  = defaultService (ServiceId "websecurityscanner:v1")
-      "websecurityscanner.googleapis.com"
+    -- ** Xxe
+    Xxe (..),
+    newXxe,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** Xxe_PayloadLocation
+    Xxe_PayloadLocation (..),
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.WebSecurityScanner.Internal.Product
+import Network.Google.WebSecurityScanner.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
+webSecurityScannerService :: Core.ServiceConfig
+webSecurityScannerService =
+  Core.defaultService
+    (Core.ServiceId "websecurityscanner:v1")
+    "websecurityscanner.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
