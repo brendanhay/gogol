@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseDynamicLinks.ManagedShortLinks.Create
+-- Module      : Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a managed short Dynamic Link given either a valid long Dynamic Link or details such as Dynamic Link domain, Android and iOS app information. The created short Dynamic Link will not expire. This differs from CreateShortDynamicLink in the following ways: - The request will also contain a name for the link (non unique name for the front end). - The response must be authenticated with an auth token (generated with the admin service account). - The link will appear in the FDL list of links in the console front end. The Dynamic Link domain in the request must be owned by requester\'s Firebase project.
 --
 -- /See:/ <https://firebase.google.com/docs/dynamic-links/ Firebase Dynamic Links API Reference> for @firebasedynamiclinks.managedShortLinks.create@.
-module Network.Google.FirebaseDynamicLinks.ManagedShortLinks.Create
+module Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
   ( -- * Resource
     FirebaseDynamicLinksManagedShortLinksCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FirebaseDynamicLinks.ManagedShortLinks.Create
   )
 where
 
-import Network.Google.FirebaseDynamicLinks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseDynamicLinks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebasedynamiclinks.managedShortLinks.create@ method which the
 -- 'FirebaseDynamicLinksManagedShortLinksCreate' request conforms to.

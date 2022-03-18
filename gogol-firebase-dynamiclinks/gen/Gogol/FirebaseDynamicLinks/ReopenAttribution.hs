@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseDynamicLinks.ReopenAttribution
+-- Module      : Gogol.FirebaseDynamicLinks.ReopenAttribution
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get iOS reopen attribution for app universal link open deeplinking.
 --
 -- /See:/ <https://firebase.google.com/docs/dynamic-links/ Firebase Dynamic Links API Reference> for @firebasedynamiclinks.reopenAttribution@.
-module Network.Google.FirebaseDynamicLinks.ReopenAttribution
+module Gogol.FirebaseDynamicLinks.ReopenAttribution
   ( -- * Resource
     FirebaseDynamicLinksReopenAttributionResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FirebaseDynamicLinks.ReopenAttribution
   )
 where
 
-import Network.Google.FirebaseDynamicLinks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseDynamicLinks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebasedynamiclinks.reopenAttribution@ method which the
 -- 'FirebaseDynamicLinksReopenAttribution' request conforms to.

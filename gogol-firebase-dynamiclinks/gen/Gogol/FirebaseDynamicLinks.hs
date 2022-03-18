@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseDynamicLinks
+-- Module      : Gogol.FirebaseDynamicLinks
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Programmatically creates and manages Firebase Dynamic Links.
 --
 -- /See:/ <https://firebase.google.com/docs/dynamic-links/ Firebase Dynamic Links API Reference>
-module Network.Google.FirebaseDynamicLinks
+module Gogol.FirebaseDynamicLinks
   ( -- * Configuration
     firebaseDynamicLinksService,
 
@@ -192,9 +192,9 @@ module Network.Google.FirebaseDynamicLinks
   )
 where
 
-import Network.Google.FirebaseDynamicLinks.GetLinkStats
-import Network.Google.FirebaseDynamicLinks.InstallAttribution
-import Network.Google.FirebaseDynamicLinks.ManagedShortLinks.Create
-import Network.Google.FirebaseDynamicLinks.ReopenAttribution
-import Network.Google.FirebaseDynamicLinks.ShortLinks.Create
-import Network.Google.FirebaseDynamicLinks.Types
+import Gogol.FirebaseDynamicLinks.GetLinkStats
+import Gogol.FirebaseDynamicLinks.InstallAttribution
+import Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
+import Gogol.FirebaseDynamicLinks.ReopenAttribution
+import Gogol.FirebaseDynamicLinks.ShortLinks.Create
+import Gogol.FirebaseDynamicLinks.Types
