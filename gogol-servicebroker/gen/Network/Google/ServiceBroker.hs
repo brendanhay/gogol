@@ -1,99 +1,90 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ServiceBroker
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Cloud Platform Service Broker API provides Google hosted
--- implementation of the Open Service Broker API
--- (https:\/\/www.openservicebrokerapi.org\/).
+-- The Google Cloud Platform Service Broker API provides Google hosted implementation of the Open Service Broker API (https:\/\/www.openservicebrokerapi.org\/).
 --
 -- /See:/ <https://cloud.google.com/kubernetes-engine/docs/concepts/add-on/service-broker Service Broker API Reference>
 module Network.Google.ServiceBroker
-    (
-    -- * Service Configuration
-      serviceBrokerService
+  ( -- * Configuration
+    serviceBrokerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , ServiceBrokerAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** servicebroker.getIamPolicy
-    , module Network.Google.Resource.ServiceBroker.GetIAMPolicy
+    ServiceBrokerGetIamPolicyResource,
+    newServiceBrokerGetIamPolicy,
+    ServiceBrokerGetIamPolicy,
 
     -- ** servicebroker.setIamPolicy
-    , module Network.Google.Resource.ServiceBroker.SetIAMPolicy
+    ServiceBrokerSetIamPolicyResource,
+    newServiceBrokerSetIamPolicy,
+    ServiceBrokerSetIamPolicy,
 
     -- ** servicebroker.testIamPermissions
-    , module Network.Google.Resource.ServiceBroker.TestIAMPermissions
+    ServiceBrokerTestIamPermissionsResource,
+    newServiceBrokerTestIamPermissions,
+    ServiceBrokerTestIamPermissions,
 
     -- * Types
 
-    -- ** GoogleIAMV1__Policy
-    , GoogleIAMV1__Policy
-    , googleIAMV1__Policy
-    , givpEtag
-    , givpVersion
-    , givpBindings
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- ** GoogleIAMV1__TestIAMPermissionsResponse
-    , GoogleIAMV1__TestIAMPermissionsResponse
-    , googleIAMV1__TestIAMPermissionsResponse
-    , givtiprPermissions
+    -- ** GoogleIamV1__Binding
+    GoogleIamV1__Binding (..),
+    newGoogleIamV1__Binding,
+
+    -- ** GoogleIamV1__Policy
+    GoogleIamV1__Policy (..),
+    newGoogleIamV1__Policy,
+
+    -- ** GoogleIamV1__SetIamPolicyRequest
+    GoogleIamV1__SetIamPolicyRequest (..),
+    newGoogleIamV1__SetIamPolicyRequest,
+
+    -- ** GoogleIamV1__TestIamPermissionsRequest
+    GoogleIamV1__TestIamPermissionsRequest (..),
+    newGoogleIamV1__TestIamPermissionsRequest,
+
+    -- ** GoogleIamV1__TestIamPermissionsResponse
+    GoogleIamV1__TestIamPermissionsResponse (..),
+    newGoogleIamV1__TestIamPermissionsResponse,
 
     -- ** GoogleType__Expr
-    , GoogleType__Expr
-    , googleType__Expr
-    , gteLocation
-    , gteExpression
-    , gteTitle
-    , gteDescription
+    GoogleType__Expr (..),
+    newGoogleType__Expr,
+  )
+where
 
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** GoogleIAMV1__Binding
-    , GoogleIAMV1__Binding
-    , googleIAMV1__Binding
-    , givbMembers
-    , givbRole
-    , givbCondition
-
-    -- ** GoogleIAMV1__SetIAMPolicyRequest
-    , GoogleIAMV1__SetIAMPolicyRequest
-    , googleIAMV1__SetIAMPolicyRequest
-    , givsiprPolicy
-
-    -- ** GoogleIAMV1__TestIAMPermissionsRequest
-    , GoogleIAMV1__TestIAMPermissionsRequest
-    , googleIAMV1__TestIAMPermissionsRequest
-    , giamvtiamprPermissions
-    ) where
-
-import Network.Google.Prelude
-import Network.Google.Resource.ServiceBroker.GetIAMPolicy
-import Network.Google.Resource.ServiceBroker.SetIAMPolicy
-import Network.Google.Resource.ServiceBroker.TestIAMPermissions
+import Network.Google.ServiceBroker.GetIamPolicy
+import Network.Google.ServiceBroker.SetIamPolicy
+import Network.Google.ServiceBroker.TestIamPermissions
 import Network.Google.ServiceBroker.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Service Broker API service.
-type ServiceBrokerAPI =
-     GetIAMPolicyResource :<|> SetIAMPolicyResource :<|>
-       TestIAMPermissionsResource
