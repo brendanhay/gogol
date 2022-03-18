@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.OAuth2
-    Network.Google.OAuth2.Tokeninfo
-    Network.Google.OAuth2.Types
-    Network.Google.OAuth2.Userinfo.Get
-    Network.Google.OAuth2.Userinfo.V2.Me.Get
+    Gogol.OAuth2
+    Gogol.OAuth2.Tokeninfo
+    Gogol.OAuth2.Types
+    Gogol.OAuth2.Userinfo.Get
+    Gogol.OAuth2.Userinfo.V2.Me.Get
 
   other-modules:
-    Network.Google.OAuth2.Internal.Product
-    Network.Google.OAuth2.Internal.Sum
+    Gogol.OAuth2.Internal.Product
+    Gogol.OAuth2.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

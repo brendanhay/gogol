@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OAuth2.Tokeninfo
+-- Module      : Gogol.OAuth2.Tokeninfo
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -27,7 +27,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference> for @oauth2.tokeninfo@.
-module Network.Google.OAuth2.Tokeninfo
+module Gogol.OAuth2.Tokeninfo
   ( -- * Resource
     OAuth2TokeninfoMethod,
 
@@ -37,8 +37,8 @@ module Network.Google.OAuth2.Tokeninfo
   )
 where
 
-import Network.Google.OAuth2.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.OAuth2.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @oauth2.tokeninfo@ method which the
 -- 'OAuth2Tokeninfo' request conforms to.

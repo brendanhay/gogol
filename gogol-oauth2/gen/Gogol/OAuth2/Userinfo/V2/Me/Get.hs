@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OAuth2.Userinfo.V2.Me.Get
+-- Module      : Gogol.OAuth2.Userinfo.V2.Me.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -27,7 +27,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference> for @oauth2.userinfo.v2.me.get@.
-module Network.Google.OAuth2.Userinfo.V2.Me.Get
+module Gogol.OAuth2.Userinfo.V2.Me.Get
   ( -- * Resource
     OAuth2UserinfoV2MeGetResource,
 
@@ -37,8 +37,8 @@ module Network.Google.OAuth2.Userinfo.V2.Me.Get
   )
 where
 
-import Network.Google.OAuth2.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.OAuth2.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @oauth2.userinfo.v2.me.get@ method which the
 -- 'OAuth2UserinfoV2MeGet' request conforms to.

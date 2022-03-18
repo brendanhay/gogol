@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OAuth2.Internal.Product
+-- Module      : Gogol.OAuth2.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.OAuth2.Internal.Product
+module Gogol.OAuth2.Internal.Product
   ( -- * Tokeninfo
     Tokeninfo (..),
     newTokeninfo,
@@ -36,8 +36,8 @@ module Network.Google.OAuth2.Internal.Product
   )
 where
 
-import Network.Google.OAuth2.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.OAuth2.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 --
 -- /See:/ 'newTokeninfo' smart constructor.

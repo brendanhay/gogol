@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OAuth2
+-- Module      : Gogol.OAuth2
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Obtains end-user authorization grants for use with other Google APIs.
 --
 -- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference>
-module Network.Google.OAuth2
+module Gogol.OAuth2
   ( -- * Configuration
     oAuth2Service,
 
@@ -67,7 +67,7 @@ module Network.Google.OAuth2
   )
 where
 
-import Network.Google.OAuth2.Tokeninfo
-import Network.Google.OAuth2.Types
-import Network.Google.OAuth2.Userinfo.Get
-import Network.Google.OAuth2.Userinfo.V2.Me.Get
+import Gogol.OAuth2.Tokeninfo
+import Gogol.OAuth2.Types
+import Gogol.OAuth2.Userinfo.Get
+import Gogol.OAuth2.Userinfo.V2.Me.Get
