@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,45 +31,46 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AdExperienceReport.Types
-  ( -- * Configuration
-    adExperienceReportService,
+    (
+    -- * Configuration
+      adExperienceReportService
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** PlatformSummary
-    PlatformSummary (..),
-    newPlatformSummary,
+    , PlatformSummary (..)
+    , newPlatformSummary
 
     -- ** PlatformSummary_BetterAdsStatus
-    PlatformSummary_BetterAdsStatus (..),
+    , PlatformSummary_BetterAdsStatus (..)
 
     -- ** PlatformSummary_FilterStatus
-    PlatformSummary_FilterStatus (..),
+    , PlatformSummary_FilterStatus (..)
 
     -- ** PlatformSummary_RegionItem
-    PlatformSummary_RegionItem (..),
+    , PlatformSummary_RegionItem (..)
 
     -- ** SiteSummaryResponse
-    SiteSummaryResponse (..),
-    newSiteSummaryResponse,
+    , SiteSummaryResponse (..)
+    , newSiteSummaryResponse
 
     -- ** ViolatingSitesResponse
-    ViolatingSitesResponse (..),
-    newViolatingSitesResponse,
-  )
-where
+    , ViolatingSitesResponse (..)
+    , newViolatingSitesResponse
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AdExperienceReport.Internal.Product
 import Gogol.AdExperienceReport.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Ad Experience Report API. This contains the host and root path used as a starting point for constructing service requests.
 adExperienceReportService :: Core.ServiceConfig
-adExperienceReportService =
-  Core.defaultService
-    (Core.ServiceId "adexperiencereport:v1")
-    "adexperiencereport.googleapis.com"
+adExperienceReportService
+  = Core.defaultService
+      (Core.ServiceId "adexperiencereport:v1")
+      "adexperiencereport.googleapis.com"
