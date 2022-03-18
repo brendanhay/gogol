@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,263 +31,264 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudFunctions.Types
-  ( -- * Configuration
-    cloudFunctionsService,
+    (
+    -- * Configuration
+      cloudFunctionsService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** BuildConfig
-    BuildConfig (..),
-    newBuildConfig,
+    , BuildConfig (..)
+    , newBuildConfig
 
     -- ** BuildConfig_EnvironmentVariables
-    BuildConfig_EnvironmentVariables (..),
-    newBuildConfig_EnvironmentVariables,
+    , BuildConfig_EnvironmentVariables (..)
+    , newBuildConfig_EnvironmentVariables
 
     -- ** EventFilter
-    EventFilter (..),
-    newEventFilter,
+    , EventFilter (..)
+    , newEventFilter
 
     -- ** EventTrigger
-    EventTrigger (..),
-    newEventTrigger,
+    , EventTrigger (..)
+    , newEventTrigger
 
     -- ** EventTrigger_RetryPolicy
-    EventTrigger_RetryPolicy (..),
+    , EventTrigger_RetryPolicy (..)
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** Function
-    Function (..),
-    newFunction,
+    , Function (..)
+    , newFunction
 
     -- ** Function_Environment
-    Function_Environment (..),
+    , Function_Environment (..)
 
     -- ** Function_Labels
-    Function_Labels (..),
-    newFunction_Labels,
+    , Function_Labels (..)
+    , newFunction_Labels
 
     -- ** Function_State
-    Function_State (..),
+    , Function_State (..)
 
     -- ** GenerateDownloadUrlRequest
-    GenerateDownloadUrlRequest (..),
-    newGenerateDownloadUrlRequest,
+    , GenerateDownloadUrlRequest (..)
+    , newGenerateDownloadUrlRequest
 
     -- ** GenerateDownloadUrlResponse
-    GenerateDownloadUrlResponse (..),
-    newGenerateDownloadUrlResponse,
+    , GenerateDownloadUrlResponse (..)
+    , newGenerateDownloadUrlResponse
 
     -- ** GenerateUploadUrlRequest
-    GenerateUploadUrlRequest (..),
-    newGenerateUploadUrlRequest,
+    , GenerateUploadUrlRequest (..)
+    , newGenerateUploadUrlRequest
 
     -- ** GenerateUploadUrlResponse
-    GenerateUploadUrlResponse (..),
-    newGenerateUploadUrlResponse,
+    , GenerateUploadUrlResponse (..)
+    , newGenerateUploadUrlResponse
 
     -- ** GoogleCloudFunctionsV2alphaOperationMetadata
-    GoogleCloudFunctionsV2alphaOperationMetadata (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata,
+    , GoogleCloudFunctionsV2alphaOperationMetadata (..)
+    , newGoogleCloudFunctionsV2alphaOperationMetadata
 
     -- ** GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource,
+    , GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource (..)
+    , newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
 
     -- ** GoogleCloudFunctionsV2alphaStage
-    GoogleCloudFunctionsV2alphaStage (..),
-    newGoogleCloudFunctionsV2alphaStage,
+    , GoogleCloudFunctionsV2alphaStage (..)
+    , newGoogleCloudFunctionsV2alphaStage
 
     -- ** GoogleCloudFunctionsV2alphaStage_Name
-    GoogleCloudFunctionsV2alphaStage_Name (..),
+    , GoogleCloudFunctionsV2alphaStage_Name (..)
 
     -- ** GoogleCloudFunctionsV2alphaStage_State
-    GoogleCloudFunctionsV2alphaStage_State (..),
+    , GoogleCloudFunctionsV2alphaStage_State (..)
 
     -- ** GoogleCloudFunctionsV2alphaStateMessage
-    GoogleCloudFunctionsV2alphaStateMessage (..),
-    newGoogleCloudFunctionsV2alphaStateMessage,
+    , GoogleCloudFunctionsV2alphaStateMessage (..)
+    , newGoogleCloudFunctionsV2alphaStateMessage
 
     -- ** GoogleCloudFunctionsV2alphaStateMessage_Severity
-    GoogleCloudFunctionsV2alphaStateMessage_Severity (..),
+    , GoogleCloudFunctionsV2alphaStateMessage_Severity (..)
 
     -- ** GoogleCloudFunctionsV2betaOperationMetadata
-    GoogleCloudFunctionsV2betaOperationMetadata (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata,
+    , GoogleCloudFunctionsV2betaOperationMetadata (..)
+    , newGoogleCloudFunctionsV2betaOperationMetadata
 
     -- ** GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource,
+    , GoogleCloudFunctionsV2betaOperationMetadata_RequestResource (..)
+    , newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource
 
     -- ** GoogleCloudFunctionsV2betaStage
-    GoogleCloudFunctionsV2betaStage (..),
-    newGoogleCloudFunctionsV2betaStage,
+    , GoogleCloudFunctionsV2betaStage (..)
+    , newGoogleCloudFunctionsV2betaStage
 
     -- ** GoogleCloudFunctionsV2betaStage_Name
-    GoogleCloudFunctionsV2betaStage_Name (..),
+    , GoogleCloudFunctionsV2betaStage_Name (..)
 
     -- ** GoogleCloudFunctionsV2betaStage_State
-    GoogleCloudFunctionsV2betaStage_State (..),
+    , GoogleCloudFunctionsV2betaStage_State (..)
 
     -- ** GoogleCloudFunctionsV2betaStateMessage
-    GoogleCloudFunctionsV2betaStateMessage (..),
-    newGoogleCloudFunctionsV2betaStateMessage,
+    , GoogleCloudFunctionsV2betaStateMessage (..)
+    , newGoogleCloudFunctionsV2betaStateMessage
 
     -- ** GoogleCloudFunctionsV2betaStateMessage_Severity
-    GoogleCloudFunctionsV2betaStateMessage_Severity (..),
+    , GoogleCloudFunctionsV2betaStateMessage_Severity (..)
 
     -- ** ListFunctionsResponse
-    ListFunctionsResponse (..),
-    newListFunctionsResponse,
+    , ListFunctionsResponse (..)
+    , newListFunctionsResponse
 
     -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    , ListLocationsResponse (..)
+    , newListLocationsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListRuntimesResponse
-    ListRuntimesResponse (..),
-    newListRuntimesResponse,
+    , ListRuntimesResponse (..)
+    , newListRuntimesResponse
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    , Location_Labels (..)
+    , newLocation_Labels
 
     -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    , Location_Metadata (..)
+    , newLocation_Metadata
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OperationMetadataV1
-    OperationMetadataV1 (..),
-    newOperationMetadataV1,
+    , OperationMetadataV1 (..)
+    , newOperationMetadataV1
 
     -- ** OperationMetadataV1_Request
-    OperationMetadataV1_Request (..),
-    newOperationMetadataV1_Request,
+    , OperationMetadataV1_Request (..)
+    , newOperationMetadataV1_Request
 
     -- ** OperationMetadataV1_Type
-    OperationMetadataV1_Type (..),
+    , OperationMetadataV1_Type (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** RepoSource
-    RepoSource (..),
-    newRepoSource,
+    , RepoSource (..)
+    , newRepoSource
 
     -- ** Runtime
-    Runtime (..),
-    newRuntime,
+    , Runtime (..)
+    , newRuntime
 
     -- ** Runtime_Environment
-    Runtime_Environment (..),
+    , Runtime_Environment (..)
 
     -- ** Runtime_Stage
-    Runtime_Stage (..),
+    , Runtime_Stage (..)
 
     -- ** ServiceConfig
-    ServiceConfig (..),
-    newServiceConfig,
+    , ServiceConfig (..)
+    , newServiceConfig
 
     -- ** ServiceConfig_EnvironmentVariables
-    ServiceConfig_EnvironmentVariables (..),
-    newServiceConfig_EnvironmentVariables,
+    , ServiceConfig_EnvironmentVariables (..)
+    , newServiceConfig_EnvironmentVariables
 
     -- ** ServiceConfig_IngressSettings
-    ServiceConfig_IngressSettings (..),
+    , ServiceConfig_IngressSettings (..)
 
     -- ** ServiceConfig_VpcConnectorEgressSettings
-    ServiceConfig_VpcConnectorEgressSettings (..),
+    , ServiceConfig_VpcConnectorEgressSettings (..)
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Source
-    Source (..),
-    newSource,
+    , Source (..)
+    , newSource
 
     -- ** SourceProvenance
-    SourceProvenance (..),
-    newSourceProvenance,
+    , SourceProvenance (..)
+    , newSourceProvenance
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** StorageSource
-    StorageSource (..),
-    newStorageSource,
+    , StorageSource (..)
+    , newStorageSource
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
-  )
-where
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.CloudFunctions.Internal.Product
 import Gogol.CloudFunctions.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2beta@ of the Cloud Functions API. This contains the host and root path used as a starting point for constructing service requests.
 cloudFunctionsService :: Core.ServiceConfig
-cloudFunctionsService =
-  Core.defaultService
-    (Core.ServiceId "cloudfunctions:v2beta")
-    "cloudfunctions.googleapis.com"
+cloudFunctionsService
+  = Core.defaultService
+      (Core.ServiceId "cloudfunctions:v2beta")
+      "cloudfunctions.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
