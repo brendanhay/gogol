@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayMoviesPartner
+-- Module      : Gogol.PlayMoviesPartner
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the delivery status of titles for Google Play Movies Partners.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
-module Network.Google.PlayMoviesPartner
+module Gogol.PlayMoviesPartner
   ( -- * Configuration
     playMoviesPartnerService,
 
@@ -123,10 +123,10 @@ module Network.Google.PlayMoviesPartner
   )
 where
 
-import Network.Google.PlayMoviesPartner.Accounts.Avails.Get
-import Network.Google.PlayMoviesPartner.Accounts.Avails.List
-import Network.Google.PlayMoviesPartner.Accounts.Orders.Get
-import Network.Google.PlayMoviesPartner.Accounts.Orders.List
-import Network.Google.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
-import Network.Google.PlayMoviesPartner.Accounts.StoreInfos.List
-import Network.Google.PlayMoviesPartner.Types
+import Gogol.PlayMoviesPartner.Accounts.Avails.Get
+import Gogol.PlayMoviesPartner.Accounts.Avails.List
+import Gogol.PlayMoviesPartner.Accounts.Orders.Get
+import Gogol.PlayMoviesPartner.Accounts.Orders.List
+import Gogol.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+import Gogol.PlayMoviesPartner.Accounts.StoreInfos.List
+import Gogol.PlayMoviesPartner.Types

@@ -19,37 +19,39 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayMoviesPartner.Accounts.Avails.Get
+-- Module      : Gogol.PlayMoviesPartner.Accounts.Orders.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an Avail given its avail group id and avail id.
+-- Get an Order given its id.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @playmoviespartner.accounts.avails.get@.
-module Network.Google.PlayMoviesPartner.Accounts.Avails.Get
+-- See /Authentication and Authorization rules/ and /Get methods rules/ for more information about this method.
+--
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @playmoviespartner.accounts.orders.get@.
+module Gogol.PlayMoviesPartner.Accounts.Orders.Get
   ( -- * Resource
-    PlayMoviesPartnerAccountsAvailsGetResource,
+    PlayMoviesPartnerAccountsOrdersGetResource,
 
     -- ** Constructing a Request
-    newPlayMoviesPartnerAccountsAvailsGet,
-    PlayMoviesPartnerAccountsAvailsGet,
+    newPlayMoviesPartnerAccountsOrdersGet,
+    PlayMoviesPartnerAccountsOrdersGet,
   )
 where
 
-import Network.Google.PlayMoviesPartner.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlayMoviesPartner.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @playmoviespartner.accounts.avails.get@ method which the
--- 'PlayMoviesPartnerAccountsAvailsGet' request conforms to.
-type PlayMoviesPartnerAccountsAvailsGetResource =
+-- | A resource alias for @playmoviespartner.accounts.orders.get@ method which the
+-- 'PlayMoviesPartnerAccountsOrdersGet' request conforms to.
+type PlayMoviesPartnerAccountsOrdersGetResource =
   "v1"
     Core.:> "accounts"
     Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "avails"
-    Core.:> Core.Capture "availId" Core.Text
+    Core.:> "orders"
+    Core.:> Core.Capture "orderId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "bearer_token" Core.Text
@@ -58,24 +60,26 @@ type PlayMoviesPartnerAccountsAvailsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Avail
+    Core.:> Core.Get '[Core.JSON] Order
 
--- | Get an Avail given its avail group id and avail id.
+-- | Get an Order given its id.
 --
--- /See:/ 'newPlayMoviesPartnerAccountsAvailsGet' smart constructor.
-data PlayMoviesPartnerAccountsAvailsGet = PlayMoviesPartnerAccountsAvailsGet
+-- See /Authentication and Authorization rules/ and /Get methods rules/ for more information about this method.
+--
+-- /See:/ 'newPlayMoviesPartnerAccountsOrdersGet' smart constructor.
+data PlayMoviesPartnerAccountsOrdersGet = PlayMoviesPartnerAccountsOrdersGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | REQUIRED. See /General rules/ for more information about this field.
     accountId :: Core.Text,
-    -- | REQUIRED. Avail ID.
-    availId :: Core.Text,
     -- | OAuth bearer token.
     bearerToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | REQUIRED. Order ID.
+    orderId :: Core.Text,
     -- | Pretty-print response.
     pp :: Core.Bool,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -85,21 +89,21 @@ data PlayMoviesPartnerAccountsAvailsGet = PlayMoviesPartnerAccountsAvailsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PlayMoviesPartnerAccountsAvailsGet' with the minimum fields required to make a request.
-newPlayMoviesPartnerAccountsAvailsGet ::
+-- | Creates a value of 'PlayMoviesPartnerAccountsOrdersGet' with the minimum fields required to make a request.
+newPlayMoviesPartnerAccountsOrdersGet ::
   -- |  REQUIRED. See /General rules/ for more information about this field. See 'accountId'.
   Core.Text ->
-  -- |  REQUIRED. Avail ID. See 'availId'.
+  -- |  REQUIRED. Order ID. See 'orderId'.
   Core.Text ->
-  PlayMoviesPartnerAccountsAvailsGet
-newPlayMoviesPartnerAccountsAvailsGet accountId availId =
-  PlayMoviesPartnerAccountsAvailsGet
+  PlayMoviesPartnerAccountsOrdersGet
+newPlayMoviesPartnerAccountsOrdersGet accountId orderId =
+  PlayMoviesPartnerAccountsOrdersGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       accountId = accountId,
-      availId = availId,
       bearerToken = Core.Nothing,
       callback = Core.Nothing,
+      orderId = orderId,
       pp = Core.True,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -107,16 +111,16 @@ newPlayMoviesPartnerAccountsAvailsGet accountId availId =
 
 instance
   Core.GoogleRequest
-    PlayMoviesPartnerAccountsAvailsGet
+    PlayMoviesPartnerAccountsOrdersGet
   where
-  type Rs PlayMoviesPartnerAccountsAvailsGet = Avail
+  type Rs PlayMoviesPartnerAccountsOrdersGet = Order
   type
-    Scopes PlayMoviesPartnerAccountsAvailsGet =
+    Scopes PlayMoviesPartnerAccountsOrdersGet =
       '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-  requestClient PlayMoviesPartnerAccountsAvailsGet {..} =
+  requestClient PlayMoviesPartnerAccountsOrdersGet {..} =
     go
       accountId
-      availId
+      orderId
       xgafv
       accessToken
       bearerToken
@@ -131,6 +135,6 @@ instance
         Core.buildClient
           ( Core.Proxy ::
               Core.Proxy
-                PlayMoviesPartnerAccountsAvailsGetResource
+                PlayMoviesPartnerAccountsOrdersGetResource
           )
           Core.mempty

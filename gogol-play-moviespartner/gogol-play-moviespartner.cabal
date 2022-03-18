@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.PlayMoviesPartner
-    Network.Google.PlayMoviesPartner.Accounts.Avails.Get
-    Network.Google.PlayMoviesPartner.Accounts.Avails.List
-    Network.Google.PlayMoviesPartner.Accounts.Orders.Get
-    Network.Google.PlayMoviesPartner.Accounts.Orders.List
-    Network.Google.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
-    Network.Google.PlayMoviesPartner.Accounts.StoreInfos.List
-    Network.Google.PlayMoviesPartner.Types
+    Gogol.PlayMoviesPartner
+    Gogol.PlayMoviesPartner.Accounts.Avails.Get
+    Gogol.PlayMoviesPartner.Accounts.Avails.List
+    Gogol.PlayMoviesPartner.Accounts.Orders.Get
+    Gogol.PlayMoviesPartner.Accounts.Orders.List
+    Gogol.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+    Gogol.PlayMoviesPartner.Accounts.StoreInfos.List
+    Gogol.PlayMoviesPartner.Types
 
   other-modules:
-    Network.Google.PlayMoviesPartner.Internal.Product
-    Network.Google.PlayMoviesPartner.Internal.Sum
+    Gogol.PlayMoviesPartner.Internal.Product
+    Gogol.PlayMoviesPartner.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

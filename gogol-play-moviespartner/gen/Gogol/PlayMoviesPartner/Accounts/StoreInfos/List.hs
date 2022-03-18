@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayMoviesPartner.Accounts.StoreInfos.List
+-- Module      : Gogol.PlayMoviesPartner.Accounts.StoreInfos.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -31,7 +31,7 @@
 -- See /Authentication and Authorization rules/ and /List methods rules/ for more information about this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @playmoviespartner.accounts.storeInfos.list@.
-module Network.Google.PlayMoviesPartner.Accounts.StoreInfos.List
+module Gogol.PlayMoviesPartner.Accounts.StoreInfos.List
   ( -- * Resource
     PlayMoviesPartnerAccountsStoreInfosListResource,
 
@@ -41,8 +41,8 @@ module Network.Google.PlayMoviesPartner.Accounts.StoreInfos.List
   )
 where
 
-import Network.Google.PlayMoviesPartner.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlayMoviesPartner.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.list@ method which the
 -- 'PlayMoviesPartnerAccountsStoreInfosList' request conforms to.

@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayMoviesPartner.Internal.Product
+-- Module      : Gogol.PlayMoviesPartner.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.PlayMoviesPartner.Internal.Product
+module Gogol.PlayMoviesPartner.Internal.Product
   ( -- * Avail
     Avail (..),
     newAvail,
@@ -52,8 +52,8 @@ module Network.Google.PlayMoviesPartner.Internal.Product
   )
 where
 
-import Network.Google.PlayMoviesPartner.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.PlayMoviesPartner.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | An Avail describes the Availability Window of a specific Edit in a given country, which means the period Google is allowed to sell or rent the Edit.
 --

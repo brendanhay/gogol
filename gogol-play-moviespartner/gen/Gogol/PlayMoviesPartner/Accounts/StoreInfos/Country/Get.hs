@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+-- Module      : Gogol.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -31,7 +31,7 @@
 -- See /Authentication and Authorization rules/ and /Get methods rules/ for more information about this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @playmoviespartner.accounts.storeInfos.country.get@.
-module Network.Google.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+module Gogol.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
   ( -- * Resource
     PlayMoviesPartnerAccountsStoreInfosCountryGetResource,
 
@@ -41,8 +41,8 @@ module Network.Google.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
   )
 where
 
-import Network.Google.PlayMoviesPartner.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlayMoviesPartner.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.country.get@ method which the
 -- 'PlayMoviesPartnerAccountsStoreInfosCountryGet' request conforms to.
