@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,617 +36,617 @@
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference>
 module Gogol.IAM
-  ( -- * Configuration
-    iAMService,
+    (
+    -- * Configuration
+      iAMService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** iam.iamPolicies.lintPolicy
-    IAMIamPoliciesLintPolicyResource,
-    newIAMIamPoliciesLintPolicy,
-    IAMIamPoliciesLintPolicy,
+    , IAMIamPoliciesLintPolicyResource
+    , newIAMIamPoliciesLintPolicy
+    , IAMIamPoliciesLintPolicy
 
     -- ** iam.iamPolicies.queryAuditableServices
-    IAMIamPoliciesQueryAuditableServicesResource,
-    newIAMIamPoliciesQueryAuditableServices,
-    IAMIamPoliciesQueryAuditableServices,
+    , IAMIamPoliciesQueryAuditableServicesResource
+    , newIAMIamPoliciesQueryAuditableServices
+    , IAMIamPoliciesQueryAuditableServices
 
     -- ** iam.locations.workforcePools.operations.get
-    IAMLocationsWorkforcePoolsOperationsGetResource,
-    newIAMLocationsWorkforcePoolsOperationsGet,
-    IAMLocationsWorkforcePoolsOperationsGet,
+    , IAMLocationsWorkforcePoolsOperationsGetResource
+    , newIAMLocationsWorkforcePoolsOperationsGet
+    , IAMLocationsWorkforcePoolsOperationsGet
 
     -- ** iam.locations.workforcePools.providers.keys.operations.get
-    IAMLocationsWorkforcePoolsProvidersKeysOperationsGetResource,
-    newIAMLocationsWorkforcePoolsProvidersKeysOperationsGet,
-    IAMLocationsWorkforcePoolsProvidersKeysOperationsGet,
+    , IAMLocationsWorkforcePoolsProvidersKeysOperationsGetResource
+    , newIAMLocationsWorkforcePoolsProvidersKeysOperationsGet
+    , IAMLocationsWorkforcePoolsProvidersKeysOperationsGet
 
     -- ** iam.locations.workforcePools.providers.operations.get
-    IAMLocationsWorkforcePoolsProvidersOperationsGetResource,
-    newIAMLocationsWorkforcePoolsProvidersOperationsGet,
-    IAMLocationsWorkforcePoolsProvidersOperationsGet,
+    , IAMLocationsWorkforcePoolsProvidersOperationsGetResource
+    , newIAMLocationsWorkforcePoolsProvidersOperationsGet
+    , IAMLocationsWorkforcePoolsProvidersOperationsGet
 
     -- ** iam.locations.workforcePools.subjects.operations.get
-    IAMLocationsWorkforcePoolsSubjectsOperationsGetResource,
-    newIAMLocationsWorkforcePoolsSubjectsOperationsGet,
-    IAMLocationsWorkforcePoolsSubjectsOperationsGet,
+    , IAMLocationsWorkforcePoolsSubjectsOperationsGetResource
+    , newIAMLocationsWorkforcePoolsSubjectsOperationsGet
+    , IAMLocationsWorkforcePoolsSubjectsOperationsGet
 
     -- ** iam.organizations.roles.create
-    IAMOrganizationsRolesCreateResource,
-    newIAMOrganizationsRolesCreate,
-    IAMOrganizationsRolesCreate,
+    , IAMOrganizationsRolesCreateResource
+    , newIAMOrganizationsRolesCreate
+    , IAMOrganizationsRolesCreate
 
     -- ** iam.organizations.roles.delete
-    IAMOrganizationsRolesDeleteResource,
-    newIAMOrganizationsRolesDelete,
-    IAMOrganizationsRolesDelete,
+    , IAMOrganizationsRolesDeleteResource
+    , newIAMOrganizationsRolesDelete
+    , IAMOrganizationsRolesDelete
 
     -- ** iam.organizations.roles.get
-    IAMOrganizationsRolesGetResource,
-    newIAMOrganizationsRolesGet,
-    IAMOrganizationsRolesGet,
+    , IAMOrganizationsRolesGetResource
+    , newIAMOrganizationsRolesGet
+    , IAMOrganizationsRolesGet
 
     -- ** iam.organizations.roles.list
-    IAMOrganizationsRolesListResource,
-    newIAMOrganizationsRolesList,
-    IAMOrganizationsRolesList,
+    , IAMOrganizationsRolesListResource
+    , newIAMOrganizationsRolesList
+    , IAMOrganizationsRolesList
 
     -- ** iam.organizations.roles.patch
-    IAMOrganizationsRolesPatchResource,
-    newIAMOrganizationsRolesPatch,
-    IAMOrganizationsRolesPatch,
+    , IAMOrganizationsRolesPatchResource
+    , newIAMOrganizationsRolesPatch
+    , IAMOrganizationsRolesPatch
 
     -- ** iam.organizations.roles.undelete
-    IAMOrganizationsRolesUndeleteResource,
-    newIAMOrganizationsRolesUndelete,
-    IAMOrganizationsRolesUndelete,
+    , IAMOrganizationsRolesUndeleteResource
+    , newIAMOrganizationsRolesUndelete
+    , IAMOrganizationsRolesUndelete
 
     -- ** iam.permissions.queryTestablePermissions
-    IAMPermissionsQueryTestablePermissionsResource,
-    newIAMPermissionsQueryTestablePermissions,
-    IAMPermissionsQueryTestablePermissions,
+    , IAMPermissionsQueryTestablePermissionsResource
+    , newIAMPermissionsQueryTestablePermissions
+    , IAMPermissionsQueryTestablePermissions
 
     -- ** iam.projects.locations.workloadIdentityPools.create
-    IAMProjectsLocationsWorkloadIdentityPoolsCreateResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsCreate,
-    IAMProjectsLocationsWorkloadIdentityPoolsCreate,
+    , IAMProjectsLocationsWorkloadIdentityPoolsCreateResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsCreate
+    , IAMProjectsLocationsWorkloadIdentityPoolsCreate
 
     -- ** iam.projects.locations.workloadIdentityPools.delete
-    IAMProjectsLocationsWorkloadIdentityPoolsDeleteResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsDelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsDelete,
+    , IAMProjectsLocationsWorkloadIdentityPoolsDeleteResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsDelete
+    , IAMProjectsLocationsWorkloadIdentityPoolsDelete
 
     -- ** iam.projects.locations.workloadIdentityPools.get
-    IAMProjectsLocationsWorkloadIdentityPoolsGetResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsGet,
+    , IAMProjectsLocationsWorkloadIdentityPoolsGetResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsGet
+    , IAMProjectsLocationsWorkloadIdentityPoolsGet
 
     -- ** iam.projects.locations.workloadIdentityPools.list
-    IAMProjectsLocationsWorkloadIdentityPoolsListResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsList,
-    IAMProjectsLocationsWorkloadIdentityPoolsList,
+    , IAMProjectsLocationsWorkloadIdentityPoolsListResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsList
+    , IAMProjectsLocationsWorkloadIdentityPoolsList
 
     -- ** iam.projects.locations.workloadIdentityPools.operations.get
-    IAMProjectsLocationsWorkloadIdentityPoolsOperationsGetResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsOperationsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsOperationsGet,
+    , IAMProjectsLocationsWorkloadIdentityPoolsOperationsGetResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsOperationsGet
+    , IAMProjectsLocationsWorkloadIdentityPoolsOperationsGet
 
     -- ** iam.projects.locations.workloadIdentityPools.patch
-    IAMProjectsLocationsWorkloadIdentityPoolsPatchResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsPatch,
-    IAMProjectsLocationsWorkloadIdentityPoolsPatch,
+    , IAMProjectsLocationsWorkloadIdentityPoolsPatchResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsPatch
+    , IAMProjectsLocationsWorkloadIdentityPoolsPatch
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.create
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreateResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreateResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.delete
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDeleteResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersDeleteResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.get
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersGetResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersGet,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersGetResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersGet
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersGet
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.keys.operations.get
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGetResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGetResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.list
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersListResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersList,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersList,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersListResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersList
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersList
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.operations.get
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGetResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGetResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.patch
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatchResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatchResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.undelete
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndeleteResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete,
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndeleteResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete
+    , IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete
 
     -- ** iam.projects.locations.workloadIdentityPools.undelete
-    IAMProjectsLocationsWorkloadIdentityPoolsUndeleteResource,
-    newIAMProjectsLocationsWorkloadIdentityPoolsUndelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsUndelete,
+    , IAMProjectsLocationsWorkloadIdentityPoolsUndeleteResource
+    , newIAMProjectsLocationsWorkloadIdentityPoolsUndelete
+    , IAMProjectsLocationsWorkloadIdentityPoolsUndelete
 
     -- ** iam.projects.roles.create
-    IAMProjectsRolesCreateResource,
-    newIAMProjectsRolesCreate,
-    IAMProjectsRolesCreate,
+    , IAMProjectsRolesCreateResource
+    , newIAMProjectsRolesCreate
+    , IAMProjectsRolesCreate
 
     -- ** iam.projects.roles.delete
-    IAMProjectsRolesDeleteResource,
-    newIAMProjectsRolesDelete,
-    IAMProjectsRolesDelete,
+    , IAMProjectsRolesDeleteResource
+    , newIAMProjectsRolesDelete
+    , IAMProjectsRolesDelete
 
     -- ** iam.projects.roles.get
-    IAMProjectsRolesGetResource,
-    newIAMProjectsRolesGet,
-    IAMProjectsRolesGet,
+    , IAMProjectsRolesGetResource
+    , newIAMProjectsRolesGet
+    , IAMProjectsRolesGet
 
     -- ** iam.projects.roles.list
-    IAMProjectsRolesListResource,
-    newIAMProjectsRolesList,
-    IAMProjectsRolesList,
+    , IAMProjectsRolesListResource
+    , newIAMProjectsRolesList
+    , IAMProjectsRolesList
 
     -- ** iam.projects.roles.patch
-    IAMProjectsRolesPatchResource,
-    newIAMProjectsRolesPatch,
-    IAMProjectsRolesPatch,
+    , IAMProjectsRolesPatchResource
+    , newIAMProjectsRolesPatch
+    , IAMProjectsRolesPatch
 
     -- ** iam.projects.roles.undelete
-    IAMProjectsRolesUndeleteResource,
-    newIAMProjectsRolesUndelete,
-    IAMProjectsRolesUndelete,
+    , IAMProjectsRolesUndeleteResource
+    , newIAMProjectsRolesUndelete
+    , IAMProjectsRolesUndelete
 
     -- ** iam.projects.serviceAccounts.create
-    IAMProjectsServiceAccountsCreateResource,
-    newIAMProjectsServiceAccountsCreate,
-    IAMProjectsServiceAccountsCreate,
+    , IAMProjectsServiceAccountsCreateResource
+    , newIAMProjectsServiceAccountsCreate
+    , IAMProjectsServiceAccountsCreate
 
     -- ** iam.projects.serviceAccounts.delete
-    IAMProjectsServiceAccountsDeleteResource,
-    newIAMProjectsServiceAccountsDelete,
-    IAMProjectsServiceAccountsDelete,
+    , IAMProjectsServiceAccountsDeleteResource
+    , newIAMProjectsServiceAccountsDelete
+    , IAMProjectsServiceAccountsDelete
 
     -- ** iam.projects.serviceAccounts.disable
-    IAMProjectsServiceAccountsDisableResource,
-    newIAMProjectsServiceAccountsDisable,
-    IAMProjectsServiceAccountsDisable,
+    , IAMProjectsServiceAccountsDisableResource
+    , newIAMProjectsServiceAccountsDisable
+    , IAMProjectsServiceAccountsDisable
 
     -- ** iam.projects.serviceAccounts.enable
-    IAMProjectsServiceAccountsEnableResource,
-    newIAMProjectsServiceAccountsEnable,
-    IAMProjectsServiceAccountsEnable,
+    , IAMProjectsServiceAccountsEnableResource
+    , newIAMProjectsServiceAccountsEnable
+    , IAMProjectsServiceAccountsEnable
 
     -- ** iam.projects.serviceAccounts.get
-    IAMProjectsServiceAccountsGetResource,
-    newIAMProjectsServiceAccountsGet,
-    IAMProjectsServiceAccountsGet,
+    , IAMProjectsServiceAccountsGetResource
+    , newIAMProjectsServiceAccountsGet
+    , IAMProjectsServiceAccountsGet
 
     -- ** iam.projects.serviceAccounts.getIamPolicy
-    IAMProjectsServiceAccountsGetIamPolicyResource,
-    newIAMProjectsServiceAccountsGetIamPolicy,
-    IAMProjectsServiceAccountsGetIamPolicy,
+    , IAMProjectsServiceAccountsGetIamPolicyResource
+    , newIAMProjectsServiceAccountsGetIamPolicy
+    , IAMProjectsServiceAccountsGetIamPolicy
 
     -- ** iam.projects.serviceAccounts.keys.create
-    IAMProjectsServiceAccountsKeysCreateResource,
-    newIAMProjectsServiceAccountsKeysCreate,
-    IAMProjectsServiceAccountsKeysCreate,
+    , IAMProjectsServiceAccountsKeysCreateResource
+    , newIAMProjectsServiceAccountsKeysCreate
+    , IAMProjectsServiceAccountsKeysCreate
 
     -- ** iam.projects.serviceAccounts.keys.delete
-    IAMProjectsServiceAccountsKeysDeleteResource,
-    newIAMProjectsServiceAccountsKeysDelete,
-    IAMProjectsServiceAccountsKeysDelete,
+    , IAMProjectsServiceAccountsKeysDeleteResource
+    , newIAMProjectsServiceAccountsKeysDelete
+    , IAMProjectsServiceAccountsKeysDelete
 
     -- ** iam.projects.serviceAccounts.keys.disable
-    IAMProjectsServiceAccountsKeysDisableResource,
-    newIAMProjectsServiceAccountsKeysDisable,
-    IAMProjectsServiceAccountsKeysDisable,
+    , IAMProjectsServiceAccountsKeysDisableResource
+    , newIAMProjectsServiceAccountsKeysDisable
+    , IAMProjectsServiceAccountsKeysDisable
 
     -- ** iam.projects.serviceAccounts.keys.enable
-    IAMProjectsServiceAccountsKeysEnableResource,
-    newIAMProjectsServiceAccountsKeysEnable,
-    IAMProjectsServiceAccountsKeysEnable,
+    , IAMProjectsServiceAccountsKeysEnableResource
+    , newIAMProjectsServiceAccountsKeysEnable
+    , IAMProjectsServiceAccountsKeysEnable
 
     -- ** iam.projects.serviceAccounts.keys.get
-    IAMProjectsServiceAccountsKeysGetResource,
-    newIAMProjectsServiceAccountsKeysGet,
-    IAMProjectsServiceAccountsKeysGet,
+    , IAMProjectsServiceAccountsKeysGetResource
+    , newIAMProjectsServiceAccountsKeysGet
+    , IAMProjectsServiceAccountsKeysGet
 
     -- ** iam.projects.serviceAccounts.keys.list
-    IAMProjectsServiceAccountsKeysListResource,
-    newIAMProjectsServiceAccountsKeysList,
-    IAMProjectsServiceAccountsKeysList,
+    , IAMProjectsServiceAccountsKeysListResource
+    , newIAMProjectsServiceAccountsKeysList
+    , IAMProjectsServiceAccountsKeysList
 
     -- ** iam.projects.serviceAccounts.keys.upload
-    IAMProjectsServiceAccountsKeysUploadResource,
-    newIAMProjectsServiceAccountsKeysUpload,
-    IAMProjectsServiceAccountsKeysUpload,
+    , IAMProjectsServiceAccountsKeysUploadResource
+    , newIAMProjectsServiceAccountsKeysUpload
+    , IAMProjectsServiceAccountsKeysUpload
 
     -- ** iam.projects.serviceAccounts.list
-    IAMProjectsServiceAccountsListResource,
-    newIAMProjectsServiceAccountsList,
-    IAMProjectsServiceAccountsList,
+    , IAMProjectsServiceAccountsListResource
+    , newIAMProjectsServiceAccountsList
+    , IAMProjectsServiceAccountsList
 
     -- ** iam.projects.serviceAccounts.patch
-    IAMProjectsServiceAccountsPatchResource,
-    newIAMProjectsServiceAccountsPatch,
-    IAMProjectsServiceAccountsPatch,
+    , IAMProjectsServiceAccountsPatchResource
+    , newIAMProjectsServiceAccountsPatch
+    , IAMProjectsServiceAccountsPatch
 
     -- ** iam.projects.serviceAccounts.setIamPolicy
-    IAMProjectsServiceAccountsSetIamPolicyResource,
-    newIAMProjectsServiceAccountsSetIamPolicy,
-    IAMProjectsServiceAccountsSetIamPolicy,
+    , IAMProjectsServiceAccountsSetIamPolicyResource
+    , newIAMProjectsServiceAccountsSetIamPolicy
+    , IAMProjectsServiceAccountsSetIamPolicy
 
     -- ** iam.projects.serviceAccounts.signBlob
-    IAMProjectsServiceAccountsSignBlobResource,
-    newIAMProjectsServiceAccountsSignBlob,
-    IAMProjectsServiceAccountsSignBlob,
+    , IAMProjectsServiceAccountsSignBlobResource
+    , newIAMProjectsServiceAccountsSignBlob
+    , IAMProjectsServiceAccountsSignBlob
 
     -- ** iam.projects.serviceAccounts.signJwt
-    IAMProjectsServiceAccountsSignJwtResource,
-    newIAMProjectsServiceAccountsSignJwt,
-    IAMProjectsServiceAccountsSignJwt,
+    , IAMProjectsServiceAccountsSignJwtResource
+    , newIAMProjectsServiceAccountsSignJwt
+    , IAMProjectsServiceAccountsSignJwt
 
     -- ** iam.projects.serviceAccounts.testIamPermissions
-    IAMProjectsServiceAccountsTestIamPermissionsResource,
-    newIAMProjectsServiceAccountsTestIamPermissions,
-    IAMProjectsServiceAccountsTestIamPermissions,
+    , IAMProjectsServiceAccountsTestIamPermissionsResource
+    , newIAMProjectsServiceAccountsTestIamPermissions
+    , IAMProjectsServiceAccountsTestIamPermissions
 
     -- ** iam.projects.serviceAccounts.undelete
-    IAMProjectsServiceAccountsUndeleteResource,
-    newIAMProjectsServiceAccountsUndelete,
-    IAMProjectsServiceAccountsUndelete,
+    , IAMProjectsServiceAccountsUndeleteResource
+    , newIAMProjectsServiceAccountsUndelete
+    , IAMProjectsServiceAccountsUndelete
 
     -- ** iam.projects.serviceAccounts.update
-    IAMProjectsServiceAccountsUpdateResource,
-    newIAMProjectsServiceAccountsUpdate,
-    IAMProjectsServiceAccountsUpdate,
+    , IAMProjectsServiceAccountsUpdateResource
+    , newIAMProjectsServiceAccountsUpdate
+    , IAMProjectsServiceAccountsUpdate
 
     -- ** iam.roles.get
-    IAMRolesGetResource,
-    newIAMRolesGet,
-    IAMRolesGet,
+    , IAMRolesGetResource
+    , newIAMRolesGet
+    , IAMRolesGet
 
     -- ** iam.roles.list
-    IAMRolesListResource,
-    newIAMRolesList,
-    IAMRolesList,
+    , IAMRolesListResource
+    , newIAMRolesList
+    , IAMRolesList
 
     -- ** iam.roles.queryGrantableRoles
-    IAMRolesQueryGrantableRolesResource,
-    newIAMRolesQueryGrantableRoles,
-    IAMRolesQueryGrantableRoles,
+    , IAMRolesQueryGrantableRolesResource
+    , newIAMRolesQueryGrantableRoles
+    , IAMRolesQueryGrantableRoles
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AdminAuditData
-    AdminAuditData (..),
-    newAdminAuditData,
+    , AdminAuditData (..)
+    , newAdminAuditData
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditData
-    AuditData (..),
-    newAuditData,
+    , AuditData (..)
+    , newAuditData
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** AuditableService
-    AuditableService (..),
-    newAuditableService,
+    , AuditableService (..)
+    , newAuditableService
 
     -- ** Aws
-    Aws (..),
-    newAws,
+    , Aws (..)
+    , newAws
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** BindingDelta
-    BindingDelta (..),
-    newBindingDelta,
+    , BindingDelta (..)
+    , newBindingDelta
 
     -- ** BindingDelta_Action
-    BindingDelta_Action (..),
+    , BindingDelta_Action (..)
 
     -- ** CreateRoleRequest
-    CreateRoleRequest (..),
-    newCreateRoleRequest,
+    , CreateRoleRequest (..)
+    , newCreateRoleRequest
 
     -- ** CreateServiceAccountKeyRequest
-    CreateServiceAccountKeyRequest (..),
-    newCreateServiceAccountKeyRequest,
+    , CreateServiceAccountKeyRequest (..)
+    , newCreateServiceAccountKeyRequest
 
     -- ** CreateServiceAccountKeyRequest_KeyAlgorithm
-    CreateServiceAccountKeyRequest_KeyAlgorithm (..),
+    , CreateServiceAccountKeyRequest_KeyAlgorithm (..)
 
     -- ** CreateServiceAccountKeyRequest_PrivateKeyType
-    CreateServiceAccountKeyRequest_PrivateKeyType (..),
+    , CreateServiceAccountKeyRequest_PrivateKeyType (..)
 
     -- ** CreateServiceAccountRequest
-    CreateServiceAccountRequest (..),
-    newCreateServiceAccountRequest,
+    , CreateServiceAccountRequest (..)
+    , newCreateServiceAccountRequest
 
     -- ** DisableServiceAccountKeyRequest
-    DisableServiceAccountKeyRequest (..),
-    newDisableServiceAccountKeyRequest,
+    , DisableServiceAccountKeyRequest (..)
+    , newDisableServiceAccountKeyRequest
 
     -- ** DisableServiceAccountRequest
-    DisableServiceAccountRequest (..),
-    newDisableServiceAccountRequest,
+    , DisableServiceAccountRequest (..)
+    , newDisableServiceAccountRequest
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EnableServiceAccountKeyRequest
-    EnableServiceAccountKeyRequest (..),
-    newEnableServiceAccountKeyRequest,
+    , EnableServiceAccountKeyRequest (..)
+    , newEnableServiceAccountKeyRequest
 
     -- ** EnableServiceAccountRequest
-    EnableServiceAccountRequest (..),
-    newEnableServiceAccountRequest,
+    , EnableServiceAccountRequest (..)
+    , newEnableServiceAccountRequest
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** LintPolicyRequest
-    LintPolicyRequest (..),
-    newLintPolicyRequest,
+    , LintPolicyRequest (..)
+    , newLintPolicyRequest
 
     -- ** LintPolicyResponse
-    LintPolicyResponse (..),
-    newLintPolicyResponse,
+    , LintPolicyResponse (..)
+    , newLintPolicyResponse
 
     -- ** LintResult
-    LintResult (..),
-    newLintResult,
+    , LintResult (..)
+    , newLintResult
 
     -- ** LintResult_Level
-    LintResult_Level (..),
+    , LintResult_Level (..)
 
     -- ** LintResult_Severity
-    LintResult_Severity (..),
+    , LintResult_Severity (..)
 
     -- ** ListRolesResponse
-    ListRolesResponse (..),
-    newListRolesResponse,
+    , ListRolesResponse (..)
+    , newListRolesResponse
 
     -- ** ListServiceAccountKeysResponse
-    ListServiceAccountKeysResponse (..),
-    newListServiceAccountKeysResponse,
+    , ListServiceAccountKeysResponse (..)
+    , newListServiceAccountKeysResponse
 
     -- ** ListServiceAccountsResponse
-    ListServiceAccountsResponse (..),
-    newListServiceAccountsResponse,
+    , ListServiceAccountsResponse (..)
+    , newListServiceAccountsResponse
 
     -- ** ListWorkloadIdentityPoolProvidersResponse
-    ListWorkloadIdentityPoolProvidersResponse (..),
-    newListWorkloadIdentityPoolProvidersResponse,
+    , ListWorkloadIdentityPoolProvidersResponse (..)
+    , newListWorkloadIdentityPoolProvidersResponse
 
     -- ** ListWorkloadIdentityPoolsResponse
-    ListWorkloadIdentityPoolsResponse (..),
-    newListWorkloadIdentityPoolsResponse,
+    , ListWorkloadIdentityPoolsResponse (..)
+    , newListWorkloadIdentityPoolsResponse
 
     -- ** Oidc
-    Oidc (..),
-    newOidc,
+    , Oidc (..)
+    , newOidc
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** PatchServiceAccountRequest
-    PatchServiceAccountRequest (..),
-    newPatchServiceAccountRequest,
+    , PatchServiceAccountRequest (..)
+    , newPatchServiceAccountRequest
 
     -- ** Permission
-    Permission (..),
-    newPermission,
+    , Permission (..)
+    , newPermission
 
     -- ** Permission_CustomRolesSupportLevel
-    Permission_CustomRolesSupportLevel (..),
+    , Permission_CustomRolesSupportLevel (..)
 
     -- ** Permission_Stage
-    Permission_Stage (..),
+    , Permission_Stage (..)
 
     -- ** PermissionDelta
-    PermissionDelta (..),
-    newPermissionDelta,
+    , PermissionDelta (..)
+    , newPermissionDelta
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PolicyDelta
-    PolicyDelta (..),
-    newPolicyDelta,
+    , PolicyDelta (..)
+    , newPolicyDelta
 
     -- ** QueryAuditableServicesRequest
-    QueryAuditableServicesRequest (..),
-    newQueryAuditableServicesRequest,
+    , QueryAuditableServicesRequest (..)
+    , newQueryAuditableServicesRequest
 
     -- ** QueryAuditableServicesResponse
-    QueryAuditableServicesResponse (..),
-    newQueryAuditableServicesResponse,
+    , QueryAuditableServicesResponse (..)
+    , newQueryAuditableServicesResponse
 
     -- ** QueryGrantableRolesRequest
-    QueryGrantableRolesRequest (..),
-    newQueryGrantableRolesRequest,
+    , QueryGrantableRolesRequest (..)
+    , newQueryGrantableRolesRequest
 
     -- ** QueryGrantableRolesRequest_View
-    QueryGrantableRolesRequest_View (..),
+    , QueryGrantableRolesRequest_View (..)
 
     -- ** QueryGrantableRolesResponse
-    QueryGrantableRolesResponse (..),
-    newQueryGrantableRolesResponse,
+    , QueryGrantableRolesResponse (..)
+    , newQueryGrantableRolesResponse
 
     -- ** QueryTestablePermissionsRequest
-    QueryTestablePermissionsRequest (..),
-    newQueryTestablePermissionsRequest,
+    , QueryTestablePermissionsRequest (..)
+    , newQueryTestablePermissionsRequest
 
     -- ** QueryTestablePermissionsResponse
-    QueryTestablePermissionsResponse (..),
-    newQueryTestablePermissionsResponse,
+    , QueryTestablePermissionsResponse (..)
+    , newQueryTestablePermissionsResponse
 
     -- ** Role
-    Role (..),
-    newRole,
+    , Role (..)
+    , newRole
 
     -- ** Role_Stage
-    Role_Stage (..),
+    , Role_Stage (..)
 
     -- ** ServiceAccount
-    ServiceAccount (..),
-    newServiceAccount,
+    , ServiceAccount (..)
+    , newServiceAccount
 
     -- ** ServiceAccountKey
-    ServiceAccountKey (..),
-    newServiceAccountKey,
+    , ServiceAccountKey (..)
+    , newServiceAccountKey
 
     -- ** ServiceAccountKey_KeyAlgorithm
-    ServiceAccountKey_KeyAlgorithm (..),
+    , ServiceAccountKey_KeyAlgorithm (..)
 
     -- ** ServiceAccountKey_KeyOrigin
-    ServiceAccountKey_KeyOrigin (..),
+    , ServiceAccountKey_KeyOrigin (..)
 
     -- ** ServiceAccountKey_KeyType
-    ServiceAccountKey_KeyType (..),
+    , ServiceAccountKey_KeyType (..)
 
     -- ** ServiceAccountKey_PrivateKeyType
-    ServiceAccountKey_PrivateKeyType (..),
+    , ServiceAccountKey_PrivateKeyType (..)
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** SignBlobRequest
-    SignBlobRequest (..),
-    newSignBlobRequest,
+    , SignBlobRequest (..)
+    , newSignBlobRequest
 
     -- ** SignBlobResponse
-    SignBlobResponse (..),
-    newSignBlobResponse,
+    , SignBlobResponse (..)
+    , newSignBlobResponse
 
     -- ** SignJwtRequest
-    SignJwtRequest (..),
-    newSignJwtRequest,
+    , SignJwtRequest (..)
+    , newSignJwtRequest
 
     -- ** SignJwtResponse
-    SignJwtResponse (..),
-    newSignJwtResponse,
+    , SignJwtResponse (..)
+    , newSignJwtResponse
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UndeleteRoleRequest
-    UndeleteRoleRequest (..),
-    newUndeleteRoleRequest,
+    , UndeleteRoleRequest (..)
+    , newUndeleteRoleRequest
 
     -- ** UndeleteServiceAccountRequest
-    UndeleteServiceAccountRequest (..),
-    newUndeleteServiceAccountRequest,
+    , UndeleteServiceAccountRequest (..)
+    , newUndeleteServiceAccountRequest
 
     -- ** UndeleteServiceAccountResponse
-    UndeleteServiceAccountResponse (..),
-    newUndeleteServiceAccountResponse,
+    , UndeleteServiceAccountResponse (..)
+    , newUndeleteServiceAccountResponse
 
     -- ** UndeleteWorkloadIdentityPoolProviderRequest
-    UndeleteWorkloadIdentityPoolProviderRequest (..),
-    newUndeleteWorkloadIdentityPoolProviderRequest,
+    , UndeleteWorkloadIdentityPoolProviderRequest (..)
+    , newUndeleteWorkloadIdentityPoolProviderRequest
 
     -- ** UndeleteWorkloadIdentityPoolRequest
-    UndeleteWorkloadIdentityPoolRequest (..),
-    newUndeleteWorkloadIdentityPoolRequest,
+    , UndeleteWorkloadIdentityPoolRequest (..)
+    , newUndeleteWorkloadIdentityPoolRequest
 
     -- ** UploadServiceAccountKeyRequest
-    UploadServiceAccountKeyRequest (..),
-    newUploadServiceAccountKeyRequest,
+    , UploadServiceAccountKeyRequest (..)
+    , newUploadServiceAccountKeyRequest
 
     -- ** WorkloadIdentityPool
-    WorkloadIdentityPool (..),
-    newWorkloadIdentityPool,
+    , WorkloadIdentityPool (..)
+    , newWorkloadIdentityPool
 
     -- ** WorkloadIdentityPool_State
-    WorkloadIdentityPool_State (..),
+    , WorkloadIdentityPool_State (..)
 
     -- ** WorkloadIdentityPoolProvider
-    WorkloadIdentityPoolProvider (..),
-    newWorkloadIdentityPoolProvider,
+    , WorkloadIdentityPoolProvider (..)
+    , newWorkloadIdentityPoolProvider
 
     -- ** WorkloadIdentityPoolProvider_AttributeMapping
-    WorkloadIdentityPoolProvider_AttributeMapping (..),
-    newWorkloadIdentityPoolProvider_AttributeMapping,
+    , WorkloadIdentityPoolProvider_AttributeMapping (..)
+    , newWorkloadIdentityPoolProvider_AttributeMapping
 
     -- ** WorkloadIdentityPoolProvider_State
-    WorkloadIdentityPoolProvider_State (..),
+    , WorkloadIdentityPoolProvider_State (..)
 
     -- ** OrganizationsRolesListView
-    OrganizationsRolesListView (..),
+    , OrganizationsRolesListView (..)
 
     -- ** ProjectsRolesListView
-    ProjectsRolesListView (..),
+    , ProjectsRolesListView (..)
 
     -- ** ProjectsServiceAccountsKeysGetPublicKeyType
-    ProjectsServiceAccountsKeysGetPublicKeyType (..),
+    , ProjectsServiceAccountsKeysGetPublicKeyType (..)
 
     -- ** ProjectsServiceAccountsKeysListKeyTypes
-    ProjectsServiceAccountsKeysListKeyTypes (..),
+    , ProjectsServiceAccountsKeysListKeyTypes (..)
 
     -- ** RolesListView
-    RolesListView (..),
-  )
-where
+    , RolesListView (..)
+    ) where
 
 import Gogol.IAM.IamPolicies.LintPolicy
 import Gogol.IAM.IamPolicies.QueryAuditableServices
