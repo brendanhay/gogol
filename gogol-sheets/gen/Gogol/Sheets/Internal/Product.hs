@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Internal.Product
+-- Module      : Gogol.Sheets.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Sheets.Internal.Product
+module Gogol.Sheets.Internal.Product
   ( -- * AddBandingRequest
     AddBandingRequest (..),
     newAddBandingRequest,
@@ -1020,8 +1020,8 @@ module Network.Google.Sheets.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Internal.Sum
 
 -- | Adds a new banded range to the spreadsheet.
 --

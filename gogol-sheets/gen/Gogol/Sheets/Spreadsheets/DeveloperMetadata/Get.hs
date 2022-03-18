@@ -19,62 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.Values.BatchGetByDataFilter
+-- Module      : Gogol.Sheets.Spreadsheets.DeveloperMetadata.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns one or more ranges of values that match the specified data filters. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges that match any of the data filters in the request will be returned.
+-- Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the developer metadata\'s unique metadataId.
 --
--- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.batchGetByDataFilter@.
-module Network.Google.Sheets.Spreadsheets.Values.BatchGetByDataFilter
+-- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.developerMetadata.get@.
+module Gogol.Sheets.Spreadsheets.DeveloperMetadata.Get
   ( -- * Resource
-    SheetsSpreadsheetsValuesBatchGetByDataFilterResource,
+    SheetsSpreadsheetsDeveloperMetadataGetResource,
 
     -- ** Constructing a Request
-    newSheetsSpreadsheetsValuesBatchGetByDataFilter,
-    SheetsSpreadsheetsValuesBatchGetByDataFilter,
+    newSheetsSpreadsheetsDeveloperMetadataGet,
+    SheetsSpreadsheetsDeveloperMetadataGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
--- | A resource alias for @sheets.spreadsheets.values.batchGetByDataFilter@ method which the
--- 'SheetsSpreadsheetsValuesBatchGetByDataFilter' request conforms to.
-type SheetsSpreadsheetsValuesBatchGetByDataFilterResource =
+-- | A resource alias for @sheets.spreadsheets.developerMetadata.get@ method which the
+-- 'SheetsSpreadsheetsDeveloperMetadataGet' request conforms to.
+type SheetsSpreadsheetsDeveloperMetadataGetResource =
   "v4"
     Core.:> "spreadsheets"
     Core.:> Core.Capture "spreadsheetId" Core.Text
-    Core.:> "values:batchGetByDataFilter"
+    Core.:> "developerMetadata"
+    Core.:> Core.Capture "metadataId" Core.Int32
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchGetValuesByDataFilterRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              BatchGetValuesByDataFilterResponse
+    Core.:> Core.Get '[Core.JSON] DeveloperMetadata
 
--- | Returns one or more ranges of values that match the specified data filters. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges that match any of the data filters in the request will be returned.
+-- | Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the developer metadata\'s unique metadataId.
 --
--- /See:/ 'newSheetsSpreadsheetsValuesBatchGetByDataFilter' smart constructor.
-data SheetsSpreadsheetsValuesBatchGetByDataFilter = SheetsSpreadsheetsValuesBatchGetByDataFilter
+-- /See:/ 'newSheetsSpreadsheetsDeveloperMetadataGet' smart constructor.
+data SheetsSpreadsheetsDeveloperMetadataGet = SheetsSpreadsheetsDeveloperMetadataGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: BatchGetValuesByDataFilterRequest,
-    -- | The ID of the spreadsheet to retrieve data from.
+    -- | The ID of the developer metadata to retrieve.
+    metadataId :: Core.Int32,
+    -- | The ID of the spreadsheet to retrieve metadata from.
     spreadsheetId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,19 +79,19 @@ data SheetsSpreadsheetsValuesBatchGetByDataFilter = SheetsSpreadsheetsValuesBatc
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SheetsSpreadsheetsValuesBatchGetByDataFilter' with the minimum fields required to make a request.
-newSheetsSpreadsheetsValuesBatchGetByDataFilter ::
-  -- |  Multipart request metadata. See 'payload'.
-  BatchGetValuesByDataFilterRequest ->
-  -- |  The ID of the spreadsheet to retrieve data from. See 'spreadsheetId'.
+-- | Creates a value of 'SheetsSpreadsheetsDeveloperMetadataGet' with the minimum fields required to make a request.
+newSheetsSpreadsheetsDeveloperMetadataGet ::
+  -- |  The ID of the developer metadata to retrieve. See 'metadataId'.
+  Core.Int32 ->
+  -- |  The ID of the spreadsheet to retrieve metadata from. See 'spreadsheetId'.
   Core.Text ->
-  SheetsSpreadsheetsValuesBatchGetByDataFilter
-newSheetsSpreadsheetsValuesBatchGetByDataFilter payload spreadsheetId =
-  SheetsSpreadsheetsValuesBatchGetByDataFilter
+  SheetsSpreadsheetsDeveloperMetadataGet
+newSheetsSpreadsheetsDeveloperMetadataGet metadataId spreadsheetId =
+  SheetsSpreadsheetsDeveloperMetadataGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      metadataId = metadataId,
       spreadsheetId = spreadsheetId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -103,35 +99,34 @@ newSheetsSpreadsheetsValuesBatchGetByDataFilter payload spreadsheetId =
 
 instance
   Core.GoogleRequest
-    SheetsSpreadsheetsValuesBatchGetByDataFilter
+    SheetsSpreadsheetsDeveloperMetadataGet
   where
   type
-    Rs SheetsSpreadsheetsValuesBatchGetByDataFilter =
-      BatchGetValuesByDataFilterResponse
+    Rs SheetsSpreadsheetsDeveloperMetadataGet =
+      DeveloperMetadata
   type
-    Scopes
-      SheetsSpreadsheetsValuesBatchGetByDataFilter =
+    Scopes SheetsSpreadsheetsDeveloperMetadataGet =
       '[ "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/spreadsheets"
        ]
   requestClient
-    SheetsSpreadsheetsValuesBatchGetByDataFilter {..} =
+    SheetsSpreadsheetsDeveloperMetadataGet {..} =
       go
         spreadsheetId
+        metadataId
         xgafv
         accessToken
         callback
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         sheetsService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  SheetsSpreadsheetsValuesBatchGetByDataFilterResource
+                  SheetsSpreadsheetsDeveloperMetadataGetResource
             )
             Core.mempty

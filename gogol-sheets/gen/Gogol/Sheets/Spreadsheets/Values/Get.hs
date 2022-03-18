@@ -19,58 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.Values.BatchGet
+-- Module      : Gogol.Sheets.Spreadsheets.Values.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges.
+-- Returns a range of values from a spreadsheet. The caller must specify the spreadsheet ID and a range.
 --
--- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.batchGet@.
-module Network.Google.Sheets.Spreadsheets.Values.BatchGet
+-- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.get@.
+module Gogol.Sheets.Spreadsheets.Values.Get
   ( -- * Resource
-    SheetsSpreadsheetsValuesBatchGetResource,
+    SheetsSpreadsheetsValuesGetResource,
 
     -- ** Constructing a Request
-    newSheetsSpreadsheetsValuesBatchGet,
-    SheetsSpreadsheetsValuesBatchGet,
+    newSheetsSpreadsheetsValuesGet,
+    SheetsSpreadsheetsValuesGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
--- | A resource alias for @sheets.spreadsheets.values.batchGet@ method which the
--- 'SheetsSpreadsheetsValuesBatchGet' request conforms to.
-type SheetsSpreadsheetsValuesBatchGetResource =
+-- | A resource alias for @sheets.spreadsheets.values.get@ method which the
+-- 'SheetsSpreadsheetsValuesGet' request conforms to.
+type SheetsSpreadsheetsValuesGetResource =
   "v4"
     Core.:> "spreadsheets"
     Core.:> Core.Capture "spreadsheetId" Core.Text
-    Core.:> "values:batchGet"
+    Core.:> "values"
+    Core.:> Core.Capture "range" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam
               "dateTimeRenderOption"
-              SpreadsheetsValuesBatchGetDateTimeRenderOption
+              SpreadsheetsValuesGetDateTimeRenderOption
     Core.:> Core.QueryParam
               "majorDimension"
-              SpreadsheetsValuesBatchGetMajorDimension
-    Core.:> Core.QueryParams "ranges" Core.Text
+              SpreadsheetsValuesGetMajorDimension
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam
               "valueRenderOption"
-              SpreadsheetsValuesBatchGetValueRenderOption
+              SpreadsheetsValuesGetValueRenderOption
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] BatchGetValuesResponse
+    Core.:> Core.Get '[Core.JSON] ValueRange
 
--- | Returns one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges.
+-- | Returns a range of values from a spreadsheet. The caller must specify the spreadsheet ID and a range.
 --
--- /See:/ 'newSheetsSpreadsheetsValuesBatchGet' smart constructor.
-data SheetsSpreadsheetsValuesBatchGet = SheetsSpreadsheetsValuesBatchGet
+-- /See:/ 'newSheetsSpreadsheetsValuesGet' smart constructor.
+data SheetsSpreadsheetsValuesGet = SheetsSpreadsheetsValuesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -78,35 +78,37 @@ data SheetsSpreadsheetsValuesBatchGet = SheetsSpreadsheetsValuesBatchGet
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | How dates, times, and durations should be represented in the output. This is ignored if value/render/option is FORMATTED/VALUE. The default dateTime render option is SERIAL/NUMBER.
-    dateTimeRenderOption :: (Core.Maybe SpreadsheetsValuesBatchGetDateTimeRenderOption),
-    -- | The major dimension that results should use. For example, if the spreadsheet data is: @A1=1,B1=2,A2=3,B2=4@, then requesting @ranges=[\"A1:B2\"],majorDimension=ROWS@ returns @[[1,2],[3,4]]@, whereas requesting @ranges=[\"A1:B2\"],majorDimension=COLUMNS@ returns @[[1,3],[2,4]]@.
-    majorDimension :: (Core.Maybe SpreadsheetsValuesBatchGetMajorDimension),
+    dateTimeRenderOption :: (Core.Maybe SpreadsheetsValuesGetDateTimeRenderOption),
+    -- | The major dimension that results should use. For example, if the spreadsheet data is: @A1=1,B1=2,A2=3,B2=4@, then requesting @range=A1:B2,majorDimension=ROWS@ returns @[[1,2],[3,4]]@, whereas requesting @range=A1:B2,majorDimension=COLUMNS@ returns @[[1,3],[2,4]]@.
+    majorDimension :: (Core.Maybe SpreadsheetsValuesGetMajorDimension),
     -- | The </sheets/api/guides/concepts#cell A1 notation or R1C1 notation> of the range to retrieve values from.
-    ranges :: (Core.Maybe [Core.Text]),
+    range :: Core.Text,
     -- | The ID of the spreadsheet to retrieve data from.
     spreadsheetId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | How values should be represented in the output. The default render option is ValueRenderOption.FORMATTED_VALUE.
-    valueRenderOption :: (Core.Maybe SpreadsheetsValuesBatchGetValueRenderOption)
+    -- | How values should be represented in the output. The default render option is FORMATTED_VALUE.
+    valueRenderOption :: (Core.Maybe SpreadsheetsValuesGetValueRenderOption)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SheetsSpreadsheetsValuesBatchGet' with the minimum fields required to make a request.
-newSheetsSpreadsheetsValuesBatchGet ::
+-- | Creates a value of 'SheetsSpreadsheetsValuesGet' with the minimum fields required to make a request.
+newSheetsSpreadsheetsValuesGet ::
+  -- |  The </sheets/api/guides/concepts#cell A1 notation or R1C1 notation> of the range to retrieve values from. See 'range'.
+  Core.Text ->
   -- |  The ID of the spreadsheet to retrieve data from. See 'spreadsheetId'.
   Core.Text ->
-  SheetsSpreadsheetsValuesBatchGet
-newSheetsSpreadsheetsValuesBatchGet spreadsheetId =
-  SheetsSpreadsheetsValuesBatchGet
+  SheetsSpreadsheetsValuesGet
+newSheetsSpreadsheetsValuesGet range spreadsheetId =
+  SheetsSpreadsheetsValuesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       dateTimeRenderOption = Core.Nothing,
       majorDimension = Core.Nothing,
-      ranges = Core.Nothing,
+      range = range,
       spreadsheetId = spreadsheetId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
@@ -115,28 +117,26 @@ newSheetsSpreadsheetsValuesBatchGet spreadsheetId =
 
 instance
   Core.GoogleRequest
-    SheetsSpreadsheetsValuesBatchGet
+    SheetsSpreadsheetsValuesGet
   where
+  type Rs SheetsSpreadsheetsValuesGet = ValueRange
   type
-    Rs SheetsSpreadsheetsValuesBatchGet =
-      BatchGetValuesResponse
-  type
-    Scopes SheetsSpreadsheetsValuesBatchGet =
+    Scopes SheetsSpreadsheetsValuesGet =
       '[ "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/drive.readonly",
          "https://www.googleapis.com/auth/spreadsheets",
          "https://www.googleapis.com/auth/spreadsheets.readonly"
        ]
-  requestClient SheetsSpreadsheetsValuesBatchGet {..} =
+  requestClient SheetsSpreadsheetsValuesGet {..} =
     go
       spreadsheetId
+      range
       xgafv
       accessToken
       callback
       dateTimeRenderOption
       majorDimension
-      (ranges Core.^. Core._Default)
       uploadType
       uploadProtocol
       valueRenderOption
@@ -146,6 +146,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SheetsSpreadsheetsValuesBatchGetResource
+              Core.Proxy SheetsSpreadsheetsValuesGetResource
           )
           Core.mempty

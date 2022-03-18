@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.Get
+-- Module      : Gogol.Sheets.Spreadsheets.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids will not be returned. You can include grid data one of two ways: * Specify a field mask listing your desired fields using the @fields@ URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the @includeGridData@ parameter is ignored For large spreadsheets, it is recommended to retrieve only the specific fields of the spreadsheet that you want. To retrieve only subsets of the spreadsheet, use the ranges URL parameter. Multiple ranges can be specified. Limiting the range will return only the portions of the spreadsheet that intersect the requested ranges. Ranges are specified using A1 notation.
 --
 -- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.get@.
-module Network.Google.Sheets.Spreadsheets.Get
+module Gogol.Sheets.Spreadsheets.Get
   ( -- * Resource
     SheetsSpreadsheetsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Sheets.Spreadsheets.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.get@ method which the
 -- 'SheetsSpreadsheetsGet' request conforms to.

@@ -19,57 +19,61 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Get
+-- Module      : Gogol.Sheets.Spreadsheets.DeveloperMetadata.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the developer metadata\'s unique metadataId.
+-- Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a DeveloperMetadataLookup object, this will return all DeveloperMetadata entries selected by it. If the DataFilter represents a location in a spreadsheet, this will return all developer metadata associated with locations intersecting that region.
 --
--- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.developerMetadata.get@.
-module Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Get
+-- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.developerMetadata.search@.
+module Gogol.Sheets.Spreadsheets.DeveloperMetadata.Search
   ( -- * Resource
-    SheetsSpreadsheetsDeveloperMetadataGetResource,
+    SheetsSpreadsheetsDeveloperMetadataSearchResource,
 
     -- ** Constructing a Request
-    newSheetsSpreadsheetsDeveloperMetadataGet,
-    SheetsSpreadsheetsDeveloperMetadataGet,
+    newSheetsSpreadsheetsDeveloperMetadataSearch,
+    SheetsSpreadsheetsDeveloperMetadataSearch,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
--- | A resource alias for @sheets.spreadsheets.developerMetadata.get@ method which the
--- 'SheetsSpreadsheetsDeveloperMetadataGet' request conforms to.
-type SheetsSpreadsheetsDeveloperMetadataGetResource =
+-- | A resource alias for @sheets.spreadsheets.developerMetadata.search@ method which the
+-- 'SheetsSpreadsheetsDeveloperMetadataSearch' request conforms to.
+type SheetsSpreadsheetsDeveloperMetadataSearchResource =
   "v4"
     Core.:> "spreadsheets"
     Core.:> Core.Capture "spreadsheetId" Core.Text
-    Core.:> "developerMetadata"
-    Core.:> Core.Capture "metadataId" Core.Int32
+    Core.:> "developerMetadata:search"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] DeveloperMetadata
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              SearchDeveloperMetadataRequest
+    Core.:> Core.Post
+              '[Core.JSON]
+              SearchDeveloperMetadataResponse
 
--- | Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the developer metadata\'s unique metadataId.
+-- | Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a DeveloperMetadataLookup object, this will return all DeveloperMetadata entries selected by it. If the DataFilter represents a location in a spreadsheet, this will return all developer metadata associated with locations intersecting that region.
 --
--- /See:/ 'newSheetsSpreadsheetsDeveloperMetadataGet' smart constructor.
-data SheetsSpreadsheetsDeveloperMetadataGet = SheetsSpreadsheetsDeveloperMetadataGet
+-- /See:/ 'newSheetsSpreadsheetsDeveloperMetadataSearch' smart constructor.
+data SheetsSpreadsheetsDeveloperMetadataSearch = SheetsSpreadsheetsDeveloperMetadataSearch
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the developer metadata to retrieve.
-    metadataId :: Core.Int32,
+    -- | Multipart request metadata.
+    payload :: SearchDeveloperMetadataRequest,
     -- | The ID of the spreadsheet to retrieve metadata from.
     spreadsheetId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -79,19 +83,19 @@ data SheetsSpreadsheetsDeveloperMetadataGet = SheetsSpreadsheetsDeveloperMetadat
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SheetsSpreadsheetsDeveloperMetadataGet' with the minimum fields required to make a request.
-newSheetsSpreadsheetsDeveloperMetadataGet ::
-  -- |  The ID of the developer metadata to retrieve. See 'metadataId'.
-  Core.Int32 ->
+-- | Creates a value of 'SheetsSpreadsheetsDeveloperMetadataSearch' with the minimum fields required to make a request.
+newSheetsSpreadsheetsDeveloperMetadataSearch ::
+  -- |  Multipart request metadata. See 'payload'.
+  SearchDeveloperMetadataRequest ->
   -- |  The ID of the spreadsheet to retrieve metadata from. See 'spreadsheetId'.
   Core.Text ->
-  SheetsSpreadsheetsDeveloperMetadataGet
-newSheetsSpreadsheetsDeveloperMetadataGet metadataId spreadsheetId =
-  SheetsSpreadsheetsDeveloperMetadataGet
+  SheetsSpreadsheetsDeveloperMetadataSearch
+newSheetsSpreadsheetsDeveloperMetadataSearch payload spreadsheetId =
+  SheetsSpreadsheetsDeveloperMetadataSearch
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      metadataId = metadataId,
+      payload = payload,
       spreadsheetId = spreadsheetId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -99,34 +103,34 @@ newSheetsSpreadsheetsDeveloperMetadataGet metadataId spreadsheetId =
 
 instance
   Core.GoogleRequest
-    SheetsSpreadsheetsDeveloperMetadataGet
+    SheetsSpreadsheetsDeveloperMetadataSearch
   where
   type
-    Rs SheetsSpreadsheetsDeveloperMetadataGet =
-      DeveloperMetadata
+    Rs SheetsSpreadsheetsDeveloperMetadataSearch =
+      SearchDeveloperMetadataResponse
   type
-    Scopes SheetsSpreadsheetsDeveloperMetadataGet =
+    Scopes SheetsSpreadsheetsDeveloperMetadataSearch =
       '[ "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/spreadsheets"
        ]
   requestClient
-    SheetsSpreadsheetsDeveloperMetadataGet {..} =
+    SheetsSpreadsheetsDeveloperMetadataSearch {..} =
       go
         spreadsheetId
-        metadataId
         xgafv
         accessToken
         callback
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         sheetsService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  SheetsSpreadsheetsDeveloperMetadataGetResource
+                  SheetsSpreadsheetsDeveloperMetadataSearchResource
             )
             Core.mempty

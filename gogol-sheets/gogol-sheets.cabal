@@ -39,34 +39,35 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Sheets
-    Network.Google.Sheets.Spreadsheets.BatchUpdate
-    Network.Google.Sheets.Spreadsheets.Create
-    Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Get
-    Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Search
-    Network.Google.Sheets.Spreadsheets.Get
-    Network.Google.Sheets.Spreadsheets.GetByDataFilter
-    Network.Google.Sheets.Spreadsheets.Sheets.CopyTo
-    Network.Google.Sheets.Spreadsheets.Values.Append
-    Network.Google.Sheets.Spreadsheets.Values.BatchClear
-    Network.Google.Sheets.Spreadsheets.Values.BatchClearByDataFilter
-    Network.Google.Sheets.Spreadsheets.Values.BatchGet
-    Network.Google.Sheets.Spreadsheets.Values.BatchGetByDataFilter
-    Network.Google.Sheets.Spreadsheets.Values.BatchUpdate
-    Network.Google.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
-    Network.Google.Sheets.Spreadsheets.Values.Clear
-    Network.Google.Sheets.Spreadsheets.Values.Get
-    Network.Google.Sheets.Spreadsheets.Values.Update
-    Network.Google.Sheets.Types
+    Gogol.Sheets
+    Gogol.Sheets.Spreadsheets.BatchUpdate
+    Gogol.Sheets.Spreadsheets.Create
+    Gogol.Sheets.Spreadsheets.DeveloperMetadata.Get
+    Gogol.Sheets.Spreadsheets.DeveloperMetadata.Search
+    Gogol.Sheets.Spreadsheets.Get
+    Gogol.Sheets.Spreadsheets.GetByDataFilter
+    Gogol.Sheets.Spreadsheets.Sheets.CopyTo
+    Gogol.Sheets.Spreadsheets.Values.Append
+    Gogol.Sheets.Spreadsheets.Values.BatchClear
+    Gogol.Sheets.Spreadsheets.Values.BatchClearByDataFilter
+    Gogol.Sheets.Spreadsheets.Values.BatchGet
+    Gogol.Sheets.Spreadsheets.Values.BatchGetByDataFilter
+    Gogol.Sheets.Spreadsheets.Values.BatchUpdate
+    Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
+    Gogol.Sheets.Spreadsheets.Values.Clear
+    Gogol.Sheets.Spreadsheets.Values.Get
+    Gogol.Sheets.Spreadsheets.Values.Update
+    Gogol.Sheets.Types
 
   other-modules:
-    Network.Google.Sheets.Internal.Product
-    Network.Google.Sheets.Internal.Sum
+    Gogol.Sheets.Internal.Product
+    Gogol.Sheets.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
