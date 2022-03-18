@@ -39,28 +39,29 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.FirebaseRules
-    Network.Google.FirebaseRules.Projects.Releases.Create
-    Network.Google.FirebaseRules.Projects.Releases.Delete
-    Network.Google.FirebaseRules.Projects.Releases.Get
-    Network.Google.FirebaseRules.Projects.Releases.GetExecutable
-    Network.Google.FirebaseRules.Projects.Releases.List
-    Network.Google.FirebaseRules.Projects.Releases.Patch
-    Network.Google.FirebaseRules.Projects.Rulesets.Create
-    Network.Google.FirebaseRules.Projects.Rulesets.Delete
-    Network.Google.FirebaseRules.Projects.Rulesets.Get
-    Network.Google.FirebaseRules.Projects.Rulesets.List
-    Network.Google.FirebaseRules.Projects.Test
-    Network.Google.FirebaseRules.Types
+    Gogol.FirebaseRules
+    Gogol.FirebaseRules.Projects.Releases.Create
+    Gogol.FirebaseRules.Projects.Releases.Delete
+    Gogol.FirebaseRules.Projects.Releases.Get
+    Gogol.FirebaseRules.Projects.Releases.GetExecutable
+    Gogol.FirebaseRules.Projects.Releases.List
+    Gogol.FirebaseRules.Projects.Releases.Patch
+    Gogol.FirebaseRules.Projects.Rulesets.Create
+    Gogol.FirebaseRules.Projects.Rulesets.Delete
+    Gogol.FirebaseRules.Projects.Rulesets.Get
+    Gogol.FirebaseRules.Projects.Rulesets.List
+    Gogol.FirebaseRules.Projects.Test
+    Gogol.FirebaseRules.Types
 
   other-modules:
-    Network.Google.FirebaseRules.Internal.Product
-    Network.Google.FirebaseRules.Internal.Sum
+    Gogol.FirebaseRules.Internal.Product
+    Gogol.FirebaseRules.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

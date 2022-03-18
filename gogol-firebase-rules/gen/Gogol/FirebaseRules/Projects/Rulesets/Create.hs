@@ -19,54 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules.Projects.Releases.Delete
+-- Module      : Gogol.FirebaseRules.Projects.Rulesets.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete a @Release@ by resource name.
+-- Create a @Ruleset@ from @Source@. The @Ruleset@ is given a unique generated name which is returned to the caller. @Source@ containing syntactic or semantics errors will result in an error response indicating the first error encountered. For a detailed view of @Source@ issues, use TestRuleset.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.delete@.
-module Network.Google.FirebaseRules.Projects.Releases.Delete
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.rulesets.create@.
+module Gogol.FirebaseRules.Projects.Rulesets.Create
   ( -- * Resource
-    FirebaseRulesProjectsReleasesDeleteResource,
+    FirebaseRulesProjectsRulesetsCreateResource,
 
     -- ** Constructing a Request
-    newFirebaseRulesProjectsReleasesDelete,
-    FirebaseRulesProjectsReleasesDelete,
+    newFirebaseRulesProjectsRulesetsCreate,
+    FirebaseRulesProjectsRulesetsCreate,
   )
 where
 
-import Network.Google.FirebaseRules.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRules.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @firebaserules.projects.releases.delete@ method which the
--- 'FirebaseRulesProjectsReleasesDelete' request conforms to.
-type FirebaseRulesProjectsReleasesDeleteResource =
+-- | A resource alias for @firebaserules.projects.rulesets.create@ method which the
+-- 'FirebaseRulesProjectsRulesetsCreate' request conforms to.
+type FirebaseRulesProjectsRulesetsCreateResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
+    Core.:> "rulesets"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.ReqBody '[Core.JSON] Ruleset
+    Core.:> Core.Post '[Core.JSON] Ruleset
 
--- | Delete a @Release@ by resource name.
+-- | Create a @Ruleset@ from @Source@. The @Ruleset@ is given a unique generated name which is returned to the caller. @Source@ containing syntactic or semantics errors will result in an error response indicating the first error encountered. For a detailed view of @Source@ issues, use TestRuleset.
 --
--- /See:/ 'newFirebaseRulesProjectsReleasesDelete' smart constructor.
-data FirebaseRulesProjectsReleasesDelete = FirebaseRulesProjectsReleasesDelete
+-- /See:/ 'newFirebaseRulesProjectsRulesetsCreate' smart constructor.
+data FirebaseRulesProjectsRulesetsCreate = FirebaseRulesProjectsRulesetsCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the @Release@ to delete. Format: @projects\/{project_id}\/releases\/{release_id}@
+    -- | Required. Resource name for Project which owns this @Ruleset@. Format: @projects\/{project_id}@
     name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: Ruleset,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,32 +78,35 @@ data FirebaseRulesProjectsReleasesDelete = FirebaseRulesProjectsReleasesDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FirebaseRulesProjectsReleasesDelete' with the minimum fields required to make a request.
-newFirebaseRulesProjectsReleasesDelete ::
-  -- |  Required. Resource name for the @Release@ to delete. Format: @projects\/{project_id}\/releases\/{release_id}@ See 'name'.
+-- | Creates a value of 'FirebaseRulesProjectsRulesetsCreate' with the minimum fields required to make a request.
+newFirebaseRulesProjectsRulesetsCreate ::
+  -- |  Required. Resource name for Project which owns this @Ruleset@. Format: @projects\/{project_id}@ See 'name'.
   Core.Text ->
-  FirebaseRulesProjectsReleasesDelete
-newFirebaseRulesProjectsReleasesDelete name =
-  FirebaseRulesProjectsReleasesDelete
+  -- |  Multipart request metadata. See 'payload'.
+  Ruleset ->
+  FirebaseRulesProjectsRulesetsCreate
+newFirebaseRulesProjectsRulesetsCreate name payload =
+  FirebaseRulesProjectsRulesetsCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    FirebaseRulesProjectsReleasesDelete
+    FirebaseRulesProjectsRulesetsCreate
   where
-  type Rs FirebaseRulesProjectsReleasesDelete = Empty
+  type Rs FirebaseRulesProjectsRulesetsCreate = Ruleset
   type
-    Scopes FirebaseRulesProjectsReleasesDelete =
+    Scopes FirebaseRulesProjectsRulesetsCreate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/firebase"
        ]
-  requestClient FirebaseRulesProjectsReleasesDelete {..} =
+  requestClient FirebaseRulesProjectsRulesetsCreate {..} =
     go
       name
       xgafv
@@ -108,12 +115,13 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       firebaseRulesService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
               Core.Proxy
-                FirebaseRulesProjectsReleasesDeleteResource
+                FirebaseRulesProjectsRulesetsCreateResource
           )
           Core.mempty

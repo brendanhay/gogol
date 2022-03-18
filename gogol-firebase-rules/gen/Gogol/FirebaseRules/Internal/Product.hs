@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules.Internal.Product
+-- Module      : Gogol.FirebaseRules.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FirebaseRules.Internal.Product
+module Gogol.FirebaseRules.Internal.Product
   ( -- * Arg
     Arg (..),
     newArg,
@@ -124,8 +124,8 @@ module Network.Google.FirebaseRules.Internal.Product
   )
 where
 
-import Network.Google.FirebaseRules.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRules.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Arg matchers for the mock function.
 --

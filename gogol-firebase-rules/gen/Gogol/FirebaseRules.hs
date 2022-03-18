@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules
+-- Module      : Gogol.FirebaseRules
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates and manages rules that determine when a Firebase Rules-enabled service should permit a request.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference>
-module Network.Google.FirebaseRules
+module Gogol.FirebaseRules
   ( -- * Configuration
     firebaseRulesService,
 
@@ -222,15 +222,15 @@ module Network.Google.FirebaseRules
   )
 where
 
-import Network.Google.FirebaseRules.Projects.Releases.Create
-import Network.Google.FirebaseRules.Projects.Releases.Delete
-import Network.Google.FirebaseRules.Projects.Releases.Get
-import Network.Google.FirebaseRules.Projects.Releases.GetExecutable
-import Network.Google.FirebaseRules.Projects.Releases.List
-import Network.Google.FirebaseRules.Projects.Releases.Patch
-import Network.Google.FirebaseRules.Projects.Rulesets.Create
-import Network.Google.FirebaseRules.Projects.Rulesets.Delete
-import Network.Google.FirebaseRules.Projects.Rulesets.Get
-import Network.Google.FirebaseRules.Projects.Rulesets.List
-import Network.Google.FirebaseRules.Projects.Test
-import Network.Google.FirebaseRules.Types
+import Gogol.FirebaseRules.Projects.Releases.Create
+import Gogol.FirebaseRules.Projects.Releases.Delete
+import Gogol.FirebaseRules.Projects.Releases.Get
+import Gogol.FirebaseRules.Projects.Releases.GetExecutable
+import Gogol.FirebaseRules.Projects.Releases.List
+import Gogol.FirebaseRules.Projects.Releases.Patch
+import Gogol.FirebaseRules.Projects.Rulesets.Create
+import Gogol.FirebaseRules.Projects.Rulesets.Delete
+import Gogol.FirebaseRules.Projects.Rulesets.Get
+import Gogol.FirebaseRules.Projects.Rulesets.List
+import Gogol.FirebaseRules.Projects.Test
+import Gogol.FirebaseRules.Types

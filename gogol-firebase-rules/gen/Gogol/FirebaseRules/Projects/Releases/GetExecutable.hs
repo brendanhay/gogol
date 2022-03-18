@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRules.Projects.Releases.GetExecutable
+-- Module      : Gogol.FirebaseRules.Projects.Releases.GetExecutable
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get the @Release@ executable to use when enforcing rules.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.getExecutable@.
-module Network.Google.FirebaseRules.Projects.Releases.GetExecutable
+module Gogol.FirebaseRules.Projects.Releases.GetExecutable
   ( -- * Resource
     FirebaseRulesProjectsReleasesGetExecutableResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FirebaseRules.Projects.Releases.GetExecutable
   )
 where
 
-import Network.Google.FirebaseRules.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRules.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebaserules.projects.releases.getExecutable@ method which the
 -- 'FirebaseRulesProjectsReleasesGetExecutable' request conforms to.
