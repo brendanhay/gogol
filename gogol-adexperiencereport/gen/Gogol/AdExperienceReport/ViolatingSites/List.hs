@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AdExperienceReport.ViolatingSites.List
+-- Module      : Gogol.AdExperienceReport.ViolatingSites.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists sites that are failing in the Ad Experience Report on at least one platform.
 --
 -- /See:/ <https://developers.google.com/ad-experience-report/ Ad Experience Report API Reference> for @adexperiencereport.violatingSites.list@.
-module Network.Google.AdExperienceReport.ViolatingSites.List
+module Gogol.AdExperienceReport.ViolatingSites.List
   ( -- * Resource
     AdExperienceReportViolatingSitesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AdExperienceReport.ViolatingSites.List
   )
 where
 
-import Network.Google.AdExperienceReport.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AdExperienceReport.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @adexperiencereport.violatingSites.list@ method which the
 -- 'AdExperienceReportViolatingSitesList' request conforms to.

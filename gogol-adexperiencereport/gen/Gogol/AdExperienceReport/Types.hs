@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AdExperienceReport.Types
+-- Module      : Gogol.AdExperienceReport.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AdExperienceReport.Types
+module Gogol.AdExperienceReport.Types
   ( -- * Configuration
     adExperienceReportService,
 
@@ -57,9 +57,9 @@ module Network.Google.AdExperienceReport.Types
   )
 where
 
-import Network.Google.AdExperienceReport.Internal.Product
-import Network.Google.AdExperienceReport.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AdExperienceReport.Internal.Product
+import Gogol.AdExperienceReport.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Ad Experience Report API. This contains the host and root path used as a starting point for constructing service requests.
 adExperienceReportService :: Core.ServiceConfig

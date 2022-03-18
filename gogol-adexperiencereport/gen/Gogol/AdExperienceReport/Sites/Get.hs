@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AdExperienceReport.Sites.Get
+-- Module      : Gogol.AdExperienceReport.Sites.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets a site\'s Ad Experience Report summary.
 --
 -- /See:/ <https://developers.google.com/ad-experience-report/ Ad Experience Report API Reference> for @adexperiencereport.sites.get@.
-module Network.Google.AdExperienceReport.Sites.Get
+module Gogol.AdExperienceReport.Sites.Get
   ( -- * Resource
     AdExperienceReportSitesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AdExperienceReport.Sites.Get
   )
 where
 
-import Network.Google.AdExperienceReport.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AdExperienceReport.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @adexperiencereport.sites.get@ method which the
 -- 'AdExperienceReportSitesGet' request conforms to.

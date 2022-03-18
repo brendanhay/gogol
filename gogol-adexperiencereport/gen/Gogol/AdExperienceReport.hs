@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AdExperienceReport
+-- Module      : Gogol.AdExperienceReport
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Views Ad Experience Report data, and gets a list of sites that have a significant number of annoying ads.
 --
 -- /See:/ <https://developers.google.com/ad-experience-report/ Ad Experience Report API Reference>
-module Network.Google.AdExperienceReport
+module Gogol.AdExperienceReport
   ( -- * Configuration
     adExperienceReportService,
 
@@ -73,6 +73,6 @@ module Network.Google.AdExperienceReport
   )
 where
 
-import Network.Google.AdExperienceReport.Sites.Get
-import Network.Google.AdExperienceReport.Types
-import Network.Google.AdExperienceReport.ViolatingSites.List
+import Gogol.AdExperienceReport.Sites.Get
+import Gogol.AdExperienceReport.Types
+import Gogol.AdExperienceReport.ViolatingSites.List
