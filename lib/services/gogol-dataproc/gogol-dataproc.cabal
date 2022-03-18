@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-dataproc
-version:               0.5.0
-synopsis:              Google Cloud Dataproc SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-dataproc
+version:            0.5.0
+synopsis:           Google Cloud Dataproc SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Manages Hadoop-based clusters and jobs on Google Cloud Platform.
+  Manages Hadoop-based clusters and jobs on Google Cloud Platform.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,100 +31,97 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Dataproc
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Create
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Get
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.GetIamPolicy
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.List
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.SetIamPolicy
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.TestIamPermissions
-    , Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Update
-    , Gogol.Dataproc.Projects.Locations.Batches.Create
-    , Gogol.Dataproc.Projects.Locations.Batches.Delete
-    , Gogol.Dataproc.Projects.Locations.Batches.Get
-    , Gogol.Dataproc.Projects.Locations.Batches.List
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Create
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Delete
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Get
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.GetIamPolicy
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.InstantiateInline
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.List
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.SetIamPolicy
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.TestIamPermissions
-    , Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Update
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Create
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Get
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.GetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.List
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.SetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.TestIamPermissions
-    , Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Update
-    , Gogol.Dataproc.Projects.Regions.Clusters.Create
-    , Gogol.Dataproc.Projects.Regions.Clusters.Delete
-    , Gogol.Dataproc.Projects.Regions.Clusters.Diagnose
-    , Gogol.Dataproc.Projects.Regions.Clusters.Get
-    , Gogol.Dataproc.Projects.Regions.Clusters.GetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.Clusters.InjectCredentials
-    , Gogol.Dataproc.Projects.Regions.Clusters.List
-    , Gogol.Dataproc.Projects.Regions.Clusters.Patch
-    , Gogol.Dataproc.Projects.Regions.Clusters.Repair
-    , Gogol.Dataproc.Projects.Regions.Clusters.SetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.Clusters.Start
-    , Gogol.Dataproc.Projects.Regions.Clusters.Stop
-    , Gogol.Dataproc.Projects.Regions.Clusters.TestIamPermissions
-    , Gogol.Dataproc.Projects.Regions.Jobs.Cancel
-    , Gogol.Dataproc.Projects.Regions.Jobs.Delete
-    , Gogol.Dataproc.Projects.Regions.Jobs.Get
-    , Gogol.Dataproc.Projects.Regions.Jobs.GetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.Jobs.List
-    , Gogol.Dataproc.Projects.Regions.Jobs.Patch
-    , Gogol.Dataproc.Projects.Regions.Jobs.SetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.Jobs.Submit
-    , Gogol.Dataproc.Projects.Regions.Jobs.SubmitAsOperation
-    , Gogol.Dataproc.Projects.Regions.Jobs.TestIamPermissions
-    , Gogol.Dataproc.Projects.Regions.Operations.Cancel
-    , Gogol.Dataproc.Projects.Regions.Operations.Delete
-    , Gogol.Dataproc.Projects.Regions.Operations.Get
-    , Gogol.Dataproc.Projects.Regions.Operations.GetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.Operations.List
-    , Gogol.Dataproc.Projects.Regions.Operations.SetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.Operations.TestIamPermissions
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Create
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Delete
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Get
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.GetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.List
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.SetIamPolicy
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.TestIamPermissions
-    , Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Update
-    , Gogol.Dataproc.Types
+    Gogol.Dataproc
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Create
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Get
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.GetIamPolicy
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.List
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.SetIamPolicy
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.TestIamPermissions
+    Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Update
+    Gogol.Dataproc.Projects.Locations.Batches.Create
+    Gogol.Dataproc.Projects.Locations.Batches.Delete
+    Gogol.Dataproc.Projects.Locations.Batches.Get
+    Gogol.Dataproc.Projects.Locations.Batches.List
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Create
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Delete
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Get
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.GetIamPolicy
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.InstantiateInline
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.List
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.SetIamPolicy
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.TestIamPermissions
+    Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Update
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Create
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Get
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.GetIamPolicy
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.List
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.SetIamPolicy
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.TestIamPermissions
+    Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Update
+    Gogol.Dataproc.Projects.Regions.Clusters.Create
+    Gogol.Dataproc.Projects.Regions.Clusters.Delete
+    Gogol.Dataproc.Projects.Regions.Clusters.Diagnose
+    Gogol.Dataproc.Projects.Regions.Clusters.Get
+    Gogol.Dataproc.Projects.Regions.Clusters.GetIamPolicy
+    Gogol.Dataproc.Projects.Regions.Clusters.InjectCredentials
+    Gogol.Dataproc.Projects.Regions.Clusters.List
+    Gogol.Dataproc.Projects.Regions.Clusters.Patch
+    Gogol.Dataproc.Projects.Regions.Clusters.Repair
+    Gogol.Dataproc.Projects.Regions.Clusters.SetIamPolicy
+    Gogol.Dataproc.Projects.Regions.Clusters.Start
+    Gogol.Dataproc.Projects.Regions.Clusters.Stop
+    Gogol.Dataproc.Projects.Regions.Clusters.TestIamPermissions
+    Gogol.Dataproc.Projects.Regions.Jobs.Cancel
+    Gogol.Dataproc.Projects.Regions.Jobs.Delete
+    Gogol.Dataproc.Projects.Regions.Jobs.Get
+    Gogol.Dataproc.Projects.Regions.Jobs.GetIamPolicy
+    Gogol.Dataproc.Projects.Regions.Jobs.List
+    Gogol.Dataproc.Projects.Regions.Jobs.Patch
+    Gogol.Dataproc.Projects.Regions.Jobs.SetIamPolicy
+    Gogol.Dataproc.Projects.Regions.Jobs.Submit
+    Gogol.Dataproc.Projects.Regions.Jobs.SubmitAsOperation
+    Gogol.Dataproc.Projects.Regions.Jobs.TestIamPermissions
+    Gogol.Dataproc.Projects.Regions.Operations.Cancel
+    Gogol.Dataproc.Projects.Regions.Operations.Delete
+    Gogol.Dataproc.Projects.Regions.Operations.Get
+    Gogol.Dataproc.Projects.Regions.Operations.GetIamPolicy
+    Gogol.Dataproc.Projects.Regions.Operations.List
+    Gogol.Dataproc.Projects.Regions.Operations.SetIamPolicy
+    Gogol.Dataproc.Projects.Regions.Operations.TestIamPermissions
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Create
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Delete
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Get
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.GetIamPolicy
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.List
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.SetIamPolicy
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.TestIamPermissions
+    Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Update
+    Gogol.Dataproc.Types
 
   other-modules:
-      Gogol.Dataproc.Internal.Product
-    , Gogol.Dataproc.Internal.Sum
+    Gogol.Dataproc.Internal.Product
+    Gogol.Dataproc.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
