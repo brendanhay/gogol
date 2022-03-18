@@ -1,388 +1,261 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DeploymentManager.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.DeploymentManager.Types
-    (
-    -- * Service Configuration
-      deploymentManagerService
+  ( -- * Configuration
+    deploymentManagerService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , ndevCloudmanScope
-    , ndevCloudmanReadOnlyScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    ndevCloudmanScope,
+    ndevCloudmanReadOnlyScope,
 
-    -- * OperationWarningsItemDataItem
-    , OperationWarningsItemDataItem
-    , operationWarningsItemDataItem
-    , owidiValue
-    , owidiKey
+    -- * Types
 
-    -- * ConfigFile
-    , ConfigFile
-    , configFile
-    , cfContent
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * OperationWarningsItemCode
-    , OperationWarningsItemCode (..)
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- * DeploymentsUpdateCreatePolicy
-    , DeploymentsUpdateCreatePolicy (..)
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * OperationsListResponse
-    , OperationsListResponse
-    , operationsListResponse
-    , olrNextPageToken
-    , olrOperations
+    -- ** ConfigFile
+    ConfigFile (..),
+    newConfigFile,
 
-    -- * ResourceUpdateWarningsItemDataItem
-    , ResourceUpdateWarningsItemDataItem
-    , resourceUpdateWarningsItemDataItem
-    , ruwidiValue
-    , ruwidiKey
+    -- ** Deployment
+    Deployment (..),
+    newDeployment,
 
-    -- * ResourceUpdateWarningsItemCode
-    , ResourceUpdateWarningsItemCode (..)
+    -- ** DeploymentLabelEntry
+    DeploymentLabelEntry (..),
+    newDeploymentLabelEntry,
 
-    -- * DeploymentsDeleteDeletePolicy
-    , DeploymentsDeleteDeletePolicy (..)
+    -- ** DeploymentUpdate
+    DeploymentUpdate (..),
+    newDeploymentUpdate,
 
-    -- * TypesListResponse
-    , TypesListResponse
-    , typesListResponse
-    , tlrNextPageToken
-    , tlrTypes
+    -- ** DeploymentUpdateLabelEntry
+    DeploymentUpdateLabelEntry (..),
+    newDeploymentUpdateLabelEntry,
 
-    -- * DeploymentsUpdateDeletePolicy
-    , DeploymentsUpdateDeletePolicy (..)
+    -- ** DeploymentsCancelPreviewRequest
+    DeploymentsCancelPreviewRequest (..),
+    newDeploymentsCancelPreviewRequest,
 
-    -- * DeploymentsPatchDeletePolicy
-    , DeploymentsPatchDeletePolicy (..)
+    -- ** DeploymentsListResponse
+    DeploymentsListResponse (..),
+    newDeploymentsListResponse,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oTargetId
-    , oStatus
-    , oOperationGroupId
-    , oInsertTime
-    , oProgress
-    , oStartTime
-    , oKind
-    , oError
-    , oHTTPErrorMessage
-    , oZone
-    , oWarnings
-    , oHTTPErrorStatusCode
-    , oUser
-    , oSelfLink
-    , oName
-    , oStatusMessage
-    , oCreationTimestamp
-    , oEndTime
-    , oId
-    , oOperationType
-    , oRegion
-    , oDescription
-    , oTargetLink
-    , oClientOperationId
+    -- ** DeploymentsStopRequest
+    DeploymentsStopRequest (..),
+    newDeploymentsStopRequest,
 
-    -- * TestPermissionsResponse
-    , TestPermissionsResponse
-    , testPermissionsResponse
-    , tprPermissions
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * DeploymentsPatchCreatePolicy
-    , DeploymentsPatchCreatePolicy (..)
+    -- ** GlobalSetPolicyRequest
+    GlobalSetPolicyRequest (..),
+    newGlobalSetPolicyRequest,
 
-    -- * ResourcesListResponse
-    , ResourcesListResponse
-    , resourcesListResponse
-    , rlrNextPageToken
-    , rlrResources
+    -- ** ImportFile
+    ImportFile (..),
+    newImportFile,
 
-    -- * DeploymentUpdate
-    , DeploymentUpdate
-    , deploymentUpdate
-    , duManifest
-    , duLabels
-    , duDescription
+    -- ** Manifest
+    Manifest (..),
+    newManifest,
 
-    -- * ResourceUpdate
-    , ResourceUpdate
-    , resourceUpdate
-    , ruState
-    , ruError
-    , ruAccessControl
-    , ruWarnings
-    , ruIntent
-    , ruManifest
-    , ruFinalProperties
-    , ruProperties
+    -- ** ManifestsListResponse
+    ManifestsListResponse (..),
+    newManifestsListResponse,
 
-    -- * DeploymentLabelEntry
-    , DeploymentLabelEntry
-    , deploymentLabelEntry
-    , dleValue
-    , dleKey
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * OperationStatus
-    , OperationStatus (..)
+    -- ** Operation_Error
+    Operation_Error (..),
+    newOperation_Error,
 
-    -- * ResourceUpdateState
-    , ResourceUpdateState (..)
+    -- ** Operation_Error_ErrorsItem
+    Operation_Error_ErrorsItem (..),
+    newOperation_Error_ErrorsItem,
 
-    -- * ResourceUpdateIntent
-    , ResourceUpdateIntent (..)
+    -- ** Operation_Status
+    Operation_Status (..),
 
-    -- * TestPermissionsRequest
-    , TestPermissionsRequest
-    , testPermissionsRequest
-    , tPermissions
+    -- ** Operation_WarningsItem
+    Operation_WarningsItem (..),
+    newOperation_WarningsItem,
 
-    -- * Manifest
-    , Manifest
-    , manifest
-    , mInsertTime
-    , mLayout
-    , mConfig
-    , mExpandedConfig
-    , mManifestSizeBytes
-    , mImports
-    , mSelfLink
-    , mName
-    , mId
-    , mManifestSizeLimitBytes
+    -- ** Operation_WarningsItem_Code
+    Operation_WarningsItem_Code (..),
 
-    -- * ResourceUpdateWarningsItem
-    , ResourceUpdateWarningsItem
-    , resourceUpdateWarningsItem
-    , ruwiData
-    , ruwiCode
-    , ruwiMessage
+    -- ** Operation_WarningsItem_DataItem
+    Operation_WarningsItem_DataItem (..),
+    newOperation_WarningsItem_DataItem,
 
-    -- * DeploymentsCancelPreviewRequest
-    , DeploymentsCancelPreviewRequest
-    , deploymentsCancelPreviewRequest
-    , dcprFingerprint
+    -- ** OperationsListResponse
+    OperationsListResponse (..),
+    newOperationsListResponse,
 
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * Resource
-    , Resource
-    , resource
-    , rInsertTime
-    , rAccessControl
-    , rURL
-    , rWarnings
-    , rUpdateTime
-    , rName
-    , rManifest
-    , rFinalProperties
-    , rId
-    , rType
-    , rUpdate
-    , rProperties
+    -- ** Resource
+    Resource (..),
+    newResource,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Resource_WarningsItem
+    Resource_WarningsItem (..),
+    newResource_WarningsItem,
 
-    -- * DeploymentUpdateLabelEntry
-    , DeploymentUpdateLabelEntry
-    , deploymentUpdateLabelEntry
-    , duleValue
-    , duleKey
+    -- ** Resource_WarningsItem_Code
+    Resource_WarningsItem_Code (..),
 
-    -- * ResourceUpdateErrorErrorsItem
-    , ResourceUpdateErrorErrorsItem
-    , resourceUpdateErrorErrorsItem
-    , rueeiLocation
-    , rueeiCode
-    , rueeiMessage
+    -- ** Resource_WarningsItem_DataItem
+    Resource_WarningsItem_DataItem (..),
+    newResource_WarningsItem_DataItem,
 
-    -- * ManifestsListResponse
-    , ManifestsListResponse
-    , manifestsListResponse
-    , mlrNextPageToken
-    , mlrManifests
+    -- ** ResourceAccessControl
+    ResourceAccessControl (..),
+    newResourceAccessControl,
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** ResourceUpdate
+    ResourceUpdate (..),
+    newResourceUpdate,
 
-    -- * GlobalSetPolicyRequest
-    , GlobalSetPolicyRequest
-    , globalSetPolicyRequest
-    , gsprEtag
-    , gsprBindings
-    , gsprPolicy
+    -- ** ResourceUpdate_Error
+    ResourceUpdate_Error (..),
+    newResourceUpdate_Error,
 
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** ResourceUpdate_Error_ErrorsItem
+    ResourceUpdate_Error_ErrorsItem (..),
+    newResourceUpdate_Error_ErrorsItem,
 
-    -- * Type
-    , Type
-    , type'
-    , tInsertTime
-    , tOperation
-    , tSelfLink
-    , tName
-    , tId
+    -- ** ResourceUpdate_Intent
+    ResourceUpdate_Intent (..),
 
-    -- * ImportFile
-    , ImportFile
-    , importFile
-    , ifContent
-    , ifName
+    -- ** ResourceUpdate_State
+    ResourceUpdate_State (..),
 
-    -- * OperationErrorErrorsItem
-    , OperationErrorErrorsItem
-    , operationErrorErrorsItem
-    , oeeiLocation
-    , oeeiCode
-    , oeeiMessage
+    -- ** ResourceUpdate_WarningsItem
+    ResourceUpdate_WarningsItem (..),
+    newResourceUpdate_WarningsItem,
 
-    -- * DeploymentsStopRequest
-    , DeploymentsStopRequest
-    , deploymentsStopRequest
-    , dsrFingerprint
+    -- ** ResourceUpdate_WarningsItem_Code
+    ResourceUpdate_WarningsItem_Code (..),
 
-    -- * ResourceWarningsItemDataItem
-    , ResourceWarningsItemDataItem
-    , resourceWarningsItemDataItem
-    , rwidiValue
-    , rwidiKey
+    -- ** ResourceUpdate_WarningsItem_DataItem
+    ResourceUpdate_WarningsItem_DataItem (..),
+    newResourceUpdate_WarningsItem_DataItem,
 
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    -- ** ResourcesListResponse
+    ResourcesListResponse (..),
+    newResourcesListResponse,
 
-    -- * ResourceUpdateError
-    , ResourceUpdateError
-    , resourceUpdateError
-    , rueErrors
+    -- ** TargetConfiguration
+    TargetConfiguration (..),
+    newTargetConfiguration,
 
-    -- * ResourceWarningsItemCode
-    , ResourceWarningsItemCode (..)
+    -- ** TestPermissionsRequest
+    TestPermissionsRequest (..),
+    newTestPermissionsRequest,
 
-    -- * DeploymentsListResponse
-    , DeploymentsListResponse
-    , deploymentsListResponse
-    , dlrNextPageToken
-    , dlrDeployments
+    -- ** TestPermissionsResponse
+    TestPermissionsResponse (..),
+    newTestPermissionsResponse,
 
-    -- * ResourceWarningsItem
-    , ResourceWarningsItem
-    , resourceWarningsItem
-    , rwiData
-    , rwiCode
-    , rwiMessage
+    -- ** Type
+    Type (..),
+    newType,
 
-    -- * ResourceAccessControl
-    , ResourceAccessControl
-    , resourceAccessControl
-    , racGcpIAMPolicy
+    -- ** TypesListResponse
+    TypesListResponse (..),
+    newTypesListResponse,
 
-    -- * TargetConfiguration
-    , TargetConfiguration
-    , targetConfiguration
-    , tcConfig
-    , tcImports
+    -- ** DeploymentsDeleteDeletePolicy
+    DeploymentsDeleteDeletePolicy (..),
 
-    -- * OperationWarningsItem
-    , OperationWarningsItem
-    , operationWarningsItem
-    , owiData
-    , owiCode
-    , owiMessage
+    -- ** DeploymentsInsertCreatePolicy
+    DeploymentsInsertCreatePolicy (..),
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    -- ** DeploymentsPatchCreatePolicy
+    DeploymentsPatchCreatePolicy (..),
 
-    -- * Deployment
-    , Deployment
-    , deployment
-    , dInsertTime
-    , dOperation
-    , dFingerprint
-    , dUpdateTime
-    , dSelfLink
-    , dName
-    , dManifest
-    , dId
-    , dLabels
-    , dDescription
-    , dUpdate
-    , dTarget
+    -- ** DeploymentsPatchDeletePolicy
+    DeploymentsPatchDeletePolicy (..),
 
-    -- * DeploymentsInsertCreatePolicy
-    , DeploymentsInsertCreatePolicy (..)
-    ) where
+    -- ** DeploymentsUpdateCreatePolicy
+    DeploymentsUpdateCreatePolicy (..),
 
-import Network.Google.DeploymentManager.Types.Product
-import Network.Google.DeploymentManager.Types.Sum
-import Network.Google.Prelude
+    -- ** DeploymentsUpdateDeletePolicy
+    DeploymentsUpdateDeletePolicy (..),
+  )
+where
 
--- | Default request referring to version 'v2' of the Cloud Deployment Manager V2 API. This contains the host and root path used as a starting point for constructing service requests.
-deploymentManagerService :: ServiceConfig
-deploymentManagerService
-  = defaultService (ServiceId "deploymentmanager:v2")
-      "deploymentmanager.googleapis.com"
+import Network.Google.DeploymentManager.Internal.Product
+import Network.Google.DeploymentManager.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy
+-- | Default request referring to version @v2@ of the Cloud Deployment Manager V2 API. This contains the host and root path used as a starting point for constructing service requests.
+deploymentManagerService :: Core.ServiceConfig
+deploymentManagerService =
+  Core.defaultService
+    (Core.ServiceId "deploymentmanager:v2")
+    "deploymentmanager.googleapis.com"
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
--- | View and manage your Google Cloud Platform management resources and
--- deployment status information
-ndevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
-ndevCloudmanScope = Proxy
+-- | View your data across Google Cloud services and see the email address of your Google Account
+cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Core.Proxy
 
--- | View your Google Cloud Platform management resources and deployment
--- status information
-ndevCloudmanReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-ndevCloudmanReadOnlyScope = Proxy
+-- | View and manage your Google Cloud Platform management resources and deployment status information
+ndevCloudmanScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
+ndevCloudmanScope = Core.Proxy
+
+-- | View your Google Cloud Platform management resources and deployment status information
+ndevCloudmanReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+ndevCloudmanReadOnlyScope = Core.Proxy
