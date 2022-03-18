@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,105 +36,98 @@
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.clusters.update@.
 module Gogol.BigtableAdmin.Projects.Instances.Clusters.Update
-  ( -- * Resource
-    BigtableAdminProjectsInstancesClustersUpdateResource,
+    (
+    -- * Resource
+      BigtableAdminProjectsInstancesClustersUpdateResource
 
     -- ** Constructing a Request
-    newBigtableAdminProjectsInstancesClustersUpdate,
-    BigtableAdminProjectsInstancesClustersUpdate,
-  )
-where
+    , newBigtableAdminProjectsInstancesClustersUpdate
+    , BigtableAdminProjectsInstancesClustersUpdate
+    ) where
 
-import Gogol.BigtableAdmin.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BigtableAdmin.Types
 
 -- | A resource alias for @bigtableadmin.projects.instances.clusters.update@ method which the
 -- 'BigtableAdminProjectsInstancesClustersUpdate' request conforms to.
-type BigtableAdminProjectsInstancesClustersUpdateResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Cluster
-    Core.:> Core.Put '[Core.JSON] Operation
+type BigtableAdminProjectsInstancesClustersUpdateResource
+     =
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] Cluster Core.:>
+                       Core.Put '[Core.JSON] Operation
 
 -- | Updates a cluster within an instance. Note that UpdateCluster does not support updating cluster/config.cluster/autoscaling_config. In order to update it, you must use PartialUpdateCluster.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesClustersUpdate' smart constructor.
 data BigtableAdminProjectsInstancesClustersUpdate = BigtableAdminProjectsInstancesClustersUpdate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The unique name of the cluster. Values are of the form @projects\/{project}\/instances\/{instance}\/clusters\/a-z*@.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Cluster,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The unique name of the cluster. Values are of the form @projects\/{project}\/instances\/{instance}\/clusters\/a-z*@.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: Cluster
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigtableAdminProjectsInstancesClustersUpdate' with the minimum fields required to make a request.
-newBigtableAdminProjectsInstancesClustersUpdate ::
-  -- |  The unique name of the cluster. Values are of the form @projects\/{project}\/instances\/{instance}\/clusters\/a-z*@. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Cluster ->
-  BigtableAdminProjectsInstancesClustersUpdate
+newBigtableAdminProjectsInstancesClustersUpdate 
+    ::  Core.Text
+       -- ^  The unique name of the cluster. Values are of the form @projects\/{project}\/instances\/{instance}\/clusters\/a-z*@. See 'name'.
+    -> Cluster
+       -- ^  Multipart request metadata. See 'payload'.
+    -> BigtableAdminProjectsInstancesClustersUpdate
 newBigtableAdminProjectsInstancesClustersUpdate name payload =
   BigtableAdminProjectsInstancesClustersUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BigtableAdminProjectsInstancesClustersUpdate
-  where
-  type
-    Rs BigtableAdminProjectsInstancesClustersUpdate =
-      Operation
-  type
-    Scopes
-      BigtableAdminProjectsInstancesClustersUpdate =
-      '[ "https://www.googleapis.com/auth/bigtable.admin",
-         "https://www.googleapis.com/auth/bigtable.admin.cluster",
-         "https://www.googleapis.com/auth/bigtable.admin.instance",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
-  requestClient
-    BigtableAdminProjectsInstancesClustersUpdate {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesClustersUpdateResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           BigtableAdminProjectsInstancesClustersUpdate
+         where
+        type Rs BigtableAdminProjectsInstancesClustersUpdate
+             = Operation
+        type Scopes
+               BigtableAdminProjectsInstancesClustersUpdate
+             =
+             '["https://www.googleapis.com/auth/bigtable.admin",
+               "https://www.googleapis.com/auth/bigtable.admin.cluster",
+               "https://www.googleapis.com/auth/bigtable.admin.instance",
+               "https://www.googleapis.com/auth/cloud-bigtable.admin",
+               "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          BigtableAdminProjectsInstancesClustersUpdate{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              bigtableAdminService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           BigtableAdminProjectsInstancesClustersUpdateResource)
+                      Core.mempty
+
