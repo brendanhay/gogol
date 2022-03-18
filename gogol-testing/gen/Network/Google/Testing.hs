@@ -1,636 +1,398 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Testing
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows developers to run automated tests for their mobile applications
--- on Google infrastructure.
+-- Allows developers to run automated tests for their mobile applications on Google infrastructure.
 --
 -- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference>
 module Network.Google.Testing
-    (
-    -- * Service Configuration
-      testingService
+  ( -- * Configuration
+    testingService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , TestingAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
     -- * Resources
 
     -- ** testing.applicationDetailService.getApkDetails
-    , module Network.Google.Resource.Testing.ApplicationDetailService.GetAPKDetails
+    TestingApplicationDetailServiceGetApkDetailsResource,
+    newTestingApplicationDetailServiceGetApkDetails,
+    TestingApplicationDetailServiceGetApkDetails,
 
     -- ** testing.projects.testMatrices.cancel
-    , module Network.Google.Resource.Testing.Projects.TestMatrices.Cancel
+    TestingProjectsTestMatricesCancelResource,
+    newTestingProjectsTestMatricesCancel,
+    TestingProjectsTestMatricesCancel,
 
     -- ** testing.projects.testMatrices.create
-    , module Network.Google.Resource.Testing.Projects.TestMatrices.Create
+    TestingProjectsTestMatricesCreateResource,
+    newTestingProjectsTestMatricesCreate,
+    TestingProjectsTestMatricesCreate,
 
     -- ** testing.projects.testMatrices.get
-    , module Network.Google.Resource.Testing.Projects.TestMatrices.Get
+    TestingProjectsTestMatricesGetResource,
+    newTestingProjectsTestMatricesGet,
+    TestingProjectsTestMatricesGet,
 
     -- ** testing.testEnvironmentCatalog.get
-    , module Network.Google.Resource.Testing.TestEnvironmentCatalog.Get
+    TestingTestEnvironmentCatalogGetResource,
+    newTestingTestEnvironmentCatalogGet,
+    TestingTestEnvironmentCatalogGet,
 
     -- * Types
 
-    -- ** TestDetails
-    , TestDetails
-    , testDetails
-    , tdProgressMessages
-    , tdErrorMessage
-
-    -- ** IntentFilter
-    , IntentFilter
-    , intentFilter
-    , ifActionNames
-    , ifMimeType
-    , ifCategoryNames
-
-    -- ** IosTestSetup
-    , IosTestSetup
-    , iosTestSetup
-    , itsAdditionalIPas
-    , itsPullDirectories
-    , itsNetworkProFile
-    , itsPushFiles
-
-    -- ** Shard
-    , Shard
-    , shard
-    , sShardIndex
-    , sTestTargetsForShard
-    , sNumShards
-
-    -- ** TestExecution
-    , TestExecution
-    , testExecution
-    , teTestDetails
-    , teShard
-    , teState
-    , teEnvironment
-    , teTestSpecification
-    , teMatrixId
-    , teId
-    , teProjectId
-    , teToolResultsStep
-    , teTimestamp
-
-    -- ** IosTestLoop
-    , IosTestLoop
-    , iosTestLoop
-    , itlScenarios
-    , itlAppBundleId
-    , itlAppIPa
-
-    -- ** IosVersion
-    , IosVersion
-    , iosVersion
-    , ivMinorVersion
-    , ivMajorVersion
-    , ivSupportedXcodeVersionIds
-    , ivId
-    , ivTags
-
-    -- ** IosDeviceList
-    , IosDeviceList
-    , iosDeviceList
-    , idlIosDevices
-
-    -- ** RoboDirective
-    , RoboDirective
-    , roboDirective
-    , rdResourceName
-    , rdInputText
-    , rdActionType
-
-    -- ** AndroidRuntimeConfiguration
-    , AndroidRuntimeConfiguration
-    , androidRuntimeConfiguration
-    , arcOrientations
-    , arcLocales
-
-    -- ** XcodeVersion
-    , XcodeVersion
-    , xcodeVersion
-    , xvVersion
-    , xvTags
-
-    -- ** SystraceSetup
-    , SystraceSetup
-    , systraceSetup
-    , ssDurationSeconds
-
-    -- ** Distribution
-    , Distribution
-    , distribution
-    , dMeasurementTime
-    , dMarketShare
-
-    -- ** TestMatrixState
-    , TestMatrixState (..)
-
-    -- ** IosModel
-    , IosModel
-    , iosModel
-    , imFormFactor
-    , imScreenX
-    , imScreenDensity
-    , imName
-    , imSupportedVersionIds
-    , imScreenY
-    , imId
-    , imDeviceCapabilities
-    , imTags
-
-    -- ** APK
-    , APK
-    , aPK
-    , aPackageName
-    , aLocation
-
-    -- ** NetworkConfigurationCatalog
-    , NetworkConfigurationCatalog
-    , networkConfigurationCatalog
-    , nccConfigurations
-
-    -- ** TestMatrixInvalidMatrixDetails
-    , TestMatrixInvalidMatrixDetails (..)
-
-    -- ** IosDevice
-    , IosDevice
-    , iosDevice
-    , idLocale
-    , idIosModelId
-    , idIosVersionId
-    , idOrientation
-
-    -- ** GetAPKDetailsResponse
-    , GetAPKDetailsResponse
-    , getAPKDetailsResponse
-    , gapkdrAPKDetail
-
-    -- ** AndroidRoboTest
-    , AndroidRoboTest
-    , androidRoboTest
-    , artRoboDirectives
-    , artRoboScript
-    , artStartingIntents
-    , artAppInitialActivity
-    , artMaxSteps
-    , artRoboMode
-    , artAppPackageId
-    , artAppBundle
-    , artAppAPK
-    , artMaxDepth
-
-    -- ** FileReference
-    , FileReference
-    , fileReference
-    , frGcsPath
-
-    -- ** Environment
-    , Environment
-    , environment
-    , eIosDevice
-    , eAndroidDevice
-
-    -- ** ToolResultsHistory
-    , ToolResultsHistory
-    , toolResultsHistory
-    , trhHistoryId
-    , trhProjectId
-
-    -- ** TestEnvironmentCatalog
-    , TestEnvironmentCatalog
-    , testEnvironmentCatalog
-    , tecSoftwareCatalog
-    , tecNetworkConfigurationCatalog
-    , tecAndroidDeviceCatalog
-    , tecIosDeviceCatalog
-    , tecDeviceIPBlockCatalog
-
-    -- ** Locale
-    , Locale
-    , locale
-    , lName
-    , lId
-    , lRegion
-    , lTags
-
-    -- ** AndroidDeviceCatalog
-    , AndroidDeviceCatalog
-    , androidDeviceCatalog
-    , adcVersions
-    , adcModels
-    , adcRuntimeConfiguration
-
-    -- ** AndroidInstrumentationTestOrchestratorOption
-    , AndroidInstrumentationTestOrchestratorOption (..)
-
-    -- ** IosDeviceFile
-    , IosDeviceFile
-    , iosDeviceFile
-    , idfDevicePath
-    , idfBundleId
-    , idfContent
-
-    -- ** TestExecutionState
-    , TestExecutionState (..)
-
-    -- ** TestEnvironmentCatalogGetEnvironmentType
-    , TestEnvironmentCatalogGetEnvironmentType (..)
-
-    -- ** TestSpecification
-    , TestSpecification
-    , testSpecification
-    , tsIosTestSetup
-    , tsIosTestLoop
-    , tsTestTimeout
-    , tsAndroidRoboTest
-    , tsDisableVideoRecording
-    , tsAndroidInstrumentationTest
-    , tsIosXcTest
-    , tsDisablePerformanceMetrics
-    , tsTestSetup
-    , tsAndroidTestLoop
-
-    -- ** TestTargetsForShard
-    , TestTargetsForShard
-    , testTargetsForShard
-    , ttfsTestTargets
-
-    -- ** TestMatrixOutcomeSummary
-    , TestMatrixOutcomeSummary (..)
-
-    -- ** ProvidedSoftwareCatalog
-    , ProvidedSoftwareCatalog
-    , providedSoftwareCatalog
-    , pscOrchestratorVersion
-    , pscAndroidxOrchestratorVersion
-
-    -- ** TrafficRule
-    , TrafficRule
-    , trafficRule
-    , trPacketLossRatio
-    , trPacketDuplicationRatio
-    , trBandwidth
-    , trBurst
-    , trDelay
-
-    -- ** IosDeviceCatalog
-    , IosDeviceCatalog
-    , iosDeviceCatalog
-    , idcXcodeVersions
-    , idcVersions
-    , idcModels
-    , idcRuntimeConfiguration
-
-    -- ** GoogleAuto
-    , GoogleAuto
-    , googleAuto
-
-    -- ** DeviceIPBlockForm
-    , DeviceIPBlockForm (..)
-
-    -- ** CancelTestMatrixResponseTestState
-    , CancelTestMatrixResponseTestState (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Account
-    , Account
-    , account
-    , aGoogleAuto
-
-    -- ** RoboDirectiveActionType
-    , RoboDirectiveActionType (..)
-
-    -- ** StartActivityIntent
-    , StartActivityIntent
-    , startActivityIntent
-    , saiURI
-    , saiCategories
-    , saiAction
-
-    -- ** IosModelFormFactor
-    , IosModelFormFactor (..)
-
-    -- ** RoboStartingIntent
-    , RoboStartingIntent
-    , roboStartingIntent
-    , rsiLauncherActivity
-    , rsiStartActivity
-    , rsiTimeout
-
-    -- ** Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- ** RegularFile
-    , RegularFile
-    , regularFile
-    , rfDevicePath
-    , rfContent
-
-    -- ** AndroidModel
-    , AndroidModel
-    , androidModel
-    , amThumbnailURL
-    , amSupportedAbis
-    , amManufacturer
-    , amCodename
-    , amLowFpsVideoRecording
-    , amFormFactor
-    , amBrand
-    , amScreenX
-    , amScreenDensity
-    , amName
-    , amSupportedVersionIds
-    , amScreenY
-    , amId
-    , amForm
-    , amTags
-
-    -- ** ClientInfo
-    , ClientInfo
-    , clientInfo
-    , ciName
-    , ciClientInfoDetails
-
-    -- ** AndroidModelFormFactor
-    , AndroidModelFormFactor (..)
-
-    -- ** ShardingOption
-    , ShardingOption
-    , shardingOption
-    , soUniformSharding
-    , soManualSharding
-
-    -- ** AndroidModelForm
-    , AndroidModelForm (..)
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** APKManifest
-    , APKManifest
-    , aPKManifest
-    , apkmApplicationLabel
-    , apkmMinSdkVersion
-    , apkmTargetSdkVersion
-    , apkmPackageName
-    , apkmIntentFilters
-    , apkmMaxSdkVersion
-    , apkmUsesPermission
-
-    -- ** AppBundle
-    , AppBundle
-    , appBundle
-    , abBundleLocation
-
-    -- ** AndroidInstrumentationTest
-    , AndroidInstrumentationTest
-    , androidInstrumentationTest
-    , aitTestTargets
-    , aitTestRunnerClass
-    , aitAppPackageId
-    , aitTestAPK
-    , aitShardingOption
-    , aitOrchestratorOption
-    , aitAppBundle
-    , aitAppAPK
-    , aitTestPackageId
-
-    -- ** TestMatrix
-    , TestMatrix
-    , testMatrix
-    , tmState
-    , tmTestMatrixId
-    , tmTestSpecification
-    , tmOutcomeSummary
-    , tmFlakyTestAttempts
-    , tmClientInfo
-    , tmTestExecutions
-    , tmFailFast
-    , tmResultStorage
-    , tmInvalidMatrixDetails
-    , tmProjectId
-    , tmEnvironmentMatrix
-    , tmTimestamp
-
-    -- ** CancelTestMatrixResponse
-    , CancelTestMatrixResponse
-    , cancelTestMatrixResponse
-    , ctmrTestState
-
-    -- ** ToolResultsExecution
-    , ToolResultsExecution
-    , toolResultsExecution
-    , treExecutionId
-    , treHistoryId
-    , treProjectId
-
-    -- ** UniformSharding
-    , UniformSharding
-    , uniformSharding
-    , usNumShards
-
-    -- ** IosXcTest
-    , IosXcTest
-    , iosXcTest
-    , ixtXctestrun
-    , ixtXcodeVersion
-    , ixtTestSpecialEntitlements
-    , ixtAppBundleId
-    , ixtTestsZip
-
-    -- ** ResultStorage
-    , ResultStorage
-    , resultStorage
-    , rsToolResultsHistory
-    , rsResultsURL
-    , rsToolResultsExecution
-    , rsGoogleCloudStorage
-
-    -- ** AndroidMatrix
-    , AndroidMatrix
-    , androidMatrix
-    , amAndroidModelIds
-    , amAndroidVersionIds
-    , amOrientations
-    , amLocales
-
-    -- ** ToolResultsStep
-    , ToolResultsStep
-    , toolResultsStep
-    , trsExecutionId
-    , trsStepId
-    , trsHistoryId
-    , trsProjectId
-
-    -- ** DeviceIPBlock
-    , DeviceIPBlock
-    , deviceIPBlock
-    , dibAddedDate
-    , dibBlock
-    , dibForm
-
-    -- ** LauncherActivityIntent
-    , LauncherActivityIntent
-    , launcherActivityIntent
-
-    -- ** APKDetail
-    , APKDetail
-    , aPKDetail
-    , apkdAPKManifest
+    Account (..),
+    newAccount,
 
     -- ** AndroidDevice
-    , AndroidDevice
-    , androidDevice
-    , adAndroidVersionId
-    , adLocale
-    , adAndroidModelId
-    , adOrientation
+    AndroidDevice (..),
+    newAndroidDevice,
 
-    -- ** EnvironmentVariable
-    , EnvironmentVariable
-    , environmentVariable
-    , evValue
-    , evKey
-
-    -- ** DeviceIPBlockCatalog
-    , DeviceIPBlockCatalog
-    , deviceIPBlockCatalog
-    , dibcIPBlocks
-
-    -- ** Orientation
-    , Orientation
-    , orientation
-    , oName
-    , oId
-    , oTags
-
-    -- ** EnvironmentMatrix
-    , EnvironmentMatrix
-    , environmentMatrix
-    , emIosDeviceList
-    , emAndroidMatrix
-    , emAndroidDeviceList
-
-    -- ** DeviceFile
-    , DeviceFile
-    , deviceFile
-    , dfRegularFile
-    , dfObbFile
-
-    -- ** ManualSharding
-    , ManualSharding
-    , manualSharding
-    , msTestTargetsForShard
-
-    -- ** ClientInfoDetail
-    , ClientInfoDetail
-    , clientInfoDetail
-    , cidValue
-    , cidKey
-
-    -- ** AndroidRoboTestRoboMode
-    , AndroidRoboTestRoboMode (..)
-
-    -- ** NetworkConfiguration
-    , NetworkConfiguration
-    , networkConfiguration
-    , ncDownRule
-    , ncId
-    , ncUpRule
-
-    -- ** IosRuntimeConfiguration
-    , IosRuntimeConfiguration
-    , iosRuntimeConfiguration
-    , ircOrientations
-    , ircLocales
-
-    -- ** GoogleCloudStorage
-    , GoogleCloudStorage
-    , googleCloudStorage
-    , gcsGcsPath
-
-    -- ** AndroidVersion
-    , AndroidVersion
-    , androidVersion
-    , avCodeName
-    , avDistribution
-    , avAPILevel
-    , avVersionString
-    , avId
-    , avReleaseDate
-    , avTags
-
-    -- ** ObbFile
-    , ObbFile
-    , obbFile
-    , ofObb
-    , ofObbFileName
-
-    -- ** AndroidTestLoop
-    , AndroidTestLoop
-    , androidTestLoop
-    , atlScenarios
-    , atlScenarioLabels
-    , atlAppPackageId
-    , atlAppBundle
-    , atlAppAPK
+    -- ** AndroidDeviceCatalog
+    AndroidDeviceCatalog (..),
+    newAndroidDeviceCatalog,
 
     -- ** AndroidDeviceList
-    , AndroidDeviceList
-    , androidDeviceList
-    , adlAndroidDevices
+    AndroidDeviceList (..),
+    newAndroidDeviceList,
+
+    -- ** AndroidInstrumentationTest
+    AndroidInstrumentationTest (..),
+    newAndroidInstrumentationTest,
+
+    -- ** AndroidInstrumentationTest_OrchestratorOption
+    AndroidInstrumentationTest_OrchestratorOption (..),
+
+    -- ** AndroidMatrix
+    AndroidMatrix (..),
+    newAndroidMatrix,
+
+    -- ** AndroidModel
+    AndroidModel (..),
+    newAndroidModel,
+
+    -- ** AndroidModel_Form
+    AndroidModel_Form (..),
+
+    -- ** AndroidModel_FormFactor
+    AndroidModel_FormFactor (..),
+
+    -- ** AndroidRoboTest
+    AndroidRoboTest (..),
+    newAndroidRoboTest,
+
+    -- ** AndroidRoboTest_RoboMode
+    AndroidRoboTest_RoboMode (..),
+
+    -- ** AndroidRuntimeConfiguration
+    AndroidRuntimeConfiguration (..),
+    newAndroidRuntimeConfiguration,
+
+    -- ** AndroidTestLoop
+    AndroidTestLoop (..),
+    newAndroidTestLoop,
+
+    -- ** AndroidVersion
+    AndroidVersion (..),
+    newAndroidVersion,
+
+    -- ** Apk
+    Apk (..),
+    newApk,
+
+    -- ** ApkDetail
+    ApkDetail (..),
+    newApkDetail,
+
+    -- ** ApkManifest
+    ApkManifest (..),
+    newApkManifest,
+
+    -- ** AppBundle
+    AppBundle (..),
+    newAppBundle,
+
+    -- ** CancelTestMatrixResponse
+    CancelTestMatrixResponse (..),
+    newCancelTestMatrixResponse,
+
+    -- ** CancelTestMatrixResponse_TestState
+    CancelTestMatrixResponse_TestState (..),
+
+    -- ** ClientInfo
+    ClientInfo (..),
+    newClientInfo,
+
+    -- ** ClientInfoDetail
+    ClientInfoDetail (..),
+    newClientInfoDetail,
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DeviceFile
+    DeviceFile (..),
+    newDeviceFile,
+
+    -- ** DeviceIpBlock
+    DeviceIpBlock (..),
+    newDeviceIpBlock,
+
+    -- ** DeviceIpBlock_Form
+    DeviceIpBlock_Form (..),
+
+    -- ** DeviceIpBlockCatalog
+    DeviceIpBlockCatalog (..),
+    newDeviceIpBlockCatalog,
+
+    -- ** Distribution
+    Distribution (..),
+    newDistribution,
+
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
+
+    -- ** EnvironmentMatrix
+    EnvironmentMatrix (..),
+    newEnvironmentMatrix,
+
+    -- ** EnvironmentVariable
+    EnvironmentVariable (..),
+    newEnvironmentVariable,
+
+    -- ** FileReference
+    FileReference (..),
+    newFileReference,
+
+    -- ** GetApkDetailsResponse
+    GetApkDetailsResponse (..),
+    newGetApkDetailsResponse,
+
+    -- ** GoogleAuto
+    GoogleAuto (..),
+    newGoogleAuto,
+
+    -- ** GoogleCloudStorage
+    GoogleCloudStorage (..),
+    newGoogleCloudStorage,
+
+    -- ** IntentFilter
+    IntentFilter (..),
+    newIntentFilter,
+
+    -- ** IosDevice
+    IosDevice (..),
+    newIosDevice,
+
+    -- ** IosDeviceCatalog
+    IosDeviceCatalog (..),
+    newIosDeviceCatalog,
+
+    -- ** IosDeviceFile
+    IosDeviceFile (..),
+    newIosDeviceFile,
+
+    -- ** IosDeviceList
+    IosDeviceList (..),
+    newIosDeviceList,
+
+    -- ** IosModel
+    IosModel (..),
+    newIosModel,
+
+    -- ** IosModel_FormFactor
+    IosModel_FormFactor (..),
+
+    -- ** IosRuntimeConfiguration
+    IosRuntimeConfiguration (..),
+    newIosRuntimeConfiguration,
+
+    -- ** IosTestLoop
+    IosTestLoop (..),
+    newIosTestLoop,
+
+    -- ** IosTestSetup
+    IosTestSetup (..),
+    newIosTestSetup,
+
+    -- ** IosVersion
+    IosVersion (..),
+    newIosVersion,
+
+    -- ** IosXcTest
+    IosXcTest (..),
+    newIosXcTest,
+
+    -- ** LauncherActivityIntent
+    LauncherActivityIntent (..),
+    newLauncherActivityIntent,
+
+    -- ** Locale
+    Locale (..),
+    newLocale,
+
+    -- ** ManualSharding
+    ManualSharding (..),
+    newManualSharding,
+
+    -- ** NetworkConfiguration
+    NetworkConfiguration (..),
+    newNetworkConfiguration,
+
+    -- ** NetworkConfigurationCatalog
+    NetworkConfigurationCatalog (..),
+    newNetworkConfigurationCatalog,
+
+    -- ** ObbFile
+    ObbFile (..),
+    newObbFile,
+
+    -- ** Orientation
+    Orientation (..),
+    newOrientation,
+
+    -- ** ProvidedSoftwareCatalog
+    ProvidedSoftwareCatalog (..),
+    newProvidedSoftwareCatalog,
+
+    -- ** RegularFile
+    RegularFile (..),
+    newRegularFile,
+
+    -- ** ResultStorage
+    ResultStorage (..),
+    newResultStorage,
+
+    -- ** RoboDirective
+    RoboDirective (..),
+    newRoboDirective,
+
+    -- ** RoboDirective_ActionType
+    RoboDirective_ActionType (..),
+
+    -- ** RoboStartingIntent
+    RoboStartingIntent (..),
+    newRoboStartingIntent,
+
+    -- ** Shard
+    Shard (..),
+    newShard,
+
+    -- ** ShardingOption
+    ShardingOption (..),
+    newShardingOption,
+
+    -- ** StartActivityIntent
+    StartActivityIntent (..),
+    newStartActivityIntent,
+
+    -- ** SystraceSetup
+    SystraceSetup (..),
+    newSystraceSetup,
+
+    -- ** TestDetails
+    TestDetails (..),
+    newTestDetails,
+
+    -- ** TestEnvironmentCatalog
+    TestEnvironmentCatalog (..),
+    newTestEnvironmentCatalog,
+
+    -- ** TestExecution
+    TestExecution (..),
+    newTestExecution,
+
+    -- ** TestExecution_State
+    TestExecution_State (..),
+
+    -- ** TestMatrix
+    TestMatrix (..),
+    newTestMatrix,
+
+    -- ** TestMatrix_InvalidMatrixDetails
+    TestMatrix_InvalidMatrixDetails (..),
+
+    -- ** TestMatrix_OutcomeSummary
+    TestMatrix_OutcomeSummary (..),
+
+    -- ** TestMatrix_State
+    TestMatrix_State (..),
 
     -- ** TestSetup
-    , TestSetup
-    , testSetup
-    , tsDontAutograntPermissions
-    , tsSystrace
-    , tsAccount
-    , tsNetworkProFile
-    , tsEnvironmentVariables
-    , tsAdditionalAPKs
-    , tsFilesToPush
-    , tsDirectoriesToPull
-    ) where
+    TestSetup (..),
+    newTestSetup,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Testing.ApplicationDetailService.GetAPKDetails
-import Network.Google.Resource.Testing.Projects.TestMatrices.Cancel
-import Network.Google.Resource.Testing.Projects.TestMatrices.Create
-import Network.Google.Resource.Testing.Projects.TestMatrices.Get
-import Network.Google.Resource.Testing.TestEnvironmentCatalog.Get
+    -- ** TestSpecification
+    TestSpecification (..),
+    newTestSpecification,
+
+    -- ** TestTargetsForShard
+    TestTargetsForShard (..),
+    newTestTargetsForShard,
+
+    -- ** ToolResultsExecution
+    ToolResultsExecution (..),
+    newToolResultsExecution,
+
+    -- ** ToolResultsHistory
+    ToolResultsHistory (..),
+    newToolResultsHistory,
+
+    -- ** ToolResultsStep
+    ToolResultsStep (..),
+    newToolResultsStep,
+
+    -- ** TrafficRule
+    TrafficRule (..),
+    newTrafficRule,
+
+    -- ** UniformSharding
+    UniformSharding (..),
+    newUniformSharding,
+
+    -- ** XcodeVersion
+    XcodeVersion (..),
+    newXcodeVersion,
+
+    -- ** TestEnvironmentCatalogGetEnvironmentType
+    TestEnvironmentCatalogGetEnvironmentType (..),
+  )
+where
+
+import Network.Google.Testing.ApplicationDetailService.GetApkDetails
+import Network.Google.Testing.Projects.TestMatrices.Cancel
+import Network.Google.Testing.Projects.TestMatrices.Create
+import Network.Google.Testing.Projects.TestMatrices.Get
+import Network.Google.Testing.TestEnvironmentCatalog.Get
 import Network.Google.Testing.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Testing API service.
-type TestingAPI =
-     TestEnvironmentCatalogGetResource :<|>
-       ApplicationDetailServiceGetAPKDetailsResource
-       :<|> ProjectsTestMatricesGetResource
-       :<|> ProjectsTestMatricesCreateResource
-       :<|> ProjectsTestMatricesCancelResource
