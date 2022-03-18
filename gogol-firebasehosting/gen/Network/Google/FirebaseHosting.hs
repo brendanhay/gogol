@@ -1,105 +1,95 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.FirebaseHosting
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Firebase Hosting REST API enables programmatic and customizable
--- management and deployments to your Firebase-hosted sites. Use this REST
--- API to create and manage channels and sites as well as to deploy new or
--- updated hosting configurations and content files.
+-- The Firebase Hosting REST API enables programmatic and customizable management and deployments to your Firebase-hosted sites. Use this REST API to create and manage channels and sites as well as to deploy new or updated hosting configurations and content files.
 --
 -- /See:/ <https://firebase.google.com/docs/hosting/ Firebase Hosting API Reference>
 module Network.Google.FirebaseHosting
-    (
-    -- * Service Configuration
-      firebaseHostingService
-
-    -- * API Declaration
-    , FirebaseHostingAPI
+  ( -- * Configuration
+    firebaseHostingService,
 
     -- * Resources
 
     -- ** firebasehosting.operations.cancel
-    , module Network.Google.Resource.FirebaseHosting.Operations.Cancel
+    FirebaseHostingOperationsCancelResource,
+    newFirebaseHostingOperationsCancel,
+    FirebaseHostingOperationsCancel,
 
     -- ** firebasehosting.operations.delete
-    , module Network.Google.Resource.FirebaseHosting.Operations.Delete
+    FirebaseHostingOperationsDeleteResource,
+    newFirebaseHostingOperationsDelete,
+    FirebaseHostingOperationsDelete,
 
     -- ** firebasehosting.operations.list
-    , module Network.Google.Resource.FirebaseHosting.Operations.List
+    FirebaseHostingOperationsListResource,
+    newFirebaseHostingOperationsList,
+    FirebaseHostingOperationsList,
 
     -- * Types
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Empty
-    , Empty
-    , empty
+    Empty (..),
+    newEmpty,
 
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-    ) where
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-import Network.Google.Prelude
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
+
+import Network.Google.FirebaseHosting.Operations.Cancel
+import Network.Google.FirebaseHosting.Operations.Delete
+import Network.Google.FirebaseHosting.Operations.List
 import Network.Google.FirebaseHosting.Types
-import Network.Google.Resource.FirebaseHosting.Operations.Cancel
-import Network.Google.Resource.FirebaseHosting.Operations.Delete
-import Network.Google.Resource.FirebaseHosting.Operations.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Firebase Hosting API service.
-type FirebaseHostingAPI =
-     OperationsListResource :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource
