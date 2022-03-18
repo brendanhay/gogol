@@ -16,8 +16,8 @@ format_haskell() {
   find "$dir" -type f -name '*.cabal' -print0 |
     xargs -0 cabal-fmt --inplace --indent=2
 
-  # find "$dir" -type f -name '*.hs' -print0 |
-  # xargs -0 ormolu --mode=inplace -o '-XPatternSynonyms' -o '-XTypeApplications'
+  find "$dir" -type f -name '*.hs' -print0 |
+    xargs -0 ormolu --mode=inplace -o '-XPatternSynonyms' -o '-XTypeApplications'
 }
 
 # Export the functions for use in GNU parallel.
