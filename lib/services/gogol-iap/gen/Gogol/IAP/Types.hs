@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,144 +25,144 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.IAP.Types
-    (
-    -- * Configuration
-      iAPService
+  ( -- * Configuration
+    iAPService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AccessDeniedPageSettings
-    , AccessDeniedPageSettings (..)
-    , newAccessDeniedPageSettings
+    AccessDeniedPageSettings (..),
+    newAccessDeniedPageSettings,
 
     -- ** AccessSettings
-    , AccessSettings (..)
-    , newAccessSettings
+    AccessSettings (..),
+    newAccessSettings,
 
     -- ** ApplicationSettings
-    , ApplicationSettings (..)
-    , newApplicationSettings
+    ApplicationSettings (..),
+    newApplicationSettings,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** Brand
-    , Brand (..)
-    , newBrand
+    Brand (..),
+    newBrand,
 
     -- ** CorsSettings
-    , CorsSettings (..)
-    , newCorsSettings
+    CorsSettings (..),
+    newCorsSettings,
 
     -- ** CsmSettings
-    , CsmSettings (..)
-    , newCsmSettings
+    CsmSettings (..),
+    newCsmSettings,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** GcipSettings
-    , GcipSettings (..)
-    , newGcipSettings
+    GcipSettings (..),
+    newGcipSettings,
 
     -- ** GetIamPolicyRequest
-    , GetIamPolicyRequest (..)
-    , newGetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
     -- ** GetPolicyOptions
-    , GetPolicyOptions (..)
-    , newGetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** IapSettings
-    , IapSettings (..)
-    , newIapSettings
+    IapSettings (..),
+    newIapSettings,
 
     -- ** IdentityAwareProxyClient
-    , IdentityAwareProxyClient (..)
-    , newIdentityAwareProxyClient
+    IdentityAwareProxyClient (..),
+    newIdentityAwareProxyClient,
 
     -- ** ListBrandsResponse
-    , ListBrandsResponse (..)
-    , newListBrandsResponse
+    ListBrandsResponse (..),
+    newListBrandsResponse,
 
     -- ** ListIdentityAwareProxyClientsResponse
-    , ListIdentityAwareProxyClientsResponse (..)
-    , newListIdentityAwareProxyClientsResponse
+    ListIdentityAwareProxyClientsResponse (..),
+    newListIdentityAwareProxyClientsResponse,
 
     -- ** OAuthSettings
-    , OAuthSettings (..)
-    , newOAuthSettings
+    OAuthSettings (..),
+    newOAuthSettings,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PolicyDelegationSettings
-    , PolicyDelegationSettings (..)
-    , newPolicyDelegationSettings
+    PolicyDelegationSettings (..),
+    newPolicyDelegationSettings,
 
     -- ** PolicyName
-    , PolicyName (..)
-    , newPolicyName
+    PolicyName (..),
+    newPolicyName,
 
     -- ** ReauthSettings
-    , ReauthSettings (..)
-    , newReauthSettings
+    ReauthSettings (..),
+    newReauthSettings,
 
     -- ** ReauthSettings_Method
-    , ReauthSettings_Method (..)
+    ReauthSettings_Method (..),
 
     -- ** ReauthSettings_PolicyType
-    , ReauthSettings_PolicyType (..)
+    ReauthSettings_PolicyType (..),
 
     -- ** ResetIdentityAwareProxyClientSecretRequest
-    , ResetIdentityAwareProxyClientSecretRequest (..)
-    , newResetIdentityAwareProxyClientSecretRequest
+    ResetIdentityAwareProxyClientSecretRequest (..),
+    newResetIdentityAwareProxyClientSecretRequest,
 
     -- ** Resource
-    , Resource (..)
-    , newResource
+    Resource (..),
+    newResource,
 
     -- ** Resource_Labels
-    , Resource_Labels (..)
-    , newResource_Labels
+    Resource_Labels (..),
+    newResource_Labels,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
-    ) where
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IAP.Internal.Product
 import Gogol.IAP.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Identity-Aware Proxy API. This contains the host and root path used as a starting point for constructing service requests.
 iAPService :: Core.ServiceConfig
-iAPService
-  = Core.defaultService (Core.ServiceId "iap:v1")
-      "iap.googleapis.com"
+iAPService =
+  Core.defaultService
+    (Core.ServiceId "iap:v1")
+    "iap.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]

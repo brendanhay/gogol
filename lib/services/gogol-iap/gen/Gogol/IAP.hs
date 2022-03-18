@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,199 +30,199 @@
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference>
 module Gogol.IAP
-    (
-    -- * Configuration
-      iAPService
+  ( -- * Configuration
+    iAPService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** iap.getIamPolicy
-    , IAPGetIamPolicyResource
-    , newIAPGetIamPolicy
-    , IAPGetIamPolicy
+    IAPGetIamPolicyResource,
+    newIAPGetIamPolicy,
+    IAPGetIamPolicy,
 
     -- ** iap.getIapSettings
-    , IAPGetIapSettingsResource
-    , newIAPGetIapSettings
-    , IAPGetIapSettings
+    IAPGetIapSettingsResource,
+    newIAPGetIapSettings,
+    IAPGetIapSettings,
 
     -- ** iap.projects.brands.create
-    , IAPProjectsBrandsCreateResource
-    , newIAPProjectsBrandsCreate
-    , IAPProjectsBrandsCreate
+    IAPProjectsBrandsCreateResource,
+    newIAPProjectsBrandsCreate,
+    IAPProjectsBrandsCreate,
 
     -- ** iap.projects.brands.get
-    , IAPProjectsBrandsGetResource
-    , newIAPProjectsBrandsGet
-    , IAPProjectsBrandsGet
+    IAPProjectsBrandsGetResource,
+    newIAPProjectsBrandsGet,
+    IAPProjectsBrandsGet,
 
     -- ** iap.projects.brands.identityAwareProxyClients.create
-    , IAPProjectsBrandsIdentityAwareProxyClientsCreateResource
-    , newIAPProjectsBrandsIdentityAwareProxyClientsCreate
-    , IAPProjectsBrandsIdentityAwareProxyClientsCreate
+    IAPProjectsBrandsIdentityAwareProxyClientsCreateResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsCreate,
+    IAPProjectsBrandsIdentityAwareProxyClientsCreate,
 
     -- ** iap.projects.brands.identityAwareProxyClients.delete
-    , IAPProjectsBrandsIdentityAwareProxyClientsDeleteResource
-    , newIAPProjectsBrandsIdentityAwareProxyClientsDelete
-    , IAPProjectsBrandsIdentityAwareProxyClientsDelete
+    IAPProjectsBrandsIdentityAwareProxyClientsDeleteResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsDelete,
+    IAPProjectsBrandsIdentityAwareProxyClientsDelete,
 
     -- ** iap.projects.brands.identityAwareProxyClients.get
-    , IAPProjectsBrandsIdentityAwareProxyClientsGetResource
-    , newIAPProjectsBrandsIdentityAwareProxyClientsGet
-    , IAPProjectsBrandsIdentityAwareProxyClientsGet
+    IAPProjectsBrandsIdentityAwareProxyClientsGetResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsGet,
+    IAPProjectsBrandsIdentityAwareProxyClientsGet,
 
     -- ** iap.projects.brands.identityAwareProxyClients.list
-    , IAPProjectsBrandsIdentityAwareProxyClientsListResource
-    , newIAPProjectsBrandsIdentityAwareProxyClientsList
-    , IAPProjectsBrandsIdentityAwareProxyClientsList
+    IAPProjectsBrandsIdentityAwareProxyClientsListResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsList,
+    IAPProjectsBrandsIdentityAwareProxyClientsList,
 
     -- ** iap.projects.brands.identityAwareProxyClients.resetSecret
-    , IAPProjectsBrandsIdentityAwareProxyClientsResetSecretResource
-    , newIAPProjectsBrandsIdentityAwareProxyClientsResetSecret
-    , IAPProjectsBrandsIdentityAwareProxyClientsResetSecret
+    IAPProjectsBrandsIdentityAwareProxyClientsResetSecretResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
+    IAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
 
     -- ** iap.projects.brands.list
-    , IAPProjectsBrandsListResource
-    , newIAPProjectsBrandsList
-    , IAPProjectsBrandsList
+    IAPProjectsBrandsListResource,
+    newIAPProjectsBrandsList,
+    IAPProjectsBrandsList,
 
     -- ** iap.setIamPolicy
-    , IAPSetIamPolicyResource
-    , newIAPSetIamPolicy
-    , IAPSetIamPolicy
+    IAPSetIamPolicyResource,
+    newIAPSetIamPolicy,
+    IAPSetIamPolicy,
 
     -- ** iap.testIamPermissions
-    , IAPTestIamPermissionsResource
-    , newIAPTestIamPermissions
-    , IAPTestIamPermissions
+    IAPTestIamPermissionsResource,
+    newIAPTestIamPermissions,
+    IAPTestIamPermissions,
 
     -- ** iap.updateIapSettings
-    , IAPUpdateIapSettingsResource
-    , newIAPUpdateIapSettings
-    , IAPUpdateIapSettings
+    IAPUpdateIapSettingsResource,
+    newIAPUpdateIapSettings,
+    IAPUpdateIapSettings,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AccessDeniedPageSettings
-    , AccessDeniedPageSettings (..)
-    , newAccessDeniedPageSettings
+    AccessDeniedPageSettings (..),
+    newAccessDeniedPageSettings,
 
     -- ** AccessSettings
-    , AccessSettings (..)
-    , newAccessSettings
+    AccessSettings (..),
+    newAccessSettings,
 
     -- ** ApplicationSettings
-    , ApplicationSettings (..)
-    , newApplicationSettings
+    ApplicationSettings (..),
+    newApplicationSettings,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** Brand
-    , Brand (..)
-    , newBrand
+    Brand (..),
+    newBrand,
 
     -- ** CorsSettings
-    , CorsSettings (..)
-    , newCorsSettings
+    CorsSettings (..),
+    newCorsSettings,
 
     -- ** CsmSettings
-    , CsmSettings (..)
-    , newCsmSettings
+    CsmSettings (..),
+    newCsmSettings,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** GcipSettings
-    , GcipSettings (..)
-    , newGcipSettings
+    GcipSettings (..),
+    newGcipSettings,
 
     -- ** GetIamPolicyRequest
-    , GetIamPolicyRequest (..)
-    , newGetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
     -- ** GetPolicyOptions
-    , GetPolicyOptions (..)
-    , newGetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** IapSettings
-    , IapSettings (..)
-    , newIapSettings
+    IapSettings (..),
+    newIapSettings,
 
     -- ** IdentityAwareProxyClient
-    , IdentityAwareProxyClient (..)
-    , newIdentityAwareProxyClient
+    IdentityAwareProxyClient (..),
+    newIdentityAwareProxyClient,
 
     -- ** ListBrandsResponse
-    , ListBrandsResponse (..)
-    , newListBrandsResponse
+    ListBrandsResponse (..),
+    newListBrandsResponse,
 
     -- ** ListIdentityAwareProxyClientsResponse
-    , ListIdentityAwareProxyClientsResponse (..)
-    , newListIdentityAwareProxyClientsResponse
+    ListIdentityAwareProxyClientsResponse (..),
+    newListIdentityAwareProxyClientsResponse,
 
     -- ** OAuthSettings
-    , OAuthSettings (..)
-    , newOAuthSettings
+    OAuthSettings (..),
+    newOAuthSettings,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PolicyDelegationSettings
-    , PolicyDelegationSettings (..)
-    , newPolicyDelegationSettings
+    PolicyDelegationSettings (..),
+    newPolicyDelegationSettings,
 
     -- ** PolicyName
-    , PolicyName (..)
-    , newPolicyName
+    PolicyName (..),
+    newPolicyName,
 
     -- ** ReauthSettings
-    , ReauthSettings (..)
-    , newReauthSettings
+    ReauthSettings (..),
+    newReauthSettings,
 
     -- ** ReauthSettings_Method
-    , ReauthSettings_Method (..)
+    ReauthSettings_Method (..),
 
     -- ** ReauthSettings_PolicyType
-    , ReauthSettings_PolicyType (..)
+    ReauthSettings_PolicyType (..),
 
     -- ** ResetIdentityAwareProxyClientSecretRequest
-    , ResetIdentityAwareProxyClientSecretRequest (..)
-    , newResetIdentityAwareProxyClientSecretRequest
+    ResetIdentityAwareProxyClientSecretRequest (..),
+    newResetIdentityAwareProxyClientSecretRequest,
 
     -- ** Resource
-    , Resource (..)
-    , newResource
+    Resource (..),
+    newResource,
 
     -- ** Resource_Labels
-    , Resource_Labels (..)
-    , newResource_Labels
+    Resource_Labels (..),
+    newResource_Labels,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
-    ) where
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+  )
+where
 
 import Gogol.IAP.GetIamPolicy
 import Gogol.IAP.GetIapSettings
