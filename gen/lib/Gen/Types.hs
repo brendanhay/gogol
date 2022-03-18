@@ -38,7 +38,6 @@ import Data.Text.Manipulate
 import qualified Filesystem.Path.CurrentOS as Path
 import Formatting
 import GHC.Stack (HasCallStack)
-import GHC.TypeLits (Symbol)
 import Gen.Orphans ()
 import Gen.Text
 import Gen.Types.Data
@@ -54,29 +53,14 @@ type Error = LText.Text
 
 type Path = Path.FilePath
 
-newtype Version (v :: Symbol) = Version Text
+newtype Version = Version Text
   deriving (Eq, Show)
 
-instance ToJSON (Version v) where
+instance ToJSON Version where
   toJSON (Version v) = toJSON v
 
-fver :: Format a (Version v -> a)
+fver :: Format a (Version -> a)
 fver = later (\(Version v) -> Build.fromText v)
-
-type LibraryVer = Version "library"
-
-type ClientVer = Version "client"
-
-type CoreVer = Version "core"
-
-data Versions = Versions
-  { _libraryVersion :: LibraryVer,
-    _clientVersion :: ClientVer,
-    _coreVersion :: CoreVer
-  }
-  deriving (Show)
-
-makeClassy ''Versions
 
 data Release
   = Sandbox
@@ -218,16 +202,13 @@ toTextIgnore :: Path -> Text
 toTextIgnore = either id id . Path.toText
 
 data Library = Library
-  { _lVersions :: Versions,
+  { _lVersion :: Version,
     _lService :: Service Global,
     _lAPI :: API,
     _lSchemas :: [Data]
   }
 
 makeLenses ''Library
-
-instance HasVersions Library where
-  versions = lVersions
 
 instance HasDescription Library Global where
   description = lService . description
@@ -242,9 +223,7 @@ instance ToJSON Library where
       [ "libraryName" .= (l ^. sLibrary),
         "libraryTitle" .= renameTitle (l ^. dTitle),
         "libraryDescription" .= Desc 4 (l ^. dDescription),
-        "libraryVersion" .= (l ^. libraryVersion),
-        "coreVersion" .= (l ^. coreVersion),
-        "clientVersion" .= (l ^. clientVersion),
+        "libraryVersion" .= (l ^. lVersion),
         "exposedModules" .= exposedModules l,
         "otherModules" .= otherModules l,
         -- Service
