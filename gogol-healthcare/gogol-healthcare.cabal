@@ -1,164 +1,179 @@
-name:                  gogol-healthcare
-version:               0.5.0
-synopsis:              Google Cloud Healthcare SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-healthcare
+version:            0.5.0
+synopsis:           Google Cloud Healthcare SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manage, store, and access healthcare data in Google Cloud Platform.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Manage, store, and access healthcare data in Google Cloud Platform.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-healthcare
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Healthcare
-        , Network.Google.Healthcare.Types
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.AttributeDefinitions.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.AttributeDefinitions.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.AttributeDefinitions.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.AttributeDefinitions.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.AttributeDefinitions.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.CheckDataAccess
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.ConsentArtifacts.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.ConsentArtifacts.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.ConsentArtifacts.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.ConsentArtifacts.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.Activate
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.DeleteRevision
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.ListRevisions
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.Reject
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Consents.Revoke
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.EvaluateUserConsents
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.GetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.QueryAccessibleData
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.SetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.TestIAMPermissions
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.UserDataMAppings.Archive
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.UserDataMAppings.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.UserDataMAppings.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.UserDataMAppings.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.UserDataMAppings.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.ConsentStores.UserDataMAppings.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Deidentify
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Deidentify
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Export
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.GetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Import
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.SearchForInstances
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.SearchForSeries
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.SearchForStudies
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.SetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.StoreInstances
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.RetrieveMetadata
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.RetrieveStudy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.SearchForInstances
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.SearchForSeries
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.Frames.RetrieveFrames
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.Frames.RetrieveRendered
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.RetrieveInstance
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.RetrieveMetadata
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.RetrieveRendered
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.RetrieveMetadata
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.RetrieveSeries
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.SearchForInstances
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.StoreInstances
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.TestIAMPermissions
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Deidentify
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Export
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Capabilities
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.ExecuteBundle
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.History
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.PatientEverything
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Read
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.ResourcePurge
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Search
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.SearchType
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Update
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Vread
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.GetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Import
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.SetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.TestIAMPermissions
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.GetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.GetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Messages.Create
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Messages.Delete
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Messages.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Messages.Ingest
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Messages.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Messages.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.SetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.TestIAMPermissions
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Operations.Cancel
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Operations.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Operations.List
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Patch
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.SetIAMPolicy
-        , Network.Google.Resource.Healthcare.Projects.Locations.DataSets.TestIAMPermissions
-        , Network.Google.Resource.Healthcare.Projects.Locations.Get
-        , Network.Google.Resource.Healthcare.Projects.Locations.List
+  exposed-modules:
+    Network.Google.Healthcare
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.AttributeDefinitions.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.AttributeDefinitions.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.AttributeDefinitions.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.AttributeDefinitions.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.AttributeDefinitions.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.CheckDataAccess
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.ConsentArtifacts.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.ConsentArtifacts.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.ConsentArtifacts.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.ConsentArtifacts.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Activate
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.DeleteRevision
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.ListRevisions
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Reject
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Revoke
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.EvaluateUserConsents
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.GetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.QueryAccessibleData
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.SetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.TestIamPermissions
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.Archive
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.Deidentify
+    Network.Google.Healthcare.Projects.Locations.Datasets.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Deidentify
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Export
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.GetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Import
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForInstances
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForSeries
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForStudies
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.SetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.StoreInstances
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.RetrieveMetadata
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.RetrieveStudy
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.SearchForInstances
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.SearchForSeries
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.Instances.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.Instances.Frames.RetrieveFrames
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.Instances.Frames.RetrieveRendered
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.Instances.RetrieveInstance
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.Instances.RetrieveMetadata
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.Instances.RetrieveRendered
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.RetrieveMetadata
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.RetrieveSeries
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.SearchForInstances
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.StoreInstances
+    Network.Google.Healthcare.Projects.Locations.Datasets.DicomStores.TestIamPermissions
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Deidentify
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Export
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Capabilities
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ExecuteBundle
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.History
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Patienteverything
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Read
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Resourcepurge
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Resourcevalidate
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Search
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Searchtype
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Update
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Vread
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.GetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Import
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.SetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.FhirStores.TestIamPermissions
+    Network.Google.Healthcare.Projects.Locations.Datasets.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.GetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Export
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.GetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Import
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Create
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Delete
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Ingest
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.SetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.TestIamPermissions
+    Network.Google.Healthcare.Projects.Locations.Datasets.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.Operations.Cancel
+    Network.Google.Healthcare.Projects.Locations.Datasets.Operations.Get
+    Network.Google.Healthcare.Projects.Locations.Datasets.Operations.List
+    Network.Google.Healthcare.Projects.Locations.Datasets.Patch
+    Network.Google.Healthcare.Projects.Locations.Datasets.SetIamPolicy
+    Network.Google.Healthcare.Projects.Locations.Datasets.TestIamPermissions
+    Network.Google.Healthcare.Projects.Locations.Get
+    Network.Google.Healthcare.Projects.Locations.List
+    Network.Google.Healthcare.Projects.Locations.Services.Nlp.AnalyzeEntities
+    Network.Google.Healthcare.Types
 
-    other-modules:
-          Network.Google.Healthcare.Types.Product
-        , Network.Google.Healthcare.Types.Sum
+  other-modules:
+    Network.Google.Healthcare.Internal.Product
+    Network.Google.Healthcare.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
