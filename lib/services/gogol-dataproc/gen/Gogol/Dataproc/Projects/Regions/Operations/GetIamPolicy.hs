@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,99 +36,93 @@
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.operations.getIamPolicy@.
 module Gogol.Dataproc.Projects.Regions.Operations.GetIamPolicy
-  ( -- * Resource
-    DataprocProjectsRegionsOperationsGetIamPolicyResource,
+    (
+    -- * Resource
+      DataprocProjectsRegionsOperationsGetIamPolicyResource
 
     -- ** Constructing a Request
-    newDataprocProjectsRegionsOperationsGetIamPolicy,
-    DataprocProjectsRegionsOperationsGetIamPolicy,
-  )
-where
+    , newDataprocProjectsRegionsOperationsGetIamPolicy
+    , DataprocProjectsRegionsOperationsGetIamPolicy
+    ) where
 
-import Gogol.Dataproc.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Dataproc.Types
 
 -- | A resource alias for @dataproc.projects.regions.operations.getIamPolicy@ method which the
 -- 'DataprocProjectsRegionsOperationsGetIamPolicy' request conforms to.
-type DataprocProjectsRegionsOperationsGetIamPolicyResource =
-  "v1"
-    Core.:> Core.CaptureMode "resource" "getIamPolicy" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] GetIamPolicyRequest
-    Core.:> Core.Post '[Core.JSON] Policy
+type DataprocProjectsRegionsOperationsGetIamPolicyResource
+     =
+     "v1" Core.:>
+       Core.CaptureMode "resource" "getIamPolicy" Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] GetIamPolicyRequest Core.:>
+                       Core.Post '[Core.JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
 --
 -- /See:/ 'newDataprocProjectsRegionsOperationsGetIamPolicy' smart constructor.
 data DataprocProjectsRegionsOperationsGetIamPolicy = DataprocProjectsRegionsOperationsGetIamPolicy
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: GetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: GetIamPolicyRequest
+      -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DataprocProjectsRegionsOperationsGetIamPolicy' with the minimum fields required to make a request.
-newDataprocProjectsRegionsOperationsGetIamPolicy ::
-  -- |  Multipart request metadata. See 'payload'.
-  GetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  DataprocProjectsRegionsOperationsGetIamPolicy
+newDataprocProjectsRegionsOperationsGetIamPolicy 
+    ::  GetIamPolicyRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+    -> DataprocProjectsRegionsOperationsGetIamPolicy
 newDataprocProjectsRegionsOperationsGetIamPolicy payload resource =
   DataprocProjectsRegionsOperationsGetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataprocProjectsRegionsOperationsGetIamPolicy
-  where
-  type
-    Rs DataprocProjectsRegionsOperationsGetIamPolicy =
-      Policy
-  type
-    Scopes
-      DataprocProjectsRegionsOperationsGetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    DataprocProjectsRegionsOperationsGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsOperationsGetIamPolicyResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DataprocProjectsRegionsOperationsGetIamPolicy
+         where
+        type Rs DataprocProjectsRegionsOperationsGetIamPolicy
+             = Policy
+        type Scopes
+               DataprocProjectsRegionsOperationsGetIamPolicy
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          DataprocProjectsRegionsOperationsGetIamPolicy{..}
+          = go resource xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              dataprocService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DataprocProjectsRegionsOperationsGetIamPolicyResource)
+                      Core.mempty
+
