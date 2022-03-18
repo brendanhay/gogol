@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,98 +31,99 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.YouTubeReporting.Types
-  ( -- * Configuration
-    youTubeReportingService,
+    (
+    -- * Configuration
+      youTubeReportingService
 
     -- * OAuth Scopes
-    youtubeAnalyticsMonetaryReadOnlyScope,
-    youtubeAnalyticsReadOnlyScope,
+    , youtubeAnalyticsMonetaryReadOnlyScope
+    , youtubeAnalyticsReadOnlyScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** GdataBlobstore2Info
-    GdataBlobstore2Info (..),
-    newGdataBlobstore2Info,
+    , GdataBlobstore2Info (..)
+    , newGdataBlobstore2Info
 
     -- ** GdataCompositeMedia
-    GdataCompositeMedia (..),
-    newGdataCompositeMedia,
+    , GdataCompositeMedia (..)
+    , newGdataCompositeMedia
 
     -- ** GdataCompositeMedia_ReferenceType
-    GdataCompositeMedia_ReferenceType (..),
+    , GdataCompositeMedia_ReferenceType (..)
 
     -- ** GdataContentTypeInfo
-    GdataContentTypeInfo (..),
-    newGdataContentTypeInfo,
+    , GdataContentTypeInfo (..)
+    , newGdataContentTypeInfo
 
     -- ** GdataDiffChecksumsResponse
-    GdataDiffChecksumsResponse (..),
-    newGdataDiffChecksumsResponse,
+    , GdataDiffChecksumsResponse (..)
+    , newGdataDiffChecksumsResponse
 
     -- ** GdataDiffDownloadResponse
-    GdataDiffDownloadResponse (..),
-    newGdataDiffDownloadResponse,
+    , GdataDiffDownloadResponse (..)
+    , newGdataDiffDownloadResponse
 
     -- ** GdataDiffUploadRequest
-    GdataDiffUploadRequest (..),
-    newGdataDiffUploadRequest,
+    , GdataDiffUploadRequest (..)
+    , newGdataDiffUploadRequest
 
     -- ** GdataDiffUploadResponse
-    GdataDiffUploadResponse (..),
-    newGdataDiffUploadResponse,
+    , GdataDiffUploadResponse (..)
+    , newGdataDiffUploadResponse
 
     -- ** GdataDiffVersionResponse
-    GdataDiffVersionResponse (..),
-    newGdataDiffVersionResponse,
+    , GdataDiffVersionResponse (..)
+    , newGdataDiffVersionResponse
 
     -- ** GdataDownloadParameters
-    GdataDownloadParameters (..),
-    newGdataDownloadParameters,
+    , GdataDownloadParameters (..)
+    , newGdataDownloadParameters
 
     -- ** GdataMedia
-    GdataMedia (..),
-    newGdataMedia,
+    , GdataMedia (..)
+    , newGdataMedia
 
     -- ** GdataMedia_ReferenceType
-    GdataMedia_ReferenceType (..),
+    , GdataMedia_ReferenceType (..)
 
     -- ** GdataObjectId
-    GdataObjectId (..),
-    newGdataObjectId,
+    , GdataObjectId (..)
+    , newGdataObjectId
 
     -- ** Job
-    Job (..),
-    newJob,
+    , Job (..)
+    , newJob
 
     -- ** ListJobsResponse
-    ListJobsResponse (..),
-    newListJobsResponse,
+    , ListJobsResponse (..)
+    , newListJobsResponse
 
     -- ** ListReportTypesResponse
-    ListReportTypesResponse (..),
-    newListReportTypesResponse,
+    , ListReportTypesResponse (..)
+    , newListReportTypesResponse
 
     -- ** ListReportsResponse
-    ListReportsResponse (..),
-    newListReportsResponse,
+    , ListReportsResponse (..)
+    , newListReportsResponse
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** ReportType
-    ReportType (..),
-    newReportType,
-  )
-where
+    , ReportType (..)
+    , newReportType
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.YouTubeReporting.Internal.Product
@@ -124,10 +131,10 @@ import Gogol.YouTubeReporting.Internal.Sum
 
 -- | Default request referring to version @v1@ of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 youTubeReportingService :: Core.ServiceConfig
-youTubeReportingService =
-  Core.defaultService
-    (Core.ServiceId "youtubereporting:v1")
-    "youtubereporting.googleapis.com"
+youTubeReportingService
+  = Core.defaultService
+      (Core.ServiceId "youtubereporting:v1")
+      "youtubereporting.googleapis.com"
 
 -- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
 youtubeAnalyticsMonetaryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
