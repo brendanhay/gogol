@@ -19,54 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo.Projects.Repos.Delete
+-- Module      : Gogol.SourceRepo.Projects.UpdateConfig
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a repo.
+-- Updates the Cloud Source Repositories configuration of the project.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.delete@.
-module Network.Google.SourceRepo.Projects.Repos.Delete
+-- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.updateConfig@.
+module Gogol.SourceRepo.Projects.UpdateConfig
   ( -- * Resource
-    SourceRepoProjectsReposDeleteResource,
+    SourceRepoProjectsUpdateConfigResource,
 
     -- ** Constructing a Request
-    newSourceRepoProjectsReposDelete,
-    SourceRepoProjectsReposDelete,
+    newSourceRepoProjectsUpdateConfig,
+    SourceRepoProjectsUpdateConfig,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SourceRepo.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SourceRepo.Types
 
--- | A resource alias for @sourcerepo.projects.repos.delete@ method which the
--- 'SourceRepoProjectsReposDelete' request conforms to.
-type SourceRepoProjectsReposDeleteResource =
+-- | A resource alias for @sourcerepo.projects.updateConfig@ method which the
+-- 'SourceRepoProjectsUpdateConfig' request conforms to.
+type SourceRepoProjectsUpdateConfigResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
+    Core.:> "config"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.ReqBody '[Core.JSON] UpdateProjectConfigRequest
+    Core.:> Core.Patch '[Core.JSON] ProjectConfig
 
--- | Deletes a repo.
+-- | Updates the Cloud Source Repositories configuration of the project.
 --
--- /See:/ 'newSourceRepoProjectsReposDelete' smart constructor.
-data SourceRepoProjectsReposDelete = SourceRepoProjectsReposDelete
+-- /See:/ 'newSourceRepoProjectsUpdateConfig' smart constructor.
+data SourceRepoProjectsUpdateConfig = SourceRepoProjectsUpdateConfig
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the repo to delete. Values are of the form @projects\/\/repos\/@.
+    -- | The name of the requested project. Values are of the form @projects\/@.
     name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: UpdateProjectConfigRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,32 +78,35 @@ data SourceRepoProjectsReposDelete = SourceRepoProjectsReposDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SourceRepoProjectsReposDelete' with the minimum fields required to make a request.
-newSourceRepoProjectsReposDelete ::
-  -- |  The name of the repo to delete. Values are of the form @projects\/\/repos\/@. See 'name'.
+-- | Creates a value of 'SourceRepoProjectsUpdateConfig' with the minimum fields required to make a request.
+newSourceRepoProjectsUpdateConfig ::
+  -- |  The name of the requested project. Values are of the form @projects\/@. See 'name'.
   Core.Text ->
-  SourceRepoProjectsReposDelete
-newSourceRepoProjectsReposDelete name =
-  SourceRepoProjectsReposDelete
+  -- |  Multipart request metadata. See 'payload'.
+  UpdateProjectConfigRequest ->
+  SourceRepoProjectsUpdateConfig
+newSourceRepoProjectsUpdateConfig name payload =
+  SourceRepoProjectsUpdateConfig
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    SourceRepoProjectsReposDelete
+    SourceRepoProjectsUpdateConfig
   where
-  type Rs SourceRepoProjectsReposDelete = Empty
   type
-    Scopes SourceRepoProjectsReposDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/source.full_control"
-       ]
-  requestClient SourceRepoProjectsReposDelete {..} =
+    Rs SourceRepoProjectsUpdateConfig =
+      ProjectConfig
+  type
+    Scopes SourceRepoProjectsUpdateConfig =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient SourceRepoProjectsUpdateConfig {..} =
     go
       name
       xgafv
@@ -108,11 +115,12 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       sourceRepoService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SourceRepoProjectsReposDeleteResource
+              Core.Proxy SourceRepoProjectsUpdateConfigResource
           )
           Core.mempty

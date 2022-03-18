@@ -19,54 +19,53 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo.Projects.GetConfig
+-- Module      : Gogol.SourceRepo.Projects.Repos.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the Cloud Source Repositories configuration of the project.
+-- Deletes a repo.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.getConfig@.
-module Network.Google.SourceRepo.Projects.GetConfig
+-- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.delete@.
+module Gogol.SourceRepo.Projects.Repos.Delete
   ( -- * Resource
-    SourceRepoProjectsGetConfigResource,
+    SourceRepoProjectsReposDeleteResource,
 
     -- ** Constructing a Request
-    newSourceRepoProjectsGetConfig,
-    SourceRepoProjectsGetConfig,
+    newSourceRepoProjectsReposDelete,
+    SourceRepoProjectsReposDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SourceRepo.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SourceRepo.Types
 
--- | A resource alias for @sourcerepo.projects.getConfig@ method which the
--- 'SourceRepoProjectsGetConfig' request conforms to.
-type SourceRepoProjectsGetConfigResource =
+-- | A resource alias for @sourcerepo.projects.repos.delete@ method which the
+-- 'SourceRepoProjectsReposDelete' request conforms to.
+type SourceRepoProjectsReposDeleteResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
-    Core.:> "config"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ProjectConfig
+    Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Returns the Cloud Source Repositories configuration of the project.
+-- | Deletes a repo.
 --
--- /See:/ 'newSourceRepoProjectsGetConfig' smart constructor.
-data SourceRepoProjectsGetConfig = SourceRepoProjectsGetConfig
+-- /See:/ 'newSourceRepoProjectsReposDelete' smart constructor.
+data SourceRepoProjectsReposDelete = SourceRepoProjectsReposDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the requested project. Values are of the form @projects\/@.
+    -- | The name of the repo to delete. Values are of the form @projects\/\/repos\/@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -75,13 +74,13 @@ data SourceRepoProjectsGetConfig = SourceRepoProjectsGetConfig
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SourceRepoProjectsGetConfig' with the minimum fields required to make a request.
-newSourceRepoProjectsGetConfig ::
-  -- |  The name of the requested project. Values are of the form @projects\/@. See 'name'.
+-- | Creates a value of 'SourceRepoProjectsReposDelete' with the minimum fields required to make a request.
+newSourceRepoProjectsReposDelete ::
+  -- |  The name of the repo to delete. Values are of the form @projects\/\/repos\/@. See 'name'.
   Core.Text ->
-  SourceRepoProjectsGetConfig
-newSourceRepoProjectsGetConfig name =
-  SourceRepoProjectsGetConfig
+  SourceRepoProjectsReposDelete
+newSourceRepoProjectsReposDelete name =
+  SourceRepoProjectsReposDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -92,13 +91,15 @@ newSourceRepoProjectsGetConfig name =
 
 instance
   Core.GoogleRequest
-    SourceRepoProjectsGetConfig
+    SourceRepoProjectsReposDelete
   where
-  type Rs SourceRepoProjectsGetConfig = ProjectConfig
+  type Rs SourceRepoProjectsReposDelete = Empty
   type
-    Scopes SourceRepoProjectsGetConfig =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient SourceRepoProjectsGetConfig {..} =
+    Scopes SourceRepoProjectsReposDelete =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/source.full_control"
+       ]
+  requestClient SourceRepoProjectsReposDelete {..} =
     go
       name
       xgafv
@@ -112,6 +113,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SourceRepoProjectsGetConfigResource
+              Core.Proxy SourceRepoProjectsReposDeleteResource
           )
           Core.mempty

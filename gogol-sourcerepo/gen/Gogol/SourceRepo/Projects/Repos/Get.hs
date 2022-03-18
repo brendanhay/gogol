@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo.Projects.Repos.Patch
+-- Module      : Gogol.SourceRepo.Projects.Repos.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates information about a repo.
+-- Returns information about a repo.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.patch@.
-module Network.Google.SourceRepo.Projects.Repos.Patch
+-- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.get@.
+module Gogol.SourceRepo.Projects.Repos.Get
   ( -- * Resource
-    SourceRepoProjectsReposPatchResource,
+    SourceRepoProjectsReposGetResource,
 
     -- ** Constructing a Request
-    newSourceRepoProjectsReposPatch,
-    SourceRepoProjectsReposPatch,
+    newSourceRepoProjectsReposGet,
+    SourceRepoProjectsReposGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SourceRepo.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SourceRepo.Types
 
--- | A resource alias for @sourcerepo.projects.repos.patch@ method which the
--- 'SourceRepoProjectsReposPatch' request conforms to.
-type SourceRepoProjectsReposPatchResource =
+-- | A resource alias for @sourcerepo.projects.repos.get@ method which the
+-- 'SourceRepoProjectsReposGet' request conforms to.
+type SourceRepoProjectsReposGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,13 +53,12 @@ type SourceRepoProjectsReposPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] UpdateRepoRequest
-    Core.:> Core.Patch '[Core.JSON] Repo
+    Core.:> Core.Get '[Core.JSON] Repo
 
--- | Updates information about a repo.
+-- | Returns information about a repo.
 --
--- /See:/ 'newSourceRepoProjectsReposPatch' smart constructor.
-data SourceRepoProjectsReposPatch = SourceRepoProjectsReposPatch
+-- /See:/ 'newSourceRepoProjectsReposGet' smart constructor.
+data SourceRepoProjectsReposGet = SourceRepoProjectsReposGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,8 +67,6 @@ data SourceRepoProjectsReposPatch = SourceRepoProjectsReposPatch
     callback :: (Core.Maybe Core.Text),
     -- | The name of the requested repository. Values are of the form @projects\/\/repos\/@.
     name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: UpdateRepoRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,33 +74,34 @@ data SourceRepoProjectsReposPatch = SourceRepoProjectsReposPatch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SourceRepoProjectsReposPatch' with the minimum fields required to make a request.
-newSourceRepoProjectsReposPatch ::
+-- | Creates a value of 'SourceRepoProjectsReposGet' with the minimum fields required to make a request.
+newSourceRepoProjectsReposGet ::
   -- |  The name of the requested repository. Values are of the form @projects\/\/repos\/@. See 'name'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  UpdateRepoRequest ->
-  SourceRepoProjectsReposPatch
-newSourceRepoProjectsReposPatch name payload =
-  SourceRepoProjectsReposPatch
+  SourceRepoProjectsReposGet
+newSourceRepoProjectsReposGet name =
+  SourceRepoProjectsReposGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
-      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    SourceRepoProjectsReposPatch
+    SourceRepoProjectsReposGet
   where
-  type Rs SourceRepoProjectsReposPatch = Repo
+  type Rs SourceRepoProjectsReposGet = Repo
   type
-    Scopes SourceRepoProjectsReposPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient SourceRepoProjectsReposPatch {..} =
+    Scopes SourceRepoProjectsReposGet =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/source.full_control",
+         "https://www.googleapis.com/auth/source.read_only",
+         "https://www.googleapis.com/auth/source.read_write"
+       ]
+  requestClient SourceRepoProjectsReposGet {..} =
     go
       name
       xgafv
@@ -112,12 +110,11 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       sourceRepoService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SourceRepoProjectsReposPatchResource
+              Core.Proxy SourceRepoProjectsReposGetResource
           )
           Core.mempty

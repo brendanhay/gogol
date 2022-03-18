@@ -19,57 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo.Projects.Repos.SetIamPolicy
+-- Module      : Gogol.SourceRepo.Projects.Repos.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy on the specified resource. Replaces any existing policy.
+-- Creates a repo in the given project with the given name. If the named repository already exists, @CreateRepo@ returns @ALREADY_EXISTS@.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.setIamPolicy@.
-module Network.Google.SourceRepo.Projects.Repos.SetIamPolicy
+-- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.create@.
+module Gogol.SourceRepo.Projects.Repos.Create
   ( -- * Resource
-    SourceRepoProjectsReposSetIamPolicyResource,
+    SourceRepoProjectsReposCreateResource,
 
     -- ** Constructing a Request
-    newSourceRepoProjectsReposSetIamPolicy,
-    SourceRepoProjectsReposSetIamPolicy,
+    newSourceRepoProjectsReposCreate,
+    SourceRepoProjectsReposCreate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SourceRepo.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SourceRepo.Types
 
--- | A resource alias for @sourcerepo.projects.repos.setIamPolicy@ method which the
--- 'SourceRepoProjectsReposSetIamPolicy' request conforms to.
-type SourceRepoProjectsReposSetIamPolicyResource =
+-- | A resource alias for @sourcerepo.projects.repos.create@ method which the
+-- 'SourceRepoProjectsReposCreate' request conforms to.
+type SourceRepoProjectsReposCreateResource =
   "v1"
-    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "repos"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
-    Core.:> Core.Post '[Core.JSON] Policy
+    Core.:> Core.ReqBody '[Core.JSON] Repo
+    Core.:> Core.Post '[Core.JSON] Repo
 
--- | Sets the access control policy on the specified resource. Replaces any existing policy.
+-- | Creates a repo in the given project with the given name. If the named repository already exists, @CreateRepo@ returns @ALREADY_EXISTS@.
 --
--- /See:/ 'newSourceRepoProjectsReposSetIamPolicy' smart constructor.
-data SourceRepoProjectsReposSetIamPolicy = SourceRepoProjectsReposSetIamPolicy
+-- /See:/ 'newSourceRepoProjectsReposCreate' smart constructor.
+data SourceRepoProjectsReposCreate = SourceRepoProjectsReposCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | The project in which to create the repo. Values are of the form @projects\/@.
+    parent :: Core.Text,
     -- | Multipart request metadata.
-    payload :: SetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text,
+    payload :: Repo,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,37 +78,37 @@ data SourceRepoProjectsReposSetIamPolicy = SourceRepoProjectsReposSetIamPolicy
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SourceRepoProjectsReposSetIamPolicy' with the minimum fields required to make a request.
-newSourceRepoProjectsReposSetIamPolicy ::
-  -- |  Multipart request metadata. See 'payload'.
-  SetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+-- | Creates a value of 'SourceRepoProjectsReposCreate' with the minimum fields required to make a request.
+newSourceRepoProjectsReposCreate ::
+  -- |  The project in which to create the repo. Values are of the form @projects\/@. See 'parent'.
   Core.Text ->
-  SourceRepoProjectsReposSetIamPolicy
-newSourceRepoProjectsReposSetIamPolicy payload resource =
-  SourceRepoProjectsReposSetIamPolicy
+  -- |  Multipart request metadata. See 'payload'.
+  Repo ->
+  SourceRepoProjectsReposCreate
+newSourceRepoProjectsReposCreate parent payload =
+  SourceRepoProjectsReposCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      parent = parent,
       payload = payload,
-      resource = resource,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    SourceRepoProjectsReposSetIamPolicy
+    SourceRepoProjectsReposCreate
   where
-  type Rs SourceRepoProjectsReposSetIamPolicy = Policy
+  type Rs SourceRepoProjectsReposCreate = Repo
   type
-    Scopes SourceRepoProjectsReposSetIamPolicy =
+    Scopes SourceRepoProjectsReposCreate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/source.full_control"
        ]
-  requestClient SourceRepoProjectsReposSetIamPolicy {..} =
+  requestClient SourceRepoProjectsReposCreate {..} =
     go
-      resource
+      parent
       xgafv
       accessToken
       callback
@@ -120,7 +121,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                SourceRepoProjectsReposSetIamPolicyResource
+              Core.Proxy SourceRepoProjectsReposCreateResource
           )
           Core.mempty
