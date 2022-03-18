@@ -19,18 +19,54 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.LibraryAgent.Types
+-- Module      : Gogol.LibraryAgent
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.LibraryAgent.Types
+--
+-- A simple Google Example Library API.
+--
+-- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference>
+module Gogol.LibraryAgent
   ( -- * Configuration
     libraryAgentService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
+
+    -- * Resources
+
+    -- ** libraryagent.shelves.books.borrow
+    LibraryAgentShelvesBooksBorrowResource,
+    newLibraryAgentShelvesBooksBorrow,
+    LibraryAgentShelvesBooksBorrow,
+
+    -- ** libraryagent.shelves.books.get
+    LibraryAgentShelvesBooksGetResource,
+    newLibraryAgentShelvesBooksGet,
+    LibraryAgentShelvesBooksGet,
+
+    -- ** libraryagent.shelves.books.list
+    LibraryAgentShelvesBooksListResource,
+    newLibraryAgentShelvesBooksList,
+    LibraryAgentShelvesBooksList,
+
+    -- ** libraryagent.shelves.books.return
+    LibraryAgentShelvesBooksReturnResource,
+    newLibraryAgentShelvesBooksReturn,
+    LibraryAgentShelvesBooksReturn,
+
+    -- ** libraryagent.shelves.get
+    LibraryAgentShelvesGetResource,
+    newLibraryAgentShelvesGet,
+    LibraryAgentShelvesGet,
+
+    -- ** libraryagent.shelves.list
+    LibraryAgentShelvesListResource,
+    newLibraryAgentShelvesList,
+    LibraryAgentShelvesList,
 
     -- * Types
 
@@ -55,17 +91,10 @@ module Network.Google.LibraryAgent.Types
   )
 where
 
-import Network.Google.LibraryAgent.Internal.Product
-import Network.Google.LibraryAgent.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Library Agent API. This contains the host and root path used as a starting point for constructing service requests.
-libraryAgentService :: Core.ServiceConfig
-libraryAgentService =
-  Core.defaultService
-    (Core.ServiceId "libraryagent:v1")
-    "libraryagent.googleapis.com"
-
--- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+import Gogol.LibraryAgent.Shelves.Books.Borrow
+import Gogol.LibraryAgent.Shelves.Books.Get
+import Gogol.LibraryAgent.Shelves.Books.List
+import Gogol.LibraryAgent.Shelves.Books.Return
+import Gogol.LibraryAgent.Shelves.Get
+import Gogol.LibraryAgent.Shelves.List
+import Gogol.LibraryAgent.Types

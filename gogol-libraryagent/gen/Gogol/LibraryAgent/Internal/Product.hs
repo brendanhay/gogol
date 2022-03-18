@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.LibraryAgent.Internal.Product
+-- Module      : Gogol.LibraryAgent.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.LibraryAgent.Internal.Product
+module Gogol.LibraryAgent.Internal.Product
   ( -- * GoogleExampleLibraryagentV1Book
     GoogleExampleLibraryagentV1Book (..),
     newGoogleExampleLibraryagentV1Book,
@@ -44,8 +44,8 @@ module Network.Google.LibraryAgent.Internal.Product
   )
 where
 
-import Network.Google.LibraryAgent.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.LibraryAgent.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | A single book in the library.
 --
