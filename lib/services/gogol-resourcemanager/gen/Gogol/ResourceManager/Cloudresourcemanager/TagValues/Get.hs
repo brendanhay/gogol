@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.tagValues.get@.
 module Gogol.ResourceManager.Cloudresourcemanager.TagValues.Get
-  ( -- * Resource
-    CloudresourcemanagerTagValuesGetResource,
+    (
+    -- * Resource
+      CloudresourcemanagerTagValuesGetResource
 
     -- ** Constructing a Request
-    newCloudresourcemanagerTagValuesGet,
-    CloudresourcemanagerTagValuesGet,
-  )
-where
+    , newCloudresourcemanagerTagValuesGet
+    , CloudresourcemanagerTagValuesGet
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ResourceManager.Types
@@ -45,74 +51,66 @@ import Gogol.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.tagValues.get@ method which the
 -- 'CloudresourcemanagerTagValuesGet' request conforms to.
 type CloudresourcemanagerTagValuesGetResource =
-  "v3"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] TagValue
+     "v3" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] TagValue
 
 -- | Retrieves TagValue. If the TagValue or namespaced name does not exist, or if the user does not have permission to view it, this method will return @PERMISSION_DENIED@.
 --
 -- /See:/ 'newCloudresourcemanagerTagValuesGet' smart constructor.
 data CloudresourcemanagerTagValuesGet = CloudresourcemanagerTagValuesGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for TagValue to be fetched in the format @tagValues\/456@.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Resource name for TagValue to be fetched in the format @tagValues\/456@.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudresourcemanagerTagValuesGet' with the minimum fields required to make a request.
-newCloudresourcemanagerTagValuesGet ::
-  -- |  Required. Resource name for TagValue to be fetched in the format @tagValues\/456@. See 'name'.
-  Core.Text ->
-  CloudresourcemanagerTagValuesGet
+newCloudresourcemanagerTagValuesGet 
+    ::  Core.Text
+       -- ^  Required. Resource name for TagValue to be fetched in the format @tagValues\/456@. See 'name'.
+    -> CloudresourcemanagerTagValuesGet
 newCloudresourcemanagerTagValuesGet name =
   CloudresourcemanagerTagValuesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudresourcemanagerTagValuesGet
-  where
-  type Rs CloudresourcemanagerTagValuesGet = TagValue
-  type
-    Scopes CloudresourcemanagerTagValuesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
-  requestClient CloudresourcemanagerTagValuesGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      resourceManagerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudresourcemanagerTagValuesGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           CloudresourcemanagerTagValuesGet
+         where
+        type Rs CloudresourcemanagerTagValuesGet = TagValue
+        type Scopes CloudresourcemanagerTagValuesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient CloudresourcemanagerTagValuesGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              resourceManagerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CloudresourcemanagerTagValuesGetResource)
+                      Core.mempty
+
