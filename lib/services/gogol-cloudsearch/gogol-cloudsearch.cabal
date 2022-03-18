@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-cloudsearch
-version:            0.5.0
-synopsis:           Google Cloud Search SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-cloudsearch
+version:               0.5.0
+synopsis:              Google Cloud Search SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Cloud Search provides cloud-based search capabilities over Google Workspace data. The Cloud Search API allows indexing of non-Google Workspace data into Cloud Search.
+    Cloud Search provides cloud-based search capabilities over Google Workspace data. The Cloud Search API allows indexing of non-Google Workspace data into Cloud Search.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,73 +28,76 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.CloudSearch
-    Gogol.CloudSearch.Debug.Datasources.Items.CheckAccess
-    Gogol.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
-    Gogol.CloudSearch.Debug.Datasources.Items.Unmappedids.List
-    Gogol.CloudSearch.Debug.Identitysources.Items.ListForunmappedidentity
-    Gogol.CloudSearch.Debug.Identitysources.Unmappedids.List
-    Gogol.CloudSearch.Indexing.Datasources.DeleteSchema
-    Gogol.CloudSearch.Indexing.Datasources.GetSchema
-    Gogol.CloudSearch.Indexing.Datasources.Items.Delete
-    Gogol.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
-    Gogol.CloudSearch.Indexing.Datasources.Items.Get
-    Gogol.CloudSearch.Indexing.Datasources.Items.Index
-    Gogol.CloudSearch.Indexing.Datasources.Items.List
-    Gogol.CloudSearch.Indexing.Datasources.Items.Poll
-    Gogol.CloudSearch.Indexing.Datasources.Items.Push
-    Gogol.CloudSearch.Indexing.Datasources.Items.Unreserve
-    Gogol.CloudSearch.Indexing.Datasources.Items.Upload
-    Gogol.CloudSearch.Indexing.Datasources.UpdateSchema
-    Gogol.CloudSearch.InitializeCustomer
-    Gogol.CloudSearch.Media.Upload
-    Gogol.CloudSearch.Operations.Get
-    Gogol.CloudSearch.Operations.Lro.List
-    Gogol.CloudSearch.Query.Search
-    Gogol.CloudSearch.Query.Sources.List
-    Gogol.CloudSearch.Query.Suggest
-    Gogol.CloudSearch.Settings.Datasources.Create
-    Gogol.CloudSearch.Settings.Datasources.Delete
-    Gogol.CloudSearch.Settings.Datasources.Get
-    Gogol.CloudSearch.Settings.Datasources.List
-    Gogol.CloudSearch.Settings.Datasources.Update
-    Gogol.CloudSearch.Settings.GetCustomer
-    Gogol.CloudSearch.Settings.Searchapplications.Create
-    Gogol.CloudSearch.Settings.Searchapplications.Delete
-    Gogol.CloudSearch.Settings.Searchapplications.Get
-    Gogol.CloudSearch.Settings.Searchapplications.List
-    Gogol.CloudSearch.Settings.Searchapplications.Reset
-    Gogol.CloudSearch.Settings.Searchapplications.Update
-    Gogol.CloudSearch.Settings.UpdateCustomer
-    Gogol.CloudSearch.Stats.GetIndex
-    Gogol.CloudSearch.Stats.GetQuery
-    Gogol.CloudSearch.Stats.GetSearchapplication
-    Gogol.CloudSearch.Stats.GetSession
-    Gogol.CloudSearch.Stats.GetUser
-    Gogol.CloudSearch.Stats.Index.Datasources.Get
-    Gogol.CloudSearch.Stats.Query.Searchapplications.Get
-    Gogol.CloudSearch.Stats.Session.Searchapplications.Get
-    Gogol.CloudSearch.Stats.User.Searchapplications.Get
-    Gogol.CloudSearch.Types
+      Gogol.CloudSearch
+    , Gogol.CloudSearch.Debug.Datasources.Items.CheckAccess
+    , Gogol.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
+    , Gogol.CloudSearch.Debug.Datasources.Items.Unmappedids.List
+    , Gogol.CloudSearch.Debug.Identitysources.Items.ListForunmappedidentity
+    , Gogol.CloudSearch.Debug.Identitysources.Unmappedids.List
+    , Gogol.CloudSearch.Indexing.Datasources.DeleteSchema
+    , Gogol.CloudSearch.Indexing.Datasources.GetSchema
+    , Gogol.CloudSearch.Indexing.Datasources.Items.Delete
+    , Gogol.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
+    , Gogol.CloudSearch.Indexing.Datasources.Items.Get
+    , Gogol.CloudSearch.Indexing.Datasources.Items.Index
+    , Gogol.CloudSearch.Indexing.Datasources.Items.List
+    , Gogol.CloudSearch.Indexing.Datasources.Items.Poll
+    , Gogol.CloudSearch.Indexing.Datasources.Items.Push
+    , Gogol.CloudSearch.Indexing.Datasources.Items.Unreserve
+    , Gogol.CloudSearch.Indexing.Datasources.Items.Upload
+    , Gogol.CloudSearch.Indexing.Datasources.UpdateSchema
+    , Gogol.CloudSearch.InitializeCustomer
+    , Gogol.CloudSearch.Media.Upload
+    , Gogol.CloudSearch.Operations.Get
+    , Gogol.CloudSearch.Operations.Lro.List
+    , Gogol.CloudSearch.Query.Search
+    , Gogol.CloudSearch.Query.Sources.List
+    , Gogol.CloudSearch.Query.Suggest
+    , Gogol.CloudSearch.Settings.Datasources.Create
+    , Gogol.CloudSearch.Settings.Datasources.Delete
+    , Gogol.CloudSearch.Settings.Datasources.Get
+    , Gogol.CloudSearch.Settings.Datasources.List
+    , Gogol.CloudSearch.Settings.Datasources.Update
+    , Gogol.CloudSearch.Settings.GetCustomer
+    , Gogol.CloudSearch.Settings.Searchapplications.Create
+    , Gogol.CloudSearch.Settings.Searchapplications.Delete
+    , Gogol.CloudSearch.Settings.Searchapplications.Get
+    , Gogol.CloudSearch.Settings.Searchapplications.List
+    , Gogol.CloudSearch.Settings.Searchapplications.Reset
+    , Gogol.CloudSearch.Settings.Searchapplications.Update
+    , Gogol.CloudSearch.Settings.UpdateCustomer
+    , Gogol.CloudSearch.Stats.GetIndex
+    , Gogol.CloudSearch.Stats.GetQuery
+    , Gogol.CloudSearch.Stats.GetSearchapplication
+    , Gogol.CloudSearch.Stats.GetSession
+    , Gogol.CloudSearch.Stats.GetUser
+    , Gogol.CloudSearch.Stats.Index.Datasources.Get
+    , Gogol.CloudSearch.Stats.Query.Searchapplications.Get
+    , Gogol.CloudSearch.Stats.Session.Searchapplications.Get
+    , Gogol.CloudSearch.Stats.User.Searchapplications.Get
+    , Gogol.CloudSearch.Types
 
   other-modules:
-    Gogol.CloudSearch.Internal.Product
-    Gogol.CloudSearch.Internal.Sum
+      Gogol.CloudSearch.Internal.Product
+    , Gogol.CloudSearch.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
