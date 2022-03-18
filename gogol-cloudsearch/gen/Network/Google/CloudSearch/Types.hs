@@ -1,1228 +1,927 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudSearch.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudSearch.Types
-    (
-    -- * Service Configuration
-      cloudSearchService
+  ( -- * Configuration
+    cloudSearchService,
 
     -- * OAuth Scopes
-    , cloudSearchSettingsQueryScope
-    , cloudSearchStatsIndexingScope
-    , cloudSearchIndexingScope
-    , cloudSearchScope
-    , cloudSearchSettingsIndexingScope
-    , cloudSearchQueryScope
-    , cloudSearchDebugScope
-    , cloudSearchStatsScope
-    , cloudSearchSettingsScope
-
-    -- * QueryInterpretationReason
-    , QueryInterpretationReason (..)
-
-    -- * DriveMimeTypeRestrictType
-    , DriveMimeTypeRestrictType (..)
-
-    -- * DriveFollowUpRestrictType
-    , DriveFollowUpRestrictType (..)
-
-    -- * ItemContent
-    , ItemContent
-    , itemContent
-    , icHash
-    , icContentFormat
-    , icContentDataRef
-    , icInlineContent
-
-    -- * CustomerUserStats
-    , CustomerUserStats
-    , customerUserStats
-    , cusThirtyDaysActiveUsersCount
-    , cusDate
-    , cusOneDayActiveUsersCount
-    , cusSevenDaysActiveUsersCount
-
-    -- * Photo
-    , Photo
-    , photo
-    , pURL
-
-    -- * SearchItemsByViewURLRequest
-    , SearchItemsByViewURLRequest
-    , searchItemsByViewURLRequest
-    , sibvurDebugOptions
-    , sibvurPageToken
-    , sibvurViewURL
-
-    -- * SearchApplication
-    , SearchApplication
-    , searchApplication
-    , saDataSourceRestrictions
-    , saOperationIds
-    , saDefaultFacetOptions
-    , saScoringConfig
-    , saName
-    , saSourceConfig
-    , saQueryInterpretationConfig
-    , saDisplayName
-    , saEnableAuditLog
-    , saDefaultSortOptions
-
-    -- * BooleanOperatorOptions
-    , BooleanOperatorOptions
-    , booleanOperatorOptions
-    , booOperatorName
-
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- * EnumPropertyOptions
-    , EnumPropertyOptions
-    , enumPropertyOptions
-    , epoPossibleValues
-    , epoOrderedRanking
-    , epoOperatorOptions
-
-    -- * ItemStatusCode
-    , ItemStatusCode (..)
-
-    -- * UnreserveItemsRequest
-    , UnreserveItemsRequest
-    , unreserveItemsRequest
-    , uirQueue
-    , uirDebugOptions
-    , uirConnectorName
-
-    -- * DateOperatorOptions
-    , DateOperatorOptions
-    , dateOperatorOptions
-    , dooOperatorName
-    , dooLessThanOperatorName
-    , dooGreaterThanOperatorName
-
-    -- * GetDataSourceIndexStatsResponse
-    , GetDataSourceIndexStatsResponse
-    , getDataSourceIndexStatsResponse
-    , gdsisrStats
-
-    -- * ObjectDisplayOptions
-    , ObjectDisplayOptions
-    , objectDisplayOptions
-    , odoMetalines
-    , odoObjectDisplayLabel
-
-    -- * QueryItem
-    , QueryItem
-    , queryItem
-    , qiIsSynthetic
-
-    -- * CustomerQueryStats
-    , CustomerQueryStats
-    , customerQueryStats
-    , cqsQueryCountByStatus
-    , cqsDate
-
-    -- * ListUnmAppedIdentitiesResponse
-    , ListUnmAppedIdentitiesResponse
-    , listUnmAppedIdentitiesResponse
-    , luairNextPageToken
-    , luairUnmAppedIdentities
-
-    -- * DeleteQueueItemsRequest
-    , DeleteQueueItemsRequest
-    , deleteQueueItemsRequest
-    , dqirQueue
-    , dqirDebugOptions
-    , dqirConnectorName
-
-    -- * SearchResult
-    , SearchResult
-    , searchResult
-    , srDebugInfo
-    , srSnippet
-    , srURL
-    , srClusteredResults
-    , srMetadata
-    , srTitle
-
-    -- * SpellResult
-    , SpellResult
-    , spellResult
-    , srSuggestedQuery
-
-    -- * PeopleSuggestion
-    , PeopleSuggestion
-    , peopleSuggestion
-    , psPerson
-
-    -- * QuerySource
-    , QuerySource
-    , querySource
-    , qsShortName
-    , qsDisplayName
-    , qsSource
-    , qsOperators
-
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- * SuggestResponse
-    , SuggestResponse
-    , suggestResponse
-    , srSuggestResults
-
-    -- * GetSearchApplicationQueryStatsResponse
-    , GetSearchApplicationQueryStatsResponse
-    , getSearchApplicationQueryStatsResponse
-    , gsaqsrStats
-
-    -- * RepositoryError
-    , RepositoryError
-    , repositoryError
-    , reHTTPStatusCode
-    , reType
-    , reErrorMessage
-
-    -- * QueryInterpretationInterpretationType
-    , QueryInterpretationInterpretationType (..)
-
-    -- * HTMLPropertyOptions
-    , HTMLPropertyOptions
-    , htmlPropertyOptions
-    , hpoRetrievalImportance
-    , hpoOperatorOptions
-
-    -- * PropertyDefinition
-    , PropertyDefinition
-    , propertyDefinition
-    , pdIsSuggestable
-    , pdEnumPropertyOptions
-    , pdHTMLPropertyOptions
-    , pdObjectPropertyOptions
-    , pdIsReturnable
-    , pdTimestampPropertyOptions
-    , pdIntegerPropertyOptions
-    , pdIsWildcardSearchable
-    , pdName
-    , pdIsRepeatable
-    , pdDoublePropertyOptions
-    , pdDisplayOptions
-    , pdTextPropertyOptions
-    , pdIsSortable
-    , pdIsFacetable
-    , pdBooleanPropertyOptions
-    , pdDatePropertyOptions
-
-    -- * SortOptions
-    , SortOptions
-    , sortOptions
-    , soSortOrder
-    , soOperatorName
-
-    -- * ObjectPropertyOptions
-    , ObjectPropertyOptions
-    , objectPropertyOptions
-    , opoSubobjectProperties
-
-    -- * InteractionType
-    , InteractionType (..)
-
-    -- * QueryOperatorType
-    , QueryOperatorType (..)
-
-    -- * SearchResponse
-    , SearchResponse
-    , searchResponse
-    , sSpellResults
-    , sFacetResults
-    , sDebugInfo
-    , sResults
-    , sHasMoreResults
-    , sResultCounts
-    , sResultCountExact
-    , sResultCountEstimate
-    , sQueryInterpretation
-    , sStructuredResults
-    , sErrorInfo
-
-    -- * SuggestResult
-    , SuggestResult
-    , suggestResult
-    , sPeopleSuggestion
-    , sQuerySuggestion
-    , sSuggestedQuery
-    , sSource
-
-    -- * TextValues
-    , TextValues
-    , textValues
-    , tvValues
-
-    -- * DriveLocationRestrict
-    , DriveLocationRestrict
-    , driveLocationRestrict
-    , dlrType
-
-    -- * ListQuerySourcesResponse
-    , ListQuerySourcesResponse
-    , listQuerySourcesResponse
-    , lqsrNextPageToken
-    , lqsrSources
-
-    -- * DoubleOperatorOptions
-    , DoubleOperatorOptions
-    , doubleOperatorOptions
-    , dOperatorName
-
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- * Person
-    , Person
-    , person
-    , pEmailAddresses
-    , pPersonNames
-    , pPhotos
-    , pName
-    , pObfuscatedId
-
-    -- * CompositeFilter
-    , CompositeFilter
-    , compositeFilter
-    , cfSubFilters
-    , cfLogicOperator
-
-    -- * ResultDisplayLine
-    , ResultDisplayLine
-    , resultDisplayLine
-    , rdlFields
-
-    -- * DoubleValues
-    , DoubleValues
-    , doubleValues
-    , dvValues
-
-    -- * Snippet
-    , Snippet
-    , snippet
-    , sMatchRanges
-    , sSnippet
-
-    -- * TextOperatorOptions
-    , TextOperatorOptions
-    , textOperatorOptions
-    , tooOperatorName
-    , tooExactMatchWithOperator
-
-    -- * EnumPropertyOptionsOrderedRanking
-    , EnumPropertyOptionsOrderedRanking (..)
-
-    -- * QueryInterpretationOptions
-    , QueryInterpretationOptions
-    , queryInterpretationOptions
-    , qioDisableNlInterpretation
-    , qioEnableVerbatimMode
-    , qioDisableSupplementalResults
-
-    -- * ResetSearchApplicationRequest
-    , ResetSearchApplicationRequest
-    , resetSearchApplicationRequest
-    , rsarDebugOptions
-
-    -- * IntegerPropertyOptionsOrderedRanking
-    , IntegerPropertyOptionsOrderedRanking (..)
-
-    -- * ItemMetadata
-    , ItemMetadata
-    , itemMetadata
-    , imSourceRepositoryURL
-    , imHash
-    , imObjectType
-    , imContainerName
-    , imInteractions
-    , imMimeType
-    , imUpdateTime
-    , imKeywords
-    , imContextAttributes
-    , imTitle
-    , imContentLanguage
-    , imSearchQualityMetadata
-    , imCreateTime
-
-    -- * FilterOptions
-    , FilterOptions
-    , filterOptions
-    , foObjectType
-    , foFilter
-
-    -- * StructuredResult
-    , StructuredResult
-    , structuredResult
-    , srPerson
-
-    -- * ProcessingError
-    , ProcessingError
-    , processingError
-    , peFieldViolations
-    , peCode
-    , peErrorMessage
-
-    -- * PushItemType
-    , PushItemType (..)
-
-    -- * ListItemNamesForUnmAppedIdentityResponse
-    , ListItemNamesForUnmAppedIdentityResponse
-    , listItemNamesForUnmAppedIdentityResponse
-    , linfuairNextPageToken
-    , linfuairItemNames
-
-    -- * CompositeFilterLogicOperator
-    , CompositeFilterLogicOperator (..)
-
-    -- * ItemACL
-    , ItemACL
-    , itemACL
-    , iaOwners
-    , iaReaders
-    , iaACLInheritanceType
-    , iaInheritACLFrom
-    , iaDeniedReaders
-
-    -- * Value
-    , Value
-    , value
-    , vIntegerValue
-    , vTimestampValue
-    , vDoubleValue
-    , vStringValue
-    , vDateValue
-    , vBooleanValue
-
-    -- * FieldViolation
-    , FieldViolation
-    , fieldViolation
-    , fvField
-    , fvDescription
-
-    -- * SourceScoringConfigSourceImportance
-    , SourceScoringConfigSourceImportance (..)
-
-    -- * Metaline
-    , Metaline
-    , metaline
-    , mProperties
-
-    -- * SearchApplicationSessionStats
-    , SearchApplicationSessionStats
-    , searchApplicationSessionStats
-    , sassSearchSessionsCount
-    , sassDate
-
-    -- * FacetBucket
-    , FacetBucket
-    , facetBucket
-    , fbValue
-    , fbCount
-    , fbPercentage
-
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- * AuditLoggingSettings
-    , AuditLoggingSettings
-    , auditLoggingSettings
-    , alsProject
-    , alsLogDataReadActions
-    , alsLogDataWriteActions
-    , alsLogAdminReadActions
-
-    -- * RetrievalImportanceImportance
-    , RetrievalImportanceImportance (..)
-
-    -- * TimestampOperatorOptions
-    , TimestampOperatorOptions
-    , timestampOperatorOptions
-    , tOperatorName
-    , tLessThanOperatorName
-    , tGreaterThanOperatorName
-
-    -- * ProcessingErrorCode
-    , ProcessingErrorCode (..)
-
-    -- * GetSearchApplicationSessionStatsResponse
-    , GetSearchApplicationSessionStatsResponse
-    , getSearchApplicationSessionStatsResponse
-    , gsassrStats
-
-    -- * IntegerOperatorOptions
-    , IntegerOperatorOptions
-    , integerOperatorOptions
-    , iooOperatorName
-    , iooLessThanOperatorName
-    , iooGreaterThanOperatorName
-
-    -- * SortOptionsSortOrder
-    , SortOptionsSortOrder (..)
-
-    -- * QuerySuggestion
-    , QuerySuggestion
-    , querySuggestion
-
-    -- * ListSearchApplicationsResponse
-    , ListSearchApplicationsResponse
-    , listSearchApplicationsResponse
-    , lsarNextPageToken
-    , lsarSearchApplications
-
-    -- * ResultDebugInfo
-    , ResultDebugInfo
-    , resultDebugInfo
-    , rdiFormattedDebugInfo
-
-    -- * QueryCountByStatus
-    , QueryCountByStatus
-    , queryCountByStatus
-    , qcbsCount
-    , qcbsStatusCode
-
-    -- * ItemCountByStatus
-    , ItemCountByStatus
-    , itemCountByStatus
-    , icbsCount
-    , icbsStatusCode
-
-    -- * TimestampPropertyOptions
-    , TimestampPropertyOptions
-    , timestampPropertyOptions
-    , tpoOperatorOptions
-
-    -- * ResultCounts
-    , ResultCounts
-    , resultCounts
-    , rcSourceResultCounts
-
-    -- * FreshnessOptions
-    , FreshnessOptions
-    , freshnessOptions
-    , foFreshnessDuration
-    , foFreshnessProperty
-
-    -- * DebugOptions
-    , DebugOptions
-    , debugOptions
-    , doEnableDebugging
-
-    -- * IntegerPropertyOptions
-    , IntegerPropertyOptions
-    , integerPropertyOptions
-    , ipoMaximumValue
-    , ipoOrderedRanking
-    , ipoMinimumValue
-    , ipoOperatorOptions
-
-    -- * DataSourceRestriction
-    , DataSourceRestriction
-    , dataSourceRestriction
-    , dsrFilterOptions
-    , dsrSource
-
-    -- * Schema
-    , Schema
-    , schema
-    , sObjectDefinitions
-    , sOperationIds
-
-    -- * GetSearchApplicationUserStatsResponse
-    , GetSearchApplicationUserStatsResponse
-    , getSearchApplicationUserStatsResponse
-    , gsausrStats
-
-    -- * DriveTimeSpanRestrict
-    , DriveTimeSpanRestrict
-    , driveTimeSpanRestrict
-    , dtsrType
-
-    -- * ResultDisplayField
-    , ResultDisplayField
-    , resultDisplayField
-    , rdfProperty
-    , rdfOperatorName
-    , rdfLabel
-
-    -- * UpdateSchemaRequest
-    , UpdateSchemaRequest
-    , updateSchemaRequest
-    , usrValidateOnly
-    , usrSchema
-    , usrDebugOptions
-
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- * IndexingDatasourcesItemsDeleteMode
-    , IndexingDatasourcesItemsDeleteMode (..)
-
-    -- * DisplayedProperty
-    , DisplayedProperty
-    , displayedProperty
-    , dpPropertyName
-
-    -- * FacetResult
-    , FacetResult
-    , facetResult
-    , frSourceName
-    , frBuckets
-    , frObjectType
-    , frOperatorName
-
-    -- * DriveMimeTypeRestrict
-    , DriveMimeTypeRestrict
-    , driveMimeTypeRestrict
-    , dmtrType
-
-    -- * StructuredDataObject
-    , StructuredDataObject
-    , structuredDataObject
-    , sdoProperties
-
-    -- * Media
-    , Media
-    , media
-    , mResourceName
-
-    -- * ItemStructuredData
-    , ItemStructuredData
-    , itemStructuredData
-    , isdHash
-    , isdObject
-
-    -- * DriveFollowUpRestrict
-    , DriveFollowUpRestrict
-    , driveFollowUpRestrict
-    , dfurType
-
-    -- * DateValues
-    , DateValues
-    , dateValues
-    , dValues
-
-    -- * SearchApplicationUserStats
-    , SearchApplicationUserStats
-    , searchApplicationUserStats
-    , sausThirtyDaysActiveUsersCount
-    , sausDate
-    , sausOneDayActiveUsersCount
-    , sausSevenDaysActiveUsersCount
-
-    -- * NamedProperty
-    , NamedProperty
-    , namedProperty
-    , npDoubleValues
-    , npTextValues
-    , npDateValues
-    , npName
-    , npBooleanValue
-    , npObjectValues
-    , npHTMLValues
-    , npEnumValues
-    , npTimestampValues
-    , npIntegerValues
-
-    -- * DebugIdentitysourcesUnmAppedidsListResolutionStatusCode
-    , DebugIdentitysourcesUnmAppedidsListResolutionStatusCode (..)
-
-    -- * MatchRange
-    , MatchRange
-    , matchRange
-    , mrStart
-    , mrEnd
-
-    -- * ResponseDebugInfo
-    , ResponseDebugInfo
-    , responseDebugInfo
-    , rFormattedDebugInfo
-
-    -- * ListDataSourceResponse
-    , ListDataSourceResponse
-    , listDataSourceResponse
-    , ldsrNextPageToken
-    , ldsrSources
-
-    -- * SearchRequest
-    , SearchRequest
-    , searchRequest
-    , srSortOptions
-    , srDataSourceRestrictions
-    , srQueryInterpretationOptions
-    , srStart
-    , srQuery
-    , srFacetOptions
-    , srContextAttributes
-    , srPageSize
-    , srRequestOptions
-
-    -- * Name
-    , Name
-    , name
-    , nDisplayName
-
-    -- * SourceResultCount
-    , SourceResultCount
-    , sourceResultCount
-    , srcHasMoreResults
-    , srcResultCountExact
-    , srcResultCountEstimate
-    , srcSource
-
-    -- * PollItemsRequestStatusCodesItem
-    , PollItemsRequestStatusCodesItem (..)
-
-    -- * SearchApplicationQueryStats
-    , SearchApplicationQueryStats
-    , searchApplicationQueryStats
-    , saqsQueryCountByStatus
-    , saqsDate
-
-    -- * SourceConfig
-    , SourceConfig
-    , sourceConfig
-    , scCrowdingConfig
-    , scScoringConfig
-    , scSource
-
-    -- * UnmAppedIdentityResolutionStatusCode
-    , UnmAppedIdentityResolutionStatusCode (..)
-
-    -- * ListItemsResponse
-    , ListItemsResponse
-    , listItemsResponse
-    , lirNextPageToken
-    , lirItems
-
-    -- * ScoringConfig
-    , ScoringConfig
-    , scoringConfig
-    , scDisablePersonalization
-    , scDisableFreshness
-
-    -- * StartUploadItemRequest
-    , StartUploadItemRequest
-    , startUploadItemRequest
-    , suirDebugOptions
-    , suirConnectorName
-
-    -- * UploadItemRef
-    , UploadItemRef
-    , uploadItemRef
-    , uirName
-
-    -- * PushItemRequest
-    , PushItemRequest
-    , pushItemRequest
-    , pirDebugOptions
-    , pirConnectorName
-    , pirItem
-
-    -- * GetCustomerQueryStatsResponse
-    , GetCustomerQueryStatsResponse
-    , getCustomerQueryStatsResponse
-    , gcqsrStats
-
-    -- * DoublePropertyOptions
-    , DoublePropertyOptions
-    , doublePropertyOptions
-    , dpoOperatorOptions
-
-    -- * QueryOperator
-    , QueryOperator
-    , queryOperator
-    , qoIsSuggestable
-    , qoIsReturnable
-    , qoObjectType
-    , qoIsRepeatable
-    , qoOperatorName
-    , qoIsSortable
-    , qoIsFacetable
-    , qoDisplayName
-    , qoLessThanOperatorName
-    , qoType
-    , qoEnumValues
-    , qoGreaterThanOperatorName
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * PollItemsResponse
-    , PollItemsResponse
-    , pollItemsResponse
-    , pirItems
-
-    -- * SourceScoringConfig
-    , SourceScoringConfig
-    , sourceScoringConfig
-    , sscSourceImportance
-
-    -- * EmailAddress
-    , EmailAddress
-    , emailAddress
-    , eaEmailAddress
-
-    -- * RetrievalImportance
-    , RetrievalImportance
-    , retrievalImportance
-    , riImportance
-
-    -- * DataSourceIndexStats
-    , DataSourceIndexStats
-    , dataSourceIndexStats
-    , dsisItemCountByStatus
-    , dsisDate
-
-    -- * SourceCrowdingConfig
-    , SourceCrowdingConfig
-    , sourceCrowdingConfig
-    , sccNumSuggestions
-    , sccNumResults
-
-    -- * QueryInterpretationConfig
-    , QueryInterpretationConfig
-    , queryInterpretationConfig
-    , qicForceDisableSupplementalResults
-    , qicForceVerbatimMode
-
-    -- * Interaction
-    , Interaction
-    , interaction
-    , iInteractionTime
-    , iPrincipal
-    , iType
-
-    -- * Principal
-    , Principal
-    , principal
-    , pUserResourceName
-    , pGroupResourceName
-    , pGsuitePrincipal
-
-    -- * IndexItemRequest
-    , IndexItemRequest
-    , indexItemRequest
-    , iirMode
-    , iirDebugOptions
-    , iirConnectorName
-    , iirItem
-    , iirIndexItemOptions
-
-    -- * RepositoryErrorType
-    , RepositoryErrorType (..)
-
-    -- * TextPropertyOptions
-    , TextPropertyOptions
-    , textPropertyOptions
-    , tRetrievalImportance
-    , tOperatorOptions
-
-    -- * EnumValuePair
-    , EnumValuePair
-    , enumValuePair
-    , evpIntegerValue
-    , evpStringValue
-
-    -- * DriveLocationRestrictType
-    , DriveLocationRestrictType (..)
-
-    -- * Metadata
-    , Metadata
-    , metadata
-    , mObjectType
-    , mOwner
-    , mMimeType
-    , mUpdateTime
-    , mDisplayOptions
-    , mSource
-    , mCreateTime
-    , mFields
-
-    -- * UpdateDataSourceRequest
-    , UpdateDataSourceRequest
-    , updateDataSourceRequest
-    , udsrDebugOptions
-    , udsrSource
-
-    -- * DataSource
-    , DataSource
-    , dataSource
-    , dsShortName
-    , dsItemsVisibility
-    , dsOperationIds
-    , dsDisableServing
-    , dsIndexingServiceAccounts
-    , dsDisableModifications
-    , dsName
-    , dsDisplayName
-
-    -- * HTMLValues
-    , HTMLValues
-    , htmlValues
-    , hvValues
-
-    -- * HTMLOperatorOptions
-    , HTMLOperatorOptions
-    , htmlOperatorOptions
-    , hooOperatorName
-
-    -- * Item
-    , Item
-    , item
-    , iStatus
-    , iItemType
-    , iPayload
-    , iStructuredData
-    , iQueue
-    , iContent
-    , iName
-    , iVersion
-    , iMetadata
-    , iACL
-
-    -- * Source
-    , Source
-    , source
-    , sName
-    , sPredefinedSource
-
-    -- * PropertyDisplayOptions
-    , PropertyDisplayOptions
-    , propertyDisplayOptions
-    , pdoDisplayLabel
-
-    -- * ObjectValues
-    , ObjectValues
-    , objectValues
-    , ovValues
-
-    -- * ObjectOptions
-    , ObjectOptions
-    , objectOptions
-    , ooFreshnessOptions
-    , ooDisplayOptions
-
-    -- * FacetOptions
-    , FacetOptions
-    , facetOptions
-    , fSourceName
-    , fObjectType
-    , fNumFacetBuckets
-    , fOperatorName
-
-    -- * SuggestRequest
-    , SuggestRequest
-    , suggestRequest
-    , sDataSourceRestrictions
-    , sQuery
-    , sRequestOptions
-
-    -- * Filter
-    , Filter
-    , filter'
-    , fCompositeFilter
-    , fValueFilter
-
-    -- * ObjectDefinition
-    , ObjectDefinition
-    , objectDefinition
-    , odName
-    , odOptions
-    , odPropertyDefinitions
-
-    -- * ItemItemType
-    , ItemItemType (..)
-
-    -- * ItemCountByStatusStatusCode
-    , ItemCountByStatusStatusCode (..)
-
-    -- * VPCSettings
-    , VPCSettings
-    , vpcSettings
-    , vsProject
-
-    -- * PollItemsRequest
-    , PollItemsRequest
-    , pollItemsRequest
-    , pQueue
-    , pDebugOptions
-    , pConnectorName
-    , pStatusCodes
-    , pLimit
-
-    -- * QueryInterpretation
-    , QueryInterpretation
-    , queryInterpretation
-    , qiInterpretedQuery
-    , qiReason
-    , qiInterpretationType
-
-    -- * UnmAppedIdentity
-    , UnmAppedIdentity
-    , unmAppedIdentity
-    , uaiResolutionStatusCode
-    , uaiExternalIdentity
-
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- * CustomerIndexStats
-    , CustomerIndexStats
-    , customerIndexStats
-    , cisItemCountByStatus
-    , cisDate
-
-    -- * PushItem
-    , PushItem
-    , pushItem
-    , piRepositoryError
-    , piContentHash
-    , piStructuredDataHash
-    , piPayload
-    , piQueue
-    , piMetadataHash
-    , piType
-
-    -- * CustomerSessionStats
-    , CustomerSessionStats
-    , customerSessionStats
-    , cssSearchSessionsCount
-    , cssDate
-
-    -- * ErrorMessage
-    , ErrorMessage
-    , errorMessage
-    , emSource
-    , emErrorMessage
-
-    -- * BooleanPropertyOptions
-    , BooleanPropertyOptions
-    , booleanPropertyOptions
-    , bpoOperatorOptions
-
-    -- * ValueFilter
-    , ValueFilter
-    , valueFilter
-    , vfValue
-    , vfOperatorName
-
-    -- * EnumOperatorOptions
-    , EnumOperatorOptions
-    , enumOperatorOptions
-    , eooOperatorName
-
-    -- * ContextAttribute
-    , ContextAttribute
-    , contextAttribute
-    , caValues
-    , caName
-
-    -- * DatePropertyOptions
-    , DatePropertyOptions
-    , datePropertyOptions
-    , dOperatorOptions
-
-    -- * EnumValues
-    , EnumValues
-    , enumValues
-    , evValues
-
-    -- * GSuitePrincipal
-    , GSuitePrincipal
-    , gSuitePrincipal
-    , gspGsuiteGroupEmail
-    , gspGsuiteUserEmail
-    , gspGsuiteDomain
-
-    -- * IndexItemOptions
-    , IndexItemOptions
-    , indexItemOptions
-    , iioAllowUnknownGsuitePrincipals
-
-    -- * SearchQualityMetadata
-    , SearchQualityMetadata
-    , searchQualityMetadata
-    , sqmQuality
-
-    -- * ItemContentContentFormat
-    , ItemContentContentFormat (..)
-
-    -- * TimestampValues
-    , TimestampValues
-    , timestampValues
-    , tValues
-
-    -- * ErrorInfo
-    , ErrorInfo
-    , errorInfo
-    , eiErrorMessages
-
-    -- * ResultDisplayMetadata
-    , ResultDisplayMetadata
-    , resultDisplayMetadata
-    , rdmMetalines
-    , rdmObjectTypeLabel
-
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- * IntegerValues
-    , IntegerValues
-    , integerValues
-    , ivValues
-
-    -- * GetCustomerSessionStatsResponse
-    , GetCustomerSessionStatsResponse
-    , getCustomerSessionStatsResponse
-    , gcssrStats
-
-    -- * SearchItemsByViewURLResponse
-    , SearchItemsByViewURLResponse
-    , searchItemsByViewURLResponse
-    , sibvurNextPageToken
-    , sibvurItems
-
-    -- * SourcePredefinedSource
-    , SourcePredefinedSource (..)
-
-    -- * GetCustomerIndexStatsResponse
-    , GetCustomerIndexStatsResponse
-    , getCustomerIndexStatsResponse
-    , gcisrStats
-
-    -- * RestrictItem
-    , RestrictItem
-    , restrictItem
-    , riDriveLocationRestrict
-    , riDriveTimeSpanRestrict
-    , riDriveMimeTypeRestrict
-    , riDriveFollowUpRestrict
-    , riSearchOperator
-
-    -- * DriveTimeSpanRestrictType
-    , DriveTimeSpanRestrictType (..)
-
-    -- * IndexItemRequestMode
-    , IndexItemRequestMode (..)
-
-    -- * CustomerSettings
-    , CustomerSettings
-    , customerSettings
-    , csAuditLoggingSettings
-    , csVPCSettings
-
-    -- * ItemACLACLInheritanceType
-    , ItemACLACLInheritanceType (..)
-
-    -- * CheckAccessResponse
-    , CheckAccessResponse
-    , checkAccessResponse
-    , carHasAccess
-
-    -- * RequestOptions
-    , RequestOptions
-    , requestOptions
-    , roLanguageCode
-    , roDebugOptions
-    , roTimeZone
-    , roSearchApplicationId
-
-    -- * ItemStatus
-    , ItemStatus
-    , itemStatus
-    , isProcessingErrors
-    , isCode
-    , isRepositoryErrors
-
-    -- * GetCustomerUserStatsResponse
-    , GetCustomerUserStatsResponse
-    , getCustomerUserStatsResponse
-    , gcusrStats
-    ) where
-
-import Network.Google.CloudSearch.Types.Product
-import Network.Google.CloudSearch.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v1' of the Cloud Search API. This contains the host and root path used as a starting point for constructing service requests.
-cloudSearchService :: ServiceConfig
-cloudSearchService
-  = defaultService (ServiceId "cloudsearch:v1")
-      "cloudsearch.googleapis.com"
+    cloud_searchScope,
+    cloud_searchDebugScope,
+    cloud_searchIndexingScope,
+    cloud_searchQueryScope,
+    cloud_searchSettingsScope,
+    cloud_searchSettingsIndexingScope,
+    cloud_searchSettingsQueryScope,
+    cloud_searchStatsScope,
+    cloud_searchStatsIndexingScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** AclInfo
+    AclInfo (..),
+    newAclInfo,
+
+    -- ** AclInfo_Scope
+    AclInfo_Scope (..),
+
+    -- ** AppId
+    AppId (..),
+    newAppId,
+
+    -- ** AppId_AppType
+    AppId_AppType (..),
+
+    -- ** AppId_GsuiteAppType
+    AppId_GsuiteAppType (..),
+
+    -- ** AuditLoggingSettings
+    AuditLoggingSettings (..),
+    newAuditLoggingSettings,
+
+    -- ** AvatarInfo
+    AvatarInfo (..),
+    newAvatarInfo,
+
+    -- ** BooleanOperatorOptions
+    BooleanOperatorOptions (..),
+    newBooleanOperatorOptions,
+
+    -- ** BooleanPropertyOptions
+    BooleanPropertyOptions (..),
+    newBooleanPropertyOptions,
+
+    -- ** CheckAccessResponse
+    CheckAccessResponse (..),
+    newCheckAccessResponse,
+
+    -- ** CompositeFilter
+    CompositeFilter (..),
+    newCompositeFilter,
+
+    -- ** CompositeFilter_LogicOperator
+    CompositeFilter_LogicOperator (..),
+
+    -- ** ContextAttribute
+    ContextAttribute (..),
+    newContextAttribute,
+
+    -- ** CustomEmoji
+    CustomEmoji (..),
+    newCustomEmoji,
+
+    -- ** CustomEmoji_State
+    CustomEmoji_State (..),
+
+    -- ** CustomerId
+    CustomerId (..),
+    newCustomerId,
+
+    -- ** CustomerIndexStats
+    CustomerIndexStats (..),
+    newCustomerIndexStats,
+
+    -- ** CustomerQueryStats
+    CustomerQueryStats (..),
+    newCustomerQueryStats,
+
+    -- ** CustomerSearchApplicationStats
+    CustomerSearchApplicationStats (..),
+    newCustomerSearchApplicationStats,
+
+    -- ** CustomerSessionStats
+    CustomerSessionStats (..),
+    newCustomerSessionStats,
+
+    -- ** CustomerSettings
+    CustomerSettings (..),
+    newCustomerSettings,
+
+    -- ** CustomerUserStats
+    CustomerUserStats (..),
+    newCustomerUserStats,
+
+    -- ** DataSource
+    DataSource (..),
+    newDataSource,
+
+    -- ** DataSourceIndexStats
+    DataSourceIndexStats (..),
+    newDataSourceIndexStats,
+
+    -- ** DataSourceRestriction
+    DataSourceRestriction (..),
+    newDataSourceRestriction,
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DateOperatorOptions
+    DateOperatorOptions (..),
+    newDateOperatorOptions,
+
+    -- ** DatePropertyOptions
+    DatePropertyOptions (..),
+    newDatePropertyOptions,
+
+    -- ** DateValues
+    DateValues (..),
+    newDateValues,
+
+    -- ** DebugOptions
+    DebugOptions (..),
+    newDebugOptions,
+
+    -- ** DeleteQueueItemsRequest
+    DeleteQueueItemsRequest (..),
+    newDeleteQueueItemsRequest,
+
+    -- ** DisplayedProperty
+    DisplayedProperty (..),
+    newDisplayedProperty,
+
+    -- ** DmId
+    DmId (..),
+    newDmId,
+
+    -- ** DoubleOperatorOptions
+    DoubleOperatorOptions (..),
+    newDoubleOperatorOptions,
+
+    -- ** DoublePropertyOptions
+    DoublePropertyOptions (..),
+    newDoublePropertyOptions,
+
+    -- ** DoubleValues
+    DoubleValues (..),
+    newDoubleValues,
+
+    -- ** DriveFollowUpRestrict
+    DriveFollowUpRestrict (..),
+    newDriveFollowUpRestrict,
+
+    -- ** DriveFollowUpRestrict_Type
+    DriveFollowUpRestrict_Type (..),
+
+    -- ** DriveLocationRestrict
+    DriveLocationRestrict (..),
+    newDriveLocationRestrict,
+
+    -- ** DriveLocationRestrict_Type
+    DriveLocationRestrict_Type (..),
+
+    -- ** DriveMimeTypeRestrict
+    DriveMimeTypeRestrict (..),
+    newDriveMimeTypeRestrict,
+
+    -- ** DriveMimeTypeRestrict_Type
+    DriveMimeTypeRestrict_Type (..),
+
+    -- ** DriveTimeSpanRestrict
+    DriveTimeSpanRestrict (..),
+    newDriveTimeSpanRestrict,
+
+    -- ** DriveTimeSpanRestrict_Type
+    DriveTimeSpanRestrict_Type (..),
+
+    -- ** DynamiteSpacesScoringInfo
+    DynamiteSpacesScoringInfo (..),
+    newDynamiteSpacesScoringInfo,
+
+    -- ** EmailAddress
+    EmailAddress (..),
+    newEmailAddress,
+
+    -- ** Emoji
+    Emoji (..),
+    newEmoji,
+
+    -- ** EnumOperatorOptions
+    EnumOperatorOptions (..),
+    newEnumOperatorOptions,
+
+    -- ** EnumPropertyOptions
+    EnumPropertyOptions (..),
+    newEnumPropertyOptions,
+
+    -- ** EnumPropertyOptions_OrderedRanking
+    EnumPropertyOptions_OrderedRanking (..),
+
+    -- ** EnumValuePair
+    EnumValuePair (..),
+    newEnumValuePair,
+
+    -- ** EnumValues
+    EnumValues (..),
+    newEnumValues,
+
+    -- ** ErrorInfo
+    ErrorInfo (..),
+    newErrorInfo,
+
+    -- ** ErrorMessage
+    ErrorMessage (..),
+    newErrorMessage,
+
+    -- ** FacetBucket
+    FacetBucket (..),
+    newFacetBucket,
+
+    -- ** FacetOptions
+    FacetOptions (..),
+    newFacetOptions,
+
+    -- ** FacetResult
+    FacetResult (..),
+    newFacetResult,
+
+    -- ** FieldViolation
+    FieldViolation (..),
+    newFieldViolation,
+
+    -- ** Filter
+    Filter (..),
+    newFilter,
+
+    -- ** FilterOptions
+    FilterOptions (..),
+    newFilterOptions,
+
+    -- ** FreshnessOptions
+    FreshnessOptions (..),
+    newFreshnessOptions,
+
+    -- ** GSuitePrincipal
+    GSuitePrincipal (..),
+    newGSuitePrincipal,
+
+    -- ** GetCustomerIndexStatsResponse
+    GetCustomerIndexStatsResponse (..),
+    newGetCustomerIndexStatsResponse,
+
+    -- ** GetCustomerQueryStatsResponse
+    GetCustomerQueryStatsResponse (..),
+    newGetCustomerQueryStatsResponse,
+
+    -- ** GetCustomerSearchApplicationStatsResponse
+    GetCustomerSearchApplicationStatsResponse (..),
+    newGetCustomerSearchApplicationStatsResponse,
+
+    -- ** GetCustomerSessionStatsResponse
+    GetCustomerSessionStatsResponse (..),
+    newGetCustomerSessionStatsResponse,
+
+    -- ** GetCustomerUserStatsResponse
+    GetCustomerUserStatsResponse (..),
+    newGetCustomerUserStatsResponse,
+
+    -- ** GetDataSourceIndexStatsResponse
+    GetDataSourceIndexStatsResponse (..),
+    newGetDataSourceIndexStatsResponse,
+
+    -- ** GetSearchApplicationQueryStatsResponse
+    GetSearchApplicationQueryStatsResponse (..),
+    newGetSearchApplicationQueryStatsResponse,
+
+    -- ** GetSearchApplicationSessionStatsResponse
+    GetSearchApplicationSessionStatsResponse (..),
+    newGetSearchApplicationSessionStatsResponse,
+
+    -- ** GetSearchApplicationUserStatsResponse
+    GetSearchApplicationUserStatsResponse (..),
+    newGetSearchApplicationUserStatsResponse,
+
+    -- ** GoogleDocsMetadata
+    GoogleDocsMetadata (..),
+    newGoogleDocsMetadata,
+
+    -- ** GoogleDocsMetadata_DocumentType
+    GoogleDocsMetadata_DocumentType (..),
+
+    -- ** GoogleDocsResultInfo
+    GoogleDocsResultInfo (..),
+    newGoogleDocsResultInfo,
+
+    -- ** GroupId
+    GroupId (..),
+    newGroupId,
+
+    -- ** HtmlOperatorOptions
+    HtmlOperatorOptions (..),
+    newHtmlOperatorOptions,
+
+    -- ** HtmlPropertyOptions
+    HtmlPropertyOptions (..),
+    newHtmlPropertyOptions,
+
+    -- ** HtmlValues
+    HtmlValues (..),
+    newHtmlValues,
+
+    -- ** Id
+    Id (..),
+    newId,
+
+    -- ** IndexItemOptions
+    IndexItemOptions (..),
+    newIndexItemOptions,
+
+    -- ** IndexItemRequest
+    IndexItemRequest (..),
+    newIndexItemRequest,
+
+    -- ** IndexItemRequest_Mode
+    IndexItemRequest_Mode (..),
+
+    -- ** InitializeCustomerRequest
+    InitializeCustomerRequest (..),
+    newInitializeCustomerRequest,
+
+    -- ** IntegerOperatorOptions
+    IntegerOperatorOptions (..),
+    newIntegerOperatorOptions,
+
+    -- ** IntegerPropertyOptions
+    IntegerPropertyOptions (..),
+    newIntegerPropertyOptions,
+
+    -- ** IntegerPropertyOptions_OrderedRanking
+    IntegerPropertyOptions_OrderedRanking (..),
+
+    -- ** IntegerValues
+    IntegerValues (..),
+    newIntegerValues,
+
+    -- ** Interaction
+    Interaction (..),
+    newInteraction,
+
+    -- ** Interaction_Type
+    Interaction_Type (..),
+
+    -- ** Item
+    Item (..),
+    newItem,
+
+    -- ** Item_ItemType
+    Item_ItemType (..),
+
+    -- ** ItemAcl
+    ItemAcl (..),
+    newItemAcl,
+
+    -- ** ItemAcl_AclInheritanceType
+    ItemAcl_AclInheritanceType (..),
+
+    -- ** ItemContent
+    ItemContent (..),
+    newItemContent,
+
+    -- ** ItemContent_ContentFormat
+    ItemContent_ContentFormat (..),
+
+    -- ** ItemCountByStatus
+    ItemCountByStatus (..),
+    newItemCountByStatus,
+
+    -- ** ItemCountByStatus_StatusCode
+    ItemCountByStatus_StatusCode (..),
+
+    -- ** ItemMetadata
+    ItemMetadata (..),
+    newItemMetadata,
+
+    -- ** ItemStatus
+    ItemStatus (..),
+    newItemStatus,
+
+    -- ** ItemStatus_Code
+    ItemStatus_Code (..),
+
+    -- ** ItemStructuredData
+    ItemStructuredData (..),
+    newItemStructuredData,
+
+    -- ** ListDataSourceResponse
+    ListDataSourceResponse (..),
+    newListDataSourceResponse,
+
+    -- ** ListItemNamesForUnmappedIdentityResponse
+    ListItemNamesForUnmappedIdentityResponse (..),
+    newListItemNamesForUnmappedIdentityResponse,
+
+    -- ** ListItemsResponse
+    ListItemsResponse (..),
+    newListItemsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListQuerySourcesResponse
+    ListQuerySourcesResponse (..),
+    newListQuerySourcesResponse,
+
+    -- ** ListSearchApplicationsResponse
+    ListSearchApplicationsResponse (..),
+    newListSearchApplicationsResponse,
+
+    -- ** ListUnmappedIdentitiesResponse
+    ListUnmappedIdentitiesResponse (..),
+    newListUnmappedIdentitiesResponse,
+
+    -- ** MatchRange
+    MatchRange (..),
+    newMatchRange,
+
+    -- ** Media
+    Media (..),
+    newMedia,
+
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
+
+    -- ** Metaline
+    Metaline (..),
+    newMetaline,
+
+    -- ** Name
+    Name (..),
+    newName,
+
+    -- ** NamedProperty
+    NamedProperty (..),
+    newNamedProperty,
+
+    -- ** ObjectDefinition
+    ObjectDefinition (..),
+    newObjectDefinition,
+
+    -- ** ObjectDisplayOptions
+    ObjectDisplayOptions (..),
+    newObjectDisplayOptions,
+
+    -- ** ObjectOptions
+    ObjectOptions (..),
+    newObjectOptions,
+
+    -- ** ObjectPropertyOptions
+    ObjectPropertyOptions (..),
+    newObjectPropertyOptions,
+
+    -- ** ObjectValues
+    ObjectValues (..),
+    newObjectValues,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** PeopleSuggestion
+    PeopleSuggestion (..),
+    newPeopleSuggestion,
+
+    -- ** Person
+    Person (..),
+    newPerson,
+
+    -- ** Photo
+    Photo (..),
+    newPhoto,
+
+    -- ** PollItemsRequest
+    PollItemsRequest (..),
+    newPollItemsRequest,
+
+    -- ** PollItemsRequest_StatusCodesItem
+    PollItemsRequest_StatusCodesItem (..),
+
+    -- ** PollItemsResponse
+    PollItemsResponse (..),
+    newPollItemsResponse,
+
+    -- ** Principal
+    Principal (..),
+    newPrincipal,
+
+    -- ** ProcessingError
+    ProcessingError (..),
+    newProcessingError,
+
+    -- ** ProcessingError_Code
+    ProcessingError_Code (..),
+
+    -- ** PropertyDefinition
+    PropertyDefinition (..),
+    newPropertyDefinition,
+
+    -- ** PropertyDisplayOptions
+    PropertyDisplayOptions (..),
+    newPropertyDisplayOptions,
+
+    -- ** PushItem
+    PushItem (..),
+    newPushItem,
+
+    -- ** PushItem_Type
+    PushItem_Type (..),
+
+    -- ** PushItemRequest
+    PushItemRequest (..),
+    newPushItemRequest,
+
+    -- ** QueryCountByStatus
+    QueryCountByStatus (..),
+    newQueryCountByStatus,
+
+    -- ** QueryInterpretation
+    QueryInterpretation (..),
+    newQueryInterpretation,
+
+    -- ** QueryInterpretation_InterpretationType
+    QueryInterpretation_InterpretationType (..),
+
+    -- ** QueryInterpretation_Reason
+    QueryInterpretation_Reason (..),
+
+    -- ** QueryInterpretationConfig
+    QueryInterpretationConfig (..),
+    newQueryInterpretationConfig,
+
+    -- ** QueryInterpretationOptions
+    QueryInterpretationOptions (..),
+    newQueryInterpretationOptions,
+
+    -- ** QueryItem
+    QueryItem (..),
+    newQueryItem,
+
+    -- ** QueryOperator
+    QueryOperator (..),
+    newQueryOperator,
+
+    -- ** QueryOperator_Type
+    QueryOperator_Type (..),
+
+    -- ** QuerySource
+    QuerySource (..),
+    newQuerySource,
+
+    -- ** QuerySuggestion
+    QuerySuggestion (..),
+    newQuerySuggestion,
+
+    -- ** RepositoryError
+    RepositoryError (..),
+    newRepositoryError,
+
+    -- ** RepositoryError_Type
+    RepositoryError_Type (..),
+
+    -- ** RequestOptions
+    RequestOptions (..),
+    newRequestOptions,
+
+    -- ** ResetSearchApplicationRequest
+    ResetSearchApplicationRequest (..),
+    newResetSearchApplicationRequest,
+
+    -- ** ResponseDebugInfo
+    ResponseDebugInfo (..),
+    newResponseDebugInfo,
+
+    -- ** RestrictItem
+    RestrictItem (..),
+    newRestrictItem,
+
+    -- ** ResultCounts
+    ResultCounts (..),
+    newResultCounts,
+
+    -- ** ResultDebugInfo
+    ResultDebugInfo (..),
+    newResultDebugInfo,
+
+    -- ** ResultDisplayField
+    ResultDisplayField (..),
+    newResultDisplayField,
+
+    -- ** ResultDisplayLine
+    ResultDisplayLine (..),
+    newResultDisplayLine,
+
+    -- ** ResultDisplayMetadata
+    ResultDisplayMetadata (..),
+    newResultDisplayMetadata,
+
+    -- ** RetrievalImportance
+    RetrievalImportance (..),
+    newRetrievalImportance,
+
+    -- ** RetrievalImportance_Importance
+    RetrievalImportance_Importance (..),
+
+    -- ** Schema
+    Schema (..),
+    newSchema,
+
+    -- ** ScoringConfig
+    ScoringConfig (..),
+    newScoringConfig,
+
+    -- ** SearchApplication
+    SearchApplication (..),
+    newSearchApplication,
+
+    -- ** SearchApplicationQueryStats
+    SearchApplicationQueryStats (..),
+    newSearchApplicationQueryStats,
+
+    -- ** SearchApplicationSessionStats
+    SearchApplicationSessionStats (..),
+    newSearchApplicationSessionStats,
+
+    -- ** SearchApplicationUserStats
+    SearchApplicationUserStats (..),
+    newSearchApplicationUserStats,
+
+    -- ** SearchItemsByViewUrlRequest
+    SearchItemsByViewUrlRequest (..),
+    newSearchItemsByViewUrlRequest,
+
+    -- ** SearchItemsByViewUrlResponse
+    SearchItemsByViewUrlResponse (..),
+    newSearchItemsByViewUrlResponse,
+
+    -- ** SearchQualityMetadata
+    SearchQualityMetadata (..),
+    newSearchQualityMetadata,
+
+    -- ** SearchRequest
+    SearchRequest (..),
+    newSearchRequest,
+
+    -- ** SearchResponse
+    SearchResponse (..),
+    newSearchResponse,
+
+    -- ** SearchResult
+    SearchResult (..),
+    newSearchResult,
+
+    -- ** ShareScope
+    ShareScope (..),
+    newShareScope,
+
+    -- ** ShareScope_Scope
+    ShareScope_Scope (..),
+
+    -- ** Snippet
+    Snippet (..),
+    newSnippet,
+
+    -- ** SortOptions
+    SortOptions (..),
+    newSortOptions,
+
+    -- ** SortOptions_SortOrder
+    SortOptions_SortOrder (..),
+
+    -- ** Source
+    Source (..),
+    newSource,
+
+    -- ** Source_PredefinedSource
+    Source_PredefinedSource (..),
+
+    -- ** SourceConfig
+    SourceConfig (..),
+    newSourceConfig,
+
+    -- ** SourceCrowdingConfig
+    SourceCrowdingConfig (..),
+    newSourceCrowdingConfig,
+
+    -- ** SourceResultCount
+    SourceResultCount (..),
+    newSourceResultCount,
+
+    -- ** SourceScoringConfig
+    SourceScoringConfig (..),
+    newSourceScoringConfig,
+
+    -- ** SourceScoringConfig_SourceImportance
+    SourceScoringConfig_SourceImportance (..),
+
+    -- ** SpaceId
+    SpaceId (..),
+    newSpaceId,
+
+    -- ** SpaceInfo
+    SpaceInfo (..),
+    newSpaceInfo,
+
+    -- ** SpaceInfo_UserMembershipState
+    SpaceInfo_UserMembershipState (..),
+
+    -- ** SpellResult
+    SpellResult (..),
+    newSpellResult,
+
+    -- ** StartUploadItemRequest
+    StartUploadItemRequest (..),
+    newStartUploadItemRequest,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StructuredDataObject
+    StructuredDataObject (..),
+    newStructuredDataObject,
+
+    -- ** StructuredResult
+    StructuredResult (..),
+    newStructuredResult,
+
+    -- ** SuggestRequest
+    SuggestRequest (..),
+    newSuggestRequest,
+
+    -- ** SuggestResponse
+    SuggestResponse (..),
+    newSuggestResponse,
+
+    -- ** SuggestResult
+    SuggestResult (..),
+    newSuggestResult,
+
+    -- ** TextOperatorOptions
+    TextOperatorOptions (..),
+    newTextOperatorOptions,
+
+    -- ** TextPropertyOptions
+    TextPropertyOptions (..),
+    newTextPropertyOptions,
+
+    -- ** TextValues
+    TextValues (..),
+    newTextValues,
+
+    -- ** TimestampOperatorOptions
+    TimestampOperatorOptions (..),
+    newTimestampOperatorOptions,
+
+    -- ** TimestampPropertyOptions
+    TimestampPropertyOptions (..),
+    newTimestampPropertyOptions,
+
+    -- ** TimestampValues
+    TimestampValues (..),
+    newTimestampValues,
+
+    -- ** TypeInfo
+    TypeInfo (..),
+    newTypeInfo,
+
+    -- ** UnmappedIdentity
+    UnmappedIdentity (..),
+    newUnmappedIdentity,
+
+    -- ** UnmappedIdentity_ResolutionStatusCode
+    UnmappedIdentity_ResolutionStatusCode (..),
+
+    -- ** UnreserveItemsRequest
+    UnreserveItemsRequest (..),
+    newUnreserveItemsRequest,
+
+    -- ** UpdateDataSourceRequest
+    UpdateDataSourceRequest (..),
+    newUpdateDataSourceRequest,
+
+    -- ** UpdateSchemaRequest
+    UpdateSchemaRequest (..),
+    newUpdateSchemaRequest,
+
+    -- ** UploadItemRef
+    UploadItemRef (..),
+    newUploadItemRef,
+
+    -- ** UserId
+    UserId (..),
+    newUserId,
+
+    -- ** UserId_Type
+    UserId_Type (..),
+
+    -- ** VPCSettings
+    VPCSettings (..),
+    newVPCSettings,
+
+    -- ** Value
+    Value (..),
+    newValue,
+
+    -- ** ValueFilter
+    ValueFilter (..),
+    newValueFilter,
+
+    -- ** VideoInfo
+    VideoInfo (..),
+    newVideoInfo,
+
+    -- ** DebugIdentitysourcesUnmappedidsListResolutionStatusCode
+    DebugIdentitysourcesUnmappedidsListResolutionStatusCode (..),
+
+    -- ** IndexingDatasourcesItemsDeleteMode
+    IndexingDatasourcesItemsDeleteMode (..),
+  )
+where
+
+import Network.Google.CloudSearch.Internal.Product
+import Network.Google.CloudSearch.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Search API. This contains the host and root path used as a starting point for constructing service requests.
+cloudSearchService :: Core.ServiceConfig
+cloudSearchService =
+  Core.defaultService
+    (Core.ServiceId "cloudsearch:v1")
+    "cloudsearch.googleapis.com"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloudSearchSettingsQueryScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings.query"]
-cloudSearchSettingsQueryScope = Proxy
+cloud_searchScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search"]
+cloud_searchScope = Core.Proxy
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloudSearchStatsIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.stats.indexing"]
-cloudSearchStatsIndexingScope = Proxy
+cloud_searchDebugScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.debug"]
+cloud_searchDebugScope = Core.Proxy
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloudSearchIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.indexing"]
-cloudSearchIndexingScope = Proxy
-
--- | Index and serve your organization\'s data with Cloud Search
-cloudSearchScope :: Proxy '["https://www.googleapis.com/auth/cloud_search"]
-cloudSearchScope = Proxy
-
--- | Index and serve your organization\'s data with Cloud Search
-cloudSearchSettingsIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings.indexing"]
-cloudSearchSettingsIndexingScope = Proxy
+cloud_searchIndexingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.indexing"]
+cloud_searchIndexingScope = Core.Proxy
 
 -- | Search your organization\'s data in the Cloud Search index
-cloudSearchQueryScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.query"]
-cloudSearchQueryScope = Proxy
+cloud_searchQueryScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.query"]
+cloud_searchQueryScope = Core.Proxy
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloudSearchDebugScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.debug"]
-cloudSearchDebugScope = Proxy
+cloud_searchSettingsScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.settings"]
+cloud_searchSettingsScope = Core.Proxy
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloudSearchStatsScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.stats"]
-cloudSearchStatsScope = Proxy
+cloud_searchSettingsIndexingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.settings.indexing"]
+cloud_searchSettingsIndexingScope = Core.Proxy
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloudSearchSettingsScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings"]
-cloudSearchSettingsScope = Proxy
+cloud_searchSettingsQueryScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.settings.query"]
+cloud_searchSettingsQueryScope = Core.Proxy
+
+-- | Index and serve your organization\'s data with Cloud Search
+cloud_searchStatsScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.stats"]
+cloud_searchStatsScope = Core.Proxy
+
+-- | Index and serve your organization\'s data with Cloud Search
+cloud_searchStatsIndexingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.stats.indexing"]
+cloud_searchStatsIndexingScope = Core.Proxy
