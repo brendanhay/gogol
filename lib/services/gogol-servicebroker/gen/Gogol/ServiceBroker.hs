@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,59 +36,59 @@
 --
 -- /See:/ <https://cloud.google.com/kubernetes-engine/docs/concepts/add-on/service-broker Service Broker API Reference>
 module Gogol.ServiceBroker
-  ( -- * Configuration
-    serviceBrokerService,
+    (
+    -- * Configuration
+      serviceBrokerService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** servicebroker.getIamPolicy
-    ServiceBrokerGetIamPolicyResource,
-    newServiceBrokerGetIamPolicy,
-    ServiceBrokerGetIamPolicy,
+    , ServiceBrokerGetIamPolicyResource
+    , newServiceBrokerGetIamPolicy
+    , ServiceBrokerGetIamPolicy
 
     -- ** servicebroker.setIamPolicy
-    ServiceBrokerSetIamPolicyResource,
-    newServiceBrokerSetIamPolicy,
-    ServiceBrokerSetIamPolicy,
+    , ServiceBrokerSetIamPolicyResource
+    , newServiceBrokerSetIamPolicy
+    , ServiceBrokerSetIamPolicy
 
     -- ** servicebroker.testIamPermissions
-    ServiceBrokerTestIamPermissionsResource,
-    newServiceBrokerTestIamPermissions,
-    ServiceBrokerTestIamPermissions,
+    , ServiceBrokerTestIamPermissionsResource
+    , newServiceBrokerTestIamPermissions
+    , ServiceBrokerTestIamPermissions
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** GoogleIamV1__Binding
-    GoogleIamV1__Binding (..),
-    newGoogleIamV1__Binding,
+    , GoogleIamV1__Binding (..)
+    , newGoogleIamV1__Binding
 
     -- ** GoogleIamV1__Policy
-    GoogleIamV1__Policy (..),
-    newGoogleIamV1__Policy,
+    , GoogleIamV1__Policy (..)
+    , newGoogleIamV1__Policy
 
     -- ** GoogleIamV1__SetIamPolicyRequest
-    GoogleIamV1__SetIamPolicyRequest (..),
-    newGoogleIamV1__SetIamPolicyRequest,
+    , GoogleIamV1__SetIamPolicyRequest (..)
+    , newGoogleIamV1__SetIamPolicyRequest
 
     -- ** GoogleIamV1__TestIamPermissionsRequest
-    GoogleIamV1__TestIamPermissionsRequest (..),
-    newGoogleIamV1__TestIamPermissionsRequest,
+    , GoogleIamV1__TestIamPermissionsRequest (..)
+    , newGoogleIamV1__TestIamPermissionsRequest
 
     -- ** GoogleIamV1__TestIamPermissionsResponse
-    GoogleIamV1__TestIamPermissionsResponse (..),
-    newGoogleIamV1__TestIamPermissionsResponse,
+    , GoogleIamV1__TestIamPermissionsResponse (..)
+    , newGoogleIamV1__TestIamPermissionsResponse
 
     -- ** GoogleType__Expr
-    GoogleType__Expr (..),
-    newGoogleType__Expr,
-  )
-where
+    , GoogleType__Expr (..)
+    , newGoogleType__Expr
+    ) where
 
 import Gogol.ServiceBroker.GetIamPolicy
 import Gogol.ServiceBroker.SetIamPolicy
