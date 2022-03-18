@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,14 +30,14 @@
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.import@.
 module Gogol.Redis.Projects.Locations.Instances.Import
-    (
-    -- * Resource
-      RedisProjectsLocationsInstancesImportResource
+  ( -- * Resource
+    RedisProjectsLocationsInstancesImportResource,
 
     -- ** Constructing a Request
-    , newRedisProjectsLocationsInstancesImport
-    , RedisProjectsLocationsInstancesImport
-    ) where
+    newRedisProjectsLocationsInstancesImport,
+    RedisProjectsLocationsInstancesImport,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Redis.Types
@@ -51,75 +45,83 @@ import Gogol.Redis.Types
 -- | A resource alias for @redis.projects.locations.instances.import@ method which the
 -- 'RedisProjectsLocationsInstancesImport' request conforms to.
 type RedisProjectsLocationsInstancesImportResource =
-     "v1" Core.:>
-       Core.CaptureMode "name" "import" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.ReqBody '[Core.JSON] ImportInstanceRequest
-                       Core.:> Core.Post '[Core.JSON] Operation
+  "v1"
+    Core.:> Core.CaptureMode "name" "import" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] ImportInstanceRequest
+    Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Import a Redis RDB snapshot file from Cloud Storage into a Redis instance. Redis may stop serving during this operation. Instance state will be IMPORTING for entire operation. When complete, the instance will contain only data from the imported file. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
 --
 -- /See:/ 'newRedisProjectsLocationsInstancesImport' smart constructor.
 data RedisProjectsLocationsInstancesImport = RedisProjectsLocationsInstancesImport
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region.
-    , name :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: ImportInstanceRequest
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region.
+    name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: ImportInstanceRequest,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'RedisProjectsLocationsInstancesImport' with the minimum fields required to make a request.
-newRedisProjectsLocationsInstancesImport 
-    ::  Core.Text
-       -- ^  Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region. See 'name'.
-    -> ImportInstanceRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> RedisProjectsLocationsInstancesImport
+newRedisProjectsLocationsInstancesImport ::
+  -- |  Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region. See 'name'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  ImportInstanceRequest ->
+  RedisProjectsLocationsInstancesImport
 newRedisProjectsLocationsInstancesImport name payload =
   RedisProjectsLocationsInstancesImport
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , payload = payload
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      payload = payload,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           RedisProjectsLocationsInstancesImport
-         where
-        type Rs RedisProjectsLocationsInstancesImport =
-             Operation
-        type Scopes RedisProjectsLocationsInstancesImport =
-             '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient
-          RedisProjectsLocationsInstancesImport{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              redisService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           RedisProjectsLocationsInstancesImportResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    RedisProjectsLocationsInstancesImport
+  where
+  type
+    Rs RedisProjectsLocationsInstancesImport =
+      Operation
+  type
+    Scopes RedisProjectsLocationsInstancesImport =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient
+    RedisProjectsLocationsInstancesImport {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        redisService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  RedisProjectsLocationsInstancesImportResource
+            )
+            Core.mempty
