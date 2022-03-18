@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Translate
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,349 +30,336 @@
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference>
 module Network.Google.Translate
-    (
-    -- * Service Configuration
-      translateService
+  ( -- * Configuration
+    translateService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudTranslationScope
-
-    -- * API Declaration
-    , TranslateAPI
+    cloudPlatformScope,
+    cloudTranslationScope,
 
     -- * Resources
 
     -- ** translate.projects.detectLanguage
-    , module Network.Google.Resource.Translate.Projects.DetectLanguage
+    TranslateProjectsDetectLanguageResource,
+    newTranslateProjectsDetectLanguage,
+    TranslateProjectsDetectLanguage,
 
     -- ** translate.projects.getSupportedLanguages
-    , module Network.Google.Resource.Translate.Projects.GetSupportedLanguages
+    TranslateProjectsGetSupportedLanguagesResource,
+    newTranslateProjectsGetSupportedLanguages,
+    TranslateProjectsGetSupportedLanguages,
+
+    -- ** translate.projects.locations.batchTranslateDocument
+    TranslateProjectsLocationsBatchTranslateDocumentResource,
+    newTranslateProjectsLocationsBatchTranslateDocument,
+    TranslateProjectsLocationsBatchTranslateDocument,
 
     -- ** translate.projects.locations.batchTranslateText
-    , module Network.Google.Resource.Translate.Projects.Locations.BatchTranslateText
+    TranslateProjectsLocationsBatchTranslateTextResource,
+    newTranslateProjectsLocationsBatchTranslateText,
+    TranslateProjectsLocationsBatchTranslateText,
 
     -- ** translate.projects.locations.detectLanguage
-    , module Network.Google.Resource.Translate.Projects.Locations.DetectLanguage
+    TranslateProjectsLocationsDetectLanguageResource,
+    newTranslateProjectsLocationsDetectLanguage,
+    TranslateProjectsLocationsDetectLanguage,
 
     -- ** translate.projects.locations.get
-    , module Network.Google.Resource.Translate.Projects.Locations.Get
+    TranslateProjectsLocationsGetResource,
+    newTranslateProjectsLocationsGet,
+    TranslateProjectsLocationsGet,
 
     -- ** translate.projects.locations.getSupportedLanguages
-    , module Network.Google.Resource.Translate.Projects.Locations.GetSupportedLanguages
+    TranslateProjectsLocationsGetSupportedLanguagesResource,
+    newTranslateProjectsLocationsGetSupportedLanguages,
+    TranslateProjectsLocationsGetSupportedLanguages,
 
     -- ** translate.projects.locations.glossaries.create
-    , module Network.Google.Resource.Translate.Projects.Locations.Glossaries.Create
+    TranslateProjectsLocationsGlossariesCreateResource,
+    newTranslateProjectsLocationsGlossariesCreate,
+    TranslateProjectsLocationsGlossariesCreate,
 
     -- ** translate.projects.locations.glossaries.delete
-    , module Network.Google.Resource.Translate.Projects.Locations.Glossaries.Delete
+    TranslateProjectsLocationsGlossariesDeleteResource,
+    newTranslateProjectsLocationsGlossariesDelete,
+    TranslateProjectsLocationsGlossariesDelete,
 
     -- ** translate.projects.locations.glossaries.get
-    , module Network.Google.Resource.Translate.Projects.Locations.Glossaries.Get
+    TranslateProjectsLocationsGlossariesGetResource,
+    newTranslateProjectsLocationsGlossariesGet,
+    TranslateProjectsLocationsGlossariesGet,
 
     -- ** translate.projects.locations.glossaries.list
-    , module Network.Google.Resource.Translate.Projects.Locations.Glossaries.List
+    TranslateProjectsLocationsGlossariesListResource,
+    newTranslateProjectsLocationsGlossariesList,
+    TranslateProjectsLocationsGlossariesList,
 
     -- ** translate.projects.locations.list
-    , module Network.Google.Resource.Translate.Projects.Locations.List
+    TranslateProjectsLocationsListResource,
+    newTranslateProjectsLocationsList,
+    TranslateProjectsLocationsList,
 
     -- ** translate.projects.locations.operations.cancel
-    , module Network.Google.Resource.Translate.Projects.Locations.Operations.Cancel
+    TranslateProjectsLocationsOperationsCancelResource,
+    newTranslateProjectsLocationsOperationsCancel,
+    TranslateProjectsLocationsOperationsCancel,
 
     -- ** translate.projects.locations.operations.delete
-    , module Network.Google.Resource.Translate.Projects.Locations.Operations.Delete
+    TranslateProjectsLocationsOperationsDeleteResource,
+    newTranslateProjectsLocationsOperationsDelete,
+    TranslateProjectsLocationsOperationsDelete,
 
     -- ** translate.projects.locations.operations.get
-    , module Network.Google.Resource.Translate.Projects.Locations.Operations.Get
+    TranslateProjectsLocationsOperationsGetResource,
+    newTranslateProjectsLocationsOperationsGet,
+    TranslateProjectsLocationsOperationsGet,
 
     -- ** translate.projects.locations.operations.list
-    , module Network.Google.Resource.Translate.Projects.Locations.Operations.List
+    TranslateProjectsLocationsOperationsListResource,
+    newTranslateProjectsLocationsOperationsList,
+    TranslateProjectsLocationsOperationsList,
 
     -- ** translate.projects.locations.operations.wait
-    , module Network.Google.Resource.Translate.Projects.Locations.Operations.Wait
+    TranslateProjectsLocationsOperationsWaitResource,
+    newTranslateProjectsLocationsOperationsWait,
+    TranslateProjectsLocationsOperationsWait,
+
+    -- ** translate.projects.locations.translateDocument
+    TranslateProjectsLocationsTranslateDocumentResource,
+    newTranslateProjectsLocationsTranslateDocument,
+    TranslateProjectsLocationsTranslateDocument,
 
     -- ** translate.projects.locations.translateText
-    , module Network.Google.Resource.Translate.Projects.Locations.TranslateText
+    TranslateProjectsLocationsTranslateTextResource,
+    newTranslateProjectsLocationsTranslateText,
+    TranslateProjectsLocationsTranslateText,
 
     -- ** translate.projects.translateText
-    , module Network.Google.Resource.Translate.Projects.TranslateText
+    TranslateProjectsTranslateTextResource,
+    newTranslateProjectsTranslateText,
+    TranslateProjectsTranslateText,
 
     -- * Types
 
-    -- ** SupportedLanguage
-    , SupportedLanguage
-    , supportedLanguage
-    , slLanguageCode
-    , slSupportTarget
-    , slSupportSource
-    , slDisplayName
-
-    -- ** DetectLanguageRequest
-    , DetectLanguageRequest
-    , detectLanguageRequest
-    , dlrContent
-    , dlrMimeType
-    , dlrModel
-    , dlrLabels
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** WaitOperationRequest
-    , WaitOperationRequest
-    , waitOperationRequest
-    , worTimeout
-
-    -- ** TranslateTextGlossaryConfig
-    , TranslateTextGlossaryConfig
-    , translateTextGlossaryConfig
-    , ttgcIgnoreCase
-    , ttgcGlossary
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** GcsSource
-    , GcsSource
-    , gcsSource
-    , gsInputURI
-
-    -- ** TranslateTextRequest
-    , TranslateTextRequest
-    , translateTextRequest
-    , ttrGlossaryConfig
-    , ttrContents
-    , ttrTargetLanguageCode
-    , ttrMimeType
-    , ttrModel
-    , ttrSourceLanguageCode
-    , ttrLabels
-
-    -- ** Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** TranslateTextResponse
-    , TranslateTextResponse
-    , translateTextResponse
-    , ttrGlossaryTranslations
-    , ttrTranslations
-
-    -- ** GcsDestination
-    , GcsDestination
-    , gcsDestination
-    , gdOutputURIPrefix
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** BatchTranslateTextRequestGlossaries
-    , BatchTranslateTextRequestGlossaries
-    , batchTranslateTextRequestGlossaries
-    , bttrgAddtional
-
-    -- ** InputConfig
-    , InputConfig
-    , inputConfig
-    , icGcsSource
-    , icMimeType
-
-    -- ** DetectedLanguage
-    , DetectedLanguage
-    , detectedLanguage
-    , dlLanguageCode
-    , dlConfidence
-
-    -- ** SupportedLanguages
-    , SupportedLanguages
-    , supportedLanguages
-    , slLanguages
-
-    -- ** TranslateTextRequestLabels
-    , TranslateTextRequestLabels
-    , translateTextRequestLabels
-    , ttrlAddtional
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
-    -- ** BatchTranslateTextRequestModels
-    , BatchTranslateTextRequestModels
-    , batchTranslateTextRequestModels
-    , bttrmAddtional
+    -- ** BatchDocumentInputConfig
+    BatchDocumentInputConfig (..),
+    newBatchDocumentInputConfig,
 
-    -- ** GlossaryInputConfig
-    , GlossaryInputConfig
-    , glossaryInputConfig
-    , gicGcsSource
+    -- ** BatchDocumentOutputConfig
+    BatchDocumentOutputConfig (..),
+    newBatchDocumentOutputConfig,
 
-    -- ** LanguageCodePair
-    , LanguageCodePair
-    , languageCodePair
-    , lcpTargetLanguageCode
-    , lcpSourceLanguageCode
+    -- ** BatchTranslateDocumentRequest
+    BatchTranslateDocumentRequest (..),
+    newBatchTranslateDocumentRequest,
 
-    -- ** OutputConfig
-    , OutputConfig
-    , outputConfig
-    , ocGcsDestination
+    -- ** BatchTranslateDocumentRequest_FormatConversions
+    BatchTranslateDocumentRequest_FormatConversions (..),
+    newBatchTranslateDocumentRequest_FormatConversions,
 
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** BatchTranslateDocumentRequest_Glossaries
+    BatchTranslateDocumentRequest_Glossaries (..),
+    newBatchTranslateDocumentRequest_Glossaries,
 
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** Translation
-    , Translation
-    , translation
-    , tGlossaryConfig
-    , tDetectedLanguageCode
-    , tModel
-    , tTranslatedText
-
-    -- ** BatchTranslateTextRequestLabels
-    , BatchTranslateTextRequestLabels
-    , batchTranslateTextRequestLabels
-    , bttrlAddtional
-
-    -- ** DetectLanguageResponse
-    , DetectLanguageResponse
-    , detectLanguageResponse
-    , dlrLanguages
+    -- ** BatchTranslateDocumentRequest_Models
+    BatchTranslateDocumentRequest_Models (..),
+    newBatchTranslateDocumentRequest_Models,
 
     -- ** BatchTranslateTextRequest
-    , BatchTranslateTextRequest
-    , batchTranslateTextRequest
-    , bttrInputConfigs
-    , bttrTargetLanguageCodes
-    , bttrModels
-    , bttrSourceLanguageCode
-    , bttrOutputConfig
-    , bttrLabels
-    , bttrGlossaries
+    BatchTranslateTextRequest (..),
+    newBatchTranslateTextRequest,
+
+    -- ** BatchTranslateTextRequest_Glossaries
+    BatchTranslateTextRequest_Glossaries (..),
+    newBatchTranslateTextRequest_Glossaries,
+
+    -- ** BatchTranslateTextRequest_Labels
+    BatchTranslateTextRequest_Labels (..),
+    newBatchTranslateTextRequest_Labels,
+
+    -- ** BatchTranslateTextRequest_Models
+    BatchTranslateTextRequest_Models (..),
+    newBatchTranslateTextRequest_Models,
+
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** DetectLanguageRequest
+    DetectLanguageRequest (..),
+    newDetectLanguageRequest,
+
+    -- ** DetectLanguageRequest_Labels
+    DetectLanguageRequest_Labels (..),
+    newDetectLanguageRequest_Labels,
+
+    -- ** DetectLanguageResponse
+    DetectLanguageResponse (..),
+    newDetectLanguageResponse,
+
+    -- ** DetectedLanguage
+    DetectedLanguage (..),
+    newDetectedLanguage,
+
+    -- ** DocumentInputConfig
+    DocumentInputConfig (..),
+    newDocumentInputConfig,
+
+    -- ** DocumentOutputConfig
+    DocumentOutputConfig (..),
+    newDocumentOutputConfig,
+
+    -- ** DocumentTranslation
+    DocumentTranslation (..),
+    newDocumentTranslation,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** GcsDestination
+    GcsDestination (..),
+    newGcsDestination,
+
+    -- ** GcsSource
+    GcsSource (..),
+    newGcsSource,
 
     -- ** Glossary
-    , Glossary
-    , glossary
-    , gLanguagePair
-    , gInputConfig
-    , gName
-    , gEntryCount
-    , gEndTime
-    , gLanguageCodesSet
-    , gSubmitTime
+    Glossary (..),
+    newGlossary,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** GlossaryInputConfig
+    GlossaryInputConfig (..),
+    newGlossaryInputConfig,
+
+    -- ** InputConfig
+    InputConfig (..),
+    newInputConfig,
+
+    -- ** LanguageCodePair
+    LanguageCodePair (..),
+    newLanguageCodePair,
 
     -- ** LanguageCodesSet
-    , LanguageCodesSet
-    , languageCodesSet
-    , lcsLanguageCodes
-
-    -- ** DetectLanguageRequestLabels
-    , DetectLanguageRequestLabels
-    , detectLanguageRequestLabels
-    , dlrlAddtional
+    LanguageCodesSet (..),
+    newLanguageCodesSet,
 
     -- ** ListGlossariesResponse
-    , ListGlossariesResponse
-    , listGlossariesResponse
-    , lgrNextPageToken
-    , lgrGlossaries
-    ) where
+    ListGlossariesResponse (..),
+    newListGlossariesResponse,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Translate.Projects.DetectLanguage
-import Network.Google.Resource.Translate.Projects.GetSupportedLanguages
-import Network.Google.Resource.Translate.Projects.Locations.BatchTranslateText
-import Network.Google.Resource.Translate.Projects.Locations.DetectLanguage
-import Network.Google.Resource.Translate.Projects.Locations.Get
-import Network.Google.Resource.Translate.Projects.Locations.GetSupportedLanguages
-import Network.Google.Resource.Translate.Projects.Locations.Glossaries.Create
-import Network.Google.Resource.Translate.Projects.Locations.Glossaries.Delete
-import Network.Google.Resource.Translate.Projects.Locations.Glossaries.Get
-import Network.Google.Resource.Translate.Projects.Locations.Glossaries.List
-import Network.Google.Resource.Translate.Projects.Locations.List
-import Network.Google.Resource.Translate.Projects.Locations.Operations.Cancel
-import Network.Google.Resource.Translate.Projects.Locations.Operations.Delete
-import Network.Google.Resource.Translate.Projects.Locations.Operations.Get
-import Network.Google.Resource.Translate.Projects.Locations.Operations.List
-import Network.Google.Resource.Translate.Projects.Locations.Operations.Wait
-import Network.Google.Resource.Translate.Projects.Locations.TranslateText
-import Network.Google.Resource.Translate.Projects.TranslateText
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OutputConfig
+    OutputConfig (..),
+    newOutputConfig,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** SupportedLanguage
+    SupportedLanguage (..),
+    newSupportedLanguage,
+
+    -- ** SupportedLanguages
+    SupportedLanguages (..),
+    newSupportedLanguages,
+
+    -- ** TranslateDocumentRequest
+    TranslateDocumentRequest (..),
+    newTranslateDocumentRequest,
+
+    -- ** TranslateDocumentRequest_Labels
+    TranslateDocumentRequest_Labels (..),
+    newTranslateDocumentRequest_Labels,
+
+    -- ** TranslateDocumentResponse
+    TranslateDocumentResponse (..),
+    newTranslateDocumentResponse,
+
+    -- ** TranslateTextGlossaryConfig
+    TranslateTextGlossaryConfig (..),
+    newTranslateTextGlossaryConfig,
+
+    -- ** TranslateTextRequest
+    TranslateTextRequest (..),
+    newTranslateTextRequest,
+
+    -- ** TranslateTextRequest_Labels
+    TranslateTextRequest_Labels (..),
+    newTranslateTextRequest_Labels,
+
+    -- ** TranslateTextResponse
+    TranslateTextResponse (..),
+    newTranslateTextResponse,
+
+    -- ** Translation
+    Translation (..),
+    newTranslation,
+
+    -- ** WaitOperationRequest
+    WaitOperationRequest (..),
+    newWaitOperationRequest,
+  )
+where
+
+import Network.Google.Translate.Projects.DetectLanguage
+import Network.Google.Translate.Projects.GetSupportedLanguages
+import Network.Google.Translate.Projects.Locations.BatchTranslateDocument
+import Network.Google.Translate.Projects.Locations.BatchTranslateText
+import Network.Google.Translate.Projects.Locations.DetectLanguage
+import Network.Google.Translate.Projects.Locations.Get
+import Network.Google.Translate.Projects.Locations.GetSupportedLanguages
+import Network.Google.Translate.Projects.Locations.Glossaries.Create
+import Network.Google.Translate.Projects.Locations.Glossaries.Delete
+import Network.Google.Translate.Projects.Locations.Glossaries.Get
+import Network.Google.Translate.Projects.Locations.Glossaries.List
+import Network.Google.Translate.Projects.Locations.List
+import Network.Google.Translate.Projects.Locations.Operations.Cancel
+import Network.Google.Translate.Projects.Locations.Operations.Delete
+import Network.Google.Translate.Projects.Locations.Operations.Get
+import Network.Google.Translate.Projects.Locations.Operations.List
+import Network.Google.Translate.Projects.Locations.Operations.Wait
+import Network.Google.Translate.Projects.Locations.TranslateDocument
+import Network.Google.Translate.Projects.Locations.TranslateText
+import Network.Google.Translate.Projects.TranslateText
 import Network.Google.Translate.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Translation API service.
-type TranslateAPI =
-     ProjectsLocationsGlossariesListResource :<|>
-       ProjectsLocationsGlossariesGetResource
-       :<|> ProjectsLocationsGlossariesCreateResource
-       :<|> ProjectsLocationsGlossariesDeleteResource
-       :<|> ProjectsLocationsOperationsListResource
-       :<|> ProjectsLocationsOperationsWaitResource
-       :<|> ProjectsLocationsOperationsGetResource
-       :<|> ProjectsLocationsOperationsCancelResource
-       :<|> ProjectsLocationsOperationsDeleteResource
-       :<|> ProjectsLocationsBatchTranslateTextResource
-       :<|> ProjectsLocationsListResource
-       :<|> ProjectsLocationsDetectLanguageResource
-       :<|> ProjectsLocationsTranslateTextResource
-       :<|> ProjectsLocationsGetResource
-       :<|> ProjectsLocationsGetSupportedLanguagesResource
-       :<|> ProjectsDetectLanguageResource
-       :<|> ProjectsTranslateTextResource
-       :<|> ProjectsGetSupportedLanguagesResource

@@ -1,274 +1,256 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Translate.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Translate.Types
-    (
-    -- * Service Configuration
-      translateService
+  ( -- * Configuration
+    translateService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudTranslationScope
+    cloudPlatformScope,
+    cloudTranslationScope,
 
-    -- * SupportedLanguage
-    , SupportedLanguage
-    , supportedLanguage
-    , slLanguageCode
-    , slSupportTarget
-    , slSupportSource
-    , slDisplayName
+    -- * Types
 
-    -- * DetectLanguageRequest
-    , DetectLanguageRequest
-    , detectLanguageRequest
-    , dlrContent
-    , dlrMimeType
-    , dlrModel
-    , dlrLabels
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** BatchDocumentInputConfig
+    BatchDocumentInputConfig (..),
+    newBatchDocumentInputConfig,
 
-    -- * WaitOperationRequest
-    , WaitOperationRequest
-    , waitOperationRequest
-    , worTimeout
+    -- ** BatchDocumentOutputConfig
+    BatchDocumentOutputConfig (..),
+    newBatchDocumentOutputConfig,
 
-    -- * TranslateTextGlossaryConfig
-    , TranslateTextGlossaryConfig
-    , translateTextGlossaryConfig
-    , ttgcIgnoreCase
-    , ttgcGlossary
+    -- ** BatchTranslateDocumentRequest
+    BatchTranslateDocumentRequest (..),
+    newBatchTranslateDocumentRequest,
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** BatchTranslateDocumentRequest_FormatConversions
+    BatchTranslateDocumentRequest_FormatConversions (..),
+    newBatchTranslateDocumentRequest_FormatConversions,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** BatchTranslateDocumentRequest_Glossaries
+    BatchTranslateDocumentRequest_Glossaries (..),
+    newBatchTranslateDocumentRequest_Glossaries,
 
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
+    -- ** BatchTranslateDocumentRequest_Models
+    BatchTranslateDocumentRequest_Models (..),
+    newBatchTranslateDocumentRequest_Models,
 
-    -- * GcsSource
-    , GcsSource
-    , gcsSource
-    , gsInputURI
+    -- ** BatchTranslateTextRequest
+    BatchTranslateTextRequest (..),
+    newBatchTranslateTextRequest,
 
-    -- * TranslateTextRequest
-    , TranslateTextRequest
-    , translateTextRequest
-    , ttrGlossaryConfig
-    , ttrContents
-    , ttrTargetLanguageCode
-    , ttrMimeType
-    , ttrModel
-    , ttrSourceLanguageCode
-    , ttrLabels
+    -- ** BatchTranslateTextRequest_Glossaries
+    BatchTranslateTextRequest_Glossaries (..),
+    newBatchTranslateTextRequest_Glossaries,
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** BatchTranslateTextRequest_Labels
+    BatchTranslateTextRequest_Labels (..),
+    newBatchTranslateTextRequest_Labels,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** BatchTranslateTextRequest_Models
+    BatchTranslateTextRequest_Models (..),
+    newBatchTranslateTextRequest_Models,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- * TranslateTextResponse
-    , TranslateTextResponse
-    , translateTextResponse
-    , ttrGlossaryTranslations
-    , ttrTranslations
+    -- ** DetectLanguageRequest
+    DetectLanguageRequest (..),
+    newDetectLanguageRequest,
 
-    -- * GcsDestination
-    , GcsDestination
-    , gcsDestination
-    , gdOutputURIPrefix
+    -- ** DetectLanguageRequest_Labels
+    DetectLanguageRequest_Labels (..),
+    newDetectLanguageRequest_Labels,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** DetectLanguageResponse
+    DetectLanguageResponse (..),
+    newDetectLanguageResponse,
 
-    -- * BatchTranslateTextRequestGlossaries
-    , BatchTranslateTextRequestGlossaries
-    , batchTranslateTextRequestGlossaries
-    , bttrgAddtional
+    -- ** DetectedLanguage
+    DetectedLanguage (..),
+    newDetectedLanguage,
 
-    -- * InputConfig
-    , InputConfig
-    , inputConfig
-    , icGcsSource
-    , icMimeType
+    -- ** DocumentInputConfig
+    DocumentInputConfig (..),
+    newDocumentInputConfig,
 
-    -- * DetectedLanguage
-    , DetectedLanguage
-    , detectedLanguage
-    , dlLanguageCode
-    , dlConfidence
+    -- ** DocumentOutputConfig
+    DocumentOutputConfig (..),
+    newDocumentOutputConfig,
 
-    -- * SupportedLanguages
-    , SupportedLanguages
-    , supportedLanguages
-    , slLanguages
+    -- ** DocumentTranslation
+    DocumentTranslation (..),
+    newDocumentTranslation,
 
-    -- * TranslateTextRequestLabels
-    , TranslateTextRequestLabels
-    , translateTextRequestLabels
-    , ttrlAddtional
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** GcsDestination
+    GcsDestination (..),
+    newGcsDestination,
 
-    -- * BatchTranslateTextRequestModels
-    , BatchTranslateTextRequestModels
-    , batchTranslateTextRequestModels
-    , bttrmAddtional
+    -- ** GcsSource
+    GcsSource (..),
+    newGcsSource,
 
-    -- * GlossaryInputConfig
-    , GlossaryInputConfig
-    , glossaryInputConfig
-    , gicGcsSource
+    -- ** Glossary
+    Glossary (..),
+    newGlossary,
 
-    -- * LanguageCodePair
-    , LanguageCodePair
-    , languageCodePair
-    , lcpTargetLanguageCode
-    , lcpSourceLanguageCode
+    -- ** GlossaryInputConfig
+    GlossaryInputConfig (..),
+    newGlossaryInputConfig,
 
-    -- * OutputConfig
-    , OutputConfig
-    , outputConfig
-    , ocGcsDestination
+    -- ** InputConfig
+    InputConfig (..),
+    newInputConfig,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** LanguageCodePair
+    LanguageCodePair (..),
+    newLanguageCodePair,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** LanguageCodesSet
+    LanguageCodesSet (..),
+    newLanguageCodesSet,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** ListGlossariesResponse
+    ListGlossariesResponse (..),
+    newListGlossariesResponse,
 
-    -- * Translation
-    , Translation
-    , translation
-    , tGlossaryConfig
-    , tDetectedLanguageCode
-    , tModel
-    , tTranslatedText
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * BatchTranslateTextRequestLabels
-    , BatchTranslateTextRequestLabels
-    , batchTranslateTextRequestLabels
-    , bttrlAddtional
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * DetectLanguageResponse
-    , DetectLanguageResponse
-    , detectLanguageResponse
-    , dlrLanguages
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * BatchTranslateTextRequest
-    , BatchTranslateTextRequest
-    , batchTranslateTextRequest
-    , bttrInputConfigs
-    , bttrTargetLanguageCodes
-    , bttrModels
-    , bttrSourceLanguageCode
-    , bttrOutputConfig
-    , bttrLabels
-    , bttrGlossaries
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * Glossary
-    , Glossary
-    , glossary
-    , gLanguagePair
-    , gInputConfig
-    , gName
-    , gEntryCount
-    , gEndTime
-    , gLanguageCodesSet
-    , gSubmitTime
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * LanguageCodesSet
-    , LanguageCodesSet
-    , languageCodesSet
-    , lcsLanguageCodes
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * DetectLanguageRequestLabels
-    , DetectLanguageRequestLabels
-    , detectLanguageRequestLabels
-    , dlrlAddtional
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * ListGlossariesResponse
-    , ListGlossariesResponse
-    , listGlossariesResponse
-    , lgrNextPageToken
-    , lgrGlossaries
-    ) where
+    -- ** OutputConfig
+    OutputConfig (..),
+    newOutputConfig,
 
-import Network.Google.Prelude
-import Network.Google.Translate.Types.Product
-import Network.Google.Translate.Types.Sum
+    -- ** Status
+    Status (..),
+    newStatus,
 
--- | Default request referring to version 'v3' of the Cloud Translation API. This contains the host and root path used as a starting point for constructing service requests.
-translateService :: ServiceConfig
-translateService
-  = defaultService (ServiceId "translate:v3")
-      "translation.googleapis.com"
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** SupportedLanguage
+    SupportedLanguage (..),
+    newSupportedLanguage,
+
+    -- ** SupportedLanguages
+    SupportedLanguages (..),
+    newSupportedLanguages,
+
+    -- ** TranslateDocumentRequest
+    TranslateDocumentRequest (..),
+    newTranslateDocumentRequest,
+
+    -- ** TranslateDocumentRequest_Labels
+    TranslateDocumentRequest_Labels (..),
+    newTranslateDocumentRequest_Labels,
+
+    -- ** TranslateDocumentResponse
+    TranslateDocumentResponse (..),
+    newTranslateDocumentResponse,
+
+    -- ** TranslateTextGlossaryConfig
+    TranslateTextGlossaryConfig (..),
+    newTranslateTextGlossaryConfig,
+
+    -- ** TranslateTextRequest
+    TranslateTextRequest (..),
+    newTranslateTextRequest,
+
+    -- ** TranslateTextRequest_Labels
+    TranslateTextRequest_Labels (..),
+    newTranslateTextRequest_Labels,
+
+    -- ** TranslateTextResponse
+    TranslateTextResponse (..),
+    newTranslateTextResponse,
+
+    -- ** Translation
+    Translation (..),
+    newTranslation,
+
+    -- ** WaitOperationRequest
+    WaitOperationRequest (..),
+    newWaitOperationRequest,
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.Translate.Internal.Product
+import Network.Google.Translate.Internal.Sum
+
+-- | Default request referring to version @v3@ of the Cloud Translation API. This contains the host and root path used as a starting point for constructing service requests.
+translateService :: Core.ServiceConfig
+translateService =
+  Core.defaultService
+    (Core.ServiceId "translate:v3")
+    "translation.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | Translate text from one language to another using Google Translate
-cloudTranslationScope :: Proxy '["https://www.googleapis.com/auth/cloud-translation"]
-cloudTranslationScope = Proxy
+cloudTranslationScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-translation"]
+cloudTranslationScope = Core.Proxy
