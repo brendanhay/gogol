@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-adsense-host
-version:            0.5.0
-synopsis:           Google AdSense Host SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-adsense-host
+version:               0.5.0
+synopsis:              Google AdSense Host SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Generates performance reports, generates ad codes, and provides publisher management capabilities for AdSense Hosts.
+    Generates performance reports, generates ad codes, and provides publisher management capabilities for AdSense Hosts.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -35,53 +32,56 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.AdSenseHost
-    Gogol.AdSenseHost.Accounts.Adclients.Get
-    Gogol.AdSenseHost.Accounts.Adclients.List
-    Gogol.AdSenseHost.Accounts.Adunits.Delete
-    Gogol.AdSenseHost.Accounts.Adunits.Get
-    Gogol.AdSenseHost.Accounts.Adunits.GetAdCode
-    Gogol.AdSenseHost.Accounts.Adunits.Insert
-    Gogol.AdSenseHost.Accounts.Adunits.List
-    Gogol.AdSenseHost.Accounts.Adunits.Patch
-    Gogol.AdSenseHost.Accounts.Adunits.Update
-    Gogol.AdSenseHost.Accounts.Get
-    Gogol.AdSenseHost.Accounts.List
-    Gogol.AdSenseHost.Accounts.Reports.Generate
-    Gogol.AdSenseHost.Adclients.Get
-    Gogol.AdSenseHost.Adclients.List
-    Gogol.AdSenseHost.Associationsessions.Start
-    Gogol.AdSenseHost.Associationsessions.Verify
-    Gogol.AdSenseHost.Customchannels.Delete
-    Gogol.AdSenseHost.Customchannels.Get
-    Gogol.AdSenseHost.Customchannels.Insert
-    Gogol.AdSenseHost.Customchannels.List
-    Gogol.AdSenseHost.Customchannels.Patch
-    Gogol.AdSenseHost.Customchannels.Update
-    Gogol.AdSenseHost.Reports.Generate
-    Gogol.AdSenseHost.Types
-    Gogol.AdSenseHost.Urlchannels.Delete
-    Gogol.AdSenseHost.Urlchannels.Insert
-    Gogol.AdSenseHost.Urlchannels.List
+      Gogol.AdSenseHost
+    , Gogol.AdSenseHost.Accounts.Adclients.Get
+    , Gogol.AdSenseHost.Accounts.Adclients.List
+    , Gogol.AdSenseHost.Accounts.Adunits.Delete
+    , Gogol.AdSenseHost.Accounts.Adunits.Get
+    , Gogol.AdSenseHost.Accounts.Adunits.GetAdCode
+    , Gogol.AdSenseHost.Accounts.Adunits.Insert
+    , Gogol.AdSenseHost.Accounts.Adunits.List
+    , Gogol.AdSenseHost.Accounts.Adunits.Patch
+    , Gogol.AdSenseHost.Accounts.Adunits.Update
+    , Gogol.AdSenseHost.Accounts.Get
+    , Gogol.AdSenseHost.Accounts.List
+    , Gogol.AdSenseHost.Accounts.Reports.Generate
+    , Gogol.AdSenseHost.Adclients.Get
+    , Gogol.AdSenseHost.Adclients.List
+    , Gogol.AdSenseHost.Associationsessions.Start
+    , Gogol.AdSenseHost.Associationsessions.Verify
+    , Gogol.AdSenseHost.Customchannels.Delete
+    , Gogol.AdSenseHost.Customchannels.Get
+    , Gogol.AdSenseHost.Customchannels.Insert
+    , Gogol.AdSenseHost.Customchannels.List
+    , Gogol.AdSenseHost.Customchannels.Patch
+    , Gogol.AdSenseHost.Customchannels.Update
+    , Gogol.AdSenseHost.Reports.Generate
+    , Gogol.AdSenseHost.Types
+    , Gogol.AdSenseHost.Urlchannels.Delete
+    , Gogol.AdSenseHost.Urlchannels.Insert
+    , Gogol.AdSenseHost.Urlchannels.List
 
   other-modules:
-    Gogol.AdSenseHost.Internal.Product
-    Gogol.AdSenseHost.Internal.Sum
+      Gogol.AdSenseHost.Internal.Product
+    , Gogol.AdSenseHost.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
