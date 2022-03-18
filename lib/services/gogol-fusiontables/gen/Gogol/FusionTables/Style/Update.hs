@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,69 +30,76 @@
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.update@.
 module Gogol.FusionTables.Style.Update
-    (
-    -- * Resource
-      FusionTablesStyleUpdateResource
+  ( -- * Resource
+    FusionTablesStyleUpdateResource,
 
     -- ** Constructing a Request
-    , newFusionTablesStyleUpdate
-    , FusionTablesStyleUpdate
-    ) where
+    newFusionTablesStyleUpdate,
+    FusionTablesStyleUpdate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.FusionTables.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @fusiontables.style.update@ method which the
 -- 'FusionTablesStyleUpdate' request conforms to.
 type FusionTablesStyleUpdateResource =
-     "fusiontables" Core.:>
-       "v2" Core.:>
-         "tables" Core.:>
-           Core.Capture "tableId" Core.Text Core.:>
-             "styles" Core.:>
-               Core.Capture "styleId" Core.Int32 Core.:>
-                 Core.QueryParam "alt" Core.AltJSON Core.:>
-                   Core.ReqBody '[Core.JSON] StyleSetting Core.:>
-                     Core.Put '[Core.JSON] StyleSetting
+  "fusiontables"
+    Core.:> "v2"
+    Core.:> "tables"
+    Core.:> Core.Capture "tableId" Core.Text
+    Core.:> "styles"
+    Core.:> Core.Capture "styleId" Core.Int32
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] StyleSetting
+    Core.:> Core.Put '[Core.JSON] StyleSetting
 
 -- | Updates an existing style.
 --
 -- /See:/ 'newFusionTablesStyleUpdate' smart constructor.
 data FusionTablesStyleUpdate = FusionTablesStyleUpdate
-    {
-      -- | Multipart request metadata.
-      payload :: StyleSetting
-      -- | Identifier (within a table) for the style being updated.
-    , styleId :: Core.Int32
-      -- | Table whose style is being updated.
-    , tableId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: StyleSetting,
+    -- | Identifier (within a table) for the style being updated.
+    styleId :: Core.Int32,
+    -- | Table whose style is being updated.
+    tableId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FusionTablesStyleUpdate' with the minimum fields required to make a request.
-newFusionTablesStyleUpdate 
-    ::  StyleSetting
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Int32
-       -- ^  Identifier (within a table) for the style being updated. See 'styleId'.
-    -> Core.Text
-       -- ^  Table whose style is being updated. See 'tableId'.
-    -> FusionTablesStyleUpdate
+newFusionTablesStyleUpdate ::
+  -- |  Multipart request metadata. See 'payload'.
+  StyleSetting ->
+  -- |  Identifier (within a table) for the style being updated. See 'styleId'.
+  Core.Int32 ->
+  -- |  Table whose style is being updated. See 'tableId'.
+  Core.Text ->
+  FusionTablesStyleUpdate
 newFusionTablesStyleUpdate payload styleId tableId =
   FusionTablesStyleUpdate
-    {payload = payload, styleId = styleId, tableId = tableId}
+    { payload = payload,
+      styleId = styleId,
+      tableId = tableId
+    }
 
-instance Core.GoogleRequest FusionTablesStyleUpdate
-         where
-        type Rs FusionTablesStyleUpdate = StyleSetting
-        type Scopes FusionTablesStyleUpdate =
-             '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient FusionTablesStyleUpdate{..}
-          = go tableId styleId (Core.Just Core.AltJSON) payload
-              fusionTablesService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy FusionTablesStyleUpdateResource)
-                      Core.mempty
-
+instance Core.GoogleRequest FusionTablesStyleUpdate where
+  type Rs FusionTablesStyleUpdate = StyleSetting
+  type
+    Scopes FusionTablesStyleUpdate =
+      '["https://www.googleapis.com/auth/fusiontables"]
+  requestClient FusionTablesStyleUpdate {..} =
+    go
+      tableId
+      styleId
+      (Core.Just Core.AltJSON)
+      payload
+      fusionTablesService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FusionTablesStyleUpdateResource
+          )
+          Core.mempty
