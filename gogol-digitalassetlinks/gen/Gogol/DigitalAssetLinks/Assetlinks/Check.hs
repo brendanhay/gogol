@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DigitalAssetLinks.Assetlinks.Check
+-- Module      : Gogol.DigitalAssetLinks.Assetlinks.Check
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -30,7 +30,7 @@
 -- statements securely, and it is not possible to ensure that the website\'s statements have not been altered by a third party. For more information, see the <https://github.com/google/digitalassetlinks/blob/master/well-known/details.md Digital Asset Links technical design specification>.
 --
 -- /See:/ <https://developers.google.com/digital-asset-links/ Digital Asset Links API Reference> for @digitalassetlinks.assetlinks.check@.
-module Network.Google.DigitalAssetLinks.Assetlinks.Check
+module Gogol.DigitalAssetLinks.Assetlinks.Check
   ( -- * Resource
     DigitalAssetLinksAssetlinksCheckResource,
 
@@ -40,8 +40,8 @@ module Network.Google.DigitalAssetLinks.Assetlinks.Check
   )
 where
 
-import Network.Google.DigitalAssetLinks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DigitalAssetLinks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @digitalassetlinks.assetlinks.check@ method which the
 -- 'DigitalAssetLinksAssetlinksCheck' request conforms to.

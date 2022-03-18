@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.DigitalAssetLinks
-    Network.Google.DigitalAssetLinks.Assetlinks.BulkCheck
-    Network.Google.DigitalAssetLinks.Assetlinks.Check
-    Network.Google.DigitalAssetLinks.Statements.List
-    Network.Google.DigitalAssetLinks.Types
+    Gogol.DigitalAssetLinks
+    Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
+    Gogol.DigitalAssetLinks.Assetlinks.Check
+    Gogol.DigitalAssetLinks.Statements.List
+    Gogol.DigitalAssetLinks.Types
 
   other-modules:
-    Network.Google.DigitalAssetLinks.Internal.Product
-    Network.Google.DigitalAssetLinks.Internal.Sum
+    Gogol.DigitalAssetLinks.Internal.Product
+    Gogol.DigitalAssetLinks.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

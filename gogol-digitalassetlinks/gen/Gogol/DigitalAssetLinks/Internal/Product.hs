@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DigitalAssetLinks.Internal.Product
+-- Module      : Gogol.DigitalAssetLinks.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.DigitalAssetLinks.Internal.Product
+module Gogol.DigitalAssetLinks.Internal.Product
   ( -- * AndroidAppAsset
     AndroidAppAsset (..),
     newAndroidAppAsset,
@@ -68,8 +68,8 @@ module Network.Google.DigitalAssetLinks.Internal.Product
   )
 where
 
-import Network.Google.DigitalAssetLinks.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.DigitalAssetLinks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Describes an android app asset.
 --

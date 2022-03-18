@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DigitalAssetLinks.Assetlinks.BulkCheck
+-- Module      : Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Send a bundle of statement checks in a single RPC to minimize latency and service load. Statements need not be all for the same source and\/or target. We recommend using this method when you need to check more than one statement in a short period of time.
 --
 -- /See:/ <https://developers.google.com/digital-asset-links/ Digital Asset Links API Reference> for @digitalassetlinks.assetlinks.bulkCheck@.
-module Network.Google.DigitalAssetLinks.Assetlinks.BulkCheck
+module Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
   ( -- * Resource
     DigitalAssetLinksAssetlinksBulkCheckResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DigitalAssetLinks.Assetlinks.BulkCheck
   )
 where
 
-import Network.Google.DigitalAssetLinks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DigitalAssetLinks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @digitalassetlinks.assetlinks.bulkCheck@ method which the
 -- 'DigitalAssetLinksAssetlinksBulkCheck' request conforms to.

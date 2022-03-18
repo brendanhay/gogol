@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DigitalAssetLinks
+-- Module      : Gogol.DigitalAssetLinks
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Discovers relationships between online assets such as websites or mobile apps.
 --
 -- /See:/ <https://developers.google.com/digital-asset-links/ Digital Asset Links API Reference>
-module Network.Google.DigitalAssetLinks
+module Gogol.DigitalAssetLinks
   ( -- * Configuration
     digitalAssetLinksService,
 
@@ -106,7 +106,7 @@ module Network.Google.DigitalAssetLinks
   )
 where
 
-import Network.Google.DigitalAssetLinks.Assetlinks.BulkCheck
-import Network.Google.DigitalAssetLinks.Assetlinks.Check
-import Network.Google.DigitalAssetLinks.Statements.List
-import Network.Google.DigitalAssetLinks.Types
+import Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
+import Gogol.DigitalAssetLinks.Assetlinks.Check
+import Gogol.DigitalAssetLinks.Statements.List
+import Gogol.DigitalAssetLinks.Types
