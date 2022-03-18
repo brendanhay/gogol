@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool.Pools.Delete
+-- Module      : Gogol.ReplicaPool.Pools.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a replica pool.
+-- Inserts a new replica pool.
 --
--- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.pools.delete@.
-module Network.Google.ReplicaPool.Pools.Delete
+-- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.pools.insert@.
+module Gogol.ReplicaPool.Pools.Insert
   ( -- * Resource
-    ReplicaPoolPoolsDeleteResource,
+    ReplicaPoolPoolsInsertResource,
 
     -- ** Constructing a Request
-    newReplicaPoolPoolsDelete,
-    ReplicaPoolPoolsDelete,
+    newReplicaPoolPoolsInsert,
+    ReplicaPoolPoolsInsert,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPool.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPool.Types
 
--- | A resource alias for @replicapool.pools.delete@ method which the
--- 'ReplicaPoolPoolsDelete' request conforms to.
-type ReplicaPoolPoolsDeleteResource =
+-- | A resource alias for @replicapool.pools.insert@ method which the
+-- 'ReplicaPoolPoolsInsert' request conforms to.
+type ReplicaPoolPoolsInsertResource =
   "replicapool"
     Core.:> "v1beta1"
     Core.:> "projects"
@@ -52,19 +52,16 @@ type ReplicaPoolPoolsDeleteResource =
     Core.:> "zones"
     Core.:> Core.Capture "zone" Core.Text
     Core.:> "pools"
-    Core.:> Core.Capture "poolName" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] PoolsDeleteRequest
-    Core.:> Core.Post '[Core.JSON] ()
+    Core.:> Core.ReqBody '[Core.JSON] Pool
+    Core.:> Core.Post '[Core.JSON] Pool
 
--- | Deletes a replica pool.
+-- | Inserts a new replica pool.
 --
--- /See:/ 'newReplicaPoolPoolsDelete' smart constructor.
-data ReplicaPoolPoolsDelete = ReplicaPoolPoolsDelete
+-- /See:/ 'newReplicaPoolPoolsInsert' smart constructor.
+data ReplicaPoolPoolsInsert = ReplicaPoolPoolsInsert
   { -- | Multipart request metadata.
-    payload :: PoolsDeleteRequest,
-    -- | The name of the replica pool for this request.
-    poolName :: Core.Text,
+    payload :: Pool,
     -- | The project ID for this replica pool.
     projectName :: Core.Text,
     -- | The zone for this replica pool.
@@ -72,38 +69,34 @@ data ReplicaPoolPoolsDelete = ReplicaPoolPoolsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ReplicaPoolPoolsDelete' with the minimum fields required to make a request.
-newReplicaPoolPoolsDelete ::
+-- | Creates a value of 'ReplicaPoolPoolsInsert' with the minimum fields required to make a request.
+newReplicaPoolPoolsInsert ::
   -- |  Multipart request metadata. See 'payload'.
-  PoolsDeleteRequest ->
-  -- |  The name of the replica pool for this request. See 'poolName'.
-  Core.Text ->
+  Pool ->
   -- |  The project ID for this replica pool. See 'projectName'.
   Core.Text ->
   -- |  The zone for this replica pool. See 'zone'.
   Core.Text ->
-  ReplicaPoolPoolsDelete
-newReplicaPoolPoolsDelete payload poolName projectName zone =
-  ReplicaPoolPoolsDelete
+  ReplicaPoolPoolsInsert
+newReplicaPoolPoolsInsert payload projectName zone =
+  ReplicaPoolPoolsInsert
     { payload = payload,
-      poolName = poolName,
       projectName = projectName,
       zone = zone
     }
 
-instance Core.GoogleRequest ReplicaPoolPoolsDelete where
-  type Rs ReplicaPoolPoolsDelete = ()
+instance Core.GoogleRequest ReplicaPoolPoolsInsert where
+  type Rs ReplicaPoolPoolsInsert = Pool
   type
-    Scopes ReplicaPoolPoolsDelete =
+    Scopes ReplicaPoolPoolsInsert =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/ndev.cloudman",
          "https://www.googleapis.com/auth/replicapool"
        ]
-  requestClient ReplicaPoolPoolsDelete {..} =
+  requestClient ReplicaPoolPoolsInsert {..} =
     go
       projectName
       zone
-      poolName
       (Core.Just Core.AltJSON)
       payload
       replicaPoolService
@@ -111,6 +104,6 @@ instance Core.GoogleRequest ReplicaPoolPoolsDelete where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ReplicaPoolPoolsDeleteResource
+              Core.Proxy ReplicaPoolPoolsInsertResource
           )
           Core.mempty

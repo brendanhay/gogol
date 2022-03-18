@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool.Replicas.List
+-- Module      : Gogol.ReplicaPool.Replicas.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists all replicas in a pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.replicas.list@.
-module Network.Google.ReplicaPool.Replicas.List
+module Gogol.ReplicaPool.Replicas.List
   ( -- * Resource
     ReplicaPoolReplicasListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ReplicaPool.Replicas.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPool.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.replicas.list@ method which the
 -- 'ReplicaPoolReplicasList' request conforms to.

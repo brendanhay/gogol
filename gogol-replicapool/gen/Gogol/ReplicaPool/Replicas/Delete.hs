@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool.Replicas.Delete
+-- Module      : Gogol.ReplicaPool.Replicas.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a replica from the pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.replicas.delete@.
-module Network.Google.ReplicaPool.Replicas.Delete
+module Gogol.ReplicaPool.Replicas.Delete
   ( -- * Resource
     ReplicaPoolReplicasDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ReplicaPool.Replicas.Delete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPool.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.replicas.delete@ method which the
 -- 'ReplicaPoolReplicasDelete' request conforms to.

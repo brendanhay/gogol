@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool.Types
+-- Module      : Gogol.ReplicaPool.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ReplicaPool.Types
+module Gogol.ReplicaPool.Types
   ( -- * Configuration
     replicaPoolService,
 
@@ -133,9 +133,9 @@ module Network.Google.ReplicaPool.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPool.Internal.Product
-import Network.Google.ReplicaPool.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPool.Internal.Product
+import Gogol.ReplicaPool.Internal.Sum
 
 -- | Default request referring to version @v1beta1@ of the Replica Pool API. This contains the host and root path used as a starting point for constructing service requests.
 replicaPoolService :: Core.ServiceConfig
