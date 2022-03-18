@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,92 +36,85 @@
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.delete@.
 module Gogol.Composer.Projects.Locations.Environments.Delete
-  ( -- * Resource
-    ComposerProjectsLocationsEnvironmentsDeleteResource,
+    (
+    -- * Resource
+      ComposerProjectsLocationsEnvironmentsDeleteResource
 
     -- ** Constructing a Request
-    newComposerProjectsLocationsEnvironmentsDelete,
-    ComposerProjectsLocationsEnvironmentsDelete,
-  )
-where
+    , newComposerProjectsLocationsEnvironmentsDelete
+    , ComposerProjectsLocationsEnvironmentsDelete
+    ) where
 
-import Gogol.Composer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Composer.Types
 
 -- | A resource alias for @composer.projects.locations.environments.delete@ method which the
 -- 'ComposerProjectsLocationsEnvironmentsDelete' request conforms to.
-type ComposerProjectsLocationsEnvironmentsDeleteResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Operation
+type ComposerProjectsLocationsEnvironmentsDeleteResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Delete '[Core.JSON] Operation
 
 -- | Delete an environment.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsDelete' smart constructor.
 data ComposerProjectsLocationsEnvironmentsDelete = ComposerProjectsLocationsEnvironmentsDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The environment to delete, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\"
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The environment to delete, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\"
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComposerProjectsLocationsEnvironmentsDelete' with the minimum fields required to make a request.
-newComposerProjectsLocationsEnvironmentsDelete ::
-  -- |  The environment to delete, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\" See 'name'.
-  Core.Text ->
-  ComposerProjectsLocationsEnvironmentsDelete
+newComposerProjectsLocationsEnvironmentsDelete 
+    ::  Core.Text
+       -- ^  The environment to delete, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\" See 'name'.
+    -> ComposerProjectsLocationsEnvironmentsDelete
 newComposerProjectsLocationsEnvironmentsDelete name =
   ComposerProjectsLocationsEnvironmentsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComposerProjectsLocationsEnvironmentsDelete
-  where
-  type
-    Rs ComposerProjectsLocationsEnvironmentsDelete =
-      Operation
-  type
-    Scopes
-      ComposerProjectsLocationsEnvironmentsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    ComposerProjectsLocationsEnvironmentsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        composerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComposerProjectsLocationsEnvironmentsDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           ComposerProjectsLocationsEnvironmentsDelete
+         where
+        type Rs ComposerProjectsLocationsEnvironmentsDelete =
+             Operation
+        type Scopes
+               ComposerProjectsLocationsEnvironmentsDelete
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          ComposerProjectsLocationsEnvironmentsDelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              composerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           ComposerProjectsLocationsEnvironmentsDeleteResource)
+                      Core.mempty
+
