@@ -19,48 +19,50 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.UrlInspection.Index.Inspect
+-- Module      : Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Index inspection.
+-- Runs Mobile-Friendly Test for a given URL.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @searchconsole.urlInspection.index.inspect@.
-module Network.Google.SearchConsole.UrlInspection.Index.Inspect
+-- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @searchconsole.urlTestingTools.mobileFriendlyTest.run@.
+module Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
   ( -- * Resource
-    SearchConsoleUrlInspectionIndexInspectResource,
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource,
 
     -- ** Constructing a Request
-    newSearchConsoleUrlInspectionIndexInspect,
-    SearchConsoleUrlInspectionIndexInspect,
+    newSearchConsoleUrlTestingToolsMobileFriendlyTestRun,
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRun,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
--- | A resource alias for @searchconsole.urlInspection.index.inspect@ method which the
--- 'SearchConsoleUrlInspectionIndexInspect' request conforms to.
-type SearchConsoleUrlInspectionIndexInspectResource =
+-- | A resource alias for @searchconsole.urlTestingTools.mobileFriendlyTest.run@ method which the
+-- 'SearchConsoleUrlTestingToolsMobileFriendlyTestRun' request conforms to.
+type SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource =
   "v1"
-    Core.:> "urlInspection"
-    Core.:> "index:inspect"
+    Core.:> "urlTestingTools"
+    Core.:> "mobileFriendlyTest:run"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] InspectUrlIndexRequest
-    Core.:> Core.Post '[Core.JSON] InspectUrlIndexResponse
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              RunMobileFriendlyTestRequest
+    Core.:> Core.Post '[Core.JSON] RunMobileFriendlyTestResponse
 
--- | Index inspection.
+-- | Runs Mobile-Friendly Test for a given URL.
 --
--- /See:/ 'newSearchConsoleUrlInspectionIndexInspect' smart constructor.
-data SearchConsoleUrlInspectionIndexInspect = SearchConsoleUrlInspectionIndexInspect
+-- /See:/ 'newSearchConsoleUrlTestingToolsMobileFriendlyTestRun' smart constructor.
+data SearchConsoleUrlTestingToolsMobileFriendlyTestRun = SearchConsoleUrlTestingToolsMobileFriendlyTestRun
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +70,7 @@ data SearchConsoleUrlInspectionIndexInspect = SearchConsoleUrlInspectionIndexIns
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: InspectUrlIndexRequest,
+    payload :: RunMobileFriendlyTestRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -76,13 +78,13 @@ data SearchConsoleUrlInspectionIndexInspect = SearchConsoleUrlInspectionIndexIns
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SearchConsoleUrlInspectionIndexInspect' with the minimum fields required to make a request.
-newSearchConsoleUrlInspectionIndexInspect ::
+-- | Creates a value of 'SearchConsoleUrlTestingToolsMobileFriendlyTestRun' with the minimum fields required to make a request.
+newSearchConsoleUrlTestingToolsMobileFriendlyTestRun ::
   -- |  Multipart request metadata. See 'payload'.
-  InspectUrlIndexRequest ->
-  SearchConsoleUrlInspectionIndexInspect
-newSearchConsoleUrlInspectionIndexInspect payload =
-  SearchConsoleUrlInspectionIndexInspect
+  RunMobileFriendlyTestRequest ->
+  SearchConsoleUrlTestingToolsMobileFriendlyTestRun
+newSearchConsoleUrlTestingToolsMobileFriendlyTestRun payload =
+  SearchConsoleUrlTestingToolsMobileFriendlyTestRun
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -93,18 +95,18 @@ newSearchConsoleUrlInspectionIndexInspect payload =
 
 instance
   Core.GoogleRequest
-    SearchConsoleUrlInspectionIndexInspect
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRun
   where
   type
-    Rs SearchConsoleUrlInspectionIndexInspect =
-      InspectUrlIndexResponse
+    Rs
+      SearchConsoleUrlTestingToolsMobileFriendlyTestRun =
+      RunMobileFriendlyTestResponse
   type
-    Scopes SearchConsoleUrlInspectionIndexInspect =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
+    Scopes
+      SearchConsoleUrlTestingToolsMobileFriendlyTestRun =
+      '[]
   requestClient
-    SearchConsoleUrlInspectionIndexInspect {..} =
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRun {..} =
       go
         xgafv
         accessToken
@@ -119,6 +121,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  SearchConsoleUrlInspectionIndexInspectResource
+                  SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource
             )
             Core.mempty

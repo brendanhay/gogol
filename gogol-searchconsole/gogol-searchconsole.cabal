@@ -39,28 +39,29 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.SearchConsole
-    Network.Google.SearchConsole.Types
-    Network.Google.SearchConsole.UrlInspection.Index.Inspect
-    Network.Google.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
-    Network.Google.SearchConsole.Webmasters.Searchanalytics.Query
-    Network.Google.SearchConsole.Webmasters.Sitemaps.Delete
-    Network.Google.SearchConsole.Webmasters.Sitemaps.Get
-    Network.Google.SearchConsole.Webmasters.Sitemaps.List
-    Network.Google.SearchConsole.Webmasters.Sitemaps.Submit
-    Network.Google.SearchConsole.Webmasters.Sites.Add
-    Network.Google.SearchConsole.Webmasters.Sites.Delete
-    Network.Google.SearchConsole.Webmasters.Sites.Get
-    Network.Google.SearchConsole.Webmasters.Sites.List
+    Gogol.SearchConsole
+    Gogol.SearchConsole.Types
+    Gogol.SearchConsole.UrlInspection.Index.Inspect
+    Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
+    Gogol.SearchConsole.Webmasters.Searchanalytics.Query
+    Gogol.SearchConsole.Webmasters.Sitemaps.Delete
+    Gogol.SearchConsole.Webmasters.Sitemaps.Get
+    Gogol.SearchConsole.Webmasters.Sitemaps.List
+    Gogol.SearchConsole.Webmasters.Sitemaps.Submit
+    Gogol.SearchConsole.Webmasters.Sites.Add
+    Gogol.SearchConsole.Webmasters.Sites.Delete
+    Gogol.SearchConsole.Webmasters.Sites.Get
+    Gogol.SearchConsole.Webmasters.Sites.List
 
   other-modules:
-    Network.Google.SearchConsole.Internal.Product
-    Network.Google.SearchConsole.Internal.Sum
+    Gogol.SearchConsole.Internal.Product
+    Gogol.SearchConsole.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

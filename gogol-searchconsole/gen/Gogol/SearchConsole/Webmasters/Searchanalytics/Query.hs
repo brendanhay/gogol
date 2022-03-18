@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Searchanalytics.Query
+-- Module      : Gogol.SearchConsole.Webmasters.Searchanalytics.Query
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Query your data with filters and parameters that you define. Returns zero or more rows grouped by the row keys that you define. You must define a date range of one or more days. When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.searchanalytics.query@.
-module Network.Google.SearchConsole.Webmasters.Searchanalytics.Query
+module Gogol.SearchConsole.Webmasters.Searchanalytics.Query
   ( -- * Resource
     WebmastersSearchanalyticsQueryResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SearchConsole.Webmasters.Searchanalytics.Query
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
 -- | A resource alias for @webmasters.searchanalytics.query@ method which the
 -- 'WebmastersSearchanalyticsQuery' request conforms to.

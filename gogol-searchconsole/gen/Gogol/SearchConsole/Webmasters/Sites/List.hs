@@ -19,56 +19,53 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Sites.Get
+-- Module      : Gogol.SearchConsole.Webmasters.Sites.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves information about specific site.
+-- Lists the user\'s Search Console sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.get@.
-module Network.Google.SearchConsole.Webmasters.Sites.Get
+-- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.list@.
+module Gogol.SearchConsole.Webmasters.Sites.List
   ( -- * Resource
-    WebmastersSitesGetResource,
+    WebmastersSitesListResource,
 
     -- ** Constructing a Request
-    newWebmastersSitesGet,
-    WebmastersSitesGet,
+    newWebmastersSitesList,
+    WebmastersSitesList,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
--- | A resource alias for @webmasters.sites.get@ method which the
--- 'WebmastersSitesGet' request conforms to.
-type WebmastersSitesGetResource =
+-- | A resource alias for @webmasters.sites.list@ method which the
+-- 'WebmastersSitesList' request conforms to.
+type WebmastersSitesListResource =
   "webmasters"
     Core.:> "v3"
     Core.:> "sites"
-    Core.:> Core.Capture "siteUrl" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] WmxSite
+    Core.:> Core.Get '[Core.JSON] SitesListResponse
 
--- | Retrieves information about specific site.
+-- | Lists the user\'s Search Console sites.
 --
--- /See:/ 'newWebmastersSitesGet' smart constructor.
-data WebmastersSitesGet = WebmastersSitesGet
+-- /See:/ 'newWebmastersSitesList' smart constructor.
+data WebmastersSitesList = WebmastersSitesList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The URI of the property as defined in Search Console. __Examples:__ @http:\/\/www.example.com\/@ or @sc-domain:example.com@.
-    siteUrl :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -76,31 +73,27 @@ data WebmastersSitesGet = WebmastersSitesGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebmastersSitesGet' with the minimum fields required to make a request.
-newWebmastersSitesGet ::
-  -- |  The URI of the property as defined in Search Console. __Examples:__ @http:\/\/www.example.com\/@ or @sc-domain:example.com@. See 'siteUrl'.
-  Core.Text ->
-  WebmastersSitesGet
-newWebmastersSitesGet siteUrl =
-  WebmastersSitesGet
+-- | Creates a value of 'WebmastersSitesList' with the minimum fields required to make a request.
+newWebmastersSitesList ::
+  WebmastersSitesList
+newWebmastersSitesList =
+  WebmastersSitesList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      siteUrl = siteUrl,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest WebmastersSitesGet where
-  type Rs WebmastersSitesGet = WmxSite
+instance Core.GoogleRequest WebmastersSitesList where
+  type Rs WebmastersSitesList = SitesListResponse
   type
-    Scopes WebmastersSitesGet =
+    Scopes WebmastersSitesList =
       '[ "https://www.googleapis.com/auth/webmasters",
          "https://www.googleapis.com/auth/webmasters.readonly"
        ]
-  requestClient WebmastersSitesGet {..} =
+  requestClient WebmastersSitesList {..} =
     go
-      siteUrl
       xgafv
       accessToken
       callback
@@ -111,5 +104,7 @@ instance Core.GoogleRequest WebmastersSitesGet where
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy WebmastersSitesGetResource)
+          ( Core.Proxy ::
+              Core.Proxy WebmastersSitesListResource
+          )
           Core.mempty

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Sitemaps.List
+-- Module      : Gogol.SearchConsole.Webmasters.Sitemaps.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the </webmaster-tools/v3/sitemaps sitemaps-entries> submitted for this site, or included in the sitemap index file (if @sitemapIndex@ is specified in the request).
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sitemaps.list@.
-module Network.Google.SearchConsole.Webmasters.Sitemaps.List
+module Gogol.SearchConsole.Webmasters.Sitemaps.List
   ( -- * Resource
     WebmastersSitemapsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SearchConsole.Webmasters.Sitemaps.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
 -- | A resource alias for @webmasters.sitemaps.list@ method which the
 -- 'WebmastersSitemapsList' request conforms to.

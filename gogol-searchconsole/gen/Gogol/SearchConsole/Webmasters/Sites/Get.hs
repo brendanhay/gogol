@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Sites.Delete
+-- Module      : Gogol.SearchConsole.Webmasters.Sites.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a site from the set of the user\'s Search Console sites.
+-- Retrieves information about specific site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.delete@.
-module Network.Google.SearchConsole.Webmasters.Sites.Delete
+-- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.get@.
+module Gogol.SearchConsole.Webmasters.Sites.Get
   ( -- * Resource
-    WebmastersSitesDeleteResource,
+    WebmastersSitesGetResource,
 
     -- ** Constructing a Request
-    newWebmastersSitesDelete,
-    WebmastersSitesDelete,
+    newWebmastersSitesGet,
+    WebmastersSitesGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
--- | A resource alias for @webmasters.sites.delete@ method which the
--- 'WebmastersSitesDelete' request conforms to.
-type WebmastersSitesDeleteResource =
+-- | A resource alias for @webmasters.sites.get@ method which the
+-- 'WebmastersSitesGet' request conforms to.
+type WebmastersSitesGetResource =
   "webmasters"
     Core.:> "v3"
     Core.:> "sites"
@@ -55,12 +55,12 @@ type WebmastersSitesDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+    Core.:> Core.Get '[Core.JSON] WmxSite
 
--- | Removes a site from the set of the user\'s Search Console sites.
+-- | Retrieves information about specific site.
 --
--- /See:/ 'newWebmastersSitesDelete' smart constructor.
-data WebmastersSitesDelete = WebmastersSitesDelete
+-- /See:/ 'newWebmastersSitesGet' smart constructor.
+data WebmastersSitesGet = WebmastersSitesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -76,13 +76,13 @@ data WebmastersSitesDelete = WebmastersSitesDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebmastersSitesDelete' with the minimum fields required to make a request.
-newWebmastersSitesDelete ::
+-- | Creates a value of 'WebmastersSitesGet' with the minimum fields required to make a request.
+newWebmastersSitesGet ::
   -- |  The URI of the property as defined in Search Console. __Examples:__ @http:\/\/www.example.com\/@ or @sc-domain:example.com@. See 'siteUrl'.
   Core.Text ->
-  WebmastersSitesDelete
-newWebmastersSitesDelete siteUrl =
-  WebmastersSitesDelete
+  WebmastersSitesGet
+newWebmastersSitesGet siteUrl =
+  WebmastersSitesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,12 +91,14 @@ newWebmastersSitesDelete siteUrl =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest WebmastersSitesDelete where
-  type Rs WebmastersSitesDelete = ()
+instance Core.GoogleRequest WebmastersSitesGet where
+  type Rs WebmastersSitesGet = WmxSite
   type
-    Scopes WebmastersSitesDelete =
-      '["https://www.googleapis.com/auth/webmasters"]
-  requestClient WebmastersSitesDelete {..} =
+    Scopes WebmastersSitesGet =
+      '[ "https://www.googleapis.com/auth/webmasters",
+         "https://www.googleapis.com/auth/webmasters.readonly"
+       ]
+  requestClient WebmastersSitesGet {..} =
     go
       siteUrl
       xgafv
@@ -109,7 +111,5 @@ instance Core.GoogleRequest WebmastersSitesDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy WebmastersSitesDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy WebmastersSitesGetResource)
           Core.mempty

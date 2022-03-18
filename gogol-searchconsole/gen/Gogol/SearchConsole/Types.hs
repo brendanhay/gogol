@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Types
+-- Module      : Gogol.SearchConsole.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.SearchConsole.Types
+module Gogol.SearchConsole.Types
   ( -- * Configuration
     searchConsoleService,
 
@@ -249,9 +249,9 @@ module Network.Google.SearchConsole.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Internal.Product
-import Network.Google.SearchConsole.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Internal.Product
+import Gogol.SearchConsole.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Google Search Console API. This contains the host and root path used as a starting point for constructing service requests.
 searchConsoleService :: Core.ServiceConfig

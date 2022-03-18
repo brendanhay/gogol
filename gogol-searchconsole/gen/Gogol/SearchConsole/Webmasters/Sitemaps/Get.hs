@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Sitemaps.Get
+-- Module      : Gogol.SearchConsole.Webmasters.Sitemaps.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves information about a specific sitemap.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sitemaps.get@.
-module Network.Google.SearchConsole.Webmasters.Sitemaps.Get
+module Gogol.SearchConsole.Webmasters.Sitemaps.Get
   ( -- * Resource
     WebmastersSitemapsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SearchConsole.Webmasters.Sitemaps.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
 -- | A resource alias for @webmasters.sitemaps.get@ method which the
 -- 'WebmastersSitemapsGet' request conforms to.

@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Internal.Product
+-- Module      : Gogol.SearchConsole.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.SearchConsole.Internal.Product
+module Gogol.SearchConsole.Internal.Product
   ( -- * AmpInspectionResult
     AmpInspectionResult (..),
     newAmpInspectionResult,
@@ -144,8 +144,8 @@ module Network.Google.SearchConsole.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Internal.Sum
 
 -- | AMP inspection result of the live page or the current information from Google\'s index, depending on whether you requested a live inspection or not.
 --
