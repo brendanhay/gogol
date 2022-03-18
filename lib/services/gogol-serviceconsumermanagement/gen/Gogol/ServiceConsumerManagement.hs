@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,535 +36,535 @@
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference>
 module Gogol.ServiceConsumerManagement
-  ( -- * Configuration
-    serviceConsumerManagementService,
+    (
+    -- * Configuration
+      serviceConsumerManagementService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** serviceconsumermanagement.operations.cancel
-    ServiceConsumerManagementOperationsCancelResource,
-    newServiceConsumerManagementOperationsCancel,
-    ServiceConsumerManagementOperationsCancel,
+    , ServiceConsumerManagementOperationsCancelResource
+    , newServiceConsumerManagementOperationsCancel
+    , ServiceConsumerManagementOperationsCancel
 
     -- ** serviceconsumermanagement.operations.delete
-    ServiceConsumerManagementOperationsDeleteResource,
-    newServiceConsumerManagementOperationsDelete,
-    ServiceConsumerManagementOperationsDelete,
+    , ServiceConsumerManagementOperationsDeleteResource
+    , newServiceConsumerManagementOperationsDelete
+    , ServiceConsumerManagementOperationsDelete
 
     -- ** serviceconsumermanagement.operations.get
-    ServiceConsumerManagementOperationsGetResource,
-    newServiceConsumerManagementOperationsGet,
-    ServiceConsumerManagementOperationsGet,
+    , ServiceConsumerManagementOperationsGetResource
+    , newServiceConsumerManagementOperationsGet
+    , ServiceConsumerManagementOperationsGet
 
     -- ** serviceconsumermanagement.operations.list
-    ServiceConsumerManagementOperationsListResource,
-    newServiceConsumerManagementOperationsList,
-    ServiceConsumerManagementOperationsList,
+    , ServiceConsumerManagementOperationsListResource
+    , newServiceConsumerManagementOperationsList
+    , ServiceConsumerManagementOperationsList
 
     -- ** serviceconsumermanagement.services.search
-    ServiceConsumerManagementServicesSearchResource,
-    newServiceConsumerManagementServicesSearch,
-    ServiceConsumerManagementServicesSearch,
+    , ServiceConsumerManagementServicesSearchResource
+    , newServiceConsumerManagementServicesSearch
+    , ServiceConsumerManagementServicesSearch
 
     -- ** serviceconsumermanagement.services.tenancyUnits.addProject
-    ServiceConsumerManagementServicesTenancyUnitsAddProjectResource,
-    newServiceConsumerManagementServicesTenancyUnitsAddProject,
-    ServiceConsumerManagementServicesTenancyUnitsAddProject,
+    , ServiceConsumerManagementServicesTenancyUnitsAddProjectResource
+    , newServiceConsumerManagementServicesTenancyUnitsAddProject
+    , ServiceConsumerManagementServicesTenancyUnitsAddProject
 
     -- ** serviceconsumermanagement.services.tenancyUnits.applyProjectConfig
-    ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfigResource,
-    newServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig,
-    ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig,
+    , ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfigResource
+    , newServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig
+    , ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig
 
     -- ** serviceconsumermanagement.services.tenancyUnits.attachProject
-    ServiceConsumerManagementServicesTenancyUnitsAttachProjectResource,
-    newServiceConsumerManagementServicesTenancyUnitsAttachProject,
-    ServiceConsumerManagementServicesTenancyUnitsAttachProject,
+    , ServiceConsumerManagementServicesTenancyUnitsAttachProjectResource
+    , newServiceConsumerManagementServicesTenancyUnitsAttachProject
+    , ServiceConsumerManagementServicesTenancyUnitsAttachProject
 
     -- ** serviceconsumermanagement.services.tenancyUnits.create
-    ServiceConsumerManagementServicesTenancyUnitsCreateResource,
-    newServiceConsumerManagementServicesTenancyUnitsCreate,
-    ServiceConsumerManagementServicesTenancyUnitsCreate,
+    , ServiceConsumerManagementServicesTenancyUnitsCreateResource
+    , newServiceConsumerManagementServicesTenancyUnitsCreate
+    , ServiceConsumerManagementServicesTenancyUnitsCreate
 
     -- ** serviceconsumermanagement.services.tenancyUnits.delete
-    ServiceConsumerManagementServicesTenancyUnitsDeleteResource,
-    newServiceConsumerManagementServicesTenancyUnitsDelete,
-    ServiceConsumerManagementServicesTenancyUnitsDelete,
+    , ServiceConsumerManagementServicesTenancyUnitsDeleteResource
+    , newServiceConsumerManagementServicesTenancyUnitsDelete
+    , ServiceConsumerManagementServicesTenancyUnitsDelete
 
     -- ** serviceconsumermanagement.services.tenancyUnits.deleteProject
-    ServiceConsumerManagementServicesTenancyUnitsDeleteProjectResource,
-    newServiceConsumerManagementServicesTenancyUnitsDeleteProject,
-    ServiceConsumerManagementServicesTenancyUnitsDeleteProject,
+    , ServiceConsumerManagementServicesTenancyUnitsDeleteProjectResource
+    , newServiceConsumerManagementServicesTenancyUnitsDeleteProject
+    , ServiceConsumerManagementServicesTenancyUnitsDeleteProject
 
     -- ** serviceconsumermanagement.services.tenancyUnits.list
-    ServiceConsumerManagementServicesTenancyUnitsListResource,
-    newServiceConsumerManagementServicesTenancyUnitsList,
-    ServiceConsumerManagementServicesTenancyUnitsList,
+    , ServiceConsumerManagementServicesTenancyUnitsListResource
+    , newServiceConsumerManagementServicesTenancyUnitsList
+    , ServiceConsumerManagementServicesTenancyUnitsList
 
     -- ** serviceconsumermanagement.services.tenancyUnits.removeProject
-    ServiceConsumerManagementServicesTenancyUnitsRemoveProjectResource,
-    newServiceConsumerManagementServicesTenancyUnitsRemoveProject,
-    ServiceConsumerManagementServicesTenancyUnitsRemoveProject,
+    , ServiceConsumerManagementServicesTenancyUnitsRemoveProjectResource
+    , newServiceConsumerManagementServicesTenancyUnitsRemoveProject
+    , ServiceConsumerManagementServicesTenancyUnitsRemoveProject
 
     -- ** serviceconsumermanagement.services.tenancyUnits.undeleteProject
-    ServiceConsumerManagementServicesTenancyUnitsUndeleteProjectResource,
-    newServiceConsumerManagementServicesTenancyUnitsUndeleteProject,
-    ServiceConsumerManagementServicesTenancyUnitsUndeleteProject,
+    , ServiceConsumerManagementServicesTenancyUnitsUndeleteProjectResource
+    , newServiceConsumerManagementServicesTenancyUnitsUndeleteProject
+    , ServiceConsumerManagementServicesTenancyUnitsUndeleteProject
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AddTenantProjectRequest
-    AddTenantProjectRequest (..),
-    newAddTenantProjectRequest,
+    , AddTenantProjectRequest (..)
+    , newAddTenantProjectRequest
 
     -- ** Api
-    Api (..),
-    newApi,
+    , Api (..)
+    , newApi
 
     -- ** Api_Syntax
-    Api_Syntax (..),
+    , Api_Syntax (..)
 
     -- ** ApplyTenantProjectConfigRequest
-    ApplyTenantProjectConfigRequest (..),
-    newApplyTenantProjectConfigRequest,
+    , ApplyTenantProjectConfigRequest (..)
+    , newApplyTenantProjectConfigRequest
 
     -- ** AttachTenantProjectRequest
-    AttachTenantProjectRequest (..),
-    newAttachTenantProjectRequest,
+    , AttachTenantProjectRequest (..)
+    , newAttachTenantProjectRequest
 
     -- ** AuthProvider
-    AuthProvider (..),
-    newAuthProvider,
+    , AuthProvider (..)
+    , newAuthProvider
 
     -- ** AuthRequirement
-    AuthRequirement (..),
-    newAuthRequirement,
+    , AuthRequirement (..)
+    , newAuthRequirement
 
     -- ** Authentication
-    Authentication (..),
-    newAuthentication,
+    , Authentication (..)
+    , newAuthentication
 
     -- ** AuthenticationRule
-    AuthenticationRule (..),
-    newAuthenticationRule,
+    , AuthenticationRule (..)
+    , newAuthenticationRule
 
     -- ** Backend
-    Backend (..),
-    newBackend,
+    , Backend (..)
+    , newBackend
 
     -- ** BackendRule
-    BackendRule (..),
-    newBackendRule,
+    , BackendRule (..)
+    , newBackendRule
 
     -- ** BackendRule_PathTranslation
-    BackendRule_PathTranslation (..),
+    , BackendRule_PathTranslation (..)
 
     -- ** Billing
-    Billing (..),
-    newBilling,
+    , Billing (..)
+    , newBilling
 
     -- ** BillingConfig
-    BillingConfig (..),
-    newBillingConfig,
+    , BillingConfig (..)
+    , newBillingConfig
 
     -- ** BillingDestination
-    BillingDestination (..),
-    newBillingDestination,
+    , BillingDestination (..)
+    , newBillingDestination
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** Context
-    Context (..),
-    newContext,
+    , Context (..)
+    , newContext
 
     -- ** ContextRule
-    ContextRule (..),
-    newContextRule,
+    , ContextRule (..)
+    , newContextRule
 
     -- ** Control
-    Control (..),
-    newControl,
+    , Control (..)
+    , newControl
 
     -- ** CreateTenancyUnitRequest
-    CreateTenancyUnitRequest (..),
-    newCreateTenancyUnitRequest,
+    , CreateTenancyUnitRequest (..)
+    , newCreateTenancyUnitRequest
 
     -- ** CustomError
-    CustomError (..),
-    newCustomError,
+    , CustomError (..)
+    , newCustomError
 
     -- ** CustomErrorRule
-    CustomErrorRule (..),
-    newCustomErrorRule,
+    , CustomErrorRule (..)
+    , newCustomErrorRule
 
     -- ** CustomHttpPattern
-    CustomHttpPattern (..),
-    newCustomHttpPattern,
+    , CustomHttpPattern (..)
+    , newCustomHttpPattern
 
     -- ** DeleteTenantProjectRequest
-    DeleteTenantProjectRequest (..),
-    newDeleteTenantProjectRequest,
+    , DeleteTenantProjectRequest (..)
+    , newDeleteTenantProjectRequest
 
     -- ** Documentation
-    Documentation (..),
-    newDocumentation,
+    , Documentation (..)
+    , newDocumentation
 
     -- ** DocumentationRule
-    DocumentationRule (..),
-    newDocumentationRule,
+    , DocumentationRule (..)
+    , newDocumentationRule
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Endpoint
-    Endpoint (..),
-    newEndpoint,
+    , Endpoint (..)
+    , newEndpoint
 
     -- ** Enum'
-    Enum' (..),
-    newEnum,
+    , Enum' (..)
+    , newEnum
 
     -- ** Enum_Syntax
-    Enum_Syntax (..),
+    , Enum_Syntax (..)
 
     -- ** EnumValue
-    EnumValue (..),
-    newEnumValue,
+    , EnumValue (..)
+    , newEnumValue
 
     -- ** Field
-    Field (..),
-    newField,
+    , Field (..)
+    , newField
 
     -- ** Field_Cardinality
-    Field_Cardinality (..),
+    , Field_Cardinality (..)
 
     -- ** Field_Kind
-    Field_Kind (..),
+    , Field_Kind (..)
 
     -- ** Http
-    Http (..),
-    newHttp,
+    , Http (..)
+    , newHttp
 
     -- ** HttpRule
-    HttpRule (..),
-    newHttpRule,
+    , HttpRule (..)
+    , newHttpRule
 
     -- ** JwtLocation
-    JwtLocation (..),
-    newJwtLocation,
+    , JwtLocation (..)
+    , newJwtLocation
 
     -- ** LabelDescriptor
-    LabelDescriptor (..),
-    newLabelDescriptor,
+    , LabelDescriptor (..)
+    , newLabelDescriptor
 
     -- ** LabelDescriptor_ValueType
-    LabelDescriptor_ValueType (..),
+    , LabelDescriptor_ValueType (..)
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListTenancyUnitsResponse
-    ListTenancyUnitsResponse (..),
-    newListTenancyUnitsResponse,
+    , ListTenancyUnitsResponse (..)
+    , newListTenancyUnitsResponse
 
     -- ** LogDescriptor
-    LogDescriptor (..),
-    newLogDescriptor,
+    , LogDescriptor (..)
+    , newLogDescriptor
 
     -- ** Logging
-    Logging (..),
-    newLogging,
+    , Logging (..)
+    , newLogging
 
     -- ** LoggingDestination
-    LoggingDestination (..),
-    newLoggingDestination,
+    , LoggingDestination (..)
+    , newLoggingDestination
 
     -- ** Method
-    Method (..),
-    newMethod,
+    , Method (..)
+    , newMethod
 
     -- ** Method_Syntax
-    Method_Syntax (..),
+    , Method_Syntax (..)
 
     -- ** MetricDescriptor
-    MetricDescriptor (..),
-    newMetricDescriptor,
+    , MetricDescriptor (..)
+    , newMetricDescriptor
 
     -- ** MetricDescriptor_LaunchStage
-    MetricDescriptor_LaunchStage (..),
+    , MetricDescriptor_LaunchStage (..)
 
     -- ** MetricDescriptor_MetricKind
-    MetricDescriptor_MetricKind (..),
+    , MetricDescriptor_MetricKind (..)
 
     -- ** MetricDescriptor_ValueType
-    MetricDescriptor_ValueType (..),
+    , MetricDescriptor_ValueType (..)
 
     -- ** MetricDescriptorMetadata
-    MetricDescriptorMetadata (..),
-    newMetricDescriptorMetadata,
+    , MetricDescriptorMetadata (..)
+    , newMetricDescriptorMetadata
 
     -- ** MetricDescriptorMetadata_LaunchStage
-    MetricDescriptorMetadata_LaunchStage (..),
+    , MetricDescriptorMetadata_LaunchStage (..)
 
     -- ** MetricRule
-    MetricRule (..),
-    newMetricRule,
+    , MetricRule (..)
+    , newMetricRule
 
     -- ** MetricRule_MetricCosts
-    MetricRule_MetricCosts (..),
-    newMetricRule_MetricCosts,
+    , MetricRule_MetricCosts (..)
+    , newMetricRule_MetricCosts
 
     -- ** Mixin
-    Mixin (..),
-    newMixin,
+    , Mixin (..)
+    , newMixin
 
     -- ** MonitoredResourceDescriptor
-    MonitoredResourceDescriptor (..),
-    newMonitoredResourceDescriptor,
+    , MonitoredResourceDescriptor (..)
+    , newMonitoredResourceDescriptor
 
     -- ** MonitoredResourceDescriptor_LaunchStage
-    MonitoredResourceDescriptor_LaunchStage (..),
+    , MonitoredResourceDescriptor_LaunchStage (..)
 
     -- ** Monitoring
-    Monitoring (..),
-    newMonitoring,
+    , Monitoring (..)
+    , newMonitoring
 
     -- ** MonitoringDestination
-    MonitoringDestination (..),
-    newMonitoringDestination,
+    , MonitoringDestination (..)
+    , newMonitoringDestination
 
     -- ** OAuthRequirements
-    OAuthRequirements (..),
-    newOAuthRequirements,
+    , OAuthRequirements (..)
+    , newOAuthRequirements
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** Option
-    Option (..),
-    newOption,
+    , Option (..)
+    , newOption
 
     -- ** Option_Value
-    Option_Value (..),
-    newOption_Value,
+    , Option_Value (..)
+    , newOption_Value
 
     -- ** Page
-    Page (..),
-    newPage,
+    , Page (..)
+    , newPage
 
     -- ** PolicyBinding
-    PolicyBinding (..),
-    newPolicyBinding,
+    , PolicyBinding (..)
+    , newPolicyBinding
 
     -- ** Quota
-    Quota (..),
-    newQuota,
+    , Quota (..)
+    , newQuota
 
     -- ** QuotaLimit
-    QuotaLimit (..),
-    newQuotaLimit,
+    , QuotaLimit (..)
+    , newQuotaLimit
 
     -- ** QuotaLimit_Values
-    QuotaLimit_Values (..),
-    newQuotaLimit_Values,
+    , QuotaLimit_Values (..)
+    , newQuotaLimit_Values
 
     -- ** RemoveTenantProjectRequest
-    RemoveTenantProjectRequest (..),
-    newRemoveTenantProjectRequest,
+    , RemoveTenantProjectRequest (..)
+    , newRemoveTenantProjectRequest
 
     -- ** SearchTenancyUnitsResponse
-    SearchTenancyUnitsResponse (..),
-    newSearchTenancyUnitsResponse,
+    , SearchTenancyUnitsResponse (..)
+    , newSearchTenancyUnitsResponse
 
     -- ** Service
-    Service (..),
-    newService,
+    , Service (..)
+    , newService
 
     -- ** ServiceAccountConfig
-    ServiceAccountConfig (..),
-    newServiceAccountConfig,
+    , ServiceAccountConfig (..)
+    , newServiceAccountConfig
 
     -- ** SourceContext
-    SourceContext (..),
-    newSourceContext,
+    , SourceContext (..)
+    , newSourceContext
 
     -- ** SourceInfo
-    SourceInfo (..),
-    newSourceInfo,
+    , SourceInfo (..)
+    , newSourceInfo
 
     -- ** SourceInfo_SourceFilesItem
-    SourceInfo_SourceFilesItem (..),
-    newSourceInfo_SourceFilesItem,
+    , SourceInfo_SourceFilesItem (..)
+    , newSourceInfo_SourceFilesItem
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** SystemParameter
-    SystemParameter (..),
-    newSystemParameter,
+    , SystemParameter (..)
+    , newSystemParameter
 
     -- ** SystemParameterRule
-    SystemParameterRule (..),
-    newSystemParameterRule,
+    , SystemParameterRule (..)
+    , newSystemParameterRule
 
     -- ** SystemParameters
-    SystemParameters (..),
-    newSystemParameters,
+    , SystemParameters (..)
+    , newSystemParameters
 
     -- ** TenancyUnit
-    TenancyUnit (..),
-    newTenancyUnit,
+    , TenancyUnit (..)
+    , newTenancyUnit
 
     -- ** TenantProjectConfig
-    TenantProjectConfig (..),
-    newTenantProjectConfig,
+    , TenantProjectConfig (..)
+    , newTenantProjectConfig
 
     -- ** TenantProjectConfig_Labels
-    TenantProjectConfig_Labels (..),
-    newTenantProjectConfig_Labels,
+    , TenantProjectConfig_Labels (..)
+    , newTenantProjectConfig_Labels
 
     -- ** TenantProjectPolicy
-    TenantProjectPolicy (..),
-    newTenantProjectPolicy,
+    , TenantProjectPolicy (..)
+    , newTenantProjectPolicy
 
     -- ** TenantResource
-    TenantResource (..),
-    newTenantResource,
+    , TenantResource (..)
+    , newTenantResource
 
     -- ** TenantResource_Status
-    TenantResource_Status (..),
+    , TenantResource_Status (..)
 
     -- ** Type
-    Type (..),
-    newType,
+    , Type (..)
+    , newType
 
     -- ** Type_Syntax
-    Type_Syntax (..),
+    , Type_Syntax (..)
 
     -- ** UndeleteTenantProjectRequest
-    UndeleteTenantProjectRequest (..),
-    newUndeleteTenantProjectRequest,
+    , UndeleteTenantProjectRequest (..)
+    , newUndeleteTenantProjectRequest
 
     -- ** Usage
-    Usage (..),
-    newUsage,
+    , Usage (..)
+    , newUsage
 
     -- ** UsageRule
-    UsageRule (..),
-    newUsageRule,
+    , UsageRule (..)
+    , newUsageRule
 
     -- ** V1AddVisibilityLabelsResponse
-    V1AddVisibilityLabelsResponse (..),
-    newV1AddVisibilityLabelsResponse,
+    , V1AddVisibilityLabelsResponse (..)
+    , newV1AddVisibilityLabelsResponse
 
     -- ** V1Beta1BatchCreateProducerOverridesResponse
-    V1Beta1BatchCreateProducerOverridesResponse (..),
-    newV1Beta1BatchCreateProducerOverridesResponse,
+    , V1Beta1BatchCreateProducerOverridesResponse (..)
+    , newV1Beta1BatchCreateProducerOverridesResponse
 
     -- ** V1Beta1DisableConsumerResponse
-    V1Beta1DisableConsumerResponse (..),
-    newV1Beta1DisableConsumerResponse,
+    , V1Beta1DisableConsumerResponse (..)
+    , newV1Beta1DisableConsumerResponse
 
     -- ** V1Beta1EnableConsumerResponse
-    V1Beta1EnableConsumerResponse (..),
-    newV1Beta1EnableConsumerResponse,
+    , V1Beta1EnableConsumerResponse (..)
+    , newV1Beta1EnableConsumerResponse
 
     -- ** V1Beta1GenerateServiceIdentityResponse
-    V1Beta1GenerateServiceIdentityResponse (..),
-    newV1Beta1GenerateServiceIdentityResponse,
+    , V1Beta1GenerateServiceIdentityResponse (..)
+    , newV1Beta1GenerateServiceIdentityResponse
 
     -- ** V1Beta1ImportProducerOverridesResponse
-    V1Beta1ImportProducerOverridesResponse (..),
-    newV1Beta1ImportProducerOverridesResponse,
+    , V1Beta1ImportProducerOverridesResponse (..)
+    , newV1Beta1ImportProducerOverridesResponse
 
     -- ** V1Beta1ImportProducerQuotaPoliciesResponse
-    V1Beta1ImportProducerQuotaPoliciesResponse (..),
-    newV1Beta1ImportProducerQuotaPoliciesResponse,
+    , V1Beta1ImportProducerQuotaPoliciesResponse (..)
+    , newV1Beta1ImportProducerQuotaPoliciesResponse
 
     -- ** V1Beta1ProducerQuotaPolicy
-    V1Beta1ProducerQuotaPolicy (..),
-    newV1Beta1ProducerQuotaPolicy,
+    , V1Beta1ProducerQuotaPolicy (..)
+    , newV1Beta1ProducerQuotaPolicy
 
     -- ** V1Beta1ProducerQuotaPolicy_Dimensions
-    V1Beta1ProducerQuotaPolicy_Dimensions (..),
-    newV1Beta1ProducerQuotaPolicy_Dimensions,
+    , V1Beta1ProducerQuotaPolicy_Dimensions (..)
+    , newV1Beta1ProducerQuotaPolicy_Dimensions
 
     -- ** V1Beta1QuotaOverride
-    V1Beta1QuotaOverride (..),
-    newV1Beta1QuotaOverride,
+    , V1Beta1QuotaOverride (..)
+    , newV1Beta1QuotaOverride
 
     -- ** V1Beta1QuotaOverride_Dimensions
-    V1Beta1QuotaOverride_Dimensions (..),
-    newV1Beta1QuotaOverride_Dimensions,
+    , V1Beta1QuotaOverride_Dimensions (..)
+    , newV1Beta1QuotaOverride_Dimensions
 
     -- ** V1Beta1RefreshConsumerResponse
-    V1Beta1RefreshConsumerResponse (..),
-    newV1Beta1RefreshConsumerResponse,
+    , V1Beta1RefreshConsumerResponse (..)
+    , newV1Beta1RefreshConsumerResponse
 
     -- ** V1Beta1ServiceIdentity
-    V1Beta1ServiceIdentity (..),
-    newV1Beta1ServiceIdentity,
+    , V1Beta1ServiceIdentity (..)
+    , newV1Beta1ServiceIdentity
 
     -- ** V1DefaultIdentity
-    V1DefaultIdentity (..),
-    newV1DefaultIdentity,
+    , V1DefaultIdentity (..)
+    , newV1DefaultIdentity
 
     -- ** V1DisableConsumerResponse
-    V1DisableConsumerResponse (..),
-    newV1DisableConsumerResponse,
+    , V1DisableConsumerResponse (..)
+    , newV1DisableConsumerResponse
 
     -- ** V1EnableConsumerResponse
-    V1EnableConsumerResponse (..),
-    newV1EnableConsumerResponse,
+    , V1EnableConsumerResponse (..)
+    , newV1EnableConsumerResponse
 
     -- ** V1GenerateDefaultIdentityResponse
-    V1GenerateDefaultIdentityResponse (..),
-    newV1GenerateDefaultIdentityResponse,
+    , V1GenerateDefaultIdentityResponse (..)
+    , newV1GenerateDefaultIdentityResponse
 
     -- ** V1GenerateDefaultIdentityResponse_AttachStatus
-    V1GenerateDefaultIdentityResponse_AttachStatus (..),
+    , V1GenerateDefaultIdentityResponse_AttachStatus (..)
 
     -- ** V1GenerateServiceAccountResponse
-    V1GenerateServiceAccountResponse (..),
-    newV1GenerateServiceAccountResponse,
+    , V1GenerateServiceAccountResponse (..)
+    , newV1GenerateServiceAccountResponse
 
     -- ** V1RefreshConsumerResponse
-    V1RefreshConsumerResponse (..),
-    newV1RefreshConsumerResponse,
+    , V1RefreshConsumerResponse (..)
+    , newV1RefreshConsumerResponse
 
     -- ** V1RemoveVisibilityLabelsResponse
-    V1RemoveVisibilityLabelsResponse (..),
-    newV1RemoveVisibilityLabelsResponse,
+    , V1RemoveVisibilityLabelsResponse (..)
+    , newV1RemoveVisibilityLabelsResponse
 
     -- ** V1ServiceAccount
-    V1ServiceAccount (..),
-    newV1ServiceAccount,
-  )
-where
+    , V1ServiceAccount (..)
+    , newV1ServiceAccount
+    ) where
 
 import Gogol.ServiceConsumerManagement.Operations.Cancel
 import Gogol.ServiceConsumerManagement.Operations.Delete
