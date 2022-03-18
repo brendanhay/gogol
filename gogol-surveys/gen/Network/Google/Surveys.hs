@@ -1,218 +1,163 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Surveys
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates and conducts surveys, lists the surveys that an authenticated
--- user owns, and retrieves survey results and information about specified
--- surveys.
+-- Creates and conducts surveys, lists the surveys that an authenticated user owns, and retrieves survey results and information about specified surveys.
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference>
 module Network.Google.Surveys
-    (
-    -- * Service Configuration
-      surveysService
+  ( -- * Configuration
+    surveysService,
 
     -- * OAuth Scopes
-    , surveysScope
-    , userInfoEmailScope
-    , surveysReadOnlyScope
-
-    -- * API Declaration
-    , SurveysAPI
+    surveysScope,
+    surveysReadOnlyScope,
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** surveys.results.get
-    , module Network.Google.Resource.Surveys.Results.Get
+    SurveysResultsGetResource,
+    newSurveysResultsGet,
+    SurveysResultsGet,
 
     -- ** surveys.surveys.delete
-    , module Network.Google.Resource.Surveys.Surveys.Delete
+    SurveysSurveysDeleteResource,
+    newSurveysSurveysDelete,
+    SurveysSurveysDelete,
 
     -- ** surveys.surveys.get
-    , module Network.Google.Resource.Surveys.Surveys.Get
+    SurveysSurveysGetResource,
+    newSurveysSurveysGet,
+    SurveysSurveysGet,
 
     -- ** surveys.surveys.insert
-    , module Network.Google.Resource.Surveys.Surveys.Insert
+    SurveysSurveysInsertResource,
+    newSurveysSurveysInsert,
+    SurveysSurveysInsert,
 
     -- ** surveys.surveys.list
-    , module Network.Google.Resource.Surveys.Surveys.List
+    SurveysSurveysListResource,
+    newSurveysSurveysList,
+    SurveysSurveysList,
 
     -- ** surveys.surveys.start
-    , module Network.Google.Resource.Surveys.Surveys.Start
+    SurveysSurveysStartResource,
+    newSurveysSurveysStart,
+    SurveysSurveysStart,
 
     -- ** surveys.surveys.stop
-    , module Network.Google.Resource.Surveys.Surveys.Stop
+    SurveysSurveysStopResource,
+    newSurveysSurveysStop,
+    SurveysSurveysStop,
 
     -- ** surveys.surveys.update
-    , module Network.Google.Resource.Surveys.Surveys.Update
+    SurveysSurveysUpdateResource,
+    newSurveysSurveysUpdate,
+    SurveysSurveysUpdate,
 
     -- * Types
 
-    -- ** SurveysListResponse
-    , SurveysListResponse
-    , surveysListResponse
-    , slrRequestId
-    , slrTokenPagination
-    , slrPageInfo
-    , slrResources
-
-    -- ** TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
-
-    -- ** ResultsGetRequest
-    , ResultsGetRequest
-    , resultsGetRequest
-    , rgrResultMask
+    -- ** FieldMask
+    FieldMask (..),
+    newFieldMask,
 
     -- ** PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
+    PageInfo (..),
+    newPageInfo,
 
-    -- ** FieldMask
-    , FieldMask
-    , fieldMask
-    , fmId
-    , fmFields
-
-    -- ** Survey
-    , Survey
-    , survey
-    , sAudience
-    , sState
-    , sOwners
-    , sWantedResponseCount
-    , sSurveyURLId
-    , sCost
-    , sRejectionReason
-    , sCustomerData
-    , sQuestions
-    , sTitle
-    , sDescription
-
-    -- ** SurveysStartResponse
-    , SurveysStartResponse
-    , surveysStartResponse
-    , ssrRequestId
-
-    -- ** SurveysStopResponse
-    , SurveysStopResponse
-    , surveysStopResponse
-    , sRequestId
+    -- ** ResultsGetRequest
+    ResultsGetRequest (..),
+    newResultsGetRequest,
 
     -- ** ResultsMask
-    , ResultsMask
-    , resultsMask
-    , rmProjection
-    , rmFields
+    ResultsMask (..),
+    newResultsMask,
 
-    -- ** SurveyRejection
-    , SurveyRejection
-    , surveyRejection
-    , srExplanation
-    , srType
-
-    -- ** SurveyResults
-    , SurveyResults
-    , surveyResults
-    , srStatus
-    , srSurveyURLId
-
-    -- ** SurveysStartRequest
-    , SurveysStartRequest
-    , surveysStartRequest
-    , ssrMaxCostPerResponseNanos
-
-    -- ** SurveysDeleteResponse
-    , SurveysDeleteResponse
-    , surveysDeleteResponse
-    , sdrRequestId
-
-    -- ** SurveyQuestionImage
-    , SurveyQuestionImage
-    , surveyQuestionImage
-    , sqiData
-    , sqiURL
-    , sqiAltText
+    -- ** Survey
+    Survey (..),
+    newSurvey,
 
     -- ** SurveyAudience
-    , SurveyAudience
-    , surveyAudience
-    , saCountry
-    , saAges
-    , saLanguages
-    , saGender
-    , saCountrySubdivision
-    , saPopulationSource
+    SurveyAudience (..),
+    newSurveyAudience,
 
     -- ** SurveyCost
-    , SurveyCost
-    , surveyCost
-    , scCurrencyCode
-    , scNanos
-    , scMaxCostPerResponseNanos
-    , scCostPerResponseNanos
+    SurveyCost (..),
+    newSurveyCost,
 
     -- ** SurveyQuestion
-    , SurveyQuestion
-    , surveyQuestion
-    , sqImages
-    , sqAnswers
-    , sqSingleLineResponse
-    , sqMustPickSuggestion
-    , sqSentimentText
-    , sqThresholdAnswers
-    , sqHasOther
-    , sqOpenTextSuggestions
-    , sqVideoId
-    , sqLastAnswerPositionPinned
-    , sqAnswerOrder
-    , sqOpenTextPlaceholder
-    , sqType
-    , sqUnitOfMeasurementLabel
-    , sqHighValueLabel
-    , sqQuestion
-    , sqNumStars
-    , sqLowValueLabel
-    ) where
+    SurveyQuestion (..),
+    newSurveyQuestion,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Surveys.Results.Get
-import Network.Google.Resource.Surveys.Surveys.Delete
-import Network.Google.Resource.Surveys.Surveys.Get
-import Network.Google.Resource.Surveys.Surveys.Insert
-import Network.Google.Resource.Surveys.Surveys.List
-import Network.Google.Resource.Surveys.Surveys.Start
-import Network.Google.Resource.Surveys.Surveys.Stop
-import Network.Google.Resource.Surveys.Surveys.Update
+    -- ** SurveyQuestionImage
+    SurveyQuestionImage (..),
+    newSurveyQuestionImage,
+
+    -- ** SurveyRejection
+    SurveyRejection (..),
+    newSurveyRejection,
+
+    -- ** SurveyResults
+    SurveyResults (..),
+    newSurveyResults,
+
+    -- ** SurveysDeleteResponse
+    SurveysDeleteResponse (..),
+    newSurveysDeleteResponse,
+
+    -- ** SurveysListResponse
+    SurveysListResponse (..),
+    newSurveysListResponse,
+
+    -- ** SurveysStartRequest
+    SurveysStartRequest (..),
+    newSurveysStartRequest,
+
+    -- ** SurveysStartResponse
+    SurveysStartResponse (..),
+    newSurveysStartResponse,
+
+    -- ** SurveysStopResponse
+    SurveysStopResponse (..),
+    newSurveysStopResponse,
+
+    -- ** TokenPagination
+    TokenPagination (..),
+    newTokenPagination,
+  )
+where
+
+import Network.Google.Surveys.Delete
+import Network.Google.Surveys.Get
+import Network.Google.Surveys.Insert
+import Network.Google.Surveys.List
+import Network.Google.Surveys.Results.Get
+import Network.Google.Surveys.Start
+import Network.Google.Surveys.Stop
 import Network.Google.Surveys.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Surveys API service.
-type SurveysAPI =
-     ResultsGetResource :<|> SurveysInsertResource :<|>
-       SurveysListResource
-       :<|> SurveysStartResource
-       :<|> SurveysGetResource
-       :<|> SurveysStopResource
-       :<|> SurveysDeleteResource
-       :<|> SurveysUpdateResource
+import Network.Google.Surveys.Update

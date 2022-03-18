@@ -1,180 +1,130 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Surveys.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Surveys.Types
-    (
-    -- * Service Configuration
-      surveysService
+  ( -- * Configuration
+    surveysService,
 
     -- * OAuth Scopes
-    , surveysScope
-    , userInfoEmailScope
-    , surveysReadOnlyScope
+    surveysScope,
+    surveysReadOnlyScope,
+    userinfoEmailScope,
 
-    -- * SurveysListResponse
-    , SurveysListResponse
-    , surveysListResponse
-    , slrRequestId
-    , slrTokenPagination
-    , slrPageInfo
-    , slrResources
+    -- * Types
 
-    -- * TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
+    -- ** FieldMask
+    FieldMask (..),
+    newFieldMask,
 
-    -- * ResultsGetRequest
-    , ResultsGetRequest
-    , resultsGetRequest
-    , rgrResultMask
+    -- ** PageInfo
+    PageInfo (..),
+    newPageInfo,
 
-    -- * PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
+    -- ** ResultsGetRequest
+    ResultsGetRequest (..),
+    newResultsGetRequest,
 
-    -- * FieldMask
-    , FieldMask
-    , fieldMask
-    , fmId
-    , fmFields
+    -- ** ResultsMask
+    ResultsMask (..),
+    newResultsMask,
 
-    -- * Survey
-    , Survey
-    , survey
-    , sAudience
-    , sState
-    , sOwners
-    , sWantedResponseCount
-    , sSurveyURLId
-    , sCost
-    , sRejectionReason
-    , sCustomerData
-    , sQuestions
-    , sTitle
-    , sDescription
+    -- ** Survey
+    Survey (..),
+    newSurvey,
 
-    -- * SurveysStartResponse
-    , SurveysStartResponse
-    , surveysStartResponse
-    , ssrRequestId
+    -- ** SurveyAudience
+    SurveyAudience (..),
+    newSurveyAudience,
 
-    -- * SurveysStopResponse
-    , SurveysStopResponse
-    , surveysStopResponse
-    , sRequestId
+    -- ** SurveyCost
+    SurveyCost (..),
+    newSurveyCost,
 
-    -- * ResultsMask
-    , ResultsMask
-    , resultsMask
-    , rmProjection
-    , rmFields
+    -- ** SurveyQuestion
+    SurveyQuestion (..),
+    newSurveyQuestion,
 
-    -- * SurveyRejection
-    , SurveyRejection
-    , surveyRejection
-    , srExplanation
-    , srType
+    -- ** SurveyQuestionImage
+    SurveyQuestionImage (..),
+    newSurveyQuestionImage,
 
-    -- * SurveyResults
-    , SurveyResults
-    , surveyResults
-    , srStatus
-    , srSurveyURLId
+    -- ** SurveyRejection
+    SurveyRejection (..),
+    newSurveyRejection,
 
-    -- * SurveysStartRequest
-    , SurveysStartRequest
-    , surveysStartRequest
-    , ssrMaxCostPerResponseNanos
+    -- ** SurveyResults
+    SurveyResults (..),
+    newSurveyResults,
 
-    -- * SurveysDeleteResponse
-    , SurveysDeleteResponse
-    , surveysDeleteResponse
-    , sdrRequestId
+    -- ** SurveysDeleteResponse
+    SurveysDeleteResponse (..),
+    newSurveysDeleteResponse,
 
-    -- * SurveyQuestionImage
-    , SurveyQuestionImage
-    , surveyQuestionImage
-    , sqiData
-    , sqiURL
-    , sqiAltText
+    -- ** SurveysListResponse
+    SurveysListResponse (..),
+    newSurveysListResponse,
 
-    -- * SurveyAudience
-    , SurveyAudience
-    , surveyAudience
-    , saCountry
-    , saAges
-    , saLanguages
-    , saGender
-    , saCountrySubdivision
-    , saPopulationSource
+    -- ** SurveysStartRequest
+    SurveysStartRequest (..),
+    newSurveysStartRequest,
 
-    -- * SurveyCost
-    , SurveyCost
-    , surveyCost
-    , scCurrencyCode
-    , scNanos
-    , scMaxCostPerResponseNanos
-    , scCostPerResponseNanos
+    -- ** SurveysStartResponse
+    SurveysStartResponse (..),
+    newSurveysStartResponse,
 
-    -- * SurveyQuestion
-    , SurveyQuestion
-    , surveyQuestion
-    , sqImages
-    , sqAnswers
-    , sqSingleLineResponse
-    , sqMustPickSuggestion
-    , sqSentimentText
-    , sqThresholdAnswers
-    , sqHasOther
-    , sqOpenTextSuggestions
-    , sqVideoId
-    , sqLastAnswerPositionPinned
-    , sqAnswerOrder
-    , sqOpenTextPlaceholder
-    , sqType
-    , sqUnitOfMeasurementLabel
-    , sqHighValueLabel
-    , sqQuestion
-    , sqNumStars
-    , sqLowValueLabel
-    ) where
+    -- ** SurveysStopResponse
+    SurveysStopResponse (..),
+    newSurveysStopResponse,
 
-import Network.Google.Prelude
-import Network.Google.Surveys.Types.Product
-import Network.Google.Surveys.Types.Sum
+    -- ** TokenPagination
+    TokenPagination (..),
+    newTokenPagination,
+  )
+where
 
--- | Default request referring to version 'v2' of the Surveys API. This contains the host and root path used as a starting point for constructing service requests.
-surveysService :: ServiceConfig
-surveysService
-  = defaultService (ServiceId "surveys:v2")
-      "www.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.Surveys.Internal.Product
+import Network.Google.Surveys.Internal.Sum
+
+-- | Default request referring to version @v2@ of the Surveys API. This contains the host and root path used as a starting point for constructing service requests.
+surveysService :: Core.ServiceConfig
+surveysService =
+  Core.defaultService
+    (Core.ServiceId "surveys:v2")
+    "www.googleapis.com"
 
 -- | View and manage your surveys and results
-surveysScope :: Proxy '["https://www.googleapis.com/auth/surveys"]
-surveysScope = Proxy
-
--- | View your email address
-userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy
+surveysScope :: Core.Proxy '["https://www.googleapis.com/auth/surveys"]
+surveysScope = Core.Proxy
 
 -- | View your surveys and survey results
-surveysReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/surveys.readonly"]
-surveysReadOnlyScope = Proxy
+surveysReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/surveys.readonly"]
+surveysReadOnlyScope = Core.Proxy
+
+-- | View your email address
+userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userinfoEmailScope = Core.Proxy
