@@ -1,267 +1,174 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DoubleClickSearch
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Search Ads 360 API allows developers to automate uploading
--- conversions and downloading reports from Search Ads 360.
+-- The Search Ads 360 API allows developers to automate uploading conversions and downloading reports from Search Ads 360.
 --
 -- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference>
 module Network.Google.DoubleClickSearch
-    (
-    -- * Service Configuration
-      doubleClickSearchService
+  ( -- * Configuration
+    doubleClickSearchService,
 
     -- * OAuth Scopes
-    , doubleClickSearchScope
-
-    -- * API Declaration
-    , DoubleClickSearchAPI
+    doubleClickSearchScope,
 
     -- * Resources
 
     -- ** doubleclicksearch.conversion.get
-    , module Network.Google.Resource.DoubleClickSearch.Conversion.Get
+    DoubleClickSearchConversionGetResource,
+    newDoubleClickSearchConversionGet,
+    DoubleClickSearchConversionGet,
 
     -- ** doubleclicksearch.conversion.insert
-    , module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
+    DoubleClickSearchConversionInsertResource,
+    newDoubleClickSearchConversionInsert,
+    DoubleClickSearchConversionInsert,
 
     -- ** doubleclicksearch.conversion.update
-    , module Network.Google.Resource.DoubleClickSearch.Conversion.Update
+    DoubleClickSearchConversionUpdateResource,
+    newDoubleClickSearchConversionUpdate,
+    DoubleClickSearchConversionUpdate,
 
     -- ** doubleclicksearch.conversion.updateAvailability
-    , module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
+    DoubleClickSearchConversionUpdateAvailabilityResource,
+    newDoubleClickSearchConversionUpdateAvailability,
+    DoubleClickSearchConversionUpdateAvailability,
 
     -- ** doubleclicksearch.reports.generate
-    , module Network.Google.Resource.DoubleClickSearch.Reports.Generate
+    DoubleClickSearchReportsGenerateResource,
+    newDoubleClickSearchReportsGenerate,
+    DoubleClickSearchReportsGenerate,
 
     -- ** doubleclicksearch.reports.get
-    , module Network.Google.Resource.DoubleClickSearch.Reports.Get
+    DoubleClickSearchReportsGetResource,
+    newDoubleClickSearchReportsGet,
+    DoubleClickSearchReportsGet,
 
     -- ** doubleclicksearch.reports.getFile
-    , module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
+    DoubleClickSearchReportsGetFileResource,
+    newDoubleClickSearchReportsGetFile,
+    DoubleClickSearchReportsGetFile,
 
     -- ** doubleclicksearch.reports.request
-    , module Network.Google.Resource.DoubleClickSearch.Reports.Request
+    DoubleClickSearchReportsRequestResource,
+    newDoubleClickSearchReportsRequest,
+    DoubleClickSearchReportsRequest,
 
     -- ** doubleclicksearch.savedColumns.list
-    , module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
+    DoubleClickSearchSavedColumnsListResource,
+    newDoubleClickSearchSavedColumnsList,
+    DoubleClickSearchSavedColumnsList,
 
     -- * Types
 
-    -- ** ReportRow
-    , ReportRow
-    , reportRow
-    , rrAddtional
-
-    -- ** ReportRequest
-    , ReportRequest
-    , reportRequest
-    , rrMaxRowsPerFile
-    , rrReportScope
-    , rrStatisticsCurrency
-    , rrTimeRange
-    , rrOrderBy
-    , rrFilters
-    , rrIncludeRemovedEntities
-    , rrIncludeDeletedEntities
-    , rrDownloadFormat
-    , rrStartRow
-    , rrColumns
-    , rrReportType
-    , rrVerifySingleTimeZone
-    , rrRowCount
-
-    -- ** ReportRequestOrderByItem
-    , ReportRequestOrderByItem
-    , reportRequestOrderByItem
-    , rrobiSortOrder
-    , rrobiColumn
-
-    -- ** Report
-    , Report
-    , report
-    , rKind
-    , rRows
-    , rStatisticsCurrencyCode
-    , rIsReportReady
-    , rFiles
-    , rId
-    , rStatisticsTimeZone
-    , rRowCount
-    , rRequest
-
-    -- ** ReportFilesItem
-    , ReportFilesItem
-    , reportFilesItem
-    , rfiURL
-    , rfiByteCount
-
-    -- ** ReportRequestFiltersItem
-    , ReportRequestFiltersItem
-    , reportRequestFiltersItem
-    , rrfiOperator
-    , rrfiValues
-    , rrfiColumn
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Availability
-    , Availability
-    , availability
-    , aAgencyId
-    , aAdvertiserId
-    , aSegmentationId
-    , aSegmentationName
-    , aAvailabilityTimestamp
-    , aSegmentationType
-
-    -- ** UpdateAvailabilityRequest
-    , UpdateAvailabilityRequest
-    , updateAvailabilityRequest
-    , uarAvailabilities
-
-    -- ** CustomMetric
-    , CustomMetric
-    , customMetric
-    , cmValue
-    , cmName
-
-    -- ** ConversionList
-    , ConversionList
-    , conversionList
-    , clKind
-    , clConversion
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ReportAPIColumnSpec
-    , ReportAPIColumnSpec
-    , reportAPIColumnSpec
-    , racsCustomDimensionName
-    , racsSavedColumnName
-    , racsGroupByColumn
-    , racsCustomMetricName
-    , racsEndDate
-    , racsProductReportPerspective
-    , racsStartDate
-    , racsHeaderText
-    , racsPlatformSource
-    , racsColumnName
-
-    -- ** ReportRequestTimeRange
-    , ReportRequestTimeRange
-    , reportRequestTimeRange
-    , rrtrEndDate
-    , rrtrChangedAttributesSinceTimestamp
-    , rrtrStartDate
-    , rrtrChangedMetricsSinceTimestamp
+    Availability (..),
+    newAvailability,
 
     -- ** Conversion
-    , Conversion
-    , conversion
-    , cAdGroupId
-    , cConversionModifiedTimestamp
-    , cState
-    , cEngineAccountId
-    , cAgencyId
-    , cCurrencyCode
-    , cStoreId
-    , cDsConversionId
-    , cConversionId
-    , cAdvertiserId
-    , cSegmentationId
-    , cChannel
-    , cProductCountry
-    , cCampaignId
-    , cCriterionId
-    , cConversionTimestamp
-    , cAttributionModel
-    , cSegmentationName
-    , cProductLanguage
-    , cCustomMetric
-    , cCountMillis
-    , cQuantityMillis
-    , cAdId
-    , cDeviceType
-    , cType
-    , cCustomDimension
-    , cFloodlightOrderId
-    , cRevenueMicros
-    , cClickId
-    , cInventoryAccountId
-    , cSegmentationType
-    , cProductId
-    , cProductGroupId
+    Conversion (..),
+    newConversion,
 
-    -- ** SavedColumn
-    , SavedColumn
-    , savedColumn
-    , scSavedColumnName
-    , scKind
-    , scType
+    -- ** ConversionList
+    ConversionList (..),
+    newConversionList,
 
     -- ** CustomDimension
-    , CustomDimension
-    , customDimension
-    , cdValue
-    , cdName
+    CustomDimension (..),
+    newCustomDimension,
 
-    -- ** UpdateAvailabilityResponse
-    , UpdateAvailabilityResponse
-    , updateAvailabilityResponse
-    , uAvailabilities
+    -- ** CustomMetric
+    CustomMetric (..),
+    newCustomMetric,
 
-    -- ** ReportRequestReportScope
-    , ReportRequestReportScope
-    , reportRequestReportScope
-    , rrrsKeywordId
-    , rrrsAdGroupId
-    , rrrsEngineAccountId
-    , rrrsAgencyId
-    , rrrsAdvertiserId
-    , rrrsCampaignId
-    , rrrsAdId
+    -- ** Report
+    Report (..),
+    newReport,
+
+    -- ** Report_FilesItem
+    Report_FilesItem (..),
+    newReport_FilesItem,
+
+    -- ** ReportApiColumnSpec
+    ReportApiColumnSpec (..),
+    newReportApiColumnSpec,
+
+    -- ** ReportRequest
+    ReportRequest (..),
+    newReportRequest,
+
+    -- ** ReportRequest_FiltersItem
+    ReportRequest_FiltersItem (..),
+    newReportRequest_FiltersItem,
+
+    -- ** ReportRequest_OrderByItem
+    ReportRequest_OrderByItem (..),
+    newReportRequest_OrderByItem,
+
+    -- ** ReportRequest_ReportScope
+    ReportRequest_ReportScope (..),
+    newReportRequest_ReportScope,
+
+    -- ** ReportRequest_TimeRange
+    ReportRequest_TimeRange (..),
+    newReportRequest_TimeRange,
+
+    -- ** ReportRow
+    ReportRow (..),
+    newReportRow,
+
+    -- ** SavedColumn
+    SavedColumn (..),
+    newSavedColumn,
 
     -- ** SavedColumnList
-    , SavedColumnList
-    , savedColumnList
-    , sclKind
-    , sclItems
-    ) where
+    SavedColumnList (..),
+    newSavedColumnList,
 
-import Network.Google.Prelude
+    -- ** UpdateAvailabilityRequest
+    UpdateAvailabilityRequest (..),
+    newUpdateAvailabilityRequest,
+
+    -- ** UpdateAvailabilityResponse
+    UpdateAvailabilityResponse (..),
+    newUpdateAvailabilityResponse,
+  )
+where
+
+import Network.Google.DoubleClickSearch.Conversion.Get
+import Network.Google.DoubleClickSearch.Conversion.Insert
+import Network.Google.DoubleClickSearch.Conversion.Update
+import Network.Google.DoubleClickSearch.Conversion.UpdateAvailability
+import Network.Google.DoubleClickSearch.Reports.Generate
+import Network.Google.DoubleClickSearch.Reports.Get
+import Network.Google.DoubleClickSearch.Reports.GetFile
+import Network.Google.DoubleClickSearch.Reports.Request
+import Network.Google.DoubleClickSearch.SavedColumns.List
 import Network.Google.DoubleClickSearch.Types
-import Network.Google.Resource.DoubleClickSearch.Conversion.Get
-import Network.Google.Resource.DoubleClickSearch.Conversion.Insert
-import Network.Google.Resource.DoubleClickSearch.Conversion.Update
-import Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
-import Network.Google.Resource.DoubleClickSearch.Reports.Generate
-import Network.Google.Resource.DoubleClickSearch.Reports.Get
-import Network.Google.Resource.DoubleClickSearch.Reports.GetFile
-import Network.Google.Resource.DoubleClickSearch.Reports.Request
-import Network.Google.Resource.DoubleClickSearch.SavedColumns.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Search Ads 360 API service.
-type DoubleClickSearchAPI =
-     ReportsGetResource :<|> ReportsGetFileResource :<|>
-       ReportsGenerateResource
-       :<|> ReportsRequestResource
-       :<|> SavedColumnsListResource
-       :<|> ConversionInsertResource
-       :<|> ConversionGetResource
-       :<|> ConversionUpdateAvailabilityResource
-       :<|> ConversionUpdateResource
