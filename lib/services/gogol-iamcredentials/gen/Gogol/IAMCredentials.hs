@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,72 +30,72 @@
 --
 -- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference>
 module Gogol.IAMCredentials
-    (
-    -- * Configuration
-      iAMCredentialsService
+  ( -- * Configuration
+    iAMCredentialsService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** iamcredentials.projects.serviceAccounts.generateAccessToken
-    , IAMCredentialsProjectsServiceAccountsGenerateAccessTokenResource
-    , newIAMCredentialsProjectsServiceAccountsGenerateAccessToken
-    , IAMCredentialsProjectsServiceAccountsGenerateAccessToken
+    IAMCredentialsProjectsServiceAccountsGenerateAccessTokenResource,
+    newIAMCredentialsProjectsServiceAccountsGenerateAccessToken,
+    IAMCredentialsProjectsServiceAccountsGenerateAccessToken,
 
     -- ** iamcredentials.projects.serviceAccounts.generateIdToken
-    , IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource
-    , newIAMCredentialsProjectsServiceAccountsGenerateIdToken
-    , IAMCredentialsProjectsServiceAccountsGenerateIdToken
+    IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource,
+    newIAMCredentialsProjectsServiceAccountsGenerateIdToken,
+    IAMCredentialsProjectsServiceAccountsGenerateIdToken,
 
     -- ** iamcredentials.projects.serviceAccounts.signBlob
-    , IAMCredentialsProjectsServiceAccountsSignBlobResource
-    , newIAMCredentialsProjectsServiceAccountsSignBlob
-    , IAMCredentialsProjectsServiceAccountsSignBlob
+    IAMCredentialsProjectsServiceAccountsSignBlobResource,
+    newIAMCredentialsProjectsServiceAccountsSignBlob,
+    IAMCredentialsProjectsServiceAccountsSignBlob,
 
     -- ** iamcredentials.projects.serviceAccounts.signJwt
-    , IAMCredentialsProjectsServiceAccountsSignJwtResource
-    , newIAMCredentialsProjectsServiceAccountsSignJwt
-    , IAMCredentialsProjectsServiceAccountsSignJwt
+    IAMCredentialsProjectsServiceAccountsSignJwtResource,
+    newIAMCredentialsProjectsServiceAccountsSignJwt,
+    IAMCredentialsProjectsServiceAccountsSignJwt,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** GenerateAccessTokenRequest
-    , GenerateAccessTokenRequest (..)
-    , newGenerateAccessTokenRequest
+    GenerateAccessTokenRequest (..),
+    newGenerateAccessTokenRequest,
 
     -- ** GenerateAccessTokenResponse
-    , GenerateAccessTokenResponse (..)
-    , newGenerateAccessTokenResponse
+    GenerateAccessTokenResponse (..),
+    newGenerateAccessTokenResponse,
 
     -- ** GenerateIdTokenRequest
-    , GenerateIdTokenRequest (..)
-    , newGenerateIdTokenRequest
+    GenerateIdTokenRequest (..),
+    newGenerateIdTokenRequest,
 
     -- ** GenerateIdTokenResponse
-    , GenerateIdTokenResponse (..)
-    , newGenerateIdTokenResponse
+    GenerateIdTokenResponse (..),
+    newGenerateIdTokenResponse,
 
     -- ** SignBlobRequest
-    , SignBlobRequest (..)
-    , newSignBlobRequest
+    SignBlobRequest (..),
+    newSignBlobRequest,
 
     -- ** SignBlobResponse
-    , SignBlobResponse (..)
-    , newSignBlobResponse
+    SignBlobResponse (..),
+    newSignBlobResponse,
 
     -- ** SignJwtRequest
-    , SignJwtRequest (..)
-    , newSignJwtRequest
+    SignJwtRequest (..),
+    newSignJwtRequest,
 
     -- ** SignJwtResponse
-    , SignJwtResponse (..)
-    , newSignJwtResponse
-    ) where
+    SignJwtResponse (..),
+    newSignJwtResponse,
+  )
+where
 
 import Gogol.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
 import Gogol.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
