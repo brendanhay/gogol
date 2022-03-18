@@ -1,175 +1,132 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Poly.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Poly.Types
-    (
-    -- * Service Configuration
-      polyService
+  ( -- * Configuration
+    polyService,
 
-    -- * ImageErrorCode
-    , ImageErrorCode (..)
+    -- * Types
 
-    -- * ObjParseError
-    , ObjParseError
-    , objParseError
-    , opeLineNumber
-    , opeFilePath
-    , opeLine
-    , opeEndIndex
-    , opeCode
-    , opeStartIndex
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * PresentationParams
-    , PresentationParams
-    , presentationParams
-    , ppBackgRoundColor
-    , ppOrientingRotation
-    , ppColorSpace
+    -- ** Asset
+    Asset (..),
+    newAsset,
 
-    -- * ListLikedAssetsResponse
-    , ListLikedAssetsResponse
-    , listLikedAssetsResponse
-    , llarNextPageToken
-    , llarTotalSize
-    , llarAssets
+    -- ** Asset_License
+    Asset_License (..),
 
-    -- * UsersAssetsListVisibility
-    , UsersAssetsListVisibility (..)
+    -- ** Asset_Visibility
+    Asset_Visibility (..),
 
-    -- * RemixInfo
-    , RemixInfo
-    , remixInfo
-    , riSourceAsset
+    -- ** AssetImportMessage
+    AssetImportMessage (..),
+    newAssetImportMessage,
 
-    -- * Quaternion
-    , Quaternion
-    , quaternion
-    , qW
-    , qZ
-    , qX
-    , qY
+    -- ** AssetImportMessage_Code
+    AssetImportMessage_Code (..),
 
-    -- * Asset
-    , Asset
-    , asset
-    , aThumbnail
-    , aPresentationParams
-    , aIsCurated
-    , aAuthorName
-    , aRemixInfo
-    , aFormats
-    , aVisibility
-    , aUpdateTime
-    , aName
-    , aMetadata
-    , aDisplayName
-    , aLicense
-    , aDescription
-    , aCreateTime
+    -- ** File
+    File (..),
+    newFile,
 
-    -- * Format
-    , Format
-    , format
-    , fRoot
-    , fResources
-    , fFormatComplexity
-    , fFormatType
+    -- ** Format
+    Format (..),
+    newFormat,
 
-    -- * AssetImportMessageCode
-    , AssetImportMessageCode (..)
+    -- ** FormatComplexity
+    FormatComplexity (..),
+    newFormatComplexity,
 
-    -- * AssetImportMessage
-    , AssetImportMessage
-    , assetImportMessage
-    , aimObjParseError
-    , aimFilePath
-    , aimImageError
-    , aimCode
+    -- ** ImageError
+    ImageError (..),
+    newImageError,
 
-    -- * StartAssetImportResponse
-    , StartAssetImportResponse
-    , startAssetImportResponse
-    , sairPublishURL
-    , sairAssetImportMessages
-    , sairAssetImportId
-    , sairAssetId
+    -- ** ImageError_Code
+    ImageError_Code (..),
 
-    -- * AssetVisibility
-    , AssetVisibility (..)
+    -- ** ListAssetsResponse
+    ListAssetsResponse (..),
+    newListAssetsResponse,
 
-    -- * ImageError
-    , ImageError
-    , imageError
-    , ieFilePath
-    , ieCode
+    -- ** ListLikedAssetsResponse
+    ListLikedAssetsResponse (..),
+    newListLikedAssetsResponse,
 
-    -- * FormatComplexity
-    , FormatComplexity
-    , formatComplexity
-    , fcTriangleCount
-    , fcLodHint
+    -- ** ListUserAssetsResponse
+    ListUserAssetsResponse (..),
+    newListUserAssetsResponse,
 
-    -- * ObjParseErrorCode
-    , ObjParseErrorCode (..)
+    -- ** ObjParseError
+    ObjParseError (..),
+    newObjParseError,
 
-    -- * ListAssetsResponse
-    , ListAssetsResponse
-    , listAssetsResponse
-    , larNextPageToken
-    , larTotalSize
-    , larAssets
+    -- ** ObjParseError_Code
+    ObjParseError_Code (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** PresentationParams
+    PresentationParams (..),
+    newPresentationParams,
 
-    -- * ListUserAssetsResponse
-    , ListUserAssetsResponse
-    , listUserAssetsResponse
-    , luarNextPageToken
-    , luarTotalSize
-    , luarUserAssets
+    -- ** PresentationParams_ColorSpace
+    PresentationParams_ColorSpace (..),
 
-    -- * AssetLicense
-    , AssetLicense (..)
+    -- ** Quaternion
+    Quaternion (..),
+    newQuaternion,
 
-    -- * PresentationParamsColorSpace
-    , PresentationParamsColorSpace (..)
+    -- ** RemixInfo
+    RemixInfo (..),
+    newRemixInfo,
 
-    -- * File
-    , File
-    , file
-    , fURL
-    , fRelativePath
-    , fContentType
+    -- ** StartAssetImportResponse
+    StartAssetImportResponse (..),
+    newStartAssetImportResponse,
 
-    -- * AssetsListMaxComplexity
-    , AssetsListMaxComplexity (..)
+    -- ** UserAsset
+    UserAsset (..),
+    newUserAsset,
 
-    -- * UserAsset
-    , UserAsset
-    , userAsset
-    , uaAsset
-    ) where
+    -- ** AssetsListMaxComplexity
+    AssetsListMaxComplexity (..),
 
-import Network.Google.Poly.Types.Product
-import Network.Google.Poly.Types.Sum
-import Network.Google.Prelude
+    -- ** UsersAssetsListVisibility
+    UsersAssetsListVisibility (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Poly API. This contains the host and root path used as a starting point for constructing service requests.
-polyService :: ServiceConfig
-polyService
-  = defaultService (ServiceId "poly:v1")
-      "poly.googleapis.com"
+import Network.Google.Poly.Internal.Product
+import Network.Google.Poly.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Poly API. This contains the host and root path used as a starting point for constructing service requests.
+polyService :: Core.ServiceConfig
+polyService =
+  Core.defaultService
+    (Core.ServiceId "poly:v1")
+    "poly.googleapis.com"
