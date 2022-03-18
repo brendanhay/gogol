@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,119 +31,120 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ProximityBeacon.Types
-  ( -- * Configuration
-    proximityBeaconService,
+    (
+    -- * Configuration
+      proximityBeaconService
 
     -- * OAuth Scopes
-    userlocationBeaconRegistryScope,
+    , userlocationBeaconRegistryScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AdvertisedId
-    AdvertisedId (..),
-    newAdvertisedId,
+    , AdvertisedId (..)
+    , newAdvertisedId
 
     -- ** AdvertisedId_Type
-    AdvertisedId_Type (..),
+    , AdvertisedId_Type (..)
 
     -- ** AttachmentInfo
-    AttachmentInfo (..),
-    newAttachmentInfo,
+    , AttachmentInfo (..)
+    , newAttachmentInfo
 
     -- ** Beacon
-    Beacon (..),
-    newBeacon,
+    , Beacon (..)
+    , newBeacon
 
     -- ** Beacon_ExpectedStability
-    Beacon_ExpectedStability (..),
+    , Beacon_ExpectedStability (..)
 
     -- ** Beacon_Properties
-    Beacon_Properties (..),
-    newBeacon_Properties,
+    , Beacon_Properties (..)
+    , newBeacon_Properties
 
     -- ** Beacon_Status
-    Beacon_Status (..),
+    , Beacon_Status (..)
 
     -- ** BeaconAttachment
-    BeaconAttachment (..),
-    newBeaconAttachment,
+    , BeaconAttachment (..)
+    , newBeaconAttachment
 
     -- ** BeaconInfo
-    BeaconInfo (..),
-    newBeaconInfo,
+    , BeaconInfo (..)
+    , newBeaconInfo
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** DeleteAttachmentsResponse
-    DeleteAttachmentsResponse (..),
-    newDeleteAttachmentsResponse,
+    , DeleteAttachmentsResponse (..)
+    , newDeleteAttachmentsResponse
 
     -- ** Diagnostics
-    Diagnostics (..),
-    newDiagnostics,
+    , Diagnostics (..)
+    , newDiagnostics
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EphemeralIdRegistration
-    EphemeralIdRegistration (..),
-    newEphemeralIdRegistration,
+    , EphemeralIdRegistration (..)
+    , newEphemeralIdRegistration
 
     -- ** EphemeralIdRegistrationParams
-    EphemeralIdRegistrationParams (..),
-    newEphemeralIdRegistrationParams,
+    , EphemeralIdRegistrationParams (..)
+    , newEphemeralIdRegistrationParams
 
     -- ** GetInfoForObservedBeaconsRequest
-    GetInfoForObservedBeaconsRequest (..),
-    newGetInfoForObservedBeaconsRequest,
+    , GetInfoForObservedBeaconsRequest (..)
+    , newGetInfoForObservedBeaconsRequest
 
     -- ** GetInfoForObservedBeaconsResponse
-    GetInfoForObservedBeaconsResponse (..),
-    newGetInfoForObservedBeaconsResponse,
+    , GetInfoForObservedBeaconsResponse (..)
+    , newGetInfoForObservedBeaconsResponse
 
     -- ** IndoorLevel
-    IndoorLevel (..),
-    newIndoorLevel,
+    , IndoorLevel (..)
+    , newIndoorLevel
 
     -- ** LatLng
-    LatLng (..),
-    newLatLng,
+    , LatLng (..)
+    , newLatLng
 
     -- ** ListBeaconAttachmentsResponse
-    ListBeaconAttachmentsResponse (..),
-    newListBeaconAttachmentsResponse,
+    , ListBeaconAttachmentsResponse (..)
+    , newListBeaconAttachmentsResponse
 
     -- ** ListBeaconsResponse
-    ListBeaconsResponse (..),
-    newListBeaconsResponse,
+    , ListBeaconsResponse (..)
+    , newListBeaconsResponse
 
     -- ** ListDiagnosticsResponse
-    ListDiagnosticsResponse (..),
-    newListDiagnosticsResponse,
+    , ListDiagnosticsResponse (..)
+    , newListDiagnosticsResponse
 
     -- ** ListNamespacesResponse
-    ListNamespacesResponse (..),
-    newListNamespacesResponse,
+    , ListNamespacesResponse (..)
+    , newListNamespacesResponse
 
     -- ** Namespace
-    Namespace (..),
-    newNamespace,
+    , Namespace (..)
+    , newNamespace
 
     -- ** Namespace_ServingVisibility
-    Namespace_ServingVisibility (..),
+    , Namespace_ServingVisibility (..)
 
     -- ** Observation
-    Observation (..),
-    newObservation,
-  )
-where
+    , Observation (..)
+    , newObservation
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ProximityBeacon.Internal.Product
@@ -145,10 +152,10 @@ import Gogol.ProximityBeacon.Internal.Sum
 
 -- | Default request referring to version @v1beta1@ of the Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
 proximityBeaconService :: Core.ServiceConfig
-proximityBeaconService =
-  Core.defaultService
-    (Core.ServiceId "proximitybeacon:v1beta1")
-    "proximitybeacon.googleapis.com"
+proximityBeaconService
+  = Core.defaultService
+      (Core.ServiceId "proximitybeacon:v1beta1")
+      "proximitybeacon.googleapis.com"
 
 -- | View and modify your beacons
 userlocationBeaconRegistryScope :: Core.Proxy '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
