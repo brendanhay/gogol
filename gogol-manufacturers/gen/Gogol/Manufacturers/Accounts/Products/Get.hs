@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Manufacturers.Accounts.Products.Get
+-- Module      : Gogol.Manufacturers.Accounts.Products.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the product from a Manufacturer Center account, including product issues. A recently updated product takes around 15 minutes to process. Changes are only visible after it has been processed. While some issues may be available once the product has been processed, other issues may take days to appear.
 --
 -- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference> for @manufacturers.accounts.products.get@.
-module Network.Google.Manufacturers.Accounts.Products.Get
+module Gogol.Manufacturers.Accounts.Products.Get
   ( -- * Resource
     ManufacturersAccountsProductsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Manufacturers.Accounts.Products.Get
   )
 where
 
-import Network.Google.Manufacturers.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Manufacturers.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @manufacturers.accounts.products.get@ method which the
 -- 'ManufacturersAccountsProductsGet' request conforms to.
