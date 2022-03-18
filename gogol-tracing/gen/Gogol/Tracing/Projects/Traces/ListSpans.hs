@@ -19,49 +19,49 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Tracing.Projects.Traces.Spans.Create
+-- Module      : Gogol.Tracing.Projects.Traces.ListSpans
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new Span.
+-- Returns a list of spans within a trace.
 --
--- /See:/ <https://cloud.google.com/trace Google Tracing API Reference> for @tracing.projects.traces.spans.create@.
-module Network.Google.Tracing.Projects.Traces.Spans.Create
+-- /See:/ <https://cloud.google.com/trace Google Tracing API Reference> for @tracing.projects.traces.listSpans@.
+module Gogol.Tracing.Projects.Traces.ListSpans
   ( -- * Resource
-    TracingProjectsTracesSpansCreateResource,
+    TracingProjectsTracesListSpansResource,
 
     -- ** Constructing a Request
-    newTracingProjectsTracesSpansCreate,
-    TracingProjectsTracesSpansCreate,
+    newTracingProjectsTracesListSpans,
+    TracingProjectsTracesListSpans,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Tracing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Tracing.Types
 
--- | A resource alias for @tracing.projects.traces.spans.create@ method which the
--- 'TracingProjectsTracesSpansCreate' request conforms to.
-type TracingProjectsTracesSpansCreateResource =
+-- | A resource alias for @tracing.projects.traces.listSpans@ method which the
+-- 'TracingProjectsTracesListSpans' request conforms to.
+type TracingProjectsTracesListSpansResource =
   "v2"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.CaptureMode "parent" "listSpans" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "bearer_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "pp" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Span
-    Core.:> Core.Put '[Core.JSON] Span
+    Core.:> Core.Get '[Core.JSON] ListSpansResponse
 
--- | Creates a new Span.
+-- | Returns a list of spans within a trace.
 --
--- /See:/ 'newTracingProjectsTracesSpansCreate' smart constructor.
-data TracingProjectsTracesSpansCreate = TracingProjectsTracesSpansCreate
+-- /See:/ 'newTracingProjectsTracesListSpans' smart constructor.
+data TracingProjectsTracesListSpans = TracingProjectsTracesListSpans
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -70,10 +70,10 @@ data TracingProjectsTracesSpansCreate = TracingProjectsTracesSpansCreate
     bearerToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name of Span in the format @projects\/PROJECT_ID\/traces\/TRACE_ID\/spans\/SPAN_ID@. @TRACE_ID@ is a unique identifier for a trace within a project and is a base16-encoded, case-insensitive string and is required to be 32 char long. @SPAN_ID@ is a unique identifier for a span within a trace. It is a base 16-encoded, case-insensitive string of a 8-bytes array and is required to be 16 char long.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Span,
+    -- | Token identifying the page of results to return. If provided, use the value of the @nextPageToken@ field from a previous request. Optional.
+    pageToken :: (Core.Maybe Core.Text),
+    -- | ID of the trace for which to list child spans. Format is @projects\/PROJECT_ID\/traces\/TRACE_ID@.
+    parent :: Core.Text,
     -- | Pretty-print response.
     pp :: Core.Bool,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -83,21 +83,19 @@ data TracingProjectsTracesSpansCreate = TracingProjectsTracesSpansCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TracingProjectsTracesSpansCreate' with the minimum fields required to make a request.
-newTracingProjectsTracesSpansCreate ::
-  -- |  The resource name of Span in the format @projects\/PROJECT_ID\/traces\/TRACE_ID\/spans\/SPAN_ID@. @TRACE_ID@ is a unique identifier for a trace within a project and is a base16-encoded, case-insensitive string and is required to be 32 char long. @SPAN_ID@ is a unique identifier for a span within a trace. It is a base 16-encoded, case-insensitive string of a 8-bytes array and is required to be 16 char long. See 'name'.
+-- | Creates a value of 'TracingProjectsTracesListSpans' with the minimum fields required to make a request.
+newTracingProjectsTracesListSpans ::
+  -- |  ID of the trace for which to list child spans. Format is @projects\/PROJECT_ID\/traces\/TRACE_ID@. See 'parent'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Span ->
-  TracingProjectsTracesSpansCreate
-newTracingProjectsTracesSpansCreate name payload =
-  TracingProjectsTracesSpansCreate
+  TracingProjectsTracesListSpans
+newTracingProjectsTracesListSpans parent =
+  TracingProjectsTracesListSpans
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       bearerToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
-      payload = payload,
+      pageToken = Core.Nothing,
+      parent = parent,
       pp = Core.True,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -105,31 +103,33 @@ newTracingProjectsTracesSpansCreate name payload =
 
 instance
   Core.GoogleRequest
-    TracingProjectsTracesSpansCreate
+    TracingProjectsTracesListSpans
   where
-  type Rs TracingProjectsTracesSpansCreate = Span
   type
-    Scopes TracingProjectsTracesSpansCreate =
+    Rs TracingProjectsTracesListSpans =
+      ListSpansResponse
+  type
+    Scopes TracingProjectsTracesListSpans =
       '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/trace.append"
+         "https://www.googleapis.com/auth/trace.readonly"
        ]
-  requestClient TracingProjectsTracesSpansCreate {..} =
+  requestClient TracingProjectsTracesListSpans {..} =
     go
-      name
+      parent
       xgafv
       accessToken
       bearerToken
       callback
+      pageToken
       (Core.Just pp)
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       tracingService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy TracingProjectsTracesSpansCreateResource
+              Core.Proxy TracingProjectsTracesListSpansResource
           )
           Core.mempty

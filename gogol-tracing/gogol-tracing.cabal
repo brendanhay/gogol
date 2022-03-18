@@ -39,21 +39,22 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Tracing
-    Network.Google.Tracing.Projects.Traces.BatchWrite
-    Network.Google.Tracing.Projects.Traces.List
-    Network.Google.Tracing.Projects.Traces.ListSpans
-    Network.Google.Tracing.Projects.Traces.Spans.Create
-    Network.Google.Tracing.Types
+    Gogol.Tracing
+    Gogol.Tracing.Projects.Traces.BatchWrite
+    Gogol.Tracing.Projects.Traces.List
+    Gogol.Tracing.Projects.Traces.ListSpans
+    Gogol.Tracing.Projects.Traces.Spans.Create
+    Gogol.Tracing.Types
 
   other-modules:
-    Network.Google.Tracing.Internal.Product
-    Network.Google.Tracing.Internal.Sum
+    Gogol.Tracing.Internal.Product
+    Gogol.Tracing.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

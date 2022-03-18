@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Tracing.Projects.Traces.List
+-- Module      : Gogol.Tracing.Projects.Traces.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns of a list of traces that match the specified filter conditions.
 --
 -- /See:/ <https://cloud.google.com/trace Google Tracing API Reference> for @tracing.projects.traces.list@.
-module Network.Google.Tracing.Projects.Traces.List
+module Gogol.Tracing.Projects.Traces.List
   ( -- * Resource
     TracingProjectsTracesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Tracing.Projects.Traces.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Tracing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Tracing.Types
 
 -- | A resource alias for @tracing.projects.traces.list@ method which the
 -- 'TracingProjectsTracesList' request conforms to.
