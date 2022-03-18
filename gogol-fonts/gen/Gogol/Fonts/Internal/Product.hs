@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fonts.Internal.Product
+-- Module      : Gogol.Fonts.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Fonts.Internal.Product
+module Gogol.Fonts.Internal.Product
   ( -- * Webfont
     Webfont (..),
     newWebfont,
@@ -40,8 +40,8 @@ module Network.Google.Fonts.Internal.Product
   )
 where
 
-import Network.Google.Fonts.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Fonts.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Metadata describing a family of fonts.
 --
