@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CommentAnalyzer.Comments.Suggestscore
+-- Module      : Gogol.CommentAnalyzer.Comments.Suggestscore
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Suggest comment scores as training data.
 --
 -- /See:/ <https://github.com/conversationai/perspectiveapi/blob/master/README.md Perspective Comment Analyzer API Reference> for @commentanalyzer.comments.suggestscore@.
-module Network.Google.CommentAnalyzer.Comments.Suggestscore
+module Gogol.CommentAnalyzer.Comments.Suggestscore
   ( -- * Resource
     CommentAnalyzerCommentsSuggestscoreResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CommentAnalyzer.Comments.Suggestscore
   )
 where
 
-import Network.Google.CommentAnalyzer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CommentAnalyzer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @commentanalyzer.comments.suggestscore@ method which the
 -- 'CommentAnalyzerCommentsSuggestscore' request conforms to.

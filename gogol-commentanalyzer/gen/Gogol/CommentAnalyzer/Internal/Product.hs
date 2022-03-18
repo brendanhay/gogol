@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CommentAnalyzer.Internal.Product
+-- Module      : Gogol.CommentAnalyzer.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CommentAnalyzer.Internal.Product
+module Gogol.CommentAnalyzer.Internal.Product
   ( -- * AnalyzeCommentRequest
     AnalyzeCommentRequest (..),
     newAnalyzeCommentRequest,
@@ -84,8 +84,8 @@ module Network.Google.CommentAnalyzer.Internal.Product
   )
 where
 
-import Network.Google.CommentAnalyzer.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CommentAnalyzer.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | The comment analysis request message. LINT.IfChange
 --

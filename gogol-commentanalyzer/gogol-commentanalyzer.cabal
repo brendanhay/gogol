@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CommentAnalyzer
-    Network.Google.CommentAnalyzer.Comments.Analyze
-    Network.Google.CommentAnalyzer.Comments.Suggestscore
-    Network.Google.CommentAnalyzer.Types
+    Gogol.CommentAnalyzer
+    Gogol.CommentAnalyzer.Comments.Analyze
+    Gogol.CommentAnalyzer.Comments.Suggestscore
+    Gogol.CommentAnalyzer.Types
 
   other-modules:
-    Network.Google.CommentAnalyzer.Internal.Product
-    Network.Google.CommentAnalyzer.Internal.Sum
+    Gogol.CommentAnalyzer.Internal.Product
+    Gogol.CommentAnalyzer.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
