@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,92 +36,86 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.uploads.get@.
 module Gogol.Analytics.Management.Uploads.Get
-  ( -- * Resource
-    AnalyticsManagementUploadsGetResource,
+    (
+    -- * Resource
+      AnalyticsManagementUploadsGetResource
 
     -- ** Constructing a Request
-    newAnalyticsManagementUploadsGet,
-    AnalyticsManagementUploadsGet,
-  )
-where
+    , newAnalyticsManagementUploadsGet
+    , AnalyticsManagementUploadsGet
+    ) where
 
-import Gogol.Analytics.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Analytics.Types
 
 -- | A resource alias for @analytics.management.uploads.get@ method which the
 -- 'AnalyticsManagementUploadsGet' request conforms to.
 type AnalyticsManagementUploadsGetResource =
-  "analytics"
-    Core.:> "v3"
-    Core.:> "management"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "webproperties"
-    Core.:> Core.Capture "webPropertyId" Core.Text
-    Core.:> "customDataSources"
-    Core.:> Core.Capture "customDataSourceId" Core.Text
-    Core.:> "uploads"
-    Core.:> Core.Capture "uploadId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Upload
+     "analytics" Core.:>
+       "v3" Core.:>
+         "management" Core.:>
+           "accounts" Core.:>
+             Core.Capture "accountId" Core.Text Core.:>
+               "webproperties" Core.:>
+                 Core.Capture "webPropertyId" Core.Text Core.:>
+                   "customDataSources" Core.:>
+                     Core.Capture "customDataSourceId" Core.Text Core.:>
+                       "uploads" Core.:>
+                         Core.Capture "uploadId" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Get '[Core.JSON] Upload
 
 -- | List uploads to which the user has access.
 --
 -- /See:/ 'newAnalyticsManagementUploadsGet' smart constructor.
 data AnalyticsManagementUploadsGet = AnalyticsManagementUploadsGet
-  { -- | Account Id for the upload to retrieve.
-    accountId :: Core.Text,
-    -- | Custom data source Id for upload to retrieve.
-    customDataSourceId :: Core.Text,
-    -- | Upload Id to retrieve.
-    uploadId :: Core.Text,
-    -- | Web property Id for the upload to retrieve.
-    webPropertyId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account Id for the upload to retrieve.
+      accountId :: Core.Text
+      -- | Custom data source Id for upload to retrieve.
+    , customDataSourceId :: Core.Text
+      -- | Upload Id to retrieve.
+    , uploadId :: Core.Text
+      -- | Web property Id for the upload to retrieve.
+    , webPropertyId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementUploadsGet' with the minimum fields required to make a request.
-newAnalyticsManagementUploadsGet ::
-  -- |  Account Id for the upload to retrieve. See 'accountId'.
-  Core.Text ->
-  -- |  Custom data source Id for upload to retrieve. See 'customDataSourceId'.
-  Core.Text ->
-  -- |  Upload Id to retrieve. See 'uploadId'.
-  Core.Text ->
-  -- |  Web property Id for the upload to retrieve. See 'webPropertyId'.
-  Core.Text ->
-  AnalyticsManagementUploadsGet
+newAnalyticsManagementUploadsGet 
+    ::  Core.Text
+       -- ^  Account Id for the upload to retrieve. See 'accountId'.
+    -> Core.Text
+       -- ^  Custom data source Id for upload to retrieve. See 'customDataSourceId'.
+    -> Core.Text
+       -- ^  Upload Id to retrieve. See 'uploadId'.
+    -> Core.Text
+       -- ^  Web property Id for the upload to retrieve. See 'webPropertyId'.
+    -> AnalyticsManagementUploadsGet
 newAnalyticsManagementUploadsGet accountId customDataSourceId uploadId webPropertyId =
   AnalyticsManagementUploadsGet
-    { accountId = accountId,
-      customDataSourceId = customDataSourceId,
-      uploadId = uploadId,
-      webPropertyId = webPropertyId
+    { accountId = accountId
+    , customDataSourceId = customDataSourceId
+    , uploadId = uploadId
+    , webPropertyId = webPropertyId
     }
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementUploadsGet
-  where
-  type Rs AnalyticsManagementUploadsGet = Upload
-  type
-    Scopes AnalyticsManagementUploadsGet =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
-  requestClient AnalyticsManagementUploadsGet {..} =
-    go
-      accountId
-      webPropertyId
-      customDataSourceId
-      uploadId
-      (Core.Just Core.AltJSON)
-      analyticsService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementUploadsGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AnalyticsManagementUploadsGet
+         where
+        type Rs AnalyticsManagementUploadsGet = Upload
+        type Scopes AnalyticsManagementUploadsGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient AnalyticsManagementUploadsGet{..}
+          = go accountId webPropertyId customDataSourceId
+              uploadId
+              (Core.Just Core.AltJSON)
+              analyticsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy AnalyticsManagementUploadsGetResource)
+                      Core.mempty
+

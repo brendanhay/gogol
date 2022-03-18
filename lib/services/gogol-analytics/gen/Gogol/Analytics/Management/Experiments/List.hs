@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,98 +36,90 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.list@.
 module Gogol.Analytics.Management.Experiments.List
-  ( -- * Resource
-    AnalyticsManagementExperimentsListResource,
+    (
+    -- * Resource
+      AnalyticsManagementExperimentsListResource
 
     -- ** Constructing a Request
-    newAnalyticsManagementExperimentsList,
-    AnalyticsManagementExperimentsList,
-  )
-where
+    , newAnalyticsManagementExperimentsList
+    , AnalyticsManagementExperimentsList
+    ) where
 
-import Gogol.Analytics.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Analytics.Types
 
 -- | A resource alias for @analytics.management.experiments.list@ method which the
 -- 'AnalyticsManagementExperimentsList' request conforms to.
 type AnalyticsManagementExperimentsListResource =
-  "analytics"
-    Core.:> "v3"
-    Core.:> "management"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "webproperties"
-    Core.:> Core.Capture "webPropertyId" Core.Text
-    Core.:> "profiles"
-    Core.:> Core.Capture "profileId" Core.Text
-    Core.:> "experiments"
-    Core.:> Core.QueryParam "max-results" Core.Int32
-    Core.:> Core.QueryParam "start-index" Core.Int32
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Experiments
+     "analytics" Core.:>
+       "v3" Core.:>
+         "management" Core.:>
+           "accounts" Core.:>
+             Core.Capture "accountId" Core.Text Core.:>
+               "webproperties" Core.:>
+                 Core.Capture "webPropertyId" Core.Text Core.:>
+                   "profiles" Core.:>
+                     Core.Capture "profileId" Core.Text Core.:>
+                       "experiments" Core.:>
+                         Core.QueryParam "max-results" Core.Int32 Core.:>
+                           Core.QueryParam "start-index" Core.Int32 Core.:>
+                             Core.QueryParam "alt" Core.AltJSON Core.:>
+                               Core.Get '[Core.JSON] Experiments
 
 -- | Lists experiments to which the user has access.
 --
 -- /See:/ 'newAnalyticsManagementExperimentsList' smart constructor.
 data AnalyticsManagementExperimentsList = AnalyticsManagementExperimentsList
-  { -- | Account ID to retrieve experiments for.
-    accountId :: Core.Text,
-    -- | The maximum number of experiments to include in this response.
-    maxResults :: (Core.Maybe Core.Int32),
-    -- | View (Profile) ID to retrieve experiments for.
-    profileId :: Core.Text,
-    -- | An index of the first experiment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
-    startIndex :: (Core.Maybe Core.Int32),
-    -- | Web property ID to retrieve experiments for.
-    webPropertyId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account ID to retrieve experiments for.
+      accountId :: Core.Text
+      -- | The maximum number of experiments to include in this response.
+    , maxResults :: (Core.Maybe Core.Int32)
+      -- | View (Profile) ID to retrieve experiments for.
+    , profileId :: Core.Text
+      -- | An index of the first experiment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+    , startIndex :: (Core.Maybe Core.Int32)
+      -- | Web property ID to retrieve experiments for.
+    , webPropertyId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementExperimentsList' with the minimum fields required to make a request.
-newAnalyticsManagementExperimentsList ::
-  -- |  Account ID to retrieve experiments for. See 'accountId'.
-  Core.Text ->
-  -- |  View (Profile) ID to retrieve experiments for. See 'profileId'.
-  Core.Text ->
-  -- |  Web property ID to retrieve experiments for. See 'webPropertyId'.
-  Core.Text ->
-  AnalyticsManagementExperimentsList
+newAnalyticsManagementExperimentsList 
+    ::  Core.Text
+       -- ^  Account ID to retrieve experiments for. See 'accountId'.
+    -> Core.Text
+       -- ^  View (Profile) ID to retrieve experiments for. See 'profileId'.
+    -> Core.Text
+       -- ^  Web property ID to retrieve experiments for. See 'webPropertyId'.
+    -> AnalyticsManagementExperimentsList
 newAnalyticsManagementExperimentsList accountId profileId webPropertyId =
   AnalyticsManagementExperimentsList
-    { accountId = accountId,
-      maxResults = Core.Nothing,
-      profileId = profileId,
-      startIndex = Core.Nothing,
-      webPropertyId = webPropertyId
+    { accountId = accountId
+    , maxResults = Core.Nothing
+    , profileId = profileId
+    , startIndex = Core.Nothing
+    , webPropertyId = webPropertyId
     }
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementExperimentsList
-  where
-  type
-    Rs AnalyticsManagementExperimentsList =
-      Experiments
-  type
-    Scopes AnalyticsManagementExperimentsList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
-  requestClient AnalyticsManagementExperimentsList {..} =
-    go
-      accountId
-      webPropertyId
-      profileId
-      maxResults
-      startIndex
-      (Core.Just Core.AltJSON)
-      analyticsService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                AnalyticsManagementExperimentsListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AnalyticsManagementExperimentsList
+         where
+        type Rs AnalyticsManagementExperimentsList =
+             Experiments
+        type Scopes AnalyticsManagementExperimentsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient AnalyticsManagementExperimentsList{..}
+          = go accountId webPropertyId profileId maxResults
+              startIndex
+              (Core.Just Core.AltJSON)
+              analyticsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AnalyticsManagementExperimentsListResource)
+                      Core.mempty
+
