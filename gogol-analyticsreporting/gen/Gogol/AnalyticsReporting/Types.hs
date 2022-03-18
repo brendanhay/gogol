@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AnalyticsReporting.Types
+-- Module      : Gogol.AnalyticsReporting.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AnalyticsReporting.Types
+module Gogol.AnalyticsReporting.Types
   ( -- * Configuration
     analyticsReportingService,
 
@@ -297,9 +297,9 @@ module Network.Google.AnalyticsReporting.Types
   )
 where
 
-import Network.Google.AnalyticsReporting.Internal.Product
-import Network.Google.AnalyticsReporting.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AnalyticsReporting.Internal.Product
+import Gogol.AnalyticsReporting.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v4@ of the Analytics Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 analyticsReportingService :: Core.ServiceConfig

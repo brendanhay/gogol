@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AnalyticsReporting
+-- Module      : Gogol.AnalyticsReporting
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Accesses Analytics report data.
 --
 -- /See:/ <https://developers.google.com/analytics/devguides/reporting/core/v4/ Analytics Reporting API Reference>
-module Network.Google.AnalyticsReporting
+module Gogol.AnalyticsReporting
   ( -- * Configuration
     analyticsReportingService,
 
@@ -313,6 +313,6 @@ module Network.Google.AnalyticsReporting
   )
 where
 
-import Network.Google.AnalyticsReporting.Reports.BatchGet
-import Network.Google.AnalyticsReporting.Types
-import Network.Google.AnalyticsReporting.UserActivity.Search
+import Gogol.AnalyticsReporting.Reports.BatchGet
+import Gogol.AnalyticsReporting.Types
+import Gogol.AnalyticsReporting.UserActivity.Search
