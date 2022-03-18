@@ -39,55 +39,56 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AppEngine
-    Network.Google.AppEngine.Apps.AuthorizedCertificates.Create
-    Network.Google.AppEngine.Apps.AuthorizedCertificates.Delete
-    Network.Google.AppEngine.Apps.AuthorizedCertificates.Get
-    Network.Google.AppEngine.Apps.AuthorizedCertificates.List
-    Network.Google.AppEngine.Apps.AuthorizedCertificates.Patch
-    Network.Google.AppEngine.Apps.AuthorizedDomains.List
-    Network.Google.AppEngine.Apps.Create
-    Network.Google.AppEngine.Apps.DomainMappings.Create
-    Network.Google.AppEngine.Apps.DomainMappings.Delete
-    Network.Google.AppEngine.Apps.DomainMappings.Get
-    Network.Google.AppEngine.Apps.DomainMappings.List
-    Network.Google.AppEngine.Apps.DomainMappings.Patch
-    Network.Google.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
-    Network.Google.AppEngine.Apps.Firewall.IngressRules.Create
-    Network.Google.AppEngine.Apps.Firewall.IngressRules.Delete
-    Network.Google.AppEngine.Apps.Firewall.IngressRules.Get
-    Network.Google.AppEngine.Apps.Firewall.IngressRules.List
-    Network.Google.AppEngine.Apps.Firewall.IngressRules.Patch
-    Network.Google.AppEngine.Apps.Get
-    Network.Google.AppEngine.Apps.Locations.Get
-    Network.Google.AppEngine.Apps.Locations.List
-    Network.Google.AppEngine.Apps.Operations.Get
-    Network.Google.AppEngine.Apps.Operations.List
-    Network.Google.AppEngine.Apps.Patch
-    Network.Google.AppEngine.Apps.Repair
-    Network.Google.AppEngine.Apps.Services.Delete
-    Network.Google.AppEngine.Apps.Services.Get
-    Network.Google.AppEngine.Apps.Services.List
-    Network.Google.AppEngine.Apps.Services.Patch
-    Network.Google.AppEngine.Apps.Services.Versions.Create
-    Network.Google.AppEngine.Apps.Services.Versions.Delete
-    Network.Google.AppEngine.Apps.Services.Versions.Get
-    Network.Google.AppEngine.Apps.Services.Versions.Instances.Debug
-    Network.Google.AppEngine.Apps.Services.Versions.Instances.Delete
-    Network.Google.AppEngine.Apps.Services.Versions.Instances.Get
-    Network.Google.AppEngine.Apps.Services.Versions.Instances.List
-    Network.Google.AppEngine.Apps.Services.Versions.List
-    Network.Google.AppEngine.Apps.Services.Versions.Patch
-    Network.Google.AppEngine.Types
+    Gogol.AppEngine
+    Gogol.AppEngine.Apps.AuthorizedCertificates.Create
+    Gogol.AppEngine.Apps.AuthorizedCertificates.Delete
+    Gogol.AppEngine.Apps.AuthorizedCertificates.Get
+    Gogol.AppEngine.Apps.AuthorizedCertificates.List
+    Gogol.AppEngine.Apps.AuthorizedCertificates.Patch
+    Gogol.AppEngine.Apps.AuthorizedDomains.List
+    Gogol.AppEngine.Apps.Create
+    Gogol.AppEngine.Apps.DomainMappings.Create
+    Gogol.AppEngine.Apps.DomainMappings.Delete
+    Gogol.AppEngine.Apps.DomainMappings.Get
+    Gogol.AppEngine.Apps.DomainMappings.List
+    Gogol.AppEngine.Apps.DomainMappings.Patch
+    Gogol.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
+    Gogol.AppEngine.Apps.Firewall.IngressRules.Create
+    Gogol.AppEngine.Apps.Firewall.IngressRules.Delete
+    Gogol.AppEngine.Apps.Firewall.IngressRules.Get
+    Gogol.AppEngine.Apps.Firewall.IngressRules.List
+    Gogol.AppEngine.Apps.Firewall.IngressRules.Patch
+    Gogol.AppEngine.Apps.Get
+    Gogol.AppEngine.Apps.Locations.Get
+    Gogol.AppEngine.Apps.Locations.List
+    Gogol.AppEngine.Apps.Operations.Get
+    Gogol.AppEngine.Apps.Operations.List
+    Gogol.AppEngine.Apps.Patch
+    Gogol.AppEngine.Apps.Repair
+    Gogol.AppEngine.Apps.Services.Delete
+    Gogol.AppEngine.Apps.Services.Get
+    Gogol.AppEngine.Apps.Services.List
+    Gogol.AppEngine.Apps.Services.Patch
+    Gogol.AppEngine.Apps.Services.Versions.Create
+    Gogol.AppEngine.Apps.Services.Versions.Delete
+    Gogol.AppEngine.Apps.Services.Versions.Get
+    Gogol.AppEngine.Apps.Services.Versions.Instances.Debug
+    Gogol.AppEngine.Apps.Services.Versions.Instances.Delete
+    Gogol.AppEngine.Apps.Services.Versions.Instances.Get
+    Gogol.AppEngine.Apps.Services.Versions.Instances.List
+    Gogol.AppEngine.Apps.Services.Versions.List
+    Gogol.AppEngine.Apps.Services.Versions.Patch
+    Gogol.AppEngine.Types
 
   other-modules:
-    Network.Google.AppEngine.Internal.Product
-    Network.Google.AppEngine.Internal.Sum
+    Gogol.AppEngine.Internal.Product
+    Gogol.AppEngine.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
