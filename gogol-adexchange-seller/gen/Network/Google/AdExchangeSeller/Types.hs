@@ -1,198 +1,133 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AdExchangeSeller.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AdExchangeSeller.Types
-    (
-    -- * Service Configuration
-      adExchangeSellerService
+  ( -- * Configuration
+    adExchangeSellerService,
 
     -- * OAuth Scopes
-    , adExchangeSellerReadOnlyScope
-    , adExchangeSellerScope
+    adexchangeSellerScope,
+    adexchangeSellerReadOnlyScope,
 
-    -- * AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
+    -- * Types
 
-    -- * ReportingMetadataEntry
-    , ReportingMetadataEntry
-    , reportingMetadataEntry
-    , rmeKind
-    , rmeRequiredMetrics
-    , rmeCompatibleMetrics
-    , rmeRequiredDimensions
-    , rmeId
-    , rmeCompatibleDimensions
-    , rmeSupportedProducts
+    -- ** Account
+    Account (..),
+    newAccount,
 
-    -- * Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
+    -- ** Accounts
+    Accounts (..),
+    newAccounts,
 
-    -- * Alerts
-    , Alerts
-    , alerts
-    , aleKind
-    , aleItems
+    -- ** AdClient
+    AdClient (..),
+    newAdClient,
 
-    -- * SavedReports
-    , SavedReports
-    , savedReports
-    , srEtag
-    , srNextPageToken
-    , srKind
-    , srItems
+    -- ** AdClients
+    AdClients (..),
+    newAdClients,
 
-    -- * SavedReport
-    , SavedReport
-    , savedReport
-    , sKind
-    , sName
-    , sId
+    -- ** Alert
+    Alert (..),
+    newAlert,
 
-    -- * URLChannels
-    , URLChannels
-    , urlChannels
-    , ucEtag
-    , ucNextPageToken
-    , ucKind
-    , ucItems
+    -- ** Alerts
+    Alerts (..),
+    newAlerts,
 
-    -- * CustomChannels
-    , CustomChannels
-    , customChannels
-    , ccEtag
-    , ccNextPageToken
-    , ccKind
-    , ccItems
+    -- ** CustomChannel
+    CustomChannel (..),
+    newCustomChannel,
 
-    -- * Report
-    , Report
-    , report
-    , rKind
-    , rAverages
-    , rWarnings
-    , rRows
-    , rTotals
-    , rHeaders
-    , rTotalMatchedRows
+    -- ** CustomChannel_TargetingInfo
+    CustomChannel_TargetingInfo (..),
+    newCustomChannel_TargetingInfo,
 
-    -- * Alert
-    , Alert
-    , alert
-    , aaKind
-    , aaSeverity
-    , aaId
-    , aaType
-    , aaMessage
+    -- ** CustomChannels
+    CustomChannels (..),
+    newCustomChannels,
 
-    -- * Account
-    , Account
-    , account
-    , accKind
-    , accName
-    , accId
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
 
-    -- * AdClient
-    , AdClient
-    , adClient
-    , adKind
-    , adArcOptIn
-    , adSupportsReporting
-    , adId
-    , adProductCode
+    -- ** PreferredDeal
+    PreferredDeal (..),
+    newPreferredDeal,
 
-    -- * ReportHeadersItem
-    , ReportHeadersItem
-    , reportHeadersItem
-    , rhiName
-    , rhiCurrency
-    , rhiType
+    -- ** PreferredDeals
+    PreferredDeals (..),
+    newPreferredDeals,
 
-    -- * CustomChannelTargetingInfo
-    , CustomChannelTargetingInfo
-    , customChannelTargetingInfo
-    , cctiLocation
-    , cctiSiteLanguage
-    , cctiAdsAppearOn
-    , cctiDescription
+    -- ** Report
+    Report (..),
+    newReport,
 
-    -- * PreferredDeals
-    , PreferredDeals
-    , preferredDeals
-    , pdKind
-    , pdItems
+    -- ** Report_HeadersItem
+    Report_HeadersItem (..),
+    newReport_HeadersItem,
 
-    -- * Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
+    -- ** ReportingMetadataEntry
+    ReportingMetadataEntry (..),
+    newReportingMetadataEntry,
 
-    -- * CustomChannel
-    , CustomChannel
-    , customChannel
-    , cTargetingInfo
-    , cKind
-    , cName
-    , cCode
-    , cId
+    -- ** SavedReport
+    SavedReport (..),
+    newSavedReport,
 
-    -- * URLChannel
-    , URLChannel
-    , urlChannel
-    , urlcKind
-    , urlcId
-    , urlcURLPattern
+    -- ** SavedReports
+    SavedReports (..),
+    newSavedReports,
 
-    -- * PreferredDeal
-    , PreferredDeal
-    , preferredDeal
-    , pAdvertiserName
-    , pCurrencyCode
-    , pStartTime
-    , pKind
-    , pBuyerNetworkName
-    , pEndTime
-    , pId
-    , pFixedCpm
-    ) where
+    -- ** UrlChannel
+    UrlChannel (..),
+    newUrlChannel,
 
-import Network.Google.AdExchangeSeller.Types.Product
-import Network.Google.AdExchangeSeller.Types.Sum
-import Network.Google.Prelude
+    -- ** UrlChannels
+    UrlChannels (..),
+    newUrlChannels,
+  )
+where
 
--- | Default request referring to version 'v2.0' of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeSellerService :: ServiceConfig
-adExchangeSellerService
-  = defaultService (ServiceId "adexchangeseller:v2.0")
-      "www.googleapis.com"
+import Network.Google.AdExchangeSeller.Internal.Product
+import Network.Google.AdExchangeSeller.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View your Ad Exchange data
-adExchangeSellerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
-adExchangeSellerReadOnlyScope = Proxy
+-- | Default request referring to version @v2.0@ of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
+adExchangeSellerService :: Core.ServiceConfig
+adExchangeSellerService =
+  Core.defaultService
+    (Core.ServiceId "adexchangeseller:v2.0")
+    "www.googleapis.com"
 
 -- | View and manage your Ad Exchange data
-adExchangeSellerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
-adExchangeSellerScope = Proxy
+adexchangeSellerScope :: Core.Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
+adexchangeSellerScope = Core.Proxy
+
+-- | View your Ad Exchange data
+adexchangeSellerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
+adexchangeSellerReadOnlyScope = Core.Proxy

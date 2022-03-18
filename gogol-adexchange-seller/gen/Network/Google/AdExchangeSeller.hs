@@ -1,270 +1,206 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AdExchangeSeller
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Accesses the inventory of Ad Exchange seller users and generates
--- reports.
+-- Accesses the inventory of Ad Exchange seller users and generates reports.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference>
 module Network.Google.AdExchangeSeller
-    (
-    -- * Service Configuration
-      adExchangeSellerService
+  ( -- * Configuration
+    adExchangeSellerService,
 
     -- * OAuth Scopes
-    , adExchangeSellerReadOnlyScope
-    , adExchangeSellerScope
-
-    -- * API Declaration
-    , AdExchangeSellerAPI
+    adexchangeSellerScope,
+    adexchangeSellerReadOnlyScope,
 
     -- * Resources
 
     -- ** adexchangeseller.accounts.adclients.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
+    AdExchangeSellerAccountsAdclientsListResource,
+    newAdExchangeSellerAccountsAdclientsList,
+    AdExchangeSellerAccountsAdclientsList,
 
     -- ** adexchangeseller.accounts.alerts.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
+    AdExchangeSellerAccountsAlertsListResource,
+    newAdExchangeSellerAccountsAlertsList,
+    AdExchangeSellerAccountsAlertsList,
 
     -- ** adexchangeseller.accounts.customchannels.get
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
+    AdExchangeSellerAccountsCustomchannelsGetResource,
+    newAdExchangeSellerAccountsCustomchannelsGet,
+    AdExchangeSellerAccountsCustomchannelsGet,
 
     -- ** adexchangeseller.accounts.customchannels.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
+    AdExchangeSellerAccountsCustomchannelsListResource,
+    newAdExchangeSellerAccountsCustomchannelsList,
+    AdExchangeSellerAccountsCustomchannelsList,
 
     -- ** adexchangeseller.accounts.get
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.Get
+    AdExchangeSellerAccountsGetResource,
+    newAdExchangeSellerAccountsGet,
+    AdExchangeSellerAccountsGet,
 
     -- ** adexchangeseller.accounts.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.List
+    AdExchangeSellerAccountsListResource,
+    newAdExchangeSellerAccountsList,
+    AdExchangeSellerAccountsList,
 
     -- ** adexchangeseller.accounts.metadata.dimensions.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
+    AdExchangeSellerAccountsMetadataDimensionsListResource,
+    newAdExchangeSellerAccountsMetadataDimensionsList,
+    AdExchangeSellerAccountsMetadataDimensionsList,
 
     -- ** adexchangeseller.accounts.metadata.metrics.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
+    AdExchangeSellerAccountsMetadataMetricsListResource,
+    newAdExchangeSellerAccountsMetadataMetricsList,
+    AdExchangeSellerAccountsMetadataMetricsList,
 
     -- ** adexchangeseller.accounts.preferreddeals.get
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
+    AdExchangeSellerAccountsPreferreddealsGetResource,
+    newAdExchangeSellerAccountsPreferreddealsGet,
+    AdExchangeSellerAccountsPreferreddealsGet,
 
     -- ** adexchangeseller.accounts.preferreddeals.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
+    AdExchangeSellerAccountsPreferreddealsListResource,
+    newAdExchangeSellerAccountsPreferreddealsList,
+    AdExchangeSellerAccountsPreferreddealsList,
 
     -- ** adexchangeseller.accounts.reports.generate
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
+    AdExchangeSellerAccountsReportsGenerateResource,
+    newAdExchangeSellerAccountsReportsGenerate,
+    AdExchangeSellerAccountsReportsGenerate,
 
     -- ** adexchangeseller.accounts.reports.saved.generate
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
+    AdExchangeSellerAccountsReportsSavedGenerateResource,
+    newAdExchangeSellerAccountsReportsSavedGenerate,
+    AdExchangeSellerAccountsReportsSavedGenerate,
 
     -- ** adexchangeseller.accounts.reports.saved.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
+    AdExchangeSellerAccountsReportsSavedListResource,
+    newAdExchangeSellerAccountsReportsSavedList,
+    AdExchangeSellerAccountsReportsSavedList,
 
     -- ** adexchangeseller.accounts.urlchannels.list
-    , module Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
+    AdExchangeSellerAccountsUrlchannelsListResource,
+    newAdExchangeSellerAccountsUrlchannelsList,
+    AdExchangeSellerAccountsUrlchannelsList,
 
     -- * Types
 
-    -- ** AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
-
-    -- ** ReportingMetadataEntry
-    , ReportingMetadataEntry
-    , reportingMetadataEntry
-    , rmeKind
-    , rmeRequiredMetrics
-    , rmeCompatibleMetrics
-    , rmeRequiredDimensions
-    , rmeId
-    , rmeCompatibleDimensions
-    , rmeSupportedProducts
+    -- ** Account
+    Account (..),
+    newAccount,
 
     -- ** Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
-
-    -- ** Alerts
-    , Alerts
-    , alerts
-    , aleKind
-    , aleItems
-
-    -- ** SavedReports
-    , SavedReports
-    , savedReports
-    , srEtag
-    , srNextPageToken
-    , srKind
-    , srItems
-
-    -- ** SavedReport
-    , SavedReport
-    , savedReport
-    , sKind
-    , sName
-    , sId
-
-    -- ** URLChannels
-    , URLChannels
-    , urlChannels
-    , ucEtag
-    , ucNextPageToken
-    , ucKind
-    , ucItems
-
-    -- ** CustomChannels
-    , CustomChannels
-    , customChannels
-    , ccEtag
-    , ccNextPageToken
-    , ccKind
-    , ccItems
-
-    -- ** Report
-    , Report
-    , report
-    , rKind
-    , rAverages
-    , rWarnings
-    , rRows
-    , rTotals
-    , rHeaders
-    , rTotalMatchedRows
-
-    -- ** Alert
-    , Alert
-    , alert
-    , aaKind
-    , aaSeverity
-    , aaId
-    , aaType
-    , aaMessage
-
-    -- ** Account
-    , Account
-    , account
-    , accKind
-    , accName
-    , accId
+    Accounts (..),
+    newAccounts,
 
     -- ** AdClient
-    , AdClient
-    , adClient
-    , adKind
-    , adArcOptIn
-    , adSupportsReporting
-    , adId
-    , adProductCode
+    AdClient (..),
+    newAdClient,
 
-    -- ** ReportHeadersItem
-    , ReportHeadersItem
-    , reportHeadersItem
-    , rhiName
-    , rhiCurrency
-    , rhiType
+    -- ** AdClients
+    AdClients (..),
+    newAdClients,
 
-    -- ** CustomChannelTargetingInfo
-    , CustomChannelTargetingInfo
-    , customChannelTargetingInfo
-    , cctiLocation
-    , cctiSiteLanguage
-    , cctiAdsAppearOn
-    , cctiDescription
+    -- ** Alert
+    Alert (..),
+    newAlert,
 
-    -- ** PreferredDeals
-    , PreferredDeals
-    , preferredDeals
-    , pdKind
-    , pdItems
-
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
+    -- ** Alerts
+    Alerts (..),
+    newAlerts,
 
     -- ** CustomChannel
-    , CustomChannel
-    , customChannel
-    , cTargetingInfo
-    , cKind
-    , cName
-    , cCode
-    , cId
+    CustomChannel (..),
+    newCustomChannel,
 
-    -- ** URLChannel
-    , URLChannel
-    , urlChannel
-    , urlcKind
-    , urlcId
-    , urlcURLPattern
+    -- ** CustomChannel_TargetingInfo
+    CustomChannel_TargetingInfo (..),
+    newCustomChannel_TargetingInfo,
+
+    -- ** CustomChannels
+    CustomChannels (..),
+    newCustomChannels,
+
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
 
     -- ** PreferredDeal
-    , PreferredDeal
-    , preferredDeal
-    , pAdvertiserName
-    , pCurrencyCode
-    , pStartTime
-    , pKind
-    , pBuyerNetworkName
-    , pEndTime
-    , pId
-    , pFixedCpm
-    ) where
+    PreferredDeal (..),
+    newPreferredDeal,
 
-import Network.Google.Prelude
+    -- ** PreferredDeals
+    PreferredDeals (..),
+    newPreferredDeals,
+
+    -- ** Report
+    Report (..),
+    newReport,
+
+    -- ** Report_HeadersItem
+    Report_HeadersItem (..),
+    newReport_HeadersItem,
+
+    -- ** ReportingMetadataEntry
+    ReportingMetadataEntry (..),
+    newReportingMetadataEntry,
+
+    -- ** SavedReport
+    SavedReport (..),
+    newSavedReport,
+
+    -- ** SavedReports
+    SavedReports (..),
+    newSavedReports,
+
+    -- ** UrlChannel
+    UrlChannel (..),
+    newUrlChannel,
+
+    -- ** UrlChannels
+    UrlChannels (..),
+    newUrlChannels,
+  )
+where
+
+import Network.Google.AdExchangeSeller.Accounts.Adclients.List
+import Network.Google.AdExchangeSeller.Accounts.Alerts.List
+import Network.Google.AdExchangeSeller.Accounts.Customchannels.Get
+import Network.Google.AdExchangeSeller.Accounts.Customchannels.List
+import Network.Google.AdExchangeSeller.Accounts.Get
+import Network.Google.AdExchangeSeller.Accounts.List
+import Network.Google.AdExchangeSeller.Accounts.Metadata.Dimensions.List
+import Network.Google.AdExchangeSeller.Accounts.Metadata.Metrics.List
+import Network.Google.AdExchangeSeller.Accounts.Preferreddeals.Get
+import Network.Google.AdExchangeSeller.Accounts.Preferreddeals.List
+import Network.Google.AdExchangeSeller.Accounts.Reports.Generate
+import Network.Google.AdExchangeSeller.Accounts.Reports.Saved.Generate
+import Network.Google.AdExchangeSeller.Accounts.Reports.Saved.List
+import Network.Google.AdExchangeSeller.Accounts.Urlchannels.List
 import Network.Google.AdExchangeSeller.Types
-import Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
-import Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.Get
-import Network.Google.Resource.AdExchangeSeller.Accounts.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
-import Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
-import Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
-import Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
-import Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Ad Exchange Seller API service.
-type AdExchangeSellerAPI =
-     AccountsAdClientsListResource :<|>
-       AccountsReportsSavedListResource
-       :<|> AccountsReportsSavedGenerateResource
-       :<|> AccountsReportsGenerateResource
-       :<|> AccountsAlertsListResource
-       :<|> AccountsURLChannelsListResource
-       :<|> AccountsCustomChannelsListResource
-       :<|> AccountsCustomChannelsGetResource
-       :<|> AccountsPreferredDealsListResource
-       :<|> AccountsPreferredDealsGetResource
-       :<|> AccountsMetadataMetricsListResource
-       :<|> AccountsMetadataDimensionsListResource
-       :<|> AccountsListResource
-       :<|> AccountsGetResource
