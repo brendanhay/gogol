@@ -1,634 +1,514 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Datastore
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Accesses the schemaless NoSQL database to provide fully managed, robust,
--- scalable storage for your application.
+-- Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
 --
 -- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference>
 module Network.Google.Datastore
-    (
-    -- * Service Configuration
-      datastoreService
+  ( -- * Configuration
+    datastoreService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , datastoreScope
-
-    -- * API Declaration
-    , DatastoreAPI
+    cloudPlatformScope,
+    datastoreScope,
 
     -- * Resources
 
     -- ** datastore.projects.allocateIds
-    , module Network.Google.Resource.Datastore.Projects.AllocateIds
+    DatastoreProjectsAllocateIdsResource,
+    newDatastoreProjectsAllocateIds,
+    DatastoreProjectsAllocateIds,
 
     -- ** datastore.projects.beginTransaction
-    , module Network.Google.Resource.Datastore.Projects.BeginTransaction
+    DatastoreProjectsBeginTransactionResource,
+    newDatastoreProjectsBeginTransaction,
+    DatastoreProjectsBeginTransaction,
 
     -- ** datastore.projects.commit
-    , module Network.Google.Resource.Datastore.Projects.Commit
+    DatastoreProjectsCommitResource,
+    newDatastoreProjectsCommit,
+    DatastoreProjectsCommit,
 
     -- ** datastore.projects.export
-    , module Network.Google.Resource.Datastore.Projects.Export
+    DatastoreProjectsExportResource,
+    newDatastoreProjectsExport,
+    DatastoreProjectsExport,
 
     -- ** datastore.projects.import
-    , module Network.Google.Resource.Datastore.Projects.Import
+    DatastoreProjectsImportResource,
+    newDatastoreProjectsImport,
+    DatastoreProjectsImport,
 
     -- ** datastore.projects.indexes.create
-    , module Network.Google.Resource.Datastore.Projects.Indexes.Create
+    DatastoreProjectsIndexesCreateResource,
+    newDatastoreProjectsIndexesCreate,
+    DatastoreProjectsIndexesCreate,
 
     -- ** datastore.projects.indexes.delete
-    , module Network.Google.Resource.Datastore.Projects.Indexes.Delete
+    DatastoreProjectsIndexesDeleteResource,
+    newDatastoreProjectsIndexesDelete,
+    DatastoreProjectsIndexesDelete,
 
     -- ** datastore.projects.indexes.get
-    , module Network.Google.Resource.Datastore.Projects.Indexes.Get
+    DatastoreProjectsIndexesGetResource,
+    newDatastoreProjectsIndexesGet,
+    DatastoreProjectsIndexesGet,
 
     -- ** datastore.projects.indexes.list
-    , module Network.Google.Resource.Datastore.Projects.Indexes.List
+    DatastoreProjectsIndexesListResource,
+    newDatastoreProjectsIndexesList,
+    DatastoreProjectsIndexesList,
 
     -- ** datastore.projects.lookup
-    , module Network.Google.Resource.Datastore.Projects.Lookup
+    DatastoreProjectsLookupResource,
+    newDatastoreProjectsLookup,
+    DatastoreProjectsLookup,
 
     -- ** datastore.projects.operations.cancel
-    , module Network.Google.Resource.Datastore.Projects.Operations.Cancel
+    DatastoreProjectsOperationsCancelResource,
+    newDatastoreProjectsOperationsCancel,
+    DatastoreProjectsOperationsCancel,
 
     -- ** datastore.projects.operations.delete
-    , module Network.Google.Resource.Datastore.Projects.Operations.Delete
+    DatastoreProjectsOperationsDeleteResource,
+    newDatastoreProjectsOperationsDelete,
+    DatastoreProjectsOperationsDelete,
 
     -- ** datastore.projects.operations.get
-    , module Network.Google.Resource.Datastore.Projects.Operations.Get
+    DatastoreProjectsOperationsGetResource,
+    newDatastoreProjectsOperationsGet,
+    DatastoreProjectsOperationsGet,
 
     -- ** datastore.projects.operations.list
-    , module Network.Google.Resource.Datastore.Projects.Operations.List
+    DatastoreProjectsOperationsListResource,
+    newDatastoreProjectsOperationsList,
+    DatastoreProjectsOperationsList,
 
     -- ** datastore.projects.reserveIds
-    , module Network.Google.Resource.Datastore.Projects.ReserveIds
+    DatastoreProjectsReserveIdsResource,
+    newDatastoreProjectsReserveIds,
+    DatastoreProjectsReserveIds,
 
     -- ** datastore.projects.rollback
-    , module Network.Google.Resource.Datastore.Projects.Rollback
+    DatastoreProjectsRollbackResource,
+    newDatastoreProjectsRollback,
+    DatastoreProjectsRollback,
 
     -- ** datastore.projects.runQuery
-    , module Network.Google.Resource.Datastore.Projects.RunQuery
+    DatastoreProjectsRunQueryResource,
+    newDatastoreProjectsRunQuery,
+    DatastoreProjectsRunQuery,
 
     -- * Types
 
-    -- ** LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
-
-    -- ** TransactionOptions
-    , TransactionOptions
-    , transactionOptions
-    , toReadWrite
-    , toReadOnly
-
-    -- ** PropertyOrderDirection
-    , PropertyOrderDirection (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** GoogleLongrunningOperationMetadata
-    , GoogleLongrunningOperationMetadata
-    , googleLongrunningOperationMetadata
-    , glomAddtional
-
-    -- ** ReadWrite
-    , ReadWrite
-    , readWrite
-    , rwPreviousTransaction
-
-    -- ** GoogleDatastoreAdminV1beta1ExportEntitiesResponse
-    , GoogleDatastoreAdminV1beta1ExportEntitiesResponse
-    , googleDatastoreAdminV1beta1ExportEntitiesResponse
-    , gdaveerOutputURL
-
-    -- ** RollbackRequest
-    , RollbackRequest
-    , rollbackRequest
-    , rrTransaction
-
-    -- ** ReserveIdsRequest
-    , ReserveIdsRequest
-    , reserveIdsRequest
-    , rirKeys
-    , rirDatabaseId
-
-    -- ** PartitionId
-    , PartitionId
-    , partitionId
-    , piNamespaceId
-    , piProjectId
-
-    -- ** GoogleDatastoreAdminV1ListIndexesResponse
-    , GoogleDatastoreAdminV1ListIndexesResponse
-    , googleDatastoreAdminV1ListIndexesResponse
-    , gdavlirNextPageToken
-    , gdavlirIndexes
-
-    -- ** QueryResultBatch
-    , QueryResultBatch
-    , queryResultBatch
-    , qrbSkippedResults
-    , qrbSkippedCursor
-    , qrbEntityResultType
-    , qrbSnapshotVersion
-    , qrbEntityResults
-    , qrbMoreResults
-    , qrbEndCursor
-
-    -- ** CompositeFilterOp
-    , CompositeFilterOp (..)
-
-    -- ** EntityProperties
-    , EntityProperties
-    , entityProperties
-    , epAddtional
-
-    -- ** GoogleDatastoreAdminV1ImportEntitiesRequestLabels
-    , GoogleDatastoreAdminV1ImportEntitiesRequestLabels
-    , googleDatastoreAdminV1ImportEntitiesRequestLabels
-    , gdavierlAddtional
-
-    -- ** BeginTransactionRequest
-    , BeginTransactionRequest
-    , beginTransactionRequest
-    , btrTransactionOptions
-
-    -- ** RunQueryRequest
-    , RunQueryRequest
-    , runQueryRequest
-    , rqrPartitionId
-    , rqrGqlQuery
-    , rqrQuery
-    , rqrReadOptions
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AllocateIdsRequest
-    , AllocateIdsRequest
-    , allocateIdsRequest
-    , airKeys
-
-    -- ** GoogleDatastoreAdminV1ExportEntitiesMetadata
-    , GoogleDatastoreAdminV1ExportEntitiesMetadata
-    , googleDatastoreAdminV1ExportEntitiesMetadata
-    , gdaveemProgressBytes
-    , gdaveemOutputURLPrefix
-    , gdaveemProgressEntities
-    , gdaveemEntityFilter
-    , gdaveemCommon
-
-    -- ** QueryResultBatchEntityResultType
-    , QueryResultBatchEntityResultType (..)
-
-    -- ** GoogleDatastoreAdminV1beta1CommonMetadata
-    , GoogleDatastoreAdminV1beta1CommonMetadata
-    , googleDatastoreAdminV1beta1CommonMetadata
-    , gdavcmState
-    , gdavcmStartTime
-    , gdavcmEndTime
-    , gdavcmLabels
-    , gdavcmOperationType
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** CompositeFilter
-    , CompositeFilter
-    , compositeFilter
-    , cfOp
-    , cfFilters
-
-    -- ** GoogleDatastoreAdminV1beta1CommonMetadataOperationType
-    , GoogleDatastoreAdminV1beta1CommonMetadataOperationType (..)
-
-    -- ** QueryResultBatchMoreResults
-    , QueryResultBatchMoreResults (..)
-
-    -- ** GoogleDatastoreAdminV1IndexOperationMetadata
-    , GoogleDatastoreAdminV1IndexOperationMetadata
-    , googleDatastoreAdminV1IndexOperationMetadata
-    , gdaviomProgressEntities
-    , gdaviomCommon
-    , gdaviomIndexId
-
-    -- ** GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
-    , GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
-    , googleDatastoreAdminV1beta1ImportEntitiesMetadata
-    , gdaviemProgressBytes
-    , gdaviemProgressEntities
-    , gdaviemEntityFilter
-    , gdaviemInputURL
-    , gdaviemCommon
-
-    -- ** GoogleDatastoreAdminV1beta1Progress
-    , GoogleDatastoreAdminV1beta1Progress
-    , googleDatastoreAdminV1beta1Progress
-    , gdavpWorkCompleted
-    , gdavpWorkEstimated
-
-    -- ** BeginTransactionResponse
-    , BeginTransactionResponse
-    , beginTransactionResponse
-    , btrTransaction
-
-    -- ** MutationResult
-    , MutationResult
-    , mutationResult
-    , mrConflictDetected
-    , mrKey
-    , mrVersion
+    AllocateIdsRequest (..),
+    newAllocateIdsRequest,
 
     -- ** AllocateIdsResponse
-    , AllocateIdsResponse
-    , allocateIdsResponse
-    , aKeys
-
-    -- ** GqlQuery
-    , GqlQuery
-    , gqlQuery
-    , gqPositionalBindings
-    , gqNamedBindings
-    , gqQueryString
-    , gqAllowLiterals
-
-    -- ** RunQueryResponse
-    , RunQueryResponse
-    , runQueryResponse
-    , rBatch
-    , rQuery
-
-    -- ** GoogleDatastoreAdminV1ExportEntitiesRequestLabels
-    , GoogleDatastoreAdminV1ExportEntitiesRequestLabels
-    , googleDatastoreAdminV1ExportEntitiesRequestLabels
-    , gdaveerlAddtional
-
-    -- ** GoogleDatastoreAdminV1CommonMetadataOperationType
-    , GoogleDatastoreAdminV1CommonMetadataOperationType (..)
-
-    -- ** Value
-    , Value
-    , value
-    , vKeyValue
-    , vGeoPointValue
-    , vIntegerValue
-    , vTimestampValue
-    , vEntityValue
-    , vExcludeFromIndexes
-    , vDoubleValue
-    , vStringValue
-    , vBooleanValue
-    , vMeaning
-    , vArrayValue
-    , vNullValue
-    , vBlobValue
-
-    -- ** ValueNullValue
-    , ValueNullValue (..)
-
-    -- ** GoogleDatastoreAdminV1IndexedPropertyDirection
-    , GoogleDatastoreAdminV1IndexedPropertyDirection (..)
-
-    -- ** GoogleDatastoreAdminV1CommonMetadataLabels
-    , GoogleDatastoreAdminV1CommonMetadataLabels
-    , googleDatastoreAdminV1CommonMetadataLabels
-    , gdavcmlAddtional
-
-    -- ** GoogleDatastoreAdminV1IndexAncestor
-    , GoogleDatastoreAdminV1IndexAncestor (..)
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** LookupRequest
-    , LookupRequest
-    , lookupRequest
-    , lrKeys
-    , lrReadOptions
-
-    -- ** ReadOptionsReadConsistency
-    , ReadOptionsReadConsistency (..)
-
-    -- ** GoogleDatastoreAdminV1CommonMetadata
-    , GoogleDatastoreAdminV1CommonMetadata
-    , googleDatastoreAdminV1CommonMetadata
-    , gState
-    , gStartTime
-    , gEndTime
-    , gLabels
-    , gOperationType
-
-    -- ** GoogleDatastoreAdminV1ExportEntitiesRequest
-    , GoogleDatastoreAdminV1ExportEntitiesRequest
-    , googleDatastoreAdminV1ExportEntitiesRequest
-    , gdaveerOutputURLPrefix
-    , gdaveerEntityFilter
-    , gdaveerLabels
-
-    -- ** Mutation
-    , Mutation
-    , mutation
-    , mBaseVersion
-    , mInsert
-    , mUpsert
-    , mDelete
-    , mUpdate
-
-    -- ** GqlQueryNamedBindings
-    , GqlQueryNamedBindings
-    , gqlQueryNamedBindings
-    , gqnbAddtional
-
-    -- ** GoogleDatastoreAdminV1ExportEntitiesResponse
-    , GoogleDatastoreAdminV1ExportEntitiesResponse
-    , googleDatastoreAdminV1ExportEntitiesResponse
-    , gOutputURL
-
-    -- ** PropertyReference
-    , PropertyReference
-    , propertyReference
-    , prName
-
-    -- ** Key
-    , Key
-    , key
-    , kPartitionId
-    , kPath
-
-    -- ** GoogleDatastoreAdminV1ImportEntitiesRequest
-    , GoogleDatastoreAdminV1ImportEntitiesRequest
-    , googleDatastoreAdminV1ImportEntitiesRequest
-    , gdavierEntityFilter
-    , gdavierInputURL
-    , gdavierLabels
-
-    -- ** GoogleDatastoreAdminV1IndexState
-    , GoogleDatastoreAdminV1IndexState (..)
-
-    -- ** PropertyFilter
-    , PropertyFilter
-    , propertyFilter
-    , pfProperty
-    , pfOp
-    , pfValue
-
-    -- ** Query
-    , Query
-    , query
-    , qStartCursor
-    , qOffSet
-    , qKind
-    , qDistinctOn
-    , qEndCursor
-    , qLimit
-    , qProjection
-    , qFilter
-    , qOrder
+    AllocateIdsResponse (..),
+    newAllocateIdsResponse,
 
     -- ** ArrayValue
-    , ArrayValue
-    , arrayValue
-    , avValues
+    ArrayValue (..),
+    newArrayValue,
 
-    -- ** EntityResult
-    , EntityResult
-    , entityResult
-    , erCursor
-    , erVersion
-    , erEntity
+    -- ** BeginTransactionRequest
+    BeginTransactionRequest (..),
+    newBeginTransactionRequest,
 
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** CommitResponse
-    , CommitResponse
-    , commitResponse
-    , crIndexUpdates
-    , crMutationResults
-
-    -- ** KindExpression
-    , KindExpression
-    , kindExpression
-    , keName
-
-    -- ** GoogleLongrunningOperationResponse
-    , GoogleLongrunningOperationResponse
-    , googleLongrunningOperationResponse
-    , glorAddtional
-
-    -- ** ReadOptions
-    , ReadOptions
-    , readOptions
-    , roReadConsistency
-    , roTransaction
-
-    -- ** GoogleDatastoreAdminV1beta1CommonMetadataState
-    , GoogleDatastoreAdminV1beta1CommonMetadataState (..)
-
-    -- ** GoogleDatastoreAdminV1EntityFilter
-    , GoogleDatastoreAdminV1EntityFilter
-    , googleDatastoreAdminV1EntityFilter
-    , gdavefNamespaceIds
-    , gdavefKinds
-
-    -- ** RollbackResponse
-    , RollbackResponse
-    , rollbackResponse
-
-    -- ** Projection
-    , Projection
-    , projection
-    , pProperty
-
-    -- ** ReserveIdsResponse
-    , ReserveIdsResponse
-    , reserveIdsResponse
-
-    -- ** Filter
-    , Filter
-    , filter'
-    , fCompositeFilter
-    , fPropertyFilter
-
-    -- ** GoogleDatastoreAdminV1Index
-    , GoogleDatastoreAdminV1Index
-    , googleDatastoreAdminV1Index
-    , gdaviState
-    , gdaviKind
-    , gdaviProjectId
-    , gdaviIndexId
-    , gdaviAncestor
-    , gdaviProperties
-
-    -- ** GoogleDatastoreAdminV1beta1CommonMetadataLabels
-    , GoogleDatastoreAdminV1beta1CommonMetadataLabels
-    , googleDatastoreAdminV1beta1CommonMetadataLabels
-    , gAddtional
-
-    -- ** PropertyFilterOp
-    , PropertyFilterOp (..)
+    -- ** BeginTransactionResponse
+    BeginTransactionResponse (..),
+    newBeginTransactionResponse,
 
     -- ** CommitRequest
-    , CommitRequest
-    , commitRequest
-    , crMutations
-    , crMode
-    , crTransaction
+    CommitRequest (..),
+    newCommitRequest,
 
-    -- ** CommitRequestMode
-    , CommitRequestMode (..)
+    -- ** CommitRequest_Mode
+    CommitRequest_Mode (..),
 
-    -- ** GoogleLongrunningListOperationsResponse
-    , GoogleLongrunningListOperationsResponse
-    , googleLongrunningListOperationsResponse
-    , gllorNextPageToken
-    , gllorOperations
+    -- ** CommitResponse
+    CommitResponse (..),
+    newCommitResponse,
 
-    -- ** GoogleDatastoreAdminV1ImportEntitiesMetadata
-    , GoogleDatastoreAdminV1ImportEntitiesMetadata
-    , googleDatastoreAdminV1ImportEntitiesMetadata
-    , gProgressBytes
-    , gProgressEntities
-    , gEntityFilter
-    , gInputURL
-    , gCommon
+    -- ** CompositeFilter
+    CompositeFilter (..),
+    newCompositeFilter,
 
-    -- ** GoogleDatastoreAdminV1Progress
-    , GoogleDatastoreAdminV1Progress
-    , googleDatastoreAdminV1Progress
-    , gWorkCompleted
-    , gWorkEstimated
+    -- ** CompositeFilter_Op
+    CompositeFilter_Op (..),
 
-    -- ** PathElement
-    , PathElement
-    , pathElement
-    , peKind
-    , peName
-    , peId
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
     -- ** Entity
-    , Entity
-    , entity
-    , eKey
-    , eProperties
+    Entity (..),
+    newEntity,
 
-    -- ** GoogleDatastoreAdminV1beta1EntityFilter
-    , GoogleDatastoreAdminV1beta1EntityFilter
-    , googleDatastoreAdminV1beta1EntityFilter
-    , gNamespaceIds
-    , gKinds
+    -- ** Entity_Properties
+    Entity_Properties (..),
+    newEntity_Properties,
 
-    -- ** ReadOnly
-    , ReadOnly
-    , readOnly
+    -- ** EntityResult
+    EntityResult (..),
+    newEntityResult,
+
+    -- ** Filter
+    Filter (..),
+    newFilter,
+
+    -- ** GoogleDatastoreAdminV1CommonMetadata
+    GoogleDatastoreAdminV1CommonMetadata (..),
+    newGoogleDatastoreAdminV1CommonMetadata,
+
+    -- ** GoogleDatastoreAdminV1CommonMetadata_Labels
+    GoogleDatastoreAdminV1CommonMetadata_Labels (..),
+    newGoogleDatastoreAdminV1CommonMetadata_Labels,
+
+    -- ** GoogleDatastoreAdminV1CommonMetadata_OperationType
+    GoogleDatastoreAdminV1CommonMetadata_OperationType (..),
+
+    -- ** GoogleDatastoreAdminV1CommonMetadata_State
+    GoogleDatastoreAdminV1CommonMetadata_State (..),
+
+    -- ** GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata
+    GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata (..),
+    newGoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata,
+
+    -- ** GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState
+    GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState (..),
+
+    -- ** GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep
+    GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep (..),
+
+    -- ** GoogleDatastoreAdminV1EntityFilter
+    GoogleDatastoreAdminV1EntityFilter (..),
+    newGoogleDatastoreAdminV1EntityFilter,
+
+    -- ** GoogleDatastoreAdminV1ExportEntitiesMetadata
+    GoogleDatastoreAdminV1ExportEntitiesMetadata (..),
+    newGoogleDatastoreAdminV1ExportEntitiesMetadata,
+
+    -- ** GoogleDatastoreAdminV1ExportEntitiesRequest
+    GoogleDatastoreAdminV1ExportEntitiesRequest (..),
+    newGoogleDatastoreAdminV1ExportEntitiesRequest,
+
+    -- ** GoogleDatastoreAdminV1ExportEntitiesRequest_Labels
+    GoogleDatastoreAdminV1ExportEntitiesRequest_Labels (..),
+    newGoogleDatastoreAdminV1ExportEntitiesRequest_Labels,
+
+    -- ** GoogleDatastoreAdminV1ExportEntitiesResponse
+    GoogleDatastoreAdminV1ExportEntitiesResponse (..),
+    newGoogleDatastoreAdminV1ExportEntitiesResponse,
+
+    -- ** GoogleDatastoreAdminV1ImportEntitiesMetadata
+    GoogleDatastoreAdminV1ImportEntitiesMetadata (..),
+    newGoogleDatastoreAdminV1ImportEntitiesMetadata,
+
+    -- ** GoogleDatastoreAdminV1ImportEntitiesRequest
+    GoogleDatastoreAdminV1ImportEntitiesRequest (..),
+    newGoogleDatastoreAdminV1ImportEntitiesRequest,
+
+    -- ** GoogleDatastoreAdminV1ImportEntitiesRequest_Labels
+    GoogleDatastoreAdminV1ImportEntitiesRequest_Labels (..),
+    newGoogleDatastoreAdminV1ImportEntitiesRequest_Labels,
+
+    -- ** GoogleDatastoreAdminV1Index
+    GoogleDatastoreAdminV1Index (..),
+    newGoogleDatastoreAdminV1Index,
+
+    -- ** GoogleDatastoreAdminV1Index_Ancestor
+    GoogleDatastoreAdminV1Index_Ancestor (..),
+
+    -- ** GoogleDatastoreAdminV1Index_State
+    GoogleDatastoreAdminV1Index_State (..),
+
+    -- ** GoogleDatastoreAdminV1IndexOperationMetadata
+    GoogleDatastoreAdminV1IndexOperationMetadata (..),
+    newGoogleDatastoreAdminV1IndexOperationMetadata,
 
     -- ** GoogleDatastoreAdminV1IndexedProperty
-    , GoogleDatastoreAdminV1IndexedProperty
-    , googleDatastoreAdminV1IndexedProperty
-    , gdavipDirection
-    , gdavipName
+    GoogleDatastoreAdminV1IndexedProperty (..),
+    newGoogleDatastoreAdminV1IndexedProperty,
 
-    -- ** LookupResponse
-    , LookupResponse
-    , lookupResponse
-    , lrDeferred
-    , lrFound
-    , lrMissing
+    -- ** GoogleDatastoreAdminV1IndexedProperty_Direction
+    GoogleDatastoreAdminV1IndexedProperty_Direction (..),
 
-    -- ** GoogleLongrunningOperation
-    , GoogleLongrunningOperation
-    , googleLongrunningOperation
-    , gloDone
-    , gloError
-    , gloResponse
-    , gloName
-    , gloMetadata
+    -- ** GoogleDatastoreAdminV1ListIndexesResponse
+    GoogleDatastoreAdminV1ListIndexesResponse (..),
+    newGoogleDatastoreAdminV1ListIndexesResponse,
 
-    -- ** PropertyOrder
-    , PropertyOrder
-    , propertyOrder
-    , poProperty
-    , poDirection
+    -- ** GoogleDatastoreAdminV1MigrationProgressEvent
+    GoogleDatastoreAdminV1MigrationProgressEvent (..),
+    newGoogleDatastoreAdminV1MigrationProgressEvent,
+
+    -- ** GoogleDatastoreAdminV1MigrationProgressEvent_Step
+    GoogleDatastoreAdminV1MigrationProgressEvent_Step (..),
+
+    -- ** GoogleDatastoreAdminV1MigrationStateEvent
+    GoogleDatastoreAdminV1MigrationStateEvent (..),
+    newGoogleDatastoreAdminV1MigrationStateEvent,
+
+    -- ** GoogleDatastoreAdminV1MigrationStateEvent_State
+    GoogleDatastoreAdminV1MigrationStateEvent_State (..),
+
+    -- ** GoogleDatastoreAdminV1PrepareStepDetails
+    GoogleDatastoreAdminV1PrepareStepDetails (..),
+    newGoogleDatastoreAdminV1PrepareStepDetails,
+
+    -- ** GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode
+    GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode (..),
+
+    -- ** GoogleDatastoreAdminV1Progress
+    GoogleDatastoreAdminV1Progress (..),
+    newGoogleDatastoreAdminV1Progress,
+
+    -- ** GoogleDatastoreAdminV1RedirectWritesStepDetails
+    GoogleDatastoreAdminV1RedirectWritesStepDetails (..),
+    newGoogleDatastoreAdminV1RedirectWritesStepDetails,
+
+    -- ** GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode
+    GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode (..),
+
+    -- ** GoogleDatastoreAdminV1beta1CommonMetadata
+    GoogleDatastoreAdminV1beta1CommonMetadata (..),
+    newGoogleDatastoreAdminV1beta1CommonMetadata,
+
+    -- ** GoogleDatastoreAdminV1beta1CommonMetadata_Labels
+    GoogleDatastoreAdminV1beta1CommonMetadata_Labels (..),
+    newGoogleDatastoreAdminV1beta1CommonMetadata_Labels,
+
+    -- ** GoogleDatastoreAdminV1beta1CommonMetadata_OperationType
+    GoogleDatastoreAdminV1beta1CommonMetadata_OperationType (..),
+
+    -- ** GoogleDatastoreAdminV1beta1CommonMetadata_State
+    GoogleDatastoreAdminV1beta1CommonMetadata_State (..),
+
+    -- ** GoogleDatastoreAdminV1beta1EntityFilter
+    GoogleDatastoreAdminV1beta1EntityFilter (..),
+    newGoogleDatastoreAdminV1beta1EntityFilter,
 
     -- ** GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
-    , GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
-    , googleDatastoreAdminV1beta1ExportEntitiesMetadata
-    , gooProgressBytes
-    , gooOutputURLPrefix
-    , gooProgressEntities
-    , gooEntityFilter
-    , gooCommon
+    GoogleDatastoreAdminV1beta1ExportEntitiesMetadata (..),
+    newGoogleDatastoreAdminV1beta1ExportEntitiesMetadata,
+
+    -- ** GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+    GoogleDatastoreAdminV1beta1ExportEntitiesResponse (..),
+    newGoogleDatastoreAdminV1beta1ExportEntitiesResponse,
+
+    -- ** GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+    GoogleDatastoreAdminV1beta1ImportEntitiesMetadata (..),
+    newGoogleDatastoreAdminV1beta1ImportEntitiesMetadata,
+
+    -- ** GoogleDatastoreAdminV1beta1Progress
+    GoogleDatastoreAdminV1beta1Progress (..),
+    newGoogleDatastoreAdminV1beta1Progress,
+
+    -- ** GoogleLongrunningListOperationsResponse
+    GoogleLongrunningListOperationsResponse (..),
+    newGoogleLongrunningListOperationsResponse,
+
+    -- ** GoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
+
+    -- ** GoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
+
+    -- ** GoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
+
+    -- ** GqlQuery
+    GqlQuery (..),
+    newGqlQuery,
+
+    -- ** GqlQuery_NamedBindings
+    GqlQuery_NamedBindings (..),
+    newGqlQuery_NamedBindings,
 
     -- ** GqlQueryParameter
-    , GqlQueryParameter
-    , gqlQueryParameter
-    , gqpCursor
-    , gqpValue
+    GqlQueryParameter (..),
+    newGqlQueryParameter,
 
-    -- ** GoogleDatastoreAdminV1CommonMetadataState
-    , GoogleDatastoreAdminV1CommonMetadataState (..)
-    ) where
+    -- ** Key
+    Key (..),
+    newKey,
 
-import Network.Google.Prelude
+    -- ** KindExpression
+    KindExpression (..),
+    newKindExpression,
+
+    -- ** LatLng
+    LatLng (..),
+    newLatLng,
+
+    -- ** LookupRequest
+    LookupRequest (..),
+    newLookupRequest,
+
+    -- ** LookupResponse
+    LookupResponse (..),
+    newLookupResponse,
+
+    -- ** Mutation
+    Mutation (..),
+    newMutation,
+
+    -- ** MutationResult
+    MutationResult (..),
+    newMutationResult,
+
+    -- ** PartitionId
+    PartitionId (..),
+    newPartitionId,
+
+    -- ** PathElement
+    PathElement (..),
+    newPathElement,
+
+    -- ** Projection
+    Projection (..),
+    newProjection,
+
+    -- ** PropertyFilter
+    PropertyFilter (..),
+    newPropertyFilter,
+
+    -- ** PropertyFilter_Op
+    PropertyFilter_Op (..),
+
+    -- ** PropertyOrder
+    PropertyOrder (..),
+    newPropertyOrder,
+
+    -- ** PropertyOrder_Direction
+    PropertyOrder_Direction (..),
+
+    -- ** PropertyReference
+    PropertyReference (..),
+    newPropertyReference,
+
+    -- ** Query
+    Query (..),
+    newQuery,
+
+    -- ** QueryResultBatch
+    QueryResultBatch (..),
+    newQueryResultBatch,
+
+    -- ** QueryResultBatch_EntityResultType
+    QueryResultBatch_EntityResultType (..),
+
+    -- ** QueryResultBatch_MoreResults
+    QueryResultBatch_MoreResults (..),
+
+    -- ** ReadOnly
+    ReadOnly (..),
+    newReadOnly,
+
+    -- ** ReadOptions
+    ReadOptions (..),
+    newReadOptions,
+
+    -- ** ReadOptions_ReadConsistency
+    ReadOptions_ReadConsistency (..),
+
+    -- ** ReadWrite
+    ReadWrite (..),
+    newReadWrite,
+
+    -- ** ReserveIdsRequest
+    ReserveIdsRequest (..),
+    newReserveIdsRequest,
+
+    -- ** ReserveIdsResponse
+    ReserveIdsResponse (..),
+    newReserveIdsResponse,
+
+    -- ** RollbackRequest
+    RollbackRequest (..),
+    newRollbackRequest,
+
+    -- ** RollbackResponse
+    RollbackResponse (..),
+    newRollbackResponse,
+
+    -- ** RunQueryRequest
+    RunQueryRequest (..),
+    newRunQueryRequest,
+
+    -- ** RunQueryResponse
+    RunQueryResponse (..),
+    newRunQueryResponse,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TransactionOptions
+    TransactionOptions (..),
+    newTransactionOptions,
+
+    -- ** Value
+    Value (..),
+    newValue,
+
+    -- ** Value_NullValue
+    Value_NullValue (..),
+  )
+where
+
+import Network.Google.Datastore.Projects.AllocateIds
+import Network.Google.Datastore.Projects.BeginTransaction
+import Network.Google.Datastore.Projects.Commit
+import Network.Google.Datastore.Projects.Export
+import Network.Google.Datastore.Projects.Import
+import Network.Google.Datastore.Projects.Indexes.Create
+import Network.Google.Datastore.Projects.Indexes.Delete
+import Network.Google.Datastore.Projects.Indexes.Get
+import Network.Google.Datastore.Projects.Indexes.List
+import Network.Google.Datastore.Projects.Lookup
+import Network.Google.Datastore.Projects.Operations.Cancel
+import Network.Google.Datastore.Projects.Operations.Delete
+import Network.Google.Datastore.Projects.Operations.Get
+import Network.Google.Datastore.Projects.Operations.List
+import Network.Google.Datastore.Projects.ReserveIds
+import Network.Google.Datastore.Projects.Rollback
+import Network.Google.Datastore.Projects.RunQuery
 import Network.Google.Datastore.Types
-import Network.Google.Resource.Datastore.Projects.AllocateIds
-import Network.Google.Resource.Datastore.Projects.BeginTransaction
-import Network.Google.Resource.Datastore.Projects.Commit
-import Network.Google.Resource.Datastore.Projects.Export
-import Network.Google.Resource.Datastore.Projects.Import
-import Network.Google.Resource.Datastore.Projects.Indexes.Create
-import Network.Google.Resource.Datastore.Projects.Indexes.Delete
-import Network.Google.Resource.Datastore.Projects.Indexes.Get
-import Network.Google.Resource.Datastore.Projects.Indexes.List
-import Network.Google.Resource.Datastore.Projects.Lookup
-import Network.Google.Resource.Datastore.Projects.Operations.Cancel
-import Network.Google.Resource.Datastore.Projects.Operations.Delete
-import Network.Google.Resource.Datastore.Projects.Operations.Get
-import Network.Google.Resource.Datastore.Projects.Operations.List
-import Network.Google.Resource.Datastore.Projects.ReserveIds
-import Network.Google.Resource.Datastore.Projects.Rollback
-import Network.Google.Resource.Datastore.Projects.RunQuery
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Datastore API service.
-type DatastoreAPI =
-     ProjectsIndexesListResource :<|>
-       ProjectsIndexesGetResource
-       :<|> ProjectsIndexesCreateResource
-       :<|> ProjectsIndexesDeleteResource
-       :<|> ProjectsOperationsListResource
-       :<|> ProjectsOperationsGetResource
-       :<|> ProjectsOperationsCancelResource
-       :<|> ProjectsOperationsDeleteResource
-       :<|> ProjectsExportResource
-       :<|> ProjectsBeginTransactionResource
-       :<|> ProjectsAllocateIdsResource
-       :<|> ProjectsRunQueryResource
-       :<|> ProjectsRollbackResource
-       :<|> ProjectsReserveIdsResource
-       :<|> ProjectsLookupResource
-       :<|> ProjectsImportResource
-       :<|> ProjectsCommitResource
