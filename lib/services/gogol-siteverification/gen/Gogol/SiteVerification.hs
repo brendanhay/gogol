@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,77 +30,77 @@
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>
 module Gogol.SiteVerification
-    (
-    -- * Configuration
-      siteVerificationService
+  ( -- * Configuration
+    siteVerificationService,
 
     -- * OAuth Scopes
-    , siteVerificationScope
-    , siteVerificationVerify_OnlyScope
+    siteVerificationScope,
+    siteVerificationVerify_OnlyScope,
 
     -- * Resources
 
     -- ** siteVerification.webResource.delete
-    , SiteVerificationWebResourceDeleteResource
-    , newSiteVerificationWebResourceDelete
-    , SiteVerificationWebResourceDelete
+    SiteVerificationWebResourceDeleteResource,
+    newSiteVerificationWebResourceDelete,
+    SiteVerificationWebResourceDelete,
 
     -- ** siteVerification.webResource.get
-    , SiteVerificationWebResourceGetResource
-    , newSiteVerificationWebResourceGet
-    , SiteVerificationWebResourceGet
+    SiteVerificationWebResourceGetResource,
+    newSiteVerificationWebResourceGet,
+    SiteVerificationWebResourceGet,
 
     -- ** siteVerification.webResource.getToken
-    , SiteVerificationWebResourceGetTokenResource
-    , newSiteVerificationWebResourceGetToken
-    , SiteVerificationWebResourceGetToken
+    SiteVerificationWebResourceGetTokenResource,
+    newSiteVerificationWebResourceGetToken,
+    SiteVerificationWebResourceGetToken,
 
     -- ** siteVerification.webResource.insert
-    , SiteVerificationWebResourceInsertResource
-    , newSiteVerificationWebResourceInsert
-    , SiteVerificationWebResourceInsert
+    SiteVerificationWebResourceInsertResource,
+    newSiteVerificationWebResourceInsert,
+    SiteVerificationWebResourceInsert,
 
     -- ** siteVerification.webResource.list
-    , SiteVerificationWebResourceListResource
-    , newSiteVerificationWebResourceList
-    , SiteVerificationWebResourceList
+    SiteVerificationWebResourceListResource,
+    newSiteVerificationWebResourceList,
+    SiteVerificationWebResourceList,
 
     -- ** siteVerification.webResource.patch
-    , SiteVerificationWebResourcePatchResource
-    , newSiteVerificationWebResourcePatch
-    , SiteVerificationWebResourcePatch
+    SiteVerificationWebResourcePatchResource,
+    newSiteVerificationWebResourcePatch,
+    SiteVerificationWebResourcePatch,
 
     -- ** siteVerification.webResource.update
-    , SiteVerificationWebResourceUpdateResource
-    , newSiteVerificationWebResourceUpdate
-    , SiteVerificationWebResourceUpdate
+    SiteVerificationWebResourceUpdateResource,
+    newSiteVerificationWebResourceUpdate,
+    SiteVerificationWebResourceUpdate,
 
     -- * Types
 
     -- ** SiteVerificationWebResourceGettokenRequest
-    , SiteVerificationWebResourceGettokenRequest (..)
-    , newSiteVerificationWebResourceGettokenRequest
+    SiteVerificationWebResourceGettokenRequest (..),
+    newSiteVerificationWebResourceGettokenRequest,
 
     -- ** SiteVerificationWebResourceGettokenRequest_Site
-    , SiteVerificationWebResourceGettokenRequest_Site (..)
-    , newSiteVerificationWebResourceGettokenRequest_Site
+    SiteVerificationWebResourceGettokenRequest_Site (..),
+    newSiteVerificationWebResourceGettokenRequest_Site,
 
     -- ** SiteVerificationWebResourceGettokenResponse
-    , SiteVerificationWebResourceGettokenResponse (..)
-    , newSiteVerificationWebResourceGettokenResponse
+    SiteVerificationWebResourceGettokenResponse (..),
+    newSiteVerificationWebResourceGettokenResponse,
 
     -- ** SiteVerificationWebResourceListResponse
-    , SiteVerificationWebResourceListResponse (..)
-    , newSiteVerificationWebResourceListResponse
+    SiteVerificationWebResourceListResponse (..),
+    newSiteVerificationWebResourceListResponse,
 
     -- ** SiteVerificationWebResourceResource
-    , SiteVerificationWebResourceResource (..)
-    , newSiteVerificationWebResourceResource
+    SiteVerificationWebResourceResource (..),
+    newSiteVerificationWebResourceResource,
 
     -- ** SiteVerificationWebResourceResource_Site
-    , SiteVerificationWebResourceResource_Site (..)
-    , newSiteVerificationWebResourceResource_Site
-    ) where
+    SiteVerificationWebResourceResource_Site (..),
+    newSiteVerificationWebResourceResource_Site,
+  )
+where
 
 import Gogol.SiteVerification.Types
 import Gogol.SiteVerification.WebResource.Delete
