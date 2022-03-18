@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,115 +30,115 @@
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
 module Gogol.QPXExpress
-    (
-    -- * Configuration
-      qPXExpressService
+  ( -- * Configuration
+    qPXExpressService,
 
     -- * Resources
 
     -- ** qpxExpress.trips.search
-    , QPXExpressTripsSearchResource
-    , newQPXExpressTripsSearch
-    , QPXExpressTripsSearch
+    QPXExpressTripsSearchResource,
+    newQPXExpressTripsSearch,
+    QPXExpressTripsSearch,
 
     -- * Types
 
     -- ** AircraftData
-    , AircraftData (..)
-    , newAircraftData
+    AircraftData (..),
+    newAircraftData,
 
     -- ** AirportData
-    , AirportData (..)
-    , newAirportData
+    AirportData (..),
+    newAirportData,
 
     -- ** BagDescriptor
-    , BagDescriptor (..)
-    , newBagDescriptor
+    BagDescriptor (..),
+    newBagDescriptor,
 
     -- ** CarrierData
-    , CarrierData (..)
-    , newCarrierData
+    CarrierData (..),
+    newCarrierData,
 
     -- ** CityData
-    , CityData (..)
-    , newCityData
+    CityData (..),
+    newCityData,
 
     -- ** Data'
-    , Data' (..)
-    , newData
+    Data' (..),
+    newData,
 
     -- ** FareInfo
-    , FareInfo (..)
-    , newFareInfo
+    FareInfo (..),
+    newFareInfo,
 
     -- ** FlightInfo
-    , FlightInfo (..)
-    , newFlightInfo
+    FlightInfo (..),
+    newFlightInfo,
 
     -- ** FreeBaggageAllowance
-    , FreeBaggageAllowance (..)
-    , newFreeBaggageAllowance
+    FreeBaggageAllowance (..),
+    newFreeBaggageAllowance,
 
     -- ** LegInfo
-    , LegInfo (..)
-    , newLegInfo
+    LegInfo (..),
+    newLegInfo,
 
     -- ** PassengerCounts
-    , PassengerCounts (..)
-    , newPassengerCounts
+    PassengerCounts (..),
+    newPassengerCounts,
 
     -- ** PricingInfo
-    , PricingInfo (..)
-    , newPricingInfo
+    PricingInfo (..),
+    newPricingInfo,
 
     -- ** SegmentInfo
-    , SegmentInfo (..)
-    , newSegmentInfo
+    SegmentInfo (..),
+    newSegmentInfo,
 
     -- ** SegmentPricing
-    , SegmentPricing (..)
-    , newSegmentPricing
+    SegmentPricing (..),
+    newSegmentPricing,
 
     -- ** SliceInfo
-    , SliceInfo (..)
-    , newSliceInfo
+    SliceInfo (..),
+    newSliceInfo,
 
     -- ** SliceInput
-    , SliceInput (..)
-    , newSliceInput
+    SliceInput (..),
+    newSliceInput,
 
     -- ** TaxData
-    , TaxData (..)
-    , newTaxData
+    TaxData (..),
+    newTaxData,
 
     -- ** TaxInfo
-    , TaxInfo (..)
-    , newTaxInfo
+    TaxInfo (..),
+    newTaxInfo,
 
     -- ** TimeOfDayRange
-    , TimeOfDayRange (..)
-    , newTimeOfDayRange
+    TimeOfDayRange (..),
+    newTimeOfDayRange,
 
     -- ** TripOption
-    , TripOption (..)
-    , newTripOption
+    TripOption (..),
+    newTripOption,
 
     -- ** TripOptionsRequest
-    , TripOptionsRequest (..)
-    , newTripOptionsRequest
+    TripOptionsRequest (..),
+    newTripOptionsRequest,
 
     -- ** TripOptionsResponse
-    , TripOptionsResponse (..)
-    , newTripOptionsResponse
+    TripOptionsResponse (..),
+    newTripOptionsResponse,
 
     -- ** TripsSearchRequest
-    , TripsSearchRequest (..)
-    , newTripsSearchRequest
+    TripsSearchRequest (..),
+    newTripsSearchRequest,
 
     -- ** TripsSearchResponse
-    , TripsSearchResponse (..)
-    , newTripsSearchResponse
-    ) where
+    TripsSearchResponse (..),
+    newTripsSearchResponse,
+  )
+where
 
 import Gogol.QPXExpress.Trips.Search
 import Gogol.QPXExpress.Types
