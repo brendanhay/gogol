@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision.Projects.Locations.Files.AsyncBatchAnnotate
+-- Module      : Gogol.Vision.Projects.Files.AsyncBatchAnnotate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -28,23 +28,23 @@
 --
 -- Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateFilesResponse@ (results).
 --
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.locations.files.asyncBatchAnnotate@.
-module Network.Google.Vision.Projects.Locations.Files.AsyncBatchAnnotate
+-- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.files.asyncBatchAnnotate@.
+module Gogol.Vision.Projects.Files.AsyncBatchAnnotate
   ( -- * Resource
-    VisionProjectsLocationsFilesAsyncBatchAnnotateResource,
+    VisionProjectsFilesAsyncBatchAnnotateResource,
 
     -- ** Constructing a Request
-    newVisionProjectsLocationsFilesAsyncBatchAnnotate,
-    VisionProjectsLocationsFilesAsyncBatchAnnotate,
+    newVisionProjectsFilesAsyncBatchAnnotate,
+    VisionProjectsFilesAsyncBatchAnnotate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Vision.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Types
 
--- | A resource alias for @vision.projects.locations.files.asyncBatchAnnotate@ method which the
--- 'VisionProjectsLocationsFilesAsyncBatchAnnotate' request conforms to.
-type VisionProjectsLocationsFilesAsyncBatchAnnotateResource =
+-- | A resource alias for @vision.projects.files.asyncBatchAnnotate@ method which the
+-- 'VisionProjectsFilesAsyncBatchAnnotate' request conforms to.
+type VisionProjectsFilesAsyncBatchAnnotateResource =
   "v1p2beta1"
     Core.:> Core.Capture "parent" Core.Text
     Core.:> "files:asyncBatchAnnotate"
@@ -61,8 +61,8 @@ type VisionProjectsLocationsFilesAsyncBatchAnnotateResource =
 
 -- | Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateFilesResponse@ (results).
 --
--- /See:/ 'newVisionProjectsLocationsFilesAsyncBatchAnnotate' smart constructor.
-data VisionProjectsLocationsFilesAsyncBatchAnnotate = VisionProjectsLocationsFilesAsyncBatchAnnotate
+-- /See:/ 'newVisionProjectsFilesAsyncBatchAnnotate' smart constructor.
+data VisionProjectsFilesAsyncBatchAnnotate = VisionProjectsFilesAsyncBatchAnnotate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -80,15 +80,15 @@ data VisionProjectsLocationsFilesAsyncBatchAnnotate = VisionProjectsLocationsFil
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'VisionProjectsLocationsFilesAsyncBatchAnnotate' with the minimum fields required to make a request.
-newVisionProjectsLocationsFilesAsyncBatchAnnotate ::
+-- | Creates a value of 'VisionProjectsFilesAsyncBatchAnnotate' with the minimum fields required to make a request.
+newVisionProjectsFilesAsyncBatchAnnotate ::
   -- |  Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest ->
-  VisionProjectsLocationsFilesAsyncBatchAnnotate
-newVisionProjectsLocationsFilesAsyncBatchAnnotate parent payload =
-  VisionProjectsLocationsFilesAsyncBatchAnnotate
+  VisionProjectsFilesAsyncBatchAnnotate
+newVisionProjectsFilesAsyncBatchAnnotate parent payload =
+  VisionProjectsFilesAsyncBatchAnnotate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -100,20 +100,18 @@ newVisionProjectsLocationsFilesAsyncBatchAnnotate parent payload =
 
 instance
   Core.GoogleRequest
-    VisionProjectsLocationsFilesAsyncBatchAnnotate
+    VisionProjectsFilesAsyncBatchAnnotate
   where
   type
-    Rs
-      VisionProjectsLocationsFilesAsyncBatchAnnotate =
+    Rs VisionProjectsFilesAsyncBatchAnnotate =
       Operation
   type
-    Scopes
-      VisionProjectsLocationsFilesAsyncBatchAnnotate =
+    Scopes VisionProjectsFilesAsyncBatchAnnotate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-vision"
        ]
   requestClient
-    VisionProjectsLocationsFilesAsyncBatchAnnotate {..} =
+    VisionProjectsFilesAsyncBatchAnnotate {..} =
       go
         parent
         xgafv
@@ -129,6 +127,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  VisionProjectsLocationsFilesAsyncBatchAnnotateResource
+                  VisionProjectsFilesAsyncBatchAnnotateResource
             )
             Core.mempty

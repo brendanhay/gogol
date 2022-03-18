@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision.Internal.Product
+-- Module      : Gogol.Vision.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Vision.Internal.Product
+module Gogol.Vision.Internal.Product
   ( -- * AnnotateFileResponse
     AnnotateFileResponse (..),
     newAnnotateFileResponse,
@@ -1108,8 +1108,8 @@ module Network.Google.Vision.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Vision.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Internal.Sum
 
 -- | Response to a single file annotation request. A file may contain one or more images, which individually have their own responses.
 --
