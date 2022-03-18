@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudShell.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Environment_State
     Environment_State
-      (
-        Environment_State_STATEUNSPECIFIED,
+      ( Environment_State_STATEUNSPECIFIED,
         Environment_State_Suspended,
         Environment_State_Pending,
         Environment_State_Running,
@@ -56,30 +45,30 @@ module Gogol.CloudShell.Internal.Sum
 
     -- * StartEnvironmentMetadata_State
     StartEnvironmentMetadata_State
-      (
-        StartEnvironmentMetadata_State_STATEUNSPECIFIED,
+      ( StartEnvironmentMetadata_State_STATEUNSPECIFIED,
         StartEnvironmentMetadata_State_Starting,
         StartEnvironmentMetadata_State_UNARCHIVINGDISK,
         StartEnvironmentMetadata_State_AWAITINGCOMPUTERESOURCES,
         StartEnvironmentMetadata_State_Finished,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -92,20 +81,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Output only. Current execution state of this environment.
-newtype Environment_State = Environment_State { fromEnvironment_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Environment_State = Environment_State {fromEnvironment_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The environment\'s states is unknown.
 pattern Environment_State_STATEUNSPECIFIED :: Environment_State
@@ -133,20 +123,21 @@ pattern Environment_State_Deleting = Environment_State "DELETING"
   Environment_State_Pending,
   Environment_State_Running,
   Environment_State_Deleting,
-  Environment_State #-}
+  Environment_State
+  #-}
 
 -- | Current state of the environment being started.
-newtype StartEnvironmentMetadata_State = StartEnvironmentMetadata_State { fromStartEnvironmentMetadata_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StartEnvironmentMetadata_State = StartEnvironmentMetadata_State {fromStartEnvironmentMetadata_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The environment\'s start state is unknown.
 pattern StartEnvironmentMetadata_State_STATEUNSPECIFIED :: StartEnvironmentMetadata_State
@@ -174,4 +165,5 @@ pattern StartEnvironmentMetadata_State_Finished = StartEnvironmentMetadata_State
   StartEnvironmentMetadata_State_UNARCHIVINGDISK,
   StartEnvironmentMetadata_State_AWAITINGCOMPUTERESOURCES,
   StartEnvironmentMetadata_State_Finished,
-  StartEnvironmentMetadata_State #-}
+  StartEnvironmentMetadata_State
+  #-}

@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,129 +25,128 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudShell.Types
-    (
-    -- * Configuration
-      cloudShellService
+  ( -- * Configuration
+    cloudShellService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AddPublicKeyMetadata
-    , AddPublicKeyMetadata (..)
-    , newAddPublicKeyMetadata
+    AddPublicKeyMetadata (..),
+    newAddPublicKeyMetadata,
 
     -- ** AddPublicKeyRequest
-    , AddPublicKeyRequest (..)
-    , newAddPublicKeyRequest
+    AddPublicKeyRequest (..),
+    newAddPublicKeyRequest,
 
     -- ** AddPublicKeyResponse
-    , AddPublicKeyResponse (..)
-    , newAddPublicKeyResponse
+    AddPublicKeyResponse (..),
+    newAddPublicKeyResponse,
 
     -- ** AuthorizeEnvironmentMetadata
-    , AuthorizeEnvironmentMetadata (..)
-    , newAuthorizeEnvironmentMetadata
+    AuthorizeEnvironmentMetadata (..),
+    newAuthorizeEnvironmentMetadata,
 
     -- ** AuthorizeEnvironmentRequest
-    , AuthorizeEnvironmentRequest (..)
-    , newAuthorizeEnvironmentRequest
+    AuthorizeEnvironmentRequest (..),
+    newAuthorizeEnvironmentRequest,
 
     -- ** AuthorizeEnvironmentResponse
-    , AuthorizeEnvironmentResponse (..)
-    , newAuthorizeEnvironmentResponse
+    AuthorizeEnvironmentResponse (..),
+    newAuthorizeEnvironmentResponse,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** CreateEnvironmentMetadata
-    , CreateEnvironmentMetadata (..)
-    , newCreateEnvironmentMetadata
+    CreateEnvironmentMetadata (..),
+    newCreateEnvironmentMetadata,
 
     -- ** DeleteEnvironmentMetadata
-    , DeleteEnvironmentMetadata (..)
-    , newDeleteEnvironmentMetadata
+    DeleteEnvironmentMetadata (..),
+    newDeleteEnvironmentMetadata,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Environment
-    , Environment (..)
-    , newEnvironment
+    Environment (..),
+    newEnvironment,
 
     -- ** Environment_State
-    , Environment_State (..)
+    Environment_State (..),
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** RemovePublicKeyMetadata
-    , RemovePublicKeyMetadata (..)
-    , newRemovePublicKeyMetadata
+    RemovePublicKeyMetadata (..),
+    newRemovePublicKeyMetadata,
 
     -- ** RemovePublicKeyRequest
-    , RemovePublicKeyRequest (..)
-    , newRemovePublicKeyRequest
+    RemovePublicKeyRequest (..),
+    newRemovePublicKeyRequest,
 
     -- ** RemovePublicKeyResponse
-    , RemovePublicKeyResponse (..)
-    , newRemovePublicKeyResponse
+    RemovePublicKeyResponse (..),
+    newRemovePublicKeyResponse,
 
     -- ** StartEnvironmentMetadata
-    , StartEnvironmentMetadata (..)
-    , newStartEnvironmentMetadata
+    StartEnvironmentMetadata (..),
+    newStartEnvironmentMetadata,
 
     -- ** StartEnvironmentMetadata_State
-    , StartEnvironmentMetadata_State (..)
+    StartEnvironmentMetadata_State (..),
 
     -- ** StartEnvironmentRequest
-    , StartEnvironmentRequest (..)
-    , newStartEnvironmentRequest
+    StartEnvironmentRequest (..),
+    newStartEnvironmentRequest,
 
     -- ** StartEnvironmentResponse
-    , StartEnvironmentResponse (..)
-    , newStartEnvironmentResponse
+    StartEnvironmentResponse (..),
+    newStartEnvironmentResponse,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
-    ) where
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudShell.Internal.Product
 import Gogol.CloudShell.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Shell API. This contains the host and root path used as a starting point for constructing service requests.
 cloudShellService :: Core.ServiceConfig
-cloudShellService
-  = Core.defaultService
-      (Core.ServiceId "cloudshell:v1")
-      "cloudshell.googleapis.com"
+cloudShellService =
+  Core.defaultService
+    (Core.ServiceId "cloudshell:v1")
+    "cloudshell.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
