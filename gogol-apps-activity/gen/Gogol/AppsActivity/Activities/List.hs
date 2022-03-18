@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsActivity.Activities.List
+-- Module      : Gogol.AppsActivity.Activities.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a list of activities visible to the current logged in user. Visible activities are determined by the visibility settings of the object that was acted on, e.g. Drive files a user can see. An activity is a record of past events. Multiple events may be merged if they are similar. A request is scoped to activities from a given Google service using the source parameter.
 --
 -- /See:/ <https://developers.google.com/google-apps/activity/ Drive Activity API Reference> for @appsactivity.activities.list@.
-module Network.Google.AppsActivity.Activities.List
+module Gogol.AppsActivity.Activities.List
   ( -- * Resource
     AppsActivityActivitiesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsActivity.Activities.List
   )
 where
 
-import Network.Google.AppsActivity.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsActivity.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appsactivity.activities.list@ method which the
 -- 'AppsActivityActivitiesList' request conforms to.
