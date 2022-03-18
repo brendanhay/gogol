@@ -1,199 +1,169 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.IAP.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.IAP.Types
-    (
-    -- * Service Configuration
-      iAPService
+  ( -- * Configuration
+    iAPService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * ResourceLabels
-    , ResourceLabels
-    , resourceLabels
-    , rlAddtional
+    -- * Types
 
-    -- * PolicyDelegationSettings
-    , PolicyDelegationSettings
-    , policyDelegationSettings
-    , pdsIAMServiceName
-    , pdsPolicyName
-    , pdsIAMPermission
-    , pdsResource
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** AccessDeniedPageSettings
+    AccessDeniedPageSettings (..),
+    newAccessDeniedPageSettings,
 
-    -- * PolicyName
-    , PolicyName
-    , policyName
-    , pnId
-    , pnRegion
-    , pnType
+    -- ** AccessSettings
+    AccessSettings (..),
+    newAccessSettings,
 
-    -- * ApplicationSettings
-    , ApplicationSettings
-    , applicationSettings
-    , asCookieDomain
-    , asAccessDeniedPageSettings
-    , asCsmSettings
+    -- ** ApplicationSettings
+    ApplicationSettings (..),
+    newApplicationSettings,
 
-    -- * GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * IapSettings
-    , IapSettings
-    , iapSettings
-    , isApplicationSettings
-    , isAccessSettings
-    , isName
+    -- ** Brand
+    Brand (..),
+    newBrand,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** CorsSettings
+    CorsSettings (..),
+    newCorsSettings,
 
-    -- * GcipSettings
-    , GcipSettings
-    , gcipSettings
-    , gsTenantIds
-    , gsLoginPageURI
+    -- ** CsmSettings
+    CsmSettings (..),
+    newCsmSettings,
 
-    -- * IdentityAwareProxyClient
-    , IdentityAwareProxyClient
-    , identityAwareProxyClient
-    , iapcSecret
-    , iapcName
-    , iapcDisplayName
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Brand
-    , Brand
-    , brand
-    , bOrgInternalOnly
-    , bName
-    , bApplicationTitle
-    , bSupportEmail
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
+    -- ** GcipSettings
+    GcipSettings (..),
+    newGcipSettings,
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
-    -- * AccessSettings
-    , AccessSettings
-    , accessSettings
-    , asPolicyDelegationSettings
-    , asGcipSettings
-    , asOAuthSettings
-    , asCORSSettings
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
-    -- * ListBrandsResponse
-    , ListBrandsResponse
-    , listBrandsResponse
-    , lbrBrands
+    -- ** IapSettings
+    IapSettings (..),
+    newIapSettings,
 
-    -- * ListIdentityAwareProxyClientsResponse
-    , ListIdentityAwareProxyClientsResponse
-    , listIdentityAwareProxyClientsResponse
-    , liapcrNextPageToken
-    , liapcrIdentityAwareProxyClients
+    -- ** IdentityAwareProxyClient
+    IdentityAwareProxyClient (..),
+    newIdentityAwareProxyClient,
 
-    -- * Resource
-    , Resource
-    , resource
-    , rService
-    , rName
-    , rLabels
-    , rType
+    -- ** ListBrandsResponse
+    ListBrandsResponse (..),
+    newListBrandsResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ListIdentityAwareProxyClientsResponse
+    ListIdentityAwareProxyClientsResponse (..),
+    newListIdentityAwareProxyClientsResponse,
 
-    -- * OAuthSettings
-    , OAuthSettings
-    , oAuthSettings
-    , oasLoginHint
+    -- ** OAuthSettings
+    OAuthSettings (..),
+    newOAuthSettings,
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * AccessDeniedPageSettings
-    , AccessDeniedPageSettings
-    , accessDeniedPageSettings
-    , adpsGenerateTroubleshootingURI
-    , adpsAccessDeniedPageURI
+    -- ** PolicyDelegationSettings
+    PolicyDelegationSettings (..),
+    newPolicyDelegationSettings,
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** PolicyName
+    PolicyName (..),
+    newPolicyName,
 
-    -- * Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** ReauthSettings
+    ReauthSettings (..),
+    newReauthSettings,
 
-    -- * CsmSettings
-    , CsmSettings
-    , csmSettings
-    , csRctokenAud
+    -- ** ReauthSettings_Method
+    ReauthSettings_Method (..),
 
-    -- * CORSSettings
-    , CORSSettings
-    , corsSettings
-    , csAllowHTTPOptions
+    -- ** ReauthSettings_PolicyType
+    ReauthSettings_PolicyType (..),
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    -- ** ResetIdentityAwareProxyClientSecretRequest
+    ResetIdentityAwareProxyClientSecretRequest (..),
+    newResetIdentityAwareProxyClientSecretRequest,
 
-    -- * ResetIdentityAwareProxyClientSecretRequest
-    , ResetIdentityAwareProxyClientSecretRequest
-    , resetIdentityAwareProxyClientSecretRequest
-    ) where
+    -- ** Resource
+    Resource (..),
+    newResource,
 
-import Network.Google.IAP.Types.Product
-import Network.Google.IAP.Types.Sum
-import Network.Google.Prelude
+    -- ** Resource_Labels
+    Resource_Labels (..),
+    newResource_Labels,
 
--- | Default request referring to version 'v1' of the Cloud Identity-Aware Proxy API. This contains the host and root path used as a starting point for constructing service requests.
-iAPService :: ServiceConfig
-iAPService
-  = defaultService (ServiceId "iap:v1")
-      "iap.googleapis.com"
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+  )
+where
+
+import Network.Google.IAP.Internal.Product
+import Network.Google.IAP.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Identity-Aware Proxy API. This contains the host and root path used as a starting point for constructing service requests.
+iAPService :: Core.ServiceConfig
+iAPService =
+  Core.defaultService
+    (Core.ServiceId "iap:v1")
+    "iap.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
