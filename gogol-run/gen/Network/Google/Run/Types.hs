@@ -1,596 +1,279 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Run.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Run.Types
-    (
-    -- * Service Configuration
-      runService
+  ( -- * Configuration
+    runService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * ResourceRequirementsRequests
-    , ResourceRequirementsRequests
-    , resourceRequirementsRequests
-    , rrrAddtional
-
-    -- * ConfigMapKeySelector
-    , ConfigMapKeySelector
-    , configMapKeySelector
-    , cmksKey
-    , cmksName
-    , cmksLocalObjectReference
-    , cmksOptional
-
-    -- * SecretKeySelector
-    , SecretKeySelector
-    , secretKeySelector
-    , sksKey
-    , sksName
-    , sksLocalObjectReference
-    , sksOptional
-
-    -- * TCPSocketAction
-    , TCPSocketAction
-    , tcpSocketAction
-    , tsaHost
-    , tsaPort
-
-    -- * Status
-    , Status
-    , status
-    , sStatus
-    , sReason
-    , sDetails
-    , sMetadata
-    , sCode
-    , sMessage
-
-    -- * Addressable
-    , Addressable
-    , addressable
-    , aURL
-
-    -- * ObjectMetaAnnotations
-    , ObjectMetaAnnotations
-    , objectMetaAnnotations
-    , omaAddtional
-
-    -- * TrafficTarget
-    , TrafficTarget
-    , trafficTarget
-    , ttRevisionName
-    , ttConfigurationName
-    , ttTag
-    , ttLatestRevision
-    , ttURL
-    , ttPercent
-
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- * AuthorizedDomain
-    , AuthorizedDomain
-    , authorizedDomain
-    , adName
-    , adId
-
-    -- * DomainMAppingSpecCertificateMode
-    , DomainMAppingSpecCertificateMode (..)
-
-    -- * HTTPHeader
-    , HTTPHeader
-    , hTTPHeader
-    , httphValue
-    , httphName
-
-    -- * ListServicesResponse
-    , ListServicesResponse
-    , listServicesResponse
-    , lsrAPIVersion
-    , lsrKind
-    , lsrItems
-    , lsrUnreachable
-    , lsrMetadata
-
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- * ResourceRecord
-    , ResourceRecord
-    , resourceRecord
-    , rrRrData
-    , rrName
-    , rrType
-
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- * Probe
-    , Probe
-    , probe
-    , pSuccessThreshold
-    , pFailureThreshold
-    , pExec
-    , pTCPSocket
-    , pTimeoutSeconds
-    , pInitialDelaySeconds
-    , pHTTPGet
-    , pPeriodSeconds
-
-    -- * ListConfigurationsResponse
-    , ListConfigurationsResponse
-    , listConfigurationsResponse
-    , lcrAPIVersion
-    , lcrKind
-    , lcrItems
-    , lcrUnreachable
-    , lcrMetadata
-
-    -- * EnvVarSource
-    , EnvVarSource
-    , envVarSource
-    , evsConfigMapKeyRef
-    , evsSecretKeyRef
-
-    -- * Service
-    , Service
-    , service
-    , serStatus
-    , serAPIVersion
-    , serKind
-    , serSpec
-    , serMetadata
-
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- * StatusCause
-    , StatusCause
-    , statusCause
-    , scField
-    , scReason
-    , scMessage
-
-    -- * RouteStatus
-    , RouteStatus
-    , routeStatus
-    , rsObservedGeneration
-    , rsURL
-    , rsAddress
-    , rsTraffic
-    , rsConditions
-
-    -- * ConfigurationSpec
-    , ConfigurationSpec
-    , configurationSpec
-    , csTemplate
-
-    -- * GoogleCloudRunV1Condition
-    , GoogleCloudRunV1Condition
-    , googleCloudRunV1Condition
-    , gcrvcStatus
-    , gcrvcSeverity
-    , gcrvcReason
-    , gcrvcLastTransitionTime
-    , gcrvcType
-    , gcrvcMessage
-
-    -- * ListAuthorizedDomainsResponse
-    , ListAuthorizedDomainsResponse
-    , listAuthorizedDomainsResponse
-    , ladrNextPageToken
-    , ladrDomains
-
-    -- * ResourceRequirementsLimits
-    , ResourceRequirementsLimits
-    , resourceRequirementsLimits
-    , rrlAddtional
-
-    -- * Volume
-    , Volume
-    , volume
-    , vConfigMap
-    , vSecret
-    , vName
-
-    -- * ObjectMeta
-    , ObjectMeta
-    , objectMeta
-    , omGenerateName
-    , omAnnotations
-    , omDeletionTimestamp
-    , omUid
-    , omDeletionGracePeriodSeconds
-    , omResourceVersion
-    , omFinalizers
-    , omNamespace
-    , omOwnerReferences
-    , omSelfLink
-    , omName
-    , omCreationTimestamp
-    , omClusterName
-    , omLabels
-    , omGeneration
-
-    -- * ConfigMapVolumeSource
-    , ConfigMapVolumeSource
-    , configMapVolumeSource
-    , cmvsDefaultMode
-    , cmvsItems
-    , cmvsName
-    , cmvsOptional
-
-    -- * SecretVolumeSource
-    , SecretVolumeSource
-    , secretVolumeSource
-    , svsDefaultMode
-    , svsItems
-    , svsSecretName
-    , svsOptional
-
-    -- * ListRoutesResponse
-    , ListRoutesResponse
-    , listRoutesResponse
-    , lrrAPIVersion
-    , lrrKind
-    , lrrItems
-    , lrrUnreachable
-    , lrrMetadata
-
-    -- * RevisionTemplate
-    , RevisionTemplate
-    , revisionTemplate
-    , rtSpec
-    , rtMetadata
-
-    -- * StatusDetails
-    , StatusDetails
-    , statusDetails
-    , sdGroup
-    , sdCauses
-    , sdKind
-    , sdUid
-    , sdRetryAfterSeconds
-    , sdName
-
-    -- * ResourceRequirements
-    , ResourceRequirements
-    , resourceRequirements
-    , rrLimits
-    , rrRequests
-
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- * DomainMAppingSpec
-    , DomainMAppingSpec
-    , domainMAppingSpec
-    , dmasRouteName
-    , dmasCertificateMode
-    , dmasForceOverride
-
-    -- * Route
-    , Route
-    , route
-    , rStatus
-    , rAPIVersion
-    , rKind
-    , rSpec
-    , rMetadata
-
-    -- * SecurityContext
-    , SecurityContext
-    , securityContext
-    , scRunAsUser
-
-    -- * ServiceStatus
-    , ServiceStatus
-    , serviceStatus
-    , ssLatestCreatedRevisionName
-    , ssObservedGeneration
-    , ssURL
-    , ssAddress
-    , ssLatestReadyRevisionName
-    , ssTraffic
-    , ssConditions
-
-    -- * DomainMApping
-    , DomainMApping
-    , domainMApping
-    , dmaStatus
-    , dmaAPIVersion
-    , dmaKind
-    , dmaSpec
-    , dmaMetadata
-
-    -- * ConfigurationStatus
-    , ConfigurationStatus
-    , configurationStatus
-    , csLatestCreatedRevisionName
-    , csObservedGeneration
-    , csLatestReadyRevisionName
-    , csConditions
-
-    -- * RouteSpec
-    , RouteSpec
-    , routeSpec
-    , rTraffic
-
-    -- * RevisionStatus
-    , RevisionStatus
-    , revisionStatus
-    , rLogURL
-    , rObservedGeneration
-    , rImageDigest
-    , rServiceName
-    , rConditions
-
-    -- * Container
-    , Container
-    , container
-    , cLivenessProbe
-    , cImage
-    , cTerminationMessagePolicy
-    , cCommand
-    , cArgs
-    , cImagePullPolicy
-    , cReadinessProbe
-    , cEnv
-    , cVolumeMounts
-    , cWorkingDir
-    , cSecurityContext
-    , cResources
-    , cName
-    , cStartupProbe
-    , cTerminationMessagePath
-    , cPorts
-    , cEnvFrom
-
-    -- * ResourceRecordType
-    , ResourceRecordType (..)
-
-    -- * ListMeta
-    , ListMeta
-    , listMeta
-    , lmResourceVersion
-    , lmSelfLink
-    , lmContinue
-
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- * OwnerReference
-    , OwnerReference
-    , ownerReference
-    , orController
-    , orAPIVersion
-    , orKind
-    , orUid
-    , orBlockOwnerDeletion
-    , orName
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- * ExecAction
-    , ExecAction
-    , execAction
-    , eaCommand
-
-    -- * ObjectMetaLabels
-    , ObjectMetaLabels
-    , objectMetaLabels
-    , omlAddtional
-
-    -- * VolumeMount
-    , VolumeMount
-    , volumeMount
-    , vmSubPath
-    , vmName
-    , vmMountPath
-    , vmReadOnly
-
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- * DomainMAppingStatus
-    , DomainMAppingStatus
-    , domainMAppingStatus
-    , dmasResourceRecords
-    , dmasObservedGeneration
-    , dmasMAppedRouteName
-    , dmasURL
-    , dmasConditions
-
-    -- * EnvVar
-    , EnvVar
-    , envVar
-    , evValue
-    , evName
-    , evValueFrom
-
-    -- * ServiceSpec
-    , ServiceSpec
-    , serviceSpec
-    , sTraffic
-    , sTemplate
-
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- * HTTPGetAction
-    , HTTPGetAction
-    , hTTPGetAction
-    , httpgaHTTPHeaders
-    , httpgaPath
-    , httpgaScheme
-    , httpgaHost
-
-    -- * Configuration
-    , Configuration
-    , configuration
-    , cStatus
-    , cAPIVersion
-    , cKind
-    , cSpec
-    , cMetadata
-
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
-
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
-
-    -- * LocalObjectReference
-    , LocalObjectReference
-    , localObjectReference
-    , lorName
-
-    -- * Revision
-    , Revision
-    , revision
-    , revStatus
-    , revAPIVersion
-    , revKind
-    , revSpec
-    , revMetadata
-
-    -- * EnvFromSource
-    , EnvFromSource
-    , envFromSource
-    , efsConfigMapRef
-    , efsSecretRef
-    , efsPrefix
-
-    -- * RevisionSpec
-    , RevisionSpec
-    , revisionSpec
-    , rsServiceAccountName
-    , rsContainers
-    , rsContainerConcurrency
-    , rsTimeoutSeconds
-    , rsVolumes
-
-    -- * ConfigMapEnvSource
-    , ConfigMapEnvSource
-    , configMapEnvSource
-    , cmesName
-    , cmesLocalObjectReference
-    , cmesOptional
-
-    -- * SecretEnvSource
-    , SecretEnvSource
-    , secretEnvSource
-    , sesName
-    , sesLocalObjectReference
-    , sesOptional
-
-    -- * ListDomainMAppingsResponse
-    , ListDomainMAppingsResponse
-    , listDomainMAppingsResponse
-    , ldmarAPIVersion
-    , ldmarKind
-    , ldmarItems
-    , ldmarUnreachable
-    , ldmarMetadata
-
-    -- * ContainerPort
-    , ContainerPort
-    , containerPort
-    , cpProtocol
-    , cpName
-    , cpContainerPort
-
-    -- * ListRevisionsResponse
-    , ListRevisionsResponse
-    , listRevisionsResponse
-    , lisAPIVersion
-    , lisKind
-    , lisItems
-    , lisUnreachable
-    , lisMetadata
-
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-
-    -- * KeyToPath
-    , KeyToPath
-    , keyToPath
-    , ktpPath
-    , ktpMode
-    , ktpKey
-    ) where
-
-import Network.Google.Prelude
-import Network.Google.Run.Types.Product
-import Network.Google.Run.Types.Sum
-
--- | Default request referring to version 'v1' of the Cloud Run Admin API. This contains the host and root path used as a starting point for constructing service requests.
-runService :: ServiceConfig
-runService
-  = defaultService (ServiceId "run:v1")
-      "run.googleapis.com"
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    cloudPlatformScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** GoogleCloudRunV2BinaryAuthorization
+    GoogleCloudRunV2BinaryAuthorization (..),
+    newGoogleCloudRunV2BinaryAuthorization,
+
+    -- ** GoogleCloudRunV2CloudSqlInstance
+    GoogleCloudRunV2CloudSqlInstance (..),
+    newGoogleCloudRunV2CloudSqlInstance,
+
+    -- ** GoogleCloudRunV2Condition
+    GoogleCloudRunV2Condition (..),
+    newGoogleCloudRunV2Condition,
+
+    -- ** GoogleCloudRunV2Condition_DomainMappingReason
+    GoogleCloudRunV2Condition_DomainMappingReason (..),
+
+    -- ** GoogleCloudRunV2Condition_ExecutionReason
+    GoogleCloudRunV2Condition_ExecutionReason (..),
+
+    -- ** GoogleCloudRunV2Condition_InternalReason
+    GoogleCloudRunV2Condition_InternalReason (..),
+
+    -- ** GoogleCloudRunV2Condition_Reason
+    GoogleCloudRunV2Condition_Reason (..),
+
+    -- ** GoogleCloudRunV2Condition_RevisionReason
+    GoogleCloudRunV2Condition_RevisionReason (..),
+
+    -- ** GoogleCloudRunV2Condition_Severity
+    GoogleCloudRunV2Condition_Severity (..),
+
+    -- ** GoogleCloudRunV2Condition_State
+    GoogleCloudRunV2Condition_State (..),
+
+    -- ** GoogleCloudRunV2Container
+    GoogleCloudRunV2Container (..),
+    newGoogleCloudRunV2Container,
+
+    -- ** GoogleCloudRunV2ContainerPort
+    GoogleCloudRunV2ContainerPort (..),
+    newGoogleCloudRunV2ContainerPort,
+
+    -- ** GoogleCloudRunV2EnvVar
+    GoogleCloudRunV2EnvVar (..),
+    newGoogleCloudRunV2EnvVar,
+
+    -- ** GoogleCloudRunV2EnvVarSource
+    GoogleCloudRunV2EnvVarSource (..),
+    newGoogleCloudRunV2EnvVarSource,
+
+    -- ** GoogleCloudRunV2ListRevisionsResponse
+    GoogleCloudRunV2ListRevisionsResponse (..),
+    newGoogleCloudRunV2ListRevisionsResponse,
+
+    -- ** GoogleCloudRunV2ListServicesResponse
+    GoogleCloudRunV2ListServicesResponse (..),
+    newGoogleCloudRunV2ListServicesResponse,
+
+    -- ** GoogleCloudRunV2ResourceRequirements
+    GoogleCloudRunV2ResourceRequirements (..),
+    newGoogleCloudRunV2ResourceRequirements,
+
+    -- ** GoogleCloudRunV2ResourceRequirements_Limits
+    GoogleCloudRunV2ResourceRequirements_Limits (..),
+    newGoogleCloudRunV2ResourceRequirements_Limits,
+
+    -- ** GoogleCloudRunV2Revision
+    GoogleCloudRunV2Revision (..),
+    newGoogleCloudRunV2Revision,
+
+    -- ** GoogleCloudRunV2Revision_Annotations
+    GoogleCloudRunV2Revision_Annotations (..),
+    newGoogleCloudRunV2Revision_Annotations,
+
+    -- ** GoogleCloudRunV2Revision_ExecutionEnvironment
+    GoogleCloudRunV2Revision_ExecutionEnvironment (..),
+
+    -- ** GoogleCloudRunV2Revision_Labels
+    GoogleCloudRunV2Revision_Labels (..),
+    newGoogleCloudRunV2Revision_Labels,
+
+    -- ** GoogleCloudRunV2Revision_LaunchStage
+    GoogleCloudRunV2Revision_LaunchStage (..),
+
+    -- ** GoogleCloudRunV2RevisionScaling
+    GoogleCloudRunV2RevisionScaling (..),
+    newGoogleCloudRunV2RevisionScaling,
+
+    -- ** GoogleCloudRunV2RevisionTemplate
+    GoogleCloudRunV2RevisionTemplate (..),
+    newGoogleCloudRunV2RevisionTemplate,
+
+    -- ** GoogleCloudRunV2RevisionTemplate_Annotations
+    GoogleCloudRunV2RevisionTemplate_Annotations (..),
+    newGoogleCloudRunV2RevisionTemplate_Annotations,
+
+    -- ** GoogleCloudRunV2RevisionTemplate_ExecutionEnvironment
+    GoogleCloudRunV2RevisionTemplate_ExecutionEnvironment (..),
+
+    -- ** GoogleCloudRunV2RevisionTemplate_Labels
+    GoogleCloudRunV2RevisionTemplate_Labels (..),
+    newGoogleCloudRunV2RevisionTemplate_Labels,
+
+    -- ** GoogleCloudRunV2SecretKeySelector
+    GoogleCloudRunV2SecretKeySelector (..),
+    newGoogleCloudRunV2SecretKeySelector,
+
+    -- ** GoogleCloudRunV2SecretVolumeSource
+    GoogleCloudRunV2SecretVolumeSource (..),
+    newGoogleCloudRunV2SecretVolumeSource,
+
+    -- ** GoogleCloudRunV2Service
+    GoogleCloudRunV2Service (..),
+    newGoogleCloudRunV2Service,
+
+    -- ** GoogleCloudRunV2Service_Annotations
+    GoogleCloudRunV2Service_Annotations (..),
+    newGoogleCloudRunV2Service_Annotations,
+
+    -- ** GoogleCloudRunV2Service_Ingress
+    GoogleCloudRunV2Service_Ingress (..),
+
+    -- ** GoogleCloudRunV2Service_Labels
+    GoogleCloudRunV2Service_Labels (..),
+    newGoogleCloudRunV2Service_Labels,
+
+    -- ** GoogleCloudRunV2Service_LaunchStage
+    GoogleCloudRunV2Service_LaunchStage (..),
+
+    -- ** GoogleCloudRunV2TrafficTarget
+    GoogleCloudRunV2TrafficTarget (..),
+    newGoogleCloudRunV2TrafficTarget,
+
+    -- ** GoogleCloudRunV2TrafficTarget_Type
+    GoogleCloudRunV2TrafficTarget_Type (..),
+
+    -- ** GoogleCloudRunV2TrafficTargetStatus
+    GoogleCloudRunV2TrafficTargetStatus (..),
+    newGoogleCloudRunV2TrafficTargetStatus,
+
+    -- ** GoogleCloudRunV2TrafficTargetStatus_Type
+    GoogleCloudRunV2TrafficTargetStatus_Type (..),
+
+    -- ** GoogleCloudRunV2VersionToPath
+    GoogleCloudRunV2VersionToPath (..),
+    newGoogleCloudRunV2VersionToPath,
+
+    -- ** GoogleCloudRunV2Volume
+    GoogleCloudRunV2Volume (..),
+    newGoogleCloudRunV2Volume,
+
+    -- ** GoogleCloudRunV2VolumeMount
+    GoogleCloudRunV2VolumeMount (..),
+    newGoogleCloudRunV2VolumeMount,
+
+    -- ** GoogleCloudRunV2VpcAccess
+    GoogleCloudRunV2VpcAccess (..),
+    newGoogleCloudRunV2VpcAccess,
+
+    -- ** GoogleCloudRunV2VpcAccess_Egress
+    GoogleCloudRunV2VpcAccess_Egress (..),
+
+    -- ** GoogleIamV1AuditConfig
+    GoogleIamV1AuditConfig (..),
+    newGoogleIamV1AuditConfig,
+
+    -- ** GoogleIamV1AuditLogConfig
+    GoogleIamV1AuditLogConfig (..),
+    newGoogleIamV1AuditLogConfig,
+
+    -- ** GoogleIamV1AuditLogConfig_LogType
+    GoogleIamV1AuditLogConfig_LogType (..),
+
+    -- ** GoogleIamV1Binding
+    GoogleIamV1Binding (..),
+    newGoogleIamV1Binding,
+
+    -- ** GoogleIamV1Policy
+    GoogleIamV1Policy (..),
+    newGoogleIamV1Policy,
+
+    -- ** GoogleIamV1SetIamPolicyRequest
+    GoogleIamV1SetIamPolicyRequest (..),
+    newGoogleIamV1SetIamPolicyRequest,
+
+    -- ** GoogleIamV1TestIamPermissionsRequest
+    GoogleIamV1TestIamPermissionsRequest (..),
+    newGoogleIamV1TestIamPermissionsRequest,
+
+    -- ** GoogleIamV1TestIamPermissionsResponse
+    GoogleIamV1TestIamPermissionsResponse (..),
+    newGoogleIamV1TestIamPermissionsResponse,
+
+    -- ** GoogleLongrunningListOperationsResponse
+    GoogleLongrunningListOperationsResponse (..),
+    newGoogleLongrunningListOperationsResponse,
+
+    -- ** GoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
+
+    -- ** GoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
+
+    -- ** GoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
+
+    -- ** GoogleProtobufEmpty
+    GoogleProtobufEmpty (..),
+    newGoogleProtobufEmpty,
+
+    -- ** GoogleRpcStatus
+    GoogleRpcStatus (..),
+    newGoogleRpcStatus,
+
+    -- ** GoogleRpcStatus_DetailsItem
+    GoogleRpcStatus_DetailsItem (..),
+    newGoogleRpcStatus_DetailsItem,
+
+    -- ** GoogleTypeExpr
+    GoogleTypeExpr (..),
+    newGoogleTypeExpr,
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.Run.Internal.Product
+import Network.Google.Run.Internal.Sum
+
+-- | Default request referring to version @v2@ of the Cloud Run Admin API. This contains the host and root path used as a starting point for constructing service requests.
+runService :: Core.ServiceConfig
+runService =
+  Core.defaultService
+    (Core.ServiceId "run:v2")
+    "run.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
