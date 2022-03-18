@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.Internal.Product
+-- Module      : Gogol.DoubleClickSearch.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.DoubleClickSearch.Internal.Product
+module Gogol.DoubleClickSearch.Internal.Product
   ( -- * Availability
     Availability (..),
     newAvailability,
@@ -100,8 +100,8 @@ module Network.Google.DoubleClickSearch.Internal.Product
   )
 where
 
-import Network.Google.DoubleClickSearch.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | A message containing availability data relevant to DoubleClick Search.
 --

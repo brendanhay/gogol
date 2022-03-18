@@ -19,48 +19,48 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickSearch.Reports.Request
+-- Module      : Gogol.DoubleClickSearch.Conversion.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts a report request into the reporting system.
+-- Updates a batch of conversions in DoubleClick Search.
 --
--- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.reports.request@.
-module Network.Google.DoubleClickSearch.Reports.Request
+-- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.conversion.update@.
+module Gogol.DoubleClickSearch.Conversion.Update
   ( -- * Resource
-    DoubleClickSearchReportsRequestResource,
+    DoubleClickSearchConversionUpdateResource,
 
     -- ** Constructing a Request
-    newDoubleClickSearchReportsRequest,
-    DoubleClickSearchReportsRequest,
+    newDoubleClickSearchConversionUpdate,
+    DoubleClickSearchConversionUpdate,
   )
 where
 
-import Network.Google.DoubleClickSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclicksearch.reports.request@ method which the
--- 'DoubleClickSearchReportsRequest' request conforms to.
-type DoubleClickSearchReportsRequestResource =
+-- | A resource alias for @doubleclicksearch.conversion.update@ method which the
+-- 'DoubleClickSearchConversionUpdate' request conforms to.
+type DoubleClickSearchConversionUpdateResource =
   "doubleclicksearch"
     Core.:> "v2"
-    Core.:> "reports"
+    Core.:> "conversion"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ReportRequest
-    Core.:> Core.Post '[Core.JSON] Report
+    Core.:> Core.ReqBody '[Core.JSON] ConversionList
+    Core.:> Core.Put '[Core.JSON] ConversionList
 
--- | Inserts a report request into the reporting system.
+-- | Updates a batch of conversions in DoubleClick Search.
 --
--- /See:/ 'newDoubleClickSearchReportsRequest' smart constructor.
-data DoubleClickSearchReportsRequest = DoubleClickSearchReportsRequest
+-- /See:/ 'newDoubleClickSearchConversionUpdate' smart constructor.
+data DoubleClickSearchConversionUpdate = DoubleClickSearchConversionUpdate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +68,7 @@ data DoubleClickSearchReportsRequest = DoubleClickSearchReportsRequest
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: ReportRequest,
+    payload :: ConversionList,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -76,13 +76,13 @@ data DoubleClickSearchReportsRequest = DoubleClickSearchReportsRequest
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleClickSearchReportsRequest' with the minimum fields required to make a request.
-newDoubleClickSearchReportsRequest ::
+-- | Creates a value of 'DoubleClickSearchConversionUpdate' with the minimum fields required to make a request.
+newDoubleClickSearchConversionUpdate ::
   -- |  Multipart request metadata. See 'payload'.
-  ReportRequest ->
-  DoubleClickSearchReportsRequest
-newDoubleClickSearchReportsRequest payload =
-  DoubleClickSearchReportsRequest
+  ConversionList ->
+  DoubleClickSearchConversionUpdate
+newDoubleClickSearchConversionUpdate payload =
+  DoubleClickSearchConversionUpdate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -93,13 +93,15 @@ newDoubleClickSearchReportsRequest payload =
 
 instance
   Core.GoogleRequest
-    DoubleClickSearchReportsRequest
+    DoubleClickSearchConversionUpdate
   where
-  type Rs DoubleClickSearchReportsRequest = Report
   type
-    Scopes DoubleClickSearchReportsRequest =
+    Rs DoubleClickSearchConversionUpdate =
+      ConversionList
+  type
+    Scopes DoubleClickSearchConversionUpdate =
       '["https://www.googleapis.com/auth/doubleclicksearch"]
-  requestClient DoubleClickSearchReportsRequest {..} =
+  requestClient DoubleClickSearchConversionUpdate {..} =
     go
       xgafv
       accessToken
@@ -113,6 +115,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DoubleClickSearchReportsRequestResource
+              Core.Proxy DoubleClickSearchConversionUpdateResource
           )
           Core.mempty
