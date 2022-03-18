@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Admin.Reports.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * ActivitiesListApplicationName
     ActivitiesListApplicationName
-      ( ActivitiesListApplicationName_AccessTransparency,
+      (
+        ActivitiesListApplicationName_AccessTransparency,
         ActivitiesListApplicationName_Admin,
         ActivitiesListApplicationName_Calendar,
         ActivitiesListApplicationName_Chat,
@@ -61,7 +72,8 @@ module Gogol.Admin.Reports.Internal.Sum
 
     -- * ActivitiesWatchApplicationName
     ActivitiesWatchApplicationName
-      ( ActivitiesWatchApplicationName_AccessTransparency,
+      (
+        ActivitiesWatchApplicationName_AccessTransparency,
         ActivitiesWatchApplicationName_Admin,
         ActivitiesWatchApplicationName_Calendar,
         ActivitiesWatchApplicationName_Chat,
@@ -87,26 +99,26 @@ module Gogol.Admin.Reports.Internal.Sum
 
     -- * EntityUsageReportsGetEntityType
     EntityUsageReportsGetEntityType
-      ( EntityUsageReportsGetEntityType_GplusCommunities,
+      (
+        EntityUsageReportsGetEntityType_GplusCommunities,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -119,21 +131,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Application name for which the events are to be retrieved.
-newtype ActivitiesListApplicationName = ActivitiesListApplicationName {fromActivitiesListApplicationName :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ActivitiesListApplicationName = ActivitiesListApplicationName { fromActivitiesListApplicationName :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The Google Workspace Access Transparency activity reports return information about different types of Access Transparency activity events.
 pattern ActivitiesListApplicationName_AccessTransparency :: ActivitiesListApplicationName
@@ -241,21 +252,20 @@ pattern ActivitiesListApplicationName_Keep = ActivitiesListApplicationName "keep
   ActivitiesListApplicationName_Chrome,
   ActivitiesListApplicationName_DataStudio,
   ActivitiesListApplicationName_Keep,
-  ActivitiesListApplicationName
-  #-}
+  ActivitiesListApplicationName #-}
 
 -- | Application name for which the events are to be retrieved.
-newtype ActivitiesWatchApplicationName = ActivitiesWatchApplicationName {fromActivitiesWatchApplicationName :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ActivitiesWatchApplicationName = ActivitiesWatchApplicationName { fromActivitiesWatchApplicationName :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The Google Workspace Access Transparency activity reports return information about different types of Access Transparency activity events.
 pattern ActivitiesWatchApplicationName_AccessTransparency :: ActivitiesWatchApplicationName
@@ -363,21 +373,20 @@ pattern ActivitiesWatchApplicationName_Keep = ActivitiesWatchApplicationName "ke
   ActivitiesWatchApplicationName_Chrome,
   ActivitiesWatchApplicationName_DataStudio,
   ActivitiesWatchApplicationName_Keep,
-  ActivitiesWatchApplicationName
-  #-}
+  ActivitiesWatchApplicationName #-}
 
 -- | Represents the type of entity for the report.
-newtype EntityUsageReportsGetEntityType = EntityUsageReportsGetEntityType {fromEntityUsageReportsGetEntityType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EntityUsageReportsGetEntityType = EntityUsageReportsGetEntityType { fromEntityUsageReportsGetEntityType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Returns a report on Google+ communities.
 pattern EntityUsageReportsGetEntityType_GplusCommunities :: EntityUsageReportsGetEntityType
@@ -385,5 +394,4 @@ pattern EntityUsageReportsGetEntityType_GplusCommunities = EntityUsageReportsGet
 
 {-# COMPLETE
   EntityUsageReportsGetEntityType_GplusCommunities,
-  EntityUsageReportsGetEntityType
-  #-}
+  EntityUsageReportsGetEntityType #-}
