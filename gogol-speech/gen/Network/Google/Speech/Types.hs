@@ -1,114 +1,99 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Speech.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Speech.Types
-    (
-    -- * Service Configuration
-      speechService
+  ( -- * Configuration
+    speechService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * LongRunningRecognizeMetadata
-    , LongRunningRecognizeMetadata
-    , longRunningRecognizeMetadata
-    , lrrmStartTime
-    , lrrmURI
-    , lrrmProgressPercent
-    , lrrmLastUpdateTime
+    -- * Types
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** LongRunningRecognizeMetadata
+    LongRunningRecognizeMetadata (..),
+    newLongRunningRecognizeMetadata,
 
-    -- * SpeechRecognitionAlternative
-    , SpeechRecognitionAlternative
-    , speechRecognitionAlternative
-    , sraConfidence
-    , sraWords
-    , sraTranscript
+    -- ** LongRunningRecognizeResponse
+    LongRunningRecognizeResponse (..),
+    newLongRunningRecognizeResponse,
 
-    -- * WordInfo
-    , WordInfo
-    , wordInfo
-    , wiStartOffSet
-    , wiConfidence
-    , wiEndOffSet
-    , wiWord
-    , wiSpeakerTag
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * SpeechRecognitionResult
-    , SpeechRecognitionResult
-    , speechRecognitionResult
-    , srrAlternatives
-    , srrLanguageCode
-    , srrChannelTag
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** SpeechRecognitionAlternative
+    SpeechRecognitionAlternative (..),
+    newSpeechRecognitionAlternative,
 
-    -- * LongRunningRecognizeResponse
-    , LongRunningRecognizeResponse
-    , longRunningRecognizeResponse
-    , lrrrResults
+    -- ** SpeechRecognitionResult
+    SpeechRecognitionResult (..),
+    newSpeechRecognitionResult,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-    ) where
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-import Network.Google.Prelude
-import Network.Google.Speech.Types.Product
-import Network.Google.Speech.Types.Sum
+    -- ** WordInfo
+    WordInfo (..),
+    newWordInfo,
+  )
+where
 
--- | Default request referring to version 'v2beta1' of the Cloud Speech-to-Text API. This contains the host and root path used as a starting point for constructing service requests.
-speechService :: ServiceConfig
-speechService
-  = defaultService (ServiceId "speech:v2beta1")
-      "speech.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.Speech.Internal.Product
+import Network.Google.Speech.Internal.Sum
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v2beta1@ of the Cloud Speech-to-Text API. This contains the host and root path used as a starting point for constructing service requests.
+speechService :: Core.ServiceConfig
+speechService =
+  Core.defaultService
+    (Core.ServiceId "speech:v2beta1")
+    "speech.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
