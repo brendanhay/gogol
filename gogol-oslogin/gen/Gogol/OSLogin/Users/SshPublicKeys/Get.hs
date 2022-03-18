@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OSLogin.Users.SshPublicKeys.Get
+-- Module      : Gogol.OSLogin.Users.SshPublicKeys.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves an SSH public key.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.get@.
-module Network.Google.OSLogin.Users.SshPublicKeys.Get
+module Gogol.OSLogin.Users.SshPublicKeys.Get
   ( -- * Resource
     OSLoginUsersSshPublicKeysGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.OSLogin.Users.SshPublicKeys.Get
   )
 where
 
-import Network.Google.OSLogin.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.OSLogin.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @oslogin.users.sshPublicKeys.get@ method which the
 -- 'OSLoginUsersSshPublicKeysGet' request conforms to.

@@ -19,60 +19,63 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OSLogin.Users.SshPublicKeys.Patch
+-- Module      : Gogol.OSLogin.Users.ImportSshPublicKey
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an SSH public key and returns the profile information. This method supports patch semantics.
+-- Adds an SSH public key and returns the profile information. Default POSIX account information is set when no username and UID exist as part of the login profile.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.patch@.
-module Network.Google.OSLogin.Users.SshPublicKeys.Patch
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.importSshPublicKey@.
+module Gogol.OSLogin.Users.ImportSshPublicKey
   ( -- * Resource
-    OSLoginUsersSshPublicKeysPatchResource,
+    OSLoginUsersImportSshPublicKeyResource,
 
     -- ** Constructing a Request
-    newOSLoginUsersSshPublicKeysPatch,
-    OSLoginUsersSshPublicKeysPatch,
+    newOSLoginUsersImportSshPublicKey,
+    OSLoginUsersImportSshPublicKey,
   )
 where
 
-import Network.Google.OSLogin.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.OSLogin.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @oslogin.users.sshPublicKeys.patch@ method which the
--- 'OSLoginUsersSshPublicKeysPatch' request conforms to.
-type OSLoginUsersSshPublicKeysPatchResource =
+-- | A resource alias for @oslogin.users.importSshPublicKey@ method which the
+-- 'OSLoginUsersImportSshPublicKey' request conforms to.
+type OSLoginUsersImportSshPublicKeyResource =
   "v1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.CaptureMode
+              "parent"
+              "importSshPublicKey"
+              Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "projectId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] SshPublicKey
-    Core.:> Core.Patch '[Core.JSON] SshPublicKey
+    Core.:> Core.Post '[Core.JSON] ImportSshPublicKeyResponse
 
--- | Updates an SSH public key and returns the profile information. This method supports patch semantics.
+-- | Adds an SSH public key and returns the profile information. Default POSIX account information is set when no username and UID exist as part of the login profile.
 --
--- /See:/ 'newOSLoginUsersSshPublicKeysPatch' smart constructor.
-data OSLoginUsersSshPublicKeysPatch = OSLoginUsersSshPublicKeysPatch
+-- /See:/ 'newOSLoginUsersImportSshPublicKey' smart constructor.
+data OSLoginUsersImportSshPublicKey = OSLoginUsersImportSshPublicKey
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format @users\/{user}\/sshPublicKeys\/{fingerprint}@.
-    name :: Core.Text,
+    -- | Required. The unique ID for the user in format @users\/{user}@.
+    parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: SshPublicKey,
-    -- | Mask to control which fields get updated. Updates all if not present.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    -- | The project ID of the Google Cloud Platform project.
+    projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,42 +83,44 @@ data OSLoginUsersSshPublicKeysPatch = OSLoginUsersSshPublicKeysPatch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'OSLoginUsersSshPublicKeysPatch' with the minimum fields required to make a request.
-newOSLoginUsersSshPublicKeysPatch ::
-  -- |  Required. The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format @users\/{user}\/sshPublicKeys\/{fingerprint}@. See 'name'.
+-- | Creates a value of 'OSLoginUsersImportSshPublicKey' with the minimum fields required to make a request.
+newOSLoginUsersImportSshPublicKey ::
+  -- |  Required. The unique ID for the user in format @users\/{user}@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   SshPublicKey ->
-  OSLoginUsersSshPublicKeysPatch
-newOSLoginUsersSshPublicKeysPatch name payload =
-  OSLoginUsersSshPublicKeysPatch
+  OSLoginUsersImportSshPublicKey
+newOSLoginUsersImportSshPublicKey parent payload =
+  OSLoginUsersImportSshPublicKey
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
+      parent = parent,
       payload = payload,
-      updateMask = Core.Nothing,
+      projectId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    OSLoginUsersSshPublicKeysPatch
+    OSLoginUsersImportSshPublicKey
   where
-  type Rs OSLoginUsersSshPublicKeysPatch = SshPublicKey
   type
-    Scopes OSLoginUsersSshPublicKeysPatch =
+    Rs OSLoginUsersImportSshPublicKey =
+      ImportSshPublicKeyResponse
+  type
+    Scopes OSLoginUsersImportSshPublicKey =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/compute"
        ]
-  requestClient OSLoginUsersSshPublicKeysPatch {..} =
+  requestClient OSLoginUsersImportSshPublicKey {..} =
     go
-      name
+      parent
       xgafv
       accessToken
       callback
-      updateMask
+      projectId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -125,6 +130,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy OSLoginUsersSshPublicKeysPatchResource
+              Core.Proxy OSLoginUsersImportSshPublicKeyResource
           )
           Core.mempty

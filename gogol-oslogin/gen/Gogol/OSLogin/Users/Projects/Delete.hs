@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OSLogin.Users.SshPublicKeys.Delete
+-- Module      : Gogol.OSLogin.Users.Projects.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an SSH public key.
+-- Deletes a POSIX account.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.delete@.
-module Network.Google.OSLogin.Users.SshPublicKeys.Delete
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.projects.delete@.
+module Gogol.OSLogin.Users.Projects.Delete
   ( -- * Resource
-    OSLoginUsersSshPublicKeysDeleteResource,
+    OSLoginUsersProjectsDeleteResource,
 
     -- ** Constructing a Request
-    newOSLoginUsersSshPublicKeysDelete,
-    OSLoginUsersSshPublicKeysDelete,
+    newOSLoginUsersProjectsDelete,
+    OSLoginUsersProjectsDelete,
   )
 where
 
-import Network.Google.OSLogin.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.OSLogin.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @oslogin.users.sshPublicKeys.delete@ method which the
--- 'OSLoginUsersSshPublicKeysDelete' request conforms to.
-type OSLoginUsersSshPublicKeysDeleteResource =
+-- | A resource alias for @oslogin.users.projects.delete@ method which the
+-- 'OSLoginUsersProjectsDelete' request conforms to.
+type OSLoginUsersProjectsDeleteResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -55,17 +55,17 @@ type OSLoginUsersSshPublicKeysDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes an SSH public key.
+-- | Deletes a POSIX account.
 --
--- /See:/ 'newOSLoginUsersSshPublicKeysDelete' smart constructor.
-data OSLoginUsersSshPublicKeysDelete = OSLoginUsersSshPublicKeysDelete
+-- /See:/ 'newOSLoginUsersProjectsDelete' smart constructor.
+data OSLoginUsersProjectsDelete = OSLoginUsersProjectsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format @users\/{user}\/sshPublicKeys\/{fingerprint}@.
+    -- | Required. A reference to the POSIX account to update. POSIX accounts are identified by the project ID they are associated with. A reference to the POSIX account is in format @users\/{user}\/projects\/{project}@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data OSLoginUsersSshPublicKeysDelete = OSLoginUsersSshPublicKeysDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'OSLoginUsersSshPublicKeysDelete' with the minimum fields required to make a request.
-newOSLoginUsersSshPublicKeysDelete ::
-  -- |  Required. The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format @users\/{user}\/sshPublicKeys\/{fingerprint}@. See 'name'.
+-- | Creates a value of 'OSLoginUsersProjectsDelete' with the minimum fields required to make a request.
+newOSLoginUsersProjectsDelete ::
+  -- |  Required. A reference to the POSIX account to update. POSIX accounts are identified by the project ID they are associated with. A reference to the POSIX account is in format @users\/{user}\/projects\/{project}@. See 'name'.
   Core.Text ->
-  OSLoginUsersSshPublicKeysDelete
-newOSLoginUsersSshPublicKeysDelete name =
-  OSLoginUsersSshPublicKeysDelete
+  OSLoginUsersProjectsDelete
+newOSLoginUsersProjectsDelete name =
+  OSLoginUsersProjectsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,15 +91,15 @@ newOSLoginUsersSshPublicKeysDelete name =
 
 instance
   Core.GoogleRequest
-    OSLoginUsersSshPublicKeysDelete
+    OSLoginUsersProjectsDelete
   where
-  type Rs OSLoginUsersSshPublicKeysDelete = Empty
+  type Rs OSLoginUsersProjectsDelete = Empty
   type
-    Scopes OSLoginUsersSshPublicKeysDelete =
+    Scopes OSLoginUsersProjectsDelete =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/compute"
        ]
-  requestClient OSLoginUsersSshPublicKeysDelete {..} =
+  requestClient OSLoginUsersProjectsDelete {..} =
     go
       name
       xgafv
@@ -113,6 +113,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy OSLoginUsersSshPublicKeysDeleteResource
+              Core.Proxy OSLoginUsersProjectsDeleteResource
           )
           Core.mempty
