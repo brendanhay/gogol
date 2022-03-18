@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,1717 +31,1718 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ShoppingContent.Types
-  ( -- * Configuration
-    shoppingContentService,
+    (
+    -- * Configuration
+      shoppingContentService
 
     -- * OAuth Scopes
-    contentScope,
+    , contentScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Account
-    Account (..),
-    newAccount,
+    , Account (..)
+    , newAccount
 
     -- ** AccountAddress
-    AccountAddress (..),
-    newAccountAddress,
+    , AccountAddress (..)
+    , newAccountAddress
 
     -- ** AccountAdsLink
-    AccountAdsLink (..),
-    newAccountAdsLink,
+    , AccountAdsLink (..)
+    , newAccountAdsLink
 
     -- ** AccountAutomaticImprovements
-    AccountAutomaticImprovements (..),
-    newAccountAutomaticImprovements,
+    , AccountAutomaticImprovements (..)
+    , newAccountAutomaticImprovements
 
     -- ** AccountBusinessInformation
-    AccountBusinessInformation (..),
-    newAccountBusinessInformation,
+    , AccountBusinessInformation (..)
+    , newAccountBusinessInformation
 
     -- ** AccountCredentials
-    AccountCredentials (..),
-    newAccountCredentials,
+    , AccountCredentials (..)
+    , newAccountCredentials
 
     -- ** AccountCredentials_Purpose
-    AccountCredentials_Purpose (..),
+    , AccountCredentials_Purpose (..)
 
     -- ** AccountCustomerService
-    AccountCustomerService (..),
-    newAccountCustomerService,
+    , AccountCustomerService (..)
+    , newAccountCustomerService
 
     -- ** AccountGoogleMyBusinessLink
-    AccountGoogleMyBusinessLink (..),
-    newAccountGoogleMyBusinessLink,
+    , AccountGoogleMyBusinessLink (..)
+    , newAccountGoogleMyBusinessLink
 
     -- ** AccountIdentifier
-    AccountIdentifier (..),
-    newAccountIdentifier,
+    , AccountIdentifier (..)
+    , newAccountIdentifier
 
     -- ** AccountImageImprovements
-    AccountImageImprovements (..),
-    newAccountImageImprovements,
+    , AccountImageImprovements (..)
+    , newAccountImageImprovements
 
     -- ** AccountImageImprovementsSettings
-    AccountImageImprovementsSettings (..),
-    newAccountImageImprovementsSettings,
+    , AccountImageImprovementsSettings (..)
+    , newAccountImageImprovementsSettings
 
     -- ** AccountItemUpdates
-    AccountItemUpdates (..),
-    newAccountItemUpdates,
+    , AccountItemUpdates (..)
+    , newAccountItemUpdates
 
     -- ** AccountItemUpdatesSettings
-    AccountItemUpdatesSettings (..),
-    newAccountItemUpdatesSettings,
+    , AccountItemUpdatesSettings (..)
+    , newAccountItemUpdatesSettings
 
     -- ** AccountLabel
-    AccountLabel (..),
-    newAccountLabel,
+    , AccountLabel (..)
+    , newAccountLabel
 
     -- ** AccountLabel_LabelType
-    AccountLabel_LabelType (..),
+    , AccountLabel_LabelType (..)
 
     -- ** AccountReturnCarrier
-    AccountReturnCarrier (..),
-    newAccountReturnCarrier,
+    , AccountReturnCarrier (..)
+    , newAccountReturnCarrier
 
     -- ** AccountReturnCarrier_CarrierCode
-    AccountReturnCarrier_CarrierCode (..),
+    , AccountReturnCarrier_CarrierCode (..)
 
     -- ** AccountShippingImprovements
-    AccountShippingImprovements (..),
-    newAccountShippingImprovements,
+    , AccountShippingImprovements (..)
+    , newAccountShippingImprovements
 
     -- ** AccountStatus
-    AccountStatus (..),
-    newAccountStatus,
+    , AccountStatus (..)
+    , newAccountStatus
 
     -- ** AccountStatusAccountLevelIssue
-    AccountStatusAccountLevelIssue (..),
-    newAccountStatusAccountLevelIssue,
+    , AccountStatusAccountLevelIssue (..)
+    , newAccountStatusAccountLevelIssue
 
     -- ** AccountStatusItemLevelIssue
-    AccountStatusItemLevelIssue (..),
-    newAccountStatusItemLevelIssue,
+    , AccountStatusItemLevelIssue (..)
+    , newAccountStatusItemLevelIssue
 
     -- ** AccountStatusProducts
-    AccountStatusProducts (..),
-    newAccountStatusProducts,
+    , AccountStatusProducts (..)
+    , newAccountStatusProducts
 
     -- ** AccountStatusStatistics
-    AccountStatusStatistics (..),
-    newAccountStatusStatistics,
+    , AccountStatusStatistics (..)
+    , newAccountStatusStatistics
 
     -- ** AccountTax
-    AccountTax (..),
-    newAccountTax,
+    , AccountTax (..)
+    , newAccountTax
 
     -- ** AccountTaxTaxRule
-    AccountTaxTaxRule (..),
-    newAccountTaxTaxRule,
+    , AccountTaxTaxRule (..)
+    , newAccountTaxTaxRule
 
     -- ** AccountUser
-    AccountUser (..),
-    newAccountUser,
+    , AccountUser (..)
+    , newAccountUser
 
     -- ** AccountYouTubeChannelLink
-    AccountYouTubeChannelLink (..),
-    newAccountYouTubeChannelLink,
+    , AccountYouTubeChannelLink (..)
+    , newAccountYouTubeChannelLink
 
     -- ** AccountsAuthInfoResponse
-    AccountsAuthInfoResponse (..),
-    newAccountsAuthInfoResponse,
+    , AccountsAuthInfoResponse (..)
+    , newAccountsAuthInfoResponse
 
     -- ** AccountsClaimWebsiteResponse
-    AccountsClaimWebsiteResponse (..),
-    newAccountsClaimWebsiteResponse,
+    , AccountsClaimWebsiteResponse (..)
+    , newAccountsClaimWebsiteResponse
 
     -- ** AccountsCustomBatchRequest
-    AccountsCustomBatchRequest (..),
-    newAccountsCustomBatchRequest,
+    , AccountsCustomBatchRequest (..)
+    , newAccountsCustomBatchRequest
 
     -- ** AccountsCustomBatchRequestEntry
-    AccountsCustomBatchRequestEntry (..),
-    newAccountsCustomBatchRequestEntry,
+    , AccountsCustomBatchRequestEntry (..)
+    , newAccountsCustomBatchRequestEntry
 
     -- ** AccountsCustomBatchRequestEntryLinkRequest
-    AccountsCustomBatchRequestEntryLinkRequest (..),
-    newAccountsCustomBatchRequestEntryLinkRequest,
+    , AccountsCustomBatchRequestEntryLinkRequest (..)
+    , newAccountsCustomBatchRequestEntryLinkRequest
 
     -- ** AccountsCustomBatchResponse
-    AccountsCustomBatchResponse (..),
-    newAccountsCustomBatchResponse,
+    , AccountsCustomBatchResponse (..)
+    , newAccountsCustomBatchResponse
 
     -- ** AccountsCustomBatchResponseEntry
-    AccountsCustomBatchResponseEntry (..),
-    newAccountsCustomBatchResponseEntry,
+    , AccountsCustomBatchResponseEntry (..)
+    , newAccountsCustomBatchResponseEntry
 
     -- ** AccountsLinkRequest
-    AccountsLinkRequest (..),
-    newAccountsLinkRequest,
+    , AccountsLinkRequest (..)
+    , newAccountsLinkRequest
 
     -- ** AccountsLinkResponse
-    AccountsLinkResponse (..),
-    newAccountsLinkResponse,
+    , AccountsLinkResponse (..)
+    , newAccountsLinkResponse
 
     -- ** AccountsListLinksResponse
-    AccountsListLinksResponse (..),
-    newAccountsListLinksResponse,
+    , AccountsListLinksResponse (..)
+    , newAccountsListLinksResponse
 
     -- ** AccountsListResponse
-    AccountsListResponse (..),
-    newAccountsListResponse,
+    , AccountsListResponse (..)
+    , newAccountsListResponse
 
     -- ** AccountsUpdateLabelsRequest
-    AccountsUpdateLabelsRequest (..),
-    newAccountsUpdateLabelsRequest,
+    , AccountsUpdateLabelsRequest (..)
+    , newAccountsUpdateLabelsRequest
 
     -- ** AccountsUpdateLabelsResponse
-    AccountsUpdateLabelsResponse (..),
-    newAccountsUpdateLabelsResponse,
+    , AccountsUpdateLabelsResponse (..)
+    , newAccountsUpdateLabelsResponse
 
     -- ** AccountstatusesCustomBatchRequest
-    AccountstatusesCustomBatchRequest (..),
-    newAccountstatusesCustomBatchRequest,
+    , AccountstatusesCustomBatchRequest (..)
+    , newAccountstatusesCustomBatchRequest
 
     -- ** AccountstatusesCustomBatchRequestEntry
-    AccountstatusesCustomBatchRequestEntry (..),
-    newAccountstatusesCustomBatchRequestEntry,
+    , AccountstatusesCustomBatchRequestEntry (..)
+    , newAccountstatusesCustomBatchRequestEntry
 
     -- ** AccountstatusesCustomBatchResponse
-    AccountstatusesCustomBatchResponse (..),
-    newAccountstatusesCustomBatchResponse,
+    , AccountstatusesCustomBatchResponse (..)
+    , newAccountstatusesCustomBatchResponse
 
     -- ** AccountstatusesCustomBatchResponseEntry
-    AccountstatusesCustomBatchResponseEntry (..),
-    newAccountstatusesCustomBatchResponseEntry,
+    , AccountstatusesCustomBatchResponseEntry (..)
+    , newAccountstatusesCustomBatchResponseEntry
 
     -- ** AccountstatusesListResponse
-    AccountstatusesListResponse (..),
-    newAccountstatusesListResponse,
+    , AccountstatusesListResponse (..)
+    , newAccountstatusesListResponse
 
     -- ** AccounttaxCustomBatchRequest
-    AccounttaxCustomBatchRequest (..),
-    newAccounttaxCustomBatchRequest,
+    , AccounttaxCustomBatchRequest (..)
+    , newAccounttaxCustomBatchRequest
 
     -- ** AccounttaxCustomBatchRequestEntry
-    AccounttaxCustomBatchRequestEntry (..),
-    newAccounttaxCustomBatchRequestEntry,
+    , AccounttaxCustomBatchRequestEntry (..)
+    , newAccounttaxCustomBatchRequestEntry
 
     -- ** AccounttaxCustomBatchResponse
-    AccounttaxCustomBatchResponse (..),
-    newAccounttaxCustomBatchResponse,
+    , AccounttaxCustomBatchResponse (..)
+    , newAccounttaxCustomBatchResponse
 
     -- ** AccounttaxCustomBatchResponseEntry
-    AccounttaxCustomBatchResponseEntry (..),
-    newAccounttaxCustomBatchResponseEntry,
+    , AccounttaxCustomBatchResponseEntry (..)
+    , newAccounttaxCustomBatchResponseEntry
 
     -- ** AccounttaxListResponse
-    AccounttaxListResponse (..),
-    newAccounttaxListResponse,
+    , AccounttaxListResponse (..)
+    , newAccounttaxListResponse
 
     -- ** ActivateBuyOnGoogleProgramRequest
-    ActivateBuyOnGoogleProgramRequest (..),
-    newActivateBuyOnGoogleProgramRequest,
+    , ActivateBuyOnGoogleProgramRequest (..)
+    , newActivateBuyOnGoogleProgramRequest
 
     -- ** Address
-    Address (..),
-    newAddress,
+    , Address (..)
+    , newAddress
 
     -- ** Amount
-    Amount (..),
-    newAmount,
+    , Amount (..)
+    , newAmount
 
     -- ** BusinessDayConfig
-    BusinessDayConfig (..),
-    newBusinessDayConfig,
+    , BusinessDayConfig (..)
+    , newBusinessDayConfig
 
     -- ** BuyOnGoogleProgramStatus
-    BuyOnGoogleProgramStatus (..),
-    newBuyOnGoogleProgramStatus,
+    , BuyOnGoogleProgramStatus (..)
+    , newBuyOnGoogleProgramStatus
 
     -- ** BuyOnGoogleProgramStatus_BusinessModelItem
-    BuyOnGoogleProgramStatus_BusinessModelItem (..),
+    , BuyOnGoogleProgramStatus_BusinessModelItem (..)
 
     -- ** BuyOnGoogleProgramStatus_OnlineSalesChannel
-    BuyOnGoogleProgramStatus_OnlineSalesChannel (..),
+    , BuyOnGoogleProgramStatus_OnlineSalesChannel (..)
 
     -- ** BuyOnGoogleProgramStatus_ParticipationStage
-    BuyOnGoogleProgramStatus_ParticipationStage (..),
+    , BuyOnGoogleProgramStatus_ParticipationStage (..)
 
     -- ** CaptureOrderRequest
-    CaptureOrderRequest (..),
-    newCaptureOrderRequest,
+    , CaptureOrderRequest (..)
+    , newCaptureOrderRequest
 
     -- ** CaptureOrderResponse
-    CaptureOrderResponse (..),
-    newCaptureOrderResponse,
+    , CaptureOrderResponse (..)
+    , newCaptureOrderResponse
 
     -- ** CaptureOrderResponse_ExecutionStatus
-    CaptureOrderResponse_ExecutionStatus (..),
+    , CaptureOrderResponse_ExecutionStatus (..)
 
     -- ** CarrierRate
-    CarrierRate (..),
-    newCarrierRate,
+    , CarrierRate (..)
+    , newCarrierRate
 
     -- ** CarriersCarrier
-    CarriersCarrier (..),
-    newCarriersCarrier,
+    , CarriersCarrier (..)
+    , newCarriersCarrier
 
     -- ** Collection
-    Collection (..),
-    newCollection,
+    , Collection (..)
+    , newCollection
 
     -- ** CollectionFeaturedProduct
-    CollectionFeaturedProduct (..),
-    newCollectionFeaturedProduct,
+    , CollectionFeaturedProduct (..)
+    , newCollectionFeaturedProduct
 
     -- ** CollectionStatus
-    CollectionStatus (..),
-    newCollectionStatus,
+    , CollectionStatus (..)
+    , newCollectionStatus
 
     -- ** CollectionStatusDestinationStatus
-    CollectionStatusDestinationStatus (..),
-    newCollectionStatusDestinationStatus,
+    , CollectionStatusDestinationStatus (..)
+    , newCollectionStatusDestinationStatus
 
     -- ** CollectionStatusItemLevelIssue
-    CollectionStatusItemLevelIssue (..),
-    newCollectionStatusItemLevelIssue,
+    , CollectionStatusItemLevelIssue (..)
+    , newCollectionStatusItemLevelIssue
 
     -- ** Css
-    Css (..),
-    newCss,
+    , Css (..)
+    , newCss
 
     -- ** CustomAttribute
-    CustomAttribute (..),
-    newCustomAttribute,
+    , CustomAttribute (..)
+    , newCustomAttribute
 
     -- ** CustomerReturnReason
-    CustomerReturnReason (..),
-    newCustomerReturnReason,
+    , CustomerReturnReason (..)
+    , newCustomerReturnReason
 
     -- ** CutoffTime
-    CutoffTime (..),
-    newCutoffTime,
+    , CutoffTime (..)
+    , newCutoffTime
 
     -- ** Datafeed
-    Datafeed (..),
-    newDatafeed,
+    , Datafeed (..)
+    , newDatafeed
 
     -- ** DatafeedFetchSchedule
-    DatafeedFetchSchedule (..),
-    newDatafeedFetchSchedule,
+    , DatafeedFetchSchedule (..)
+    , newDatafeedFetchSchedule
 
     -- ** DatafeedFormat
-    DatafeedFormat (..),
-    newDatafeedFormat,
+    , DatafeedFormat (..)
+    , newDatafeedFormat
 
     -- ** DatafeedStatus
-    DatafeedStatus (..),
-    newDatafeedStatus,
+    , DatafeedStatus (..)
+    , newDatafeedStatus
 
     -- ** DatafeedStatusError
-    DatafeedStatusError (..),
-    newDatafeedStatusError,
+    , DatafeedStatusError (..)
+    , newDatafeedStatusError
 
     -- ** DatafeedStatusExample
-    DatafeedStatusExample (..),
-    newDatafeedStatusExample,
+    , DatafeedStatusExample (..)
+    , newDatafeedStatusExample
 
     -- ** DatafeedTarget
-    DatafeedTarget (..),
-    newDatafeedTarget,
+    , DatafeedTarget (..)
+    , newDatafeedTarget
 
     -- ** DatafeedsCustomBatchRequest
-    DatafeedsCustomBatchRequest (..),
-    newDatafeedsCustomBatchRequest,
+    , DatafeedsCustomBatchRequest (..)
+    , newDatafeedsCustomBatchRequest
 
     -- ** DatafeedsCustomBatchRequestEntry
-    DatafeedsCustomBatchRequestEntry (..),
-    newDatafeedsCustomBatchRequestEntry,
+    , DatafeedsCustomBatchRequestEntry (..)
+    , newDatafeedsCustomBatchRequestEntry
 
     -- ** DatafeedsCustomBatchResponse
-    DatafeedsCustomBatchResponse (..),
-    newDatafeedsCustomBatchResponse,
+    , DatafeedsCustomBatchResponse (..)
+    , newDatafeedsCustomBatchResponse
 
     -- ** DatafeedsCustomBatchResponseEntry
-    DatafeedsCustomBatchResponseEntry (..),
-    newDatafeedsCustomBatchResponseEntry,
+    , DatafeedsCustomBatchResponseEntry (..)
+    , newDatafeedsCustomBatchResponseEntry
 
     -- ** DatafeedsFetchNowResponse
-    DatafeedsFetchNowResponse (..),
-    newDatafeedsFetchNowResponse,
+    , DatafeedsFetchNowResponse (..)
+    , newDatafeedsFetchNowResponse
 
     -- ** DatafeedsListResponse
-    DatafeedsListResponse (..),
-    newDatafeedsListResponse,
+    , DatafeedsListResponse (..)
+    , newDatafeedsListResponse
 
     -- ** DatafeedstatusesCustomBatchRequest
-    DatafeedstatusesCustomBatchRequest (..),
-    newDatafeedstatusesCustomBatchRequest,
+    , DatafeedstatusesCustomBatchRequest (..)
+    , newDatafeedstatusesCustomBatchRequest
 
     -- ** DatafeedstatusesCustomBatchRequestEntry
-    DatafeedstatusesCustomBatchRequestEntry (..),
-    newDatafeedstatusesCustomBatchRequestEntry,
+    , DatafeedstatusesCustomBatchRequestEntry (..)
+    , newDatafeedstatusesCustomBatchRequestEntry
 
     -- ** DatafeedstatusesCustomBatchResponse
-    DatafeedstatusesCustomBatchResponse (..),
-    newDatafeedstatusesCustomBatchResponse,
+    , DatafeedstatusesCustomBatchResponse (..)
+    , newDatafeedstatusesCustomBatchResponse
 
     -- ** DatafeedstatusesCustomBatchResponseEntry
-    DatafeedstatusesCustomBatchResponseEntry (..),
-    newDatafeedstatusesCustomBatchResponseEntry,
+    , DatafeedstatusesCustomBatchResponseEntry (..)
+    , newDatafeedstatusesCustomBatchResponseEntry
 
     -- ** DatafeedstatusesListResponse
-    DatafeedstatusesListResponse (..),
-    newDatafeedstatusesListResponse,
+    , DatafeedstatusesListResponse (..)
+    , newDatafeedstatusesListResponse
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** DateTime'
-    DateTime' (..),
-    newDateTime,
+    , DateTime' (..)
+    , newDateTime
 
     -- ** DeliveryTime
-    DeliveryTime (..),
-    newDeliveryTime,
+    , DeliveryTime (..)
+    , newDeliveryTime
 
     -- ** ECommercePlatformLinkInfo
-    ECommercePlatformLinkInfo (..),
-    newECommercePlatformLinkInfo,
+    , ECommercePlatformLinkInfo (..)
+    , newECommercePlatformLinkInfo
 
     -- ** Error'
-    Error' (..),
-    newError,
+    , Error' (..)
+    , newError
 
     -- ** Errors
-    Errors (..),
-    newErrors,
+    , Errors (..)
+    , newErrors
 
     -- ** FreeListingsProgramStatus
-    FreeListingsProgramStatus (..),
-    newFreeListingsProgramStatus,
+    , FreeListingsProgramStatus (..)
+    , newFreeListingsProgramStatus
 
     -- ** FreeListingsProgramStatus_GlobalState
-    FreeListingsProgramStatus_GlobalState (..),
+    , FreeListingsProgramStatus_GlobalState (..)
 
     -- ** FreeListingsProgramStatusRegionStatus
-    FreeListingsProgramStatusRegionStatus (..),
-    newFreeListingsProgramStatusRegionStatus,
+    , FreeListingsProgramStatusRegionStatus (..)
+    , newFreeListingsProgramStatusRegionStatus
 
     -- ** FreeListingsProgramStatusRegionStatus_EligibilityStatus
-    FreeListingsProgramStatusRegionStatus_EligibilityStatus (..),
+    , FreeListingsProgramStatusRegionStatus_EligibilityStatus (..)
 
     -- ** FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus
-    FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus (..),
+    , FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus (..)
 
     -- ** FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
-    FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason (..),
+    , FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason (..)
 
     -- ** FreeListingsProgramStatusReviewIneligibilityReasonDetails
-    FreeListingsProgramStatusReviewIneligibilityReasonDetails (..),
-    newFreeListingsProgramStatusReviewIneligibilityReasonDetails,
+    , FreeListingsProgramStatusReviewIneligibilityReasonDetails (..)
+    , newFreeListingsProgramStatusReviewIneligibilityReasonDetails
 
     -- ** GmbAccounts
-    GmbAccounts (..),
-    newGmbAccounts,
+    , GmbAccounts (..)
+    , newGmbAccounts
 
     -- ** GmbAccountsGmbAccount
-    GmbAccountsGmbAccount (..),
-    newGmbAccountsGmbAccount,
+    , GmbAccountsGmbAccount (..)
+    , newGmbAccountsGmbAccount
 
     -- ** Headers
-    Headers (..),
-    newHeaders,
+    , Headers (..)
+    , newHeaders
 
     -- ** HolidayCutoff
-    HolidayCutoff (..),
-    newHolidayCutoff,
+    , HolidayCutoff (..)
+    , newHolidayCutoff
 
     -- ** HolidaysHoliday
-    HolidaysHoliday (..),
-    newHolidaysHoliday,
+    , HolidaysHoliday (..)
+    , newHolidaysHoliday
 
     -- ** InapplicabilityDetails
-    InapplicabilityDetails (..),
-    newInapplicabilityDetails,
+    , InapplicabilityDetails (..)
+    , newInapplicabilityDetails
 
     -- ** InapplicabilityDetails_InapplicableReason
-    InapplicabilityDetails_InapplicableReason (..),
+    , InapplicabilityDetails_InapplicableReason (..)
 
     -- ** Installment
-    Installment (..),
-    newInstallment,
+    , Installment (..)
+    , newInstallment
 
     -- ** InvoiceSummary
-    InvoiceSummary (..),
-    newInvoiceSummary,
+    , InvoiceSummary (..)
+    , newInvoiceSummary
 
     -- ** InvoiceSummaryAdditionalChargeSummary
-    InvoiceSummaryAdditionalChargeSummary (..),
-    newInvoiceSummaryAdditionalChargeSummary,
+    , InvoiceSummaryAdditionalChargeSummary (..)
+    , newInvoiceSummaryAdditionalChargeSummary
 
     -- ** LabelIds
-    LabelIds (..),
-    newLabelIds,
+    , LabelIds (..)
+    , newLabelIds
 
     -- ** LiaAboutPageSettings
-    LiaAboutPageSettings (..),
-    newLiaAboutPageSettings,
+    , LiaAboutPageSettings (..)
+    , newLiaAboutPageSettings
 
     -- ** LiaCountrySettings
-    LiaCountrySettings (..),
-    newLiaCountrySettings,
+    , LiaCountrySettings (..)
+    , newLiaCountrySettings
 
     -- ** LiaInventorySettings
-    LiaInventorySettings (..),
-    newLiaInventorySettings,
+    , LiaInventorySettings (..)
+    , newLiaInventorySettings
 
     -- ** LiaOnDisplayToOrderSettings
-    LiaOnDisplayToOrderSettings (..),
-    newLiaOnDisplayToOrderSettings,
+    , LiaOnDisplayToOrderSettings (..)
+    , newLiaOnDisplayToOrderSettings
 
     -- ** LiaPosDataProvider
-    LiaPosDataProvider (..),
-    newLiaPosDataProvider,
+    , LiaPosDataProvider (..)
+    , newLiaPosDataProvider
 
     -- ** LiaSettings
-    LiaSettings (..),
-    newLiaSettings,
+    , LiaSettings (..)
+    , newLiaSettings
 
     -- ** LiasettingsCustomBatchRequest
-    LiasettingsCustomBatchRequest (..),
-    newLiasettingsCustomBatchRequest,
+    , LiasettingsCustomBatchRequest (..)
+    , newLiasettingsCustomBatchRequest
 
     -- ** LiasettingsCustomBatchRequestEntry
-    LiasettingsCustomBatchRequestEntry (..),
-    newLiasettingsCustomBatchRequestEntry,
+    , LiasettingsCustomBatchRequestEntry (..)
+    , newLiasettingsCustomBatchRequestEntry
 
     -- ** LiasettingsCustomBatchResponse
-    LiasettingsCustomBatchResponse (..),
-    newLiasettingsCustomBatchResponse,
+    , LiasettingsCustomBatchResponse (..)
+    , newLiasettingsCustomBatchResponse
 
     -- ** LiasettingsCustomBatchResponseEntry
-    LiasettingsCustomBatchResponseEntry (..),
-    newLiasettingsCustomBatchResponseEntry,
+    , LiasettingsCustomBatchResponseEntry (..)
+    , newLiasettingsCustomBatchResponseEntry
 
     -- ** LiasettingsGetAccessibleGmbAccountsResponse
-    LiasettingsGetAccessibleGmbAccountsResponse (..),
-    newLiasettingsGetAccessibleGmbAccountsResponse,
+    , LiasettingsGetAccessibleGmbAccountsResponse (..)
+    , newLiasettingsGetAccessibleGmbAccountsResponse
 
     -- ** LiasettingsListPosDataProvidersResponse
-    LiasettingsListPosDataProvidersResponse (..),
-    newLiasettingsListPosDataProvidersResponse,
+    , LiasettingsListPosDataProvidersResponse (..)
+    , newLiasettingsListPosDataProvidersResponse
 
     -- ** LiasettingsListResponse
-    LiasettingsListResponse (..),
-    newLiasettingsListResponse,
+    , LiasettingsListResponse (..)
+    , newLiasettingsListResponse
 
     -- ** LiasettingsRequestGmbAccessResponse
-    LiasettingsRequestGmbAccessResponse (..),
-    newLiasettingsRequestGmbAccessResponse,
+    , LiasettingsRequestGmbAccessResponse (..)
+    , newLiasettingsRequestGmbAccessResponse
 
     -- ** LiasettingsRequestInventoryVerificationResponse
-    LiasettingsRequestInventoryVerificationResponse (..),
-    newLiasettingsRequestInventoryVerificationResponse,
+    , LiasettingsRequestInventoryVerificationResponse (..)
+    , newLiasettingsRequestInventoryVerificationResponse
 
     -- ** LiasettingsSetInventoryVerificationContactResponse
-    LiasettingsSetInventoryVerificationContactResponse (..),
-    newLiasettingsSetInventoryVerificationContactResponse,
+    , LiasettingsSetInventoryVerificationContactResponse (..)
+    , newLiasettingsSetInventoryVerificationContactResponse
 
     -- ** LiasettingsSetPosDataProviderResponse
-    LiasettingsSetPosDataProviderResponse (..),
-    newLiasettingsSetPosDataProviderResponse,
+    , LiasettingsSetPosDataProviderResponse (..)
+    , newLiasettingsSetPosDataProviderResponse
 
     -- ** LinkService
-    LinkService (..),
-    newLinkService,
+    , LinkService (..)
+    , newLinkService
 
     -- ** LinkedAccount
-    LinkedAccount (..),
-    newLinkedAccount,
+    , LinkedAccount (..)
+    , newLinkedAccount
 
     -- ** ListAccountLabelsResponse
-    ListAccountLabelsResponse (..),
-    newListAccountLabelsResponse,
+    , ListAccountLabelsResponse (..)
+    , newListAccountLabelsResponse
 
     -- ** ListAccountReturnCarrierResponse
-    ListAccountReturnCarrierResponse (..),
-    newListAccountReturnCarrierResponse,
+    , ListAccountReturnCarrierResponse (..)
+    , newListAccountReturnCarrierResponse
 
     -- ** ListCollectionStatusesResponse
-    ListCollectionStatusesResponse (..),
-    newListCollectionStatusesResponse,
+    , ListCollectionStatusesResponse (..)
+    , newListCollectionStatusesResponse
 
     -- ** ListCollectionsResponse
-    ListCollectionsResponse (..),
-    newListCollectionsResponse,
+    , ListCollectionsResponse (..)
+    , newListCollectionsResponse
 
     -- ** ListCssesResponse
-    ListCssesResponse (..),
-    newListCssesResponse,
+    , ListCssesResponse (..)
+    , newListCssesResponse
 
     -- ** ListRegionsResponse
-    ListRegionsResponse (..),
-    newListRegionsResponse,
+    , ListRegionsResponse (..)
+    , newListRegionsResponse
 
     -- ** ListRepricingProductReportsResponse
-    ListRepricingProductReportsResponse (..),
-    newListRepricingProductReportsResponse,
+    , ListRepricingProductReportsResponse (..)
+    , newListRepricingProductReportsResponse
 
     -- ** ListRepricingRuleReportsResponse
-    ListRepricingRuleReportsResponse (..),
-    newListRepricingRuleReportsResponse,
+    , ListRepricingRuleReportsResponse (..)
+    , newListRepricingRuleReportsResponse
 
     -- ** ListRepricingRulesResponse
-    ListRepricingRulesResponse (..),
-    newListRepricingRulesResponse,
+    , ListRepricingRulesResponse (..)
+    , newListRepricingRulesResponse
 
     -- ** ListReturnPolicyOnlineResponse
-    ListReturnPolicyOnlineResponse (..),
-    newListReturnPolicyOnlineResponse,
+    , ListReturnPolicyOnlineResponse (..)
+    , newListReturnPolicyOnlineResponse
 
     -- ** LocalInventory
-    LocalInventory (..),
-    newLocalInventory,
+    , LocalInventory (..)
+    , newLocalInventory
 
     -- ** LocalinventoryCustomBatchRequest
-    LocalinventoryCustomBatchRequest (..),
-    newLocalinventoryCustomBatchRequest,
+    , LocalinventoryCustomBatchRequest (..)
+    , newLocalinventoryCustomBatchRequest
 
     -- ** LocalinventoryCustomBatchRequestEntry
-    LocalinventoryCustomBatchRequestEntry (..),
-    newLocalinventoryCustomBatchRequestEntry,
+    , LocalinventoryCustomBatchRequestEntry (..)
+    , newLocalinventoryCustomBatchRequestEntry
 
     -- ** LocalinventoryCustomBatchResponse
-    LocalinventoryCustomBatchResponse (..),
-    newLocalinventoryCustomBatchResponse,
+    , LocalinventoryCustomBatchResponse (..)
+    , newLocalinventoryCustomBatchResponse
 
     -- ** LocalinventoryCustomBatchResponseEntry
-    LocalinventoryCustomBatchResponseEntry (..),
-    newLocalinventoryCustomBatchResponseEntry,
+    , LocalinventoryCustomBatchResponseEntry (..)
+    , newLocalinventoryCustomBatchResponseEntry
 
     -- ** LocationIdSet
-    LocationIdSet (..),
-    newLocationIdSet,
+    , LocationIdSet (..)
+    , newLocationIdSet
 
     -- ** LoyaltyPoints
-    LoyaltyPoints (..),
-    newLoyaltyPoints,
+    , LoyaltyPoints (..)
+    , newLoyaltyPoints
 
     -- ** MerchantOrderReturn
-    MerchantOrderReturn (..),
-    newMerchantOrderReturn,
+    , MerchantOrderReturn (..)
+    , newMerchantOrderReturn
 
     -- ** MerchantOrderReturnItem
-    MerchantOrderReturnItem (..),
-    newMerchantOrderReturnItem,
+    , MerchantOrderReturnItem (..)
+    , newMerchantOrderReturnItem
 
     -- ** MerchantRejectionReason
-    MerchantRejectionReason (..),
-    newMerchantRejectionReason,
+    , MerchantRejectionReason (..)
+    , newMerchantRejectionReason
 
     -- ** Metrics
-    Metrics (..),
-    newMetrics,
+    , Metrics (..)
+    , newMetrics
 
     -- ** MinimumOrderValueTable
-    MinimumOrderValueTable (..),
-    newMinimumOrderValueTable,
+    , MinimumOrderValueTable (..)
+    , newMinimumOrderValueTable
 
     -- ** MinimumOrderValueTableStoreCodeSetWithMov
-    MinimumOrderValueTableStoreCodeSetWithMov (..),
-    newMinimumOrderValueTableStoreCodeSetWithMov,
+    , MinimumOrderValueTableStoreCodeSetWithMov (..)
+    , newMinimumOrderValueTableStoreCodeSetWithMov
 
     -- ** MonetaryAmount
-    MonetaryAmount (..),
-    newMonetaryAmount,
+    , MonetaryAmount (..)
+    , newMonetaryAmount
 
     -- ** OnboardBuyOnGoogleProgramRequest
-    OnboardBuyOnGoogleProgramRequest (..),
-    newOnboardBuyOnGoogleProgramRequest,
+    , OnboardBuyOnGoogleProgramRequest (..)
+    , newOnboardBuyOnGoogleProgramRequest
 
     -- ** Order
-    Order (..),
-    newOrder,
+    , Order (..)
+    , newOrder
 
     -- ** OrderAddress
-    OrderAddress (..),
-    newOrderAddress,
+    , OrderAddress (..)
+    , newOrderAddress
 
     -- ** OrderCancellation
-    OrderCancellation (..),
-    newOrderCancellation,
+    , OrderCancellation (..)
+    , newOrderCancellation
 
     -- ** OrderCustomer
-    OrderCustomer (..),
-    newOrderCustomer,
+    , OrderCustomer (..)
+    , newOrderCustomer
 
     -- ** OrderCustomerLoyaltyInfo
-    OrderCustomerLoyaltyInfo (..),
-    newOrderCustomerLoyaltyInfo,
+    , OrderCustomerLoyaltyInfo (..)
+    , newOrderCustomerLoyaltyInfo
 
     -- ** OrderCustomerMarketingRightsInfo
-    OrderCustomerMarketingRightsInfo (..),
-    newOrderCustomerMarketingRightsInfo,
+    , OrderCustomerMarketingRightsInfo (..)
+    , newOrderCustomerMarketingRightsInfo
 
     -- ** OrderDeliveryDetails
-    OrderDeliveryDetails (..),
-    newOrderDeliveryDetails,
+    , OrderDeliveryDetails (..)
+    , newOrderDeliveryDetails
 
     -- ** OrderLineItem
-    OrderLineItem (..),
-    newOrderLineItem,
+    , OrderLineItem (..)
+    , newOrderLineItem
 
     -- ** OrderLineItemAdjustment
-    OrderLineItemAdjustment (..),
-    newOrderLineItemAdjustment,
+    , OrderLineItemAdjustment (..)
+    , newOrderLineItemAdjustment
 
     -- ** OrderLineItemProduct
-    OrderLineItemProduct (..),
-    newOrderLineItemProduct,
+    , OrderLineItemProduct (..)
+    , newOrderLineItemProduct
 
     -- ** OrderLineItemProductFee
-    OrderLineItemProductFee (..),
-    newOrderLineItemProductFee,
+    , OrderLineItemProductFee (..)
+    , newOrderLineItemProductFee
 
     -- ** OrderLineItemProductVariantAttribute
-    OrderLineItemProductVariantAttribute (..),
-    newOrderLineItemProductVariantAttribute,
+    , OrderLineItemProductVariantAttribute (..)
+    , newOrderLineItemProductVariantAttribute
 
     -- ** OrderLineItemReturnInfo
-    OrderLineItemReturnInfo (..),
-    newOrderLineItemReturnInfo,
+    , OrderLineItemReturnInfo (..)
+    , newOrderLineItemReturnInfo
 
     -- ** OrderLineItemShippingDetails
-    OrderLineItemShippingDetails (..),
-    newOrderLineItemShippingDetails,
+    , OrderLineItemShippingDetails (..)
+    , newOrderLineItemShippingDetails
 
     -- ** OrderLineItemShippingDetailsMethod
-    OrderLineItemShippingDetailsMethod (..),
-    newOrderLineItemShippingDetailsMethod,
+    , OrderLineItemShippingDetailsMethod (..)
+    , newOrderLineItemShippingDetailsMethod
 
     -- ** OrderMerchantProvidedAnnotation
-    OrderMerchantProvidedAnnotation (..),
-    newOrderMerchantProvidedAnnotation,
+    , OrderMerchantProvidedAnnotation (..)
+    , newOrderMerchantProvidedAnnotation
 
     -- ** OrderOrderAnnotation
-    OrderOrderAnnotation (..),
-    newOrderOrderAnnotation,
+    , OrderOrderAnnotation (..)
+    , newOrderOrderAnnotation
 
     -- ** OrderPickupDetails
-    OrderPickupDetails (..),
-    newOrderPickupDetails,
+    , OrderPickupDetails (..)
+    , newOrderPickupDetails
 
     -- ** OrderPickupDetailsCollector
-    OrderPickupDetailsCollector (..),
-    newOrderPickupDetailsCollector,
+    , OrderPickupDetailsCollector (..)
+    , newOrderPickupDetailsCollector
 
     -- ** OrderPromotion
-    OrderPromotion (..),
-    newOrderPromotion,
+    , OrderPromotion (..)
+    , newOrderPromotion
 
     -- ** OrderPromotionItem
-    OrderPromotionItem (..),
-    newOrderPromotionItem,
+    , OrderPromotionItem (..)
+    , newOrderPromotionItem
 
     -- ** OrderRefund
-    OrderRefund (..),
-    newOrderRefund,
+    , OrderRefund (..)
+    , newOrderRefund
 
     -- ** OrderReportDisbursement
-    OrderReportDisbursement (..),
-    newOrderReportDisbursement,
+    , OrderReportDisbursement (..)
+    , newOrderReportDisbursement
 
     -- ** OrderReportTransaction
-    OrderReportTransaction (..),
-    newOrderReportTransaction,
+    , OrderReportTransaction (..)
+    , newOrderReportTransaction
 
     -- ** OrderReturn
-    OrderReturn (..),
-    newOrderReturn,
+    , OrderReturn (..)
+    , newOrderReturn
 
     -- ** OrderShipment
-    OrderShipment (..),
-    newOrderShipment,
+    , OrderShipment (..)
+    , newOrderShipment
 
     -- ** OrderShipmentLineItemShipment
-    OrderShipmentLineItemShipment (..),
-    newOrderShipmentLineItemShipment,
+    , OrderShipmentLineItemShipment (..)
+    , newOrderShipmentLineItemShipment
 
     -- ** OrderShipmentScheduledDeliveryDetails
-    OrderShipmentScheduledDeliveryDetails (..),
-    newOrderShipmentScheduledDeliveryDetails,
+    , OrderShipmentScheduledDeliveryDetails (..)
+    , newOrderShipmentScheduledDeliveryDetails
 
     -- ** OrderTrackingSignal
-    OrderTrackingSignal (..),
-    newOrderTrackingSignal,
+    , OrderTrackingSignal (..)
+    , newOrderTrackingSignal
 
     -- ** OrderTrackingSignalLineItemDetails
-    OrderTrackingSignalLineItemDetails (..),
-    newOrderTrackingSignalLineItemDetails,
+    , OrderTrackingSignalLineItemDetails (..)
+    , newOrderTrackingSignalLineItemDetails
 
     -- ** OrderTrackingSignalShipmentLineItemMapping
-    OrderTrackingSignalShipmentLineItemMapping (..),
-    newOrderTrackingSignalShipmentLineItemMapping,
+    , OrderTrackingSignalShipmentLineItemMapping (..)
+    , newOrderTrackingSignalShipmentLineItemMapping
 
     -- ** OrderTrackingSignalShippingInfo
-    OrderTrackingSignalShippingInfo (..),
-    newOrderTrackingSignalShippingInfo,
+    , OrderTrackingSignalShippingInfo (..)
+    , newOrderTrackingSignalShippingInfo
 
     -- ** OrderTrackingSignalShippingInfo_ShippingStatus
-    OrderTrackingSignalShippingInfo_ShippingStatus (..),
+    , OrderTrackingSignalShippingInfo_ShippingStatus (..)
 
     -- ** OrderinvoicesCreateChargeInvoiceRequest
-    OrderinvoicesCreateChargeInvoiceRequest (..),
-    newOrderinvoicesCreateChargeInvoiceRequest,
+    , OrderinvoicesCreateChargeInvoiceRequest (..)
+    , newOrderinvoicesCreateChargeInvoiceRequest
 
     -- ** OrderinvoicesCreateChargeInvoiceResponse
-    OrderinvoicesCreateChargeInvoiceResponse (..),
-    newOrderinvoicesCreateChargeInvoiceResponse,
+    , OrderinvoicesCreateChargeInvoiceResponse (..)
+    , newOrderinvoicesCreateChargeInvoiceResponse
 
     -- ** OrderinvoicesCreateRefundInvoiceRequest
-    OrderinvoicesCreateRefundInvoiceRequest (..),
-    newOrderinvoicesCreateRefundInvoiceRequest,
+    , OrderinvoicesCreateRefundInvoiceRequest (..)
+    , newOrderinvoicesCreateRefundInvoiceRequest
 
     -- ** OrderinvoicesCreateRefundInvoiceResponse
-    OrderinvoicesCreateRefundInvoiceResponse (..),
-    newOrderinvoicesCreateRefundInvoiceResponse,
+    , OrderinvoicesCreateRefundInvoiceResponse (..)
+    , newOrderinvoicesCreateRefundInvoiceResponse
 
     -- ** OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption (..),
-    newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption,
+    , OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption (..)
+    , newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
 
     -- ** OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption (..),
-    newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption,
+    , OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption (..)
+    , newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
 
     -- ** OrderreportsListDisbursementsResponse
-    OrderreportsListDisbursementsResponse (..),
-    newOrderreportsListDisbursementsResponse,
+    , OrderreportsListDisbursementsResponse (..)
+    , newOrderreportsListDisbursementsResponse
 
     -- ** OrderreportsListTransactionsResponse
-    OrderreportsListTransactionsResponse (..),
-    newOrderreportsListTransactionsResponse,
+    , OrderreportsListTransactionsResponse (..)
+    , newOrderreportsListTransactionsResponse
 
     -- ** OrderreturnsAcknowledgeRequest
-    OrderreturnsAcknowledgeRequest (..),
-    newOrderreturnsAcknowledgeRequest,
+    , OrderreturnsAcknowledgeRequest (..)
+    , newOrderreturnsAcknowledgeRequest
 
     -- ** OrderreturnsAcknowledgeResponse
-    OrderreturnsAcknowledgeResponse (..),
-    newOrderreturnsAcknowledgeResponse,
+    , OrderreturnsAcknowledgeResponse (..)
+    , newOrderreturnsAcknowledgeResponse
 
     -- ** OrderreturnsCreateOrderReturnRequest
-    OrderreturnsCreateOrderReturnRequest (..),
-    newOrderreturnsCreateOrderReturnRequest,
+    , OrderreturnsCreateOrderReturnRequest (..)
+    , newOrderreturnsCreateOrderReturnRequest
 
     -- ** OrderreturnsCreateOrderReturnResponse
-    OrderreturnsCreateOrderReturnResponse (..),
-    newOrderreturnsCreateOrderReturnResponse,
+    , OrderreturnsCreateOrderReturnResponse (..)
+    , newOrderreturnsCreateOrderReturnResponse
 
     -- ** OrderreturnsLineItem
-    OrderreturnsLineItem (..),
-    newOrderreturnsLineItem,
+    , OrderreturnsLineItem (..)
+    , newOrderreturnsLineItem
 
     -- ** OrderreturnsListResponse
-    OrderreturnsListResponse (..),
-    newOrderreturnsListResponse,
+    , OrderreturnsListResponse (..)
+    , newOrderreturnsListResponse
 
     -- ** OrderreturnsPartialRefund
-    OrderreturnsPartialRefund (..),
-    newOrderreturnsPartialRefund,
+    , OrderreturnsPartialRefund (..)
+    , newOrderreturnsPartialRefund
 
     -- ** OrderreturnsProcessRequest
-    OrderreturnsProcessRequest (..),
-    newOrderreturnsProcessRequest,
+    , OrderreturnsProcessRequest (..)
+    , newOrderreturnsProcessRequest
 
     -- ** OrderreturnsProcessResponse
-    OrderreturnsProcessResponse (..),
-    newOrderreturnsProcessResponse,
+    , OrderreturnsProcessResponse (..)
+    , newOrderreturnsProcessResponse
 
     -- ** OrderreturnsRefundOperation
-    OrderreturnsRefundOperation (..),
-    newOrderreturnsRefundOperation,
+    , OrderreturnsRefundOperation (..)
+    , newOrderreturnsRefundOperation
 
     -- ** OrderreturnsRejectOperation
-    OrderreturnsRejectOperation (..),
-    newOrderreturnsRejectOperation,
+    , OrderreturnsRejectOperation (..)
+    , newOrderreturnsRejectOperation
 
     -- ** OrderreturnsReturnItem
-    OrderreturnsReturnItem (..),
-    newOrderreturnsReturnItem,
+    , OrderreturnsReturnItem (..)
+    , newOrderreturnsReturnItem
 
     -- ** OrdersAcknowledgeRequest
-    OrdersAcknowledgeRequest (..),
-    newOrdersAcknowledgeRequest,
+    , OrdersAcknowledgeRequest (..)
+    , newOrdersAcknowledgeRequest
 
     -- ** OrdersAcknowledgeResponse
-    OrdersAcknowledgeResponse (..),
-    newOrdersAcknowledgeResponse,
+    , OrdersAcknowledgeResponse (..)
+    , newOrdersAcknowledgeResponse
 
     -- ** OrdersAdvanceTestOrderResponse
-    OrdersAdvanceTestOrderResponse (..),
-    newOrdersAdvanceTestOrderResponse,
+    , OrdersAdvanceTestOrderResponse (..)
+    , newOrdersAdvanceTestOrderResponse
 
     -- ** OrdersCancelLineItemRequest
-    OrdersCancelLineItemRequest (..),
-    newOrdersCancelLineItemRequest,
+    , OrdersCancelLineItemRequest (..)
+    , newOrdersCancelLineItemRequest
 
     -- ** OrdersCancelLineItemResponse
-    OrdersCancelLineItemResponse (..),
-    newOrdersCancelLineItemResponse,
+    , OrdersCancelLineItemResponse (..)
+    , newOrdersCancelLineItemResponse
 
     -- ** OrdersCancelRequest
-    OrdersCancelRequest (..),
-    newOrdersCancelRequest,
+    , OrdersCancelRequest (..)
+    , newOrdersCancelRequest
 
     -- ** OrdersCancelResponse
-    OrdersCancelResponse (..),
-    newOrdersCancelResponse,
+    , OrdersCancelResponse (..)
+    , newOrdersCancelResponse
 
     -- ** OrdersCancelTestOrderByCustomerRequest
-    OrdersCancelTestOrderByCustomerRequest (..),
-    newOrdersCancelTestOrderByCustomerRequest,
+    , OrdersCancelTestOrderByCustomerRequest (..)
+    , newOrdersCancelTestOrderByCustomerRequest
 
     -- ** OrdersCancelTestOrderByCustomerResponse
-    OrdersCancelTestOrderByCustomerResponse (..),
-    newOrdersCancelTestOrderByCustomerResponse,
+    , OrdersCancelTestOrderByCustomerResponse (..)
+    , newOrdersCancelTestOrderByCustomerResponse
 
     -- ** OrdersCreateTestOrderRequest
-    OrdersCreateTestOrderRequest (..),
-    newOrdersCreateTestOrderRequest,
+    , OrdersCreateTestOrderRequest (..)
+    , newOrdersCreateTestOrderRequest
 
     -- ** OrdersCreateTestOrderResponse
-    OrdersCreateTestOrderResponse (..),
-    newOrdersCreateTestOrderResponse,
+    , OrdersCreateTestOrderResponse (..)
+    , newOrdersCreateTestOrderResponse
 
     -- ** OrdersCreateTestReturnRequest
-    OrdersCreateTestReturnRequest (..),
-    newOrdersCreateTestReturnRequest,
+    , OrdersCreateTestReturnRequest (..)
+    , newOrdersCreateTestReturnRequest
 
     -- ** OrdersCreateTestReturnResponse
-    OrdersCreateTestReturnResponse (..),
-    newOrdersCreateTestReturnResponse,
+    , OrdersCreateTestReturnResponse (..)
+    , newOrdersCreateTestReturnResponse
 
     -- ** OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-    OrdersCustomBatchRequestEntryCreateTestReturnReturnItem (..),
-    newOrdersCustomBatchRequestEntryCreateTestReturnReturnItem,
+    , OrdersCustomBatchRequestEntryCreateTestReturnReturnItem (..)
+    , newOrdersCustomBatchRequestEntryCreateTestReturnReturnItem
 
     -- ** OrdersCustomBatchRequestEntryRefundItemItem
-    OrdersCustomBatchRequestEntryRefundItemItem (..),
-    newOrdersCustomBatchRequestEntryRefundItemItem,
+    , OrdersCustomBatchRequestEntryRefundItemItem (..)
+    , newOrdersCustomBatchRequestEntryRefundItemItem
 
     -- ** OrdersCustomBatchRequestEntryRefundItemShipping
-    OrdersCustomBatchRequestEntryRefundItemShipping (..),
-    newOrdersCustomBatchRequestEntryRefundItemShipping,
+    , OrdersCustomBatchRequestEntryRefundItemShipping (..)
+    , newOrdersCustomBatchRequestEntryRefundItemShipping
 
     -- ** OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-    OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo (..),
-    newOrdersCustomBatchRequestEntryShipLineItemsShipmentInfo,
+    , OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo (..)
+    , newOrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
 
     -- ** OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-    OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails (..),
-    newOrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails,
+    , OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails (..)
+    , newOrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
 
     -- ** OrdersGetByMerchantOrderIdResponse
-    OrdersGetByMerchantOrderIdResponse (..),
-    newOrdersGetByMerchantOrderIdResponse,
+    , OrdersGetByMerchantOrderIdResponse (..)
+    , newOrdersGetByMerchantOrderIdResponse
 
     -- ** OrdersGetTestOrderTemplateResponse
-    OrdersGetTestOrderTemplateResponse (..),
-    newOrdersGetTestOrderTemplateResponse,
+    , OrdersGetTestOrderTemplateResponse (..)
+    , newOrdersGetTestOrderTemplateResponse
 
     -- ** OrdersInStoreRefundLineItemRequest
-    OrdersInStoreRefundLineItemRequest (..),
-    newOrdersInStoreRefundLineItemRequest,
+    , OrdersInStoreRefundLineItemRequest (..)
+    , newOrdersInStoreRefundLineItemRequest
 
     -- ** OrdersInStoreRefundLineItemResponse
-    OrdersInStoreRefundLineItemResponse (..),
-    newOrdersInStoreRefundLineItemResponse,
+    , OrdersInStoreRefundLineItemResponse (..)
+    , newOrdersInStoreRefundLineItemResponse
 
     -- ** OrdersListResponse
-    OrdersListResponse (..),
-    newOrdersListResponse,
+    , OrdersListResponse (..)
+    , newOrdersListResponse
 
     -- ** OrdersRefundItemRequest
-    OrdersRefundItemRequest (..),
-    newOrdersRefundItemRequest,
+    , OrdersRefundItemRequest (..)
+    , newOrdersRefundItemRequest
 
     -- ** OrdersRefundItemResponse
-    OrdersRefundItemResponse (..),
-    newOrdersRefundItemResponse,
+    , OrdersRefundItemResponse (..)
+    , newOrdersRefundItemResponse
 
     -- ** OrdersRefundOrderRequest
-    OrdersRefundOrderRequest (..),
-    newOrdersRefundOrderRequest,
+    , OrdersRefundOrderRequest (..)
+    , newOrdersRefundOrderRequest
 
     -- ** OrdersRefundOrderResponse
-    OrdersRefundOrderResponse (..),
-    newOrdersRefundOrderResponse,
+    , OrdersRefundOrderResponse (..)
+    , newOrdersRefundOrderResponse
 
     -- ** OrdersRejectReturnLineItemRequest
-    OrdersRejectReturnLineItemRequest (..),
-    newOrdersRejectReturnLineItemRequest,
+    , OrdersRejectReturnLineItemRequest (..)
+    , newOrdersRejectReturnLineItemRequest
 
     -- ** OrdersRejectReturnLineItemResponse
-    OrdersRejectReturnLineItemResponse (..),
-    newOrdersRejectReturnLineItemResponse,
+    , OrdersRejectReturnLineItemResponse (..)
+    , newOrdersRejectReturnLineItemResponse
 
     -- ** OrdersReturnRefundLineItemRequest
-    OrdersReturnRefundLineItemRequest (..),
-    newOrdersReturnRefundLineItemRequest,
+    , OrdersReturnRefundLineItemRequest (..)
+    , newOrdersReturnRefundLineItemRequest
 
     -- ** OrdersReturnRefundLineItemResponse
-    OrdersReturnRefundLineItemResponse (..),
-    newOrdersReturnRefundLineItemResponse,
+    , OrdersReturnRefundLineItemResponse (..)
+    , newOrdersReturnRefundLineItemResponse
 
     -- ** OrdersSetLineItemMetadataRequest
-    OrdersSetLineItemMetadataRequest (..),
-    newOrdersSetLineItemMetadataRequest,
+    , OrdersSetLineItemMetadataRequest (..)
+    , newOrdersSetLineItemMetadataRequest
 
     -- ** OrdersSetLineItemMetadataResponse
-    OrdersSetLineItemMetadataResponse (..),
-    newOrdersSetLineItemMetadataResponse,
+    , OrdersSetLineItemMetadataResponse (..)
+    , newOrdersSetLineItemMetadataResponse
 
     -- ** OrdersShipLineItemsRequest
-    OrdersShipLineItemsRequest (..),
-    newOrdersShipLineItemsRequest,
+    , OrdersShipLineItemsRequest (..)
+    , newOrdersShipLineItemsRequest
 
     -- ** OrdersShipLineItemsResponse
-    OrdersShipLineItemsResponse (..),
-    newOrdersShipLineItemsResponse,
+    , OrdersShipLineItemsResponse (..)
+    , newOrdersShipLineItemsResponse
 
     -- ** OrdersUpdateLineItemShippingDetailsRequest
-    OrdersUpdateLineItemShippingDetailsRequest (..),
-    newOrdersUpdateLineItemShippingDetailsRequest,
+    , OrdersUpdateLineItemShippingDetailsRequest (..)
+    , newOrdersUpdateLineItemShippingDetailsRequest
 
     -- ** OrdersUpdateLineItemShippingDetailsResponse
-    OrdersUpdateLineItemShippingDetailsResponse (..),
-    newOrdersUpdateLineItemShippingDetailsResponse,
+    , OrdersUpdateLineItemShippingDetailsResponse (..)
+    , newOrdersUpdateLineItemShippingDetailsResponse
 
     -- ** OrdersUpdateMerchantOrderIdRequest
-    OrdersUpdateMerchantOrderIdRequest (..),
-    newOrdersUpdateMerchantOrderIdRequest,
+    , OrdersUpdateMerchantOrderIdRequest (..)
+    , newOrdersUpdateMerchantOrderIdRequest
 
     -- ** OrdersUpdateMerchantOrderIdResponse
-    OrdersUpdateMerchantOrderIdResponse (..),
-    newOrdersUpdateMerchantOrderIdResponse,
+    , OrdersUpdateMerchantOrderIdResponse (..)
+    , newOrdersUpdateMerchantOrderIdResponse
 
     -- ** OrdersUpdateShipmentRequest
-    OrdersUpdateShipmentRequest (..),
-    newOrdersUpdateShipmentRequest,
+    , OrdersUpdateShipmentRequest (..)
+    , newOrdersUpdateShipmentRequest
 
     -- ** OrdersUpdateShipmentResponse
-    OrdersUpdateShipmentResponse (..),
-    newOrdersUpdateShipmentResponse,
+    , OrdersUpdateShipmentResponse (..)
+    , newOrdersUpdateShipmentResponse
 
     -- ** PauseBuyOnGoogleProgramRequest
-    PauseBuyOnGoogleProgramRequest (..),
-    newPauseBuyOnGoogleProgramRequest,
+    , PauseBuyOnGoogleProgramRequest (..)
+    , newPauseBuyOnGoogleProgramRequest
 
     -- ** PaymentServiceProviderLinkInfo
-    PaymentServiceProviderLinkInfo (..),
-    newPaymentServiceProviderLinkInfo,
+    , PaymentServiceProviderLinkInfo (..)
+    , newPaymentServiceProviderLinkInfo
 
     -- ** PickupCarrierService
-    PickupCarrierService (..),
-    newPickupCarrierService,
+    , PickupCarrierService (..)
+    , newPickupCarrierService
 
     -- ** PickupServicesPickupService
-    PickupServicesPickupService (..),
-    newPickupServicesPickupService,
+    , PickupServicesPickupService (..)
+    , newPickupServicesPickupService
 
     -- ** PosCustomBatchRequest
-    PosCustomBatchRequest (..),
-    newPosCustomBatchRequest,
+    , PosCustomBatchRequest (..)
+    , newPosCustomBatchRequest
 
     -- ** PosCustomBatchRequestEntry
-    PosCustomBatchRequestEntry (..),
-    newPosCustomBatchRequestEntry,
+    , PosCustomBatchRequestEntry (..)
+    , newPosCustomBatchRequestEntry
 
     -- ** PosCustomBatchResponse
-    PosCustomBatchResponse (..),
-    newPosCustomBatchResponse,
+    , PosCustomBatchResponse (..)
+    , newPosCustomBatchResponse
 
     -- ** PosCustomBatchResponseEntry
-    PosCustomBatchResponseEntry (..),
-    newPosCustomBatchResponseEntry,
+    , PosCustomBatchResponseEntry (..)
+    , newPosCustomBatchResponseEntry
 
     -- ** PosDataProviders
-    PosDataProviders (..),
-    newPosDataProviders,
+    , PosDataProviders (..)
+    , newPosDataProviders
 
     -- ** PosDataProvidersPosDataProvider
-    PosDataProvidersPosDataProvider (..),
-    newPosDataProvidersPosDataProvider,
+    , PosDataProvidersPosDataProvider (..)
+    , newPosDataProvidersPosDataProvider
 
     -- ** PosInventory
-    PosInventory (..),
-    newPosInventory,
+    , PosInventory (..)
+    , newPosInventory
 
     -- ** PosInventoryRequest
-    PosInventoryRequest (..),
-    newPosInventoryRequest,
+    , PosInventoryRequest (..)
+    , newPosInventoryRequest
 
     -- ** PosInventoryResponse
-    PosInventoryResponse (..),
-    newPosInventoryResponse,
+    , PosInventoryResponse (..)
+    , newPosInventoryResponse
 
     -- ** PosListResponse
-    PosListResponse (..),
-    newPosListResponse,
+    , PosListResponse (..)
+    , newPosListResponse
 
     -- ** PosSale
-    PosSale (..),
-    newPosSale,
+    , PosSale (..)
+    , newPosSale
 
     -- ** PosSaleRequest
-    PosSaleRequest (..),
-    newPosSaleRequest,
+    , PosSaleRequest (..)
+    , newPosSaleRequest
 
     -- ** PosSaleResponse
-    PosSaleResponse (..),
-    newPosSaleResponse,
+    , PosSaleResponse (..)
+    , newPosSaleResponse
 
     -- ** PosStore
-    PosStore (..),
-    newPosStore,
+    , PosStore (..)
+    , newPosStore
 
     -- ** PostalCodeGroup
-    PostalCodeGroup (..),
-    newPostalCodeGroup,
+    , PostalCodeGroup (..)
+    , newPostalCodeGroup
 
     -- ** PostalCodeRange
-    PostalCodeRange (..),
-    newPostalCodeRange,
+    , PostalCodeRange (..)
+    , newPostalCodeRange
 
     -- ** Price
-    Price (..),
-    newPrice,
+    , Price (..)
+    , newPrice
 
     -- ** PriceAmount
-    PriceAmount (..),
-    newPriceAmount,
+    , PriceAmount (..)
+    , newPriceAmount
 
     -- ** Product
-    Product (..),
-    newProduct,
+    , Product (..)
+    , newProduct
 
     -- ** ProductAmount
-    ProductAmount (..),
-    newProductAmount,
+    , ProductAmount (..)
+    , newProductAmount
 
     -- ** ProductDimension
-    ProductDimension (..),
-    newProductDimension,
+    , ProductDimension (..)
+    , newProductDimension
 
     -- ** ProductProductDetail
-    ProductProductDetail (..),
-    newProductProductDetail,
+    , ProductProductDetail (..)
+    , newProductProductDetail
 
     -- ** ProductShipping
-    ProductShipping (..),
-    newProductShipping,
+    , ProductShipping (..)
+    , newProductShipping
 
     -- ** ProductShippingDimension
-    ProductShippingDimension (..),
-    newProductShippingDimension,
+    , ProductShippingDimension (..)
+    , newProductShippingDimension
 
     -- ** ProductShippingWeight
-    ProductShippingWeight (..),
-    newProductShippingWeight,
+    , ProductShippingWeight (..)
+    , newProductShippingWeight
 
     -- ** ProductStatus
-    ProductStatus (..),
-    newProductStatus,
+    , ProductStatus (..)
+    , newProductStatus
 
     -- ** ProductStatusDestinationStatus
-    ProductStatusDestinationStatus (..),
-    newProductStatusDestinationStatus,
+    , ProductStatusDestinationStatus (..)
+    , newProductStatusDestinationStatus
 
     -- ** ProductStatusItemLevelIssue
-    ProductStatusItemLevelIssue (..),
-    newProductStatusItemLevelIssue,
+    , ProductStatusItemLevelIssue (..)
+    , newProductStatusItemLevelIssue
 
     -- ** ProductSubscriptionCost
-    ProductSubscriptionCost (..),
-    newProductSubscriptionCost,
+    , ProductSubscriptionCost (..)
+    , newProductSubscriptionCost
 
     -- ** ProductTax
-    ProductTax (..),
-    newProductTax,
+    , ProductTax (..)
+    , newProductTax
 
     -- ** ProductUnitPricingBaseMeasure
-    ProductUnitPricingBaseMeasure (..),
-    newProductUnitPricingBaseMeasure,
+    , ProductUnitPricingBaseMeasure (..)
+    , newProductUnitPricingBaseMeasure
 
     -- ** ProductUnitPricingMeasure
-    ProductUnitPricingMeasure (..),
-    newProductUnitPricingMeasure,
+    , ProductUnitPricingMeasure (..)
+    , newProductUnitPricingMeasure
 
     -- ** ProductWeight
-    ProductWeight (..),
-    newProductWeight,
+    , ProductWeight (..)
+    , newProductWeight
 
     -- ** ProductsCustomBatchRequest
-    ProductsCustomBatchRequest (..),
-    newProductsCustomBatchRequest,
+    , ProductsCustomBatchRequest (..)
+    , newProductsCustomBatchRequest
 
     -- ** ProductsCustomBatchRequestEntry
-    ProductsCustomBatchRequestEntry (..),
-    newProductsCustomBatchRequestEntry,
+    , ProductsCustomBatchRequestEntry (..)
+    , newProductsCustomBatchRequestEntry
 
     -- ** ProductsCustomBatchResponse
-    ProductsCustomBatchResponse (..),
-    newProductsCustomBatchResponse,
+    , ProductsCustomBatchResponse (..)
+    , newProductsCustomBatchResponse
 
     -- ** ProductsCustomBatchResponseEntry
-    ProductsCustomBatchResponseEntry (..),
-    newProductsCustomBatchResponseEntry,
+    , ProductsCustomBatchResponseEntry (..)
+    , newProductsCustomBatchResponseEntry
 
     -- ** ProductsListResponse
-    ProductsListResponse (..),
-    newProductsListResponse,
+    , ProductsListResponse (..)
+    , newProductsListResponse
 
     -- ** ProductstatusesCustomBatchRequest
-    ProductstatusesCustomBatchRequest (..),
-    newProductstatusesCustomBatchRequest,
+    , ProductstatusesCustomBatchRequest (..)
+    , newProductstatusesCustomBatchRequest
 
     -- ** ProductstatusesCustomBatchRequestEntry
-    ProductstatusesCustomBatchRequestEntry (..),
-    newProductstatusesCustomBatchRequestEntry,
+    , ProductstatusesCustomBatchRequestEntry (..)
+    , newProductstatusesCustomBatchRequestEntry
 
     -- ** ProductstatusesCustomBatchResponse
-    ProductstatusesCustomBatchResponse (..),
-    newProductstatusesCustomBatchResponse,
+    , ProductstatusesCustomBatchResponse (..)
+    , newProductstatusesCustomBatchResponse
 
     -- ** ProductstatusesCustomBatchResponseEntry
-    ProductstatusesCustomBatchResponseEntry (..),
-    newProductstatusesCustomBatchResponseEntry,
+    , ProductstatusesCustomBatchResponseEntry (..)
+    , newProductstatusesCustomBatchResponseEntry
 
     -- ** ProductstatusesListResponse
-    ProductstatusesListResponse (..),
-    newProductstatusesListResponse,
+    , ProductstatusesListResponse (..)
+    , newProductstatusesListResponse
 
     -- ** Promotion
-    Promotion (..),
-    newPromotion,
+    , Promotion (..)
+    , newPromotion
 
     -- ** Promotion_CouponValueType
-    Promotion_CouponValueType (..),
+    , Promotion_CouponValueType (..)
 
     -- ** Promotion_OfferType
-    Promotion_OfferType (..),
+    , Promotion_OfferType (..)
 
     -- ** Promotion_ProductApplicability
-    Promotion_ProductApplicability (..),
+    , Promotion_ProductApplicability (..)
 
     -- ** Promotion_RedemptionChannelItem
-    Promotion_RedemptionChannelItem (..),
+    , Promotion_RedemptionChannelItem (..)
 
     -- ** PubsubNotificationSettings
-    PubsubNotificationSettings (..),
-    newPubsubNotificationSettings,
+    , PubsubNotificationSettings (..)
+    , newPubsubNotificationSettings
 
     -- ** RateGroup
-    RateGroup (..),
-    newRateGroup,
+    , RateGroup (..)
+    , newRateGroup
 
     -- ** RefundReason
-    RefundReason (..),
-    newRefundReason,
+    , RefundReason (..)
+    , newRefundReason
 
     -- ** Region
-    Region (..),
-    newRegion,
+    , Region (..)
+    , newRegion
 
     -- ** RegionGeoTargetArea
-    RegionGeoTargetArea (..),
-    newRegionGeoTargetArea,
+    , RegionGeoTargetArea (..)
+    , newRegionGeoTargetArea
 
     -- ** RegionPostalCodeArea
-    RegionPostalCodeArea (..),
-    newRegionPostalCodeArea,
+    , RegionPostalCodeArea (..)
+    , newRegionPostalCodeArea
 
     -- ** RegionPostalCodeAreaPostalCodeRange
-    RegionPostalCodeAreaPostalCodeRange (..),
-    newRegionPostalCodeAreaPostalCodeRange,
+    , RegionPostalCodeAreaPostalCodeRange (..)
+    , newRegionPostalCodeAreaPostalCodeRange
 
     -- ** RegionalInventory
-    RegionalInventory (..),
-    newRegionalInventory,
+    , RegionalInventory (..)
+    , newRegionalInventory
 
     -- ** RegionalinventoryCustomBatchRequest
-    RegionalinventoryCustomBatchRequest (..),
-    newRegionalinventoryCustomBatchRequest,
+    , RegionalinventoryCustomBatchRequest (..)
+    , newRegionalinventoryCustomBatchRequest
 
     -- ** RegionalinventoryCustomBatchRequestEntry
-    RegionalinventoryCustomBatchRequestEntry (..),
-    newRegionalinventoryCustomBatchRequestEntry,
+    , RegionalinventoryCustomBatchRequestEntry (..)
+    , newRegionalinventoryCustomBatchRequestEntry
 
     -- ** RegionalinventoryCustomBatchResponse
-    RegionalinventoryCustomBatchResponse (..),
-    newRegionalinventoryCustomBatchResponse,
+    , RegionalinventoryCustomBatchResponse (..)
+    , newRegionalinventoryCustomBatchResponse
 
     -- ** RegionalinventoryCustomBatchResponseEntry
-    RegionalinventoryCustomBatchResponseEntry (..),
-    newRegionalinventoryCustomBatchResponseEntry,
+    , RegionalinventoryCustomBatchResponseEntry (..)
+    , newRegionalinventoryCustomBatchResponseEntry
 
     -- ** ReportRow
-    ReportRow (..),
-    newReportRow,
+    , ReportRow (..)
+    , newReportRow
 
     -- ** RepricingProductReport
-    RepricingProductReport (..),
-    newRepricingProductReport,
+    , RepricingProductReport (..)
+    , newRepricingProductReport
 
     -- ** RepricingProductReport_Type
-    RepricingProductReport_Type (..),
+    , RepricingProductReport_Type (..)
 
     -- ** RepricingProductReportBuyboxWinningProductStats
-    RepricingProductReportBuyboxWinningProductStats (..),
-    newRepricingProductReportBuyboxWinningProductStats,
+    , RepricingProductReportBuyboxWinningProductStats (..)
+    , newRepricingProductReportBuyboxWinningProductStats
 
     -- ** RepricingRule
-    RepricingRule (..),
-    newRepricingRule,
+    , RepricingRule (..)
+    , newRepricingRule
 
     -- ** RepricingRule_Type
-    RepricingRule_Type (..),
+    , RepricingRule_Type (..)
 
     -- ** RepricingRuleCostOfGoodsSaleRule
-    RepricingRuleCostOfGoodsSaleRule (..),
-    newRepricingRuleCostOfGoodsSaleRule,
+    , RepricingRuleCostOfGoodsSaleRule (..)
+    , newRepricingRuleCostOfGoodsSaleRule
 
     -- ** RepricingRuleEffectiveTime
-    RepricingRuleEffectiveTime (..),
-    newRepricingRuleEffectiveTime,
+    , RepricingRuleEffectiveTime (..)
+    , newRepricingRuleEffectiveTime
 
     -- ** RepricingRuleEffectiveTimeFixedTimePeriod
-    RepricingRuleEffectiveTimeFixedTimePeriod (..),
-    newRepricingRuleEffectiveTimeFixedTimePeriod,
+    , RepricingRuleEffectiveTimeFixedTimePeriod (..)
+    , newRepricingRuleEffectiveTimeFixedTimePeriod
 
     -- ** RepricingRuleEligibleOfferMatcher
-    RepricingRuleEligibleOfferMatcher (..),
-    newRepricingRuleEligibleOfferMatcher,
+    , RepricingRuleEligibleOfferMatcher (..)
+    , newRepricingRuleEligibleOfferMatcher
 
     -- ** RepricingRuleEligibleOfferMatcher_MatcherOption
-    RepricingRuleEligibleOfferMatcher_MatcherOption (..),
+    , RepricingRuleEligibleOfferMatcher_MatcherOption (..)
 
     -- ** RepricingRuleEligibleOfferMatcherStringMatcher
-    RepricingRuleEligibleOfferMatcherStringMatcher (..),
-    newRepricingRuleEligibleOfferMatcherStringMatcher,
+    , RepricingRuleEligibleOfferMatcherStringMatcher (..)
+    , newRepricingRuleEligibleOfferMatcherStringMatcher
 
     -- ** RepricingRuleReport
-    RepricingRuleReport (..),
-    newRepricingRuleReport,
+    , RepricingRuleReport (..)
+    , newRepricingRuleReport
 
     -- ** RepricingRuleReport_Type
-    RepricingRuleReport_Type (..),
+    , RepricingRuleReport_Type (..)
 
     -- ** RepricingRuleReportBuyboxWinningRuleStats
-    RepricingRuleReportBuyboxWinningRuleStats (..),
-    newRepricingRuleReportBuyboxWinningRuleStats,
+    , RepricingRuleReportBuyboxWinningRuleStats (..)
+    , newRepricingRuleReportBuyboxWinningRuleStats
 
     -- ** RepricingRuleRestriction
-    RepricingRuleRestriction (..),
-    newRepricingRuleRestriction,
+    , RepricingRuleRestriction (..)
+    , newRepricingRuleRestriction
 
     -- ** RepricingRuleRestrictionBoundary
-    RepricingRuleRestrictionBoundary (..),
-    newRepricingRuleRestrictionBoundary,
+    , RepricingRuleRestrictionBoundary (..)
+    , newRepricingRuleRestrictionBoundary
 
     -- ** RepricingRuleStatsBasedRule
-    RepricingRuleStatsBasedRule (..),
-    newRepricingRuleStatsBasedRule,
+    , RepricingRuleStatsBasedRule (..)
+    , newRepricingRuleStatsBasedRule
 
     -- ** RequestPhoneVerificationRequest
-    RequestPhoneVerificationRequest (..),
-    newRequestPhoneVerificationRequest,
+    , RequestPhoneVerificationRequest (..)
+    , newRequestPhoneVerificationRequest
 
     -- ** RequestPhoneVerificationRequest_PhoneVerificationMethod
-    RequestPhoneVerificationRequest_PhoneVerificationMethod (..),
+    , RequestPhoneVerificationRequest_PhoneVerificationMethod (..)
 
     -- ** RequestPhoneVerificationResponse
-    RequestPhoneVerificationResponse (..),
-    newRequestPhoneVerificationResponse,
+    , RequestPhoneVerificationResponse (..)
+    , newRequestPhoneVerificationResponse
 
     -- ** RequestReviewBuyOnGoogleProgramRequest
-    RequestReviewBuyOnGoogleProgramRequest (..),
-    newRequestReviewBuyOnGoogleProgramRequest,
+    , RequestReviewBuyOnGoogleProgramRequest (..)
+    , newRequestReviewBuyOnGoogleProgramRequest
 
     -- ** RequestReviewFreeListingsRequest
-    RequestReviewFreeListingsRequest (..),
-    newRequestReviewFreeListingsRequest,
+    , RequestReviewFreeListingsRequest (..)
+    , newRequestReviewFreeListingsRequest
 
     -- ** RequestReviewShoppingAdsRequest
-    RequestReviewShoppingAdsRequest (..),
-    newRequestReviewShoppingAdsRequest,
+    , RequestReviewShoppingAdsRequest (..)
+    , newRequestReviewShoppingAdsRequest
 
     -- ** ReturnAddress
-    ReturnAddress (..),
-    newReturnAddress,
+    , ReturnAddress (..)
+    , newReturnAddress
 
     -- ** ReturnAddressAddress
-    ReturnAddressAddress (..),
-    newReturnAddressAddress,
+    , ReturnAddressAddress (..)
+    , newReturnAddressAddress
 
     -- ** ReturnPolicy
-    ReturnPolicy (..),
-    newReturnPolicy,
+    , ReturnPolicy (..)
+    , newReturnPolicy
 
     -- ** ReturnPolicyOnline
-    ReturnPolicyOnline (..),
-    newReturnPolicyOnline,
+    , ReturnPolicyOnline (..)
+    , newReturnPolicyOnline
 
     -- ** ReturnPolicyOnline_ItemConditionsItem
-    ReturnPolicyOnline_ItemConditionsItem (..),
+    , ReturnPolicyOnline_ItemConditionsItem (..)
 
     -- ** ReturnPolicyOnline_ReturnMethodsItem
-    ReturnPolicyOnline_ReturnMethodsItem (..),
+    , ReturnPolicyOnline_ReturnMethodsItem (..)
 
     -- ** ReturnPolicyOnlinePolicy
-    ReturnPolicyOnlinePolicy (..),
-    newReturnPolicyOnlinePolicy,
+    , ReturnPolicyOnlinePolicy (..)
+    , newReturnPolicyOnlinePolicy
 
     -- ** ReturnPolicyOnlinePolicy_Type
-    ReturnPolicyOnlinePolicy_Type (..),
+    , ReturnPolicyOnlinePolicy_Type (..)
 
     -- ** ReturnPolicyOnlineRestockingFee
-    ReturnPolicyOnlineRestockingFee (..),
-    newReturnPolicyOnlineRestockingFee,
+    , ReturnPolicyOnlineRestockingFee (..)
+    , newReturnPolicyOnlineRestockingFee
 
     -- ** ReturnPolicyOnlineReturnReasonCategoryInfo
-    ReturnPolicyOnlineReturnReasonCategoryInfo (..),
-    newReturnPolicyOnlineReturnReasonCategoryInfo,
+    , ReturnPolicyOnlineReturnReasonCategoryInfo (..)
+    , newReturnPolicyOnlineReturnReasonCategoryInfo
 
     -- ** ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource
-    ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource (..),
+    , ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource (..)
 
     -- ** ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory
-    ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory (..),
+    , ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory (..)
 
     -- ** ReturnPolicyOnlineReturnShippingFee
-    ReturnPolicyOnlineReturnShippingFee (..),
-    newReturnPolicyOnlineReturnShippingFee,
+    , ReturnPolicyOnlineReturnShippingFee (..)
+    , newReturnPolicyOnlineReturnShippingFee
 
     -- ** ReturnPolicyOnlineReturnShippingFee_Type
-    ReturnPolicyOnlineReturnShippingFee_Type (..),
+    , ReturnPolicyOnlineReturnShippingFee_Type (..)
 
     -- ** ReturnPolicyPolicy
-    ReturnPolicyPolicy (..),
-    newReturnPolicyPolicy,
+    , ReturnPolicyPolicy (..)
+    , newReturnPolicyPolicy
 
     -- ** ReturnPolicySeasonalOverride
-    ReturnPolicySeasonalOverride (..),
-    newReturnPolicySeasonalOverride,
+    , ReturnPolicySeasonalOverride (..)
+    , newReturnPolicySeasonalOverride
 
     -- ** ReturnPricingInfo
-    ReturnPricingInfo (..),
-    newReturnPricingInfo,
+    , ReturnPricingInfo (..)
+    , newReturnPricingInfo
 
     -- ** ReturnShipment
-    ReturnShipment (..),
-    newReturnShipment,
+    , ReturnShipment (..)
+    , newReturnShipment
 
     -- ** ReturnShippingLabel
-    ReturnShippingLabel (..),
-    newReturnShippingLabel,
+    , ReturnShippingLabel (..)
+    , newReturnShippingLabel
 
     -- ** ReturnaddressCustomBatchRequest
-    ReturnaddressCustomBatchRequest (..),
-    newReturnaddressCustomBatchRequest,
+    , ReturnaddressCustomBatchRequest (..)
+    , newReturnaddressCustomBatchRequest
 
     -- ** ReturnaddressCustomBatchRequestEntry
-    ReturnaddressCustomBatchRequestEntry (..),
-    newReturnaddressCustomBatchRequestEntry,
+    , ReturnaddressCustomBatchRequestEntry (..)
+    , newReturnaddressCustomBatchRequestEntry
 
     -- ** ReturnaddressCustomBatchResponse
-    ReturnaddressCustomBatchResponse (..),
-    newReturnaddressCustomBatchResponse,
+    , ReturnaddressCustomBatchResponse (..)
+    , newReturnaddressCustomBatchResponse
 
     -- ** ReturnaddressCustomBatchResponseEntry
-    ReturnaddressCustomBatchResponseEntry (..),
-    newReturnaddressCustomBatchResponseEntry,
+    , ReturnaddressCustomBatchResponseEntry (..)
+    , newReturnaddressCustomBatchResponseEntry
 
     -- ** ReturnaddressListResponse
-    ReturnaddressListResponse (..),
-    newReturnaddressListResponse,
+    , ReturnaddressListResponse (..)
+    , newReturnaddressListResponse
 
     -- ** ReturnpolicyCustomBatchRequest
-    ReturnpolicyCustomBatchRequest (..),
-    newReturnpolicyCustomBatchRequest,
+    , ReturnpolicyCustomBatchRequest (..)
+    , newReturnpolicyCustomBatchRequest
 
     -- ** ReturnpolicyCustomBatchRequestEntry
-    ReturnpolicyCustomBatchRequestEntry (..),
-    newReturnpolicyCustomBatchRequestEntry,
+    , ReturnpolicyCustomBatchRequestEntry (..)
+    , newReturnpolicyCustomBatchRequestEntry
 
     -- ** ReturnpolicyCustomBatchResponse
-    ReturnpolicyCustomBatchResponse (..),
-    newReturnpolicyCustomBatchResponse,
+    , ReturnpolicyCustomBatchResponse (..)
+    , newReturnpolicyCustomBatchResponse
 
     -- ** ReturnpolicyCustomBatchResponseEntry
-    ReturnpolicyCustomBatchResponseEntry (..),
-    newReturnpolicyCustomBatchResponseEntry,
+    , ReturnpolicyCustomBatchResponseEntry (..)
+    , newReturnpolicyCustomBatchResponseEntry
 
     -- ** ReturnpolicyListResponse
-    ReturnpolicyListResponse (..),
-    newReturnpolicyListResponse,
+    , ReturnpolicyListResponse (..)
+    , newReturnpolicyListResponse
 
     -- ** Row
-    Row (..),
-    newRow,
+    , Row (..)
+    , newRow
 
     -- ** SearchRequest
-    SearchRequest (..),
-    newSearchRequest,
+    , SearchRequest (..)
+    , newSearchRequest
 
     -- ** SearchResponse
-    SearchResponse (..),
-    newSearchResponse,
+    , SearchResponse (..)
+    , newSearchResponse
 
     -- ** Segments
-    Segments (..),
-    newSegments,
+    , Segments (..)
+    , newSegments
 
     -- ** Segments_Program
-    Segments_Program (..),
+    , Segments_Program (..)
 
     -- ** Service
-    Service (..),
-    newService,
+    , Service (..)
+    , newService
 
     -- ** SettlementReport
-    SettlementReport (..),
-    newSettlementReport,
+    , SettlementReport (..)
+    , newSettlementReport
 
     -- ** SettlementTransaction
-    SettlementTransaction (..),
-    newSettlementTransaction,
+    , SettlementTransaction (..)
+    , newSettlementTransaction
 
     -- ** SettlementTransactionAmount
-    SettlementTransactionAmount (..),
-    newSettlementTransactionAmount,
+    , SettlementTransactionAmount (..)
+    , newSettlementTransactionAmount
 
     -- ** SettlementTransactionAmountCommission
-    SettlementTransactionAmountCommission (..),
-    newSettlementTransactionAmountCommission,
+    , SettlementTransactionAmountCommission (..)
+    , newSettlementTransactionAmountCommission
 
     -- ** SettlementTransactionIdentifiers
-    SettlementTransactionIdentifiers (..),
-    newSettlementTransactionIdentifiers,
+    , SettlementTransactionIdentifiers (..)
+    , newSettlementTransactionIdentifiers
 
     -- ** SettlementTransactionTransaction
-    SettlementTransactionTransaction (..),
-    newSettlementTransactionTransaction,
+    , SettlementTransactionTransaction (..)
+    , newSettlementTransactionTransaction
 
     -- ** SettlementreportsListResponse
-    SettlementreportsListResponse (..),
-    newSettlementreportsListResponse,
+    , SettlementreportsListResponse (..)
+    , newSettlementreportsListResponse
 
     -- ** SettlementtransactionsListResponse
-    SettlementtransactionsListResponse (..),
-    newSettlementtransactionsListResponse,
+    , SettlementtransactionsListResponse (..)
+    , newSettlementtransactionsListResponse
 
     -- ** ShipmentInvoice
-    ShipmentInvoice (..),
-    newShipmentInvoice,
+    , ShipmentInvoice (..)
+    , newShipmentInvoice
 
     -- ** ShipmentInvoiceLineItemInvoice
-    ShipmentInvoiceLineItemInvoice (..),
-    newShipmentInvoiceLineItemInvoice,
+    , ShipmentInvoiceLineItemInvoice (..)
+    , newShipmentInvoiceLineItemInvoice
 
     -- ** ShipmentTrackingInfo
-    ShipmentTrackingInfo (..),
-    newShipmentTrackingInfo,
+    , ShipmentTrackingInfo (..)
+    , newShipmentTrackingInfo
 
     -- ** ShippingSettings
-    ShippingSettings (..),
-    newShippingSettings,
+    , ShippingSettings (..)
+    , newShippingSettings
 
     -- ** ShippingsettingsCustomBatchRequest
-    ShippingsettingsCustomBatchRequest (..),
-    newShippingsettingsCustomBatchRequest,
+    , ShippingsettingsCustomBatchRequest (..)
+    , newShippingsettingsCustomBatchRequest
 
     -- ** ShippingsettingsCustomBatchRequestEntry
-    ShippingsettingsCustomBatchRequestEntry (..),
-    newShippingsettingsCustomBatchRequestEntry,
+    , ShippingsettingsCustomBatchRequestEntry (..)
+    , newShippingsettingsCustomBatchRequestEntry
 
     -- ** ShippingsettingsCustomBatchResponse
-    ShippingsettingsCustomBatchResponse (..),
-    newShippingsettingsCustomBatchResponse,
+    , ShippingsettingsCustomBatchResponse (..)
+    , newShippingsettingsCustomBatchResponse
 
     -- ** ShippingsettingsCustomBatchResponseEntry
-    ShippingsettingsCustomBatchResponseEntry (..),
-    newShippingsettingsCustomBatchResponseEntry,
+    , ShippingsettingsCustomBatchResponseEntry (..)
+    , newShippingsettingsCustomBatchResponseEntry
 
     -- ** ShippingsettingsGetSupportedCarriersResponse
-    ShippingsettingsGetSupportedCarriersResponse (..),
-    newShippingsettingsGetSupportedCarriersResponse,
+    , ShippingsettingsGetSupportedCarriersResponse (..)
+    , newShippingsettingsGetSupportedCarriersResponse
 
     -- ** ShippingsettingsGetSupportedHolidaysResponse
-    ShippingsettingsGetSupportedHolidaysResponse (..),
-    newShippingsettingsGetSupportedHolidaysResponse,
+    , ShippingsettingsGetSupportedHolidaysResponse (..)
+    , newShippingsettingsGetSupportedHolidaysResponse
 
     -- ** ShippingsettingsGetSupportedPickupServicesResponse
-    ShippingsettingsGetSupportedPickupServicesResponse (..),
-    newShippingsettingsGetSupportedPickupServicesResponse,
+    , ShippingsettingsGetSupportedPickupServicesResponse (..)
+    , newShippingsettingsGetSupportedPickupServicesResponse
 
     -- ** ShippingsettingsListResponse
-    ShippingsettingsListResponse (..),
-    newShippingsettingsListResponse,
+    , ShippingsettingsListResponse (..)
+    , newShippingsettingsListResponse
 
     -- ** ShoppingAdsProgramStatus
-    ShoppingAdsProgramStatus (..),
-    newShoppingAdsProgramStatus,
+    , ShoppingAdsProgramStatus (..)
+    , newShoppingAdsProgramStatus
 
     -- ** ShoppingAdsProgramStatus_GlobalState
-    ShoppingAdsProgramStatus_GlobalState (..),
+    , ShoppingAdsProgramStatus_GlobalState (..)
 
     -- ** ShoppingAdsProgramStatusRegionStatus
-    ShoppingAdsProgramStatusRegionStatus (..),
-    newShoppingAdsProgramStatusRegionStatus,
+    , ShoppingAdsProgramStatusRegionStatus (..)
+    , newShoppingAdsProgramStatusRegionStatus
 
     -- ** ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
-    ShoppingAdsProgramStatusRegionStatus_EligibilityStatus (..),
+    , ShoppingAdsProgramStatusRegionStatus_EligibilityStatus (..)
 
     -- ** ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus
-    ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus (..),
+    , ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus (..)
 
     -- ** ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
-    ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason (..),
+    , ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason (..)
 
     -- ** ShoppingAdsProgramStatusReviewIneligibilityReasonDetails
-    ShoppingAdsProgramStatusReviewIneligibilityReasonDetails (..),
-    newShoppingAdsProgramStatusReviewIneligibilityReasonDetails,
+    , ShoppingAdsProgramStatusReviewIneligibilityReasonDetails (..)
+    , newShoppingAdsProgramStatusReviewIneligibilityReasonDetails
 
     -- ** Table
-    Table (..),
-    newTable,
+    , Table (..)
+    , newTable
 
     -- ** TestOrder
-    TestOrder (..),
-    newTestOrder,
+    , TestOrder (..)
+    , newTestOrder
 
     -- ** TestOrderAddress
-    TestOrderAddress (..),
-    newTestOrderAddress,
+    , TestOrderAddress (..)
+    , newTestOrderAddress
 
     -- ** TestOrderDeliveryDetails
-    TestOrderDeliveryDetails (..),
-    newTestOrderDeliveryDetails,
+    , TestOrderDeliveryDetails (..)
+    , newTestOrderDeliveryDetails
 
     -- ** TestOrderLineItem
-    TestOrderLineItem (..),
-    newTestOrderLineItem,
+    , TestOrderLineItem (..)
+    , newTestOrderLineItem
 
     -- ** TestOrderLineItemProduct
-    TestOrderLineItemProduct (..),
-    newTestOrderLineItemProduct,
+    , TestOrderLineItemProduct (..)
+    , newTestOrderLineItemProduct
 
     -- ** TestOrderPickupDetails
-    TestOrderPickupDetails (..),
-    newTestOrderPickupDetails,
+    , TestOrderPickupDetails (..)
+    , newTestOrderPickupDetails
 
     -- ** TestOrderPickupDetailsPickupPerson
-    TestOrderPickupDetailsPickupPerson (..),
-    newTestOrderPickupDetailsPickupPerson,
+    , TestOrderPickupDetailsPickupPerson (..)
+    , newTestOrderPickupDetailsPickupPerson
 
     -- ** TimePeriod
-    TimePeriod (..),
-    newTimePeriod,
+    , TimePeriod (..)
+    , newTimePeriod
 
     -- ** TimeZone
-    TimeZone (..),
-    newTimeZone,
+    , TimeZone (..)
+    , newTimeZone
 
     -- ** TransitTable
-    TransitTable (..),
-    newTransitTable,
+    , TransitTable (..)
+    , newTransitTable
 
     -- ** TransitTableTransitTimeRow
-    TransitTableTransitTimeRow (..),
-    newTransitTableTransitTimeRow,
+    , TransitTableTransitTimeRow (..)
+    , newTransitTableTransitTimeRow
 
     -- ** TransitTableTransitTimeRowTransitTimeValue
-    TransitTableTransitTimeRowTransitTimeValue (..),
-    newTransitTableTransitTimeRowTransitTimeValue,
+    , TransitTableTransitTimeRowTransitTimeValue (..)
+    , newTransitTableTransitTimeRowTransitTimeValue
 
     -- ** UnitInvoice
-    UnitInvoice (..),
-    newUnitInvoice,
+    , UnitInvoice (..)
+    , newUnitInvoice
 
     -- ** UnitInvoiceAdditionalCharge
-    UnitInvoiceAdditionalCharge (..),
-    newUnitInvoiceAdditionalCharge,
+    , UnitInvoiceAdditionalCharge (..)
+    , newUnitInvoiceAdditionalCharge
 
     -- ** UnitInvoiceTaxLine
-    UnitInvoiceTaxLine (..),
-    newUnitInvoiceTaxLine,
+    , UnitInvoiceTaxLine (..)
+    , newUnitInvoiceTaxLine
 
     -- ** Value
-    Value (..),
-    newValue,
+    , Value (..)
+    , newValue
 
     -- ** VerifyPhoneNumberRequest
-    VerifyPhoneNumberRequest (..),
-    newVerifyPhoneNumberRequest,
+    , VerifyPhoneNumberRequest (..)
+    , newVerifyPhoneNumberRequest
 
     -- ** VerifyPhoneNumberRequest_PhoneVerificationMethod
-    VerifyPhoneNumberRequest_PhoneVerificationMethod (..),
+    , VerifyPhoneNumberRequest_PhoneVerificationMethod (..)
 
     -- ** VerifyPhoneNumberResponse
-    VerifyPhoneNumberResponse (..),
-    newVerifyPhoneNumberResponse,
+    , VerifyPhoneNumberResponse (..)
+    , newVerifyPhoneNumberResponse
 
     -- ** Warehouse
-    Warehouse (..),
-    newWarehouse,
+    , Warehouse (..)
+    , newWarehouse
 
     -- ** WarehouseBasedDeliveryTime
-    WarehouseBasedDeliveryTime (..),
-    newWarehouseBasedDeliveryTime,
+    , WarehouseBasedDeliveryTime (..)
+    , newWarehouseBasedDeliveryTime
 
     -- ** WarehouseCutoffTime
-    WarehouseCutoffTime (..),
-    newWarehouseCutoffTime,
+    , WarehouseCutoffTime (..)
+    , newWarehouseCutoffTime
 
     -- ** Weight
-    Weight (..),
-    newWeight,
+    , Weight (..)
+    , newWeight
 
     -- ** AccountsGetView
-    AccountsGetView (..),
+    , AccountsGetView (..)
 
     -- ** AccountsListView
-    AccountsListView (..),
+    , AccountsListView (..)
 
     -- ** OrderreturnsListOrderBy
-    OrderreturnsListOrderBy (..),
+    , OrderreturnsListOrderBy (..)
 
     -- ** OrderreturnsListShipmentStates
-    OrderreturnsListShipmentStates (..),
+    , OrderreturnsListShipmentStates (..)
 
     -- ** OrderreturnsListShipmentStatus
-    OrderreturnsListShipmentStatus (..),
+    , OrderreturnsListShipmentStatus (..)
 
     -- ** OrderreturnsListShipmentTypes
-    OrderreturnsListShipmentTypes (..),
+    , OrderreturnsListShipmentTypes (..)
 
     -- ** OrdersGettestordertemplateTemplateName
-    OrdersGettestordertemplateTemplateName (..),
+    , OrdersGettestordertemplateTemplateName (..)
 
     -- ** OrdersListStatuses
-    OrdersListStatuses (..),
-  )
-where
+    , OrdersListStatuses (..)
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ShoppingContent.Internal.Product
@@ -1743,10 +1750,9 @@ import Gogol.ShoppingContent.Internal.Sum
 
 -- | Default request referring to version @v2.1@ of the Content API for Shopping. This contains the host and root path used as a starting point for constructing service requests.
 shoppingContentService :: Core.ServiceConfig
-shoppingContentService =
-  Core.defaultService
-    (Core.ServiceId "content:v2.1")
-    "shoppingcontent.googleapis.com"
+shoppingContentService
+  = Core.defaultService (Core.ServiceId "content:v2.1")
+      "shoppingcontent.googleapis.com"
 
 -- | Manage your product listings and accounts for Google Shopping
 contentScope :: Core.Proxy '["https://www.googleapis.com/auth/content"]

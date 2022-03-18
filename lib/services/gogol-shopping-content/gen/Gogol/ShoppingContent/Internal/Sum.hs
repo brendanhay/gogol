@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ShoppingContent.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AccountCredentials_Purpose
     AccountCredentials_Purpose
-      ( AccountCredentials_Purpose_ACCOUNTCREDENTIALSPURPOSEUNSPECIFIED,
+      (
+        AccountCredentials_Purpose_ACCOUNTCREDENTIALSPURPOSEUNSPECIFIED,
         AccountCredentials_Purpose_SHOPIFYORDERMANAGEMENT,
         AccountCredentials_Purpose_SHOPIFYINTEGRATION,
         ..
@@ -43,7 +54,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * AccountLabel_LabelType
     AccountLabel_LabelType
-      ( AccountLabel_LabelType_LABELTYPEUNSPECIFIED,
+      (
+        AccountLabel_LabelType_LABELTYPEUNSPECIFIED,
         AccountLabel_LabelType_Manual,
         AccountLabel_LabelType_Automatic,
         ..
@@ -51,7 +63,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * AccountReturnCarrier_CarrierCode
     AccountReturnCarrier_CarrierCode
-      ( AccountReturnCarrier_CarrierCode_CARRIERCODEUNSPECIFIED,
+      (
+        AccountReturnCarrier_CarrierCode_CARRIERCODEUNSPECIFIED,
         AccountReturnCarrier_CarrierCode_Fedex,
         AccountReturnCarrier_CarrierCode_Ups,
         ..
@@ -59,7 +72,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * BuyOnGoogleProgramStatus_BusinessModelItem
     BuyOnGoogleProgramStatus_BusinessModelItem
-      ( BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED,
+      (
+        BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED,
         BuyOnGoogleProgramStatus_BusinessModelItem_Manufacturer,
         BuyOnGoogleProgramStatus_BusinessModelItem_Importer,
         BuyOnGoogleProgramStatus_BusinessModelItem_Reseller,
@@ -69,7 +83,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * BuyOnGoogleProgramStatus_OnlineSalesChannel
     BuyOnGoogleProgramStatus_OnlineSalesChannel
-      ( BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED,
+      (
+        BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED,
         BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEEXCLUSIVE,
         BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEANDOTHERWEBSITES,
         ..
@@ -77,7 +92,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * BuyOnGoogleProgramStatus_ParticipationStage
     BuyOnGoogleProgramStatus_ParticipationStage
-      ( BuyOnGoogleProgramStatus_ParticipationStage_PROGRAMPARTICIPATIONSTAGEUNSPECIFIED,
+      (
+        BuyOnGoogleProgramStatus_ParticipationStage_PROGRAMPARTICIPATIONSTAGEUNSPECIFIED,
         BuyOnGoogleProgramStatus_ParticipationStage_NOTELIGIBLE,
         BuyOnGoogleProgramStatus_ParticipationStage_Eligible,
         BuyOnGoogleProgramStatus_ParticipationStage_Onboarding,
@@ -91,7 +107,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * CaptureOrderResponse_ExecutionStatus
     CaptureOrderResponse_ExecutionStatus
-      ( CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED,
+      (
+        CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED,
         CaptureOrderResponse_ExecutionStatus_Executed,
         CaptureOrderResponse_ExecutionStatus_Duplicate,
         ..
@@ -99,7 +116,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * FreeListingsProgramStatus_GlobalState
     FreeListingsProgramStatus_GlobalState
-      ( FreeListingsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED,
+      (
+        FreeListingsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED,
         FreeListingsProgramStatus_GlobalState_NOTENABLED,
         FreeListingsProgramStatus_GlobalState_NOOFFERSUPLOADED,
         FreeListingsProgramStatus_GlobalState_Enabled,
@@ -108,7 +126,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * FreeListingsProgramStatusRegionStatus_EligibilityStatus
     FreeListingsProgramStatusRegionStatus_EligibilityStatus
-      ( FreeListingsProgramStatusRegionStatus_EligibilityStatus_STATEUNSPECIFIED,
+      (
+        FreeListingsProgramStatusRegionStatus_EligibilityStatus_STATEUNSPECIFIED,
         FreeListingsProgramStatusRegionStatus_EligibilityStatus_Approved,
         FreeListingsProgramStatusRegionStatus_EligibilityStatus_Disapproved,
         FreeListingsProgramStatusRegionStatus_EligibilityStatus_Warning,
@@ -120,7 +139,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus
     FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus
-      ( FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED,
+      (
+        FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED,
         FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_Eligible,
         FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_Ineligible,
         ..
@@ -128,7 +148,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
     FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
-      ( FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED,
+      (
+        FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED,
         FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ONBOARDINGISSUES,
         FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOTENOUGHOFFERS,
         FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
@@ -139,7 +160,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * InapplicabilityDetails_InapplicableReason
     InapplicabilityDetails_InapplicableReason
-      ( InapplicabilityDetails_InapplicableReason_INAPPLICABLEREASONUNSPECIFIED,
+      (
+        InapplicabilityDetails_InapplicableReason_INAPPLICABLEREASONUNSPECIFIED,
         InapplicabilityDetails_InapplicableReason_CANNOTBEATBUYBOXWINNER,
         InapplicabilityDetails_InapplicableReason_ALREADYWINNINGBUYBOX,
         InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYSAMETYPERULE,
@@ -153,7 +175,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * OrderTrackingSignalShippingInfo_ShippingStatus
     OrderTrackingSignalShippingInfo_ShippingStatus
-      ( OrderTrackingSignalShippingInfo_ShippingStatus_SHIPPINGSTATEUNSPECIFIED,
+      (
+        OrderTrackingSignalShippingInfo_ShippingStatus_SHIPPINGSTATEUNSPECIFIED,
         OrderTrackingSignalShippingInfo_ShippingStatus_Shipped,
         OrderTrackingSignalShippingInfo_ShippingStatus_Delivered,
         ..
@@ -161,7 +184,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * Promotion_CouponValueType
     Promotion_CouponValueType
-      ( Promotion_CouponValueType_COUPONVALUETYPEUNSPECIFIED,
+      (
+        Promotion_CouponValueType_COUPONVALUETYPEUNSPECIFIED,
         Promotion_CouponValueType_MONEYOFF,
         Promotion_CouponValueType_PERCENTOFF,
         Promotion_CouponValueType_BUYMGETNMONEYOFF,
@@ -179,7 +203,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * Promotion_OfferType
     Promotion_OfferType
-      ( Promotion_OfferType_OFFERTYPEUNSPECIFIED,
+      (
+        Promotion_OfferType_OFFERTYPEUNSPECIFIED,
         Promotion_OfferType_NOCODE,
         Promotion_OfferType_GENERICCODE,
         ..
@@ -187,7 +212,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * Promotion_ProductApplicability
     Promotion_ProductApplicability
-      ( Promotion_ProductApplicability_PRODUCTAPPLICABILITYUNSPECIFIED,
+      (
+        Promotion_ProductApplicability_PRODUCTAPPLICABILITYUNSPECIFIED,
         Promotion_ProductApplicability_ALLPRODUCTS,
         Promotion_ProductApplicability_SPECIFICPRODUCTS,
         ..
@@ -195,7 +221,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * Promotion_RedemptionChannelItem
     Promotion_RedemptionChannelItem
-      ( Promotion_RedemptionChannelItem_REDEMPTIONCHANNELUNSPECIFIED,
+      (
+        Promotion_RedemptionChannelItem_REDEMPTIONCHANNELUNSPECIFIED,
         Promotion_RedemptionChannelItem_INSTORE,
         Promotion_RedemptionChannelItem_Online,
         ..
@@ -203,7 +230,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * RepricingProductReport_Type
     RepricingProductReport_Type
-      ( RepricingProductReport_Type_REPRICINGRULETYPEUNSPECIFIED,
+      (
+        RepricingProductReport_Type_REPRICINGRULETYPEUNSPECIFIED,
         RepricingProductReport_Type_TYPESTATSBASED,
         RepricingProductReport_Type_TYPECOGSBASED,
         RepricingProductReport_Type_TYPESALESVOLUMEBASED,
@@ -213,7 +241,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * RepricingRule_Type
     RepricingRule_Type
-      ( RepricingRule_Type_REPRICINGRULETYPEUNSPECIFIED,
+      (
+        RepricingRule_Type_REPRICINGRULETYPEUNSPECIFIED,
         RepricingRule_Type_TYPESTATSBASED,
         RepricingRule_Type_TYPECOGSBASED,
         RepricingRule_Type_TYPESALESVOLUMEBASED,
@@ -223,7 +252,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * RepricingRuleEligibleOfferMatcher_MatcherOption
     RepricingRuleEligibleOfferMatcher_MatcherOption
-      ( RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUNSPECIFIED,
+      (
+        RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUNSPECIFIED,
         RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONCUSTOMFILTER,
         RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUSEFEEDATTRIBUTE,
         RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONALLPRODUCTS,
@@ -232,7 +262,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * RepricingRuleReport_Type
     RepricingRuleReport_Type
-      ( RepricingRuleReport_Type_REPRICINGRULETYPEUNSPECIFIED,
+      (
+        RepricingRuleReport_Type_REPRICINGRULETYPEUNSPECIFIED,
         RepricingRuleReport_Type_TYPESTATSBASED,
         RepricingRuleReport_Type_TYPECOGSBASED,
         RepricingRuleReport_Type_TYPESALESVOLUMEBASED,
@@ -242,7 +273,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * RequestPhoneVerificationRequest_PhoneVerificationMethod
     RequestPhoneVerificationRequest_PhoneVerificationMethod
-      ( RequestPhoneVerificationRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED,
+      (
+        RequestPhoneVerificationRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED,
         RequestPhoneVerificationRequest_PhoneVerificationMethod_Sms,
         RequestPhoneVerificationRequest_PhoneVerificationMethod_PHONECALL,
         ..
@@ -250,7 +282,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ReturnPolicyOnline_ItemConditionsItem
     ReturnPolicyOnline_ItemConditionsItem
-      ( ReturnPolicyOnline_ItemConditionsItem_ITEMCONDITIONUNSPECIFIED,
+      (
+        ReturnPolicyOnline_ItemConditionsItem_ITEMCONDITIONUNSPECIFIED,
         ReturnPolicyOnline_ItemConditionsItem_New,
         ReturnPolicyOnline_ItemConditionsItem_Used,
         ..
@@ -258,7 +291,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ReturnPolicyOnline_ReturnMethodsItem
     ReturnPolicyOnline_ReturnMethodsItem
-      ( ReturnPolicyOnline_ReturnMethodsItem_RETURNMETHODUNSPECIFIED,
+      (
+        ReturnPolicyOnline_ReturnMethodsItem_RETURNMETHODUNSPECIFIED,
         ReturnPolicyOnline_ReturnMethodsItem_BYMAIL,
         ReturnPolicyOnline_ReturnMethodsItem_INSTORE,
         ReturnPolicyOnline_ReturnMethodsItem_ATAKIOSK,
@@ -267,7 +301,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ReturnPolicyOnlinePolicy_Type
     ReturnPolicyOnlinePolicy_Type
-      ( ReturnPolicyOnlinePolicy_Type_TYPEUNSPECIFIED,
+      (
+        ReturnPolicyOnlinePolicy_Type_TYPEUNSPECIFIED,
         ReturnPolicyOnlinePolicy_Type_NUMBEROFDAYSAFTERDELIVERY,
         ReturnPolicyOnlinePolicy_Type_NORETURNS,
         ReturnPolicyOnlinePolicy_Type_LIFETIMERETURNS,
@@ -276,7 +311,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource
     ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource
-      ( ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_RETURNLABELSOURCEUNSPECIFIED,
+      (
+        ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_RETURNLABELSOURCEUNSPECIFIED,
         ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_DOWNLOADANDPRINT,
         ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_INTHEBOX,
         ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_CUSTOMERRESPONSIBILITY,
@@ -285,7 +321,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory
     ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory
-      ( ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_RETURNREASONCATEGORYUNSPECIFIED,
+      (
+        ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_RETURNREASONCATEGORYUNSPECIFIED,
         ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_BUYERREMORSE,
         ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_ITEMDEFECT,
         ..
@@ -293,7 +330,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ReturnPolicyOnlineReturnShippingFee_Type
     ReturnPolicyOnlineReturnShippingFee_Type
-      ( ReturnPolicyOnlineReturnShippingFee_Type_TYPEUNSPECIFIED,
+      (
+        ReturnPolicyOnlineReturnShippingFee_Type_TYPEUNSPECIFIED,
         ReturnPolicyOnlineReturnShippingFee_Type_Fixed,
         ReturnPolicyOnlineReturnShippingFee_Type_CUSTOMERPAYINGACTUALFEE,
         ..
@@ -301,7 +339,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * Segments_Program
     Segments_Program
-      ( Segments_Program_PROGRAMUNSPECIFIED,
+      (
+        Segments_Program_PROGRAMUNSPECIFIED,
         Segments_Program_SHOPPINGADS,
         Segments_Program_FREEPRODUCTLISTING,
         Segments_Program_FREELOCALPRODUCTLISTING,
@@ -311,7 +350,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ShoppingAdsProgramStatus_GlobalState
     ShoppingAdsProgramStatus_GlobalState
-      ( ShoppingAdsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED,
+      (
+        ShoppingAdsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED,
         ShoppingAdsProgramStatus_GlobalState_NOTENABLED,
         ShoppingAdsProgramStatus_GlobalState_NOOFFERSUPLOADED,
         ShoppingAdsProgramStatus_GlobalState_Enabled,
@@ -320,7 +360,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
     ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
-      ( ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_STATEUNSPECIFIED,
+      (
+        ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_STATEUNSPECIFIED,
         ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Approved,
         ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Disapproved,
         ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Warning,
@@ -332,7 +373,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus
     ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus
-      ( ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED,
+      (
+        ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED,
         ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_Eligible,
         ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_Ineligible,
         ..
@@ -340,7 +382,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
     ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
-      ( ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED,
+      (
+        ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED,
         ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ONBOARDINGISSUES,
         ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOTENOUGHOFFERS,
         ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
@@ -351,7 +394,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * VerifyPhoneNumberRequest_PhoneVerificationMethod
     VerifyPhoneNumberRequest_PhoneVerificationMethod
-      ( VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED,
+      (
+        VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED,
         VerifyPhoneNumberRequest_PhoneVerificationMethod_Sms,
         VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONECALL,
         ..
@@ -359,28 +403,32 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * AccountsGetView
     AccountsGetView
-      ( AccountsGetView_Merchant,
+      (
+        AccountsGetView_Merchant,
         AccountsGetView_Css,
         ..
       ),
 
     -- * AccountsListView
     AccountsListView
-      ( AccountsListView_Merchant,
+      (
+        AccountsListView_Merchant,
         AccountsListView_Css,
         ..
       ),
 
     -- * OrderreturnsListOrderBy
     OrderreturnsListOrderBy
-      ( OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC,
+      (
+        OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC,
         OrderreturnsListOrderBy_RETURNCREATIONTIMEASC,
         ..
       ),
 
     -- * OrderreturnsListShipmentStates
     OrderreturnsListShipmentStates
-      ( OrderreturnsListShipmentStates_New,
+      (
+        OrderreturnsListShipmentStates_New,
         OrderreturnsListShipmentStates_Shipped,
         OrderreturnsListShipmentStates_Completed,
         OrderreturnsListShipmentStates_Undeliverable,
@@ -390,7 +438,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * OrderreturnsListShipmentStatus
     OrderreturnsListShipmentStatus
-      ( OrderreturnsListShipmentStatus_New,
+      (
+        OrderreturnsListShipmentStatus_New,
         OrderreturnsListShipmentStatus_INPROGRESS,
         OrderreturnsListShipmentStatus_Processed,
         ..
@@ -398,7 +447,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * OrderreturnsListShipmentTypes
     OrderreturnsListShipmentTypes
-      ( OrderreturnsListShipmentTypes_BYMAIL,
+      (
+        OrderreturnsListShipmentTypes_BYMAIL,
         OrderreturnsListShipmentTypes_Returnless,
         OrderreturnsListShipmentTypes_CONTACTCUSTOMERSUPPORT,
         ..
@@ -406,7 +456,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * OrdersGettestordertemplateTemplateName
     OrdersGettestordertemplateTemplateName
-      ( OrdersGettestordertemplateTemplateName_TEMPLATE1,
+      (
+        OrdersGettestordertemplateTemplateName_TEMPLATE1,
         OrdersGettestordertemplateTemplateName_TEMPLATE2,
         OrdersGettestordertemplateTemplateName_TEMPLATE1A,
         OrdersGettestordertemplateTemplateName_TEMPLATE1B,
@@ -417,7 +468,8 @@ module Gogol.ShoppingContent.Internal.Sum
 
     -- * OrdersListStatuses
     OrdersListStatuses
-      ( OrdersListStatuses_Active,
+      (
+        OrdersListStatuses_Active,
         OrdersListStatuses_Completed,
         OrdersListStatuses_Canceled,
         OrdersListStatuses_INPROGRESS,
@@ -430,23 +482,22 @@ module Gogol.ShoppingContent.Internal.Sum
         OrdersListStatuses_Returned,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -459,21 +510,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Indicates to Google how Google should use these OAuth tokens.
-newtype AccountCredentials_Purpose = AccountCredentials_Purpose {fromAccountCredentials_Purpose :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountCredentials_Purpose = AccountCredentials_Purpose { fromAccountCredentials_Purpose :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown purpose.
 pattern AccountCredentials_Purpose_ACCOUNTCREDENTIALSPURPOSEUNSPECIFIED :: AccountCredentials_Purpose
@@ -491,21 +541,20 @@ pattern AccountCredentials_Purpose_SHOPIFYINTEGRATION = AccountCredentials_Purpo
   AccountCredentials_Purpose_ACCOUNTCREDENTIALSPURPOSEUNSPECIFIED,
   AccountCredentials_Purpose_SHOPIFYORDERMANAGEMENT,
   AccountCredentials_Purpose_SHOPIFYINTEGRATION,
-  AccountCredentials_Purpose
-  #-}
+  AccountCredentials_Purpose #-}
 
 -- | Output only. The type of this label.
-newtype AccountLabel_LabelType = AccountLabel_LabelType {fromAccountLabel_LabelType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountLabel_LabelType = AccountLabel_LabelType { fromAccountLabel_LabelType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown label type.
 pattern AccountLabel_LabelType_LABELTYPEUNSPECIFIED :: AccountLabel_LabelType
@@ -523,21 +572,20 @@ pattern AccountLabel_LabelType_Automatic = AccountLabel_LabelType "AUTOMATIC"
   AccountLabel_LabelType_LABELTYPEUNSPECIFIED,
   AccountLabel_LabelType_Manual,
   AccountLabel_LabelType_Automatic,
-  AccountLabel_LabelType
-  #-}
+  AccountLabel_LabelType #-}
 
 -- | The carrier code enum. Accepts the values FEDEX or UPS.
-newtype AccountReturnCarrier_CarrierCode = AccountReturnCarrier_CarrierCode {fromAccountReturnCarrier_CarrierCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountReturnCarrier_CarrierCode = AccountReturnCarrier_CarrierCode { fromAccountReturnCarrier_CarrierCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Carrier not specified
 pattern AccountReturnCarrier_CarrierCode_CARRIERCODEUNSPECIFIED :: AccountReturnCarrier_CarrierCode
@@ -555,20 +603,19 @@ pattern AccountReturnCarrier_CarrierCode_Ups = AccountReturnCarrier_CarrierCode 
   AccountReturnCarrier_CarrierCode_CARRIERCODEUNSPECIFIED,
   AccountReturnCarrier_CarrierCode_Fedex,
   AccountReturnCarrier_CarrierCode_Ups,
-  AccountReturnCarrier_CarrierCode
-  #-}
+  AccountReturnCarrier_CarrierCode #-}
 
-newtype BuyOnGoogleProgramStatus_BusinessModelItem = BuyOnGoogleProgramStatus_BusinessModelItem {fromBuyOnGoogleProgramStatus_BusinessModelItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuyOnGoogleProgramStatus_BusinessModelItem = BuyOnGoogleProgramStatus_BusinessModelItem { fromBuyOnGoogleProgramStatus_BusinessModelItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when business model is not set.
 pattern BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED :: BuyOnGoogleProgramStatus_BusinessModelItem
@@ -596,21 +643,20 @@ pattern BuyOnGoogleProgramStatus_BusinessModelItem_Other = BuyOnGoogleProgramSta
   BuyOnGoogleProgramStatus_BusinessModelItem_Importer,
   BuyOnGoogleProgramStatus_BusinessModelItem_Reseller,
   BuyOnGoogleProgramStatus_BusinessModelItem_Other,
-  BuyOnGoogleProgramStatus_BusinessModelItem
-  #-}
+  BuyOnGoogleProgramStatus_BusinessModelItem #-}
 
 -- | The channels through which the merchant is selling.
-newtype BuyOnGoogleProgramStatus_OnlineSalesChannel = BuyOnGoogleProgramStatus_OnlineSalesChannel {fromBuyOnGoogleProgramStatus_OnlineSalesChannel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuyOnGoogleProgramStatus_OnlineSalesChannel = BuyOnGoogleProgramStatus_OnlineSalesChannel { fromBuyOnGoogleProgramStatus_OnlineSalesChannel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when online sales channel is not set.
 pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED :: BuyOnGoogleProgramStatus_OnlineSalesChannel
@@ -628,21 +674,20 @@ pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEANDOTHERWEBSITES = Buy
   BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED,
   BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEEXCLUSIVE,
   BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEANDOTHERWEBSITES,
-  BuyOnGoogleProgramStatus_OnlineSalesChannel
-  #-}
+  BuyOnGoogleProgramStatus_OnlineSalesChannel #-}
 
 -- | Output only. The current participation stage for the program.
-newtype BuyOnGoogleProgramStatus_ParticipationStage = BuyOnGoogleProgramStatus_ParticipationStage {fromBuyOnGoogleProgramStatus_ParticipationStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuyOnGoogleProgramStatus_ParticipationStage = BuyOnGoogleProgramStatus_ParticipationStage { fromBuyOnGoogleProgramStatus_ParticipationStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when participation stage is not set.
 pattern BuyOnGoogleProgramStatus_ParticipationStage_PROGRAMPARTICIPATIONSTAGEUNSPECIFIED :: BuyOnGoogleProgramStatus_ParticipationStage
@@ -690,21 +735,20 @@ pattern BuyOnGoogleProgramStatus_ParticipationStage_Paused = BuyOnGoogleProgramS
   BuyOnGoogleProgramStatus_ParticipationStage_REVIEWDISAPPROVED,
   BuyOnGoogleProgramStatus_ParticipationStage_Active,
   BuyOnGoogleProgramStatus_ParticipationStage_Paused,
-  BuyOnGoogleProgramStatus_ParticipationStage
-  #-}
+  BuyOnGoogleProgramStatus_ParticipationStage #-}
 
 -- | The status of the execution. Only defined if the request was successful. Acceptable values are: * \"duplicate\" * \"executed\"
-newtype CaptureOrderResponse_ExecutionStatus = CaptureOrderResponse_ExecutionStatus {fromCaptureOrderResponse_ExecutionStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CaptureOrderResponse_ExecutionStatus = CaptureOrderResponse_ExecutionStatus { fromCaptureOrderResponse_ExecutionStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED :: CaptureOrderResponse_ExecutionStatus
@@ -722,21 +766,20 @@ pattern CaptureOrderResponse_ExecutionStatus_Duplicate = CaptureOrderResponse_Ex
   CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED,
   CaptureOrderResponse_ExecutionStatus_Executed,
   CaptureOrderResponse_ExecutionStatus_Duplicate,
-  CaptureOrderResponse_ExecutionStatus
-  #-}
+  CaptureOrderResponse_ExecutionStatus #-}
 
 -- | State of the program, It is set to enabled if there are offers for at least one region.
-newtype FreeListingsProgramStatus_GlobalState = FreeListingsProgramStatus_GlobalState {fromFreeListingsProgramStatus_GlobalState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FreeListingsProgramStatus_GlobalState = FreeListingsProgramStatus_GlobalState { fromFreeListingsProgramStatus_GlobalState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State is not known.
 pattern FreeListingsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED :: FreeListingsProgramStatus_GlobalState
@@ -759,21 +802,20 @@ pattern FreeListingsProgramStatus_GlobalState_Enabled = FreeListingsProgramStatu
   FreeListingsProgramStatus_GlobalState_NOTENABLED,
   FreeListingsProgramStatus_GlobalState_NOOFFERSUPLOADED,
   FreeListingsProgramStatus_GlobalState_Enabled,
-  FreeListingsProgramStatus_GlobalState
-  #-}
+  FreeListingsProgramStatus_GlobalState #-}
 
 -- | Eligibility status of the standard free listing program.
-newtype FreeListingsProgramStatusRegionStatus_EligibilityStatus = FreeListingsProgramStatusRegionStatus_EligibilityStatus {fromFreeListingsProgramStatusRegionStatus_EligibilityStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FreeListingsProgramStatusRegionStatus_EligibilityStatus = FreeListingsProgramStatusRegionStatus_EligibilityStatus { fromFreeListingsProgramStatusRegionStatus_EligibilityStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State is not known.
 pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_STATEUNSPECIFIED :: FreeListingsProgramStatusRegionStatus_EligibilityStatus
@@ -811,21 +853,20 @@ pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_Onboarding = Fre
   FreeListingsProgramStatusRegionStatus_EligibilityStatus_UNDERREVIEW,
   FreeListingsProgramStatusRegionStatus_EligibilityStatus_PENDINGREVIEW,
   FreeListingsProgramStatusRegionStatus_EligibilityStatus_Onboarding,
-  FreeListingsProgramStatusRegionStatus_EligibilityStatus
-  #-}
+  FreeListingsProgramStatusRegionStatus_EligibilityStatus #-}
 
 -- | If a program in a given country is eligible for review. It will be present only if eligibility status is @DISAPPROVED@.
-newtype FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus = FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus {fromFreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus = FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus { fromFreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Review eligibility reason state is unknown.
 pattern FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED :: FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus
@@ -843,21 +884,20 @@ pattern FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_Ineligible
   FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED,
   FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_Eligible,
   FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_Ineligible,
-  FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus
-  #-}
+  FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus #-}
 
 -- | Review ineligibility reason if account is not eligible for review.
-newtype FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason {fromFreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason { fromFreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Requesting a review from Google is not possible.
 pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED :: FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
@@ -890,21 +930,20 @@ pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEW
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYUNDERREVIEW,
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED,
-  FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
-  #-}
+  FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason #-}
 
 -- | Reason code this rule was not applicable.
-newtype InapplicabilityDetails_InapplicableReason = InapplicabilityDetails_InapplicableReason {fromInapplicabilityDetails_InapplicableReason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype InapplicabilityDetails_InapplicableReason = InapplicabilityDetails_InapplicableReason { fromInapplicabilityDetails_InapplicableReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. Should not be used.
 pattern InapplicabilityDetails_InapplicableReason_INAPPLICABLEREASONUNSPECIFIED :: InapplicabilityDetails_InapplicableReason
@@ -952,21 +991,20 @@ pattern InapplicabilityDetails_InapplicableReason_INVALIDFLOORCONFIG = Inapplica
   InapplicabilityDetails_InapplicableReason_Uncategorized,
   InapplicabilityDetails_InapplicableReason_INVALIDAUTOPRICEMIN,
   InapplicabilityDetails_InapplicableReason_INVALIDFLOORCONFIG,
-  InapplicabilityDetails_InapplicableReason
-  #-}
+  InapplicabilityDetails_InapplicableReason #-}
 
 -- | The status of the shipment.
-newtype OrderTrackingSignalShippingInfo_ShippingStatus = OrderTrackingSignalShippingInfo_ShippingStatus {fromOrderTrackingSignalShippingInfo_ShippingStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrderTrackingSignalShippingInfo_ShippingStatus = OrderTrackingSignalShippingInfo_ShippingStatus { fromOrderTrackingSignalShippingInfo_ShippingStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The shipping status is not known to merchant.
 pattern OrderTrackingSignalShippingInfo_ShippingStatus_SHIPPINGSTATEUNSPECIFIED :: OrderTrackingSignalShippingInfo_ShippingStatus
@@ -984,21 +1022,20 @@ pattern OrderTrackingSignalShippingInfo_ShippingStatus_Delivered = OrderTracking
   OrderTrackingSignalShippingInfo_ShippingStatus_SHIPPINGSTATEUNSPECIFIED,
   OrderTrackingSignalShippingInfo_ShippingStatus_Shipped,
   OrderTrackingSignalShippingInfo_ShippingStatus_Delivered,
-  OrderTrackingSignalShippingInfo_ShippingStatus
-  #-}
+  OrderTrackingSignalShippingInfo_ShippingStatus #-}
 
 -- | Required. Coupon value type for the promotion.
-newtype Promotion_CouponValueType = Promotion_CouponValueType {fromPromotion_CouponValueType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Promotion_CouponValueType = Promotion_CouponValueType { fromPromotion_CouponValueType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Indicates that the coupon value type is unspecified.
 pattern Promotion_CouponValueType_COUPONVALUETYPEUNSPECIFIED :: Promotion_CouponValueType
@@ -1066,21 +1103,20 @@ pattern Promotion_CouponValueType_FREESHIPPINGTWODAY = Promotion_CouponValueType
   Promotion_CouponValueType_FREESHIPPINGSTANDARD,
   Promotion_CouponValueType_FREESHIPPINGOVERNIGHT,
   Promotion_CouponValueType_FREESHIPPINGTWODAY,
-  Promotion_CouponValueType
-  #-}
+  Promotion_CouponValueType #-}
 
 -- | Required. Type of the promotion.
-newtype Promotion_OfferType = Promotion_OfferType {fromPromotion_OfferType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Promotion_OfferType = Promotion_OfferType { fromPromotion_OfferType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown offer type.
 pattern Promotion_OfferType_OFFERTYPEUNSPECIFIED :: Promotion_OfferType
@@ -1098,21 +1134,20 @@ pattern Promotion_OfferType_GENERICCODE = Promotion_OfferType "GENERIC_CODE"
   Promotion_OfferType_OFFERTYPEUNSPECIFIED,
   Promotion_OfferType_NOCODE,
   Promotion_OfferType_GENERICCODE,
-  Promotion_OfferType
-  #-}
+  Promotion_OfferType #-}
 
 -- | Required. Applicability of the promotion to either all products or only specific products.
-newtype Promotion_ProductApplicability = Promotion_ProductApplicability {fromPromotion_ProductApplicability :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Promotion_ProductApplicability = Promotion_ProductApplicability { fromPromotion_ProductApplicability :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown product applicability.
 pattern Promotion_ProductApplicability_PRODUCTAPPLICABILITYUNSPECIFIED :: Promotion_ProductApplicability
@@ -1130,20 +1165,19 @@ pattern Promotion_ProductApplicability_SPECIFICPRODUCTS = Promotion_ProductAppli
   Promotion_ProductApplicability_PRODUCTAPPLICABILITYUNSPECIFIED,
   Promotion_ProductApplicability_ALLPRODUCTS,
   Promotion_ProductApplicability_SPECIFICPRODUCTS,
-  Promotion_ProductApplicability
-  #-}
+  Promotion_ProductApplicability #-}
 
-newtype Promotion_RedemptionChannelItem = Promotion_RedemptionChannelItem {fromPromotion_RedemptionChannelItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Promotion_RedemptionChannelItem = Promotion_RedemptionChannelItem { fromPromotion_RedemptionChannelItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Indicates that the channel is unspecified.
 pattern Promotion_RedemptionChannelItem_REDEMPTIONCHANNELUNSPECIFIED :: Promotion_RedemptionChannelItem
@@ -1161,21 +1195,20 @@ pattern Promotion_RedemptionChannelItem_Online = Promotion_RedemptionChannelItem
   Promotion_RedemptionChannelItem_REDEMPTIONCHANNELUNSPECIFIED,
   Promotion_RedemptionChannelItem_INSTORE,
   Promotion_RedemptionChannelItem_Online,
-  Promotion_RedemptionChannelItem
-  #-}
+  Promotion_RedemptionChannelItem #-}
 
 -- | Type of the rule.
-newtype RepricingProductReport_Type = RepricingProductReport_Type {fromRepricingProductReport_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RepricingProductReport_Type = RepricingProductReport_Type { fromRepricingProductReport_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unused.
 pattern RepricingProductReport_Type_REPRICINGRULETYPEUNSPECIFIED :: RepricingProductReport_Type
@@ -1203,21 +1236,20 @@ pattern RepricingProductReport_Type_TYPECOMPETITIVEPRICE = RepricingProductRepor
   RepricingProductReport_Type_TYPECOGSBASED,
   RepricingProductReport_Type_TYPESALESVOLUMEBASED,
   RepricingProductReport_Type_TYPECOMPETITIVEPRICE,
-  RepricingProductReport_Type
-  #-}
+  RepricingProductReport_Type #-}
 
 -- | Required. Immutable. The type of the rule.
-newtype RepricingRule_Type = RepricingRule_Type {fromRepricingRule_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RepricingRule_Type = RepricingRule_Type { fromRepricingRule_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unused.
 pattern RepricingRule_Type_REPRICINGRULETYPEUNSPECIFIED :: RepricingRule_Type
@@ -1245,21 +1277,20 @@ pattern RepricingRule_Type_TYPECOMPETITIVEPRICE = RepricingRule_Type "TYPE_COMPE
   RepricingRule_Type_TYPECOGSBASED,
   RepricingRule_Type_TYPESALESVOLUMEBASED,
   RepricingRule_Type_TYPECOMPETITIVEPRICE,
-  RepricingRule_Type
-  #-}
+  RepricingRule_Type #-}
 
 -- | Determines whether to use the custom matchers or the product feed attribute \"repricing/rule/id\" to specify offer-rule mapping.
-newtype RepricingRuleEligibleOfferMatcher_MatcherOption = RepricingRuleEligibleOfferMatcher_MatcherOption {fromRepricingRuleEligibleOfferMatcher_MatcherOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RepricingRuleEligibleOfferMatcher_MatcherOption = RepricingRuleEligibleOfferMatcher_MatcherOption { fromRepricingRuleEligibleOfferMatcher_MatcherOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unused.
 pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUNSPECIFIED :: RepricingRuleEligibleOfferMatcher_MatcherOption
@@ -1282,21 +1313,20 @@ pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONALLPRODUCTS
   RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONCUSTOMFILTER,
   RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUSEFEEDATTRIBUTE,
   RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONALLPRODUCTS,
-  RepricingRuleEligibleOfferMatcher_MatcherOption
-  #-}
+  RepricingRuleEligibleOfferMatcher_MatcherOption #-}
 
 -- | Type of the rule.
-newtype RepricingRuleReport_Type = RepricingRuleReport_Type {fromRepricingRuleReport_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RepricingRuleReport_Type = RepricingRuleReport_Type { fromRepricingRuleReport_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unused.
 pattern RepricingRuleReport_Type_REPRICINGRULETYPEUNSPECIFIED :: RepricingRuleReport_Type
@@ -1324,21 +1354,20 @@ pattern RepricingRuleReport_Type_TYPECOMPETITIVEPRICE = RepricingRuleReport_Type
   RepricingRuleReport_Type_TYPECOGSBASED,
   RepricingRuleReport_Type_TYPESALESVOLUMEBASED,
   RepricingRuleReport_Type_TYPECOMPETITIVEPRICE,
-  RepricingRuleReport_Type
-  #-}
+  RepricingRuleReport_Type #-}
 
 -- | Verification method to receive verification code.
-newtype RequestPhoneVerificationRequest_PhoneVerificationMethod = RequestPhoneVerificationRequest_PhoneVerificationMethod {fromRequestPhoneVerificationRequest_PhoneVerificationMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RequestPhoneVerificationRequest_PhoneVerificationMethod = RequestPhoneVerificationRequest_PhoneVerificationMethod { fromRequestPhoneVerificationRequest_PhoneVerificationMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown method.
 pattern RequestPhoneVerificationRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED :: RequestPhoneVerificationRequest_PhoneVerificationMethod
@@ -1356,20 +1385,19 @@ pattern RequestPhoneVerificationRequest_PhoneVerificationMethod_PHONECALL = Requ
   RequestPhoneVerificationRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED,
   RequestPhoneVerificationRequest_PhoneVerificationMethod_Sms,
   RequestPhoneVerificationRequest_PhoneVerificationMethod_PHONECALL,
-  RequestPhoneVerificationRequest_PhoneVerificationMethod
-  #-}
+  RequestPhoneVerificationRequest_PhoneVerificationMethod #-}
 
-newtype ReturnPolicyOnline_ItemConditionsItem = ReturnPolicyOnline_ItemConditionsItem {fromReturnPolicyOnline_ItemConditionsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReturnPolicyOnline_ItemConditionsItem = ReturnPolicyOnline_ItemConditionsItem { fromReturnPolicyOnline_ItemConditionsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern ReturnPolicyOnline_ItemConditionsItem_ITEMCONDITIONUNSPECIFIED :: ReturnPolicyOnline_ItemConditionsItem
@@ -1387,20 +1415,19 @@ pattern ReturnPolicyOnline_ItemConditionsItem_Used = ReturnPolicyOnline_ItemCond
   ReturnPolicyOnline_ItemConditionsItem_ITEMCONDITIONUNSPECIFIED,
   ReturnPolicyOnline_ItemConditionsItem_New,
   ReturnPolicyOnline_ItemConditionsItem_Used,
-  ReturnPolicyOnline_ItemConditionsItem
-  #-}
+  ReturnPolicyOnline_ItemConditionsItem #-}
 
-newtype ReturnPolicyOnline_ReturnMethodsItem = ReturnPolicyOnline_ReturnMethodsItem {fromReturnPolicyOnline_ReturnMethodsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReturnPolicyOnline_ReturnMethodsItem = ReturnPolicyOnline_ReturnMethodsItem { fromReturnPolicyOnline_ReturnMethodsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern ReturnPolicyOnline_ReturnMethodsItem_RETURNMETHODUNSPECIFIED :: ReturnPolicyOnline_ReturnMethodsItem
@@ -1423,21 +1450,20 @@ pattern ReturnPolicyOnline_ReturnMethodsItem_ATAKIOSK = ReturnPolicyOnline_Retur
   ReturnPolicyOnline_ReturnMethodsItem_BYMAIL,
   ReturnPolicyOnline_ReturnMethodsItem_INSTORE,
   ReturnPolicyOnline_ReturnMethodsItem_ATAKIOSK,
-  ReturnPolicyOnline_ReturnMethodsItem
-  #-}
+  ReturnPolicyOnline_ReturnMethodsItem #-}
 
 -- | Policy type.
-newtype ReturnPolicyOnlinePolicy_Type = ReturnPolicyOnlinePolicy_Type {fromReturnPolicyOnlinePolicy_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReturnPolicyOnlinePolicy_Type = ReturnPolicyOnlinePolicy_Type { fromReturnPolicyOnlinePolicy_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern ReturnPolicyOnlinePolicy_Type_TYPEUNSPECIFIED :: ReturnPolicyOnlinePolicy_Type
@@ -1460,21 +1486,20 @@ pattern ReturnPolicyOnlinePolicy_Type_LIFETIMERETURNS = ReturnPolicyOnlinePolicy
   ReturnPolicyOnlinePolicy_Type_NUMBEROFDAYSAFTERDELIVERY,
   ReturnPolicyOnlinePolicy_Type_NORETURNS,
   ReturnPolicyOnlinePolicy_Type_LIFETIMERETURNS,
-  ReturnPolicyOnlinePolicy_Type
-  #-}
+  ReturnPolicyOnlinePolicy_Type #-}
 
 -- | The corresponding return label source.
-newtype ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource = ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource {fromReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource = ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource { fromReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_RETURNLABELSOURCEUNSPECIFIED :: ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource
@@ -1497,21 +1522,20 @@ pattern ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_CUSTOMERRES
   ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_DOWNLOADANDPRINT,
   ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_INTHEBOX,
   ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource_CUSTOMERRESPONSIBILITY,
-  ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource
-  #-}
+  ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource #-}
 
 -- | The return reason category.
-newtype ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory = ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory {fromReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory = ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory { fromReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_RETURNREASONCATEGORYUNSPECIFIED :: ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory
@@ -1529,21 +1553,20 @@ pattern ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_ITEMDEFE
   ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_RETURNREASONCATEGORYUNSPECIFIED,
   ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_BUYERREMORSE,
   ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory_ITEMDEFECT,
-  ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory
-  #-}
+  ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnReasonCategory #-}
 
 -- | Type of return shipping fee.
-newtype ReturnPolicyOnlineReturnShippingFee_Type = ReturnPolicyOnlineReturnShippingFee_Type {fromReturnPolicyOnlineReturnShippingFee_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReturnPolicyOnlineReturnShippingFee_Type = ReturnPolicyOnlineReturnShippingFee_Type { fromReturnPolicyOnlineReturnShippingFee_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern ReturnPolicyOnlineReturnShippingFee_Type_TYPEUNSPECIFIED :: ReturnPolicyOnlineReturnShippingFee_Type
@@ -1561,21 +1584,20 @@ pattern ReturnPolicyOnlineReturnShippingFee_Type_CUSTOMERPAYINGACTUALFEE = Retur
   ReturnPolicyOnlineReturnShippingFee_Type_TYPEUNSPECIFIED,
   ReturnPolicyOnlineReturnShippingFee_Type_Fixed,
   ReturnPolicyOnlineReturnShippingFee_Type_CUSTOMERPAYINGACTUALFEE,
-  ReturnPolicyOnlineReturnShippingFee_Type
-  #-}
+  ReturnPolicyOnlineReturnShippingFee_Type #-}
 
 -- | Program to which metrics apply, e.g., Free Product Listing.
-newtype Segments_Program = Segments_Program {fromSegments_Program :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Segments_Program = Segments_Program { fromSegments_Program :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern Segments_Program_PROGRAMUNSPECIFIED :: Segments_Program
@@ -1603,21 +1625,20 @@ pattern Segments_Program_BUYONGOOGLELISTING = Segments_Program "BUY_ON_GOOGLE_LI
   Segments_Program_FREEPRODUCTLISTING,
   Segments_Program_FREELOCALPRODUCTLISTING,
   Segments_Program_BUYONGOOGLELISTING,
-  Segments_Program
-  #-}
+  Segments_Program #-}
 
 -- | State of the program, It is set to enabled if there are offers for at least one region.
-newtype ShoppingAdsProgramStatus_GlobalState = ShoppingAdsProgramStatus_GlobalState {fromShoppingAdsProgramStatus_GlobalState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ShoppingAdsProgramStatus_GlobalState = ShoppingAdsProgramStatus_GlobalState { fromShoppingAdsProgramStatus_GlobalState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State is not known.
 pattern ShoppingAdsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED :: ShoppingAdsProgramStatus_GlobalState
@@ -1640,21 +1661,20 @@ pattern ShoppingAdsProgramStatus_GlobalState_Enabled = ShoppingAdsProgramStatus_
   ShoppingAdsProgramStatus_GlobalState_NOTENABLED,
   ShoppingAdsProgramStatus_GlobalState_NOOFFERSUPLOADED,
   ShoppingAdsProgramStatus_GlobalState_Enabled,
-  ShoppingAdsProgramStatus_GlobalState
-  #-}
+  ShoppingAdsProgramStatus_GlobalState #-}
 
 -- | Eligibility status of the Shopping Ads program.
-newtype ShoppingAdsProgramStatusRegionStatus_EligibilityStatus = ShoppingAdsProgramStatusRegionStatus_EligibilityStatus {fromShoppingAdsProgramStatusRegionStatus_EligibilityStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ShoppingAdsProgramStatusRegionStatus_EligibilityStatus = ShoppingAdsProgramStatusRegionStatus_EligibilityStatus { fromShoppingAdsProgramStatusRegionStatus_EligibilityStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State is not known.
 pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_STATEUNSPECIFIED :: ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
@@ -1692,21 +1712,20 @@ pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Onboarding = Shop
   ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_UNDERREVIEW,
   ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_PENDINGREVIEW,
   ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Onboarding,
-  ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
-  #-}
+  ShoppingAdsProgramStatusRegionStatus_EligibilityStatus #-}
 
 -- | If a program in a given country is eligible for review. It will be present only if eligibility status is @DISAPPROVED@.
-newtype ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus = ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus {fromShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus = ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus { fromShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Review eligibility reason state is unknown.
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED :: ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus
@@ -1724,21 +1743,20 @@ pattern ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_Ineligible 
   ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED,
   ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_Eligible,
   ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_Ineligible,
-  ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus
-  #-}
+  ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus #-}
 
 -- | Review ineligibility reason if account is not eligible for review.
-newtype ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason {fromShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason { fromShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Requesting a review from Google is not possible.
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED :: ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
@@ -1771,21 +1789,20 @@ pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWR
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYUNDERREVIEW,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED,
-  ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
-  #-}
+  ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason #-}
 
 -- | Verification method used to receive verification code.
-newtype VerifyPhoneNumberRequest_PhoneVerificationMethod = VerifyPhoneNumberRequest_PhoneVerificationMethod {fromVerifyPhoneNumberRequest_PhoneVerificationMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VerifyPhoneNumberRequest_PhoneVerificationMethod = VerifyPhoneNumberRequest_PhoneVerificationMethod { fromVerifyPhoneNumberRequest_PhoneVerificationMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown method.
 pattern VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED :: VerifyPhoneNumberRequest_PhoneVerificationMethod
@@ -1803,21 +1820,20 @@ pattern VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONECALL = VerifyPhone
   VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED,
   VerifyPhoneNumberRequest_PhoneVerificationMethod_Sms,
   VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONECALL,
-  VerifyPhoneNumberRequest_PhoneVerificationMethod
-  #-}
+  VerifyPhoneNumberRequest_PhoneVerificationMethod #-}
 
 -- | Controls which fields will be populated. Acceptable values are: \"merchant\" and \"css\". The default value is \"merchant\".
-newtype AccountsGetView = AccountsGetView {fromAccountsGetView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsGetView = AccountsGetView { fromAccountsGetView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default. View is populated with Merchant Center fields.
 pattern AccountsGetView_Merchant :: AccountsGetView
@@ -1830,21 +1846,20 @@ pattern AccountsGetView_Css = AccountsGetView "CSS"
 {-# COMPLETE
   AccountsGetView_Merchant,
   AccountsGetView_Css,
-  AccountsGetView
-  #-}
+  AccountsGetView #-}
 
 -- | Controls which fields will be populated. Acceptable values are: \"merchant\" and \"css\". The default value is \"merchant\".
-newtype AccountsListView = AccountsListView {fromAccountsListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsListView = AccountsListView { fromAccountsListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default. View is populated with Merchant Center fields.
 pattern AccountsListView_Merchant :: AccountsListView
@@ -1857,21 +1872,20 @@ pattern AccountsListView_Css = AccountsListView "CSS"
 {-# COMPLETE
   AccountsListView_Merchant,
   AccountsListView_Css,
-  AccountsListView
-  #-}
+  AccountsListView #-}
 
 -- | Return the results in the specified order.
-newtype OrderreturnsListOrderBy = OrderreturnsListOrderBy {fromOrderreturnsListOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrderreturnsListOrderBy = OrderreturnsListOrderBy { fromOrderreturnsListOrderBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Return results in descending order.
 pattern OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC :: OrderreturnsListOrderBy
@@ -1884,21 +1898,20 @@ pattern OrderreturnsListOrderBy_RETURNCREATIONTIMEASC = OrderreturnsListOrderBy 
 {-# COMPLETE
   OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC,
   OrderreturnsListOrderBy_RETURNCREATIONTIMEASC,
-  OrderreturnsListOrderBy
-  #-}
+  OrderreturnsListOrderBy #-}
 
 -- | Obtains order returns that match any shipment state provided in this parameter. When this parameter is not provided, order returns are obtained regardless of their shipment states.
-newtype OrderreturnsListShipmentStates = OrderreturnsListShipmentStates {fromOrderreturnsListShipmentStates :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrderreturnsListShipmentStates = OrderreturnsListShipmentStates { fromOrderreturnsListShipmentStates :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Return shipments with @new@ state only.
 pattern OrderreturnsListShipmentStates_New :: OrderreturnsListShipmentStates
@@ -1926,21 +1939,20 @@ pattern OrderreturnsListShipmentStates_Pending = OrderreturnsListShipmentStates 
   OrderreturnsListShipmentStates_Completed,
   OrderreturnsListShipmentStates_Undeliverable,
   OrderreturnsListShipmentStates_Pending,
-  OrderreturnsListShipmentStates
-  #-}
+  OrderreturnsListShipmentStates #-}
 
 -- | Obtains order returns that match any shipment status provided in this parameter. When this parameter is not provided, order returns are obtained regardless of their shipment statuses.
-newtype OrderreturnsListShipmentStatus = OrderreturnsListShipmentStatus {fromOrderreturnsListShipmentStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrderreturnsListShipmentStatus = OrderreturnsListShipmentStatus { fromOrderreturnsListShipmentStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Return shipments with @new@ status only.
 pattern OrderreturnsListShipmentStatus_New :: OrderreturnsListShipmentStatus
@@ -1958,21 +1970,20 @@ pattern OrderreturnsListShipmentStatus_Processed = OrderreturnsListShipmentStatu
   OrderreturnsListShipmentStatus_New,
   OrderreturnsListShipmentStatus_INPROGRESS,
   OrderreturnsListShipmentStatus_Processed,
-  OrderreturnsListShipmentStatus
-  #-}
+  OrderreturnsListShipmentStatus #-}
 
 -- | Obtains order returns that match any shipment type provided in this parameter. When this parameter is not provided, order returns are obtained regardless of their shipment types.
-newtype OrderreturnsListShipmentTypes = OrderreturnsListShipmentTypes {fromOrderreturnsListShipmentTypes :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrderreturnsListShipmentTypes = OrderreturnsListShipmentTypes { fromOrderreturnsListShipmentTypes :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Return shipments with type @byMail@ only.
 pattern OrderreturnsListShipmentTypes_BYMAIL :: OrderreturnsListShipmentTypes
@@ -1990,21 +2001,20 @@ pattern OrderreturnsListShipmentTypes_CONTACTCUSTOMERSUPPORT = OrderreturnsListS
   OrderreturnsListShipmentTypes_BYMAIL,
   OrderreturnsListShipmentTypes_Returnless,
   OrderreturnsListShipmentTypes_CONTACTCUSTOMERSUPPORT,
-  OrderreturnsListShipmentTypes
-  #-}
+  OrderreturnsListShipmentTypes #-}
 
 -- | The name of the template to retrieve.
-newtype OrdersGettestordertemplateTemplateName = OrdersGettestordertemplateTemplateName {fromOrdersGettestordertemplateTemplateName :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrdersGettestordertemplateTemplateName = OrdersGettestordertemplateTemplateName { fromOrdersGettestordertemplateTemplateName :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Get @template1@.
 pattern OrdersGettestordertemplateTemplateName_TEMPLATE1 :: OrdersGettestordertemplateTemplateName
@@ -2037,21 +2047,20 @@ pattern OrdersGettestordertemplateTemplateName_TEMPLATE4 = OrdersGettestordertem
   OrdersGettestordertemplateTemplateName_TEMPLATE1B,
   OrdersGettestordertemplateTemplateName_TEMPLATE3,
   OrdersGettestordertemplateTemplateName_TEMPLATE4,
-  OrdersGettestordertemplateTemplateName
-  #-}
+  OrdersGettestordertemplateTemplateName #-}
 
 -- | Obtains orders that match any of the specified statuses. Note that @active@ is a shortcut for @pendingShipment@ and @partiallyShipped@, and @completed@ is a shortcut for @shipped@, @partiallyDelivered@, @delivered@, @partiallyReturned@, @returned@, and @canceled@.
-newtype OrdersListStatuses = OrdersListStatuses {fromOrdersListStatuses :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrdersListStatuses = OrdersListStatuses { fromOrdersListStatuses :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Return orders with status @active@. The @active@ status includes @pendingShipment@ and @partiallyShipped@ orders.
 pattern OrdersListStatuses_Active :: OrdersListStatuses
@@ -2109,5 +2118,4 @@ pattern OrdersListStatuses_Returned = OrdersListStatuses "RETURNED"
   OrdersListStatuses_Delivered,
   OrdersListStatuses_PARTIALLYRETURNED,
   OrdersListStatuses_Returned,
-  OrdersListStatuses
-  #-}
+  OrdersListStatuses #-}
