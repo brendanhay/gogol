@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,198 +31,198 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Language.Types
-  ( -- * Configuration
-    languageService,
+    (
+    -- * Configuration
+      languageService
 
     -- * OAuth Scopes
-    cloudLanguageScope,
-    cloudPlatformScope,
+    , cloudLanguageScope
+    , cloudPlatformScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AnalyzeEntitiesRequest
-    AnalyzeEntitiesRequest (..),
-    newAnalyzeEntitiesRequest,
+    , AnalyzeEntitiesRequest (..)
+    , newAnalyzeEntitiesRequest
 
     -- ** AnalyzeEntitiesRequest_EncodingType
-    AnalyzeEntitiesRequest_EncodingType (..),
+    , AnalyzeEntitiesRequest_EncodingType (..)
 
     -- ** AnalyzeEntitiesResponse
-    AnalyzeEntitiesResponse (..),
-    newAnalyzeEntitiesResponse,
+    , AnalyzeEntitiesResponse (..)
+    , newAnalyzeEntitiesResponse
 
     -- ** AnalyzeEntitySentimentRequest
-    AnalyzeEntitySentimentRequest (..),
-    newAnalyzeEntitySentimentRequest,
+    , AnalyzeEntitySentimentRequest (..)
+    , newAnalyzeEntitySentimentRequest
 
     -- ** AnalyzeEntitySentimentRequest_EncodingType
-    AnalyzeEntitySentimentRequest_EncodingType (..),
+    , AnalyzeEntitySentimentRequest_EncodingType (..)
 
     -- ** AnalyzeEntitySentimentResponse
-    AnalyzeEntitySentimentResponse (..),
-    newAnalyzeEntitySentimentResponse,
+    , AnalyzeEntitySentimentResponse (..)
+    , newAnalyzeEntitySentimentResponse
 
     -- ** AnalyzeSentimentRequest
-    AnalyzeSentimentRequest (..),
-    newAnalyzeSentimentRequest,
+    , AnalyzeSentimentRequest (..)
+    , newAnalyzeSentimentRequest
 
     -- ** AnalyzeSentimentRequest_EncodingType
-    AnalyzeSentimentRequest_EncodingType (..),
+    , AnalyzeSentimentRequest_EncodingType (..)
 
     -- ** AnalyzeSentimentResponse
-    AnalyzeSentimentResponse (..),
-    newAnalyzeSentimentResponse,
+    , AnalyzeSentimentResponse (..)
+    , newAnalyzeSentimentResponse
 
     -- ** AnalyzeSyntaxRequest
-    AnalyzeSyntaxRequest (..),
-    newAnalyzeSyntaxRequest,
+    , AnalyzeSyntaxRequest (..)
+    , newAnalyzeSyntaxRequest
 
     -- ** AnalyzeSyntaxRequest_EncodingType
-    AnalyzeSyntaxRequest_EncodingType (..),
+    , AnalyzeSyntaxRequest_EncodingType (..)
 
     -- ** AnalyzeSyntaxResponse
-    AnalyzeSyntaxResponse (..),
-    newAnalyzeSyntaxResponse,
+    , AnalyzeSyntaxResponse (..)
+    , newAnalyzeSyntaxResponse
 
     -- ** AnnotateTextRequest
-    AnnotateTextRequest (..),
-    newAnnotateTextRequest,
+    , AnnotateTextRequest (..)
+    , newAnnotateTextRequest
 
     -- ** AnnotateTextRequest_EncodingType
-    AnnotateTextRequest_EncodingType (..),
+    , AnnotateTextRequest_EncodingType (..)
 
     -- ** AnnotateTextResponse
-    AnnotateTextResponse (..),
-    newAnnotateTextResponse,
+    , AnnotateTextResponse (..)
+    , newAnnotateTextResponse
 
     -- ** ClassificationCategory
-    ClassificationCategory (..),
-    newClassificationCategory,
+    , ClassificationCategory (..)
+    , newClassificationCategory
 
     -- ** ClassifyTextRequest
-    ClassifyTextRequest (..),
-    newClassifyTextRequest,
+    , ClassifyTextRequest (..)
+    , newClassifyTextRequest
 
     -- ** ClassifyTextResponse
-    ClassifyTextResponse (..),
-    newClassifyTextResponse,
+    , ClassifyTextResponse (..)
+    , newClassifyTextResponse
 
     -- ** DependencyEdge
-    DependencyEdge (..),
-    newDependencyEdge,
+    , DependencyEdge (..)
+    , newDependencyEdge
 
     -- ** DependencyEdge_Label
-    DependencyEdge_Label (..),
+    , DependencyEdge_Label (..)
 
     -- ** Document
-    Document (..),
-    newDocument,
+    , Document (..)
+    , newDocument
 
     -- ** Document_Type
-    Document_Type (..),
+    , Document_Type (..)
 
     -- ** Entity
-    Entity (..),
-    newEntity,
+    , Entity (..)
+    , newEntity
 
     -- ** Entity_Metadata
-    Entity_Metadata (..),
-    newEntity_Metadata,
+    , Entity_Metadata (..)
+    , newEntity_Metadata
 
     -- ** Entity_Type
-    Entity_Type (..),
+    , Entity_Type (..)
 
     -- ** EntityMention
-    EntityMention (..),
-    newEntityMention,
+    , EntityMention (..)
+    , newEntityMention
 
     -- ** EntityMention_Type
-    EntityMention_Type (..),
+    , EntityMention_Type (..)
 
     -- ** Features
-    Features (..),
-    newFeatures,
+    , Features (..)
+    , newFeatures
 
     -- ** PartOfSpeech
-    PartOfSpeech (..),
-    newPartOfSpeech,
+    , PartOfSpeech (..)
+    , newPartOfSpeech
 
     -- ** PartOfSpeech_Aspect
-    PartOfSpeech_Aspect (..),
+    , PartOfSpeech_Aspect (..)
 
     -- ** PartOfSpeech_Case
-    PartOfSpeech_Case (..),
+    , PartOfSpeech_Case (..)
 
     -- ** PartOfSpeech_Form
-    PartOfSpeech_Form (..),
+    , PartOfSpeech_Form (..)
 
     -- ** PartOfSpeech_Gender
-    PartOfSpeech_Gender (..),
+    , PartOfSpeech_Gender (..)
 
     -- ** PartOfSpeech_Mood
-    PartOfSpeech_Mood (..),
+    , PartOfSpeech_Mood (..)
 
     -- ** PartOfSpeech_Number
-    PartOfSpeech_Number (..),
+    , PartOfSpeech_Number (..)
 
     -- ** PartOfSpeech_Person
-    PartOfSpeech_Person (..),
+    , PartOfSpeech_Person (..)
 
     -- ** PartOfSpeech_Proper
-    PartOfSpeech_Proper (..),
+    , PartOfSpeech_Proper (..)
 
     -- ** PartOfSpeech_Reciprocity
-    PartOfSpeech_Reciprocity (..),
+    , PartOfSpeech_Reciprocity (..)
 
     -- ** PartOfSpeech_Tag
-    PartOfSpeech_Tag (..),
+    , PartOfSpeech_Tag (..)
 
     -- ** PartOfSpeech_Tense
-    PartOfSpeech_Tense (..),
+    , PartOfSpeech_Tense (..)
 
     -- ** PartOfSpeech_Voice
-    PartOfSpeech_Voice (..),
+    , PartOfSpeech_Voice (..)
 
     -- ** Sentence
-    Sentence (..),
-    newSentence,
+    , Sentence (..)
+    , newSentence
 
     -- ** Sentiment
-    Sentiment (..),
-    newSentiment,
+    , Sentiment (..)
+    , newSentiment
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TextSpan
-    TextSpan (..),
-    newTextSpan,
+    , TextSpan (..)
+    , newTextSpan
 
     -- ** Token
-    Token (..),
-    newToken,
-  )
-where
+    , Token (..)
+    , newToken
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Language.Internal.Product
 import Gogol.Language.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Natural Language API. This contains the host and root path used as a starting point for constructing service requests.
 languageService :: Core.ServiceConfig
-languageService =
-  Core.defaultService
-    (Core.ServiceId "language:v1")
-    "language.googleapis.com"
+languageService
+  = Core.defaultService (Core.ServiceId "language:v1")
+      "language.googleapis.com"
 
 -- | Apply machine learning models to reveal the structure and meaning of text
 cloudLanguageScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-language"]
