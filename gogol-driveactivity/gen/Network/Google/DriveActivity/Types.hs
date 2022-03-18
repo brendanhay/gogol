@@ -1,423 +1,315 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DriveActivity.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.DriveActivity.Types
-    (
-    -- * Service Configuration
-      driveActivityService
+  ( -- * Configuration
+    driveActivityService,
 
     -- * OAuth Scopes
-    , driveActivityReadOnlyScope
-    , driveActivityScope
-
-    -- * Suggestion
-    , Suggestion
-    , suggestion
-    , sSubtype
-
-    -- * Drive
-    , Drive
-    , drive
-    , dRoot
-    , dName
-    , dTitle
-
-    -- * Impersonation
-    , Impersonation
-    , impersonation
-    , iImpersonatedUser
-
-    -- * Edit
-    , Edit
-    , edit
-
-    -- * ActionDetail
-    , ActionDetail
-    , actionDetail
-    , adEdit
-    , adPermissionChange
-    , adRestore
-    , adReference
-    , adCreate
-    , adRename
-    , adComment
-    , adSettingsChange
-    , adDlpChange
-    , adDelete
-    , adMove
-
-    -- * DriveReference
-    , DriveReference
-    , driveReference
-    , drName
-    , drTitle
-
-    -- * PermissionRole
-    , PermissionRole (..)
-
-    -- * Group
-    , Group
-    , group'
-    , gEmail
-    , gTitle
-
-    -- * DriveFile
-    , DriveFile
-    , driveFile
-
-    -- * TimeRange
-    , TimeRange
-    , timeRange
-    , trStartTime
-    , trEndTime
-
-    -- * RestrictionChangeNewRestriction
-    , RestrictionChangeNewRestriction (..)
-
-    -- * DriveFolderType
-    , DriveFolderType (..)
-
-    -- * QueryDriveActivityRequest
-    , QueryDriveActivityRequest
-    , queryDriveActivityRequest
-    , qdarAncestorName
-    , qdarItemName
-    , qdarConsolidationStrategy
-    , qdarFilter
-    , qdarPageToken
-    , qdarPageSize
-
-    -- * DriveItemReference
-    , DriveItemReference
-    , driveItemReference
-    , dirDriveFile
-    , dirFolder
-    , dirName
-    , dirDriveFolder
-    , dirTitle
-    , dirFile
-
-    -- * KnownUser
-    , KnownUser
-    , knownUser
-    , kuPersonName
-    , kuIsCurrentUser
-
-    -- * TargetReference
-    , TargetReference
-    , targetReference
-    , trDrive
-    , trTeamDrive
-    , trDriveItem
-
-    -- * Copy
-    , Copy
-    , copy
-    , cOriginalObject
-
-    -- * PermissionChange
-    , PermissionChange
-    , permissionChange
-    , pcAddedPermissions
-    , pcRemovedPermissions
-
-    -- * QueryDriveActivityResponse
-    , QueryDriveActivityResponse
-    , queryDriveActivityResponse
-    , qdarNextPageToken
-    , qdarActivities
-
-    -- * Post'
-    , Post'
-    , post
-    , pSubtype
-
-    -- * Restore
-    , Restore
-    , restore
-    , rType
-
-    -- * Domain
-    , Domain
-    , domain
-    , domLegacyId
-    , domName
-
-    -- * Administrator
-    , Administrator
-    , administrator
-
-    -- * DataLeakPreventionChange
-    , DataLeakPreventionChange
-    , dataLeakPreventionChange
-    , dlpcType
-
-    -- * Actor
-    , Actor
-    , actor
-    , aImpersonation
-    , aSystem
-    , aAdministrator
-    , aUser
-    , aAnonymous
-
-    -- * Folder
-    , Folder
-    , folder
-    , fType
-
-    -- * RestrictionChangeFeature
-    , RestrictionChangeFeature (..)
-
-    -- * Action
-    , Action
-    , action
-    , aTimeRange
-    , aActor
-    , aTimestamp
-    , aTarget
-    , aDetail
-
-    -- * TeamDrive
-    , TeamDrive
-    , teamDrive
-    , tdRoot
-    , tdName
-    , tdTitle
-
-    -- * UnknownUser
-    , UnknownUser
-    , unknownUser
-
-    -- * Owner
-    , Owner
-    , owner
-    , oDrive
-    , oDomain
-    , oTeamDrive
-    , oUser
-
-    -- * SystemEventType
-    , SystemEventType (..)
-
-    -- * ApplicationReference
-    , ApplicationReference
-    , applicationReference
-    , arType
-
-    -- * DeleteType
-    , DeleteType (..)
-
-    -- * ConsolidationStrategy
-    , ConsolidationStrategy
-    , consolidationStrategy
-    , csNone
-    , csLegacy
-
-    -- * User
-    , User
-    , user
-    , uKnownUser
-    , uUnknownUser
-    , uDeletedUser
-
-    -- * DeletedUser
-    , DeletedUser
-    , deletedUser
-
-    -- * Create
-    , Create
-    , create
-    , cCopy
-    , cNew
-    , cUpload
-
-    -- * PostSubtype
-    , PostSubtype (..)
-
-    -- * New
-    , New
-    , new
-
-    -- * AssignmentSubtype
-    , AssignmentSubtype (..)
-
-    -- * TeamDriveReference
-    , TeamDriveReference
-    , teamDriveReference
-    , tdrName
-    , tdrTitle
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * AnonymousUser
-    , AnonymousUser
-    , anonymousUser
-
-    -- * DriveFolder
-    , DriveFolder
-    , driveFolder
-    , dfType
-
-    -- * Anyone
-    , Anyone
-    , anyone
-
-    -- * RestrictionChange
-    , RestrictionChange
-    , restrictionChange
-    , rcFeature
-    , rcNewRestriction
-
-    -- * Legacy
-    , Legacy
-    , legacy
-
-    -- * FileComment
-    , FileComment
-    , fileComment
-    , fcParent
-    , fcLegacyDiscussionId
-    , fcLegacyCommentId
-    , fcLinkToDiscussion
-
-    -- * RestoreType
-    , RestoreType (..)
-
-    -- * Rename
-    , Rename
-    , rename
-    , rNewTitle
-    , rOldTitle
-
-    -- * SuggestionSubtype
-    , SuggestionSubtype (..)
-
-    -- * Upload
-    , Upload
-    , upload
-
-    -- * NoConsolidation
-    , NoConsolidation
-    , noConsolidation
-
-    -- * Assignment
-    , Assignment
-    , assignment
-    , aAssignedUser
-    , aSubtype
-
-    -- * SettingsChange
-    , SettingsChange
-    , settingsChange
-    , scRestrictionChanges
-
-    -- * Comment
-    , Comment
-    , comment
-    , cSuggestion
-    , cPost
-    , cMentionedUsers
-    , cAssignment
-
-    -- * Permission
-    , Permission
-    , permission
-    , pGroup
-    , pDomain
-    , pUser
-    , pRole
-    , pAnyone
-    , pAllowDiscovery
-
-    -- * DataLeakPreventionChangeType
-    , DataLeakPreventionChangeType (..)
-
-    -- * File
-    , File
-    , file
-
-    -- * FolderType
-    , FolderType (..)
-
-    -- * Delete'
-    , Delete'
-    , delete'
-    , dType
-
-    -- * Target
-    , Target
-    , target
-    , tDrive
-    , tTeamDrive
-    , tFileComment
-    , tDriveItem
-
-    -- * Move
-    , Move
-    , move
-    , mAddedParents
-    , mRemovedParents
-
-    -- * ApplicationReferenceType
-    , ApplicationReferenceType (..)
-
-    -- * DriveActivity
-    , DriveActivity
-    , driveActivity
-    , daTimeRange
-    , daActions
-    , daActors
-    , daTargets
-    , daPrimaryActionDetail
-    , daTimestamp
-
-    -- * DriveItem
-    , DriveItem
-    , driveItem
-    , diDriveFile
-    , diFolder
-    , diOwner
-    , diMimeType
-    , diName
-    , diDriveFolder
-    , diTitle
-    , diFile
-
-    -- * SystemEvent
-    , SystemEvent
-    , systemEvent
-    , seType
-    ) where
-
-import Network.Google.DriveActivity.Types.Product
-import Network.Google.DriveActivity.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v2' of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
-driveActivityService :: ServiceConfig
-driveActivityService
-  = defaultService (ServiceId "driveactivity:v2")
-      "driveactivity.googleapis.com"
-
--- | View the activity record of files in your Google Drive
-driveActivityReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.activity.readonly"]
-driveActivityReadOnlyScope = Proxy
+    driveActivityScope,
+    driveActivityReadOnlyScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** Action
+    Action (..),
+    newAction,
+
+    -- ** ActionDetail
+    ActionDetail (..),
+    newActionDetail,
+
+    -- ** Actor
+    Actor (..),
+    newActor,
+
+    -- ** Administrator
+    Administrator (..),
+    newAdministrator,
+
+    -- ** AnonymousUser
+    AnonymousUser (..),
+    newAnonymousUser,
+
+    -- ** Anyone
+    Anyone (..),
+    newAnyone,
+
+    -- ** ApplicationReference
+    ApplicationReference (..),
+    newApplicationReference,
+
+    -- ** ApplicationReference_Type
+    ApplicationReference_Type (..),
+
+    -- ** Assignment
+    Assignment (..),
+    newAssignment,
+
+    -- ** Assignment_Subtype
+    Assignment_Subtype (..),
+
+    -- ** Comment
+    Comment (..),
+    newComment,
+
+    -- ** ConsolidationStrategy
+    ConsolidationStrategy (..),
+    newConsolidationStrategy,
+
+    -- ** Copy
+    Copy (..),
+    newCopy,
+
+    -- ** Create
+    Create (..),
+    newCreate,
+
+    -- ** DataLeakPreventionChange
+    DataLeakPreventionChange (..),
+    newDataLeakPreventionChange,
+
+    -- ** DataLeakPreventionChange_Type
+    DataLeakPreventionChange_Type (..),
+
+    -- ** Delete'
+    Delete' (..),
+    newDelete,
+
+    -- ** Delete_Type
+    Delete_Type (..),
+
+    -- ** DeletedUser
+    DeletedUser (..),
+    newDeletedUser,
+
+    -- ** Domain
+    Domain (..),
+    newDomain,
+
+    -- ** Drive
+    Drive (..),
+    newDrive,
+
+    -- ** DriveActivity
+    DriveActivity (..),
+    newDriveActivity,
+
+    -- ** DriveFile
+    DriveFile (..),
+    newDriveFile,
+
+    -- ** DriveFolder
+    DriveFolder (..),
+    newDriveFolder,
+
+    -- ** DriveFolder_Type
+    DriveFolder_Type (..),
+
+    -- ** DriveItem
+    DriveItem (..),
+    newDriveItem,
+
+    -- ** DriveItemReference
+    DriveItemReference (..),
+    newDriveItemReference,
+
+    -- ** DriveReference
+    DriveReference (..),
+    newDriveReference,
+
+    -- ** Edit
+    Edit (..),
+    newEdit,
+
+    -- ** File
+    File (..),
+    newFile,
+
+    -- ** FileComment
+    FileComment (..),
+    newFileComment,
+
+    -- ** Folder
+    Folder (..),
+    newFolder,
+
+    -- ** Folder_Type
+    Folder_Type (..),
+
+    -- ** Group
+    Group (..),
+    newGroup,
+
+    -- ** Impersonation
+    Impersonation (..),
+    newImpersonation,
+
+    -- ** KnownUser
+    KnownUser (..),
+    newKnownUser,
+
+    -- ** Legacy
+    Legacy (..),
+    newLegacy,
+
+    -- ** Move
+    Move (..),
+    newMove,
+
+    -- ** New
+    New (..),
+    newNew,
+
+    -- ** NoConsolidation
+    NoConsolidation (..),
+    newNoConsolidation,
+
+    -- ** Owner
+    Owner (..),
+    newOwner,
+
+    -- ** Permission
+    Permission (..),
+    newPermission,
+
+    -- ** Permission_Role
+    Permission_Role (..),
+
+    -- ** PermissionChange
+    PermissionChange (..),
+    newPermissionChange,
+
+    -- ** Post'
+    Post' (..),
+    newPost,
+
+    -- ** Post_Subtype
+    Post_Subtype (..),
+
+    -- ** QueryDriveActivityRequest
+    QueryDriveActivityRequest (..),
+    newQueryDriveActivityRequest,
+
+    -- ** QueryDriveActivityResponse
+    QueryDriveActivityResponse (..),
+    newQueryDriveActivityResponse,
+
+    -- ** Rename
+    Rename (..),
+    newRename,
+
+    -- ** Restore
+    Restore (..),
+    newRestore,
+
+    -- ** Restore_Type
+    Restore_Type (..),
+
+    -- ** RestrictionChange
+    RestrictionChange (..),
+    newRestrictionChange,
+
+    -- ** RestrictionChange_Feature
+    RestrictionChange_Feature (..),
+
+    -- ** RestrictionChange_NewRestriction
+    RestrictionChange_NewRestriction (..),
+
+    -- ** SettingsChange
+    SettingsChange (..),
+    newSettingsChange,
+
+    -- ** Suggestion
+    Suggestion (..),
+    newSuggestion,
+
+    -- ** Suggestion_Subtype
+    Suggestion_Subtype (..),
+
+    -- ** SystemEvent
+    SystemEvent (..),
+    newSystemEvent,
+
+    -- ** SystemEvent_Type
+    SystemEvent_Type (..),
+
+    -- ** Target
+    Target (..),
+    newTarget,
+
+    -- ** TargetReference
+    TargetReference (..),
+    newTargetReference,
+
+    -- ** TeamDrive
+    TeamDrive (..),
+    newTeamDrive,
+
+    -- ** TeamDriveReference
+    TeamDriveReference (..),
+    newTeamDriveReference,
+
+    -- ** TimeRange
+    TimeRange (..),
+    newTimeRange,
+
+    -- ** UnknownUser
+    UnknownUser (..),
+    newUnknownUser,
+
+    -- ** Upload
+    Upload (..),
+    newUpload,
+
+    -- ** User
+    User (..),
+    newUser,
+  )
+where
+
+import Network.Google.DriveActivity.Internal.Product
+import Network.Google.DriveActivity.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
+driveActivityService :: Core.ServiceConfig
+driveActivityService =
+  Core.defaultService
+    (Core.ServiceId "driveactivity:v2")
+    "driveactivity.googleapis.com"
 
 -- | View and add to the activity record of files in your Google Drive
-driveActivityScope :: Proxy '["https://www.googleapis.com/auth/drive.activity"]
-driveActivityScope = Proxy
+driveActivityScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.activity"]
+driveActivityScope = Core.Proxy
+
+-- | View the activity record of files in your Google Drive
+driveActivityReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.activity.readonly"]
+driveActivityReadOnlyScope = Core.Proxy
