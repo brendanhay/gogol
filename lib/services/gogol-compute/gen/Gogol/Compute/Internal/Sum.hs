@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Compute.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AcceleratorTypeAggregatedList_Warning_Code
     AcceleratorTypeAggregatedList_Warning_Code
-      (
-        AcceleratorTypeAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( AcceleratorTypeAggregatedList_Warning_Code_CLEANUPFAILED,
         AcceleratorTypeAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AcceleratorTypeAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         AcceleratorTypeAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -76,8 +65,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AcceleratorTypeList_Warning_Code
     AcceleratorTypeList_Warning_Code
-      (
-        AcceleratorTypeList_Warning_Code_CLEANUPFAILED,
+      ( AcceleratorTypeList_Warning_Code_CLEANUPFAILED,
         AcceleratorTypeList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AcceleratorTypeList_Warning_Code_DEPRECATEDTYPEUSED,
         AcceleratorTypeList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -107,8 +95,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AcceleratorTypesScopedList_Warning_Code
     AcceleratorTypesScopedList_Warning_Code
-      (
-        AcceleratorTypesScopedList_Warning_Code_CLEANUPFAILED,
+      ( AcceleratorTypesScopedList_Warning_Code_CLEANUPFAILED,
         AcceleratorTypesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AcceleratorTypesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         AcceleratorTypesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -138,8 +125,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AccessConfig_NetworkTier
     AccessConfig_NetworkTier
-      (
-        AccessConfig_NetworkTier_FIXEDSTANDARD,
+      ( AccessConfig_NetworkTier_FIXEDSTANDARD,
         AccessConfig_NetworkTier_Premium,
         AccessConfig_NetworkTier_Standard,
         AccessConfig_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
@@ -148,16 +134,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * AccessConfig_Type
     AccessConfig_Type
-      (
-        AccessConfig_Type_DIRECT_IPV6,
+      ( AccessConfig_Type_DIRECT_IPV6,
         AccessConfig_Type_ONETOONENAT,
         ..
       ),
 
     -- * Address_AddressType
     Address_AddressType
-      (
-        Address_AddressType_External,
+      ( Address_AddressType_External,
         Address_AddressType_Internal,
         Address_AddressType_UNSPECIFIEDTYPE,
         ..
@@ -165,8 +149,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Address_IpVersion
     Address_IpVersion
-      (
-        Address_IpVersion_IPV4,
+      ( Address_IpVersion_IPV4,
         Address_IpVersion_IPV6,
         Address_IpVersion_UNSPECIFIEDVERSION,
         ..
@@ -174,8 +157,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Address_NetworkTier
     Address_NetworkTier
-      (
-        Address_NetworkTier_FIXEDSTANDARD,
+      ( Address_NetworkTier_FIXEDSTANDARD,
         Address_NetworkTier_Premium,
         Address_NetworkTier_Standard,
         Address_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
@@ -184,8 +166,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Address_Purpose
     Address_Purpose
-      (
-        Address_Purpose_DNSRESOLVER,
+      ( Address_Purpose_DNSRESOLVER,
         Address_Purpose_GCEENDPOINT,
         Address_Purpose_IPSECINTERCONNECT,
         Address_Purpose_NATAUTO,
@@ -197,8 +178,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Address_Status
     Address_Status
-      (
-        Address_Status_INUSE,
+      ( Address_Status_INUSE,
         Address_Status_Reserved,
         Address_Status_Reserving,
         ..
@@ -206,8 +186,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AddressAggregatedList_Warning_Code
     AddressAggregatedList_Warning_Code
-      (
-        AddressAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( AddressAggregatedList_Warning_Code_CLEANUPFAILED,
         AddressAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AddressAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         AddressAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -237,8 +216,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AddressList_Warning_Code
     AddressList_Warning_Code
-      (
-        AddressList_Warning_Code_CLEANUPFAILED,
+      ( AddressList_Warning_Code_CLEANUPFAILED,
         AddressList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AddressList_Warning_Code_DEPRECATEDTYPEUSED,
         AddressList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -268,8 +246,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AddressesScopedList_Warning_Code
     AddressesScopedList_Warning_Code
-      (
-        AddressesScopedList_Warning_Code_CLEANUPFAILED,
+      ( AddressesScopedList_Warning_Code_CLEANUPFAILED,
         AddressesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AddressesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         AddressesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -299,40 +276,35 @@ module Gogol.Compute.Internal.Sum
 
     -- * AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface
     AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface
-      (
-        AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Nvme,
+      ( AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Nvme,
         AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Scsi,
         ..
       ),
 
     -- * AttachedDisk_Interface
     AttachedDisk_Interface
-      (
-        AttachedDisk_Interface_Nvme,
+      ( AttachedDisk_Interface_Nvme,
         AttachedDisk_Interface_Scsi,
         ..
       ),
 
     -- * AttachedDisk_Mode
     AttachedDisk_Mode
-      (
-        AttachedDisk_Mode_READONLY,
+      ( AttachedDisk_Mode_READONLY,
         AttachedDisk_Mode_READWRITE,
         ..
       ),
 
     -- * AttachedDisk_Type
     AttachedDisk_Type
-      (
-        AttachedDisk_Type_Persistent,
+      ( AttachedDisk_Type_Persistent,
         AttachedDisk_Type_Scratch,
         ..
       ),
 
     -- * AttachedDiskInitializeParams_OnUpdateAction
     AttachedDiskInitializeParams_OnUpdateAction
-      (
-        AttachedDiskInitializeParams_OnUpdateAction_RECREATEDISK,
+      ( AttachedDiskInitializeParams_OnUpdateAction_RECREATEDISK,
         AttachedDiskInitializeParams_OnUpdateAction_RECREATEDISKIFSOURCECHANGED,
         AttachedDiskInitializeParams_OnUpdateAction_USEEXISTINGDISK,
         ..
@@ -340,8 +312,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_ADMINREAD,
+      ( AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
@@ -350,8 +321,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AuthorizationLoggingOptions_PermissionType
     AuthorizationLoggingOptions_PermissionType
-      (
-        AuthorizationLoggingOptions_PermissionType_ADMINREAD,
+      ( AuthorizationLoggingOptions_PermissionType_ADMINREAD,
         AuthorizationLoggingOptions_PermissionType_ADMINWRITE,
         AuthorizationLoggingOptions_PermissionType_DATAREAD,
         AuthorizationLoggingOptions_PermissionType_DATAWRITE,
@@ -361,8 +331,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Autoscaler_Status
     Autoscaler_Status
-      (
-        Autoscaler_Status_Active,
+      ( Autoscaler_Status_Active,
         Autoscaler_Status_Deleting,
         Autoscaler_Status_Error',
         Autoscaler_Status_Pending,
@@ -371,8 +340,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AutoscalerAggregatedList_Warning_Code
     AutoscalerAggregatedList_Warning_Code
-      (
-        AutoscalerAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( AutoscalerAggregatedList_Warning_Code_CLEANUPFAILED,
         AutoscalerAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AutoscalerAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         AutoscalerAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -402,8 +370,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AutoscalerList_Warning_Code
     AutoscalerList_Warning_Code
-      (
-        AutoscalerList_Warning_Code_CLEANUPFAILED,
+      ( AutoscalerList_Warning_Code_CLEANUPFAILED,
         AutoscalerList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AutoscalerList_Warning_Code_DEPRECATEDTYPEUSED,
         AutoscalerList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -433,8 +400,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AutoscalerStatusDetails_Type
     AutoscalerStatusDetails_Type
-      (
-        AutoscalerStatusDetails_Type_ALLINSTANCESUNHEALTHY,
+      ( AutoscalerStatusDetails_Type_ALLINSTANCESUNHEALTHY,
         AutoscalerStatusDetails_Type_BACKENDSERVICEDOESNOTEXIST,
         AutoscalerStatusDetails_Type_CAPPEDATMAXNUMREPLICAS,
         AutoscalerStatusDetails_Type_CUSTOMMETRICDATAPOINTSTOOSPARSE,
@@ -459,8 +425,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AutoscalersScopedList_Warning_Code
     AutoscalersScopedList_Warning_Code
-      (
-        AutoscalersScopedList_Warning_Code_CLEANUPFAILED,
+      ( AutoscalersScopedList_Warning_Code_CLEANUPFAILED,
         AutoscalersScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         AutoscalersScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         AutoscalersScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -490,8 +455,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * AutoscalingPolicy_Mode
     AutoscalingPolicy_Mode
-      (
-        AutoscalingPolicy_Mode_Off,
+      ( AutoscalingPolicy_Mode_Off,
         AutoscalingPolicy_Mode_ON,
         AutoscalingPolicy_Mode_ONLYSCALEOUT,
         AutoscalingPolicy_Mode_ONLYUP,
@@ -500,16 +464,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * AutoscalingPolicyCpuUtilization_PredictiveMethod
     AutoscalingPolicyCpuUtilization_PredictiveMethod
-      (
-        AutoscalingPolicyCpuUtilization_PredictiveMethod_None,
+      ( AutoscalingPolicyCpuUtilization_PredictiveMethod_None,
         AutoscalingPolicyCpuUtilization_PredictiveMethod_OPTIMIZEAVAILABILITY,
         ..
       ),
 
     -- * AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType
     AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType
-      (
-        AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_DELTAPERMINUTE,
+      ( AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_DELTAPERMINUTE,
         AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_DELTAPERSECOND,
         AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_Gauge,
         ..
@@ -517,8 +479,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Backend_BalancingMode
     Backend_BalancingMode
-      (
-        Backend_BalancingMode_Connection,
+      ( Backend_BalancingMode_Connection,
         Backend_BalancingMode_Rate,
         Backend_BalancingMode_Utilization,
         ..
@@ -526,8 +487,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendBucketCdnPolicy_CacheMode
     BackendBucketCdnPolicy_CacheMode
-      (
-        BackendBucketCdnPolicy_CacheMode_CACHEALLSTATIC,
+      ( BackendBucketCdnPolicy_CacheMode_CACHEALLSTATIC,
         BackendBucketCdnPolicy_CacheMode_FORCECACHEALL,
         BackendBucketCdnPolicy_CacheMode_INVALIDCACHEMODE,
         BackendBucketCdnPolicy_CacheMode_USEORIGINHEADERS,
@@ -536,8 +496,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendBucketList_Warning_Code
     BackendBucketList_Warning_Code
-      (
-        BackendBucketList_Warning_Code_CLEANUPFAILED,
+      ( BackendBucketList_Warning_Code_CLEANUPFAILED,
         BackendBucketList_Warning_Code_DEPRECATEDRESOURCEUSED,
         BackendBucketList_Warning_Code_DEPRECATEDTYPEUSED,
         BackendBucketList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -567,8 +526,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendService_LoadBalancingScheme
     BackendService_LoadBalancingScheme
-      (
-        BackendService_LoadBalancingScheme_External,
+      ( BackendService_LoadBalancingScheme_External,
         BackendService_LoadBalancingScheme_EXTERNALMANAGED,
         BackendService_LoadBalancingScheme_Internal,
         BackendService_LoadBalancingScheme_INTERNALMANAGED,
@@ -579,8 +537,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendService_LocalityLbPolicy
     BackendService_LocalityLbPolicy
-      (
-        BackendService_LocalityLbPolicy_INVALIDLBPOLICY,
+      ( BackendService_LocalityLbPolicy_INVALIDLBPOLICY,
         BackendService_LocalityLbPolicy_LEASTREQUEST,
         BackendService_LocalityLbPolicy_Maglev,
         BackendService_LocalityLbPolicy_ORIGINALDESTINATION,
@@ -592,8 +549,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendService_Protocol
     BackendService_Protocol
-      (
-        BackendService_Protocol_Grpc,
+      ( BackendService_Protocol_Grpc,
         BackendService_Protocol_Http,
         BackendService_Protocol_HTTP2,
         BackendService_Protocol_Https,
@@ -606,8 +562,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendService_SessionAffinity
     BackendService_SessionAffinity
-      (
-        BackendService_SessionAffinity_CLIENTIP,
+      ( BackendService_SessionAffinity_CLIENTIP,
         BackendService_SessionAffinity_CLIENTIPNODESTINATION,
         BackendService_SessionAffinity_CLIENTIPPORTPROTO,
         BackendService_SessionAffinity_CLIENTIPPROTO,
@@ -620,8 +575,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendServiceAggregatedList_Warning_Code
     BackendServiceAggregatedList_Warning_Code
-      (
-        BackendServiceAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( BackendServiceAggregatedList_Warning_Code_CLEANUPFAILED,
         BackendServiceAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         BackendServiceAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         BackendServiceAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -651,8 +605,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendServiceCdnPolicy_CacheMode
     BackendServiceCdnPolicy_CacheMode
-      (
-        BackendServiceCdnPolicy_CacheMode_CACHEALLSTATIC,
+      ( BackendServiceCdnPolicy_CacheMode_CACHEALLSTATIC,
         BackendServiceCdnPolicy_CacheMode_FORCECACHEALL,
         BackendServiceCdnPolicy_CacheMode_INVALIDCACHEMODE,
         BackendServiceCdnPolicy_CacheMode_USEORIGINHEADERS,
@@ -661,8 +614,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends
     BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends
-      (
-        BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_ALWAYSPERSIST,
+      ( BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_ALWAYSPERSIST,
         BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_DEFAULTFORPROTOCOL,
         BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_NEVERPERSIST,
         ..
@@ -670,8 +622,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendServiceConnectionTrackingPolicy_TrackingMode
     BackendServiceConnectionTrackingPolicy_TrackingMode
-      (
-        BackendServiceConnectionTrackingPolicy_TrackingMode_INVALIDTRACKINGMODE,
+      ( BackendServiceConnectionTrackingPolicy_TrackingMode_INVALIDTRACKINGMODE,
         BackendServiceConnectionTrackingPolicy_TrackingMode_PERCONNECTION,
         BackendServiceConnectionTrackingPolicy_TrackingMode_PERSESSION,
         ..
@@ -679,8 +630,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendServiceList_Warning_Code
     BackendServiceList_Warning_Code
-      (
-        BackendServiceList_Warning_Code_CLEANUPFAILED,
+      ( BackendServiceList_Warning_Code_CLEANUPFAILED,
         BackendServiceList_Warning_Code_DEPRECATEDRESOURCEUSED,
         BackendServiceList_Warning_Code_DEPRECATEDTYPEUSED,
         BackendServiceList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -710,8 +660,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BackendServicesScopedList_Warning_Code
     BackendServicesScopedList_Warning_Code
-      (
-        BackendServicesScopedList_Warning_Code_CLEANUPFAILED,
+      ( BackendServicesScopedList_Warning_Code_CLEANUPFAILED,
         BackendServicesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         BackendServicesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         BackendServicesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -741,8 +690,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BfdPacket_Diagnostic
     BfdPacket_Diagnostic
-      (
-        BfdPacket_Diagnostic_ADMINISTRATIVELYDOWN,
+      ( BfdPacket_Diagnostic_ADMINISTRATIVELYDOWN,
         BfdPacket_Diagnostic_CONCATENATEDPATHDOWN,
         BfdPacket_Diagnostic_CONTROLDETECTIONTIMEEXPIRED,
         BfdPacket_Diagnostic_DIAGNOSTICUNSPECIFIED,
@@ -757,8 +705,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BfdPacket_State
     BfdPacket_State
-      (
-        BfdPacket_State_ADMINDOWN,
+      ( BfdPacket_State_ADMINDOWN,
         BfdPacket_State_Down,
         BfdPacket_State_Init,
         BfdPacket_State_STATEUNSPECIFIED,
@@ -768,8 +715,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BfdStatus_BfdSessionInitializationMode
     BfdStatus_BfdSessionInitializationMode
-      (
-        BfdStatus_BfdSessionInitializationMode_Active,
+      ( BfdStatus_BfdSessionInitializationMode_Active,
         BfdStatus_BfdSessionInitializationMode_Disabled,
         BfdStatus_BfdSessionInitializationMode_Passive,
         ..
@@ -777,8 +723,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BfdStatus_LocalDiagnostic
     BfdStatus_LocalDiagnostic
-      (
-        BfdStatus_LocalDiagnostic_ADMINISTRATIVELYDOWN,
+      ( BfdStatus_LocalDiagnostic_ADMINISTRATIVELYDOWN,
         BfdStatus_LocalDiagnostic_CONCATENATEDPATHDOWN,
         BfdStatus_LocalDiagnostic_CONTROLDETECTIONTIMEEXPIRED,
         BfdStatus_LocalDiagnostic_DIAGNOSTICUNSPECIFIED,
@@ -793,8 +738,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * BfdStatus_LocalState
     BfdStatus_LocalState
-      (
-        BfdStatus_LocalState_ADMINDOWN,
+      ( BfdStatus_LocalState_ADMINDOWN,
         BfdStatus_LocalState_Down,
         BfdStatus_LocalState_Init,
         BfdStatus_LocalState_STATEUNSPECIFIED,
@@ -804,8 +748,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Commitment_Category
     Commitment_Category
-      (
-        Commitment_Category_CATEGORYUNSPECIFIED,
+      ( Commitment_Category_CATEGORYUNSPECIFIED,
         Commitment_Category_License,
         Commitment_Category_Machine,
         ..
@@ -813,8 +756,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Commitment_Plan
     Commitment_Plan
-      (
-        Commitment_Plan_Invalid,
+      ( Commitment_Plan_Invalid,
         Commitment_Plan_THIRTYSIXMONTH,
         Commitment_Plan_TWELVEMONTH,
         ..
@@ -822,8 +764,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Commitment_Status
     Commitment_Status
-      (
-        Commitment_Status_Active,
+      ( Commitment_Status_Active,
         Commitment_Status_Creating,
         Commitment_Status_Expired,
         Commitment_Status_NOTYETACTIVE,
@@ -832,8 +773,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Commitment_Type
     Commitment_Type
-      (
-        Commitment_Type_ACCELERATOROPTIMIZED,
+      ( Commitment_Type_ACCELERATOROPTIMIZED,
         Commitment_Type_COMPUTEOPTIMIZED,
         Commitment_Type_COMPUTEOPTIMIZEDC2D,
         Commitment_Type_GENERALPURPOSE,
@@ -848,8 +788,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * CommitmentAggregatedList_Warning_Code
     CommitmentAggregatedList_Warning_Code
-      (
-        CommitmentAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( CommitmentAggregatedList_Warning_Code_CLEANUPFAILED,
         CommitmentAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         CommitmentAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         CommitmentAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -879,8 +818,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * CommitmentList_Warning_Code
     CommitmentList_Warning_Code
-      (
-        CommitmentList_Warning_Code_CLEANUPFAILED,
+      ( CommitmentList_Warning_Code_CLEANUPFAILED,
         CommitmentList_Warning_Code_DEPRECATEDRESOURCEUSED,
         CommitmentList_Warning_Code_DEPRECATEDTYPEUSED,
         CommitmentList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -910,8 +848,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * CommitmentsScopedList_Warning_Code
     CommitmentsScopedList_Warning_Code
-      (
-        CommitmentsScopedList_Warning_Code_CLEANUPFAILED,
+      ( CommitmentsScopedList_Warning_Code_CLEANUPFAILED,
         CommitmentsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         CommitmentsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         CommitmentsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -941,8 +878,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Condition_Iam
     Condition_Iam
-      (
-        Condition_Iam_Approver,
+      ( Condition_Iam_Approver,
         Condition_Iam_Attribution,
         Condition_Iam_Authority,
         Condition_Iam_CREDENTIALSTYPE,
@@ -955,8 +891,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Condition_Op
     Condition_Op
-      (
-        Condition_Op_Discharged,
+      ( Condition_Op_Discharged,
         Condition_Op_Equals,
         Condition_Op_IN,
         Condition_Op_NOTEQUALS,
@@ -967,8 +902,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Condition_Sys
     Condition_Sys
-      (
-        Condition_Sys_IP,
+      ( Condition_Sys_IP,
         Condition_Sys_Name,
         Condition_Sys_NOATTR,
         Condition_Sys_Region,
@@ -978,8 +912,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DeprecationStatus_State
     DeprecationStatus_State
-      (
-        DeprecationStatus_State_Active,
+      ( DeprecationStatus_State_Active,
         DeprecationStatus_State_Deleted,
         DeprecationStatus_State_Deprecated,
         DeprecationStatus_State_Obsolete,
@@ -988,8 +921,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Disk_Status
     Disk_Status
-      (
-        Disk_Status_Creating,
+      ( Disk_Status_Creating,
         Disk_Status_Deleting,
         Disk_Status_Failed,
         Disk_Status_Ready,
@@ -999,8 +931,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DiskAggregatedList_Warning_Code
     DiskAggregatedList_Warning_Code
-      (
-        DiskAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( DiskAggregatedList_Warning_Code_CLEANUPFAILED,
         DiskAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         DiskAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         DiskAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1030,8 +961,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DiskInstantiationConfig_InstantiateFrom
     DiskInstantiationConfig_InstantiateFrom
-      (
-        DiskInstantiationConfig_InstantiateFrom_ATTACHREADONLY,
+      ( DiskInstantiationConfig_InstantiateFrom_ATTACHREADONLY,
         DiskInstantiationConfig_InstantiateFrom_Blank,
         DiskInstantiationConfig_InstantiateFrom_CUSTOMIMAGE,
         DiskInstantiationConfig_InstantiateFrom_Default,
@@ -1043,8 +973,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DiskList_Warning_Code
     DiskList_Warning_Code
-      (
-        DiskList_Warning_Code_CLEANUPFAILED,
+      ( DiskList_Warning_Code_CLEANUPFAILED,
         DiskList_Warning_Code_DEPRECATEDRESOURCEUSED,
         DiskList_Warning_Code_DEPRECATEDTYPEUSED,
         DiskList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1074,8 +1003,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DiskTypeAggregatedList_Warning_Code
     DiskTypeAggregatedList_Warning_Code
-      (
-        DiskTypeAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( DiskTypeAggregatedList_Warning_Code_CLEANUPFAILED,
         DiskTypeAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         DiskTypeAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         DiskTypeAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1105,8 +1033,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DiskTypeList_Warning_Code
     DiskTypeList_Warning_Code
-      (
-        DiskTypeList_Warning_Code_CLEANUPFAILED,
+      ( DiskTypeList_Warning_Code_CLEANUPFAILED,
         DiskTypeList_Warning_Code_DEPRECATEDRESOURCEUSED,
         DiskTypeList_Warning_Code_DEPRECATEDTYPEUSED,
         DiskTypeList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1136,8 +1063,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DiskTypesScopedList_Warning_Code
     DiskTypesScopedList_Warning_Code
-      (
-        DiskTypesScopedList_Warning_Code_CLEANUPFAILED,
+      ( DiskTypesScopedList_Warning_Code_CLEANUPFAILED,
         DiskTypesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         DiskTypesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         DiskTypesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1167,8 +1093,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DisksScopedList_Warning_Code
     DisksScopedList_Warning_Code
-      (
-        DisksScopedList_Warning_Code_CLEANUPFAILED,
+      ( DisksScopedList_Warning_Code_CLEANUPFAILED,
         DisksScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         DisksScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         DisksScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1198,8 +1123,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * DistributionPolicy_TargetShape
     DistributionPolicy_TargetShape
-      (
-        DistributionPolicy_TargetShape_Any,
+      ( DistributionPolicy_TargetShape_Any,
         DistributionPolicy_TargetShape_Balanced,
         DistributionPolicy_TargetShape_Even,
         ..
@@ -1207,8 +1131,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ExchangedPeeringRoute_Type
     ExchangedPeeringRoute_Type
-      (
-        ExchangedPeeringRoute_Type_DYNAMICPEERINGROUTE,
+      ( ExchangedPeeringRoute_Type_DYNAMICPEERINGROUTE,
         ExchangedPeeringRoute_Type_STATICPEERINGROUTE,
         ExchangedPeeringRoute_Type_SUBNETPEERINGROUTE,
         ..
@@ -1216,8 +1139,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ExchangedPeeringRoutesList_Warning_Code
     ExchangedPeeringRoutesList_Warning_Code
-      (
-        ExchangedPeeringRoutesList_Warning_Code_CLEANUPFAILED,
+      ( ExchangedPeeringRoutesList_Warning_Code_CLEANUPFAILED,
         ExchangedPeeringRoutesList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ExchangedPeeringRoutesList_Warning_Code_DEPRECATEDTYPEUSED,
         ExchangedPeeringRoutesList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1247,8 +1169,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ExternalVpnGateway_RedundancyType
     ExternalVpnGateway_RedundancyType
-      (
-        ExternalVpnGateway_RedundancyType_FOURIPSREDUNDANCY,
+      ( ExternalVpnGateway_RedundancyType_FOURIPSREDUNDANCY,
         ExternalVpnGateway_RedundancyType_SINGLEIPINTERNALLYREDUNDANT,
         ExternalVpnGateway_RedundancyType_TWOIPSREDUNDANCY,
         ..
@@ -1256,8 +1177,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ExternalVpnGatewayList_Warning_Code
     ExternalVpnGatewayList_Warning_Code
-      (
-        ExternalVpnGatewayList_Warning_Code_CLEANUPFAILED,
+      ( ExternalVpnGatewayList_Warning_Code_CLEANUPFAILED,
         ExternalVpnGatewayList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ExternalVpnGatewayList_Warning_Code_DEPRECATEDTYPEUSED,
         ExternalVpnGatewayList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1287,8 +1207,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * FileContentBuffer_FileType
     FileContentBuffer_FileType
-      (
-        FileContentBuffer_FileType_Bin,
+      ( FileContentBuffer_FileType_Bin,
         FileContentBuffer_FileType_Undefined,
         FileContentBuffer_FileType_X509,
         ..
@@ -1296,16 +1215,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * Firewall_Direction
     Firewall_Direction
-      (
-        Firewall_Direction_Egress,
+      ( Firewall_Direction_Egress,
         Firewall_Direction_Ingress,
         ..
       ),
 
     -- * FirewallList_Warning_Code
     FirewallList_Warning_Code
-      (
-        FirewallList_Warning_Code_CLEANUPFAILED,
+      ( FirewallList_Warning_Code_CLEANUPFAILED,
         FirewallList_Warning_Code_DEPRECATEDRESOURCEUSED,
         FirewallList_Warning_Code_DEPRECATEDTYPEUSED,
         FirewallList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1335,16 +1252,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * FirewallLogConfig_Metadata
     FirewallLogConfig_Metadata
-      (
-        FirewallLogConfig_Metadata_EXCLUDEALLMETADATA,
+      ( FirewallLogConfig_Metadata_EXCLUDEALLMETADATA,
         FirewallLogConfig_Metadata_INCLUDEALLMETADATA,
         ..
       ),
 
     -- * FirewallPolicyList_Warning_Code
     FirewallPolicyList_Warning_Code
-      (
-        FirewallPolicyList_Warning_Code_CLEANUPFAILED,
+      ( FirewallPolicyList_Warning_Code_CLEANUPFAILED,
         FirewallPolicyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         FirewallPolicyList_Warning_Code_DEPRECATEDTYPEUSED,
         FirewallPolicyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1374,24 +1289,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * FirewallPolicyRule_Direction
     FirewallPolicyRule_Direction
-      (
-        FirewallPolicyRule_Direction_Egress,
+      ( FirewallPolicyRule_Direction_Egress,
         FirewallPolicyRule_Direction_Ingress,
         ..
       ),
 
     -- * FirewallPolicyRuleSecureTag_State
     FirewallPolicyRuleSecureTag_State
-      (
-        FirewallPolicyRuleSecureTag_State_Effective,
+      ( FirewallPolicyRuleSecureTag_State_Effective,
         FirewallPolicyRuleSecureTag_State_Ineffective,
         ..
       ),
 
     -- * ForwardingRule_IPProtocol
     ForwardingRule_IPProtocol
-      (
-        ForwardingRule_IPProtocol_AH,
+      ( ForwardingRule_IPProtocol_AH,
         ForwardingRule_IPProtocol_Esp,
         ForwardingRule_IPProtocol_Icmp,
         ForwardingRule_IPProtocol_L3DEFAULT,
@@ -1403,8 +1315,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ForwardingRule_IpVersion
     ForwardingRule_IpVersion
-      (
-        ForwardingRule_IpVersion_IPV4,
+      ( ForwardingRule_IpVersion_IPV4,
         ForwardingRule_IpVersion_IPV6,
         ForwardingRule_IpVersion_UNSPECIFIEDVERSION,
         ..
@@ -1412,8 +1323,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ForwardingRule_LoadBalancingScheme
     ForwardingRule_LoadBalancingScheme
-      (
-        ForwardingRule_LoadBalancingScheme_External,
+      ( ForwardingRule_LoadBalancingScheme_External,
         ForwardingRule_LoadBalancingScheme_EXTERNALMANAGED,
         ForwardingRule_LoadBalancingScheme_Internal,
         ForwardingRule_LoadBalancingScheme_INTERNALMANAGED,
@@ -1424,8 +1334,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ForwardingRule_NetworkTier
     ForwardingRule_NetworkTier
-      (
-        ForwardingRule_NetworkTier_FIXEDSTANDARD,
+      ( ForwardingRule_NetworkTier_FIXEDSTANDARD,
         ForwardingRule_NetworkTier_Premium,
         ForwardingRule_NetworkTier_Standard,
         ForwardingRule_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
@@ -1434,8 +1343,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ForwardingRule_PscConnectionStatus
     ForwardingRule_PscConnectionStatus
-      (
-        ForwardingRule_PscConnectionStatus_Accepted,
+      ( ForwardingRule_PscConnectionStatus_Accepted,
         ForwardingRule_PscConnectionStatus_Closed,
         ForwardingRule_PscConnectionStatus_Pending,
         ForwardingRule_PscConnectionStatus_Rejected,
@@ -1445,8 +1353,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ForwardingRuleAggregatedList_Warning_Code
     ForwardingRuleAggregatedList_Warning_Code
-      (
-        ForwardingRuleAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( ForwardingRuleAggregatedList_Warning_Code_CLEANUPFAILED,
         ForwardingRuleAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ForwardingRuleAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         ForwardingRuleAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1476,8 +1383,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ForwardingRuleList_Warning_Code
     ForwardingRuleList_Warning_Code
-      (
-        ForwardingRuleList_Warning_Code_CLEANUPFAILED,
+      ( ForwardingRuleList_Warning_Code_CLEANUPFAILED,
         ForwardingRuleList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ForwardingRuleList_Warning_Code_DEPRECATEDTYPEUSED,
         ForwardingRuleList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1507,8 +1413,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ForwardingRulesScopedList_Warning_Code
     ForwardingRulesScopedList_Warning_Code
-      (
-        ForwardingRulesScopedList_Warning_Code_CLEANUPFAILED,
+      ( ForwardingRulesScopedList_Warning_Code_CLEANUPFAILED,
         ForwardingRulesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ForwardingRulesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         ForwardingRulesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1538,8 +1443,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * GRPCHealthCheck_PortSpecification
     GRPCHealthCheck_PortSpecification
-      (
-        GRPCHealthCheck_PortSpecification_USEFIXEDPORT,
+      ( GRPCHealthCheck_PortSpecification_USEFIXEDPORT,
         GRPCHealthCheck_PortSpecification_USENAMEDPORT,
         GRPCHealthCheck_PortSpecification_USESERVINGPORT,
         ..
@@ -1547,8 +1451,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * GuestOsFeature_Type
     GuestOsFeature_Type
-      (
-        GuestOsFeature_Type_FEATURETYPEUNSPECIFIED,
+      ( GuestOsFeature_Type_FEATURETYPEUNSPECIFIED,
         GuestOsFeature_Type_Gvnic,
         GuestOsFeature_Type_MULTIIPSUBNET,
         GuestOsFeature_Type_SECUREBOOT,
@@ -1561,8 +1464,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HTTP2HealthCheck_PortSpecification
     HTTP2HealthCheck_PortSpecification
-      (
-        HTTP2HealthCheck_PortSpecification_USEFIXEDPORT,
+      ( HTTP2HealthCheck_PortSpecification_USEFIXEDPORT,
         HTTP2HealthCheck_PortSpecification_USENAMEDPORT,
         HTTP2HealthCheck_PortSpecification_USESERVINGPORT,
         ..
@@ -1570,16 +1472,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * HTTP2HealthCheck_ProxyHeader
     HTTP2HealthCheck_ProxyHeader
-      (
-        HTTP2HealthCheck_ProxyHeader_None,
+      ( HTTP2HealthCheck_ProxyHeader_None,
         HTTP2HealthCheck_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * HTTPHealthCheck_PortSpecification
     HTTPHealthCheck_PortSpecification
-      (
-        HTTPHealthCheck_PortSpecification_USEFIXEDPORT,
+      ( HTTPHealthCheck_PortSpecification_USEFIXEDPORT,
         HTTPHealthCheck_PortSpecification_USENAMEDPORT,
         HTTPHealthCheck_PortSpecification_USESERVINGPORT,
         ..
@@ -1587,16 +1487,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * HTTPHealthCheck_ProxyHeader
     HTTPHealthCheck_ProxyHeader
-      (
-        HTTPHealthCheck_ProxyHeader_None,
+      ( HTTPHealthCheck_ProxyHeader_None,
         HTTPHealthCheck_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * HTTPSHealthCheck_PortSpecification
     HTTPSHealthCheck_PortSpecification
-      (
-        HTTPSHealthCheck_PortSpecification_USEFIXEDPORT,
+      ( HTTPSHealthCheck_PortSpecification_USEFIXEDPORT,
         HTTPSHealthCheck_PortSpecification_USENAMEDPORT,
         HTTPSHealthCheck_PortSpecification_USESERVINGPORT,
         ..
@@ -1604,16 +1502,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * HTTPSHealthCheck_ProxyHeader
     HTTPSHealthCheck_ProxyHeader
-      (
-        HTTPSHealthCheck_ProxyHeader_None,
+      ( HTTPSHealthCheck_ProxyHeader_None,
         HTTPSHealthCheck_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * HealthCheck_Type
     HealthCheck_Type
-      (
-        HealthCheck_Type_Grpc,
+      ( HealthCheck_Type_Grpc,
         HealthCheck_Type_Http,
         HealthCheck_Type_HTTP2,
         HealthCheck_Type_Https,
@@ -1625,8 +1521,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HealthCheckList_Warning_Code
     HealthCheckList_Warning_Code
-      (
-        HealthCheckList_Warning_Code_CLEANUPFAILED,
+      ( HealthCheckList_Warning_Code_CLEANUPFAILED,
         HealthCheckList_Warning_Code_DEPRECATEDRESOURCEUSED,
         HealthCheckList_Warning_Code_DEPRECATEDTYPEUSED,
         HealthCheckList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1656,16 +1551,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * HealthCheckService_HealthStatusAggregationPolicy
     HealthCheckService_HealthStatusAggregationPolicy
-      (
-        HealthCheckService_HealthStatusAggregationPolicy_And,
+      ( HealthCheckService_HealthStatusAggregationPolicy_And,
         HealthCheckService_HealthStatusAggregationPolicy_NOAGGREGATION,
         ..
       ),
 
     -- * HealthCheckServicesList_Warning_Code
     HealthCheckServicesList_Warning_Code
-      (
-        HealthCheckServicesList_Warning_Code_CLEANUPFAILED,
+      ( HealthCheckServicesList_Warning_Code_CLEANUPFAILED,
         HealthCheckServicesList_Warning_Code_DEPRECATEDRESOURCEUSED,
         HealthCheckServicesList_Warning_Code_DEPRECATEDTYPEUSED,
         HealthCheckServicesList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1695,8 +1588,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HealthChecksAggregatedList_Warning_Code
     HealthChecksAggregatedList_Warning_Code
-      (
-        HealthChecksAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( HealthChecksAggregatedList_Warning_Code_CLEANUPFAILED,
         HealthChecksAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         HealthChecksAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         HealthChecksAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1726,8 +1618,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HealthChecksScopedList_Warning_Code
     HealthChecksScopedList_Warning_Code
-      (
-        HealthChecksScopedList_Warning_Code_CLEANUPFAILED,
+      ( HealthChecksScopedList_Warning_Code_CLEANUPFAILED,
         HealthChecksScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         HealthChecksScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         HealthChecksScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1757,16 +1648,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * HealthStatus_HealthState
     HealthStatus_HealthState
-      (
-        HealthStatus_HealthState_Healthy,
+      ( HealthStatus_HealthState_Healthy,
         HealthStatus_HealthState_Unhealthy,
         ..
       ),
 
     -- * HealthStatus_WeightError
     HealthStatus_WeightError
-      (
-        HealthStatus_WeightError_INVALIDWEIGHT,
+      ( HealthStatus_WeightError_INVALIDWEIGHT,
         HealthStatus_WeightError_MISSINGWEIGHT,
         HealthStatus_WeightError_UNAVAILABLEWEIGHT,
         HealthStatus_WeightError_WEIGHTNONE,
@@ -1775,8 +1664,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HealthStatusForNetworkEndpoint_HealthState
     HealthStatusForNetworkEndpoint_HealthState
-      (
-        HealthStatusForNetworkEndpoint_HealthState_Draining,
+      ( HealthStatusForNetworkEndpoint_HealthState_Draining,
         HealthStatusForNetworkEndpoint_HealthState_Healthy,
         HealthStatusForNetworkEndpoint_HealthState_Unhealthy,
         HealthStatusForNetworkEndpoint_HealthState_Unknown,
@@ -1785,8 +1673,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HttpHealthCheckList_Warning_Code
     HttpHealthCheckList_Warning_Code
-      (
-        HttpHealthCheckList_Warning_Code_CLEANUPFAILED,
+      ( HttpHealthCheckList_Warning_Code_CLEANUPFAILED,
         HttpHealthCheckList_Warning_Code_DEPRECATEDRESOURCEUSED,
         HttpHealthCheckList_Warning_Code_DEPRECATEDTYPEUSED,
         HttpHealthCheckList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1816,8 +1703,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HttpRedirectAction_RedirectResponseCode
     HttpRedirectAction_RedirectResponseCode
-      (
-        HttpRedirectAction_RedirectResponseCode_Found,
+      ( HttpRedirectAction_RedirectResponseCode_Found,
         HttpRedirectAction_RedirectResponseCode_MOVEDPERMANENTLYDEFAULT,
         HttpRedirectAction_RedirectResponseCode_PERMANENTREDIRECT,
         HttpRedirectAction_RedirectResponseCode_SEEOTHER,
@@ -1827,8 +1713,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * HttpsHealthCheckList_Warning_Code
     HttpsHealthCheckList_Warning_Code
-      (
-        HttpsHealthCheckList_Warning_Code_CLEANUPFAILED,
+      ( HttpsHealthCheckList_Warning_Code_CLEANUPFAILED,
         HttpsHealthCheckList_Warning_Code_DEPRECATEDRESOURCEUSED,
         HttpsHealthCheckList_Warning_Code_DEPRECATEDTYPEUSED,
         HttpsHealthCheckList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1858,22 +1743,19 @@ module Gogol.Compute.Internal.Sum
 
     -- * Image_RawDisk_ContainerType
     Image_RawDisk_ContainerType
-      (
-        Image_RawDisk_ContainerType_Tar,
+      ( Image_RawDisk_ContainerType_Tar,
         ..
       ),
 
     -- * Image_SourceType
     Image_SourceType
-      (
-        Image_SourceType_Raw,
+      ( Image_SourceType_Raw,
         ..
       ),
 
     -- * Image_Status
     Image_Status
-      (
-        Image_Status_Deleting,
+      ( Image_Status_Deleting,
         Image_Status_Failed,
         Image_Status_Pending,
         Image_Status_Ready,
@@ -1882,8 +1764,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ImageList_Warning_Code
     ImageList_Warning_Code
-      (
-        ImageList_Warning_Code_CLEANUPFAILED,
+      ( ImageList_Warning_Code_CLEANUPFAILED,
         ImageList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ImageList_Warning_Code_DEPRECATEDTYPEUSED,
         ImageList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1913,8 +1794,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Instance_PrivateIpv6GoogleAccess
     Instance_PrivateIpv6GoogleAccess
-      (
-        Instance_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
+      ( Instance_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
         Instance_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
         Instance_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
         ..
@@ -1922,8 +1802,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Instance_Status
     Instance_Status
-      (
-        Instance_Status_Deprovisioning,
+      ( Instance_Status_Deprovisioning,
         Instance_Status_Provisioning,
         Instance_Status_Repairing,
         Instance_Status_Running,
@@ -1938,8 +1817,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceAggregatedList_Warning_Code
     InstanceAggregatedList_Warning_Code
-      (
-        InstanceAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( InstanceAggregatedList_Warning_Code_CLEANUPFAILED,
         InstanceAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -1969,8 +1847,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupAggregatedList_Warning_Code
     InstanceGroupAggregatedList_Warning_Code
-      (
-        InstanceGroupAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupAggregatedList_Warning_Code_CLEANUPFAILED,
         InstanceGroupAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2000,8 +1877,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupList_Warning_Code
     InstanceGroupList_Warning_Code
-      (
-        InstanceGroupList_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupList_Warning_Code_CLEANUPFAILED,
         InstanceGroupList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2031,8 +1907,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagerAggregatedList_Warning_Code
     InstanceGroupManagerAggregatedList_Warning_Code
-      (
-        InstanceGroupManagerAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupManagerAggregatedList_Warning_Code_CLEANUPFAILED,
         InstanceGroupManagerAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupManagerAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupManagerAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2062,8 +1937,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagerList_Warning_Code
     InstanceGroupManagerList_Warning_Code
-      (
-        InstanceGroupManagerList_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupManagerList_Warning_Code_CLEANUPFAILED,
         InstanceGroupManagerList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupManagerList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupManagerList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2093,16 +1967,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagerUpdatePolicy_InstanceRedistributionType
     InstanceGroupManagerUpdatePolicy_InstanceRedistributionType
-      (
-        InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_None,
+      ( InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_None,
         InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_Proactive,
         ..
       ),
 
     -- * InstanceGroupManagerUpdatePolicy_MinimalAction
     InstanceGroupManagerUpdatePolicy_MinimalAction
-      (
-        InstanceGroupManagerUpdatePolicy_MinimalAction_None,
+      ( InstanceGroupManagerUpdatePolicy_MinimalAction_None,
         InstanceGroupManagerUpdatePolicy_MinimalAction_Refresh,
         InstanceGroupManagerUpdatePolicy_MinimalAction_Replace,
         InstanceGroupManagerUpdatePolicy_MinimalAction_Restart,
@@ -2111,8 +1983,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction
     InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction
-      (
-        InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_None,
+      ( InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_None,
         InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_Refresh,
         InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_Replace,
         InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_Restart,
@@ -2121,24 +1992,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagerUpdatePolicy_ReplacementMethod
     InstanceGroupManagerUpdatePolicy_ReplacementMethod
-      (
-        InstanceGroupManagerUpdatePolicy_ReplacementMethod_Recreate,
+      ( InstanceGroupManagerUpdatePolicy_ReplacementMethod_Recreate,
         InstanceGroupManagerUpdatePolicy_ReplacementMethod_Substitute,
         ..
       ),
 
     -- * InstanceGroupManagerUpdatePolicy_Type
     InstanceGroupManagerUpdatePolicy_Type
-      (
-        InstanceGroupManagerUpdatePolicy_Type_Opportunistic,
+      ( InstanceGroupManagerUpdatePolicy_Type_Opportunistic,
         InstanceGroupManagerUpdatePolicy_Type_Proactive,
         ..
       ),
 
     -- * InstanceGroupManagersApplyUpdatesRequest_MinimalAction
     InstanceGroupManagersApplyUpdatesRequest_MinimalAction
-      (
-        InstanceGroupManagersApplyUpdatesRequest_MinimalAction_None,
+      ( InstanceGroupManagersApplyUpdatesRequest_MinimalAction_None,
         InstanceGroupManagersApplyUpdatesRequest_MinimalAction_Refresh,
         InstanceGroupManagersApplyUpdatesRequest_MinimalAction_Replace,
         InstanceGroupManagersApplyUpdatesRequest_MinimalAction_Restart,
@@ -2147,8 +2015,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
     InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
-      (
-        InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_None,
+      ( InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_None,
         InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Refresh,
         InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Replace,
         InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Restart,
@@ -2157,8 +2024,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
     InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
-      (
-        InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_CLEANUPFAILED,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2188,8 +2054,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupManagersScopedList_Warning_Code
     InstanceGroupManagersScopedList_Warning_Code
-      (
-        InstanceGroupManagersScopedList_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupManagersScopedList_Warning_Code_CLEANUPFAILED,
         InstanceGroupManagersScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupManagersScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupManagersScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2219,8 +2084,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupsListInstances_Warning_Code
     InstanceGroupsListInstances_Warning_Code
-      (
-        InstanceGroupsListInstances_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupsListInstances_Warning_Code_CLEANUPFAILED,
         InstanceGroupsListInstances_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupsListInstances_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupsListInstances_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2250,16 +2114,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceGroupsListInstancesRequest_InstanceState
     InstanceGroupsListInstancesRequest_InstanceState
-      (
-        InstanceGroupsListInstancesRequest_InstanceState_All,
+      ( InstanceGroupsListInstancesRequest_InstanceState_All,
         InstanceGroupsListInstancesRequest_InstanceState_Running,
         ..
       ),
 
     -- * InstanceGroupsScopedList_Warning_Code
     InstanceGroupsScopedList_Warning_Code
-      (
-        InstanceGroupsScopedList_Warning_Code_CLEANUPFAILED,
+      ( InstanceGroupsScopedList_Warning_Code_CLEANUPFAILED,
         InstanceGroupsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceGroupsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceGroupsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2289,8 +2151,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceList_Warning_Code
     InstanceList_Warning_Code
-      (
-        InstanceList_Warning_Code_CLEANUPFAILED,
+      ( InstanceList_Warning_Code_CLEANUPFAILED,
         InstanceList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2320,8 +2181,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceListReferrers_Warning_Code
     InstanceListReferrers_Warning_Code
-      (
-        InstanceListReferrers_Warning_Code_CLEANUPFAILED,
+      ( InstanceListReferrers_Warning_Code_CLEANUPFAILED,
         InstanceListReferrers_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceListReferrers_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceListReferrers_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2351,8 +2211,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceManagedByIgmErrorInstanceActionDetails_Action
     InstanceManagedByIgmErrorInstanceActionDetails_Action
-      (
-        InstanceManagedByIgmErrorInstanceActionDetails_Action_Abandoning,
+      ( InstanceManagedByIgmErrorInstanceActionDetails_Action_Abandoning,
         InstanceManagedByIgmErrorInstanceActionDetails_Action_Creating,
         InstanceManagedByIgmErrorInstanceActionDetails_Action_CREATINGWITHOUTRETRIES,
         InstanceManagedByIgmErrorInstanceActionDetails_Action_Deleting,
@@ -2370,8 +2229,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceProperties_PrivateIpv6GoogleAccess
     InstanceProperties_PrivateIpv6GoogleAccess
-      (
-        InstanceProperties_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
+      ( InstanceProperties_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
         InstanceProperties_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
         InstanceProperties_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
         ..
@@ -2379,8 +2237,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceTemplateList_Warning_Code
     InstanceTemplateList_Warning_Code
-      (
-        InstanceTemplateList_Warning_Code_CLEANUPFAILED,
+      ( InstanceTemplateList_Warning_Code_CLEANUPFAILED,
         InstanceTemplateList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstanceTemplateList_Warning_Code_DEPRECATEDTYPEUSED,
         InstanceTemplateList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2410,8 +2267,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstanceWithNamedPorts_Status
     InstanceWithNamedPorts_Status
-      (
-        InstanceWithNamedPorts_Status_Deprovisioning,
+      ( InstanceWithNamedPorts_Status_Deprovisioning,
         InstanceWithNamedPorts_Status_Provisioning,
         InstanceWithNamedPorts_Status_Repairing,
         InstanceWithNamedPorts_Status_Running,
@@ -2426,8 +2282,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
     InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
-      (
-        InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
+      ( InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
         InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
         InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL,
         InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
@@ -2436,8 +2291,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstancesScopedList_Warning_Code
     InstancesScopedList_Warning_Code
-      (
-        InstancesScopedList_Warning_Code_CLEANUPFAILED,
+      ( InstancesScopedList_Warning_Code_CLEANUPFAILED,
         InstancesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InstancesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         InstancesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2467,8 +2321,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Interconnect_InterconnectType
     Interconnect_InterconnectType
-      (
-        Interconnect_InterconnectType_Dedicated,
+      ( Interconnect_InterconnectType_Dedicated,
         Interconnect_InterconnectType_ITPRIVATE,
         Interconnect_InterconnectType_Partner,
         ..
@@ -2476,32 +2329,28 @@ module Gogol.Compute.Internal.Sum
 
     -- * Interconnect_LinkType
     Interconnect_LinkType
-      (
-        Interconnect_LinkType_LINKTYPEETHERNET100GLR,
+      ( Interconnect_LinkType_LINKTYPEETHERNET100GLR,
         Interconnect_LinkType_LINKTYPEETHERNET10GLR,
         ..
       ),
 
     -- * Interconnect_OperationalStatus
     Interconnect_OperationalStatus
-      (
-        Interconnect_OperationalStatus_OSACTIVE,
+      ( Interconnect_OperationalStatus_OSACTIVE,
         Interconnect_OperationalStatus_OSUNPROVISIONED,
         ..
       ),
 
     -- * Interconnect_State
     Interconnect_State
-      (
-        Interconnect_State_Active,
+      ( Interconnect_State_Active,
         Interconnect_State_Unprovisioned,
         ..
       ),
 
     -- * InterconnectAttachment_Bandwidth
     InterconnectAttachment_Bandwidth
-      (
-        InterconnectAttachment_Bandwidth_BPS100M,
+      ( InterconnectAttachment_Bandwidth_BPS100M,
         InterconnectAttachment_Bandwidth_BPS10G,
         InterconnectAttachment_Bandwidth_BPS1G,
         InterconnectAttachment_Bandwidth_BPS200M,
@@ -2518,8 +2367,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectAttachment_EdgeAvailabilityDomain
     InterconnectAttachment_EdgeAvailabilityDomain
-      (
-        InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_1,
+      ( InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_1,
         InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_2,
         InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITYDOMAINANY,
         ..
@@ -2527,32 +2375,28 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectAttachment_Encryption
     InterconnectAttachment_Encryption
-      (
-        InterconnectAttachment_Encryption_Ipsec,
+      ( InterconnectAttachment_Encryption_Ipsec,
         InterconnectAttachment_Encryption_None,
         ..
       ),
 
     -- * InterconnectAttachment_OperationalStatus
     InterconnectAttachment_OperationalStatus
-      (
-        InterconnectAttachment_OperationalStatus_OSACTIVE,
+      ( InterconnectAttachment_OperationalStatus_OSACTIVE,
         InterconnectAttachment_OperationalStatus_OSUNPROVISIONED,
         ..
       ),
 
     -- * InterconnectAttachment_StackType
     InterconnectAttachment_StackType
-      (
-        InterconnectAttachment_StackType_IPV4_IPV6,
+      ( InterconnectAttachment_StackType_IPV4_IPV6,
         InterconnectAttachment_StackType_IPV4ONLY,
         ..
       ),
 
     -- * InterconnectAttachment_State
     InterconnectAttachment_State
-      (
-        InterconnectAttachment_State_Active,
+      ( InterconnectAttachment_State_Active,
         InterconnectAttachment_State_Defunct,
         InterconnectAttachment_State_PARTNERREQUESTRECEIVED,
         InterconnectAttachment_State_PENDINGCUSTOMER,
@@ -2564,8 +2408,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectAttachment_Type
     InterconnectAttachment_Type
-      (
-        InterconnectAttachment_Type_Dedicated,
+      ( InterconnectAttachment_Type_Dedicated,
         InterconnectAttachment_Type_Partner,
         InterconnectAttachment_Type_PARTNERPROVIDER,
         ..
@@ -2573,8 +2416,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectAttachmentAggregatedList_Warning_Code
     InterconnectAttachmentAggregatedList_Warning_Code
-      (
-        InterconnectAttachmentAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( InterconnectAttachmentAggregatedList_Warning_Code_CLEANUPFAILED,
         InterconnectAttachmentAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InterconnectAttachmentAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         InterconnectAttachmentAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2604,8 +2446,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectAttachmentList_Warning_Code
     InterconnectAttachmentList_Warning_Code
-      (
-        InterconnectAttachmentList_Warning_Code_CLEANUPFAILED,
+      ( InterconnectAttachmentList_Warning_Code_CLEANUPFAILED,
         InterconnectAttachmentList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InterconnectAttachmentList_Warning_Code_DEPRECATEDTYPEUSED,
         InterconnectAttachmentList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2635,8 +2476,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectAttachmentsScopedList_Warning_Code
     InterconnectAttachmentsScopedList_Warning_Code
-      (
-        InterconnectAttachmentsScopedList_Warning_Code_CLEANUPFAILED,
+      ( InterconnectAttachmentsScopedList_Warning_Code_CLEANUPFAILED,
         InterconnectAttachmentsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InterconnectAttachmentsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         InterconnectAttachmentsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2666,16 +2506,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectDiagnosticsLinkLACPStatus_State
     InterconnectDiagnosticsLinkLACPStatus_State
-      (
-        InterconnectDiagnosticsLinkLACPStatus_State_Active,
+      ( InterconnectDiagnosticsLinkLACPStatus_State_Active,
         InterconnectDiagnosticsLinkLACPStatus_State_Detached,
         ..
       ),
 
     -- * InterconnectDiagnosticsLinkOpticalPower_State
     InterconnectDiagnosticsLinkOpticalPower_State
-      (
-        InterconnectDiagnosticsLinkOpticalPower_State_HIGHALARM,
+      ( InterconnectDiagnosticsLinkOpticalPower_State_HIGHALARM,
         InterconnectDiagnosticsLinkOpticalPower_State_HIGHWARNING,
         InterconnectDiagnosticsLinkOpticalPower_State_LOWALARM,
         InterconnectDiagnosticsLinkOpticalPower_State_LOWWARNING,
@@ -2685,8 +2523,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectList_Warning_Code
     InterconnectList_Warning_Code
-      (
-        InterconnectList_Warning_Code_CLEANUPFAILED,
+      ( InterconnectList_Warning_Code_CLEANUPFAILED,
         InterconnectList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InterconnectList_Warning_Code_DEPRECATEDTYPEUSED,
         InterconnectList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2716,8 +2553,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectLocation_Continent
     InterconnectLocation_Continent
-      (
-        InterconnectLocation_Continent_Africa,
+      ( InterconnectLocation_Continent_Africa,
         InterconnectLocation_Continent_ASIAPAC,
         InterconnectLocation_Continent_CAFRICA,
         InterconnectLocation_Continent_CASIAPAC,
@@ -2732,16 +2568,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectLocation_Status
     InterconnectLocation_Status
-      (
-        InterconnectLocation_Status_Available,
+      ( InterconnectLocation_Status_Available,
         InterconnectLocation_Status_Closed,
         ..
       ),
 
     -- * InterconnectLocationList_Warning_Code
     InterconnectLocationList_Warning_Code
-      (
-        InterconnectLocationList_Warning_Code_CLEANUPFAILED,
+      ( InterconnectLocationList_Warning_Code_CLEANUPFAILED,
         InterconnectLocationList_Warning_Code_DEPRECATEDRESOURCEUSED,
         InterconnectLocationList_Warning_Code_DEPRECATEDTYPEUSED,
         InterconnectLocationList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2771,8 +2605,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectLocationRegionInfo_LocationPresence
     InterconnectLocationRegionInfo_LocationPresence
-      (
-        InterconnectLocationRegionInfo_LocationPresence_Global,
+      ( InterconnectLocationRegionInfo_LocationPresence_Global,
         InterconnectLocationRegionInfo_LocationPresence_LOCALREGION,
         InterconnectLocationRegionInfo_LocationPresence_LPGLOBAL,
         InterconnectLocationRegionInfo_LocationPresence_LPLOCALREGION,
@@ -2781,8 +2614,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectOutageNotification_IssueType
     InterconnectOutageNotification_IssueType
-      (
-        InterconnectOutageNotification_IssueType_ITOUTAGE,
+      ( InterconnectOutageNotification_IssueType_ITOUTAGE,
         InterconnectOutageNotification_IssueType_ITPARTIALOUTAGE,
         InterconnectOutageNotification_IssueType_Outage,
         InterconnectOutageNotification_IssueType_PARTIALOUTAGE,
@@ -2791,16 +2623,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectOutageNotification_Source
     InterconnectOutageNotification_Source
-      (
-        InterconnectOutageNotification_Source_Google,
+      ( InterconnectOutageNotification_Source_Google,
         InterconnectOutageNotification_Source_NSRCGOOGLE,
         ..
       ),
 
     -- * InterconnectOutageNotification_State
     InterconnectOutageNotification_State
-      (
-        InterconnectOutageNotification_State_Active,
+      ( InterconnectOutageNotification_State_Active,
         InterconnectOutageNotification_State_Cancelled,
         InterconnectOutageNotification_State_Completed,
         InterconnectOutageNotification_State_NSACTIVE,
@@ -2810,8 +2640,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * LicenseCode_State
     LicenseCode_State
-      (
-        LicenseCode_State_Disabled,
+      ( LicenseCode_State_Disabled,
         LicenseCode_State_Enabled,
         LicenseCode_State_Restricted,
         LicenseCode_State_STATEUNSPECIFIED,
@@ -2821,8 +2650,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * LicensesListResponse_Warning_Code
     LicensesListResponse_Warning_Code
-      (
-        LicensesListResponse_Warning_Code_CLEANUPFAILED,
+      ( LicensesListResponse_Warning_Code_CLEANUPFAILED,
         LicensesListResponse_Warning_Code_DEPRECATEDRESOURCEUSED,
         LicensesListResponse_Warning_Code_DEPRECATEDTYPEUSED,
         LicensesListResponse_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2852,8 +2680,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * LocationPolicyLocation_Preference
     LocationPolicyLocation_Preference
-      (
-        LocationPolicyLocation_Preference_Allow,
+      ( LocationPolicyLocation_Preference_Allow,
         LocationPolicyLocation_Preference_Deny,
         LocationPolicyLocation_Preference_PREFERENCEUNSPECIFIED,
         ..
@@ -2861,8 +2688,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * LogConfigCloudAuditOptions_LogName
     LogConfigCloudAuditOptions_LogName
-      (
-        LogConfigCloudAuditOptions_LogName_ADMINACTIVITY,
+      ( LogConfigCloudAuditOptions_LogName_ADMINACTIVITY,
         LogConfigCloudAuditOptions_LogName_DATAACCESS,
         LogConfigCloudAuditOptions_LogName_UNSPECIFIEDLOGNAME,
         ..
@@ -2870,16 +2696,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * LogConfigDataAccessOptions_LogMode
     LogConfigDataAccessOptions_LogMode
-      (
-        LogConfigDataAccessOptions_LogMode_LOGFAILCLOSED,
+      ( LogConfigDataAccessOptions_LogMode_LOGFAILCLOSED,
         LogConfigDataAccessOptions_LogMode_LOGMODEUNSPECIFIED,
         ..
       ),
 
     -- * MachineImage_Status
     MachineImage_Status
-      (
-        MachineImage_Status_Creating,
+      ( MachineImage_Status_Creating,
         MachineImage_Status_Deleting,
         MachineImage_Status_Invalid,
         MachineImage_Status_Ready,
@@ -2889,8 +2713,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * MachineImageList_Warning_Code
     MachineImageList_Warning_Code
-      (
-        MachineImageList_Warning_Code_CLEANUPFAILED,
+      ( MachineImageList_Warning_Code_CLEANUPFAILED,
         MachineImageList_Warning_Code_DEPRECATEDRESOURCEUSED,
         MachineImageList_Warning_Code_DEPRECATEDTYPEUSED,
         MachineImageList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2920,8 +2743,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * MachineTypeAggregatedList_Warning_Code
     MachineTypeAggregatedList_Warning_Code
-      (
-        MachineTypeAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( MachineTypeAggregatedList_Warning_Code_CLEANUPFAILED,
         MachineTypeAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         MachineTypeAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         MachineTypeAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2951,8 +2773,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * MachineTypeList_Warning_Code
     MachineTypeList_Warning_Code
-      (
-        MachineTypeList_Warning_Code_CLEANUPFAILED,
+      ( MachineTypeList_Warning_Code_CLEANUPFAILED,
         MachineTypeList_Warning_Code_DEPRECATEDRESOURCEUSED,
         MachineTypeList_Warning_Code_DEPRECATEDTYPEUSED,
         MachineTypeList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -2982,8 +2803,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * MachineTypesScopedList_Warning_Code
     MachineTypesScopedList_Warning_Code
-      (
-        MachineTypesScopedList_Warning_Code_CLEANUPFAILED,
+      ( MachineTypesScopedList_Warning_Code_CLEANUPFAILED,
         MachineTypesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         MachineTypesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         MachineTypesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3013,8 +2833,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ManagedInstance_CurrentAction
     ManagedInstance_CurrentAction
-      (
-        ManagedInstance_CurrentAction_Abandoning,
+      ( ManagedInstance_CurrentAction_Abandoning,
         ManagedInstance_CurrentAction_Creating,
         ManagedInstance_CurrentAction_CREATINGWITHOUTRETRIES,
         ManagedInstance_CurrentAction_Deleting,
@@ -3032,8 +2851,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ManagedInstance_InstanceStatus
     ManagedInstance_InstanceStatus
-      (
-        ManagedInstance_InstanceStatus_Deprovisioning,
+      ( ManagedInstance_InstanceStatus_Deprovisioning,
         ManagedInstance_InstanceStatus_Provisioning,
         ManagedInstance_InstanceStatus_Repairing,
         ManagedInstance_InstanceStatus_Running,
@@ -3048,8 +2866,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ManagedInstanceInstanceHealth_DetailedHealthState
     ManagedInstanceInstanceHealth_DetailedHealthState
-      (
-        ManagedInstanceInstanceHealth_DetailedHealthState_Draining,
+      ( ManagedInstanceInstanceHealth_DetailedHealthState_Draining,
         ManagedInstanceInstanceHealth_DetailedHealthState_Healthy,
         ManagedInstanceInstanceHealth_DetailedHealthState_Timeout,
         ManagedInstanceInstanceHealth_DetailedHealthState_Unhealthy,
@@ -3059,8 +2876,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * MetadataFilter_FilterMatchCriteria
     MetadataFilter_FilterMatchCriteria
-      (
-        MetadataFilter_FilterMatchCriteria_MATCHALL,
+      ( MetadataFilter_FilterMatchCriteria_MATCHALL,
         MetadataFilter_FilterMatchCriteria_MATCHANY,
         MetadataFilter_FilterMatchCriteria_NOTSET,
         ..
@@ -3068,16 +2884,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * Network_NetworkFirewallPolicyEnforcementOrder
     Network_NetworkFirewallPolicyEnforcementOrder
-      (
-        Network_NetworkFirewallPolicyEnforcementOrder_AFTERCLASSICFIREWALL,
+      ( Network_NetworkFirewallPolicyEnforcementOrder_AFTERCLASSICFIREWALL,
         Network_NetworkFirewallPolicyEnforcementOrder_BEFORECLASSICFIREWALL,
         ..
       ),
 
     -- * NetworkEndpointGroup_NetworkEndpointType
     NetworkEndpointGroup_NetworkEndpointType
-      (
-        NetworkEndpointGroup_NetworkEndpointType_GCEVMIP,
+      ( NetworkEndpointGroup_NetworkEndpointType_GCEVMIP,
         NetworkEndpointGroup_NetworkEndpointType_GCEVMIPPORT,
         NetworkEndpointGroup_NetworkEndpointType_INTERNETFQDNPORT,
         NetworkEndpointGroup_NetworkEndpointType_INTERNETIPPORT,
@@ -3089,8 +2903,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworkEndpointGroupAggregatedList_Warning_Code
     NetworkEndpointGroupAggregatedList_Warning_Code
-      (
-        NetworkEndpointGroupAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( NetworkEndpointGroupAggregatedList_Warning_Code_CLEANUPFAILED,
         NetworkEndpointGroupAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NetworkEndpointGroupAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         NetworkEndpointGroupAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3120,8 +2933,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworkEndpointGroupList_Warning_Code
     NetworkEndpointGroupList_Warning_Code
-      (
-        NetworkEndpointGroupList_Warning_Code_CLEANUPFAILED,
+      ( NetworkEndpointGroupList_Warning_Code_CLEANUPFAILED,
         NetworkEndpointGroupList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NetworkEndpointGroupList_Warning_Code_DEPRECATEDTYPEUSED,
         NetworkEndpointGroupList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3151,16 +2963,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworkEndpointGroupsListEndpointsRequest_HealthStatus
     NetworkEndpointGroupsListEndpointsRequest_HealthStatus
-      (
-        NetworkEndpointGroupsListEndpointsRequest_HealthStatus_Show,
+      ( NetworkEndpointGroupsListEndpointsRequest_HealthStatus_Show,
         NetworkEndpointGroupsListEndpointsRequest_HealthStatus_Skip,
         ..
       ),
 
     -- * NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
     NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
-      (
-        NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_CLEANUPFAILED,
+      ( NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_CLEANUPFAILED,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_DEPRECATEDRESOURCEUSED,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_DEPRECATEDTYPEUSED,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3190,8 +3000,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworkEndpointGroupsScopedList_Warning_Code
     NetworkEndpointGroupsScopedList_Warning_Code
-      (
-        NetworkEndpointGroupsScopedList_Warning_Code_CLEANUPFAILED,
+      ( NetworkEndpointGroupsScopedList_Warning_Code_CLEANUPFAILED,
         NetworkEndpointGroupsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NetworkEndpointGroupsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         NetworkEndpointGroupsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3221,16 +3030,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworkInterface_Ipv6AccessType
     NetworkInterface_Ipv6AccessType
-      (
-        NetworkInterface_Ipv6AccessType_External,
+      ( NetworkInterface_Ipv6AccessType_External,
         NetworkInterface_Ipv6AccessType_Internal,
         ..
       ),
 
     -- * NetworkInterface_NicType
     NetworkInterface_NicType
-      (
-        NetworkInterface_NicType_Gvnic,
+      ( NetworkInterface_NicType_Gvnic,
         NetworkInterface_NicType_UNSPECIFIEDNICTYPE,
         NetworkInterface_NicType_VIRTIONET,
         ..
@@ -3238,16 +3045,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworkInterface_StackType
     NetworkInterface_StackType
-      (
-        NetworkInterface_StackType_IPV4_IPV6,
+      ( NetworkInterface_StackType_IPV4_IPV6,
         NetworkInterface_StackType_IPV4ONLY,
         ..
       ),
 
     -- * NetworkList_Warning_Code
     NetworkList_Warning_Code
-      (
-        NetworkList_Warning_Code_CLEANUPFAILED,
+      ( NetworkList_Warning_Code_CLEANUPFAILED,
         NetworkList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NetworkList_Warning_Code_DEPRECATEDTYPEUSED,
         NetworkList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3277,32 +3082,28 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworkPeering_State
     NetworkPeering_State
-      (
-        NetworkPeering_State_Active,
+      ( NetworkPeering_State_Active,
         NetworkPeering_State_Inactive,
         ..
       ),
 
     -- * NetworkPerformanceConfig_TotalEgressBandwidthTier
     NetworkPerformanceConfig_TotalEgressBandwidthTier
-      (
-        NetworkPerformanceConfig_TotalEgressBandwidthTier_Default,
+      ( NetworkPerformanceConfig_TotalEgressBandwidthTier_Default,
         NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
         ..
       ),
 
     -- * NetworkRoutingConfig_RoutingMode
     NetworkRoutingConfig_RoutingMode
-      (
-        NetworkRoutingConfig_RoutingMode_Global,
+      ( NetworkRoutingConfig_RoutingMode_Global,
         NetworkRoutingConfig_RoutingMode_Regional,
         ..
       ),
 
     -- * NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
     NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
-      (
-        NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
+      ( NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
         NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
         NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
         ..
@@ -3310,8 +3111,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroup_MaintenancePolicy
     NodeGroup_MaintenancePolicy
-      (
-        NodeGroup_MaintenancePolicy_Default,
+      ( NodeGroup_MaintenancePolicy_Default,
         NodeGroup_MaintenancePolicy_MAINTENANCEPOLICYUNSPECIFIED,
         NodeGroup_MaintenancePolicy_MIGRATEWITHINNODEGROUP,
         NodeGroup_MaintenancePolicy_RESTARTINPLACE,
@@ -3320,8 +3120,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroup_Status
     NodeGroup_Status
-      (
-        NodeGroup_Status_Creating,
+      ( NodeGroup_Status_Creating,
         NodeGroup_Status_Deleting,
         NodeGroup_Status_Invalid,
         NodeGroup_Status_Ready,
@@ -3330,8 +3129,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroupAggregatedList_Warning_Code
     NodeGroupAggregatedList_Warning_Code
-      (
-        NodeGroupAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( NodeGroupAggregatedList_Warning_Code_CLEANUPFAILED,
         NodeGroupAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeGroupAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeGroupAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3361,8 +3159,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroupAutoscalingPolicy_Mode
     NodeGroupAutoscalingPolicy_Mode
-      (
-        NodeGroupAutoscalingPolicy_Mode_MODEUNSPECIFIED,
+      ( NodeGroupAutoscalingPolicy_Mode_MODEUNSPECIFIED,
         NodeGroupAutoscalingPolicy_Mode_Off,
         NodeGroupAutoscalingPolicy_Mode_ON,
         NodeGroupAutoscalingPolicy_Mode_ONLYSCALEOUT,
@@ -3371,8 +3168,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroupList_Warning_Code
     NodeGroupList_Warning_Code
-      (
-        NodeGroupList_Warning_Code_CLEANUPFAILED,
+      ( NodeGroupList_Warning_Code_CLEANUPFAILED,
         NodeGroupList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeGroupList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeGroupList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3402,8 +3198,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroupNode_CpuOvercommitType
     NodeGroupNode_CpuOvercommitType
-      (
-        NodeGroupNode_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED,
+      ( NodeGroupNode_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED,
         NodeGroupNode_CpuOvercommitType_Enabled,
         NodeGroupNode_CpuOvercommitType_None,
         ..
@@ -3411,8 +3206,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroupNode_Status
     NodeGroupNode_Status
-      (
-        NodeGroupNode_Status_Creating,
+      ( NodeGroupNode_Status_Creating,
         NodeGroupNode_Status_Deleting,
         NodeGroupNode_Status_Invalid,
         NodeGroupNode_Status_Ready,
@@ -3422,8 +3216,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroupsListNodes_Warning_Code
     NodeGroupsListNodes_Warning_Code
-      (
-        NodeGroupsListNodes_Warning_Code_CLEANUPFAILED,
+      ( NodeGroupsListNodes_Warning_Code_CLEANUPFAILED,
         NodeGroupsListNodes_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeGroupsListNodes_Warning_Code_DEPRECATEDTYPEUSED,
         NodeGroupsListNodes_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3453,8 +3246,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeGroupsScopedList_Warning_Code
     NodeGroupsScopedList_Warning_Code
-      (
-        NodeGroupsScopedList_Warning_Code_CLEANUPFAILED,
+      ( NodeGroupsScopedList_Warning_Code_CLEANUPFAILED,
         NodeGroupsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeGroupsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeGroupsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3484,8 +3276,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTemplate_CpuOvercommitType
     NodeTemplate_CpuOvercommitType
-      (
-        NodeTemplate_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED,
+      ( NodeTemplate_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED,
         NodeTemplate_CpuOvercommitType_Enabled,
         NodeTemplate_CpuOvercommitType_None,
         ..
@@ -3493,8 +3284,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTemplate_Status
     NodeTemplate_Status
-      (
-        NodeTemplate_Status_Creating,
+      ( NodeTemplate_Status_Creating,
         NodeTemplate_Status_Deleting,
         NodeTemplate_Status_Invalid,
         NodeTemplate_Status_Ready,
@@ -3503,8 +3293,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTemplateAggregatedList_Warning_Code
     NodeTemplateAggregatedList_Warning_Code
-      (
-        NodeTemplateAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( NodeTemplateAggregatedList_Warning_Code_CLEANUPFAILED,
         NodeTemplateAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeTemplateAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeTemplateAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3534,8 +3323,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTemplateList_Warning_Code
     NodeTemplateList_Warning_Code
-      (
-        NodeTemplateList_Warning_Code_CLEANUPFAILED,
+      ( NodeTemplateList_Warning_Code_CLEANUPFAILED,
         NodeTemplateList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeTemplateList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeTemplateList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3565,8 +3353,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTemplatesScopedList_Warning_Code
     NodeTemplatesScopedList_Warning_Code
-      (
-        NodeTemplatesScopedList_Warning_Code_CLEANUPFAILED,
+      ( NodeTemplatesScopedList_Warning_Code_CLEANUPFAILED,
         NodeTemplatesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeTemplatesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeTemplatesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3596,8 +3383,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTypeAggregatedList_Warning_Code
     NodeTypeAggregatedList_Warning_Code
-      (
-        NodeTypeAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( NodeTypeAggregatedList_Warning_Code_CLEANUPFAILED,
         NodeTypeAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeTypeAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeTypeAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3627,8 +3413,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTypeList_Warning_Code
     NodeTypeList_Warning_Code
-      (
-        NodeTypeList_Warning_Code_CLEANUPFAILED,
+      ( NodeTypeList_Warning_Code_CLEANUPFAILED,
         NodeTypeList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeTypeList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeTypeList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3658,8 +3443,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NodeTypesScopedList_Warning_Code
     NodeTypesScopedList_Warning_Code
-      (
-        NodeTypesScopedList_Warning_Code_CLEANUPFAILED,
+      ( NodeTypesScopedList_Warning_Code_CLEANUPFAILED,
         NodeTypesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NodeTypesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         NodeTypesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3689,8 +3473,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * NotificationEndpointList_Warning_Code
     NotificationEndpointList_Warning_Code
-      (
-        NotificationEndpointList_Warning_Code_CLEANUPFAILED,
+      ( NotificationEndpointList_Warning_Code_CLEANUPFAILED,
         NotificationEndpointList_Warning_Code_DEPRECATEDRESOURCEUSED,
         NotificationEndpointList_Warning_Code_DEPRECATEDTYPEUSED,
         NotificationEndpointList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3720,8 +3503,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Operation_Status
     Operation_Status
-      (
-        Operation_Status_Done,
+      ( Operation_Status_Done,
         Operation_Status_Pending,
         Operation_Status_Running,
         ..
@@ -3729,8 +3511,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Operation_WarningsItem_Code
     Operation_WarningsItem_Code
-      (
-        Operation_WarningsItem_Code_CLEANUPFAILED,
+      ( Operation_WarningsItem_Code_CLEANUPFAILED,
         Operation_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
         Operation_WarningsItem_Code_DEPRECATEDTYPEUSED,
         Operation_WarningsItem_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3760,8 +3541,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * OperationAggregatedList_Warning_Code
     OperationAggregatedList_Warning_Code
-      (
-        OperationAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( OperationAggregatedList_Warning_Code_CLEANUPFAILED,
         OperationAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         OperationAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         OperationAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3791,8 +3571,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * OperationList_Warning_Code
     OperationList_Warning_Code
-      (
-        OperationList_Warning_Code_CLEANUPFAILED,
+      ( OperationList_Warning_Code_CLEANUPFAILED,
         OperationList_Warning_Code_DEPRECATEDRESOURCEUSED,
         OperationList_Warning_Code_DEPRECATEDTYPEUSED,
         OperationList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3822,8 +3601,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * OperationsScopedList_Warning_Code
     OperationsScopedList_Warning_Code
-      (
-        OperationsScopedList_Warning_Code_CLEANUPFAILED,
+      ( OperationsScopedList_Warning_Code_CLEANUPFAILED,
         OperationsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         OperationsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         OperationsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3853,8 +3631,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PacketIntervals_Duration
     PacketIntervals_Duration
-      (
-        PacketIntervals_Duration_DURATIONUNSPECIFIED,
+      ( PacketIntervals_Duration_DURATIONUNSPECIFIED,
         PacketIntervals_Duration_Hour,
         PacketIntervals_Duration_Max,
         PacketIntervals_Duration_Minute,
@@ -3863,8 +3640,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PacketIntervals_Type
     PacketIntervals_Type
-      (
-        PacketIntervals_Type_Loopback,
+      ( PacketIntervals_Type_Loopback,
         PacketIntervals_Type_Receive,
         PacketIntervals_Type_Transmit,
         PacketIntervals_Type_TYPEUNSPECIFIED,
@@ -3873,16 +3649,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * PacketMirroring_Enable
     PacketMirroring_Enable
-      (
-        PacketMirroring_Enable_False',
+      ( PacketMirroring_Enable_False',
         PacketMirroring_Enable_True',
         ..
       ),
 
     -- * PacketMirroringAggregatedList_Warning_Code
     PacketMirroringAggregatedList_Warning_Code
-      (
-        PacketMirroringAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( PacketMirroringAggregatedList_Warning_Code_CLEANUPFAILED,
         PacketMirroringAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         PacketMirroringAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         PacketMirroringAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3912,8 +3686,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PacketMirroringFilter_Direction
     PacketMirroringFilter_Direction
-      (
-        PacketMirroringFilter_Direction_Both,
+      ( PacketMirroringFilter_Direction_Both,
         PacketMirroringFilter_Direction_Egress,
         PacketMirroringFilter_Direction_Ingress,
         ..
@@ -3921,8 +3694,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PacketMirroringList_Warning_Code
     PacketMirroringList_Warning_Code
-      (
-        PacketMirroringList_Warning_Code_CLEANUPFAILED,
+      ( PacketMirroringList_Warning_Code_CLEANUPFAILED,
         PacketMirroringList_Warning_Code_DEPRECATEDRESOURCEUSED,
         PacketMirroringList_Warning_Code_DEPRECATEDTYPEUSED,
         PacketMirroringList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3952,8 +3724,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PacketMirroringsScopedList_Warning_Code
     PacketMirroringsScopedList_Warning_Code
-      (
-        PacketMirroringsScopedList_Warning_Code_CLEANUPFAILED,
+      ( PacketMirroringsScopedList_Warning_Code_CLEANUPFAILED,
         PacketMirroringsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         PacketMirroringsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         PacketMirroringsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -3983,8 +3754,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PerInstanceConfig_Status
     PerInstanceConfig_Status
-      (
-        PerInstanceConfig_Status_Applying,
+      ( PerInstanceConfig_Status_Applying,
         PerInstanceConfig_Status_Deleting,
         PerInstanceConfig_Status_Effective,
         PerInstanceConfig_Status_None,
@@ -3995,24 +3765,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * PreservedStatePreservedDisk_AutoDelete
     PreservedStatePreservedDisk_AutoDelete
-      (
-        PreservedStatePreservedDisk_AutoDelete_Never,
+      ( PreservedStatePreservedDisk_AutoDelete_Never,
         PreservedStatePreservedDisk_AutoDelete_ONPERMANENTINSTANCEDELETION,
         ..
       ),
 
     -- * PreservedStatePreservedDisk_Mode
     PreservedStatePreservedDisk_Mode
-      (
-        PreservedStatePreservedDisk_Mode_READONLY,
+      ( PreservedStatePreservedDisk_Mode_READONLY,
         PreservedStatePreservedDisk_Mode_READWRITE,
         ..
       ),
 
     -- * Project_DefaultNetworkTier
     Project_DefaultNetworkTier
-      (
-        Project_DefaultNetworkTier_FIXEDSTANDARD,
+      ( Project_DefaultNetworkTier_FIXEDSTANDARD,
         Project_DefaultNetworkTier_Premium,
         Project_DefaultNetworkTier_Standard,
         Project_DefaultNetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
@@ -4021,16 +3788,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * Project_XpnProjectStatus
     Project_XpnProjectStatus
-      (
-        Project_XpnProjectStatus_Host,
+      ( Project_XpnProjectStatus_Host,
         Project_XpnProjectStatus_UNSPECIFIEDXPNPROJECTSTATUS,
         ..
       ),
 
     -- * ProjectsSetDefaultNetworkTierRequest_NetworkTier
     ProjectsSetDefaultNetworkTierRequest_NetworkTier
-      (
-        ProjectsSetDefaultNetworkTierRequest_NetworkTier_FIXEDSTANDARD,
+      ( ProjectsSetDefaultNetworkTierRequest_NetworkTier_FIXEDSTANDARD,
         ProjectsSetDefaultNetworkTierRequest_NetworkTier_Premium,
         ProjectsSetDefaultNetworkTierRequest_NetworkTier_Standard,
         ProjectsSetDefaultNetworkTierRequest_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
@@ -4039,8 +3804,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PublicAdvertisedPrefix_Status
     PublicAdvertisedPrefix_Status
-      (
-        PublicAdvertisedPrefix_Status_Initial,
+      ( PublicAdvertisedPrefix_Status_Initial,
         PublicAdvertisedPrefix_Status_PREFIXCONFIGURATIONCOMPLETE,
         PublicAdvertisedPrefix_Status_PREFIXCONFIGURATIONINPROGRESS,
         PublicAdvertisedPrefix_Status_PREFIXREMOVALINPROGRESS,
@@ -4052,8 +3816,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PublicAdvertisedPrefixList_Warning_Code
     PublicAdvertisedPrefixList_Warning_Code
-      (
-        PublicAdvertisedPrefixList_Warning_Code_CLEANUPFAILED,
+      ( PublicAdvertisedPrefixList_Warning_Code_CLEANUPFAILED,
         PublicAdvertisedPrefixList_Warning_Code_DEPRECATEDRESOURCEUSED,
         PublicAdvertisedPrefixList_Warning_Code_DEPRECATEDTYPEUSED,
         PublicAdvertisedPrefixList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4083,8 +3846,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PublicDelegatedPrefix_Status
     PublicDelegatedPrefix_Status
-      (
-        PublicDelegatedPrefix_Status_Announced,
+      ( PublicDelegatedPrefix_Status_Announced,
         PublicDelegatedPrefix_Status_Deleting,
         PublicDelegatedPrefix_Status_Initializing,
         PublicDelegatedPrefix_Status_READYTOANNOUNCE,
@@ -4093,8 +3855,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PublicDelegatedPrefixAggregatedList_Warning_Code
     PublicDelegatedPrefixAggregatedList_Warning_Code
-      (
-        PublicDelegatedPrefixAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( PublicDelegatedPrefixAggregatedList_Warning_Code_CLEANUPFAILED,
         PublicDelegatedPrefixAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         PublicDelegatedPrefixAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         PublicDelegatedPrefixAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4124,8 +3885,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * PublicDelegatedPrefixList_Warning_Code
     PublicDelegatedPrefixList_Warning_Code
-      (
-        PublicDelegatedPrefixList_Warning_Code_CLEANUPFAILED,
+      ( PublicDelegatedPrefixList_Warning_Code_CLEANUPFAILED,
         PublicDelegatedPrefixList_Warning_Code_DEPRECATEDRESOURCEUSED,
         PublicDelegatedPrefixList_Warning_Code_DEPRECATEDTYPEUSED,
         PublicDelegatedPrefixList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4155,16 +3915,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * PublicDelegatedPrefixPublicDelegatedSubPrefix_Status
     PublicDelegatedPrefixPublicDelegatedSubPrefix_Status
-      (
-        PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Active,
+      ( PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Active,
         PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Inactive,
         ..
       ),
 
     -- * PublicDelegatedPrefixesScopedList_Warning_Code
     PublicDelegatedPrefixesScopedList_Warning_Code
-      (
-        PublicDelegatedPrefixesScopedList_Warning_Code_CLEANUPFAILED,
+      ( PublicDelegatedPrefixesScopedList_Warning_Code_CLEANUPFAILED,
         PublicDelegatedPrefixesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         PublicDelegatedPrefixesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         PublicDelegatedPrefixesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4194,8 +3952,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Quota_Metric
     Quota_Metric
-      (
-        Quota_Metric_A2CPUS,
+      ( Quota_Metric_A2CPUS,
         Quota_Metric_AFFINITYGROUPS,
         Quota_Metric_Autoscalers,
         Quota_Metric_BACKENDBUCKETS,
@@ -4329,16 +4086,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * Region_Status
     Region_Status
-      (
-        Region_Status_Down,
+      ( Region_Status_Down,
         Region_Status_UP,
         ..
       ),
 
     -- * RegionAutoscalerList_Warning_Code
     RegionAutoscalerList_Warning_Code
-      (
-        RegionAutoscalerList_Warning_Code_CLEANUPFAILED,
+      ( RegionAutoscalerList_Warning_Code_CLEANUPFAILED,
         RegionAutoscalerList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RegionAutoscalerList_Warning_Code_DEPRECATEDTYPEUSED,
         RegionAutoscalerList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4368,8 +4123,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionDiskTypeList_Warning_Code
     RegionDiskTypeList_Warning_Code
-      (
-        RegionDiskTypeList_Warning_Code_CLEANUPFAILED,
+      ( RegionDiskTypeList_Warning_Code_CLEANUPFAILED,
         RegionDiskTypeList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RegionDiskTypeList_Warning_Code_DEPRECATEDTYPEUSED,
         RegionDiskTypeList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4399,8 +4153,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionInstanceGroupList_Warning_Code
     RegionInstanceGroupList_Warning_Code
-      (
-        RegionInstanceGroupList_Warning_Code_CLEANUPFAILED,
+      ( RegionInstanceGroupList_Warning_Code_CLEANUPFAILED,
         RegionInstanceGroupList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RegionInstanceGroupList_Warning_Code_DEPRECATEDTYPEUSED,
         RegionInstanceGroupList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4430,8 +4183,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionInstanceGroupManagerList_Warning_Code
     RegionInstanceGroupManagerList_Warning_Code
-      (
-        RegionInstanceGroupManagerList_Warning_Code_CLEANUPFAILED,
+      ( RegionInstanceGroupManagerList_Warning_Code_CLEANUPFAILED,
         RegionInstanceGroupManagerList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RegionInstanceGroupManagerList_Warning_Code_DEPRECATEDTYPEUSED,
         RegionInstanceGroupManagerList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4461,8 +4213,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction
     RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction
-      (
-        RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_None,
+      ( RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_None,
         RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_Refresh,
         RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_Replace,
         RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_Restart,
@@ -4471,8 +4222,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
     RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
-      (
-        RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_None,
+      ( RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_None,
         RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Refresh,
         RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Replace,
         RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Restart,
@@ -4481,8 +4231,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
     RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
-      (
-        RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_CLEANUPFAILED,
+      ( RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_CLEANUPFAILED,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_DEPRECATEDRESOURCEUSED,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_DEPRECATEDTYPEUSED,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4512,8 +4261,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionInstanceGroupsListInstances_Warning_Code
     RegionInstanceGroupsListInstances_Warning_Code
-      (
-        RegionInstanceGroupsListInstances_Warning_Code_CLEANUPFAILED,
+      ( RegionInstanceGroupsListInstances_Warning_Code_CLEANUPFAILED,
         RegionInstanceGroupsListInstances_Warning_Code_DEPRECATEDRESOURCEUSED,
         RegionInstanceGroupsListInstances_Warning_Code_DEPRECATEDTYPEUSED,
         RegionInstanceGroupsListInstances_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4543,16 +4291,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionInstanceGroupsListInstancesRequest_InstanceState
     RegionInstanceGroupsListInstancesRequest_InstanceState
-      (
-        RegionInstanceGroupsListInstancesRequest_InstanceState_All,
+      ( RegionInstanceGroupsListInstancesRequest_InstanceState_All,
         RegionInstanceGroupsListInstancesRequest_InstanceState_Running,
         ..
       ),
 
     -- * RegionList_Warning_Code
     RegionList_Warning_Code
-      (
-        RegionList_Warning_Code_CLEANUPFAILED,
+      ( RegionList_Warning_Code_CLEANUPFAILED,
         RegionList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RegionList_Warning_Code_DEPRECATEDTYPEUSED,
         RegionList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4582,8 +4328,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
     RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
-      (
-        RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
+      ( RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
         RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
         RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL,
         RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
@@ -4592,8 +4337,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Reservation_Status
     Reservation_Status
-      (
-        Reservation_Status_Creating,
+      ( Reservation_Status_Creating,
         Reservation_Status_Deleting,
         Reservation_Status_Invalid,
         Reservation_Status_Ready,
@@ -4603,8 +4347,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ReservationAffinity_ConsumeReservationType
     ReservationAffinity_ConsumeReservationType
-      (
-        ReservationAffinity_ConsumeReservationType_ANYRESERVATION,
+      ( ReservationAffinity_ConsumeReservationType_ANYRESERVATION,
         ReservationAffinity_ConsumeReservationType_NORESERVATION,
         ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION,
         ReservationAffinity_ConsumeReservationType_Unspecified,
@@ -4613,8 +4356,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ReservationAggregatedList_Warning_Code
     ReservationAggregatedList_Warning_Code
-      (
-        ReservationAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( ReservationAggregatedList_Warning_Code_CLEANUPFAILED,
         ReservationAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ReservationAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         ReservationAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4644,8 +4386,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ReservationList_Warning_Code
     ReservationList_Warning_Code
-      (
-        ReservationList_Warning_Code_CLEANUPFAILED,
+      ( ReservationList_Warning_Code_CLEANUPFAILED,
         ReservationList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ReservationList_Warning_Code_DEPRECATEDTYPEUSED,
         ReservationList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4675,8 +4416,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ReservationsScopedList_Warning_Code
     ReservationsScopedList_Warning_Code
-      (
-        ReservationsScopedList_Warning_Code_CLEANUPFAILED,
+      ( ReservationsScopedList_Warning_Code_CLEANUPFAILED,
         ReservationsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ReservationsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         ReservationsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4706,8 +4446,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ResourceCommitment_Type
     ResourceCommitment_Type
-      (
-        ResourceCommitment_Type_Accelerator,
+      ( ResourceCommitment_Type_Accelerator,
         ResourceCommitment_Type_LOCALSSD,
         ResourceCommitment_Type_Memory,
         ResourceCommitment_Type_Unspecified,
@@ -4717,8 +4456,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ResourcePoliciesScopedList_Warning_Code
     ResourcePoliciesScopedList_Warning_Code
-      (
-        ResourcePoliciesScopedList_Warning_Code_CLEANUPFAILED,
+      ( ResourcePoliciesScopedList_Warning_Code_CLEANUPFAILED,
         ResourcePoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ResourcePoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         ResourcePoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4748,8 +4486,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ResourcePolicy_Status
     ResourcePolicy_Status
-      (
-        ResourcePolicy_Status_Creating,
+      ( ResourcePolicy_Status_Creating,
         ResourcePolicy_Status_Deleting,
         ResourcePolicy_Status_Expired,
         ResourcePolicy_Status_Invalid,
@@ -4759,8 +4496,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ResourcePolicyAggregatedList_Warning_Code
     ResourcePolicyAggregatedList_Warning_Code
-      (
-        ResourcePolicyAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( ResourcePolicyAggregatedList_Warning_Code_CLEANUPFAILED,
         ResourcePolicyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ResourcePolicyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         ResourcePolicyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4790,16 +4526,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * ResourcePolicyGroupPlacementPolicy_Collocation
     ResourcePolicyGroupPlacementPolicy_Collocation
-      (
-        ResourcePolicyGroupPlacementPolicy_Collocation_Collocated,
+      ( ResourcePolicyGroupPlacementPolicy_Collocation_Collocated,
         ResourcePolicyGroupPlacementPolicy_Collocation_UNSPECIFIEDCOLLOCATION,
         ..
       ),
 
     -- * ResourcePolicyList_Warning_Code
     ResourcePolicyList_Warning_Code
-      (
-        ResourcePolicyList_Warning_Code_CLEANUPFAILED,
+      ( ResourcePolicyList_Warning_Code_CLEANUPFAILED,
         ResourcePolicyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ResourcePolicyList_Warning_Code_DEPRECATEDTYPEUSED,
         ResourcePolicyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4829,8 +4563,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete
     ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete
-      (
-        ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_APPLYRETENTIONPOLICY,
+      ( ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_APPLYRETENTIONPOLICY,
         ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_KEEPAUTOSNAPSHOTS,
         ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_UNSPECIFIEDONSOURCEDISKDELETE,
         ..
@@ -4838,8 +4571,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ResourcePolicyWeeklyCycleDayOfWeek_Day
     ResourcePolicyWeeklyCycleDayOfWeek_Day
-      (
-        ResourcePolicyWeeklyCycleDayOfWeek_Day_Friday,
+      ( ResourcePolicyWeeklyCycleDayOfWeek_Day_Friday,
         ResourcePolicyWeeklyCycleDayOfWeek_Day_Invalid,
         ResourcePolicyWeeklyCycleDayOfWeek_Day_Monday,
         ResourcePolicyWeeklyCycleDayOfWeek_Day_Saturday,
@@ -4852,8 +4584,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Route_RouteType
     Route_RouteType
-      (
-        Route_RouteType_Bgp,
+      ( Route_RouteType_Bgp,
         Route_RouteType_Static,
         Route_RouteType_Subnet,
         Route_RouteType_Transit,
@@ -4862,8 +4593,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Route_WarningsItem_Code
     Route_WarningsItem_Code
-      (
-        Route_WarningsItem_Code_CLEANUPFAILED,
+      ( Route_WarningsItem_Code_CLEANUPFAILED,
         Route_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
         Route_WarningsItem_Code_DEPRECATEDTYPEUSED,
         Route_WarningsItem_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4893,8 +4623,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouteAsPath_PathSegmentType
     RouteAsPath_PathSegmentType
-      (
-        RouteAsPath_PathSegmentType_ASCONFEDSEQUENCE,
+      ( RouteAsPath_PathSegmentType_ASCONFEDSEQUENCE,
         RouteAsPath_PathSegmentType_ASCONFEDSET,
         RouteAsPath_PathSegmentType_ASSEQUENCE,
         RouteAsPath_PathSegmentType_ASSET,
@@ -4903,8 +4632,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouteList_Warning_Code
     RouteList_Warning_Code
-      (
-        RouteList_Warning_Code_CLEANUPFAILED,
+      ( RouteList_Warning_Code_CLEANUPFAILED,
         RouteList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RouteList_Warning_Code_DEPRECATEDTYPEUSED,
         RouteList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4934,8 +4662,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouterAggregatedList_Warning_Code
     RouterAggregatedList_Warning_Code
-      (
-        RouterAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( RouterAggregatedList_Warning_Code_CLEANUPFAILED,
         RouterAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RouterAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         RouterAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -4965,54 +4692,47 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouterBgp_AdvertiseMode
     RouterBgp_AdvertiseMode
-      (
-        RouterBgp_AdvertiseMode_Custom,
+      ( RouterBgp_AdvertiseMode_Custom,
         RouterBgp_AdvertiseMode_Default,
         ..
       ),
 
     -- * RouterBgp_AdvertisedGroupsItem
     RouterBgp_AdvertisedGroupsItem
-      (
-        RouterBgp_AdvertisedGroupsItem_ALLSUBNETS,
+      ( RouterBgp_AdvertisedGroupsItem_ALLSUBNETS,
         ..
       ),
 
     -- * RouterBgpPeer_AdvertiseMode
     RouterBgpPeer_AdvertiseMode
-      (
-        RouterBgpPeer_AdvertiseMode_Custom,
+      ( RouterBgpPeer_AdvertiseMode_Custom,
         RouterBgpPeer_AdvertiseMode_Default,
         ..
       ),
 
     -- * RouterBgpPeer_AdvertisedGroupsItem
     RouterBgpPeer_AdvertisedGroupsItem
-      (
-        RouterBgpPeer_AdvertisedGroupsItem_ALLSUBNETS,
+      ( RouterBgpPeer_AdvertisedGroupsItem_ALLSUBNETS,
         ..
       ),
 
     -- * RouterBgpPeer_Enable
     RouterBgpPeer_Enable
-      (
-        RouterBgpPeer_Enable_False',
+      ( RouterBgpPeer_Enable_False',
         RouterBgpPeer_Enable_True',
         ..
       ),
 
     -- * RouterBgpPeer_ManagementType
     RouterBgpPeer_ManagementType
-      (
-        RouterBgpPeer_ManagementType_MANAGEDBYATTACHMENT,
+      ( RouterBgpPeer_ManagementType_MANAGEDBYATTACHMENT,
         RouterBgpPeer_ManagementType_MANAGEDBYUSER,
         ..
       ),
 
     -- * RouterBgpPeerBfd_SessionInitializationMode
     RouterBgpPeerBfd_SessionInitializationMode
-      (
-        RouterBgpPeerBfd_SessionInitializationMode_Active,
+      ( RouterBgpPeerBfd_SessionInitializationMode_Active,
         RouterBgpPeerBfd_SessionInitializationMode_Disabled,
         RouterBgpPeerBfd_SessionInitializationMode_Passive,
         ..
@@ -5020,16 +4740,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouterInterface_ManagementType
     RouterInterface_ManagementType
-      (
-        RouterInterface_ManagementType_MANAGEDBYATTACHMENT,
+      ( RouterInterface_ManagementType_MANAGEDBYATTACHMENT,
         RouterInterface_ManagementType_MANAGEDBYUSER,
         ..
       ),
 
     -- * RouterList_Warning_Code
     RouterList_Warning_Code
-      (
-        RouterList_Warning_Code_CLEANUPFAILED,
+      ( RouterList_Warning_Code_CLEANUPFAILED,
         RouterList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RouterList_Warning_Code_DEPRECATEDTYPEUSED,
         RouterList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5059,16 +4777,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouterNat_NatIpAllocateOption
     RouterNat_NatIpAllocateOption
-      (
-        RouterNat_NatIpAllocateOption_AUTOONLY,
+      ( RouterNat_NatIpAllocateOption_AUTOONLY,
         RouterNat_NatIpAllocateOption_MANUALONLY,
         ..
       ),
 
     -- * RouterNat_SourceSubnetworkIpRangesToNat
     RouterNat_SourceSubnetworkIpRangesToNat
-      (
-        RouterNat_SourceSubnetworkIpRangesToNat_ALLSUBNETWORKSALLIPRANGES,
+      ( RouterNat_SourceSubnetworkIpRangesToNat_ALLSUBNETWORKSALLIPRANGES,
         RouterNat_SourceSubnetworkIpRangesToNat_ALLSUBNETWORKSALLPRIMARYIPRANGES,
         RouterNat_SourceSubnetworkIpRangesToNat_LISTOFSUBNETWORKS,
         ..
@@ -5076,8 +4792,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouterNatLogConfig_Filter
     RouterNatLogConfig_Filter
-      (
-        RouterNatLogConfig_Filter_All,
+      ( RouterNatLogConfig_Filter_All,
         RouterNatLogConfig_Filter_ERRORSONLY,
         RouterNatLogConfig_Filter_TRANSLATIONSONLY,
         ..
@@ -5085,8 +4800,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouterNatSubnetworkToNat_SourceIpRangesToNatItem
     RouterNatSubnetworkToNat_SourceIpRangesToNatItem
-      (
-        RouterNatSubnetworkToNat_SourceIpRangesToNatItem_ALLIPRANGES,
+      ( RouterNatSubnetworkToNat_SourceIpRangesToNatItem_ALLIPRANGES,
         RouterNatSubnetworkToNat_SourceIpRangesToNatItem_LISTOFSECONDARYIPRANGES,
         RouterNatSubnetworkToNat_SourceIpRangesToNatItem_PRIMARYIPRANGE,
         ..
@@ -5094,8 +4808,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RouterStatusBgpPeerStatus_Status
     RouterStatusBgpPeerStatus_Status
-      (
-        RouterStatusBgpPeerStatus_Status_Down,
+      ( RouterStatusBgpPeerStatus_Status_Down,
         RouterStatusBgpPeerStatus_Status_Unknown,
         RouterStatusBgpPeerStatus_Status_UP,
         ..
@@ -5103,8 +4816,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * RoutersScopedList_Warning_Code
     RoutersScopedList_Warning_Code
-      (
-        RoutersScopedList_Warning_Code_CLEANUPFAILED,
+      ( RoutersScopedList_Warning_Code_CLEANUPFAILED,
         RoutersScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         RoutersScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         RoutersScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5134,8 +4846,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Rule_Action
     Rule_Action
-      (
-        Rule_Action_Allow,
+      ( Rule_Action_Allow,
         Rule_Action_ALLOWWITHLOG,
         Rule_Action_Deny,
         Rule_Action_DENYWITHLOG,
@@ -5146,8 +4857,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SSLHealthCheck_PortSpecification
     SSLHealthCheck_PortSpecification
-      (
-        SSLHealthCheck_PortSpecification_USEFIXEDPORT,
+      ( SSLHealthCheck_PortSpecification_USEFIXEDPORT,
         SSLHealthCheck_PortSpecification_USENAMEDPORT,
         SSLHealthCheck_PortSpecification_USESERVINGPORT,
         ..
@@ -5155,56 +4865,49 @@ module Gogol.Compute.Internal.Sum
 
     -- * SSLHealthCheck_ProxyHeader
     SSLHealthCheck_ProxyHeader
-      (
-        SSLHealthCheck_ProxyHeader_None,
+      ( SSLHealthCheck_ProxyHeader_None,
         SSLHealthCheck_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * SavedAttachedDisk_Interface
     SavedAttachedDisk_Interface
-      (
-        SavedAttachedDisk_Interface_Nvme,
+      ( SavedAttachedDisk_Interface_Nvme,
         SavedAttachedDisk_Interface_Scsi,
         ..
       ),
 
     -- * SavedAttachedDisk_Mode
     SavedAttachedDisk_Mode
-      (
-        SavedAttachedDisk_Mode_READONLY,
+      ( SavedAttachedDisk_Mode_READONLY,
         SavedAttachedDisk_Mode_READWRITE,
         ..
       ),
 
     -- * SavedAttachedDisk_StorageBytesStatus
     SavedAttachedDisk_StorageBytesStatus
-      (
-        SavedAttachedDisk_StorageBytesStatus_Updating,
+      ( SavedAttachedDisk_StorageBytesStatus_Updating,
         SavedAttachedDisk_StorageBytesStatus_UPTODATE,
         ..
       ),
 
     -- * SavedAttachedDisk_Type
     SavedAttachedDisk_Type
-      (
-        SavedAttachedDisk_Type_Persistent,
+      ( SavedAttachedDisk_Type_Persistent,
         SavedAttachedDisk_Type_Scratch,
         ..
       ),
 
     -- * SavedDisk_StorageBytesStatus
     SavedDisk_StorageBytesStatus
-      (
-        SavedDisk_StorageBytesStatus_Updating,
+      ( SavedDisk_StorageBytesStatus_Updating,
         SavedDisk_StorageBytesStatus_UPTODATE,
         ..
       ),
 
     -- * ScalingScheduleStatus_State
     ScalingScheduleStatus_State
-      (
-        ScalingScheduleStatus_State_Active,
+      ( ScalingScheduleStatus_State_Active,
         ScalingScheduleStatus_State_Disabled,
         ScalingScheduleStatus_State_Obsolete,
         ScalingScheduleStatus_State_Ready,
@@ -5213,8 +4916,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Scheduling_InstanceTerminationAction
     Scheduling_InstanceTerminationAction
-      (
-        Scheduling_InstanceTerminationAction_Delete',
+      ( Scheduling_InstanceTerminationAction_Delete',
         Scheduling_InstanceTerminationAction_INSTANCETERMINATIONACTIONUNSPECIFIED,
         Scheduling_InstanceTerminationAction_Stop,
         ..
@@ -5222,24 +4924,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * Scheduling_OnHostMaintenance
     Scheduling_OnHostMaintenance
-      (
-        Scheduling_OnHostMaintenance_Migrate,
+      ( Scheduling_OnHostMaintenance_Migrate,
         Scheduling_OnHostMaintenance_Terminate,
         ..
       ),
 
     -- * Scheduling_ProvisioningModel
     Scheduling_ProvisioningModel
-      (
-        Scheduling_ProvisioningModel_Spot,
+      ( Scheduling_ProvisioningModel_Spot,
         Scheduling_ProvisioningModel_Standard,
         ..
       ),
 
     -- * SchedulingNodeAffinity_Operator
     SchedulingNodeAffinity_Operator
-      (
-        SchedulingNodeAffinity_Operator_IN,
+      ( SchedulingNodeAffinity_Operator_IN,
         SchedulingNodeAffinity_Operator_NOTIN,
         SchedulingNodeAffinity_Operator_OPERATORUNSPECIFIED,
         ..
@@ -5247,40 +4946,35 @@ module Gogol.Compute.Internal.Sum
 
     -- * SecurityPolicy_Type
     SecurityPolicy_Type
-      (
-        SecurityPolicy_Type_CLOUDARMOR,
+      ( SecurityPolicy_Type_CLOUDARMOR,
         SecurityPolicy_Type_CLOUDARMOREDGE,
         ..
       ),
 
     -- * SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility
     SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility
-      (
-        SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Premium,
+      ( SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Premium,
         SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Standard,
         ..
       ),
 
     -- * SecurityPolicyAdvancedOptionsConfig_JsonParsing
     SecurityPolicyAdvancedOptionsConfig_JsonParsing
-      (
-        SecurityPolicyAdvancedOptionsConfig_JsonParsing_Disabled,
+      ( SecurityPolicyAdvancedOptionsConfig_JsonParsing_Disabled,
         SecurityPolicyAdvancedOptionsConfig_JsonParsing_Standard,
         ..
       ),
 
     -- * SecurityPolicyAdvancedOptionsConfig_LogLevel
     SecurityPolicyAdvancedOptionsConfig_LogLevel
-      (
-        SecurityPolicyAdvancedOptionsConfig_LogLevel_Normal,
+      ( SecurityPolicyAdvancedOptionsConfig_LogLevel_Normal,
         SecurityPolicyAdvancedOptionsConfig_LogLevel_Verbose,
         ..
       ),
 
     -- * SecurityPolicyList_Warning_Code
     SecurityPolicyList_Warning_Code
-      (
-        SecurityPolicyList_Warning_Code_CLEANUPFAILED,
+      ( SecurityPolicyList_Warning_Code_CLEANUPFAILED,
         SecurityPolicyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SecurityPolicyList_Warning_Code_DEPRECATEDTYPEUSED,
         SecurityPolicyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5310,15 +5004,13 @@ module Gogol.Compute.Internal.Sum
 
     -- * SecurityPolicyRuleMatcher_VersionedExpr
     SecurityPolicyRuleMatcher_VersionedExpr
-      (
-        SecurityPolicyRuleMatcher_VersionedExpr_SRC_IPS_V1,
+      ( SecurityPolicyRuleMatcher_VersionedExpr_SRC_IPS_V1,
         ..
       ),
 
     -- * SecurityPolicyRuleRateLimitOptions_EnforceOnKey
     SecurityPolicyRuleRateLimitOptions_EnforceOnKey
-      (
-        SecurityPolicyRuleRateLimitOptions_EnforceOnKey_All,
+      ( SecurityPolicyRuleRateLimitOptions_EnforceOnKey_All,
         SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPCOOKIE,
         SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER,
         SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP,
@@ -5328,16 +5020,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * SecurityPolicyRuleRedirectOptions_Type
     SecurityPolicyRuleRedirectOptions_Type
-      (
-        SecurityPolicyRuleRedirectOptions_Type_EXTERNAL_302,
+      ( SecurityPolicyRuleRedirectOptions_Type_EXTERNAL_302,
         SecurityPolicyRuleRedirectOptions_Type_GOOGLERECAPTCHA,
         ..
       ),
 
     -- * ServerBinding_Type
     ServerBinding_Type
-      (
-        ServerBinding_Type_RESTARTNODEONANYSERVER,
+      ( ServerBinding_Type_RESTARTNODEONANYSERVER,
         ServerBinding_Type_RESTARTNODEONMINIMALSERVERS,
         ServerBinding_Type_SERVERBINDINGTYPEUNSPECIFIED,
         ..
@@ -5345,8 +5035,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ServiceAttachment_ConnectionPreference
     ServiceAttachment_ConnectionPreference
-      (
-        ServiceAttachment_ConnectionPreference_ACCEPTAUTOMATIC,
+      ( ServiceAttachment_ConnectionPreference_ACCEPTAUTOMATIC,
         ServiceAttachment_ConnectionPreference_ACCEPTMANUAL,
         ServiceAttachment_ConnectionPreference_CONNECTIONPREFERENCEUNSPECIFIED,
         ..
@@ -5354,8 +5043,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ServiceAttachmentAggregatedList_Warning_Code
     ServiceAttachmentAggregatedList_Warning_Code
-      (
-        ServiceAttachmentAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( ServiceAttachmentAggregatedList_Warning_Code_CLEANUPFAILED,
         ServiceAttachmentAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ServiceAttachmentAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         ServiceAttachmentAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5385,8 +5073,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ServiceAttachmentConnectedEndpoint_Status
     ServiceAttachmentConnectedEndpoint_Status
-      (
-        ServiceAttachmentConnectedEndpoint_Status_Accepted,
+      ( ServiceAttachmentConnectedEndpoint_Status_Accepted,
         ServiceAttachmentConnectedEndpoint_Status_Closed,
         ServiceAttachmentConnectedEndpoint_Status_Pending,
         ServiceAttachmentConnectedEndpoint_Status_Rejected,
@@ -5396,8 +5083,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ServiceAttachmentList_Warning_Code
     ServiceAttachmentList_Warning_Code
-      (
-        ServiceAttachmentList_Warning_Code_CLEANUPFAILED,
+      ( ServiceAttachmentList_Warning_Code_CLEANUPFAILED,
         ServiceAttachmentList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ServiceAttachmentList_Warning_Code_DEPRECATEDTYPEUSED,
         ServiceAttachmentList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5427,8 +5113,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ServiceAttachmentsScopedList_Warning_Code
     ServiceAttachmentsScopedList_Warning_Code
-      (
-        ServiceAttachmentsScopedList_Warning_Code_CLEANUPFAILED,
+      ( ServiceAttachmentsScopedList_Warning_Code_CLEANUPFAILED,
         ServiceAttachmentsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ServiceAttachmentsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         ServiceAttachmentsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5458,8 +5143,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * ShareSettings_ShareType
     ShareSettings_ShareType
-      (
-        ShareSettings_ShareType_Local,
+      ( ShareSettings_ShareType_Local,
         ShareSettings_ShareType_SHARETYPEUNSPECIFIED,
         ShareSettings_ShareType_SPECIFICPROJECTS,
         ..
@@ -5467,8 +5151,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Snapshot_Status
     Snapshot_Status
-      (
-        Snapshot_Status_Creating,
+      ( Snapshot_Status_Creating,
         Snapshot_Status_Deleting,
         Snapshot_Status_Failed,
         Snapshot_Status_Ready,
@@ -5478,16 +5161,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * Snapshot_StorageBytesStatus
     Snapshot_StorageBytesStatus
-      (
-        Snapshot_StorageBytesStatus_Updating,
+      ( Snapshot_StorageBytesStatus_Updating,
         Snapshot_StorageBytesStatus_UPTODATE,
         ..
       ),
 
     -- * SnapshotList_Warning_Code
     SnapshotList_Warning_Code
-      (
-        SnapshotList_Warning_Code_CLEANUPFAILED,
+      ( SnapshotList_Warning_Code_CLEANUPFAILED,
         SnapshotList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SnapshotList_Warning_Code_DEPRECATEDTYPEUSED,
         SnapshotList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5517,8 +5198,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslCertificate_Type
     SslCertificate_Type
-      (
-        SslCertificate_Type_Managed,
+      ( SslCertificate_Type_Managed,
         SslCertificate_Type_SELFMANAGED,
         SslCertificate_Type_TYPEUNSPECIFIED,
         ..
@@ -5526,8 +5206,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslCertificateAggregatedList_Warning_Code
     SslCertificateAggregatedList_Warning_Code
-      (
-        SslCertificateAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( SslCertificateAggregatedList_Warning_Code_CLEANUPFAILED,
         SslCertificateAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SslCertificateAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         SslCertificateAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5557,8 +5236,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslCertificateList_Warning_Code
     SslCertificateList_Warning_Code
-      (
-        SslCertificateList_Warning_Code_CLEANUPFAILED,
+      ( SslCertificateList_Warning_Code_CLEANUPFAILED,
         SslCertificateList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SslCertificateList_Warning_Code_DEPRECATEDTYPEUSED,
         SslCertificateList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5588,8 +5266,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslCertificateManagedSslCertificate_DomainStatusAdditional
     SslCertificateManagedSslCertificate_DomainStatusAdditional
-      (
-        SslCertificateManagedSslCertificate_DomainStatusAdditional_Active,
+      ( SslCertificateManagedSslCertificate_DomainStatusAdditional_Active,
         SslCertificateManagedSslCertificate_DomainStatusAdditional_DOMAINSTATUSUNSPECIFIED,
         SslCertificateManagedSslCertificate_DomainStatusAdditional_FAILEDCAACHECKING,
         SslCertificateManagedSslCertificate_DomainStatusAdditional_FAILEDCAAFORBIDDEN,
@@ -5601,8 +5278,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslCertificateManagedSslCertificate_Status
     SslCertificateManagedSslCertificate_Status
-      (
-        SslCertificateManagedSslCertificate_Status_Active,
+      ( SslCertificateManagedSslCertificate_Status_Active,
         SslCertificateManagedSslCertificate_Status_MANAGEDCERTIFICATESTATUSUNSPECIFIED,
         SslCertificateManagedSslCertificate_Status_Provisioning,
         SslCertificateManagedSslCertificate_Status_PROVISIONINGFAILED,
@@ -5613,8 +5289,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslCertificatesScopedList_Warning_Code
     SslCertificatesScopedList_Warning_Code
-      (
-        SslCertificatesScopedList_Warning_Code_CLEANUPFAILED,
+      ( SslCertificatesScopedList_Warning_Code_CLEANUPFAILED,
         SslCertificatesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SslCertificatesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         SslCertificatesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5644,8 +5319,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslPoliciesList_Warning_Code
     SslPoliciesList_Warning_Code
-      (
-        SslPoliciesList_Warning_Code_CLEANUPFAILED,
+      ( SslPoliciesList_Warning_Code_CLEANUPFAILED,
         SslPoliciesList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SslPoliciesList_Warning_Code_DEPRECATEDTYPEUSED,
         SslPoliciesList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5675,8 +5349,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslPolicy_MinTlsVersion
     SslPolicy_MinTlsVersion
-      (
-        SslPolicy_MinTlsVersion_TLS_1_0,
+      ( SslPolicy_MinTlsVersion_TLS_1_0,
         SslPolicy_MinTlsVersion_TLS_1_1,
         SslPolicy_MinTlsVersion_TLS_1_2,
         ..
@@ -5684,8 +5357,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslPolicy_Profile
     SslPolicy_Profile
-      (
-        SslPolicy_Profile_Compatible,
+      ( SslPolicy_Profile_Compatible,
         SslPolicy_Profile_Custom,
         SslPolicy_Profile_Modern,
         SslPolicy_Profile_Restricted,
@@ -5694,8 +5366,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SslPolicy_WarningsItem_Code
     SslPolicy_WarningsItem_Code
-      (
-        SslPolicy_WarningsItem_Code_CLEANUPFAILED,
+      ( SslPolicy_WarningsItem_Code_CLEANUPFAILED,
         SslPolicy_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
         SslPolicy_WarningsItem_Code_DEPRECATEDTYPEUSED,
         SslPolicy_WarningsItem_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5725,24 +5396,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * StatefulPolicyPreservedStateDiskDevice_AutoDelete
     StatefulPolicyPreservedStateDiskDevice_AutoDelete
-      (
-        StatefulPolicyPreservedStateDiskDevice_AutoDelete_Never,
+      ( StatefulPolicyPreservedStateDiskDevice_AutoDelete_Never,
         StatefulPolicyPreservedStateDiskDevice_AutoDelete_ONPERMANENTINSTANCEDELETION,
         ..
       ),
 
     -- * Subnetwork_Ipv6AccessType
     Subnetwork_Ipv6AccessType
-      (
-        Subnetwork_Ipv6AccessType_External,
+      ( Subnetwork_Ipv6AccessType_External,
         Subnetwork_Ipv6AccessType_Internal,
         ..
       ),
 
     -- * Subnetwork_PrivateIpv6GoogleAccess
     Subnetwork_PrivateIpv6GoogleAccess
-      (
-        Subnetwork_PrivateIpv6GoogleAccess_DISABLEGOOGLEACCESS,
+      ( Subnetwork_PrivateIpv6GoogleAccess_DISABLEGOOGLEACCESS,
         Subnetwork_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
         Subnetwork_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
         ..
@@ -5750,8 +5418,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * Subnetwork_Purpose
     Subnetwork_Purpose
-      (
-        Subnetwork_Purpose_INTERNALHTTPSLOADBALANCER,
+      ( Subnetwork_Purpose_INTERNALHTTPSLOADBALANCER,
         Subnetwork_Purpose_Private,
         Subnetwork_Purpose_PRIVATE_RFC_1918,
         Subnetwork_Purpose_PRIVATESERVICECONNECT,
@@ -5761,32 +5428,28 @@ module Gogol.Compute.Internal.Sum
 
     -- * Subnetwork_Role
     Subnetwork_Role
-      (
-        Subnetwork_Role_Active,
+      ( Subnetwork_Role_Active,
         Subnetwork_Role_Backup,
         ..
       ),
 
     -- * Subnetwork_StackType
     Subnetwork_StackType
-      (
-        Subnetwork_StackType_IPV4_IPV6,
+      ( Subnetwork_StackType_IPV4_IPV6,
         Subnetwork_StackType_IPV4ONLY,
         ..
       ),
 
     -- * Subnetwork_State
     Subnetwork_State
-      (
-        Subnetwork_State_Draining,
+      ( Subnetwork_State_Draining,
         Subnetwork_State_Ready,
         ..
       ),
 
     -- * SubnetworkAggregatedList_Warning_Code
     SubnetworkAggregatedList_Warning_Code
-      (
-        SubnetworkAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( SubnetworkAggregatedList_Warning_Code_CLEANUPFAILED,
         SubnetworkAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SubnetworkAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         SubnetworkAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5816,8 +5479,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SubnetworkList_Warning_Code
     SubnetworkList_Warning_Code
-      (
-        SubnetworkList_Warning_Code_CLEANUPFAILED,
+      ( SubnetworkList_Warning_Code_CLEANUPFAILED,
         SubnetworkList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SubnetworkList_Warning_Code_DEPRECATEDTYPEUSED,
         SubnetworkList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5847,8 +5509,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SubnetworkLogConfig_AggregationInterval
     SubnetworkLogConfig_AggregationInterval
-      (
-        SubnetworkLogConfig_AggregationInterval_INTERVAL10MIN,
+      ( SubnetworkLogConfig_AggregationInterval_INTERVAL10MIN,
         SubnetworkLogConfig_AggregationInterval_INTERVAL15MIN,
         SubnetworkLogConfig_AggregationInterval_INTERVAL1MIN,
         SubnetworkLogConfig_AggregationInterval_INTERVAL30SEC,
@@ -5859,8 +5520,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SubnetworkLogConfig_Metadata
     SubnetworkLogConfig_Metadata
-      (
-        SubnetworkLogConfig_Metadata_CUSTOMMETADATA,
+      ( SubnetworkLogConfig_Metadata_CUSTOMMETADATA,
         SubnetworkLogConfig_Metadata_EXCLUDEALLMETADATA,
         SubnetworkLogConfig_Metadata_INCLUDEALLMETADATA,
         ..
@@ -5868,8 +5528,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * SubnetworksScopedList_Warning_Code
     SubnetworksScopedList_Warning_Code
-      (
-        SubnetworksScopedList_Warning_Code_CLEANUPFAILED,
+      ( SubnetworksScopedList_Warning_Code_CLEANUPFAILED,
         SubnetworksScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         SubnetworksScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         SubnetworksScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5899,16 +5558,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * Subsetting_Policy
     Subsetting_Policy
-      (
-        Subsetting_Policy_CONSISTENTHASHSUBSETTING,
+      ( Subsetting_Policy_CONSISTENTHASHSUBSETTING,
         Subsetting_Policy_None,
         ..
       ),
 
     -- * TCPHealthCheck_PortSpecification
     TCPHealthCheck_PortSpecification
-      (
-        TCPHealthCheck_PortSpecification_USEFIXEDPORT,
+      ( TCPHealthCheck_PortSpecification_USEFIXEDPORT,
         TCPHealthCheck_PortSpecification_USENAMEDPORT,
         TCPHealthCheck_PortSpecification_USESERVINGPORT,
         ..
@@ -5916,16 +5573,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * TCPHealthCheck_ProxyHeader
     TCPHealthCheck_ProxyHeader
-      (
-        TCPHealthCheck_ProxyHeader_None,
+      ( TCPHealthCheck_ProxyHeader_None,
         TCPHealthCheck_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * TargetGrpcProxyList_Warning_Code
     TargetGrpcProxyList_Warning_Code
-      (
-        TargetGrpcProxyList_Warning_Code_CLEANUPFAILED,
+      ( TargetGrpcProxyList_Warning_Code_CLEANUPFAILED,
         TargetGrpcProxyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetGrpcProxyList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetGrpcProxyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5955,8 +5610,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetHttpProxiesScopedList_Warning_Code
     TargetHttpProxiesScopedList_Warning_Code
-      (
-        TargetHttpProxiesScopedList_Warning_Code_CLEANUPFAILED,
+      ( TargetHttpProxiesScopedList_Warning_Code_CLEANUPFAILED,
         TargetHttpProxiesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetHttpProxiesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetHttpProxiesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -5986,8 +5640,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetHttpProxyList_Warning_Code
     TargetHttpProxyList_Warning_Code
-      (
-        TargetHttpProxyList_Warning_Code_CLEANUPFAILED,
+      ( TargetHttpProxyList_Warning_Code_CLEANUPFAILED,
         TargetHttpProxyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetHttpProxyList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetHttpProxyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6017,8 +5670,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetHttpsProxiesScopedList_Warning_Code
     TargetHttpsProxiesScopedList_Warning_Code
-      (
-        TargetHttpsProxiesScopedList_Warning_Code_CLEANUPFAILED,
+      ( TargetHttpsProxiesScopedList_Warning_Code_CLEANUPFAILED,
         TargetHttpsProxiesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetHttpsProxiesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetHttpsProxiesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6048,8 +5700,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride
     TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride
-      (
-        TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_Disable,
+      ( TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_Disable,
         TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_Enable,
         TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_None,
         ..
@@ -6057,8 +5708,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetHttpsProxy_QuicOverride
     TargetHttpsProxy_QuicOverride
-      (
-        TargetHttpsProxy_QuicOverride_Disable,
+      ( TargetHttpsProxy_QuicOverride_Disable,
         TargetHttpsProxy_QuicOverride_Enable,
         TargetHttpsProxy_QuicOverride_None,
         ..
@@ -6066,8 +5716,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetHttpsProxyAggregatedList_Warning_Code
     TargetHttpsProxyAggregatedList_Warning_Code
-      (
-        TargetHttpsProxyAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( TargetHttpsProxyAggregatedList_Warning_Code_CLEANUPFAILED,
         TargetHttpsProxyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetHttpsProxyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetHttpsProxyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6097,8 +5746,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetHttpsProxyList_Warning_Code
     TargetHttpsProxyList_Warning_Code
-      (
-        TargetHttpsProxyList_Warning_Code_CLEANUPFAILED,
+      ( TargetHttpsProxyList_Warning_Code_CLEANUPFAILED,
         TargetHttpsProxyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetHttpsProxyList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetHttpsProxyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6128,15 +5776,13 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetInstance_NatPolicy
     TargetInstance_NatPolicy
-      (
-        TargetInstance_NatPolicy_NONAT,
+      ( TargetInstance_NatPolicy_NONAT,
         ..
       ),
 
     -- * TargetInstanceAggregatedList_Warning_Code
     TargetInstanceAggregatedList_Warning_Code
-      (
-        TargetInstanceAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( TargetInstanceAggregatedList_Warning_Code_CLEANUPFAILED,
         TargetInstanceAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetInstanceAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetInstanceAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6166,8 +5812,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetInstanceList_Warning_Code
     TargetInstanceList_Warning_Code
-      (
-        TargetInstanceList_Warning_Code_CLEANUPFAILED,
+      ( TargetInstanceList_Warning_Code_CLEANUPFAILED,
         TargetInstanceList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetInstanceList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetInstanceList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6197,8 +5842,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetInstancesScopedList_Warning_Code
     TargetInstancesScopedList_Warning_Code
-      (
-        TargetInstancesScopedList_Warning_Code_CLEANUPFAILED,
+      ( TargetInstancesScopedList_Warning_Code_CLEANUPFAILED,
         TargetInstancesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetInstancesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetInstancesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6228,8 +5872,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetPool_SessionAffinity
     TargetPool_SessionAffinity
-      (
-        TargetPool_SessionAffinity_CLIENTIP,
+      ( TargetPool_SessionAffinity_CLIENTIP,
         TargetPool_SessionAffinity_CLIENTIPNODESTINATION,
         TargetPool_SessionAffinity_CLIENTIPPORTPROTO,
         TargetPool_SessionAffinity_CLIENTIPPROTO,
@@ -6242,8 +5885,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetPoolAggregatedList_Warning_Code
     TargetPoolAggregatedList_Warning_Code
-      (
-        TargetPoolAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( TargetPoolAggregatedList_Warning_Code_CLEANUPFAILED,
         TargetPoolAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetPoolAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetPoolAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6273,8 +5915,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetPoolList_Warning_Code
     TargetPoolList_Warning_Code
-      (
-        TargetPoolList_Warning_Code_CLEANUPFAILED,
+      ( TargetPoolList_Warning_Code_CLEANUPFAILED,
         TargetPoolList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetPoolList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetPoolList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6304,8 +5945,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetPoolsScopedList_Warning_Code
     TargetPoolsScopedList_Warning_Code
-      (
-        TargetPoolsScopedList_Warning_Code_CLEANUPFAILED,
+      ( TargetPoolsScopedList_Warning_Code_CLEANUPFAILED,
         TargetPoolsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetPoolsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetPoolsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6335,24 +5975,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetSslProxiesSetProxyHeaderRequest_ProxyHeader
     TargetSslProxiesSetProxyHeaderRequest_ProxyHeader
-      (
-        TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_None,
+      ( TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_None,
         TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * TargetSslProxy_ProxyHeader
     TargetSslProxy_ProxyHeader
-      (
-        TargetSslProxy_ProxyHeader_None,
+      ( TargetSslProxy_ProxyHeader_None,
         TargetSslProxy_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * TargetSslProxyList_Warning_Code
     TargetSslProxyList_Warning_Code
-      (
-        TargetSslProxyList_Warning_Code_CLEANUPFAILED,
+      ( TargetSslProxyList_Warning_Code_CLEANUPFAILED,
         TargetSslProxyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetSslProxyList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetSslProxyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6382,24 +6019,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader
     TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader
-      (
-        TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_None,
+      ( TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_None,
         TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * TargetTcpProxy_ProxyHeader
     TargetTcpProxy_ProxyHeader
-      (
-        TargetTcpProxy_ProxyHeader_None,
+      ( TargetTcpProxy_ProxyHeader_None,
         TargetTcpProxy_ProxyHeader_PROXY_V1,
         ..
       ),
 
     -- * TargetTcpProxyList_Warning_Code
     TargetTcpProxyList_Warning_Code
-      (
-        TargetTcpProxyList_Warning_Code_CLEANUPFAILED,
+      ( TargetTcpProxyList_Warning_Code_CLEANUPFAILED,
         TargetTcpProxyList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetTcpProxyList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetTcpProxyList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6429,8 +6063,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetVpnGateway_Status
     TargetVpnGateway_Status
-      (
-        TargetVpnGateway_Status_Creating,
+      ( TargetVpnGateway_Status_Creating,
         TargetVpnGateway_Status_Deleting,
         TargetVpnGateway_Status_Failed,
         TargetVpnGateway_Status_Ready,
@@ -6439,8 +6072,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetVpnGatewayAggregatedList_Warning_Code
     TargetVpnGatewayAggregatedList_Warning_Code
-      (
-        TargetVpnGatewayAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( TargetVpnGatewayAggregatedList_Warning_Code_CLEANUPFAILED,
         TargetVpnGatewayAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetVpnGatewayAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetVpnGatewayAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6470,8 +6102,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetVpnGatewayList_Warning_Code
     TargetVpnGatewayList_Warning_Code
-      (
-        TargetVpnGatewayList_Warning_Code_CLEANUPFAILED,
+      ( TargetVpnGatewayList_Warning_Code_CLEANUPFAILED,
         TargetVpnGatewayList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetVpnGatewayList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetVpnGatewayList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6501,8 +6132,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * TargetVpnGatewaysScopedList_Warning_Code
     TargetVpnGatewaysScopedList_Warning_Code
-      (
-        TargetVpnGatewaysScopedList_Warning_Code_CLEANUPFAILED,
+      ( TargetVpnGatewaysScopedList_Warning_Code_CLEANUPFAILED,
         TargetVpnGatewaysScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         TargetVpnGatewaysScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         TargetVpnGatewaysScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6532,8 +6162,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * UrlMapList_Warning_Code
     UrlMapList_Warning_Code
-      (
-        UrlMapList_Warning_Code_CLEANUPFAILED,
+      ( UrlMapList_Warning_Code_CLEANUPFAILED,
         UrlMapList_Warning_Code_DEPRECATEDRESOURCEUSED,
         UrlMapList_Warning_Code_DEPRECATEDTYPEUSED,
         UrlMapList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6563,8 +6192,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * UrlMapsAggregatedList_Warning_Code
     UrlMapsAggregatedList_Warning_Code
-      (
-        UrlMapsAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( UrlMapsAggregatedList_Warning_Code_CLEANUPFAILED,
         UrlMapsAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         UrlMapsAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         UrlMapsAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6594,8 +6222,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * UrlMapsScopedList_Warning_Code
     UrlMapsScopedList_Warning_Code
-      (
-        UrlMapsScopedList_Warning_Code_CLEANUPFAILED,
+      ( UrlMapsScopedList_Warning_Code_CLEANUPFAILED,
         UrlMapsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         UrlMapsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         UrlMapsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6625,8 +6252,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * UrlMapsValidateRequest_LoadBalancingSchemesItem
     UrlMapsValidateRequest_LoadBalancingSchemesItem
-      (
-        UrlMapsValidateRequest_LoadBalancingSchemesItem_External,
+      ( UrlMapsValidateRequest_LoadBalancingSchemesItem_External,
         UrlMapsValidateRequest_LoadBalancingSchemesItem_EXTERNALMANAGED,
         UrlMapsValidateRequest_LoadBalancingSchemesItem_LOADBALANCINGSCHEMEUNSPECIFIED,
         ..
@@ -6634,8 +6260,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * UsableSubnetworksAggregatedList_Warning_Code
     UsableSubnetworksAggregatedList_Warning_Code
-      (
-        UsableSubnetworksAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( UsableSubnetworksAggregatedList_Warning_Code_CLEANUPFAILED,
         UsableSubnetworksAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         UsableSubnetworksAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         UsableSubnetworksAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6665,8 +6290,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * VmEndpointNatMappingsList_Warning_Code
     VmEndpointNatMappingsList_Warning_Code
-      (
-        VmEndpointNatMappingsList_Warning_Code_CLEANUPFAILED,
+      ( VmEndpointNatMappingsList_Warning_Code_CLEANUPFAILED,
         VmEndpointNatMappingsList_Warning_Code_DEPRECATEDRESOURCEUSED,
         VmEndpointNatMappingsList_Warning_Code_DEPRECATEDTYPEUSED,
         VmEndpointNatMappingsList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6696,16 +6320,14 @@ module Gogol.Compute.Internal.Sum
 
     -- * VpnGateway_StackType
     VpnGateway_StackType
-      (
-        VpnGateway_StackType_IPV4_IPV6,
+      ( VpnGateway_StackType_IPV4_IPV6,
         VpnGateway_StackType_IPV4ONLY,
         ..
       ),
 
     -- * VpnGatewayAggregatedList_Warning_Code
     VpnGatewayAggregatedList_Warning_Code
-      (
-        VpnGatewayAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( VpnGatewayAggregatedList_Warning_Code_CLEANUPFAILED,
         VpnGatewayAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         VpnGatewayAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         VpnGatewayAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6735,8 +6357,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * VpnGatewayList_Warning_Code
     VpnGatewayList_Warning_Code
-      (
-        VpnGatewayList_Warning_Code_CLEANUPFAILED,
+      ( VpnGatewayList_Warning_Code_CLEANUPFAILED,
         VpnGatewayList_Warning_Code_DEPRECATEDRESOURCEUSED,
         VpnGatewayList_Warning_Code_DEPRECATEDTYPEUSED,
         VpnGatewayList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6766,23 +6387,20 @@ module Gogol.Compute.Internal.Sum
 
     -- * VpnGatewayStatusHighAvailabilityRequirementState_State
     VpnGatewayStatusHighAvailabilityRequirementState_State
-      (
-        VpnGatewayStatusHighAvailabilityRequirementState_State_CONNECTIONREDUNDANCYMET,
+      ( VpnGatewayStatusHighAvailabilityRequirementState_State_CONNECTIONREDUNDANCYMET,
         VpnGatewayStatusHighAvailabilityRequirementState_State_CONNECTIONREDUNDANCYNOTMET,
         ..
       ),
 
     -- * VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason
     VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason
-      (
-        VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason_INCOMPLETETUNNELSCOVERAGE,
+      ( VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason_INCOMPLETETUNNELSCOVERAGE,
         ..
       ),
 
     -- * VpnGatewaysScopedList_Warning_Code
     VpnGatewaysScopedList_Warning_Code
-      (
-        VpnGatewaysScopedList_Warning_Code_CLEANUPFAILED,
+      ( VpnGatewaysScopedList_Warning_Code_CLEANUPFAILED,
         VpnGatewaysScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         VpnGatewaysScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         VpnGatewaysScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6812,8 +6430,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * VpnTunnel_Status
     VpnTunnel_Status
-      (
-        VpnTunnel_Status_ALLOCATINGRESOURCES,
+      ( VpnTunnel_Status_ALLOCATINGRESOURCES,
         VpnTunnel_Status_AUTHORIZATIONERROR,
         VpnTunnel_Status_Deprovisioning,
         VpnTunnel_Status_Established,
@@ -6831,8 +6448,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * VpnTunnelAggregatedList_Warning_Code
     VpnTunnelAggregatedList_Warning_Code
-      (
-        VpnTunnelAggregatedList_Warning_Code_CLEANUPFAILED,
+      ( VpnTunnelAggregatedList_Warning_Code_CLEANUPFAILED,
         VpnTunnelAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         VpnTunnelAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
         VpnTunnelAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6862,8 +6478,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * VpnTunnelList_Warning_Code
     VpnTunnelList_Warning_Code
-      (
-        VpnTunnelList_Warning_Code_CLEANUPFAILED,
+      ( VpnTunnelList_Warning_Code_CLEANUPFAILED,
         VpnTunnelList_Warning_Code_DEPRECATEDRESOURCEUSED,
         VpnTunnelList_Warning_Code_DEPRECATEDTYPEUSED,
         VpnTunnelList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6893,8 +6508,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * VpnTunnelsScopedList_Warning_Code
     VpnTunnelsScopedList_Warning_Code
-      (
-        VpnTunnelsScopedList_Warning_Code_CLEANUPFAILED,
+      ( VpnTunnelsScopedList_Warning_Code_CLEANUPFAILED,
         VpnTunnelsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
         VpnTunnelsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
         VpnTunnelsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6924,8 +6538,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * XpnHostList_Warning_Code
     XpnHostList_Warning_Code
-      (
-        XpnHostList_Warning_Code_CLEANUPFAILED,
+      ( XpnHostList_Warning_Code_CLEANUPFAILED,
         XpnHostList_Warning_Code_DEPRECATEDRESOURCEUSED,
         XpnHostList_Warning_Code_DEPRECATEDTYPEUSED,
         XpnHostList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -6955,24 +6568,21 @@ module Gogol.Compute.Internal.Sum
 
     -- * XpnResourceId_Type
     XpnResourceId_Type
-      (
-        XpnResourceId_Type_Project,
+      ( XpnResourceId_Type_Project,
         XpnResourceId_Type_XPNRESOURCETYPEUNSPECIFIED,
         ..
       ),
 
     -- * Zone_Status
     Zone_Status
-      (
-        Zone_Status_Down,
+      ( Zone_Status_Down,
         Zone_Status_UP,
         ..
       ),
 
     -- * ZoneList_Warning_Code
     ZoneList_Warning_Code
-      (
-        ZoneList_Warning_Code_CLEANUPFAILED,
+      ( ZoneList_Warning_Code_CLEANUPFAILED,
         ZoneList_Warning_Code_DEPRECATEDRESOURCEUSED,
         ZoneList_Warning_Code_DEPRECATEDTYPEUSED,
         ZoneList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
@@ -7002,8 +6612,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstancesUpdateMinimalAction
     InstancesUpdateMinimalAction
-      (
-        InstancesUpdateMinimalAction_Invalid,
+      ( InstancesUpdateMinimalAction_Invalid,
         InstancesUpdateMinimalAction_NOEFFECT,
         InstancesUpdateMinimalAction_Refresh,
         InstancesUpdateMinimalAction_Restart,
@@ -7012,8 +6621,7 @@ module Gogol.Compute.Internal.Sum
 
     -- * InstancesUpdateMostDisruptiveAllowedAction
     InstancesUpdateMostDisruptiveAllowedAction
-      (
-        InstancesUpdateMostDisruptiveAllowedAction_Invalid,
+      ( InstancesUpdateMostDisruptiveAllowedAction_Invalid,
         InstancesUpdateMostDisruptiveAllowedAction_NOEFFECT,
         InstancesUpdateMostDisruptiveAllowedAction_Refresh,
         InstancesUpdateMostDisruptiveAllowedAction_Restart,
@@ -7022,27 +6630,27 @@ module Gogol.Compute.Internal.Sum
 
     -- * NetworksListPeeringRoutesDirection
     NetworksListPeeringRoutesDirection
-      (
-        NetworksListPeeringRoutesDirection_Incoming,
+      ( NetworksListPeeringRoutesDirection_Incoming,
         NetworksListPeeringRoutesDirection_Outgoing,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -7055,20 +6663,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AcceleratorTypeAggregatedList_Warning_Code = AcceleratorTypeAggregatedList_Warning_Code { fromAcceleratorTypeAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AcceleratorTypeAggregatedList_Warning_Code = AcceleratorTypeAggregatedList_Warning_Code {fromAcceleratorTypeAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AcceleratorTypeAggregatedList_Warning_Code_CLEANUPFAILED :: AcceleratorTypeAggregatedList_Warning_Code
@@ -7196,20 +6805,21 @@ pattern AcceleratorTypeAggregatedList_Warning_Code_Unreachable = AcceleratorType
   AcceleratorTypeAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AcceleratorTypeAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   AcceleratorTypeAggregatedList_Warning_Code_Unreachable,
-  AcceleratorTypeAggregatedList_Warning_Code #-}
+  AcceleratorTypeAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AcceleratorTypeList_Warning_Code = AcceleratorTypeList_Warning_Code { fromAcceleratorTypeList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AcceleratorTypeList_Warning_Code = AcceleratorTypeList_Warning_Code {fromAcceleratorTypeList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AcceleratorTypeList_Warning_Code_CLEANUPFAILED :: AcceleratorTypeList_Warning_Code
@@ -7337,20 +6947,21 @@ pattern AcceleratorTypeList_Warning_Code_Unreachable = AcceleratorTypeList_Warni
   AcceleratorTypeList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AcceleratorTypeList_Warning_Code_UNDECLAREDPROPERTIES,
   AcceleratorTypeList_Warning_Code_Unreachable,
-  AcceleratorTypeList_Warning_Code #-}
+  AcceleratorTypeList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AcceleratorTypesScopedList_Warning_Code = AcceleratorTypesScopedList_Warning_Code { fromAcceleratorTypesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AcceleratorTypesScopedList_Warning_Code = AcceleratorTypesScopedList_Warning_Code {fromAcceleratorTypesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AcceleratorTypesScopedList_Warning_Code_CLEANUPFAILED :: AcceleratorTypesScopedList_Warning_Code
@@ -7478,20 +7089,21 @@ pattern AcceleratorTypesScopedList_Warning_Code_Unreachable = AcceleratorTypesSc
   AcceleratorTypesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AcceleratorTypesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   AcceleratorTypesScopedList_Warning_Code_Unreachable,
-  AcceleratorTypesScopedList_Warning_Code #-}
+  AcceleratorTypesScopedList_Warning_Code
+  #-}
 
 -- | This signifies the networking tier used for configuring this access configuration and can only take the following values: PREMIUM, STANDARD. If an AccessConfig is specified without a valid external IP address, an ephemeral IP will be created with this networkTier. If an AccessConfig with a valid external IP address is specified, it must match that of the networkTier associated with the Address resource owning that IP.
-newtype AccessConfig_NetworkTier = AccessConfig_NetworkTier { fromAccessConfig_NetworkTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AccessConfig_NetworkTier = AccessConfig_NetworkTier {fromAccessConfig_NetworkTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Public internet quality with fixed bandwidth.
 pattern AccessConfig_NetworkTier_FIXEDSTANDARD :: AccessConfig_NetworkTier
@@ -7514,46 +7126,48 @@ pattern AccessConfig_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD = AccessConfig_N
   AccessConfig_NetworkTier_Premium,
   AccessConfig_NetworkTier_Standard,
   AccessConfig_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
-  AccessConfig_NetworkTier #-}
+  AccessConfig_NetworkTier
+  #-}
 
 -- | The type of configuration. The default and only option is ONE/TO/ONE_NAT.
-newtype AccessConfig_Type = AccessConfig_Type { fromAccessConfig_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AccessConfig_Type = AccessConfig_Type {fromAccessConfig_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AccessConfig_Type_DIRECT_IPV6 :: AccessConfig_Type
 pattern AccessConfig_Type_DIRECT_IPV6 = AccessConfig_Type "DIRECT_IPV6"
 
--- | 
+-- |
 pattern AccessConfig_Type_ONETOONENAT :: AccessConfig_Type
 pattern AccessConfig_Type_ONETOONENAT = AccessConfig_Type "ONE_TO_ONE_NAT"
 
 {-# COMPLETE
   AccessConfig_Type_DIRECT_IPV6,
   AccessConfig_Type_ONETOONENAT,
-  AccessConfig_Type #-}
+  AccessConfig_Type
+  #-}
 
 -- | The type of address to reserve, either INTERNAL or EXTERNAL. If unspecified, defaults to EXTERNAL.
-newtype Address_AddressType = Address_AddressType { fromAddress_AddressType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Address_AddressType = Address_AddressType {fromAddress_AddressType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A publicly visible external IP address.
 pattern Address_AddressType_External :: Address_AddressType
@@ -7563,7 +7177,7 @@ pattern Address_AddressType_External = Address_AddressType "EXTERNAL"
 pattern Address_AddressType_Internal :: Address_AddressType
 pattern Address_AddressType_Internal = Address_AddressType "INTERNAL"
 
--- | 
+-- |
 pattern Address_AddressType_UNSPECIFIEDTYPE :: Address_AddressType
 pattern Address_AddressType_UNSPECIFIEDTYPE = Address_AddressType "UNSPECIFIED_TYPE"
 
@@ -7571,30 +7185,31 @@ pattern Address_AddressType_UNSPECIFIEDTYPE = Address_AddressType "UNSPECIFIED_T
   Address_AddressType_External,
   Address_AddressType_Internal,
   Address_AddressType_UNSPECIFIEDTYPE,
-  Address_AddressType #-}
+  Address_AddressType
+  #-}
 
 -- | The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
-newtype Address_IpVersion = Address_IpVersion { fromAddress_IpVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Address_IpVersion = Address_IpVersion {fromAddress_IpVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Address_IpVersion_IPV4 :: Address_IpVersion
 pattern Address_IpVersion_IPV4 = Address_IpVersion "IPV4"
 
--- | 
+-- |
 pattern Address_IpVersion_IPV6 :: Address_IpVersion
 pattern Address_IpVersion_IPV6 = Address_IpVersion "IPV6"
 
--- | 
+-- |
 pattern Address_IpVersion_UNSPECIFIEDVERSION :: Address_IpVersion
 pattern Address_IpVersion_UNSPECIFIEDVERSION = Address_IpVersion "UNSPECIFIED_VERSION"
 
@@ -7602,20 +7217,21 @@ pattern Address_IpVersion_UNSPECIFIEDVERSION = Address_IpVersion "UNSPECIFIED_VE
   Address_IpVersion_IPV4,
   Address_IpVersion_IPV6,
   Address_IpVersion_UNSPECIFIEDVERSION,
-  Address_IpVersion #-}
+  Address_IpVersion
+  #-}
 
 -- | This signifies the networking tier used for configuring this address and can only take the following values: PREMIUM or STANDARD. Internal IP addresses are always Premium Tier; global external IP addresses are always Premium Tier; regional external IP addresses can be either Standard or Premium Tier. If this field is not specified, it is assumed to be PREMIUM.
-newtype Address_NetworkTier = Address_NetworkTier { fromAddress_NetworkTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Address_NetworkTier = Address_NetworkTier {fromAddress_NetworkTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Public internet quality with fixed bandwidth.
 pattern Address_NetworkTier_FIXEDSTANDARD :: Address_NetworkTier
@@ -7638,21 +7254,22 @@ pattern Address_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD = Address_NetworkTier
   Address_NetworkTier_Premium,
   Address_NetworkTier_Standard,
   Address_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
-  Address_NetworkTier #-}
+  Address_NetworkTier
+  #-}
 
 -- | The purpose of this resource, which can be one of the following values: - GCE/ENDPOINT for addresses that are used by VM instances, alias IP ranges, load balancers, and similar resources. - DNS/RESOLVER for a DNS resolver address in a subnetwork for a Cloud DNS inbound forwarder IP addresses (regional internal IP address in a subnet of a VPC network) - VPC/PEERING for global internal IP addresses used for private services access allocated ranges. - NAT/AUTO for the regional external IP addresses used by Cloud NAT when allocating addresses using automatic NAT IP address allocation. - IPSEC_INTERCONNECT for addresses created from a private IP range that are reserved for a VLAN attachment in an /IPsec-encrypted Cloud Interconnect/ configuration. These addresses are regional resources. Not currently available publicly. - @SHARED_LOADBALANCER_VIP@ for an internal IP address that is assigned to multiple internal forwarding rules. - @PRIVATE_SERVICE_CONNECT@ for a private network address that is used to configure
 -- Private Service Connect. Only global internal addresses can use this purpose.
-newtype Address_Purpose = Address_Purpose { fromAddress_Purpose :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Address_Purpose = Address_Purpose {fromAddress_Purpose :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | DNS resolver address in the subnetwork.
 pattern Address_Purpose_DNSRESOLVER :: Address_Purpose
@@ -7690,20 +7307,21 @@ pattern Address_Purpose_VPCPEERING = Address_Purpose "VPC_PEERING"
   Address_Purpose_PRIVATESERVICECONNECT,
   Address_Purpose_SHAREDLOADBALANCERVIP,
   Address_Purpose_VPCPEERING,
-  Address_Purpose #-}
+  Address_Purpose
+  #-}
 
 -- | [Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN/USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN/USE address is currently being used by another resource and is not available.
-newtype Address_Status = Address_Status { fromAddress_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Address_Status = Address_Status {fromAddress_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Address is being used by another resource and is not available.
 pattern Address_Status_INUSE :: Address_Status
@@ -7721,20 +7339,21 @@ pattern Address_Status_Reserving = Address_Status "RESERVING"
   Address_Status_INUSE,
   Address_Status_Reserved,
   Address_Status_Reserving,
-  Address_Status #-}
+  Address_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AddressAggregatedList_Warning_Code = AddressAggregatedList_Warning_Code { fromAddressAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AddressAggregatedList_Warning_Code = AddressAggregatedList_Warning_Code {fromAddressAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AddressAggregatedList_Warning_Code_CLEANUPFAILED :: AddressAggregatedList_Warning_Code
@@ -7862,20 +7481,21 @@ pattern AddressAggregatedList_Warning_Code_Unreachable = AddressAggregatedList_W
   AddressAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AddressAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   AddressAggregatedList_Warning_Code_Unreachable,
-  AddressAggregatedList_Warning_Code #-}
+  AddressAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AddressList_Warning_Code = AddressList_Warning_Code { fromAddressList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AddressList_Warning_Code = AddressList_Warning_Code {fromAddressList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AddressList_Warning_Code_CLEANUPFAILED :: AddressList_Warning_Code
@@ -8003,20 +7623,21 @@ pattern AddressList_Warning_Code_Unreachable = AddressList_Warning_Code "UNREACH
   AddressList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AddressList_Warning_Code_UNDECLAREDPROPERTIES,
   AddressList_Warning_Code_Unreachable,
-  AddressList_Warning_Code #-}
+  AddressList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AddressesScopedList_Warning_Code = AddressesScopedList_Warning_Code { fromAddressesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AddressesScopedList_Warning_Code = AddressesScopedList_Warning_Code {fromAddressesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AddressesScopedList_Warning_Code_CLEANUPFAILED :: AddressesScopedList_Warning_Code
@@ -8144,72 +7765,75 @@ pattern AddressesScopedList_Warning_Code_Unreachable = AddressesScopedList_Warni
   AddressesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AddressesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   AddressesScopedList_Warning_Code_Unreachable,
-  AddressesScopedList_Warning_Code #-}
+  AddressesScopedList_Warning_Code
+  #-}
 
 -- | Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
-newtype AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface = AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface { fromAllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface = AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface {fromAllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Nvme :: AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface
 pattern AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Nvme = AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface "NVME"
 
--- | 
+-- |
 pattern AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Scsi :: AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface
 pattern AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Scsi = AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface "SCSI"
 
 {-# COMPLETE
   AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Nvme,
   AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface_Scsi,
-  AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface #-}
+  AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface
+  #-}
 
 -- | Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
-newtype AttachedDisk_Interface = AttachedDisk_Interface { fromAttachedDisk_Interface :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AttachedDisk_Interface = AttachedDisk_Interface {fromAttachedDisk_Interface :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AttachedDisk_Interface_Nvme :: AttachedDisk_Interface
 pattern AttachedDisk_Interface_Nvme = AttachedDisk_Interface "NVME"
 
--- | 
+-- |
 pattern AttachedDisk_Interface_Scsi :: AttachedDisk_Interface
 pattern AttachedDisk_Interface_Scsi = AttachedDisk_Interface "SCSI"
 
 {-# COMPLETE
   AttachedDisk_Interface_Nvme,
   AttachedDisk_Interface_Scsi,
-  AttachedDisk_Interface #-}
+  AttachedDisk_Interface
+  #-}
 
 -- | The mode in which to attach this disk, either READ/WRITE or READ/ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
-newtype AttachedDisk_Mode = AttachedDisk_Mode { fromAttachedDisk_Mode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AttachedDisk_Mode = AttachedDisk_Mode {fromAttachedDisk_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Attaches this disk in read-only mode. Multiple virtual machines can use a disk in read-only mode at a time.
 pattern AttachedDisk_Mode_READONLY :: AttachedDisk_Mode
@@ -8222,46 +7846,48 @@ pattern AttachedDisk_Mode_READWRITE = AttachedDisk_Mode "READ_WRITE"
 {-# COMPLETE
   AttachedDisk_Mode_READONLY,
   AttachedDisk_Mode_READWRITE,
-  AttachedDisk_Mode #-}
+  AttachedDisk_Mode
+  #-}
 
 -- | Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
-newtype AttachedDisk_Type = AttachedDisk_Type { fromAttachedDisk_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AttachedDisk_Type = AttachedDisk_Type {fromAttachedDisk_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern AttachedDisk_Type_Persistent :: AttachedDisk_Type
 pattern AttachedDisk_Type_Persistent = AttachedDisk_Type "PERSISTENT"
 
--- | 
+-- |
 pattern AttachedDisk_Type_Scratch :: AttachedDisk_Type
 pattern AttachedDisk_Type_Scratch = AttachedDisk_Type "SCRATCH"
 
 {-# COMPLETE
   AttachedDisk_Type_Persistent,
   AttachedDisk_Type_Scratch,
-  AttachedDisk_Type #-}
+  AttachedDisk_Type
+  #-}
 
 -- | Specifies which action to take on instance update with this disk. Default is to use the existing disk.
-newtype AttachedDiskInitializeParams_OnUpdateAction = AttachedDiskInitializeParams_OnUpdateAction { fromAttachedDiskInitializeParams_OnUpdateAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AttachedDiskInitializeParams_OnUpdateAction = AttachedDiskInitializeParams_OnUpdateAction {fromAttachedDiskInitializeParams_OnUpdateAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Always recreate the disk.
 pattern AttachedDiskInitializeParams_OnUpdateAction_RECREATEDISK :: AttachedDiskInitializeParams_OnUpdateAction
@@ -8279,20 +7905,21 @@ pattern AttachedDiskInitializeParams_OnUpdateAction_USEEXISTINGDISK = AttachedDi
   AttachedDiskInitializeParams_OnUpdateAction_RECREATEDISK,
   AttachedDiskInitializeParams_OnUpdateAction_RECREATEDISKIFSOURCECHANGED,
   AttachedDiskInitializeParams_OnUpdateAction_USEEXISTINGDISK,
-  AttachedDiskInitializeParams_OnUpdateAction #-}
+  AttachedDiskInitializeParams_OnUpdateAction
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Admin reads. Example: CloudIAM getIamPolicy
 pattern AuditLogConfig_LogType_ADMINREAD :: AuditLogConfig_LogType
@@ -8315,20 +7942,21 @@ pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED = AuditLogConfig_LogType "LOG_
   AuditLogConfig_LogType_DATAREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | This is deprecated and has no effect. Do not use.
-newtype AuthorizationLoggingOptions_PermissionType = AuthorizationLoggingOptions_PermissionType { fromAuthorizationLoggingOptions_PermissionType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuthorizationLoggingOptions_PermissionType = AuthorizationLoggingOptions_PermissionType {fromAuthorizationLoggingOptions_PermissionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is deprecated and has no effect. Do not use.
 pattern AuthorizationLoggingOptions_PermissionType_ADMINREAD :: AuthorizationLoggingOptions_PermissionType
@@ -8356,20 +7984,21 @@ pattern AuthorizationLoggingOptions_PermissionType_PERMISSIONTYPEUNSPECIFIED = A
   AuthorizationLoggingOptions_PermissionType_DATAREAD,
   AuthorizationLoggingOptions_PermissionType_DATAWRITE,
   AuthorizationLoggingOptions_PermissionType_PERMISSIONTYPEUNSPECIFIED,
-  AuthorizationLoggingOptions_PermissionType #-}
+  AuthorizationLoggingOptions_PermissionType
+  #-}
 
 -- | [Output Only] The status of the autoscaler configuration. Current set of possible values: - PENDING: Autoscaler backend hasn\'t read new\/updated configuration. - DELETING: Configuration is being deleted. - ACTIVE: Configuration is acknowledged to be effective. Some warnings might be present in the statusDetails field. - ERROR: Configuration has errors. Actionable for users. Details are present in the statusDetails field. New values might be added in the future.
-newtype Autoscaler_Status = Autoscaler_Status { fromAutoscaler_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Autoscaler_Status = Autoscaler_Status {fromAutoscaler_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Configuration is acknowledged to be effective
 pattern Autoscaler_Status_Active :: Autoscaler_Status
@@ -8392,20 +8021,21 @@ pattern Autoscaler_Status_Pending = Autoscaler_Status "PENDING"
   Autoscaler_Status_Deleting,
   Autoscaler_Status_Error',
   Autoscaler_Status_Pending,
-  Autoscaler_Status #-}
+  Autoscaler_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AutoscalerAggregatedList_Warning_Code = AutoscalerAggregatedList_Warning_Code { fromAutoscalerAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoscalerAggregatedList_Warning_Code = AutoscalerAggregatedList_Warning_Code {fromAutoscalerAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AutoscalerAggregatedList_Warning_Code_CLEANUPFAILED :: AutoscalerAggregatedList_Warning_Code
@@ -8533,20 +8163,21 @@ pattern AutoscalerAggregatedList_Warning_Code_Unreachable = AutoscalerAggregated
   AutoscalerAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AutoscalerAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   AutoscalerAggregatedList_Warning_Code_Unreachable,
-  AutoscalerAggregatedList_Warning_Code #-}
+  AutoscalerAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AutoscalerList_Warning_Code = AutoscalerList_Warning_Code { fromAutoscalerList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoscalerList_Warning_Code = AutoscalerList_Warning_Code {fromAutoscalerList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AutoscalerList_Warning_Code_CLEANUPFAILED :: AutoscalerList_Warning_Code
@@ -8674,22 +8305,23 @@ pattern AutoscalerList_Warning_Code_Unreachable = AutoscalerList_Warning_Code "U
   AutoscalerList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AutoscalerList_Warning_Code_UNDECLAREDPROPERTIES,
   AutoscalerList_Warning_Code_Unreachable,
-  AutoscalerList_Warning_Code #-}
+  AutoscalerList_Warning_Code
+  #-}
 
 -- | The type of error, warning, or notice returned. Current set of possible values: - ALL/INSTANCES/UNHEALTHY (WARNING): All instances in the instance group are unhealthy (not in RUNNING state). - BACKEND/SERVICE/DOES/NOT/EXIST (ERROR): There is no backend service attached to the instance group. - CAPPED/AT/MAX/NUM/REPLICAS (WARNING): Autoscaler recommends a size greater than maxNumReplicas. - CUSTOM/METRIC/DATA/POINTS/TOO/SPARSE (WARNING): The custom metric samples are not exported often enough to be a credible base for autoscaling. - CUSTOM/METRIC/INVALID (ERROR): The custom metric that was specified does not exist or does not have the necessary labels. - MIN/EQUALS/MAX (WARNING): The minNumReplicas is equal to maxNumReplicas. This means the autoscaler cannot add or remove instances from the instance group. - MISSING/CUSTOM/METRIC/DATA/POINTS (WARNING): The autoscaler did not receive any data from the custom metric configured for autoscaling. - MISSING/LOAD/BALANCING/DATA/POINTS (WARNING): The autoscaler is
 -- configured to scale based on a load balancing signal but the instance group has not received any requests from the load balancer. - MODE/OFF (WARNING): Autoscaling is turned off. The number of instances in the group won\'t change automatically. The autoscaling configuration is preserved. - MODE/ONLY/UP (WARNING): Autoscaling is in the \"Autoscale only out\" mode. The autoscaler can add instances but not remove any. - MORE/THAN/ONE/BACKEND/SERVICE (ERROR): The instance group cannot be autoscaled because it has more than one backend service attached to it. - NOT/ENOUGH/QUOTA/AVAILABLE (ERROR): There is insufficient quota for the necessary resources, such as CPU or number of instances. - REGION/RESOURCE/STOCKOUT (ERROR): Shown only for regional autoscalers: there is a resource stockout in the chosen region. - SCALING/TARGET/DOES/NOT/EXIST (ERROR): The target to be scaled does not exist. - UNSUPPORTED/MAX/RATE/LOAD/BALANCING/CONFIGURATION (ERROR): Autoscaling does not work with an HTTP\/S load balancer that has
 -- been configured for maxRate. - ZONE/RESOURCE/STOCKOUT (ERROR): For zonal autoscalers: there is a resource stockout in the chosen zone. For regional autoscalers: in at least one of the zones you\'re using there is a resource stockout. New values might be added in the future. Some of the values might not be available in all API versions.
-newtype AutoscalerStatusDetails_Type = AutoscalerStatusDetails_Type { fromAutoscalerStatusDetails_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoscalerStatusDetails_Type = AutoscalerStatusDetails_Type {fromAutoscalerStatusDetails_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | All instances in the instance group are unhealthy (not in RUNNING state).
 pattern AutoscalerStatusDetails_Type_ALLINSTANCESUNHEALTHY :: AutoscalerStatusDetails_Type
@@ -8759,7 +8391,7 @@ pattern AutoscalerStatusDetails_Type_SCHEDULEDINSTANCESGREATERTHANAUTOSCALERMAX 
 pattern AutoscalerStatusDetails_Type_SCHEDULEDINSTANCESLESSTHANAUTOSCALERMIN :: AutoscalerStatusDetails_Type
 pattern AutoscalerStatusDetails_Type_SCHEDULEDINSTANCESLESSTHANAUTOSCALERMIN = AutoscalerStatusDetails_Type "SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN"
 
--- | 
+-- |
 pattern AutoscalerStatusDetails_Type_Unknown :: AutoscalerStatusDetails_Type
 pattern AutoscalerStatusDetails_Type_Unknown = AutoscalerStatusDetails_Type "UNKNOWN"
 
@@ -8792,20 +8424,21 @@ pattern AutoscalerStatusDetails_Type_ZONERESOURCESTOCKOUT = AutoscalerStatusDeta
   AutoscalerStatusDetails_Type_Unknown,
   AutoscalerStatusDetails_Type_UNSUPPORTEDMAXRATELOADBALANCINGCONFIGURATION,
   AutoscalerStatusDetails_Type_ZONERESOURCESTOCKOUT,
-  AutoscalerStatusDetails_Type #-}
+  AutoscalerStatusDetails_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype AutoscalersScopedList_Warning_Code = AutoscalersScopedList_Warning_Code { fromAutoscalersScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoscalersScopedList_Warning_Code = AutoscalersScopedList_Warning_Code {fromAutoscalersScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern AutoscalersScopedList_Warning_Code_CLEANUPFAILED :: AutoscalersScopedList_Warning_Code
@@ -8933,20 +8566,21 @@ pattern AutoscalersScopedList_Warning_Code_Unreachable = AutoscalersScopedList_W
   AutoscalersScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   AutoscalersScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   AutoscalersScopedList_Warning_Code_Unreachable,
-  AutoscalersScopedList_Warning_Code #-}
+  AutoscalersScopedList_Warning_Code
+  #-}
 
 -- | Defines operating mode for this policy.
-newtype AutoscalingPolicy_Mode = AutoscalingPolicy_Mode { fromAutoscalingPolicy_Mode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoscalingPolicy_Mode = AutoscalingPolicy_Mode {fromAutoscalingPolicy_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not automatically scale the MIG in or out. The recommended_size field contains the size of MIG that would be set if the actuation mode was enabled.
 pattern AutoscalingPolicy_Mode_Off :: AutoscalingPolicy_Mode
@@ -8969,20 +8603,21 @@ pattern AutoscalingPolicy_Mode_ONLYUP = AutoscalingPolicy_Mode "ONLY_UP"
   AutoscalingPolicy_Mode_ON,
   AutoscalingPolicy_Mode_ONLYSCALEOUT,
   AutoscalingPolicy_Mode_ONLYUP,
-  AutoscalingPolicy_Mode #-}
+  AutoscalingPolicy_Mode
+  #-}
 
 -- | Indicates whether predictive autoscaling based on CPU metric is enabled. Valid values are: * NONE (default). No predictive method is used. The autoscaler scales the group to meet current demand based on real-time metrics. * OPTIMIZE_AVAILABILITY. Predictive autoscaling improves availability by monitoring daily and weekly load patterns and scaling out ahead of anticipated demand.
-newtype AutoscalingPolicyCpuUtilization_PredictiveMethod = AutoscalingPolicyCpuUtilization_PredictiveMethod { fromAutoscalingPolicyCpuUtilization_PredictiveMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoscalingPolicyCpuUtilization_PredictiveMethod = AutoscalingPolicyCpuUtilization_PredictiveMethod {fromAutoscalingPolicyCpuUtilization_PredictiveMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No predictive method is used. The autoscaler scales the group to meet current demand based on real-time metrics
 pattern AutoscalingPolicyCpuUtilization_PredictiveMethod_None :: AutoscalingPolicyCpuUtilization_PredictiveMethod
@@ -8995,20 +8630,21 @@ pattern AutoscalingPolicyCpuUtilization_PredictiveMethod_OPTIMIZEAVAILABILITY = 
 {-# COMPLETE
   AutoscalingPolicyCpuUtilization_PredictiveMethod_None,
   AutoscalingPolicyCpuUtilization_PredictiveMethod_OPTIMIZEAVAILABILITY,
-  AutoscalingPolicyCpuUtilization_PredictiveMethod #-}
+  AutoscalingPolicyCpuUtilization_PredictiveMethod
+  #-}
 
 -- | Defines how target utilization value is expressed for a Stackdriver Monitoring metric. Either GAUGE, DELTA/PER/SECOND, or DELTA/PER/MINUTE.
-newtype AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType = AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType { fromAutoscalingPolicyCustomMetricUtilization_UtilizationTargetType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType = AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType {fromAutoscalingPolicyCustomMetricUtilization_UtilizationTargetType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Sets the utilization target value for a cumulative or delta metric, expressed as the rate of growth per minute.
 pattern AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_DELTAPERMINUTE :: AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType
@@ -9026,20 +8662,21 @@ pattern AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_Gauge = A
   AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_DELTAPERMINUTE,
   AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_DELTAPERSECOND,
   AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType_Gauge,
-  AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType #-}
+  AutoscalingPolicyCustomMetricUtilization_UtilizationTargetType
+  #-}
 
 -- | Specifies how to determine whether the backend of a load balancer can handle additional traffic or is fully loaded. For usage guidelines, see Connection balancing mode. Backends must use compatible balancing modes. For more information, see Supported balancing modes and target capacity settings and Restrictions and guidance for instance groups. Note: Currently, if you use the API to configure incompatible balancing modes, the configuration might be accepted even though it has no impact and is ignored. Specifically, Backend.maxUtilization is ignored when Backend.balancingMode is RATE. In the future, this incompatible combination will be rejected.
-newtype Backend_BalancingMode = Backend_BalancingMode { fromBackend_BalancingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Backend_BalancingMode = Backend_BalancingMode {fromBackend_BalancingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Balance based on the number of simultaneous connections.
 pattern Backend_BalancingMode_Connection :: Backend_BalancingMode
@@ -9057,20 +8694,21 @@ pattern Backend_BalancingMode_Utilization = Backend_BalancingMode "UTILIZATION"
   Backend_BalancingMode_Connection,
   Backend_BalancingMode_Rate,
   Backend_BalancingMode_Utilization,
-  Backend_BalancingMode #-}
+  Backend_BalancingMode
+  #-}
 
 -- | Specifies the cache setting for all responses from this backend. The possible values are: USE/ORIGIN/HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google\'s edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE/CACHE/ALL Cache all content, ignoring any \"private\", \"no-store\" or \"no-cache\" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE/ALL/STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
-newtype BackendBucketCdnPolicy_CacheMode = BackendBucketCdnPolicy_CacheMode { fromBackendBucketCdnPolicy_CacheMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendBucketCdnPolicy_CacheMode = BackendBucketCdnPolicy_CacheMode {fromBackendBucketCdnPolicy_CacheMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
 pattern BackendBucketCdnPolicy_CacheMode_CACHEALLSTATIC :: BackendBucketCdnPolicy_CacheMode
@@ -9080,7 +8718,7 @@ pattern BackendBucketCdnPolicy_CacheMode_CACHEALLSTATIC = BackendBucketCdnPolicy
 pattern BackendBucketCdnPolicy_CacheMode_FORCECACHEALL :: BackendBucketCdnPolicy_CacheMode
 pattern BackendBucketCdnPolicy_CacheMode_FORCECACHEALL = BackendBucketCdnPolicy_CacheMode "FORCE_CACHE_ALL"
 
--- | 
+-- |
 pattern BackendBucketCdnPolicy_CacheMode_INVALIDCACHEMODE :: BackendBucketCdnPolicy_CacheMode
 pattern BackendBucketCdnPolicy_CacheMode_INVALIDCACHEMODE = BackendBucketCdnPolicy_CacheMode "INVALID_CACHE_MODE"
 
@@ -9093,20 +8731,21 @@ pattern BackendBucketCdnPolicy_CacheMode_USEORIGINHEADERS = BackendBucketCdnPoli
   BackendBucketCdnPolicy_CacheMode_FORCECACHEALL,
   BackendBucketCdnPolicy_CacheMode_INVALIDCACHEMODE,
   BackendBucketCdnPolicy_CacheMode_USEORIGINHEADERS,
-  BackendBucketCdnPolicy_CacheMode #-}
+  BackendBucketCdnPolicy_CacheMode
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype BackendBucketList_Warning_Code = BackendBucketList_Warning_Code { fromBackendBucketList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendBucketList_Warning_Code = BackendBucketList_Warning_Code {fromBackendBucketList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern BackendBucketList_Warning_Code_CLEANUPFAILED :: BackendBucketList_Warning_Code
@@ -9234,20 +8873,21 @@ pattern BackendBucketList_Warning_Code_Unreachable = BackendBucketList_Warning_C
   BackendBucketList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   BackendBucketList_Warning_Code_UNDECLAREDPROPERTIES,
   BackendBucketList_Warning_Code_Unreachable,
-  BackendBucketList_Warning_Code #-}
+  BackendBucketList_Warning_Code
+  #-}
 
 -- | Specifies the load balancer type. A backend service created for one type of load balancer cannot be used with another. For more information, refer to Choosing a load balancer.
-newtype BackendService_LoadBalancingScheme = BackendService_LoadBalancingScheme { fromBackendService_LoadBalancingScheme :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendService_LoadBalancingScheme = BackendService_LoadBalancingScheme {fromBackendService_LoadBalancingScheme :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Signifies that this will be used for external HTTP(S), SSL Proxy, TCP Proxy, or Network Load Balancing
 pattern BackendService_LoadBalancingScheme_External :: BackendService_LoadBalancingScheme
@@ -9269,7 +8909,7 @@ pattern BackendService_LoadBalancingScheme_INTERNALMANAGED = BackendService_Load
 pattern BackendService_LoadBalancingScheme_INTERNALSELFMANAGED :: BackendService_LoadBalancingScheme
 pattern BackendService_LoadBalancingScheme_INTERNALSELFMANAGED = BackendService_LoadBalancingScheme "INTERNAL_SELF_MANAGED"
 
--- | 
+-- |
 pattern BackendService_LoadBalancingScheme_INVALIDLOADBALANCINGSCHEME :: BackendService_LoadBalancingScheme
 pattern BackendService_LoadBalancingScheme_INVALIDLOADBALANCINGSCHEME = BackendService_LoadBalancingScheme "INVALID_LOAD_BALANCING_SCHEME"
 
@@ -9280,23 +8920,24 @@ pattern BackendService_LoadBalancingScheme_INVALIDLOADBALANCINGSCHEME = BackendS
   BackendService_LoadBalancingScheme_INTERNALMANAGED,
   BackendService_LoadBalancingScheme_INTERNALSELFMANAGED,
   BackendService_LoadBalancingScheme_INVALIDLOADBALANCINGSCHEME,
-  BackendService_LoadBalancingScheme #-}
+  BackendService_LoadBalancingScheme
+  #-}
 
 -- | The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND/ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST/REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING/HASH: The ring\/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition\/removal of a host from a set of N hosts only affects 1\/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL/DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and
 -- host selection times. For more information about Maglev, see https:\/\/ai.google\/research\/pubs\/pub44824 This field is applicable to either: - A regional backend service with the service/protocol set to HTTP, HTTPS, or HTTP2, and load/balancing/scheme set to INTERNAL/MANAGED. - A global backend service with the load/balancing/scheme set to INTERNAL/SELF/MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING/HASH, session affinity settings will not take effect. Only ROUND/ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
-newtype BackendService_LocalityLbPolicy = BackendService_LocalityLbPolicy { fromBackendService_LocalityLbPolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendService_LocalityLbPolicy = BackendService_LocalityLbPolicy {fromBackendService_LocalityLbPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BackendService_LocalityLbPolicy_INVALIDLBPOLICY :: BackendService_LocalityLbPolicy
 pattern BackendService_LocalityLbPolicy_INVALIDLBPOLICY = BackendService_LocalityLbPolicy "INVALID_LB_POLICY"
 
@@ -9332,26 +8973,27 @@ pattern BackendService_LocalityLbPolicy_ROUNDROBIN = BackendService_LocalityLbPo
   BackendService_LocalityLbPolicy_Random,
   BackendService_LocalityLbPolicy_RINGHASH,
   BackendService_LocalityLbPolicy_ROUNDROBIN,
-  BackendService_LocalityLbPolicy #-}
+  BackendService_LocalityLbPolicy
+  #-}
 
 -- | The protocol this BackendService uses to communicate with backends. Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancers or for Traffic Director for more information. Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
-newtype BackendService_Protocol = BackendService_Protocol { fromBackendService_Protocol :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendService_Protocol = BackendService_Protocol {fromBackendService_Protocol :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | gRPC (available for Traffic Director).
 pattern BackendService_Protocol_Grpc :: BackendService_Protocol
 pattern BackendService_Protocol_Grpc = BackendService_Protocol "GRPC"
 
--- | 
+-- |
 pattern BackendService_Protocol_Http :: BackendService_Protocol
 pattern BackendService_Protocol_Http = BackendService_Protocol "HTTP"
 
@@ -9359,7 +9001,7 @@ pattern BackendService_Protocol_Http = BackendService_Protocol "HTTP"
 pattern BackendService_Protocol_HTTP2 :: BackendService_Protocol
 pattern BackendService_Protocol_HTTP2 = BackendService_Protocol "HTTP2"
 
--- | 
+-- |
 pattern BackendService_Protocol_Https :: BackendService_Protocol
 pattern BackendService_Protocol_Https = BackendService_Protocol "HTTPS"
 
@@ -9388,20 +9030,21 @@ pattern BackendService_Protocol_Unspecified = BackendService_Protocol "UNSPECIFI
   BackendService_Protocol_Tcp,
   BackendService_Protocol_Udp,
   BackendService_Protocol_Unspecified,
-  BackendService_Protocol #-}
+  BackendService_Protocol
+  #-}
 
 -- | Type of session affinity to use. The default is NONE. Only NONE and HEADER_FIELD are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. For more details, see: <https://cloud.google.com/load-balancing/docs/backend-service#session_affinity Session Affinity>.
-newtype BackendService_SessionAffinity = BackendService_SessionAffinity { fromBackendService_SessionAffinity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendService_SessionAffinity = BackendService_SessionAffinity {fromBackendService_SessionAffinity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | 2-tuple hash on packet\'s source and destination IP addresses. Connections from the same source IP address to the same destination IP address will be served by the same backend VM while that VM remains healthy.
 pattern BackendService_SessionAffinity_CLIENTIP :: BackendService_SessionAffinity
@@ -9444,20 +9087,21 @@ pattern BackendService_SessionAffinity_None = BackendService_SessionAffinity "NO
   BackendService_SessionAffinity_HEADERFIELD,
   BackendService_SessionAffinity_HTTPCOOKIE,
   BackendService_SessionAffinity_None,
-  BackendService_SessionAffinity #-}
+  BackendService_SessionAffinity
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype BackendServiceAggregatedList_Warning_Code = BackendServiceAggregatedList_Warning_Code { fromBackendServiceAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendServiceAggregatedList_Warning_Code = BackendServiceAggregatedList_Warning_Code {fromBackendServiceAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern BackendServiceAggregatedList_Warning_Code_CLEANUPFAILED :: BackendServiceAggregatedList_Warning_Code
@@ -9585,20 +9229,21 @@ pattern BackendServiceAggregatedList_Warning_Code_Unreachable = BackendServiceAg
   BackendServiceAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   BackendServiceAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   BackendServiceAggregatedList_Warning_Code_Unreachable,
-  BackendServiceAggregatedList_Warning_Code #-}
+  BackendServiceAggregatedList_Warning_Code
+  #-}
 
 -- | Specifies the cache setting for all responses from this backend. The possible values are: USE/ORIGIN/HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google\'s edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE/CACHE/ALL Cache all content, ignoring any \"private\", \"no-store\" or \"no-cache\" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE/ALL/STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
-newtype BackendServiceCdnPolicy_CacheMode = BackendServiceCdnPolicy_CacheMode { fromBackendServiceCdnPolicy_CacheMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendServiceCdnPolicy_CacheMode = BackendServiceCdnPolicy_CacheMode {fromBackendServiceCdnPolicy_CacheMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
 pattern BackendServiceCdnPolicy_CacheMode_CACHEALLSTATIC :: BackendServiceCdnPolicy_CacheMode
@@ -9608,7 +9253,7 @@ pattern BackendServiceCdnPolicy_CacheMode_CACHEALLSTATIC = BackendServiceCdnPoli
 pattern BackendServiceCdnPolicy_CacheMode_FORCECACHEALL :: BackendServiceCdnPolicy_CacheMode
 pattern BackendServiceCdnPolicy_CacheMode_FORCECACHEALL = BackendServiceCdnPolicy_CacheMode "FORCE_CACHE_ALL"
 
--- | 
+-- |
 pattern BackendServiceCdnPolicy_CacheMode_INVALIDCACHEMODE :: BackendServiceCdnPolicy_CacheMode
 pattern BackendServiceCdnPolicy_CacheMode_INVALIDCACHEMODE = BackendServiceCdnPolicy_CacheMode "INVALID_CACHE_MODE"
 
@@ -9621,31 +9266,32 @@ pattern BackendServiceCdnPolicy_CacheMode_USEORIGINHEADERS = BackendServiceCdnPo
   BackendServiceCdnPolicy_CacheMode_FORCECACHEALL,
   BackendServiceCdnPolicy_CacheMode_INVALIDCACHEMODE,
   BackendServiceCdnPolicy_CacheMode_USEORIGINHEADERS,
-  BackendServiceCdnPolicy_CacheMode #-}
+  BackendServiceCdnPolicy_CacheMode
+  #-}
 
 -- | Specifies connection persistence when backends are unhealthy. The default value is DEFAULT/FOR/PROTOCOL. If set to DEFAULT/FOR/PROTOCOL, the existing connections persist on unhealthy backends only for connection-oriented protocols (TCP and SCTP) and only if the Tracking Mode is PER/CONNECTION (default tracking mode) or the Session Affinity is configured for 5-tuple. They do not persist for UDP. If set to NEVER/PERSIST, after a backend becomes unhealthy, the existing connections on the unhealthy backend are never persisted on the unhealthy backend. They are always diverted to newly selected healthy backends (unless all backends are unhealthy). If set to ALWAYS_PERSIST, existing connections always persist on unhealthy backends regardless of protocol and session affinity. It is generally not recommended to use this mode overriding the default. For more details, see
 -- <https://cloud.google.com/load-balancing/docs/network/networklb-backend-service#connection-persistence Connection Persistence for Network Load Balancing> and <https://cloud.google.com/load-balancing/docs/internal#connection-persistence Connection Persistence for Internal TCP\/UDP Load Balancing>.
-newtype BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends = BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends { fromBackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends = BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends {fromBackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_ALWAYSPERSIST :: BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends
 pattern BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_ALWAYSPERSIST = BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends "ALWAYS_PERSIST"
 
--- | 
+-- |
 pattern BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_DEFAULTFORPROTOCOL :: BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends
 pattern BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_DEFAULTFORPROTOCOL = BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends "DEFAULT_FOR_PROTOCOL"
 
--- | 
+-- |
 pattern BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_NEVERPERSIST :: BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends
 pattern BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_NEVERPERSIST = BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends "NEVER_PERSIST"
 
@@ -9653,30 +9299,31 @@ pattern BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyB
   BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_ALWAYSPERSIST,
   BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_DEFAULTFORPROTOCOL,
   BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends_NEVERPERSIST,
-  BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends #-}
+  BackendServiceConnectionTrackingPolicy_ConnectionPersistenceOnUnhealthyBackends
+  #-}
 
 -- | Specifies the key used for connection tracking. There are two options: - PER/CONNECTION: This is the default mode. The Connection Tracking is performed as per the Connection Key (default Hash Method) for the specific protocol. - PER/SESSION: The Connection Tracking is performed as per the configured Session Affinity. It matches the configured Session Affinity. For more details, see <https://cloud.google.com/load-balancing/docs/network/networklb-backend-service#tracking-mode Tracking Mode for Network Load Balancing> and <https://cloud.google.com/load-balancing/docs/internal#tracking-mode Tracking Mode for Internal TCP\/UDP Load Balancing>.
-newtype BackendServiceConnectionTrackingPolicy_TrackingMode = BackendServiceConnectionTrackingPolicy_TrackingMode { fromBackendServiceConnectionTrackingPolicy_TrackingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendServiceConnectionTrackingPolicy_TrackingMode = BackendServiceConnectionTrackingPolicy_TrackingMode {fromBackendServiceConnectionTrackingPolicy_TrackingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BackendServiceConnectionTrackingPolicy_TrackingMode_INVALIDTRACKINGMODE :: BackendServiceConnectionTrackingPolicy_TrackingMode
 pattern BackendServiceConnectionTrackingPolicy_TrackingMode_INVALIDTRACKINGMODE = BackendServiceConnectionTrackingPolicy_TrackingMode "INVALID_TRACKING_MODE"
 
--- | 
+-- |
 pattern BackendServiceConnectionTrackingPolicy_TrackingMode_PERCONNECTION :: BackendServiceConnectionTrackingPolicy_TrackingMode
 pattern BackendServiceConnectionTrackingPolicy_TrackingMode_PERCONNECTION = BackendServiceConnectionTrackingPolicy_TrackingMode "PER_CONNECTION"
 
--- | 
+-- |
 pattern BackendServiceConnectionTrackingPolicy_TrackingMode_PERSESSION :: BackendServiceConnectionTrackingPolicy_TrackingMode
 pattern BackendServiceConnectionTrackingPolicy_TrackingMode_PERSESSION = BackendServiceConnectionTrackingPolicy_TrackingMode "PER_SESSION"
 
@@ -9684,20 +9331,21 @@ pattern BackendServiceConnectionTrackingPolicy_TrackingMode_PERSESSION = Backend
   BackendServiceConnectionTrackingPolicy_TrackingMode_INVALIDTRACKINGMODE,
   BackendServiceConnectionTrackingPolicy_TrackingMode_PERCONNECTION,
   BackendServiceConnectionTrackingPolicy_TrackingMode_PERSESSION,
-  BackendServiceConnectionTrackingPolicy_TrackingMode #-}
+  BackendServiceConnectionTrackingPolicy_TrackingMode
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype BackendServiceList_Warning_Code = BackendServiceList_Warning_Code { fromBackendServiceList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendServiceList_Warning_Code = BackendServiceList_Warning_Code {fromBackendServiceList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern BackendServiceList_Warning_Code_CLEANUPFAILED :: BackendServiceList_Warning_Code
@@ -9825,20 +9473,21 @@ pattern BackendServiceList_Warning_Code_Unreachable = BackendServiceList_Warning
   BackendServiceList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   BackendServiceList_Warning_Code_UNDECLAREDPROPERTIES,
   BackendServiceList_Warning_Code_Unreachable,
-  BackendServiceList_Warning_Code #-}
+  BackendServiceList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype BackendServicesScopedList_Warning_Code = BackendServicesScopedList_Warning_Code { fromBackendServicesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BackendServicesScopedList_Warning_Code = BackendServicesScopedList_Warning_Code {fromBackendServicesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern BackendServicesScopedList_Warning_Code_CLEANUPFAILED :: BackendServicesScopedList_Warning_Code
@@ -9966,58 +9615,59 @@ pattern BackendServicesScopedList_Warning_Code_Unreachable = BackendServicesScop
   BackendServicesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   BackendServicesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   BackendServicesScopedList_Warning_Code_Unreachable,
-  BackendServicesScopedList_Warning_Code #-}
+  BackendServicesScopedList_Warning_Code
+  #-}
 
 -- | The diagnostic code specifies the local system\'s reason for the last change in session state. This allows remote systems to determine the reason that the previous session failed, for example. These diagnostic codes are specified in section 4.1 of RFC5880
-newtype BfdPacket_Diagnostic = BfdPacket_Diagnostic { fromBfdPacket_Diagnostic :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BfdPacket_Diagnostic = BfdPacket_Diagnostic {fromBfdPacket_Diagnostic :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_ADMINISTRATIVELYDOWN :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_ADMINISTRATIVELYDOWN = BfdPacket_Diagnostic "ADMINISTRATIVELY_DOWN"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_CONCATENATEDPATHDOWN :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_CONCATENATEDPATHDOWN = BfdPacket_Diagnostic "CONCATENATED_PATH_DOWN"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_CONTROLDETECTIONTIMEEXPIRED :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_CONTROLDETECTIONTIMEEXPIRED = BfdPacket_Diagnostic "CONTROL_DETECTION_TIME_EXPIRED"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_DIAGNOSTICUNSPECIFIED :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_DIAGNOSTICUNSPECIFIED = BfdPacket_Diagnostic "DIAGNOSTIC_UNSPECIFIED"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_ECHOFUNCTIONFAILED :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_ECHOFUNCTIONFAILED = BfdPacket_Diagnostic "ECHO_FUNCTION_FAILED"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_FORWARDINGPLANERESET :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_FORWARDINGPLANERESET = BfdPacket_Diagnostic "FORWARDING_PLANE_RESET"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_NEIGHBORSIGNALEDSESSIONDOWN :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_NEIGHBORSIGNALEDSESSIONDOWN = BfdPacket_Diagnostic "NEIGHBOR_SIGNALED_SESSION_DOWN"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_NODIAGNOSTIC :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_NODIAGNOSTIC = BfdPacket_Diagnostic "NO_DIAGNOSTIC"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_PATHDOWN :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_PATHDOWN = BfdPacket_Diagnostic "PATH_DOWN"
 
--- | 
+-- |
 pattern BfdPacket_Diagnostic_REVERSECONCATENATEDPATHDOWN :: BfdPacket_Diagnostic
 pattern BfdPacket_Diagnostic_REVERSECONCATENATEDPATHDOWN = BfdPacket_Diagnostic "REVERSE_CONCATENATED_PATH_DOWN"
 
@@ -10032,38 +9682,39 @@ pattern BfdPacket_Diagnostic_REVERSECONCATENATEDPATHDOWN = BfdPacket_Diagnostic 
   BfdPacket_Diagnostic_NODIAGNOSTIC,
   BfdPacket_Diagnostic_PATHDOWN,
   BfdPacket_Diagnostic_REVERSECONCATENATEDPATHDOWN,
-  BfdPacket_Diagnostic #-}
+  BfdPacket_Diagnostic
+  #-}
 
 -- | The current BFD session state as seen by the transmitting system. These states are specified in section 4.1 of RFC5880
-newtype BfdPacket_State = BfdPacket_State { fromBfdPacket_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BfdPacket_State = BfdPacket_State {fromBfdPacket_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BfdPacket_State_ADMINDOWN :: BfdPacket_State
 pattern BfdPacket_State_ADMINDOWN = BfdPacket_State "ADMIN_DOWN"
 
--- | 
+-- |
 pattern BfdPacket_State_Down :: BfdPacket_State
 pattern BfdPacket_State_Down = BfdPacket_State "DOWN"
 
--- | 
+-- |
 pattern BfdPacket_State_Init :: BfdPacket_State
 pattern BfdPacket_State_Init = BfdPacket_State "INIT"
 
--- | 
+-- |
 pattern BfdPacket_State_STATEUNSPECIFIED :: BfdPacket_State
 pattern BfdPacket_State_STATEUNSPECIFIED = BfdPacket_State "STATE_UNSPECIFIED"
 
--- | 
+-- |
 pattern BfdPacket_State_UP :: BfdPacket_State
 pattern BfdPacket_State_UP = BfdPacket_State "UP"
 
@@ -10073,30 +9724,31 @@ pattern BfdPacket_State_UP = BfdPacket_State "UP"
   BfdPacket_State_Init,
   BfdPacket_State_STATEUNSPECIFIED,
   BfdPacket_State_UP,
-  BfdPacket_State #-}
+  BfdPacket_State
+  #-}
 
 -- | The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer.
-newtype BfdStatus_BfdSessionInitializationMode = BfdStatus_BfdSessionInitializationMode { fromBfdStatus_BfdSessionInitializationMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BfdStatus_BfdSessionInitializationMode = BfdStatus_BfdSessionInitializationMode {fromBfdStatus_BfdSessionInitializationMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BfdStatus_BfdSessionInitializationMode_Active :: BfdStatus_BfdSessionInitializationMode
 pattern BfdStatus_BfdSessionInitializationMode_Active = BfdStatus_BfdSessionInitializationMode "ACTIVE"
 
--- | 
+-- |
 pattern BfdStatus_BfdSessionInitializationMode_Disabled :: BfdStatus_BfdSessionInitializationMode
 pattern BfdStatus_BfdSessionInitializationMode_Disabled = BfdStatus_BfdSessionInitializationMode "DISABLED"
 
--- | 
+-- |
 pattern BfdStatus_BfdSessionInitializationMode_Passive :: BfdStatus_BfdSessionInitializationMode
 pattern BfdStatus_BfdSessionInitializationMode_Passive = BfdStatus_BfdSessionInitializationMode "PASSIVE"
 
@@ -10104,58 +9756,59 @@ pattern BfdStatus_BfdSessionInitializationMode_Passive = BfdStatus_BfdSessionIni
   BfdStatus_BfdSessionInitializationMode_Active,
   BfdStatus_BfdSessionInitializationMode_Disabled,
   BfdStatus_BfdSessionInitializationMode_Passive,
-  BfdStatus_BfdSessionInitializationMode #-}
+  BfdStatus_BfdSessionInitializationMode
+  #-}
 
 -- | The diagnostic code specifies the local system\'s reason for the last change in session state. This allows remote systems to determine the reason that the previous session failed, for example. These diagnostic codes are specified in section 4.1 of RFC5880
-newtype BfdStatus_LocalDiagnostic = BfdStatus_LocalDiagnostic { fromBfdStatus_LocalDiagnostic :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BfdStatus_LocalDiagnostic = BfdStatus_LocalDiagnostic {fromBfdStatus_LocalDiagnostic :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_ADMINISTRATIVELYDOWN :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_ADMINISTRATIVELYDOWN = BfdStatus_LocalDiagnostic "ADMINISTRATIVELY_DOWN"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_CONCATENATEDPATHDOWN :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_CONCATENATEDPATHDOWN = BfdStatus_LocalDiagnostic "CONCATENATED_PATH_DOWN"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_CONTROLDETECTIONTIMEEXPIRED :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_CONTROLDETECTIONTIMEEXPIRED = BfdStatus_LocalDiagnostic "CONTROL_DETECTION_TIME_EXPIRED"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_DIAGNOSTICUNSPECIFIED :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_DIAGNOSTICUNSPECIFIED = BfdStatus_LocalDiagnostic "DIAGNOSTIC_UNSPECIFIED"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_ECHOFUNCTIONFAILED :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_ECHOFUNCTIONFAILED = BfdStatus_LocalDiagnostic "ECHO_FUNCTION_FAILED"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_FORWARDINGPLANERESET :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_FORWARDINGPLANERESET = BfdStatus_LocalDiagnostic "FORWARDING_PLANE_RESET"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_NEIGHBORSIGNALEDSESSIONDOWN :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_NEIGHBORSIGNALEDSESSIONDOWN = BfdStatus_LocalDiagnostic "NEIGHBOR_SIGNALED_SESSION_DOWN"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_NODIAGNOSTIC :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_NODIAGNOSTIC = BfdStatus_LocalDiagnostic "NO_DIAGNOSTIC"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_PATHDOWN :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_PATHDOWN = BfdStatus_LocalDiagnostic "PATH_DOWN"
 
--- | 
+-- |
 pattern BfdStatus_LocalDiagnostic_REVERSECONCATENATEDPATHDOWN :: BfdStatus_LocalDiagnostic
 pattern BfdStatus_LocalDiagnostic_REVERSECONCATENATEDPATHDOWN = BfdStatus_LocalDiagnostic "REVERSE_CONCATENATED_PATH_DOWN"
 
@@ -10170,38 +9823,39 @@ pattern BfdStatus_LocalDiagnostic_REVERSECONCATENATEDPATHDOWN = BfdStatus_LocalD
   BfdStatus_LocalDiagnostic_NODIAGNOSTIC,
   BfdStatus_LocalDiagnostic_PATHDOWN,
   BfdStatus_LocalDiagnostic_REVERSECONCATENATEDPATHDOWN,
-  BfdStatus_LocalDiagnostic #-}
+  BfdStatus_LocalDiagnostic
+  #-}
 
 -- | The current BFD session state as seen by the transmitting system. These states are specified in section 4.1 of RFC5880
-newtype BfdStatus_LocalState = BfdStatus_LocalState { fromBfdStatus_LocalState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BfdStatus_LocalState = BfdStatus_LocalState {fromBfdStatus_LocalState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern BfdStatus_LocalState_ADMINDOWN :: BfdStatus_LocalState
 pattern BfdStatus_LocalState_ADMINDOWN = BfdStatus_LocalState "ADMIN_DOWN"
 
--- | 
+-- |
 pattern BfdStatus_LocalState_Down :: BfdStatus_LocalState
 pattern BfdStatus_LocalState_Down = BfdStatus_LocalState "DOWN"
 
--- | 
+-- |
 pattern BfdStatus_LocalState_Init :: BfdStatus_LocalState
 pattern BfdStatus_LocalState_Init = BfdStatus_LocalState "INIT"
 
--- | 
+-- |
 pattern BfdStatus_LocalState_STATEUNSPECIFIED :: BfdStatus_LocalState
 pattern BfdStatus_LocalState_STATEUNSPECIFIED = BfdStatus_LocalState "STATE_UNSPECIFIED"
 
--- | 
+-- |
 pattern BfdStatus_LocalState_UP :: BfdStatus_LocalState
 pattern BfdStatus_LocalState_UP = BfdStatus_LocalState "UP"
 
@@ -10211,30 +9865,31 @@ pattern BfdStatus_LocalState_UP = BfdStatus_LocalState "UP"
   BfdStatus_LocalState_Init,
   BfdStatus_LocalState_STATEUNSPECIFIED,
   BfdStatus_LocalState_UP,
-  BfdStatus_LocalState #-}
+  BfdStatus_LocalState
+  #-}
 
 -- | The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
-newtype Commitment_Category = Commitment_Category { fromCommitment_Category :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Commitment_Category = Commitment_Category {fromCommitment_Category :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Commitment_Category_CATEGORYUNSPECIFIED :: Commitment_Category
 pattern Commitment_Category_CATEGORYUNSPECIFIED = Commitment_Category "CATEGORY_UNSPECIFIED"
 
--- | 
+-- |
 pattern Commitment_Category_License :: Commitment_Category
 pattern Commitment_Category_License = Commitment_Category "LICENSE"
 
--- | 
+-- |
 pattern Commitment_Category_Machine :: Commitment_Category
 pattern Commitment_Category_Machine = Commitment_Category "MACHINE"
 
@@ -10242,30 +9897,31 @@ pattern Commitment_Category_Machine = Commitment_Category "MACHINE"
   Commitment_Category_CATEGORYUNSPECIFIED,
   Commitment_Category_License,
   Commitment_Category_Machine,
-  Commitment_Category #-}
+  Commitment_Category
+  #-}
 
 -- | The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE/MONTH (1 year), and THIRTY/SIX_MONTH (3 years).
-newtype Commitment_Plan = Commitment_Plan { fromCommitment_Plan :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Commitment_Plan = Commitment_Plan {fromCommitment_Plan :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Commitment_Plan_Invalid :: Commitment_Plan
 pattern Commitment_Plan_Invalid = Commitment_Plan "INVALID"
 
--- | 
+-- |
 pattern Commitment_Plan_THIRTYSIXMONTH :: Commitment_Plan
 pattern Commitment_Plan_THIRTYSIXMONTH = Commitment_Plan "THIRTY_SIX_MONTH"
 
--- | 
+-- |
 pattern Commitment_Plan_TWELVEMONTH :: Commitment_Plan
 pattern Commitment_Plan_TWELVEMONTH = Commitment_Plan "TWELVE_MONTH"
 
@@ -10273,34 +9929,35 @@ pattern Commitment_Plan_TWELVEMONTH = Commitment_Plan "TWELVE_MONTH"
   Commitment_Plan_Invalid,
   Commitment_Plan_THIRTYSIXMONTH,
   Commitment_Plan_TWELVEMONTH,
-  Commitment_Plan #-}
+  Commitment_Plan
+  #-}
 
 -- | [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT/YET/ACTIVE, ACTIVE, EXPIRED.
-newtype Commitment_Status = Commitment_Status { fromCommitment_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Commitment_Status = Commitment_Status {fromCommitment_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Commitment_Status_Active :: Commitment_Status
 pattern Commitment_Status_Active = Commitment_Status "ACTIVE"
 
--- | 
+-- |
 pattern Commitment_Status_Creating :: Commitment_Status
 pattern Commitment_Status_Creating = Commitment_Status "CREATING"
 
--- | 
+-- |
 pattern Commitment_Status_Expired :: Commitment_Status
 pattern Commitment_Status_Expired = Commitment_Status "EXPIRED"
 
--- | 
+-- |
 pattern Commitment_Status_NOTYETACTIVE :: Commitment_Status
 pattern Commitment_Status_NOTYETACTIVE = Commitment_Status "NOT_YET_ACTIVE"
 
@@ -10309,58 +9966,59 @@ pattern Commitment_Status_NOTYETACTIVE = Commitment_Status "NOT_YET_ACTIVE"
   Commitment_Status_Creating,
   Commitment_Status_Expired,
   Commitment_Status_NOTYETACTIVE,
-  Commitment_Status #-}
+  Commitment_Status
+  #-}
 
 -- | The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY/OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR/OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
-newtype Commitment_Type = Commitment_Type { fromCommitment_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Commitment_Type = Commitment_Type {fromCommitment_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Commitment_Type_ACCELERATOROPTIMIZED :: Commitment_Type
 pattern Commitment_Type_ACCELERATOROPTIMIZED = Commitment_Type "ACCELERATOR_OPTIMIZED"
 
--- | 
+-- |
 pattern Commitment_Type_COMPUTEOPTIMIZED :: Commitment_Type
 pattern Commitment_Type_COMPUTEOPTIMIZED = Commitment_Type "COMPUTE_OPTIMIZED"
 
--- | 
+-- |
 pattern Commitment_Type_COMPUTEOPTIMIZEDC2D :: Commitment_Type
 pattern Commitment_Type_COMPUTEOPTIMIZEDC2D = Commitment_Type "COMPUTE_OPTIMIZED_C2D"
 
--- | 
+-- |
 pattern Commitment_Type_GENERALPURPOSE :: Commitment_Type
 pattern Commitment_Type_GENERALPURPOSE = Commitment_Type "GENERAL_PURPOSE"
 
--- | 
+-- |
 pattern Commitment_Type_GENERAL_PURPOSE_E2 :: Commitment_Type
 pattern Commitment_Type_GENERAL_PURPOSE_E2 = Commitment_Type "GENERAL_PURPOSE_E2"
 
--- | 
+-- |
 pattern Commitment_Type_GENERAL_PURPOSE_N2 :: Commitment_Type
 pattern Commitment_Type_GENERAL_PURPOSE_N2 = Commitment_Type "GENERAL_PURPOSE_N2"
 
--- | 
+-- |
 pattern Commitment_Type_GENERALPURPOSEN2D :: Commitment_Type
 pattern Commitment_Type_GENERALPURPOSEN2D = Commitment_Type "GENERAL_PURPOSE_N2D"
 
--- | 
+-- |
 pattern Commitment_Type_GENERALPURPOSET2D :: Commitment_Type
 pattern Commitment_Type_GENERALPURPOSET2D = Commitment_Type "GENERAL_PURPOSE_T2D"
 
--- | 
+-- |
 pattern Commitment_Type_MEMORYOPTIMIZED :: Commitment_Type
 pattern Commitment_Type_MEMORYOPTIMIZED = Commitment_Type "MEMORY_OPTIMIZED"
 
--- | 
+-- |
 pattern Commitment_Type_TYPEUNSPECIFIED :: Commitment_Type
 pattern Commitment_Type_TYPEUNSPECIFIED = Commitment_Type "TYPE_UNSPECIFIED"
 
@@ -10375,20 +10033,21 @@ pattern Commitment_Type_TYPEUNSPECIFIED = Commitment_Type "TYPE_UNSPECIFIED"
   Commitment_Type_GENERALPURPOSET2D,
   Commitment_Type_MEMORYOPTIMIZED,
   Commitment_Type_TYPEUNSPECIFIED,
-  Commitment_Type #-}
+  Commitment_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype CommitmentAggregatedList_Warning_Code = CommitmentAggregatedList_Warning_Code { fromCommitmentAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CommitmentAggregatedList_Warning_Code = CommitmentAggregatedList_Warning_Code {fromCommitmentAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern CommitmentAggregatedList_Warning_Code_CLEANUPFAILED :: CommitmentAggregatedList_Warning_Code
@@ -10516,20 +10175,21 @@ pattern CommitmentAggregatedList_Warning_Code_Unreachable = CommitmentAggregated
   CommitmentAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   CommitmentAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   CommitmentAggregatedList_Warning_Code_Unreachable,
-  CommitmentAggregatedList_Warning_Code #-}
+  CommitmentAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype CommitmentList_Warning_Code = CommitmentList_Warning_Code { fromCommitmentList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CommitmentList_Warning_Code = CommitmentList_Warning_Code {fromCommitmentList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern CommitmentList_Warning_Code_CLEANUPFAILED :: CommitmentList_Warning_Code
@@ -10657,20 +10317,21 @@ pattern CommitmentList_Warning_Code_Unreachable = CommitmentList_Warning_Code "U
   CommitmentList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   CommitmentList_Warning_Code_UNDECLAREDPROPERTIES,
   CommitmentList_Warning_Code_Unreachable,
-  CommitmentList_Warning_Code #-}
+  CommitmentList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype CommitmentsScopedList_Warning_Code = CommitmentsScopedList_Warning_Code { fromCommitmentsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CommitmentsScopedList_Warning_Code = CommitmentsScopedList_Warning_Code {fromCommitmentsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern CommitmentsScopedList_Warning_Code_CLEANUPFAILED :: CommitmentsScopedList_Warning_Code
@@ -10798,20 +10459,21 @@ pattern CommitmentsScopedList_Warning_Code_Unreachable = CommitmentsScopedList_W
   CommitmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   CommitmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   CommitmentsScopedList_Warning_Code_Unreachable,
-  CommitmentsScopedList_Warning_Code #-}
+  CommitmentsScopedList_Warning_Code
+  #-}
 
 -- | This is deprecated and has no effect. Do not use.
-newtype Condition_Iam = Condition_Iam { fromCondition_Iam :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Condition_Iam = Condition_Iam {fromCondition_Iam :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is deprecated and has no effect. Do not use.
 pattern Condition_Iam_Approver :: Condition_Iam
@@ -10854,20 +10516,21 @@ pattern Condition_Iam_SECURITYREALM = Condition_Iam "SECURITY_REALM"
   Condition_Iam_JUSTIFICATIONTYPE,
   Condition_Iam_NOATTR,
   Condition_Iam_SECURITYREALM,
-  Condition_Iam #-}
+  Condition_Iam
+  #-}
 
 -- | This is deprecated and has no effect. Do not use.
-newtype Condition_Op = Condition_Op { fromCondition_Op :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Condition_Op = Condition_Op {fromCondition_Op :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is deprecated and has no effect. Do not use.
 pattern Condition_Op_Discharged :: Condition_Op
@@ -10900,20 +10563,21 @@ pattern Condition_Op_NOOP = Condition_Op "NO_OP"
   Condition_Op_NOTEQUALS,
   Condition_Op_NOTIN,
   Condition_Op_NOOP,
-  Condition_Op #-}
+  Condition_Op
+  #-}
 
 -- | This is deprecated and has no effect. Do not use.
-newtype Condition_Sys = Condition_Sys { fromCondition_Sys :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Condition_Sys = Condition_Sys {fromCondition_Sys :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is deprecated and has no effect. Do not use.
 pattern Condition_Sys_IP :: Condition_Sys
@@ -10941,34 +10605,35 @@ pattern Condition_Sys_Service = Condition_Sys "SERVICE"
   Condition_Sys_NOATTR,
   Condition_Sys_Region,
   Condition_Sys_Service,
-  Condition_Sys #-}
+  Condition_Sys
+  #-}
 
 -- | The deprecation state of this resource. This can be ACTIVE, DEPRECATED, OBSOLETE, or DELETED. Operations which communicate the end of life date for an image, can use ACTIVE. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.
-newtype DeprecationStatus_State = DeprecationStatus_State { fromDeprecationStatus_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeprecationStatus_State = DeprecationStatus_State {fromDeprecationStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeprecationStatus_State_Active :: DeprecationStatus_State
 pattern DeprecationStatus_State_Active = DeprecationStatus_State "ACTIVE"
 
--- | 
+-- |
 pattern DeprecationStatus_State_Deleted :: DeprecationStatus_State
 pattern DeprecationStatus_State_Deleted = DeprecationStatus_State "DELETED"
 
--- | 
+-- |
 pattern DeprecationStatus_State_Deprecated :: DeprecationStatus_State
 pattern DeprecationStatus_State_Deprecated = DeprecationStatus_State "DEPRECATED"
 
--- | 
+-- |
 pattern DeprecationStatus_State_Obsolete :: DeprecationStatus_State
 pattern DeprecationStatus_State_Obsolete = DeprecationStatus_State "OBSOLETE"
 
@@ -10977,20 +10642,21 @@ pattern DeprecationStatus_State_Obsolete = DeprecationStatus_State "OBSOLETE"
   DeprecationStatus_State_Deleted,
   DeprecationStatus_State_Deprecated,
   DeprecationStatus_State_Obsolete,
-  DeprecationStatus_State #-}
+  DeprecationStatus_State
+  #-}
 
 -- | [Output Only] The status of disk creation. - CREATING: Disk is provisioning. - RESTORING: Source data is being copied into the disk. - FAILED: Disk creation failed. - READY: Disk is ready for use. - DELETING: Disk is deleting.
-newtype Disk_Status = Disk_Status { fromDisk_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Disk_Status = Disk_Status {fromDisk_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Disk is provisioning
 pattern Disk_Status_Creating :: Disk_Status
@@ -11018,20 +10684,21 @@ pattern Disk_Status_Restoring = Disk_Status "RESTORING"
   Disk_Status_Failed,
   Disk_Status_Ready,
   Disk_Status_Restoring,
-  Disk_Status #-}
+  Disk_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype DiskAggregatedList_Warning_Code = DiskAggregatedList_Warning_Code { fromDiskAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DiskAggregatedList_Warning_Code = DiskAggregatedList_Warning_Code {fromDiskAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern DiskAggregatedList_Warning_Code_CLEANUPFAILED :: DiskAggregatedList_Warning_Code
@@ -11159,20 +10826,21 @@ pattern DiskAggregatedList_Warning_Code_Unreachable = DiskAggregatedList_Warning
   DiskAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   DiskAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   DiskAggregatedList_Warning_Code_Unreachable,
-  DiskAggregatedList_Warning_Code #-}
+  DiskAggregatedList_Warning_Code
+  #-}
 
 -- | Specifies whether to include the disk and what image to use. Possible values are: - source-image: to use the same image that was used to create the source instance\'s corresponding disk. Applicable to the boot disk and additional read-write disks. - source-image-family: to use the same image family that was used to create the source instance\'s corresponding disk. Applicable to the boot disk and additional read-write disks. - custom-image: to use a user-provided image url for disk creation. Applicable to the boot disk and additional read-write disks. - attach-read-only: to attach a read-only disk. Applicable to read-only disks. - do-not-include: to exclude a disk from the template. Applicable to additional read-write disks, local SSDs, and read-only disks.
-newtype DiskInstantiationConfig_InstantiateFrom = DiskInstantiationConfig_InstantiateFrom { fromDiskInstantiationConfig_InstantiateFrom :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DiskInstantiationConfig_InstantiateFrom = DiskInstantiationConfig_InstantiateFrom {fromDiskInstantiationConfig_InstantiateFrom :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Attach the existing disk in read-only mode. The request will fail if the disk was attached in read-write mode on the source instance. Applicable to: read-only disks.
 pattern DiskInstantiationConfig_InstantiateFrom_ATTACHREADONLY :: DiskInstantiationConfig_InstantiateFrom
@@ -11210,20 +10878,21 @@ pattern DiskInstantiationConfig_InstantiateFrom_SOURCEIMAGEFAMILY = DiskInstanti
   DiskInstantiationConfig_InstantiateFrom_DONOTINCLUDE,
   DiskInstantiationConfig_InstantiateFrom_SOURCEIMAGE,
   DiskInstantiationConfig_InstantiateFrom_SOURCEIMAGEFAMILY,
-  DiskInstantiationConfig_InstantiateFrom #-}
+  DiskInstantiationConfig_InstantiateFrom
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype DiskList_Warning_Code = DiskList_Warning_Code { fromDiskList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DiskList_Warning_Code = DiskList_Warning_Code {fromDiskList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern DiskList_Warning_Code_CLEANUPFAILED :: DiskList_Warning_Code
@@ -11351,20 +11020,21 @@ pattern DiskList_Warning_Code_Unreachable = DiskList_Warning_Code "UNREACHABLE"
   DiskList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   DiskList_Warning_Code_UNDECLAREDPROPERTIES,
   DiskList_Warning_Code_Unreachable,
-  DiskList_Warning_Code #-}
+  DiskList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype DiskTypeAggregatedList_Warning_Code = DiskTypeAggregatedList_Warning_Code { fromDiskTypeAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DiskTypeAggregatedList_Warning_Code = DiskTypeAggregatedList_Warning_Code {fromDiskTypeAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern DiskTypeAggregatedList_Warning_Code_CLEANUPFAILED :: DiskTypeAggregatedList_Warning_Code
@@ -11492,20 +11162,21 @@ pattern DiskTypeAggregatedList_Warning_Code_Unreachable = DiskTypeAggregatedList
   DiskTypeAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   DiskTypeAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   DiskTypeAggregatedList_Warning_Code_Unreachable,
-  DiskTypeAggregatedList_Warning_Code #-}
+  DiskTypeAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype DiskTypeList_Warning_Code = DiskTypeList_Warning_Code { fromDiskTypeList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DiskTypeList_Warning_Code = DiskTypeList_Warning_Code {fromDiskTypeList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern DiskTypeList_Warning_Code_CLEANUPFAILED :: DiskTypeList_Warning_Code
@@ -11633,20 +11304,21 @@ pattern DiskTypeList_Warning_Code_Unreachable = DiskTypeList_Warning_Code "UNREA
   DiskTypeList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   DiskTypeList_Warning_Code_UNDECLAREDPROPERTIES,
   DiskTypeList_Warning_Code_Unreachable,
-  DiskTypeList_Warning_Code #-}
+  DiskTypeList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype DiskTypesScopedList_Warning_Code = DiskTypesScopedList_Warning_Code { fromDiskTypesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DiskTypesScopedList_Warning_Code = DiskTypesScopedList_Warning_Code {fromDiskTypesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern DiskTypesScopedList_Warning_Code_CLEANUPFAILED :: DiskTypesScopedList_Warning_Code
@@ -11774,20 +11446,21 @@ pattern DiskTypesScopedList_Warning_Code_Unreachable = DiskTypesScopedList_Warni
   DiskTypesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   DiskTypesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   DiskTypesScopedList_Warning_Code_Unreachable,
-  DiskTypesScopedList_Warning_Code #-}
+  DiskTypesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype DisksScopedList_Warning_Code = DisksScopedList_Warning_Code { fromDisksScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DisksScopedList_Warning_Code = DisksScopedList_Warning_Code {fromDisksScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern DisksScopedList_Warning_Code_CLEANUPFAILED :: DisksScopedList_Warning_Code
@@ -11915,20 +11588,21 @@ pattern DisksScopedList_Warning_Code_Unreachable = DisksScopedList_Warning_Code 
   DisksScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   DisksScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   DisksScopedList_Warning_Code_Unreachable,
-  DisksScopedList_Warning_Code #-}
+  DisksScopedList_Warning_Code
+  #-}
 
 -- | The distribution shape to which the group converges either proactively or on resize events (depending on the value set in updatePolicy.instanceRedistributionType).
-newtype DistributionPolicy_TargetShape = DistributionPolicy_TargetShape { fromDistributionPolicy_TargetShape :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DistributionPolicy_TargetShape = DistributionPolicy_TargetShape {fromDistributionPolicy_TargetShape :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The group picks zones for creating VM instances to fulfill the requested number of VMs within present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads that do not require high availability.
 pattern DistributionPolicy_TargetShape_Any :: DistributionPolicy_TargetShape
@@ -11946,20 +11620,21 @@ pattern DistributionPolicy_TargetShape_Even = DistributionPolicy_TargetShape "EV
   DistributionPolicy_TargetShape_Any,
   DistributionPolicy_TargetShape_Balanced,
   DistributionPolicy_TargetShape_Even,
-  DistributionPolicy_TargetShape #-}
+  DistributionPolicy_TargetShape
+  #-}
 
 -- | The type of the peering route.
-newtype ExchangedPeeringRoute_Type = ExchangedPeeringRoute_Type { fromExchangedPeeringRoute_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExchangedPeeringRoute_Type = ExchangedPeeringRoute_Type {fromExchangedPeeringRoute_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | For routes exported from local network.
 pattern ExchangedPeeringRoute_Type_DYNAMICPEERINGROUTE :: ExchangedPeeringRoute_Type
@@ -11977,20 +11652,21 @@ pattern ExchangedPeeringRoute_Type_SUBNETPEERINGROUTE = ExchangedPeeringRoute_Ty
   ExchangedPeeringRoute_Type_DYNAMICPEERINGROUTE,
   ExchangedPeeringRoute_Type_STATICPEERINGROUTE,
   ExchangedPeeringRoute_Type_SUBNETPEERINGROUTE,
-  ExchangedPeeringRoute_Type #-}
+  ExchangedPeeringRoute_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ExchangedPeeringRoutesList_Warning_Code = ExchangedPeeringRoutesList_Warning_Code { fromExchangedPeeringRoutesList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExchangedPeeringRoutesList_Warning_Code = ExchangedPeeringRoutesList_Warning_Code {fromExchangedPeeringRoutesList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ExchangedPeeringRoutesList_Warning_Code_CLEANUPFAILED :: ExchangedPeeringRoutesList_Warning_Code
@@ -12118,20 +11794,21 @@ pattern ExchangedPeeringRoutesList_Warning_Code_Unreachable = ExchangedPeeringRo
   ExchangedPeeringRoutesList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ExchangedPeeringRoutesList_Warning_Code_UNDECLAREDPROPERTIES,
   ExchangedPeeringRoutesList_Warning_Code_Unreachable,
-  ExchangedPeeringRoutesList_Warning_Code #-}
+  ExchangedPeeringRoutesList_Warning_Code
+  #-}
 
 -- | Indicates the user-supplied redundancy type of this external VPN gateway.
-newtype ExternalVpnGateway_RedundancyType = ExternalVpnGateway_RedundancyType { fromExternalVpnGateway_RedundancyType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExternalVpnGateway_RedundancyType = ExternalVpnGateway_RedundancyType {fromExternalVpnGateway_RedundancyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The external VPN gateway has four public IP addresses; at the time of writing this API, the AWS virtual private gateway is an example which has four public IP addresses for high availability connections; there should be two VPN connections in the AWS virtual private gateway , each AWS VPN connection has two public IP addresses; please make sure to put two public IP addresses from one AWS VPN connection into interfaces 0 and 1 of this external VPN gateway, and put the other two public IP addresses from another AWS VPN connection into interfaces 2 and 3 of this external VPN gateway. When displaying highly available configuration status for the VPN tunnels connected to FOUR/IPS/REDUNDANCY external VPN gateway, Google will always detect whether interfaces 0 and 1 are connected on one interface of HA Cloud VPN gateway, and detect whether interfaces 2 and 3 are connected to another interface of the HA Cloud VPN gateway.
 pattern ExternalVpnGateway_RedundancyType_FOURIPSREDUNDANCY :: ExternalVpnGateway_RedundancyType
@@ -12149,20 +11826,21 @@ pattern ExternalVpnGateway_RedundancyType_TWOIPSREDUNDANCY = ExternalVpnGateway_
   ExternalVpnGateway_RedundancyType_FOURIPSREDUNDANCY,
   ExternalVpnGateway_RedundancyType_SINGLEIPINTERNALLYREDUNDANT,
   ExternalVpnGateway_RedundancyType_TWOIPSREDUNDANCY,
-  ExternalVpnGateway_RedundancyType #-}
+  ExternalVpnGateway_RedundancyType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ExternalVpnGatewayList_Warning_Code = ExternalVpnGatewayList_Warning_Code { fromExternalVpnGatewayList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExternalVpnGatewayList_Warning_Code = ExternalVpnGatewayList_Warning_Code {fromExternalVpnGatewayList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ExternalVpnGatewayList_Warning_Code_CLEANUPFAILED :: ExternalVpnGatewayList_Warning_Code
@@ -12290,30 +11968,31 @@ pattern ExternalVpnGatewayList_Warning_Code_Unreachable = ExternalVpnGatewayList
   ExternalVpnGatewayList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ExternalVpnGatewayList_Warning_Code_UNDECLAREDPROPERTIES,
   ExternalVpnGatewayList_Warning_Code_Unreachable,
-  ExternalVpnGatewayList_Warning_Code #-}
+  ExternalVpnGatewayList_Warning_Code
+  #-}
 
 -- | The file type of source file.
-newtype FileContentBuffer_FileType = FileContentBuffer_FileType { fromFileContentBuffer_FileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FileContentBuffer_FileType = FileContentBuffer_FileType {fromFileContentBuffer_FileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern FileContentBuffer_FileType_Bin :: FileContentBuffer_FileType
 pattern FileContentBuffer_FileType_Bin = FileContentBuffer_FileType "BIN"
 
--- | 
+-- |
 pattern FileContentBuffer_FileType_Undefined :: FileContentBuffer_FileType
 pattern FileContentBuffer_FileType_Undefined = FileContentBuffer_FileType "UNDEFINED"
 
--- | 
+-- |
 pattern FileContentBuffer_FileType_X509 :: FileContentBuffer_FileType
 pattern FileContentBuffer_FileType_X509 = FileContentBuffer_FileType "X509"
 
@@ -12321,20 +12000,21 @@ pattern FileContentBuffer_FileType_X509 = FileContentBuffer_FileType "X509"
   FileContentBuffer_FileType_Bin,
   FileContentBuffer_FileType_Undefined,
   FileContentBuffer_FileType_X509,
-  FileContentBuffer_FileType #-}
+  FileContentBuffer_FileType
+  #-}
 
 -- | Direction of traffic to which this firewall applies, either @INGRESS@ or @EGRESS@. The default is @INGRESS@. For @INGRESS@ traffic, you cannot specify the destinationRanges field, and for @EGRESS@ traffic, you cannot specify the sourceRanges or sourceTags fields.
-newtype Firewall_Direction = Firewall_Direction { fromFirewall_Direction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Firewall_Direction = Firewall_Direction {fromFirewall_Direction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Indicates that firewall should apply to outgoing traffic.
 pattern Firewall_Direction_Egress :: Firewall_Direction
@@ -12347,20 +12027,21 @@ pattern Firewall_Direction_Ingress = Firewall_Direction "INGRESS"
 {-# COMPLETE
   Firewall_Direction_Egress,
   Firewall_Direction_Ingress,
-  Firewall_Direction #-}
+  Firewall_Direction
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype FirewallList_Warning_Code = FirewallList_Warning_Code { fromFirewallList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FirewallList_Warning_Code = FirewallList_Warning_Code {fromFirewallList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern FirewallList_Warning_Code_CLEANUPFAILED :: FirewallList_Warning_Code
@@ -12488,46 +12169,48 @@ pattern FirewallList_Warning_Code_Unreachable = FirewallList_Warning_Code "UNREA
   FirewallList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   FirewallList_Warning_Code_UNDECLAREDPROPERTIES,
   FirewallList_Warning_Code_Unreachable,
-  FirewallList_Warning_Code #-}
+  FirewallList_Warning_Code
+  #-}
 
 -- | This field can only be specified for a particular firewall rule if logging is enabled for that rule. This field denotes whether to include or exclude metadata for firewall logs.
-newtype FirewallLogConfig_Metadata = FirewallLogConfig_Metadata { fromFirewallLogConfig_Metadata :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FirewallLogConfig_Metadata = FirewallLogConfig_Metadata {fromFirewallLogConfig_Metadata :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern FirewallLogConfig_Metadata_EXCLUDEALLMETADATA :: FirewallLogConfig_Metadata
 pattern FirewallLogConfig_Metadata_EXCLUDEALLMETADATA = FirewallLogConfig_Metadata "EXCLUDE_ALL_METADATA"
 
--- | 
+-- |
 pattern FirewallLogConfig_Metadata_INCLUDEALLMETADATA :: FirewallLogConfig_Metadata
 pattern FirewallLogConfig_Metadata_INCLUDEALLMETADATA = FirewallLogConfig_Metadata "INCLUDE_ALL_METADATA"
 
 {-# COMPLETE
   FirewallLogConfig_Metadata_EXCLUDEALLMETADATA,
   FirewallLogConfig_Metadata_INCLUDEALLMETADATA,
-  FirewallLogConfig_Metadata #-}
+  FirewallLogConfig_Metadata
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype FirewallPolicyList_Warning_Code = FirewallPolicyList_Warning_Code { fromFirewallPolicyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FirewallPolicyList_Warning_Code = FirewallPolicyList_Warning_Code {fromFirewallPolicyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern FirewallPolicyList_Warning_Code_CLEANUPFAILED :: FirewallPolicyList_Warning_Code
@@ -12655,98 +12338,101 @@ pattern FirewallPolicyList_Warning_Code_Unreachable = FirewallPolicyList_Warning
   FirewallPolicyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   FirewallPolicyList_Warning_Code_UNDECLAREDPROPERTIES,
   FirewallPolicyList_Warning_Code_Unreachable,
-  FirewallPolicyList_Warning_Code #-}
+  FirewallPolicyList_Warning_Code
+  #-}
 
 -- | The direction in which this rule applies.
-newtype FirewallPolicyRule_Direction = FirewallPolicyRule_Direction { fromFirewallPolicyRule_Direction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FirewallPolicyRule_Direction = FirewallPolicyRule_Direction {fromFirewallPolicyRule_Direction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern FirewallPolicyRule_Direction_Egress :: FirewallPolicyRule_Direction
 pattern FirewallPolicyRule_Direction_Egress = FirewallPolicyRule_Direction "EGRESS"
 
--- | 
+-- |
 pattern FirewallPolicyRule_Direction_Ingress :: FirewallPolicyRule_Direction
 pattern FirewallPolicyRule_Direction_Ingress = FirewallPolicyRule_Direction "INGRESS"
 
 {-# COMPLETE
   FirewallPolicyRule_Direction_Egress,
   FirewallPolicyRule_Direction_Ingress,
-  FirewallPolicyRule_Direction #-}
+  FirewallPolicyRule_Direction
+  #-}
 
 -- | [Output Only] State of the secure tag, either @EFFECTIVE@ or @INEFFECTIVE@. A secure tag is @INEFFECTIVE@ when it is deleted or its network is deleted.
-newtype FirewallPolicyRuleSecureTag_State = FirewallPolicyRuleSecureTag_State { fromFirewallPolicyRuleSecureTag_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FirewallPolicyRuleSecureTag_State = FirewallPolicyRuleSecureTag_State {fromFirewallPolicyRuleSecureTag_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern FirewallPolicyRuleSecureTag_State_Effective :: FirewallPolicyRuleSecureTag_State
 pattern FirewallPolicyRuleSecureTag_State_Effective = FirewallPolicyRuleSecureTag_State "EFFECTIVE"
 
--- | 
+-- |
 pattern FirewallPolicyRuleSecureTag_State_Ineffective :: FirewallPolicyRuleSecureTag_State
 pattern FirewallPolicyRuleSecureTag_State_Ineffective = FirewallPolicyRuleSecureTag_State "INEFFECTIVE"
 
 {-# COMPLETE
   FirewallPolicyRuleSecureTag_State_Effective,
   FirewallPolicyRuleSecureTag_State_Ineffective,
-  FirewallPolicyRuleSecureTag_State #-}
+  FirewallPolicyRuleSecureTag_State
+  #-}
 
 -- | The IP protocol to which this rule applies. For protocol forwarding, valid options are TCP, UDP, ESP, AH, SCTP, ICMP and L3_DEFAULT. The valid IP protocols are different for different load balancing products as described in <https://cloud.google.com/load-balancing/docs/features#protocols_from_the_load_balancer_to_the_backends Load balancing features>.
-newtype ForwardingRule_IPProtocol = ForwardingRule_IPProtocol { fromForwardingRule_IPProtocol :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRule_IPProtocol = ForwardingRule_IPProtocol {fromForwardingRule_IPProtocol :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ForwardingRule_IPProtocol_AH :: ForwardingRule_IPProtocol
 pattern ForwardingRule_IPProtocol_AH = ForwardingRule_IPProtocol "AH"
 
--- | 
+-- |
 pattern ForwardingRule_IPProtocol_Esp :: ForwardingRule_IPProtocol
 pattern ForwardingRule_IPProtocol_Esp = ForwardingRule_IPProtocol "ESP"
 
--- | 
+-- |
 pattern ForwardingRule_IPProtocol_Icmp :: ForwardingRule_IPProtocol
 pattern ForwardingRule_IPProtocol_Icmp = ForwardingRule_IPProtocol "ICMP"
 
--- | 
+-- |
 pattern ForwardingRule_IPProtocol_L3DEFAULT :: ForwardingRule_IPProtocol
 pattern ForwardingRule_IPProtocol_L3DEFAULT = ForwardingRule_IPProtocol "L3_DEFAULT"
 
--- | 
+-- |
 pattern ForwardingRule_IPProtocol_Sctp :: ForwardingRule_IPProtocol
 pattern ForwardingRule_IPProtocol_Sctp = ForwardingRule_IPProtocol "SCTP"
 
--- | 
+-- |
 pattern ForwardingRule_IPProtocol_Tcp :: ForwardingRule_IPProtocol
 pattern ForwardingRule_IPProtocol_Tcp = ForwardingRule_IPProtocol "TCP"
 
--- | 
+-- |
 pattern ForwardingRule_IPProtocol_Udp :: ForwardingRule_IPProtocol
 pattern ForwardingRule_IPProtocol_Udp = ForwardingRule_IPProtocol "UDP"
 
@@ -12758,30 +12444,31 @@ pattern ForwardingRule_IPProtocol_Udp = ForwardingRule_IPProtocol "UDP"
   ForwardingRule_IPProtocol_Sctp,
   ForwardingRule_IPProtocol_Tcp,
   ForwardingRule_IPProtocol_Udp,
-  ForwardingRule_IPProtocol #-}
+  ForwardingRule_IPProtocol
+  #-}
 
 -- | The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for an external global forwarding rule.
-newtype ForwardingRule_IpVersion = ForwardingRule_IpVersion { fromForwardingRule_IpVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRule_IpVersion = ForwardingRule_IpVersion {fromForwardingRule_IpVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ForwardingRule_IpVersion_IPV4 :: ForwardingRule_IpVersion
 pattern ForwardingRule_IpVersion_IPV4 = ForwardingRule_IpVersion "IPV4"
 
--- | 
+-- |
 pattern ForwardingRule_IpVersion_IPV6 :: ForwardingRule_IpVersion
 pattern ForwardingRule_IpVersion_IPV6 = ForwardingRule_IpVersion "IPV6"
 
--- | 
+-- |
 pattern ForwardingRule_IpVersion_UNSPECIFIEDVERSION :: ForwardingRule_IpVersion
 pattern ForwardingRule_IpVersion_UNSPECIFIEDVERSION = ForwardingRule_IpVersion "UNSPECIFIED_VERSION"
 
@@ -12789,42 +12476,43 @@ pattern ForwardingRule_IpVersion_UNSPECIFIEDVERSION = ForwardingRule_IpVersion "
   ForwardingRule_IpVersion_IPV4,
   ForwardingRule_IpVersion_IPV6,
   ForwardingRule_IpVersion_UNSPECIFIEDVERSION,
-  ForwardingRule_IpVersion #-}
+  ForwardingRule_IpVersion
+  #-}
 
 -- | Specifies the forwarding rule type. For more information about forwarding rules, refer to Forwarding rule concepts.
-newtype ForwardingRule_LoadBalancingScheme = ForwardingRule_LoadBalancingScheme { fromForwardingRule_LoadBalancingScheme :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRule_LoadBalancingScheme = ForwardingRule_LoadBalancingScheme {fromForwardingRule_LoadBalancingScheme :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ForwardingRule_LoadBalancingScheme_External :: ForwardingRule_LoadBalancingScheme
 pattern ForwardingRule_LoadBalancingScheme_External = ForwardingRule_LoadBalancingScheme "EXTERNAL"
 
--- | 
+-- |
 pattern ForwardingRule_LoadBalancingScheme_EXTERNALMANAGED :: ForwardingRule_LoadBalancingScheme
 pattern ForwardingRule_LoadBalancingScheme_EXTERNALMANAGED = ForwardingRule_LoadBalancingScheme "EXTERNAL_MANAGED"
 
--- | 
+-- |
 pattern ForwardingRule_LoadBalancingScheme_Internal :: ForwardingRule_LoadBalancingScheme
 pattern ForwardingRule_LoadBalancingScheme_Internal = ForwardingRule_LoadBalancingScheme "INTERNAL"
 
--- | 
+-- |
 pattern ForwardingRule_LoadBalancingScheme_INTERNALMANAGED :: ForwardingRule_LoadBalancingScheme
 pattern ForwardingRule_LoadBalancingScheme_INTERNALMANAGED = ForwardingRule_LoadBalancingScheme "INTERNAL_MANAGED"
 
--- | 
+-- |
 pattern ForwardingRule_LoadBalancingScheme_INTERNALSELFMANAGED :: ForwardingRule_LoadBalancingScheme
 pattern ForwardingRule_LoadBalancingScheme_INTERNALSELFMANAGED = ForwardingRule_LoadBalancingScheme "INTERNAL_SELF_MANAGED"
 
--- | 
+-- |
 pattern ForwardingRule_LoadBalancingScheme_Invalid :: ForwardingRule_LoadBalancingScheme
 pattern ForwardingRule_LoadBalancingScheme_Invalid = ForwardingRule_LoadBalancingScheme "INVALID"
 
@@ -12835,20 +12523,21 @@ pattern ForwardingRule_LoadBalancingScheme_Invalid = ForwardingRule_LoadBalancin
   ForwardingRule_LoadBalancingScheme_INTERNALMANAGED,
   ForwardingRule_LoadBalancingScheme_INTERNALSELFMANAGED,
   ForwardingRule_LoadBalancingScheme_Invalid,
-  ForwardingRule_LoadBalancingScheme #-}
+  ForwardingRule_LoadBalancingScheme
+  #-}
 
 -- | This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM, STANDARD. For regional ForwardingRule, the valid values are PREMIUM and STANDARD. For GlobalForwardingRule, the valid value is PREMIUM. If this field is not specified, it is assumed to be PREMIUM. If IPAddress is specified, this value must be equal to the networkTier of the Address.
-newtype ForwardingRule_NetworkTier = ForwardingRule_NetworkTier { fromForwardingRule_NetworkTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRule_NetworkTier = ForwardingRule_NetworkTier {fromForwardingRule_NetworkTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Public internet quality with fixed bandwidth.
 pattern ForwardingRule_NetworkTier_FIXEDSTANDARD :: ForwardingRule_NetworkTier
@@ -12871,19 +12560,20 @@ pattern ForwardingRule_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD = ForwardingRu
   ForwardingRule_NetworkTier_Premium,
   ForwardingRule_NetworkTier_Standard,
   ForwardingRule_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
-  ForwardingRule_NetworkTier #-}
+  ForwardingRule_NetworkTier
+  #-}
 
-newtype ForwardingRule_PscConnectionStatus = ForwardingRule_PscConnectionStatus { fromForwardingRule_PscConnectionStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRule_PscConnectionStatus = ForwardingRule_PscConnectionStatus {fromForwardingRule_PscConnectionStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The connection has been accepted by the producer.
 pattern ForwardingRule_PscConnectionStatus_Accepted :: ForwardingRule_PscConnectionStatus
@@ -12901,7 +12591,7 @@ pattern ForwardingRule_PscConnectionStatus_Pending = ForwardingRule_PscConnectio
 pattern ForwardingRule_PscConnectionStatus_Rejected :: ForwardingRule_PscConnectionStatus
 pattern ForwardingRule_PscConnectionStatus_Rejected = ForwardingRule_PscConnectionStatus "REJECTED"
 
--- | 
+-- |
 pattern ForwardingRule_PscConnectionStatus_STATUSUNSPECIFIED :: ForwardingRule_PscConnectionStatus
 pattern ForwardingRule_PscConnectionStatus_STATUSUNSPECIFIED = ForwardingRule_PscConnectionStatus "STATUS_UNSPECIFIED"
 
@@ -12911,20 +12601,21 @@ pattern ForwardingRule_PscConnectionStatus_STATUSUNSPECIFIED = ForwardingRule_Ps
   ForwardingRule_PscConnectionStatus_Pending,
   ForwardingRule_PscConnectionStatus_Rejected,
   ForwardingRule_PscConnectionStatus_STATUSUNSPECIFIED,
-  ForwardingRule_PscConnectionStatus #-}
+  ForwardingRule_PscConnectionStatus
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ForwardingRuleAggregatedList_Warning_Code = ForwardingRuleAggregatedList_Warning_Code { fromForwardingRuleAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRuleAggregatedList_Warning_Code = ForwardingRuleAggregatedList_Warning_Code {fromForwardingRuleAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ForwardingRuleAggregatedList_Warning_Code_CLEANUPFAILED :: ForwardingRuleAggregatedList_Warning_Code
@@ -13052,20 +12743,21 @@ pattern ForwardingRuleAggregatedList_Warning_Code_Unreachable = ForwardingRuleAg
   ForwardingRuleAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ForwardingRuleAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   ForwardingRuleAggregatedList_Warning_Code_Unreachable,
-  ForwardingRuleAggregatedList_Warning_Code #-}
+  ForwardingRuleAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ForwardingRuleList_Warning_Code = ForwardingRuleList_Warning_Code { fromForwardingRuleList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRuleList_Warning_Code = ForwardingRuleList_Warning_Code {fromForwardingRuleList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ForwardingRuleList_Warning_Code_CLEANUPFAILED :: ForwardingRuleList_Warning_Code
@@ -13193,20 +12885,21 @@ pattern ForwardingRuleList_Warning_Code_Unreachable = ForwardingRuleList_Warning
   ForwardingRuleList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ForwardingRuleList_Warning_Code_UNDECLAREDPROPERTIES,
   ForwardingRuleList_Warning_Code_Unreachable,
-  ForwardingRuleList_Warning_Code #-}
+  ForwardingRuleList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ForwardingRulesScopedList_Warning_Code = ForwardingRulesScopedList_Warning_Code { fromForwardingRulesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForwardingRulesScopedList_Warning_Code = ForwardingRulesScopedList_Warning_Code {fromForwardingRulesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ForwardingRulesScopedList_Warning_Code_CLEANUPFAILED :: ForwardingRulesScopedList_Warning_Code
@@ -13334,20 +13027,21 @@ pattern ForwardingRulesScopedList_Warning_Code_Unreachable = ForwardingRulesScop
   ForwardingRulesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ForwardingRulesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   ForwardingRulesScopedList_Warning_Code_Unreachable,
-  ForwardingRulesScopedList_Warning_Code #-}
+  ForwardingRulesScopedList_Warning_Code
+  #-}
 
 -- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, gRPC health check follows behavior specified in port and portName fields.
-newtype GRPCHealthCheck_PortSpecification = GRPCHealthCheck_PortSpecification { fromGRPCHealthCheck_PortSpecification :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GRPCHealthCheck_PortSpecification = GRPCHealthCheck_PortSpecification {fromGRPCHealthCheck_PortSpecification :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The port number in port is used for health checking.
 pattern GRPCHealthCheck_PortSpecification_USEFIXEDPORT :: GRPCHealthCheck_PortSpecification
@@ -13365,50 +13059,51 @@ pattern GRPCHealthCheck_PortSpecification_USESERVINGPORT = GRPCHealthCheck_PortS
   GRPCHealthCheck_PortSpecification_USEFIXEDPORT,
   GRPCHealthCheck_PortSpecification_USENAMEDPORT,
   GRPCHealthCheck_PortSpecification_USESERVINGPORT,
-  GRPCHealthCheck_PortSpecification #-}
+  GRPCHealthCheck_PortSpecification
+  #-}
 
 -- | The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO/SCSI/MULTIQUEUE - WINDOWS - MULTI/IP/SUBNET - UEFI/COMPATIBLE - SECURE/BOOT - GVNIC - SEV/CAPABLE - SUSPEND/RESUME/COMPATIBLE - SEV/SNP_CAPABLE For more information, see Enabling guest operating system features.
-newtype GuestOsFeature_Type = GuestOsFeature_Type { fromGuestOsFeature_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GuestOsFeature_Type = GuestOsFeature_Type {fromGuestOsFeature_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern GuestOsFeature_Type_FEATURETYPEUNSPECIFIED :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_FEATURETYPEUNSPECIFIED = GuestOsFeature_Type "FEATURE_TYPE_UNSPECIFIED"
 
--- | 
+-- |
 pattern GuestOsFeature_Type_Gvnic :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_Gvnic = GuestOsFeature_Type "GVNIC"
 
--- | 
+-- |
 pattern GuestOsFeature_Type_MULTIIPSUBNET :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_MULTIIPSUBNET = GuestOsFeature_Type "MULTI_IP_SUBNET"
 
--- | 
+-- |
 pattern GuestOsFeature_Type_SECUREBOOT :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_SECUREBOOT = GuestOsFeature_Type "SECURE_BOOT"
 
--- | 
+-- |
 pattern GuestOsFeature_Type_SEVCAPABLE :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_SEVCAPABLE = GuestOsFeature_Type "SEV_CAPABLE"
 
--- | 
+-- |
 pattern GuestOsFeature_Type_UEFICOMPATIBLE :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_UEFICOMPATIBLE = GuestOsFeature_Type "UEFI_COMPATIBLE"
 
--- | 
+-- |
 pattern GuestOsFeature_Type_VIRTIOSCSIMULTIQUEUE :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_VIRTIOSCSIMULTIQUEUE = GuestOsFeature_Type "VIRTIO_SCSI_MULTIQUEUE"
 
--- | 
+-- |
 pattern GuestOsFeature_Type_Windows :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_Windows = GuestOsFeature_Type "WINDOWS"
 
@@ -13421,20 +13116,21 @@ pattern GuestOsFeature_Type_Windows = GuestOsFeature_Type "WINDOWS"
   GuestOsFeature_Type_UEFICOMPATIBLE,
   GuestOsFeature_Type_VIRTIOSCSIMULTIQUEUE,
   GuestOsFeature_Type_Windows,
-  GuestOsFeature_Type #-}
+  GuestOsFeature_Type
+  #-}
 
 -- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP2 health check follows behavior specified in port and portName fields.
-newtype HTTP2HealthCheck_PortSpecification = HTTP2HealthCheck_PortSpecification { fromHTTP2HealthCheck_PortSpecification :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HTTP2HealthCheck_PortSpecification = HTTP2HealthCheck_PortSpecification {fromHTTP2HealthCheck_PortSpecification :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The port number in port is used for health checking.
 pattern HTTP2HealthCheck_PortSpecification_USEFIXEDPORT :: HTTP2HealthCheck_PortSpecification
@@ -13452,46 +13148,48 @@ pattern HTTP2HealthCheck_PortSpecification_USESERVINGPORT = HTTP2HealthCheck_Por
   HTTP2HealthCheck_PortSpecification_USEFIXEDPORT,
   HTTP2HealthCheck_PortSpecification_USENAMEDPORT,
   HTTP2HealthCheck_PortSpecification_USESERVINGPORT,
-  HTTP2HealthCheck_PortSpecification #-}
+  HTTP2HealthCheck_PortSpecification
+  #-}
 
 -- | Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
-newtype HTTP2HealthCheck_ProxyHeader = HTTP2HealthCheck_ProxyHeader { fromHTTP2HealthCheck_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HTTP2HealthCheck_ProxyHeader = HTTP2HealthCheck_ProxyHeader {fromHTTP2HealthCheck_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern HTTP2HealthCheck_ProxyHeader_None :: HTTP2HealthCheck_ProxyHeader
 pattern HTTP2HealthCheck_ProxyHeader_None = HTTP2HealthCheck_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern HTTP2HealthCheck_ProxyHeader_PROXY_V1 :: HTTP2HealthCheck_ProxyHeader
 pattern HTTP2HealthCheck_ProxyHeader_PROXY_V1 = HTTP2HealthCheck_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   HTTP2HealthCheck_ProxyHeader_None,
   HTTP2HealthCheck_ProxyHeader_PROXY_V1,
-  HTTP2HealthCheck_ProxyHeader #-}
+  HTTP2HealthCheck_ProxyHeader
+  #-}
 
 -- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP health check follows behavior specified in port and portName fields.
-newtype HTTPHealthCheck_PortSpecification = HTTPHealthCheck_PortSpecification { fromHTTPHealthCheck_PortSpecification :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HTTPHealthCheck_PortSpecification = HTTPHealthCheck_PortSpecification {fromHTTPHealthCheck_PortSpecification :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The port number in port is used for health checking.
 pattern HTTPHealthCheck_PortSpecification_USEFIXEDPORT :: HTTPHealthCheck_PortSpecification
@@ -13509,46 +13207,48 @@ pattern HTTPHealthCheck_PortSpecification_USESERVINGPORT = HTTPHealthCheck_PortS
   HTTPHealthCheck_PortSpecification_USEFIXEDPORT,
   HTTPHealthCheck_PortSpecification_USENAMEDPORT,
   HTTPHealthCheck_PortSpecification_USESERVINGPORT,
-  HTTPHealthCheck_PortSpecification #-}
+  HTTPHealthCheck_PortSpecification
+  #-}
 
 -- | Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
-newtype HTTPHealthCheck_ProxyHeader = HTTPHealthCheck_ProxyHeader { fromHTTPHealthCheck_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HTTPHealthCheck_ProxyHeader = HTTPHealthCheck_ProxyHeader {fromHTTPHealthCheck_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern HTTPHealthCheck_ProxyHeader_None :: HTTPHealthCheck_ProxyHeader
 pattern HTTPHealthCheck_ProxyHeader_None = HTTPHealthCheck_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern HTTPHealthCheck_ProxyHeader_PROXY_V1 :: HTTPHealthCheck_ProxyHeader
 pattern HTTPHealthCheck_ProxyHeader_PROXY_V1 = HTTPHealthCheck_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   HTTPHealthCheck_ProxyHeader_None,
   HTTPHealthCheck_ProxyHeader_PROXY_V1,
-  HTTPHealthCheck_ProxyHeader #-}
+  HTTPHealthCheck_ProxyHeader
+  #-}
 
 -- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTPS health check follows behavior specified in port and portName fields.
-newtype HTTPSHealthCheck_PortSpecification = HTTPSHealthCheck_PortSpecification { fromHTTPSHealthCheck_PortSpecification :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HTTPSHealthCheck_PortSpecification = HTTPSHealthCheck_PortSpecification {fromHTTPSHealthCheck_PortSpecification :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The port number in port is used for health checking.
 pattern HTTPSHealthCheck_PortSpecification_USEFIXEDPORT :: HTTPSHealthCheck_PortSpecification
@@ -13566,72 +13266,74 @@ pattern HTTPSHealthCheck_PortSpecification_USESERVINGPORT = HTTPSHealthCheck_Por
   HTTPSHealthCheck_PortSpecification_USEFIXEDPORT,
   HTTPSHealthCheck_PortSpecification_USENAMEDPORT,
   HTTPSHealthCheck_PortSpecification_USESERVINGPORT,
-  HTTPSHealthCheck_PortSpecification #-}
+  HTTPSHealthCheck_PortSpecification
+  #-}
 
 -- | Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
-newtype HTTPSHealthCheck_ProxyHeader = HTTPSHealthCheck_ProxyHeader { fromHTTPSHealthCheck_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HTTPSHealthCheck_ProxyHeader = HTTPSHealthCheck_ProxyHeader {fromHTTPSHealthCheck_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern HTTPSHealthCheck_ProxyHeader_None :: HTTPSHealthCheck_ProxyHeader
 pattern HTTPSHealthCheck_ProxyHeader_None = HTTPSHealthCheck_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern HTTPSHealthCheck_ProxyHeader_PROXY_V1 :: HTTPSHealthCheck_ProxyHeader
 pattern HTTPSHealthCheck_ProxyHeader_PROXY_V1 = HTTPSHealthCheck_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   HTTPSHealthCheck_ProxyHeader_None,
   HTTPSHealthCheck_ProxyHeader_PROXY_V1,
-  HTTPSHealthCheck_ProxyHeader #-}
+  HTTPSHealthCheck_ProxyHeader
+  #-}
 
 -- | Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or HTTP2. Exactly one of the protocol-specific health check field must be specified, which must match type field.
-newtype HealthCheck_Type = HealthCheck_Type { fromHealthCheck_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthCheck_Type = HealthCheck_Type {fromHealthCheck_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern HealthCheck_Type_Grpc :: HealthCheck_Type
 pattern HealthCheck_Type_Grpc = HealthCheck_Type "GRPC"
 
--- | 
+-- |
 pattern HealthCheck_Type_Http :: HealthCheck_Type
 pattern HealthCheck_Type_Http = HealthCheck_Type "HTTP"
 
--- | 
+-- |
 pattern HealthCheck_Type_HTTP2 :: HealthCheck_Type
 pattern HealthCheck_Type_HTTP2 = HealthCheck_Type "HTTP2"
 
--- | 
+-- |
 pattern HealthCheck_Type_Https :: HealthCheck_Type
 pattern HealthCheck_Type_Https = HealthCheck_Type "HTTPS"
 
--- | 
+-- |
 pattern HealthCheck_Type_Invalid :: HealthCheck_Type
 pattern HealthCheck_Type_Invalid = HealthCheck_Type "INVALID"
 
--- | 
+-- |
 pattern HealthCheck_Type_Ssl :: HealthCheck_Type
 pattern HealthCheck_Type_Ssl = HealthCheck_Type "SSL"
 
--- | 
+-- |
 pattern HealthCheck_Type_Tcp :: HealthCheck_Type
 pattern HealthCheck_Type_Tcp = HealthCheck_Type "TCP"
 
@@ -13643,20 +13345,21 @@ pattern HealthCheck_Type_Tcp = HealthCheck_Type "TCP"
   HealthCheck_Type_Invalid,
   HealthCheck_Type_Ssl,
   HealthCheck_Type_Tcp,
-  HealthCheck_Type #-}
+  HealthCheck_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype HealthCheckList_Warning_Code = HealthCheckList_Warning_Code { fromHealthCheckList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthCheckList_Warning_Code = HealthCheckList_Warning_Code {fromHealthCheckList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern HealthCheckList_Warning_Code_CLEANUPFAILED :: HealthCheckList_Warning_Code
@@ -13784,20 +13487,21 @@ pattern HealthCheckList_Warning_Code_Unreachable = HealthCheckList_Warning_Code 
   HealthCheckList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   HealthCheckList_Warning_Code_UNDECLAREDPROPERTIES,
   HealthCheckList_Warning_Code_Unreachable,
-  HealthCheckList_Warning_Code #-}
+  HealthCheckList_Warning_Code
+  #-}
 
 -- | Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO/AGGREGATION if unspecified. - NO/AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. .
-newtype HealthCheckService_HealthStatusAggregationPolicy = HealthCheckService_HealthStatusAggregationPolicy { fromHealthCheckService_HealthStatusAggregationPolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthCheckService_HealthStatusAggregationPolicy = HealthCheckService_HealthStatusAggregationPolicy {fromHealthCheckService_HealthStatusAggregationPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If any backend\'s health check reports UNHEALTHY, then UNHEALTHY is the HealthState of the entire health check service. If all backend\'s are healthy, the HealthState of the health check service is HEALTHY.
 pattern HealthCheckService_HealthStatusAggregationPolicy_And :: HealthCheckService_HealthStatusAggregationPolicy
@@ -13810,20 +13514,21 @@ pattern HealthCheckService_HealthStatusAggregationPolicy_NOAGGREGATION = HealthC
 {-# COMPLETE
   HealthCheckService_HealthStatusAggregationPolicy_And,
   HealthCheckService_HealthStatusAggregationPolicy_NOAGGREGATION,
-  HealthCheckService_HealthStatusAggregationPolicy #-}
+  HealthCheckService_HealthStatusAggregationPolicy
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype HealthCheckServicesList_Warning_Code = HealthCheckServicesList_Warning_Code { fromHealthCheckServicesList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthCheckServicesList_Warning_Code = HealthCheckServicesList_Warning_Code {fromHealthCheckServicesList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern HealthCheckServicesList_Warning_Code_CLEANUPFAILED :: HealthCheckServicesList_Warning_Code
@@ -13951,20 +13656,21 @@ pattern HealthCheckServicesList_Warning_Code_Unreachable = HealthCheckServicesLi
   HealthCheckServicesList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   HealthCheckServicesList_Warning_Code_UNDECLAREDPROPERTIES,
   HealthCheckServicesList_Warning_Code_Unreachable,
-  HealthCheckServicesList_Warning_Code #-}
+  HealthCheckServicesList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype HealthChecksAggregatedList_Warning_Code = HealthChecksAggregatedList_Warning_Code { fromHealthChecksAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthChecksAggregatedList_Warning_Code = HealthChecksAggregatedList_Warning_Code {fromHealthChecksAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern HealthChecksAggregatedList_Warning_Code_CLEANUPFAILED :: HealthChecksAggregatedList_Warning_Code
@@ -14092,20 +13798,21 @@ pattern HealthChecksAggregatedList_Warning_Code_Unreachable = HealthChecksAggreg
   HealthChecksAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   HealthChecksAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   HealthChecksAggregatedList_Warning_Code_Unreachable,
-  HealthChecksAggregatedList_Warning_Code #-}
+  HealthChecksAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype HealthChecksScopedList_Warning_Code = HealthChecksScopedList_Warning_Code { fromHealthChecksScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthChecksScopedList_Warning_Code = HealthChecksScopedList_Warning_Code {fromHealthChecksScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern HealthChecksScopedList_Warning_Code_CLEANUPFAILED :: HealthChecksScopedList_Warning_Code
@@ -14233,45 +13940,47 @@ pattern HealthChecksScopedList_Warning_Code_Unreachable = HealthChecksScopedList
   HealthChecksScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   HealthChecksScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   HealthChecksScopedList_Warning_Code_Unreachable,
-  HealthChecksScopedList_Warning_Code #-}
+  HealthChecksScopedList_Warning_Code
+  #-}
 
 -- | Health state of the instance.
-newtype HealthStatus_HealthState = HealthStatus_HealthState { fromHealthStatus_HealthState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthStatus_HealthState = HealthStatus_HealthState {fromHealthStatus_HealthState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern HealthStatus_HealthState_Healthy :: HealthStatus_HealthState
 pattern HealthStatus_HealthState_Healthy = HealthStatus_HealthState "HEALTHY"
 
--- | 
+-- |
 pattern HealthStatus_HealthState_Unhealthy :: HealthStatus_HealthState
 pattern HealthStatus_HealthState_Unhealthy = HealthStatus_HealthState "UNHEALTHY"
 
 {-# COMPLETE
   HealthStatus_HealthState_Healthy,
   HealthStatus_HealthState_Unhealthy,
-  HealthStatus_HealthState #-}
+  HealthStatus_HealthState
+  #-}
 
-newtype HealthStatus_WeightError = HealthStatus_WeightError { fromHealthStatus_WeightError :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthStatus_WeightError = HealthStatus_WeightError {fromHealthStatus_WeightError :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The response to a Health Check probe had the HTTP response header field X-Load-Balancing-Endpoint-Weight, but its content was invalid (i.e., not a non-negative single-precision floating-point number in decimal string representation).
 pattern HealthStatus_WeightError_INVALIDWEIGHT :: HealthStatus_WeightError
@@ -14294,34 +14003,35 @@ pattern HealthStatus_WeightError_WEIGHTNONE = HealthStatus_WeightError "WEIGHT_N
   HealthStatus_WeightError_MISSINGWEIGHT,
   HealthStatus_WeightError_UNAVAILABLEWEIGHT,
   HealthStatus_WeightError_WEIGHTNONE,
-  HealthStatus_WeightError #-}
+  HealthStatus_WeightError
+  #-}
 
 -- | Health state of the network endpoint determined based on the health checks configured.
-newtype HealthStatusForNetworkEndpoint_HealthState = HealthStatusForNetworkEndpoint_HealthState { fromHealthStatusForNetworkEndpoint_HealthState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HealthStatusForNetworkEndpoint_HealthState = HealthStatusForNetworkEndpoint_HealthState {fromHealthStatusForNetworkEndpoint_HealthState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern HealthStatusForNetworkEndpoint_HealthState_Draining :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Draining = HealthStatusForNetworkEndpoint_HealthState "DRAINING"
 
--- | 
+-- |
 pattern HealthStatusForNetworkEndpoint_HealthState_Healthy :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Healthy = HealthStatusForNetworkEndpoint_HealthState "HEALTHY"
 
--- | 
+-- |
 pattern HealthStatusForNetworkEndpoint_HealthState_Unhealthy :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Unhealthy = HealthStatusForNetworkEndpoint_HealthState "UNHEALTHY"
 
--- | 
+-- |
 pattern HealthStatusForNetworkEndpoint_HealthState_Unknown :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Unknown = HealthStatusForNetworkEndpoint_HealthState "UNKNOWN"
 
@@ -14330,20 +14040,21 @@ pattern HealthStatusForNetworkEndpoint_HealthState_Unknown = HealthStatusForNetw
   HealthStatusForNetworkEndpoint_HealthState_Healthy,
   HealthStatusForNetworkEndpoint_HealthState_Unhealthy,
   HealthStatusForNetworkEndpoint_HealthState_Unknown,
-  HealthStatusForNetworkEndpoint_HealthState #-}
+  HealthStatusForNetworkEndpoint_HealthState
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype HttpHealthCheckList_Warning_Code = HttpHealthCheckList_Warning_Code { fromHttpHealthCheckList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HttpHealthCheckList_Warning_Code = HttpHealthCheckList_Warning_Code {fromHttpHealthCheckList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern HttpHealthCheckList_Warning_Code_CLEANUPFAILED :: HttpHealthCheckList_Warning_Code
@@ -14471,20 +14182,21 @@ pattern HttpHealthCheckList_Warning_Code_Unreachable = HttpHealthCheckList_Warni
   HttpHealthCheckList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   HttpHealthCheckList_Warning_Code_UNDECLAREDPROPERTIES,
   HttpHealthCheckList_Warning_Code_Unreachable,
-  HttpHealthCheckList_Warning_Code #-}
+  HttpHealthCheckList_Warning_Code
+  #-}
 
 -- | The HTTP Status code to use for this RedirectAction. Supported values are: - MOVED/PERMANENTLY/DEFAULT, which is the default value and corresponds to 301. - FOUND, which corresponds to 302. - SEE/OTHER which corresponds to 303. - TEMPORARY/REDIRECT, which corresponds to 307. In this case, the request method is retained. - PERMANENT_REDIRECT, which corresponds to 308. In this case, the request method is retained.
-newtype HttpRedirectAction_RedirectResponseCode = HttpRedirectAction_RedirectResponseCode { fromHttpRedirectAction_RedirectResponseCode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HttpRedirectAction_RedirectResponseCode = HttpRedirectAction_RedirectResponseCode {fromHttpRedirectAction_RedirectResponseCode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Http Status Code 302 - Found.
 pattern HttpRedirectAction_RedirectResponseCode_Found :: HttpRedirectAction_RedirectResponseCode
@@ -14512,20 +14224,21 @@ pattern HttpRedirectAction_RedirectResponseCode_TEMPORARYREDIRECT = HttpRedirect
   HttpRedirectAction_RedirectResponseCode_PERMANENTREDIRECT,
   HttpRedirectAction_RedirectResponseCode_SEEOTHER,
   HttpRedirectAction_RedirectResponseCode_TEMPORARYREDIRECT,
-  HttpRedirectAction_RedirectResponseCode #-}
+  HttpRedirectAction_RedirectResponseCode
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype HttpsHealthCheckList_Warning_Code = HttpsHealthCheckList_Warning_Code { fromHttpsHealthCheckList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HttpsHealthCheckList_Warning_Code = HttpsHealthCheckList_Warning_Code {fromHttpsHealthCheckList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern HttpsHealthCheckList_Warning_Code_CLEANUPFAILED :: HttpsHealthCheckList_Warning_Code
@@ -14653,62 +14366,65 @@ pattern HttpsHealthCheckList_Warning_Code_Unreachable = HttpsHealthCheckList_War
   HttpsHealthCheckList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   HttpsHealthCheckList_Warning_Code_UNDECLAREDPROPERTIES,
   HttpsHealthCheckList_Warning_Code_Unreachable,
-  HttpsHealthCheckList_Warning_Code #-}
+  HttpsHealthCheckList_Warning_Code
+  #-}
 
 -- | The format used to encode and transmit the block device, which should be TAR. This is just a container and transmission format and not a runtime format. Provided by the client when the disk image is created.
-newtype Image_RawDisk_ContainerType = Image_RawDisk_ContainerType { fromImage_RawDisk_ContainerType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Image_RawDisk_ContainerType = Image_RawDisk_ContainerType {fromImage_RawDisk_ContainerType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Image_RawDisk_ContainerType_Tar :: Image_RawDisk_ContainerType
 pattern Image_RawDisk_ContainerType_Tar = Image_RawDisk_ContainerType "TAR"
 
 {-# COMPLETE
   Image_RawDisk_ContainerType_Tar,
-  Image_RawDisk_ContainerType #-}
+  Image_RawDisk_ContainerType
+  #-}
 
 -- | The type of the image used to create this disk. The default and only value is RAW
-newtype Image_SourceType = Image_SourceType { fromImage_SourceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Image_SourceType = Image_SourceType {fromImage_SourceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Image_SourceType_Raw :: Image_SourceType
 pattern Image_SourceType_Raw = Image_SourceType "RAW"
 
 {-# COMPLETE
   Image_SourceType_Raw,
-  Image_SourceType #-}
+  Image_SourceType
+  #-}
 
 -- | [Output Only] The status of the image. An image can be used to create other resources, such as instances, only after the image has been successfully created and the status is set to READY. Possible values are FAILED, PENDING, or READY.
-newtype Image_Status = Image_Status { fromImage_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Image_Status = Image_Status {fromImage_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Image is deleting.
 pattern Image_Status_Deleting :: Image_Status
@@ -14731,20 +14447,21 @@ pattern Image_Status_Ready = Image_Status "READY"
   Image_Status_Failed,
   Image_Status_Pending,
   Image_Status_Ready,
-  Image_Status #-}
+  Image_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ImageList_Warning_Code = ImageList_Warning_Code { fromImageList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ImageList_Warning_Code = ImageList_Warning_Code {fromImageList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ImageList_Warning_Code_CLEANUPFAILED :: ImageList_Warning_Code
@@ -14872,20 +14589,21 @@ pattern ImageList_Warning_Code_Unreachable = ImageList_Warning_Code "UNREACHABLE
   ImageList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ImageList_Warning_Code_UNDECLAREDPROPERTIES,
   ImageList_Warning_Code_Unreachable,
-  ImageList_Warning_Code #-}
+  ImageList_Warning_Code
+  #-}
 
 -- | The private IPv6 google access type for the VM. If not specified, use INHERIT/FROM/SUBNETWORK as default.
-newtype Instance_PrivateIpv6GoogleAccess = Instance_PrivateIpv6GoogleAccess { fromInstance_PrivateIpv6GoogleAccess :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_PrivateIpv6GoogleAccess = Instance_PrivateIpv6GoogleAccess {fromInstance_PrivateIpv6GoogleAccess :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Bidirectional private IPv6 access to\/from Google services. If specified, the subnetwork who is attached to the instance\'s default network interface will be assigned an internal IPv6 prefix if it doesn\'t have before.
 pattern Instance_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE :: Instance_PrivateIpv6GoogleAccess
@@ -14903,20 +14621,21 @@ pattern Instance_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK = Instance_Privat
   Instance_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
   Instance_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
   Instance_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
-  Instance_PrivateIpv6GoogleAccess #-}
+  Instance_PrivateIpv6GoogleAccess
+  #-}
 
 -- | [Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see Instance life cycle.
-newtype Instance_Status = Instance_Status { fromInstance_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_Status = Instance_Status {fromInstance_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
 pattern Instance_Status_Deprovisioning :: Instance_Status
@@ -14969,20 +14688,21 @@ pattern Instance_Status_Terminated = Instance_Status "TERMINATED"
   Instance_Status_Suspended,
   Instance_Status_Suspending,
   Instance_Status_Terminated,
-  Instance_Status #-}
+  Instance_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceAggregatedList_Warning_Code = InstanceAggregatedList_Warning_Code { fromInstanceAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceAggregatedList_Warning_Code = InstanceAggregatedList_Warning_Code {fromInstanceAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceAggregatedList_Warning_Code_CLEANUPFAILED :: InstanceAggregatedList_Warning_Code
@@ -15110,20 +14830,21 @@ pattern InstanceAggregatedList_Warning_Code_Unreachable = InstanceAggregatedList
   InstanceAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceAggregatedList_Warning_Code_Unreachable,
-  InstanceAggregatedList_Warning_Code #-}
+  InstanceAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupAggregatedList_Warning_Code = InstanceGroupAggregatedList_Warning_Code { fromInstanceGroupAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupAggregatedList_Warning_Code = InstanceGroupAggregatedList_Warning_Code {fromInstanceGroupAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupAggregatedList_Warning_Code_CLEANUPFAILED :: InstanceGroupAggregatedList_Warning_Code
@@ -15251,20 +14972,21 @@ pattern InstanceGroupAggregatedList_Warning_Code_Unreachable = InstanceGroupAggr
   InstanceGroupAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupAggregatedList_Warning_Code_Unreachable,
-  InstanceGroupAggregatedList_Warning_Code #-}
+  InstanceGroupAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupList_Warning_Code = InstanceGroupList_Warning_Code { fromInstanceGroupList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupList_Warning_Code = InstanceGroupList_Warning_Code {fromInstanceGroupList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupList_Warning_Code_CLEANUPFAILED :: InstanceGroupList_Warning_Code
@@ -15392,20 +15114,21 @@ pattern InstanceGroupList_Warning_Code_Unreachable = InstanceGroupList_Warning_C
   InstanceGroupList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupList_Warning_Code_Unreachable,
-  InstanceGroupList_Warning_Code #-}
+  InstanceGroupList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupManagerAggregatedList_Warning_Code = InstanceGroupManagerAggregatedList_Warning_Code { fromInstanceGroupManagerAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagerAggregatedList_Warning_Code = InstanceGroupManagerAggregatedList_Warning_Code {fromInstanceGroupManagerAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupManagerAggregatedList_Warning_Code_CLEANUPFAILED :: InstanceGroupManagerAggregatedList_Warning_Code
@@ -15533,20 +15256,21 @@ pattern InstanceGroupManagerAggregatedList_Warning_Code_Unreachable = InstanceGr
   InstanceGroupManagerAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupManagerAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupManagerAggregatedList_Warning_Code_Unreachable,
-  InstanceGroupManagerAggregatedList_Warning_Code #-}
+  InstanceGroupManagerAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupManagerList_Warning_Code = InstanceGroupManagerList_Warning_Code { fromInstanceGroupManagerList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagerList_Warning_Code = InstanceGroupManagerList_Warning_Code {fromInstanceGroupManagerList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupManagerList_Warning_Code_CLEANUPFAILED :: InstanceGroupManagerList_Warning_Code
@@ -15674,20 +15398,21 @@ pattern InstanceGroupManagerList_Warning_Code_Unreachable = InstanceGroupManager
   InstanceGroupManagerList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupManagerList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupManagerList_Warning_Code_Unreachable,
-  InstanceGroupManagerList_Warning_Code #-}
+  InstanceGroupManagerList_Warning_Code
+  #-}
 
 -- | The instance redistribution policy for regional managed instance groups. Valid values are: - PROACTIVE (default): The group attempts to maintain an even distribution of VM instances across zones in the region. - NONE: For non-autoscaled groups, proactive redistribution is disabled.
-newtype InstanceGroupManagerUpdatePolicy_InstanceRedistributionType = InstanceGroupManagerUpdatePolicy_InstanceRedistributionType { fromInstanceGroupManagerUpdatePolicy_InstanceRedistributionType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagerUpdatePolicy_InstanceRedistributionType = InstanceGroupManagerUpdatePolicy_InstanceRedistributionType {fromInstanceGroupManagerUpdatePolicy_InstanceRedistributionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No action is being proactively performed in order to bring this IGM to its target instance distribution.
 pattern InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_None :: InstanceGroupManagerUpdatePolicy_InstanceRedistributionType
@@ -15700,20 +15425,21 @@ pattern InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_Proactive = 
 {-# COMPLETE
   InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_None,
   InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_Proactive,
-  InstanceGroupManagerUpdatePolicy_InstanceRedistributionType #-}
+  InstanceGroupManagerUpdatePolicy_InstanceRedistributionType
+  #-}
 
 -- | Minimal action to be taken on an instance. You can specify either RESTART to restart existing instances or REPLACE to delete and create new instances from the target template. If you specify a RESTART, the Updater will attempt to perform that action only. However, if the Updater determines that the minimal action you specify is not enough to perform the update, it might perform a more disruptive action.
-newtype InstanceGroupManagerUpdatePolicy_MinimalAction = InstanceGroupManagerUpdatePolicy_MinimalAction { fromInstanceGroupManagerUpdatePolicy_MinimalAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagerUpdatePolicy_MinimalAction = InstanceGroupManagerUpdatePolicy_MinimalAction {fromInstanceGroupManagerUpdatePolicy_MinimalAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not perform any action.
 pattern InstanceGroupManagerUpdatePolicy_MinimalAction_None :: InstanceGroupManagerUpdatePolicy_MinimalAction
@@ -15736,20 +15462,21 @@ pattern InstanceGroupManagerUpdatePolicy_MinimalAction_Restart = InstanceGroupMa
   InstanceGroupManagerUpdatePolicy_MinimalAction_Refresh,
   InstanceGroupManagerUpdatePolicy_MinimalAction_Replace,
   InstanceGroupManagerUpdatePolicy_MinimalAction_Restart,
-  InstanceGroupManagerUpdatePolicy_MinimalAction #-}
+  InstanceGroupManagerUpdatePolicy_MinimalAction
+  #-}
 
 -- | Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to allow actions that do not need instance restart, RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
-newtype InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction = InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction { fromInstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction = InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction {fromInstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not perform any action.
 pattern InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_None :: InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction
@@ -15772,20 +15499,21 @@ pattern InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_Restart = I
   InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_Refresh,
   InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_Replace,
   InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction_Restart,
-  InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction #-}
+  InstanceGroupManagerUpdatePolicy_MostDisruptiveAllowedAction
+  #-}
 
 -- | What action should be used to replace instances. See minimal_action.REPLACE
-newtype InstanceGroupManagerUpdatePolicy_ReplacementMethod = InstanceGroupManagerUpdatePolicy_ReplacementMethod { fromInstanceGroupManagerUpdatePolicy_ReplacementMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagerUpdatePolicy_ReplacementMethod = InstanceGroupManagerUpdatePolicy_ReplacementMethod {fromInstanceGroupManagerUpdatePolicy_ReplacementMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Instances will be recreated (with the same name)
 pattern InstanceGroupManagerUpdatePolicy_ReplacementMethod_Recreate :: InstanceGroupManagerUpdatePolicy_ReplacementMethod
@@ -15798,20 +15526,21 @@ pattern InstanceGroupManagerUpdatePolicy_ReplacementMethod_Substitute = Instance
 {-# COMPLETE
   InstanceGroupManagerUpdatePolicy_ReplacementMethod_Recreate,
   InstanceGroupManagerUpdatePolicy_ReplacementMethod_Substitute,
-  InstanceGroupManagerUpdatePolicy_ReplacementMethod #-}
+  InstanceGroupManagerUpdatePolicy_ReplacementMethod
+  #-}
 
 -- | The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
-newtype InstanceGroupManagerUpdatePolicy_Type = InstanceGroupManagerUpdatePolicy_Type { fromInstanceGroupManagerUpdatePolicy_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagerUpdatePolicy_Type = InstanceGroupManagerUpdatePolicy_Type {fromInstanceGroupManagerUpdatePolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No action is being proactively performed in order to bring this IGM to its target version distribution (regardless of whether this distribution is expressed using instanceTemplate or versions field).
 pattern InstanceGroupManagerUpdatePolicy_Type_Opportunistic :: InstanceGroupManagerUpdatePolicy_Type
@@ -15824,20 +15553,21 @@ pattern InstanceGroupManagerUpdatePolicy_Type_Proactive = InstanceGroupManagerUp
 {-# COMPLETE
   InstanceGroupManagerUpdatePolicy_Type_Opportunistic,
   InstanceGroupManagerUpdatePolicy_Type_Proactive,
-  InstanceGroupManagerUpdatePolicy_Type #-}
+  InstanceGroupManagerUpdatePolicy_Type
+  #-}
 
 -- | The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
-newtype InstanceGroupManagersApplyUpdatesRequest_MinimalAction = InstanceGroupManagersApplyUpdatesRequest_MinimalAction { fromInstanceGroupManagersApplyUpdatesRequest_MinimalAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagersApplyUpdatesRequest_MinimalAction = InstanceGroupManagersApplyUpdatesRequest_MinimalAction {fromInstanceGroupManagersApplyUpdatesRequest_MinimalAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not perform any action.
 pattern InstanceGroupManagersApplyUpdatesRequest_MinimalAction_None :: InstanceGroupManagersApplyUpdatesRequest_MinimalAction
@@ -15860,20 +15590,21 @@ pattern InstanceGroupManagersApplyUpdatesRequest_MinimalAction_Restart = Instanc
   InstanceGroupManagersApplyUpdatesRequest_MinimalAction_Refresh,
   InstanceGroupManagersApplyUpdatesRequest_MinimalAction_Replace,
   InstanceGroupManagersApplyUpdatesRequest_MinimalAction_Restart,
-  InstanceGroupManagersApplyUpdatesRequest_MinimalAction #-}
+  InstanceGroupManagersApplyUpdatesRequest_MinimalAction
+  #-}
 
 -- | The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
-newtype InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction = InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction { fromInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction = InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction {fromInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not perform any action.
 pattern InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_None :: InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
@@ -15896,20 +15627,21 @@ pattern InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Res
   InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Refresh,
   InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Replace,
   InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Restart,
-  InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction #-}
+  InstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code = InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code { fromInstanceGroupManagersListPerInstanceConfigsResp_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code = InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code {fromInstanceGroupManagersListPerInstanceConfigsResp_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_CLEANUPFAILED :: InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
@@ -16037,20 +15769,21 @@ pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_Unreachable
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_Unreachable,
-  InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code #-}
+  InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupManagersScopedList_Warning_Code = InstanceGroupManagersScopedList_Warning_Code { fromInstanceGroupManagersScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupManagersScopedList_Warning_Code = InstanceGroupManagersScopedList_Warning_Code {fromInstanceGroupManagersScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupManagersScopedList_Warning_Code_CLEANUPFAILED :: InstanceGroupManagersScopedList_Warning_Code
@@ -16178,20 +15911,21 @@ pattern InstanceGroupManagersScopedList_Warning_Code_Unreachable = InstanceGroup
   InstanceGroupManagersScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupManagersScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupManagersScopedList_Warning_Code_Unreachable,
-  InstanceGroupManagersScopedList_Warning_Code #-}
+  InstanceGroupManagersScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupsListInstances_Warning_Code = InstanceGroupsListInstances_Warning_Code { fromInstanceGroupsListInstances_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupsListInstances_Warning_Code = InstanceGroupsListInstances_Warning_Code {fromInstanceGroupsListInstances_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupsListInstances_Warning_Code_CLEANUPFAILED :: InstanceGroupsListInstances_Warning_Code
@@ -16319,20 +16053,21 @@ pattern InstanceGroupsListInstances_Warning_Code_Unreachable = InstanceGroupsLis
   InstanceGroupsListInstances_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupsListInstances_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupsListInstances_Warning_Code_Unreachable,
-  InstanceGroupsListInstances_Warning_Code #-}
+  InstanceGroupsListInstances_Warning_Code
+  #-}
 
 -- | A filter for the state of the instances in the instance group. Valid options are ALL or RUNNING. If you do not specify this parameter the list includes all instances regardless of their state.
-newtype InstanceGroupsListInstancesRequest_InstanceState = InstanceGroupsListInstancesRequest_InstanceState { fromInstanceGroupsListInstancesRequest_InstanceState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupsListInstancesRequest_InstanceState = InstanceGroupsListInstancesRequest_InstanceState {fromInstanceGroupsListInstancesRequest_InstanceState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes all instances in the generated list regardless of their state.
 pattern InstanceGroupsListInstancesRequest_InstanceState_All :: InstanceGroupsListInstancesRequest_InstanceState
@@ -16345,20 +16080,21 @@ pattern InstanceGroupsListInstancesRequest_InstanceState_Running = InstanceGroup
 {-# COMPLETE
   InstanceGroupsListInstancesRequest_InstanceState_All,
   InstanceGroupsListInstancesRequest_InstanceState_Running,
-  InstanceGroupsListInstancesRequest_InstanceState #-}
+  InstanceGroupsListInstancesRequest_InstanceState
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceGroupsScopedList_Warning_Code = InstanceGroupsScopedList_Warning_Code { fromInstanceGroupsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupsScopedList_Warning_Code = InstanceGroupsScopedList_Warning_Code {fromInstanceGroupsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceGroupsScopedList_Warning_Code_CLEANUPFAILED :: InstanceGroupsScopedList_Warning_Code
@@ -16486,20 +16222,21 @@ pattern InstanceGroupsScopedList_Warning_Code_Unreachable = InstanceGroupsScoped
   InstanceGroupsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceGroupsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupsScopedList_Warning_Code_Unreachable,
-  InstanceGroupsScopedList_Warning_Code #-}
+  InstanceGroupsScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceList_Warning_Code = InstanceList_Warning_Code { fromInstanceList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceList_Warning_Code = InstanceList_Warning_Code {fromInstanceList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceList_Warning_Code_CLEANUPFAILED :: InstanceList_Warning_Code
@@ -16627,20 +16364,21 @@ pattern InstanceList_Warning_Code_Unreachable = InstanceList_Warning_Code "UNREA
   InstanceList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceList_Warning_Code_Unreachable,
-  InstanceList_Warning_Code #-}
+  InstanceList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceListReferrers_Warning_Code = InstanceListReferrers_Warning_Code { fromInstanceListReferrers_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceListReferrers_Warning_Code = InstanceListReferrers_Warning_Code {fromInstanceListReferrers_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceListReferrers_Warning_Code_CLEANUPFAILED :: InstanceListReferrers_Warning_Code
@@ -16768,20 +16506,21 @@ pattern InstanceListReferrers_Warning_Code_Unreachable = InstanceListReferrers_W
   InstanceListReferrers_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceListReferrers_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceListReferrers_Warning_Code_Unreachable,
-  InstanceListReferrers_Warning_Code #-}
+  InstanceListReferrers_Warning_Code
+  #-}
 
 -- | [Output Only] Action that managed instance group was executing on the instance when the error occurred. Possible values:
-newtype InstanceManagedByIgmErrorInstanceActionDetails_Action = InstanceManagedByIgmErrorInstanceActionDetails_Action { fromInstanceManagedByIgmErrorInstanceActionDetails_Action :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceManagedByIgmErrorInstanceActionDetails_Action = InstanceManagedByIgmErrorInstanceActionDetails_Action {fromInstanceManagedByIgmErrorInstanceActionDetails_Action :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group.
 pattern InstanceManagedByIgmErrorInstanceActionDetails_Action_Abandoning :: InstanceManagedByIgmErrorInstanceActionDetails_Action
@@ -16849,20 +16588,21 @@ pattern InstanceManagedByIgmErrorInstanceActionDetails_Action_Verifying = Instan
   InstanceManagedByIgmErrorInstanceActionDetails_Action_Stopping,
   InstanceManagedByIgmErrorInstanceActionDetails_Action_Suspending,
   InstanceManagedByIgmErrorInstanceActionDetails_Action_Verifying,
-  InstanceManagedByIgmErrorInstanceActionDetails_Action #-}
+  InstanceManagedByIgmErrorInstanceActionDetails_Action
+  #-}
 
 -- | The private IPv6 google access type for VMs. If not specified, use INHERIT/FROM/SUBNETWORK as default. Note that for MachineImage, this is not supported yet.
-newtype InstanceProperties_PrivateIpv6GoogleAccess = InstanceProperties_PrivateIpv6GoogleAccess { fromInstanceProperties_PrivateIpv6GoogleAccess :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceProperties_PrivateIpv6GoogleAccess = InstanceProperties_PrivateIpv6GoogleAccess {fromInstanceProperties_PrivateIpv6GoogleAccess :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Bidirectional private IPv6 access to\/from Google services. If specified, the subnetwork who is attached to the instance\'s default network interface will be assigned an internal IPv6 prefix if it doesn\'t have before.
 pattern InstanceProperties_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE :: InstanceProperties_PrivateIpv6GoogleAccess
@@ -16880,20 +16620,21 @@ pattern InstanceProperties_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK = Insta
   InstanceProperties_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
   InstanceProperties_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
   InstanceProperties_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
-  InstanceProperties_PrivateIpv6GoogleAccess #-}
+  InstanceProperties_PrivateIpv6GoogleAccess
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstanceTemplateList_Warning_Code = InstanceTemplateList_Warning_Code { fromInstanceTemplateList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceTemplateList_Warning_Code = InstanceTemplateList_Warning_Code {fromInstanceTemplateList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstanceTemplateList_Warning_Code_CLEANUPFAILED :: InstanceTemplateList_Warning_Code
@@ -17021,20 +16762,21 @@ pattern InstanceTemplateList_Warning_Code_Unreachable = InstanceTemplateList_War
   InstanceTemplateList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstanceTemplateList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceTemplateList_Warning_Code_Unreachable,
-  InstanceTemplateList_Warning_Code #-}
+  InstanceTemplateList_Warning_Code
+  #-}
 
 -- | [Output Only] The status of the instance.
-newtype InstanceWithNamedPorts_Status = InstanceWithNamedPorts_Status { fromInstanceWithNamedPorts_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceWithNamedPorts_Status = InstanceWithNamedPorts_Status {fromInstanceWithNamedPorts_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
 pattern InstanceWithNamedPorts_Status_Deprovisioning :: InstanceWithNamedPorts_Status
@@ -17087,34 +16829,35 @@ pattern InstanceWithNamedPorts_Status_Terminated = InstanceWithNamedPorts_Status
   InstanceWithNamedPorts_Status_Suspended,
   InstanceWithNamedPorts_Status_Suspending,
   InstanceWithNamedPorts_Status_Terminated,
-  InstanceWithNamedPorts_Status #-}
+  InstanceWithNamedPorts_Status
+  #-}
 
 -- | [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
-newtype InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type = InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type { fromInstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type = InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type {fromInstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy :: InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy = InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "HIERARCHY"
 
--- | 
+-- |
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network :: InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network = InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "NETWORK"
 
--- | 
+-- |
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL :: InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL = InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "NETWORK_REGIONAL"
 
--- | 
+-- |
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified :: InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified = InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "UNSPECIFIED"
 
@@ -17123,20 +16866,21 @@ pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspe
   InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
   InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL,
   InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
-  InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type #-}
+  InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InstancesScopedList_Warning_Code = InstancesScopedList_Warning_Code { fromInstancesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstancesScopedList_Warning_Code = InstancesScopedList_Warning_Code {fromInstancesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InstancesScopedList_Warning_Code_CLEANUPFAILED :: InstancesScopedList_Warning_Code
@@ -17264,20 +17008,21 @@ pattern InstancesScopedList_Warning_Code_Unreachable = InstancesScopedList_Warni
   InstancesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InstancesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   InstancesScopedList_Warning_Code_Unreachable,
-  InstancesScopedList_Warning_Code #-}
+  InstancesScopedList_Warning_Code
+  #-}
 
 -- | Type of interconnect, which can take one of the following values: - PARTNER: A partner-managed interconnection shared between customers though a partner. - DEDICATED: A dedicated physical interconnection with the customer. Note that a value IT_PRIVATE has been deprecated in favor of DEDICATED.
-newtype Interconnect_InterconnectType = Interconnect_InterconnectType { fromInterconnect_InterconnectType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Interconnect_InterconnectType = Interconnect_InterconnectType {fromInterconnect_InterconnectType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A dedicated physical interconnection with the customer.
 pattern Interconnect_InterconnectType_Dedicated :: Interconnect_InterconnectType
@@ -17295,20 +17040,21 @@ pattern Interconnect_InterconnectType_Partner = Interconnect_InterconnectType "P
   Interconnect_InterconnectType_Dedicated,
   Interconnect_InterconnectType_ITPRIVATE,
   Interconnect_InterconnectType_Partner,
-  Interconnect_InterconnectType #-}
+  Interconnect_InterconnectType
+  #-}
 
 -- | Type of link requested, which can take one of the following values: - LINK/TYPE/ETHERNET/10G/LR: A 10G Ethernet with LR optics - LINK/TYPE/ETHERNET/100G/LR: A 100G Ethernet with LR optics. Note that this field indicates the speed of each of the links in the bundle, not the speed of the entire bundle.
-newtype Interconnect_LinkType = Interconnect_LinkType { fromInterconnect_LinkType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Interconnect_LinkType = Interconnect_LinkType {fromInterconnect_LinkType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | 100G Ethernet, LR Optics.
 pattern Interconnect_LinkType_LINKTYPEETHERNET100GLR :: Interconnect_LinkType
@@ -17321,20 +17067,21 @@ pattern Interconnect_LinkType_LINKTYPEETHERNET10GLR = Interconnect_LinkType "LIN
 {-# COMPLETE
   Interconnect_LinkType_LINKTYPEETHERNET100GLR,
   Interconnect_LinkType_LINKTYPEETHERNET10GLR,
-  Interconnect_LinkType #-}
+  Interconnect_LinkType
+  #-}
 
 -- | [Output Only] The current status of this Interconnect\'s functionality, which can take one of the following values: - OS/ACTIVE: A valid Interconnect, which is turned up and is ready to use. Attachments may be provisioned on this Interconnect. - OS/UNPROVISIONED: An Interconnect that has not completed turnup. No attachments may be provisioned on this Interconnect. - OS/UNDER/MAINTENANCE: An Interconnect that is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
-newtype Interconnect_OperationalStatus = Interconnect_OperationalStatus { fromInterconnect_OperationalStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Interconnect_OperationalStatus = Interconnect_OperationalStatus {fromInterconnect_OperationalStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The interconnect is valid, turned up, and ready to use. Attachments may be provisioned on this interconnect.
 pattern Interconnect_OperationalStatus_OSACTIVE :: Interconnect_OperationalStatus
@@ -17347,20 +17094,21 @@ pattern Interconnect_OperationalStatus_OSUNPROVISIONED = Interconnect_Operationa
 {-# COMPLETE
   Interconnect_OperationalStatus_OSACTIVE,
   Interconnect_OperationalStatus_OSUNPROVISIONED,
-  Interconnect_OperationalStatus #-}
+  Interconnect_OperationalStatus
+  #-}
 
 -- | [Output Only] The current state of Interconnect functionality, which can take one of the following values: - ACTIVE: The Interconnect is valid, turned up and ready to use. Attachments may be provisioned on this Interconnect. - UNPROVISIONED: The Interconnect has not completed turnup. No attachments may be provisioned on this Interconnect. - UNDER_MAINTENANCE: The Interconnect is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
-newtype Interconnect_State = Interconnect_State { fromInterconnect_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Interconnect_State = Interconnect_State {fromInterconnect_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The interconnect is valid, turned up, and ready to use. Attachments may be provisioned on this interconnect.
 pattern Interconnect_State_Active :: Interconnect_State
@@ -17373,20 +17121,21 @@ pattern Interconnect_State_Unprovisioned = Interconnect_State "UNPROVISIONED"
 {-# COMPLETE
   Interconnect_State_Active,
   Interconnect_State_Unprovisioned,
-  Interconnect_State #-}
+  Interconnect_State
+  #-}
 
 -- | Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER/PROVIDER and DEDICATED, and can take one of the following values: - BPS/50M: 50 Mbit\/s - BPS/100M: 100 Mbit\/s - BPS/200M: 200 Mbit\/s - BPS/300M: 300 Mbit\/s - BPS/400M: 400 Mbit\/s - BPS/500M: 500 Mbit\/s - BPS/1G: 1 Gbit\/s - BPS/2G: 2 Gbit\/s - BPS/5G: 5 Gbit\/s - BPS/10G: 10 Gbit\/s - BPS/20G: 20 Gbit\/s - BPS_50G: 50 Gbit\/s
-newtype InterconnectAttachment_Bandwidth = InterconnectAttachment_Bandwidth { fromInterconnectAttachment_Bandwidth :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachment_Bandwidth = InterconnectAttachment_Bandwidth {fromInterconnectAttachment_Bandwidth :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | 100 Mbit\/s
 pattern InterconnectAttachment_Bandwidth_BPS100M :: InterconnectAttachment_Bandwidth
@@ -17449,30 +17198,31 @@ pattern InterconnectAttachment_Bandwidth_BPS5G = InterconnectAttachment_Bandwidt
   InterconnectAttachment_Bandwidth_BPS50G,
   InterconnectAttachment_Bandwidth_BPS50M,
   InterconnectAttachment_Bandwidth_BPS5G,
-  InterconnectAttachment_Bandwidth #-}
+  InterconnectAttachment_Bandwidth
+  #-}
 
 -- | Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY/DOMAIN/ANY - AVAILABILITY/DOMAIN/1 - AVAILABILITY/DOMAIN/2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY/DOMAIN/ANY.
-newtype InterconnectAttachment_EdgeAvailabilityDomain = InterconnectAttachment_EdgeAvailabilityDomain { fromInterconnectAttachment_EdgeAvailabilityDomain :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachment_EdgeAvailabilityDomain = InterconnectAttachment_EdgeAvailabilityDomain {fromInterconnectAttachment_EdgeAvailabilityDomain :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_1 :: InterconnectAttachment_EdgeAvailabilityDomain
 pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_1 = InterconnectAttachment_EdgeAvailabilityDomain "AVAILABILITY_DOMAIN_1"
 
--- | 
+-- |
 pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_2 :: InterconnectAttachment_EdgeAvailabilityDomain
 pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_2 = InterconnectAttachment_EdgeAvailabilityDomain "AVAILABILITY_DOMAIN_2"
 
--- | 
+-- |
 pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITYDOMAINANY :: InterconnectAttachment_EdgeAvailabilityDomain
 pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITYDOMAINANY = InterconnectAttachment_EdgeAvailabilityDomain "AVAILABILITY_DOMAIN_ANY"
 
@@ -17480,20 +17230,21 @@ pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITYDOMAINANY = In
   InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_1,
   InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITY_DOMAIN_2,
   InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITYDOMAINANY,
-  InterconnectAttachment_EdgeAvailabilityDomain #-}
+  InterconnectAttachment_EdgeAvailabilityDomain
+  #-}
 
 -- | Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use /IPsec-encrypted Cloud Interconnect/, the VLAN attachment must be created with this option. Not currently available publicly.
-newtype InterconnectAttachment_Encryption = InterconnectAttachment_Encryption { fromInterconnectAttachment_Encryption :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachment_Encryption = InterconnectAttachment_Encryption {fromInterconnectAttachment_Encryption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The interconnect attachment will carry only encrypted traffic that is encrypted by an IPsec device such as HA VPN gateway; VMs cannot directly send traffic to or receive traffic from such an interconnect attachment. To use IPsec-encrypted Cloud Interconnect, the interconnect attachment must be created with this option.
 pattern InterconnectAttachment_Encryption_Ipsec :: InterconnectAttachment_Encryption
@@ -17506,20 +17257,21 @@ pattern InterconnectAttachment_Encryption_None = InterconnectAttachment_Encrypti
 {-# COMPLETE
   InterconnectAttachment_Encryption_Ipsec,
   InterconnectAttachment_Encryption_None,
-  InterconnectAttachment_Encryption #-}
+  InterconnectAttachment_Encryption
+  #-}
 
 -- | [Output Only] The current status of whether or not this interconnect attachment is functional, which can take one of the following values: - OS/ACTIVE: The attachment has been turned up and is ready to use. - OS/UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete.
-newtype InterconnectAttachment_OperationalStatus = InterconnectAttachment_OperationalStatus { fromInterconnectAttachment_OperationalStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachment_OperationalStatus = InterconnectAttachment_OperationalStatus {fromInterconnectAttachment_OperationalStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Indicates that attachment has been turned up and is ready to use.
 pattern InterconnectAttachment_OperationalStatus_OSACTIVE :: InterconnectAttachment_OperationalStatus
@@ -17532,20 +17284,21 @@ pattern InterconnectAttachment_OperationalStatus_OSUNPROVISIONED = InterconnectA
 {-# COMPLETE
   InterconnectAttachment_OperationalStatus_OSACTIVE,
   InterconnectAttachment_OperationalStatus_OSUNPROVISIONED,
-  InterconnectAttachment_OperationalStatus #-}
+  InterconnectAttachment_OperationalStatus
+  #-}
 
 -- | The stack type for this interconnect attachment to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at interconnect attachments creation and update interconnect attachment operations.
-newtype InterconnectAttachment_StackType = InterconnectAttachment_StackType { fromInterconnectAttachment_StackType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachment_StackType = InterconnectAttachment_StackType {fromInterconnectAttachment_StackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The interconnect attachment can have both IPv4 and IPv6 addresses.
 pattern InterconnectAttachment_StackType_IPV4_IPV6 :: InterconnectAttachment_StackType
@@ -17558,21 +17311,22 @@ pattern InterconnectAttachment_StackType_IPV4ONLY = InterconnectAttachment_Stack
 {-# COMPLETE
   InterconnectAttachment_StackType_IPV4_IPV6,
   InterconnectAttachment_StackType_IPV4ONLY,
-  InterconnectAttachment_StackType #-}
+  InterconnectAttachment_StackType
+  #-}
 
 -- | [Output Only] The current state of this attachment\'s functionality. Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED\/PRIVATE, PARTNER, and PARTNER/PROVIDER interconnect attachments, while enum values PENDING/PARTNER, PARTNER/REQUEST/RECEIVED, and PENDING/CUSTOMER are used for only PARTNER and PARTNER/PROVIDER interconnect attachments. This state can take one of the following values: - ACTIVE: The attachment has been turned up and is ready to use. - UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete. - PENDING/PARTNER: A newly-created PARTNER attachment that has not yet been configured on the Partner side. - PARTNER/REQUEST/RECEIVED: A PARTNER attachment is in the process of provisioning after a PARTNER/PROVIDER attachment was created that references it. - PENDING/CUSTOMER: A PARTNER or PARTNER/PROVIDER attachment that is waiting for a customer to activate it. - DEFUNCT: The attachment was deleted externally and is no longer functional. This could be because the
 -- associated Interconnect was removed, or because the other side of a Partner attachment was deleted.
-newtype InterconnectAttachment_State = InterconnectAttachment_State { fromInterconnectAttachment_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachment_State = InterconnectAttachment_State {fromInterconnectAttachment_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Indicates that attachment has been turned up and is ready to use.
 pattern InterconnectAttachment_State_Active :: InterconnectAttachment_State
@@ -17594,7 +17348,7 @@ pattern InterconnectAttachment_State_PENDINGCUSTOMER = InterconnectAttachment_St
 pattern InterconnectAttachment_State_PENDINGPARTNER :: InterconnectAttachment_State
 pattern InterconnectAttachment_State_PENDINGPARTNER = InterconnectAttachment_State "PENDING_PARTNER"
 
--- | 
+-- |
 pattern InterconnectAttachment_State_STATEUNSPECIFIED :: InterconnectAttachment_State
 pattern InterconnectAttachment_State_STATEUNSPECIFIED = InterconnectAttachment_State "STATE_UNSPECIFIED"
 
@@ -17610,20 +17364,21 @@ pattern InterconnectAttachment_State_Unprovisioned = InterconnectAttachment_Stat
   InterconnectAttachment_State_PENDINGPARTNER,
   InterconnectAttachment_State_STATEUNSPECIFIED,
   InterconnectAttachment_State_Unprovisioned,
-  InterconnectAttachment_State #-}
+  InterconnectAttachment_State
+  #-}
 
 -- | The type of interconnect attachment this is, which can take one of the following values: - DEDICATED: an attachment to a Dedicated Interconnect. - PARTNER: an attachment to a Partner Interconnect, created by the customer. - PARTNER_PROVIDER: an attachment to a Partner Interconnect, created by the partner.
-newtype InterconnectAttachment_Type = InterconnectAttachment_Type { fromInterconnectAttachment_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachment_Type = InterconnectAttachment_Type {fromInterconnectAttachment_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Attachment to a dedicated interconnect.
 pattern InterconnectAttachment_Type_Dedicated :: InterconnectAttachment_Type
@@ -17641,20 +17396,21 @@ pattern InterconnectAttachment_Type_PARTNERPROVIDER = InterconnectAttachment_Typ
   InterconnectAttachment_Type_Dedicated,
   InterconnectAttachment_Type_Partner,
   InterconnectAttachment_Type_PARTNERPROVIDER,
-  InterconnectAttachment_Type #-}
+  InterconnectAttachment_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InterconnectAttachmentAggregatedList_Warning_Code = InterconnectAttachmentAggregatedList_Warning_Code { fromInterconnectAttachmentAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachmentAggregatedList_Warning_Code = InterconnectAttachmentAggregatedList_Warning_Code {fromInterconnectAttachmentAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InterconnectAttachmentAggregatedList_Warning_Code_CLEANUPFAILED :: InterconnectAttachmentAggregatedList_Warning_Code
@@ -17782,20 +17538,21 @@ pattern InterconnectAttachmentAggregatedList_Warning_Code_Unreachable = Intercon
   InterconnectAttachmentAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InterconnectAttachmentAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   InterconnectAttachmentAggregatedList_Warning_Code_Unreachable,
-  InterconnectAttachmentAggregatedList_Warning_Code #-}
+  InterconnectAttachmentAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InterconnectAttachmentList_Warning_Code = InterconnectAttachmentList_Warning_Code { fromInterconnectAttachmentList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachmentList_Warning_Code = InterconnectAttachmentList_Warning_Code {fromInterconnectAttachmentList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InterconnectAttachmentList_Warning_Code_CLEANUPFAILED :: InterconnectAttachmentList_Warning_Code
@@ -17923,20 +17680,21 @@ pattern InterconnectAttachmentList_Warning_Code_Unreachable = InterconnectAttach
   InterconnectAttachmentList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InterconnectAttachmentList_Warning_Code_UNDECLAREDPROPERTIES,
   InterconnectAttachmentList_Warning_Code_Unreachable,
-  InterconnectAttachmentList_Warning_Code #-}
+  InterconnectAttachmentList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InterconnectAttachmentsScopedList_Warning_Code = InterconnectAttachmentsScopedList_Warning_Code { fromInterconnectAttachmentsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectAttachmentsScopedList_Warning_Code = InterconnectAttachmentsScopedList_Warning_Code {fromInterconnectAttachmentsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InterconnectAttachmentsScopedList_Warning_Code_CLEANUPFAILED :: InterconnectAttachmentsScopedList_Warning_Code
@@ -18064,20 +17822,21 @@ pattern InterconnectAttachmentsScopedList_Warning_Code_Unreachable = Interconnec
   InterconnectAttachmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InterconnectAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   InterconnectAttachmentsScopedList_Warning_Code_Unreachable,
-  InterconnectAttachmentsScopedList_Warning_Code #-}
+  InterconnectAttachmentsScopedList_Warning_Code
+  #-}
 
 -- | The state of a LACP link, which can take one of the following values: - ACTIVE: The link is configured and active within the bundle. - DETACHED: The link is not configured within the bundle. This means that the rest of the object should be empty.
-newtype InterconnectDiagnosticsLinkLACPStatus_State = InterconnectDiagnosticsLinkLACPStatus_State { fromInterconnectDiagnosticsLinkLACPStatus_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectDiagnosticsLinkLACPStatus_State = InterconnectDiagnosticsLinkLACPStatus_State {fromInterconnectDiagnosticsLinkLACPStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The link is configured and active within the bundle.
 pattern InterconnectDiagnosticsLinkLACPStatus_State_Active :: InterconnectDiagnosticsLinkLACPStatus_State
@@ -18090,20 +17849,21 @@ pattern InterconnectDiagnosticsLinkLACPStatus_State_Detached = InterconnectDiagn
 {-# COMPLETE
   InterconnectDiagnosticsLinkLACPStatus_State_Active,
   InterconnectDiagnosticsLinkLACPStatus_State_Detached,
-  InterconnectDiagnosticsLinkLACPStatus_State #-}
+  InterconnectDiagnosticsLinkLACPStatus_State
+  #-}
 
 -- | The status of the current value when compared to the warning and alarm levels for the receiving or transmitting transceiver. Possible states include: - OK: The value has not crossed a warning threshold. - LOW/WARNING: The value has crossed below the low warning threshold. - HIGH/WARNING: The value has crossed above the high warning threshold. - LOW/ALARM: The value has crossed below the low alarm threshold. - HIGH/ALARM: The value has crossed above the high alarm threshold.
-newtype InterconnectDiagnosticsLinkOpticalPower_State = InterconnectDiagnosticsLinkOpticalPower_State { fromInterconnectDiagnosticsLinkOpticalPower_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectDiagnosticsLinkOpticalPower_State = InterconnectDiagnosticsLinkOpticalPower_State {fromInterconnectDiagnosticsLinkOpticalPower_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The value has crossed above the high alarm threshold.
 pattern InterconnectDiagnosticsLinkOpticalPower_State_HIGHALARM :: InterconnectDiagnosticsLinkOpticalPower_State
@@ -18131,20 +17891,21 @@ pattern InterconnectDiagnosticsLinkOpticalPower_State_OK = InterconnectDiagnosti
   InterconnectDiagnosticsLinkOpticalPower_State_LOWALARM,
   InterconnectDiagnosticsLinkOpticalPower_State_LOWWARNING,
   InterconnectDiagnosticsLinkOpticalPower_State_OK,
-  InterconnectDiagnosticsLinkOpticalPower_State #-}
+  InterconnectDiagnosticsLinkOpticalPower_State
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InterconnectList_Warning_Code = InterconnectList_Warning_Code { fromInterconnectList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectList_Warning_Code = InterconnectList_Warning_Code {fromInterconnectList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InterconnectList_Warning_Code_CLEANUPFAILED :: InterconnectList_Warning_Code
@@ -18272,58 +18033,59 @@ pattern InterconnectList_Warning_Code_Unreachable = InterconnectList_Warning_Cod
   InterconnectList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InterconnectList_Warning_Code_UNDECLAREDPROPERTIES,
   InterconnectList_Warning_Code_Unreachable,
-  InterconnectList_Warning_Code #-}
+  InterconnectList_Warning_Code
+  #-}
 
 -- | [Output Only] Continent for this location, which can take one of the following values: - AFRICA - ASIA/PAC - EUROPE - NORTH/AMERICA - SOUTH_AMERICA
-newtype InterconnectLocation_Continent = InterconnectLocation_Continent { fromInterconnectLocation_Continent :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectLocation_Continent = InterconnectLocation_Continent {fromInterconnectLocation_Continent :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_Africa :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_Africa = InterconnectLocation_Continent "AFRICA"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_ASIAPAC :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_ASIAPAC = InterconnectLocation_Continent "ASIA_PAC"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_CAFRICA :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_CAFRICA = InterconnectLocation_Continent "C_AFRICA"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_CASIAPAC :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_CASIAPAC = InterconnectLocation_Continent "C_ASIA_PAC"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_CEUROPE :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_CEUROPE = InterconnectLocation_Continent "C_EUROPE"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_CNORTHAMERICA :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_CNORTHAMERICA = InterconnectLocation_Continent "C_NORTH_AMERICA"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_CSOUTHAMERICA :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_CSOUTHAMERICA = InterconnectLocation_Continent "C_SOUTH_AMERICA"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_Europe :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_Europe = InterconnectLocation_Continent "EUROPE"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_NORTHAMERICA :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_NORTHAMERICA = InterconnectLocation_Continent "NORTH_AMERICA"
 
--- | 
+-- |
 pattern InterconnectLocation_Continent_SOUTHAMERICA :: InterconnectLocation_Continent
 pattern InterconnectLocation_Continent_SOUTHAMERICA = InterconnectLocation_Continent "SOUTH_AMERICA"
 
@@ -18338,20 +18100,21 @@ pattern InterconnectLocation_Continent_SOUTHAMERICA = InterconnectLocation_Conti
   InterconnectLocation_Continent_Europe,
   InterconnectLocation_Continent_NORTHAMERICA,
   InterconnectLocation_Continent_SOUTHAMERICA,
-  InterconnectLocation_Continent #-}
+  InterconnectLocation_Continent
+  #-}
 
 -- | [Output Only] The status of this InterconnectLocation, which can take one of the following values: - CLOSED: The InterconnectLocation is closed and is unavailable for provisioning new Interconnects. - AVAILABLE: The InterconnectLocation is available for provisioning new Interconnects.
-newtype InterconnectLocation_Status = InterconnectLocation_Status { fromInterconnectLocation_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectLocation_Status = InterconnectLocation_Status {fromInterconnectLocation_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The InterconnectLocation is available for provisioning new Interconnects.
 pattern InterconnectLocation_Status_Available :: InterconnectLocation_Status
@@ -18364,20 +18127,21 @@ pattern InterconnectLocation_Status_Closed = InterconnectLocation_Status "CLOSED
 {-# COMPLETE
   InterconnectLocation_Status_Available,
   InterconnectLocation_Status_Closed,
-  InterconnectLocation_Status #-}
+  InterconnectLocation_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype InterconnectLocationList_Warning_Code = InterconnectLocationList_Warning_Code { fromInterconnectLocationList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectLocationList_Warning_Code = InterconnectLocationList_Warning_Code {fromInterconnectLocationList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern InterconnectLocationList_Warning_Code_CLEANUPFAILED :: InterconnectLocationList_Warning_Code
@@ -18505,20 +18269,21 @@ pattern InterconnectLocationList_Warning_Code_Unreachable = InterconnectLocation
   InterconnectLocationList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   InterconnectLocationList_Warning_Code_UNDECLAREDPROPERTIES,
   InterconnectLocationList_Warning_Code_Unreachable,
-  InterconnectLocationList_Warning_Code #-}
+  InterconnectLocationList_Warning_Code
+  #-}
 
 -- | Identifies the network presence of this location.
-newtype InterconnectLocationRegionInfo_LocationPresence = InterconnectLocationRegionInfo_LocationPresence { fromInterconnectLocationRegionInfo_LocationPresence :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectLocationRegionInfo_LocationPresence = InterconnectLocationRegionInfo_LocationPresence {fromInterconnectLocationRegionInfo_LocationPresence :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This region is not in any common network presence with this InterconnectLocation.
 pattern InterconnectLocationRegionInfo_LocationPresence_Global :: InterconnectLocationRegionInfo_LocationPresence
@@ -18541,20 +18306,21 @@ pattern InterconnectLocationRegionInfo_LocationPresence_LPLOCALREGION = Intercon
   InterconnectLocationRegionInfo_LocationPresence_LOCALREGION,
   InterconnectLocationRegionInfo_LocationPresence_LPGLOBAL,
   InterconnectLocationRegionInfo_LocationPresence_LPLOCALREGION,
-  InterconnectLocationRegionInfo_LocationPresence #-}
+  InterconnectLocationRegionInfo_LocationPresence
+  #-}
 
 -- | Form this outage is expected to take, which can take one of the following values: - OUTAGE: The Interconnect may be completely out of service for some or all of the specified window. - PARTIAL/OUTAGE: Some circuits comprising the Interconnect as a whole should remain up, but with reduced bandwidth. Note that the versions of this enum prefixed with \"IT/\" have been deprecated in favor of the unprefixed values.
-newtype InterconnectOutageNotification_IssueType = InterconnectOutageNotification_IssueType { fromInterconnectOutageNotification_IssueType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectOutageNotification_IssueType = InterconnectOutageNotification_IssueType {fromInterconnectOutageNotification_IssueType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | [Deprecated] The Interconnect may be completely out of service for some or all of the specified window.
 pattern InterconnectOutageNotification_IssueType_ITOUTAGE :: InterconnectOutageNotification_IssueType
@@ -18577,20 +18343,21 @@ pattern InterconnectOutageNotification_IssueType_PARTIALOUTAGE = InterconnectOut
   InterconnectOutageNotification_IssueType_ITPARTIALOUTAGE,
   InterconnectOutageNotification_IssueType_Outage,
   InterconnectOutageNotification_IssueType_PARTIALOUTAGE,
-  InterconnectOutageNotification_IssueType #-}
+  InterconnectOutageNotification_IssueType
+  #-}
 
 -- | The party that generated this notification, which can take the following value: - GOOGLE: this notification as generated by Google. Note that the value of NSRC_GOOGLE has been deprecated in favor of GOOGLE.
-newtype InterconnectOutageNotification_Source = InterconnectOutageNotification_Source { fromInterconnectOutageNotification_Source :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectOutageNotification_Source = InterconnectOutageNotification_Source {fromInterconnectOutageNotification_Source :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This notification was generated by Google.
 pattern InterconnectOutageNotification_Source_Google :: InterconnectOutageNotification_Source
@@ -18603,20 +18370,21 @@ pattern InterconnectOutageNotification_Source_NSRCGOOGLE = InterconnectOutageNot
 {-# COMPLETE
   InterconnectOutageNotification_Source_Google,
   InterconnectOutageNotification_Source_NSRCGOOGLE,
-  InterconnectOutageNotification_Source #-}
+  InterconnectOutageNotification_Source
+  #-}
 
 -- | State of this notification, which can take one of the following values: - ACTIVE: This outage notification is active. The event could be in the past, present, or future. See start/time and end/time for scheduling. - CANCELLED: The outage associated with this notification was cancelled before the outage was due to start. - COMPLETED: The outage associated with this notification is complete. Note that the versions of this enum prefixed with \"NS_\" have been deprecated in favor of the unprefixed values.
-newtype InterconnectOutageNotification_State = InterconnectOutageNotification_State { fromInterconnectOutageNotification_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InterconnectOutageNotification_State = InterconnectOutageNotification_State {fromInterconnectOutageNotification_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This outage notification is active. The event could be in the future, present, or past. See start/time and end/time for scheduling.
 pattern InterconnectOutageNotification_State_Active :: InterconnectOutageNotification_State
@@ -18644,20 +18412,21 @@ pattern InterconnectOutageNotification_State_NSCANCELED = InterconnectOutageNoti
   InterconnectOutageNotification_State_Completed,
   InterconnectOutageNotification_State_NSACTIVE,
   InterconnectOutageNotification_State_NSCANCELED,
-  InterconnectOutageNotification_State #-}
+  InterconnectOutageNotification_State
+  #-}
 
 -- | [Output Only] Current state of this License Code.
-newtype LicenseCode_State = LicenseCode_State { fromLicenseCode_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LicenseCode_State = LicenseCode_State {fromLicenseCode_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Machines are not allowed to attach boot disks with this License Code. Requests to create new resources with this license will be rejected.
 pattern LicenseCode_State_Disabled :: LicenseCode_State
@@ -18671,7 +18440,7 @@ pattern LicenseCode_State_Enabled = LicenseCode_State "ENABLED"
 pattern LicenseCode_State_Restricted :: LicenseCode_State
 pattern LicenseCode_State_Restricted = LicenseCode_State "RESTRICTED"
 
--- | 
+-- |
 pattern LicenseCode_State_STATEUNSPECIFIED :: LicenseCode_State
 pattern LicenseCode_State_STATEUNSPECIFIED = LicenseCode_State "STATE_UNSPECIFIED"
 
@@ -18685,20 +18454,21 @@ pattern LicenseCode_State_Terminated = LicenseCode_State "TERMINATED"
   LicenseCode_State_Restricted,
   LicenseCode_State_STATEUNSPECIFIED,
   LicenseCode_State_Terminated,
-  LicenseCode_State #-}
+  LicenseCode_State
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype LicensesListResponse_Warning_Code = LicensesListResponse_Warning_Code { fromLicensesListResponse_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LicensesListResponse_Warning_Code = LicensesListResponse_Warning_Code {fromLicensesListResponse_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern LicensesListResponse_Warning_Code_CLEANUPFAILED :: LicensesListResponse_Warning_Code
@@ -18826,20 +18596,21 @@ pattern LicensesListResponse_Warning_Code_Unreachable = LicensesListResponse_War
   LicensesListResponse_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   LicensesListResponse_Warning_Code_UNDECLAREDPROPERTIES,
   LicensesListResponse_Warning_Code_Unreachable,
-  LicensesListResponse_Warning_Code #-}
+  LicensesListResponse_Warning_Code
+  #-}
 
 -- | Preference for a given location.
-newtype LocationPolicyLocation_Preference = LocationPolicyLocation_Preference { fromLocationPolicyLocation_Preference :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LocationPolicyLocation_Preference = LocationPolicyLocation_Preference {fromLocationPolicyLocation_Preference :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Location is allowed for use.
 pattern LocationPolicyLocation_Preference_Allow :: LocationPolicyLocation_Preference
@@ -18857,20 +18628,21 @@ pattern LocationPolicyLocation_Preference_PREFERENCEUNSPECIFIED = LocationPolicy
   LocationPolicyLocation_Preference_Allow,
   LocationPolicyLocation_Preference_Deny,
   LocationPolicyLocation_Preference_PREFERENCEUNSPECIFIED,
-  LocationPolicyLocation_Preference #-}
+  LocationPolicyLocation_Preference
+  #-}
 
 -- | This is deprecated and has no effect. Do not use.
-newtype LogConfigCloudAuditOptions_LogName = LogConfigCloudAuditOptions_LogName { fromLogConfigCloudAuditOptions_LogName :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LogConfigCloudAuditOptions_LogName = LogConfigCloudAuditOptions_LogName {fromLogConfigCloudAuditOptions_LogName :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is deprecated and has no effect. Do not use.
 pattern LogConfigCloudAuditOptions_LogName_ADMINACTIVITY :: LogConfigCloudAuditOptions_LogName
@@ -18888,20 +18660,21 @@ pattern LogConfigCloudAuditOptions_LogName_UNSPECIFIEDLOGNAME = LogConfigCloudAu
   LogConfigCloudAuditOptions_LogName_ADMINACTIVITY,
   LogConfigCloudAuditOptions_LogName_DATAACCESS,
   LogConfigCloudAuditOptions_LogName_UNSPECIFIEDLOGNAME,
-  LogConfigCloudAuditOptions_LogName #-}
+  LogConfigCloudAuditOptions_LogName
+  #-}
 
 -- | This is deprecated and has no effect. Do not use.
-newtype LogConfigDataAccessOptions_LogMode = LogConfigDataAccessOptions_LogMode { fromLogConfigDataAccessOptions_LogMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LogConfigDataAccessOptions_LogMode = LogConfigDataAccessOptions_LogMode {fromLogConfigDataAccessOptions_LogMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is deprecated and has no effect. Do not use.
 pattern LogConfigDataAccessOptions_LogMode_LOGFAILCLOSED :: LogConfigDataAccessOptions_LogMode
@@ -18914,38 +18687,39 @@ pattern LogConfigDataAccessOptions_LogMode_LOGMODEUNSPECIFIED = LogConfigDataAcc
 {-# COMPLETE
   LogConfigDataAccessOptions_LogMode_LOGFAILCLOSED,
   LogConfigDataAccessOptions_LogMode_LOGMODEUNSPECIFIED,
-  LogConfigDataAccessOptions_LogMode #-}
+  LogConfigDataAccessOptions_LogMode
+  #-}
 
 -- | [Output Only] The status of the machine image. One of the following values: INVALID, CREATING, READY, DELETING, and UPLOADING.
-newtype MachineImage_Status = MachineImage_Status { fromMachineImage_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MachineImage_Status = MachineImage_Status {fromMachineImage_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern MachineImage_Status_Creating :: MachineImage_Status
 pattern MachineImage_Status_Creating = MachineImage_Status "CREATING"
 
--- | 
+-- |
 pattern MachineImage_Status_Deleting :: MachineImage_Status
 pattern MachineImage_Status_Deleting = MachineImage_Status "DELETING"
 
--- | 
+-- |
 pattern MachineImage_Status_Invalid :: MachineImage_Status
 pattern MachineImage_Status_Invalid = MachineImage_Status "INVALID"
 
--- | 
+-- |
 pattern MachineImage_Status_Ready :: MachineImage_Status
 pattern MachineImage_Status_Ready = MachineImage_Status "READY"
 
--- | 
+-- |
 pattern MachineImage_Status_Uploading :: MachineImage_Status
 pattern MachineImage_Status_Uploading = MachineImage_Status "UPLOADING"
 
@@ -18955,20 +18729,21 @@ pattern MachineImage_Status_Uploading = MachineImage_Status "UPLOADING"
   MachineImage_Status_Invalid,
   MachineImage_Status_Ready,
   MachineImage_Status_Uploading,
-  MachineImage_Status #-}
+  MachineImage_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype MachineImageList_Warning_Code = MachineImageList_Warning_Code { fromMachineImageList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MachineImageList_Warning_Code = MachineImageList_Warning_Code {fromMachineImageList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern MachineImageList_Warning_Code_CLEANUPFAILED :: MachineImageList_Warning_Code
@@ -19096,20 +18871,21 @@ pattern MachineImageList_Warning_Code_Unreachable = MachineImageList_Warning_Cod
   MachineImageList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   MachineImageList_Warning_Code_UNDECLAREDPROPERTIES,
   MachineImageList_Warning_Code_Unreachable,
-  MachineImageList_Warning_Code #-}
+  MachineImageList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype MachineTypeAggregatedList_Warning_Code = MachineTypeAggregatedList_Warning_Code { fromMachineTypeAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MachineTypeAggregatedList_Warning_Code = MachineTypeAggregatedList_Warning_Code {fromMachineTypeAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern MachineTypeAggregatedList_Warning_Code_CLEANUPFAILED :: MachineTypeAggregatedList_Warning_Code
@@ -19237,20 +19013,21 @@ pattern MachineTypeAggregatedList_Warning_Code_Unreachable = MachineTypeAggregat
   MachineTypeAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   MachineTypeAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   MachineTypeAggregatedList_Warning_Code_Unreachable,
-  MachineTypeAggregatedList_Warning_Code #-}
+  MachineTypeAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype MachineTypeList_Warning_Code = MachineTypeList_Warning_Code { fromMachineTypeList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MachineTypeList_Warning_Code = MachineTypeList_Warning_Code {fromMachineTypeList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern MachineTypeList_Warning_Code_CLEANUPFAILED :: MachineTypeList_Warning_Code
@@ -19378,20 +19155,21 @@ pattern MachineTypeList_Warning_Code_Unreachable = MachineTypeList_Warning_Code 
   MachineTypeList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   MachineTypeList_Warning_Code_UNDECLAREDPROPERTIES,
   MachineTypeList_Warning_Code_Unreachable,
-  MachineTypeList_Warning_Code #-}
+  MachineTypeList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype MachineTypesScopedList_Warning_Code = MachineTypesScopedList_Warning_Code { fromMachineTypesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MachineTypesScopedList_Warning_Code = MachineTypesScopedList_Warning_Code {fromMachineTypesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern MachineTypesScopedList_Warning_Code_CLEANUPFAILED :: MachineTypesScopedList_Warning_Code
@@ -19519,21 +19297,22 @@ pattern MachineTypesScopedList_Warning_Code_Unreachable = MachineTypesScopedList
   MachineTypesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   MachineTypesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   MachineTypesScopedList_Warning_Code_Unreachable,
-  MachineTypesScopedList_Warning_Code #-}
+  MachineTypesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: - NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. - CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. - CREATING/WITHOUT/RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group\'s targetSize value is decreased instead. - RECREATING The managed instance group is recreating this instance. - DELETING The managed instance group is permanently deleting this instance. - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. - RESTARTING The managed instance group is restarting the instance. - REFRESHING The
 -- managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance. - VERIFYING The managed instance group has created the instance and it is in the process of being verified.
-newtype ManagedInstance_CurrentAction = ManagedInstance_CurrentAction { fromManagedInstance_CurrentAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ManagedInstance_CurrentAction = ManagedInstance_CurrentAction {fromManagedInstance_CurrentAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group.
 pattern ManagedInstance_CurrentAction_Abandoning :: ManagedInstance_CurrentAction
@@ -19601,20 +19380,21 @@ pattern ManagedInstance_CurrentAction_Verifying = ManagedInstance_CurrentAction 
   ManagedInstance_CurrentAction_Stopping,
   ManagedInstance_CurrentAction_Suspending,
   ManagedInstance_CurrentAction_Verifying,
-  ManagedInstance_CurrentAction #-}
+  ManagedInstance_CurrentAction
+  #-}
 
 -- | [Output Only] The status of the instance. This field is empty when the instance does not exist.
-newtype ManagedInstance_InstanceStatus = ManagedInstance_InstanceStatus { fromManagedInstance_InstanceStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ManagedInstance_InstanceStatus = ManagedInstance_InstanceStatus {fromManagedInstance_InstanceStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
 pattern ManagedInstance_InstanceStatus_Deprovisioning :: ManagedInstance_InstanceStatus
@@ -19667,20 +19447,21 @@ pattern ManagedInstance_InstanceStatus_Terminated = ManagedInstance_InstanceStat
   ManagedInstance_InstanceStatus_Suspended,
   ManagedInstance_InstanceStatus_Suspending,
   ManagedInstance_InstanceStatus_Terminated,
-  ManagedInstance_InstanceStatus #-}
+  ManagedInstance_InstanceStatus
+  #-}
 
 -- | [Output Only] The current detailed instance health state.
-newtype ManagedInstanceInstanceHealth_DetailedHealthState = ManagedInstanceInstanceHealth_DetailedHealthState { fromManagedInstanceInstanceHealth_DetailedHealthState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ManagedInstanceInstanceHealth_DetailedHealthState = ManagedInstanceInstanceHealth_DetailedHealthState {fromManagedInstanceInstanceHealth_DetailedHealthState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The instance is being drained. The existing connections to the instance have time to complete, but the new ones are being refused.
 pattern ManagedInstanceInstanceHealth_DetailedHealthState_Draining :: ManagedInstanceInstanceHealth_DetailedHealthState
@@ -19708,20 +19489,21 @@ pattern ManagedInstanceInstanceHealth_DetailedHealthState_Unknown = ManagedInsta
   ManagedInstanceInstanceHealth_DetailedHealthState_Timeout,
   ManagedInstanceInstanceHealth_DetailedHealthState_Unhealthy,
   ManagedInstanceInstanceHealth_DetailedHealthState_Unknown,
-  ManagedInstanceInstanceHealth_DetailedHealthState #-}
+  ManagedInstanceInstanceHealth_DetailedHealthState
+  #-}
 
 -- | Specifies how individual filter label matches within the list of filterLabels and contributes toward the overall metadataFilter match. Supported values are: - MATCH/ANY: at least one of the filterLabels must have a matching label in the provided metadata. - MATCH/ALL: all filterLabels must have matching labels in the provided metadata.
-newtype MetadataFilter_FilterMatchCriteria = MetadataFilter_FilterMatchCriteria { fromMetadataFilter_FilterMatchCriteria :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MetadataFilter_FilterMatchCriteria = MetadataFilter_FilterMatchCriteria {fromMetadataFilter_FilterMatchCriteria :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Specifies that all filterLabels must match for the metadataFilter to be considered a match.
 pattern MetadataFilter_FilterMatchCriteria_MATCHALL :: MetadataFilter_FilterMatchCriteria
@@ -19739,46 +19521,48 @@ pattern MetadataFilter_FilterMatchCriteria_NOTSET = MetadataFilter_FilterMatchCr
   MetadataFilter_FilterMatchCriteria_MATCHALL,
   MetadataFilter_FilterMatchCriteria_MATCHANY,
   MetadataFilter_FilterMatchCriteria_NOTSET,
-  MetadataFilter_FilterMatchCriteria #-}
+  MetadataFilter_FilterMatchCriteria
+  #-}
 
 -- | The network firewall policy enforcement order. Can be either AFTER/CLASSIC/FIREWALL or BEFORE/CLASSIC/FIREWALL. Defaults to AFTER/CLASSIC/FIREWALL if the field is not specified.
-newtype Network_NetworkFirewallPolicyEnforcementOrder = Network_NetworkFirewallPolicyEnforcementOrder { fromNetwork_NetworkFirewallPolicyEnforcementOrder :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Network_NetworkFirewallPolicyEnforcementOrder = Network_NetworkFirewallPolicyEnforcementOrder {fromNetwork_NetworkFirewallPolicyEnforcementOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Network_NetworkFirewallPolicyEnforcementOrder_AFTERCLASSICFIREWALL :: Network_NetworkFirewallPolicyEnforcementOrder
 pattern Network_NetworkFirewallPolicyEnforcementOrder_AFTERCLASSICFIREWALL = Network_NetworkFirewallPolicyEnforcementOrder "AFTER_CLASSIC_FIREWALL"
 
--- | 
+-- |
 pattern Network_NetworkFirewallPolicyEnforcementOrder_BEFORECLASSICFIREWALL :: Network_NetworkFirewallPolicyEnforcementOrder
 pattern Network_NetworkFirewallPolicyEnforcementOrder_BEFORECLASSICFIREWALL = Network_NetworkFirewallPolicyEnforcementOrder "BEFORE_CLASSIC_FIREWALL"
 
 {-# COMPLETE
   Network_NetworkFirewallPolicyEnforcementOrder_AFTERCLASSICFIREWALL,
   Network_NetworkFirewallPolicyEnforcementOrder_BEFORECLASSICFIREWALL,
-  Network_NetworkFirewallPolicyEnforcementOrder #-}
+  Network_NetworkFirewallPolicyEnforcementOrder
+  #-}
 
 -- | Type of network endpoints in this network endpoint group. Can be one of GCE/VM/IP, GCE/VM/IP/PORT, NON/GCP/PRIVATE/IP/PORT, INTERNET/FQDN/PORT, INTERNET/IP/PORT, SERVERLESS, PRIVATE/SERVICE_CONNECT.
-newtype NetworkEndpointGroup_NetworkEndpointType = NetworkEndpointGroup_NetworkEndpointType { fromNetworkEndpointGroup_NetworkEndpointType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkEndpointGroup_NetworkEndpointType = NetworkEndpointGroup_NetworkEndpointType {fromNetworkEndpointGroup_NetworkEndpointType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The network endpoint is represented by an IP address.
 pattern NetworkEndpointGroup_NetworkEndpointType_GCEVMIP :: NetworkEndpointGroup_NetworkEndpointType
@@ -19816,20 +19600,21 @@ pattern NetworkEndpointGroup_NetworkEndpointType_Serverless = NetworkEndpointGro
   NetworkEndpointGroup_NetworkEndpointType_NONGCPPRIVATEIPPORT,
   NetworkEndpointGroup_NetworkEndpointType_PRIVATESERVICECONNECT,
   NetworkEndpointGroup_NetworkEndpointType_Serverless,
-  NetworkEndpointGroup_NetworkEndpointType #-}
+  NetworkEndpointGroup_NetworkEndpointType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NetworkEndpointGroupAggregatedList_Warning_Code = NetworkEndpointGroupAggregatedList_Warning_Code { fromNetworkEndpointGroupAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkEndpointGroupAggregatedList_Warning_Code = NetworkEndpointGroupAggregatedList_Warning_Code {fromNetworkEndpointGroupAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_CLEANUPFAILED :: NetworkEndpointGroupAggregatedList_Warning_Code
@@ -19957,20 +19742,21 @@ pattern NetworkEndpointGroupAggregatedList_Warning_Code_Unreachable = NetworkEnd
   NetworkEndpointGroupAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NetworkEndpointGroupAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   NetworkEndpointGroupAggregatedList_Warning_Code_Unreachable,
-  NetworkEndpointGroupAggregatedList_Warning_Code #-}
+  NetworkEndpointGroupAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NetworkEndpointGroupList_Warning_Code = NetworkEndpointGroupList_Warning_Code { fromNetworkEndpointGroupList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkEndpointGroupList_Warning_Code = NetworkEndpointGroupList_Warning_Code {fromNetworkEndpointGroupList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NetworkEndpointGroupList_Warning_Code_CLEANUPFAILED :: NetworkEndpointGroupList_Warning_Code
@@ -20098,20 +19884,21 @@ pattern NetworkEndpointGroupList_Warning_Code_Unreachable = NetworkEndpointGroup
   NetworkEndpointGroupList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NetworkEndpointGroupList_Warning_Code_UNDECLAREDPROPERTIES,
   NetworkEndpointGroupList_Warning_Code_Unreachable,
-  NetworkEndpointGroupList_Warning_Code #-}
+  NetworkEndpointGroupList_Warning_Code
+  #-}
 
 -- | Optional query parameter for showing the health status of each network endpoint. Valid options are SKIP or SHOW. If you don\'t specify this parameter, the health status of network endpoints will not be provided.
-newtype NetworkEndpointGroupsListEndpointsRequest_HealthStatus = NetworkEndpointGroupsListEndpointsRequest_HealthStatus { fromNetworkEndpointGroupsListEndpointsRequest_HealthStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkEndpointGroupsListEndpointsRequest_HealthStatus = NetworkEndpointGroupsListEndpointsRequest_HealthStatus {fromNetworkEndpointGroupsListEndpointsRequest_HealthStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Show the health status for each network endpoint. Impacts latency of the call.
 pattern NetworkEndpointGroupsListEndpointsRequest_HealthStatus_Show :: NetworkEndpointGroupsListEndpointsRequest_HealthStatus
@@ -20124,20 +19911,21 @@ pattern NetworkEndpointGroupsListEndpointsRequest_HealthStatus_Skip = NetworkEnd
 {-# COMPLETE
   NetworkEndpointGroupsListEndpointsRequest_HealthStatus_Show,
   NetworkEndpointGroupsListEndpointsRequest_HealthStatus_Skip,
-  NetworkEndpointGroupsListEndpointsRequest_HealthStatus #-}
+  NetworkEndpointGroupsListEndpointsRequest_HealthStatus
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NetworkEndpointGroupsListNetworkEndpoints_Warning_Code = NetworkEndpointGroupsListNetworkEndpoints_Warning_Code { fromNetworkEndpointGroupsListNetworkEndpoints_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkEndpointGroupsListNetworkEndpoints_Warning_Code = NetworkEndpointGroupsListNetworkEndpoints_Warning_Code {fromNetworkEndpointGroupsListNetworkEndpoints_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_CLEANUPFAILED :: NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
@@ -20265,20 +20053,21 @@ pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_Unreachable = Net
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_UNDECLAREDPROPERTIES,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_Unreachable,
-  NetworkEndpointGroupsListNetworkEndpoints_Warning_Code #-}
+  NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NetworkEndpointGroupsScopedList_Warning_Code = NetworkEndpointGroupsScopedList_Warning_Code { fromNetworkEndpointGroupsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkEndpointGroupsScopedList_Warning_Code = NetworkEndpointGroupsScopedList_Warning_Code {fromNetworkEndpointGroupsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NetworkEndpointGroupsScopedList_Warning_Code_CLEANUPFAILED :: NetworkEndpointGroupsScopedList_Warning_Code
@@ -20406,20 +20195,21 @@ pattern NetworkEndpointGroupsScopedList_Warning_Code_Unreachable = NetworkEndpoi
   NetworkEndpointGroupsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NetworkEndpointGroupsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   NetworkEndpointGroupsScopedList_Warning_Code_Unreachable,
-  NetworkEndpointGroupsScopedList_Warning_Code #-}
+  NetworkEndpointGroupsScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be accessed from the Internet. This field is always inherited from its subnetwork. Valid only if stackType is IPV4_IPV6.
-newtype NetworkInterface_Ipv6AccessType = NetworkInterface_Ipv6AccessType { fromNetworkInterface_Ipv6AccessType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkInterface_Ipv6AccessType = NetworkInterface_Ipv6AccessType {fromNetworkInterface_Ipv6AccessType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This network interface can have external IPv6.
 pattern NetworkInterface_Ipv6AccessType_External :: NetworkInterface_Ipv6AccessType
@@ -20432,20 +20222,21 @@ pattern NetworkInterface_Ipv6AccessType_Internal = NetworkInterface_Ipv6AccessTy
 {-# COMPLETE
   NetworkInterface_Ipv6AccessType_External,
   NetworkInterface_Ipv6AccessType_Internal,
-  NetworkInterface_Ipv6AccessType #-}
+  NetworkInterface_Ipv6AccessType
+  #-}
 
 -- | The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
-newtype NetworkInterface_NicType = NetworkInterface_NicType { fromNetworkInterface_NicType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkInterface_NicType = NetworkInterface_NicType {fromNetworkInterface_NicType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | GVNIC
 pattern NetworkInterface_NicType_Gvnic :: NetworkInterface_NicType
@@ -20463,20 +20254,21 @@ pattern NetworkInterface_NicType_VIRTIONET = NetworkInterface_NicType "VIRTIO_NE
   NetworkInterface_NicType_Gvnic,
   NetworkInterface_NicType_UNSPECIFIEDNICTYPE,
   NetworkInterface_NicType_VIRTIONET,
-  NetworkInterface_NicType #-}
+  NetworkInterface_NicType
+  #-}
 
 -- | The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at instance creation and update network interface operations.
-newtype NetworkInterface_StackType = NetworkInterface_StackType { fromNetworkInterface_StackType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkInterface_StackType = NetworkInterface_StackType {fromNetworkInterface_StackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The network interface can have both IPv4 and IPv6 addresses.
 pattern NetworkInterface_StackType_IPV4_IPV6 :: NetworkInterface_StackType
@@ -20489,20 +20281,21 @@ pattern NetworkInterface_StackType_IPV4ONLY = NetworkInterface_StackType "IPV4_O
 {-# COMPLETE
   NetworkInterface_StackType_IPV4_IPV6,
   NetworkInterface_StackType_IPV4ONLY,
-  NetworkInterface_StackType #-}
+  NetworkInterface_StackType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NetworkList_Warning_Code = NetworkList_Warning_Code { fromNetworkList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkList_Warning_Code = NetworkList_Warning_Code {fromNetworkList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NetworkList_Warning_Code_CLEANUPFAILED :: NetworkList_Warning_Code
@@ -20630,20 +20423,21 @@ pattern NetworkList_Warning_Code_Unreachable = NetworkList_Warning_Code "UNREACH
   NetworkList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NetworkList_Warning_Code_UNDECLAREDPROPERTIES,
   NetworkList_Warning_Code_Unreachable,
-  NetworkList_Warning_Code #-}
+  NetworkList_Warning_Code
+  #-}
 
 -- | [Output Only] State for the peering, either @ACTIVE@ or @INACTIVE@. The peering is @ACTIVE@ when there\'s a matching configuration in the peer network.
-newtype NetworkPeering_State = NetworkPeering_State { fromNetworkPeering_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkPeering_State = NetworkPeering_State {fromNetworkPeering_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Matching configuration exists on the peer.
 pattern NetworkPeering_State_Active :: NetworkPeering_State
@@ -20656,81 +20450,84 @@ pattern NetworkPeering_State_Inactive = NetworkPeering_State "INACTIVE"
 {-# COMPLETE
   NetworkPeering_State_Active,
   NetworkPeering_State_Inactive,
-  NetworkPeering_State #-}
+  NetworkPeering_State
+  #-}
 
-newtype NetworkPerformanceConfig_TotalEgressBandwidthTier = NetworkPerformanceConfig_TotalEgressBandwidthTier { fromNetworkPerformanceConfig_TotalEgressBandwidthTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkPerformanceConfig_TotalEgressBandwidthTier = NetworkPerformanceConfig_TotalEgressBandwidthTier {fromNetworkPerformanceConfig_TotalEgressBandwidthTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_Default :: NetworkPerformanceConfig_TotalEgressBandwidthTier
 pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_Default = NetworkPerformanceConfig_TotalEgressBandwidthTier "DEFAULT"
 
--- | 
+-- |
 pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1 :: NetworkPerformanceConfig_TotalEgressBandwidthTier
 pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1 = NetworkPerformanceConfig_TotalEgressBandwidthTier "TIER_1"
 
 {-# COMPLETE
   NetworkPerformanceConfig_TotalEgressBandwidthTier_Default,
   NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
-  NetworkPerformanceConfig_TotalEgressBandwidthTier #-}
+  NetworkPerformanceConfig_TotalEgressBandwidthTier
+  #-}
 
 -- | The network-wide routing mode to use. If set to REGIONAL, this network\'s Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network\'s Cloud Routers will advertise routes with all subnets of this network, across regions.
-newtype NetworkRoutingConfig_RoutingMode = NetworkRoutingConfig_RoutingMode { fromNetworkRoutingConfig_RoutingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkRoutingConfig_RoutingMode = NetworkRoutingConfig_RoutingMode {fromNetworkRoutingConfig_RoutingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NetworkRoutingConfig_RoutingMode_Global :: NetworkRoutingConfig_RoutingMode
 pattern NetworkRoutingConfig_RoutingMode_Global = NetworkRoutingConfig_RoutingMode "GLOBAL"
 
--- | 
+-- |
 pattern NetworkRoutingConfig_RoutingMode_Regional :: NetworkRoutingConfig_RoutingMode
 pattern NetworkRoutingConfig_RoutingMode_Regional = NetworkRoutingConfig_RoutingMode "REGIONAL"
 
 {-# COMPLETE
   NetworkRoutingConfig_RoutingMode_Global,
   NetworkRoutingConfig_RoutingMode_Regional,
-  NetworkRoutingConfig_RoutingMode #-}
+  NetworkRoutingConfig_RoutingMode
+  #-}
 
 -- | [Output Only] The type of the firewall policy.
-newtype NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type = NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type { fromNetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type = NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type {fromNetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy :: NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy = NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "HIERARCHY"
 
--- | 
+-- |
 pattern NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network :: NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network = NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "NETWORK"
 
--- | 
+-- |
 pattern NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified :: NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified = NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "UNSPECIFIED"
 
@@ -20738,26 +20535,27 @@ pattern NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspec
   NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
   NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
   NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
-  NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type #-}
+  NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+  #-}
 
 -- | Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART/IN/PLACE, or MIGRATE/WITHIN/NODE_GROUP. The default value is DEFAULT. For more information, see Maintenance policies.
-newtype NodeGroup_MaintenancePolicy = NodeGroup_MaintenancePolicy { fromNodeGroup_MaintenancePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroup_MaintenancePolicy = NodeGroup_MaintenancePolicy {fromNodeGroup_MaintenancePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Allow the node and corresponding instances to retain default maintenance behavior.
 pattern NodeGroup_MaintenancePolicy_Default :: NodeGroup_MaintenancePolicy
 pattern NodeGroup_MaintenancePolicy_Default = NodeGroup_MaintenancePolicy "DEFAULT"
 
--- | 
+-- |
 pattern NodeGroup_MaintenancePolicy_MAINTENANCEPOLICYUNSPECIFIED :: NodeGroup_MaintenancePolicy
 pattern NodeGroup_MaintenancePolicy_MAINTENANCEPOLICYUNSPECIFIED = NodeGroup_MaintenancePolicy "MAINTENANCE_POLICY_UNSPECIFIED"
 
@@ -20774,33 +20572,34 @@ pattern NodeGroup_MaintenancePolicy_RESTARTINPLACE = NodeGroup_MaintenancePolicy
   NodeGroup_MaintenancePolicy_MAINTENANCEPOLICYUNSPECIFIED,
   NodeGroup_MaintenancePolicy_MIGRATEWITHINNODEGROUP,
   NodeGroup_MaintenancePolicy_RESTARTINPLACE,
-  NodeGroup_MaintenancePolicy #-}
+  NodeGroup_MaintenancePolicy
+  #-}
 
-newtype NodeGroup_Status = NodeGroup_Status { fromNodeGroup_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroup_Status = NodeGroup_Status {fromNodeGroup_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NodeGroup_Status_Creating :: NodeGroup_Status
 pattern NodeGroup_Status_Creating = NodeGroup_Status "CREATING"
 
--- | 
+-- |
 pattern NodeGroup_Status_Deleting :: NodeGroup_Status
 pattern NodeGroup_Status_Deleting = NodeGroup_Status "DELETING"
 
--- | 
+-- |
 pattern NodeGroup_Status_Invalid :: NodeGroup_Status
 pattern NodeGroup_Status_Invalid = NodeGroup_Status "INVALID"
 
--- | 
+-- |
 pattern NodeGroup_Status_Ready :: NodeGroup_Status
 pattern NodeGroup_Status_Ready = NodeGroup_Status "READY"
 
@@ -20809,20 +20608,21 @@ pattern NodeGroup_Status_Ready = NodeGroup_Status "READY"
   NodeGroup_Status_Deleting,
   NodeGroup_Status_Invalid,
   NodeGroup_Status_Ready,
-  NodeGroup_Status #-}
+  NodeGroup_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeGroupAggregatedList_Warning_Code = NodeGroupAggregatedList_Warning_Code { fromNodeGroupAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupAggregatedList_Warning_Code = NodeGroupAggregatedList_Warning_Code {fromNodeGroupAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeGroupAggregatedList_Warning_Code_CLEANUPFAILED :: NodeGroupAggregatedList_Warning_Code
@@ -20950,22 +20750,23 @@ pattern NodeGroupAggregatedList_Warning_Code_Unreachable = NodeGroupAggregatedLi
   NodeGroupAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeGroupAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeGroupAggregatedList_Warning_Code_Unreachable,
-  NodeGroupAggregatedList_Warning_Code #-}
+  NodeGroupAggregatedList_Warning_Code
+  #-}
 
 -- | The autoscaling mode. Set to one of: ON, OFF, or ONLY/SCALE/OUT. For more information, see Autoscaler modes.
-newtype NodeGroupAutoscalingPolicy_Mode = NodeGroupAutoscalingPolicy_Mode { fromNodeGroupAutoscalingPolicy_Mode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupAutoscalingPolicy_Mode = NodeGroupAutoscalingPolicy_Mode {fromNodeGroupAutoscalingPolicy_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NodeGroupAutoscalingPolicy_Mode_MODEUNSPECIFIED :: NodeGroupAutoscalingPolicy_Mode
 pattern NodeGroupAutoscalingPolicy_Mode_MODEUNSPECIFIED = NodeGroupAutoscalingPolicy_Mode "MODE_UNSPECIFIED"
 
@@ -20986,20 +20787,21 @@ pattern NodeGroupAutoscalingPolicy_Mode_ONLYSCALEOUT = NodeGroupAutoscalingPolic
   NodeGroupAutoscalingPolicy_Mode_Off,
   NodeGroupAutoscalingPolicy_Mode_ON,
   NodeGroupAutoscalingPolicy_Mode_ONLYSCALEOUT,
-  NodeGroupAutoscalingPolicy_Mode #-}
+  NodeGroupAutoscalingPolicy_Mode
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeGroupList_Warning_Code = NodeGroupList_Warning_Code { fromNodeGroupList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupList_Warning_Code = NodeGroupList_Warning_Code {fromNodeGroupList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeGroupList_Warning_Code_CLEANUPFAILED :: NodeGroupList_Warning_Code
@@ -21127,30 +20929,31 @@ pattern NodeGroupList_Warning_Code_Unreachable = NodeGroupList_Warning_Code "UNR
   NodeGroupList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeGroupList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeGroupList_Warning_Code_Unreachable,
-  NodeGroupList_Warning_Code #-}
+  NodeGroupList_Warning_Code
+  #-}
 
 -- | CPU overcommit.
-newtype NodeGroupNode_CpuOvercommitType = NodeGroupNode_CpuOvercommitType { fromNodeGroupNode_CpuOvercommitType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupNode_CpuOvercommitType = NodeGroupNode_CpuOvercommitType {fromNodeGroupNode_CpuOvercommitType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NodeGroupNode_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED :: NodeGroupNode_CpuOvercommitType
 pattern NodeGroupNode_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED = NodeGroupNode_CpuOvercommitType "CPU_OVERCOMMIT_TYPE_UNSPECIFIED"
 
--- | 
+-- |
 pattern NodeGroupNode_CpuOvercommitType_Enabled :: NodeGroupNode_CpuOvercommitType
 pattern NodeGroupNode_CpuOvercommitType_Enabled = NodeGroupNode_CpuOvercommitType "ENABLED"
 
--- | 
+-- |
 pattern NodeGroupNode_CpuOvercommitType_None :: NodeGroupNode_CpuOvercommitType
 pattern NodeGroupNode_CpuOvercommitType_None = NodeGroupNode_CpuOvercommitType "NONE"
 
@@ -21158,37 +20961,38 @@ pattern NodeGroupNode_CpuOvercommitType_None = NodeGroupNode_CpuOvercommitType "
   NodeGroupNode_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED,
   NodeGroupNode_CpuOvercommitType_Enabled,
   NodeGroupNode_CpuOvercommitType_None,
-  NodeGroupNode_CpuOvercommitType #-}
+  NodeGroupNode_CpuOvercommitType
+  #-}
 
-newtype NodeGroupNode_Status = NodeGroupNode_Status { fromNodeGroupNode_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupNode_Status = NodeGroupNode_Status {fromNodeGroupNode_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NodeGroupNode_Status_Creating :: NodeGroupNode_Status
 pattern NodeGroupNode_Status_Creating = NodeGroupNode_Status "CREATING"
 
--- | 
+-- |
 pattern NodeGroupNode_Status_Deleting :: NodeGroupNode_Status
 pattern NodeGroupNode_Status_Deleting = NodeGroupNode_Status "DELETING"
 
--- | 
+-- |
 pattern NodeGroupNode_Status_Invalid :: NodeGroupNode_Status
 pattern NodeGroupNode_Status_Invalid = NodeGroupNode_Status "INVALID"
 
--- | 
+-- |
 pattern NodeGroupNode_Status_Ready :: NodeGroupNode_Status
 pattern NodeGroupNode_Status_Ready = NodeGroupNode_Status "READY"
 
--- | 
+-- |
 pattern NodeGroupNode_Status_Repairing :: NodeGroupNode_Status
 pattern NodeGroupNode_Status_Repairing = NodeGroupNode_Status "REPAIRING"
 
@@ -21198,20 +21002,21 @@ pattern NodeGroupNode_Status_Repairing = NodeGroupNode_Status "REPAIRING"
   NodeGroupNode_Status_Invalid,
   NodeGroupNode_Status_Ready,
   NodeGroupNode_Status_Repairing,
-  NodeGroupNode_Status #-}
+  NodeGroupNode_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeGroupsListNodes_Warning_Code = NodeGroupsListNodes_Warning_Code { fromNodeGroupsListNodes_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupsListNodes_Warning_Code = NodeGroupsListNodes_Warning_Code {fromNodeGroupsListNodes_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeGroupsListNodes_Warning_Code_CLEANUPFAILED :: NodeGroupsListNodes_Warning_Code
@@ -21339,20 +21144,21 @@ pattern NodeGroupsListNodes_Warning_Code_Unreachable = NodeGroupsListNodes_Warni
   NodeGroupsListNodes_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeGroupsListNodes_Warning_Code_UNDECLAREDPROPERTIES,
   NodeGroupsListNodes_Warning_Code_Unreachable,
-  NodeGroupsListNodes_Warning_Code #-}
+  NodeGroupsListNodes_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeGroupsScopedList_Warning_Code = NodeGroupsScopedList_Warning_Code { fromNodeGroupsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupsScopedList_Warning_Code = NodeGroupsScopedList_Warning_Code {fromNodeGroupsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeGroupsScopedList_Warning_Code_CLEANUPFAILED :: NodeGroupsScopedList_Warning_Code
@@ -21480,30 +21286,31 @@ pattern NodeGroupsScopedList_Warning_Code_Unreachable = NodeGroupsScopedList_War
   NodeGroupsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeGroupsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeGroupsScopedList_Warning_Code_Unreachable,
-  NodeGroupsScopedList_Warning_Code #-}
+  NodeGroupsScopedList_Warning_Code
+  #-}
 
 -- | CPU overcommit.
-newtype NodeTemplate_CpuOvercommitType = NodeTemplate_CpuOvercommitType { fromNodeTemplate_CpuOvercommitType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTemplate_CpuOvercommitType = NodeTemplate_CpuOvercommitType {fromNodeTemplate_CpuOvercommitType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern NodeTemplate_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED :: NodeTemplate_CpuOvercommitType
 pattern NodeTemplate_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED = NodeTemplate_CpuOvercommitType "CPU_OVERCOMMIT_TYPE_UNSPECIFIED"
 
--- | 
+-- |
 pattern NodeTemplate_CpuOvercommitType_Enabled :: NodeTemplate_CpuOvercommitType
 pattern NodeTemplate_CpuOvercommitType_Enabled = NodeTemplate_CpuOvercommitType "ENABLED"
 
--- | 
+-- |
 pattern NodeTemplate_CpuOvercommitType_None :: NodeTemplate_CpuOvercommitType
 pattern NodeTemplate_CpuOvercommitType_None = NodeTemplate_CpuOvercommitType "NONE"
 
@@ -21511,20 +21318,21 @@ pattern NodeTemplate_CpuOvercommitType_None = NodeTemplate_CpuOvercommitType "NO
   NodeTemplate_CpuOvercommitType_CPUOVERCOMMITTYPEUNSPECIFIED,
   NodeTemplate_CpuOvercommitType_Enabled,
   NodeTemplate_CpuOvercommitType_None,
-  NodeTemplate_CpuOvercommitType #-}
+  NodeTemplate_CpuOvercommitType
+  #-}
 
 -- | [Output Only] The status of the node template. One of the following values: CREATING, READY, and DELETING.
-newtype NodeTemplate_Status = NodeTemplate_Status { fromNodeTemplate_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTemplate_Status = NodeTemplate_Status {fromNodeTemplate_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Resources are being allocated.
 pattern NodeTemplate_Status_Creating :: NodeTemplate_Status
@@ -21547,20 +21355,21 @@ pattern NodeTemplate_Status_Ready = NodeTemplate_Status "READY"
   NodeTemplate_Status_Deleting,
   NodeTemplate_Status_Invalid,
   NodeTemplate_Status_Ready,
-  NodeTemplate_Status #-}
+  NodeTemplate_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeTemplateAggregatedList_Warning_Code = NodeTemplateAggregatedList_Warning_Code { fromNodeTemplateAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTemplateAggregatedList_Warning_Code = NodeTemplateAggregatedList_Warning_Code {fromNodeTemplateAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeTemplateAggregatedList_Warning_Code_CLEANUPFAILED :: NodeTemplateAggregatedList_Warning_Code
@@ -21688,20 +21497,21 @@ pattern NodeTemplateAggregatedList_Warning_Code_Unreachable = NodeTemplateAggreg
   NodeTemplateAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeTemplateAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeTemplateAggregatedList_Warning_Code_Unreachable,
-  NodeTemplateAggregatedList_Warning_Code #-}
+  NodeTemplateAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeTemplateList_Warning_Code = NodeTemplateList_Warning_Code { fromNodeTemplateList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTemplateList_Warning_Code = NodeTemplateList_Warning_Code {fromNodeTemplateList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeTemplateList_Warning_Code_CLEANUPFAILED :: NodeTemplateList_Warning_Code
@@ -21829,20 +21639,21 @@ pattern NodeTemplateList_Warning_Code_Unreachable = NodeTemplateList_Warning_Cod
   NodeTemplateList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeTemplateList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeTemplateList_Warning_Code_Unreachable,
-  NodeTemplateList_Warning_Code #-}
+  NodeTemplateList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeTemplatesScopedList_Warning_Code = NodeTemplatesScopedList_Warning_Code { fromNodeTemplatesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTemplatesScopedList_Warning_Code = NodeTemplatesScopedList_Warning_Code {fromNodeTemplatesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeTemplatesScopedList_Warning_Code_CLEANUPFAILED :: NodeTemplatesScopedList_Warning_Code
@@ -21970,20 +21781,21 @@ pattern NodeTemplatesScopedList_Warning_Code_Unreachable = NodeTemplatesScopedLi
   NodeTemplatesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeTemplatesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeTemplatesScopedList_Warning_Code_Unreachable,
-  NodeTemplatesScopedList_Warning_Code #-}
+  NodeTemplatesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeTypeAggregatedList_Warning_Code = NodeTypeAggregatedList_Warning_Code { fromNodeTypeAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTypeAggregatedList_Warning_Code = NodeTypeAggregatedList_Warning_Code {fromNodeTypeAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeTypeAggregatedList_Warning_Code_CLEANUPFAILED :: NodeTypeAggregatedList_Warning_Code
@@ -22111,20 +21923,21 @@ pattern NodeTypeAggregatedList_Warning_Code_Unreachable = NodeTypeAggregatedList
   NodeTypeAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeTypeAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeTypeAggregatedList_Warning_Code_Unreachable,
-  NodeTypeAggregatedList_Warning_Code #-}
+  NodeTypeAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeTypeList_Warning_Code = NodeTypeList_Warning_Code { fromNodeTypeList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTypeList_Warning_Code = NodeTypeList_Warning_Code {fromNodeTypeList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeTypeList_Warning_Code_CLEANUPFAILED :: NodeTypeList_Warning_Code
@@ -22252,20 +22065,21 @@ pattern NodeTypeList_Warning_Code_Unreachable = NodeTypeList_Warning_Code "UNREA
   NodeTypeList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeTypeList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeTypeList_Warning_Code_Unreachable,
-  NodeTypeList_Warning_Code #-}
+  NodeTypeList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NodeTypesScopedList_Warning_Code = NodeTypesScopedList_Warning_Code { fromNodeTypesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeTypesScopedList_Warning_Code = NodeTypesScopedList_Warning_Code {fromNodeTypesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NodeTypesScopedList_Warning_Code_CLEANUPFAILED :: NodeTypesScopedList_Warning_Code
@@ -22393,20 +22207,21 @@ pattern NodeTypesScopedList_Warning_Code_Unreachable = NodeTypesScopedList_Warni
   NodeTypesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NodeTypesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   NodeTypesScopedList_Warning_Code_Unreachable,
-  NodeTypesScopedList_Warning_Code #-}
+  NodeTypesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype NotificationEndpointList_Warning_Code = NotificationEndpointList_Warning_Code { fromNotificationEndpointList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NotificationEndpointList_Warning_Code = NotificationEndpointList_Warning_Code {fromNotificationEndpointList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern NotificationEndpointList_Warning_Code_CLEANUPFAILED :: NotificationEndpointList_Warning_Code
@@ -22534,30 +22349,31 @@ pattern NotificationEndpointList_Warning_Code_Unreachable = NotificationEndpoint
   NotificationEndpointList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   NotificationEndpointList_Warning_Code_UNDECLAREDPROPERTIES,
   NotificationEndpointList_Warning_Code_Unreachable,
-  NotificationEndpointList_Warning_Code #-}
+  NotificationEndpointList_Warning_Code
+  #-}
 
 -- | [Output Only] The status of the operation, which can be one of the following: @PENDING@, @RUNNING@, or @DONE@.
-newtype Operation_Status = Operation_Status { fromOperation_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Operation_Status = Operation_Status {fromOperation_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Operation_Status_Done :: Operation_Status
 pattern Operation_Status_Done = Operation_Status "DONE"
 
--- | 
+-- |
 pattern Operation_Status_Pending :: Operation_Status
 pattern Operation_Status_Pending = Operation_Status "PENDING"
 
--- | 
+-- |
 pattern Operation_Status_Running :: Operation_Status
 pattern Operation_Status_Running = Operation_Status "RUNNING"
 
@@ -22565,20 +22381,21 @@ pattern Operation_Status_Running = Operation_Status "RUNNING"
   Operation_Status_Done,
   Operation_Status_Pending,
   Operation_Status_Running,
-  Operation_Status #-}
+  Operation_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype Operation_WarningsItem_Code = Operation_WarningsItem_Code { fromOperation_WarningsItem_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Operation_WarningsItem_Code = Operation_WarningsItem_Code {fromOperation_WarningsItem_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern Operation_WarningsItem_Code_CLEANUPFAILED :: Operation_WarningsItem_Code
@@ -22706,20 +22523,21 @@ pattern Operation_WarningsItem_Code_Unreachable = Operation_WarningsItem_Code "U
   Operation_WarningsItem_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   Operation_WarningsItem_Code_UNDECLAREDPROPERTIES,
   Operation_WarningsItem_Code_Unreachable,
-  Operation_WarningsItem_Code #-}
+  Operation_WarningsItem_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype OperationAggregatedList_Warning_Code = OperationAggregatedList_Warning_Code { fromOperationAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OperationAggregatedList_Warning_Code = OperationAggregatedList_Warning_Code {fromOperationAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern OperationAggregatedList_Warning_Code_CLEANUPFAILED :: OperationAggregatedList_Warning_Code
@@ -22847,20 +22665,21 @@ pattern OperationAggregatedList_Warning_Code_Unreachable = OperationAggregatedLi
   OperationAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   OperationAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   OperationAggregatedList_Warning_Code_Unreachable,
-  OperationAggregatedList_Warning_Code #-}
+  OperationAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype OperationList_Warning_Code = OperationList_Warning_Code { fromOperationList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OperationList_Warning_Code = OperationList_Warning_Code {fromOperationList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern OperationList_Warning_Code_CLEANUPFAILED :: OperationList_Warning_Code
@@ -22988,20 +22807,21 @@ pattern OperationList_Warning_Code_Unreachable = OperationList_Warning_Code "UNR
   OperationList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   OperationList_Warning_Code_UNDECLAREDPROPERTIES,
   OperationList_Warning_Code_Unreachable,
-  OperationList_Warning_Code #-}
+  OperationList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype OperationsScopedList_Warning_Code = OperationsScopedList_Warning_Code { fromOperationsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OperationsScopedList_Warning_Code = OperationsScopedList_Warning_Code {fromOperationsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern OperationsScopedList_Warning_Code_CLEANUPFAILED :: OperationsScopedList_Warning_Code
@@ -23129,26 +22949,27 @@ pattern OperationsScopedList_Warning_Code_Unreachable = OperationsScopedList_War
   OperationsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   OperationsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   OperationsScopedList_Warning_Code_Unreachable,
-  OperationsScopedList_Warning_Code #-}
+  OperationsScopedList_Warning_Code
+  #-}
 
 -- | From how long ago in the past these intervals were observed.
-newtype PacketIntervals_Duration = PacketIntervals_Duration { fromPacketIntervals_Duration :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PacketIntervals_Duration = PacketIntervals_Duration {fromPacketIntervals_Duration :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern PacketIntervals_Duration_DURATIONUNSPECIFIED :: PacketIntervals_Duration
 pattern PacketIntervals_Duration_DURATIONUNSPECIFIED = PacketIntervals_Duration "DURATION_UNSPECIFIED"
 
--- | 
+-- |
 pattern PacketIntervals_Duration_Hour :: PacketIntervals_Duration
 pattern PacketIntervals_Duration_Hour = PacketIntervals_Duration "HOUR"
 
@@ -23156,7 +22977,7 @@ pattern PacketIntervals_Duration_Hour = PacketIntervals_Duration "HOUR"
 pattern PacketIntervals_Duration_Max :: PacketIntervals_Duration
 pattern PacketIntervals_Duration_Max = PacketIntervals_Duration "MAX"
 
--- | 
+-- |
 pattern PacketIntervals_Duration_Minute :: PacketIntervals_Duration
 pattern PacketIntervals_Duration_Minute = PacketIntervals_Duration "MINUTE"
 
@@ -23165,20 +22986,21 @@ pattern PacketIntervals_Duration_Minute = PacketIntervals_Duration "MINUTE"
   PacketIntervals_Duration_Hour,
   PacketIntervals_Duration_Max,
   PacketIntervals_Duration_Minute,
-  PacketIntervals_Duration #-}
+  PacketIntervals_Duration
+  #-}
 
 -- | The type of packets for which inter-packet intervals were computed.
-newtype PacketIntervals_Type = PacketIntervals_Type { fromPacketIntervals_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PacketIntervals_Type = PacketIntervals_Type {fromPacketIntervals_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Only applies to Echo packets. This shows the intervals between sending and receiving the same packet.
 pattern PacketIntervals_Type_Loopback :: PacketIntervals_Type
@@ -23192,7 +23014,7 @@ pattern PacketIntervals_Type_Receive = PacketIntervals_Type "RECEIVE"
 pattern PacketIntervals_Type_Transmit :: PacketIntervals_Type
 pattern PacketIntervals_Type_Transmit = PacketIntervals_Type "TRANSMIT"
 
--- | 
+-- |
 pattern PacketIntervals_Type_TYPEUNSPECIFIED :: PacketIntervals_Type
 pattern PacketIntervals_Type_TYPEUNSPECIFIED = PacketIntervals_Type "TYPE_UNSPECIFIED"
 
@@ -23201,46 +23023,48 @@ pattern PacketIntervals_Type_TYPEUNSPECIFIED = PacketIntervals_Type "TYPE_UNSPEC
   PacketIntervals_Type_Receive,
   PacketIntervals_Type_Transmit,
   PacketIntervals_Type_TYPEUNSPECIFIED,
-  PacketIntervals_Type #-}
+  PacketIntervals_Type
+  #-}
 
 -- | Indicates whether or not this packet mirroring takes effect. If set to FALSE, this packet mirroring policy will not be enforced on the network. The default is TRUE.
-newtype PacketMirroring_Enable = PacketMirroring_Enable { fromPacketMirroring_Enable :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PacketMirroring_Enable = PacketMirroring_Enable {fromPacketMirroring_Enable :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern PacketMirroring_Enable_False' :: PacketMirroring_Enable
 pattern PacketMirroring_Enable_False' = PacketMirroring_Enable "FALSE"
 
--- | 
+-- |
 pattern PacketMirroring_Enable_True' :: PacketMirroring_Enable
 pattern PacketMirroring_Enable_True' = PacketMirroring_Enable "TRUE"
 
 {-# COMPLETE
   PacketMirroring_Enable_False',
   PacketMirroring_Enable_True',
-  PacketMirroring_Enable #-}
+  PacketMirroring_Enable
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype PacketMirroringAggregatedList_Warning_Code = PacketMirroringAggregatedList_Warning_Code { fromPacketMirroringAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PacketMirroringAggregatedList_Warning_Code = PacketMirroringAggregatedList_Warning_Code {fromPacketMirroringAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern PacketMirroringAggregatedList_Warning_Code_CLEANUPFAILED :: PacketMirroringAggregatedList_Warning_Code
@@ -23368,20 +23192,21 @@ pattern PacketMirroringAggregatedList_Warning_Code_Unreachable = PacketMirroring
   PacketMirroringAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   PacketMirroringAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   PacketMirroringAggregatedList_Warning_Code_Unreachable,
-  PacketMirroringAggregatedList_Warning_Code #-}
+  PacketMirroringAggregatedList_Warning_Code
+  #-}
 
 -- | Direction of traffic to mirror, either INGRESS, EGRESS, or BOTH. The default is BOTH.
-newtype PacketMirroringFilter_Direction = PacketMirroringFilter_Direction { fromPacketMirroringFilter_Direction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PacketMirroringFilter_Direction = PacketMirroringFilter_Direction {fromPacketMirroringFilter_Direction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default, both directions are mirrored.
 pattern PacketMirroringFilter_Direction_Both :: PacketMirroringFilter_Direction
@@ -23399,20 +23224,21 @@ pattern PacketMirroringFilter_Direction_Ingress = PacketMirroringFilter_Directio
   PacketMirroringFilter_Direction_Both,
   PacketMirroringFilter_Direction_Egress,
   PacketMirroringFilter_Direction_Ingress,
-  PacketMirroringFilter_Direction #-}
+  PacketMirroringFilter_Direction
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype PacketMirroringList_Warning_Code = PacketMirroringList_Warning_Code { fromPacketMirroringList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PacketMirroringList_Warning_Code = PacketMirroringList_Warning_Code {fromPacketMirroringList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern PacketMirroringList_Warning_Code_CLEANUPFAILED :: PacketMirroringList_Warning_Code
@@ -23540,20 +23366,21 @@ pattern PacketMirroringList_Warning_Code_Unreachable = PacketMirroringList_Warni
   PacketMirroringList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   PacketMirroringList_Warning_Code_UNDECLAREDPROPERTIES,
   PacketMirroringList_Warning_Code_Unreachable,
-  PacketMirroringList_Warning_Code #-}
+  PacketMirroringList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype PacketMirroringsScopedList_Warning_Code = PacketMirroringsScopedList_Warning_Code { fromPacketMirroringsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PacketMirroringsScopedList_Warning_Code = PacketMirroringsScopedList_Warning_Code {fromPacketMirroringsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern PacketMirroringsScopedList_Warning_Code_CLEANUPFAILED :: PacketMirroringsScopedList_Warning_Code
@@ -23681,20 +23508,21 @@ pattern PacketMirroringsScopedList_Warning_Code_Unreachable = PacketMirroringsSc
   PacketMirroringsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   PacketMirroringsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   PacketMirroringsScopedList_Warning_Code_Unreachable,
-  PacketMirroringsScopedList_Warning_Code #-}
+  PacketMirroringsScopedList_Warning_Code
+  #-}
 
 -- | The status of applying this per-instance config on the corresponding managed instance.
-newtype PerInstanceConfig_Status = PerInstanceConfig_Status { fromPerInstanceConfig_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PerInstanceConfig_Status = PerInstanceConfig_Status {fromPerInstanceConfig_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The per-instance config is being applied to the instance, but is not yet effective, possibly waiting for the instance to, for example, REFRESH.
 pattern PerInstanceConfig_Status_Applying :: PerInstanceConfig_Status
@@ -23727,46 +23555,48 @@ pattern PerInstanceConfig_Status_UNAPPLIEDDELETION = PerInstanceConfig_Status "U
   PerInstanceConfig_Status_None,
   PerInstanceConfig_Status_Unapplied,
   PerInstanceConfig_Status_UNAPPLIEDDELETION,
-  PerInstanceConfig_Status #-}
+  PerInstanceConfig_Status
+  #-}
 
 -- | These stateful disks will never be deleted during autohealing, update, instance recreate operations. This flag is used to configure if the disk should be deleted after it is no longer used by the group, e.g. when the given instance or the whole MIG is deleted. Note: disks attached in READ_ONLY mode cannot be auto-deleted.
-newtype PreservedStatePreservedDisk_AutoDelete = PreservedStatePreservedDisk_AutoDelete { fromPreservedStatePreservedDisk_AutoDelete :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PreservedStatePreservedDisk_AutoDelete = PreservedStatePreservedDisk_AutoDelete {fromPreservedStatePreservedDisk_AutoDelete :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern PreservedStatePreservedDisk_AutoDelete_Never :: PreservedStatePreservedDisk_AutoDelete
 pattern PreservedStatePreservedDisk_AutoDelete_Never = PreservedStatePreservedDisk_AutoDelete "NEVER"
 
--- | 
+-- |
 pattern PreservedStatePreservedDisk_AutoDelete_ONPERMANENTINSTANCEDELETION :: PreservedStatePreservedDisk_AutoDelete
 pattern PreservedStatePreservedDisk_AutoDelete_ONPERMANENTINSTANCEDELETION = PreservedStatePreservedDisk_AutoDelete "ON_PERMANENT_INSTANCE_DELETION"
 
 {-# COMPLETE
   PreservedStatePreservedDisk_AutoDelete_Never,
   PreservedStatePreservedDisk_AutoDelete_ONPERMANENTINSTANCEDELETION,
-  PreservedStatePreservedDisk_AutoDelete #-}
+  PreservedStatePreservedDisk_AutoDelete
+  #-}
 
 -- | The mode in which to attach this disk, either READ/WRITE or READ/ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
-newtype PreservedStatePreservedDisk_Mode = PreservedStatePreservedDisk_Mode { fromPreservedStatePreservedDisk_Mode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PreservedStatePreservedDisk_Mode = PreservedStatePreservedDisk_Mode {fromPreservedStatePreservedDisk_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Attaches this disk in read-only mode. Multiple VM instances can use a disk in READ_ONLY mode at a time.
 pattern PreservedStatePreservedDisk_Mode_READONLY :: PreservedStatePreservedDisk_Mode
@@ -23779,20 +23609,21 @@ pattern PreservedStatePreservedDisk_Mode_READWRITE = PreservedStatePreservedDisk
 {-# COMPLETE
   PreservedStatePreservedDisk_Mode_READONLY,
   PreservedStatePreservedDisk_Mode_READWRITE,
-  PreservedStatePreservedDisk_Mode #-}
+  PreservedStatePreservedDisk_Mode
+  #-}
 
 -- | This signifies the default network tier used for configuring resources of the project and can only take the following values: PREMIUM, STANDARD. Initially the default network tier is PREMIUM.
-newtype Project_DefaultNetworkTier = Project_DefaultNetworkTier { fromProject_DefaultNetworkTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Project_DefaultNetworkTier = Project_DefaultNetworkTier {fromProject_DefaultNetworkTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Public internet quality with fixed bandwidth.
 pattern Project_DefaultNetworkTier_FIXEDSTANDARD :: Project_DefaultNetworkTier
@@ -23815,46 +23646,48 @@ pattern Project_DefaultNetworkTier_STANDARDOVERRIDESFIXEDSTANDARD = Project_Defa
   Project_DefaultNetworkTier_Premium,
   Project_DefaultNetworkTier_Standard,
   Project_DefaultNetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
-  Project_DefaultNetworkTier #-}
+  Project_DefaultNetworkTier
+  #-}
 
 -- | [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
-newtype Project_XpnProjectStatus = Project_XpnProjectStatus { fromProject_XpnProjectStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Project_XpnProjectStatus = Project_XpnProjectStatus {fromProject_XpnProjectStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Project_XpnProjectStatus_Host :: Project_XpnProjectStatus
 pattern Project_XpnProjectStatus_Host = Project_XpnProjectStatus "HOST"
 
--- | 
+-- |
 pattern Project_XpnProjectStatus_UNSPECIFIEDXPNPROJECTSTATUS :: Project_XpnProjectStatus
 pattern Project_XpnProjectStatus_UNSPECIFIEDXPNPROJECTSTATUS = Project_XpnProjectStatus "UNSPECIFIED_XPN_PROJECT_STATUS"
 
 {-# COMPLETE
   Project_XpnProjectStatus_Host,
   Project_XpnProjectStatus_UNSPECIFIEDXPNPROJECTSTATUS,
-  Project_XpnProjectStatus #-}
+  Project_XpnProjectStatus
+  #-}
 
 -- | Default network tier to be set.
-newtype ProjectsSetDefaultNetworkTierRequest_NetworkTier = ProjectsSetDefaultNetworkTierRequest_NetworkTier { fromProjectsSetDefaultNetworkTierRequest_NetworkTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsSetDefaultNetworkTierRequest_NetworkTier = ProjectsSetDefaultNetworkTierRequest_NetworkTier {fromProjectsSetDefaultNetworkTierRequest_NetworkTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Public internet quality with fixed bandwidth.
 pattern ProjectsSetDefaultNetworkTierRequest_NetworkTier_FIXEDSTANDARD :: ProjectsSetDefaultNetworkTierRequest_NetworkTier
@@ -23877,20 +23710,21 @@ pattern ProjectsSetDefaultNetworkTierRequest_NetworkTier_STANDARDOVERRIDESFIXEDS
   ProjectsSetDefaultNetworkTierRequest_NetworkTier_Premium,
   ProjectsSetDefaultNetworkTierRequest_NetworkTier_Standard,
   ProjectsSetDefaultNetworkTierRequest_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
-  ProjectsSetDefaultNetworkTierRequest_NetworkTier #-}
+  ProjectsSetDefaultNetworkTierRequest_NetworkTier
+  #-}
 
 -- | The status of the public advertised prefix. Possible values include: - @INITIAL@: RPKI validation is complete. - @PTR_CONFIGURED@: User has configured the PTR. - @VALIDATED@: Reverse DNS lookup is successful. - @REVERSE_DNS_LOOKUP_FAILED@: Reverse DNS lookup failed. - @PREFIX_CONFIGURATION_IN_PROGRESS@: The prefix is being configured. - @PREFIX_CONFIGURATION_COMPLETE@: The prefix is fully configured. - @PREFIX_REMOVAL_IN_PROGRESS@: The prefix is being removed.
-newtype PublicAdvertisedPrefix_Status = PublicAdvertisedPrefix_Status { fromPublicAdvertisedPrefix_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PublicAdvertisedPrefix_Status = PublicAdvertisedPrefix_Status {fromPublicAdvertisedPrefix_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | RPKI validation is complete.
 pattern PublicAdvertisedPrefix_Status_Initial :: PublicAdvertisedPrefix_Status
@@ -23928,20 +23762,21 @@ pattern PublicAdvertisedPrefix_Status_Validated = PublicAdvertisedPrefix_Status 
   PublicAdvertisedPrefix_Status_PTRCONFIGURED,
   PublicAdvertisedPrefix_Status_REVERSEDNSLOOKUPFAILED,
   PublicAdvertisedPrefix_Status_Validated,
-  PublicAdvertisedPrefix_Status #-}
+  PublicAdvertisedPrefix_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype PublicAdvertisedPrefixList_Warning_Code = PublicAdvertisedPrefixList_Warning_Code { fromPublicAdvertisedPrefixList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PublicAdvertisedPrefixList_Warning_Code = PublicAdvertisedPrefixList_Warning_Code {fromPublicAdvertisedPrefixList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern PublicAdvertisedPrefixList_Warning_Code_CLEANUPFAILED :: PublicAdvertisedPrefixList_Warning_Code
@@ -24069,20 +23904,21 @@ pattern PublicAdvertisedPrefixList_Warning_Code_Unreachable = PublicAdvertisedPr
   PublicAdvertisedPrefixList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   PublicAdvertisedPrefixList_Warning_Code_UNDECLAREDPROPERTIES,
   PublicAdvertisedPrefixList_Warning_Code_Unreachable,
-  PublicAdvertisedPrefixList_Warning_Code #-}
+  PublicAdvertisedPrefixList_Warning_Code
+  #-}
 
 -- | [Output Only] The status of the public delegated prefix, which can be one of following values: - @INITIALIZING@ The public delegated prefix is being initialized and addresses cannot be created yet. - @READY_TO_ANNOUNCE@ The public delegated prefix is a live migration prefix and is active. - @ANNOUNCED@ The public delegated prefix is active. - @DELETING@ The public delegated prefix is being deprovsioned.
-newtype PublicDelegatedPrefix_Status = PublicDelegatedPrefix_Status { fromPublicDelegatedPrefix_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PublicDelegatedPrefix_Status = PublicDelegatedPrefix_Status {fromPublicDelegatedPrefix_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The public delegated prefix is active.
 pattern PublicDelegatedPrefix_Status_Announced :: PublicDelegatedPrefix_Status
@@ -24105,20 +23941,21 @@ pattern PublicDelegatedPrefix_Status_READYTOANNOUNCE = PublicDelegatedPrefix_Sta
   PublicDelegatedPrefix_Status_Deleting,
   PublicDelegatedPrefix_Status_Initializing,
   PublicDelegatedPrefix_Status_READYTOANNOUNCE,
-  PublicDelegatedPrefix_Status #-}
+  PublicDelegatedPrefix_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype PublicDelegatedPrefixAggregatedList_Warning_Code = PublicDelegatedPrefixAggregatedList_Warning_Code { fromPublicDelegatedPrefixAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PublicDelegatedPrefixAggregatedList_Warning_Code = PublicDelegatedPrefixAggregatedList_Warning_Code {fromPublicDelegatedPrefixAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_CLEANUPFAILED :: PublicDelegatedPrefixAggregatedList_Warning_Code
@@ -24246,20 +24083,21 @@ pattern PublicDelegatedPrefixAggregatedList_Warning_Code_Unreachable = PublicDel
   PublicDelegatedPrefixAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   PublicDelegatedPrefixAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   PublicDelegatedPrefixAggregatedList_Warning_Code_Unreachable,
-  PublicDelegatedPrefixAggregatedList_Warning_Code #-}
+  PublicDelegatedPrefixAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype PublicDelegatedPrefixList_Warning_Code = PublicDelegatedPrefixList_Warning_Code { fromPublicDelegatedPrefixList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PublicDelegatedPrefixList_Warning_Code = PublicDelegatedPrefixList_Warning_Code {fromPublicDelegatedPrefixList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern PublicDelegatedPrefixList_Warning_Code_CLEANUPFAILED :: PublicDelegatedPrefixList_Warning_Code
@@ -24387,46 +24225,48 @@ pattern PublicDelegatedPrefixList_Warning_Code_Unreachable = PublicDelegatedPref
   PublicDelegatedPrefixList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   PublicDelegatedPrefixList_Warning_Code_UNDECLAREDPROPERTIES,
   PublicDelegatedPrefixList_Warning_Code_Unreachable,
-  PublicDelegatedPrefixList_Warning_Code #-}
+  PublicDelegatedPrefixList_Warning_Code
+  #-}
 
 -- | [Output Only] The status of the sub public delegated prefix.
-newtype PublicDelegatedPrefixPublicDelegatedSubPrefix_Status = PublicDelegatedPrefixPublicDelegatedSubPrefix_Status { fromPublicDelegatedPrefixPublicDelegatedSubPrefix_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PublicDelegatedPrefixPublicDelegatedSubPrefix_Status = PublicDelegatedPrefixPublicDelegatedSubPrefix_Status {fromPublicDelegatedPrefixPublicDelegatedSubPrefix_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Active :: PublicDelegatedPrefixPublicDelegatedSubPrefix_Status
 pattern PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Active = PublicDelegatedPrefixPublicDelegatedSubPrefix_Status "ACTIVE"
 
--- | 
+-- |
 pattern PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Inactive :: PublicDelegatedPrefixPublicDelegatedSubPrefix_Status
 pattern PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Inactive = PublicDelegatedPrefixPublicDelegatedSubPrefix_Status "INACTIVE"
 
 {-# COMPLETE
   PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Active,
   PublicDelegatedPrefixPublicDelegatedSubPrefix_Status_Inactive,
-  PublicDelegatedPrefixPublicDelegatedSubPrefix_Status #-}
+  PublicDelegatedPrefixPublicDelegatedSubPrefix_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype PublicDelegatedPrefixesScopedList_Warning_Code = PublicDelegatedPrefixesScopedList_Warning_Code { fromPublicDelegatedPrefixesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PublicDelegatedPrefixesScopedList_Warning_Code = PublicDelegatedPrefixesScopedList_Warning_Code {fromPublicDelegatedPrefixesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_CLEANUPFAILED :: PublicDelegatedPrefixesScopedList_Warning_Code
@@ -24554,138 +24394,139 @@ pattern PublicDelegatedPrefixesScopedList_Warning_Code_Unreachable = PublicDeleg
   PublicDelegatedPrefixesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   PublicDelegatedPrefixesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   PublicDelegatedPrefixesScopedList_Warning_Code_Unreachable,
-  PublicDelegatedPrefixesScopedList_Warning_Code #-}
+  PublicDelegatedPrefixesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] Name of the quota metric.
-newtype Quota_Metric = Quota_Metric { fromQuota_Metric :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Quota_Metric = Quota_Metric {fromQuota_Metric :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Quota_Metric_A2CPUS :: Quota_Metric
 pattern Quota_Metric_A2CPUS = Quota_Metric "A2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_AFFINITYGROUPS :: Quota_Metric
 pattern Quota_Metric_AFFINITYGROUPS = Quota_Metric "AFFINITY_GROUPS"
 
--- | 
+-- |
 pattern Quota_Metric_Autoscalers :: Quota_Metric
 pattern Quota_Metric_Autoscalers = Quota_Metric "AUTOSCALERS"
 
--- | 
+-- |
 pattern Quota_Metric_BACKENDBUCKETS :: Quota_Metric
 pattern Quota_Metric_BACKENDBUCKETS = Quota_Metric "BACKEND_BUCKETS"
 
--- | 
+-- |
 pattern Quota_Metric_BACKENDSERVICES :: Quota_Metric
 pattern Quota_Metric_BACKENDSERVICES = Quota_Metric "BACKEND_SERVICES"
 
--- | 
+-- |
 pattern Quota_Metric_C2DCPUS :: Quota_Metric
 pattern Quota_Metric_C2DCPUS = Quota_Metric "C2D_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_C2CPUS :: Quota_Metric
 pattern Quota_Metric_C2CPUS = Quota_Metric "C2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_C3CPUS :: Quota_Metric
 pattern Quota_Metric_C3CPUS = Quota_Metric "C3_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_Commitments :: Quota_Metric
 pattern Quota_Metric_Commitments = Quota_Metric "COMMITMENTS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDA2CPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDA2CPUS = Quota_Metric "COMMITTED_A2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDC2DCPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDC2DCPUS = Quota_Metric "COMMITTED_C2D_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDC2CPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDC2CPUS = Quota_Metric "COMMITTED_C2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDC3CPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDC3CPUS = Quota_Metric "COMMITTED_C3_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDCPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDCPUS = Quota_Metric "COMMITTED_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDE2CPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDE2CPUS = Quota_Metric "COMMITTED_E2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDLICENSES :: Quota_Metric
 pattern Quota_Metric_COMMITTEDLICENSES = Quota_Metric "COMMITTED_LICENSES"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDLOCALSSDTOTALGB :: Quota_Metric
 pattern Quota_Metric_COMMITTEDLOCALSSDTOTALGB = Quota_Metric "COMMITTED_LOCAL_SSD_TOTAL_GB"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDM3CPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDM3CPUS = Quota_Metric "COMMITTED_M3_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDMEMORYOPTIMIZEDCPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDMEMORYOPTIMIZEDCPUS = Quota_Metric "COMMITTED_MEMORY_OPTIMIZED_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDN2ACPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDN2ACPUS = Quota_Metric "COMMITTED_N2A_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDN2DCPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDN2DCPUS = Quota_Metric "COMMITTED_N2D_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDN2CPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDN2CPUS = Quota_Metric "COMMITTED_N2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDNVIDIAA100GPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDNVIDIAA100GPUS = Quota_Metric "COMMITTED_NVIDIA_A100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDNVIDIAK80GPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDNVIDIAK80GPUS = Quota_Metric "COMMITTED_NVIDIA_K80_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDNVIDIAP100GPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDNVIDIAP100GPUS = Quota_Metric "COMMITTED_NVIDIA_P100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDNVIDIAP4GPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDNVIDIAP4GPUS = Quota_Metric "COMMITTED_NVIDIA_P4_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDNVIDIAT4GPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDNVIDIAT4GPUS = Quota_Metric "COMMITTED_NVIDIA_T4_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDNVIDIAV100GPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDNVIDIAV100GPUS = Quota_Metric "COMMITTED_NVIDIA_V100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDT2ACPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDT2ACPUS = Quota_Metric "COMMITTED_T2A_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_COMMITTEDT2DCPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDT2DCPUS = Quota_Metric "COMMITTED_T2D_CPUS"
 
@@ -24693,319 +24534,319 @@ pattern Quota_Metric_COMMITTEDT2DCPUS = Quota_Metric "COMMITTED_T2D_CPUS"
 pattern Quota_Metric_Cpus :: Quota_Metric
 pattern Quota_Metric_Cpus = Quota_Metric "CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_CPUSALLREGIONS :: Quota_Metric
 pattern Quota_Metric_CPUSALLREGIONS = Quota_Metric "CPUS_ALL_REGIONS"
 
--- | 
+-- |
 pattern Quota_Metric_DISKSTOTALGB :: Quota_Metric
 pattern Quota_Metric_DISKSTOTALGB = Quota_Metric "DISKS_TOTAL_GB"
 
--- | 
+-- |
 pattern Quota_Metric_E2CPUS :: Quota_Metric
 pattern Quota_Metric_E2CPUS = Quota_Metric "E2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_EXTERNALMANAGEDFORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_EXTERNALMANAGEDFORWARDINGRULES = Quota_Metric "EXTERNAL_MANAGED_FORWARDING_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_EXTERNALNETWORKLBFORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_EXTERNALNETWORKLBFORWARDINGRULES = Quota_Metric "EXTERNAL_NETWORK_LB_FORWARDING_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_EXTERNALPROTOCOLFORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_EXTERNALPROTOCOLFORWARDINGRULES = Quota_Metric "EXTERNAL_PROTOCOL_FORWARDING_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_EXTERNALVPNGATEWAYS :: Quota_Metric
 pattern Quota_Metric_EXTERNALVPNGATEWAYS = Quota_Metric "EXTERNAL_VPN_GATEWAYS"
 
--- | 
+-- |
 pattern Quota_Metric_Firewalls :: Quota_Metric
 pattern Quota_Metric_Firewalls = Quota_Metric "FIREWALLS"
 
--- | 
+-- |
 pattern Quota_Metric_FORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_FORWARDINGRULES = Quota_Metric "FORWARDING_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_GLOBALEXTERNALMANAGEDFORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_GLOBALEXTERNALMANAGEDFORWARDINGRULES = Quota_Metric "GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_GLOBALINTERNALADDRESSES :: Quota_Metric
 pattern Quota_Metric_GLOBALINTERNALADDRESSES = Quota_Metric "GLOBAL_INTERNAL_ADDRESSES"
 
--- | 
+-- |
 pattern Quota_Metric_GPUSALLREGIONS :: Quota_Metric
 pattern Quota_Metric_GPUSALLREGIONS = Quota_Metric "GPUS_ALL_REGIONS"
 
--- | 
+-- |
 pattern Quota_Metric_HEALTHCHECKS :: Quota_Metric
 pattern Quota_Metric_HEALTHCHECKS = Quota_Metric "HEALTH_CHECKS"
 
--- | 
+-- |
 pattern Quota_Metric_Images :: Quota_Metric
 pattern Quota_Metric_Images = Quota_Metric "IMAGES"
 
--- | 
+-- |
 pattern Quota_Metric_Instances :: Quota_Metric
 pattern Quota_Metric_Instances = Quota_Metric "INSTANCES"
 
--- | 
+-- |
 pattern Quota_Metric_INSTANCEGROUPS :: Quota_Metric
 pattern Quota_Metric_INSTANCEGROUPS = Quota_Metric "INSTANCE_GROUPS"
 
--- | 
+-- |
 pattern Quota_Metric_INSTANCEGROUPMANAGERS :: Quota_Metric
 pattern Quota_Metric_INSTANCEGROUPMANAGERS = Quota_Metric "INSTANCE_GROUP_MANAGERS"
 
--- | 
+-- |
 pattern Quota_Metric_INSTANCETEMPLATES :: Quota_Metric
 pattern Quota_Metric_INSTANCETEMPLATES = Quota_Metric "INSTANCE_TEMPLATES"
 
--- | 
+-- |
 pattern Quota_Metric_Interconnects :: Quota_Metric
 pattern Quota_Metric_Interconnects = Quota_Metric "INTERCONNECTS"
 
--- | 
+-- |
 pattern Quota_Metric_INTERCONNECTATTACHMENTSPERREGION :: Quota_Metric
 pattern Quota_Metric_INTERCONNECTATTACHMENTSPERREGION = Quota_Metric "INTERCONNECT_ATTACHMENTS_PER_REGION"
 
--- | 
+-- |
 pattern Quota_Metric_INTERCONNECTATTACHMENTSTOTALMBPS :: Quota_Metric
 pattern Quota_Metric_INTERCONNECTATTACHMENTSTOTALMBPS = Quota_Metric "INTERCONNECT_ATTACHMENTS_TOTAL_MBPS"
 
--- | 
+-- |
 pattern Quota_Metric_INTERCONNECTTOTALGBPS :: Quota_Metric
 pattern Quota_Metric_INTERCONNECTTOTALGBPS = Quota_Metric "INTERCONNECT_TOTAL_GBPS"
 
--- | 
+-- |
 pattern Quota_Metric_INTERNALADDRESSES :: Quota_Metric
 pattern Quota_Metric_INTERNALADDRESSES = Quota_Metric "INTERNAL_ADDRESSES"
 
--- | 
+-- |
 pattern Quota_Metric_INTERNALTRAFFICDIRECTORFORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_INTERNALTRAFFICDIRECTORFORWARDINGRULES = Quota_Metric "INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_INPLACESNAPSHOTS :: Quota_Metric
 pattern Quota_Metric_INPLACESNAPSHOTS = Quota_Metric "IN_PLACE_SNAPSHOTS"
 
--- | 
+-- |
 pattern Quota_Metric_INUSEADDRESSES :: Quota_Metric
 pattern Quota_Metric_INUSEADDRESSES = Quota_Metric "IN_USE_ADDRESSES"
 
--- | 
+-- |
 pattern Quota_Metric_INUSEBACKUPSCHEDULES :: Quota_Metric
 pattern Quota_Metric_INUSEBACKUPSCHEDULES = Quota_Metric "IN_USE_BACKUP_SCHEDULES"
 
--- | 
+-- |
 pattern Quota_Metric_INUSESNAPSHOTSCHEDULES :: Quota_Metric
 pattern Quota_Metric_INUSESNAPSHOTSCHEDULES = Quota_Metric "IN_USE_SNAPSHOT_SCHEDULES"
 
--- | 
+-- |
 pattern Quota_Metric_LOCALSSDTOTALGB :: Quota_Metric
 pattern Quota_Metric_LOCALSSDTOTALGB = Quota_Metric "LOCAL_SSD_TOTAL_GB"
 
--- | 
+-- |
 pattern Quota_Metric_M1CPUS :: Quota_Metric
 pattern Quota_Metric_M1CPUS = Quota_Metric "M1_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_M2CPUS :: Quota_Metric
 pattern Quota_Metric_M2CPUS = Quota_Metric "M2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_M3CPUS :: Quota_Metric
 pattern Quota_Metric_M3CPUS = Quota_Metric "M3_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_MACHINEIMAGES :: Quota_Metric
 pattern Quota_Metric_MACHINEIMAGES = Quota_Metric "MACHINE_IMAGES"
 
--- | 
+-- |
 pattern Quota_Metric_N2ACPUS :: Quota_Metric
 pattern Quota_Metric_N2ACPUS = Quota_Metric "N2A_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_N2DCPUS :: Quota_Metric
 pattern Quota_Metric_N2DCPUS = Quota_Metric "N2D_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_N2CPUS :: Quota_Metric
 pattern Quota_Metric_N2CPUS = Quota_Metric "N2_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_Networks :: Quota_Metric
 pattern Quota_Metric_Networks = Quota_Metric "NETWORKS"
 
--- | 
+-- |
 pattern Quota_Metric_NETWORKENDPOINTGROUPS :: Quota_Metric
 pattern Quota_Metric_NETWORKENDPOINTGROUPS = Quota_Metric "NETWORK_ENDPOINT_GROUPS"
 
--- | 
+-- |
 pattern Quota_Metric_NETWORKFIREWALLPOLICIES :: Quota_Metric
 pattern Quota_Metric_NETWORKFIREWALLPOLICIES = Quota_Metric "NETWORK_FIREWALL_POLICIES"
 
--- | 
+-- |
 pattern Quota_Metric_NODEGROUPS :: Quota_Metric
 pattern Quota_Metric_NODEGROUPS = Quota_Metric "NODE_GROUPS"
 
--- | 
+-- |
 pattern Quota_Metric_NODETEMPLATES :: Quota_Metric
 pattern Quota_Metric_NODETEMPLATES = Quota_Metric "NODE_TEMPLATES"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAA100GPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAA100GPUS = Quota_Metric "NVIDIA_A100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAK80GPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAK80GPUS = Quota_Metric "NVIDIA_K80_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAP100GPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAP100GPUS = Quota_Metric "NVIDIA_P100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAP100VWSGPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAP100VWSGPUS = Quota_Metric "NVIDIA_P100_VWS_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAP4GPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAP4GPUS = Quota_Metric "NVIDIA_P4_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAP4VWSGPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAP4VWSGPUS = Quota_Metric "NVIDIA_P4_VWS_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAT4GPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAT4GPUS = Quota_Metric "NVIDIA_T4_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAT4VWSGPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAT4VWSGPUS = Quota_Metric "NVIDIA_T4_VWS_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_NVIDIAV100GPUS :: Quota_Metric
 pattern Quota_Metric_NVIDIAV100GPUS = Quota_Metric "NVIDIA_V100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PACKETMIRRORINGS :: Quota_Metric
 pattern Quota_Metric_PACKETMIRRORINGS = Quota_Metric "PACKET_MIRRORINGS"
 
--- | 
+-- |
 pattern Quota_Metric_PDEXTREMETOTALPROVISIONEDIOPS :: Quota_Metric
 pattern Quota_Metric_PDEXTREMETOTALPROVISIONEDIOPS = Quota_Metric "PD_EXTREME_TOTAL_PROVISIONED_IOPS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLECPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLECPUS = Quota_Metric "PREEMPTIBLE_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLELOCALSSDGB :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLELOCALSSDGB = Quota_Metric "PREEMPTIBLE_LOCAL_SSD_GB"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAA100GPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAA100GPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_A100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAK80GPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAK80GPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_K80_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAP100GPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAP100GPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_P100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAP100VWSGPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAP100VWSGPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_P100_VWS_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAP4GPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAP4GPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_P4_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAP4VWSGPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAP4VWSGPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_P4_VWS_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAT4GPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAT4GPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_T4_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAT4VWSGPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAT4VWSGPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_T4_VWS_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAV100GPUS :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLENVIDIAV100GPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_V100_GPUS"
 
--- | 
+-- |
 pattern Quota_Metric_PSCILBCONSUMERFORWARDINGRULESPERPRODUCERNETWORK :: Quota_Metric
 pattern Quota_Metric_PSCILBCONSUMERFORWARDINGRULESPERPRODUCERNETWORK = Quota_Metric "PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK"
 
--- | 
+-- |
 pattern Quota_Metric_PSCINTERNALLBFORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_PSCINTERNALLBFORWARDINGRULES = Quota_Metric "PSC_INTERNAL_LB_FORWARDING_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_PUBLICADVERTISEDPREFIXES :: Quota_Metric
 pattern Quota_Metric_PUBLICADVERTISEDPREFIXES = Quota_Metric "PUBLIC_ADVERTISED_PREFIXES"
 
--- | 
+-- |
 pattern Quota_Metric_PUBLICDELEGATEDPREFIXES :: Quota_Metric
 pattern Quota_Metric_PUBLICDELEGATEDPREFIXES = Quota_Metric "PUBLIC_DELEGATED_PREFIXES"
 
--- | 
+-- |
 pattern Quota_Metric_REGIONALAUTOSCALERS :: Quota_Metric
 pattern Quota_Metric_REGIONALAUTOSCALERS = Quota_Metric "REGIONAL_AUTOSCALERS"
 
--- | 
+-- |
 pattern Quota_Metric_REGIONALINSTANCEGROUPMANAGERS :: Quota_Metric
 pattern Quota_Metric_REGIONALINSTANCEGROUPMANAGERS = Quota_Metric "REGIONAL_INSTANCE_GROUP_MANAGERS"
 
--- | 
+-- |
 pattern Quota_Metric_Reservations :: Quota_Metric
 pattern Quota_Metric_Reservations = Quota_Metric "RESERVATIONS"
 
--- | 
+-- |
 pattern Quota_Metric_RESOURCEPOLICIES :: Quota_Metric
 pattern Quota_Metric_RESOURCEPOLICIES = Quota_Metric "RESOURCE_POLICIES"
 
--- | 
+-- |
 pattern Quota_Metric_Routers :: Quota_Metric
 pattern Quota_Metric_Routers = Quota_Metric "ROUTERS"
 
--- | 
+-- |
 pattern Quota_Metric_Routes :: Quota_Metric
 pattern Quota_Metric_Routes = Quota_Metric "ROUTES"
 
--- | 
+-- |
 pattern Quota_Metric_SECURITYPOLICIES :: Quota_Metric
 pattern Quota_Metric_SECURITYPOLICIES = Quota_Metric "SECURITY_POLICIES"
 
--- | 
+-- |
 pattern Quota_Metric_SECURITYPOLICIESPERREGION :: Quota_Metric
 pattern Quota_Metric_SECURITYPOLICIESPERREGION = Quota_Metric "SECURITY_POLICIES_PER_REGION"
 
--- | 
+-- |
 pattern Quota_Metric_SECURITYPOLICYCEVALRULES :: Quota_Metric
 pattern Quota_Metric_SECURITYPOLICYCEVALRULES = Quota_Metric "SECURITY_POLICY_CEVAL_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_SECURITYPOLICYRULES :: Quota_Metric
 pattern Quota_Metric_SECURITYPOLICYRULES = Quota_Metric "SECURITY_POLICY_RULES"
 
--- | 
+-- |
 pattern Quota_Metric_SECURITYPOLICYRULESPERREGION :: Quota_Metric
 pattern Quota_Metric_SECURITYPOLICYRULESPERREGION = Quota_Metric "SECURITY_POLICY_RULES_PER_REGION"
 
--- | 
+-- |
 pattern Quota_Metric_SERVICEATTACHMENTS :: Quota_Metric
 pattern Quota_Metric_SERVICEATTACHMENTS = Quota_Metric "SERVICE_ATTACHMENTS"
 
@@ -25013,75 +24854,75 @@ pattern Quota_Metric_SERVICEATTACHMENTS = Quota_Metric "SERVICE_ATTACHMENTS"
 pattern Quota_Metric_Snapshots :: Quota_Metric
 pattern Quota_Metric_Snapshots = Quota_Metric "SNAPSHOTS"
 
--- | 
+-- |
 pattern Quota_Metric_SSDTOTALGB :: Quota_Metric
 pattern Quota_Metric_SSDTOTALGB = Quota_Metric "SSD_TOTAL_GB"
 
--- | 
+-- |
 pattern Quota_Metric_SSLCERTIFICATES :: Quota_Metric
 pattern Quota_Metric_SSLCERTIFICATES = Quota_Metric "SSL_CERTIFICATES"
 
--- | 
+-- |
 pattern Quota_Metric_STATICADDRESSES :: Quota_Metric
 pattern Quota_Metric_STATICADDRESSES = Quota_Metric "STATIC_ADDRESSES"
 
--- | 
+-- |
 pattern Quota_Metric_STATICBYOIPADDRESSES :: Quota_Metric
 pattern Quota_Metric_STATICBYOIPADDRESSES = Quota_Metric "STATIC_BYOIP_ADDRESSES"
 
--- | 
+-- |
 pattern Quota_Metric_Subnetworks :: Quota_Metric
 pattern Quota_Metric_Subnetworks = Quota_Metric "SUBNETWORKS"
 
--- | 
+-- |
 pattern Quota_Metric_T2ACPUS :: Quota_Metric
 pattern Quota_Metric_T2ACPUS = Quota_Metric "T2A_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_T2DCPUS :: Quota_Metric
 pattern Quota_Metric_T2DCPUS = Quota_Metric "T2D_CPUS"
 
--- | 
+-- |
 pattern Quota_Metric_TARGETHTTPSPROXIES :: Quota_Metric
 pattern Quota_Metric_TARGETHTTPSPROXIES = Quota_Metric "TARGET_HTTPS_PROXIES"
 
--- | 
+-- |
 pattern Quota_Metric_TARGETHTTPPROXIES :: Quota_Metric
 pattern Quota_Metric_TARGETHTTPPROXIES = Quota_Metric "TARGET_HTTP_PROXIES"
 
--- | 
+-- |
 pattern Quota_Metric_TARGETINSTANCES :: Quota_Metric
 pattern Quota_Metric_TARGETINSTANCES = Quota_Metric "TARGET_INSTANCES"
 
--- | 
+-- |
 pattern Quota_Metric_TARGETPOOLS :: Quota_Metric
 pattern Quota_Metric_TARGETPOOLS = Quota_Metric "TARGET_POOLS"
 
--- | 
+-- |
 pattern Quota_Metric_TARGETSSLPROXIES :: Quota_Metric
 pattern Quota_Metric_TARGETSSLPROXIES = Quota_Metric "TARGET_SSL_PROXIES"
 
--- | 
+-- |
 pattern Quota_Metric_TARGETTCPPROXIES :: Quota_Metric
 pattern Quota_Metric_TARGETTCPPROXIES = Quota_Metric "TARGET_TCP_PROXIES"
 
--- | 
+-- |
 pattern Quota_Metric_TARGETVPNGATEWAYS :: Quota_Metric
 pattern Quota_Metric_TARGETVPNGATEWAYS = Quota_Metric "TARGET_VPN_GATEWAYS"
 
--- | 
+-- |
 pattern Quota_Metric_URLMAPS :: Quota_Metric
 pattern Quota_Metric_URLMAPS = Quota_Metric "URL_MAPS"
 
--- | 
+-- |
 pattern Quota_Metric_VPNGATEWAYS :: Quota_Metric
 pattern Quota_Metric_VPNGATEWAYS = Quota_Metric "VPN_GATEWAYS"
 
--- | 
+-- |
 pattern Quota_Metric_VPNTUNNELS :: Quota_Metric
 pattern Quota_Metric_VPNTUNNELS = Quota_Metric "VPN_TUNNELS"
 
--- | 
+-- |
 pattern Quota_Metric_XPNSERVICEPROJECTS :: Quota_Metric
 pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
 
@@ -25215,46 +25056,48 @@ pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
   Quota_Metric_VPNGATEWAYS,
   Quota_Metric_VPNTUNNELS,
   Quota_Metric_XPNSERVICEPROJECTS,
-  Quota_Metric #-}
+  Quota_Metric
+  #-}
 
 -- | [Output Only] Status of the region, either UP or DOWN.
-newtype Region_Status = Region_Status { fromRegion_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Region_Status = Region_Status {fromRegion_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Region_Status_Down :: Region_Status
 pattern Region_Status_Down = Region_Status "DOWN"
 
--- | 
+-- |
 pattern Region_Status_UP :: Region_Status
 pattern Region_Status_UP = Region_Status "UP"
 
 {-# COMPLETE
   Region_Status_Down,
   Region_Status_UP,
-  Region_Status #-}
+  Region_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RegionAutoscalerList_Warning_Code = RegionAutoscalerList_Warning_Code { fromRegionAutoscalerList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionAutoscalerList_Warning_Code = RegionAutoscalerList_Warning_Code {fromRegionAutoscalerList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RegionAutoscalerList_Warning_Code_CLEANUPFAILED :: RegionAutoscalerList_Warning_Code
@@ -25382,20 +25225,21 @@ pattern RegionAutoscalerList_Warning_Code_Unreachable = RegionAutoscalerList_War
   RegionAutoscalerList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RegionAutoscalerList_Warning_Code_UNDECLAREDPROPERTIES,
   RegionAutoscalerList_Warning_Code_Unreachable,
-  RegionAutoscalerList_Warning_Code #-}
+  RegionAutoscalerList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RegionDiskTypeList_Warning_Code = RegionDiskTypeList_Warning_Code { fromRegionDiskTypeList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionDiskTypeList_Warning_Code = RegionDiskTypeList_Warning_Code {fromRegionDiskTypeList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RegionDiskTypeList_Warning_Code_CLEANUPFAILED :: RegionDiskTypeList_Warning_Code
@@ -25523,20 +25367,21 @@ pattern RegionDiskTypeList_Warning_Code_Unreachable = RegionDiskTypeList_Warning
   RegionDiskTypeList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RegionDiskTypeList_Warning_Code_UNDECLAREDPROPERTIES,
   RegionDiskTypeList_Warning_Code_Unreachable,
-  RegionDiskTypeList_Warning_Code #-}
+  RegionDiskTypeList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RegionInstanceGroupList_Warning_Code = RegionInstanceGroupList_Warning_Code { fromRegionInstanceGroupList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionInstanceGroupList_Warning_Code = RegionInstanceGroupList_Warning_Code {fromRegionInstanceGroupList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RegionInstanceGroupList_Warning_Code_CLEANUPFAILED :: RegionInstanceGroupList_Warning_Code
@@ -25664,20 +25509,21 @@ pattern RegionInstanceGroupList_Warning_Code_Unreachable = RegionInstanceGroupLi
   RegionInstanceGroupList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RegionInstanceGroupList_Warning_Code_UNDECLAREDPROPERTIES,
   RegionInstanceGroupList_Warning_Code_Unreachable,
-  RegionInstanceGroupList_Warning_Code #-}
+  RegionInstanceGroupList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RegionInstanceGroupManagerList_Warning_Code = RegionInstanceGroupManagerList_Warning_Code { fromRegionInstanceGroupManagerList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionInstanceGroupManagerList_Warning_Code = RegionInstanceGroupManagerList_Warning_Code {fromRegionInstanceGroupManagerList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RegionInstanceGroupManagerList_Warning_Code_CLEANUPFAILED :: RegionInstanceGroupManagerList_Warning_Code
@@ -25805,20 +25651,21 @@ pattern RegionInstanceGroupManagerList_Warning_Code_Unreachable = RegionInstance
   RegionInstanceGroupManagerList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RegionInstanceGroupManagerList_Warning_Code_UNDECLAREDPROPERTIES,
   RegionInstanceGroupManagerList_Warning_Code_Unreachable,
-  RegionInstanceGroupManagerList_Warning_Code #-}
+  RegionInstanceGroupManagerList_Warning_Code
+  #-}
 
 -- | The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
-newtype RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction = RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction { fromRegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction = RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction {fromRegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not perform any action.
 pattern RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_None :: RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction
@@ -25841,20 +25688,21 @@ pattern RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_Restart = R
   RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_Refresh,
   RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_Replace,
   RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction_Restart,
-  RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction #-}
+  RegionInstanceGroupManagersApplyUpdatesRequest_MinimalAction
+  #-}
 
 -- | The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
-newtype RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction = RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction { fromRegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction = RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction {fromRegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not perform any action.
 pattern RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_None :: RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
@@ -25877,20 +25725,21 @@ pattern RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedActi
   RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Refresh,
   RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Replace,
   RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction_Restart,
-  RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction #-}
+  RegionInstanceGroupManagersApplyUpdatesRequest_MostDisruptiveAllowedAction
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code = RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code { fromRegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code = RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code {fromRegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_CLEANUPFAILED :: RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
@@ -26018,20 +25867,21 @@ pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_Unreacha
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_UNDECLAREDPROPERTIES,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_Unreachable,
-  RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code #-}
+  RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RegionInstanceGroupsListInstances_Warning_Code = RegionInstanceGroupsListInstances_Warning_Code { fromRegionInstanceGroupsListInstances_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionInstanceGroupsListInstances_Warning_Code = RegionInstanceGroupsListInstances_Warning_Code {fromRegionInstanceGroupsListInstances_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RegionInstanceGroupsListInstances_Warning_Code_CLEANUPFAILED :: RegionInstanceGroupsListInstances_Warning_Code
@@ -26159,20 +26009,21 @@ pattern RegionInstanceGroupsListInstances_Warning_Code_Unreachable = RegionInsta
   RegionInstanceGroupsListInstances_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RegionInstanceGroupsListInstances_Warning_Code_UNDECLAREDPROPERTIES,
   RegionInstanceGroupsListInstances_Warning_Code_Unreachable,
-  RegionInstanceGroupsListInstances_Warning_Code #-}
+  RegionInstanceGroupsListInstances_Warning_Code
+  #-}
 
 -- | Instances in which state should be returned. Valid options are: \'ALL\', \'RUNNING\'. By default, it lists all instances.
-newtype RegionInstanceGroupsListInstancesRequest_InstanceState = RegionInstanceGroupsListInstancesRequest_InstanceState { fromRegionInstanceGroupsListInstancesRequest_InstanceState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionInstanceGroupsListInstancesRequest_InstanceState = RegionInstanceGroupsListInstancesRequest_InstanceState {fromRegionInstanceGroupsListInstancesRequest_InstanceState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Matches any status of the instances, running, non-running and others.
 pattern RegionInstanceGroupsListInstancesRequest_InstanceState_All :: RegionInstanceGroupsListInstancesRequest_InstanceState
@@ -26185,20 +26036,21 @@ pattern RegionInstanceGroupsListInstancesRequest_InstanceState_Running = RegionI
 {-# COMPLETE
   RegionInstanceGroupsListInstancesRequest_InstanceState_All,
   RegionInstanceGroupsListInstancesRequest_InstanceState_Running,
-  RegionInstanceGroupsListInstancesRequest_InstanceState #-}
+  RegionInstanceGroupsListInstancesRequest_InstanceState
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RegionList_Warning_Code = RegionList_Warning_Code { fromRegionList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionList_Warning_Code = RegionList_Warning_Code {fromRegionList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RegionList_Warning_Code_CLEANUPFAILED :: RegionList_Warning_Code
@@ -26326,34 +26178,35 @@ pattern RegionList_Warning_Code_Unreachable = RegionList_Warning_Code "UNREACHAB
   RegionList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RegionList_Warning_Code_UNDECLAREDPROPERTIES,
   RegionList_Warning_Code_Unreachable,
-  RegionList_Warning_Code #-}
+  RegionList_Warning_Code
+  #-}
 
 -- | [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
-newtype RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type { fromRegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type {fromRegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "HIERARCHY"
 
--- | 
+-- |
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "NETWORK"
 
--- | 
+-- |
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "NETWORK_REGIONAL"
 
--- | 
+-- |
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "UNSPECIFIED"
 
@@ -26362,20 +26215,21 @@ pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirew
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL,
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
-  RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type #-}
+  RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+  #-}
 
 -- | [Output Only] The status of the reservation.
-newtype Reservation_Status = Reservation_Status { fromReservation_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Reservation_Status = Reservation_Status {fromReservation_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Resources are being allocated for the reservation.
 pattern Reservation_Status_Creating :: Reservation_Status
@@ -26385,7 +26239,7 @@ pattern Reservation_Status_Creating = Reservation_Status "CREATING"
 pattern Reservation_Status_Deleting :: Reservation_Status
 pattern Reservation_Status_Deleting = Reservation_Status "DELETING"
 
--- | 
+-- |
 pattern Reservation_Status_Invalid :: Reservation_Status
 pattern Reservation_Status_Invalid = Reservation_Status "INVALID"
 
@@ -26403,20 +26257,21 @@ pattern Reservation_Status_Updating = Reservation_Status "UPDATING"
   Reservation_Status_Invalid,
   Reservation_Status_Ready,
   Reservation_Status_Updating,
-  Reservation_Status #-}
+  Reservation_Status
+  #-}
 
 -- | Specifies the type of reservation from which this instance can consume resources: ANY/RESERVATION (default), SPECIFIC/RESERVATION, or NO_RESERVATION. See Consuming reserved instances for examples.
-newtype ReservationAffinity_ConsumeReservationType = ReservationAffinity_ConsumeReservationType { fromReservationAffinity_ConsumeReservationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReservationAffinity_ConsumeReservationType = ReservationAffinity_ConsumeReservationType {fromReservationAffinity_ConsumeReservationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Consume any allocation available.
 pattern ReservationAffinity_ConsumeReservationType_ANYRESERVATION :: ReservationAffinity_ConsumeReservationType
@@ -26430,7 +26285,7 @@ pattern ReservationAffinity_ConsumeReservationType_NORESERVATION = ReservationAf
 pattern ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION :: ReservationAffinity_ConsumeReservationType
 pattern ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION = ReservationAffinity_ConsumeReservationType "SPECIFIC_RESERVATION"
 
--- | 
+-- |
 pattern ReservationAffinity_ConsumeReservationType_Unspecified :: ReservationAffinity_ConsumeReservationType
 pattern ReservationAffinity_ConsumeReservationType_Unspecified = ReservationAffinity_ConsumeReservationType "UNSPECIFIED"
 
@@ -26439,20 +26294,21 @@ pattern ReservationAffinity_ConsumeReservationType_Unspecified = ReservationAffi
   ReservationAffinity_ConsumeReservationType_NORESERVATION,
   ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION,
   ReservationAffinity_ConsumeReservationType_Unspecified,
-  ReservationAffinity_ConsumeReservationType #-}
+  ReservationAffinity_ConsumeReservationType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ReservationAggregatedList_Warning_Code = ReservationAggregatedList_Warning_Code { fromReservationAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReservationAggregatedList_Warning_Code = ReservationAggregatedList_Warning_Code {fromReservationAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ReservationAggregatedList_Warning_Code_CLEANUPFAILED :: ReservationAggregatedList_Warning_Code
@@ -26580,20 +26436,21 @@ pattern ReservationAggregatedList_Warning_Code_Unreachable = ReservationAggregat
   ReservationAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ReservationAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   ReservationAggregatedList_Warning_Code_Unreachable,
-  ReservationAggregatedList_Warning_Code #-}
+  ReservationAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ReservationList_Warning_Code = ReservationList_Warning_Code { fromReservationList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReservationList_Warning_Code = ReservationList_Warning_Code {fromReservationList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ReservationList_Warning_Code_CLEANUPFAILED :: ReservationList_Warning_Code
@@ -26721,20 +26578,21 @@ pattern ReservationList_Warning_Code_Unreachable = ReservationList_Warning_Code 
   ReservationList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ReservationList_Warning_Code_UNDECLAREDPROPERTIES,
   ReservationList_Warning_Code_Unreachable,
-  ReservationList_Warning_Code #-}
+  ReservationList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ReservationsScopedList_Warning_Code = ReservationsScopedList_Warning_Code { fromReservationsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReservationsScopedList_Warning_Code = ReservationsScopedList_Warning_Code {fromReservationsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ReservationsScopedList_Warning_Code_CLEANUPFAILED :: ReservationsScopedList_Warning_Code
@@ -26862,38 +26720,39 @@ pattern ReservationsScopedList_Warning_Code_Unreachable = ReservationsScopedList
   ReservationsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ReservationsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   ReservationsScopedList_Warning_Code_Unreachable,
-  ReservationsScopedList_Warning_Code #-}
+  ReservationsScopedList_Warning_Code
+  #-}
 
 -- | Type of resource for which this commitment applies. Possible values are VCPU and MEMORY
-newtype ResourceCommitment_Type = ResourceCommitment_Type { fromResourceCommitment_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourceCommitment_Type = ResourceCommitment_Type {fromResourceCommitment_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ResourceCommitment_Type_Accelerator :: ResourceCommitment_Type
 pattern ResourceCommitment_Type_Accelerator = ResourceCommitment_Type "ACCELERATOR"
 
--- | 
+-- |
 pattern ResourceCommitment_Type_LOCALSSD :: ResourceCommitment_Type
 pattern ResourceCommitment_Type_LOCALSSD = ResourceCommitment_Type "LOCAL_SSD"
 
--- | 
+-- |
 pattern ResourceCommitment_Type_Memory :: ResourceCommitment_Type
 pattern ResourceCommitment_Type_Memory = ResourceCommitment_Type "MEMORY"
 
--- | 
+-- |
 pattern ResourceCommitment_Type_Unspecified :: ResourceCommitment_Type
 pattern ResourceCommitment_Type_Unspecified = ResourceCommitment_Type "UNSPECIFIED"
 
--- | 
+-- |
 pattern ResourceCommitment_Type_Vcpu :: ResourceCommitment_Type
 pattern ResourceCommitment_Type_Vcpu = ResourceCommitment_Type "VCPU"
 
@@ -26903,20 +26762,21 @@ pattern ResourceCommitment_Type_Vcpu = ResourceCommitment_Type "VCPU"
   ResourceCommitment_Type_Memory,
   ResourceCommitment_Type_Unspecified,
   ResourceCommitment_Type_Vcpu,
-  ResourceCommitment_Type #-}
+  ResourceCommitment_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ResourcePoliciesScopedList_Warning_Code = ResourcePoliciesScopedList_Warning_Code { fromResourcePoliciesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcePoliciesScopedList_Warning_Code = ResourcePoliciesScopedList_Warning_Code {fromResourcePoliciesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ResourcePoliciesScopedList_Warning_Code_CLEANUPFAILED :: ResourcePoliciesScopedList_Warning_Code
@@ -27044,20 +26904,21 @@ pattern ResourcePoliciesScopedList_Warning_Code_Unreachable = ResourcePoliciesSc
   ResourcePoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ResourcePoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   ResourcePoliciesScopedList_Warning_Code_Unreachable,
-  ResourcePoliciesScopedList_Warning_Code #-}
+  ResourcePoliciesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] The status of resource policy creation.
-newtype ResourcePolicy_Status = ResourcePolicy_Status { fromResourcePolicy_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcePolicy_Status = ResourcePolicy_Status {fromResourcePolicy_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Resource policy is being created.
 pattern ResourcePolicy_Status_Creating :: ResourcePolicy_Status
@@ -27071,7 +26932,7 @@ pattern ResourcePolicy_Status_Deleting = ResourcePolicy_Status "DELETING"
 pattern ResourcePolicy_Status_Expired :: ResourcePolicy_Status
 pattern ResourcePolicy_Status_Expired = ResourcePolicy_Status "EXPIRED"
 
--- | 
+-- |
 pattern ResourcePolicy_Status_Invalid :: ResourcePolicy_Status
 pattern ResourcePolicy_Status_Invalid = ResourcePolicy_Status "INVALID"
 
@@ -27085,20 +26946,21 @@ pattern ResourcePolicy_Status_Ready = ResourcePolicy_Status "READY"
   ResourcePolicy_Status_Expired,
   ResourcePolicy_Status_Invalid,
   ResourcePolicy_Status_Ready,
-  ResourcePolicy_Status #-}
+  ResourcePolicy_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ResourcePolicyAggregatedList_Warning_Code = ResourcePolicyAggregatedList_Warning_Code { fromResourcePolicyAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcePolicyAggregatedList_Warning_Code = ResourcePolicyAggregatedList_Warning_Code {fromResourcePolicyAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ResourcePolicyAggregatedList_Warning_Code_CLEANUPFAILED :: ResourcePolicyAggregatedList_Warning_Code
@@ -27226,46 +27088,48 @@ pattern ResourcePolicyAggregatedList_Warning_Code_Unreachable = ResourcePolicyAg
   ResourcePolicyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ResourcePolicyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   ResourcePolicyAggregatedList_Warning_Code_Unreachable,
-  ResourcePolicyAggregatedList_Warning_Code #-}
+  ResourcePolicyAggregatedList_Warning_Code
+  #-}
 
 -- | Specifies network collocation
-newtype ResourcePolicyGroupPlacementPolicy_Collocation = ResourcePolicyGroupPlacementPolicy_Collocation { fromResourcePolicyGroupPlacementPolicy_Collocation :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcePolicyGroupPlacementPolicy_Collocation = ResourcePolicyGroupPlacementPolicy_Collocation {fromResourcePolicyGroupPlacementPolicy_Collocation :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ResourcePolicyGroupPlacementPolicy_Collocation_Collocated :: ResourcePolicyGroupPlacementPolicy_Collocation
 pattern ResourcePolicyGroupPlacementPolicy_Collocation_Collocated = ResourcePolicyGroupPlacementPolicy_Collocation "COLLOCATED"
 
--- | 
+-- |
 pattern ResourcePolicyGroupPlacementPolicy_Collocation_UNSPECIFIEDCOLLOCATION :: ResourcePolicyGroupPlacementPolicy_Collocation
 pattern ResourcePolicyGroupPlacementPolicy_Collocation_UNSPECIFIEDCOLLOCATION = ResourcePolicyGroupPlacementPolicy_Collocation "UNSPECIFIED_COLLOCATION"
 
 {-# COMPLETE
   ResourcePolicyGroupPlacementPolicy_Collocation_Collocated,
   ResourcePolicyGroupPlacementPolicy_Collocation_UNSPECIFIEDCOLLOCATION,
-  ResourcePolicyGroupPlacementPolicy_Collocation #-}
+  ResourcePolicyGroupPlacementPolicy_Collocation
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ResourcePolicyList_Warning_Code = ResourcePolicyList_Warning_Code { fromResourcePolicyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcePolicyList_Warning_Code = ResourcePolicyList_Warning_Code {fromResourcePolicyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ResourcePolicyList_Warning_Code_CLEANUPFAILED :: ResourcePolicyList_Warning_Code
@@ -27393,30 +27257,31 @@ pattern ResourcePolicyList_Warning_Code_Unreachable = ResourcePolicyList_Warning
   ResourcePolicyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ResourcePolicyList_Warning_Code_UNDECLAREDPROPERTIES,
   ResourcePolicyList_Warning_Code_Unreachable,
-  ResourcePolicyList_Warning_Code #-}
+  ResourcePolicyList_Warning_Code
+  #-}
 
 -- | Specifies the behavior to apply to scheduled snapshots when the source disk is deleted.
-newtype ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete = ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete { fromResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete = ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete {fromResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_APPLYRETENTIONPOLICY :: ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete
 pattern ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_APPLYRETENTIONPOLICY = ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete "APPLY_RETENTION_POLICY"
 
--- | 
+-- |
 pattern ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_KEEPAUTOSNAPSHOTS :: ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete
 pattern ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_KEEPAUTOSNAPSHOTS = ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete "KEEP_AUTO_SNAPSHOTS"
 
--- | 
+-- |
 pattern ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_UNSPECIFIEDONSOURCEDISKDELETE :: ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete
 pattern ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_UNSPECIFIEDONSOURCEDISKDELETE = ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete "UNSPECIFIED_ON_SOURCE_DISK_DELETE"
 
@@ -27424,50 +27289,51 @@ pattern ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_U
   ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_APPLYRETENTIONPOLICY,
   ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_KEEPAUTOSNAPSHOTS,
   ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete_UNSPECIFIEDONSOURCEDISKDELETE,
-  ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete #-}
+  ResourcePolicySnapshotSchedulePolicyRetentionPolicy_OnSourceDiskDelete
+  #-}
 
 -- | Defines a schedule that runs on specific days of the week. Specify one or more days. The following options are available: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY.
-newtype ResourcePolicyWeeklyCycleDayOfWeek_Day = ResourcePolicyWeeklyCycleDayOfWeek_Day { fromResourcePolicyWeeklyCycleDayOfWeek_Day :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcePolicyWeeklyCycleDayOfWeek_Day = ResourcePolicyWeeklyCycleDayOfWeek_Day {fromResourcePolicyWeeklyCycleDayOfWeek_Day :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Friday :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Friday = ResourcePolicyWeeklyCycleDayOfWeek_Day "FRIDAY"
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Invalid :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Invalid = ResourcePolicyWeeklyCycleDayOfWeek_Day "INVALID"
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Monday :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Monday = ResourcePolicyWeeklyCycleDayOfWeek_Day "MONDAY"
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Saturday :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Saturday = ResourcePolicyWeeklyCycleDayOfWeek_Day "SATURDAY"
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Sunday :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Sunday = ResourcePolicyWeeklyCycleDayOfWeek_Day "SUNDAY"
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Thursday :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Thursday = ResourcePolicyWeeklyCycleDayOfWeek_Day "THURSDAY"
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Tuesday :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Tuesday = ResourcePolicyWeeklyCycleDayOfWeek_Day "TUESDAY"
 
--- | 
+-- |
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Wednesday :: ResourcePolicyWeeklyCycleDayOfWeek_Day
 pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Wednesday = ResourcePolicyWeeklyCycleDayOfWeek_Day "WEDNESDAY"
 
@@ -27480,34 +27346,35 @@ pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Wednesday = ResourcePolicyWeeklyC
   ResourcePolicyWeeklyCycleDayOfWeek_Day_Thursday,
   ResourcePolicyWeeklyCycleDayOfWeek_Day_Tuesday,
   ResourcePolicyWeeklyCycleDayOfWeek_Day_Wednesday,
-  ResourcePolicyWeeklyCycleDayOfWeek_Day #-}
+  ResourcePolicyWeeklyCycleDayOfWeek_Day
+  #-}
 
 -- | [Output Only] The type of this route, which can be one of the following values: - \'TRANSIT\' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - \'SUBNET\' for a route from a subnet of the VPC - \'BGP\' for a route learned from a BGP peer of this router - \'STATIC\' for a static route
-newtype Route_RouteType = Route_RouteType { fromRoute_RouteType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Route_RouteType = Route_RouteType {fromRoute_RouteType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Route_RouteType_Bgp :: Route_RouteType
 pattern Route_RouteType_Bgp = Route_RouteType "BGP"
 
--- | 
+-- |
 pattern Route_RouteType_Static :: Route_RouteType
 pattern Route_RouteType_Static = Route_RouteType "STATIC"
 
--- | 
+-- |
 pattern Route_RouteType_Subnet :: Route_RouteType
 pattern Route_RouteType_Subnet = Route_RouteType "SUBNET"
 
--- | 
+-- |
 pattern Route_RouteType_Transit :: Route_RouteType
 pattern Route_RouteType_Transit = Route_RouteType "TRANSIT"
 
@@ -27516,20 +27383,21 @@ pattern Route_RouteType_Transit = Route_RouteType "TRANSIT"
   Route_RouteType_Static,
   Route_RouteType_Subnet,
   Route_RouteType_Transit,
-  Route_RouteType #-}
+  Route_RouteType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype Route_WarningsItem_Code = Route_WarningsItem_Code { fromRoute_WarningsItem_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Route_WarningsItem_Code = Route_WarningsItem_Code {fromRoute_WarningsItem_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern Route_WarningsItem_Code_CLEANUPFAILED :: Route_WarningsItem_Code
@@ -27657,34 +27525,35 @@ pattern Route_WarningsItem_Code_Unreachable = Route_WarningsItem_Code "UNREACHAB
   Route_WarningsItem_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   Route_WarningsItem_Code_UNDECLAREDPROPERTIES,
   Route_WarningsItem_Code_Unreachable,
-  Route_WarningsItem_Code #-}
+  Route_WarningsItem_Code
+  #-}
 
 -- | [Output Only] The type of the AS Path, which can be one of the following values: - \'AS/SET\': unordered set of autonomous systems that the route in has traversed - \'AS/SEQUENCE\': ordered set of autonomous systems that the route has traversed - \'AS/CONFED/SEQUENCE\': ordered set of Member Autonomous Systems in the local confederation that the route has traversed - \'AS/CONFED/SET\': unordered set of Member Autonomous Systems in the local confederation that the route has traversed
-newtype RouteAsPath_PathSegmentType = RouteAsPath_PathSegmentType { fromRouteAsPath_PathSegmentType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouteAsPath_PathSegmentType = RouteAsPath_PathSegmentType {fromRouteAsPath_PathSegmentType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RouteAsPath_PathSegmentType_ASCONFEDSEQUENCE :: RouteAsPath_PathSegmentType
 pattern RouteAsPath_PathSegmentType_ASCONFEDSEQUENCE = RouteAsPath_PathSegmentType "AS_CONFED_SEQUENCE"
 
--- | 
+-- |
 pattern RouteAsPath_PathSegmentType_ASCONFEDSET :: RouteAsPath_PathSegmentType
 pattern RouteAsPath_PathSegmentType_ASCONFEDSET = RouteAsPath_PathSegmentType "AS_CONFED_SET"
 
--- | 
+-- |
 pattern RouteAsPath_PathSegmentType_ASSEQUENCE :: RouteAsPath_PathSegmentType
 pattern RouteAsPath_PathSegmentType_ASSEQUENCE = RouteAsPath_PathSegmentType "AS_SEQUENCE"
 
--- | 
+-- |
 pattern RouteAsPath_PathSegmentType_ASSET :: RouteAsPath_PathSegmentType
 pattern RouteAsPath_PathSegmentType_ASSET = RouteAsPath_PathSegmentType "AS_SET"
 
@@ -27693,20 +27562,21 @@ pattern RouteAsPath_PathSegmentType_ASSET = RouteAsPath_PathSegmentType "AS_SET"
   RouteAsPath_PathSegmentType_ASCONFEDSET,
   RouteAsPath_PathSegmentType_ASSEQUENCE,
   RouteAsPath_PathSegmentType_ASSET,
-  RouteAsPath_PathSegmentType #-}
+  RouteAsPath_PathSegmentType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RouteList_Warning_Code = RouteList_Warning_Code { fromRouteList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouteList_Warning_Code = RouteList_Warning_Code {fromRouteList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RouteList_Warning_Code_CLEANUPFAILED :: RouteList_Warning_Code
@@ -27834,20 +27704,21 @@ pattern RouteList_Warning_Code_Unreachable = RouteList_Warning_Code "UNREACHABLE
   RouteList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RouteList_Warning_Code_UNDECLAREDPROPERTIES,
   RouteList_Warning_Code_Unreachable,
-  RouteList_Warning_Code #-}
+  RouteList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RouterAggregatedList_Warning_Code = RouterAggregatedList_Warning_Code { fromRouterAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterAggregatedList_Warning_Code = RouterAggregatedList_Warning_Code {fromRouterAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RouterAggregatedList_Warning_Code_CLEANUPFAILED :: RouterAggregatedList_Warning_Code
@@ -27975,45 +27846,47 @@ pattern RouterAggregatedList_Warning_Code_Unreachable = RouterAggregatedList_War
   RouterAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RouterAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   RouterAggregatedList_Warning_Code_Unreachable,
-  RouterAggregatedList_Warning_Code #-}
+  RouterAggregatedList_Warning_Code
+  #-}
 
 -- | User-specified flag to indicate which mode to use for advertisement. The options are DEFAULT or CUSTOM.
-newtype RouterBgp_AdvertiseMode = RouterBgp_AdvertiseMode { fromRouterBgp_AdvertiseMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterBgp_AdvertiseMode = RouterBgp_AdvertiseMode {fromRouterBgp_AdvertiseMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RouterBgp_AdvertiseMode_Custom :: RouterBgp_AdvertiseMode
 pattern RouterBgp_AdvertiseMode_Custom = RouterBgp_AdvertiseMode "CUSTOM"
 
--- | 
+-- |
 pattern RouterBgp_AdvertiseMode_Default :: RouterBgp_AdvertiseMode
 pattern RouterBgp_AdvertiseMode_Default = RouterBgp_AdvertiseMode "DEFAULT"
 
 {-# COMPLETE
   RouterBgp_AdvertiseMode_Custom,
   RouterBgp_AdvertiseMode_Default,
-  RouterBgp_AdvertiseMode #-}
+  RouterBgp_AdvertiseMode
+  #-}
 
-newtype RouterBgp_AdvertisedGroupsItem = RouterBgp_AdvertisedGroupsItem { fromRouterBgp_AdvertisedGroupsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterBgp_AdvertisedGroupsItem = RouterBgp_AdvertisedGroupsItem {fromRouterBgp_AdvertisedGroupsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Advertise all available subnets (including peer VPC subnets).
 pattern RouterBgp_AdvertisedGroupsItem_ALLSUBNETS :: RouterBgp_AdvertisedGroupsItem
@@ -28021,45 +27894,47 @@ pattern RouterBgp_AdvertisedGroupsItem_ALLSUBNETS = RouterBgp_AdvertisedGroupsIt
 
 {-# COMPLETE
   RouterBgp_AdvertisedGroupsItem_ALLSUBNETS,
-  RouterBgp_AdvertisedGroupsItem #-}
+  RouterBgp_AdvertisedGroupsItem
+  #-}
 
 -- | User-specified flag to indicate which mode to use for advertisement.
-newtype RouterBgpPeer_AdvertiseMode = RouterBgpPeer_AdvertiseMode { fromRouterBgpPeer_AdvertiseMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterBgpPeer_AdvertiseMode = RouterBgpPeer_AdvertiseMode {fromRouterBgpPeer_AdvertiseMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RouterBgpPeer_AdvertiseMode_Custom :: RouterBgpPeer_AdvertiseMode
 pattern RouterBgpPeer_AdvertiseMode_Custom = RouterBgpPeer_AdvertiseMode "CUSTOM"
 
--- | 
+-- |
 pattern RouterBgpPeer_AdvertiseMode_Default :: RouterBgpPeer_AdvertiseMode
 pattern RouterBgpPeer_AdvertiseMode_Default = RouterBgpPeer_AdvertiseMode "DEFAULT"
 
 {-# COMPLETE
   RouterBgpPeer_AdvertiseMode_Custom,
   RouterBgpPeer_AdvertiseMode_Default,
-  RouterBgpPeer_AdvertiseMode #-}
+  RouterBgpPeer_AdvertiseMode
+  #-}
 
-newtype RouterBgpPeer_AdvertisedGroupsItem = RouterBgpPeer_AdvertisedGroupsItem { fromRouterBgpPeer_AdvertisedGroupsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterBgpPeer_AdvertisedGroupsItem = RouterBgpPeer_AdvertisedGroupsItem {fromRouterBgpPeer_AdvertisedGroupsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Advertise all available subnets (including peer VPC subnets).
 pattern RouterBgpPeer_AdvertisedGroupsItem_ALLSUBNETS :: RouterBgpPeer_AdvertisedGroupsItem
@@ -28067,46 +27942,48 @@ pattern RouterBgpPeer_AdvertisedGroupsItem_ALLSUBNETS = RouterBgpPeer_Advertised
 
 {-# COMPLETE
   RouterBgpPeer_AdvertisedGroupsItem_ALLSUBNETS,
-  RouterBgpPeer_AdvertisedGroupsItem #-}
+  RouterBgpPeer_AdvertisedGroupsItem
+  #-}
 
 -- | The status of the BGP peer connection. If set to FALSE, any active session with the peer is terminated and all associated routing information is removed. If set to TRUE, the peer connection can be established with routing information. The default is TRUE.
-newtype RouterBgpPeer_Enable = RouterBgpPeer_Enable { fromRouterBgpPeer_Enable :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterBgpPeer_Enable = RouterBgpPeer_Enable {fromRouterBgpPeer_Enable :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RouterBgpPeer_Enable_False' :: RouterBgpPeer_Enable
 pattern RouterBgpPeer_Enable_False' = RouterBgpPeer_Enable "FALSE"
 
--- | 
+-- |
 pattern RouterBgpPeer_Enable_True' :: RouterBgpPeer_Enable
 pattern RouterBgpPeer_Enable_True' = RouterBgpPeer_Enable "TRUE"
 
 {-# COMPLETE
   RouterBgpPeer_Enable_False',
   RouterBgpPeer_Enable_True',
-  RouterBgpPeer_Enable #-}
+  RouterBgpPeer_Enable
+  #-}
 
 -- | [Output Only] The resource that configures and manages this BGP peer. - MANAGED/BY/USER is the default value and can be managed by you or other users - MANAGED/BY/ATTACHMENT is a BGP peer that is configured and managed by Cloud Interconnect, specifically by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of BGP peer when the PARTNER InterconnectAttachment is created, updated, or deleted.
-newtype RouterBgpPeer_ManagementType = RouterBgpPeer_ManagementType { fromRouterBgpPeer_ManagementType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterBgpPeer_ManagementType = RouterBgpPeer_ManagementType {fromRouterBgpPeer_ManagementType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The BGP peer is automatically created for PARTNER type InterconnectAttachment; Google will automatically create\/delete this BGP peer when the PARTNER InterconnectAttachment is created\/deleted, and Google will update the ipAddress and peerIpAddress when the PARTNER InterconnectAttachment is provisioned. This type of BGP peer cannot be created or deleted, but can be modified for all fields except for name, ipAddress and peerIpAddress.
 pattern RouterBgpPeer_ManagementType_MANAGEDBYATTACHMENT :: RouterBgpPeer_ManagementType
@@ -28119,30 +27996,31 @@ pattern RouterBgpPeer_ManagementType_MANAGEDBYUSER = RouterBgpPeer_ManagementTyp
 {-# COMPLETE
   RouterBgpPeer_ManagementType_MANAGEDBYATTACHMENT,
   RouterBgpPeer_ManagementType_MANAGEDBYUSER,
-  RouterBgpPeer_ManagementType #-}
+  RouterBgpPeer_ManagementType
+  #-}
 
 -- | The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer. The default is DISABLED.
-newtype RouterBgpPeerBfd_SessionInitializationMode = RouterBgpPeerBfd_SessionInitializationMode { fromRouterBgpPeerBfd_SessionInitializationMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterBgpPeerBfd_SessionInitializationMode = RouterBgpPeerBfd_SessionInitializationMode {fromRouterBgpPeerBfd_SessionInitializationMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RouterBgpPeerBfd_SessionInitializationMode_Active :: RouterBgpPeerBfd_SessionInitializationMode
 pattern RouterBgpPeerBfd_SessionInitializationMode_Active = RouterBgpPeerBfd_SessionInitializationMode "ACTIVE"
 
--- | 
+-- |
 pattern RouterBgpPeerBfd_SessionInitializationMode_Disabled :: RouterBgpPeerBfd_SessionInitializationMode
 pattern RouterBgpPeerBfd_SessionInitializationMode_Disabled = RouterBgpPeerBfd_SessionInitializationMode "DISABLED"
 
--- | 
+-- |
 pattern RouterBgpPeerBfd_SessionInitializationMode_Passive :: RouterBgpPeerBfd_SessionInitializationMode
 pattern RouterBgpPeerBfd_SessionInitializationMode_Passive = RouterBgpPeerBfd_SessionInitializationMode "PASSIVE"
 
@@ -28150,20 +28028,21 @@ pattern RouterBgpPeerBfd_SessionInitializationMode_Passive = RouterBgpPeerBfd_Se
   RouterBgpPeerBfd_SessionInitializationMode_Active,
   RouterBgpPeerBfd_SessionInitializationMode_Disabled,
   RouterBgpPeerBfd_SessionInitializationMode_Passive,
-  RouterBgpPeerBfd_SessionInitializationMode #-}
+  RouterBgpPeerBfd_SessionInitializationMode
+  #-}
 
 -- | [Output Only] The resource that configures and manages this interface. - MANAGED/BY/USER is the default value and can be managed directly by users. - MANAGED/BY/ATTACHMENT is an interface that is configured and managed by Cloud Interconnect, specifically, by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of interface when the PARTNER InterconnectAttachment is created, updated, or deleted.
-newtype RouterInterface_ManagementType = RouterInterface_ManagementType { fromRouterInterface_ManagementType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterInterface_ManagementType = RouterInterface_ManagementType {fromRouterInterface_ManagementType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The interface is automatically created for PARTNER type InterconnectAttachment, Google will automatically create\/update\/delete this interface when the PARTNER InterconnectAttachment is created\/provisioned\/deleted. This type of interface cannot be manually managed by user.
 pattern RouterInterface_ManagementType_MANAGEDBYATTACHMENT :: RouterInterface_ManagementType
@@ -28176,20 +28055,21 @@ pattern RouterInterface_ManagementType_MANAGEDBYUSER = RouterInterface_Managemen
 {-# COMPLETE
   RouterInterface_ManagementType_MANAGEDBYATTACHMENT,
   RouterInterface_ManagementType_MANAGEDBYUSER,
-  RouterInterface_ManagementType #-}
+  RouterInterface_ManagementType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RouterList_Warning_Code = RouterList_Warning_Code { fromRouterList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterList_Warning_Code = RouterList_Warning_Code {fromRouterList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RouterList_Warning_Code_CLEANUPFAILED :: RouterList_Warning_Code
@@ -28317,20 +28197,21 @@ pattern RouterList_Warning_Code_Unreachable = RouterList_Warning_Code "UNREACHAB
   RouterList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RouterList_Warning_Code_UNDECLAREDPROPERTIES,
   RouterList_Warning_Code_Unreachable,
-  RouterList_Warning_Code #-}
+  RouterList_Warning_Code
+  #-}
 
 -- | Specify the NatIpAllocateOption, which can take one of the following values: - MANUAL/ONLY: Uses only Nat IP addresses provided by customers. When there are not enough specified Nat IPs, the Nat service fails for new VMs. - AUTO/ONLY: Nat IPs are allocated by Google Cloud Platform; customers can\'t specify any Nat IPs. When choosing AUTO/ONLY, then nat/ip should be empty.
-newtype RouterNat_NatIpAllocateOption = RouterNat_NatIpAllocateOption { fromRouterNat_NatIpAllocateOption :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterNat_NatIpAllocateOption = RouterNat_NatIpAllocateOption {fromRouterNat_NatIpAllocateOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Nat IPs are allocated by GCP; customers can not specify any Nat IPs.
 pattern RouterNat_NatIpAllocateOption_AUTOONLY :: RouterNat_NatIpAllocateOption
@@ -28343,20 +28224,21 @@ pattern RouterNat_NatIpAllocateOption_MANUALONLY = RouterNat_NatIpAllocateOption
 {-# COMPLETE
   RouterNat_NatIpAllocateOption_AUTOONLY,
   RouterNat_NatIpAllocateOption_MANUALONLY,
-  RouterNat_NatIpAllocateOption #-}
+  RouterNat_NatIpAllocateOption
+  #-}
 
 -- | Specify the Nat option, which can take one of the following values: - ALL/SUBNETWORKS/ALL/IP/RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL/SUBNETWORKS/ALL/PRIMARY/IP/RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST/OF/SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK/IP/RANGE/TO/NAT/OPTION/UNSPECIFIED. Note that if this field contains ALL/SUBNETWORKS/ALL/IP/RANGES or ALL/SUBNETWORKS/ALL/PRIMARY/IP/RANGES, then there should not be any other Router.Nat section in any Router for this network in this region.
-newtype RouterNat_SourceSubnetworkIpRangesToNat = RouterNat_SourceSubnetworkIpRangesToNat { fromRouterNat_SourceSubnetworkIpRangesToNat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterNat_SourceSubnetworkIpRangesToNat = RouterNat_SourceSubnetworkIpRangesToNat {fromRouterNat_SourceSubnetworkIpRangesToNat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | All the IP ranges in every Subnetwork are allowed to Nat.
 pattern RouterNat_SourceSubnetworkIpRangesToNat_ALLSUBNETWORKSALLIPRANGES :: RouterNat_SourceSubnetworkIpRangesToNat
@@ -28374,20 +28256,21 @@ pattern RouterNat_SourceSubnetworkIpRangesToNat_LISTOFSUBNETWORKS = RouterNat_So
   RouterNat_SourceSubnetworkIpRangesToNat_ALLSUBNETWORKSALLIPRANGES,
   RouterNat_SourceSubnetworkIpRangesToNat_ALLSUBNETWORKSALLPRIMARYIPRANGES,
   RouterNat_SourceSubnetworkIpRangesToNat_LISTOFSUBNETWORKS,
-  RouterNat_SourceSubnetworkIpRangesToNat #-}
+  RouterNat_SourceSubnetworkIpRangesToNat
+  #-}
 
 -- | Specify the desired filtering of logs on this NAT. If unspecified, logs are exported for all connections handled by this NAT. This option can take one of the following values: - ERRORS/ONLY: Export logs only for connection failures. - TRANSLATIONS/ONLY: Export logs only for successful connections. - ALL: Export logs for all connections, successful and unsuccessful.
-newtype RouterNatLogConfig_Filter = RouterNatLogConfig_Filter { fromRouterNatLogConfig_Filter :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterNatLogConfig_Filter = RouterNatLogConfig_Filter {fromRouterNatLogConfig_Filter :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Export logs for all (successful and unsuccessful) connections.
 pattern RouterNatLogConfig_Filter_All :: RouterNatLogConfig_Filter
@@ -28405,19 +28288,20 @@ pattern RouterNatLogConfig_Filter_TRANSLATIONSONLY = RouterNatLogConfig_Filter "
   RouterNatLogConfig_Filter_All,
   RouterNatLogConfig_Filter_ERRORSONLY,
   RouterNatLogConfig_Filter_TRANSLATIONSONLY,
-  RouterNatLogConfig_Filter #-}
+  RouterNatLogConfig_Filter
+  #-}
 
-newtype RouterNatSubnetworkToNat_SourceIpRangesToNatItem = RouterNatSubnetworkToNat_SourceIpRangesToNatItem { fromRouterNatSubnetworkToNat_SourceIpRangesToNatItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterNatSubnetworkToNat_SourceIpRangesToNatItem = RouterNatSubnetworkToNat_SourceIpRangesToNatItem {fromRouterNatSubnetworkToNat_SourceIpRangesToNatItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The primary and all the secondary ranges are allowed to Nat.
 pattern RouterNatSubnetworkToNat_SourceIpRangesToNatItem_ALLIPRANGES :: RouterNatSubnetworkToNat_SourceIpRangesToNatItem
@@ -28435,30 +28319,31 @@ pattern RouterNatSubnetworkToNat_SourceIpRangesToNatItem_PRIMARYIPRANGE = Router
   RouterNatSubnetworkToNat_SourceIpRangesToNatItem_ALLIPRANGES,
   RouterNatSubnetworkToNat_SourceIpRangesToNatItem_LISTOFSECONDARYIPRANGES,
   RouterNatSubnetworkToNat_SourceIpRangesToNatItem_PRIMARYIPRANGE,
-  RouterNatSubnetworkToNat_SourceIpRangesToNatItem #-}
+  RouterNatSubnetworkToNat_SourceIpRangesToNatItem
+  #-}
 
 -- | Status of the BGP peer: {UP, DOWN}
-newtype RouterStatusBgpPeerStatus_Status = RouterStatusBgpPeerStatus_Status { fromRouterStatusBgpPeerStatus_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RouterStatusBgpPeerStatus_Status = RouterStatusBgpPeerStatus_Status {fromRouterStatusBgpPeerStatus_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RouterStatusBgpPeerStatus_Status_Down :: RouterStatusBgpPeerStatus_Status
 pattern RouterStatusBgpPeerStatus_Status_Down = RouterStatusBgpPeerStatus_Status "DOWN"
 
--- | 
+-- |
 pattern RouterStatusBgpPeerStatus_Status_Unknown :: RouterStatusBgpPeerStatus_Status
 pattern RouterStatusBgpPeerStatus_Status_Unknown = RouterStatusBgpPeerStatus_Status "UNKNOWN"
 
--- | 
+-- |
 pattern RouterStatusBgpPeerStatus_Status_UP :: RouterStatusBgpPeerStatus_Status
 pattern RouterStatusBgpPeerStatus_Status_UP = RouterStatusBgpPeerStatus_Status "UP"
 
@@ -28466,20 +28351,21 @@ pattern RouterStatusBgpPeerStatus_Status_UP = RouterStatusBgpPeerStatus_Status "
   RouterStatusBgpPeerStatus_Status_Down,
   RouterStatusBgpPeerStatus_Status_Unknown,
   RouterStatusBgpPeerStatus_Status_UP,
-  RouterStatusBgpPeerStatus_Status #-}
+  RouterStatusBgpPeerStatus_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype RoutersScopedList_Warning_Code = RoutersScopedList_Warning_Code { fromRoutersScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RoutersScopedList_Warning_Code = RoutersScopedList_Warning_Code {fromRoutersScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern RoutersScopedList_Warning_Code_CLEANUPFAILED :: RoutersScopedList_Warning_Code
@@ -28607,20 +28493,21 @@ pattern RoutersScopedList_Warning_Code_Unreachable = RoutersScopedList_Warning_C
   RoutersScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   RoutersScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   RoutersScopedList_Warning_Code_Unreachable,
-  RoutersScopedList_Warning_Code #-}
+  RoutersScopedList_Warning_Code
+  #-}
 
 -- | This is deprecated and has no effect. Do not use.
-newtype Rule_Action = Rule_Action { fromRule_Action :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Rule_Action = Rule_Action {fromRule_Action :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is deprecated and has no effect. Do not use.
 pattern Rule_Action_Allow :: Rule_Action
@@ -28653,20 +28540,21 @@ pattern Rule_Action_NOACTION = Rule_Action "NO_ACTION"
   Rule_Action_DENYWITHLOG,
   Rule_Action_Log,
   Rule_Action_NOACTION,
-  Rule_Action #-}
+  Rule_Action
+  #-}
 
 -- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, SSL health check follows behavior specified in port and portName fields.
-newtype SSLHealthCheck_PortSpecification = SSLHealthCheck_PortSpecification { fromSSLHealthCheck_PortSpecification :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SSLHealthCheck_PortSpecification = SSLHealthCheck_PortSpecification {fromSSLHealthCheck_PortSpecification :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The port number in port is used for health checking.
 pattern SSLHealthCheck_PortSpecification_USEFIXEDPORT :: SSLHealthCheck_PortSpecification
@@ -28684,72 +28572,75 @@ pattern SSLHealthCheck_PortSpecification_USESERVINGPORT = SSLHealthCheck_PortSpe
   SSLHealthCheck_PortSpecification_USEFIXEDPORT,
   SSLHealthCheck_PortSpecification_USENAMEDPORT,
   SSLHealthCheck_PortSpecification_USESERVINGPORT,
-  SSLHealthCheck_PortSpecification #-}
+  SSLHealthCheck_PortSpecification
+  #-}
 
 -- | Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
-newtype SSLHealthCheck_ProxyHeader = SSLHealthCheck_ProxyHeader { fromSSLHealthCheck_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SSLHealthCheck_ProxyHeader = SSLHealthCheck_ProxyHeader {fromSSLHealthCheck_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SSLHealthCheck_ProxyHeader_None :: SSLHealthCheck_ProxyHeader
 pattern SSLHealthCheck_ProxyHeader_None = SSLHealthCheck_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern SSLHealthCheck_ProxyHeader_PROXY_V1 :: SSLHealthCheck_ProxyHeader
 pattern SSLHealthCheck_ProxyHeader_PROXY_V1 = SSLHealthCheck_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   SSLHealthCheck_ProxyHeader_None,
   SSLHealthCheck_ProxyHeader_PROXY_V1,
-  SSLHealthCheck_ProxyHeader #-}
+  SSLHealthCheck_ProxyHeader
+  #-}
 
 -- | Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME.
-newtype SavedAttachedDisk_Interface = SavedAttachedDisk_Interface { fromSavedAttachedDisk_Interface :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SavedAttachedDisk_Interface = SavedAttachedDisk_Interface {fromSavedAttachedDisk_Interface :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SavedAttachedDisk_Interface_Nvme :: SavedAttachedDisk_Interface
 pattern SavedAttachedDisk_Interface_Nvme = SavedAttachedDisk_Interface "NVME"
 
--- | 
+-- |
 pattern SavedAttachedDisk_Interface_Scsi :: SavedAttachedDisk_Interface
 pattern SavedAttachedDisk_Interface_Scsi = SavedAttachedDisk_Interface "SCSI"
 
 {-# COMPLETE
   SavedAttachedDisk_Interface_Nvme,
   SavedAttachedDisk_Interface_Scsi,
-  SavedAttachedDisk_Interface #-}
+  SavedAttachedDisk_Interface
+  #-}
 
 -- | The mode in which this disk is attached to the source instance, either READ/WRITE or READ/ONLY.
-newtype SavedAttachedDisk_Mode = SavedAttachedDisk_Mode { fromSavedAttachedDisk_Mode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SavedAttachedDisk_Mode = SavedAttachedDisk_Mode {fromSavedAttachedDisk_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Attaches this disk in read-only mode. Multiple virtual machines can use a disk in read-only mode at a time.
 pattern SavedAttachedDisk_Mode_READONLY :: SavedAttachedDisk_Mode
@@ -28762,98 +28653,102 @@ pattern SavedAttachedDisk_Mode_READWRITE = SavedAttachedDisk_Mode "READ_WRITE"
 {-# COMPLETE
   SavedAttachedDisk_Mode_READONLY,
   SavedAttachedDisk_Mode_READWRITE,
-  SavedAttachedDisk_Mode #-}
+  SavedAttachedDisk_Mode
+  #-}
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP/TO/DATE, meaning the size of the snapshot is up-to-date.
-newtype SavedAttachedDisk_StorageBytesStatus = SavedAttachedDisk_StorageBytesStatus { fromSavedAttachedDisk_StorageBytesStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SavedAttachedDisk_StorageBytesStatus = SavedAttachedDisk_StorageBytesStatus {fromSavedAttachedDisk_StorageBytesStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SavedAttachedDisk_StorageBytesStatus_Updating :: SavedAttachedDisk_StorageBytesStatus
 pattern SavedAttachedDisk_StorageBytesStatus_Updating = SavedAttachedDisk_StorageBytesStatus "UPDATING"
 
--- | 
+-- |
 pattern SavedAttachedDisk_StorageBytesStatus_UPTODATE :: SavedAttachedDisk_StorageBytesStatus
 pattern SavedAttachedDisk_StorageBytesStatus_UPTODATE = SavedAttachedDisk_StorageBytesStatus "UP_TO_DATE"
 
 {-# COMPLETE
   SavedAttachedDisk_StorageBytesStatus_Updating,
   SavedAttachedDisk_StorageBytesStatus_UPTODATE,
-  SavedAttachedDisk_StorageBytesStatus #-}
+  SavedAttachedDisk_StorageBytesStatus
+  #-}
 
 -- | Specifies the type of the attached disk, either SCRATCH or PERSISTENT.
-newtype SavedAttachedDisk_Type = SavedAttachedDisk_Type { fromSavedAttachedDisk_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SavedAttachedDisk_Type = SavedAttachedDisk_Type {fromSavedAttachedDisk_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SavedAttachedDisk_Type_Persistent :: SavedAttachedDisk_Type
 pattern SavedAttachedDisk_Type_Persistent = SavedAttachedDisk_Type "PERSISTENT"
 
--- | 
+-- |
 pattern SavedAttachedDisk_Type_Scratch :: SavedAttachedDisk_Type
 pattern SavedAttachedDisk_Type_Scratch = SavedAttachedDisk_Type "SCRATCH"
 
 {-# COMPLETE
   SavedAttachedDisk_Type_Persistent,
   SavedAttachedDisk_Type_Scratch,
-  SavedAttachedDisk_Type #-}
+  SavedAttachedDisk_Type
+  #-}
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP/TO/DATE, meaning the size of the snapshot is up-to-date.
-newtype SavedDisk_StorageBytesStatus = SavedDisk_StorageBytesStatus { fromSavedDisk_StorageBytesStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SavedDisk_StorageBytesStatus = SavedDisk_StorageBytesStatus {fromSavedDisk_StorageBytesStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SavedDisk_StorageBytesStatus_Updating :: SavedDisk_StorageBytesStatus
 pattern SavedDisk_StorageBytesStatus_Updating = SavedDisk_StorageBytesStatus "UPDATING"
 
--- | 
+-- |
 pattern SavedDisk_StorageBytesStatus_UPTODATE :: SavedDisk_StorageBytesStatus
 pattern SavedDisk_StorageBytesStatus_UPTODATE = SavedDisk_StorageBytesStatus "UP_TO_DATE"
 
 {-# COMPLETE
   SavedDisk_StorageBytesStatus_Updating,
   SavedDisk_StorageBytesStatus_UPTODATE,
-  SavedDisk_StorageBytesStatus #-}
+  SavedDisk_StorageBytesStatus
+  #-}
 
 -- | [Output Only] The current state of a scaling schedule.
-newtype ScalingScheduleStatus_State = ScalingScheduleStatus_State { fromScalingScheduleStatus_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ScalingScheduleStatus_State = ScalingScheduleStatus_State {fromScalingScheduleStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The current autoscaling recommendation is influenced by this scaling schedule.
 pattern ScalingScheduleStatus_State_Active :: ScalingScheduleStatus_State
@@ -28876,20 +28771,21 @@ pattern ScalingScheduleStatus_State_Ready = ScalingScheduleStatus_State "READY"
   ScalingScheduleStatus_State_Disabled,
   ScalingScheduleStatus_State_Obsolete,
   ScalingScheduleStatus_State_Ready,
-  ScalingScheduleStatus_State #-}
+  ScalingScheduleStatus_State
+  #-}
 
 -- | Specifies the termination action for the instance.
-newtype Scheduling_InstanceTerminationAction = Scheduling_InstanceTerminationAction { fromScheduling_InstanceTerminationAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Scheduling_InstanceTerminationAction = Scheduling_InstanceTerminationAction {fromScheduling_InstanceTerminationAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Delete the VM.
 pattern Scheduling_InstanceTerminationAction_Delete' :: Scheduling_InstanceTerminationAction
@@ -28907,20 +28803,21 @@ pattern Scheduling_InstanceTerminationAction_Stop = Scheduling_InstanceTerminati
   Scheduling_InstanceTerminationAction_Delete',
   Scheduling_InstanceTerminationAction_INSTANCETERMINATIONACTIONUNSPECIFIED,
   Scheduling_InstanceTerminationAction_Stop,
-  Scheduling_InstanceTerminationAction #-}
+  Scheduling_InstanceTerminationAction
+  #-}
 
 -- | Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM availability policies.
-newtype Scheduling_OnHostMaintenance = Scheduling_OnHostMaintenance { fromScheduling_OnHostMaintenance :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Scheduling_OnHostMaintenance = Scheduling_OnHostMaintenance {fromScheduling_OnHostMaintenance :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | /[Default]/ Allows Compute Engine to automatically migrate instances out of the way of maintenance events.
 pattern Scheduling_OnHostMaintenance_Migrate :: Scheduling_OnHostMaintenance
@@ -28933,20 +28830,21 @@ pattern Scheduling_OnHostMaintenance_Terminate = Scheduling_OnHostMaintenance "T
 {-# COMPLETE
   Scheduling_OnHostMaintenance_Migrate,
   Scheduling_OnHostMaintenance_Terminate,
-  Scheduling_OnHostMaintenance #-}
+  Scheduling_OnHostMaintenance
+  #-}
 
 -- | Specifies the provisioning model of the instance.
-newtype Scheduling_ProvisioningModel = Scheduling_ProvisioningModel { fromScheduling_ProvisioningModel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Scheduling_ProvisioningModel = Scheduling_ProvisioningModel {fromScheduling_ProvisioningModel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Heavily discounted, no guaranteed runtime.
 pattern Scheduling_ProvisioningModel_Spot :: Scheduling_ProvisioningModel
@@ -28959,20 +28857,21 @@ pattern Scheduling_ProvisioningModel_Standard = Scheduling_ProvisioningModel "ST
 {-# COMPLETE
   Scheduling_ProvisioningModel_Spot,
   Scheduling_ProvisioningModel_Standard,
-  Scheduling_ProvisioningModel #-}
+  Scheduling_ProvisioningModel
+  #-}
 
 -- | Defines the operation of node selection. Valid operators are IN for affinity and NOT_IN for anti-affinity.
-newtype SchedulingNodeAffinity_Operator = SchedulingNodeAffinity_Operator { fromSchedulingNodeAffinity_Operator :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SchedulingNodeAffinity_Operator = SchedulingNodeAffinity_Operator {fromSchedulingNodeAffinity_Operator :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Requires Compute Engine to seek for matched nodes.
 pattern SchedulingNodeAffinity_Operator_IN :: SchedulingNodeAffinity_Operator
@@ -28982,7 +28881,7 @@ pattern SchedulingNodeAffinity_Operator_IN = SchedulingNodeAffinity_Operator "IN
 pattern SchedulingNodeAffinity_Operator_NOTIN :: SchedulingNodeAffinity_Operator
 pattern SchedulingNodeAffinity_Operator_NOTIN = SchedulingNodeAffinity_Operator "NOT_IN"
 
--- | 
+-- |
 pattern SchedulingNodeAffinity_Operator_OPERATORUNSPECIFIED :: SchedulingNodeAffinity_Operator
 pattern SchedulingNodeAffinity_Operator_OPERATORUNSPECIFIED = SchedulingNodeAffinity_Operator "OPERATOR_UNSPECIFIED"
 
@@ -28990,122 +28889,127 @@ pattern SchedulingNodeAffinity_Operator_OPERATORUNSPECIFIED = SchedulingNodeAffi
   SchedulingNodeAffinity_Operator_IN,
   SchedulingNodeAffinity_Operator_NOTIN,
   SchedulingNodeAffinity_Operator_OPERATORUNSPECIFIED,
-  SchedulingNodeAffinity_Operator #-}
+  SchedulingNodeAffinity_Operator
+  #-}
 
 -- | The type indicates the intended use of the security policy. - CLOUD/ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD/ARMOR/EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google\'s cache. - CLOUD/ARMOR/INTERNAL/SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. This field can be set only at resource creation time.
-newtype SecurityPolicy_Type = SecurityPolicy_Type { fromSecurityPolicy_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicy_Type = SecurityPolicy_Type {fromSecurityPolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SecurityPolicy_Type_CLOUDARMOR :: SecurityPolicy_Type
 pattern SecurityPolicy_Type_CLOUDARMOR = SecurityPolicy_Type "CLOUD_ARMOR"
 
--- | 
+-- |
 pattern SecurityPolicy_Type_CLOUDARMOREDGE :: SecurityPolicy_Type
 pattern SecurityPolicy_Type_CLOUDARMOREDGE = SecurityPolicy_Type "CLOUD_ARMOR_EDGE"
 
 {-# COMPLETE
   SecurityPolicy_Type_CLOUDARMOR,
   SecurityPolicy_Type_CLOUDARMOREDGE,
-  SecurityPolicy_Type #-}
+  SecurityPolicy_Type
+  #-}
 
 -- | Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules.
-newtype SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility = SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility { fromSecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility = SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility {fromSecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Premium :: SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility
 pattern SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Premium = SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility "PREMIUM"
 
--- | 
+-- |
 pattern SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Standard :: SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility
 pattern SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Standard = SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility "STANDARD"
 
 {-# COMPLETE
   SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Premium,
   SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility_Standard,
-  SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility #-}
+  SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility
+  #-}
 
-newtype SecurityPolicyAdvancedOptionsConfig_JsonParsing = SecurityPolicyAdvancedOptionsConfig_JsonParsing { fromSecurityPolicyAdvancedOptionsConfig_JsonParsing :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicyAdvancedOptionsConfig_JsonParsing = SecurityPolicyAdvancedOptionsConfig_JsonParsing {fromSecurityPolicyAdvancedOptionsConfig_JsonParsing :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SecurityPolicyAdvancedOptionsConfig_JsonParsing_Disabled :: SecurityPolicyAdvancedOptionsConfig_JsonParsing
 pattern SecurityPolicyAdvancedOptionsConfig_JsonParsing_Disabled = SecurityPolicyAdvancedOptionsConfig_JsonParsing "DISABLED"
 
--- | 
+-- |
 pattern SecurityPolicyAdvancedOptionsConfig_JsonParsing_Standard :: SecurityPolicyAdvancedOptionsConfig_JsonParsing
 pattern SecurityPolicyAdvancedOptionsConfig_JsonParsing_Standard = SecurityPolicyAdvancedOptionsConfig_JsonParsing "STANDARD"
 
 {-# COMPLETE
   SecurityPolicyAdvancedOptionsConfig_JsonParsing_Disabled,
   SecurityPolicyAdvancedOptionsConfig_JsonParsing_Standard,
-  SecurityPolicyAdvancedOptionsConfig_JsonParsing #-}
+  SecurityPolicyAdvancedOptionsConfig_JsonParsing
+  #-}
 
-newtype SecurityPolicyAdvancedOptionsConfig_LogLevel = SecurityPolicyAdvancedOptionsConfig_LogLevel { fromSecurityPolicyAdvancedOptionsConfig_LogLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicyAdvancedOptionsConfig_LogLevel = SecurityPolicyAdvancedOptionsConfig_LogLevel {fromSecurityPolicyAdvancedOptionsConfig_LogLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SecurityPolicyAdvancedOptionsConfig_LogLevel_Normal :: SecurityPolicyAdvancedOptionsConfig_LogLevel
 pattern SecurityPolicyAdvancedOptionsConfig_LogLevel_Normal = SecurityPolicyAdvancedOptionsConfig_LogLevel "NORMAL"
 
--- | 
+-- |
 pattern SecurityPolicyAdvancedOptionsConfig_LogLevel_Verbose :: SecurityPolicyAdvancedOptionsConfig_LogLevel
 pattern SecurityPolicyAdvancedOptionsConfig_LogLevel_Verbose = SecurityPolicyAdvancedOptionsConfig_LogLevel "VERBOSE"
 
 {-# COMPLETE
   SecurityPolicyAdvancedOptionsConfig_LogLevel_Normal,
   SecurityPolicyAdvancedOptionsConfig_LogLevel_Verbose,
-  SecurityPolicyAdvancedOptionsConfig_LogLevel #-}
+  SecurityPolicyAdvancedOptionsConfig_LogLevel
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SecurityPolicyList_Warning_Code = SecurityPolicyList_Warning_Code { fromSecurityPolicyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicyList_Warning_Code = SecurityPolicyList_Warning_Code {fromSecurityPolicyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SecurityPolicyList_Warning_Code_CLEANUPFAILED :: SecurityPolicyList_Warning_Code
@@ -29233,20 +29137,21 @@ pattern SecurityPolicyList_Warning_Code_Unreachable = SecurityPolicyList_Warning
   SecurityPolicyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SecurityPolicyList_Warning_Code_UNDECLAREDPROPERTIES,
   SecurityPolicyList_Warning_Code_Unreachable,
-  SecurityPolicyList_Warning_Code #-}
+  SecurityPolicyList_Warning_Code
+  #-}
 
 -- | Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC/IPS/V1 - must specify the corresponding src/ip/range field in config.
-newtype SecurityPolicyRuleMatcher_VersionedExpr = SecurityPolicyRuleMatcher_VersionedExpr { fromSecurityPolicyRuleMatcher_VersionedExpr :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicyRuleMatcher_VersionedExpr = SecurityPolicyRuleMatcher_VersionedExpr {fromSecurityPolicyRuleMatcher_VersionedExpr :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Matches the source IP address of a request to the IP ranges supplied in config.
 pattern SecurityPolicyRuleMatcher_VersionedExpr_SRC_IPS_V1 :: SecurityPolicyRuleMatcher_VersionedExpr
@@ -29254,39 +29159,40 @@ pattern SecurityPolicyRuleMatcher_VersionedExpr_SRC_IPS_V1 = SecurityPolicyRuleM
 
 {-# COMPLETE
   SecurityPolicyRuleMatcher_VersionedExpr_SRC_IPS_V1,
-  SecurityPolicyRuleMatcher_VersionedExpr #-}
+  SecurityPolicyRuleMatcher_VersionedExpr
+  #-}
 
 -- | Determines the key to enforce the rate/limit/threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field \'enforce/on/key\' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP/HEADER: The value of the HTTP header whose name is configured under \"enforce/on/key/name\". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF/IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP/COOKIE: The value of the HTTP cookie whose name is configured under \"enforce/on/key_name\". The key value is truncated to the first 128 bytes of the
 -- cookie value. If no such cookie is present in the request, the key type defaults to ALL.
-newtype SecurityPolicyRuleRateLimitOptions_EnforceOnKey = SecurityPolicyRuleRateLimitOptions_EnforceOnKey { fromSecurityPolicyRuleRateLimitOptions_EnforceOnKey :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicyRuleRateLimitOptions_EnforceOnKey = SecurityPolicyRuleRateLimitOptions_EnforceOnKey {fromSecurityPolicyRuleRateLimitOptions_EnforceOnKey :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_All :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_All = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "ALL"
 
--- | 
+-- |
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPCOOKIE :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPCOOKIE = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "HTTP_COOKIE"
 
--- | 
+-- |
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "HTTP_HEADER"
 
--- | 
+-- |
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "IP"
 
--- | 
+-- |
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "XFF_IP"
 
@@ -29296,45 +29202,47 @@ pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP = SecurityPolicyRu
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER,
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP,
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP,
-  SecurityPolicyRuleRateLimitOptions_EnforceOnKey #-}
+  SecurityPolicyRuleRateLimitOptions_EnforceOnKey
+  #-}
 
 -- | Type of the redirect action.
-newtype SecurityPolicyRuleRedirectOptions_Type = SecurityPolicyRuleRedirectOptions_Type { fromSecurityPolicyRuleRedirectOptions_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SecurityPolicyRuleRedirectOptions_Type = SecurityPolicyRuleRedirectOptions_Type {fromSecurityPolicyRuleRedirectOptions_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SecurityPolicyRuleRedirectOptions_Type_EXTERNAL_302 :: SecurityPolicyRuleRedirectOptions_Type
 pattern SecurityPolicyRuleRedirectOptions_Type_EXTERNAL_302 = SecurityPolicyRuleRedirectOptions_Type "EXTERNAL_302"
 
--- | 
+-- |
 pattern SecurityPolicyRuleRedirectOptions_Type_GOOGLERECAPTCHA :: SecurityPolicyRuleRedirectOptions_Type
 pattern SecurityPolicyRuleRedirectOptions_Type_GOOGLERECAPTCHA = SecurityPolicyRuleRedirectOptions_Type "GOOGLE_RECAPTCHA"
 
 {-# COMPLETE
   SecurityPolicyRuleRedirectOptions_Type_EXTERNAL_302,
   SecurityPolicyRuleRedirectOptions_Type_GOOGLERECAPTCHA,
-  SecurityPolicyRuleRedirectOptions_Type #-}
+  SecurityPolicyRuleRedirectOptions_Type
+  #-}
 
-newtype ServerBinding_Type = ServerBinding_Type { fromServerBinding_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServerBinding_Type = ServerBinding_Type {fromServerBinding_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Node may associate with any physical server over its lifetime.
 pattern ServerBinding_Type_RESTARTNODEONANYSERVER :: ServerBinding_Type
@@ -29344,7 +29252,7 @@ pattern ServerBinding_Type_RESTARTNODEONANYSERVER = ServerBinding_Type "RESTART_
 pattern ServerBinding_Type_RESTARTNODEONMINIMALSERVERS :: ServerBinding_Type
 pattern ServerBinding_Type_RESTARTNODEONMINIMALSERVERS = ServerBinding_Type "RESTART_NODE_ON_MINIMAL_SERVERS"
 
--- | 
+-- |
 pattern ServerBinding_Type_SERVERBINDINGTYPEUNSPECIFIED :: ServerBinding_Type
 pattern ServerBinding_Type_SERVERBINDINGTYPEUNSPECIFIED = ServerBinding_Type "SERVER_BINDING_TYPE_UNSPECIFIED"
 
@@ -29352,30 +29260,31 @@ pattern ServerBinding_Type_SERVERBINDINGTYPEUNSPECIFIED = ServerBinding_Type "SE
   ServerBinding_Type_RESTARTNODEONANYSERVER,
   ServerBinding_Type_RESTARTNODEONMINIMALSERVERS,
   ServerBinding_Type_SERVERBINDINGTYPEUNSPECIFIED,
-  ServerBinding_Type #-}
+  ServerBinding_Type
+  #-}
 
 -- | The connection preference of service attachment. The value can be set to ACCEPT/AUTOMATIC. An ACCEPT/AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
-newtype ServiceAttachment_ConnectionPreference = ServiceAttachment_ConnectionPreference { fromServiceAttachment_ConnectionPreference :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAttachment_ConnectionPreference = ServiceAttachment_ConnectionPreference {fromServiceAttachment_ConnectionPreference :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ServiceAttachment_ConnectionPreference_ACCEPTAUTOMATIC :: ServiceAttachment_ConnectionPreference
 pattern ServiceAttachment_ConnectionPreference_ACCEPTAUTOMATIC = ServiceAttachment_ConnectionPreference "ACCEPT_AUTOMATIC"
 
--- | 
+-- |
 pattern ServiceAttachment_ConnectionPreference_ACCEPTMANUAL :: ServiceAttachment_ConnectionPreference
 pattern ServiceAttachment_ConnectionPreference_ACCEPTMANUAL = ServiceAttachment_ConnectionPreference "ACCEPT_MANUAL"
 
--- | 
+-- |
 pattern ServiceAttachment_ConnectionPreference_CONNECTIONPREFERENCEUNSPECIFIED :: ServiceAttachment_ConnectionPreference
 pattern ServiceAttachment_ConnectionPreference_CONNECTIONPREFERENCEUNSPECIFIED = ServiceAttachment_ConnectionPreference "CONNECTION_PREFERENCE_UNSPECIFIED"
 
@@ -29383,20 +29292,21 @@ pattern ServiceAttachment_ConnectionPreference_CONNECTIONPREFERENCEUNSPECIFIED =
   ServiceAttachment_ConnectionPreference_ACCEPTAUTOMATIC,
   ServiceAttachment_ConnectionPreference_ACCEPTMANUAL,
   ServiceAttachment_ConnectionPreference_CONNECTIONPREFERENCEUNSPECIFIED,
-  ServiceAttachment_ConnectionPreference #-}
+  ServiceAttachment_ConnectionPreference
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ServiceAttachmentAggregatedList_Warning_Code = ServiceAttachmentAggregatedList_Warning_Code { fromServiceAttachmentAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAttachmentAggregatedList_Warning_Code = ServiceAttachmentAggregatedList_Warning_Code {fromServiceAttachmentAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ServiceAttachmentAggregatedList_Warning_Code_CLEANUPFAILED :: ServiceAttachmentAggregatedList_Warning_Code
@@ -29524,20 +29434,21 @@ pattern ServiceAttachmentAggregatedList_Warning_Code_Unreachable = ServiceAttach
   ServiceAttachmentAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ServiceAttachmentAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   ServiceAttachmentAggregatedList_Warning_Code_Unreachable,
-  ServiceAttachmentAggregatedList_Warning_Code #-}
+  ServiceAttachmentAggregatedList_Warning_Code
+  #-}
 
 -- | The status of a connected endpoint to this service attachment.
-newtype ServiceAttachmentConnectedEndpoint_Status = ServiceAttachmentConnectedEndpoint_Status { fromServiceAttachmentConnectedEndpoint_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAttachmentConnectedEndpoint_Status = ServiceAttachmentConnectedEndpoint_Status {fromServiceAttachmentConnectedEndpoint_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The connection has been accepted by the producer.
 pattern ServiceAttachmentConnectedEndpoint_Status_Accepted :: ServiceAttachmentConnectedEndpoint_Status
@@ -29555,7 +29466,7 @@ pattern ServiceAttachmentConnectedEndpoint_Status_Pending = ServiceAttachmentCon
 pattern ServiceAttachmentConnectedEndpoint_Status_Rejected :: ServiceAttachmentConnectedEndpoint_Status
 pattern ServiceAttachmentConnectedEndpoint_Status_Rejected = ServiceAttachmentConnectedEndpoint_Status "REJECTED"
 
--- | 
+-- |
 pattern ServiceAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED :: ServiceAttachmentConnectedEndpoint_Status
 pattern ServiceAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED = ServiceAttachmentConnectedEndpoint_Status "STATUS_UNSPECIFIED"
 
@@ -29565,20 +29476,21 @@ pattern ServiceAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED = ServiceAtt
   ServiceAttachmentConnectedEndpoint_Status_Pending,
   ServiceAttachmentConnectedEndpoint_Status_Rejected,
   ServiceAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED,
-  ServiceAttachmentConnectedEndpoint_Status #-}
+  ServiceAttachmentConnectedEndpoint_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ServiceAttachmentList_Warning_Code = ServiceAttachmentList_Warning_Code { fromServiceAttachmentList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAttachmentList_Warning_Code = ServiceAttachmentList_Warning_Code {fromServiceAttachmentList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ServiceAttachmentList_Warning_Code_CLEANUPFAILED :: ServiceAttachmentList_Warning_Code
@@ -29706,20 +29618,21 @@ pattern ServiceAttachmentList_Warning_Code_Unreachable = ServiceAttachmentList_W
   ServiceAttachmentList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ServiceAttachmentList_Warning_Code_UNDECLAREDPROPERTIES,
   ServiceAttachmentList_Warning_Code_Unreachable,
-  ServiceAttachmentList_Warning_Code #-}
+  ServiceAttachmentList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ServiceAttachmentsScopedList_Warning_Code = ServiceAttachmentsScopedList_Warning_Code { fromServiceAttachmentsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAttachmentsScopedList_Warning_Code = ServiceAttachmentsScopedList_Warning_Code {fromServiceAttachmentsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ServiceAttachmentsScopedList_Warning_Code_CLEANUPFAILED :: ServiceAttachmentsScopedList_Warning_Code
@@ -29847,20 +29760,21 @@ pattern ServiceAttachmentsScopedList_Warning_Code_Unreachable = ServiceAttachmen
   ServiceAttachmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ServiceAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   ServiceAttachmentsScopedList_Warning_Code_Unreachable,
-  ServiceAttachmentsScopedList_Warning_Code #-}
+  ServiceAttachmentsScopedList_Warning_Code
+  #-}
 
 -- | Type of sharing for this shared-reservation
-newtype ShareSettings_ShareType = ShareSettings_ShareType { fromShareSettings_ShareType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ShareSettings_ShareType = ShareSettings_ShareType {fromShareSettings_ShareType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern ShareSettings_ShareType_Local :: ShareSettings_ShareType
@@ -29878,20 +29792,21 @@ pattern ShareSettings_ShareType_SPECIFICPROJECTS = ShareSettings_ShareType "SPEC
   ShareSettings_ShareType_Local,
   ShareSettings_ShareType_SHARETYPEUNSPECIFIED,
   ShareSettings_ShareType_SPECIFICPROJECTS,
-  ShareSettings_ShareType #-}
+  ShareSettings_ShareType
+  #-}
 
 -- | [Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.
-newtype Snapshot_Status = Snapshot_Status { fromSnapshot_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Snapshot_Status = Snapshot_Status {fromSnapshot_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Snapshot creation is in progress.
 pattern Snapshot_Status_Creating :: Snapshot_Status
@@ -29919,46 +29834,48 @@ pattern Snapshot_Status_Uploading = Snapshot_Status "UPLOADING"
   Snapshot_Status_Failed,
   Snapshot_Status_Ready,
   Snapshot_Status_Uploading,
-  Snapshot_Status #-}
+  Snapshot_Status
+  #-}
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP/TO/DATE, meaning the size of the snapshot is up-to-date.
-newtype Snapshot_StorageBytesStatus = Snapshot_StorageBytesStatus { fromSnapshot_StorageBytesStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Snapshot_StorageBytesStatus = Snapshot_StorageBytesStatus {fromSnapshot_StorageBytesStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Snapshot_StorageBytesStatus_Updating :: Snapshot_StorageBytesStatus
 pattern Snapshot_StorageBytesStatus_Updating = Snapshot_StorageBytesStatus "UPDATING"
 
--- | 
+-- |
 pattern Snapshot_StorageBytesStatus_UPTODATE :: Snapshot_StorageBytesStatus
 pattern Snapshot_StorageBytesStatus_UPTODATE = Snapshot_StorageBytesStatus "UP_TO_DATE"
 
 {-# COMPLETE
   Snapshot_StorageBytesStatus_Updating,
   Snapshot_StorageBytesStatus_UPTODATE,
-  Snapshot_StorageBytesStatus #-}
+  Snapshot_StorageBytesStatus
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SnapshotList_Warning_Code = SnapshotList_Warning_Code { fromSnapshotList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SnapshotList_Warning_Code = SnapshotList_Warning_Code {fromSnapshotList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SnapshotList_Warning_Code_CLEANUPFAILED :: SnapshotList_Warning_Code
@@ -30086,20 +30003,21 @@ pattern SnapshotList_Warning_Code_Unreachable = SnapshotList_Warning_Code "UNREA
   SnapshotList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SnapshotList_Warning_Code_UNDECLAREDPROPERTIES,
   SnapshotList_Warning_Code_Unreachable,
-  SnapshotList_Warning_Code #-}
+  SnapshotList_Warning_Code
+  #-}
 
 -- | (Optional) Specifies the type of SSL certificate, either \"SELF/MANAGED\" or \"MANAGED\". If not specified, the certificate is self-managed and the fields certificate and private/key are used.
-newtype SslCertificate_Type = SslCertificate_Type { fromSslCertificate_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslCertificate_Type = SslCertificate_Type {fromSslCertificate_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Google-managed SSLCertificate.
 pattern SslCertificate_Type_Managed :: SslCertificate_Type
@@ -30109,7 +30027,7 @@ pattern SslCertificate_Type_Managed = SslCertificate_Type "MANAGED"
 pattern SslCertificate_Type_SELFMANAGED :: SslCertificate_Type
 pattern SslCertificate_Type_SELFMANAGED = SslCertificate_Type "SELF_MANAGED"
 
--- | 
+-- |
 pattern SslCertificate_Type_TYPEUNSPECIFIED :: SslCertificate_Type
 pattern SslCertificate_Type_TYPEUNSPECIFIED = SslCertificate_Type "TYPE_UNSPECIFIED"
 
@@ -30117,20 +30035,21 @@ pattern SslCertificate_Type_TYPEUNSPECIFIED = SslCertificate_Type "TYPE_UNSPECIF
   SslCertificate_Type_Managed,
   SslCertificate_Type_SELFMANAGED,
   SslCertificate_Type_TYPEUNSPECIFIED,
-  SslCertificate_Type #-}
+  SslCertificate_Type
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SslCertificateAggregatedList_Warning_Code = SslCertificateAggregatedList_Warning_Code { fromSslCertificateAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslCertificateAggregatedList_Warning_Code = SslCertificateAggregatedList_Warning_Code {fromSslCertificateAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SslCertificateAggregatedList_Warning_Code_CLEANUPFAILED :: SslCertificateAggregatedList_Warning_Code
@@ -30258,20 +30177,21 @@ pattern SslCertificateAggregatedList_Warning_Code_Unreachable = SslCertificateAg
   SslCertificateAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SslCertificateAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   SslCertificateAggregatedList_Warning_Code_Unreachable,
-  SslCertificateAggregatedList_Warning_Code #-}
+  SslCertificateAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SslCertificateList_Warning_Code = SslCertificateList_Warning_Code { fromSslCertificateList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslCertificateList_Warning_Code = SslCertificateList_Warning_Code {fromSslCertificateList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SslCertificateList_Warning_Code_CLEANUPFAILED :: SslCertificateList_Warning_Code
@@ -30399,25 +30319,26 @@ pattern SslCertificateList_Warning_Code_Unreachable = SslCertificateList_Warning
   SslCertificateList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SslCertificateList_Warning_Code_UNDECLAREDPROPERTIES,
   SslCertificateList_Warning_Code_Unreachable,
-  SslCertificateList_Warning_Code #-}
+  SslCertificateList_Warning_Code
+  #-}
 
-newtype SslCertificateManagedSslCertificate_DomainStatusAdditional = SslCertificateManagedSslCertificate_DomainStatusAdditional { fromSslCertificateManagedSslCertificate_DomainStatusAdditional :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslCertificateManagedSslCertificate_DomainStatusAdditional = SslCertificateManagedSslCertificate_DomainStatusAdditional {fromSslCertificateManagedSslCertificate_DomainStatusAdditional :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A managed certificate can be provisioned, no issues for this domain.
 pattern SslCertificateManagedSslCertificate_DomainStatusAdditional_Active :: SslCertificateManagedSslCertificate_DomainStatusAdditional
 pattern SslCertificateManagedSslCertificate_DomainStatusAdditional_Active = SslCertificateManagedSslCertificate_DomainStatusAdditional "ACTIVE"
 
--- | 
+-- |
 pattern SslCertificateManagedSslCertificate_DomainStatusAdditional_DOMAINSTATUSUNSPECIFIED :: SslCertificateManagedSslCertificate_DomainStatusAdditional
 pattern SslCertificateManagedSslCertificate_DomainStatusAdditional_DOMAINSTATUSUNSPECIFIED = SslCertificateManagedSslCertificate_DomainStatusAdditional "DOMAIN_STATUS_UNSPECIFIED"
 
@@ -30449,26 +30370,27 @@ pattern SslCertificateManagedSslCertificate_DomainStatusAdditional_Provisioning 
   SslCertificateManagedSslCertificate_DomainStatusAdditional_FAILEDNOTVISIBLE,
   SslCertificateManagedSslCertificate_DomainStatusAdditional_FAILEDRATELIMITED,
   SslCertificateManagedSslCertificate_DomainStatusAdditional_Provisioning,
-  SslCertificateManagedSslCertificate_DomainStatusAdditional #-}
+  SslCertificateManagedSslCertificate_DomainStatusAdditional
+  #-}
 
 -- | [Output only] Status of the managed certificate resource.
-newtype SslCertificateManagedSslCertificate_Status = SslCertificateManagedSslCertificate_Status { fromSslCertificateManagedSslCertificate_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslCertificateManagedSslCertificate_Status = SslCertificateManagedSslCertificate_Status {fromSslCertificateManagedSslCertificate_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The certificate management is working, and a certificate has been provisioned.
 pattern SslCertificateManagedSslCertificate_Status_Active :: SslCertificateManagedSslCertificate_Status
 pattern SslCertificateManagedSslCertificate_Status_Active = SslCertificateManagedSslCertificate_Status "ACTIVE"
 
--- | 
+-- |
 pattern SslCertificateManagedSslCertificate_Status_MANAGEDCERTIFICATESTATUSUNSPECIFIED :: SslCertificateManagedSslCertificate_Status
 pattern SslCertificateManagedSslCertificate_Status_MANAGEDCERTIFICATESTATUSUNSPECIFIED = SslCertificateManagedSslCertificate_Status "MANAGED_CERTIFICATE_STATUS_UNSPECIFIED"
 
@@ -30495,20 +30417,21 @@ pattern SslCertificateManagedSslCertificate_Status_RENEWALFAILED = SslCertificat
   SslCertificateManagedSslCertificate_Status_PROVISIONINGFAILED,
   SslCertificateManagedSslCertificate_Status_PROVISIONINGFAILEDPERMANENTLY,
   SslCertificateManagedSslCertificate_Status_RENEWALFAILED,
-  SslCertificateManagedSslCertificate_Status #-}
+  SslCertificateManagedSslCertificate_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SslCertificatesScopedList_Warning_Code = SslCertificatesScopedList_Warning_Code { fromSslCertificatesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslCertificatesScopedList_Warning_Code = SslCertificatesScopedList_Warning_Code {fromSslCertificatesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SslCertificatesScopedList_Warning_Code_CLEANUPFAILED :: SslCertificatesScopedList_Warning_Code
@@ -30636,20 +30559,21 @@ pattern SslCertificatesScopedList_Warning_Code_Unreachable = SslCertificatesScop
   SslCertificatesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SslCertificatesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   SslCertificatesScopedList_Warning_Code_Unreachable,
-  SslCertificatesScopedList_Warning_Code #-}
+  SslCertificatesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SslPoliciesList_Warning_Code = SslPoliciesList_Warning_Code { fromSslPoliciesList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslPoliciesList_Warning_Code = SslPoliciesList_Warning_Code {fromSslPoliciesList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SslPoliciesList_Warning_Code_CLEANUPFAILED :: SslPoliciesList_Warning_Code
@@ -30777,20 +30701,21 @@ pattern SslPoliciesList_Warning_Code_Unreachable = SslPoliciesList_Warning_Code 
   SslPoliciesList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SslPoliciesList_Warning_Code_UNDECLAREDPROPERTIES,
   SslPoliciesList_Warning_Code_Unreachable,
-  SslPoliciesList_Warning_Code #-}
+  SslPoliciesList_Warning_Code
+  #-}
 
 -- | The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS/1/0, TLS/1/1, TLS/1/2.
-newtype SslPolicy_MinTlsVersion = SslPolicy_MinTlsVersion { fromSslPolicy_MinTlsVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslPolicy_MinTlsVersion = SslPolicy_MinTlsVersion {fromSslPolicy_MinTlsVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | TLS 1.0
 pattern SslPolicy_MinTlsVersion_TLS_1_0 :: SslPolicy_MinTlsVersion
@@ -30808,20 +30733,21 @@ pattern SslPolicy_MinTlsVersion_TLS_1_2 = SslPolicy_MinTlsVersion "TLS_1_2"
   SslPolicy_MinTlsVersion_TLS_1_0,
   SslPolicy_MinTlsVersion_TLS_1_1,
   SslPolicy_MinTlsVersion_TLS_1_2,
-  SslPolicy_MinTlsVersion #-}
+  SslPolicy_MinTlsVersion
+  #-}
 
 -- | Profile specifies the set of SSL features that can be used by the load balancer when negotiating SSL with clients. This can be one of COMPATIBLE, MODERN, RESTRICTED, or CUSTOM. If using CUSTOM, the set of SSL features to enable must be specified in the customFeatures field.
-newtype SslPolicy_Profile = SslPolicy_Profile { fromSslPolicy_Profile :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslPolicy_Profile = SslPolicy_Profile {fromSslPolicy_Profile :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Compatible profile. Allows the broadset set of clients, even those which support only out-of-date SSL features to negotiate with the load balancer.
 pattern SslPolicy_Profile_Compatible :: SslPolicy_Profile
@@ -30844,20 +30770,21 @@ pattern SslPolicy_Profile_Restricted = SslPolicy_Profile "RESTRICTED"
   SslPolicy_Profile_Custom,
   SslPolicy_Profile_Modern,
   SslPolicy_Profile_Restricted,
-  SslPolicy_Profile #-}
+  SslPolicy_Profile
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SslPolicy_WarningsItem_Code = SslPolicy_WarningsItem_Code { fromSslPolicy_WarningsItem_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslPolicy_WarningsItem_Code = SslPolicy_WarningsItem_Code {fromSslPolicy_WarningsItem_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SslPolicy_WarningsItem_Code_CLEANUPFAILED :: SslPolicy_WarningsItem_Code
@@ -30985,46 +30912,48 @@ pattern SslPolicy_WarningsItem_Code_Unreachable = SslPolicy_WarningsItem_Code "U
   SslPolicy_WarningsItem_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SslPolicy_WarningsItem_Code_UNDECLAREDPROPERTIES,
   SslPolicy_WarningsItem_Code_Unreachable,
-  SslPolicy_WarningsItem_Code #-}
+  SslPolicy_WarningsItem_Code
+  #-}
 
 -- | These stateful disks will never be deleted during autohealing, update or VM instance recreate operations. This flag is used to configure if the disk should be deleted after it is no longer used by the group, e.g. when the given instance or the whole group is deleted. Note: disks attached in READ_ONLY mode cannot be auto-deleted.
-newtype StatefulPolicyPreservedStateDiskDevice_AutoDelete = StatefulPolicyPreservedStateDiskDevice_AutoDelete { fromStatefulPolicyPreservedStateDiskDevice_AutoDelete :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StatefulPolicyPreservedStateDiskDevice_AutoDelete = StatefulPolicyPreservedStateDiskDevice_AutoDelete {fromStatefulPolicyPreservedStateDiskDevice_AutoDelete :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern StatefulPolicyPreservedStateDiskDevice_AutoDelete_Never :: StatefulPolicyPreservedStateDiskDevice_AutoDelete
 pattern StatefulPolicyPreservedStateDiskDevice_AutoDelete_Never = StatefulPolicyPreservedStateDiskDevice_AutoDelete "NEVER"
 
--- | 
+-- |
 pattern StatefulPolicyPreservedStateDiskDevice_AutoDelete_ONPERMANENTINSTANCEDELETION :: StatefulPolicyPreservedStateDiskDevice_AutoDelete
 pattern StatefulPolicyPreservedStateDiskDevice_AutoDelete_ONPERMANENTINSTANCEDELETION = StatefulPolicyPreservedStateDiskDevice_AutoDelete "ON_PERMANENT_INSTANCE_DELETION"
 
 {-# COMPLETE
   StatefulPolicyPreservedStateDiskDevice_AutoDelete_Never,
   StatefulPolicyPreservedStateDiskDevice_AutoDelete_ONPERMANENTINSTANCEDELETION,
-  StatefulPolicyPreservedStateDiskDevice_AutoDelete #-}
+  StatefulPolicyPreservedStateDiskDevice_AutoDelete
+  #-}
 
 -- | The access type of IPv6 address this subnet holds. It\'s immutable and can only be specified during creation or the first time the subnet is updated into IPV4/IPV6 dual stack. If the ipv6/type is EXTERNAL then this subnet cannot enable direct path.
-newtype Subnetwork_Ipv6AccessType = Subnetwork_Ipv6AccessType { fromSubnetwork_Ipv6AccessType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subnetwork_Ipv6AccessType = Subnetwork_Ipv6AccessType {fromSubnetwork_Ipv6AccessType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | VMs on this subnet will be assigned IPv6 addresses that are accesible via the Internet, as well as the VPC network.
 pattern Subnetwork_Ipv6AccessType_External :: Subnetwork_Ipv6AccessType
@@ -31037,20 +30966,21 @@ pattern Subnetwork_Ipv6AccessType_Internal = Subnetwork_Ipv6AccessType "INTERNAL
 {-# COMPLETE
   Subnetwork_Ipv6AccessType_External,
   Subnetwork_Ipv6AccessType_Internal,
-  Subnetwork_Ipv6AccessType #-}
+  Subnetwork_Ipv6AccessType
+  #-}
 
 -- | The private IPv6 google access type for the VMs in this subnet. This is an expanded field of enablePrivateV6Access. If both fields are set, privateIpv6GoogleAccess will take priority. This field can be both set at resource creation time and updated using patch.
-newtype Subnetwork_PrivateIpv6GoogleAccess = Subnetwork_PrivateIpv6GoogleAccess { fromSubnetwork_PrivateIpv6GoogleAccess :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subnetwork_PrivateIpv6GoogleAccess = Subnetwork_PrivateIpv6GoogleAccess {fromSubnetwork_PrivateIpv6GoogleAccess :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Disable private IPv6 access to\/from Google services.
 pattern Subnetwork_PrivateIpv6GoogleAccess_DISABLEGOOGLEACCESS :: Subnetwork_PrivateIpv6GoogleAccess
@@ -31068,20 +30998,21 @@ pattern Subnetwork_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE = Subn
   Subnetwork_PrivateIpv6GoogleAccess_DISABLEGOOGLEACCESS,
   Subnetwork_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
   Subnetwork_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
-  Subnetwork_PrivateIpv6GoogleAccess #-}
+  Subnetwork_PrivateIpv6GoogleAccess
+  #-}
 
 -- | The purpose of the resource. This field can be either PRIVATE/RFC/1918 or INTERNAL/HTTPS/LOAD/BALANCER. A subnetwork with purpose set to INTERNAL/HTTPS/LOAD/BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE/RFC/1918. The enableFlowLogs field isn\'t supported with the purpose field set to INTERNAL/HTTPS/LOAD_BALANCER.
-newtype Subnetwork_Purpose = Subnetwork_Purpose { fromSubnetwork_Purpose :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subnetwork_Purpose = Subnetwork_Purpose {fromSubnetwork_Purpose :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Subnet reserved for Internal HTTP(S) Load Balancing.
 pattern Subnetwork_Purpose_INTERNALHTTPSLOADBALANCER :: Subnetwork_Purpose
@@ -31109,20 +31040,21 @@ pattern Subnetwork_Purpose_REGIONALMANAGEDPROXY = Subnetwork_Purpose "REGIONAL_M
   Subnetwork_Purpose_PRIVATE_RFC_1918,
   Subnetwork_Purpose_PRIVATESERVICECONNECT,
   Subnetwork_Purpose_REGIONALMANAGEDPROXY,
-  Subnetwork_Purpose #-}
+  Subnetwork_Purpose
+  #-}
 
 -- | The role of subnetwork. Currently, this field is only used when purpose = INTERNAL/HTTPS/LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
-newtype Subnetwork_Role = Subnetwork_Role { fromSubnetwork_Role :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subnetwork_Role = Subnetwork_Role {fromSubnetwork_Role :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The ACTIVE subnet that is currently used.
 pattern Subnetwork_Role_Active :: Subnetwork_Role
@@ -31135,20 +31067,21 @@ pattern Subnetwork_Role_Backup = Subnetwork_Role "BACKUP"
 {-# COMPLETE
   Subnetwork_Role_Active,
   Subnetwork_Role_Backup,
-  Subnetwork_Role #-}
+  Subnetwork_Role
+  #-}
 
 -- | The stack type for the subnet. If set to IPV4/ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4/IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
-newtype Subnetwork_StackType = Subnetwork_StackType { fromSubnetwork_StackType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subnetwork_StackType = Subnetwork_StackType {fromSubnetwork_StackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | New VMs in this subnet can have both IPv4 and IPv6 addresses.
 pattern Subnetwork_StackType_IPV4_IPV6 :: Subnetwork_StackType
@@ -31161,20 +31094,21 @@ pattern Subnetwork_StackType_IPV4ONLY = Subnetwork_StackType "IPV4_ONLY"
 {-# COMPLETE
   Subnetwork_StackType_IPV4_IPV6,
   Subnetwork_StackType_IPV4ONLY,
-  Subnetwork_StackType #-}
+  Subnetwork_StackType
+  #-}
 
 -- | [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL/HTTPS/LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY
-newtype Subnetwork_State = Subnetwork_State { fromSubnetwork_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subnetwork_State = Subnetwork_State {fromSubnetwork_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Subnetwork is being drained.
 pattern Subnetwork_State_Draining :: Subnetwork_State
@@ -31187,20 +31121,21 @@ pattern Subnetwork_State_Ready = Subnetwork_State "READY"
 {-# COMPLETE
   Subnetwork_State_Draining,
   Subnetwork_State_Ready,
-  Subnetwork_State #-}
+  Subnetwork_State
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SubnetworkAggregatedList_Warning_Code = SubnetworkAggregatedList_Warning_Code { fromSubnetworkAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubnetworkAggregatedList_Warning_Code = SubnetworkAggregatedList_Warning_Code {fromSubnetworkAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SubnetworkAggregatedList_Warning_Code_CLEANUPFAILED :: SubnetworkAggregatedList_Warning_Code
@@ -31328,20 +31263,21 @@ pattern SubnetworkAggregatedList_Warning_Code_Unreachable = SubnetworkAggregated
   SubnetworkAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SubnetworkAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   SubnetworkAggregatedList_Warning_Code_Unreachable,
-  SubnetworkAggregatedList_Warning_Code #-}
+  SubnetworkAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SubnetworkList_Warning_Code = SubnetworkList_Warning_Code { fromSubnetworkList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubnetworkList_Warning_Code = SubnetworkList_Warning_Code {fromSubnetworkList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SubnetworkList_Warning_Code_CLEANUPFAILED :: SubnetworkList_Warning_Code
@@ -31469,42 +31405,43 @@ pattern SubnetworkList_Warning_Code_Unreachable = SubnetworkList_Warning_Code "U
   SubnetworkList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SubnetworkList_Warning_Code_UNDECLAREDPROPERTIES,
   SubnetworkList_Warning_Code_Unreachable,
-  SubnetworkList_Warning_Code #-}
+  SubnetworkList_Warning_Code
+  #-}
 
 -- | Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Default is an interval of 5 seconds per connection.
-newtype SubnetworkLogConfig_AggregationInterval = SubnetworkLogConfig_AggregationInterval { fromSubnetworkLogConfig_AggregationInterval :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubnetworkLogConfig_AggregationInterval = SubnetworkLogConfig_AggregationInterval {fromSubnetworkLogConfig_AggregationInterval :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL10MIN :: SubnetworkLogConfig_AggregationInterval
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL10MIN = SubnetworkLogConfig_AggregationInterval "INTERVAL_10_MIN"
 
--- | 
+-- |
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL15MIN :: SubnetworkLogConfig_AggregationInterval
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL15MIN = SubnetworkLogConfig_AggregationInterval "INTERVAL_15_MIN"
 
--- | 
+-- |
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL1MIN :: SubnetworkLogConfig_AggregationInterval
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL1MIN = SubnetworkLogConfig_AggregationInterval "INTERVAL_1_MIN"
 
--- | 
+-- |
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL30SEC :: SubnetworkLogConfig_AggregationInterval
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL30SEC = SubnetworkLogConfig_AggregationInterval "INTERVAL_30_SEC"
 
--- | 
+-- |
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL5MIN :: SubnetworkLogConfig_AggregationInterval
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL5MIN = SubnetworkLogConfig_AggregationInterval "INTERVAL_5_MIN"
 
--- | 
+-- |
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL5SEC :: SubnetworkLogConfig_AggregationInterval
 pattern SubnetworkLogConfig_AggregationInterval_INTERVAL5SEC = SubnetworkLogConfig_AggregationInterval "INTERVAL_5_SEC"
 
@@ -31515,30 +31452,31 @@ pattern SubnetworkLogConfig_AggregationInterval_INTERVAL5SEC = SubnetworkLogConf
   SubnetworkLogConfig_AggregationInterval_INTERVAL30SEC,
   SubnetworkLogConfig_AggregationInterval_INTERVAL5MIN,
   SubnetworkLogConfig_AggregationInterval_INTERVAL5SEC,
-  SubnetworkLogConfig_AggregationInterval #-}
+  SubnetworkLogConfig_AggregationInterval
+  #-}
 
 -- | Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is EXCLUDE/ALL/METADATA.
-newtype SubnetworkLogConfig_Metadata = SubnetworkLogConfig_Metadata { fromSubnetworkLogConfig_Metadata :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubnetworkLogConfig_Metadata = SubnetworkLogConfig_Metadata {fromSubnetworkLogConfig_Metadata :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SubnetworkLogConfig_Metadata_CUSTOMMETADATA :: SubnetworkLogConfig_Metadata
 pattern SubnetworkLogConfig_Metadata_CUSTOMMETADATA = SubnetworkLogConfig_Metadata "CUSTOM_METADATA"
 
--- | 
+-- |
 pattern SubnetworkLogConfig_Metadata_EXCLUDEALLMETADATA :: SubnetworkLogConfig_Metadata
 pattern SubnetworkLogConfig_Metadata_EXCLUDEALLMETADATA = SubnetworkLogConfig_Metadata "EXCLUDE_ALL_METADATA"
 
--- | 
+-- |
 pattern SubnetworkLogConfig_Metadata_INCLUDEALLMETADATA :: SubnetworkLogConfig_Metadata
 pattern SubnetworkLogConfig_Metadata_INCLUDEALLMETADATA = SubnetworkLogConfig_Metadata "INCLUDE_ALL_METADATA"
 
@@ -31546,20 +31484,21 @@ pattern SubnetworkLogConfig_Metadata_INCLUDEALLMETADATA = SubnetworkLogConfig_Me
   SubnetworkLogConfig_Metadata_CUSTOMMETADATA,
   SubnetworkLogConfig_Metadata_EXCLUDEALLMETADATA,
   SubnetworkLogConfig_Metadata_INCLUDEALLMETADATA,
-  SubnetworkLogConfig_Metadata #-}
+  SubnetworkLogConfig_Metadata
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype SubnetworksScopedList_Warning_Code = SubnetworksScopedList_Warning_Code { fromSubnetworksScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubnetworksScopedList_Warning_Code = SubnetworksScopedList_Warning_Code {fromSubnetworksScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern SubnetworksScopedList_Warning_Code_CLEANUPFAILED :: SubnetworksScopedList_Warning_Code
@@ -31687,19 +31626,20 @@ pattern SubnetworksScopedList_Warning_Code_Unreachable = SubnetworksScopedList_W
   SubnetworksScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   SubnetworksScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   SubnetworksScopedList_Warning_Code_Unreachable,
-  SubnetworksScopedList_Warning_Code #-}
+  SubnetworksScopedList_Warning_Code
+  #-}
 
-newtype Subsetting_Policy = Subsetting_Policy { fromSubsetting_Policy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subsetting_Policy = Subsetting_Policy {fromSubsetting_Policy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Subsetting based on consistent hashing. For Traffic Director, the number of backends per backend group (the subset size) is based on the @subset_size@ parameter. For Internal HTTP(S) load balancing, the number of backends per backend group (the subset size) is dynamically adjusted in two cases: - As the number of proxy instances participating in Internal HTTP(S) load balancing increases, the subset size decreases. - When the total number of backends in a network exceeds the capacity of a single proxy instance, subset sizes are reduced automatically for each service that has backend subsetting enabled.
 pattern Subsetting_Policy_CONSISTENTHASHSUBSETTING :: Subsetting_Policy
@@ -31712,20 +31652,21 @@ pattern Subsetting_Policy_None = Subsetting_Policy "NONE"
 {-# COMPLETE
   Subsetting_Policy_CONSISTENTHASHSUBSETTING,
   Subsetting_Policy_None,
-  Subsetting_Policy #-}
+  Subsetting_Policy
+  #-}
 
 -- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, TCP health check follows behavior specified in port and portName fields.
-newtype TCPHealthCheck_PortSpecification = TCPHealthCheck_PortSpecification { fromTCPHealthCheck_PortSpecification :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TCPHealthCheck_PortSpecification = TCPHealthCheck_PortSpecification {fromTCPHealthCheck_PortSpecification :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The port number in port is used for health checking.
 pattern TCPHealthCheck_PortSpecification_USEFIXEDPORT :: TCPHealthCheck_PortSpecification
@@ -31743,46 +31684,48 @@ pattern TCPHealthCheck_PortSpecification_USESERVINGPORT = TCPHealthCheck_PortSpe
   TCPHealthCheck_PortSpecification_USEFIXEDPORT,
   TCPHealthCheck_PortSpecification_USENAMEDPORT,
   TCPHealthCheck_PortSpecification_USESERVINGPORT,
-  TCPHealthCheck_PortSpecification #-}
+  TCPHealthCheck_PortSpecification
+  #-}
 
 -- | Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
-newtype TCPHealthCheck_ProxyHeader = TCPHealthCheck_ProxyHeader { fromTCPHealthCheck_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TCPHealthCheck_ProxyHeader = TCPHealthCheck_ProxyHeader {fromTCPHealthCheck_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern TCPHealthCheck_ProxyHeader_None :: TCPHealthCheck_ProxyHeader
 pattern TCPHealthCheck_ProxyHeader_None = TCPHealthCheck_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern TCPHealthCheck_ProxyHeader_PROXY_V1 :: TCPHealthCheck_ProxyHeader
 pattern TCPHealthCheck_ProxyHeader_PROXY_V1 = TCPHealthCheck_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   TCPHealthCheck_ProxyHeader_None,
   TCPHealthCheck_ProxyHeader_PROXY_V1,
-  TCPHealthCheck_ProxyHeader #-}
+  TCPHealthCheck_ProxyHeader
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetGrpcProxyList_Warning_Code = TargetGrpcProxyList_Warning_Code { fromTargetGrpcProxyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetGrpcProxyList_Warning_Code = TargetGrpcProxyList_Warning_Code {fromTargetGrpcProxyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetGrpcProxyList_Warning_Code_CLEANUPFAILED :: TargetGrpcProxyList_Warning_Code
@@ -31910,20 +31853,21 @@ pattern TargetGrpcProxyList_Warning_Code_Unreachable = TargetGrpcProxyList_Warni
   TargetGrpcProxyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetGrpcProxyList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetGrpcProxyList_Warning_Code_Unreachable,
-  TargetGrpcProxyList_Warning_Code #-}
+  TargetGrpcProxyList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetHttpProxiesScopedList_Warning_Code = TargetHttpProxiesScopedList_Warning_Code { fromTargetHttpProxiesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetHttpProxiesScopedList_Warning_Code = TargetHttpProxiesScopedList_Warning_Code {fromTargetHttpProxiesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetHttpProxiesScopedList_Warning_Code_CLEANUPFAILED :: TargetHttpProxiesScopedList_Warning_Code
@@ -32051,20 +31995,21 @@ pattern TargetHttpProxiesScopedList_Warning_Code_Unreachable = TargetHttpProxies
   TargetHttpProxiesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetHttpProxiesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetHttpProxiesScopedList_Warning_Code_Unreachable,
-  TargetHttpProxiesScopedList_Warning_Code #-}
+  TargetHttpProxiesScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetHttpProxyList_Warning_Code = TargetHttpProxyList_Warning_Code { fromTargetHttpProxyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetHttpProxyList_Warning_Code = TargetHttpProxyList_Warning_Code {fromTargetHttpProxyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetHttpProxyList_Warning_Code_CLEANUPFAILED :: TargetHttpProxyList_Warning_Code
@@ -32192,20 +32137,21 @@ pattern TargetHttpProxyList_Warning_Code_Unreachable = TargetHttpProxyList_Warni
   TargetHttpProxyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetHttpProxyList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetHttpProxyList_Warning_Code_Unreachable,
-  TargetHttpProxyList_Warning_Code #-}
+  TargetHttpProxyList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetHttpsProxiesScopedList_Warning_Code = TargetHttpsProxiesScopedList_Warning_Code { fromTargetHttpsProxiesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetHttpsProxiesScopedList_Warning_Code = TargetHttpsProxiesScopedList_Warning_Code {fromTargetHttpsProxiesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetHttpsProxiesScopedList_Warning_Code_CLEANUPFAILED :: TargetHttpsProxiesScopedList_Warning_Code
@@ -32333,20 +32279,21 @@ pattern TargetHttpsProxiesScopedList_Warning_Code_Unreachable = TargetHttpsProxi
   TargetHttpsProxiesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetHttpsProxiesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetHttpsProxiesScopedList_Warning_Code_Unreachable,
-  TargetHttpsProxiesScopedList_Warning_Code #-}
+  TargetHttpsProxiesScopedList_Warning_Code
+  #-}
 
 -- | QUIC policy for the TargetHttpsProxy resource.
-newtype TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride = TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride { fromTargetHttpsProxiesSetQuicOverrideRequest_QuicOverride :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride = TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride {fromTargetHttpsProxiesSetQuicOverrideRequest_QuicOverride :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The load balancer will not attempt to negotiate QUIC with clients.
 pattern TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_Disable :: TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride
@@ -32364,20 +32311,21 @@ pattern TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_None = TargetHttps
   TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_Disable,
   TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_Enable,
   TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride_None,
-  TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride #-}
+  TargetHttpsProxiesSetQuicOverrideRequest_QuicOverride
+  #-}
 
 -- | Specifies the QUIC override policy for this TargetHttpsProxy resource. This setting determines whether the load balancer attempts to negotiate QUIC with clients. You can specify NONE, ENABLE, or DISABLE. - When quic-override is set to NONE, Google manages whether QUIC is used. - When quic-override is set to ENABLE, the load balancer uses QUIC when possible. - When quic-override is set to DISABLE, the load balancer doesn\'t use QUIC. - If the quic-override flag is not specified, NONE is implied.
-newtype TargetHttpsProxy_QuicOverride = TargetHttpsProxy_QuicOverride { fromTargetHttpsProxy_QuicOverride :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetHttpsProxy_QuicOverride = TargetHttpsProxy_QuicOverride {fromTargetHttpsProxy_QuicOverride :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The load balancer will not attempt to negotiate QUIC with clients.
 pattern TargetHttpsProxy_QuicOverride_Disable :: TargetHttpsProxy_QuicOverride
@@ -32395,20 +32343,21 @@ pattern TargetHttpsProxy_QuicOverride_None = TargetHttpsProxy_QuicOverride "NONE
   TargetHttpsProxy_QuicOverride_Disable,
   TargetHttpsProxy_QuicOverride_Enable,
   TargetHttpsProxy_QuicOverride_None,
-  TargetHttpsProxy_QuicOverride #-}
+  TargetHttpsProxy_QuicOverride
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetHttpsProxyAggregatedList_Warning_Code = TargetHttpsProxyAggregatedList_Warning_Code { fromTargetHttpsProxyAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetHttpsProxyAggregatedList_Warning_Code = TargetHttpsProxyAggregatedList_Warning_Code {fromTargetHttpsProxyAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetHttpsProxyAggregatedList_Warning_Code_CLEANUPFAILED :: TargetHttpsProxyAggregatedList_Warning_Code
@@ -32536,20 +32485,21 @@ pattern TargetHttpsProxyAggregatedList_Warning_Code_Unreachable = TargetHttpsPro
   TargetHttpsProxyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetHttpsProxyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetHttpsProxyAggregatedList_Warning_Code_Unreachable,
-  TargetHttpsProxyAggregatedList_Warning_Code #-}
+  TargetHttpsProxyAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetHttpsProxyList_Warning_Code = TargetHttpsProxyList_Warning_Code { fromTargetHttpsProxyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetHttpsProxyList_Warning_Code = TargetHttpsProxyList_Warning_Code {fromTargetHttpsProxyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetHttpsProxyList_Warning_Code_CLEANUPFAILED :: TargetHttpsProxyList_Warning_Code
@@ -32677,20 +32627,21 @@ pattern TargetHttpsProxyList_Warning_Code_Unreachable = TargetHttpsProxyList_War
   TargetHttpsProxyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetHttpsProxyList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetHttpsProxyList_Warning_Code_Unreachable,
-  TargetHttpsProxyList_Warning_Code #-}
+  TargetHttpsProxyList_Warning_Code
+  #-}
 
 -- | NAT option controlling how IPs are NAT\'ed to the instance. Currently only NO_NAT (default value) is supported.
-newtype TargetInstance_NatPolicy = TargetInstance_NatPolicy { fromTargetInstance_NatPolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetInstance_NatPolicy = TargetInstance_NatPolicy {fromTargetInstance_NatPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No NAT performed.
 pattern TargetInstance_NatPolicy_NONAT :: TargetInstance_NatPolicy
@@ -32698,20 +32649,21 @@ pattern TargetInstance_NatPolicy_NONAT = TargetInstance_NatPolicy "NO_NAT"
 
 {-# COMPLETE
   TargetInstance_NatPolicy_NONAT,
-  TargetInstance_NatPolicy #-}
+  TargetInstance_NatPolicy
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetInstanceAggregatedList_Warning_Code = TargetInstanceAggregatedList_Warning_Code { fromTargetInstanceAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetInstanceAggregatedList_Warning_Code = TargetInstanceAggregatedList_Warning_Code {fromTargetInstanceAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetInstanceAggregatedList_Warning_Code_CLEANUPFAILED :: TargetInstanceAggregatedList_Warning_Code
@@ -32839,20 +32791,21 @@ pattern TargetInstanceAggregatedList_Warning_Code_Unreachable = TargetInstanceAg
   TargetInstanceAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetInstanceAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetInstanceAggregatedList_Warning_Code_Unreachable,
-  TargetInstanceAggregatedList_Warning_Code #-}
+  TargetInstanceAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetInstanceList_Warning_Code = TargetInstanceList_Warning_Code { fromTargetInstanceList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetInstanceList_Warning_Code = TargetInstanceList_Warning_Code {fromTargetInstanceList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetInstanceList_Warning_Code_CLEANUPFAILED :: TargetInstanceList_Warning_Code
@@ -32980,20 +32933,21 @@ pattern TargetInstanceList_Warning_Code_Unreachable = TargetInstanceList_Warning
   TargetInstanceList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetInstanceList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetInstanceList_Warning_Code_Unreachable,
-  TargetInstanceList_Warning_Code #-}
+  TargetInstanceList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetInstancesScopedList_Warning_Code = TargetInstancesScopedList_Warning_Code { fromTargetInstancesScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetInstancesScopedList_Warning_Code = TargetInstancesScopedList_Warning_Code {fromTargetInstancesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetInstancesScopedList_Warning_Code_CLEANUPFAILED :: TargetInstancesScopedList_Warning_Code
@@ -33121,20 +33075,21 @@ pattern TargetInstancesScopedList_Warning_Code_Unreachable = TargetInstancesScop
   TargetInstancesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetInstancesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetInstancesScopedList_Warning_Code_Unreachable,
-  TargetInstancesScopedList_Warning_Code #-}
+  TargetInstancesScopedList_Warning_Code
+  #-}
 
 -- | Session affinity option, must be one of the following values: NONE: Connections from the same client IP may go to any instance in the pool. CLIENT/IP: Connections from the same client IP will go to the same instance in the pool while that instance remains healthy. CLIENT/IP_PROTO: Connections from the same client IP with the same IP protocol will go to the same instance in the pool while that instance remains healthy.
-newtype TargetPool_SessionAffinity = TargetPool_SessionAffinity { fromTargetPool_SessionAffinity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetPool_SessionAffinity = TargetPool_SessionAffinity {fromTargetPool_SessionAffinity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | 2-tuple hash on packet\'s source and destination IP addresses. Connections from the same source IP address to the same destination IP address will be served by the same backend VM while that VM remains healthy.
 pattern TargetPool_SessionAffinity_CLIENTIP :: TargetPool_SessionAffinity
@@ -33177,20 +33132,21 @@ pattern TargetPool_SessionAffinity_None = TargetPool_SessionAffinity "NONE"
   TargetPool_SessionAffinity_HEADERFIELD,
   TargetPool_SessionAffinity_HTTPCOOKIE,
   TargetPool_SessionAffinity_None,
-  TargetPool_SessionAffinity #-}
+  TargetPool_SessionAffinity
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetPoolAggregatedList_Warning_Code = TargetPoolAggregatedList_Warning_Code { fromTargetPoolAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetPoolAggregatedList_Warning_Code = TargetPoolAggregatedList_Warning_Code {fromTargetPoolAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetPoolAggregatedList_Warning_Code_CLEANUPFAILED :: TargetPoolAggregatedList_Warning_Code
@@ -33318,20 +33274,21 @@ pattern TargetPoolAggregatedList_Warning_Code_Unreachable = TargetPoolAggregated
   TargetPoolAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetPoolAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetPoolAggregatedList_Warning_Code_Unreachable,
-  TargetPoolAggregatedList_Warning_Code #-}
+  TargetPoolAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetPoolList_Warning_Code = TargetPoolList_Warning_Code { fromTargetPoolList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetPoolList_Warning_Code = TargetPoolList_Warning_Code {fromTargetPoolList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetPoolList_Warning_Code_CLEANUPFAILED :: TargetPoolList_Warning_Code
@@ -33459,20 +33416,21 @@ pattern TargetPoolList_Warning_Code_Unreachable = TargetPoolList_Warning_Code "U
   TargetPoolList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetPoolList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetPoolList_Warning_Code_Unreachable,
-  TargetPoolList_Warning_Code #-}
+  TargetPoolList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetPoolsScopedList_Warning_Code = TargetPoolsScopedList_Warning_Code { fromTargetPoolsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetPoolsScopedList_Warning_Code = TargetPoolsScopedList_Warning_Code {fromTargetPoolsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetPoolsScopedList_Warning_Code_CLEANUPFAILED :: TargetPoolsScopedList_Warning_Code
@@ -33600,72 +33558,75 @@ pattern TargetPoolsScopedList_Warning_Code_Unreachable = TargetPoolsScopedList_W
   TargetPoolsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetPoolsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetPoolsScopedList_Warning_Code_Unreachable,
-  TargetPoolsScopedList_Warning_Code #-}
+  TargetPoolsScopedList_Warning_Code
+  #-}
 
 -- | The new type of proxy header to append before sending data to the backend. NONE or PROXY_V1 are allowed.
-newtype TargetSslProxiesSetProxyHeaderRequest_ProxyHeader = TargetSslProxiesSetProxyHeaderRequest_ProxyHeader { fromTargetSslProxiesSetProxyHeaderRequest_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetSslProxiesSetProxyHeaderRequest_ProxyHeader = TargetSslProxiesSetProxyHeaderRequest_ProxyHeader {fromTargetSslProxiesSetProxyHeaderRequest_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_None :: TargetSslProxiesSetProxyHeaderRequest_ProxyHeader
 pattern TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_None = TargetSslProxiesSetProxyHeaderRequest_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1 :: TargetSslProxiesSetProxyHeaderRequest_ProxyHeader
 pattern TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1 = TargetSslProxiesSetProxyHeaderRequest_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_None,
   TargetSslProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1,
-  TargetSslProxiesSetProxyHeaderRequest_ProxyHeader #-}
+  TargetSslProxiesSetProxyHeaderRequest_ProxyHeader
+  #-}
 
 -- | Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
-newtype TargetSslProxy_ProxyHeader = TargetSslProxy_ProxyHeader { fromTargetSslProxy_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetSslProxy_ProxyHeader = TargetSslProxy_ProxyHeader {fromTargetSslProxy_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern TargetSslProxy_ProxyHeader_None :: TargetSslProxy_ProxyHeader
 pattern TargetSslProxy_ProxyHeader_None = TargetSslProxy_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern TargetSslProxy_ProxyHeader_PROXY_V1 :: TargetSslProxy_ProxyHeader
 pattern TargetSslProxy_ProxyHeader_PROXY_V1 = TargetSslProxy_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   TargetSslProxy_ProxyHeader_None,
   TargetSslProxy_ProxyHeader_PROXY_V1,
-  TargetSslProxy_ProxyHeader #-}
+  TargetSslProxy_ProxyHeader
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetSslProxyList_Warning_Code = TargetSslProxyList_Warning_Code { fromTargetSslProxyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetSslProxyList_Warning_Code = TargetSslProxyList_Warning_Code {fromTargetSslProxyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetSslProxyList_Warning_Code_CLEANUPFAILED :: TargetSslProxyList_Warning_Code
@@ -33793,72 +33754,75 @@ pattern TargetSslProxyList_Warning_Code_Unreachable = TargetSslProxyList_Warning
   TargetSslProxyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetSslProxyList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetSslProxyList_Warning_Code_Unreachable,
-  TargetSslProxyList_Warning_Code #-}
+  TargetSslProxyList_Warning_Code
+  #-}
 
 -- | The new type of proxy header to append before sending data to the backend. NONE or PROXY_V1 are allowed.
-newtype TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader = TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader { fromTargetTcpProxiesSetProxyHeaderRequest_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader = TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader {fromTargetTcpProxiesSetProxyHeaderRequest_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_None :: TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader
 pattern TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_None = TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1 :: TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader
 pattern TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1 = TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_None,
   TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader_PROXY_V1,
-  TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader #-}
+  TargetTcpProxiesSetProxyHeaderRequest_ProxyHeader
+  #-}
 
 -- | Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
-newtype TargetTcpProxy_ProxyHeader = TargetTcpProxy_ProxyHeader { fromTargetTcpProxy_ProxyHeader :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetTcpProxy_ProxyHeader = TargetTcpProxy_ProxyHeader {fromTargetTcpProxy_ProxyHeader :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern TargetTcpProxy_ProxyHeader_None :: TargetTcpProxy_ProxyHeader
 pattern TargetTcpProxy_ProxyHeader_None = TargetTcpProxy_ProxyHeader "NONE"
 
--- | 
+-- |
 pattern TargetTcpProxy_ProxyHeader_PROXY_V1 :: TargetTcpProxy_ProxyHeader
 pattern TargetTcpProxy_ProxyHeader_PROXY_V1 = TargetTcpProxy_ProxyHeader "PROXY_V1"
 
 {-# COMPLETE
   TargetTcpProxy_ProxyHeader_None,
   TargetTcpProxy_ProxyHeader_PROXY_V1,
-  TargetTcpProxy_ProxyHeader #-}
+  TargetTcpProxy_ProxyHeader
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetTcpProxyList_Warning_Code = TargetTcpProxyList_Warning_Code { fromTargetTcpProxyList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetTcpProxyList_Warning_Code = TargetTcpProxyList_Warning_Code {fromTargetTcpProxyList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetTcpProxyList_Warning_Code_CLEANUPFAILED :: TargetTcpProxyList_Warning_Code
@@ -33986,34 +33950,35 @@ pattern TargetTcpProxyList_Warning_Code_Unreachable = TargetTcpProxyList_Warning
   TargetTcpProxyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetTcpProxyList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetTcpProxyList_Warning_Code_Unreachable,
-  TargetTcpProxyList_Warning_Code #-}
+  TargetTcpProxyList_Warning_Code
+  #-}
 
 -- | [Output Only] The status of the VPN gateway, which can be one of the following: CREATING, READY, FAILED, or DELETING.
-newtype TargetVpnGateway_Status = TargetVpnGateway_Status { fromTargetVpnGateway_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetVpnGateway_Status = TargetVpnGateway_Status {fromTargetVpnGateway_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern TargetVpnGateway_Status_Creating :: TargetVpnGateway_Status
 pattern TargetVpnGateway_Status_Creating = TargetVpnGateway_Status "CREATING"
 
--- | 
+-- |
 pattern TargetVpnGateway_Status_Deleting :: TargetVpnGateway_Status
 pattern TargetVpnGateway_Status_Deleting = TargetVpnGateway_Status "DELETING"
 
--- | 
+-- |
 pattern TargetVpnGateway_Status_Failed :: TargetVpnGateway_Status
 pattern TargetVpnGateway_Status_Failed = TargetVpnGateway_Status "FAILED"
 
--- | 
+-- |
 pattern TargetVpnGateway_Status_Ready :: TargetVpnGateway_Status
 pattern TargetVpnGateway_Status_Ready = TargetVpnGateway_Status "READY"
 
@@ -34022,20 +33987,21 @@ pattern TargetVpnGateway_Status_Ready = TargetVpnGateway_Status "READY"
   TargetVpnGateway_Status_Deleting,
   TargetVpnGateway_Status_Failed,
   TargetVpnGateway_Status_Ready,
-  TargetVpnGateway_Status #-}
+  TargetVpnGateway_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetVpnGatewayAggregatedList_Warning_Code = TargetVpnGatewayAggregatedList_Warning_Code { fromTargetVpnGatewayAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetVpnGatewayAggregatedList_Warning_Code = TargetVpnGatewayAggregatedList_Warning_Code {fromTargetVpnGatewayAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetVpnGatewayAggregatedList_Warning_Code_CLEANUPFAILED :: TargetVpnGatewayAggregatedList_Warning_Code
@@ -34163,20 +34129,21 @@ pattern TargetVpnGatewayAggregatedList_Warning_Code_Unreachable = TargetVpnGatew
   TargetVpnGatewayAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetVpnGatewayAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetVpnGatewayAggregatedList_Warning_Code_Unreachable,
-  TargetVpnGatewayAggregatedList_Warning_Code #-}
+  TargetVpnGatewayAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetVpnGatewayList_Warning_Code = TargetVpnGatewayList_Warning_Code { fromTargetVpnGatewayList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetVpnGatewayList_Warning_Code = TargetVpnGatewayList_Warning_Code {fromTargetVpnGatewayList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetVpnGatewayList_Warning_Code_CLEANUPFAILED :: TargetVpnGatewayList_Warning_Code
@@ -34304,20 +34271,21 @@ pattern TargetVpnGatewayList_Warning_Code_Unreachable = TargetVpnGatewayList_War
   TargetVpnGatewayList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetVpnGatewayList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetVpnGatewayList_Warning_Code_Unreachable,
-  TargetVpnGatewayList_Warning_Code #-}
+  TargetVpnGatewayList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype TargetVpnGatewaysScopedList_Warning_Code = TargetVpnGatewaysScopedList_Warning_Code { fromTargetVpnGatewaysScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TargetVpnGatewaysScopedList_Warning_Code = TargetVpnGatewaysScopedList_Warning_Code {fromTargetVpnGatewaysScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern TargetVpnGatewaysScopedList_Warning_Code_CLEANUPFAILED :: TargetVpnGatewaysScopedList_Warning_Code
@@ -34445,20 +34413,21 @@ pattern TargetVpnGatewaysScopedList_Warning_Code_Unreachable = TargetVpnGateways
   TargetVpnGatewaysScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   TargetVpnGatewaysScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetVpnGatewaysScopedList_Warning_Code_Unreachable,
-  TargetVpnGatewaysScopedList_Warning_Code #-}
+  TargetVpnGatewaysScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype UrlMapList_Warning_Code = UrlMapList_Warning_Code { fromUrlMapList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMapList_Warning_Code = UrlMapList_Warning_Code {fromUrlMapList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern UrlMapList_Warning_Code_CLEANUPFAILED :: UrlMapList_Warning_Code
@@ -34586,20 +34555,21 @@ pattern UrlMapList_Warning_Code_Unreachable = UrlMapList_Warning_Code "UNREACHAB
   UrlMapList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   UrlMapList_Warning_Code_UNDECLAREDPROPERTIES,
   UrlMapList_Warning_Code_Unreachable,
-  UrlMapList_Warning_Code #-}
+  UrlMapList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype UrlMapsAggregatedList_Warning_Code = UrlMapsAggregatedList_Warning_Code { fromUrlMapsAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMapsAggregatedList_Warning_Code = UrlMapsAggregatedList_Warning_Code {fromUrlMapsAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern UrlMapsAggregatedList_Warning_Code_CLEANUPFAILED :: UrlMapsAggregatedList_Warning_Code
@@ -34727,20 +34697,21 @@ pattern UrlMapsAggregatedList_Warning_Code_Unreachable = UrlMapsAggregatedList_W
   UrlMapsAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   UrlMapsAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   UrlMapsAggregatedList_Warning_Code_Unreachable,
-  UrlMapsAggregatedList_Warning_Code #-}
+  UrlMapsAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype UrlMapsScopedList_Warning_Code = UrlMapsScopedList_Warning_Code { fromUrlMapsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMapsScopedList_Warning_Code = UrlMapsScopedList_Warning_Code {fromUrlMapsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern UrlMapsScopedList_Warning_Code_CLEANUPFAILED :: UrlMapsScopedList_Warning_Code
@@ -34868,19 +34839,20 @@ pattern UrlMapsScopedList_Warning_Code_Unreachable = UrlMapsScopedList_Warning_C
   UrlMapsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   UrlMapsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   UrlMapsScopedList_Warning_Code_Unreachable,
-  UrlMapsScopedList_Warning_Code #-}
+  UrlMapsScopedList_Warning_Code
+  #-}
 
-newtype UrlMapsValidateRequest_LoadBalancingSchemesItem = UrlMapsValidateRequest_LoadBalancingSchemesItem { fromUrlMapsValidateRequest_LoadBalancingSchemesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMapsValidateRequest_LoadBalancingSchemesItem = UrlMapsValidateRequest_LoadBalancingSchemesItem {fromUrlMapsValidateRequest_LoadBalancingSchemesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Signifies that this will be used for Classic L7 External Load Balancing.
 pattern UrlMapsValidateRequest_LoadBalancingSchemesItem_External :: UrlMapsValidateRequest_LoadBalancingSchemesItem
@@ -34898,20 +34870,21 @@ pattern UrlMapsValidateRequest_LoadBalancingSchemesItem_LOADBALANCINGSCHEMEUNSPE
   UrlMapsValidateRequest_LoadBalancingSchemesItem_External,
   UrlMapsValidateRequest_LoadBalancingSchemesItem_EXTERNALMANAGED,
   UrlMapsValidateRequest_LoadBalancingSchemesItem_LOADBALANCINGSCHEMEUNSPECIFIED,
-  UrlMapsValidateRequest_LoadBalancingSchemesItem #-}
+  UrlMapsValidateRequest_LoadBalancingSchemesItem
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype UsableSubnetworksAggregatedList_Warning_Code = UsableSubnetworksAggregatedList_Warning_Code { fromUsableSubnetworksAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsableSubnetworksAggregatedList_Warning_Code = UsableSubnetworksAggregatedList_Warning_Code {fromUsableSubnetworksAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern UsableSubnetworksAggregatedList_Warning_Code_CLEANUPFAILED :: UsableSubnetworksAggregatedList_Warning_Code
@@ -35039,20 +35012,21 @@ pattern UsableSubnetworksAggregatedList_Warning_Code_Unreachable = UsableSubnetw
   UsableSubnetworksAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   UsableSubnetworksAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   UsableSubnetworksAggregatedList_Warning_Code_Unreachable,
-  UsableSubnetworksAggregatedList_Warning_Code #-}
+  UsableSubnetworksAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype VmEndpointNatMappingsList_Warning_Code = VmEndpointNatMappingsList_Warning_Code { fromVmEndpointNatMappingsList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VmEndpointNatMappingsList_Warning_Code = VmEndpointNatMappingsList_Warning_Code {fromVmEndpointNatMappingsList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern VmEndpointNatMappingsList_Warning_Code_CLEANUPFAILED :: VmEndpointNatMappingsList_Warning_Code
@@ -35180,20 +35154,21 @@ pattern VmEndpointNatMappingsList_Warning_Code_Unreachable = VmEndpointNatMappin
   VmEndpointNatMappingsList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   VmEndpointNatMappingsList_Warning_Code_UNDECLAREDPROPERTIES,
   VmEndpointNatMappingsList_Warning_Code_Unreachable,
-  VmEndpointNatMappingsList_Warning_Code #-}
+  VmEndpointNatMappingsList_Warning_Code
+  #-}
 
 -- | The stack type for this VPN gateway to identify the IP protocols that are enabled. If not specified, IPV4_ONLY will be used.
-newtype VpnGateway_StackType = VpnGateway_StackType { fromVpnGateway_StackType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnGateway_StackType = VpnGateway_StackType {fromVpnGateway_StackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Enable VPN gateway with both IPv4 and IPv6 protocols.
 pattern VpnGateway_StackType_IPV4_IPV6 :: VpnGateway_StackType
@@ -35206,20 +35181,21 @@ pattern VpnGateway_StackType_IPV4ONLY = VpnGateway_StackType "IPV4_ONLY"
 {-# COMPLETE
   VpnGateway_StackType_IPV4_IPV6,
   VpnGateway_StackType_IPV4ONLY,
-  VpnGateway_StackType #-}
+  VpnGateway_StackType
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype VpnGatewayAggregatedList_Warning_Code = VpnGatewayAggregatedList_Warning_Code { fromVpnGatewayAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnGatewayAggregatedList_Warning_Code = VpnGatewayAggregatedList_Warning_Code {fromVpnGatewayAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern VpnGatewayAggregatedList_Warning_Code_CLEANUPFAILED :: VpnGatewayAggregatedList_Warning_Code
@@ -35347,20 +35323,21 @@ pattern VpnGatewayAggregatedList_Warning_Code_Unreachable = VpnGatewayAggregated
   VpnGatewayAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   VpnGatewayAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   VpnGatewayAggregatedList_Warning_Code_Unreachable,
-  VpnGatewayAggregatedList_Warning_Code #-}
+  VpnGatewayAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype VpnGatewayList_Warning_Code = VpnGatewayList_Warning_Code { fromVpnGatewayList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnGatewayList_Warning_Code = VpnGatewayList_Warning_Code {fromVpnGatewayList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern VpnGatewayList_Warning_Code_CLEANUPFAILED :: VpnGatewayList_Warning_Code
@@ -35488,20 +35465,21 @@ pattern VpnGatewayList_Warning_Code_Unreachable = VpnGatewayList_Warning_Code "U
   VpnGatewayList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   VpnGatewayList_Warning_Code_UNDECLAREDPROPERTIES,
   VpnGatewayList_Warning_Code_Unreachable,
-  VpnGatewayList_Warning_Code #-}
+  VpnGatewayList_Warning_Code
+  #-}
 
 -- | Indicates the high availability requirement state for the VPN connection. Valid values are CONNECTION/REDUNDANCY/MET, CONNECTION/REDUNDANCY/NOT_MET.
-newtype VpnGatewayStatusHighAvailabilityRequirementState_State = VpnGatewayStatusHighAvailabilityRequirementState_State { fromVpnGatewayStatusHighAvailabilityRequirementState_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnGatewayStatusHighAvailabilityRequirementState_State = VpnGatewayStatusHighAvailabilityRequirementState_State {fromVpnGatewayStatusHighAvailabilityRequirementState_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | VPN tunnels are configured with adequate redundancy from Cloud VPN gateway to the peer VPN gateway. For both GCP-to-non-GCP and GCP-to-GCP connections, the adequate redundancy is a pre-requirement for users to get 99.99% availability on GCP side; please note that for any connection, end-to-end 99.99% availability is subject to proper configuration on the peer VPN gateway.
 pattern VpnGatewayStatusHighAvailabilityRequirementState_State_CONNECTIONREDUNDANCYMET :: VpnGatewayStatusHighAvailabilityRequirementState_State
@@ -35514,41 +35492,43 @@ pattern VpnGatewayStatusHighAvailabilityRequirementState_State_CONNECTIONREDUNDA
 {-# COMPLETE
   VpnGatewayStatusHighAvailabilityRequirementState_State_CONNECTIONREDUNDANCYMET,
   VpnGatewayStatusHighAvailabilityRequirementState_State_CONNECTIONREDUNDANCYNOTMET,
-  VpnGatewayStatusHighAvailabilityRequirementState_State #-}
+  VpnGatewayStatusHighAvailabilityRequirementState_State
+  #-}
 
 -- | Indicates the reason why the VPN connection does not meet the high availability redundancy criteria\/requirement. Valid values is INCOMPLETE/TUNNELS/COVERAGE.
-newtype VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason = VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason { fromVpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason = VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason {fromVpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason_INCOMPLETETUNNELSCOVERAGE :: VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason
 pattern VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason_INCOMPLETETUNNELSCOVERAGE = VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason "INCOMPLETE_TUNNELS_COVERAGE"
 
 {-# COMPLETE
   VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason_INCOMPLETETUNNELSCOVERAGE,
-  VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason #-}
+  VpnGatewayStatusHighAvailabilityRequirementState_UnsatisfiedReason
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype VpnGatewaysScopedList_Warning_Code = VpnGatewaysScopedList_Warning_Code { fromVpnGatewaysScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnGatewaysScopedList_Warning_Code = VpnGatewaysScopedList_Warning_Code {fromVpnGatewaysScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern VpnGatewaysScopedList_Warning_Code_CLEANUPFAILED :: VpnGatewaysScopedList_Warning_Code
@@ -35676,21 +35656,22 @@ pattern VpnGatewaysScopedList_Warning_Code_Unreachable = VpnGatewaysScopedList_W
   VpnGatewaysScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   VpnGatewaysScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   VpnGatewaysScopedList_Warning_Code_Unreachable,
-  VpnGatewaysScopedList_Warning_Code #-}
+  VpnGatewaysScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] The status of the VPN tunnel, which can be one of the following: - PROVISIONING: Resource is being allocated for the VPN tunnel. - WAITING/FOR/FULL/CONFIG: Waiting to receive all VPN-related configs from the user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule, and Route resources are needed to setup the VPN tunnel. - FIRST/HANDSHAKE: Successful first handshake with the peer VPN. - ESTABLISHED: Secure session is successfully established with the peer VPN. - NETWORK/ERROR: Deprecated, replaced by NO/INCOMING/PACKETS - AUTHORIZATION/ERROR: Auth error (for example, bad shared secret). - NEGOTIATION/FAILURE: Handshake failed. - DEPROVISIONING: Resources are being deallocated for the VPN tunnel. - FAILED: Tunnel creation has failed and the tunnel is not ready to be used. - NO/INCOMING/PACKETS: No incoming packets from peer. - REJECTED: Tunnel configuration was rejected, can be result of being denied access. - ALLOCATING/RESOURCES: Cloud VPN is in the process of allocating all required
 -- resources. - STOPPED: Tunnel is stopped due to its Forwarding Rules being deleted for Classic VPN tunnels or the project is in frozen state. - PEER/IDENTITY/MISMATCH: Peer identity does not match peer IP, probably behind NAT. - TS/NARROWING/NOT_ALLOWED: Traffic selector narrowing not allowed for an HA-VPN tunnel.
-newtype VpnTunnel_Status = VpnTunnel_Status { fromVpnTunnel_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnTunnel_Status = VpnTunnel_Status {fromVpnTunnel_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Cloud VPN is in the process of allocating all required resources (specifically, a borg task).
 pattern VpnTunnel_Status_ALLOCATINGRESOURCES :: VpnTunnel_Status
@@ -35758,20 +35739,21 @@ pattern VpnTunnel_Status_WAITINGFORFULLCONFIG = VpnTunnel_Status "WAITING_FOR_FU
   VpnTunnel_Status_Rejected,
   VpnTunnel_Status_Stopped,
   VpnTunnel_Status_WAITINGFORFULLCONFIG,
-  VpnTunnel_Status #-}
+  VpnTunnel_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype VpnTunnelAggregatedList_Warning_Code = VpnTunnelAggregatedList_Warning_Code { fromVpnTunnelAggregatedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnTunnelAggregatedList_Warning_Code = VpnTunnelAggregatedList_Warning_Code {fromVpnTunnelAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern VpnTunnelAggregatedList_Warning_Code_CLEANUPFAILED :: VpnTunnelAggregatedList_Warning_Code
@@ -35899,20 +35881,21 @@ pattern VpnTunnelAggregatedList_Warning_Code_Unreachable = VpnTunnelAggregatedLi
   VpnTunnelAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   VpnTunnelAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
   VpnTunnelAggregatedList_Warning_Code_Unreachable,
-  VpnTunnelAggregatedList_Warning_Code #-}
+  VpnTunnelAggregatedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype VpnTunnelList_Warning_Code = VpnTunnelList_Warning_Code { fromVpnTunnelList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnTunnelList_Warning_Code = VpnTunnelList_Warning_Code {fromVpnTunnelList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern VpnTunnelList_Warning_Code_CLEANUPFAILED :: VpnTunnelList_Warning_Code
@@ -36040,20 +36023,21 @@ pattern VpnTunnelList_Warning_Code_Unreachable = VpnTunnelList_Warning_Code "UNR
   VpnTunnelList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   VpnTunnelList_Warning_Code_UNDECLAREDPROPERTIES,
   VpnTunnelList_Warning_Code_Unreachable,
-  VpnTunnelList_Warning_Code #-}
+  VpnTunnelList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype VpnTunnelsScopedList_Warning_Code = VpnTunnelsScopedList_Warning_Code { fromVpnTunnelsScopedList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpnTunnelsScopedList_Warning_Code = VpnTunnelsScopedList_Warning_Code {fromVpnTunnelsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern VpnTunnelsScopedList_Warning_Code_CLEANUPFAILED :: VpnTunnelsScopedList_Warning_Code
@@ -36181,20 +36165,21 @@ pattern VpnTunnelsScopedList_Warning_Code_Unreachable = VpnTunnelsScopedList_War
   VpnTunnelsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   VpnTunnelsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   VpnTunnelsScopedList_Warning_Code_Unreachable,
-  VpnTunnelsScopedList_Warning_Code #-}
+  VpnTunnelsScopedList_Warning_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype XpnHostList_Warning_Code = XpnHostList_Warning_Code { fromXpnHostList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype XpnHostList_Warning_Code = XpnHostList_Warning_Code {fromXpnHostList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern XpnHostList_Warning_Code_CLEANUPFAILED :: XpnHostList_Warning_Code
@@ -36322,72 +36307,75 @@ pattern XpnHostList_Warning_Code_Unreachable = XpnHostList_Warning_Code "UNREACH
   XpnHostList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   XpnHostList_Warning_Code_UNDECLAREDPROPERTIES,
   XpnHostList_Warning_Code_Unreachable,
-  XpnHostList_Warning_Code #-}
+  XpnHostList_Warning_Code
+  #-}
 
 -- | The type of the service resource.
-newtype XpnResourceId_Type = XpnResourceId_Type { fromXpnResourceId_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype XpnResourceId_Type = XpnResourceId_Type {fromXpnResourceId_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern XpnResourceId_Type_Project :: XpnResourceId_Type
 pattern XpnResourceId_Type_Project = XpnResourceId_Type "PROJECT"
 
--- | 
+-- |
 pattern XpnResourceId_Type_XPNRESOURCETYPEUNSPECIFIED :: XpnResourceId_Type
 pattern XpnResourceId_Type_XPNRESOURCETYPEUNSPECIFIED = XpnResourceId_Type "XPN_RESOURCE_TYPE_UNSPECIFIED"
 
 {-# COMPLETE
   XpnResourceId_Type_Project,
   XpnResourceId_Type_XPNRESOURCETYPEUNSPECIFIED,
-  XpnResourceId_Type #-}
+  XpnResourceId_Type
+  #-}
 
 -- | [Output Only] Status of the zone, either UP or DOWN.
-newtype Zone_Status = Zone_Status { fromZone_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Zone_Status = Zone_Status {fromZone_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Zone_Status_Down :: Zone_Status
 pattern Zone_Status_Down = Zone_Status "DOWN"
 
--- | 
+-- |
 pattern Zone_Status_UP :: Zone_Status
 pattern Zone_Status_UP = Zone_Status "UP"
 
 {-# COMPLETE
   Zone_Status_Down,
   Zone_Status_UP,
-  Zone_Status #-}
+  Zone_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ZoneList_Warning_Code = ZoneList_Warning_Code { fromZoneList_Warning_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ZoneList_Warning_Code = ZoneList_Warning_Code {fromZoneList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Warning about failed cleanup of transient changes made by a failed operation.
 pattern ZoneList_Warning_Code_CLEANUPFAILED :: ZoneList_Warning_Code
@@ -36515,22 +36503,23 @@ pattern ZoneList_Warning_Code_Unreachable = ZoneList_Warning_Code "UNREACHABLE"
   ZoneList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
   ZoneList_Warning_Code_UNDECLAREDPROPERTIES,
   ZoneList_Warning_Code_Unreachable,
-  ZoneList_Warning_Code #-}
+  ZoneList_Warning_Code
+  #-}
 
 -- | Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
-newtype InstancesUpdateMinimalAction = InstancesUpdateMinimalAction { fromInstancesUpdateMinimalAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstancesUpdateMinimalAction = InstancesUpdateMinimalAction {fromInstancesUpdateMinimalAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern InstancesUpdateMinimalAction_Invalid :: InstancesUpdateMinimalAction
 pattern InstancesUpdateMinimalAction_Invalid = InstancesUpdateMinimalAction "INVALID"
 
@@ -36551,22 +36540,23 @@ pattern InstancesUpdateMinimalAction_Restart = InstancesUpdateMinimalAction "RES
   InstancesUpdateMinimalAction_NOEFFECT,
   InstancesUpdateMinimalAction_Refresh,
   InstancesUpdateMinimalAction_Restart,
-  InstancesUpdateMinimalAction #-}
+  InstancesUpdateMinimalAction
+  #-}
 
 -- | Specifies the most disruptive action that can be taken on the instance as part of the update. Compute Engine returns an error if the instance properties require a more disruptive action as part of the instance update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and RESTART.
-newtype InstancesUpdateMostDisruptiveAllowedAction = InstancesUpdateMostDisruptiveAllowedAction { fromInstancesUpdateMostDisruptiveAllowedAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstancesUpdateMostDisruptiveAllowedAction = InstancesUpdateMostDisruptiveAllowedAction {fromInstancesUpdateMostDisruptiveAllowedAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern InstancesUpdateMostDisruptiveAllowedAction_Invalid :: InstancesUpdateMostDisruptiveAllowedAction
 pattern InstancesUpdateMostDisruptiveAllowedAction_Invalid = InstancesUpdateMostDisruptiveAllowedAction "INVALID"
 
@@ -36587,20 +36577,21 @@ pattern InstancesUpdateMostDisruptiveAllowedAction_Restart = InstancesUpdateMost
   InstancesUpdateMostDisruptiveAllowedAction_NOEFFECT,
   InstancesUpdateMostDisruptiveAllowedAction_Refresh,
   InstancesUpdateMostDisruptiveAllowedAction_Restart,
-  InstancesUpdateMostDisruptiveAllowedAction #-}
+  InstancesUpdateMostDisruptiveAllowedAction
+  #-}
 
 -- | The direction of the exchanged routes.
-newtype NetworksListPeeringRoutesDirection = NetworksListPeeringRoutesDirection { fromNetworksListPeeringRoutesDirection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworksListPeeringRoutesDirection = NetworksListPeeringRoutesDirection {fromNetworksListPeeringRoutesDirection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | For routes exported from peer network.
 pattern NetworksListPeeringRoutesDirection_Incoming :: NetworksListPeeringRoutesDirection
@@ -36613,4 +36604,5 @@ pattern NetworksListPeeringRoutesDirection_Outgoing = NetworksListPeeringRoutesD
 {-# COMPLETE
   NetworksListPeeringRoutesDirection_Incoming,
   NetworksListPeeringRoutesDirection_Outgoing,
-  NetworksListPeeringRoutesDirection #-}
+  NetworksListPeeringRoutesDirection
+  #-}

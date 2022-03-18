@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,100 +30,108 @@
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionOperations.get@.
 module Gogol.Compute.RegionOperations.Get
-    (
-    -- * Resource
-      ComputeRegionOperationsGetResource
+  ( -- * Resource
+    ComputeRegionOperationsGetResource,
 
     -- ** Constructing a Request
-    , newComputeRegionOperationsGet
-    , ComputeRegionOperationsGet
-    ) where
+    newComputeRegionOperationsGet,
+    ComputeRegionOperationsGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Compute.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @compute.regionOperations.get@ method which the
 -- 'ComputeRegionOperationsGet' request conforms to.
 type ComputeRegionOperationsGetResource =
-     "compute" Core.:>
-       "v1" Core.:>
-         "projects" Core.:>
-           Core.Capture "project" Core.Text Core.:>
-             "regions" Core.:>
-               Core.Capture "region" Core.Text Core.:>
-                 "operations" Core.:>
-                   Core.Capture "operation" Core.Text Core.:>
-                     Core.QueryParam "$.xgafv" Xgafv Core.:>
-                       Core.QueryParam "access_token" Core.Text Core.:>
-                         Core.QueryParam "callback" Core.Text Core.:>
-                           Core.QueryParam "uploadType" Core.Text Core.:>
-                             Core.QueryParam "upload_protocol" Core.Text Core.:>
-                               Core.QueryParam "alt" Core.AltJSON Core.:>
-                                 Core.Get '[Core.JSON] Operation
+  "compute"
+    Core.:> "v1"
+    Core.:> "projects"
+    Core.:> Core.Capture "project" Core.Text
+    Core.:> "regions"
+    Core.:> Core.Capture "region" Core.Text
+    Core.:> "operations"
+    Core.:> Core.Capture "operation" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Operation
 
 -- | Retrieves the specified region-specific Operations resource.
 --
 -- /See:/ 'newComputeRegionOperationsGet' smart constructor.
 data ComputeRegionOperationsGet = ComputeRegionOperationsGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Name of the Operations resource to return.
-    , operation :: Core.Text
-      -- | Project ID for this request.
-    , project :: Core.Text
-      -- | Name of the region for this request.
-    , region :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Name of the Operations resource to return.
+    operation :: Core.Text,
+    -- | Project ID for this request.
+    project :: Core.Text,
+    -- | Name of the region for this request.
+    region :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComputeRegionOperationsGet' with the minimum fields required to make a request.
-newComputeRegionOperationsGet 
-    ::  Core.Text
-       -- ^  Name of the Operations resource to return. See 'operation'.
-    -> Core.Text
-       -- ^  Project ID for this request. See 'project'.
-    -> Core.Text
-       -- ^  Name of the region for this request. See 'region'.
-    -> ComputeRegionOperationsGet
+newComputeRegionOperationsGet ::
+  -- |  Name of the Operations resource to return. See 'operation'.
+  Core.Text ->
+  -- |  Project ID for this request. See 'project'.
+  Core.Text ->
+  -- |  Name of the region for this request. See 'region'.
+  Core.Text ->
+  ComputeRegionOperationsGet
 newComputeRegionOperationsGet operation project region =
   ComputeRegionOperationsGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , operation = operation
-    , project = project
-    , region = region
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      operation = operation,
+      project = project,
+      region = region,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           ComputeRegionOperationsGet
-         where
-        type Rs ComputeRegionOperationsGet = Operation
-        type Scopes ComputeRegionOperationsGet =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/compute",
-               "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ComputeRegionOperationsGet{..}
-          = go project region operation xgafv accessToken
-              callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              computeService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy ComputeRegionOperationsGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    ComputeRegionOperationsGet
+  where
+  type Rs ComputeRegionOperationsGet = Operation
+  type
+    Scopes ComputeRegionOperationsGet =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/compute",
+         "https://www.googleapis.com/auth/compute.readonly"
+       ]
+  requestClient ComputeRegionOperationsGet {..} =
+    go
+      project
+      region
+      operation
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionOperationsGetResource
+          )
+          Core.mempty
