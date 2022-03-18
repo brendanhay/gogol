@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.TextToSpeech.Text.Synthesize
+-- Module      : Gogol.TextToSpeech.Text.Synthesize
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Synthesizes speech synchronously: receive results after all text input has been processed.
 --
 -- /See:/ <https://cloud.google.com/text-to-speech/ Cloud Text-to-Speech API Reference> for @texttospeech.text.synthesize@.
-module Network.Google.TextToSpeech.Text.Synthesize
+module Gogol.TextToSpeech.Text.Synthesize
   ( -- * Resource
     TextToSpeechTextSynthesizeResource,
 
@@ -39,8 +39,8 @@ module Network.Google.TextToSpeech.Text.Synthesize
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.TextToSpeech.Types
+import qualified Gogol.Prelude as Core
+import Gogol.TextToSpeech.Types
 
 -- | A resource alias for @texttospeech.text.synthesize@ method which the
 -- 'TextToSpeechTextSynthesize' request conforms to.

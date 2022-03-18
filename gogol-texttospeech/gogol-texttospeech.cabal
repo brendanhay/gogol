@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.TextToSpeech
-    Network.Google.TextToSpeech.Text.Synthesize
-    Network.Google.TextToSpeech.Types
-    Network.Google.TextToSpeech.Voices.List
+    Gogol.TextToSpeech
+    Gogol.TextToSpeech.Text.Synthesize
+    Gogol.TextToSpeech.Types
+    Gogol.TextToSpeech.Voices.List
 
   other-modules:
-    Network.Google.TextToSpeech.Internal.Product
-    Network.Google.TextToSpeech.Internal.Sum
+    Gogol.TextToSpeech.Internal.Product
+    Gogol.TextToSpeech.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

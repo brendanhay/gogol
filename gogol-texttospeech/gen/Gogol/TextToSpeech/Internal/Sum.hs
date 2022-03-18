@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.TextToSpeech.Internal.Sum
+-- Module      : Gogol.TextToSpeech.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.TextToSpeech.Internal.Sum
+module Gogol.TextToSpeech.Internal.Sum
   ( -- * Xgafv
     Xgafv
       ( Xgafv_1,
@@ -64,7 +64,7 @@ module Network.Google.TextToSpeech.Internal.Sum
   )
 where
 
-import qualified Network.Google.Prelude as Core
+import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
