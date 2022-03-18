@@ -19,59 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Sitemaps.Submit
+-- Module      : Gogol.SearchConsole.Webmasters.Sites.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Submits a sitemap for a site.
+-- Removes a site from the set of the user\'s Search Console sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sitemaps.submit@.
-module Network.Google.SearchConsole.Webmasters.Sitemaps.Submit
+-- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.delete@.
+module Gogol.SearchConsole.Webmasters.Sites.Delete
   ( -- * Resource
-    WebmastersSitemapsSubmitResource,
+    WebmastersSitesDeleteResource,
 
     -- ** Constructing a Request
-    newWebmastersSitemapsSubmit,
-    WebmastersSitemapsSubmit,
+    newWebmastersSitesDelete,
+    WebmastersSitesDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
--- | A resource alias for @webmasters.sitemaps.submit@ method which the
--- 'WebmastersSitemapsSubmit' request conforms to.
-type WebmastersSitemapsSubmitResource =
+-- | A resource alias for @webmasters.sites.delete@ method which the
+-- 'WebmastersSitesDelete' request conforms to.
+type WebmastersSitesDeleteResource =
   "webmasters"
     Core.:> "v3"
     Core.:> "sites"
     Core.:> Core.Capture "siteUrl" Core.Text
-    Core.:> "sitemaps"
-    Core.:> Core.Capture "feedpath" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Put '[Core.JSON] ()
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Submits a sitemap for a site.
+-- | Removes a site from the set of the user\'s Search Console sites.
 --
--- /See:/ 'newWebmastersSitemapsSubmit' smart constructor.
-data WebmastersSitemapsSubmit = WebmastersSitemapsSubmit
+-- /See:/ 'newWebmastersSitesDelete' smart constructor.
+data WebmastersSitesDelete = WebmastersSitesDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The URL of the actual sitemap. For example: @http:\/\/www.example.com\/sitemap.xml@.
-    feedpath :: Core.Text,
-    -- | The site\'s URL, including protocol. For example: @http:\/\/www.example.com\/@.
+    -- | The URI of the property as defined in Search Console. __Examples:__ @http:\/\/www.example.com\/@ or @sc-domain:example.com@.
     siteUrl :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -80,33 +76,29 @@ data WebmastersSitemapsSubmit = WebmastersSitemapsSubmit
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebmastersSitemapsSubmit' with the minimum fields required to make a request.
-newWebmastersSitemapsSubmit ::
-  -- |  The URL of the actual sitemap. For example: @http:\/\/www.example.com\/sitemap.xml@. See 'feedpath'.
+-- | Creates a value of 'WebmastersSitesDelete' with the minimum fields required to make a request.
+newWebmastersSitesDelete ::
+  -- |  The URI of the property as defined in Search Console. __Examples:__ @http:\/\/www.example.com\/@ or @sc-domain:example.com@. See 'siteUrl'.
   Core.Text ->
-  -- |  The site\'s URL, including protocol. For example: @http:\/\/www.example.com\/@. See 'siteUrl'.
-  Core.Text ->
-  WebmastersSitemapsSubmit
-newWebmastersSitemapsSubmit feedpath siteUrl =
-  WebmastersSitemapsSubmit
+  WebmastersSitesDelete
+newWebmastersSitesDelete siteUrl =
+  WebmastersSitesDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      feedpath = feedpath,
       siteUrl = siteUrl,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest WebmastersSitemapsSubmit where
-  type Rs WebmastersSitemapsSubmit = ()
+instance Core.GoogleRequest WebmastersSitesDelete where
+  type Rs WebmastersSitesDelete = ()
   type
-    Scopes WebmastersSitemapsSubmit =
+    Scopes WebmastersSitesDelete =
       '["https://www.googleapis.com/auth/webmasters"]
-  requestClient WebmastersSitemapsSubmit {..} =
+  requestClient WebmastersSitesDelete {..} =
     go
       siteUrl
-      feedpath
       xgafv
       accessToken
       callback
@@ -118,6 +110,6 @@ instance Core.GoogleRequest WebmastersSitemapsSubmit where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy WebmastersSitemapsSubmitResource
+              Core.Proxy WebmastersSitesDeleteResource
           )
           Core.mempty

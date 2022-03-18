@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole
+-- Module      : Gogol.SearchConsole
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Search Console API provides access to both Search Console data (verified users only) and to public information on an URL basis (anyone)
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference>
-module Network.Google.SearchConsole
+module Gogol.SearchConsole
   ( -- * Configuration
     searchConsoleService,
 
@@ -310,15 +310,15 @@ module Network.Google.SearchConsole
   )
 where
 
-import Network.Google.SearchConsole.Types
-import Network.Google.SearchConsole.UrlInspection.Index.Inspect
-import Network.Google.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
-import Network.Google.SearchConsole.Webmasters.Searchanalytics.Query
-import Network.Google.SearchConsole.Webmasters.Sitemaps.Delete
-import Network.Google.SearchConsole.Webmasters.Sitemaps.Get
-import Network.Google.SearchConsole.Webmasters.Sitemaps.List
-import Network.Google.SearchConsole.Webmasters.Sitemaps.Submit
-import Network.Google.SearchConsole.Webmasters.Sites.Add
-import Network.Google.SearchConsole.Webmasters.Sites.Delete
-import Network.Google.SearchConsole.Webmasters.Sites.Get
-import Network.Google.SearchConsole.Webmasters.Sites.List
+import Gogol.SearchConsole.Types
+import Gogol.SearchConsole.UrlInspection.Index.Inspect
+import Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
+import Gogol.SearchConsole.Webmasters.Searchanalytics.Query
+import Gogol.SearchConsole.Webmasters.Sitemaps.Delete
+import Gogol.SearchConsole.Webmasters.Sitemaps.Get
+import Gogol.SearchConsole.Webmasters.Sitemaps.List
+import Gogol.SearchConsole.Webmasters.Sitemaps.Submit
+import Gogol.SearchConsole.Webmasters.Sites.Add
+import Gogol.SearchConsole.Webmasters.Sites.Delete
+import Gogol.SearchConsole.Webmasters.Sites.Get
+import Gogol.SearchConsole.Webmasters.Sites.List

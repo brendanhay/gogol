@@ -19,53 +19,60 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Sites.List
+-- Module      : Gogol.SearchConsole.Webmasters.Sitemaps.Submit
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the user\'s Search Console sites.
+-- Submits a sitemap for a site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.list@.
-module Network.Google.SearchConsole.Webmasters.Sites.List
+-- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sitemaps.submit@.
+module Gogol.SearchConsole.Webmasters.Sitemaps.Submit
   ( -- * Resource
-    WebmastersSitesListResource,
+    WebmastersSitemapsSubmitResource,
 
     -- ** Constructing a Request
-    newWebmastersSitesList,
-    WebmastersSitesList,
+    newWebmastersSitemapsSubmit,
+    WebmastersSitemapsSubmit,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
--- | A resource alias for @webmasters.sites.list@ method which the
--- 'WebmastersSitesList' request conforms to.
-type WebmastersSitesListResource =
+-- | A resource alias for @webmasters.sitemaps.submit@ method which the
+-- 'WebmastersSitemapsSubmit' request conforms to.
+type WebmastersSitemapsSubmitResource =
   "webmasters"
     Core.:> "v3"
     Core.:> "sites"
+    Core.:> Core.Capture "siteUrl" Core.Text
+    Core.:> "sitemaps"
+    Core.:> Core.Capture "feedpath" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] SitesListResponse
+    Core.:> Core.Put '[Core.JSON] ()
 
--- | Lists the user\'s Search Console sites.
+-- | Submits a sitemap for a site.
 --
--- /See:/ 'newWebmastersSitesList' smart constructor.
-data WebmastersSitesList = WebmastersSitesList
+-- /See:/ 'newWebmastersSitemapsSubmit' smart constructor.
+data WebmastersSitemapsSubmit = WebmastersSitemapsSubmit
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | The URL of the actual sitemap. For example: @http:\/\/www.example.com\/sitemap.xml@.
+    feedpath :: Core.Text,
+    -- | The site\'s URL, including protocol. For example: @http:\/\/www.example.com\/@.
+    siteUrl :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -73,27 +80,33 @@ data WebmastersSitesList = WebmastersSitesList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebmastersSitesList' with the minimum fields required to make a request.
-newWebmastersSitesList ::
-  WebmastersSitesList
-newWebmastersSitesList =
-  WebmastersSitesList
+-- | Creates a value of 'WebmastersSitemapsSubmit' with the minimum fields required to make a request.
+newWebmastersSitemapsSubmit ::
+  -- |  The URL of the actual sitemap. For example: @http:\/\/www.example.com\/sitemap.xml@. See 'feedpath'.
+  Core.Text ->
+  -- |  The site\'s URL, including protocol. For example: @http:\/\/www.example.com\/@. See 'siteUrl'.
+  Core.Text ->
+  WebmastersSitemapsSubmit
+newWebmastersSitemapsSubmit feedpath siteUrl =
+  WebmastersSitemapsSubmit
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      feedpath = feedpath,
+      siteUrl = siteUrl,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest WebmastersSitesList where
-  type Rs WebmastersSitesList = SitesListResponse
+instance Core.GoogleRequest WebmastersSitemapsSubmit where
+  type Rs WebmastersSitemapsSubmit = ()
   type
-    Scopes WebmastersSitesList =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
-  requestClient WebmastersSitesList {..} =
+    Scopes WebmastersSitemapsSubmit =
+      '["https://www.googleapis.com/auth/webmasters"]
+  requestClient WebmastersSitemapsSubmit {..} =
     go
+      siteUrl
+      feedpath
       xgafv
       accessToken
       callback
@@ -105,6 +118,6 @@ instance Core.GoogleRequest WebmastersSitesList where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy WebmastersSitesListResource
+              Core.Proxy WebmastersSitemapsSubmitResource
           )
           Core.mempty

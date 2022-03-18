@@ -19,59 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SearchConsole.Webmasters.Sitemaps.Delete
+-- Module      : Gogol.SearchConsole.Webmasters.Sites.Add
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a sitemap from the Sitemaps report. Does not stop Google from crawling this sitemap or the URLs that were previously crawled in the deleted sitemap.
+-- Adds a site to the set of the user\'s sites in Search Console.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sitemaps.delete@.
-module Network.Google.SearchConsole.Webmasters.Sitemaps.Delete
+-- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.add@.
+module Gogol.SearchConsole.Webmasters.Sites.Add
   ( -- * Resource
-    WebmastersSitemapsDeleteResource,
+    WebmastersSitesAddResource,
 
     -- ** Constructing a Request
-    newWebmastersSitemapsDelete,
-    WebmastersSitemapsDelete,
+    newWebmastersSitesAdd,
+    WebmastersSitesAdd,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SearchConsole.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SearchConsole.Types
 
--- | A resource alias for @webmasters.sitemaps.delete@ method which the
--- 'WebmastersSitemapsDelete' request conforms to.
-type WebmastersSitemapsDeleteResource =
+-- | A resource alias for @webmasters.sites.add@ method which the
+-- 'WebmastersSitesAdd' request conforms to.
+type WebmastersSitesAddResource =
   "webmasters"
     Core.:> "v3"
     Core.:> "sites"
     Core.:> Core.Capture "siteUrl" Core.Text
-    Core.:> "sitemaps"
-    Core.:> Core.Capture "feedpath" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+    Core.:> Core.Put '[Core.JSON] ()
 
--- | Deletes a sitemap from the Sitemaps report. Does not stop Google from crawling this sitemap or the URLs that were previously crawled in the deleted sitemap.
+-- | Adds a site to the set of the user\'s sites in Search Console.
 --
--- /See:/ 'newWebmastersSitemapsDelete' smart constructor.
-data WebmastersSitemapsDelete = WebmastersSitemapsDelete
+-- /See:/ 'newWebmastersSitesAdd' smart constructor.
+data WebmastersSitesAdd = WebmastersSitesAdd
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The URL of the actual sitemap. For example: @http:\/\/www.example.com\/sitemap.xml@.
-    feedpath :: Core.Text,
-    -- | The site\'s URL, including protocol. For example: @http:\/\/www.example.com\/@.
+    -- | The URL of the site to add.
     siteUrl :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -80,33 +76,29 @@ data WebmastersSitemapsDelete = WebmastersSitemapsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebmastersSitemapsDelete' with the minimum fields required to make a request.
-newWebmastersSitemapsDelete ::
-  -- |  The URL of the actual sitemap. For example: @http:\/\/www.example.com\/sitemap.xml@. See 'feedpath'.
+-- | Creates a value of 'WebmastersSitesAdd' with the minimum fields required to make a request.
+newWebmastersSitesAdd ::
+  -- |  The URL of the site to add. See 'siteUrl'.
   Core.Text ->
-  -- |  The site\'s URL, including protocol. For example: @http:\/\/www.example.com\/@. See 'siteUrl'.
-  Core.Text ->
-  WebmastersSitemapsDelete
-newWebmastersSitemapsDelete feedpath siteUrl =
-  WebmastersSitemapsDelete
+  WebmastersSitesAdd
+newWebmastersSitesAdd siteUrl =
+  WebmastersSitesAdd
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      feedpath = feedpath,
       siteUrl = siteUrl,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest WebmastersSitemapsDelete where
-  type Rs WebmastersSitemapsDelete = ()
+instance Core.GoogleRequest WebmastersSitesAdd where
+  type Rs WebmastersSitesAdd = ()
   type
-    Scopes WebmastersSitemapsDelete =
+    Scopes WebmastersSitesAdd =
       '["https://www.googleapis.com/auth/webmasters"]
-  requestClient WebmastersSitemapsDelete {..} =
+  requestClient WebmastersSitesAdd {..} =
     go
       siteUrl
-      feedpath
       xgafv
       accessToken
       callback
@@ -117,7 +109,5 @@ instance Core.GoogleRequest WebmastersSitemapsDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy WebmastersSitemapsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy WebmastersSitesAddResource)
           Core.mempty
