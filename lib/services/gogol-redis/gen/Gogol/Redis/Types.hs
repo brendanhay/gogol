@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,193 +31,194 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Redis.Types
-  ( -- * Configuration
-    redisService,
+    (
+    -- * Configuration
+      redisService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** ExportInstanceRequest
-    ExportInstanceRequest (..),
-    newExportInstanceRequest,
+    , ExportInstanceRequest (..)
+    , newExportInstanceRequest
 
     -- ** FailoverInstanceRequest
-    FailoverInstanceRequest (..),
-    newFailoverInstanceRequest,
+    , FailoverInstanceRequest (..)
+    , newFailoverInstanceRequest
 
     -- ** FailoverInstanceRequest_DataProtectionMode
-    FailoverInstanceRequest_DataProtectionMode (..),
+    , FailoverInstanceRequest_DataProtectionMode (..)
 
     -- ** GcsDestination
-    GcsDestination (..),
-    newGcsDestination,
+    , GcsDestination (..)
+    , newGcsDestination
 
     -- ** GcsSource
-    GcsSource (..),
-    newGcsSource,
+    , GcsSource (..)
+    , newGcsSource
 
     -- ** GoogleCloudRedisV1LocationMetadata
-    GoogleCloudRedisV1LocationMetadata (..),
-    newGoogleCloudRedisV1LocationMetadata,
+    , GoogleCloudRedisV1LocationMetadata (..)
+    , newGoogleCloudRedisV1LocationMetadata
 
     -- ** GoogleCloudRedisV1LocationMetadata_AvailableZones
-    GoogleCloudRedisV1LocationMetadata_AvailableZones (..),
-    newGoogleCloudRedisV1LocationMetadata_AvailableZones,
+    , GoogleCloudRedisV1LocationMetadata_AvailableZones (..)
+    , newGoogleCloudRedisV1LocationMetadata_AvailableZones
 
     -- ** GoogleCloudRedisV1OperationMetadata
-    GoogleCloudRedisV1OperationMetadata (..),
-    newGoogleCloudRedisV1OperationMetadata,
+    , GoogleCloudRedisV1OperationMetadata (..)
+    , newGoogleCloudRedisV1OperationMetadata
 
     -- ** GoogleCloudRedisV1ZoneMetadata
-    GoogleCloudRedisV1ZoneMetadata (..),
-    newGoogleCloudRedisV1ZoneMetadata,
+    , GoogleCloudRedisV1ZoneMetadata (..)
+    , newGoogleCloudRedisV1ZoneMetadata
 
     -- ** ImportInstanceRequest
-    ImportInstanceRequest (..),
-    newImportInstanceRequest,
+    , ImportInstanceRequest (..)
+    , newImportInstanceRequest
 
     -- ** InputConfig
-    InputConfig (..),
-    newInputConfig,
+    , InputConfig (..)
+    , newInputConfig
 
     -- ** Instance
-    Instance (..),
-    newInstance,
+    , Instance (..)
+    , newInstance
 
     -- ** Instance_ConnectMode
-    Instance_ConnectMode (..),
+    , Instance_ConnectMode (..)
 
     -- ** Instance_Labels
-    Instance_Labels (..),
-    newInstance_Labels,
+    , Instance_Labels (..)
+    , newInstance_Labels
 
     -- ** Instance_ReadReplicasMode
-    Instance_ReadReplicasMode (..),
+    , Instance_ReadReplicasMode (..)
 
     -- ** Instance_RedisConfigs
-    Instance_RedisConfigs (..),
-    newInstance_RedisConfigs,
+    , Instance_RedisConfigs (..)
+    , newInstance_RedisConfigs
 
     -- ** Instance_State
-    Instance_State (..),
+    , Instance_State (..)
 
     -- ** Instance_Tier
-    Instance_Tier (..),
+    , Instance_Tier (..)
 
     -- ** Instance_TransitEncryptionMode
-    Instance_TransitEncryptionMode (..),
+    , Instance_TransitEncryptionMode (..)
 
     -- ** InstanceAuthString
-    InstanceAuthString (..),
-    newInstanceAuthString,
+    , InstanceAuthString (..)
+    , newInstanceAuthString
 
     -- ** ListInstancesResponse
-    ListInstancesResponse (..),
-    newListInstancesResponse,
+    , ListInstancesResponse (..)
+    , newListInstancesResponse
 
     -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    , ListLocationsResponse (..)
+    , newListLocationsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    , Location_Labels (..)
+    , newLocation_Labels
 
     -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    , Location_Metadata (..)
+    , newLocation_Metadata
 
     -- ** MaintenancePolicy
-    MaintenancePolicy (..),
-    newMaintenancePolicy,
+    , MaintenancePolicy (..)
+    , newMaintenancePolicy
 
     -- ** MaintenanceSchedule
-    MaintenanceSchedule (..),
-    newMaintenanceSchedule,
+    , MaintenanceSchedule (..)
+    , newMaintenanceSchedule
 
     -- ** NodeInfo
-    NodeInfo (..),
-    newNodeInfo,
+    , NodeInfo (..)
+    , newNodeInfo
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OutputConfig
-    OutputConfig (..),
-    newOutputConfig,
+    , OutputConfig (..)
+    , newOutputConfig
 
     -- ** PersistenceConfig
-    PersistenceConfig (..),
-    newPersistenceConfig,
+    , PersistenceConfig (..)
+    , newPersistenceConfig
 
     -- ** PersistenceConfig_PersistenceMode
-    PersistenceConfig_PersistenceMode (..),
+    , PersistenceConfig_PersistenceMode (..)
 
     -- ** PersistenceConfig_RdbSnapshotPeriod
-    PersistenceConfig_RdbSnapshotPeriod (..),
+    , PersistenceConfig_RdbSnapshotPeriod (..)
 
     -- ** RescheduleMaintenanceRequest
-    RescheduleMaintenanceRequest (..),
-    newRescheduleMaintenanceRequest,
+    , RescheduleMaintenanceRequest (..)
+    , newRescheduleMaintenanceRequest
 
     -- ** RescheduleMaintenanceRequest_RescheduleType
-    RescheduleMaintenanceRequest_RescheduleType (..),
+    , RescheduleMaintenanceRequest_RescheduleType (..)
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TimeOfDay'
-    TimeOfDay' (..),
-    newTimeOfDay,
+    , TimeOfDay' (..)
+    , newTimeOfDay
 
     -- ** TlsCertificate
-    TlsCertificate (..),
-    newTlsCertificate,
+    , TlsCertificate (..)
+    , newTlsCertificate
 
     -- ** UpgradeInstanceRequest
-    UpgradeInstanceRequest (..),
-    newUpgradeInstanceRequest,
+    , UpgradeInstanceRequest (..)
+    , newUpgradeInstanceRequest
 
     -- ** WeeklyMaintenanceWindow
-    WeeklyMaintenanceWindow (..),
-    newWeeklyMaintenanceWindow,
+    , WeeklyMaintenanceWindow (..)
+    , newWeeklyMaintenanceWindow
 
     -- ** WeeklyMaintenanceWindow_Day
-    WeeklyMaintenanceWindow_Day (..),
-  )
-where
+    , WeeklyMaintenanceWindow_Day (..)
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Redis.Internal.Product
@@ -219,10 +226,9 @@ import Gogol.Redis.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Google Cloud Memorystore for Redis API. This contains the host and root path used as a starting point for constructing service requests.
 redisService :: Core.ServiceConfig
-redisService =
-  Core.defaultService
-    (Core.ServiceId "redis:v1")
-    "redis.googleapis.com"
+redisService
+  = Core.defaultService (Core.ServiceId "redis:v1")
+      "redis.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
