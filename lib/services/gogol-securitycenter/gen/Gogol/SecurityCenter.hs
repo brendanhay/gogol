@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,427 +36,427 @@
 --
 -- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference>
 module Gogol.SecurityCenter
-  ( -- * Configuration
-    securityCenterService,
+    (
+    -- * Configuration
+      securityCenterService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** securitycenter.organizations.assets.group
-    SecurityCenterOrganizationsAssetsGroupResource,
-    newSecurityCenterOrganizationsAssetsGroup,
-    SecurityCenterOrganizationsAssetsGroup,
+    , SecurityCenterOrganizationsAssetsGroupResource
+    , newSecurityCenterOrganizationsAssetsGroup
+    , SecurityCenterOrganizationsAssetsGroup
 
     -- ** securitycenter.organizations.assets.list
-    SecurityCenterOrganizationsAssetsListResource,
-    newSecurityCenterOrganizationsAssetsList,
-    SecurityCenterOrganizationsAssetsList,
+    , SecurityCenterOrganizationsAssetsListResource
+    , newSecurityCenterOrganizationsAssetsList
+    , SecurityCenterOrganizationsAssetsList
 
     -- ** securitycenter.organizations.assets.runDiscovery
-    SecurityCenterOrganizationsAssetsRunDiscoveryResource,
-    newSecurityCenterOrganizationsAssetsRunDiscovery,
-    SecurityCenterOrganizationsAssetsRunDiscovery,
+    , SecurityCenterOrganizationsAssetsRunDiscoveryResource
+    , newSecurityCenterOrganizationsAssetsRunDiscovery
+    , SecurityCenterOrganizationsAssetsRunDiscovery
 
     -- ** securitycenter.organizations.assets.updateSecurityMarks
-    SecurityCenterOrganizationsAssetsUpdateSecurityMarksResource,
-    newSecurityCenterOrganizationsAssetsUpdateSecurityMarks,
-    SecurityCenterOrganizationsAssetsUpdateSecurityMarks,
+    , SecurityCenterOrganizationsAssetsUpdateSecurityMarksResource
+    , newSecurityCenterOrganizationsAssetsUpdateSecurityMarks
+    , SecurityCenterOrganizationsAssetsUpdateSecurityMarks
 
     -- ** securitycenter.organizations.getOrganizationSettings
-    SecurityCenterOrganizationsGetOrganizationSettingsResource,
-    newSecurityCenterOrganizationsGetOrganizationSettings,
-    SecurityCenterOrganizationsGetOrganizationSettings,
+    , SecurityCenterOrganizationsGetOrganizationSettingsResource
+    , newSecurityCenterOrganizationsGetOrganizationSettings
+    , SecurityCenterOrganizationsGetOrganizationSettings
 
     -- ** securitycenter.organizations.notificationConfigs.create
-    SecurityCenterOrganizationsNotificationConfigsCreateResource,
-    newSecurityCenterOrganizationsNotificationConfigsCreate,
-    SecurityCenterOrganizationsNotificationConfigsCreate,
+    , SecurityCenterOrganizationsNotificationConfigsCreateResource
+    , newSecurityCenterOrganizationsNotificationConfigsCreate
+    , SecurityCenterOrganizationsNotificationConfigsCreate
 
     -- ** securitycenter.organizations.notificationConfigs.delete
-    SecurityCenterOrganizationsNotificationConfigsDeleteResource,
-    newSecurityCenterOrganizationsNotificationConfigsDelete,
-    SecurityCenterOrganizationsNotificationConfigsDelete,
+    , SecurityCenterOrganizationsNotificationConfigsDeleteResource
+    , newSecurityCenterOrganizationsNotificationConfigsDelete
+    , SecurityCenterOrganizationsNotificationConfigsDelete
 
     -- ** securitycenter.organizations.notificationConfigs.get
-    SecurityCenterOrganizationsNotificationConfigsGetResource,
-    newSecurityCenterOrganizationsNotificationConfigsGet,
-    SecurityCenterOrganizationsNotificationConfigsGet,
+    , SecurityCenterOrganizationsNotificationConfigsGetResource
+    , newSecurityCenterOrganizationsNotificationConfigsGet
+    , SecurityCenterOrganizationsNotificationConfigsGet
 
     -- ** securitycenter.organizations.notificationConfigs.list
-    SecurityCenterOrganizationsNotificationConfigsListResource,
-    newSecurityCenterOrganizationsNotificationConfigsList,
-    SecurityCenterOrganizationsNotificationConfigsList,
+    , SecurityCenterOrganizationsNotificationConfigsListResource
+    , newSecurityCenterOrganizationsNotificationConfigsList
+    , SecurityCenterOrganizationsNotificationConfigsList
 
     -- ** securitycenter.organizations.notificationConfigs.patch
-    SecurityCenterOrganizationsNotificationConfigsPatchResource,
-    newSecurityCenterOrganizationsNotificationConfigsPatch,
-    SecurityCenterOrganizationsNotificationConfigsPatch,
+    , SecurityCenterOrganizationsNotificationConfigsPatchResource
+    , newSecurityCenterOrganizationsNotificationConfigsPatch
+    , SecurityCenterOrganizationsNotificationConfigsPatch
 
     -- ** securitycenter.organizations.operations.cancel
-    SecurityCenterOrganizationsOperationsCancelResource,
-    newSecurityCenterOrganizationsOperationsCancel,
-    SecurityCenterOrganizationsOperationsCancel,
+    , SecurityCenterOrganizationsOperationsCancelResource
+    , newSecurityCenterOrganizationsOperationsCancel
+    , SecurityCenterOrganizationsOperationsCancel
 
     -- ** securitycenter.organizations.operations.delete
-    SecurityCenterOrganizationsOperationsDeleteResource,
-    newSecurityCenterOrganizationsOperationsDelete,
-    SecurityCenterOrganizationsOperationsDelete,
+    , SecurityCenterOrganizationsOperationsDeleteResource
+    , newSecurityCenterOrganizationsOperationsDelete
+    , SecurityCenterOrganizationsOperationsDelete
 
     -- ** securitycenter.organizations.operations.get
-    SecurityCenterOrganizationsOperationsGetResource,
-    newSecurityCenterOrganizationsOperationsGet,
-    SecurityCenterOrganizationsOperationsGet,
+    , SecurityCenterOrganizationsOperationsGetResource
+    , newSecurityCenterOrganizationsOperationsGet
+    , SecurityCenterOrganizationsOperationsGet
 
     -- ** securitycenter.organizations.operations.list
-    SecurityCenterOrganizationsOperationsListResource,
-    newSecurityCenterOrganizationsOperationsList,
-    SecurityCenterOrganizationsOperationsList,
+    , SecurityCenterOrganizationsOperationsListResource
+    , newSecurityCenterOrganizationsOperationsList
+    , SecurityCenterOrganizationsOperationsList
 
     -- ** securitycenter.organizations.sources.create
-    SecurityCenterOrganizationsSourcesCreateResource,
-    newSecurityCenterOrganizationsSourcesCreate,
-    SecurityCenterOrganizationsSourcesCreate,
+    , SecurityCenterOrganizationsSourcesCreateResource
+    , newSecurityCenterOrganizationsSourcesCreate
+    , SecurityCenterOrganizationsSourcesCreate
 
     -- ** securitycenter.organizations.sources.findings.create
-    SecurityCenterOrganizationsSourcesFindingsCreateResource,
-    newSecurityCenterOrganizationsSourcesFindingsCreate,
-    SecurityCenterOrganizationsSourcesFindingsCreate,
+    , SecurityCenterOrganizationsSourcesFindingsCreateResource
+    , newSecurityCenterOrganizationsSourcesFindingsCreate
+    , SecurityCenterOrganizationsSourcesFindingsCreate
 
     -- ** securitycenter.organizations.sources.findings.group
-    SecurityCenterOrganizationsSourcesFindingsGroupResource,
-    newSecurityCenterOrganizationsSourcesFindingsGroup,
-    SecurityCenterOrganizationsSourcesFindingsGroup,
+    , SecurityCenterOrganizationsSourcesFindingsGroupResource
+    , newSecurityCenterOrganizationsSourcesFindingsGroup
+    , SecurityCenterOrganizationsSourcesFindingsGroup
 
     -- ** securitycenter.organizations.sources.findings.list
-    SecurityCenterOrganizationsSourcesFindingsListResource,
-    newSecurityCenterOrganizationsSourcesFindingsList,
-    SecurityCenterOrganizationsSourcesFindingsList,
+    , SecurityCenterOrganizationsSourcesFindingsListResource
+    , newSecurityCenterOrganizationsSourcesFindingsList
+    , SecurityCenterOrganizationsSourcesFindingsList
 
     -- ** securitycenter.organizations.sources.findings.patch
-    SecurityCenterOrganizationsSourcesFindingsPatchResource,
-    newSecurityCenterOrganizationsSourcesFindingsPatch,
-    SecurityCenterOrganizationsSourcesFindingsPatch,
+    , SecurityCenterOrganizationsSourcesFindingsPatchResource
+    , newSecurityCenterOrganizationsSourcesFindingsPatch
+    , SecurityCenterOrganizationsSourcesFindingsPatch
 
     -- ** securitycenter.organizations.sources.findings.setState
-    SecurityCenterOrganizationsSourcesFindingsSetStateResource,
-    newSecurityCenterOrganizationsSourcesFindingsSetState,
-    SecurityCenterOrganizationsSourcesFindingsSetState,
+    , SecurityCenterOrganizationsSourcesFindingsSetStateResource
+    , newSecurityCenterOrganizationsSourcesFindingsSetState
+    , SecurityCenterOrganizationsSourcesFindingsSetState
 
     -- ** securitycenter.organizations.sources.findings.updateSecurityMarks
-    SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarksResource,
-    newSecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks,
-    SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks,
+    , SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarksResource
+    , newSecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks
+    , SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks
 
     -- ** securitycenter.organizations.sources.get
-    SecurityCenterOrganizationsSourcesGetResource,
-    newSecurityCenterOrganizationsSourcesGet,
-    SecurityCenterOrganizationsSourcesGet,
+    , SecurityCenterOrganizationsSourcesGetResource
+    , newSecurityCenterOrganizationsSourcesGet
+    , SecurityCenterOrganizationsSourcesGet
 
     -- ** securitycenter.organizations.sources.getIamPolicy
-    SecurityCenterOrganizationsSourcesGetIamPolicyResource,
-    newSecurityCenterOrganizationsSourcesGetIamPolicy,
-    SecurityCenterOrganizationsSourcesGetIamPolicy,
+    , SecurityCenterOrganizationsSourcesGetIamPolicyResource
+    , newSecurityCenterOrganizationsSourcesGetIamPolicy
+    , SecurityCenterOrganizationsSourcesGetIamPolicy
 
     -- ** securitycenter.organizations.sources.list
-    SecurityCenterOrganizationsSourcesListResource,
-    newSecurityCenterOrganizationsSourcesList,
-    SecurityCenterOrganizationsSourcesList,
+    , SecurityCenterOrganizationsSourcesListResource
+    , newSecurityCenterOrganizationsSourcesList
+    , SecurityCenterOrganizationsSourcesList
 
     -- ** securitycenter.organizations.sources.patch
-    SecurityCenterOrganizationsSourcesPatchResource,
-    newSecurityCenterOrganizationsSourcesPatch,
-    SecurityCenterOrganizationsSourcesPatch,
+    , SecurityCenterOrganizationsSourcesPatchResource
+    , newSecurityCenterOrganizationsSourcesPatch
+    , SecurityCenterOrganizationsSourcesPatch
 
     -- ** securitycenter.organizations.sources.setIamPolicy
-    SecurityCenterOrganizationsSourcesSetIamPolicyResource,
-    newSecurityCenterOrganizationsSourcesSetIamPolicy,
-    SecurityCenterOrganizationsSourcesSetIamPolicy,
+    , SecurityCenterOrganizationsSourcesSetIamPolicyResource
+    , newSecurityCenterOrganizationsSourcesSetIamPolicy
+    , SecurityCenterOrganizationsSourcesSetIamPolicy
 
     -- ** securitycenter.organizations.sources.testIamPermissions
-    SecurityCenterOrganizationsSourcesTestIamPermissionsResource,
-    newSecurityCenterOrganizationsSourcesTestIamPermissions,
-    SecurityCenterOrganizationsSourcesTestIamPermissions,
+    , SecurityCenterOrganizationsSourcesTestIamPermissionsResource
+    , newSecurityCenterOrganizationsSourcesTestIamPermissions
+    , SecurityCenterOrganizationsSourcesTestIamPermissions
 
     -- ** securitycenter.organizations.updateOrganizationSettings
-    SecurityCenterOrganizationsUpdateOrganizationSettingsResource,
-    newSecurityCenterOrganizationsUpdateOrganizationSettings,
-    SecurityCenterOrganizationsUpdateOrganizationSettings,
+    , SecurityCenterOrganizationsUpdateOrganizationSettingsResource
+    , newSecurityCenterOrganizationsUpdateOrganizationSettings
+    , SecurityCenterOrganizationsUpdateOrganizationSettings
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AssetDiscoveryConfig
-    AssetDiscoveryConfig (..),
-    newAssetDiscoveryConfig,
+    , AssetDiscoveryConfig (..)
+    , newAssetDiscoveryConfig
 
     -- ** AssetDiscoveryConfig_InclusionMode
-    AssetDiscoveryConfig_InclusionMode (..),
+    , AssetDiscoveryConfig_InclusionMode (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** Finding
-    Finding (..),
-    newFinding,
+    , Finding (..)
+    , newFinding
 
     -- ** Finding_SourceProperties
-    Finding_SourceProperties (..),
-    newFinding_SourceProperties,
+    , Finding_SourceProperties (..)
+    , newFinding_SourceProperties
 
     -- ** Finding_State
-    Finding_State (..),
+    , Finding_State (..)
 
     -- ** GetIamPolicyRequest
-    GetIamPolicyRequest (..),
-    newGetIamPolicyRequest,
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
 
     -- ** GetPolicyOptions
-    GetPolicyOptions (..),
-    newGetPolicyOptions,
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** GoogleCloudSecuritycenterV1NotificationMessage
-    GoogleCloudSecuritycenterV1NotificationMessage (..),
-    newGoogleCloudSecuritycenterV1NotificationMessage,
+    , GoogleCloudSecuritycenterV1NotificationMessage (..)
+    , newGoogleCloudSecuritycenterV1NotificationMessage
 
     -- ** GoogleCloudSecuritycenterV1Resource
-    GoogleCloudSecuritycenterV1Resource (..),
-    newGoogleCloudSecuritycenterV1Resource,
+    , GoogleCloudSecuritycenterV1Resource (..)
+    , newGoogleCloudSecuritycenterV1Resource
 
     -- ** GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
-    GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse (..),
-    newGoogleCloudSecuritycenterV1RunAssetDiscoveryResponse,
+    , GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse (..)
+    , newGoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
 
     -- ** GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse_State
-    GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse_State (..),
+    , GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse_State (..)
 
     -- ** GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
-    GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse (..),
-    newGoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse,
+    , GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse (..)
+    , newGoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
 
     -- ** GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse_State
-    GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse_State (..),
+    , GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse_State (..)
 
     -- ** GoogleCloudSecuritycenterV1p1beta1Asset
-    GoogleCloudSecuritycenterV1p1beta1Asset (..),
-    newGoogleCloudSecuritycenterV1p1beta1Asset,
+    , GoogleCloudSecuritycenterV1p1beta1Asset (..)
+    , newGoogleCloudSecuritycenterV1p1beta1Asset
 
     -- ** GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties
-    GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties (..),
-    newGoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties,
+    , GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties (..)
+    , newGoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties
 
     -- ** GoogleCloudSecuritycenterV1p1beta1Finding
-    GoogleCloudSecuritycenterV1p1beta1Finding (..),
-    newGoogleCloudSecuritycenterV1p1beta1Finding,
+    , GoogleCloudSecuritycenterV1p1beta1Finding (..)
+    , newGoogleCloudSecuritycenterV1p1beta1Finding
 
     -- ** GoogleCloudSecuritycenterV1p1beta1Finding_Severity
-    GoogleCloudSecuritycenterV1p1beta1Finding_Severity (..),
+    , GoogleCloudSecuritycenterV1p1beta1Finding_Severity (..)
 
     -- ** GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties
-    GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties (..),
-    newGoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties,
+    , GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties (..)
+    , newGoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties
 
     -- ** GoogleCloudSecuritycenterV1p1beta1Finding_State
-    GoogleCloudSecuritycenterV1p1beta1Finding_State (..),
+    , GoogleCloudSecuritycenterV1p1beta1Finding_State (..)
 
     -- ** GoogleCloudSecuritycenterV1p1beta1IamPolicy
-    GoogleCloudSecuritycenterV1p1beta1IamPolicy (..),
-    newGoogleCloudSecuritycenterV1p1beta1IamPolicy,
+    , GoogleCloudSecuritycenterV1p1beta1IamPolicy (..)
+    , newGoogleCloudSecuritycenterV1p1beta1IamPolicy
 
     -- ** GoogleCloudSecuritycenterV1p1beta1NotificationMessage
-    GoogleCloudSecuritycenterV1p1beta1NotificationMessage (..),
-    newGoogleCloudSecuritycenterV1p1beta1NotificationMessage,
+    , GoogleCloudSecuritycenterV1p1beta1NotificationMessage (..)
+    , newGoogleCloudSecuritycenterV1p1beta1NotificationMessage
 
     -- ** GoogleCloudSecuritycenterV1p1beta1Resource
-    GoogleCloudSecuritycenterV1p1beta1Resource (..),
-    newGoogleCloudSecuritycenterV1p1beta1Resource,
+    , GoogleCloudSecuritycenterV1p1beta1Resource (..)
+    , newGoogleCloudSecuritycenterV1p1beta1Resource
 
     -- ** GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
-    GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse (..),
-    newGoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse,
+    , GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse (..)
+    , newGoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
 
     -- ** GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse_State
-    GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse_State (..),
+    , GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse_State (..)
 
     -- ** GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
-    GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (..),
-    newGoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties,
+    , GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (..)
+    , newGoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
 
     -- ** GoogleCloudSecuritycenterV1p1beta1SecurityMarks
-    GoogleCloudSecuritycenterV1p1beta1SecurityMarks (..),
-    newGoogleCloudSecuritycenterV1p1beta1SecurityMarks,
+    , GoogleCloudSecuritycenterV1p1beta1SecurityMarks (..)
+    , newGoogleCloudSecuritycenterV1p1beta1SecurityMarks
 
     -- ** GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks
-    GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks (..),
-    newGoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks,
+    , GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks (..)
+    , newGoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks
 
     -- ** GoogleCloudSecuritycenterV1p1beta1TemporalAsset
-    GoogleCloudSecuritycenterV1p1beta1TemporalAsset (..),
-    newGoogleCloudSecuritycenterV1p1beta1TemporalAsset,
+    , GoogleCloudSecuritycenterV1p1beta1TemporalAsset (..)
+    , newGoogleCloudSecuritycenterV1p1beta1TemporalAsset
 
     -- ** GoogleCloudSecuritycenterV1p1beta1TemporalAsset_ChangeType
-    GoogleCloudSecuritycenterV1p1beta1TemporalAsset_ChangeType (..),
+    , GoogleCloudSecuritycenterV1p1beta1TemporalAsset_ChangeType (..)
 
     -- ** GroupAssetsRequest
-    GroupAssetsRequest (..),
-    newGroupAssetsRequest,
+    , GroupAssetsRequest (..)
+    , newGroupAssetsRequest
 
     -- ** GroupAssetsResponse
-    GroupAssetsResponse (..),
-    newGroupAssetsResponse,
+    , GroupAssetsResponse (..)
+    , newGroupAssetsResponse
 
     -- ** GroupFindingsRequest
-    GroupFindingsRequest (..),
-    newGroupFindingsRequest,
+    , GroupFindingsRequest (..)
+    , newGroupFindingsRequest
 
     -- ** GroupFindingsResponse
-    GroupFindingsResponse (..),
-    newGroupFindingsResponse,
+    , GroupFindingsResponse (..)
+    , newGroupFindingsResponse
 
     -- ** GroupResult
-    GroupResult (..),
-    newGroupResult,
+    , GroupResult (..)
+    , newGroupResult
 
     -- ** GroupResult_Properties
-    GroupResult_Properties (..),
-    newGroupResult_Properties,
+    , GroupResult_Properties (..)
+    , newGroupResult_Properties
 
     -- ** ListAssetsResponse
-    ListAssetsResponse (..),
-    newListAssetsResponse,
+    , ListAssetsResponse (..)
+    , newListAssetsResponse
 
     -- ** ListAssetsResult
-    ListAssetsResult (..),
-    newListAssetsResult,
+    , ListAssetsResult (..)
+    , newListAssetsResult
 
     -- ** ListAssetsResult_StateChange
-    ListAssetsResult_StateChange (..),
+    , ListAssetsResult_StateChange (..)
 
     -- ** ListFindingsResponse
-    ListFindingsResponse (..),
-    newListFindingsResponse,
+    , ListFindingsResponse (..)
+    , newListFindingsResponse
 
     -- ** ListFindingsResult
-    ListFindingsResult (..),
-    newListFindingsResult,
+    , ListFindingsResult (..)
+    , newListFindingsResult
 
     -- ** ListFindingsResult_StateChange
-    ListFindingsResult_StateChange (..),
+    , ListFindingsResult_StateChange (..)
 
     -- ** ListNotificationConfigsResponse
-    ListNotificationConfigsResponse (..),
-    newListNotificationConfigsResponse,
+    , ListNotificationConfigsResponse (..)
+    , newListNotificationConfigsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListSourcesResponse
-    ListSourcesResponse (..),
-    newListSourcesResponse,
+    , ListSourcesResponse (..)
+    , newListSourcesResponse
 
     -- ** NotificationConfig
-    NotificationConfig (..),
-    newNotificationConfig,
+    , NotificationConfig (..)
+    , newNotificationConfig
 
     -- ** NotificationConfig_EventType
-    NotificationConfig_EventType (..),
+    , NotificationConfig_EventType (..)
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OrganizationSettings
-    OrganizationSettings (..),
-    newOrganizationSettings,
+    , OrganizationSettings (..)
+    , newOrganizationSettings
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Resource
-    Resource (..),
-    newResource,
+    , Resource (..)
+    , newResource
 
     -- ** RunAssetDiscoveryRequest
-    RunAssetDiscoveryRequest (..),
-    newRunAssetDiscoveryRequest,
+    , RunAssetDiscoveryRequest (..)
+    , newRunAssetDiscoveryRequest
 
     -- ** SecurityMarks
-    SecurityMarks (..),
-    newSecurityMarks,
+    , SecurityMarks (..)
+    , newSecurityMarks
 
     -- ** SecurityMarks_Marks
-    SecurityMarks_Marks (..),
-    newSecurityMarks_Marks,
+    , SecurityMarks_Marks (..)
+    , newSecurityMarks_Marks
 
     -- ** SetFindingStateRequest
-    SetFindingStateRequest (..),
-    newSetFindingStateRequest,
+    , SetFindingStateRequest (..)
+    , newSetFindingStateRequest
 
     -- ** SetFindingStateRequest_State
-    SetFindingStateRequest_State (..),
+    , SetFindingStateRequest_State (..)
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Source
-    Source (..),
-    newSource,
+    , Source (..)
+    , newSource
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** StreamingConfig
-    StreamingConfig (..),
-    newStreamingConfig,
+    , StreamingConfig (..)
+    , newStreamingConfig
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
-  )
-where
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
+    ) where
 
 import Gogol.SecurityCenter.Organizations.Assets.Group
 import Gogol.SecurityCenter.Organizations.Assets.List
