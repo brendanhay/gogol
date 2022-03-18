@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GroupsSettings.Groups.Update
+-- Module      : Gogol.GroupsSettings.Groups.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates an existing resource.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @groupsSettings.groups.update@.
-module Network.Google.GroupsSettings.Groups.Update
+module Gogol.GroupsSettings.Groups.Update
   ( -- * Resource
     GroupsSettingsGroupsUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.GroupsSettings.Groups.Update
   )
 where
 
-import Network.Google.GroupsSettings.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GroupsSettings.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @groupsSettings.groups.update@ method which the
 -- 'GroupsSettingsGroupsUpdate' request conforms to.

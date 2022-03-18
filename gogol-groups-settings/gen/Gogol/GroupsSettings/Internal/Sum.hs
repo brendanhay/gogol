@@ -19,38 +19,15 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GroupsSettings.Types
+-- Module      : Gogol.GroupsSettings.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.GroupsSettings.Types
-  ( -- * Configuration
-    groupsSettingsService,
-
-    -- * OAuth Scopes
-    appsGroupsSettingsScope,
-
-    -- * Types
-
-    -- ** Groups
-    Groups (..),
-    newGroups,
+module Gogol.GroupsSettings.Internal.Sum
+  (
   )
 where
 
-import Network.Google.GroupsSettings.Internal.Product
-import Network.Google.GroupsSettings.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Groups Settings API. This contains the host and root path used as a starting point for constructing service requests.
-groupsSettingsService :: Core.ServiceConfig
-groupsSettingsService =
-  Core.defaultService
-    (Core.ServiceId "groupssettings:v1")
-    "www.googleapis.com"
-
--- | View and manage the settings of a G Suite group
-appsGroupsSettingsScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
-appsGroupsSettingsScope = Core.Proxy
+import qualified Gogol.Prelude as Core
