@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Internal.Product
+-- Module      : Gogol.BinaryAuthorization.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.BinaryAuthorization.Internal.Product
+module Gogol.BinaryAuthorization.Internal.Product
   ( -- * AdmissionRule
     AdmissionRule (..),
     newAdmissionRule,
@@ -124,8 +124,8 @@ module Network.Google.BinaryAuthorization.Internal.Product
   )
 where
 
-import Network.Google.BinaryAuthorization.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | An admission rule specifies either that all container images used in a pod creation request must be attested to by one or more attestors, that all pod creations will be allowed, or that all pod creations will be denied. Images matching an admission allowlist pattern are exempted from admission rules and will never block a pod creation.
 --

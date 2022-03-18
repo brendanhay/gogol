@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.Attestors.TestIamPermissions
+-- Module      : Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -28,23 +28,23 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a @NOT_FOUND@ error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.
 --
--- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.testIamPermissions@.
-module Network.Google.BinaryAuthorization.Projects.Attestors.TestIamPermissions
+-- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.policy.testIamPermissions@.
+module Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions
   ( -- * Resource
-    BinaryAuthorizationProjectsAttestorsTestIamPermissionsResource,
+    BinaryAuthorizationProjectsPolicyTestIamPermissionsResource,
 
     -- ** Constructing a Request
-    newBinaryAuthorizationProjectsAttestorsTestIamPermissions,
-    BinaryAuthorizationProjectsAttestorsTestIamPermissions,
+    newBinaryAuthorizationProjectsPolicyTestIamPermissions,
+    BinaryAuthorizationProjectsPolicyTestIamPermissions,
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @binaryauthorization.projects.attestors.testIamPermissions@ method which the
--- 'BinaryAuthorizationProjectsAttestorsTestIamPermissions' request conforms to.
-type BinaryAuthorizationProjectsAttestorsTestIamPermissionsResource =
+-- | A resource alias for @binaryauthorization.projects.policy.testIamPermissions@ method which the
+-- 'BinaryAuthorizationProjectsPolicyTestIamPermissions' request conforms to.
+type BinaryAuthorizationProjectsPolicyTestIamPermissionsResource =
   "v1"
     Core.:> Core.CaptureMode
               "resource"
@@ -61,8 +61,8 @@ type BinaryAuthorizationProjectsAttestorsTestIamPermissionsResource =
 
 -- | Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a @NOT_FOUND@ error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.
 --
--- /See:/ 'newBinaryAuthorizationProjectsAttestorsTestIamPermissions' smart constructor.
-data BinaryAuthorizationProjectsAttestorsTestIamPermissions = BinaryAuthorizationProjectsAttestorsTestIamPermissions
+-- /See:/ 'newBinaryAuthorizationProjectsPolicyTestIamPermissions' smart constructor.
+data BinaryAuthorizationProjectsPolicyTestIamPermissions = BinaryAuthorizationProjectsPolicyTestIamPermissions
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -80,15 +80,15 @@ data BinaryAuthorizationProjectsAttestorsTestIamPermissions = BinaryAuthorizatio
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'BinaryAuthorizationProjectsAttestorsTestIamPermissions' with the minimum fields required to make a request.
-newBinaryAuthorizationProjectsAttestorsTestIamPermissions ::
+-- | Creates a value of 'BinaryAuthorizationProjectsPolicyTestIamPermissions' with the minimum fields required to make a request.
+newBinaryAuthorizationProjectsPolicyTestIamPermissions ::
   -- |  Multipart request metadata. See 'payload'.
   TestIamPermissionsRequest ->
   -- |  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
   Core.Text ->
-  BinaryAuthorizationProjectsAttestorsTestIamPermissions
-newBinaryAuthorizationProjectsAttestorsTestIamPermissions payload resource =
-  BinaryAuthorizationProjectsAttestorsTestIamPermissions
+  BinaryAuthorizationProjectsPolicyTestIamPermissions
+newBinaryAuthorizationProjectsPolicyTestIamPermissions payload resource =
+  BinaryAuthorizationProjectsPolicyTestIamPermissions
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -100,18 +100,18 @@ newBinaryAuthorizationProjectsAttestorsTestIamPermissions payload resource =
 
 instance
   Core.GoogleRequest
-    BinaryAuthorizationProjectsAttestorsTestIamPermissions
+    BinaryAuthorizationProjectsPolicyTestIamPermissions
   where
   type
     Rs
-      BinaryAuthorizationProjectsAttestorsTestIamPermissions =
+      BinaryAuthorizationProjectsPolicyTestIamPermissions =
       TestIamPermissionsResponse
   type
     Scopes
-      BinaryAuthorizationProjectsAttestorsTestIamPermissions =
+      BinaryAuthorizationProjectsPolicyTestIamPermissions =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    BinaryAuthorizationProjectsAttestorsTestIamPermissions {..} =
+    BinaryAuthorizationProjectsPolicyTestIamPermissions {..} =
       go
         resource
         xgafv
@@ -127,6 +127,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  BinaryAuthorizationProjectsAttestorsTestIamPermissionsResource
+                  BinaryAuthorizationProjectsPolicyTestIamPermissionsResource
             )
             Core.mempty

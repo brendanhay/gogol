@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
+-- Module      : Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns whether the given Attestation for the given image URI was signed by the given Attestor
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.validateAttestationOccurrence@.
-module Network.Google.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
+module Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
   ( -- * Resource
     BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrenceResource,
 
@@ -39,8 +39,8 @@ module Network.Google.BinaryAuthorization.Projects.Attestors.ValidateAttestation
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.validateAttestationOccurrence@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence' request conforms to.

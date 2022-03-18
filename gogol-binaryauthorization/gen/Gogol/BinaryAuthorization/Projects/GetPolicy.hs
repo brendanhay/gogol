@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.Attestors.Delete
+-- Module      : Gogol.BinaryAuthorization.Projects.GetPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an attestor. Returns NOT_FOUND if the attestor does not exist.
+-- A policy specifies the attestors that must attest to a container image, before the project is allowed to deploy that image. There is at most one policy per project. All image admission requests are permitted if a project has no policy. Gets the policy for this project. Returns a default policy if the project does not have one.
 --
--- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.delete@.
-module Network.Google.BinaryAuthorization.Projects.Attestors.Delete
+-- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.getPolicy@.
+module Gogol.BinaryAuthorization.Projects.GetPolicy
   ( -- * Resource
-    BinaryAuthorizationProjectsAttestorsDeleteResource,
+    BinaryAuthorizationProjectsGetPolicyResource,
 
     -- ** Constructing a Request
-    newBinaryAuthorizationProjectsAttestorsDelete,
-    BinaryAuthorizationProjectsAttestorsDelete,
+    newBinaryAuthorizationProjectsGetPolicy,
+    BinaryAuthorizationProjectsGetPolicy,
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @binaryauthorization.projects.attestors.delete@ method which the
--- 'BinaryAuthorizationProjectsAttestorsDelete' request conforms to.
-type BinaryAuthorizationProjectsAttestorsDeleteResource =
+-- | A resource alias for @binaryauthorization.projects.getPolicy@ method which the
+-- 'BinaryAuthorizationProjectsGetPolicy' request conforms to.
+type BinaryAuthorizationProjectsGetPolicyResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type BinaryAuthorizationProjectsAttestorsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] Policy
 
--- | Deletes an attestor. Returns NOT_FOUND if the attestor does not exist.
+-- | A policy specifies the attestors that must attest to a container image, before the project is allowed to deploy that image. There is at most one policy per project. All image admission requests are permitted if a project has no policy. Gets the policy for this project. Returns a default policy if the project does not have one.
 --
--- /See:/ 'newBinaryAuthorizationProjectsAttestorsDelete' smart constructor.
-data BinaryAuthorizationProjectsAttestorsDelete = BinaryAuthorizationProjectsAttestorsDelete
+-- /See:/ 'newBinaryAuthorizationProjectsGetPolicy' smart constructor.
+data BinaryAuthorizationProjectsGetPolicy = BinaryAuthorizationProjectsGetPolicy
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the attestors to delete, in the format @projects\/*\/attestors\/*@.
+    -- | Required. The resource name of the policy to retrieve, in the format @projects\/*\/policy@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data BinaryAuthorizationProjectsAttestorsDelete = BinaryAuthorizationProjectsAtt
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'BinaryAuthorizationProjectsAttestorsDelete' with the minimum fields required to make a request.
-newBinaryAuthorizationProjectsAttestorsDelete ::
-  -- |  Required. The name of the attestors to delete, in the format @projects\/*\/attestors\/*@. See 'name'.
+-- | Creates a value of 'BinaryAuthorizationProjectsGetPolicy' with the minimum fields required to make a request.
+newBinaryAuthorizationProjectsGetPolicy ::
+  -- |  Required. The resource name of the policy to retrieve, in the format @projects\/*\/policy@. See 'name'.
   Core.Text ->
-  BinaryAuthorizationProjectsAttestorsDelete
-newBinaryAuthorizationProjectsAttestorsDelete name =
-  BinaryAuthorizationProjectsAttestorsDelete
+  BinaryAuthorizationProjectsGetPolicy
+newBinaryAuthorizationProjectsGetPolicy name =
+  BinaryAuthorizationProjectsGetPolicy
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,17 +91,14 @@ newBinaryAuthorizationProjectsAttestorsDelete name =
 
 instance
   Core.GoogleRequest
-    BinaryAuthorizationProjectsAttestorsDelete
+    BinaryAuthorizationProjectsGetPolicy
   where
+  type Rs BinaryAuthorizationProjectsGetPolicy = Policy
   type
-    Rs BinaryAuthorizationProjectsAttestorsDelete =
-      Empty
-  type
-    Scopes
-      BinaryAuthorizationProjectsAttestorsDelete =
+    Scopes BinaryAuthorizationProjectsGetPolicy =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    BinaryAuthorizationProjectsAttestorsDelete {..} =
+    BinaryAuthorizationProjectsGetPolicy {..} =
       go
         name
         xgafv
@@ -116,6 +113,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  BinaryAuthorizationProjectsAttestorsDeleteResource
+                  BinaryAuthorizationProjectsGetPolicyResource
             )
             Core.mempty

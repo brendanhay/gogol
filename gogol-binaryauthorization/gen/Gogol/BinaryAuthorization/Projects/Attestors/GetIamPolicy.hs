@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.Attestors.GetIamPolicy
+-- Module      : Gogol.BinaryAuthorization.Projects.Attestors.GetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.getIamPolicy@.
-module Network.Google.BinaryAuthorization.Projects.Attestors.GetIamPolicy
+module Gogol.BinaryAuthorization.Projects.Attestors.GetIamPolicy
   ( -- * Resource
     BinaryAuthorizationProjectsAttestorsGetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.BinaryAuthorization.Projects.Attestors.GetIamPolicy
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.getIamPolicy@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsGetIamPolicy' request conforms to.

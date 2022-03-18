@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.Attestors.Create
+-- Module      : Gogol.BinaryAuthorization.Projects.Attestors.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates an attestor, and returns a copy of the new attestor. Returns NOT/FOUND if the project does not exist, INVALID/ARGUMENT if the request is malformed, ALREADY_EXISTS if the attestor already exists.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.create@.
-module Network.Google.BinaryAuthorization.Projects.Attestors.Create
+module Gogol.BinaryAuthorization.Projects.Attestors.Create
   ( -- * Resource
     BinaryAuthorizationProjectsAttestorsCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.BinaryAuthorization.Projects.Attestors.Create
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.create@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsCreate' request conforms to.

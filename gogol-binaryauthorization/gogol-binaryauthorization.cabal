@@ -39,32 +39,33 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.BinaryAuthorization
-    Network.Google.BinaryAuthorization.Projects.Attestors.Create
-    Network.Google.BinaryAuthorization.Projects.Attestors.Delete
-    Network.Google.BinaryAuthorization.Projects.Attestors.Get
-    Network.Google.BinaryAuthorization.Projects.Attestors.GetIamPolicy
-    Network.Google.BinaryAuthorization.Projects.Attestors.List
-    Network.Google.BinaryAuthorization.Projects.Attestors.SetIamPolicy
-    Network.Google.BinaryAuthorization.Projects.Attestors.TestIamPermissions
-    Network.Google.BinaryAuthorization.Projects.Attestors.Update
-    Network.Google.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
-    Network.Google.BinaryAuthorization.Projects.GetPolicy
-    Network.Google.BinaryAuthorization.Projects.Policy.GetIamPolicy
-    Network.Google.BinaryAuthorization.Projects.Policy.SetIamPolicy
-    Network.Google.BinaryAuthorization.Projects.Policy.TestIamPermissions
-    Network.Google.BinaryAuthorization.Projects.UpdatePolicy
-    Network.Google.BinaryAuthorization.Systempolicy.GetPolicy
-    Network.Google.BinaryAuthorization.Types
+    Gogol.BinaryAuthorization
+    Gogol.BinaryAuthorization.Projects.Attestors.Create
+    Gogol.BinaryAuthorization.Projects.Attestors.Delete
+    Gogol.BinaryAuthorization.Projects.Attestors.Get
+    Gogol.BinaryAuthorization.Projects.Attestors.GetIamPolicy
+    Gogol.BinaryAuthorization.Projects.Attestors.List
+    Gogol.BinaryAuthorization.Projects.Attestors.SetIamPolicy
+    Gogol.BinaryAuthorization.Projects.Attestors.TestIamPermissions
+    Gogol.BinaryAuthorization.Projects.Attestors.Update
+    Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
+    Gogol.BinaryAuthorization.Projects.GetPolicy
+    Gogol.BinaryAuthorization.Projects.Policy.GetIamPolicy
+    Gogol.BinaryAuthorization.Projects.Policy.SetIamPolicy
+    Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions
+    Gogol.BinaryAuthorization.Projects.UpdatePolicy
+    Gogol.BinaryAuthorization.Systempolicy.GetPolicy
+    Gogol.BinaryAuthorization.Types
 
   other-modules:
-    Network.Google.BinaryAuthorization.Internal.Product
-    Network.Google.BinaryAuthorization.Internal.Sum
+    Gogol.BinaryAuthorization.Internal.Product
+    Gogol.BinaryAuthorization.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
