@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter
+-- Module      : Gogol.AlertCenter
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Manages alerts on issues affecting your domain.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference>
-module Network.Google.AlertCenter
+module Gogol.AlertCenter
   ( -- * Configuration
     alertCenterService,
 
@@ -358,15 +358,15 @@ module Network.Google.AlertCenter
   )
 where
 
-import Network.Google.AlertCenter.Alerts.BatchDelete
-import Network.Google.AlertCenter.Alerts.BatchUndelete
-import Network.Google.AlertCenter.Alerts.Delete
-import Network.Google.AlertCenter.Alerts.Feedback.Create
-import Network.Google.AlertCenter.Alerts.Feedback.List
-import Network.Google.AlertCenter.Alerts.Get
-import Network.Google.AlertCenter.Alerts.GetMetadata
-import Network.Google.AlertCenter.Alerts.List
-import Network.Google.AlertCenter.Alerts.Undelete
-import Network.Google.AlertCenter.GetSettings
-import Network.Google.AlertCenter.Types
-import Network.Google.AlertCenter.UpdateSettings
+import Gogol.AlertCenter.Alerts.BatchDelete
+import Gogol.AlertCenter.Alerts.BatchUndelete
+import Gogol.AlertCenter.Alerts.Delete
+import Gogol.AlertCenter.Alerts.Feedback.Create
+import Gogol.AlertCenter.Alerts.Feedback.List
+import Gogol.AlertCenter.Alerts.Get
+import Gogol.AlertCenter.Alerts.GetMetadata
+import Gogol.AlertCenter.Alerts.List
+import Gogol.AlertCenter.Alerts.Undelete
+import Gogol.AlertCenter.GetSettings
+import Gogol.AlertCenter.Types
+import Gogol.AlertCenter.UpdateSettings

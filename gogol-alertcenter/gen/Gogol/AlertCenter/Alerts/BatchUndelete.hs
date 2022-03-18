@@ -19,58 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.UpdateSettings
+-- Module      : Gogol.AlertCenter.Alerts.BatchUndelete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the customer-level settings.
+-- Performs batch undelete operation on alerts.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.updateSettings@.
-module Network.Google.AlertCenter.UpdateSettings
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.batchUndelete@.
+module Gogol.AlertCenter.Alerts.BatchUndelete
   ( -- * Resource
-    AlertCenterUpdateSettingsResource,
+    AlertCenterAlertsBatchUndeleteResource,
 
     -- ** Constructing a Request
-    newAlertCenterUpdateSettings,
-    AlertCenterUpdateSettings,
+    newAlertCenterAlertsBatchUndelete,
+    AlertCenterAlertsBatchUndelete,
   )
 where
 
-import Network.Google.AlertCenter.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @alertcenter.updateSettings@ method which the
--- 'AlertCenterUpdateSettings' request conforms to.
-type AlertCenterUpdateSettingsResource =
+-- | A resource alias for @alertcenter.alerts.batchUndelete@ method which the
+-- 'AlertCenterAlertsBatchUndelete' request conforms to.
+type AlertCenterAlertsBatchUndeleteResource =
   "v1beta1"
-    Core.:> "settings"
+    Core.:> "alerts:batchUndelete"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "customerId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Settings
-    Core.:> Core.Patch '[Core.JSON] Settings
+    Core.:> Core.ReqBody '[Core.JSON] BatchUndeleteAlertsRequest
+    Core.:> Core.Post '[Core.JSON] BatchUndeleteAlertsResponse
 
--- | Updates the customer-level settings.
+-- | Performs batch undelete operation on alerts.
 --
--- /See:/ 'newAlertCenterUpdateSettings' smart constructor.
-data AlertCenterUpdateSettings = AlertCenterUpdateSettings
+-- /See:/ 'newAlertCenterAlertsBatchUndelete' smart constructor.
+data AlertCenterAlertsBatchUndelete = AlertCenterAlertsBatchUndelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
-    customerId :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: Settings,
+    payload :: BatchUndeleteAlertsRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -78,33 +75,36 @@ data AlertCenterUpdateSettings = AlertCenterUpdateSettings
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'AlertCenterUpdateSettings' with the minimum fields required to make a request.
-newAlertCenterUpdateSettings ::
+-- | Creates a value of 'AlertCenterAlertsBatchUndelete' with the minimum fields required to make a request.
+newAlertCenterAlertsBatchUndelete ::
   -- |  Multipart request metadata. See 'payload'.
-  Settings ->
-  AlertCenterUpdateSettings
-newAlertCenterUpdateSettings payload =
-  AlertCenterUpdateSettings
+  BatchUndeleteAlertsRequest ->
+  AlertCenterAlertsBatchUndelete
+newAlertCenterAlertsBatchUndelete payload =
+  AlertCenterAlertsBatchUndelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      customerId = Core.Nothing,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest AlertCenterUpdateSettings where
-  type Rs AlertCenterUpdateSettings = Settings
+instance
+  Core.GoogleRequest
+    AlertCenterAlertsBatchUndelete
+  where
   type
-    Scopes AlertCenterUpdateSettings =
+    Rs AlertCenterAlertsBatchUndelete =
+      BatchUndeleteAlertsResponse
+  type
+    Scopes AlertCenterAlertsBatchUndelete =
       '["https://www.googleapis.com/auth/apps.alerts"]
-  requestClient AlertCenterUpdateSettings {..} =
+  requestClient AlertCenterAlertsBatchUndelete {..} =
     go
       xgafv
       accessToken
       callback
-      customerId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -114,6 +114,6 @@ instance Core.GoogleRequest AlertCenterUpdateSettings where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy AlertCenterUpdateSettingsResource
+              Core.Proxy AlertCenterAlertsBatchUndeleteResource
           )
           Core.mempty

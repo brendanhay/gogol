@@ -19,36 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.Alerts.GetMetadata
+-- Module      : Gogol.AlertCenter.UpdateSettings
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the metadata of an alert. Attempting to get metadata for a non-existent alert returns @NOT_FOUND@ error.
+-- Updates the customer-level settings.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.getMetadata@.
-module Network.Google.AlertCenter.Alerts.GetMetadata
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.updateSettings@.
+module Gogol.AlertCenter.UpdateSettings
   ( -- * Resource
-    AlertCenterAlertsGetMetadataResource,
+    AlertCenterUpdateSettingsResource,
 
     -- ** Constructing a Request
-    newAlertCenterAlertsGetMetadata,
-    AlertCenterAlertsGetMetadata,
+    newAlertCenterUpdateSettings,
+    AlertCenterUpdateSettings,
   )
 where
 
-import Network.Google.AlertCenter.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @alertcenter.alerts.getMetadata@ method which the
--- 'AlertCenterAlertsGetMetadata' request conforms to.
-type AlertCenterAlertsGetMetadataResource =
+-- | A resource alias for @alertcenter.updateSettings@ method which the
+-- 'AlertCenterUpdateSettings' request conforms to.
+type AlertCenterUpdateSettingsResource =
   "v1beta1"
-    Core.:> "alerts"
-    Core.:> Core.Capture "alertId" Core.Text
-    Core.:> "metadata"
+    Core.:> "settings"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -56,22 +54,23 @@ type AlertCenterAlertsGetMetadataResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AlertMetadata
+    Core.:> Core.ReqBody '[Core.JSON] Settings
+    Core.:> Core.Patch '[Core.JSON] Settings
 
--- | Returns the metadata of an alert. Attempting to get metadata for a non-existent alert returns @NOT_FOUND@ error.
+-- | Updates the customer-level settings.
 --
--- /See:/ 'newAlertCenterAlertsGetMetadata' smart constructor.
-data AlertCenterAlertsGetMetadata = AlertCenterAlertsGetMetadata
+-- /See:/ 'newAlertCenterUpdateSettings' smart constructor.
+data AlertCenterUpdateSettings = AlertCenterUpdateSettings
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Required. The identifier of the alert this metadata belongs to.
-    alertId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alert metadata is associated with. Inferred from the caller identity if not provided.
+    -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
     customerId :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: Settings,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,33 +78,29 @@ data AlertCenterAlertsGetMetadata = AlertCenterAlertsGetMetadata
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'AlertCenterAlertsGetMetadata' with the minimum fields required to make a request.
-newAlertCenterAlertsGetMetadata ::
-  -- |  Required. The identifier of the alert this metadata belongs to. See 'alertId'.
-  Core.Text ->
-  AlertCenterAlertsGetMetadata
-newAlertCenterAlertsGetMetadata alertId =
-  AlertCenterAlertsGetMetadata
+-- | Creates a value of 'AlertCenterUpdateSettings' with the minimum fields required to make a request.
+newAlertCenterUpdateSettings ::
+  -- |  Multipart request metadata. See 'payload'.
+  Settings ->
+  AlertCenterUpdateSettings
+newAlertCenterUpdateSettings payload =
+  AlertCenterUpdateSettings
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
-      alertId = alertId,
       callback = Core.Nothing,
       customerId = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AlertCenterAlertsGetMetadata
-  where
-  type Rs AlertCenterAlertsGetMetadata = AlertMetadata
+instance Core.GoogleRequest AlertCenterUpdateSettings where
+  type Rs AlertCenterUpdateSettings = Settings
   type
-    Scopes AlertCenterAlertsGetMetadata =
+    Scopes AlertCenterUpdateSettings =
       '["https://www.googleapis.com/auth/apps.alerts"]
-  requestClient AlertCenterAlertsGetMetadata {..} =
+  requestClient AlertCenterUpdateSettings {..} =
     go
-      alertId
       xgafv
       accessToken
       callback
@@ -113,11 +108,12 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       alertCenterService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy AlertCenterAlertsGetMetadataResource
+              Core.Proxy AlertCenterUpdateSettingsResource
           )
           Core.mempty

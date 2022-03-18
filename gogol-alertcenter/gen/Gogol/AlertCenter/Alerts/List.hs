@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.Alerts.List
+-- Module      : Gogol.AlertCenter.Alerts.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the alerts.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.list@.
-module Network.Google.AlertCenter.Alerts.List
+module Gogol.AlertCenter.Alerts.List
   ( -- * Resource
     AlertCenterAlertsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AlertCenter.Alerts.List
   )
 where
 
-import Network.Google.AlertCenter.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @alertcenter.alerts.list@ method which the
 -- 'AlertCenterAlertsList' request conforms to.
