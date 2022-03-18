@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ContainerAnalysis.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AliasContext_Kind
     AliasContext_Kind
-      ( AliasContext_Kind_KINDUNSPECIFIED,
+      (
+        AliasContext_Kind_KINDUNSPECIFIED,
         AliasContext_Kind_Fixed,
         AliasContext_Kind_Movable,
         AliasContext_Kind_Other,
@@ -44,7 +55,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_AttackComplexity
     CVSS_AttackComplexity
-      ( CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
+      (
+        CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
         CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW,
         CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH,
         ..
@@ -52,7 +64,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_AttackVector
     CVSS_AttackVector
-      ( CVSS_AttackVector_ATTACKVECTORUNSPECIFIED,
+      (
+        CVSS_AttackVector_ATTACKVECTORUNSPECIFIED,
         CVSS_AttackVector_ATTACKVECTORNETWORK,
         CVSS_AttackVector_ATTACKVECTORADJACENT,
         CVSS_AttackVector_ATTACKVECTORLOCAL,
@@ -62,7 +75,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_Authentication
     CVSS_Authentication
-      ( CVSS_Authentication_AUTHENTICATIONUNSPECIFIED,
+      (
+        CVSS_Authentication_AUTHENTICATIONUNSPECIFIED,
         CVSS_Authentication_AUTHENTICATIONMULTIPLE,
         CVSS_Authentication_AUTHENTICATIONSINGLE,
         CVSS_Authentication_AUTHENTICATIONNONE,
@@ -71,7 +85,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_AvailabilityImpact
     CVSS_AvailabilityImpact
-      ( CVSS_AvailabilityImpact_IMPACTUNSPECIFIED,
+      (
+        CVSS_AvailabilityImpact_IMPACTUNSPECIFIED,
         CVSS_AvailabilityImpact_IMPACTHIGH,
         CVSS_AvailabilityImpact_IMPACTLOW,
         CVSS_AvailabilityImpact_IMPACTNONE,
@@ -80,7 +95,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_ConfidentialityImpact
     CVSS_ConfidentialityImpact
-      ( CVSS_ConfidentialityImpact_IMPACTUNSPECIFIED,
+      (
+        CVSS_ConfidentialityImpact_IMPACTUNSPECIFIED,
         CVSS_ConfidentialityImpact_IMPACTHIGH,
         CVSS_ConfidentialityImpact_IMPACTLOW,
         CVSS_ConfidentialityImpact_IMPACTNONE,
@@ -89,7 +105,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_IntegrityImpact
     CVSS_IntegrityImpact
-      ( CVSS_IntegrityImpact_IMPACTUNSPECIFIED,
+      (
+        CVSS_IntegrityImpact_IMPACTUNSPECIFIED,
         CVSS_IntegrityImpact_IMPACTHIGH,
         CVSS_IntegrityImpact_IMPACTLOW,
         CVSS_IntegrityImpact_IMPACTNONE,
@@ -98,7 +115,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_PrivilegesRequired
     CVSS_PrivilegesRequired
-      ( CVSS_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED,
+      (
+        CVSS_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED,
         CVSS_PrivilegesRequired_PRIVILEGESREQUIREDNONE,
         CVSS_PrivilegesRequired_PRIVILEGESREQUIREDLOW,
         CVSS_PrivilegesRequired_PRIVILEGESREQUIREDHIGH,
@@ -107,7 +125,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_Scope
     CVSS_Scope
-      ( CVSS_Scope_SCOPEUNSPECIFIED,
+      (
+        CVSS_Scope_SCOPEUNSPECIFIED,
         CVSS_Scope_SCOPEUNCHANGED,
         CVSS_Scope_SCOPECHANGED,
         ..
@@ -115,7 +134,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSS_UserInteraction
     CVSS_UserInteraction
-      ( CVSS_UserInteraction_USERINTERACTIONUNSPECIFIED,
+      (
+        CVSS_UserInteraction_USERINTERACTIONUNSPECIFIED,
         CVSS_UserInteraction_USERINTERACTIONNONE,
         CVSS_UserInteraction_USERINTERACTIONREQUIRED,
         ..
@@ -123,7 +143,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_AttackComplexity
     CVSSv3_AttackComplexity
-      ( CVSSv3_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
+      (
+        CVSSv3_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
         CVSSv3_AttackComplexity_ATTACKCOMPLEXITYLOW,
         CVSSv3_AttackComplexity_ATTACKCOMPLEXITYHIGH,
         ..
@@ -131,7 +152,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_AttackVector
     CVSSv3_AttackVector
-      ( CVSSv3_AttackVector_ATTACKVECTORUNSPECIFIED,
+      (
+        CVSSv3_AttackVector_ATTACKVECTORUNSPECIFIED,
         CVSSv3_AttackVector_ATTACKVECTORNETWORK,
         CVSSv3_AttackVector_ATTACKVECTORADJACENT,
         CVSSv3_AttackVector_ATTACKVECTORLOCAL,
@@ -141,7 +163,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_AvailabilityImpact
     CVSSv3_AvailabilityImpact
-      ( CVSSv3_AvailabilityImpact_IMPACTUNSPECIFIED,
+      (
+        CVSSv3_AvailabilityImpact_IMPACTUNSPECIFIED,
         CVSSv3_AvailabilityImpact_IMPACTHIGH,
         CVSSv3_AvailabilityImpact_IMPACTLOW,
         CVSSv3_AvailabilityImpact_IMPACTNONE,
@@ -150,7 +173,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_ConfidentialityImpact
     CVSSv3_ConfidentialityImpact
-      ( CVSSv3_ConfidentialityImpact_IMPACTUNSPECIFIED,
+      (
+        CVSSv3_ConfidentialityImpact_IMPACTUNSPECIFIED,
         CVSSv3_ConfidentialityImpact_IMPACTHIGH,
         CVSSv3_ConfidentialityImpact_IMPACTLOW,
         CVSSv3_ConfidentialityImpact_IMPACTNONE,
@@ -159,7 +183,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_IntegrityImpact
     CVSSv3_IntegrityImpact
-      ( CVSSv3_IntegrityImpact_IMPACTUNSPECIFIED,
+      (
+        CVSSv3_IntegrityImpact_IMPACTUNSPECIFIED,
         CVSSv3_IntegrityImpact_IMPACTHIGH,
         CVSSv3_IntegrityImpact_IMPACTLOW,
         CVSSv3_IntegrityImpact_IMPACTNONE,
@@ -168,7 +193,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_PrivilegesRequired
     CVSSv3_PrivilegesRequired
-      ( CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED,
+      (
+        CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED,
         CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDNONE,
         CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDLOW,
         CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDHIGH,
@@ -177,7 +203,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_Scope
     CVSSv3_Scope
-      ( CVSSv3_Scope_SCOPEUNSPECIFIED,
+      (
+        CVSSv3_Scope_SCOPEUNSPECIFIED,
         CVSSv3_Scope_SCOPEUNCHANGED,
         CVSSv3_Scope_SCOPECHANGED,
         ..
@@ -185,7 +212,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CVSSv3_UserInteraction
     CVSSv3_UserInteraction
-      ( CVSSv3_UserInteraction_USERINTERACTIONUNSPECIFIED,
+      (
+        CVSSv3_UserInteraction_USERINTERACTIONUNSPECIFIED,
         CVSSv3_UserInteraction_USERINTERACTIONNONE,
         CVSSv3_UserInteraction_USERINTERACTIONREQUIRED,
         ..
@@ -193,7 +221,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * CisBenchmark_Severity
     CisBenchmark_Severity
-      ( CisBenchmark_Severity_SEVERITYUNSPECIFIED,
+      (
+        CisBenchmark_Severity_SEVERITYUNSPECIFIED,
         CisBenchmark_Severity_Minimal,
         CisBenchmark_Severity_Low,
         CisBenchmark_Severity_Medium,
@@ -204,7 +233,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision
     ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_DECISIONUNSPECIFIED,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_DECISIONUNSPECIFIED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_Approved,
         ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_Rejected,
         ..
@@ -212,7 +242,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status
     ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_STATUSUNKNOWN,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_STATUSUNKNOWN,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_Pending,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_Queued,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_Working,
@@ -227,7 +258,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_STATEUNSPECIFIED,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_STATEUNSPECIFIED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_Pending,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_Approved,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_Rejected,
@@ -237,7 +269,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_FAILURETYPEUNSPECIFIED,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_FAILURETYPEUNSPECIFIED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_PUSHFAILED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_PUSHIMAGENOTFOUND,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_PUSHNOTAUTHORIZED,
@@ -249,7 +282,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMDEFAULT,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMDEFAULT,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMON,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMOFF,
         ..
@@ -257,7 +291,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_LOGGINGUNSPECIFIED,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_LOGGINGUNSPECIFIED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_Legacy,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_GCSONLY,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_STACKDRIVERONLY,
@@ -268,7 +303,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_Unspecified,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_Unspecified,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_N1_HIGHCPU_8,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_N1_HIGHCPU_32,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_8,
@@ -278,14 +314,16 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_NOTVERIFIED,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_NOTVERIFIED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_Verified,
         ..
       ),
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
         ..
@@ -293,14 +331,16 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption_MUSTMATCH,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption_MUSTMATCH,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption_ALLOWLOOSE,
         ..
       ),
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_STATUSUNKNOWN,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_STATUSUNKNOWN,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_Pending,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_Queued,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_Working,
@@ -315,7 +355,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_PRIORITYUNSPECIFIED,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_PRIORITYUNSPECIFIED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_Info,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_Warning,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_Alert,
@@ -324,7 +365,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
     ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
-      ( ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None,
+      (
+        ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5,
         ..
@@ -332,7 +374,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * DeploymentOccurrence_Platform
     DeploymentOccurrence_Platform
-      ( DeploymentOccurrence_Platform_PLATFORMUNSPECIFIED,
+      (
+        DeploymentOccurrence_Platform_PLATFORMUNSPECIFIED,
         DeploymentOccurrence_Platform_Gke,
         DeploymentOccurrence_Platform_Flex,
         DeploymentOccurrence_Platform_Custom,
@@ -341,7 +384,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * DiscoveryNote_AnalysisKind
     DiscoveryNote_AnalysisKind
-      ( DiscoveryNote_AnalysisKind_NOTEKINDUNSPECIFIED,
+      (
+        DiscoveryNote_AnalysisKind_NOTEKINDUNSPECIFIED,
         DiscoveryNote_AnalysisKind_Vulnerability,
         DiscoveryNote_AnalysisKind_Build,
         DiscoveryNote_AnalysisKind_Image,
@@ -357,7 +401,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * DiscoveryOccurrence_AnalysisStatus
     DiscoveryOccurrence_AnalysisStatus
-      ( DiscoveryOccurrence_AnalysisStatus_ANALYSISSTATUSUNSPECIFIED,
+      (
+        DiscoveryOccurrence_AnalysisStatus_ANALYSISSTATUSUNSPECIFIED,
         DiscoveryOccurrence_AnalysisStatus_Pending,
         DiscoveryOccurrence_AnalysisStatus_Scanning,
         DiscoveryOccurrence_AnalysisStatus_FINISHEDSUCCESS,
@@ -368,7 +413,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * DiscoveryOccurrence_ContinuousAnalysis
     DiscoveryOccurrence_ContinuousAnalysis
-      ( DiscoveryOccurrence_ContinuousAnalysis_CONTINUOUSANALYSISUNSPECIFIED,
+      (
+        DiscoveryOccurrence_ContinuousAnalysis_CONTINUOUSANALYSISUNSPECIFIED,
         DiscoveryOccurrence_ContinuousAnalysis_Active,
         DiscoveryOccurrence_ContinuousAnalysis_Inactive,
         ..
@@ -376,7 +422,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * Distribution_Architecture
     Distribution_Architecture
-      ( Distribution_Architecture_ARCHITECTUREUNSPECIFIED,
+      (
+        Distribution_Architecture_ARCHITECTUREUNSPECIFIED,
         Distribution_Architecture_X86,
         Distribution_Architecture_X64,
         ..
@@ -384,7 +431,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * FixableTotalByDigest_Severity
     FixableTotalByDigest_Severity
-      ( FixableTotalByDigest_Severity_SEVERITYUNSPECIFIED,
+      (
+        FixableTotalByDigest_Severity_SEVERITYUNSPECIFIED,
         FixableTotalByDigest_Severity_Minimal,
         FixableTotalByDigest_Severity_Low,
         FixableTotalByDigest_Severity_Medium,
@@ -395,7 +443,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * Note_Kind
     Note_Kind
-      ( Note_Kind_NOTEKINDUNSPECIFIED,
+      (
+        Note_Kind_NOTEKINDUNSPECIFIED,
         Note_Kind_Vulnerability,
         Note_Kind_Build,
         Note_Kind_Image,
@@ -411,7 +460,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * Occurrence_Kind
     Occurrence_Kind
-      ( Occurrence_Kind_NOTEKINDUNSPECIFIED,
+      (
+        Occurrence_Kind_NOTEKINDUNSPECIFIED,
         Occurrence_Kind_Vulnerability,
         Occurrence_Kind_Build,
         Occurrence_Kind_Image,
@@ -427,7 +477,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * PackageIssue_EffectiveSeverity
     PackageIssue_EffectiveSeverity
-      ( PackageIssue_EffectiveSeverity_SEVERITYUNSPECIFIED,
+      (
+        PackageIssue_EffectiveSeverity_SEVERITYUNSPECIFIED,
         PackageIssue_EffectiveSeverity_Minimal,
         PackageIssue_EffectiveSeverity_Low,
         PackageIssue_EffectiveSeverity_Medium,
@@ -438,7 +489,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * Version_Kind
     Version_Kind
-      ( Version_Kind_VERSIONKINDUNSPECIFIED,
+      (
+        Version_Kind_VERSIONKINDUNSPECIFIED,
         Version_Kind_Normal,
         Version_Kind_Minimum,
         Version_Kind_Maximum,
@@ -447,7 +499,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * VulnerabilityNote_Severity
     VulnerabilityNote_Severity
-      ( VulnerabilityNote_Severity_SEVERITYUNSPECIFIED,
+      (
+        VulnerabilityNote_Severity_SEVERITYUNSPECIFIED,
         VulnerabilityNote_Severity_Minimal,
         VulnerabilityNote_Severity_Low,
         VulnerabilityNote_Severity_Medium,
@@ -458,7 +511,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * VulnerabilityOccurrence_EffectiveSeverity
     VulnerabilityOccurrence_EffectiveSeverity
-      ( VulnerabilityOccurrence_EffectiveSeverity_SEVERITYUNSPECIFIED,
+      (
+        VulnerabilityOccurrence_EffectiveSeverity_SEVERITYUNSPECIFIED,
         VulnerabilityOccurrence_EffectiveSeverity_Minimal,
         VulnerabilityOccurrence_EffectiveSeverity_Low,
         VulnerabilityOccurrence_EffectiveSeverity_Medium,
@@ -469,7 +523,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
 
     -- * VulnerabilityOccurrence_Severity
     VulnerabilityOccurrence_Severity
-      ( VulnerabilityOccurrence_Severity_SEVERITYUNSPECIFIED,
+      (
+        VulnerabilityOccurrence_Severity_SEVERITYUNSPECIFIED,
         VulnerabilityOccurrence_Severity_Minimal,
         VulnerabilityOccurrence_Severity_Low,
         VulnerabilityOccurrence_Severity_Medium,
@@ -477,23 +532,22 @@ module Gogol.ContainerAnalysis.Internal.Sum
         VulnerabilityOccurrence_Severity_Critical,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -506,21 +560,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The alias kind.
-newtype AliasContext_Kind = AliasContext_Kind {fromAliasContext_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AliasContext_Kind = AliasContext_Kind { fromAliasContext_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern AliasContext_Kind_KINDUNSPECIFIED :: AliasContext_Kind
@@ -543,30 +596,29 @@ pattern AliasContext_Kind_Other = AliasContext_Kind "OTHER"
   AliasContext_Kind_Fixed,
   AliasContext_Kind_Movable,
   AliasContext_Kind_Other,
-  AliasContext_Kind
-  #-}
+  AliasContext_Kind #-}
 
-newtype CVSS_AttackComplexity = CVSS_AttackComplexity {fromCVSS_AttackComplexity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_AttackComplexity = CVSS_AttackComplexity { fromCVSS_AttackComplexity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED :: CVSS_AttackComplexity
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED = CVSS_AttackComplexity "ATTACK_COMPLEXITY_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW :: CVSS_AttackComplexity
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW = CVSS_AttackComplexity "ATTACK_COMPLEXITY_LOW"
 
--- |
+-- | 
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH :: CVSS_AttackComplexity
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH = CVSS_AttackComplexity "ATTACK_COMPLEXITY_HIGH"
 
@@ -574,39 +626,38 @@ pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH = CVSS_AttackComplexity "ATTA
   CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
   CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW,
   CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH,
-  CVSS_AttackComplexity
-  #-}
+  CVSS_AttackComplexity #-}
 
 -- | Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments.
-newtype CVSS_AttackVector = CVSS_AttackVector {fromCVSS_AttackVector :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_AttackVector = CVSS_AttackVector { fromCVSS_AttackVector :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_AttackVector_ATTACKVECTORUNSPECIFIED :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORUNSPECIFIED = CVSS_AttackVector "ATTACK_VECTOR_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_AttackVector_ATTACKVECTORNETWORK :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORNETWORK = CVSS_AttackVector "ATTACK_VECTOR_NETWORK"
 
--- |
+-- | 
 pattern CVSS_AttackVector_ATTACKVECTORADJACENT :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORADJACENT = CVSS_AttackVector "ATTACK_VECTOR_ADJACENT"
 
--- |
+-- | 
 pattern CVSS_AttackVector_ATTACKVECTORLOCAL :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORLOCAL = CVSS_AttackVector "ATTACK_VECTOR_LOCAL"
 
--- |
+-- | 
 pattern CVSS_AttackVector_ATTACKVECTORPHYSICAL :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORPHYSICAL = CVSS_AttackVector "ATTACK_VECTOR_PHYSICAL"
 
@@ -616,34 +667,33 @@ pattern CVSS_AttackVector_ATTACKVECTORPHYSICAL = CVSS_AttackVector "ATTACK_VECTO
   CVSS_AttackVector_ATTACKVECTORADJACENT,
   CVSS_AttackVector_ATTACKVECTORLOCAL,
   CVSS_AttackVector_ATTACKVECTORPHYSICAL,
-  CVSS_AttackVector
-  #-}
+  CVSS_AttackVector #-}
 
-newtype CVSS_Authentication = CVSS_Authentication {fromCVSS_Authentication :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_Authentication = CVSS_Authentication { fromCVSS_Authentication :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_Authentication_AUTHENTICATIONUNSPECIFIED :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONUNSPECIFIED = CVSS_Authentication "AUTHENTICATION_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_Authentication_AUTHENTICATIONMULTIPLE :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONMULTIPLE = CVSS_Authentication "AUTHENTICATION_MULTIPLE"
 
--- |
+-- | 
 pattern CVSS_Authentication_AUTHENTICATIONSINGLE :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONSINGLE = CVSS_Authentication "AUTHENTICATION_SINGLE"
 
--- |
+-- | 
 pattern CVSS_Authentication_AUTHENTICATIONNONE :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONNONE = CVSS_Authentication "AUTHENTICATION_NONE"
 
@@ -652,34 +702,33 @@ pattern CVSS_Authentication_AUTHENTICATIONNONE = CVSS_Authentication "AUTHENTICA
   CVSS_Authentication_AUTHENTICATIONMULTIPLE,
   CVSS_Authentication_AUTHENTICATIONSINGLE,
   CVSS_Authentication_AUTHENTICATIONNONE,
-  CVSS_Authentication
-  #-}
+  CVSS_Authentication #-}
 
-newtype CVSS_AvailabilityImpact = CVSS_AvailabilityImpact {fromCVSS_AvailabilityImpact :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_AvailabilityImpact = CVSS_AvailabilityImpact { fromCVSS_AvailabilityImpact :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_AvailabilityImpact_IMPACTUNSPECIFIED :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTUNSPECIFIED = CVSS_AvailabilityImpact "IMPACT_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_AvailabilityImpact_IMPACTHIGH :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTHIGH = CVSS_AvailabilityImpact "IMPACT_HIGH"
 
--- |
+-- | 
 pattern CVSS_AvailabilityImpact_IMPACTLOW :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTLOW = CVSS_AvailabilityImpact "IMPACT_LOW"
 
--- |
+-- | 
 pattern CVSS_AvailabilityImpact_IMPACTNONE :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTNONE = CVSS_AvailabilityImpact "IMPACT_NONE"
 
@@ -688,34 +737,33 @@ pattern CVSS_AvailabilityImpact_IMPACTNONE = CVSS_AvailabilityImpact "IMPACT_NON
   CVSS_AvailabilityImpact_IMPACTHIGH,
   CVSS_AvailabilityImpact_IMPACTLOW,
   CVSS_AvailabilityImpact_IMPACTNONE,
-  CVSS_AvailabilityImpact
-  #-}
+  CVSS_AvailabilityImpact #-}
 
-newtype CVSS_ConfidentialityImpact = CVSS_ConfidentialityImpact {fromCVSS_ConfidentialityImpact :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_ConfidentialityImpact = CVSS_ConfidentialityImpact { fromCVSS_ConfidentialityImpact :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_ConfidentialityImpact_IMPACTUNSPECIFIED :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTUNSPECIFIED = CVSS_ConfidentialityImpact "IMPACT_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_ConfidentialityImpact_IMPACTHIGH :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTHIGH = CVSS_ConfidentialityImpact "IMPACT_HIGH"
 
--- |
+-- | 
 pattern CVSS_ConfidentialityImpact_IMPACTLOW :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTLOW = CVSS_ConfidentialityImpact "IMPACT_LOW"
 
--- |
+-- | 
 pattern CVSS_ConfidentialityImpact_IMPACTNONE :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTNONE = CVSS_ConfidentialityImpact "IMPACT_NONE"
 
@@ -724,34 +772,33 @@ pattern CVSS_ConfidentialityImpact_IMPACTNONE = CVSS_ConfidentialityImpact "IMPA
   CVSS_ConfidentialityImpact_IMPACTHIGH,
   CVSS_ConfidentialityImpact_IMPACTLOW,
   CVSS_ConfidentialityImpact_IMPACTNONE,
-  CVSS_ConfidentialityImpact
-  #-}
+  CVSS_ConfidentialityImpact #-}
 
-newtype CVSS_IntegrityImpact = CVSS_IntegrityImpact {fromCVSS_IntegrityImpact :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_IntegrityImpact = CVSS_IntegrityImpact { fromCVSS_IntegrityImpact :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_IntegrityImpact_IMPACTUNSPECIFIED :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTUNSPECIFIED = CVSS_IntegrityImpact "IMPACT_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_IntegrityImpact_IMPACTHIGH :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTHIGH = CVSS_IntegrityImpact "IMPACT_HIGH"
 
--- |
+-- | 
 pattern CVSS_IntegrityImpact_IMPACTLOW :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTLOW = CVSS_IntegrityImpact "IMPACT_LOW"
 
--- |
+-- | 
 pattern CVSS_IntegrityImpact_IMPACTNONE :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTNONE = CVSS_IntegrityImpact "IMPACT_NONE"
 
@@ -760,34 +807,33 @@ pattern CVSS_IntegrityImpact_IMPACTNONE = CVSS_IntegrityImpact "IMPACT_NONE"
   CVSS_IntegrityImpact_IMPACTHIGH,
   CVSS_IntegrityImpact_IMPACTLOW,
   CVSS_IntegrityImpact_IMPACTNONE,
-  CVSS_IntegrityImpact
-  #-}
+  CVSS_IntegrityImpact #-}
 
-newtype CVSS_PrivilegesRequired = CVSS_PrivilegesRequired {fromCVSS_PrivilegesRequired :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_PrivilegesRequired = CVSS_PrivilegesRequired { fromCVSS_PrivilegesRequired :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDNONE :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDNONE = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_NONE"
 
--- |
+-- | 
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDLOW :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDLOW = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_LOW"
 
--- |
+-- | 
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDHIGH :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDHIGH = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_HIGH"
 
@@ -796,30 +842,29 @@ pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDHIGH = CVSS_PrivilegesRequired
   CVSS_PrivilegesRequired_PRIVILEGESREQUIREDNONE,
   CVSS_PrivilegesRequired_PRIVILEGESREQUIREDLOW,
   CVSS_PrivilegesRequired_PRIVILEGESREQUIREDHIGH,
-  CVSS_PrivilegesRequired
-  #-}
+  CVSS_PrivilegesRequired #-}
 
-newtype CVSS_Scope = CVSS_Scope {fromCVSS_Scope :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_Scope = CVSS_Scope { fromCVSS_Scope :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_Scope_SCOPEUNSPECIFIED :: CVSS_Scope
 pattern CVSS_Scope_SCOPEUNSPECIFIED = CVSS_Scope "SCOPE_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_Scope_SCOPEUNCHANGED :: CVSS_Scope
 pattern CVSS_Scope_SCOPEUNCHANGED = CVSS_Scope "SCOPE_UNCHANGED"
 
--- |
+-- | 
 pattern CVSS_Scope_SCOPECHANGED :: CVSS_Scope
 pattern CVSS_Scope_SCOPECHANGED = CVSS_Scope "SCOPE_CHANGED"
 
@@ -827,30 +872,29 @@ pattern CVSS_Scope_SCOPECHANGED = CVSS_Scope "SCOPE_CHANGED"
   CVSS_Scope_SCOPEUNSPECIFIED,
   CVSS_Scope_SCOPEUNCHANGED,
   CVSS_Scope_SCOPECHANGED,
-  CVSS_Scope
-  #-}
+  CVSS_Scope #-}
 
-newtype CVSS_UserInteraction = CVSS_UserInteraction {fromCVSS_UserInteraction :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSS_UserInteraction = CVSS_UserInteraction { fromCVSS_UserInteraction :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSS_UserInteraction_USERINTERACTIONUNSPECIFIED :: CVSS_UserInteraction
 pattern CVSS_UserInteraction_USERINTERACTIONUNSPECIFIED = CVSS_UserInteraction "USER_INTERACTION_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSS_UserInteraction_USERINTERACTIONNONE :: CVSS_UserInteraction
 pattern CVSS_UserInteraction_USERINTERACTIONNONE = CVSS_UserInteraction "USER_INTERACTION_NONE"
 
--- |
+-- | 
 pattern CVSS_UserInteraction_USERINTERACTIONREQUIRED :: CVSS_UserInteraction
 pattern CVSS_UserInteraction_USERINTERACTIONREQUIRED = CVSS_UserInteraction "USER_INTERACTION_REQUIRED"
 
@@ -858,30 +902,29 @@ pattern CVSS_UserInteraction_USERINTERACTIONREQUIRED = CVSS_UserInteraction "USE
   CVSS_UserInteraction_USERINTERACTIONUNSPECIFIED,
   CVSS_UserInteraction_USERINTERACTIONNONE,
   CVSS_UserInteraction_USERINTERACTIONREQUIRED,
-  CVSS_UserInteraction
-  #-}
+  CVSS_UserInteraction #-}
 
-newtype CVSSv3_AttackComplexity = CVSSv3_AttackComplexity {fromCVSSv3_AttackComplexity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_AttackComplexity = CVSSv3_AttackComplexity { fromCVSSv3_AttackComplexity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED :: CVSSv3_AttackComplexity
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED = CVSSv3_AttackComplexity "ATTACK_COMPLEXITY_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYLOW :: CVSSv3_AttackComplexity
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYLOW = CVSSv3_AttackComplexity "ATTACK_COMPLEXITY_LOW"
 
--- |
+-- | 
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYHIGH :: CVSSv3_AttackComplexity
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYHIGH = CVSSv3_AttackComplexity "ATTACK_COMPLEXITY_HIGH"
 
@@ -889,39 +932,38 @@ pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYHIGH = CVSSv3_AttackComplexity "
   CVSSv3_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
   CVSSv3_AttackComplexity_ATTACKCOMPLEXITYLOW,
   CVSSv3_AttackComplexity_ATTACKCOMPLEXITYHIGH,
-  CVSSv3_AttackComplexity
-  #-}
+  CVSSv3_AttackComplexity #-}
 
 -- | Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments.
-newtype CVSSv3_AttackVector = CVSSv3_AttackVector {fromCVSSv3_AttackVector :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_AttackVector = CVSSv3_AttackVector { fromCVSSv3_AttackVector :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_AttackVector_ATTACKVECTORUNSPECIFIED :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORUNSPECIFIED = CVSSv3_AttackVector "ATTACK_VECTOR_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_AttackVector_ATTACKVECTORNETWORK :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORNETWORK = CVSSv3_AttackVector "ATTACK_VECTOR_NETWORK"
 
--- |
+-- | 
 pattern CVSSv3_AttackVector_ATTACKVECTORADJACENT :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORADJACENT = CVSSv3_AttackVector "ATTACK_VECTOR_ADJACENT"
 
--- |
+-- | 
 pattern CVSSv3_AttackVector_ATTACKVECTORLOCAL :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORLOCAL = CVSSv3_AttackVector "ATTACK_VECTOR_LOCAL"
 
--- |
+-- | 
 pattern CVSSv3_AttackVector_ATTACKVECTORPHYSICAL :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORPHYSICAL = CVSSv3_AttackVector "ATTACK_VECTOR_PHYSICAL"
 
@@ -931,34 +973,33 @@ pattern CVSSv3_AttackVector_ATTACKVECTORPHYSICAL = CVSSv3_AttackVector "ATTACK_V
   CVSSv3_AttackVector_ATTACKVECTORADJACENT,
   CVSSv3_AttackVector_ATTACKVECTORLOCAL,
   CVSSv3_AttackVector_ATTACKVECTORPHYSICAL,
-  CVSSv3_AttackVector
-  #-}
+  CVSSv3_AttackVector #-}
 
-newtype CVSSv3_AvailabilityImpact = CVSSv3_AvailabilityImpact {fromCVSSv3_AvailabilityImpact :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_AvailabilityImpact = CVSSv3_AvailabilityImpact { fromCVSSv3_AvailabilityImpact :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_AvailabilityImpact_IMPACTUNSPECIFIED :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTUNSPECIFIED = CVSSv3_AvailabilityImpact "IMPACT_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_AvailabilityImpact_IMPACTHIGH :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTHIGH = CVSSv3_AvailabilityImpact "IMPACT_HIGH"
 
--- |
+-- | 
 pattern CVSSv3_AvailabilityImpact_IMPACTLOW :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTLOW = CVSSv3_AvailabilityImpact "IMPACT_LOW"
 
--- |
+-- | 
 pattern CVSSv3_AvailabilityImpact_IMPACTNONE :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTNONE = CVSSv3_AvailabilityImpact "IMPACT_NONE"
 
@@ -967,34 +1008,33 @@ pattern CVSSv3_AvailabilityImpact_IMPACTNONE = CVSSv3_AvailabilityImpact "IMPACT
   CVSSv3_AvailabilityImpact_IMPACTHIGH,
   CVSSv3_AvailabilityImpact_IMPACTLOW,
   CVSSv3_AvailabilityImpact_IMPACTNONE,
-  CVSSv3_AvailabilityImpact
-  #-}
+  CVSSv3_AvailabilityImpact #-}
 
-newtype CVSSv3_ConfidentialityImpact = CVSSv3_ConfidentialityImpact {fromCVSSv3_ConfidentialityImpact :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_ConfidentialityImpact = CVSSv3_ConfidentialityImpact { fromCVSSv3_ConfidentialityImpact :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_ConfidentialityImpact_IMPACTUNSPECIFIED :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTUNSPECIFIED = CVSSv3_ConfidentialityImpact "IMPACT_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_ConfidentialityImpact_IMPACTHIGH :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTHIGH = CVSSv3_ConfidentialityImpact "IMPACT_HIGH"
 
--- |
+-- | 
 pattern CVSSv3_ConfidentialityImpact_IMPACTLOW :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTLOW = CVSSv3_ConfidentialityImpact "IMPACT_LOW"
 
--- |
+-- | 
 pattern CVSSv3_ConfidentialityImpact_IMPACTNONE :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTNONE = CVSSv3_ConfidentialityImpact "IMPACT_NONE"
 
@@ -1003,34 +1043,33 @@ pattern CVSSv3_ConfidentialityImpact_IMPACTNONE = CVSSv3_ConfidentialityImpact "
   CVSSv3_ConfidentialityImpact_IMPACTHIGH,
   CVSSv3_ConfidentialityImpact_IMPACTLOW,
   CVSSv3_ConfidentialityImpact_IMPACTNONE,
-  CVSSv3_ConfidentialityImpact
-  #-}
+  CVSSv3_ConfidentialityImpact #-}
 
-newtype CVSSv3_IntegrityImpact = CVSSv3_IntegrityImpact {fromCVSSv3_IntegrityImpact :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_IntegrityImpact = CVSSv3_IntegrityImpact { fromCVSSv3_IntegrityImpact :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_IntegrityImpact_IMPACTUNSPECIFIED :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTUNSPECIFIED = CVSSv3_IntegrityImpact "IMPACT_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_IntegrityImpact_IMPACTHIGH :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTHIGH = CVSSv3_IntegrityImpact "IMPACT_HIGH"
 
--- |
+-- | 
 pattern CVSSv3_IntegrityImpact_IMPACTLOW :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTLOW = CVSSv3_IntegrityImpact "IMPACT_LOW"
 
--- |
+-- | 
 pattern CVSSv3_IntegrityImpact_IMPACTNONE :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTNONE = CVSSv3_IntegrityImpact "IMPACT_NONE"
 
@@ -1039,34 +1078,33 @@ pattern CVSSv3_IntegrityImpact_IMPACTNONE = CVSSv3_IntegrityImpact "IMPACT_NONE"
   CVSSv3_IntegrityImpact_IMPACTHIGH,
   CVSSv3_IntegrityImpact_IMPACTLOW,
   CVSSv3_IntegrityImpact_IMPACTNONE,
-  CVSSv3_IntegrityImpact
-  #-}
+  CVSSv3_IntegrityImpact #-}
 
-newtype CVSSv3_PrivilegesRequired = CVSSv3_PrivilegesRequired {fromCVSSv3_PrivilegesRequired :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_PrivilegesRequired = CVSSv3_PrivilegesRequired { fromCVSSv3_PrivilegesRequired :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDNONE :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDNONE = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_NONE"
 
--- |
+-- | 
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDLOW :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDLOW = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_LOW"
 
--- |
+-- | 
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDHIGH :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDHIGH = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_HIGH"
 
@@ -1075,30 +1113,29 @@ pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDHIGH = CVSSv3_PrivilegesRequ
   CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDNONE,
   CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDLOW,
   CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDHIGH,
-  CVSSv3_PrivilegesRequired
-  #-}
+  CVSSv3_PrivilegesRequired #-}
 
-newtype CVSSv3_Scope = CVSSv3_Scope {fromCVSSv3_Scope :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_Scope = CVSSv3_Scope { fromCVSSv3_Scope :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_Scope_SCOPEUNSPECIFIED :: CVSSv3_Scope
 pattern CVSSv3_Scope_SCOPEUNSPECIFIED = CVSSv3_Scope "SCOPE_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_Scope_SCOPEUNCHANGED :: CVSSv3_Scope
 pattern CVSSv3_Scope_SCOPEUNCHANGED = CVSSv3_Scope "SCOPE_UNCHANGED"
 
--- |
+-- | 
 pattern CVSSv3_Scope_SCOPECHANGED :: CVSSv3_Scope
 pattern CVSSv3_Scope_SCOPECHANGED = CVSSv3_Scope "SCOPE_CHANGED"
 
@@ -1106,30 +1143,29 @@ pattern CVSSv3_Scope_SCOPECHANGED = CVSSv3_Scope "SCOPE_CHANGED"
   CVSSv3_Scope_SCOPEUNSPECIFIED,
   CVSSv3_Scope_SCOPEUNCHANGED,
   CVSSv3_Scope_SCOPECHANGED,
-  CVSSv3_Scope
-  #-}
+  CVSSv3_Scope #-}
 
-newtype CVSSv3_UserInteraction = CVSSv3_UserInteraction {fromCVSSv3_UserInteraction :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CVSSv3_UserInteraction = CVSSv3_UserInteraction { fromCVSSv3_UserInteraction :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CVSSv3_UserInteraction_USERINTERACTIONUNSPECIFIED :: CVSSv3_UserInteraction
 pattern CVSSv3_UserInteraction_USERINTERACTIONUNSPECIFIED = CVSSv3_UserInteraction "USER_INTERACTION_UNSPECIFIED"
 
--- |
+-- | 
 pattern CVSSv3_UserInteraction_USERINTERACTIONNONE :: CVSSv3_UserInteraction
 pattern CVSSv3_UserInteraction_USERINTERACTIONNONE = CVSSv3_UserInteraction "USER_INTERACTION_NONE"
 
--- |
+-- | 
 pattern CVSSv3_UserInteraction_USERINTERACTIONREQUIRED :: CVSSv3_UserInteraction
 pattern CVSSv3_UserInteraction_USERINTERACTIONREQUIRED = CVSSv3_UserInteraction "USER_INTERACTION_REQUIRED"
 
@@ -1137,20 +1173,19 @@ pattern CVSSv3_UserInteraction_USERINTERACTIONREQUIRED = CVSSv3_UserInteraction 
   CVSSv3_UserInteraction_USERINTERACTIONUNSPECIFIED,
   CVSSv3_UserInteraction_USERINTERACTIONNONE,
   CVSSv3_UserInteraction_USERINTERACTIONREQUIRED,
-  CVSSv3_UserInteraction
-  #-}
+  CVSSv3_UserInteraction #-}
 
-newtype CisBenchmark_Severity = CisBenchmark_Severity {fromCisBenchmark_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CisBenchmark_Severity = CisBenchmark_Severity { fromCisBenchmark_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern CisBenchmark_Severity_SEVERITYUNSPECIFIED :: CisBenchmark_Severity
@@ -1183,21 +1218,20 @@ pattern CisBenchmark_Severity_Critical = CisBenchmark_Severity "CRITICAL"
   CisBenchmark_Severity_Medium,
   CisBenchmark_Severity_High,
   CisBenchmark_Severity_Critical,
-  CisBenchmark_Severity
-  #-}
+  CisBenchmark_Severity #-}
 
 -- | Required. The decision of this manual approval.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision = ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision {fromContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision = ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision { fromContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default enum type. This should not be used.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_DECISIONUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision
@@ -1215,21 +1249,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_Rejec
   ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_DECISIONUNSPECIFIED,
   ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_Approved,
   ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision_Rejected,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult_Decision #-}
 
 -- | Output only. Status of the build.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status = ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status {fromContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status = ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status { fromContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Status of the build is unknown.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_STATUSUNKNOWN :: ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status
@@ -1282,21 +1315,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_Expired = Contai
   ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_Timeout,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_Cancelled,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status_Expired,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Status #-}
 
 -- | Output only. The state of this build\'s approval.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default enum type. This should not be used.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_STATEUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State
@@ -1324,21 +1356,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_Cancelled
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_Approved,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_Rejected,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State_Cancelled,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildApproval_State #-}
 
 -- | The name of the failure.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Type unspecified
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_FAILURETYPEUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type
@@ -1376,21 +1407,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_FETCHSO
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_LOGGINGFAILURE,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_USERBUILDSTEP,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_FETCHSOURCEFAILED,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type #-}
 
 -- | Option to define build log streaming behavior to Google Cloud Storage.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Service may automatically determine build log streaming behavior.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMDEFAULT :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
@@ -1408,21 +1438,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOpti
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMDEFAULT,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMON,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMOFF,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption #-}
 
 -- | Option to specify the logging mode, which determines if and where build logs are stored.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The service determines the logging mode. The default is @LEGACY@. Do not rely on the default logging behavior as it may change in the future.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_LOGGINGUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging
@@ -1455,21 +1484,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_None = C
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_STACKDRIVERONLY,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_CLOUDLOGGINGONLY,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging_None,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_Logging #-}
 
 -- | Compute Engine machine type on which to run the build.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Standard machine type.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_Unspecified :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
@@ -1497,21 +1525,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_H
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_N1_HIGHCPU_32,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_8,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_32,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType #-}
 
 -- | Requested verifiability options.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not a verifiable build. (default)
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_NOTVERIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
@@ -1524,20 +1551,19 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyO
 {-# COMPLETE
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_NOTVERIFIED,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_Verified,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption #-}
 
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No hash requested.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
@@ -1555,21 +1581,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenance
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem #-}
 
 -- | Option to specify behavior when there is an error in the substitution checks. NOTE: this is always set to ALLOW_LOOSE for triggered builds and cannot be overridden in the build configuration file.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Fails the build if error in substitutions checks, like missing a substitution in the template or in the map.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption_MUSTMATCH :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption
@@ -1582,21 +1607,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOpti
 {-# COMPLETE
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption_MUSTMATCH,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption_ALLOWLOOSE,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption #-}
 
 -- | Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Status of the build is unknown.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_STATUSUNKNOWN :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status
@@ -1649,21 +1673,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_Expired = Co
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_Timeout,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_Cancelled,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status_Expired,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status #-}
 
 -- | The priority for this warning.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority { fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Should not be used.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_PRIORITYUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority
@@ -1686,21 +1709,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_Alert =
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_Info,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_Warning,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority_Alert,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildWarning_Priority #-}
 
 -- | The type of hash that was performed.
-newtype ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type {fromContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type { fromContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No hash requested.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None :: ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
@@ -1718,21 +1740,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5 = Containeranal
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5,
-  ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
-  #-}
+  ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type #-}
 
 -- | Platform hosting this deployment.
-newtype DeploymentOccurrence_Platform = DeploymentOccurrence_Platform {fromDeploymentOccurrence_Platform :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DeploymentOccurrence_Platform = DeploymentOccurrence_Platform { fromDeploymentOccurrence_Platform :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern DeploymentOccurrence_Platform_PLATFORMUNSPECIFIED :: DeploymentOccurrence_Platform
@@ -1755,21 +1776,20 @@ pattern DeploymentOccurrence_Platform_Custom = DeploymentOccurrence_Platform "CU
   DeploymentOccurrence_Platform_Gke,
   DeploymentOccurrence_Platform_Flex,
   DeploymentOccurrence_Platform_Custom,
-  DeploymentOccurrence_Platform
-  #-}
+  DeploymentOccurrence_Platform #-}
 
 -- | Required. Immutable. The kind of analysis that is handled by this discovery.
-newtype DiscoveryNote_AnalysisKind = DiscoveryNote_AnalysisKind {fromDiscoveryNote_AnalysisKind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DiscoveryNote_AnalysisKind = DiscoveryNote_AnalysisKind { fromDiscoveryNote_AnalysisKind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern DiscoveryNote_AnalysisKind_NOTEKINDUNSPECIFIED :: DiscoveryNote_AnalysisKind
@@ -1827,21 +1847,20 @@ pattern DiscoveryNote_AnalysisKind_DSSEATTESTATION = DiscoveryNote_AnalysisKind 
   DiscoveryNote_AnalysisKind_Upgrade,
   DiscoveryNote_AnalysisKind_Compliance,
   DiscoveryNote_AnalysisKind_DSSEATTESTATION,
-  DiscoveryNote_AnalysisKind
-  #-}
+  DiscoveryNote_AnalysisKind #-}
 
 -- | The status of discovery for the resource.
-newtype DiscoveryOccurrence_AnalysisStatus = DiscoveryOccurrence_AnalysisStatus {fromDiscoveryOccurrence_AnalysisStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DiscoveryOccurrence_AnalysisStatus = DiscoveryOccurrence_AnalysisStatus { fromDiscoveryOccurrence_AnalysisStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern DiscoveryOccurrence_AnalysisStatus_ANALYSISSTATUSUNSPECIFIED :: DiscoveryOccurrence_AnalysisStatus
@@ -1874,21 +1893,20 @@ pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDUNSUPPORTED = DiscoveryOccurr
   DiscoveryOccurrence_AnalysisStatus_FINISHEDSUCCESS,
   DiscoveryOccurrence_AnalysisStatus_FINISHEDFAILED,
   DiscoveryOccurrence_AnalysisStatus_FINISHEDUNSUPPORTED,
-  DiscoveryOccurrence_AnalysisStatus
-  #-}
+  DiscoveryOccurrence_AnalysisStatus #-}
 
 -- | Whether the resource is continuously analyzed.
-newtype DiscoveryOccurrence_ContinuousAnalysis = DiscoveryOccurrence_ContinuousAnalysis {fromDiscoveryOccurrence_ContinuousAnalysis :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DiscoveryOccurrence_ContinuousAnalysis = DiscoveryOccurrence_ContinuousAnalysis { fromDiscoveryOccurrence_ContinuousAnalysis :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern DiscoveryOccurrence_ContinuousAnalysis_CONTINUOUSANALYSISUNSPECIFIED :: DiscoveryOccurrence_ContinuousAnalysis
@@ -1906,21 +1924,20 @@ pattern DiscoveryOccurrence_ContinuousAnalysis_Inactive = DiscoveryOccurrence_Co
   DiscoveryOccurrence_ContinuousAnalysis_CONTINUOUSANALYSISUNSPECIFIED,
   DiscoveryOccurrence_ContinuousAnalysis_Active,
   DiscoveryOccurrence_ContinuousAnalysis_Inactive,
-  DiscoveryOccurrence_ContinuousAnalysis
-  #-}
+  DiscoveryOccurrence_ContinuousAnalysis #-}
 
 -- | The CPU architecture for which packages in this distribution channel were built.
-newtype Distribution_Architecture = Distribution_Architecture {fromDistribution_Architecture :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Distribution_Architecture = Distribution_Architecture { fromDistribution_Architecture :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown architecture.
 pattern Distribution_Architecture_ARCHITECTUREUNSPECIFIED :: Distribution_Architecture
@@ -1938,21 +1955,20 @@ pattern Distribution_Architecture_X64 = Distribution_Architecture "X64"
   Distribution_Architecture_ARCHITECTUREUNSPECIFIED,
   Distribution_Architecture_X86,
   Distribution_Architecture_X64,
-  Distribution_Architecture
-  #-}
+  Distribution_Architecture #-}
 
 -- | The severity for this count. SEVERITY_UNSPECIFIED indicates total across all severities.
-newtype FixableTotalByDigest_Severity = FixableTotalByDigest_Severity {fromFixableTotalByDigest_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FixableTotalByDigest_Severity = FixableTotalByDigest_Severity { fromFixableTotalByDigest_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern FixableTotalByDigest_Severity_SEVERITYUNSPECIFIED :: FixableTotalByDigest_Severity
@@ -1985,21 +2001,20 @@ pattern FixableTotalByDigest_Severity_Critical = FixableTotalByDigest_Severity "
   FixableTotalByDigest_Severity_Medium,
   FixableTotalByDigest_Severity_High,
   FixableTotalByDigest_Severity_Critical,
-  FixableTotalByDigest_Severity
-  #-}
+  FixableTotalByDigest_Severity #-}
 
 -- | Output only. The type of analysis. This field can be used as a filter in list requests.
-newtype Note_Kind = Note_Kind {fromNote_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Note_Kind = Note_Kind { fromNote_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern Note_Kind_NOTEKINDUNSPECIFIED :: Note_Kind
@@ -2057,21 +2072,20 @@ pattern Note_Kind_DSSEATTESTATION = Note_Kind "DSSE_ATTESTATION"
   Note_Kind_Upgrade,
   Note_Kind_Compliance,
   Note_Kind_DSSEATTESTATION,
-  Note_Kind
-  #-}
+  Note_Kind #-}
 
 -- | Output only. This explicitly denotes which of the occurrence details are specified. This field can be used as a filter in list requests.
-newtype Occurrence_Kind = Occurrence_Kind {fromOccurrence_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Occurrence_Kind = Occurrence_Kind { fromOccurrence_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is unused.
 pattern Occurrence_Kind_NOTEKINDUNSPECIFIED :: Occurrence_Kind
@@ -2129,21 +2143,20 @@ pattern Occurrence_Kind_DSSEATTESTATION = Occurrence_Kind "DSSE_ATTESTATION"
   Occurrence_Kind_Upgrade,
   Occurrence_Kind_Compliance,
   Occurrence_Kind_DSSEATTESTATION,
-  Occurrence_Kind
-  #-}
+  Occurrence_Kind #-}
 
 -- | Output only. The distro or language system assigned severity for this vulnerability when that is available and note provider assigned severity when it is not available.
-newtype PackageIssue_EffectiveSeverity = PackageIssue_EffectiveSeverity {fromPackageIssue_EffectiveSeverity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PackageIssue_EffectiveSeverity = PackageIssue_EffectiveSeverity { fromPackageIssue_EffectiveSeverity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern PackageIssue_EffectiveSeverity_SEVERITYUNSPECIFIED :: PackageIssue_EffectiveSeverity
@@ -2176,21 +2189,20 @@ pattern PackageIssue_EffectiveSeverity_Critical = PackageIssue_EffectiveSeverity
   PackageIssue_EffectiveSeverity_Medium,
   PackageIssue_EffectiveSeverity_High,
   PackageIssue_EffectiveSeverity_Critical,
-  PackageIssue_EffectiveSeverity
-  #-}
+  PackageIssue_EffectiveSeverity #-}
 
 -- | Required. Distinguishes between sentinel MIN\/MAX versions and normal versions.
-newtype Version_Kind = Version_Kind {fromVersion_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Version_Kind = Version_Kind { fromVersion_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern Version_Kind_VERSIONKINDUNSPECIFIED :: Version_Kind
@@ -2213,21 +2225,20 @@ pattern Version_Kind_Maximum = Version_Kind "MAXIMUM"
   Version_Kind_Normal,
   Version_Kind_Minimum,
   Version_Kind_Maximum,
-  Version_Kind
-  #-}
+  Version_Kind #-}
 
 -- | The note provider assigned severity of this vulnerability.
-newtype VulnerabilityNote_Severity = VulnerabilityNote_Severity {fromVulnerabilityNote_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VulnerabilityNote_Severity = VulnerabilityNote_Severity { fromVulnerabilityNote_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern VulnerabilityNote_Severity_SEVERITYUNSPECIFIED :: VulnerabilityNote_Severity
@@ -2260,21 +2271,20 @@ pattern VulnerabilityNote_Severity_Critical = VulnerabilityNote_Severity "CRITIC
   VulnerabilityNote_Severity_Medium,
   VulnerabilityNote_Severity_High,
   VulnerabilityNote_Severity_Critical,
-  VulnerabilityNote_Severity
-  #-}
+  VulnerabilityNote_Severity #-}
 
 -- | The distro assigned severity for this vulnerability when it is available, otherwise this is the note provider assigned severity. When there are multiple PackageIssues for this vulnerability, they can have different effective severities because some might be provided by the distro while others are provided by the language ecosystem for a language pack. For this reason, it is advised to use the effective severity on the PackageIssue level. In the case where multiple PackageIssues have differing effective severities, this field should be the highest severity for any of the PackageIssues.
-newtype VulnerabilityOccurrence_EffectiveSeverity = VulnerabilityOccurrence_EffectiveSeverity {fromVulnerabilityOccurrence_EffectiveSeverity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VulnerabilityOccurrence_EffectiveSeverity = VulnerabilityOccurrence_EffectiveSeverity { fromVulnerabilityOccurrence_EffectiveSeverity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern VulnerabilityOccurrence_EffectiveSeverity_SEVERITYUNSPECIFIED :: VulnerabilityOccurrence_EffectiveSeverity
@@ -2307,21 +2317,20 @@ pattern VulnerabilityOccurrence_EffectiveSeverity_Critical = VulnerabilityOccurr
   VulnerabilityOccurrence_EffectiveSeverity_Medium,
   VulnerabilityOccurrence_EffectiveSeverity_High,
   VulnerabilityOccurrence_EffectiveSeverity_Critical,
-  VulnerabilityOccurrence_EffectiveSeverity
-  #-}
+  VulnerabilityOccurrence_EffectiveSeverity #-}
 
 -- | Output only. The note provider assigned severity of this vulnerability.
-newtype VulnerabilityOccurrence_Severity = VulnerabilityOccurrence_Severity {fromVulnerabilityOccurrence_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VulnerabilityOccurrence_Severity = VulnerabilityOccurrence_Severity { fromVulnerabilityOccurrence_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern VulnerabilityOccurrence_Severity_SEVERITYUNSPECIFIED :: VulnerabilityOccurrence_Severity
@@ -2354,5 +2363,4 @@ pattern VulnerabilityOccurrence_Severity_Critical = VulnerabilityOccurrence_Seve
   VulnerabilityOccurrence_Severity_Medium,
   VulnerabilityOccurrence_Severity_High,
   VulnerabilityOccurrence_Severity_Critical,
-  VulnerabilityOccurrence_Severity
-  #-}
+  VulnerabilityOccurrence_Severity #-}

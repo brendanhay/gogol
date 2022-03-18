@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,89 +36,82 @@
 --
 -- /See:/ <https://cloud.google.com/container-analysis/api/reference/rest/ Container Analysis API Reference> for @containeranalysis.projects.notes.delete@.
 module Gogol.ContainerAnalysis.Projects.Notes.Delete
-  ( -- * Resource
-    ContainerAnalysisProjectsNotesDeleteResource,
+    (
+    -- * Resource
+      ContainerAnalysisProjectsNotesDeleteResource
 
     -- ** Constructing a Request
-    newContainerAnalysisProjectsNotesDelete,
-    ContainerAnalysisProjectsNotesDelete,
-  )
-where
+    , newContainerAnalysisProjectsNotesDelete
+    , ContainerAnalysisProjectsNotesDelete
+    ) where
 
-import Gogol.ContainerAnalysis.Types
 import qualified Gogol.Prelude as Core
+import Gogol.ContainerAnalysis.Types
 
 -- | A resource alias for @containeranalysis.projects.notes.delete@ method which the
 -- 'ContainerAnalysisProjectsNotesDelete' request conforms to.
 type ContainerAnalysisProjectsNotesDeleteResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Delete '[Core.JSON] Empty
 
 -- | Deletes the specified note.
 --
 -- /See:/ 'newContainerAnalysisProjectsNotesDelete' smart constructor.
 data ContainerAnalysisProjectsNotesDelete = ContainerAnalysisProjectsNotesDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the note in the form of @projects\/[PROVIDER_ID]\/notes\/[NOTE_ID]@.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The name of the note in the form of @projects\/[PROVIDER_ID]\/notes\/[NOTE_ID]@.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ContainerAnalysisProjectsNotesDelete' with the minimum fields required to make a request.
-newContainerAnalysisProjectsNotesDelete ::
-  -- |  Required. The name of the note in the form of @projects\/[PROVIDER_ID]\/notes\/[NOTE_ID]@. See 'name'.
-  Core.Text ->
-  ContainerAnalysisProjectsNotesDelete
+newContainerAnalysisProjectsNotesDelete 
+    ::  Core.Text
+       -- ^  Required. The name of the note in the form of @projects\/[PROVIDER_ID]\/notes\/[NOTE_ID]@. See 'name'.
+    -> ContainerAnalysisProjectsNotesDelete
 newContainerAnalysisProjectsNotesDelete name =
   ContainerAnalysisProjectsNotesDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContainerAnalysisProjectsNotesDelete
-  where
-  type Rs ContainerAnalysisProjectsNotesDelete = Empty
-  type
-    Scopes ContainerAnalysisProjectsNotesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    ContainerAnalysisProjectsNotesDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        containerAnalysisService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerAnalysisProjectsNotesDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           ContainerAnalysisProjectsNotesDelete
+         where
+        type Rs ContainerAnalysisProjectsNotesDelete = Empty
+        type Scopes ContainerAnalysisProjectsNotesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          ContainerAnalysisProjectsNotesDelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              containerAnalysisService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           ContainerAnalysisProjectsNotesDeleteResource)
+                      Core.mempty
+
