@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DigitalAssetLinks.Statements.List
+-- Module      : Gogol.DigitalAssetLinks.Statements.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves a list of all statements from a given source that match the specified target and statement string. The API guarantees that all statements with secure source assets, such as HTTPS websites or Android apps, have been made in a secure way by the owner of those assets, as described in the <https://github.com/google/digitalassetlinks/blob/master/well-known/details.md Digital Asset Links technical design specification>. Specifically, you should consider that for insecure websites (that is, where the URL starts with @http:\/\/@ instead of @https:\/\/@), this guarantee cannot be made. The @List@ command is most useful in cases where the API client wants to know all the ways in which two assets are related, or enumerate all the relationships from a particular source asset. Example: a feature that helps users navigate to related items. When a mobile app is running on a device, the feature would make it easy to navigate to the corresponding web site or Google+ profile.
 --
 -- /See:/ <https://developers.google.com/digital-asset-links/ Digital Asset Links API Reference> for @digitalassetlinks.statements.list@.
-module Network.Google.DigitalAssetLinks.Statements.List
+module Gogol.DigitalAssetLinks.Statements.List
   ( -- * Resource
     DigitalAssetLinksStatementsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DigitalAssetLinks.Statements.List
   )
 where
 
-import Network.Google.DigitalAssetLinks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DigitalAssetLinks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @digitalassetlinks.statements.list@ method which the
 -- 'DigitalAssetLinksStatementsList' request conforms to.
