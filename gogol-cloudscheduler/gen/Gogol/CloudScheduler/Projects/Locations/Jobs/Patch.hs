@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudScheduler.Projects.Locations.Jobs.Patch
+-- Module      : Gogol.CloudScheduler.Projects.Locations.Jobs.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates a job. If successful, the updated Job is returned. If the job does not exist, @NOT_FOUND@ is returned. If UpdateJob does not successfully return, it is possible for the job to be in an Job.State.UPDATE_FAILED state. A job in this state may not be executed. If this happens, retry the UpdateJob request until a successful response is received.
 --
 -- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.jobs.patch@.
-module Network.Google.CloudScheduler.Projects.Locations.Jobs.Patch
+module Gogol.CloudScheduler.Projects.Locations.Jobs.Patch
   ( -- * Resource
     CloudSchedulerProjectsLocationsJobsPatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudScheduler.Projects.Locations.Jobs.Patch
   )
 where
 
-import Network.Google.CloudScheduler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudScheduler.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.patch@ method which the
 -- 'CloudSchedulerProjectsLocationsJobsPatch' request conforms to.

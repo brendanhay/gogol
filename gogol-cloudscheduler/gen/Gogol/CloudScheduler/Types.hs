@@ -19,74 +19,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudScheduler
+-- Module      : Gogol.CloudScheduler.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Creates and manages jobs run on a regular recurring schedule.
---
--- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference>
-module Network.Google.CloudScheduler
+module Gogol.CloudScheduler.Types
   ( -- * Configuration
     cloudSchedulerService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
-
-    -- * Resources
-
-    -- ** cloudscheduler.projects.locations.get
-    CloudSchedulerProjectsLocationsGetResource,
-    newCloudSchedulerProjectsLocationsGet,
-    CloudSchedulerProjectsLocationsGet,
-
-    -- ** cloudscheduler.projects.locations.jobs.create
-    CloudSchedulerProjectsLocationsJobsCreateResource,
-    newCloudSchedulerProjectsLocationsJobsCreate,
-    CloudSchedulerProjectsLocationsJobsCreate,
-
-    -- ** cloudscheduler.projects.locations.jobs.delete
-    CloudSchedulerProjectsLocationsJobsDeleteResource,
-    newCloudSchedulerProjectsLocationsJobsDelete,
-    CloudSchedulerProjectsLocationsJobsDelete,
-
-    -- ** cloudscheduler.projects.locations.jobs.get
-    CloudSchedulerProjectsLocationsJobsGetResource,
-    newCloudSchedulerProjectsLocationsJobsGet,
-    CloudSchedulerProjectsLocationsJobsGet,
-
-    -- ** cloudscheduler.projects.locations.jobs.list
-    CloudSchedulerProjectsLocationsJobsListResource,
-    newCloudSchedulerProjectsLocationsJobsList,
-    CloudSchedulerProjectsLocationsJobsList,
-
-    -- ** cloudscheduler.projects.locations.jobs.patch
-    CloudSchedulerProjectsLocationsJobsPatchResource,
-    newCloudSchedulerProjectsLocationsJobsPatch,
-    CloudSchedulerProjectsLocationsJobsPatch,
-
-    -- ** cloudscheduler.projects.locations.jobs.pause
-    CloudSchedulerProjectsLocationsJobsPauseResource,
-    newCloudSchedulerProjectsLocationsJobsPause,
-    CloudSchedulerProjectsLocationsJobsPause,
-
-    -- ** cloudscheduler.projects.locations.jobs.resume
-    CloudSchedulerProjectsLocationsJobsResumeResource,
-    newCloudSchedulerProjectsLocationsJobsResume,
-    CloudSchedulerProjectsLocationsJobsResume,
-
-    -- ** cloudscheduler.projects.locations.jobs.run
-    CloudSchedulerProjectsLocationsJobsRunResource,
-    newCloudSchedulerProjectsLocationsJobsRun,
-    CloudSchedulerProjectsLocationsJobsRun,
-
-    -- ** cloudscheduler.projects.locations.list
-    CloudSchedulerProjectsLocationsListResource,
-    newCloudSchedulerProjectsLocationsList,
-    CloudSchedulerProjectsLocationsList,
 
     -- * Types
 
@@ -200,14 +144,17 @@ module Network.Google.CloudScheduler
   )
 where
 
-import Network.Google.CloudScheduler.Projects.Locations.Get
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.Create
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.Delete
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.Get
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.List
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.Patch
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.Pause
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.Resume
-import Network.Google.CloudScheduler.Projects.Locations.Jobs.Run
-import Network.Google.CloudScheduler.Projects.Locations.List
-import Network.Google.CloudScheduler.Types
+import Gogol.CloudScheduler.Internal.Product
+import Gogol.CloudScheduler.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Scheduler API. This contains the host and root path used as a starting point for constructing service requests.
+cloudSchedulerService :: Core.ServiceConfig
+cloudSchedulerService =
+  Core.defaultService
+    (Core.ServiceId "cloudscheduler:v1")
+    "cloudscheduler.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy

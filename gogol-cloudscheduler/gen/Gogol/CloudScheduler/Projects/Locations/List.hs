@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudScheduler.Projects.Locations.List
+-- Module      : Gogol.CloudScheduler.Projects.Locations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists information about the supported locations for this service.
 --
 -- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.list@.
-module Network.Google.CloudScheduler.Projects.Locations.List
+module Gogol.CloudScheduler.Projects.Locations.List
   ( -- * Resource
     CloudSchedulerProjectsLocationsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudScheduler.Projects.Locations.List
   )
 where
 
-import Network.Google.CloudScheduler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudScheduler.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudscheduler.projects.locations.list@ method which the
 -- 'CloudSchedulerProjectsLocationsList' request conforms to.
