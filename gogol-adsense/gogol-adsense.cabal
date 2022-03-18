@@ -39,39 +39,40 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AdSense
-    Network.Google.AdSense.Accounts.Adclients.Adunits.Get
-    Network.Google.AdSense.Accounts.Adclients.Adunits.GetAdcode
-    Network.Google.AdSense.Accounts.Adclients.Adunits.List
-    Network.Google.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
-    Network.Google.AdSense.Accounts.Adclients.Customchannels.Get
-    Network.Google.AdSense.Accounts.Adclients.Customchannels.List
-    Network.Google.AdSense.Accounts.Adclients.Customchannels.ListLinkedAdUnits
-    Network.Google.AdSense.Accounts.Adclients.GetAdcode
-    Network.Google.AdSense.Accounts.Adclients.List
-    Network.Google.AdSense.Accounts.Adclients.Urlchannels.List
-    Network.Google.AdSense.Accounts.Alerts.List
-    Network.Google.AdSense.Accounts.Get
-    Network.Google.AdSense.Accounts.List
-    Network.Google.AdSense.Accounts.ListChildAccounts
-    Network.Google.AdSense.Accounts.Payments.List
-    Network.Google.AdSense.Accounts.Reports.Generate
-    Network.Google.AdSense.Accounts.Reports.GenerateCsv
-    Network.Google.AdSense.Accounts.Reports.Saved.Generate
-    Network.Google.AdSense.Accounts.Reports.Saved.GenerateCsv
-    Network.Google.AdSense.Accounts.Reports.Saved.List
-    Network.Google.AdSense.Accounts.Sites.Get
-    Network.Google.AdSense.Accounts.Sites.List
-    Network.Google.AdSense.Types
+    Gogol.AdSense
+    Gogol.AdSense.Accounts.Adclients.Adunits.Get
+    Gogol.AdSense.Accounts.Adclients.Adunits.GetAdcode
+    Gogol.AdSense.Accounts.Adclients.Adunits.List
+    Gogol.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Get
+    Gogol.AdSense.Accounts.Adclients.Customchannels.List
+    Gogol.AdSense.Accounts.Adclients.Customchannels.ListLinkedAdUnits
+    Gogol.AdSense.Accounts.Adclients.GetAdcode
+    Gogol.AdSense.Accounts.Adclients.List
+    Gogol.AdSense.Accounts.Adclients.Urlchannels.List
+    Gogol.AdSense.Accounts.Alerts.List
+    Gogol.AdSense.Accounts.Get
+    Gogol.AdSense.Accounts.List
+    Gogol.AdSense.Accounts.ListChildAccounts
+    Gogol.AdSense.Accounts.Payments.List
+    Gogol.AdSense.Accounts.Reports.Generate
+    Gogol.AdSense.Accounts.Reports.GenerateCsv
+    Gogol.AdSense.Accounts.Reports.Saved.Generate
+    Gogol.AdSense.Accounts.Reports.Saved.GenerateCsv
+    Gogol.AdSense.Accounts.Reports.Saved.List
+    Gogol.AdSense.Accounts.Sites.Get
+    Gogol.AdSense.Accounts.Sites.List
+    Gogol.AdSense.Types
 
   other-modules:
-    Network.Google.AdSense.Internal.Product
-    Network.Google.AdSense.Internal.Sum
+    Gogol.AdSense.Internal.Product
+    Gogol.AdSense.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
