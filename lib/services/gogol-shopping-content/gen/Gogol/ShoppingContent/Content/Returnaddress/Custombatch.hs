@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,14 +30,14 @@
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.returnaddress.custombatch@.
 module Gogol.ShoppingContent.Content.Returnaddress.Custombatch
-    (
-    -- * Resource
-      ContentReturnaddressCustombatchResource
+  ( -- * Resource
+    ContentReturnaddressCustombatchResource,
 
     -- ** Constructing a Request
-    , newContentReturnaddressCustombatch
-    , ContentReturnaddressCustombatch
-    ) where
+    newContentReturnaddressCustombatch,
+    ContentReturnaddressCustombatch,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ShoppingContent.Types
@@ -51,73 +45,81 @@ import Gogol.ShoppingContent.Types
 -- | A resource alias for @content.returnaddress.custombatch@ method which the
 -- 'ContentReturnaddressCustombatch' request conforms to.
 type ContentReturnaddressCustombatchResource =
-     "content" Core.:>
-       "v2.1" Core.:>
-         "returnaddress" Core.:>
-           "batch" Core.:>
-             Core.QueryParam "$.xgafv" Xgafv Core.:>
-               Core.QueryParam "access_token" Core.Text Core.:>
-                 Core.QueryParam "callback" Core.Text Core.:>
-                   Core.QueryParam "uploadType" Core.Text Core.:>
-                     Core.QueryParam "upload_protocol" Core.Text Core.:>
-                       Core.QueryParam "alt" Core.AltJSON Core.:>
-                         Core.ReqBody '[Core.JSON]
-                           ReturnaddressCustomBatchRequest
-                           Core.:>
-                           Core.Post '[Core.JSON]
-                             ReturnaddressCustomBatchResponse
+  "content"
+    Core.:> "v2.1"
+    Core.:> "returnaddress"
+    Core.:> "batch"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              ReturnaddressCustomBatchRequest
+    Core.:> Core.Post
+              '[Core.JSON]
+              ReturnaddressCustomBatchResponse
 
 -- | Batches multiple return address related calls in a single request.
 --
 -- /See:/ 'newContentReturnaddressCustombatch' smart constructor.
 data ContentReturnaddressCustombatch = ContentReturnaddressCustombatch
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: ReturnaddressCustomBatchRequest
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: ReturnaddressCustomBatchRequest,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ContentReturnaddressCustombatch' with the minimum fields required to make a request.
-newContentReturnaddressCustombatch 
-    ::  ReturnaddressCustomBatchRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> ContentReturnaddressCustombatch
+newContentReturnaddressCustombatch ::
+  -- |  Multipart request metadata. See 'payload'.
+  ReturnaddressCustomBatchRequest ->
+  ContentReturnaddressCustombatch
 newContentReturnaddressCustombatch payload =
   ContentReturnaddressCustombatch
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           ContentReturnaddressCustombatch
-         where
-        type Rs ContentReturnaddressCustombatch =
-             ReturnaddressCustomBatchResponse
-        type Scopes ContentReturnaddressCustombatch =
-             '["https://www.googleapis.com/auth/content"]
-        requestClient ContentReturnaddressCustombatch{..}
-          = go xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              shoppingContentService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy ContentReturnaddressCustombatchResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    ContentReturnaddressCustombatch
+  where
+  type
+    Rs ContentReturnaddressCustombatch =
+      ReturnaddressCustomBatchResponse
+  type
+    Scopes ContentReturnaddressCustombatch =
+      '["https://www.googleapis.com/auth/content"]
+  requestClient ContentReturnaddressCustombatch {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      shoppingContentService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContentReturnaddressCustombatchResource
+          )
+          Core.mempty
