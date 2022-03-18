@@ -1,165 +1,174 @@
-name:                  gogol-admin-directory
-version:               0.5.0
-synopsis:              Google Admin SDK SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-admin-directory
+version:            0.5.0
+synopsis:           Google Admin SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Admin SDK lets administrators of enterprise domains to view and manage
-    resources like user, groups etc. It also provides audit and usage
-    reports of domain.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @directory_v1@
-    of the API.
+  Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @directory_v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-admin-directory
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Directory
-        , Network.Google.Directory.Types
-        , Network.Google.Resource.Admin.Channels.Stop
-        , Network.Google.Resource.Admin.Customer.Devices.Chromeos.Commands.Get
-        , Network.Google.Resource.Admin.Customer.Devices.Chromeos.IssueCommand
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchCreatePrinters
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchDeletePrinters
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Create
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Delete
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Get
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.List
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.ListPrinterModels
-        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Patch
-        , Network.Google.Resource.Directory.Asps.Delete
-        , Network.Google.Resource.Directory.Asps.Get
-        , Network.Google.Resource.Directory.Asps.List
-        , Network.Google.Resource.Directory.ChromeosDevices.Action
-        , Network.Google.Resource.Directory.ChromeosDevices.Get
-        , Network.Google.Resource.Directory.ChromeosDevices.List
-        , Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
-        , Network.Google.Resource.Directory.ChromeosDevices.Patch
-        , Network.Google.Resource.Directory.ChromeosDevices.Update
-        , Network.Google.Resource.Directory.Customers.Get
-        , Network.Google.Resource.Directory.Customers.Patch
-        , Network.Google.Resource.Directory.Customers.Update
-        , Network.Google.Resource.Directory.DomainAliases.Delete
-        , Network.Google.Resource.Directory.DomainAliases.Get
-        , Network.Google.Resource.Directory.DomainAliases.Insert
-        , Network.Google.Resource.Directory.DomainAliases.List
-        , Network.Google.Resource.Directory.Domains.Delete
-        , Network.Google.Resource.Directory.Domains.Get
-        , Network.Google.Resource.Directory.Domains.Insert
-        , Network.Google.Resource.Directory.Domains.List
-        , Network.Google.Resource.Directory.Groups.Aliases.Delete
-        , Network.Google.Resource.Directory.Groups.Aliases.Insert
-        , Network.Google.Resource.Directory.Groups.Aliases.List
-        , Network.Google.Resource.Directory.Groups.Delete
-        , Network.Google.Resource.Directory.Groups.Get
-        , Network.Google.Resource.Directory.Groups.Insert
-        , Network.Google.Resource.Directory.Groups.List
-        , Network.Google.Resource.Directory.Groups.Patch
-        , Network.Google.Resource.Directory.Groups.Update
-        , Network.Google.Resource.Directory.Members.Delete
-        , Network.Google.Resource.Directory.Members.Get
-        , Network.Google.Resource.Directory.Members.HasMember
-        , Network.Google.Resource.Directory.Members.Insert
-        , Network.Google.Resource.Directory.Members.List
-        , Network.Google.Resource.Directory.Members.Patch
-        , Network.Google.Resource.Directory.Members.Update
-        , Network.Google.Resource.Directory.MobileDevices.Action
-        , Network.Google.Resource.Directory.MobileDevices.Delete
-        , Network.Google.Resource.Directory.MobileDevices.Get
-        , Network.Google.Resource.Directory.MobileDevices.List
-        , Network.Google.Resource.Directory.OrgUnits.Delete
-        , Network.Google.Resource.Directory.OrgUnits.Get
-        , Network.Google.Resource.Directory.OrgUnits.Insert
-        , Network.Google.Resource.Directory.OrgUnits.List
-        , Network.Google.Resource.Directory.OrgUnits.Patch
-        , Network.Google.Resource.Directory.OrgUnits.Update
-        , Network.Google.Resource.Directory.Privileges.List
-        , Network.Google.Resource.Directory.Resources.Buildings.Delete
-        , Network.Google.Resource.Directory.Resources.Buildings.Get
-        , Network.Google.Resource.Directory.Resources.Buildings.Insert
-        , Network.Google.Resource.Directory.Resources.Buildings.List
-        , Network.Google.Resource.Directory.Resources.Buildings.Patch
-        , Network.Google.Resource.Directory.Resources.Buildings.Update
-        , Network.Google.Resource.Directory.Resources.Calendars.Delete
-        , Network.Google.Resource.Directory.Resources.Calendars.Get
-        , Network.Google.Resource.Directory.Resources.Calendars.Insert
-        , Network.Google.Resource.Directory.Resources.Calendars.List
-        , Network.Google.Resource.Directory.Resources.Calendars.Patch
-        , Network.Google.Resource.Directory.Resources.Calendars.Update
-        , Network.Google.Resource.Directory.Resources.Features.Delete
-        , Network.Google.Resource.Directory.Resources.Features.Get
-        , Network.Google.Resource.Directory.Resources.Features.Insert
-        , Network.Google.Resource.Directory.Resources.Features.List
-        , Network.Google.Resource.Directory.Resources.Features.Patch
-        , Network.Google.Resource.Directory.Resources.Features.Rename
-        , Network.Google.Resource.Directory.Resources.Features.Update
-        , Network.Google.Resource.Directory.RoleAssignments.Delete
-        , Network.Google.Resource.Directory.RoleAssignments.Get
-        , Network.Google.Resource.Directory.RoleAssignments.Insert
-        , Network.Google.Resource.Directory.RoleAssignments.List
-        , Network.Google.Resource.Directory.Roles.Delete
-        , Network.Google.Resource.Directory.Roles.Get
-        , Network.Google.Resource.Directory.Roles.Insert
-        , Network.Google.Resource.Directory.Roles.List
-        , Network.Google.Resource.Directory.Roles.Patch
-        , Network.Google.Resource.Directory.Roles.Update
-        , Network.Google.Resource.Directory.Schemas.Delete
-        , Network.Google.Resource.Directory.Schemas.Get
-        , Network.Google.Resource.Directory.Schemas.Insert
-        , Network.Google.Resource.Directory.Schemas.List
-        , Network.Google.Resource.Directory.Schemas.Patch
-        , Network.Google.Resource.Directory.Schemas.Update
-        , Network.Google.Resource.Directory.Tokens.Delete
-        , Network.Google.Resource.Directory.Tokens.Get
-        , Network.Google.Resource.Directory.Tokens.List
-        , Network.Google.Resource.Directory.TwoStepVerification.TurnOff
-        , Network.Google.Resource.Directory.Users.Aliases.Delete
-        , Network.Google.Resource.Directory.Users.Aliases.Insert
-        , Network.Google.Resource.Directory.Users.Aliases.List
-        , Network.Google.Resource.Directory.Users.Aliases.Watch
-        , Network.Google.Resource.Directory.Users.Delete
-        , Network.Google.Resource.Directory.Users.Get
-        , Network.Google.Resource.Directory.Users.Insert
-        , Network.Google.Resource.Directory.Users.List
-        , Network.Google.Resource.Directory.Users.MakeAdmin
-        , Network.Google.Resource.Directory.Users.Patch
-        , Network.Google.Resource.Directory.Users.Photos.Delete
-        , Network.Google.Resource.Directory.Users.Photos.Get
-        , Network.Google.Resource.Directory.Users.Photos.Patch
-        , Network.Google.Resource.Directory.Users.Photos.Update
-        , Network.Google.Resource.Directory.Users.SignOut
-        , Network.Google.Resource.Directory.Users.Undelete
-        , Network.Google.Resource.Directory.Users.Update
-        , Network.Google.Resource.Directory.Users.Watch
-        , Network.Google.Resource.Directory.VerificationCodes.Generate
-        , Network.Google.Resource.Directory.VerificationCodes.Invalidate
-        , Network.Google.Resource.Directory.VerificationCodes.List
+  exposed-modules:
+    Network.Google.Admin.Directory
+    Network.Google.Admin.Directory.Admin.Channels.Stop
+    Network.Google.Admin.Directory.Admin.Customer.Devices.Chromeos.Commands.Get
+    Network.Google.Admin.Directory.Admin.Customer.Devices.Chromeos.IssueCommand
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.BatchCreatePrinters
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.BatchDeletePrinters
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.Create
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.Delete
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.Get
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.List
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.ListPrinterModels
+    Network.Google.Admin.Directory.Admin.Customers.Chrome.Printers.Patch
+    Network.Google.Admin.Directory.Asps.Delete
+    Network.Google.Admin.Directory.Asps.Get
+    Network.Google.Admin.Directory.Asps.List
+    Network.Google.Admin.Directory.Chromeosdevices.Action
+    Network.Google.Admin.Directory.Chromeosdevices.Get
+    Network.Google.Admin.Directory.Chromeosdevices.List
+    Network.Google.Admin.Directory.Chromeosdevices.MoveDevicesToOu
+    Network.Google.Admin.Directory.Chromeosdevices.Patch
+    Network.Google.Admin.Directory.Chromeosdevices.Update
+    Network.Google.Admin.Directory.Customers.Get
+    Network.Google.Admin.Directory.Customers.Patch
+    Network.Google.Admin.Directory.Customers.Update
+    Network.Google.Admin.Directory.DomainAliases.Delete
+    Network.Google.Admin.Directory.DomainAliases.Get
+    Network.Google.Admin.Directory.DomainAliases.Insert
+    Network.Google.Admin.Directory.DomainAliases.List
+    Network.Google.Admin.Directory.Domains.Delete
+    Network.Google.Admin.Directory.Domains.Get
+    Network.Google.Admin.Directory.Domains.Insert
+    Network.Google.Admin.Directory.Domains.List
+    Network.Google.Admin.Directory.Groups.Aliases.Delete
+    Network.Google.Admin.Directory.Groups.Aliases.Insert
+    Network.Google.Admin.Directory.Groups.Aliases.List
+    Network.Google.Admin.Directory.Groups.Delete
+    Network.Google.Admin.Directory.Groups.Get
+    Network.Google.Admin.Directory.Groups.Insert
+    Network.Google.Admin.Directory.Groups.List
+    Network.Google.Admin.Directory.Groups.Patch
+    Network.Google.Admin.Directory.Groups.Update
+    Network.Google.Admin.Directory.Members.Delete
+    Network.Google.Admin.Directory.Members.Get
+    Network.Google.Admin.Directory.Members.HasMember
+    Network.Google.Admin.Directory.Members.Insert
+    Network.Google.Admin.Directory.Members.List
+    Network.Google.Admin.Directory.Members.Patch
+    Network.Google.Admin.Directory.Members.Update
+    Network.Google.Admin.Directory.Mobiledevices.Action
+    Network.Google.Admin.Directory.Mobiledevices.Delete
+    Network.Google.Admin.Directory.Mobiledevices.Get
+    Network.Google.Admin.Directory.Mobiledevices.List
+    Network.Google.Admin.Directory.Orgunits.Delete
+    Network.Google.Admin.Directory.Orgunits.Get
+    Network.Google.Admin.Directory.Orgunits.Insert
+    Network.Google.Admin.Directory.Orgunits.List
+    Network.Google.Admin.Directory.Orgunits.Patch
+    Network.Google.Admin.Directory.Orgunits.Update
+    Network.Google.Admin.Directory.Privileges.List
+    Network.Google.Admin.Directory.Resources.Buildings.Delete
+    Network.Google.Admin.Directory.Resources.Buildings.Get
+    Network.Google.Admin.Directory.Resources.Buildings.Insert
+    Network.Google.Admin.Directory.Resources.Buildings.List
+    Network.Google.Admin.Directory.Resources.Buildings.Patch
+    Network.Google.Admin.Directory.Resources.Buildings.Update
+    Network.Google.Admin.Directory.Resources.Calendars.Delete
+    Network.Google.Admin.Directory.Resources.Calendars.Get
+    Network.Google.Admin.Directory.Resources.Calendars.Insert
+    Network.Google.Admin.Directory.Resources.Calendars.List
+    Network.Google.Admin.Directory.Resources.Calendars.Patch
+    Network.Google.Admin.Directory.Resources.Calendars.Update
+    Network.Google.Admin.Directory.Resources.Features.Delete
+    Network.Google.Admin.Directory.Resources.Features.Get
+    Network.Google.Admin.Directory.Resources.Features.Insert
+    Network.Google.Admin.Directory.Resources.Features.List
+    Network.Google.Admin.Directory.Resources.Features.Patch
+    Network.Google.Admin.Directory.Resources.Features.Rename
+    Network.Google.Admin.Directory.Resources.Features.Update
+    Network.Google.Admin.Directory.RoleAssignments.Delete
+    Network.Google.Admin.Directory.RoleAssignments.Get
+    Network.Google.Admin.Directory.RoleAssignments.Insert
+    Network.Google.Admin.Directory.RoleAssignments.List
+    Network.Google.Admin.Directory.Roles.Delete
+    Network.Google.Admin.Directory.Roles.Get
+    Network.Google.Admin.Directory.Roles.Insert
+    Network.Google.Admin.Directory.Roles.List
+    Network.Google.Admin.Directory.Roles.Patch
+    Network.Google.Admin.Directory.Roles.Update
+    Network.Google.Admin.Directory.Schemas.Delete
+    Network.Google.Admin.Directory.Schemas.Get
+    Network.Google.Admin.Directory.Schemas.Insert
+    Network.Google.Admin.Directory.Schemas.List
+    Network.Google.Admin.Directory.Schemas.Patch
+    Network.Google.Admin.Directory.Schemas.Update
+    Network.Google.Admin.Directory.Tokens.Delete
+    Network.Google.Admin.Directory.Tokens.Get
+    Network.Google.Admin.Directory.Tokens.List
+    Network.Google.Admin.Directory.TwoStepVerification.TurnOff
+    Network.Google.Admin.Directory.Types
+    Network.Google.Admin.Directory.Users.Aliases.Delete
+    Network.Google.Admin.Directory.Users.Aliases.Insert
+    Network.Google.Admin.Directory.Users.Aliases.List
+    Network.Google.Admin.Directory.Users.Aliases.Watch
+    Network.Google.Admin.Directory.Users.Delete
+    Network.Google.Admin.Directory.Users.Get
+    Network.Google.Admin.Directory.Users.Insert
+    Network.Google.Admin.Directory.Users.List
+    Network.Google.Admin.Directory.Users.MakeAdmin
+    Network.Google.Admin.Directory.Users.Patch
+    Network.Google.Admin.Directory.Users.Photos.Delete
+    Network.Google.Admin.Directory.Users.Photos.Get
+    Network.Google.Admin.Directory.Users.Photos.Patch
+    Network.Google.Admin.Directory.Users.Photos.Update
+    Network.Google.Admin.Directory.Users.SignOut
+    Network.Google.Admin.Directory.Users.Undelete
+    Network.Google.Admin.Directory.Users.Update
+    Network.Google.Admin.Directory.Users.Watch
+    Network.Google.Admin.Directory.VerificationCodes.Generate
+    Network.Google.Admin.Directory.VerificationCodes.Invalidate
+    Network.Google.Admin.Directory.VerificationCodes.List
 
-    other-modules:
-          Network.Google.Directory.Types.Product
-        , Network.Google.Directory.Types.Sum
+  other-modules:
+    Network.Google.Admin.Directory.Internal.Product
+    Network.Google.Admin.Directory.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
