@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AlertCenter.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AccountSuspensionDetails_AbuseReason
     AccountSuspensionDetails_AbuseReason
-      ( AccountSuspensionDetails_AbuseReason_ACCOUNTSUSPENSIONABUSEREASONUNSPECIFIED,
+      (
+        AccountSuspensionDetails_AbuseReason_ACCOUNTSUSPENSIONABUSEREASONUNSPECIFIED,
         AccountSuspensionDetails_AbuseReason_TOSVIOLATION,
         AccountSuspensionDetails_AbuseReason_Spam,
         AccountSuspensionDetails_AbuseReason_Phishing,
@@ -49,7 +60,8 @@ module Gogol.AlertCenter.Internal.Sum
 
     -- * AccountSuspensionWarning_State
     AccountSuspensionWarning_State
-      ( AccountSuspensionWarning_State_ACCOUNTSUSPENSIONWARNINGSTATEUNSPECIFIED,
+      (
+        AccountSuspensionWarning_State_ACCOUNTSUSPENSIONWARNINGSTATEUNSPECIFIED,
         AccountSuspensionWarning_State_Warning,
         AccountSuspensionWarning_State_Suspended,
         AccountSuspensionWarning_State_APPEALAPPROVED,
@@ -59,7 +71,8 @@ module Gogol.AlertCenter.Internal.Sum
 
     -- * AlertFeedback_Type
     AlertFeedback_Type
-      ( AlertFeedback_Type_ALERTFEEDBACKTYPEUNSPECIFIED,
+      (
+        AlertFeedback_Type_ALERTFEEDBACKTYPEUNSPECIFIED,
         AlertFeedback_Type_NOTUSEFUL,
         AlertFeedback_Type_SOMEWHATUSEFUL,
         AlertFeedback_Type_VERYUSEFUL,
@@ -68,7 +81,8 @@ module Gogol.AlertCenter.Internal.Sum
 
     -- * AppsOutage_Status
     AppsOutage_Status
-      ( AppsOutage_Status_STATUSUNSPECIFIED,
+      (
+        AppsOutage_Status_STATUSUNSPECIFIED,
         AppsOutage_Status_New,
         AppsOutage_Status_Ongoing,
         AppsOutage_Status_Resolved,
@@ -81,14 +95,16 @@ module Gogol.AlertCenter.Internal.Sum
 
     -- * CloudPubsubTopic_PayloadFormat
     CloudPubsubTopic_PayloadFormat
-      ( CloudPubsubTopic_PayloadFormat_PAYLOADFORMATUNSPECIFIED,
+      (
+        CloudPubsubTopic_PayloadFormat_PAYLOADFORMATUNSPECIFIED,
         CloudPubsubTopic_PayloadFormat_Json,
         ..
       ),
 
     -- * MailPhishing_SystemActionType
     MailPhishing_SystemActionType
-      ( MailPhishing_SystemActionType_SYSTEMACTIONTYPEUNSPECIFIED,
+      (
+        MailPhishing_SystemActionType_SYSTEMACTIONTYPEUNSPECIFIED,
         MailPhishing_SystemActionType_NOOPERATION,
         MailPhishing_SystemActionType_REMOVEDFROMINBOX,
         ..
@@ -96,14 +112,16 @@ module Gogol.AlertCenter.Internal.Sum
 
     -- * RuleViolationInfo_DataSource
     RuleViolationInfo_DataSource
-      ( RuleViolationInfo_DataSource_DATASOURCEUNSPECIFIED,
+      (
+        RuleViolationInfo_DataSource_DATASOURCEUNSPECIFIED,
         RuleViolationInfo_DataSource_Drive,
         ..
       ),
 
     -- * RuleViolationInfo_SuppressedActionTypesItem
     RuleViolationInfo_SuppressedActionTypesItem
-      ( RuleViolationInfo_SuppressedActionTypesItem_ACTIONTYPEUNSPECIFIED,
+      (
+        RuleViolationInfo_SuppressedActionTypesItem_ACTIONTYPEUNSPECIFIED,
         RuleViolationInfo_SuppressedActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
         RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING,
         RuleViolationInfo_SuppressedActionTypesItem_Alert,
@@ -114,14 +132,16 @@ module Gogol.AlertCenter.Internal.Sum
 
     -- * RuleViolationInfo_Trigger
     RuleViolationInfo_Trigger
-      ( RuleViolationInfo_Trigger_TRIGGERUNSPECIFIED,
+      (
+        RuleViolationInfo_Trigger_TRIGGERUNSPECIFIED,
         RuleViolationInfo_Trigger_DRIVESHARE,
         ..
       ),
 
     -- * RuleViolationInfo_TriggeredActionTypesItem
     RuleViolationInfo_TriggeredActionTypesItem
-      ( RuleViolationInfo_TriggeredActionTypesItem_ACTIONTYPEUNSPECIFIED,
+      (
+        RuleViolationInfo_TriggeredActionTypesItem_ACTIONTYPEUNSPECIFIED,
         RuleViolationInfo_TriggeredActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
         RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING,
         RuleViolationInfo_TriggeredActionTypesItem_Alert,
@@ -129,23 +149,22 @@ module Gogol.AlertCenter.Internal.Sum
         RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -158,21 +177,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The reason why this account is receiving an account suspension warning.
-newtype AccountSuspensionDetails_AbuseReason = AccountSuspensionDetails_AbuseReason {fromAccountSuspensionDetails_AbuseReason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountSuspensionDetails_AbuseReason = AccountSuspensionDetails_AbuseReason { fromAccountSuspensionDetails_AbuseReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Abuse reason is unspecified.
 pattern AccountSuspensionDetails_AbuseReason_ACCOUNTSUSPENSIONABUSEREASONUNSPECIFIED :: AccountSuspensionDetails_AbuseReason
@@ -220,21 +238,20 @@ pattern AccountSuspensionDetails_AbuseReason_UNWANTEDCONTENT = AccountSuspension
   AccountSuspensionDetails_AbuseReason_NUMBERHARVESTING,
   AccountSuspensionDetails_AbuseReason_PAYMENTSFRAUD,
   AccountSuspensionDetails_AbuseReason_UNWANTEDCONTENT,
-  AccountSuspensionDetails_AbuseReason
-  #-}
+  AccountSuspensionDetails_AbuseReason #-}
 
 -- | Account suspension warning state.
-newtype AccountSuspensionWarning_State = AccountSuspensionWarning_State {fromAccountSuspensionWarning_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountSuspensionWarning_State = AccountSuspensionWarning_State { fromAccountSuspensionWarning_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State is unspecified.
 pattern AccountSuspensionWarning_State_ACCOUNTSUSPENSIONWARNINGSTATEUNSPECIFIED :: AccountSuspensionWarning_State
@@ -262,21 +279,20 @@ pattern AccountSuspensionWarning_State_APPEALSUBMITTED = AccountSuspensionWarnin
   AccountSuspensionWarning_State_Suspended,
   AccountSuspensionWarning_State_APPEALAPPROVED,
   AccountSuspensionWarning_State_APPEALSUBMITTED,
-  AccountSuspensionWarning_State
-  #-}
+  AccountSuspensionWarning_State #-}
 
 -- | Required. The type of the feedback.
-newtype AlertFeedback_Type = AlertFeedback_Type {fromAlertFeedback_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AlertFeedback_Type = AlertFeedback_Type { fromAlertFeedback_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The feedback type is not specified.
 pattern AlertFeedback_Type_ALERTFEEDBACKTYPEUNSPECIFIED :: AlertFeedback_Type
@@ -299,21 +315,20 @@ pattern AlertFeedback_Type_VERYUSEFUL = AlertFeedback_Type "VERY_USEFUL"
   AlertFeedback_Type_NOTUSEFUL,
   AlertFeedback_Type_SOMEWHATUSEFUL,
   AlertFeedback_Type_VERYUSEFUL,
-  AlertFeedback_Type
-  #-}
+  AlertFeedback_Type #-}
 
 -- | Current outage status.
-newtype AppsOutage_Status = AppsOutage_Status {fromAppsOutage_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AppsOutage_Status = AppsOutage_Status { fromAppsOutage_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Status is unspecified.
 pattern AppsOutage_Status_STATUSUNSPECIFIED :: AppsOutage_Status
@@ -356,21 +371,20 @@ pattern AppsOutage_Status_Downgraded = AppsOutage_Status "DOWNGRADED"
   AppsOutage_Status_PARTIALLYRESOLVED,
   AppsOutage_Status_Merged,
   AppsOutage_Status_Downgraded,
-  AppsOutage_Status
-  #-}
+  AppsOutage_Status #-}
 
 -- | Optional. The format of the payload that would be sent. If not specified the format will be JSON.
-newtype CloudPubsubTopic_PayloadFormat = CloudPubsubTopic_PayloadFormat {fromCloudPubsubTopic_PayloadFormat :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CloudPubsubTopic_PayloadFormat = CloudPubsubTopic_PayloadFormat { fromCloudPubsubTopic_PayloadFormat :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Payload format is not specified (will use JSON as default).
 pattern CloudPubsubTopic_PayloadFormat_PAYLOADFORMATUNSPECIFIED :: CloudPubsubTopic_PayloadFormat
@@ -383,21 +397,20 @@ pattern CloudPubsubTopic_PayloadFormat_Json = CloudPubsubTopic_PayloadFormat "JS
 {-# COMPLETE
   CloudPubsubTopic_PayloadFormat_PAYLOADFORMATUNSPECIFIED,
   CloudPubsubTopic_PayloadFormat_Json,
-  CloudPubsubTopic_PayloadFormat
-  #-}
+  CloudPubsubTopic_PayloadFormat #-}
 
 -- | System actions on the messages.
-newtype MailPhishing_SystemActionType = MailPhishing_SystemActionType {fromMailPhishing_SystemActionType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MailPhishing_SystemActionType = MailPhishing_SystemActionType { fromMailPhishing_SystemActionType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | System action is unspecified.
 pattern MailPhishing_SystemActionType_SYSTEMACTIONTYPEUNSPECIFIED :: MailPhishing_SystemActionType
@@ -415,21 +428,20 @@ pattern MailPhishing_SystemActionType_REMOVEDFROMINBOX = MailPhishing_SystemActi
   MailPhishing_SystemActionType_SYSTEMACTIONTYPEUNSPECIFIED,
   MailPhishing_SystemActionType_NOOPERATION,
   MailPhishing_SystemActionType_REMOVEDFROMINBOX,
-  MailPhishing_SystemActionType
-  #-}
+  MailPhishing_SystemActionType #-}
 
 -- | Source of the data.
-newtype RuleViolationInfo_DataSource = RuleViolationInfo_DataSource {fromRuleViolationInfo_DataSource :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RuleViolationInfo_DataSource = RuleViolationInfo_DataSource { fromRuleViolationInfo_DataSource :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Data source is unspecified.
 pattern RuleViolationInfo_DataSource_DATASOURCEUNSPECIFIED :: RuleViolationInfo_DataSource
@@ -442,20 +454,19 @@ pattern RuleViolationInfo_DataSource_Drive = RuleViolationInfo_DataSource "DRIVE
 {-# COMPLETE
   RuleViolationInfo_DataSource_DATASOURCEUNSPECIFIED,
   RuleViolationInfo_DataSource_Drive,
-  RuleViolationInfo_DataSource
-  #-}
+  RuleViolationInfo_DataSource #-}
 
-newtype RuleViolationInfo_SuppressedActionTypesItem = RuleViolationInfo_SuppressedActionTypesItem {fromRuleViolationInfo_SuppressedActionTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RuleViolationInfo_SuppressedActionTypesItem = RuleViolationInfo_SuppressedActionTypesItem { fromRuleViolationInfo_SuppressedActionTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Action type is unspecified.
 pattern RuleViolationInfo_SuppressedActionTypesItem_ACTIONTYPEUNSPECIFIED :: RuleViolationInfo_SuppressedActionTypesItem
@@ -488,21 +499,20 @@ pattern RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE = RuleViolati
   RuleViolationInfo_SuppressedActionTypesItem_Alert,
   RuleViolationInfo_SuppressedActionTypesItem_RULEACTIVATE,
   RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE,
-  RuleViolationInfo_SuppressedActionTypesItem
-  #-}
+  RuleViolationInfo_SuppressedActionTypesItem #-}
 
 -- | Trigger of the rule.
-newtype RuleViolationInfo_Trigger = RuleViolationInfo_Trigger {fromRuleViolationInfo_Trigger :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RuleViolationInfo_Trigger = RuleViolationInfo_Trigger { fromRuleViolationInfo_Trigger :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Trigger is unspecified.
 pattern RuleViolationInfo_Trigger_TRIGGERUNSPECIFIED :: RuleViolationInfo_Trigger
@@ -515,20 +525,19 @@ pattern RuleViolationInfo_Trigger_DRIVESHARE = RuleViolationInfo_Trigger "DRIVE_
 {-# COMPLETE
   RuleViolationInfo_Trigger_TRIGGERUNSPECIFIED,
   RuleViolationInfo_Trigger_DRIVESHARE,
-  RuleViolationInfo_Trigger
-  #-}
+  RuleViolationInfo_Trigger #-}
 
-newtype RuleViolationInfo_TriggeredActionTypesItem = RuleViolationInfo_TriggeredActionTypesItem {fromRuleViolationInfo_TriggeredActionTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RuleViolationInfo_TriggeredActionTypesItem = RuleViolationInfo_TriggeredActionTypesItem { fromRuleViolationInfo_TriggeredActionTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Action type is unspecified.
 pattern RuleViolationInfo_TriggeredActionTypesItem_ACTIONTYPEUNSPECIFIED :: RuleViolationInfo_TriggeredActionTypesItem
@@ -561,5 +570,4 @@ pattern RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE = RuleViolatio
   RuleViolationInfo_TriggeredActionTypesItem_Alert,
   RuleViolationInfo_TriggeredActionTypesItem_RULEACTIVATE,
   RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE,
-  RuleViolationInfo_TriggeredActionTypesItem
-  #-}
+  RuleViolationInfo_TriggeredActionTypesItem #-}
