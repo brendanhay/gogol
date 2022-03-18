@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Scripts.Run
+-- Module      : Gogol.Script.Scripts.Run
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Runs a function in an Apps Script project. The script project must be deployed for use with the Apps Script API and the calling application must share the same Cloud Platform project. This method requires authorization with an OAuth 2.0 token that includes at least one of the scopes listed in the <#authorization-scopes Authorization> section; script projects that do not require authorization cannot be executed through this API. To find the correct scopes to include in the authentication token, open the script project __Overview__ page and scroll down to \"Project OAuth Scopes.\" The error @403, PERMISSION_DENIED: The caller does not have permission@ indicates that the Cloud Platform project used to authorize the request is not the same as the one used by the script.
 --
 -- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.scripts.run@.
-module Network.Google.Script.Scripts.Run
+module Gogol.Script.Scripts.Run
   ( -- * Resource
     ScriptScriptsRunResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Script.Scripts.Run
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
 -- | A resource alias for @script.scripts.run@ method which the
 -- 'ScriptScriptsRun' request conforms to.

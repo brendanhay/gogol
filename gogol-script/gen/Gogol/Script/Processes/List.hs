@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Processes.List
+-- Module      : Gogol.Script.Processes.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List information about processes made by or on behalf of a user, such as process type and current status.
 --
 -- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.processes.list@.
-module Network.Google.Script.Processes.List
+module Gogol.Script.Processes.List
   ( -- * Resource
     ScriptProcessesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Script.Processes.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
 -- | A resource alias for @script.processes.list@ method which the
 -- 'ScriptProcessesList' request conforms to.

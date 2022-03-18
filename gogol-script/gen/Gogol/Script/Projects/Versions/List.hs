@@ -19,57 +19,60 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.UpdateContent
+-- Module      : Gogol.Script.Projects.Versions.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the content of the specified script project. This content is stored as the HEAD version, and is used when the script is executed as a trigger, in the script editor, in add-on preview mode, or as a web app or Apps Script API in development mode. This clears all the existing files in the project.
+-- List the versions of a script project.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.updateContent@.
-module Network.Google.Script.Projects.UpdateContent
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.versions.list@.
+module Gogol.Script.Projects.Versions.List
   ( -- * Resource
-    ScriptProjectsUpdateContentResource,
+    ScriptProjectsVersionsListResource,
 
     -- ** Constructing a Request
-    newScriptProjectsUpdateContent,
-    ScriptProjectsUpdateContent,
+    newScriptProjectsVersionsList,
+    ScriptProjectsVersionsList,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.updateContent@ method which the
--- 'ScriptProjectsUpdateContent' request conforms to.
-type ScriptProjectsUpdateContentResource =
+-- | A resource alias for @script.projects.versions.list@ method which the
+-- 'ScriptProjectsVersionsList' request conforms to.
+type ScriptProjectsVersionsListResource =
   "v1"
     Core.:> "projects"
     Core.:> Core.Capture "scriptId" Core.Text
-    Core.:> "content"
+    Core.:> "versions"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "pageSize" Core.Int32
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Content
-    Core.:> Core.Put '[Core.JSON] Content
+    Core.:> Core.Get '[Core.JSON] ListVersionsResponse
 
--- | Updates the content of the specified script project. This content is stored as the HEAD version, and is used when the script is executed as a trigger, in the script editor, in add-on preview mode, or as a web app or Apps Script API in development mode. This clears all the existing files in the project.
+-- | List the versions of a script project.
 --
--- /See:/ 'newScriptProjectsUpdateContent' smart constructor.
-data ScriptProjectsUpdateContent = ScriptProjectsUpdateContent
+-- /See:/ 'newScriptProjectsVersionsList' smart constructor.
+data ScriptProjectsVersionsList = ScriptProjectsVersionsList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Content,
+    -- | The maximum number of versions on each returned page. Defaults to 50.
+    pageSize :: (Core.Maybe Core.Int32),
+    -- | The token for continuing a previous list request on the next page. This should be set to the value of @nextPageToken@ from a previous response.
+    pageToken :: (Core.Maybe Core.Text),
     -- | The script project\'s Drive ID.
     scriptId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -79,19 +82,18 @@ data ScriptProjectsUpdateContent = ScriptProjectsUpdateContent
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsUpdateContent' with the minimum fields required to make a request.
-newScriptProjectsUpdateContent ::
-  -- |  Multipart request metadata. See 'payload'.
-  Content ->
+-- | Creates a value of 'ScriptProjectsVersionsList' with the minimum fields required to make a request.
+newScriptProjectsVersionsList ::
   -- |  The script project\'s Drive ID. See 'scriptId'.
   Core.Text ->
-  ScriptProjectsUpdateContent
-newScriptProjectsUpdateContent payload scriptId =
-  ScriptProjectsUpdateContent
+  ScriptProjectsVersionsList
+newScriptProjectsVersionsList scriptId =
+  ScriptProjectsVersionsList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      pageSize = Core.Nothing,
+      pageToken = Core.Nothing,
       scriptId = scriptId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -99,27 +101,32 @@ newScriptProjectsUpdateContent payload scriptId =
 
 instance
   Core.GoogleRequest
-    ScriptProjectsUpdateContent
+    ScriptProjectsVersionsList
   where
-  type Rs ScriptProjectsUpdateContent = Content
   type
-    Scopes ScriptProjectsUpdateContent =
-      '["https://www.googleapis.com/auth/script.projects"]
-  requestClient ScriptProjectsUpdateContent {..} =
+    Rs ScriptProjectsVersionsList =
+      ListVersionsResponse
+  type
+    Scopes ScriptProjectsVersionsList =
+      '[ "https://www.googleapis.com/auth/script.projects",
+         "https://www.googleapis.com/auth/script.projects.readonly"
+       ]
+  requestClient ScriptProjectsVersionsList {..} =
     go
       scriptId
       xgafv
       accessToken
       callback
+      pageSize
+      pageToken
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       scriptService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ScriptProjectsUpdateContentResource
+              Core.Proxy ScriptProjectsVersionsListResource
           )
           Core.mempty

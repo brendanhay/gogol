@@ -19,55 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.Get
+-- Module      : Gogol.Script.Projects.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a script project\'s metadata.
+-- Creates a new, empty script project with no script files and a base manifest file.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.get@.
-module Network.Google.Script.Projects.Get
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.create@.
+module Gogol.Script.Projects.Create
   ( -- * Resource
-    ScriptProjectsGetResource,
+    ScriptProjectsCreateResource,
 
     -- ** Constructing a Request
-    newScriptProjectsGet,
-    ScriptProjectsGet,
+    newScriptProjectsCreate,
+    ScriptProjectsCreate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.get@ method which the
--- 'ScriptProjectsGet' request conforms to.
-type ScriptProjectsGetResource =
+-- | A resource alias for @script.projects.create@ method which the
+-- 'ScriptProjectsCreate' request conforms to.
+type ScriptProjectsCreateResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.Capture "scriptId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Project
+    Core.:> Core.ReqBody '[Core.JSON] CreateProjectRequest
+    Core.:> Core.Post '[Core.JSON] Project
 
--- | Gets a script project\'s metadata.
+-- | Creates a new, empty script project with no script files and a base manifest file.
 --
--- /See:/ 'newScriptProjectsGet' smart constructor.
-data ScriptProjectsGet = ScriptProjectsGet
+-- /See:/ 'newScriptProjectsCreate' smart constructor.
+data ScriptProjectsCreate = ScriptProjectsCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The script project\'s Drive ID.
-    scriptId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: CreateProjectRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,40 +75,40 @@ data ScriptProjectsGet = ScriptProjectsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsGet' with the minimum fields required to make a request.
-newScriptProjectsGet ::
-  -- |  The script project\'s Drive ID. See 'scriptId'.
-  Core.Text ->
-  ScriptProjectsGet
-newScriptProjectsGet scriptId =
-  ScriptProjectsGet
+-- | Creates a value of 'ScriptProjectsCreate' with the minimum fields required to make a request.
+newScriptProjectsCreate ::
+  -- |  Multipart request metadata. See 'payload'.
+  CreateProjectRequest ->
+  ScriptProjectsCreate
+newScriptProjectsCreate payload =
+  ScriptProjectsCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      scriptId = scriptId,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest ScriptProjectsGet where
-  type Rs ScriptProjectsGet = Project
+instance Core.GoogleRequest ScriptProjectsCreate where
+  type Rs ScriptProjectsCreate = Project
   type
-    Scopes ScriptProjectsGet =
-      '[ "https://www.googleapis.com/auth/script.projects",
-         "https://www.googleapis.com/auth/script.projects.readonly"
-       ]
-  requestClient ScriptProjectsGet {..} =
+    Scopes ScriptProjectsCreate =
+      '["https://www.googleapis.com/auth/script.projects"]
+  requestClient ScriptProjectsCreate {..} =
     go
-      scriptId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       scriptService
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy ScriptProjectsGetResource)
+          ( Core.Proxy ::
+              Core.Proxy ScriptProjectsCreateResource
+          )
           Core.mempty

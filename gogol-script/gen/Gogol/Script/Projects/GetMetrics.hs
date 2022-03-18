@@ -19,58 +19,65 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.Deployments.Create
+-- Module      : Gogol.Script.Projects.GetMetrics
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a deployment of an Apps Script project.
+-- Get metrics data for scripts, such as number of executions and active users.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.deployments.create@.
-module Network.Google.Script.Projects.Deployments.Create
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.getMetrics@.
+module Gogol.Script.Projects.GetMetrics
   ( -- * Resource
-    ScriptProjectsDeploymentsCreateResource,
+    ScriptProjectsGetMetricsResource,
 
     -- ** Constructing a Request
-    newScriptProjectsDeploymentsCreate,
-    ScriptProjectsDeploymentsCreate,
+    newScriptProjectsGetMetrics,
+    ScriptProjectsGetMetrics,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.deployments.create@ method which the
--- 'ScriptProjectsDeploymentsCreate' request conforms to.
-type ScriptProjectsDeploymentsCreateResource =
+-- | A resource alias for @script.projects.getMetrics@ method which the
+-- 'ScriptProjectsGetMetrics' request conforms to.
+type ScriptProjectsGetMetricsResource =
   "v1"
     Core.:> "projects"
     Core.:> Core.Capture "scriptId" Core.Text
-    Core.:> "deployments"
+    Core.:> "metrics"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "metricsFilter.deploymentId"
+              Core.Text
+    Core.:> Core.QueryParam
+              "metricsGranularity"
+              ProjectsGetMetricsMetricsGranularity
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] DeploymentConfig
-    Core.:> Core.Post '[Core.JSON] Deployment
+    Core.:> Core.Get '[Core.JSON] Metrics
 
--- | Creates a deployment of an Apps Script project.
+-- | Get metrics data for scripts, such as number of executions and active users.
 --
--- /See:/ 'newScriptProjectsDeploymentsCreate' smart constructor.
-data ScriptProjectsDeploymentsCreate = ScriptProjectsDeploymentsCreate
+-- /See:/ 'newScriptProjectsGetMetrics' smart constructor.
+data ScriptProjectsGetMetrics = ScriptProjectsGetMetrics
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: DeploymentConfig,
-    -- | The script project\'s Drive ID.
+    -- | Optional field indicating a specific deployment to retrieve metrics from.
+    metricsFilterDeploymentId :: (Core.Maybe Core.Text),
+    -- | Required field indicating what granularity of metrics are returned.
+    metricsGranularity :: (Core.Maybe ProjectsGetMetricsMetricsGranularity),
+    -- | Required field indicating the script to get metrics for.
     scriptId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -79,47 +86,44 @@ data ScriptProjectsDeploymentsCreate = ScriptProjectsDeploymentsCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsDeploymentsCreate' with the minimum fields required to make a request.
-newScriptProjectsDeploymentsCreate ::
-  -- |  Multipart request metadata. See 'payload'.
-  DeploymentConfig ->
-  -- |  The script project\'s Drive ID. See 'scriptId'.
+-- | Creates a value of 'ScriptProjectsGetMetrics' with the minimum fields required to make a request.
+newScriptProjectsGetMetrics ::
+  -- |  Required field indicating the script to get metrics for. See 'scriptId'.
   Core.Text ->
-  ScriptProjectsDeploymentsCreate
-newScriptProjectsDeploymentsCreate payload scriptId =
-  ScriptProjectsDeploymentsCreate
+  ScriptProjectsGetMetrics
+newScriptProjectsGetMetrics scriptId =
+  ScriptProjectsGetMetrics
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      metricsFilterDeploymentId = Core.Nothing,
+      metricsGranularity = Core.Nothing,
       scriptId = scriptId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ScriptProjectsDeploymentsCreate
-  where
-  type Rs ScriptProjectsDeploymentsCreate = Deployment
+instance Core.GoogleRequest ScriptProjectsGetMetrics where
+  type Rs ScriptProjectsGetMetrics = Metrics
   type
-    Scopes ScriptProjectsDeploymentsCreate =
-      '["https://www.googleapis.com/auth/script.deployments"]
-  requestClient ScriptProjectsDeploymentsCreate {..} =
+    Scopes ScriptProjectsGetMetrics =
+      '["https://www.googleapis.com/auth/script.metrics"]
+  requestClient ScriptProjectsGetMetrics {..} =
     go
       scriptId
       xgafv
       accessToken
       callback
+      metricsFilterDeploymentId
+      metricsGranularity
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       scriptService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ScriptProjectsDeploymentsCreateResource
+              Core.Proxy ScriptProjectsGetMetricsResource
           )
           Core.mempty

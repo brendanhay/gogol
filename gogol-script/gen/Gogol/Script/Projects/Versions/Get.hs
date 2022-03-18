@@ -19,106 +19,98 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.Versions.List
+-- Module      : Gogol.Script.Projects.Versions.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the versions of a script project.
+-- Gets a version of a script project.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.versions.list@.
-module Network.Google.Script.Projects.Versions.List
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.versions.get@.
+module Gogol.Script.Projects.Versions.Get
   ( -- * Resource
-    ScriptProjectsVersionsListResource,
+    ScriptProjectsVersionsGetResource,
 
     -- ** Constructing a Request
-    newScriptProjectsVersionsList,
-    ScriptProjectsVersionsList,
+    newScriptProjectsVersionsGet,
+    ScriptProjectsVersionsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.versions.list@ method which the
--- 'ScriptProjectsVersionsList' request conforms to.
-type ScriptProjectsVersionsListResource =
+-- | A resource alias for @script.projects.versions.get@ method which the
+-- 'ScriptProjectsVersionsGet' request conforms to.
+type ScriptProjectsVersionsGetResource =
   "v1"
     Core.:> "projects"
     Core.:> Core.Capture "scriptId" Core.Text
     Core.:> "versions"
+    Core.:> Core.Capture "versionNumber" Core.Int32
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "pageSize" Core.Int32
-    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListVersionsResponse
+    Core.:> Core.Get '[Core.JSON] Version
 
--- | List the versions of a script project.
+-- | Gets a version of a script project.
 --
--- /See:/ 'newScriptProjectsVersionsList' smart constructor.
-data ScriptProjectsVersionsList = ScriptProjectsVersionsList
+-- /See:/ 'newScriptProjectsVersionsGet' smart constructor.
+data ScriptProjectsVersionsGet = ScriptProjectsVersionsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The maximum number of versions on each returned page. Defaults to 50.
-    pageSize :: (Core.Maybe Core.Int32),
-    -- | The token for continuing a previous list request on the next page. This should be set to the value of @nextPageToken@ from a previous response.
-    pageToken :: (Core.Maybe Core.Text),
     -- | The script project\'s Drive ID.
     scriptId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | The version number.
+    versionNumber :: Core.Int32
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsVersionsList' with the minimum fields required to make a request.
-newScriptProjectsVersionsList ::
+-- | Creates a value of 'ScriptProjectsVersionsGet' with the minimum fields required to make a request.
+newScriptProjectsVersionsGet ::
   -- |  The script project\'s Drive ID. See 'scriptId'.
   Core.Text ->
-  ScriptProjectsVersionsList
-newScriptProjectsVersionsList scriptId =
-  ScriptProjectsVersionsList
+  -- |  The version number. See 'versionNumber'.
+  Core.Int32 ->
+  ScriptProjectsVersionsGet
+newScriptProjectsVersionsGet scriptId versionNumber =
+  ScriptProjectsVersionsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
       scriptId = scriptId,
       uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+      uploadProtocol = Core.Nothing,
+      versionNumber = versionNumber
     }
 
-instance
-  Core.GoogleRequest
-    ScriptProjectsVersionsList
-  where
+instance Core.GoogleRequest ScriptProjectsVersionsGet where
+  type Rs ScriptProjectsVersionsGet = Version
   type
-    Rs ScriptProjectsVersionsList =
-      ListVersionsResponse
-  type
-    Scopes ScriptProjectsVersionsList =
+    Scopes ScriptProjectsVersionsGet =
       '[ "https://www.googleapis.com/auth/script.projects",
          "https://www.googleapis.com/auth/script.projects.readonly"
        ]
-  requestClient ScriptProjectsVersionsList {..} =
+  requestClient ScriptProjectsVersionsGet {..} =
     go
       scriptId
+      versionNumber
       xgafv
       accessToken
       callback
-      pageSize
-      pageToken
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -127,6 +119,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ScriptProjectsVersionsListResource
+              Core.Proxy ScriptProjectsVersionsGetResource
           )
           Core.mempty
