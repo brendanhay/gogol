@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.Reports.EntityUsageReports.Get
+-- Module      : Gogol.Admin.Reports.EntityUsageReports.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves a report which is a collection of properties and statistics for entities used by users within the account. For more information, see the Entities Usage Report guide. For more information about the entities report\'s parameters, see the Entities Usage parameters reference guides.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @reports.entityUsageReports.get@.
-module Network.Google.Admin.Reports.EntityUsageReports.Get
+module Gogol.Admin.Reports.EntityUsageReports.Get
   ( -- * Resource
     ReportsEntityUsageReportsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Admin.Reports.EntityUsageReports.Get
   )
 where
 
-import Network.Google.Admin.Reports.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.Reports.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reports.entityUsageReports.get@ method which the
 -- 'ReportsEntityUsageReportsGet' request conforms to.
