@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,376 +30,376 @@
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference>
 module Gogol.Partners
-    (
-    -- * Configuration
-      partnersService
+  ( -- * Configuration
+    partnersService,
 
     -- * Resources
 
     -- ** partners.analytics.list
-    , PartnersAnalyticsListResource
-    , newPartnersAnalyticsList
-    , PartnersAnalyticsList
+    PartnersAnalyticsListResource,
+    newPartnersAnalyticsList,
+    PartnersAnalyticsList,
 
     -- ** partners.clientMessages.log
-    , PartnersClientMessagesLogResource
-    , newPartnersClientMessagesLog
-    , PartnersClientMessagesLog
+    PartnersClientMessagesLogResource,
+    newPartnersClientMessagesLog,
+    PartnersClientMessagesLog,
 
     -- ** partners.companies.get
-    , PartnersCompaniesGetResource
-    , newPartnersCompaniesGet
-    , PartnersCompaniesGet
+    PartnersCompaniesGetResource,
+    newPartnersCompaniesGet,
+    PartnersCompaniesGet,
 
     -- ** partners.companies.leads.create
-    , PartnersCompaniesLeadsCreateResource
-    , newPartnersCompaniesLeadsCreate
-    , PartnersCompaniesLeadsCreate
+    PartnersCompaniesLeadsCreateResource,
+    newPartnersCompaniesLeadsCreate,
+    PartnersCompaniesLeadsCreate,
 
     -- ** partners.companies.list
-    , PartnersCompaniesListResource
-    , newPartnersCompaniesList
-    , PartnersCompaniesList
+    PartnersCompaniesListResource,
+    newPartnersCompaniesList,
+    PartnersCompaniesList,
 
     -- ** partners.getPartnersstatus
-    , PartnersGetPartnersstatusResource
-    , newPartnersGetPartnersstatus
-    , PartnersGetPartnersstatus
+    PartnersGetPartnersstatusResource,
+    newPartnersGetPartnersstatus,
+    PartnersGetPartnersstatus,
 
     -- ** partners.leads.list
-    , PartnersLeadsListResource
-    , newPartnersLeadsList
-    , PartnersLeadsList
+    PartnersLeadsListResource,
+    newPartnersLeadsList,
+    PartnersLeadsList,
 
     -- ** partners.offers.history.list
-    , PartnersOffersHistoryListResource
-    , newPartnersOffersHistoryList
-    , PartnersOffersHistoryList
+    PartnersOffersHistoryListResource,
+    newPartnersOffersHistoryList,
+    PartnersOffersHistoryList,
 
     -- ** partners.offers.list
-    , PartnersOffersListResource
-    , newPartnersOffersList
-    , PartnersOffersList
+    PartnersOffersListResource,
+    newPartnersOffersList,
+    PartnersOffersList,
 
     -- ** partners.updateCompanies
-    , PartnersUpdateCompaniesResource
-    , newPartnersUpdateCompanies
-    , PartnersUpdateCompanies
+    PartnersUpdateCompaniesResource,
+    newPartnersUpdateCompanies,
+    PartnersUpdateCompanies,
 
     -- ** partners.updateLeads
-    , PartnersUpdateLeadsResource
-    , newPartnersUpdateLeads
-    , PartnersUpdateLeads
+    PartnersUpdateLeadsResource,
+    newPartnersUpdateLeads,
+    PartnersUpdateLeads,
 
     -- ** partners.userEvents.log
-    , PartnersUserEventsLogResource
-    , newPartnersUserEventsLog
-    , PartnersUserEventsLog
+    PartnersUserEventsLogResource,
+    newPartnersUserEventsLog,
+    PartnersUserEventsLog,
 
     -- ** partners.userStates.list
-    , PartnersUserStatesListResource
-    , newPartnersUserStatesList
-    , PartnersUserStatesList
+    PartnersUserStatesListResource,
+    newPartnersUserStatesList,
+    PartnersUserStatesList,
 
     -- ** partners.users.createCompanyRelation
-    , PartnersUsersCreateCompanyRelationResource
-    , newPartnersUsersCreateCompanyRelation
-    , PartnersUsersCreateCompanyRelation
+    PartnersUsersCreateCompanyRelationResource,
+    newPartnersUsersCreateCompanyRelation,
+    PartnersUsersCreateCompanyRelation,
 
     -- ** partners.users.deleteCompanyRelation
-    , PartnersUsersDeleteCompanyRelationResource
-    , newPartnersUsersDeleteCompanyRelation
-    , PartnersUsersDeleteCompanyRelation
+    PartnersUsersDeleteCompanyRelationResource,
+    newPartnersUsersDeleteCompanyRelation,
+    PartnersUsersDeleteCompanyRelation,
 
     -- ** partners.users.get
-    , PartnersUsersGetResource
-    , newPartnersUsersGet
-    , PartnersUsersGet
+    PartnersUsersGetResource,
+    newPartnersUsersGet,
+    PartnersUsersGet,
 
     -- ** partners.users.updateProfile
-    , PartnersUsersUpdateProfileResource
-    , newPartnersUsersUpdateProfile
-    , PartnersUsersUpdateProfile
+    PartnersUsersUpdateProfileResource,
+    newPartnersUsersUpdateProfile,
+    PartnersUsersUpdateProfile,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AdWordsManagerAccountInfo
-    , AdWordsManagerAccountInfo (..)
-    , newAdWordsManagerAccountInfo
+    AdWordsManagerAccountInfo (..),
+    newAdWordsManagerAccountInfo,
 
     -- ** Analytics
-    , Analytics (..)
-    , newAnalytics
+    Analytics (..),
+    newAnalytics,
 
     -- ** AnalyticsDataPoint
-    , AnalyticsDataPoint (..)
-    , newAnalyticsDataPoint
+    AnalyticsDataPoint (..),
+    newAnalyticsDataPoint,
 
     -- ** AnalyticsSummary
-    , AnalyticsSummary (..)
-    , newAnalyticsSummary
+    AnalyticsSummary (..),
+    newAnalyticsSummary,
 
     -- ** AvailableOffer
-    , AvailableOffer (..)
-    , newAvailableOffer
+    AvailableOffer (..),
+    newAvailableOffer,
 
     -- ** AvailableOffer_OfferLevel
-    , AvailableOffer_OfferLevel (..)
+    AvailableOffer_OfferLevel (..),
 
     -- ** AvailableOffer_OfferType
-    , AvailableOffer_OfferType (..)
+    AvailableOffer_OfferType (..),
 
     -- ** Certification
-    , Certification (..)
-    , newCertification
+    Certification (..),
+    newCertification,
 
     -- ** Certification_CertificationType
-    , Certification_CertificationType (..)
+    Certification_CertificationType (..),
 
     -- ** CertificationExamStatus
-    , CertificationExamStatus (..)
-    , newCertificationExamStatus
+    CertificationExamStatus (..),
+    newCertificationExamStatus,
 
     -- ** CertificationExamStatus_Type
-    , CertificationExamStatus_Type (..)
+    CertificationExamStatus_Type (..),
 
     -- ** CertificationStatus
-    , CertificationStatus (..)
-    , newCertificationStatus
+    CertificationStatus (..),
+    newCertificationStatus,
 
     -- ** CertificationStatus_Type
-    , CertificationStatus_Type (..)
+    CertificationStatus_Type (..),
 
     -- ** Company
-    , Company (..)
-    , newCompany
+    Company (..),
+    newCompany,
 
     -- ** Company_BadgeTier
-    , Company_BadgeTier (..)
+    Company_BadgeTier (..),
 
     -- ** Company_ProfileStatus
-    , Company_ProfileStatus (..)
+    Company_ProfileStatus (..),
 
     -- ** CompanyRelation
-    , CompanyRelation (..)
-    , newCompanyRelation
+    CompanyRelation (..),
+    newCompanyRelation,
 
     -- ** CompanyRelation_BadgeTier
-    , CompanyRelation_BadgeTier (..)
+    CompanyRelation_BadgeTier (..),
 
     -- ** CompanyRelation_State
-    , CompanyRelation_State (..)
+    CompanyRelation_State (..),
 
     -- ** CountryOfferInfo
-    , CountryOfferInfo (..)
-    , newCountryOfferInfo
+    CountryOfferInfo (..),
+    newCountryOfferInfo,
 
     -- ** CountryOfferInfo_OfferType
-    , CountryOfferInfo_OfferType (..)
+    CountryOfferInfo_OfferType (..),
 
     -- ** CreateLeadRequest
-    , CreateLeadRequest (..)
-    , newCreateLeadRequest
+    CreateLeadRequest (..),
+    newCreateLeadRequest,
 
     -- ** CreateLeadResponse
-    , CreateLeadResponse (..)
-    , newCreateLeadResponse
+    CreateLeadResponse (..),
+    newCreateLeadResponse,
 
     -- ** CreateLeadResponse_RecaptchaStatus
-    , CreateLeadResponse_RecaptchaStatus (..)
+    CreateLeadResponse_RecaptchaStatus (..),
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** DebugInfo
-    , DebugInfo (..)
-    , newDebugInfo
+    DebugInfo (..),
+    newDebugInfo,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EventData
-    , EventData (..)
-    , newEventData
+    EventData (..),
+    newEventData,
 
     -- ** EventData_Key
-    , EventData_Key (..)
+    EventData_Key (..),
 
     -- ** ExamStatus
-    , ExamStatus (..)
-    , newExamStatus
+    ExamStatus (..),
+    newExamStatus,
 
     -- ** ExamStatus_ExamType
-    , ExamStatus_ExamType (..)
+    ExamStatus_ExamType (..),
 
     -- ** GetCompanyResponse
-    , GetCompanyResponse (..)
-    , newGetCompanyResponse
+    GetCompanyResponse (..),
+    newGetCompanyResponse,
 
     -- ** GetPartnersStatusResponse
-    , GetPartnersStatusResponse (..)
-    , newGetPartnersStatusResponse
+    GetPartnersStatusResponse (..),
+    newGetPartnersStatusResponse,
 
     -- ** HistoricalOffer
-    , HistoricalOffer (..)
-    , newHistoricalOffer
+    HistoricalOffer (..),
+    newHistoricalOffer,
 
     -- ** HistoricalOffer_OfferType
-    , HistoricalOffer_OfferType (..)
+    HistoricalOffer_OfferType (..),
 
     -- ** HistoricalOffer_Status
-    , HistoricalOffer_Status (..)
+    HistoricalOffer_Status (..),
 
     -- ** LatLng
-    , LatLng (..)
-    , newLatLng
+    LatLng (..),
+    newLatLng,
 
     -- ** Lead
-    , Lead (..)
-    , newLead
+    Lead (..),
+    newLead,
 
     -- ** Lead_State
-    , Lead_State (..)
+    Lead_State (..),
 
     -- ** Lead_Type
-    , Lead_Type (..)
+    Lead_Type (..),
 
     -- ** ListAnalyticsResponse
-    , ListAnalyticsResponse (..)
-    , newListAnalyticsResponse
+    ListAnalyticsResponse (..),
+    newListAnalyticsResponse,
 
     -- ** ListCompaniesResponse
-    , ListCompaniesResponse (..)
-    , newListCompaniesResponse
+    ListCompaniesResponse (..),
+    newListCompaniesResponse,
 
     -- ** ListLeadsResponse
-    , ListLeadsResponse (..)
-    , newListLeadsResponse
+    ListLeadsResponse (..),
+    newListLeadsResponse,
 
     -- ** ListOffersHistoryResponse
-    , ListOffersHistoryResponse (..)
-    , newListOffersHistoryResponse
+    ListOffersHistoryResponse (..),
+    newListOffersHistoryResponse,
 
     -- ** ListOffersResponse
-    , ListOffersResponse (..)
-    , newListOffersResponse
+    ListOffersResponse (..),
+    newListOffersResponse,
 
     -- ** ListOffersResponse_NoOfferReason
-    , ListOffersResponse_NoOfferReason (..)
+    ListOffersResponse_NoOfferReason (..),
 
     -- ** ListUserStatesResponse
-    , ListUserStatesResponse (..)
-    , newListUserStatesResponse
+    ListUserStatesResponse (..),
+    newListUserStatesResponse,
 
     -- ** LocalizedCompanyInfo
-    , LocalizedCompanyInfo (..)
-    , newLocalizedCompanyInfo
+    LocalizedCompanyInfo (..),
+    newLocalizedCompanyInfo,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** LogMessageRequest
-    , LogMessageRequest (..)
-    , newLogMessageRequest
+    LogMessageRequest (..),
+    newLogMessageRequest,
 
     -- ** LogMessageRequest_ClientInfo
-    , LogMessageRequest_ClientInfo (..)
-    , newLogMessageRequest_ClientInfo
+    LogMessageRequest_ClientInfo (..),
+    newLogMessageRequest_ClientInfo,
 
     -- ** LogMessageRequest_Level
-    , LogMessageRequest_Level (..)
+    LogMessageRequest_Level (..),
 
     -- ** LogMessageResponse
-    , LogMessageResponse (..)
-    , newLogMessageResponse
+    LogMessageResponse (..),
+    newLogMessageResponse,
 
     -- ** LogUserEventRequest
-    , LogUserEventRequest (..)
-    , newLogUserEventRequest
+    LogUserEventRequest (..),
+    newLogUserEventRequest,
 
     -- ** LogUserEventRequest_EventAction
-    , LogUserEventRequest_EventAction (..)
+    LogUserEventRequest_EventAction (..),
 
     -- ** LogUserEventRequest_EventCategory
-    , LogUserEventRequest_EventCategory (..)
+    LogUserEventRequest_EventCategory (..),
 
     -- ** LogUserEventRequest_EventScope
-    , LogUserEventRequest_EventScope (..)
+    LogUserEventRequest_EventScope (..),
 
     -- ** LogUserEventResponse
-    , LogUserEventResponse (..)
-    , newLogUserEventResponse
+    LogUserEventResponse (..),
+    newLogUserEventResponse,
 
     -- ** Money
-    , Money (..)
-    , newMoney
+    Money (..),
+    newMoney,
 
     -- ** OfferCustomer
-    , OfferCustomer (..)
-    , newOfferCustomer
+    OfferCustomer (..),
+    newOfferCustomer,
 
     -- ** OfferCustomer_OfferType
-    , OfferCustomer_OfferType (..)
+    OfferCustomer_OfferType (..),
 
     -- ** OptIns
-    , OptIns (..)
-    , newOptIns
+    OptIns (..),
+    newOptIns,
 
     -- ** PublicProfile
-    , PublicProfile (..)
-    , newPublicProfile
+    PublicProfile (..),
+    newPublicProfile,
 
     -- ** Rank
-    , Rank (..)
-    , newRank
+    Rank (..),
+    newRank,
 
     -- ** Rank_Type
-    , Rank_Type (..)
+    Rank_Type (..),
 
     -- ** RecaptchaChallenge
-    , RecaptchaChallenge (..)
-    , newRecaptchaChallenge
+    RecaptchaChallenge (..),
+    newRecaptchaChallenge,
 
     -- ** RequestMetadata
-    , RequestMetadata (..)
-    , newRequestMetadata
+    RequestMetadata (..),
+    newRequestMetadata,
 
     -- ** ResponseMetadata
-    , ResponseMetadata (..)
-    , newResponseMetadata
+    ResponseMetadata (..),
+    newResponseMetadata,
 
     -- ** SpecializationStatus
-    , SpecializationStatus (..)
-    , newSpecializationStatus
+    SpecializationStatus (..),
+    newSpecializationStatus,
 
     -- ** SpecializationStatus_BadgeSpecialization
-    , SpecializationStatus_BadgeSpecialization (..)
+    SpecializationStatus_BadgeSpecialization (..),
 
     -- ** SpecializationStatus_BadgeSpecializationState
-    , SpecializationStatus_BadgeSpecializationState (..)
+    SpecializationStatus_BadgeSpecializationState (..),
 
     -- ** TrafficSource
-    , TrafficSource (..)
-    , newTrafficSource
+    TrafficSource (..),
+    newTrafficSource,
 
     -- ** User
-    , User (..)
-    , newUser
+    User (..),
+    newUser,
 
     -- ** UserOverrides
-    , UserOverrides (..)
-    , newUserOverrides
+    UserOverrides (..),
+    newUserOverrides,
 
     -- ** UserProfile
-    , UserProfile (..)
-    , newUserProfile
-    ) where
+    UserProfile (..),
+    newUserProfile,
+  )
+where
 
 import Gogol.Partners.Analytics.List
 import Gogol.Partners.ClientMessages.Log
