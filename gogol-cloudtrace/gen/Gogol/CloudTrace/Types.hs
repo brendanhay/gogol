@@ -19,35 +19,19 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTrace
+-- Module      : Gogol.CloudTrace.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenTelemetry.
---
--- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference>
-module Network.Google.CloudTrace
+module Gogol.CloudTrace.Types
   ( -- * Configuration
     cloudTraceService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
     traceAppendScope,
-
-    -- * Resources
-
-    -- ** cloudtrace.projects.traces.batchWrite
-    CloudTraceProjectsTracesBatchWriteResource,
-    newCloudTraceProjectsTracesBatchWrite,
-    CloudTraceProjectsTracesBatchWrite,
-
-    -- ** cloudtrace.projects.traces.spans.createSpan
-    CloudTraceProjectsTracesSpansCreateSpanResource,
-    newCloudTraceProjectsTracesSpansCreateSpan,
-    CloudTraceProjectsTracesSpansCreateSpan,
 
     -- * Types
 
@@ -141,6 +125,21 @@ module Network.Google.CloudTrace
   )
 where
 
-import Network.Google.CloudTrace.Projects.Traces.BatchWrite
-import Network.Google.CloudTrace.Projects.Traces.Spans.CreateSpan
-import Network.Google.CloudTrace.Types
+import Gogol.CloudTrace.Internal.Product
+import Gogol.CloudTrace.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Cloud Trace API. This contains the host and root path used as a starting point for constructing service requests.
+cloudTraceService :: Core.ServiceConfig
+cloudTraceService =
+  Core.defaultService
+    (Core.ServiceId "cloudtrace:v2")
+    "cloudtrace.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | Write Trace data for a project or application
+traceAppendScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.append"]
+traceAppendScope = Core.Proxy

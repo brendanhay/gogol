@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTrace.Internal.Product
+-- Module      : Gogol.CloudTrace.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudTrace.Internal.Product
+module Gogol.CloudTrace.Internal.Product
   ( -- * Annotation
     Annotation (..),
     newAnnotation,
@@ -104,8 +104,8 @@ module Network.Google.CloudTrace.Internal.Product
   )
 where
 
-import Network.Google.CloudTrace.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTrace.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Text annotation with a set of attributes.
 --
