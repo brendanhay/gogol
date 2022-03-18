@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Internal.Product
+-- Module      : Gogol.AppsTasks.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppsTasks.Internal.Product
+module Gogol.AppsTasks.Internal.Product
   ( -- * Task
     Task (..),
     newTask,
@@ -48,8 +48,8 @@ module Network.Google.AppsTasks.Internal.Product
   )
 where
 
-import Network.Google.AppsTasks.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 --
 -- /See:/ 'newTask' smart constructor.

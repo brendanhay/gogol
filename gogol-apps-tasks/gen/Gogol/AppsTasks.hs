@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks
+-- Module      : Gogol.AppsTasks
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Tasks API lets you manage your tasks and task lists.
 --
 -- /See:/ <https://developers.google.com/tasks/ Tasks API Reference>
-module Network.Google.AppsTasks
+module Gogol.AppsTasks
   ( -- * Configuration
     appsTasksService,
 
@@ -136,18 +136,18 @@ module Network.Google.AppsTasks
   )
 where
 
-import Network.Google.AppsTasks.Tasks.Clear
-import Network.Google.AppsTasks.Tasks.Delete
-import Network.Google.AppsTasks.Tasks.Get
-import Network.Google.AppsTasks.Tasks.Insert
-import Network.Google.AppsTasks.Tasks.List
-import Network.Google.AppsTasks.Tasks.Move
-import Network.Google.AppsTasks.Tasks.Patch
-import Network.Google.AppsTasks.Tasks.Tasklists.Delete
-import Network.Google.AppsTasks.Tasks.Tasklists.Get
-import Network.Google.AppsTasks.Tasks.Tasklists.Insert
-import Network.Google.AppsTasks.Tasks.Tasklists.List
-import Network.Google.AppsTasks.Tasks.Tasklists.Patch
-import Network.Google.AppsTasks.Tasks.Tasklists.Update
-import Network.Google.AppsTasks.Tasks.Update
-import Network.Google.AppsTasks.Types
+import Gogol.AppsTasks.Tasks.Clear
+import Gogol.AppsTasks.Tasks.Delete
+import Gogol.AppsTasks.Tasks.Get
+import Gogol.AppsTasks.Tasks.Insert
+import Gogol.AppsTasks.Tasks.List
+import Gogol.AppsTasks.Tasks.Move
+import Gogol.AppsTasks.Tasks.Patch
+import Gogol.AppsTasks.Tasks.Tasklists.Delete
+import Gogol.AppsTasks.Tasks.Tasklists.Get
+import Gogol.AppsTasks.Tasks.Tasklists.Insert
+import Gogol.AppsTasks.Tasks.Tasklists.List
+import Gogol.AppsTasks.Tasks.Tasklists.Patch
+import Gogol.AppsTasks.Tasks.Tasklists.Update
+import Gogol.AppsTasks.Tasks.Update
+import Gogol.AppsTasks.Types

@@ -19,57 +19,61 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Tasks.Clear
+-- Module      : Gogol.AppsTasks.Tasks.Tasklists.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Clears all completed tasks from the specified task list. The affected tasks will be marked as \'hidden\' and no longer be returned by default when retrieving all tasks for a task list.
+-- Returns all the authenticated user\'s task lists.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.clear@.
-module Network.Google.AppsTasks.Tasks.Clear
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.list@.
+module Gogol.AppsTasks.Tasks.Tasklists.List
   ( -- * Resource
-    TasksTasksClearResource,
+    TasksTasklistsListResource,
 
     -- ** Constructing a Request
-    newTasksTasksClear,
-    TasksTasksClear,
+    newTasksTasklistsList,
+    TasksTasklistsList,
   )
 where
 
-import Network.Google.AppsTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @tasks.tasks.clear@ method which the
--- 'TasksTasksClear' request conforms to.
-type TasksTasksClearResource =
+-- | A resource alias for @tasks.tasklists.list@ method which the
+-- 'TasksTasklistsList' request conforms to.
+type TasksTasklistsListResource =
   "tasks"
     Core.:> "v1"
+    Core.:> "users"
+    Core.:> "@me"
     Core.:> "lists"
-    Core.:> Core.Capture "tasklist" Core.Text
-    Core.:> "clear"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "maxResults" Core.Int32
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post '[Core.JSON] ()
+    Core.:> Core.Get '[Core.JSON] TaskLists
 
--- | Clears all completed tasks from the specified task list. The affected tasks will be marked as \'hidden\' and no longer be returned by default when retrieving all tasks for a task list.
+-- | Returns all the authenticated user\'s task lists.
 --
--- /See:/ 'newTasksTasksClear' smart constructor.
-data TasksTasksClear = TasksTasksClear
+-- /See:/ 'newTasksTasklistsList' smart constructor.
+data TasksTasklistsList = TasksTasklistsList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Task list identifier.
-    tasklist :: Core.Text,
+    -- | Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100).
+    maxResults :: (Core.Maybe Core.Int32),
+    -- | Token specifying the result page to return. Optional.
+    pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,32 +81,34 @@ data TasksTasksClear = TasksTasksClear
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TasksTasksClear' with the minimum fields required to make a request.
-newTasksTasksClear ::
-  -- |  Task list identifier. See 'tasklist'.
-  Core.Text ->
-  TasksTasksClear
-newTasksTasksClear tasklist =
-  TasksTasksClear
+-- | Creates a value of 'TasksTasklistsList' with the minimum fields required to make a request.
+newTasksTasklistsList ::
+  TasksTasklistsList
+newTasksTasklistsList =
+  TasksTasklistsList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      tasklist = tasklist,
+      maxResults = Core.Nothing,
+      pageToken = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest TasksTasksClear where
-  type Rs TasksTasksClear = ()
+instance Core.GoogleRequest TasksTasklistsList where
+  type Rs TasksTasklistsList = TaskLists
   type
-    Scopes TasksTasksClear =
-      '["https://www.googleapis.com/auth/tasks"]
-  requestClient TasksTasksClear {..} =
+    Scopes TasksTasklistsList =
+      '[ "https://www.googleapis.com/auth/tasks",
+         "https://www.googleapis.com/auth/tasks.readonly"
+       ]
+  requestClient TasksTasklistsList {..} =
     go
-      tasklist
       xgafv
       accessToken
       callback
+      maxResults
+      pageToken
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -110,5 +116,5 @@ instance Core.GoogleRequest TasksTasksClear where
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy TasksTasksClearResource)
+          (Core.Proxy :: Core.Proxy TasksTasklistsListResource)
           Core.mempty

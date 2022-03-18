@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Tasks.List
+-- Module      : Gogol.AppsTasks.Tasks.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns all tasks in the specified task list.
 --
 -- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.list@.
-module Network.Google.AppsTasks.Tasks.List
+module Gogol.AppsTasks.Tasks.List
   ( -- * Resource
     TasksTasksListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsTasks.Tasks.List
   )
 where
 
-import Network.Google.AppsTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @tasks.tasks.list@ method which the
 -- 'TasksTasksList' request conforms to.

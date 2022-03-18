@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Types
+-- Module      : Gogol.AppsTasks.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppsTasks.Types
+module Gogol.AppsTasks.Types
   ( -- * Configuration
     appsTasksService,
 
@@ -60,9 +60,9 @@ module Network.Google.AppsTasks.Types
   )
 where
 
-import Network.Google.AppsTasks.Internal.Product
-import Network.Google.AppsTasks.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Internal.Product
+import Gogol.AppsTasks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 appsTasksService :: Core.ServiceConfig

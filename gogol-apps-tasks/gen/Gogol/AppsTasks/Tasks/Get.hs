@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Tasks.Patch
+-- Module      : Gogol.AppsTasks.Tasks.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified task. This method supports patch semantics.
+-- Returns the specified task.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.patch@.
-module Network.Google.AppsTasks.Tasks.Patch
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.get@.
+module Gogol.AppsTasks.Tasks.Get
   ( -- * Resource
-    TasksTasksPatchResource,
+    TasksTasksGetResource,
 
     -- ** Constructing a Request
-    newTasksTasksPatch,
-    TasksTasksPatch,
+    newTasksTasksGet,
+    TasksTasksGet,
   )
 where
 
-import Network.Google.AppsTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @tasks.tasks.patch@ method which the
--- 'TasksTasksPatch' request conforms to.
-type TasksTasksPatchResource =
+-- | A resource alias for @tasks.tasks.get@ method which the
+-- 'TasksTasksGet' request conforms to.
+type TasksTasksGetResource =
   "tasks"
     Core.:> "v1"
     Core.:> "lists"
@@ -57,21 +57,18 @@ type TasksTasksPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Task
-    Core.:> Core.Patch '[Core.JSON] Task
+    Core.:> Core.Get '[Core.JSON] Task
 
--- | Updates the specified task. This method supports patch semantics.
+-- | Returns the specified task.
 --
--- /See:/ 'newTasksTasksPatch' smart constructor.
-data TasksTasksPatch = TasksTasksPatch
+-- /See:/ 'newTasksTasksGet' smart constructor.
+data TasksTasksGet = TasksTasksGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Task,
     -- | Task identifier.
     task :: Core.Text,
     -- | Task list identifier.
@@ -83,33 +80,32 @@ data TasksTasksPatch = TasksTasksPatch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TasksTasksPatch' with the minimum fields required to make a request.
-newTasksTasksPatch ::
-  -- |  Multipart request metadata. See 'payload'.
-  Task ->
+-- | Creates a value of 'TasksTasksGet' with the minimum fields required to make a request.
+newTasksTasksGet ::
   -- |  Task identifier. See 'task'.
   Core.Text ->
   -- |  Task list identifier. See 'tasklist'.
   Core.Text ->
-  TasksTasksPatch
-newTasksTasksPatch payload task tasklist =
-  TasksTasksPatch
+  TasksTasksGet
+newTasksTasksGet task tasklist =
+  TasksTasksGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
       task = task,
       tasklist = tasklist,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest TasksTasksPatch where
-  type Rs TasksTasksPatch = Task
+instance Core.GoogleRequest TasksTasksGet where
+  type Rs TasksTasksGet = Task
   type
-    Scopes TasksTasksPatch =
-      '["https://www.googleapis.com/auth/tasks"]
-  requestClient TasksTasksPatch {..} =
+    Scopes TasksTasksGet =
+      '[ "https://www.googleapis.com/auth/tasks",
+         "https://www.googleapis.com/auth/tasks.readonly"
+       ]
+  requestClient TasksTasksGet {..} =
     go
       tasklist
       task
@@ -119,10 +115,9 @@ instance Core.GoogleRequest TasksTasksPatch where
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       appsTasksService
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy TasksTasksPatchResource)
+          (Core.Proxy :: Core.Proxy TasksTasksGetResource)
           Core.mempty

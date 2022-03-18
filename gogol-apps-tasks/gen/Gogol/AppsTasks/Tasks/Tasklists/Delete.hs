@@ -19,58 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Tasks.Tasklists.Insert
+-- Module      : Gogol.AppsTasks.Tasks.Tasklists.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new task list and adds it to the authenticated user\'s task lists.
+-- Deletes the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.insert@.
-module Network.Google.AppsTasks.Tasks.Tasklists.Insert
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.delete@.
+module Gogol.AppsTasks.Tasks.Tasklists.Delete
   ( -- * Resource
-    TasksTasklistsInsertResource,
+    TasksTasklistsDeleteResource,
 
     -- ** Constructing a Request
-    newTasksTasklistsInsert,
-    TasksTasklistsInsert,
+    newTasksTasklistsDelete,
+    TasksTasklistsDelete,
   )
 where
 
-import Network.Google.AppsTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @tasks.tasklists.insert@ method which the
--- 'TasksTasklistsInsert' request conforms to.
-type TasksTasklistsInsertResource =
+-- | A resource alias for @tasks.tasklists.delete@ method which the
+-- 'TasksTasklistsDelete' request conforms to.
+type TasksTasklistsDeleteResource =
   "tasks"
     Core.:> "v1"
     Core.:> "users"
     Core.:> "@me"
     Core.:> "lists"
+    Core.:> Core.Capture "tasklist" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] TaskList
-    Core.:> Core.Post '[Core.JSON] TaskList
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Creates a new task list and adds it to the authenticated user\'s task lists.
+-- | Deletes the authenticated user\'s specified task list.
 --
--- /See:/ 'newTasksTasklistsInsert' smart constructor.
-data TasksTasklistsInsert = TasksTasklistsInsert
+-- /See:/ 'newTasksTasklistsDelete' smart constructor.
+data TasksTasklistsDelete = TasksTasklistsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: TaskList,
+    -- | Task list identifier.
+    tasklist :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -78,40 +78,40 @@ data TasksTasklistsInsert = TasksTasklistsInsert
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TasksTasklistsInsert' with the minimum fields required to make a request.
-newTasksTasklistsInsert ::
-  -- |  Multipart request metadata. See 'payload'.
-  TaskList ->
-  TasksTasklistsInsert
-newTasksTasklistsInsert payload =
-  TasksTasklistsInsert
+-- | Creates a value of 'TasksTasklistsDelete' with the minimum fields required to make a request.
+newTasksTasklistsDelete ::
+  -- |  Task list identifier. See 'tasklist'.
+  Core.Text ->
+  TasksTasklistsDelete
+newTasksTasklistsDelete tasklist =
+  TasksTasklistsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      tasklist = tasklist,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest TasksTasklistsInsert where
-  type Rs TasksTasklistsInsert = TaskList
+instance Core.GoogleRequest TasksTasklistsDelete where
+  type Rs TasksTasklistsDelete = ()
   type
-    Scopes TasksTasklistsInsert =
+    Scopes TasksTasklistsDelete =
       '["https://www.googleapis.com/auth/tasks"]
-  requestClient TasksTasklistsInsert {..} =
+  requestClient TasksTasklistsDelete {..} =
     go
+      tasklist
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       appsTasksService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy TasksTasklistsInsertResource
+              Core.Proxy TasksTasklistsDeleteResource
           )
           Core.mempty

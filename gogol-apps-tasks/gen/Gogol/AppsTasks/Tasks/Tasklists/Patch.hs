@@ -19,58 +19,59 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Tasks.Get
+-- Module      : Gogol.AppsTasks.Tasks.Tasklists.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified task.
+-- Updates the authenticated user\'s specified task list. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.get@.
-module Network.Google.AppsTasks.Tasks.Get
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.patch@.
+module Gogol.AppsTasks.Tasks.Tasklists.Patch
   ( -- * Resource
-    TasksTasksGetResource,
+    TasksTasklistsPatchResource,
 
     -- ** Constructing a Request
-    newTasksTasksGet,
-    TasksTasksGet,
+    newTasksTasklistsPatch,
+    TasksTasklistsPatch,
   )
 where
 
-import Network.Google.AppsTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @tasks.tasks.get@ method which the
--- 'TasksTasksGet' request conforms to.
-type TasksTasksGetResource =
+-- | A resource alias for @tasks.tasklists.patch@ method which the
+-- 'TasksTasklistsPatch' request conforms to.
+type TasksTasklistsPatchResource =
   "tasks"
     Core.:> "v1"
+    Core.:> "users"
+    Core.:> "@me"
     Core.:> "lists"
     Core.:> Core.Capture "tasklist" Core.Text
-    Core.:> "tasks"
-    Core.:> Core.Capture "task" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Task
+    Core.:> Core.ReqBody '[Core.JSON] TaskList
+    Core.:> Core.Patch '[Core.JSON] TaskList
 
--- | Returns the specified task.
+-- | Updates the authenticated user\'s specified task list. This method supports patch semantics.
 --
--- /See:/ 'newTasksTasksGet' smart constructor.
-data TasksTasksGet = TasksTasksGet
+-- /See:/ 'newTasksTasklistsPatch' smart constructor.
+data TasksTasklistsPatch = TasksTasklistsPatch
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Task identifier.
-    task :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: TaskList,
     -- | Task list identifier.
     tasklist :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -80,44 +81,44 @@ data TasksTasksGet = TasksTasksGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TasksTasksGet' with the minimum fields required to make a request.
-newTasksTasksGet ::
-  -- |  Task identifier. See 'task'.
-  Core.Text ->
+-- | Creates a value of 'TasksTasklistsPatch' with the minimum fields required to make a request.
+newTasksTasklistsPatch ::
+  -- |  Multipart request metadata. See 'payload'.
+  TaskList ->
   -- |  Task list identifier. See 'tasklist'.
   Core.Text ->
-  TasksTasksGet
-newTasksTasksGet task tasklist =
-  TasksTasksGet
+  TasksTasklistsPatch
+newTasksTasklistsPatch payload tasklist =
+  TasksTasklistsPatch
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      task = task,
+      payload = payload,
       tasklist = tasklist,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest TasksTasksGet where
-  type Rs TasksTasksGet = Task
+instance Core.GoogleRequest TasksTasklistsPatch where
+  type Rs TasksTasklistsPatch = TaskList
   type
-    Scopes TasksTasksGet =
-      '[ "https://www.googleapis.com/auth/tasks",
-         "https://www.googleapis.com/auth/tasks.readonly"
-       ]
-  requestClient TasksTasksGet {..} =
+    Scopes TasksTasklistsPatch =
+      '["https://www.googleapis.com/auth/tasks"]
+  requestClient TasksTasklistsPatch {..} =
     go
       tasklist
-      task
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       appsTasksService
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy TasksTasksGetResource)
+          ( Core.Proxy ::
+              Core.Proxy TasksTasklistsPatchResource
+          )
           Core.mempty
