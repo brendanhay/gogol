@@ -1,279 +1,178 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CivicInfo.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CivicInfo.Types
-    (
-    -- * Service Configuration
-      civicInfoService
+  ( -- * Configuration
+    civicInfoService,
 
-    -- * RepresentativeInfoResponseDivisions
-    , RepresentativeInfoResponseDivisions
-    , representativeInfoResponseDivisions
-    , rirdAddtional
+    -- * Types
 
-    -- * ContestLevelItem
-    , ContestLevelItem (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * VoterInfoResponse
-    , VoterInfoResponse
-    , voterInfoResponse
-    , virOtherElections
-    , virContests
-    , virState
-    , virKind
-    , virDropOffLocations
-    , virElection
-    , virNormalizedInput
-    , virMailOnly
-    , virEarlyVoteSites
-    , virPollingLocations
-    , virPrecinctId
+    -- ** AdministrationRegion
+    AdministrationRegion (..),
+    newAdministrationRegion,
 
-    -- * PollingLocation
-    , PollingLocation
-    , pollingLocation
-    , plVoterServices
-    , plLatitude
-    , plEndDate
-    , plSources
-    , plAddress
-    , plStartDate
-    , plPollingHours
-    , plName
-    , plNotes
-    , plLongitude
+    -- ** AdministrativeBody
+    AdministrativeBody (..),
+    newAdministrativeBody,
 
-    -- * RepresentativesRepresentativeInfoByDivisionLevels
-    , RepresentativesRepresentativeInfoByDivisionLevels (..)
+    -- ** Candidate
+    Candidate (..),
+    newCandidate,
 
-    -- * GeographicDivision
-    , GeographicDivision
-    , geographicDivision
-    , gdName
-    , gdOfficeIndices
-    , gdAlsoKnownAs
+    -- ** Channel
+    Channel (..),
+    newChannel,
 
-    -- * Candidate
-    , Candidate
-    , candidate
-    , cEmail
-    , cPhone
-    , cPhotoURL
-    , cChannels
-    , cCandidateURL
-    , cOrderOnBallot
-    , cName
-    , cParty
+    -- ** Contest
+    Contest (..),
+    newContest,
 
-    -- * RepresentativesRepresentativeInfoByAddressLevels
-    , RepresentativesRepresentativeInfoByAddressLevels (..)
+    -- ** Contest_LevelItem
+    Contest_LevelItem (..),
 
-    -- * Office
-    , Office
-    , office
-    , oDivisionId
-    , oRoles
-    , oOfficialIndices
-    , oSources
-    , oName
-    , oLevels
+    -- ** Contest_RolesItem
+    Contest_RolesItem (..),
 
-    -- * RepresentativesRepresentativeInfoByDivisionRoles
-    , RepresentativesRepresentativeInfoByDivisionRoles (..)
+    -- ** DivisionSearchResponse
+    DivisionSearchResponse (..),
+    newDivisionSearchResponse,
 
-    -- * OfficeLevelsItem
-    , OfficeLevelsItem (..)
+    -- ** DivisionSearchResult
+    DivisionSearchResult (..),
+    newDivisionSearchResult,
 
-    -- * Channel
-    , Channel
-    , channel
-    , cId
-    , cType
+    -- ** Election
+    Election (..),
+    newElection,
 
-    -- * Election
-    , Election
-    , election
-    , eOcdDivisionId
-    , eElectionDay
-    , eName
-    , eId
+    -- ** ElectionOfficial
+    ElectionOfficial (..),
+    newElectionOfficial,
 
-    -- * RepresentativeInfoResponse
-    , RepresentativeInfoResponse
-    , representativeInfoResponse
-    , rirKind
-    , rirNormalizedInput
-    , rirOfficials
-    , rirDivisions
-    , rirOffices
+    -- ** ElectionsQueryResponse
+    ElectionsQueryResponse (..),
+    newElectionsQueryResponse,
 
-    -- * DivisionSearchResult
-    , DivisionSearchResult
-    , divisionSearchResult
-    , dsrAliases
-    , dsrName
-    , dsrOcdId
+    -- ** ElectoralDistrict
+    ElectoralDistrict (..),
+    newElectoralDistrict,
 
-    -- * AdministrativeBody
-    , AdministrativeBody
-    , administrativeBody
-    , abCorrespondenceAddress
-    , abAbsenteeVotingInfoURL
-    , abHoursOfOperation
-    , abElectionNoticeURL
-    , abBallotInfoURL
-    , abPhysicalAddress
-    , abElectionRegistrationConfirmationURL
-    , abElectionInfoURL
-    , abVotingLocationFinderURL
-    , abElectionOfficials
-    , abElectionNoticeText
-    , abName
-    , abElectionRulesURL
-    , abVoterServices
-    , abElectionRegistrationURL
+    -- ** ElectoralDistrict_Scope
+    ElectoralDistrict_Scope (..),
 
-    -- * Contest
-    , Contest
-    , contest
-    , conReferendumPassageThreshold
-    , conPrimaryParties
-    , conRoles
-    , conReferendumURL
-    , conReferendumEffectOfAbstain
-    , conReferendumSubtitle
-    , conNumberVotingFor
-    , conOffice
-    , conReferendumConStatement
-    , conSources
-    , conReferendumProStatement
-    , conReferendumBallotResponses
-    , conNumberElected
-    , conSpecial
-    , conReferendumText
-    , conPrimaryParty
-    , conType
-    , conBallotTitle
-    , conElectorateSpecifications
-    , conReferendumBrief
-    , conDistrict
-    , conLevel
-    , conCandidates
-    , conReferendumTitle
-    , conBallotPlacement
+    -- ** FeatureIdProto
+    FeatureIdProto (..),
+    newFeatureIdProto,
 
-    -- * DivisionSearchResponse
-    , DivisionSearchResponse
-    , divisionSearchResponse
-    , dsrResults
-    , dsrKind
+    -- ** GeocodingSummary
+    GeocodingSummary (..),
+    newGeocodingSummary,
 
-    -- * RepresentativeInfoDataDivisions
-    , RepresentativeInfoDataDivisions
-    , representativeInfoDataDivisions
-    , riddAddtional
+    -- ** GeocodingSummary_FeatureType
+    GeocodingSummary_FeatureType (..),
 
-    -- * ElectoralDistrictScope
-    , ElectoralDistrictScope (..)
+    -- ** GeographicDivision
+    GeographicDivision (..),
+    newGeographicDivision,
 
-    -- * RepresentativesRepresentativeInfoByAddressRoles
-    , RepresentativesRepresentativeInfoByAddressRoles (..)
+    -- ** MessageSet
+    MessageSet (..),
+    newMessageSet,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Office
+    Office (..),
+    newOffice,
 
-    -- * OfficeRolesItem
-    , OfficeRolesItem (..)
+    -- ** Office_LevelsItem
+    Office_LevelsItem (..),
 
-    -- * ElectionOfficial
-    , ElectionOfficial
-    , electionOfficial
-    , eoFaxNumber
-    , eoName
-    , eoOfficePhoneNumber
-    , eoEmailAddress
-    , eoTitle
+    -- ** Office_RolesItem
+    Office_RolesItem (..),
 
-    -- * RepresentativeInfoData
-    , RepresentativeInfoData
-    , representativeInfoData
-    , ridOfficials
-    , ridDivisions
-    , ridOffices
+    -- ** Official
+    Official (..),
+    newOfficial,
 
-    -- * Source
-    , Source
-    , source
-    , sName
-    , sOfficial
+    -- ** PollingLocation
+    PollingLocation (..),
+    newPollingLocation,
 
-    -- * ElectoralDistrict
-    , ElectoralDistrict
-    , electoralDistrict
-    , edName
-    , edScope
-    , edId
+    -- ** RepresentativeInfoData
+    RepresentativeInfoData (..),
+    newRepresentativeInfoData,
 
-    -- * SimpleAddressType
-    , SimpleAddressType
-    , simpleAddressType
-    , satLine2
-    , satState
-    , satLine3
-    , satZip
-    , satCity
-    , satLine1
-    , satLocationName
+    -- ** RepresentativeInfoData_Divisions
+    RepresentativeInfoData_Divisions (..),
+    newRepresentativeInfoData_Divisions,
 
-    -- * AdministrationRegion
-    , AdministrationRegion
-    , administrationRegion
-    , arLocalJurisdiction
-    , arSources
-    , arName
-    , arElectionAdministrationBody
+    -- ** RepresentativeInfoResponse
+    RepresentativeInfoResponse (..),
+    newRepresentativeInfoResponse,
 
-    -- * ContestRolesItem
-    , ContestRolesItem (..)
+    -- ** RepresentativeInfoResponse_Divisions
+    RepresentativeInfoResponse_Divisions (..),
+    newRepresentativeInfoResponse_Divisions,
 
-    -- * ElectionsQueryResponse
-    , ElectionsQueryResponse
-    , electionsQueryResponse
-    , eqrKind
-    , eqrElections
+    -- ** SimpleAddressType
+    SimpleAddressType (..),
+    newSimpleAddressType,
 
-    -- * Official
-    , Official
-    , official
-    , offPhotoURL
-    , offURLs
-    , offChannels
-    , offAddress
-    , offPhones
-    , offName
-    , offEmails
-    , offParty
-    ) where
+    -- ** Source
+    Source (..),
+    newSource,
 
-import Network.Google.CivicInfo.Types.Product
-import Network.Google.CivicInfo.Types.Sum
-import Network.Google.Prelude
+    -- ** VoterInfoResponse
+    VoterInfoResponse (..),
+    newVoterInfoResponse,
 
--- | Default request referring to version 'v2' of the Google Civic Information API. This contains the host and root path used as a starting point for constructing service requests.
-civicInfoService :: ServiceConfig
-civicInfoService
-  = defaultService (ServiceId "civicinfo:v2")
-      "civicinfo.googleapis.com"
+    -- ** RepresentativesRepresentativeInfoByAddressLevels
+    RepresentativesRepresentativeInfoByAddressLevels (..),
+
+    -- ** RepresentativesRepresentativeInfoByAddressRoles
+    RepresentativesRepresentativeInfoByAddressRoles (..),
+
+    -- ** RepresentativesRepresentativeInfoByDivisionLevels
+    RepresentativesRepresentativeInfoByDivisionLevels (..),
+
+    -- ** RepresentativesRepresentativeInfoByDivisionRoles
+    RepresentativesRepresentativeInfoByDivisionRoles (..),
+  )
+where
+
+import Network.Google.CivicInfo.Internal.Product
+import Network.Google.CivicInfo.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Google Civic Information API. This contains the host and root path used as a starting point for constructing service requests.
+civicInfoService :: Core.ServiceConfig
+civicInfoService =
+  Core.defaultService
+    (Core.ServiceId "civicinfo:v2")
+    "civicinfo.googleapis.com"
