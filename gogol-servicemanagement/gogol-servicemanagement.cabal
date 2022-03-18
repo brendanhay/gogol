@@ -39,39 +39,40 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ServiceManagement
-    Network.Google.ServiceManagement.Operations.Get
-    Network.Google.ServiceManagement.Operations.List
-    Network.Google.ServiceManagement.Services.Configs.Create
-    Network.Google.ServiceManagement.Services.Configs.Get
-    Network.Google.ServiceManagement.Services.Configs.List
-    Network.Google.ServiceManagement.Services.Configs.Submit
-    Network.Google.ServiceManagement.Services.Consumers.GetIamPolicy
-    Network.Google.ServiceManagement.Services.Consumers.SetIamPolicy
-    Network.Google.ServiceManagement.Services.Consumers.TestIamPermissions
-    Network.Google.ServiceManagement.Services.Create
-    Network.Google.ServiceManagement.Services.Delete
-    Network.Google.ServiceManagement.Services.GenerateConfigReport
-    Network.Google.ServiceManagement.Services.Get
-    Network.Google.ServiceManagement.Services.GetConfig
-    Network.Google.ServiceManagement.Services.GetIamPolicy
-    Network.Google.ServiceManagement.Services.List
-    Network.Google.ServiceManagement.Services.Rollouts.Create
-    Network.Google.ServiceManagement.Services.Rollouts.Get
-    Network.Google.ServiceManagement.Services.Rollouts.List
-    Network.Google.ServiceManagement.Services.SetIamPolicy
-    Network.Google.ServiceManagement.Services.TestIamPermissions
-    Network.Google.ServiceManagement.Services.Undelete
-    Network.Google.ServiceManagement.Types
+    Gogol.ServiceManagement
+    Gogol.ServiceManagement.Operations.Get
+    Gogol.ServiceManagement.Operations.List
+    Gogol.ServiceManagement.Services.Configs.Create
+    Gogol.ServiceManagement.Services.Configs.Get
+    Gogol.ServiceManagement.Services.Configs.List
+    Gogol.ServiceManagement.Services.Configs.Submit
+    Gogol.ServiceManagement.Services.Consumers.GetIamPolicy
+    Gogol.ServiceManagement.Services.Consumers.SetIamPolicy
+    Gogol.ServiceManagement.Services.Consumers.TestIamPermissions
+    Gogol.ServiceManagement.Services.Create
+    Gogol.ServiceManagement.Services.Delete
+    Gogol.ServiceManagement.Services.GenerateConfigReport
+    Gogol.ServiceManagement.Services.Get
+    Gogol.ServiceManagement.Services.GetConfig
+    Gogol.ServiceManagement.Services.GetIamPolicy
+    Gogol.ServiceManagement.Services.List
+    Gogol.ServiceManagement.Services.Rollouts.Create
+    Gogol.ServiceManagement.Services.Rollouts.Get
+    Gogol.ServiceManagement.Services.Rollouts.List
+    Gogol.ServiceManagement.Services.SetIamPolicy
+    Gogol.ServiceManagement.Services.TestIamPermissions
+    Gogol.ServiceManagement.Services.Undelete
+    Gogol.ServiceManagement.Types
 
   other-modules:
-    Network.Google.ServiceManagement.Internal.Product
-    Network.Google.ServiceManagement.Internal.Sum
+    Gogol.ServiceManagement.Internal.Product
+    Gogol.ServiceManagement.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
