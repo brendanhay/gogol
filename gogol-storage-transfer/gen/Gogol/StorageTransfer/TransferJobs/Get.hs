@@ -19,57 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferJobs.Patch
+-- Module      : Gogol.StorageTransfer.TransferJobs.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a transfer job. Updating a job\'s transfer spec does not affect transfer operations that are running already. __Note:__ The job\'s status field can be modified using this RPC (for example, to set a job\'s status to DELETED, DISABLED, or ENABLED).
+-- Gets a transfer job.
 --
--- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.patch@.
-module Network.Google.StorageTransfer.TransferJobs.Patch
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.get@.
+module Gogol.StorageTransfer.TransferJobs.Get
   ( -- * Resource
-    StorageTransferTransferJobsPatchResource,
+    StorageTransferTransferJobsGetResource,
 
     -- ** Constructing a Request
-    newStorageTransferTransferJobsPatch,
-    StorageTransferTransferJobsPatch,
+    newStorageTransferTransferJobsGet,
+    StorageTransferTransferJobsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
--- | A resource alias for @storagetransfer.transferJobs.patch@ method which the
--- 'StorageTransferTransferJobsPatch' request conforms to.
-type StorageTransferTransferJobsPatchResource =
+-- | A resource alias for @storagetransfer.transferJobs.get@ method which the
+-- 'StorageTransferTransferJobsGet' request conforms to.
+type StorageTransferTransferJobsGetResource =
   "v1"
     Core.:> Core.Capture "jobName" Core.Text
+    Core.:> Core.QueryParam "projectId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] UpdateTransferJobRequest
-    Core.:> Core.Patch '[Core.JSON] TransferJob
+    Core.:> Core.Get '[Core.JSON] TransferJob
 
--- | Updates a transfer job. Updating a job\'s transfer spec does not affect transfer operations that are running already. __Note:__ The job\'s status field can be modified using this RPC (for example, to set a job\'s status to DELETED, DISABLED, or ENABLED).
+-- | Gets a transfer job.
 --
--- /See:/ 'newStorageTransferTransferJobsPatch' smart constructor.
-data StorageTransferTransferJobsPatch = StorageTransferTransferJobsPatch
+-- /See:/ 'newStorageTransferTransferJobsGet' smart constructor.
+data StorageTransferTransferJobsGet = StorageTransferTransferJobsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of job to update.
+    -- | Required. The job to get.
     jobName :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: UpdateTransferJobRequest,
+    -- | Required. The ID of the Google Cloud project that owns the job.
+    projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,49 +77,47 @@ data StorageTransferTransferJobsPatch = StorageTransferTransferJobsPatch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageTransferTransferJobsPatch' with the minimum fields required to make a request.
-newStorageTransferTransferJobsPatch ::
-  -- |  Required. The name of job to update. See 'jobName'.
+-- | Creates a value of 'StorageTransferTransferJobsGet' with the minimum fields required to make a request.
+newStorageTransferTransferJobsGet ::
+  -- |  Required. The job to get. See 'jobName'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  UpdateTransferJobRequest ->
-  StorageTransferTransferJobsPatch
-newStorageTransferTransferJobsPatch jobName payload =
-  StorageTransferTransferJobsPatch
+  -- |  Required. The ID of the Google Cloud project that owns the job. See 'projectId'.
+  Core.Text ->
+  StorageTransferTransferJobsGet
+newStorageTransferTransferJobsGet jobName projectId =
+  StorageTransferTransferJobsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       jobName = jobName,
-      payload = payload,
+      projectId = projectId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    StorageTransferTransferJobsPatch
+    StorageTransferTransferJobsGet
   where
+  type Rs StorageTransferTransferJobsGet = TransferJob
   type
-    Rs StorageTransferTransferJobsPatch =
-      TransferJob
-  type
-    Scopes StorageTransferTransferJobsPatch =
+    Scopes StorageTransferTransferJobsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient StorageTransferTransferJobsPatch {..} =
+  requestClient StorageTransferTransferJobsGet {..} =
     go
       jobName
+      (Core.Just projectId)
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       storageTransferService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy StorageTransferTransferJobsPatchResource
+              Core.Proxy StorageTransferTransferJobsGetResource
           )
           Core.mempty

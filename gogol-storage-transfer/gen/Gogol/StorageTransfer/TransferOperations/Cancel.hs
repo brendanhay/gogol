@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferOperations.Cancel
+-- Module      : Gogol.StorageTransfer.TransferOperations.Cancel
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -30,7 +30,7 @@
 -- job found 10 new files and transferred five files before you canceled the job, tomorrow\'s transfer operation will compute a new delta with the five files that were not copied today plus any new files discovered tomorrow.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.cancel@.
-module Network.Google.StorageTransfer.TransferOperations.Cancel
+module Gogol.StorageTransfer.TransferOperations.Cancel
   ( -- * Resource
     StorageTransferTransferOperationsCancelResource,
 
@@ -40,8 +40,8 @@ module Network.Google.StorageTransfer.TransferOperations.Cancel
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.cancel@ method which the
 -- 'StorageTransferTransferOperationsCancel' request conforms to.

@@ -19,54 +19,60 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.Projects.AgentPools.Delete
+-- Module      : Gogol.StorageTransfer.Projects.AgentPools.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an agent pool.
+-- Updates an existing agent pool resource.
 --
--- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.projects.agentPools.delete@.
-module Network.Google.StorageTransfer.Projects.AgentPools.Delete
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.projects.agentPools.patch@.
+module Gogol.StorageTransfer.Projects.AgentPools.Patch
   ( -- * Resource
-    StorageTransferProjectsAgentPoolsDeleteResource,
+    StorageTransferProjectsAgentPoolsPatchResource,
 
     -- ** Constructing a Request
-    newStorageTransferProjectsAgentPoolsDelete,
-    StorageTransferProjectsAgentPoolsDelete,
+    newStorageTransferProjectsAgentPoolsPatch,
+    StorageTransferProjectsAgentPoolsPatch,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
--- | A resource alias for @storagetransfer.projects.agentPools.delete@ method which the
--- 'StorageTransferProjectsAgentPoolsDelete' request conforms to.
-type StorageTransferProjectsAgentPoolsDeleteResource =
+-- | A resource alias for @storagetransfer.projects.agentPools.patch@ method which the
+-- 'StorageTransferProjectsAgentPoolsPatch' request conforms to.
+type StorageTransferProjectsAgentPoolsPatchResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.ReqBody '[Core.JSON] AgentPool
+    Core.:> Core.Patch '[Core.JSON] AgentPool
 
--- | Deletes an agent pool.
+-- | Updates an existing agent pool resource.
 --
--- /See:/ 'newStorageTransferProjectsAgentPoolsDelete' smart constructor.
-data StorageTransferProjectsAgentPoolsDelete = StorageTransferProjectsAgentPoolsDelete
+-- /See:/ 'newStorageTransferProjectsAgentPoolsPatch' smart constructor.
+data StorageTransferProjectsAgentPoolsPatch = StorageTransferProjectsAgentPoolsPatch
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the agent pool to delete.
+    -- | Required. Specifies a unique string that identifies the agent pool. Format: @projects\/{project_id}\/agentPools\/{agent_pool_id}@
     name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: AgentPool,
+    -- | The [field mask] (https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf) of the fields in @agentPool@ to update in this request. The following @agentPool@ fields can be updated: * display/name * bandwidth/limit
+    updateMask :: (Core.Maybe Core.GFieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,47 +80,53 @@ data StorageTransferProjectsAgentPoolsDelete = StorageTransferProjectsAgentPools
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageTransferProjectsAgentPoolsDelete' with the minimum fields required to make a request.
-newStorageTransferProjectsAgentPoolsDelete ::
-  -- |  Required. The name of the agent pool to delete. See 'name'.
+-- | Creates a value of 'StorageTransferProjectsAgentPoolsPatch' with the minimum fields required to make a request.
+newStorageTransferProjectsAgentPoolsPatch ::
+  -- |  Required. Specifies a unique string that identifies the agent pool. Format: @projects\/{project_id}\/agentPools\/{agent_pool_id}@ See 'name'.
   Core.Text ->
-  StorageTransferProjectsAgentPoolsDelete
-newStorageTransferProjectsAgentPoolsDelete name =
-  StorageTransferProjectsAgentPoolsDelete
+  -- |  Multipart request metadata. See 'payload'.
+  AgentPool ->
+  StorageTransferProjectsAgentPoolsPatch
+newStorageTransferProjectsAgentPoolsPatch name payload =
+  StorageTransferProjectsAgentPoolsPatch
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      payload = payload,
+      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    StorageTransferProjectsAgentPoolsDelete
+    StorageTransferProjectsAgentPoolsPatch
   where
   type
-    Rs StorageTransferProjectsAgentPoolsDelete =
-      Empty
+    Rs StorageTransferProjectsAgentPoolsPatch =
+      AgentPool
   type
-    Scopes StorageTransferProjectsAgentPoolsDelete =
+    Scopes StorageTransferProjectsAgentPoolsPatch =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    StorageTransferProjectsAgentPoolsDelete {..} =
+    StorageTransferProjectsAgentPoolsPatch {..} =
       go
         name
         xgafv
         accessToken
         callback
+        updateMask
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         storageTransferService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  StorageTransferProjectsAgentPoolsDeleteResource
+                  StorageTransferProjectsAgentPoolsPatchResource
             )
             Core.mempty

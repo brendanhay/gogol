@@ -19,60 +19,59 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.Projects.AgentPools.Patch
+-- Module      : Gogol.StorageTransfer.TransferOperations.Resume
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing agent pool resource.
+-- Resumes a transfer operation that is paused.
 --
--- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.projects.agentPools.patch@.
-module Network.Google.StorageTransfer.Projects.AgentPools.Patch
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.resume@.
+module Gogol.StorageTransfer.TransferOperations.Resume
   ( -- * Resource
-    StorageTransferProjectsAgentPoolsPatchResource,
+    StorageTransferTransferOperationsResumeResource,
 
     -- ** Constructing a Request
-    newStorageTransferProjectsAgentPoolsPatch,
-    StorageTransferProjectsAgentPoolsPatch,
+    newStorageTransferTransferOperationsResume,
+    StorageTransferTransferOperationsResume,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
--- | A resource alias for @storagetransfer.projects.agentPools.patch@ method which the
--- 'StorageTransferProjectsAgentPoolsPatch' request conforms to.
-type StorageTransferProjectsAgentPoolsPatchResource =
+-- | A resource alias for @storagetransfer.transferOperations.resume@ method which the
+-- 'StorageTransferTransferOperationsResume' request conforms to.
+type StorageTransferTransferOperationsResumeResource =
   "v1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.CaptureMode "name" "resume" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] AgentPool
-    Core.:> Core.Patch '[Core.JSON] AgentPool
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              ResumeTransferOperationRequest
+    Core.:> Core.Post '[Core.JSON] Empty
 
--- | Updates an existing agent pool resource.
+-- | Resumes a transfer operation that is paused.
 --
--- /See:/ 'newStorageTransferProjectsAgentPoolsPatch' smart constructor.
-data StorageTransferProjectsAgentPoolsPatch = StorageTransferProjectsAgentPoolsPatch
+-- /See:/ 'newStorageTransferTransferOperationsResume' smart constructor.
+data StorageTransferTransferOperationsResume = StorageTransferTransferOperationsResume
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Specifies a unique string that identifies the agent pool. Format: @projects\/{project_id}\/agentPools\/{agent_pool_id}@
+    -- | Required. The name of the transfer operation.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: AgentPool,
-    -- | The [field mask] (https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf) of the fields in @agentPool@ to update in this request. The following @agentPool@ fields can be updated: * display/name * bandwidth/limit
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    payload :: ResumeTransferOperationRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,43 +79,41 @@ data StorageTransferProjectsAgentPoolsPatch = StorageTransferProjectsAgentPoolsP
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageTransferProjectsAgentPoolsPatch' with the minimum fields required to make a request.
-newStorageTransferProjectsAgentPoolsPatch ::
-  -- |  Required. Specifies a unique string that identifies the agent pool. Format: @projects\/{project_id}\/agentPools\/{agent_pool_id}@ See 'name'.
+-- | Creates a value of 'StorageTransferTransferOperationsResume' with the minimum fields required to make a request.
+newStorageTransferTransferOperationsResume ::
+  -- |  Required. The name of the transfer operation. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  AgentPool ->
-  StorageTransferProjectsAgentPoolsPatch
-newStorageTransferProjectsAgentPoolsPatch name payload =
-  StorageTransferProjectsAgentPoolsPatch
+  ResumeTransferOperationRequest ->
+  StorageTransferTransferOperationsResume
+newStorageTransferTransferOperationsResume name payload =
+  StorageTransferTransferOperationsResume
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
       payload = payload,
-      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    StorageTransferProjectsAgentPoolsPatch
+    StorageTransferTransferOperationsResume
   where
   type
-    Rs StorageTransferProjectsAgentPoolsPatch =
-      AgentPool
+    Rs StorageTransferTransferOperationsResume =
+      Empty
   type
-    Scopes StorageTransferProjectsAgentPoolsPatch =
+    Scopes StorageTransferTransferOperationsResume =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    StorageTransferProjectsAgentPoolsPatch {..} =
+    StorageTransferTransferOperationsResume {..} =
       go
         name
         xgafv
         accessToken
         callback
-        updateMask
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
@@ -127,6 +124,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  StorageTransferProjectsAgentPoolsPatchResource
+                  StorageTransferTransferOperationsResumeResource
             )
             Core.mempty

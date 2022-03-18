@@ -19,34 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferOperations.Resume
+-- Module      : Gogol.StorageTransfer.TransferOperations.Pause
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resumes a transfer operation that is paused.
+-- Pauses a transfer operation.
 --
--- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.resume@.
-module Network.Google.StorageTransfer.TransferOperations.Resume
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
+module Gogol.StorageTransfer.TransferOperations.Pause
   ( -- * Resource
-    StorageTransferTransferOperationsResumeResource,
+    StorageTransferTransferOperationsPauseResource,
 
     -- ** Constructing a Request
-    newStorageTransferTransferOperationsResume,
-    StorageTransferTransferOperationsResume,
+    newStorageTransferTransferOperationsPause,
+    StorageTransferTransferOperationsPause,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
--- | A resource alias for @storagetransfer.transferOperations.resume@ method which the
--- 'StorageTransferTransferOperationsResume' request conforms to.
-type StorageTransferTransferOperationsResumeResource =
+-- | A resource alias for @storagetransfer.transferOperations.pause@ method which the
+-- 'StorageTransferTransferOperationsPause' request conforms to.
+type StorageTransferTransferOperationsPauseResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "resume" Core.Text
+    Core.:> Core.CaptureMode "name" "pause" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -55,13 +55,13 @@ type StorageTransferTransferOperationsResumeResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              ResumeTransferOperationRequest
+              PauseTransferOperationRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
--- | Resumes a transfer operation that is paused.
+-- | Pauses a transfer operation.
 --
--- /See:/ 'newStorageTransferTransferOperationsResume' smart constructor.
-data StorageTransferTransferOperationsResume = StorageTransferTransferOperationsResume
+-- /See:/ 'newStorageTransferTransferOperationsPause' smart constructor.
+data StorageTransferTransferOperationsPause = StorageTransferTransferOperationsPause
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -71,7 +71,7 @@ data StorageTransferTransferOperationsResume = StorageTransferTransferOperations
     -- | Required. The name of the transfer operation.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: ResumeTransferOperationRequest,
+    payload :: PauseTransferOperationRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,15 +79,15 @@ data StorageTransferTransferOperationsResume = StorageTransferTransferOperations
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageTransferTransferOperationsResume' with the minimum fields required to make a request.
-newStorageTransferTransferOperationsResume ::
+-- | Creates a value of 'StorageTransferTransferOperationsPause' with the minimum fields required to make a request.
+newStorageTransferTransferOperationsPause ::
   -- |  Required. The name of the transfer operation. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  ResumeTransferOperationRequest ->
-  StorageTransferTransferOperationsResume
-newStorageTransferTransferOperationsResume name payload =
-  StorageTransferTransferOperationsResume
+  PauseTransferOperationRequest ->
+  StorageTransferTransferOperationsPause
+newStorageTransferTransferOperationsPause name payload =
+  StorageTransferTransferOperationsPause
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -99,16 +99,16 @@ newStorageTransferTransferOperationsResume name payload =
 
 instance
   Core.GoogleRequest
-    StorageTransferTransferOperationsResume
+    StorageTransferTransferOperationsPause
   where
   type
-    Rs StorageTransferTransferOperationsResume =
+    Rs StorageTransferTransferOperationsPause =
       Empty
   type
-    Scopes StorageTransferTransferOperationsResume =
+    Scopes StorageTransferTransferOperationsPause =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    StorageTransferTransferOperationsResume {..} =
+    StorageTransferTransferOperationsPause {..} =
       go
         name
         xgafv
@@ -124,6 +124,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  StorageTransferTransferOperationsResumeResource
+                  StorageTransferTransferOperationsPauseResource
             )
             Core.mempty

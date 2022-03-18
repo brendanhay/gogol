@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferJobs.List
+-- Module      : Gogol.StorageTransfer.TransferJobs.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists transfer jobs.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.list@.
-module Network.Google.StorageTransfer.TransferJobs.List
+module Gogol.StorageTransfer.TransferJobs.List
   ( -- * Resource
     StorageTransferTransferJobsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StorageTransfer.TransferJobs.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferJobs.list@ method which the
 -- 'StorageTransferTransferJobsList' request conforms to.

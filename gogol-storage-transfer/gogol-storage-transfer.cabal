@@ -39,33 +39,34 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.StorageTransfer
-    Network.Google.StorageTransfer.GoogleServiceAccounts.Get
-    Network.Google.StorageTransfer.Projects.AgentPools.Create
-    Network.Google.StorageTransfer.Projects.AgentPools.Delete
-    Network.Google.StorageTransfer.Projects.AgentPools.Get
-    Network.Google.StorageTransfer.Projects.AgentPools.List
-    Network.Google.StorageTransfer.Projects.AgentPools.Patch
-    Network.Google.StorageTransfer.TransferJobs.Create
-    Network.Google.StorageTransfer.TransferJobs.Get
-    Network.Google.StorageTransfer.TransferJobs.List
-    Network.Google.StorageTransfer.TransferJobs.Patch
-    Network.Google.StorageTransfer.TransferJobs.Run
-    Network.Google.StorageTransfer.TransferOperations.Cancel
-    Network.Google.StorageTransfer.TransferOperations.Get
-    Network.Google.StorageTransfer.TransferOperations.List
-    Network.Google.StorageTransfer.TransferOperations.Pause
-    Network.Google.StorageTransfer.TransferOperations.Resume
-    Network.Google.StorageTransfer.Types
+    Gogol.StorageTransfer
+    Gogol.StorageTransfer.GoogleServiceAccounts.Get
+    Gogol.StorageTransfer.Projects.AgentPools.Create
+    Gogol.StorageTransfer.Projects.AgentPools.Delete
+    Gogol.StorageTransfer.Projects.AgentPools.Get
+    Gogol.StorageTransfer.Projects.AgentPools.List
+    Gogol.StorageTransfer.Projects.AgentPools.Patch
+    Gogol.StorageTransfer.TransferJobs.Create
+    Gogol.StorageTransfer.TransferJobs.Get
+    Gogol.StorageTransfer.TransferJobs.List
+    Gogol.StorageTransfer.TransferJobs.Patch
+    Gogol.StorageTransfer.TransferJobs.Run
+    Gogol.StorageTransfer.TransferOperations.Cancel
+    Gogol.StorageTransfer.TransferOperations.Get
+    Gogol.StorageTransfer.TransferOperations.List
+    Gogol.StorageTransfer.TransferOperations.Pause
+    Gogol.StorageTransfer.TransferOperations.Resume
+    Gogol.StorageTransfer.Types
 
   other-modules:
-    Network.Google.StorageTransfer.Internal.Product
-    Network.Google.StorageTransfer.Internal.Sum
+    Gogol.StorageTransfer.Internal.Product
+    Gogol.StorageTransfer.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

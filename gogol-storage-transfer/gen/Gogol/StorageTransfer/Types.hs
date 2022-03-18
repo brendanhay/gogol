@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.Types
+-- Module      : Gogol.StorageTransfer.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.StorageTransfer.Types
+module Gogol.StorageTransfer.Types
   ( -- * Configuration
     storageTransferService,
 
@@ -246,9 +246,9 @@ module Network.Google.StorageTransfer.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Internal.Product
-import Network.Google.StorageTransfer.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Internal.Product
+import Gogol.StorageTransfer.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 storageTransferService :: Core.ServiceConfig

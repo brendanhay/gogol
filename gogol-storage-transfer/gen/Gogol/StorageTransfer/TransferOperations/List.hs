@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferOperations.List
+-- Module      : Gogol.StorageTransfer.TransferOperations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists transfer operations. Operations are ordered by their creation time in reverse chronological order.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.list@.
-module Network.Google.StorageTransfer.TransferOperations.List
+module Gogol.StorageTransfer.TransferOperations.List
   ( -- * Resource
     StorageTransferTransferOperationsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StorageTransfer.TransferOperations.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.list@ method which the
 -- 'StorageTransferTransferOperationsList' request conforms to.

@@ -19,55 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferJobs.Create
+-- Module      : Gogol.StorageTransfer.TransferJobs.Run
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a transfer job that runs periodically.
+-- Attempts to start a new TransferOperation for the current TransferJob. A TransferJob has a maximum of one active TransferOperation. If this method is called while a TransferOperation is active, an error will be returned.
 --
--- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.create@.
-module Network.Google.StorageTransfer.TransferJobs.Create
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.run@.
+module Gogol.StorageTransfer.TransferJobs.Run
   ( -- * Resource
-    StorageTransferTransferJobsCreateResource,
+    StorageTransferTransferJobsRunResource,
 
     -- ** Constructing a Request
-    newStorageTransferTransferJobsCreate,
-    StorageTransferTransferJobsCreate,
+    newStorageTransferTransferJobsRun,
+    StorageTransferTransferJobsRun,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
--- | A resource alias for @storagetransfer.transferJobs.create@ method which the
--- 'StorageTransferTransferJobsCreate' request conforms to.
-type StorageTransferTransferJobsCreateResource =
+-- | A resource alias for @storagetransfer.transferJobs.run@ method which the
+-- 'StorageTransferTransferJobsRun' request conforms to.
+type StorageTransferTransferJobsRunResource =
   "v1"
-    Core.:> "transferJobs"
+    Core.:> Core.CaptureMode "jobName" "run" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] TransferJob
-    Core.:> Core.Post '[Core.JSON] TransferJob
+    Core.:> Core.ReqBody '[Core.JSON] RunTransferJobRequest
+    Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates a transfer job that runs periodically.
+-- | Attempts to start a new TransferOperation for the current TransferJob. A TransferJob has a maximum of one active TransferOperation. If this method is called while a TransferOperation is active, an error will be returned.
 --
--- /See:/ 'newStorageTransferTransferJobsCreate' smart constructor.
-data StorageTransferTransferJobsCreate = StorageTransferTransferJobsCreate
+-- /See:/ 'newStorageTransferTransferJobsRun' smart constructor.
+data StorageTransferTransferJobsRun = StorageTransferTransferJobsRun
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Required. The name of the transfer job.
+    jobName :: Core.Text,
     -- | Multipart request metadata.
-    payload :: TransferJob,
+    payload :: RunTransferJobRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,16 +77,19 @@ data StorageTransferTransferJobsCreate = StorageTransferTransferJobsCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageTransferTransferJobsCreate' with the minimum fields required to make a request.
-newStorageTransferTransferJobsCreate ::
+-- | Creates a value of 'StorageTransferTransferJobsRun' with the minimum fields required to make a request.
+newStorageTransferTransferJobsRun ::
+  -- |  Required. The name of the transfer job. See 'jobName'.
+  Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  TransferJob ->
-  StorageTransferTransferJobsCreate
-newStorageTransferTransferJobsCreate payload =
-  StorageTransferTransferJobsCreate
+  RunTransferJobRequest ->
+  StorageTransferTransferJobsRun
+newStorageTransferTransferJobsRun jobName payload =
+  StorageTransferTransferJobsRun
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      jobName = jobName,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -92,16 +97,15 @@ newStorageTransferTransferJobsCreate payload =
 
 instance
   Core.GoogleRequest
-    StorageTransferTransferJobsCreate
+    StorageTransferTransferJobsRun
   where
+  type Rs StorageTransferTransferJobsRun = Operation
   type
-    Rs StorageTransferTransferJobsCreate =
-      TransferJob
-  type
-    Scopes StorageTransferTransferJobsCreate =
+    Scopes StorageTransferTransferJobsRun =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient StorageTransferTransferJobsCreate {..} =
+  requestClient StorageTransferTransferJobsRun {..} =
     go
+      jobName
       xgafv
       accessToken
       callback
@@ -114,6 +118,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy StorageTransferTransferJobsCreateResource
+              Core.Proxy StorageTransferTransferJobsRunResource
           )
           Core.mempty
