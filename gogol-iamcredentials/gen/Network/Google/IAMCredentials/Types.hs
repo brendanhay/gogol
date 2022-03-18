@@ -1,90 +1,87 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.IAMCredentials.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.IAMCredentials.Types
-    (
-    -- * Service Configuration
-      iAMCredentialsService
+  ( -- * Configuration
+    iAMCredentialsService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * GenerateIdTokenRequest
-    , GenerateIdTokenRequest
-    , generateIdTokenRequest
-    , gitrAudience
-    , gitrDelegates
-    , gitrIncludeEmail
+    -- * Types
 
-    -- * GenerateAccessTokenResponse
-    , GenerateAccessTokenResponse
-    , generateAccessTokenResponse
-    , gatrAccessToken
-    , gatrExpireTime
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * SignJwtResponse
-    , SignJwtResponse
-    , signJwtResponse
-    , sjrKeyId
-    , sjrSignedJwt
+    -- ** GenerateAccessTokenRequest
+    GenerateAccessTokenRequest (..),
+    newGenerateAccessTokenRequest,
 
-    -- * SignBlobRequest
-    , SignBlobRequest
-    , signBlobRequest
-    , sbrDelegates
-    , sbrPayload
+    -- ** GenerateAccessTokenResponse
+    GenerateAccessTokenResponse (..),
+    newGenerateAccessTokenResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** GenerateIdTokenRequest
+    GenerateIdTokenRequest (..),
+    newGenerateIdTokenRequest,
 
-    -- * GenerateAccessTokenRequest
-    , GenerateAccessTokenRequest
-    , generateAccessTokenRequest
-    , gatrDelegates
-    , gatrLifetime
-    , gatrScope
+    -- ** GenerateIdTokenResponse
+    GenerateIdTokenResponse (..),
+    newGenerateIdTokenResponse,
 
-    -- * SignJwtRequest
-    , SignJwtRequest
-    , signJwtRequest
-    , sjrDelegates
-    , sjrPayload
+    -- ** SignBlobRequest
+    SignBlobRequest (..),
+    newSignBlobRequest,
 
-    -- * SignBlobResponse
-    , SignBlobResponse
-    , signBlobResponse
-    , sbrKeyId
-    , sbrSignedBlob
+    -- ** SignBlobResponse
+    SignBlobResponse (..),
+    newSignBlobResponse,
 
-    -- * GenerateIdTokenResponse
-    , GenerateIdTokenResponse
-    , generateIdTokenResponse
-    , gitrToken
-    ) where
+    -- ** SignJwtRequest
+    SignJwtRequest (..),
+    newSignJwtRequest,
 
-import Network.Google.IAMCredentials.Types.Product
-import Network.Google.IAMCredentials.Types.Sum
-import Network.Google.Prelude
+    -- ** SignJwtResponse
+    SignJwtResponse (..),
+    newSignJwtResponse,
+  )
+where
 
--- | Default request referring to version 'v1' of the IAM Service Account Credentials API. This contains the host and root path used as a starting point for constructing service requests.
-iAMCredentialsService :: ServiceConfig
-iAMCredentialsService
-  = defaultService (ServiceId "iamcredentials:v1")
-      "iamcredentials.googleapis.com"
+import Network.Google.IAMCredentials.Internal.Product
+import Network.Google.IAMCredentials.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v1@ of the IAM Service Account Credentials API. This contains the host and root path used as a starting point for constructing service requests.
+iAMCredentialsService :: Core.ServiceConfig
+iAMCredentialsService =
+  Core.defaultService
+    (Core.ServiceId "iamcredentials:v1")
+    "iamcredentials.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
