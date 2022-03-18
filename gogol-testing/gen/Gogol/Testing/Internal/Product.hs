@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Testing.Internal.Product
+-- Module      : Gogol.Testing.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Testing.Internal.Product
+module Gogol.Testing.Internal.Product
   ( -- * Account
     Account (..),
     newAccount,
@@ -308,8 +308,8 @@ module Network.Google.Testing.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Testing.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Testing.Internal.Sum
 
 -- | Identifies an account and how to log into it.
 --
