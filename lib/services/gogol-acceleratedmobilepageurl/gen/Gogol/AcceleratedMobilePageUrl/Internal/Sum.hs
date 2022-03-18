@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AcceleratedMobilePageUrl.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AmpUrlError_ErrorCode
     AmpUrlError_ErrorCode
-      ( AmpUrlError_ErrorCode_ERRORCODEUNSPECIFIED,
+      (
+        AmpUrlError_ErrorCode_ERRORCODEUNSPECIFIED,
         AmpUrlError_ErrorCode_INPUTURLNOTFOUND,
         AmpUrlError_ErrorCode_NOAMPURL,
         AmpUrlError_ErrorCode_APPLICATIONERROR,
@@ -46,27 +57,27 @@ module Gogol.AcceleratedMobilePageUrl.Internal.Sum
 
     -- * BatchGetAmpUrlsRequest_LookupStrategy
     BatchGetAmpUrlsRequest_LookupStrategy
-      ( BatchGetAmpUrlsRequest_LookupStrategy_FETCHLIVEDOC,
+      (
+        BatchGetAmpUrlsRequest_LookupStrategy_FETCHLIVEDOC,
         BatchGetAmpUrlsRequest_LookupStrategy_ININDEXDOC,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -79,21 +90,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The error code of an API call.
-newtype AmpUrlError_ErrorCode = AmpUrlError_ErrorCode {fromAmpUrlError_ErrorCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AmpUrlError_ErrorCode = AmpUrlError_ErrorCode { fromAmpUrlError_ErrorCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified error.
 pattern AmpUrlError_ErrorCode_ERRORCODEUNSPECIFIED :: AmpUrlError_ErrorCode
@@ -126,21 +136,20 @@ pattern AmpUrlError_ErrorCode_URLISINVALIDAMP = AmpUrlError_ErrorCode "URL_IS_IN
   AmpUrlError_ErrorCode_APPLICATIONERROR,
   AmpUrlError_ErrorCode_URLISVALIDAMP,
   AmpUrlError_ErrorCode_URLISINVALIDAMP,
-  AmpUrlError_ErrorCode
-  #-}
+  AmpUrlError_ErrorCode #-}
 
 -- | The lookup_strategy being requested.
-newtype BatchGetAmpUrlsRequest_LookupStrategy = BatchGetAmpUrlsRequest_LookupStrategy {fromBatchGetAmpUrlsRequest_LookupStrategy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BatchGetAmpUrlsRequest_LookupStrategy = BatchGetAmpUrlsRequest_LookupStrategy { fromBatchGetAmpUrlsRequest_LookupStrategy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | FETCH/LIVE/DOC strategy involves live document fetch of URLs not found in the index. Any request URL not found in the index is crawled in realtime to validate if there is a corresponding AMP URL. This strategy has higher coverage but with extra latency introduced by realtime crawling. This is the default strategy. Applications using this strategy should set higher HTTP timeouts of the API calls.
 pattern BatchGetAmpUrlsRequest_LookupStrategy_FETCHLIVEDOC :: BatchGetAmpUrlsRequest_LookupStrategy
@@ -153,5 +162,4 @@ pattern BatchGetAmpUrlsRequest_LookupStrategy_ININDEXDOC = BatchGetAmpUrlsReques
 {-# COMPLETE
   BatchGetAmpUrlsRequest_LookupStrategy_FETCHLIVEDOC,
   BatchGetAmpUrlsRequest_LookupStrategy_ININDEXDOC,
-  BatchGetAmpUrlsRequest_LookupStrategy
-  #-}
+  BatchGetAmpUrlsRequest_LookupStrategy #-}
