@@ -1,253 +1,189 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ConsumerSurveys
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates and conducts surveys, lists the surveys that an authenticated
--- user owns, and retrieves survey results and information about specified
--- surveys.
+-- Creates and conducts surveys, lists the surveys that an authenticated user owns, and retrieves survey results and information about specified surveys.
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference>
 module Network.Google.ConsumerSurveys
-    (
-    -- * Service Configuration
-      consumerSurveysService
+  ( -- * Configuration
+    consumerSurveysService,
 
     -- * OAuth Scopes
-    , userInfoEmailScope
-    , consumerSurveysReadOnlyScope
-    , consumerSurveysScope
-
-    -- * API Declaration
-    , ConsumerSurveysAPI
+    consumerSurveysScope,
+    consumerSurveysReadOnlyScope,
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** consumersurveys.mobileapppanels.get
-    , module Network.Google.Resource.ConsumerSurveys.MobileApppanels.Get
+    ConsumerSurveysMobileapppanelsGetResource,
+    newConsumerSurveysMobileapppanelsGet,
+    ConsumerSurveysMobileapppanelsGet,
 
     -- ** consumersurveys.mobileapppanels.list
-    , module Network.Google.Resource.ConsumerSurveys.MobileApppanels.List
+    ConsumerSurveysMobileapppanelsListResource,
+    newConsumerSurveysMobileapppanelsList,
+    ConsumerSurveysMobileapppanelsList,
 
     -- ** consumersurveys.mobileapppanels.update
-    , module Network.Google.Resource.ConsumerSurveys.MobileApppanels.Update
+    ConsumerSurveysMobileapppanelsUpdateResource,
+    newConsumerSurveysMobileapppanelsUpdate,
+    ConsumerSurveysMobileapppanelsUpdate,
 
     -- ** consumersurveys.results.get
-    , module Network.Google.Resource.ConsumerSurveys.Results.Get
+    ConsumerSurveysResultsGetResource,
+    newConsumerSurveysResultsGet,
+    ConsumerSurveysResultsGet,
 
     -- ** consumersurveys.surveys.delete
-    , module Network.Google.Resource.ConsumerSurveys.Surveys.Delete
+    ConsumerSurveysSurveysDeleteResource,
+    newConsumerSurveysSurveysDelete,
+    ConsumerSurveysSurveysDelete,
 
     -- ** consumersurveys.surveys.get
-    , module Network.Google.Resource.ConsumerSurveys.Surveys.Get
+    ConsumerSurveysSurveysGetResource,
+    newConsumerSurveysSurveysGet,
+    ConsumerSurveysSurveysGet,
 
     -- ** consumersurveys.surveys.insert
-    , module Network.Google.Resource.ConsumerSurveys.Surveys.Insert
+    ConsumerSurveysSurveysInsertResource,
+    newConsumerSurveysSurveysInsert,
+    ConsumerSurveysSurveysInsert,
 
     -- ** consumersurveys.surveys.list
-    , module Network.Google.Resource.ConsumerSurveys.Surveys.List
+    ConsumerSurveysSurveysListResource,
+    newConsumerSurveysSurveysList,
+    ConsumerSurveysSurveysList,
 
     -- ** consumersurveys.surveys.start
-    , module Network.Google.Resource.ConsumerSurveys.Surveys.Start
+    ConsumerSurveysSurveysStartResource,
+    newConsumerSurveysSurveysStart,
+    ConsumerSurveysSurveysStart,
 
     -- ** consumersurveys.surveys.stop
-    , module Network.Google.Resource.ConsumerSurveys.Surveys.Stop
+    ConsumerSurveysSurveysStopResource,
+    newConsumerSurveysSurveysStop,
+    ConsumerSurveysSurveysStop,
 
     -- ** consumersurveys.surveys.update
-    , module Network.Google.Resource.ConsumerSurveys.Surveys.Update
+    ConsumerSurveysSurveysUpdateResource,
+    newConsumerSurveysSurveysUpdate,
+    ConsumerSurveysSurveysUpdate,
 
     -- * Types
 
-    -- ** SurveysListResponse
-    , SurveysListResponse
-    , surveysListResponse
-    , slrRequestId
-    , slrTokenPagination
-    , slrPageInfo
-    , slrResources
+    -- ** FieldMask
+    FieldMask (..),
+    newFieldMask,
 
     -- ** MobileAppPanel
-    , MobileAppPanel
-    , mobileAppPanel
-    , mapOwners
-    , mapCountry
-    , mapName
-    , mapMobileAppPanelId
-    , mapLanguage
-    , mapIsPublicPanel
-
-    -- ** TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
-
-    -- ** ResultsGetRequest
-    , ResultsGetRequest
-    , resultsGetRequest
-    , rgrResultMask
+    MobileAppPanel (..),
+    newMobileAppPanel,
 
     -- ** MobileAppPanelsListResponse
-    , MobileAppPanelsListResponse
-    , mobileAppPanelsListResponse
-    , maplrRequestId
-    , maplrTokenPagination
-    , maplrPageInfo
-    , maplrResources
+    MobileAppPanelsListResponse (..),
+    newMobileAppPanelsListResponse,
 
     -- ** PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
+    PageInfo (..),
+    newPageInfo,
 
-    -- ** FieldMask
-    , FieldMask
-    , fieldMask
-    , fmId
-    , fmFields
-
-    -- ** Survey
-    , Survey
-    , survey
-    , sAudience
-    , sState
-    , sOwners
-    , sWantedResponseCount
-    , sSurveyURLId
-    , sCost
-    , sRejectionReason
-    , sCustomerData
-    , sQuestions
-    , sTitle
-    , sDescription
-
-    -- ** SurveysStartResponse
-    , SurveysStartResponse
-    , surveysStartResponse
-    , ssrRequestId
-
-    -- ** SurveysStopResponse
-    , SurveysStopResponse
-    , surveysStopResponse
-    , sRequestId
+    -- ** ResultsGetRequest
+    ResultsGetRequest (..),
+    newResultsGetRequest,
 
     -- ** ResultsMask
-    , ResultsMask
-    , resultsMask
-    , rmProjection
-    , rmFields
+    ResultsMask (..),
+    newResultsMask,
 
-    -- ** SurveyRejection
-    , SurveyRejection
-    , surveyRejection
-    , srExplanation
-    , srType
-
-    -- ** SurveyResults
-    , SurveyResults
-    , surveyResults
-    , srStatus
-    , srSurveyURLId
-
-    -- ** SurveysStartRequest
-    , SurveysStartRequest
-    , surveysStartRequest
-    , ssrMaxCostPerResponseNanos
-
-    -- ** SurveysDeleteResponse
-    , SurveysDeleteResponse
-    , surveysDeleteResponse
-    , sdrRequestId
-
-    -- ** SurveyQuestionImage
-    , SurveyQuestionImage
-    , surveyQuestionImage
-    , sqiData
-    , sqiURL
-    , sqiAltText
+    -- ** Survey
+    Survey (..),
+    newSurvey,
 
     -- ** SurveyAudience
-    , SurveyAudience
-    , surveyAudience
-    , saCountry
-    , saAges
-    , saLanguages
-    , saGender
-    , saMobileAppPanelId
-    , saCountrySubdivision
-    , saPopulationSource
+    SurveyAudience (..),
+    newSurveyAudience,
 
     -- ** SurveyCost
-    , SurveyCost
-    , surveyCost
-    , scCurrencyCode
-    , scNanos
-    , scMaxCostPerResponseNanos
-    , scCostPerResponseNanos
+    SurveyCost (..),
+    newSurveyCost,
 
     -- ** SurveyQuestion
-    , SurveyQuestion
-    , surveyQuestion
-    , sqImages
-    , sqAnswers
-    , sqSingleLineResponse
-    , sqMustPickSuggestion
-    , sqSentimentText
-    , sqThresholdAnswers
-    , sqHasOther
-    , sqOpenTextSuggestions
-    , sqVideoId
-    , sqLastAnswerPositionPinned
-    , sqAnswerOrder
-    , sqOpenTextPlaceholder
-    , sqType
-    , sqUnitOfMeasurementLabel
-    , sqHighValueLabel
-    , sqQuestion
-    , sqNumStars
-    , sqLowValueLabel
-    ) where
+    SurveyQuestion (..),
+    newSurveyQuestion,
 
-import Network.Google.Prelude
+    -- ** SurveyQuestionImage
+    SurveyQuestionImage (..),
+    newSurveyQuestionImage,
+
+    -- ** SurveyRejection
+    SurveyRejection (..),
+    newSurveyRejection,
+
+    -- ** SurveyResults
+    SurveyResults (..),
+    newSurveyResults,
+
+    -- ** SurveysDeleteResponse
+    SurveysDeleteResponse (..),
+    newSurveysDeleteResponse,
+
+    -- ** SurveysListResponse
+    SurveysListResponse (..),
+    newSurveysListResponse,
+
+    -- ** SurveysStartRequest
+    SurveysStartRequest (..),
+    newSurveysStartRequest,
+
+    -- ** SurveysStartResponse
+    SurveysStartResponse (..),
+    newSurveysStartResponse,
+
+    -- ** SurveysStopResponse
+    SurveysStopResponse (..),
+    newSurveysStopResponse,
+
+    -- ** TokenPagination
+    TokenPagination (..),
+    newTokenPagination,
+  )
+where
+
+import Network.Google.ConsumerSurveys.Mobileapppanels.Get
+import Network.Google.ConsumerSurveys.Mobileapppanels.List
+import Network.Google.ConsumerSurveys.Mobileapppanels.Update
+import Network.Google.ConsumerSurveys.Results.Get
+import Network.Google.ConsumerSurveys.Surveys.Delete
+import Network.Google.ConsumerSurveys.Surveys.Get
+import Network.Google.ConsumerSurveys.Surveys.Insert
+import Network.Google.ConsumerSurveys.Surveys.List
+import Network.Google.ConsumerSurveys.Surveys.Start
+import Network.Google.ConsumerSurveys.Surveys.Stop
+import Network.Google.ConsumerSurveys.Surveys.Update
 import Network.Google.ConsumerSurveys.Types
-import Network.Google.Resource.ConsumerSurveys.MobileApppanels.Get
-import Network.Google.Resource.ConsumerSurveys.MobileApppanels.List
-import Network.Google.Resource.ConsumerSurveys.MobileApppanels.Update
-import Network.Google.Resource.ConsumerSurveys.Results.Get
-import Network.Google.Resource.ConsumerSurveys.Surveys.Delete
-import Network.Google.Resource.ConsumerSurveys.Surveys.Get
-import Network.Google.Resource.ConsumerSurveys.Surveys.Insert
-import Network.Google.Resource.ConsumerSurveys.Surveys.List
-import Network.Google.Resource.ConsumerSurveys.Surveys.Start
-import Network.Google.Resource.ConsumerSurveys.Surveys.Stop
-import Network.Google.Resource.ConsumerSurveys.Surveys.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Consumer Surveys API service.
-type ConsumerSurveysAPI =
-     MobileApppanelsListResource :<|>
-       MobileApppanelsGetResource
-       :<|> MobileApppanelsUpdateResource
-       :<|> ResultsGetResource
-       :<|> SurveysInsertResource
-       :<|> SurveysListResource
-       :<|> SurveysStartResource
-       :<|> SurveysGetResource
-       :<|> SurveysStopResource
-       :<|> SurveysDeleteResource
-       :<|> SurveysUpdateResource
