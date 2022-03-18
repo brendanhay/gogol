@@ -39,41 +39,42 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.People
-    Network.Google.People.BatchCreateContacts
-    Network.Google.People.BatchDeleteContacts
-    Network.Google.People.BatchUpdateContacts
-    Network.Google.People.Connections.List
-    Network.Google.People.ContactGroups.BatchGet
-    Network.Google.People.ContactGroups.Create
-    Network.Google.People.ContactGroups.Delete
-    Network.Google.People.ContactGroups.Get
-    Network.Google.People.ContactGroups.List
-    Network.Google.People.ContactGroups.Members.Modify
-    Network.Google.People.ContactGroups.Update
-    Network.Google.People.CreateContact
-    Network.Google.People.DeleteContact
-    Network.Google.People.DeleteContactPhoto
-    Network.Google.People.Get
-    Network.Google.People.GetBatchGet
-    Network.Google.People.ListDirectoryPeople
-    Network.Google.People.OtherContacts.CopyOtherContactToMyContactsGroup
-    Network.Google.People.OtherContacts.List
-    Network.Google.People.OtherContacts.Search
-    Network.Google.People.SearchContacts
-    Network.Google.People.SearchDirectoryPeople
-    Network.Google.People.Types
-    Network.Google.People.UpdateContact
-    Network.Google.People.UpdateContactPhoto
+    Gogol.People
+    Gogol.People.BatchCreateContacts
+    Gogol.People.BatchDeleteContacts
+    Gogol.People.BatchUpdateContacts
+    Gogol.People.Connections.List
+    Gogol.People.ContactGroups.BatchGet
+    Gogol.People.ContactGroups.Create
+    Gogol.People.ContactGroups.Delete
+    Gogol.People.ContactGroups.Get
+    Gogol.People.ContactGroups.List
+    Gogol.People.ContactGroups.Members.Modify
+    Gogol.People.ContactGroups.Update
+    Gogol.People.CreateContact
+    Gogol.People.DeleteContact
+    Gogol.People.DeleteContactPhoto
+    Gogol.People.Get
+    Gogol.People.GetBatchGet
+    Gogol.People.ListDirectoryPeople
+    Gogol.People.OtherContacts.CopyOtherContactToMyContactsGroup
+    Gogol.People.OtherContacts.List
+    Gogol.People.OtherContacts.Search
+    Gogol.People.SearchContacts
+    Gogol.People.SearchDirectoryPeople
+    Gogol.People.Types
+    Gogol.People.UpdateContact
+    Gogol.People.UpdateContactPhoto
 
   other-modules:
-    Network.Google.People.Internal.Product
-    Network.Google.People.Internal.Sum
+    Gogol.People.Internal.Product
+    Gogol.People.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
