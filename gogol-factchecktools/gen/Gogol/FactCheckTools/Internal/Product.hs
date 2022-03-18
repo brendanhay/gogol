@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FactCheckTools.Internal.Product
+-- Module      : Gogol.FactCheckTools.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FactCheckTools.Internal.Product
+module Gogol.FactCheckTools.Internal.Product
   ( -- * GoogleFactcheckingFactchecktoolsV1alpha1Claim
     GoogleFactcheckingFactchecktoolsV1alpha1Claim (..),
     newGoogleFactcheckingFactchecktoolsV1alpha1Claim,
@@ -72,8 +72,8 @@ module Network.Google.FactCheckTools.Internal.Product
   )
 where
 
-import Network.Google.FactCheckTools.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FactCheckTools.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Information about the claim.
 --

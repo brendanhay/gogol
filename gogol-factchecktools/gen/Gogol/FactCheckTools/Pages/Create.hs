@@ -19,34 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FactCheckTools.Pages.Update
+-- Module      : Gogol.FactCheckTools.Pages.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update for all @ClaimReview@ markup on a page Note that this is a full update. To retain the existing @ClaimReview@ markup on a page, first perform a Get operation, then modify the returned markup, and finally call Update with the entire @ClaimReview@ markup as the body.
+-- Create @ClaimReview@ markup on a page.
 --
--- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference> for @factchecktools.pages.update@.
-module Network.Google.FactCheckTools.Pages.Update
+-- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference> for @factchecktools.pages.create@.
+module Gogol.FactCheckTools.Pages.Create
   ( -- * Resource
-    FactCheckToolsPagesUpdateResource,
+    FactCheckToolsPagesCreateResource,
 
     -- ** Constructing a Request
-    newFactCheckToolsPagesUpdate,
-    FactCheckToolsPagesUpdate,
+    newFactCheckToolsPagesCreate,
+    FactCheckToolsPagesCreate,
   )
 where
 
-import Network.Google.FactCheckTools.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FactCheckTools.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @factchecktools.pages.update@ method which the
--- 'FactCheckToolsPagesUpdate' request conforms to.
-type FactCheckToolsPagesUpdateResource =
+-- | A resource alias for @factchecktools.pages.create@ method which the
+-- 'FactCheckToolsPagesCreate' request conforms to.
+type FactCheckToolsPagesCreateResource =
   "v1alpha1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> "pages"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -56,22 +56,20 @@ type FactCheckToolsPagesUpdateResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
-    Core.:> Core.Put
+    Core.:> Core.Post
               '[Core.JSON]
               GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
 
--- | Update for all @ClaimReview@ markup on a page Note that this is a full update. To retain the existing @ClaimReview@ markup on a page, first perform a Get operation, then modify the returned markup, and finally call Update with the entire @ClaimReview@ markup as the body.
+-- | Create @ClaimReview@ markup on a page.
 --
--- /See:/ 'newFactCheckToolsPagesUpdate' smart constructor.
-data FactCheckToolsPagesUpdate = FactCheckToolsPagesUpdate
+-- /See:/ 'newFactCheckToolsPagesCreate' smart constructor.
+data FactCheckToolsPagesCreate = FactCheckToolsPagesCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of this @ClaimReview@ markup page resource, in the form of @pages\/{page_id}@. Except for update requests, this field is output-only and should not be set by the user.
-    name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -81,34 +79,30 @@ data FactCheckToolsPagesUpdate = FactCheckToolsPagesUpdate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FactCheckToolsPagesUpdate' with the minimum fields required to make a request.
-newFactCheckToolsPagesUpdate ::
-  -- |  The name of this @ClaimReview@ markup page resource, in the form of @pages\/{page_id}@. Except for update requests, this field is output-only and should not be set by the user. See 'name'.
-  Core.Text ->
+-- | Creates a value of 'FactCheckToolsPagesCreate' with the minimum fields required to make a request.
+newFactCheckToolsPagesCreate ::
   -- |  Multipart request metadata. See 'payload'.
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage ->
-  FactCheckToolsPagesUpdate
-newFactCheckToolsPagesUpdate name payload =
-  FactCheckToolsPagesUpdate
+  FactCheckToolsPagesCreate
+newFactCheckToolsPagesCreate payload =
+  FactCheckToolsPagesCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest FactCheckToolsPagesUpdate where
+instance Core.GoogleRequest FactCheckToolsPagesCreate where
   type
-    Rs FactCheckToolsPagesUpdate =
+    Rs FactCheckToolsPagesCreate =
       GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
   type
-    Scopes FactCheckToolsPagesUpdate =
+    Scopes FactCheckToolsPagesCreate =
       '["https://www.googleapis.com/auth/userinfo.email"]
-  requestClient FactCheckToolsPagesUpdate {..} =
+  requestClient FactCheckToolsPagesCreate {..} =
     go
-      name
       xgafv
       accessToken
       callback
@@ -121,6 +115,6 @@ instance Core.GoogleRequest FactCheckToolsPagesUpdate where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy FactCheckToolsPagesUpdateResource
+              Core.Proxy FactCheckToolsPagesCreateResource
           )
           Core.mempty

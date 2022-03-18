@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FactCheckTools.Types
+-- Module      : Gogol.FactCheckTools.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FactCheckTools.Types
+module Gogol.FactCheckTools.Types
   ( -- * Configuration
     factCheckToolsService,
 
@@ -83,9 +83,9 @@ module Network.Google.FactCheckTools.Types
   )
 where
 
-import Network.Google.FactCheckTools.Internal.Product
-import Network.Google.FactCheckTools.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FactCheckTools.Internal.Product
+import Gogol.FactCheckTools.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1alpha1@ of the Fact Check Tools API. This contains the host and root path used as a starting point for constructing service requests.
 factCheckToolsService :: Core.ServiceConfig

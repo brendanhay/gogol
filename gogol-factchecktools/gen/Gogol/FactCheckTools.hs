@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FactCheckTools
+-- Module      : Gogol.FactCheckTools
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 --
 --
 -- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference>
-module Network.Google.FactCheckTools
+module Gogol.FactCheckTools
   ( -- * Configuration
     factCheckToolsService,
 
@@ -119,10 +119,10 @@ module Network.Google.FactCheckTools
   )
 where
 
-import Network.Google.FactCheckTools.Claims.Search
-import Network.Google.FactCheckTools.Pages.Create
-import Network.Google.FactCheckTools.Pages.Delete
-import Network.Google.FactCheckTools.Pages.Get
-import Network.Google.FactCheckTools.Pages.List
-import Network.Google.FactCheckTools.Pages.Update
-import Network.Google.FactCheckTools.Types
+import Gogol.FactCheckTools.Claims.Search
+import Gogol.FactCheckTools.Pages.Create
+import Gogol.FactCheckTools.Pages.Delete
+import Gogol.FactCheckTools.Pages.Get
+import Gogol.FactCheckTools.Pages.List
+import Gogol.FactCheckTools.Pages.Update
+import Gogol.FactCheckTools.Types
