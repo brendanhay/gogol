@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,186 +36,186 @@
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference>
 module Gogol.Billing
-  ( -- * Configuration
-    billingService,
+    (
+    -- * Configuration
+      billingService
 
     -- * OAuth Scopes
-    cloudBillingScope,
-    cloudBillingReadOnlyScope,
-    cloudPlatformScope,
+    , cloudBillingScope
+    , cloudBillingReadOnlyScope
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** cloudbilling.billingAccounts.create
-    CloudbillingBillingAccountsCreateResource,
-    newCloudbillingBillingAccountsCreate,
-    CloudbillingBillingAccountsCreate,
+    , CloudbillingBillingAccountsCreateResource
+    , newCloudbillingBillingAccountsCreate
+    , CloudbillingBillingAccountsCreate
 
     -- ** cloudbilling.billingAccounts.get
-    CloudbillingBillingAccountsGetResource,
-    newCloudbillingBillingAccountsGet,
-    CloudbillingBillingAccountsGet,
+    , CloudbillingBillingAccountsGetResource
+    , newCloudbillingBillingAccountsGet
+    , CloudbillingBillingAccountsGet
 
     -- ** cloudbilling.billingAccounts.getIamPolicy
-    CloudbillingBillingAccountsGetIamPolicyResource,
-    newCloudbillingBillingAccountsGetIamPolicy,
-    CloudbillingBillingAccountsGetIamPolicy,
+    , CloudbillingBillingAccountsGetIamPolicyResource
+    , newCloudbillingBillingAccountsGetIamPolicy
+    , CloudbillingBillingAccountsGetIamPolicy
 
     -- ** cloudbilling.billingAccounts.list
-    CloudbillingBillingAccountsListResource,
-    newCloudbillingBillingAccountsList,
-    CloudbillingBillingAccountsList,
+    , CloudbillingBillingAccountsListResource
+    , newCloudbillingBillingAccountsList
+    , CloudbillingBillingAccountsList
 
     -- ** cloudbilling.billingAccounts.patch
-    CloudbillingBillingAccountsPatchResource,
-    newCloudbillingBillingAccountsPatch,
-    CloudbillingBillingAccountsPatch,
+    , CloudbillingBillingAccountsPatchResource
+    , newCloudbillingBillingAccountsPatch
+    , CloudbillingBillingAccountsPatch
 
     -- ** cloudbilling.billingAccounts.projects.list
-    CloudbillingBillingAccountsProjectsListResource,
-    newCloudbillingBillingAccountsProjectsList,
-    CloudbillingBillingAccountsProjectsList,
+    , CloudbillingBillingAccountsProjectsListResource
+    , newCloudbillingBillingAccountsProjectsList
+    , CloudbillingBillingAccountsProjectsList
 
     -- ** cloudbilling.billingAccounts.setIamPolicy
-    CloudbillingBillingAccountsSetIamPolicyResource,
-    newCloudbillingBillingAccountsSetIamPolicy,
-    CloudbillingBillingAccountsSetIamPolicy,
+    , CloudbillingBillingAccountsSetIamPolicyResource
+    , newCloudbillingBillingAccountsSetIamPolicy
+    , CloudbillingBillingAccountsSetIamPolicy
 
     -- ** cloudbilling.billingAccounts.testIamPermissions
-    CloudbillingBillingAccountsTestIamPermissionsResource,
-    newCloudbillingBillingAccountsTestIamPermissions,
-    CloudbillingBillingAccountsTestIamPermissions,
+    , CloudbillingBillingAccountsTestIamPermissionsResource
+    , newCloudbillingBillingAccountsTestIamPermissions
+    , CloudbillingBillingAccountsTestIamPermissions
 
     -- ** cloudbilling.projects.getBillingInfo
-    CloudbillingProjectsGetBillingInfoResource,
-    newCloudbillingProjectsGetBillingInfo,
-    CloudbillingProjectsGetBillingInfo,
+    , CloudbillingProjectsGetBillingInfoResource
+    , newCloudbillingProjectsGetBillingInfo
+    , CloudbillingProjectsGetBillingInfo
 
     -- ** cloudbilling.projects.updateBillingInfo
-    CloudbillingProjectsUpdateBillingInfoResource,
-    newCloudbillingProjectsUpdateBillingInfo,
-    CloudbillingProjectsUpdateBillingInfo,
+    , CloudbillingProjectsUpdateBillingInfoResource
+    , newCloudbillingProjectsUpdateBillingInfo
+    , CloudbillingProjectsUpdateBillingInfo
 
     -- ** cloudbilling.services.list
-    CloudbillingServicesListResource,
-    newCloudbillingServicesList,
-    CloudbillingServicesList,
+    , CloudbillingServicesListResource
+    , newCloudbillingServicesList
+    , CloudbillingServicesList
 
     -- ** cloudbilling.services.skus.list
-    CloudbillingServicesSkusListResource,
-    newCloudbillingServicesSkusList,
-    CloudbillingServicesSkusList,
+    , CloudbillingServicesSkusListResource
+    , newCloudbillingServicesSkusList
+    , CloudbillingServicesSkusList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AggregationInfo
-    AggregationInfo (..),
-    newAggregationInfo,
+    , AggregationInfo (..)
+    , newAggregationInfo
 
     -- ** AggregationInfo_AggregationInterval
-    AggregationInfo_AggregationInterval (..),
+    , AggregationInfo_AggregationInterval (..)
 
     -- ** AggregationInfo_AggregationLevel
-    AggregationInfo_AggregationLevel (..),
+    , AggregationInfo_AggregationLevel (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** BillingAccount
-    BillingAccount (..),
-    newBillingAccount,
+    , BillingAccount (..)
+    , newBillingAccount
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Category
-    Category (..),
-    newCategory,
+    , Category (..)
+    , newCategory
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** GeoTaxonomy
-    GeoTaxonomy (..),
-    newGeoTaxonomy,
+    , GeoTaxonomy (..)
+    , newGeoTaxonomy
 
     -- ** GeoTaxonomy_Type
-    GeoTaxonomy_Type (..),
+    , GeoTaxonomy_Type (..)
 
     -- ** ListBillingAccountsResponse
-    ListBillingAccountsResponse (..),
-    newListBillingAccountsResponse,
+    , ListBillingAccountsResponse (..)
+    , newListBillingAccountsResponse
 
     -- ** ListProjectBillingInfoResponse
-    ListProjectBillingInfoResponse (..),
-    newListProjectBillingInfoResponse,
+    , ListProjectBillingInfoResponse (..)
+    , newListProjectBillingInfoResponse
 
     -- ** ListServicesResponse
-    ListServicesResponse (..),
-    newListServicesResponse,
+    , ListServicesResponse (..)
+    , newListServicesResponse
 
     -- ** ListSkusResponse
-    ListSkusResponse (..),
-    newListSkusResponse,
+    , ListSkusResponse (..)
+    , newListSkusResponse
 
     -- ** Money
-    Money (..),
-    newMoney,
+    , Money (..)
+    , newMoney
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PricingExpression
-    PricingExpression (..),
-    newPricingExpression,
+    , PricingExpression (..)
+    , newPricingExpression
 
     -- ** PricingInfo
-    PricingInfo (..),
-    newPricingInfo,
+    , PricingInfo (..)
+    , newPricingInfo
 
     -- ** ProjectBillingInfo
-    ProjectBillingInfo (..),
-    newProjectBillingInfo,
+    , ProjectBillingInfo (..)
+    , newProjectBillingInfo
 
     -- ** Service
-    Service (..),
-    newService,
+    , Service (..)
+    , newService
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Sku
-    Sku (..),
-    newSku,
+    , Sku (..)
+    , newSku
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** TierRate
-    TierRate (..),
-    newTierRate,
-  )
-where
+    , TierRate (..)
+    , newTierRate
+    ) where
 
 import Gogol.Billing.Cloudbilling.BillingAccounts.Create
 import Gogol.Billing.Cloudbilling.BillingAccounts.Get
