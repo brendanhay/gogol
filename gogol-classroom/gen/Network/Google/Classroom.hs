@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Classroom
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,901 +30,745 @@
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference>
 module Network.Google.Classroom
-    (
-    -- * Service Configuration
-      classroomService
+  ( -- * Configuration
+    classroomService,
 
     -- * OAuth Scopes
-    , classroomRostersReadOnlyScope
-    , classroomCoursesScope
-    , classroomPushNotificationsScope
-    , classroomCourseworkStudentsReadOnlyScope
-    , classroomTopicsReadOnlyScope
-    , classroomProFileEmailsScope
-    , classroomProFilePhotosScope
-    , classroomCourseworkMeScope
-    , classroomAnnouncementsReadOnlyScope
-    , classroomGuardianlinksStudentsScope
-    , classroomCourseworkmaterialsScope
-    , classroomStudentSubmissionsStudentsReadOnlyScope
-    , classroomGuardianlinksMeReadOnlyScope
-    , classroomRostersScope
-    , classroomCoursesReadOnlyScope
-    , classroomCourseworkStudentsScope
-    , classroomTopicsScope
-    , classroomAnnouncementsScope
-    , classroomCourseworkMeReadOnlyScope
-    , classroomStudentSubmissionsMeReadOnlyScope
-    , classroomCourseworkmaterialsReadOnlyScope
-    , classroomGuardianlinksStudentsReadOnlyScope
-
-    -- * API Declaration
-    , ClassroomAPI
+    classroomAnnouncementsScope,
+    classroomAnnouncementsReadOnlyScope,
+    classroomCoursesScope,
+    classroomCoursesReadOnlyScope,
+    classroomCourseworkMeScope,
+    classroomCourseworkMeReadOnlyScope,
+    classroomCourseworkStudentsScope,
+    classroomCourseworkStudentsReadOnlyScope,
+    classroomCourseworkmaterialsScope,
+    classroomCourseworkmaterialsReadOnlyScope,
+    classroomGuardianlinksMeReadOnlyScope,
+    classroomGuardianlinksStudentsScope,
+    classroomGuardianlinksStudentsReadOnlyScope,
+    classroomProfileEmailsScope,
+    classroomProfilePhotosScope,
+    classroomPushNotificationsScope,
+    classroomRostersScope,
+    classroomRostersReadOnlyScope,
+    classroomStudentSubmissionsMeReadOnlyScope,
+    classroomStudentSubmissionsStudentsReadOnlyScope,
+    classroomTopicsScope,
+    classroomTopicsReadOnlyScope,
 
     -- * Resources
 
     -- ** classroom.courses.aliases.create
-    , module Network.Google.Resource.Classroom.Courses.Aliases.Create
+    ClassroomCoursesAliasesCreateResource,
+    newClassroomCoursesAliasesCreate,
+    ClassroomCoursesAliasesCreate,
 
     -- ** classroom.courses.aliases.delete
-    , module Network.Google.Resource.Classroom.Courses.Aliases.Delete
+    ClassroomCoursesAliasesDeleteResource,
+    newClassroomCoursesAliasesDelete,
+    ClassroomCoursesAliasesDelete,
 
     -- ** classroom.courses.aliases.list
-    , module Network.Google.Resource.Classroom.Courses.Aliases.List
+    ClassroomCoursesAliasesListResource,
+    newClassroomCoursesAliasesList,
+    ClassroomCoursesAliasesList,
 
     -- ** classroom.courses.announcements.create
-    , module Network.Google.Resource.Classroom.Courses.Announcements.Create
+    ClassroomCoursesAnnouncementsCreateResource,
+    newClassroomCoursesAnnouncementsCreate,
+    ClassroomCoursesAnnouncementsCreate,
 
     -- ** classroom.courses.announcements.delete
-    , module Network.Google.Resource.Classroom.Courses.Announcements.Delete
+    ClassroomCoursesAnnouncementsDeleteResource,
+    newClassroomCoursesAnnouncementsDelete,
+    ClassroomCoursesAnnouncementsDelete,
 
     -- ** classroom.courses.announcements.get
-    , module Network.Google.Resource.Classroom.Courses.Announcements.Get
+    ClassroomCoursesAnnouncementsGetResource,
+    newClassroomCoursesAnnouncementsGet,
+    ClassroomCoursesAnnouncementsGet,
 
     -- ** classroom.courses.announcements.list
-    , module Network.Google.Resource.Classroom.Courses.Announcements.List
+    ClassroomCoursesAnnouncementsListResource,
+    newClassroomCoursesAnnouncementsList,
+    ClassroomCoursesAnnouncementsList,
 
     -- ** classroom.courses.announcements.modifyAssignees
-    , module Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
+    ClassroomCoursesAnnouncementsModifyAssigneesResource,
+    newClassroomCoursesAnnouncementsModifyAssignees,
+    ClassroomCoursesAnnouncementsModifyAssignees,
 
     -- ** classroom.courses.announcements.patch
-    , module Network.Google.Resource.Classroom.Courses.Announcements.Patch
+    ClassroomCoursesAnnouncementsPatchResource,
+    newClassroomCoursesAnnouncementsPatch,
+    ClassroomCoursesAnnouncementsPatch,
 
     -- ** classroom.courses.courseWork.create
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.Create
+    ClassroomCoursesCourseWorkCreateResource,
+    newClassroomCoursesCourseWorkCreate,
+    ClassroomCoursesCourseWorkCreate,
 
     -- ** classroom.courses.courseWork.delete
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.Delete
+    ClassroomCoursesCourseWorkDeleteResource,
+    newClassroomCoursesCourseWorkDelete,
+    ClassroomCoursesCourseWorkDelete,
 
     -- ** classroom.courses.courseWork.get
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.Get
+    ClassroomCoursesCourseWorkGetResource,
+    newClassroomCoursesCourseWorkGet,
+    ClassroomCoursesCourseWorkGet,
 
     -- ** classroom.courses.courseWork.list
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.List
+    ClassroomCoursesCourseWorkListResource,
+    newClassroomCoursesCourseWorkList,
+    ClassroomCoursesCourseWorkList,
 
     -- ** classroom.courses.courseWork.modifyAssignees
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
+    ClassroomCoursesCourseWorkModifyAssigneesResource,
+    newClassroomCoursesCourseWorkModifyAssignees,
+    ClassroomCoursesCourseWorkModifyAssignees,
 
     -- ** classroom.courses.courseWork.patch
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.Patch
+    ClassroomCoursesCourseWorkPatchResource,
+    newClassroomCoursesCourseWorkPatch,
+    ClassroomCoursesCourseWorkPatch,
 
     -- ** classroom.courses.courseWork.studentSubmissions.get
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
+    ClassroomCoursesCourseWorkStudentSubmissionsGetResource,
+    newClassroomCoursesCourseWorkStudentSubmissionsGet,
+    ClassroomCoursesCourseWorkStudentSubmissionsGet,
 
     -- ** classroom.courses.courseWork.studentSubmissions.list
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
+    ClassroomCoursesCourseWorkStudentSubmissionsListResource,
+    newClassroomCoursesCourseWorkStudentSubmissionsList,
+    ClassroomCoursesCourseWorkStudentSubmissionsList,
 
     -- ** classroom.courses.courseWork.studentSubmissions.modifyAttachments
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+    ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachmentsResource,
+    newClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments,
+    ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments,
 
     -- ** classroom.courses.courseWork.studentSubmissions.patch
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+    ClassroomCoursesCourseWorkStudentSubmissionsPatchResource,
+    newClassroomCoursesCourseWorkStudentSubmissionsPatch,
+    ClassroomCoursesCourseWorkStudentSubmissionsPatch,
 
     -- ** classroom.courses.courseWork.studentSubmissions.reclaim
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+    ClassroomCoursesCourseWorkStudentSubmissionsReclaimResource,
+    newClassroomCoursesCourseWorkStudentSubmissionsReclaim,
+    ClassroomCoursesCourseWorkStudentSubmissionsReclaim,
 
     -- ** classroom.courses.courseWork.studentSubmissions.return
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
+    ClassroomCoursesCourseWorkStudentSubmissionsReturnResource,
+    newClassroomCoursesCourseWorkStudentSubmissionsReturn,
+    ClassroomCoursesCourseWorkStudentSubmissionsReturn,
 
     -- ** classroom.courses.courseWork.studentSubmissions.turnIn
-    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
+    ClassroomCoursesCourseWorkStudentSubmissionsTurnInResource,
+    newClassroomCoursesCourseWorkStudentSubmissionsTurnIn,
+    ClassroomCoursesCourseWorkStudentSubmissionsTurnIn,
 
     -- ** classroom.courses.courseWorkMaterials.create
-    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Create
+    ClassroomCoursesCourseWorkMaterialsCreateResource,
+    newClassroomCoursesCourseWorkMaterialsCreate,
+    ClassroomCoursesCourseWorkMaterialsCreate,
 
     -- ** classroom.courses.courseWorkMaterials.delete
-    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Delete
+    ClassroomCoursesCourseWorkMaterialsDeleteResource,
+    newClassroomCoursesCourseWorkMaterialsDelete,
+    ClassroomCoursesCourseWorkMaterialsDelete,
 
     -- ** classroom.courses.courseWorkMaterials.get
-    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Get
+    ClassroomCoursesCourseWorkMaterialsGetResource,
+    newClassroomCoursesCourseWorkMaterialsGet,
+    ClassroomCoursesCourseWorkMaterialsGet,
 
     -- ** classroom.courses.courseWorkMaterials.list
-    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.List
+    ClassroomCoursesCourseWorkMaterialsListResource,
+    newClassroomCoursesCourseWorkMaterialsList,
+    ClassroomCoursesCourseWorkMaterialsList,
 
     -- ** classroom.courses.courseWorkMaterials.patch
-    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Patch
+    ClassroomCoursesCourseWorkMaterialsPatchResource,
+    newClassroomCoursesCourseWorkMaterialsPatch,
+    ClassroomCoursesCourseWorkMaterialsPatch,
 
     -- ** classroom.courses.create
-    , module Network.Google.Resource.Classroom.Courses.Create
+    ClassroomCoursesCreateResource,
+    newClassroomCoursesCreate,
+    ClassroomCoursesCreate,
 
     -- ** classroom.courses.delete
-    , module Network.Google.Resource.Classroom.Courses.Delete
+    ClassroomCoursesDeleteResource,
+    newClassroomCoursesDelete,
+    ClassroomCoursesDelete,
 
     -- ** classroom.courses.get
-    , module Network.Google.Resource.Classroom.Courses.Get
+    ClassroomCoursesGetResource,
+    newClassroomCoursesGet,
+    ClassroomCoursesGet,
 
     -- ** classroom.courses.list
-    , module Network.Google.Resource.Classroom.Courses.List
+    ClassroomCoursesListResource,
+    newClassroomCoursesList,
+    ClassroomCoursesList,
 
     -- ** classroom.courses.patch
-    , module Network.Google.Resource.Classroom.Courses.Patch
+    ClassroomCoursesPatchResource,
+    newClassroomCoursesPatch,
+    ClassroomCoursesPatch,
 
     -- ** classroom.courses.students.create
-    , module Network.Google.Resource.Classroom.Courses.Students.Create
+    ClassroomCoursesStudentsCreateResource,
+    newClassroomCoursesStudentsCreate,
+    ClassroomCoursesStudentsCreate,
 
     -- ** classroom.courses.students.delete
-    , module Network.Google.Resource.Classroom.Courses.Students.Delete
+    ClassroomCoursesStudentsDeleteResource,
+    newClassroomCoursesStudentsDelete,
+    ClassroomCoursesStudentsDelete,
 
     -- ** classroom.courses.students.get
-    , module Network.Google.Resource.Classroom.Courses.Students.Get
+    ClassroomCoursesStudentsGetResource,
+    newClassroomCoursesStudentsGet,
+    ClassroomCoursesStudentsGet,
 
     -- ** classroom.courses.students.list
-    , module Network.Google.Resource.Classroom.Courses.Students.List
+    ClassroomCoursesStudentsListResource,
+    newClassroomCoursesStudentsList,
+    ClassroomCoursesStudentsList,
 
     -- ** classroom.courses.teachers.create
-    , module Network.Google.Resource.Classroom.Courses.Teachers.Create
+    ClassroomCoursesTeachersCreateResource,
+    newClassroomCoursesTeachersCreate,
+    ClassroomCoursesTeachersCreate,
 
     -- ** classroom.courses.teachers.delete
-    , module Network.Google.Resource.Classroom.Courses.Teachers.Delete
+    ClassroomCoursesTeachersDeleteResource,
+    newClassroomCoursesTeachersDelete,
+    ClassroomCoursesTeachersDelete,
 
     -- ** classroom.courses.teachers.get
-    , module Network.Google.Resource.Classroom.Courses.Teachers.Get
+    ClassroomCoursesTeachersGetResource,
+    newClassroomCoursesTeachersGet,
+    ClassroomCoursesTeachersGet,
 
     -- ** classroom.courses.teachers.list
-    , module Network.Google.Resource.Classroom.Courses.Teachers.List
+    ClassroomCoursesTeachersListResource,
+    newClassroomCoursesTeachersList,
+    ClassroomCoursesTeachersList,
 
     -- ** classroom.courses.topics.create
-    , module Network.Google.Resource.Classroom.Courses.Topics.Create
+    ClassroomCoursesTopicsCreateResource,
+    newClassroomCoursesTopicsCreate,
+    ClassroomCoursesTopicsCreate,
 
     -- ** classroom.courses.topics.delete
-    , module Network.Google.Resource.Classroom.Courses.Topics.Delete
+    ClassroomCoursesTopicsDeleteResource,
+    newClassroomCoursesTopicsDelete,
+    ClassroomCoursesTopicsDelete,
 
     -- ** classroom.courses.topics.get
-    , module Network.Google.Resource.Classroom.Courses.Topics.Get
+    ClassroomCoursesTopicsGetResource,
+    newClassroomCoursesTopicsGet,
+    ClassroomCoursesTopicsGet,
 
     -- ** classroom.courses.topics.list
-    , module Network.Google.Resource.Classroom.Courses.Topics.List
+    ClassroomCoursesTopicsListResource,
+    newClassroomCoursesTopicsList,
+    ClassroomCoursesTopicsList,
 
     -- ** classroom.courses.topics.patch
-    , module Network.Google.Resource.Classroom.Courses.Topics.Patch
+    ClassroomCoursesTopicsPatchResource,
+    newClassroomCoursesTopicsPatch,
+    ClassroomCoursesTopicsPatch,
 
     -- ** classroom.courses.update
-    , module Network.Google.Resource.Classroom.Courses.Update
+    ClassroomCoursesUpdateResource,
+    newClassroomCoursesUpdate,
+    ClassroomCoursesUpdate,
 
     -- ** classroom.invitations.accept
-    , module Network.Google.Resource.Classroom.Invitations.Accept
+    ClassroomInvitationsAcceptResource,
+    newClassroomInvitationsAccept,
+    ClassroomInvitationsAccept,
 
     -- ** classroom.invitations.create
-    , module Network.Google.Resource.Classroom.Invitations.Create
+    ClassroomInvitationsCreateResource,
+    newClassroomInvitationsCreate,
+    ClassroomInvitationsCreate,
 
     -- ** classroom.invitations.delete
-    , module Network.Google.Resource.Classroom.Invitations.Delete
+    ClassroomInvitationsDeleteResource,
+    newClassroomInvitationsDelete,
+    ClassroomInvitationsDelete,
 
     -- ** classroom.invitations.get
-    , module Network.Google.Resource.Classroom.Invitations.Get
+    ClassroomInvitationsGetResource,
+    newClassroomInvitationsGet,
+    ClassroomInvitationsGet,
 
     -- ** classroom.invitations.list
-    , module Network.Google.Resource.Classroom.Invitations.List
+    ClassroomInvitationsListResource,
+    newClassroomInvitationsList,
+    ClassroomInvitationsList,
 
     -- ** classroom.registrations.create
-    , module Network.Google.Resource.Classroom.Registrations.Create
+    ClassroomRegistrationsCreateResource,
+    newClassroomRegistrationsCreate,
+    ClassroomRegistrationsCreate,
 
     -- ** classroom.registrations.delete
-    , module Network.Google.Resource.Classroom.Registrations.Delete
+    ClassroomRegistrationsDeleteResource,
+    newClassroomRegistrationsDelete,
+    ClassroomRegistrationsDelete,
 
     -- ** classroom.userProfiles.get
-    , module Network.Google.Resource.Classroom.UserProFiles.Get
+    ClassroomUserProfilesGetResource,
+    newClassroomUserProfilesGet,
+    ClassroomUserProfilesGet,
 
     -- ** classroom.userProfiles.guardianInvitations.create
-    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
+    ClassroomUserProfilesGuardianInvitationsCreateResource,
+    newClassroomUserProfilesGuardianInvitationsCreate,
+    ClassroomUserProfilesGuardianInvitationsCreate,
 
     -- ** classroom.userProfiles.guardianInvitations.get
-    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
+    ClassroomUserProfilesGuardianInvitationsGetResource,
+    newClassroomUserProfilesGuardianInvitationsGet,
+    ClassroomUserProfilesGuardianInvitationsGet,
 
     -- ** classroom.userProfiles.guardianInvitations.list
-    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
+    ClassroomUserProfilesGuardianInvitationsListResource,
+    newClassroomUserProfilesGuardianInvitationsList,
+    ClassroomUserProfilesGuardianInvitationsList,
 
     -- ** classroom.userProfiles.guardianInvitations.patch
-    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
+    ClassroomUserProfilesGuardianInvitationsPatchResource,
+    newClassroomUserProfilesGuardianInvitationsPatch,
+    ClassroomUserProfilesGuardianInvitationsPatch,
 
     -- ** classroom.userProfiles.guardians.delete
-    , module Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
+    ClassroomUserProfilesGuardiansDeleteResource,
+    newClassroomUserProfilesGuardiansDelete,
+    ClassroomUserProfilesGuardiansDelete,
 
     -- ** classroom.userProfiles.guardians.get
-    , module Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
+    ClassroomUserProfilesGuardiansGetResource,
+    newClassroomUserProfilesGuardiansGet,
+    ClassroomUserProfilesGuardiansGet,
 
     -- ** classroom.userProfiles.guardians.list
-    , module Network.Google.Resource.Classroom.UserProFiles.Guardians.List
+    ClassroomUserProfilesGuardiansListResource,
+    newClassroomUserProfilesGuardiansList,
+    ClassroomUserProfilesGuardiansList,
 
     -- * Types
 
-    -- ** ListCourseAliasesResponse
-    , ListCourseAliasesResponse
-    , listCourseAliasesResponse
-    , lcarNextPageToken
-    , lcarAliases
-
-    -- ** CourseWork
-    , CourseWork
-    , courseWork
-    , cwCreationTime
-    , cwScheduledTime
-    , cwState
-    , cwAssigneeMode
-    , cwMaterials
-    , cwCourseId
-    , cwIndividualStudentsOptions
-    , cwMaxPoints
-    , cwWorkType
-    , cwDueTime
-    , cwAssociatedWithDeveloper
-    , cwUpdateTime
-    , cwTopicId
-    , cwMultipleChoiceQuestion
-    , cwId
-    , cwSubmissionModificationMode
-    , cwDueDate
-    , cwCreatorUserId
-    , cwTitle
-    , cwAlternateLink
-    , cwAssignment
-    , cwDescription
-
-    -- ** GradeHistoryGradeChangeType
-    , GradeHistoryGradeChangeType (..)
-
-    -- ** GradeHistory
-    , GradeHistory
-    , gradeHistory
-    , ghGradeTimestamp
-    , ghMaxPoints
-    , ghPointsEarned
-    , ghActorUserId
-    , ghGradeChangeType
-
-    -- ** CourseWorkChangesInfo
-    , CourseWorkChangesInfo
-    , courseWorkChangesInfo
-    , cwciCourseId
-
-    -- ** CourseWorkMaterial
-    , CourseWorkMaterial
-    , courseWorkMaterial
-    , cwmCreationTime
-    , cwmScheduledTime
-    , cwmState
-    , cwmAssigneeMode
-    , cwmMaterials
-    , cwmCourseId
-    , cwmIndividualStudentsOptions
-    , cwmUpdateTime
-    , cwmTopicId
-    , cwmId
-    , cwmCreatorUserId
-    , cwmTitle
-    , cwmAlternateLink
-    , cwmDescription
-
-    -- ** ModifyCourseWorkAssigneesRequest
-    , ModifyCourseWorkAssigneesRequest
-    , modifyCourseWorkAssigneesRequest
-    , mcwarAssigneeMode
-    , mcwarModifyIndividualStudentsOptions
-
-    -- ** CourseCourseState
-    , CourseCourseState (..)
-
-    -- ** DriveFile
-    , DriveFile
-    , driveFile
-    , dfThumbnailURL
-    , dfId
-    , dfTitle
-    , dfAlternateLink
-
-    -- ** GuardianInvitation
-    , GuardianInvitation
-    , guardianInvitation
-    , giCreationTime
-    , giStudentId
-    , giState
-    , giInvitationId
-    , giInvitedEmailAddress
-
-    -- ** Feed
-    , Feed
-    , feed
-    , fCourseWorkChangesInfo
-    , fFeedType
-    , fCourseRosterChangesInfo
-
-    -- ** ModifyAnnouncementAssigneesRequest
-    , ModifyAnnouncementAssigneesRequest
-    , modifyAnnouncementAssigneesRequest
-    , maarAssigneeMode
-    , maarModifyIndividualStudentsOptions
-
-    -- ** ReturnStudentSubmissionRequest
-    , ReturnStudentSubmissionRequest
-    , returnStudentSubmissionRequest
-
-    -- ** StateHistoryState
-    , StateHistoryState (..)
-
-    -- ** ReclaimStudentSubmissionRequest
-    , ReclaimStudentSubmissionRequest
-    , reclaimStudentSubmissionRequest
-
-    -- ** CourseWorkWorkType
-    , CourseWorkWorkType (..)
-
-    -- ** ListCourseWorkResponse
-    , ListCourseWorkResponse
-    , listCourseWorkResponse
-    , lcwrCourseWork
-    , lcwrNextPageToken
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** CourseWorkMaterialAssigneeMode
-    , CourseWorkMaterialAssigneeMode (..)
-
-    -- ** CoursesListCourseStates
-    , CoursesListCourseStates (..)
-
-    -- ** ModifyCourseWorkAssigneesRequestAssigneeMode
-    , ModifyCourseWorkAssigneesRequestAssigneeMode (..)
-
-    -- ** GuardianInvitationState
-    , GuardianInvitationState (..)
-
-    -- ** SharedDriveFileShareMode
-    , SharedDriveFileShareMode (..)
-
-    -- ** GlobalPermission
-    , GlobalPermission
-    , globalPermission
-    , gpPermission
-
-    -- ** ListTopicResponse
-    , ListTopicResponse
-    , listTopicResponse
-    , ltrNextPageToken
-    , ltrTopic
-
-    -- ** Link
-    , Link
-    , link
-    , lThumbnailURL
-    , lURL
-    , lTitle
-
-    -- ** ModifyAnnouncementAssigneesRequestAssigneeMode
-    , ModifyAnnouncementAssigneesRequestAssigneeMode (..)
-
-    -- ** IndividualStudentsOptions
-    , IndividualStudentsOptions
-    , individualStudentsOptions
-    , isoStudentIds
-
-    -- ** AssignmentSubmission
-    , AssignmentSubmission
-    , assignmentSubmission
-    , asAttachments
-
-    -- ** ModifyAttachmentsRequest
-    , ModifyAttachmentsRequest
-    , modifyAttachmentsRequest
-    , marAddAttachments
-
-    -- ** ListAnnouncementsResponse
-    , ListAnnouncementsResponse
-    , listAnnouncementsResponse
-    , larNextPageToken
-    , larAnnouncements
-
-    -- ** AnnouncementAssigneeMode
-    , AnnouncementAssigneeMode (..)
-
-    -- ** CourseWorkState
-    , CourseWorkState (..)
-
-    -- ** ListStudentSubmissionsResponse
-    , ListStudentSubmissionsResponse
-    , listStudentSubmissionsResponse
-    , lssrNextPageToken
-    , lssrStudentSubmissions
-
-    -- ** Material
-    , Material
-    , material
-    , mDriveFile
-    , mLink
-    , mYouTubeVideo
-    , mForm
-
-    -- ** MultipleChoiceSubmission
-    , MultipleChoiceSubmission
-    , multipleChoiceSubmission
-    , mcsAnswer
-
-    -- ** ListInvitationsResponse
-    , ListInvitationsResponse
-    , listInvitationsResponse
-    , lirNextPageToken
-    , lirInvitations
-
-    -- ** Guardian
-    , Guardian
-    , guardian
-    , gStudentId
-    , gGuardianId
-    , gInvitedEmailAddress
-    , gGuardianProFile
-
-    -- ** CourseMaterial
-    , CourseMaterial
-    , courseMaterial
-    , cmDriveFile
-    , cmLink
-    , cmYouTubeVideo
-    , cmForm
-
-    -- ** StudentSubmissionState
-    , StudentSubmissionState (..)
-
-    -- ** ShortAnswerSubmission
-    , ShortAnswerSubmission
-    , shortAnswerSubmission
-    , sasAnswer
-
-    -- ** CoursesCourseWorkStudentSubmissionsListLate
-    , CoursesCourseWorkStudentSubmissionsListLate (..)
-
-    -- ** CoursesCourseWorkStudentSubmissionsListStates
-    , CoursesCourseWorkStudentSubmissionsListStates (..)
-
-    -- ** AnnouncementState
-    , AnnouncementState (..)
-
-    -- ** Invitation
-    , Invitation
-    , invitation
-    , iCourseId
-    , iUserId
-    , iRole
-    , iId
-
-    -- ** Attachment
-    , Attachment
-    , attachment
-    , aDriveFile
-    , aLink
-    , aYouTubeVideo
-    , aForm
-
-    -- ** Topic
-    , Topic
-    , topic
-    , tCourseId
-    , tUpdateTime
-    , tTopicId
-    , tName
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Announcement
-    , Announcement
-    , announcement
-    , aCreationTime
-    , aScheduledTime
-    , aState
-    , aAssigneeMode
-    , aText
-    , aMaterials
-    , aCourseId
-    , aIndividualStudentsOptions
-    , aUpdateTime
-    , aId
-    , aCreatorUserId
-    , aAlternateLink
+    Announcement (..),
+    newAnnouncement,
 
-    -- ** StudentSubmission
-    , StudentSubmission
-    , studentSubmission
-    , ssCreationTime
-    , ssLate
-    , ssState
-    , ssCourseId
-    , ssMultipleChoiceSubmission
-    , ssAssignmentSubmission
-    , ssShortAnswerSubmission
-    , ssAssociatedWithDeveloper
-    , ssUserId
-    , ssUpdateTime
-    , ssCourseWorkType
-    , ssSubmissionHistory
-    , ssAssignedGrade
-    , ssId
-    , ssDraftGrade
-    , ssAlternateLink
-    , ssCourseWorkId
+    -- ** Announcement_AssigneeMode
+    Announcement_AssigneeMode (..),
 
-    -- ** ListGuardiansResponse
-    , ListGuardiansResponse
-    , listGuardiansResponse
-    , lgrNextPageToken
-    , lgrGuardians
-
-    -- ** Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- ** YouTubeVideo
-    , YouTubeVideo
-    , youTubeVideo
-    , ytvThumbnailURL
-    , ytvId
-    , ytvTitle
-    , ytvAlternateLink
-
-    -- ** Teacher
-    , Teacher
-    , teacher
-    , teaCourseId
-    , teaProFile
-    , teaUserId
-
-    -- ** CourseMaterialSet
-    , CourseMaterialSet
-    , courseMaterialSet
-    , cmsMaterials
-    , cmsTitle
-
-    -- ** Name
-    , Name
-    , name
-    , nGivenName
-    , nFullName
-    , nFamilyName
-
-    -- ** ListCoursesResponse
-    , ListCoursesResponse
-    , listCoursesResponse
-    , lcrNextPageToken
-    , lcrCourses
-
-    -- ** TurnInStudentSubmissionRequest
-    , TurnInStudentSubmissionRequest
-    , turnInStudentSubmissionRequest
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** UserProFile
-    , UserProFile
-    , userProFile
-    , upfPhotoURL
-    , upfVerifiedTeacher
-    , upfName
-    , upfEmailAddress
-    , upfId
-    , upfPermissions
-
-    -- ** DriveFolder
-    , DriveFolder
-    , driveFolder
-    , dId
-    , dTitle
-    , dAlternateLink
-
-    -- ** SubmissionHistory
-    , SubmissionHistory
-    , submissionHistory
-    , shGradeHistory
-    , shStateHistory
-
-    -- ** StateHistory
-    , StateHistory
-    , stateHistory
-    , shState
-    , shActorUserId
-    , shStateTimestamp
-
-    -- ** MultipleChoiceQuestion
-    , MultipleChoiceQuestion
-    , multipleChoiceQuestion
-    , mcqChoices
-
-    -- ** Course
-    , Course
-    , course
-    , couCreationTime
-    , couRoom
-    , couCourseMaterialSets
-    , couCalendarId
-    , couTeacherGroupEmail
-    , couTeacherFolder
-    , couCourseState
-    , couGuardiansEnabled
-    , couEnrollmentCode
-    , couUpdateTime
-    , couOwnerId
-    , couName
-    , couId
-    , couAlternateLink
-    , couCourseGroupEmail
-    , couDescription
-    , couDescriptionHeading
-    , couSection
-
-    -- ** InvitationRole
-    , InvitationRole (..)
-
-    -- ** StudentSubmissionCourseWorkType
-    , StudentSubmissionCourseWorkType (..)
-
-    -- ** CourseWorkMaterialState
-    , CourseWorkMaterialState (..)
-
-    -- ** TimeOfDay'
-    , TimeOfDay'
-    , timeOfDay
-    , todNanos
-    , todHours
-    , todMinutes
-    , todSeconds
-
-    -- ** FeedFeedType
-    , FeedFeedType (..)
-
-    -- ** CoursesCourseWorkListCourseWorkStates
-    , CoursesCourseWorkListCourseWorkStates (..)
-
-    -- ** ListGuardianInvitationsResponse
-    , ListGuardianInvitationsResponse
-    , listGuardianInvitationsResponse
-    , lgirNextPageToken
-    , lgirGuardianInvitations
-
-    -- ** CoursesAnnouncementsListAnnouncementStates
-    , CoursesAnnouncementsListAnnouncementStates (..)
+    -- ** Announcement_State
+    Announcement_State (..),
 
     -- ** Assignment
-    , Assignment
-    , assignment
-    , aStudentWorkFolder
+    Assignment (..),
+    newAssignment,
 
-    -- ** ListStudentsResponse
-    , ListStudentsResponse
-    , listStudentsResponse
-    , lsrNextPageToken
-    , lsrStudents
+    -- ** AssignmentSubmission
+    AssignmentSubmission (..),
+    newAssignmentSubmission,
 
-    -- ** SharedDriveFile
-    , SharedDriveFile
-    , sharedDriveFile
-    , sdfDriveFile
-    , sdfShareMode
-
-    -- ** CoursesCourseWorkMaterialsListCourseWorkMaterialStates
-    , CoursesCourseWorkMaterialsListCourseWorkMaterialStates (..)
-
-    -- ** CourseAlias
-    , CourseAlias
-    , courseAlias
-    , caAlias
-
-    -- ** CourseRosterChangesInfo
-    , CourseRosterChangesInfo
-    , courseRosterChangesInfo
-    , crciCourseId
-
-    -- ** ModifyIndividualStudentsOptions
-    , ModifyIndividualStudentsOptions
-    , modifyIndividualStudentsOptions
-    , misoAddStudentIds
-    , misoRemoveStudentIds
+    -- ** Attachment
+    Attachment (..),
+    newAttachment,
 
     -- ** CloudPubsubTopic
-    , CloudPubsubTopic
-    , cloudPubsubTopic
-    , cptTopicName
+    CloudPubsubTopic (..),
+    newCloudPubsubTopic,
 
-    -- ** GlobalPermissionPermission
-    , GlobalPermissionPermission (..)
+    -- ** Course
+    Course (..),
+    newCourse,
 
-    -- ** CourseWorkAssigneeMode
-    , CourseWorkAssigneeMode (..)
+    -- ** Course_CourseState
+    Course_CourseState (..),
+
+    -- ** CourseAlias
+    CourseAlias (..),
+    newCourseAlias,
+
+    -- ** CourseMaterial
+    CourseMaterial (..),
+    newCourseMaterial,
+
+    -- ** CourseMaterialSet
+    CourseMaterialSet (..),
+    newCourseMaterialSet,
+
+    -- ** CourseRosterChangesInfo
+    CourseRosterChangesInfo (..),
+    newCourseRosterChangesInfo,
+
+    -- ** CourseWork
+    CourseWork (..),
+    newCourseWork,
+
+    -- ** CourseWork_AssigneeMode
+    CourseWork_AssigneeMode (..),
+
+    -- ** CourseWork_State
+    CourseWork_State (..),
+
+    -- ** CourseWork_SubmissionModificationMode
+    CourseWork_SubmissionModificationMode (..),
+
+    -- ** CourseWork_WorkType
+    CourseWork_WorkType (..),
+
+    -- ** CourseWorkChangesInfo
+    CourseWorkChangesInfo (..),
+    newCourseWorkChangesInfo,
+
+    -- ** CourseWorkMaterial
+    CourseWorkMaterial (..),
+    newCourseWorkMaterial,
+
+    -- ** CourseWorkMaterial_AssigneeMode
+    CourseWorkMaterial_AssigneeMode (..),
+
+    -- ** CourseWorkMaterial_State
+    CourseWorkMaterial_State (..),
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DriveFile
+    DriveFile (..),
+    newDriveFile,
+
+    -- ** DriveFolder
+    DriveFolder (..),
+    newDriveFolder,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Feed
+    Feed (..),
+    newFeed,
+
+    -- ** Feed_FeedType
+    Feed_FeedType (..),
 
     -- ** Form
-    , Form
-    , form
-    , fThumbnailURL
-    , fFormURL
-    , fTitle
-    , fResponseURL
+    Form (..),
+    newForm,
 
-    -- ** ListTeachersResponse
-    , ListTeachersResponse
-    , listTeachersResponse
-    , lNextPageToken
-    , lTeachers
+    -- ** GlobalPermission
+    GlobalPermission (..),
+    newGlobalPermission,
+
+    -- ** GlobalPermission_Permission
+    GlobalPermission_Permission (..),
+
+    -- ** GradeCategory
+    GradeCategory (..),
+    newGradeCategory,
+
+    -- ** GradeHistory
+    GradeHistory (..),
+    newGradeHistory,
+
+    -- ** GradeHistory_GradeChangeType
+    GradeHistory_GradeChangeType (..),
+
+    -- ** GradebookSettings
+    GradebookSettings (..),
+    newGradebookSettings,
+
+    -- ** GradebookSettings_CalculationType
+    GradebookSettings_CalculationType (..),
+
+    -- ** GradebookSettings_DisplaySetting
+    GradebookSettings_DisplaySetting (..),
+
+    -- ** Guardian
+    Guardian (..),
+    newGuardian,
+
+    -- ** GuardianInvitation
+    GuardianInvitation (..),
+    newGuardianInvitation,
+
+    -- ** GuardianInvitation_State
+    GuardianInvitation_State (..),
+
+    -- ** IndividualStudentsOptions
+    IndividualStudentsOptions (..),
+    newIndividualStudentsOptions,
+
+    -- ** Invitation
+    Invitation (..),
+    newInvitation,
+
+    -- ** Invitation_Role
+    Invitation_Role (..),
+
+    -- ** Link
+    Link (..),
+    newLink,
+
+    -- ** ListAnnouncementsResponse
+    ListAnnouncementsResponse (..),
+    newListAnnouncementsResponse,
+
+    -- ** ListCourseAliasesResponse
+    ListCourseAliasesResponse (..),
+    newListCourseAliasesResponse,
 
     -- ** ListCourseWorkMaterialResponse
-    , ListCourseWorkMaterialResponse
-    , listCourseWorkMaterialResponse
-    , lcwmrCourseWorkMaterial
-    , lcwmrNextPageToken
+    ListCourseWorkMaterialResponse (..),
+    newListCourseWorkMaterialResponse,
 
-    -- ** UserProFilesGuardianInvitationsListStates
-    , UserProFilesGuardianInvitationsListStates (..)
+    -- ** ListCourseWorkResponse
+    ListCourseWorkResponse (..),
+    newListCourseWorkResponse,
 
-    -- ** Student
-    , Student
-    , student
-    , sCourseId
-    , sProFile
-    , sStudentWorkFolder
-    , sUserId
+    -- ** ListCoursesResponse
+    ListCoursesResponse (..),
+    newListCoursesResponse,
 
-    -- ** CourseWorkSubmissionModificationMode
-    , CourseWorkSubmissionModificationMode (..)
+    -- ** ListGuardianInvitationsResponse
+    ListGuardianInvitationsResponse (..),
+    newListGuardianInvitationsResponse,
+
+    -- ** ListGuardiansResponse
+    ListGuardiansResponse (..),
+    newListGuardiansResponse,
+
+    -- ** ListInvitationsResponse
+    ListInvitationsResponse (..),
+    newListInvitationsResponse,
+
+    -- ** ListStudentSubmissionsResponse
+    ListStudentSubmissionsResponse (..),
+    newListStudentSubmissionsResponse,
+
+    -- ** ListStudentsResponse
+    ListStudentsResponse (..),
+    newListStudentsResponse,
+
+    -- ** ListTeachersResponse
+    ListTeachersResponse (..),
+    newListTeachersResponse,
+
+    -- ** ListTopicResponse
+    ListTopicResponse (..),
+    newListTopicResponse,
+
+    -- ** Material
+    Material (..),
+    newMaterial,
+
+    -- ** ModifyAnnouncementAssigneesRequest
+    ModifyAnnouncementAssigneesRequest (..),
+    newModifyAnnouncementAssigneesRequest,
+
+    -- ** ModifyAnnouncementAssigneesRequest_AssigneeMode
+    ModifyAnnouncementAssigneesRequest_AssigneeMode (..),
+
+    -- ** ModifyAttachmentsRequest
+    ModifyAttachmentsRequest (..),
+    newModifyAttachmentsRequest,
+
+    -- ** ModifyCourseWorkAssigneesRequest
+    ModifyCourseWorkAssigneesRequest (..),
+    newModifyCourseWorkAssigneesRequest,
+
+    -- ** ModifyCourseWorkAssigneesRequest_AssigneeMode
+    ModifyCourseWorkAssigneesRequest_AssigneeMode (..),
+
+    -- ** ModifyIndividualStudentsOptions
+    ModifyIndividualStudentsOptions (..),
+    newModifyIndividualStudentsOptions,
+
+    -- ** MultipleChoiceQuestion
+    MultipleChoiceQuestion (..),
+    newMultipleChoiceQuestion,
+
+    -- ** MultipleChoiceSubmission
+    MultipleChoiceSubmission (..),
+    newMultipleChoiceSubmission,
+
+    -- ** Name
+    Name (..),
+    newName,
+
+    -- ** ReclaimStudentSubmissionRequest
+    ReclaimStudentSubmissionRequest (..),
+    newReclaimStudentSubmissionRequest,
 
     -- ** Registration
-    , Registration
-    , registration
-    , rRegistrationId
-    , rExpiryTime
-    , rFeed
-    , rCloudPubsubTopic
-    ) where
+    Registration (..),
+    newRegistration,
 
-import Network.Google.Prelude
+    -- ** ReturnStudentSubmissionRequest
+    ReturnStudentSubmissionRequest (..),
+    newReturnStudentSubmissionRequest,
+
+    -- ** SharedDriveFile
+    SharedDriveFile (..),
+    newSharedDriveFile,
+
+    -- ** SharedDriveFile_ShareMode
+    SharedDriveFile_ShareMode (..),
+
+    -- ** ShortAnswerSubmission
+    ShortAnswerSubmission (..),
+    newShortAnswerSubmission,
+
+    -- ** StateHistory
+    StateHistory (..),
+    newStateHistory,
+
+    -- ** StateHistory_State
+    StateHistory_State (..),
+
+    -- ** Student
+    Student (..),
+    newStudent,
+
+    -- ** StudentSubmission
+    StudentSubmission (..),
+    newStudentSubmission,
+
+    -- ** StudentSubmission_CourseWorkType
+    StudentSubmission_CourseWorkType (..),
+
+    -- ** StudentSubmission_State
+    StudentSubmission_State (..),
+
+    -- ** SubmissionHistory
+    SubmissionHistory (..),
+    newSubmissionHistory,
+
+    -- ** Teacher
+    Teacher (..),
+    newTeacher,
+
+    -- ** TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
+
+    -- ** Topic
+    Topic (..),
+    newTopic,
+
+    -- ** TurnInStudentSubmissionRequest
+    TurnInStudentSubmissionRequest (..),
+    newTurnInStudentSubmissionRequest,
+
+    -- ** UserProfile
+    UserProfile (..),
+    newUserProfile,
+
+    -- ** YouTubeVideo
+    YouTubeVideo (..),
+    newYouTubeVideo,
+
+    -- ** CoursesAnnouncementsListAnnouncementStates
+    CoursesAnnouncementsListAnnouncementStates (..),
+
+    -- ** CoursesCourseWorkListCourseWorkStates
+    CoursesCourseWorkListCourseWorkStates (..),
+
+    -- ** CoursesCourseWorkStudentSubmissionsListLate
+    CoursesCourseWorkStudentSubmissionsListLate (..),
+
+    -- ** CoursesCourseWorkStudentSubmissionsListStates
+    CoursesCourseWorkStudentSubmissionsListStates (..),
+
+    -- ** CoursesCourseWorkMaterialsListCourseWorkMaterialStates
+    CoursesCourseWorkMaterialsListCourseWorkMaterialStates (..),
+
+    -- ** CoursesListCourseStates
+    CoursesListCourseStates (..),
+
+    -- ** UserProfilesGuardianInvitationsListStates
+    UserProfilesGuardianInvitationsListStates (..),
+  )
+where
+
+import Network.Google.Classroom.Courses.Aliases.Create
+import Network.Google.Classroom.Courses.Aliases.Delete
+import Network.Google.Classroom.Courses.Aliases.List
+import Network.Google.Classroom.Courses.Announcements.Create
+import Network.Google.Classroom.Courses.Announcements.Delete
+import Network.Google.Classroom.Courses.Announcements.Get
+import Network.Google.Classroom.Courses.Announcements.List
+import Network.Google.Classroom.Courses.Announcements.ModifyAssignees
+import Network.Google.Classroom.Courses.Announcements.Patch
+import Network.Google.Classroom.Courses.CourseWork.Create
+import Network.Google.Classroom.Courses.CourseWork.Delete
+import Network.Google.Classroom.Courses.CourseWork.Get
+import Network.Google.Classroom.Courses.CourseWork.List
+import Network.Google.Classroom.Courses.CourseWork.ModifyAssignees
+import Network.Google.Classroom.Courses.CourseWork.Patch
+import Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Get
+import Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.List
+import Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+import Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+import Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+import Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Return
+import Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
+import Network.Google.Classroom.Courses.CourseWorkMaterials.Create
+import Network.Google.Classroom.Courses.CourseWorkMaterials.Delete
+import Network.Google.Classroom.Courses.CourseWorkMaterials.Get
+import Network.Google.Classroom.Courses.CourseWorkMaterials.List
+import Network.Google.Classroom.Courses.CourseWorkMaterials.Patch
+import Network.Google.Classroom.Courses.Create
+import Network.Google.Classroom.Courses.Delete
+import Network.Google.Classroom.Courses.Get
+import Network.Google.Classroom.Courses.List
+import Network.Google.Classroom.Courses.Patch
+import Network.Google.Classroom.Courses.Students.Create
+import Network.Google.Classroom.Courses.Students.Delete
+import Network.Google.Classroom.Courses.Students.Get
+import Network.Google.Classroom.Courses.Students.List
+import Network.Google.Classroom.Courses.Teachers.Create
+import Network.Google.Classroom.Courses.Teachers.Delete
+import Network.Google.Classroom.Courses.Teachers.Get
+import Network.Google.Classroom.Courses.Teachers.List
+import Network.Google.Classroom.Courses.Topics.Create
+import Network.Google.Classroom.Courses.Topics.Delete
+import Network.Google.Classroom.Courses.Topics.Get
+import Network.Google.Classroom.Courses.Topics.List
+import Network.Google.Classroom.Courses.Topics.Patch
+import Network.Google.Classroom.Courses.Update
+import Network.Google.Classroom.Invitations.Accept
+import Network.Google.Classroom.Invitations.Create
+import Network.Google.Classroom.Invitations.Delete
+import Network.Google.Classroom.Invitations.Get
+import Network.Google.Classroom.Invitations.List
+import Network.Google.Classroom.Registrations.Create
+import Network.Google.Classroom.Registrations.Delete
 import Network.Google.Classroom.Types
-import Network.Google.Resource.Classroom.Courses.Aliases.Create
-import Network.Google.Resource.Classroom.Courses.Aliases.Delete
-import Network.Google.Resource.Classroom.Courses.Aliases.List
-import Network.Google.Resource.Classroom.Courses.Announcements.Create
-import Network.Google.Resource.Classroom.Courses.Announcements.Delete
-import Network.Google.Resource.Classroom.Courses.Announcements.Get
-import Network.Google.Resource.Classroom.Courses.Announcements.List
-import Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
-import Network.Google.Resource.Classroom.Courses.Announcements.Patch
-import Network.Google.Resource.Classroom.Courses.CourseWork.Create
-import Network.Google.Resource.Classroom.Courses.CourseWork.Delete
-import Network.Google.Resource.Classroom.Courses.CourseWork.Get
-import Network.Google.Resource.Classroom.Courses.CourseWork.List
-import Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
-import Network.Google.Resource.Classroom.Courses.CourseWork.Patch
-import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
-import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
-import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
-import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
-import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
-import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
-import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
-import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Create
-import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Delete
-import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Get
-import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.List
-import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Patch
-import Network.Google.Resource.Classroom.Courses.Create
-import Network.Google.Resource.Classroom.Courses.Delete
-import Network.Google.Resource.Classroom.Courses.Get
-import Network.Google.Resource.Classroom.Courses.List
-import Network.Google.Resource.Classroom.Courses.Patch
-import Network.Google.Resource.Classroom.Courses.Students.Create
-import Network.Google.Resource.Classroom.Courses.Students.Delete
-import Network.Google.Resource.Classroom.Courses.Students.Get
-import Network.Google.Resource.Classroom.Courses.Students.List
-import Network.Google.Resource.Classroom.Courses.Teachers.Create
-import Network.Google.Resource.Classroom.Courses.Teachers.Delete
-import Network.Google.Resource.Classroom.Courses.Teachers.Get
-import Network.Google.Resource.Classroom.Courses.Teachers.List
-import Network.Google.Resource.Classroom.Courses.Topics.Create
-import Network.Google.Resource.Classroom.Courses.Topics.Delete
-import Network.Google.Resource.Classroom.Courses.Topics.Get
-import Network.Google.Resource.Classroom.Courses.Topics.List
-import Network.Google.Resource.Classroom.Courses.Topics.Patch
-import Network.Google.Resource.Classroom.Courses.Update
-import Network.Google.Resource.Classroom.Invitations.Accept
-import Network.Google.Resource.Classroom.Invitations.Create
-import Network.Google.Resource.Classroom.Invitations.Delete
-import Network.Google.Resource.Classroom.Invitations.Get
-import Network.Google.Resource.Classroom.Invitations.List
-import Network.Google.Resource.Classroom.Registrations.Create
-import Network.Google.Resource.Classroom.Registrations.Delete
-import Network.Google.Resource.Classroom.UserProFiles.Get
-import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
-import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
-import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
-import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
-import Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
-import Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
-import Network.Google.Resource.Classroom.UserProFiles.Guardians.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Classroom API service.
-type ClassroomAPI =
-     InvitationsListResource :<|>
-       InvitationsAcceptResource
-       :<|> InvitationsGetResource
-       :<|> InvitationsCreateResource
-       :<|> InvitationsDeleteResource
-       :<|>
-       CoursesCourseWorkStudentSubmissionsReturnResource
-       :<|> CoursesCourseWorkStudentSubmissionsListResource
-       :<|>
-       CoursesCourseWorkStudentSubmissionsReclaimResource
-       :<|> CoursesCourseWorkStudentSubmissionsPatchResource
-       :<|> CoursesCourseWorkStudentSubmissionsGetResource
-       :<|>
-       CoursesCourseWorkStudentSubmissionsTurnInResource
-       :<|>
-       CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
-       :<|> CoursesCourseWorkListResource
-       :<|> CoursesCourseWorkPatchResource
-       :<|> CoursesCourseWorkGetResource
-       :<|> CoursesCourseWorkCreateResource
-       :<|> CoursesCourseWorkModifyAssigneesResource
-       :<|> CoursesCourseWorkDeleteResource
-       :<|> CoursesCourseWorkMaterialsListResource
-       :<|> CoursesCourseWorkMaterialsPatchResource
-       :<|> CoursesCourseWorkMaterialsGetResource
-       :<|> CoursesCourseWorkMaterialsCreateResource
-       :<|> CoursesCourseWorkMaterialsDeleteResource
-       :<|> CoursesTeachersListResource
-       :<|> CoursesTeachersGetResource
-       :<|> CoursesTeachersCreateResource
-       :<|> CoursesTeachersDeleteResource
-       :<|> CoursesAnnouncementsListResource
-       :<|> CoursesAnnouncementsPatchResource
-       :<|> CoursesAnnouncementsGetResource
-       :<|> CoursesAnnouncementsCreateResource
-       :<|> CoursesAnnouncementsModifyAssigneesResource
-       :<|> CoursesAnnouncementsDeleteResource
-       :<|> CoursesTopicsListResource
-       :<|> CoursesTopicsPatchResource
-       :<|> CoursesTopicsGetResource
-       :<|> CoursesTopicsCreateResource
-       :<|> CoursesTopicsDeleteResource
-       :<|> CoursesAliasesListResource
-       :<|> CoursesAliasesCreateResource
-       :<|> CoursesAliasesDeleteResource
-       :<|> CoursesStudentsListResource
-       :<|> CoursesStudentsGetResource
-       :<|> CoursesStudentsCreateResource
-       :<|> CoursesStudentsDeleteResource
-       :<|> CoursesListResource
-       :<|> CoursesPatchResource
-       :<|> CoursesGetResource
-       :<|> CoursesCreateResource
-       :<|> CoursesDeleteResource
-       :<|> CoursesUpdateResource
-       :<|> UserProFilesGuardiansListResource
-       :<|> UserProFilesGuardiansGetResource
-       :<|> UserProFilesGuardiansDeleteResource
-       :<|> UserProFilesGuardianInvitationsListResource
-       :<|> UserProFilesGuardianInvitationsPatchResource
-       :<|> UserProFilesGuardianInvitationsGetResource
-       :<|> UserProFilesGuardianInvitationsCreateResource
-       :<|> UserProFilesGetResource
-       :<|> RegistrationsCreateResource
-       :<|> RegistrationsDeleteResource
+import Network.Google.Classroom.UserProfiles.Get
+import Network.Google.Classroom.UserProfiles.GuardianInvitations.Create
+import Network.Google.Classroom.UserProfiles.GuardianInvitations.Get
+import Network.Google.Classroom.UserProfiles.GuardianInvitations.List
+import Network.Google.Classroom.UserProfiles.GuardianInvitations.Patch
+import Network.Google.Classroom.UserProfiles.Guardians.Delete
+import Network.Google.Classroom.UserProfiles.Guardians.Get
+import Network.Google.Classroom.UserProfiles.Guardians.List

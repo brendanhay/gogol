@@ -1,106 +1,117 @@
-name:                  gogol-classroom
-version:               0.5.0
-synopsis:              Google Classroom SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-classroom
+version:            0.5.0
+synopsis:           Google Classroom SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manages classes, rosters, and invitations in Google Classroom.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Manages classes, rosters, and invitations in Google Classroom.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-classroom
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Classroom
-        , Network.Google.Classroom.Types
-        , Network.Google.Resource.Classroom.Courses.Aliases.Create
-        , Network.Google.Resource.Classroom.Courses.Aliases.Delete
-        , Network.Google.Resource.Classroom.Courses.Aliases.List
-        , Network.Google.Resource.Classroom.Courses.Announcements.Create
-        , Network.Google.Resource.Classroom.Courses.Announcements.Delete
-        , Network.Google.Resource.Classroom.Courses.Announcements.Get
-        , Network.Google.Resource.Classroom.Courses.Announcements.List
-        , Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
-        , Network.Google.Resource.Classroom.Courses.Announcements.Patch
-        , Network.Google.Resource.Classroom.Courses.CourseWork.Create
-        , Network.Google.Resource.Classroom.Courses.CourseWork.Delete
-        , Network.Google.Resource.Classroom.Courses.CourseWork.Get
-        , Network.Google.Resource.Classroom.Courses.CourseWork.List
-        , Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
-        , Network.Google.Resource.Classroom.Courses.CourseWork.Patch
-        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
-        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
-        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
-        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
-        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
-        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
-        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
-        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Create
-        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Delete
-        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Get
-        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.List
-        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Patch
-        , Network.Google.Resource.Classroom.Courses.Create
-        , Network.Google.Resource.Classroom.Courses.Delete
-        , Network.Google.Resource.Classroom.Courses.Get
-        , Network.Google.Resource.Classroom.Courses.List
-        , Network.Google.Resource.Classroom.Courses.Patch
-        , Network.Google.Resource.Classroom.Courses.Students.Create
-        , Network.Google.Resource.Classroom.Courses.Students.Delete
-        , Network.Google.Resource.Classroom.Courses.Students.Get
-        , Network.Google.Resource.Classroom.Courses.Students.List
-        , Network.Google.Resource.Classroom.Courses.Teachers.Create
-        , Network.Google.Resource.Classroom.Courses.Teachers.Delete
-        , Network.Google.Resource.Classroom.Courses.Teachers.Get
-        , Network.Google.Resource.Classroom.Courses.Teachers.List
-        , Network.Google.Resource.Classroom.Courses.Topics.Create
-        , Network.Google.Resource.Classroom.Courses.Topics.Delete
-        , Network.Google.Resource.Classroom.Courses.Topics.Get
-        , Network.Google.Resource.Classroom.Courses.Topics.List
-        , Network.Google.Resource.Classroom.Courses.Topics.Patch
-        , Network.Google.Resource.Classroom.Courses.Update
-        , Network.Google.Resource.Classroom.Invitations.Accept
-        , Network.Google.Resource.Classroom.Invitations.Create
-        , Network.Google.Resource.Classroom.Invitations.Delete
-        , Network.Google.Resource.Classroom.Invitations.Get
-        , Network.Google.Resource.Classroom.Invitations.List
-        , Network.Google.Resource.Classroom.Registrations.Create
-        , Network.Google.Resource.Classroom.Registrations.Delete
-        , Network.Google.Resource.Classroom.UserProFiles.Get
-        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
-        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
-        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
-        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
-        , Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
-        , Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
-        , Network.Google.Resource.Classroom.UserProFiles.Guardians.List
+  exposed-modules:
+    Network.Google.Classroom
+    Network.Google.Classroom.Courses.Aliases.Create
+    Network.Google.Classroom.Courses.Aliases.Delete
+    Network.Google.Classroom.Courses.Aliases.List
+    Network.Google.Classroom.Courses.Announcements.Create
+    Network.Google.Classroom.Courses.Announcements.Delete
+    Network.Google.Classroom.Courses.Announcements.Get
+    Network.Google.Classroom.Courses.Announcements.List
+    Network.Google.Classroom.Courses.Announcements.ModifyAssignees
+    Network.Google.Classroom.Courses.Announcements.Patch
+    Network.Google.Classroom.Courses.CourseWork.Create
+    Network.Google.Classroom.Courses.CourseWork.Delete
+    Network.Google.Classroom.Courses.CourseWork.Get
+    Network.Google.Classroom.Courses.CourseWork.List
+    Network.Google.Classroom.Courses.CourseWork.ModifyAssignees
+    Network.Google.Classroom.Courses.CourseWork.Patch
+    Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Get
+    Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.List
+    Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+    Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+    Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+    Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.Return
+    Network.Google.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
+    Network.Google.Classroom.Courses.CourseWorkMaterials.Create
+    Network.Google.Classroom.Courses.CourseWorkMaterials.Delete
+    Network.Google.Classroom.Courses.CourseWorkMaterials.Get
+    Network.Google.Classroom.Courses.CourseWorkMaterials.List
+    Network.Google.Classroom.Courses.CourseWorkMaterials.Patch
+    Network.Google.Classroom.Courses.Create
+    Network.Google.Classroom.Courses.Delete
+    Network.Google.Classroom.Courses.Get
+    Network.Google.Classroom.Courses.List
+    Network.Google.Classroom.Courses.Patch
+    Network.Google.Classroom.Courses.Students.Create
+    Network.Google.Classroom.Courses.Students.Delete
+    Network.Google.Classroom.Courses.Students.Get
+    Network.Google.Classroom.Courses.Students.List
+    Network.Google.Classroom.Courses.Teachers.Create
+    Network.Google.Classroom.Courses.Teachers.Delete
+    Network.Google.Classroom.Courses.Teachers.Get
+    Network.Google.Classroom.Courses.Teachers.List
+    Network.Google.Classroom.Courses.Topics.Create
+    Network.Google.Classroom.Courses.Topics.Delete
+    Network.Google.Classroom.Courses.Topics.Get
+    Network.Google.Classroom.Courses.Topics.List
+    Network.Google.Classroom.Courses.Topics.Patch
+    Network.Google.Classroom.Courses.Update
+    Network.Google.Classroom.Invitations.Accept
+    Network.Google.Classroom.Invitations.Create
+    Network.Google.Classroom.Invitations.Delete
+    Network.Google.Classroom.Invitations.Get
+    Network.Google.Classroom.Invitations.List
+    Network.Google.Classroom.Registrations.Create
+    Network.Google.Classroom.Registrations.Delete
+    Network.Google.Classroom.Types
+    Network.Google.Classroom.UserProfiles.Get
+    Network.Google.Classroom.UserProfiles.GuardianInvitations.Create
+    Network.Google.Classroom.UserProfiles.GuardianInvitations.Get
+    Network.Google.Classroom.UserProfiles.GuardianInvitations.List
+    Network.Google.Classroom.UserProfiles.GuardianInvitations.Patch
+    Network.Google.Classroom.UserProfiles.Guardians.Delete
+    Network.Google.Classroom.UserProfiles.Guardians.Get
+    Network.Google.Classroom.UserProfiles.Guardians.List
 
-    other-modules:
-          Network.Google.Classroom.Types.Product
-        , Network.Google.Classroom.Types.Sum
+  other-modules:
+    Network.Google.Classroom.Internal.Product
+    Network.Google.Classroom.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
