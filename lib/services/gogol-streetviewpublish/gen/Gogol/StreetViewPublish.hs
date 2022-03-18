@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,168 +30,168 @@
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference>
 module Gogol.StreetViewPublish
-    (
-    -- * Configuration
-      streetViewPublishService
+  ( -- * Configuration
+    streetViewPublishService,
 
     -- * OAuth Scopes
-    , streetViewPublishScope
+    streetViewPublishScope,
 
     -- * Resources
 
     -- ** streetviewpublish.photo.create
-    , StreetViewPublishPhotoCreateResource
-    , newStreetViewPublishPhotoCreate
-    , StreetViewPublishPhotoCreate
+    StreetViewPublishPhotoCreateResource,
+    newStreetViewPublishPhotoCreate,
+    StreetViewPublishPhotoCreate,
 
     -- ** streetviewpublish.photo.delete
-    , StreetViewPublishPhotoDeleteResource
-    , newStreetViewPublishPhotoDelete
-    , StreetViewPublishPhotoDelete
+    StreetViewPublishPhotoDeleteResource,
+    newStreetViewPublishPhotoDelete,
+    StreetViewPublishPhotoDelete,
 
     -- ** streetviewpublish.photo.get
-    , StreetViewPublishPhotoGetResource
-    , newStreetViewPublishPhotoGet
-    , StreetViewPublishPhotoGet
+    StreetViewPublishPhotoGetResource,
+    newStreetViewPublishPhotoGet,
+    StreetViewPublishPhotoGet,
 
     -- ** streetviewpublish.photo.startUpload
-    , StreetViewPublishPhotoStartUploadResource
-    , newStreetViewPublishPhotoStartUpload
-    , StreetViewPublishPhotoStartUpload
+    StreetViewPublishPhotoStartUploadResource,
+    newStreetViewPublishPhotoStartUpload,
+    StreetViewPublishPhotoStartUpload,
 
     -- ** streetviewpublish.photo.update
-    , StreetViewPublishPhotoUpdateResource
-    , newStreetViewPublishPhotoUpdate
-    , StreetViewPublishPhotoUpdate
+    StreetViewPublishPhotoUpdateResource,
+    newStreetViewPublishPhotoUpdate,
+    StreetViewPublishPhotoUpdate,
 
     -- ** streetviewpublish.photos.batchDelete
-    , StreetViewPublishPhotosBatchDeleteResource
-    , newStreetViewPublishPhotosBatchDelete
-    , StreetViewPublishPhotosBatchDelete
+    StreetViewPublishPhotosBatchDeleteResource,
+    newStreetViewPublishPhotosBatchDelete,
+    StreetViewPublishPhotosBatchDelete,
 
     -- ** streetviewpublish.photos.batchGet
-    , StreetViewPublishPhotosBatchGetResource
-    , newStreetViewPublishPhotosBatchGet
-    , StreetViewPublishPhotosBatchGet
+    StreetViewPublishPhotosBatchGetResource,
+    newStreetViewPublishPhotosBatchGet,
+    StreetViewPublishPhotosBatchGet,
 
     -- ** streetviewpublish.photos.batchUpdate
-    , StreetViewPublishPhotosBatchUpdateResource
-    , newStreetViewPublishPhotosBatchUpdate
-    , StreetViewPublishPhotosBatchUpdate
+    StreetViewPublishPhotosBatchUpdateResource,
+    newStreetViewPublishPhotosBatchUpdate,
+    StreetViewPublishPhotosBatchUpdate,
 
     -- ** streetviewpublish.photos.list
-    , StreetViewPublishPhotosListResource
-    , newStreetViewPublishPhotosList
-    , StreetViewPublishPhotosList
+    StreetViewPublishPhotosListResource,
+    newStreetViewPublishPhotosList,
+    StreetViewPublishPhotosList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** BatchDeletePhotosRequest
-    , BatchDeletePhotosRequest (..)
-    , newBatchDeletePhotosRequest
+    BatchDeletePhotosRequest (..),
+    newBatchDeletePhotosRequest,
 
     -- ** BatchDeletePhotosResponse
-    , BatchDeletePhotosResponse (..)
-    , newBatchDeletePhotosResponse
+    BatchDeletePhotosResponse (..),
+    newBatchDeletePhotosResponse,
 
     -- ** BatchGetPhotosResponse
-    , BatchGetPhotosResponse (..)
-    , newBatchGetPhotosResponse
+    BatchGetPhotosResponse (..),
+    newBatchGetPhotosResponse,
 
     -- ** BatchUpdatePhotosRequest
-    , BatchUpdatePhotosRequest (..)
-    , newBatchUpdatePhotosRequest
+    BatchUpdatePhotosRequest (..),
+    newBatchUpdatePhotosRequest,
 
     -- ** BatchUpdatePhotosResponse
-    , BatchUpdatePhotosResponse (..)
-    , newBatchUpdatePhotosResponse
+    BatchUpdatePhotosResponse (..),
+    newBatchUpdatePhotosResponse,
 
     -- ** Connection
-    , Connection (..)
-    , newConnection
+    Connection (..),
+    newConnection,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** LatLng
-    , LatLng (..)
-    , newLatLng
+    LatLng (..),
+    newLatLng,
 
     -- ** Level
-    , Level (..)
-    , newLevel
+    Level (..),
+    newLevel,
 
     -- ** ListPhotosResponse
-    , ListPhotosResponse (..)
-    , newListPhotosResponse
+    ListPhotosResponse (..),
+    newListPhotosResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Photo
-    , Photo (..)
-    , newPhoto
+    Photo (..),
+    newPhoto,
 
     -- ** Photo_MapsPublishStatus
-    , Photo_MapsPublishStatus (..)
+    Photo_MapsPublishStatus (..),
 
     -- ** Photo_TransferStatus
-    , Photo_TransferStatus (..)
+    Photo_TransferStatus (..),
 
     -- ** PhotoId
-    , PhotoId (..)
-    , newPhotoId
+    PhotoId (..),
+    newPhotoId,
 
     -- ** PhotoResponse
-    , PhotoResponse (..)
-    , newPhotoResponse
+    PhotoResponse (..),
+    newPhotoResponse,
 
     -- ** Place
-    , Place (..)
-    , newPlace
+    Place (..),
+    newPlace,
 
     -- ** Pose
-    , Pose (..)
-    , newPose
+    Pose (..),
+    newPose,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** UpdatePhotoRequest
-    , UpdatePhotoRequest (..)
-    , newUpdatePhotoRequest
+    UpdatePhotoRequest (..),
+    newUpdatePhotoRequest,
 
     -- ** UploadRef
-    , UploadRef (..)
-    , newUploadRef
+    UploadRef (..),
+    newUploadRef,
 
     -- ** PhotoGetView
-    , PhotoGetView (..)
+    PhotoGetView (..),
 
     -- ** PhotosBatchGetView
-    , PhotosBatchGetView (..)
+    PhotosBatchGetView (..),
 
     -- ** PhotosListView
-    , PhotosListView (..)
-    ) where
+    PhotosListView (..),
+  )
+where
 
 import Gogol.StreetViewPublish.Photo.Create
 import Gogol.StreetViewPublish.Photo.Delete
