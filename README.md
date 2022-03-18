@@ -1,12 +1,7 @@
 # Gogol
 
-**Warning:** This is an experimental prototype/preview release which is still
-under heavy development and not intended for public consumption, caveat emptor!
-
-[![Build Status](https://img.shields.io/travis/brendanhay/gogol/develop.svg?maxAge=2592000)](https://travis-ci.org/brendanhay/gogol)
 [![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
 [![Gitter Chat](https://img.shields.io/gitter/room/brendanhay/gogol.js.svg?maxAge=2592000)](https://gitter.im/brendanhay/gogol)
-
 
 * [Description](#description)
 * [Documentation](#documentation)
@@ -17,9 +12,6 @@ under heavy development and not intended for public consumption, caveat emptor!
 
 
 ## Description
-
-<img alt="Гоголь-моголь" height="261px;" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Kogel_mogel.JPG">
-<img alt="Мико́ла Васи́льович Го́голь" height="261px" src="https://upload.wikimedia.org/wikipedia/commons/3/31/NV_Gogol.png">
 
 A comprehensive Google Services SDK for Haskell supporting all of the publicly
 available services.
