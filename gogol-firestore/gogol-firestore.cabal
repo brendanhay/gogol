@@ -39,51 +39,52 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.FireStore
-    Network.Google.FireStore.Projects.Databases.CollectionGroups.Fields.Get
-    Network.Google.FireStore.Projects.Databases.CollectionGroups.Fields.List
-    Network.Google.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
-    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
-    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
-    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
-    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.List
-    Network.Google.FireStore.Projects.Databases.Documents.BatchGet
-    Network.Google.FireStore.Projects.Databases.Documents.BatchWrite
-    Network.Google.FireStore.Projects.Databases.Documents.BeginTransaction
-    Network.Google.FireStore.Projects.Databases.Documents.Commit
-    Network.Google.FireStore.Projects.Databases.Documents.CreateDocument
-    Network.Google.FireStore.Projects.Databases.Documents.Delete
-    Network.Google.FireStore.Projects.Databases.Documents.Get
-    Network.Google.FireStore.Projects.Databases.Documents.List
-    Network.Google.FireStore.Projects.Databases.Documents.ListCollectionIds
-    Network.Google.FireStore.Projects.Databases.Documents.ListDocuments
-    Network.Google.FireStore.Projects.Databases.Documents.Listen
-    Network.Google.FireStore.Projects.Databases.Documents.PartitionQuery
-    Network.Google.FireStore.Projects.Databases.Documents.Patch
-    Network.Google.FireStore.Projects.Databases.Documents.Rollback
-    Network.Google.FireStore.Projects.Databases.Documents.RunQuery
-    Network.Google.FireStore.Projects.Databases.Documents.Write
-    Network.Google.FireStore.Projects.Databases.ExportDocuments
-    Network.Google.FireStore.Projects.Databases.Get
-    Network.Google.FireStore.Projects.Databases.ImportDocuments
-    Network.Google.FireStore.Projects.Databases.List
-    Network.Google.FireStore.Projects.Databases.Operations.Cancel
-    Network.Google.FireStore.Projects.Databases.Operations.Delete
-    Network.Google.FireStore.Projects.Databases.Operations.Get
-    Network.Google.FireStore.Projects.Databases.Operations.List
-    Network.Google.FireStore.Projects.Databases.Patch
-    Network.Google.FireStore.Projects.Locations.Get
-    Network.Google.FireStore.Projects.Locations.List
-    Network.Google.FireStore.Types
+    Gogol.FireStore
+    Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.Get
+    Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.List
+    Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
+    Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
+    Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
+    Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
+    Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.List
+    Gogol.FireStore.Projects.Databases.Documents.BatchGet
+    Gogol.FireStore.Projects.Databases.Documents.BatchWrite
+    Gogol.FireStore.Projects.Databases.Documents.BeginTransaction
+    Gogol.FireStore.Projects.Databases.Documents.Commit
+    Gogol.FireStore.Projects.Databases.Documents.CreateDocument
+    Gogol.FireStore.Projects.Databases.Documents.Delete
+    Gogol.FireStore.Projects.Databases.Documents.Get
+    Gogol.FireStore.Projects.Databases.Documents.List
+    Gogol.FireStore.Projects.Databases.Documents.ListCollectionIds
+    Gogol.FireStore.Projects.Databases.Documents.ListDocuments
+    Gogol.FireStore.Projects.Databases.Documents.Listen
+    Gogol.FireStore.Projects.Databases.Documents.PartitionQuery
+    Gogol.FireStore.Projects.Databases.Documents.Patch
+    Gogol.FireStore.Projects.Databases.Documents.Rollback
+    Gogol.FireStore.Projects.Databases.Documents.RunQuery
+    Gogol.FireStore.Projects.Databases.Documents.Write
+    Gogol.FireStore.Projects.Databases.ExportDocuments
+    Gogol.FireStore.Projects.Databases.Get
+    Gogol.FireStore.Projects.Databases.ImportDocuments
+    Gogol.FireStore.Projects.Databases.List
+    Gogol.FireStore.Projects.Databases.Operations.Cancel
+    Gogol.FireStore.Projects.Databases.Operations.Delete
+    Gogol.FireStore.Projects.Databases.Operations.Get
+    Gogol.FireStore.Projects.Databases.Operations.List
+    Gogol.FireStore.Projects.Databases.Patch
+    Gogol.FireStore.Projects.Locations.Get
+    Gogol.FireStore.Projects.Locations.List
+    Gogol.FireStore.Types
 
   other-modules:
-    Network.Google.FireStore.Internal.Product
-    Network.Google.FireStore.Internal.Sum
+    Gogol.FireStore.Internal.Product
+    Gogol.FireStore.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
