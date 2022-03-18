@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,123 +36,123 @@
 --
 -- /See:/ <https://developers.google.com/speed/docs/insights/v5/about PageSpeed Insights API Reference>
 module Gogol.PageSpeed
-  ( -- * Configuration
-    pageSpeedService,
+    (
+    -- * Configuration
+      pageSpeedService
 
     -- * OAuth Scopes
-    openidScope,
+    , openidScope
 
     -- * Resources
 
     -- ** pagespeedonline.pagespeedapi.runpagespeed
-    PagespeedonlinePagespeedapiRunpagespeedResource,
-    newPagespeedonlinePagespeedapiRunpagespeed,
-    PagespeedonlinePagespeedapiRunpagespeed,
+    , PagespeedonlinePagespeedapiRunpagespeedResource
+    , newPagespeedonlinePagespeedapiRunpagespeed
+    , PagespeedonlinePagespeedapiRunpagespeed
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AuditRefs
-    AuditRefs (..),
-    newAuditRefs,
+    , AuditRefs (..)
+    , newAuditRefs
 
     -- ** Bucket
-    Bucket (..),
-    newBucket,
+    , Bucket (..)
+    , newBucket
 
     -- ** Categories
-    Categories (..),
-    newCategories,
+    , Categories (..)
+    , newCategories
 
     -- ** CategoryGroupV5
-    CategoryGroupV5 (..),
-    newCategoryGroupV5,
+    , CategoryGroupV5 (..)
+    , newCategoryGroupV5
 
     -- ** ConfigSettings
-    ConfigSettings (..),
-    newConfigSettings,
+    , ConfigSettings (..)
+    , newConfigSettings
 
     -- ** Environment
-    Environment (..),
-    newEnvironment,
+    , Environment (..)
+    , newEnvironment
 
     -- ** I18n
-    I18n (..),
-    newI18n,
+    , I18n (..)
+    , newI18n
 
     -- ** LighthouseAuditResultV5
-    LighthouseAuditResultV5 (..),
-    newLighthouseAuditResultV5,
+    , LighthouseAuditResultV5 (..)
+    , newLighthouseAuditResultV5
 
     -- ** LighthouseAuditResultV5_Details
-    LighthouseAuditResultV5_Details (..),
-    newLighthouseAuditResultV5_Details,
+    , LighthouseAuditResultV5_Details (..)
+    , newLighthouseAuditResultV5_Details
 
     -- ** LighthouseCategoryV5
-    LighthouseCategoryV5 (..),
-    newLighthouseCategoryV5,
+    , LighthouseCategoryV5 (..)
+    , newLighthouseCategoryV5
 
     -- ** LighthouseResultV5
-    LighthouseResultV5 (..),
-    newLighthouseResultV5,
+    , LighthouseResultV5 (..)
+    , newLighthouseResultV5
 
     -- ** LighthouseResultV5_Audits
-    LighthouseResultV5_Audits (..),
-    newLighthouseResultV5_Audits,
+    , LighthouseResultV5_Audits (..)
+    , newLighthouseResultV5_Audits
 
     -- ** LighthouseResultV5_CategoryGroups
-    LighthouseResultV5_CategoryGroups (..),
-    newLighthouseResultV5_CategoryGroups,
+    , LighthouseResultV5_CategoryGroups (..)
+    , newLighthouseResultV5_CategoryGroups
 
     -- ** PagespeedApiLoadingExperienceV5
-    PagespeedApiLoadingExperienceV5 (..),
-    newPagespeedApiLoadingExperienceV5,
+    , PagespeedApiLoadingExperienceV5 (..)
+    , newPagespeedApiLoadingExperienceV5
 
     -- ** PagespeedApiLoadingExperienceV5_Metrics
-    PagespeedApiLoadingExperienceV5_Metrics (..),
-    newPagespeedApiLoadingExperienceV5_Metrics,
+    , PagespeedApiLoadingExperienceV5_Metrics (..)
+    , newPagespeedApiLoadingExperienceV5_Metrics
 
     -- ** PagespeedApiPagespeedResponseV5
-    PagespeedApiPagespeedResponseV5 (..),
-    newPagespeedApiPagespeedResponseV5,
+    , PagespeedApiPagespeedResponseV5 (..)
+    , newPagespeedApiPagespeedResponseV5
 
     -- ** PagespeedVersion
-    PagespeedVersion (..),
-    newPagespeedVersion,
+    , PagespeedVersion (..)
+    , newPagespeedVersion
 
     -- ** RendererFormattedStrings
-    RendererFormattedStrings (..),
-    newRendererFormattedStrings,
+    , RendererFormattedStrings (..)
+    , newRendererFormattedStrings
 
     -- ** RuntimeError
-    RuntimeError (..),
-    newRuntimeError,
+    , RuntimeError (..)
+    , newRuntimeError
 
     -- ** StackPack
-    StackPack (..),
-    newStackPack,
+    , StackPack (..)
+    , newStackPack
 
     -- ** StackPack_Descriptions
-    StackPack_Descriptions (..),
-    newStackPack_Descriptions,
+    , StackPack_Descriptions (..)
+    , newStackPack_Descriptions
 
     -- ** Timing
-    Timing (..),
-    newTiming,
+    , Timing (..)
+    , newTiming
 
     -- ** UserPageLoadMetricV5
-    UserPageLoadMetricV5 (..),
-    newUserPageLoadMetricV5,
+    , UserPageLoadMetricV5 (..)
+    , newUserPageLoadMetricV5
 
     -- ** PagespeedapiRunpagespeedCategory
-    PagespeedapiRunpagespeedCategory (..),
+    , PagespeedapiRunpagespeedCategory (..)
 
     -- ** PagespeedapiRunpagespeedStrategy
-    PagespeedapiRunpagespeedStrategy (..),
-  )
-where
+    , PagespeedapiRunpagespeedStrategy (..)
+    ) where
 
 import Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
 import Gogol.PageSpeed.Types
