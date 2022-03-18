@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,14 +30,14 @@
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference> for @slides.presentations.pages.getThumbnail@.
 module Gogol.Slides.Presentations.Pages.GetThumbnail
-    (
-    -- * Resource
-      SlidesPresentationsPagesGetThumbnailResource
+  ( -- * Resource
+    SlidesPresentationsPagesGetThumbnailResource,
 
     -- ** Constructing a Request
-    , newSlidesPresentationsPagesGetThumbnail
-    , SlidesPresentationsPagesGetThumbnail
-    ) where
+    newSlidesPresentationsPagesGetThumbnail,
+    SlidesPresentationsPagesGetThumbnail,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Slides.Types
@@ -51,99 +45,111 @@ import Gogol.Slides.Types
 -- | A resource alias for @slides.presentations.pages.getThumbnail@ method which the
 -- 'SlidesPresentationsPagesGetThumbnail' request conforms to.
 type SlidesPresentationsPagesGetThumbnailResource =
-     "v1" Core.:>
-       "presentations" Core.:>
-         Core.Capture "presentationId" Core.Text Core.:>
-           "pages" Core.:>
-             Core.Capture "pageObjectId" Core.Text Core.:>
-               "thumbnail" Core.:>
-                 Core.QueryParam "$.xgafv" Xgafv Core.:>
-                   Core.QueryParam "access_token" Core.Text Core.:>
-                     Core.QueryParam "callback" Core.Text Core.:>
-                       Core.QueryParam "thumbnailProperties.mimeType"
-                         PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
-                         Core.:>
-                         Core.QueryParam "thumbnailProperties.thumbnailSize"
-                           PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
-                           Core.:>
-                           Core.QueryParam "uploadType" Core.Text Core.:>
-                             Core.QueryParam "upload_protocol" Core.Text Core.:>
-                               Core.QueryParam "alt" Core.AltJSON Core.:>
-                                 Core.Get '[Core.JSON] Thumbnail
+  "v1"
+    Core.:> "presentations"
+    Core.:> Core.Capture "presentationId" Core.Text
+    Core.:> "pages"
+    Core.:> Core.Capture "pageObjectId" Core.Text
+    Core.:> "thumbnail"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "thumbnailProperties.mimeType"
+              PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+    Core.:> Core.QueryParam
+              "thumbnailProperties.thumbnailSize"
+              PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Thumbnail
 
 -- | Generates a thumbnail of the latest version of the specified page in the presentation and returns a URL to the thumbnail image. This request counts as an </slides/limits expensive read request> for quota purposes.
 --
 -- /See:/ 'newSlidesPresentationsPagesGetThumbnail' smart constructor.
 data SlidesPresentationsPagesGetThumbnail = SlidesPresentationsPagesGetThumbnail
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The object ID of the page whose thumbnail to retrieve.
-    , pageObjectId :: Core.Text
-      -- | The ID of the presentation to retrieve.
-    , presentationId :: Core.Text
-      -- | The optional mime type of the thumbnail image. If you don\'t specify the mime type, the mime type defaults to PNG.
-    , thumbnailPropertiesMimeType :: (Core.Maybe
-   PresentationsPagesGetThumbnailThumbnailPropertiesMimeType)
-      -- | The optional thumbnail image size. If you don\'t specify the size, the server chooses a default size of the image.
-    , thumbnailPropertiesThumbnailSize :: (Core.Maybe
-   PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The object ID of the page whose thumbnail to retrieve.
+    pageObjectId :: Core.Text,
+    -- | The ID of the presentation to retrieve.
+    presentationId :: Core.Text,
+    -- | The optional mime type of the thumbnail image. If you don\'t specify the mime type, the mime type defaults to PNG.
+    thumbnailPropertiesMimeType ::
+      ( Core.Maybe
+          PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+      ),
+    -- | The optional thumbnail image size. If you don\'t specify the size, the server chooses a default size of the image.
+    thumbnailPropertiesThumbnailSize ::
+      ( Core.Maybe
+          PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+      ),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SlidesPresentationsPagesGetThumbnail' with the minimum fields required to make a request.
-newSlidesPresentationsPagesGetThumbnail 
-    ::  Core.Text
-       -- ^  The object ID of the page whose thumbnail to retrieve. See 'pageObjectId'.
-    -> Core.Text
-       -- ^  The ID of the presentation to retrieve. See 'presentationId'.
-    -> SlidesPresentationsPagesGetThumbnail
+newSlidesPresentationsPagesGetThumbnail ::
+  -- |  The object ID of the page whose thumbnail to retrieve. See 'pageObjectId'.
+  Core.Text ->
+  -- |  The ID of the presentation to retrieve. See 'presentationId'.
+  Core.Text ->
+  SlidesPresentationsPagesGetThumbnail
 newSlidesPresentationsPagesGetThumbnail pageObjectId presentationId =
   SlidesPresentationsPagesGetThumbnail
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , pageObjectId = pageObjectId
-    , presentationId = presentationId
-    , thumbnailPropertiesMimeType = Core.Nothing
-    , thumbnailPropertiesThumbnailSize = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      pageObjectId = pageObjectId,
+      presentationId = presentationId,
+      thumbnailPropertiesMimeType = Core.Nothing,
+      thumbnailPropertiesThumbnailSize = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           SlidesPresentationsPagesGetThumbnail
-         where
-        type Rs SlidesPresentationsPagesGetThumbnail =
-             Thumbnail
-        type Scopes SlidesPresentationsPagesGetThumbnail =
-             '["https://www.googleapis.com/auth/drive",
-               "https://www.googleapis.com/auth/drive.file",
-               "https://www.googleapis.com/auth/drive.readonly",
-               "https://www.googleapis.com/auth/presentations",
-               "https://www.googleapis.com/auth/presentations.readonly"]
-        requestClient
-          SlidesPresentationsPagesGetThumbnail{..}
-          = go presentationId pageObjectId xgafv accessToken
-              callback
-              thumbnailPropertiesMimeType
-              thumbnailPropertiesThumbnailSize
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              slidesService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           SlidesPresentationsPagesGetThumbnailResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    SlidesPresentationsPagesGetThumbnail
+  where
+  type
+    Rs SlidesPresentationsPagesGetThumbnail =
+      Thumbnail
+  type
+    Scopes SlidesPresentationsPagesGetThumbnail =
+      '[ "https://www.googleapis.com/auth/drive",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/drive.readonly",
+         "https://www.googleapis.com/auth/presentations",
+         "https://www.googleapis.com/auth/presentations.readonly"
+       ]
+  requestClient
+    SlidesPresentationsPagesGetThumbnail {..} =
+      go
+        presentationId
+        pageObjectId
+        xgafv
+        accessToken
+        callback
+        thumbnailPropertiesMimeType
+        thumbnailPropertiesThumbnailSize
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        slidesService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  SlidesPresentationsPagesGetThumbnailResource
+            )
+            Core.mempty

@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Slides.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AffineTransform_Unit
     AffineTransform_Unit
-      (
-        AffineTransform_Unit_UNITUNSPECIFIED,
+      ( AffineTransform_Unit_UNITUNSPECIFIED,
         AffineTransform_Unit_Emu,
         AffineTransform_Unit_PT,
         ..
@@ -54,16 +43,14 @@ module Gogol.Slides.Internal.Sum
 
     -- * AutoText_Type
     AutoText_Type
-      (
-        AutoText_Type_TYPEUNSPECIFIED,
+      ( AutoText_Type_TYPEUNSPECIFIED,
         AutoText_Type_SLIDENUMBER,
         ..
       ),
 
     -- * Autofit_AutofitType
     Autofit_AutofitType
-      (
-        Autofit_AutofitType_AUTOFITTYPEUNSPECIFIED,
+      ( Autofit_AutofitType_AUTOFITTYPEUNSPECIFIED,
         Autofit_AutofitType_None,
         Autofit_AutofitType_TEXTAUTOFIT,
         Autofit_AutofitType_SHAPEAUTOFIT,
@@ -72,8 +59,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * CreateLineRequest_Category
     CreateLineRequest_Category
-      (
-        CreateLineRequest_Category_LINECATEGORYUNSPECIFIED,
+      ( CreateLineRequest_Category_LINECATEGORYUNSPECIFIED,
         CreateLineRequest_Category_Straight,
         CreateLineRequest_Category_Bent,
         CreateLineRequest_Category_Curved,
@@ -82,8 +68,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * CreateLineRequest_LineCategory
     CreateLineRequest_LineCategory
-      (
-        CreateLineRequest_LineCategory_Straight,
+      ( CreateLineRequest_LineCategory_Straight,
         CreateLineRequest_LineCategory_Bent,
         CreateLineRequest_LineCategory_Curved,
         ..
@@ -91,8 +76,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * CreateParagraphBulletsRequest_BulletPreset
     CreateParagraphBulletsRequest_BulletPreset
-      (
-        CreateParagraphBulletsRequest_BulletPreset_BULLETDISCCIRCLESQUARE,
+      ( CreateParagraphBulletsRequest_BulletPreset_BULLETDISCCIRCLESQUARE,
         CreateParagraphBulletsRequest_BulletPreset_BULLETDIAMONDXARROW3DSQUARE,
         CreateParagraphBulletsRequest_BulletPreset_BULLETCHECKBOX,
         CreateParagraphBulletsRequest_BulletPreset_BULLETARROWDIAMONDDISC,
@@ -112,8 +96,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * CreateShapeRequest_ShapeType
     CreateShapeRequest_ShapeType
-      (
-        CreateShapeRequest_ShapeType_TYPEUNSPECIFIED,
+      ( CreateShapeRequest_ShapeType_TYPEUNSPECIFIED,
         CreateShapeRequest_ShapeType_TEXTBOX,
         CreateShapeRequest_ShapeType_Rectangle,
         CreateShapeRequest_ShapeType_ROUNDRECTANGLE,
@@ -261,16 +244,14 @@ module Gogol.Slides.Internal.Sum
 
     -- * CreateSheetsChartRequest_LinkingMode
     CreateSheetsChartRequest_LinkingMode
-      (
-        CreateSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE,
+      ( CreateSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE,
         CreateSheetsChartRequest_LinkingMode_Linked,
         ..
       ),
 
     -- * CreateVideoRequest_Source
     CreateVideoRequest_Source
-      (
-        CreateVideoRequest_Source_SOURCEUNSPECIFIED,
+      ( CreateVideoRequest_Source_SOURCEUNSPECIFIED,
         CreateVideoRequest_Source_Youtube,
         CreateVideoRequest_Source_Drive,
         ..
@@ -278,8 +259,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Dimension_Unit
     Dimension_Unit
-      (
-        Dimension_Unit_UNITUNSPECIFIED,
+      ( Dimension_Unit_UNITUNSPECIFIED,
         Dimension_Unit_Emu,
         Dimension_Unit_PT,
         ..
@@ -287,8 +267,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * LayoutReference_PredefinedLayout
     LayoutReference_PredefinedLayout
-      (
-        LayoutReference_PredefinedLayout_PREDEFINEDLAYOUTUNSPECIFIED,
+      ( LayoutReference_PredefinedLayout_PREDEFINEDLAYOUTUNSPECIFIED,
         LayoutReference_PredefinedLayout_Blank,
         LayoutReference_PredefinedLayout_CAPTIONONLY,
         LayoutReference_PredefinedLayout_Title,
@@ -305,8 +284,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Line_LineCategory
     Line_LineCategory
-      (
-        Line_LineCategory_LINECATEGORYUNSPECIFIED,
+      ( Line_LineCategory_LINECATEGORYUNSPECIFIED,
         Line_LineCategory_Straight,
         Line_LineCategory_Bent,
         Line_LineCategory_Curved,
@@ -315,8 +293,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Line_LineType
     Line_LineType
-      (
-        Line_LineType_TYPEUNSPECIFIED,
+      ( Line_LineType_TYPEUNSPECIFIED,
         Line_LineType_STRAIGHT_CONNECTOR_1,
         Line_LineType_BENT_CONNECTOR_2,
         Line_LineType_BENT_CONNECTOR_3,
@@ -332,8 +309,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * LineProperties_DashStyle
     LineProperties_DashStyle
-      (
-        LineProperties_DashStyle_DASHSTYLEUNSPECIFIED,
+      ( LineProperties_DashStyle_DASHSTYLEUNSPECIFIED,
         LineProperties_DashStyle_Solid,
         LineProperties_DashStyle_Dot,
         LineProperties_DashStyle_Dash,
@@ -345,8 +321,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * LineProperties_EndArrow
     LineProperties_EndArrow
-      (
-        LineProperties_EndArrow_ARROWSTYLEUNSPECIFIED,
+      ( LineProperties_EndArrow_ARROWSTYLEUNSPECIFIED,
         LineProperties_EndArrow_None,
         LineProperties_EndArrow_STEALTHARROW,
         LineProperties_EndArrow_FILLARROW,
@@ -362,8 +337,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * LineProperties_StartArrow
     LineProperties_StartArrow
-      (
-        LineProperties_StartArrow_ARROWSTYLEUNSPECIFIED,
+      ( LineProperties_StartArrow_ARROWSTYLEUNSPECIFIED,
         LineProperties_StartArrow_None,
         LineProperties_StartArrow_STEALTHARROW,
         LineProperties_StartArrow_FILLARROW,
@@ -379,8 +353,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Link_RelativeLink
     Link_RelativeLink
-      (
-        Link_RelativeLink_RELATIVESLIDELINKUNSPECIFIED,
+      ( Link_RelativeLink_RELATIVESLIDELINKUNSPECIFIED,
         Link_RelativeLink_NEXTSLIDE,
         Link_RelativeLink_PREVIOUSSLIDE,
         Link_RelativeLink_FIRSTSLIDE,
@@ -390,8 +363,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * OpaqueColor_ThemeColor
     OpaqueColor_ThemeColor
-      (
-        OpaqueColor_ThemeColor_THEMECOLORTYPEUNSPECIFIED,
+      ( OpaqueColor_ThemeColor_THEMECOLORTYPEUNSPECIFIED,
         OpaqueColor_ThemeColor_DARK1,
         OpaqueColor_ThemeColor_LIGHT1,
         OpaqueColor_ThemeColor_DARK2,
@@ -413,8 +385,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Outline_DashStyle
     Outline_DashStyle
-      (
-        Outline_DashStyle_DASHSTYLEUNSPECIFIED,
+      ( Outline_DashStyle_DASHSTYLEUNSPECIFIED,
         Outline_DashStyle_Solid,
         Outline_DashStyle_Dot,
         Outline_DashStyle_Dash,
@@ -426,8 +397,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Outline_PropertyState
     Outline_PropertyState
-      (
-        Outline_PropertyState_Rendered,
+      ( Outline_PropertyState_Rendered,
         Outline_PropertyState_NOTRENDERED,
         Outline_PropertyState_Inherit,
         ..
@@ -435,8 +405,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Page_PageType
     Page_PageType
-      (
-        Page_PageType_Slide,
+      ( Page_PageType_Slide,
         Page_PageType_Master,
         Page_PageType_Layout,
         Page_PageType_Notes,
@@ -446,8 +415,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * PageBackgroundFill_PropertyState
     PageBackgroundFill_PropertyState
-      (
-        PageBackgroundFill_PropertyState_Rendered,
+      ( PageBackgroundFill_PropertyState_Rendered,
         PageBackgroundFill_PropertyState_NOTRENDERED,
         PageBackgroundFill_PropertyState_Inherit,
         ..
@@ -455,8 +423,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * ParagraphStyle_Alignment
     ParagraphStyle_Alignment
-      (
-        ParagraphStyle_Alignment_ALIGNMENTUNSPECIFIED,
+      ( ParagraphStyle_Alignment_ALIGNMENTUNSPECIFIED,
         ParagraphStyle_Alignment_Start,
         ParagraphStyle_Alignment_Center,
         ParagraphStyle_Alignment_End,
@@ -466,8 +433,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * ParagraphStyle_Direction
     ParagraphStyle_Direction
-      (
-        ParagraphStyle_Direction_TEXTDIRECTIONUNSPECIFIED,
+      ( ParagraphStyle_Direction_TEXTDIRECTIONUNSPECIFIED,
         ParagraphStyle_Direction_LEFTTORIGHT,
         ParagraphStyle_Direction_RIGHTTOLEFT,
         ..
@@ -475,8 +441,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * ParagraphStyle_SpacingMode
     ParagraphStyle_SpacingMode
-      (
-        ParagraphStyle_SpacingMode_SPACINGMODEUNSPECIFIED,
+      ( ParagraphStyle_SpacingMode_SPACINGMODEUNSPECIFIED,
         ParagraphStyle_SpacingMode_NEVERCOLLAPSE,
         ParagraphStyle_SpacingMode_COLLAPSELISTS,
         ..
@@ -484,8 +449,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Placeholder_Type
     Placeholder_Type
-      (
-        Placeholder_Type_None,
+      ( Placeholder_Type_None,
         Placeholder_Type_Body,
         Placeholder_Type_Chart,
         Placeholder_Type_CLIPART,
@@ -507,8 +471,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Range_Type
     Range_Type
-      (
-        Range_Type_RANGETYPEUNSPECIFIED,
+      ( Range_Type_RANGETYPEUNSPECIFIED,
         Range_Type_FIXEDRANGE,
         Range_Type_FROMSTARTINDEX,
         Range_Type_All,
@@ -517,8 +480,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Recolor_Name
     Recolor_Name
-      (
-        Recolor_Name_None,
+      ( Recolor_Name_None,
         Recolor_Name_LIGHT1,
         Recolor_Name_LIGHT2,
         Recolor_Name_LIGHT3,
@@ -548,8 +510,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * ReplaceAllShapesWithImageRequest_ImageReplaceMethod
     ReplaceAllShapesWithImageRequest_ImageReplaceMethod
-      (
-        ReplaceAllShapesWithImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED,
+      ( ReplaceAllShapesWithImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED,
         ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERINSIDE,
         ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERCROP,
         ..
@@ -557,24 +518,21 @@ module Gogol.Slides.Internal.Sum
 
     -- * ReplaceAllShapesWithImageRequest_ReplaceMethod
     ReplaceAllShapesWithImageRequest_ReplaceMethod
-      (
-        ReplaceAllShapesWithImageRequest_ReplaceMethod_CENTERINSIDE,
+      ( ReplaceAllShapesWithImageRequest_ReplaceMethod_CENTERINSIDE,
         ReplaceAllShapesWithImageRequest_ReplaceMethod_CENTERCROP,
         ..
       ),
 
     -- * ReplaceAllShapesWithSheetsChartRequest_LinkingMode
     ReplaceAllShapesWithSheetsChartRequest_LinkingMode
-      (
-        ReplaceAllShapesWithSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE,
+      ( ReplaceAllShapesWithSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE,
         ReplaceAllShapesWithSheetsChartRequest_LinkingMode_Linked,
         ..
       ),
 
     -- * ReplaceImageRequest_ImageReplaceMethod
     ReplaceImageRequest_ImageReplaceMethod
-      (
-        ReplaceImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED,
+      ( ReplaceImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED,
         ReplaceImageRequest_ImageReplaceMethod_CENTERINSIDE,
         ReplaceImageRequest_ImageReplaceMethod_CENTERCROP,
         ..
@@ -582,8 +540,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Shadow_Alignment
     Shadow_Alignment
-      (
-        Shadow_Alignment_RECTANGLEPOSITIONUNSPECIFIED,
+      ( Shadow_Alignment_RECTANGLEPOSITIONUNSPECIFIED,
         Shadow_Alignment_TOPLEFT,
         Shadow_Alignment_TOPCENTER,
         Shadow_Alignment_TOPRIGHT,
@@ -598,8 +555,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Shadow_PropertyState
     Shadow_PropertyState
-      (
-        Shadow_PropertyState_Rendered,
+      ( Shadow_PropertyState_Rendered,
         Shadow_PropertyState_NOTRENDERED,
         Shadow_PropertyState_Inherit,
         ..
@@ -607,16 +563,14 @@ module Gogol.Slides.Internal.Sum
 
     -- * Shadow_Type
     Shadow_Type
-      (
-        Shadow_Type_SHADOWTYPEUNSPECIFIED,
+      ( Shadow_Type_SHADOWTYPEUNSPECIFIED,
         Shadow_Type_Outer,
         ..
       ),
 
     -- * Shape_ShapeType
     Shape_ShapeType
-      (
-        Shape_ShapeType_TYPEUNSPECIFIED,
+      ( Shape_ShapeType_TYPEUNSPECIFIED,
         Shape_ShapeType_TEXTBOX,
         Shape_ShapeType_Rectangle,
         Shape_ShapeType_ROUNDRECTANGLE,
@@ -764,8 +718,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * ShapeBackgroundFill_PropertyState
     ShapeBackgroundFill_PropertyState
-      (
-        ShapeBackgroundFill_PropertyState_Rendered,
+      ( ShapeBackgroundFill_PropertyState_Rendered,
         ShapeBackgroundFill_PropertyState_NOTRENDERED,
         ShapeBackgroundFill_PropertyState_Inherit,
         ..
@@ -773,8 +726,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * ShapeProperties_ContentAlignment
     ShapeProperties_ContentAlignment
-      (
-        ShapeProperties_ContentAlignment_CONTENTALIGNMENTUNSPECIFIED,
+      ( ShapeProperties_ContentAlignment_CONTENTALIGNMENTUNSPECIFIED,
         ShapeProperties_ContentAlignment_CONTENTALIGNMENTUNSUPPORTED,
         ShapeProperties_ContentAlignment_Top,
         ShapeProperties_ContentAlignment_Middle,
@@ -784,8 +736,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * TableBorderProperties_DashStyle
     TableBorderProperties_DashStyle
-      (
-        TableBorderProperties_DashStyle_DASHSTYLEUNSPECIFIED,
+      ( TableBorderProperties_DashStyle_DASHSTYLEUNSPECIFIED,
         TableBorderProperties_DashStyle_Solid,
         TableBorderProperties_DashStyle_Dot,
         TableBorderProperties_DashStyle_Dash,
@@ -797,8 +748,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * TableCellBackgroundFill_PropertyState
     TableCellBackgroundFill_PropertyState
-      (
-        TableCellBackgroundFill_PropertyState_Rendered,
+      ( TableCellBackgroundFill_PropertyState_Rendered,
         TableCellBackgroundFill_PropertyState_NOTRENDERED,
         TableCellBackgroundFill_PropertyState_Inherit,
         ..
@@ -806,8 +756,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * TableCellProperties_ContentAlignment
     TableCellProperties_ContentAlignment
-      (
-        TableCellProperties_ContentAlignment_CONTENTALIGNMENTUNSPECIFIED,
+      ( TableCellProperties_ContentAlignment_CONTENTALIGNMENTUNSPECIFIED,
         TableCellProperties_ContentAlignment_CONTENTALIGNMENTUNSUPPORTED,
         TableCellProperties_ContentAlignment_Top,
         TableCellProperties_ContentAlignment_Middle,
@@ -817,8 +766,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * TextStyle_BaselineOffset
     TextStyle_BaselineOffset
-      (
-        TextStyle_BaselineOffset_BASELINEOFFSETUNSPECIFIED,
+      ( TextStyle_BaselineOffset_BASELINEOFFSETUNSPECIFIED,
         TextStyle_BaselineOffset_None,
         TextStyle_BaselineOffset_Superscript,
         TextStyle_BaselineOffset_Subscript,
@@ -827,8 +775,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * ThemeColorPair_Type
     ThemeColorPair_Type
-      (
-        ThemeColorPair_Type_THEMECOLORTYPEUNSPECIFIED,
+      ( ThemeColorPair_Type_THEMECOLORTYPEUNSPECIFIED,
         ThemeColorPair_Type_DARK1,
         ThemeColorPair_Type_LIGHT1,
         ThemeColorPair_Type_DARK2,
@@ -850,8 +797,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * UpdateLineCategoryRequest_LineCategory
     UpdateLineCategoryRequest_LineCategory
-      (
-        UpdateLineCategoryRequest_LineCategory_LINECATEGORYUNSPECIFIED,
+      ( UpdateLineCategoryRequest_LineCategory_LINECATEGORYUNSPECIFIED,
         UpdateLineCategoryRequest_LineCategory_Straight,
         UpdateLineCategoryRequest_LineCategory_Bent,
         UpdateLineCategoryRequest_LineCategory_Curved,
@@ -860,8 +806,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * UpdatePageElementTransformRequest_ApplyMode
     UpdatePageElementTransformRequest_ApplyMode
-      (
-        UpdatePageElementTransformRequest_ApplyMode_APPLYMODEUNSPECIFIED,
+      ( UpdatePageElementTransformRequest_ApplyMode_APPLYMODEUNSPECIFIED,
         UpdatePageElementTransformRequest_ApplyMode_Relative,
         UpdatePageElementTransformRequest_ApplyMode_Absolute,
         ..
@@ -869,8 +814,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * UpdatePageElementsZOrderRequest_Operation
     UpdatePageElementsZOrderRequest_Operation
-      (
-        UpdatePageElementsZOrderRequest_Operation_ZORDEROPERATIONUNSPECIFIED,
+      ( UpdatePageElementsZOrderRequest_Operation_ZORDEROPERATIONUNSPECIFIED,
         UpdatePageElementsZOrderRequest_Operation_BRINGTOFRONT,
         UpdatePageElementsZOrderRequest_Operation_BRINGFORWARD,
         UpdatePageElementsZOrderRequest_Operation_SENDBACKWARD,
@@ -880,8 +824,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * UpdateTableBorderPropertiesRequest_BorderPosition
     UpdateTableBorderPropertiesRequest_BorderPosition
-      (
-        UpdateTableBorderPropertiesRequest_BorderPosition_All,
+      ( UpdateTableBorderPropertiesRequest_BorderPosition_All,
         UpdateTableBorderPropertiesRequest_BorderPosition_Bottom,
         UpdateTableBorderPropertiesRequest_BorderPosition_Inner,
         UpdateTableBorderPropertiesRequest_BorderPosition_INNERHORIZONTAL,
@@ -895,8 +838,7 @@ module Gogol.Slides.Internal.Sum
 
     -- * Video_Source
     Video_Source
-      (
-        Video_Source_SOURCEUNSPECIFIED,
+      ( Video_Source_SOURCEUNSPECIFIED,
         Video_Source_Youtube,
         Video_Source_Drive,
         ..
@@ -904,36 +846,35 @@ module Gogol.Slides.Internal.Sum
 
     -- * PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
     PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
-      (
-        PresentationsPagesGetThumbnailThumbnailPropertiesMimeType_Png,
+      ( PresentationsPagesGetThumbnailThumbnailPropertiesMimeType_Png,
         ..
       ),
 
     -- * PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
     PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
-      (
-        PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_THUMBNAILSIZEUNSPECIFIED,
+      ( PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_THUMBNAILSIZEUNSPECIFIED,
         PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_Large,
         PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_Medium,
         PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_Small,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -946,20 +887,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The units for translate elements.
-newtype AffineTransform_Unit = AffineTransform_Unit { fromAffineTransform_Unit :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AffineTransform_Unit = AffineTransform_Unit {fromAffineTransform_Unit :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The units are unknown.
 pattern AffineTransform_Unit_UNITUNSPECIFIED :: AffineTransform_Unit
@@ -977,20 +919,21 @@ pattern AffineTransform_Unit_PT = AffineTransform_Unit "PT"
   AffineTransform_Unit_UNITUNSPECIFIED,
   AffineTransform_Unit_Emu,
   AffineTransform_Unit_PT,
-  AffineTransform_Unit #-}
+  AffineTransform_Unit
+  #-}
 
 -- | The type of this auto text.
-newtype AutoText_Type = AutoText_Type { fromAutoText_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutoText_Type = AutoText_Type {fromAutoText_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified autotext type.
 pattern AutoText_Type_TYPEUNSPECIFIED :: AutoText_Type
@@ -1003,20 +946,21 @@ pattern AutoText_Type_SLIDENUMBER = AutoText_Type "SLIDE_NUMBER"
 {-# COMPLETE
   AutoText_Type_TYPEUNSPECIFIED,
   AutoText_Type_SLIDENUMBER,
-  AutoText_Type #-}
+  AutoText_Type
+  #-}
 
 -- | The autofit type of the shape. If the autofit type is AUTOFIT/TYPE/UNSPECIFIED, the autofit type is inherited from a parent placeholder if it exists. The field is automatically set to NONE if a request is made that might affect text fitting within its bounding text box. In this case the font/scale is applied to the font/size and the line/spacing/reduction is applied to the line_spacing. Both properties are also reset to default values.
-newtype Autofit_AutofitType = Autofit_AutofitType { fromAutofit_AutofitType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Autofit_AutofitType = Autofit_AutofitType {fromAutofit_AutofitType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The autofit type is unspecified.
 pattern Autofit_AutofitType_AUTOFITTYPEUNSPECIFIED :: Autofit_AutofitType
@@ -1039,20 +983,21 @@ pattern Autofit_AutofitType_SHAPEAUTOFIT = Autofit_AutofitType "SHAPE_AUTOFIT"
   Autofit_AutofitType_None,
   Autofit_AutofitType_TEXTAUTOFIT,
   Autofit_AutofitType_SHAPEAUTOFIT,
-  Autofit_AutofitType #-}
+  Autofit_AutofitType
+  #-}
 
 -- | The category of the line to be created. The exact line type created is determined based on the category and how it\'s routed to connect to other page elements. If you specify both a @category@ and a @line_category@, the @category@ takes precedence. If you do not specify a value for @category@, but specify a value for @line_category@, then the specified @line_category@ value is used. If you do not specify either, then STRAIGHT is used.
-newtype CreateLineRequest_Category = CreateLineRequest_Category { fromCreateLineRequest_Category :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateLineRequest_Category = CreateLineRequest_Category {fromCreateLineRequest_Category :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified line category.
 pattern CreateLineRequest_Category_LINECATEGORYUNSPECIFIED :: CreateLineRequest_Category
@@ -1075,20 +1020,21 @@ pattern CreateLineRequest_Category_Curved = CreateLineRequest_Category "CURVED"
   CreateLineRequest_Category_Straight,
   CreateLineRequest_Category_Bent,
   CreateLineRequest_Category_Curved,
-  CreateLineRequest_Category #-}
+  CreateLineRequest_Category
+  #-}
 
 -- | The category of the line to be created. /Deprecated/: use @category@ instead. The exact line type created is determined based on the category and how it\'s routed to connect to other page elements. If you specify both a @category@ and a @line_category@, the @category@ takes precedence.
-newtype CreateLineRequest_LineCategory = CreateLineRequest_LineCategory { fromCreateLineRequest_LineCategory :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateLineRequest_LineCategory = CreateLineRequest_LineCategory {fromCreateLineRequest_LineCategory :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Straight connectors, including straight connector 1. The is the default category when one is not specified.
 pattern CreateLineRequest_LineCategory_Straight :: CreateLineRequest_LineCategory
@@ -1106,20 +1052,21 @@ pattern CreateLineRequest_LineCategory_Curved = CreateLineRequest_LineCategory "
   CreateLineRequest_LineCategory_Straight,
   CreateLineRequest_LineCategory_Bent,
   CreateLineRequest_LineCategory_Curved,
-  CreateLineRequest_LineCategory #-}
+  CreateLineRequest_LineCategory
+  #-}
 
 -- | The kinds of bullet glyphs to be used. Defaults to the @BULLET_DISC_CIRCLE_SQUARE@ preset.
-newtype CreateParagraphBulletsRequest_BulletPreset = CreateParagraphBulletsRequest_BulletPreset { fromCreateParagraphBulletsRequest_BulletPreset :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateParagraphBulletsRequest_BulletPreset = CreateParagraphBulletsRequest_BulletPreset {fromCreateParagraphBulletsRequest_BulletPreset :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A bulleted list with a @DISC@, @CIRCLE@ and @SQUARE@ bullet glyph for the first 3 list nesting levels.
 pattern CreateParagraphBulletsRequest_BulletPreset_BULLETDISCCIRCLESQUARE :: CreateParagraphBulletsRequest_BulletPreset
@@ -1197,20 +1144,21 @@ pattern CreateParagraphBulletsRequest_BulletPreset_NUMBEREDZERODIGITALPHAROMAN =
   CreateParagraphBulletsRequest_BulletPreset_NUMBEREDUPPERALPHAALPHAROMAN,
   CreateParagraphBulletsRequest_BulletPreset_NUMBEREDUPPERROMANUPPERALPHADIGIT,
   CreateParagraphBulletsRequest_BulletPreset_NUMBEREDZERODIGITALPHAROMAN,
-  CreateParagraphBulletsRequest_BulletPreset #-}
+  CreateParagraphBulletsRequest_BulletPreset
+  #-}
 
 -- | The shape type.
-newtype CreateShapeRequest_ShapeType = CreateShapeRequest_ShapeType { fromCreateShapeRequest_ShapeType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateShapeRequest_ShapeType = CreateShapeRequest_ShapeType {fromCreateShapeRequest_ShapeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The shape type that is not predefined.
 pattern CreateShapeRequest_ShapeType_TYPEUNSPECIFIED :: CreateShapeRequest_ShapeType
@@ -1928,20 +1876,21 @@ pattern CreateShapeRequest_ShapeType_Custom = CreateShapeRequest_ShapeType "CUST
   CreateShapeRequest_ShapeType_ELLIPSE_RIBBON_2,
   CreateShapeRequest_ShapeType_CLOUDCALLOUT,
   CreateShapeRequest_ShapeType_Custom,
-  CreateShapeRequest_ShapeType #-}
+  CreateShapeRequest_ShapeType
+  #-}
 
 -- | The mode with which the chart is linked to the source spreadsheet. When not specified, the chart will be an image that is not linked.
-newtype CreateSheetsChartRequest_LinkingMode = CreateSheetsChartRequest_LinkingMode { fromCreateSheetsChartRequest_LinkingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateSheetsChartRequest_LinkingMode = CreateSheetsChartRequest_LinkingMode {fromCreateSheetsChartRequest_LinkingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The chart is not associated with the source spreadsheet and cannot be updated. A chart that is not linked will be inserted as an image.
 pattern CreateSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE :: CreateSheetsChartRequest_LinkingMode
@@ -1954,20 +1903,21 @@ pattern CreateSheetsChartRequest_LinkingMode_Linked = CreateSheetsChartRequest_L
 {-# COMPLETE
   CreateSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE,
   CreateSheetsChartRequest_LinkingMode_Linked,
-  CreateSheetsChartRequest_LinkingMode #-}
+  CreateSheetsChartRequest_LinkingMode
+  #-}
 
 -- | The video source.
-newtype CreateVideoRequest_Source = CreateVideoRequest_Source { fromCreateVideoRequest_Source :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateVideoRequest_Source = CreateVideoRequest_Source {fromCreateVideoRequest_Source :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The video source is unspecified.
 pattern CreateVideoRequest_Source_SOURCEUNSPECIFIED :: CreateVideoRequest_Source
@@ -1985,20 +1935,21 @@ pattern CreateVideoRequest_Source_Drive = CreateVideoRequest_Source "DRIVE"
   CreateVideoRequest_Source_SOURCEUNSPECIFIED,
   CreateVideoRequest_Source_Youtube,
   CreateVideoRequest_Source_Drive,
-  CreateVideoRequest_Source #-}
+  CreateVideoRequest_Source
+  #-}
 
 -- | The units for magnitude.
-newtype Dimension_Unit = Dimension_Unit { fromDimension_Unit :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Dimension_Unit = Dimension_Unit {fromDimension_Unit :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The units are unknown.
 pattern Dimension_Unit_UNITUNSPECIFIED :: Dimension_Unit
@@ -2016,20 +1967,21 @@ pattern Dimension_Unit_PT = Dimension_Unit "PT"
   Dimension_Unit_UNITUNSPECIFIED,
   Dimension_Unit_Emu,
   Dimension_Unit_PT,
-  Dimension_Unit #-}
+  Dimension_Unit
+  #-}
 
 -- | Predefined layout.
-newtype LayoutReference_PredefinedLayout = LayoutReference_PredefinedLayout { fromLayoutReference_PredefinedLayout :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LayoutReference_PredefinedLayout = LayoutReference_PredefinedLayout {fromLayoutReference_PredefinedLayout :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified layout.
 pattern LayoutReference_PredefinedLayout_PREDEFINEDLAYOUTUNSPECIFIED :: LayoutReference_PredefinedLayout
@@ -2092,20 +2044,21 @@ pattern LayoutReference_PredefinedLayout_BIGNUMBER = LayoutReference_PredefinedL
   LayoutReference_PredefinedLayout_ONECOLUMNTEXT,
   LayoutReference_PredefinedLayout_MAINPOINT,
   LayoutReference_PredefinedLayout_BIGNUMBER,
-  LayoutReference_PredefinedLayout #-}
+  LayoutReference_PredefinedLayout
+  #-}
 
 -- | The category of the line. It matches the @category@ specified in CreateLineRequest, and can be updated with UpdateLineCategoryRequest.
-newtype Line_LineCategory = Line_LineCategory { fromLine_LineCategory :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Line_LineCategory = Line_LineCategory {fromLine_LineCategory :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified line category.
 pattern Line_LineCategory_LINECATEGORYUNSPECIFIED :: Line_LineCategory
@@ -2128,20 +2081,21 @@ pattern Line_LineCategory_Curved = Line_LineCategory "CURVED"
   Line_LineCategory_Straight,
   Line_LineCategory_Bent,
   Line_LineCategory_Curved,
-  Line_LineCategory #-}
+  Line_LineCategory
+  #-}
 
 -- | The type of the line.
-newtype Line_LineType = Line_LineType { fromLine_LineType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Line_LineType = Line_LineType {fromLine_LineType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified line type.
 pattern Line_LineType_TYPEUNSPECIFIED :: Line_LineType
@@ -2199,20 +2153,21 @@ pattern Line_LineType_STRAIGHTLINE = Line_LineType "STRAIGHT_LINE"
   Line_LineType_CURVED_CONNECTOR_4,
   Line_LineType_CURVED_CONNECTOR_5,
   Line_LineType_STRAIGHTLINE,
-  Line_LineType #-}
+  Line_LineType
+  #-}
 
 -- | The dash style of the line.
-newtype LineProperties_DashStyle = LineProperties_DashStyle { fromLineProperties_DashStyle :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LineProperties_DashStyle = LineProperties_DashStyle {fromLineProperties_DashStyle :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified dash style.
 pattern LineProperties_DashStyle_DASHSTYLEUNSPECIFIED :: LineProperties_DashStyle
@@ -2250,20 +2205,21 @@ pattern LineProperties_DashStyle_LONGDASHDOT = LineProperties_DashStyle "LONG_DA
   LineProperties_DashStyle_DASHDOT,
   LineProperties_DashStyle_LONGDASH,
   LineProperties_DashStyle_LONGDASHDOT,
-  LineProperties_DashStyle #-}
+  LineProperties_DashStyle
+  #-}
 
 -- | The style of the arrow at the end of the line.
-newtype LineProperties_EndArrow = LineProperties_EndArrow { fromLineProperties_EndArrow :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LineProperties_EndArrow = LineProperties_EndArrow {fromLineProperties_EndArrow :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified arrow style.
 pattern LineProperties_EndArrow_ARROWSTYLEUNSPECIFIED :: LineProperties_EndArrow
@@ -2321,20 +2277,21 @@ pattern LineProperties_EndArrow_OPENDIAMOND = LineProperties_EndArrow "OPEN_DIAM
   LineProperties_EndArrow_OPENCIRCLE,
   LineProperties_EndArrow_OPENSQUARE,
   LineProperties_EndArrow_OPENDIAMOND,
-  LineProperties_EndArrow #-}
+  LineProperties_EndArrow
+  #-}
 
 -- | The style of the arrow at the beginning of the line.
-newtype LineProperties_StartArrow = LineProperties_StartArrow { fromLineProperties_StartArrow :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LineProperties_StartArrow = LineProperties_StartArrow {fromLineProperties_StartArrow :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified arrow style.
 pattern LineProperties_StartArrow_ARROWSTYLEUNSPECIFIED :: LineProperties_StartArrow
@@ -2392,20 +2349,21 @@ pattern LineProperties_StartArrow_OPENDIAMOND = LineProperties_StartArrow "OPEN_
   LineProperties_StartArrow_OPENCIRCLE,
   LineProperties_StartArrow_OPENSQUARE,
   LineProperties_StartArrow_OPENDIAMOND,
-  LineProperties_StartArrow #-}
+  LineProperties_StartArrow
+  #-}
 
 -- | If set, indicates this is a link to a slide in this presentation, addressed by its position.
-newtype Link_RelativeLink = Link_RelativeLink { fromLink_RelativeLink :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Link_RelativeLink = Link_RelativeLink {fromLink_RelativeLink :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified relative slide link.
 pattern Link_RelativeLink_RELATIVESLIDELINKUNSPECIFIED :: Link_RelativeLink
@@ -2433,20 +2391,21 @@ pattern Link_RelativeLink_LASTSLIDE = Link_RelativeLink "LAST_SLIDE"
   Link_RelativeLink_PREVIOUSSLIDE,
   Link_RelativeLink_FIRSTSLIDE,
   Link_RelativeLink_LASTSLIDE,
-  Link_RelativeLink #-}
+  Link_RelativeLink
+  #-}
 
 -- | An opaque theme color.
-newtype OpaqueColor_ThemeColor = OpaqueColor_ThemeColor { fromOpaqueColor_ThemeColor :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OpaqueColor_ThemeColor = OpaqueColor_ThemeColor {fromOpaqueColor_ThemeColor :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified theme color. This value should not be used.
 pattern OpaqueColor_ThemeColor_THEMECOLORTYPEUNSPECIFIED :: OpaqueColor_ThemeColor
@@ -2534,20 +2493,21 @@ pattern OpaqueColor_ThemeColor_BACKGROUND2 = OpaqueColor_ThemeColor "BACKGROUND2
   OpaqueColor_ThemeColor_BACKGROUND1,
   OpaqueColor_ThemeColor_TEXT2,
   OpaqueColor_ThemeColor_BACKGROUND2,
-  OpaqueColor_ThemeColor #-}
+  OpaqueColor_ThemeColor
+  #-}
 
 -- | The dash style of the outline.
-newtype Outline_DashStyle = Outline_DashStyle { fromOutline_DashStyle :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Outline_DashStyle = Outline_DashStyle {fromOutline_DashStyle :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified dash style.
 pattern Outline_DashStyle_DASHSTYLEUNSPECIFIED :: Outline_DashStyle
@@ -2585,20 +2545,21 @@ pattern Outline_DashStyle_LONGDASHDOT = Outline_DashStyle "LONG_DASH_DOT"
   Outline_DashStyle_DASHDOT,
   Outline_DashStyle_LONGDASH,
   Outline_DashStyle_LONGDASHDOT,
-  Outline_DashStyle #-}
+  Outline_DashStyle
+  #-}
 
 -- | The outline property state. Updating the outline on a page element will implicitly update this field to @RENDERED@, unless another value is specified in the same request. To have no outline on a page element, set this field to @NOT_RENDERED@. In this case, any other outline fields set in the same request will be ignored.
-newtype Outline_PropertyState = Outline_PropertyState { fromOutline_PropertyState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Outline_PropertyState = Outline_PropertyState {fromOutline_PropertyState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If a property\'s state is RENDERED, then the element has the corresponding property when rendered on a page. If the element is a placeholder shape as determined by the placeholder field, and it inherits from a placeholder shape, the corresponding field may be unset, meaning that the property value is inherited from a parent placeholder. If the element does not inherit, then the field will contain the rendered value. This is the default value.
 pattern Outline_PropertyState_Rendered :: Outline_PropertyState
@@ -2616,20 +2577,21 @@ pattern Outline_PropertyState_Inherit = Outline_PropertyState "INHERIT"
   Outline_PropertyState_Rendered,
   Outline_PropertyState_NOTRENDERED,
   Outline_PropertyState_Inherit,
-  Outline_PropertyState #-}
+  Outline_PropertyState
+  #-}
 
 -- | The type of the page.
-newtype Page_PageType = Page_PageType { fromPage_PageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Page_PageType = Page_PageType {fromPage_PageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A slide page.
 pattern Page_PageType_Slide :: Page_PageType
@@ -2657,20 +2619,21 @@ pattern Page_PageType_NOTESMASTER = Page_PageType "NOTES_MASTER"
   Page_PageType_Layout,
   Page_PageType_Notes,
   Page_PageType_NOTESMASTER,
-  Page_PageType #-}
+  Page_PageType
+  #-}
 
 -- | The background fill property state. Updating the fill on a page will implicitly update this field to @RENDERED@, unless another value is specified in the same request. To have no fill on a page, set this field to @NOT_RENDERED@. In this case, any other fill fields set in the same request will be ignored.
-newtype PageBackgroundFill_PropertyState = PageBackgroundFill_PropertyState { fromPageBackgroundFill_PropertyState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PageBackgroundFill_PropertyState = PageBackgroundFill_PropertyState {fromPageBackgroundFill_PropertyState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If a property\'s state is RENDERED, then the element has the corresponding property when rendered on a page. If the element is a placeholder shape as determined by the placeholder field, and it inherits from a placeholder shape, the corresponding field may be unset, meaning that the property value is inherited from a parent placeholder. If the element does not inherit, then the field will contain the rendered value. This is the default value.
 pattern PageBackgroundFill_PropertyState_Rendered :: PageBackgroundFill_PropertyState
@@ -2688,20 +2651,21 @@ pattern PageBackgroundFill_PropertyState_Inherit = PageBackgroundFill_PropertySt
   PageBackgroundFill_PropertyState_Rendered,
   PageBackgroundFill_PropertyState_NOTRENDERED,
   PageBackgroundFill_PropertyState_Inherit,
-  PageBackgroundFill_PropertyState #-}
+  PageBackgroundFill_PropertyState
+  #-}
 
 -- | The text alignment for this paragraph.
-newtype ParagraphStyle_Alignment = ParagraphStyle_Alignment { fromParagraphStyle_Alignment :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ParagraphStyle_Alignment = ParagraphStyle_Alignment {fromParagraphStyle_Alignment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The paragraph alignment is inherited from the parent.
 pattern ParagraphStyle_Alignment_ALIGNMENTUNSPECIFIED :: ParagraphStyle_Alignment
@@ -2729,20 +2693,21 @@ pattern ParagraphStyle_Alignment_Justified = ParagraphStyle_Alignment "JUSTIFIED
   ParagraphStyle_Alignment_Center,
   ParagraphStyle_Alignment_End,
   ParagraphStyle_Alignment_Justified,
-  ParagraphStyle_Alignment #-}
+  ParagraphStyle_Alignment
+  #-}
 
 -- | The text direction of this paragraph. If unset, the value defaults to LEFT/TO/RIGHT since text direction is not inherited.
-newtype ParagraphStyle_Direction = ParagraphStyle_Direction { fromParagraphStyle_Direction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ParagraphStyle_Direction = ParagraphStyle_Direction {fromParagraphStyle_Direction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The text direction is inherited from the parent.
 pattern ParagraphStyle_Direction_TEXTDIRECTIONUNSPECIFIED :: ParagraphStyle_Direction
@@ -2760,20 +2725,21 @@ pattern ParagraphStyle_Direction_RIGHTTOLEFT = ParagraphStyle_Direction "RIGHT_T
   ParagraphStyle_Direction_TEXTDIRECTIONUNSPECIFIED,
   ParagraphStyle_Direction_LEFTTORIGHT,
   ParagraphStyle_Direction_RIGHTTOLEFT,
-  ParagraphStyle_Direction #-}
+  ParagraphStyle_Direction
+  #-}
 
 -- | The spacing mode for the paragraph.
-newtype ParagraphStyle_SpacingMode = ParagraphStyle_SpacingMode { fromParagraphStyle_SpacingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ParagraphStyle_SpacingMode = ParagraphStyle_SpacingMode {fromParagraphStyle_SpacingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The spacing mode is inherited from the parent.
 pattern ParagraphStyle_SpacingMode_SPACINGMODEUNSPECIFIED :: ParagraphStyle_SpacingMode
@@ -2791,20 +2757,21 @@ pattern ParagraphStyle_SpacingMode_COLLAPSELISTS = ParagraphStyle_SpacingMode "C
   ParagraphStyle_SpacingMode_SPACINGMODEUNSPECIFIED,
   ParagraphStyle_SpacingMode_NEVERCOLLAPSE,
   ParagraphStyle_SpacingMode_COLLAPSELISTS,
-  ParagraphStyle_SpacingMode #-}
+  ParagraphStyle_SpacingMode
+  #-}
 
 -- | The type of the placeholder.
-newtype Placeholder_Type = Placeholder_Type { fromPlaceholder_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Placeholder_Type = Placeholder_Type {fromPlaceholder_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, signifies it is not a placeholder.
 pattern Placeholder_Type_None :: Placeholder_Type
@@ -2892,20 +2859,21 @@ pattern Placeholder_Type_SLIDEIMAGE = Placeholder_Type "SLIDE_IMAGE"
   Placeholder_Type_Table,
   Placeholder_Type_Title,
   Placeholder_Type_SLIDEIMAGE,
-  Placeholder_Type #-}
+  Placeholder_Type
+  #-}
 
 -- | The type of range.
-newtype Range_Type = Range_Type { fromRange_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Range_Type = Range_Type {fromRange_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified range type. This value must not be used.
 pattern Range_Type_RANGETYPEUNSPECIFIED :: Range_Type
@@ -2928,20 +2896,21 @@ pattern Range_Type_All = Range_Type "ALL"
   Range_Type_FIXEDRANGE,
   Range_Type_FROMSTARTINDEX,
   Range_Type_All,
-  Range_Type #-}
+  Range_Type
+  #-}
 
 -- | The name of the recolor effect. The name is determined from the @recolor_stops@ by matching the gradient against the colors in the page\'s current color scheme. This property is read-only.
-newtype Recolor_Name = Recolor_Name { fromRecolor_Name :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Recolor_Name = Recolor_Name {fromRecolor_Name :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No recolor effect. The default value.
 pattern Recolor_Name_None :: Recolor_Name
@@ -3069,20 +3038,21 @@ pattern Recolor_Name_Custom = Recolor_Name "CUSTOM"
   Recolor_Name_Negative,
   Recolor_Name_Sepia,
   Recolor_Name_Custom,
-  Recolor_Name #-}
+  Recolor_Name
+  #-}
 
 -- | The image replace method. If you specify both a @replace_method@ and an @image_replace_method@, the @image_replace_method@ takes precedence. If you do not specify a value for @image_replace_method@, but specify a value for @replace_method@, then the specified @replace_method@ value is used. If you do not specify either, then CENTER_INSIDE is used.
-newtype ReplaceAllShapesWithImageRequest_ImageReplaceMethod = ReplaceAllShapesWithImageRequest_ImageReplaceMethod { fromReplaceAllShapesWithImageRequest_ImageReplaceMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReplaceAllShapesWithImageRequest_ImageReplaceMethod = ReplaceAllShapesWithImageRequest_ImageReplaceMethod {fromReplaceAllShapesWithImageRequest_ImageReplaceMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified image replace method. This value must not be used.
 pattern ReplaceAllShapesWithImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED :: ReplaceAllShapesWithImageRequest_ImageReplaceMethod
@@ -3100,20 +3070,21 @@ pattern ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERCROP = Replace
   ReplaceAllShapesWithImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED,
   ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERINSIDE,
   ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERCROP,
-  ReplaceAllShapesWithImageRequest_ImageReplaceMethod #-}
+  ReplaceAllShapesWithImageRequest_ImageReplaceMethod
+  #-}
 
 -- | The replace method. /Deprecated/: use @image_replace_method@ instead. If you specify both a @replace_method@ and an @image_replace_method@, the @image_replace_method@ takes precedence.
-newtype ReplaceAllShapesWithImageRequest_ReplaceMethod = ReplaceAllShapesWithImageRequest_ReplaceMethod { fromReplaceAllShapesWithImageRequest_ReplaceMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReplaceAllShapesWithImageRequest_ReplaceMethod = ReplaceAllShapesWithImageRequest_ReplaceMethod {fromReplaceAllShapesWithImageRequest_ReplaceMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Scales and centers the image to fit within the bounds of the original shape and maintains the image\'s aspect ratio. The rendered size of the image may be smaller than the size of the shape. This is the default method when one is not specified.
 pattern ReplaceAllShapesWithImageRequest_ReplaceMethod_CENTERINSIDE :: ReplaceAllShapesWithImageRequest_ReplaceMethod
@@ -3126,20 +3097,21 @@ pattern ReplaceAllShapesWithImageRequest_ReplaceMethod_CENTERCROP = ReplaceAllSh
 {-# COMPLETE
   ReplaceAllShapesWithImageRequest_ReplaceMethod_CENTERINSIDE,
   ReplaceAllShapesWithImageRequest_ReplaceMethod_CENTERCROP,
-  ReplaceAllShapesWithImageRequest_ReplaceMethod #-}
+  ReplaceAllShapesWithImageRequest_ReplaceMethod
+  #-}
 
 -- | The mode with which the chart is linked to the source spreadsheet. When not specified, the chart will be an image that is not linked.
-newtype ReplaceAllShapesWithSheetsChartRequest_LinkingMode = ReplaceAllShapesWithSheetsChartRequest_LinkingMode { fromReplaceAllShapesWithSheetsChartRequest_LinkingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReplaceAllShapesWithSheetsChartRequest_LinkingMode = ReplaceAllShapesWithSheetsChartRequest_LinkingMode {fromReplaceAllShapesWithSheetsChartRequest_LinkingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The chart is not associated with the source spreadsheet and cannot be updated. A chart that is not linked will be inserted as an image.
 pattern ReplaceAllShapesWithSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE :: ReplaceAllShapesWithSheetsChartRequest_LinkingMode
@@ -3152,20 +3124,21 @@ pattern ReplaceAllShapesWithSheetsChartRequest_LinkingMode_Linked = ReplaceAllSh
 {-# COMPLETE
   ReplaceAllShapesWithSheetsChartRequest_LinkingMode_NOTLINKEDIMAGE,
   ReplaceAllShapesWithSheetsChartRequest_LinkingMode_Linked,
-  ReplaceAllShapesWithSheetsChartRequest_LinkingMode #-}
+  ReplaceAllShapesWithSheetsChartRequest_LinkingMode
+  #-}
 
 -- | The replacement method.
-newtype ReplaceImageRequest_ImageReplaceMethod = ReplaceImageRequest_ImageReplaceMethod { fromReplaceImageRequest_ImageReplaceMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReplaceImageRequest_ImageReplaceMethod = ReplaceImageRequest_ImageReplaceMethod {fromReplaceImageRequest_ImageReplaceMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified image replace method. This value must not be used.
 pattern ReplaceImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED :: ReplaceImageRequest_ImageReplaceMethod
@@ -3183,20 +3156,21 @@ pattern ReplaceImageRequest_ImageReplaceMethod_CENTERCROP = ReplaceImageRequest_
   ReplaceImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED,
   ReplaceImageRequest_ImageReplaceMethod_CENTERINSIDE,
   ReplaceImageRequest_ImageReplaceMethod_CENTERCROP,
-  ReplaceImageRequest_ImageReplaceMethod #-}
+  ReplaceImageRequest_ImageReplaceMethod
+  #-}
 
 -- | The alignment point of the shadow, that sets the origin for translate, scale and skew of the shadow. This property is read-only.
-newtype Shadow_Alignment = Shadow_Alignment { fromShadow_Alignment :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Shadow_Alignment = Shadow_Alignment {fromShadow_Alignment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern Shadow_Alignment_RECTANGLEPOSITIONUNSPECIFIED :: Shadow_Alignment
@@ -3249,20 +3223,21 @@ pattern Shadow_Alignment_BOTTOMRIGHT = Shadow_Alignment "BOTTOM_RIGHT"
   Shadow_Alignment_BOTTOMLEFT,
   Shadow_Alignment_BOTTOMCENTER,
   Shadow_Alignment_BOTTOMRIGHT,
-  Shadow_Alignment #-}
+  Shadow_Alignment
+  #-}
 
 -- | The shadow property state. Updating the shadow on a page element will implicitly update this field to @RENDERED@, unless another value is specified in the same request. To have no shadow on a page element, set this field to @NOT_RENDERED@. In this case, any other shadow fields set in the same request will be ignored.
-newtype Shadow_PropertyState = Shadow_PropertyState { fromShadow_PropertyState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Shadow_PropertyState = Shadow_PropertyState {fromShadow_PropertyState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If a property\'s state is RENDERED, then the element has the corresponding property when rendered on a page. If the element is a placeholder shape as determined by the placeholder field, and it inherits from a placeholder shape, the corresponding field may be unset, meaning that the property value is inherited from a parent placeholder. If the element does not inherit, then the field will contain the rendered value. This is the default value.
 pattern Shadow_PropertyState_Rendered :: Shadow_PropertyState
@@ -3280,20 +3255,21 @@ pattern Shadow_PropertyState_Inherit = Shadow_PropertyState "INHERIT"
   Shadow_PropertyState_Rendered,
   Shadow_PropertyState_NOTRENDERED,
   Shadow_PropertyState_Inherit,
-  Shadow_PropertyState #-}
+  Shadow_PropertyState
+  #-}
 
 -- | The type of the shadow. This property is read-only.
-newtype Shadow_Type = Shadow_Type { fromShadow_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Shadow_Type = Shadow_Type {fromShadow_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified shadow type.
 pattern Shadow_Type_SHADOWTYPEUNSPECIFIED :: Shadow_Type
@@ -3306,20 +3282,21 @@ pattern Shadow_Type_Outer = Shadow_Type "OUTER"
 {-# COMPLETE
   Shadow_Type_SHADOWTYPEUNSPECIFIED,
   Shadow_Type_Outer,
-  Shadow_Type #-}
+  Shadow_Type
+  #-}
 
 -- | The type of the shape.
-newtype Shape_ShapeType = Shape_ShapeType { fromShape_ShapeType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Shape_ShapeType = Shape_ShapeType {fromShape_ShapeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The shape type that is not predefined.
 pattern Shape_ShapeType_TYPEUNSPECIFIED :: Shape_ShapeType
@@ -4037,20 +4014,21 @@ pattern Shape_ShapeType_Custom = Shape_ShapeType "CUSTOM"
   Shape_ShapeType_ELLIPSE_RIBBON_2,
   Shape_ShapeType_CLOUDCALLOUT,
   Shape_ShapeType_Custom,
-  Shape_ShapeType #-}
+  Shape_ShapeType
+  #-}
 
 -- | The background fill property state. Updating the fill on a shape will implicitly update this field to @RENDERED@, unless another value is specified in the same request. To have no fill on a shape, set this field to @NOT_RENDERED@. In this case, any other fill fields set in the same request will be ignored.
-newtype ShapeBackgroundFill_PropertyState = ShapeBackgroundFill_PropertyState { fromShapeBackgroundFill_PropertyState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ShapeBackgroundFill_PropertyState = ShapeBackgroundFill_PropertyState {fromShapeBackgroundFill_PropertyState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If a property\'s state is RENDERED, then the element has the corresponding property when rendered on a page. If the element is a placeholder shape as determined by the placeholder field, and it inherits from a placeholder shape, the corresponding field may be unset, meaning that the property value is inherited from a parent placeholder. If the element does not inherit, then the field will contain the rendered value. This is the default value.
 pattern ShapeBackgroundFill_PropertyState_Rendered :: ShapeBackgroundFill_PropertyState
@@ -4068,20 +4046,21 @@ pattern ShapeBackgroundFill_PropertyState_Inherit = ShapeBackgroundFill_Property
   ShapeBackgroundFill_PropertyState_Rendered,
   ShapeBackgroundFill_PropertyState_NOTRENDERED,
   ShapeBackgroundFill_PropertyState_Inherit,
-  ShapeBackgroundFill_PropertyState #-}
+  ShapeBackgroundFill_PropertyState
+  #-}
 
 -- | The alignment of the content in the shape. If unspecified, the alignment is inherited from a parent placeholder if it exists. If the shape has no parent, the default alignment matches the alignment for new shapes created in the Slides editor.
-newtype ShapeProperties_ContentAlignment = ShapeProperties_ContentAlignment { fromShapeProperties_ContentAlignment :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ShapeProperties_ContentAlignment = ShapeProperties_ContentAlignment {fromShapeProperties_ContentAlignment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified content alignment. The content alignment is inherited from the parent if it exists.
 pattern ShapeProperties_ContentAlignment_CONTENTALIGNMENTUNSPECIFIED :: ShapeProperties_ContentAlignment
@@ -4109,20 +4088,21 @@ pattern ShapeProperties_ContentAlignment_Bottom = ShapeProperties_ContentAlignme
   ShapeProperties_ContentAlignment_Top,
   ShapeProperties_ContentAlignment_Middle,
   ShapeProperties_ContentAlignment_Bottom,
-  ShapeProperties_ContentAlignment #-}
+  ShapeProperties_ContentAlignment
+  #-}
 
 -- | The dash style of the border.
-newtype TableBorderProperties_DashStyle = TableBorderProperties_DashStyle { fromTableBorderProperties_DashStyle :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TableBorderProperties_DashStyle = TableBorderProperties_DashStyle {fromTableBorderProperties_DashStyle :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified dash style.
 pattern TableBorderProperties_DashStyle_DASHSTYLEUNSPECIFIED :: TableBorderProperties_DashStyle
@@ -4160,20 +4140,21 @@ pattern TableBorderProperties_DashStyle_LONGDASHDOT = TableBorderProperties_Dash
   TableBorderProperties_DashStyle_DASHDOT,
   TableBorderProperties_DashStyle_LONGDASH,
   TableBorderProperties_DashStyle_LONGDASHDOT,
-  TableBorderProperties_DashStyle #-}
+  TableBorderProperties_DashStyle
+  #-}
 
 -- | The background fill property state. Updating the fill on a table cell will implicitly update this field to @RENDERED@, unless another value is specified in the same request. To have no fill on a table cell, set this field to @NOT_RENDERED@. In this case, any other fill fields set in the same request will be ignored.
-newtype TableCellBackgroundFill_PropertyState = TableCellBackgroundFill_PropertyState { fromTableCellBackgroundFill_PropertyState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TableCellBackgroundFill_PropertyState = TableCellBackgroundFill_PropertyState {fromTableCellBackgroundFill_PropertyState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If a property\'s state is RENDERED, then the element has the corresponding property when rendered on a page. If the element is a placeholder shape as determined by the placeholder field, and it inherits from a placeholder shape, the corresponding field may be unset, meaning that the property value is inherited from a parent placeholder. If the element does not inherit, then the field will contain the rendered value. This is the default value.
 pattern TableCellBackgroundFill_PropertyState_Rendered :: TableCellBackgroundFill_PropertyState
@@ -4191,20 +4172,21 @@ pattern TableCellBackgroundFill_PropertyState_Inherit = TableCellBackgroundFill_
   TableCellBackgroundFill_PropertyState_Rendered,
   TableCellBackgroundFill_PropertyState_NOTRENDERED,
   TableCellBackgroundFill_PropertyState_Inherit,
-  TableCellBackgroundFill_PropertyState #-}
+  TableCellBackgroundFill_PropertyState
+  #-}
 
 -- | The alignment of the content in the table cell. The default alignment matches the alignment for newly created table cells in the Slides editor.
-newtype TableCellProperties_ContentAlignment = TableCellProperties_ContentAlignment { fromTableCellProperties_ContentAlignment :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TableCellProperties_ContentAlignment = TableCellProperties_ContentAlignment {fromTableCellProperties_ContentAlignment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified content alignment. The content alignment is inherited from the parent if it exists.
 pattern TableCellProperties_ContentAlignment_CONTENTALIGNMENTUNSPECIFIED :: TableCellProperties_ContentAlignment
@@ -4232,20 +4214,21 @@ pattern TableCellProperties_ContentAlignment_Bottom = TableCellProperties_Conten
   TableCellProperties_ContentAlignment_Top,
   TableCellProperties_ContentAlignment_Middle,
   TableCellProperties_ContentAlignment_Bottom,
-  TableCellProperties_ContentAlignment #-}
+  TableCellProperties_ContentAlignment
+  #-}
 
 -- | The text\'s vertical offset from its normal position. Text with @SUPERSCRIPT@ or @SUBSCRIPT@ baseline offsets is automatically rendered in a smaller font size, computed based on the @font_size@ field. The @font_size@ itself is not affected by changes in this field.
-newtype TextStyle_BaselineOffset = TextStyle_BaselineOffset { fromTextStyle_BaselineOffset :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TextStyle_BaselineOffset = TextStyle_BaselineOffset {fromTextStyle_BaselineOffset :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The text\'s baseline offset is inherited from the parent.
 pattern TextStyle_BaselineOffset_BASELINEOFFSETUNSPECIFIED :: TextStyle_BaselineOffset
@@ -4268,20 +4251,21 @@ pattern TextStyle_BaselineOffset_Subscript = TextStyle_BaselineOffset "SUBSCRIPT
   TextStyle_BaselineOffset_None,
   TextStyle_BaselineOffset_Superscript,
   TextStyle_BaselineOffset_Subscript,
-  TextStyle_BaselineOffset #-}
+  TextStyle_BaselineOffset
+  #-}
 
 -- | The type of the theme color.
-newtype ThemeColorPair_Type = ThemeColorPair_Type { fromThemeColorPair_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ThemeColorPair_Type = ThemeColorPair_Type {fromThemeColorPair_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified theme color. This value should not be used.
 pattern ThemeColorPair_Type_THEMECOLORTYPEUNSPECIFIED :: ThemeColorPair_Type
@@ -4369,20 +4353,21 @@ pattern ThemeColorPair_Type_BACKGROUND2 = ThemeColorPair_Type "BACKGROUND2"
   ThemeColorPair_Type_BACKGROUND1,
   ThemeColorPair_Type_TEXT2,
   ThemeColorPair_Type_BACKGROUND2,
-  ThemeColorPair_Type #-}
+  ThemeColorPair_Type
+  #-}
 
 -- | The line category to update to. The exact line type is determined based on the category to update to and how it\'s routed to connect to other page elements.
-newtype UpdateLineCategoryRequest_LineCategory = UpdateLineCategoryRequest_LineCategory { fromUpdateLineCategoryRequest_LineCategory :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UpdateLineCategoryRequest_LineCategory = UpdateLineCategoryRequest_LineCategory {fromUpdateLineCategoryRequest_LineCategory :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified line category.
 pattern UpdateLineCategoryRequest_LineCategory_LINECATEGORYUNSPECIFIED :: UpdateLineCategoryRequest_LineCategory
@@ -4405,20 +4390,21 @@ pattern UpdateLineCategoryRequest_LineCategory_Curved = UpdateLineCategoryReques
   UpdateLineCategoryRequest_LineCategory_Straight,
   UpdateLineCategoryRequest_LineCategory_Bent,
   UpdateLineCategoryRequest_LineCategory_Curved,
-  UpdateLineCategoryRequest_LineCategory #-}
+  UpdateLineCategoryRequest_LineCategory
+  #-}
 
 -- | The apply mode of the transform update.
-newtype UpdatePageElementTransformRequest_ApplyMode = UpdatePageElementTransformRequest_ApplyMode { fromUpdatePageElementTransformRequest_ApplyMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UpdatePageElementTransformRequest_ApplyMode = UpdatePageElementTransformRequest_ApplyMode {fromUpdatePageElementTransformRequest_ApplyMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified mode.
 pattern UpdatePageElementTransformRequest_ApplyMode_APPLYMODEUNSPECIFIED :: UpdatePageElementTransformRequest_ApplyMode
@@ -4436,20 +4422,21 @@ pattern UpdatePageElementTransformRequest_ApplyMode_Absolute = UpdatePageElement
   UpdatePageElementTransformRequest_ApplyMode_APPLYMODEUNSPECIFIED,
   UpdatePageElementTransformRequest_ApplyMode_Relative,
   UpdatePageElementTransformRequest_ApplyMode_Absolute,
-  UpdatePageElementTransformRequest_ApplyMode #-}
+  UpdatePageElementTransformRequest_ApplyMode
+  #-}
 
 -- | The Z-order operation to apply on the page elements. When applying the operation on multiple page elements, the relative Z-orders within these page elements before the operation is maintained.
-newtype UpdatePageElementsZOrderRequest_Operation = UpdatePageElementsZOrderRequest_Operation { fromUpdatePageElementsZOrderRequest_Operation :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UpdatePageElementsZOrderRequest_Operation = UpdatePageElementsZOrderRequest_Operation {fromUpdatePageElementsZOrderRequest_Operation :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified operation.
 pattern UpdatePageElementsZOrderRequest_Operation_ZORDEROPERATIONUNSPECIFIED :: UpdatePageElementsZOrderRequest_Operation
@@ -4477,20 +4464,21 @@ pattern UpdatePageElementsZOrderRequest_Operation_SENDTOBACK = UpdatePageElement
   UpdatePageElementsZOrderRequest_Operation_BRINGFORWARD,
   UpdatePageElementsZOrderRequest_Operation_SENDBACKWARD,
   UpdatePageElementsZOrderRequest_Operation_SENDTOBACK,
-  UpdatePageElementsZOrderRequest_Operation #-}
+  UpdatePageElementsZOrderRequest_Operation
+  #-}
 
 -- | The border position in the table range the updates should apply to. If a border position is not specified, the updates will apply to all borders in the table range.
-newtype UpdateTableBorderPropertiesRequest_BorderPosition = UpdateTableBorderPropertiesRequest_BorderPosition { fromUpdateTableBorderPropertiesRequest_BorderPosition :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UpdateTableBorderPropertiesRequest_BorderPosition = UpdateTableBorderPropertiesRequest_BorderPosition {fromUpdateTableBorderPropertiesRequest_BorderPosition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | All borders in the range.
 pattern UpdateTableBorderPropertiesRequest_BorderPosition_All :: UpdateTableBorderPropertiesRequest_BorderPosition
@@ -4538,20 +4526,21 @@ pattern UpdateTableBorderPropertiesRequest_BorderPosition_Top = UpdateTableBorde
   UpdateTableBorderPropertiesRequest_BorderPosition_Outer,
   UpdateTableBorderPropertiesRequest_BorderPosition_Right',
   UpdateTableBorderPropertiesRequest_BorderPosition_Top,
-  UpdateTableBorderPropertiesRequest_BorderPosition #-}
+  UpdateTableBorderPropertiesRequest_BorderPosition
+  #-}
 
 -- | The video source.
-newtype Video_Source = Video_Source { fromVideo_Source :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Video_Source = Video_Source {fromVideo_Source :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The video source is unspecified.
 pattern Video_Source_SOURCEUNSPECIFIED :: Video_Source
@@ -4569,20 +4558,21 @@ pattern Video_Source_Drive = Video_Source "DRIVE"
   Video_Source_SOURCEUNSPECIFIED,
   Video_Source_Youtube,
   Video_Source_Drive,
-  Video_Source #-}
+  Video_Source
+  #-}
 
 -- | The optional mime type of the thumbnail image. If you don\'t specify the mime type, the mime type defaults to PNG.
-newtype PresentationsPagesGetThumbnailThumbnailPropertiesMimeType = PresentationsPagesGetThumbnailThumbnailPropertiesMimeType { fromPresentationsPagesGetThumbnailThumbnailPropertiesMimeType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PresentationsPagesGetThumbnailThumbnailPropertiesMimeType = PresentationsPagesGetThumbnailThumbnailPropertiesMimeType {fromPresentationsPagesGetThumbnailThumbnailPropertiesMimeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default mime type.
 pattern PresentationsPagesGetThumbnailThumbnailPropertiesMimeType_Png :: PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
@@ -4590,20 +4580,21 @@ pattern PresentationsPagesGetThumbnailThumbnailPropertiesMimeType_Png = Presenta
 
 {-# COMPLETE
   PresentationsPagesGetThumbnailThumbnailPropertiesMimeType_Png,
-  PresentationsPagesGetThumbnailThumbnailPropertiesMimeType #-}
+  PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+  #-}
 
 -- | The optional thumbnail image size. If you don\'t specify the size, the server chooses a default size of the image.
-newtype PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize = PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize { fromPresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize = PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize {fromPresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default thumbnail image size. The unspecified thumbnail size implies that the server chooses the size of the image in a way that might vary in the future.
 pattern PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_THUMBNAILSIZEUNSPECIFIED :: PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
@@ -4626,4 +4617,5 @@ pattern PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_Small = P
   PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_Large,
   PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_Medium,
   PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize_Small,
-  PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize #-}
+  PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+  #-}
