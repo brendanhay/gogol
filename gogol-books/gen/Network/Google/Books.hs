@@ -1,1306 +1,867 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Books
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Books API allows clients to access the Google Books
--- repository.
+-- The Google Books API allows clients to access the Google Books repository.
 --
 -- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference>
 module Network.Google.Books
-    (
-    -- * Service Configuration
-      booksService
+  ( -- * Configuration
+    booksService,
 
     -- * OAuth Scopes
-    , booksScope
-
-    -- * API Declaration
-    , BooksAPI
+    booksScope,
 
     -- * Resources
 
     -- ** books.bookshelves.get
-    , module Network.Google.Resource.Books.Bookshelves.Get
+    BooksBookshelvesGetResource,
+    newBooksBookshelvesGet,
+    BooksBookshelvesGet,
 
     -- ** books.bookshelves.list
-    , module Network.Google.Resource.Books.Bookshelves.List
+    BooksBookshelvesListResource,
+    newBooksBookshelvesList,
+    BooksBookshelvesList,
 
     -- ** books.bookshelves.volumes.list
-    , module Network.Google.Resource.Books.Bookshelves.Volumes.List
+    BooksBookshelvesVolumesListResource,
+    newBooksBookshelvesVolumesList,
+    BooksBookshelvesVolumesList,
 
     -- ** books.cloudloading.addBook
-    , module Network.Google.Resource.Books.CloudLoading.AddBook
+    BooksCloudloadingAddBookResource,
+    newBooksCloudloadingAddBook,
+    BooksCloudloadingAddBook,
 
     -- ** books.cloudloading.deleteBook
-    , module Network.Google.Resource.Books.CloudLoading.DeleteBook
+    BooksCloudloadingDeleteBookResource,
+    newBooksCloudloadingDeleteBook,
+    BooksCloudloadingDeleteBook,
 
     -- ** books.cloudloading.updateBook
-    , module Network.Google.Resource.Books.CloudLoading.UpdateBook
+    BooksCloudloadingUpdateBookResource,
+    newBooksCloudloadingUpdateBook,
+    BooksCloudloadingUpdateBook,
 
     -- ** books.dictionary.listOfflineMetadata
-    , module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
+    BooksDictionaryListOfflineMetadataResource,
+    newBooksDictionaryListOfflineMetadata,
+    BooksDictionaryListOfflineMetadata,
 
     -- ** books.familysharing.getFamilyInfo
-    , module Network.Google.Resource.Books.Familysharing.GetFamilyInfo
+    BooksFamilysharingGetFamilyInfoResource,
+    newBooksFamilysharingGetFamilyInfo,
+    BooksFamilysharingGetFamilyInfo,
 
     -- ** books.familysharing.share
-    , module Network.Google.Resource.Books.Familysharing.Share
+    BooksFamilysharingShareResource,
+    newBooksFamilysharingShare,
+    BooksFamilysharingShare,
 
     -- ** books.familysharing.unshare
-    , module Network.Google.Resource.Books.Familysharing.Unshare
+    BooksFamilysharingUnshareResource,
+    newBooksFamilysharingUnshare,
+    BooksFamilysharingUnshare,
 
     -- ** books.layers.annotationData.get
-    , module Network.Google.Resource.Books.Layers.AnnotationData.Get
+    BooksLayersAnnotationDataGetResource,
+    newBooksLayersAnnotationDataGet,
+    BooksLayersAnnotationDataGet,
 
     -- ** books.layers.annotationData.list
-    , module Network.Google.Resource.Books.Layers.AnnotationData.List
+    BooksLayersAnnotationDataListResource,
+    newBooksLayersAnnotationDataList,
+    BooksLayersAnnotationDataList,
 
     -- ** books.layers.get
-    , module Network.Google.Resource.Books.Layers.Get
+    BooksLayersGetResource,
+    newBooksLayersGet,
+    BooksLayersGet,
 
     -- ** books.layers.list
-    , module Network.Google.Resource.Books.Layers.List
+    BooksLayersListResource,
+    newBooksLayersList,
+    BooksLayersList,
 
     -- ** books.layers.volumeAnnotations.get
-    , module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
+    BooksLayersVolumeAnnotationsGetResource,
+    newBooksLayersVolumeAnnotationsGet,
+    BooksLayersVolumeAnnotationsGet,
 
     -- ** books.layers.volumeAnnotations.list
-    , module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
+    BooksLayersVolumeAnnotationsListResource,
+    newBooksLayersVolumeAnnotationsList,
+    BooksLayersVolumeAnnotationsList,
 
     -- ** books.myconfig.getUserSettings
-    , module Network.Google.Resource.Books.MyConfig.GetUserSettings
+    BooksMyconfigGetUserSettingsResource,
+    newBooksMyconfigGetUserSettings,
+    BooksMyconfigGetUserSettings,
 
     -- ** books.myconfig.releaseDownloadAccess
-    , module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
+    BooksMyconfigReleaseDownloadAccessResource,
+    newBooksMyconfigReleaseDownloadAccess,
+    BooksMyconfigReleaseDownloadAccess,
 
     -- ** books.myconfig.requestAccess
-    , module Network.Google.Resource.Books.MyConfig.RequestAccess
+    BooksMyconfigRequestAccessResource,
+    newBooksMyconfigRequestAccess,
+    BooksMyconfigRequestAccess,
 
     -- ** books.myconfig.syncVolumeLicenses
-    , module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
+    BooksMyconfigSyncVolumeLicensesResource,
+    newBooksMyconfigSyncVolumeLicenses,
+    BooksMyconfigSyncVolumeLicenses,
 
     -- ** books.myconfig.updateUserSettings
-    , module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
+    BooksMyconfigUpdateUserSettingsResource,
+    newBooksMyconfigUpdateUserSettings,
+    BooksMyconfigUpdateUserSettings,
 
     -- ** books.mylibrary.annotations.delete
-    , module Network.Google.Resource.Books.MyLibrary.Annotations.Delete
+    BooksMylibraryAnnotationsDeleteResource,
+    newBooksMylibraryAnnotationsDelete,
+    BooksMylibraryAnnotationsDelete,
 
     -- ** books.mylibrary.annotations.insert
-    , module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
+    BooksMylibraryAnnotationsInsertResource,
+    newBooksMylibraryAnnotationsInsert,
+    BooksMylibraryAnnotationsInsert,
 
     -- ** books.mylibrary.annotations.list
-    , module Network.Google.Resource.Books.MyLibrary.Annotations.List
+    BooksMylibraryAnnotationsListResource,
+    newBooksMylibraryAnnotationsList,
+    BooksMylibraryAnnotationsList,
 
     -- ** books.mylibrary.annotations.summary
-    , module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
+    BooksMylibraryAnnotationsSummaryResource,
+    newBooksMylibraryAnnotationsSummary,
+    BooksMylibraryAnnotationsSummary,
 
     -- ** books.mylibrary.annotations.update
-    , module Network.Google.Resource.Books.MyLibrary.Annotations.Update
+    BooksMylibraryAnnotationsUpdateResource,
+    newBooksMylibraryAnnotationsUpdate,
+    BooksMylibraryAnnotationsUpdate,
 
     -- ** books.mylibrary.bookshelves.addVolume
-    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
+    BooksMylibraryBookshelvesAddVolumeResource,
+    newBooksMylibraryBookshelvesAddVolume,
+    BooksMylibraryBookshelvesAddVolume,
 
     -- ** books.mylibrary.bookshelves.clearVolumes
-    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
+    BooksMylibraryBookshelvesClearVolumesResource,
+    newBooksMylibraryBookshelvesClearVolumes,
+    BooksMylibraryBookshelvesClearVolumes,
 
     -- ** books.mylibrary.bookshelves.get
-    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
+    BooksMylibraryBookshelvesGetResource,
+    newBooksMylibraryBookshelvesGet,
+    BooksMylibraryBookshelvesGet,
 
     -- ** books.mylibrary.bookshelves.list
-    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.List
+    BooksMylibraryBookshelvesListResource,
+    newBooksMylibraryBookshelvesList,
+    BooksMylibraryBookshelvesList,
 
     -- ** books.mylibrary.bookshelves.moveVolume
-    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
+    BooksMylibraryBookshelvesMoveVolumeResource,
+    newBooksMylibraryBookshelvesMoveVolume,
+    BooksMylibraryBookshelvesMoveVolume,
 
     -- ** books.mylibrary.bookshelves.removeVolume
-    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
+    BooksMylibraryBookshelvesRemoveVolumeResource,
+    newBooksMylibraryBookshelvesRemoveVolume,
+    BooksMylibraryBookshelvesRemoveVolume,
 
     -- ** books.mylibrary.bookshelves.volumes.list
-    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
+    BooksMylibraryBookshelvesVolumesListResource,
+    newBooksMylibraryBookshelvesVolumesList,
+    BooksMylibraryBookshelvesVolumesList,
 
     -- ** books.mylibrary.readingpositions.get
-    , module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
+    BooksMylibraryReadingpositionsGetResource,
+    newBooksMylibraryReadingpositionsGet,
+    BooksMylibraryReadingpositionsGet,
 
     -- ** books.mylibrary.readingpositions.setPosition
-    , module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
+    BooksMylibraryReadingpositionsSetPositionResource,
+    newBooksMylibraryReadingpositionsSetPosition,
+    BooksMylibraryReadingpositionsSetPosition,
 
     -- ** books.notification.get
-    , module Network.Google.Resource.Books.Notification.Get
+    BooksNotificationGetResource,
+    newBooksNotificationGet,
+    BooksNotificationGet,
 
     -- ** books.onboarding.listCategories
-    , module Network.Google.Resource.Books.Onboarding.ListCategories
+    BooksOnboardingListCategoriesResource,
+    newBooksOnboardingListCategories,
+    BooksOnboardingListCategories,
 
     -- ** books.onboarding.listCategoryVolumes
-    , module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
+    BooksOnboardingListCategoryVolumesResource,
+    newBooksOnboardingListCategoryVolumes,
+    BooksOnboardingListCategoryVolumes,
 
     -- ** books.personalizedstream.get
-    , module Network.Google.Resource.Books.Personalizedstream.Get
+    BooksPersonalizedstreamGetResource,
+    newBooksPersonalizedstreamGet,
+    BooksPersonalizedstreamGet,
 
     -- ** books.promooffer.accept
-    , module Network.Google.Resource.Books.PromoOffer.Accept
+    BooksPromoofferAcceptResource,
+    newBooksPromoofferAccept,
+    BooksPromoofferAccept,
 
     -- ** books.promooffer.dismiss
-    , module Network.Google.Resource.Books.PromoOffer.Dismiss
+    BooksPromoofferDismissResource,
+    newBooksPromoofferDismiss,
+    BooksPromoofferDismiss,
 
     -- ** books.promooffer.get
-    , module Network.Google.Resource.Books.PromoOffer.Get
+    BooksPromoofferGetResource,
+    newBooksPromoofferGet,
+    BooksPromoofferGet,
 
     -- ** books.series.get
-    , module Network.Google.Resource.Books.Series.Get
+    BooksSeriesGetResource,
+    newBooksSeriesGet,
+    BooksSeriesGet,
 
     -- ** books.series.membership.get
-    , module Network.Google.Resource.Books.Series.Membership.Get
+    BooksSeriesMembershipGetResource,
+    newBooksSeriesMembershipGet,
+    BooksSeriesMembershipGet,
 
     -- ** books.volumes.associated.list
-    , module Network.Google.Resource.Books.Volumes.Associated.List
+    BooksVolumesAssociatedListResource,
+    newBooksVolumesAssociatedList,
+    BooksVolumesAssociatedList,
 
     -- ** books.volumes.get
-    , module Network.Google.Resource.Books.Volumes.Get
+    BooksVolumesGetResource,
+    newBooksVolumesGet,
+    BooksVolumesGet,
 
     -- ** books.volumes.list
-    , module Network.Google.Resource.Books.Volumes.List
+    BooksVolumesListResource,
+    newBooksVolumesList,
+    BooksVolumesList,
 
     -- ** books.volumes.mybooks.list
-    , module Network.Google.Resource.Books.Volumes.Mybooks.List
+    BooksVolumesMybooksListResource,
+    newBooksVolumesMybooksList,
+    BooksVolumesMybooksList,
 
     -- ** books.volumes.recommended.list
-    , module Network.Google.Resource.Books.Volumes.Recommended.List
+    BooksVolumesRecommendedListResource,
+    newBooksVolumesRecommendedList,
+    BooksVolumesRecommendedList,
 
     -- ** books.volumes.recommended.rate
-    , module Network.Google.Resource.Books.Volumes.Recommended.Rate
+    BooksVolumesRecommendedRateResource,
+    newBooksVolumesRecommendedRate,
+    BooksVolumesRecommendedRate,
 
     -- ** books.volumes.useruploaded.list
-    , module Network.Google.Resource.Books.Volumes.UserUploaded.List
+    BooksVolumesUseruploadedListResource,
+    newBooksVolumesUseruploadedList,
+    BooksVolumesUseruploadedList,
 
     -- * Types
 
-    -- ** UserSettings
-    , UserSettings
-    , userSettings
-    , usNotification
-    , usKind
-    , usNotesExport
-
-    -- ** Annotations
-    , Annotations
-    , annotations
-    , aTotalItems
-    , aNextPageToken
-    , aKind
-    , aItems
-
-    -- ** SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
-    , SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
-    , seriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
-    , ssissricriReleaseTime
-    , ssissricriCurrencyCode
-    , ssissricriAmountInMicros
-    , ssissricriReleaseNumber
-
-    -- ** VolumesListProjection
-    , VolumesListProjection (..)
-
-    -- ** MyLibraryBookshelvesVolumesListProjection
-    , MyLibraryBookshelvesVolumesListProjection (..)
-
-    -- ** VolumeVolumeInfoReadingModes
-    , VolumeVolumeInfoReadingModes
-    , volumeVolumeInfoReadingModes
-    , vvirmImage
-    , vvirmText
-
-    -- ** VolumesListOrderBy
-    , VolumesListOrderBy (..)
-
-    -- ** AnnotationsData
-    , AnnotationsData
-    , annotationsData
-    , adTotalItems
-    , adNextPageToken
-    , adKind
-    , adItems
-
-    -- ** UserSettingsNotificationMoreFromAuthors
-    , UserSettingsNotificationMoreFromAuthors
-    , userSettingsNotificationMoreFromAuthors
-    , usnmfaOptedState
-
-    -- ** Volumeannotations
-    , Volumeannotations
-    , volumeannotations
-    , vTotalItems
-    , vNextPageToken
-    , vKind
-    , vItems
-    , vVersion
-
-    -- ** ReviewSource
-    , ReviewSource
-    , reviewSource
-    , rsExtraDescription
-    , rsURL
-    , rsDescription
-
-    -- ** Volumeannotation
-    , Volumeannotation
-    , volumeannotation
-    , volSelectedText
-    , volAnnotationDataLink
-    , volPageIds
-    , volKind
-    , volData
-    , volSelfLink
-    , volAnnotationType
-    , volAnnotationDataId
-    , volContentRanges
-    , volVolumeId
-    , volId
-    , volDeleted
-    , volUpdated
-    , volLayerId
-
-    -- ** BooksCloudLoadingResource
-    , BooksCloudLoadingResource
-    , booksCloudLoadingResource
-    , bclrProcessingState
-    , bclrVolumeId
-    , bclrAuthor
-    , bclrTitle
-
-    -- ** VolumeseriesInfoVolumeSeriesItemIssueItem
-    , VolumeseriesInfoVolumeSeriesItemIssueItem
-    , volumeseriesInfoVolumeSeriesItemIssueItem
-    , vivsiiiIssueOrderNumber
-    , vivsiiiIssueDisplayNumber
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Annotation
-    , Annotation
-    , annotation
-    , annSelectedText
-    , annLayerSummary
-    , annHighlightStyle
-    , annClientVersionRanges
-    , annPageIds
-    , annKind
-    , annData
-    , annCreated
-    , annAfterSelectedText
-    , annSelfLink
-    , annCurrentVersionRanges
-    , annVolumeId
-    , annBeforeSelectedText
-    , annId
-    , annDeleted
-    , annUpdated
-    , annLayerId
+    Annotation (..),
+    newAnnotation,
 
-    -- ** ReviewAuthor
-    , ReviewAuthor
-    , reviewAuthor
-    , raDisplayName
+    -- ** Annotation_ClientVersionRanges
+    Annotation_ClientVersionRanges (..),
+    newAnnotation_ClientVersionRanges,
 
-    -- ** GeolayerDataGeoViewport
-    , GeolayerDataGeoViewport
-    , geolayerDataGeoViewport
-    , gdgvHi
-    , gdgvLo
+    -- ** Annotation_CurrentVersionRanges
+    Annotation_CurrentVersionRanges (..),
+    newAnnotation_CurrentVersionRanges,
 
-    -- ** VolumeUserInfo
-    , VolumeUserInfo
-    , volumeUserInfo
-    , vuiIsFamilySharingAllowed
-    , vuiIsFamilySharedToUser
-    , vuiCopy
-    , vuiUserUploadedVolumeInfo
-    , vuiIsPurchased
-    , vuiEntitlementType
-    , vuiAcquisitionType
-    , vuiAcquiredTime
-    , vuiRentalState
-    , vuiIsPreOrdered
-    , vuiReview
-    , vuiIsFamilySharedFromUser
-    , vuiRentalPeriod
-    , vuiUpdated
-    , vuiIsUploaded
-    , vuiIsInMyBooks
-    , vuiReadingPosition
-    , vuiFamilySharing
-    , vuiIsFamilySharingDisabledByFop
+    -- ** Annotation_LayerSummary
+    Annotation_LayerSummary (..),
+    newAnnotation_LayerSummary,
 
-    -- ** Layersummary
-    , Layersummary
-    , layersummary
-    , lAnnotationsDataLink
-    , lAnnotationsLink
-    , lKind
-    , lDataCount
-    , lContentVersion
-    , lVolumeAnnotationsVersion
-    , lAnnotationCount
-    , lAnnotationTypes
-    , lSelfLink
-    , lVolumeId
-    , lId
-    , lUpdated
-    , lLayerId
-
-    -- ** VolumesListLibraryRestrict
-    , VolumesListLibraryRestrict (..)
-
-    -- ** VolumeannotationContentRanges
-    , VolumeannotationContentRanges
-    , volumeannotationContentRanges
-    , vcrGbImageRange
-    , vcrContentVersion
-    , vcrGbTextRange
-    , vcrCfiRange
-
-    -- ** VolumeAccessInfo
-    , VolumeAccessInfo
-    , volumeAccessInfo
-    , vaiWebReaderLink
-    , vaiCountry
-    , vaiDriveImportedContentLink
-    , vaiExplicitOfflineLicenseManagement
-    , vaiViewability
-    , vaiQuoteSharingAllowed
-    , vaiEpub
-    , vaiPdf
-    , vaiTextToSpeechPermission
-    , vaiEmbeddable
-    , vaiAccessViewStatus
-    , vaiDownloadAccess
-    , vaiViewOrderURL
-    , vaiPublicDomain
-
-    -- ** VolumeVolumeInfoPanelizationSummary
-    , VolumeVolumeInfoPanelizationSummary
-    , volumeVolumeInfoPanelizationSummary
-    , vvipsEpubBubbleVersion
-    , vvipsContainsImageBubbles
-    , vvipsContainsEpubBubbles
-    , vvipsImageBubbleVersion
-
-    -- ** SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
-    , SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
-    , seriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
-    , ssissrinriReleaseTime
-    , ssissrinriCurrencyCode
-    , ssissrinriAmountInMicros
-    , ssissrinriReleaseNumber
-
-    -- ** MyLibraryBookshelvesRemoveVolumeReason
-    , MyLibraryBookshelvesRemoveVolumeReason (..)
-
-    -- ** VolumeVolumeInfoImageLinks
-    , VolumeVolumeInfoImageLinks
-    , volumeVolumeInfoImageLinks
-    , vviilThumbnail
-    , vviilSmall
-    , vviilExtraLarge
-    , vviilLarge
-    , vviilMedium
-    , vviilSmallThumbnail
-
-    -- ** OnboardingListCategoryVolumesMaxAllowedMaturityRating
-    , OnboardingListCategoryVolumesMaxAllowedMaturityRating (..)
-
-    -- ** VolumeUserInfoUserUploadedVolumeInfo
-    , VolumeUserInfoUserUploadedVolumeInfo
-    , volumeUserInfoUserUploadedVolumeInfo
-    , vuiuuviProcessingState
-
-    -- ** VolumeUserInfoCopy
-    , VolumeUserInfoCopy
-    , volumeUserInfoCopy
-    , vuicLimitType
-    , vuicAllowedCharacterCount
-    , vuicUpdated
-    , vuicRemainingCharacterCount
-
-    -- ** BooksVolumesRecommendedRateResponse
-    , BooksVolumesRecommendedRateResponse
-    , booksVolumesRecommendedRateResponse
-    , bvrrrConsistencyToken
-
-    -- ** UserSettingsNotificationPriceDrop
-    , UserSettingsNotificationPriceDrop
-    , userSettingsNotificationPriceDrop
-    , usnpdOptedState
-
-    -- ** VolumeseriesInfo
-    , VolumeseriesInfo
-    , volumeseriesInfo
-    , viBookDisplayNumber
-    , viKind
-    , viShortSeriesBookTitle
-    , viVolumeSeries
-
-    -- ** Bookshelf
-    , Bookshelf
-    , bookshelf
-    , bAccess
-    , bVolumesLastUpdated
-    , bKind
-    , bCreated
-    , bVolumeCount
-    , bSelfLink
-    , bId
-    , bUpdated
-    , bTitle
-    , bDescription
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** Notification
-    , Notification
-    , notification
-    , nDocType
-    , nTargetURL
-    , nShowNotificationSettingsAction
-    , nDocId
-    , nKind
-    , nBody
-    , nCrmExperimentIds
-    , nTimeToExpireMs
-    , nPcampaignId
-    , nReason
-    , nIsDocumentMature
-    , nDontShowNotification
-    , nNotificationType
-    , nNotificationGroup
-    , nIconURL
-    , nTitle
-
-    -- ** VolumesListDownload
-    , VolumesListDownload (..)
-
-    -- ** AnnotationsSummaryLayersItem
-    , AnnotationsSummaryLayersItem
-    , annotationsSummaryLayersItem
-    , asliLimitType
-    , asliAllowedCharacterCount
-    , asliUpdated
-    , asliLayerId
-    , asliRemainingCharacterCount
-
-    -- ** VolumeSaleInfoOffersItemRentalDuration
-    , VolumeSaleInfoOffersItemRentalDuration
-    , volumeSaleInfoOffersItemRentalDuration
-    , vsioirdCount
-    , vsioirdUnit
-
-    -- ** DictlayerDataDictWordsItemExamplesItem
-    , DictlayerDataDictWordsItemExamplesItem
-    , dictlayerDataDictWordsItemExamplesItem
-    , dddwieiText
-    , dddwieiSource
-
-    -- ** OffersItemsItem
-    , OffersItemsItem
-    , offersItemsItem
-    , oiiItems
-    , oiiArtURL
-    , oiiId
-    , oiiGServicesKey
-
-    -- ** AnnotationLayerSummary
-    , AnnotationLayerSummary
-    , annotationLayerSummary
-    , alsLimitType
-    , alsAllowedCharacterCount
-    , alsRemainingCharacterCount
-
-    -- ** VolumeSearchInfo
-    , VolumeSearchInfo
-    , volumeSearchInfo
-    , vsiTextSnippet
+    -- ** Annotations
+    Annotations (..),
+    newAnnotations,
 
     -- ** AnnotationsSummary
-    , AnnotationsSummary
-    , annotationsSummary
-    , asKind
-    , asLayers
-
-    -- ** VolumesGetProjection
-    , VolumesGetProjection (..)
-
-    -- ** Category
-    , Category
-    , category
-    , cKind
-    , cItems
-
-    -- ** VolumesAssociatedListAssociation
-    , VolumesAssociatedListAssociation (..)
-
-    -- ** DiscoveryclustersClustersItemBanner_with_content_container
-    , DiscoveryclustersClustersItemBanner_with_content_container
-    , discoveryclustersClustersItemBanner_with_content_container
-    , dcibFillColorArgb
-    , dcibMoreButtonURL
-    , dcibTextColorArgb
-    , dcibMoreButtonText
-    , dcibImageURL
-    , dcibMaskColorArgb
-
-    -- ** Volume
-    , Volume
-    , volume
-    , vvUserInfo
-    , vvEtag
-    , vvAccessInfo
-    , vvKind
-    , vvSearchInfo
-    , vvSelfLink
-    , vvLayerInfo
-    , vvSaleInfo
-    , vvId
-    , vvRecommendedInfo
-    , vvVolumeInfo
-
-    -- ** Series
-    , Series
-    , series
-    , sKind
-    , sSeries
-
-    -- ** OffersItemsItemItemsItem
-    , OffersItemsItemItemsItem
-    , offersItemsItemItemsItem
-    , oiiiiCanonicalVolumeLink
-    , oiiiiCoverURL
-    , oiiiiVolumeId
-    , oiiiiAuthor
-    , oiiiiTitle
-    , oiiiiDescription
-
-    -- ** DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    , DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    , dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    , dddwisidieisURL
-    , dddwisidieisAttribution
-
-    -- ** GeolayerDataCommon
-    , GeolayerDataCommon
-    , geolayerDataCommon
-    , gdcSnippet
-    , gdcSnippetURL
-    , gdcLang
-    , gdcTitle
-    , gdcPreviewImageURL
-
-    -- ** GeolayerDataGeo
-    , GeolayerDataGeo
-    , geolayerDataGeo
-    , gdgMapType
-    , gdgCachePolicy
-    , gdgViewport
-    , gdgBoundary
-    , gdgLatitude
-    , gdgZoom
-    , gdgCountryCode
-    , gdgLongitude
-
-    -- ** DictlayerDataDictWordsItem
-    , DictlayerDataDictWordsItem
-    , dictlayerDataDictWordsItem
-    , dddwiSenses
-    , dddwiSource
-    , dddwiDerivatives
-    , dddwiExamples
-
-    -- ** CategoryItemsItem
-    , CategoryItemsItem
-    , categoryItemsItem
-    , ciiName
-    , ciiCategoryId
-    , ciiBadgeURL
-
-    -- ** DictlayerDataDictWordsItemDerivativesItemSource
-    , DictlayerDataDictWordsItemDerivativesItemSource
-    , dictlayerDataDictWordsItemDerivativesItemSource
-    , dddwidisURL
-    , dddwidisAttribution
-
-    -- ** VolumesRecommendedRateRating
-    , VolumesRecommendedRateRating (..)
-
-    -- ** GeolayerData
-    , GeolayerData
-    , geolayerData
-    , gdKind
-    , gdGeo
-    , gdCommon
-
-    -- ** DictlayerDataDictWordsItemSource
-    , DictlayerDataDictWordsItemSource
-    , dictlayerDataDictWordsItemSource
-    , dddwisURL
-    , dddwisAttribution
-
-    -- ** DictlayerDataDictWordsItemDerivativesItem
-    , DictlayerDataDictWordsItemDerivativesItem
-    , dictlayerDataDictWordsItemDerivativesItem
-    , dddwidiText
-    , dddwidiSource
-
-    -- ** VolumesUserUploadedListProcessingState
-    , VolumesUserUploadedListProcessingState (..)
-
-    -- ** MyConfigSyncVolumeLicensesFeatures
-    , MyConfigSyncVolumeLicensesFeatures (..)
-
-    -- ** DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    , DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    , dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    , dddwisidieiText
-    , dddwisidieiSource
-
-    -- ** UserSettingsNotificationRewardExpirations
-    , UserSettingsNotificationRewardExpirations
-    , userSettingsNotificationRewardExpirations
-    , usnreOptedState
-
-    -- ** DictlayerData
-    , DictlayerData
-    , dictlayerData
-    , ddKind
-    , ddDict
-    , ddCommon
-
-    -- ** VolumesAssociatedListMaxAllowedMaturityRating
-    , VolumesAssociatedListMaxAllowedMaturityRating (..)
-
-    -- ** DictlayerDataDictWordsItemSensesItemSynonymsItemSource
-    , DictlayerDataDictWordsItemSensesItemSynonymsItemSource
-    , dictlayerDataDictWordsItemSensesItemSynonymsItemSource
-    , dddwisisisURL
-    , dddwisisisAttribution
-
-    -- ** Seriesmembership
-    , Seriesmembership
-    , seriesmembership
-    , serNextPageToken
-    , serKind
-    , serMember
-
-    -- ** VolumesListFilter
-    , VolumesListFilter (..)
-
-    -- ** UserSettingsNotification
-    , UserSettingsNotification
-    , userSettingsNotification
-    , usnRewardExpirations
-    , usnPriceDrop
-    , usnMatchMyInterests
-    , usnMoreFromAuthors
-    , usnMoreFromSeries
-
-    -- ** DictlayerDataDictWordsItemSensesItemSynonymsItem
-    , DictlayerDataDictWordsItemSensesItemSynonymsItem
-    , dictlayerDataDictWordsItemSensesItemSynonymsItem
-    , dddwisisiText
-    , dddwisisiSource
-
-    -- ** GeolayerDataGeoViewportLo
-    , GeolayerDataGeoViewportLo
-    , geolayerDataGeoViewportLo
-    , gdgvlLatitude
-    , gdgvlLongitude
-
-    -- ** VolumesRecommendedListMaxAllowedMaturityRating
-    , VolumesRecommendedListMaxAllowedMaturityRating (..)
-
-    -- ** VolumeSaleInfoOffersItemListPrice
-    , VolumeSaleInfoOffersItemListPrice
-    , volumeSaleInfoOffersItemListPrice
-    , vsioilpCurrencyCode
-    , vsioilpAmountInMicros
-
-    -- ** DownloadAccessRestriction
-    , DownloadAccessRestriction
-    , downloadAccessRestriction
-    , darJustAcquired
-    , darSignature
-    , darKind
-    , darMaxDownloadDevices
-    , darDownloadsAcquired
-    , darReasonCode
-    , darVolumeId
-    , darRestricted
-    , darSource
-    , darDeviceAllowed
-    , darMessage
-    , darNonce
-
-    -- ** DictlayerDataCommon
-    , DictlayerDataCommon
-    , dictlayerDataCommon
-    , ddcTitle
-
-    -- ** DiscoveryclustersClustersItem
-    , DiscoveryclustersClustersItem
-    , discoveryclustersClustersItem
-    , dciBannerWithContentContainer
-    , dciUid
-    , dciTotalVolumes
-    , dciSubTitle
-    , dciTitle
-    , dciVolumes
-
-    -- ** VolumeSaleInfoRetailPrice
-    , VolumeSaleInfoRetailPrice
-    , volumeSaleInfoRetailPrice
-    , vsirpAmount
-    , vsirpCurrencyCode
-
-    -- ** DictionaryAnnotationData
-    , DictionaryAnnotationData
-    , dictionaryAnnotationData
-    , dadKind
-    , dadData
-    , dadSelfLink
-    , dadAnnotationType
-    , dadEncodedData
-    , dadVolumeId
-    , dadId
-    , dadUpdated
-    , dadLayerId
-
-    -- ** VolumeSaleInfoListPrice
-    , VolumeSaleInfoListPrice
-    , volumeSaleInfoListPrice
-    , vsilpAmount
-    , vsilpCurrencyCode
-
-    -- ** DictlayerDataDictWordsItemSensesItemConjugationsItem
-    , DictlayerDataDictWordsItemSensesItemConjugationsItem
-    , dictlayerDataDictWordsItemSensesItemConjugationsItem
-    , dddwisiciValue
-    , dddwisiciType
-
-    -- ** FamilyInfoMembership
-    , FamilyInfoMembership
-    , familyInfoMembership
-    , fimAllowedMaturityRating
-    , fimAcquirePermission
-    , fimRole
-    , fimAgeGroup
-    , fimIsInFamily
-
-    -- ** GeoAnnotationData
-    , GeoAnnotationData
-    , geoAnnotationData
-    , gadKind
-    , gadData
-    , gadSelfLink
-    , gadAnnotationType
-    , gadEncodedData
-    , gadVolumeId
-    , gadId
-    , gadUpdated
-    , gadLayerId
-
-    -- ** Volume2
-    , Volume2
-    , volume2
-    , voloNextPageToken
-    , voloKind
-    , voloItems
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** Review
-    , Review
-    , review
-    , rRating
-    , rKind
-    , rContent
-    , rDate
-    , rVolumeId
-    , rAuthor
-    , rSource
-    , rFullTextURL
-    , rTitle
-    , rType
-
-    -- ** VolumeUserInfoRentalPeriod
-    , VolumeUserInfoRentalPeriod
-    , volumeUserInfoRentalPeriod
-    , vuirpEndUtcSec
-    , vuirpStartUtcSec
-
-    -- ** SeriesSeriesItemSeriesSubscriptionReleaseInfo
-    , SeriesSeriesItemSeriesSubscriptionReleaseInfo
-    , seriesSeriesItemSeriesSubscriptionReleaseInfo
-    , ssissriSeriesSubscriptionType
-    , ssissriCancelTime
-    , ssissriCurrentReleaseInfo
-    , ssissriNextReleaseInfo
-
-    -- ** VolumeSaleInfo
-    , VolumeSaleInfo
-    , volumeSaleInfo
-    , vsiCountry
-    , vsiOnSaleDate
-    , vsiListPrice
-    , vsiRetailPrice
-    , vsiOffers
-    , vsiBuyLink
-    , vsiIsEbook
-    , vsiSaleability
-
-    -- ** MyLibraryBookshelvesAddVolumeReason
-    , MyLibraryBookshelvesAddVolumeReason (..)
-
-    -- ** SeriesSeriesItem
-    , SeriesSeriesItem
-    , seriesSeriesItem
-    , ssiIsComplete
-    , ssiSeriesId
-    , ssiImageURL
-    , ssiSeriesSubscriptionReleaseInfo
-    , ssiEligibleForSubscription
-    , ssiSeriesFormatType
-    , ssiBannerImageURL
-    , ssiTitle
-    , ssiSeriesType
-    , ssiSubscriptionId
-
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
-
-    -- ** VolumeLayerInfo
-    , VolumeLayerInfo
-    , volumeLayerInfo
-    , vliLayers
-
-    -- ** VolumeVolumeInfoDimensions
-    , VolumeVolumeInfoDimensions
-    , volumeVolumeInfoDimensions
-    , vvidHeight
-    , vvidWidth
-    , vvidThickness
-
-    -- ** RequestAccessData
-    , RequestAccessData
-    , requestAccessData
-    , radConcurrentAccess
-    , radKind
-    , radDownloadAccess
-
-    -- ** FamilyInfo
-    , FamilyInfo
-    , familyInfo
-    , fiMembership
-    , fiKind
-
-    -- ** AnnotationClientVersionRanges
-    , AnnotationClientVersionRanges
-    , annotationClientVersionRanges
-    , acvrGbImageRange
-    , acvrContentVersion
-    , acvrImageCfiRange
-    , acvrGbTextRange
-    , acvrCfiRange
-
-    -- ** VolumesMybooksListAcquireMethod
-    , VolumesMybooksListAcquireMethod (..)
-
-    -- ** DictlayerDataDictWordsItemSensesItemDefinitionsItem
-    , DictlayerDataDictWordsItemSensesItemDefinitionsItem
-    , dictlayerDataDictWordsItemSensesItemDefinitionsItem
-    , dddwisidiDefinition
-    , dddwisidiExamples
-
-    -- ** VolumeLayerInfoLayersItem
-    , VolumeLayerInfoLayersItem
-    , volumeLayerInfoLayersItem
-    , vliliVolumeAnnotationsVersion
-    , vliliLayerId
-
-    -- ** AnnotationCurrentVersionRanges
-    , AnnotationCurrentVersionRanges
-    , annotationCurrentVersionRanges
-    , aGbImageRange
-    , aContentVersion
-    , aImageCfiRange
-    , aGbTextRange
-    , aCfiRange
-
-    -- ** PersonalizedstreamGetMaxAllowedMaturityRating
-    , PersonalizedstreamGetMaxAllowedMaturityRating (..)
-
-    -- ** VolumesListPrintType
-    , VolumesListPrintType (..)
-
-    -- ** VolumeAccessInfoPdf
-    , VolumeAccessInfoPdf
-    , volumeAccessInfoPdf
-    , vaipAcsTokenLink
-    , vaipIsAvailable
-    , vaipDownloadLink
-
-    -- ** DictlayerDataDictWordsItemExamplesItemSource
-    , DictlayerDataDictWordsItemExamplesItemSource
-    , dictlayerDataDictWordsItemExamplesItemSource
-    , dddwieisURL
-    , dddwieisAttribution
-
-    -- ** VolumeAccessInfoEpub
-    , VolumeAccessInfoEpub
-    , volumeAccessInfoEpub
-    , vaieAcsTokenLink
-    , vaieIsAvailable
-    , vaieDownloadLink
-
-    -- ** ReadingPosition
-    , ReadingPosition
-    , readingPosition
-    , rpEpubCfiPosition
-    , rpKind
-    , rpGbImagePosition
-    , rpPdfPosition
-    , rpVolumeId
-    , rpUpdated
-    , rpGbTextPosition
-
-    -- ** VolumeSaleInfoOffersItem
-    , VolumeSaleInfoOffersItem
-    , volumeSaleInfoOffersItem
-    , vsioiFinskyOfferType
-    , vsioiRentalDuration
-    , vsioiListPrice
-    , vsioiRetailPrice
-    , vsioiGiftable
-
-    -- ** DictlayerDataDict
-    , DictlayerDataDict
-    , dictlayerDataDict
-    , dddSource
-    , dddWords
-
-    -- ** DictlayerDataDictWordsItemSensesItem
-    , DictlayerDataDictWordsItemSensesItem
-    , dictlayerDataDictWordsItemSensesItem
-    , dddwisiPronunciationURL
-    , dddwisiConjugations
-    , dddwisiPronunciation
-    , dddwisiSynonyms
-    , dddwisiSource
-    , dddwisiPartOfSpeech
-    , dddwisiDefinitions
-    , dddwisiSyllabification
-
-    -- ** VolumeRecommendedInfo
-    , VolumeRecommendedInfo
-    , volumeRecommendedInfo
-    , vriExplanation
-
-    -- ** Offers
-    , Offers
-    , offers
-    , oKind
-    , oItems
-
-    -- ** VolumesMybooksListProcessingState
-    , VolumesMybooksListProcessingState (..)
-
-    -- ** Discoveryclusters
-    , Discoveryclusters
-    , discoveryclusters
-    , dKind
-    , dTotalClusters
-    , dClusters
-
-    -- ** VolumeseriesInfoVolumeSeriesItem
-    , VolumeseriesInfoVolumeSeriesItem
-    , volumeseriesInfoVolumeSeriesItem
-    , vivsiSeriesId
-    , vivsiSeriesBookType
-    , vivsiOrderNumber
-    , vivsiIssue
-
-    -- ** UserSettingsNotesExport
-    , UserSettingsNotesExport
-    , userSettingsNotesExport
-    , usneFolderName
-    , usneIsEnabled
-
-    -- ** ConcurrentAccessRestriction
-    , ConcurrentAccessRestriction
-    , concurrentAccessRestriction
-    , carMaxConcurrentDevices
-    , carSignature
-    , carTimeWindowSeconds
-    , carKind
-    , carReasonCode
-    , carVolumeId
-    , carRestricted
-    , carSource
-    , carDeviceAllowed
-    , carMessage
-    , carNonce
-
-    -- ** Volumes
-    , Volumes
-    , volumes
-    , v1TotalItems
-    , v1Kind
-    , v1Items
-
-    -- ** UserSettingsNotificationMatchMyInterests
-    , UserSettingsNotificationMatchMyInterests
-    , userSettingsNotificationMatchMyInterests
-    , usnmmiOptedState
-
-    -- ** Bookshelves
-    , Bookshelves
-    , bookshelves
-    , booKind
-    , booItems
-
-    -- ** MyConfigRequestAccessLicenseTypes
-    , MyConfigRequestAccessLicenseTypes (..)
-
-    -- ** DictlayerDataDictSource
-    , DictlayerDataDictSource
-    , dictlayerDataDictSource
-    , dddsURL
-    , dddsAttribution
-
-    -- ** DownloadAccesses
-    , DownloadAccesses
-    , downloadAccesses
-    , daKind
-    , daDownloadAccessList
-
-    -- ** GeolayerDataGeoViewportHi
-    , GeolayerDataGeoViewportHi
-    , geolayerDataGeoViewportHi
-    , gdgvhLatitude
-    , gdgvhLongitude
-
-    -- ** MyLibraryReadingPositionsSetPositionAction
-    , MyLibraryReadingPositionsSetPositionAction (..)
-
-    -- ** VolumeVolumeInfo
-    , VolumeVolumeInfo
-    , volumeVolumeInfo
-    , vviImageLinks
-    , vviPanelizationSummary
-    , vviAverageRating
-    , vviRatingsCount
-    , vviCanonicalVolumeLink
-    , vviReadingModes
-    , vviIndustryIdentifiers
-    , vviSeriesInfo
-    , vviPrintedPageCount
-    , vviMainCategory
-    , vviContentVersion
-    , vviSamplePageCount
-    , vviCategories
-    , vviAuthors
-    , vviComicsContent
-    , vviAllowAnonLogging
-    , vviSubtitle
-    , vviPublishedDate
-    , vviMaturityRating
-    , vviPreviewLink
-    , vviLanguage
-    , vviTitle
-    , vviPageCount
-    , vviDimensions
-    , vviInfoLink
-    , vviPublisher
-    , vviDescription
-    , vviPrintType
-
-    -- ** MetadataItemsItem
-    , MetadataItemsItem
-    , metadataItemsItem
-    , miiSize
-    , miiVersion
-    , miiLanguage
-    , miiDownloadURL
-    , miiEncryptedKey
-
-    -- ** DictlayerDataDictWordsItemSensesItemSource
-    , DictlayerDataDictWordsItemSensesItemSource
-    , dictlayerDataDictWordsItemSensesItemSource
-    , dddwisisURL
-    , dddwisisAttribution
-
-    -- ** VolumeSaleInfoOffersItemRetailPrice
-    , VolumeSaleInfoOffersItemRetailPrice
-    , volumeSaleInfoOffersItemRetailPrice
-    , vsioirpCurrencyCode
-    , vsioirpAmountInMicros
-
-    -- ** VolumeUserInfoFamilySharing
-    , VolumeUserInfoFamilySharing
-    , volumeUserInfoFamilySharing
-    , vuifsFamilyRole
-    , vuifsIsSharingAllowed
-    , vuifsIsSharingDisabledByFop
-
-    -- ** UserSettingsNotificationMoreFromSeries
-    , UserSettingsNotificationMoreFromSeries
-    , userSettingsNotificationMoreFromSeries
-    , usnmfsOptedState
-
-    -- ** VolumeVolumeInfoIndustryIdentifiersItem
-    , VolumeVolumeInfoIndustryIdentifiersItem
-    , volumeVolumeInfoIndustryIdentifiersItem
-    , vviiiiIdentifier
-    , vviiiiType
+    AnnotationsSummary (..),
+    newAnnotationsSummary,
+
+    -- ** AnnotationsSummary_LayersItem
+    AnnotationsSummary_LayersItem (..),
+    newAnnotationsSummary_LayersItem,
+
+    -- ** Annotationsdata
+    Annotationsdata (..),
+    newAnnotationsdata,
 
     -- ** BooksAnnotationsRange
-    , BooksAnnotationsRange
-    , booksAnnotationsRange
-    , barStartOffSet
-    , barEndOffSet
-    , barEndPosition
-    , barStartPosition
+    BooksAnnotationsRange (..),
+    newBooksAnnotationsRange,
 
-    -- ** VolumesListMaxAllowedMaturityRating
-    , VolumesListMaxAllowedMaturityRating (..)
+    -- ** BooksCloudloadingResource
+    BooksCloudloadingResource (..),
+    newBooksCloudloadingResource,
+
+    -- ** BooksVolumesRecommendedRateResponse
+    BooksVolumesRecommendedRateResponse (..),
+    newBooksVolumesRecommendedRateResponse,
+
+    -- ** Bookshelf
+    Bookshelf (..),
+    newBookshelf,
+
+    -- ** Bookshelves
+    Bookshelves (..),
+    newBookshelves,
+
+    -- ** Category
+    Category (..),
+    newCategory,
+
+    -- ** Category_ItemsItem
+    Category_ItemsItem (..),
+    newCategory_ItemsItem,
+
+    -- ** ConcurrentAccessRestriction
+    ConcurrentAccessRestriction (..),
+    newConcurrentAccessRestriction,
+
+    -- ** DictionaryAnnotationdata
+    DictionaryAnnotationdata (..),
+    newDictionaryAnnotationdata,
+
+    -- ** Dictlayerdata
+    Dictlayerdata (..),
+    newDictlayerdata,
+
+    -- ** Dictlayerdata_Common
+    Dictlayerdata_Common (..),
+    newDictlayerdata_Common,
+
+    -- ** Dictlayerdata_Dict
+    Dictlayerdata_Dict (..),
+    newDictlayerdata_Dict,
+
+    -- ** Dictlayerdata_Dict_Source
+    Dictlayerdata_Dict_Source (..),
+    newDictlayerdata_Dict_Source,
+
+    -- ** Dictlayerdata_Dict_WordsItem
+    Dictlayerdata_Dict_WordsItem (..),
+    newDictlayerdata_Dict_WordsItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_DerivativesItem
+    Dictlayerdata_Dict_WordsItem_DerivativesItem (..),
+    newDictlayerdata_Dict_WordsItem_DerivativesItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_DerivativesItem_Source
+    Dictlayerdata_Dict_WordsItem_DerivativesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_DerivativesItem_Source,
+
+    -- ** Dictlayerdata_Dict_WordsItem_ExamplesItem
+    Dictlayerdata_Dict_WordsItem_ExamplesItem (..),
+    newDictlayerdata_Dict_WordsItem_ExamplesItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_ExamplesItem_Source
+    Dictlayerdata_Dict_WordsItem_ExamplesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_ExamplesItem_Source,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem
+    Dictlayerdata_Dict_WordsItem_SensesItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
+    Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem_Source
+    Dictlayerdata_Dict_WordsItem_SensesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_Source,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem,
+
+    -- ** Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
+    Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source,
+
+    -- ** Dictlayerdata_Dict_WordsItem_Source
+    Dictlayerdata_Dict_WordsItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_Source,
+
+    -- ** Discoveryclusters
+    Discoveryclusters (..),
+    newDiscoveryclusters,
+
+    -- ** Discoveryclusters_ClustersItem
+    Discoveryclusters_ClustersItem (..),
+    newDiscoveryclusters_ClustersItem,
+
+    -- ** Discoveryclusters_ClustersItem_Banner_with_content_container
+    Discoveryclusters_ClustersItem_Banner_with_content_container (..),
+    newDiscoveryclusters_ClustersItem_Banner_with_content_container,
+
+    -- ** DownloadAccessRestriction
+    DownloadAccessRestriction (..),
+    newDownloadAccessRestriction,
+
+    -- ** DownloadAccesses
+    DownloadAccesses (..),
+    newDownloadAccesses,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** FamilyInfo
+    FamilyInfo (..),
+    newFamilyInfo,
+
+    -- ** FamilyInfo_Membership
+    FamilyInfo_Membership (..),
+    newFamilyInfo_Membership,
+
+    -- ** GeoAnnotationdata
+    GeoAnnotationdata (..),
+    newGeoAnnotationdata,
+
+    -- ** Geolayerdata
+    Geolayerdata (..),
+    newGeolayerdata,
+
+    -- ** Geolayerdata_Common
+    Geolayerdata_Common (..),
+    newGeolayerdata_Common,
+
+    -- ** Geolayerdata_Geo
+    Geolayerdata_Geo (..),
+    newGeolayerdata_Geo,
+
+    -- ** Geolayerdata_Geo_Viewport
+    Geolayerdata_Geo_Viewport (..),
+    newGeolayerdata_Geo_Viewport,
+
+    -- ** Geolayerdata_Geo_Viewport_Hi
+    Geolayerdata_Geo_Viewport_Hi (..),
+    newGeolayerdata_Geo_Viewport_Hi,
+
+    -- ** Geolayerdata_Geo_Viewport_Lo
+    Geolayerdata_Geo_Viewport_Lo (..),
+    newGeolayerdata_Geo_Viewport_Lo,
 
     -- ** Layersummaries
-    , Layersummaries
-    , layersummaries
-    , layTotalItems
-    , layKind
-    , layItems
-    ) where
+    Layersummaries (..),
+    newLayersummaries,
 
-import Network.Google.Prelude
+    -- ** Layersummary
+    Layersummary (..),
+    newLayersummary,
+
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
+
+    -- ** Metadata_ItemsItem
+    Metadata_ItemsItem (..),
+    newMetadata_ItemsItem,
+
+    -- ** Notification
+    Notification (..),
+    newNotification,
+
+    -- ** Offers
+    Offers (..),
+    newOffers,
+
+    -- ** Offers_ItemsItem
+    Offers_ItemsItem (..),
+    newOffers_ItemsItem,
+
+    -- ** Offers_ItemsItem_ItemsItem
+    Offers_ItemsItem_ItemsItem (..),
+    newOffers_ItemsItem_ItemsItem,
+
+    -- ** ReadingPosition
+    ReadingPosition (..),
+    newReadingPosition,
+
+    -- ** RequestAccessData
+    RequestAccessData (..),
+    newRequestAccessData,
+
+    -- ** Review
+    Review (..),
+    newReview,
+
+    -- ** Review_Author
+    Review_Author (..),
+    newReview_Author,
+
+    -- ** Review_Source
+    Review_Source (..),
+    newReview_Source,
+
+    -- ** Series
+    Series (..),
+    newSeries,
+
+    -- ** Series_SeriesItem
+    Series_SeriesItem (..),
+    newSeries_SeriesItem,
+
+    -- ** Series_SeriesItem_SeriesSubscriptionReleaseInfo
+    Series_SeriesItem_SeriesSubscriptionReleaseInfo (..),
+    newSeries_SeriesItem_SeriesSubscriptionReleaseInfo,
+
+    -- ** Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
+    Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo (..),
+    newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo,
+
+    -- ** Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
+    Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo (..),
+    newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo,
+
+    -- ** Seriesmembership
+    Seriesmembership (..),
+    newSeriesmembership,
+
+    -- ** Usersettings
+    Usersettings (..),
+    newUsersettings,
+
+    -- ** Usersettings_NotesExport
+    Usersettings_NotesExport (..),
+    newUsersettings_NotesExport,
+
+    -- ** Usersettings_Notification
+    Usersettings_Notification (..),
+    newUsersettings_Notification,
+
+    -- ** Usersettings_Notification_MatchMyInterests
+    Usersettings_Notification_MatchMyInterests (..),
+    newUsersettings_Notification_MatchMyInterests,
+
+    -- ** Usersettings_Notification_MoreFromAuthors
+    Usersettings_Notification_MoreFromAuthors (..),
+    newUsersettings_Notification_MoreFromAuthors,
+
+    -- ** Usersettings_Notification_MoreFromSeries
+    Usersettings_Notification_MoreFromSeries (..),
+    newUsersettings_Notification_MoreFromSeries,
+
+    -- ** Usersettings_Notification_PriceDrop
+    Usersettings_Notification_PriceDrop (..),
+    newUsersettings_Notification_PriceDrop,
+
+    -- ** Usersettings_Notification_RewardExpirations
+    Usersettings_Notification_RewardExpirations (..),
+    newUsersettings_Notification_RewardExpirations,
+
+    -- ** Volume
+    Volume (..),
+    newVolume,
+
+    -- ** Volume_AccessInfo
+    Volume_AccessInfo (..),
+    newVolume_AccessInfo,
+
+    -- ** Volume_AccessInfo_Epub
+    Volume_AccessInfo_Epub (..),
+    newVolume_AccessInfo_Epub,
+
+    -- ** Volume_AccessInfo_Pdf
+    Volume_AccessInfo_Pdf (..),
+    newVolume_AccessInfo_Pdf,
+
+    -- ** Volume_LayerInfo
+    Volume_LayerInfo (..),
+    newVolume_LayerInfo,
+
+    -- ** Volume_LayerInfo_LayersItem
+    Volume_LayerInfo_LayersItem (..),
+    newVolume_LayerInfo_LayersItem,
+
+    -- ** Volume_RecommendedInfo
+    Volume_RecommendedInfo (..),
+    newVolume_RecommendedInfo,
+
+    -- ** Volume_SaleInfo
+    Volume_SaleInfo (..),
+    newVolume_SaleInfo,
+
+    -- ** Volume_SaleInfo_ListPrice
+    Volume_SaleInfo_ListPrice (..),
+    newVolume_SaleInfo_ListPrice,
+
+    -- ** Volume_SaleInfo_OffersItem
+    Volume_SaleInfo_OffersItem (..),
+    newVolume_SaleInfo_OffersItem,
+
+    -- ** Volume_SaleInfo_OffersItem_ListPrice
+    Volume_SaleInfo_OffersItem_ListPrice (..),
+    newVolume_SaleInfo_OffersItem_ListPrice,
+
+    -- ** Volume_SaleInfo_OffersItem_RentalDuration
+    Volume_SaleInfo_OffersItem_RentalDuration (..),
+    newVolume_SaleInfo_OffersItem_RentalDuration,
+
+    -- ** Volume_SaleInfo_OffersItem_RetailPrice
+    Volume_SaleInfo_OffersItem_RetailPrice (..),
+    newVolume_SaleInfo_OffersItem_RetailPrice,
+
+    -- ** Volume_SaleInfo_RetailPrice
+    Volume_SaleInfo_RetailPrice (..),
+    newVolume_SaleInfo_RetailPrice,
+
+    -- ** Volume_SearchInfo
+    Volume_SearchInfo (..),
+    newVolume_SearchInfo,
+
+    -- ** Volume_UserInfo
+    Volume_UserInfo (..),
+    newVolume_UserInfo,
+
+    -- ** Volume_UserInfo_Copy
+    Volume_UserInfo_Copy (..),
+    newVolume_UserInfo_Copy,
+
+    -- ** Volume_UserInfo_FamilySharing
+    Volume_UserInfo_FamilySharing (..),
+    newVolume_UserInfo_FamilySharing,
+
+    -- ** Volume_UserInfo_RentalPeriod
+    Volume_UserInfo_RentalPeriod (..),
+    newVolume_UserInfo_RentalPeriod,
+
+    -- ** Volume_UserInfo_UserUploadedVolumeInfo
+    Volume_UserInfo_UserUploadedVolumeInfo (..),
+    newVolume_UserInfo_UserUploadedVolumeInfo,
+
+    -- ** Volume_VolumeInfo
+    Volume_VolumeInfo (..),
+    newVolume_VolumeInfo,
+
+    -- ** Volume_VolumeInfo_Dimensions
+    Volume_VolumeInfo_Dimensions (..),
+    newVolume_VolumeInfo_Dimensions,
+
+    -- ** Volume_VolumeInfo_ImageLinks
+    Volume_VolumeInfo_ImageLinks (..),
+    newVolume_VolumeInfo_ImageLinks,
+
+    -- ** Volume_VolumeInfo_IndustryIdentifiersItem
+    Volume_VolumeInfo_IndustryIdentifiersItem (..),
+    newVolume_VolumeInfo_IndustryIdentifiersItem,
+
+    -- ** Volume_VolumeInfo_PanelizationSummary
+    Volume_VolumeInfo_PanelizationSummary (..),
+    newVolume_VolumeInfo_PanelizationSummary,
+
+    -- ** Volume_VolumeInfo_ReadingModes
+    Volume_VolumeInfo_ReadingModes (..),
+    newVolume_VolumeInfo_ReadingModes,
+
+    -- ** Volume2
+    Volume2 (..),
+    newVolume2,
+
+    -- ** Volumeannotation
+    Volumeannotation (..),
+    newVolumeannotation,
+
+    -- ** Volumeannotation_ContentRanges
+    Volumeannotation_ContentRanges (..),
+    newVolumeannotation_ContentRanges,
+
+    -- ** Volumeannotations
+    Volumeannotations (..),
+    newVolumeannotations,
+
+    -- ** Volumes
+    Volumes (..),
+    newVolumes,
+
+    -- ** Volumeseriesinfo
+    Volumeseriesinfo (..),
+    newVolumeseriesinfo,
+
+    -- ** Volumeseriesinfo_VolumeSeriesItem
+    Volumeseriesinfo_VolumeSeriesItem (..),
+    newVolumeseriesinfo_VolumeSeriesItem,
+
+    -- ** Volumeseriesinfo_VolumeSeriesItem_IssueItem
+    Volumeseriesinfo_VolumeSeriesItem_IssueItem (..),
+    newVolumeseriesinfo_VolumeSeriesItem_IssueItem,
+
+    -- ** MyconfigRequestAccessLicenseTypes
+    MyconfigRequestAccessLicenseTypes (..),
+
+    -- ** MyconfigSyncVolumeLicensesFeatures
+    MyconfigSyncVolumeLicensesFeatures (..),
+
+    -- ** MylibraryBookshelvesAddVolumeReason
+    MylibraryBookshelvesAddVolumeReason (..),
+
+    -- ** MylibraryBookshelvesRemoveVolumeReason
+    MylibraryBookshelvesRemoveVolumeReason (..),
+
+    -- ** MylibraryBookshelvesVolumesListProjection
+    MylibraryBookshelvesVolumesListProjection (..),
+
+    -- ** MylibraryReadingpositionsSetPositionAction
+    MylibraryReadingpositionsSetPositionAction (..),
+
+    -- ** OnboardingListCategoryVolumesMaxAllowedMaturityRating
+    OnboardingListCategoryVolumesMaxAllowedMaturityRating (..),
+
+    -- ** PersonalizedstreamGetMaxAllowedMaturityRating
+    PersonalizedstreamGetMaxAllowedMaturityRating (..),
+
+    -- ** VolumesAssociatedListAssociation
+    VolumesAssociatedListAssociation (..),
+
+    -- ** VolumesAssociatedListMaxAllowedMaturityRating
+    VolumesAssociatedListMaxAllowedMaturityRating (..),
+
+    -- ** VolumesGetProjection
+    VolumesGetProjection (..),
+
+    -- ** VolumesListDownload
+    VolumesListDownload (..),
+
+    -- ** VolumesListFilter
+    VolumesListFilter (..),
+
+    -- ** VolumesListLibraryRestrict
+    VolumesListLibraryRestrict (..),
+
+    -- ** VolumesListMaxAllowedMaturityRating
+    VolumesListMaxAllowedMaturityRating (..),
+
+    -- ** VolumesListOrderBy
+    VolumesListOrderBy (..),
+
+    -- ** VolumesListPrintType
+    VolumesListPrintType (..),
+
+    -- ** VolumesListProjection
+    VolumesListProjection (..),
+
+    -- ** VolumesMybooksListAcquireMethod
+    VolumesMybooksListAcquireMethod (..),
+
+    -- ** VolumesMybooksListProcessingState
+    VolumesMybooksListProcessingState (..),
+
+    -- ** VolumesRecommendedListMaxAllowedMaturityRating
+    VolumesRecommendedListMaxAllowedMaturityRating (..),
+
+    -- ** VolumesRecommendedRateRating
+    VolumesRecommendedRateRating (..),
+
+    -- ** VolumesUseruploadedListProcessingState
+    VolumesUseruploadedListProcessingState (..),
+  )
+where
+
+import Network.Google.Books.Bookshelves.Get
+import Network.Google.Books.Bookshelves.List
+import Network.Google.Books.Bookshelves.Volumes.List
+import Network.Google.Books.Cloudloading.AddBook
+import Network.Google.Books.Cloudloading.DeleteBook
+import Network.Google.Books.Cloudloading.UpdateBook
+import Network.Google.Books.Dictionary.ListOfflineMetadata
+import Network.Google.Books.Familysharing.GetFamilyInfo
+import Network.Google.Books.Familysharing.Share
+import Network.Google.Books.Familysharing.Unshare
+import Network.Google.Books.Layers.AnnotationData.Get
+import Network.Google.Books.Layers.AnnotationData.List
+import Network.Google.Books.Layers.Get
+import Network.Google.Books.Layers.List
+import Network.Google.Books.Layers.VolumeAnnotations.Get
+import Network.Google.Books.Layers.VolumeAnnotations.List
+import Network.Google.Books.Myconfig.GetUserSettings
+import Network.Google.Books.Myconfig.ReleaseDownloadAccess
+import Network.Google.Books.Myconfig.RequestAccess
+import Network.Google.Books.Myconfig.SyncVolumeLicenses
+import Network.Google.Books.Myconfig.UpdateUserSettings
+import Network.Google.Books.Mylibrary.Annotations.Delete
+import Network.Google.Books.Mylibrary.Annotations.Insert
+import Network.Google.Books.Mylibrary.Annotations.List
+import Network.Google.Books.Mylibrary.Annotations.Summary
+import Network.Google.Books.Mylibrary.Annotations.Update
+import Network.Google.Books.Mylibrary.Bookshelves.AddVolume
+import Network.Google.Books.Mylibrary.Bookshelves.ClearVolumes
+import Network.Google.Books.Mylibrary.Bookshelves.Get
+import Network.Google.Books.Mylibrary.Bookshelves.List
+import Network.Google.Books.Mylibrary.Bookshelves.MoveVolume
+import Network.Google.Books.Mylibrary.Bookshelves.RemoveVolume
+import Network.Google.Books.Mylibrary.Bookshelves.Volumes.List
+import Network.Google.Books.Mylibrary.Readingpositions.Get
+import Network.Google.Books.Mylibrary.Readingpositions.SetPosition
+import Network.Google.Books.Notification.Get
+import Network.Google.Books.Onboarding.ListCategories
+import Network.Google.Books.Onboarding.ListCategoryVolumes
+import Network.Google.Books.Personalizedstream.Get
+import Network.Google.Books.Promooffer.Accept
+import Network.Google.Books.Promooffer.Dismiss
+import Network.Google.Books.Promooffer.Get
+import Network.Google.Books.Series.Get
+import Network.Google.Books.Series.Membership.Get
 import Network.Google.Books.Types
-import Network.Google.Resource.Books.Bookshelves.Get
-import Network.Google.Resource.Books.Bookshelves.List
-import Network.Google.Resource.Books.Bookshelves.Volumes.List
-import Network.Google.Resource.Books.CloudLoading.AddBook
-import Network.Google.Resource.Books.CloudLoading.DeleteBook
-import Network.Google.Resource.Books.CloudLoading.UpdateBook
-import Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
-import Network.Google.Resource.Books.Familysharing.GetFamilyInfo
-import Network.Google.Resource.Books.Familysharing.Share
-import Network.Google.Resource.Books.Familysharing.Unshare
-import Network.Google.Resource.Books.Layers.AnnotationData.Get
-import Network.Google.Resource.Books.Layers.AnnotationData.List
-import Network.Google.Resource.Books.Layers.Get
-import Network.Google.Resource.Books.Layers.List
-import Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
-import Network.Google.Resource.Books.Layers.VolumeAnnotations.List
-import Network.Google.Resource.Books.MyConfig.GetUserSettings
-import Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
-import Network.Google.Resource.Books.MyConfig.RequestAccess
-import Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
-import Network.Google.Resource.Books.MyConfig.UpdateUserSettings
-import Network.Google.Resource.Books.MyLibrary.Annotations.Delete
-import Network.Google.Resource.Books.MyLibrary.Annotations.Insert
-import Network.Google.Resource.Books.MyLibrary.Annotations.List
-import Network.Google.Resource.Books.MyLibrary.Annotations.Summary
-import Network.Google.Resource.Books.MyLibrary.Annotations.Update
-import Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
-import Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
-import Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
-import Network.Google.Resource.Books.MyLibrary.Bookshelves.List
-import Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
-import Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
-import Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
-import Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
-import Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
-import Network.Google.Resource.Books.Notification.Get
-import Network.Google.Resource.Books.Onboarding.ListCategories
-import Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
-import Network.Google.Resource.Books.Personalizedstream.Get
-import Network.Google.Resource.Books.PromoOffer.Accept
-import Network.Google.Resource.Books.PromoOffer.Dismiss
-import Network.Google.Resource.Books.PromoOffer.Get
-import Network.Google.Resource.Books.Series.Get
-import Network.Google.Resource.Books.Series.Membership.Get
-import Network.Google.Resource.Books.Volumes.Associated.List
-import Network.Google.Resource.Books.Volumes.Get
-import Network.Google.Resource.Books.Volumes.List
-import Network.Google.Resource.Books.Volumes.Mybooks.List
-import Network.Google.Resource.Books.Volumes.Recommended.List
-import Network.Google.Resource.Books.Volumes.Recommended.Rate
-import Network.Google.Resource.Books.Volumes.UserUploaded.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Books API service.
-type BooksAPI =
-     NotificationGetResource :<|>
-       SeriesMembershipGetResource
-       :<|> SeriesGetResource
-       :<|> OnboardingListCategoriesResource
-       :<|> OnboardingListCategoryVolumesResource
-       :<|> MyLibraryAnnotationsSummaryResource
-       :<|> MyLibraryAnnotationsInsertResource
-       :<|> MyLibraryAnnotationsListResource
-       :<|> MyLibraryAnnotationsDeleteResource
-       :<|> MyLibraryAnnotationsUpdateResource
-       :<|> MyLibraryReadingPositionsGetResource
-       :<|> MyLibraryReadingPositionsSetPositionResource
-       :<|> MyLibraryBookshelvesVolumesListResource
-       :<|> MyLibraryBookshelvesClearVolumesResource
-       :<|> MyLibraryBookshelvesListResource
-       :<|> MyLibraryBookshelvesGetResource
-       :<|> MyLibraryBookshelvesRemoveVolumeResource
-       :<|> MyLibraryBookshelvesAddVolumeResource
-       :<|> MyLibraryBookshelvesMoveVolumeResource
-       :<|> PromoOfferAcceptResource
-       :<|> PromoOfferGetResource
-       :<|> PromoOfferDismissResource
-       :<|> CloudLoadingAddBookResource
-       :<|> CloudLoadingUpdateBookResource
-       :<|> CloudLoadingDeleteBookResource
-       :<|> LayersVolumeAnnotationsListResource
-       :<|> LayersVolumeAnnotationsGetResource
-       :<|> LayersAnnotationDataListResource
-       :<|> LayersAnnotationDataGetResource
-       :<|> LayersListResource
-       :<|> LayersGetResource
-       :<|> DictionaryListOfflineMetadataResource
-       :<|> VolumesUserUploadedListResource
-       :<|> VolumesRecommendedListResource
-       :<|> VolumesRecommendedRateResource
-       :<|> VolumesAssociatedListResource
-       :<|> VolumesMybooksListResource
-       :<|> VolumesListResource
-       :<|> VolumesGetResource
-       :<|> BookshelvesVolumesListResource
-       :<|> BookshelvesListResource
-       :<|> BookshelvesGetResource
-       :<|> FamilysharingShareResource
-       :<|> FamilysharingGetFamilyInfoResource
-       :<|> FamilysharingUnshareResource
-       :<|> PersonalizedstreamGetResource
-       :<|> MyConfigSyncVolumeLicensesResource
-       :<|> MyConfigGetUserSettingsResource
-       :<|> MyConfigRequestAccessResource
-       :<|> MyConfigUpdateUserSettingsResource
-       :<|> MyConfigReleaseDownloadAccessResource
+import Network.Google.Books.Volumes.Associated.List
+import Network.Google.Books.Volumes.Get
+import Network.Google.Books.Volumes.List
+import Network.Google.Books.Volumes.Mybooks.List
+import Network.Google.Books.Volumes.Recommended.List
+import Network.Google.Books.Volumes.Recommended.Rate
+import Network.Google.Books.Volumes.Useruploaded.List
