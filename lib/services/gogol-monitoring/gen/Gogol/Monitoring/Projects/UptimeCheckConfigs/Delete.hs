@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,94 +36,87 @@
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.uptimeCheckConfigs.delete@.
 module Gogol.Monitoring.Projects.UptimeCheckConfigs.Delete
-  ( -- * Resource
-    MonitoringProjectsUptimeCheckConfigsDeleteResource,
+    (
+    -- * Resource
+      MonitoringProjectsUptimeCheckConfigsDeleteResource
 
     -- ** Constructing a Request
-    newMonitoringProjectsUptimeCheckConfigsDelete,
-    MonitoringProjectsUptimeCheckConfigsDelete,
-  )
-where
+    , newMonitoringProjectsUptimeCheckConfigsDelete
+    , MonitoringProjectsUptimeCheckConfigsDelete
+    ) where
 
-import Gogol.Monitoring.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Monitoring.Types
 
 -- | A resource alias for @monitoring.projects.uptimeCheckConfigs.delete@ method which the
 -- 'MonitoringProjectsUptimeCheckConfigsDelete' request conforms to.
-type MonitoringProjectsUptimeCheckConfigsDeleteResource =
-  "v3"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+type MonitoringProjectsUptimeCheckConfigsDeleteResource
+     =
+     "v3" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Delete '[Core.JSON] Empty
 
 -- | Deletes an Uptime check configuration. Note that this method will fail if the Uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
 --
 -- /See:/ 'newMonitoringProjectsUptimeCheckConfigsDelete' smart constructor.
 data MonitoringProjectsUptimeCheckConfigsDelete = MonitoringProjectsUptimeCheckConfigsDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The Uptime check configuration to delete. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK_ID]
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The Uptime check configuration to delete. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK_ID]
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MonitoringProjectsUptimeCheckConfigsDelete' with the minimum fields required to make a request.
-newMonitoringProjectsUptimeCheckConfigsDelete ::
-  -- |  Required. The Uptime check configuration to delete. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK_ID] See 'name'.
-  Core.Text ->
-  MonitoringProjectsUptimeCheckConfigsDelete
+newMonitoringProjectsUptimeCheckConfigsDelete 
+    ::  Core.Text
+       -- ^  Required. The Uptime check configuration to delete. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK_ID] See 'name'.
+    -> MonitoringProjectsUptimeCheckConfigsDelete
 newMonitoringProjectsUptimeCheckConfigsDelete name =
   MonitoringProjectsUptimeCheckConfigsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringProjectsUptimeCheckConfigsDelete
-  where
-  type
-    Rs MonitoringProjectsUptimeCheckConfigsDelete =
-      Empty
-  type
-    Scopes
-      MonitoringProjectsUptimeCheckConfigsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
-  requestClient
-    MonitoringProjectsUptimeCheckConfigsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringProjectsUptimeCheckConfigsDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           MonitoringProjectsUptimeCheckConfigsDelete
+         where
+        type Rs MonitoringProjectsUptimeCheckConfigsDelete =
+             Empty
+        type Scopes
+               MonitoringProjectsUptimeCheckConfigsDelete
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
+        requestClient
+          MonitoringProjectsUptimeCheckConfigsDelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              monitoringService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           MonitoringProjectsUptimeCheckConfigsDeleteResource)
+                      Core.mempty
+
