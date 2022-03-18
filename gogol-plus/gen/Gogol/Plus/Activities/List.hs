@@ -19,95 +19,90 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Plus.People.List
+-- Module      : Gogol.Plus.Activities.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all of the people in the specified collection.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.list@.
-module Network.Google.Plus.People.List
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.list@.
+module Gogol.Plus.Activities.List
   ( -- * Resource
-    PlusPeopleListResource,
+    PlusActivitiesListResource,
 
     -- ** Constructing a Request
-    newPlusPeopleList,
-    PlusPeopleList,
+    newPlusActivitiesList,
+    PlusActivitiesList,
   )
 where
 
-import Network.Google.Plus.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Plus.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @plus.people.list@ method which the
--- 'PlusPeopleList' request conforms to.
-type PlusPeopleListResource =
+-- | A resource alias for @plus.activities.list@ method which the
+-- 'PlusActivitiesList' request conforms to.
+type PlusActivitiesListResource =
   "plus"
     Core.:> "v1"
     Core.:> "people"
     Core.:> Core.Capture "userId" Core.Text
-    Core.:> "people"
-    Core.:> Core.Capture "collection" PeopleListCollection
+    Core.:> "activities"
+    Core.:> Core.Capture "collection" ActivitiesListCollection
     Core.:> Core.QueryParam "maxResults" Core.Word32
-    Core.:> Core.QueryParam "orderBy" PeopleListOrderBy
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] PeopleFeed
+    Core.:> Core.Get '[Core.JSON] ActivityFeed
 
--- | List all of the people in the specified collection.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
--- /See:/ 'newPlusPeopleList' smart constructor.
-data PlusPeopleList = PlusPeopleList
-  { -- | The collection of people to list.
-    collection :: PeopleListCollection,
-    -- | The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+-- /See:/ 'newPlusActivitiesList' smart constructor.
+data PlusActivitiesList = PlusActivitiesList
+  { -- | The collection of activities to list.
+    collection :: ActivitiesListCollection,
+    -- | The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
     maxResults :: Core.Word32,
-    -- | The order to return people in.
-    orderBy :: (Core.Maybe PeopleListOrderBy),
     -- | The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Get the collection of people for the person identified. Use \"me\" to indicate the authenticated user.
+    -- | The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user.
     userId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PlusPeopleList' with the minimum fields required to make a request.
-newPlusPeopleList ::
-  -- |  The collection of people to list. See 'collection'.
-  PeopleListCollection ->
-  -- |  Get the collection of people for the person identified. Use \"me\" to indicate the authenticated user. See 'userId'.
+-- | Creates a value of 'PlusActivitiesList' with the minimum fields required to make a request.
+newPlusActivitiesList ::
+  -- |  The collection of activities to list. See 'collection'.
+  ActivitiesListCollection ->
+  -- |  The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user. See 'userId'.
   Core.Text ->
-  PlusPeopleList
-newPlusPeopleList collection userId =
-  PlusPeopleList
+  PlusActivitiesList
+newPlusActivitiesList collection userId =
+  PlusActivitiesList
     { collection = collection,
-      maxResults = 100,
-      orderBy = Core.Nothing,
+      maxResults = 20,
       pageToken = Core.Nothing,
       userId = userId
     }
 
-instance Core.GoogleRequest PlusPeopleList where
-  type Rs PlusPeopleList = PeopleFeed
+instance Core.GoogleRequest PlusActivitiesList where
+  type Rs PlusActivitiesList = ActivityFeed
   type
-    Scopes PlusPeopleList =
+    Scopes PlusActivitiesList =
       '[ "https://www.googleapis.com/auth/plus.login",
          "https://www.googleapis.com/auth/plus.me"
        ]
-  requestClient PlusPeopleList {..} =
+  requestClient PlusActivitiesList {..} =
     go
       userId
       collection
       (Core.Just maxResults)
-      orderBy
       pageToken
       (Core.Just Core.AltJSON)
       plusService
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy PlusPeopleListResource)
+          (Core.Proxy :: Core.Proxy PlusActivitiesListResource)
           Core.mempty

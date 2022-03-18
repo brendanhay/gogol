@@ -19,13 +19,17 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Plus.Types
+-- Module      : Gogol.Plus
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Plus.Types
+--
+-- Builds on top of the Google+ platform.
+--
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference>
+module Gogol.Plus
   ( -- * Configuration
     plusService,
 
@@ -34,6 +38,53 @@ module Network.Google.Plus.Types
     plusMeScope,
     userinfoEmailScope,
     userinfoProfileScope,
+
+    -- * Resources
+
+    -- ** plus.activities.get
+    PlusActivitiesGetResource,
+    newPlusActivitiesGet,
+    PlusActivitiesGet,
+
+    -- ** plus.activities.list
+    PlusActivitiesListResource,
+    newPlusActivitiesList,
+    PlusActivitiesList,
+
+    -- ** plus.activities.search
+    PlusActivitiesSearchResource,
+    newPlusActivitiesSearch,
+    PlusActivitiesSearch,
+
+    -- ** plus.comments.get
+    PlusCommentsGetResource,
+    newPlusCommentsGet,
+    PlusCommentsGet,
+
+    -- ** plus.comments.list
+    PlusCommentsListResource,
+    newPlusCommentsList,
+    PlusCommentsList,
+
+    -- ** plus.people.get
+    PlusPeopleGetResource,
+    newPlusPeopleGet,
+    PlusPeopleGet,
+
+    -- ** plus.people.list
+    PlusPeopleListResource,
+    newPlusPeopleList,
+    PlusPeopleList,
+
+    -- ** plus.people.listByActivity
+    PlusPeopleListByActivityResource,
+    newPlusPeopleListByActivity,
+    PlusPeopleListByActivity,
+
+    -- ** plus.people.search
+    PlusPeopleSearchResource,
+    newPlusPeopleSearch,
+    PlusPeopleSearch,
 
     -- * Types
 
@@ -261,29 +312,13 @@ module Network.Google.Plus.Types
   )
 where
 
-import Network.Google.Plus.Internal.Product
-import Network.Google.Plus.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Google+ API. This contains the host and root path used as a starting point for constructing service requests.
-plusService :: Core.ServiceConfig
-plusService =
-  Core.defaultService
-    (Core.ServiceId "plus:v1")
-    "www.googleapis.com"
-
--- | View your basic profile info, including your age range and language
-plusLoginScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.login"]
-plusLoginScope = Core.Proxy
-
--- | Associate you with your personal info on Google
-plusMeScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.me"]
-plusMeScope = Core.Proxy
-
--- | View your email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
-
--- | See your personal info, including any personal info you\'ve made publicly available
-userinfoProfileScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userinfoProfileScope = Core.Proxy
+import Gogol.Plus.Activities.Get
+import Gogol.Plus.Activities.List
+import Gogol.Plus.Activities.Search
+import Gogol.Plus.Comments.Get
+import Gogol.Plus.Comments.List
+import Gogol.Plus.People.Get
+import Gogol.Plus.People.List
+import Gogol.Plus.People.ListByActivity
+import Gogol.Plus.People.Search
+import Gogol.Plus.Types

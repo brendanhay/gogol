@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Plus.Comments.Get
+-- Module      : Gogol.Plus.Comments.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.comments.get@.
-module Network.Google.Plus.Comments.Get
+module Gogol.Plus.Comments.Get
   ( -- * Resource
     PlusCommentsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Plus.Comments.Get
   )
 where
 
-import Network.Google.Plus.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Plus.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @plus.comments.get@ method which the
 -- 'PlusCommentsGet' request conforms to.

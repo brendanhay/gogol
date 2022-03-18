@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Plus
-    Network.Google.Plus.Activities.Get
-    Network.Google.Plus.Activities.List
-    Network.Google.Plus.Activities.Search
-    Network.Google.Plus.Comments.Get
-    Network.Google.Plus.Comments.List
-    Network.Google.Plus.People.Get
-    Network.Google.Plus.People.List
-    Network.Google.Plus.People.ListByActivity
-    Network.Google.Plus.People.Search
-    Network.Google.Plus.Types
+    Gogol.Plus
+    Gogol.Plus.Activities.Get
+    Gogol.Plus.Activities.List
+    Gogol.Plus.Activities.Search
+    Gogol.Plus.Comments.Get
+    Gogol.Plus.Comments.List
+    Gogol.Plus.People.Get
+    Gogol.Plus.People.List
+    Gogol.Plus.People.ListByActivity
+    Gogol.Plus.People.Search
+    Gogol.Plus.Types
 
   other-modules:
-    Network.Google.Plus.Internal.Product
-    Network.Google.Plus.Internal.Sum
+    Gogol.Plus.Internal.Product
+    Gogol.Plus.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

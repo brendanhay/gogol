@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Plus.Internal.Sum
+-- Module      : Gogol.Plus.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Plus.Internal.Sum
+module Gogol.Plus.Internal.Sum
   ( -- * ActivitiesListCollection
     ActivitiesListCollection
       ( ActivitiesListCollection_Public,
@@ -69,7 +69,7 @@ module Network.Google.Plus.Internal.Sum
   )
 where
 
-import qualified Network.Google.Prelude as Core
+import qualified Gogol.Prelude as Core
 
 -- | The collection of activities to list.
 newtype ActivitiesListCollection = ActivitiesListCollection {fromActivitiesListCollection :: Core.Text}
