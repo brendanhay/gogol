@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.schemas.setIamPolicy@.
 module Gogol.PubSub.Projects.Schemas.SetIamPolicy
-  ( -- * Resource
-    PubSubProjectsSchemasSetIamPolicyResource,
+    (
+    -- * Resource
+      PubSubProjectsSchemasSetIamPolicyResource
 
     -- ** Constructing a Request
-    newPubSubProjectsSchemasSetIamPolicy,
-    PubSubProjectsSchemasSetIamPolicy,
-  )
-where
+    , newPubSubProjectsSchemasSetIamPolicy
+    , PubSubProjectsSchemasSetIamPolicy
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.PubSub.Types
@@ -45,81 +51,74 @@ import Gogol.PubSub.Types
 -- | A resource alias for @pubsub.projects.schemas.setIamPolicy@ method which the
 -- 'PubSubProjectsSchemasSetIamPolicy' request conforms to.
 type PubSubProjectsSchemasSetIamPolicyResource =
-  "v1"
-    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
-    Core.:> Core.Post '[Core.JSON] Policy
+     "v1" Core.:>
+       Core.CaptureMode "resource" "setIamPolicy" Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] SetIamPolicyRequest Core.:>
+                       Core.Post '[Core.JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy. Can return @NOT_FOUND@, @INVALID_ARGUMENT@, and @PERMISSION_DENIED@ errors.
 --
 -- /See:/ 'newPubSubProjectsSchemasSetIamPolicy' smart constructor.
 data PubSubProjectsSchemasSetIamPolicy = PubSubProjectsSchemasSetIamPolicy
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: SetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: SetIamPolicyRequest
+      -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PubSubProjectsSchemasSetIamPolicy' with the minimum fields required to make a request.
-newPubSubProjectsSchemasSetIamPolicy ::
-  -- |  Multipart request metadata. See 'payload'.
-  SetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  PubSubProjectsSchemasSetIamPolicy
+newPubSubProjectsSchemasSetIamPolicy 
+    ::  SetIamPolicyRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+    -> PubSubProjectsSchemasSetIamPolicy
 newPubSubProjectsSchemasSetIamPolicy payload resource =
   PubSubProjectsSchemasSetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PubSubProjectsSchemasSetIamPolicy
-  where
-  type Rs PubSubProjectsSchemasSetIamPolicy = Policy
-  type
-    Scopes PubSubProjectsSchemasSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
-  requestClient PubSubProjectsSchemasSetIamPolicy {..} =
-    go
-      resource
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      pubSubService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PubSubProjectsSchemasSetIamPolicyResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           PubSubProjectsSchemasSetIamPolicy
+         where
+        type Rs PubSubProjectsSchemasSetIamPolicy = Policy
+        type Scopes PubSubProjectsSchemasSetIamPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient PubSubProjectsSchemasSetIamPolicy{..}
+          = go resource xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              pubSubService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy PubSubProjectsSchemasSetIamPolicyResource)
+                      Core.mempty
+

@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.pull@.
 module Gogol.PubSub.Projects.Subscriptions.Pull
-  ( -- * Resource
-    PubSubProjectsSubscriptionsPullResource,
+    (
+    -- * Resource
+      PubSubProjectsSubscriptionsPullResource
 
     -- ** Constructing a Request
-    newPubSubProjectsSubscriptionsPull,
-    PubSubProjectsSubscriptionsPull,
-  )
-where
+    , newPubSubProjectsSubscriptionsPull
+    , PubSubProjectsSubscriptionsPull
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.PubSub.Types
@@ -45,83 +51,76 @@ import Gogol.PubSub.Types
 -- | A resource alias for @pubsub.projects.subscriptions.pull@ method which the
 -- 'PubSubProjectsSubscriptionsPull' request conforms to.
 type PubSubProjectsSubscriptionsPullResource =
-  "v1"
-    Core.:> Core.CaptureMode "subscription" "pull" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] PullRequest
-    Core.:> Core.Post '[Core.JSON] PullResponse
+     "v1" Core.:>
+       Core.CaptureMode "subscription" "pull" Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] PullRequest Core.:>
+                       Core.Post '[Core.JSON] PullResponse
 
 -- | Pulls messages from the server. The server may return @UNAVAILABLE@ if there are too many concurrent pull requests pending for the given subscription.
 --
 -- /See:/ 'newPubSubProjectsSubscriptionsPull' smart constructor.
 data PubSubProjectsSubscriptionsPull = PubSubProjectsSubscriptionsPull
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: PullRequest,
-    -- | Required. The subscription from which messages should be pulled. Format is @projects\/{project}\/subscriptions\/{sub}@.
-    subscription :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: PullRequest
+      -- | Required. The subscription from which messages should be pulled. Format is @projects\/{project}\/subscriptions\/{sub}@.
+    , subscription :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PubSubProjectsSubscriptionsPull' with the minimum fields required to make a request.
-newPubSubProjectsSubscriptionsPull ::
-  -- |  Multipart request metadata. See 'payload'.
-  PullRequest ->
-  -- |  Required. The subscription from which messages should be pulled. Format is @projects\/{project}\/subscriptions\/{sub}@. See 'subscription'.
-  Core.Text ->
-  PubSubProjectsSubscriptionsPull
+newPubSubProjectsSubscriptionsPull 
+    ::  PullRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  Required. The subscription from which messages should be pulled. Format is @projects\/{project}\/subscriptions\/{sub}@. See 'subscription'.
+    -> PubSubProjectsSubscriptionsPull
 newPubSubProjectsSubscriptionsPull payload subscription =
   PubSubProjectsSubscriptionsPull
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      subscription = subscription,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , subscription = subscription
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PubSubProjectsSubscriptionsPull
-  where
-  type
-    Rs PubSubProjectsSubscriptionsPull =
-      PullResponse
-  type
-    Scopes PubSubProjectsSubscriptionsPull =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
-  requestClient PubSubProjectsSubscriptionsPull {..} =
-    go
-      subscription
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      pubSubService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PubSubProjectsSubscriptionsPullResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           PubSubProjectsSubscriptionsPull
+         where
+        type Rs PubSubProjectsSubscriptionsPull =
+             PullResponse
+        type Scopes PubSubProjectsSubscriptionsPull =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient PubSubProjectsSubscriptionsPull{..}
+          = go subscription xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              pubSubService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy PubSubProjectsSubscriptionsPullResource)
+                      Core.mempty
+
