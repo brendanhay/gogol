@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudAsset.ExportAssets
+-- Module      : Gogol.CloudAsset.ExportAssets
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Exports assets with time and resource types to a given Cloud Storage location\/BigQuery table. For Cloud Storage location destinations, the output format is newline-delimited JSON. Each line represents a google.cloud.asset.v1p7beta1.Asset in the JSON format; for BigQuery table destinations, the output table stores the fields in asset proto as columns. This API implements the google.longrunning.Operation API , which allows you to keep track of the export. We recommend intervals of at least 2 seconds with exponential retry to poll the export operation result. For regular-size resource parent, the export operation usually finishes within 5 minutes.
 --
 -- /See:/ <https://cloud.google.com/asset-inventory/docs/quickstart Cloud Asset API Reference> for @cloudasset.exportAssets@.
-module Network.Google.CloudAsset.ExportAssets
+module Gogol.CloudAsset.ExportAssets
   ( -- * Resource
     CloudAssetExportAssetsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudAsset.ExportAssets
   )
 where
 
-import Network.Google.CloudAsset.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudAsset.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudasset.exportAssets@ method which the
 -- 'CloudAssetExportAssets' request conforms to.

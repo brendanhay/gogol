@@ -19,18 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudAsset.Types
+-- Module      : Gogol.CloudAsset
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudAsset.Types
+--
+-- The cloud asset API manages the history and inventory of cloud resources.
+--
+-- /See:/ <https://cloud.google.com/asset-inventory/docs/quickstart Cloud Asset API Reference>
+module Gogol.CloudAsset
   ( -- * Configuration
     cloudAssetService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
+
+    -- * Resources
+
+    -- ** cloudasset.exportAssets
+    CloudAssetExportAssetsResource,
+    newCloudAssetExportAssets,
+    CloudAssetExportAssets,
+
+    -- ** cloudasset.operations.get
+    CloudAssetOperationsGetResource,
+    newCloudAssetOperationsGet,
+    CloudAssetOperationsGet,
 
     -- * Types
 
@@ -256,17 +272,6 @@ module Network.Google.CloudAsset.Types
   )
 where
 
-import Network.Google.CloudAsset.Internal.Product
-import Network.Google.CloudAsset.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1p7beta1@ of the Cloud Asset API. This contains the host and root path used as a starting point for constructing service requests.
-cloudAssetService :: Core.ServiceConfig
-cloudAssetService =
-  Core.defaultService
-    (Core.ServiceId "cloudasset:v1p7beta1")
-    "cloudasset.googleapis.com"
-
--- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+import Gogol.CloudAsset.ExportAssets
+import Gogol.CloudAsset.Operations.Get
+import Gogol.CloudAsset.Types
