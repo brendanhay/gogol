@@ -18,6 +18,7 @@ common base
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   default-extensions:
     BinaryLiterals

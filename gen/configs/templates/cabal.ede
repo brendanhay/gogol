@@ -47,6 +47,7 @@ library
     -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates
     -funbox-strict-fields
+    -fwarn-unused-packages
 
   if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors

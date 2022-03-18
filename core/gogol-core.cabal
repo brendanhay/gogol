@@ -30,6 +30,7 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   exposed-modules:
     Network.Google.Data.Base64
