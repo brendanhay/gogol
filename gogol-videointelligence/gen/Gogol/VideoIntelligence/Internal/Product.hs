@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.VideoIntelligence.Internal.Product
+-- Module      : Gogol.VideoIntelligence.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.VideoIntelligence.Internal.Product
+module Gogol.VideoIntelligence.Internal.Product
   ( -- * GoogleCloudVideointelligenceV1_AnnotateVideoProgress
     GoogleCloudVideointelligenceV1_AnnotateVideoProgress (..),
     newGoogleCloudVideointelligenceV1_AnnotateVideoProgress,
@@ -756,8 +756,8 @@ module Network.Google.VideoIntelligence.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.VideoIntelligence.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.VideoIntelligence.Internal.Sum
 
 -- | Video annotation progress. Included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --

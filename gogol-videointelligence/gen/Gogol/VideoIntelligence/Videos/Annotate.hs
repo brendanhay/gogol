@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.VideoIntelligence.Videos.Annotate
+-- Module      : Gogol.VideoIntelligence.Videos.Annotate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Performs asynchronous video annotation. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @AnnotateVideoProgress@ (progress). @Operation.response@ contains @AnnotateVideoResponse@ (results).
 --
 -- /See:/ <https://cloud.google.com/video-intelligence/docs/ Cloud Video Intelligence API Reference> for @videointelligence.videos.annotate@.
-module Network.Google.VideoIntelligence.Videos.Annotate
+module Gogol.VideoIntelligence.Videos.Annotate
   ( -- * Resource
     VideoIntelligenceVideosAnnotateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.VideoIntelligence.Videos.Annotate
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.VideoIntelligence.Types
+import qualified Gogol.Prelude as Core
+import Gogol.VideoIntelligence.Types
 
 -- | A resource alias for @videointelligence.videos.annotate@ method which the
 -- 'VideoIntelligenceVideosAnnotate' request conforms to.

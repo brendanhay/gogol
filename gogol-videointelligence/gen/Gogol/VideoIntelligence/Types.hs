@@ -19,29 +19,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.VideoIntelligence
+-- Module      : Gogol.VideoIntelligence.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.
---
--- /See:/ <https://cloud.google.com/video-intelligence/docs/ Cloud Video Intelligence API Reference>
-module Network.Google.VideoIntelligence
+module Gogol.VideoIntelligence.Types
   ( -- * Configuration
     videoIntelligenceService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
-
-    -- * Resources
-
-    -- ** videointelligence.videos.annotate
-    VideoIntelligenceVideosAnnotateResource,
-    newVideoIntelligenceVideosAnnotate,
-    VideoIntelligenceVideosAnnotate,
 
     -- * Types
 
@@ -814,5 +803,17 @@ module Network.Google.VideoIntelligence
   )
 where
 
-import Network.Google.VideoIntelligence.Types
-import Network.Google.VideoIntelligence.Videos.Annotate
+import qualified Gogol.Prelude as Core
+import Gogol.VideoIntelligence.Internal.Product
+import Gogol.VideoIntelligence.Internal.Sum
+
+-- | Default request referring to version @v1p3beta1@ of the Cloud Video Intelligence API. This contains the host and root path used as a starting point for constructing service requests.
+videoIntelligenceService :: Core.ServiceConfig
+videoIntelligenceService =
+  Core.defaultService
+    (Core.ServiceId "videointelligence:v1p3beta1")
+    "videointelligence.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
