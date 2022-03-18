@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Events.ResetAllForAllPlayers
+-- Module      : Gogol.GamesManagement.Events.ResetAllForAllPlayers
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Resets all draft events for all players. This method is only available to user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.events.resetAllForAllPlayers@.
-module Network.Google.GamesManagement.Events.ResetAllForAllPlayers
+module Gogol.GamesManagement.Events.ResetAllForAllPlayers
   ( -- * Resource
     GamesManagementEventsResetAllForAllPlayersResource,
 
@@ -39,8 +39,8 @@ module Network.Google.GamesManagement.Events.ResetAllForAllPlayers
   )
 where
 
-import Network.Google.GamesManagement.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @gamesManagement.events.resetAllForAllPlayers@ method which the
 -- 'GamesManagementEventsResetAllForAllPlayers' request conforms to.

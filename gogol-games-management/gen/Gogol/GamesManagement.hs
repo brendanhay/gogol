@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement
+-- Module      : Gogol.GamesManagement
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Play Game Management API allows developers to manage resources from the Google Play Game service.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference>
-module Network.Google.GamesManagement
+module Gogol.GamesManagement
   ( -- * Configuration
     gamesManagementService,
 
@@ -191,22 +191,22 @@ module Network.Google.GamesManagement
   )
 where
 
-import Network.Google.GamesManagement.Achievements.Reset
-import Network.Google.GamesManagement.Achievements.ResetAll
-import Network.Google.GamesManagement.Achievements.ResetAllForAllPlayers
-import Network.Google.GamesManagement.Achievements.ResetForAllPlayers
-import Network.Google.GamesManagement.Achievements.ResetMultipleForAllPlayers
-import Network.Google.GamesManagement.Applications.ListHidden
-import Network.Google.GamesManagement.Events.Reset
-import Network.Google.GamesManagement.Events.ResetAll
-import Network.Google.GamesManagement.Events.ResetAllForAllPlayers
-import Network.Google.GamesManagement.Events.ResetForAllPlayers
-import Network.Google.GamesManagement.Events.ResetMultipleForAllPlayers
-import Network.Google.GamesManagement.Players.Hide
-import Network.Google.GamesManagement.Players.Unhide
-import Network.Google.GamesManagement.Scores.Reset
-import Network.Google.GamesManagement.Scores.ResetAll
-import Network.Google.GamesManagement.Scores.ResetAllForAllPlayers
-import Network.Google.GamesManagement.Scores.ResetForAllPlayers
-import Network.Google.GamesManagement.Scores.ResetMultipleForAllPlayers
-import Network.Google.GamesManagement.Types
+import Gogol.GamesManagement.Achievements.Reset
+import Gogol.GamesManagement.Achievements.ResetAll
+import Gogol.GamesManagement.Achievements.ResetAllForAllPlayers
+import Gogol.GamesManagement.Achievements.ResetForAllPlayers
+import Gogol.GamesManagement.Achievements.ResetMultipleForAllPlayers
+import Gogol.GamesManagement.Applications.ListHidden
+import Gogol.GamesManagement.Events.Reset
+import Gogol.GamesManagement.Events.ResetAll
+import Gogol.GamesManagement.Events.ResetAllForAllPlayers
+import Gogol.GamesManagement.Events.ResetForAllPlayers
+import Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
+import Gogol.GamesManagement.Players.Hide
+import Gogol.GamesManagement.Players.Unhide
+import Gogol.GamesManagement.Scores.Reset
+import Gogol.GamesManagement.Scores.ResetAll
+import Gogol.GamesManagement.Scores.ResetAllForAllPlayers
+import Gogol.GamesManagement.Scores.ResetForAllPlayers
+import Gogol.GamesManagement.Scores.ResetMultipleForAllPlayers
+import Gogol.GamesManagement.Types

@@ -19,36 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesManagement.Events.Reset
+-- Module      : Gogol.GamesManagement.Events.ResetAll
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+-- Resets all player progress on all events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.events.reset@.
-module Network.Google.GamesManagement.Events.Reset
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.events.resetAll@.
+module Gogol.GamesManagement.Events.ResetAll
   ( -- * Resource
-    GamesManagementEventsResetResource,
+    GamesManagementEventsResetAllResource,
 
     -- ** Constructing a Request
-    newGamesManagementEventsReset,
-    GamesManagementEventsReset,
+    newGamesManagementEventsResetAll,
+    GamesManagementEventsResetAll,
   )
 where
 
-import Network.Google.GamesManagement.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesManagement.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesManagement.events.reset@ method which the
--- 'GamesManagementEventsReset' request conforms to.
-type GamesManagementEventsResetResource =
+-- | A resource alias for @gamesManagement.events.resetAll@ method which the
+-- 'GamesManagementEventsResetAll' request conforms to.
+type GamesManagementEventsResetAllResource =
   "games"
     Core.:> "v1management"
     Core.:> "events"
-    Core.:> Core.Capture "eventId" Core.Text
     Core.:> "reset"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -58,18 +57,16 @@ type GamesManagementEventsResetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+-- | Resets all player progress on all events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
 --
--- /See:/ 'newGamesManagementEventsReset' smart constructor.
-data GamesManagementEventsReset = GamesManagementEventsReset
+-- /See:/ 'newGamesManagementEventsResetAll' smart constructor.
+data GamesManagementEventsResetAll = GamesManagementEventsResetAll
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the event.
-    eventId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,32 +74,28 @@ data GamesManagementEventsReset = GamesManagementEventsReset
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesManagementEventsReset' with the minimum fields required to make a request.
-newGamesManagementEventsReset ::
-  -- |  The ID of the event. See 'eventId'.
-  Core.Text ->
-  GamesManagementEventsReset
-newGamesManagementEventsReset eventId =
-  GamesManagementEventsReset
+-- | Creates a value of 'GamesManagementEventsResetAll' with the minimum fields required to make a request.
+newGamesManagementEventsResetAll ::
+  GamesManagementEventsResetAll
+newGamesManagementEventsResetAll =
+  GamesManagementEventsResetAll
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      eventId = eventId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    GamesManagementEventsReset
+    GamesManagementEventsResetAll
   where
-  type Rs GamesManagementEventsReset = ()
+  type Rs GamesManagementEventsResetAll = ()
   type
-    Scopes GamesManagementEventsReset =
+    Scopes GamesManagementEventsResetAll =
       '["https://www.googleapis.com/auth/games"]
-  requestClient GamesManagementEventsReset {..} =
+  requestClient GamesManagementEventsResetAll {..} =
     go
-      eventId
       xgafv
       accessToken
       callback
@@ -114,6 +107,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy GamesManagementEventsResetResource
+              Core.Proxy GamesManagementEventsResetAllResource
           )
           Core.mempty

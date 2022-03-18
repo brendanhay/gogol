@@ -39,35 +39,36 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.GamesManagement
-    Network.Google.GamesManagement.Achievements.Reset
-    Network.Google.GamesManagement.Achievements.ResetAll
-    Network.Google.GamesManagement.Achievements.ResetAllForAllPlayers
-    Network.Google.GamesManagement.Achievements.ResetForAllPlayers
-    Network.Google.GamesManagement.Achievements.ResetMultipleForAllPlayers
-    Network.Google.GamesManagement.Applications.ListHidden
-    Network.Google.GamesManagement.Events.Reset
-    Network.Google.GamesManagement.Events.ResetAll
-    Network.Google.GamesManagement.Events.ResetAllForAllPlayers
-    Network.Google.GamesManagement.Events.ResetForAllPlayers
-    Network.Google.GamesManagement.Events.ResetMultipleForAllPlayers
-    Network.Google.GamesManagement.Players.Hide
-    Network.Google.GamesManagement.Players.Unhide
-    Network.Google.GamesManagement.Scores.Reset
-    Network.Google.GamesManagement.Scores.ResetAll
-    Network.Google.GamesManagement.Scores.ResetAllForAllPlayers
-    Network.Google.GamesManagement.Scores.ResetForAllPlayers
-    Network.Google.GamesManagement.Scores.ResetMultipleForAllPlayers
-    Network.Google.GamesManagement.Types
+    Gogol.GamesManagement
+    Gogol.GamesManagement.Achievements.Reset
+    Gogol.GamesManagement.Achievements.ResetAll
+    Gogol.GamesManagement.Achievements.ResetAllForAllPlayers
+    Gogol.GamesManagement.Achievements.ResetForAllPlayers
+    Gogol.GamesManagement.Achievements.ResetMultipleForAllPlayers
+    Gogol.GamesManagement.Applications.ListHidden
+    Gogol.GamesManagement.Events.Reset
+    Gogol.GamesManagement.Events.ResetAll
+    Gogol.GamesManagement.Events.ResetAllForAllPlayers
+    Gogol.GamesManagement.Events.ResetForAllPlayers
+    Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
+    Gogol.GamesManagement.Players.Hide
+    Gogol.GamesManagement.Players.Unhide
+    Gogol.GamesManagement.Scores.Reset
+    Gogol.GamesManagement.Scores.ResetAll
+    Gogol.GamesManagement.Scores.ResetAllForAllPlayers
+    Gogol.GamesManagement.Scores.ResetForAllPlayers
+    Gogol.GamesManagement.Scores.ResetMultipleForAllPlayers
+    Gogol.GamesManagement.Types
 
   other-modules:
-    Network.Google.GamesManagement.Internal.Product
-    Network.Google.GamesManagement.Internal.Sum
+    Gogol.GamesManagement.Internal.Product
+    Gogol.GamesManagement.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
