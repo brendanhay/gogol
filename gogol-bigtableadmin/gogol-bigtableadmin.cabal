@@ -39,63 +39,64 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.BigtableAdmin
-    Network.Google.BigtableAdmin.Operations.Cancel
-    Network.Google.BigtableAdmin.Operations.Delete
-    Network.Google.BigtableAdmin.Operations.Get
-    Network.Google.BigtableAdmin.Operations.Projects.Operations.List
-    Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Create
-    Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Delete
-    Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Get
-    Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.List
-    Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Patch
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.GetIamPolicy
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.List
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Patch
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIamPolicy
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.TestIamPermissions
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Create
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Delete
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Get
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.List
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
-    Network.Google.BigtableAdmin.Projects.Instances.Clusters.Update
-    Network.Google.BigtableAdmin.Projects.Instances.Create
-    Network.Google.BigtableAdmin.Projects.Instances.Delete
-    Network.Google.BigtableAdmin.Projects.Instances.Get
-    Network.Google.BigtableAdmin.Projects.Instances.GetIamPolicy
-    Network.Google.BigtableAdmin.Projects.Instances.List
-    Network.Google.BigtableAdmin.Projects.Instances.PartialUpdateInstance
-    Network.Google.BigtableAdmin.Projects.Instances.SetIamPolicy
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.Create
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.Delete
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.DropRowRange
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.Get
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.List
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.Restore
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.SetIamPolicy
-    Network.Google.BigtableAdmin.Projects.Instances.Tables.TestIamPermissions
-    Network.Google.BigtableAdmin.Projects.Instances.TestIamPermissions
-    Network.Google.BigtableAdmin.Projects.Instances.Update
-    Network.Google.BigtableAdmin.Projects.Locations.Get
-    Network.Google.BigtableAdmin.Projects.Locations.List
-    Network.Google.BigtableAdmin.Types
+    Gogol.BigtableAdmin
+    Gogol.BigtableAdmin.Operations.Cancel
+    Gogol.BigtableAdmin.Operations.Delete
+    Gogol.BigtableAdmin.Operations.Get
+    Gogol.BigtableAdmin.Operations.Projects.Operations.List
+    Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Create
+    Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Delete
+    Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Get
+    Gogol.BigtableAdmin.Projects.Instances.AppProfiles.List
+    Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Patch
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.GetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.List
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Patch
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.TestIamPermissions
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Create
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Delete
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Get
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.List
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Update
+    Gogol.BigtableAdmin.Projects.Instances.Create
+    Gogol.BigtableAdmin.Projects.Instances.Delete
+    Gogol.BigtableAdmin.Projects.Instances.Get
+    Gogol.BigtableAdmin.Projects.Instances.GetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.List
+    Gogol.BigtableAdmin.Projects.Instances.PartialUpdateInstance
+    Gogol.BigtableAdmin.Projects.Instances.SetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
+    Gogol.BigtableAdmin.Projects.Instances.Tables.Create
+    Gogol.BigtableAdmin.Projects.Instances.Tables.Delete
+    Gogol.BigtableAdmin.Projects.Instances.Tables.DropRowRange
+    Gogol.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
+    Gogol.BigtableAdmin.Projects.Instances.Tables.Get
+    Gogol.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.Tables.List
+    Gogol.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+    Gogol.BigtableAdmin.Projects.Instances.Tables.Restore
+    Gogol.BigtableAdmin.Projects.Instances.Tables.SetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.Tables.TestIamPermissions
+    Gogol.BigtableAdmin.Projects.Instances.TestIamPermissions
+    Gogol.BigtableAdmin.Projects.Instances.Update
+    Gogol.BigtableAdmin.Projects.Locations.Get
+    Gogol.BigtableAdmin.Projects.Locations.List
+    Gogol.BigtableAdmin.Types
 
   other-modules:
-    Network.Google.BigtableAdmin.Internal.Product
-    Network.Google.BigtableAdmin.Internal.Sum
+    Gogol.BigtableAdmin.Internal.Product
+    Gogol.BigtableAdmin.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
