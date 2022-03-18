@@ -1,912 +1,634 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ServiceManagement
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Service Management allows service producers to publish their
--- services on Google Cloud Platform so that they can be discovered and
--- used by service consumers.
+-- Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
 --
 -- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference>
 module Network.Google.ServiceManagement
-    (
-    -- * Service Configuration
-      serviceManagementService
+  ( -- * Configuration
+    serviceManagementService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , serviceManagementReadOnlyScope
-    , serviceManagementScope
-
-    -- * API Declaration
-    , ServiceManagementAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    serviceManagementScope,
+    serviceManagementReadOnlyScope,
 
     -- * Resources
 
     -- ** servicemanagement.operations.get
-    , module Network.Google.Resource.ServiceManagement.Operations.Get
+    ServiceManagementOperationsGetResource,
+    newServiceManagementOperationsGet,
+    ServiceManagementOperationsGet,
 
     -- ** servicemanagement.operations.list
-    , module Network.Google.Resource.ServiceManagement.Operations.List
+    ServiceManagementOperationsListResource,
+    newServiceManagementOperationsList,
+    ServiceManagementOperationsList,
 
     -- ** servicemanagement.services.configs.create
-    , module Network.Google.Resource.ServiceManagement.Services.Configs.Create
+    ServiceManagementServicesConfigsCreateResource,
+    newServiceManagementServicesConfigsCreate,
+    ServiceManagementServicesConfigsCreate,
 
     -- ** servicemanagement.services.configs.get
-    , module Network.Google.Resource.ServiceManagement.Services.Configs.Get
+    ServiceManagementServicesConfigsGetResource,
+    newServiceManagementServicesConfigsGet,
+    ServiceManagementServicesConfigsGet,
 
     -- ** servicemanagement.services.configs.list
-    , module Network.Google.Resource.ServiceManagement.Services.Configs.List
+    ServiceManagementServicesConfigsListResource,
+    newServiceManagementServicesConfigsList,
+    ServiceManagementServicesConfigsList,
 
     -- ** servicemanagement.services.configs.submit
-    , module Network.Google.Resource.ServiceManagement.Services.Configs.Submit
+    ServiceManagementServicesConfigsSubmitResource,
+    newServiceManagementServicesConfigsSubmit,
+    ServiceManagementServicesConfigsSubmit,
 
     -- ** servicemanagement.services.consumers.getIamPolicy
-    , module Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
+    ServiceManagementServicesConsumersGetIamPolicyResource,
+    newServiceManagementServicesConsumersGetIamPolicy,
+    ServiceManagementServicesConsumersGetIamPolicy,
 
     -- ** servicemanagement.services.consumers.setIamPolicy
-    , module Network.Google.Resource.ServiceManagement.Services.Consumers.SetIAMPolicy
+    ServiceManagementServicesConsumersSetIamPolicyResource,
+    newServiceManagementServicesConsumersSetIamPolicy,
+    ServiceManagementServicesConsumersSetIamPolicy,
 
     -- ** servicemanagement.services.consumers.testIamPermissions
-    , module Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
+    ServiceManagementServicesConsumersTestIamPermissionsResource,
+    newServiceManagementServicesConsumersTestIamPermissions,
+    ServiceManagementServicesConsumersTestIamPermissions,
 
     -- ** servicemanagement.services.create
-    , module Network.Google.Resource.ServiceManagement.Services.Create
+    ServiceManagementServicesCreateResource,
+    newServiceManagementServicesCreate,
+    ServiceManagementServicesCreate,
 
     -- ** servicemanagement.services.delete
-    , module Network.Google.Resource.ServiceManagement.Services.Delete
+    ServiceManagementServicesDeleteResource,
+    newServiceManagementServicesDelete,
+    ServiceManagementServicesDelete,
 
     -- ** servicemanagement.services.generateConfigReport
-    , module Network.Google.Resource.ServiceManagement.Services.GenerateConfigReport
+    ServiceManagementServicesGenerateConfigReportResource,
+    newServiceManagementServicesGenerateConfigReport,
+    ServiceManagementServicesGenerateConfigReport,
 
     -- ** servicemanagement.services.get
-    , module Network.Google.Resource.ServiceManagement.Services.Get
+    ServiceManagementServicesGetResource,
+    newServiceManagementServicesGet,
+    ServiceManagementServicesGet,
 
     -- ** servicemanagement.services.getConfig
-    , module Network.Google.Resource.ServiceManagement.Services.GetConfig
+    ServiceManagementServicesGetConfigResource,
+    newServiceManagementServicesGetConfig,
+    ServiceManagementServicesGetConfig,
 
     -- ** servicemanagement.services.getIamPolicy
-    , module Network.Google.Resource.ServiceManagement.Services.GetIAMPolicy
+    ServiceManagementServicesGetIamPolicyResource,
+    newServiceManagementServicesGetIamPolicy,
+    ServiceManagementServicesGetIamPolicy,
 
     -- ** servicemanagement.services.list
-    , module Network.Google.Resource.ServiceManagement.Services.List
+    ServiceManagementServicesListResource,
+    newServiceManagementServicesList,
+    ServiceManagementServicesList,
 
     -- ** servicemanagement.services.rollouts.create
-    , module Network.Google.Resource.ServiceManagement.Services.Rollouts.Create
+    ServiceManagementServicesRolloutsCreateResource,
+    newServiceManagementServicesRolloutsCreate,
+    ServiceManagementServicesRolloutsCreate,
 
     -- ** servicemanagement.services.rollouts.get
-    , module Network.Google.Resource.ServiceManagement.Services.Rollouts.Get
+    ServiceManagementServicesRolloutsGetResource,
+    newServiceManagementServicesRolloutsGet,
+    ServiceManagementServicesRolloutsGet,
 
     -- ** servicemanagement.services.rollouts.list
-    , module Network.Google.Resource.ServiceManagement.Services.Rollouts.List
+    ServiceManagementServicesRolloutsListResource,
+    newServiceManagementServicesRolloutsList,
+    ServiceManagementServicesRolloutsList,
 
     -- ** servicemanagement.services.setIamPolicy
-    , module Network.Google.Resource.ServiceManagement.Services.SetIAMPolicy
+    ServiceManagementServicesSetIamPolicyResource,
+    newServiceManagementServicesSetIamPolicy,
+    ServiceManagementServicesSetIamPolicy,
 
     -- ** servicemanagement.services.testIamPermissions
-    , module Network.Google.Resource.ServiceManagement.Services.TestIAMPermissions
+    ServiceManagementServicesTestIamPermissionsResource,
+    newServiceManagementServicesTestIamPermissions,
+    ServiceManagementServicesTestIamPermissions,
 
     -- ** servicemanagement.services.undelete
-    , module Network.Google.Resource.ServiceManagement.Services.Undelete
+    ServiceManagementServicesUndeleteResource,
+    newServiceManagementServicesUndelete,
+    ServiceManagementServicesUndelete,
 
     -- * Types
 
-    -- ** JwtLocation
-    , JwtLocation
-    , jwtLocation
-    , jlValuePrefix
-    , jlHeader
-    , jlQuery
-
-    -- ** MetricDescriptorValueType
-    , MetricDescriptorValueType (..)
-
-    -- ** UndeleteServiceResponse
-    , UndeleteServiceResponse
-    , undeleteServiceResponse
-    , usrService
-
-    -- ** SystemParameter
-    , SystemParameter
-    , systemParameter
-    , spHTTPHeader
-    , spURLQueryParameter
-    , spName
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Advice
-    , Advice
-    , advice
-    , aDescription
+    Advice (..),
+    newAdvice,
 
-    -- ** ConfigFile
-    , ConfigFile
-    , configFile
-    , cfFileContents
-    , cfFilePath
-    , cfFileType
+    -- ** Api
+    Api (..),
+    newApi,
 
-    -- ** MonitoredResourceDescriptor
-    , MonitoredResourceDescriptor
-    , monitoredResourceDescriptor
-    , mrdName
-    , mrdDisplayName
-    , mrdLabels
-    , mrdType
-    , mrdDescription
-    , mrdLaunchStage
-
-    -- ** BackendRulePathTranslation
-    , BackendRulePathTranslation (..)
-
-    -- ** ServicesConfigsGetView
-    , ServicesConfigsGetView (..)
-
-    -- ** DocumentationRule
-    , DocumentationRule
-    , documentationRule
-    , drSelector
-    , drDeprecationDescription
-    , drDescription
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
-
-    -- ** GenerateConfigReportResponse
-    , GenerateConfigReportResponse
-    , generateConfigReportResponse
-    , gcrrDiagnostics
-    , gcrrServiceName
-    , gcrrId
-    , gcrrChangeReports
-
-    -- ** BillingDestination
-    , BillingDestination
-    , billingDestination
-    , bdMetrics
-    , bdMonitoredResource
+    -- ** Api_Syntax
+    Api_Syntax (..),
 
     -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** Control
-    , Control
-    , control
-    , cEnvironment
-
-    -- ** DeleteServiceStrategy
-    , DeleteServiceStrategy
-    , deleteServiceStrategy
-
-    -- ** AuthRequirement
-    , AuthRequirement
-    , authRequirement
-    , arProviderId
-    , arAudiences
-
-    -- ** ListServicesResponse
-    , ListServicesResponse
-    , listServicesResponse
-    , lsrNextPageToken
-    , lsrServices
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** Context
-    , Context
-    , context
-    , cRules
-
-    -- ** LoggingDestination
-    , LoggingDestination
-    , loggingDestination
-    , ldMonitoredResource
-    , ldLogs
-
-    -- ** MetricDescriptor
-    , MetricDescriptor
-    , metricDescriptor
-    , mdMonitoredResourceTypes
-    , mdMetricKind
-    , mdName
-    , mdMetadata
-    , mdDisplayName
-    , mdLabels
-    , mdType
-    , mdValueType
-    , mdDescription
-    , mdUnit
-    , mdLaunchStage
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** ServicesGetConfigView
-    , ServicesGetConfigView (..)
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** BackendRule
-    , BackendRule
-    , backendRule
-    , brJwtAudience
-    , brSelector
-    , brAddress
-    , brProtocol
-    , brDisableAuth
-    , brOperationDeadline
-    , brDeadline
-    , brPathTranslation
-
-    -- ** SubmitConfigSourceRequest
-    , SubmitConfigSourceRequest
-    , submitConfigSourceRequest
-    , scsrValidateOnly
-    , scsrConfigSource
-
-    -- ** SourceContext
-    , SourceContext
-    , sourceContext
-    , scFileName
-
-    -- ** Field
-    , Field
-    , field
-    , fKind
-    , fOneofIndex
-    , fName
-    , fJSONName
-    , fCardinality
-    , fOptions
-    , fPacked
-    , fDefaultValue
-    , fNumber
-    , fTypeURL
-
-    -- ** MetricRule
-    , MetricRule
-    , metricRule
-    , mrSelector
-    , mrMetricCosts
-
-    -- ** FieldKind
-    , FieldKind (..)
-
-    -- ** EnumSyntax
-    , EnumSyntax (..)
-
-    -- ** TrafficPercentStrategy
-    , TrafficPercentStrategy
-    , trafficPercentStrategy
-    , tpsPercentages
-
-    -- ** Service
-    , Service
-    , service
-    , sControl
-    , sMetrics
-    , sContext
-    , sAuthentication
-    , sAPIs
-    , sTypes
-    , sSystemTypes
-    , sMonitoredResources
-    , sBackend
-    , sMonitoring
-    , sName
-    , sSystemParameters
-    , sLogs
-    , sDocumentation
-    , sId
-    , sUsage
-    , sEndpoints
-    , sEnums
-    , sConfigVersion
-    , sHTTP
-    , sTitle
-    , sProducerProjectId
-    , sSourceInfo
-    , sBilling
-    , sCustomError
-    , sLogging
-    , sQuota
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** ListServiceConfigsResponse
-    , ListServiceConfigsResponse
-    , listServiceConfigsResponse
-    , lscrServiceConfigs
-    , lscrNextPageToken
-
-    -- ** CustomErrorRule
-    , CustomErrorRule
-    , customErrorRule
-    , cerIsErrorType
-    , cerSelector
-
-    -- ** SubmitConfigSourceResponse
-    , SubmitConfigSourceResponse
-    , submitConfigSourceResponse
-    , scsrServiceConfig
-
-    -- ** ChangeReport
-    , ChangeReport
-    , changeReport
-    , crConfigChanges
-
-    -- ** OptionValue
-    , OptionValue
-    , optionValue
-    , ovAddtional
-
-    -- ** EnumValue
-    , EnumValue
-    , enumValue
-    , evName
-    , evOptions
-    , evNumber
-
-    -- ** Authentication
-    , Authentication
-    , authentication
-    , aRules
-    , aProviders
-
-    -- ** MetricDescriptorMetadataLaunchStage
-    , MetricDescriptorMetadataLaunchStage (..)
-
-    -- ** Mixin
-    , Mixin
-    , mixin
-    , mRoot
-    , mName
-
-    -- ** OperationInfo
-    , OperationInfo
-    , operationInfo
-    , oiMetadataType
-    , oiResponseType
-
-    -- ** CustomHTTPPattern
-    , CustomHTTPPattern
-    , customHTTPPattern
-    , chttppPath
-    , chttppKind
-
-    -- ** UsageRule
-    , UsageRule
-    , usageRule
-    , urSelector
-    , urAllowUnregisteredCalls
-    , urSkipServiceControl
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** Page
-    , Page
-    , page
-    , pSubpages
-    , pContent
-    , pName
-
-    -- ** GenerateConfigReportRequestOldConfig
-    , GenerateConfigReportRequestOldConfig
-    , generateConfigReportRequestOldConfig
-    , gcrrocAddtional
-
-    -- ** AuthenticationRule
-    , AuthenticationRule
-    , authenticationRule
-    , arRequirements
-    , arSelector
-    , arAllowWithoutCredential
-    , arOAuth
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** StepStatus
-    , StepStatus (..)
-
-    -- ** LabelDescriptorValueType
-    , LabelDescriptorValueType (..)
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** MetricRuleMetricCosts
-    , MetricRuleMetricCosts
-    , metricRuleMetricCosts
-    , mrmcAddtional
-
-    -- ** TrafficPercentStrategyPercentages
-    , TrafficPercentStrategyPercentages
-    , trafficPercentStrategyPercentages
-    , tpspAddtional
-
-    -- ** APISyntax
-    , APISyntax (..)
-
-    -- ** TypeSyntax
-    , TypeSyntax (..)
-
-    -- ** ListServiceRolloutsResponse
-    , ListServiceRolloutsResponse
-    , listServiceRolloutsResponse
-    , lsrrNextPageToken
-    , lsrrRollouts
-
-    -- ** ConfigChange
-    , ConfigChange
-    , configChange
-    , ccOldValue
-    , ccNewValue
-    , ccAdvices
-    , ccChangeType
-    , ccElement
-
-    -- ** Backend
-    , Backend
-    , backend
-    , bRules
-
-    -- ** Monitoring
-    , Monitoring
-    , monitoring
-    , mProducerDestinations
-    , mConsumerDestinations
-
-    -- ** LogDescriptor
-    , LogDescriptor
-    , logDescriptor
-    , ldName
-    , ldDisplayName
-    , ldLabels
-    , ldDescription
-
-    -- ** Method
-    , Method
-    , method
-    , metRequestStreaming
-    , metResponseTypeURL
-    , metName
-    , metResponseStreaming
-    , metRequestTypeURL
-    , metOptions
-    , metSyntax
-
-    -- ** Diagnostic
-    , Diagnostic
-    , diagnostic
-    , dLocation
-    , dKind
-    , dMessage
-
-    -- ** RolloutStatus
-    , RolloutStatus (..)
-
-    -- ** SystemParameters
-    , SystemParameters
-    , systemParameters
-    , spRules
-
-    -- ** DiagnosticKind
-    , DiagnosticKind (..)
-
-    -- ** ConfigSource
-    , ConfigSource
-    , configSource
-    , csFiles
-    , csId
-
-    -- ** EnableServiceResponse
-    , EnableServiceResponse
-    , enableServiceResponse
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** Documentation
-    , Documentation
-    , documentation
-    , dSummary
-    , dDocumentationRootURL
-    , dRules
-    , dPages
-    , dServiceRootURL
-    , dOverview
-
-    -- ** Step
-    , Step
-    , step
-    , sStatus
-    , sDescription
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ConfigFileFileType
-    , ConfigFileFileType (..)
-
-    -- ** MetricDescriptorMetadata
-    , MetricDescriptorMetadata
-    , metricDescriptorMetadata
-    , mdmSamplePeriod
-    , mdmIngestDelay
-    , mdmLaunchStage
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** ConfigChangeChangeType
-    , ConfigChangeChangeType (..)
-
-    -- ** SystemParameterRule
-    , SystemParameterRule
-    , systemParameterRule
-    , sprSelector
-    , sprParameters
-
-    -- ** LabelDescriptor
-    , LabelDescriptor
-    , labelDescriptor
-    , lKey
-    , lValueType
-    , lDescription
-
-    -- ** MonitoredResourceDescriptorLaunchStage
-    , MonitoredResourceDescriptorLaunchStage (..)
-
-    -- ** Usage
-    , Usage
-    , usage
-    , uRequirements
-    , uRules
-    , uProducerNotificationChannel
-
-    -- ** FieldCardinality
-    , FieldCardinality (..)
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** FlowErrorDetails
-    , FlowErrorDetails
-    , flowErrorDetails
-    , fedFlowStepId
-    , fedExceptionType
-
-    -- ** GenerateConfigReportRequestNewConfig
-    , GenerateConfigReportRequestNewConfig
-    , generateConfigReportRequestNewConfig
-    , gcrrncAddtional
-
-    -- ** HTTP
-    , HTTP
-    , hTTP
-    , hRules
-    , hFullyDecodeReservedExpansion
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** Type
-    , Type
-    , type'
-    , tSourceContext
-    , tOneofs
-    , tName
-    , tOptions
-    , tFields
-    , tSyntax
-
-    -- ** API
-    , API
-    , api
-    , aSourceContext
-    , aMixins
-    , aMethods
-    , aName
-    , aVersion
-    , aOptions
-    , aSyntax
-
-    -- ** MonitoringDestination
-    , MonitoringDestination
-    , monitoringDestination
-    , mdMetrics
-    , mdMonitoredResource
-
-    -- ** ManagedService
-    , ManagedService
-    , managedService
-    , msServiceName
-    , msProducerProjectId
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omStartTime
-    , omSteps
-    , omProgressPercentage
-    , omResourceNames
-
-    -- ** Endpoint
-    , Endpoint
-    , endpoint
-    , eAllowCORS
-    , eName
-    , eTarget
-
-    -- ** OAuthRequirements
-    , OAuthRequirements
-    , oAuthRequirements
-    , oarCanonicalScopes
-
-    -- ** MetricDescriptorMetricKind
-    , MetricDescriptorMetricKind (..)
-
-    -- ** CustomError
-    , CustomError
-    , customError
-    , ceRules
-    , ceTypes
-
-    -- ** QuotaLimit
-    , QuotaLimit
-    , quotaLimit
-    , qlValues
-    , qlFreeTier
-    , qlMetric
-    , qlName
-    , qlDisplayName
-    , qlDuration
-    , qlDefaultLimit
-    , qlDescription
-    , qlUnit
-    , qlMaxLimit
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** Option
-    , Option
-    , option
-    , optValue
-    , optName
-
-    -- ** Billing
-    , Billing
-    , billing
-    , bConsumerDestinations
-
-    -- ** SourceInfo
-    , SourceInfo
-    , sourceInfo
-    , siSourceFiles
-
-    -- ** QuotaLimitValues
-    , QuotaLimitValues
-    , quotaLimitValues
-    , qlvAddtional
-
-    -- ** Rollout
-    , Rollout
-    , rollout
-    , rStatus
-    , rDeleteServiceStrategy
-    , rTrafficPercentStrategy
-    , rCreatedBy
-    , rServiceName
-    , rRolloutId
-    , rCreateTime
-
-    -- ** Enum'
-    , Enum'
-    , enum
-    , enuSourceContext
-    , enuEnumvalue
-    , enuName
-    , enuOptions
-    , enuSyntax
-
-    -- ** Logging
-    , Logging
-    , logging
-    , lProducerDestinations
-    , lConsumerDestinations
-
-    -- ** ConfigRef
-    , ConfigRef
-    , configRef
-    , crName
-
-    -- ** MethodSyntax
-    , MethodSyntax (..)
-
-    -- ** GenerateConfigReportRequest
-    , GenerateConfigReportRequest
-    , generateConfigReportRequest
-    , gcrrOldConfig
-    , gcrrNewConfig
-
-    -- ** SourceInfoSourceFilesItem
-    , SourceInfoSourceFilesItem
-    , sourceInfoSourceFilesItem
-    , sisfiAddtional
-
-    -- ** Quota
-    , Quota
-    , quota
-    , qLimits
-    , qMetricRules
-
-    -- ** HTTPRule
-    , HTTPRule
-    , hTTPRule
-    , httprSelector
-    , httprPost
-    , httprBody
-    , httprCustom
-    , httprResponseBody
-    , httprPatch
-    , httprGet
-    , httprAdditionalBindings
-    , httprDelete
-    , httprPut
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** MetricDescriptorLaunchStage
-    , MetricDescriptorLaunchStage (..)
-
-    -- ** ResourceReference
-    , ResourceReference
-    , resourceReference
-    , rrChildType
-    , rrType
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
     -- ** AuthProvider
-    , AuthProvider
-    , authProvider
-    , apJWKsURI
-    , apAudiences
-    , apJwtLocations
-    , apId
-    , apAuthorizationURL
-    , apIssuer
+    AuthProvider (..),
+    newAuthProvider,
+
+    -- ** AuthRequirement
+    AuthRequirement (..),
+    newAuthRequirement,
+
+    -- ** Authentication
+    Authentication (..),
+    newAuthentication,
+
+    -- ** AuthenticationRule
+    AuthenticationRule (..),
+    newAuthenticationRule,
+
+    -- ** Backend
+    Backend (..),
+    newBackend,
+
+    -- ** BackendRule
+    BackendRule (..),
+    newBackendRule,
+
+    -- ** BackendRule_PathTranslation
+    BackendRule_PathTranslation (..),
+
+    -- ** Billing
+    Billing (..),
+    newBilling,
+
+    -- ** BillingDestination
+    BillingDestination (..),
+    newBillingDestination,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** ChangeReport
+    ChangeReport (..),
+    newChangeReport,
+
+    -- ** ConfigChange
+    ConfigChange (..),
+    newConfigChange,
+
+    -- ** ConfigChange_ChangeType
+    ConfigChange_ChangeType (..),
+
+    -- ** ConfigFile
+    ConfigFile (..),
+    newConfigFile,
+
+    -- ** ConfigFile_FileType
+    ConfigFile_FileType (..),
+
+    -- ** ConfigRef
+    ConfigRef (..),
+    newConfigRef,
+
+    -- ** ConfigSource
+    ConfigSource (..),
+    newConfigSource,
+
+    -- ** Context
+    Context (..),
+    newContext,
 
     -- ** ContextRule
-    , ContextRule
-    , contextRule
-    , crSelector
-    , crRequested
-    , crAllowedRequestExtensions
-    , crProvided
-    , crAllowedResponseExtensions
-    ) where
+    ContextRule (..),
+    newContextRule,
 
-import Network.Google.Prelude
-import Network.Google.Resource.ServiceManagement.Operations.Get
-import Network.Google.Resource.ServiceManagement.Operations.List
-import Network.Google.Resource.ServiceManagement.Services.Configs.Create
-import Network.Google.Resource.ServiceManagement.Services.Configs.Get
-import Network.Google.Resource.ServiceManagement.Services.Configs.List
-import Network.Google.Resource.ServiceManagement.Services.Configs.Submit
-import Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
-import Network.Google.Resource.ServiceManagement.Services.Consumers.SetIAMPolicy
-import Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
-import Network.Google.Resource.ServiceManagement.Services.Create
-import Network.Google.Resource.ServiceManagement.Services.Delete
-import Network.Google.Resource.ServiceManagement.Services.GenerateConfigReport
-import Network.Google.Resource.ServiceManagement.Services.Get
-import Network.Google.Resource.ServiceManagement.Services.GetConfig
-import Network.Google.Resource.ServiceManagement.Services.GetIAMPolicy
-import Network.Google.Resource.ServiceManagement.Services.List
-import Network.Google.Resource.ServiceManagement.Services.Rollouts.Create
-import Network.Google.Resource.ServiceManagement.Services.Rollouts.Get
-import Network.Google.Resource.ServiceManagement.Services.Rollouts.List
-import Network.Google.Resource.ServiceManagement.Services.SetIAMPolicy
-import Network.Google.Resource.ServiceManagement.Services.TestIAMPermissions
-import Network.Google.Resource.ServiceManagement.Services.Undelete
+    -- ** Control
+    Control (..),
+    newControl,
+
+    -- ** CustomError
+    CustomError (..),
+    newCustomError,
+
+    -- ** CustomErrorRule
+    CustomErrorRule (..),
+    newCustomErrorRule,
+
+    -- ** CustomHttpPattern
+    CustomHttpPattern (..),
+    newCustomHttpPattern,
+
+    -- ** DeleteServiceStrategy
+    DeleteServiceStrategy (..),
+    newDeleteServiceStrategy,
+
+    -- ** Diagnostic
+    Diagnostic (..),
+    newDiagnostic,
+
+    -- ** Diagnostic_Kind
+    Diagnostic_Kind (..),
+
+    -- ** Documentation
+    Documentation (..),
+    newDocumentation,
+
+    -- ** DocumentationRule
+    DocumentationRule (..),
+    newDocumentationRule,
+
+    -- ** Endpoint
+    Endpoint (..),
+    newEndpoint,
+
+    -- ** Enum'
+    Enum' (..),
+    newEnum,
+
+    -- ** Enum_Syntax
+    Enum_Syntax (..),
+
+    -- ** EnumValue
+    EnumValue (..),
+    newEnumValue,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** Field
+    Field (..),
+    newField,
+
+    -- ** Field_Cardinality
+    Field_Cardinality (..),
+
+    -- ** Field_Kind
+    Field_Kind (..),
+
+    -- ** FlowErrorDetails
+    FlowErrorDetails (..),
+    newFlowErrorDetails,
+
+    -- ** GenerateConfigReportRequest
+    GenerateConfigReportRequest (..),
+    newGenerateConfigReportRequest,
+
+    -- ** GenerateConfigReportRequest_NewConfig
+    GenerateConfigReportRequest_NewConfig (..),
+    newGenerateConfigReportRequest_NewConfig,
+
+    -- ** GenerateConfigReportRequest_OldConfig
+    GenerateConfigReportRequest_OldConfig (..),
+    newGenerateConfigReportRequest_OldConfig,
+
+    -- ** GenerateConfigReportResponse
+    GenerateConfigReportResponse (..),
+    newGenerateConfigReportResponse,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
+
+    -- ** Http
+    Http (..),
+    newHttp,
+
+    -- ** HttpRule
+    HttpRule (..),
+    newHttpRule,
+
+    -- ** JwtLocation
+    JwtLocation (..),
+    newJwtLocation,
+
+    -- ** LabelDescriptor
+    LabelDescriptor (..),
+    newLabelDescriptor,
+
+    -- ** LabelDescriptor_ValueType
+    LabelDescriptor_ValueType (..),
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListServiceConfigsResponse
+    ListServiceConfigsResponse (..),
+    newListServiceConfigsResponse,
+
+    -- ** ListServiceRolloutsResponse
+    ListServiceRolloutsResponse (..),
+    newListServiceRolloutsResponse,
+
+    -- ** ListServicesResponse
+    ListServicesResponse (..),
+    newListServicesResponse,
+
+    -- ** LogDescriptor
+    LogDescriptor (..),
+    newLogDescriptor,
+
+    -- ** Logging
+    Logging (..),
+    newLogging,
+
+    -- ** LoggingDestination
+    LoggingDestination (..),
+    newLoggingDestination,
+
+    -- ** ManagedService
+    ManagedService (..),
+    newManagedService,
+
+    -- ** Method
+    Method (..),
+    newMethod,
+
+    -- ** Method_Syntax
+    Method_Syntax (..),
+
+    -- ** MetricDescriptor
+    MetricDescriptor (..),
+    newMetricDescriptor,
+
+    -- ** MetricDescriptor_LaunchStage
+    MetricDescriptor_LaunchStage (..),
+
+    -- ** MetricDescriptor_MetricKind
+    MetricDescriptor_MetricKind (..),
+
+    -- ** MetricDescriptor_ValueType
+    MetricDescriptor_ValueType (..),
+
+    -- ** MetricDescriptorMetadata
+    MetricDescriptorMetadata (..),
+    newMetricDescriptorMetadata,
+
+    -- ** MetricDescriptorMetadata_LaunchStage
+    MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricRule
+    MetricRule (..),
+    newMetricRule,
+
+    -- ** MetricRule_MetricCosts
+    MetricRule_MetricCosts (..),
+    newMetricRule_MetricCosts,
+
+    -- ** Mixin
+    Mixin (..),
+    newMixin,
+
+    -- ** MonitoredResourceDescriptor
+    MonitoredResourceDescriptor (..),
+    newMonitoredResourceDescriptor,
+
+    -- ** MonitoredResourceDescriptor_LaunchStage
+    MonitoredResourceDescriptor_LaunchStage (..),
+
+    -- ** Monitoring
+    Monitoring (..),
+    newMonitoring,
+
+    -- ** MonitoringDestination
+    MonitoringDestination (..),
+    newMonitoringDestination,
+
+    -- ** OAuthRequirements
+    OAuthRequirements (..),
+    newOAuthRequirements,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationInfo
+    OperationInfo (..),
+    newOperationInfo,
+
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
+
+    -- ** Option
+    Option (..),
+    newOption,
+
+    -- ** Option_Value
+    Option_Value (..),
+    newOption_Value,
+
+    -- ** Page
+    Page (..),
+    newPage,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** Quota
+    Quota (..),
+    newQuota,
+
+    -- ** QuotaLimit
+    QuotaLimit (..),
+    newQuotaLimit,
+
+    -- ** QuotaLimit_Values
+    QuotaLimit_Values (..),
+    newQuotaLimit_Values,
+
+    -- ** ResourceReference
+    ResourceReference (..),
+    newResourceReference,
+
+    -- ** Rollout
+    Rollout (..),
+    newRollout,
+
+    -- ** Rollout_Status
+    Rollout_Status (..),
+
+    -- ** Service
+    Service (..),
+    newService,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** SourceContext
+    SourceContext (..),
+    newSourceContext,
+
+    -- ** SourceInfo
+    SourceInfo (..),
+    newSourceInfo,
+
+    -- ** SourceInfo_SourceFilesItem
+    SourceInfo_SourceFilesItem (..),
+    newSourceInfo_SourceFilesItem,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** Step
+    Step (..),
+    newStep,
+
+    -- ** Step_Status
+    Step_Status (..),
+
+    -- ** SubmitConfigSourceRequest
+    SubmitConfigSourceRequest (..),
+    newSubmitConfigSourceRequest,
+
+    -- ** SubmitConfigSourceResponse
+    SubmitConfigSourceResponse (..),
+    newSubmitConfigSourceResponse,
+
+    -- ** SystemParameter
+    SystemParameter (..),
+    newSystemParameter,
+
+    -- ** SystemParameterRule
+    SystemParameterRule (..),
+    newSystemParameterRule,
+
+    -- ** SystemParameters
+    SystemParameters (..),
+    newSystemParameters,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** TrafficPercentStrategy
+    TrafficPercentStrategy (..),
+    newTrafficPercentStrategy,
+
+    -- ** TrafficPercentStrategy_Percentages
+    TrafficPercentStrategy_Percentages (..),
+    newTrafficPercentStrategy_Percentages,
+
+    -- ** Type
+    Type (..),
+    newType,
+
+    -- ** Type_Syntax
+    Type_Syntax (..),
+
+    -- ** UndeleteServiceResponse
+    UndeleteServiceResponse (..),
+    newUndeleteServiceResponse,
+
+    -- ** Usage
+    Usage (..),
+    newUsage,
+
+    -- ** UsageRule
+    UsageRule (..),
+    newUsageRule,
+
+    -- ** ServicesConfigsGetView
+    ServicesConfigsGetView (..),
+
+    -- ** ServicesGetConfigView
+    ServicesGetConfigView (..),
+  )
+where
+
+import Network.Google.ServiceManagement.Operations.Get
+import Network.Google.ServiceManagement.Operations.List
+import Network.Google.ServiceManagement.Services.Configs.Create
+import Network.Google.ServiceManagement.Services.Configs.Get
+import Network.Google.ServiceManagement.Services.Configs.List
+import Network.Google.ServiceManagement.Services.Configs.Submit
+import Network.Google.ServiceManagement.Services.Consumers.GetIamPolicy
+import Network.Google.ServiceManagement.Services.Consumers.SetIamPolicy
+import Network.Google.ServiceManagement.Services.Consumers.TestIamPermissions
+import Network.Google.ServiceManagement.Services.Create
+import Network.Google.ServiceManagement.Services.Delete
+import Network.Google.ServiceManagement.Services.GenerateConfigReport
+import Network.Google.ServiceManagement.Services.Get
+import Network.Google.ServiceManagement.Services.GetConfig
+import Network.Google.ServiceManagement.Services.GetIamPolicy
+import Network.Google.ServiceManagement.Services.List
+import Network.Google.ServiceManagement.Services.Rollouts.Create
+import Network.Google.ServiceManagement.Services.Rollouts.Get
+import Network.Google.ServiceManagement.Services.Rollouts.List
+import Network.Google.ServiceManagement.Services.SetIamPolicy
+import Network.Google.ServiceManagement.Services.TestIamPermissions
+import Network.Google.ServiceManagement.Services.Undelete
 import Network.Google.ServiceManagement.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Service Management API service.
-type ServiceManagementAPI =
-     OperationsListResource :<|> OperationsGetResource
-       :<|> ServicesConsumersGetIAMPolicyResource
-       :<|> ServicesConsumersSetIAMPolicyResource
-       :<|> ServicesConsumersTestIAMPermissionsResource
-       :<|> ServicesRolloutsListResource
-       :<|> ServicesRolloutsGetResource
-       :<|> ServicesRolloutsCreateResource
-       :<|> ServicesConfigsListResource
-       :<|> ServicesConfigsGetResource
-       :<|> ServicesConfigsSubmitResource
-       :<|> ServicesConfigsCreateResource
-       :<|> ServicesGenerateConfigReportResource
-       :<|> ServicesListResource
-       :<|> ServicesUndeleteResource
-       :<|> ServicesGetIAMPolicyResource
-       :<|> ServicesGetResource
-       :<|> ServicesCreateResource
-       :<|> ServicesGetConfigResource
-       :<|> ServicesSetIAMPolicyResource
-       :<|> ServicesTestIAMPermissionsResource
-       :<|> ServicesDeleteResource
