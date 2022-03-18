@@ -1,227 +1,140 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Mirror.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Mirror.Types
-    (
-    -- * Service Configuration
-      mirrorService
+  ( -- * Configuration
+    mirrorService,
 
     -- * OAuth Scopes
-    , glassTimelineScope
-    , glassLocationScope
+    glassLocationScope,
+    glassTimelineScope,
 
-    -- * TimelineListOrderBy
-    , TimelineListOrderBy (..)
+    -- * Types
 
-    -- * NotificationConfig
-    , NotificationConfig
-    , notificationConfig
-    , ncDeliveryTime
-    , ncLevel
+    -- ** Account
+    Account (..),
+    newAccount,
 
-    -- * Command
-    , Command
-    , command
-    , cType
+    -- ** Attachment
+    Attachment (..),
+    newAttachment,
 
-    -- * LocationsListResponse
-    , LocationsListResponse
-    , locationsListResponse
-    , llrKind
-    , llrItems
+    -- ** AttachmentsListResponse
+    AttachmentsListResponse (..),
+    newAttachmentsListResponse,
 
-    -- * Location
-    , Location
-    , location
-    , lKind
-    , lLatitude
-    , lAddress
-    , lDisplayName
-    , lId
-    , lAccuracy
-    , lLongitude
-    , lTimestamp
+    -- ** AuthToken
+    AuthToken (..),
+    newAuthToken,
 
-    -- * Notification
-    , Notification
-    , notification
-    , nOperation
-    , nItemId
-    , nCollection
-    , nUserActions
-    , nVerifyToken
-    , nUserToken
+    -- ** Command
+    Command (..),
+    newCommand,
 
-    -- * Contact
-    , Contact
-    , contact
-    , conAcceptCommands
-    , conSharingFeatures
-    , conImageURLs
-    , conPriority
-    , conKind
-    , conAcceptTypes
-    , conPhoneNumber
-    , conDisplayName
-    , conSource
-    , conId
-    , conType
-    , conSpeakableName
+    -- ** Contact
+    Contact (..),
+    newContact,
 
-    -- * AuthToken
-    , AuthToken
-    , authToken
-    , atAuthToken
-    , atType
+    -- ** ContactsListResponse
+    ContactsListResponse (..),
+    newContactsListResponse,
 
-    -- * AttachmentsListResponse
-    , AttachmentsListResponse
-    , attachmentsListResponse
-    , alrKind
-    , alrItems
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * MenuItem
-    , MenuItem
-    , menuItem
-    , miValues
-    , miRemoveWhenSelected
-    , miAction
-    , miPayload
-    , miContextualCommand
-    , miId
+    -- ** LocationsListResponse
+    LocationsListResponse (..),
+    newLocationsListResponse,
 
-    -- * Setting
-    , Setting
-    , setting
-    , sKind
-    , sValue
-    , sId
+    -- ** MenuItem
+    MenuItem (..),
+    newMenuItem,
 
-    -- * Attachment
-    , Attachment
-    , attachment
-    , aContentURL
-    , aId
-    , aIsProcessingContent
-    , aContentType
+    -- ** MenuValue
+    MenuValue (..),
+    newMenuValue,
 
-    -- * Account
-    , Account
-    , account
-    , aAuthTokens
-    , aUserData
-    , aPassword
-    , aFeatures
+    -- ** Notification
+    Notification (..),
+    newNotification,
 
-    -- * UserData
-    , UserData
-    , userData
-    , udValue
-    , udKey
+    -- ** NotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
 
-    -- * UserAction
-    , UserAction
-    , userAction
-    , uaPayload
-    , uaType
+    -- ** Setting
+    Setting (..),
+    newSetting,
 
-    -- * TimelineListResponse
-    , TimelineListResponse
-    , timelineListResponse
-    , tlrNextPageToken
-    , tlrKind
-    , tlrItems
+    -- ** Subscription
+    Subscription (..),
+    newSubscription,
 
-    -- * ContactsListResponse
-    , ContactsListResponse
-    , contactsListResponse
-    , clrKind
-    , clrItems
+    -- ** SubscriptionsListResponse
+    SubscriptionsListResponse (..),
+    newSubscriptionsListResponse,
 
-    -- * MenuValue
-    , MenuValue
-    , menuValue
-    , mvState
-    , mvDisplayName
-    , mvIconURL
+    -- ** TimelineItem
+    TimelineItem (..),
+    newTimelineItem,
 
-    -- * Subscription
-    , Subscription
-    , subscription
-    , subCallbackURL
-    , subOperation
-    , subNotification
-    , subKind
-    , subCollection
-    , subVerifyToken
-    , subUserToken
-    , subId
-    , subUpdated
+    -- ** TimelineListResponse
+    TimelineListResponse (..),
+    newTimelineListResponse,
 
-    -- * TimelineItem
-    , TimelineItem
-    , timelineItem
-    , tiCreator
-    , tiDisplayTime
-    , tiEtag
-    , tiIsDeleted
-    , tiPinScore
-    , tiAttachments
-    , tiLocation
-    , tiMenuItems
-    , tiNotification
-    , tiText
-    , tiKind
-    , tiCreated
-    , tiSpeakableText
-    , tiIsBundleCover
-    , tiSpeakableType
-    , tiBundleId
-    , tiCanonicalURL
-    , tiSelfLink
-    , tiIsPinned
-    , tiSourceItemId
-    , tiId
-    , tiHTML
-    , tiUpdated
-    , tiRecipients
-    , tiTitle
-    , tiInReplyTo
+    -- ** UserAction
+    UserAction (..),
+    newUserAction,
 
-    -- * SubscriptionsListResponse
-    , SubscriptionsListResponse
-    , subscriptionsListResponse
-    , slrKind
-    , slrItems
-    ) where
+    -- ** UserData
+    UserData (..),
+    newUserData,
 
-import Network.Google.Mirror.Types.Product
-import Network.Google.Mirror.Types.Sum
-import Network.Google.Prelude
+    -- ** TimelineListOrderBy
+    TimelineListOrderBy (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
-mirrorService :: ServiceConfig
-mirrorService
-  = defaultService (ServiceId "mirror:v1")
-      "www.googleapis.com"
+import Network.Google.Mirror.Internal.Product
+import Network.Google.Mirror.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View and manage your Glass timeline
-glassTimelineScope :: Proxy '["https://www.googleapis.com/auth/glass.timeline"]
-glassTimelineScope = Proxy
+-- | Default request referring to version @v1@ of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
+mirrorService :: Core.ServiceConfig
+mirrorService =
+  Core.defaultService
+    (Core.ServiceId "mirror:v1")
+    "www.googleapis.com"
 
 -- | View your location
-glassLocationScope :: Proxy '["https://www.googleapis.com/auth/glass.location"]
-glassLocationScope = Proxy
+glassLocationScope :: Core.Proxy '["https://www.googleapis.com/auth/glass.location"]
+glassLocationScope = Core.Proxy
+
+-- | View and manage your Glass timeline
+glassTimelineScope :: Core.Proxy '["https://www.googleapis.com/auth/glass.timeline"]
+glassTimelineScope = Core.Proxy

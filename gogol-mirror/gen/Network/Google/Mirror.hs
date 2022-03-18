@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Mirror
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,331 +30,244 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference>
 module Network.Google.Mirror
-    (
-    -- * Service Configuration
-      mirrorService
+  ( -- * Configuration
+    mirrorService,
 
     -- * OAuth Scopes
-    , glassTimelineScope
-    , glassLocationScope
-
-    -- * API Declaration
-    , MirrorAPI
+    glassLocationScope,
+    glassTimelineScope,
 
     -- * Resources
 
     -- ** mirror.accounts.insert
-    , module Network.Google.Resource.Mirror.Accounts.Insert
+    MirrorAccountsInsertResource,
+    newMirrorAccountsInsert,
+    MirrorAccountsInsert,
 
     -- ** mirror.contacts.delete
-    , module Network.Google.Resource.Mirror.Contacts.Delete
+    MirrorContactsDeleteResource,
+    newMirrorContactsDelete,
+    MirrorContactsDelete,
 
     -- ** mirror.contacts.get
-    , module Network.Google.Resource.Mirror.Contacts.Get
+    MirrorContactsGetResource,
+    newMirrorContactsGet,
+    MirrorContactsGet,
 
     -- ** mirror.contacts.insert
-    , module Network.Google.Resource.Mirror.Contacts.Insert
+    MirrorContactsInsertResource,
+    newMirrorContactsInsert,
+    MirrorContactsInsert,
 
     -- ** mirror.contacts.list
-    , module Network.Google.Resource.Mirror.Contacts.List
+    MirrorContactsListResource,
+    newMirrorContactsList,
+    MirrorContactsList,
 
     -- ** mirror.contacts.patch
-    , module Network.Google.Resource.Mirror.Contacts.Patch
+    MirrorContactsPatchResource,
+    newMirrorContactsPatch,
+    MirrorContactsPatch,
 
     -- ** mirror.contacts.update
-    , module Network.Google.Resource.Mirror.Contacts.Update
+    MirrorContactsUpdateResource,
+    newMirrorContactsUpdate,
+    MirrorContactsUpdate,
 
     -- ** mirror.locations.get
-    , module Network.Google.Resource.Mirror.Locations.Get
+    MirrorLocationsGetResource,
+    newMirrorLocationsGet,
+    MirrorLocationsGet,
 
     -- ** mirror.locations.list
-    , module Network.Google.Resource.Mirror.Locations.List
+    MirrorLocationsListResource,
+    newMirrorLocationsList,
+    MirrorLocationsList,
 
     -- ** mirror.settings.get
-    , module Network.Google.Resource.Mirror.Settings.Get
+    MirrorSettingsGetResource,
+    newMirrorSettingsGet,
+    MirrorSettingsGet,
 
     -- ** mirror.subscriptions.delete
-    , module Network.Google.Resource.Mirror.Subscriptions.Delete
+    MirrorSubscriptionsDeleteResource,
+    newMirrorSubscriptionsDelete,
+    MirrorSubscriptionsDelete,
 
     -- ** mirror.subscriptions.insert
-    , module Network.Google.Resource.Mirror.Subscriptions.Insert
+    MirrorSubscriptionsInsertResource,
+    newMirrorSubscriptionsInsert,
+    MirrorSubscriptionsInsert,
 
     -- ** mirror.subscriptions.list
-    , module Network.Google.Resource.Mirror.Subscriptions.List
+    MirrorSubscriptionsListResource,
+    newMirrorSubscriptionsList,
+    MirrorSubscriptionsList,
 
     -- ** mirror.subscriptions.update
-    , module Network.Google.Resource.Mirror.Subscriptions.Update
+    MirrorSubscriptionsUpdateResource,
+    newMirrorSubscriptionsUpdate,
+    MirrorSubscriptionsUpdate,
 
     -- ** mirror.timeline.attachments.delete
-    , module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
+    MirrorTimelineAttachmentsDeleteResource,
+    newMirrorTimelineAttachmentsDelete,
+    MirrorTimelineAttachmentsDelete,
 
     -- ** mirror.timeline.attachments.get
-    , module Network.Google.Resource.Mirror.Timeline.Attachments.Get
+    MirrorTimelineAttachmentsGetResource,
+    newMirrorTimelineAttachmentsGet,
+    MirrorTimelineAttachmentsGet,
 
     -- ** mirror.timeline.attachments.insert
-    , module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
+    MirrorTimelineAttachmentsInsertResource,
+    newMirrorTimelineAttachmentsInsert,
+    MirrorTimelineAttachmentsInsert,
 
     -- ** mirror.timeline.attachments.list
-    , module Network.Google.Resource.Mirror.Timeline.Attachments.List
+    MirrorTimelineAttachmentsListResource,
+    newMirrorTimelineAttachmentsList,
+    MirrorTimelineAttachmentsList,
 
     -- ** mirror.timeline.delete
-    , module Network.Google.Resource.Mirror.Timeline.Delete
+    MirrorTimelineDeleteResource,
+    newMirrorTimelineDelete,
+    MirrorTimelineDelete,
 
     -- ** mirror.timeline.get
-    , module Network.Google.Resource.Mirror.Timeline.Get
+    MirrorTimelineGetResource,
+    newMirrorTimelineGet,
+    MirrorTimelineGet,
 
     -- ** mirror.timeline.insert
-    , module Network.Google.Resource.Mirror.Timeline.Insert
+    MirrorTimelineInsertResource,
+    newMirrorTimelineInsert,
+    MirrorTimelineInsert,
 
     -- ** mirror.timeline.list
-    , module Network.Google.Resource.Mirror.Timeline.List
+    MirrorTimelineListResource,
+    newMirrorTimelineList,
+    MirrorTimelineList,
 
     -- ** mirror.timeline.patch
-    , module Network.Google.Resource.Mirror.Timeline.Patch
+    MirrorTimelinePatchResource,
+    newMirrorTimelinePatch,
+    MirrorTimelinePatch,
 
     -- ** mirror.timeline.update
-    , module Network.Google.Resource.Mirror.Timeline.Update
+    MirrorTimelineUpdateResource,
+    newMirrorTimelineUpdate,
+    MirrorTimelineUpdate,
 
     -- * Types
 
-    -- ** TimelineListOrderBy
-    , TimelineListOrderBy (..)
-
-    -- ** NotificationConfig
-    , NotificationConfig
-    , notificationConfig
-    , ncDeliveryTime
-    , ncLevel
-
-    -- ** Command
-    , Command
-    , command
-    , cType
-
-    -- ** LocationsListResponse
-    , LocationsListResponse
-    , locationsListResponse
-    , llrKind
-    , llrItems
-
-    -- ** Location
-    , Location
-    , location
-    , lKind
-    , lLatitude
-    , lAddress
-    , lDisplayName
-    , lId
-    , lAccuracy
-    , lLongitude
-    , lTimestamp
-
-    -- ** Notification
-    , Notification
-    , notification
-    , nOperation
-    , nItemId
-    , nCollection
-    , nUserActions
-    , nVerifyToken
-    , nUserToken
-
-    -- ** Contact
-    , Contact
-    , contact
-    , conAcceptCommands
-    , conSharingFeatures
-    , conImageURLs
-    , conPriority
-    , conKind
-    , conAcceptTypes
-    , conPhoneNumber
-    , conDisplayName
-    , conSource
-    , conId
-    , conType
-    , conSpeakableName
-
-    -- ** AuthToken
-    , AuthToken
-    , authToken
-    , atAuthToken
-    , atType
-
-    -- ** AttachmentsListResponse
-    , AttachmentsListResponse
-    , attachmentsListResponse
-    , alrKind
-    , alrItems
-
-    -- ** MenuItem
-    , MenuItem
-    , menuItem
-    , miValues
-    , miRemoveWhenSelected
-    , miAction
-    , miPayload
-    , miContextualCommand
-    , miId
-
-    -- ** Setting
-    , Setting
-    , setting
-    , sKind
-    , sValue
-    , sId
+    -- ** Account
+    Account (..),
+    newAccount,
 
     -- ** Attachment
-    , Attachment
-    , attachment
-    , aContentURL
-    , aId
-    , aIsProcessingContent
-    , aContentType
+    Attachment (..),
+    newAttachment,
 
-    -- ** Account
-    , Account
-    , account
-    , aAuthTokens
-    , aUserData
-    , aPassword
-    , aFeatures
+    -- ** AttachmentsListResponse
+    AttachmentsListResponse (..),
+    newAttachmentsListResponse,
 
-    -- ** UserData
-    , UserData
-    , userData
-    , udValue
-    , udKey
+    -- ** AuthToken
+    AuthToken (..),
+    newAuthToken,
 
-    -- ** UserAction
-    , UserAction
-    , userAction
-    , uaPayload
-    , uaType
+    -- ** Command
+    Command (..),
+    newCommand,
 
-    -- ** TimelineListResponse
-    , TimelineListResponse
-    , timelineListResponse
-    , tlrNextPageToken
-    , tlrKind
-    , tlrItems
+    -- ** Contact
+    Contact (..),
+    newContact,
 
     -- ** ContactsListResponse
-    , ContactsListResponse
-    , contactsListResponse
-    , clrKind
-    , clrItems
+    ContactsListResponse (..),
+    newContactsListResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** LocationsListResponse
+    LocationsListResponse (..),
+    newLocationsListResponse,
+
+    -- ** MenuItem
+    MenuItem (..),
+    newMenuItem,
 
     -- ** MenuValue
-    , MenuValue
-    , menuValue
-    , mvState
-    , mvDisplayName
-    , mvIconURL
+    MenuValue (..),
+    newMenuValue,
+
+    -- ** Notification
+    Notification (..),
+    newNotification,
+
+    -- ** NotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
+
+    -- ** Setting
+    Setting (..),
+    newSetting,
 
     -- ** Subscription
-    , Subscription
-    , subscription
-    , subCallbackURL
-    , subOperation
-    , subNotification
-    , subKind
-    , subCollection
-    , subVerifyToken
-    , subUserToken
-    , subId
-    , subUpdated
-
-    -- ** TimelineItem
-    , TimelineItem
-    , timelineItem
-    , tiCreator
-    , tiDisplayTime
-    , tiEtag
-    , tiIsDeleted
-    , tiPinScore
-    , tiAttachments
-    , tiLocation
-    , tiMenuItems
-    , tiNotification
-    , tiText
-    , tiKind
-    , tiCreated
-    , tiSpeakableText
-    , tiIsBundleCover
-    , tiSpeakableType
-    , tiBundleId
-    , tiCanonicalURL
-    , tiSelfLink
-    , tiIsPinned
-    , tiSourceItemId
-    , tiId
-    , tiHTML
-    , tiUpdated
-    , tiRecipients
-    , tiTitle
-    , tiInReplyTo
+    Subscription (..),
+    newSubscription,
 
     -- ** SubscriptionsListResponse
-    , SubscriptionsListResponse
-    , subscriptionsListResponse
-    , slrKind
-    , slrItems
-    ) where
+    SubscriptionsListResponse (..),
+    newSubscriptionsListResponse,
 
-import Network.Google.Prelude
+    -- ** TimelineItem
+    TimelineItem (..),
+    newTimelineItem,
+
+    -- ** TimelineListResponse
+    TimelineListResponse (..),
+    newTimelineListResponse,
+
+    -- ** UserAction
+    UserAction (..),
+    newUserAction,
+
+    -- ** UserData
+    UserData (..),
+    newUserData,
+
+    -- ** TimelineListOrderBy
+    TimelineListOrderBy (..),
+  )
+where
+
+import Network.Google.Mirror.Accounts.Insert
+import Network.Google.Mirror.Contacts.Delete
+import Network.Google.Mirror.Contacts.Get
+import Network.Google.Mirror.Contacts.Insert
+import Network.Google.Mirror.Contacts.List
+import Network.Google.Mirror.Contacts.Patch
+import Network.Google.Mirror.Contacts.Update
+import Network.Google.Mirror.Locations.Get
+import Network.Google.Mirror.Locations.List
+import Network.Google.Mirror.Settings.Get
+import Network.Google.Mirror.Subscriptions.Delete
+import Network.Google.Mirror.Subscriptions.Insert
+import Network.Google.Mirror.Subscriptions.List
+import Network.Google.Mirror.Subscriptions.Update
+import Network.Google.Mirror.Timeline.Attachments.Delete
+import Network.Google.Mirror.Timeline.Attachments.Get
+import Network.Google.Mirror.Timeline.Attachments.Insert
+import Network.Google.Mirror.Timeline.Attachments.List
+import Network.Google.Mirror.Timeline.Delete
+import Network.Google.Mirror.Timeline.Get
+import Network.Google.Mirror.Timeline.Insert
+import Network.Google.Mirror.Timeline.List
+import Network.Google.Mirror.Timeline.Patch
+import Network.Google.Mirror.Timeline.Update
 import Network.Google.Mirror.Types
-import Network.Google.Resource.Mirror.Accounts.Insert
-import Network.Google.Resource.Mirror.Contacts.Delete
-import Network.Google.Resource.Mirror.Contacts.Get
-import Network.Google.Resource.Mirror.Contacts.Insert
-import Network.Google.Resource.Mirror.Contacts.List
-import Network.Google.Resource.Mirror.Contacts.Patch
-import Network.Google.Resource.Mirror.Contacts.Update
-import Network.Google.Resource.Mirror.Locations.Get
-import Network.Google.Resource.Mirror.Locations.List
-import Network.Google.Resource.Mirror.Settings.Get
-import Network.Google.Resource.Mirror.Subscriptions.Delete
-import Network.Google.Resource.Mirror.Subscriptions.Insert
-import Network.Google.Resource.Mirror.Subscriptions.List
-import Network.Google.Resource.Mirror.Subscriptions.Update
-import Network.Google.Resource.Mirror.Timeline.Attachments.Delete
-import Network.Google.Resource.Mirror.Timeline.Attachments.Get
-import Network.Google.Resource.Mirror.Timeline.Attachments.Insert
-import Network.Google.Resource.Mirror.Timeline.Attachments.List
-import Network.Google.Resource.Mirror.Timeline.Delete
-import Network.Google.Resource.Mirror.Timeline.Get
-import Network.Google.Resource.Mirror.Timeline.Insert
-import Network.Google.Resource.Mirror.Timeline.List
-import Network.Google.Resource.Mirror.Timeline.Patch
-import Network.Google.Resource.Mirror.Timeline.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Mirror API service.
-type MirrorAPI =
-     AccountsInsertResource :<|> SettingsGetResource :<|>
-       SubscriptionsInsertResource
-       :<|> SubscriptionsListResource
-       :<|> SubscriptionsDeleteResource
-       :<|> SubscriptionsUpdateResource
-       :<|> TimelineAttachmentsInsertResource
-       :<|> TimelineAttachmentsListResource
-       :<|> TimelineAttachmentsGetResource
-       :<|> TimelineAttachmentsDeleteResource
-       :<|> TimelineInsertResource
-       :<|> TimelineListResource
-       :<|> TimelinePatchResource
-       :<|> TimelineGetResource
-       :<|> TimelineDeleteResource
-       :<|> TimelineUpdateResource
-       :<|> ContactsInsertResource
-       :<|> ContactsListResource
-       :<|> ContactsPatchResource
-       :<|> ContactsGetResource
-       :<|> ContactsDeleteResource
-       :<|> ContactsUpdateResource
-       :<|> LocationsListResource
-       :<|> LocationsGetResource
