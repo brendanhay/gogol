@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,69 +36,64 @@
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.template.insert@.
 module Gogol.FusionTables.Template.Insert
-  ( -- * Resource
-    FusionTablesTemplateInsertResource,
+    (
+    -- * Resource
+      FusionTablesTemplateInsertResource
 
     -- ** Constructing a Request
-    newFusionTablesTemplateInsert,
-    FusionTablesTemplateInsert,
-  )
-where
+    , newFusionTablesTemplateInsert
+    , FusionTablesTemplateInsert
+    ) where
 
-import Gogol.FusionTables.Types
 import qualified Gogol.Prelude as Core
+import Gogol.FusionTables.Types
 
 -- | A resource alias for @fusiontables.template.insert@ method which the
 -- 'FusionTablesTemplateInsert' request conforms to.
 type FusionTablesTemplateInsertResource =
-  "fusiontables"
-    Core.:> "v2"
-    Core.:> "tables"
-    Core.:> Core.Capture "tableId" Core.Text
-    Core.:> "templates"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Template
-    Core.:> Core.Post '[Core.JSON] Template
+     "fusiontables" Core.:>
+       "v2" Core.:>
+         "tables" Core.:>
+           Core.Capture "tableId" Core.Text Core.:>
+             "templates" Core.:>
+               Core.QueryParam "alt" Core.AltJSON Core.:>
+                 Core.ReqBody '[Core.JSON] Template Core.:>
+                   Core.Post '[Core.JSON] Template
 
 -- | Creates a new template for the table.
 --
 -- /See:/ 'newFusionTablesTemplateInsert' smart constructor.
 data FusionTablesTemplateInsert = FusionTablesTemplateInsert
-  { -- | Multipart request metadata.
-    payload :: Template,
-    -- | Table for which a new template is being created
-    tableId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: Template
+      -- | Table for which a new template is being created
+    , tableId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FusionTablesTemplateInsert' with the minimum fields required to make a request.
-newFusionTablesTemplateInsert ::
-  -- |  Multipart request metadata. See 'payload'.
-  Template ->
-  -- |  Table for which a new template is being created See 'tableId'.
-  Core.Text ->
-  FusionTablesTemplateInsert
+newFusionTablesTemplateInsert 
+    ::  Template
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  Table for which a new template is being created See 'tableId'.
+    -> FusionTablesTemplateInsert
 newFusionTablesTemplateInsert payload tableId =
   FusionTablesTemplateInsert {payload = payload, tableId = tableId}
 
-instance
-  Core.GoogleRequest
-    FusionTablesTemplateInsert
-  where
-  type Rs FusionTablesTemplateInsert = Template
-  type
-    Scopes FusionTablesTemplateInsert =
-      '["https://www.googleapis.com/auth/fusiontables"]
-  requestClient FusionTablesTemplateInsert {..} =
-    go
-      tableId
-      (Core.Just Core.AltJSON)
-      payload
-      fusionTablesService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTemplateInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           FusionTablesTemplateInsert
+         where
+        type Rs FusionTablesTemplateInsert = Template
+        type Scopes FusionTablesTemplateInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient FusionTablesTemplateInsert{..}
+          = go tableId (Core.Just Core.AltJSON) payload
+              fusionTablesService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy FusionTablesTemplateInsertResource)
+                      Core.mempty
+

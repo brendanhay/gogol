@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,66 +36,63 @@
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.task.delete@.
 module Gogol.FusionTables.Task.Delete
-  ( -- * Resource
-    FusionTablesTaskDeleteResource,
+    (
+    -- * Resource
+      FusionTablesTaskDeleteResource
 
     -- ** Constructing a Request
-    newFusionTablesTaskDelete,
-    FusionTablesTaskDelete,
-  )
-where
+    , newFusionTablesTaskDelete
+    , FusionTablesTaskDelete
+    ) where
 
-import Gogol.FusionTables.Types
 import qualified Gogol.Prelude as Core
+import Gogol.FusionTables.Types
 
 -- | A resource alias for @fusiontables.task.delete@ method which the
 -- 'FusionTablesTaskDelete' request conforms to.
 type FusionTablesTaskDeleteResource =
-  "fusiontables"
-    Core.:> "v2"
-    Core.:> "tables"
-    Core.:> Core.Capture "tableId" Core.Text
-    Core.:> "tasks"
-    Core.:> Core.Capture "taskId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+     "fusiontables" Core.:>
+       "v2" Core.:>
+         "tables" Core.:>
+           Core.Capture "tableId" Core.Text Core.:>
+             "tasks" Core.:>
+               Core.Capture "taskId" Core.Text Core.:>
+                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                   Core.Delete '[Core.JSON] ()
 
 -- | Deletes a specific task by its ID, unless that task has already started running.
 --
 -- /See:/ 'newFusionTablesTaskDelete' smart constructor.
 data FusionTablesTaskDelete = FusionTablesTaskDelete
-  { -- | Table from which the task is being deleted.
-    tableId :: Core.Text,
-    -- | The identifier of the task to delete.
-    taskId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Table from which the task is being deleted.
+      tableId :: Core.Text
+      -- | The identifier of the task to delete.
+    , taskId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FusionTablesTaskDelete' with the minimum fields required to make a request.
-newFusionTablesTaskDelete ::
-  -- |  Table from which the task is being deleted. See 'tableId'.
-  Core.Text ->
-  -- |  The identifier of the task to delete. See 'taskId'.
-  Core.Text ->
-  FusionTablesTaskDelete
+newFusionTablesTaskDelete 
+    ::  Core.Text
+       -- ^  Table from which the task is being deleted. See 'tableId'.
+    -> Core.Text
+       -- ^  The identifier of the task to delete. See 'taskId'.
+    -> FusionTablesTaskDelete
 newFusionTablesTaskDelete tableId taskId =
   FusionTablesTaskDelete {tableId = tableId, taskId = taskId}
 
-instance Core.GoogleRequest FusionTablesTaskDelete where
-  type Rs FusionTablesTaskDelete = ()
-  type
-    Scopes FusionTablesTaskDelete =
-      '["https://www.googleapis.com/auth/fusiontables"]
-  requestClient FusionTablesTaskDelete {..} =
-    go
-      tableId
-      taskId
-      (Core.Just Core.AltJSON)
-      fusionTablesService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTaskDeleteResource
-          )
-          Core.mempty
+instance Core.GoogleRequest FusionTablesTaskDelete
+         where
+        type Rs FusionTablesTaskDelete = ()
+        type Scopes FusionTablesTaskDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient FusionTablesTaskDelete{..}
+          = go tableId taskId (Core.Just Core.AltJSON)
+              fusionTablesService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy FusionTablesTaskDeleteResource)
+                      Core.mempty
+
