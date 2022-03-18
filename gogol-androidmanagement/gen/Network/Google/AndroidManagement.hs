@@ -1,1125 +1,779 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AndroidManagement
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Android Management API provides remote enterprise management of
--- Android devices and apps.
+-- The Android Management API provides remote enterprise management of Android devices and apps.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference>
 module Network.Google.AndroidManagement
-    (
-    -- * Service Configuration
-      androidManagementService
+  ( -- * Configuration
+    androidManagementService,
 
     -- * OAuth Scopes
-    , androidManagementScope
-
-    -- * API Declaration
-    , AndroidManagementAPI
+    androidManagementScope,
 
     -- * Resources
 
     -- ** androidmanagement.enterprises.applications.get
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Applications.Get
+    AndroidManagementEnterprisesApplicationsGetResource,
+    newAndroidManagementEnterprisesApplicationsGet,
+    AndroidManagementEnterprisesApplicationsGet,
 
     -- ** androidmanagement.enterprises.create
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Create
+    AndroidManagementEnterprisesCreateResource,
+    newAndroidManagementEnterprisesCreate,
+    AndroidManagementEnterprisesCreate,
 
     -- ** androidmanagement.enterprises.delete
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Delete
+    AndroidManagementEnterprisesDeleteResource,
+    newAndroidManagementEnterprisesDelete,
+    AndroidManagementEnterprisesDelete,
 
     -- ** androidmanagement.enterprises.devices.delete
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Delete
+    AndroidManagementEnterprisesDevicesDeleteResource,
+    newAndroidManagementEnterprisesDevicesDelete,
+    AndroidManagementEnterprisesDevicesDelete,
 
     -- ** androidmanagement.enterprises.devices.get
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Get
+    AndroidManagementEnterprisesDevicesGetResource,
+    newAndroidManagementEnterprisesDevicesGet,
+    AndroidManagementEnterprisesDevicesGet,
 
     -- ** androidmanagement.enterprises.devices.issueCommand
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.IssueCommand
+    AndroidManagementEnterprisesDevicesIssueCommandResource,
+    newAndroidManagementEnterprisesDevicesIssueCommand,
+    AndroidManagementEnterprisesDevicesIssueCommand,
 
     -- ** androidmanagement.enterprises.devices.list
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.List
+    AndroidManagementEnterprisesDevicesListResource,
+    newAndroidManagementEnterprisesDevicesList,
+    AndroidManagementEnterprisesDevicesList,
 
     -- ** androidmanagement.enterprises.devices.operations.cancel
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Cancel
+    AndroidManagementEnterprisesDevicesOperationsCancelResource,
+    newAndroidManagementEnterprisesDevicesOperationsCancel,
+    AndroidManagementEnterprisesDevicesOperationsCancel,
 
     -- ** androidmanagement.enterprises.devices.operations.delete
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Delete
+    AndroidManagementEnterprisesDevicesOperationsDeleteResource,
+    newAndroidManagementEnterprisesDevicesOperationsDelete,
+    AndroidManagementEnterprisesDevicesOperationsDelete,
 
     -- ** androidmanagement.enterprises.devices.operations.get
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Get
+    AndroidManagementEnterprisesDevicesOperationsGetResource,
+    newAndroidManagementEnterprisesDevicesOperationsGet,
+    AndroidManagementEnterprisesDevicesOperationsGet,
 
     -- ** androidmanagement.enterprises.devices.operations.list
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.List
+    AndroidManagementEnterprisesDevicesOperationsListResource,
+    newAndroidManagementEnterprisesDevicesOperationsList,
+    AndroidManagementEnterprisesDevicesOperationsList,
 
     -- ** androidmanagement.enterprises.devices.patch
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Patch
+    AndroidManagementEnterprisesDevicesPatchResource,
+    newAndroidManagementEnterprisesDevicesPatch,
+    AndroidManagementEnterprisesDevicesPatch,
 
     -- ** androidmanagement.enterprises.enrollmentTokens.create
-    , module Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Create
+    AndroidManagementEnterprisesEnrollmentTokensCreateResource,
+    newAndroidManagementEnterprisesEnrollmentTokensCreate,
+    AndroidManagementEnterprisesEnrollmentTokensCreate,
 
     -- ** androidmanagement.enterprises.enrollmentTokens.delete
-    , module Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Delete
+    AndroidManagementEnterprisesEnrollmentTokensDeleteResource,
+    newAndroidManagementEnterprisesEnrollmentTokensDelete,
+    AndroidManagementEnterprisesEnrollmentTokensDelete,
 
     -- ** androidmanagement.enterprises.get
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Get
+    AndroidManagementEnterprisesGetResource,
+    newAndroidManagementEnterprisesGet,
+    AndroidManagementEnterprisesGet,
 
     -- ** androidmanagement.enterprises.list
-    , module Network.Google.Resource.AndroidManagement.Enterprises.List
+    AndroidManagementEnterprisesListResource,
+    newAndroidManagementEnterprisesList,
+    AndroidManagementEnterprisesList,
 
     -- ** androidmanagement.enterprises.patch
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Patch
+    AndroidManagementEnterprisesPatchResource,
+    newAndroidManagementEnterprisesPatch,
+    AndroidManagementEnterprisesPatch,
 
     -- ** androidmanagement.enterprises.policies.delete
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Policies.Delete
+    AndroidManagementEnterprisesPoliciesDeleteResource,
+    newAndroidManagementEnterprisesPoliciesDelete,
+    AndroidManagementEnterprisesPoliciesDelete,
 
     -- ** androidmanagement.enterprises.policies.get
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Policies.Get
+    AndroidManagementEnterprisesPoliciesGetResource,
+    newAndroidManagementEnterprisesPoliciesGet,
+    AndroidManagementEnterprisesPoliciesGet,
 
     -- ** androidmanagement.enterprises.policies.list
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Policies.List
+    AndroidManagementEnterprisesPoliciesListResource,
+    newAndroidManagementEnterprisesPoliciesList,
+    AndroidManagementEnterprisesPoliciesList,
 
     -- ** androidmanagement.enterprises.policies.patch
-    , module Network.Google.Resource.AndroidManagement.Enterprises.Policies.Patch
+    AndroidManagementEnterprisesPoliciesPatchResource,
+    newAndroidManagementEnterprisesPoliciesPatch,
+    AndroidManagementEnterprisesPoliciesPatch,
 
     -- ** androidmanagement.enterprises.webApps.create
-    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Create
+    AndroidManagementEnterprisesWebAppsCreateResource,
+    newAndroidManagementEnterprisesWebAppsCreate,
+    AndroidManagementEnterprisesWebAppsCreate,
 
     -- ** androidmanagement.enterprises.webApps.delete
-    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Delete
+    AndroidManagementEnterprisesWebAppsDeleteResource,
+    newAndroidManagementEnterprisesWebAppsDelete,
+    AndroidManagementEnterprisesWebAppsDelete,
 
     -- ** androidmanagement.enterprises.webApps.get
-    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Get
+    AndroidManagementEnterprisesWebAppsGetResource,
+    newAndroidManagementEnterprisesWebAppsGet,
+    AndroidManagementEnterprisesWebAppsGet,
 
     -- ** androidmanagement.enterprises.webApps.list
-    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.List
+    AndroidManagementEnterprisesWebAppsListResource,
+    newAndroidManagementEnterprisesWebAppsList,
+    AndroidManagementEnterprisesWebAppsList,
 
     -- ** androidmanagement.enterprises.webApps.patch
-    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Patch
+    AndroidManagementEnterprisesWebAppsPatchResource,
+    newAndroidManagementEnterprisesWebAppsPatch,
+    AndroidManagementEnterprisesWebAppsPatch,
 
     -- ** androidmanagement.enterprises.webTokens.create
-    , module Network.Google.Resource.AndroidManagement.Enterprises.WebTokens.Create
+    AndroidManagementEnterprisesWebTokensCreateResource,
+    newAndroidManagementEnterprisesWebTokensCreate,
+    AndroidManagementEnterprisesWebTokensCreate,
 
     -- ** androidmanagement.signupUrls.create
-    , module Network.Google.Resource.AndroidManagement.SignupURLs.Create
+    AndroidManagementSignupUrlsCreateResource,
+    newAndroidManagementSignupUrlsCreate,
+    AndroidManagementSignupUrlsCreate,
 
     -- * Types
 
-    -- ** KioskCustomizationPowerButtonActions
-    , KioskCustomizationPowerButtonActions (..)
-
-    -- ** PowerManagementEventEventType
-    , PowerManagementEventEventType (..)
-
-    -- ** KioskCustomizationSystemErrorWarnings
-    , KioskCustomizationSystemErrorWarnings (..)
-
-    -- ** AdvancedSecurityOverridesDeveloperSettings
-    , AdvancedSecurityOverridesDeveloperSettings (..)
-
-    -- ** WebTokenEnabledFeaturesItem
-    , WebTokenEnabledFeaturesItem (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** SystemUpdateType
-    , SystemUpdateType (..)
-
-    -- ** SystemUpdateInfoUpdateStatus
-    , SystemUpdateInfoUpdateStatus (..)
-
-    -- ** ApplicationPolicyAutoUpdateMode
-    , ApplicationPolicyAutoUpdateMode (..)
-
-    -- ** ListPoliciesResponse
-    , ListPoliciesResponse
-    , listPoliciesResponse
-    , lprNextPageToken
-    , lprPolicies
-
-    -- ** MemoryInfo
-    , MemoryInfo
-    , memoryInfo
-    , miTotalInternalStorage
-    , miTotalRam
-
-    -- ** DeviceState
-    , DeviceState (..)
-
-    -- ** PackageNameList
-    , PackageNameList
-    , packageNameList
-    , pnlPackageNames
-
-    -- ** Command
-    , Command
-    , command
-    , cResetPasswordFlags
-    , cNewPassword
-    , cUserName
-    , cErrorCode
-    , cType
-    , cDuration
-    , cCreateTime
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** Display
-    , Display
-    , display
-    , dHeight
-    , dState
-    , dWidth
-    , dName
-    , dRefreshRate
-    , dDisplayId
-    , dDensity
-
-    -- ** AlwaysOnVPNPackage
-    , AlwaysOnVPNPackage
-    , alwaysOnVPNPackage
-    , aovpLockdownEnabled
-    , aovpPackageName
-
-    -- ** PolicyOpenNetworkConfiguration
-    , PolicyOpenNetworkConfiguration
-    , policyOpenNetworkConfiguration
-    , poncAddtional
-
-    -- ** LaunchAppAction
-    , LaunchAppAction
-    , launchAppAction
-    , laaPackageName
-
-    -- ** CommandErrorCode
-    , CommandErrorCode (..)
-
-    -- ** CommonCriteriaModeInfoCommonCriteriaModeStatus
-    , CommonCriteriaModeInfoCommonCriteriaModeStatus (..)
-
-    -- ** PolicyAndroidDevicePolicyTracksItem
-    , PolicyAndroidDevicePolicyTracksItem (..)
-
-    -- ** PolicyEnforcementRule
-    , PolicyEnforcementRule
-    , policyEnforcementRule
-    , perWipeAction
-    , perSettingName
-    , perBlockAction
-
-    -- ** HardwareStatus
-    , HardwareStatus
-    , hardwareStatus
-    , hsCPUTemperatures
-    , hsBatteryTemperatures
-    , hsGpuTemperatures
-    , hsFanSpeeds
-    , hsSkinTemperatures
-    , hsCPUUsages
-    , hsCreateTime
-
-    -- ** Application
-    , Application
-    , application
-    , aAppTracks
-    , aManagedProperties
-    , aName
-    , aPermissions
-    , aTitle
-
-    -- ** PersonalApplicationPolicy
-    , PersonalApplicationPolicy
-    , personalApplicationPolicy
-    , papPackageName
-    , papInstallType
-
-    -- ** ManagedProperty
-    , ManagedProperty
-    , managedProperty
-    , mpEntries
-    , mpNestedProperties
-    , mpKey
-    , mpDefaultValue
-    , mpTitle
-    , mpType
-    , mpDescription
-
-    -- ** ProxyInfo
-    , ProxyInfo
-    , proxyInfo
-    , piPacURI
-    , piHost
-    , piExcludedHosts
-    , piPort
-
-    -- ** KioskCustomizationStatusBar
-    , KioskCustomizationStatusBar (..)
-
-    -- ** PermissionGrantPolicy
-    , PermissionGrantPolicy (..)
-
-    -- ** ApplicationPolicyDelegatedScopesItem
-    , ApplicationPolicyDelegatedScopesItem (..)
-
-    -- ** PersistentPreferredActivity
-    , PersistentPreferredActivity
-    , persistentPreferredActivity
-    , ppaActions
-    , ppaCategories
-    , ppaReceiverActivity
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** ExternalData
-    , ExternalData
-    , externalData
-    , edURL
-    , edSha256Hash
-
-    -- ** DisplayState
-    , DisplayState (..)
-
-    -- ** APILevelCondition
-    , APILevelCondition
-    , apiLevelCondition
-    , alcMinAPILevel
-
-    -- ** IssueCommandResponse
-    , IssueCommandResponse
-    , issueCommandResponse
-
-    -- ** DeviceSettings
-    , DeviceSettings
-    , deviceSettings
-    , dsIsEncrypted
-    , dsAdbEnabled
-    , dsIsDeviceSecure
-    , dsVerifyAppsEnabled
-    , dsDevelopmentSettingsEnabled
-    , dsEncryptionStatus
-    , dsUnknownSourcesEnabled
-
-    -- ** WipeAction
-    , WipeAction
-    , wipeAction
-    , waWipeAfterDays
-    , waPreserveFrp
-
-    -- ** PolicyPlayStoreMode
-    , PolicyPlayStoreMode (..)
-
-    -- ** ManagedConfigurationTemplateConfigurationVariables
-    , ManagedConfigurationTemplateConfigurationVariables
-    , managedConfigurationTemplateConfigurationVariables
-    , mctcvAddtional
-
-    -- ** DeviceManagementMode
-    , DeviceManagementMode (..)
-
-    -- ** HardwareInfo
-    , HardwareInfo
-    , hardwareInfo
-    , hiCPUThrottlingTemperatures
-    , hiManufacturer
-    , hiBrand
-    , hiCPUShutdownTemperatures
-    , hiBatteryThrottlingTemperatures
-    , hiModel
-    , hiBatteryShutdownTemperatures
-    , hiSkinThrottlingTemperatures
-    , hiGpuShutdownTemperatures
-    , hiGpuThrottlingTemperatures
-    , hiSkinShutdownTemperatures
-    , hiSerialNumber
-    , hiDeviceBasebandVersion
-    , hiHardware
-
-    -- ** Device
-    , Device
-    , device
-    , devMemoryInfo
-    , devPolicyCompliant
-    , devApplicationReports
-    , devPolicyName
-    , devState
-    , devAppliedPolicyName
-    , devLastStatusReportTime
-    , devDeviceSettings
-    , devEnrollmentTokenName
-    , devManagementMode
-    , devHardwareInfo
-    , devPowerManagementEvents
-    , devCommonCriteriaModeInfo
-    , devUserName
-    , devMemoryEvents
-    , devAPILevel
-    , devUser
-    , devDisabledReason
-    , devSystemProperties
-    , devLastPolicyComplianceReportTime
-    , devAppliedPasswordPolicies
-    , devSecurityPosture
-    , devEnrollmentTokenData
-    , devName
-    , devAppliedPolicyVersion
-    , devHardwareStatusSamples
-    , devAppliedState
-    , devPreviousDeviceNames
-    , devLastPolicySyncTime
-    , devNetworkInfo
-    , devNonComplianceDetails
-    , devOwnership
-    , devSoftwareInfo
-    , devEnrollmentTime
-    , devDisplays
-
-    -- ** WebAppDisplayMode
-    , WebAppDisplayMode (..)
-
-    -- ** ContentProviderEndpoint
-    , ContentProviderEndpoint
-    , contentProviderEndpoint
-    , cpePackageName
-    , cpeSigningCertsSha256
-    , cpeURI
-
-    -- ** AdvancedSecurityOverridesUntrustedAppsPolicy
-    , AdvancedSecurityOverridesUntrustedAppsPolicy (..)
-
-    -- ** ApplicationReportApplicationSource
-    , ApplicationReportApplicationSource (..)
-
-    -- ** PersonalUsagePolicies
-    , PersonalUsagePolicies
-    , personalUsagePolicies
-    , pupMaxDaysWithWorkOff
-    , pupPersonalPlayStoreMode
-    , pupScreenCaptureDisabled
-    , pupPersonalApplications
-    , pupAccountTypesWithManagementDisabled
-    , pupCameraDisabled
-
-    -- ** EnrollmentTokenAllowPersonalUsage
-    , EnrollmentTokenAllowPersonalUsage (..)
-
-    -- ** EnterpriseEnabledNotificationTypesItem
-    , EnterpriseEnabledNotificationTypesItem (..)
-
-    -- ** PostureDetail
-    , PostureDetail
-    , postureDetail
-    , pdAdvice
-    , pdSecurityRisk
-
-    -- ** PolicyAutoDateAndTimeZone
-    , PolicyAutoDateAndTimeZone (..)
-
-    -- ** CommonCriteriaModeInfo
-    , CommonCriteriaModeInfo
-    , commonCriteriaModeInfo
-    , ccmiCommonCriteriaModeStatus
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** ApplicationPolicyInstallType
-    , ApplicationPolicyInstallType (..)
-
-    -- ** NonComplianceDetailInstallationFailureReason
-    , NonComplianceDetailInstallationFailureReason (..)
-
-    -- ** PasswordRequirementsPasswordScope
-    , PasswordRequirementsPasswordScope (..)
-
-    -- ** OncCertificateProvider
-    , OncCertificateProvider
-    , oncCertificateProvider
-    , ocpContentProviderEndpoint
-    , ocpCertificateReferences
-
-    -- ** ManagedPropertyEntry
-    , ManagedPropertyEntry
-    , managedPropertyEntry
-    , mpeValue
-    , mpeName
-
-    -- ** DeviceSettingsEncryptionStatus
-    , DeviceSettingsEncryptionStatus (..)
-
-    -- ** FreezePeriod
-    , FreezePeriod
-    , freezePeriod
-    , fpEndDate
-    , fpStartDate
-
-    -- ** PolicyLocationMode
-    , PolicyLocationMode (..)
-
-    -- ** TelephonyInfo
-    , TelephonyInfo
-    , telephonyInfo
-    , tiPhoneNumber
-    , tiCarrierName
-
-    -- ** EnterprisesListView
-    , EnterprisesListView (..)
-
-    -- ** ChoosePrivateKeyRule
-    , ChoosePrivateKeyRule
-    , choosePrivateKeyRule
-    , cpkrPrivateKeyAlias
-    , cpkrURLPattern
-    , cpkrPackageNames
-
-    -- ** UserFacingMessageLocalizedMessages
-    , UserFacingMessageLocalizedMessages
-    , userFacingMessageLocalizedMessages
-    , ufmlmAddtional
-
-    -- ** SigninDetailAllowPersonalUsage
-    , SigninDetailAllowPersonalUsage (..)
-
-    -- ** User
-    , User
-    , user
-    , uAccountIdentifier
-
-    -- ** Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- ** SecurityPosture
-    , SecurityPosture
-    , securityPosture
-    , spPostureDetails
-    , spDevicePosture
-
-    -- ** AdvancedSecurityOverridesGooglePlayProtectVerifyApps
-    , AdvancedSecurityOverridesGooglePlayProtectVerifyApps (..)
-
-    -- ** SystemUpdate
-    , SystemUpdate
-    , systemUpdate
-    , suFreezePeriods
-    , suEndMinutes
-    , suStartMinutes
-    , suType
-
-    -- ** BlockActionBlockScope
-    , BlockActionBlockScope (..)
-
-    -- ** DeviceSystemProperties
-    , DeviceSystemProperties
-    , deviceSystemProperties
-    , dspAddtional
-
-    -- ** ApplicationReport
-    , ApplicationReport
-    , applicationReport
-    , arVersionCode
-    , arSigningKeyCertFingerprints
-    , arState
-    , arVersionName
-    , arPackageName
-    , arPackageSha256Hash
-    , arKeyedAppStates
-    , arApplicationSource
-    , arEvents
-    , arDisplayName
-    , arInstallerPackageName
-
-    -- ** PolicyAppAutoUpdatePolicy
-    , PolicyAppAutoUpdatePolicy (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AdvancedSecurityOverrides
-    , AdvancedSecurityOverrides
-    , advancedSecurityOverrides
-    , asoUntrustedAppsPolicy
-    , asoCommonCriteriaMode
-    , asoDeveloperSettings
-    , asoGooglePlayProtectVerifyApps
+    AdvancedSecurityOverrides (..),
+    newAdvancedSecurityOverrides,
 
-    -- ** CommandResetPasswordFlagsItem
-    , CommandResetPasswordFlagsItem (..)
+    -- ** AdvancedSecurityOverrides_CommonCriteriaMode
+    AdvancedSecurityOverrides_CommonCriteriaMode (..),
 
-    -- ** EnrollmentToken
-    , EnrollmentToken
-    , enrollmentToken
-    , etPolicyName
-    , etValue
-    , etQrCode
-    , etAdditionalData
-    , etUser
-    , etAllowPersonalUsage
-    , etName
-    , etOneTimeOnly
-    , etExpirationTimestamp
-    , etDuration
+    -- ** AdvancedSecurityOverrides_DeveloperSettings
+    AdvancedSecurityOverrides_DeveloperSettings (..),
 
-    -- ** ListEnterprisesResponse
-    , ListEnterprisesResponse
-    , listEnterprisesResponse
-    , lerNextPageToken
-    , lerEnterprises
+    -- ** AdvancedSecurityOverrides_GooglePlayProtectVerifyApps
+    AdvancedSecurityOverrides_GooglePlayProtectVerifyApps (..),
 
-    -- ** ApplicationPolicyManagedConfiguration
-    , ApplicationPolicyManagedConfiguration
-    , applicationPolicyManagedConfiguration
-    , apmcAddtional
+    -- ** AdvancedSecurityOverrides_UntrustedAppsPolicy
+    AdvancedSecurityOverrides_UntrustedAppsPolicy (..),
 
-    -- ** BlockAction
-    , BlockAction
-    , blockAction
-    , baBlockScope
-    , baBlockAfterDays
+    -- ** AlwaysOnVpnPackage
+    AlwaysOnVpnPackage (..),
+    newAlwaysOnVpnPackage,
 
-    -- ** PolicyEncryptionPolicy
-    , PolicyEncryptionPolicy (..)
-
-    -- ** StatusReportingSettings
-    , StatusReportingSettings
-    , statusReportingSettings
-    , srsSoftwareInfoEnabled
-    , srsHardwareStatusEnabled
-    , srsPowerManagementEventsEnabled
-    , srsDisplayInfoEnabled
-    , srsApplicationReportsEnabled
-    , srsMemoryInfoEnabled
-    , srsNetworkInfoEnabled
-    , srsDeviceSettingsEnabled
-    , srsCommonCriteriaModeEnabled
-    , srsSystemPropertiesEnabled
-    , srsApplicationReportingSettings
-
-    -- ** KioskCustomizationSystemNavigation
-    , KioskCustomizationSystemNavigation (..)
-
-    -- ** CommandType
-    , CommandType (..)
-
-    -- ** SystemUpdateInfo
-    , SystemUpdateInfo
-    , systemUpdateInfo
-    , suiUpdateStatus
-    , suiUpdateReceivedTime
-
-    -- ** ApplicationPolicyDefaultPermissionPolicy
-    , ApplicationPolicyDefaultPermissionPolicy (..)
-
-    -- ** WebAppIcon
-    , WebAppIcon
-    , webAppIcon
-    , waiImageData
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** AdvancedSecurityOverridesCommonCriteriaMode
-    , AdvancedSecurityOverridesCommonCriteriaMode (..)
-
-    -- ** ApplicationPolicy
-    , ApplicationPolicy
-    , applicationPolicy
-    , apAccessibleTrackIds
-    , apDelegatedScopes
-    , apPackageName
-    , apManagedConfiguration
-    , apDefaultPermissionPolicy
-    , apDisabled
-    , apLockTaskAllowed
-    , apPermissionGrants
-    , apConnectedWorkAndPersonalApp
-    , apManagedConfigurationTemplate
-    , apAutoUpdateMode
-    , apMinimumVersionCode
-    , apInstallType
-
-    -- ** ManagedPropertyType
-    , ManagedPropertyType (..)
-
-    -- ** DeviceAppliedState
-    , DeviceAppliedState (..)
-
-    -- ** ApplicationEventEventType
-    , ApplicationEventEventType (..)
-
-    -- ** ListDevicesResponse
-    , ListDevicesResponse
-    , listDevicesResponse
-    , ldrNextPageToken
-    , ldrDevices
-
-    -- ** ManagedConfigurationTemplate
-    , ManagedConfigurationTemplate
-    , managedConfigurationTemplate
-    , mctTemplateId
-    , mctConfigurationVariables
-
-    -- ** KioskCustomizationDeviceSettings
-    , KioskCustomizationDeviceSettings (..)
-
-    -- ** NonComplianceDetailNonComplianceReason
-    , NonComplianceDetailNonComplianceReason (..)
-
-    -- ** Enterprise
-    , Enterprise
-    , enterprise
-    , eAppAutoApprovalEnabled
-    , eEnabledNotificationTypes
-    , eSigninDetails
-    , eName
-    , ePubsubTopic
-    , eEnterpriseDisplayName
-    , eLogo
-    , eTermsAndConditions
-    , eContactInfo
-    , ePrimaryColor
-
-    -- ** MemoryEvent
-    , MemoryEvent
-    , memoryEvent
-    , meByteCount
-    , meEventType
-    , meCreateTime
-
-    -- ** PermissionGrant
-    , PermissionGrant
-    , permissionGrant
-    , pgPolicy
-    , pgPermission
-
-    -- ** SigninDetail
-    , SigninDetail
-    , signinDetail
-    , sdSigninURL
-    , sdQrCode
-    , sdAllowPersonalUsage
-    , sdSigninEnrollmentToken
-
-    -- ** SignupURL
-    , SignupURL
-    , signupURL
-    , suURL
-    , suName
-
-    -- ** PolicyDefaultPermissionPolicy
-    , PolicyDefaultPermissionPolicy (..)
+    -- ** ApiLevelCondition
+    ApiLevelCondition (..),
+    newApiLevelCondition,
 
     -- ** AppTrackInfo
-    , AppTrackInfo
-    , appTrackInfo
-    , atiTrackAlias
-    , atiTrackId
+    AppTrackInfo (..),
+    newAppTrackInfo,
 
-    -- ** NetworkInfo
-    , NetworkInfo
-    , networkInfo
-    , niTelephonyInfos
-    , niNetworkOperatorName
-    , niMeid
-    , niImei
-    , niWifiMACAddress
+    -- ** AppVersion
+    AppVersion (..),
+    newAppVersion,
 
-    -- ** EnterprisesDevicesDeleteWipeDataFlags
-    , EnterprisesDevicesDeleteWipeDataFlags (..)
+    -- ** Application
+    Application (..),
+    newApplication,
 
-    -- ** PolicyKeyguardDisabledFeaturesItem
-    , PolicyKeyguardDisabledFeaturesItem (..)
+    -- ** Application_AppPricing
+    Application_AppPricing (..),
 
-    -- ** PowerManagementEvent
-    , PowerManagementEvent
-    , powerManagementEvent
-    , pmeBatteryLevel
-    , pmeEventType
-    , pmeCreateTime
+    -- ** Application_ContentRating
+    Application_ContentRating (..),
 
-    -- ** Policy
-    , Policy
-    , policy
-    , pBluetoothConfigDisabled
-    , pUnmuteMicrophoneDisabled
-    , pMountPhysicalMediaDisabled
-    , pFrpAdminEmails
-    , pAppAutoUpdatePolicy
-    , pEncryptionPolicy
-    , pAndroidDevicePolicyTracks
-    , pSafeBootDisabled
-    , pAlwaysOnVPNPackage
-    , pChoosePrivateKeyRules
-    , pCredentialsConfigDisabled
-    , pRecommendedGlobalProxy
-    , pPermittedAccessibilityServices
-    , pKeyguardDisabled
-    , pOncCertificateProviders
-    , pSkipFirstUseHintsEnabled
-    , pAdjustVolumeDisabled
-    , pDefaultPermissionPolicy
-    , pUninstallAppsDisabled
-    , pSetUserIconDisabled
-    , pPermittedInputMethods
-    , pMinimumAPILevel
-    , pScreenCaptureDisabled
-    , pAddUserDisabled
-    , pShareLocationDisabled
-    , pAutoTimeRequired
-    , pInstallAppsDisabled
-    , pCreateWindowsDisabled
-    , pNetworkResetDisabled
-    , pPersonalUsagePolicies
-    , pBluetoothContactSharingDisabled
-    , pPermissionGrants
-    , pShortSupportMessage
-    , pStayOnPluggedModes
-    , pDataRoamingDisabled
-    , pDebuggingFeaturesAllowed
-    , pKioskCustomLauncherEnabled
-    , pWifiConfigsLockdownEnabled
-    , pUsbMassStorageEnabled
-    , pNetworkEscapeHatchEnabled
-    , pSystemUpdate
-    , pInstallUnknownSourcesAllowed
-    , pName
-    , pPrivateKeySelectionEnabled
-    , pAdvancedSecurityOverrides
-    , pOutgoingCallsDisabled
-    , pStatusReportingSettings
-    , pRemoveUserDisabled
-    , pMobileNetworksConfigDisabled
-    , pVersion
-    , pEnsureVerifyAppsEnabled
-    , pSetWallpaperDisabled
-    , pVPNConfigDisabled
-    , pSetupActions
-    , pOpenNetworkConfiguration
-    , pModifyAccountsDisabled
-    , pBlockApplicationsEnabled
-    , pKeyguardDisabledFeatures
-    , pFunDisabled
-    , pSmsDisabled
-    , pMaximumTimeToLock
-    , pOutgoingBeamDisabled
-    , pStatusBarDisabled
-    , pCellBroadcastsConfigDisabled
-    , pDeviceOwnerLockScreenInfo
-    , pPlayStoreMode
-    , pKioskCustomization
-    , pComplianceRules
-    , pTetheringConfigDisabled
-    , pAccountTypesWithManagementDisabled
-    , pWifiConfigDisabled
-    , pPersistentPreferredActivities
-    , pPasswordRequirements
-    , pAutoDateAndTimeZone
-    , pLongSupportMessage
-    , pLocationMode
-    , pBluetoothDisabled
-    , pPolicyEnforcementRules
-    , pUsbFileTransferDisabled
-    , pCameraDisabled
-    , pApplications
-    , pPasswordPolicies
-    , pFactoryResetDisabled
+    -- ** Application_DistributionChannel
+    Application_DistributionChannel (..),
 
-    -- ** NonComplianceDetailCondition
-    , NonComplianceDetailCondition
-    , nonComplianceDetailCondition
-    , ncdcPackageName
-    , ncdcNonComplianceReason
-    , ncdcSettingName
-
-    -- ** KeyedAppState
-    , KeyedAppState
-    , keyedAppState
-    , kasData
-    , kasSeverity
-    , kasKey
-    , kasMessage
-    , kasLastUpdateTime
-    , kasCreateTime
-
-    -- ** KioskCustomization
-    , KioskCustomization
-    , kioskCustomization
-    , kcSystemNavigation
-    , kcDeviceSettings
-    , kcPowerButtonActions
-    , kcSystemErrorWarnings
-    , kcStatusBar
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** WebToken
-    , WebToken
-    , webToken
-    , wtParentFrameURL
-    , wtValue
-    , wtName
-    , wtEnabledFeatures
-    , wtPermissions
-
-    -- ** PersonalApplicationPolicyInstallType
-    , PersonalApplicationPolicyInstallType (..)
-
-    -- ** PersonalUsagePoliciesPersonalPlayStoreMode
-    , PersonalUsagePoliciesPersonalPlayStoreMode (..)
-
-    -- ** KeyedAppStateSeverity
-    , KeyedAppStateSeverity (..)
-
-    -- ** ComplianceRule
-    , ComplianceRule
-    , complianceRule
-    , crAPILevelCondition
-    , crDisableApps
-    , crPackageNamesToDisable
-    , crNonComplianceDetailCondition
-
-    -- ** ListWebAppsResponse
-    , ListWebAppsResponse
-    , listWebAppsResponse
-    , lwarNextPageToken
-    , lwarWebApps
-
-    -- ** DeviceOwnership
-    , DeviceOwnership (..)
-
-    -- ** PasswordRequirements
-    , PasswordRequirements
-    , passwordRequirements
-    , prPasswordMinimumSymbols
-    , prMaximumFailedPasswordsForWipe
-    , prPasswordExpirationTimeout
-    , prPasswordMinimumNonLetter
-    , prPasswordHistoryLength
-    , prPasswordMinimumLetters
-    , prPasswordMinimumUpperCase
-    , prRequirePasswordUnlock
-    , prPasswordMinimumNumeric
-    , prPasswordQuality
-    , prPasswordMinimumLength
-    , prPasswordScope
-    , prPasswordMinimumLowerCase
-
-    -- ** ApplicationReportState
-    , ApplicationReportState (..)
-
-    -- ** NonComplianceDetail
-    , NonComplianceDetail
-    , nonComplianceDetail
-    , ncdFieldPath
-    , ncdPackageName
-    , ncdInstallationFailureReason
-    , ncdNonComplianceReason
-    , ncdSettingName
-    , ncdCurrentValue
-
-    -- ** PolicyStayOnPluggedModesItem
-    , PolicyStayOnPluggedModesItem (..)
-
-    -- ** NonComplianceDetailConditionNonComplianceReason
-    , NonComplianceDetailConditionNonComplianceReason (..)
-
-    -- ** ApplicationPolicyConnectedWorkAndPersonalApp
-    , ApplicationPolicyConnectedWorkAndPersonalApp (..)
+    -- ** Application_FeaturesItem
+    Application_FeaturesItem (..),
 
     -- ** ApplicationEvent
-    , ApplicationEvent
-    , applicationEvent
-    , aeEventType
-    , aeCreateTime
+    ApplicationEvent (..),
+    newApplicationEvent,
 
-    -- ** SecurityPostureDevicePosture
-    , SecurityPostureDevicePosture (..)
-
-    -- ** WebTokenPermissionsItem
-    , WebTokenPermissionsItem (..)
-
-    -- ** TermsAndConditions
-    , TermsAndConditions
-    , termsAndConditions
-    , tacContent
-    , tacHeader
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** UserFacingMessage
-    , UserFacingMessage
-    , userFacingMessage
-    , ufmLocalizedMessages
-    , ufmDefaultMessage
-
-    -- ** ContactInfo
-    , ContactInfo
-    , contactInfo
-    , ciContactEmail
-    , ciDataProtectionOfficerName
-    , ciEuRepresentativeName
-    , ciEuRepresentativeEmail
-    , ciEuRepresentativePhone
-    , ciDataProtectionOfficerEmail
-    , ciDataProtectionOfficerPhone
-
-    -- ** PostureDetailSecurityRisk
-    , PostureDetailSecurityRisk (..)
-
-    -- ** SoftwareInfo
-    , SoftwareInfo
-    , softwareInfo
-    , siSecurityPatchLevel
-    , siAndroidDevicePolicyVersionName
-    , siDeviceKernelVersion
-    , siAndroidDevicePolicyVersionCode
-    , siDeviceBuildSignature
-    , siSystemUpdateInfo
-    , siBootLoaderVersion
-    , siAndroidBuildTime
-    , siPrimaryLanguageCode
-    , siAndroidBuildNumber
-    , siAndroidVersion
-
-    -- ** ApplicationReportingSettings
-    , ApplicationReportingSettings
-    , applicationReportingSettings
-    , arsIncludeRemovedApps
-
-    -- ** MemoryEventEventType
-    , MemoryEventEventType (..)
+    -- ** ApplicationEvent_EventType
+    ApplicationEvent_EventType (..),
 
     -- ** ApplicationPermission
-    , ApplicationPermission
-    , applicationPermission
-    , apName
-    , apDescription
-    , apPermissionId
+    ApplicationPermission (..),
+    newApplicationPermission,
 
-    -- ** PasswordRequirementsRequirePasswordUnlock
-    , PasswordRequirementsRequirePasswordUnlock (..)
+    -- ** ApplicationPolicy
+    ApplicationPolicy (..),
+    newApplicationPolicy,
+
+    -- ** ApplicationPolicy_AutoUpdateMode
+    ApplicationPolicy_AutoUpdateMode (..),
+
+    -- ** ApplicationPolicy_ConnectedWorkAndPersonalApp
+    ApplicationPolicy_ConnectedWorkAndPersonalApp (..),
+
+    -- ** ApplicationPolicy_DefaultPermissionPolicy
+    ApplicationPolicy_DefaultPermissionPolicy (..),
+
+    -- ** ApplicationPolicy_DelegatedScopesItem
+    ApplicationPolicy_DelegatedScopesItem (..),
+
+    -- ** ApplicationPolicy_InstallType
+    ApplicationPolicy_InstallType (..),
+
+    -- ** ApplicationPolicy_ManagedConfiguration
+    ApplicationPolicy_ManagedConfiguration (..),
+    newApplicationPolicy_ManagedConfiguration,
+
+    -- ** ApplicationReport
+    ApplicationReport (..),
+    newApplicationReport,
+
+    -- ** ApplicationReport_ApplicationSource
+    ApplicationReport_ApplicationSource (..),
+
+    -- ** ApplicationReport_State
+    ApplicationReport_State (..),
+
+    -- ** ApplicationReportingSettings
+    ApplicationReportingSettings (..),
+    newApplicationReportingSettings,
+
+    -- ** BlockAction
+    BlockAction (..),
+    newBlockAction,
+
+    -- ** BlockAction_BlockScope
+    BlockAction_BlockScope (..),
+
+    -- ** ChoosePrivateKeyRule
+    ChoosePrivateKeyRule (..),
+    newChoosePrivateKeyRule,
+
+    -- ** Command
+    Command (..),
+    newCommand,
+
+    -- ** Command_ErrorCode
+    Command_ErrorCode (..),
+
+    -- ** Command_ResetPasswordFlagsItem
+    Command_ResetPasswordFlagsItem (..),
+
+    -- ** Command_Type
+    Command_Type (..),
+
+    -- ** CommonCriteriaModeInfo
+    CommonCriteriaModeInfo (..),
+    newCommonCriteriaModeInfo,
+
+    -- ** CommonCriteriaModeInfo_CommonCriteriaModeStatus
+    CommonCriteriaModeInfo_CommonCriteriaModeStatus (..),
+
+    -- ** ComplianceRule
+    ComplianceRule (..),
+    newComplianceRule,
+
+    -- ** ContactInfo
+    ContactInfo (..),
+    newContactInfo,
+
+    -- ** ContentProviderEndpoint
+    ContentProviderEndpoint (..),
+    newContentProviderEndpoint,
+
+    -- ** CrossProfilePolicies
+    CrossProfilePolicies (..),
+    newCrossProfilePolicies,
+
+    -- ** CrossProfilePolicies_CrossProfileCopyPaste
+    CrossProfilePolicies_CrossProfileCopyPaste (..),
+
+    -- ** CrossProfilePolicies_CrossProfileDataSharing
+    CrossProfilePolicies_CrossProfileDataSharing (..),
+
+    -- ** CrossProfilePolicies_ShowWorkContactsInPersonalProfile
+    CrossProfilePolicies_ShowWorkContactsInPersonalProfile (..),
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** Device
+    Device (..),
+    newDevice,
+
+    -- ** Device_AppliedState
+    Device_AppliedState (..),
+
+    -- ** Device_ManagementMode
+    Device_ManagementMode (..),
+
+    -- ** Device_Ownership
+    Device_Ownership (..),
+
+    -- ** Device_State
+    Device_State (..),
+
+    -- ** Device_SystemProperties
+    Device_SystemProperties (..),
+    newDevice_SystemProperties,
+
+    -- ** DeviceSettings
+    DeviceSettings (..),
+    newDeviceSettings,
+
+    -- ** DeviceSettings_EncryptionStatus
+    DeviceSettings_EncryptionStatus (..),
+
+    -- ** Display
+    Display (..),
+    newDisplay,
+
+    -- ** Display_State
+    Display_State (..),
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EnrollmentToken
+    EnrollmentToken (..),
+    newEnrollmentToken,
+
+    -- ** EnrollmentToken_AllowPersonalUsage
+    EnrollmentToken_AllowPersonalUsage (..),
+
+    -- ** Enterprise
+    Enterprise (..),
+    newEnterprise,
+
+    -- ** Enterprise_EnabledNotificationTypesItem
+    Enterprise_EnabledNotificationTypesItem (..),
+
+    -- ** ExtensionConfig
+    ExtensionConfig (..),
+    newExtensionConfig,
+
+    -- ** ExternalData
+    ExternalData (..),
+    newExternalData,
+
+    -- ** FreezePeriod
+    FreezePeriod (..),
+    newFreezePeriod,
+
+    -- ** HardwareInfo
+    HardwareInfo (..),
+    newHardwareInfo,
+
+    -- ** HardwareStatus
+    HardwareStatus (..),
+    newHardwareStatus,
+
+    -- ** IssueCommandResponse
+    IssueCommandResponse (..),
+    newIssueCommandResponse,
+
+    -- ** KeyedAppState
+    KeyedAppState (..),
+    newKeyedAppState,
+
+    -- ** KeyedAppState_Severity
+    KeyedAppState_Severity (..),
+
+    -- ** KioskCustomization
+    KioskCustomization (..),
+    newKioskCustomization,
+
+    -- ** KioskCustomization_DeviceSettings
+    KioskCustomization_DeviceSettings (..),
+
+    -- ** KioskCustomization_PowerButtonActions
+    KioskCustomization_PowerButtonActions (..),
+
+    -- ** KioskCustomization_StatusBar
+    KioskCustomization_StatusBar (..),
+
+    -- ** KioskCustomization_SystemErrorWarnings
+    KioskCustomization_SystemErrorWarnings (..),
+
+    -- ** KioskCustomization_SystemNavigation
+    KioskCustomization_SystemNavigation (..),
+
+    -- ** LaunchAppAction
+    LaunchAppAction (..),
+    newLaunchAppAction,
+
+    -- ** ListDevicesResponse
+    ListDevicesResponse (..),
+    newListDevicesResponse,
+
+    -- ** ListEnterprisesResponse
+    ListEnterprisesResponse (..),
+    newListEnterprisesResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListPoliciesResponse
+    ListPoliciesResponse (..),
+    newListPoliciesResponse,
+
+    -- ** ListWebAppsResponse
+    ListWebAppsResponse (..),
+    newListWebAppsResponse,
+
+    -- ** ManagedConfigurationTemplate
+    ManagedConfigurationTemplate (..),
+    newManagedConfigurationTemplate,
+
+    -- ** ManagedConfigurationTemplate_ConfigurationVariables
+    ManagedConfigurationTemplate_ConfigurationVariables (..),
+    newManagedConfigurationTemplate_ConfigurationVariables,
+
+    -- ** ManagedProperty
+    ManagedProperty (..),
+    newManagedProperty,
+
+    -- ** ManagedProperty_Type
+    ManagedProperty_Type (..),
+
+    -- ** ManagedPropertyEntry
+    ManagedPropertyEntry (..),
+    newManagedPropertyEntry,
+
+    -- ** MemoryEvent
+    MemoryEvent (..),
+    newMemoryEvent,
+
+    -- ** MemoryEvent_EventType
+    MemoryEvent_EventType (..),
+
+    -- ** MemoryInfo
+    MemoryInfo (..),
+    newMemoryInfo,
+
+    -- ** NetworkInfo
+    NetworkInfo (..),
+    newNetworkInfo,
+
+    -- ** NonComplianceDetail
+    NonComplianceDetail (..),
+    newNonComplianceDetail,
+
+    -- ** NonComplianceDetail_InstallationFailureReason
+    NonComplianceDetail_InstallationFailureReason (..),
+
+    -- ** NonComplianceDetail_NonComplianceReason
+    NonComplianceDetail_NonComplianceReason (..),
+
+    -- ** NonComplianceDetailCondition
+    NonComplianceDetailCondition (..),
+    newNonComplianceDetailCondition,
+
+    -- ** NonComplianceDetailCondition_NonComplianceReason
+    NonComplianceDetailCondition_NonComplianceReason (..),
+
+    -- ** OncCertificateProvider
+    OncCertificateProvider (..),
+    newOncCertificateProvider,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** PackageNameList
+    PackageNameList (..),
+    newPackageNameList,
+
+    -- ** PasswordRequirements
+    PasswordRequirements (..),
+    newPasswordRequirements,
+
+    -- ** PasswordRequirements_PasswordQuality
+    PasswordRequirements_PasswordQuality (..),
+
+    -- ** PasswordRequirements_PasswordScope
+    PasswordRequirements_PasswordScope (..),
+
+    -- ** PasswordRequirements_RequirePasswordUnlock
+    PasswordRequirements_RequirePasswordUnlock (..),
+
+    -- ** PasswordRequirements_UnifiedLockSettings
+    PasswordRequirements_UnifiedLockSettings (..),
+
+    -- ** PermissionGrant
+    PermissionGrant (..),
+    newPermissionGrant,
+
+    -- ** PermissionGrant_Policy
+    PermissionGrant_Policy (..),
+
+    -- ** PersistentPreferredActivity
+    PersistentPreferredActivity (..),
+    newPersistentPreferredActivity,
+
+    -- ** PersonalApplicationPolicy
+    PersonalApplicationPolicy (..),
+    newPersonalApplicationPolicy,
+
+    -- ** PersonalApplicationPolicy_InstallType
+    PersonalApplicationPolicy_InstallType (..),
+
+    -- ** PersonalUsagePolicies
+    PersonalUsagePolicies (..),
+    newPersonalUsagePolicies,
+
+    -- ** PersonalUsagePolicies_PersonalPlayStoreMode
+    PersonalUsagePolicies_PersonalPlayStoreMode (..),
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** Policy_AndroidDevicePolicyTracksItem
+    Policy_AndroidDevicePolicyTracksItem (..),
+
+    -- ** Policy_AppAutoUpdatePolicy
+    Policy_AppAutoUpdatePolicy (..),
+
+    -- ** Policy_AutoDateAndTimeZone
+    Policy_AutoDateAndTimeZone (..),
+
+    -- ** Policy_CameraAccess
+    Policy_CameraAccess (..),
+
+    -- ** Policy_DefaultPermissionPolicy
+    Policy_DefaultPermissionPolicy (..),
+
+    -- ** Policy_EncryptionPolicy
+    Policy_EncryptionPolicy (..),
+
+    -- ** Policy_KeyguardDisabledFeaturesItem
+    Policy_KeyguardDisabledFeaturesItem (..),
+
+    -- ** Policy_LocationMode
+    Policy_LocationMode (..),
+
+    -- ** Policy_MicrophoneAccess
+    Policy_MicrophoneAccess (..),
+
+    -- ** Policy_OpenNetworkConfiguration
+    Policy_OpenNetworkConfiguration (..),
+    newPolicy_OpenNetworkConfiguration,
+
+    -- ** Policy_PlayStoreMode
+    Policy_PlayStoreMode (..),
+
+    -- ** Policy_PreferentialNetworkService
+    Policy_PreferentialNetworkService (..),
+
+    -- ** Policy_StayOnPluggedModesItem
+    Policy_StayOnPluggedModesItem (..),
+
+    -- ** PolicyEnforcementRule
+    PolicyEnforcementRule (..),
+    newPolicyEnforcementRule,
+
+    -- ** PostureDetail
+    PostureDetail (..),
+    newPostureDetail,
+
+    -- ** PostureDetail_SecurityRisk
+    PostureDetail_SecurityRisk (..),
+
+    -- ** PowerManagementEvent
+    PowerManagementEvent (..),
+    newPowerManagementEvent,
+
+    -- ** PowerManagementEvent_EventType
+    PowerManagementEvent_EventType (..),
+
+    -- ** ProxyInfo
+    ProxyInfo (..),
+    newProxyInfo,
+
+    -- ** SecurityPosture
+    SecurityPosture (..),
+    newSecurityPosture,
+
+    -- ** SecurityPosture_DevicePosture
+    SecurityPosture_DevicePosture (..),
 
     -- ** SetupAction
-    , SetupAction
-    , setupAction
-    , saLaunchApp
-    , saTitle
-    , saDescription
+    SetupAction (..),
+    newSetupAction,
+
+    -- ** SigninDetail
+    SigninDetail (..),
+    newSigninDetail,
+
+    -- ** SigninDetail_AllowPersonalUsage
+    SigninDetail_AllowPersonalUsage (..),
+
+    -- ** SignupUrl
+    SignupUrl (..),
+    newSignupUrl,
+
+    -- ** SoftwareInfo
+    SoftwareInfo (..),
+    newSoftwareInfo,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StatusReportingSettings
+    StatusReportingSettings (..),
+    newStatusReportingSettings,
+
+    -- ** SystemUpdate
+    SystemUpdate (..),
+    newSystemUpdate,
+
+    -- ** SystemUpdate_Type
+    SystemUpdate_Type (..),
+
+    -- ** SystemUpdateInfo
+    SystemUpdateInfo (..),
+    newSystemUpdateInfo,
+
+    -- ** SystemUpdateInfo_UpdateStatus
+    SystemUpdateInfo_UpdateStatus (..),
+
+    -- ** TelephonyInfo
+    TelephonyInfo (..),
+    newTelephonyInfo,
+
+    -- ** TermsAndConditions
+    TermsAndConditions (..),
+    newTermsAndConditions,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** UserFacingMessage
+    UserFacingMessage (..),
+    newUserFacingMessage,
+
+    -- ** UserFacingMessage_LocalizedMessages
+    UserFacingMessage_LocalizedMessages (..),
+    newUserFacingMessage_LocalizedMessages,
 
     -- ** WebApp
-    , WebApp
-    , webApp
-    , waVersionCode
-    , waIcons
-    , waStartURL
-    , waDisplayMode
-    , waName
-    , waTitle
+    WebApp (..),
+    newWebApp,
 
-    -- ** PasswordRequirementsPasswordQuality
-    , PasswordRequirementsPasswordQuality (..)
-    ) where
+    -- ** WebApp_DisplayMode
+    WebApp_DisplayMode (..),
 
-import Network.Google.Prelude
+    -- ** WebAppIcon
+    WebAppIcon (..),
+    newWebAppIcon,
+
+    -- ** WebToken
+    WebToken (..),
+    newWebToken,
+
+    -- ** WebToken_EnabledFeaturesItem
+    WebToken_EnabledFeaturesItem (..),
+
+    -- ** WebToken_PermissionsItem
+    WebToken_PermissionsItem (..),
+
+    -- ** WipeAction
+    WipeAction (..),
+    newWipeAction,
+
+    -- ** EnterprisesDevicesDeleteWipeDataFlags
+    EnterprisesDevicesDeleteWipeDataFlags (..),
+
+    -- ** EnterprisesListView
+    EnterprisesListView (..),
+  )
+where
+
+import Network.Google.AndroidManagement.Enterprises.Applications.Get
+import Network.Google.AndroidManagement.Enterprises.Create
+import Network.Google.AndroidManagement.Enterprises.Delete
+import Network.Google.AndroidManagement.Enterprises.Devices.Delete
+import Network.Google.AndroidManagement.Enterprises.Devices.Get
+import Network.Google.AndroidManagement.Enterprises.Devices.IssueCommand
+import Network.Google.AndroidManagement.Enterprises.Devices.List
+import Network.Google.AndroidManagement.Enterprises.Devices.Operations.Cancel
+import Network.Google.AndroidManagement.Enterprises.Devices.Operations.Delete
+import Network.Google.AndroidManagement.Enterprises.Devices.Operations.Get
+import Network.Google.AndroidManagement.Enterprises.Devices.Operations.List
+import Network.Google.AndroidManagement.Enterprises.Devices.Patch
+import Network.Google.AndroidManagement.Enterprises.EnrollmentTokens.Create
+import Network.Google.AndroidManagement.Enterprises.EnrollmentTokens.Delete
+import Network.Google.AndroidManagement.Enterprises.Get
+import Network.Google.AndroidManagement.Enterprises.List
+import Network.Google.AndroidManagement.Enterprises.Patch
+import Network.Google.AndroidManagement.Enterprises.Policies.Delete
+import Network.Google.AndroidManagement.Enterprises.Policies.Get
+import Network.Google.AndroidManagement.Enterprises.Policies.List
+import Network.Google.AndroidManagement.Enterprises.Policies.Patch
+import Network.Google.AndroidManagement.Enterprises.WebApps.Create
+import Network.Google.AndroidManagement.Enterprises.WebApps.Delete
+import Network.Google.AndroidManagement.Enterprises.WebApps.Get
+import Network.Google.AndroidManagement.Enterprises.WebApps.List
+import Network.Google.AndroidManagement.Enterprises.WebApps.Patch
+import Network.Google.AndroidManagement.Enterprises.WebTokens.Create
+import Network.Google.AndroidManagement.SignupUrls.Create
 import Network.Google.AndroidManagement.Types
-import Network.Google.Resource.AndroidManagement.Enterprises.Applications.Get
-import Network.Google.Resource.AndroidManagement.Enterprises.Create
-import Network.Google.Resource.AndroidManagement.Enterprises.Delete
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.Delete
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.Get
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.IssueCommand
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.List
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Cancel
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Delete
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Get
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.List
-import Network.Google.Resource.AndroidManagement.Enterprises.Devices.Patch
-import Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Create
-import Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Delete
-import Network.Google.Resource.AndroidManagement.Enterprises.Get
-import Network.Google.Resource.AndroidManagement.Enterprises.List
-import Network.Google.Resource.AndroidManagement.Enterprises.Patch
-import Network.Google.Resource.AndroidManagement.Enterprises.Policies.Delete
-import Network.Google.Resource.AndroidManagement.Enterprises.Policies.Get
-import Network.Google.Resource.AndroidManagement.Enterprises.Policies.List
-import Network.Google.Resource.AndroidManagement.Enterprises.Policies.Patch
-import Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Create
-import Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Delete
-import Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Get
-import Network.Google.Resource.AndroidManagement.Enterprises.WebApps.List
-import Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Patch
-import Network.Google.Resource.AndroidManagement.Enterprises.WebTokens.Create
-import Network.Google.Resource.AndroidManagement.SignupURLs.Create
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Android Management API service.
-type AndroidManagementAPI =
-     EnterprisesEnrollmentTokensCreateResource :<|>
-       EnterprisesEnrollmentTokensDeleteResource
-       :<|> EnterprisesWebAppsListResource
-       :<|> EnterprisesWebAppsPatchResource
-       :<|> EnterprisesWebAppsGetResource
-       :<|> EnterprisesWebAppsCreateResource
-       :<|> EnterprisesWebAppsDeleteResource
-       :<|> EnterprisesWebTokensCreateResource
-       :<|> EnterprisesDevicesOperationsListResource
-       :<|> EnterprisesDevicesOperationsGetResource
-       :<|> EnterprisesDevicesOperationsCancelResource
-       :<|> EnterprisesDevicesOperationsDeleteResource
-       :<|> EnterprisesDevicesListResource
-       :<|> EnterprisesDevicesPatchResource
-       :<|> EnterprisesDevicesGetResource
-       :<|> EnterprisesDevicesIssueCommandResource
-       :<|> EnterprisesDevicesDeleteResource
-       :<|> EnterprisesPoliciesListResource
-       :<|> EnterprisesPoliciesPatchResource
-       :<|> EnterprisesPoliciesGetResource
-       :<|> EnterprisesPoliciesDeleteResource
-       :<|> EnterprisesApplicationsGetResource
-       :<|> EnterprisesListResource
-       :<|> EnterprisesPatchResource
-       :<|> EnterprisesGetResource
-       :<|> EnterprisesCreateResource
-       :<|> EnterprisesDeleteResource
-       :<|> SignupURLsCreateResource
