@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,95 +30,95 @@
 --
 -- /See:/ <https://github.com/conversationai/perspectiveapi/blob/master/README.md Perspective Comment Analyzer API Reference>
 module Gogol.CommentAnalyzer
-    (
-    -- * Configuration
-      commentAnalyzerService
+  ( -- * Configuration
+    commentAnalyzerService,
 
     -- * OAuth Scopes
-    , userinfoEmailScope
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** commentanalyzer.comments.analyze
-    , CommentAnalyzerCommentsAnalyzeResource
-    , newCommentAnalyzerCommentsAnalyze
-    , CommentAnalyzerCommentsAnalyze
+    CommentAnalyzerCommentsAnalyzeResource,
+    newCommentAnalyzerCommentsAnalyze,
+    CommentAnalyzerCommentsAnalyze,
 
     -- ** commentanalyzer.comments.suggestscore
-    , CommentAnalyzerCommentsSuggestscoreResource
-    , newCommentAnalyzerCommentsSuggestscore
-    , CommentAnalyzerCommentsSuggestscore
+    CommentAnalyzerCommentsSuggestscoreResource,
+    newCommentAnalyzerCommentsSuggestscore,
+    CommentAnalyzerCommentsSuggestscore,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AnalyzeCommentRequest
-    , AnalyzeCommentRequest (..)
-    , newAnalyzeCommentRequest
+    AnalyzeCommentRequest (..),
+    newAnalyzeCommentRequest,
 
     -- ** AnalyzeCommentRequest_RequestedAttributes
-    , AnalyzeCommentRequest_RequestedAttributes (..)
-    , newAnalyzeCommentRequest_RequestedAttributes
+    AnalyzeCommentRequest_RequestedAttributes (..),
+    newAnalyzeCommentRequest_RequestedAttributes,
 
     -- ** AnalyzeCommentResponse
-    , AnalyzeCommentResponse (..)
-    , newAnalyzeCommentResponse
+    AnalyzeCommentResponse (..),
+    newAnalyzeCommentResponse,
 
     -- ** AnalyzeCommentResponse_AttributeScores
-    , AnalyzeCommentResponse_AttributeScores (..)
-    , newAnalyzeCommentResponse_AttributeScores
+    AnalyzeCommentResponse_AttributeScores (..),
+    newAnalyzeCommentResponse_AttributeScores,
 
     -- ** ArticleAndParentComment
-    , ArticleAndParentComment (..)
-    , newArticleAndParentComment
+    ArticleAndParentComment (..),
+    newArticleAndParentComment,
 
     -- ** AttributeParameters
-    , AttributeParameters (..)
-    , newAttributeParameters
+    AttributeParameters (..),
+    newAttributeParameters,
 
     -- ** AttributeParameters_ScoreType
-    , AttributeParameters_ScoreType (..)
+    AttributeParameters_ScoreType (..),
 
     -- ** AttributeScores
-    , AttributeScores (..)
-    , newAttributeScores
+    AttributeScores (..),
+    newAttributeScores,
 
     -- ** Context
-    , Context (..)
-    , newContext
+    Context (..),
+    newContext,
 
     -- ** Score
-    , Score (..)
-    , newScore
+    Score (..),
+    newScore,
 
     -- ** Score_Type
-    , Score_Type (..)
+    Score_Type (..),
 
     -- ** SpanScore
-    , SpanScore (..)
-    , newSpanScore
+    SpanScore (..),
+    newSpanScore,
 
     -- ** SuggestCommentScoreRequest
-    , SuggestCommentScoreRequest (..)
-    , newSuggestCommentScoreRequest
+    SuggestCommentScoreRequest (..),
+    newSuggestCommentScoreRequest,
 
     -- ** SuggestCommentScoreRequest_AttributeScores
-    , SuggestCommentScoreRequest_AttributeScores (..)
-    , newSuggestCommentScoreRequest_AttributeScores
+    SuggestCommentScoreRequest_AttributeScores (..),
+    newSuggestCommentScoreRequest_AttributeScores,
 
     -- ** SuggestCommentScoreResponse
-    , SuggestCommentScoreResponse (..)
-    , newSuggestCommentScoreResponse
+    SuggestCommentScoreResponse (..),
+    newSuggestCommentScoreResponse,
 
     -- ** TextEntry
-    , TextEntry (..)
-    , newTextEntry
+    TextEntry (..),
+    newTextEntry,
 
     -- ** TextEntry_Type
-    , TextEntry_Type (..)
-    ) where
+    TextEntry_Type (..),
+  )
+where
 
 import Gogol.CommentAnalyzer.Comments.Analyze
 import Gogol.CommentAnalyzer.Comments.Suggestscore
