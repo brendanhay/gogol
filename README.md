@@ -47,7 +47,7 @@ This ensures the Continuous Integration process is the single source of truth fo
 
 ### Adding New Services
 
-The configuration for the generation step of each individual service endpoint lives under `./configs/services/g`. The naming matches the Google Discovery Service naming of endpoints, which are vendored under `./configs/models`.
+The configuration for the generation step of each individual service endpoint lives under `./configs/services`. The naming matches the Google Discovery Service naming of endpoints, which are vendored under `./configs/models`.
 
 Rather than actually crawling the Discovery Service, the [Google API Go Client](https://www.github.com/google/google-api-go-client) is vendored under `./vendor`, and the JSON service definitions are copied to `./configs/models` to ensure reproducibility of the generation steps and the abilitry to diff across versions.
 
@@ -56,7 +56,7 @@ Rather than actually crawling the Discovery Service, the [Google API Go Client](
 To add a new endpoint, first create the related JSON configuration in the `./configs/services` directory.
 
 Since the Cloud Dataproc API is called `dataproc-api.json` in the Google Discovery API,
-you would create the configuration `./configs/services/g/dataproc.json` with the following contents:
+you would create the configuration `./configs/services/dataproc.json` with the following contents:
 
 ```
 {
@@ -72,7 +72,7 @@ make clean
 make
 ```
 
-This will build the `./bin/gogol-gen` binary, and will generate a Haskell library for each API that has matching `./configs/services/g/*.json` configuration.
+This will build the `./bin/gogol-gen` binary, and will generate a Haskell library for each API that has matching `./configs/services/*.json` configuration.
 
 For the above example, the result would be a `./lib/services/gogol-dataproc` directory at the top-level of the project containing the generated API client.
 
