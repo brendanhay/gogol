@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,100 +36,92 @@
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.locations.operations.cancel@.
 module Gogol.Logging.Folders.Locations.Operations.Cancel
-  ( -- * Resource
-    LoggingFoldersLocationsOperationsCancelResource,
+    (
+    -- * Resource
+      LoggingFoldersLocationsOperationsCancelResource
 
     -- ** Constructing a Request
-    newLoggingFoldersLocationsOperationsCancel,
-    LoggingFoldersLocationsOperationsCancel,
-  )
-where
+    , newLoggingFoldersLocationsOperationsCancel
+    , LoggingFoldersLocationsOperationsCancel
+    ) where
 
-import Gogol.Logging.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Logging.Types
 
 -- | A resource alias for @logging.folders.locations.operations.cancel@ method which the
 -- 'LoggingFoldersLocationsOperationsCancel' request conforms to.
-type LoggingFoldersLocationsOperationsCancelResource =
-  "v2"
-    Core.:> Core.CaptureMode "name" "cancel" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CancelOperationRequest
-    Core.:> Core.Post '[Core.JSON] Empty
+type LoggingFoldersLocationsOperationsCancelResource
+     =
+     "v2" Core.:>
+       Core.CaptureMode "name" "cancel" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] CancelOperationRequest
+                       Core.:> Core.Post '[Core.JSON] Empty
 
 -- | Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn\'t support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.
 --
 -- /See:/ 'newLoggingFoldersLocationsOperationsCancel' smart constructor.
 data LoggingFoldersLocationsOperationsCancel = LoggingFoldersLocationsOperationsCancel
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource to be cancelled.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: CancelOperationRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The name of the operation resource to be cancelled.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: CancelOperationRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'LoggingFoldersLocationsOperationsCancel' with the minimum fields required to make a request.
-newLoggingFoldersLocationsOperationsCancel ::
-  -- |  The name of the operation resource to be cancelled. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  CancelOperationRequest ->
-  LoggingFoldersLocationsOperationsCancel
+newLoggingFoldersLocationsOperationsCancel 
+    ::  Core.Text
+       -- ^  The name of the operation resource to be cancelled. See 'name'.
+    -> CancelOperationRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> LoggingFoldersLocationsOperationsCancel
 newLoggingFoldersLocationsOperationsCancel name payload =
   LoggingFoldersLocationsOperationsCancel
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingFoldersLocationsOperationsCancel
-  where
-  type
-    Rs LoggingFoldersLocationsOperationsCancel =
-      Empty
-  type
-    Scopes LoggingFoldersLocationsOperationsCancel =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
-  requestClient
-    LoggingFoldersLocationsOperationsCancel {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingFoldersLocationsOperationsCancelResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           LoggingFoldersLocationsOperationsCancel
+         where
+        type Rs LoggingFoldersLocationsOperationsCancel =
+             Empty
+        type Scopes LoggingFoldersLocationsOperationsCancel =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin"]
+        requestClient
+          LoggingFoldersLocationsOperationsCancel{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              loggingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           LoggingFoldersLocationsOperationsCancelResource)
+                      Core.mempty
+

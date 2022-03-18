@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,105 +36,96 @@
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.exclusions.patch@.
 module Gogol.Logging.BillingAccounts.Exclusions.Patch
-  ( -- * Resource
-    LoggingBillingAccountsExclusionsPatchResource,
+    (
+    -- * Resource
+      LoggingBillingAccountsExclusionsPatchResource
 
     -- ** Constructing a Request
-    newLoggingBillingAccountsExclusionsPatch,
-    LoggingBillingAccountsExclusionsPatch,
-  )
-where
+    , newLoggingBillingAccountsExclusionsPatch
+    , LoggingBillingAccountsExclusionsPatch
+    ) where
 
-import Gogol.Logging.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Logging.Types
 
 -- | A resource alias for @logging.billingAccounts.exclusions.patch@ method which the
 -- 'LoggingBillingAccountsExclusionsPatch' request conforms to.
 type LoggingBillingAccountsExclusionsPatchResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] LogExclusion
-    Core.:> Core.Patch '[Core.JSON] LogExclusion
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "updateMask" Core.GFieldMask Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON] LogExclusion Core.:>
+                         Core.Patch '[Core.JSON] LogExclusion
 
 -- | Changes one or more properties of an existing exclusion in the _Default sink.
 --
 -- /See:/ 'newLoggingBillingAccountsExclusionsPatch' smart constructor.
 data LoggingBillingAccountsExclusionsPatch = LoggingBillingAccountsExclusionsPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the exclusion to update: \"projects\/[PROJECT/ID]\/exclusions\/[EXCLUSION/ID]\" \"organizations\/[ORGANIZATION/ID]\/exclusions\/[EXCLUSION/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/exclusions\/[EXCLUSION/ID]\" \"folders\/[FOLDER/ID]\/exclusions\/[EXCLUSION_ID]\" For example:\"projects\/my-project\/exclusions\/my-exclusion\"
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: LogExclusion,
-    -- | Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update/mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update/mask of \"filter,description\".
-    updateMask :: (Core.Maybe Core.GFieldMask),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The resource name of the exclusion to update: \"projects\/[PROJECT/ID]\/exclusions\/[EXCLUSION/ID]\" \"organizations\/[ORGANIZATION/ID]\/exclusions\/[EXCLUSION/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/exclusions\/[EXCLUSION/ID]\" \"folders\/[FOLDER/ID]\/exclusions\/[EXCLUSION_ID]\" For example:\"projects\/my-project\/exclusions\/my-exclusion\"
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: LogExclusion
+      -- | Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update/mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update/mask of \"filter,description\".
+    , updateMask :: (Core.Maybe Core.GFieldMask)
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'LoggingBillingAccountsExclusionsPatch' with the minimum fields required to make a request.
-newLoggingBillingAccountsExclusionsPatch ::
-  -- |  Required. The resource name of the exclusion to update: \"projects\/[PROJECT/ID]\/exclusions\/[EXCLUSION/ID]\" \"organizations\/[ORGANIZATION/ID]\/exclusions\/[EXCLUSION/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/exclusions\/[EXCLUSION/ID]\" \"folders\/[FOLDER/ID]\/exclusions\/[EXCLUSION_ID]\" For example:\"projects\/my-project\/exclusions\/my-exclusion\" See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  LogExclusion ->
-  LoggingBillingAccountsExclusionsPatch
+newLoggingBillingAccountsExclusionsPatch 
+    ::  Core.Text
+       -- ^  Required. The resource name of the exclusion to update: \"projects\/[PROJECT/ID]\/exclusions\/[EXCLUSION/ID]\" \"organizations\/[ORGANIZATION/ID]\/exclusions\/[EXCLUSION/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/exclusions\/[EXCLUSION/ID]\" \"folders\/[FOLDER/ID]\/exclusions\/[EXCLUSION_ID]\" For example:\"projects\/my-project\/exclusions\/my-exclusion\" See 'name'.
+    -> LogExclusion
+       -- ^  Multipart request metadata. See 'payload'.
+    -> LoggingBillingAccountsExclusionsPatch
 newLoggingBillingAccountsExclusionsPatch name payload =
   LoggingBillingAccountsExclusionsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , updateMask = Core.Nothing
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingBillingAccountsExclusionsPatch
-  where
-  type
-    Rs LoggingBillingAccountsExclusionsPatch =
-      LogExclusion
-  type
-    Scopes LoggingBillingAccountsExclusionsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
-  requestClient
-    LoggingBillingAccountsExclusionsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingBillingAccountsExclusionsPatchResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           LoggingBillingAccountsExclusionsPatch
+         where
+        type Rs LoggingBillingAccountsExclusionsPatch =
+             LogExclusion
+        type Scopes LoggingBillingAccountsExclusionsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin"]
+        requestClient
+          LoggingBillingAccountsExclusionsPatch{..}
+          = go name xgafv accessToken callback updateMask
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              loggingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           LoggingBillingAccountsExclusionsPatchResource)
+                      Core.mempty
+

@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-logging
-version:            0.5.0
-synopsis:           Google Cloud Logging SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-logging
+version:               0.5.0
+synopsis:              Google Cloud Logging SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Writes log entries and manages your Cloud Logging configuration.
+    Writes log entries and manages your Cloud Logging configuration.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,196 +28,199 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Logging
-    Gogol.Logging.BillingAccounts.Buckets.Get
-    Gogol.Logging.BillingAccounts.Buckets.Views.Get
-    Gogol.Logging.BillingAccounts.Exclusions.Create
-    Gogol.Logging.BillingAccounts.Exclusions.Delete
-    Gogol.Logging.BillingAccounts.Exclusions.Get
-    Gogol.Logging.BillingAccounts.Exclusions.List
-    Gogol.Logging.BillingAccounts.Exclusions.Patch
-    Gogol.Logging.BillingAccounts.GetCmekSettings
-    Gogol.Logging.BillingAccounts.GetSettings
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Create
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Delete
-    Gogol.Logging.BillingAccounts.Locations.Buckets.List
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Patch
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Undelete
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Create
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Delete
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Views.List
-    Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Patch
-    Gogol.Logging.BillingAccounts.Locations.Get
-    Gogol.Logging.BillingAccounts.Locations.List
-    Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
-    Gogol.Logging.BillingAccounts.Locations.Operations.List
-    Gogol.Logging.BillingAccounts.Logs.Delete
-    Gogol.Logging.BillingAccounts.Logs.List
-    Gogol.Logging.BillingAccounts.Operations.Get
-    Gogol.Logging.BillingAccounts.Sinks.Create
-    Gogol.Logging.BillingAccounts.Sinks.Delete
-    Gogol.Logging.BillingAccounts.Sinks.Get
-    Gogol.Logging.BillingAccounts.Sinks.List
-    Gogol.Logging.BillingAccounts.Sinks.Patch
-    Gogol.Logging.BillingAccounts.Sinks.Update
-    Gogol.Logging.Entries.Copy
-    Gogol.Logging.Entries.List
-    Gogol.Logging.Entries.Tail
-    Gogol.Logging.Entries.Write
-    Gogol.Logging.Exclusions.Create
-    Gogol.Logging.Exclusions.Delete
-    Gogol.Logging.Exclusions.Get
-    Gogol.Logging.Exclusions.List
-    Gogol.Logging.Exclusions.Patch
-    Gogol.Logging.Folders.Exclusions.Create
-    Gogol.Logging.Folders.Exclusions.Delete
-    Gogol.Logging.Folders.Exclusions.Get
-    Gogol.Logging.Folders.Exclusions.List
-    Gogol.Logging.Folders.Exclusions.Patch
-    Gogol.Logging.Folders.GetCmekSettings
-    Gogol.Logging.Folders.GetSettings
-    Gogol.Logging.Folders.Locations.Buckets.Create
-    Gogol.Logging.Folders.Locations.Buckets.Delete
-    Gogol.Logging.Folders.Locations.Buckets.Get
-    Gogol.Logging.Folders.Locations.Buckets.List
-    Gogol.Logging.Folders.Locations.Buckets.Patch
-    Gogol.Logging.Folders.Locations.Buckets.Undelete
-    Gogol.Logging.Folders.Locations.Buckets.Views.Create
-    Gogol.Logging.Folders.Locations.Buckets.Views.Delete
-    Gogol.Logging.Folders.Locations.Buckets.Views.Get
-    Gogol.Logging.Folders.Locations.Buckets.Views.List
-    Gogol.Logging.Folders.Locations.Buckets.Views.Patch
-    Gogol.Logging.Folders.Locations.Get
-    Gogol.Logging.Folders.Locations.List
-    Gogol.Logging.Folders.Locations.Operations.Cancel
-    Gogol.Logging.Folders.Locations.Operations.Get
-    Gogol.Logging.Folders.Locations.Operations.List
-    Gogol.Logging.Folders.Logs.Delete
-    Gogol.Logging.Folders.Logs.List
-    Gogol.Logging.Folders.Sinks.Create
-    Gogol.Logging.Folders.Sinks.Delete
-    Gogol.Logging.Folders.Sinks.Get
-    Gogol.Logging.Folders.Sinks.List
-    Gogol.Logging.Folders.Sinks.Patch
-    Gogol.Logging.Folders.Sinks.Update
-    Gogol.Logging.Folders.UpdateSettings
-    Gogol.Logging.GetCmekSettings
-    Gogol.Logging.GetSettings
-    Gogol.Logging.Locations.Buckets.Create
-    Gogol.Logging.Locations.Buckets.Delete
-    Gogol.Logging.Locations.Buckets.Get
-    Gogol.Logging.Locations.Buckets.List
-    Gogol.Logging.Locations.Buckets.Patch
-    Gogol.Logging.Locations.Buckets.Undelete
-    Gogol.Logging.Locations.Buckets.Views.Create
-    Gogol.Logging.Locations.Buckets.Views.Delete
-    Gogol.Logging.Locations.Buckets.Views.Get
-    Gogol.Logging.Locations.Buckets.Views.List
-    Gogol.Logging.Locations.Buckets.Views.Patch
-    Gogol.Logging.Locations.Get
-    Gogol.Logging.Locations.List
-    Gogol.Logging.Locations.Operations.Cancel
-    Gogol.Logging.Locations.Operations.Get
-    Gogol.Logging.Locations.Operations.List
-    Gogol.Logging.Logs.Delete
-    Gogol.Logging.Logs.List
-    Gogol.Logging.MonitoredResourceDescriptors.List
-    Gogol.Logging.Organizations.Exclusions.Create
-    Gogol.Logging.Organizations.Exclusions.Delete
-    Gogol.Logging.Organizations.Exclusions.Get
-    Gogol.Logging.Organizations.Exclusions.List
-    Gogol.Logging.Organizations.Exclusions.Patch
-    Gogol.Logging.Organizations.GetCmekSettings
-    Gogol.Logging.Organizations.GetSettings
-    Gogol.Logging.Organizations.Locations.Buckets.Create
-    Gogol.Logging.Organizations.Locations.Buckets.Delete
-    Gogol.Logging.Organizations.Locations.Buckets.Get
-    Gogol.Logging.Organizations.Locations.Buckets.List
-    Gogol.Logging.Organizations.Locations.Buckets.Patch
-    Gogol.Logging.Organizations.Locations.Buckets.Undelete
-    Gogol.Logging.Organizations.Locations.Buckets.Views.Create
-    Gogol.Logging.Organizations.Locations.Buckets.Views.Delete
-    Gogol.Logging.Organizations.Locations.Buckets.Views.Get
-    Gogol.Logging.Organizations.Locations.Buckets.Views.List
-    Gogol.Logging.Organizations.Locations.Buckets.Views.Patch
-    Gogol.Logging.Organizations.Locations.Get
-    Gogol.Logging.Organizations.Locations.List
-    Gogol.Logging.Organizations.Locations.Operations.Cancel
-    Gogol.Logging.Organizations.Locations.Operations.Get
-    Gogol.Logging.Organizations.Locations.Operations.List
-    Gogol.Logging.Organizations.Logs.Delete
-    Gogol.Logging.Organizations.Logs.List
-    Gogol.Logging.Organizations.Sinks.Create
-    Gogol.Logging.Organizations.Sinks.Delete
-    Gogol.Logging.Organizations.Sinks.Get
-    Gogol.Logging.Organizations.Sinks.List
-    Gogol.Logging.Organizations.Sinks.Patch
-    Gogol.Logging.Organizations.Sinks.Update
-    Gogol.Logging.Organizations.UpdateCmekSettings
-    Gogol.Logging.Organizations.UpdateSettings
-    Gogol.Logging.Projects.Exclusions.Create
-    Gogol.Logging.Projects.Exclusions.Delete
-    Gogol.Logging.Projects.Exclusions.Get
-    Gogol.Logging.Projects.Exclusions.List
-    Gogol.Logging.Projects.Exclusions.Patch
-    Gogol.Logging.Projects.GetCmekSettings
-    Gogol.Logging.Projects.GetSettings
-    Gogol.Logging.Projects.Locations.Buckets.Create
-    Gogol.Logging.Projects.Locations.Buckets.Delete
-    Gogol.Logging.Projects.Locations.Buckets.Get
-    Gogol.Logging.Projects.Locations.Buckets.List
-    Gogol.Logging.Projects.Locations.Buckets.Patch
-    Gogol.Logging.Projects.Locations.Buckets.Undelete
-    Gogol.Logging.Projects.Locations.Buckets.Views.Create
-    Gogol.Logging.Projects.Locations.Buckets.Views.Delete
-    Gogol.Logging.Projects.Locations.Buckets.Views.Get
-    Gogol.Logging.Projects.Locations.Buckets.Views.List
-    Gogol.Logging.Projects.Locations.Buckets.Views.Patch
-    Gogol.Logging.Projects.Locations.Get
-    Gogol.Logging.Projects.Locations.List
-    Gogol.Logging.Projects.Locations.Operations.Cancel
-    Gogol.Logging.Projects.Locations.Operations.Get
-    Gogol.Logging.Projects.Locations.Operations.List
-    Gogol.Logging.Projects.Logs.Delete
-    Gogol.Logging.Projects.Logs.List
-    Gogol.Logging.Projects.Metrics.Create
-    Gogol.Logging.Projects.Metrics.Delete
-    Gogol.Logging.Projects.Metrics.Get
-    Gogol.Logging.Projects.Metrics.List
-    Gogol.Logging.Projects.Metrics.Update
-    Gogol.Logging.Projects.Sinks.Create
-    Gogol.Logging.Projects.Sinks.Delete
-    Gogol.Logging.Projects.Sinks.Get
-    Gogol.Logging.Projects.Sinks.List
-    Gogol.Logging.Projects.Sinks.Patch
-    Gogol.Logging.Projects.Sinks.Update
-    Gogol.Logging.Sinks.Create
-    Gogol.Logging.Sinks.Delete
-    Gogol.Logging.Sinks.Get
-    Gogol.Logging.Sinks.List
-    Gogol.Logging.Sinks.Update
-    Gogol.Logging.Types
-    Gogol.Logging.UpdateCmekSettings
-    Gogol.Logging.UpdateSettings
+      Gogol.Logging
+    , Gogol.Logging.BillingAccounts.Buckets.Get
+    , Gogol.Logging.BillingAccounts.Buckets.Views.Get
+    , Gogol.Logging.BillingAccounts.Exclusions.Create
+    , Gogol.Logging.BillingAccounts.Exclusions.Delete
+    , Gogol.Logging.BillingAccounts.Exclusions.Get
+    , Gogol.Logging.BillingAccounts.Exclusions.List
+    , Gogol.Logging.BillingAccounts.Exclusions.Patch
+    , Gogol.Logging.BillingAccounts.GetCmekSettings
+    , Gogol.Logging.BillingAccounts.GetSettings
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Create
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Delete
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.List
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Patch
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Undelete
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Create
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Delete
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Views.List
+    , Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Patch
+    , Gogol.Logging.BillingAccounts.Locations.Get
+    , Gogol.Logging.BillingAccounts.Locations.List
+    , Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
+    , Gogol.Logging.BillingAccounts.Locations.Operations.List
+    , Gogol.Logging.BillingAccounts.Logs.Delete
+    , Gogol.Logging.BillingAccounts.Logs.List
+    , Gogol.Logging.BillingAccounts.Operations.Get
+    , Gogol.Logging.BillingAccounts.Sinks.Create
+    , Gogol.Logging.BillingAccounts.Sinks.Delete
+    , Gogol.Logging.BillingAccounts.Sinks.Get
+    , Gogol.Logging.BillingAccounts.Sinks.List
+    , Gogol.Logging.BillingAccounts.Sinks.Patch
+    , Gogol.Logging.BillingAccounts.Sinks.Update
+    , Gogol.Logging.Entries.Copy
+    , Gogol.Logging.Entries.List
+    , Gogol.Logging.Entries.Tail
+    , Gogol.Logging.Entries.Write
+    , Gogol.Logging.Exclusions.Create
+    , Gogol.Logging.Exclusions.Delete
+    , Gogol.Logging.Exclusions.Get
+    , Gogol.Logging.Exclusions.List
+    , Gogol.Logging.Exclusions.Patch
+    , Gogol.Logging.Folders.Exclusions.Create
+    , Gogol.Logging.Folders.Exclusions.Delete
+    , Gogol.Logging.Folders.Exclusions.Get
+    , Gogol.Logging.Folders.Exclusions.List
+    , Gogol.Logging.Folders.Exclusions.Patch
+    , Gogol.Logging.Folders.GetCmekSettings
+    , Gogol.Logging.Folders.GetSettings
+    , Gogol.Logging.Folders.Locations.Buckets.Create
+    , Gogol.Logging.Folders.Locations.Buckets.Delete
+    , Gogol.Logging.Folders.Locations.Buckets.Get
+    , Gogol.Logging.Folders.Locations.Buckets.List
+    , Gogol.Logging.Folders.Locations.Buckets.Patch
+    , Gogol.Logging.Folders.Locations.Buckets.Undelete
+    , Gogol.Logging.Folders.Locations.Buckets.Views.Create
+    , Gogol.Logging.Folders.Locations.Buckets.Views.Delete
+    , Gogol.Logging.Folders.Locations.Buckets.Views.Get
+    , Gogol.Logging.Folders.Locations.Buckets.Views.List
+    , Gogol.Logging.Folders.Locations.Buckets.Views.Patch
+    , Gogol.Logging.Folders.Locations.Get
+    , Gogol.Logging.Folders.Locations.List
+    , Gogol.Logging.Folders.Locations.Operations.Cancel
+    , Gogol.Logging.Folders.Locations.Operations.Get
+    , Gogol.Logging.Folders.Locations.Operations.List
+    , Gogol.Logging.Folders.Logs.Delete
+    , Gogol.Logging.Folders.Logs.List
+    , Gogol.Logging.Folders.Sinks.Create
+    , Gogol.Logging.Folders.Sinks.Delete
+    , Gogol.Logging.Folders.Sinks.Get
+    , Gogol.Logging.Folders.Sinks.List
+    , Gogol.Logging.Folders.Sinks.Patch
+    , Gogol.Logging.Folders.Sinks.Update
+    , Gogol.Logging.Folders.UpdateSettings
+    , Gogol.Logging.GetCmekSettings
+    , Gogol.Logging.GetSettings
+    , Gogol.Logging.Locations.Buckets.Create
+    , Gogol.Logging.Locations.Buckets.Delete
+    , Gogol.Logging.Locations.Buckets.Get
+    , Gogol.Logging.Locations.Buckets.List
+    , Gogol.Logging.Locations.Buckets.Patch
+    , Gogol.Logging.Locations.Buckets.Undelete
+    , Gogol.Logging.Locations.Buckets.Views.Create
+    , Gogol.Logging.Locations.Buckets.Views.Delete
+    , Gogol.Logging.Locations.Buckets.Views.Get
+    , Gogol.Logging.Locations.Buckets.Views.List
+    , Gogol.Logging.Locations.Buckets.Views.Patch
+    , Gogol.Logging.Locations.Get
+    , Gogol.Logging.Locations.List
+    , Gogol.Logging.Locations.Operations.Cancel
+    , Gogol.Logging.Locations.Operations.Get
+    , Gogol.Logging.Locations.Operations.List
+    , Gogol.Logging.Logs.Delete
+    , Gogol.Logging.Logs.List
+    , Gogol.Logging.MonitoredResourceDescriptors.List
+    , Gogol.Logging.Organizations.Exclusions.Create
+    , Gogol.Logging.Organizations.Exclusions.Delete
+    , Gogol.Logging.Organizations.Exclusions.Get
+    , Gogol.Logging.Organizations.Exclusions.List
+    , Gogol.Logging.Organizations.Exclusions.Patch
+    , Gogol.Logging.Organizations.GetCmekSettings
+    , Gogol.Logging.Organizations.GetSettings
+    , Gogol.Logging.Organizations.Locations.Buckets.Create
+    , Gogol.Logging.Organizations.Locations.Buckets.Delete
+    , Gogol.Logging.Organizations.Locations.Buckets.Get
+    , Gogol.Logging.Organizations.Locations.Buckets.List
+    , Gogol.Logging.Organizations.Locations.Buckets.Patch
+    , Gogol.Logging.Organizations.Locations.Buckets.Undelete
+    , Gogol.Logging.Organizations.Locations.Buckets.Views.Create
+    , Gogol.Logging.Organizations.Locations.Buckets.Views.Delete
+    , Gogol.Logging.Organizations.Locations.Buckets.Views.Get
+    , Gogol.Logging.Organizations.Locations.Buckets.Views.List
+    , Gogol.Logging.Organizations.Locations.Buckets.Views.Patch
+    , Gogol.Logging.Organizations.Locations.Get
+    , Gogol.Logging.Organizations.Locations.List
+    , Gogol.Logging.Organizations.Locations.Operations.Cancel
+    , Gogol.Logging.Organizations.Locations.Operations.Get
+    , Gogol.Logging.Organizations.Locations.Operations.List
+    , Gogol.Logging.Organizations.Logs.Delete
+    , Gogol.Logging.Organizations.Logs.List
+    , Gogol.Logging.Organizations.Sinks.Create
+    , Gogol.Logging.Organizations.Sinks.Delete
+    , Gogol.Logging.Organizations.Sinks.Get
+    , Gogol.Logging.Organizations.Sinks.List
+    , Gogol.Logging.Organizations.Sinks.Patch
+    , Gogol.Logging.Organizations.Sinks.Update
+    , Gogol.Logging.Organizations.UpdateCmekSettings
+    , Gogol.Logging.Organizations.UpdateSettings
+    , Gogol.Logging.Projects.Exclusions.Create
+    , Gogol.Logging.Projects.Exclusions.Delete
+    , Gogol.Logging.Projects.Exclusions.Get
+    , Gogol.Logging.Projects.Exclusions.List
+    , Gogol.Logging.Projects.Exclusions.Patch
+    , Gogol.Logging.Projects.GetCmekSettings
+    , Gogol.Logging.Projects.GetSettings
+    , Gogol.Logging.Projects.Locations.Buckets.Create
+    , Gogol.Logging.Projects.Locations.Buckets.Delete
+    , Gogol.Logging.Projects.Locations.Buckets.Get
+    , Gogol.Logging.Projects.Locations.Buckets.List
+    , Gogol.Logging.Projects.Locations.Buckets.Patch
+    , Gogol.Logging.Projects.Locations.Buckets.Undelete
+    , Gogol.Logging.Projects.Locations.Buckets.Views.Create
+    , Gogol.Logging.Projects.Locations.Buckets.Views.Delete
+    , Gogol.Logging.Projects.Locations.Buckets.Views.Get
+    , Gogol.Logging.Projects.Locations.Buckets.Views.List
+    , Gogol.Logging.Projects.Locations.Buckets.Views.Patch
+    , Gogol.Logging.Projects.Locations.Get
+    , Gogol.Logging.Projects.Locations.List
+    , Gogol.Logging.Projects.Locations.Operations.Cancel
+    , Gogol.Logging.Projects.Locations.Operations.Get
+    , Gogol.Logging.Projects.Locations.Operations.List
+    , Gogol.Logging.Projects.Logs.Delete
+    , Gogol.Logging.Projects.Logs.List
+    , Gogol.Logging.Projects.Metrics.Create
+    , Gogol.Logging.Projects.Metrics.Delete
+    , Gogol.Logging.Projects.Metrics.Get
+    , Gogol.Logging.Projects.Metrics.List
+    , Gogol.Logging.Projects.Metrics.Update
+    , Gogol.Logging.Projects.Sinks.Create
+    , Gogol.Logging.Projects.Sinks.Delete
+    , Gogol.Logging.Projects.Sinks.Get
+    , Gogol.Logging.Projects.Sinks.List
+    , Gogol.Logging.Projects.Sinks.Patch
+    , Gogol.Logging.Projects.Sinks.Update
+    , Gogol.Logging.Sinks.Create
+    , Gogol.Logging.Sinks.Delete
+    , Gogol.Logging.Sinks.Get
+    , Gogol.Logging.Sinks.List
+    , Gogol.Logging.Sinks.Update
+    , Gogol.Logging.Types
+    , Gogol.Logging.UpdateCmekSettings
+    , Gogol.Logging.UpdateSettings
 
   other-modules:
-    Gogol.Logging.Internal.Product
-    Gogol.Logging.Internal.Sum
+      Gogol.Logging.Internal.Product
+    , Gogol.Logging.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
