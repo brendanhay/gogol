@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool.Pools.Insert
+-- Module      : Gogol.ReplicaPool.Pools.Updatetemplate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts a new replica pool.
+-- Update the template used by the pool.
 --
--- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.pools.insert@.
-module Network.Google.ReplicaPool.Pools.Insert
+-- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.pools.updatetemplate@.
+module Gogol.ReplicaPool.Pools.Updatetemplate
   ( -- * Resource
-    ReplicaPoolPoolsInsertResource,
+    ReplicaPoolPoolsUpdatetemplateResource,
 
     -- ** Constructing a Request
-    newReplicaPoolPoolsInsert,
-    ReplicaPoolPoolsInsert,
+    newReplicaPoolPoolsUpdatetemplate,
+    ReplicaPoolPoolsUpdatetemplate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPool.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPool.Types
 
--- | A resource alias for @replicapool.pools.insert@ method which the
--- 'ReplicaPoolPoolsInsert' request conforms to.
-type ReplicaPoolPoolsInsertResource =
+-- | A resource alias for @replicapool.pools.updatetemplate@ method which the
+-- 'ReplicaPoolPoolsUpdatetemplate' request conforms to.
+type ReplicaPoolPoolsUpdatetemplateResource =
   "replicapool"
     Core.:> "v1beta1"
     Core.:> "projects"
@@ -52,16 +52,20 @@ type ReplicaPoolPoolsInsertResource =
     Core.:> "zones"
     Core.:> Core.Capture "zone" Core.Text
     Core.:> "pools"
+    Core.:> Core.Capture "poolName" Core.Text
+    Core.:> "updateTemplate"
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Pool
-    Core.:> Core.Post '[Core.JSON] Pool
+    Core.:> Core.ReqBody '[Core.JSON] Template
+    Core.:> Core.Post '[Core.JSON] ()
 
--- | Inserts a new replica pool.
+-- | Update the template used by the pool.
 --
--- /See:/ 'newReplicaPoolPoolsInsert' smart constructor.
-data ReplicaPoolPoolsInsert = ReplicaPoolPoolsInsert
+-- /See:/ 'newReplicaPoolPoolsUpdatetemplate' smart constructor.
+data ReplicaPoolPoolsUpdatetemplate = ReplicaPoolPoolsUpdatetemplate
   { -- | Multipart request metadata.
-    payload :: Pool,
+    payload :: Template,
+    -- | The name of the replica pool for this request.
+    poolName :: Core.Text,
     -- | The project ID for this replica pool.
     projectName :: Core.Text,
     -- | The zone for this replica pool.
@@ -69,34 +73,41 @@ data ReplicaPoolPoolsInsert = ReplicaPoolPoolsInsert
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ReplicaPoolPoolsInsert' with the minimum fields required to make a request.
-newReplicaPoolPoolsInsert ::
+-- | Creates a value of 'ReplicaPoolPoolsUpdatetemplate' with the minimum fields required to make a request.
+newReplicaPoolPoolsUpdatetemplate ::
   -- |  Multipart request metadata. See 'payload'.
-  Pool ->
+  Template ->
+  -- |  The name of the replica pool for this request. See 'poolName'.
+  Core.Text ->
   -- |  The project ID for this replica pool. See 'projectName'.
   Core.Text ->
   -- |  The zone for this replica pool. See 'zone'.
   Core.Text ->
-  ReplicaPoolPoolsInsert
-newReplicaPoolPoolsInsert payload projectName zone =
-  ReplicaPoolPoolsInsert
+  ReplicaPoolPoolsUpdatetemplate
+newReplicaPoolPoolsUpdatetemplate payload poolName projectName zone =
+  ReplicaPoolPoolsUpdatetemplate
     { payload = payload,
+      poolName = poolName,
       projectName = projectName,
       zone = zone
     }
 
-instance Core.GoogleRequest ReplicaPoolPoolsInsert where
-  type Rs ReplicaPoolPoolsInsert = Pool
+instance
+  Core.GoogleRequest
+    ReplicaPoolPoolsUpdatetemplate
+  where
+  type Rs ReplicaPoolPoolsUpdatetemplate = ()
   type
-    Scopes ReplicaPoolPoolsInsert =
+    Scopes ReplicaPoolPoolsUpdatetemplate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/ndev.cloudman",
          "https://www.googleapis.com/auth/replicapool"
        ]
-  requestClient ReplicaPoolPoolsInsert {..} =
+  requestClient ReplicaPoolPoolsUpdatetemplate {..} =
     go
       projectName
       zone
+      poolName
       (Core.Just Core.AltJSON)
       payload
       replicaPoolService
@@ -104,6 +115,6 @@ instance Core.GoogleRequest ReplicaPoolPoolsInsert where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ReplicaPoolPoolsInsertResource
+              Core.Proxy ReplicaPoolPoolsUpdatetemplateResource
           )
           Core.mempty

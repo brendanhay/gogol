@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool.Pools.Get
+-- Module      : Gogol.ReplicaPool.Pools.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about a single replica pool.
+-- List all replica pools.
 --
--- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.pools.get@.
-module Network.Google.ReplicaPool.Pools.Get
+-- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference> for @replicapool.pools.list@.
+module Gogol.ReplicaPool.Pools.List
   ( -- * Resource
-    ReplicaPoolPoolsGetResource,
+    ReplicaPoolPoolsListResource,
 
     -- ** Constructing a Request
-    newReplicaPoolPoolsGet,
-    ReplicaPoolPoolsGet,
+    newReplicaPoolPoolsList,
+    ReplicaPoolPoolsList,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPool.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPool.Types
 
--- | A resource alias for @replicapool.pools.get@ method which the
--- 'ReplicaPoolPoolsGet' request conforms to.
-type ReplicaPoolPoolsGetResource =
+-- | A resource alias for @replicapool.pools.list@ method which the
+-- 'ReplicaPoolPoolsList' request conforms to.
+type ReplicaPoolPoolsListResource =
   "replicapool"
     Core.:> "v1beta1"
     Core.:> "projects"
@@ -52,43 +52,45 @@ type ReplicaPoolPoolsGetResource =
     Core.:> "zones"
     Core.:> Core.Capture "zone" Core.Text
     Core.:> "pools"
-    Core.:> Core.Capture "poolName" Core.Text
+    Core.:> Core.QueryParam "maxResults" Core.Int32
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Pool
+    Core.:> Core.Get '[Core.JSON] PoolsListResponse
 
--- | Gets information about a single replica pool.
+-- | List all replica pools.
 --
--- /See:/ 'newReplicaPoolPoolsGet' smart constructor.
-data ReplicaPoolPoolsGet = ReplicaPoolPoolsGet
-  { -- | The name of the replica pool for this request.
-    poolName :: Core.Text,
-    -- | The project ID for this replica pool.
+-- /See:/ 'newReplicaPoolPoolsList' smart constructor.
+data ReplicaPoolPoolsList = ReplicaPoolPoolsList
+  { -- | Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)
+    maxResults :: Core.Int32,
+    -- | Set this to the nextPageToken value returned by a previous list request to obtain the next page of results from the previous list request.
+    pageToken :: (Core.Maybe Core.Text),
+    -- | The project ID for this request.
     projectName :: Core.Text,
     -- | The zone for this replica pool.
     zone :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ReplicaPoolPoolsGet' with the minimum fields required to make a request.
-newReplicaPoolPoolsGet ::
-  -- |  The name of the replica pool for this request. See 'poolName'.
-  Core.Text ->
-  -- |  The project ID for this replica pool. See 'projectName'.
+-- | Creates a value of 'ReplicaPoolPoolsList' with the minimum fields required to make a request.
+newReplicaPoolPoolsList ::
+  -- |  The project ID for this request. See 'projectName'.
   Core.Text ->
   -- |  The zone for this replica pool. See 'zone'.
   Core.Text ->
-  ReplicaPoolPoolsGet
-newReplicaPoolPoolsGet poolName projectName zone =
-  ReplicaPoolPoolsGet
-    { poolName = poolName,
+  ReplicaPoolPoolsList
+newReplicaPoolPoolsList projectName zone =
+  ReplicaPoolPoolsList
+    { maxResults = 500,
+      pageToken = Core.Nothing,
       projectName = projectName,
       zone = zone
     }
 
-instance Core.GoogleRequest ReplicaPoolPoolsGet where
-  type Rs ReplicaPoolPoolsGet = Pool
+instance Core.GoogleRequest ReplicaPoolPoolsList where
+  type Rs ReplicaPoolPoolsList = PoolsListResponse
   type
-    Scopes ReplicaPoolPoolsGet =
+    Scopes ReplicaPoolPoolsList =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-platform.read-only",
          "https://www.googleapis.com/auth/ndev.cloudman",
@@ -96,17 +98,18 @@ instance Core.GoogleRequest ReplicaPoolPoolsGet where
          "https://www.googleapis.com/auth/replicapool",
          "https://www.googleapis.com/auth/replicapool.readonly"
        ]
-  requestClient ReplicaPoolPoolsGet {..} =
+  requestClient ReplicaPoolPoolsList {..} =
     go
       projectName
       zone
-      poolName
+      (Core.Just maxResults)
+      pageToken
       (Core.Just Core.AltJSON)
       replicaPoolService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ReplicaPoolPoolsGetResource
+              Core.Proxy ReplicaPoolPoolsListResource
           )
           Core.mempty

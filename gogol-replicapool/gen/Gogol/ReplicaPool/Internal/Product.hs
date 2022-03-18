@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool.Internal.Product
+-- Module      : Gogol.ReplicaPool.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ReplicaPool.Internal.Product
+module Gogol.ReplicaPool.Internal.Product
   ( -- * AccessConfig
     AccessConfig (..),
     newAccessConfig,
@@ -120,8 +120,8 @@ module Network.Google.ReplicaPool.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPool.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPool.Internal.Sum
 
 -- | A Compute Engine network accessConfig. Identical to the accessConfig on corresponding Compute Engine resource.
 --

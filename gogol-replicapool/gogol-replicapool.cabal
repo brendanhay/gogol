@@ -43,27 +43,28 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ReplicaPool
-    Network.Google.ReplicaPool.Pools.Delete
-    Network.Google.ReplicaPool.Pools.Get
-    Network.Google.ReplicaPool.Pools.Insert
-    Network.Google.ReplicaPool.Pools.List
-    Network.Google.ReplicaPool.Pools.Resize
-    Network.Google.ReplicaPool.Pools.Updatetemplate
-    Network.Google.ReplicaPool.Replicas.Delete
-    Network.Google.ReplicaPool.Replicas.Get
-    Network.Google.ReplicaPool.Replicas.List
-    Network.Google.ReplicaPool.Replicas.Restart
-    Network.Google.ReplicaPool.Types
+    Gogol.ReplicaPool
+    Gogol.ReplicaPool.Pools.Delete
+    Gogol.ReplicaPool.Pools.Get
+    Gogol.ReplicaPool.Pools.Insert
+    Gogol.ReplicaPool.Pools.List
+    Gogol.ReplicaPool.Pools.Resize
+    Gogol.ReplicaPool.Pools.Updatetemplate
+    Gogol.ReplicaPool.Replicas.Delete
+    Gogol.ReplicaPool.Replicas.Get
+    Gogol.ReplicaPool.Replicas.List
+    Gogol.ReplicaPool.Replicas.Restart
+    Gogol.ReplicaPool.Types
 
   other-modules:
-    Network.Google.ReplicaPool.Internal.Product
-    Network.Google.ReplicaPool.Internal.Sum
+    Gogol.ReplicaPool.Internal.Product
+    Gogol.ReplicaPool.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

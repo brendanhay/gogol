@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPool
+-- Module      : Gogol.ReplicaPool
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Replica Pool API allows users to declaratively provision and manage groups of Google Compute Engine instances based on a common template.
 --
 -- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference>
-module Network.Google.ReplicaPool
+module Gogol.ReplicaPool
   ( -- * Configuration
     replicaPoolService,
 
@@ -189,14 +189,14 @@ module Network.Google.ReplicaPool
   )
 where
 
-import Network.Google.ReplicaPool.Pools.Delete
-import Network.Google.ReplicaPool.Pools.Get
-import Network.Google.ReplicaPool.Pools.Insert
-import Network.Google.ReplicaPool.Pools.List
-import Network.Google.ReplicaPool.Pools.Resize
-import Network.Google.ReplicaPool.Pools.Updatetemplate
-import Network.Google.ReplicaPool.Replicas.Delete
-import Network.Google.ReplicaPool.Replicas.Get
-import Network.Google.ReplicaPool.Replicas.List
-import Network.Google.ReplicaPool.Replicas.Restart
-import Network.Google.ReplicaPool.Types
+import Gogol.ReplicaPool.Pools.Delete
+import Gogol.ReplicaPool.Pools.Get
+import Gogol.ReplicaPool.Pools.Insert
+import Gogol.ReplicaPool.Pools.List
+import Gogol.ReplicaPool.Pools.Resize
+import Gogol.ReplicaPool.Pools.Updatetemplate
+import Gogol.ReplicaPool.Replicas.Delete
+import Gogol.ReplicaPool.Replicas.Get
+import Gogol.ReplicaPool.Replicas.List
+import Gogol.ReplicaPool.Replicas.Restart
+import Gogol.ReplicaPool.Types
