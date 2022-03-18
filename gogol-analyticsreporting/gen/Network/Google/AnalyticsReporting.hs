@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AnalyticsReporting
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,479 +30,289 @@
 --
 -- /See:/ <https://developers.google.com/analytics/devguides/reporting/core/v4/ Analytics Reporting API Reference>
 module Network.Google.AnalyticsReporting
-    (
-    -- * Service Configuration
-      analyticsReportingService
+  ( -- * Configuration
+    analyticsReportingService,
 
     -- * OAuth Scopes
-    , analyticsScope
-    , analyticsReadOnlyScope
-
-    -- * API Declaration
-    , AnalyticsReportingAPI
+    analyticsScope,
+    analyticsReadOnlyScope,
 
     -- * Resources
 
     -- ** analyticsreporting.reports.batchGet
-    , module Network.Google.Resource.AnalyticsReporting.Reports.BatchGet
+    AnalyticsReportingReportsBatchGetResource,
+    newAnalyticsReportingReportsBatchGet,
+    AnalyticsReportingReportsBatchGet,
 
     -- ** analyticsreporting.userActivity.search
-    , module Network.Google.Resource.AnalyticsReporting.UserActivity.Search
+    AnalyticsReportingUserActivitySearchResource,
+    newAnalyticsReportingUserActivitySearch,
+    AnalyticsReportingUserActivitySearch,
 
     -- * Types
 
-    -- ** MetricFilter
-    , MetricFilter
-    , metricFilter
-    , mfNot
-    , mfOperator
-    , mfMetricName
-    , mfComparisonValue
-
-    -- ** EventData
-    , EventData
-    , eventData
-    , edEventCategory
-    , edEventCount
-    , edEventValue
-    , edEventLabel
-    , edEventAction
-
-    -- ** MetricFilterOperator
-    , MetricFilterOperator (..)
-
-    -- ** ReportRow
-    , ReportRow
-    , reportRow
-    , rrMetrics
-    , rrDimensions
-
-    -- ** PivotHeaderEntry
-    , PivotHeaderEntry
-    , pivotHeaderEntry
-    , pheDimensionValues
-    , pheDimensionNames
-    , pheMetric
-
-    -- ** PivotValueRegion
-    , PivotValueRegion
-    , pivotValueRegion
-    , pvrValues
-
-    -- ** ReportRequest
-    , ReportRequest
-    , reportRequest
-    , rMetrics
-    , rPivots
-    , rCohortGroup
-    , rSamplingLevel
-    , rIncludeEmptyRows
-    , rDateRanges
-    , rViewId
-    , rHideTotals
-    , rHideValueRanges
-    , rMetricFilterClauses
-    , rSegments
-    , rPageToken
-    , rDimensions
-    , rDimensionFilterClauses
-    , rPageSize
-    , rOrderBys
-    , rFiltersExpression
-
-    -- ** MetricHeaderEntry
-    , MetricHeaderEntry
-    , metricHeaderEntry
-    , mheName
-    , mheType
-
-    -- ** GoalSetData
-    , GoalSetData
-    , goalSetData
-    , gsdGoals
-
-    -- ** CohortGroup
-    , CohortGroup
-    , cohortGroup
-    , cgCohorts
-    , cgLifetimeValue
-
-    -- ** SimpleSegment
-    , SimpleSegment
-    , simpleSegment
-    , ssOrFiltersForSegment
-
-    -- ** DimensionFilterClause
-    , DimensionFilterClause
-    , dimensionFilterClause
-    , dfcOperator
-    , dfcFilters
-
-    -- ** DimensionFilterClauseOperator
-    , DimensionFilterClauseOperator (..)
-
-    -- ** CohortType
-    , CohortType (..)
-
-    -- ** OrderBy
-    , OrderBy
-    , orderBy
-    , obOrderType
-    , obSortOrder
-    , obFieldName
-
-    -- ** Dimension
-    , Dimension
-    , dimension
-    , dName
-    , dHistogramBuckets
-
-    -- ** SearchUserActivityRequestActivityTypesItem
-    , SearchUserActivityRequestActivityTypesItem (..)
-
-    -- ** DateRangeValues
-    , DateRangeValues
-    , dateRangeValues
-    , drvPivotValueRegions
-    , drvValues
-
-    -- ** PivotHeader
-    , PivotHeader
-    , pivotHeader
-    , phTotalPivotGroupsCount
-    , phPivotHeaderEntries
-
-    -- ** SearchUserActivityRequest
-    , SearchUserActivityRequest
-    , searchUserActivityRequest
-    , suarViewId
-    , suarDateRange
-    , suarUser
-    , suarPageToken
-    , suarPageSize
-    , suarActivityTypes
-
-    -- ** MetricHeader
-    , MetricHeader
-    , metricHeader
-    , mhPivotHeaders
-    , mhMetricHeaderEntries
-
-    -- ** SegmentFilter
-    , SegmentFilter
-    , segmentFilter
-    , sfNot
-    , sfSimpleSegment
-    , sfSequenceSegment
-
-    -- ** OrderByOrderType
-    , OrderByOrderType (..)
-
-    -- ** DateRange
-    , DateRange
-    , dateRange
-    , drEndDate
-    , drStartDate
-
-    -- ** Report
-    , Report
-    , report
-    , rNextPageToken
-    , rData
-    , rColumnHeader
-
-    -- ** PageviewData
-    , PageviewData
-    , pageviewData
-    , pdPageTitle
-    , pdPagePath
-
-    -- ** EcommerceDataActionType
-    , EcommerceDataActionType (..)
-
-    -- ** ReportData
-    , ReportData
-    , reportData
-    , rdMinimums
-    , rdRows
-    , rdTotals
-    , rdSamplesReadCounts
-    , rdMaximums
-    , rdDataLastRefreshed
-    , rdRowCount
-    , rdSamplingSpaceSizes
-    , rdIsDataGolden
-
-    -- ** SegmentFilterClause
-    , SegmentFilterClause
-    , segmentFilterClause
-    , sfcMetricFilter
-    , sfcNot
-    , sfcDimensionFilter
-
-    -- ** SegmentSequenceStep
-    , SegmentSequenceStep
-    , segmentSequenceStep
-    , sssMatchType
-    , sssOrFiltersForSegment
-
-    -- ** OrFiltersForSegment
-    , OrFiltersForSegment
-    , orFiltersForSegment
-    , offsSegmentFilterClauses
-
-    -- ** SegmentDefinition
-    , SegmentDefinition
-    , segmentDefinition
-    , sdSegmentFilters
-
-    -- ** OrderBySortOrder
-    , OrderBySortOrder (..)
-
-    -- ** User
-    , User
-    , user
-    , uUserId
-    , uType
-
-    -- ** Pivot
-    , Pivot
-    , pivot
-    , pStartGroup
-    , pMetrics
-    , pMaxGroupCount
-    , pDimensions
-    , pDimensionFilterClauses
-
-    -- ** TransactionData
-    , TransactionData
-    , transactionData
-    , tdTransactionId
-    , tdTransactionTax
-    , tdTransactionShipping
-    , tdTransactionRevenue
-
-    -- ** SequenceSegment
-    , SequenceSegment
-    , sequenceSegment
-    , ssFirstStepShouldMatchFirstHit
-    , ssSegmentSequenceSteps
-
-    -- ** Metric
-    , Metric
-    , metric
-    , mFormattingType
-    , mAlias
-    , mExpression
-
-    -- ** SegmentMetricFilterOperator
-    , SegmentMetricFilterOperator (..)
-
-    -- ** MetricHeaderEntryType
-    , MetricHeaderEntryType (..)
-
-    -- ** SegmentMetricFilter
-    , SegmentMetricFilter
-    , segmentMetricFilter
-    , smfOperator
-    , smfMetricName
-    , smfMaxComparisonValue
-    , smfScope
-    , smfComparisonValue
-
-    -- ** ReportRequestSamplingLevel
-    , ReportRequestSamplingLevel (..)
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** GetReportsRequest
-    , GetReportsRequest
-    , getReportsRequest
-    , grrUseResourceQuotas
-    , grrReportRequests
-
-    -- ** UserActivitySession
-    , UserActivitySession
-    , userActivitySession
-    , uasPlatform
-    , uasDeviceCategory
-    , uasActivities
-    , uasSessionDate
-    , uasDataSource
-    , uasSessionId
-
-    -- ** SegmentSequenceStepMatchType
-    , SegmentSequenceStepMatchType (..)
-
-    -- ** GoalData
-    , GoalData
-    , goalData
-    , gdGoalPreviousStep2
-    , gdGoalName
-    , gdGoalPreviousStep3
-    , gdGoalIndex
-    , gdGoalCompletionLocation
-    , gdGoalPreviousStep1
-    , gdGoalCompletions
-    , gdGoalValue
+    Xgafv (..),
 
     -- ** Activity
-    , Activity
-    , activity
-    , aEvent
-    , aHostname
-    , aActivityType
-    , aMedium
-    , aPageview
-    , aCampaign
-    , aGoals
-    , aChannelGrouping
-    , aAppview
-    , aSource
-    , aActivityTime
-    , aEcommerce
-    , aCustomDimension
-    , aKeyword
-    , aLandingPagePath
+    Activity (..),
+    newActivity,
+
+    -- ** Activity_ActivityType
+    Activity_ActivityType (..),
 
     -- ** Cohort
-    , Cohort
-    , cohort
-    , cDateRange
-    , cName
-    , cType
+    Cohort (..),
+    newCohort,
 
-    -- ** SegmentMetricFilterScope
-    , SegmentMetricFilterScope (..)
+    -- ** Cohort_Type
+    Cohort_Type (..),
 
-    -- ** EcommerceData
-    , EcommerceData
-    , ecommerceData
-    , edEcommerceType
-    , edTransaction
-    , edProducts
-    , edActionType
-
-    -- ** EcommerceDataEcommerceType
-    , EcommerceDataEcommerceType (..)
-
-    -- ** DimensionFilter
-    , DimensionFilter
-    , dimensionFilter
-    , dfNot
-    , dfOperator
-    , dfExpressions
-    , dfDimensionName
-    , dfCaseSensitive
-
-    -- ** GetReportsResponse
-    , GetReportsResponse
-    , getReportsResponse
-    , grrReports
-    , grrResourceQuotasRemaining
-    , grrQueryCost
-
-    -- ** DimensionFilterOperator
-    , DimensionFilterOperator (..)
-
-    -- ** ActivityActivityType
-    , ActivityActivityType (..)
-
-    -- ** MetricFormattingType
-    , MetricFormattingType (..)
-
-    -- ** CustomDimension
-    , CustomDimension
-    , customDimension
-    , cdValue
-    , cdIndex
-
-    -- ** Segment
-    , Segment
-    , segment
-    , sDynamicSegment
-    , sSegmentId
-
-    -- ** ProductData
-    , ProductData
-    , productData
-    , pdProductName
-    , pdProductSKU
-    , pdItemRevenue
-    , pdProductQuantity
-
-    -- ** SegmentDimensionFilterOperator
-    , SegmentDimensionFilterOperator (..)
-
-    -- ** ResourceQuotasRemaining
-    , ResourceQuotasRemaining
-    , resourceQuotasRemaining
-    , rqrHourlyQuotaTokensRemaining
-    , rqrDailyQuotaTokensRemaining
-
-    -- ** SegmentDimensionFilter
-    , SegmentDimensionFilter
-    , segmentDimensionFilter
-    , sdfOperator
-    , sdfMinComparisonValue
-    , sdfMaxComparisonValue
-    , sdfExpressions
-    , sdfDimensionName
-    , sdfCaseSensitive
-
-    -- ** DynamicSegment
-    , DynamicSegment
-    , dynamicSegment
-    , dsUserSegment
-    , dsName
-    , dsSessionSegment
-
-    -- ** MetricFilterClause
-    , MetricFilterClause
-    , metricFilterClause
-    , mfcOperator
-    , mfcFilters
-
-    -- ** MetricFilterClauseOperator
-    , MetricFilterClauseOperator (..)
-
-    -- ** UserType
-    , UserType (..)
+    -- ** CohortGroup
+    CohortGroup (..),
+    newCohortGroup,
 
     -- ** ColumnHeader
-    , ColumnHeader
-    , columnHeader
-    , chMetricHeader
-    , chDimensions
+    ColumnHeader (..),
+    newColumnHeader,
 
-    -- ** SearchUserActivityResponse
-    , SearchUserActivityResponse
-    , searchUserActivityResponse
-    , suarNextPageToken
-    , suarSampleRate
-    , suarSessions
-    , suarTotalRows
+    -- ** CustomDimension
+    CustomDimension (..),
+    newCustomDimension,
+
+    -- ** DateRange
+    DateRange (..),
+    newDateRange,
+
+    -- ** DateRangeValues
+    DateRangeValues (..),
+    newDateRangeValues,
+
+    -- ** Dimension
+    Dimension (..),
+    newDimension,
+
+    -- ** DimensionFilter
+    DimensionFilter (..),
+    newDimensionFilter,
+
+    -- ** DimensionFilter_Operator
+    DimensionFilter_Operator (..),
+
+    -- ** DimensionFilterClause
+    DimensionFilterClause (..),
+    newDimensionFilterClause,
+
+    -- ** DimensionFilterClause_Operator
+    DimensionFilterClause_Operator (..),
+
+    -- ** DynamicSegment
+    DynamicSegment (..),
+    newDynamicSegment,
+
+    -- ** EcommerceData
+    EcommerceData (..),
+    newEcommerceData,
+
+    -- ** EcommerceData_ActionType
+    EcommerceData_ActionType (..),
+
+    -- ** EcommerceData_EcommerceType
+    EcommerceData_EcommerceType (..),
+
+    -- ** EventData
+    EventData (..),
+    newEventData,
+
+    -- ** GetReportsRequest
+    GetReportsRequest (..),
+    newGetReportsRequest,
+
+    -- ** GetReportsResponse
+    GetReportsResponse (..),
+    newGetReportsResponse,
+
+    -- ** GoalData
+    GoalData (..),
+    newGoalData,
+
+    -- ** GoalSetData
+    GoalSetData (..),
+    newGoalSetData,
+
+    -- ** Metric
+    Metric (..),
+    newMetric,
+
+    -- ** Metric_FormattingType
+    Metric_FormattingType (..),
+
+    -- ** MetricFilter
+    MetricFilter (..),
+    newMetricFilter,
+
+    -- ** MetricFilter_Operator
+    MetricFilter_Operator (..),
+
+    -- ** MetricFilterClause
+    MetricFilterClause (..),
+    newMetricFilterClause,
+
+    -- ** MetricFilterClause_Operator
+    MetricFilterClause_Operator (..),
+
+    -- ** MetricHeader
+    MetricHeader (..),
+    newMetricHeader,
+
+    -- ** MetricHeaderEntry
+    MetricHeaderEntry (..),
+    newMetricHeaderEntry,
+
+    -- ** MetricHeaderEntry_Type
+    MetricHeaderEntry_Type (..),
+
+    -- ** OrFiltersForSegment
+    OrFiltersForSegment (..),
+    newOrFiltersForSegment,
+
+    -- ** OrderBy
+    OrderBy (..),
+    newOrderBy,
+
+    -- ** OrderBy_OrderType
+    OrderBy_OrderType (..),
+
+    -- ** OrderBy_SortOrder
+    OrderBy_SortOrder (..),
+
+    -- ** PageviewData
+    PageviewData (..),
+    newPageviewData,
+
+    -- ** Pivot
+    Pivot (..),
+    newPivot,
+
+    -- ** PivotHeader
+    PivotHeader (..),
+    newPivotHeader,
+
+    -- ** PivotHeaderEntry
+    PivotHeaderEntry (..),
+    newPivotHeaderEntry,
+
+    -- ** PivotValueRegion
+    PivotValueRegion (..),
+    newPivotValueRegion,
+
+    -- ** ProductData
+    ProductData (..),
+    newProductData,
+
+    -- ** Report
+    Report (..),
+    newReport,
+
+    -- ** ReportData
+    ReportData (..),
+    newReportData,
+
+    -- ** ReportRequest
+    ReportRequest (..),
+    newReportRequest,
+
+    -- ** ReportRequest_SamplingLevel
+    ReportRequest_SamplingLevel (..),
+
+    -- ** ReportRow
+    ReportRow (..),
+    newReportRow,
+
+    -- ** ResourceQuotasRemaining
+    ResourceQuotasRemaining (..),
+    newResourceQuotasRemaining,
 
     -- ** ScreenviewData
-    , ScreenviewData
-    , screenviewData
-    , sdMobileDeviceModel
-    , sdMobileDeviceBranding
-    , sdAppName
-    , sdScreenName
-    ) where
+    ScreenviewData (..),
+    newScreenviewData,
 
-import Network.Google.Prelude
+    -- ** SearchUserActivityRequest
+    SearchUserActivityRequest (..),
+    newSearchUserActivityRequest,
+
+    -- ** SearchUserActivityRequest_ActivityTypesItem
+    SearchUserActivityRequest_ActivityTypesItem (..),
+
+    -- ** SearchUserActivityResponse
+    SearchUserActivityResponse (..),
+    newSearchUserActivityResponse,
+
+    -- ** Segment
+    Segment (..),
+    newSegment,
+
+    -- ** SegmentDefinition
+    SegmentDefinition (..),
+    newSegmentDefinition,
+
+    -- ** SegmentDimensionFilter
+    SegmentDimensionFilter (..),
+    newSegmentDimensionFilter,
+
+    -- ** SegmentDimensionFilter_Operator
+    SegmentDimensionFilter_Operator (..),
+
+    -- ** SegmentFilter
+    SegmentFilter (..),
+    newSegmentFilter,
+
+    -- ** SegmentFilterClause
+    SegmentFilterClause (..),
+    newSegmentFilterClause,
+
+    -- ** SegmentMetricFilter
+    SegmentMetricFilter (..),
+    newSegmentMetricFilter,
+
+    -- ** SegmentMetricFilter_Operator
+    SegmentMetricFilter_Operator (..),
+
+    -- ** SegmentMetricFilter_Scope
+    SegmentMetricFilter_Scope (..),
+
+    -- ** SegmentSequenceStep
+    SegmentSequenceStep (..),
+    newSegmentSequenceStep,
+
+    -- ** SegmentSequenceStep_MatchType
+    SegmentSequenceStep_MatchType (..),
+
+    -- ** SequenceSegment
+    SequenceSegment (..),
+    newSequenceSegment,
+
+    -- ** SimpleSegment
+    SimpleSegment (..),
+    newSimpleSegment,
+
+    -- ** TransactionData
+    TransactionData (..),
+    newTransactionData,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_Type
+    User_Type (..),
+
+    -- ** UserActivitySession
+    UserActivitySession (..),
+    newUserActivitySession,
+  )
+where
+
+import Network.Google.AnalyticsReporting.Reports.BatchGet
 import Network.Google.AnalyticsReporting.Types
-import Network.Google.Resource.AnalyticsReporting.Reports.BatchGet
-import Network.Google.Resource.AnalyticsReporting.UserActivity.Search
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Analytics Reporting API service.
-type AnalyticsReportingAPI =
-     ReportsBatchGetResource :<|>
-       UserActivitySearchResource
+import Network.Google.AnalyticsReporting.UserActivity.Search
