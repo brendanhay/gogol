@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AcceleratedMobilePageUrl
+-- Module      : Gogol.AcceleratedMobilePageUrl
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves the list of AMP URLs (and equivalent AMP Cache URLs) for a given list of public URL(s).
 --
 -- /See:/ <https://developers.google.com/amp/cache/ Accelerated Mobile Pages (AMP) URL API Reference>
-module Network.Google.AcceleratedMobilePageUrl
+module Gogol.AcceleratedMobilePageUrl
   ( -- * Configuration
     acceleratedMobilePageUrlService,
 
@@ -69,5 +69,5 @@ module Network.Google.AcceleratedMobilePageUrl
   )
 where
 
-import Network.Google.AcceleratedMobilePageUrl.AmpUrls.BatchGet
-import Network.Google.AcceleratedMobilePageUrl.Types
+import Gogol.AcceleratedMobilePageUrl.AmpUrls.BatchGet
+import Gogol.AcceleratedMobilePageUrl.Types

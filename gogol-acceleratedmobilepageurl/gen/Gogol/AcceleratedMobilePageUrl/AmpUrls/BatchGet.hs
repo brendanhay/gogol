@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AcceleratedMobilePageUrl.AmpUrls.BatchGet
+-- Module      : Gogol.AcceleratedMobilePageUrl.AmpUrls.BatchGet
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns AMP URL(s) and equivalent </amp/cache/overview#amp-cache-url-format AMP Cache URL(s)>.
 --
 -- /See:/ <https://developers.google.com/amp/cache/ Accelerated Mobile Pages (AMP) URL API Reference> for @acceleratedmobilepageurl.ampUrls.batchGet@.
-module Network.Google.AcceleratedMobilePageUrl.AmpUrls.BatchGet
+module Gogol.AcceleratedMobilePageUrl.AmpUrls.BatchGet
   ( -- * Resource
     AcceleratedMobilePageUrlAmpUrlsBatchGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AcceleratedMobilePageUrl.AmpUrls.BatchGet
   )
 where
 
-import Network.Google.AcceleratedMobilePageUrl.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AcceleratedMobilePageUrl.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @acceleratedmobilepageurl.ampUrls.batchGet@ method which the
 -- 'AcceleratedMobilePageUrlAmpUrlsBatchGet' request conforms to.
