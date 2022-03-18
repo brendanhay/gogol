@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,89 +30,96 @@
 --
 -- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.templates.get@.
 module Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Get
-    (
-    -- * Resource
-      TagManagerAccountsContainersWorkspacesTemplatesGetResource
+  ( -- * Resource
+    TagManagerAccountsContainersWorkspacesTemplatesGetResource,
 
     -- ** Constructing a Request
-    , newTagManagerAccountsContainersWorkspacesTemplatesGet
-    , TagManagerAccountsContainersWorkspacesTemplatesGet
-    ) where
+    newTagManagerAccountsContainersWorkspacesTemplatesGet,
+    TagManagerAccountsContainersWorkspacesTemplatesGet,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.templates.get@ method which the
 -- 'TagManagerAccountsContainersWorkspacesTemplatesGet' request conforms to.
-type TagManagerAccountsContainersWorkspacesTemplatesGetResource
-     =
-     "tagmanager" Core.:>
-       "v2" Core.:>
-         Core.Capture "path" Core.Text Core.:>
-           Core.QueryParam "$.xgafv" Xgafv Core.:>
-             Core.QueryParam "access_token" Core.Text Core.:>
-               Core.QueryParam "callback" Core.Text Core.:>
-                 Core.QueryParam "uploadType" Core.Text Core.:>
-                   Core.QueryParam "upload_protocol" Core.Text Core.:>
-                     Core.QueryParam "alt" Core.AltJSON Core.:>
-                       Core.Get '[Core.JSON] CustomTemplate
+type TagManagerAccountsContainersWorkspacesTemplatesGetResource =
+  "tagmanager"
+    Core.:> "v2"
+    Core.:> Core.Capture "path" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] CustomTemplate
 
 -- | Gets a GTM Template.
 --
 -- /See:/ 'newTagManagerAccountsContainersWorkspacesTemplatesGet' smart constructor.
 data TagManagerAccountsContainersWorkspacesTemplatesGet = TagManagerAccountsContainersWorkspacesTemplatesGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | GTM Custom Template\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/templates\/{template/id}
-    , path :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | GTM Custom Template\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/templates\/{template/id}
+    path :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TagManagerAccountsContainersWorkspacesTemplatesGet' with the minimum fields required to make a request.
-newTagManagerAccountsContainersWorkspacesTemplatesGet 
-    ::  Core.Text
-       -- ^  GTM Custom Template\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/templates\/{template/id} See 'path'.
-    -> TagManagerAccountsContainersWorkspacesTemplatesGet
+newTagManagerAccountsContainersWorkspacesTemplatesGet ::
+  -- |  GTM Custom Template\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/templates\/{template/id} See 'path'.
+  Core.Text ->
+  TagManagerAccountsContainersWorkspacesTemplatesGet
 newTagManagerAccountsContainersWorkspacesTemplatesGet path =
   TagManagerAccountsContainersWorkspacesTemplatesGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , path = path
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      path = path,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           TagManagerAccountsContainersWorkspacesTemplatesGet
-         where
-        type Rs
-               TagManagerAccountsContainersWorkspacesTemplatesGet
-             = CustomTemplate
-        type Scopes
-               TagManagerAccountsContainersWorkspacesTemplatesGet
-             =
-             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
-               "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient
-          TagManagerAccountsContainersWorkspacesTemplatesGet{..}
-          = go path xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              tagManagerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           TagManagerAccountsContainersWorkspacesTemplatesGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    TagManagerAccountsContainersWorkspacesTemplatesGet
+  where
+  type
+    Rs
+      TagManagerAccountsContainersWorkspacesTemplatesGet =
+      CustomTemplate
+  type
+    Scopes
+      TagManagerAccountsContainersWorkspacesTemplatesGet =
+      '[ "https://www.googleapis.com/auth/tagmanager.edit.containers",
+         "https://www.googleapis.com/auth/tagmanager.readonly"
+       ]
+  requestClient
+    TagManagerAccountsContainersWorkspacesTemplatesGet {..} =
+      go
+        path
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        tagManagerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  TagManagerAccountsContainersWorkspacesTemplatesGetResource
+            )
+            Core.mempty

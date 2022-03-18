@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,93 +30,99 @@
 --
 -- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.clients.revert@.
 module Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Revert
-    (
-    -- * Resource
-      TagManagerAccountsContainersWorkspacesClientsRevertResource
+  ( -- * Resource
+    TagManagerAccountsContainersWorkspacesClientsRevertResource,
 
     -- ** Constructing a Request
-    , newTagManagerAccountsContainersWorkspacesClientsRevert
-    , TagManagerAccountsContainersWorkspacesClientsRevert
-    ) where
+    newTagManagerAccountsContainersWorkspacesClientsRevert,
+    TagManagerAccountsContainersWorkspacesClientsRevert,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.clients.revert@ method which the
 -- 'TagManagerAccountsContainersWorkspacesClientsRevert' request conforms to.
-type TagManagerAccountsContainersWorkspacesClientsRevertResource
-     =
-     "tagmanager" Core.:>
-       "v2" Core.:>
-         Core.CaptureMode "path" "revert" Core.Text Core.:>
-           Core.QueryParam "$.xgafv" Xgafv Core.:>
-             Core.QueryParam "access_token" Core.Text Core.:>
-               Core.QueryParam "callback" Core.Text Core.:>
-                 Core.QueryParam "fingerprint" Core.Text Core.:>
-                   Core.QueryParam "uploadType" Core.Text Core.:>
-                     Core.QueryParam "upload_protocol" Core.Text Core.:>
-                       Core.QueryParam "alt" Core.AltJSON Core.:>
-                         Core.Post '[Core.JSON] RevertClientResponse
+type TagManagerAccountsContainersWorkspacesClientsRevertResource =
+  "tagmanager"
+    Core.:> "v2"
+    Core.:> Core.CaptureMode "path" "revert" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "fingerprint" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Post '[Core.JSON] RevertClientResponse
 
 -- | Reverts changes to a GTM Client in a GTM Workspace.
 --
 -- /See:/ 'newTagManagerAccountsContainersWorkspacesClientsRevert' smart constructor.
 data TagManagerAccountsContainersWorkspacesClientsRevert = TagManagerAccountsContainersWorkspacesClientsRevert
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | When provided, this fingerprint must match the fingerprint of the client in storage.
-    , fingerprint :: (Core.Maybe Core.Text)
-      -- | GTM Client\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/clients\/{client/id}
-    , path :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | When provided, this fingerprint must match the fingerprint of the client in storage.
+    fingerprint :: (Core.Maybe Core.Text),
+    -- | GTM Client\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/clients\/{client/id}
+    path :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TagManagerAccountsContainersWorkspacesClientsRevert' with the minimum fields required to make a request.
-newTagManagerAccountsContainersWorkspacesClientsRevert 
-    ::  Core.Text
-       -- ^  GTM Client\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/clients\/{client/id} See 'path'.
-    -> TagManagerAccountsContainersWorkspacesClientsRevert
+newTagManagerAccountsContainersWorkspacesClientsRevert ::
+  -- |  GTM Client\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/clients\/{client/id} See 'path'.
+  Core.Text ->
+  TagManagerAccountsContainersWorkspacesClientsRevert
 newTagManagerAccountsContainersWorkspacesClientsRevert path =
   TagManagerAccountsContainersWorkspacesClientsRevert
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , fingerprint = Core.Nothing
-    , path = path
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      fingerprint = Core.Nothing,
+      path = path,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           TagManagerAccountsContainersWorkspacesClientsRevert
-         where
-        type Rs
-               TagManagerAccountsContainersWorkspacesClientsRevert
-             = RevertClientResponse
-        type Scopes
-               TagManagerAccountsContainersWorkspacesClientsRevert
-             =
-             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient
-          TagManagerAccountsContainersWorkspacesClientsRevert{..}
-          = go path xgafv accessToken callback fingerprint
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              tagManagerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           TagManagerAccountsContainersWorkspacesClientsRevertResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    TagManagerAccountsContainersWorkspacesClientsRevert
+  where
+  type
+    Rs
+      TagManagerAccountsContainersWorkspacesClientsRevert =
+      RevertClientResponse
+  type
+    Scopes
+      TagManagerAccountsContainersWorkspacesClientsRevert =
+      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+  requestClient
+    TagManagerAccountsContainersWorkspacesClientsRevert {..} =
+      go
+        path
+        xgafv
+        accessToken
+        callback
+        fingerprint
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        tagManagerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  TagManagerAccountsContainersWorkspacesClientsRevertResource
+            )
+            Core.mempty

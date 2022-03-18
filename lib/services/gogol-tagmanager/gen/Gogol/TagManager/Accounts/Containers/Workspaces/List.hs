@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,94 +30,101 @@
 --
 -- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.list@.
 module Gogol.TagManager.Accounts.Containers.Workspaces.List
-    (
-    -- * Resource
-      TagManagerAccountsContainersWorkspacesListResource
+  ( -- * Resource
+    TagManagerAccountsContainersWorkspacesListResource,
 
     -- ** Constructing a Request
-    , newTagManagerAccountsContainersWorkspacesList
-    , TagManagerAccountsContainersWorkspacesList
-    ) where
+    newTagManagerAccountsContainersWorkspacesList,
+    TagManagerAccountsContainersWorkspacesList,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.list@ method which the
 -- 'TagManagerAccountsContainersWorkspacesList' request conforms to.
-type TagManagerAccountsContainersWorkspacesListResource
-     =
-     "tagmanager" Core.:>
-       "v2" Core.:>
-         Core.Capture "parent" Core.Text Core.:>
-           "workspaces" Core.:>
-             Core.QueryParam "$.xgafv" Xgafv Core.:>
-               Core.QueryParam "access_token" Core.Text Core.:>
-                 Core.QueryParam "callback" Core.Text Core.:>
-                   Core.QueryParam "pageToken" Core.Text Core.:>
-                     Core.QueryParam "uploadType" Core.Text Core.:>
-                       Core.QueryParam "upload_protocol" Core.Text Core.:>
-                         Core.QueryParam "alt" Core.AltJSON Core.:>
-                           Core.Get '[Core.JSON] ListWorkspacesResponse
+type TagManagerAccountsContainersWorkspacesListResource =
+  "tagmanager"
+    Core.:> "v2"
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "workspaces"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ListWorkspacesResponse
 
 -- | Lists all Workspaces that belong to a GTM Container.
 --
 -- /See:/ 'newTagManagerAccountsContainersWorkspacesList' smart constructor.
 data TagManagerAccountsContainersWorkspacesList = TagManagerAccountsContainersWorkspacesList
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Continuation token for fetching the next page of results.
-    , pageToken :: (Core.Maybe Core.Text)
-      -- | GTM parent Container\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}
-    , parent :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Continuation token for fetching the next page of results.
+    pageToken :: (Core.Maybe Core.Text),
+    -- | GTM parent Container\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}
+    parent :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TagManagerAccountsContainersWorkspacesList' with the minimum fields required to make a request.
-newTagManagerAccountsContainersWorkspacesList 
-    ::  Core.Text
-       -- ^  GTM parent Container\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id} See 'parent'.
-    -> TagManagerAccountsContainersWorkspacesList
+newTagManagerAccountsContainersWorkspacesList ::
+  -- |  GTM parent Container\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id} See 'parent'.
+  Core.Text ->
+  TagManagerAccountsContainersWorkspacesList
 newTagManagerAccountsContainersWorkspacesList parent =
   TagManagerAccountsContainersWorkspacesList
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , pageToken = Core.Nothing
-    , parent = parent
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      pageToken = Core.Nothing,
+      parent = parent,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           TagManagerAccountsContainersWorkspacesList
-         where
-        type Rs TagManagerAccountsContainersWorkspacesList =
-             ListWorkspacesResponse
-        type Scopes
-               TagManagerAccountsContainersWorkspacesList
-             =
-             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
-               "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient
-          TagManagerAccountsContainersWorkspacesList{..}
-          = go parent xgafv accessToken callback pageToken
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              tagManagerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           TagManagerAccountsContainersWorkspacesListResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    TagManagerAccountsContainersWorkspacesList
+  where
+  type
+    Rs TagManagerAccountsContainersWorkspacesList =
+      ListWorkspacesResponse
+  type
+    Scopes
+      TagManagerAccountsContainersWorkspacesList =
+      '[ "https://www.googleapis.com/auth/tagmanager.edit.containers",
+         "https://www.googleapis.com/auth/tagmanager.readonly"
+       ]
+  requestClient
+    TagManagerAccountsContainersWorkspacesList {..} =
+      go
+        parent
+        xgafv
+        accessToken
+        callback
+        pageToken
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        tagManagerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  TagManagerAccountsContainersWorkspacesListResource
+            )
+            Core.mempty

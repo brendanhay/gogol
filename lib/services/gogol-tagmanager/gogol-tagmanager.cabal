@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-tagmanager
-version:               0.5.0
-synopsis:              Google Tag Manager SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-tagmanager
+version:            0.5.0
+synopsis:           Google Tag Manager SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    This API allows clients to access and modify container and tag configuration.
+  This API allows clients to access and modify container and tag configuration.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,116 +31,113 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.TagManager
-    , Gogol.TagManager.Accounts.Containers.Create
-    , Gogol.TagManager.Accounts.Containers.Delete
-    , Gogol.TagManager.Accounts.Containers.Environments.Create
-    , Gogol.TagManager.Accounts.Containers.Environments.Delete
-    , Gogol.TagManager.Accounts.Containers.Environments.Get
-    , Gogol.TagManager.Accounts.Containers.Environments.List
-    , Gogol.TagManager.Accounts.Containers.Environments.Reauthorize
-    , Gogol.TagManager.Accounts.Containers.Environments.Update
-    , Gogol.TagManager.Accounts.Containers.Get
-    , Gogol.TagManager.Accounts.Containers.List
-    , Gogol.TagManager.Accounts.Containers.Update
-    , Gogol.TagManager.Accounts.Containers.Version_headers.Latest
-    , Gogol.TagManager.Accounts.Containers.Version_headers.List
-    , Gogol.TagManager.Accounts.Containers.Versions.Delete
-    , Gogol.TagManager.Accounts.Containers.Versions.Get
-    , Gogol.TagManager.Accounts.Containers.Versions.Live
-    , Gogol.TagManager.Accounts.Containers.Versions.Publish
-    , Gogol.TagManager.Accounts.Containers.Versions.Set_latest
-    , Gogol.TagManager.Accounts.Containers.Versions.Undelete
-    , Gogol.TagManager.Accounts.Containers.Versions.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Clients.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Create_version
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Entities
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Move_entities_to_folder
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.GetStatus
-    , Gogol.TagManager.Accounts.Containers.Workspaces.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Quick_preview
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Resolve_conflict
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Sync
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Tags.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Templates.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Variables.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Update
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Create
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Delete
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Get
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Zones.List
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Revert
-    , Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Update
-    , Gogol.TagManager.Accounts.Get
-    , Gogol.TagManager.Accounts.List
-    , Gogol.TagManager.Accounts.Update
-    , Gogol.TagManager.Accounts.User_permissions.Create
-    , Gogol.TagManager.Accounts.User_permissions.Delete
-    , Gogol.TagManager.Accounts.User_permissions.Get
-    , Gogol.TagManager.Accounts.User_permissions.List
-    , Gogol.TagManager.Accounts.User_permissions.Update
-    , Gogol.TagManager.Types
+    Gogol.TagManager
+    Gogol.TagManager.Accounts.Containers.Create
+    Gogol.TagManager.Accounts.Containers.Delete
+    Gogol.TagManager.Accounts.Containers.Environments.Create
+    Gogol.TagManager.Accounts.Containers.Environments.Delete
+    Gogol.TagManager.Accounts.Containers.Environments.Get
+    Gogol.TagManager.Accounts.Containers.Environments.List
+    Gogol.TagManager.Accounts.Containers.Environments.Reauthorize
+    Gogol.TagManager.Accounts.Containers.Environments.Update
+    Gogol.TagManager.Accounts.Containers.Get
+    Gogol.TagManager.Accounts.Containers.List
+    Gogol.TagManager.Accounts.Containers.Update
+    Gogol.TagManager.Accounts.Containers.Version_headers.Latest
+    Gogol.TagManager.Accounts.Containers.Version_headers.List
+    Gogol.TagManager.Accounts.Containers.Versions.Delete
+    Gogol.TagManager.Accounts.Containers.Versions.Get
+    Gogol.TagManager.Accounts.Containers.Versions.Live
+    Gogol.TagManager.Accounts.Containers.Versions.Publish
+    Gogol.TagManager.Accounts.Containers.Versions.Set_latest
+    Gogol.TagManager.Accounts.Containers.Versions.Undelete
+    Gogol.TagManager.Accounts.Containers.Versions.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Clients.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Clients.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Create_version
+    Gogol.TagManager.Accounts.Containers.Workspaces.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Entities
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Move_entities_to_folder
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.GetStatus
+    Gogol.TagManager.Accounts.Containers.Workspaces.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Quick_preview
+    Gogol.TagManager.Accounts.Containers.Workspaces.Resolve_conflict
+    Gogol.TagManager.Accounts.Containers.Workspaces.Sync
+    Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Tags.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Templates.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Variables.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Update
+    Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Zones.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Revert
+    Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Update
+    Gogol.TagManager.Accounts.Get
+    Gogol.TagManager.Accounts.List
+    Gogol.TagManager.Accounts.Update
+    Gogol.TagManager.Accounts.User_permissions.Create
+    Gogol.TagManager.Accounts.User_permissions.Delete
+    Gogol.TagManager.Accounts.User_permissions.Get
+    Gogol.TagManager.Accounts.User_permissions.List
+    Gogol.TagManager.Accounts.User_permissions.Update
+    Gogol.TagManager.Types
 
   other-modules:
-      Gogol.TagManager.Internal.Product
-    , Gogol.TagManager.Internal.Sum
+    Gogol.TagManager.Internal.Product
+    Gogol.TagManager.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

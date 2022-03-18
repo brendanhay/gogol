@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,90 +30,97 @@
 --
 -- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.getStatus@.
 module Gogol.TagManager.Accounts.Containers.Workspaces.GetStatus
-    (
-    -- * Resource
-      TagManagerAccountsContainersWorkspacesGetStatusResource
+  ( -- * Resource
+    TagManagerAccountsContainersWorkspacesGetStatusResource,
 
     -- ** Constructing a Request
-    , newTagManagerAccountsContainersWorkspacesGetStatus
-    , TagManagerAccountsContainersWorkspacesGetStatus
-    ) where
+    newTagManagerAccountsContainersWorkspacesGetStatus,
+    TagManagerAccountsContainersWorkspacesGetStatus,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.getStatus@ method which the
 -- 'TagManagerAccountsContainersWorkspacesGetStatus' request conforms to.
-type TagManagerAccountsContainersWorkspacesGetStatusResource
-     =
-     "tagmanager" Core.:>
-       "v2" Core.:>
-         Core.Capture "path" Core.Text Core.:>
-           "status" Core.:>
-             Core.QueryParam "$.xgafv" Xgafv Core.:>
-               Core.QueryParam "access_token" Core.Text Core.:>
-                 Core.QueryParam "callback" Core.Text Core.:>
-                   Core.QueryParam "uploadType" Core.Text Core.:>
-                     Core.QueryParam "upload_protocol" Core.Text Core.:>
-                       Core.QueryParam "alt" Core.AltJSON Core.:>
-                         Core.Get '[Core.JSON] GetWorkspaceStatusResponse
+type TagManagerAccountsContainersWorkspacesGetStatusResource =
+  "tagmanager"
+    Core.:> "v2"
+    Core.:> Core.Capture "path" Core.Text
+    Core.:> "status"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] GetWorkspaceStatusResponse
 
 -- | Finds conflicting and modified entities in the workspace.
 --
 -- /See:/ 'newTagManagerAccountsContainersWorkspacesGetStatus' smart constructor.
 data TagManagerAccountsContainersWorkspacesGetStatus = TagManagerAccountsContainersWorkspacesGetStatus
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id}
-    , path :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id}
+    path :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TagManagerAccountsContainersWorkspacesGetStatus' with the minimum fields required to make a request.
-newTagManagerAccountsContainersWorkspacesGetStatus 
-    ::  Core.Text
-       -- ^  GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id} See 'path'.
-    -> TagManagerAccountsContainersWorkspacesGetStatus
+newTagManagerAccountsContainersWorkspacesGetStatus ::
+  -- |  GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id} See 'path'.
+  Core.Text ->
+  TagManagerAccountsContainersWorkspacesGetStatus
 newTagManagerAccountsContainersWorkspacesGetStatus path =
   TagManagerAccountsContainersWorkspacesGetStatus
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , path = path
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      path = path,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           TagManagerAccountsContainersWorkspacesGetStatus
-         where
-        type Rs
-               TagManagerAccountsContainersWorkspacesGetStatus
-             = GetWorkspaceStatusResponse
-        type Scopes
-               TagManagerAccountsContainersWorkspacesGetStatus
-             =
-             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
-               "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient
-          TagManagerAccountsContainersWorkspacesGetStatus{..}
-          = go path xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              tagManagerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           TagManagerAccountsContainersWorkspacesGetStatusResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    TagManagerAccountsContainersWorkspacesGetStatus
+  where
+  type
+    Rs
+      TagManagerAccountsContainersWorkspacesGetStatus =
+      GetWorkspaceStatusResponse
+  type
+    Scopes
+      TagManagerAccountsContainersWorkspacesGetStatus =
+      '[ "https://www.googleapis.com/auth/tagmanager.edit.containers",
+         "https://www.googleapis.com/auth/tagmanager.readonly"
+       ]
+  requestClient
+    TagManagerAccountsContainersWorkspacesGetStatus {..} =
+      go
+        path
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        tagManagerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  TagManagerAccountsContainersWorkspacesGetStatusResource
+            )
+            Core.mempty
