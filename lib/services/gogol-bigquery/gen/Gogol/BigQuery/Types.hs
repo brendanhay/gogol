@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,804 +25,804 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.BigQuery.Types
-    (
-    -- * Configuration
-      bigQueryService
+  ( -- * Configuration
+    bigQueryService,
 
     -- * OAuth Scopes
-    , bigQueryScope
-    , bigQueryInsertdataScope
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
-    , storageFull_controlScope
-    , storageRead_OnlyScope
-    , storageRead_writeScope
+    bigQueryScope,
+    bigQueryInsertdataScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    storageFull_controlScope,
+    storageRead_OnlyScope,
+    storageRead_writeScope,
 
     -- * Types
 
     -- ** AggregateClassificationMetrics
-    , AggregateClassificationMetrics (..)
-    , newAggregateClassificationMetrics
+    AggregateClassificationMetrics (..),
+    newAggregateClassificationMetrics,
 
     -- ** Argument
-    , Argument (..)
-    , newArgument
+    Argument (..),
+    newArgument,
 
     -- ** Argument_ArgumentKind
-    , Argument_ArgumentKind (..)
+    Argument_ArgumentKind (..),
 
     -- ** Argument_Mode
-    , Argument_Mode (..)
+    Argument_Mode (..),
 
     -- ** ArimaCoefficients
-    , ArimaCoefficients (..)
-    , newArimaCoefficients
+    ArimaCoefficients (..),
+    newArimaCoefficients,
 
     -- ** ArimaFittingMetrics
-    , ArimaFittingMetrics (..)
-    , newArimaFittingMetrics
+    ArimaFittingMetrics (..),
+    newArimaFittingMetrics,
 
     -- ** ArimaForecastingMetrics
-    , ArimaForecastingMetrics (..)
-    , newArimaForecastingMetrics
+    ArimaForecastingMetrics (..),
+    newArimaForecastingMetrics,
 
     -- ** ArimaForecastingMetrics_SeasonalPeriodsItem
-    , ArimaForecastingMetrics_SeasonalPeriodsItem (..)
+    ArimaForecastingMetrics_SeasonalPeriodsItem (..),
 
     -- ** ArimaModelInfo
-    , ArimaModelInfo (..)
-    , newArimaModelInfo
+    ArimaModelInfo (..),
+    newArimaModelInfo,
 
     -- ** ArimaModelInfo_SeasonalPeriodsItem
-    , ArimaModelInfo_SeasonalPeriodsItem (..)
+    ArimaModelInfo_SeasonalPeriodsItem (..),
 
     -- ** ArimaOrder
-    , ArimaOrder (..)
-    , newArimaOrder
+    ArimaOrder (..),
+    newArimaOrder,
 
     -- ** ArimaResult
-    , ArimaResult (..)
-    , newArimaResult
+    ArimaResult (..),
+    newArimaResult,
 
     -- ** ArimaResult_SeasonalPeriodsItem
-    , ArimaResult_SeasonalPeriodsItem (..)
+    ArimaResult_SeasonalPeriodsItem (..),
 
     -- ** ArimaSingleModelForecastingMetrics
-    , ArimaSingleModelForecastingMetrics (..)
-    , newArimaSingleModelForecastingMetrics
+    ArimaSingleModelForecastingMetrics (..),
+    newArimaSingleModelForecastingMetrics,
 
     -- ** ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
-    , ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem (..)
+    ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem (..),
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** AvroOptions
-    , AvroOptions (..)
-    , newAvroOptions
+    AvroOptions (..),
+    newAvroOptions,
 
     -- ** BiEngineReason
-    , BiEngineReason (..)
-    , newBiEngineReason
+    BiEngineReason (..),
+    newBiEngineReason,
 
     -- ** BiEngineStatistics
-    , BiEngineStatistics (..)
-    , newBiEngineStatistics
+    BiEngineStatistics (..),
+    newBiEngineStatistics,
 
     -- ** BigQueryModelTraining
-    , BigQueryModelTraining (..)
-    , newBigQueryModelTraining
+    BigQueryModelTraining (..),
+    newBigQueryModelTraining,
 
     -- ** BigtableColumn
-    , BigtableColumn (..)
-    , newBigtableColumn
+    BigtableColumn (..),
+    newBigtableColumn,
 
     -- ** BigtableColumnFamily
-    , BigtableColumnFamily (..)
-    , newBigtableColumnFamily
+    BigtableColumnFamily (..),
+    newBigtableColumnFamily,
 
     -- ** BigtableOptions
-    , BigtableOptions (..)
-    , newBigtableOptions
+    BigtableOptions (..),
+    newBigtableOptions,
 
     -- ** BinaryClassificationMetrics
-    , BinaryClassificationMetrics (..)
-    , newBinaryClassificationMetrics
+    BinaryClassificationMetrics (..),
+    newBinaryClassificationMetrics,
 
     -- ** BinaryConfusionMatrix
-    , BinaryConfusionMatrix (..)
-    , newBinaryConfusionMatrix
+    BinaryConfusionMatrix (..),
+    newBinaryConfusionMatrix,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** BqmlIterationResult
-    , BqmlIterationResult (..)
-    , newBqmlIterationResult
+    BqmlIterationResult (..),
+    newBqmlIterationResult,
 
     -- ** BqmlTrainingRun
-    , BqmlTrainingRun (..)
-    , newBqmlTrainingRun
+    BqmlTrainingRun (..),
+    newBqmlTrainingRun,
 
     -- ** BqmlTrainingRun_TrainingOptions
-    , BqmlTrainingRun_TrainingOptions (..)
-    , newBqmlTrainingRun_TrainingOptions
+    BqmlTrainingRun_TrainingOptions (..),
+    newBqmlTrainingRun_TrainingOptions,
 
     -- ** CategoricalValue
-    , CategoricalValue (..)
-    , newCategoricalValue
+    CategoricalValue (..),
+    newCategoricalValue,
 
     -- ** CategoryCount
-    , CategoryCount (..)
-    , newCategoryCount
+    CategoryCount (..),
+    newCategoryCount,
 
     -- ** CloneDefinition
-    , CloneDefinition (..)
-    , newCloneDefinition
+    CloneDefinition (..),
+    newCloneDefinition,
 
     -- ** Cluster
-    , Cluster (..)
-    , newCluster
+    Cluster (..),
+    newCluster,
 
     -- ** ClusterInfo
-    , ClusterInfo (..)
-    , newClusterInfo
+    ClusterInfo (..),
+    newClusterInfo,
 
     -- ** Clustering
-    , Clustering (..)
-    , newClustering
+    Clustering (..),
+    newClustering,
 
     -- ** ClusteringMetrics
-    , ClusteringMetrics (..)
-    , newClusteringMetrics
+    ClusteringMetrics (..),
+    newClusteringMetrics,
 
     -- ** ConfusionMatrix
-    , ConfusionMatrix (..)
-    , newConfusionMatrix
+    ConfusionMatrix (..),
+    newConfusionMatrix,
 
     -- ** ConnectionProperty
-    , ConnectionProperty (..)
-    , newConnectionProperty
+    ConnectionProperty (..),
+    newConnectionProperty,
 
     -- ** CsvOptions
-    , CsvOptions (..)
-    , newCsvOptions
+    CsvOptions (..),
+    newCsvOptions,
 
     -- ** DataSplitResult
-    , DataSplitResult (..)
-    , newDataSplitResult
+    DataSplitResult (..),
+    newDataSplitResult,
 
     -- ** Dataset
-    , Dataset (..)
-    , newDataset
+    Dataset (..),
+    newDataset,
 
     -- ** Dataset_AccessItem
-    , Dataset_AccessItem (..)
-    , newDataset_AccessItem
+    Dataset_AccessItem (..),
+    newDataset_AccessItem,
 
     -- ** Dataset_Labels
-    , Dataset_Labels (..)
-    , newDataset_Labels
+    Dataset_Labels (..),
+    newDataset_Labels,
 
     -- ** Dataset_TagsItem
-    , Dataset_TagsItem (..)
-    , newDataset_TagsItem
+    Dataset_TagsItem (..),
+    newDataset_TagsItem,
 
     -- ** DatasetAccessEntry
-    , DatasetAccessEntry (..)
-    , newDatasetAccessEntry
+    DatasetAccessEntry (..),
+    newDatasetAccessEntry,
 
     -- ** DatasetAccessEntry_TargetTypesItem
-    , DatasetAccessEntry_TargetTypesItem (..)
+    DatasetAccessEntry_TargetTypesItem (..),
 
     -- ** DatasetList
-    , DatasetList (..)
-    , newDatasetList
+    DatasetList (..),
+    newDatasetList,
 
     -- ** DatasetList_DatasetsItem
-    , DatasetList_DatasetsItem (..)
-    , newDatasetList_DatasetsItem
+    DatasetList_DatasetsItem (..),
+    newDatasetList_DatasetsItem,
 
     -- ** DatasetList_DatasetsItem_Labels
-    , DatasetList_DatasetsItem_Labels (..)
-    , newDatasetList_DatasetsItem_Labels
+    DatasetList_DatasetsItem_Labels (..),
+    newDatasetList_DatasetsItem_Labels,
 
     -- ** DatasetReference
-    , DatasetReference (..)
-    , newDatasetReference
+    DatasetReference (..),
+    newDatasetReference,
 
     -- ** DestinationTableProperties
-    , DestinationTableProperties (..)
-    , newDestinationTableProperties
+    DestinationTableProperties (..),
+    newDestinationTableProperties,
 
     -- ** DestinationTableProperties_Labels
-    , DestinationTableProperties_Labels (..)
-    , newDestinationTableProperties_Labels
+    DestinationTableProperties_Labels (..),
+    newDestinationTableProperties_Labels,
 
     -- ** DimensionalityReductionMetrics
-    , DimensionalityReductionMetrics (..)
-    , newDimensionalityReductionMetrics
+    DimensionalityReductionMetrics (..),
+    newDimensionalityReductionMetrics,
 
     -- ** DmlStatistics
-    , DmlStatistics (..)
-    , newDmlStatistics
+    DmlStatistics (..),
+    newDmlStatistics,
 
     -- ** DoubleCandidates
-    , DoubleCandidates (..)
-    , newDoubleCandidates
+    DoubleCandidates (..),
+    newDoubleCandidates,
 
     -- ** DoubleHparamSearchSpace
-    , DoubleHparamSearchSpace (..)
-    , newDoubleHparamSearchSpace
+    DoubleHparamSearchSpace (..),
+    newDoubleHparamSearchSpace,
 
     -- ** DoubleRange
-    , DoubleRange (..)
-    , newDoubleRange
+    DoubleRange (..),
+    newDoubleRange,
 
     -- ** EncryptionConfiguration
-    , EncryptionConfiguration (..)
-    , newEncryptionConfiguration
+    EncryptionConfiguration (..),
+    newEncryptionConfiguration,
 
     -- ** Entry
-    , Entry (..)
-    , newEntry
+    Entry (..),
+    newEntry,
 
     -- ** ErrorProto
-    , ErrorProto (..)
-    , newErrorProto
+    ErrorProto (..),
+    newErrorProto,
 
     -- ** EvaluationMetrics
-    , EvaluationMetrics (..)
-    , newEvaluationMetrics
+    EvaluationMetrics (..),
+    newEvaluationMetrics,
 
     -- ** ExplainQueryStage
-    , ExplainQueryStage (..)
-    , newExplainQueryStage
+    ExplainQueryStage (..),
+    newExplainQueryStage,
 
     -- ** ExplainQueryStep
-    , ExplainQueryStep (..)
-    , newExplainQueryStep
+    ExplainQueryStep (..),
+    newExplainQueryStep,
 
     -- ** Explanation
-    , Explanation (..)
-    , newExplanation
+    Explanation (..),
+    newExplanation,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** ExternalDataConfiguration
-    , ExternalDataConfiguration (..)
-    , newExternalDataConfiguration
+    ExternalDataConfiguration (..),
+    newExternalDataConfiguration,
 
     -- ** FeatureValue
-    , FeatureValue (..)
-    , newFeatureValue
+    FeatureValue (..),
+    newFeatureValue,
 
     -- ** GetIamPolicyRequest
-    , GetIamPolicyRequest (..)
-    , newGetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
     -- ** GetPolicyOptions
-    , GetPolicyOptions (..)
-    , newGetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** GetQueryResultsResponse
-    , GetQueryResultsResponse (..)
-    , newGetQueryResultsResponse
+    GetQueryResultsResponse (..),
+    newGetQueryResultsResponse,
 
     -- ** GetServiceAccountResponse
-    , GetServiceAccountResponse (..)
-    , newGetServiceAccountResponse
+    GetServiceAccountResponse (..),
+    newGetServiceAccountResponse,
 
     -- ** GlobalExplanation
-    , GlobalExplanation (..)
-    , newGlobalExplanation
+    GlobalExplanation (..),
+    newGlobalExplanation,
 
     -- ** GoogleSheetsOptions
-    , GoogleSheetsOptions (..)
-    , newGoogleSheetsOptions
+    GoogleSheetsOptions (..),
+    newGoogleSheetsOptions,
 
     -- ** HivePartitioningOptions
-    , HivePartitioningOptions (..)
-    , newHivePartitioningOptions
+    HivePartitioningOptions (..),
+    newHivePartitioningOptions,
 
     -- ** HparamSearchSpaces
-    , HparamSearchSpaces (..)
-    , newHparamSearchSpaces
+    HparamSearchSpaces (..),
+    newHparamSearchSpaces,
 
     -- ** HparamTuningTrial
-    , HparamTuningTrial (..)
-    , newHparamTuningTrial
+    HparamTuningTrial (..),
+    newHparamTuningTrial,
 
     -- ** HparamTuningTrial_Status
-    , HparamTuningTrial_Status (..)
+    HparamTuningTrial_Status (..),
 
     -- ** IntArray
-    , IntArray (..)
-    , newIntArray
+    IntArray (..),
+    newIntArray,
 
     -- ** IntArrayHparamSearchSpace
-    , IntArrayHparamSearchSpace (..)
-    , newIntArrayHparamSearchSpace
+    IntArrayHparamSearchSpace (..),
+    newIntArrayHparamSearchSpace,
 
     -- ** IntCandidates
-    , IntCandidates (..)
-    , newIntCandidates
+    IntCandidates (..),
+    newIntCandidates,
 
     -- ** IntHparamSearchSpace
-    , IntHparamSearchSpace (..)
-    , newIntHparamSearchSpace
+    IntHparamSearchSpace (..),
+    newIntHparamSearchSpace,
 
     -- ** IntRange
-    , IntRange (..)
-    , newIntRange
+    IntRange (..),
+    newIntRange,
 
     -- ** IterationResult
-    , IterationResult (..)
-    , newIterationResult
+    IterationResult (..),
+    newIterationResult,
 
     -- ** Job
-    , Job (..)
-    , newJob
+    Job (..),
+    newJob,
 
     -- ** JobCancelResponse
-    , JobCancelResponse (..)
-    , newJobCancelResponse
+    JobCancelResponse (..),
+    newJobCancelResponse,
 
     -- ** JobConfiguration
-    , JobConfiguration (..)
-    , newJobConfiguration
+    JobConfiguration (..),
+    newJobConfiguration,
 
     -- ** JobConfiguration_Labels
-    , JobConfiguration_Labels (..)
-    , newJobConfiguration_Labels
+    JobConfiguration_Labels (..),
+    newJobConfiguration_Labels,
 
     -- ** JobConfigurationExtract
-    , JobConfigurationExtract (..)
-    , newJobConfigurationExtract
+    JobConfigurationExtract (..),
+    newJobConfigurationExtract,
 
     -- ** JobConfigurationLoad
-    , JobConfigurationLoad (..)
-    , newJobConfigurationLoad
+    JobConfigurationLoad (..),
+    newJobConfigurationLoad,
 
     -- ** JobConfigurationQuery
-    , JobConfigurationQuery (..)
-    , newJobConfigurationQuery
+    JobConfigurationQuery (..),
+    newJobConfigurationQuery,
 
     -- ** JobConfigurationQuery_TableDefinitions
-    , JobConfigurationQuery_TableDefinitions (..)
-    , newJobConfigurationQuery_TableDefinitions
+    JobConfigurationQuery_TableDefinitions (..),
+    newJobConfigurationQuery_TableDefinitions,
 
     -- ** JobConfigurationTableCopy
-    , JobConfigurationTableCopy (..)
-    , newJobConfigurationTableCopy
+    JobConfigurationTableCopy (..),
+    newJobConfigurationTableCopy,
 
     -- ** JobList
-    , JobList (..)
-    , newJobList
+    JobList (..),
+    newJobList,
 
     -- ** JobList_JobsItem
-    , JobList_JobsItem (..)
-    , newJobList_JobsItem
+    JobList_JobsItem (..),
+    newJobList_JobsItem,
 
     -- ** JobReference
-    , JobReference (..)
-    , newJobReference
+    JobReference (..),
+    newJobReference,
 
     -- ** JobStatistics
-    , JobStatistics (..)
-    , newJobStatistics
+    JobStatistics (..),
+    newJobStatistics,
 
     -- ** JobStatistics_ReservationUsageItem
-    , JobStatistics_ReservationUsageItem (..)
-    , newJobStatistics_ReservationUsageItem
+    JobStatistics_ReservationUsageItem (..),
+    newJobStatistics_ReservationUsageItem,
 
     -- ** JobStatistics2
-    , JobStatistics2 (..)
-    , newJobStatistics2
+    JobStatistics2 (..),
+    newJobStatistics2,
 
     -- ** JobStatistics2_ReservationUsageItem
-    , JobStatistics2_ReservationUsageItem (..)
-    , newJobStatistics2_ReservationUsageItem
+    JobStatistics2_ReservationUsageItem (..),
+    newJobStatistics2_ReservationUsageItem,
 
     -- ** JobStatistics3
-    , JobStatistics3 (..)
-    , newJobStatistics3
+    JobStatistics3 (..),
+    newJobStatistics3,
 
     -- ** JobStatistics4
-    , JobStatistics4 (..)
-    , newJobStatistics4
+    JobStatistics4 (..),
+    newJobStatistics4,
 
     -- ** JobStatus
-    , JobStatus (..)
-    , newJobStatus
+    JobStatus (..),
+    newJobStatus,
 
     -- ** JsonObject
-    , JsonObject (..)
-    , newJsonObject
+    JsonObject (..),
+    newJsonObject,
 
     -- ** ListModelsResponse
-    , ListModelsResponse (..)
-    , newListModelsResponse
+    ListModelsResponse (..),
+    newListModelsResponse,
 
     -- ** ListRoutinesResponse
-    , ListRoutinesResponse (..)
-    , newListRoutinesResponse
+    ListRoutinesResponse (..),
+    newListRoutinesResponse,
 
     -- ** ListRowAccessPoliciesResponse
-    , ListRowAccessPoliciesResponse (..)
-    , newListRowAccessPoliciesResponse
+    ListRowAccessPoliciesResponse (..),
+    newListRowAccessPoliciesResponse,
 
     -- ** LocationMetadata
-    , LocationMetadata (..)
-    , newLocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
 
     -- ** MaterializedViewDefinition
-    , MaterializedViewDefinition (..)
-    , newMaterializedViewDefinition
+    MaterializedViewDefinition (..),
+    newMaterializedViewDefinition,
 
     -- ** MlStatistics
-    , MlStatistics (..)
-    , newMlStatistics
+    MlStatistics (..),
+    newMlStatistics,
 
     -- ** Model
-    , Model (..)
-    , newModel
+    Model (..),
+    newModel,
 
     -- ** Model_Labels
-    , Model_Labels (..)
-    , newModel_Labels
+    Model_Labels (..),
+    newModel_Labels,
 
     -- ** Model_ModelType
-    , Model_ModelType (..)
+    Model_ModelType (..),
 
     -- ** ModelDefinition
-    , ModelDefinition (..)
-    , newModelDefinition
+    ModelDefinition (..),
+    newModelDefinition,
 
     -- ** ModelDefinition_ModelOptions
-    , ModelDefinition_ModelOptions (..)
-    , newModelDefinition_ModelOptions
+    ModelDefinition_ModelOptions (..),
+    newModelDefinition_ModelOptions,
 
     -- ** ModelReference
-    , ModelReference (..)
-    , newModelReference
+    ModelReference (..),
+    newModelReference,
 
     -- ** MultiClassClassificationMetrics
-    , MultiClassClassificationMetrics (..)
-    , newMultiClassClassificationMetrics
+    MultiClassClassificationMetrics (..),
+    newMultiClassClassificationMetrics,
 
     -- ** ParquetOptions
-    , ParquetOptions (..)
-    , newParquetOptions
+    ParquetOptions (..),
+    newParquetOptions,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PrincipalComponentInfo
-    , PrincipalComponentInfo (..)
-    , newPrincipalComponentInfo
+    PrincipalComponentInfo (..),
+    newPrincipalComponentInfo,
 
     -- ** ProjectList
-    , ProjectList (..)
-    , newProjectList
+    ProjectList (..),
+    newProjectList,
 
     -- ** ProjectList_ProjectsItem
-    , ProjectList_ProjectsItem (..)
-    , newProjectList_ProjectsItem
+    ProjectList_ProjectsItem (..),
+    newProjectList_ProjectsItem,
 
     -- ** ProjectReference
-    , ProjectReference (..)
-    , newProjectReference
+    ProjectReference (..),
+    newProjectReference,
 
     -- ** QueryParameter
-    , QueryParameter (..)
-    , newQueryParameter
+    QueryParameter (..),
+    newQueryParameter,
 
     -- ** QueryParameterType
-    , QueryParameterType (..)
-    , newQueryParameterType
+    QueryParameterType (..),
+    newQueryParameterType,
 
     -- ** QueryParameterType_StructTypesItem
-    , QueryParameterType_StructTypesItem (..)
-    , newQueryParameterType_StructTypesItem
+    QueryParameterType_StructTypesItem (..),
+    newQueryParameterType_StructTypesItem,
 
     -- ** QueryParameterValue
-    , QueryParameterValue (..)
-    , newQueryParameterValue
+    QueryParameterValue (..),
+    newQueryParameterValue,
 
     -- ** QueryParameterValue_StructValues
-    , QueryParameterValue_StructValues (..)
-    , newQueryParameterValue_StructValues
+    QueryParameterValue_StructValues (..),
+    newQueryParameterValue_StructValues,
 
     -- ** QueryRequest
-    , QueryRequest (..)
-    , newQueryRequest
+    QueryRequest (..),
+    newQueryRequest,
 
     -- ** QueryRequest_Labels
-    , QueryRequest_Labels (..)
-    , newQueryRequest_Labels
+    QueryRequest_Labels (..),
+    newQueryRequest_Labels,
 
     -- ** QueryResponse
-    , QueryResponse (..)
-    , newQueryResponse
+    QueryResponse (..),
+    newQueryResponse,
 
     -- ** QueryTimelineSample
-    , QueryTimelineSample (..)
-    , newQueryTimelineSample
+    QueryTimelineSample (..),
+    newQueryTimelineSample,
 
     -- ** RangePartitioning
-    , RangePartitioning (..)
-    , newRangePartitioning
+    RangePartitioning (..),
+    newRangePartitioning,
 
     -- ** RangePartitioning_Range
-    , RangePartitioning_Range (..)
-    , newRangePartitioning_Range
+    RangePartitioning_Range (..),
+    newRangePartitioning_Range,
 
     -- ** RankingMetrics
-    , RankingMetrics (..)
-    , newRankingMetrics
+    RankingMetrics (..),
+    newRankingMetrics,
 
     -- ** RegressionMetrics
-    , RegressionMetrics (..)
-    , newRegressionMetrics
+    RegressionMetrics (..),
+    newRegressionMetrics,
 
     -- ** Routine
-    , Routine (..)
-    , newRoutine
+    Routine (..),
+    newRoutine,
 
     -- ** Routine_DeterminismLevel
-    , Routine_DeterminismLevel (..)
+    Routine_DeterminismLevel (..),
 
     -- ** Routine_Language
-    , Routine_Language (..)
+    Routine_Language (..),
 
     -- ** Routine_RoutineType
-    , Routine_RoutineType (..)
+    Routine_RoutineType (..),
 
     -- ** RoutineReference
-    , RoutineReference (..)
-    , newRoutineReference
+    RoutineReference (..),
+    newRoutineReference,
 
     -- ** Row
-    , Row (..)
-    , newRow
+    Row (..),
+    newRow,
 
     -- ** RowAccessPolicy
-    , RowAccessPolicy (..)
-    , newRowAccessPolicy
+    RowAccessPolicy (..),
+    newRowAccessPolicy,
 
     -- ** RowAccessPolicyReference
-    , RowAccessPolicyReference (..)
-    , newRowAccessPolicyReference
+    RowAccessPolicyReference (..),
+    newRowAccessPolicyReference,
 
     -- ** RowLevelSecurityStatistics
-    , RowLevelSecurityStatistics (..)
-    , newRowLevelSecurityStatistics
+    RowLevelSecurityStatistics (..),
+    newRowLevelSecurityStatistics,
 
     -- ** ScriptStackFrame
-    , ScriptStackFrame (..)
-    , newScriptStackFrame
+    ScriptStackFrame (..),
+    newScriptStackFrame,
 
     -- ** ScriptStatistics
-    , ScriptStatistics (..)
-    , newScriptStatistics
+    ScriptStatistics (..),
+    newScriptStatistics,
 
     -- ** SessionInfo
-    , SessionInfo (..)
-    , newSessionInfo
+    SessionInfo (..),
+    newSessionInfo,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** SnapshotDefinition
-    , SnapshotDefinition (..)
-    , newSnapshotDefinition
+    SnapshotDefinition (..),
+    newSnapshotDefinition,
 
     -- ** StandardSqlDataType
-    , StandardSqlDataType (..)
-    , newStandardSqlDataType
+    StandardSqlDataType (..),
+    newStandardSqlDataType,
 
     -- ** StandardSqlDataType_TypeKind
-    , StandardSqlDataType_TypeKind (..)
+    StandardSqlDataType_TypeKind (..),
 
     -- ** StandardSqlField
-    , StandardSqlField (..)
-    , newStandardSqlField
+    StandardSqlField (..),
+    newStandardSqlField,
 
     -- ** StandardSqlStructType
-    , StandardSqlStructType (..)
-    , newStandardSqlStructType
+    StandardSqlStructType (..),
+    newStandardSqlStructType,
 
     -- ** StandardSqlTableType
-    , StandardSqlTableType (..)
-    , newStandardSqlTableType
+    StandardSqlTableType (..),
+    newStandardSqlTableType,
 
     -- ** Streamingbuffer
-    , Streamingbuffer (..)
-    , newStreamingbuffer
+    Streamingbuffer (..),
+    newStreamingbuffer,
 
     -- ** StringHparamSearchSpace
-    , StringHparamSearchSpace (..)
-    , newStringHparamSearchSpace
+    StringHparamSearchSpace (..),
+    newStringHparamSearchSpace,
 
     -- ** Table
-    , Table (..)
-    , newTable
+    Table (..),
+    newTable,
 
     -- ** Table_Labels
-    , Table_Labels (..)
-    , newTable_Labels
+    Table_Labels (..),
+    newTable_Labels,
 
     -- ** TableCell
-    , TableCell (..)
-    , newTableCell
+    TableCell (..),
+    newTableCell,
 
     -- ** TableDataInsertAllRequest
-    , TableDataInsertAllRequest (..)
-    , newTableDataInsertAllRequest
+    TableDataInsertAllRequest (..),
+    newTableDataInsertAllRequest,
 
     -- ** TableDataInsertAllRequest_RowsItem
-    , TableDataInsertAllRequest_RowsItem (..)
-    , newTableDataInsertAllRequest_RowsItem
+    TableDataInsertAllRequest_RowsItem (..),
+    newTableDataInsertAllRequest_RowsItem,
 
     -- ** TableDataInsertAllResponse
-    , TableDataInsertAllResponse (..)
-    , newTableDataInsertAllResponse
+    TableDataInsertAllResponse (..),
+    newTableDataInsertAllResponse,
 
     -- ** TableDataInsertAllResponse_InsertErrorsItem
-    , TableDataInsertAllResponse_InsertErrorsItem (..)
-    , newTableDataInsertAllResponse_InsertErrorsItem
+    TableDataInsertAllResponse_InsertErrorsItem (..),
+    newTableDataInsertAllResponse_InsertErrorsItem,
 
     -- ** TableDataList
-    , TableDataList (..)
-    , newTableDataList
+    TableDataList (..),
+    newTableDataList,
 
     -- ** TableFieldSchema
-    , TableFieldSchema (..)
-    , newTableFieldSchema
+    TableFieldSchema (..),
+    newTableFieldSchema,
 
     -- ** TableFieldSchema_Categories
-    , TableFieldSchema_Categories (..)
-    , newTableFieldSchema_Categories
+    TableFieldSchema_Categories (..),
+    newTableFieldSchema_Categories,
 
     -- ** TableFieldSchema_PolicyTags
-    , TableFieldSchema_PolicyTags (..)
-    , newTableFieldSchema_PolicyTags
+    TableFieldSchema_PolicyTags (..),
+    newTableFieldSchema_PolicyTags,
 
     -- ** TableList
-    , TableList (..)
-    , newTableList
+    TableList (..),
+    newTableList,
 
     -- ** TableList_TablesItem
-    , TableList_TablesItem (..)
-    , newTableList_TablesItem
+    TableList_TablesItem (..),
+    newTableList_TablesItem,
 
     -- ** TableList_TablesItem_Labels
-    , TableList_TablesItem_Labels (..)
-    , newTableList_TablesItem_Labels
+    TableList_TablesItem_Labels (..),
+    newTableList_TablesItem_Labels,
 
     -- ** TableList_TablesItem_View
-    , TableList_TablesItem_View (..)
-    , newTableList_TablesItem_View
+    TableList_TablesItem_View (..),
+    newTableList_TablesItem_View,
 
     -- ** TableReference
-    , TableReference (..)
-    , newTableReference
+    TableReference (..),
+    newTableReference,
 
     -- ** TableRow
-    , TableRow (..)
-    , newTableRow
+    TableRow (..),
+    newTableRow,
 
     -- ** TableSchema
-    , TableSchema (..)
-    , newTableSchema
+    TableSchema (..),
+    newTableSchema,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** TimePartitioning
-    , TimePartitioning (..)
-    , newTimePartitioning
+    TimePartitioning (..),
+    newTimePartitioning,
 
     -- ** TrainingOptions
-    , TrainingOptions (..)
-    , newTrainingOptions
+    TrainingOptions (..),
+    newTrainingOptions,
 
     -- ** TrainingOptions_BoosterType
-    , TrainingOptions_BoosterType (..)
+    TrainingOptions_BoosterType (..),
 
     -- ** TrainingOptions_DartNormalizeType
-    , TrainingOptions_DartNormalizeType (..)
+    TrainingOptions_DartNormalizeType (..),
 
     -- ** TrainingOptions_DataFrequency
-    , TrainingOptions_DataFrequency (..)
+    TrainingOptions_DataFrequency (..),
 
     -- ** TrainingOptions_DataSplitMethod
-    , TrainingOptions_DataSplitMethod (..)
+    TrainingOptions_DataSplitMethod (..),
 
     -- ** TrainingOptions_DistanceType
-    , TrainingOptions_DistanceType (..)
+    TrainingOptions_DistanceType (..),
 
     -- ** TrainingOptions_FeedbackType
-    , TrainingOptions_FeedbackType (..)
+    TrainingOptions_FeedbackType (..),
 
     -- ** TrainingOptions_HolidayRegion
-    , TrainingOptions_HolidayRegion (..)
+    TrainingOptions_HolidayRegion (..),
 
     -- ** TrainingOptions_HparamTuningObjectivesItem
-    , TrainingOptions_HparamTuningObjectivesItem (..)
+    TrainingOptions_HparamTuningObjectivesItem (..),
 
     -- ** TrainingOptions_KmeansInitializationMethod
-    , TrainingOptions_KmeansInitializationMethod (..)
+    TrainingOptions_KmeansInitializationMethod (..),
 
     -- ** TrainingOptions_LabelClassWeights
-    , TrainingOptions_LabelClassWeights (..)
-    , newTrainingOptions_LabelClassWeights
+    TrainingOptions_LabelClassWeights (..),
+    newTrainingOptions_LabelClassWeights,
 
     -- ** TrainingOptions_LearnRateStrategy
-    , TrainingOptions_LearnRateStrategy (..)
+    TrainingOptions_LearnRateStrategy (..),
 
     -- ** TrainingOptions_LossType
-    , TrainingOptions_LossType (..)
+    TrainingOptions_LossType (..),
 
     -- ** TrainingOptions_OptimizationStrategy
-    , TrainingOptions_OptimizationStrategy (..)
+    TrainingOptions_OptimizationStrategy (..),
 
     -- ** TrainingOptions_TreeMethod
-    , TrainingOptions_TreeMethod (..)
+    TrainingOptions_TreeMethod (..),
 
     -- ** TrainingRun
-    , TrainingRun (..)
-    , newTrainingRun
+    TrainingRun (..),
+    newTrainingRun,
 
     -- ** TransactionInfo
-    , TransactionInfo (..)
-    , newTransactionInfo
+    TransactionInfo (..),
+    newTransactionInfo,
 
     -- ** UserDefinedFunctionResource
-    , UserDefinedFunctionResource (..)
-    , newUserDefinedFunctionResource
+    UserDefinedFunctionResource (..),
+    newUserDefinedFunctionResource,
 
     -- ** ViewDefinition
-    , ViewDefinition (..)
-    , newViewDefinition
+    ViewDefinition (..),
+    newViewDefinition,
 
     -- ** JobsListProjection
-    , JobsListProjection (..)
+    JobsListProjection (..),
 
     -- ** JobsListStateFilter
-    , JobsListStateFilter (..)
-    ) where
+    JobsListStateFilter (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.BigQuery.Internal.Product
 import Gogol.BigQuery.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the BigQuery API. This contains the host and root path used as a starting point for constructing service requests.
 bigQueryService :: Core.ServiceConfig
-bigQueryService
-  = Core.defaultService (Core.ServiceId "bigquery:v2")
-      "bigquery.googleapis.com"
+bigQueryService =
+  Core.defaultService
+    (Core.ServiceId "bigquery:v2")
+    "bigquery.googleapis.com"
 
 -- | View and manage your data in Google BigQuery and see the email address for your Google Account
 bigQueryScope :: Core.Proxy '["https://www.googleapis.com/auth/bigquery"]

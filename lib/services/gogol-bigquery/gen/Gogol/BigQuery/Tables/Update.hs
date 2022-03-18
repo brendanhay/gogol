@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,86 +30,91 @@
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tables.update@.
 module Gogol.BigQuery.Tables.Update
-    (
-    -- * Resource
-      BigQueryTablesUpdateResource
+  ( -- * Resource
+    BigQueryTablesUpdateResource,
 
     -- ** Constructing a Request
-    , newBigQueryTablesUpdate
-    , BigQueryTablesUpdate
-    ) where
+    newBigQueryTablesUpdate,
+    BigQueryTablesUpdate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.BigQuery.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @bigquery.tables.update@ method which the
 -- 'BigQueryTablesUpdate' request conforms to.
 type BigQueryTablesUpdateResource =
-     "bigquery" Core.:>
-       "v2" Core.:>
-         "projects" Core.:>
-           Core.Capture "projectId" Core.Text Core.:>
-             "datasets" Core.:>
-               Core.Capture "datasetId" Core.Text Core.:>
-                 "tables" Core.:>
-                   Core.Capture "tableId" Core.Text Core.:>
-                     Core.QueryParam "autodetect_schema" Core.Bool Core.:>
-                       Core.QueryParam "alt" Core.AltJSON Core.:>
-                         Core.ReqBody '[Core.JSON] Table Core.:>
-                           Core.Put '[Core.JSON] Table
+  "bigquery"
+    Core.:> "v2"
+    Core.:> "projects"
+    Core.:> Core.Capture "projectId" Core.Text
+    Core.:> "datasets"
+    Core.:> Core.Capture "datasetId" Core.Text
+    Core.:> "tables"
+    Core.:> Core.Capture "tableId" Core.Text
+    Core.:> Core.QueryParam "autodetect_schema" Core.Bool
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Table
+    Core.:> Core.Put '[Core.JSON] Table
 
 -- | Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource.
 --
 -- /See:/ 'newBigQueryTablesUpdate' smart constructor.
 data BigQueryTablesUpdate = BigQueryTablesUpdate
-    {
-      -- | When true will autodetect schema, else will keep original schema
-      autodetectSchema :: (Core.Maybe Core.Bool)
-      -- | Dataset ID of the table to update
-    , datasetId :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: Table
-      -- | Project ID of the table to update
-    , projectId :: Core.Text
-      -- | Table ID of the table to update
-    , tableId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | When true will autodetect schema, else will keep original schema
+    autodetectSchema :: (Core.Maybe Core.Bool),
+    -- | Dataset ID of the table to update
+    datasetId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: Table,
+    -- | Project ID of the table to update
+    projectId :: Core.Text,
+    -- | Table ID of the table to update
+    tableId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryTablesUpdate' with the minimum fields required to make a request.
-newBigQueryTablesUpdate 
-    ::  Core.Text
-       -- ^  Dataset ID of the table to update See 'datasetId'.
-    -> Table
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  Project ID of the table to update See 'projectId'.
-    -> Core.Text
-       -- ^  Table ID of the table to update See 'tableId'.
-    -> BigQueryTablesUpdate
+newBigQueryTablesUpdate ::
+  -- |  Dataset ID of the table to update See 'datasetId'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  Table ->
+  -- |  Project ID of the table to update See 'projectId'.
+  Core.Text ->
+  -- |  Table ID of the table to update See 'tableId'.
+  Core.Text ->
+  BigQueryTablesUpdate
 newBigQueryTablesUpdate datasetId payload projectId tableId =
   BigQueryTablesUpdate
-    { autodetectSchema = Core.Nothing
-    , datasetId = datasetId
-    , payload = payload
-    , projectId = projectId
-    , tableId = tableId
+    { autodetectSchema = Core.Nothing,
+      datasetId = datasetId,
+      payload = payload,
+      projectId = projectId,
+      tableId = tableId
     }
 
-instance Core.GoogleRequest BigQueryTablesUpdate
-         where
-        type Rs BigQueryTablesUpdate = Table
-        type Scopes BigQueryTablesUpdate =
-             '["https://www.googleapis.com/auth/bigquery",
-               "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient BigQueryTablesUpdate{..}
-          = go projectId datasetId tableId autodetectSchema
-              (Core.Just Core.AltJSON)
-              payload
-              bigQueryService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy BigQueryTablesUpdateResource)
-                      Core.mempty
-
+instance Core.GoogleRequest BigQueryTablesUpdate where
+  type Rs BigQueryTablesUpdate = Table
+  type
+    Scopes BigQueryTablesUpdate =
+      '[ "https://www.googleapis.com/auth/bigquery",
+         "https://www.googleapis.com/auth/cloud-platform"
+       ]
+  requestClient BigQueryTablesUpdate {..} =
+    go
+      projectId
+      datasetId
+      tableId
+      autodetectSchema
+      (Core.Just Core.AltJSON)
+      payload
+      bigQueryService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BigQueryTablesUpdateResource
+          )
+          Core.mempty
