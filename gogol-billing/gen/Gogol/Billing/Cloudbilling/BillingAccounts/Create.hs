@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Cloudbilling.BillingAccounts.Create
+-- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- This method creates <https://cloud.google.com/billing/docs/concepts#subaccounts billing subaccounts>. Google Cloud resellers should use the Channel Services APIs, <https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers/create accounts.customers.create> and <https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers.entitlements/create accounts.customers.entitlements.create>. When creating a subaccount, the current authenticated user must have the @billing.accounts.update@ IAM permission on the parent account, which is typically given to billing account <https://cloud.google.com/billing/docs/how-to/billing-access administrators>. This method will return an error if the parent account has not been provisioned as a reseller account.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.create@.
-module Network.Google.Billing.Cloudbilling.BillingAccounts.Create
+module Gogol.Billing.Cloudbilling.BillingAccounts.Create
   ( -- * Resource
     CloudbillingBillingAccountsCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Billing.Cloudbilling.BillingAccounts.Create
   )
 where
 
-import Network.Google.Billing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.create@ method which the
 -- 'CloudbillingBillingAccountsCreate' request conforms to.

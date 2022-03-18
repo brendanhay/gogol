@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Internal.Product
+-- Module      : Gogol.Billing.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Billing.Internal.Product
+module Gogol.Billing.Internal.Product
   ( -- * AggregationInfo
     AggregationInfo (..),
     newAggregationInfo,
@@ -120,8 +120,8 @@ module Network.Google.Billing.Internal.Product
   )
 where
 
-import Network.Google.Billing.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Represents the aggregation level and interval for pricing of a single SKU.
 --

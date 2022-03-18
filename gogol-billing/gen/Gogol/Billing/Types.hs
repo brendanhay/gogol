@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Types
+-- Module      : Gogol.Billing.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Billing.Types
+module Gogol.Billing.Types
   ( -- * Configuration
     billingService,
 
@@ -145,9 +145,9 @@ module Network.Google.Billing.Types
   )
 where
 
-import Network.Google.Billing.Internal.Product
-import Network.Google.Billing.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Internal.Product
+import Gogol.Billing.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
 billingService :: Core.ServiceConfig

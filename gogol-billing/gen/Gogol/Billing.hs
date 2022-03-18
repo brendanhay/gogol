@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing
+-- Module      : Gogol.Billing
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference>
-module Network.Google.Billing
+module Gogol.Billing
   ( -- * Configuration
     billingService,
 
@@ -211,16 +211,16 @@ module Network.Google.Billing
   )
 where
 
-import Network.Google.Billing.Cloudbilling.BillingAccounts.Create
-import Network.Google.Billing.Cloudbilling.BillingAccounts.Get
-import Network.Google.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
-import Network.Google.Billing.Cloudbilling.BillingAccounts.List
-import Network.Google.Billing.Cloudbilling.BillingAccounts.Patch
-import Network.Google.Billing.Cloudbilling.BillingAccounts.Projects.List
-import Network.Google.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
-import Network.Google.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
-import Network.Google.Billing.Cloudbilling.Projects.GetBillingInfo
-import Network.Google.Billing.Cloudbilling.Projects.UpdateBillingInfo
-import Network.Google.Billing.Cloudbilling.Services.List
-import Network.Google.Billing.Cloudbilling.Services.Skus.List
-import Network.Google.Billing.Types
+import Gogol.Billing.Cloudbilling.BillingAccounts.Create
+import Gogol.Billing.Cloudbilling.BillingAccounts.Get
+import Gogol.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
+import Gogol.Billing.Cloudbilling.BillingAccounts.List
+import Gogol.Billing.Cloudbilling.BillingAccounts.Patch
+import Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
+import Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
+import Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
+import Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
+import Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
+import Gogol.Billing.Cloudbilling.Services.List
+import Gogol.Billing.Cloudbilling.Services.Skus.List
+import Gogol.Billing.Types

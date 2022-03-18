@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Cloudbilling.Projects.UpdateBillingInfo
+-- Module      : Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -30,7 +30,7 @@
 -- empty. This action disassociates the current billing account from the project. Any billable activity of your in-use services will stop, and your application could stop functioning as expected. Any unbilled charges to date will be billed to the previously associated account. The current authenticated user must be either an owner of the project or an owner of the billing account for the project. Note that associating a project with a /closed/ billing account will have much the same effect as disabling billing on the project: any paid resources used by the project will be shut down. Thus, unless you wish to disable billing, you should always call this method with the name of an /open/ billing account.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.projects.updateBillingInfo@.
-module Network.Google.Billing.Cloudbilling.Projects.UpdateBillingInfo
+module Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
   ( -- * Resource
     CloudbillingProjectsUpdateBillingInfoResource,
 
@@ -40,8 +40,8 @@ module Network.Google.Billing.Cloudbilling.Projects.UpdateBillingInfo
   )
 where
 
-import Network.Google.Billing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudbilling.projects.updateBillingInfo@ method which the
 -- 'CloudbillingProjectsUpdateBillingInfo' request conforms to.
