@@ -39,53 +39,54 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudIdentity
-    Network.Google.CloudIdentity.Devices.CancelWipe
-    Network.Google.CloudIdentity.Devices.Create
-    Network.Google.CloudIdentity.Devices.Delete
-    Network.Google.CloudIdentity.Devices.DeviceUsers.Approve
-    Network.Google.CloudIdentity.Devices.DeviceUsers.Block
-    Network.Google.CloudIdentity.Devices.DeviceUsers.CancelWipe
-    Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
-    Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.List
-    Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
-    Network.Google.CloudIdentity.Devices.DeviceUsers.Delete
-    Network.Google.CloudIdentity.Devices.DeviceUsers.Get
-    Network.Google.CloudIdentity.Devices.DeviceUsers.List
-    Network.Google.CloudIdentity.Devices.DeviceUsers.Lookup
-    Network.Google.CloudIdentity.Devices.DeviceUsers.Wipe
-    Network.Google.CloudIdentity.Devices.Get
-    Network.Google.CloudIdentity.Devices.List
-    Network.Google.CloudIdentity.Devices.Wipe
-    Network.Google.CloudIdentity.Groups.Create
-    Network.Google.CloudIdentity.Groups.Delete
-    Network.Google.CloudIdentity.Groups.Get
-    Network.Google.CloudIdentity.Groups.GetSecuritySettings
-    Network.Google.CloudIdentity.Groups.List
-    Network.Google.CloudIdentity.Groups.Lookup
-    Network.Google.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
-    Network.Google.CloudIdentity.Groups.Memberships.Create
-    Network.Google.CloudIdentity.Groups.Memberships.Delete
-    Network.Google.CloudIdentity.Groups.Memberships.Get
-    Network.Google.CloudIdentity.Groups.Memberships.GetMembershipGraph
-    Network.Google.CloudIdentity.Groups.Memberships.List
-    Network.Google.CloudIdentity.Groups.Memberships.Lookup
-    Network.Google.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
-    Network.Google.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
-    Network.Google.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
-    Network.Google.CloudIdentity.Groups.Patch
-    Network.Google.CloudIdentity.Groups.Search
-    Network.Google.CloudIdentity.Groups.UpdateSecuritySettings
-    Network.Google.CloudIdentity.Types
+    Gogol.CloudIdentity
+    Gogol.CloudIdentity.Devices.CancelWipe
+    Gogol.CloudIdentity.Devices.Create
+    Gogol.CloudIdentity.Devices.Delete
+    Gogol.CloudIdentity.Devices.DeviceUsers.Approve
+    Gogol.CloudIdentity.Devices.DeviceUsers.Block
+    Gogol.CloudIdentity.Devices.DeviceUsers.CancelWipe
+    Gogol.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
+    Gogol.CloudIdentity.Devices.DeviceUsers.ClientStates.List
+    Gogol.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
+    Gogol.CloudIdentity.Devices.DeviceUsers.Delete
+    Gogol.CloudIdentity.Devices.DeviceUsers.Get
+    Gogol.CloudIdentity.Devices.DeviceUsers.List
+    Gogol.CloudIdentity.Devices.DeviceUsers.Lookup
+    Gogol.CloudIdentity.Devices.DeviceUsers.Wipe
+    Gogol.CloudIdentity.Devices.Get
+    Gogol.CloudIdentity.Devices.List
+    Gogol.CloudIdentity.Devices.Wipe
+    Gogol.CloudIdentity.Groups.Create
+    Gogol.CloudIdentity.Groups.Delete
+    Gogol.CloudIdentity.Groups.Get
+    Gogol.CloudIdentity.Groups.GetSecuritySettings
+    Gogol.CloudIdentity.Groups.List
+    Gogol.CloudIdentity.Groups.Lookup
+    Gogol.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
+    Gogol.CloudIdentity.Groups.Memberships.Create
+    Gogol.CloudIdentity.Groups.Memberships.Delete
+    Gogol.CloudIdentity.Groups.Memberships.Get
+    Gogol.CloudIdentity.Groups.Memberships.GetMembershipGraph
+    Gogol.CloudIdentity.Groups.Memberships.List
+    Gogol.CloudIdentity.Groups.Memberships.Lookup
+    Gogol.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
+    Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
+    Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
+    Gogol.CloudIdentity.Groups.Patch
+    Gogol.CloudIdentity.Groups.Search
+    Gogol.CloudIdentity.Groups.UpdateSecuritySettings
+    Gogol.CloudIdentity.Types
 
   other-modules:
-    Network.Google.CloudIdentity.Internal.Product
-    Network.Google.CloudIdentity.Internal.Sum
+    Gogol.CloudIdentity.Internal.Product
+    Gogol.CloudIdentity.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
