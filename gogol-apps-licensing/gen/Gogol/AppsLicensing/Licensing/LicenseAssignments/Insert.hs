@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsLicensing.Licensing.LicenseAssignments.Insert
+-- Module      : Gogol.AppsLicensing.Licensing.LicenseAssignments.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Assign a license.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.insert@.
-module Network.Google.AppsLicensing.Licensing.LicenseAssignments.Insert
+module Gogol.AppsLicensing.Licensing.LicenseAssignments.Insert
   ( -- * Resource
     LicensingLicenseAssignmentsInsertResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsLicensing.Licensing.LicenseAssignments.Insert
   )
 where
 
-import Network.Google.AppsLicensing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsLicensing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @licensing.licenseAssignments.insert@ method which the
 -- 'LicensingLicenseAssignmentsInsert' request conforms to.

@@ -39,24 +39,25 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AppsLicensing
-    Network.Google.AppsLicensing.Licensing.LicenseAssignments.Delete
-    Network.Google.AppsLicensing.Licensing.LicenseAssignments.Get
-    Network.Google.AppsLicensing.Licensing.LicenseAssignments.Insert
-    Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
-    Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProductAndSku
-    Network.Google.AppsLicensing.Licensing.LicenseAssignments.Patch
-    Network.Google.AppsLicensing.Licensing.LicenseAssignments.Update
-    Network.Google.AppsLicensing.Types
+    Gogol.AppsLicensing
+    Gogol.AppsLicensing.Licensing.LicenseAssignments.Delete
+    Gogol.AppsLicensing.Licensing.LicenseAssignments.Get
+    Gogol.AppsLicensing.Licensing.LicenseAssignments.Insert
+    Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
+    Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProductAndSku
+    Gogol.AppsLicensing.Licensing.LicenseAssignments.Patch
+    Gogol.AppsLicensing.Licensing.LicenseAssignments.Update
+    Gogol.AppsLicensing.Types
 
   other-modules:
-    Network.Google.AppsLicensing.Internal.Product
-    Network.Google.AppsLicensing.Internal.Sum
+    Gogol.AppsLicensing.Internal.Product
+    Gogol.AppsLicensing.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

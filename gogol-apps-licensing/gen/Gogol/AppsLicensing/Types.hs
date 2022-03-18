@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsLicensing.Types
+-- Module      : Gogol.AppsLicensing.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppsLicensing.Types
+module Gogol.AppsLicensing.Types
   ( -- * Configuration
     appsLicensingService,
 
@@ -55,9 +55,9 @@ module Network.Google.AppsLicensing.Types
   )
 where
 
-import Network.Google.AppsLicensing.Internal.Product
-import Network.Google.AppsLicensing.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsLicensing.Internal.Product
+import Gogol.AppsLicensing.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Enterprise License Manager API. This contains the host and root path used as a starting point for constructing service requests.
 appsLicensingService :: Core.ServiceConfig

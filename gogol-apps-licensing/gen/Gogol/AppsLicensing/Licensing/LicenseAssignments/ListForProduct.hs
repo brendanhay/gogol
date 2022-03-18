@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
+-- Module      : Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List all users assigned licenses for a specific product SKU.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.listForProduct@.
-module Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
+module Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
   ( -- * Resource
     LicensingLicenseAssignmentsListForProductResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
   )
 where
 
-import Network.Google.AppsLicensing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsLicensing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @licensing.licenseAssignments.listForProduct@ method which the
 -- 'LicensingLicenseAssignmentsListForProduct' request conforms to.

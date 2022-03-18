@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsLicensing.Internal.Product
+-- Module      : Gogol.AppsLicensing.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppsLicensing.Internal.Product
+module Gogol.AppsLicensing.Internal.Product
   ( -- * Empty
     Empty (..),
     newEmpty,
@@ -44,8 +44,8 @@ module Network.Google.AppsLicensing.Internal.Product
   )
 where
 
-import Network.Google.AppsLicensing.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsLicensing.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
 --
