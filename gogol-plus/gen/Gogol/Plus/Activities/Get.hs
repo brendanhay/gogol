@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Plus.Activities.Get
+-- Module      : Gogol.Plus.Activities.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.get@.
-module Network.Google.Plus.Activities.Get
+module Gogol.Plus.Activities.Get
   ( -- * Resource
     PlusActivitiesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Plus.Activities.Get
   )
 where
 
-import Network.Google.Plus.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Plus.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @plus.activities.get@ method which the
 -- 'PlusActivitiesGet' request conforms to.

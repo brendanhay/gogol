@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Plus.People.Search
+-- Module      : Gogol.Plus.People.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.search@.
-module Network.Google.Plus.People.Search
+module Gogol.Plus.People.Search
   ( -- * Resource
     PlusPeopleSearchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Plus.People.Search
   )
 where
 
-import Network.Google.Plus.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Plus.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @plus.people.search@ method which the
 -- 'PlusPeopleSearch' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Plus.People.Get
+-- Module      : Gogol.Plus.People.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get a person\'s profile. If your app uses scope https:\/\/www.googleapis.com\/auth\/plus.login, this method is guaranteed to return ageRange and language.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.get@.
-module Network.Google.Plus.People.Get
+module Gogol.Plus.People.Get
   ( -- * Resource
     PlusPeopleGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Plus.People.Get
   )
 where
 
-import Network.Google.Plus.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Plus.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @plus.people.get@ method which the
 -- 'PlusPeopleGet' request conforms to.
