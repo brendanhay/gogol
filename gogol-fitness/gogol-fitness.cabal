@@ -39,30 +39,31 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Fitness
-    Network.Google.Fitness.Types
-    Network.Google.Fitness.Users.Dataset.Aggregate
-    Network.Google.Fitness.Users.DataSources.Create
-    Network.Google.Fitness.Users.DataSources.DataPointChanges.List
-    Network.Google.Fitness.Users.DataSources.Datasets.Delete
-    Network.Google.Fitness.Users.DataSources.Datasets.Get
-    Network.Google.Fitness.Users.DataSources.Datasets.Patch
-    Network.Google.Fitness.Users.DataSources.Delete
-    Network.Google.Fitness.Users.DataSources.Get
-    Network.Google.Fitness.Users.DataSources.List
-    Network.Google.Fitness.Users.DataSources.Update
-    Network.Google.Fitness.Users.Sessions.Delete
-    Network.Google.Fitness.Users.Sessions.List
-    Network.Google.Fitness.Users.Sessions.Update
+    Gogol.Fitness
+    Gogol.Fitness.Types
+    Gogol.Fitness.Users.Dataset.Aggregate
+    Gogol.Fitness.Users.DataSources.Create
+    Gogol.Fitness.Users.DataSources.DataPointChanges.List
+    Gogol.Fitness.Users.DataSources.Datasets.Delete
+    Gogol.Fitness.Users.DataSources.Datasets.Get
+    Gogol.Fitness.Users.DataSources.Datasets.Patch
+    Gogol.Fitness.Users.DataSources.Delete
+    Gogol.Fitness.Users.DataSources.Get
+    Gogol.Fitness.Users.DataSources.List
+    Gogol.Fitness.Users.DataSources.Update
+    Gogol.Fitness.Users.Sessions.Delete
+    Gogol.Fitness.Users.Sessions.List
+    Gogol.Fitness.Users.Sessions.Update
 
   other-modules:
-    Network.Google.Fitness.Internal.Product
-    Network.Google.Fitness.Internal.Sum
+    Gogol.Fitness.Internal.Product
+    Gogol.Fitness.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

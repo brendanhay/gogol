@@ -19,80 +19,91 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness.Users.Dataset.Aggregate
+-- Module      : Gogol.Fitness.Users.DataSources.DataPointChanges.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggregated into exactly one bucket type per request.
+-- Queries for user\'s data point changes for a particular data source.
 --
--- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataset.aggregate@.
-module Network.Google.Fitness.Users.Dataset.Aggregate
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.dataPointChanges.list@.
+module Gogol.Fitness.Users.DataSources.DataPointChanges.List
   ( -- * Resource
-    FitnessUsersDatasetAggregateResource,
+    FitnessUsersDataSourcesDataPointChangesListResource,
 
     -- ** Constructing a Request
-    newFitnessUsersDatasetAggregate,
-    FitnessUsersDatasetAggregate,
+    newFitnessUsersDataSourcesDataPointChangesList,
+    FitnessUsersDataSourcesDataPointChangesList,
   )
 where
 
-import Network.Google.Fitness.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fitness.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @fitness.users.dataset.aggregate@ method which the
--- 'FitnessUsersDatasetAggregate' request conforms to.
-type FitnessUsersDatasetAggregateResource =
+-- | A resource alias for @fitness.users.dataSources.dataPointChanges.list@ method which the
+-- 'FitnessUsersDataSourcesDataPointChangesList' request conforms to.
+type FitnessUsersDataSourcesDataPointChangesListResource =
   "fitness"
     Core.:> "v1"
     Core.:> "users"
     Core.:> Core.Capture "userId" Core.Text
-    Core.:> "dataset:aggregate"
+    Core.:> "dataSources"
+    Core.:> Core.Capture "dataSourceId" Core.Text
+    Core.:> "dataPointChanges"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "limit" Core.Int32
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] AggregateRequest
-    Core.:> Core.Post '[Core.JSON] AggregateResponse
+    Core.:> Core.Get
+              '[Core.JSON]
+              ListDataPointChangesResponse
 
--- | Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggregated into exactly one bucket type per request.
+-- | Queries for user\'s data point changes for a particular data source.
 --
--- /See:/ 'newFitnessUsersDatasetAggregate' smart constructor.
-data FitnessUsersDatasetAggregate = FitnessUsersDatasetAggregate
+-- /See:/ 'newFitnessUsersDataSourcesDataPointChangesList' smart constructor.
+data FitnessUsersDataSourcesDataPointChangesList = FitnessUsersDataSourcesDataPointChangesList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: AggregateRequest,
+    -- | The data stream ID of the data source that created the dataset.
+    dataSourceId :: Core.Text,
+    -- | If specified, no more than this many data point changes will be included in the response.
+    limit :: (Core.Maybe Core.Int32),
+    -- | The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+    pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+    -- | List data points for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
     userId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FitnessUsersDatasetAggregate' with the minimum fields required to make a request.
-newFitnessUsersDatasetAggregate ::
-  -- |  Multipart request metadata. See 'payload'.
-  AggregateRequest ->
-  -- |  Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
+-- | Creates a value of 'FitnessUsersDataSourcesDataPointChangesList' with the minimum fields required to make a request.
+newFitnessUsersDataSourcesDataPointChangesList ::
+  -- |  The data stream ID of the data source that created the dataset. See 'dataSourceId'.
   Core.Text ->
-  FitnessUsersDatasetAggregate
-newFitnessUsersDatasetAggregate payload userId =
-  FitnessUsersDatasetAggregate
+  -- |  List data points for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
+  Core.Text ->
+  FitnessUsersDataSourcesDataPointChangesList
+newFitnessUsersDataSourcesDataPointChangesList dataSourceId userId =
+  FitnessUsersDataSourcesDataPointChangesList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      dataSourceId = dataSourceId,
+      limit = Core.Nothing,
+      pageToken = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
       userId = userId
@@ -100,13 +111,14 @@ newFitnessUsersDatasetAggregate payload userId =
 
 instance
   Core.GoogleRequest
-    FitnessUsersDatasetAggregate
+    FitnessUsersDataSourcesDataPointChangesList
   where
   type
-    Rs FitnessUsersDatasetAggregate =
-      AggregateResponse
+    Rs FitnessUsersDataSourcesDataPointChangesList =
+      ListDataPointChangesResponse
   type
-    Scopes FitnessUsersDatasetAggregate =
+    Scopes
+      FitnessUsersDataSourcesDataPointChangesList =
       '[ "https://www.googleapis.com/auth/fitness.activity.read",
          "https://www.googleapis.com/auth/fitness.activity.write",
          "https://www.googleapis.com/auth/fitness.blood_glucose.read",
@@ -130,21 +142,25 @@ instance
          "https://www.googleapis.com/auth/fitness.sleep.read",
          "https://www.googleapis.com/auth/fitness.sleep.write"
        ]
-  requestClient FitnessUsersDatasetAggregate {..} =
-    go
-      userId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      fitnessService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FitnessUsersDatasetAggregateResource
-          )
-          Core.mempty
+  requestClient
+    FitnessUsersDataSourcesDataPointChangesList {..} =
+      go
+        userId
+        dataSourceId
+        xgafv
+        accessToken
+        callback
+        limit
+        pageToken
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        fitnessService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  FitnessUsersDataSourcesDataPointChangesListResource
+            )
+            Core.mempty

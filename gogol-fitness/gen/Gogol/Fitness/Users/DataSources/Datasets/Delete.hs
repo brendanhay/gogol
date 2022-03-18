@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness.Users.DataSources.Datasets.Delete
+-- Module      : Gogol.Fitness.Users.DataSources.Datasets.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Performs an inclusive delete of all data points whose start and end times have any overlap with the time range specified by the dataset ID. For most data types, the entire data point will be deleted. For data types where the time span represents a consistent value (such as com.google.activity.segment), and a data point straddles either end point of the dataset, only the overlapping portion of the data point will be deleted.
 --
 -- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.datasets.delete@.
-module Network.Google.Fitness.Users.DataSources.Datasets.Delete
+module Gogol.Fitness.Users.DataSources.Datasets.Delete
   ( -- * Resource
     FitnessUsersDataSourcesDatasetsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Fitness.Users.DataSources.Datasets.Delete
   )
 where
 
-import Network.Google.Fitness.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fitness.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @fitness.users.dataSources.datasets.delete@ method which the
 -- 'FitnessUsersDataSourcesDatasetsDelete' request conforms to.

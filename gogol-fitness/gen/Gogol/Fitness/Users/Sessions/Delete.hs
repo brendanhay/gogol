@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness.Users.Sessions.Update
+-- Module      : Gogol.Fitness.Users.Sessions.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates or insert a given session.
+-- Deletes a session specified by the given session ID.
 --
--- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.sessions.update@.
-module Network.Google.Fitness.Users.Sessions.Update
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.sessions.delete@.
+module Gogol.Fitness.Users.Sessions.Delete
   ( -- * Resource
-    FitnessUsersSessionsUpdateResource,
+    FitnessUsersSessionsDeleteResource,
 
     -- ** Constructing a Request
-    newFitnessUsersSessionsUpdate,
-    FitnessUsersSessionsUpdate,
+    newFitnessUsersSessionsDelete,
+    FitnessUsersSessionsDelete,
   )
 where
 
-import Network.Google.Fitness.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fitness.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @fitness.users.sessions.update@ method which the
--- 'FitnessUsersSessionsUpdate' request conforms to.
-type FitnessUsersSessionsUpdateResource =
+-- | A resource alias for @fitness.users.sessions.delete@ method which the
+-- 'FitnessUsersSessionsDelete' request conforms to.
+type FitnessUsersSessionsDeleteResource =
   "fitness"
     Core.:> "v1"
     Core.:> "users"
@@ -57,47 +57,41 @@ type FitnessUsersSessionsUpdateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Session
-    Core.:> Core.Put '[Core.JSON] Session
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Updates or insert a given session.
+-- | Deletes a session specified by the given session ID.
 --
--- /See:/ 'newFitnessUsersSessionsUpdate' smart constructor.
-data FitnessUsersSessionsUpdate = FitnessUsersSessionsUpdate
+-- /See:/ 'newFitnessUsersSessionsDelete' smart constructor.
+data FitnessUsersSessionsDelete = FitnessUsersSessionsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Session,
-    -- | The ID of the session to be created.
+    -- | The ID of the session to be deleted.
     sessionId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+    -- | Delete a session for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
     userId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FitnessUsersSessionsUpdate' with the minimum fields required to make a request.
-newFitnessUsersSessionsUpdate ::
-  -- |  Multipart request metadata. See 'payload'.
-  Session ->
-  -- |  The ID of the session to be created. See 'sessionId'.
+-- | Creates a value of 'FitnessUsersSessionsDelete' with the minimum fields required to make a request.
+newFitnessUsersSessionsDelete ::
+  -- |  The ID of the session to be deleted. See 'sessionId'.
   Core.Text ->
-  -- |  Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
+  -- |  Delete a session for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
   Core.Text ->
-  FitnessUsersSessionsUpdate
-newFitnessUsersSessionsUpdate payload sessionId userId =
-  FitnessUsersSessionsUpdate
+  FitnessUsersSessionsDelete
+newFitnessUsersSessionsDelete sessionId userId =
+  FitnessUsersSessionsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
       sessionId = sessionId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
@@ -106,15 +100,15 @@ newFitnessUsersSessionsUpdate payload sessionId userId =
 
 instance
   Core.GoogleRequest
-    FitnessUsersSessionsUpdate
+    FitnessUsersSessionsDelete
   where
-  type Rs FitnessUsersSessionsUpdate = Session
+  type Rs FitnessUsersSessionsDelete = ()
   type
-    Scopes FitnessUsersSessionsUpdate =
+    Scopes FitnessUsersSessionsDelete =
       '[ "https://www.googleapis.com/auth/fitness.activity.write",
          "https://www.googleapis.com/auth/fitness.sleep.write"
        ]
-  requestClient FitnessUsersSessionsUpdate {..} =
+  requestClient FitnessUsersSessionsDelete {..} =
     go
       userId
       sessionId
@@ -124,12 +118,11 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       fitnessService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy FitnessUsersSessionsUpdateResource
+              Core.Proxy FitnessUsersSessionsDeleteResource
           )
           Core.mempty

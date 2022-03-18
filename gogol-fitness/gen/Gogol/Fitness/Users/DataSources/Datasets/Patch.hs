@@ -19,55 +19,53 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fitness.Users.DataSources.DataPointChanges.List
+-- Module      : Gogol.Fitness.Users.DataSources.Datasets.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Queries for user\'s data point changes for a particular data source.
+-- Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsquent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics: the data points provided are merely inserted, with no existing data replaced.
 --
--- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.dataPointChanges.list@.
-module Network.Google.Fitness.Users.DataSources.DataPointChanges.List
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.datasets.patch@.
+module Gogol.Fitness.Users.DataSources.Datasets.Patch
   ( -- * Resource
-    FitnessUsersDataSourcesDataPointChangesListResource,
+    FitnessUsersDataSourcesDatasetsPatchResource,
 
     -- ** Constructing a Request
-    newFitnessUsersDataSourcesDataPointChangesList,
-    FitnessUsersDataSourcesDataPointChangesList,
+    newFitnessUsersDataSourcesDatasetsPatch,
+    FitnessUsersDataSourcesDatasetsPatch,
   )
 where
 
-import Network.Google.Fitness.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fitness.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @fitness.users.dataSources.dataPointChanges.list@ method which the
--- 'FitnessUsersDataSourcesDataPointChangesList' request conforms to.
-type FitnessUsersDataSourcesDataPointChangesListResource =
+-- | A resource alias for @fitness.users.dataSources.datasets.patch@ method which the
+-- 'FitnessUsersDataSourcesDatasetsPatch' request conforms to.
+type FitnessUsersDataSourcesDatasetsPatchResource =
   "fitness"
     Core.:> "v1"
     Core.:> "users"
     Core.:> Core.Capture "userId" Core.Text
     Core.:> "dataSources"
     Core.:> Core.Capture "dataSourceId" Core.Text
-    Core.:> "dataPointChanges"
+    Core.:> "datasets"
+    Core.:> Core.Capture "datasetId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "limit" Core.Int32
-    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListDataPointChangesResponse
+    Core.:> Core.ReqBody '[Core.JSON] Dataset
+    Core.:> Core.Patch '[Core.JSON] Dataset
 
--- | Queries for user\'s data point changes for a particular data source.
+-- | Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsquent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics: the data points provided are merely inserted, with no existing data replaced.
 --
--- /See:/ 'newFitnessUsersDataSourcesDataPointChangesList' smart constructor.
-data FitnessUsersDataSourcesDataPointChangesList = FitnessUsersDataSourcesDataPointChangesList
+-- /See:/ 'newFitnessUsersDataSourcesDatasetsPatch' smart constructor.
+data FitnessUsersDataSourcesDatasetsPatch = FitnessUsersDataSourcesDatasetsPatch
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -76,34 +74,38 @@ data FitnessUsersDataSourcesDataPointChangesList = FitnessUsersDataSourcesDataPo
     callback :: (Core.Maybe Core.Text),
     -- | The data stream ID of the data source that created the dataset.
     dataSourceId :: Core.Text,
-    -- | If specified, no more than this many data point changes will be included in the response.
-    limit :: (Core.Maybe Core.Int32),
-    -- | The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
-    pageToken :: (Core.Maybe Core.Text),
+    -- | This field is not used, and can be safely omitted.
+    datasetId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: Dataset,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | List data points for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+    -- | Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
     userId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FitnessUsersDataSourcesDataPointChangesList' with the minimum fields required to make a request.
-newFitnessUsersDataSourcesDataPointChangesList ::
+-- | Creates a value of 'FitnessUsersDataSourcesDatasetsPatch' with the minimum fields required to make a request.
+newFitnessUsersDataSourcesDatasetsPatch ::
   -- |  The data stream ID of the data source that created the dataset. See 'dataSourceId'.
   Core.Text ->
-  -- |  List data points for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
+  -- |  This field is not used, and can be safely omitted. See 'datasetId'.
   Core.Text ->
-  FitnessUsersDataSourcesDataPointChangesList
-newFitnessUsersDataSourcesDataPointChangesList dataSourceId userId =
-  FitnessUsersDataSourcesDataPointChangesList
+  -- |  Multipart request metadata. See 'payload'.
+  Dataset ->
+  -- |  Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
+  Core.Text ->
+  FitnessUsersDataSourcesDatasetsPatch
+newFitnessUsersDataSourcesDatasetsPatch dataSourceId datasetId payload userId =
+  FitnessUsersDataSourcesDatasetsPatch
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       dataSourceId = dataSourceId,
-      limit = Core.Nothing,
-      pageToken = Core.Nothing,
+      datasetId = datasetId,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
       userId = userId
@@ -111,56 +113,44 @@ newFitnessUsersDataSourcesDataPointChangesList dataSourceId userId =
 
 instance
   Core.GoogleRequest
-    FitnessUsersDataSourcesDataPointChangesList
+    FitnessUsersDataSourcesDatasetsPatch
   where
   type
-    Rs FitnessUsersDataSourcesDataPointChangesList =
-      ListDataPointChangesResponse
+    Rs FitnessUsersDataSourcesDatasetsPatch =
+      Dataset
   type
-    Scopes
-      FitnessUsersDataSourcesDataPointChangesList =
-      '[ "https://www.googleapis.com/auth/fitness.activity.read",
-         "https://www.googleapis.com/auth/fitness.activity.write",
-         "https://www.googleapis.com/auth/fitness.blood_glucose.read",
+    Scopes FitnessUsersDataSourcesDatasetsPatch =
+      '[ "https://www.googleapis.com/auth/fitness.activity.write",
          "https://www.googleapis.com/auth/fitness.blood_glucose.write",
-         "https://www.googleapis.com/auth/fitness.blood_pressure.read",
          "https://www.googleapis.com/auth/fitness.blood_pressure.write",
-         "https://www.googleapis.com/auth/fitness.body.read",
          "https://www.googleapis.com/auth/fitness.body.write",
-         "https://www.googleapis.com/auth/fitness.body_temperature.read",
          "https://www.googleapis.com/auth/fitness.body_temperature.write",
-         "https://www.googleapis.com/auth/fitness.heart_rate.read",
          "https://www.googleapis.com/auth/fitness.heart_rate.write",
-         "https://www.googleapis.com/auth/fitness.location.read",
          "https://www.googleapis.com/auth/fitness.location.write",
-         "https://www.googleapis.com/auth/fitness.nutrition.read",
          "https://www.googleapis.com/auth/fitness.nutrition.write",
-         "https://www.googleapis.com/auth/fitness.oxygen_saturation.read",
          "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
-         "https://www.googleapis.com/auth/fitness.reproductive_health.read",
          "https://www.googleapis.com/auth/fitness.reproductive_health.write",
-         "https://www.googleapis.com/auth/fitness.sleep.read",
          "https://www.googleapis.com/auth/fitness.sleep.write"
        ]
   requestClient
-    FitnessUsersDataSourcesDataPointChangesList {..} =
+    FitnessUsersDataSourcesDatasetsPatch {..} =
       go
         userId
         dataSourceId
+        datasetId
         xgafv
         accessToken
         callback
-        limit
-        pageToken
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         fitnessService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  FitnessUsersDataSourcesDataPointChangesListResource
+                  FitnessUsersDataSourcesDatasetsPatchResource
             )
             Core.mempty
