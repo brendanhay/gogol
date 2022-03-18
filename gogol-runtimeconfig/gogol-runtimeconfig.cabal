@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.RuntimeConfig
-    Network.Google.RuntimeConfig.Operations.Cancel
-    Network.Google.RuntimeConfig.Operations.Delete
-    Network.Google.RuntimeConfig.Operations.List
-    Network.Google.RuntimeConfig.Types
+    Gogol.RuntimeConfig
+    Gogol.RuntimeConfig.Operations.Cancel
+    Gogol.RuntimeConfig.Operations.Delete
+    Gogol.RuntimeConfig.Operations.List
+    Gogol.RuntimeConfig.Types
 
   other-modules:
-    Network.Google.RuntimeConfig.Internal.Product
-    Network.Google.RuntimeConfig.Internal.Sum
+    Gogol.RuntimeConfig.Internal.Product
+    Gogol.RuntimeConfig.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
