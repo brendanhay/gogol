@@ -1,116 +1,104 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.IAMCredentials
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates short-lived credentials for impersonating IAM service accounts.
--- To enable this API, you must enable the IAM API (iam.googleapis.com).
+-- Creates short-lived credentials for impersonating IAM service accounts. To enable this API, you must enable the IAM API (iam.googleapis.com).
 --
 -- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference>
 module Network.Google.IAMCredentials
-    (
-    -- * Service Configuration
-      iAMCredentialsService
+  ( -- * Configuration
+    iAMCredentialsService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , IAMCredentialsAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** iamcredentials.projects.serviceAccounts.generateAccessToken
-    , module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
+    IAMCredentialsProjectsServiceAccountsGenerateAccessTokenResource,
+    newIAMCredentialsProjectsServiceAccountsGenerateAccessToken,
+    IAMCredentialsProjectsServiceAccountsGenerateAccessToken,
 
     -- ** iamcredentials.projects.serviceAccounts.generateIdToken
-    , module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
+    IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource,
+    newIAMCredentialsProjectsServiceAccountsGenerateIdToken,
+    IAMCredentialsProjectsServiceAccountsGenerateIdToken,
 
     -- ** iamcredentials.projects.serviceAccounts.signBlob
-    , module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignBlob
+    IAMCredentialsProjectsServiceAccountsSignBlobResource,
+    newIAMCredentialsProjectsServiceAccountsSignBlob,
+    IAMCredentialsProjectsServiceAccountsSignBlob,
 
     -- ** iamcredentials.projects.serviceAccounts.signJwt
-    , module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignJwt
+    IAMCredentialsProjectsServiceAccountsSignJwtResource,
+    newIAMCredentialsProjectsServiceAccountsSignJwt,
+    IAMCredentialsProjectsServiceAccountsSignJwt,
 
     -- * Types
 
-    -- ** GenerateIdTokenRequest
-    , GenerateIdTokenRequest
-    , generateIdTokenRequest
-    , gitrAudience
-    , gitrDelegates
-    , gitrIncludeEmail
-
-    -- ** GenerateAccessTokenResponse
-    , GenerateAccessTokenResponse
-    , generateAccessTokenResponse
-    , gatrAccessToken
-    , gatrExpireTime
-
-    -- ** SignJwtResponse
-    , SignJwtResponse
-    , signJwtResponse
-    , sjrKeyId
-    , sjrSignedJwt
-
-    -- ** SignBlobRequest
-    , SignBlobRequest
-    , signBlobRequest
-    , sbrDelegates
-    , sbrPayload
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** GenerateAccessTokenRequest
-    , GenerateAccessTokenRequest
-    , generateAccessTokenRequest
-    , gatrDelegates
-    , gatrLifetime
-    , gatrScope
+    GenerateAccessTokenRequest (..),
+    newGenerateAccessTokenRequest,
 
-    -- ** SignJwtRequest
-    , SignJwtRequest
-    , signJwtRequest
-    , sjrDelegates
-    , sjrPayload
+    -- ** GenerateAccessTokenResponse
+    GenerateAccessTokenResponse (..),
+    newGenerateAccessTokenResponse,
 
-    -- ** SignBlobResponse
-    , SignBlobResponse
-    , signBlobResponse
-    , sbrKeyId
-    , sbrSignedBlob
+    -- ** GenerateIdTokenRequest
+    GenerateIdTokenRequest (..),
+    newGenerateIdTokenRequest,
 
     -- ** GenerateIdTokenResponse
-    , GenerateIdTokenResponse
-    , generateIdTokenResponse
-    , gitrToken
-    ) where
+    GenerateIdTokenResponse (..),
+    newGenerateIdTokenResponse,
 
-import Network.Google.Prelude
+    -- ** SignBlobRequest
+    SignBlobRequest (..),
+    newSignBlobRequest,
+
+    -- ** SignBlobResponse
+    SignBlobResponse (..),
+    newSignBlobResponse,
+
+    -- ** SignJwtRequest
+    SignJwtRequest (..),
+    newSignJwtRequest,
+
+    -- ** SignJwtResponse
+    SignJwtResponse (..),
+    newSignJwtResponse,
+  )
+where
+
+import Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
+import Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
+import Network.Google.IAMCredentials.Projects.ServiceAccounts.SignBlob
+import Network.Google.IAMCredentials.Projects.ServiceAccounts.SignJwt
 import Network.Google.IAMCredentials.Types
-import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
-import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
-import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignBlob
-import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignJwt
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the IAM Service Account Credentials API service.
-type IAMCredentialsAPI =
-     ProjectsServiceAccountsGenerateAccessTokenResource
-       :<|> ProjectsServiceAccountsSignJwtResource
-       :<|> ProjectsServiceAccountsGenerateIdTokenResource
-       :<|> ProjectsServiceAccountsSignBlobResource
