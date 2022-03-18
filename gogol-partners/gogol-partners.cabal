@@ -39,34 +39,35 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Partners
-    Network.Google.Partners.Analytics.List
-    Network.Google.Partners.ClientMessages.Log
-    Network.Google.Partners.Companies.Get
-    Network.Google.Partners.Companies.Leads.Create
-    Network.Google.Partners.Companies.List
-    Network.Google.Partners.GetPartnersstatus
-    Network.Google.Partners.Leads.List
-    Network.Google.Partners.Offers.History.List
-    Network.Google.Partners.Offers.List
-    Network.Google.Partners.Types
-    Network.Google.Partners.UpdateCompanies
-    Network.Google.Partners.UpdateLeads
-    Network.Google.Partners.UserEvents.Log
-    Network.Google.Partners.Users.CreateCompanyRelation
-    Network.Google.Partners.Users.DeleteCompanyRelation
-    Network.Google.Partners.Users.Get
-    Network.Google.Partners.Users.UpdateProfile
-    Network.Google.Partners.UserStates.List
+    Gogol.Partners
+    Gogol.Partners.Analytics.List
+    Gogol.Partners.ClientMessages.Log
+    Gogol.Partners.Companies.Get
+    Gogol.Partners.Companies.Leads.Create
+    Gogol.Partners.Companies.List
+    Gogol.Partners.GetPartnersstatus
+    Gogol.Partners.Leads.List
+    Gogol.Partners.Offers.History.List
+    Gogol.Partners.Offers.List
+    Gogol.Partners.Types
+    Gogol.Partners.UpdateCompanies
+    Gogol.Partners.UpdateLeads
+    Gogol.Partners.UserEvents.Log
+    Gogol.Partners.Users.CreateCompanyRelation
+    Gogol.Partners.Users.DeleteCompanyRelation
+    Gogol.Partners.Users.Get
+    Gogol.Partners.Users.UpdateProfile
+    Gogol.Partners.UserStates.List
 
   other-modules:
-    Network.Google.Partners.Internal.Product
-    Network.Google.Partners.Internal.Sum
+    Gogol.Partners.Internal.Product
+    Gogol.Partners.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
