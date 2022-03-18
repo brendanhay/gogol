@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SiteVerification.WebResource.GetToken
+-- Module      : Gogol.SiteVerification.WebResource.GetToken
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get a verification token for placing on a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.getToken@.
-module Network.Google.SiteVerification.WebResource.GetToken
+module Gogol.SiteVerification.WebResource.GetToken
   ( -- * Resource
     SiteVerificationWebResourceGetTokenResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SiteVerification.WebResource.GetToken
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SiteVerification.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.getToken@ method which the
 -- 'SiteVerificationWebResourceGetToken' request conforms to.

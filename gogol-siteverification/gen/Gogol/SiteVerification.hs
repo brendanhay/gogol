@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SiteVerification
+-- Module      : Gogol.SiteVerification
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Verifies ownership of websites or domains with Google.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>
-module Network.Google.SiteVerification
+module Gogol.SiteVerification
   ( -- * Configuration
     siteVerificationService,
 
@@ -102,11 +102,11 @@ module Network.Google.SiteVerification
   )
 where
 
-import Network.Google.SiteVerification.Types
-import Network.Google.SiteVerification.WebResource.Delete
-import Network.Google.SiteVerification.WebResource.Get
-import Network.Google.SiteVerification.WebResource.GetToken
-import Network.Google.SiteVerification.WebResource.Insert
-import Network.Google.SiteVerification.WebResource.List
-import Network.Google.SiteVerification.WebResource.Patch
-import Network.Google.SiteVerification.WebResource.Update
+import Gogol.SiteVerification.Types
+import Gogol.SiteVerification.WebResource.Delete
+import Gogol.SiteVerification.WebResource.Get
+import Gogol.SiteVerification.WebResource.GetToken
+import Gogol.SiteVerification.WebResource.Insert
+import Gogol.SiteVerification.WebResource.List
+import Gogol.SiteVerification.WebResource.Patch
+import Gogol.SiteVerification.WebResource.Update

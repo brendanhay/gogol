@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SiteVerification.Types
+-- Module      : Gogol.SiteVerification.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.SiteVerification.Types
+module Gogol.SiteVerification.Types
   ( -- * Configuration
     siteVerificationService,
 
@@ -61,9 +61,9 @@ module Network.Google.SiteVerification.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SiteVerification.Internal.Product
-import Network.Google.SiteVerification.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.SiteVerification.Internal.Product
+import Gogol.SiteVerification.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Google Site Verification API. This contains the host and root path used as a starting point for constructing service requests.
 siteVerificationService :: Core.ServiceConfig

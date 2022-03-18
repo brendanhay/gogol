@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SiteVerification.WebResource.List
+-- Module      : Gogol.SiteVerification.WebResource.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get the list of your verified websites and domains.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.list@.
-module Network.Google.SiteVerification.WebResource.List
+module Gogol.SiteVerification.WebResource.List
   ( -- * Resource
     SiteVerificationWebResourceListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SiteVerification.WebResource.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SiteVerification.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.list@ method which the
 -- 'SiteVerificationWebResourceList' request conforms to.

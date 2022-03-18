@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SiteVerification.Internal.Product
+-- Module      : Gogol.SiteVerification.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.SiteVerification.Internal.Product
+module Gogol.SiteVerification.Internal.Product
   ( -- * SiteVerificationWebResourceGettokenRequest
     SiteVerificationWebResourceGettokenRequest (..),
     newSiteVerificationWebResourceGettokenRequest,
@@ -52,8 +52,8 @@ module Network.Google.SiteVerification.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SiteVerification.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.SiteVerification.Internal.Sum
 
 --
 -- /See:/ 'newSiteVerificationWebResourceGettokenRequest' smart constructor.

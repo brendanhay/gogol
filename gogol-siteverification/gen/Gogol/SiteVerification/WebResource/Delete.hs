@@ -19,68 +19,65 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SiteVerification.WebResource.Get
+-- Module      : Gogol.SiteVerification.WebResource.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get the most current data for a website or domain.
+-- Relinquish ownership of a website or domain.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.get@.
-module Network.Google.SiteVerification.WebResource.Get
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.delete@.
+module Gogol.SiteVerification.WebResource.Delete
   ( -- * Resource
-    SiteVerificationWebResourceGetResource,
+    SiteVerificationWebResourceDeleteResource,
 
     -- ** Constructing a Request
-    newSiteVerificationWebResourceGet,
-    SiteVerificationWebResourceGet,
+    newSiteVerificationWebResourceDelete,
+    SiteVerificationWebResourceDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SiteVerification.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SiteVerification.Types
 
--- | A resource alias for @siteVerification.webResource.get@ method which the
--- 'SiteVerificationWebResourceGet' request conforms to.
-type SiteVerificationWebResourceGetResource =
+-- | A resource alias for @siteVerification.webResource.delete@ method which the
+-- 'SiteVerificationWebResourceDelete' request conforms to.
+type SiteVerificationWebResourceDeleteResource =
   "siteVerification"
     Core.:> "v1"
     Core.:> "webResource"
     Core.:> Core.Capture "id" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              SiteVerificationWebResourceResource
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Get the most current data for a website or domain.
+-- | Relinquish ownership of a website or domain.
 --
--- /See:/ 'newSiteVerificationWebResourceGet' smart constructor.
-newtype SiteVerificationWebResourceGet = SiteVerificationWebResourceGet
+-- /See:/ 'newSiteVerificationWebResourceDelete' smart constructor.
+newtype SiteVerificationWebResourceDelete = SiteVerificationWebResourceDelete
   { -- | The id of a verified site or domain.
     id :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SiteVerificationWebResourceGet' with the minimum fields required to make a request.
-newSiteVerificationWebResourceGet ::
+-- | Creates a value of 'SiteVerificationWebResourceDelete' with the minimum fields required to make a request.
+newSiteVerificationWebResourceDelete ::
   -- |  The id of a verified site or domain. See 'id'.
   Core.Text ->
-  SiteVerificationWebResourceGet
-newSiteVerificationWebResourceGet id = SiteVerificationWebResourceGet {id = id}
+  SiteVerificationWebResourceDelete
+newSiteVerificationWebResourceDelete id =
+  SiteVerificationWebResourceDelete {id = id}
 
 instance
   Core.GoogleRequest
-    SiteVerificationWebResourceGet
+    SiteVerificationWebResourceDelete
   where
+  type Rs SiteVerificationWebResourceDelete = ()
   type
-    Rs SiteVerificationWebResourceGet =
-      SiteVerificationWebResourceResource
-  type
-    Scopes SiteVerificationWebResourceGet =
+    Scopes SiteVerificationWebResourceDelete =
       '["https://www.googleapis.com/auth/siteverification"]
-  requestClient SiteVerificationWebResourceGet {..} =
+  requestClient SiteVerificationWebResourceDelete {..} =
     go
       id
       (Core.Just Core.AltJSON)
@@ -89,6 +86,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SiteVerificationWebResourceGetResource
+              Core.Proxy SiteVerificationWebResourceDeleteResource
           )
           Core.mempty
