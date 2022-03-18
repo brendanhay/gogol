@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsCalendar
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,666 +30,472 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference>
 module Network.Google.AppsCalendar
-    (
-    -- * Service Configuration
-      appsCalendarService
+  ( -- * Configuration
+    appsCalendarService,
 
     -- * OAuth Scopes
-    , calendarScope
-    , calendarReadOnlyScope
-    , calendarEventsScope
-    , calendarSettingsReadOnlyScope
-    , calendarEventsReadOnlyScope
-
-    -- * API Declaration
-    , AppsCalendarAPI
+    calendarScope,
+    calendarEventsScope,
+    calendarEventsReadOnlyScope,
+    calendarReadOnlyScope,
+    calendarSettingsReadOnlyScope,
 
     -- * Resources
 
     -- ** calendar.acl.delete
-    , module Network.Google.Resource.Calendar.ACL.Delete
+    CalendarAclDeleteResource,
+    newCalendarAclDelete,
+    CalendarAclDelete,
 
     -- ** calendar.acl.get
-    , module Network.Google.Resource.Calendar.ACL.Get
+    CalendarAclGetResource,
+    newCalendarAclGet,
+    CalendarAclGet,
 
     -- ** calendar.acl.insert
-    , module Network.Google.Resource.Calendar.ACL.Insert
+    CalendarAclInsertResource,
+    newCalendarAclInsert,
+    CalendarAclInsert,
 
     -- ** calendar.acl.list
-    , module Network.Google.Resource.Calendar.ACL.List
+    CalendarAclListResource,
+    newCalendarAclList,
+    CalendarAclList,
 
     -- ** calendar.acl.patch
-    , module Network.Google.Resource.Calendar.ACL.Patch
+    CalendarAclPatchResource,
+    newCalendarAclPatch,
+    CalendarAclPatch,
 
     -- ** calendar.acl.update
-    , module Network.Google.Resource.Calendar.ACL.Update
+    CalendarAclUpdateResource,
+    newCalendarAclUpdate,
+    CalendarAclUpdate,
 
     -- ** calendar.acl.watch
-    , module Network.Google.Resource.Calendar.ACL.Watch
+    CalendarAclWatchResource,
+    newCalendarAclWatch,
+    CalendarAclWatch,
 
     -- ** calendar.calendarList.delete
-    , module Network.Google.Resource.Calendar.CalendarList.Delete
+    CalendarCalendarListDeleteResource,
+    newCalendarCalendarListDelete,
+    CalendarCalendarListDelete,
 
     -- ** calendar.calendarList.get
-    , module Network.Google.Resource.Calendar.CalendarList.Get
+    CalendarCalendarListGetResource,
+    newCalendarCalendarListGet,
+    CalendarCalendarListGet,
 
     -- ** calendar.calendarList.insert
-    , module Network.Google.Resource.Calendar.CalendarList.Insert
+    CalendarCalendarListInsertResource,
+    newCalendarCalendarListInsert,
+    CalendarCalendarListInsert,
 
     -- ** calendar.calendarList.list
-    , module Network.Google.Resource.Calendar.CalendarList.List
+    CalendarCalendarListListResource,
+    newCalendarCalendarListList,
+    CalendarCalendarListList,
 
     -- ** calendar.calendarList.patch
-    , module Network.Google.Resource.Calendar.CalendarList.Patch
+    CalendarCalendarListPatchResource,
+    newCalendarCalendarListPatch,
+    CalendarCalendarListPatch,
 
     -- ** calendar.calendarList.update
-    , module Network.Google.Resource.Calendar.CalendarList.Update
+    CalendarCalendarListUpdateResource,
+    newCalendarCalendarListUpdate,
+    CalendarCalendarListUpdate,
 
     -- ** calendar.calendarList.watch
-    , module Network.Google.Resource.Calendar.CalendarList.Watch
+    CalendarCalendarListWatchResource,
+    newCalendarCalendarListWatch,
+    CalendarCalendarListWatch,
 
     -- ** calendar.calendars.clear
-    , module Network.Google.Resource.Calendar.Calendars.Clear
+    CalendarCalendarsClearResource,
+    newCalendarCalendarsClear,
+    CalendarCalendarsClear,
 
     -- ** calendar.calendars.delete
-    , module Network.Google.Resource.Calendar.Calendars.Delete
+    CalendarCalendarsDeleteResource,
+    newCalendarCalendarsDelete,
+    CalendarCalendarsDelete,
 
     -- ** calendar.calendars.get
-    , module Network.Google.Resource.Calendar.Calendars.Get
+    CalendarCalendarsGetResource,
+    newCalendarCalendarsGet,
+    CalendarCalendarsGet,
 
     -- ** calendar.calendars.insert
-    , module Network.Google.Resource.Calendar.Calendars.Insert
+    CalendarCalendarsInsertResource,
+    newCalendarCalendarsInsert,
+    CalendarCalendarsInsert,
 
     -- ** calendar.calendars.patch
-    , module Network.Google.Resource.Calendar.Calendars.Patch
+    CalendarCalendarsPatchResource,
+    newCalendarCalendarsPatch,
+    CalendarCalendarsPatch,
 
     -- ** calendar.calendars.update
-    , module Network.Google.Resource.Calendar.Calendars.Update
+    CalendarCalendarsUpdateResource,
+    newCalendarCalendarsUpdate,
+    CalendarCalendarsUpdate,
 
     -- ** calendar.channels.stop
-    , module Network.Google.Resource.Calendar.Channels.Stop
+    CalendarChannelsStopResource,
+    newCalendarChannelsStop,
+    CalendarChannelsStop,
 
     -- ** calendar.colors.get
-    , module Network.Google.Resource.Calendar.Colors.Get
+    CalendarColorsGetResource,
+    newCalendarColorsGet,
+    CalendarColorsGet,
 
     -- ** calendar.events.delete
-    , module Network.Google.Resource.Calendar.Events.Delete
+    CalendarEventsDeleteResource,
+    newCalendarEventsDelete,
+    CalendarEventsDelete,
 
     -- ** calendar.events.get
-    , module Network.Google.Resource.Calendar.Events.Get
+    CalendarEventsGetResource,
+    newCalendarEventsGet,
+    CalendarEventsGet,
 
     -- ** calendar.events.import
-    , module Network.Google.Resource.Calendar.Events.Import
+    CalendarEventsImportResource,
+    newCalendarEventsImport,
+    CalendarEventsImport,
 
     -- ** calendar.events.insert
-    , module Network.Google.Resource.Calendar.Events.Insert
+    CalendarEventsInsertResource,
+    newCalendarEventsInsert,
+    CalendarEventsInsert,
 
     -- ** calendar.events.instances
-    , module Network.Google.Resource.Calendar.Events.Instances
+    CalendarEventsInstancesResource,
+    newCalendarEventsInstances,
+    CalendarEventsInstances,
 
     -- ** calendar.events.list
-    , module Network.Google.Resource.Calendar.Events.List
+    CalendarEventsListResource,
+    newCalendarEventsList,
+    CalendarEventsList,
 
     -- ** calendar.events.move
-    , module Network.Google.Resource.Calendar.Events.Move
+    CalendarEventsMoveResource,
+    newCalendarEventsMove,
+    CalendarEventsMove,
 
     -- ** calendar.events.patch
-    , module Network.Google.Resource.Calendar.Events.Patch
+    CalendarEventsPatchResource,
+    newCalendarEventsPatch,
+    CalendarEventsPatch,
 
     -- ** calendar.events.quickAdd
-    , module Network.Google.Resource.Calendar.Events.QuickAdd
+    CalendarEventsQuickAddResource,
+    newCalendarEventsQuickAdd,
+    CalendarEventsQuickAdd,
 
     -- ** calendar.events.update
-    , module Network.Google.Resource.Calendar.Events.Update
+    CalendarEventsUpdateResource,
+    newCalendarEventsUpdate,
+    CalendarEventsUpdate,
 
     -- ** calendar.events.watch
-    , module Network.Google.Resource.Calendar.Events.Watch
+    CalendarEventsWatchResource,
+    newCalendarEventsWatch,
+    CalendarEventsWatch,
 
     -- ** calendar.freebusy.query
-    , module Network.Google.Resource.Calendar.FreeBusy.Query
+    CalendarFreebusyQueryResource,
+    newCalendarFreebusyQuery,
+    CalendarFreebusyQuery,
 
     -- ** calendar.settings.get
-    , module Network.Google.Resource.Calendar.Settings.Get
+    CalendarSettingsGetResource,
+    newCalendarSettingsGet,
+    CalendarSettingsGet,
 
     -- ** calendar.settings.list
-    , module Network.Google.Resource.Calendar.Settings.List
+    CalendarSettingsListResource,
+    newCalendarSettingsList,
+    CalendarSettingsList,
 
     -- ** calendar.settings.watch
-    , module Network.Google.Resource.Calendar.Settings.Watch
+    CalendarSettingsWatchResource,
+    newCalendarSettingsWatch,
+    CalendarSettingsWatch,
 
     -- * Types
 
-    -- ** CalendarListEntry
-    , CalendarListEntry
-    , calendarListEntry
-    , cleSummary
-    , cleConferenceProperties
-    , cleEtag
-    , cleLocation
-    , cleKind
-    , cleNotificationSettings
-    , cleBackgRoundColor
-    , cleForegRoundColor
-    , cleDefaultReminders
-    , cleSelected
-    , clePrimary
-    , cleHidden
-    , cleId
-    , cleDeleted
-    , cleAccessRole
-    , cleSummaryOverride
-    , cleColorId
-    , cleTimeZone
-    , cleDescription
+    -- ** Acl
+    Acl (..),
+    newAcl,
 
-    -- ** ConferenceParameters
-    , ConferenceParameters
-    , conferenceParameters
-    , cpAddOnParameters
+    -- ** AclRule
+    AclRule (..),
+    newAclRule,
 
-    -- ** Event
-    , Event
-    , event
-    , eSummary
-    , eOriginalStartTime
-    , eCreator
-    , eStatus
-    , eGuestsCanModify
-    , eEtag
-    , eAttachments
-    , eLocked
-    , eLocation
-    , eAttendees
-    , eReminders
-    , eKind
-    , eCreated
-    , eTransparency
-    , eRecurringEventId
-    , eStart
-    , ePrivateCopy
-    , eEndTimeUnspecified
-    , eConferenceData
-    , eExtendedProperties
-    , eVisibility
-    , eGuestsCanInviteOthers
-    , eRecurrence
-    , eGadget
-    , eEventType
-    , eSequence
-    , eICalUId
-    , eEnd
-    , eAttendeesOmitted
-    , eSource
-    , eId
-    , eHTMLLink
-    , eUpdated
-    , eColorId
-    , eAnyoneCanAddSelf
-    , eGuestsCanSeeOtherGuests
-    , eHangoutLink
-    , eDescription
-    , eOrganizer
-
-    -- ** CalendarListEntryNotificationSettings
-    , CalendarListEntryNotificationSettings
-    , calendarListEntryNotificationSettings
-    , clensNotifications
-
-    -- ** ConferenceProperties
-    , ConferenceProperties
-    , conferenceProperties
-    , cpAllowedConferenceSolutionTypes
-
-    -- ** ConferenceSolution
-    , ConferenceSolution
-    , conferenceSolution
-    , csIconURI
-    , csKey
-    , csName
-
-    -- ** EventsPatchSendUpdates
-    , EventsPatchSendUpdates (..)
-
-    -- ** ACLRuleScope
-    , ACLRuleScope
-    , aclRuleScope
-    , arsValue
-    , arsType
-
-    -- ** ColorsEvent
-    , ColorsEvent
-    , colorsEvent
-    , ceAddtional
-
-    -- ** EventsQuickAddSendUpdates
-    , EventsQuickAddSendUpdates (..)
-
-    -- ** Settings
-    , Settings
-    , settings
-    , sEtag
-    , sNextPageToken
-    , sKind
-    , sItems
-    , sNextSyncToken
-
-    -- ** FreeBusyRequestItem
-    , FreeBusyRequestItem
-    , freeBusyRequestItem
-    , fbriId
-
-    -- ** EventAttachment
-    , EventAttachment
-    , eventAttachment
-    , eaFileURL
-    , eaIconLink
-    , eaMimeType
-    , eaTitle
-    , eaFileId
-
-    -- ** EntryPoint
-    , EntryPoint
-    , entryPoint
-    , epPasscode
-    , epRegionCode
-    , epURI
-    , epMeetingCode
-    , epPassword
-    , epPin
-    , epEntryPointFeatures
-    , epEntryPointType
-    , epLabel
-    , epAccessCode
-
-    -- ** TimePeriod
-    , TimePeriod
-    , timePeriod
-    , tpStart
-    , tpEnd
-
-    -- ** EventsUpdateSendUpdates
-    , EventsUpdateSendUpdates (..)
-
-    -- ** ConferenceSolutionKey
-    , ConferenceSolutionKey
-    , conferenceSolutionKey
-    , cskType
-
-    -- ** EventsMoveSendUpdates
-    , EventsMoveSendUpdates (..)
-
-    -- ** EventCreator
-    , EventCreator
-    , eventCreator
-    , ecEmail
-    , ecSelf
-    , ecDisplayName
-    , ecId
-
-    -- ** Error'
-    , Error'
-    , error'
-    , eDomain
-    , eReason
-
-    -- ** ColorDefinition
-    , ColorDefinition
-    , colorDefinition
-    , cdForegRound
-    , cdBackgRound
-
-    -- ** EventsListOrderBy
-    , EventsListOrderBy (..)
-
-    -- ** EventsDeleteSendUpdates
-    , EventsDeleteSendUpdates (..)
-
-    -- ** Channel
-    , Channel
-    , channel
-    , cResourceURI
-    , cResourceId
-    , cKind
-    , cExpiration
-    , cToken
-    , cAddress
-    , cPayload
-    , cParams
-    , cId
-    , cType
-
-    -- ** ConferenceRequestStatus
-    , ConferenceRequestStatus
-    , conferenceRequestStatus
-    , crsStatusCode
-
-    -- ** FreeBusyCalendar
-    , FreeBusyCalendar
-    , freeBusyCalendar
-    , fbcBusy
-    , fbcErrors
-
-    -- ** ConferenceData
-    , ConferenceData
-    , conferenceData
-    , cdSignature
-    , cdConferenceSolution
-    , cdCreateRequest
-    , cdConferenceId
-    , cdParameters
-    , cdNotes
-    , cdEntryPoints
-
-    -- ** Setting
-    , Setting
-    , setting
-    , setEtag
-    , setKind
-    , setValue
-    , setId
-
-    -- ** FreeBusyResponseGroups
-    , FreeBusyResponseGroups
-    , freeBusyResponseGroups
-    , fbrgAddtional
-
-    -- ** EventsInsertSendUpdates
-    , EventsInsertSendUpdates (..)
-
-    -- ** EventReminders
-    , EventReminders
-    , eventReminders
-    , erOverrides
-    , erUseDefault
-
-    -- ** ColorsCalendar
-    , ColorsCalendar
-    , colorsCalendar
-    , ccAddtional
-
-    -- ** ConferenceParametersAddOnParametersParameters
-    , ConferenceParametersAddOnParametersParameters
-    , conferenceParametersAddOnParametersParameters
-    , cpaoppAddtional
-
-    -- ** CalendarNotification
-    , CalendarNotification
-    , calendarNotification
-    , cnMethod
-    , cnType
-
-    -- ** EventExtendedPropertiesPrivate
-    , EventExtendedPropertiesPrivate
-    , eventExtendedPropertiesPrivate
-    , eeppAddtional
-
-    -- ** ChannelParams
-    , ChannelParams
-    , channelParams
-    , cpAddtional
-
-    -- ** Events
-    , Events
-    , events
-    , eveSummary
-    , eveEtag
-    , eveNextPageToken
-    , eveKind
-    , eveItems
-    , eveDefaultReminders
-    , eveUpdated
-    , eveAccessRole
-    , eveTimeZone
-    , eveNextSyncToken
-    , eveDescription
-
-    -- ** EventAttendee
-    , EventAttendee
-    , eventAttendee
-    , eaEmail
-    , eaResponseStatus
-    , eaSelf
-    , eaResource
-    , eaAdditionalGuests
-    , eaDisplayName
-    , eaId
-    , eaComment
-    , eaOptional
-    , eaOrganizer
+    -- ** AclRule_Scope
+    AclRule_Scope (..),
+    newAclRule_Scope,
 
     -- ** Calendar
-    , Calendar
-    , calendar
-    , calSummary
-    , calConferenceProperties
-    , calEtag
-    , calLocation
-    , calKind
-    , calId
-    , calTimeZone
-    , calDescription
-
-    -- ** FreeBusyResponse
-    , FreeBusyResponse
-    , freeBusyResponse
-    , fbrGroups
-    , fbrTimeMin
-    , fbrKind
-    , fbrCalendars
-    , fbrTimeMax
-
-    -- ** EventReminder
-    , EventReminder
-    , eventReminder
-    , erMethod
-    , erMinutes
-
-    -- ** EventExtendedProperties
-    , EventExtendedProperties
-    , eventExtendedProperties
-    , eepPrivate
-    , eepShared
-
-    -- ** EventDateTime
-    , EventDateTime
-    , eventDateTime
-    , edtDate
-    , edtTimeZone
-    , edtDateTime
-
-    -- ** EventOrganizer
-    , EventOrganizer
-    , eventOrganizer
-    , eoEmail
-    , eoSelf
-    , eoDisplayName
-    , eoId
+    Calendar (..),
+    newCalendar,
 
     -- ** CalendarList
-    , CalendarList
-    , calendarList
-    , clEtag
-    , clNextPageToken
-    , clKind
-    , clItems
-    , clNextSyncToken
+    CalendarList (..),
+    newCalendarList,
 
-    -- ** CalendarListListMinAccessRole
-    , CalendarListListMinAccessRole (..)
+    -- ** CalendarListEntry
+    CalendarListEntry (..),
+    newCalendarListEntry,
 
-    -- ** EventGadget
-    , EventGadget
-    , eventGadget
-    , egHeight
-    , egDisplay
-    , egPreferences
-    , egLink
-    , egIconLink
-    , egWidth
-    , egTitle
-    , egType
+    -- ** CalendarListEntry_NotificationSettings
+    CalendarListEntry_NotificationSettings (..),
+    newCalendarListEntry_NotificationSettings,
 
-    -- ** EventGadgetPreferences
-    , EventGadgetPreferences
-    , eventGadgetPreferences
-    , egpAddtional
+    -- ** CalendarNotification
+    CalendarNotification (..),
+    newCalendarNotification,
 
-    -- ** FreeBusyRequest
-    , FreeBusyRequest
-    , freeBusyRequest
-    , fCalendarExpansionMax
-    , fTimeMin
-    , fItems
-    , fGroupExpansionMax
-    , fTimeZone
-    , fTimeMax
+    -- ** Channel
+    Channel (..),
+    newChannel,
 
-    -- ** ACLRule
-    , ACLRule
-    , aclRule
-    , arEtag
-    , arKind
-    , arRole
-    , arScope
-    , arId
+    -- ** Channel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
-    -- ** EventsWatchOrderBy
-    , EventsWatchOrderBy (..)
-
-    -- ** CreateConferenceRequest
-    , CreateConferenceRequest
-    , createConferenceRequest
-    , ccrStatus
-    , ccrRequestId
-    , ccrConferenceSolutionKey
-
-    -- ** EventExtendedPropertiesShared
-    , EventExtendedPropertiesShared
-    , eventExtendedPropertiesShared
-    , eepsAddtional
-
-    -- ** CalendarListWatchMinAccessRole
-    , CalendarListWatchMinAccessRole (..)
-
-    -- ** FreeBusyResponseCalendars
-    , FreeBusyResponseCalendars
-    , freeBusyResponseCalendars
-    , fbrcAddtional
-
-    -- ** ACL
-    , ACL
-    , acl
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
-    , aNextSyncToken
+    -- ** ColorDefinition
+    ColorDefinition (..),
+    newColorDefinition,
 
     -- ** Colors
-    , Colors
-    , colors
-    , colEvent
-    , colKind
-    , colCalendar
-    , colUpdated
+    Colors (..),
+    newColors,
 
-    -- ** FreeBusyGroup
-    , FreeBusyGroup
-    , freeBusyGroup
-    , fbgCalendars
-    , fbgErrors
+    -- ** Colors_Calendar
+    Colors_Calendar (..),
+    newColors_Calendar,
+
+    -- ** Colors_Event
+    Colors_Event (..),
+    newColors_Event,
+
+    -- ** ConferenceData
+    ConferenceData (..),
+    newConferenceData,
+
+    -- ** ConferenceParameters
+    ConferenceParameters (..),
+    newConferenceParameters,
 
     -- ** ConferenceParametersAddOnParameters
-    , ConferenceParametersAddOnParameters
-    , conferenceParametersAddOnParameters
-    , cpaopParameters
+    ConferenceParametersAddOnParameters (..),
+    newConferenceParametersAddOnParameters,
 
-    -- ** EventSource
-    , EventSource
-    , eventSource
-    , esURL
-    , esTitle
-    ) where
+    -- ** ConferenceParametersAddOnParameters_Parameters
+    ConferenceParametersAddOnParameters_Parameters (..),
+    newConferenceParametersAddOnParameters_Parameters,
 
-import Network.Google.Prelude
+    -- ** ConferenceProperties
+    ConferenceProperties (..),
+    newConferenceProperties,
+
+    -- ** ConferenceRequestStatus
+    ConferenceRequestStatus (..),
+    newConferenceRequestStatus,
+
+    -- ** ConferenceSolution
+    ConferenceSolution (..),
+    newConferenceSolution,
+
+    -- ** ConferenceSolutionKey
+    ConferenceSolutionKey (..),
+    newConferenceSolutionKey,
+
+    -- ** CreateConferenceRequest
+    CreateConferenceRequest (..),
+    newCreateConferenceRequest,
+
+    -- ** EntryPoint
+    EntryPoint (..),
+    newEntryPoint,
+
+    -- ** Error'
+    Error' (..),
+    newError,
+
+    -- ** Event
+    Event (..),
+    newEvent,
+
+    -- ** Event_Creator
+    Event_Creator (..),
+    newEvent_Creator,
+
+    -- ** Event_ExtendedProperties
+    Event_ExtendedProperties (..),
+    newEvent_ExtendedProperties,
+
+    -- ** Event_ExtendedProperties_Private
+    Event_ExtendedProperties_Private (..),
+    newEvent_ExtendedProperties_Private,
+
+    -- ** Event_ExtendedProperties_Shared
+    Event_ExtendedProperties_Shared (..),
+    newEvent_ExtendedProperties_Shared,
+
+    -- ** Event_Gadget
+    Event_Gadget (..),
+    newEvent_Gadget,
+
+    -- ** Event_Gadget_Preferences
+    Event_Gadget_Preferences (..),
+    newEvent_Gadget_Preferences,
+
+    -- ** Event_Organizer
+    Event_Organizer (..),
+    newEvent_Organizer,
+
+    -- ** Event_Reminders
+    Event_Reminders (..),
+    newEvent_Reminders,
+
+    -- ** Event_Source
+    Event_Source (..),
+    newEvent_Source,
+
+    -- ** EventAttachment
+    EventAttachment (..),
+    newEventAttachment,
+
+    -- ** EventAttendee
+    EventAttendee (..),
+    newEventAttendee,
+
+    -- ** EventDateTime
+    EventDateTime (..),
+    newEventDateTime,
+
+    -- ** EventReminder
+    EventReminder (..),
+    newEventReminder,
+
+    -- ** Events
+    Events (..),
+    newEvents,
+
+    -- ** FreeBusyCalendar
+    FreeBusyCalendar (..),
+    newFreeBusyCalendar,
+
+    -- ** FreeBusyGroup
+    FreeBusyGroup (..),
+    newFreeBusyGroup,
+
+    -- ** FreeBusyRequest
+    FreeBusyRequest (..),
+    newFreeBusyRequest,
+
+    -- ** FreeBusyRequestItem
+    FreeBusyRequestItem (..),
+    newFreeBusyRequestItem,
+
+    -- ** FreeBusyResponse
+    FreeBusyResponse (..),
+    newFreeBusyResponse,
+
+    -- ** FreeBusyResponse_Calendars
+    FreeBusyResponse_Calendars (..),
+    newFreeBusyResponse_Calendars,
+
+    -- ** FreeBusyResponse_Groups
+    FreeBusyResponse_Groups (..),
+    newFreeBusyResponse_Groups,
+
+    -- ** Setting
+    Setting (..),
+    newSetting,
+
+    -- ** Settings
+    Settings (..),
+    newSettings,
+
+    -- ** TimePeriod
+    TimePeriod (..),
+    newTimePeriod,
+
+    -- ** CalendarListListMinAccessRole
+    CalendarListListMinAccessRole (..),
+
+    -- ** CalendarListWatchMinAccessRole
+    CalendarListWatchMinAccessRole (..),
+
+    -- ** EventsDeleteSendUpdates
+    EventsDeleteSendUpdates (..),
+
+    -- ** EventsInsertSendUpdates
+    EventsInsertSendUpdates (..),
+
+    -- ** EventsListOrderBy
+    EventsListOrderBy (..),
+
+    -- ** EventsMoveSendUpdates
+    EventsMoveSendUpdates (..),
+
+    -- ** EventsPatchSendUpdates
+    EventsPatchSendUpdates (..),
+
+    -- ** EventsQuickAddSendUpdates
+    EventsQuickAddSendUpdates (..),
+
+    -- ** EventsUpdateSendUpdates
+    EventsUpdateSendUpdates (..),
+
+    -- ** EventsWatchOrderBy
+    EventsWatchOrderBy (..),
+  )
+where
+
+import Network.Google.AppsCalendar.Calendar.Acl.Delete
+import Network.Google.AppsCalendar.Calendar.Acl.Get
+import Network.Google.AppsCalendar.Calendar.Acl.Insert
+import Network.Google.AppsCalendar.Calendar.Acl.List
+import Network.Google.AppsCalendar.Calendar.Acl.Patch
+import Network.Google.AppsCalendar.Calendar.Acl.Update
+import Network.Google.AppsCalendar.Calendar.Acl.Watch
+import Network.Google.AppsCalendar.Calendar.CalendarList.Delete
+import Network.Google.AppsCalendar.Calendar.CalendarList.Get
+import Network.Google.AppsCalendar.Calendar.CalendarList.Insert
+import Network.Google.AppsCalendar.Calendar.CalendarList.List
+import Network.Google.AppsCalendar.Calendar.CalendarList.Patch
+import Network.Google.AppsCalendar.Calendar.CalendarList.Update
+import Network.Google.AppsCalendar.Calendar.CalendarList.Watch
+import Network.Google.AppsCalendar.Calendar.Calendars.Clear
+import Network.Google.AppsCalendar.Calendar.Calendars.Delete
+import Network.Google.AppsCalendar.Calendar.Calendars.Get
+import Network.Google.AppsCalendar.Calendar.Calendars.Insert
+import Network.Google.AppsCalendar.Calendar.Calendars.Patch
+import Network.Google.AppsCalendar.Calendar.Calendars.Update
+import Network.Google.AppsCalendar.Calendar.Channels.Stop
+import Network.Google.AppsCalendar.Calendar.Colors.Get
+import Network.Google.AppsCalendar.Calendar.Events.Delete
+import Network.Google.AppsCalendar.Calendar.Events.Get
+import Network.Google.AppsCalendar.Calendar.Events.Import
+import Network.Google.AppsCalendar.Calendar.Events.Insert
+import Network.Google.AppsCalendar.Calendar.Events.Instances
+import Network.Google.AppsCalendar.Calendar.Events.List
+import Network.Google.AppsCalendar.Calendar.Events.Move
+import Network.Google.AppsCalendar.Calendar.Events.Patch
+import Network.Google.AppsCalendar.Calendar.Events.QuickAdd
+import Network.Google.AppsCalendar.Calendar.Events.Update
+import Network.Google.AppsCalendar.Calendar.Events.Watch
+import Network.Google.AppsCalendar.Calendar.Freebusy.Query
+import Network.Google.AppsCalendar.Calendar.Settings.Get
+import Network.Google.AppsCalendar.Calendar.Settings.List
+import Network.Google.AppsCalendar.Calendar.Settings.Watch
 import Network.Google.AppsCalendar.Types
-import Network.Google.Resource.Calendar.ACL.Delete
-import Network.Google.Resource.Calendar.ACL.Get
-import Network.Google.Resource.Calendar.ACL.Insert
-import Network.Google.Resource.Calendar.ACL.List
-import Network.Google.Resource.Calendar.ACL.Patch
-import Network.Google.Resource.Calendar.ACL.Update
-import Network.Google.Resource.Calendar.ACL.Watch
-import Network.Google.Resource.Calendar.CalendarList.Delete
-import Network.Google.Resource.Calendar.CalendarList.Get
-import Network.Google.Resource.Calendar.CalendarList.Insert
-import Network.Google.Resource.Calendar.CalendarList.List
-import Network.Google.Resource.Calendar.CalendarList.Patch
-import Network.Google.Resource.Calendar.CalendarList.Update
-import Network.Google.Resource.Calendar.CalendarList.Watch
-import Network.Google.Resource.Calendar.Calendars.Clear
-import Network.Google.Resource.Calendar.Calendars.Delete
-import Network.Google.Resource.Calendar.Calendars.Get
-import Network.Google.Resource.Calendar.Calendars.Insert
-import Network.Google.Resource.Calendar.Calendars.Patch
-import Network.Google.Resource.Calendar.Calendars.Update
-import Network.Google.Resource.Calendar.Channels.Stop
-import Network.Google.Resource.Calendar.Colors.Get
-import Network.Google.Resource.Calendar.Events.Delete
-import Network.Google.Resource.Calendar.Events.Get
-import Network.Google.Resource.Calendar.Events.Import
-import Network.Google.Resource.Calendar.Events.Insert
-import Network.Google.Resource.Calendar.Events.Instances
-import Network.Google.Resource.Calendar.Events.List
-import Network.Google.Resource.Calendar.Events.Move
-import Network.Google.Resource.Calendar.Events.Patch
-import Network.Google.Resource.Calendar.Events.QuickAdd
-import Network.Google.Resource.Calendar.Events.Update
-import Network.Google.Resource.Calendar.Events.Watch
-import Network.Google.Resource.Calendar.FreeBusy.Query
-import Network.Google.Resource.Calendar.Settings.Get
-import Network.Google.Resource.Calendar.Settings.List
-import Network.Google.Resource.Calendar.Settings.Watch
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Calendar API service.
-type AppsCalendarAPI =
-     SettingsListResource :<|> SettingsGetResource :<|>
-       SettingsWatchResource
-       :<|> ChannelsStopResource
-       :<|> CalendarsInsertResource
-       :<|> CalendarsPatchResource
-       :<|> CalendarsGetResource
-       :<|> CalendarsClearResource
-       :<|> CalendarsDeleteResource
-       :<|> CalendarsUpdateResource
-       :<|> EventsQuickAddResource
-       :<|> EventsInsertResource
-       :<|> EventsListResource
-       :<|> EventsPatchResource
-       :<|> EventsGetResource
-       :<|> EventsInstancesResource
-       :<|> EventsImportResource
-       :<|> EventsDeleteResource
-       :<|> EventsUpdateResource
-       :<|> EventsMoveResource
-       :<|> EventsWatchResource
-       :<|> CalendarListInsertResource
-       :<|> CalendarListListResource
-       :<|> CalendarListPatchResource
-       :<|> CalendarListGetResource
-       :<|> CalendarListDeleteResource
-       :<|> CalendarListUpdateResource
-       :<|> CalendarListWatchResource
-       :<|> ACLInsertResource
-       :<|> ACLListResource
-       :<|> ACLPatchResource
-       :<|> ACLGetResource
-       :<|> ACLDeleteResource
-       :<|> ACLUpdateResource
-       :<|> ACLWatchResource
-       :<|> ColorsGetResource
-       :<|> FreeBusyQueryResource
