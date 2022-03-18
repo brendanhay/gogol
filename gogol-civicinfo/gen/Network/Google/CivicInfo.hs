@@ -1,317 +1,205 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CivicInfo
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides polling places, early vote locations, contest data, election
--- officials, and government representatives for U.S. residential
--- addresses.
+-- Provides polling places, early vote locations, contest data, election officials, and government representatives for U.S. residential addresses.
 --
 -- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference>
 module Network.Google.CivicInfo
-    (
-    -- * Service Configuration
-      civicInfoService
-
-    -- * API Declaration
-    , CivicInfoAPI
+  ( -- * Configuration
+    civicInfoService,
 
     -- * Resources
 
     -- ** civicinfo.divisions.search
-    , module Network.Google.Resource.CivicInfo.Divisions.Search
+    CivicInfoDivisionsSearchResource,
+    newCivicInfoDivisionsSearch,
+    CivicInfoDivisionsSearch,
 
     -- ** civicinfo.elections.electionQuery
-    , module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
+    CivicInfoElectionsElectionQueryResource,
+    newCivicInfoElectionsElectionQuery,
+    CivicInfoElectionsElectionQuery,
 
     -- ** civicinfo.elections.voterInfoQuery
-    , module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
+    CivicInfoElectionsVoterInfoQueryResource,
+    newCivicInfoElectionsVoterInfoQuery,
+    CivicInfoElectionsVoterInfoQuery,
 
     -- ** civicinfo.representatives.representativeInfoByAddress
-    , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
+    CivicInfoRepresentativesRepresentativeInfoByAddressResource,
+    newCivicInfoRepresentativesRepresentativeInfoByAddress,
+    CivicInfoRepresentativesRepresentativeInfoByAddress,
 
     -- ** civicinfo.representatives.representativeInfoByDivision
-    , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
+    CivicInfoRepresentativesRepresentativeInfoByDivisionResource,
+    newCivicInfoRepresentativesRepresentativeInfoByDivision,
+    CivicInfoRepresentativesRepresentativeInfoByDivision,
 
     -- * Types
 
-    -- ** RepresentativeInfoResponseDivisions
-    , RepresentativeInfoResponseDivisions
-    , representativeInfoResponseDivisions
-    , rirdAddtional
-
-    -- ** ContestLevelItem
-    , ContestLevelItem (..)
-
-    -- ** VoterInfoResponse
-    , VoterInfoResponse
-    , voterInfoResponse
-    , virOtherElections
-    , virContests
-    , virState
-    , virKind
-    , virDropOffLocations
-    , virElection
-    , virNormalizedInput
-    , virMailOnly
-    , virEarlyVoteSites
-    , virPollingLocations
-    , virPrecinctId
-
-    -- ** PollingLocation
-    , PollingLocation
-    , pollingLocation
-    , plVoterServices
-    , plLatitude
-    , plEndDate
-    , plSources
-    , plAddress
-    , plStartDate
-    , plPollingHours
-    , plName
-    , plNotes
-    , plLongitude
-
-    -- ** RepresentativesRepresentativeInfoByDivisionLevels
-    , RepresentativesRepresentativeInfoByDivisionLevels (..)
-
-    -- ** GeographicDivision
-    , GeographicDivision
-    , geographicDivision
-    , gdName
-    , gdOfficeIndices
-    , gdAlsoKnownAs
-
-    -- ** Candidate
-    , Candidate
-    , candidate
-    , cEmail
-    , cPhone
-    , cPhotoURL
-    , cChannels
-    , cCandidateURL
-    , cOrderOnBallot
-    , cName
-    , cParty
-
-    -- ** RepresentativesRepresentativeInfoByAddressLevels
-    , RepresentativesRepresentativeInfoByAddressLevels (..)
-
-    -- ** Office
-    , Office
-    , office
-    , oDivisionId
-    , oRoles
-    , oOfficialIndices
-    , oSources
-    , oName
-    , oLevels
-
-    -- ** RepresentativesRepresentativeInfoByDivisionRoles
-    , RepresentativesRepresentativeInfoByDivisionRoles (..)
-
-    -- ** OfficeLevelsItem
-    , OfficeLevelsItem (..)
-
-    -- ** Channel
-    , Channel
-    , channel
-    , cId
-    , cType
-
-    -- ** Election
-    , Election
-    , election
-    , eOcdDivisionId
-    , eElectionDay
-    , eName
-    , eId
-
-    -- ** RepresentativeInfoResponse
-    , RepresentativeInfoResponse
-    , representativeInfoResponse
-    , rirKind
-    , rirNormalizedInput
-    , rirOfficials
-    , rirDivisions
-    , rirOffices
-
-    -- ** DivisionSearchResult
-    , DivisionSearchResult
-    , divisionSearchResult
-    , dsrAliases
-    , dsrName
-    , dsrOcdId
-
-    -- ** AdministrativeBody
-    , AdministrativeBody
-    , administrativeBody
-    , abCorrespondenceAddress
-    , abAbsenteeVotingInfoURL
-    , abHoursOfOperation
-    , abElectionNoticeURL
-    , abBallotInfoURL
-    , abPhysicalAddress
-    , abElectionRegistrationConfirmationURL
-    , abElectionInfoURL
-    , abVotingLocationFinderURL
-    , abElectionOfficials
-    , abElectionNoticeText
-    , abName
-    , abElectionRulesURL
-    , abVoterServices
-    , abElectionRegistrationURL
-
-    -- ** Contest
-    , Contest
-    , contest
-    , conReferendumPassageThreshold
-    , conPrimaryParties
-    , conRoles
-    , conReferendumURL
-    , conReferendumEffectOfAbstain
-    , conReferendumSubtitle
-    , conNumberVotingFor
-    , conOffice
-    , conReferendumConStatement
-    , conSources
-    , conReferendumProStatement
-    , conReferendumBallotResponses
-    , conNumberElected
-    , conSpecial
-    , conReferendumText
-    , conPrimaryParty
-    , conType
-    , conBallotTitle
-    , conElectorateSpecifications
-    , conReferendumBrief
-    , conDistrict
-    , conLevel
-    , conCandidates
-    , conReferendumTitle
-    , conBallotPlacement
-
-    -- ** DivisionSearchResponse
-    , DivisionSearchResponse
-    , divisionSearchResponse
-    , dsrResults
-    , dsrKind
-
-    -- ** RepresentativeInfoDataDivisions
-    , RepresentativeInfoDataDivisions
-    , representativeInfoDataDivisions
-    , riddAddtional
-
-    -- ** ElectoralDistrictScope
-    , ElectoralDistrictScope (..)
-
-    -- ** RepresentativesRepresentativeInfoByAddressRoles
-    , RepresentativesRepresentativeInfoByAddressRoles (..)
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** OfficeRolesItem
-    , OfficeRolesItem (..)
-
-    -- ** ElectionOfficial
-    , ElectionOfficial
-    , electionOfficial
-    , eoFaxNumber
-    , eoName
-    , eoOfficePhoneNumber
-    , eoEmailAddress
-    , eoTitle
-
-    -- ** RepresentativeInfoData
-    , RepresentativeInfoData
-    , representativeInfoData
-    , ridOfficials
-    , ridDivisions
-    , ridOffices
-
-    -- ** Source
-    , Source
-    , source
-    , sName
-    , sOfficial
-
-    -- ** ElectoralDistrict
-    , ElectoralDistrict
-    , electoralDistrict
-    , edName
-    , edScope
-    , edId
-
-    -- ** SimpleAddressType
-    , SimpleAddressType
-    , simpleAddressType
-    , satLine2
-    , satState
-    , satLine3
-    , satZip
-    , satCity
-    , satLine1
-    , satLocationName
+    Xgafv (..),
 
     -- ** AdministrationRegion
-    , AdministrationRegion
-    , administrationRegion
-    , arLocalJurisdiction
-    , arSources
-    , arName
-    , arElectionAdministrationBody
+    AdministrationRegion (..),
+    newAdministrationRegion,
 
-    -- ** ContestRolesItem
-    , ContestRolesItem (..)
+    -- ** AdministrativeBody
+    AdministrativeBody (..),
+    newAdministrativeBody,
+
+    -- ** Candidate
+    Candidate (..),
+    newCandidate,
+
+    -- ** Channel
+    Channel (..),
+    newChannel,
+
+    -- ** Contest
+    Contest (..),
+    newContest,
+
+    -- ** Contest_LevelItem
+    Contest_LevelItem (..),
+
+    -- ** Contest_RolesItem
+    Contest_RolesItem (..),
+
+    -- ** DivisionSearchResponse
+    DivisionSearchResponse (..),
+    newDivisionSearchResponse,
+
+    -- ** DivisionSearchResult
+    DivisionSearchResult (..),
+    newDivisionSearchResult,
+
+    -- ** Election
+    Election (..),
+    newElection,
+
+    -- ** ElectionOfficial
+    ElectionOfficial (..),
+    newElectionOfficial,
 
     -- ** ElectionsQueryResponse
-    , ElectionsQueryResponse
-    , electionsQueryResponse
-    , eqrKind
-    , eqrElections
+    ElectionsQueryResponse (..),
+    newElectionsQueryResponse,
+
+    -- ** ElectoralDistrict
+    ElectoralDistrict (..),
+    newElectoralDistrict,
+
+    -- ** ElectoralDistrict_Scope
+    ElectoralDistrict_Scope (..),
+
+    -- ** FeatureIdProto
+    FeatureIdProto (..),
+    newFeatureIdProto,
+
+    -- ** GeocodingSummary
+    GeocodingSummary (..),
+    newGeocodingSummary,
+
+    -- ** GeocodingSummary_FeatureType
+    GeocodingSummary_FeatureType (..),
+
+    -- ** GeographicDivision
+    GeographicDivision (..),
+    newGeographicDivision,
+
+    -- ** MessageSet
+    MessageSet (..),
+    newMessageSet,
+
+    -- ** Office
+    Office (..),
+    newOffice,
+
+    -- ** Office_LevelsItem
+    Office_LevelsItem (..),
+
+    -- ** Office_RolesItem
+    Office_RolesItem (..),
 
     -- ** Official
-    , Official
-    , official
-    , offPhotoURL
-    , offURLs
-    , offChannels
-    , offAddress
-    , offPhones
-    , offName
-    , offEmails
-    , offParty
-    ) where
+    Official (..),
+    newOfficial,
 
-import Network.Google.Prelude
+    -- ** PollingLocation
+    PollingLocation (..),
+    newPollingLocation,
+
+    -- ** RepresentativeInfoData
+    RepresentativeInfoData (..),
+    newRepresentativeInfoData,
+
+    -- ** RepresentativeInfoData_Divisions
+    RepresentativeInfoData_Divisions (..),
+    newRepresentativeInfoData_Divisions,
+
+    -- ** RepresentativeInfoResponse
+    RepresentativeInfoResponse (..),
+    newRepresentativeInfoResponse,
+
+    -- ** RepresentativeInfoResponse_Divisions
+    RepresentativeInfoResponse_Divisions (..),
+    newRepresentativeInfoResponse_Divisions,
+
+    -- ** SimpleAddressType
+    SimpleAddressType (..),
+    newSimpleAddressType,
+
+    -- ** Source
+    Source (..),
+    newSource,
+
+    -- ** VoterInfoResponse
+    VoterInfoResponse (..),
+    newVoterInfoResponse,
+
+    -- ** RepresentativesRepresentativeInfoByAddressLevels
+    RepresentativesRepresentativeInfoByAddressLevels (..),
+
+    -- ** RepresentativesRepresentativeInfoByAddressRoles
+    RepresentativesRepresentativeInfoByAddressRoles (..),
+
+    -- ** RepresentativesRepresentativeInfoByDivisionLevels
+    RepresentativesRepresentativeInfoByDivisionLevels (..),
+
+    -- ** RepresentativesRepresentativeInfoByDivisionRoles
+    RepresentativesRepresentativeInfoByDivisionRoles (..),
+  )
+where
+
+import Network.Google.CivicInfo.Divisions.Search
+import Network.Google.CivicInfo.Elections.ElectionQuery
+import Network.Google.CivicInfo.Elections.VoterInfoQuery
+import Network.Google.CivicInfo.Representatives.RepresentativeInfoByAddress
+import Network.Google.CivicInfo.Representatives.RepresentativeInfoByDivision
 import Network.Google.CivicInfo.Types
-import Network.Google.Resource.CivicInfo.Divisions.Search
-import Network.Google.Resource.CivicInfo.Elections.ElectionQuery
-import Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
-import Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
-import Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Civic Information API service.
-type CivicInfoAPI =
-     ElectionsVoterInfoQueryResource :<|>
-       ElectionsElectionQueryResource
-       :<|> DivisionsSearchResource
-       :<|>
-       RepresentativesRepresentativeInfoByDivisionResource
-       :<|>
-       RepresentativesRepresentativeInfoByAddressResource
