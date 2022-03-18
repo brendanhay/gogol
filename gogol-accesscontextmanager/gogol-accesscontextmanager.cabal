@@ -39,49 +39,50 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AccessContextManager
-    Network.Google.AccessContextManager.AccessPolicies.AccessLevels.Create
-    Network.Google.AccessContextManager.AccessPolicies.AccessLevels.Delete
-    Network.Google.AccessContextManager.AccessPolicies.AccessLevels.Get
-    Network.Google.AccessContextManager.AccessPolicies.AccessLevels.List
-    Network.Google.AccessContextManager.AccessPolicies.AccessLevels.Patch
-    Network.Google.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
-    Network.Google.AccessContextManager.AccessPolicies.AccessLevels.TestIamPermissions
-    Network.Google.AccessContextManager.AccessPolicies.Create
-    Network.Google.AccessContextManager.AccessPolicies.Delete
-    Network.Google.AccessContextManager.AccessPolicies.Get
-    Network.Google.AccessContextManager.AccessPolicies.GetIamPolicy
-    Network.Google.AccessContextManager.AccessPolicies.List
-    Network.Google.AccessContextManager.AccessPolicies.Patch
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.Create
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.Get
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.List
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
-    Network.Google.AccessContextManager.AccessPolicies.ServicePerimeters.TestIamPermissions
-    Network.Google.AccessContextManager.AccessPolicies.SetIamPolicy
-    Network.Google.AccessContextManager.AccessPolicies.TestIamPermissions
-    Network.Google.AccessContextManager.Operations.Cancel
-    Network.Google.AccessContextManager.Operations.Delete
-    Network.Google.AccessContextManager.Operations.Get
-    Network.Google.AccessContextManager.Operations.List
-    Network.Google.AccessContextManager.Organizations.GcpUserAccessBindings.Create
-    Network.Google.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
-    Network.Google.AccessContextManager.Organizations.GcpUserAccessBindings.Get
-    Network.Google.AccessContextManager.Organizations.GcpUserAccessBindings.List
-    Network.Google.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
-    Network.Google.AccessContextManager.Types
+    Gogol.AccessContextManager
+    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Create
+    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Delete
+    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Get
+    Gogol.AccessContextManager.AccessPolicies.AccessLevels.List
+    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
+    Gogol.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
+    Gogol.AccessContextManager.AccessPolicies.AccessLevels.TestIamPermissions
+    Gogol.AccessContextManager.AccessPolicies.Create
+    Gogol.AccessContextManager.AccessPolicies.Delete
+    Gogol.AccessContextManager.AccessPolicies.Get
+    Gogol.AccessContextManager.AccessPolicies.GetIamPolicy
+    Gogol.AccessContextManager.AccessPolicies.List
+    Gogol.AccessContextManager.AccessPolicies.Patch
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Create
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Get
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.List
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
+    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.TestIamPermissions
+    Gogol.AccessContextManager.AccessPolicies.SetIamPolicy
+    Gogol.AccessContextManager.AccessPolicies.TestIamPermissions
+    Gogol.AccessContextManager.Operations.Cancel
+    Gogol.AccessContextManager.Operations.Delete
+    Gogol.AccessContextManager.Operations.Get
+    Gogol.AccessContextManager.Operations.List
+    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Create
+    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
+    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Get
+    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.List
+    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
+    Gogol.AccessContextManager.Types
 
   other-modules:
-    Network.Google.AccessContextManager.Internal.Product
-    Network.Google.AccessContextManager.Internal.Sum
+    Gogol.AccessContextManager.Internal.Product
+    Gogol.AccessContextManager.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
