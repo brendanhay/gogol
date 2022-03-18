@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Instances.Delete
+-- Module      : Gogol.DataFusion.Projects.Locations.Instances.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a single Date Fusion instance.
+-- Gets details of a single Data Fusion instance.
 --
--- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.delete@.
-module Network.Google.DataFusion.Projects.Locations.Instances.Delete
+-- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.get@.
+module Gogol.DataFusion.Projects.Locations.Instances.Get
   ( -- * Resource
-    DataFusionProjectsLocationsInstancesDeleteResource,
+    DataFusionProjectsLocationsInstancesGetResource,
 
     -- ** Constructing a Request
-    newDataFusionProjectsLocationsInstancesDelete,
-    DataFusionProjectsLocationsInstancesDelete,
+    newDataFusionProjectsLocationsInstancesGet,
+    DataFusionProjectsLocationsInstancesGet,
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datafusion.projects.locations.instances.delete@ method which the
--- 'DataFusionProjectsLocationsInstancesDelete' request conforms to.
-type DataFusionProjectsLocationsInstancesDeleteResource =
+-- | A resource alias for @datafusion.projects.locations.instances.get@ method which the
+-- 'DataFusionProjectsLocationsInstancesGet' request conforms to.
+type DataFusionProjectsLocationsInstancesGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type DataFusionProjectsLocationsInstancesDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Operation
+    Core.:> Core.Get '[Core.JSON] Instance
 
--- | Deletes a single Date Fusion instance.
+-- | Gets details of a single Data Fusion instance.
 --
--- /See:/ 'newDataFusionProjectsLocationsInstancesDelete' smart constructor.
-data DataFusionProjectsLocationsInstancesDelete = DataFusionProjectsLocationsInstancesDelete
+-- /See:/ 'newDataFusionProjectsLocationsInstancesGet' smart constructor.
+data DataFusionProjectsLocationsInstancesGet = DataFusionProjectsLocationsInstancesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The instance resource name in the format projects\/{project}\/locations\/{location}\/instances\/{instance}
+    -- | Required. The instance resource name in the format projects\/{project}\/locations\/{location}\/instances\/{instance}.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data DataFusionProjectsLocationsInstancesDelete = DataFusionProjectsLocationsIns
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DataFusionProjectsLocationsInstancesDelete' with the minimum fields required to make a request.
-newDataFusionProjectsLocationsInstancesDelete ::
-  -- |  Required. The instance resource name in the format projects\/{project}\/locations\/{location}\/instances\/{instance} See 'name'.
+-- | Creates a value of 'DataFusionProjectsLocationsInstancesGet' with the minimum fields required to make a request.
+newDataFusionProjectsLocationsInstancesGet ::
+  -- |  Required. The instance resource name in the format projects\/{project}\/locations\/{location}\/instances\/{instance}. See 'name'.
   Core.Text ->
-  DataFusionProjectsLocationsInstancesDelete
-newDataFusionProjectsLocationsInstancesDelete name =
-  DataFusionProjectsLocationsInstancesDelete
+  DataFusionProjectsLocationsInstancesGet
+newDataFusionProjectsLocationsInstancesGet name =
+  DataFusionProjectsLocationsInstancesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,17 +91,16 @@ newDataFusionProjectsLocationsInstancesDelete name =
 
 instance
   Core.GoogleRequest
-    DataFusionProjectsLocationsInstancesDelete
+    DataFusionProjectsLocationsInstancesGet
   where
   type
-    Rs DataFusionProjectsLocationsInstancesDelete =
-      Operation
+    Rs DataFusionProjectsLocationsInstancesGet =
+      Instance
   type
-    Scopes
-      DataFusionProjectsLocationsInstancesDelete =
+    Scopes DataFusionProjectsLocationsInstancesGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    DataFusionProjectsLocationsInstancesDelete {..} =
+    DataFusionProjectsLocationsInstancesGet {..} =
       go
         name
         xgafv
@@ -116,6 +115,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  DataFusionProjectsLocationsInstancesDeleteResource
+                  DataFusionProjectsLocationsInstancesGetResource
             )
             Core.mempty

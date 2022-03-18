@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Instances.SetIamPolicy
+-- Module      : Gogol.DataFusion.Projects.Locations.Instances.SetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Sets the access control policy on the specified resource. Replaces any existing policy. Can return @NOT_FOUND@, @INVALID_ARGUMENT@, and @PERMISSION_DENIED@ errors.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.setIamPolicy@.
-module Network.Google.DataFusion.Projects.Locations.Instances.SetIamPolicy
+module Gogol.DataFusion.Projects.Locations.Instances.SetIamPolicy
   ( -- * Resource
     DataFusionProjectsLocationsInstancesSetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DataFusion.Projects.Locations.Instances.SetIamPolicy
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datafusion.projects.locations.instances.setIamPolicy@ method which the
 -- 'DataFusionProjectsLocationsInstancesSetIamPolicy' request conforms to.

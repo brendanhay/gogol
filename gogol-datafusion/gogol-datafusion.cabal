@@ -39,33 +39,34 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.DataFusion
-    Network.Google.DataFusion.Projects.Locations.Get
-    Network.Google.DataFusion.Projects.Locations.Instances.Create
-    Network.Google.DataFusion.Projects.Locations.Instances.Delete
-    Network.Google.DataFusion.Projects.Locations.Instances.Get
-    Network.Google.DataFusion.Projects.Locations.Instances.GetIamPolicy
-    Network.Google.DataFusion.Projects.Locations.Instances.List
-    Network.Google.DataFusion.Projects.Locations.Instances.Patch
-    Network.Google.DataFusion.Projects.Locations.Instances.Restart
-    Network.Google.DataFusion.Projects.Locations.Instances.SetIamPolicy
-    Network.Google.DataFusion.Projects.Locations.Instances.TestIamPermissions
-    Network.Google.DataFusion.Projects.Locations.List
-    Network.Google.DataFusion.Projects.Locations.Operations.Cancel
-    Network.Google.DataFusion.Projects.Locations.Operations.Delete
-    Network.Google.DataFusion.Projects.Locations.Operations.Get
-    Network.Google.DataFusion.Projects.Locations.Operations.List
-    Network.Google.DataFusion.Projects.Locations.Versions.List
-    Network.Google.DataFusion.Types
+    Gogol.DataFusion
+    Gogol.DataFusion.Projects.Locations.Get
+    Gogol.DataFusion.Projects.Locations.Instances.Create
+    Gogol.DataFusion.Projects.Locations.Instances.Delete
+    Gogol.DataFusion.Projects.Locations.Instances.Get
+    Gogol.DataFusion.Projects.Locations.Instances.GetIamPolicy
+    Gogol.DataFusion.Projects.Locations.Instances.List
+    Gogol.DataFusion.Projects.Locations.Instances.Patch
+    Gogol.DataFusion.Projects.Locations.Instances.Restart
+    Gogol.DataFusion.Projects.Locations.Instances.SetIamPolicy
+    Gogol.DataFusion.Projects.Locations.Instances.TestIamPermissions
+    Gogol.DataFusion.Projects.Locations.List
+    Gogol.DataFusion.Projects.Locations.Operations.Cancel
+    Gogol.DataFusion.Projects.Locations.Operations.Delete
+    Gogol.DataFusion.Projects.Locations.Operations.Get
+    Gogol.DataFusion.Projects.Locations.Operations.List
+    Gogol.DataFusion.Projects.Locations.Versions.List
+    Gogol.DataFusion.Types
 
   other-modules:
-    Network.Google.DataFusion.Internal.Product
-    Network.Google.DataFusion.Internal.Sum
+    Gogol.DataFusion.Internal.Product
+    Gogol.DataFusion.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

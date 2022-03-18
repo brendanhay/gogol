@@ -19,60 +19,61 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Instances.Patch
+-- Module      : Gogol.DataFusion.Projects.Locations.Instances.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a single Data Fusion instance.
+-- Creates a new Data Fusion instance in the specified project and location.
 --
--- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.patch@.
-module Network.Google.DataFusion.Projects.Locations.Instances.Patch
+-- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.create@.
+module Gogol.DataFusion.Projects.Locations.Instances.Create
   ( -- * Resource
-    DataFusionProjectsLocationsInstancesPatchResource,
+    DataFusionProjectsLocationsInstancesCreateResource,
 
     -- ** Constructing a Request
-    newDataFusionProjectsLocationsInstancesPatch,
-    DataFusionProjectsLocationsInstancesPatch,
+    newDataFusionProjectsLocationsInstancesCreate,
+    DataFusionProjectsLocationsInstancesCreate,
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datafusion.projects.locations.instances.patch@ method which the
--- 'DataFusionProjectsLocationsInstancesPatch' request conforms to.
-type DataFusionProjectsLocationsInstancesPatchResource =
+-- | A resource alias for @datafusion.projects.locations.instances.create@ method which the
+-- 'DataFusionProjectsLocationsInstancesCreate' request conforms to.
+type DataFusionProjectsLocationsInstancesCreateResource =
   "v1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "instances"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "instanceId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Instance
-    Core.:> Core.Patch '[Core.JSON] Operation
+    Core.:> Core.Post '[Core.JSON] Operation
 
--- | Updates a single Data Fusion instance.
+-- | Creates a new Data Fusion instance in the specified project and location.
 --
--- /See:/ 'newDataFusionProjectsLocationsInstancesPatch' smart constructor.
-data DataFusionProjectsLocationsInstancesPatch = DataFusionProjectsLocationsInstancesPatch
+-- /See:/ 'newDataFusionProjectsLocationsInstancesCreate' smart constructor.
+data DataFusionProjectsLocationsInstancesCreate = DataFusionProjectsLocationsInstancesCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Output only. The name of this instance is in the form of projects\/{project}\/locations\/{location}\/instances\/{instance}.
-    name :: Core.Text,
+    -- | Required. The name of the instance to create.
+    instanceId :: (Core.Maybe Core.Text),
+    -- | Required. The instance\'s project and location in the format projects\/{project}\/locations\/{location}.
+    parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Instance,
-    -- | Field mask is used to specify the fields that the update will overwrite in an instance resource. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask, all the supported fields (labels, options, and version currently) will be overwritten.
-    updateMask :: (Core.Maybe Core.GFieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,43 +81,44 @@ data DataFusionProjectsLocationsInstancesPatch = DataFusionProjectsLocationsInst
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DataFusionProjectsLocationsInstancesPatch' with the minimum fields required to make a request.
-newDataFusionProjectsLocationsInstancesPatch ::
-  -- |  Output only. The name of this instance is in the form of projects\/{project}\/locations\/{location}\/instances\/{instance}. See 'name'.
+-- | Creates a value of 'DataFusionProjectsLocationsInstancesCreate' with the minimum fields required to make a request.
+newDataFusionProjectsLocationsInstancesCreate ::
+  -- |  Required. The instance\'s project and location in the format projects\/{project}\/locations\/{location}. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Instance ->
-  DataFusionProjectsLocationsInstancesPatch
-newDataFusionProjectsLocationsInstancesPatch name payload =
-  DataFusionProjectsLocationsInstancesPatch
+  DataFusionProjectsLocationsInstancesCreate
+newDataFusionProjectsLocationsInstancesCreate parent payload =
+  DataFusionProjectsLocationsInstancesCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
+      instanceId = Core.Nothing,
+      parent = parent,
       payload = payload,
-      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DataFusionProjectsLocationsInstancesPatch
+    DataFusionProjectsLocationsInstancesCreate
   where
   type
-    Rs DataFusionProjectsLocationsInstancesPatch =
+    Rs DataFusionProjectsLocationsInstancesCreate =
       Operation
   type
-    Scopes DataFusionProjectsLocationsInstancesPatch =
+    Scopes
+      DataFusionProjectsLocationsInstancesCreate =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    DataFusionProjectsLocationsInstancesPatch {..} =
+    DataFusionProjectsLocationsInstancesCreate {..} =
       go
-        name
+        parent
         xgafv
         accessToken
         callback
-        updateMask
+        instanceId
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
@@ -127,6 +129,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  DataFusionProjectsLocationsInstancesPatchResource
+                  DataFusionProjectsLocationsInstancesCreateResource
             )
             Core.mempty

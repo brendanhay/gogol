@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Instances.Restart
+-- Module      : Gogol.DataFusion.Projects.Locations.Instances.Restart
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Restart a single Data Fusion instance. At the end of an operation instance is fully restarted.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.restart@.
-module Network.Google.DataFusion.Projects.Locations.Instances.Restart
+module Gogol.DataFusion.Projects.Locations.Instances.Restart
   ( -- * Resource
     DataFusionProjectsLocationsInstancesRestartResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DataFusion.Projects.Locations.Instances.Restart
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datafusion.projects.locations.instances.restart@ method which the
 -- 'DataFusionProjectsLocationsInstancesRestart' request conforms to.

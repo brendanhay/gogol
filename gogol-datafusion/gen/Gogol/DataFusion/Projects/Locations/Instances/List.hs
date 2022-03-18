@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Instances.List
+-- Module      : Gogol.DataFusion.Projects.Locations.Instances.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists Data Fusion instances in the specified project and location.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.list@.
-module Network.Google.DataFusion.Projects.Locations.Instances.List
+module Gogol.DataFusion.Projects.Locations.Instances.List
   ( -- * Resource
     DataFusionProjectsLocationsInstancesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DataFusion.Projects.Locations.Instances.List
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datafusion.projects.locations.instances.list@ method which the
 -- 'DataFusionProjectsLocationsInstancesList' request conforms to.

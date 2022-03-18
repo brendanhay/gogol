@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Types
+-- Module      : Gogol.DataFusion.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.DataFusion.Types
+module Gogol.DataFusion.Types
   ( -- * Configuration
     dataFusionService,
 
@@ -188,9 +188,9 @@ module Network.Google.DataFusion.Types
   )
 where
 
-import Network.Google.DataFusion.Internal.Product
-import Network.Google.DataFusion.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Internal.Product
+import Gogol.DataFusion.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Data Fusion API. This contains the host and root path used as a starting point for constructing service requests.
 dataFusionService :: Core.ServiceConfig

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DataFusion.Projects.Locations.Instances.TestIamPermissions
+-- Module      : Gogol.DataFusion.Projects.Locations.Instances.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a @NOT_FOUND@ error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.testIamPermissions@.
-module Network.Google.DataFusion.Projects.Locations.Instances.TestIamPermissions
+module Gogol.DataFusion.Projects.Locations.Instances.TestIamPermissions
   ( -- * Resource
     DataFusionProjectsLocationsInstancesTestIamPermissionsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DataFusion.Projects.Locations.Instances.TestIamPermissions
   )
 where
 
-import Network.Google.DataFusion.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DataFusion.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datafusion.projects.locations.instances.testIamPermissions@ method which the
 -- 'DataFusionProjectsLocationsInstancesTestIamPermissions' request conforms to.
