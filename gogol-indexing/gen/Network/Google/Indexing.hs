@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Indexing
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,62 +30,46 @@
 --
 -- /See:/ <https://developers.google.com/search/apis/indexing-api/ Indexing API Reference>
 module Network.Google.Indexing
-    (
-    -- * Service Configuration
-      indexingService
+  ( -- * Configuration
+    indexingService,
 
     -- * OAuth Scopes
-    , indexingScope
-
-    -- * API Declaration
-    , IndexingAPI
+    indexingScope,
 
     -- * Resources
 
     -- ** indexing.urlNotifications.getMetadata
-    , module Network.Google.Resource.Indexing.URLNotifications.GetMetadata
+    IndexingUrlNotificationsGetMetadataResource,
+    newIndexingUrlNotificationsGetMetadata,
+    IndexingUrlNotificationsGetMetadata,
 
     -- ** indexing.urlNotifications.publish
-    , module Network.Google.Resource.Indexing.URLNotifications.Publish
+    IndexingUrlNotificationsPublishResource,
+    newIndexingUrlNotificationsPublish,
+    IndexingUrlNotificationsPublish,
 
     -- * Types
 
-    -- ** PublishURLNotificationResponse
-    , PublishURLNotificationResponse
-    , publishURLNotificationResponse
-    , punrURLNotificationMetadata
-
-    -- ** URLNotificationType
-    , URLNotificationType (..)
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
-    -- ** URLNotificationMetadata
-    , URLNotificationMetadata
-    , urlNotificationMetadata
-    , unmLatestUpdate
-    , unmLatestRemove
-    , unmURL
+    -- ** PublishUrlNotificationResponse
+    PublishUrlNotificationResponse (..),
+    newPublishUrlNotificationResponse,
 
-    -- ** URLNotification
-    , URLNotification
-    , urlNotification
-    , unURL
-    , unNotifyTime
-    , unType
-    ) where
+    -- ** UrlNotification
+    UrlNotification (..),
+    newUrlNotification,
 
-import Network.Google.Prelude
+    -- ** UrlNotification_Type
+    UrlNotification_Type (..),
+
+    -- ** UrlNotificationMetadata
+    UrlNotificationMetadata (..),
+    newUrlNotificationMetadata,
+  )
+where
+
 import Network.Google.Indexing.Types
-import Network.Google.Resource.Indexing.URLNotifications.GetMetadata
-import Network.Google.Resource.Indexing.URLNotifications.Publish
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Indexing API service.
-type IndexingAPI =
-     URLNotificationsGetMetadataResource :<|>
-       URLNotificationsPublishResource
+import Network.Google.Indexing.UrlNotifications.GetMetadata
+import Network.Google.Indexing.UrlNotifications.Publish
