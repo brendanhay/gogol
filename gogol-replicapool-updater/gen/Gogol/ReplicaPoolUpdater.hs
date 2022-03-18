@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPoolUpdater
+-- Module      : Gogol.ReplicaPoolUpdater
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- [Deprecated. Please use compute.instanceGroupManagers.update method. replicapoolupdater API will be disabled after December 30th, 2016] Updates groups of Compute Engine instances.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference>
-module Network.Google.ReplicaPoolUpdater
+module Gogol.ReplicaPoolUpdater
   ( -- * Configuration
     replicaPoolUpdaterService,
 
@@ -155,14 +155,14 @@ module Network.Google.ReplicaPoolUpdater
   )
 where
 
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.Cancel
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.Get
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.Insert
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.List
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.Pause
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.Resume
-import Network.Google.ReplicaPoolUpdater.RollingUpdates.Rollback
-import Network.Google.ReplicaPoolUpdater.Types
-import Network.Google.ReplicaPoolUpdater.ZoneOperations.Get
-import Network.Google.ReplicaPoolUpdater.ZoneOperations.List
+import Gogol.ReplicaPoolUpdater.RollingUpdates.Cancel
+import Gogol.ReplicaPoolUpdater.RollingUpdates.Get
+import Gogol.ReplicaPoolUpdater.RollingUpdates.Insert
+import Gogol.ReplicaPoolUpdater.RollingUpdates.List
+import Gogol.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
+import Gogol.ReplicaPoolUpdater.RollingUpdates.Pause
+import Gogol.ReplicaPoolUpdater.RollingUpdates.Resume
+import Gogol.ReplicaPoolUpdater.RollingUpdates.Rollback
+import Gogol.ReplicaPoolUpdater.Types
+import Gogol.ReplicaPoolUpdater.ZoneOperations.Get
+import Gogol.ReplicaPoolUpdater.ZoneOperations.List

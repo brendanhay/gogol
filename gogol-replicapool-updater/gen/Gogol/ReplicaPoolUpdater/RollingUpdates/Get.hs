@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPoolUpdater.RollingUpdates.Get
+-- Module      : Gogol.ReplicaPoolUpdater.RollingUpdates.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns information about an update.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.get@.
-module Network.Google.ReplicaPoolUpdater.RollingUpdates.Get
+module Gogol.ReplicaPoolUpdater.RollingUpdates.Get
   ( -- * Resource
     ReplicaPoolUpdaterRollingUpdatesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ReplicaPoolUpdater.RollingUpdates.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPoolUpdater.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.get@ method which the
 -- 'ReplicaPoolUpdaterRollingUpdatesGet' request conforms to.

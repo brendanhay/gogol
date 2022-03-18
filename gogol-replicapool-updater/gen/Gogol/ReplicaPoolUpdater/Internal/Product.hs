@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPoolUpdater.Internal.Product
+-- Module      : Gogol.ReplicaPoolUpdater.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ReplicaPoolUpdater.Internal.Product
+module Gogol.ReplicaPoolUpdater.Internal.Product
   ( -- * InstanceUpdate
     InstanceUpdate (..),
     newInstanceUpdate,
@@ -88,8 +88,8 @@ module Network.Google.ReplicaPoolUpdater.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPoolUpdater.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPoolUpdater.Internal.Sum
 
 -- | Update of a single instance.
 --

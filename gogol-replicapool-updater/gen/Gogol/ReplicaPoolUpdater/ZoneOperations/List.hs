@@ -19,71 +19,71 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPoolUpdater.RollingUpdates.List
+-- Module      : Gogol.ReplicaPoolUpdater.ZoneOperations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists recent updates for a given managed instance group, in reverse chronological order and paginated format.
+-- Retrieves the list of Operation resources contained within the specified zone.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.list@.
-module Network.Google.ReplicaPoolUpdater.RollingUpdates.List
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.zoneOperations.list@.
+module Gogol.ReplicaPoolUpdater.ZoneOperations.List
   ( -- * Resource
-    ReplicaPoolUpdaterRollingUpdatesListResource,
+    ReplicaPoolUpdaterZoneOperationsListResource,
 
     -- ** Constructing a Request
-    newReplicaPoolUpdaterRollingUpdatesList,
-    ReplicaPoolUpdaterRollingUpdatesList,
+    newReplicaPoolUpdaterZoneOperationsList,
+    ReplicaPoolUpdaterZoneOperationsList,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPoolUpdater.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPoolUpdater.Types
 
--- | A resource alias for @replicapoolupdater.rollingUpdates.list@ method which the
--- 'ReplicaPoolUpdaterRollingUpdatesList' request conforms to.
-type ReplicaPoolUpdaterRollingUpdatesListResource =
+-- | A resource alias for @replicapoolupdater.zoneOperations.list@ method which the
+-- 'ReplicaPoolUpdaterZoneOperationsList' request conforms to.
+type ReplicaPoolUpdaterZoneOperationsListResource =
   "replicapoolupdater"
     Core.:> "v1beta1"
     Core.:> "projects"
     Core.:> Core.Capture "project" Core.Text
     Core.:> "zones"
     Core.:> Core.Capture "zone" Core.Text
-    Core.:> "rollingUpdates"
+    Core.:> "operations"
     Core.:> Core.QueryParam "filter" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] RollingUpdateList
+    Core.:> Core.Get '[Core.JSON] OperationList
 
--- | Lists recent updates for a given managed instance group, in reverse chronological order and paginated format.
+-- | Retrieves the list of Operation resources contained within the specified zone.
 --
--- /See:/ 'newReplicaPoolUpdaterRollingUpdatesList' smart constructor.
-data ReplicaPoolUpdaterRollingUpdatesList = ReplicaPoolUpdaterRollingUpdatesList
+-- /See:/ 'newReplicaPoolUpdaterZoneOperationsList' smart constructor.
+data ReplicaPoolUpdaterZoneOperationsList = ReplicaPoolUpdaterZoneOperationsList
   { -- | Optional. Filter expression for filtering listed resources.
     filter :: (Core.Maybe Core.Text),
     -- | Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.
     maxResults :: Core.Word32,
     -- | Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | The Google Developers Console project name.
+    -- | Name of the project scoping this request.
     project :: Core.Text,
-    -- | The name of the zone in which the update\'s target resides.
+    -- | Name of the zone scoping this request.
     zone :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ReplicaPoolUpdaterRollingUpdatesList' with the minimum fields required to make a request.
-newReplicaPoolUpdaterRollingUpdatesList ::
-  -- |  The Google Developers Console project name. See 'project'.
+-- | Creates a value of 'ReplicaPoolUpdaterZoneOperationsList' with the minimum fields required to make a request.
+newReplicaPoolUpdaterZoneOperationsList ::
+  -- |  Name of the project scoping this request. See 'project'.
   Core.Text ->
-  -- |  The name of the zone in which the update\'s target resides. See 'zone'.
+  -- |  Name of the zone scoping this request. See 'zone'.
   Core.Text ->
-  ReplicaPoolUpdaterRollingUpdatesList
-newReplicaPoolUpdaterRollingUpdatesList project zone =
-  ReplicaPoolUpdaterRollingUpdatesList
+  ReplicaPoolUpdaterZoneOperationsList
+newReplicaPoolUpdaterZoneOperationsList project zone =
+  ReplicaPoolUpdaterZoneOperationsList
     { filter = Core.Nothing,
       maxResults = 500,
       pageToken = Core.Nothing,
@@ -93,20 +93,18 @@ newReplicaPoolUpdaterRollingUpdatesList project zone =
 
 instance
   Core.GoogleRequest
-    ReplicaPoolUpdaterRollingUpdatesList
+    ReplicaPoolUpdaterZoneOperationsList
   where
   type
-    Rs ReplicaPoolUpdaterRollingUpdatesList =
-      RollingUpdateList
+    Rs ReplicaPoolUpdaterZoneOperationsList =
+      OperationList
   type
-    Scopes ReplicaPoolUpdaterRollingUpdatesList =
+    Scopes ReplicaPoolUpdaterZoneOperationsList =
       '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/replicapool",
-         "https://www.googleapis.com/auth/replicapool.readonly"
+         "https://www.googleapis.com/auth/replicapool"
        ]
   requestClient
-    ReplicaPoolUpdaterRollingUpdatesList {..} =
+    ReplicaPoolUpdaterZoneOperationsList {..} =
       go
         project
         zone
@@ -120,6 +118,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  ReplicaPoolUpdaterRollingUpdatesListResource
+                  ReplicaPoolUpdaterZoneOperationsListResource
             )
             Core.mempty

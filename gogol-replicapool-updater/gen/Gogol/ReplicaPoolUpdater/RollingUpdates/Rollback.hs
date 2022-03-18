@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPoolUpdater.RollingUpdates.Cancel
+-- Module      : Gogol.ReplicaPoolUpdater.RollingUpdates.Rollback
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels an update. The update must be PAUSED before it can be cancelled. This has no effect if the update is already CANCELLED.
+-- Rolls back the update in state from ROLLING/FORWARD or PAUSED. Has no effect if invoked when the state of the update is ROLLED/BACK.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.cancel@.
-module Network.Google.ReplicaPoolUpdater.RollingUpdates.Cancel
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.rollback@.
+module Gogol.ReplicaPoolUpdater.RollingUpdates.Rollback
   ( -- * Resource
-    ReplicaPoolUpdaterRollingUpdatesCancelResource,
+    ReplicaPoolUpdaterRollingUpdatesRollbackResource,
 
     -- ** Constructing a Request
-    newReplicaPoolUpdaterRollingUpdatesCancel,
-    ReplicaPoolUpdaterRollingUpdatesCancel,
+    newReplicaPoolUpdaterRollingUpdatesRollback,
+    ReplicaPoolUpdaterRollingUpdatesRollback,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPoolUpdater.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPoolUpdater.Types
 
--- | A resource alias for @replicapoolupdater.rollingUpdates.cancel@ method which the
--- 'ReplicaPoolUpdaterRollingUpdatesCancel' request conforms to.
-type ReplicaPoolUpdaterRollingUpdatesCancelResource =
+-- | A resource alias for @replicapoolupdater.rollingUpdates.rollback@ method which the
+-- 'ReplicaPoolUpdaterRollingUpdatesRollback' request conforms to.
+type ReplicaPoolUpdaterRollingUpdatesRollbackResource =
   "replicapoolupdater"
     Core.:> "v1beta1"
     Core.:> "projects"
@@ -53,14 +53,14 @@ type ReplicaPoolUpdaterRollingUpdatesCancelResource =
     Core.:> Core.Capture "zone" Core.Text
     Core.:> "rollingUpdates"
     Core.:> Core.Capture "rollingUpdate" Core.Text
-    Core.:> "cancel"
+    Core.:> "rollback"
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Cancels an update. The update must be PAUSED before it can be cancelled. This has no effect if the update is already CANCELLED.
+-- | Rolls back the update in state from ROLLING/FORWARD or PAUSED. Has no effect if invoked when the state of the update is ROLLED/BACK.
 --
--- /See:/ 'newReplicaPoolUpdaterRollingUpdatesCancel' smart constructor.
-data ReplicaPoolUpdaterRollingUpdatesCancel = ReplicaPoolUpdaterRollingUpdatesCancel
+-- /See:/ 'newReplicaPoolUpdaterRollingUpdatesRollback' smart constructor.
+data ReplicaPoolUpdaterRollingUpdatesRollback = ReplicaPoolUpdaterRollingUpdatesRollback
   { -- | The Google Developers Console project name.
     project :: Core.Text,
     -- | The name of the update.
@@ -70,17 +70,17 @@ data ReplicaPoolUpdaterRollingUpdatesCancel = ReplicaPoolUpdaterRollingUpdatesCa
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ReplicaPoolUpdaterRollingUpdatesCancel' with the minimum fields required to make a request.
-newReplicaPoolUpdaterRollingUpdatesCancel ::
+-- | Creates a value of 'ReplicaPoolUpdaterRollingUpdatesRollback' with the minimum fields required to make a request.
+newReplicaPoolUpdaterRollingUpdatesRollback ::
   -- |  The Google Developers Console project name. See 'project'.
   Core.Text ->
   -- |  The name of the update. See 'rollingUpdate'.
   Core.Text ->
   -- |  The name of the zone in which the update\'s target resides. See 'zone'.
   Core.Text ->
-  ReplicaPoolUpdaterRollingUpdatesCancel
-newReplicaPoolUpdaterRollingUpdatesCancel project rollingUpdate zone =
-  ReplicaPoolUpdaterRollingUpdatesCancel
+  ReplicaPoolUpdaterRollingUpdatesRollback
+newReplicaPoolUpdaterRollingUpdatesRollback project rollingUpdate zone =
+  ReplicaPoolUpdaterRollingUpdatesRollback
     { project = project,
       rollingUpdate = rollingUpdate,
       zone = zone
@@ -88,18 +88,18 @@ newReplicaPoolUpdaterRollingUpdatesCancel project rollingUpdate zone =
 
 instance
   Core.GoogleRequest
-    ReplicaPoolUpdaterRollingUpdatesCancel
+    ReplicaPoolUpdaterRollingUpdatesRollback
   where
   type
-    Rs ReplicaPoolUpdaterRollingUpdatesCancel =
+    Rs ReplicaPoolUpdaterRollingUpdatesRollback =
       Operation
   type
-    Scopes ReplicaPoolUpdaterRollingUpdatesCancel =
+    Scopes ReplicaPoolUpdaterRollingUpdatesRollback =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/replicapool"
        ]
   requestClient
-    ReplicaPoolUpdaterRollingUpdatesCancel {..} =
+    ReplicaPoolUpdaterRollingUpdatesRollback {..} =
       go
         project
         zone
@@ -111,6 +111,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  ReplicaPoolUpdaterRollingUpdatesCancelResource
+                  ReplicaPoolUpdaterRollingUpdatesRollbackResource
             )
             Core.mempty
