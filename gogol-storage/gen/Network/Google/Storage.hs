@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Storage
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,760 +30,599 @@
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference>
 module Network.Google.Storage
-    (
-    -- * Service Configuration
-      storageService
+  ( -- * Configuration
+    storageService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , storageReadOnlyScope
-    , storageReadWriteScope
-    , storageFullControlScope
-
-    -- * API Declaration
-    , StorageAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    storageFull_controlScope,
+    storageRead_OnlyScope,
+    storageRead_writeScope,
 
     -- * Resources
 
     -- ** storage.bucketAccessControls.delete
-    , module Network.Google.Resource.Storage.BucketAccessControls.Delete
+    StorageBucketAccessControlsDeleteResource,
+    newStorageBucketAccessControlsDelete,
+    StorageBucketAccessControlsDelete,
 
     -- ** storage.bucketAccessControls.get
-    , module Network.Google.Resource.Storage.BucketAccessControls.Get
+    StorageBucketAccessControlsGetResource,
+    newStorageBucketAccessControlsGet,
+    StorageBucketAccessControlsGet,
 
     -- ** storage.bucketAccessControls.insert
-    , module Network.Google.Resource.Storage.BucketAccessControls.Insert
+    StorageBucketAccessControlsInsertResource,
+    newStorageBucketAccessControlsInsert,
+    StorageBucketAccessControlsInsert,
 
     -- ** storage.bucketAccessControls.list
-    , module Network.Google.Resource.Storage.BucketAccessControls.List
+    StorageBucketAccessControlsListResource,
+    newStorageBucketAccessControlsList,
+    StorageBucketAccessControlsList,
 
     -- ** storage.bucketAccessControls.patch
-    , module Network.Google.Resource.Storage.BucketAccessControls.Patch
+    StorageBucketAccessControlsPatchResource,
+    newStorageBucketAccessControlsPatch,
+    StorageBucketAccessControlsPatch,
 
     -- ** storage.bucketAccessControls.update
-    , module Network.Google.Resource.Storage.BucketAccessControls.Update
+    StorageBucketAccessControlsUpdateResource,
+    newStorageBucketAccessControlsUpdate,
+    StorageBucketAccessControlsUpdate,
 
     -- ** storage.buckets.delete
-    , module Network.Google.Resource.Storage.Buckets.Delete
+    StorageBucketsDeleteResource,
+    newStorageBucketsDelete,
+    StorageBucketsDelete,
 
     -- ** storage.buckets.get
-    , module Network.Google.Resource.Storage.Buckets.Get
+    StorageBucketsGetResource,
+    newStorageBucketsGet,
+    StorageBucketsGet,
 
     -- ** storage.buckets.getIamPolicy
-    , module Network.Google.Resource.Storage.Buckets.GetIAMPolicy
+    StorageBucketsGetIamPolicyResource,
+    newStorageBucketsGetIamPolicy,
+    StorageBucketsGetIamPolicy,
 
     -- ** storage.buckets.insert
-    , module Network.Google.Resource.Storage.Buckets.Insert
+    StorageBucketsInsertResource,
+    newStorageBucketsInsert,
+    StorageBucketsInsert,
 
     -- ** storage.buckets.list
-    , module Network.Google.Resource.Storage.Buckets.List
+    StorageBucketsListResource,
+    newStorageBucketsList,
+    StorageBucketsList,
 
     -- ** storage.buckets.lockRetentionPolicy
-    , module Network.Google.Resource.Storage.Buckets.LockRetentionPolicy
+    StorageBucketsLockRetentionPolicyResource,
+    newStorageBucketsLockRetentionPolicy,
+    StorageBucketsLockRetentionPolicy,
 
     -- ** storage.buckets.patch
-    , module Network.Google.Resource.Storage.Buckets.Patch
+    StorageBucketsPatchResource,
+    newStorageBucketsPatch,
+    StorageBucketsPatch,
 
     -- ** storage.buckets.setIamPolicy
-    , module Network.Google.Resource.Storage.Buckets.SetIAMPolicy
+    StorageBucketsSetIamPolicyResource,
+    newStorageBucketsSetIamPolicy,
+    StorageBucketsSetIamPolicy,
 
     -- ** storage.buckets.testIamPermissions
-    , module Network.Google.Resource.Storage.Buckets.TestIAMPermissions
+    StorageBucketsTestIamPermissionsResource,
+    newStorageBucketsTestIamPermissions,
+    StorageBucketsTestIamPermissions,
 
     -- ** storage.buckets.update
-    , module Network.Google.Resource.Storage.Buckets.Update
+    StorageBucketsUpdateResource,
+    newStorageBucketsUpdate,
+    StorageBucketsUpdate,
 
     -- ** storage.channels.stop
-    , module Network.Google.Resource.Storage.Channels.Stop
+    StorageChannelsStopResource,
+    newStorageChannelsStop,
+    StorageChannelsStop,
 
     -- ** storage.defaultObjectAccessControls.delete
-    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
+    StorageDefaultObjectAccessControlsDeleteResource,
+    newStorageDefaultObjectAccessControlsDelete,
+    StorageDefaultObjectAccessControlsDelete,
 
     -- ** storage.defaultObjectAccessControls.get
-    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
+    StorageDefaultObjectAccessControlsGetResource,
+    newStorageDefaultObjectAccessControlsGet,
+    StorageDefaultObjectAccessControlsGet,
 
     -- ** storage.defaultObjectAccessControls.insert
-    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
+    StorageDefaultObjectAccessControlsInsertResource,
+    newStorageDefaultObjectAccessControlsInsert,
+    StorageDefaultObjectAccessControlsInsert,
 
     -- ** storage.defaultObjectAccessControls.list
-    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
+    StorageDefaultObjectAccessControlsListResource,
+    newStorageDefaultObjectAccessControlsList,
+    StorageDefaultObjectAccessControlsList,
 
     -- ** storage.defaultObjectAccessControls.patch
-    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
+    StorageDefaultObjectAccessControlsPatchResource,
+    newStorageDefaultObjectAccessControlsPatch,
+    StorageDefaultObjectAccessControlsPatch,
 
     -- ** storage.defaultObjectAccessControls.update
-    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
+    StorageDefaultObjectAccessControlsUpdateResource,
+    newStorageDefaultObjectAccessControlsUpdate,
+    StorageDefaultObjectAccessControlsUpdate,
 
     -- ** storage.notifications.delete
-    , module Network.Google.Resource.Storage.Notifications.Delete
+    StorageNotificationsDeleteResource,
+    newStorageNotificationsDelete,
+    StorageNotificationsDelete,
 
     -- ** storage.notifications.get
-    , module Network.Google.Resource.Storage.Notifications.Get
+    StorageNotificationsGetResource,
+    newStorageNotificationsGet,
+    StorageNotificationsGet,
 
     -- ** storage.notifications.insert
-    , module Network.Google.Resource.Storage.Notifications.Insert
+    StorageNotificationsInsertResource,
+    newStorageNotificationsInsert,
+    StorageNotificationsInsert,
 
     -- ** storage.notifications.list
-    , module Network.Google.Resource.Storage.Notifications.List
+    StorageNotificationsListResource,
+    newStorageNotificationsList,
+    StorageNotificationsList,
 
     -- ** storage.objectAccessControls.delete
-    , module Network.Google.Resource.Storage.ObjectAccessControls.Delete
+    StorageObjectAccessControlsDeleteResource,
+    newStorageObjectAccessControlsDelete,
+    StorageObjectAccessControlsDelete,
 
     -- ** storage.objectAccessControls.get
-    , module Network.Google.Resource.Storage.ObjectAccessControls.Get
+    StorageObjectAccessControlsGetResource,
+    newStorageObjectAccessControlsGet,
+    StorageObjectAccessControlsGet,
 
     -- ** storage.objectAccessControls.insert
-    , module Network.Google.Resource.Storage.ObjectAccessControls.Insert
+    StorageObjectAccessControlsInsertResource,
+    newStorageObjectAccessControlsInsert,
+    StorageObjectAccessControlsInsert,
 
     -- ** storage.objectAccessControls.list
-    , module Network.Google.Resource.Storage.ObjectAccessControls.List
+    StorageObjectAccessControlsListResource,
+    newStorageObjectAccessControlsList,
+    StorageObjectAccessControlsList,
 
     -- ** storage.objectAccessControls.patch
-    , module Network.Google.Resource.Storage.ObjectAccessControls.Patch
+    StorageObjectAccessControlsPatchResource,
+    newStorageObjectAccessControlsPatch,
+    StorageObjectAccessControlsPatch,
 
     -- ** storage.objectAccessControls.update
-    , module Network.Google.Resource.Storage.ObjectAccessControls.Update
+    StorageObjectAccessControlsUpdateResource,
+    newStorageObjectAccessControlsUpdate,
+    StorageObjectAccessControlsUpdate,
 
     -- ** storage.objects.compose
-    , module Network.Google.Resource.Storage.Objects.Compose
+    StorageObjectsComposeResource,
+    newStorageObjectsCompose,
+    StorageObjectsCompose,
 
     -- ** storage.objects.copy
-    , module Network.Google.Resource.Storage.Objects.Copy
+    StorageObjectsCopyResource,
+    newStorageObjectsCopy,
+    StorageObjectsCopy,
 
     -- ** storage.objects.delete
-    , module Network.Google.Resource.Storage.Objects.Delete
+    StorageObjectsDeleteResource,
+    newStorageObjectsDelete,
+    StorageObjectsDelete,
 
     -- ** storage.objects.get
-    , module Network.Google.Resource.Storage.Objects.Get
+    StorageObjectsGetResource,
+    newStorageObjectsGet,
+    StorageObjectsGet,
 
     -- ** storage.objects.getIamPolicy
-    , module Network.Google.Resource.Storage.Objects.GetIAMPolicy
+    StorageObjectsGetIamPolicyResource,
+    newStorageObjectsGetIamPolicy,
+    StorageObjectsGetIamPolicy,
 
     -- ** storage.objects.insert
-    , module Network.Google.Resource.Storage.Objects.Insert
+    StorageObjectsInsertResource,
+    newStorageObjectsInsert,
+    StorageObjectsInsert,
 
     -- ** storage.objects.list
-    , module Network.Google.Resource.Storage.Objects.List
+    StorageObjectsListResource,
+    newStorageObjectsList,
+    StorageObjectsList,
 
     -- ** storage.objects.patch
-    , module Network.Google.Resource.Storage.Objects.Patch
+    StorageObjectsPatchResource,
+    newStorageObjectsPatch,
+    StorageObjectsPatch,
 
     -- ** storage.objects.rewrite
-    , module Network.Google.Resource.Storage.Objects.Rewrite
+    StorageObjectsRewriteResource,
+    newStorageObjectsRewrite,
+    StorageObjectsRewrite,
 
     -- ** storage.objects.setIamPolicy
-    , module Network.Google.Resource.Storage.Objects.SetIAMPolicy
+    StorageObjectsSetIamPolicyResource,
+    newStorageObjectsSetIamPolicy,
+    StorageObjectsSetIamPolicy,
 
     -- ** storage.objects.testIamPermissions
-    , module Network.Google.Resource.Storage.Objects.TestIAMPermissions
+    StorageObjectsTestIamPermissionsResource,
+    newStorageObjectsTestIamPermissions,
+    StorageObjectsTestIamPermissions,
 
     -- ** storage.objects.update
-    , module Network.Google.Resource.Storage.Objects.Update
+    StorageObjectsUpdateResource,
+    newStorageObjectsUpdate,
+    StorageObjectsUpdate,
 
     -- ** storage.objects.watchAll
-    , module Network.Google.Resource.Storage.Objects.WatchAll
+    StorageObjectsWatchAllResource,
+    newStorageObjectsWatchAll,
+    StorageObjectsWatchAll,
 
     -- ** storage.projects.hmacKeys.create
-    , module Network.Google.Resource.Storage.Projects.HmacKeys.Create
+    StorageProjectsHmacKeysCreateResource,
+    newStorageProjectsHmacKeysCreate,
+    StorageProjectsHmacKeysCreate,
 
     -- ** storage.projects.hmacKeys.delete
-    , module Network.Google.Resource.Storage.Projects.HmacKeys.Delete
+    StorageProjectsHmacKeysDeleteResource,
+    newStorageProjectsHmacKeysDelete,
+    StorageProjectsHmacKeysDelete,
 
     -- ** storage.projects.hmacKeys.get
-    , module Network.Google.Resource.Storage.Projects.HmacKeys.Get
+    StorageProjectsHmacKeysGetResource,
+    newStorageProjectsHmacKeysGet,
+    StorageProjectsHmacKeysGet,
 
     -- ** storage.projects.hmacKeys.list
-    , module Network.Google.Resource.Storage.Projects.HmacKeys.List
+    StorageProjectsHmacKeysListResource,
+    newStorageProjectsHmacKeysList,
+    StorageProjectsHmacKeysList,
 
     -- ** storage.projects.hmacKeys.update
-    , module Network.Google.Resource.Storage.Projects.HmacKeys.Update
+    StorageProjectsHmacKeysUpdateResource,
+    newStorageProjectsHmacKeysUpdate,
+    StorageProjectsHmacKeysUpdate,
 
     -- ** storage.projects.serviceAccount.get
-    , module Network.Google.Resource.Storage.Projects.ServiceAccount.Get
+    StorageProjectsServiceAccountGetResource,
+    newStorageProjectsServiceAccountGet,
+    StorageProjectsServiceAccountGet,
 
     -- * Types
 
-    -- ** ObjectOwner
-    , ObjectOwner
-    , objectOwner
-    , ooEntity
-    , ooEntityId
-
-    -- ** ObjectsInsertProjection
-    , ObjectsInsertProjection (..)
-
-    -- ** BucketVersioning
-    , BucketVersioning
-    , bucketVersioning
-    , bvEnabled
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** BucketsUpdatePredefinedDefaultObjectACL
-    , BucketsUpdatePredefinedDefaultObjectACL (..)
-
-    -- ** ObjectsComposeDestinationPredefinedACL
-    , ObjectsComposeDestinationPredefinedACL (..)
-
-    -- ** BucketRetentionPolicy
-    , BucketRetentionPolicy
-    , bucketRetentionPolicy
-    , brpRetentionPeriod
-    , brpEffectiveTime
-    , brpIsLocked
-
-    -- ** BucketsInsertPredefinedACL
-    , BucketsInsertPredefinedACL (..)
-
-    -- ** Buckets
-    , Buckets
-    , buckets
-    , bNextPageToken
-    , bKind
-    , bItems
-
-    -- ** HmacKeyMetadata
-    , HmacKeyMetadata
-    , hmacKeyMetadata
-    , hkmEtag
-    , hkmState
-    , hkmKind
-    , hkmSelfLink
-    , hkmTimeCreated
-    , hkmId
-    , hkmUpdated
-    , hkmServiceAccountEmail
-    , hkmProjectId
-    , hkmAccessId
-
-    -- ** BucketBilling
-    , BucketBilling
-    , bucketBilling
-    , bbRequesterPays
-
-    -- ** Notification
-    , Notification
-    , notification
-    , nEtag
-    , nObjectNamePrefix
-    , nPayloadFormat
-    , nEventTypes
-    , nKind
-    , nTopic
-    , nSelfLink
-    , nId
-    , nCustomAttributes
-
-    -- ** BucketLogging
-    , BucketLogging
-    , bucketLogging
-    , blLogBucket
-    , blLogObjectPrefix
-
-    -- ** ObjectMetadata
-    , ObjectMetadata
-    , objectMetadata
-    , omAddtional
-
-    -- ** ObjectsPatchPredefinedACL
-    , ObjectsPatchPredefinedACL (..)
-
-    -- ** BucketLifecycleRuleItemCondition
-    , BucketLifecycleRuleItemCondition
-    , bucketLifecycleRuleItemCondition
-    , blricNoncurrentTimeBefore
-    , blricDaysSinceCustomTime
-    , blricAge
-    , blricDaysSinceNoncurrentTime
-    , blricIsLive
-    , blricNumNewerVersions
-    , blricCustomTimeBefore
-    , blricMatchesStorageClass
-    , blricMatchesPattern
-    , blricCreatedBefore
-
-    -- ** ObjectsRewriteDestinationPredefinedACL
-    , ObjectsRewriteDestinationPredefinedACL (..)
-
-    -- ** BucketLifecycle
-    , BucketLifecycle
-    , bucketLifecycle
-    , blRule
-
-    -- ** BucketLabels
-    , BucketLabels
-    , bucketLabels
-    , blAddtional
-
-    -- ** Channel
-    , Channel
-    , channel
-    , cResourceURI
-    , cResourceId
-    , cKind
-    , cExpiration
-    , cToken
-    , cAddress
-    , cPayload
-    , cParams
-    , cId
-    , cType
-
-    -- ** BucketLifecycleRuleItem
-    , BucketLifecycleRuleItem
-    , bucketLifecycleRuleItem
-    , blriAction
-    , blriCondition
-
-    -- ** ObjectsWatchAllProjection
-    , ObjectsWatchAllProjection (..)
-
-    -- ** BucketCORSItem
-    , BucketCORSItem
-    , bucketCORSItem
-    , bciMaxAgeSeconds
-    , bciOrigin
-    , bciResponseHeader
-    , bciMethod
-
-    -- ** ObjectAccessControlProjectTeam
-    , ObjectAccessControlProjectTeam
-    , objectAccessControlProjectTeam
-    , oacptProjectNumber
-    , oacptTeam
-
-    -- ** ObjectCustomerEncryption
-    , ObjectCustomerEncryption
-    , objectCustomerEncryption
-    , oceKeySha256
-    , oceEncryptionAlgorithm
-
     -- ** Bucket
-    , Bucket
-    , bucket
-    , bucSatisfiesPZS
-    , bucEtag
-    , bucLocation
-    , bucIAMConfiguration
-    , bucKind
-    , bucWebsite
-    , bucProjectNumber
-    , bucLifecycle
-    , bucOwner
-    , bucRetentionPolicy
-    , bucZoneAffinity
-    , bucSelfLink
-    , bucName
-    , bucEncryption
-    , bucStorageClass
-    , bucVersioning
-    , bucCORS
-    , bucTimeCreated
-    , bucId
-    , bucLabels
-    , bucLocationType
-    , bucUpdated
-    , bucDefaultObjectACL
-    , bucBilling
-    , bucMetageneration
-    , bucLogging
-    , bucACL
-    , bucDefaultEventBasedHold
+    Bucket (..),
+    newBucket,
 
-    -- ** BucketsGetProjection
-    , BucketsGetProjection (..)
+    -- ** Bucket_Autoclass
+    Bucket_Autoclass (..),
+    newBucket_Autoclass,
 
-    -- ** Objects
-    , Objects
-    , objects
-    , oNextPageToken
-    , oKind
-    , oItems
-    , oPrefixes
+    -- ** Bucket_Billing
+    Bucket_Billing (..),
+    newBucket_Billing,
 
-    -- ** BucketsPatchProjection
-    , BucketsPatchProjection (..)
+    -- ** Bucket_CorsItem
+    Bucket_CorsItem (..),
+    newBucket_CorsItem,
 
-    -- ** HmacKeysMetadata
-    , HmacKeysMetadata
-    , hmacKeysMetadata
-    , hNextPageToken
-    , hKind
-    , hItems
+    -- ** Bucket_CustomPlacementConfig
+    Bucket_CustomPlacementConfig (..),
+    newBucket_CustomPlacementConfig,
 
-    -- ** BucketAccessControls
-    , BucketAccessControls
-    , bucketAccessControls
-    , bacKind
-    , bacItems
+    -- ** Bucket_Encryption
+    Bucket_Encryption (..),
+    newBucket_Encryption,
 
-    -- ** BucketEncryption
-    , BucketEncryption
-    , bucketEncryption
-    , beDefaultKmsKeyName
+    -- ** Bucket_IamConfiguration
+    Bucket_IamConfiguration (..),
+    newBucket_IamConfiguration,
 
-    -- ** BucketsUpdateProjection
-    , BucketsUpdateProjection (..)
+    -- ** Bucket_IamConfiguration_BucketPolicyOnly
+    Bucket_IamConfiguration_BucketPolicyOnly (..),
+    newBucket_IamConfiguration_BucketPolicyOnly,
 
-    -- ** ComposeRequest
-    , ComposeRequest
-    , composeRequest
-    , crDestination
-    , crKind
-    , crSourceObjects
+    -- ** Bucket_IamConfiguration_UniformBucketLevelAccess
+    Bucket_IamConfiguration_UniformBucketLevelAccess (..),
+    newBucket_IamConfiguration_UniformBucketLevelAccess,
 
-    -- ** ObjectsInsertPredefinedACL
-    , ObjectsInsertPredefinedACL (..)
+    -- ** Bucket_Labels
+    Bucket_Labels (..),
+    newBucket_Labels,
 
-    -- ** ObjectsListProjection
-    , ObjectsListProjection (..)
+    -- ** Bucket_Lifecycle
+    Bucket_Lifecycle (..),
+    newBucket_Lifecycle,
 
-    -- ** BucketsInsertPredefinedDefaultObjectACL
-    , BucketsInsertPredefinedDefaultObjectACL (..)
+    -- ** Bucket_Lifecycle_RuleItem
+    Bucket_Lifecycle_RuleItem (..),
+    newBucket_Lifecycle_RuleItem,
 
-    -- ** BucketsUpdatePredefinedACL
-    , BucketsUpdatePredefinedACL (..)
+    -- ** Bucket_Lifecycle_RuleItem_Action
+    Bucket_Lifecycle_RuleItem_Action (..),
+    newBucket_Lifecycle_RuleItem_Action,
 
-    -- ** ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saKind
-    , saEmailAddress
+    -- ** Bucket_Lifecycle_RuleItem_Condition
+    Bucket_Lifecycle_RuleItem_Condition (..),
+    newBucket_Lifecycle_RuleItem_Condition,
 
-    -- ** ObjectsCopyDestinationPredefinedACL
-    , ObjectsCopyDestinationPredefinedACL (..)
+    -- ** Bucket_Logging
+    Bucket_Logging (..),
+    newBucket_Logging,
 
-    -- ** ObjectsUpdatePredefinedACL
-    , ObjectsUpdatePredefinedACL (..)
+    -- ** Bucket_Owner
+    Bucket_Owner (..),
+    newBucket_Owner,
 
-    -- ** BucketOwner
-    , BucketOwner
-    , bucketOwner
-    , boEntity
-    , boEntityId
+    -- ** Bucket_RetentionPolicy
+    Bucket_RetentionPolicy (..),
+    newBucket_RetentionPolicy,
 
-    -- ** ComposeRequestSourceObjectsItem
-    , ComposeRequestSourceObjectsItem
-    , composeRequestSourceObjectsItem
-    , crsoiName
-    , crsoiObjectPreconditions
-    , crsoiGeneration
+    -- ** Bucket_Versioning
+    Bucket_Versioning (..),
+    newBucket_Versioning,
 
-    -- ** BucketsInsertProjection
-    , BucketsInsertProjection (..)
-
-    -- ** ChannelParams
-    , ChannelParams
-    , channelParams
-    , cpAddtional
-
-    -- ** PolicyBindingsItem
-    , PolicyBindingsItem
-    , policyBindingsItem
-    , pbiMembers
-    , pbiRole
-    , pbiCondition
-
-    -- ** BucketsListProjection
-    , BucketsListProjection (..)
-
-    -- ** ObjectsUpdateProjection
-    , ObjectsUpdateProjection (..)
-
-    -- ** Object
-    , Object
-    , object'
-    , objTemporaryHold
-    , objEtag
-    , objTimeStorageClassUpdated
-    , objRetentionExpirationTime
-    , objSize
-    , objKind
-    , objTimeDeleted
-    , objCrc32c
-    , objCustomerEncryption
-    , objBucket
-    , objOwner
-    , objSelfLink
-    , objMediaLink
-    , objComponentCount
-    , objName
-    , objStorageClass
-    , objContentEncoding
-    , objEventBasedHold
-    , objMetadata
-    , objTimeCreated
-    , objId
-    , objKmsKeyName
-    , objUpdated
-    , objContentLanguage
-    , objCacheControl
-    , objMetageneration
-    , objGeneration
-    , objACL
-    , objCustomTime
-    , objContentDisPosition
-    , objMD5Hash
-    , objContentType
-
-    -- ** ObjectsPatchProjection
-    , ObjectsPatchProjection (..)
-
-    -- ** ComposeRequestSourceObjectsItemObjectPreconditions
-    , ComposeRequestSourceObjectsItemObjectPreconditions
-    , composeRequestSourceObjectsItemObjectPreconditions
-    , crsoiopIfGenerationMatch
-
-    -- ** BucketAccessControlProjectTeam
-    , BucketAccessControlProjectTeam
-    , bucketAccessControlProjectTeam
-    , bacptProjectNumber
-    , bacptTeam
-
-    -- ** ObjectAccessControls
-    , ObjectAccessControls
-    , objectAccessControls
-    , oacKind
-    , oacItems
-
-    -- ** BucketWebsite
-    , BucketWebsite
-    , bucketWebsite
-    , bwMainPageSuffix
-    , bwNotFoundPage
+    -- ** Bucket_Website
+    Bucket_Website (..),
+    newBucket_Website,
 
     -- ** BucketAccessControl
-    , BucketAccessControl
-    , bucketAccessControl
-    , bacaEmail
-    , bacaEtag
-    , bacaKind
-    , bacaDomain
-    , bacaBucket
-    , bacaRole
-    , bacaSelfLink
-    , bacaId
-    , bacaProjectTeam
-    , bacaEntity
-    , bacaEntityId
+    BucketAccessControl (..),
+    newBucketAccessControl,
 
-    -- ** BucketLifecycleRuleItemAction
-    , BucketLifecycleRuleItemAction
-    , bucketLifecycleRuleItemAction
-    , blriaStorageClass
-    , blriaType
+    -- ** BucketAccessControl_ProjectTeam
+    BucketAccessControl_ProjectTeam (..),
+    newBucketAccessControl_ProjectTeam,
 
-    -- ** ObjectsGetProjection
-    , ObjectsGetProjection (..)
+    -- ** BucketAccessControls
+    BucketAccessControls (..),
+    newBucketAccessControls,
 
-    -- ** BucketsPatchPredefinedDefaultObjectACL
-    , BucketsPatchPredefinedDefaultObjectACL (..)
+    -- ** Buckets
+    Buckets (..),
+    newBuckets,
 
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiprKind
-    , tiprPermissions
+    -- ** Channel
+    Channel (..),
+    newChannel,
+
+    -- ** Channel_Params
+    Channel_Params (..),
+    newChannel_Params,
+
+    -- ** ComposeRequest
+    ComposeRequest (..),
+    newComposeRequest,
+
+    -- ** ComposeRequest_SourceObjectsItem
+    ComposeRequest_SourceObjectsItem (..),
+    newComposeRequest_SourceObjectsItem,
+
+    -- ** ComposeRequest_SourceObjectsItem_ObjectPreconditions
+    ComposeRequest_SourceObjectsItem_ObjectPreconditions (..),
+    newComposeRequest_SourceObjectsItem_ObjectPreconditions,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
     -- ** HmacKey
-    , HmacKey
-    , hmacKey
-    , hkKind
-    , hkSecret
-    , hkMetadata
+    HmacKey (..),
+    newHmacKey,
 
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pResourceId
-    , pKind
-    , pVersion
-    , pBindings
+    -- ** HmacKeyMetadata
+    HmacKeyMetadata (..),
+    newHmacKeyMetadata,
 
-    -- ** BucketIAMConfigurationUniformBucketLevelAccess
-    , BucketIAMConfigurationUniformBucketLevelAccess
-    , bucketIAMConfigurationUniformBucketLevelAccess
-    , bicublaLockedTime
-    , bicublaEnabled
+    -- ** HmacKeysMetadata
+    HmacKeysMetadata (..),
+    newHmacKeysMetadata,
 
-    -- ** BucketIAMConfiguration
-    , BucketIAMConfiguration
-    , bucketIAMConfiguration
-    , bicBucketPolicyOnly
-    , bicUniformBucketLevelAccess
-    , bicPublicAccessPrevention
+    -- ** Notification
+    Notification (..),
+    newNotification,
 
-    -- ** BucketsPatchPredefinedACL
-    , BucketsPatchPredefinedACL (..)
-
-    -- ** ObjectAccessControl
-    , ObjectAccessControl
-    , objectAccessControl
-    , oacaEmail
-    , oacaEtag
-    , oacaKind
-    , oacaDomain
-    , oacaBucket
-    , oacaRole
-    , oacaSelfLink
-    , oacaObject
-    , oacaId
-    , oacaProjectTeam
-    , oacaEntity
-    , oacaGeneration
-    , oacaEntityId
+    -- ** Notification_Custom_attributes
+    Notification_Custom_attributes (..),
+    newNotification_Custom_attributes,
 
     -- ** Notifications
-    , Notifications
-    , notifications
-    , notKind
-    , notItems
+    Notifications (..),
+    newNotifications,
 
-    -- ** NotificationCustom_attributes
-    , NotificationCustom_attributes
-    , notificationCustom_attributes
-    , ncAddtional
+    -- ** Object
+    Object (..),
+    newObject,
 
-    -- ** ObjectsCopyProjection
-    , ObjectsCopyProjection (..)
+    -- ** Object_CustomerEncryption
+    Object_CustomerEncryption (..),
+    newObject_CustomerEncryption,
 
-    -- ** BucketIAMConfigurationBucketPolicyOnly
-    , BucketIAMConfigurationBucketPolicyOnly
-    , bucketIAMConfigurationBucketPolicyOnly
-    , bicbpoLockedTime
-    , bicbpoEnabled
+    -- ** Object_Metadata
+    Object_Metadata (..),
+    newObject_Metadata,
+
+    -- ** Object_Owner
+    Object_Owner (..),
+    newObject_Owner,
+
+    -- ** ObjectAccessControl
+    ObjectAccessControl (..),
+    newObjectAccessControl,
+
+    -- ** ObjectAccessControl_ProjectTeam
+    ObjectAccessControl_ProjectTeam (..),
+    newObjectAccessControl_ProjectTeam,
+
+    -- ** ObjectAccessControls
+    ObjectAccessControls (..),
+    newObjectAccessControls,
+
+    -- ** Objects
+    Objects (..),
+    newObjects,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** Policy_BindingsItem
+    Policy_BindingsItem (..),
+    newPolicy_BindingsItem,
 
     -- ** RewriteResponse
-    , RewriteResponse
-    , rewriteResponse
-    , rrKind
-    , rrDone
-    , rrResource
-    , rrObjectSize
-    , rrTotalBytesRewritten
-    , rrRewriteToken
+    RewriteResponse (..),
+    newRewriteResponse,
+
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** BucketsGetProjection
+    BucketsGetProjection (..),
+
+    -- ** BucketsInsertPredefinedAcl
+    BucketsInsertPredefinedAcl (..),
+
+    -- ** BucketsInsertPredefinedDefaultObjectAcl
+    BucketsInsertPredefinedDefaultObjectAcl (..),
+
+    -- ** BucketsInsertProjection
+    BucketsInsertProjection (..),
+
+    -- ** BucketsListProjection
+    BucketsListProjection (..),
+
+    -- ** BucketsPatchPredefinedAcl
+    BucketsPatchPredefinedAcl (..),
+
+    -- ** BucketsPatchPredefinedDefaultObjectAcl
+    BucketsPatchPredefinedDefaultObjectAcl (..),
+
+    -- ** BucketsPatchProjection
+    BucketsPatchProjection (..),
+
+    -- ** BucketsUpdatePredefinedAcl
+    BucketsUpdatePredefinedAcl (..),
+
+    -- ** BucketsUpdatePredefinedDefaultObjectAcl
+    BucketsUpdatePredefinedDefaultObjectAcl (..),
+
+    -- ** BucketsUpdateProjection
+    BucketsUpdateProjection (..),
+
+    -- ** ObjectsComposeDestinationPredefinedAcl
+    ObjectsComposeDestinationPredefinedAcl (..),
+
+    -- ** ObjectsCopyDestinationPredefinedAcl
+    ObjectsCopyDestinationPredefinedAcl (..),
+
+    -- ** ObjectsCopyProjection
+    ObjectsCopyProjection (..),
+
+    -- ** ObjectsGetProjection
+    ObjectsGetProjection (..),
+
+    -- ** ObjectsInsertPredefinedAcl
+    ObjectsInsertPredefinedAcl (..),
+
+    -- ** ObjectsInsertProjection
+    ObjectsInsertProjection (..),
+
+    -- ** ObjectsListProjection
+    ObjectsListProjection (..),
+
+    -- ** ObjectsPatchPredefinedAcl
+    ObjectsPatchPredefinedAcl (..),
+
+    -- ** ObjectsPatchProjection
+    ObjectsPatchProjection (..),
+
+    -- ** ObjectsRewriteDestinationPredefinedAcl
+    ObjectsRewriteDestinationPredefinedAcl (..),
 
     -- ** ObjectsRewriteProjection
-    , ObjectsRewriteProjection (..)
-    ) where
+    ObjectsRewriteProjection (..),
 
-import Network.Google.Prelude
-import Network.Google.Resource.Storage.BucketAccessControls.Delete
-import Network.Google.Resource.Storage.BucketAccessControls.Get
-import Network.Google.Resource.Storage.BucketAccessControls.Insert
-import Network.Google.Resource.Storage.BucketAccessControls.List
-import Network.Google.Resource.Storage.BucketAccessControls.Patch
-import Network.Google.Resource.Storage.BucketAccessControls.Update
-import Network.Google.Resource.Storage.Buckets.Delete
-import Network.Google.Resource.Storage.Buckets.Get
-import Network.Google.Resource.Storage.Buckets.GetIAMPolicy
-import Network.Google.Resource.Storage.Buckets.Insert
-import Network.Google.Resource.Storage.Buckets.List
-import Network.Google.Resource.Storage.Buckets.LockRetentionPolicy
-import Network.Google.Resource.Storage.Buckets.Patch
-import Network.Google.Resource.Storage.Buckets.SetIAMPolicy
-import Network.Google.Resource.Storage.Buckets.TestIAMPermissions
-import Network.Google.Resource.Storage.Buckets.Update
-import Network.Google.Resource.Storage.Channels.Stop
-import Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
-import Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
-import Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
-import Network.Google.Resource.Storage.DefaultObjectAccessControls.List
-import Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
-import Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
-import Network.Google.Resource.Storage.Notifications.Delete
-import Network.Google.Resource.Storage.Notifications.Get
-import Network.Google.Resource.Storage.Notifications.Insert
-import Network.Google.Resource.Storage.Notifications.List
-import Network.Google.Resource.Storage.ObjectAccessControls.Delete
-import Network.Google.Resource.Storage.ObjectAccessControls.Get
-import Network.Google.Resource.Storage.ObjectAccessControls.Insert
-import Network.Google.Resource.Storage.ObjectAccessControls.List
-import Network.Google.Resource.Storage.ObjectAccessControls.Patch
-import Network.Google.Resource.Storage.ObjectAccessControls.Update
-import Network.Google.Resource.Storage.Objects.Compose
-import Network.Google.Resource.Storage.Objects.Copy
-import Network.Google.Resource.Storage.Objects.Delete
-import Network.Google.Resource.Storage.Objects.Get
-import Network.Google.Resource.Storage.Objects.GetIAMPolicy
-import Network.Google.Resource.Storage.Objects.Insert
-import Network.Google.Resource.Storage.Objects.List
-import Network.Google.Resource.Storage.Objects.Patch
-import Network.Google.Resource.Storage.Objects.Rewrite
-import Network.Google.Resource.Storage.Objects.SetIAMPolicy
-import Network.Google.Resource.Storage.Objects.TestIAMPermissions
-import Network.Google.Resource.Storage.Objects.Update
-import Network.Google.Resource.Storage.Objects.WatchAll
-import Network.Google.Resource.Storage.Projects.HmacKeys.Create
-import Network.Google.Resource.Storage.Projects.HmacKeys.Delete
-import Network.Google.Resource.Storage.Projects.HmacKeys.Get
-import Network.Google.Resource.Storage.Projects.HmacKeys.List
-import Network.Google.Resource.Storage.Projects.HmacKeys.Update
-import Network.Google.Resource.Storage.Projects.ServiceAccount.Get
+    -- ** ObjectsUpdatePredefinedAcl
+    ObjectsUpdatePredefinedAcl (..),
+
+    -- ** ObjectsUpdateProjection
+    ObjectsUpdateProjection (..),
+
+    -- ** ObjectsWatchAllProjection
+    ObjectsWatchAllProjection (..),
+  )
+where
+
+import Network.Google.Storage.BucketAccessControls.Delete
+import Network.Google.Storage.BucketAccessControls.Get
+import Network.Google.Storage.BucketAccessControls.Insert
+import Network.Google.Storage.BucketAccessControls.List
+import Network.Google.Storage.BucketAccessControls.Patch
+import Network.Google.Storage.BucketAccessControls.Update
+import Network.Google.Storage.Buckets.Delete
+import Network.Google.Storage.Buckets.Get
+import Network.Google.Storage.Buckets.GetIamPolicy
+import Network.Google.Storage.Buckets.Insert
+import Network.Google.Storage.Buckets.List
+import Network.Google.Storage.Buckets.LockRetentionPolicy
+import Network.Google.Storage.Buckets.Patch
+import Network.Google.Storage.Buckets.SetIamPolicy
+import Network.Google.Storage.Buckets.TestIamPermissions
+import Network.Google.Storage.Buckets.Update
+import Network.Google.Storage.Channels.Stop
+import Network.Google.Storage.DefaultObjectAccessControls.Delete
+import Network.Google.Storage.DefaultObjectAccessControls.Get
+import Network.Google.Storage.DefaultObjectAccessControls.Insert
+import Network.Google.Storage.DefaultObjectAccessControls.List
+import Network.Google.Storage.DefaultObjectAccessControls.Patch
+import Network.Google.Storage.DefaultObjectAccessControls.Update
+import Network.Google.Storage.Notifications.Delete
+import Network.Google.Storage.Notifications.Get
+import Network.Google.Storage.Notifications.Insert
+import Network.Google.Storage.Notifications.List
+import Network.Google.Storage.ObjectAccessControls.Delete
+import Network.Google.Storage.ObjectAccessControls.Get
+import Network.Google.Storage.ObjectAccessControls.Insert
+import Network.Google.Storage.ObjectAccessControls.List
+import Network.Google.Storage.ObjectAccessControls.Patch
+import Network.Google.Storage.ObjectAccessControls.Update
+import Network.Google.Storage.Objects.Compose
+import Network.Google.Storage.Objects.Copy
+import Network.Google.Storage.Objects.Delete
+import Network.Google.Storage.Objects.Get
+import Network.Google.Storage.Objects.GetIamPolicy
+import Network.Google.Storage.Objects.Insert
+import Network.Google.Storage.Objects.List
+import Network.Google.Storage.Objects.Patch
+import Network.Google.Storage.Objects.Rewrite
+import Network.Google.Storage.Objects.SetIamPolicy
+import Network.Google.Storage.Objects.TestIamPermissions
+import Network.Google.Storage.Objects.Update
+import Network.Google.Storage.Objects.WatchAll
+import Network.Google.Storage.Projects.HmacKeys.Create
+import Network.Google.Storage.Projects.HmacKeys.Delete
+import Network.Google.Storage.Projects.HmacKeys.Get
+import Network.Google.Storage.Projects.HmacKeys.List
+import Network.Google.Storage.Projects.HmacKeys.Update
+import Network.Google.Storage.Projects.ServiceAccount.Get
 import Network.Google.Storage.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Storage JSON API service.
-type StorageAPI =
-     BucketsInsertResource :<|> BucketsListResource :<|>
-       BucketsGetIAMPolicyResource
-       :<|> BucketsPatchResource
-       :<|> BucketsGetResource
-       :<|> BucketsSetIAMPolicyResource
-       :<|> BucketsLockRetentionPolicyResource
-       :<|> BucketsTestIAMPermissionsResource
-       :<|> BucketsDeleteResource
-       :<|> BucketsUpdateResource
-       :<|> ChannelsStopResource
-       :<|> DefaultObjectAccessControlsInsertResource
-       :<|> DefaultObjectAccessControlsListResource
-       :<|> DefaultObjectAccessControlsPatchResource
-       :<|> DefaultObjectAccessControlsGetResource
-       :<|> DefaultObjectAccessControlsDeleteResource
-       :<|> DefaultObjectAccessControlsUpdateResource
-       :<|> ObjectsInsertResource
-       :<|> ObjectsListResource
-       :<|> ObjectsCopyResource
-       :<|> ObjectsWatchAllResource
-       :<|> ObjectsGetIAMPolicyResource
-       :<|> ObjectsPatchResource
-       :<|> ObjectsGetResource
-       :<|> ObjectsSetIAMPolicyResource
-       :<|> ObjectsRewriteResource
-       :<|> ObjectsComposeResource
-       :<|> ObjectsTestIAMPermissionsResource
-       :<|> ObjectsDeleteResource
-       :<|> ObjectsUpdateResource
-       :<|> BucketAccessControlsInsertResource
-       :<|> BucketAccessControlsListResource
-       :<|> BucketAccessControlsPatchResource
-       :<|> BucketAccessControlsGetResource
-       :<|> BucketAccessControlsDeleteResource
-       :<|> BucketAccessControlsUpdateResource
-       :<|> ObjectAccessControlsInsertResource
-       :<|> ObjectAccessControlsListResource
-       :<|> ObjectAccessControlsPatchResource
-       :<|> ObjectAccessControlsGetResource
-       :<|> ObjectAccessControlsDeleteResource
-       :<|> ObjectAccessControlsUpdateResource
-       :<|> NotificationsInsertResource
-       :<|> NotificationsListResource
-       :<|> NotificationsGetResource
-       :<|> NotificationsDeleteResource
-       :<|> ProjectsHmacKeysListResource
-       :<|> ProjectsHmacKeysGetResource
-       :<|> ProjectsHmacKeysCreateResource
-       :<|> ProjectsHmacKeysDeleteResource
-       :<|> ProjectsHmacKeysUpdateResource
-       :<|> ProjectsServiceAccountGetResource
