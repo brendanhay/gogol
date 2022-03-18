@@ -39,31 +39,32 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AdExchangeSeller
-    Network.Google.AdExchangeSeller.Accounts.Adclients.List
-    Network.Google.AdExchangeSeller.Accounts.Alerts.List
-    Network.Google.AdExchangeSeller.Accounts.Customchannels.Get
-    Network.Google.AdExchangeSeller.Accounts.Customchannels.List
-    Network.Google.AdExchangeSeller.Accounts.Get
-    Network.Google.AdExchangeSeller.Accounts.List
-    Network.Google.AdExchangeSeller.Accounts.Metadata.Dimensions.List
-    Network.Google.AdExchangeSeller.Accounts.Metadata.Metrics.List
-    Network.Google.AdExchangeSeller.Accounts.Preferreddeals.Get
-    Network.Google.AdExchangeSeller.Accounts.Preferreddeals.List
-    Network.Google.AdExchangeSeller.Accounts.Reports.Generate
-    Network.Google.AdExchangeSeller.Accounts.Reports.Saved.Generate
-    Network.Google.AdExchangeSeller.Accounts.Reports.Saved.List
-    Network.Google.AdExchangeSeller.Accounts.Urlchannels.List
-    Network.Google.AdExchangeSeller.Types
+    Gogol.AdExchangeSeller
+    Gogol.AdExchangeSeller.Accounts.Adclients.List
+    Gogol.AdExchangeSeller.Accounts.Alerts.List
+    Gogol.AdExchangeSeller.Accounts.Customchannels.Get
+    Gogol.AdExchangeSeller.Accounts.Customchannels.List
+    Gogol.AdExchangeSeller.Accounts.Get
+    Gogol.AdExchangeSeller.Accounts.List
+    Gogol.AdExchangeSeller.Accounts.Metadata.Dimensions.List
+    Gogol.AdExchangeSeller.Accounts.Metadata.Metrics.List
+    Gogol.AdExchangeSeller.Accounts.Preferreddeals.Get
+    Gogol.AdExchangeSeller.Accounts.Preferreddeals.List
+    Gogol.AdExchangeSeller.Accounts.Reports.Generate
+    Gogol.AdExchangeSeller.Accounts.Reports.Saved.Generate
+    Gogol.AdExchangeSeller.Accounts.Reports.Saved.List
+    Gogol.AdExchangeSeller.Accounts.Urlchannels.List
+    Gogol.AdExchangeSeller.Types
 
   other-modules:
-    Network.Google.AdExchangeSeller.Internal.Product
-    Network.Google.AdExchangeSeller.Internal.Sum
+    Gogol.AdExchangeSeller.Internal.Product
+    Gogol.AdExchangeSeller.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
