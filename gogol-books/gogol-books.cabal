@@ -1,97 +1,107 @@
-name:                  gogol-books
-version:               0.5.0
-synopsis:              Google Books SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-books
+version:            0.5.0
+synopsis:           Google Books SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    The Google Books API allows clients to access the Google Books
-    repository.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  The Google Books API allows clients to access the Google Books repository.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-books
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Books
-        , Network.Google.Books.Types
-        , Network.Google.Resource.Books.Bookshelves.Get
-        , Network.Google.Resource.Books.Bookshelves.List
-        , Network.Google.Resource.Books.Bookshelves.Volumes.List
-        , Network.Google.Resource.Books.CloudLoading.AddBook
-        , Network.Google.Resource.Books.CloudLoading.DeleteBook
-        , Network.Google.Resource.Books.CloudLoading.UpdateBook
-        , Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
-        , Network.Google.Resource.Books.Familysharing.GetFamilyInfo
-        , Network.Google.Resource.Books.Familysharing.Share
-        , Network.Google.Resource.Books.Familysharing.Unshare
-        , Network.Google.Resource.Books.Layers.AnnotationData.Get
-        , Network.Google.Resource.Books.Layers.AnnotationData.List
-        , Network.Google.Resource.Books.Layers.Get
-        , Network.Google.Resource.Books.Layers.List
-        , Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
-        , Network.Google.Resource.Books.Layers.VolumeAnnotations.List
-        , Network.Google.Resource.Books.MyConfig.GetUserSettings
-        , Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
-        , Network.Google.Resource.Books.MyConfig.RequestAccess
-        , Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
-        , Network.Google.Resource.Books.MyConfig.UpdateUserSettings
-        , Network.Google.Resource.Books.MyLibrary.Annotations.Delete
-        , Network.Google.Resource.Books.MyLibrary.Annotations.Insert
-        , Network.Google.Resource.Books.MyLibrary.Annotations.List
-        , Network.Google.Resource.Books.MyLibrary.Annotations.Summary
-        , Network.Google.Resource.Books.MyLibrary.Annotations.Update
-        , Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
-        , Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
-        , Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
-        , Network.Google.Resource.Books.MyLibrary.Bookshelves.List
-        , Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
-        , Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
-        , Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
-        , Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
-        , Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
-        , Network.Google.Resource.Books.Notification.Get
-        , Network.Google.Resource.Books.Onboarding.ListCategories
-        , Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
-        , Network.Google.Resource.Books.Personalizedstream.Get
-        , Network.Google.Resource.Books.PromoOffer.Accept
-        , Network.Google.Resource.Books.PromoOffer.Dismiss
-        , Network.Google.Resource.Books.PromoOffer.Get
-        , Network.Google.Resource.Books.Series.Get
-        , Network.Google.Resource.Books.Series.Membership.Get
-        , Network.Google.Resource.Books.Volumes.Associated.List
-        , Network.Google.Resource.Books.Volumes.Get
-        , Network.Google.Resource.Books.Volumes.List
-        , Network.Google.Resource.Books.Volumes.Mybooks.List
-        , Network.Google.Resource.Books.Volumes.Recommended.List
-        , Network.Google.Resource.Books.Volumes.Recommended.Rate
-        , Network.Google.Resource.Books.Volumes.UserUploaded.List
+  exposed-modules:
+    Network.Google.Books
+    Network.Google.Books.Bookshelves.Get
+    Network.Google.Books.Bookshelves.List
+    Network.Google.Books.Bookshelves.Volumes.List
+    Network.Google.Books.Cloudloading.AddBook
+    Network.Google.Books.Cloudloading.DeleteBook
+    Network.Google.Books.Cloudloading.UpdateBook
+    Network.Google.Books.Dictionary.ListOfflineMetadata
+    Network.Google.Books.Familysharing.GetFamilyInfo
+    Network.Google.Books.Familysharing.Share
+    Network.Google.Books.Familysharing.Unshare
+    Network.Google.Books.Layers.AnnotationData.Get
+    Network.Google.Books.Layers.AnnotationData.List
+    Network.Google.Books.Layers.Get
+    Network.Google.Books.Layers.List
+    Network.Google.Books.Layers.VolumeAnnotations.Get
+    Network.Google.Books.Layers.VolumeAnnotations.List
+    Network.Google.Books.Myconfig.GetUserSettings
+    Network.Google.Books.Myconfig.ReleaseDownloadAccess
+    Network.Google.Books.Myconfig.RequestAccess
+    Network.Google.Books.Myconfig.SyncVolumeLicenses
+    Network.Google.Books.Myconfig.UpdateUserSettings
+    Network.Google.Books.Mylibrary.Annotations.Delete
+    Network.Google.Books.Mylibrary.Annotations.Insert
+    Network.Google.Books.Mylibrary.Annotations.List
+    Network.Google.Books.Mylibrary.Annotations.Summary
+    Network.Google.Books.Mylibrary.Annotations.Update
+    Network.Google.Books.Mylibrary.Bookshelves.AddVolume
+    Network.Google.Books.Mylibrary.Bookshelves.ClearVolumes
+    Network.Google.Books.Mylibrary.Bookshelves.Get
+    Network.Google.Books.Mylibrary.Bookshelves.List
+    Network.Google.Books.Mylibrary.Bookshelves.MoveVolume
+    Network.Google.Books.Mylibrary.Bookshelves.RemoveVolume
+    Network.Google.Books.Mylibrary.Bookshelves.Volumes.List
+    Network.Google.Books.Mylibrary.Readingpositions.Get
+    Network.Google.Books.Mylibrary.Readingpositions.SetPosition
+    Network.Google.Books.Notification.Get
+    Network.Google.Books.Onboarding.ListCategories
+    Network.Google.Books.Onboarding.ListCategoryVolumes
+    Network.Google.Books.Personalizedstream.Get
+    Network.Google.Books.Promooffer.Accept
+    Network.Google.Books.Promooffer.Dismiss
+    Network.Google.Books.Promooffer.Get
+    Network.Google.Books.Series.Get
+    Network.Google.Books.Series.Membership.Get
+    Network.Google.Books.Types
+    Network.Google.Books.Volumes.Associated.List
+    Network.Google.Books.Volumes.Get
+    Network.Google.Books.Volumes.List
+    Network.Google.Books.Volumes.Mybooks.List
+    Network.Google.Books.Volumes.Recommended.List
+    Network.Google.Books.Volumes.Recommended.Rate
+    Network.Google.Books.Volumes.Useruploaded.List
 
-    other-modules:
-          Network.Google.Books.Types.Product
-        , Network.Google.Books.Types.Sum
+  other-modules:
+    Network.Google.Books.Internal.Product
+    Network.Google.Books.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
