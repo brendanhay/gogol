@@ -19,34 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SafeBrowsing.ThreatListUpdates.Fetch
+-- Module      : Gogol.SafeBrowsing.ThreatHits.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Fetches the most recent threat list updates. A client can request updates for multiple lists at once.
+-- Reports a Safe Browsing threat list hit to Google. Only projects with TRUSTED_REPORTER visibility can use this method.
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.threatListUpdates.fetch@.
-module Network.Google.SafeBrowsing.ThreatListUpdates.Fetch
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.threatHits.create@.
+module Gogol.SafeBrowsing.ThreatHits.Create
   ( -- * Resource
-    SafeBrowsingThreatListUpdatesFetchResource,
+    SafeBrowsingThreatHitsCreateResource,
 
     -- ** Constructing a Request
-    newSafeBrowsingThreatListUpdatesFetch,
-    SafeBrowsingThreatListUpdatesFetch,
+    newSafeBrowsingThreatHitsCreate,
+    SafeBrowsingThreatHitsCreate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SafeBrowsing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SafeBrowsing.Types
 
--- | A resource alias for @safebrowsing.threatListUpdates.fetch@ method which the
--- 'SafeBrowsingThreatListUpdatesFetch' request conforms to.
-type SafeBrowsingThreatListUpdatesFetchResource =
+-- | A resource alias for @safebrowsing.threatHits.create@ method which the
+-- 'SafeBrowsingThreatHitsCreate' request conforms to.
+type SafeBrowsingThreatHitsCreateResource =
   "v4"
-    Core.:> "threatListUpdates:fetch"
+    Core.:> "threatHits"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -55,15 +55,13 @@ type SafeBrowsingThreatListUpdatesFetchResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
+              GoogleSecuritySafebrowsingV4ThreatHit
+    Core.:> Core.Post '[Core.JSON] GoogleProtobufEmpty
 
--- | Fetches the most recent threat list updates. A client can request updates for multiple lists at once.
+-- | Reports a Safe Browsing threat list hit to Google. Only projects with TRUSTED_REPORTER visibility can use this method.
 --
--- /See:/ 'newSafeBrowsingThreatListUpdatesFetch' smart constructor.
-data SafeBrowsingThreatListUpdatesFetch = SafeBrowsingThreatListUpdatesFetch
+-- /See:/ 'newSafeBrowsingThreatHitsCreate' smart constructor.
+data SafeBrowsingThreatHitsCreate = SafeBrowsingThreatHitsCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -71,7 +69,7 @@ data SafeBrowsingThreatListUpdatesFetch = SafeBrowsingThreatListUpdatesFetch
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest,
+    payload :: GoogleSecuritySafebrowsingV4ThreatHit,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,13 +77,13 @@ data SafeBrowsingThreatListUpdatesFetch = SafeBrowsingThreatListUpdatesFetch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SafeBrowsingThreatListUpdatesFetch' with the minimum fields required to make a request.
-newSafeBrowsingThreatListUpdatesFetch ::
+-- | Creates a value of 'SafeBrowsingThreatHitsCreate' with the minimum fields required to make a request.
+newSafeBrowsingThreatHitsCreate ::
   -- |  Multipart request metadata. See 'payload'.
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest ->
-  SafeBrowsingThreatListUpdatesFetch
-newSafeBrowsingThreatListUpdatesFetch payload =
-  SafeBrowsingThreatListUpdatesFetch
+  GoogleSecuritySafebrowsingV4ThreatHit ->
+  SafeBrowsingThreatHitsCreate
+newSafeBrowsingThreatHitsCreate payload =
+  SafeBrowsingThreatHitsCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,13 +94,13 @@ newSafeBrowsingThreatListUpdatesFetch payload =
 
 instance
   Core.GoogleRequest
-    SafeBrowsingThreatListUpdatesFetch
+    SafeBrowsingThreatHitsCreate
   where
   type
-    Rs SafeBrowsingThreatListUpdatesFetch =
-      GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
-  type Scopes SafeBrowsingThreatListUpdatesFetch = '[]
-  requestClient SafeBrowsingThreatListUpdatesFetch {..} =
+    Rs SafeBrowsingThreatHitsCreate =
+      GoogleProtobufEmpty
+  type Scopes SafeBrowsingThreatHitsCreate = '[]
+  requestClient SafeBrowsingThreatHitsCreate {..} =
     go
       xgafv
       accessToken
@@ -116,7 +114,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                SafeBrowsingThreatListUpdatesFetchResource
+              Core.Proxy SafeBrowsingThreatHitsCreateResource
           )
           Core.mempty

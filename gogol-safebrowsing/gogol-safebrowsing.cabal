@@ -39,24 +39,25 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.SafeBrowsing
-    Network.Google.SafeBrowsing.EncodedFullHashes.Get
-    Network.Google.SafeBrowsing.EncodedUpdates.Get
-    Network.Google.SafeBrowsing.FullHashes.Find
-    Network.Google.SafeBrowsing.ThreatHits.Create
-    Network.Google.SafeBrowsing.ThreatLists.List
-    Network.Google.SafeBrowsing.ThreatListUpdates.Fetch
-    Network.Google.SafeBrowsing.ThreatMatches.Find
-    Network.Google.SafeBrowsing.Types
+    Gogol.SafeBrowsing
+    Gogol.SafeBrowsing.EncodedFullHashes.Get
+    Gogol.SafeBrowsing.EncodedUpdates.Get
+    Gogol.SafeBrowsing.FullHashes.Find
+    Gogol.SafeBrowsing.ThreatHits.Create
+    Gogol.SafeBrowsing.ThreatLists.List
+    Gogol.SafeBrowsing.ThreatListUpdates.Fetch
+    Gogol.SafeBrowsing.ThreatMatches.Find
+    Gogol.SafeBrowsing.Types
 
   other-modules:
-    Network.Google.SafeBrowsing.Internal.Product
-    Network.Google.SafeBrowsing.Internal.Sum
+    Gogol.SafeBrowsing.Internal.Product
+    Gogol.SafeBrowsing.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

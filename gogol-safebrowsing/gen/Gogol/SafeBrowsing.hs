@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SafeBrowsing
+-- Module      : Gogol.SafeBrowsing
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources. The Safe Browsing APIs are for non-commercial use only. If you need to use APIs to detect malicious URLs for commercial purposes – meaning “for sale or revenue-generating purposes” – please refer to the Web Risk API.
 --
 -- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference>
-module Network.Google.SafeBrowsing
+module Gogol.SafeBrowsing
   ( -- * Configuration
     safeBrowsingService,
 
@@ -244,11 +244,11 @@ module Network.Google.SafeBrowsing
   )
 where
 
-import Network.Google.SafeBrowsing.EncodedFullHashes.Get
-import Network.Google.SafeBrowsing.EncodedUpdates.Get
-import Network.Google.SafeBrowsing.FullHashes.Find
-import Network.Google.SafeBrowsing.ThreatHits.Create
-import Network.Google.SafeBrowsing.ThreatListUpdates.Fetch
-import Network.Google.SafeBrowsing.ThreatLists.List
-import Network.Google.SafeBrowsing.ThreatMatches.Find
-import Network.Google.SafeBrowsing.Types
+import Gogol.SafeBrowsing.EncodedFullHashes.Get
+import Gogol.SafeBrowsing.EncodedUpdates.Get
+import Gogol.SafeBrowsing.FullHashes.Find
+import Gogol.SafeBrowsing.ThreatHits.Create
+import Gogol.SafeBrowsing.ThreatListUpdates.Fetch
+import Gogol.SafeBrowsing.ThreatLists.List
+import Gogol.SafeBrowsing.ThreatMatches.Find
+import Gogol.SafeBrowsing.Types

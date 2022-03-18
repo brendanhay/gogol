@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SafeBrowsing.ThreatMatches.Find
+-- Module      : Gogol.SafeBrowsing.ThreatMatches.Find
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Finds the threat entries that match the Safe Browsing lists.
 --
 -- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.threatMatches.find@.
-module Network.Google.SafeBrowsing.ThreatMatches.Find
+module Gogol.SafeBrowsing.ThreatMatches.Find
   ( -- * Resource
     SafeBrowsingThreatMatchesFindResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SafeBrowsing.ThreatMatches.Find
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SafeBrowsing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SafeBrowsing.Types
 
 -- | A resource alias for @safebrowsing.threatMatches.find@ method which the
 -- 'SafeBrowsingThreatMatchesFind' request conforms to.
