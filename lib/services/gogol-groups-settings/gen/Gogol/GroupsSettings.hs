@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,36 +30,36 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Gogol.GroupsSettings
-    (
-    -- * Configuration
-      groupsSettingsService
+  ( -- * Configuration
+    groupsSettingsService,
 
     -- * OAuth Scopes
-    , appsGroupsSettingsScope
+    appsGroupsSettingsScope,
 
     -- * Resources
 
     -- ** groupsSettings.groups.get
-    , GroupsSettingsGroupsGetResource
-    , newGroupsSettingsGroupsGet
-    , GroupsSettingsGroupsGet
+    GroupsSettingsGroupsGetResource,
+    newGroupsSettingsGroupsGet,
+    GroupsSettingsGroupsGet,
 
     -- ** groupsSettings.groups.patch
-    , GroupsSettingsGroupsPatchResource
-    , newGroupsSettingsGroupsPatch
-    , GroupsSettingsGroupsPatch
+    GroupsSettingsGroupsPatchResource,
+    newGroupsSettingsGroupsPatch,
+    GroupsSettingsGroupsPatch,
 
     -- ** groupsSettings.groups.update
-    , GroupsSettingsGroupsUpdateResource
-    , newGroupsSettingsGroupsUpdate
-    , GroupsSettingsGroupsUpdate
+    GroupsSettingsGroupsUpdateResource,
+    newGroupsSettingsGroupsUpdate,
+    GroupsSettingsGroupsUpdate,
 
     -- * Types
 
     -- ** Groups
-    , Groups (..)
-    , newGroups
-    ) where
+    Groups (..),
+    newGroups,
+  )
+where
 
 import Gogol.GroupsSettings.Groups.Get
 import Gogol.GroupsSettings.Groups.Patch
