@@ -19,41 +19,15 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Poly
+-- Module      : Gogol.Poly.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- The Poly API provides read access to assets hosted on poly.google.com to all, and upload access to poly.google.com for whitelisted accounts.
---
--- /See:/ <https://developers.google.com/poly/ Poly API Reference>
-module Network.Google.Poly
+module Gogol.Poly.Types
   ( -- * Configuration
     polyService,
-
-    -- * Resources
-
-    -- ** poly.assets.get
-    PolyAssetsGetResource,
-    newPolyAssetsGet,
-    PolyAssetsGet,
-
-    -- ** poly.assets.list
-    PolyAssetsListResource,
-    newPolyAssetsList,
-    PolyAssetsList,
-
-    -- ** poly.users.assets.list
-    PolyUsersAssetsListResource,
-    newPolyUsersAssetsList,
-    PolyUsersAssetsList,
-
-    -- ** poly.users.likedassets.list
-    PolyUsersLikedassetsListResource,
-    newPolyUsersLikedassetsList,
-    PolyUsersLikedassetsList,
 
     -- * Types
 
@@ -146,8 +120,13 @@ module Network.Google.Poly
   )
 where
 
-import Network.Google.Poly.Assets.Get
-import Network.Google.Poly.Assets.List
-import Network.Google.Poly.Types
-import Network.Google.Poly.Users.Assets.List
-import Network.Google.Poly.Users.Likedassets.List
+import Gogol.Poly.Internal.Product
+import Gogol.Poly.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Poly API. This contains the host and root path used as a starting point for constructing service requests.
+polyService :: Core.ServiceConfig
+polyService =
+  Core.defaultService
+    (Core.ServiceId "poly:v1")
+    "poly.googleapis.com"

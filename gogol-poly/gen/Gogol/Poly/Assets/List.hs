@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Poly.Assets.List
+-- Module      : Gogol.Poly.Assets.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists all public, remixable assets. These are assets with an access level of PUBLIC and published under the CC-By license.
 --
 -- /See:/ <https://developers.google.com/poly/ Poly API Reference> for @poly.assets.list@.
-module Network.Google.Poly.Assets.List
+module Gogol.Poly.Assets.List
   ( -- * Resource
     PolyAssetsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Poly.Assets.List
   )
 where
 
-import Network.Google.Poly.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Poly.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @poly.assets.list@ method which the
 -- 'PolyAssetsList' request conforms to.

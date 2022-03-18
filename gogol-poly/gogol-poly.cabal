@@ -39,21 +39,22 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Poly
-    Network.Google.Poly.Assets.Get
-    Network.Google.Poly.Assets.List
-    Network.Google.Poly.Types
-    Network.Google.Poly.Users.Assets.List
-    Network.Google.Poly.Users.Likedassets.List
+    Gogol.Poly
+    Gogol.Poly.Assets.Get
+    Gogol.Poly.Assets.List
+    Gogol.Poly.Types
+    Gogol.Poly.Users.Assets.List
+    Gogol.Poly.Users.Likedassets.List
 
   other-modules:
-    Network.Google.Poly.Internal.Product
-    Network.Google.Poly.Internal.Sum
+    Gogol.Poly.Internal.Product
+    Gogol.Poly.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
