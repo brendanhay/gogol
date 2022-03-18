@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,532 +30,532 @@
 --
 -- /See:/ <https://developers.google.com/people/ People API Reference>
 module Gogol.People
-    (
-    -- * Configuration
-      peopleService
+  ( -- * Configuration
+    peopleService,
 
     -- * OAuth Scopes
-    , contactsScope
-    , contactsOtherReadOnlyScope
-    , contactsReadOnlyScope
-    , directoryReadOnlyScope
-    , userAddressesReadScope
-    , userBirthdayReadScope
-    , userEmailsReadScope
-    , userGenderReadScope
-    , userOrganizationReadScope
-    , userPhoneNumbersReadScope
-    , userinfoEmailScope
-    , userinfoProfileScope
+    contactsScope,
+    contactsOtherReadOnlyScope,
+    contactsReadOnlyScope,
+    directoryReadOnlyScope,
+    userAddressesReadScope,
+    userBirthdayReadScope,
+    userEmailsReadScope,
+    userGenderReadScope,
+    userOrganizationReadScope,
+    userPhoneNumbersReadScope,
+    userinfoEmailScope,
+    userinfoProfileScope,
 
     -- * Resources
 
     -- ** people.contactGroups.batchGet
-    , PeopleContactGroupsBatchGetResource
-    , newPeopleContactGroupsBatchGet
-    , PeopleContactGroupsBatchGet
+    PeopleContactGroupsBatchGetResource,
+    newPeopleContactGroupsBatchGet,
+    PeopleContactGroupsBatchGet,
 
     -- ** people.contactGroups.create
-    , PeopleContactGroupsCreateResource
-    , newPeopleContactGroupsCreate
-    , PeopleContactGroupsCreate
+    PeopleContactGroupsCreateResource,
+    newPeopleContactGroupsCreate,
+    PeopleContactGroupsCreate,
 
     -- ** people.contactGroups.delete
-    , PeopleContactGroupsDeleteResource
-    , newPeopleContactGroupsDelete
-    , PeopleContactGroupsDelete
+    PeopleContactGroupsDeleteResource,
+    newPeopleContactGroupsDelete,
+    PeopleContactGroupsDelete,
 
     -- ** people.contactGroups.get
-    , PeopleContactGroupsGetResource
-    , newPeopleContactGroupsGet
-    , PeopleContactGroupsGet
+    PeopleContactGroupsGetResource,
+    newPeopleContactGroupsGet,
+    PeopleContactGroupsGet,
 
     -- ** people.contactGroups.list
-    , PeopleContactGroupsListResource
-    , newPeopleContactGroupsList
-    , PeopleContactGroupsList
+    PeopleContactGroupsListResource,
+    newPeopleContactGroupsList,
+    PeopleContactGroupsList,
 
     -- ** people.contactGroups.members.modify
-    , PeopleContactGroupsMembersModifyResource
-    , newPeopleContactGroupsMembersModify
-    , PeopleContactGroupsMembersModify
+    PeopleContactGroupsMembersModifyResource,
+    newPeopleContactGroupsMembersModify,
+    PeopleContactGroupsMembersModify,
 
     -- ** people.contactGroups.update
-    , PeopleContactGroupsUpdateResource
-    , newPeopleContactGroupsUpdate
-    , PeopleContactGroupsUpdate
+    PeopleContactGroupsUpdateResource,
+    newPeopleContactGroupsUpdate,
+    PeopleContactGroupsUpdate,
 
     -- ** people.otherContacts.copyOtherContactToMyContactsGroup
-    , PeopleOtherContactsCopyOtherContactToMyContactsGroupResource
-    , newPeopleOtherContactsCopyOtherContactToMyContactsGroup
-    , PeopleOtherContactsCopyOtherContactToMyContactsGroup
+    PeopleOtherContactsCopyOtherContactToMyContactsGroupResource,
+    newPeopleOtherContactsCopyOtherContactToMyContactsGroup,
+    PeopleOtherContactsCopyOtherContactToMyContactsGroup,
 
     -- ** people.otherContacts.list
-    , PeopleOtherContactsListResource
-    , newPeopleOtherContactsList
-    , PeopleOtherContactsList
+    PeopleOtherContactsListResource,
+    newPeopleOtherContactsList,
+    PeopleOtherContactsList,
 
     -- ** people.otherContacts.search
-    , PeopleOtherContactsSearchResource
-    , newPeopleOtherContactsSearch
-    , PeopleOtherContactsSearch
+    PeopleOtherContactsSearchResource,
+    newPeopleOtherContactsSearch,
+    PeopleOtherContactsSearch,
 
     -- ** people.people.batchCreateContacts
-    , PeoplePeopleBatchCreateContactsResource
-    , newPeoplePeopleBatchCreateContacts
-    , PeoplePeopleBatchCreateContacts
+    PeoplePeopleBatchCreateContactsResource,
+    newPeoplePeopleBatchCreateContacts,
+    PeoplePeopleBatchCreateContacts,
 
     -- ** people.people.batchDeleteContacts
-    , PeoplePeopleBatchDeleteContactsResource
-    , newPeoplePeopleBatchDeleteContacts
-    , PeoplePeopleBatchDeleteContacts
+    PeoplePeopleBatchDeleteContactsResource,
+    newPeoplePeopleBatchDeleteContacts,
+    PeoplePeopleBatchDeleteContacts,
 
     -- ** people.people.batchUpdateContacts
-    , PeoplePeopleBatchUpdateContactsResource
-    , newPeoplePeopleBatchUpdateContacts
-    , PeoplePeopleBatchUpdateContacts
+    PeoplePeopleBatchUpdateContactsResource,
+    newPeoplePeopleBatchUpdateContacts,
+    PeoplePeopleBatchUpdateContacts,
 
     -- ** people.people.connections.list
-    , PeoplePeopleConnectionsListResource
-    , newPeoplePeopleConnectionsList
-    , PeoplePeopleConnectionsList
+    PeoplePeopleConnectionsListResource,
+    newPeoplePeopleConnectionsList,
+    PeoplePeopleConnectionsList,
 
     -- ** people.people.createContact
-    , PeoplePeopleCreateContactResource
-    , newPeoplePeopleCreateContact
-    , PeoplePeopleCreateContact
+    PeoplePeopleCreateContactResource,
+    newPeoplePeopleCreateContact,
+    PeoplePeopleCreateContact,
 
     -- ** people.people.deleteContact
-    , PeoplePeopleDeleteContactResource
-    , newPeoplePeopleDeleteContact
-    , PeoplePeopleDeleteContact
+    PeoplePeopleDeleteContactResource,
+    newPeoplePeopleDeleteContact,
+    PeoplePeopleDeleteContact,
 
     -- ** people.people.deleteContactPhoto
-    , PeoplePeopleDeleteContactPhotoResource
-    , newPeoplePeopleDeleteContactPhoto
-    , PeoplePeopleDeleteContactPhoto
+    PeoplePeopleDeleteContactPhotoResource,
+    newPeoplePeopleDeleteContactPhoto,
+    PeoplePeopleDeleteContactPhoto,
 
     -- ** people.people.get
-    , PeoplePeopleGetResource
-    , newPeoplePeopleGet
-    , PeoplePeopleGet
+    PeoplePeopleGetResource,
+    newPeoplePeopleGet,
+    PeoplePeopleGet,
 
     -- ** people.people.getBatchGet
-    , PeoplePeopleGetBatchGetResource
-    , newPeoplePeopleGetBatchGet
-    , PeoplePeopleGetBatchGet
+    PeoplePeopleGetBatchGetResource,
+    newPeoplePeopleGetBatchGet,
+    PeoplePeopleGetBatchGet,
 
     -- ** people.people.listDirectoryPeople
-    , PeoplePeopleListDirectoryPeopleResource
-    , newPeoplePeopleListDirectoryPeople
-    , PeoplePeopleListDirectoryPeople
+    PeoplePeopleListDirectoryPeopleResource,
+    newPeoplePeopleListDirectoryPeople,
+    PeoplePeopleListDirectoryPeople,
 
     -- ** people.people.searchContacts
-    , PeoplePeopleSearchContactsResource
-    , newPeoplePeopleSearchContacts
-    , PeoplePeopleSearchContacts
+    PeoplePeopleSearchContactsResource,
+    newPeoplePeopleSearchContacts,
+    PeoplePeopleSearchContacts,
 
     -- ** people.people.searchDirectoryPeople
-    , PeoplePeopleSearchDirectoryPeopleResource
-    , newPeoplePeopleSearchDirectoryPeople
-    , PeoplePeopleSearchDirectoryPeople
+    PeoplePeopleSearchDirectoryPeopleResource,
+    newPeoplePeopleSearchDirectoryPeople,
+    PeoplePeopleSearchDirectoryPeople,
 
     -- ** people.people.updateContact
-    , PeoplePeopleUpdateContactResource
-    , newPeoplePeopleUpdateContact
-    , PeoplePeopleUpdateContact
+    PeoplePeopleUpdateContactResource,
+    newPeoplePeopleUpdateContact,
+    PeoplePeopleUpdateContact,
 
     -- ** people.people.updateContactPhoto
-    , PeoplePeopleUpdateContactPhotoResource
-    , newPeoplePeopleUpdateContactPhoto
-    , PeoplePeopleUpdateContactPhoto
+    PeoplePeopleUpdateContactPhotoResource,
+    newPeoplePeopleUpdateContactPhoto,
+    PeoplePeopleUpdateContactPhoto,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Address
-    , Address (..)
-    , newAddress
+    Address (..),
+    newAddress,
 
     -- ** AgeRangeType
-    , AgeRangeType (..)
-    , newAgeRangeType
+    AgeRangeType (..),
+    newAgeRangeType,
 
     -- ** AgeRangeType_AgeRange
-    , AgeRangeType_AgeRange (..)
+    AgeRangeType_AgeRange (..),
 
     -- ** BatchCreateContactsRequest
-    , BatchCreateContactsRequest (..)
-    , newBatchCreateContactsRequest
+    BatchCreateContactsRequest (..),
+    newBatchCreateContactsRequest,
 
     -- ** BatchCreateContactsRequest_SourcesItem
-    , BatchCreateContactsRequest_SourcesItem (..)
+    BatchCreateContactsRequest_SourcesItem (..),
 
     -- ** BatchCreateContactsResponse
-    , BatchCreateContactsResponse (..)
-    , newBatchCreateContactsResponse
+    BatchCreateContactsResponse (..),
+    newBatchCreateContactsResponse,
 
     -- ** BatchDeleteContactsRequest
-    , BatchDeleteContactsRequest (..)
-    , newBatchDeleteContactsRequest
+    BatchDeleteContactsRequest (..),
+    newBatchDeleteContactsRequest,
 
     -- ** BatchGetContactGroupsResponse
-    , BatchGetContactGroupsResponse (..)
-    , newBatchGetContactGroupsResponse
+    BatchGetContactGroupsResponse (..),
+    newBatchGetContactGroupsResponse,
 
     -- ** BatchUpdateContactsRequest
-    , BatchUpdateContactsRequest (..)
-    , newBatchUpdateContactsRequest
+    BatchUpdateContactsRequest (..),
+    newBatchUpdateContactsRequest,
 
     -- ** BatchUpdateContactsRequest_Contacts
-    , BatchUpdateContactsRequest_Contacts (..)
-    , newBatchUpdateContactsRequest_Contacts
+    BatchUpdateContactsRequest_Contacts (..),
+    newBatchUpdateContactsRequest_Contacts,
 
     -- ** BatchUpdateContactsRequest_SourcesItem
-    , BatchUpdateContactsRequest_SourcesItem (..)
+    BatchUpdateContactsRequest_SourcesItem (..),
 
     -- ** BatchUpdateContactsResponse
-    , BatchUpdateContactsResponse (..)
-    , newBatchUpdateContactsResponse
+    BatchUpdateContactsResponse (..),
+    newBatchUpdateContactsResponse,
 
     -- ** BatchUpdateContactsResponse_UpdateResult
-    , BatchUpdateContactsResponse_UpdateResult (..)
-    , newBatchUpdateContactsResponse_UpdateResult
+    BatchUpdateContactsResponse_UpdateResult (..),
+    newBatchUpdateContactsResponse_UpdateResult,
 
     -- ** Biography
-    , Biography (..)
-    , newBiography
+    Biography (..),
+    newBiography,
 
     -- ** Biography_ContentType
-    , Biography_ContentType (..)
+    Biography_ContentType (..),
 
     -- ** Birthday
-    , Birthday (..)
-    , newBirthday
+    Birthday (..),
+    newBirthday,
 
     -- ** BraggingRights
-    , BraggingRights (..)
-    , newBraggingRights
+    BraggingRights (..),
+    newBraggingRights,
 
     -- ** CalendarUrl
-    , CalendarUrl (..)
-    , newCalendarUrl
+    CalendarUrl (..),
+    newCalendarUrl,
 
     -- ** ClientData
-    , ClientData (..)
-    , newClientData
+    ClientData (..),
+    newClientData,
 
     -- ** ContactGroup
-    , ContactGroup (..)
-    , newContactGroup
+    ContactGroup (..),
+    newContactGroup,
 
     -- ** ContactGroup_GroupType
-    , ContactGroup_GroupType (..)
+    ContactGroup_GroupType (..),
 
     -- ** ContactGroupMembership
-    , ContactGroupMembership (..)
-    , newContactGroupMembership
+    ContactGroupMembership (..),
+    newContactGroupMembership,
 
     -- ** ContactGroupMetadata
-    , ContactGroupMetadata (..)
-    , newContactGroupMetadata
+    ContactGroupMetadata (..),
+    newContactGroupMetadata,
 
     -- ** ContactGroupResponse
-    , ContactGroupResponse (..)
-    , newContactGroupResponse
+    ContactGroupResponse (..),
+    newContactGroupResponse,
 
     -- ** ContactToCreate
-    , ContactToCreate (..)
-    , newContactToCreate
+    ContactToCreate (..),
+    newContactToCreate,
 
     -- ** CopyOtherContactToMyContactsGroupRequest
-    , CopyOtherContactToMyContactsGroupRequest (..)
-    , newCopyOtherContactToMyContactsGroupRequest
+    CopyOtherContactToMyContactsGroupRequest (..),
+    newCopyOtherContactToMyContactsGroupRequest,
 
     -- ** CopyOtherContactToMyContactsGroupRequest_SourcesItem
-    , CopyOtherContactToMyContactsGroupRequest_SourcesItem (..)
+    CopyOtherContactToMyContactsGroupRequest_SourcesItem (..),
 
     -- ** CoverPhoto
-    , CoverPhoto (..)
-    , newCoverPhoto
+    CoverPhoto (..),
+    newCoverPhoto,
 
     -- ** CreateContactGroupRequest
-    , CreateContactGroupRequest (..)
-    , newCreateContactGroupRequest
+    CreateContactGroupRequest (..),
+    newCreateContactGroupRequest,
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** DeleteContactPhotoResponse
-    , DeleteContactPhotoResponse (..)
-    , newDeleteContactPhotoResponse
+    DeleteContactPhotoResponse (..),
+    newDeleteContactPhotoResponse,
 
     -- ** DomainMembership
-    , DomainMembership (..)
-    , newDomainMembership
+    DomainMembership (..),
+    newDomainMembership,
 
     -- ** EmailAddress
-    , EmailAddress (..)
-    , newEmailAddress
+    EmailAddress (..),
+    newEmailAddress,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Event
-    , Event (..)
-    , newEvent
+    Event (..),
+    newEvent,
 
     -- ** ExternalId
-    , ExternalId (..)
-    , newExternalId
+    ExternalId (..),
+    newExternalId,
 
     -- ** FieldMetadata
-    , FieldMetadata (..)
-    , newFieldMetadata
+    FieldMetadata (..),
+    newFieldMetadata,
 
     -- ** FileAs
-    , FileAs (..)
-    , newFileAs
+    FileAs (..),
+    newFileAs,
 
     -- ** Gender
-    , Gender (..)
-    , newGender
+    Gender (..),
+    newGender,
 
     -- ** GetPeopleResponse
-    , GetPeopleResponse (..)
-    , newGetPeopleResponse
+    GetPeopleResponse (..),
+    newGetPeopleResponse,
 
     -- ** GroupClientData
-    , GroupClientData (..)
-    , newGroupClientData
+    GroupClientData (..),
+    newGroupClientData,
 
     -- ** ImClient
-    , ImClient (..)
-    , newImClient
+    ImClient (..),
+    newImClient,
 
     -- ** Interest
-    , Interest (..)
-    , newInterest
+    Interest (..),
+    newInterest,
 
     -- ** ListConnectionsResponse
-    , ListConnectionsResponse (..)
-    , newListConnectionsResponse
+    ListConnectionsResponse (..),
+    newListConnectionsResponse,
 
     -- ** ListContactGroupsResponse
-    , ListContactGroupsResponse (..)
-    , newListContactGroupsResponse
+    ListContactGroupsResponse (..),
+    newListContactGroupsResponse,
 
     -- ** ListDirectoryPeopleResponse
-    , ListDirectoryPeopleResponse (..)
-    , newListDirectoryPeopleResponse
+    ListDirectoryPeopleResponse (..),
+    newListDirectoryPeopleResponse,
 
     -- ** ListOtherContactsResponse
-    , ListOtherContactsResponse (..)
-    , newListOtherContactsResponse
+    ListOtherContactsResponse (..),
+    newListOtherContactsResponse,
 
     -- ** Locale
-    , Locale (..)
-    , newLocale
+    Locale (..),
+    newLocale,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Membership
-    , Membership (..)
-    , newMembership
+    Membership (..),
+    newMembership,
 
     -- ** MiscKeyword
-    , MiscKeyword (..)
-    , newMiscKeyword
+    MiscKeyword (..),
+    newMiscKeyword,
 
     -- ** MiscKeyword_Type
-    , MiscKeyword_Type (..)
+    MiscKeyword_Type (..),
 
     -- ** ModifyContactGroupMembersRequest
-    , ModifyContactGroupMembersRequest (..)
-    , newModifyContactGroupMembersRequest
+    ModifyContactGroupMembersRequest (..),
+    newModifyContactGroupMembersRequest,
 
     -- ** ModifyContactGroupMembersResponse
-    , ModifyContactGroupMembersResponse (..)
-    , newModifyContactGroupMembersResponse
+    ModifyContactGroupMembersResponse (..),
+    newModifyContactGroupMembersResponse,
 
     -- ** Name
-    , Name (..)
-    , newName
+    Name (..),
+    newName,
 
     -- ** Nickname
-    , Nickname (..)
-    , newNickname
+    Nickname (..),
+    newNickname,
 
     -- ** Nickname_Type
-    , Nickname_Type (..)
+    Nickname_Type (..),
 
     -- ** Occupation
-    , Occupation (..)
-    , newOccupation
+    Occupation (..),
+    newOccupation,
 
     -- ** Organization
-    , Organization (..)
-    , newOrganization
+    Organization (..),
+    newOrganization,
 
     -- ** Person
-    , Person (..)
-    , newPerson
+    Person (..),
+    newPerson,
 
     -- ** Person_AgeRange
-    , Person_AgeRange (..)
+    Person_AgeRange (..),
 
     -- ** PersonMetadata
-    , PersonMetadata (..)
-    , newPersonMetadata
+    PersonMetadata (..),
+    newPersonMetadata,
 
     -- ** PersonMetadata_ObjectType
-    , PersonMetadata_ObjectType (..)
+    PersonMetadata_ObjectType (..),
 
     -- ** PersonResponse
-    , PersonResponse (..)
-    , newPersonResponse
+    PersonResponse (..),
+    newPersonResponse,
 
     -- ** PhoneNumber
-    , PhoneNumber (..)
-    , newPhoneNumber
+    PhoneNumber (..),
+    newPhoneNumber,
 
     -- ** Photo
-    , Photo (..)
-    , newPhoto
+    Photo (..),
+    newPhoto,
 
     -- ** ProfileMetadata
-    , ProfileMetadata (..)
-    , newProfileMetadata
+    ProfileMetadata (..),
+    newProfileMetadata,
 
     -- ** ProfileMetadata_ObjectType
-    , ProfileMetadata_ObjectType (..)
+    ProfileMetadata_ObjectType (..),
 
     -- ** ProfileMetadata_UserTypesItem
-    , ProfileMetadata_UserTypesItem (..)
+    ProfileMetadata_UserTypesItem (..),
 
     -- ** Relation
-    , Relation (..)
-    , newRelation
+    Relation (..),
+    newRelation,
 
     -- ** RelationshipInterest
-    , RelationshipInterest (..)
-    , newRelationshipInterest
+    RelationshipInterest (..),
+    newRelationshipInterest,
 
     -- ** RelationshipStatus
-    , RelationshipStatus (..)
-    , newRelationshipStatus
+    RelationshipStatus (..),
+    newRelationshipStatus,
 
     -- ** Residence
-    , Residence (..)
-    , newResidence
+    Residence (..),
+    newResidence,
 
     -- ** SearchDirectoryPeopleResponse
-    , SearchDirectoryPeopleResponse (..)
-    , newSearchDirectoryPeopleResponse
+    SearchDirectoryPeopleResponse (..),
+    newSearchDirectoryPeopleResponse,
 
     -- ** SearchResponse
-    , SearchResponse (..)
-    , newSearchResponse
+    SearchResponse (..),
+    newSearchResponse,
 
     -- ** SearchResult
-    , SearchResult (..)
-    , newSearchResult
+    SearchResult (..),
+    newSearchResult,
 
     -- ** SipAddress
-    , SipAddress (..)
-    , newSipAddress
+    SipAddress (..),
+    newSipAddress,
 
     -- ** Skill
-    , Skill (..)
-    , newSkill
+    Skill (..),
+    newSkill,
 
     -- ** Source
-    , Source (..)
-    , newSource
+    Source (..),
+    newSource,
 
     -- ** Source_Type
-    , Source_Type (..)
+    Source_Type (..),
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Tagline
-    , Tagline (..)
-    , newTagline
+    Tagline (..),
+    newTagline,
 
     -- ** UpdateContactGroupRequest
-    , UpdateContactGroupRequest (..)
-    , newUpdateContactGroupRequest
+    UpdateContactGroupRequest (..),
+    newUpdateContactGroupRequest,
 
     -- ** UpdateContactPhotoRequest
-    , UpdateContactPhotoRequest (..)
-    , newUpdateContactPhotoRequest
+    UpdateContactPhotoRequest (..),
+    newUpdateContactPhotoRequest,
 
     -- ** UpdateContactPhotoRequest_SourcesItem
-    , UpdateContactPhotoRequest_SourcesItem (..)
+    UpdateContactPhotoRequest_SourcesItem (..),
 
     -- ** UpdateContactPhotoResponse
-    , UpdateContactPhotoResponse (..)
-    , newUpdateContactPhotoResponse
+    UpdateContactPhotoResponse (..),
+    newUpdateContactPhotoResponse,
 
     -- ** Url
-    , Url (..)
-    , newUrl
+    Url (..),
+    newUrl,
 
     -- ** UserDefined
-    , UserDefined (..)
-    , newUserDefined
+    UserDefined (..),
+    newUserDefined,
 
     -- ** OtherContactsListSources
-    , OtherContactsListSources (..)
+    OtherContactsListSources (..),
 
     -- ** PeopleConnectionsListSortOrder
-    , PeopleConnectionsListSortOrder (..)
+    PeopleConnectionsListSortOrder (..),
 
     -- ** PeopleConnectionsListSources
-    , PeopleConnectionsListSources (..)
+    PeopleConnectionsListSources (..),
 
     -- ** PeopleCreateContactSources
-    , PeopleCreateContactSources (..)
+    PeopleCreateContactSources (..),
 
     -- ** PeopleDeleteContactPhotoSources
-    , PeopleDeleteContactPhotoSources (..)
+    PeopleDeleteContactPhotoSources (..),
 
     -- ** PeopleGetSources
-    , PeopleGetSources (..)
+    PeopleGetSources (..),
 
     -- ** PeopleGetBatchGetSources
-    , PeopleGetBatchGetSources (..)
+    PeopleGetBatchGetSources (..),
 
     -- ** PeopleListDirectoryPeopleMergeSources
-    , PeopleListDirectoryPeopleMergeSources (..)
+    PeopleListDirectoryPeopleMergeSources (..),
 
     -- ** PeopleListDirectoryPeopleSources
-    , PeopleListDirectoryPeopleSources (..)
+    PeopleListDirectoryPeopleSources (..),
 
     -- ** PeopleSearchContactsSources
-    , PeopleSearchContactsSources (..)
+    PeopleSearchContactsSources (..),
 
     -- ** PeopleSearchDirectoryPeopleMergeSources
-    , PeopleSearchDirectoryPeopleMergeSources (..)
+    PeopleSearchDirectoryPeopleMergeSources (..),
 
     -- ** PeopleSearchDirectoryPeopleSources
-    , PeopleSearchDirectoryPeopleSources (..)
+    PeopleSearchDirectoryPeopleSources (..),
 
     -- ** PeopleUpdateContactSources
-    , PeopleUpdateContactSources (..)
-    ) where
+    PeopleUpdateContactSources (..),
+  )
+where
 
 import Gogol.People.BatchCreateContacts
 import Gogol.People.BatchDeleteContacts
