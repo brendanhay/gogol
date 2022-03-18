@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
+-- Module      : Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful if the secret was compromised. Requires that the client is owned by IAP.
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.identityAwareProxyClients.resetSecret@.
-module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
+module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
   ( -- * Resource
     IAPProjectsBrandsIdentityAwareProxyClientsResetSecretResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iap.projects.brands.identityAwareProxyClients.resetSecret@ method which the
 -- 'IAPProjectsBrandsIdentityAwareProxyClientsResetSecret' request conforms to.

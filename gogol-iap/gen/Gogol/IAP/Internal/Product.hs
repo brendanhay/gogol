@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Internal.Product
+-- Module      : Gogol.IAP.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.IAP.Internal.Product
+module Gogol.IAP.Internal.Product
   ( -- * AccessDeniedPageSettings
     AccessDeniedPageSettings (..),
     newAccessDeniedPageSettings,
@@ -136,8 +136,8 @@ module Network.Google.IAP.Internal.Product
   )
 where
 
-import Network.Google.IAP.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Custom content configuration for access denied page. IAP allows customers to define a custom URI to use as the error page when access is denied to users. If IAP prevents access to this page, the default IAP error page will be displayed instead.
 --

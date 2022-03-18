@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.SetIamPolicy
+-- Module      : Gogol.IAP.GetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy for an Identity-Aware Proxy protected resource. Replaces any existing policy. More information about managing access via IAP can be found at: https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing/access/via/the/api
+-- Gets the access control policy for an Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing/access/via/the/api
 --
--- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.setIamPolicy@.
-module Network.Google.IAP.SetIamPolicy
+-- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.getIamPolicy@.
+module Gogol.IAP.GetIamPolicy
   ( -- * Resource
-    IAPSetIamPolicyResource,
+    IAPGetIamPolicyResource,
 
     -- ** Constructing a Request
-    newIAPSetIamPolicy,
-    IAPSetIamPolicy,
+    newIAPGetIamPolicy,
+    IAPGetIamPolicy,
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @iap.setIamPolicy@ method which the
--- 'IAPSetIamPolicy' request conforms to.
-type IAPSetIamPolicyResource =
+-- | A resource alias for @iap.getIamPolicy@ method which the
+-- 'IAPGetIamPolicy' request conforms to.
+type IAPGetIamPolicyResource =
   "v1"
-    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
+    Core.:> Core.CaptureMode "resource" "getIamPolicy" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
+    Core.:> Core.ReqBody '[Core.JSON] GetIamPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
--- | Sets the access control policy for an Identity-Aware Proxy protected resource. Replaces any existing policy. More information about managing access via IAP can be found at: https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing/access/via/the/api
+-- | Gets the access control policy for an Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing/access/via/the/api
 --
--- /See:/ 'newIAPSetIamPolicy' smart constructor.
-data IAPSetIamPolicy = IAPSetIamPolicy
+-- /See:/ 'newIAPGetIamPolicy' smart constructor.
+data IAPGetIamPolicy = IAPGetIamPolicy
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -67,8 +67,8 @@ data IAPSetIamPolicy = IAPSetIamPolicy
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: SetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
+    payload :: GetIamPolicyRequest,
+    -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
     resource :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -77,15 +77,15 @@ data IAPSetIamPolicy = IAPSetIamPolicy
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'IAPSetIamPolicy' with the minimum fields required to make a request.
-newIAPSetIamPolicy ::
+-- | Creates a value of 'IAPGetIamPolicy' with the minimum fields required to make a request.
+newIAPGetIamPolicy ::
   -- |  Multipart request metadata. See 'payload'.
-  SetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+  GetIamPolicyRequest ->
+  -- |  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
   Core.Text ->
-  IAPSetIamPolicy
-newIAPSetIamPolicy payload resource =
-  IAPSetIamPolicy
+  IAPGetIamPolicy
+newIAPGetIamPolicy payload resource =
+  IAPGetIamPolicy
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -95,12 +95,12 @@ newIAPSetIamPolicy payload resource =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest IAPSetIamPolicy where
-  type Rs IAPSetIamPolicy = Policy
+instance Core.GoogleRequest IAPGetIamPolicy where
+  type Rs IAPGetIamPolicy = Policy
   type
-    Scopes IAPSetIamPolicy =
+    Scopes IAPGetIamPolicy =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient IAPSetIamPolicy {..} =
+  requestClient IAPGetIamPolicy {..} =
     go
       resource
       xgafv
@@ -114,5 +114,5 @@ instance Core.GoogleRequest IAPSetIamPolicy where
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy IAPSetIamPolicyResource)
+          (Core.Proxy :: Core.Proxy IAPGetIamPolicyResource)
           Core.mempty

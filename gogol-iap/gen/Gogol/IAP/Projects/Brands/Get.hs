@@ -19,55 +19,54 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Projects.Brands.List
+-- Module      : Gogol.IAP.Projects.Brands.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the existing brands for the project.
+-- Retrieves the OAuth brand of the project.
 --
--- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.list@.
-module Network.Google.IAP.Projects.Brands.List
+-- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.get@.
+module Gogol.IAP.Projects.Brands.Get
   ( -- * Resource
-    IAPProjectsBrandsListResource,
+    IAPProjectsBrandsGetResource,
 
     -- ** Constructing a Request
-    newIAPProjectsBrandsList,
-    IAPProjectsBrandsList,
+    newIAPProjectsBrandsGet,
+    IAPProjectsBrandsGet,
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @iap.projects.brands.list@ method which the
--- 'IAPProjectsBrandsList' request conforms to.
-type IAPProjectsBrandsListResource =
+-- | A resource alias for @iap.projects.brands.get@ method which the
+-- 'IAPProjectsBrandsGet' request conforms to.
+type IAPProjectsBrandsGetResource =
   "v1"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "brands"
+    Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListBrandsResponse
+    Core.:> Core.Get '[Core.JSON] Brand
 
--- | Lists the existing brands for the project.
+-- | Retrieves the OAuth brand of the project.
 --
--- /See:/ 'newIAPProjectsBrandsList' smart constructor.
-data IAPProjectsBrandsList = IAPProjectsBrandsList
+-- /See:/ 'newIAPProjectsBrandsGet' smart constructor.
+data IAPProjectsBrandsGet = IAPProjectsBrandsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. GCP Project number\/id. In the following format: projects\/{project_number\/id}.
-    parent :: Core.Text,
+    -- | Required. Name of the brand to be fetched. In the following format: projects\/{project_number\/id}\/brands\/{brand}.
+    name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,29 +74,29 @@ data IAPProjectsBrandsList = IAPProjectsBrandsList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'IAPProjectsBrandsList' with the minimum fields required to make a request.
-newIAPProjectsBrandsList ::
-  -- |  Required. GCP Project number\/id. In the following format: projects\/{project_number\/id}. See 'parent'.
+-- | Creates a value of 'IAPProjectsBrandsGet' with the minimum fields required to make a request.
+newIAPProjectsBrandsGet ::
+  -- |  Required. Name of the brand to be fetched. In the following format: projects\/{project_number\/id}\/brands\/{brand}. See 'name'.
   Core.Text ->
-  IAPProjectsBrandsList
-newIAPProjectsBrandsList parent =
-  IAPProjectsBrandsList
+  IAPProjectsBrandsGet
+newIAPProjectsBrandsGet name =
+  IAPProjectsBrandsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      parent = parent,
+      name = name,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest IAPProjectsBrandsList where
-  type Rs IAPProjectsBrandsList = ListBrandsResponse
+instance Core.GoogleRequest IAPProjectsBrandsGet where
+  type Rs IAPProjectsBrandsGet = Brand
   type
-    Scopes IAPProjectsBrandsList =
+    Scopes IAPProjectsBrandsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient IAPProjectsBrandsList {..} =
+  requestClient IAPProjectsBrandsGet {..} =
     go
-      parent
+      name
       xgafv
       accessToken
       callback
@@ -109,6 +108,6 @@ instance Core.GoogleRequest IAPProjectsBrandsList where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy IAPProjectsBrandsListResource
+              Core.Proxy IAPProjectsBrandsGetResource
           )
           Core.mempty

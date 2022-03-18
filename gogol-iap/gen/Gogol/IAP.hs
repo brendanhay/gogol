@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP
+-- Module      : Gogol.IAP
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Controls access to cloud applications running on Google Cloud Platform.
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference>
-module Network.Google.IAP
+module Gogol.IAP
   ( -- * Configuration
     iAPService,
 
@@ -224,17 +224,17 @@ module Network.Google.IAP
   )
 where
 
-import Network.Google.IAP.GetIamPolicy
-import Network.Google.IAP.GetIapSettings
-import Network.Google.IAP.Projects.Brands.Create
-import Network.Google.IAP.Projects.Brands.Get
-import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Create
-import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
-import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Get
-import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.List
-import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
-import Network.Google.IAP.Projects.Brands.List
-import Network.Google.IAP.SetIamPolicy
-import Network.Google.IAP.TestIamPermissions
-import Network.Google.IAP.Types
-import Network.Google.IAP.UpdateIapSettings
+import Gogol.IAP.GetIamPolicy
+import Gogol.IAP.GetIapSettings
+import Gogol.IAP.Projects.Brands.Create
+import Gogol.IAP.Projects.Brands.Get
+import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Create
+import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
+import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Get
+import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
+import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
+import Gogol.IAP.Projects.Brands.List
+import Gogol.IAP.SetIamPolicy
+import Gogol.IAP.TestIamPermissions
+import Gogol.IAP.Types
+import Gogol.IAP.UpdateIapSettings
