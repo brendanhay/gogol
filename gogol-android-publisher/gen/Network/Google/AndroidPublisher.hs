@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AndroidPublisher
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,826 +30,834 @@
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference>
 module Network.Google.AndroidPublisher
-    (
-    -- * Service Configuration
-      androidPublisherService
+  ( -- * Configuration
+    androidPublisherService,
 
     -- * OAuth Scopes
-    , androidPublisherScope
-
-    -- * API Declaration
-    , AndroidPublisherAPI
+    androidPublisherScope,
 
     -- * Resources
 
     -- ** androidpublisher.edits.apks.addexternallyhosted
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
+    AndroidPublisherEditsApksAddexternallyhostedResource,
+    newAndroidPublisherEditsApksAddexternallyhosted,
+    AndroidPublisherEditsApksAddexternallyhosted,
 
     -- ** androidpublisher.edits.apks.list
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKs.List
+    AndroidPublisherEditsApksListResource,
+    newAndroidPublisherEditsApksList,
+    AndroidPublisherEditsApksList,
 
     -- ** androidpublisher.edits.apks.upload
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
+    AndroidPublisherEditsApksUploadResource,
+    newAndroidPublisherEditsApksUpload,
+    AndroidPublisherEditsApksUpload,
 
     -- ** androidpublisher.edits.bundles.list
-    , module Network.Google.Resource.AndroidPublisher.Edits.Bundles.List
+    AndroidPublisherEditsBundlesListResource,
+    newAndroidPublisherEditsBundlesList,
+    AndroidPublisherEditsBundlesList,
 
     -- ** androidpublisher.edits.bundles.upload
-    , module Network.Google.Resource.AndroidPublisher.Edits.Bundles.Upload
+    AndroidPublisherEditsBundlesUploadResource,
+    newAndroidPublisherEditsBundlesUpload,
+    AndroidPublisherEditsBundlesUpload,
 
     -- ** androidpublisher.edits.commit
-    , module Network.Google.Resource.AndroidPublisher.Edits.Commit
+    AndroidPublisherEditsCommitResource,
+    newAndroidPublisherEditsCommit,
+    AndroidPublisherEditsCommit,
+
+    -- ** androidpublisher.edits.countryavailability.get
+    AndroidPublisherEditsCountryavailabilityGetResource,
+    newAndroidPublisherEditsCountryavailabilityGet,
+    AndroidPublisherEditsCountryavailabilityGet,
 
     -- ** androidpublisher.edits.delete
-    , module Network.Google.Resource.AndroidPublisher.Edits.Delete
+    AndroidPublisherEditsDeleteResource,
+    newAndroidPublisherEditsDelete,
+    AndroidPublisherEditsDelete,
 
     -- ** androidpublisher.edits.deobfuscationfiles.upload
-    , module Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
+    AndroidPublisherEditsDeobfuscationfilesUploadResource,
+    newAndroidPublisherEditsDeobfuscationfilesUpload,
+    AndroidPublisherEditsDeobfuscationfilesUpload,
 
     -- ** androidpublisher.edits.details.get
-    , module Network.Google.Resource.AndroidPublisher.Edits.Details.Get
+    AndroidPublisherEditsDetailsGetResource,
+    newAndroidPublisherEditsDetailsGet,
+    AndroidPublisherEditsDetailsGet,
 
     -- ** androidpublisher.edits.details.patch
-    , module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
+    AndroidPublisherEditsDetailsPatchResource,
+    newAndroidPublisherEditsDetailsPatch,
+    AndroidPublisherEditsDetailsPatch,
 
     -- ** androidpublisher.edits.details.update
-    , module Network.Google.Resource.AndroidPublisher.Edits.Details.Update
+    AndroidPublisherEditsDetailsUpdateResource,
+    newAndroidPublisherEditsDetailsUpdate,
+    AndroidPublisherEditsDetailsUpdate,
 
     -- ** androidpublisher.edits.expansionfiles.get
-    , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
+    AndroidPublisherEditsExpansionfilesGetResource,
+    newAndroidPublisherEditsExpansionfilesGet,
+    AndroidPublisherEditsExpansionfilesGet,
 
     -- ** androidpublisher.edits.expansionfiles.patch
-    , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
+    AndroidPublisherEditsExpansionfilesPatchResource,
+    newAndroidPublisherEditsExpansionfilesPatch,
+    AndroidPublisherEditsExpansionfilesPatch,
 
     -- ** androidpublisher.edits.expansionfiles.update
-    , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
+    AndroidPublisherEditsExpansionfilesUpdateResource,
+    newAndroidPublisherEditsExpansionfilesUpdate,
+    AndroidPublisherEditsExpansionfilesUpdate,
 
     -- ** androidpublisher.edits.expansionfiles.upload
-    , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
+    AndroidPublisherEditsExpansionfilesUploadResource,
+    newAndroidPublisherEditsExpansionfilesUpload,
+    AndroidPublisherEditsExpansionfilesUpload,
 
     -- ** androidpublisher.edits.get
-    , module Network.Google.Resource.AndroidPublisher.Edits.Get
+    AndroidPublisherEditsGetResource,
+    newAndroidPublisherEditsGet,
+    AndroidPublisherEditsGet,
 
     -- ** androidpublisher.edits.images.delete
-    , module Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
+    AndroidPublisherEditsImagesDeleteResource,
+    newAndroidPublisherEditsImagesDelete,
+    AndroidPublisherEditsImagesDelete,
 
     -- ** androidpublisher.edits.images.deleteall
-    , module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
+    AndroidPublisherEditsImagesDeleteallResource,
+    newAndroidPublisherEditsImagesDeleteall,
+    AndroidPublisherEditsImagesDeleteall,
 
     -- ** androidpublisher.edits.images.list
-    , module Network.Google.Resource.AndroidPublisher.Edits.Images.List
+    AndroidPublisherEditsImagesListResource,
+    newAndroidPublisherEditsImagesList,
+    AndroidPublisherEditsImagesList,
 
     -- ** androidpublisher.edits.images.upload
-    , module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
+    AndroidPublisherEditsImagesUploadResource,
+    newAndroidPublisherEditsImagesUpload,
+    AndroidPublisherEditsImagesUpload,
 
     -- ** androidpublisher.edits.insert
-    , module Network.Google.Resource.AndroidPublisher.Edits.Insert
+    AndroidPublisherEditsInsertResource,
+    newAndroidPublisherEditsInsert,
+    AndroidPublisherEditsInsert,
 
     -- ** androidpublisher.edits.listings.delete
-    , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
+    AndroidPublisherEditsListingsDeleteResource,
+    newAndroidPublisherEditsListingsDelete,
+    AndroidPublisherEditsListingsDelete,
 
     -- ** androidpublisher.edits.listings.deleteall
-    , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
+    AndroidPublisherEditsListingsDeleteallResource,
+    newAndroidPublisherEditsListingsDeleteall,
+    AndroidPublisherEditsListingsDeleteall,
 
     -- ** androidpublisher.edits.listings.get
-    , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
+    AndroidPublisherEditsListingsGetResource,
+    newAndroidPublisherEditsListingsGet,
+    AndroidPublisherEditsListingsGet,
 
     -- ** androidpublisher.edits.listings.list
-    , module Network.Google.Resource.AndroidPublisher.Edits.Listings.List
+    AndroidPublisherEditsListingsListResource,
+    newAndroidPublisherEditsListingsList,
+    AndroidPublisherEditsListingsList,
 
     -- ** androidpublisher.edits.listings.patch
-    , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
+    AndroidPublisherEditsListingsPatchResource,
+    newAndroidPublisherEditsListingsPatch,
+    AndroidPublisherEditsListingsPatch,
 
     -- ** androidpublisher.edits.listings.update
-    , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
+    AndroidPublisherEditsListingsUpdateResource,
+    newAndroidPublisherEditsListingsUpdate,
+    AndroidPublisherEditsListingsUpdate,
 
     -- ** androidpublisher.edits.testers.get
-    , module Network.Google.Resource.AndroidPublisher.Edits.Testers.Get
+    AndroidPublisherEditsTestersGetResource,
+    newAndroidPublisherEditsTestersGet,
+    AndroidPublisherEditsTestersGet,
 
     -- ** androidpublisher.edits.testers.patch
-    , module Network.Google.Resource.AndroidPublisher.Edits.Testers.Patch
+    AndroidPublisherEditsTestersPatchResource,
+    newAndroidPublisherEditsTestersPatch,
+    AndroidPublisherEditsTestersPatch,
 
     -- ** androidpublisher.edits.testers.update
-    , module Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
+    AndroidPublisherEditsTestersUpdateResource,
+    newAndroidPublisherEditsTestersUpdate,
+    AndroidPublisherEditsTestersUpdate,
 
     -- ** androidpublisher.edits.tracks.get
-    , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
+    AndroidPublisherEditsTracksGetResource,
+    newAndroidPublisherEditsTracksGet,
+    AndroidPublisherEditsTracksGet,
 
     -- ** androidpublisher.edits.tracks.list
-    , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
+    AndroidPublisherEditsTracksListResource,
+    newAndroidPublisherEditsTracksList,
+    AndroidPublisherEditsTracksList,
 
     -- ** androidpublisher.edits.tracks.patch
-    , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
+    AndroidPublisherEditsTracksPatchResource,
+    newAndroidPublisherEditsTracksPatch,
+    AndroidPublisherEditsTracksPatch,
 
     -- ** androidpublisher.edits.tracks.update
-    , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
+    AndroidPublisherEditsTracksUpdateResource,
+    newAndroidPublisherEditsTracksUpdate,
+    AndroidPublisherEditsTracksUpdate,
 
     -- ** androidpublisher.edits.validate
-    , module Network.Google.Resource.AndroidPublisher.Edits.Validate
+    AndroidPublisherEditsValidateResource,
+    newAndroidPublisherEditsValidate,
+    AndroidPublisherEditsValidate,
+
+    -- ** androidpublisher.generatedapks.download
+    AndroidPublisherGeneratedapksDownloadResource,
+    newAndroidPublisherGeneratedapksDownload,
+    AndroidPublisherGeneratedapksDownload,
+
+    -- ** androidpublisher.generatedapks.list
+    AndroidPublisherGeneratedapksListResource,
+    newAndroidPublisherGeneratedapksList,
+    AndroidPublisherGeneratedapksList,
+
+    -- ** androidpublisher.grants.create
+    AndroidPublisherGrantsCreateResource,
+    newAndroidPublisherGrantsCreate,
+    AndroidPublisherGrantsCreate,
+
+    -- ** androidpublisher.grants.delete
+    AndroidPublisherGrantsDeleteResource,
+    newAndroidPublisherGrantsDelete,
+    AndroidPublisherGrantsDelete,
+
+    -- ** androidpublisher.grants.patch
+    AndroidPublisherGrantsPatchResource,
+    newAndroidPublisherGrantsPatch,
+    AndroidPublisherGrantsPatch,
 
     -- ** androidpublisher.inappproducts.delete
-    , module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
+    AndroidPublisherInappproductsDeleteResource,
+    newAndroidPublisherInappproductsDelete,
+    AndroidPublisherInappproductsDelete,
 
     -- ** androidpublisher.inappproducts.get
-    , module Network.Google.Resource.AndroidPublisher.InAppProducts.Get
+    AndroidPublisherInappproductsGetResource,
+    newAndroidPublisherInappproductsGet,
+    AndroidPublisherInappproductsGet,
 
     -- ** androidpublisher.inappproducts.insert
-    , module Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
+    AndroidPublisherInappproductsInsertResource,
+    newAndroidPublisherInappproductsInsert,
+    AndroidPublisherInappproductsInsert,
 
     -- ** androidpublisher.inappproducts.list
-    , module Network.Google.Resource.AndroidPublisher.InAppProducts.List
+    AndroidPublisherInappproductsListResource,
+    newAndroidPublisherInappproductsList,
+    AndroidPublisherInappproductsList,
 
     -- ** androidpublisher.inappproducts.patch
-    , module Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
+    AndroidPublisherInappproductsPatchResource,
+    newAndroidPublisherInappproductsPatch,
+    AndroidPublisherInappproductsPatch,
 
     -- ** androidpublisher.inappproducts.update
-    , module Network.Google.Resource.AndroidPublisher.InAppProducts.Update
+    AndroidPublisherInappproductsUpdateResource,
+    newAndroidPublisherInappproductsUpdate,
+    AndroidPublisherInappproductsUpdate,
 
     -- ** androidpublisher.internalappsharingartifacts.uploadapk
-    , module Network.Google.Resource.AndroidPublisher.InternalAppsharingartifacts.Uploadapk
+    AndroidPublisherInternalappsharingartifactsUploadapkResource,
+    newAndroidPublisherInternalappsharingartifactsUploadapk,
+    AndroidPublisherInternalappsharingartifactsUploadapk,
 
     -- ** androidpublisher.internalappsharingartifacts.uploadbundle
-    , module Network.Google.Resource.AndroidPublisher.InternalAppsharingartifacts.Uploadbundle
+    AndroidPublisherInternalappsharingartifactsUploadbundleResource,
+    newAndroidPublisherInternalappsharingartifactsUploadbundle,
+    AndroidPublisherInternalappsharingartifactsUploadbundle,
+
+    -- ** androidpublisher.monetization.convertRegionPrices
+    AndroidPublisherMonetizationConvertRegionPricesResource,
+    newAndroidPublisherMonetizationConvertRegionPrices,
+    AndroidPublisherMonetizationConvertRegionPrices,
 
     -- ** androidpublisher.orders.refund
-    , module Network.Google.Resource.AndroidPublisher.Orders.Refund
+    AndroidPublisherOrdersRefundResource,
+    newAndroidPublisherOrdersRefund,
+    AndroidPublisherOrdersRefund,
 
     -- ** androidpublisher.purchases.products.acknowledge
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Products.Acknowledge
+    AndroidPublisherPurchasesProductsAcknowledgeResource,
+    newAndroidPublisherPurchasesProductsAcknowledge,
+    AndroidPublisherPurchasesProductsAcknowledge,
 
     -- ** androidpublisher.purchases.products.get
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
+    AndroidPublisherPurchasesProductsGetResource,
+    newAndroidPublisherPurchasesProductsGet,
+    AndroidPublisherPurchasesProductsGet,
 
     -- ** androidpublisher.purchases.subscriptions.acknowledge
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Acknowledge
+    AndroidPublisherPurchasesSubscriptionsAcknowledgeResource,
+    newAndroidPublisherPurchasesSubscriptionsAcknowledge,
+    AndroidPublisherPurchasesSubscriptionsAcknowledge,
 
     -- ** androidpublisher.purchases.subscriptions.cancel
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
+    AndroidPublisherPurchasesSubscriptionsCancelResource,
+    newAndroidPublisherPurchasesSubscriptionsCancel,
+    AndroidPublisherPurchasesSubscriptionsCancel,
 
     -- ** androidpublisher.purchases.subscriptions.defer
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
+    AndroidPublisherPurchasesSubscriptionsDeferResource,
+    newAndroidPublisherPurchasesSubscriptionsDefer,
+    AndroidPublisherPurchasesSubscriptionsDefer,
 
     -- ** androidpublisher.purchases.subscriptions.get
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
+    AndroidPublisherPurchasesSubscriptionsGetResource,
+    newAndroidPublisherPurchasesSubscriptionsGet,
+    AndroidPublisherPurchasesSubscriptionsGet,
 
     -- ** androidpublisher.purchases.subscriptions.refund
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
+    AndroidPublisherPurchasesSubscriptionsRefundResource,
+    newAndroidPublisherPurchasesSubscriptionsRefund,
+    AndroidPublisherPurchasesSubscriptionsRefund,
 
     -- ** androidpublisher.purchases.subscriptions.revoke
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
+    AndroidPublisherPurchasesSubscriptionsRevokeResource,
+    newAndroidPublisherPurchasesSubscriptionsRevoke,
+    AndroidPublisherPurchasesSubscriptionsRevoke,
 
     -- ** androidpublisher.purchases.voidedpurchases.list
-    , module Network.Google.Resource.AndroidPublisher.Purchases.Voidedpurchases.List
+    AndroidPublisherPurchasesVoidedpurchasesListResource,
+    newAndroidPublisherPurchasesVoidedpurchasesList,
+    AndroidPublisherPurchasesVoidedpurchasesList,
 
     -- ** androidpublisher.reviews.get
-    , module Network.Google.Resource.AndroidPublisher.Reviews.Get
+    AndroidPublisherReviewsGetResource,
+    newAndroidPublisherReviewsGet,
+    AndroidPublisherReviewsGet,
 
     -- ** androidpublisher.reviews.list
-    , module Network.Google.Resource.AndroidPublisher.Reviews.List
+    AndroidPublisherReviewsListResource,
+    newAndroidPublisherReviewsList,
+    AndroidPublisherReviewsList,
 
     -- ** androidpublisher.reviews.reply
-    , module Network.Google.Resource.AndroidPublisher.Reviews.Reply
+    AndroidPublisherReviewsReplyResource,
+    newAndroidPublisherReviewsReply,
+    AndroidPublisherReviewsReply,
 
     -- ** androidpublisher.systemapks.variants.create
-    , module Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Create
+    AndroidPublisherSystemapksVariantsCreateResource,
+    newAndroidPublisherSystemapksVariantsCreate,
+    AndroidPublisherSystemapksVariantsCreate,
 
     -- ** androidpublisher.systemapks.variants.download
-    , module Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Download
+    AndroidPublisherSystemapksVariantsDownloadResource,
+    newAndroidPublisherSystemapksVariantsDownload,
+    AndroidPublisherSystemapksVariantsDownload,
 
     -- ** androidpublisher.systemapks.variants.get
-    , module Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Get
+    AndroidPublisherSystemapksVariantsGetResource,
+    newAndroidPublisherSystemapksVariantsGet,
+    AndroidPublisherSystemapksVariantsGet,
 
     -- ** androidpublisher.systemapks.variants.list
-    , module Network.Google.Resource.AndroidPublisher.Systemapks.Variants.List
+    AndroidPublisherSystemapksVariantsListResource,
+    newAndroidPublisherSystemapksVariantsList,
+    AndroidPublisherSystemapksVariantsList,
+
+    -- ** androidpublisher.users.create
+    AndroidPublisherUsersCreateResource,
+    newAndroidPublisherUsersCreate,
+    AndroidPublisherUsersCreate,
+
+    -- ** androidpublisher.users.delete
+    AndroidPublisherUsersDeleteResource,
+    newAndroidPublisherUsersDelete,
+    AndroidPublisherUsersDelete,
+
+    -- ** androidpublisher.users.list
+    AndroidPublisherUsersListResource,
+    newAndroidPublisherUsersList,
+    AndroidPublisherUsersList,
+
+    -- ** androidpublisher.users.patch
+    AndroidPublisherUsersPatchResource,
+    newAndroidPublisherUsersPatch,
+    AndroidPublisherUsersPatch,
 
     -- * Types
 
-    -- ** InAppProductListings
-    , InAppProductListings
-    , inAppProductListings
-    , iaplAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- ** EditsImagesDeleteallImageType
-    , EditsImagesDeleteallImageType (..)
+    -- ** Apk
+    Apk (..),
+    newApk,
 
-    -- ** Track
-    , Track
-    , track
-    , tTrack
-    , tReleases
+    -- ** ApkBinary
+    ApkBinary (..),
+    newApkBinary,
 
-    -- ** Variant
-    , Variant
-    , variant
-    , vVariantId
-    , vDeviceSpec
+    -- ** ApksAddExternallyHostedRequest
+    ApksAddExternallyHostedRequest (..),
+    newApksAddExternallyHostedRequest,
 
-    -- ** Image
-    , Image
-    , image
-    , iURL
-    , iSha1
-    , iId
-    , iSha256
+    -- ** ApksAddExternallyHostedResponse
+    ApksAddExternallyHostedResponse (..),
+    newApksAddExternallyHostedResponse,
 
-    -- ** InAppProductListing
-    , InAppProductListing
-    , inAppProductListing
-    , iaplBenefits
-    , iaplTitle
-    , iaplDescription
-
-    -- ** ImagesDeleteAllResponse
-    , ImagesDeleteAllResponse
-    , imagesDeleteAllResponse
-    , idarDeleted
-
-    -- ** IntroductoryPriceInfo
-    , IntroductoryPriceInfo
-    , introductoryPriceInfo
-    , ipiIntroductoryPricePeriod
-    , ipiIntroductoryPriceAmountMicros
-    , ipiIntroductoryPriceCycles
-    , ipiIntroductoryPriceCurrencyCode
-
-    -- ** TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
-
-    -- ** ExpansionFile
-    , ExpansionFile
-    , expansionFile
-    , efFileSize
-    , efReferencesVersion
-
-    -- ** SubscriptionPurchasesAcknowledgeRequest
-    , SubscriptionPurchasesAcknowledgeRequest
-    , subscriptionPurchasesAcknowledgeRequest
-    , sparDeveloperPayload
-
-    -- ** UserComment
-    , UserComment
-    , userComment
-    , ucAndroidOSVersion
-    , ucText
-    , ucDevice
-    , ucThumbsUpCount
-    , ucAppVersionCode
-    , ucThumbsDownCount
-    , ucOriginalText
-    , ucAppVersionName
-    , ucReviewerLanguage
-    , ucDeviceMetadata
-    , ucStarRating
-    , ucLastModified
-
-    -- ** Testers
-    , Testers
-    , testers
-    , tGoogleGroups
-
-    -- ** SubscriptionCancelSurveyResult
-    , SubscriptionCancelSurveyResult
-    , subscriptionCancelSurveyResult
-    , scsrCancelSurveyReason
-    , scsrUserInputCancelReason
-
-    -- ** Listing
-    , Listing
-    , listing
-    , lFullDescription
-    , lVideo
-    , lShortDescription
-    , lLanguage
-    , lTitle
-
-    -- ** ProductPurchasesAcknowledgeRequest
-    , ProductPurchasesAcknowledgeRequest
-    , productPurchasesAcknowledgeRequest
-    , pparDeveloperPayload
-
-    -- ** APK
-    , APK
-    , aPK
-    , aVersionCode
-    , aBinary
-
-    -- ** SubscriptionPurchasesDeferRequest
-    , SubscriptionPurchasesDeferRequest
-    , subscriptionPurchasesDeferRequest
-    , spdrDeferralInfo
-
-    -- ** TracksListResponse
-    , TracksListResponse
-    , tracksListResponse
-    , tlrTracks
-    , tlrKind
-
-    -- ** PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
-
-    -- ** ImagesListResponse
-    , ImagesListResponse
-    , imagesListResponse
-    , ilrImages
-
-    -- ** AppEdit
-    , AppEdit
-    , appEdit
-    , aeId
-    , aeExpiryTimeSeconds
-
-    -- ** ProductPurchase
-    , ProductPurchase
-    , productPurchase
-    , ppPurchaseState
-    , ppConsumptionState
-    , ppRegionCode
-    , ppAcknowledgementState
-    , ppKind
-    , ppPurchaseTimeMillis
-    , ppPurchaseToken
-    , ppQuantity
-    , ppObfuscatedExternalAccountId
-    , ppPurchaseType
-    , ppObfuscatedExternalProFileId
-    , ppDeveloperPayload
-    , ppOrderId
-    , ppProductId
-
-    -- ** ReviewsListResponse
-    , ReviewsListResponse
-    , reviewsListResponse
-    , rlrTokenPagination
-    , rlrPageInfo
-    , rlrReviews
-
-    -- ** SubscriptionPurchasesDeferResponse
-    , SubscriptionPurchasesDeferResponse
-    , subscriptionPurchasesDeferResponse
-    , spdrNewExpiryTimeMillis
-
-    -- ** SubscriptionPurchase
-    , SubscriptionPurchase
-    , subscriptionPurchase
-    , spGivenName
-    , spIntroductoryPriceInfo
-    , spAcknowledgementState
-    , spAutoResumeTimeMillis
-    , spUserCancellationTimeMillis
-    , spPaymentState
-    , spKind
-    , spObfuscatedExternalAccountId
-    , spPurchaseType
-    , spPromotionType
-    , spPriceChange
-    , spProFileId
-    , spLinkedPurchaseToken
-    , spObfuscatedExternalProFileId
-    , spFamilyName
-    , spExternalAccountId
-    , spProFileName
-    , spExpiryTimeMillis
-    , spAutoRenewing
-    , spPriceCurrencyCode
-    , spEmailAddress
-    , spCancelReason
-    , spCountryCode
-    , spDeveloperPayload
-    , spPriceAmountMicros
-    , spStartTimeMillis
-    , spOrderId
-    , spPromotionCode
-    , spCancelSurveyResult
-
-    -- ** SubscriptionPriceChange
-    , SubscriptionPriceChange
-    , subscriptionPriceChange
-    , spcState
-    , spcNewPrice
+    -- ** ApksListResponse
+    ApksListResponse (..),
+    newApksListResponse,
 
     -- ** AppDetails
-    , AppDetails
-    , appDetails
-    , adContactPhone
-    , adContactEmail
-    , adContactWebsite
-    , adDefaultLanguage
+    AppDetails (..),
+    newAppDetails,
 
-    -- ** InAppProductPrices
-    , InAppProductPrices
-    , inAppProductPrices
-    , iAppAddtional
-
-    -- ** ExternallyHostedAPK
-    , ExternallyHostedAPK
-    , externallyHostedAPK
-    , ehapkApplicationLabel
-    , ehapkMaximumSdk
-    , ehapkNATiveCodes
-    , ehapkVersionCode
-    , ehapkFileSha256Base64
-    , ehapkExternallyHostedURL
-    , ehapkVersionName
-    , ehapkPackageName
-    , ehapkFileSize
-    , ehapkIconBase64
-    , ehapkUsesFeatures
-    , ehapkMinimumSdk
-    , ehapkFileSha1Base64
-    , ehapkUsesPermissions
-    , ehapkCertificateBase64s
-
-    -- ** InAppProductPurchaseType
-    , InAppProductPurchaseType (..)
-
-    -- ** TrackRelease
-    , TrackRelease
-    , trackRelease
-    , trVersionCodes
-    , trStatus
-    , trReleaseNotes
-    , trUserFraction
-    , trCountryTargeting
-    , trName
-    , trInAppUpdatePriority
-
-    -- ** EditsImagesListImageType
-    , EditsImagesListImageType (..)
-
-    -- ** CountryTargeting
-    , CountryTargeting
-    , countryTargeting
-    , ctIncludeRestOfWorld
-    , ctCountries
+    -- ** AppEdit
+    AppEdit (..),
+    newAppEdit,
 
     -- ** Bundle
-    , Bundle
-    , bundle
-    , bVersionCode
-    , bSha1
-    , bSha256
-
-    -- ** DeobfuscationFile
-    , DeobfuscationFile
-    , deobfuscationFile
-    , dfSymbolType
-
-    -- ** VoidedPurchasesListResponse
-    , VoidedPurchasesListResponse
-    , voidedPurchasesListResponse
-    , vplrTokenPagination
-    , vplrPageInfo
-    , vplrVoidedPurchases
-
-    -- ** ExpansionFilesUploadResponse
-    , ExpansionFilesUploadResponse
-    , expansionFilesUploadResponse
-    , efurExpansionFile
-
-    -- ** ImagesUploadResponse
-    , ImagesUploadResponse
-    , imagesUploadResponse
-    , iurImage
-
-    -- ** EditsImagesUploadImageType
-    , EditsImagesUploadImageType (..)
-
-    -- ** DeobfuscationFilesUploadResponse
-    , DeobfuscationFilesUploadResponse
-    , deobfuscationFilesUploadResponse
-    , dfurDeobfuscationFile
-
-    -- ** InAppProductsListResponse
-    , InAppProductsListResponse
-    , inAppProductsListResponse
-    , iaplrTokenPagination
-    , iaplrPageInfo
-    , iaplrKind
-    , iaplrInAppProduct
-
-    -- ** EditsDeobfuscationFilesUploadDeobfuscationFileType
-    , EditsDeobfuscationFilesUploadDeobfuscationFileType (..)
-
-    -- ** EditsExpansionFilesUploadExpansionFileType
-    , EditsExpansionFilesUploadExpansionFileType (..)
-
-    -- ** LocalizedText
-    , LocalizedText
-    , localizedText
-    , ltText
-    , ltLanguage
-
-    -- ** DeobfuscationFileSymbolType
-    , DeobfuscationFileSymbolType (..)
-
-    -- ** TrackReleaseStatus
-    , TrackReleaseStatus (..)
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** Review
-    , Review
-    , review
-    , rReviewId
-    , rAuthorName
-    , rComments
-
-    -- ** APKsAddExternallyHostedResponse
-    , APKsAddExternallyHostedResponse
-    , aPKsAddExternallyHostedResponse
-    , apkaehrExternallyHostedAPK
-
-    -- ** SubscriptionDeferralInfo
-    , SubscriptionDeferralInfo
-    , subscriptionDeferralInfo
-    , sdiDesiredExpiryTimeMillis
-    , sdiExpectedExpiryTimeMillis
-
-    -- ** EditsExpansionFilesGetExpansionFileType
-    , EditsExpansionFilesGetExpansionFileType (..)
-
-    -- ** ReviewsReplyRequest
-    , ReviewsReplyRequest
-    , reviewsReplyRequest
-    , rrrReplyText
-
-    -- ** EditsExpansionFilesPatchExpansionFileType
-    , EditsExpansionFilesPatchExpansionFileType (..)
-
-    -- ** EditsExpansionFilesUpdateExpansionFileType
-    , EditsExpansionFilesUpdateExpansionFileType (..)
-
-    -- ** DeviceSpec
-    , DeviceSpec
-    , deviceSpec
-    , dsSupportedAbis
-    , dsSupportedLocales
-    , dsScreenDensity
-
-    -- ** DeviceMetadata
-    , DeviceMetadata
-    , deviceMetadata
-    , dmProductName
-    , dmGlEsVersion
-    , dmManufacturer
-    , dmScreenWidthPx
-    , dmRamMb
-    , dmCPUMake
-    , dmScreenHeightPx
-    , dmNATivePlatform
-    , dmDeviceClass
-    , dmCPUModel
-    , dmScreenDensityDpi
-
-    -- ** DeveloperComment
-    , DeveloperComment
-    , developerComment
-    , dcText
-    , dcLastModified
-
-    -- ** InAppProduct
-    , InAppProduct
-    , inAppProduct
-    , iapStatus
-    , iapGracePeriod
-    , iapTrialPeriod
-    , iapPackageName
-    , iapPurchaseType
-    , iapSubscriptionPeriod
-    , iapPrices
-    , iapSKU
-    , iapDefaultPrice
-    , iapListings
-    , iapDefaultLanguage
-
-    -- ** Price
-    , Price
-    , price
-    , pPriceMicros
-    , pCurrency
-
-    -- ** EditsImagesDeleteImageType
-    , EditsImagesDeleteImageType (..)
-
-    -- ** SystemAPKsListResponse
-    , SystemAPKsListResponse
-    , systemAPKsListResponse
-    , sapklrVariants
-
-    -- ** APKBinary
-    , APKBinary
-    , aPKBinary
-    , apkbSha1
-    , apkbSha256
-
-    -- ** APKsListResponse
-    , APKsListResponse
-    , aPKsListResponse
-    , apklrKind
-    , apklrAPKs
-
-    -- ** ReviewsReplyResponse
-    , ReviewsReplyResponse
-    , reviewsReplyResponse
-    , rrrResult
-
-    -- ** ListingsListResponse
-    , ListingsListResponse
-    , listingsListResponse
-    , llrKind
-    , llrListings
-
-    -- ** APKsAddExternallyHostedRequest
-    , APKsAddExternallyHostedRequest
-    , aPKsAddExternallyHostedRequest
-    , aExternallyHostedAPK
-
-    -- ** InternalAppSharingArtifact
-    , InternalAppSharingArtifact
-    , internalAppSharingArtifact
-    , iasaCertificateFingerprint
-    , iasaDownloadURL
-    , iasaSha256
-
-    -- ** UsesPermission
-    , UsesPermission
-    , usesPermission
-    , upName
-    , upMaxSdkVersion
-
-    -- ** Comment
-    , Comment
-    , comment
-    , cUserComment
-    , cDeveloperComment
-
-    -- ** Timestamp
-    , Timestamp
-    , timestamp
-    , tNanos
-    , tSeconds
-
-    -- ** VoidedPurchase
-    , VoidedPurchase
-    , voidedPurchase
-    , vpKind
-    , vpPurchaseTimeMillis
-    , vpPurchaseToken
-    , vpVoidedSource
-    , vpVoidedReason
-    , vpOrderId
-    , vpVoidedTimeMillis
+    Bundle (..),
+    newBundle,
 
     -- ** BundlesListResponse
-    , BundlesListResponse
-    , bundlesListResponse
-    , blrBundles
-    , blrKind
+    BundlesListResponse (..),
+    newBundlesListResponse,
+
+    -- ** Comment
+    Comment (..),
+    newComment,
+
+    -- ** ConvertRegionPricesRequest
+    ConvertRegionPricesRequest (..),
+    newConvertRegionPricesRequest,
+
+    -- ** ConvertRegionPricesResponse
+    ConvertRegionPricesResponse (..),
+    newConvertRegionPricesResponse,
+
+    -- ** ConvertRegionPricesResponse_ConvertedRegionPrices
+    ConvertRegionPricesResponse_ConvertedRegionPrices (..),
+    newConvertRegionPricesResponse_ConvertedRegionPrices,
+
+    -- ** ConvertedOtherRegionsPrice
+    ConvertedOtherRegionsPrice (..),
+    newConvertedOtherRegionsPrice,
+
+    -- ** ConvertedRegionPrice
+    ConvertedRegionPrice (..),
+    newConvertedRegionPrice,
+
+    -- ** CountryTargeting
+    CountryTargeting (..),
+    newCountryTargeting,
+
+    -- ** DeobfuscationFile
+    DeobfuscationFile (..),
+    newDeobfuscationFile,
+
+    -- ** DeobfuscationFile_SymbolType
+    DeobfuscationFile_SymbolType (..),
+
+    -- ** DeobfuscationFilesUploadResponse
+    DeobfuscationFilesUploadResponse (..),
+    newDeobfuscationFilesUploadResponse,
+
+    -- ** DeveloperComment
+    DeveloperComment (..),
+    newDeveloperComment,
+
+    -- ** DeviceMetadata
+    DeviceMetadata (..),
+    newDeviceMetadata,
+
+    -- ** DeviceSpec
+    DeviceSpec (..),
+    newDeviceSpec,
+
+    -- ** ExpansionFile
+    ExpansionFile (..),
+    newExpansionFile,
+
+    -- ** ExpansionFilesUploadResponse
+    ExpansionFilesUploadResponse (..),
+    newExpansionFilesUploadResponse,
+
+    -- ** ExternallyHostedApk
+    ExternallyHostedApk (..),
+    newExternallyHostedApk,
+
+    -- ** GeneratedApksListResponse
+    GeneratedApksListResponse (..),
+    newGeneratedApksListResponse,
+
+    -- ** GeneratedApksPerSigningKey
+    GeneratedApksPerSigningKey (..),
+    newGeneratedApksPerSigningKey,
+
+    -- ** GeneratedAssetPackSlice
+    GeneratedAssetPackSlice (..),
+    newGeneratedAssetPackSlice,
+
+    -- ** GeneratedSplitApk
+    GeneratedSplitApk (..),
+    newGeneratedSplitApk,
+
+    -- ** GeneratedStandaloneApk
+    GeneratedStandaloneApk (..),
+    newGeneratedStandaloneApk,
+
+    -- ** GeneratedUniversalApk
+    GeneratedUniversalApk (..),
+    newGeneratedUniversalApk,
+
+    -- ** Grant
+    Grant (..),
+    newGrant,
+
+    -- ** Grant_AppLevelPermissionsItem
+    Grant_AppLevelPermissionsItem (..),
+
+    -- ** Image
+    Image (..),
+    newImage,
+
+    -- ** ImagesDeleteAllResponse
+    ImagesDeleteAllResponse (..),
+    newImagesDeleteAllResponse,
+
+    -- ** ImagesListResponse
+    ImagesListResponse (..),
+    newImagesListResponse,
+
+    -- ** ImagesUploadResponse
+    ImagesUploadResponse (..),
+    newImagesUploadResponse,
+
+    -- ** InAppProduct
+    InAppProduct (..),
+    newInAppProduct,
+
+    -- ** InAppProduct_Listings
+    InAppProduct_Listings (..),
+    newInAppProduct_Listings,
+
+    -- ** InAppProduct_Prices
+    InAppProduct_Prices (..),
+    newInAppProduct_Prices,
+
+    -- ** InAppProduct_PurchaseType
+    InAppProduct_PurchaseType (..),
+
+    -- ** InAppProduct_Status
+    InAppProduct_Status (..),
+
+    -- ** InAppProductListing
+    InAppProductListing (..),
+    newInAppProductListing,
+
+    -- ** InappproductsListResponse
+    InappproductsListResponse (..),
+    newInappproductsListResponse,
+
+    -- ** InternalAppSharingArtifact
+    InternalAppSharingArtifact (..),
+    newInternalAppSharingArtifact,
+
+    -- ** IntroductoryPriceInfo
+    IntroductoryPriceInfo (..),
+    newIntroductoryPriceInfo,
+
+    -- ** ListUsersResponse
+    ListUsersResponse (..),
+    newListUsersResponse,
+
+    -- ** Listing
+    Listing (..),
+    newListing,
+
+    -- ** ListingsListResponse
+    ListingsListResponse (..),
+    newListingsListResponse,
+
+    -- ** LocalizedText
+    LocalizedText (..),
+    newLocalizedText,
+
+    -- ** ManagedProductTaxAndComplianceSettings
+    ManagedProductTaxAndComplianceSettings (..),
+    newManagedProductTaxAndComplianceSettings,
+
+    -- ** ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
+    ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType (..),
+
+    -- ** ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode
+    ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
+    newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+
+    -- ** Money
+    Money (..),
+    newMoney,
+
+    -- ** PageInfo
+    PageInfo (..),
+    newPageInfo,
+
+    -- ** Price
+    Price (..),
+    newPrice,
+
+    -- ** ProductPurchase
+    ProductPurchase (..),
+    newProductPurchase,
+
+    -- ** ProductPurchasesAcknowledgeRequest
+    ProductPurchasesAcknowledgeRequest (..),
+    newProductPurchasesAcknowledgeRequest,
+
+    -- ** RegionalTaxRateInfo
+    RegionalTaxRateInfo (..),
+    newRegionalTaxRateInfo,
+
+    -- ** RegionalTaxRateInfo_TaxTier
+    RegionalTaxRateInfo_TaxTier (..),
+
+    -- ** Review
+    Review (..),
+    newReview,
 
     -- ** ReviewReplyResult
-    , ReviewReplyResult
-    , reviewReplyResult
-    , rReplyText
-    , rLastEdited
+    ReviewReplyResult (..),
+    newReviewReplyResult,
 
-    -- ** InAppProductStatus
-    , InAppProductStatus (..)
-    ) where
+    -- ** ReviewsListResponse
+    ReviewsListResponse (..),
+    newReviewsListResponse,
 
-import Network.Google.Prelude
+    -- ** ReviewsReplyRequest
+    ReviewsReplyRequest (..),
+    newReviewsReplyRequest,
+
+    -- ** ReviewsReplyResponse
+    ReviewsReplyResponse (..),
+    newReviewsReplyResponse,
+
+    -- ** SubscriptionCancelSurveyResult
+    SubscriptionCancelSurveyResult (..),
+    newSubscriptionCancelSurveyResult,
+
+    -- ** SubscriptionDeferralInfo
+    SubscriptionDeferralInfo (..),
+    newSubscriptionDeferralInfo,
+
+    -- ** SubscriptionPriceChange
+    SubscriptionPriceChange (..),
+    newSubscriptionPriceChange,
+
+    -- ** SubscriptionPurchase
+    SubscriptionPurchase (..),
+    newSubscriptionPurchase,
+
+    -- ** SubscriptionPurchasesAcknowledgeRequest
+    SubscriptionPurchasesAcknowledgeRequest (..),
+    newSubscriptionPurchasesAcknowledgeRequest,
+
+    -- ** SubscriptionPurchasesDeferRequest
+    SubscriptionPurchasesDeferRequest (..),
+    newSubscriptionPurchasesDeferRequest,
+
+    -- ** SubscriptionPurchasesDeferResponse
+    SubscriptionPurchasesDeferResponse (..),
+    newSubscriptionPurchasesDeferResponse,
+
+    -- ** SubscriptionTaxAndComplianceSettings
+    SubscriptionTaxAndComplianceSettings (..),
+    newSubscriptionTaxAndComplianceSettings,
+
+    -- ** SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
+    SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType (..),
+
+    -- ** SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode
+    SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
+    newSubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+
+    -- ** SystemApksListResponse
+    SystemApksListResponse (..),
+    newSystemApksListResponse,
+
+    -- ** Testers
+    Testers (..),
+    newTesters,
+
+    -- ** Timestamp
+    Timestamp (..),
+    newTimestamp,
+
+    -- ** TokenPagination
+    TokenPagination (..),
+    newTokenPagination,
+
+    -- ** Track
+    Track (..),
+    newTrack,
+
+    -- ** TrackCountryAvailability
+    TrackCountryAvailability (..),
+    newTrackCountryAvailability,
+
+    -- ** TrackRelease
+    TrackRelease (..),
+    newTrackRelease,
+
+    -- ** TrackRelease_Status
+    TrackRelease_Status (..),
+
+    -- ** TrackTargetedCountry
+    TrackTargetedCountry (..),
+    newTrackTargetedCountry,
+
+    -- ** TracksListResponse
+    TracksListResponse (..),
+    newTracksListResponse,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_AccessState
+    User_AccessState (..),
+
+    -- ** User_DeveloperAccountPermissionsItem
+    User_DeveloperAccountPermissionsItem (..),
+
+    -- ** UserComment
+    UserComment (..),
+    newUserComment,
+
+    -- ** UsesPermission
+    UsesPermission (..),
+    newUsesPermission,
+
+    -- ** Variant
+    Variant (..),
+    newVariant,
+
+    -- ** VoidedPurchase
+    VoidedPurchase (..),
+    newVoidedPurchase,
+
+    -- ** VoidedPurchasesListResponse
+    VoidedPurchasesListResponse (..),
+    newVoidedPurchasesListResponse,
+
+    -- ** EditsDeobfuscationfilesUploadDeobfuscationFileType
+    EditsDeobfuscationfilesUploadDeobfuscationFileType (..),
+
+    -- ** EditsExpansionfilesGetExpansionFileType
+    EditsExpansionfilesGetExpansionFileType (..),
+
+    -- ** EditsExpansionfilesPatchExpansionFileType
+    EditsExpansionfilesPatchExpansionFileType (..),
+
+    -- ** EditsExpansionfilesUpdateExpansionFileType
+    EditsExpansionfilesUpdateExpansionFileType (..),
+
+    -- ** EditsExpansionfilesUploadExpansionFileType
+    EditsExpansionfilesUploadExpansionFileType (..),
+
+    -- ** EditsImagesDeleteImageType
+    EditsImagesDeleteImageType (..),
+
+    -- ** EditsImagesDeleteallImageType
+    EditsImagesDeleteallImageType (..),
+
+    -- ** EditsImagesListImageType
+    EditsImagesListImageType (..),
+
+    -- ** EditsImagesUploadImageType
+    EditsImagesUploadImageType (..),
+  )
+where
+
+import Network.Google.AndroidPublisher.Edits.Apks.Addexternallyhosted
+import Network.Google.AndroidPublisher.Edits.Apks.List
+import Network.Google.AndroidPublisher.Edits.Apks.Upload
+import Network.Google.AndroidPublisher.Edits.Bundles.List
+import Network.Google.AndroidPublisher.Edits.Bundles.Upload
+import Network.Google.AndroidPublisher.Edits.Commit
+import Network.Google.AndroidPublisher.Edits.Countryavailability.Get
+import Network.Google.AndroidPublisher.Edits.Delete
+import Network.Google.AndroidPublisher.Edits.Deobfuscationfiles.Upload
+import Network.Google.AndroidPublisher.Edits.Details.Get
+import Network.Google.AndroidPublisher.Edits.Details.Patch
+import Network.Google.AndroidPublisher.Edits.Details.Update
+import Network.Google.AndroidPublisher.Edits.Expansionfiles.Get
+import Network.Google.AndroidPublisher.Edits.Expansionfiles.Patch
+import Network.Google.AndroidPublisher.Edits.Expansionfiles.Update
+import Network.Google.AndroidPublisher.Edits.Expansionfiles.Upload
+import Network.Google.AndroidPublisher.Edits.Get
+import Network.Google.AndroidPublisher.Edits.Images.Delete
+import Network.Google.AndroidPublisher.Edits.Images.Deleteall
+import Network.Google.AndroidPublisher.Edits.Images.List
+import Network.Google.AndroidPublisher.Edits.Images.Upload
+import Network.Google.AndroidPublisher.Edits.Insert
+import Network.Google.AndroidPublisher.Edits.Listings.Delete
+import Network.Google.AndroidPublisher.Edits.Listings.Deleteall
+import Network.Google.AndroidPublisher.Edits.Listings.Get
+import Network.Google.AndroidPublisher.Edits.Listings.List
+import Network.Google.AndroidPublisher.Edits.Listings.Patch
+import Network.Google.AndroidPublisher.Edits.Listings.Update
+import Network.Google.AndroidPublisher.Edits.Testers.Get
+import Network.Google.AndroidPublisher.Edits.Testers.Patch
+import Network.Google.AndroidPublisher.Edits.Testers.Update
+import Network.Google.AndroidPublisher.Edits.Tracks.Get
+import Network.Google.AndroidPublisher.Edits.Tracks.List
+import Network.Google.AndroidPublisher.Edits.Tracks.Patch
+import Network.Google.AndroidPublisher.Edits.Tracks.Update
+import Network.Google.AndroidPublisher.Edits.Validate
+import Network.Google.AndroidPublisher.Generatedapks.Download
+import Network.Google.AndroidPublisher.Generatedapks.List
+import Network.Google.AndroidPublisher.Grants.Create
+import Network.Google.AndroidPublisher.Grants.Delete
+import Network.Google.AndroidPublisher.Grants.Patch
+import Network.Google.AndroidPublisher.Inappproducts.Delete
+import Network.Google.AndroidPublisher.Inappproducts.Get
+import Network.Google.AndroidPublisher.Inappproducts.Insert
+import Network.Google.AndroidPublisher.Inappproducts.List
+import Network.Google.AndroidPublisher.Inappproducts.Patch
+import Network.Google.AndroidPublisher.Inappproducts.Update
+import Network.Google.AndroidPublisher.Internalappsharingartifacts.Uploadapk
+import Network.Google.AndroidPublisher.Internalappsharingartifacts.Uploadbundle
+import Network.Google.AndroidPublisher.Monetization.ConvertRegionPrices
+import Network.Google.AndroidPublisher.Orders.Refund
+import Network.Google.AndroidPublisher.Purchases.Products.Acknowledge
+import Network.Google.AndroidPublisher.Purchases.Products.Get
+import Network.Google.AndroidPublisher.Purchases.Subscriptions.Acknowledge
+import Network.Google.AndroidPublisher.Purchases.Subscriptions.Cancel
+import Network.Google.AndroidPublisher.Purchases.Subscriptions.Defer
+import Network.Google.AndroidPublisher.Purchases.Subscriptions.Get
+import Network.Google.AndroidPublisher.Purchases.Subscriptions.Refund
+import Network.Google.AndroidPublisher.Purchases.Subscriptions.Revoke
+import Network.Google.AndroidPublisher.Purchases.Voidedpurchases.List
+import Network.Google.AndroidPublisher.Reviews.Get
+import Network.Google.AndroidPublisher.Reviews.List
+import Network.Google.AndroidPublisher.Reviews.Reply
+import Network.Google.AndroidPublisher.Systemapks.Variants.Create
+import Network.Google.AndroidPublisher.Systemapks.Variants.Download
+import Network.Google.AndroidPublisher.Systemapks.Variants.Get
+import Network.Google.AndroidPublisher.Systemapks.Variants.List
 import Network.Google.AndroidPublisher.Types
-import Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
-import Network.Google.Resource.AndroidPublisher.Edits.APKs.List
-import Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
-import Network.Google.Resource.AndroidPublisher.Edits.Bundles.List
-import Network.Google.Resource.AndroidPublisher.Edits.Bundles.Upload
-import Network.Google.Resource.AndroidPublisher.Edits.Commit
-import Network.Google.Resource.AndroidPublisher.Edits.Delete
-import Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
-import Network.Google.Resource.AndroidPublisher.Edits.Details.Get
-import Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
-import Network.Google.Resource.AndroidPublisher.Edits.Details.Update
-import Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
-import Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
-import Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
-import Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
-import Network.Google.Resource.AndroidPublisher.Edits.Get
-import Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
-import Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
-import Network.Google.Resource.AndroidPublisher.Edits.Images.List
-import Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
-import Network.Google.Resource.AndroidPublisher.Edits.Insert
-import Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
-import Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
-import Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
-import Network.Google.Resource.AndroidPublisher.Edits.Listings.List
-import Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
-import Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
-import Network.Google.Resource.AndroidPublisher.Edits.Testers.Get
-import Network.Google.Resource.AndroidPublisher.Edits.Testers.Patch
-import Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
-import Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
-import Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
-import Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
-import Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
-import Network.Google.Resource.AndroidPublisher.Edits.Validate
-import Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
-import Network.Google.Resource.AndroidPublisher.InAppProducts.Get
-import Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
-import Network.Google.Resource.AndroidPublisher.InAppProducts.List
-import Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
-import Network.Google.Resource.AndroidPublisher.InAppProducts.Update
-import Network.Google.Resource.AndroidPublisher.InternalAppsharingartifacts.Uploadapk
-import Network.Google.Resource.AndroidPublisher.InternalAppsharingartifacts.Uploadbundle
-import Network.Google.Resource.AndroidPublisher.Orders.Refund
-import Network.Google.Resource.AndroidPublisher.Purchases.Products.Acknowledge
-import Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
-import Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Acknowledge
-import Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
-import Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
-import Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
-import Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
-import Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
-import Network.Google.Resource.AndroidPublisher.Purchases.Voidedpurchases.List
-import Network.Google.Resource.AndroidPublisher.Reviews.Get
-import Network.Google.Resource.AndroidPublisher.Reviews.List
-import Network.Google.Resource.AndroidPublisher.Reviews.Reply
-import Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Create
-import Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Download
-import Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Get
-import Network.Google.Resource.AndroidPublisher.Systemapks.Variants.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Play Android Developer API service.
-type AndroidPublisherAPI =
-     InternalAppsharingartifactsUploadbundleResource :<|>
-       InternalAppsharingartifactsUploadapkResource
-       :<|> InAppProductsInsertResource
-       :<|> InAppProductsListResource
-       :<|> InAppProductsPatchResource
-       :<|> InAppProductsGetResource
-       :<|> InAppProductsDeleteResource
-       :<|> InAppProductsUpdateResource
-       :<|> ReviewsReplyResource
-       :<|> ReviewsListResource
-       :<|> ReviewsGetResource
-       :<|> SystemapksVariantsListResource
-       :<|> SystemapksVariantsGetResource
-       :<|> SystemapksVariantsCreateResource
-       :<|> SystemapksVariantsDownloadResource
-       :<|> EditsImagesListResource
-       :<|> EditsImagesDeleteallResource
-       :<|> EditsImagesUploadResource
-       :<|> EditsImagesDeleteResource
-       :<|> EditsExpansionFilesPatchResource
-       :<|> EditsExpansionFilesGetResource
-       :<|> EditsExpansionFilesUploadResource
-       :<|> EditsExpansionFilesUpdateResource
-       :<|> EditsTracksListResource
-       :<|> EditsTracksPatchResource
-       :<|> EditsTracksGetResource
-       :<|> EditsTracksUpdateResource
-       :<|> EditsDeobfuscationFilesUploadResource
-       :<|> EditsBundlesListResource
-       :<|> EditsBundlesUploadResource
-       :<|> EditsTestersPatchResource
-       :<|> EditsTestersGetResource
-       :<|> EditsTestersUpdateResource
-       :<|> EditsDetailsPatchResource
-       :<|> EditsDetailsGetResource
-       :<|> EditsDetailsUpdateResource
-       :<|> EditsAPKsListResource
-       :<|> EditsAPKsAddexternallyhostedResource
-       :<|> EditsAPKsUploadResource
-       :<|> EditsListingsListResource
-       :<|> EditsListingsDeleteallResource
-       :<|> EditsListingsPatchResource
-       :<|> EditsListingsGetResource
-       :<|> EditsListingsDeleteResource
-       :<|> EditsListingsUpdateResource
-       :<|> EditsInsertResource
-       :<|> EditsGetResource
-       :<|> EditsValidateResource
-       :<|> EditsDeleteResource
-       :<|> EditsCommitResource
-       :<|> OrdersRefundResource
-       :<|> PurchasesVoidedpurchasesListResource
-       :<|> PurchasesProductsAcknowledgeResource
-       :<|> PurchasesProductsGetResource
-       :<|> PurchasesSubscriptionsDeferResource
-       :<|> PurchasesSubscriptionsAcknowledgeResource
-       :<|> PurchasesSubscriptionsGetResource
-       :<|> PurchasesSubscriptionsRefundResource
-       :<|> PurchasesSubscriptionsRevokeResource
-       :<|> PurchasesSubscriptionsCancelResource
+import Network.Google.AndroidPublisher.Users.Create
+import Network.Google.AndroidPublisher.Users.Delete
+import Network.Google.AndroidPublisher.Users.List
+import Network.Google.AndroidPublisher.Users.Patch
