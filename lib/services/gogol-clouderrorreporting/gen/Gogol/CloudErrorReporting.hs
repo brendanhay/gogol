@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,125 +30,125 @@
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference>
 module Gogol.CloudErrorReporting
-    (
-    -- * Configuration
-      cloudErrorReportingService
+  ( -- * Configuration
+    cloudErrorReportingService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** clouderrorreporting.projects.deleteEvents
-    , CloudErrorReportingProjectsDeleteEventsResource
-    , newCloudErrorReportingProjectsDeleteEvents
-    , CloudErrorReportingProjectsDeleteEvents
+    CloudErrorReportingProjectsDeleteEventsResource,
+    newCloudErrorReportingProjectsDeleteEvents,
+    CloudErrorReportingProjectsDeleteEvents,
 
     -- ** clouderrorreporting.projects.events.list
-    , CloudErrorReportingProjectsEventsListResource
-    , newCloudErrorReportingProjectsEventsList
-    , CloudErrorReportingProjectsEventsList
+    CloudErrorReportingProjectsEventsListResource,
+    newCloudErrorReportingProjectsEventsList,
+    CloudErrorReportingProjectsEventsList,
 
     -- ** clouderrorreporting.projects.events.report
-    , CloudErrorReportingProjectsEventsReportResource
-    , newCloudErrorReportingProjectsEventsReport
-    , CloudErrorReportingProjectsEventsReport
+    CloudErrorReportingProjectsEventsReportResource,
+    newCloudErrorReportingProjectsEventsReport,
+    CloudErrorReportingProjectsEventsReport,
 
     -- ** clouderrorreporting.projects.groupStats.list
-    , CloudErrorReportingProjectsGroupStatsListResource
-    , newCloudErrorReportingProjectsGroupStatsList
-    , CloudErrorReportingProjectsGroupStatsList
+    CloudErrorReportingProjectsGroupStatsListResource,
+    newCloudErrorReportingProjectsGroupStatsList,
+    CloudErrorReportingProjectsGroupStatsList,
 
     -- ** clouderrorreporting.projects.groups.get
-    , CloudErrorReportingProjectsGroupsGetResource
-    , newCloudErrorReportingProjectsGroupsGet
-    , CloudErrorReportingProjectsGroupsGet
+    CloudErrorReportingProjectsGroupsGetResource,
+    newCloudErrorReportingProjectsGroupsGet,
+    CloudErrorReportingProjectsGroupsGet,
 
     -- ** clouderrorreporting.projects.groups.update
-    , CloudErrorReportingProjectsGroupsUpdateResource
-    , newCloudErrorReportingProjectsGroupsUpdate
-    , CloudErrorReportingProjectsGroupsUpdate
+    CloudErrorReportingProjectsGroupsUpdateResource,
+    newCloudErrorReportingProjectsGroupsUpdate,
+    CloudErrorReportingProjectsGroupsUpdate,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** DeleteEventsResponse
-    , DeleteEventsResponse (..)
-    , newDeleteEventsResponse
+    DeleteEventsResponse (..),
+    newDeleteEventsResponse,
 
     -- ** ErrorContext
-    , ErrorContext (..)
-    , newErrorContext
+    ErrorContext (..),
+    newErrorContext,
 
     -- ** ErrorEvent
-    , ErrorEvent (..)
-    , newErrorEvent
+    ErrorEvent (..),
+    newErrorEvent,
 
     -- ** ErrorGroup
-    , ErrorGroup (..)
-    , newErrorGroup
+    ErrorGroup (..),
+    newErrorGroup,
 
     -- ** ErrorGroup_ResolutionStatus
-    , ErrorGroup_ResolutionStatus (..)
+    ErrorGroup_ResolutionStatus (..),
 
     -- ** ErrorGroupStats
-    , ErrorGroupStats (..)
-    , newErrorGroupStats
+    ErrorGroupStats (..),
+    newErrorGroupStats,
 
     -- ** HttpRequestContext
-    , HttpRequestContext (..)
-    , newHttpRequestContext
+    HttpRequestContext (..),
+    newHttpRequestContext,
 
     -- ** ListEventsResponse
-    , ListEventsResponse (..)
-    , newListEventsResponse
+    ListEventsResponse (..),
+    newListEventsResponse,
 
     -- ** ListGroupStatsResponse
-    , ListGroupStatsResponse (..)
-    , newListGroupStatsResponse
+    ListGroupStatsResponse (..),
+    newListGroupStatsResponse,
 
     -- ** ReportErrorEventResponse
-    , ReportErrorEventResponse (..)
-    , newReportErrorEventResponse
+    ReportErrorEventResponse (..),
+    newReportErrorEventResponse,
 
     -- ** ReportedErrorEvent
-    , ReportedErrorEvent (..)
-    , newReportedErrorEvent
+    ReportedErrorEvent (..),
+    newReportedErrorEvent,
 
     -- ** ServiceContext
-    , ServiceContext (..)
-    , newServiceContext
+    ServiceContext (..),
+    newServiceContext,
 
     -- ** SourceLocation
-    , SourceLocation (..)
-    , newSourceLocation
+    SourceLocation (..),
+    newSourceLocation,
 
     -- ** SourceReference
-    , SourceReference (..)
-    , newSourceReference
+    SourceReference (..),
+    newSourceReference,
 
     -- ** TimedCount
-    , TimedCount (..)
-    , newTimedCount
+    TimedCount (..),
+    newTimedCount,
 
     -- ** TrackingIssue
-    , TrackingIssue (..)
-    , newTrackingIssue
+    TrackingIssue (..),
+    newTrackingIssue,
 
     -- ** ProjectsEventsListTimeRangePeriod
-    , ProjectsEventsListTimeRangePeriod (..)
+    ProjectsEventsListTimeRangePeriod (..),
 
     -- ** ProjectsGroupStatsListAlignment
-    , ProjectsGroupStatsListAlignment (..)
+    ProjectsGroupStatsListAlignment (..),
 
     -- ** ProjectsGroupStatsListOrder
-    , ProjectsGroupStatsListOrder (..)
+    ProjectsGroupStatsListOrder (..),
 
     -- ** ProjectsGroupStatsListTimeRangePeriod
-    , ProjectsGroupStatsListTimeRangePeriod (..)
-    ) where
+    ProjectsGroupStatsListTimeRangePeriod (..),
+  )
+where
 
 import Gogol.CloudErrorReporting.Projects.DeleteEvents
 import Gogol.CloudErrorReporting.Projects.Events.List
