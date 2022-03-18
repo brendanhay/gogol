@@ -1,312 +1,238 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudIOT.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudIOT.Types
-    (
-    -- * Service Configuration
-      cloudIOTService
+  ( -- * Configuration
+    cloudIOTService,
 
     -- * OAuth Scopes
-    , cloudIOTScope
-    , cloudPlatformScope
+    cloudPlatformScope,
+    cloudIOTScope,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- * Types
 
-    -- * ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
-    , ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * UnbindDeviceFromGatewayResponse
-    , UnbindDeviceFromGatewayResponse
-    , unbindDeviceFromGatewayResponse
+    -- ** BindDeviceToGatewayRequest
+    BindDeviceToGatewayRequest (..),
+    newBindDeviceToGatewayRequest,
 
-    -- * DeviceState
-    , DeviceState
-    , deviceState
-    , dsUpdateTime
-    , dsBinaryData
+    -- ** BindDeviceToGatewayResponse
+    BindDeviceToGatewayResponse (..),
+    newBindDeviceToGatewayResponse,
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
+    -- ** Device
+    Device (..),
+    newDevice,
 
-    -- * ListDeviceRegistriesResponse
-    , ListDeviceRegistriesResponse
-    , listDeviceRegistriesResponse
-    , ldrrNextPageToken
-    , ldrrDeviceRegistries
+    -- ** Device_LogLevel
+    Device_LogLevel (..),
 
-    -- * DeviceConfig
-    , DeviceConfig
-    , deviceConfig
-    , dcDeviceAckTime
-    , dcCloudUpdateTime
-    , dcBinaryData
-    , dcVersion
+    -- ** Device_Metadata
+    Device_Metadata (..),
+    newDevice_Metadata,
 
-    -- * ListDeviceConfigVersionsResponse
-    , ListDeviceConfigVersionsResponse
-    , listDeviceConfigVersionsResponse
-    , ldcvrDeviceConfigs
+    -- ** DeviceConfig
+    DeviceConfig (..),
+    newDeviceConfig,
 
-    -- * DeviceLogLevel
-    , DeviceLogLevel (..)
+    -- ** DeviceCredential
+    DeviceCredential (..),
+    newDeviceCredential,
 
-    -- * GatewayConfig
-    , GatewayConfig
-    , gatewayConfig
-    , gcLastAccessedGatewayId
-    , gcGatewayAuthMethod
-    , gcLastAccessedGatewayTime
-    , gcGatewayType
+    -- ** DeviceRegistry
+    DeviceRegistry (..),
+    newDeviceRegistry,
 
-    -- * ListDeviceStatesResponse
-    , ListDeviceStatesResponse
-    , listDeviceStatesResponse
-    , ldsrDeviceStates
+    -- ** DeviceRegistry_LogLevel
+    DeviceRegistry_LogLevel (..),
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** DeviceState
+    DeviceState (..),
+    newDeviceState,
 
-    -- * ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
-    , ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..)
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * StateNotificationConfig
-    , StateNotificationConfig
-    , stateNotificationConfig
-    , sncPubsubTopicName
+    -- ** EventNotificationConfig
+    EventNotificationConfig (..),
+    newEventNotificationConfig,
 
-    -- * PublicKeyCertificateFormat
-    , PublicKeyCertificateFormat (..)
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * Device
-    , Device
-    , device
-    , dState
-    , dLastHeartbeatTime
-    , dGatewayConfig
-    , dLogLevel
-    , dConfig
-    , dCredentials
-    , dNumId
-    , dLastErrorStatus
-    , dLastConfigSendTime
-    , dLastConfigAckTime
-    , dName
-    , dLastErrorTime
-    , dMetadata
-    , dId
-    , dLastStateTime
-    , dBlocked
-    , dLastEventTime
+    -- ** GatewayConfig
+    GatewayConfig (..),
+    newGatewayConfig,
 
-    -- * DeviceCredential
-    , DeviceCredential
-    , deviceCredential
-    , dcPublicKey
-    , dcExpirationTime
+    -- ** GatewayConfig_GatewayAuthMethod
+    GatewayConfig_GatewayAuthMethod (..),
 
-    -- * EventNotificationConfig
-    , EventNotificationConfig
-    , eventNotificationConfig
-    , encPubsubTopicName
-    , encSubfolderMatches
+    -- ** GatewayConfig_GatewayType
+    GatewayConfig_GatewayType (..),
 
-    -- * X509CertificateDetails
-    , X509CertificateDetails
-    , x509CertificateDetails
-    , xcdSubject
-    , xcdExpiryTime
-    , xcdStartTime
-    , xcdSignatureAlgorithm
-    , xcdIssuer
-    , xcdPublicKeyType
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
-    -- * PublicKeyCertificate
-    , PublicKeyCertificate
-    , publicKeyCertificate
-    , pkcFormat
-    , pkcCertificate
-    , pkcX509Details
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** HttpConfig
+    HttpConfig (..),
+    newHttpConfig,
 
-    -- * PublicKeyCredentialFormat
-    , PublicKeyCredentialFormat (..)
+    -- ** HttpConfig_HttpEnabledState
+    HttpConfig_HttpEnabledState (..),
 
-    -- * GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
+    -- ** ListDeviceConfigVersionsResponse
+    ListDeviceConfigVersionsResponse (..),
+    newListDeviceConfigVersionsResponse,
 
-    -- * MqttConfig
-    , MqttConfig
-    , mqttConfig
-    , mcMqttEnabledState
+    -- ** ListDeviceRegistriesResponse
+    ListDeviceRegistriesResponse (..),
+    newListDeviceRegistriesResponse,
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
+    -- ** ListDeviceStatesResponse
+    ListDeviceStatesResponse (..),
+    newListDeviceStatesResponse,
 
-    -- * RegistryCredential
-    , RegistryCredential
-    , registryCredential
-    , rcPublicKeyCertificate
+    -- ** ListDevicesResponse
+    ListDevicesResponse (..),
+    newListDevicesResponse,
 
-    -- * SendCommandToDeviceRequest
-    , SendCommandToDeviceRequest
-    , sendCommandToDeviceRequest
-    , sctdrBinaryData
-    , sctdrSubfolder
+    -- ** ModifyCloudToDeviceConfigRequest
+    ModifyCloudToDeviceConfigRequest (..),
+    newModifyCloudToDeviceConfigRequest,
 
-    -- * BindDeviceToGatewayResponse
-    , BindDeviceToGatewayResponse
-    , bindDeviceToGatewayResponse
+    -- ** MqttConfig
+    MqttConfig (..),
+    newMqttConfig,
 
-    -- * DeviceRegistryLogLevel
-    , DeviceRegistryLogLevel (..)
+    -- ** MqttConfig_MqttEnabledState
+    MqttConfig_MqttEnabledState (..),
 
-    -- * HTTPConfig
-    , HTTPConfig
-    , hTTPConfig
-    , httpcHTTPEnabledState
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** PublicKeyCertificate
+    PublicKeyCertificate (..),
+    newPublicKeyCertificate,
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** PublicKeyCertificate_Format
+    PublicKeyCertificate_Format (..),
 
-    -- * GatewayConfigGatewayType
-    , GatewayConfigGatewayType (..)
+    -- ** PublicKeyCredential
+    PublicKeyCredential (..),
+    newPublicKeyCredential,
 
-    -- * ListDevicesResponse
-    , ListDevicesResponse
-    , listDevicesResponse
-    , ldrNextPageToken
-    , ldrDevices
+    -- ** PublicKeyCredential_Format
+    PublicKeyCredential_Format (..),
 
-    -- * DeviceMetadata
-    , DeviceMetadata
-    , deviceMetadata
-    , dmAddtional
+    -- ** RegistryCredential
+    RegistryCredential (..),
+    newRegistryCredential,
 
-    -- * GatewayConfigGatewayAuthMethod
-    , GatewayConfigGatewayAuthMethod (..)
+    -- ** SendCommandToDeviceRequest
+    SendCommandToDeviceRequest (..),
+    newSendCommandToDeviceRequest,
 
-    -- * DeviceRegistry
-    , DeviceRegistry
-    , deviceRegistry
-    , drLogLevel
-    , drCredentials
-    , drStateNotificationConfig
-    , drEventNotificationConfigs
-    , drMqttConfig
-    , drName
-    , drHTTPConfig
-    , drId
+    -- ** SendCommandToDeviceResponse
+    SendCommandToDeviceResponse (..),
+    newSendCommandToDeviceResponse,
 
-    -- * PublicKeyCredential
-    , PublicKeyCredential
-    , publicKeyCredential
-    , pFormat
-    , pKey
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
-    -- * UnbindDeviceFromGatewayRequest
-    , UnbindDeviceFromGatewayRequest
-    , unbindDeviceFromGatewayRequest
-    , udfgrDeviceId
-    , udfgrGatewayId
+    -- ** StateNotificationConfig
+    StateNotificationConfig (..),
+    newStateNotificationConfig,
 
-    -- * MqttConfigMqttEnabledState
-    , MqttConfigMqttEnabledState (..)
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
-    -- * HTTPConfigHTTPEnabledState
-    , HTTPConfigHTTPEnabledState (..)
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
-    -- * SendCommandToDeviceResponse
-    , SendCommandToDeviceResponse
-    , sendCommandToDeviceResponse
+    -- ** UnbindDeviceFromGatewayRequest
+    UnbindDeviceFromGatewayRequest (..),
+    newUnbindDeviceFromGatewayRequest,
 
-    -- * BindDeviceToGatewayRequest
-    , BindDeviceToGatewayRequest
-    , bindDeviceToGatewayRequest
-    , bdtgrDeviceId
-    , bdtgrGatewayId
+    -- ** UnbindDeviceFromGatewayResponse
+    UnbindDeviceFromGatewayResponse (..),
+    newUnbindDeviceFromGatewayResponse,
 
-    -- * ModifyCloudToDeviceConfigRequest
-    , ModifyCloudToDeviceConfigRequest
-    , modifyCloudToDeviceConfigRequest
-    , mctdcrVersionToUpdate
-    , mctdcrBinaryData
+    -- ** X509CertificateDetails
+    X509CertificateDetails (..),
+    newX509CertificateDetails,
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    -- ** ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
+    ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..),
 
-import Network.Google.CloudIOT.Types.Product
-import Network.Google.CloudIOT.Types.Sum
-import Network.Google.Prelude
+    -- ** ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
+    ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Cloud IoT API. This contains the host and root path used as a starting point for constructing service requests.
-cloudIOTService :: ServiceConfig
-cloudIOTService
-  = defaultService (ServiceId "cloudiot:v1")
-      "cloudiot.googleapis.com"
+import Network.Google.CloudIOT.Internal.Product
+import Network.Google.CloudIOT.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud IoT API. This contains the host and root path used as a starting point for constructing service requests.
+cloudIOTService :: Core.ServiceConfig
+cloudIOTService =
+  Core.defaultService
+    (Core.ServiceId "cloudiot:v1")
+    "cloudiot.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | Register and manage devices in the Google Cloud IoT service
-cloudIOTScope :: Proxy '["https://www.googleapis.com/auth/cloudiot"]
-cloudIOTScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+cloudIOTScope :: Core.Proxy '["https://www.googleapis.com/auth/cloudiot"]
+cloudIOTScope = Core.Proxy
