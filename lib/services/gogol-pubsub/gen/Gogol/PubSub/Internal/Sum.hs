@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.PubSub.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Schema_Type
     Schema_Type
-      (
-        Schema_Type_TYPEUNSPECIFIED,
+      ( Schema_Type_TYPEUNSPECIFIED,
         Schema_Type_PROTOCOLBUFFER,
         Schema_Type_Avro,
         ..
@@ -54,8 +43,7 @@ module Gogol.PubSub.Internal.Sum
 
     -- * SchemaSettings_Encoding
     SchemaSettings_Encoding
-      (
-        SchemaSettings_Encoding_ENCODINGUNSPECIFIED,
+      ( SchemaSettings_Encoding_ENCODINGUNSPECIFIED,
         SchemaSettings_Encoding_Json,
         SchemaSettings_Encoding_Binary,
         ..
@@ -63,8 +51,7 @@ module Gogol.PubSub.Internal.Sum
 
     -- * Subscription_State
     Subscription_State
-      (
-        Subscription_State_STATEUNSPECIFIED,
+      ( Subscription_State_STATEUNSPECIFIED,
         Subscription_State_Active,
         Subscription_State_RESOURCEERROR,
         ..
@@ -72,8 +59,7 @@ module Gogol.PubSub.Internal.Sum
 
     -- * ValidateMessageRequest_Encoding
     ValidateMessageRequest_Encoding
-      (
-        ValidateMessageRequest_Encoding_ENCODINGUNSPECIFIED,
+      ( ValidateMessageRequest_Encoding_ENCODINGUNSPECIFIED,
         ValidateMessageRequest_Encoding_Json,
         ValidateMessageRequest_Encoding_Binary,
         ..
@@ -81,8 +67,7 @@ module Gogol.PubSub.Internal.Sum
 
     -- * ProjectsSchemasGetView
     ProjectsSchemasGetView
-      (
-        ProjectsSchemasGetView_SCHEMAVIEWUNSPECIFIED,
+      ( ProjectsSchemasGetView_SCHEMAVIEWUNSPECIFIED,
         ProjectsSchemasGetView_Basic,
         ProjectsSchemasGetView_Full,
         ..
@@ -90,28 +75,28 @@ module Gogol.PubSub.Internal.Sum
 
     -- * ProjectsSchemasListView
     ProjectsSchemasListView
-      (
-        ProjectsSchemasListView_SCHEMAVIEWUNSPECIFIED,
+      ( ProjectsSchemasListView_SCHEMAVIEWUNSPECIFIED,
         ProjectsSchemasListView_Basic,
         ProjectsSchemasListView_Full,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -124,20 +109,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The type of the schema definition.
-newtype Schema_Type = Schema_Type { fromSchema_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Schema_Type = Schema_Type {fromSchema_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern Schema_Type_TYPEUNSPECIFIED :: Schema_Type
@@ -155,20 +141,21 @@ pattern Schema_Type_Avro = Schema_Type "AVRO"
   Schema_Type_TYPEUNSPECIFIED,
   Schema_Type_PROTOCOLBUFFER,
   Schema_Type_Avro,
-  Schema_Type #-}
+  Schema_Type
+  #-}
 
 -- | The encoding of messages validated against @schema@.
-newtype SchemaSettings_Encoding = SchemaSettings_Encoding { fromSchemaSettings_Encoding :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SchemaSettings_Encoding = SchemaSettings_Encoding {fromSchemaSettings_Encoding :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified
 pattern SchemaSettings_Encoding_ENCODINGUNSPECIFIED :: SchemaSettings_Encoding
@@ -186,20 +173,21 @@ pattern SchemaSettings_Encoding_Binary = SchemaSettings_Encoding "BINARY"
   SchemaSettings_Encoding_ENCODINGUNSPECIFIED,
   SchemaSettings_Encoding_Json,
   SchemaSettings_Encoding_Binary,
-  SchemaSettings_Encoding #-}
+  SchemaSettings_Encoding
+  #-}
 
 -- | Output only. An output-only field indicating whether or not the subscription can receive messages.
-newtype Subscription_State = Subscription_State { fromSubscription_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Subscription_State = Subscription_State {fromSubscription_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern Subscription_State_STATEUNSPECIFIED :: Subscription_State
@@ -217,20 +205,21 @@ pattern Subscription_State_RESOURCEERROR = Subscription_State "RESOURCE_ERROR"
   Subscription_State_STATEUNSPECIFIED,
   Subscription_State_Active,
   Subscription_State_RESOURCEERROR,
-  Subscription_State #-}
+  Subscription_State
+  #-}
 
 -- | The encoding expected for messages
-newtype ValidateMessageRequest_Encoding = ValidateMessageRequest_Encoding { fromValidateMessageRequest_Encoding :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ValidateMessageRequest_Encoding = ValidateMessageRequest_Encoding {fromValidateMessageRequest_Encoding :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified
 pattern ValidateMessageRequest_Encoding_ENCODINGUNSPECIFIED :: ValidateMessageRequest_Encoding
@@ -248,20 +237,21 @@ pattern ValidateMessageRequest_Encoding_Binary = ValidateMessageRequest_Encoding
   ValidateMessageRequest_Encoding_ENCODINGUNSPECIFIED,
   ValidateMessageRequest_Encoding_Json,
   ValidateMessageRequest_Encoding_Binary,
-  ValidateMessageRequest_Encoding #-}
+  ValidateMessageRequest_Encoding
+  #-}
 
 -- | The set of fields to return in the response. If not set, returns a Schema with all fields filled out. Set to @BASIC@ to omit the @definition@.
-newtype ProjectsSchemasGetView = ProjectsSchemasGetView { fromProjectsSchemasGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsSchemasGetView = ProjectsSchemasGetView {fromProjectsSchemasGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default \/ unset value. The API will default to the BASIC view.
 pattern ProjectsSchemasGetView_SCHEMAVIEWUNSPECIFIED :: ProjectsSchemasGetView
@@ -279,20 +269,21 @@ pattern ProjectsSchemasGetView_Full = ProjectsSchemasGetView "FULL"
   ProjectsSchemasGetView_SCHEMAVIEWUNSPECIFIED,
   ProjectsSchemasGetView_Basic,
   ProjectsSchemasGetView_Full,
-  ProjectsSchemasGetView #-}
+  ProjectsSchemasGetView
+  #-}
 
 -- | The set of Schema fields to return in the response. If not set, returns Schemas with @name@ and @type@, but not @definition@. Set to @FULL@ to retrieve all fields.
-newtype ProjectsSchemasListView = ProjectsSchemasListView { fromProjectsSchemasListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsSchemasListView = ProjectsSchemasListView {fromProjectsSchemasListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default \/ unset value. The API will default to the BASIC view.
 pattern ProjectsSchemasListView_SCHEMAVIEWUNSPECIFIED :: ProjectsSchemasListView
@@ -310,4 +301,5 @@ pattern ProjectsSchemasListView_Full = ProjectsSchemasListView "FULL"
   ProjectsSchemasListView_SCHEMAVIEWUNSPECIFIED,
   ProjectsSchemasListView_Basic,
   ProjectsSchemasListView_Full,
-  ProjectsSchemasListView #-}
+  ProjectsSchemasListView
+  #-}
