@@ -1,581 +1,441 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.BigtableAdmin.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.BigtableAdmin.Types
-    (
-    -- * Service Configuration
-      bigtableAdminService
+  ( -- * Configuration
+    bigtableAdminService,
 
     -- * OAuth Scopes
-    , bigtableAdminClusterScope
-    , cloudBigtableAdminTableScope
-    , cloudPlatformReadOnlyScope
-    , bigtableAdminScope
-    , cloudPlatformScope
-    , cloudBigtableAdminScope
-    , cloudBigtableAdminClusterScope
-    , bigtableAdminTableScope
-    , bigtableAdminInstanceScope
-
-    -- * SingleClusterRouting
-    , SingleClusterRouting
-    , singleClusterRouting
-    , scrAllowTransactionalWrites
-    , scrClusterId
-
-    -- * InstanceLabels
-    , InstanceLabels
-    , instanceLabels
-    , ilAddtional
-
-    -- * ListBackupsResponse
-    , ListBackupsResponse
-    , listBackupsResponse
-    , lbrNextPageToken
-    , lbrBackups
-
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- * CreateInstanceRequest
-    , CreateInstanceRequest
-    , createInstanceRequest
-    , cirParent
-    , cirInstanceId
-    , cirClusters
-    , cirInstance
-
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- * GenerateConsistencyTokenRequest
-    , GenerateConsistencyTokenRequest
-    , generateConsistencyTokenRequest
-
-    -- * ModifyColumnFamiliesRequest
-    , ModifyColumnFamiliesRequest
-    , modifyColumnFamiliesRequest
-    , mcfrModifications
-
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- * CreateClusterRequest
-    , CreateClusterRequest
-    , createClusterRequest
-    , ccrParent
-    , ccrCluster
-    , ccrClusterId
-
-    -- * GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- * Cluster
-    , Cluster
-    , cluster
-    , cState
-    , cDefaultStorageType
-    , cLocation
-    , cServeNodes
-    , cName
-    , cEncryptionConfig
-
-    -- * Split
-    , Split
-    , split
-    , sKey
-
-    -- * MultiClusterRoutingUseAny
-    , MultiClusterRoutingUseAny
-    , multiClusterRoutingUseAny
-
-    -- * ClusterState
-    , ClusterState
-    , clusterState
-    , csReplicationState
-    , csEncryptionInfo
-
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * ClusterDefaultStorageType
-    , ClusterDefaultStorageType (..)
-
-    -- * ListAppProFilesResponse
-    , ListAppProFilesResponse
-    , listAppProFilesResponse
-    , lapfrNextPageToken
-    , lapfrFailedLocations
-    , lapfrAppProFiles
-
-    -- * OperationProgress
-    , OperationProgress
-    , operationProgress
-    , opStartTime
-    , opProgressPercent
-    , opEndTime
-
-    -- * TableClusterStates
-    , TableClusterStates
-    , tableClusterStates
-    , tcsAddtional
-
-    -- * TableColumnFamilies
-    , TableColumnFamilies
-    , tableColumnFamilies
-    , tcfAddtional
-
-    -- * CreateTableRequest
-    , CreateTableRequest
-    , createTableRequest
-    , ctrInitialSplits
-    , ctrTableId
-    , ctrTable
-
-    -- * RestoreInfoSourceType
-    , RestoreInfoSourceType (..)
-
-    -- * CreateClusterMetadata
-    , CreateClusterMetadata
-    , createClusterMetadata
-    , ccmRequestTime
-    , ccmTables
-    , ccmOriginalRequest
-    , ccmFinishTime
-
-    -- * TableProgress
-    , TableProgress
-    , tableProgress
-    , tpState
-    , tpEstimatedSizeBytes
-    , tpEstimatedCopiedBytes
-
-    -- * Union
-    , Union
-    , union
-    , uRules
-
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- * CreateClusterMetadataTables
-    , CreateClusterMetadataTables
-    , createClusterMetadataTables
-    , ccmtAddtional
-
-    -- * ProjectsInstancesTablesListView
-    , ProjectsInstancesTablesListView (..)
-
-    -- * EncryptionInfoEncryptionType
-    , EncryptionInfoEncryptionType (..)
-
-    -- * UpdateAppProFileMetadata
-    , UpdateAppProFileMetadata
-    , updateAppProFileMetadata
-
-    -- * RestoreTableMetadataSourceType
-    , RestoreTableMetadataSourceType (..)
-
-    -- * GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- * Backup
-    , Backup
-    , backup
-    , bSizeBytes
-    , bState
-    , bStartTime
-    , bSourceTable
-    , bName
-    , bEndTime
-    , bExpireTime
-    , bEncryptionInfo
-
-    -- * UpdateClusterMetadata
-    , UpdateClusterMetadata
-    , updateClusterMetadata
-    , ucmRequestTime
-    , ucmOriginalRequest
-    , ucmFinishTime
-
-    -- * ClusterStateReplicationState
-    , ClusterStateReplicationState (..)
-
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- * InstanceType
-    , InstanceType (..)
-
-    -- * FailureTrace
-    , FailureTrace
-    , failureTrace
-    , ftFrames
-
-    -- * CheckConsistencyRequest
-    , CheckConsistencyRequest
-    , checkConsistencyRequest
-    , ccrConsistencyToken
-
-    -- * ListTablesResponse
-    , ListTablesResponse
-    , listTablesResponse
-    , ltrNextPageToken
-    , ltrTables
-
-    -- * TableProgressState
-    , TableProgressState (..)
-
-    -- * RestoreTableRequest
-    , RestoreTableRequest
-    , restoreTableRequest
-    , rtrBackup
-    , rtrTableId
-
-    -- * CreateBackupMetadata
-    , CreateBackupMetadata
-    , createBackupMetadata
-    , cbmStartTime
-    , cbmSourceTable
-    , cbmName
-    , cbmEndTime
-
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- * PartialUpdateInstanceRequest
-    , PartialUpdateInstanceRequest
-    , partialUpdateInstanceRequest
-    , puirUpdateMask
-    , puirInstance
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * TableGranularity
-    , TableGranularity (..)
-
-    -- * GcRule
-    , GcRule
-    , gcRule
-    , grMaxAge
-    , grUnion
-    , grIntersection
-    , grMaxNumVersions
-
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- * ClusterType
-    , ClusterType (..)
-
-    -- * ProjectsInstancesTablesGetView
-    , ProjectsInstancesTablesGetView (..)
-
-    -- * AppProFile
-    , AppProFile
-    , appProFile
-    , apfSingleClusterRouting
-    , apfEtag
-    , apfMultiClusterRoutingUseAny
-    , apfName
-    , apfDescription
-
-    -- * Frame
-    , Frame
-    , frame
-    , fWorkflowGuid
-    , fZoneId
-    , fTargetName
-
-    -- * CreateInstanceRequestClusters
-    , CreateInstanceRequestClusters
-    , createInstanceRequestClusters
-    , circAddtional
-
-    -- * GenerateConsistencyTokenResponse
-    , GenerateConsistencyTokenResponse
-    , generateConsistencyTokenResponse
-    , gctrConsistencyToken
-
-    -- * EncryptionConfig
-    , EncryptionConfig
-    , encryptionConfig
-    , ecKmsKeyName
-
-    -- * DropRowRangeRequest
-    , DropRowRangeRequest
-    , dropRowRangeRequest
-    , drrrRowKeyPrefix
-    , drrrDeleteAllDataFromTable
-
-    -- * UpdateInstanceMetadata
-    , UpdateInstanceMetadata
-    , updateInstanceMetadata
-    , uimRequestTime
-    , uimOriginalRequest
-    , uimFinishTime
-
-    -- * Intersection
-    , Intersection
-    , intersection
-    , iRules
-
-    -- * ColumnFamily
-    , ColumnFamily
-    , columnFamily
-    , cfGcRule
-
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- * ListClustersResponse
-    , ListClustersResponse
-    , listClustersResponse
-    , lcrNextPageToken
-    , lcrFailedLocations
-    , lcrClusters
-
-    -- * BackupInfo
-    , BackupInfo
-    , backupInfo
-    , biStartTime
-    , biSourceTable
-    , biBackup
-    , biEndTime
-
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- * CreateInstanceMetadata
-    , CreateInstanceMetadata
-    , createInstanceMetadata
-    , cimRequestTime
-    , cimOriginalRequest
-    , cimFinishTime
-
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
-
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
-
-    -- * ListInstancesResponse
-    , ListInstancesResponse
-    , listInstancesResponse
-    , lirNextPageToken
-    , lirFailedLocations
-    , lirInstances
-
-    -- * RestoreTableMetadata
-    , RestoreTableMetadata
-    , restoreTableMetadata
-    , rtmOptimizeTableOperationName
-    , rtmSourceType
-    , rtmProgress
-    , rtmName
-    , rtmBackupInfo
-
-    -- * CheckConsistencyResponse
-    , CheckConsistencyResponse
-    , checkConsistencyResponse
-    , ccrConsistent
-
-    -- * InstanceState
-    , InstanceState (..)
-
-    -- * Modification
-    , Modification
-    , modification
-    , mDrop
-    , mCreate
-    , mId
-    , mUpdate
-
-    -- * Table
-    , Table
-    , table
-    , tGranularity
-    , tName
-    , tRestoreInfo
-    , tClusterStates
-    , tColumnFamilies
-
-    -- * OptimizeRestoredTableMetadata
-    , OptimizeRestoredTableMetadata
-    , optimizeRestoredTableMetadata
-    , ortmProgress
-    , ortmName
-
-    -- * RestoreInfo
-    , RestoreInfo
-    , restoreInfo
-    , riSourceType
-    , riBackupInfo
-
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- * BackupState
-    , BackupState (..)
-
-    -- * EncryptionInfo
-    , EncryptionInfo
-    , encryptionInfo
-    , eiEncryptionType
-    , eiKmsKeyVersion
-    , eiEncryptionStatus
-
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-
-    -- * Instance
-    , Instance
-    , instance'
-    , iState
-    , iName
-    , iDisplayName
-    , iLabels
-    , iType
-    ) where
-
-import Network.Google.BigtableAdmin.Types.Product
-import Network.Google.BigtableAdmin.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v2' of the Cloud Bigtable Admin API. This contains the host and root path used as a starting point for constructing service requests.
-bigtableAdminService :: ServiceConfig
-bigtableAdminService
-  = defaultService (ServiceId "bigtableadmin:v2")
-      "bigtableadmin.googleapis.com"
-
--- | Administer your Cloud Bigtable clusters
-bigtableAdminClusterScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin.cluster"]
-bigtableAdminClusterScope = Proxy
-
--- | Administer your Cloud Bigtable tables
-cloudBigtableAdminTableScope :: Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.table"]
-cloudBigtableAdminTableScope = Proxy
-
--- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy
+    bigtableAdminScope,
+    bigtableAdminClusterScope,
+    bigtableAdminInstanceScope,
+    bigtableAdminTableScope,
+    cloudBigtableAdminScope,
+    cloudBigtableAdminClusterScope,
+    cloudBigtableAdminTableScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** AppProfile
+    AppProfile (..),
+    newAppProfile,
+
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
+
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
+
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
+
+    -- ** AutoscalingLimits
+    AutoscalingLimits (..),
+    newAutoscalingLimits,
+
+    -- ** AutoscalingTargets
+    AutoscalingTargets (..),
+    newAutoscalingTargets,
+
+    -- ** Backup
+    Backup (..),
+    newBackup,
+
+    -- ** Backup_State
+    Backup_State (..),
+
+    -- ** BackupInfo
+    BackupInfo (..),
+    newBackupInfo,
+
+    -- ** Binding
+    Binding (..),
+    newBinding,
+
+    -- ** CheckConsistencyRequest
+    CheckConsistencyRequest (..),
+    newCheckConsistencyRequest,
+
+    -- ** CheckConsistencyResponse
+    CheckConsistencyResponse (..),
+    newCheckConsistencyResponse,
+
+    -- ** Cluster
+    Cluster (..),
+    newCluster,
+
+    -- ** Cluster_DefaultStorageType
+    Cluster_DefaultStorageType (..),
+
+    -- ** Cluster_State
+    Cluster_State (..),
+
+    -- ** ClusterAutoscalingConfig
+    ClusterAutoscalingConfig (..),
+    newClusterAutoscalingConfig,
+
+    -- ** ClusterConfig
+    ClusterConfig (..),
+    newClusterConfig,
+
+    -- ** ClusterState
+    ClusterState (..),
+    newClusterState,
+
+    -- ** ClusterState_ReplicationState
+    ClusterState_ReplicationState (..),
+
+    -- ** ColumnFamily
+    ColumnFamily (..),
+    newColumnFamily,
+
+    -- ** CreateBackupMetadata
+    CreateBackupMetadata (..),
+    newCreateBackupMetadata,
+
+    -- ** CreateClusterMetadata
+    CreateClusterMetadata (..),
+    newCreateClusterMetadata,
+
+    -- ** CreateClusterMetadata_Tables
+    CreateClusterMetadata_Tables (..),
+    newCreateClusterMetadata_Tables,
+
+    -- ** CreateClusterRequest
+    CreateClusterRequest (..),
+    newCreateClusterRequest,
+
+    -- ** CreateInstanceMetadata
+    CreateInstanceMetadata (..),
+    newCreateInstanceMetadata,
+
+    -- ** CreateInstanceRequest
+    CreateInstanceRequest (..),
+    newCreateInstanceRequest,
+
+    -- ** CreateInstanceRequest_Clusters
+    CreateInstanceRequest_Clusters (..),
+    newCreateInstanceRequest_Clusters,
+
+    -- ** CreateTableRequest
+    CreateTableRequest (..),
+    newCreateTableRequest,
+
+    -- ** DropRowRangeRequest
+    DropRowRangeRequest (..),
+    newDropRowRangeRequest,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
+
+    -- ** EncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
+
+    -- ** EncryptionInfo_EncryptionType
+    EncryptionInfo_EncryptionType (..),
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** GcRule
+    GcRule (..),
+    newGcRule,
+
+    -- ** GenerateConsistencyTokenRequest
+    GenerateConsistencyTokenRequest (..),
+    newGenerateConsistencyTokenRequest,
+
+    -- ** GenerateConsistencyTokenResponse
+    GenerateConsistencyTokenResponse (..),
+    newGenerateConsistencyTokenResponse,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
+
+    -- ** Instance
+    Instance (..),
+    newInstance,
+
+    -- ** Instance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
+
+    -- ** Instance_State
+    Instance_State (..),
+
+    -- ** Instance_Type
+    Instance_Type (..),
+
+    -- ** Intersection
+    Intersection (..),
+    newIntersection,
+
+    -- ** ListAppProfilesResponse
+    ListAppProfilesResponse (..),
+    newListAppProfilesResponse,
+
+    -- ** ListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
+
+    -- ** ListClustersResponse
+    ListClustersResponse (..),
+    newListClustersResponse,
+
+    -- ** ListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListTablesResponse
+    ListTablesResponse (..),
+    newListTablesResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** Modification
+    Modification (..),
+    newModification,
+
+    -- ** ModifyColumnFamiliesRequest
+    ModifyColumnFamiliesRequest (..),
+    newModifyColumnFamiliesRequest,
+
+    -- ** MultiClusterRoutingUseAny
+    MultiClusterRoutingUseAny (..),
+    newMultiClusterRoutingUseAny,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationProgress
+    OperationProgress (..),
+    newOperationProgress,
+
+    -- ** OptimizeRestoredTableMetadata
+    OptimizeRestoredTableMetadata (..),
+    newOptimizeRestoredTableMetadata,
+
+    -- ** PartialUpdateClusterMetadata
+    PartialUpdateClusterMetadata (..),
+    newPartialUpdateClusterMetadata,
+
+    -- ** PartialUpdateClusterRequest
+    PartialUpdateClusterRequest (..),
+    newPartialUpdateClusterRequest,
+
+    -- ** PartialUpdateInstanceRequest
+    PartialUpdateInstanceRequest (..),
+    newPartialUpdateInstanceRequest,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** RestoreInfo
+    RestoreInfo (..),
+    newRestoreInfo,
+
+    -- ** RestoreInfo_SourceType
+    RestoreInfo_SourceType (..),
+
+    -- ** RestoreTableMetadata
+    RestoreTableMetadata (..),
+    newRestoreTableMetadata,
+
+    -- ** RestoreTableMetadata_SourceType
+    RestoreTableMetadata_SourceType (..),
+
+    -- ** RestoreTableRequest
+    RestoreTableRequest (..),
+    newRestoreTableRequest,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** SingleClusterRouting
+    SingleClusterRouting (..),
+    newSingleClusterRouting,
+
+    -- ** Split
+    Split (..),
+    newSplit,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** Table
+    Table (..),
+    newTable,
+
+    -- ** Table_ClusterStates
+    Table_ClusterStates (..),
+    newTable_ClusterStates,
+
+    -- ** Table_ColumnFamilies
+    Table_ColumnFamilies (..),
+    newTable_ColumnFamilies,
+
+    -- ** Table_Granularity
+    Table_Granularity (..),
+
+    -- ** TableProgress
+    TableProgress (..),
+    newTableProgress,
+
+    -- ** TableProgress_State
+    TableProgress_State (..),
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** Union
+    Union (..),
+    newUnion,
+
+    -- ** UpdateAppProfileMetadata
+    UpdateAppProfileMetadata (..),
+    newUpdateAppProfileMetadata,
+
+    -- ** UpdateClusterMetadata
+    UpdateClusterMetadata (..),
+    newUpdateClusterMetadata,
+
+    -- ** UpdateInstanceMetadata
+    UpdateInstanceMetadata (..),
+    newUpdateInstanceMetadata,
+
+    -- ** ProjectsInstancesTablesGetView
+    ProjectsInstancesTablesGetView (..),
+
+    -- ** ProjectsInstancesTablesListView
+    ProjectsInstancesTablesListView (..),
+  )
+where
+
+import Network.Google.BigtableAdmin.Internal.Product
+import Network.Google.BigtableAdmin.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Cloud Bigtable Admin API. This contains the host and root path used as a starting point for constructing service requests.
+bigtableAdminService :: Core.ServiceConfig
+bigtableAdminService =
+  Core.defaultService
+    (Core.ServiceId "bigtableadmin:v2")
+    "bigtableadmin.googleapis.com"
 
 -- | Administer your Cloud Bigtable tables and clusters
-bigtableAdminScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin"]
-bigtableAdminScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
-
--- | Administer your Cloud Bigtable tables and clusters
-cloudBigtableAdminScope :: Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin"]
-cloudBigtableAdminScope = Proxy
+bigtableAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin"]
+bigtableAdminScope = Core.Proxy
 
 -- | Administer your Cloud Bigtable clusters
-cloudBigtableAdminClusterScope :: Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.cluster"]
-cloudBigtableAdminClusterScope = Proxy
+bigtableAdminClusterScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin.cluster"]
+bigtableAdminClusterScope = Core.Proxy
+
+-- | Administer your Cloud Bigtable clusters
+bigtableAdminInstanceScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin.instance"]
+bigtableAdminInstanceScope = Core.Proxy
 
 -- | Administer your Cloud Bigtable tables
-bigtableAdminTableScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin.table"]
-bigtableAdminTableScope = Proxy
+bigtableAdminTableScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin.table"]
+bigtableAdminTableScope = Core.Proxy
+
+-- | Administer your Cloud Bigtable tables and clusters
+cloudBigtableAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin"]
+cloudBigtableAdminScope = Core.Proxy
 
 -- | Administer your Cloud Bigtable clusters
-bigtableAdminInstanceScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin.instance"]
-bigtableAdminInstanceScope = Proxy
+cloudBigtableAdminClusterScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.cluster"]
+cloudBigtableAdminClusterScope = Core.Proxy
+
+-- | Administer your Cloud Bigtable tables
+cloudBigtableAdminTableScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.table"]
+cloudBigtableAdminTableScope = Core.Proxy
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View your data across Google Cloud services and see the email address of your Google Account
+cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Core.Proxy

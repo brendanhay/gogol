@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.BigtableAdmin
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,775 +30,649 @@
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference>
 module Network.Google.BigtableAdmin
-    (
-    -- * Service Configuration
-      bigtableAdminService
+  ( -- * Configuration
+    bigtableAdminService,
 
     -- * OAuth Scopes
-    , bigtableAdminClusterScope
-    , cloudBigtableAdminTableScope
-    , cloudPlatformReadOnlyScope
-    , bigtableAdminScope
-    , cloudPlatformScope
-    , cloudBigtableAdminScope
-    , cloudBigtableAdminClusterScope
-    , bigtableAdminTableScope
-    , bigtableAdminInstanceScope
-
-    -- * API Declaration
-    , BigtableAdminAPI
+    bigtableAdminScope,
+    bigtableAdminClusterScope,
+    bigtableAdminInstanceScope,
+    bigtableAdminTableScope,
+    cloudBigtableAdminScope,
+    cloudBigtableAdminClusterScope,
+    cloudBigtableAdminTableScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
     -- * Resources
 
     -- ** bigtableadmin.operations.cancel
-    , module Network.Google.Resource.BigtableAdmin.Operations.Cancel
+    BigtableAdminOperationsCancelResource,
+    newBigtableAdminOperationsCancel,
+    BigtableAdminOperationsCancel,
 
     -- ** bigtableadmin.operations.delete
-    , module Network.Google.Resource.BigtableAdmin.Operations.Delete
+    BigtableAdminOperationsDeleteResource,
+    newBigtableAdminOperationsDelete,
+    BigtableAdminOperationsDelete,
 
     -- ** bigtableadmin.operations.get
-    , module Network.Google.Resource.BigtableAdmin.Operations.Get
+    BigtableAdminOperationsGetResource,
+    newBigtableAdminOperationsGet,
+    BigtableAdminOperationsGet,
 
     -- ** bigtableadmin.operations.projects.operations.list
-    , module Network.Google.Resource.BigtableAdmin.Operations.Projects.Operations.List
+    BigtableAdminOperationsProjectsOperationsListResource,
+    newBigtableAdminOperationsProjectsOperationsList,
+    BigtableAdminOperationsProjectsOperationsList,
 
     -- ** bigtableadmin.projects.instances.appProfiles.create
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Create
+    BigtableAdminProjectsInstancesAppProfilesCreateResource,
+    newBigtableAdminProjectsInstancesAppProfilesCreate,
+    BigtableAdminProjectsInstancesAppProfilesCreate,
 
     -- ** bigtableadmin.projects.instances.appProfiles.delete
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Delete
+    BigtableAdminProjectsInstancesAppProfilesDeleteResource,
+    newBigtableAdminProjectsInstancesAppProfilesDelete,
+    BigtableAdminProjectsInstancesAppProfilesDelete,
 
     -- ** bigtableadmin.projects.instances.appProfiles.get
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Get
+    BigtableAdminProjectsInstancesAppProfilesGetResource,
+    newBigtableAdminProjectsInstancesAppProfilesGet,
+    BigtableAdminProjectsInstancesAppProfilesGet,
 
     -- ** bigtableadmin.projects.instances.appProfiles.list
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.List
+    BigtableAdminProjectsInstancesAppProfilesListResource,
+    newBigtableAdminProjectsInstancesAppProfilesList,
+    BigtableAdminProjectsInstancesAppProfilesList,
 
     -- ** bigtableadmin.projects.instances.appProfiles.patch
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Patch
+    BigtableAdminProjectsInstancesAppProfilesPatchResource,
+    newBigtableAdminProjectsInstancesAppProfilesPatch,
+    BigtableAdminProjectsInstancesAppProfilesPatch,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.create
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
+    BigtableAdminProjectsInstancesClustersBackupsCreateResource,
+    newBigtableAdminProjectsInstancesClustersBackupsCreate,
+    BigtableAdminProjectsInstancesClustersBackupsCreate,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.delete
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
+    BigtableAdminProjectsInstancesClustersBackupsDeleteResource,
+    newBigtableAdminProjectsInstancesClustersBackupsDelete,
+    BigtableAdminProjectsInstancesClustersBackupsDelete,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.get
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
+    BigtableAdminProjectsInstancesClustersBackupsGetResource,
+    newBigtableAdminProjectsInstancesClustersBackupsGet,
+    BigtableAdminProjectsInstancesClustersBackupsGet,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.getIamPolicy
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.GetIAMPolicy
+    BigtableAdminProjectsInstancesClustersBackupsGetIamPolicyResource,
+    newBigtableAdminProjectsInstancesClustersBackupsGetIamPolicy,
+    BigtableAdminProjectsInstancesClustersBackupsGetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.list
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.List
+    BigtableAdminProjectsInstancesClustersBackupsListResource,
+    newBigtableAdminProjectsInstancesClustersBackupsList,
+    BigtableAdminProjectsInstancesClustersBackupsList,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.patch
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Patch
+    BigtableAdminProjectsInstancesClustersBackupsPatchResource,
+    newBigtableAdminProjectsInstancesClustersBackupsPatch,
+    BigtableAdminProjectsInstancesClustersBackupsPatch,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.setIamPolicy
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIAMPolicy
+    BigtableAdminProjectsInstancesClustersBackupsSetIamPolicyResource,
+    newBigtableAdminProjectsInstancesClustersBackupsSetIamPolicy,
+    BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.testIamPermissions
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.TestIAMPermissions
+    BigtableAdminProjectsInstancesClustersBackupsTestIamPermissionsResource,
+    newBigtableAdminProjectsInstancesClustersBackupsTestIamPermissions,
+    BigtableAdminProjectsInstancesClustersBackupsTestIamPermissions,
 
     -- ** bigtableadmin.projects.instances.clusters.create
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Create
+    BigtableAdminProjectsInstancesClustersCreateResource,
+    newBigtableAdminProjectsInstancesClustersCreate,
+    BigtableAdminProjectsInstancesClustersCreate,
 
     -- ** bigtableadmin.projects.instances.clusters.delete
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Delete
+    BigtableAdminProjectsInstancesClustersDeleteResource,
+    newBigtableAdminProjectsInstancesClustersDelete,
+    BigtableAdminProjectsInstancesClustersDelete,
 
     -- ** bigtableadmin.projects.instances.clusters.get
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Get
+    BigtableAdminProjectsInstancesClustersGetResource,
+    newBigtableAdminProjectsInstancesClustersGet,
+    BigtableAdminProjectsInstancesClustersGet,
 
     -- ** bigtableadmin.projects.instances.clusters.list
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.List
+    BigtableAdminProjectsInstancesClustersListResource,
+    newBigtableAdminProjectsInstancesClustersList,
+    BigtableAdminProjectsInstancesClustersList,
 
     -- ** bigtableadmin.projects.instances.clusters.partialUpdateCluster
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
+    BigtableAdminProjectsInstancesClustersPartialUpdateClusterResource,
+    newBigtableAdminProjectsInstancesClustersPartialUpdateCluster,
+    BigtableAdminProjectsInstancesClustersPartialUpdateCluster,
 
     -- ** bigtableadmin.projects.instances.clusters.update
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Update
+    BigtableAdminProjectsInstancesClustersUpdateResource,
+    newBigtableAdminProjectsInstancesClustersUpdate,
+    BigtableAdminProjectsInstancesClustersUpdate,
 
     -- ** bigtableadmin.projects.instances.create
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Create
+    BigtableAdminProjectsInstancesCreateResource,
+    newBigtableAdminProjectsInstancesCreate,
+    BigtableAdminProjectsInstancesCreate,
 
     -- ** bigtableadmin.projects.instances.delete
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Delete
+    BigtableAdminProjectsInstancesDeleteResource,
+    newBigtableAdminProjectsInstancesDelete,
+    BigtableAdminProjectsInstancesDelete,
 
     -- ** bigtableadmin.projects.instances.get
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Get
+    BigtableAdminProjectsInstancesGetResource,
+    newBigtableAdminProjectsInstancesGet,
+    BigtableAdminProjectsInstancesGet,
 
     -- ** bigtableadmin.projects.instances.getIamPolicy
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.GetIAMPolicy
+    BigtableAdminProjectsInstancesGetIamPolicyResource,
+    newBigtableAdminProjectsInstancesGetIamPolicy,
+    BigtableAdminProjectsInstancesGetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.list
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.List
+    BigtableAdminProjectsInstancesListResource,
+    newBigtableAdminProjectsInstancesList,
+    BigtableAdminProjectsInstancesList,
 
     -- ** bigtableadmin.projects.instances.partialUpdateInstance
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.PartialUpdateInstance
+    BigtableAdminProjectsInstancesPartialUpdateInstanceResource,
+    newBigtableAdminProjectsInstancesPartialUpdateInstance,
+    BigtableAdminProjectsInstancesPartialUpdateInstance,
 
     -- ** bigtableadmin.projects.instances.setIamPolicy
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.SetIAMPolicy
+    BigtableAdminProjectsInstancesSetIamPolicyResource,
+    newBigtableAdminProjectsInstancesSetIamPolicy,
+    BigtableAdminProjectsInstancesSetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.tables.checkConsistency
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
+    BigtableAdminProjectsInstancesTablesCheckConsistencyResource,
+    newBigtableAdminProjectsInstancesTablesCheckConsistency,
+    BigtableAdminProjectsInstancesTablesCheckConsistency,
 
     -- ** bigtableadmin.projects.instances.tables.create
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Create
+    BigtableAdminProjectsInstancesTablesCreateResource,
+    newBigtableAdminProjectsInstancesTablesCreate,
+    BigtableAdminProjectsInstancesTablesCreate,
 
     -- ** bigtableadmin.projects.instances.tables.delete
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Delete
+    BigtableAdminProjectsInstancesTablesDeleteResource,
+    newBigtableAdminProjectsInstancesTablesDelete,
+    BigtableAdminProjectsInstancesTablesDelete,
 
     -- ** bigtableadmin.projects.instances.tables.dropRowRange
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.DropRowRange
+    BigtableAdminProjectsInstancesTablesDropRowRangeResource,
+    newBigtableAdminProjectsInstancesTablesDropRowRange,
+    BigtableAdminProjectsInstancesTablesDropRowRange,
 
     -- ** bigtableadmin.projects.instances.tables.generateConsistencyToken
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
+    BigtableAdminProjectsInstancesTablesGenerateConsistencyTokenResource,
+    newBigtableAdminProjectsInstancesTablesGenerateConsistencyToken,
+    BigtableAdminProjectsInstancesTablesGenerateConsistencyToken,
 
     -- ** bigtableadmin.projects.instances.tables.get
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Get
+    BigtableAdminProjectsInstancesTablesGetResource,
+    newBigtableAdminProjectsInstancesTablesGet,
+    BigtableAdminProjectsInstancesTablesGet,
 
     -- ** bigtableadmin.projects.instances.tables.getIamPolicy
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPolicy
+    BigtableAdminProjectsInstancesTablesGetIamPolicyResource,
+    newBigtableAdminProjectsInstancesTablesGetIamPolicy,
+    BigtableAdminProjectsInstancesTablesGetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.tables.list
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.List
+    BigtableAdminProjectsInstancesTablesListResource,
+    newBigtableAdminProjectsInstancesTablesList,
+    BigtableAdminProjectsInstancesTablesList,
 
     -- ** bigtableadmin.projects.instances.tables.modifyColumnFamilies
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+    BigtableAdminProjectsInstancesTablesModifyColumnFamiliesResource,
+    newBigtableAdminProjectsInstancesTablesModifyColumnFamilies,
+    BigtableAdminProjectsInstancesTablesModifyColumnFamilies,
 
     -- ** bigtableadmin.projects.instances.tables.restore
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Restore
+    BigtableAdminProjectsInstancesTablesRestoreResource,
+    newBigtableAdminProjectsInstancesTablesRestore,
+    BigtableAdminProjectsInstancesTablesRestore,
 
     -- ** bigtableadmin.projects.instances.tables.setIamPolicy
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.SetIAMPolicy
+    BigtableAdminProjectsInstancesTablesSetIamPolicyResource,
+    newBigtableAdminProjectsInstancesTablesSetIamPolicy,
+    BigtableAdminProjectsInstancesTablesSetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.tables.testIamPermissions
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.TestIAMPermissions
+    BigtableAdminProjectsInstancesTablesTestIamPermissionsResource,
+    newBigtableAdminProjectsInstancesTablesTestIamPermissions,
+    BigtableAdminProjectsInstancesTablesTestIamPermissions,
 
     -- ** bigtableadmin.projects.instances.testIamPermissions
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.TestIAMPermissions
+    BigtableAdminProjectsInstancesTestIamPermissionsResource,
+    newBigtableAdminProjectsInstancesTestIamPermissions,
+    BigtableAdminProjectsInstancesTestIamPermissions,
 
     -- ** bigtableadmin.projects.instances.update
-    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Update
+    BigtableAdminProjectsInstancesUpdateResource,
+    newBigtableAdminProjectsInstancesUpdate,
+    BigtableAdminProjectsInstancesUpdate,
 
     -- ** bigtableadmin.projects.locations.get
-    , module Network.Google.Resource.BigtableAdmin.Projects.Locations.Get
+    BigtableAdminProjectsLocationsGetResource,
+    newBigtableAdminProjectsLocationsGet,
+    BigtableAdminProjectsLocationsGet,
 
     -- ** bigtableadmin.projects.locations.list
-    , module Network.Google.Resource.BigtableAdmin.Projects.Locations.List
+    BigtableAdminProjectsLocationsListResource,
+    newBigtableAdminProjectsLocationsList,
+    BigtableAdminProjectsLocationsList,
 
     -- * Types
 
-    -- ** SingleClusterRouting
-    , SingleClusterRouting
-    , singleClusterRouting
-    , scrAllowTransactionalWrites
-    , scrClusterId
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- ** InstanceLabels
-    , InstanceLabels
-    , instanceLabels
-    , ilAddtional
-
-    -- ** ListBackupsResponse
-    , ListBackupsResponse
-    , listBackupsResponse
-    , lbrNextPageToken
-    , lbrBackups
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** CreateInstanceRequest
-    , CreateInstanceRequest
-    , createInstanceRequest
-    , cirParent
-    , cirInstanceId
-    , cirClusters
-    , cirInstance
+    -- ** AppProfile
+    AppProfile (..),
+    newAppProfile,
 
     -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** GenerateConsistencyTokenRequest
-    , GenerateConsistencyTokenRequest
-    , generateConsistencyTokenRequest
-
-    -- ** ModifyColumnFamiliesRequest
-    , ModifyColumnFamiliesRequest
-    , modifyColumnFamiliesRequest
-    , mcfrModifications
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** CreateClusterRequest
-    , CreateClusterRequest
-    , createClusterRequest
-    , ccrParent
-    , ccrCluster
-    , ccrClusterId
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** Cluster
-    , Cluster
-    , cluster
-    , cState
-    , cDefaultStorageType
-    , cLocation
-    , cServeNodes
-    , cName
-    , cEncryptionConfig
-
-    -- ** Split
-    , Split
-    , split
-    , sKey
-
-    -- ** MultiClusterRoutingUseAny
-    , MultiClusterRoutingUseAny
-    , multiClusterRoutingUseAny
-
-    -- ** ClusterState
-    , ClusterState
-    , clusterState
-    , csReplicationState
-    , csEncryptionInfo
-
-    -- ** Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** ClusterDefaultStorageType
-    , ClusterDefaultStorageType (..)
-
-    -- ** ListAppProFilesResponse
-    , ListAppProFilesResponse
-    , listAppProFilesResponse
-    , lapfrNextPageToken
-    , lapfrFailedLocations
-    , lapfrAppProFiles
-
-    -- ** OperationProgress
-    , OperationProgress
-    , operationProgress
-    , opStartTime
-    , opProgressPercent
-    , opEndTime
-
-    -- ** TableClusterStates
-    , TableClusterStates
-    , tableClusterStates
-    , tcsAddtional
-
-    -- ** TableColumnFamilies
-    , TableColumnFamilies
-    , tableColumnFamilies
-    , tcfAddtional
-
-    -- ** CreateTableRequest
-    , CreateTableRequest
-    , createTableRequest
-    , ctrInitialSplits
-    , ctrTableId
-    , ctrTable
-
-    -- ** RestoreInfoSourceType
-    , RestoreInfoSourceType (..)
-
-    -- ** CreateClusterMetadata
-    , CreateClusterMetadata
-    , createClusterMetadata
-    , ccmRequestTime
-    , ccmTables
-    , ccmOriginalRequest
-    , ccmFinishTime
-
-    -- ** TableProgress
-    , TableProgress
-    , tableProgress
-    , tpState
-    , tpEstimatedSizeBytes
-    , tpEstimatedCopiedBytes
-
-    -- ** Union
-    , Union
-    , union
-    , uRules
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** CreateClusterMetadataTables
-    , CreateClusterMetadataTables
-    , createClusterMetadataTables
-    , ccmtAddtional
-
-    -- ** ProjectsInstancesTablesListView
-    , ProjectsInstancesTablesListView (..)
-
-    -- ** EncryptionInfoEncryptionType
-    , EncryptionInfoEncryptionType (..)
-
-    -- ** UpdateAppProFileMetadata
-    , UpdateAppProFileMetadata
-    , updateAppProFileMetadata
-
-    -- ** RestoreTableMetadataSourceType
-    , RestoreTableMetadataSourceType (..)
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** Backup
-    , Backup
-    , backup
-    , bSizeBytes
-    , bState
-    , bStartTime
-    , bSourceTable
-    , bName
-    , bEndTime
-    , bExpireTime
-    , bEncryptionInfo
-
-    -- ** UpdateClusterMetadata
-    , UpdateClusterMetadata
-    , updateClusterMetadata
-    , ucmRequestTime
-    , ucmOriginalRequest
-    , ucmFinishTime
-
-    -- ** ClusterStateReplicationState
-    , ClusterStateReplicationState (..)
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** InstanceType
-    , InstanceType (..)
-
-    -- ** FailureTrace
-    , FailureTrace
-    , failureTrace
-    , ftFrames
-
-    -- ** CheckConsistencyRequest
-    , CheckConsistencyRequest
-    , checkConsistencyRequest
-    , ccrConsistencyToken
-
-    -- ** ListTablesResponse
-    , ListTablesResponse
-    , listTablesResponse
-    , ltrNextPageToken
-    , ltrTables
-
-    -- ** TableProgressState
-    , TableProgressState (..)
-
-    -- ** RestoreTableRequest
-    , RestoreTableRequest
-    , restoreTableRequest
-    , rtrBackup
-    , rtrTableId
-
-    -- ** CreateBackupMetadata
-    , CreateBackupMetadata
-    , createBackupMetadata
-    , cbmStartTime
-    , cbmSourceTable
-    , cbmName
-    , cbmEndTime
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** PartialUpdateInstanceRequest
-    , PartialUpdateInstanceRequest
-    , partialUpdateInstanceRequest
-    , puirUpdateMask
-    , puirInstance
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** TableGranularity
-    , TableGranularity (..)
-
-    -- ** GcRule
-    , GcRule
-    , gcRule
-    , grMaxAge
-    , grUnion
-    , grIntersection
-    , grMaxNumVersions
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** ClusterType
-    , ClusterType (..)
-
-    -- ** ProjectsInstancesTablesGetView
-    , ProjectsInstancesTablesGetView (..)
-
-    -- ** AppProFile
-    , AppProFile
-    , appProFile
-    , apfSingleClusterRouting
-    , apfEtag
-    , apfMultiClusterRoutingUseAny
-    , apfName
-    , apfDescription
-
-    -- ** Frame
-    , Frame
-    , frame
-    , fWorkflowGuid
-    , fZoneId
-    , fTargetName
-
-    -- ** CreateInstanceRequestClusters
-    , CreateInstanceRequestClusters
-    , createInstanceRequestClusters
-    , circAddtional
-
-    -- ** GenerateConsistencyTokenResponse
-    , GenerateConsistencyTokenResponse
-    , generateConsistencyTokenResponse
-    , gctrConsistencyToken
-
-    -- ** EncryptionConfig
-    , EncryptionConfig
-    , encryptionConfig
-    , ecKmsKeyName
-
-    -- ** DropRowRangeRequest
-    , DropRowRangeRequest
-    , dropRowRangeRequest
-    , drrrRowKeyPrefix
-    , drrrDeleteAllDataFromTable
-
-    -- ** UpdateInstanceMetadata
-    , UpdateInstanceMetadata
-    , updateInstanceMetadata
-    , uimRequestTime
-    , uimOriginalRequest
-    , uimFinishTime
-
-    -- ** Intersection
-    , Intersection
-    , intersection
-    , iRules
-
-    -- ** ColumnFamily
-    , ColumnFamily
-    , columnFamily
-    , cfGcRule
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** ListClustersResponse
-    , ListClustersResponse
-    , listClustersResponse
-    , lcrNextPageToken
-    , lcrFailedLocations
-    , lcrClusters
-
-    -- ** BackupInfo
-    , BackupInfo
-    , backupInfo
-    , biStartTime
-    , biSourceTable
-    , biBackup
-    , biEndTime
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- ** CreateInstanceMetadata
-    , CreateInstanceMetadata
-    , createInstanceMetadata
-    , cimRequestTime
-    , cimOriginalRequest
-    , cimFinishTime
-
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** ListInstancesResponse
-    , ListInstancesResponse
-    , listInstancesResponse
-    , lirNextPageToken
-    , lirFailedLocations
-    , lirInstances
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- ** RestoreTableMetadata
-    , RestoreTableMetadata
-    , restoreTableMetadata
-    , rtmOptimizeTableOperationName
-    , rtmSourceType
-    , rtmProgress
-    , rtmName
-    , rtmBackupInfo
+    -- ** AutoscalingLimits
+    AutoscalingLimits (..),
+    newAutoscalingLimits,
 
-    -- ** CheckConsistencyResponse
-    , CheckConsistencyResponse
-    , checkConsistencyResponse
-    , ccrConsistent
+    -- ** AutoscalingTargets
+    AutoscalingTargets (..),
+    newAutoscalingTargets,
 
-    -- ** InstanceState
-    , InstanceState (..)
+    -- ** Backup
+    Backup (..),
+    newBackup,
 
-    -- ** Modification
-    , Modification
-    , modification
-    , mDrop
-    , mCreate
-    , mId
-    , mUpdate
+    -- ** Backup_State
+    Backup_State (..),
 
-    -- ** Table
-    , Table
-    , table
-    , tGranularity
-    , tName
-    , tRestoreInfo
-    , tClusterStates
-    , tColumnFamilies
-
-    -- ** OptimizeRestoredTableMetadata
-    , OptimizeRestoredTableMetadata
-    , optimizeRestoredTableMetadata
-    , ortmProgress
-    , ortmName
-
-    -- ** RestoreInfo
-    , RestoreInfo
-    , restoreInfo
-    , riSourceType
-    , riBackupInfo
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** BackupState
-    , BackupState (..)
-
-    -- ** EncryptionInfo
-    , EncryptionInfo
-    , encryptionInfo
-    , eiEncryptionType
-    , eiKmsKeyVersion
-    , eiEncryptionStatus
+    -- ** BackupInfo
+    BackupInfo (..),
+    newBackupInfo,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** CheckConsistencyRequest
+    CheckConsistencyRequest (..),
+    newCheckConsistencyRequest,
+
+    -- ** CheckConsistencyResponse
+    CheckConsistencyResponse (..),
+    newCheckConsistencyResponse,
+
+    -- ** Cluster
+    Cluster (..),
+    newCluster,
+
+    -- ** Cluster_DefaultStorageType
+    Cluster_DefaultStorageType (..),
+
+    -- ** Cluster_State
+    Cluster_State (..),
+
+    -- ** ClusterAutoscalingConfig
+    ClusterAutoscalingConfig (..),
+    newClusterAutoscalingConfig,
+
+    -- ** ClusterConfig
+    ClusterConfig (..),
+    newClusterConfig,
+
+    -- ** ClusterState
+    ClusterState (..),
+    newClusterState,
+
+    -- ** ClusterState_ReplicationState
+    ClusterState_ReplicationState (..),
+
+    -- ** ColumnFamily
+    ColumnFamily (..),
+    newColumnFamily,
+
+    -- ** CreateBackupMetadata
+    CreateBackupMetadata (..),
+    newCreateBackupMetadata,
+
+    -- ** CreateClusterMetadata
+    CreateClusterMetadata (..),
+    newCreateClusterMetadata,
+
+    -- ** CreateClusterMetadata_Tables
+    CreateClusterMetadata_Tables (..),
+    newCreateClusterMetadata_Tables,
+
+    -- ** CreateClusterRequest
+    CreateClusterRequest (..),
+    newCreateClusterRequest,
+
+    -- ** CreateInstanceMetadata
+    CreateInstanceMetadata (..),
+    newCreateInstanceMetadata,
+
+    -- ** CreateInstanceRequest
+    CreateInstanceRequest (..),
+    newCreateInstanceRequest,
+
+    -- ** CreateInstanceRequest_Clusters
+    CreateInstanceRequest_Clusters (..),
+    newCreateInstanceRequest_Clusters,
+
+    -- ** CreateTableRequest
+    CreateTableRequest (..),
+    newCreateTableRequest,
+
+    -- ** DropRowRangeRequest
+    DropRowRangeRequest (..),
+    newDropRowRangeRequest,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
+
+    -- ** EncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
+
+    -- ** EncryptionInfo_EncryptionType
+    EncryptionInfo_EncryptionType (..),
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** GcRule
+    GcRule (..),
+    newGcRule,
+
+    -- ** GenerateConsistencyTokenRequest
+    GenerateConsistencyTokenRequest (..),
+    newGenerateConsistencyTokenRequest,
+
+    -- ** GenerateConsistencyTokenResponse
+    GenerateConsistencyTokenResponse (..),
+    newGenerateConsistencyTokenResponse,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** Instance
-    , Instance
-    , instance'
-    , iState
-    , iName
-    , iDisplayName
-    , iLabels
-    , iType
-    ) where
+    Instance (..),
+    newInstance,
 
-import Network.Google.Prelude
+    -- ** Instance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
+
+    -- ** Instance_State
+    Instance_State (..),
+
+    -- ** Instance_Type
+    Instance_Type (..),
+
+    -- ** Intersection
+    Intersection (..),
+    newIntersection,
+
+    -- ** ListAppProfilesResponse
+    ListAppProfilesResponse (..),
+    newListAppProfilesResponse,
+
+    -- ** ListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
+
+    -- ** ListClustersResponse
+    ListClustersResponse (..),
+    newListClustersResponse,
+
+    -- ** ListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListTablesResponse
+    ListTablesResponse (..),
+    newListTablesResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** Modification
+    Modification (..),
+    newModification,
+
+    -- ** ModifyColumnFamiliesRequest
+    ModifyColumnFamiliesRequest (..),
+    newModifyColumnFamiliesRequest,
+
+    -- ** MultiClusterRoutingUseAny
+    MultiClusterRoutingUseAny (..),
+    newMultiClusterRoutingUseAny,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationProgress
+    OperationProgress (..),
+    newOperationProgress,
+
+    -- ** OptimizeRestoredTableMetadata
+    OptimizeRestoredTableMetadata (..),
+    newOptimizeRestoredTableMetadata,
+
+    -- ** PartialUpdateClusterMetadata
+    PartialUpdateClusterMetadata (..),
+    newPartialUpdateClusterMetadata,
+
+    -- ** PartialUpdateClusterRequest
+    PartialUpdateClusterRequest (..),
+    newPartialUpdateClusterRequest,
+
+    -- ** PartialUpdateInstanceRequest
+    PartialUpdateInstanceRequest (..),
+    newPartialUpdateInstanceRequest,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** RestoreInfo
+    RestoreInfo (..),
+    newRestoreInfo,
+
+    -- ** RestoreInfo_SourceType
+    RestoreInfo_SourceType (..),
+
+    -- ** RestoreTableMetadata
+    RestoreTableMetadata (..),
+    newRestoreTableMetadata,
+
+    -- ** RestoreTableMetadata_SourceType
+    RestoreTableMetadata_SourceType (..),
+
+    -- ** RestoreTableRequest
+    RestoreTableRequest (..),
+    newRestoreTableRequest,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** SingleClusterRouting
+    SingleClusterRouting (..),
+    newSingleClusterRouting,
+
+    -- ** Split
+    Split (..),
+    newSplit,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** Table
+    Table (..),
+    newTable,
+
+    -- ** Table_ClusterStates
+    Table_ClusterStates (..),
+    newTable_ClusterStates,
+
+    -- ** Table_ColumnFamilies
+    Table_ColumnFamilies (..),
+    newTable_ColumnFamilies,
+
+    -- ** Table_Granularity
+    Table_Granularity (..),
+
+    -- ** TableProgress
+    TableProgress (..),
+    newTableProgress,
+
+    -- ** TableProgress_State
+    TableProgress_State (..),
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** Union
+    Union (..),
+    newUnion,
+
+    -- ** UpdateAppProfileMetadata
+    UpdateAppProfileMetadata (..),
+    newUpdateAppProfileMetadata,
+
+    -- ** UpdateClusterMetadata
+    UpdateClusterMetadata (..),
+    newUpdateClusterMetadata,
+
+    -- ** UpdateInstanceMetadata
+    UpdateInstanceMetadata (..),
+    newUpdateInstanceMetadata,
+
+    -- ** ProjectsInstancesTablesGetView
+    ProjectsInstancesTablesGetView (..),
+
+    -- ** ProjectsInstancesTablesListView
+    ProjectsInstancesTablesListView (..),
+  )
+where
+
+import Network.Google.BigtableAdmin.Operations.Cancel
+import Network.Google.BigtableAdmin.Operations.Delete
+import Network.Google.BigtableAdmin.Operations.Get
+import Network.Google.BigtableAdmin.Operations.Projects.Operations.List
+import Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Create
+import Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Delete
+import Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Get
+import Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.List
+import Network.Google.BigtableAdmin.Projects.Instances.AppProfiles.Patch
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.GetIamPolicy
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.List
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.Patch
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIamPolicy
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Backups.TestIamPermissions
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Create
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Delete
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Get
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.List
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
+import Network.Google.BigtableAdmin.Projects.Instances.Clusters.Update
+import Network.Google.BigtableAdmin.Projects.Instances.Create
+import Network.Google.BigtableAdmin.Projects.Instances.Delete
+import Network.Google.BigtableAdmin.Projects.Instances.Get
+import Network.Google.BigtableAdmin.Projects.Instances.GetIamPolicy
+import Network.Google.BigtableAdmin.Projects.Instances.List
+import Network.Google.BigtableAdmin.Projects.Instances.PartialUpdateInstance
+import Network.Google.BigtableAdmin.Projects.Instances.SetIamPolicy
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.Create
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.Delete
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.DropRowRange
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.Get
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.List
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.Restore
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.SetIamPolicy
+import Network.Google.BigtableAdmin.Projects.Instances.Tables.TestIamPermissions
+import Network.Google.BigtableAdmin.Projects.Instances.TestIamPermissions
+import Network.Google.BigtableAdmin.Projects.Instances.Update
+import Network.Google.BigtableAdmin.Projects.Locations.Get
+import Network.Google.BigtableAdmin.Projects.Locations.List
 import Network.Google.BigtableAdmin.Types
-import Network.Google.Resource.BigtableAdmin.Operations.Cancel
-import Network.Google.Resource.BigtableAdmin.Operations.Delete
-import Network.Google.Resource.BigtableAdmin.Operations.Get
-import Network.Google.Resource.BigtableAdmin.Operations.Projects.Operations.List
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Create
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Delete
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Get
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.List
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Patch
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.GetIAMPolicy
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.List
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Patch
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIAMPolicy
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.TestIAMPermissions
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Create
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Delete
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Get
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.List
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Update
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Create
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Delete
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Get
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.GetIAMPolicy
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.List
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.PartialUpdateInstance
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.SetIAMPolicy
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Create
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Delete
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.DropRowRange
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Get
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPolicy
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.List
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Restore
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.SetIAMPolicy
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.TestIAMPermissions
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.TestIAMPermissions
-import Network.Google.Resource.BigtableAdmin.Projects.Instances.Update
-import Network.Google.Resource.BigtableAdmin.Projects.Locations.Get
-import Network.Google.Resource.BigtableAdmin.Projects.Locations.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Bigtable Admin API service.
-type BigtableAdminAPI =
-     OperationsProjectsOperationsListResource :<|>
-       OperationsGetResource
-       :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource
-       :<|> ProjectsInstancesAppProFilesListResource
-       :<|> ProjectsInstancesAppProFilesPatchResource
-       :<|> ProjectsInstancesAppProFilesGetResource
-       :<|> ProjectsInstancesAppProFilesCreateResource
-       :<|> ProjectsInstancesAppProFilesDeleteResource
-       :<|> ProjectsInstancesTablesDropRowRangeResource
-       :<|> ProjectsInstancesTablesListResource
-       :<|> ProjectsInstancesTablesRestoreResource
-       :<|> ProjectsInstancesTablesGetIAMPolicyResource
-       :<|>
-       ProjectsInstancesTablesGenerateConsistencyTokenResource
-       :<|> ProjectsInstancesTablesGetResource
-       :<|>
-       ProjectsInstancesTablesModifyColumnFamiliesResource
-       :<|> ProjectsInstancesTablesCreateResource
-       :<|> ProjectsInstancesTablesSetIAMPolicyResource
-       :<|> ProjectsInstancesTablesCheckConsistencyResource
-       :<|>
-       ProjectsInstancesTablesTestIAMPermissionsResource
-       :<|> ProjectsInstancesTablesDeleteResource
-       :<|> ProjectsInstancesClustersBackupsListResource
-       :<|>
-       ProjectsInstancesClustersBackupsGetIAMPolicyResource
-       :<|> ProjectsInstancesClustersBackupsPatchResource
-       :<|> ProjectsInstancesClustersBackupsGetResource
-       :<|> ProjectsInstancesClustersBackupsCreateResource
-       :<|>
-       ProjectsInstancesClustersBackupsSetIAMPolicyResource
-       :<|>
-       ProjectsInstancesClustersBackupsTestIAMPermissionsResource
-       :<|> ProjectsInstancesClustersBackupsDeleteResource
-       :<|> ProjectsInstancesClustersListResource
-       :<|>
-       ProjectsInstancesClustersPartialUpdateClusterResource
-       :<|> ProjectsInstancesClustersGetResource
-       :<|> ProjectsInstancesClustersCreateResource
-       :<|> ProjectsInstancesClustersDeleteResource
-       :<|> ProjectsInstancesClustersUpdateResource
-       :<|> ProjectsInstancesListResource
-       :<|> ProjectsInstancesGetIAMPolicyResource
-       :<|> ProjectsInstancesGetResource
-       :<|> ProjectsInstancesCreateResource
-       :<|> ProjectsInstancesSetIAMPolicyResource
-       :<|> ProjectsInstancesPartialUpdateInstanceResource
-       :<|> ProjectsInstancesTestIAMPermissionsResource
-       :<|> ProjectsInstancesDeleteResource
-       :<|> ProjectsInstancesUpdateResource
-       :<|> ProjectsLocationsListResource
-       :<|> ProjectsLocationsGetResource
