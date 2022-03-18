@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Poly.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Asset_License
     Asset_License
-      (
-        Asset_License_Unknown,
+      ( Asset_License_Unknown,
         Asset_License_CREATIVECOMMONSBY,
         Asset_License_ALLRIGHTSRESERVED,
         ..
@@ -54,8 +43,7 @@ module Gogol.Poly.Internal.Sum
 
     -- * Asset_Visibility
     Asset_Visibility
-      (
-        Asset_Visibility_VISIBILITYUNSPECIFIED,
+      ( Asset_Visibility_VISIBILITYUNSPECIFIED,
         Asset_Visibility_Private,
         Asset_Visibility_Unlisted,
         Asset_Visibility_Public,
@@ -64,8 +52,7 @@ module Gogol.Poly.Internal.Sum
 
     -- * AssetImportMessage_Code
     AssetImportMessage_Code
-      (
-        AssetImportMessage_Code_CODEUNSPECIFIED,
+      ( AssetImportMessage_Code_CODEUNSPECIFIED,
         AssetImportMessage_Code_NOIMPORTABLEFILE,
         AssetImportMessage_Code_EMPTYMODEL,
         AssetImportMessage_Code_OBJPARSEERROR,
@@ -80,8 +67,7 @@ module Gogol.Poly.Internal.Sum
 
     -- * ImageError_Code
     ImageError_Code
-      (
-        ImageError_Code_CODEUNSPECIFIED,
+      ( ImageError_Code_CODEUNSPECIFIED,
         ImageError_Code_INVALIDIMAGE,
         ImageError_Code_IMAGETOOBIG,
         ImageError_Code_WRONGIMAGETYPE,
@@ -90,8 +76,7 @@ module Gogol.Poly.Internal.Sum
 
     -- * ObjParseError_Code
     ObjParseError_Code
-      (
-        ObjParseError_Code_CODEUNSPECIFIED,
+      ( ObjParseError_Code_CODEUNSPECIFIED,
         ObjParseError_Code_INCONSISTENTVERTEXREFS,
         ObjParseError_Code_INVALIDCOMMAND,
         ObjParseError_Code_INVALIDNUMBER,
@@ -122,8 +107,7 @@ module Gogol.Poly.Internal.Sum
 
     -- * PresentationParams_ColorSpace
     PresentationParams_ColorSpace
-      (
-        PresentationParams_ColorSpace_Unknown,
+      ( PresentationParams_ColorSpace_Unknown,
         PresentationParams_ColorSpace_Linear,
         PresentationParams_ColorSpace_Gamma,
         ..
@@ -131,8 +115,7 @@ module Gogol.Poly.Internal.Sum
 
     -- * AssetsListMaxComplexity
     AssetsListMaxComplexity
-      (
-        AssetsListMaxComplexity_COMPLEXITYUNSPECIFIED,
+      ( AssetsListMaxComplexity_COMPLEXITYUNSPECIFIED,
         AssetsListMaxComplexity_Complex,
         AssetsListMaxComplexity_Medium,
         AssetsListMaxComplexity_Simple,
@@ -141,28 +124,28 @@ module Gogol.Poly.Internal.Sum
 
     -- * UsersAssetsListVisibility
     UsersAssetsListVisibility
-      (
-        UsersAssetsListVisibility_VISIBILITYUNSPECIFIED,
+      ( UsersAssetsListVisibility_VISIBILITYUNSPECIFIED,
         UsersAssetsListVisibility_Published,
         UsersAssetsListVisibility_Private,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -175,20 +158,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The license under which the author has made the asset available for use, if any.
-newtype Asset_License = Asset_License { fromAsset_License :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Asset_License = Asset_License {fromAsset_License :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown license value.
 pattern Asset_License_Unknown :: Asset_License
@@ -206,20 +190,21 @@ pattern Asset_License_ALLRIGHTSRESERVED = Asset_License "ALL_RIGHTS_RESERVED"
   Asset_License_Unknown,
   Asset_License_CREATIVECOMMONSBY,
   Asset_License_ALLRIGHTSRESERVED,
-  Asset_License #-}
+  Asset_License
+  #-}
 
 -- | The visibility of the asset and who can access it.
-newtype Asset_Visibility = Asset_Visibility { fromAsset_Visibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Asset_Visibility = Asset_Visibility {fromAsset_Visibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown (and invalid) visibility.
 pattern Asset_Visibility_VISIBILITYUNSPECIFIED :: Asset_Visibility
@@ -242,20 +227,21 @@ pattern Asset_Visibility_Public = Asset_Visibility "PUBLIC"
   Asset_Visibility_Private,
   Asset_Visibility_Unlisted,
   Asset_Visibility_Public,
-  Asset_Visibility #-}
+  Asset_Visibility
+  #-}
 
 -- | The code associated with this message.
-newtype AssetImportMessage_Code = AssetImportMessage_Code { fromAssetImportMessage_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AssetImportMessage_Code = AssetImportMessage_Code {fromAssetImportMessage_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown error code.
 pattern AssetImportMessage_Code_CODEUNSPECIFIED :: AssetImportMessage_Code
@@ -308,20 +294,21 @@ pattern AssetImportMessage_Code_INVALIDELEMENTTYPE = AssetImportMessage_Code "IN
   AssetImportMessage_Code_DEFAULTMATERIALS,
   AssetImportMessage_Code_FATALERROR,
   AssetImportMessage_Code_INVALIDELEMENTTYPE,
-  AssetImportMessage_Code #-}
+  AssetImportMessage_Code
+  #-}
 
 -- | The type of image error encountered. Optional for older image errors.
-newtype ImageError_Code = ImageError_Code { fromImageError_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ImageError_Code = ImageError_Code {fromImageError_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown error code.
 pattern ImageError_Code_CODEUNSPECIFIED :: ImageError_Code
@@ -344,20 +331,21 @@ pattern ImageError_Code_WRONGIMAGETYPE = ImageError_Code "WRONG_IMAGE_TYPE"
   ImageError_Code_INVALIDIMAGE,
   ImageError_Code_IMAGETOOBIG,
   ImageError_Code_WRONGIMAGETYPE,
-  ImageError_Code #-}
+  ImageError_Code
+  #-}
 
 -- | The type of problem found (required).
-newtype ObjParseError_Code = ObjParseError_Code { fromObjParseError_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ObjParseError_Code = ObjParseError_Code {fromObjParseError_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown error code.
 pattern ObjParseError_Code_CODEUNSPECIFIED :: ObjParseError_Code
@@ -490,20 +478,21 @@ pattern ObjParseError_Code_INVALIDFILEPATH = ObjParseError_Code "INVALID_FILE_PA
   ObjParseError_Code_FILESUBSTITUTION,
   ObjParseError_Code_LINETOOLONG,
   ObjParseError_Code_INVALIDFILEPATH,
-  ObjParseError_Code #-}
+  ObjParseError_Code
+  #-}
 
 -- | The materials\' diffuse\/albedo color. This does not apply to vertex colors or texture maps.
-newtype PresentationParams_ColorSpace = PresentationParams_ColorSpace { fromPresentationParams_ColorSpace :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PresentationParams_ColorSpace = PresentationParams_ColorSpace {fromPresentationParams_ColorSpace :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Invalid color value.
 pattern PresentationParams_ColorSpace_Unknown :: PresentationParams_ColorSpace
@@ -521,20 +510,21 @@ pattern PresentationParams_ColorSpace_Gamma = PresentationParams_ColorSpace "GAM
   PresentationParams_ColorSpace_Unknown,
   PresentationParams_ColorSpace_Linear,
   PresentationParams_ColorSpace_Gamma,
-  PresentationParams_ColorSpace #-}
+  PresentationParams_ColorSpace
+  #-}
 
 -- | Returns assets that are of the specified complexity or less. Defaults to COMPLEX. For example, a request for MEDIUM assets also includes SIMPLE assets.
-newtype AssetsListMaxComplexity = AssetsListMaxComplexity { fromAssetsListMaxComplexity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AssetsListMaxComplexity = AssetsListMaxComplexity {fromAssetsListMaxComplexity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No complexity specified. This is equivalent to omitting the filter.
 pattern AssetsListMaxComplexity_COMPLEXITYUNSPECIFIED :: AssetsListMaxComplexity
@@ -557,20 +547,21 @@ pattern AssetsListMaxComplexity_Simple = AssetsListMaxComplexity "SIMPLE"
   AssetsListMaxComplexity_Complex,
   AssetsListMaxComplexity_Medium,
   AssetsListMaxComplexity_Simple,
-  AssetsListMaxComplexity #-}
+  AssetsListMaxComplexity
+  #-}
 
 -- | The visibility of the assets to be returned. Defaults to VISIBILITY_UNSPECIFIED which returns all assets.
-newtype UsersAssetsListVisibility = UsersAssetsListVisibility { fromUsersAssetsListVisibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersAssetsListVisibility = UsersAssetsListVisibility {fromUsersAssetsListVisibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No visibility specified. Returns all assets.
 pattern UsersAssetsListVisibility_VISIBILITYUNSPECIFIED :: UsersAssetsListVisibility
@@ -588,4 +579,5 @@ pattern UsersAssetsListVisibility_Private = UsersAssetsListVisibility "PRIVATE"
   UsersAssetsListVisibility_VISIBILITYUNSPECIFIED,
   UsersAssetsListVisibility_Published,
   UsersAssetsListVisibility_Private,
-  UsersAssetsListVisibility #-}
+  UsersAssetsListVisibility
+  #-}

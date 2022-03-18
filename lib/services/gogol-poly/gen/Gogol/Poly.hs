@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,121 +30,121 @@
 --
 -- /See:/ <https://developers.google.com/poly/ Poly API Reference>
 module Gogol.Poly
-    (
-    -- * Configuration
-      polyService
+  ( -- * Configuration
+    polyService,
 
     -- * Resources
 
     -- ** poly.assets.get
-    , PolyAssetsGetResource
-    , newPolyAssetsGet
-    , PolyAssetsGet
+    PolyAssetsGetResource,
+    newPolyAssetsGet,
+    PolyAssetsGet,
 
     -- ** poly.assets.list
-    , PolyAssetsListResource
-    , newPolyAssetsList
-    , PolyAssetsList
+    PolyAssetsListResource,
+    newPolyAssetsList,
+    PolyAssetsList,
 
     -- ** poly.users.assets.list
-    , PolyUsersAssetsListResource
-    , newPolyUsersAssetsList
-    , PolyUsersAssetsList
+    PolyUsersAssetsListResource,
+    newPolyUsersAssetsList,
+    PolyUsersAssetsList,
 
     -- ** poly.users.likedassets.list
-    , PolyUsersLikedassetsListResource
-    , newPolyUsersLikedassetsList
-    , PolyUsersLikedassetsList
+    PolyUsersLikedassetsListResource,
+    newPolyUsersLikedassetsList,
+    PolyUsersLikedassetsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Asset
-    , Asset (..)
-    , newAsset
+    Asset (..),
+    newAsset,
 
     -- ** Asset_License
-    , Asset_License (..)
+    Asset_License (..),
 
     -- ** Asset_Visibility
-    , Asset_Visibility (..)
+    Asset_Visibility (..),
 
     -- ** AssetImportMessage
-    , AssetImportMessage (..)
-    , newAssetImportMessage
+    AssetImportMessage (..),
+    newAssetImportMessage,
 
     -- ** AssetImportMessage_Code
-    , AssetImportMessage_Code (..)
+    AssetImportMessage_Code (..),
 
     -- ** File
-    , File (..)
-    , newFile
+    File (..),
+    newFile,
 
     -- ** Format
-    , Format (..)
-    , newFormat
+    Format (..),
+    newFormat,
 
     -- ** FormatComplexity
-    , FormatComplexity (..)
-    , newFormatComplexity
+    FormatComplexity (..),
+    newFormatComplexity,
 
     -- ** ImageError
-    , ImageError (..)
-    , newImageError
+    ImageError (..),
+    newImageError,
 
     -- ** ImageError_Code
-    , ImageError_Code (..)
+    ImageError_Code (..),
 
     -- ** ListAssetsResponse
-    , ListAssetsResponse (..)
-    , newListAssetsResponse
+    ListAssetsResponse (..),
+    newListAssetsResponse,
 
     -- ** ListLikedAssetsResponse
-    , ListLikedAssetsResponse (..)
-    , newListLikedAssetsResponse
+    ListLikedAssetsResponse (..),
+    newListLikedAssetsResponse,
 
     -- ** ListUserAssetsResponse
-    , ListUserAssetsResponse (..)
-    , newListUserAssetsResponse
+    ListUserAssetsResponse (..),
+    newListUserAssetsResponse,
 
     -- ** ObjParseError
-    , ObjParseError (..)
-    , newObjParseError
+    ObjParseError (..),
+    newObjParseError,
 
     -- ** ObjParseError_Code
-    , ObjParseError_Code (..)
+    ObjParseError_Code (..),
 
     -- ** PresentationParams
-    , PresentationParams (..)
-    , newPresentationParams
+    PresentationParams (..),
+    newPresentationParams,
 
     -- ** PresentationParams_ColorSpace
-    , PresentationParams_ColorSpace (..)
+    PresentationParams_ColorSpace (..),
 
     -- ** Quaternion
-    , Quaternion (..)
-    , newQuaternion
+    Quaternion (..),
+    newQuaternion,
 
     -- ** RemixInfo
-    , RemixInfo (..)
-    , newRemixInfo
+    RemixInfo (..),
+    newRemixInfo,
 
     -- ** StartAssetImportResponse
-    , StartAssetImportResponse (..)
-    , newStartAssetImportResponse
+    StartAssetImportResponse (..),
+    newStartAssetImportResponse,
 
     -- ** UserAsset
-    , UserAsset (..)
-    , newUserAsset
+    UserAsset (..),
+    newUserAsset,
 
     -- ** AssetsListMaxComplexity
-    , AssetsListMaxComplexity (..)
+    AssetsListMaxComplexity (..),
 
     -- ** UsersAssetsListVisibility
-    , UsersAssetsListVisibility (..)
-    ) where
+    UsersAssetsListVisibility (..),
+  )
+where
 
 import Gogol.Poly.Assets.Get
 import Gogol.Poly.Assets.List
