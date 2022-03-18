@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.IAP
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,257 +30,211 @@
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference>
 module Network.Google.IAP
-    (
-    -- * Service Configuration
-      iAPService
+  ( -- * Configuration
+    iAPService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , IAPAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** iap.getIamPolicy
-    , module Network.Google.Resource.IAP.GetIAMPolicy
+    IAPGetIamPolicyResource,
+    newIAPGetIamPolicy,
+    IAPGetIamPolicy,
 
     -- ** iap.getIapSettings
-    , module Network.Google.Resource.IAP.GetIapSettings
+    IAPGetIapSettingsResource,
+    newIAPGetIapSettings,
+    IAPGetIapSettings,
 
     -- ** iap.projects.brands.create
-    , module Network.Google.Resource.IAP.Projects.Brands.Create
+    IAPProjectsBrandsCreateResource,
+    newIAPProjectsBrandsCreate,
+    IAPProjectsBrandsCreate,
 
     -- ** iap.projects.brands.get
-    , module Network.Google.Resource.IAP.Projects.Brands.Get
+    IAPProjectsBrandsGetResource,
+    newIAPProjectsBrandsGet,
+    IAPProjectsBrandsGet,
 
     -- ** iap.projects.brands.identityAwareProxyClients.create
-    , module Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Create
+    IAPProjectsBrandsIdentityAwareProxyClientsCreateResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsCreate,
+    IAPProjectsBrandsIdentityAwareProxyClientsCreate,
 
     -- ** iap.projects.brands.identityAwareProxyClients.delete
-    , module Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
+    IAPProjectsBrandsIdentityAwareProxyClientsDeleteResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsDelete,
+    IAPProjectsBrandsIdentityAwareProxyClientsDelete,
 
     -- ** iap.projects.brands.identityAwareProxyClients.get
-    , module Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Get
+    IAPProjectsBrandsIdentityAwareProxyClientsGetResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsGet,
+    IAPProjectsBrandsIdentityAwareProxyClientsGet,
 
     -- ** iap.projects.brands.identityAwareProxyClients.list
-    , module Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.List
+    IAPProjectsBrandsIdentityAwareProxyClientsListResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsList,
+    IAPProjectsBrandsIdentityAwareProxyClientsList,
 
     -- ** iap.projects.brands.identityAwareProxyClients.resetSecret
-    , module Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
+    IAPProjectsBrandsIdentityAwareProxyClientsResetSecretResource,
+    newIAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
+    IAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
 
     -- ** iap.projects.brands.list
-    , module Network.Google.Resource.IAP.Projects.Brands.List
+    IAPProjectsBrandsListResource,
+    newIAPProjectsBrandsList,
+    IAPProjectsBrandsList,
 
     -- ** iap.setIamPolicy
-    , module Network.Google.Resource.IAP.SetIAMPolicy
+    IAPSetIamPolicyResource,
+    newIAPSetIamPolicy,
+    IAPSetIamPolicy,
 
     -- ** iap.testIamPermissions
-    , module Network.Google.Resource.IAP.TestIAMPermissions
+    IAPTestIamPermissionsResource,
+    newIAPTestIamPermissions,
+    IAPTestIamPermissions,
 
     -- ** iap.updateIapSettings
-    , module Network.Google.Resource.IAP.UpdateIapSettings
+    IAPUpdateIapSettingsResource,
+    newIAPUpdateIapSettings,
+    IAPUpdateIapSettings,
 
     -- * Types
 
-    -- ** ResourceLabels
-    , ResourceLabels
-    , resourceLabels
-    , rlAddtional
-
-    -- ** PolicyDelegationSettings
-    , PolicyDelegationSettings
-    , policyDelegationSettings
-    , pdsIAMServiceName
-    , pdsPolicyName
-    , pdsIAMPermission
-    , pdsResource
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** PolicyName
-    , PolicyName
-    , policyName
-    , pnId
-    , pnRegion
-    , pnType
-
-    -- ** ApplicationSettings
-    , ApplicationSettings
-    , applicationSettings
-    , asCookieDomain
-    , asAccessDeniedPageSettings
-    , asCsmSettings
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** IapSettings
-    , IapSettings
-    , iapSettings
-    , isApplicationSettings
-    , isAccessSettings
-    , isName
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** GcipSettings
-    , GcipSettings
-    , gcipSettings
-    , gsTenantIds
-    , gsLoginPageURI
-
-    -- ** IdentityAwareProxyClient
-    , IdentityAwareProxyClient
-    , identityAwareProxyClient
-    , iapcSecret
-    , iapcName
-    , iapcDisplayName
-
-    -- ** Brand
-    , Brand
-    , brand
-    , bOrgInternalOnly
-    , bName
-    , bApplicationTitle
-    , bSupportEmail
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
-
-    -- ** AccessSettings
-    , AccessSettings
-    , accessSettings
-    , asPolicyDelegationSettings
-    , asGcipSettings
-    , asOAuthSettings
-    , asCORSSettings
-
-    -- ** ListBrandsResponse
-    , ListBrandsResponse
-    , listBrandsResponse
-    , lbrBrands
-
-    -- ** ListIdentityAwareProxyClientsResponse
-    , ListIdentityAwareProxyClientsResponse
-    , listIdentityAwareProxyClientsResponse
-    , liapcrNextPageToken
-    , liapcrIdentityAwareProxyClients
-
-    -- ** Resource
-    , Resource
-    , resource
-    , rService
-    , rName
-    , rLabels
-    , rType
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** OAuthSettings
-    , OAuthSettings
-    , oAuthSettings
-    , oasLoginHint
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    Xgafv (..),
 
     -- ** AccessDeniedPageSettings
-    , AccessDeniedPageSettings
-    , accessDeniedPageSettings
-    , adpsGenerateTroubleshootingURI
-    , adpsAccessDeniedPageURI
+    AccessDeniedPageSettings (..),
+    newAccessDeniedPageSettings,
 
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** AccessSettings
+    AccessSettings (..),
+    newAccessSettings,
 
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** CsmSettings
-    , CsmSettings
-    , csmSettings
-    , csRctokenAud
-
-    -- ** CORSSettings
-    , CORSSettings
-    , corsSettings
-    , csAllowHTTPOptions
+    -- ** ApplicationSettings
+    ApplicationSettings (..),
+    newApplicationSettings,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** Brand
+    Brand (..),
+    newBrand,
+
+    -- ** CorsSettings
+    CorsSettings (..),
+    newCorsSettings,
+
+    -- ** CsmSettings
+    CsmSettings (..),
+    newCsmSettings,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** GcipSettings
+    GcipSettings (..),
+    newGcipSettings,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
+
+    -- ** IapSettings
+    IapSettings (..),
+    newIapSettings,
+
+    -- ** IdentityAwareProxyClient
+    IdentityAwareProxyClient (..),
+    newIdentityAwareProxyClient,
+
+    -- ** ListBrandsResponse
+    ListBrandsResponse (..),
+    newListBrandsResponse,
+
+    -- ** ListIdentityAwareProxyClientsResponse
+    ListIdentityAwareProxyClientsResponse (..),
+    newListIdentityAwareProxyClientsResponse,
+
+    -- ** OAuthSettings
+    OAuthSettings (..),
+    newOAuthSettings,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PolicyDelegationSettings
+    PolicyDelegationSettings (..),
+    newPolicyDelegationSettings,
+
+    -- ** PolicyName
+    PolicyName (..),
+    newPolicyName,
+
+    -- ** ReauthSettings
+    ReauthSettings (..),
+    newReauthSettings,
+
+    -- ** ReauthSettings_Method
+    ReauthSettings_Method (..),
+
+    -- ** ReauthSettings_PolicyType
+    ReauthSettings_PolicyType (..),
 
     -- ** ResetIdentityAwareProxyClientSecretRequest
-    , ResetIdentityAwareProxyClientSecretRequest
-    , resetIdentityAwareProxyClientSecretRequest
-    ) where
+    ResetIdentityAwareProxyClientSecretRequest (..),
+    newResetIdentityAwareProxyClientSecretRequest,
 
-import Network.Google.Prelude
+    -- ** Resource
+    Resource (..),
+    newResource,
+
+    -- ** Resource_Labels
+    Resource_Labels (..),
+    newResource_Labels,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+  )
+where
+
+import Network.Google.IAP.GetIamPolicy
+import Network.Google.IAP.GetIapSettings
+import Network.Google.IAP.Projects.Brands.Create
+import Network.Google.IAP.Projects.Brands.Get
+import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Create
+import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
+import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Get
+import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.List
+import Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
+import Network.Google.IAP.Projects.Brands.List
+import Network.Google.IAP.SetIamPolicy
+import Network.Google.IAP.TestIamPermissions
 import Network.Google.IAP.Types
-import Network.Google.Resource.IAP.GetIAMPolicy
-import Network.Google.Resource.IAP.GetIapSettings
-import Network.Google.Resource.IAP.Projects.Brands.Create
-import Network.Google.Resource.IAP.Projects.Brands.Get
-import Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Create
-import Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
-import Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Get
-import Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.List
-import Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
-import Network.Google.Resource.IAP.Projects.Brands.List
-import Network.Google.Resource.IAP.SetIAMPolicy
-import Network.Google.Resource.IAP.TestIAMPermissions
-import Network.Google.Resource.IAP.UpdateIapSettings
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Identity-Aware Proxy API service.
-type IAPAPI =
-     UpdateIapSettingsResource :<|> GetIAMPolicyResource
-       :<|> SetIAMPolicyResource
-       :<|> GetIapSettingsResource
-       :<|> TestIAMPermissionsResource
-       :<|>
-       ProjectsBrandsIdentityAwareProxyClientsListResource
-       :<|>
-       ProjectsBrandsIdentityAwareProxyClientsResetSecretResource
-       :<|>
-       ProjectsBrandsIdentityAwareProxyClientsGetResource
-       :<|>
-       ProjectsBrandsIdentityAwareProxyClientsCreateResource
-       :<|>
-       ProjectsBrandsIdentityAwareProxyClientsDeleteResource
-       :<|> ProjectsBrandsListResource
-       :<|> ProjectsBrandsGetResource
-       :<|> ProjectsBrandsCreateResource
+import Network.Google.IAP.UpdateIapSettings
