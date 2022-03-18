@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,106 +36,99 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.resources.features.patch@.
 module Gogol.Admin.Directory.Resources.Features.Patch
-  ( -- * Resource
-    DirectoryResourcesFeaturesPatchResource,
+    (
+    -- * Resource
+      DirectoryResourcesFeaturesPatchResource
 
     -- ** Constructing a Request
-    newDirectoryResourcesFeaturesPatch,
-    DirectoryResourcesFeaturesPatch,
-  )
-where
+    , newDirectoryResourcesFeaturesPatch
+    , DirectoryResourcesFeaturesPatch
+    ) where
 
-import Gogol.Admin.Directory.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Admin.Directory.Types
 
 -- | A resource alias for @directory.resources.features.patch@ method which the
 -- 'DirectoryResourcesFeaturesPatch' request conforms to.
 type DirectoryResourcesFeaturesPatchResource =
-  "admin"
-    Core.:> "directory"
-    Core.:> "v1"
-    Core.:> "customer"
-    Core.:> Core.Capture "customer" Core.Text
-    Core.:> "resources"
-    Core.:> "features"
-    Core.:> Core.Capture "featureKey" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Feature
-    Core.:> Core.Patch '[Core.JSON] Feature
+     "admin" Core.:>
+       "directory" Core.:>
+         "v1" Core.:>
+           "customer" Core.:>
+             Core.Capture "customer" Core.Text Core.:>
+               "resources" Core.:>
+                 "features" Core.:>
+                   Core.Capture "featureKey" Core.Text Core.:>
+                     Core.QueryParam "$.xgafv" Xgafv Core.:>
+                       Core.QueryParam "access_token" Core.Text Core.:>
+                         Core.QueryParam "callback" Core.Text Core.:>
+                           Core.QueryParam "uploadType" Core.Text Core.:>
+                             Core.QueryParam "upload_protocol" Core.Text Core.:>
+                               Core.QueryParam "alt" Core.AltJSON Core.:>
+                                 Core.ReqBody '[Core.JSON] Feature Core.:>
+                                   Core.Patch '[Core.JSON] Feature
 
 -- | Patches a feature.
 --
 -- /See:/ 'newDirectoryResourcesFeaturesPatch' smart constructor.
 data DirectoryResourcesFeaturesPatch = DirectoryResourcesFeaturesPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The unique ID for the customer\'s Google Workspace account. As an account administrator, you can also use the @my_customer@ alias to represent your account\'s customer ID.
-    customer :: Core.Text,
-    -- | The unique ID of the feature to update.
-    featureKey :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Feature,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The unique ID for the customer\'s Google Workspace account. As an account administrator, you can also use the @my_customer@ alias to represent your account\'s customer ID.
+    , customer :: Core.Text
+      -- | The unique ID of the feature to update.
+    , featureKey :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: Feature
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DirectoryResourcesFeaturesPatch' with the minimum fields required to make a request.
-newDirectoryResourcesFeaturesPatch ::
-  -- |  The unique ID for the customer\'s Google Workspace account. As an account administrator, you can also use the @my_customer@ alias to represent your account\'s customer ID. See 'customer'.
-  Core.Text ->
-  -- |  The unique ID of the feature to update. See 'featureKey'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Feature ->
-  DirectoryResourcesFeaturesPatch
+newDirectoryResourcesFeaturesPatch 
+    ::  Core.Text
+       -- ^  The unique ID for the customer\'s Google Workspace account. As an account administrator, you can also use the @my_customer@ alias to represent your account\'s customer ID. See 'customer'.
+    -> Core.Text
+       -- ^  The unique ID of the feature to update. See 'featureKey'.
+    -> Feature
+       -- ^  Multipart request metadata. See 'payload'.
+    -> DirectoryResourcesFeaturesPatch
 newDirectoryResourcesFeaturesPatch customer featureKey payload =
   DirectoryResourcesFeaturesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      customer = customer,
-      featureKey = featureKey,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , customer = customer
+    , featureKey = featureKey
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DirectoryResourcesFeaturesPatch
-  where
-  type Rs DirectoryResourcesFeaturesPatch = Feature
-  type
-    Scopes DirectoryResourcesFeaturesPatch =
-      '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
-  requestClient DirectoryResourcesFeaturesPatch {..} =
-    go
-      customer
-      featureKey
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      adminDirectoryService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryResourcesFeaturesPatchResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DirectoryResourcesFeaturesPatch
+         where
+        type Rs DirectoryResourcesFeaturesPatch = Feature
+        type Scopes DirectoryResourcesFeaturesPatch =
+             '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
+        requestClient DirectoryResourcesFeaturesPatch{..}
+          = go customer featureKey xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              adminDirectoryService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy DirectoryResourcesFeaturesPatchResource)
+                      Core.mempty
+
