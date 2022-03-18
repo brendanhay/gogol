@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,53 +36,53 @@
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.drives.delete@.
 module Gogol.Drive.Drives.Delete
-  ( -- * Resource
-    DriveDrivesDeleteResource,
+    (
+    -- * Resource
+      DriveDrivesDeleteResource
 
     -- ** Constructing a Request
-    newDriveDrivesDelete,
-    DriveDrivesDelete,
-  )
-where
+    , newDriveDrivesDelete
+    , DriveDrivesDelete
+    ) where
 
-import Gogol.Drive.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Drive.Types
 
 -- | A resource alias for @drive.drives.delete@ method which the
 -- 'DriveDrivesDelete' request conforms to.
 type DriveDrivesDeleteResource =
-  "drive"
-    Core.:> "v3"
-    Core.:> "drives"
-    Core.:> Core.Capture "driveId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+     "drive" Core.:>
+       "v3" Core.:>
+         "drives" Core.:>
+           Core.Capture "driveId" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.Delete '[Core.JSON] ()
 
 -- | Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.
 --
 -- /See:/ 'newDriveDrivesDelete' smart constructor.
 newtype DriveDrivesDelete = DriveDrivesDelete
-  { -- | The ID of the shared drive.
-    driveId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The ID of the shared drive.
+      driveId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DriveDrivesDelete' with the minimum fields required to make a request.
-newDriveDrivesDelete ::
-  -- |  The ID of the shared drive. See 'driveId'.
-  Core.Text ->
-  DriveDrivesDelete
+newDriveDrivesDelete 
+    ::  Core.Text
+       -- ^  The ID of the shared drive. See 'driveId'.
+    -> DriveDrivesDelete
 newDriveDrivesDelete driveId = DriveDrivesDelete {driveId = driveId}
 
 instance Core.GoogleRequest DriveDrivesDelete where
-  type Rs DriveDrivesDelete = ()
-  type
-    Scopes DriveDrivesDelete =
-      '["https://www.googleapis.com/auth/drive"]
-  requestClient DriveDrivesDelete {..} =
-    go driveId (Core.Just Core.AltJSON) driveService
-    where
-      go =
-        Core.buildClient
-          (Core.Proxy :: Core.Proxy DriveDrivesDeleteResource)
-          Core.mempty
+        type Rs DriveDrivesDelete = ()
+        type Scopes DriveDrivesDelete =
+             '["https://www.googleapis.com/auth/drive"]
+        requestClient DriveDrivesDelete{..}
+          = go driveId (Core.Just Core.AltJSON) driveService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy :: Core.Proxy DriveDrivesDeleteResource)
+                      Core.mempty
+
