@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CommentAnalyzer.Comments.Analyze
+-- Module      : Gogol.CommentAnalyzer.Comments.Analyze
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Analyzes the provided text and returns scores for requested attributes.
 --
 -- /See:/ <https://github.com/conversationai/perspectiveapi/blob/master/README.md Perspective Comment Analyzer API Reference> for @commentanalyzer.comments.analyze@.
-module Network.Google.CommentAnalyzer.Comments.Analyze
+module Gogol.CommentAnalyzer.Comments.Analyze
   ( -- * Resource
     CommentAnalyzerCommentsAnalyzeResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CommentAnalyzer.Comments.Analyze
   )
 where
 
-import Network.Google.CommentAnalyzer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CommentAnalyzer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @commentanalyzer.comments.analyze@ method which the
 -- 'CommentAnalyzerCommentsAnalyze' request conforms to.

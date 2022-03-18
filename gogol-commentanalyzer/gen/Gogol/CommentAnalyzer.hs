@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CommentAnalyzer
+-- Module      : Gogol.CommentAnalyzer
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Perspective Comment Analyzer API provides information about the potential impact of a comment on a conversation (e.g. it can provide a score for the \"toxicity\" of a comment). Users can leverage the \"SuggestCommentScore\" method to submit corrections to improve Perspective over time. Users can set the \"doNotStore\" flag to ensure that all submitted comments are automatically deleted after scores are returned.
 --
 -- /See:/ <https://github.com/conversationai/perspectiveapi/blob/master/README.md Perspective Comment Analyzer API Reference>
-module Network.Google.CommentAnalyzer
+module Gogol.CommentAnalyzer
   ( -- * Configuration
     commentAnalyzerService,
 
@@ -120,6 +120,6 @@ module Network.Google.CommentAnalyzer
   )
 where
 
-import Network.Google.CommentAnalyzer.Comments.Analyze
-import Network.Google.CommentAnalyzer.Comments.Suggestscore
-import Network.Google.CommentAnalyzer.Types
+import Gogol.CommentAnalyzer.Comments.Analyze
+import Gogol.CommentAnalyzer.Comments.Suggestscore
+import Gogol.CommentAnalyzer.Types
