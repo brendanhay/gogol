@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GroupsMigration.Archive.Insert
+-- Module      : Gogol.GroupsMigration.Archive.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Inserts a new mail into the archive of the Google group.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference> for @groupsmigration.archive.insert@.
-module Network.Google.GroupsMigration.Archive.Insert
+module Gogol.GroupsMigration.Archive.Insert
   ( -- * Resource
     GroupsMigrationArchiveInsertResource,
 
@@ -39,8 +39,8 @@ module Network.Google.GroupsMigration.Archive.Insert
   )
 where
 
-import Network.Google.GroupsMigration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GroupsMigration.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @groupsmigration.archive.insert@ method which the
 -- 'GroupsMigrationArchiveInsert' request conforms to.

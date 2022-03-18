@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GroupsMigration.Types
+-- Module      : Gogol.GroupsMigration.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.GroupsMigration.Types
+module Gogol.GroupsMigration.Types
   ( -- * Configuration
     groupsMigrationService,
 
@@ -43,9 +43,9 @@ module Network.Google.GroupsMigration.Types
   )
 where
 
-import Network.Google.GroupsMigration.Internal.Product
-import Network.Google.GroupsMigration.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.GroupsMigration.Internal.Product
+import Gogol.GroupsMigration.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Groups Migration API. This contains the host and root path used as a starting point for constructing service requests.
 groupsMigrationService :: Core.ServiceConfig

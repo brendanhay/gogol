@@ -19,40 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GroupsMigration
+-- Module      : Gogol.GroupsMigration.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- The Groups Migration API allows domain administrators to archive emails into Google groups.
---
--- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
-module Network.Google.GroupsMigration
-  ( -- * Configuration
-    groupsMigrationService,
-
-    -- * OAuth Scopes
-    appsGroupsMigrationScope,
-
-    -- * Resources
-
-    -- ** groupsmigration.archive.insert
-    GroupsMigrationArchiveInsertResource,
-    newGroupsMigrationArchiveInsert,
-    GroupsMigrationArchiveInsert,
-
-    -- * Types
-
-    -- ** Xgafv
-    Xgafv (..),
-
-    -- ** Groups
-    Groups (..),
-    newGroups,
+module Gogol.GroupsMigration.Internal.Sum
+  ( -- * Xgafv
+    Xgafv
+      ( Xgafv_1,
+        Xgafv_2,
+        ..
+      ),
   )
 where
 
-import Network.Google.GroupsMigration.Archive.Insert
-import Network.Google.GroupsMigration.Types
+import qualified Gogol.Prelude as Core
+
+-- | V1 error format.
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | v1 error format
+pattern Xgafv_1 :: Xgafv
+pattern Xgafv_1 = Xgafv "1"
+
+-- | v2 error format
+pattern Xgafv_2 :: Xgafv
+pattern Xgafv_2 = Xgafv "2"
+
+{-# COMPLETE
+  Xgafv_1,
+  Xgafv_2,
+  Xgafv
+  #-}
