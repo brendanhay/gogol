@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,87 +30,93 @@
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.enrollmentTokens.delete@.
 module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Delete
-    (
-    -- * Resource
-      AndroidManagementEnterprisesEnrollmentTokensDeleteResource
+  ( -- * Resource
+    AndroidManagementEnterprisesEnrollmentTokensDeleteResource,
 
     -- ** Constructing a Request
-    , newAndroidManagementEnterprisesEnrollmentTokensDelete
-    , AndroidManagementEnterprisesEnrollmentTokensDelete
-    ) where
+    newAndroidManagementEnterprisesEnrollmentTokensDelete,
+    AndroidManagementEnterprisesEnrollmentTokensDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AndroidManagement.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @androidmanagement.enterprises.enrollmentTokens.delete@ method which the
 -- 'AndroidManagementEnterprisesEnrollmentTokensDelete' request conforms to.
-type AndroidManagementEnterprisesEnrollmentTokensDeleteResource
-     =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Delete '[Core.JSON] Empty
+type AndroidManagementEnterprisesEnrollmentTokensDeleteResource =
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] Empty
 
 -- | Deletes an enrollment token. This operation invalidates the token, preventing its future use.
 --
 -- /See:/ 'newAndroidManagementEnterprisesEnrollmentTokensDelete' smart constructor.
 data AndroidManagementEnterprisesEnrollmentTokensDelete = AndroidManagementEnterprisesEnrollmentTokensDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The name of the enrollment token in the form enterprises\/{enterpriseId}\/enrollmentTokens\/{enrollmentTokenId}.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The name of the enrollment token in the form enterprises\/{enterpriseId}\/enrollmentTokens\/{enrollmentTokenId}.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AndroidManagementEnterprisesEnrollmentTokensDelete' with the minimum fields required to make a request.
-newAndroidManagementEnterprisesEnrollmentTokensDelete 
-    ::  Core.Text
-       -- ^  The name of the enrollment token in the form enterprises\/{enterpriseId}\/enrollmentTokens\/{enrollmentTokenId}. See 'name'.
-    -> AndroidManagementEnterprisesEnrollmentTokensDelete
+newAndroidManagementEnterprisesEnrollmentTokensDelete ::
+  -- |  The name of the enrollment token in the form enterprises\/{enterpriseId}\/enrollmentTokens\/{enrollmentTokenId}. See 'name'.
+  Core.Text ->
+  AndroidManagementEnterprisesEnrollmentTokensDelete
 newAndroidManagementEnterprisesEnrollmentTokensDelete name =
   AndroidManagementEnterprisesEnrollmentTokensDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           AndroidManagementEnterprisesEnrollmentTokensDelete
-         where
-        type Rs
-               AndroidManagementEnterprisesEnrollmentTokensDelete
-             = Empty
-        type Scopes
-               AndroidManagementEnterprisesEnrollmentTokensDelete
-             =
-             '["https://www.googleapis.com/auth/androidmanagement"]
-        requestClient
-          AndroidManagementEnterprisesEnrollmentTokensDelete{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              androidManagementService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           AndroidManagementEnterprisesEnrollmentTokensDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AndroidManagementEnterprisesEnrollmentTokensDelete
+  where
+  type
+    Rs
+      AndroidManagementEnterprisesEnrollmentTokensDelete =
+      Empty
+  type
+    Scopes
+      AndroidManagementEnterprisesEnrollmentTokensDelete =
+      '["https://www.googleapis.com/auth/androidmanagement"]
+  requestClient
+    AndroidManagementEnterprisesEnrollmentTokensDelete {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        androidManagementService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  AndroidManagementEnterprisesEnrollmentTokensDeleteResource
+            )
+            Core.mempty
