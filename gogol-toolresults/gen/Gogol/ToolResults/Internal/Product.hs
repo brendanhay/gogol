@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ToolResults.Internal.Product
+-- Module      : Gogol.ToolResults.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ToolResults.Internal.Product
+module Gogol.ToolResults.Internal.Product
   ( -- * ANR
     ANR (..),
     newANR,
@@ -148,8 +148,8 @@ module Network.Google.ToolResults.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ToolResults.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ToolResults.Internal.Sum
 
 -- | Additional details for an ANR crash.
 --
