@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Indexing
-    Network.Google.Indexing.Types
-    Network.Google.Indexing.UrlNotifications.GetMetadata
-    Network.Google.Indexing.UrlNotifications.Publish
+    Gogol.Indexing
+    Gogol.Indexing.Types
+    Gogol.Indexing.UrlNotifications.GetMetadata
+    Gogol.Indexing.UrlNotifications.Publish
 
   other-modules:
-    Network.Google.Indexing.Internal.Product
-    Network.Google.Indexing.Internal.Sum
+    Gogol.Indexing.Internal.Product
+    Gogol.Indexing.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
