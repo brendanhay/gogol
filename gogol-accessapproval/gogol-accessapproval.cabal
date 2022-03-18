@@ -39,41 +39,42 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AccessApproval
-    Network.Google.AccessApproval.Folders.ApprovalRequests.Approve
-    Network.Google.AccessApproval.Folders.ApprovalRequests.Dismiss
-    Network.Google.AccessApproval.Folders.ApprovalRequests.Get
-    Network.Google.AccessApproval.Folders.ApprovalRequests.List
-    Network.Google.AccessApproval.Folders.DeleteAccessApprovalSettings
-    Network.Google.AccessApproval.Folders.GetAccessApprovalSettings
-    Network.Google.AccessApproval.Folders.GetServiceAccount
-    Network.Google.AccessApproval.Folders.UpdateAccessApprovalSettings
-    Network.Google.AccessApproval.Organizations.ApprovalRequests.Approve
-    Network.Google.AccessApproval.Organizations.ApprovalRequests.Dismiss
-    Network.Google.AccessApproval.Organizations.ApprovalRequests.Get
-    Network.Google.AccessApproval.Organizations.ApprovalRequests.List
-    Network.Google.AccessApproval.Organizations.DeleteAccessApprovalSettings
-    Network.Google.AccessApproval.Organizations.GetAccessApprovalSettings
-    Network.Google.AccessApproval.Organizations.GetServiceAccount
-    Network.Google.AccessApproval.Organizations.UpdateAccessApprovalSettings
-    Network.Google.AccessApproval.Projects.ApprovalRequests.Approve
-    Network.Google.AccessApproval.Projects.ApprovalRequests.Dismiss
-    Network.Google.AccessApproval.Projects.ApprovalRequests.Get
-    Network.Google.AccessApproval.Projects.ApprovalRequests.List
-    Network.Google.AccessApproval.Projects.DeleteAccessApprovalSettings
-    Network.Google.AccessApproval.Projects.GetAccessApprovalSettings
-    Network.Google.AccessApproval.Projects.GetServiceAccount
-    Network.Google.AccessApproval.Projects.UpdateAccessApprovalSettings
-    Network.Google.AccessApproval.Types
+    Gogol.AccessApproval
+    Gogol.AccessApproval.Folders.ApprovalRequests.Approve
+    Gogol.AccessApproval.Folders.ApprovalRequests.Dismiss
+    Gogol.AccessApproval.Folders.ApprovalRequests.Get
+    Gogol.AccessApproval.Folders.ApprovalRequests.List
+    Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
+    Gogol.AccessApproval.Folders.GetAccessApprovalSettings
+    Gogol.AccessApproval.Folders.GetServiceAccount
+    Gogol.AccessApproval.Folders.UpdateAccessApprovalSettings
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Approve
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Get
+    Gogol.AccessApproval.Organizations.ApprovalRequests.List
+    Gogol.AccessApproval.Organizations.DeleteAccessApprovalSettings
+    Gogol.AccessApproval.Organizations.GetAccessApprovalSettings
+    Gogol.AccessApproval.Organizations.GetServiceAccount
+    Gogol.AccessApproval.Organizations.UpdateAccessApprovalSettings
+    Gogol.AccessApproval.Projects.ApprovalRequests.Approve
+    Gogol.AccessApproval.Projects.ApprovalRequests.Dismiss
+    Gogol.AccessApproval.Projects.ApprovalRequests.Get
+    Gogol.AccessApproval.Projects.ApprovalRequests.List
+    Gogol.AccessApproval.Projects.DeleteAccessApprovalSettings
+    Gogol.AccessApproval.Projects.GetAccessApprovalSettings
+    Gogol.AccessApproval.Projects.GetServiceAccount
+    Gogol.AccessApproval.Projects.UpdateAccessApprovalSettings
+    Gogol.AccessApproval.Types
 
   other-modules:
-    Network.Google.AccessApproval.Internal.Product
-    Network.Google.AccessApproval.Internal.Sum
+    Gogol.AccessApproval.Internal.Product
+    Gogol.AccessApproval.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
