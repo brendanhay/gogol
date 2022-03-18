@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseHosting.Operations.Delete
+-- Module      : Gogol.FirebaseHosting.Operations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
 -- /See:/ <https://firebase.google.com/docs/hosting/ Firebase Hosting API Reference> for @firebasehosting.operations.delete@.
-module Network.Google.FirebaseHosting.Operations.Delete
+module Gogol.FirebaseHosting.Operations.Delete
   ( -- * Resource
     FirebaseHostingOperationsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FirebaseHosting.Operations.Delete
   )
 where
 
-import Network.Google.FirebaseHosting.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseHosting.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebasehosting.operations.delete@ method which the
 -- 'FirebaseHostingOperationsDelete' request conforms to.

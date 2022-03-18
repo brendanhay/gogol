@@ -19,15 +19,36 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseHosting.Types
+-- Module      : Gogol.FirebaseHosting
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FirebaseHosting.Types
+--
+-- The Firebase Hosting REST API enables programmatic and customizable management and deployments to your Firebase-hosted sites. Use this REST API to create and manage channels and sites as well as to deploy new or updated hosting configurations and content files.
+--
+-- /See:/ <https://firebase.google.com/docs/hosting/ Firebase Hosting API Reference>
+module Gogol.FirebaseHosting
   ( -- * Configuration
     firebaseHostingService,
+
+    -- * Resources
+
+    -- ** firebasehosting.operations.cancel
+    FirebaseHostingOperationsCancelResource,
+    newFirebaseHostingOperationsCancel,
+    FirebaseHostingOperationsCancel,
+
+    -- ** firebasehosting.operations.delete
+    FirebaseHostingOperationsDeleteResource,
+    newFirebaseHostingOperationsDelete,
+    FirebaseHostingOperationsDelete,
+
+    -- ** firebasehosting.operations.list
+    FirebaseHostingOperationsListResource,
+    newFirebaseHostingOperationsList,
+    FirebaseHostingOperationsList,
 
     -- * Types
 
@@ -68,13 +89,7 @@ module Network.Google.FirebaseHosting.Types
   )
 where
 
-import Network.Google.FirebaseHosting.Internal.Product
-import Network.Google.FirebaseHosting.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Firebase Hosting API. This contains the host and root path used as a starting point for constructing service requests.
-firebaseHostingService :: Core.ServiceConfig
-firebaseHostingService =
-  Core.defaultService
-    (Core.ServiceId "firebasehosting:v1")
-    "firebasehosting.googleapis.com"
+import Gogol.FirebaseHosting.Operations.Cancel
+import Gogol.FirebaseHosting.Operations.Delete
+import Gogol.FirebaseHosting.Operations.List
+import Gogol.FirebaseHosting.Types

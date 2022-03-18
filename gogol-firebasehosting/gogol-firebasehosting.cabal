@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.FirebaseHosting
-    Network.Google.FirebaseHosting.Operations.Cancel
-    Network.Google.FirebaseHosting.Operations.Delete
-    Network.Google.FirebaseHosting.Operations.List
-    Network.Google.FirebaseHosting.Types
+    Gogol.FirebaseHosting
+    Gogol.FirebaseHosting.Operations.Cancel
+    Gogol.FirebaseHosting.Operations.Delete
+    Gogol.FirebaseHosting.Operations.List
+    Gogol.FirebaseHosting.Types
 
   other-modules:
-    Network.Google.FirebaseHosting.Internal.Product
-    Network.Google.FirebaseHosting.Internal.Sum
+    Gogol.FirebaseHosting.Internal.Product
+    Gogol.FirebaseHosting.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
