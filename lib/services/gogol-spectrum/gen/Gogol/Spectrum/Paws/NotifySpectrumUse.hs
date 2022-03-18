@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.notifySpectrumUse@.
 module Gogol.Spectrum.Paws.NotifySpectrumUse
-  ( -- * Resource
-    SpectrumPawsNotifySpectrumUseResource,
+    (
+    -- * Resource
+      SpectrumPawsNotifySpectrumUseResource
 
     -- ** Constructing a Request
-    newSpectrumPawsNotifySpectrumUse,
-    SpectrumPawsNotifySpectrumUse,
-  )
-where
+    , newSpectrumPawsNotifySpectrumUse
+    , SpectrumPawsNotifySpectrumUse
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Spectrum.Types
@@ -45,47 +51,45 @@ import Gogol.Spectrum.Types
 -- | A resource alias for @spectrum.paws.notifySpectrumUse@ method which the
 -- 'SpectrumPawsNotifySpectrumUse' request conforms to.
 type SpectrumPawsNotifySpectrumUseResource =
-  "spectrum"
-    Core.:> "v1explorer"
-    Core.:> "paws"
-    Core.:> "notifySpectrumUse"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              PawsNotifySpectrumUseRequest
-    Core.:> Core.Post '[Core.JSON] PawsNotifySpectrumUseResponse
+     "spectrum" Core.:>
+       "v1explorer" Core.:>
+         "paws" Core.:>
+           "notifySpectrumUse" Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON]
+                 PawsNotifySpectrumUseRequest
+                 Core.:>
+                 Core.Post '[Core.JSON] PawsNotifySpectrumUseResponse
 
 -- | Notifies the database that the device has selected certain frequency ranges for transmission. Only to be invoked when required by the regulator. The Google Spectrum Database does not operate in domains that require notification, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'newSpectrumPawsNotifySpectrumUse' smart constructor.
 newtype SpectrumPawsNotifySpectrumUse = SpectrumPawsNotifySpectrumUse
-  { -- | Multipart request metadata.
-    payload :: PawsNotifySpectrumUseRequest
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: PawsNotifySpectrumUseRequest
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SpectrumPawsNotifySpectrumUse' with the minimum fields required to make a request.
-newSpectrumPawsNotifySpectrumUse ::
-  -- |  Multipart request metadata. See 'payload'.
-  PawsNotifySpectrumUseRequest ->
-  SpectrumPawsNotifySpectrumUse
+newSpectrumPawsNotifySpectrumUse 
+    ::  PawsNotifySpectrumUseRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> SpectrumPawsNotifySpectrumUse
 newSpectrumPawsNotifySpectrumUse payload =
   SpectrumPawsNotifySpectrumUse {payload = payload}
 
-instance
-  Core.GoogleRequest
-    SpectrumPawsNotifySpectrumUse
-  where
-  type
-    Rs SpectrumPawsNotifySpectrumUse =
-      PawsNotifySpectrumUseResponse
-  type Scopes SpectrumPawsNotifySpectrumUse = '[]
-  requestClient SpectrumPawsNotifySpectrumUse {..} =
-    go (Core.Just Core.AltJSON) payload spectrumService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SpectrumPawsNotifySpectrumUseResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           SpectrumPawsNotifySpectrumUse
+         where
+        type Rs SpectrumPawsNotifySpectrumUse =
+             PawsNotifySpectrumUseResponse
+        type Scopes SpectrumPawsNotifySpectrumUse = '[]
+        requestClient SpectrumPawsNotifySpectrumUse{..}
+          = go (Core.Just Core.AltJSON) payload spectrumService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy SpectrumPawsNotifySpectrumUseResource)
+                      Core.mempty
+

@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.register@.
 module Gogol.Spectrum.Paws.Register
-  ( -- * Resource
-    SpectrumPawsRegisterResource,
+    (
+    -- * Resource
+      SpectrumPawsRegisterResource
 
     -- ** Constructing a Request
-    newSpectrumPawsRegister,
-    SpectrumPawsRegister,
-  )
-where
+    , newSpectrumPawsRegister
+    , SpectrumPawsRegister
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Spectrum.Types
@@ -45,39 +51,40 @@ import Gogol.Spectrum.Types
 -- | A resource alias for @spectrum.paws.register@ method which the
 -- 'SpectrumPawsRegister' request conforms to.
 type SpectrumPawsRegisterResource =
-  "spectrum"
-    Core.:> "v1explorer"
-    Core.:> "paws"
-    Core.:> "register"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] PawsRegisterRequest
-    Core.:> Core.Post '[Core.JSON] PawsRegisterResponse
+     "spectrum" Core.:>
+       "v1explorer" Core.:>
+         "paws" Core.:>
+           "register" Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON] PawsRegisterRequest Core.:>
+                 Core.Post '[Core.JSON] PawsRegisterResponse
 
 -- | The Google Spectrum Database implements registration in the getSpectrum method. As such this always returns an UNIMPLEMENTED error.
 --
 -- /See:/ 'newSpectrumPawsRegister' smart constructor.
 newtype SpectrumPawsRegister = SpectrumPawsRegister
-  { -- | Multipart request metadata.
-    payload :: PawsRegisterRequest
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: PawsRegisterRequest
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SpectrumPawsRegister' with the minimum fields required to make a request.
-newSpectrumPawsRegister ::
-  -- |  Multipart request metadata. See 'payload'.
-  PawsRegisterRequest ->
-  SpectrumPawsRegister
+newSpectrumPawsRegister 
+    ::  PawsRegisterRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> SpectrumPawsRegister
 newSpectrumPawsRegister payload = SpectrumPawsRegister {payload = payload}
 
-instance Core.GoogleRequest SpectrumPawsRegister where
-  type Rs SpectrumPawsRegister = PawsRegisterResponse
-  type Scopes SpectrumPawsRegister = '[]
-  requestClient SpectrumPawsRegister {..} =
-    go (Core.Just Core.AltJSON) payload spectrumService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SpectrumPawsRegisterResource
-          )
-          Core.mempty
+instance Core.GoogleRequest SpectrumPawsRegister
+         where
+        type Rs SpectrumPawsRegister = PawsRegisterResponse
+        type Scopes SpectrumPawsRegister = '[]
+        requestClient SpectrumPawsRegister{..}
+          = go (Core.Just Core.AltJSON) payload spectrumService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy SpectrumPawsRegisterResource)
+                      Core.mempty
+
