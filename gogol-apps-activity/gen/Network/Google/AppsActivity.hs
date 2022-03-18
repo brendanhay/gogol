@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsActivity
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,127 +30,81 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/activity/ Drive Activity API Reference>
 module Network.Google.AppsActivity
-    (
-    -- * Service Configuration
-      appsActivityService
+  ( -- * Configuration
+    appsActivityService,
 
     -- * OAuth Scopes
-    , activityScope
-
-    -- * API Declaration
-    , AppsActivityAPI
+    activityScope,
 
     -- * Resources
 
     -- ** appsactivity.activities.list
-    , module Network.Google.Resource.AppsActivity.Activities.List
+    AppsActivityActivitiesListResource,
+    newAppsActivityActivitiesList,
+    AppsActivityActivitiesList,
 
     -- * Types
 
-    -- ** Parent
-    , Parent
-    , parent
-    , pIsRoot
-    , pId
-    , pTitle
-
-    -- ** Photo
-    , Photo
-    , photo
-    , pURL
-
-    -- ** EventPrimaryEventType
-    , EventPrimaryEventType (..)
+    -- ** Activity
+    Activity (..),
+    newActivity,
 
     -- ** Event
-    , Event
-    , event
-    , ePrimaryEventType
-    , eUser
-    , eEventTimeMillis
-    , eRename
-    , eFromUserDeletion
-    , eAdditionalEventTypes
-    , ePermissionChanges
-    , eTarget
-    , eMove
+    Event (..),
+    newEvent,
 
-    -- ** PermissionRole
-    , PermissionRole (..)
+    -- ** Event_AdditionalEventTypesItem
+    Event_AdditionalEventTypesItem (..),
+
+    -- ** Event_PrimaryEventType
+    Event_PrimaryEventType (..),
 
     -- ** ListActivitiesResponse
-    , ListActivitiesResponse
-    , listActivitiesResponse
-    , larNextPageToken
-    , larActivities
-
-    -- ** PermissionChange
-    , PermissionChange
-    , permissionChange
-    , pcAddedPermissions
-    , pcRemovedPermissions
-
-    -- ** PermissionType
-    , PermissionType (..)
-
-    -- ** User
-    , User
-    , user
-    , uPhoto
-    , uIsDeleted
-    , uName
-    , uIsMe
-    , uPermissionId
-
-    -- ** EventAdditionalEventTypesItem
-    , EventAdditionalEventTypesItem (..)
-
-    -- ** Activity
-    , Activity
-    , activity
-    , aSingleEvents
-    , aCombinedEvent
-
-    -- ** ActivitiesListGroupingStrategy
-    , ActivitiesListGroupingStrategy (..)
-
-    -- ** Rename
-    , Rename
-    , rename
-    , rNewTitle
-    , rOldTitle
-
-    -- ** Permission
-    , Permission
-    , permission
-    , pWithLink
-    , pUser
-    , pRole
-    , pName
-    , pType
-    , pPermissionId
-
-    -- ** Target
-    , Target
-    , target
-    , tMimeType
-    , tName
-    , tId
+    ListActivitiesResponse (..),
+    newListActivitiesResponse,
 
     -- ** Move
-    , Move
-    , move
-    , mAddedParents
-    , mRemovedParents
-    ) where
+    Move (..),
+    newMove,
 
-import Network.Google.Prelude
+    -- ** Parent
+    Parent (..),
+    newParent,
+
+    -- ** Permission
+    Permission (..),
+    newPermission,
+
+    -- ** Permission_Role
+    Permission_Role (..),
+
+    -- ** Permission_Type
+    Permission_Type (..),
+
+    -- ** PermissionChange
+    PermissionChange (..),
+    newPermissionChange,
+
+    -- ** Photo
+    Photo (..),
+    newPhoto,
+
+    -- ** Rename
+    Rename (..),
+    newRename,
+
+    -- ** Target
+    Target (..),
+    newTarget,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** ActivitiesListGroupingStrategy
+    ActivitiesListGroupingStrategy (..),
+  )
+where
+
+import Network.Google.AppsActivity.Activities.List
 import Network.Google.AppsActivity.Types
-import Network.Google.Resource.AppsActivity.Activities.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Drive Activity API service.
-type AppsActivityAPI = ActivitiesListResource
