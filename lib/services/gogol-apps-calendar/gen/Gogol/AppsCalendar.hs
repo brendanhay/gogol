@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,436 +36,436 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference>
 module Gogol.AppsCalendar
-  ( -- * Configuration
-    appsCalendarService,
+    (
+    -- * Configuration
+      appsCalendarService
 
     -- * OAuth Scopes
-    calendarScope,
-    calendarEventsScope,
-    calendarEventsReadOnlyScope,
-    calendarReadOnlyScope,
-    calendarSettingsReadOnlyScope,
+    , calendarScope
+    , calendarEventsScope
+    , calendarEventsReadOnlyScope
+    , calendarReadOnlyScope
+    , calendarSettingsReadOnlyScope
 
     -- * Resources
 
     -- ** calendar.acl.delete
-    CalendarAclDeleteResource,
-    newCalendarAclDelete,
-    CalendarAclDelete,
+    , CalendarAclDeleteResource
+    , newCalendarAclDelete
+    , CalendarAclDelete
 
     -- ** calendar.acl.get
-    CalendarAclGetResource,
-    newCalendarAclGet,
-    CalendarAclGet,
+    , CalendarAclGetResource
+    , newCalendarAclGet
+    , CalendarAclGet
 
     -- ** calendar.acl.insert
-    CalendarAclInsertResource,
-    newCalendarAclInsert,
-    CalendarAclInsert,
+    , CalendarAclInsertResource
+    , newCalendarAclInsert
+    , CalendarAclInsert
 
     -- ** calendar.acl.list
-    CalendarAclListResource,
-    newCalendarAclList,
-    CalendarAclList,
+    , CalendarAclListResource
+    , newCalendarAclList
+    , CalendarAclList
 
     -- ** calendar.acl.patch
-    CalendarAclPatchResource,
-    newCalendarAclPatch,
-    CalendarAclPatch,
+    , CalendarAclPatchResource
+    , newCalendarAclPatch
+    , CalendarAclPatch
 
     -- ** calendar.acl.update
-    CalendarAclUpdateResource,
-    newCalendarAclUpdate,
-    CalendarAclUpdate,
+    , CalendarAclUpdateResource
+    , newCalendarAclUpdate
+    , CalendarAclUpdate
 
     -- ** calendar.acl.watch
-    CalendarAclWatchResource,
-    newCalendarAclWatch,
-    CalendarAclWatch,
+    , CalendarAclWatchResource
+    , newCalendarAclWatch
+    , CalendarAclWatch
 
     -- ** calendar.calendarList.delete
-    CalendarCalendarListDeleteResource,
-    newCalendarCalendarListDelete,
-    CalendarCalendarListDelete,
+    , CalendarCalendarListDeleteResource
+    , newCalendarCalendarListDelete
+    , CalendarCalendarListDelete
 
     -- ** calendar.calendarList.get
-    CalendarCalendarListGetResource,
-    newCalendarCalendarListGet,
-    CalendarCalendarListGet,
+    , CalendarCalendarListGetResource
+    , newCalendarCalendarListGet
+    , CalendarCalendarListGet
 
     -- ** calendar.calendarList.insert
-    CalendarCalendarListInsertResource,
-    newCalendarCalendarListInsert,
-    CalendarCalendarListInsert,
+    , CalendarCalendarListInsertResource
+    , newCalendarCalendarListInsert
+    , CalendarCalendarListInsert
 
     -- ** calendar.calendarList.list
-    CalendarCalendarListListResource,
-    newCalendarCalendarListList,
-    CalendarCalendarListList,
+    , CalendarCalendarListListResource
+    , newCalendarCalendarListList
+    , CalendarCalendarListList
 
     -- ** calendar.calendarList.patch
-    CalendarCalendarListPatchResource,
-    newCalendarCalendarListPatch,
-    CalendarCalendarListPatch,
+    , CalendarCalendarListPatchResource
+    , newCalendarCalendarListPatch
+    , CalendarCalendarListPatch
 
     -- ** calendar.calendarList.update
-    CalendarCalendarListUpdateResource,
-    newCalendarCalendarListUpdate,
-    CalendarCalendarListUpdate,
+    , CalendarCalendarListUpdateResource
+    , newCalendarCalendarListUpdate
+    , CalendarCalendarListUpdate
 
     -- ** calendar.calendarList.watch
-    CalendarCalendarListWatchResource,
-    newCalendarCalendarListWatch,
-    CalendarCalendarListWatch,
+    , CalendarCalendarListWatchResource
+    , newCalendarCalendarListWatch
+    , CalendarCalendarListWatch
 
     -- ** calendar.calendars.clear
-    CalendarCalendarsClearResource,
-    newCalendarCalendarsClear,
-    CalendarCalendarsClear,
+    , CalendarCalendarsClearResource
+    , newCalendarCalendarsClear
+    , CalendarCalendarsClear
 
     -- ** calendar.calendars.delete
-    CalendarCalendarsDeleteResource,
-    newCalendarCalendarsDelete,
-    CalendarCalendarsDelete,
+    , CalendarCalendarsDeleteResource
+    , newCalendarCalendarsDelete
+    , CalendarCalendarsDelete
 
     -- ** calendar.calendars.get
-    CalendarCalendarsGetResource,
-    newCalendarCalendarsGet,
-    CalendarCalendarsGet,
+    , CalendarCalendarsGetResource
+    , newCalendarCalendarsGet
+    , CalendarCalendarsGet
 
     -- ** calendar.calendars.insert
-    CalendarCalendarsInsertResource,
-    newCalendarCalendarsInsert,
-    CalendarCalendarsInsert,
+    , CalendarCalendarsInsertResource
+    , newCalendarCalendarsInsert
+    , CalendarCalendarsInsert
 
     -- ** calendar.calendars.patch
-    CalendarCalendarsPatchResource,
-    newCalendarCalendarsPatch,
-    CalendarCalendarsPatch,
+    , CalendarCalendarsPatchResource
+    , newCalendarCalendarsPatch
+    , CalendarCalendarsPatch
 
     -- ** calendar.calendars.update
-    CalendarCalendarsUpdateResource,
-    newCalendarCalendarsUpdate,
-    CalendarCalendarsUpdate,
+    , CalendarCalendarsUpdateResource
+    , newCalendarCalendarsUpdate
+    , CalendarCalendarsUpdate
 
     -- ** calendar.channels.stop
-    CalendarChannelsStopResource,
-    newCalendarChannelsStop,
-    CalendarChannelsStop,
+    , CalendarChannelsStopResource
+    , newCalendarChannelsStop
+    , CalendarChannelsStop
 
     -- ** calendar.colors.get
-    CalendarColorsGetResource,
-    newCalendarColorsGet,
-    CalendarColorsGet,
+    , CalendarColorsGetResource
+    , newCalendarColorsGet
+    , CalendarColorsGet
 
     -- ** calendar.events.delete
-    CalendarEventsDeleteResource,
-    newCalendarEventsDelete,
-    CalendarEventsDelete,
+    , CalendarEventsDeleteResource
+    , newCalendarEventsDelete
+    , CalendarEventsDelete
 
     -- ** calendar.events.get
-    CalendarEventsGetResource,
-    newCalendarEventsGet,
-    CalendarEventsGet,
+    , CalendarEventsGetResource
+    , newCalendarEventsGet
+    , CalendarEventsGet
 
     -- ** calendar.events.import
-    CalendarEventsImportResource,
-    newCalendarEventsImport,
-    CalendarEventsImport,
+    , CalendarEventsImportResource
+    , newCalendarEventsImport
+    , CalendarEventsImport
 
     -- ** calendar.events.insert
-    CalendarEventsInsertResource,
-    newCalendarEventsInsert,
-    CalendarEventsInsert,
+    , CalendarEventsInsertResource
+    , newCalendarEventsInsert
+    , CalendarEventsInsert
 
     -- ** calendar.events.instances
-    CalendarEventsInstancesResource,
-    newCalendarEventsInstances,
-    CalendarEventsInstances,
+    , CalendarEventsInstancesResource
+    , newCalendarEventsInstances
+    , CalendarEventsInstances
 
     -- ** calendar.events.list
-    CalendarEventsListResource,
-    newCalendarEventsList,
-    CalendarEventsList,
+    , CalendarEventsListResource
+    , newCalendarEventsList
+    , CalendarEventsList
 
     -- ** calendar.events.move
-    CalendarEventsMoveResource,
-    newCalendarEventsMove,
-    CalendarEventsMove,
+    , CalendarEventsMoveResource
+    , newCalendarEventsMove
+    , CalendarEventsMove
 
     -- ** calendar.events.patch
-    CalendarEventsPatchResource,
-    newCalendarEventsPatch,
-    CalendarEventsPatch,
+    , CalendarEventsPatchResource
+    , newCalendarEventsPatch
+    , CalendarEventsPatch
 
     -- ** calendar.events.quickAdd
-    CalendarEventsQuickAddResource,
-    newCalendarEventsQuickAdd,
-    CalendarEventsQuickAdd,
+    , CalendarEventsQuickAddResource
+    , newCalendarEventsQuickAdd
+    , CalendarEventsQuickAdd
 
     -- ** calendar.events.update
-    CalendarEventsUpdateResource,
-    newCalendarEventsUpdate,
-    CalendarEventsUpdate,
+    , CalendarEventsUpdateResource
+    , newCalendarEventsUpdate
+    , CalendarEventsUpdate
 
     -- ** calendar.events.watch
-    CalendarEventsWatchResource,
-    newCalendarEventsWatch,
-    CalendarEventsWatch,
+    , CalendarEventsWatchResource
+    , newCalendarEventsWatch
+    , CalendarEventsWatch
 
     -- ** calendar.freebusy.query
-    CalendarFreebusyQueryResource,
-    newCalendarFreebusyQuery,
-    CalendarFreebusyQuery,
+    , CalendarFreebusyQueryResource
+    , newCalendarFreebusyQuery
+    , CalendarFreebusyQuery
 
     -- ** calendar.settings.get
-    CalendarSettingsGetResource,
-    newCalendarSettingsGet,
-    CalendarSettingsGet,
+    , CalendarSettingsGetResource
+    , newCalendarSettingsGet
+    , CalendarSettingsGet
 
     -- ** calendar.settings.list
-    CalendarSettingsListResource,
-    newCalendarSettingsList,
-    CalendarSettingsList,
+    , CalendarSettingsListResource
+    , newCalendarSettingsList
+    , CalendarSettingsList
 
     -- ** calendar.settings.watch
-    CalendarSettingsWatchResource,
-    newCalendarSettingsWatch,
-    CalendarSettingsWatch,
+    , CalendarSettingsWatchResource
+    , newCalendarSettingsWatch
+    , CalendarSettingsWatch
 
     -- * Types
 
     -- ** Acl
-    Acl (..),
-    newAcl,
+    , Acl (..)
+    , newAcl
 
     -- ** AclRule
-    AclRule (..),
-    newAclRule,
+    , AclRule (..)
+    , newAclRule
 
     -- ** AclRule_Scope
-    AclRule_Scope (..),
-    newAclRule_Scope,
+    , AclRule_Scope (..)
+    , newAclRule_Scope
 
     -- ** Calendar
-    Calendar (..),
-    newCalendar,
+    , Calendar (..)
+    , newCalendar
 
     -- ** CalendarList
-    CalendarList (..),
-    newCalendarList,
+    , CalendarList (..)
+    , newCalendarList
 
     -- ** CalendarListEntry
-    CalendarListEntry (..),
-    newCalendarListEntry,
+    , CalendarListEntry (..)
+    , newCalendarListEntry
 
     -- ** CalendarListEntry_NotificationSettings
-    CalendarListEntry_NotificationSettings (..),
-    newCalendarListEntry_NotificationSettings,
+    , CalendarListEntry_NotificationSettings (..)
+    , newCalendarListEntry_NotificationSettings
 
     -- ** CalendarNotification
-    CalendarNotification (..),
-    newCalendarNotification,
+    , CalendarNotification (..)
+    , newCalendarNotification
 
     -- ** Channel
-    Channel (..),
-    newChannel,
+    , Channel (..)
+    , newChannel
 
     -- ** Channel_Params
-    Channel_Params (..),
-    newChannel_Params,
+    , Channel_Params (..)
+    , newChannel_Params
 
     -- ** ColorDefinition
-    ColorDefinition (..),
-    newColorDefinition,
+    , ColorDefinition (..)
+    , newColorDefinition
 
     -- ** Colors
-    Colors (..),
-    newColors,
+    , Colors (..)
+    , newColors
 
     -- ** Colors_Calendar
-    Colors_Calendar (..),
-    newColors_Calendar,
+    , Colors_Calendar (..)
+    , newColors_Calendar
 
     -- ** Colors_Event
-    Colors_Event (..),
-    newColors_Event,
+    , Colors_Event (..)
+    , newColors_Event
 
     -- ** ConferenceData
-    ConferenceData (..),
-    newConferenceData,
+    , ConferenceData (..)
+    , newConferenceData
 
     -- ** ConferenceParameters
-    ConferenceParameters (..),
-    newConferenceParameters,
+    , ConferenceParameters (..)
+    , newConferenceParameters
 
     -- ** ConferenceParametersAddOnParameters
-    ConferenceParametersAddOnParameters (..),
-    newConferenceParametersAddOnParameters,
+    , ConferenceParametersAddOnParameters (..)
+    , newConferenceParametersAddOnParameters
 
     -- ** ConferenceParametersAddOnParameters_Parameters
-    ConferenceParametersAddOnParameters_Parameters (..),
-    newConferenceParametersAddOnParameters_Parameters,
+    , ConferenceParametersAddOnParameters_Parameters (..)
+    , newConferenceParametersAddOnParameters_Parameters
 
     -- ** ConferenceProperties
-    ConferenceProperties (..),
-    newConferenceProperties,
+    , ConferenceProperties (..)
+    , newConferenceProperties
 
     -- ** ConferenceRequestStatus
-    ConferenceRequestStatus (..),
-    newConferenceRequestStatus,
+    , ConferenceRequestStatus (..)
+    , newConferenceRequestStatus
 
     -- ** ConferenceSolution
-    ConferenceSolution (..),
-    newConferenceSolution,
+    , ConferenceSolution (..)
+    , newConferenceSolution
 
     -- ** ConferenceSolutionKey
-    ConferenceSolutionKey (..),
-    newConferenceSolutionKey,
+    , ConferenceSolutionKey (..)
+    , newConferenceSolutionKey
 
     -- ** CreateConferenceRequest
-    CreateConferenceRequest (..),
-    newCreateConferenceRequest,
+    , CreateConferenceRequest (..)
+    , newCreateConferenceRequest
 
     -- ** EntryPoint
-    EntryPoint (..),
-    newEntryPoint,
+    , EntryPoint (..)
+    , newEntryPoint
 
     -- ** Error'
-    Error' (..),
-    newError,
+    , Error' (..)
+    , newError
 
     -- ** Event
-    Event (..),
-    newEvent,
+    , Event (..)
+    , newEvent
 
     -- ** Event_Creator
-    Event_Creator (..),
-    newEvent_Creator,
+    , Event_Creator (..)
+    , newEvent_Creator
 
     -- ** Event_ExtendedProperties
-    Event_ExtendedProperties (..),
-    newEvent_ExtendedProperties,
+    , Event_ExtendedProperties (..)
+    , newEvent_ExtendedProperties
 
     -- ** Event_ExtendedProperties_Private
-    Event_ExtendedProperties_Private (..),
-    newEvent_ExtendedProperties_Private,
+    , Event_ExtendedProperties_Private (..)
+    , newEvent_ExtendedProperties_Private
 
     -- ** Event_ExtendedProperties_Shared
-    Event_ExtendedProperties_Shared (..),
-    newEvent_ExtendedProperties_Shared,
+    , Event_ExtendedProperties_Shared (..)
+    , newEvent_ExtendedProperties_Shared
 
     -- ** Event_Gadget
-    Event_Gadget (..),
-    newEvent_Gadget,
+    , Event_Gadget (..)
+    , newEvent_Gadget
 
     -- ** Event_Gadget_Preferences
-    Event_Gadget_Preferences (..),
-    newEvent_Gadget_Preferences,
+    , Event_Gadget_Preferences (..)
+    , newEvent_Gadget_Preferences
 
     -- ** Event_Organizer
-    Event_Organizer (..),
-    newEvent_Organizer,
+    , Event_Organizer (..)
+    , newEvent_Organizer
 
     -- ** Event_Reminders
-    Event_Reminders (..),
-    newEvent_Reminders,
+    , Event_Reminders (..)
+    , newEvent_Reminders
 
     -- ** Event_Source
-    Event_Source (..),
-    newEvent_Source,
+    , Event_Source (..)
+    , newEvent_Source
 
     -- ** EventAttachment
-    EventAttachment (..),
-    newEventAttachment,
+    , EventAttachment (..)
+    , newEventAttachment
 
     -- ** EventAttendee
-    EventAttendee (..),
-    newEventAttendee,
+    , EventAttendee (..)
+    , newEventAttendee
 
     -- ** EventDateTime
-    EventDateTime (..),
-    newEventDateTime,
+    , EventDateTime (..)
+    , newEventDateTime
 
     -- ** EventReminder
-    EventReminder (..),
-    newEventReminder,
+    , EventReminder (..)
+    , newEventReminder
 
     -- ** Events
-    Events (..),
-    newEvents,
+    , Events (..)
+    , newEvents
 
     -- ** FreeBusyCalendar
-    FreeBusyCalendar (..),
-    newFreeBusyCalendar,
+    , FreeBusyCalendar (..)
+    , newFreeBusyCalendar
 
     -- ** FreeBusyGroup
-    FreeBusyGroup (..),
-    newFreeBusyGroup,
+    , FreeBusyGroup (..)
+    , newFreeBusyGroup
 
     -- ** FreeBusyRequest
-    FreeBusyRequest (..),
-    newFreeBusyRequest,
+    , FreeBusyRequest (..)
+    , newFreeBusyRequest
 
     -- ** FreeBusyRequestItem
-    FreeBusyRequestItem (..),
-    newFreeBusyRequestItem,
+    , FreeBusyRequestItem (..)
+    , newFreeBusyRequestItem
 
     -- ** FreeBusyResponse
-    FreeBusyResponse (..),
-    newFreeBusyResponse,
+    , FreeBusyResponse (..)
+    , newFreeBusyResponse
 
     -- ** FreeBusyResponse_Calendars
-    FreeBusyResponse_Calendars (..),
-    newFreeBusyResponse_Calendars,
+    , FreeBusyResponse_Calendars (..)
+    , newFreeBusyResponse_Calendars
 
     -- ** FreeBusyResponse_Groups
-    FreeBusyResponse_Groups (..),
-    newFreeBusyResponse_Groups,
+    , FreeBusyResponse_Groups (..)
+    , newFreeBusyResponse_Groups
 
     -- ** Setting
-    Setting (..),
-    newSetting,
+    , Setting (..)
+    , newSetting
 
     -- ** Settings
-    Settings (..),
-    newSettings,
+    , Settings (..)
+    , newSettings
 
     -- ** TimePeriod
-    TimePeriod (..),
-    newTimePeriod,
+    , TimePeriod (..)
+    , newTimePeriod
 
     -- ** CalendarListListMinAccessRole
-    CalendarListListMinAccessRole (..),
+    , CalendarListListMinAccessRole (..)
 
     -- ** CalendarListWatchMinAccessRole
-    CalendarListWatchMinAccessRole (..),
+    , CalendarListWatchMinAccessRole (..)
 
     -- ** EventsDeleteSendUpdates
-    EventsDeleteSendUpdates (..),
+    , EventsDeleteSendUpdates (..)
 
     -- ** EventsInsertSendUpdates
-    EventsInsertSendUpdates (..),
+    , EventsInsertSendUpdates (..)
 
     -- ** EventsListOrderBy
-    EventsListOrderBy (..),
+    , EventsListOrderBy (..)
 
     -- ** EventsMoveSendUpdates
-    EventsMoveSendUpdates (..),
+    , EventsMoveSendUpdates (..)
 
     -- ** EventsPatchSendUpdates
-    EventsPatchSendUpdates (..),
+    , EventsPatchSendUpdates (..)
 
     -- ** EventsQuickAddSendUpdates
-    EventsQuickAddSendUpdates (..),
+    , EventsQuickAddSendUpdates (..)
 
     -- ** EventsUpdateSendUpdates
-    EventsUpdateSendUpdates (..),
+    , EventsUpdateSendUpdates (..)
 
     -- ** EventsWatchOrderBy
-    EventsWatchOrderBy (..),
-  )
-where
+    , EventsWatchOrderBy (..)
+    ) where
 
 import Gogol.AppsCalendar.Calendar.Acl.Delete
 import Gogol.AppsCalendar.Calendar.Acl.Get

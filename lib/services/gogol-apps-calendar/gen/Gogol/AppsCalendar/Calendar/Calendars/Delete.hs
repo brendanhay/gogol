@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,59 +36,57 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.delete@.
 module Gogol.AppsCalendar.Calendar.Calendars.Delete
-  ( -- * Resource
-    CalendarCalendarsDeleteResource,
+    (
+    -- * Resource
+      CalendarCalendarsDeleteResource
 
     -- ** Constructing a Request
-    newCalendarCalendarsDelete,
-    CalendarCalendarsDelete,
-  )
-where
+    , newCalendarCalendarsDelete
+    , CalendarCalendarsDelete
+    ) where
 
-import Gogol.AppsCalendar.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AppsCalendar.Types
 
 -- | A resource alias for @calendar.calendars.delete@ method which the
 -- 'CalendarCalendarsDelete' request conforms to.
 type CalendarCalendarsDeleteResource =
-  "calendar"
-    Core.:> "v3"
-    Core.:> "calendars"
-    Core.:> Core.Capture "calendarId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+     "calendar" Core.:>
+       "v3" Core.:>
+         "calendars" Core.:>
+           Core.Capture "calendarId" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.Delete '[Core.JSON] ()
 
 -- | Deletes a secondary calendar. Use calendars.clear for clearing all events on primary calendars.
 --
 -- /See:/ 'newCalendarCalendarsDelete' smart constructor.
 newtype CalendarCalendarsDelete = CalendarCalendarsDelete
-  { -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.
-    calendarId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.
+      calendarId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CalendarCalendarsDelete' with the minimum fields required to make a request.
-newCalendarCalendarsDelete ::
-  -- |  Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword. See 'calendarId'.
-  Core.Text ->
-  CalendarCalendarsDelete
+newCalendarCalendarsDelete 
+    ::  Core.Text
+       -- ^  Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword. See 'calendarId'.
+    -> CalendarCalendarsDelete
 newCalendarCalendarsDelete calendarId =
   CalendarCalendarsDelete {calendarId = calendarId}
 
-instance Core.GoogleRequest CalendarCalendarsDelete where
-  type Rs CalendarCalendarsDelete = ()
-  type
-    Scopes CalendarCalendarsDelete =
-      '["https://www.googleapis.com/auth/calendar"]
-  requestClient CalendarCalendarsDelete {..} =
-    go
-      calendarId
-      (Core.Just Core.AltJSON)
-      appsCalendarService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarCalendarsDeleteResource
-          )
-          Core.mempty
+instance Core.GoogleRequest CalendarCalendarsDelete
+         where
+        type Rs CalendarCalendarsDelete = ()
+        type Scopes CalendarCalendarsDelete =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarCalendarsDelete{..}
+          = go calendarId (Core.Just Core.AltJSON)
+              appsCalendarService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CalendarCalendarsDeleteResource)
+                      Core.mempty
+

@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,65 +36,62 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.update@.
 module Gogol.AppsCalendar.Calendar.Calendars.Update
-  ( -- * Resource
-    CalendarCalendarsUpdateResource,
+    (
+    -- * Resource
+      CalendarCalendarsUpdateResource
 
     -- ** Constructing a Request
-    newCalendarCalendarsUpdate,
-    CalendarCalendarsUpdate,
-  )
-where
+    , newCalendarCalendarsUpdate
+    , CalendarCalendarsUpdate
+    ) where
 
-import Gogol.AppsCalendar.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AppsCalendar.Types
 
 -- | A resource alias for @calendar.calendars.update@ method which the
 -- 'CalendarCalendarsUpdate' request conforms to.
 type CalendarCalendarsUpdateResource =
-  "calendar"
-    Core.:> "v3"
-    Core.:> "calendars"
-    Core.:> Core.Capture "calendarId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Calendar
-    Core.:> Core.Put '[Core.JSON] Calendar
+     "calendar" Core.:>
+       "v3" Core.:>
+         "calendars" Core.:>
+           Core.Capture "calendarId" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON] Calendar Core.:>
+                 Core.Put '[Core.JSON] Calendar
 
 -- | Updates metadata for a calendar.
 --
 -- /See:/ 'newCalendarCalendarsUpdate' smart constructor.
 data CalendarCalendarsUpdate = CalendarCalendarsUpdate
-  { -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.
-    calendarId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Calendar
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.
+      calendarId :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: Calendar
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CalendarCalendarsUpdate' with the minimum fields required to make a request.
-newCalendarCalendarsUpdate ::
-  -- |  Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword. See 'calendarId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Calendar ->
-  CalendarCalendarsUpdate
+newCalendarCalendarsUpdate 
+    ::  Core.Text
+       -- ^  Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword. See 'calendarId'.
+    -> Calendar
+       -- ^  Multipart request metadata. See 'payload'.
+    -> CalendarCalendarsUpdate
 newCalendarCalendarsUpdate calendarId payload =
   CalendarCalendarsUpdate {calendarId = calendarId, payload = payload}
 
-instance Core.GoogleRequest CalendarCalendarsUpdate where
-  type Rs CalendarCalendarsUpdate = Calendar
-  type
-    Scopes CalendarCalendarsUpdate =
-      '["https://www.googleapis.com/auth/calendar"]
-  requestClient CalendarCalendarsUpdate {..} =
-    go
-      calendarId
-      (Core.Just Core.AltJSON)
-      payload
-      appsCalendarService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarCalendarsUpdateResource
-          )
-          Core.mempty
+instance Core.GoogleRequest CalendarCalendarsUpdate
+         where
+        type Rs CalendarCalendarsUpdate = Calendar
+        type Scopes CalendarCalendarsUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarCalendarsUpdate{..}
+          = go calendarId (Core.Just Core.AltJSON) payload
+              appsCalendarService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CalendarCalendarsUpdateResource)
+                      Core.mempty
+
