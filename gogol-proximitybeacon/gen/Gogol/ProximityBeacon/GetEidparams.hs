@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.GetEidparams
+-- Module      : Gogol.ProximityBeacon.GetEidparams
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the Proximity Beacon API\'s current public key and associated parameters used to initiate the Diffie-Hellman key exchange required to register a beacon that broadcasts the Eddystone-EID format. This key changes periodically; clients may cache it and re-use the same public key to provision and register multiple beacons. However, clients should be prepared to refresh this key when they encounter an error registering an Eddystone-EID beacon.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.getEidparams@.
-module Network.Google.ProximityBeacon.GetEidparams
+module Gogol.ProximityBeacon.GetEidparams
   ( -- * Resource
     ProximityBeaconGetEidparamsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ProximityBeacon.GetEidparams
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.getEidparams@ method which the
 -- 'ProximityBeaconGetEidparams' request conforms to.

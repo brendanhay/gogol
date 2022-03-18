@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Internal.Product
+-- Module      : Gogol.ProximityBeacon.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ProximityBeacon.Internal.Product
+module Gogol.ProximityBeacon.Internal.Product
   ( -- * AdvertisedId
     AdvertisedId (..),
     newAdvertisedId,
@@ -116,8 +116,8 @@ module Network.Google.ProximityBeacon.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Internal.Sum
 
 -- | Defines a unique identifier of a beacon as broadcast by the device.
 --

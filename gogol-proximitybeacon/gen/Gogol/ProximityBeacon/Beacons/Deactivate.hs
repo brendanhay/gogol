@@ -19,36 +19,36 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Beacons.Activate
+-- Module      : Gogol.ProximityBeacon.Beacons.Deactivate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Activates a beacon. A beacon that is active will return information and attachment data when queried via @beaconinfo.getforobserved@. Calling this method on an already active beacon will do nothing (but will return a successful response code).
+-- Deactivates a beacon. Once deactivated, the API will not return information nor attachment data for the beacon when queried via @beaconinfo.getforobserved@. Calling this method on an already inactive beacon will do nothing (but will return a successful response code).
 --
 -- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.activate@.
-module Network.Google.ProximityBeacon.Beacons.Activate
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.deactivate@.
+module Gogol.ProximityBeacon.Beacons.Deactivate
   ( -- * Resource
-    ProximityBeaconBeaconsActivateResource,
+    ProximityBeaconBeaconsDeactivateResource,
 
     -- ** Constructing a Request
-    newProximityBeaconBeaconsActivate,
-    ProximityBeaconBeaconsActivate,
+    newProximityBeaconBeaconsDeactivate,
+    ProximityBeaconBeaconsDeactivate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
--- | A resource alias for @proximitybeacon.beacons.activate@ method which the
--- 'ProximityBeaconBeaconsActivate' request conforms to.
-type ProximityBeaconBeaconsActivateResource =
+-- | A resource alias for @proximitybeacon.beacons.deactivate@ method which the
+-- 'ProximityBeaconBeaconsDeactivate' request conforms to.
+type ProximityBeaconBeaconsDeactivateResource =
   "v1beta1"
-    Core.:> Core.CaptureMode "beaconName" "activate" Core.Text
+    Core.:> Core.CaptureMode "beaconName" "deactivate" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -58,21 +58,21 @@ type ProximityBeaconBeaconsActivateResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Empty
 
--- | Activates a beacon. A beacon that is active will return information and attachment data when queried via @beaconinfo.getforobserved@. Calling this method on an already active beacon will do nothing (but will return a successful response code).
+-- | Deactivates a beacon. Once deactivated, the API will not return information nor attachment data for the beacon when queried via @beaconinfo.getforobserved@. Calling this method on an already inactive beacon will do nothing (but will return a successful response code).
 --
 -- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
 --
--- /See:/ 'newProximityBeaconBeaconsActivate' smart constructor.
-data ProximityBeaconBeaconsActivate = ProximityBeaconBeaconsActivate
+-- /See:/ 'newProximityBeaconBeaconsDeactivate' smart constructor.
+data ProximityBeaconBeaconsDeactivate = ProximityBeaconBeaconsDeactivate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Beacon that should be activated. A beacon name has the format \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by the beacon and N is a code for the beacon\'s type. Possible values are @3@ for Eddystone-UID, @4@ for Eddystone-EID, @1@ for iBeacon, or @5@ for AltBeacon. For Eddystone-EID beacons, you may use either the current EID or the beacon\'s \"stable\" UID. Required.
+    -- | Beacon that should be deactivated. A beacon name has the format \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by the beacon and N is a code for the beacon\'s type. Possible values are @3@ for Eddystone-UID, @4@ for Eddystone-EID, @1@ for iBeacon, or @5@ for AltBeacon. For Eddystone-EID beacons, you may use either the current EID or the beacon\'s \"stable\" UID. Required.
     beaconName :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The project id of the beacon to activate. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+    -- | The project id of the beacon to deactivate. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,13 +81,13 @@ data ProximityBeaconBeaconsActivate = ProximityBeaconBeaconsActivate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ProximityBeaconBeaconsActivate' with the minimum fields required to make a request.
-newProximityBeaconBeaconsActivate ::
-  -- |  Beacon that should be activated. A beacon name has the format \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by the beacon and N is a code for the beacon\'s type. Possible values are @3@ for Eddystone-UID, @4@ for Eddystone-EID, @1@ for iBeacon, or @5@ for AltBeacon. For Eddystone-EID beacons, you may use either the current EID or the beacon\'s \"stable\" UID. Required. See 'beaconName'.
+-- | Creates a value of 'ProximityBeaconBeaconsDeactivate' with the minimum fields required to make a request.
+newProximityBeaconBeaconsDeactivate ::
+  -- |  Beacon that should be deactivated. A beacon name has the format \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by the beacon and N is a code for the beacon\'s type. Possible values are @3@ for Eddystone-UID, @4@ for Eddystone-EID, @1@ for iBeacon, or @5@ for AltBeacon. For Eddystone-EID beacons, you may use either the current EID or the beacon\'s \"stable\" UID. Required. See 'beaconName'.
   Core.Text ->
-  ProximityBeaconBeaconsActivate
-newProximityBeaconBeaconsActivate beaconName =
-  ProximityBeaconBeaconsActivate
+  ProximityBeaconBeaconsDeactivate
+newProximityBeaconBeaconsDeactivate beaconName =
+  ProximityBeaconBeaconsDeactivate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       beaconName = beaconName,
@@ -99,13 +99,13 @@ newProximityBeaconBeaconsActivate beaconName =
 
 instance
   Core.GoogleRequest
-    ProximityBeaconBeaconsActivate
+    ProximityBeaconBeaconsDeactivate
   where
-  type Rs ProximityBeaconBeaconsActivate = Empty
+  type Rs ProximityBeaconBeaconsDeactivate = Empty
   type
-    Scopes ProximityBeaconBeaconsActivate =
+    Scopes ProximityBeaconBeaconsDeactivate =
       '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
-  requestClient ProximityBeaconBeaconsActivate {..} =
+  requestClient ProximityBeaconBeaconsDeactivate {..} =
     go
       beaconName
       xgafv
@@ -120,6 +120,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ProximityBeaconBeaconsActivateResource
+              Core.Proxy ProximityBeaconBeaconsDeactivateResource
           )
           Core.mempty

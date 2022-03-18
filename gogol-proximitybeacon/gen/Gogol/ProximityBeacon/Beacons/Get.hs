@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Beacons.Get
+-- Module      : Gogol.ProximityBeacon.Beacons.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -33,7 +33,7 @@
 -- Requests may supply an Eddystone-EID beacon name in the form: @beacons\/4!beaconId@ where the @beaconId@ is the base16 ephemeral ID broadcast by the beacon. The returned @Beacon@ object will contain the beacon\'s stable Eddystone-UID. Clients not authorized to resolve the beacon\'s ephemeral Eddystone-EID broadcast will receive an error.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.get@.
-module Network.Google.ProximityBeacon.Beacons.Get
+module Gogol.ProximityBeacon.Beacons.Get
   ( -- * Resource
     ProximityBeaconBeaconsGetResource,
 
@@ -43,8 +43,8 @@ module Network.Google.ProximityBeacon.Beacons.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.get@ method which the
 -- 'ProximityBeaconBeaconsGet' request conforms to.

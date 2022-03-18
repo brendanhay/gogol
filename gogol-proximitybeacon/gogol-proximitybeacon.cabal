@@ -39,34 +39,35 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ProximityBeacon
-    Network.Google.ProximityBeacon.Beaconinfo.Getforobserved
-    Network.Google.ProximityBeacon.Beacons.Activate
-    Network.Google.ProximityBeacon.Beacons.Attachments.BatchDelete
-    Network.Google.ProximityBeacon.Beacons.Attachments.Create
-    Network.Google.ProximityBeacon.Beacons.Attachments.Delete
-    Network.Google.ProximityBeacon.Beacons.Attachments.List
-    Network.Google.ProximityBeacon.Beacons.Deactivate
-    Network.Google.ProximityBeacon.Beacons.Decommission
-    Network.Google.ProximityBeacon.Beacons.Delete
-    Network.Google.ProximityBeacon.Beacons.Diagnostics.List
-    Network.Google.ProximityBeacon.Beacons.Get
-    Network.Google.ProximityBeacon.Beacons.List
-    Network.Google.ProximityBeacon.Beacons.Register
-    Network.Google.ProximityBeacon.Beacons.Update
-    Network.Google.ProximityBeacon.GetEidparams
-    Network.Google.ProximityBeacon.Namespaces.List
-    Network.Google.ProximityBeacon.Namespaces.Update
-    Network.Google.ProximityBeacon.Types
+    Gogol.ProximityBeacon
+    Gogol.ProximityBeacon.Beaconinfo.Getforobserved
+    Gogol.ProximityBeacon.Beacons.Activate
+    Gogol.ProximityBeacon.Beacons.Attachments.BatchDelete
+    Gogol.ProximityBeacon.Beacons.Attachments.Create
+    Gogol.ProximityBeacon.Beacons.Attachments.Delete
+    Gogol.ProximityBeacon.Beacons.Attachments.List
+    Gogol.ProximityBeacon.Beacons.Deactivate
+    Gogol.ProximityBeacon.Beacons.Decommission
+    Gogol.ProximityBeacon.Beacons.Delete
+    Gogol.ProximityBeacon.Beacons.Diagnostics.List
+    Gogol.ProximityBeacon.Beacons.Get
+    Gogol.ProximityBeacon.Beacons.List
+    Gogol.ProximityBeacon.Beacons.Register
+    Gogol.ProximityBeacon.Beacons.Update
+    Gogol.ProximityBeacon.GetEidparams
+    Gogol.ProximityBeacon.Namespaces.List
+    Gogol.ProximityBeacon.Namespaces.Update
+    Gogol.ProximityBeacon.Types
 
   other-modules:
-    Network.Google.ProximityBeacon.Internal.Product
-    Network.Google.ProximityBeacon.Internal.Sum
+    Gogol.ProximityBeacon.Internal.Product
+    Gogol.ProximityBeacon.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Beacons.List
+-- Module      : Gogol.ProximityBeacon.Beacons.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -31,7 +31,7 @@
 -- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __viewer__, __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.list@.
-module Network.Google.ProximityBeacon.Beacons.List
+module Gogol.ProximityBeacon.Beacons.List
   ( -- * Resource
     ProximityBeaconBeaconsListResource,
 
@@ -41,8 +41,8 @@ module Network.Google.ProximityBeacon.Beacons.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.list@ method which the
 -- 'ProximityBeaconBeaconsList' request conforms to.
