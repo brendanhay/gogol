@@ -1,18 +1,6 @@
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TemplateHaskell #-}
 
--- |
--- Module      : Main
--- Copyright   : (c) 2015-2022 Brendan Hay
--- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
--- Stability   : provisional
--- Portability : non-portable (GHC extensions)
-module Main (main) where
+module Main where
 
 import Control.Error
 import Control.Lens hiding ((<.>))
@@ -34,7 +22,7 @@ import Options.Applicative
 data Opt = Opt
   { _optOutput :: Path,
     _optModels :: [Path],
-    _optAnnexes :: Path,
+    _optServices :: Path,
     _optTemplates :: Path,
     _optStatic :: Path,
     _optVersions :: Versions
@@ -57,14 +45,14 @@ parser =
           isPath
           ( long "model"
               <> metavar "DIR"
-              <> help "Directory for a service's botocore models."
+              <> help "Directory for a service's models."
           )
       )
     <*> option
       isPath
-      ( long "annexes"
+      ( long "services"
           <> metavar "DIR"
-          <> help "Directory containing botocore model annexes."
+          <> help "Directory containing model configurations."
       )
     <*> option
       isPath
@@ -112,7 +100,7 @@ validate :: MonadIO m => Opt -> m Opt
 validate o = flip execStateT o $ do
   sequence_
     [ check optOutput,
-      check optAnnexes,
+      check optServices,
       check optTemplates,
       check optStatic
     ]
@@ -159,9 +147,9 @@ main = do
     done
 
     forM_ (zip [1 :: Int ..] ms) $ \(n, Model {..}) -> do
-      let annexPath = _optAnnexes </> fromText modelName <.> "json"
+      let configPath = _optServices </> fromText modelName <.> "json"
 
-      configured <- isFile annexPath
+      configured <- isFile configPath
 
       if not configured
         then lift (skip modelName)
@@ -169,7 +157,7 @@ main = do
           title ("[" % int % "/" % int % "] model:" % stext) n i modelName
 
           definition <-
-            sequence [JS.load annexPath, JS.load modelPath]
+            sequence [JS.load configPath, JS.load modelPath]
               >>= hoistEither . JS.parse . JS.merge
 
           say ("Successfully parsed '" % stext % "' API definition.") modelName
@@ -196,7 +184,7 @@ main = do
     unless (Prelude.null names) $ do
       let count = length names
 
-      title ("Skipped " % int % " models due to missing annex configuration(s):\n " % list stext) count names
+      title ("Skipped " % int % " models due to missing configuration(s):\n " % list stext) count names
 
       done
 

@@ -62,7 +62,7 @@ mname canonical (Suffix suf) (Global method) =
 
     -- Replace possibly wonky casing of method.id components that are supplied
     -- by a canonicalName, which typically correctly cased due to coming from
-    -- the ./annex/*.json configurations.
+    -- the ./service/*.json configurations.
     squeeze = \case
       (x : xs, y : ys) | CI.mk x == CI.mk y -> x : squeeze (xs, ys)
       (_xs, ys) -> ys

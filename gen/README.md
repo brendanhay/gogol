@@ -1,8 +1,8 @@
 # gogol-gen
 
 For pull requests which affect generated output, please _do not include_ the
-actual regenerated service code, only commit the updates to the generator,
-config and annex connection.
+actual regenerated service code, only commit the updates to the generator and
+related configuration.
 
 This ensures the Continuous Integration process is the single source of truth
 for generated code changes, and keeps pull requests readable and focused on
@@ -11,7 +11,7 @@ actual generator code/logic changes.
 ## Generating
 
 The configuration for the generation step of each individual service endpoint lives
-under `./annex`. The naming matches the Google Discovery Service naming of endpoints,
+under `./service`. The naming matches the Google Discovery Service naming of endpoints,
 which are vendored under `./model`.
 
 Rather than actually crawling the Discovery Service, the [Google API Go Client](https://www.github.com/google/google-api-go-client)
@@ -20,10 +20,10 @@ to ensure reproducibility of the generation steps and the abilitry to diff acros
 
 ### Example: Cloud Dataproc
 
-To add a new endpoint, first create the related JSON configuration in the `./annex` directory.
+To add a new endpoint, first create the related JSON configuration in the `./service` directory.
 
 Since the Cloud Dataproc API is called `dataproc-api.json` in the Google Discovery API,
-you would create the configuration `./annex/dataproc.json` with the following contents:
+you would create the configuration `./service/dataproc.json` with the following contents:
 
 ```
 {
@@ -40,7 +40,7 @@ make
 ```
 
 This will build the `./bin/gogol-gen` binary, and will generate a Haskell library
-for each API that has matching `./annex/*.json` configuration.
+for each API that has matching `./service/*.json` configuration.
 
 For the above example, the result would be a `../gogol-dataproc` directory at the
 top-level of the project containing the generated API client.

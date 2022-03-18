@@ -22,7 +22,7 @@ gen: $(BIN)/gogol-gen $(MODEL_DIR)
  --library-version=$(VERSION) \
  --client-version=$(CLIENT_VERSION) \
  --core-version=$(CORE_VERSION) \
- --annexes=annex \
+ --services=service \
  --templates=template \
  --static=static \
  $(addprefix --model=,$(MODELS))

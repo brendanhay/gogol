@@ -559,7 +559,7 @@ ctorSig n rs = TypeSig () [cname n] ts
     ps = parameters (Map.elems rs)
 
 ctorDecl :: Global -> Map Local Solved -> Decl ()
-ctorDecl n = sfun c ps (UnGuardedRhs () rhs) noBinds
+ctorDecl n rs = sfun c ps (UnGuardedRhs () rhs) noBinds
   where
     c = cname n
     d = dname n
