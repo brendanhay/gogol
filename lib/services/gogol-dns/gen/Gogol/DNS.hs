@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -32,469 +26,469 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- 
+--
 --
 -- /See:/ <https://cloud.google.com/dns/docs Cloud DNS API Reference>
 module Gogol.DNS
-    (
-    -- * Configuration
-      dNSService
+  ( -- * Configuration
+    dNSService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
-    , ndevClouddnsReadOnlyScope
-    , ndevClouddnsReadwriteScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    ndevClouddnsReadOnlyScope,
+    ndevClouddnsReadwriteScope,
 
     -- * Resources
 
     -- ** dns.changes.create
-    , DNSChangesCreateResource
-    , newDNSChangesCreate
-    , DNSChangesCreate
+    DNSChangesCreateResource,
+    newDNSChangesCreate,
+    DNSChangesCreate,
 
     -- ** dns.changes.get
-    , DNSChangesGetResource
-    , newDNSChangesGet
-    , DNSChangesGet
+    DNSChangesGetResource,
+    newDNSChangesGet,
+    DNSChangesGet,
 
     -- ** dns.changes.list
-    , DNSChangesListResource
-    , newDNSChangesList
-    , DNSChangesList
+    DNSChangesListResource,
+    newDNSChangesList,
+    DNSChangesList,
 
     -- ** dns.dnsKeys.get
-    , DNSDnsKeysGetResource
-    , newDNSDnsKeysGet
-    , DNSDnsKeysGet
+    DNSDnsKeysGetResource,
+    newDNSDnsKeysGet,
+    DNSDnsKeysGet,
 
     -- ** dns.dnsKeys.list
-    , DNSDnsKeysListResource
-    , newDNSDnsKeysList
-    , DNSDnsKeysList
+    DNSDnsKeysListResource,
+    newDNSDnsKeysList,
+    DNSDnsKeysList,
 
     -- ** dns.managedZoneOperations.get
-    , DNSManagedZoneOperationsGetResource
-    , newDNSManagedZoneOperationsGet
-    , DNSManagedZoneOperationsGet
+    DNSManagedZoneOperationsGetResource,
+    newDNSManagedZoneOperationsGet,
+    DNSManagedZoneOperationsGet,
 
     -- ** dns.managedZoneOperations.list
-    , DNSManagedZoneOperationsListResource
-    , newDNSManagedZoneOperationsList
-    , DNSManagedZoneOperationsList
+    DNSManagedZoneOperationsListResource,
+    newDNSManagedZoneOperationsList,
+    DNSManagedZoneOperationsList,
 
     -- ** dns.managedZones.create
-    , DNSManagedZonesCreateResource
-    , newDNSManagedZonesCreate
-    , DNSManagedZonesCreate
+    DNSManagedZonesCreateResource,
+    newDNSManagedZonesCreate,
+    DNSManagedZonesCreate,
 
     -- ** dns.managedZones.delete
-    , DNSManagedZonesDeleteResource
-    , newDNSManagedZonesDelete
-    , DNSManagedZonesDelete
+    DNSManagedZonesDeleteResource,
+    newDNSManagedZonesDelete,
+    DNSManagedZonesDelete,
 
     -- ** dns.managedZones.get
-    , DNSManagedZonesGetResource
-    , newDNSManagedZonesGet
-    , DNSManagedZonesGet
+    DNSManagedZonesGetResource,
+    newDNSManagedZonesGet,
+    DNSManagedZonesGet,
 
     -- ** dns.managedZones.list
-    , DNSManagedZonesListResource
-    , newDNSManagedZonesList
-    , DNSManagedZonesList
+    DNSManagedZonesListResource,
+    newDNSManagedZonesList,
+    DNSManagedZonesList,
 
     -- ** dns.managedZones.patch
-    , DNSManagedZonesPatchResource
-    , newDNSManagedZonesPatch
-    , DNSManagedZonesPatch
+    DNSManagedZonesPatchResource,
+    newDNSManagedZonesPatch,
+    DNSManagedZonesPatch,
 
     -- ** dns.managedZones.update
-    , DNSManagedZonesUpdateResource
-    , newDNSManagedZonesUpdate
-    , DNSManagedZonesUpdate
+    DNSManagedZonesUpdateResource,
+    newDNSManagedZonesUpdate,
+    DNSManagedZonesUpdate,
 
     -- ** dns.policies.create
-    , DNSPoliciesCreateResource
-    , newDNSPoliciesCreate
-    , DNSPoliciesCreate
+    DNSPoliciesCreateResource,
+    newDNSPoliciesCreate,
+    DNSPoliciesCreate,
 
     -- ** dns.policies.delete
-    , DNSPoliciesDeleteResource
-    , newDNSPoliciesDelete
-    , DNSPoliciesDelete
+    DNSPoliciesDeleteResource,
+    newDNSPoliciesDelete,
+    DNSPoliciesDelete,
 
     -- ** dns.policies.get
-    , DNSPoliciesGetResource
-    , newDNSPoliciesGet
-    , DNSPoliciesGet
+    DNSPoliciesGetResource,
+    newDNSPoliciesGet,
+    DNSPoliciesGet,
 
     -- ** dns.policies.list
-    , DNSPoliciesListResource
-    , newDNSPoliciesList
-    , DNSPoliciesList
+    DNSPoliciesListResource,
+    newDNSPoliciesList,
+    DNSPoliciesList,
 
     -- ** dns.policies.patch
-    , DNSPoliciesPatchResource
-    , newDNSPoliciesPatch
-    , DNSPoliciesPatch
+    DNSPoliciesPatchResource,
+    newDNSPoliciesPatch,
+    DNSPoliciesPatch,
 
     -- ** dns.policies.update
-    , DNSPoliciesUpdateResource
-    , newDNSPoliciesUpdate
-    , DNSPoliciesUpdate
+    DNSPoliciesUpdateResource,
+    newDNSPoliciesUpdate,
+    DNSPoliciesUpdate,
 
     -- ** dns.projects.get
-    , DNSProjectsGetResource
-    , newDNSProjectsGet
-    , DNSProjectsGet
+    DNSProjectsGetResource,
+    newDNSProjectsGet,
+    DNSProjectsGet,
 
     -- ** dns.resourceRecordSets.create
-    , DNSResourceRecordSetsCreateResource
-    , newDNSResourceRecordSetsCreate
-    , DNSResourceRecordSetsCreate
+    DNSResourceRecordSetsCreateResource,
+    newDNSResourceRecordSetsCreate,
+    DNSResourceRecordSetsCreate,
 
     -- ** dns.resourceRecordSets.delete
-    , DNSResourceRecordSetsDeleteResource
-    , newDNSResourceRecordSetsDelete
-    , DNSResourceRecordSetsDelete
+    DNSResourceRecordSetsDeleteResource,
+    newDNSResourceRecordSetsDelete,
+    DNSResourceRecordSetsDelete,
 
     -- ** dns.resourceRecordSets.get
-    , DNSResourceRecordSetsGetResource
-    , newDNSResourceRecordSetsGet
-    , DNSResourceRecordSetsGet
+    DNSResourceRecordSetsGetResource,
+    newDNSResourceRecordSetsGet,
+    DNSResourceRecordSetsGet,
 
     -- ** dns.resourceRecordSets.list
-    , DNSResourceRecordSetsListResource
-    , newDNSResourceRecordSetsList
-    , DNSResourceRecordSetsList
+    DNSResourceRecordSetsListResource,
+    newDNSResourceRecordSetsList,
+    DNSResourceRecordSetsList,
 
     -- ** dns.resourceRecordSets.patch
-    , DNSResourceRecordSetsPatchResource
-    , newDNSResourceRecordSetsPatch
-    , DNSResourceRecordSetsPatch
+    DNSResourceRecordSetsPatchResource,
+    newDNSResourceRecordSetsPatch,
+    DNSResourceRecordSetsPatch,
 
     -- ** dns.responsePolicies.create
-    , DNSResponsePoliciesCreateResource
-    , newDNSResponsePoliciesCreate
-    , DNSResponsePoliciesCreate
+    DNSResponsePoliciesCreateResource,
+    newDNSResponsePoliciesCreate,
+    DNSResponsePoliciesCreate,
 
     -- ** dns.responsePolicies.delete
-    , DNSResponsePoliciesDeleteResource
-    , newDNSResponsePoliciesDelete
-    , DNSResponsePoliciesDelete
+    DNSResponsePoliciesDeleteResource,
+    newDNSResponsePoliciesDelete,
+    DNSResponsePoliciesDelete,
 
     -- ** dns.responsePolicies.get
-    , DNSResponsePoliciesGetResource
-    , newDNSResponsePoliciesGet
-    , DNSResponsePoliciesGet
+    DNSResponsePoliciesGetResource,
+    newDNSResponsePoliciesGet,
+    DNSResponsePoliciesGet,
 
     -- ** dns.responsePolicies.list
-    , DNSResponsePoliciesListResource
-    , newDNSResponsePoliciesList
-    , DNSResponsePoliciesList
+    DNSResponsePoliciesListResource,
+    newDNSResponsePoliciesList,
+    DNSResponsePoliciesList,
 
     -- ** dns.responsePolicies.patch
-    , DNSResponsePoliciesPatchResource
-    , newDNSResponsePoliciesPatch
-    , DNSResponsePoliciesPatch
+    DNSResponsePoliciesPatchResource,
+    newDNSResponsePoliciesPatch,
+    DNSResponsePoliciesPatch,
 
     -- ** dns.responsePolicies.update
-    , DNSResponsePoliciesUpdateResource
-    , newDNSResponsePoliciesUpdate
-    , DNSResponsePoliciesUpdate
+    DNSResponsePoliciesUpdateResource,
+    newDNSResponsePoliciesUpdate,
+    DNSResponsePoliciesUpdate,
 
     -- ** dns.responsePolicyRules.create
-    , DNSResponsePolicyRulesCreateResource
-    , newDNSResponsePolicyRulesCreate
-    , DNSResponsePolicyRulesCreate
+    DNSResponsePolicyRulesCreateResource,
+    newDNSResponsePolicyRulesCreate,
+    DNSResponsePolicyRulesCreate,
 
     -- ** dns.responsePolicyRules.delete
-    , DNSResponsePolicyRulesDeleteResource
-    , newDNSResponsePolicyRulesDelete
-    , DNSResponsePolicyRulesDelete
+    DNSResponsePolicyRulesDeleteResource,
+    newDNSResponsePolicyRulesDelete,
+    DNSResponsePolicyRulesDelete,
 
     -- ** dns.responsePolicyRules.get
-    , DNSResponsePolicyRulesGetResource
-    , newDNSResponsePolicyRulesGet
-    , DNSResponsePolicyRulesGet
+    DNSResponsePolicyRulesGetResource,
+    newDNSResponsePolicyRulesGet,
+    DNSResponsePolicyRulesGet,
 
     -- ** dns.responsePolicyRules.list
-    , DNSResponsePolicyRulesListResource
-    , newDNSResponsePolicyRulesList
-    , DNSResponsePolicyRulesList
+    DNSResponsePolicyRulesListResource,
+    newDNSResponsePolicyRulesList,
+    DNSResponsePolicyRulesList,
 
     -- ** dns.responsePolicyRules.patch
-    , DNSResponsePolicyRulesPatchResource
-    , newDNSResponsePolicyRulesPatch
-    , DNSResponsePolicyRulesPatch
+    DNSResponsePolicyRulesPatchResource,
+    newDNSResponsePolicyRulesPatch,
+    DNSResponsePolicyRulesPatch,
 
     -- ** dns.responsePolicyRules.update
-    , DNSResponsePolicyRulesUpdateResource
-    , newDNSResponsePolicyRulesUpdate
-    , DNSResponsePolicyRulesUpdate
+    DNSResponsePolicyRulesUpdateResource,
+    newDNSResponsePolicyRulesUpdate,
+    DNSResponsePolicyRulesUpdate,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Change
-    , Change (..)
-    , newChange
+    Change (..),
+    newChange,
 
     -- ** Change_Status
-    , Change_Status (..)
+    Change_Status (..),
 
     -- ** ChangesListResponse
-    , ChangesListResponse (..)
-    , newChangesListResponse
+    ChangesListResponse (..),
+    newChangesListResponse,
 
     -- ** DnsKey
-    , DnsKey (..)
-    , newDnsKey
+    DnsKey (..),
+    newDnsKey,
 
     -- ** DnsKey_Algorithm
-    , DnsKey_Algorithm (..)
+    DnsKey_Algorithm (..),
 
     -- ** DnsKey_Type
-    , DnsKey_Type (..)
+    DnsKey_Type (..),
 
     -- ** DnsKeyDigest
-    , DnsKeyDigest (..)
-    , newDnsKeyDigest
+    DnsKeyDigest (..),
+    newDnsKeyDigest,
 
     -- ** DnsKeyDigest_Type
-    , DnsKeyDigest_Type (..)
+    DnsKeyDigest_Type (..),
 
     -- ** DnsKeySpec
-    , DnsKeySpec (..)
-    , newDnsKeySpec
+    DnsKeySpec (..),
+    newDnsKeySpec,
 
     -- ** DnsKeySpec_Algorithm
-    , DnsKeySpec_Algorithm (..)
+    DnsKeySpec_Algorithm (..),
 
     -- ** DnsKeySpec_KeyType
-    , DnsKeySpec_KeyType (..)
+    DnsKeySpec_KeyType (..),
 
     -- ** DnsKeysListResponse
-    , DnsKeysListResponse (..)
-    , newDnsKeysListResponse
+    DnsKeysListResponse (..),
+    newDnsKeysListResponse,
 
     -- ** ManagedZone
-    , ManagedZone (..)
-    , newManagedZone
+    ManagedZone (..),
+    newManagedZone,
 
     -- ** ManagedZone_Labels
-    , ManagedZone_Labels (..)
-    , newManagedZone_Labels
+    ManagedZone_Labels (..),
+    newManagedZone_Labels,
 
     -- ** ManagedZone_Visibility
-    , ManagedZone_Visibility (..)
+    ManagedZone_Visibility (..),
 
     -- ** ManagedZoneCloudLoggingConfig
-    , ManagedZoneCloudLoggingConfig (..)
-    , newManagedZoneCloudLoggingConfig
+    ManagedZoneCloudLoggingConfig (..),
+    newManagedZoneCloudLoggingConfig,
 
     -- ** ManagedZoneDnsSecConfig
-    , ManagedZoneDnsSecConfig (..)
-    , newManagedZoneDnsSecConfig
+    ManagedZoneDnsSecConfig (..),
+    newManagedZoneDnsSecConfig,
 
     -- ** ManagedZoneDnsSecConfig_NonExistence
-    , ManagedZoneDnsSecConfig_NonExistence (..)
+    ManagedZoneDnsSecConfig_NonExistence (..),
 
     -- ** ManagedZoneDnsSecConfig_State
-    , ManagedZoneDnsSecConfig_State (..)
+    ManagedZoneDnsSecConfig_State (..),
 
     -- ** ManagedZoneForwardingConfig
-    , ManagedZoneForwardingConfig (..)
-    , newManagedZoneForwardingConfig
+    ManagedZoneForwardingConfig (..),
+    newManagedZoneForwardingConfig,
 
     -- ** ManagedZoneForwardingConfigNameServerTarget
-    , ManagedZoneForwardingConfigNameServerTarget (..)
-    , newManagedZoneForwardingConfigNameServerTarget
+    ManagedZoneForwardingConfigNameServerTarget (..),
+    newManagedZoneForwardingConfigNameServerTarget,
 
     -- ** ManagedZoneForwardingConfigNameServerTarget_ForwardingPath
-    , ManagedZoneForwardingConfigNameServerTarget_ForwardingPath (..)
+    ManagedZoneForwardingConfigNameServerTarget_ForwardingPath (..),
 
     -- ** ManagedZoneOperationsListResponse
-    , ManagedZoneOperationsListResponse (..)
-    , newManagedZoneOperationsListResponse
+    ManagedZoneOperationsListResponse (..),
+    newManagedZoneOperationsListResponse,
 
     -- ** ManagedZonePeeringConfig
-    , ManagedZonePeeringConfig (..)
-    , newManagedZonePeeringConfig
+    ManagedZonePeeringConfig (..),
+    newManagedZonePeeringConfig,
 
     -- ** ManagedZonePeeringConfigTargetNetwork
-    , ManagedZonePeeringConfigTargetNetwork (..)
-    , newManagedZonePeeringConfigTargetNetwork
+    ManagedZonePeeringConfigTargetNetwork (..),
+    newManagedZonePeeringConfigTargetNetwork,
 
     -- ** ManagedZonePrivateVisibilityConfig
-    , ManagedZonePrivateVisibilityConfig (..)
-    , newManagedZonePrivateVisibilityConfig
+    ManagedZonePrivateVisibilityConfig (..),
+    newManagedZonePrivateVisibilityConfig,
 
     -- ** ManagedZonePrivateVisibilityConfigGKECluster
-    , ManagedZonePrivateVisibilityConfigGKECluster (..)
-    , newManagedZonePrivateVisibilityConfigGKECluster
+    ManagedZonePrivateVisibilityConfigGKECluster (..),
+    newManagedZonePrivateVisibilityConfigGKECluster,
 
     -- ** ManagedZonePrivateVisibilityConfigNetwork
-    , ManagedZonePrivateVisibilityConfigNetwork (..)
-    , newManagedZonePrivateVisibilityConfigNetwork
+    ManagedZonePrivateVisibilityConfigNetwork (..),
+    newManagedZonePrivateVisibilityConfigNetwork,
 
     -- ** ManagedZoneReverseLookupConfig
-    , ManagedZoneReverseLookupConfig (..)
-    , newManagedZoneReverseLookupConfig
+    ManagedZoneReverseLookupConfig (..),
+    newManagedZoneReverseLookupConfig,
 
     -- ** ManagedZoneServiceDirectoryConfig
-    , ManagedZoneServiceDirectoryConfig (..)
-    , newManagedZoneServiceDirectoryConfig
+    ManagedZoneServiceDirectoryConfig (..),
+    newManagedZoneServiceDirectoryConfig,
 
     -- ** ManagedZoneServiceDirectoryConfigNamespace
-    , ManagedZoneServiceDirectoryConfigNamespace (..)
-    , newManagedZoneServiceDirectoryConfigNamespace
+    ManagedZoneServiceDirectoryConfigNamespace (..),
+    newManagedZoneServiceDirectoryConfigNamespace,
 
     -- ** ManagedZonesListResponse
-    , ManagedZonesListResponse (..)
-    , newManagedZonesListResponse
+    ManagedZonesListResponse (..),
+    newManagedZonesListResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Status
-    , Operation_Status (..)
+    Operation_Status (..),
 
     -- ** OperationDnsKeyContext
-    , OperationDnsKeyContext (..)
-    , newOperationDnsKeyContext
+    OperationDnsKeyContext (..),
+    newOperationDnsKeyContext,
 
     -- ** OperationManagedZoneContext
-    , OperationManagedZoneContext (..)
-    , newOperationManagedZoneContext
+    OperationManagedZoneContext (..),
+    newOperationManagedZoneContext,
 
     -- ** PoliciesListResponse
-    , PoliciesListResponse (..)
-    , newPoliciesListResponse
+    PoliciesListResponse (..),
+    newPoliciesListResponse,
 
     -- ** PoliciesPatchResponse
-    , PoliciesPatchResponse (..)
-    , newPoliciesPatchResponse
+    PoliciesPatchResponse (..),
+    newPoliciesPatchResponse,
 
     -- ** PoliciesUpdateResponse
-    , PoliciesUpdateResponse (..)
-    , newPoliciesUpdateResponse
+    PoliciesUpdateResponse (..),
+    newPoliciesUpdateResponse,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PolicyAlternativeNameServerConfig
-    , PolicyAlternativeNameServerConfig (..)
-    , newPolicyAlternativeNameServerConfig
+    PolicyAlternativeNameServerConfig (..),
+    newPolicyAlternativeNameServerConfig,
 
     -- ** PolicyAlternativeNameServerConfigTargetNameServer
-    , PolicyAlternativeNameServerConfigTargetNameServer (..)
-    , newPolicyAlternativeNameServerConfigTargetNameServer
+    PolicyAlternativeNameServerConfigTargetNameServer (..),
+    newPolicyAlternativeNameServerConfigTargetNameServer,
 
     -- ** PolicyAlternativeNameServerConfigTargetNameServer_ForwardingPath
-    , PolicyAlternativeNameServerConfigTargetNameServer_ForwardingPath (..)
+    PolicyAlternativeNameServerConfigTargetNameServer_ForwardingPath (..),
 
     -- ** PolicyNetwork
-    , PolicyNetwork (..)
-    , newPolicyNetwork
+    PolicyNetwork (..),
+    newPolicyNetwork,
 
     -- ** Project
-    , Project (..)
-    , newProject
+    Project (..),
+    newProject,
 
     -- ** Quota
-    , Quota (..)
-    , newQuota
+    Quota (..),
+    newQuota,
 
     -- ** RRSetRoutingPolicy
-    , RRSetRoutingPolicy (..)
-    , newRRSetRoutingPolicy
+    RRSetRoutingPolicy (..),
+    newRRSetRoutingPolicy,
 
     -- ** RRSetRoutingPolicyGeoPolicy
-    , RRSetRoutingPolicyGeoPolicy (..)
-    , newRRSetRoutingPolicyGeoPolicy
+    RRSetRoutingPolicyGeoPolicy (..),
+    newRRSetRoutingPolicyGeoPolicy,
 
     -- ** RRSetRoutingPolicyGeoPolicyGeoPolicyItem
-    , RRSetRoutingPolicyGeoPolicyGeoPolicyItem (..)
-    , newRRSetRoutingPolicyGeoPolicyGeoPolicyItem
+    RRSetRoutingPolicyGeoPolicyGeoPolicyItem (..),
+    newRRSetRoutingPolicyGeoPolicyGeoPolicyItem,
 
     -- ** RRSetRoutingPolicyWrrPolicy
-    , RRSetRoutingPolicyWrrPolicy (..)
-    , newRRSetRoutingPolicyWrrPolicy
+    RRSetRoutingPolicyWrrPolicy (..),
+    newRRSetRoutingPolicyWrrPolicy,
 
     -- ** RRSetRoutingPolicyWrrPolicyWrrPolicyItem
-    , RRSetRoutingPolicyWrrPolicyWrrPolicyItem (..)
-    , newRRSetRoutingPolicyWrrPolicyWrrPolicyItem
+    RRSetRoutingPolicyWrrPolicyWrrPolicyItem (..),
+    newRRSetRoutingPolicyWrrPolicyWrrPolicyItem,
 
     -- ** ResourceRecordSet
-    , ResourceRecordSet (..)
-    , newResourceRecordSet
+    ResourceRecordSet (..),
+    newResourceRecordSet,
 
     -- ** ResourceRecordSetsListResponse
-    , ResourceRecordSetsListResponse (..)
-    , newResourceRecordSetsListResponse
+    ResourceRecordSetsListResponse (..),
+    newResourceRecordSetsListResponse,
 
     -- ** ResponseHeader
-    , ResponseHeader (..)
-    , newResponseHeader
+    ResponseHeader (..),
+    newResponseHeader,
 
     -- ** ResponsePoliciesListResponse
-    , ResponsePoliciesListResponse (..)
-    , newResponsePoliciesListResponse
+    ResponsePoliciesListResponse (..),
+    newResponsePoliciesListResponse,
 
     -- ** ResponsePoliciesPatchResponse
-    , ResponsePoliciesPatchResponse (..)
-    , newResponsePoliciesPatchResponse
+    ResponsePoliciesPatchResponse (..),
+    newResponsePoliciesPatchResponse,
 
     -- ** ResponsePoliciesUpdateResponse
-    , ResponsePoliciesUpdateResponse (..)
-    , newResponsePoliciesUpdateResponse
+    ResponsePoliciesUpdateResponse (..),
+    newResponsePoliciesUpdateResponse,
 
     -- ** ResponsePolicy
-    , ResponsePolicy (..)
-    , newResponsePolicy
+    ResponsePolicy (..),
+    newResponsePolicy,
 
     -- ** ResponsePolicyGKECluster
-    , ResponsePolicyGKECluster (..)
-    , newResponsePolicyGKECluster
+    ResponsePolicyGKECluster (..),
+    newResponsePolicyGKECluster,
 
     -- ** ResponsePolicyNetwork
-    , ResponsePolicyNetwork (..)
-    , newResponsePolicyNetwork
+    ResponsePolicyNetwork (..),
+    newResponsePolicyNetwork,
 
     -- ** ResponsePolicyRule
-    , ResponsePolicyRule (..)
-    , newResponsePolicyRule
+    ResponsePolicyRule (..),
+    newResponsePolicyRule,
 
     -- ** ResponsePolicyRule_Behavior
-    , ResponsePolicyRule_Behavior (..)
+    ResponsePolicyRule_Behavior (..),
 
     -- ** ResponsePolicyRuleLocalData
-    , ResponsePolicyRuleLocalData (..)
-    , newResponsePolicyRuleLocalData
+    ResponsePolicyRuleLocalData (..),
+    newResponsePolicyRuleLocalData,
 
     -- ** ResponsePolicyRulesListResponse
-    , ResponsePolicyRulesListResponse (..)
-    , newResponsePolicyRulesListResponse
+    ResponsePolicyRulesListResponse (..),
+    newResponsePolicyRulesListResponse,
 
     -- ** ResponsePolicyRulesPatchResponse
-    , ResponsePolicyRulesPatchResponse (..)
-    , newResponsePolicyRulesPatchResponse
+    ResponsePolicyRulesPatchResponse (..),
+    newResponsePolicyRulesPatchResponse,
 
     -- ** ResponsePolicyRulesUpdateResponse
-    , ResponsePolicyRulesUpdateResponse (..)
-    , newResponsePolicyRulesUpdateResponse
+    ResponsePolicyRulesUpdateResponse (..),
+    newResponsePolicyRulesUpdateResponse,
 
     -- ** ChangesListSortBy
-    , ChangesListSortBy (..)
+    ChangesListSortBy (..),
 
     -- ** ManagedZoneOperationsListSortBy
-    , ManagedZoneOperationsListSortBy (..)
-    ) where
+    ManagedZoneOperationsListSortBy (..),
+  )
+where
 
 import Gogol.DNS.Changes.Create
 import Gogol.DNS.Changes.Get
