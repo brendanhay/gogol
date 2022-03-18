@@ -1,75 +1,70 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.OAuth2.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.OAuth2.Types
-    (
-    -- * Service Configuration
-      oAuth2Service
+  ( -- * Configuration
+    oAuth2Service,
 
     -- * OAuth Scopes
-    , userInfoProFileScope
-    , userInfoEmailScope
-    , openidScope
+    userinfoEmailScope,
+    userinfoProfileScope,
+    openidScope,
 
-    -- * UserInfo
-    , UserInfo
-    , userInfo
-    , uiHd
-    , uiEmail
-    , uiLink
-    , uiLocale
-    , uiGivenName
-    , uiFamilyName
-    , uiPicture
-    , uiGender
-    , uiName
-    , uiVerifiedEmail
-    , uiId
+    -- * Types
 
-    -- * TokenInfo
-    , TokenInfo
-    , tokenInfo
-    , tiAudience
-    , tiEmail
-    , tiExpiresIn
-    , tiScope
-    , tiVerifiedEmail
-    , tiUserId
-    , tiIssuedTo
-    ) where
+    -- ** Tokeninfo
+    Tokeninfo (..),
+    newTokeninfo,
 
-import Network.Google.OAuth2.Types.Product
-import Network.Google.OAuth2.Types.Sum
-import Network.Google.Prelude
+    -- ** Userinfo
+    Userinfo (..),
+    newUserinfo,
+  )
+where
 
--- | Default request referring to version 'v2' of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
-oAuth2Service :: ServiceConfig
-oAuth2Service
-  = defaultService (ServiceId "oauth2:v2")
-      "www.googleapis.com"
+import Network.Google.OAuth2.Internal.Product
+import Network.Google.OAuth2.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See your personal info, including any personal info you\'ve made
--- publicly available
-userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userInfoProFileScope = Proxy
+-- | Default request referring to version @v2@ of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
+oAuth2Service :: Core.ServiceConfig
+oAuth2Service =
+  Core.defaultService
+    (Core.ServiceId "oauth2:v2")
+    "www.googleapis.com"
 
 -- | View your email address
-userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy
+userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userinfoEmailScope = Core.Proxy
+
+-- | See your personal info, including any personal info you\'ve made publicly available
+userinfoProfileScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
+userinfoProfileScope = Core.Proxy
 
 -- | Associate you with your personal info on Google
-openidScope :: Proxy '["openid"]
-openidScope = Proxy
+openidScope :: Core.Proxy '["openid"]
+openidScope = Core.Proxy
