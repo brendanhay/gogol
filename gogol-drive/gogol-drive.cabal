@@ -39,63 +39,64 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Drive
-    Network.Google.Drive.About.Get
-    Network.Google.Drive.Changes.GetStartPageToken
-    Network.Google.Drive.Changes.List
-    Network.Google.Drive.Changes.Watch
-    Network.Google.Drive.Channels.Stop
-    Network.Google.Drive.Comments.Create
-    Network.Google.Drive.Comments.Delete
-    Network.Google.Drive.Comments.Get
-    Network.Google.Drive.Comments.List
-    Network.Google.Drive.Comments.Update
-    Network.Google.Drive.Drives.Create
-    Network.Google.Drive.Drives.Delete
-    Network.Google.Drive.Drives.Get
-    Network.Google.Drive.Drives.Hide
-    Network.Google.Drive.Drives.List
-    Network.Google.Drive.Drives.Unhide
-    Network.Google.Drive.Drives.Update
-    Network.Google.Drive.Files.Copy
-    Network.Google.Drive.Files.Create
-    Network.Google.Drive.Files.Delete
-    Network.Google.Drive.Files.EmptyTrash
-    Network.Google.Drive.Files.Export
-    Network.Google.Drive.Files.GenerateIds
-    Network.Google.Drive.Files.Get
-    Network.Google.Drive.Files.List
-    Network.Google.Drive.Files.Update
-    Network.Google.Drive.Files.Watch
-    Network.Google.Drive.Permissions.Create
-    Network.Google.Drive.Permissions.Delete
-    Network.Google.Drive.Permissions.Get
-    Network.Google.Drive.Permissions.List
-    Network.Google.Drive.Permissions.Update
-    Network.Google.Drive.Replies.Create
-    Network.Google.Drive.Replies.Delete
-    Network.Google.Drive.Replies.Get
-    Network.Google.Drive.Replies.List
-    Network.Google.Drive.Replies.Update
-    Network.Google.Drive.Revisions.Delete
-    Network.Google.Drive.Revisions.Get
-    Network.Google.Drive.Revisions.List
-    Network.Google.Drive.Revisions.Update
-    Network.Google.Drive.Teamdrives.Create
-    Network.Google.Drive.Teamdrives.Delete
-    Network.Google.Drive.Teamdrives.Get
-    Network.Google.Drive.Teamdrives.List
-    Network.Google.Drive.Teamdrives.Update
-    Network.Google.Drive.Types
+    Gogol.Drive
+    Gogol.Drive.About.Get
+    Gogol.Drive.Changes.GetStartPageToken
+    Gogol.Drive.Changes.List
+    Gogol.Drive.Changes.Watch
+    Gogol.Drive.Channels.Stop
+    Gogol.Drive.Comments.Create
+    Gogol.Drive.Comments.Delete
+    Gogol.Drive.Comments.Get
+    Gogol.Drive.Comments.List
+    Gogol.Drive.Comments.Update
+    Gogol.Drive.Drives.Create
+    Gogol.Drive.Drives.Delete
+    Gogol.Drive.Drives.Get
+    Gogol.Drive.Drives.Hide
+    Gogol.Drive.Drives.List
+    Gogol.Drive.Drives.Unhide
+    Gogol.Drive.Drives.Update
+    Gogol.Drive.Files.Copy
+    Gogol.Drive.Files.Create
+    Gogol.Drive.Files.Delete
+    Gogol.Drive.Files.EmptyTrash
+    Gogol.Drive.Files.Export
+    Gogol.Drive.Files.GenerateIds
+    Gogol.Drive.Files.Get
+    Gogol.Drive.Files.List
+    Gogol.Drive.Files.Update
+    Gogol.Drive.Files.Watch
+    Gogol.Drive.Permissions.Create
+    Gogol.Drive.Permissions.Delete
+    Gogol.Drive.Permissions.Get
+    Gogol.Drive.Permissions.List
+    Gogol.Drive.Permissions.Update
+    Gogol.Drive.Replies.Create
+    Gogol.Drive.Replies.Delete
+    Gogol.Drive.Replies.Get
+    Gogol.Drive.Replies.List
+    Gogol.Drive.Replies.Update
+    Gogol.Drive.Revisions.Delete
+    Gogol.Drive.Revisions.Get
+    Gogol.Drive.Revisions.List
+    Gogol.Drive.Revisions.Update
+    Gogol.Drive.Teamdrives.Create
+    Gogol.Drive.Teamdrives.Delete
+    Gogol.Drive.Teamdrives.Get
+    Gogol.Drive.Teamdrives.List
+    Gogol.Drive.Teamdrives.Update
+    Gogol.Drive.Types
 
   other-modules:
-    Network.Google.Drive.Internal.Product
-    Network.Google.Drive.Internal.Sum
+    Gogol.Drive.Internal.Product
+    Gogol.Drive.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
