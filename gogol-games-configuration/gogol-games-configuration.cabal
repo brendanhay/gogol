@@ -39,28 +39,29 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.GamesConfiguration
-    Network.Google.GamesConfiguration.AchievementConfigurations.Delete
-    Network.Google.GamesConfiguration.AchievementConfigurations.Get
-    Network.Google.GamesConfiguration.AchievementConfigurations.Insert
-    Network.Google.GamesConfiguration.AchievementConfigurations.List
-    Network.Google.GamesConfiguration.AchievementConfigurations.Update
-    Network.Google.GamesConfiguration.ImageConfigurations.Upload
-    Network.Google.GamesConfiguration.LeaderboardConfigurations.Delete
-    Network.Google.GamesConfiguration.LeaderboardConfigurations.Get
-    Network.Google.GamesConfiguration.LeaderboardConfigurations.Insert
-    Network.Google.GamesConfiguration.LeaderboardConfigurations.List
-    Network.Google.GamesConfiguration.LeaderboardConfigurations.Update
-    Network.Google.GamesConfiguration.Types
+    Gogol.GamesConfiguration
+    Gogol.GamesConfiguration.AchievementConfigurations.Delete
+    Gogol.GamesConfiguration.AchievementConfigurations.Get
+    Gogol.GamesConfiguration.AchievementConfigurations.Insert
+    Gogol.GamesConfiguration.AchievementConfigurations.List
+    Gogol.GamesConfiguration.AchievementConfigurations.Update
+    Gogol.GamesConfiguration.ImageConfigurations.Upload
+    Gogol.GamesConfiguration.LeaderboardConfigurations.Delete
+    Gogol.GamesConfiguration.LeaderboardConfigurations.Get
+    Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
+    Gogol.GamesConfiguration.LeaderboardConfigurations.List
+    Gogol.GamesConfiguration.LeaderboardConfigurations.Update
+    Gogol.GamesConfiguration.Types
 
   other-modules:
-    Network.Google.GamesConfiguration.Internal.Product
-    Network.Google.GamesConfiguration.Internal.Sum
+    Gogol.GamesConfiguration.Internal.Product
+    Gogol.GamesConfiguration.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

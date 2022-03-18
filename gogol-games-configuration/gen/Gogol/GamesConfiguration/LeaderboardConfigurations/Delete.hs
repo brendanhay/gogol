@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.LeaderboardConfigurations.Update
+-- Module      : Gogol.GamesConfiguration.LeaderboardConfigurations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the metadata of the leaderboard configuration with the given ID.
+-- Delete the leaderboard configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.update@.
-module Network.Google.GamesConfiguration.LeaderboardConfigurations.Update
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.delete@.
+module Gogol.GamesConfiguration.LeaderboardConfigurations.Delete
   ( -- * Resource
-    GamesConfigurationLeaderboardConfigurationsUpdateResource,
+    GamesConfigurationLeaderboardConfigurationsDeleteResource,
 
     -- ** Constructing a Request
-    newGamesConfigurationLeaderboardConfigurationsUpdate,
-    GamesConfigurationLeaderboardConfigurationsUpdate,
+    newGamesConfigurationLeaderboardConfigurationsDelete,
+    GamesConfigurationLeaderboardConfigurationsDelete,
   )
 where
 
-import Network.Google.GamesConfiguration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesConfiguration.leaderboardConfigurations.update@ method which the
--- 'GamesConfigurationLeaderboardConfigurationsUpdate' request conforms to.
-type GamesConfigurationLeaderboardConfigurationsUpdateResource =
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.delete@ method which the
+-- 'GamesConfigurationLeaderboardConfigurationsDelete' request conforms to.
+type GamesConfigurationLeaderboardConfigurationsDeleteResource =
   "games"
     Core.:> "v1configuration"
     Core.:> "leaderboards"
@@ -55,13 +55,12 @@ type GamesConfigurationLeaderboardConfigurationsUpdateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] LeaderboardConfiguration
-    Core.:> Core.Put '[Core.JSON] LeaderboardConfiguration
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Update the metadata of the leaderboard configuration with the given ID.
+-- | Delete the leaderboard configuration with the given ID.
 --
--- /See:/ 'newGamesConfigurationLeaderboardConfigurationsUpdate' smart constructor.
-data GamesConfigurationLeaderboardConfigurationsUpdate = GamesConfigurationLeaderboardConfigurationsUpdate
+-- /See:/ 'newGamesConfigurationLeaderboardConfigurationsDelete' smart constructor.
+data GamesConfigurationLeaderboardConfigurationsDelete = GamesConfigurationLeaderboardConfigurationsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -70,8 +69,6 @@ data GamesConfigurationLeaderboardConfigurationsUpdate = GamesConfigurationLeade
     callback :: (Core.Maybe Core.Text),
     -- | The ID of the leaderboard.
     leaderboardId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: LeaderboardConfiguration,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,38 +76,35 @@ data GamesConfigurationLeaderboardConfigurationsUpdate = GamesConfigurationLeade
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesConfigurationLeaderboardConfigurationsUpdate' with the minimum fields required to make a request.
-newGamesConfigurationLeaderboardConfigurationsUpdate ::
+-- | Creates a value of 'GamesConfigurationLeaderboardConfigurationsDelete' with the minimum fields required to make a request.
+newGamesConfigurationLeaderboardConfigurationsDelete ::
   -- |  The ID of the leaderboard. See 'leaderboardId'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  LeaderboardConfiguration ->
-  GamesConfigurationLeaderboardConfigurationsUpdate
-newGamesConfigurationLeaderboardConfigurationsUpdate leaderboardId payload =
-  GamesConfigurationLeaderboardConfigurationsUpdate
+  GamesConfigurationLeaderboardConfigurationsDelete
+newGamesConfigurationLeaderboardConfigurationsDelete leaderboardId =
+  GamesConfigurationLeaderboardConfigurationsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       leaderboardId = leaderboardId,
-      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    GamesConfigurationLeaderboardConfigurationsUpdate
+    GamesConfigurationLeaderboardConfigurationsDelete
   where
   type
     Rs
-      GamesConfigurationLeaderboardConfigurationsUpdate =
-      LeaderboardConfiguration
+      GamesConfigurationLeaderboardConfigurationsDelete =
+      ()
   type
     Scopes
-      GamesConfigurationLeaderboardConfigurationsUpdate =
+      GamesConfigurationLeaderboardConfigurationsDelete =
       '["https://www.googleapis.com/auth/androidpublisher"]
   requestClient
-    GamesConfigurationLeaderboardConfigurationsUpdate {..} =
+    GamesConfigurationLeaderboardConfigurationsDelete {..} =
       go
         leaderboardId
         xgafv
@@ -119,13 +113,12 @@ instance
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         gamesConfigurationService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesConfigurationLeaderboardConfigurationsUpdateResource
+                  GamesConfigurationLeaderboardConfigurationsDeleteResource
             )
             Core.mempty

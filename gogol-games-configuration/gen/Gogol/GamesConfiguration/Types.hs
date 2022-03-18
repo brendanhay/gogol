@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.Types
+-- Module      : Gogol.GamesConfiguration.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.GamesConfiguration.Types
+module Gogol.GamesConfiguration.Types
   ( -- * Configuration
     gamesConfigurationService,
 
@@ -101,9 +101,9 @@ module Network.Google.GamesConfiguration.Types
   )
 where
 
-import Network.Google.GamesConfiguration.Internal.Product
-import Network.Google.GamesConfiguration.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Internal.Product
+import Gogol.GamesConfiguration.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1configuration@ of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
 gamesConfigurationService :: Core.ServiceConfig

@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.AchievementConfigurations.Get
+-- Module      : Gogol.GamesConfiguration.AchievementConfigurations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the metadata of the achievement configuration with the given ID.
+-- Delete the achievement configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.get@.
-module Network.Google.GamesConfiguration.AchievementConfigurations.Get
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.delete@.
+module Gogol.GamesConfiguration.AchievementConfigurations.Delete
   ( -- * Resource
-    GamesConfigurationAchievementConfigurationsGetResource,
+    GamesConfigurationAchievementConfigurationsDeleteResource,
 
     -- ** Constructing a Request
-    newGamesConfigurationAchievementConfigurationsGet,
-    GamesConfigurationAchievementConfigurationsGet,
+    newGamesConfigurationAchievementConfigurationsDelete,
+    GamesConfigurationAchievementConfigurationsDelete,
   )
 where
 
-import Network.Google.GamesConfiguration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesConfiguration.achievementConfigurations.get@ method which the
--- 'GamesConfigurationAchievementConfigurationsGet' request conforms to.
-type GamesConfigurationAchievementConfigurationsGetResource =
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.delete@ method which the
+-- 'GamesConfigurationAchievementConfigurationsDelete' request conforms to.
+type GamesConfigurationAchievementConfigurationsDeleteResource =
   "games"
     Core.:> "v1configuration"
     Core.:> "achievements"
@@ -55,12 +55,12 @@ type GamesConfigurationAchievementConfigurationsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AchievementConfiguration
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Retrieves the metadata of the achievement configuration with the given ID.
+-- | Delete the achievement configuration with the given ID.
 --
--- /See:/ 'newGamesConfigurationAchievementConfigurationsGet' smart constructor.
-data GamesConfigurationAchievementConfigurationsGet = GamesConfigurationAchievementConfigurationsGet
+-- /See:/ 'newGamesConfigurationAchievementConfigurationsDelete' smart constructor.
+data GamesConfigurationAchievementConfigurationsDelete = GamesConfigurationAchievementConfigurationsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -76,13 +76,13 @@ data GamesConfigurationAchievementConfigurationsGet = GamesConfigurationAchievem
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesConfigurationAchievementConfigurationsGet' with the minimum fields required to make a request.
-newGamesConfigurationAchievementConfigurationsGet ::
+-- | Creates a value of 'GamesConfigurationAchievementConfigurationsDelete' with the minimum fields required to make a request.
+newGamesConfigurationAchievementConfigurationsDelete ::
   -- |  The ID of the achievement used by this method. See 'achievementId'.
   Core.Text ->
-  GamesConfigurationAchievementConfigurationsGet
-newGamesConfigurationAchievementConfigurationsGet achievementId =
-  GamesConfigurationAchievementConfigurationsGet
+  GamesConfigurationAchievementConfigurationsDelete
+newGamesConfigurationAchievementConfigurationsDelete achievementId =
+  GamesConfigurationAchievementConfigurationsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       achievementId = achievementId,
@@ -93,18 +93,18 @@ newGamesConfigurationAchievementConfigurationsGet achievementId =
 
 instance
   Core.GoogleRequest
-    GamesConfigurationAchievementConfigurationsGet
+    GamesConfigurationAchievementConfigurationsDelete
   where
   type
     Rs
-      GamesConfigurationAchievementConfigurationsGet =
-      AchievementConfiguration
+      GamesConfigurationAchievementConfigurationsDelete =
+      ()
   type
     Scopes
-      GamesConfigurationAchievementConfigurationsGet =
+      GamesConfigurationAchievementConfigurationsDelete =
       '["https://www.googleapis.com/auth/androidpublisher"]
   requestClient
-    GamesConfigurationAchievementConfigurationsGet {..} =
+    GamesConfigurationAchievementConfigurationsDelete {..} =
       go
         achievementId
         xgafv
@@ -119,6 +119,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesConfigurationAchievementConfigurationsGetResource
+                  GamesConfigurationAchievementConfigurationsDeleteResource
             )
             Core.mempty

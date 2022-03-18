@@ -19,37 +19,37 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.AchievementConfigurations.List
+-- Module      : Gogol.GamesConfiguration.LeaderboardConfigurations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of the achievement configurations in this application.
+-- Returns a list of the leaderboard configurations in this application.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.list@.
-module Network.Google.GamesConfiguration.AchievementConfigurations.List
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.list@.
+module Gogol.GamesConfiguration.LeaderboardConfigurations.List
   ( -- * Resource
-    GamesConfigurationAchievementConfigurationsListResource,
+    GamesConfigurationLeaderboardConfigurationsListResource,
 
     -- ** Constructing a Request
-    newGamesConfigurationAchievementConfigurationsList,
-    GamesConfigurationAchievementConfigurationsList,
+    newGamesConfigurationLeaderboardConfigurationsList,
+    GamesConfigurationLeaderboardConfigurationsList,
   )
 where
 
-import Network.Google.GamesConfiguration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesConfiguration.achievementConfigurations.list@ method which the
--- 'GamesConfigurationAchievementConfigurationsList' request conforms to.
-type GamesConfigurationAchievementConfigurationsListResource =
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.list@ method which the
+-- 'GamesConfigurationLeaderboardConfigurationsList' request conforms to.
+type GamesConfigurationLeaderboardConfigurationsListResource =
   "games"
     Core.:> "v1configuration"
     Core.:> "applications"
     Core.:> Core.Capture "applicationId" Core.Text
-    Core.:> "achievements"
+    Core.:> "leaderboards"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -60,12 +60,12 @@ type GamesConfigurationAchievementConfigurationsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
-              AchievementConfigurationListResponse
+              LeaderboardConfigurationListResponse
 
--- | Returns a list of the achievement configurations in this application.
+-- | Returns a list of the leaderboard configurations in this application.
 --
--- /See:/ 'newGamesConfigurationAchievementConfigurationsList' smart constructor.
-data GamesConfigurationAchievementConfigurationsList = GamesConfigurationAchievementConfigurationsList
+-- /See:/ 'newGamesConfigurationLeaderboardConfigurationsList' smart constructor.
+data GamesConfigurationLeaderboardConfigurationsList = GamesConfigurationLeaderboardConfigurationsList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -85,13 +85,13 @@ data GamesConfigurationAchievementConfigurationsList = GamesConfigurationAchieve
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesConfigurationAchievementConfigurationsList' with the minimum fields required to make a request.
-newGamesConfigurationAchievementConfigurationsList ::
+-- | Creates a value of 'GamesConfigurationLeaderboardConfigurationsList' with the minimum fields required to make a request.
+newGamesConfigurationLeaderboardConfigurationsList ::
   -- |  The application ID from the Google Play developer console. See 'applicationId'.
   Core.Text ->
-  GamesConfigurationAchievementConfigurationsList
-newGamesConfigurationAchievementConfigurationsList applicationId =
-  GamesConfigurationAchievementConfigurationsList
+  GamesConfigurationLeaderboardConfigurationsList
+newGamesConfigurationLeaderboardConfigurationsList applicationId =
+  GamesConfigurationLeaderboardConfigurationsList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       applicationId = applicationId,
@@ -104,18 +104,18 @@ newGamesConfigurationAchievementConfigurationsList applicationId =
 
 instance
   Core.GoogleRequest
-    GamesConfigurationAchievementConfigurationsList
+    GamesConfigurationLeaderboardConfigurationsList
   where
   type
     Rs
-      GamesConfigurationAchievementConfigurationsList =
-      AchievementConfigurationListResponse
+      GamesConfigurationLeaderboardConfigurationsList =
+      LeaderboardConfigurationListResponse
   type
     Scopes
-      GamesConfigurationAchievementConfigurationsList =
+      GamesConfigurationLeaderboardConfigurationsList =
       '["https://www.googleapis.com/auth/androidpublisher"]
   requestClient
-    GamesConfigurationAchievementConfigurationsList {..} =
+    GamesConfigurationLeaderboardConfigurationsList {..} =
       go
         applicationId
         xgafv
@@ -132,6 +132,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesConfigurationAchievementConfigurationsListResource
+                  GamesConfigurationLeaderboardConfigurationsListResource
             )
             Core.mempty
