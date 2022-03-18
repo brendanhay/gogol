@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,281 +30,281 @@
 --
 -- /See:/ <https://developers.google.com/drive/activity/ Drive Activity API Reference>
 module Gogol.DriveActivity
-    (
-    -- * Configuration
-      driveActivityService
+  ( -- * Configuration
+    driveActivityService,
 
     -- * OAuth Scopes
-    , driveActivityScope
-    , driveActivityReadOnlyScope
+    driveActivityScope,
+    driveActivityReadOnlyScope,
 
     -- * Resources
 
     -- ** driveactivity.activity.query
-    , DriveActivityActivityQueryResource
-    , newDriveActivityActivityQuery
-    , DriveActivityActivityQuery
+    DriveActivityActivityQueryResource,
+    newDriveActivityActivityQuery,
+    DriveActivityActivityQuery,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Action
-    , Action (..)
-    , newAction
+    Action (..),
+    newAction,
 
     -- ** ActionDetail
-    , ActionDetail (..)
-    , newActionDetail
+    ActionDetail (..),
+    newActionDetail,
 
     -- ** Actor
-    , Actor (..)
-    , newActor
+    Actor (..),
+    newActor,
 
     -- ** Administrator
-    , Administrator (..)
-    , newAdministrator
+    Administrator (..),
+    newAdministrator,
 
     -- ** AnonymousUser
-    , AnonymousUser (..)
-    , newAnonymousUser
+    AnonymousUser (..),
+    newAnonymousUser,
 
     -- ** Anyone
-    , Anyone (..)
-    , newAnyone
+    Anyone (..),
+    newAnyone,
 
     -- ** ApplicationReference
-    , ApplicationReference (..)
-    , newApplicationReference
+    ApplicationReference (..),
+    newApplicationReference,
 
     -- ** ApplicationReference_Type
-    , ApplicationReference_Type (..)
+    ApplicationReference_Type (..),
 
     -- ** Assignment
-    , Assignment (..)
-    , newAssignment
+    Assignment (..),
+    newAssignment,
 
     -- ** Assignment_Subtype
-    , Assignment_Subtype (..)
+    Assignment_Subtype (..),
 
     -- ** Comment
-    , Comment (..)
-    , newComment
+    Comment (..),
+    newComment,
 
     -- ** ConsolidationStrategy
-    , ConsolidationStrategy (..)
-    , newConsolidationStrategy
+    ConsolidationStrategy (..),
+    newConsolidationStrategy,
 
     -- ** Copy
-    , Copy (..)
-    , newCopy
+    Copy (..),
+    newCopy,
 
     -- ** Create
-    , Create (..)
-    , newCreate
+    Create (..),
+    newCreate,
 
     -- ** DataLeakPreventionChange
-    , DataLeakPreventionChange (..)
-    , newDataLeakPreventionChange
+    DataLeakPreventionChange (..),
+    newDataLeakPreventionChange,
 
     -- ** DataLeakPreventionChange_Type
-    , DataLeakPreventionChange_Type (..)
+    DataLeakPreventionChange_Type (..),
 
     -- ** Delete'
-    , Delete' (..)
-    , newDelete
+    Delete' (..),
+    newDelete,
 
     -- ** Delete_Type
-    , Delete_Type (..)
+    Delete_Type (..),
 
     -- ** DeletedUser
-    , DeletedUser (..)
-    , newDeletedUser
+    DeletedUser (..),
+    newDeletedUser,
 
     -- ** Domain
-    , Domain (..)
-    , newDomain
+    Domain (..),
+    newDomain,
 
     -- ** Drive
-    , Drive (..)
-    , newDrive
+    Drive (..),
+    newDrive,
 
     -- ** DriveActivity
-    , DriveActivity (..)
-    , newDriveActivity
+    DriveActivity (..),
+    newDriveActivity,
 
     -- ** DriveFile
-    , DriveFile (..)
-    , newDriveFile
+    DriveFile (..),
+    newDriveFile,
 
     -- ** DriveFolder
-    , DriveFolder (..)
-    , newDriveFolder
+    DriveFolder (..),
+    newDriveFolder,
 
     -- ** DriveFolder_Type
-    , DriveFolder_Type (..)
+    DriveFolder_Type (..),
 
     -- ** DriveItem
-    , DriveItem (..)
-    , newDriveItem
+    DriveItem (..),
+    newDriveItem,
 
     -- ** DriveItemReference
-    , DriveItemReference (..)
-    , newDriveItemReference
+    DriveItemReference (..),
+    newDriveItemReference,
 
     -- ** DriveReference
-    , DriveReference (..)
-    , newDriveReference
+    DriveReference (..),
+    newDriveReference,
 
     -- ** Edit
-    , Edit (..)
-    , newEdit
+    Edit (..),
+    newEdit,
 
     -- ** File
-    , File (..)
-    , newFile
+    File (..),
+    newFile,
 
     -- ** FileComment
-    , FileComment (..)
-    , newFileComment
+    FileComment (..),
+    newFileComment,
 
     -- ** Folder
-    , Folder (..)
-    , newFolder
+    Folder (..),
+    newFolder,
 
     -- ** Folder_Type
-    , Folder_Type (..)
+    Folder_Type (..),
 
     -- ** Group
-    , Group (..)
-    , newGroup
+    Group (..),
+    newGroup,
 
     -- ** Impersonation
-    , Impersonation (..)
-    , newImpersonation
+    Impersonation (..),
+    newImpersonation,
 
     -- ** KnownUser
-    , KnownUser (..)
-    , newKnownUser
+    KnownUser (..),
+    newKnownUser,
 
     -- ** Legacy
-    , Legacy (..)
-    , newLegacy
+    Legacy (..),
+    newLegacy,
 
     -- ** Move
-    , Move (..)
-    , newMove
+    Move (..),
+    newMove,
 
     -- ** New
-    , New (..)
-    , newNew
+    New (..),
+    newNew,
 
     -- ** NoConsolidation
-    , NoConsolidation (..)
-    , newNoConsolidation
+    NoConsolidation (..),
+    newNoConsolidation,
 
     -- ** Owner
-    , Owner (..)
-    , newOwner
+    Owner (..),
+    newOwner,
 
     -- ** Permission
-    , Permission (..)
-    , newPermission
+    Permission (..),
+    newPermission,
 
     -- ** Permission_Role
-    , Permission_Role (..)
+    Permission_Role (..),
 
     -- ** PermissionChange
-    , PermissionChange (..)
-    , newPermissionChange
+    PermissionChange (..),
+    newPermissionChange,
 
     -- ** Post'
-    , Post' (..)
-    , newPost
+    Post' (..),
+    newPost,
 
     -- ** Post_Subtype
-    , Post_Subtype (..)
+    Post_Subtype (..),
 
     -- ** QueryDriveActivityRequest
-    , QueryDriveActivityRequest (..)
-    , newQueryDriveActivityRequest
+    QueryDriveActivityRequest (..),
+    newQueryDriveActivityRequest,
 
     -- ** QueryDriveActivityResponse
-    , QueryDriveActivityResponse (..)
-    , newQueryDriveActivityResponse
+    QueryDriveActivityResponse (..),
+    newQueryDriveActivityResponse,
 
     -- ** Rename
-    , Rename (..)
-    , newRename
+    Rename (..),
+    newRename,
 
     -- ** Restore
-    , Restore (..)
-    , newRestore
+    Restore (..),
+    newRestore,
 
     -- ** Restore_Type
-    , Restore_Type (..)
+    Restore_Type (..),
 
     -- ** RestrictionChange
-    , RestrictionChange (..)
-    , newRestrictionChange
+    RestrictionChange (..),
+    newRestrictionChange,
 
     -- ** RestrictionChange_Feature
-    , RestrictionChange_Feature (..)
+    RestrictionChange_Feature (..),
 
     -- ** RestrictionChange_NewRestriction
-    , RestrictionChange_NewRestriction (..)
+    RestrictionChange_NewRestriction (..),
 
     -- ** SettingsChange
-    , SettingsChange (..)
-    , newSettingsChange
+    SettingsChange (..),
+    newSettingsChange,
 
     -- ** Suggestion
-    , Suggestion (..)
-    , newSuggestion
+    Suggestion (..),
+    newSuggestion,
 
     -- ** Suggestion_Subtype
-    , Suggestion_Subtype (..)
+    Suggestion_Subtype (..),
 
     -- ** SystemEvent
-    , SystemEvent (..)
-    , newSystemEvent
+    SystemEvent (..),
+    newSystemEvent,
 
     -- ** SystemEvent_Type
-    , SystemEvent_Type (..)
+    SystemEvent_Type (..),
 
     -- ** Target
-    , Target (..)
-    , newTarget
+    Target (..),
+    newTarget,
 
     -- ** TargetReference
-    , TargetReference (..)
-    , newTargetReference
+    TargetReference (..),
+    newTargetReference,
 
     -- ** TeamDrive
-    , TeamDrive (..)
-    , newTeamDrive
+    TeamDrive (..),
+    newTeamDrive,
 
     -- ** TeamDriveReference
-    , TeamDriveReference (..)
-    , newTeamDriveReference
+    TeamDriveReference (..),
+    newTeamDriveReference,
 
     -- ** TimeRange
-    , TimeRange (..)
-    , newTimeRange
+    TimeRange (..),
+    newTimeRange,
 
     -- ** UnknownUser
-    , UnknownUser (..)
-    , newUnknownUser
+    UnknownUser (..),
+    newUnknownUser,
 
     -- ** Upload
-    , Upload (..)
-    , newUpload
+    Upload (..),
+    newUpload,
 
     -- ** User
-    , User (..)
-    , newUser
-    ) where
+    User (..),
+    newUser,
+  )
+where
 
 import Gogol.DriveActivity.Activity.Query
 import Gogol.DriveActivity.Types
