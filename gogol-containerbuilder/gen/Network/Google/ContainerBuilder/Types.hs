@@ -1,645 +1,554 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ContainerBuilder.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.ContainerBuilder.Types
-    (
-    -- * Service Configuration
-      containerBuilderService
+  ( -- * Configuration
+    containerBuilderService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * BuildStep
-    , BuildStep
-    , buildStep
-    , bsStatus
-    , bsDir
-    , bsArgs
-    , bsEnv
-    , bsPullTiming
-    , bsEntrypoint
-    , bsWaitFor
-    , bsName
-    , bsId
-    , bsTiming
-    , bsSecretEnv
-    , bsTimeout
-    , bsVolumes
-
-    -- * WorkerConfig
-    , WorkerConfig
-    , workerConfig
-    , wcDiskSizeGb
-    , wcMachineType
-
-    -- * SourceProvenance
-    , SourceProvenance
-    , sourceProvenance
-    , spResolvedRepoSource
-    , spResolvedStorageSourceManifest
-    , spResolvedStorageSource
-    , spFileHashes
-
-    -- * ListBuildsResponse
-    , ListBuildsResponse
-    , listBuildsResponse
-    , lbrNextPageToken
-    , lbrBuilds
-
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- * OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
-
-    -- * PullRequestFilter
-    , PullRequestFilter
-    , pullRequestFilter
-    , prfCommentControl
-    , prfInvertRegex
-    , prfBranch
-
-    -- * RetryBuildRequest
-    , RetryBuildRequest
-    , retryBuildRequest
-    , rbrName
-    , rbrId
-    , rbrProjectId
-
-    -- * PoolOption
-    , PoolOption
-    , poolOption
-    , poName
-
-    -- * HTTPBodyExtensionsItem
-    , HTTPBodyExtensionsItem
-    , hTTPBodyExtensionsItem
-    , httpbeiAddtional
-
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- * Hash
-    , Hash
-    , hash
-    , hValue
-    , hType
-
-    -- * Results
-    , Results
-    , results
-    , rImages
-    , rBuildStepImages
-    , rArtifactManifest
-    , rBuildStepOutputs
-    , rNumArtifacts
-    , rArtifactTiming
-
-    -- * BuildTriggerSubstitutions
-    , BuildTriggerSubstitutions
-    , buildTriggerSubstitutions
-    , btsAddtional
-
-    -- * RepoSource
-    , RepoSource
-    , repoSource
-    , rsSubstitutions
-    , rsInvertRegex
-    , rsRepoName
-    , rsDir
-    , rsCommitSha
-    , rsBranchName
-    , rsTagName
-    , rsProjectId
-
-    -- * Secrets
-    , Secrets
-    , secrets
-    , sInline
-    , sSecretManager
-
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * SecretSecretEnv
-    , SecretSecretEnv
-    , secretSecretEnv
-    , sseAddtional
-
-    -- * Notification
-    , Notification
-    , notification
-    , nStructDelivery
-    , nSmtpDelivery
-    , nHTTPDelivery
-    , nSlackDelivery
-    , nFilter
-
-    -- * Artifacts
-    , Artifacts
-    , artifacts
-    , aImages
-    , aObjects
-
-    -- * BuildStepStatus
-    , BuildStepStatus (..)
-
-    -- * ArtifactObjects
-    , ArtifactObjects
-    , artifactObjects
-    , aoLocation
-    , aoTiming
-    , aoPaths
-
-    -- * GitHubEventsConfig
-    , GitHubEventsConfig
-    , gitHubEventsConfig
-    , ghecOwner
-    , ghecPullRequest
-    , ghecName
-    , ghecPush
-    , ghecInstallationId
-
-    -- * ListWorkerPoolsResponse
-    , ListWorkerPoolsResponse
-    , listWorkerPoolsResponse
-    , lwprNextPageToken
-    , lwprWorkerPools
-
-    -- * PullRequestFilterCommentControl
-    , PullRequestFilterCommentControl (..)
-
-    -- * Volume
-    , Volume
-    , volume
-    , vPath
-    , vName
-
-    -- * NotifierSecretRef
-    , NotifierSecretRef
-    , notifierSecretRef
-    , nsrSecretRef
-
-    -- * ReceiveTriggerWebhookResponse
-    , ReceiveTriggerWebhookResponse
-    , receiveTriggerWebhookResponse
-
-    -- * StorageSourceManifest
-    , StorageSourceManifest
-    , storageSourceManifest
-    , ssmBucket
-    , ssmObject
-    , ssmGeneration
-
-    -- * DeleteWorkerPoolOperationMetadata
-    , DeleteWorkerPoolOperationMetadata
-    , deleteWorkerPoolOperationMetadata
-    , dwpomCompleteTime
-    , dwpomWorkerPool
-    , dwpomCreateTime
-
-    -- * UpdateWorkerPoolOperationMetadata
-    , UpdateWorkerPoolOperationMetadata
-    , updateWorkerPoolOperationMetadata
-    , uwpomCompleteTime
-    , uwpomWorkerPool
-    , uwpomCreateTime
-
-    -- * SecretManagerSecret
-    , SecretManagerSecret
-    , secretManagerSecret
-    , smsVersionName
-    , smsEnv
-
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- * PubsubConfigState
-    , PubsubConfigState (..)
-
-    -- * Build
-    , Build
-    , build
-    , bAvailableSecrets
-    , bImages
-    , bStatus
-    , bSourceProvenance
-    , bSubstitutions
-    , bLogURL
-    , bResults
-    , bSecrets
-    , bStartTime
-    , bArtifacts
-    , bFailureInfo
-    , bWarnings
-    , bLogsBucket
-    , bSteps
-    , bServiceAccount
-    , bName
-    , bStatusDetail
-    , bSource
-    , bId
-    , bQueueTtl
-    , bOptions
-    , bProjectId
-    , bTiming
-    , bBuildTriggerId
-    , bTimeout
-    , bFinishTime
-    , bCreateTime
-    , bTags
-
-    -- * InlineSecretEnvMap
-    , InlineSecretEnvMap
-    , inlineSecretEnvMap
-    , isemAddtional
-
-    -- * FailureInfo
-    , FailureInfo
-    , failureInfo
-    , fiType
-    , fiDetail
-
-    -- * CreateWorkerPoolOperationMetadata
-    , CreateWorkerPoolOperationMetadata
-    , createWorkerPoolOperationMetadata
-    , cwpomCompleteTime
-    , cwpomWorkerPool
-    , cwpomCreateTime
-
-    -- * SourceProvenanceFileHashes
-    , SourceProvenanceFileHashes
-    , sourceProvenanceFileHashes
-    , spfhAddtional
-
-    -- * WorkerPoolAnnotations
-    , WorkerPoolAnnotations
-    , workerPoolAnnotations
-    , wpaAddtional
-
-    -- * SMTPDelivery
-    , SMTPDelivery
-    , sMTPDelivery
-    , smtpdSenderAddress
-    , smtpdFromAddress
-    , smtpdRecipientAddresses
-    , smtpdPassword
-    , smtpdServer
-    , smtpdPort
-
-    -- * Secret
-    , Secret
-    , secret
-    , sKmsKeyName
-    , sSecretEnv
-
-    -- * GoogleDevtoolsCloudbuildV2OperationMetadata
-    , GoogleDevtoolsCloudbuildV2OperationMetadata
-    , googleDevtoolsCloudbuildV2OperationMetadata
-    , gdcvomAPIVersion
-    , gdcvomRequestedCancellation
-    , gdcvomStatusMessage
-    , gdcvomEndTime
-    , gdcvomVerb
-    , gdcvomTarget
-    , gdcvomCreateTime
-
-    -- * PushFilter
-    , PushFilter
-    , pushFilter
-    , pfInvertRegex
-    , pfTag
-    , pfBranch
-
-    -- * CancelBuildRequest
-    , CancelBuildRequest
-    , cancelBuildRequest
-    , cbrName
-    , cbrId
-    , cbrProjectId
-
-    -- * PubsubConfig
-    , PubsubConfig
-    , pubsubConfig
-    , pcState
-    , pcTopic
-    , pcServiceAccountEmail
-    , pcSubscription
-
-    -- * TimeSpan
-    , TimeSpan
-    , timeSpan
-    , tsStartTime
-    , tsEndTime
-
-    -- * NetworkConfig
-    , NetworkConfig
-    , networkConfig
-    , ncPeeredNetwork
-    , ncEgressOption
-
-    -- * StorageSource
-    , StorageSource
-    , storageSource
-    , ssBucket
-    , ssObject
-    , ssGeneration
-
-    -- * PrivatePoolV1Config
-    , PrivatePoolV1Config
-    , privatePoolV1Config
-    , ppvcWorkerConfig
-    , ppvcNetworkConfig
-
-    -- * HTTPDelivery
-    , HTTPDelivery
-    , hTTPDelivery
-    , httpdURI
-
-    -- * ListBuildTriggersResponse
-    , ListBuildTriggersResponse
-    , listBuildTriggersResponse
-    , lbtrNextPageToken
-    , lbtrTriggers
-
-    -- * InlineSecret
-    , InlineSecret
-    , inlineSecret
-    , isEnvMap
-    , isKmsKeyName
-
-    -- * ArtifactResult
-    , ArtifactResult
-    , artifactResult
-    , arFileHash
-    , arLocation
-
-    -- * GitRepoSourceRepoType
-    , GitRepoSourceRepoType (..)
-
-    -- * GitRepoSource
-    , GitRepoSource
-    , gitRepoSource
-    , grsRepoType
-    , grsURI
-    , grsRef
-
-    -- * BuildOptionsRequestedVerifyOption
-    , BuildOptionsRequestedVerifyOption (..)
-
-    -- * FileHashes
-    , FileHashes
-    , fileHashes
-    , fhFileHash
-
-    -- * Warning
-    , Warning
-    , warning
-    , wPriority
-    , wText
-
-    -- * NetworkConfigEgressOption
-    , NetworkConfigEgressOption (..)
-
-    -- * WorkerPool
-    , WorkerPool
-    , workerPool
-    , wpAnnotations
-    , wpEtag
-    , wpState
-    , wpUid
-    , wpUpdateTime
-    , wpDeleteTime
-    , wpPrivatePoolV1Config
-    , wpName
-    , wpDisplayName
-    , wpCreateTime
-
-    -- * BuildSubstitutions
-    , BuildSubstitutions
-    , buildSubstitutions
-    , bsAddtional
-
-    -- * SlackDelivery
-    , SlackDelivery
-    , slackDelivery
-    , sdWebhookURI
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * BuildStatus
-    , BuildStatus (..)
-
-    -- * BuildOptionsSubstitutionOption
-    , BuildOptionsSubstitutionOption (..)
-
-    -- * HashType
-    , HashType (..)
-
-    -- * NotifierSecret
-    , NotifierSecret
-    , notifierSecret
-    , nsValue
-    , nsName
-
-    -- * BuildOptionsLogStreamingOption
-    , BuildOptionsLogStreamingOption (..)
-
-    -- * BuildOptionsSourceProvenanceHashItem
-    , BuildOptionsSourceProvenanceHashItem (..)
-
-    -- * Source
-    , Source
-    , source
-    , sRepoSource
-    , sStorageSourceManifest
-    , sStorageSource
-
-    -- * BuildOptionsLogging
-    , BuildOptionsLogging (..)
-
-    -- * WorkerPoolState
-    , WorkerPoolState (..)
-
-    -- * HTTPBody
-    , HTTPBody
-    , hTTPBody
-    , httpbExtensions
-    , httpbData
-    , httpbContentType
-
-    -- * WarningPriority
-    , WarningPriority (..)
-
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAPIVersion
-    , omEndTime
-    , omStatusDetail
-    , omVerb
-    , omCancelRequested
-    , omTarget
-    , omCreateTime
-
-    -- * BuildOptionsMachineType
-    , BuildOptionsMachineType (..)
-
-    -- * BuildTiming
-    , BuildTiming
-    , buildTiming
-    , btAddtional
-
-    -- * NotifierConfig
-    , NotifierConfig
-    , notifierConfig
-    , ncAPIVersion
-    , ncKind
-    , ncSpec
-    , ncMetadata
-
-    -- * BuildOperationMetadata
-    , BuildOperationMetadata
-    , buildOperationMetadata
-    , bomBuild
-
-    -- * FailureInfoType
-    , FailureInfoType (..)
-
-    -- * BuildOptions
-    , BuildOptions
-    , buildOptions
-    , boDiskSizeGb
-    , boEnv
-    , boPool
-    , boSubstitutionOption
-    , boRequestedVerifyOption
-    , boWorkerPool
-    , boMachineType
-    , boSecretEnv
-    , boVolumes
-    , boLogStreamingOption
-    , boLogging
-    , boSourceProvenanceHash
-    , boDynamicSubstitutions
-
-    -- * NotificationStructDelivery
-    , NotificationStructDelivery
-    , notificationStructDelivery
-    , nsdAddtional
-
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- * RunBuildTriggerRequest
-    , RunBuildTriggerRequest
-    , runBuildTriggerRequest
-    , rbtrTriggerId
-    , rbtrSource
-    , rbtrProjectId
-
-    -- * BuildTrigger
-    , BuildTrigger
-    , buildTrigger
-    , btSubstitutions
-    , btResourceName
-    , btIncludedFiles
-    , btSourceToBuild
-    , btDisabled
-    , btTriggerTemplate
-    , btBuild
-    , btIgnoredFiles
-    , btPubsubConfig
-    , btName
-    , btId
-    , btGithub
-    , btFilter
-    , btAutodetect
-    , btDescription
-    , btFilename
-    , btCreateTime
-    , btWebhookConfig
-    , btTags
-
-    -- * WebhookConfigState
-    , WebhookConfigState (..)
-
-    -- * NotifierMetadata
-    , NotifierMetadata
-    , notifierMetadata
-    , nmNotifier
-    , nmName
-
-    -- * NotifierSpec
-    , NotifierSpec
-    , notifierSpec
-    , nsSecrets
-    , nsNotification
-
-    -- * BuiltImage
-    , BuiltImage
-    , builtImage
-    , biPushTiming
-    , biName
-    , biDigest
-
-    -- * RepoSourceSubstitutions
-    , RepoSourceSubstitutions
-    , repoSourceSubstitutions
-    , rssAddtional
-
-    -- * WebhookConfig
-    , WebhookConfig
-    , webhookConfig
-    , wcState
-    , wcSecret
-    ) where
-
-import Network.Google.ContainerBuilder.Types.Product
-import Network.Google.ContainerBuilder.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v1' of the Cloud Build API. This contains the host and root path used as a starting point for constructing service requests.
-containerBuilderService :: ServiceConfig
-containerBuilderService
-  = defaultService (ServiceId "cloudbuild:v1")
-      "cloudbuild.googleapis.com"
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    cloudPlatformScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** AddBitbucketServerConnectedRepositoryRequest
+    AddBitbucketServerConnectedRepositoryRequest (..),
+    newAddBitbucketServerConnectedRepositoryRequest,
+
+    -- ** AddBitbucketServerConnectedRepositoryResponse
+    AddBitbucketServerConnectedRepositoryResponse (..),
+    newAddBitbucketServerConnectedRepositoryResponse,
+
+    -- ** ApprovalConfig
+    ApprovalConfig (..),
+    newApprovalConfig,
+
+    -- ** ApprovalResult
+    ApprovalResult (..),
+    newApprovalResult,
+
+    -- ** ApprovalResult_Decision
+    ApprovalResult_Decision (..),
+
+    -- ** ApproveBuildRequest
+    ApproveBuildRequest (..),
+    newApproveBuildRequest,
+
+    -- ** ArtifactObjects
+    ArtifactObjects (..),
+    newArtifactObjects,
+
+    -- ** ArtifactResult
+    ArtifactResult (..),
+    newArtifactResult,
+
+    -- ** Artifacts
+    Artifacts (..),
+    newArtifacts,
+
+    -- ** BatchCreateBitbucketServerConnectedRepositoriesRequest
+    BatchCreateBitbucketServerConnectedRepositoriesRequest (..),
+    newBatchCreateBitbucketServerConnectedRepositoriesRequest,
+
+    -- ** BatchCreateBitbucketServerConnectedRepositoriesResponse
+    BatchCreateBitbucketServerConnectedRepositoriesResponse (..),
+    newBatchCreateBitbucketServerConnectedRepositoriesResponse,
+
+    -- ** BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
+    BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata (..),
+    newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata,
+
+    -- ** BitbucketServerConfig
+    BitbucketServerConfig (..),
+    newBitbucketServerConfig,
+
+    -- ** BitbucketServerConnectedRepository
+    BitbucketServerConnectedRepository (..),
+    newBitbucketServerConnectedRepository,
+
+    -- ** BitbucketServerRepository
+    BitbucketServerRepository (..),
+    newBitbucketServerRepository,
+
+    -- ** BitbucketServerRepositoryId
+    BitbucketServerRepositoryId (..),
+    newBitbucketServerRepositoryId,
+
+    -- ** BitbucketServerSecrets
+    BitbucketServerSecrets (..),
+    newBitbucketServerSecrets,
+
+    -- ** BitbucketServerTriggerConfig
+    BitbucketServerTriggerConfig (..),
+    newBitbucketServerTriggerConfig,
+
+    -- ** Build
+    Build (..),
+    newBuild,
+
+    -- ** Build_Status
+    Build_Status (..),
+
+    -- ** Build_Substitutions
+    Build_Substitutions (..),
+    newBuild_Substitutions,
+
+    -- ** Build_Timing
+    Build_Timing (..),
+    newBuild_Timing,
+
+    -- ** BuildApproval
+    BuildApproval (..),
+    newBuildApproval,
+
+    -- ** BuildApproval_State
+    BuildApproval_State (..),
+
+    -- ** BuildOperationMetadata
+    BuildOperationMetadata (..),
+    newBuildOperationMetadata,
+
+    -- ** BuildOptions
+    BuildOptions (..),
+    newBuildOptions,
+
+    -- ** BuildOptions_LogStreamingOption
+    BuildOptions_LogStreamingOption (..),
+
+    -- ** BuildOptions_Logging
+    BuildOptions_Logging (..),
+
+    -- ** BuildOptions_MachineType
+    BuildOptions_MachineType (..),
+
+    -- ** BuildOptions_RequestedVerifyOption
+    BuildOptions_RequestedVerifyOption (..),
+
+    -- ** BuildOptions_SourceProvenanceHashItem
+    BuildOptions_SourceProvenanceHashItem (..),
+
+    -- ** BuildOptions_SubstitutionOption
+    BuildOptions_SubstitutionOption (..),
+
+    -- ** BuildStep
+    BuildStep (..),
+    newBuildStep,
+
+    -- ** BuildStep_Status
+    BuildStep_Status (..),
+
+    -- ** BuildTrigger
+    BuildTrigger (..),
+    newBuildTrigger,
+
+    -- ** BuildTrigger_EventType
+    BuildTrigger_EventType (..),
+
+    -- ** BuildTrigger_Substitutions
+    BuildTrigger_Substitutions (..),
+    newBuildTrigger_Substitutions,
+
+    -- ** BuiltImage
+    BuiltImage (..),
+    newBuiltImage,
+
+    -- ** CancelBuildRequest
+    CancelBuildRequest (..),
+    newCancelBuildRequest,
+
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** CreateBitbucketServerConfigOperationMetadata
+    CreateBitbucketServerConfigOperationMetadata (..),
+    newCreateBitbucketServerConfigOperationMetadata,
+
+    -- ** CreateBitbucketServerConnectedRepositoryRequest
+    CreateBitbucketServerConnectedRepositoryRequest (..),
+    newCreateBitbucketServerConnectedRepositoryRequest,
+
+    -- ** CreateGitHubEnterpriseConfigOperationMetadata
+    CreateGitHubEnterpriseConfigOperationMetadata (..),
+    newCreateGitHubEnterpriseConfigOperationMetadata,
+
+    -- ** CreateGitLabConfigOperationMetadata
+    CreateGitLabConfigOperationMetadata (..),
+    newCreateGitLabConfigOperationMetadata,
+
+    -- ** CreateWorkerPoolOperationMetadata
+    CreateWorkerPoolOperationMetadata (..),
+    newCreateWorkerPoolOperationMetadata,
+
+    -- ** DeleteBitbucketServerConfigOperationMetadata
+    DeleteBitbucketServerConfigOperationMetadata (..),
+    newDeleteBitbucketServerConfigOperationMetadata,
+
+    -- ** DeleteGitHubEnterpriseConfigOperationMetadata
+    DeleteGitHubEnterpriseConfigOperationMetadata (..),
+    newDeleteGitHubEnterpriseConfigOperationMetadata,
+
+    -- ** DeleteGitLabConfigOperationMetadata
+    DeleteGitLabConfigOperationMetadata (..),
+    newDeleteGitLabConfigOperationMetadata,
+
+    -- ** DeleteWorkerPoolOperationMetadata
+    DeleteWorkerPoolOperationMetadata (..),
+    newDeleteWorkerPoolOperationMetadata,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** FailureInfo
+    FailureInfo (..),
+    newFailureInfo,
+
+    -- ** FailureInfo_Type
+    FailureInfo_Type (..),
+
+    -- ** FileHashes
+    FileHashes (..),
+    newFileHashes,
+
+    -- ** GitFileSource
+    GitFileSource (..),
+    newGitFileSource,
+
+    -- ** GitFileSource_RepoType
+    GitFileSource_RepoType (..),
+
+    -- ** GitHubEnterpriseConfig
+    GitHubEnterpriseConfig (..),
+    newGitHubEnterpriseConfig,
+
+    -- ** GitHubEnterpriseSecrets
+    GitHubEnterpriseSecrets (..),
+    newGitHubEnterpriseSecrets,
+
+    -- ** GitHubEventsConfig
+    GitHubEventsConfig (..),
+    newGitHubEventsConfig,
+
+    -- ** GitRepoSource
+    GitRepoSource (..),
+    newGitRepoSource,
+
+    -- ** GitRepoSource_RepoType
+    GitRepoSource_RepoType (..),
+
+    -- ** GoogleDevtoolsCloudbuildV2OperationMetadata
+    GoogleDevtoolsCloudbuildV2OperationMetadata (..),
+    newGoogleDevtoolsCloudbuildV2OperationMetadata,
+
+    -- ** HTTPDelivery
+    HTTPDelivery (..),
+    newHTTPDelivery,
+
+    -- ** Hash
+    Hash (..),
+    newHash,
+
+    -- ** Hash_Type
+    Hash_Type (..),
+
+    -- ** HttpBody
+    HttpBody (..),
+    newHttpBody,
+
+    -- ** HttpBody_ExtensionsItem
+    HttpBody_ExtensionsItem (..),
+    newHttpBody_ExtensionsItem,
+
+    -- ** InlineSecret
+    InlineSecret (..),
+    newInlineSecret,
+
+    -- ** InlineSecret_EnvMap
+    InlineSecret_EnvMap (..),
+    newInlineSecret_EnvMap,
+
+    -- ** ListBitbucketServerConfigsResponse
+    ListBitbucketServerConfigsResponse (..),
+    newListBitbucketServerConfigsResponse,
+
+    -- ** ListBitbucketServerRepositoriesResponse
+    ListBitbucketServerRepositoriesResponse (..),
+    newListBitbucketServerRepositoriesResponse,
+
+    -- ** ListBuildTriggersResponse
+    ListBuildTriggersResponse (..),
+    newListBuildTriggersResponse,
+
+    -- ** ListBuildsResponse
+    ListBuildsResponse (..),
+    newListBuildsResponse,
+
+    -- ** ListGithubEnterpriseConfigsResponse
+    ListGithubEnterpriseConfigsResponse (..),
+    newListGithubEnterpriseConfigsResponse,
+
+    -- ** ListWorkerPoolsResponse
+    ListWorkerPoolsResponse (..),
+    newListWorkerPoolsResponse,
+
+    -- ** NetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
+
+    -- ** NetworkConfig_EgressOption
+    NetworkConfig_EgressOption (..),
+
+    -- ** Notification
+    Notification (..),
+    newNotification,
+
+    -- ** Notification_StructDelivery
+    Notification_StructDelivery (..),
+    newNotification_StructDelivery,
+
+    -- ** NotifierConfig
+    NotifierConfig (..),
+    newNotifierConfig,
+
+    -- ** NotifierMetadata
+    NotifierMetadata (..),
+    newNotifierMetadata,
+
+    -- ** NotifierSecret
+    NotifierSecret (..),
+    newNotifierSecret,
+
+    -- ** NotifierSecretRef
+    NotifierSecretRef (..),
+    newNotifierSecretRef,
+
+    -- ** NotifierSpec
+    NotifierSpec (..),
+    newNotifierSpec,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
+
+    -- ** PoolOption
+    PoolOption (..),
+    newPoolOption,
+
+    -- ** PrivatePoolV1Config
+    PrivatePoolV1Config (..),
+    newPrivatePoolV1Config,
+
+    -- ** ProcessAppManifestCallbackOperationMetadata
+    ProcessAppManifestCallbackOperationMetadata (..),
+    newProcessAppManifestCallbackOperationMetadata,
+
+    -- ** PubsubConfig
+    PubsubConfig (..),
+    newPubsubConfig,
+
+    -- ** PubsubConfig_State
+    PubsubConfig_State (..),
+
+    -- ** PullRequestFilter
+    PullRequestFilter (..),
+    newPullRequestFilter,
+
+    -- ** PullRequestFilter_CommentControl
+    PullRequestFilter_CommentControl (..),
+
+    -- ** PushFilter
+    PushFilter (..),
+    newPushFilter,
+
+    -- ** ReceiveTriggerWebhookResponse
+    ReceiveTriggerWebhookResponse (..),
+    newReceiveTriggerWebhookResponse,
+
+    -- ** RemoveBitbucketServerConnectedRepositoryRequest
+    RemoveBitbucketServerConnectedRepositoryRequest (..),
+    newRemoveBitbucketServerConnectedRepositoryRequest,
+
+    -- ** RepoSource
+    RepoSource (..),
+    newRepoSource,
+
+    -- ** RepoSource_Substitutions
+    RepoSource_Substitutions (..),
+    newRepoSource_Substitutions,
+
+    -- ** Results
+    Results (..),
+    newResults,
+
+    -- ** RetryBuildRequest
+    RetryBuildRequest (..),
+    newRetryBuildRequest,
+
+    -- ** RunBuildTriggerRequest
+    RunBuildTriggerRequest (..),
+    newRunBuildTriggerRequest,
+
+    -- ** RunWorkflowCustomOperationMetadata
+    RunWorkflowCustomOperationMetadata (..),
+    newRunWorkflowCustomOperationMetadata,
+
+    -- ** SMTPDelivery
+    SMTPDelivery (..),
+    newSMTPDelivery,
+
+    -- ** Secret
+    Secret (..),
+    newSecret,
+
+    -- ** Secret_SecretEnv
+    Secret_SecretEnv (..),
+    newSecret_SecretEnv,
+
+    -- ** SecretManagerSecret
+    SecretManagerSecret (..),
+    newSecretManagerSecret,
+
+    -- ** Secrets
+    Secrets (..),
+    newSecrets,
+
+    -- ** SlackDelivery
+    SlackDelivery (..),
+    newSlackDelivery,
+
+    -- ** Source
+    Source (..),
+    newSource,
+
+    -- ** SourceProvenance
+    SourceProvenance (..),
+    newSourceProvenance,
+
+    -- ** SourceProvenance_FileHashes
+    SourceProvenance_FileHashes (..),
+    newSourceProvenance_FileHashes,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StorageSource
+    StorageSource (..),
+    newStorageSource,
+
+    -- ** StorageSourceManifest
+    StorageSourceManifest (..),
+    newStorageSourceManifest,
+
+    -- ** TimeSpan
+    TimeSpan (..),
+    newTimeSpan,
+
+    -- ** UpdateBitbucketServerConfigOperationMetadata
+    UpdateBitbucketServerConfigOperationMetadata (..),
+    newUpdateBitbucketServerConfigOperationMetadata,
+
+    -- ** UpdateGitHubEnterpriseConfigOperationMetadata
+    UpdateGitHubEnterpriseConfigOperationMetadata (..),
+    newUpdateGitHubEnterpriseConfigOperationMetadata,
+
+    -- ** UpdateGitLabConfigOperationMetadata
+    UpdateGitLabConfigOperationMetadata (..),
+    newUpdateGitLabConfigOperationMetadata,
+
+    -- ** UpdateWorkerPoolOperationMetadata
+    UpdateWorkerPoolOperationMetadata (..),
+    newUpdateWorkerPoolOperationMetadata,
+
+    -- ** Volume
+    Volume (..),
+    newVolume,
+
+    -- ** Warning
+    Warning (..),
+    newWarning,
+
+    -- ** Warning_Priority
+    Warning_Priority (..),
+
+    -- ** WebhookConfig
+    WebhookConfig (..),
+    newWebhookConfig,
+
+    -- ** WebhookConfig_State
+    WebhookConfig_State (..),
+
+    -- ** WorkerConfig
+    WorkerConfig (..),
+    newWorkerConfig,
+
+    -- ** WorkerPool
+    WorkerPool (..),
+    newWorkerPool,
+
+    -- ** WorkerPool_Annotations
+    WorkerPool_Annotations (..),
+    newWorkerPool_Annotations,
+
+    -- ** WorkerPool_State
+    WorkerPool_State (..),
+  )
+where
+
+import Network.Google.ContainerBuilder.Internal.Product
+import Network.Google.ContainerBuilder.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Build API. This contains the host and root path used as a starting point for constructing service requests.
+containerBuilderService :: Core.ServiceConfig
+containerBuilderService =
+  Core.defaultService
+    (Core.ServiceId "cloudbuild:v1")
+    "cloudbuild.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
