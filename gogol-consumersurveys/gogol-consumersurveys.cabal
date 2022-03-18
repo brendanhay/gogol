@@ -39,28 +39,29 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ConsumerSurveys
-    Network.Google.ConsumerSurveys.Mobileapppanels.Get
-    Network.Google.ConsumerSurveys.Mobileapppanels.List
-    Network.Google.ConsumerSurveys.Mobileapppanels.Update
-    Network.Google.ConsumerSurveys.Results.Get
-    Network.Google.ConsumerSurveys.Surveys.Delete
-    Network.Google.ConsumerSurveys.Surveys.Get
-    Network.Google.ConsumerSurveys.Surveys.Insert
-    Network.Google.ConsumerSurveys.Surveys.List
-    Network.Google.ConsumerSurveys.Surveys.Start
-    Network.Google.ConsumerSurveys.Surveys.Stop
-    Network.Google.ConsumerSurveys.Surveys.Update
-    Network.Google.ConsumerSurveys.Types
+    Gogol.ConsumerSurveys
+    Gogol.ConsumerSurveys.Mobileapppanels.Get
+    Gogol.ConsumerSurveys.Mobileapppanels.List
+    Gogol.ConsumerSurveys.Mobileapppanels.Update
+    Gogol.ConsumerSurveys.Results.Get
+    Gogol.ConsumerSurveys.Surveys.Delete
+    Gogol.ConsumerSurveys.Surveys.Get
+    Gogol.ConsumerSurveys.Surveys.Insert
+    Gogol.ConsumerSurveys.Surveys.List
+    Gogol.ConsumerSurveys.Surveys.Start
+    Gogol.ConsumerSurveys.Surveys.Stop
+    Gogol.ConsumerSurveys.Surveys.Update
+    Gogol.ConsumerSurveys.Types
 
   other-modules:
-    Network.Google.ConsumerSurveys.Internal.Product
-    Network.Google.ConsumerSurveys.Internal.Sum
+    Gogol.ConsumerSurveys.Internal.Product
+    Gogol.ConsumerSurveys.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Surveys.Insert
+-- Module      : Gogol.ConsumerSurveys.Surveys.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a survey.
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.insert@.
-module Network.Google.ConsumerSurveys.Surveys.Insert
+module Gogol.ConsumerSurveys.Surveys.Insert
   ( -- * Resource
     ConsumerSurveysSurveysInsertResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ConsumerSurveys.Surveys.Insert
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @consumersurveys.surveys.insert@ method which the
 -- 'ConsumerSurveysSurveysInsert' request conforms to.

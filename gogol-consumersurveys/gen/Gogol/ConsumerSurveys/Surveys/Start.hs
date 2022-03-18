@@ -19,78 +19,84 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Surveys.Stop
+-- Module      : Gogol.ConsumerSurveys.Surveys.Start
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops a running survey.
+-- Begins running a survey.
 --
--- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.stop@.
-module Network.Google.ConsumerSurveys.Surveys.Stop
+-- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.start@.
+module Gogol.ConsumerSurveys.Surveys.Start
   ( -- * Resource
-    ConsumerSurveysSurveysStopResource,
+    ConsumerSurveysSurveysStartResource,
 
     -- ** Constructing a Request
-    newConsumerSurveysSurveysStop,
-    ConsumerSurveysSurveysStop,
+    newConsumerSurveysSurveysStart,
+    ConsumerSurveysSurveysStart,
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @consumersurveys.surveys.stop@ method which the
--- 'ConsumerSurveysSurveysStop' request conforms to.
-type ConsumerSurveysSurveysStopResource =
+-- | A resource alias for @consumersurveys.surveys.start@ method which the
+-- 'ConsumerSurveysSurveysStart' request conforms to.
+type ConsumerSurveysSurveysStartResource =
   "consumersurveys"
     Core.:> "v2"
     Core.:> "surveys"
     Core.:> Core.Capture "resourceId" Core.Text
-    Core.:> "stop"
+    Core.:> "start"
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post '[Core.JSON] SurveysStopResponse
+    Core.:> Core.ReqBody '[Core.JSON] SurveysStartRequest
+    Core.:> Core.Post '[Core.JSON] SurveysStartResponse
 
--- | Stops a running survey.
+-- | Begins running a survey.
 --
--- /See:/ 'newConsumerSurveysSurveysStop' smart constructor.
-newtype ConsumerSurveysSurveysStop = ConsumerSurveysSurveysStop
-  { -- |
+-- /See:/ 'newConsumerSurveysSurveysStart' smart constructor.
+data ConsumerSurveysSurveysStart = ConsumerSurveysSurveysStart
+  { -- | Multipart request metadata.
+    payload :: SurveysStartRequest,
+    -- |
     resourceId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ConsumerSurveysSurveysStop' with the minimum fields required to make a request.
-newConsumerSurveysSurveysStop ::
+-- | Creates a value of 'ConsumerSurveysSurveysStart' with the minimum fields required to make a request.
+newConsumerSurveysSurveysStart ::
+  -- |  Multipart request metadata. See 'payload'.
+  SurveysStartRequest ->
   -- |  See 'resourceId'.
   Core.Text ->
-  ConsumerSurveysSurveysStop
-newConsumerSurveysSurveysStop resourceId =
-  ConsumerSurveysSurveysStop {resourceId = resourceId}
+  ConsumerSurveysSurveysStart
+newConsumerSurveysSurveysStart payload resourceId =
+  ConsumerSurveysSurveysStart {payload = payload, resourceId = resourceId}
 
 instance
   Core.GoogleRequest
-    ConsumerSurveysSurveysStop
+    ConsumerSurveysSurveysStart
   where
   type
-    Rs ConsumerSurveysSurveysStop =
-      SurveysStopResponse
+    Rs ConsumerSurveysSurveysStart =
+      SurveysStartResponse
   type
-    Scopes ConsumerSurveysSurveysStop =
+    Scopes ConsumerSurveysSurveysStart =
       '[ "https://www.googleapis.com/auth/consumersurveys",
          "https://www.googleapis.com/auth/userinfo.email"
        ]
-  requestClient ConsumerSurveysSurveysStop {..} =
+  requestClient ConsumerSurveysSurveysStart {..} =
     go
       resourceId
       (Core.Just Core.AltJSON)
+      payload
       consumerSurveysService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysStopResource
+              Core.Proxy ConsumerSurveysSurveysStartResource
           )
           Core.mempty

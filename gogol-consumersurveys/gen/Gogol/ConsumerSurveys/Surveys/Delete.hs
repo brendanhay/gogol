@@ -19,65 +19,69 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Surveys.Get
+-- Module      : Gogol.ConsumerSurveys.Surveys.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves information about the specified survey.
+-- Removes a survey from view in all user GET requests.
 --
--- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.get@.
-module Network.Google.ConsumerSurveys.Surveys.Get
+-- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.delete@.
+module Gogol.ConsumerSurveys.Surveys.Delete
   ( -- * Resource
-    ConsumerSurveysSurveysGetResource,
+    ConsumerSurveysSurveysDeleteResource,
 
     -- ** Constructing a Request
-    newConsumerSurveysSurveysGet,
-    ConsumerSurveysSurveysGet,
+    newConsumerSurveysSurveysDelete,
+    ConsumerSurveysSurveysDelete,
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @consumersurveys.surveys.get@ method which the
--- 'ConsumerSurveysSurveysGet' request conforms to.
-type ConsumerSurveysSurveysGetResource =
+-- | A resource alias for @consumersurveys.surveys.delete@ method which the
+-- 'ConsumerSurveysSurveysDelete' request conforms to.
+type ConsumerSurveysSurveysDeleteResource =
   "consumersurveys"
     Core.:> "v2"
     Core.:> "surveys"
     Core.:> Core.Capture "surveyUrlId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Survey
+    Core.:> Core.Delete '[Core.JSON] SurveysDeleteResponse
 
--- | Retrieves information about the specified survey.
+-- | Removes a survey from view in all user GET requests.
 --
--- /See:/ 'newConsumerSurveysSurveysGet' smart constructor.
-newtype ConsumerSurveysSurveysGet = ConsumerSurveysSurveysGet
+-- /See:/ 'newConsumerSurveysSurveysDelete' smart constructor.
+newtype ConsumerSurveysSurveysDelete = ConsumerSurveysSurveysDelete
   { -- | External URL ID for the survey.
     surveyUrlId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ConsumerSurveysSurveysGet' with the minimum fields required to make a request.
-newConsumerSurveysSurveysGet ::
+-- | Creates a value of 'ConsumerSurveysSurveysDelete' with the minimum fields required to make a request.
+newConsumerSurveysSurveysDelete ::
   -- |  External URL ID for the survey. See 'surveyUrlId'.
   Core.Text ->
-  ConsumerSurveysSurveysGet
-newConsumerSurveysSurveysGet surveyUrlId =
-  ConsumerSurveysSurveysGet {surveyUrlId = surveyUrlId}
+  ConsumerSurveysSurveysDelete
+newConsumerSurveysSurveysDelete surveyUrlId =
+  ConsumerSurveysSurveysDelete {surveyUrlId = surveyUrlId}
 
-instance Core.GoogleRequest ConsumerSurveysSurveysGet where
-  type Rs ConsumerSurveysSurveysGet = Survey
+instance
+  Core.GoogleRequest
+    ConsumerSurveysSurveysDelete
+  where
   type
-    Scopes ConsumerSurveysSurveysGet =
+    Rs ConsumerSurveysSurveysDelete =
+      SurveysDeleteResponse
+  type
+    Scopes ConsumerSurveysSurveysDelete =
       '[ "https://www.googleapis.com/auth/consumersurveys",
-         "https://www.googleapis.com/auth/consumersurveys.readonly",
          "https://www.googleapis.com/auth/userinfo.email"
        ]
-  requestClient ConsumerSurveysSurveysGet {..} =
+  requestClient ConsumerSurveysSurveysDelete {..} =
     go
       surveyUrlId
       (Core.Just Core.AltJSON)
@@ -86,6 +90,6 @@ instance Core.GoogleRequest ConsumerSurveysSurveysGet where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysGetResource
+              Core.Proxy ConsumerSurveysSurveysDeleteResource
           )
           Core.mempty

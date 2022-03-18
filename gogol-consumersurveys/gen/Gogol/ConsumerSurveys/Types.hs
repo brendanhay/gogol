@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Types
+-- Module      : Gogol.ConsumerSurveys.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ConsumerSurveys.Types
+module Gogol.ConsumerSurveys.Types
   ( -- * Configuration
     consumerSurveysService,
 
@@ -114,9 +114,9 @@ module Network.Google.ConsumerSurveys.Types
   )
 where
 
-import Network.Google.ConsumerSurveys.Internal.Product
-import Network.Google.ConsumerSurveys.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Internal.Product
+import Gogol.ConsumerSurveys.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Consumer Surveys API. This contains the host and root path used as a starting point for constructing service requests.
 consumerSurveysService :: Core.ServiceConfig

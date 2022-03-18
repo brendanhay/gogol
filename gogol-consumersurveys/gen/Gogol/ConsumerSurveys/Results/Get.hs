@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Results.Get
+-- Module      : Gogol.ConsumerSurveys.Results.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add \"?alt=media\" to the URL as an argument to get results.
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.results.get@.
-module Network.Google.ConsumerSurveys.Results.Get
+module Gogol.ConsumerSurveys.Results.Get
   ( -- * Resource
     ConsumerSurveysResultsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ConsumerSurveys.Results.Get
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @consumersurveys.results.get@ method which the
 -- 'ConsumerSurveysResultsGet' request conforms to.

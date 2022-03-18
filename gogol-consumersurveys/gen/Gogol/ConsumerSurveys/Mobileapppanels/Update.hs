@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Mobileapppanels.Update
+-- Module      : Gogol.ConsumerSurveys.Mobileapppanels.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates a MobileAppPanel. Currently the only property that can be updated is the owners property.
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.mobileapppanels.update@.
-module Network.Google.ConsumerSurveys.Mobileapppanels.Update
+module Gogol.ConsumerSurveys.Mobileapppanels.Update
   ( -- * Resource
     ConsumerSurveysMobileapppanelsUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ConsumerSurveys.Mobileapppanels.Update
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @consumersurveys.mobileapppanels.update@ method which the
 -- 'ConsumerSurveysMobileapppanelsUpdate' request conforms to.
