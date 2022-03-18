@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,64 +30,64 @@
 --
 -- /See:/ <https://firebase.google.com/docs/hosting/ Firebase Hosting API Reference>
 module Gogol.FirebaseHosting
-    (
-    -- * Configuration
-      firebaseHostingService
+  ( -- * Configuration
+    firebaseHostingService,
 
     -- * Resources
 
     -- ** firebasehosting.operations.cancel
-    , FirebaseHostingOperationsCancelResource
-    , newFirebaseHostingOperationsCancel
-    , FirebaseHostingOperationsCancel
+    FirebaseHostingOperationsCancelResource,
+    newFirebaseHostingOperationsCancel,
+    FirebaseHostingOperationsCancel,
 
     -- ** firebasehosting.operations.delete
-    , FirebaseHostingOperationsDeleteResource
-    , newFirebaseHostingOperationsDelete
-    , FirebaseHostingOperationsDelete
+    FirebaseHostingOperationsDeleteResource,
+    newFirebaseHostingOperationsDelete,
+    FirebaseHostingOperationsDelete,
 
     -- ** firebasehosting.operations.list
-    , FirebaseHostingOperationsListResource
-    , newFirebaseHostingOperationsList
-    , FirebaseHostingOperationsList
+    FirebaseHostingOperationsListResource,
+    newFirebaseHostingOperationsList,
+    FirebaseHostingOperationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
-    ) where
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
 
 import Gogol.FirebaseHosting.Operations.Cancel
 import Gogol.FirebaseHosting.Operations.Delete
