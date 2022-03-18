@@ -19,101 +19,101 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Indexing.UrlNotifications.GetMetadata
+-- Module      : Gogol.Indexing.UrlNotifications.Publish
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets metadata about a Web Document. This method can /only/ be used to query URLs that were previously seen in successful Indexing API notifications. Includes the latest @UrlNotification@ received via this API.
+-- Notifies that a URL has been updated or deleted.
 --
--- /See:/ <https://developers.google.com/search/apis/indexing-api/ Indexing API Reference> for @indexing.urlNotifications.getMetadata@.
-module Network.Google.Indexing.UrlNotifications.GetMetadata
+-- /See:/ <https://developers.google.com/search/apis/indexing-api/ Indexing API Reference> for @indexing.urlNotifications.publish@.
+module Gogol.Indexing.UrlNotifications.Publish
   ( -- * Resource
-    IndexingUrlNotificationsGetMetadataResource,
+    IndexingUrlNotificationsPublishResource,
 
     -- ** Constructing a Request
-    newIndexingUrlNotificationsGetMetadata,
-    IndexingUrlNotificationsGetMetadata,
+    newIndexingUrlNotificationsPublish,
+    IndexingUrlNotificationsPublish,
   )
 where
 
-import Network.Google.Indexing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Indexing.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @indexing.urlNotifications.getMetadata@ method which the
--- 'IndexingUrlNotificationsGetMetadata' request conforms to.
-type IndexingUrlNotificationsGetMetadataResource =
+-- | A resource alias for @indexing.urlNotifications.publish@ method which the
+-- 'IndexingUrlNotificationsPublish' request conforms to.
+type IndexingUrlNotificationsPublishResource =
   "v3"
-    Core.:> "urlNotifications"
-    Core.:> "metadata"
+    Core.:> "urlNotifications:publish"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "url" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] UrlNotificationMetadata
+    Core.:> Core.ReqBody '[Core.JSON] UrlNotification
+    Core.:> Core.Post '[Core.JSON] PublishUrlNotificationResponse
 
--- | Gets metadata about a Web Document. This method can /only/ be used to query URLs that were previously seen in successful Indexing API notifications. Includes the latest @UrlNotification@ received via this API.
+-- | Notifies that a URL has been updated or deleted.
 --
--- /See:/ 'newIndexingUrlNotificationsGetMetadata' smart constructor.
-data IndexingUrlNotificationsGetMetadata = IndexingUrlNotificationsGetMetadata
+-- /See:/ 'newIndexingUrlNotificationsPublish' smart constructor.
+data IndexingUrlNotificationsPublish = IndexingUrlNotificationsPublish
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: UrlNotification,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text),
-    -- | URL that is being queried.
-    url :: (Core.Maybe Core.Text)
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'IndexingUrlNotificationsGetMetadata' with the minimum fields required to make a request.
-newIndexingUrlNotificationsGetMetadata ::
-  IndexingUrlNotificationsGetMetadata
-newIndexingUrlNotificationsGetMetadata =
-  IndexingUrlNotificationsGetMetadata
+-- | Creates a value of 'IndexingUrlNotificationsPublish' with the minimum fields required to make a request.
+newIndexingUrlNotificationsPublish ::
+  -- |  Multipart request metadata. See 'payload'.
+  UrlNotification ->
+  IndexingUrlNotificationsPublish
+newIndexingUrlNotificationsPublish payload =
+  IndexingUrlNotificationsPublish
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      url = Core.Nothing
+      uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    IndexingUrlNotificationsGetMetadata
+    IndexingUrlNotificationsPublish
   where
   type
-    Rs IndexingUrlNotificationsGetMetadata =
-      UrlNotificationMetadata
+    Rs IndexingUrlNotificationsPublish =
+      PublishUrlNotificationResponse
   type
-    Scopes IndexingUrlNotificationsGetMetadata =
+    Scopes IndexingUrlNotificationsPublish =
       '["https://www.googleapis.com/auth/indexing"]
-  requestClient IndexingUrlNotificationsGetMetadata {..} =
+  requestClient IndexingUrlNotificationsPublish {..} =
     go
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
-      url
       (Core.Just Core.AltJSON)
+      payload
       indexingService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                IndexingUrlNotificationsGetMetadataResource
+              Core.Proxy IndexingUrlNotificationsPublishResource
           )
           Core.mempty

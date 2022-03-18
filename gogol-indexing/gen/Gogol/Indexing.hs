@@ -19,18 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Indexing.Types
+-- Module      : Gogol.Indexing
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Indexing.Types
+--
+-- Notifies Google when your web pages change.
+--
+-- /See:/ <https://developers.google.com/search/apis/indexing-api/ Indexing API Reference>
+module Gogol.Indexing
   ( -- * Configuration
     indexingService,
 
     -- * OAuth Scopes
     indexingScope,
+
+    -- * Resources
+
+    -- ** indexing.urlNotifications.getMetadata
+    IndexingUrlNotificationsGetMetadataResource,
+    newIndexingUrlNotificationsGetMetadata,
+    IndexingUrlNotificationsGetMetadata,
+
+    -- ** indexing.urlNotifications.publish
+    IndexingUrlNotificationsPublishResource,
+    newIndexingUrlNotificationsPublish,
+    IndexingUrlNotificationsPublish,
 
     -- * Types
 
@@ -54,17 +70,6 @@ module Network.Google.Indexing.Types
   )
 where
 
-import Network.Google.Indexing.Internal.Product
-import Network.Google.Indexing.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v3@ of the Indexing API. This contains the host and root path used as a starting point for constructing service requests.
-indexingService :: Core.ServiceConfig
-indexingService =
-  Core.defaultService
-    (Core.ServiceId "indexing:v3")
-    "indexing.googleapis.com"
-
--- | Submit data to Google for indexing
-indexingScope :: Core.Proxy '["https://www.googleapis.com/auth/indexing"]
-indexingScope = Core.Proxy
+import Gogol.Indexing.Types
+import Gogol.Indexing.UrlNotifications.GetMetadata
+import Gogol.Indexing.UrlNotifications.Publish
