@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,75 +25,74 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.FactCheckTools.Types
-    (
-    -- * Configuration
-      factCheckToolsService
+  ( -- * Configuration
+    factCheckToolsService,
 
     -- * OAuth Scopes
-    , userinfoEmailScope
+    userinfoEmailScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1Claim
-    , GoogleFactcheckingFactchecktoolsV1alpha1Claim (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1Claim
+    GoogleFactcheckingFactchecktoolsV1alpha1Claim (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1Claim,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
-    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
+    GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
-    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
+    GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimRating,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
-    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
+    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReview,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
-    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
+    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
-    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
+    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
-    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
+    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
-    , GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
-    , GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
+    GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse,
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1Publisher
-    , GoogleFactcheckingFactchecktoolsV1alpha1Publisher (..)
-    , newGoogleFactcheckingFactchecktoolsV1alpha1Publisher
+    GoogleFactcheckingFactchecktoolsV1alpha1Publisher (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1Publisher,
 
     -- ** GoogleProtobufEmpty
-    , GoogleProtobufEmpty (..)
-    , newGoogleProtobufEmpty
-    ) where
+    GoogleProtobufEmpty (..),
+    newGoogleProtobufEmpty,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.FactCheckTools.Internal.Product
 import Gogol.FactCheckTools.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1alpha1@ of the Fact Check Tools API. This contains the host and root path used as a starting point for constructing service requests.
 factCheckToolsService :: Core.ServiceConfig
-factCheckToolsService
-  = Core.defaultService
-      (Core.ServiceId "factchecktools:v1alpha1")
-      "factchecktools.googleapis.com"
+factCheckToolsService =
+  Core.defaultService
+    (Core.ServiceId "factchecktools:v1alpha1")
+    "factchecktools.googleapis.com"
 
 -- | See your primary Google Account email address
 userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
