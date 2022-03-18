@@ -1,63 +1,74 @@
-name:                  gogol-cloudtasks
-version:               0.5.0
-synopsis:              Google Cloud Tasks SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudtasks
+version:            0.5.0
+synopsis:           Google Cloud Tasks SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manages the execution of large numbers of distributed requests.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v2@
-    of the API.
+  Manages the execution of large numbers of distributed requests.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v2@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-cloudtasks
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.CloudTasks
-        , Network.Google.CloudTasks.Types
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Get
-        , Network.Google.Resource.CloudTasks.Projects.Locations.List
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Create
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Delete
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Get
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.GetIAMPolicy
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.List
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Patch
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Pause
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Purge
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Resume
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.SetIAMPolicy
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Create
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Delete
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Get
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.List
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Run
-        , Network.Google.Resource.CloudTasks.Projects.Locations.Queues.TestIAMPermissions
+  exposed-modules:
+    Network.Google.CloudTasks
+    Network.Google.CloudTasks.Projects.Locations.Get
+    Network.Google.CloudTasks.Projects.Locations.List
+    Network.Google.CloudTasks.Projects.Locations.Queues.Create
+    Network.Google.CloudTasks.Projects.Locations.Queues.Delete
+    Network.Google.CloudTasks.Projects.Locations.Queues.Get
+    Network.Google.CloudTasks.Projects.Locations.Queues.GetIamPolicy
+    Network.Google.CloudTasks.Projects.Locations.Queues.List
+    Network.Google.CloudTasks.Projects.Locations.Queues.Patch
+    Network.Google.CloudTasks.Projects.Locations.Queues.Pause
+    Network.Google.CloudTasks.Projects.Locations.Queues.Purge
+    Network.Google.CloudTasks.Projects.Locations.Queues.Resume
+    Network.Google.CloudTasks.Projects.Locations.Queues.SetIamPolicy
+    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Create
+    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Delete
+    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Get
+    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.List
+    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Run
+    Network.Google.CloudTasks.Projects.Locations.Queues.TestIamPermissions
+    Network.Google.CloudTasks.Types
 
-    other-modules:
-          Network.Google.CloudTasks.Types.Product
-        , Network.Google.CloudTasks.Types.Sum
+  other-modules:
+    Network.Google.CloudTasks.Internal.Product
+    Network.Google.CloudTasks.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

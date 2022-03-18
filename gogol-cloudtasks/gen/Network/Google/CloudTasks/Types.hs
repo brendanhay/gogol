@@ -1,292 +1,219 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudTasks.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudTasks.Types
-    (
-    -- * Service Configuration
-      cloudTasksService
+  ( -- * Configuration
+    cloudTasksService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * RateLimits
-    , RateLimits
-    , rateLimits
-    , rlMaxConcurrentDispatches
-    , rlMaxDispatchesPerSecond
-    , rlMaxBurstSize
+    -- * Types
 
-    -- * OAuthToken
-    , OAuthToken
-    , oAuthToken
-    , oatScope
-    , oatServiceAccountEmail
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** AppEngineHttpRequest
+    AppEngineHttpRequest (..),
+    newAppEngineHttpRequest,
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** AppEngineHttpRequest_Headers
+    AppEngineHttpRequest_Headers (..),
+    newAppEngineHttpRequest_Headers,
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** AppEngineHttpRequest_HttpMethod
+    AppEngineHttpRequest_HttpMethod (..),
 
-    -- * GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
+    -- ** AppEngineRouting
+    AppEngineRouting (..),
+    newAppEngineRouting,
 
-    -- * OidcToken
-    , OidcToken
-    , oidcToken
-    , otAudience
-    , otServiceAccountEmail
+    -- ** Attempt
+    Attempt (..),
+    newAttempt,
 
-    -- * RetryConfig
-    , RetryConfig
-    , retryConfig
-    , rcMaxDoublings
-    , rcMaxRetryDuration
-    , rcMaxAttempts
-    , rcMaxBackoff
-    , rcMinBackoff
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * RunTaskRequest
-    , RunTaskRequest
-    , runTaskRequest
-    , rtrResponseView
+    -- ** CreateTaskRequest
+    CreateTaskRequest (..),
+    newCreateTaskRequest,
 
-    -- * HTTPRequestHeaders
-    , HTTPRequestHeaders
-    , hTTPRequestHeaders
-    , httprhAddtional
+    -- ** CreateTaskRequest_ResponseView
+    CreateTaskRequest_ResponseView (..),
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * CreateTaskRequest
-    , CreateTaskRequest
-    , createTaskRequest
-    , ctrResponseView
-    , ctrTask
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
-    -- * ProjectsLocationsQueuesTasksListResponseView
-    , ProjectsLocationsQueuesTasksListResponseView (..)
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
-    -- * TaskView
-    , TaskView (..)
+    -- ** HttpRequest
+    HttpRequest (..),
+    newHttpRequest,
 
-    -- * ListQueuesResponse
-    , ListQueuesResponse
-    , listQueuesResponse
-    , lqrNextPageToken
-    , lqrQueues
+    -- ** HttpRequest_Headers
+    HttpRequest_Headers (..),
+    newHttpRequest_Headers,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** HttpRequest_HttpMethod
+    HttpRequest_HttpMethod (..),
 
-    -- * QueueState
-    , QueueState (..)
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
+    -- ** ListQueuesResponse
+    ListQueuesResponse (..),
+    newListQueuesResponse,
 
-    -- * CreateTaskRequestResponseView
-    , CreateTaskRequestResponseView (..)
+    -- ** ListTasksResponse
+    ListTasksResponse (..),
+    newListTasksResponse,
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * Queue
-    , Queue
-    , queue
-    , qRateLimits
-    , qAppEngineRoutingOverride
-    , qState
-    , qRetryConfig
-    , qStackdriverLoggingConfig
-    , qName
-    , qPurgeTime
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * AppEngineHTTPRequestHTTPMethod
-    , AppEngineHTTPRequestHTTPMethod (..)
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * HTTPRequest
-    , HTTPRequest
-    , hTTPRequest
-    , httprOAuthToken
-    , httprHTTPMethod
-    , httprOidcToken
-    , httprBody
-    , httprURL
-    , httprHeaders
+    -- ** OAuthToken
+    OAuthToken (..),
+    newOAuthToken,
 
-    -- * StackdriverLoggingConfig
-    , StackdriverLoggingConfig
-    , stackdriverLoggingConfig
-    , slcSamplingRatio
+    -- ** OidcToken
+    OidcToken (..),
+    newOidcToken,
 
-    -- * ProjectsLocationsQueuesTasksGetResponseView
-    , ProjectsLocationsQueuesTasksGetResponseView (..)
+    -- ** PauseQueueRequest
+    PauseQueueRequest (..),
+    newPauseQueueRequest,
 
-    -- * ListTasksResponse
-    , ListTasksResponse
-    , listTasksResponse
-    , ltrNextPageToken
-    , ltrTasks
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * AppEngineHTTPRequestHeaders
-    , AppEngineHTTPRequestHeaders
-    , appEngineHTTPRequestHeaders
-    , aehttprhAddtional
+    -- ** PurgeQueueRequest
+    PurgeQueueRequest (..),
+    newPurgeQueueRequest,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Queue
+    Queue (..),
+    newQueue,
 
-    -- * PauseQueueRequest
-    , PauseQueueRequest
-    , pauseQueueRequest
+    -- ** Queue_State
+    Queue_State (..),
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** RateLimits
+    RateLimits (..),
+    newRateLimits,
 
-    -- * Attempt
-    , Attempt
-    , attempt
-    , aResponseStatus
-    , aScheduleTime
-    , aDispatchTime
-    , aResponseTime
+    -- ** ResumeQueueRequest
+    ResumeQueueRequest (..),
+    newResumeQueueRequest,
 
-    -- * PurgeQueueRequest
-    , PurgeQueueRequest
-    , purgeQueueRequest
+    -- ** RetryConfig
+    RetryConfig (..),
+    newRetryConfig,
 
-    -- * Task
-    , Task
-    , task
-    , tLastAttempt
-    , tDispatchDeadline
-    , tScheduleTime
-    , tHTTPRequest
-    , tName
-    , tFirstAttempt
-    , tView
-    , tResponseCount
-    , tDispatchCount
-    , tAppEngineHTTPRequest
-    , tCreateTime
+    -- ** RunTaskRequest
+    RunTaskRequest (..),
+    newRunTaskRequest,
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** RunTaskRequest_ResponseView
+    RunTaskRequest_ResponseView (..),
 
-    -- * Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** StackdriverLoggingConfig
+    StackdriverLoggingConfig (..),
+    newStackdriverLoggingConfig,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * RunTaskRequestResponseView
-    , RunTaskRequestResponseView (..)
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * AppEngineRouting
-    , AppEngineRouting
-    , appEngineRouting
-    , aerService
-    , aerVersion
-    , aerHost
-    , aerInstance
+    -- ** Task
+    Task (..),
+    newTask,
 
-    -- * HTTPRequestHTTPMethod
-    , HTTPRequestHTTPMethod (..)
+    -- ** Task_View
+    Task_View (..),
 
-    -- * AppEngineHTTPRequest
-    , AppEngineHTTPRequest
-    , appEngineHTTPRequest
-    , aehttprHTTPMethod
-    , aehttprRelativeURI
-    , aehttprBody
-    , aehttprHeaders
-    , aehttprAppEngineRouting
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
-    -- * ResumeQueueRequest
-    , ResumeQueueRequest
-    , resumeQueueRequest
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    -- ** ProjectsLocationsQueuesTasksGetResponseView
+    ProjectsLocationsQueuesTasksGetResponseView (..),
 
-import Network.Google.CloudTasks.Types.Product
-import Network.Google.CloudTasks.Types.Sum
-import Network.Google.Prelude
+    -- ** ProjectsLocationsQueuesTasksListResponseView
+    ProjectsLocationsQueuesTasksListResponseView (..),
+  )
+where
 
--- | Default request referring to version 'v2' of the Cloud Tasks API. This contains the host and root path used as a starting point for constructing service requests.
-cloudTasksService :: ServiceConfig
-cloudTasksService
-  = defaultService (ServiceId "cloudtasks:v2")
-      "cloudtasks.googleapis.com"
+import Network.Google.CloudTasks.Internal.Product
+import Network.Google.CloudTasks.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v2@ of the Cloud Tasks API. This contains the host and root path used as a starting point for constructing service requests.
+cloudTasksService :: Core.ServiceConfig
+cloudTasksService =
+  Core.defaultService
+    (Core.ServiceId "cloudtasks:v2")
+    "cloudtasks.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
