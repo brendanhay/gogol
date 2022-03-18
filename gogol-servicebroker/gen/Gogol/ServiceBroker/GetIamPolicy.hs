@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceBroker.GetIamPolicy
+-- Module      : Gogol.ServiceBroker.GetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/kubernetes-engine/docs/concepts/add-on/service-broker Service Broker API Reference> for @servicebroker.getIamPolicy@.
-module Network.Google.ServiceBroker.GetIamPolicy
+module Gogol.ServiceBroker.GetIamPolicy
   ( -- * Resource
     ServiceBrokerGetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceBroker.GetIamPolicy
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceBroker.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.getIamPolicy@ method which the
 -- 'ServiceBrokerGetIamPolicy' request conforms to.

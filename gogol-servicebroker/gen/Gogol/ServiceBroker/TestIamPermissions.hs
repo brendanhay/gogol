@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceBroker.TestIamPermissions
+-- Module      : Gogol.ServiceBroker.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -31,7 +31,7 @@
 -- Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.
 --
 -- /See:/ <https://cloud.google.com/kubernetes-engine/docs/concepts/add-on/service-broker Service Broker API Reference> for @servicebroker.testIamPermissions@.
-module Network.Google.ServiceBroker.TestIamPermissions
+module Gogol.ServiceBroker.TestIamPermissions
   ( -- * Resource
     ServiceBrokerTestIamPermissionsResource,
 
@@ -41,8 +41,8 @@ module Network.Google.ServiceBroker.TestIamPermissions
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceBroker.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.testIamPermissions@ method which the
 -- 'ServiceBrokerTestIamPermissions' request conforms to.

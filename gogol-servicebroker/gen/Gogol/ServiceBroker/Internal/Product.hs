@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceBroker.Internal.Product
+-- Module      : Gogol.ServiceBroker.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ServiceBroker.Internal.Product
+module Gogol.ServiceBroker.Internal.Product
   ( -- * GoogleIamV1__Binding
     GoogleIamV1__Binding (..),
     newGoogleIamV1__Binding,
@@ -52,8 +52,8 @@ module Network.Google.ServiceBroker.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceBroker.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceBroker.Internal.Sum
 
 -- | Associates @members@ with a @role@.
 --

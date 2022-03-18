@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ServiceBroker
-    Network.Google.ServiceBroker.GetIamPolicy
-    Network.Google.ServiceBroker.SetIamPolicy
-    Network.Google.ServiceBroker.TestIamPermissions
-    Network.Google.ServiceBroker.Types
+    Gogol.ServiceBroker
+    Gogol.ServiceBroker.GetIamPolicy
+    Gogol.ServiceBroker.SetIamPolicy
+    Gogol.ServiceBroker.TestIamPermissions
+    Gogol.ServiceBroker.Types
 
   other-modules:
-    Network.Google.ServiceBroker.Internal.Product
-    Network.Google.ServiceBroker.Internal.Sum
+    Gogol.ServiceBroker.Internal.Product
+    Gogol.ServiceBroker.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

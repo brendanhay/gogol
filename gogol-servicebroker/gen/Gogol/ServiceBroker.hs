@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceBroker
+-- Module      : Gogol.ServiceBroker
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Cloud Platform Service Broker API provides Google hosted implementation of the Open Service Broker API (https:\/\/www.openservicebrokerapi.org\/).
 --
 -- /See:/ <https://cloud.google.com/kubernetes-engine/docs/concepts/add-on/service-broker Service Broker API Reference>
-module Network.Google.ServiceBroker
+module Gogol.ServiceBroker
   ( -- * Configuration
     serviceBrokerService,
 
@@ -84,7 +84,7 @@ module Network.Google.ServiceBroker
   )
 where
 
-import Network.Google.ServiceBroker.GetIamPolicy
-import Network.Google.ServiceBroker.SetIamPolicy
-import Network.Google.ServiceBroker.TestIamPermissions
-import Network.Google.ServiceBroker.Types
+import Gogol.ServiceBroker.GetIamPolicy
+import Gogol.ServiceBroker.SetIamPolicy
+import Gogol.ServiceBroker.TestIamPermissions
+import Gogol.ServiceBroker.Types

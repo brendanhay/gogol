@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceBroker.SetIamPolicy
+-- Module      : Gogol.ServiceBroker.SetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -31,7 +31,7 @@
 -- Can return Public Errors: NOT/FOUND, INVALID/ARGUMENT and PERMISSION_DENIED
 --
 -- /See:/ <https://cloud.google.com/kubernetes-engine/docs/concepts/add-on/service-broker Service Broker API Reference> for @servicebroker.setIamPolicy@.
-module Network.Google.ServiceBroker.SetIamPolicy
+module Gogol.ServiceBroker.SetIamPolicy
   ( -- * Resource
     ServiceBrokerSetIamPolicyResource,
 
@@ -41,8 +41,8 @@ module Network.Google.ServiceBroker.SetIamPolicy
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceBroker.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.setIamPolicy@ method which the
 -- 'ServiceBrokerSetIamPolicy' request conforms to.
