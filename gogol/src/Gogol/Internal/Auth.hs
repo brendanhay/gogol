@@ -10,7 +10,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
--- Module      : Network.Google.Internal.Auth
+-- Module      : Gogol.Internal.Auth
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -18,7 +18,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Internal types and helpers for constructing OAuth credentials.
-module Network.Google.Internal.Auth where
+module Gogol.Internal.Auth where
 
 import Control.Exception (Exception, SomeException, catch, throwIO)
 import Control.Exception.Lens (exception)
@@ -39,8 +39,8 @@ import Data.Time
 import Data.X509 (PrivKey (..))
 import Data.X509.Memory (readKeyFileFromMemory)
 import GHC.TypeLits (Symbol)
-import Network.Google.Internal.Logger
-import Network.Google.Prelude
+import Gogol.Internal.Logger
+import Gogol.Prelude
 import Network.HTTP.Conduit (HttpException, Manager)
 import qualified Network.HTTP.Conduit as Client
 import Network.HTTP.Types (Status, hContentType)

@@ -17,8 +17,8 @@ import Data.Conduit (runConduit, (.|))
 import qualified Data.Conduit.Binary as Conduit
 import Data.Text (Text)
 import qualified Data.Text as Text
-import qualified Network.Google as Google
-import qualified Network.Google.Storage as Storage
+import qualified Gogol as Google
+import qualified Gogol.Storage as Storage
 import System.IO (stdout)
 
 -- This will calculate the MIME type (and therefore Content-Type) of

@@ -33,11 +33,11 @@ library
     -fwarn-unused-packages
 
   exposed-modules:
-    Network.Google.Data.Base64
-    Network.Google.Data.JSON
-    Network.Google.Data.Time
-    Network.Google.Prelude
-    Network.Google.Types
+    Gogol.Data.Base64
+    Gogol.Data.JSON
+    Gogol.Data.Time
+    Gogol.Prelude
+    Gogol.Types
 
   build-depends:
     , aeson                 >=0.8

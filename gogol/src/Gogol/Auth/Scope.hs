@@ -7,15 +7,15 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 -- |
--- Module      : Network.Google.Auth.Scope
+-- Module      : Gogol.Auth.Scope
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
--- Helpers for specifying and using 'Scope's with "Network.Google".
-module Network.Google.Auth.Scope where
+-- Helpers for specifying and using 'Scope's with "Gogol".
+module Gogol.Auth.Scope where
 
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Char8 as BS8
@@ -28,8 +28,8 @@ import Data.Type.Equality (type (==))
 import Data.Typeable (Proxy (..))
 import GHC.Exts (Constraint)
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
-import Network.Google.Internal.Auth (Credentials)
-import Network.Google.Prelude
+import Gogol.Internal.Auth (Credentials)
+import Gogol.Prelude
   ( GoogleRequest (..),
     OAuthScope (..),
   )

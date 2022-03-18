@@ -2,7 +2,7 @@
 {-# LANGUAGE RecordWildCards #-}
 
 -- |
--- Module      : Network.Google.Auth.ApplicationDefaultCredentials
+-- Module      : Gogol.Auth.ApplicationDefaultCredentials
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -16,7 +16,7 @@
 -- that is deployed to Google App Engine or Google Compute Engine virtual machines.
 --
 -- /See:/ <https://developers.google.com/identity/protocols/application-default-credentials Application Default Documentation>.
-module Network.Google.Auth.ApplicationDefault where
+module Gogol.Auth.ApplicationDefault where
 
 import Control.Applicative
 import Control.Exception.Lens (catching, throwingM)
@@ -28,8 +28,8 @@ import Data.Aeson.Types (parseEither)
 import qualified Data.ByteString.Lazy as LBS
 import Data.Maybe (maybe)
 import qualified Data.Text as Text
-import Network.Google.Compute.Metadata (isGCE)
-import Network.Google.Internal.Auth
+import Gogol.Compute.Metadata (isGCE)
+import Gogol.Internal.Auth
 import Network.HTTP.Conduit (Manager)
 import System.Directory (createDirectoryIfMissing, doesFileExist, getHomeDirectory)
 import System.Environment (lookupEnv)
@@ -78,7 +78,7 @@ defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFile)
 -- The specified 'Scope's are used to authorize any @service_account@ that is
 -- found with the appropriate OAuth2 scopes, otherwise they are not used. See the
 -- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
+-- scopes, such as @Gogol.Compute.computeScope@.
 --
 -- /See:/ <https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials>
 getApplicationDefault ::
@@ -98,7 +98,7 @@ getApplicationDefault m =
 -- The specified 'Scope's are used to authorize any @service_account@ that is
 -- found with the appropriate scopes, otherwise they are not used. See the
 -- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
+-- scopes, such as @Gogol.Compute.computeScope@.
 --
 -- /See:/ 'cloudSDKConfigPath', 'defaultCredentialsPath'.
 fromWellKnownPath :: (MonadIO m, MonadCatch m) => m (Credentials s)
@@ -117,7 +117,7 @@ fromWellKnownPath = do
 -- The specified 'Scope's are used to authorize any @service_account@ that is
 -- found with the appropriate scopes, otherwise they are not used. See the
 -- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
+-- scopes, such as @Gogol.Compute.computeScope@.
 fromFilePath :: (MonadIO m, MonadCatch m) => FilePath -> m (Credentials s)
 fromFilePath f = do
   p <- liftIO (doesFileExist f)

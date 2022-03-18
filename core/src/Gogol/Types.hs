@@ -14,13 +14,13 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 -- |
--- Module      : Network.Google.Types
+-- Module      : Gogol.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay <brendan.g.hay@gmail.com>
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Types where
+module Gogol.Types where
 
 import Control.Exception.Lens (exception)
 import Control.Lens

@@ -1,19 +1,19 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- |
--- Module      : Network.Google.Internal.Multipart
+-- Module      : Gogol.Internal.Multipart
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Internal.Multipart where
+module Gogol.Internal.Multipart where
 
 import Control.Monad.IO.Class (MonadIO (..))
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import Data.ByteString.Builder.Extra (byteStringCopy)
-import Network.Google.Types (GBody (..))
+import Gogol.Types (GBody (..))
 import Network.HTTP.Client
 import Network.HTTP.Client.MultipartFormData (webkitBoundary)
 import Network.HTTP.Media (RenderHeader (..))

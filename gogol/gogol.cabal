@@ -22,8 +22,8 @@ description:
   category on Hackage for supported services.
   .
   To get started, import the desired @gogol-*@ library (such as
-  <http://hackage.haskell.org/package/gogol-gmail/docs/Network-Google-Gmail.html Network.Google.Gmail>)
-  and @Network.Google@ from this package.
+  <http://hackage.haskell.org/package/gogol-gmail/docs/Gogol-Gmail.html Gogol.Gmail>)
+  and @Gogol@ from this package.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -43,20 +43,23 @@ library
     -fwarn-unused-packages
 
   exposed-modules:
-    Network.Google
-    Network.Google.Auth
-    Network.Google.Auth.ApplicationDefault
-    Network.Google.Auth.InstalledApplication
-    Network.Google.Auth.Scope
-    Network.Google.Auth.ServiceAccount
-    Network.Google.Auth.TokenFile
-    Network.Google.Compute.Metadata
-    Network.Google.Env
-    Network.Google.Internal.Auth
-    Network.Google.Internal.Body
-    Network.Google.Internal.HTTP
-    Network.Google.Internal.Logger
-    Network.Google.Internal.Multipart
+    Gogol
+    Gogol.Auth
+    Gogol.Auth.ApplicationDefault
+    Gogol.Auth.InstalledApplication
+    Gogol.Auth.Scope
+    Gogol.Auth.ServiceAccount
+    Gogol.Auth.TokenFile
+    Gogol.Compute.Metadata
+    Gogol.Env
+    Gogol.Internal.Auth
+    Gogol.Internal.Body
+    Gogol.Internal.HTTP
+    Gogol.Internal.Logger
+    Gogol.Internal.Multipart
+
+  reexported-modules:
+    Gogol.Prelude, Gogol.Types, Gogol.Data.Base64, Gogol.Data.JSON, Gogol.Data.Time
 
   build-depends:
     , aeson             >=0.8

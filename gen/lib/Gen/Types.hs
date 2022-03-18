@@ -198,7 +198,7 @@ serviceImports s =
     }
 
 tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
-tocNS = mappend "Network.Google" . mkNS . view sCanonicalName
+tocNS = mappend "Gogol" . mkNS . view sCanonicalName
 typesNS = (<> "Types") . tocNS
 prodNS = (<> "Internal.Product") . tocNS
 sumNS = (<> "Internal.Sum") . tocNS
@@ -332,7 +332,7 @@ initial s = Memo s mempty mempty res core mempty mempty mempty
       Set.fromList
         . mapMaybe (view iId)
         $ Map.elems (s ^. dSchemas)
-    -- Types available in Network.Google.Prelude.
+    -- Types available in Gogol.Prelude.
     core =
       Map.fromList
         [ ("GBody", SLit requiredInfo RqBody),
