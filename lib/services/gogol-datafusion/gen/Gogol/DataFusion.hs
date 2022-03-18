@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,249 +36,249 @@
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference>
 module Gogol.DataFusion
-  ( -- * Configuration
-    dataFusionService,
+    (
+    -- * Configuration
+      dataFusionService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** datafusion.projects.locations.get
-    DataFusionProjectsLocationsGetResource,
-    newDataFusionProjectsLocationsGet,
-    DataFusionProjectsLocationsGet,
+    , DataFusionProjectsLocationsGetResource
+    , newDataFusionProjectsLocationsGet
+    , DataFusionProjectsLocationsGet
 
     -- ** datafusion.projects.locations.instances.create
-    DataFusionProjectsLocationsInstancesCreateResource,
-    newDataFusionProjectsLocationsInstancesCreate,
-    DataFusionProjectsLocationsInstancesCreate,
+    , DataFusionProjectsLocationsInstancesCreateResource
+    , newDataFusionProjectsLocationsInstancesCreate
+    , DataFusionProjectsLocationsInstancesCreate
 
     -- ** datafusion.projects.locations.instances.delete
-    DataFusionProjectsLocationsInstancesDeleteResource,
-    newDataFusionProjectsLocationsInstancesDelete,
-    DataFusionProjectsLocationsInstancesDelete,
+    , DataFusionProjectsLocationsInstancesDeleteResource
+    , newDataFusionProjectsLocationsInstancesDelete
+    , DataFusionProjectsLocationsInstancesDelete
 
     -- ** datafusion.projects.locations.instances.get
-    DataFusionProjectsLocationsInstancesGetResource,
-    newDataFusionProjectsLocationsInstancesGet,
-    DataFusionProjectsLocationsInstancesGet,
+    , DataFusionProjectsLocationsInstancesGetResource
+    , newDataFusionProjectsLocationsInstancesGet
+    , DataFusionProjectsLocationsInstancesGet
 
     -- ** datafusion.projects.locations.instances.getIamPolicy
-    DataFusionProjectsLocationsInstancesGetIamPolicyResource,
-    newDataFusionProjectsLocationsInstancesGetIamPolicy,
-    DataFusionProjectsLocationsInstancesGetIamPolicy,
+    , DataFusionProjectsLocationsInstancesGetIamPolicyResource
+    , newDataFusionProjectsLocationsInstancesGetIamPolicy
+    , DataFusionProjectsLocationsInstancesGetIamPolicy
 
     -- ** datafusion.projects.locations.instances.list
-    DataFusionProjectsLocationsInstancesListResource,
-    newDataFusionProjectsLocationsInstancesList,
-    DataFusionProjectsLocationsInstancesList,
+    , DataFusionProjectsLocationsInstancesListResource
+    , newDataFusionProjectsLocationsInstancesList
+    , DataFusionProjectsLocationsInstancesList
 
     -- ** datafusion.projects.locations.instances.patch
-    DataFusionProjectsLocationsInstancesPatchResource,
-    newDataFusionProjectsLocationsInstancesPatch,
-    DataFusionProjectsLocationsInstancesPatch,
+    , DataFusionProjectsLocationsInstancesPatchResource
+    , newDataFusionProjectsLocationsInstancesPatch
+    , DataFusionProjectsLocationsInstancesPatch
 
     -- ** datafusion.projects.locations.instances.restart
-    DataFusionProjectsLocationsInstancesRestartResource,
-    newDataFusionProjectsLocationsInstancesRestart,
-    DataFusionProjectsLocationsInstancesRestart,
+    , DataFusionProjectsLocationsInstancesRestartResource
+    , newDataFusionProjectsLocationsInstancesRestart
+    , DataFusionProjectsLocationsInstancesRestart
 
     -- ** datafusion.projects.locations.instances.setIamPolicy
-    DataFusionProjectsLocationsInstancesSetIamPolicyResource,
-    newDataFusionProjectsLocationsInstancesSetIamPolicy,
-    DataFusionProjectsLocationsInstancesSetIamPolicy,
+    , DataFusionProjectsLocationsInstancesSetIamPolicyResource
+    , newDataFusionProjectsLocationsInstancesSetIamPolicy
+    , DataFusionProjectsLocationsInstancesSetIamPolicy
 
     -- ** datafusion.projects.locations.instances.testIamPermissions
-    DataFusionProjectsLocationsInstancesTestIamPermissionsResource,
-    newDataFusionProjectsLocationsInstancesTestIamPermissions,
-    DataFusionProjectsLocationsInstancesTestIamPermissions,
+    , DataFusionProjectsLocationsInstancesTestIamPermissionsResource
+    , newDataFusionProjectsLocationsInstancesTestIamPermissions
+    , DataFusionProjectsLocationsInstancesTestIamPermissions
 
     -- ** datafusion.projects.locations.list
-    DataFusionProjectsLocationsListResource,
-    newDataFusionProjectsLocationsList,
-    DataFusionProjectsLocationsList,
+    , DataFusionProjectsLocationsListResource
+    , newDataFusionProjectsLocationsList
+    , DataFusionProjectsLocationsList
 
     -- ** datafusion.projects.locations.operations.cancel
-    DataFusionProjectsLocationsOperationsCancelResource,
-    newDataFusionProjectsLocationsOperationsCancel,
-    DataFusionProjectsLocationsOperationsCancel,
+    , DataFusionProjectsLocationsOperationsCancelResource
+    , newDataFusionProjectsLocationsOperationsCancel
+    , DataFusionProjectsLocationsOperationsCancel
 
     -- ** datafusion.projects.locations.operations.delete
-    DataFusionProjectsLocationsOperationsDeleteResource,
-    newDataFusionProjectsLocationsOperationsDelete,
-    DataFusionProjectsLocationsOperationsDelete,
+    , DataFusionProjectsLocationsOperationsDeleteResource
+    , newDataFusionProjectsLocationsOperationsDelete
+    , DataFusionProjectsLocationsOperationsDelete
 
     -- ** datafusion.projects.locations.operations.get
-    DataFusionProjectsLocationsOperationsGetResource,
-    newDataFusionProjectsLocationsOperationsGet,
-    DataFusionProjectsLocationsOperationsGet,
+    , DataFusionProjectsLocationsOperationsGetResource
+    , newDataFusionProjectsLocationsOperationsGet
+    , DataFusionProjectsLocationsOperationsGet
 
     -- ** datafusion.projects.locations.operations.list
-    DataFusionProjectsLocationsOperationsListResource,
-    newDataFusionProjectsLocationsOperationsList,
-    DataFusionProjectsLocationsOperationsList,
+    , DataFusionProjectsLocationsOperationsListResource
+    , newDataFusionProjectsLocationsOperationsList
+    , DataFusionProjectsLocationsOperationsList
 
     -- ** datafusion.projects.locations.versions.list
-    DataFusionProjectsLocationsVersionsListResource,
-    newDataFusionProjectsLocationsVersionsList,
-    DataFusionProjectsLocationsVersionsList,
+    , DataFusionProjectsLocationsVersionsListResource
+    , newDataFusionProjectsLocationsVersionsList
+    , DataFusionProjectsLocationsVersionsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Accelerator
-    Accelerator (..),
-    newAccelerator,
+    , Accelerator (..)
+    , newAccelerator
 
     -- ** Accelerator_AcceleratorType
-    Accelerator_AcceleratorType (..),
+    , Accelerator_AcceleratorType (..)
 
     -- ** Accelerator_State
-    Accelerator_State (..),
+    , Accelerator_State (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** CryptoKeyConfig
-    CryptoKeyConfig (..),
-    newCryptoKeyConfig,
+    , CryptoKeyConfig (..)
+    , newCryptoKeyConfig
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** Instance
-    Instance (..),
-    newInstance,
+    , Instance (..)
+    , newInstance
 
     -- ** Instance_DisabledReasonItem
-    Instance_DisabledReasonItem (..),
+    , Instance_DisabledReasonItem (..)
 
     -- ** Instance_Labels
-    Instance_Labels (..),
-    newInstance_Labels,
+    , Instance_Labels (..)
+    , newInstance_Labels
 
     -- ** Instance_Options
-    Instance_Options (..),
-    newInstance_Options,
+    , Instance_Options (..)
+    , newInstance_Options
 
     -- ** Instance_State
-    Instance_State (..),
+    , Instance_State (..)
 
     -- ** Instance_Type
-    Instance_Type (..),
+    , Instance_Type (..)
 
     -- ** ListAvailableVersionsResponse
-    ListAvailableVersionsResponse (..),
-    newListAvailableVersionsResponse,
+    , ListAvailableVersionsResponse (..)
+    , newListAvailableVersionsResponse
 
     -- ** ListInstancesResponse
-    ListInstancesResponse (..),
-    newListInstancesResponse,
+    , ListInstancesResponse (..)
+    , newListInstancesResponse
 
     -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    , ListLocationsResponse (..)
+    , newListLocationsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    , Location_Labels (..)
+    , newLocation_Labels
 
     -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    , Location_Metadata (..)
+    , newLocation_Metadata
 
     -- ** NetworkConfig
-    NetworkConfig (..),
-    newNetworkConfig,
+    , NetworkConfig (..)
+    , newNetworkConfig
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OperationMetadata
-    OperationMetadata (..),
-    newOperationMetadata,
+    , OperationMetadata (..)
+    , newOperationMetadata
 
     -- ** OperationMetadata_AdditionalStatus
-    OperationMetadata_AdditionalStatus (..),
-    newOperationMetadata_AdditionalStatus,
+    , OperationMetadata_AdditionalStatus (..)
+    , newOperationMetadata_AdditionalStatus
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** RestartInstanceRequest
-    RestartInstanceRequest (..),
-    newRestartInstanceRequest,
+    , RestartInstanceRequest (..)
+    , newRestartInstanceRequest
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** Version
-    Version (..),
-    newVersion,
+    , Version (..)
+    , newVersion
 
     -- ** Version_Type
-    Version_Type (..),
-  )
-where
+    , Version_Type (..)
+    ) where
 
 import Gogol.DataFusion.Projects.Locations.Get
 import Gogol.DataFusion.Projects.Locations.Instances.Create
