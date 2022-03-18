@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,37 +30,37 @@
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Web Fonts Developer API Reference>
 module Gogol.Fonts
-    (
-    -- * Configuration
-      fontsService
+  ( -- * Configuration
+    fontsService,
 
     -- * Resources
 
     -- ** webfonts.webfonts.list
-    , WebfontsWebfontsListResource
-    , newWebfontsWebfontsList
-    , WebfontsWebfontsList
+    WebfontsWebfontsListResource,
+    newWebfontsWebfontsList,
+    WebfontsWebfontsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Webfont
-    , Webfont (..)
-    , newWebfont
+    Webfont (..),
+    newWebfont,
 
     -- ** Webfont_Files
-    , Webfont_Files (..)
-    , newWebfont_Files
+    Webfont_Files (..),
+    newWebfont_Files,
 
     -- ** WebfontList
-    , WebfontList (..)
-    , newWebfontList
+    WebfontList (..),
+    newWebfontList,
 
     -- ** WebfontsListSort
-    , WebfontsListSort (..)
-    ) where
+    WebfontsListSort (..),
+  )
+where
 
 import Gogol.Fonts.Types
 import Gogol.Fonts.Webfonts.List
