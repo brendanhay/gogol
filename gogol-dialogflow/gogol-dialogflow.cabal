@@ -1,150 +1,168 @@
-name:                  gogol-dialogflow
-version:               0.5.0
-synopsis:              Google Dialogflow SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-dialogflow
+version:            0.5.0
+synopsis:           Google Dialogflow SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Builds conversational interfaces (for example, chatbots, and
-    voice-powered apps and devices).
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v3@
-    of the API.
+  Builds conversational interfaces (for example, chatbots, and voice-powered apps and devices).
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v3@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-dialogflow
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.DialogFlow
-        , Network.Google.DialogFlow.Types
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.ContinuousTestResults.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Start
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Stop
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.LookupEnvironmentHistory
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.RunContinuousTest
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.DetectIntent
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.FulfillIntent
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.MatchIntent
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Export
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Export
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.GetValidationResult
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Import
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Train
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Validate
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Load
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.GetValidationResult
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Restore
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.DetectIntent
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.FulfillIntent
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.MatchIntent
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.BatchDelete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.BatchRun
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.CalculateCoverage
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Export
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Import
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Results.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Run
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Validate
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Operations.Cancel
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Operations.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.Operations.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Create
-        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Get
-        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.List
-        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Operations.Cancel
-        , Network.Google.Resource.DialogFlow.Projects.Operations.Get
-        , Network.Google.Resource.DialogFlow.Projects.Operations.List
+  exposed-modules:
+    Network.Google.DialogFlow
+    Network.Google.DialogFlow.Projects.Locations.Agents.Changelogs.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Changelogs.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.EntityTypes.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.EntityTypes.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.EntityTypes.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.EntityTypes.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.EntityTypes.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.ContinuousTestResults.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.DeployFlow
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Deployments.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Deployments.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Experiments.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Start
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Stop
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.LookupEnvironmentHistory
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.RunContinuousTest
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.DetectIntent
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.FulfillIntent
+    Network.Google.DialogFlow.Projects.Locations.Agents.Environments.Sessions.MatchIntent
+    Network.Google.DialogFlow.Projects.Locations.Agents.Export
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Export
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.GetValidationResult
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Import
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Pages.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Pages.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Pages.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Pages.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Train
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Validate
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Versions.CompareVersions
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Versions.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Versions.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Versions.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Versions.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Versions.Load
+    Network.Google.DialogFlow.Projects.Locations.Agents.Flows.Versions.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.GetValidationResult
+    Network.Google.DialogFlow.Projects.Locations.Agents.Intents.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Intents.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Intents.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Intents.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Intents.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Restore
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.DetectIntent
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.FulfillIntent
+    Network.Google.DialogFlow.Projects.Locations.Agents.Sessions.MatchIntent
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.BatchDelete
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.BatchRun
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.CalculateCoverage
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Export
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Import
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Patch
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Results.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.TestCases.Run
+    Network.Google.DialogFlow.Projects.Locations.Agents.Validate
+    Network.Google.DialogFlow.Projects.Locations.Agents.Webhooks.Create
+    Network.Google.DialogFlow.Projects.Locations.Agents.Webhooks.Delete
+    Network.Google.DialogFlow.Projects.Locations.Agents.Webhooks.Get
+    Network.Google.DialogFlow.Projects.Locations.Agents.Webhooks.List
+    Network.Google.DialogFlow.Projects.Locations.Agents.Webhooks.Patch
+    Network.Google.DialogFlow.Projects.Locations.Get
+    Network.Google.DialogFlow.Projects.Locations.List
+    Network.Google.DialogFlow.Projects.Locations.Operations.Cancel
+    Network.Google.DialogFlow.Projects.Locations.Operations.Get
+    Network.Google.DialogFlow.Projects.Locations.Operations.List
+    Network.Google.DialogFlow.Projects.Locations.SecuritySettings.Create
+    Network.Google.DialogFlow.Projects.Locations.SecuritySettings.Delete
+    Network.Google.DialogFlow.Projects.Locations.SecuritySettings.Get
+    Network.Google.DialogFlow.Projects.Locations.SecuritySettings.List
+    Network.Google.DialogFlow.Projects.Locations.SecuritySettings.Patch
+    Network.Google.DialogFlow.Projects.Operations.Cancel
+    Network.Google.DialogFlow.Projects.Operations.Get
+    Network.Google.DialogFlow.Projects.Operations.List
+    Network.Google.DialogFlow.Types
 
-    other-modules:
-          Network.Google.DialogFlow.Types.Product
-        , Network.Google.DialogFlow.Types.Sum
+  other-modules:
+    Network.Google.DialogFlow.Internal.Product
+    Network.Google.DialogFlow.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
