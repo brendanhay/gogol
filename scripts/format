@@ -34,19 +34,19 @@ case "${1:-}" in
 esac
 
 targets=(
-  gogol
-  core
+  lib/gogol
+  lib/gogol-core
   gen
   examples
 )
 
 if [ "$all" = "true" ]; then
-  targets+=(gogol-*)
+  targets+=(lib/services/gogol-*)
 fi
 
 say "Formatting shell"
 
-find scripts gen/scripts -type f -print0 |
+find scripts -type f -print0 |
   xargs -0 shfmt -s -i 2 -ln bash -w
 
 say "Formatting nix"
