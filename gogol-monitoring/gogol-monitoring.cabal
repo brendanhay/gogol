@@ -1,99 +1,106 @@
-name:                  gogol-monitoring
-version:               0.5.0
-synopsis:              Google Cloud Monitoring SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-monitoring
+version:            0.5.0
+synopsis:           Google Cloud Monitoring SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manages your Cloud Monitoring data and configurations. Most projects
-    must be associated with a Workspace, with a few exceptions as noted on
-    the individual method pages. The table entries below are presented in
-    alphabetical order, not in order of common use. For explanations of the
-    concepts found in the table entries, read the Cloud Monitoring
-    documentation (https:\/\/cloud.google.com\/monitoring\/docs).
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v3@
-    of the API.
+  Manages your Cloud Monitoring data and configurations.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v3@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-monitoring
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Monitoring
-        , Network.Google.Monitoring.Types
-        , Network.Google.Resource.Monitoring.Folders.TimeSeries.List
-        , Network.Google.Resource.Monitoring.Organizations.TimeSeries.List
-        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Create
-        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Delete
-        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Get
-        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.List
-        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Patch
-        , Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
-        , Network.Google.Resource.Monitoring.Projects.Groups.Create
-        , Network.Google.Resource.Monitoring.Projects.Groups.Delete
-        , Network.Google.Resource.Monitoring.Projects.Groups.Get
-        , Network.Google.Resource.Monitoring.Projects.Groups.List
-        , Network.Google.Resource.Monitoring.Projects.Groups.Members.List
-        , Network.Google.Resource.Monitoring.Projects.Groups.Update
-        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
-        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
-        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Get
-        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
-        , Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.Get
-        , Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.List
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannelDescriptors.Get
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannelDescriptors.List
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Create
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Delete
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Get
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.GetVerificationCode
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.List
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Patch
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.SendVerificationCode
-        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Verify
-        , Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
-        , Network.Google.Resource.Monitoring.Projects.TimeSeries.List
-        , Network.Google.Resource.Monitoring.Projects.TimeSeries.Query
-        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Create
-        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Delete
-        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Get
-        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.List
-        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Patch
-        , Network.Google.Resource.Monitoring.Services.Create
-        , Network.Google.Resource.Monitoring.Services.Delete
-        , Network.Google.Resource.Monitoring.Services.Get
-        , Network.Google.Resource.Monitoring.Services.List
-        , Network.Google.Resource.Monitoring.Services.Patch
-        , Network.Google.Resource.Monitoring.Services.ServiceLevelObjectives.Create
-        , Network.Google.Resource.Monitoring.Services.ServiceLevelObjectives.Delete
-        , Network.Google.Resource.Monitoring.Services.ServiceLevelObjectives.Get
-        , Network.Google.Resource.Monitoring.Services.ServiceLevelObjectives.List
-        , Network.Google.Resource.Monitoring.Services.ServiceLevelObjectives.Patch
-        , Network.Google.Resource.Monitoring.UptimeCheckIPs.List
+  exposed-modules:
+    Network.Google.Monitoring
+    Network.Google.Monitoring.Folders.TimeSeries.List
+    Network.Google.Monitoring.Organizations.TimeSeries.List
+    Network.Google.Monitoring.Projects.AlertPolicies.Create
+    Network.Google.Monitoring.Projects.AlertPolicies.Delete
+    Network.Google.Monitoring.Projects.AlertPolicies.Get
+    Network.Google.Monitoring.Projects.AlertPolicies.List
+    Network.Google.Monitoring.Projects.AlertPolicies.Patch
+    Network.Google.Monitoring.Projects.CollectdTimeSeries.Create
+    Network.Google.Monitoring.Projects.Groups.Create
+    Network.Google.Monitoring.Projects.Groups.Delete
+    Network.Google.Monitoring.Projects.Groups.Get
+    Network.Google.Monitoring.Projects.Groups.List
+    Network.Google.Monitoring.Projects.Groups.Members.List
+    Network.Google.Monitoring.Projects.Groups.Update
+    Network.Google.Monitoring.Projects.MetricDescriptors.Create
+    Network.Google.Monitoring.Projects.MetricDescriptors.Delete
+    Network.Google.Monitoring.Projects.MetricDescriptors.Get
+    Network.Google.Monitoring.Projects.MetricDescriptors.List
+    Network.Google.Monitoring.Projects.MonitoredResourceDescriptors.Get
+    Network.Google.Monitoring.Projects.MonitoredResourceDescriptors.List
+    Network.Google.Monitoring.Projects.NotificationChannelDescriptors.Get
+    Network.Google.Monitoring.Projects.NotificationChannelDescriptors.List
+    Network.Google.Monitoring.Projects.NotificationChannels.Create
+    Network.Google.Monitoring.Projects.NotificationChannels.Delete
+    Network.Google.Monitoring.Projects.NotificationChannels.Get
+    Network.Google.Monitoring.Projects.NotificationChannels.GetVerificationCode
+    Network.Google.Monitoring.Projects.NotificationChannels.List
+    Network.Google.Monitoring.Projects.NotificationChannels.Patch
+    Network.Google.Monitoring.Projects.NotificationChannels.SendVerificationCode
+    Network.Google.Monitoring.Projects.NotificationChannels.Verify
+    Network.Google.Monitoring.Projects.TimeSeries.Create
+    Network.Google.Monitoring.Projects.TimeSeries.CreateService
+    Network.Google.Monitoring.Projects.TimeSeries.List
+    Network.Google.Monitoring.Projects.TimeSeries.Query
+    Network.Google.Monitoring.Projects.UptimeCheckConfigs.Create
+    Network.Google.Monitoring.Projects.UptimeCheckConfigs.Delete
+    Network.Google.Monitoring.Projects.UptimeCheckConfigs.Get
+    Network.Google.Monitoring.Projects.UptimeCheckConfigs.List
+    Network.Google.Monitoring.Projects.UptimeCheckConfigs.Patch
+    Network.Google.Monitoring.Services.Create
+    Network.Google.Monitoring.Services.Delete
+    Network.Google.Monitoring.Services.Get
+    Network.Google.Monitoring.Services.List
+    Network.Google.Monitoring.Services.Patch
+    Network.Google.Monitoring.Services.ServiceLevelObjectives.Create
+    Network.Google.Monitoring.Services.ServiceLevelObjectives.Delete
+    Network.Google.Monitoring.Services.ServiceLevelObjectives.Get
+    Network.Google.Monitoring.Services.ServiceLevelObjectives.List
+    Network.Google.Monitoring.Services.ServiceLevelObjectives.Patch
+    Network.Google.Monitoring.Types
+    Network.Google.Monitoring.UptimeCheckIps.List
 
-    other-modules:
-          Network.Google.Monitoring.Types.Product
-        , Network.Google.Monitoring.Types.Sum
+  other-modules:
+    Network.Google.Monitoring.Internal.Product
+    Network.Google.Monitoring.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
