@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,230 +36,230 @@
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference>
 module Gogol.AdSenseHost
-  ( -- * Configuration
-    adSenseHostService,
+    (
+    -- * Configuration
+      adSenseHostService
 
     -- * OAuth Scopes
-    adSenseHostScope,
+    , adSenseHostScope
 
     -- * Resources
 
     -- ** adsensehost.accounts.adclients.get
-    AdSenseHostAccountsAdclientsGetResource,
-    newAdSenseHostAccountsAdclientsGet,
-    AdSenseHostAccountsAdclientsGet,
+    , AdSenseHostAccountsAdclientsGetResource
+    , newAdSenseHostAccountsAdclientsGet
+    , AdSenseHostAccountsAdclientsGet
 
     -- ** adsensehost.accounts.adclients.list
-    AdSenseHostAccountsAdclientsListResource,
-    newAdSenseHostAccountsAdclientsList,
-    AdSenseHostAccountsAdclientsList,
+    , AdSenseHostAccountsAdclientsListResource
+    , newAdSenseHostAccountsAdclientsList
+    , AdSenseHostAccountsAdclientsList
 
     -- ** adsensehost.accounts.adunits.delete
-    AdSenseHostAccountsAdunitsDeleteResource,
-    newAdSenseHostAccountsAdunitsDelete,
-    AdSenseHostAccountsAdunitsDelete,
+    , AdSenseHostAccountsAdunitsDeleteResource
+    , newAdSenseHostAccountsAdunitsDelete
+    , AdSenseHostAccountsAdunitsDelete
 
     -- ** adsensehost.accounts.adunits.get
-    AdSenseHostAccountsAdunitsGetResource,
-    newAdSenseHostAccountsAdunitsGet,
-    AdSenseHostAccountsAdunitsGet,
+    , AdSenseHostAccountsAdunitsGetResource
+    , newAdSenseHostAccountsAdunitsGet
+    , AdSenseHostAccountsAdunitsGet
 
     -- ** adsensehost.accounts.adunits.getAdCode
-    AdSenseHostAccountsAdunitsGetAdCodeResource,
-    newAdSenseHostAccountsAdunitsGetAdCode,
-    AdSenseHostAccountsAdunitsGetAdCode,
+    , AdSenseHostAccountsAdunitsGetAdCodeResource
+    , newAdSenseHostAccountsAdunitsGetAdCode
+    , AdSenseHostAccountsAdunitsGetAdCode
 
     -- ** adsensehost.accounts.adunits.insert
-    AdSenseHostAccountsAdunitsInsertResource,
-    newAdSenseHostAccountsAdunitsInsert,
-    AdSenseHostAccountsAdunitsInsert,
+    , AdSenseHostAccountsAdunitsInsertResource
+    , newAdSenseHostAccountsAdunitsInsert
+    , AdSenseHostAccountsAdunitsInsert
 
     -- ** adsensehost.accounts.adunits.list
-    AdSenseHostAccountsAdunitsListResource,
-    newAdSenseHostAccountsAdunitsList,
-    AdSenseHostAccountsAdunitsList,
+    , AdSenseHostAccountsAdunitsListResource
+    , newAdSenseHostAccountsAdunitsList
+    , AdSenseHostAccountsAdunitsList
 
     -- ** adsensehost.accounts.adunits.patch
-    AdSenseHostAccountsAdunitsPatchResource,
-    newAdSenseHostAccountsAdunitsPatch,
-    AdSenseHostAccountsAdunitsPatch,
+    , AdSenseHostAccountsAdunitsPatchResource
+    , newAdSenseHostAccountsAdunitsPatch
+    , AdSenseHostAccountsAdunitsPatch
 
     -- ** adsensehost.accounts.adunits.update
-    AdSenseHostAccountsAdunitsUpdateResource,
-    newAdSenseHostAccountsAdunitsUpdate,
-    AdSenseHostAccountsAdunitsUpdate,
+    , AdSenseHostAccountsAdunitsUpdateResource
+    , newAdSenseHostAccountsAdunitsUpdate
+    , AdSenseHostAccountsAdunitsUpdate
 
     -- ** adsensehost.accounts.get
-    AdSenseHostAccountsGetResource,
-    newAdSenseHostAccountsGet,
-    AdSenseHostAccountsGet,
+    , AdSenseHostAccountsGetResource
+    , newAdSenseHostAccountsGet
+    , AdSenseHostAccountsGet
 
     -- ** adsensehost.accounts.list
-    AdSenseHostAccountsListResource,
-    newAdSenseHostAccountsList,
-    AdSenseHostAccountsList,
+    , AdSenseHostAccountsListResource
+    , newAdSenseHostAccountsList
+    , AdSenseHostAccountsList
 
     -- ** adsensehost.accounts.reports.generate
-    AdSenseHostAccountsReportsGenerateResource,
-    newAdSenseHostAccountsReportsGenerate,
-    AdSenseHostAccountsReportsGenerate,
+    , AdSenseHostAccountsReportsGenerateResource
+    , newAdSenseHostAccountsReportsGenerate
+    , AdSenseHostAccountsReportsGenerate
 
     -- ** adsensehost.adclients.get
-    AdSenseHostAdclientsGetResource,
-    newAdSenseHostAdclientsGet,
-    AdSenseHostAdclientsGet,
+    , AdSenseHostAdclientsGetResource
+    , newAdSenseHostAdclientsGet
+    , AdSenseHostAdclientsGet
 
     -- ** adsensehost.adclients.list
-    AdSenseHostAdclientsListResource,
-    newAdSenseHostAdclientsList,
-    AdSenseHostAdclientsList,
+    , AdSenseHostAdclientsListResource
+    , newAdSenseHostAdclientsList
+    , AdSenseHostAdclientsList
 
     -- ** adsensehost.associationsessions.start
-    AdSenseHostAssociationsessionsStartResource,
-    newAdSenseHostAssociationsessionsStart,
-    AdSenseHostAssociationsessionsStart,
+    , AdSenseHostAssociationsessionsStartResource
+    , newAdSenseHostAssociationsessionsStart
+    , AdSenseHostAssociationsessionsStart
 
     -- ** adsensehost.associationsessions.verify
-    AdSenseHostAssociationsessionsVerifyResource,
-    newAdSenseHostAssociationsessionsVerify,
-    AdSenseHostAssociationsessionsVerify,
+    , AdSenseHostAssociationsessionsVerifyResource
+    , newAdSenseHostAssociationsessionsVerify
+    , AdSenseHostAssociationsessionsVerify
 
     -- ** adsensehost.customchannels.delete
-    AdSenseHostCustomchannelsDeleteResource,
-    newAdSenseHostCustomchannelsDelete,
-    AdSenseHostCustomchannelsDelete,
+    , AdSenseHostCustomchannelsDeleteResource
+    , newAdSenseHostCustomchannelsDelete
+    , AdSenseHostCustomchannelsDelete
 
     -- ** adsensehost.customchannels.get
-    AdSenseHostCustomchannelsGetResource,
-    newAdSenseHostCustomchannelsGet,
-    AdSenseHostCustomchannelsGet,
+    , AdSenseHostCustomchannelsGetResource
+    , newAdSenseHostCustomchannelsGet
+    , AdSenseHostCustomchannelsGet
 
     -- ** adsensehost.customchannels.insert
-    AdSenseHostCustomchannelsInsertResource,
-    newAdSenseHostCustomchannelsInsert,
-    AdSenseHostCustomchannelsInsert,
+    , AdSenseHostCustomchannelsInsertResource
+    , newAdSenseHostCustomchannelsInsert
+    , AdSenseHostCustomchannelsInsert
 
     -- ** adsensehost.customchannels.list
-    AdSenseHostCustomchannelsListResource,
-    newAdSenseHostCustomchannelsList,
-    AdSenseHostCustomchannelsList,
+    , AdSenseHostCustomchannelsListResource
+    , newAdSenseHostCustomchannelsList
+    , AdSenseHostCustomchannelsList
 
     -- ** adsensehost.customchannels.patch
-    AdSenseHostCustomchannelsPatchResource,
-    newAdSenseHostCustomchannelsPatch,
-    AdSenseHostCustomchannelsPatch,
+    , AdSenseHostCustomchannelsPatchResource
+    , newAdSenseHostCustomchannelsPatch
+    , AdSenseHostCustomchannelsPatch
 
     -- ** adsensehost.customchannels.update
-    AdSenseHostCustomchannelsUpdateResource,
-    newAdSenseHostCustomchannelsUpdate,
-    AdSenseHostCustomchannelsUpdate,
+    , AdSenseHostCustomchannelsUpdateResource
+    , newAdSenseHostCustomchannelsUpdate
+    , AdSenseHostCustomchannelsUpdate
 
     -- ** adsensehost.reports.generate
-    AdSenseHostReportsGenerateResource,
-    newAdSenseHostReportsGenerate,
-    AdSenseHostReportsGenerate,
+    , AdSenseHostReportsGenerateResource
+    , newAdSenseHostReportsGenerate
+    , AdSenseHostReportsGenerate
 
     -- ** adsensehost.urlchannels.delete
-    AdSenseHostUrlchannelsDeleteResource,
-    newAdSenseHostUrlchannelsDelete,
-    AdSenseHostUrlchannelsDelete,
+    , AdSenseHostUrlchannelsDeleteResource
+    , newAdSenseHostUrlchannelsDelete
+    , AdSenseHostUrlchannelsDelete
 
     -- ** adsensehost.urlchannels.insert
-    AdSenseHostUrlchannelsInsertResource,
-    newAdSenseHostUrlchannelsInsert,
-    AdSenseHostUrlchannelsInsert,
+    , AdSenseHostUrlchannelsInsertResource
+    , newAdSenseHostUrlchannelsInsert
+    , AdSenseHostUrlchannelsInsert
 
     -- ** adsensehost.urlchannels.list
-    AdSenseHostUrlchannelsListResource,
-    newAdSenseHostUrlchannelsList,
-    AdSenseHostUrlchannelsList,
+    , AdSenseHostUrlchannelsListResource
+    , newAdSenseHostUrlchannelsList
+    , AdSenseHostUrlchannelsList
 
     -- * Types
 
     -- ** Account
-    Account (..),
-    newAccount,
+    , Account (..)
+    , newAccount
 
     -- ** Accounts
-    Accounts (..),
-    newAccounts,
+    , Accounts (..)
+    , newAccounts
 
     -- ** AdClient
-    AdClient (..),
-    newAdClient,
+    , AdClient (..)
+    , newAdClient
 
     -- ** AdClients
-    AdClients (..),
-    newAdClients,
+    , AdClients (..)
+    , newAdClients
 
     -- ** AdCode
-    AdCode (..),
-    newAdCode,
+    , AdCode (..)
+    , newAdCode
 
     -- ** AdStyle
-    AdStyle (..),
-    newAdStyle,
+    , AdStyle (..)
+    , newAdStyle
 
     -- ** AdStyle_Colors
-    AdStyle_Colors (..),
-    newAdStyle_Colors,
+    , AdStyle_Colors (..)
+    , newAdStyle_Colors
 
     -- ** AdStyle_Font
-    AdStyle_Font (..),
-    newAdStyle_Font,
+    , AdStyle_Font (..)
+    , newAdStyle_Font
 
     -- ** AdUnit
-    AdUnit (..),
-    newAdUnit,
+    , AdUnit (..)
+    , newAdUnit
 
     -- ** AdUnit_ContentAdsSettings
-    AdUnit_ContentAdsSettings (..),
-    newAdUnit_ContentAdsSettings,
+    , AdUnit_ContentAdsSettings (..)
+    , newAdUnit_ContentAdsSettings
 
     -- ** AdUnit_ContentAdsSettings_BackupOption
-    AdUnit_ContentAdsSettings_BackupOption (..),
-    newAdUnit_ContentAdsSettings_BackupOption,
+    , AdUnit_ContentAdsSettings_BackupOption (..)
+    , newAdUnit_ContentAdsSettings_BackupOption
 
     -- ** AdUnit_MobileContentAdsSettings
-    AdUnit_MobileContentAdsSettings (..),
-    newAdUnit_MobileContentAdsSettings,
+    , AdUnit_MobileContentAdsSettings (..)
+    , newAdUnit_MobileContentAdsSettings
 
     -- ** AdUnits
-    AdUnits (..),
-    newAdUnits,
+    , AdUnits (..)
+    , newAdUnits
 
     -- ** AssociationSession
-    AssociationSession (..),
-    newAssociationSession,
+    , AssociationSession (..)
+    , newAssociationSession
 
     -- ** CustomChannel
-    CustomChannel (..),
-    newCustomChannel,
+    , CustomChannel (..)
+    , newCustomChannel
 
     -- ** CustomChannels
-    CustomChannels (..),
-    newCustomChannels,
+    , CustomChannels (..)
+    , newCustomChannels
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** Report_HeadersItem
-    Report_HeadersItem (..),
-    newReport_HeadersItem,
+    , Report_HeadersItem (..)
+    , newReport_HeadersItem
 
     -- ** UrlChannel
-    UrlChannel (..),
-    newUrlChannel,
+    , UrlChannel (..)
+    , newUrlChannel
 
     -- ** UrlChannels
-    UrlChannels (..),
-    newUrlChannels,
+    , UrlChannels (..)
+    , newUrlChannels
 
     -- ** AssociationsessionsStartProductCode
-    AssociationsessionsStartProductCode (..),
-  )
-where
+    , AssociationsessionsStartProductCode (..)
+    ) where
 
 import Gogol.AdSenseHost.Accounts.Adclients.Get
 import Gogol.AdSenseHost.Accounts.Adclients.List
