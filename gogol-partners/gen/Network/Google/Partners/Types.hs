@@ -1,554 +1,322 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Partners.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Partners.Types
-    (
-    -- * Service Configuration
-      partnersService
-
-    -- * LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
-
-    -- * ListUserStatesResponse
-    , ListUserStatesResponse
-    , listUserStatesResponse
-    , lusrUserStates
-    , lusrResponseMetadata
-
-    -- * EventData
-    , EventData
-    , eventData
-    , edValues
-    , edKey
-
-    -- * OfferCustomerOfferType
-    , OfferCustomerOfferType (..)
-
-    -- * HistoricalOffer
-    , HistoricalOffer
-    , historicalOffer
-    , hoCreationTime
-    , hoClientId
-    , hoStatus
-    , hoClientEmail
-    , hoAdwordsURL
-    , hoLastModifiedTime
-    , hoSenderName
-    , hoOfferCode
-    , hoOfferCountryCode
-    , hoOfferType
-    , hoClientName
-    , hoExpirationTime
-
-    -- * RequestMetadata
-    , RequestMetadata
-    , requestMetadata
-    , rmExperimentIds
-    , rmTrafficSource
-    , rmLocale
-    , rmUserOverrides
-    , rmPartnersSessionId
-
-    -- * LeadType
-    , LeadType (..)
-
-    -- * CertificationStatus
-    , CertificationStatus
-    , certificationStatus
-    , csUserCount
-    , csIsCertified
-    , csType
-    , csExamStatuses
-
-    -- * DebugInfo
-    , DebugInfo
-    , debugInfo
-    , diServiceURL
-    , diServerTraceInfo
-    , diServerInfo
-
-    -- * AvailableOfferOfferLevel
-    , AvailableOfferOfferLevel (..)
-
-    -- * OptIns
-    , OptIns
-    , optIns
-    , oiPhoneContact
-    , oiPhysicalMail
-    , oiPerformanceSuggestions
-    , oiSpecialOffers
-    , oiMarketComm
-
-    -- * LogUserEventRequestEventAction
-    , LogUserEventRequestEventAction (..)
-
-    -- * AnalyticsDataPoint
-    , AnalyticsDataPoint
-    , analyticsDataPoint
-    , adpEventCount
-    , adpEventLocations
-
-    -- * GetCompanyResponse
-    , GetCompanyResponse
-    , getCompanyResponse
-    , gcrResponseMetadata
-    , gcrCompany
-
-    -- * PublicProFile
-    , PublicProFile
-    , publicProFile
-    , ppfURL
-    , ppfDisplayImageURL
-    , ppfProFileImage
-    , ppfDisplayName
-    , ppfId
-
-    -- * ExamStatus
-    , ExamStatus
-    , examStatus
-    , esPassed
-    , esExpiration
-    , esWarning
-    , esLastPassed
-    , esTaken
-    , esExamType
-
-    -- * CertificationExamStatus
-    , CertificationExamStatus
-    , certificationExamStatus
-    , cesNumberUsersPass
-    , cesType
-
-    -- * Location
-    , Location
-    , location
-    , lLatLng
-    , lLanguageCode
-    , lSortingCode
-    , lRegionCode
-    , lAddressLine
-    , lDependentLocality
-    , lPostalCode
-    , lAddress
-    , lLocality
-    , lAdministrativeArea
-
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * TrafficSource
-    , TrafficSource
-    , trafficSource
-    , tsTrafficSubId
-    , tsTrafficSourceId
-
-    -- * ListOffersHistoryResponse
-    , ListOffersHistoryResponse
-    , listOffersHistoryResponse
-    , lohrNextPageToken
-    , lohrShowingEntireCompany
-    , lohrResponseMetadata
-    , lohrCanShowEntireCompany
-    , lohrTotalResults
-    , lohrOffers
-
-    -- * Money
-    , Money
-    , money
-    , mCurrencyCode
-    , mNanos
-    , mUnits
-
-    -- * ListCompaniesResponse
-    , ListCompaniesResponse
-    , listCompaniesResponse
-    , lcrNextPageToken
-    , lcrResponseMetadata
-    , lcrCompanies
-
-    -- * Certification
-    , Certification
-    , certification
-    , cLastAchieved
-    , cExpiration
-    , cWarning
-    , cCertificationType
-    , cAchieved
-
-    -- * RecaptchaChallenge
-    , RecaptchaChallenge
-    , recaptchaChallenge
-    , rcResponse
-    , rcId
-
-    -- * HistoricalOfferStatus
-    , HistoricalOfferStatus (..)
-
-    -- * CompanyProFileStatus
-    , CompanyProFileStatus (..)
-
-    -- * CompanyBadgeTier
-    , CompanyBadgeTier (..)
-
-    -- * CreateLeadResponse
-    , CreateLeadResponse
-    , createLeadResponse
-    , clrRecaptchaStatus
-    , clrResponseMetadata
-    , clrLead
-
-    -- * UserOverrides
-    , UserOverrides
-    , userOverrides
-    , uoIPAddress
-    , uoUserId
-
-    -- * Analytics
-    , Analytics
-    , analytics
-    , aProFileViews
-    , aEventDate
-    , aSearchViews
-    , aContacts
-
-    -- * CompanyRelationBadgeTier
-    , CompanyRelationBadgeTier (..)
-
-    -- * ResponseMetadata
-    , ResponseMetadata
-    , responseMetadata
-    , rmDebugInfo
-
-    -- * LogMessageRequest
-    , LogMessageRequest
-    , logMessageRequest
-    , lmrRequestMetadata
-    , lmrClientInfo
-    , lmrDetails
-    , lmrLevel
-
-    -- * LocalizedCompanyInfo
-    , LocalizedCompanyInfo
-    , localizedCompanyInfo
-    , lciLanguageCode
-    , lciOverview
-    , lciCountryCodes
-    , lciDisplayName
-
-    -- * CompanyRelationState
-    , CompanyRelationState (..)
-
-    -- * CountryOfferInfoOfferType
-    , CountryOfferInfoOfferType (..)
-
-    -- * RankType
-    , RankType (..)
-
-    -- * SpecializationStatusBadgeSpecializationState
-    , SpecializationStatusBadgeSpecializationState (..)
-
-    -- * AvailableOfferOfferType
-    , AvailableOfferOfferType (..)
-
-    -- * AvailableOffer
-    , AvailableOffer
-    , availableOffer
-    , aoShowSpecialOfferCopy
-    , aoQualifiedCustomer
-    , aoTerms
-    , aoQualifiedCustomersComplete
-    , aoMaxAccountAge
-    , aoName
-    , aoCountryOfferInfos
-    , aoId
-    , aoOfferType
-    , aoOfferLevel
-    , aoDescription
-    , aoAvailable
-
-    -- * SpecializationStatusBadgeSpecialization
-    , SpecializationStatusBadgeSpecialization (..)
-
-    -- * LogMessageRequestClientInfo
-    , LogMessageRequestClientInfo
-    , logMessageRequestClientInfo
-    , lmrciAddtional
-
-    -- * CompanyRelation
-    , CompanyRelation
-    , companyRelation
-    , crCreationTime
-    , crState
-    , crBadgeTier
-    , crCompanyId
-    , crPrimaryAddress
-    , crLogoURL
-    , crCompanyAdmin
-    , crWebsite
-    , crAddress
-    , crPrimaryCountryCode
-    , crName
-    , crPhoneNumber
-    , crManagerAccount
-    , crIsPending
-    , crInternalCompanyId
-    , crSpecializationStatus
-    , crSegment
-    , crPrimaryLanguageCode
-    , crResolvedTimestamp
-
-    -- * User
-    , User
-    , user
-    , uCertificationStatus
-    , uPublicProFile
-    , uCompanyVerificationEmail
-    , uExamStatus
-    , uPrimaryEmails
-    , uProFile
-    , uAfaInfoShared
-    , uCompany
-    , uInternalId
-    , uId
-    , uAvailableAdwordsManagerAccounts
-    , uLastAccessTime
-
-    -- * LogUserEventRequestEventCategory
-    , LogUserEventRequestEventCategory (..)
-
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- * Lead
-    , Lead
-    , lead
-    , leaGivenName
-    , leaEmail
-    , leaLanguageCode
-    , leaState
-    , leaMarketingOptIn
-    , leaAdwordsCustomerId
-    , leaFamilyName
-    , leaPhoneNumber
-    , leaMinMonthlyBudget
-    , leaId
-    , leaComments
-    , leaWebsiteURL
-    , leaType
-    , leaGpsMotivations
-    , leaCreateTime
-
-    -- * AdWordsManagerAccountInfo
-    , AdWordsManagerAccountInfo
-    , adWordsManagerAccountInfo
-    , awmaiCustomerName
-    , awmaiId
-
-    -- * LogMessageResponse
-    , LogMessageResponse
-    , logMessageResponse
-    , lmrResponseMetadata
-
-    -- * HistoricalOfferOfferType
-    , HistoricalOfferOfferType (..)
-
-    -- * CertificationStatusType
-    , CertificationStatusType (..)
-
-    -- * CreateLeadResponseRecaptchaStatus
-    , CreateLeadResponseRecaptchaStatus (..)
-
-    -- * OfferCustomer
-    , OfferCustomer
-    , offerCustomer
-    , ocCreationTime
-    , ocAdwordsURL
-    , ocGetYAmount
-    , ocName
-    , ocCountryCode
-    , ocOfferType
-    , ocSpendXAmount
-    , ocExternalCid
-    , ocEligibilityDaysLeft
-
-    -- * ExamStatusExamType
-    , ExamStatusExamType (..)
-
-    -- * GetPartnersStatusResponse
-    , GetPartnersStatusResponse
-    , getPartnersStatusResponse
-    , gpsrResponseMetadata
-
-    -- * ListAnalyticsResponse
-    , ListAnalyticsResponse
-    , listAnalyticsResponse
-    , larNextPageToken
-    , larAnalytics
-    , larResponseMetadata
-    , larAnalyticsSummary
-
-    -- * Company
-    , Company
-    , company
-    , cCompanyTypes
-    , cAutoApprovalEmailDomains
-    , cProFileStatus
-    , cBadgeTier
-    , cPublicProFile
-    , cOriginalMinMonthlyBudget
-    , cAdditionalWebsites
-    , cIndustries
-    , cConvertedMinMonthlyBudget
-    , cName
-    , cLocalizedInfos
-    , cCertificationStatuses
-    , cRanks
-    , cId
-    , cWebsiteURL
-    , cSpecializationStatus
-    , cPrimaryAdwordsManagerAccountId
-    , cBadgeAuthorityInAwn
-    , cPrimaryLanguageCode
-    , cLocations
-    , cServices
-    , cPrimaryLocation
-
-    -- * ListOffersResponseNoOfferReason
-    , ListOffersResponseNoOfferReason (..)
-
-    -- * LogUserEventResponse
-    , LogUserEventResponse
-    , logUserEventResponse
-    , luerResponseMetadata
-
-    -- * ListOffersResponse
-    , ListOffersResponse
-    , listOffersResponse
-    , lorAvailableOffers
-    , lorNoOfferReason
-    , lorResponseMetadata
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * UserProFile
-    , UserProFile
-    , userProFile
-    , upfGivenName
-    , upfMarkets
-    , upfChannels
-    , upfEmailOptIns
-    , upfJobFunctions
-    , upfAddress
-    , upfPrimaryCountryCode
-    , upfFamilyName
-    , upfLanguages
-    , upfIndustries
-    , upfMigrateToAfa
-    , upfPhoneNumber
-    , upfEmailAddress
-    , upfAdwordsManagerAccount
-    , upfProFilePublic
-
-    -- * AnalyticsSummary
-    , AnalyticsSummary
-    , analyticsSummary
-    , asContactsCount
-    , asProFileViewsCount
-    , asSearchViewsCount
-
-    -- * CertificationExamStatusType
-    , CertificationExamStatusType (..)
-
-    -- * LogUserEventRequest
-    , LogUserEventRequest
-    , logUserEventRequest
-    , luerEventCategory
-    , luerRequestMetadata
-    , luerURL
-    , luerEventScope
-    , luerLead
-    , luerEventDatas
-    , luerEventAction
-
-    -- * LogMessageRequestLevel
-    , LogMessageRequestLevel (..)
-
-    -- * CertificationCertificationType
-    , CertificationCertificationType (..)
-
-    -- * EventDataKey
-    , EventDataKey (..)
-
-    -- * SpecializationStatus
-    , SpecializationStatus
-    , specializationStatus
-    , ssBadgeSpecialization
-    , ssBadgeSpecializationState
-
-    -- * LeadState
-    , LeadState (..)
-
-    -- * Rank
-    , Rank
-    , rank
-    , rValue
-    , rType
-
-    -- * LogUserEventRequestEventScope
-    , LogUserEventRequestEventScope (..)
-
-    -- * ListLeadsResponse
-    , ListLeadsResponse
-    , listLeadsResponse
-    , llrLeads
-    , llrNextPageToken
-    , llrResponseMetadata
-    , llrTotalSize
-
-    -- * CountryOfferInfo
-    , CountryOfferInfo
-    , countryOfferInfo
-    , coiGetYAmount
-    , coiOfferCountryCode
-    , coiOfferType
-    , coiSpendXAmount
-
-    -- * CreateLeadRequest
-    , CreateLeadRequest
-    , createLeadRequest
-    , cRequestMetadata
-    , cRecaptchaChallenge
-    , cLead
-    ) where
-
-import Network.Google.Partners.Types.Product
-import Network.Google.Partners.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v2' of the Google Partners API. This contains the host and root path used as a starting point for constructing service requests.
-partnersService :: ServiceConfig
-partnersService
-  = defaultService (ServiceId "partners:v2")
-      "partners.googleapis.com"
+  ( -- * Configuration
+    partnersService,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** AdWordsManagerAccountInfo
+    AdWordsManagerAccountInfo (..),
+    newAdWordsManagerAccountInfo,
+
+    -- ** Analytics
+    Analytics (..),
+    newAnalytics,
+
+    -- ** AnalyticsDataPoint
+    AnalyticsDataPoint (..),
+    newAnalyticsDataPoint,
+
+    -- ** AnalyticsSummary
+    AnalyticsSummary (..),
+    newAnalyticsSummary,
+
+    -- ** AvailableOffer
+    AvailableOffer (..),
+    newAvailableOffer,
+
+    -- ** AvailableOffer_OfferLevel
+    AvailableOffer_OfferLevel (..),
+
+    -- ** AvailableOffer_OfferType
+    AvailableOffer_OfferType (..),
+
+    -- ** Certification
+    Certification (..),
+    newCertification,
+
+    -- ** Certification_CertificationType
+    Certification_CertificationType (..),
+
+    -- ** CertificationExamStatus
+    CertificationExamStatus (..),
+    newCertificationExamStatus,
+
+    -- ** CertificationExamStatus_Type
+    CertificationExamStatus_Type (..),
+
+    -- ** CertificationStatus
+    CertificationStatus (..),
+    newCertificationStatus,
+
+    -- ** CertificationStatus_Type
+    CertificationStatus_Type (..),
+
+    -- ** Company
+    Company (..),
+    newCompany,
+
+    -- ** Company_BadgeTier
+    Company_BadgeTier (..),
+
+    -- ** Company_ProfileStatus
+    Company_ProfileStatus (..),
+
+    -- ** CompanyRelation
+    CompanyRelation (..),
+    newCompanyRelation,
+
+    -- ** CompanyRelation_BadgeTier
+    CompanyRelation_BadgeTier (..),
+
+    -- ** CompanyRelation_State
+    CompanyRelation_State (..),
+
+    -- ** CountryOfferInfo
+    CountryOfferInfo (..),
+    newCountryOfferInfo,
+
+    -- ** CountryOfferInfo_OfferType
+    CountryOfferInfo_OfferType (..),
+
+    -- ** CreateLeadRequest
+    CreateLeadRequest (..),
+    newCreateLeadRequest,
+
+    -- ** CreateLeadResponse
+    CreateLeadResponse (..),
+    newCreateLeadResponse,
+
+    -- ** CreateLeadResponse_RecaptchaStatus
+    CreateLeadResponse_RecaptchaStatus (..),
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DebugInfo
+    DebugInfo (..),
+    newDebugInfo,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EventData
+    EventData (..),
+    newEventData,
+
+    -- ** EventData_Key
+    EventData_Key (..),
+
+    -- ** ExamStatus
+    ExamStatus (..),
+    newExamStatus,
+
+    -- ** ExamStatus_ExamType
+    ExamStatus_ExamType (..),
+
+    -- ** GetCompanyResponse
+    GetCompanyResponse (..),
+    newGetCompanyResponse,
+
+    -- ** GetPartnersStatusResponse
+    GetPartnersStatusResponse (..),
+    newGetPartnersStatusResponse,
+
+    -- ** HistoricalOffer
+    HistoricalOffer (..),
+    newHistoricalOffer,
+
+    -- ** HistoricalOffer_OfferType
+    HistoricalOffer_OfferType (..),
+
+    -- ** HistoricalOffer_Status
+    HistoricalOffer_Status (..),
+
+    -- ** LatLng
+    LatLng (..),
+    newLatLng,
+
+    -- ** Lead
+    Lead (..),
+    newLead,
+
+    -- ** Lead_State
+    Lead_State (..),
+
+    -- ** Lead_Type
+    Lead_Type (..),
+
+    -- ** ListAnalyticsResponse
+    ListAnalyticsResponse (..),
+    newListAnalyticsResponse,
+
+    -- ** ListCompaniesResponse
+    ListCompaniesResponse (..),
+    newListCompaniesResponse,
+
+    -- ** ListLeadsResponse
+    ListLeadsResponse (..),
+    newListLeadsResponse,
+
+    -- ** ListOffersHistoryResponse
+    ListOffersHistoryResponse (..),
+    newListOffersHistoryResponse,
+
+    -- ** ListOffersResponse
+    ListOffersResponse (..),
+    newListOffersResponse,
+
+    -- ** ListOffersResponse_NoOfferReason
+    ListOffersResponse_NoOfferReason (..),
+
+    -- ** ListUserStatesResponse
+    ListUserStatesResponse (..),
+    newListUserStatesResponse,
+
+    -- ** LocalizedCompanyInfo
+    LocalizedCompanyInfo (..),
+    newLocalizedCompanyInfo,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** LogMessageRequest
+    LogMessageRequest (..),
+    newLogMessageRequest,
+
+    -- ** LogMessageRequest_ClientInfo
+    LogMessageRequest_ClientInfo (..),
+    newLogMessageRequest_ClientInfo,
+
+    -- ** LogMessageRequest_Level
+    LogMessageRequest_Level (..),
+
+    -- ** LogMessageResponse
+    LogMessageResponse (..),
+    newLogMessageResponse,
+
+    -- ** LogUserEventRequest
+    LogUserEventRequest (..),
+    newLogUserEventRequest,
+
+    -- ** LogUserEventRequest_EventAction
+    LogUserEventRequest_EventAction (..),
+
+    -- ** LogUserEventRequest_EventCategory
+    LogUserEventRequest_EventCategory (..),
+
+    -- ** LogUserEventRequest_EventScope
+    LogUserEventRequest_EventScope (..),
+
+    -- ** LogUserEventResponse
+    LogUserEventResponse (..),
+    newLogUserEventResponse,
+
+    -- ** Money
+    Money (..),
+    newMoney,
+
+    -- ** OfferCustomer
+    OfferCustomer (..),
+    newOfferCustomer,
+
+    -- ** OfferCustomer_OfferType
+    OfferCustomer_OfferType (..),
+
+    -- ** OptIns
+    OptIns (..),
+    newOptIns,
+
+    -- ** PublicProfile
+    PublicProfile (..),
+    newPublicProfile,
+
+    -- ** Rank
+    Rank (..),
+    newRank,
+
+    -- ** Rank_Type
+    Rank_Type (..),
+
+    -- ** RecaptchaChallenge
+    RecaptchaChallenge (..),
+    newRecaptchaChallenge,
+
+    -- ** RequestMetadata
+    RequestMetadata (..),
+    newRequestMetadata,
+
+    -- ** ResponseMetadata
+    ResponseMetadata (..),
+    newResponseMetadata,
+
+    -- ** SpecializationStatus
+    SpecializationStatus (..),
+    newSpecializationStatus,
+
+    -- ** SpecializationStatus_BadgeSpecialization
+    SpecializationStatus_BadgeSpecialization (..),
+
+    -- ** SpecializationStatus_BadgeSpecializationState
+    SpecializationStatus_BadgeSpecializationState (..),
+
+    -- ** TrafficSource
+    TrafficSource (..),
+    newTrafficSource,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** UserOverrides
+    UserOverrides (..),
+    newUserOverrides,
+
+    -- ** UserProfile
+    UserProfile (..),
+    newUserProfile,
+  )
+where
+
+import Network.Google.Partners.Internal.Product
+import Network.Google.Partners.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Google Partners API. This contains the host and root path used as a starting point for constructing service requests.
+partnersService :: Core.ServiceConfig
+partnersService =
+  Core.defaultService
+    (Core.ServiceId "partners:v2")
+    "partners.googleapis.com"
