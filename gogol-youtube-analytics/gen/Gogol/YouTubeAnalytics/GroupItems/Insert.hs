@@ -19,34 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeAnalytics.Groups.Insert
+-- Module      : Gogol.YouTubeAnalytics.GroupItems.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a group.
+-- Creates a group item.
 --
--- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference> for @youtubeAnalytics.groups.insert@.
-module Network.Google.YouTubeAnalytics.Groups.Insert
+-- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference> for @youtubeAnalytics.groupItems.insert@.
+module Gogol.YouTubeAnalytics.GroupItems.Insert
   ( -- * Resource
-    YouTubeAnalyticsGroupsInsertResource,
+    YouTubeAnalyticsGroupItemsInsertResource,
 
     -- ** Constructing a Request
-    newYouTubeAnalyticsGroupsInsert,
-    YouTubeAnalyticsGroupsInsert,
+    newYouTubeAnalyticsGroupItemsInsert,
+    YouTubeAnalyticsGroupItemsInsert,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeAnalytics.Types
+import qualified Gogol.Prelude as Core
+import Gogol.YouTubeAnalytics.Types
 
--- | A resource alias for @youtubeAnalytics.groups.insert@ method which the
--- 'YouTubeAnalyticsGroupsInsert' request conforms to.
-type YouTubeAnalyticsGroupsInsertResource =
+-- | A resource alias for @youtubeAnalytics.groupItems.insert@ method which the
+-- 'YouTubeAnalyticsGroupItemsInsert' request conforms to.
+type YouTubeAnalyticsGroupItemsInsertResource =
   "v2"
-    Core.:> "groups"
+    Core.:> "groupItems"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -54,13 +54,13 @@ type YouTubeAnalyticsGroupsInsertResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Group
-    Core.:> Core.Post '[Core.JSON] Group
+    Core.:> Core.ReqBody '[Core.JSON] GroupItem
+    Core.:> Core.Post '[Core.JSON] GroupItem
 
--- | Creates a group.
+-- | Creates a group item.
 --
--- /See:/ 'newYouTubeAnalyticsGroupsInsert' smart constructor.
-data YouTubeAnalyticsGroupsInsert = YouTubeAnalyticsGroupsInsert
+-- /See:/ 'newYouTubeAnalyticsGroupItemsInsert' smart constructor.
+data YouTubeAnalyticsGroupItemsInsert = YouTubeAnalyticsGroupItemsInsert
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -70,7 +70,7 @@ data YouTubeAnalyticsGroupsInsert = YouTubeAnalyticsGroupsInsert
     -- | This parameter can only be used in a properly authorized request. __Note:__ This parameter is intended exclusively for YouTube content partners that own and manage many different YouTube channels. The @onBehalfOfContentOwner@ parameter indicates that the request\'s authorization credentials identify a YouTube user who is acting on behalf of the content owner specified in the parameter value. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The account that the user authenticates with must be linked to the specified YouTube content owner.
     onBehalfOfContentOwner :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: Group,
+    payload :: GroupItem,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -78,13 +78,13 @@ data YouTubeAnalyticsGroupsInsert = YouTubeAnalyticsGroupsInsert
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'YouTubeAnalyticsGroupsInsert' with the minimum fields required to make a request.
-newYouTubeAnalyticsGroupsInsert ::
+-- | Creates a value of 'YouTubeAnalyticsGroupItemsInsert' with the minimum fields required to make a request.
+newYouTubeAnalyticsGroupItemsInsert ::
   -- |  Multipart request metadata. See 'payload'.
-  Group ->
-  YouTubeAnalyticsGroupsInsert
-newYouTubeAnalyticsGroupsInsert payload =
-  YouTubeAnalyticsGroupsInsert
+  GroupItem ->
+  YouTubeAnalyticsGroupItemsInsert
+newYouTubeAnalyticsGroupItemsInsert payload =
+  YouTubeAnalyticsGroupItemsInsert
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,18 +96,18 @@ newYouTubeAnalyticsGroupsInsert payload =
 
 instance
   Core.GoogleRequest
-    YouTubeAnalyticsGroupsInsert
+    YouTubeAnalyticsGroupItemsInsert
   where
-  type Rs YouTubeAnalyticsGroupsInsert = Group
+  type Rs YouTubeAnalyticsGroupItemsInsert = GroupItem
   type
-    Scopes YouTubeAnalyticsGroupsInsert =
+    Scopes YouTubeAnalyticsGroupItemsInsert =
       '[ "https://www.googleapis.com/auth/youtube",
          "https://www.googleapis.com/auth/youtube.readonly",
          "https://www.googleapis.com/auth/youtubepartner",
          "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
          "https://www.googleapis.com/auth/yt-analytics.readonly"
        ]
-  requestClient YouTubeAnalyticsGroupsInsert {..} =
+  requestClient YouTubeAnalyticsGroupItemsInsert {..} =
     go
       xgafv
       accessToken
@@ -122,6 +122,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy YouTubeAnalyticsGroupsInsertResource
+              Core.Proxy YouTubeAnalyticsGroupItemsInsertResource
           )
           Core.mempty

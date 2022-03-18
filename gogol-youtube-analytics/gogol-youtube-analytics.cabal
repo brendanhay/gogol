@@ -39,25 +39,26 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.YouTubeAnalytics
-    Network.Google.YouTubeAnalytics.GroupItems.Delete
-    Network.Google.YouTubeAnalytics.GroupItems.Insert
-    Network.Google.YouTubeAnalytics.GroupItems.List
-    Network.Google.YouTubeAnalytics.Groups.Delete
-    Network.Google.YouTubeAnalytics.Groups.Insert
-    Network.Google.YouTubeAnalytics.Groups.List
-    Network.Google.YouTubeAnalytics.Groups.Update
-    Network.Google.YouTubeAnalytics.Reports.Query
-    Network.Google.YouTubeAnalytics.Types
+    Gogol.YouTubeAnalytics
+    Gogol.YouTubeAnalytics.GroupItems.Delete
+    Gogol.YouTubeAnalytics.GroupItems.Insert
+    Gogol.YouTubeAnalytics.GroupItems.List
+    Gogol.YouTubeAnalytics.Groups.Delete
+    Gogol.YouTubeAnalytics.Groups.Insert
+    Gogol.YouTubeAnalytics.Groups.List
+    Gogol.YouTubeAnalytics.Groups.Update
+    Gogol.YouTubeAnalytics.Reports.Query
+    Gogol.YouTubeAnalytics.Types
 
   other-modules:
-    Network.Google.YouTubeAnalytics.Internal.Product
-    Network.Google.YouTubeAnalytics.Internal.Sum
+    Gogol.YouTubeAnalytics.Internal.Product
+    Gogol.YouTubeAnalytics.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
