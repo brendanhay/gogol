@@ -1,76 +1,90 @@
-name:                  gogol-firestore
-version:               0.5.0
-synopsis:              Google Cloud Firestore SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-firestore
+version:            0.5.0
+synopsis:           Google Cloud Firestore SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Accesses the NoSQL document database built for automatic scaling, high
-    performance, and ease of application development.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-firestore
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.FireStore
-        , Network.Google.FireStore.Types
-        , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.Get
-        , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.List
-        , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
-        , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
-        , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
-        , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
-        , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.List
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchGet
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchWrite
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.BeginTransaction
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.Commit
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.CreateDocument
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.Delete
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.Get
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.List
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.ListCollectionIds
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.Listen
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.PartitionQuery
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.Patch
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.Rollback
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.RunQuery
-        , Network.Google.Resource.FireStore.Projects.Databases.Documents.Write
-        , Network.Google.Resource.FireStore.Projects.Databases.ExportDocuments
-        , Network.Google.Resource.FireStore.Projects.Databases.ImportDocuments
-        , Network.Google.Resource.FireStore.Projects.Databases.Operations.Cancel
-        , Network.Google.Resource.FireStore.Projects.Databases.Operations.Delete
-        , Network.Google.Resource.FireStore.Projects.Databases.Operations.Get
-        , Network.Google.Resource.FireStore.Projects.Databases.Operations.List
-        , Network.Google.Resource.FireStore.Projects.Locations.Get
-        , Network.Google.Resource.FireStore.Projects.Locations.List
+  exposed-modules:
+    Network.Google.FireStore
+    Network.Google.FireStore.Projects.Databases.CollectionGroups.Fields.Get
+    Network.Google.FireStore.Projects.Databases.CollectionGroups.Fields.List
+    Network.Google.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
+    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
+    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
+    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
+    Network.Google.FireStore.Projects.Databases.CollectionGroups.Indexes.List
+    Network.Google.FireStore.Projects.Databases.Documents.BatchGet
+    Network.Google.FireStore.Projects.Databases.Documents.BatchWrite
+    Network.Google.FireStore.Projects.Databases.Documents.BeginTransaction
+    Network.Google.FireStore.Projects.Databases.Documents.Commit
+    Network.Google.FireStore.Projects.Databases.Documents.CreateDocument
+    Network.Google.FireStore.Projects.Databases.Documents.Delete
+    Network.Google.FireStore.Projects.Databases.Documents.Get
+    Network.Google.FireStore.Projects.Databases.Documents.List
+    Network.Google.FireStore.Projects.Databases.Documents.ListCollectionIds
+    Network.Google.FireStore.Projects.Databases.Documents.ListDocuments
+    Network.Google.FireStore.Projects.Databases.Documents.Listen
+    Network.Google.FireStore.Projects.Databases.Documents.PartitionQuery
+    Network.Google.FireStore.Projects.Databases.Documents.Patch
+    Network.Google.FireStore.Projects.Databases.Documents.Rollback
+    Network.Google.FireStore.Projects.Databases.Documents.RunQuery
+    Network.Google.FireStore.Projects.Databases.Documents.Write
+    Network.Google.FireStore.Projects.Databases.ExportDocuments
+    Network.Google.FireStore.Projects.Databases.Get
+    Network.Google.FireStore.Projects.Databases.ImportDocuments
+    Network.Google.FireStore.Projects.Databases.List
+    Network.Google.FireStore.Projects.Databases.Operations.Cancel
+    Network.Google.FireStore.Projects.Databases.Operations.Delete
+    Network.Google.FireStore.Projects.Databases.Operations.Get
+    Network.Google.FireStore.Projects.Databases.Operations.List
+    Network.Google.FireStore.Projects.Databases.Patch
+    Network.Google.FireStore.Projects.Locations.Get
+    Network.Google.FireStore.Projects.Locations.List
+    Network.Google.FireStore.Types
 
-    other-modules:
-          Network.Google.FireStore.Types.Product
-        , Network.Google.FireStore.Types.Sum
+  other-modules:
+    Network.Google.FireStore.Internal.Product
+    Network.Google.FireStore.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
