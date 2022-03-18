@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Projects.Locations.Queues.Delete
+-- Module      : Gogol.CloudTasks.Projects.Locations.Queues.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a queue. This command will delete the queue even if it has tasks in it. Note: If you delete a queue, a queue with the same name can\'t be created for 7 days. WARNING: Using this method may have unintended side effects if you are using an App Engine @queue.yaml@ or @queue.xml@ file to manage your queues. Read <https://cloud.google.com/tasks/docs/queue-yaml Overview of Queue Management and queue.yaml> before using this method.
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.delete@.
-module Network.Google.CloudTasks.Projects.Locations.Queues.Delete
+module Gogol.CloudTasks.Projects.Locations.Queues.Delete
   ( -- * Resource
     CloudTasksProjectsLocationsQueuesDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudTasks.Projects.Locations.Queues.Delete
   )
 where
 
-import Network.Google.CloudTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.delete@ method which the
 -- 'CloudTasksProjectsLocationsQueuesDelete' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Projects.Locations.Queues.SetIamPolicy
+-- Module      : Gogol.CloudTasks.Projects.Locations.Queues.SetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Sets the access control policy for a Queue. Replaces any existing policy. Note: The Cloud Console does not check queue-level IAM permissions yet. Project-level permissions are required to use the Cloud Console. Authorization requires the following <https://cloud.google.com/iam Google IAM> permission on the specified resource parent: * @cloudtasks.queues.setIamPolicy@
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.setIamPolicy@.
-module Network.Google.CloudTasks.Projects.Locations.Queues.SetIamPolicy
+module Gogol.CloudTasks.Projects.Locations.Queues.SetIamPolicy
   ( -- * Resource
     CloudTasksProjectsLocationsQueuesSetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudTasks.Projects.Locations.Queues.SetIamPolicy
   )
 where
 
-import Network.Google.CloudTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.setIamPolicy@ method which the
 -- 'CloudTasksProjectsLocationsQueuesSetIamPolicy' request conforms to.

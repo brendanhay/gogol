@@ -39,35 +39,36 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudTasks
-    Network.Google.CloudTasks.Projects.Locations.Get
-    Network.Google.CloudTasks.Projects.Locations.List
-    Network.Google.CloudTasks.Projects.Locations.Queues.Create
-    Network.Google.CloudTasks.Projects.Locations.Queues.Delete
-    Network.Google.CloudTasks.Projects.Locations.Queues.Get
-    Network.Google.CloudTasks.Projects.Locations.Queues.GetIamPolicy
-    Network.Google.CloudTasks.Projects.Locations.Queues.List
-    Network.Google.CloudTasks.Projects.Locations.Queues.Patch
-    Network.Google.CloudTasks.Projects.Locations.Queues.Pause
-    Network.Google.CloudTasks.Projects.Locations.Queues.Purge
-    Network.Google.CloudTasks.Projects.Locations.Queues.Resume
-    Network.Google.CloudTasks.Projects.Locations.Queues.SetIamPolicy
-    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Create
-    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Delete
-    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Get
-    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.List
-    Network.Google.CloudTasks.Projects.Locations.Queues.Tasks.Run
-    Network.Google.CloudTasks.Projects.Locations.Queues.TestIamPermissions
-    Network.Google.CloudTasks.Types
+    Gogol.CloudTasks
+    Gogol.CloudTasks.Projects.Locations.Get
+    Gogol.CloudTasks.Projects.Locations.List
+    Gogol.CloudTasks.Projects.Locations.Queues.Create
+    Gogol.CloudTasks.Projects.Locations.Queues.Delete
+    Gogol.CloudTasks.Projects.Locations.Queues.Get
+    Gogol.CloudTasks.Projects.Locations.Queues.GetIamPolicy
+    Gogol.CloudTasks.Projects.Locations.Queues.List
+    Gogol.CloudTasks.Projects.Locations.Queues.Patch
+    Gogol.CloudTasks.Projects.Locations.Queues.Pause
+    Gogol.CloudTasks.Projects.Locations.Queues.Purge
+    Gogol.CloudTasks.Projects.Locations.Queues.Resume
+    Gogol.CloudTasks.Projects.Locations.Queues.SetIamPolicy
+    Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Create
+    Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Delete
+    Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Get
+    Gogol.CloudTasks.Projects.Locations.Queues.Tasks.List
+    Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Run
+    Gogol.CloudTasks.Projects.Locations.Queues.TestIamPermissions
+    Gogol.CloudTasks.Types
 
   other-modules:
-    Network.Google.CloudTasks.Internal.Product
-    Network.Google.CloudTasks.Internal.Sum
+    Gogol.CloudTasks.Internal.Product
+    Gogol.CloudTasks.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

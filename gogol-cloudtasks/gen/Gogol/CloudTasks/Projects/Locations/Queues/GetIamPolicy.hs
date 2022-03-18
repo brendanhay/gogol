@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Projects.Locations.Queues.GetIamPolicy
+-- Module      : Gogol.CloudTasks.Projects.Locations.Queues.GetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the access control policy for a Queue. Returns an empty policy if the resource exists and does not have a policy set. Authorization requires the following <https://cloud.google.com/iam Google IAM> permission on the specified resource parent: * @cloudtasks.queues.getIamPolicy@
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.getIamPolicy@.
-module Network.Google.CloudTasks.Projects.Locations.Queues.GetIamPolicy
+module Gogol.CloudTasks.Projects.Locations.Queues.GetIamPolicy
   ( -- * Resource
     CloudTasksProjectsLocationsQueuesGetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudTasks.Projects.Locations.Queues.GetIamPolicy
   )
 where
 
-import Network.Google.CloudTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.getIamPolicy@ method which the
 -- 'CloudTasksProjectsLocationsQueuesGetIamPolicy' request conforms to.

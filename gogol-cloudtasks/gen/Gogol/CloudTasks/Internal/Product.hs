@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTasks.Internal.Product
+-- Module      : Gogol.CloudTasks.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudTasks.Internal.Product
+module Gogol.CloudTasks.Internal.Product
   ( -- * AppEngineHttpRequest
     AppEngineHttpRequest (..),
     newAppEngineHttpRequest,
@@ -168,8 +168,8 @@ module Network.Google.CloudTasks.Internal.Product
   )
 where
 
-import Network.Google.CloudTasks.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTasks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | App Engine HTTP request. The message defines the HTTP request that is sent to an App Engine app when the task is dispatched. Using AppEngineHttpRequest requires <https://cloud.google.com/appengine/docs/admin-api/access-control appengine.applications.get> Google IAM permission for the project and the following scope: @https:\/\/www.googleapis.com\/auth\/cloud-platform@ The task will be delivered to the App Engine app which belongs to the same project as the queue. For more information, see <https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed How Requests are Routed> and how routing is affected by <https://cloud.google.com/appengine/docs/python/config/dispatchref dispatch files>. Traffic is encrypted during transport and never leaves Google datacenters. Because this traffic is carried over a communication mechanism internal to Google, you cannot explicitly set the protocol (for example, HTTP or HTTPS). The request to the handler, however, will appear to have used the HTTP protocol.
 -- The AppEngineRouting used to construct the URL that the task is delivered to can be set at the queue-level or task-level: * If app/engine/routing/override is set on the queue, this value is used for all tasks in the queue, no matter what the setting is for the task-level app/engine/routing. The @url@ that the task will be sent to is: * @url =@ host @+@ relative/uri Tasks can be dispatched to secure app handlers, unsecure app handlers, and URIs restricted with <https://cloud.google.com/appengine/docs/standard/python/config/appref login: admin>. Because tasks are not run as any user, they cannot be dispatched to URIs restricted with <https://cloud.google.com/appengine/docs/standard/python/config/appref login: required> Task dispatches also do not follow redirects. The task attempt has succeeded if the app\'s request handler returns an HTTP response code in the range [@200@ - @299@]. The task attempt has failed if the app\'s handler returns a non-2xx response code or Cloud Tasks does not receive response before
