@@ -43,43 +43,44 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AdSenseHost
-    Network.Google.AdSenseHost.Accounts.Adclients.Get
-    Network.Google.AdSenseHost.Accounts.Adclients.List
-    Network.Google.AdSenseHost.Accounts.Adunits.Delete
-    Network.Google.AdSenseHost.Accounts.Adunits.Get
-    Network.Google.AdSenseHost.Accounts.Adunits.GetAdCode
-    Network.Google.AdSenseHost.Accounts.Adunits.Insert
-    Network.Google.AdSenseHost.Accounts.Adunits.List
-    Network.Google.AdSenseHost.Accounts.Adunits.Patch
-    Network.Google.AdSenseHost.Accounts.Adunits.Update
-    Network.Google.AdSenseHost.Accounts.Get
-    Network.Google.AdSenseHost.Accounts.List
-    Network.Google.AdSenseHost.Accounts.Reports.Generate
-    Network.Google.AdSenseHost.Adclients.Get
-    Network.Google.AdSenseHost.Adclients.List
-    Network.Google.AdSenseHost.Associationsessions.Start
-    Network.Google.AdSenseHost.Associationsessions.Verify
-    Network.Google.AdSenseHost.Customchannels.Delete
-    Network.Google.AdSenseHost.Customchannels.Get
-    Network.Google.AdSenseHost.Customchannels.Insert
-    Network.Google.AdSenseHost.Customchannels.List
-    Network.Google.AdSenseHost.Customchannels.Patch
-    Network.Google.AdSenseHost.Customchannels.Update
-    Network.Google.AdSenseHost.Reports.Generate
-    Network.Google.AdSenseHost.Types
-    Network.Google.AdSenseHost.Urlchannels.Delete
-    Network.Google.AdSenseHost.Urlchannels.Insert
-    Network.Google.AdSenseHost.Urlchannels.List
+    Gogol.AdSenseHost
+    Gogol.AdSenseHost.Accounts.Adclients.Get
+    Gogol.AdSenseHost.Accounts.Adclients.List
+    Gogol.AdSenseHost.Accounts.Adunits.Delete
+    Gogol.AdSenseHost.Accounts.Adunits.Get
+    Gogol.AdSenseHost.Accounts.Adunits.GetAdCode
+    Gogol.AdSenseHost.Accounts.Adunits.Insert
+    Gogol.AdSenseHost.Accounts.Adunits.List
+    Gogol.AdSenseHost.Accounts.Adunits.Patch
+    Gogol.AdSenseHost.Accounts.Adunits.Update
+    Gogol.AdSenseHost.Accounts.Get
+    Gogol.AdSenseHost.Accounts.List
+    Gogol.AdSenseHost.Accounts.Reports.Generate
+    Gogol.AdSenseHost.Adclients.Get
+    Gogol.AdSenseHost.Adclients.List
+    Gogol.AdSenseHost.Associationsessions.Start
+    Gogol.AdSenseHost.Associationsessions.Verify
+    Gogol.AdSenseHost.Customchannels.Delete
+    Gogol.AdSenseHost.Customchannels.Get
+    Gogol.AdSenseHost.Customchannels.Insert
+    Gogol.AdSenseHost.Customchannels.List
+    Gogol.AdSenseHost.Customchannels.Patch
+    Gogol.AdSenseHost.Customchannels.Update
+    Gogol.AdSenseHost.Reports.Generate
+    Gogol.AdSenseHost.Types
+    Gogol.AdSenseHost.Urlchannels.Delete
+    Gogol.AdSenseHost.Urlchannels.Insert
+    Gogol.AdSenseHost.Urlchannels.List
 
   other-modules:
-    Network.Google.AdSenseHost.Internal.Product
-    Network.Google.AdSenseHost.Internal.Sum
+    Gogol.AdSenseHost.Internal.Product
+    Gogol.AdSenseHost.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
