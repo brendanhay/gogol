@@ -11,22 +11,14 @@
 * [Code Generation](#code-generation)
 * [Licence](#licence)
 
-
 ## Description
 
-A comprehensive Google Services SDK for Haskell supporting all of the publicly
-available services.
-
-An introductory blog post detailing the motivation can be found [here](http://brendanhay.nz/gogol-comprehensive-haskell-google-client).
+A comprehensive Google Services SDK for Haskell supporting all of the publicly available services.
 
 ## Documentation
 
 You can find the latest stable release documentation for each respective library
 on Hackage under the [Google section](http://hackage.haskell.org/packages/#cat:Google).
-
-Haddock documentation which is built by CI from the `develop` branch
-can be found [here](http://brendanhay.nz/gogol-doc).
-
 
 ## Organisation
 
