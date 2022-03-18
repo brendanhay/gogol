@@ -1,228 +1,169 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Billing.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Billing.Types
-    (
-    -- * Service Configuration
-      billingService
+  ( -- * Configuration
+    billingService,
 
     -- * OAuth Scopes
-    , cloudBillingReadOnlyScope
-    , cloudPlatformScope
-    , cloudBillingScope
+    cloudBillingScope,
+    cloudBillingReadOnlyScope,
+    cloudPlatformScope,
 
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
+    -- * Types
 
-    -- * ListServicesResponse
-    , ListServicesResponse
-    , listServicesResponse
-    , lsrNextPageToken
-    , lsrServices
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** AggregationInfo
+    AggregationInfo (..),
+    newAggregationInfo,
 
-    -- * GeoTaxonomy
-    , GeoTaxonomy
-    , geoTaxonomy
-    , gtRegions
-    , gtType
+    -- ** AggregationInfo_AggregationInterval
+    AggregationInfo_AggregationInterval (..),
 
-    -- * BillingAccount
-    , BillingAccount
-    , billingAccount
-    , baMasterBillingAccount
-    , baOpen
-    , baName
-    , baDisplayName
+    -- ** AggregationInfo_AggregationLevel
+    AggregationInfo_AggregationLevel (..),
 
-    -- * Service
-    , Service
-    , service
-    , sBusinessEntityName
-    , sName
-    , sDisplayName
-    , sServiceId
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- * ProjectBillingInfo
-    , ProjectBillingInfo
-    , projectBillingInfo
-    , pbiName
-    , pbiBillingAccountName
-    , pbiProjectId
-    , pbiBillingEnabled
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- * TierRate
-    , TierRate
-    , tierRate
-    , trUnitPrice
-    , trStartUsageAmount
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- * Money
-    , Money
-    , money
-    , mCurrencyCode
-    , mNanos
-    , mUnits
+    -- ** BillingAccount
+    BillingAccount (..),
+    newBillingAccount,
 
-    -- * Category
-    , Category
-    , category
-    , cResourceFamily
-    , cUsageType
-    , cServiceDisplayName
-    , cResourceGroup
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * AggregationInfoAggregationLevel
-    , AggregationInfoAggregationLevel (..)
+    -- ** Category
+    Category (..),
+    newCategory,
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * ListProjectBillingInfoResponse
-    , ListProjectBillingInfoResponse
-    , listProjectBillingInfoResponse
-    , lpbirNextPageToken
-    , lpbirProjectBillingInfo
+    -- ** GeoTaxonomy
+    GeoTaxonomy (..),
+    newGeoTaxonomy,
 
-    -- * ListSKUsResponse
-    , ListSKUsResponse
-    , listSKUsResponse
-    , lskurNextPageToken
-    , lskurSKUs
+    -- ** GeoTaxonomy_Type
+    GeoTaxonomy_Type (..),
 
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
+    -- ** ListBillingAccountsResponse
+    ListBillingAccountsResponse (..),
+    newListBillingAccountsResponse,
 
-    -- * GeoTaxonomyType
-    , GeoTaxonomyType (..)
+    -- ** ListProjectBillingInfoResponse
+    ListProjectBillingInfoResponse (..),
+    newListProjectBillingInfoResponse,
 
-    -- * PricingExpression
-    , PricingExpression
-    , pricingExpression
-    , peUsageUnitDescription
-    , peBaseUnit
-    , peBaseUnitConversionFactor
-    , peDisplayQuantity
-    , peTieredRates
-    , peBaseUnitDescription
-    , peUsageUnit
+    -- ** ListServicesResponse
+    ListServicesResponse (..),
+    newListServicesResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ListSkusResponse
+    ListSkusResponse (..),
+    newListSkusResponse,
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** Money
+    Money (..),
+    newMoney,
 
-    -- * AggregationInfo
-    , AggregationInfo
-    , aggregationInfo
-    , aiAggregationInterval
-    , aiAggregationCount
-    , aiAggregationLevel
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * SKU
-    , SKU
-    , sKU
-    , skukGeoTaxonomy
-    , skukCategory
-    , skukSKUId
-    , skukServiceProviderName
-    , skukServiceRegions
-    , skukName
-    , skukPricingInfo
-    , skukDescription
+    -- ** PricingExpression
+    PricingExpression (..),
+    newPricingExpression,
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** PricingInfo
+    PricingInfo (..),
+    newPricingInfo,
 
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** ProjectBillingInfo
+    ProjectBillingInfo (..),
+    newProjectBillingInfo,
 
-    -- * ListBillingAccountsResponse
-    , ListBillingAccountsResponse
-    , listBillingAccountsResponse
-    , lbarNextPageToken
-    , lbarBillingAccounts
+    -- ** Service
+    Service (..),
+    newService,
 
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
-    -- * PricingInfo
-    , PricingInfo
-    , pricingInfo
-    , piSummary
-    , piAggregationInfo
-    , piPricingExpression
-    , piCurrencyConversionRate
-    , piEffectiveTime
+    -- ** Sku
+    Sku (..),
+    newSku,
 
-    -- * AggregationInfoAggregationInterval
-    , AggregationInfoAggregationInterval (..)
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
-import Network.Google.Billing.Types.Product
-import Network.Google.Billing.Types.Sum
-import Network.Google.Prelude
+    -- ** TierRate
+    TierRate (..),
+    newTierRate,
+  )
+where
 
--- | Default request referring to version 'v1' of the Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
-billingService :: ServiceConfig
-billingService
-  = defaultService (ServiceId "cloudbilling:v1")
-      "cloudbilling.googleapis.com"
+import Network.Google.Billing.Internal.Product
+import Network.Google.Billing.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View your Google Cloud Platform billing accounts
-cloudBillingReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-billing.readonly"]
-cloudBillingReadOnlyScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v1@ of the Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
+billingService :: Core.ServiceConfig
+billingService =
+  Core.defaultService
+    (Core.ServiceId "cloudbilling:v1")
+    "cloudbilling.googleapis.com"
 
 -- | View and manage your Google Cloud Platform billing accounts
-cloudBillingScope :: Proxy '["https://www.googleapis.com/auth/cloud-billing"]
-cloudBillingScope = Proxy
+cloudBillingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-billing"]
+cloudBillingScope = Core.Proxy
+
+-- | View your Google Cloud Platform billing accounts
+cloudBillingReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-billing.readonly"]
+cloudBillingReadOnlyScope = Core.Proxy
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy

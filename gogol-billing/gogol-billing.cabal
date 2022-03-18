@@ -1,58 +1,68 @@
-name:                  gogol-billing
-version:               0.5.0
-synopsis:              Google Cloud Billing SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-billing
+version:            0.5.0
+synopsis:           Google Cloud Billing SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Allows developers to manage billing for their Google Cloud Platform
-    projects programmatically.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Allows developers to manage billing for their Google Cloud Platform projects programmatically.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-billing
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Billing
-        , Network.Google.Billing.Types
-        , Network.Google.Resource.CloudBilling.BillingAccounts.Create
-        , Network.Google.Resource.CloudBilling.BillingAccounts.Get
-        , Network.Google.Resource.CloudBilling.BillingAccounts.GetIAMPolicy
-        , Network.Google.Resource.CloudBilling.BillingAccounts.List
-        , Network.Google.Resource.CloudBilling.BillingAccounts.Patch
-        , Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
-        , Network.Google.Resource.CloudBilling.BillingAccounts.SetIAMPolicy
-        , Network.Google.Resource.CloudBilling.BillingAccounts.TestIAMPermissions
-        , Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
-        , Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
-        , Network.Google.Resource.CloudBilling.Services.List
-        , Network.Google.Resource.CloudBilling.Services.SKUs.List
+  exposed-modules:
+    Network.Google.Billing
+    Network.Google.Billing.Cloudbilling.BillingAccounts.Create
+    Network.Google.Billing.Cloudbilling.BillingAccounts.Get
+    Network.Google.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
+    Network.Google.Billing.Cloudbilling.BillingAccounts.List
+    Network.Google.Billing.Cloudbilling.BillingAccounts.Patch
+    Network.Google.Billing.Cloudbilling.BillingAccounts.Projects.List
+    Network.Google.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
+    Network.Google.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
+    Network.Google.Billing.Cloudbilling.Projects.GetBillingInfo
+    Network.Google.Billing.Cloudbilling.Projects.UpdateBillingInfo
+    Network.Google.Billing.Cloudbilling.Services.List
+    Network.Google.Billing.Cloudbilling.Services.Skus.List
+    Network.Google.Billing.Types
 
-    other-modules:
-          Network.Google.Billing.Types.Product
-        , Network.Google.Billing.Types.Sum
+  other-modules:
+    Network.Google.Billing.Internal.Product
+    Network.Google.Billing.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

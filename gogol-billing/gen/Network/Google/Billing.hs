@@ -1,286 +1,226 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Billing
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows developers to manage billing for their Google Cloud Platform
--- projects programmatically.
+-- Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference>
 module Network.Google.Billing
-    (
-    -- * Service Configuration
-      billingService
+  ( -- * Configuration
+    billingService,
 
     -- * OAuth Scopes
-    , cloudBillingReadOnlyScope
-    , cloudPlatformScope
-    , cloudBillingScope
-
-    -- * API Declaration
-    , BillingAPI
+    cloudBillingScope,
+    cloudBillingReadOnlyScope,
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** cloudbilling.billingAccounts.create
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.Create
+    CloudbillingBillingAccountsCreateResource,
+    newCloudbillingBillingAccountsCreate,
+    CloudbillingBillingAccountsCreate,
 
     -- ** cloudbilling.billingAccounts.get
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.Get
+    CloudbillingBillingAccountsGetResource,
+    newCloudbillingBillingAccountsGet,
+    CloudbillingBillingAccountsGet,
 
     -- ** cloudbilling.billingAccounts.getIamPolicy
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.GetIAMPolicy
+    CloudbillingBillingAccountsGetIamPolicyResource,
+    newCloudbillingBillingAccountsGetIamPolicy,
+    CloudbillingBillingAccountsGetIamPolicy,
 
     -- ** cloudbilling.billingAccounts.list
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.List
+    CloudbillingBillingAccountsListResource,
+    newCloudbillingBillingAccountsList,
+    CloudbillingBillingAccountsList,
 
     -- ** cloudbilling.billingAccounts.patch
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.Patch
+    CloudbillingBillingAccountsPatchResource,
+    newCloudbillingBillingAccountsPatch,
+    CloudbillingBillingAccountsPatch,
 
     -- ** cloudbilling.billingAccounts.projects.list
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
+    CloudbillingBillingAccountsProjectsListResource,
+    newCloudbillingBillingAccountsProjectsList,
+    CloudbillingBillingAccountsProjectsList,
 
     -- ** cloudbilling.billingAccounts.setIamPolicy
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.SetIAMPolicy
+    CloudbillingBillingAccountsSetIamPolicyResource,
+    newCloudbillingBillingAccountsSetIamPolicy,
+    CloudbillingBillingAccountsSetIamPolicy,
 
     -- ** cloudbilling.billingAccounts.testIamPermissions
-    , module Network.Google.Resource.CloudBilling.BillingAccounts.TestIAMPermissions
+    CloudbillingBillingAccountsTestIamPermissionsResource,
+    newCloudbillingBillingAccountsTestIamPermissions,
+    CloudbillingBillingAccountsTestIamPermissions,
 
     -- ** cloudbilling.projects.getBillingInfo
-    , module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
+    CloudbillingProjectsGetBillingInfoResource,
+    newCloudbillingProjectsGetBillingInfo,
+    CloudbillingProjectsGetBillingInfo,
 
     -- ** cloudbilling.projects.updateBillingInfo
-    , module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
+    CloudbillingProjectsUpdateBillingInfoResource,
+    newCloudbillingProjectsUpdateBillingInfo,
+    CloudbillingProjectsUpdateBillingInfo,
 
     -- ** cloudbilling.services.list
-    , module Network.Google.Resource.CloudBilling.Services.List
+    CloudbillingServicesListResource,
+    newCloudbillingServicesList,
+    CloudbillingServicesList,
 
     -- ** cloudbilling.services.skus.list
-    , module Network.Google.Resource.CloudBilling.Services.SKUs.List
+    CloudbillingServicesSkusListResource,
+    newCloudbillingServicesSkusList,
+    CloudbillingServicesSkusList,
 
     -- * Types
 
-    -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** ListServicesResponse
-    , ListServicesResponse
-    , listServicesResponse
-    , lsrNextPageToken
-    , lsrServices
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** GeoTaxonomy
-    , GeoTaxonomy
-    , geoTaxonomy
-    , gtRegions
-    , gtType
-
-    -- ** BillingAccount
-    , BillingAccount
-    , billingAccount
-    , baMasterBillingAccount
-    , baOpen
-    , baName
-    , baDisplayName
-
-    -- ** Service
-    , Service
-    , service
-    , sBusinessEntityName
-    , sName
-    , sDisplayName
-    , sServiceId
-
-    -- ** ProjectBillingInfo
-    , ProjectBillingInfo
-    , projectBillingInfo
-    , pbiName
-    , pbiBillingAccountName
-    , pbiProjectId
-    , pbiBillingEnabled
-
-    -- ** TierRate
-    , TierRate
-    , tierRate
-    , trUnitPrice
-    , trStartUsageAmount
-
-    -- ** Money
-    , Money
-    , money
-    , mCurrencyCode
-    , mNanos
-    , mUnits
-
-    -- ** Category
-    , Category
-    , category
-    , cResourceFamily
-    , cUsageType
-    , cServiceDisplayName
-    , cResourceGroup
-
-    -- ** AggregationInfoAggregationLevel
-    , AggregationInfoAggregationLevel (..)
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** ListProjectBillingInfoResponse
-    , ListProjectBillingInfoResponse
-    , listProjectBillingInfoResponse
-    , lpbirNextPageToken
-    , lpbirProjectBillingInfo
-
-    -- ** ListSKUsResponse
-    , ListSKUsResponse
-    , listSKUsResponse
-    , lskurNextPageToken
-    , lskurSKUs
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** GeoTaxonomyType
-    , GeoTaxonomyType (..)
-
-    -- ** PricingExpression
-    , PricingExpression
-    , pricingExpression
-    , peUsageUnitDescription
-    , peBaseUnit
-    , peBaseUnitConversionFactor
-    , peDisplayQuantity
-    , peTieredRates
-    , peBaseUnitDescription
-    , peUsageUnit
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    Xgafv (..),
 
     -- ** AggregationInfo
-    , AggregationInfo
-    , aggregationInfo
-    , aiAggregationInterval
-    , aiAggregationCount
-    , aiAggregationLevel
+    AggregationInfo (..),
+    newAggregationInfo,
 
-    -- ** SKU
-    , SKU
-    , sKU
-    , skukGeoTaxonomy
-    , skukCategory
-    , skukSKUId
-    , skukServiceProviderName
-    , skukServiceRegions
-    , skukName
-    , skukPricingInfo
-    , skukDescription
+    -- ** AggregationInfo_AggregationInterval
+    AggregationInfo_AggregationInterval (..),
 
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** AggregationInfo_AggregationLevel
+    AggregationInfo_AggregationLevel (..),
 
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** ListBillingAccountsResponse
-    , ListBillingAccountsResponse
-    , listBillingAccountsResponse
-    , lbarNextPageToken
-    , lbarBillingAccounts
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** PricingInfo
-    , PricingInfo
-    , pricingInfo
-    , piSummary
-    , piAggregationInfo
-    , piPricingExpression
-    , piCurrencyConversionRate
-    , piEffectiveTime
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- ** AggregationInfoAggregationInterval
-    , AggregationInfoAggregationInterval (..)
+    -- ** BillingAccount
+    BillingAccount (..),
+    newBillingAccount,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    Binding (..),
+    newBinding,
 
-import Network.Google.Prelude
+    -- ** Category
+    Category (..),
+    newCategory,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** GeoTaxonomy
+    GeoTaxonomy (..),
+    newGeoTaxonomy,
+
+    -- ** GeoTaxonomy_Type
+    GeoTaxonomy_Type (..),
+
+    -- ** ListBillingAccountsResponse
+    ListBillingAccountsResponse (..),
+    newListBillingAccountsResponse,
+
+    -- ** ListProjectBillingInfoResponse
+    ListProjectBillingInfoResponse (..),
+    newListProjectBillingInfoResponse,
+
+    -- ** ListServicesResponse
+    ListServicesResponse (..),
+    newListServicesResponse,
+
+    -- ** ListSkusResponse
+    ListSkusResponse (..),
+    newListSkusResponse,
+
+    -- ** Money
+    Money (..),
+    newMoney,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PricingExpression
+    PricingExpression (..),
+    newPricingExpression,
+
+    -- ** PricingInfo
+    PricingInfo (..),
+    newPricingInfo,
+
+    -- ** ProjectBillingInfo
+    ProjectBillingInfo (..),
+    newProjectBillingInfo,
+
+    -- ** Service
+    Service (..),
+    newService,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Sku
+    Sku (..),
+    newSku,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** TierRate
+    TierRate (..),
+    newTierRate,
+  )
+where
+
+import Network.Google.Billing.Cloudbilling.BillingAccounts.Create
+import Network.Google.Billing.Cloudbilling.BillingAccounts.Get
+import Network.Google.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
+import Network.Google.Billing.Cloudbilling.BillingAccounts.List
+import Network.Google.Billing.Cloudbilling.BillingAccounts.Patch
+import Network.Google.Billing.Cloudbilling.BillingAccounts.Projects.List
+import Network.Google.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
+import Network.Google.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
+import Network.Google.Billing.Cloudbilling.Projects.GetBillingInfo
+import Network.Google.Billing.Cloudbilling.Projects.UpdateBillingInfo
+import Network.Google.Billing.Cloudbilling.Services.List
+import Network.Google.Billing.Cloudbilling.Services.Skus.List
 import Network.Google.Billing.Types
-import Network.Google.Resource.CloudBilling.BillingAccounts.Create
-import Network.Google.Resource.CloudBilling.BillingAccounts.Get
-import Network.Google.Resource.CloudBilling.BillingAccounts.GetIAMPolicy
-import Network.Google.Resource.CloudBilling.BillingAccounts.List
-import Network.Google.Resource.CloudBilling.BillingAccounts.Patch
-import Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
-import Network.Google.Resource.CloudBilling.BillingAccounts.SetIAMPolicy
-import Network.Google.Resource.CloudBilling.BillingAccounts.TestIAMPermissions
-import Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
-import Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
-import Network.Google.Resource.CloudBilling.Services.List
-import Network.Google.Resource.CloudBilling.Services.SKUs.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Billing API service.
-type BillingAPI =
-     ProjectsGetBillingInfoResource :<|>
-       ProjectsUpdateBillingInfoResource
-       :<|> ServicesSKUsListResource
-       :<|> ServicesListResource
-       :<|> BillingAccountsProjectsListResource
-       :<|> BillingAccountsListResource
-       :<|> BillingAccountsGetIAMPolicyResource
-       :<|> BillingAccountsPatchResource
-       :<|> BillingAccountsGetResource
-       :<|> BillingAccountsCreateResource
-       :<|> BillingAccountsSetIAMPolicyResource
-       :<|> BillingAccountsTestIAMPermissionsResource
