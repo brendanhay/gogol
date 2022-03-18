@@ -1,411 +1,286 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Genomics.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Genomics.Types
-    (
-    -- * Service Configuration
-      genomicsService
+  ( -- * Configuration
+    genomicsService,
 
     -- * OAuth Scopes
-    , genomicsScope
-    , cloudPlatformScope
+    cloudPlatformScope,
+    genomicsScope,
 
-    -- * ContainerStartedEventPortMAppings
-    , ContainerStartedEventPortMAppings
-    , containerStartedEventPortMAppings
-    , csepmaAddtional
+    -- * Types
 
-    -- * ActionFlagsItem
-    , ActionFlagsItem (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Event
-    , Event
-    , event
-    , eDetails
-    , eTimestamp
-    , eDescription
+    -- ** Accelerator
+    Accelerator (..),
+    newAccelerator,
 
-    -- * CheckInRequestEvent
-    , CheckInRequestEvent
-    , checkInRequestEvent
-    , cireAddtional
+    -- ** Action
+    Action (..),
+    newAction,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Action_Environment
+    Action_Environment (..),
+    newAction_Environment,
 
-    -- * RunPipelineRequestLabels
-    , RunPipelineRequestLabels
-    , runPipelineRequestLabels
-    , rprlAddtional
+    -- ** Action_FlagsItem
+    Action_FlagsItem (..),
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** Action_Labels
+    Action_Labels (..),
+    newAction_Labels,
 
-    -- * FailedEvent
-    , FailedEvent
-    , failedEvent
-    , feCause
-    , feCode
+    -- ** Action_PortMappings
+    Action_PortMappings (..),
+    newAction_PortMappings,
 
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- * WorkerStatus
-    , WorkerStatus
-    , workerStatus
-    , wsTotalRamBytes
-    , wsAttachedDisks
-    , wsUptimeSeconds
-    , wsBootDisk
-    , wsFreeRamBytes
+    -- ** CheckInRequest
+    CheckInRequest (..),
+    newCheckInRequest,
 
-    -- * ContainerStoppedEvent
-    , ContainerStoppedEvent
-    , containerStoppedEvent
-    , cseExitStatus
-    , cseActionId
-    , cseStderr
+    -- ** CheckInRequest_Event
+    CheckInRequest_Event (..),
+    newCheckInRequest_Event,
 
-    -- * CheckInResponse
-    , CheckInResponse
-    , checkInResponse
-    , cirFeatures
-    , cirDeadline
-    , cirMetadata
+    -- ** CheckInResponse
+    CheckInResponse (..),
+    newCheckInResponse,
 
-    -- * WorkerAssignedEvent
-    , WorkerAssignedEvent
-    , workerAssignedEvent
-    , waeZone
-    , waeMachineType
-    , waeInstance
+    -- ** CheckInResponse_Features
+    CheckInResponse_Features (..),
+    newCheckInResponse_Features,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** CheckInResponse_Metadata
+    CheckInResponse_Metadata (..),
+    newCheckInResponse_Metadata,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** ContainerKilledEvent
+    ContainerKilledEvent (..),
+    newContainerKilledEvent,
 
-    -- * Disk
-    , Disk
-    , disk
-    , dSourceImage
-    , dSizeGb
-    , dName
-    , dType
+    -- ** ContainerStartedEvent
+    ContainerStartedEvent (..),
+    newContainerStartedEvent,
 
-    -- * UnexpectedExitStatusEvent
-    , UnexpectedExitStatusEvent
-    , unexpectedExitStatusEvent
-    , ueseExitStatus
-    , ueseActionId
+    -- ** ContainerStartedEvent_PortMappings
+    ContainerStartedEvent_PortMappings (..),
+    newContainerStartedEvent_PortMappings,
 
-    -- * DelayedEvent
-    , DelayedEvent
-    , delayedEvent
-    , deMetrics
-    , deCause
+    -- ** ContainerStoppedEvent
+    ContainerStoppedEvent (..),
+    newContainerStoppedEvent,
 
-    -- * ActionPortMAppings
-    , ActionPortMAppings
-    , actionPortMAppings
-    , apmaAddtional
+    -- ** DelayedEvent
+    DelayedEvent (..),
+    newDelayedEvent,
 
-    -- * MetadataLabels
-    , MetadataLabels
-    , metadataLabels
-    , mlAddtional
+    -- ** Disk
+    Disk (..),
+    newDisk,
 
-    -- * CheckInRequest
-    , CheckInRequest
-    , checkInRequest
-    , cirEvent
-    , cirWorkerStatus
-    , cirResult
-    , cirEvents
-    , cirDeadlineExpired
-    , cirSosReport
+    -- ** DiskStatus
+    DiskStatus (..),
+    newDiskStatus,
 
-    -- * PersistentDisk
-    , PersistentDisk
-    , persistentDisk
-    , pdSourceImage
-    , pdSizeGb
-    , pdType
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * ContainerKilledEvent
-    , ContainerKilledEvent
-    , containerKilledEvent
-    , ckeActionId
+    -- ** Event
+    Event (..),
+    newEvent,
 
-    -- * PullStoppedEvent
-    , PullStoppedEvent
-    , pullStoppedEvent
-    , pseImageURI
+    -- ** Event_Details
+    Event_Details (..),
+    newEvent_Details,
 
-    -- * Volume
-    , Volume
-    , volume
-    , vPersistentDisk
-    , vVolume
-    , vExistingDisk
-    , vNfsMount
+    -- ** ExistingDisk
+    ExistingDisk (..),
+    newExistingDisk,
 
-    -- * ActionLabels
-    , ActionLabels
-    , actionLabels
-    , alAddtional
+    -- ** FailedEvent
+    FailedEvent (..),
+    newFailedEvent,
 
-    -- * TimestampedEventData
-    , TimestampedEventData
-    , timestampedEventData
-    , tedAddtional
+    -- ** FailedEvent_Code
+    FailedEvent_Code (..),
 
-    -- * TimestampedEvent
-    , TimestampedEvent
-    , timestampedEvent
-    , teData
-    , teTimestamp
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
 
-    -- * Network
-    , Network
-    , network
-    , nUsePrivateAddress
-    , nName
-    , nSubnetwork
+    -- ** Metadata_Labels
+    Metadata_Labels (..),
+    newMetadata_Labels,
 
-    -- * EventDetails
-    , EventDetails
-    , eventDetails
-    , edAddtional
+    -- ** Mount
+    Mount (..),
+    newMount,
 
-    -- * ExistingDisk
-    , ExistingDisk
-    , existingDisk
-    , edDisk
+    -- ** NFSMount
+    NFSMount (..),
+    newNFSMount,
 
-    -- * Action
-    , Action
-    , action
-    , aCommands
-    , aFlags
-    , aEnvironment
-    , aCredentials
-    , aEntrypoint
-    , aPortMAppings
-    , aMounts
-    , aImageURI
-    , aName
-    , aLabels
-    , aEncryptedEnvironment
-    , aTimeout
-    , aPidNamespace
+    -- ** Network
+    Network (..),
+    newNetwork,
 
-    -- * Secret
-    , Secret
-    , secret
-    , sKeyName
-    , sCipherText
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * WorkerStatusAttachedDisks
-    , WorkerStatusAttachedDisks
-    , workerStatusAttachedDisks
-    , wsadAddtional
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * Resources
-    , Resources
-    , resources
-    , rZones
-    , rRegions
-    , rVirtualMachine
-    , rProjectId
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * DiskStatus
-    , DiskStatus
-    , diskStatus
-    , dsTotalSpaceBytes
-    , dsFreeSpaceBytes
+    -- ** PersistentDisk
+    PersistentDisk (..),
+    newPersistentDisk,
 
-    -- * VirtualMachineLabels
-    , VirtualMachineLabels
-    , virtualMachineLabels
-    , vmlAddtional
+    -- ** Pipeline
+    Pipeline (..),
+    newPipeline,
 
-    -- * VirtualMachine
-    , VirtualMachine
-    , virtualMachine
-    , vmDockerCacheImages
-    , vmReservation
-    , vmNetwork
-    , vmCPUPlatform
-    , vmServiceAccount
-    , vmAccelerators
-    , vmMachineType
-    , vmEnableStackdriverMonitoring
-    , vmLabels
-    , vmVolumes
-    , vmBootDiskSizeGb
-    , vmDisks
-    , vmBootImage
-    , vmNvidiaDriverVersion
-    , vmPreemptible
+    -- ** Pipeline_Environment
+    Pipeline_Environment (..),
+    newPipeline_Environment,
 
-    -- * ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
+    -- ** PullStartedEvent
+    PullStartedEvent (..),
+    newPullStartedEvent,
 
-    -- * CheckInResponseMetadata
-    , CheckInResponseMetadata
-    , checkInResponseMetadata
-    , cirmAddtional
+    -- ** PullStoppedEvent
+    PullStoppedEvent (..),
+    newPullStoppedEvent,
 
-    -- * Accelerator
-    , Accelerator
-    , accelerator
-    , aCount
-    , aType
+    -- ** Resources
+    Resources (..),
+    newResources,
 
-    -- * PipelineEnvironment
-    , PipelineEnvironment
-    , pipelineEnvironment
-    , peAddtional
+    -- ** RunPipelineRequest
+    RunPipelineRequest (..),
+    newRunPipelineRequest,
 
-    -- * WorkerReleasedEvent
-    , WorkerReleasedEvent
-    , workerReleasedEvent
-    , wreZone
-    , wreInstance
+    -- ** RunPipelineRequest_Labels
+    RunPipelineRequest_Labels (..),
+    newRunPipelineRequest_Labels,
 
-    -- * ContainerStartedEvent
-    , ContainerStartedEvent
-    , containerStartedEvent
-    , cIPAddress
-    , cActionId
-    , cPortMAppings
+    -- ** RunPipelineResponse
+    RunPipelineResponse (..),
+    newRunPipelineResponse,
 
-    -- * FailedEventCode
-    , FailedEventCode (..)
+    -- ** Secret
+    Secret (..),
+    newSecret,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
-    -- * RunPipelineRequest
-    , RunPipelineRequest
-    , runPipelineRequest
-    , rprPipeline
-    , rprPubSubTopic
-    , rprLabels
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * Pipeline
-    , Pipeline
-    , pipeline
-    , pActions
-    , pEnvironment
-    , pResources
-    , pEncryptedEnvironment
-    , pTimeout
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * Metadata
-    , Metadata
-    , metadata
-    , mStartTime
-    , mEvents
-    , mEndTime
-    , mPipeline
-    , mLabels
-    , mCreateTime
+    -- ** TimestampedEvent
+    TimestampedEvent (..),
+    newTimestampedEvent,
 
-    -- * CheckInResponseFeatures
-    , CheckInResponseFeatures
-    , checkInResponseFeatures
-    , cirfAddtional
+    -- ** TimestampedEvent_Data
+    TimestampedEvent_Data (..),
+    newTimestampedEvent_Data,
 
-    -- * Mount
-    , Mount
-    , mount
-    , mPath
-    , mDisk
-    , mReadOnly
+    -- ** UnexpectedExitStatusEvent
+    UnexpectedExitStatusEvent (..),
+    newUnexpectedExitStatusEvent,
 
-    -- * PullStartedEvent
-    , PullStartedEvent
-    , pullStartedEvent
-    , pImageURI
+    -- ** VirtualMachine
+    VirtualMachine (..),
+    newVirtualMachine,
 
-    -- * RunPipelineResponse
-    , RunPipelineResponse
-    , runPipelineResponse
+    -- ** VirtualMachine_Labels
+    VirtualMachine_Labels (..),
+    newVirtualMachine_Labels,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** Volume
+    Volume (..),
+    newVolume,
 
-    -- * ActionEnvironment
-    , ActionEnvironment
-    , actionEnvironment
-    , aeAddtional
+    -- ** WorkerAssignedEvent
+    WorkerAssignedEvent (..),
+    newWorkerAssignedEvent,
 
-    -- * NFSMount
-    , NFSMount
-    , nFSMount
-    , nfsmTarget
+    -- ** WorkerReleasedEvent
+    WorkerReleasedEvent (..),
+    newWorkerReleasedEvent,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-    ) where
+    -- ** WorkerStatus
+    WorkerStatus (..),
+    newWorkerStatus,
 
-import Network.Google.Genomics.Types.Product
-import Network.Google.Genomics.Types.Sum
-import Network.Google.Prelude
+    -- ** WorkerStatus_AttachedDisks
+    WorkerStatus_AttachedDisks (..),
+    newWorkerStatus_AttachedDisks,
+  )
+where
 
--- | Default request referring to version 'v2alpha1' of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
-genomicsService :: ServiceConfig
-genomicsService
-  = defaultService (ServiceId "genomics:v2alpha1")
-      "genomics.googleapis.com"
+import Network.Google.Genomics.Internal.Product
+import Network.Google.Genomics.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2alpha1@ of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
+genomicsService :: Core.ServiceConfig
+genomicsService =
+  Core.defaultService
+    (Core.ServiceId "genomics:v2alpha1")
+    "genomics.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | View and manage Genomics data
-genomicsScope :: Proxy '["https://www.googleapis.com/auth/genomics"]
-genomicsScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+genomicsScope :: Core.Proxy '["https://www.googleapis.com/auth/genomics"]
+genomicsScope = Core.Proxy
