@@ -19,31 +19,15 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Discovery
+-- Module      : Gogol.Discovery.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Provides information about other Google APIs, such as what APIs are available, the resource, and method details for each API.
---
--- /See:/ <https://developers.google.com/discovery/ API Discovery Service Reference>
-module Network.Google.Discovery
+module Gogol.Discovery.Types
   ( -- * Configuration
     discoveryService,
-
-    -- * Resources
-
-    -- ** discovery.apis.getRest
-    DiscoveryApisGetRestResource,
-    newDiscoveryApisGetRest,
-    DiscoveryApisGetRest,
-
-    -- ** discovery.apis.list
-    DiscoveryApisListResource,
-    newDiscoveryApisList,
-    DiscoveryApisList,
 
     -- * Types
 
@@ -165,6 +149,13 @@ module Network.Google.Discovery
   )
 where
 
-import Network.Google.Discovery.Apis.GetRest
-import Network.Google.Discovery.Apis.List
-import Network.Google.Discovery.Types
+import Gogol.Discovery.Internal.Product
+import Gogol.Discovery.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the API Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
+discoveryService :: Core.ServiceConfig
+discoveryService =
+  Core.defaultService
+    (Core.ServiceId "discovery:v1")
+    "www.googleapis.com"

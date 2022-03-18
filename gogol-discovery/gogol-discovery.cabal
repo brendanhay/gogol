@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Discovery
-    Network.Google.Discovery.Apis.GetRest
-    Network.Google.Discovery.Apis.List
-    Network.Google.Discovery.Types
+    Gogol.Discovery
+    Gogol.Discovery.Apis.GetRest
+    Gogol.Discovery.Apis.List
+    Gogol.Discovery.Types
 
   other-modules:
-    Network.Google.Discovery.Internal.Product
-    Network.Google.Discovery.Internal.Sum
+    Gogol.Discovery.Internal.Product
+    Gogol.Discovery.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
