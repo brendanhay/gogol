@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,41 +36,41 @@
 --
 -- /See:/ <https://developers.google.com/abusive-experience-report/ Abusive Experience Report API Reference>
 module Gogol.AbusiveExperienceReport
-  ( -- * Configuration
-    abusiveExperienceReportService,
+    (
+    -- * Configuration
+      abusiveExperienceReportService
 
     -- * Resources
 
     -- ** abusiveexperiencereport.sites.get
-    AbusiveExperienceReportSitesGetResource,
-    newAbusiveExperienceReportSitesGet,
-    AbusiveExperienceReportSitesGet,
+    , AbusiveExperienceReportSitesGetResource
+    , newAbusiveExperienceReportSitesGet
+    , AbusiveExperienceReportSitesGet
 
     -- ** abusiveexperiencereport.violatingSites.list
-    AbusiveExperienceReportViolatingSitesListResource,
-    newAbusiveExperienceReportViolatingSitesList,
-    AbusiveExperienceReportViolatingSitesList,
+    , AbusiveExperienceReportViolatingSitesListResource
+    , newAbusiveExperienceReportViolatingSitesList
+    , AbusiveExperienceReportViolatingSitesList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** SiteSummaryResponse
-    SiteSummaryResponse (..),
-    newSiteSummaryResponse,
+    , SiteSummaryResponse (..)
+    , newSiteSummaryResponse
 
     -- ** SiteSummaryResponse_AbusiveStatus
-    SiteSummaryResponse_AbusiveStatus (..),
+    , SiteSummaryResponse_AbusiveStatus (..)
 
     -- ** SiteSummaryResponse_FilterStatus
-    SiteSummaryResponse_FilterStatus (..),
+    , SiteSummaryResponse_FilterStatus (..)
 
     -- ** ViolatingSitesResponse
-    ViolatingSitesResponse (..),
-    newViolatingSitesResponse,
-  )
-where
+    , ViolatingSitesResponse (..)
+    , newViolatingSitesResponse
+    ) where
 
 import Gogol.AbusiveExperienceReport.Sites.Get
 import Gogol.AbusiveExperienceReport.Types
