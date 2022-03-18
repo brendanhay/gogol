@@ -1,120 +1,97 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.WebmasterTools.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.WebmasterTools.Types
-    (
-    -- * Service Configuration
-      webmasterToolsService
+  ( -- * Configuration
+    webmasterToolsService,
 
     -- * OAuth Scopes
-    , webmastersScope
-    , webmastersReadOnlyScope
+    webmastersScope,
+    webmastersReadOnlyScope,
 
-    -- * WmxSitemapContent
-    , WmxSitemapContent
-    , wmxSitemapContent
-    , wscIndexed
-    , wscType
-    , wscSubmitted
+    -- * Types
 
-    -- * APIdimensionFilterGroup
-    , APIdimensionFilterGroup
-    , apidimensionFilterGroup
-    , afgFilters
-    , afgGroupType
+    -- ** ApiDataRow
+    ApiDataRow (..),
+    newApiDataRow,
 
-    -- * APIDataRow
-    , APIDataRow
-    , apiDataRow
-    , adrImpressions
-    , adrKeys
-    , adrCtr
-    , adrClicks
-    , adrPosition
+    -- ** ApiDimensionFilter
+    ApiDimensionFilter (..),
+    newApiDimensionFilter,
 
-    -- * APIdimensionFilter
-    , APIdimensionFilter
-    , apidimensionFilter
-    , afOperator
-    , afDimension
-    , afExpression
+    -- ** ApiDimensionFilterGroup
+    ApiDimensionFilterGroup (..),
+    newApiDimensionFilterGroup,
 
-    -- * SearchAnalyticsQueryResponse
-    , SearchAnalyticsQueryResponse
-    , searchAnalyticsQueryResponse
-    , saqrRows
-    , saqrResponseAggregationType
+    -- ** SearchAnalyticsQueryRequest
+    SearchAnalyticsQueryRequest (..),
+    newSearchAnalyticsQueryRequest,
 
-    -- * WmxSitemap
-    , WmxSitemap
-    , wmxSitemap
-    , wsContents
-    , wsPath
-    , wsIsSitemapsIndex
-    , wsLastSubmitted
-    , wsWarnings
-    , wsLastDownloaded
-    , wsIsPending
-    , wsType
-    , wsErrors
+    -- ** SearchAnalyticsQueryResponse
+    SearchAnalyticsQueryResponse (..),
+    newSearchAnalyticsQueryResponse,
 
-    -- * SitemapsListResponse
-    , SitemapsListResponse
-    , sitemapsListResponse
-    , slrSitemap
+    -- ** SitemapsListResponse
+    SitemapsListResponse (..),
+    newSitemapsListResponse,
 
-    -- * SearchAnalyticsQueryRequest
-    , SearchAnalyticsQueryRequest
-    , searchAnalyticsQueryRequest
-    , saqrAggregationType
-    , saqrDataState
-    , saqrRowLimit
-    , saqrEndDate
-    , saqrSearchType
-    , saqrDimensionFilterGroups
-    , saqrStartDate
-    , saqrStartRow
-    , saqrDimensions
+    -- ** SitesListResponse
+    SitesListResponse (..),
+    newSitesListResponse,
 
-    -- * SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , slrSiteEntry
+    -- ** WmxSite
+    WmxSite (..),
+    newWmxSite,
 
-    -- * WmxSite
-    , WmxSite
-    , wmxSite
-    , wsPermissionLevel
-    , wsSiteURL
-    ) where
+    -- ** WmxSitemap
+    WmxSitemap (..),
+    newWmxSitemap,
 
-import Network.Google.Prelude
-import Network.Google.WebmasterTools.Types.Product
-import Network.Google.WebmasterTools.Types.Sum
+    -- ** WmxSitemapContent
+    WmxSitemapContent (..),
+    newWmxSitemapContent,
+  )
+where
 
--- | Default request referring to version 'v3' of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
-webmasterToolsService :: ServiceConfig
-webmasterToolsService
-  = defaultService (ServiceId "webmasters:v3")
-      "www.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.WebmasterTools.Internal.Product
+import Network.Google.WebmasterTools.Internal.Sum
+
+-- | Default request referring to version @v3@ of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
+webmasterToolsService :: Core.ServiceConfig
+webmasterToolsService =
+  Core.defaultService
+    (Core.ServiceId "webmasters:v3")
+    "www.googleapis.com"
 
 -- | View and manage Search Console data for your verified sites
-webmastersScope :: Proxy '["https://www.googleapis.com/auth/webmasters"]
-webmastersScope = Proxy
+webmastersScope :: Core.Proxy '["https://www.googleapis.com/auth/webmasters"]
+webmastersScope = Core.Proxy
 
 -- | View Search Console data for your verified sites
-webmastersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/webmasters.readonly"]
-webmastersReadOnlyScope = Proxy
+webmastersReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/webmasters.readonly"]
+webmastersReadOnlyScope = Core.Proxy

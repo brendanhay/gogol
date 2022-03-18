@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.WebmasterTools
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,149 +30,111 @@
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference>
 module Network.Google.WebmasterTools
-    (
-    -- * Service Configuration
-      webmasterToolsService
+  ( -- * Configuration
+    webmasterToolsService,
 
     -- * OAuth Scopes
-    , webmastersScope
-    , webmastersReadOnlyScope
-
-    -- * API Declaration
-    , WebmasterToolsAPI
+    webmastersScope,
+    webmastersReadOnlyScope,
 
     -- * Resources
 
     -- ** webmasters.searchanalytics.query
-    , module Network.Google.Resource.Webmasters.Searchanalytics.Query
+    WebmastersSearchanalyticsQueryResource,
+    newWebmastersSearchanalyticsQuery,
+    WebmastersSearchanalyticsQuery,
 
     -- ** webmasters.sitemaps.delete
-    , module Network.Google.Resource.Webmasters.Sitemaps.Delete
+    WebmastersSitemapsDeleteResource,
+    newWebmastersSitemapsDelete,
+    WebmastersSitemapsDelete,
 
     -- ** webmasters.sitemaps.get
-    , module Network.Google.Resource.Webmasters.Sitemaps.Get
+    WebmastersSitemapsGetResource,
+    newWebmastersSitemapsGet,
+    WebmastersSitemapsGet,
 
     -- ** webmasters.sitemaps.list
-    , module Network.Google.Resource.Webmasters.Sitemaps.List
+    WebmastersSitemapsListResource,
+    newWebmastersSitemapsList,
+    WebmastersSitemapsList,
 
     -- ** webmasters.sitemaps.submit
-    , module Network.Google.Resource.Webmasters.Sitemaps.Submit
+    WebmastersSitemapsSubmitResource,
+    newWebmastersSitemapsSubmit,
+    WebmastersSitemapsSubmit,
 
     -- ** webmasters.sites.add
-    , module Network.Google.Resource.Webmasters.Sites.Add
+    WebmastersSitesAddResource,
+    newWebmastersSitesAdd,
+    WebmastersSitesAdd,
 
     -- ** webmasters.sites.delete
-    , module Network.Google.Resource.Webmasters.Sites.Delete
+    WebmastersSitesDeleteResource,
+    newWebmastersSitesDelete,
+    WebmastersSitesDelete,
 
     -- ** webmasters.sites.get
-    , module Network.Google.Resource.Webmasters.Sites.Get
+    WebmastersSitesGetResource,
+    newWebmastersSitesGet,
+    WebmastersSitesGet,
 
     -- ** webmasters.sites.list
-    , module Network.Google.Resource.Webmasters.Sites.List
+    WebmastersSitesListResource,
+    newWebmastersSitesList,
+    WebmastersSitesList,
 
     -- * Types
 
-    -- ** WmxSitemapContent
-    , WmxSitemapContent
-    , wmxSitemapContent
-    , wscIndexed
-    , wscType
-    , wscSubmitted
+    -- ** ApiDataRow
+    ApiDataRow (..),
+    newApiDataRow,
 
-    -- ** APIdimensionFilterGroup
-    , APIdimensionFilterGroup
-    , apidimensionFilterGroup
-    , afgFilters
-    , afgGroupType
+    -- ** ApiDimensionFilter
+    ApiDimensionFilter (..),
+    newApiDimensionFilter,
 
-    -- ** APIDataRow
-    , APIDataRow
-    , apiDataRow
-    , adrImpressions
-    , adrKeys
-    , adrCtr
-    , adrClicks
-    , adrPosition
-
-    -- ** APIdimensionFilter
-    , APIdimensionFilter
-    , apidimensionFilter
-    , afOperator
-    , afDimension
-    , afExpression
-
-    -- ** SearchAnalyticsQueryResponse
-    , SearchAnalyticsQueryResponse
-    , searchAnalyticsQueryResponse
-    , saqrRows
-    , saqrResponseAggregationType
-
-    -- ** WmxSitemap
-    , WmxSitemap
-    , wmxSitemap
-    , wsContents
-    , wsPath
-    , wsIsSitemapsIndex
-    , wsLastSubmitted
-    , wsWarnings
-    , wsLastDownloaded
-    , wsIsPending
-    , wsType
-    , wsErrors
-
-    -- ** SitemapsListResponse
-    , SitemapsListResponse
-    , sitemapsListResponse
-    , slrSitemap
+    -- ** ApiDimensionFilterGroup
+    ApiDimensionFilterGroup (..),
+    newApiDimensionFilterGroup,
 
     -- ** SearchAnalyticsQueryRequest
-    , SearchAnalyticsQueryRequest
-    , searchAnalyticsQueryRequest
-    , saqrAggregationType
-    , saqrDataState
-    , saqrRowLimit
-    , saqrEndDate
-    , saqrSearchType
-    , saqrDimensionFilterGroups
-    , saqrStartDate
-    , saqrStartRow
-    , saqrDimensions
+    SearchAnalyticsQueryRequest (..),
+    newSearchAnalyticsQueryRequest,
+
+    -- ** SearchAnalyticsQueryResponse
+    SearchAnalyticsQueryResponse (..),
+    newSearchAnalyticsQueryResponse,
+
+    -- ** SitemapsListResponse
+    SitemapsListResponse (..),
+    newSitemapsListResponse,
 
     -- ** SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , slrSiteEntry
+    SitesListResponse (..),
+    newSitesListResponse,
 
     -- ** WmxSite
-    , WmxSite
-    , wmxSite
-    , wsPermissionLevel
-    , wsSiteURL
-    ) where
+    WmxSite (..),
+    newWmxSite,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Webmasters.Searchanalytics.Query
-import Network.Google.Resource.Webmasters.Sitemaps.Delete
-import Network.Google.Resource.Webmasters.Sitemaps.Get
-import Network.Google.Resource.Webmasters.Sitemaps.List
-import Network.Google.Resource.Webmasters.Sitemaps.Submit
-import Network.Google.Resource.Webmasters.Sites.Add
-import Network.Google.Resource.Webmasters.Sites.Delete
-import Network.Google.Resource.Webmasters.Sites.Get
-import Network.Google.Resource.Webmasters.Sites.List
+    -- ** WmxSitemap
+    WmxSitemap (..),
+    newWmxSitemap,
+
+    -- ** WmxSitemapContent
+    WmxSitemapContent (..),
+    newWmxSitemapContent,
+  )
+where
+
 import Network.Google.WebmasterTools.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Search Console API service.
-type WebmasterToolsAPI =
-     SitemapsListResource :<|> SitemapsGetResource :<|>
-       SitemapsSubmitResource
-       :<|> SitemapsDeleteResource
-       :<|> SearchanalyticsQueryResource
-       :<|> SitesListResource
-       :<|> SitesGetResource
-       :<|> SitesAddResource
-       :<|> SitesDeleteResource
+import Network.Google.WebmasterTools.Webmasters.Searchanalytics.Query
+import Network.Google.WebmasterTools.Webmasters.Sitemaps.Delete
+import Network.Google.WebmasterTools.Webmasters.Sitemaps.Get
+import Network.Google.WebmasterTools.Webmasters.Sitemaps.List
+import Network.Google.WebmasterTools.Webmasters.Sitemaps.Submit
+import Network.Google.WebmasterTools.Webmasters.Sites.Add
+import Network.Google.WebmasterTools.Webmasters.Sites.Delete
+import Network.Google.WebmasterTools.Webmasters.Sites.Get
+import Network.Google.WebmasterTools.Webmasters.Sites.List
