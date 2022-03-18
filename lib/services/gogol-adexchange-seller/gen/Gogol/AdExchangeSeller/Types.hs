@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,104 +31,105 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AdExchangeSeller.Types
-  ( -- * Configuration
-    adExchangeSellerService,
+    (
+    -- * Configuration
+      adExchangeSellerService
 
     -- * OAuth Scopes
-    adexchangeSellerScope,
-    adexchangeSellerReadOnlyScope,
+    , adexchangeSellerScope
+    , adexchangeSellerReadOnlyScope
 
     -- * Types
 
     -- ** Account
-    Account (..),
-    newAccount,
+    , Account (..)
+    , newAccount
 
     -- ** Accounts
-    Accounts (..),
-    newAccounts,
+    , Accounts (..)
+    , newAccounts
 
     -- ** AdClient
-    AdClient (..),
-    newAdClient,
+    , AdClient (..)
+    , newAdClient
 
     -- ** AdClients
-    AdClients (..),
-    newAdClients,
+    , AdClients (..)
+    , newAdClients
 
     -- ** Alert
-    Alert (..),
-    newAlert,
+    , Alert (..)
+    , newAlert
 
     -- ** Alerts
-    Alerts (..),
-    newAlerts,
+    , Alerts (..)
+    , newAlerts
 
     -- ** CustomChannel
-    CustomChannel (..),
-    newCustomChannel,
+    , CustomChannel (..)
+    , newCustomChannel
 
     -- ** CustomChannel_TargetingInfo
-    CustomChannel_TargetingInfo (..),
-    newCustomChannel_TargetingInfo,
+    , CustomChannel_TargetingInfo (..)
+    , newCustomChannel_TargetingInfo
 
     -- ** CustomChannels
-    CustomChannels (..),
-    newCustomChannels,
+    , CustomChannels (..)
+    , newCustomChannels
 
     -- ** Metadata
-    Metadata (..),
-    newMetadata,
+    , Metadata (..)
+    , newMetadata
 
     -- ** PreferredDeal
-    PreferredDeal (..),
-    newPreferredDeal,
+    , PreferredDeal (..)
+    , newPreferredDeal
 
     -- ** PreferredDeals
-    PreferredDeals (..),
-    newPreferredDeals,
+    , PreferredDeals (..)
+    , newPreferredDeals
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** Report_HeadersItem
-    Report_HeadersItem (..),
-    newReport_HeadersItem,
+    , Report_HeadersItem (..)
+    , newReport_HeadersItem
 
     -- ** ReportingMetadataEntry
-    ReportingMetadataEntry (..),
-    newReportingMetadataEntry,
+    , ReportingMetadataEntry (..)
+    , newReportingMetadataEntry
 
     -- ** SavedReport
-    SavedReport (..),
-    newSavedReport,
+    , SavedReport (..)
+    , newSavedReport
 
     -- ** SavedReports
-    SavedReports (..),
-    newSavedReports,
+    , SavedReports (..)
+    , newSavedReports
 
     -- ** UrlChannel
-    UrlChannel (..),
-    newUrlChannel,
+    , UrlChannel (..)
+    , newUrlChannel
 
     -- ** UrlChannels
-    UrlChannels (..),
-    newUrlChannels,
-  )
-where
+    , UrlChannels (..)
+    , newUrlChannels
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AdExchangeSeller.Internal.Product
 import Gogol.AdExchangeSeller.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2.0@ of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
 adExchangeSellerService :: Core.ServiceConfig
-adExchangeSellerService =
-  Core.defaultService
-    (Core.ServiceId "adexchangeseller:v2.0")
-    "www.googleapis.com"
+adExchangeSellerService
+  = Core.defaultService
+      (Core.ServiceId "adexchangeseller:v2.0")
+      "www.googleapis.com"
 
 -- | View and manage your Ad Exchange data
 adexchangeSellerScope :: Core.Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
