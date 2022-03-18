@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,68 +30,68 @@
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference>
 module Gogol.RuntimeConfig
-    (
-    -- * Configuration
-      runtimeConfigService
+  ( -- * Configuration
+    runtimeConfigService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudruntimeconfigScope
+    cloudPlatformScope,
+    cloudruntimeconfigScope,
 
     -- * Resources
 
     -- ** runtimeconfig.operations.cancel
-    , RuntimeConfigOperationsCancelResource
-    , newRuntimeConfigOperationsCancel
-    , RuntimeConfigOperationsCancel
+    RuntimeConfigOperationsCancelResource,
+    newRuntimeConfigOperationsCancel,
+    RuntimeConfigOperationsCancel,
 
     -- ** runtimeconfig.operations.delete
-    , RuntimeConfigOperationsDeleteResource
-    , newRuntimeConfigOperationsDelete
-    , RuntimeConfigOperationsDelete
+    RuntimeConfigOperationsDeleteResource,
+    newRuntimeConfigOperationsDelete,
+    RuntimeConfigOperationsDelete,
 
     -- ** runtimeconfig.operations.list
-    , RuntimeConfigOperationsListResource
-    , newRuntimeConfigOperationsList
-    , RuntimeConfigOperationsList
+    RuntimeConfigOperationsListResource,
+    newRuntimeConfigOperationsList,
+    RuntimeConfigOperationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
-    ) where
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
 
 import Gogol.RuntimeConfig.Operations.Cancel
 import Gogol.RuntimeConfig.Operations.Delete
