@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.QPXExpress.Trips.Search
+-- Module      : Gogol.QPXExpress.Trips.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a list of flights.
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference> for @qpxExpress.trips.search@.
-module Network.Google.QPXExpress.Trips.Search
+module Gogol.QPXExpress.Trips.Search
   ( -- * Resource
     QPXExpressTripsSearchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.QPXExpress.Trips.Search
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.QPXExpress.Types
+import qualified Gogol.Prelude as Core
+import Gogol.QPXExpress.Types
 
 -- | A resource alias for @qpxExpress.trips.search@ method which the
 -- 'QPXExpressTripsSearch' request conforms to.
