@@ -1,98 +1,114 @@
-name:                  gogol-iam
-version:               0.5.0
-synopsis:              Google Identity and Access Management (IAM) SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-iam
+version:            0.5.0
+synopsis:           Google Identity and Access Management (IAM) SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Manages identity and access control for Google Cloud Platform resources,
-    including the creation of service accounts, which you can use to
-    authenticate to Google and make API calls.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-iam
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.IAM
-        , Network.Google.IAM.Types
-        , Network.Google.Resource.IAM.IAMPolicies.LintPolicy
-        , Network.Google.Resource.IAM.IAMPolicies.QueryAuditableServices
-        , Network.Google.Resource.IAM.Organizations.Roles.Create
-        , Network.Google.Resource.IAM.Organizations.Roles.Delete
-        , Network.Google.Resource.IAM.Organizations.Roles.Get
-        , Network.Google.Resource.IAM.Organizations.Roles.List
-        , Network.Google.Resource.IAM.Organizations.Roles.Patch
-        , Network.Google.Resource.IAM.Organizations.Roles.Undelete
-        , Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Create
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Delete
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Get
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.List
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Operations.Get
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Patch
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Create
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Delete
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Get
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.List
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Operations.Get
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Patch
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Undelete
-        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Undelete
-        , Network.Google.Resource.IAM.Projects.Roles.Create
-        , Network.Google.Resource.IAM.Projects.Roles.Delete
-        , Network.Google.Resource.IAM.Projects.Roles.Get
-        , Network.Google.Resource.IAM.Projects.Roles.List
-        , Network.Google.Resource.IAM.Projects.Roles.Patch
-        , Network.Google.Resource.IAM.Projects.Roles.Undelete
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Upload
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.List
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
-        , Network.Google.Resource.IAM.Roles.Get
-        , Network.Google.Resource.IAM.Roles.List
-        , Network.Google.Resource.IAM.Roles.QueryGrantableRoles
+  exposed-modules:
+    Network.Google.IAM
+    Network.Google.IAM.IamPolicies.LintPolicy
+    Network.Google.IAM.IamPolicies.QueryAuditableServices
+    Network.Google.IAM.Locations.WorkforcePools.Operations.Get
+    Network.Google.IAM.Locations.WorkforcePools.Providers.Keys.Operations.Get
+    Network.Google.IAM.Locations.WorkforcePools.Providers.Operations.Get
+    Network.Google.IAM.Locations.WorkforcePools.Subjects.Operations.Get
+    Network.Google.IAM.Organizations.Roles.Create
+    Network.Google.IAM.Organizations.Roles.Delete
+    Network.Google.IAM.Organizations.Roles.Get
+    Network.Google.IAM.Organizations.Roles.List
+    Network.Google.IAM.Organizations.Roles.Patch
+    Network.Google.IAM.Organizations.Roles.Undelete
+    Network.Google.IAM.Permissions.QueryTestablePermissions
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Create
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Delete
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Get
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.List
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Operations.Get
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Patch
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Create
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Delete
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Get
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Keys.Operations.Get
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.List
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Operations.Get
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Patch
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Undelete
+    Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Undelete
+    Network.Google.IAM.Projects.Roles.Create
+    Network.Google.IAM.Projects.Roles.Delete
+    Network.Google.IAM.Projects.Roles.Get
+    Network.Google.IAM.Projects.Roles.List
+    Network.Google.IAM.Projects.Roles.Patch
+    Network.Google.IAM.Projects.Roles.Undelete
+    Network.Google.IAM.Projects.ServiceAccounts.Create
+    Network.Google.IAM.Projects.ServiceAccounts.Delete
+    Network.Google.IAM.Projects.ServiceAccounts.Disable
+    Network.Google.IAM.Projects.ServiceAccounts.Enable
+    Network.Google.IAM.Projects.ServiceAccounts.Get
+    Network.Google.IAM.Projects.ServiceAccounts.GetIamPolicy
+    Network.Google.IAM.Projects.ServiceAccounts.Keys.Create
+    Network.Google.IAM.Projects.ServiceAccounts.Keys.Delete
+    Network.Google.IAM.Projects.ServiceAccounts.Keys.Disable
+    Network.Google.IAM.Projects.ServiceAccounts.Keys.Enable
+    Network.Google.IAM.Projects.ServiceAccounts.Keys.Get
+    Network.Google.IAM.Projects.ServiceAccounts.Keys.List
+    Network.Google.IAM.Projects.ServiceAccounts.Keys.Upload
+    Network.Google.IAM.Projects.ServiceAccounts.List
+    Network.Google.IAM.Projects.ServiceAccounts.Patch
+    Network.Google.IAM.Projects.ServiceAccounts.SetIamPolicy
+    Network.Google.IAM.Projects.ServiceAccounts.SignBlob
+    Network.Google.IAM.Projects.ServiceAccounts.SignJwt
+    Network.Google.IAM.Projects.ServiceAccounts.TestIamPermissions
+    Network.Google.IAM.Projects.ServiceAccounts.Undelete
+    Network.Google.IAM.Projects.ServiceAccounts.Update
+    Network.Google.IAM.Roles.Get
+    Network.Google.IAM.Roles.List
+    Network.Google.IAM.Roles.QueryGrantableRoles
+    Network.Google.IAM.Types
 
-    other-modules:
-          Network.Google.IAM.Types.Product
-        , Network.Google.IAM.Types.Sum
+  other-modules:
+    Network.Google.IAM.Internal.Product
+    Network.Google.IAM.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
