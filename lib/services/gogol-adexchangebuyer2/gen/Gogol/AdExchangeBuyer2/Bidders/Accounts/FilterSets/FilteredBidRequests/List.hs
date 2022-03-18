@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,99 +30,104 @@
 --
 -- /See:/ <https://developers.google.com/authorized-buyers/apis/reference/rest/ Ad Exchange Buyer API II Reference> for @adexchangebuyer2.bidders.accounts.filterSets.filteredBidRequests.list@.
 module Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBidRequests.List
-    (
-    -- * Resource
-      AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsListResource
+  ( -- * Resource
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsListResource,
 
     -- ** Constructing a Request
-    , newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
-    , AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
-    ) where
+    newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList,
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AdExchangeBuyer2.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @adexchangebuyer2.bidders.accounts.filterSets.filteredBidRequests.list@ method which the
 -- 'AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList' request conforms to.
-type AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsListResource
-     =
-     "v2beta1" Core.:>
-       Core.Capture "filterSetName" Core.Text Core.:>
-         "filteredBidRequests" Core.:>
-           Core.QueryParam "$.xgafv" Xgafv Core.:>
-             Core.QueryParam "access_token" Core.Text Core.:>
-               Core.QueryParam "callback" Core.Text Core.:>
-                 Core.QueryParam "pageSize" Core.Int32 Core.:>
-                   Core.QueryParam "pageToken" Core.Text Core.:>
-                     Core.QueryParam "uploadType" Core.Text Core.:>
-                       Core.QueryParam "upload_protocol" Core.Text Core.:>
-                         Core.QueryParam "alt" Core.AltJSON Core.:>
-                           Core.Get '[Core.JSON] ListFilteredBidRequestsResponse
+type AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsListResource =
+  "v2beta1"
+    Core.:> Core.Capture "filterSetName" Core.Text
+    Core.:> "filteredBidRequests"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "pageSize" Core.Int32
+    Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ListFilteredBidRequestsResponse
 
 -- | List all reasons that caused a bid request not to be sent for an impression, with the number of bid requests not sent for each reason.
 --
 -- /See:/ 'newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList' smart constructor.
 data AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList = AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: @bidders\/123\/filterSets\/abc@ - For an account-level filter set for the buyer account representing bidder 123: @bidders\/123\/accounts\/123\/filterSets\/abc@ - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: @bidders\/123\/accounts\/456\/filterSets\/abc@
-    , filterSetName :: Core.Text
-      -- | Requested page size. The server may return fewer results than requested. If unspecified, the server will pick an appropriate default.
-    , pageSize :: (Core.Maybe Core.Int32)
-      -- | A token identifying a page of results the server should return. Typically, this is the value of ListFilteredBidRequestsResponse.nextPageToken returned from the previous call to the filteredBidRequests.list method.
-    , pageToken :: (Core.Maybe Core.Text)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: @bidders\/123\/filterSets\/abc@ - For an account-level filter set for the buyer account representing bidder 123: @bidders\/123\/accounts\/123\/filterSets\/abc@ - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: @bidders\/123\/accounts\/456\/filterSets\/abc@
+    filterSetName :: Core.Text,
+    -- | Requested page size. The server may return fewer results than requested. If unspecified, the server will pick an appropriate default.
+    pageSize :: (Core.Maybe Core.Int32),
+    -- | A token identifying a page of results the server should return. Typically, this is the value of ListFilteredBidRequestsResponse.nextPageToken returned from the previous call to the filteredBidRequests.list method.
+    pageToken :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList' with the minimum fields required to make a request.
-newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList 
-    ::  Core.Text
-       -- ^  Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: @bidders\/123\/filterSets\/abc@ - For an account-level filter set for the buyer account representing bidder 123: @bidders\/123\/accounts\/123\/filterSets\/abc@ - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: @bidders\/123\/accounts\/456\/filterSets\/abc@ See 'filterSetName'.
-    -> AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
+newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList ::
+  -- |  Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: @bidders\/123\/filterSets\/abc@ - For an account-level filter set for the buyer account representing bidder 123: @bidders\/123\/accounts\/123\/filterSets\/abc@ - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: @bidders\/123\/accounts\/456\/filterSets\/abc@ See 'filterSetName'.
+  Core.Text ->
+  AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
 newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList filterSetName =
   AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , filterSetName = filterSetName
-    , pageSize = Core.Nothing
-    , pageToken = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      filterSetName = filterSetName,
+      pageSize = Core.Nothing,
+      pageToken = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
-         where
-        type Rs
-               AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
-             = ListFilteredBidRequestsResponse
-        type Scopes
-               AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
-             =
-             '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient
-          AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList{..}
-          = go filterSetName xgafv accessToken callback
-              pageSize
-              pageToken
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              adExchangeBuyer2Service
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsListResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList
+  where
+  type
+    Rs
+      AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList =
+      ListFilteredBidRequestsResponse
+  type
+    Scopes
+      AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList =
+      '["https://www.googleapis.com/auth/adexchange.buyer"]
+  requestClient
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList {..} =
+      go
+        filterSetName
+        xgafv
+        accessToken
+        callback
+        pageSize
+        pageToken
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        adExchangeBuyer2Service
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsListResource
+            )
+            Core.mempty
