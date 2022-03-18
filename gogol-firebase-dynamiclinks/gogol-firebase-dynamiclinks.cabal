@@ -39,22 +39,23 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.FirebaseDynamicLinks
-    Network.Google.FirebaseDynamicLinks.GetLinkStats
-    Network.Google.FirebaseDynamicLinks.InstallAttribution
-    Network.Google.FirebaseDynamicLinks.ManagedShortLinks.Create
-    Network.Google.FirebaseDynamicLinks.ReopenAttribution
-    Network.Google.FirebaseDynamicLinks.ShortLinks.Create
-    Network.Google.FirebaseDynamicLinks.Types
+    Gogol.FirebaseDynamicLinks
+    Gogol.FirebaseDynamicLinks.GetLinkStats
+    Gogol.FirebaseDynamicLinks.InstallAttribution
+    Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
+    Gogol.FirebaseDynamicLinks.ReopenAttribution
+    Gogol.FirebaseDynamicLinks.ShortLinks.Create
+    Gogol.FirebaseDynamicLinks.Types
 
   other-modules:
-    Network.Google.FirebaseDynamicLinks.Internal.Product
-    Network.Google.FirebaseDynamicLinks.Internal.Sum
+    Gogol.FirebaseDynamicLinks.Internal.Product
+    Gogol.FirebaseDynamicLinks.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

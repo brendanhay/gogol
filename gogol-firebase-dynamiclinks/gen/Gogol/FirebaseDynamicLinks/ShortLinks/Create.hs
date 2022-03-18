@@ -19,34 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseDynamicLinks.InstallAttribution
+-- Module      : Gogol.FirebaseDynamicLinks.ShortLinks.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get iOS strong\/weak-match info for post-install attribution.
+-- Creates a short Dynamic Link given either a valid long Dynamic Link or details such as Dynamic Link domain, Android and iOS app information. The created short Dynamic Link will not expire. Repeated calls with the same long Dynamic Link or Dynamic Link information will produce the same short Dynamic Link. The Dynamic Link domain in the request must be owned by requester\'s Firebase project.
 --
--- /See:/ <https://firebase.google.com/docs/dynamic-links/ Firebase Dynamic Links API Reference> for @firebasedynamiclinks.installAttribution@.
-module Network.Google.FirebaseDynamicLinks.InstallAttribution
+-- /See:/ <https://firebase.google.com/docs/dynamic-links/ Firebase Dynamic Links API Reference> for @firebasedynamiclinks.shortLinks.create@.
+module Gogol.FirebaseDynamicLinks.ShortLinks.Create
   ( -- * Resource
-    FirebaseDynamicLinksInstallAttributionResource,
+    FirebaseDynamicLinksShortLinksCreateResource,
 
     -- ** Constructing a Request
-    newFirebaseDynamicLinksInstallAttribution,
-    FirebaseDynamicLinksInstallAttribution,
+    newFirebaseDynamicLinksShortLinksCreate,
+    FirebaseDynamicLinksShortLinksCreate,
   )
 where
 
-import Network.Google.FirebaseDynamicLinks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseDynamicLinks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @firebasedynamiclinks.installAttribution@ method which the
--- 'FirebaseDynamicLinksInstallAttribution' request conforms to.
-type FirebaseDynamicLinksInstallAttributionResource =
+-- | A resource alias for @firebasedynamiclinks.shortLinks.create@ method which the
+-- 'FirebaseDynamicLinksShortLinksCreate' request conforms to.
+type FirebaseDynamicLinksShortLinksCreateResource =
   "v1"
-    Core.:> "installAttribution"
+    Core.:> "shortLinks"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -55,15 +55,13 @@ type FirebaseDynamicLinksInstallAttributionResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              GetIosPostInstallAttributionRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GetIosPostInstallAttributionResponse
+              CreateShortDynamicLinkRequest
+    Core.:> Core.Post '[Core.JSON] CreateShortDynamicLinkResponse
 
--- | Get iOS strong\/weak-match info for post-install attribution.
+-- | Creates a short Dynamic Link given either a valid long Dynamic Link or details such as Dynamic Link domain, Android and iOS app information. The created short Dynamic Link will not expire. Repeated calls with the same long Dynamic Link or Dynamic Link information will produce the same short Dynamic Link. The Dynamic Link domain in the request must be owned by requester\'s Firebase project.
 --
--- /See:/ 'newFirebaseDynamicLinksInstallAttribution' smart constructor.
-data FirebaseDynamicLinksInstallAttribution = FirebaseDynamicLinksInstallAttribution
+-- /See:/ 'newFirebaseDynamicLinksShortLinksCreate' smart constructor.
+data FirebaseDynamicLinksShortLinksCreate = FirebaseDynamicLinksShortLinksCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -71,7 +69,7 @@ data FirebaseDynamicLinksInstallAttribution = FirebaseDynamicLinksInstallAttribu
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: GetIosPostInstallAttributionRequest,
+    payload :: CreateShortDynamicLinkRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,13 +77,13 @@ data FirebaseDynamicLinksInstallAttribution = FirebaseDynamicLinksInstallAttribu
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FirebaseDynamicLinksInstallAttribution' with the minimum fields required to make a request.
-newFirebaseDynamicLinksInstallAttribution ::
+-- | Creates a value of 'FirebaseDynamicLinksShortLinksCreate' with the minimum fields required to make a request.
+newFirebaseDynamicLinksShortLinksCreate ::
   -- |  Multipart request metadata. See 'payload'.
-  GetIosPostInstallAttributionRequest ->
-  FirebaseDynamicLinksInstallAttribution
-newFirebaseDynamicLinksInstallAttribution payload =
-  FirebaseDynamicLinksInstallAttribution
+  CreateShortDynamicLinkRequest ->
+  FirebaseDynamicLinksShortLinksCreate
+newFirebaseDynamicLinksShortLinksCreate payload =
+  FirebaseDynamicLinksShortLinksCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,16 +94,16 @@ newFirebaseDynamicLinksInstallAttribution payload =
 
 instance
   Core.GoogleRequest
-    FirebaseDynamicLinksInstallAttribution
+    FirebaseDynamicLinksShortLinksCreate
   where
   type
-    Rs FirebaseDynamicLinksInstallAttribution =
-      GetIosPostInstallAttributionResponse
+    Rs FirebaseDynamicLinksShortLinksCreate =
+      CreateShortDynamicLinkResponse
   type
-    Scopes FirebaseDynamicLinksInstallAttribution =
+    Scopes FirebaseDynamicLinksShortLinksCreate =
       '["https://www.googleapis.com/auth/firebase"]
   requestClient
-    FirebaseDynamicLinksInstallAttribution {..} =
+    FirebaseDynamicLinksShortLinksCreate {..} =
       go
         xgafv
         accessToken
@@ -120,6 +118,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  FirebaseDynamicLinksInstallAttributionResource
+                  FirebaseDynamicLinksShortLinksCreateResource
             )
             Core.mempty

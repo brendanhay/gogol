@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseDynamicLinks.Internal.Product
+-- Module      : Gogol.FirebaseDynamicLinks.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FirebaseDynamicLinks.Internal.Product
+module Gogol.FirebaseDynamicLinks.Internal.Product
   ( -- * AnalyticsInfo
     AnalyticsInfo (..),
     newAnalyticsInfo,
@@ -120,8 +120,8 @@ module Network.Google.FirebaseDynamicLinks.Internal.Product
   )
 where
 
-import Network.Google.FirebaseDynamicLinks.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseDynamicLinks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Tracking parameters supported by Dynamic Link.
 --

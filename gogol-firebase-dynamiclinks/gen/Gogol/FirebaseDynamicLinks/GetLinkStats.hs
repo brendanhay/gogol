@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseDynamicLinks.GetLinkStats
+-- Module      : Gogol.FirebaseDynamicLinks.GetLinkStats
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Fetches analytics stats of a short Dynamic Link for a given duration. Metrics include number of clicks, redirects, installs, app first opens, and app reopens.
 --
 -- /See:/ <https://firebase.google.com/docs/dynamic-links/ Firebase Dynamic Links API Reference> for @firebasedynamiclinks.getLinkStats@.
-module Network.Google.FirebaseDynamicLinks.GetLinkStats
+module Gogol.FirebaseDynamicLinks.GetLinkStats
   ( -- * Resource
     FirebaseDynamicLinksGetLinkStatsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FirebaseDynamicLinks.GetLinkStats
   )
 where
 
-import Network.Google.FirebaseDynamicLinks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseDynamicLinks.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebasedynamiclinks.getLinkStats@ method which the
 -- 'FirebaseDynamicLinksGetLinkStats' request conforms to.

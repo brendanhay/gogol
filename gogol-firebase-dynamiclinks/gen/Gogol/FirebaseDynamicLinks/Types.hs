@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseDynamicLinks.Types
+-- Module      : Gogol.FirebaseDynamicLinks.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FirebaseDynamicLinks.Types
+module Gogol.FirebaseDynamicLinks.Types
   ( -- * Configuration
     firebaseDynamicLinksService,
 
@@ -161,9 +161,9 @@ module Network.Google.FirebaseDynamicLinks.Types
   )
 where
 
-import Network.Google.FirebaseDynamicLinks.Internal.Product
-import Network.Google.FirebaseDynamicLinks.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseDynamicLinks.Internal.Product
+import Gogol.FirebaseDynamicLinks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Firebase Dynamic Links API. This contains the host and root path used as a starting point for constructing service requests.
 firebaseDynamicLinksService :: Core.ServiceConfig
