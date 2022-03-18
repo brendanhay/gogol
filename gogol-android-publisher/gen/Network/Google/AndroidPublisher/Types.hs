@@ -1,537 +1,444 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AndroidPublisher.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AndroidPublisher.Types
-    (
-    -- * Service Configuration
-      androidPublisherService
+  ( -- * Configuration
+    androidPublisherService,
 
     -- * OAuth Scopes
-    , androidPublisherScope
-
-    -- * InAppProductListings
-    , InAppProductListings
-    , inAppProductListings
-    , iaplAddtional
-
-    -- * EditsImagesDeleteallImageType
-    , EditsImagesDeleteallImageType (..)
-
-    -- * Track
-    , Track
-    , track
-    , tTrack
-    , tReleases
-
-    -- * Variant
-    , Variant
-    , variant
-    , vVariantId
-    , vDeviceSpec
-
-    -- * Image
-    , Image
-    , image
-    , iURL
-    , iSha1
-    , iId
-    , iSha256
-
-    -- * InAppProductListing
-    , InAppProductListing
-    , inAppProductListing
-    , iaplBenefits
-    , iaplTitle
-    , iaplDescription
-
-    -- * ImagesDeleteAllResponse
-    , ImagesDeleteAllResponse
-    , imagesDeleteAllResponse
-    , idarDeleted
-
-    -- * IntroductoryPriceInfo
-    , IntroductoryPriceInfo
-    , introductoryPriceInfo
-    , ipiIntroductoryPricePeriod
-    , ipiIntroductoryPriceAmountMicros
-    , ipiIntroductoryPriceCycles
-    , ipiIntroductoryPriceCurrencyCode
-
-    -- * TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
-
-    -- * ExpansionFile
-    , ExpansionFile
-    , expansionFile
-    , efFileSize
-    , efReferencesVersion
-
-    -- * SubscriptionPurchasesAcknowledgeRequest
-    , SubscriptionPurchasesAcknowledgeRequest
-    , subscriptionPurchasesAcknowledgeRequest
-    , sparDeveloperPayload
-
-    -- * UserComment
-    , UserComment
-    , userComment
-    , ucAndroidOSVersion
-    , ucText
-    , ucDevice
-    , ucThumbsUpCount
-    , ucAppVersionCode
-    , ucThumbsDownCount
-    , ucOriginalText
-    , ucAppVersionName
-    , ucReviewerLanguage
-    , ucDeviceMetadata
-    , ucStarRating
-    , ucLastModified
-
-    -- * Testers
-    , Testers
-    , testers
-    , tGoogleGroups
-
-    -- * SubscriptionCancelSurveyResult
-    , SubscriptionCancelSurveyResult
-    , subscriptionCancelSurveyResult
-    , scsrCancelSurveyReason
-    , scsrUserInputCancelReason
-
-    -- * Listing
-    , Listing
-    , listing
-    , lFullDescription
-    , lVideo
-    , lShortDescription
-    , lLanguage
-    , lTitle
-
-    -- * ProductPurchasesAcknowledgeRequest
-    , ProductPurchasesAcknowledgeRequest
-    , productPurchasesAcknowledgeRequest
-    , pparDeveloperPayload
-
-    -- * APK
-    , APK
-    , aPK
-    , aVersionCode
-    , aBinary
-
-    -- * SubscriptionPurchasesDeferRequest
-    , SubscriptionPurchasesDeferRequest
-    , subscriptionPurchasesDeferRequest
-    , spdrDeferralInfo
-
-    -- * TracksListResponse
-    , TracksListResponse
-    , tracksListResponse
-    , tlrTracks
-    , tlrKind
-
-    -- * PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
-
-    -- * ImagesListResponse
-    , ImagesListResponse
-    , imagesListResponse
-    , ilrImages
-
-    -- * AppEdit
-    , AppEdit
-    , appEdit
-    , aeId
-    , aeExpiryTimeSeconds
-
-    -- * ProductPurchase
-    , ProductPurchase
-    , productPurchase
-    , ppPurchaseState
-    , ppConsumptionState
-    , ppRegionCode
-    , ppAcknowledgementState
-    , ppKind
-    , ppPurchaseTimeMillis
-    , ppPurchaseToken
-    , ppQuantity
-    , ppObfuscatedExternalAccountId
-    , ppPurchaseType
-    , ppObfuscatedExternalProFileId
-    , ppDeveloperPayload
-    , ppOrderId
-    , ppProductId
-
-    -- * ReviewsListResponse
-    , ReviewsListResponse
-    , reviewsListResponse
-    , rlrTokenPagination
-    , rlrPageInfo
-    , rlrReviews
-
-    -- * SubscriptionPurchasesDeferResponse
-    , SubscriptionPurchasesDeferResponse
-    , subscriptionPurchasesDeferResponse
-    , spdrNewExpiryTimeMillis
-
-    -- * SubscriptionPurchase
-    , SubscriptionPurchase
-    , subscriptionPurchase
-    , spGivenName
-    , spIntroductoryPriceInfo
-    , spAcknowledgementState
-    , spAutoResumeTimeMillis
-    , spUserCancellationTimeMillis
-    , spPaymentState
-    , spKind
-    , spObfuscatedExternalAccountId
-    , spPurchaseType
-    , spPromotionType
-    , spPriceChange
-    , spProFileId
-    , spLinkedPurchaseToken
-    , spObfuscatedExternalProFileId
-    , spFamilyName
-    , spExternalAccountId
-    , spProFileName
-    , spExpiryTimeMillis
-    , spAutoRenewing
-    , spPriceCurrencyCode
-    , spEmailAddress
-    , spCancelReason
-    , spCountryCode
-    , spDeveloperPayload
-    , spPriceAmountMicros
-    , spStartTimeMillis
-    , spOrderId
-    , spPromotionCode
-    , spCancelSurveyResult
-
-    -- * SubscriptionPriceChange
-    , SubscriptionPriceChange
-    , subscriptionPriceChange
-    , spcState
-    , spcNewPrice
-
-    -- * AppDetails
-    , AppDetails
-    , appDetails
-    , adContactPhone
-    , adContactEmail
-    , adContactWebsite
-    , adDefaultLanguage
-
-    -- * InAppProductPrices
-    , InAppProductPrices
-    , inAppProductPrices
-    , iAppAddtional
-
-    -- * ExternallyHostedAPK
-    , ExternallyHostedAPK
-    , externallyHostedAPK
-    , ehapkApplicationLabel
-    , ehapkMaximumSdk
-    , ehapkNATiveCodes
-    , ehapkVersionCode
-    , ehapkFileSha256Base64
-    , ehapkExternallyHostedURL
-    , ehapkVersionName
-    , ehapkPackageName
-    , ehapkFileSize
-    , ehapkIconBase64
-    , ehapkUsesFeatures
-    , ehapkMinimumSdk
-    , ehapkFileSha1Base64
-    , ehapkUsesPermissions
-    , ehapkCertificateBase64s
-
-    -- * InAppProductPurchaseType
-    , InAppProductPurchaseType (..)
-
-    -- * TrackRelease
-    , TrackRelease
-    , trackRelease
-    , trVersionCodes
-    , trStatus
-    , trReleaseNotes
-    , trUserFraction
-    , trCountryTargeting
-    , trName
-    , trInAppUpdatePriority
-
-    -- * EditsImagesListImageType
-    , EditsImagesListImageType (..)
-
-    -- * CountryTargeting
-    , CountryTargeting
-    , countryTargeting
-    , ctIncludeRestOfWorld
-    , ctCountries
-
-    -- * Bundle
-    , Bundle
-    , bundle
-    , bVersionCode
-    , bSha1
-    , bSha256
-
-    -- * DeobfuscationFile
-    , DeobfuscationFile
-    , deobfuscationFile
-    , dfSymbolType
-
-    -- * VoidedPurchasesListResponse
-    , VoidedPurchasesListResponse
-    , voidedPurchasesListResponse
-    , vplrTokenPagination
-    , vplrPageInfo
-    , vplrVoidedPurchases
-
-    -- * ExpansionFilesUploadResponse
-    , ExpansionFilesUploadResponse
-    , expansionFilesUploadResponse
-    , efurExpansionFile
-
-    -- * ImagesUploadResponse
-    , ImagesUploadResponse
-    , imagesUploadResponse
-    , iurImage
-
-    -- * EditsImagesUploadImageType
-    , EditsImagesUploadImageType (..)
-
-    -- * DeobfuscationFilesUploadResponse
-    , DeobfuscationFilesUploadResponse
-    , deobfuscationFilesUploadResponse
-    , dfurDeobfuscationFile
-
-    -- * InAppProductsListResponse
-    , InAppProductsListResponse
-    , inAppProductsListResponse
-    , iaplrTokenPagination
-    , iaplrPageInfo
-    , iaplrKind
-    , iaplrInAppProduct
-
-    -- * EditsDeobfuscationFilesUploadDeobfuscationFileType
-    , EditsDeobfuscationFilesUploadDeobfuscationFileType (..)
-
-    -- * EditsExpansionFilesUploadExpansionFileType
-    , EditsExpansionFilesUploadExpansionFileType (..)
-
-    -- * LocalizedText
-    , LocalizedText
-    , localizedText
-    , ltText
-    , ltLanguage
-
-    -- * DeobfuscationFileSymbolType
-    , DeobfuscationFileSymbolType (..)
-
-    -- * TrackReleaseStatus
-    , TrackReleaseStatus (..)
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * Review
-    , Review
-    , review
-    , rReviewId
-    , rAuthorName
-    , rComments
-
-    -- * APKsAddExternallyHostedResponse
-    , APKsAddExternallyHostedResponse
-    , aPKsAddExternallyHostedResponse
-    , apkaehrExternallyHostedAPK
-
-    -- * SubscriptionDeferralInfo
-    , SubscriptionDeferralInfo
-    , subscriptionDeferralInfo
-    , sdiDesiredExpiryTimeMillis
-    , sdiExpectedExpiryTimeMillis
-
-    -- * EditsExpansionFilesGetExpansionFileType
-    , EditsExpansionFilesGetExpansionFileType (..)
-
-    -- * ReviewsReplyRequest
-    , ReviewsReplyRequest
-    , reviewsReplyRequest
-    , rrrReplyText
-
-    -- * EditsExpansionFilesPatchExpansionFileType
-    , EditsExpansionFilesPatchExpansionFileType (..)
-
-    -- * EditsExpansionFilesUpdateExpansionFileType
-    , EditsExpansionFilesUpdateExpansionFileType (..)
-
-    -- * DeviceSpec
-    , DeviceSpec
-    , deviceSpec
-    , dsSupportedAbis
-    , dsSupportedLocales
-    , dsScreenDensity
-
-    -- * DeviceMetadata
-    , DeviceMetadata
-    , deviceMetadata
-    , dmProductName
-    , dmGlEsVersion
-    , dmManufacturer
-    , dmScreenWidthPx
-    , dmRamMb
-    , dmCPUMake
-    , dmScreenHeightPx
-    , dmNATivePlatform
-    , dmDeviceClass
-    , dmCPUModel
-    , dmScreenDensityDpi
-
-    -- * DeveloperComment
-    , DeveloperComment
-    , developerComment
-    , dcText
-    , dcLastModified
-
-    -- * InAppProduct
-    , InAppProduct
-    , inAppProduct
-    , iapStatus
-    , iapGracePeriod
-    , iapTrialPeriod
-    , iapPackageName
-    , iapPurchaseType
-    , iapSubscriptionPeriod
-    , iapPrices
-    , iapSKU
-    , iapDefaultPrice
-    , iapListings
-    , iapDefaultLanguage
-
-    -- * Price
-    , Price
-    , price
-    , pPriceMicros
-    , pCurrency
-
-    -- * EditsImagesDeleteImageType
-    , EditsImagesDeleteImageType (..)
-
-    -- * SystemAPKsListResponse
-    , SystemAPKsListResponse
-    , systemAPKsListResponse
-    , sapklrVariants
-
-    -- * APKBinary
-    , APKBinary
-    , aPKBinary
-    , apkbSha1
-    , apkbSha256
-
-    -- * APKsListResponse
-    , APKsListResponse
-    , aPKsListResponse
-    , apklrKind
-    , apklrAPKs
-
-    -- * ReviewsReplyResponse
-    , ReviewsReplyResponse
-    , reviewsReplyResponse
-    , rrrResult
-
-    -- * ListingsListResponse
-    , ListingsListResponse
-    , listingsListResponse
-    , llrKind
-    , llrListings
-
-    -- * APKsAddExternallyHostedRequest
-    , APKsAddExternallyHostedRequest
-    , aPKsAddExternallyHostedRequest
-    , aExternallyHostedAPK
-
-    -- * InternalAppSharingArtifact
-    , InternalAppSharingArtifact
-    , internalAppSharingArtifact
-    , iasaCertificateFingerprint
-    , iasaDownloadURL
-    , iasaSha256
-
-    -- * UsesPermission
-    , UsesPermission
-    , usesPermission
-    , upName
-    , upMaxSdkVersion
-
-    -- * Comment
-    , Comment
-    , comment
-    , cUserComment
-    , cDeveloperComment
-
-    -- * Timestamp
-    , Timestamp
-    , timestamp
-    , tNanos
-    , tSeconds
-
-    -- * VoidedPurchase
-    , VoidedPurchase
-    , voidedPurchase
-    , vpKind
-    , vpPurchaseTimeMillis
-    , vpPurchaseToken
-    , vpVoidedSource
-    , vpVoidedReason
-    , vpOrderId
-    , vpVoidedTimeMillis
-
-    -- * BundlesListResponse
-    , BundlesListResponse
-    , bundlesListResponse
-    , blrBundles
-    , blrKind
-
-    -- * ReviewReplyResult
-    , ReviewReplyResult
-    , reviewReplyResult
-    , rReplyText
-    , rLastEdited
-
-    -- * InAppProductStatus
-    , InAppProductStatus (..)
-    ) where
-
-import Network.Google.AndroidPublisher.Types.Product
-import Network.Google.AndroidPublisher.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v3' of the Google Play Android Developer API. This contains the host and root path used as a starting point for constructing service requests.
-androidPublisherService :: ServiceConfig
-androidPublisherService
-  = defaultService (ServiceId "androidpublisher:v3")
-      "androidpublisher.googleapis.com"
+    androidPublisherScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** Apk
+    Apk (..),
+    newApk,
+
+    -- ** ApkBinary
+    ApkBinary (..),
+    newApkBinary,
+
+    -- ** ApksAddExternallyHostedRequest
+    ApksAddExternallyHostedRequest (..),
+    newApksAddExternallyHostedRequest,
+
+    -- ** ApksAddExternallyHostedResponse
+    ApksAddExternallyHostedResponse (..),
+    newApksAddExternallyHostedResponse,
+
+    -- ** ApksListResponse
+    ApksListResponse (..),
+    newApksListResponse,
+
+    -- ** AppDetails
+    AppDetails (..),
+    newAppDetails,
+
+    -- ** AppEdit
+    AppEdit (..),
+    newAppEdit,
+
+    -- ** Bundle
+    Bundle (..),
+    newBundle,
+
+    -- ** BundlesListResponse
+    BundlesListResponse (..),
+    newBundlesListResponse,
+
+    -- ** Comment
+    Comment (..),
+    newComment,
+
+    -- ** ConvertRegionPricesRequest
+    ConvertRegionPricesRequest (..),
+    newConvertRegionPricesRequest,
+
+    -- ** ConvertRegionPricesResponse
+    ConvertRegionPricesResponse (..),
+    newConvertRegionPricesResponse,
+
+    -- ** ConvertRegionPricesResponse_ConvertedRegionPrices
+    ConvertRegionPricesResponse_ConvertedRegionPrices (..),
+    newConvertRegionPricesResponse_ConvertedRegionPrices,
+
+    -- ** ConvertedOtherRegionsPrice
+    ConvertedOtherRegionsPrice (..),
+    newConvertedOtherRegionsPrice,
+
+    -- ** ConvertedRegionPrice
+    ConvertedRegionPrice (..),
+    newConvertedRegionPrice,
+
+    -- ** CountryTargeting
+    CountryTargeting (..),
+    newCountryTargeting,
+
+    -- ** DeobfuscationFile
+    DeobfuscationFile (..),
+    newDeobfuscationFile,
+
+    -- ** DeobfuscationFile_SymbolType
+    DeobfuscationFile_SymbolType (..),
+
+    -- ** DeobfuscationFilesUploadResponse
+    DeobfuscationFilesUploadResponse (..),
+    newDeobfuscationFilesUploadResponse,
+
+    -- ** DeveloperComment
+    DeveloperComment (..),
+    newDeveloperComment,
+
+    -- ** DeviceMetadata
+    DeviceMetadata (..),
+    newDeviceMetadata,
+
+    -- ** DeviceSpec
+    DeviceSpec (..),
+    newDeviceSpec,
+
+    -- ** ExpansionFile
+    ExpansionFile (..),
+    newExpansionFile,
+
+    -- ** ExpansionFilesUploadResponse
+    ExpansionFilesUploadResponse (..),
+    newExpansionFilesUploadResponse,
+
+    -- ** ExternallyHostedApk
+    ExternallyHostedApk (..),
+    newExternallyHostedApk,
+
+    -- ** GeneratedApksListResponse
+    GeneratedApksListResponse (..),
+    newGeneratedApksListResponse,
+
+    -- ** GeneratedApksPerSigningKey
+    GeneratedApksPerSigningKey (..),
+    newGeneratedApksPerSigningKey,
+
+    -- ** GeneratedAssetPackSlice
+    GeneratedAssetPackSlice (..),
+    newGeneratedAssetPackSlice,
+
+    -- ** GeneratedSplitApk
+    GeneratedSplitApk (..),
+    newGeneratedSplitApk,
+
+    -- ** GeneratedStandaloneApk
+    GeneratedStandaloneApk (..),
+    newGeneratedStandaloneApk,
+
+    -- ** GeneratedUniversalApk
+    GeneratedUniversalApk (..),
+    newGeneratedUniversalApk,
+
+    -- ** Grant
+    Grant (..),
+    newGrant,
+
+    -- ** Grant_AppLevelPermissionsItem
+    Grant_AppLevelPermissionsItem (..),
+
+    -- ** Image
+    Image (..),
+    newImage,
+
+    -- ** ImagesDeleteAllResponse
+    ImagesDeleteAllResponse (..),
+    newImagesDeleteAllResponse,
+
+    -- ** ImagesListResponse
+    ImagesListResponse (..),
+    newImagesListResponse,
+
+    -- ** ImagesUploadResponse
+    ImagesUploadResponse (..),
+    newImagesUploadResponse,
+
+    -- ** InAppProduct
+    InAppProduct (..),
+    newInAppProduct,
+
+    -- ** InAppProduct_Listings
+    InAppProduct_Listings (..),
+    newInAppProduct_Listings,
+
+    -- ** InAppProduct_Prices
+    InAppProduct_Prices (..),
+    newInAppProduct_Prices,
+
+    -- ** InAppProduct_PurchaseType
+    InAppProduct_PurchaseType (..),
+
+    -- ** InAppProduct_Status
+    InAppProduct_Status (..),
+
+    -- ** InAppProductListing
+    InAppProductListing (..),
+    newInAppProductListing,
+
+    -- ** InappproductsListResponse
+    InappproductsListResponse (..),
+    newInappproductsListResponse,
+
+    -- ** InternalAppSharingArtifact
+    InternalAppSharingArtifact (..),
+    newInternalAppSharingArtifact,
+
+    -- ** IntroductoryPriceInfo
+    IntroductoryPriceInfo (..),
+    newIntroductoryPriceInfo,
+
+    -- ** ListUsersResponse
+    ListUsersResponse (..),
+    newListUsersResponse,
+
+    -- ** Listing
+    Listing (..),
+    newListing,
+
+    -- ** ListingsListResponse
+    ListingsListResponse (..),
+    newListingsListResponse,
+
+    -- ** LocalizedText
+    LocalizedText (..),
+    newLocalizedText,
+
+    -- ** ManagedProductTaxAndComplianceSettings
+    ManagedProductTaxAndComplianceSettings (..),
+    newManagedProductTaxAndComplianceSettings,
+
+    -- ** ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
+    ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType (..),
+
+    -- ** ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode
+    ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
+    newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+
+    -- ** Money
+    Money (..),
+    newMoney,
+
+    -- ** PageInfo
+    PageInfo (..),
+    newPageInfo,
+
+    -- ** Price
+    Price (..),
+    newPrice,
+
+    -- ** ProductPurchase
+    ProductPurchase (..),
+    newProductPurchase,
+
+    -- ** ProductPurchasesAcknowledgeRequest
+    ProductPurchasesAcknowledgeRequest (..),
+    newProductPurchasesAcknowledgeRequest,
+
+    -- ** RegionalTaxRateInfo
+    RegionalTaxRateInfo (..),
+    newRegionalTaxRateInfo,
+
+    -- ** RegionalTaxRateInfo_TaxTier
+    RegionalTaxRateInfo_TaxTier (..),
+
+    -- ** Review
+    Review (..),
+    newReview,
+
+    -- ** ReviewReplyResult
+    ReviewReplyResult (..),
+    newReviewReplyResult,
+
+    -- ** ReviewsListResponse
+    ReviewsListResponse (..),
+    newReviewsListResponse,
+
+    -- ** ReviewsReplyRequest
+    ReviewsReplyRequest (..),
+    newReviewsReplyRequest,
+
+    -- ** ReviewsReplyResponse
+    ReviewsReplyResponse (..),
+    newReviewsReplyResponse,
+
+    -- ** SubscriptionCancelSurveyResult
+    SubscriptionCancelSurveyResult (..),
+    newSubscriptionCancelSurveyResult,
+
+    -- ** SubscriptionDeferralInfo
+    SubscriptionDeferralInfo (..),
+    newSubscriptionDeferralInfo,
+
+    -- ** SubscriptionPriceChange
+    SubscriptionPriceChange (..),
+    newSubscriptionPriceChange,
+
+    -- ** SubscriptionPurchase
+    SubscriptionPurchase (..),
+    newSubscriptionPurchase,
+
+    -- ** SubscriptionPurchasesAcknowledgeRequest
+    SubscriptionPurchasesAcknowledgeRequest (..),
+    newSubscriptionPurchasesAcknowledgeRequest,
+
+    -- ** SubscriptionPurchasesDeferRequest
+    SubscriptionPurchasesDeferRequest (..),
+    newSubscriptionPurchasesDeferRequest,
+
+    -- ** SubscriptionPurchasesDeferResponse
+    SubscriptionPurchasesDeferResponse (..),
+    newSubscriptionPurchasesDeferResponse,
+
+    -- ** SubscriptionTaxAndComplianceSettings
+    SubscriptionTaxAndComplianceSettings (..),
+    newSubscriptionTaxAndComplianceSettings,
+
+    -- ** SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
+    SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType (..),
+
+    -- ** SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode
+    SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
+    newSubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+
+    -- ** SystemApksListResponse
+    SystemApksListResponse (..),
+    newSystemApksListResponse,
+
+    -- ** Testers
+    Testers (..),
+    newTesters,
+
+    -- ** Timestamp
+    Timestamp (..),
+    newTimestamp,
+
+    -- ** TokenPagination
+    TokenPagination (..),
+    newTokenPagination,
+
+    -- ** Track
+    Track (..),
+    newTrack,
+
+    -- ** TrackCountryAvailability
+    TrackCountryAvailability (..),
+    newTrackCountryAvailability,
+
+    -- ** TrackRelease
+    TrackRelease (..),
+    newTrackRelease,
+
+    -- ** TrackRelease_Status
+    TrackRelease_Status (..),
+
+    -- ** TrackTargetedCountry
+    TrackTargetedCountry (..),
+    newTrackTargetedCountry,
+
+    -- ** TracksListResponse
+    TracksListResponse (..),
+    newTracksListResponse,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_AccessState
+    User_AccessState (..),
+
+    -- ** User_DeveloperAccountPermissionsItem
+    User_DeveloperAccountPermissionsItem (..),
+
+    -- ** UserComment
+    UserComment (..),
+    newUserComment,
+
+    -- ** UsesPermission
+    UsesPermission (..),
+    newUsesPermission,
+
+    -- ** Variant
+    Variant (..),
+    newVariant,
+
+    -- ** VoidedPurchase
+    VoidedPurchase (..),
+    newVoidedPurchase,
+
+    -- ** VoidedPurchasesListResponse
+    VoidedPurchasesListResponse (..),
+    newVoidedPurchasesListResponse,
+
+    -- ** EditsDeobfuscationfilesUploadDeobfuscationFileType
+    EditsDeobfuscationfilesUploadDeobfuscationFileType (..),
+
+    -- ** EditsExpansionfilesGetExpansionFileType
+    EditsExpansionfilesGetExpansionFileType (..),
+
+    -- ** EditsExpansionfilesPatchExpansionFileType
+    EditsExpansionfilesPatchExpansionFileType (..),
+
+    -- ** EditsExpansionfilesUpdateExpansionFileType
+    EditsExpansionfilesUpdateExpansionFileType (..),
+
+    -- ** EditsExpansionfilesUploadExpansionFileType
+    EditsExpansionfilesUploadExpansionFileType (..),
+
+    -- ** EditsImagesDeleteImageType
+    EditsImagesDeleteImageType (..),
+
+    -- ** EditsImagesDeleteallImageType
+    EditsImagesDeleteallImageType (..),
+
+    -- ** EditsImagesListImageType
+    EditsImagesListImageType (..),
+
+    -- ** EditsImagesUploadImageType
+    EditsImagesUploadImageType (..),
+  )
+where
+
+import Network.Google.AndroidPublisher.Internal.Product
+import Network.Google.AndroidPublisher.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v3@ of the Google Play Android Developer API. This contains the host and root path used as a starting point for constructing service requests.
+androidPublisherService :: Core.ServiceConfig
+androidPublisherService =
+  Core.defaultService
+    (Core.ServiceId "androidpublisher:v3")
+    "androidpublisher.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidPublisherScope = Proxy
+androidPublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+androidPublisherScope = Core.Proxy
