@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,82 +30,90 @@
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.rulesets.get@.
 module Gogol.FirebaseRules.Projects.Rulesets.Get
-    (
-    -- * Resource
-      FirebaseRulesProjectsRulesetsGetResource
+  ( -- * Resource
+    FirebaseRulesProjectsRulesetsGetResource,
 
     -- ** Constructing a Request
-    , newFirebaseRulesProjectsRulesetsGet
-    , FirebaseRulesProjectsRulesetsGet
-    ) where
+    newFirebaseRulesProjectsRulesetsGet,
+    FirebaseRulesProjectsRulesetsGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.FirebaseRules.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @firebaserules.projects.rulesets.get@ method which the
 -- 'FirebaseRulesProjectsRulesetsGet' request conforms to.
 type FirebaseRulesProjectsRulesetsGetResource =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Get '[Core.JSON] Ruleset
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Ruleset
 
 -- | Get a @Ruleset@ by name including the full @Source@ contents.
 --
 -- /See:/ 'newFirebaseRulesProjectsRulesetsGet' smart constructor.
 data FirebaseRulesProjectsRulesetsGet = FirebaseRulesProjectsRulesetsGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. Resource name for the ruleset to get. Format: @projects\/{project_id}\/rulesets\/{ruleset_id}@
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Resource name for the ruleset to get. Format: @projects\/{project_id}\/rulesets\/{ruleset_id}@
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FirebaseRulesProjectsRulesetsGet' with the minimum fields required to make a request.
-newFirebaseRulesProjectsRulesetsGet 
-    ::  Core.Text
-       -- ^  Required. Resource name for the ruleset to get. Format: @projects\/{project_id}\/rulesets\/{ruleset_id}@ See 'name'.
-    -> FirebaseRulesProjectsRulesetsGet
+newFirebaseRulesProjectsRulesetsGet ::
+  -- |  Required. Resource name for the ruleset to get. Format: @projects\/{project_id}\/rulesets\/{ruleset_id}@ See 'name'.
+  Core.Text ->
+  FirebaseRulesProjectsRulesetsGet
 newFirebaseRulesProjectsRulesetsGet name =
   FirebaseRulesProjectsRulesetsGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           FirebaseRulesProjectsRulesetsGet
-         where
-        type Rs FirebaseRulesProjectsRulesetsGet = Ruleset
-        type Scopes FirebaseRulesProjectsRulesetsGet =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/firebase",
-               "https://www.googleapis.com/auth/firebase.readonly"]
-        requestClient FirebaseRulesProjectsRulesetsGet{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              firebaseRulesService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy FirebaseRulesProjectsRulesetsGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    FirebaseRulesProjectsRulesetsGet
+  where
+  type Rs FirebaseRulesProjectsRulesetsGet = Ruleset
+  type
+    Scopes FirebaseRulesProjectsRulesetsGet =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/firebase",
+         "https://www.googleapis.com/auth/firebase.readonly"
+       ]
+  requestClient FirebaseRulesProjectsRulesetsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      firebaseRulesService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FirebaseRulesProjectsRulesetsGetResource
+          )
+          Core.mempty
