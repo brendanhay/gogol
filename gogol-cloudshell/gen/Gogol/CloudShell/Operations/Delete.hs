@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudShell.Operations.Get
+-- Module      : Gogol.CloudShell.Operations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.operations.get@.
-module Network.Google.CloudShell.Operations.Get
+-- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.operations.delete@.
+module Gogol.CloudShell.Operations.Delete
   ( -- * Resource
-    CloudShellOperationsGetResource,
+    CloudShellOperationsDeleteResource,
 
     -- ** Constructing a Request
-    newCloudShellOperationsGet,
-    CloudShellOperationsGet,
+    newCloudShellOperationsDelete,
+    CloudShellOperationsDelete,
   )
 where
 
-import Network.Google.CloudShell.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudShell.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudshell.operations.get@ method which the
--- 'CloudShellOperationsGet' request conforms to.
-type CloudShellOperationsGetResource =
+-- | A resource alias for @cloudshell.operations.delete@ method which the
+-- 'CloudShellOperationsDelete' request conforms to.
+type CloudShellOperationsDeleteResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type CloudShellOperationsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Operation
+    Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ 'newCloudShellOperationsGet' smart constructor.
-data CloudShellOperationsGet = CloudShellOperationsGet
+-- /See:/ 'newCloudShellOperationsDelete' smart constructor.
+data CloudShellOperationsDelete = CloudShellOperationsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
+    -- | The name of the operation resource to be deleted.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data CloudShellOperationsGet = CloudShellOperationsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudShellOperationsGet' with the minimum fields required to make a request.
-newCloudShellOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
+-- | Creates a value of 'CloudShellOperationsDelete' with the minimum fields required to make a request.
+newCloudShellOperationsDelete ::
+  -- |  The name of the operation resource to be deleted. See 'name'.
   Core.Text ->
-  CloudShellOperationsGet
-newCloudShellOperationsGet name =
-  CloudShellOperationsGet
+  CloudShellOperationsDelete
+newCloudShellOperationsDelete name =
+  CloudShellOperationsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -89,12 +89,15 @@ newCloudShellOperationsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest CloudShellOperationsGet where
-  type Rs CloudShellOperationsGet = Operation
+instance
+  Core.GoogleRequest
+    CloudShellOperationsDelete
+  where
+  type Rs CloudShellOperationsDelete = Empty
   type
-    Scopes CloudShellOperationsGet =
+    Scopes CloudShellOperationsDelete =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient CloudShellOperationsGet {..} =
+  requestClient CloudShellOperationsDelete {..} =
     go
       name
       xgafv
@@ -108,6 +111,6 @@ instance Core.GoogleRequest CloudShellOperationsGet where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy CloudShellOperationsGetResource
+              Core.Proxy CloudShellOperationsDeleteResource
           )
           Core.mempty

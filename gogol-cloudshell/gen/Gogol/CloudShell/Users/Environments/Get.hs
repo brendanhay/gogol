@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudShell.Operations.Delete
+-- Module      : Gogol.CloudShell.Users.Environments.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- Gets an environment. Returns NOT_FOUND if the environment does not exist.
 --
--- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.operations.delete@.
-module Network.Google.CloudShell.Operations.Delete
+-- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.users.environments.get@.
+module Gogol.CloudShell.Users.Environments.Get
   ( -- * Resource
-    CloudShellOperationsDeleteResource,
+    CloudShellUsersEnvironmentsGetResource,
 
     -- ** Constructing a Request
-    newCloudShellOperationsDelete,
-    CloudShellOperationsDelete,
+    newCloudShellUsersEnvironmentsGet,
+    CloudShellUsersEnvironmentsGet,
   )
 where
 
-import Network.Google.CloudShell.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudShell.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudshell.operations.delete@ method which the
--- 'CloudShellOperationsDelete' request conforms to.
-type CloudShellOperationsDeleteResource =
+-- | A resource alias for @cloudshell.users.environments.get@ method which the
+-- 'CloudShellUsersEnvironmentsGet' request conforms to.
+type CloudShellUsersEnvironmentsGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type CloudShellOperationsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] Environment
 
--- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- | Gets an environment. Returns NOT_FOUND if the environment does not exist.
 --
--- /See:/ 'newCloudShellOperationsDelete' smart constructor.
-data CloudShellOperationsDelete = CloudShellOperationsDelete
+-- /See:/ 'newCloudShellUsersEnvironmentsGet' smart constructor.
+data CloudShellUsersEnvironmentsGet = CloudShellUsersEnvironmentsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource to be deleted.
+    -- | Required. Name of the requested resource, for example @users\/me\/environments\/default@ or @users\/someone\@example.com\/environments\/default@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data CloudShellOperationsDelete = CloudShellOperationsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudShellOperationsDelete' with the minimum fields required to make a request.
-newCloudShellOperationsDelete ::
-  -- |  The name of the operation resource to be deleted. See 'name'.
+-- | Creates a value of 'CloudShellUsersEnvironmentsGet' with the minimum fields required to make a request.
+newCloudShellUsersEnvironmentsGet ::
+  -- |  Required. Name of the requested resource, for example @users\/me\/environments\/default@ or @users\/someone\@example.com\/environments\/default@. See 'name'.
   Core.Text ->
-  CloudShellOperationsDelete
-newCloudShellOperationsDelete name =
-  CloudShellOperationsDelete
+  CloudShellUsersEnvironmentsGet
+newCloudShellUsersEnvironmentsGet name =
+  CloudShellUsersEnvironmentsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,13 +91,13 @@ newCloudShellOperationsDelete name =
 
 instance
   Core.GoogleRequest
-    CloudShellOperationsDelete
+    CloudShellUsersEnvironmentsGet
   where
-  type Rs CloudShellOperationsDelete = Empty
+  type Rs CloudShellUsersEnvironmentsGet = Environment
   type
-    Scopes CloudShellOperationsDelete =
+    Scopes CloudShellUsersEnvironmentsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient CloudShellOperationsDelete {..} =
+  requestClient CloudShellUsersEnvironmentsGet {..} =
     go
       name
       xgafv
@@ -111,6 +111,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy CloudShellOperationsDeleteResource
+              Core.Proxy CloudShellUsersEnvironmentsGetResource
           )
           Core.mempty

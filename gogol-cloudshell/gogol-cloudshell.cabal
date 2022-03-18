@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudShell
-    Network.Google.CloudShell.Operations.Cancel
-    Network.Google.CloudShell.Operations.Delete
-    Network.Google.CloudShell.Operations.Get
-    Network.Google.CloudShell.Operations.List
-    Network.Google.CloudShell.Types
-    Network.Google.CloudShell.Users.Environments.AddPublicKey
-    Network.Google.CloudShell.Users.Environments.Authorize
-    Network.Google.CloudShell.Users.Environments.Get
-    Network.Google.CloudShell.Users.Environments.RemovePublicKey
-    Network.Google.CloudShell.Users.Environments.Start
+    Gogol.CloudShell
+    Gogol.CloudShell.Operations.Cancel
+    Gogol.CloudShell.Operations.Delete
+    Gogol.CloudShell.Operations.Get
+    Gogol.CloudShell.Operations.List
+    Gogol.CloudShell.Types
+    Gogol.CloudShell.Users.Environments.AddPublicKey
+    Gogol.CloudShell.Users.Environments.Authorize
+    Gogol.CloudShell.Users.Environments.Get
+    Gogol.CloudShell.Users.Environments.RemovePublicKey
+    Gogol.CloudShell.Users.Environments.Start
 
   other-modules:
-    Network.Google.CloudShell.Internal.Product
-    Network.Google.CloudShell.Internal.Sum
+    Gogol.CloudShell.Internal.Product
+    Gogol.CloudShell.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

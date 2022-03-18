@@ -19,69 +19,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudShell
+-- Module      : Gogol.CloudShell.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Allows users to start, configure, and connect to interactive shell sessions running in the cloud.
---
--- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference>
-module Network.Google.CloudShell
+module Gogol.CloudShell.Types
   ( -- * Configuration
     cloudShellService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
-
-    -- * Resources
-
-    -- ** cloudshell.operations.cancel
-    CloudShellOperationsCancelResource,
-    newCloudShellOperationsCancel,
-    CloudShellOperationsCancel,
-
-    -- ** cloudshell.operations.delete
-    CloudShellOperationsDeleteResource,
-    newCloudShellOperationsDelete,
-    CloudShellOperationsDelete,
-
-    -- ** cloudshell.operations.get
-    CloudShellOperationsGetResource,
-    newCloudShellOperationsGet,
-    CloudShellOperationsGet,
-
-    -- ** cloudshell.operations.list
-    CloudShellOperationsListResource,
-    newCloudShellOperationsList,
-    CloudShellOperationsList,
-
-    -- ** cloudshell.users.environments.addPublicKey
-    CloudShellUsersEnvironmentsAddPublicKeyResource,
-    newCloudShellUsersEnvironmentsAddPublicKey,
-    CloudShellUsersEnvironmentsAddPublicKey,
-
-    -- ** cloudshell.users.environments.authorize
-    CloudShellUsersEnvironmentsAuthorizeResource,
-    newCloudShellUsersEnvironmentsAuthorize,
-    CloudShellUsersEnvironmentsAuthorize,
-
-    -- ** cloudshell.users.environments.get
-    CloudShellUsersEnvironmentsGetResource,
-    newCloudShellUsersEnvironmentsGet,
-    CloudShellUsersEnvironmentsGet,
-
-    -- ** cloudshell.users.environments.removePublicKey
-    CloudShellUsersEnvironmentsRemovePublicKeyResource,
-    newCloudShellUsersEnvironmentsRemovePublicKey,
-    CloudShellUsersEnvironmentsRemovePublicKey,
-
-    -- ** cloudshell.users.environments.start
-    CloudShellUsersEnvironmentsStartResource,
-    newCloudShellUsersEnvironmentsStart,
-    CloudShellUsersEnvironmentsStart,
 
     -- * Types
 
@@ -188,13 +137,17 @@ module Network.Google.CloudShell
   )
 where
 
-import Network.Google.CloudShell.Operations.Cancel
-import Network.Google.CloudShell.Operations.Delete
-import Network.Google.CloudShell.Operations.Get
-import Network.Google.CloudShell.Operations.List
-import Network.Google.CloudShell.Types
-import Network.Google.CloudShell.Users.Environments.AddPublicKey
-import Network.Google.CloudShell.Users.Environments.Authorize
-import Network.Google.CloudShell.Users.Environments.Get
-import Network.Google.CloudShell.Users.Environments.RemovePublicKey
-import Network.Google.CloudShell.Users.Environments.Start
+import Gogol.CloudShell.Internal.Product
+import Gogol.CloudShell.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Shell API. This contains the host and root path used as a starting point for constructing service requests.
+cloudShellService :: Core.ServiceConfig
+cloudShellService =
+  Core.defaultService
+    (Core.ServiceId "cloudshell:v1")
+    "cloudshell.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy

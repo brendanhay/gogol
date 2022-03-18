@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudShell.Users.Environments.Start
+-- Module      : Gogol.CloudShell.Users.Environments.Start
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Starts an existing environment, allowing clients to connect to it. The returned operation will contain an instance of StartEnvironmentMetadata in its metadata field. Users can wait for the environment to start by polling this operation via GetOperation. Once the environment has finished starting and is ready to accept connections, the operation will contain a StartEnvironmentResponse in its response field.
 --
 -- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.users.environments.start@.
-module Network.Google.CloudShell.Users.Environments.Start
+module Gogol.CloudShell.Users.Environments.Start
   ( -- * Resource
     CloudShellUsersEnvironmentsStartResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudShell.Users.Environments.Start
   )
 where
 
-import Network.Google.CloudShell.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudShell.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudshell.users.environments.start@ method which the
 -- 'CloudShellUsersEnvironmentsStart' request conforms to.
