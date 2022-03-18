@@ -19,18 +19,94 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Run.Types
+-- Module      : Gogol.Run
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Run.Types
+--
+-- Deploy and manage user provided container images that scale automatically based on incoming requests. The Cloud Run Admin API v1 follows the Knative Serving API specification, while v2 is aligned with Google Cloud AIP-based API standards, as described in https:\/\/google.aip.dev\/.
+--
+-- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference>
+module Gogol.Run
   ( -- * Configuration
     runService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
+
+    -- * Resources
+
+    -- ** run.projects.locations.operations.delete
+    RunProjectsLocationsOperationsDeleteResource,
+    newRunProjectsLocationsOperationsDelete,
+    RunProjectsLocationsOperationsDelete,
+
+    -- ** run.projects.locations.operations.get
+    RunProjectsLocationsOperationsGetResource,
+    newRunProjectsLocationsOperationsGet,
+    RunProjectsLocationsOperationsGet,
+
+    -- ** run.projects.locations.operations.list
+    RunProjectsLocationsOperationsListResource,
+    newRunProjectsLocationsOperationsList,
+    RunProjectsLocationsOperationsList,
+
+    -- ** run.projects.locations.services.create
+    RunProjectsLocationsServicesCreateResource,
+    newRunProjectsLocationsServicesCreate,
+    RunProjectsLocationsServicesCreate,
+
+    -- ** run.projects.locations.services.delete
+    RunProjectsLocationsServicesDeleteResource,
+    newRunProjectsLocationsServicesDelete,
+    RunProjectsLocationsServicesDelete,
+
+    -- ** run.projects.locations.services.get
+    RunProjectsLocationsServicesGetResource,
+    newRunProjectsLocationsServicesGet,
+    RunProjectsLocationsServicesGet,
+
+    -- ** run.projects.locations.services.getIamPolicy
+    RunProjectsLocationsServicesGetIamPolicyResource,
+    newRunProjectsLocationsServicesGetIamPolicy,
+    RunProjectsLocationsServicesGetIamPolicy,
+
+    -- ** run.projects.locations.services.list
+    RunProjectsLocationsServicesListResource,
+    newRunProjectsLocationsServicesList,
+    RunProjectsLocationsServicesList,
+
+    -- ** run.projects.locations.services.patch
+    RunProjectsLocationsServicesPatchResource,
+    newRunProjectsLocationsServicesPatch,
+    RunProjectsLocationsServicesPatch,
+
+    -- ** run.projects.locations.services.revisions.delete
+    RunProjectsLocationsServicesRevisionsDeleteResource,
+    newRunProjectsLocationsServicesRevisionsDelete,
+    RunProjectsLocationsServicesRevisionsDelete,
+
+    -- ** run.projects.locations.services.revisions.get
+    RunProjectsLocationsServicesRevisionsGetResource,
+    newRunProjectsLocationsServicesRevisionsGet,
+    RunProjectsLocationsServicesRevisionsGet,
+
+    -- ** run.projects.locations.services.revisions.list
+    RunProjectsLocationsServicesRevisionsListResource,
+    newRunProjectsLocationsServicesRevisionsList,
+    RunProjectsLocationsServicesRevisionsList,
+
+    -- ** run.projects.locations.services.setIamPolicy
+    RunProjectsLocationsServicesSetIamPolicyResource,
+    newRunProjectsLocationsServicesSetIamPolicy,
+    RunProjectsLocationsServicesSetIamPolicy,
+
+    -- ** run.projects.locations.services.testIamPermissions
+    RunProjectsLocationsServicesTestIamPermissionsResource,
+    newRunProjectsLocationsServicesTestIamPermissions,
+    RunProjectsLocationsServicesTestIamPermissions,
 
     -- * Types
 
@@ -263,17 +339,18 @@ module Network.Google.Run.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Run.Internal.Product
-import Network.Google.Run.Internal.Sum
-
--- | Default request referring to version @v2@ of the Cloud Run Admin API. This contains the host and root path used as a starting point for constructing service requests.
-runService :: Core.ServiceConfig
-runService =
-  Core.defaultService
-    (Core.ServiceId "run:v2")
-    "run.googleapis.com"
-
--- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+import Gogol.Run.Projects.Locations.Operations.Delete
+import Gogol.Run.Projects.Locations.Operations.Get
+import Gogol.Run.Projects.Locations.Operations.List
+import Gogol.Run.Projects.Locations.Services.Create
+import Gogol.Run.Projects.Locations.Services.Delete
+import Gogol.Run.Projects.Locations.Services.Get
+import Gogol.Run.Projects.Locations.Services.GetIamPolicy
+import Gogol.Run.Projects.Locations.Services.List
+import Gogol.Run.Projects.Locations.Services.Patch
+import Gogol.Run.Projects.Locations.Services.Revisions.Delete
+import Gogol.Run.Projects.Locations.Services.Revisions.Get
+import Gogol.Run.Projects.Locations.Services.Revisions.List
+import Gogol.Run.Projects.Locations.Services.SetIamPolicy
+import Gogol.Run.Projects.Locations.Services.TestIamPermissions
+import Gogol.Run.Types

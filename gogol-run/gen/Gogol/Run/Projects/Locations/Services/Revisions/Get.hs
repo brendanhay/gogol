@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Run.Projects.Locations.Operations.Delete
+-- Module      : Gogol.Run.Projects.Locations.Services.Revisions.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- Gets information about a Revision.
 --
--- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.operations.delete@.
-module Network.Google.Run.Projects.Locations.Operations.Delete
+-- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.revisions.get@.
+module Gogol.Run.Projects.Locations.Services.Revisions.Get
   ( -- * Resource
-    RunProjectsLocationsOperationsDeleteResource,
+    RunProjectsLocationsServicesRevisionsGetResource,
 
     -- ** Constructing a Request
-    newRunProjectsLocationsOperationsDelete,
-    RunProjectsLocationsOperationsDelete,
+    newRunProjectsLocationsServicesRevisionsGet,
+    RunProjectsLocationsServicesRevisionsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Run.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Run.Types
 
--- | A resource alias for @run.projects.locations.operations.delete@ method which the
--- 'RunProjectsLocationsOperationsDelete' request conforms to.
-type RunProjectsLocationsOperationsDeleteResource =
+-- | A resource alias for @run.projects.locations.services.revisions.get@ method which the
+-- 'RunProjectsLocationsServicesRevisionsGet' request conforms to.
+type RunProjectsLocationsServicesRevisionsGetResource =
   "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type RunProjectsLocationsOperationsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
+    Core.:> Core.Get '[Core.JSON] GoogleCloudRunV2Revision
 
--- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- | Gets information about a Revision.
 --
--- /See:/ 'newRunProjectsLocationsOperationsDelete' smart constructor.
-data RunProjectsLocationsOperationsDelete = RunProjectsLocationsOperationsDelete
+-- /See:/ 'newRunProjectsLocationsServicesRevisionsGet' smart constructor.
+data RunProjectsLocationsServicesRevisionsGet = RunProjectsLocationsServicesRevisionsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource to be deleted.
+    -- | Required. The full name of the Revision. Format: projects\/{project}\/locations\/{location}\/services\/{service}\/revisions\/{revision}
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data RunProjectsLocationsOperationsDelete = RunProjectsLocationsOperationsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RunProjectsLocationsOperationsDelete' with the minimum fields required to make a request.
-newRunProjectsLocationsOperationsDelete ::
-  -- |  The name of the operation resource to be deleted. See 'name'.
+-- | Creates a value of 'RunProjectsLocationsServicesRevisionsGet' with the minimum fields required to make a request.
+newRunProjectsLocationsServicesRevisionsGet ::
+  -- |  Required. The full name of the Revision. Format: projects\/{project}\/locations\/{location}\/services\/{service}\/revisions\/{revision} See 'name'.
   Core.Text ->
-  RunProjectsLocationsOperationsDelete
-newRunProjectsLocationsOperationsDelete name =
-  RunProjectsLocationsOperationsDelete
+  RunProjectsLocationsServicesRevisionsGet
+newRunProjectsLocationsServicesRevisionsGet name =
+  RunProjectsLocationsServicesRevisionsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,16 +91,16 @@ newRunProjectsLocationsOperationsDelete name =
 
 instance
   Core.GoogleRequest
-    RunProjectsLocationsOperationsDelete
+    RunProjectsLocationsServicesRevisionsGet
   where
   type
-    Rs RunProjectsLocationsOperationsDelete =
-      GoogleProtobufEmpty
+    Rs RunProjectsLocationsServicesRevisionsGet =
+      GoogleCloudRunV2Revision
   type
-    Scopes RunProjectsLocationsOperationsDelete =
+    Scopes RunProjectsLocationsServicesRevisionsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    RunProjectsLocationsOperationsDelete {..} =
+    RunProjectsLocationsServicesRevisionsGet {..} =
       go
         name
         xgafv
@@ -115,6 +115,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  RunProjectsLocationsOperationsDeleteResource
+                  RunProjectsLocationsServicesRevisionsGetResource
             )
             Core.mempty

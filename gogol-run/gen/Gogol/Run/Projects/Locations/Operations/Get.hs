@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Run.Projects.Locations.Operations.Get
+-- Module      : Gogol.Run.Projects.Locations.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.operations.get@.
-module Network.Google.Run.Projects.Locations.Operations.Get
+module Gogol.Run.Projects.Locations.Operations.Get
   ( -- * Resource
     RunProjectsLocationsOperationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Run.Projects.Locations.Operations.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Run.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.operations.get@ method which the
 -- 'RunProjectsLocationsOperationsGet' request conforms to.
