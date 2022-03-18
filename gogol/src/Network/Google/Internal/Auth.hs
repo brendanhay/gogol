@@ -20,9 +20,9 @@
 -- Internal types and helpers for constructing OAuth credentials.
 module Network.Google.Internal.Auth where
 
+import Control.Exception (Exception, SomeException, catch, throwIO)
 import Control.Exception.Lens (exception)
 import Control.Lens (Prism', prism, (<&>))
-import Control.Monad.Catch
 import Control.Monad.IO.Class (MonadIO (..))
 import Crypto.PubKey.RSA.Types (PrivateKey)
 import Data.Aeson
@@ -296,14 +296,14 @@ tokenRequest =
     }
 
 refreshRequest ::
-  (MonadIO m, MonadCatch m) =>
+  MonadIO m =>
   Client.Request ->
   Logger ->
   Manager ->
   m (OAuthToken s)
 refreshRequest rq l m = do
   logDebug l rq -- debug:ClientRequest
-  rs <- liftIO (Client.httpLbs rq m) `catch` (throwM . RetrievalError)
+  rs <- liftIO (Client.httpLbs rq m `catch` (throwIO . RetrievalError))
 
   let bs = Client.responseBody rs
       s = Client.responseStatus rs
@@ -334,8 +334,8 @@ refreshRequest rq l m = do
             "[Parse Error] Failure parsing token refresh " <> build e
           refreshErr s e Nothing
 
-    refreshErr :: MonadThrow m => Status -> Text -> Maybe Text -> m a
-    refreshErr s e = throwM . TokenRefreshError s e
+    refreshErr :: MonadIO m => Status -> Text -> Maybe Text -> m a
+    refreshErr s e = liftIO . throwIO . TokenRefreshError s e
 
     host = Text.decodeUtf8 (Client.host rq)
     path = Text.decodeUtf8 (Client.path rq)

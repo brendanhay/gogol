@@ -14,10 +14,10 @@
 -- Portability : non-portable (GHC extensions)
 module Network.Google.Internal.HTTP where
 
+import Control.Exception (Handler (..), catches, throwIO, toException)
 import Control.Lens ((%~), (&))
-import Control.Monad.Catch
-import Control.Monad.IO.Class (MonadIO)
-import Control.Monad.Trans.Resource (MonadResource (..))
+import Control.Monad.IO.Class (MonadIO (..))
+import Control.Monad.Trans.Resource (MonadResource (..), transResourceT)
 import Data.Monoid (Dual (..), Endo (..))
 import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
@@ -42,19 +42,22 @@ import Network.HTTP.Types
 -- "resumable" or "multipart" needs to go into the "uploadType" param
 
 perform ::
-  (MonadCatch m, MonadResource m, AllowScopes s, GoogleRequest a) =>
+  (MonadResource m, AllowScopes s, GoogleRequest a) =>
   Env s ->
   a ->
   m (Either Error (Rs a))
-perform Env {..} x = catches go handlers
+perform Env {..} x =
+  liftResourceT (transResourceT (`catches` handlers) go)
   where
     Request {..} = _cliRequest
+
     ServiceConfig {..} = _cliService
+
     GClient {..} =
       requestClient x
         & clientService %~ appEndo (getDual _envOverride)
 
-    go = liftResourceT $ do
+    go = do
       (ct, b) <- getContent _rqBody
       rq <- authorize (request ct b) _envStore _envLogger _envManager
 
@@ -104,7 +107,8 @@ perform Env {..} x = catches go handlers
       | _cliCheck (responseStatus rs) = pure ()
       | otherwise = do
         b <- sinkLBS (responseBody rs)
-        throwM . toException . ServiceError $
+
+        liftIO . throwIO . toException . ServiceError $
           ServiceError'
             { _serviceId = _svcId,
               _serviceStatus = responseStatus rs,

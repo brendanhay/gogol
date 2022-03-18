@@ -27,12 +27,6 @@ module Network.Google
   ( -- * Usage
     -- $usage
 
-    -- * The Google Monad
-    Google (..),
-    MonadGoogle (..),
-    runGoogle,
-    runResourceT,
-
     -- * Environment
     Env,
     HasEnv (..),
@@ -105,22 +99,10 @@ module Network.Google
   )
 where
 
-import Control.Applicative
 import Control.Exception.Lens
 import Control.Monad
-import Control.Monad.Catch
-import Control.Monad.IO.Unlift (MonadUnliftIO (withRunInIO))
-import qualified Control.Monad.RWS.Lazy as LRW
-import qualified Control.Monad.RWS.Strict as RW
-import Control.Monad.Reader
-import qualified Control.Monad.State.Lazy as LS
-import qualified Control.Monad.State.Strict as S
-import Control.Monad.Trans.Except (ExceptT)
-import Control.Monad.Trans.Identity (IdentityT)
-import Control.Monad.Trans.Maybe (MaybeT)
+import Control.Monad.IO.Class (MonadIO (..))
 import Control.Monad.Trans.Resource
-import qualified Control.Monad.Writer.Lazy as LW
-import qualified Control.Monad.Writer.Strict as W
 import Network.Google.Auth
 import Network.Google.Env
 import Network.Google.Internal.Body
@@ -130,96 +112,20 @@ import Network.Google.Prelude
 import Network.Google.Types
 import Network.HTTP.Conduit (newManager, tlsManagerSettings)
 
--- | The 'Google' monad containing configuration environment and tracks
--- resource allocation via 'ResourceT'.
--- The functions in "Network.Google" are generalised
-newtype Google s a = Google {unGoogle :: ReaderT (Env s) (ResourceT IO) a}
-  deriving
-    ( Functor,
-      Applicative,
-      Alternative,
-      Monad,
-      MonadPlus,
-      MonadIO,
-      MonadThrow,
-      MonadCatch,
-      MonadMask,
-      MonadReader (Env s),
-      MonadResource
-    )
-
--- | Run a 'Google' action using the specified environment and
--- credentials annotated with sufficient authorization scopes.
-runGoogle :: (MonadResource m, HasEnv s r) => r -> Google s a -> m a
-runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)
-
--- | Monads in which 'Google' actions may be embedded.
---
--- The functions in "Network.Google" have 'MonadGoogle' constraints to provide
--- automatic lifting when embedding 'Google' as a layer inside your own
--- application stack.
-class
-  ( Functor m,
-    Applicative m,
-    Monad m,
-    MonadIO m,
-    MonadCatch m,
-    AllowScopes s
-  ) =>
-  MonadGoogle s m
-    | m -> s
-  where
-  -- | Lift a computation to the 'Google' monad.
-  liftGoogle :: Google s a -> m a
-
-instance AllowScopes s => MonadGoogle s (Google s) where
-  liftGoogle = id
-
-instance MonadUnliftIO (Google s) where
-  withRunInIO inner =
-    Google $
-      withRunInIO $ \run ->
-        inner (run . unGoogle)
-  {-# INLINE withRunInIO #-}
-
-instance MonadGoogle s m => MonadGoogle s (IdentityT m) where
-  liftGoogle = lift . liftGoogle
-
-instance MonadGoogle s m => MonadGoogle s (MaybeT m) where
-  liftGoogle = lift . liftGoogle
-
-instance MonadGoogle s m => MonadGoogle s (ExceptT e m) where
-  liftGoogle = lift . liftGoogle
-
-instance MonadGoogle s m => MonadGoogle s (ReaderT r m) where
-  liftGoogle = lift . liftGoogle
-
-instance MonadGoogle s m => MonadGoogle s (S.StateT s' m) where
-  liftGoogle = lift . liftGoogle
-
-instance MonadGoogle s m => MonadGoogle s (LS.StateT s' m) where
-  liftGoogle = lift . liftGoogle
-
-instance (Monoid w, MonadGoogle s m) => MonadGoogle s (W.WriterT w m) where
-  liftGoogle = lift . liftGoogle
-
-instance (Monoid w, MonadGoogle s m) => MonadGoogle s (LW.WriterT w m) where
-  liftGoogle = lift . liftGoogle
-
-instance (Monoid w, MonadGoogle s m) => MonadGoogle s (RW.RWST r w s' m) where
-  liftGoogle = lift . liftGoogle
-
-instance (Monoid w, MonadGoogle s m) => MonadGoogle s (LRW.RWST r w s' m) where
-  liftGoogle = lift . liftGoogle
-
 -- | Send a request, returning the associated response if successful.
 --
 -- Throws 'Error'.
-send :: (MonadGoogle s m, HasScope s a, GoogleRequest a) => a -> m (Rs a)
-send x = liftGoogle $ do
-  e <- ask
-  r <- perform e x
-  hoistError r
+send ::
+  ( MonadResource m,
+    AllowScopes s,
+    HasScope s a,
+    GoogleRequest a
+  ) =>
+  Env s ->
+  a ->
+  m (Rs a)
+send env =
+  perform env >=> hoistError
 
 -- | Send a request returning the associated streaming media response if successful.
 --
@@ -235,13 +141,16 @@ send x = liftGoogle $ do
 --
 -- Throws 'Error'.
 download ::
-  ( MonadGoogle s m,
+  ( MonadResource m,
+    AllowScopes s,
     HasScope s (MediaDownload a),
     GoogleRequest (MediaDownload a)
   ) =>
+  Env s ->
   a ->
   m (Rs (MediaDownload a))
-download = send . MediaDownload
+download env =
+  send env . MediaDownload
 
 -- | Send a request with an attached <https://tools.ietf.org/html/rfc2387 multipart/related media> upload.
 --
@@ -253,17 +162,19 @@ download = send . MediaDownload
 --
 -- Throws 'Error'.
 upload ::
-  ( MonadGoogle s m,
+  ( MonadResource m,
+    AllowScopes s,
     HasScope s (MediaUpload a),
     GoogleRequest (MediaUpload a)
   ) =>
+  Env s ->
   a ->
   GBody ->
   m (Rs (MediaUpload a))
-upload x = send . MediaUpload x
+upload env x = send env . MediaUpload x
 
-hoistError :: MonadThrow m => Either Error a -> m a
-hoistError = either (throwingM _Error) return
+hoistError :: MonadIO m => Either Error a -> m a
+hoistError = either (liftIO . throwingM _Error) pure
 
 -- $usage
 --
@@ -352,8 +263,7 @@ hoistError = either (throwingM _Error) return
 -- Multiple differing requests within a given 'runGoogle' context will then require
 -- the credentials to have a minimal set of these associated request scopes.
 -- This authorization information is represented as a type-level set,
--- the 's' type parameter of 'Google' and 'MonadGoogle'. A mismatch
--- of the sent request scopes and the 'Env' credential scopes results in a informative
+-- the 's' type parameter of 'Env'. A mismatch of the sent request scopes and the 'Env' credential scopes results in a informative
 -- compile error.
 --
 -- You can use 'allow' or the 'envScopes' lens to specify the 'Env's set of scopes.
