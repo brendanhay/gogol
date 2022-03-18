@@ -39,56 +39,57 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.BigQuery
-    Network.Google.BigQuery.Datasets.Delete
-    Network.Google.BigQuery.Datasets.Get
-    Network.Google.BigQuery.Datasets.Insert
-    Network.Google.BigQuery.Datasets.List
-    Network.Google.BigQuery.Datasets.Patch
-    Network.Google.BigQuery.Datasets.Update
-    Network.Google.BigQuery.Jobs.Cancel
-    Network.Google.BigQuery.Jobs.Delete
-    Network.Google.BigQuery.Jobs.Get
-    Network.Google.BigQuery.Jobs.GetQueryResults
-    Network.Google.BigQuery.Jobs.Insert
-    Network.Google.BigQuery.Jobs.List
-    Network.Google.BigQuery.Jobs.Query
-    Network.Google.BigQuery.Models.Delete
-    Network.Google.BigQuery.Models.Get
-    Network.Google.BigQuery.Models.List
-    Network.Google.BigQuery.Models.Patch
-    Network.Google.BigQuery.Projects.GetServiceAccount
-    Network.Google.BigQuery.Projects.List
-    Network.Google.BigQuery.Routines.Delete
-    Network.Google.BigQuery.Routines.Get
-    Network.Google.BigQuery.Routines.Insert
-    Network.Google.BigQuery.Routines.List
-    Network.Google.BigQuery.Routines.Update
-    Network.Google.BigQuery.RowAccessPolicies.GetIamPolicy
-    Network.Google.BigQuery.RowAccessPolicies.List
-    Network.Google.BigQuery.RowAccessPolicies.SetIamPolicy
-    Network.Google.BigQuery.RowAccessPolicies.TestIamPermissions
-    Network.Google.BigQuery.Tabledata.InsertAll
-    Network.Google.BigQuery.Tabledata.List
-    Network.Google.BigQuery.Tables.Delete
-    Network.Google.BigQuery.Tables.Get
-    Network.Google.BigQuery.Tables.GetIamPolicy
-    Network.Google.BigQuery.Tables.Insert
-    Network.Google.BigQuery.Tables.List
-    Network.Google.BigQuery.Tables.Patch
-    Network.Google.BigQuery.Tables.SetIamPolicy
-    Network.Google.BigQuery.Tables.TestIamPermissions
-    Network.Google.BigQuery.Tables.Update
-    Network.Google.BigQuery.Types
+    Gogol.BigQuery
+    Gogol.BigQuery.Datasets.Delete
+    Gogol.BigQuery.Datasets.Get
+    Gogol.BigQuery.Datasets.Insert
+    Gogol.BigQuery.Datasets.List
+    Gogol.BigQuery.Datasets.Patch
+    Gogol.BigQuery.Datasets.Update
+    Gogol.BigQuery.Jobs.Cancel
+    Gogol.BigQuery.Jobs.Delete
+    Gogol.BigQuery.Jobs.Get
+    Gogol.BigQuery.Jobs.GetQueryResults
+    Gogol.BigQuery.Jobs.Insert
+    Gogol.BigQuery.Jobs.List
+    Gogol.BigQuery.Jobs.Query
+    Gogol.BigQuery.Models.Delete
+    Gogol.BigQuery.Models.Get
+    Gogol.BigQuery.Models.List
+    Gogol.BigQuery.Models.Patch
+    Gogol.BigQuery.Projects.GetServiceAccount
+    Gogol.BigQuery.Projects.List
+    Gogol.BigQuery.Routines.Delete
+    Gogol.BigQuery.Routines.Get
+    Gogol.BigQuery.Routines.Insert
+    Gogol.BigQuery.Routines.List
+    Gogol.BigQuery.Routines.Update
+    Gogol.BigQuery.RowAccessPolicies.GetIamPolicy
+    Gogol.BigQuery.RowAccessPolicies.List
+    Gogol.BigQuery.RowAccessPolicies.SetIamPolicy
+    Gogol.BigQuery.RowAccessPolicies.TestIamPermissions
+    Gogol.BigQuery.Tabledata.InsertAll
+    Gogol.BigQuery.Tabledata.List
+    Gogol.BigQuery.Tables.Delete
+    Gogol.BigQuery.Tables.Get
+    Gogol.BigQuery.Tables.GetIamPolicy
+    Gogol.BigQuery.Tables.Insert
+    Gogol.BigQuery.Tables.List
+    Gogol.BigQuery.Tables.Patch
+    Gogol.BigQuery.Tables.SetIamPolicy
+    Gogol.BigQuery.Tables.TestIamPermissions
+    Gogol.BigQuery.Tables.Update
+    Gogol.BigQuery.Types
 
   other-modules:
-    Network.Google.BigQuery.Internal.Product
-    Network.Google.BigQuery.Internal.Sum
+    Gogol.BigQuery.Internal.Product
+    Gogol.BigQuery.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
