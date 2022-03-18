@@ -1,328 +1,254 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SafeBrowsing
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables client applications to check web resources (most commonly URLs)
--- against Google-generated lists of unsafe web resources. The Safe
--- Browsing APIs are for non-commercial use only. If you need to use APIs
--- to detect malicious URLs for commercial purposes – meaning “for sale or
--- revenue-generating purposes” – please refer to the Web Risk API.
+-- Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources. The Safe Browsing APIs are for non-commercial use only. If you need to use APIs to detect malicious URLs for commercial purposes – meaning “for sale or revenue-generating purposes” – please refer to the Web Risk API.
 --
 -- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference>
 module Network.Google.SafeBrowsing
-    (
-    -- * Service Configuration
-      safeBrowsingService
-
-    -- * API Declaration
-    , SafeBrowsingAPI
+  ( -- * Configuration
+    safeBrowsingService,
 
     -- * Resources
 
     -- ** safebrowsing.encodedFullHashes.get
-    , module Network.Google.Resource.SafeBrowsing.EncodedFullHashes.Get
+    SafeBrowsingEncodedFullHashesGetResource,
+    newSafeBrowsingEncodedFullHashesGet,
+    SafeBrowsingEncodedFullHashesGet,
 
     -- ** safebrowsing.encodedUpdates.get
-    , module Network.Google.Resource.SafeBrowsing.EncodedUpdates.Get
+    SafeBrowsingEncodedUpdatesGetResource,
+    newSafeBrowsingEncodedUpdatesGet,
+    SafeBrowsingEncodedUpdatesGet,
 
     -- ** safebrowsing.fullHashes.find
-    , module Network.Google.Resource.SafeBrowsing.FullHashes.Find
+    SafeBrowsingFullHashesFindResource,
+    newSafeBrowsingFullHashesFind,
+    SafeBrowsingFullHashesFind,
 
     -- ** safebrowsing.threatHits.create
-    , module Network.Google.Resource.SafeBrowsing.ThreatHits.Create
+    SafeBrowsingThreatHitsCreateResource,
+    newSafeBrowsingThreatHitsCreate,
+    SafeBrowsingThreatHitsCreate,
 
     -- ** safebrowsing.threatListUpdates.fetch
-    , module Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
+    SafeBrowsingThreatListUpdatesFetchResource,
+    newSafeBrowsingThreatListUpdatesFetch,
+    SafeBrowsingThreatListUpdatesFetch,
 
     -- ** safebrowsing.threatLists.list
-    , module Network.Google.Resource.SafeBrowsing.ThreatLists.List
+    SafeBrowsingThreatListsListResource,
+    newSafeBrowsingThreatListsList,
+    SafeBrowsingThreatListsList,
 
     -- ** safebrowsing.threatMatches.find
-    , module Network.Google.Resource.SafeBrowsing.ThreatMatches.Find
+    SafeBrowsingThreatMatchesFindResource,
+    newSafeBrowsingThreatMatchesFind,
+    SafeBrowsingThreatMatchesFind,
 
     -- * Types
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatHit
-    , GoogleSecuritySafebrowsingV4ThreatHit
-    , googleSecuritySafebrowsingV4ThreatHit
-    , gssvthUserInfo
-    , gssvthThreatType
-    , gssvthResources
-    , gssvthEntry
-    , gssvthClientInfo
-    , gssvthPlatformType
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatMatchThreatType
-    , GoogleSecuritySafebrowsingV4ThreatMatchThreatType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4RawIndices
-    , GoogleSecuritySafebrowsingV4RawIndices
-    , googleSecuritySafebrowsingV4RawIndices
-    , gssvriIndices
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest
-    , googleSecuritySafebrowsingV4FetchThreatListUpdatesRequest
-    , gssvftlurListUpdateRequests
-    , gssvftlurClient
-
-    -- ** GoogleSecuritySafebrowsingV4FindFullHashesRequest
-    , GoogleSecuritySafebrowsingV4FindFullHashesRequest
-    , googleSecuritySafebrowsingV4FindFullHashesRequest
-    , gssvffhrThreatInfo
-    , gssvffhrAPIClient
-    , gssvffhrClientStates
-    , gssvffhrClient
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatEntrySet
-    , GoogleSecuritySafebrowsingV4ThreatEntrySet
-    , googleSecuritySafebrowsingV4ThreatEntrySet
-    , gssvtesRiceHashes
-    , gssvtesRiceIndices
-    , gssvtesRawHashes
-    , gssvtesRawIndices
-    , gssvtesCompressionType
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatHitThreatSourceType
-    , GoogleSecuritySafebrowsingV4ThreatHitThreatSourceType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FindThreatMatchesResponse
-    , GoogleSecuritySafebrowsingV4FindThreatMatchesResponse
-    , googleSecuritySafebrowsingV4FindThreatMatchesResponse
-    , gssvftmrMatches
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptorThreatEntryType
-    , GoogleSecuritySafebrowsingV4ThreatListDescriptorThreatEntryType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatMatchPlatformType
-    , GoogleSecuritySafebrowsingV4ThreatMatchPlatformType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseResponseType
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseResponseType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints
-    , googleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints
-    , gssvftlurlurcMaxUpdateEntries
-    , gssvftlurlurcDeviceLocation
-    , gssvftlurlurcLanguage
-    , gssvftlurlurcRegion
-    , gssvftlurlurcSupportedCompressions
-    , gssvftlurlurcMaxDatabaseEntries
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatEntryMetadata
-    , GoogleSecuritySafebrowsingV4ThreatEntryMetadata
-    , googleSecuritySafebrowsingV4ThreatEntryMetadata
-    , gssvtemEntries
-
-    -- ** GoogleSecuritySafebrowsingV4FindThreatMatchesRequest
-    , GoogleSecuritySafebrowsingV4FindThreatMatchesRequest
-    , googleSecuritySafebrowsingV4FindThreatMatchesRequest
-    , gssvftmrThreatInfo
-    , gssvftmrClient
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptor
-    , GoogleSecuritySafebrowsingV4ThreatListDescriptor
-    , googleSecuritySafebrowsingV4ThreatListDescriptor
-    , gssvtldThreatEntryType
-    , gssvtldThreatType
-    , gssvtldPlatformType
-
-    -- ** GoogleSecuritySafebrowsingV4ClientInfo
-    , GoogleSecuritySafebrowsingV4ClientInfo
-    , googleSecuritySafebrowsingV4ClientInfo
-    , gssvciClientId
-    , gssvciClientVersion
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatType
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatType
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatType (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** GoogleProtobufEmpty
-    , GoogleProtobufEmpty
-    , googleProtobufEmpty
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatHitUserInfo
-    , GoogleSecuritySafebrowsingV4ThreatHitUserInfo
-    , googleSecuritySafebrowsingV4ThreatHitUserInfo
-    , gssvthuiRegionCode
-    , gssvthuiUserId
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse
-    , googleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse
-    , gssvftlurlurAdditions
-    , gssvftlurlurThreatEntryType
-    , gssvftlurlurChecksum
-    , gssvftlurlurThreatType
-    , gssvftlurlurPlatformType
-    , gssvftlurlurNewClientState
-    , gssvftlurlurRemovals
-    , gssvftlurlurResponseType
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest
-    , googleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest
-    , gState
-    , gThreatEntryType
-    , gConstraints
-    , gThreatType
-    , gPlatformType
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptorThreatType
-    , GoogleSecuritySafebrowsingV4ThreatListDescriptorThreatType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponsePlatformType
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponsePlatformType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformType
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatEntryType
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatEntryType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatEntryType
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatEntryType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptorPlatformType
-    , GoogleSecuritySafebrowsingV4ThreatListDescriptorPlatformType (..)
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatInfo
-    , GoogleSecuritySafebrowsingV4ThreatInfo
-    , googleSecuritySafebrowsingV4ThreatInfo
-    , gssvtiThreatEntries
-    , gssvtiThreatTypes
-    , gssvtiPlatformTypes
-    , gssvtiThreatEntryTypes
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatHitThreatSource
-    , GoogleSecuritySafebrowsingV4ThreatHitThreatSource
-    , googleSecuritySafebrowsingV4ThreatHitThreatSource
-    , gssvthtsRemoteIP
-    , gssvthtsURL
-    , gssvthtsReferrer
-    , gssvthtsType
-
-    -- ** GoogleSecuritySafebrowsingV4RawHashes
-    , GoogleSecuritySafebrowsingV4RawHashes
-    , googleSecuritySafebrowsingV4RawHashes
-    , gssvrhPrefixSize
-    , gssvrhRawHashes
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatInfoThreatTypesItem
-    , GoogleSecuritySafebrowsingV4ThreatInfoThreatTypesItem (..)
+    GoogleProtobufEmpty (..),
+    newGoogleProtobufEmpty,
 
     -- ** GoogleSecuritySafebrowsingV4Checksum
-    , GoogleSecuritySafebrowsingV4Checksum
-    , googleSecuritySafebrowsingV4Checksum
-    , gssvcSha256
+    GoogleSecuritySafebrowsingV4Checksum (..),
+    newGoogleSecuritySafebrowsingV4Checksum,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** GoogleSecuritySafebrowsingV4ClientInfo
+    GoogleSecuritySafebrowsingV4ClientInfo (..),
+    newGoogleSecuritySafebrowsingV4ClientInfo,
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatMatch
-    , GoogleSecuritySafebrowsingV4ThreatMatch
-    , googleSecuritySafebrowsingV4ThreatMatch
-    , gssvtmThreatEntryMetadata
-    , gssvtmThreatEntryType
-    , gssvtmThreatType
-    , gssvtmPlatformType
-    , gssvtmCacheDuration
-    , gssvtmThreat
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest (..),
+    newGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest,
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatHitThreatType
-    , GoogleSecuritySafebrowsingV4ThreatHitThreatType (..)
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest (..),
+    newGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest,
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatEntry
-    , GoogleSecuritySafebrowsingV4ThreatEntry
-    , googleSecuritySafebrowsingV4ThreatEntry
-    , gssvteHash
-    , gssvteURL
-    , gssvteDigest
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType (..),
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatMatchThreatEntryType
-    , GoogleSecuritySafebrowsingV4ThreatMatchThreatEntryType (..)
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType (..),
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatInfoThreatEntryTypesItem
-    , GoogleSecuritySafebrowsingV4ThreatInfoThreatEntryTypesItem (..)
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType (..),
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatHitPlatformType
-    , GoogleSecuritySafebrowsingV4ThreatHitPlatformType (..)
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints (..),
+    newGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints,
 
-    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsItem
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsItem (..)
-
-    -- ** GoogleSecuritySafebrowsingV4FindFullHashesResponse
-    , GoogleSecuritySafebrowsingV4FindFullHashesResponse
-    , googleSecuritySafebrowsingV4FindFullHashesResponse
-    , gssvffhrMatches
-    , gssvffhrNegativeCacheDuration
-    , gssvffhrMinimumWaitDuration
-
-    -- ** GoogleSecuritySafebrowsingV4ThreatInfoPlatformTypesItem
-    , GoogleSecuritySafebrowsingV4ThreatInfoPlatformTypesItem (..)
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem (..),
 
     -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
-    , GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
-    , googleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
-    , gssvftlurListUpdateResponses
-    , gssvftlurMinimumWaitDuration
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse (..),
+    newGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse,
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry
-    , GoogleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry
-    , googleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry
-    , gssvtemmeValue
-    , gssvtemmeKey
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse (..),
+    newGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse,
+
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
+    GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4FindFullHashesRequest
+    GoogleSecuritySafebrowsingV4FindFullHashesRequest (..),
+    newGoogleSecuritySafebrowsingV4FindFullHashesRequest,
+
+    -- ** GoogleSecuritySafebrowsingV4FindFullHashesResponse
+    GoogleSecuritySafebrowsingV4FindFullHashesResponse (..),
+    newGoogleSecuritySafebrowsingV4FindFullHashesResponse,
+
+    -- ** GoogleSecuritySafebrowsingV4FindThreatMatchesRequest
+    GoogleSecuritySafebrowsingV4FindThreatMatchesRequest (..),
+    newGoogleSecuritySafebrowsingV4FindThreatMatchesRequest,
+
+    -- ** GoogleSecuritySafebrowsingV4FindThreatMatchesResponse
+    GoogleSecuritySafebrowsingV4FindThreatMatchesResponse (..),
+    newGoogleSecuritySafebrowsingV4FindThreatMatchesResponse,
 
     -- ** GoogleSecuritySafebrowsingV4ListThreatListsResponse
-    , GoogleSecuritySafebrowsingV4ListThreatListsResponse
-    , googleSecuritySafebrowsingV4ListThreatListsResponse
-    , gssvltlrThreatLists
+    GoogleSecuritySafebrowsingV4ListThreatListsResponse (..),
+    newGoogleSecuritySafebrowsingV4ListThreatListsResponse,
 
-    -- ** GoogleSecuritySafebrowsingV4ThreatEntrySetCompressionType
-    , GoogleSecuritySafebrowsingV4ThreatEntrySetCompressionType (..)
+    -- ** GoogleSecuritySafebrowsingV4RawHashes
+    GoogleSecuritySafebrowsingV4RawHashes (..),
+    newGoogleSecuritySafebrowsingV4RawHashes,
+
+    -- ** GoogleSecuritySafebrowsingV4RawIndices
+    GoogleSecuritySafebrowsingV4RawIndices (..),
+    newGoogleSecuritySafebrowsingV4RawIndices,
 
     -- ** GoogleSecuritySafebrowsingV4RiceDeltaEncoding
-    , GoogleSecuritySafebrowsingV4RiceDeltaEncoding
-    , googleSecuritySafebrowsingV4RiceDeltaEncoding
-    , gssvrdeFirstValue
-    , gssvrdeRiceParameter
-    , gssvrdeNumEntries
-    , gssvrdeEncodedData
-    ) where
+    GoogleSecuritySafebrowsingV4RiceDeltaEncoding (..),
+    newGoogleSecuritySafebrowsingV4RiceDeltaEncoding,
 
-import Network.Google.Prelude
-import Network.Google.Resource.SafeBrowsing.EncodedFullHashes.Get
-import Network.Google.Resource.SafeBrowsing.EncodedUpdates.Get
-import Network.Google.Resource.SafeBrowsing.FullHashes.Find
-import Network.Google.Resource.SafeBrowsing.ThreatHits.Create
-import Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
-import Network.Google.Resource.SafeBrowsing.ThreatLists.List
-import Network.Google.Resource.SafeBrowsing.ThreatMatches.Find
+    -- ** GoogleSecuritySafebrowsingV4ThreatEntry
+    GoogleSecuritySafebrowsingV4ThreatEntry (..),
+    newGoogleSecuritySafebrowsingV4ThreatEntry,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatEntryMetadata
+    GoogleSecuritySafebrowsingV4ThreatEntryMetadata (..),
+    newGoogleSecuritySafebrowsingV4ThreatEntryMetadata,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry
+    GoogleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry (..),
+    newGoogleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatEntrySet
+    GoogleSecuritySafebrowsingV4ThreatEntrySet (..),
+    newGoogleSecuritySafebrowsingV4ThreatEntrySet,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType
+    GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatHit
+    GoogleSecuritySafebrowsingV4ThreatHit (..),
+    newGoogleSecuritySafebrowsingV4ThreatHit,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatHit_PlatformType
+    GoogleSecuritySafebrowsingV4ThreatHit_PlatformType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
+    GoogleSecuritySafebrowsingV4ThreatHit_ThreatType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatHitThreatSource
+    GoogleSecuritySafebrowsingV4ThreatHitThreatSource (..),
+    newGoogleSecuritySafebrowsingV4ThreatHitThreatSource,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type
+    GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatHitUserInfo
+    GoogleSecuritySafebrowsingV4ThreatHitUserInfo (..),
+    newGoogleSecuritySafebrowsingV4ThreatHitUserInfo,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatInfo
+    GoogleSecuritySafebrowsingV4ThreatInfo (..),
+    newGoogleSecuritySafebrowsingV4ThreatInfo,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem
+    GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem
+    GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
+    GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptor
+    GoogleSecuritySafebrowsingV4ThreatListDescriptor (..),
+    newGoogleSecuritySafebrowsingV4ThreatListDescriptor,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType
+    GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType
+    GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
+    GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatMatch
+    GoogleSecuritySafebrowsingV4ThreatMatch (..),
+    newGoogleSecuritySafebrowsingV4ThreatMatch,
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType
+    GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType
+    GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType (..),
+
+    -- ** GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
+    GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType (..),
+  )
+where
+
+import Network.Google.SafeBrowsing.EncodedFullHashes.Get
+import Network.Google.SafeBrowsing.EncodedUpdates.Get
+import Network.Google.SafeBrowsing.FullHashes.Find
+import Network.Google.SafeBrowsing.ThreatHits.Create
+import Network.Google.SafeBrowsing.ThreatListUpdates.Fetch
+import Network.Google.SafeBrowsing.ThreatLists.List
+import Network.Google.SafeBrowsing.ThreatMatches.Find
 import Network.Google.SafeBrowsing.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Safe Browsing API service.
-type SafeBrowsingAPI =
-     FullHashesFindResource :<|> EncodedUpdatesGetResource
-       :<|> ThreatHitsCreateResource
-       :<|> ThreatMatchesFindResource
-       :<|> ThreatListUpdatesFetchResource
-       :<|> ThreatListsListResource
-       :<|> EncodedFullHashesGetResource
