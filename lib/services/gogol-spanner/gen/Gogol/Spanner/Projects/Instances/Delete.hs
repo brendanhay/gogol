@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.delete@.
 module Gogol.Spanner.Projects.Instances.Delete
-  ( -- * Resource
-    SpannerProjectsInstancesDeleteResource,
+    (
+    -- * Resource
+      SpannerProjectsInstancesDeleteResource
 
     -- ** Constructing a Request
-    newSpannerProjectsInstancesDelete,
-    SpannerProjectsInstancesDelete,
-  )
-where
+    , newSpannerProjectsInstancesDelete
+    , SpannerProjectsInstancesDelete
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Spanner.Types
@@ -45,74 +51,66 @@ import Gogol.Spanner.Types
 -- | A resource alias for @spanner.projects.instances.delete@ method which the
 -- 'SpannerProjectsInstancesDelete' request conforms to.
 type SpannerProjectsInstancesDeleteResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Delete '[Core.JSON] Empty
 
 -- | Deletes an instance. Immediately upon completion of the request: * Billing ceases for all of the instance\'s reserved resources. Soon afterward: * The instance and /all of its databases/ immediately and irrevocably disappear from the API. All data in the databases is permanently deleted.
 --
 -- /See:/ 'newSpannerProjectsInstancesDelete' smart constructor.
 data SpannerProjectsInstancesDelete = SpannerProjectsInstancesDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the instance to be deleted. Values are of the form @projects\/\/instances\/@
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The name of the instance to be deleted. Values are of the form @projects\/\/instances\/@
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SpannerProjectsInstancesDelete' with the minimum fields required to make a request.
-newSpannerProjectsInstancesDelete ::
-  -- |  Required. The name of the instance to be deleted. Values are of the form @projects\/\/instances\/@ See 'name'.
-  Core.Text ->
-  SpannerProjectsInstancesDelete
+newSpannerProjectsInstancesDelete 
+    ::  Core.Text
+       -- ^  Required. The name of the instance to be deleted. Values are of the form @projects\/\/instances\/@ See 'name'.
+    -> SpannerProjectsInstancesDelete
 newSpannerProjectsInstancesDelete name =
   SpannerProjectsInstancesDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SpannerProjectsInstancesDelete
-  where
-  type Rs SpannerProjectsInstancesDelete = Empty
-  type
-    Scopes SpannerProjectsInstancesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.admin"
-       ]
-  requestClient SpannerProjectsInstancesDelete {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      spannerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SpannerProjectsInstancesDeleteResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           SpannerProjectsInstancesDelete
+         where
+        type Rs SpannerProjectsInstancesDelete = Empty
+        type Scopes SpannerProjectsInstancesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/spanner.admin"]
+        requestClient SpannerProjectsInstancesDelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              spannerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy SpannerProjectsInstancesDeleteResource)
+                      Core.mempty
+
