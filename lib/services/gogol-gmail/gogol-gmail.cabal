@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-gmail
-version:            0.5.0
-synopsis:           Google Gmail SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-gmail
+version:               0.5.0
+synopsis:              Google Gmail SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  The Gmail API lets you view and manage Gmail mailbox data like threads, messages, and labels.
+    The Gmail API lets you view and manage Gmail mailbox data like threads, messages, and labels.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,95 +28,98 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Gmail
-    Gogol.Gmail.Types
-    Gogol.Gmail.Users.Drafts.Create
-    Gogol.Gmail.Users.Drafts.Delete
-    Gogol.Gmail.Users.Drafts.Get
-    Gogol.Gmail.Users.Drafts.List
-    Gogol.Gmail.Users.Drafts.Send
-    Gogol.Gmail.Users.Drafts.Update
-    Gogol.Gmail.Users.GetProfile
-    Gogol.Gmail.Users.History.List
-    Gogol.Gmail.Users.Labels.Create
-    Gogol.Gmail.Users.Labels.Delete
-    Gogol.Gmail.Users.Labels.Get
-    Gogol.Gmail.Users.Labels.List
-    Gogol.Gmail.Users.Labels.Patch
-    Gogol.Gmail.Users.Labels.Update
-    Gogol.Gmail.Users.Messages.Attachments.Get
-    Gogol.Gmail.Users.Messages.BatchDelete
-    Gogol.Gmail.Users.Messages.BatchModify
-    Gogol.Gmail.Users.Messages.Delete
-    Gogol.Gmail.Users.Messages.Get
-    Gogol.Gmail.Users.Messages.Import
-    Gogol.Gmail.Users.Messages.Insert
-    Gogol.Gmail.Users.Messages.List
-    Gogol.Gmail.Users.Messages.Modify
-    Gogol.Gmail.Users.Messages.Send
-    Gogol.Gmail.Users.Messages.Trash
-    Gogol.Gmail.Users.Messages.Untrash
-    Gogol.Gmail.Users.Settings.Delegates.Create
-    Gogol.Gmail.Users.Settings.Delegates.Delete
-    Gogol.Gmail.Users.Settings.Delegates.Get
-    Gogol.Gmail.Users.Settings.Delegates.List
-    Gogol.Gmail.Users.Settings.Filters.Create
-    Gogol.Gmail.Users.Settings.Filters.Delete
-    Gogol.Gmail.Users.Settings.Filters.Get
-    Gogol.Gmail.Users.Settings.Filters.List
-    Gogol.Gmail.Users.Settings.ForwardingAddresses.Create
-    Gogol.Gmail.Users.Settings.ForwardingAddresses.Delete
-    Gogol.Gmail.Users.Settings.ForwardingAddresses.Get
-    Gogol.Gmail.Users.Settings.ForwardingAddresses.List
-    Gogol.Gmail.Users.Settings.GetAutoForwarding
-    Gogol.Gmail.Users.Settings.GetImap
-    Gogol.Gmail.Users.Settings.GetLanguage
-    Gogol.Gmail.Users.Settings.GetPop
-    Gogol.Gmail.Users.Settings.GetVacation
-    Gogol.Gmail.Users.Settings.SendAs.Create
-    Gogol.Gmail.Users.Settings.SendAs.Delete
-    Gogol.Gmail.Users.Settings.SendAs.Get
-    Gogol.Gmail.Users.Settings.SendAs.List
-    Gogol.Gmail.Users.Settings.SendAs.Patch
-    Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
-    Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Get
-    Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
-    Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.List
-    Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
-    Gogol.Gmail.Users.Settings.SendAs.Update
-    Gogol.Gmail.Users.Settings.SendAs.Verify
-    Gogol.Gmail.Users.Settings.UpdateAutoForwarding
-    Gogol.Gmail.Users.Settings.UpdateImap
-    Gogol.Gmail.Users.Settings.UpdateLanguage
-    Gogol.Gmail.Users.Settings.UpdatePop
-    Gogol.Gmail.Users.Settings.UpdateVacation
-    Gogol.Gmail.Users.Stop
-    Gogol.Gmail.Users.Threads.Delete
-    Gogol.Gmail.Users.Threads.Get
-    Gogol.Gmail.Users.Threads.List
-    Gogol.Gmail.Users.Threads.Modify
-    Gogol.Gmail.Users.Threads.Trash
-    Gogol.Gmail.Users.Threads.Untrash
-    Gogol.Gmail.Users.Watch
+      Gogol.Gmail
+    , Gogol.Gmail.Types
+    , Gogol.Gmail.Users.Drafts.Create
+    , Gogol.Gmail.Users.Drafts.Delete
+    , Gogol.Gmail.Users.Drafts.Get
+    , Gogol.Gmail.Users.Drafts.List
+    , Gogol.Gmail.Users.Drafts.Send
+    , Gogol.Gmail.Users.Drafts.Update
+    , Gogol.Gmail.Users.GetProfile
+    , Gogol.Gmail.Users.History.List
+    , Gogol.Gmail.Users.Labels.Create
+    , Gogol.Gmail.Users.Labels.Delete
+    , Gogol.Gmail.Users.Labels.Get
+    , Gogol.Gmail.Users.Labels.List
+    , Gogol.Gmail.Users.Labels.Patch
+    , Gogol.Gmail.Users.Labels.Update
+    , Gogol.Gmail.Users.Messages.Attachments.Get
+    , Gogol.Gmail.Users.Messages.BatchDelete
+    , Gogol.Gmail.Users.Messages.BatchModify
+    , Gogol.Gmail.Users.Messages.Delete
+    , Gogol.Gmail.Users.Messages.Get
+    , Gogol.Gmail.Users.Messages.Import
+    , Gogol.Gmail.Users.Messages.Insert
+    , Gogol.Gmail.Users.Messages.List
+    , Gogol.Gmail.Users.Messages.Modify
+    , Gogol.Gmail.Users.Messages.Send
+    , Gogol.Gmail.Users.Messages.Trash
+    , Gogol.Gmail.Users.Messages.Untrash
+    , Gogol.Gmail.Users.Settings.Delegates.Create
+    , Gogol.Gmail.Users.Settings.Delegates.Delete
+    , Gogol.Gmail.Users.Settings.Delegates.Get
+    , Gogol.Gmail.Users.Settings.Delegates.List
+    , Gogol.Gmail.Users.Settings.Filters.Create
+    , Gogol.Gmail.Users.Settings.Filters.Delete
+    , Gogol.Gmail.Users.Settings.Filters.Get
+    , Gogol.Gmail.Users.Settings.Filters.List
+    , Gogol.Gmail.Users.Settings.ForwardingAddresses.Create
+    , Gogol.Gmail.Users.Settings.ForwardingAddresses.Delete
+    , Gogol.Gmail.Users.Settings.ForwardingAddresses.Get
+    , Gogol.Gmail.Users.Settings.ForwardingAddresses.List
+    , Gogol.Gmail.Users.Settings.GetAutoForwarding
+    , Gogol.Gmail.Users.Settings.GetImap
+    , Gogol.Gmail.Users.Settings.GetLanguage
+    , Gogol.Gmail.Users.Settings.GetPop
+    , Gogol.Gmail.Users.Settings.GetVacation
+    , Gogol.Gmail.Users.Settings.SendAs.Create
+    , Gogol.Gmail.Users.Settings.SendAs.Delete
+    , Gogol.Gmail.Users.Settings.SendAs.Get
+    , Gogol.Gmail.Users.Settings.SendAs.List
+    , Gogol.Gmail.Users.Settings.SendAs.Patch
+    , Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
+    , Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Get
+    , Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
+    , Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.List
+    , Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
+    , Gogol.Gmail.Users.Settings.SendAs.Update
+    , Gogol.Gmail.Users.Settings.SendAs.Verify
+    , Gogol.Gmail.Users.Settings.UpdateAutoForwarding
+    , Gogol.Gmail.Users.Settings.UpdateImap
+    , Gogol.Gmail.Users.Settings.UpdateLanguage
+    , Gogol.Gmail.Users.Settings.UpdatePop
+    , Gogol.Gmail.Users.Settings.UpdateVacation
+    , Gogol.Gmail.Users.Stop
+    , Gogol.Gmail.Users.Threads.Delete
+    , Gogol.Gmail.Users.Threads.Get
+    , Gogol.Gmail.Users.Threads.List
+    , Gogol.Gmail.Users.Threads.Modify
+    , Gogol.Gmail.Users.Threads.Trash
+    , Gogol.Gmail.Users.Threads.Untrash
+    , Gogol.Gmail.Users.Watch
 
   other-modules:
-    Gogol.Gmail.Internal.Product
-    Gogol.Gmail.Internal.Sum
+      Gogol.Gmail.Internal.Product
+    , Gogol.Gmail.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
