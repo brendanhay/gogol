@@ -1,277 +1,153 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.PageSpeed.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.PageSpeed.Types
-    (
-    -- * Service Configuration
-      pageSpeedService
+  ( -- * Configuration
+    pageSpeedService,
 
     -- * OAuth Scopes
-    , openidScope
+    openidScope,
 
-    -- * LighthouseResultV5CategoryGroups
-    , LighthouseResultV5CategoryGroups
-    , lighthouseResultV5CategoryGroups
-    , lrvcgAddtional
+    -- * Types
 
-    -- * RuntimeError
-    , RuntimeError
-    , runtimeError
-    , reCode
-    , reMessage
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ConfigSettings
-    , ConfigSettings
-    , configSettings
-    , csLocale
-    , csFormFactor
-    , csChannel
-    , csEmulatedFormFactor
-    , csOnlyCategories
+    -- ** AuditRefs
+    AuditRefs (..),
+    newAuditRefs,
 
-    -- * StackPack
-    , StackPack
-    , stackPack
-    , spDescriptions
-    , spId
-    , spTitle
-    , spIconDataURL
+    -- ** Bucket
+    Bucket (..),
+    newBucket,
 
-    -- * LighthouseAuditResultV5Details
-    , LighthouseAuditResultV5Details
-    , lighthouseAuditResultV5Details
-    , larvdAddtional
+    -- ** Categories
+    Categories (..),
+    newCategories,
 
-    -- * PagespeedAPIRunPagespeedStrategy
-    , PagespeedAPIRunPagespeedStrategy (..)
+    -- ** CategoryGroupV5
+    CategoryGroupV5 (..),
+    newCategoryGroupV5,
 
-    -- * LighthouseAuditResultV5
-    , LighthouseAuditResultV5
-    , lighthouseAuditResultV5
-    , larvScore
-    , larvNumericValue
-    , larvExplanation
-    , larvWarnings
-    , larvScoreDisplayMode
-    , larvDisplayValue
-    , larvDetails
-    , larvNumericUnit
-    , larvId
-    , larvTitle
-    , larvErrorMessage
-    , larvDescription
+    -- ** ConfigSettings
+    ConfigSettings (..),
+    newConfigSettings,
 
-    -- * Environment
-    , Environment
-    , environment
-    , eHostUserAgent
-    , eBenchmarkIndex
-    , eNetworkUserAgent
+    -- ** Environment
+    Environment (..),
+    newEnvironment,
 
-    -- * PagespeedAPIPagespeedResponseV5
-    , PagespeedAPIPagespeedResponseV5
-    , pagespeedAPIPagespeedResponseV5
-    , paprvKind
-    , paprvOriginLoadingExperience
-    , paprvVersion
-    , paprvCaptchaResult
-    , paprvId
-    , paprvLoadingExperience
-    , paprvLighthouseResult
-    , paprvAnalysisUTCTimestamp
+    -- ** I18n
+    I18n (..),
+    newI18n,
 
-    -- * PagespeedAPILoadingExperienceV5Metrics
-    , PagespeedAPILoadingExperienceV5Metrics
-    , pagespeedAPILoadingExperienceV5Metrics
-    , palevmAddtional
+    -- ** LighthouseAuditResultV5
+    LighthouseAuditResultV5 (..),
+    newLighthouseAuditResultV5,
 
-    -- * LighthouseResultV5
-    , LighthouseResultV5
-    , lighthouseResultV5
-    , lrvRuntimeError
-    , lrvCategoryGroups
-    , lrvStackPacks
-    , lrvFinalURL
-    , lrvConfigSettings
-    , lrvEnvironment
-    , lrvLighthouseVersion
-    , lrvRunWarnings
-    , lrvRequestedURL
-    , lrvCategories
-    , lrvFetchTime
-    , lrvUserAgent
-    , lrvTiming
-    , lrvAudits
-    , lrvI18n
+    -- ** LighthouseAuditResultV5_Details
+    LighthouseAuditResultV5_Details (..),
+    newLighthouseAuditResultV5_Details,
 
-    -- * Categories
-    , Categories
-    , categories
-    , cBestPractices
-    , cPerformance
-    , cPwa
-    , cSeo
-    , cAccessibility
+    -- ** LighthouseCategoryV5
+    LighthouseCategoryV5 (..),
+    newLighthouseCategoryV5,
 
-    -- * Bucket
-    , Bucket
-    , bucket
-    , bMax
-    , bProportion
-    , bMin
+    -- ** LighthouseResultV5
+    LighthouseResultV5 (..),
+    newLighthouseResultV5,
 
-    -- * PagespeedVersion
-    , PagespeedVersion
-    , pagespeedVersion
-    , pvMinor
-    , pvMajor
+    -- ** LighthouseResultV5_Audits
+    LighthouseResultV5_Audits (..),
+    newLighthouseResultV5_Audits,
 
-    -- * PagespeedAPIRunPagespeedCategory
-    , PagespeedAPIRunPagespeedCategory (..)
+    -- ** LighthouseResultV5_CategoryGroups
+    LighthouseResultV5_CategoryGroups (..),
+    newLighthouseResultV5_CategoryGroups,
 
-    -- * LighthouseCategoryV5
-    , LighthouseCategoryV5
-    , lighthouseCategoryV5
-    , lcvManualDescription
-    , lcvScore
-    , lcvAuditRefs
-    , lcvId
-    , lcvTitle
-    , lcvDescription
+    -- ** PagespeedApiLoadingExperienceV5
+    PagespeedApiLoadingExperienceV5 (..),
+    newPagespeedApiLoadingExperienceV5,
 
-    -- * CategoryGroupV5
-    , CategoryGroupV5
-    , categoryGroupV5
-    , cgvTitle
-    , cgvDescription
+    -- ** PagespeedApiLoadingExperienceV5_Metrics
+    PagespeedApiLoadingExperienceV5_Metrics (..),
+    newPagespeedApiLoadingExperienceV5_Metrics,
 
-    -- * PagespeedAPILoadingExperienceV5
-    , PagespeedAPILoadingExperienceV5
-    , pagespeedAPILoadingExperienceV5
-    , palevOriginFallback
-    , palevMetrics
-    , palevInitialURL
-    , palevId
-    , palevOverallCategory
+    -- ** PagespeedApiPagespeedResponseV5
+    PagespeedApiPagespeedResponseV5 (..),
+    newPagespeedApiPagespeedResponseV5,
 
-    -- * AuditRefs
-    , AuditRefs
-    , auditRefs
-    , arGroup
-    , arAcronym
-    , arWeight
-    , arRelevantAudits
-    , arId
+    -- ** PagespeedVersion
+    PagespeedVersion (..),
+    newPagespeedVersion,
 
-    -- * StackPackDescriptions
-    , StackPackDescriptions
-    , stackPackDescriptions
-    , spdAddtional
+    -- ** RendererFormattedStrings
+    RendererFormattedStrings (..),
+    newRendererFormattedStrings,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** RuntimeError
+    RuntimeError (..),
+    newRuntimeError,
 
-    -- * RendererFormattedStrings
-    , RendererFormattedStrings
-    , rendererFormattedStrings
-    , rfsRuntimeUnknown
-    , rfsCalculatorLink
-    , rfsLabDataTitle
-    , rfsDropdownSaveHTML
-    , rfsRuntimeSettingsNetworkThrottling
-    , rfsRuntimeDesktopEmulation
-    , rfsWarningHeader
-    , rfsRuntimeSettingsUA
-    , rfsOpportUnityResourceColumnLabel
-    , rfsManualAuditsGroupTitle
-    , rfsDropdownSaveGist
-    , rfsRuntimeSettingsUANetwork
-    , rfsCrcInitialNavigation
-    , rfsDropdownPrintSummary
-    , rfsVarianceDisclaimer
-    , rfsRuntimeSettingsTitle
-    , rfsPassedAuditsGroupTitle
-    , rfsRuntimeSettingsDevice
-    , rfsDropdownViewer
-    , rfsFooterIssue
-    , rfsRuntimeSettingsAxeVersion
-    , rfsToplevelWarningsMessage
-    , rfsErrorMissingAuditInfo
-    , rfsRuntimeSettingsURL
-    , rfsRuntimeSettingsCPUThrottling
-    , rfsThirdPartyResourcesLabel
-    , rfsDropdownSaveJSON
-    , rfsRuntimeSettingsChannel
-    , rfsCrcLongestDurationLabel
-    , rfsThrottlingProvided
-    , rfsDropdownPrintExpanded
-    , rfsRuntimeMobileEmulation
-    , rfsRuntimeSettingsFetchTime
-    , rfsWarningAuditsGroupTitle
-    , rfsSnippetExpandButtonLabel
-    , rfsRuntimeSettingsBenchmark
-    , rfsSnippetCollapseButtonLabel
-    , rfsDropdownDarkTheme
-    , rfsScorescaleLabel
-    , rfsShowRelevantAudits
-    , rfsDropdownCopyJSON
-    , rfsOpportUnitySavingsColumnLabel
-    , rfsErrorLabel
-    , rfsViewTreemapLabel
-    , rfsLsPerformanceCategoryDescription
-    , rfsAuditGroupExpandTooltip
-    , rfsRuntimeNoEmulation
-    , rfsNotApplicableAuditsGroupTitle
+    -- ** StackPack
+    StackPack (..),
+    newStackPack,
 
-    -- * Timing
-    , Timing
-    , timing
-    , tTotal
+    -- ** StackPack_Descriptions
+    StackPack_Descriptions (..),
+    newStackPack_Descriptions,
 
-    -- * UserPageLoadMetricV5
-    , UserPageLoadMetricV5
-    , userPageLoadMetricV5
-    , uplmvMedian
-    , uplmvCategory
-    , uplmvFormFactor
-    , uplmvMetricId
-    , uplmvPercentile
-    , uplmvDistributions
+    -- ** Timing
+    Timing (..),
+    newTiming,
 
-    -- * I18n
-    , I18n
-    , i18n
-    , iRendererFormattedStrings
+    -- ** UserPageLoadMetricV5
+    UserPageLoadMetricV5 (..),
+    newUserPageLoadMetricV5,
 
-    -- * LighthouseResultV5Audits
-    , LighthouseResultV5Audits
-    , lighthouseResultV5Audits
-    , lrvaAddtional
-    ) where
+    -- ** PagespeedapiRunpagespeedCategory
+    PagespeedapiRunpagespeedCategory (..),
 
-import Network.Google.PageSpeed.Types.Product
-import Network.Google.PageSpeed.Types.Sum
-import Network.Google.Prelude
+    -- ** PagespeedapiRunpagespeedStrategy
+    PagespeedapiRunpagespeedStrategy (..),
+  )
+where
 
--- | Default request referring to version 'v5' of the PageSpeed Insights API. This contains the host and root path used as a starting point for constructing service requests.
-pageSpeedService :: ServiceConfig
-pageSpeedService
-  = defaultService (ServiceId "pagespeedonline:v5")
-      "pagespeedonline.googleapis.com"
+import Network.Google.PageSpeed.Internal.Product
+import Network.Google.PageSpeed.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v5@ of the PageSpeed Insights API. This contains the host and root path used as a starting point for constructing service requests.
+pageSpeedService :: Core.ServiceConfig
+pageSpeedService =
+  Core.defaultService
+    (Core.ServiceId "pagespeedonline:v5")
+    "pagespeedonline.googleapis.com"
 
 -- | Associate you with your personal info on Google
-openidScope :: Proxy '["openid"]
-openidScope = Proxy
+openidScope :: Core.Proxy '["openid"]
+openidScope = Core.Proxy
