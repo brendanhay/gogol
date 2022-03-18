@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,133 +36,133 @@
 --
 -- /See:/ <https://developers.google.com/custom-search/v1/introduction Custom Search API Reference>
 module Gogol.CustomSearch
-  ( -- * Configuration
-    customSearchService,
+    (
+    -- * Configuration
+      customSearchService
 
     -- * Resources
 
     -- ** search.cse.list
-    SearchCseListResource,
-    newSearchCseList,
-    SearchCseList,
+    , SearchCseListResource
+    , newSearchCseList
+    , SearchCseList
 
     -- ** search.cse.siterestrict.list
-    SearchCseSiterestrictListResource,
-    newSearchCseSiterestrictList,
-    SearchCseSiterestrictList,
+    , SearchCseSiterestrictListResource
+    , newSearchCseSiterestrictList
+    , SearchCseSiterestrictList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Promotion
-    Promotion (..),
-    newPromotion,
+    , Promotion (..)
+    , newPromotion
 
     -- ** Promotion_BodyLinesItem
-    Promotion_BodyLinesItem (..),
-    newPromotion_BodyLinesItem,
+    , Promotion_BodyLinesItem (..)
+    , newPromotion_BodyLinesItem
 
     -- ** Promotion_Image
-    Promotion_Image (..),
-    newPromotion_Image,
+    , Promotion_Image (..)
+    , newPromotion_Image
 
     -- ** Result
-    Result (..),
-    newResult,
+    , Result (..)
+    , newResult
 
     -- ** Result_Image
-    Result_Image (..),
-    newResult_Image,
+    , Result_Image (..)
+    , newResult_Image
 
     -- ** Result_LabelsItem
-    Result_LabelsItem (..),
-    newResult_LabelsItem,
+    , Result_LabelsItem (..)
+    , newResult_LabelsItem
 
     -- ** Result_Pagemap
-    Result_Pagemap (..),
-    newResult_Pagemap,
+    , Result_Pagemap (..)
+    , newResult_Pagemap
 
     -- ** Search
-    Search (..),
-    newSearch,
+    , Search (..)
+    , newSearch
 
     -- ** Search_Context
-    Search_Context (..),
-    newSearch_Context,
+    , Search_Context (..)
+    , newSearch_Context
 
     -- ** Search_Queries
-    Search_Queries (..),
-    newSearch_Queries,
+    , Search_Queries (..)
+    , newSearch_Queries
 
     -- ** Search_Queries_NextPageItem
-    Search_Queries_NextPageItem (..),
-    newSearch_Queries_NextPageItem,
+    , Search_Queries_NextPageItem (..)
+    , newSearch_Queries_NextPageItem
 
     -- ** Search_Queries_PreviousPageItem
-    Search_Queries_PreviousPageItem (..),
-    newSearch_Queries_PreviousPageItem,
+    , Search_Queries_PreviousPageItem (..)
+    , newSearch_Queries_PreviousPageItem
 
     -- ** Search_Queries_RequestItem
-    Search_Queries_RequestItem (..),
-    newSearch_Queries_RequestItem,
+    , Search_Queries_RequestItem (..)
+    , newSearch_Queries_RequestItem
 
     -- ** Search_SearchInformation
-    Search_SearchInformation (..),
-    newSearch_SearchInformation,
+    , Search_SearchInformation (..)
+    , newSearch_SearchInformation
 
     -- ** Search_Spelling
-    Search_Spelling (..),
-    newSearch_Spelling,
+    , Search_Spelling (..)
+    , newSearch_Spelling
 
     -- ** Search_Url
-    Search_Url (..),
-    newSearch_Url,
+    , Search_Url (..)
+    , newSearch_Url
 
     -- ** CseListImgColorType
-    CseListImgColorType (..),
+    , CseListImgColorType (..)
 
     -- ** CseListImgDominantColor
-    CseListImgDominantColor (..),
+    , CseListImgDominantColor (..)
 
     -- ** CseListImgSize
-    CseListImgSize (..),
+    , CseListImgSize (..)
 
     -- ** CseListImgType
-    CseListImgType (..),
+    , CseListImgType (..)
 
     -- ** CseListSafe
-    CseListSafe (..),
+    , CseListSafe (..)
 
     -- ** CseListSearchType
-    CseListSearchType (..),
+    , CseListSearchType (..)
 
     -- ** CseListSiteSearchFilter
-    CseListSiteSearchFilter (..),
+    , CseListSiteSearchFilter (..)
 
     -- ** CseSiterestrictListImgColorType
-    CseSiterestrictListImgColorType (..),
+    , CseSiterestrictListImgColorType (..)
 
     -- ** CseSiterestrictListImgDominantColor
-    CseSiterestrictListImgDominantColor (..),
+    , CseSiterestrictListImgDominantColor (..)
 
     -- ** CseSiterestrictListImgSize
-    CseSiterestrictListImgSize (..),
+    , CseSiterestrictListImgSize (..)
 
     -- ** CseSiterestrictListImgType
-    CseSiterestrictListImgType (..),
+    , CseSiterestrictListImgType (..)
 
     -- ** CseSiterestrictListSafe
-    CseSiterestrictListSafe (..),
+    , CseSiterestrictListSafe (..)
 
     -- ** CseSiterestrictListSearchType
-    CseSiterestrictListSearchType (..),
+    , CseSiterestrictListSearchType (..)
 
     -- ** CseSiterestrictListSiteSearchFilter
-    CseSiterestrictListSiteSearchFilter (..),
-  )
-where
+    , CseSiterestrictListSiteSearchFilter (..)
+    ) where
 
 import Gogol.CustomSearch.Search.Cse.List
 import Gogol.CustomSearch.Search.Cse.Siterestrict.List
