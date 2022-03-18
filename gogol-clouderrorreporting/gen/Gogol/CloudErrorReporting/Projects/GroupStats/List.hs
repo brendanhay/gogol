@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudErrorReporting.Projects.GroupStats.List
+-- Module      : Gogol.CloudErrorReporting.Projects.GroupStats.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the specified groups.
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.groupStats.list@.
-module Network.Google.CloudErrorReporting.Projects.GroupStats.List
+module Gogol.CloudErrorReporting.Projects.GroupStats.List
   ( -- * Resource
     CloudErrorReportingProjectsGroupStatsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudErrorReporting.Projects.GroupStats.List
   )
 where
 
-import Network.Google.CloudErrorReporting.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudErrorReporting.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouderrorreporting.projects.groupStats.list@ method which the
 -- 'CloudErrorReportingProjectsGroupStatsList' request conforms to.

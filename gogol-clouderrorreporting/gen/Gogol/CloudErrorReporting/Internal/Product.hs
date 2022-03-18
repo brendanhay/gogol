@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudErrorReporting.Internal.Product
+-- Module      : Gogol.CloudErrorReporting.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudErrorReporting.Internal.Product
+module Gogol.CloudErrorReporting.Internal.Product
   ( -- * DeleteEventsResponse
     DeleteEventsResponse (..),
     newDeleteEventsResponse,
@@ -88,8 +88,8 @@ module Network.Google.CloudErrorReporting.Internal.Product
   )
 where
 
-import Network.Google.CloudErrorReporting.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudErrorReporting.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Response message for deleting error events.
 --

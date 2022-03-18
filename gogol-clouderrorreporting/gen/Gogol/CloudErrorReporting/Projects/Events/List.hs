@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudErrorReporting.Projects.Events.List
+-- Module      : Gogol.CloudErrorReporting.Projects.Events.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the specified events.
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.events.list@.
-module Network.Google.CloudErrorReporting.Projects.Events.List
+module Gogol.CloudErrorReporting.Projects.Events.List
   ( -- * Resource
     CloudErrorReportingProjectsEventsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudErrorReporting.Projects.Events.List
   )
 where
 
-import Network.Google.CloudErrorReporting.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudErrorReporting.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouderrorreporting.projects.events.list@ method which the
 -- 'CloudErrorReportingProjectsEventsList' request conforms to.

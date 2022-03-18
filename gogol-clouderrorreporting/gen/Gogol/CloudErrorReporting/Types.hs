@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudErrorReporting.Types
+-- Module      : Gogol.CloudErrorReporting.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudErrorReporting.Types
+module Gogol.CloudErrorReporting.Types
   ( -- * Configuration
     cloudErrorReportingService,
 
@@ -114,9 +114,9 @@ module Network.Google.CloudErrorReporting.Types
   )
 where
 
-import Network.Google.CloudErrorReporting.Internal.Product
-import Network.Google.CloudErrorReporting.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudErrorReporting.Internal.Product
+import Gogol.CloudErrorReporting.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1beta1@ of the Error Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 cloudErrorReportingService :: Core.ServiceConfig

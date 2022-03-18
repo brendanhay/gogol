@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudErrorReporting
-    Network.Google.CloudErrorReporting.Projects.DeleteEvents
-    Network.Google.CloudErrorReporting.Projects.Events.List
-    Network.Google.CloudErrorReporting.Projects.Events.Report
-    Network.Google.CloudErrorReporting.Projects.Groups.Get
-    Network.Google.CloudErrorReporting.Projects.Groups.Update
-    Network.Google.CloudErrorReporting.Projects.GroupStats.List
-    Network.Google.CloudErrorReporting.Types
+    Gogol.CloudErrorReporting
+    Gogol.CloudErrorReporting.Projects.DeleteEvents
+    Gogol.CloudErrorReporting.Projects.Events.List
+    Gogol.CloudErrorReporting.Projects.Events.Report
+    Gogol.CloudErrorReporting.Projects.Groups.Get
+    Gogol.CloudErrorReporting.Projects.Groups.Update
+    Gogol.CloudErrorReporting.Projects.GroupStats.List
+    Gogol.CloudErrorReporting.Types
 
   other-modules:
-    Network.Google.CloudErrorReporting.Internal.Product
-    Network.Google.CloudErrorReporting.Internal.Sum
+    Gogol.CloudErrorReporting.Internal.Product
+    Gogol.CloudErrorReporting.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
