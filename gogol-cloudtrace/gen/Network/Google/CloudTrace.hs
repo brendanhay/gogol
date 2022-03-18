@@ -1,205 +1,146 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudTrace
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sends application trace data to Cloud Trace for viewing. Trace data is
--- collected for all App Engine applications by default. Trace data from
--- other applications can be provided using this API. This library is used
--- to interact with the Cloud Trace API directly. If you are looking to
--- instrument your application for Cloud Trace, we recommend using
--- OpenCensus.
+-- Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenTelemetry.
 --
 -- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference>
 module Network.Google.CloudTrace
-    (
-    -- * Service Configuration
-      cloudTraceService
+  ( -- * Configuration
+    cloudTraceService,
 
     -- * OAuth Scopes
-    , traceAppendScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , CloudTraceAPI
+    cloudPlatformScope,
+    traceAppendScope,
 
     -- * Resources
 
     -- ** cloudtrace.projects.traces.batchWrite
-    , module Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
+    CloudTraceProjectsTracesBatchWriteResource,
+    newCloudTraceProjectsTracesBatchWrite,
+    CloudTraceProjectsTracesBatchWrite,
 
     -- ** cloudtrace.projects.traces.spans.createSpan
-    , module Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
+    CloudTraceProjectsTracesSpansCreateSpanResource,
+    newCloudTraceProjectsTracesSpansCreateSpan,
+    CloudTraceProjectsTracesSpansCreateSpan,
 
     -- * Types
 
-    -- ** Span
-    , Span
-    , span
-    , sSpanKind
-    , sStatus
-    , sStartTime
-    , sChildSpanCount
-    , sSameProcessAsParentSpan
-    , sName
-    , sStackTrace
-    , sAttributes
-    , sEndTime
-    , sTimeEvents
-    , sDisplayName
-    , sParentSpanId
-    , sLinks
-    , sSpanId
-
-    -- ** TruncatableString
-    , TruncatableString
-    , truncatableString
-    , tsValue
-    , tsTruncatedByteCount
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** AttributesAttributeMap
-    , AttributesAttributeMap
-    , attributesAttributeMap
-    , aamAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Annotation
-    , Annotation
-    , annotation
-    , aAttributes
-    , aDescription
+    Annotation (..),
+    newAnnotation,
 
     -- ** AttributeValue
-    , AttributeValue
-    , attributeValue
-    , avBoolValue
-    , avIntValue
-    , avStringValue
-
-    -- ** MessageEvent
-    , MessageEvent
-    , messageEvent
-    , meId
-    , meUncompressedSizeBytes
-    , meType
-    , meCompressedSizeBytes
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** SpanSpanKind
-    , SpanSpanKind (..)
-
-    -- ** Link
-    , Link
-    , link
-    , lTraceId
-    , lAttributes
-    , lType
-    , lSpanId
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** StackTrace
-    , StackTrace
-    , stackTrace
-    , stStackTraceHashId
-    , stStackFrames
-
-    -- ** BatchWriteSpansRequest
-    , BatchWriteSpansRequest
-    , batchWriteSpansRequest
-    , bwsrSpans
-
-    -- ** MessageEventType
-    , MessageEventType (..)
+    AttributeValue (..),
+    newAttributeValue,
 
     -- ** Attributes
-    , Attributes
-    , attributes
-    , aDroppedAttributesCount
-    , aAttributeMap
+    Attributes (..),
+    newAttributes,
 
-    -- ** Module
-    , Module
-    , module'
-    , mBuildId
-    , mModule
+    -- ** Attributes_AttributeMap
+    Attributes_AttributeMap (..),
+    newAttributes_AttributeMap,
 
-    -- ** TimeEvents
-    , TimeEvents
-    , timeEvents
-    , teDroppedMessageEventsCount
-    , teDroppedAnnotationsCount
-    , teTimeEvent
+    -- ** BatchWriteSpansRequest
+    BatchWriteSpansRequest (..),
+    newBatchWriteSpansRequest,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- ** StackFrames
-    , StackFrames
-    , stackFrames
-    , sfDroppedFramesCount
-    , sfFrame
+    -- ** Link
+    Link (..),
+    newLink,
 
-    -- ** LinkType
-    , LinkType (..)
-
-    -- ** StackFrame
-    , StackFrame
-    , stackFrame
-    , sfLoadModule
-    , sfOriginalFunctionName
-    , sfLineNumber
-    , sfSourceVersion
-    , sfFunctionName
-    , sfColumnNumber
-    , sfFileName
+    -- ** Link_Type
+    Link_Type (..),
 
     -- ** Links
-    , Links
-    , links
-    , lDroppedLinksCount
-    , lLink
+    Links (..),
+    newLinks,
+
+    -- ** MessageEvent
+    MessageEvent (..),
+    newMessageEvent,
+
+    -- ** MessageEvent_Type
+    MessageEvent_Type (..),
+
+    -- ** Module
+    Module (..),
+    newModule,
+
+    -- ** Span
+    Span (..),
+    newSpan,
+
+    -- ** Span_SpanKind
+    Span_SpanKind (..),
+
+    -- ** StackFrame
+    StackFrame (..),
+    newStackFrame,
+
+    -- ** StackFrames
+    StackFrames (..),
+    newStackFrames,
+
+    -- ** StackTrace
+    StackTrace (..),
+    newStackTrace,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TimeEvent
-    , TimeEvent
-    , timeEvent
-    , teMessageEvent
-    , teAnnotation
-    , teTime
-    ) where
+    TimeEvent (..),
+    newTimeEvent,
 
-import Network.Google.Prelude
+    -- ** TimeEvents
+    TimeEvents (..),
+    newTimeEvents,
+
+    -- ** TruncatableString
+    TruncatableString (..),
+    newTruncatableString,
+  )
+where
+
+import Network.Google.CloudTrace.Projects.Traces.BatchWrite
+import Network.Google.CloudTrace.Projects.Traces.Spans.CreateSpan
 import Network.Google.CloudTrace.Types
-import Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
-import Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Trace API service.
-type CloudTraceAPI =
-     ProjectsTracesSpansCreateSpanResource :<|>
-       ProjectsTracesBatchWriteResource

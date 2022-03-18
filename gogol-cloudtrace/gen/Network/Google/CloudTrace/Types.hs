@@ -1,189 +1,145 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudTrace.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudTrace.Types
-    (
-    -- * Service Configuration
-      cloudTraceService
+  ( -- * Configuration
+    cloudTraceService,
 
     -- * OAuth Scopes
-    , traceAppendScope
-    , cloudPlatformScope
+    cloudPlatformScope,
+    traceAppendScope,
 
-    -- * Span
-    , Span
-    , span
-    , sSpanKind
-    , sStatus
-    , sStartTime
-    , sChildSpanCount
-    , sSameProcessAsParentSpan
-    , sName
-    , sStackTrace
-    , sAttributes
-    , sEndTime
-    , sTimeEvents
-    , sDisplayName
-    , sParentSpanId
-    , sLinks
-    , sSpanId
+    -- * Types
 
-    -- * TruncatableString
-    , TruncatableString
-    , truncatableString
-    , tsValue
-    , tsTruncatedByteCount
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Annotation
+    Annotation (..),
+    newAnnotation,
 
-    -- * AttributesAttributeMap
-    , AttributesAttributeMap
-    , attributesAttributeMap
-    , aamAddtional
+    -- ** AttributeValue
+    AttributeValue (..),
+    newAttributeValue,
 
-    -- * Annotation
-    , Annotation
-    , annotation
-    , aAttributes
-    , aDescription
+    -- ** Attributes
+    Attributes (..),
+    newAttributes,
 
-    -- * AttributeValue
-    , AttributeValue
-    , attributeValue
-    , avBoolValue
-    , avIntValue
-    , avStringValue
+    -- ** Attributes_AttributeMap
+    Attributes_AttributeMap (..),
+    newAttributes_AttributeMap,
 
-    -- * MessageEvent
-    , MessageEvent
-    , messageEvent
-    , meId
-    , meUncompressedSizeBytes
-    , meType
-    , meCompressedSizeBytes
+    -- ** BatchWriteSpansRequest
+    BatchWriteSpansRequest (..),
+    newBatchWriteSpansRequest,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * SpanSpanKind
-    , SpanSpanKind (..)
+    -- ** Link
+    Link (..),
+    newLink,
 
-    -- * Link
-    , Link
-    , link
-    , lTraceId
-    , lAttributes
-    , lType
-    , lSpanId
+    -- ** Link_Type
+    Link_Type (..),
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Links
+    Links (..),
+    newLinks,
 
-    -- * StackTrace
-    , StackTrace
-    , stackTrace
-    , stStackTraceHashId
-    , stStackFrames
+    -- ** MessageEvent
+    MessageEvent (..),
+    newMessageEvent,
 
-    -- * BatchWriteSpansRequest
-    , BatchWriteSpansRequest
-    , batchWriteSpansRequest
-    , bwsrSpans
+    -- ** MessageEvent_Type
+    MessageEvent_Type (..),
 
-    -- * MessageEventType
-    , MessageEventType (..)
+    -- ** Module
+    Module (..),
+    newModule,
 
-    -- * Attributes
-    , Attributes
-    , attributes
-    , aDroppedAttributesCount
-    , aAttributeMap
+    -- ** Span
+    Span (..),
+    newSpan,
 
-    -- * Module
-    , Module
-    , module'
-    , mBuildId
-    , mModule
+    -- ** Span_SpanKind
+    Span_SpanKind (..),
 
-    -- * TimeEvents
-    , TimeEvents
-    , timeEvents
-    , teDroppedMessageEventsCount
-    , teDroppedAnnotationsCount
-    , teTimeEvent
+    -- ** StackFrame
+    StackFrame (..),
+    newStackFrame,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** StackFrames
+    StackFrames (..),
+    newStackFrames,
 
-    -- * StackFrames
-    , StackFrames
-    , stackFrames
-    , sfDroppedFramesCount
-    , sfFrame
+    -- ** StackTrace
+    StackTrace (..),
+    newStackTrace,
 
-    -- * LinkType
-    , LinkType (..)
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * StackFrame
-    , StackFrame
-    , stackFrame
-    , sfLoadModule
-    , sfOriginalFunctionName
-    , sfLineNumber
-    , sfSourceVersion
-    , sfFunctionName
-    , sfColumnNumber
-    , sfFileName
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * Links
-    , Links
-    , links
-    , lDroppedLinksCount
-    , lLink
+    -- ** TimeEvent
+    TimeEvent (..),
+    newTimeEvent,
 
-    -- * TimeEvent
-    , TimeEvent
-    , timeEvent
-    , teMessageEvent
-    , teAnnotation
-    , teTime
-    ) where
+    -- ** TimeEvents
+    TimeEvents (..),
+    newTimeEvents,
 
-import Network.Google.CloudTrace.Types.Product
-import Network.Google.CloudTrace.Types.Sum
-import Network.Google.Prelude
+    -- ** TruncatableString
+    TruncatableString (..),
+    newTruncatableString,
+  )
+where
 
--- | Default request referring to version 'v2' of the Cloud Trace API. This contains the host and root path used as a starting point for constructing service requests.
-cloudTraceService :: ServiceConfig
-cloudTraceService
-  = defaultService (ServiceId "cloudtrace:v2")
-      "cloudtrace.googleapis.com"
+import Network.Google.CloudTrace.Internal.Product
+import Network.Google.CloudTrace.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Cloud Trace API. This contains the host and root path used as a starting point for constructing service requests.
+cloudTraceService :: Core.ServiceConfig
+cloudTraceService =
+  Core.defaultService
+    (Core.ServiceId "cloudtrace:v2")
+    "cloudtrace.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | Write Trace data for a project or application
-traceAppendScope :: Proxy '["https://www.googleapis.com/auth/trace.append"]
-traceAppendScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+traceAppendScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.append"]
+traceAppendScope = Core.Proxy
