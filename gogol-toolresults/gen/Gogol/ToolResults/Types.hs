@@ -19,21 +19,15 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ToolResults
+-- Module      : Gogol.ToolResults.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- API to publish and access results from developer tools.
---
--- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Tool Results API Reference>
-module Network.Google.ToolResults
+module Gogol.ToolResults.Types
   ( -- * Configuration
     toolResultsService,
-
-    -- * Resources
 
     -- * Types
 
@@ -165,4 +159,13 @@ module Network.Google.ToolResults
   )
 where
 
-import Network.Google.ToolResults.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ToolResults.Internal.Product
+import Gogol.ToolResults.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Cloud Tool Results API. This contains the host and root path used as a starting point for constructing service requests.
+toolResultsService :: Core.ServiceConfig
+toolResultsService =
+  Core.defaultService
+    (Core.ServiceId "toolresults:v1")
+    "www.googleapis.com"
