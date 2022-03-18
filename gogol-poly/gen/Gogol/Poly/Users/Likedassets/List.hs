@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Poly.Users.Likedassets.List
+-- Module      : Gogol.Poly.Users.Likedassets.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists assets that the user has liked. Only the value \'me\', representing the currently-authenticated user, is supported. May include assets with an access level of UNLISTED.
 --
 -- /See:/ <https://developers.google.com/poly/ Poly API Reference> for @poly.users.likedassets.list@.
-module Network.Google.Poly.Users.Likedassets.List
+module Gogol.Poly.Users.Likedassets.List
   ( -- * Resource
     PolyUsersLikedassetsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Poly.Users.Likedassets.List
   )
 where
 
-import Network.Google.Poly.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Poly.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @poly.users.likedassets.list@ method which the
 -- 'PolyUsersLikedassetsList' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Poly.Assets.Get
+-- Module      : Gogol.Poly.Assets.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns detailed information about an asset given its name. PRIVATE assets are returned only if the currently authenticated user (via OAuth token) is the author of the asset.
 --
 -- /See:/ <https://developers.google.com/poly/ Poly API Reference> for @poly.assets.get@.
-module Network.Google.Poly.Assets.Get
+module Gogol.Poly.Assets.Get
   ( -- * Resource
     PolyAssetsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Poly.Assets.Get
   )
 where
 
-import Network.Google.Poly.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Poly.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @poly.assets.get@ method which the
 -- 'PolyAssetsGet' request conforms to.

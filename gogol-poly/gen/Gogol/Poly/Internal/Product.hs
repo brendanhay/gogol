@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Poly.Internal.Product
+-- Module      : Gogol.Poly.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Poly.Internal.Product
+module Gogol.Poly.Internal.Product
   ( -- * Asset
     Asset (..),
     newAsset,
@@ -88,8 +88,8 @@ module Network.Google.Poly.Internal.Product
   )
 where
 
-import Network.Google.Poly.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Poly.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Represents and describes an asset in the Poly library. An asset is a 3D model or scene created using <//www.tiltbrush.com Tilt Brush>, <//vr.google.com/blocks/ Blocks>, or any 3D program that produces a file that can be upload to Poly.
 --
