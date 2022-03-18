@@ -19,57 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.Deployments.Get
+-- Module      : Gogol.Script.Projects.Deployments.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a deployment of an Apps Script project.
+-- Creates a deployment of an Apps Script project.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.deployments.get@.
-module Network.Google.Script.Projects.Deployments.Get
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.deployments.create@.
+module Gogol.Script.Projects.Deployments.Create
   ( -- * Resource
-    ScriptProjectsDeploymentsGetResource,
+    ScriptProjectsDeploymentsCreateResource,
 
     -- ** Constructing a Request
-    newScriptProjectsDeploymentsGet,
-    ScriptProjectsDeploymentsGet,
+    newScriptProjectsDeploymentsCreate,
+    ScriptProjectsDeploymentsCreate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.deployments.get@ method which the
--- 'ScriptProjectsDeploymentsGet' request conforms to.
-type ScriptProjectsDeploymentsGetResource =
+-- | A resource alias for @script.projects.deployments.create@ method which the
+-- 'ScriptProjectsDeploymentsCreate' request conforms to.
+type ScriptProjectsDeploymentsCreateResource =
   "v1"
     Core.:> "projects"
     Core.:> Core.Capture "scriptId" Core.Text
     Core.:> "deployments"
-    Core.:> Core.Capture "deploymentId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Deployment
+    Core.:> Core.ReqBody '[Core.JSON] DeploymentConfig
+    Core.:> Core.Post '[Core.JSON] Deployment
 
--- | Gets a deployment of an Apps Script project.
+-- | Creates a deployment of an Apps Script project.
 --
--- /See:/ 'newScriptProjectsDeploymentsGet' smart constructor.
-data ScriptProjectsDeploymentsGet = ScriptProjectsDeploymentsGet
+-- /See:/ 'newScriptProjectsDeploymentsCreate' smart constructor.
+data ScriptProjectsDeploymentsCreate = ScriptProjectsDeploymentsCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The deployment ID.
-    deploymentId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: DeploymentConfig,
     -- | The script project\'s Drive ID.
     scriptId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -79,19 +79,19 @@ data ScriptProjectsDeploymentsGet = ScriptProjectsDeploymentsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsDeploymentsGet' with the minimum fields required to make a request.
-newScriptProjectsDeploymentsGet ::
-  -- |  The deployment ID. See 'deploymentId'.
-  Core.Text ->
+-- | Creates a value of 'ScriptProjectsDeploymentsCreate' with the minimum fields required to make a request.
+newScriptProjectsDeploymentsCreate ::
+  -- |  Multipart request metadata. See 'payload'.
+  DeploymentConfig ->
   -- |  The script project\'s Drive ID. See 'scriptId'.
   Core.Text ->
-  ScriptProjectsDeploymentsGet
-newScriptProjectsDeploymentsGet deploymentId scriptId =
-  ScriptProjectsDeploymentsGet
+  ScriptProjectsDeploymentsCreate
+newScriptProjectsDeploymentsCreate payload scriptId =
+  ScriptProjectsDeploymentsCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      deploymentId = deploymentId,
+      payload = payload,
       scriptId = scriptId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -99,29 +99,27 @@ newScriptProjectsDeploymentsGet deploymentId scriptId =
 
 instance
   Core.GoogleRequest
-    ScriptProjectsDeploymentsGet
+    ScriptProjectsDeploymentsCreate
   where
-  type Rs ScriptProjectsDeploymentsGet = Deployment
+  type Rs ScriptProjectsDeploymentsCreate = Deployment
   type
-    Scopes ScriptProjectsDeploymentsGet =
-      '[ "https://www.googleapis.com/auth/script.deployments",
-         "https://www.googleapis.com/auth/script.deployments.readonly"
-       ]
-  requestClient ScriptProjectsDeploymentsGet {..} =
+    Scopes ScriptProjectsDeploymentsCreate =
+      '["https://www.googleapis.com/auth/script.deployments"]
+  requestClient ScriptProjectsDeploymentsCreate {..} =
     go
       scriptId
-      deploymentId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       scriptService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ScriptProjectsDeploymentsGetResource
+              Core.Proxy ScriptProjectsDeploymentsCreateResource
           )
           Core.mempty

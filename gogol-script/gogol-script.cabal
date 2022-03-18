@@ -39,33 +39,34 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Script
-    Network.Google.Script.Processes.List
-    Network.Google.Script.Processes.ListScriptProcesses
-    Network.Google.Script.Projects.Create
-    Network.Google.Script.Projects.Deployments.Create
-    Network.Google.Script.Projects.Deployments.Delete
-    Network.Google.Script.Projects.Deployments.Get
-    Network.Google.Script.Projects.Deployments.List
-    Network.Google.Script.Projects.Deployments.Update
-    Network.Google.Script.Projects.Get
-    Network.Google.Script.Projects.GetContent
-    Network.Google.Script.Projects.GetMetrics
-    Network.Google.Script.Projects.UpdateContent
-    Network.Google.Script.Projects.Versions.Create
-    Network.Google.Script.Projects.Versions.Get
-    Network.Google.Script.Projects.Versions.List
-    Network.Google.Script.Scripts.Run
-    Network.Google.Script.Types
+    Gogol.Script
+    Gogol.Script.Processes.List
+    Gogol.Script.Processes.ListScriptProcesses
+    Gogol.Script.Projects.Create
+    Gogol.Script.Projects.Deployments.Create
+    Gogol.Script.Projects.Deployments.Delete
+    Gogol.Script.Projects.Deployments.Get
+    Gogol.Script.Projects.Deployments.List
+    Gogol.Script.Projects.Deployments.Update
+    Gogol.Script.Projects.Get
+    Gogol.Script.Projects.GetContent
+    Gogol.Script.Projects.GetMetrics
+    Gogol.Script.Projects.UpdateContent
+    Gogol.Script.Projects.Versions.Create
+    Gogol.Script.Projects.Versions.Get
+    Gogol.Script.Projects.Versions.List
+    Gogol.Script.Scripts.Run
+    Gogol.Script.Types
 
   other-modules:
-    Network.Google.Script.Internal.Product
-    Network.Google.Script.Internal.Sum
+    Gogol.Script.Internal.Product
+    Gogol.Script.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

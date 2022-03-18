@@ -19,47 +19,49 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.Create
+-- Module      : Gogol.Script.Projects.UpdateContent
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new, empty script project with no script files and a base manifest file.
+-- Updates the content of the specified script project. This content is stored as the HEAD version, and is used when the script is executed as a trigger, in the script editor, in add-on preview mode, or as a web app or Apps Script API in development mode. This clears all the existing files in the project.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.create@.
-module Network.Google.Script.Projects.Create
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.updateContent@.
+module Gogol.Script.Projects.UpdateContent
   ( -- * Resource
-    ScriptProjectsCreateResource,
+    ScriptProjectsUpdateContentResource,
 
     -- ** Constructing a Request
-    newScriptProjectsCreate,
-    ScriptProjectsCreate,
+    newScriptProjectsUpdateContent,
+    ScriptProjectsUpdateContent,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.create@ method which the
--- 'ScriptProjectsCreate' request conforms to.
-type ScriptProjectsCreateResource =
+-- | A resource alias for @script.projects.updateContent@ method which the
+-- 'ScriptProjectsUpdateContent' request conforms to.
+type ScriptProjectsUpdateContentResource =
   "v1"
     Core.:> "projects"
+    Core.:> Core.Capture "scriptId" Core.Text
+    Core.:> "content"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CreateProjectRequest
-    Core.:> Core.Post '[Core.JSON] Project
+    Core.:> Core.ReqBody '[Core.JSON] Content
+    Core.:> Core.Put '[Core.JSON] Content
 
--- | Creates a new, empty script project with no script files and a base manifest file.
+-- | Updates the content of the specified script project. This content is stored as the HEAD version, and is used when the script is executed as a trigger, in the script editor, in add-on preview mode, or as a web app or Apps Script API in development mode. This clears all the existing files in the project.
 --
--- /See:/ 'newScriptProjectsCreate' smart constructor.
-data ScriptProjectsCreate = ScriptProjectsCreate
+-- /See:/ 'newScriptProjectsUpdateContent' smart constructor.
+data ScriptProjectsUpdateContent = ScriptProjectsUpdateContent
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -67,7 +69,9 @@ data ScriptProjectsCreate = ScriptProjectsCreate
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: CreateProjectRequest,
+    payload :: Content,
+    -- | The script project\'s Drive ID.
+    scriptId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,28 +79,35 @@ data ScriptProjectsCreate = ScriptProjectsCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsCreate' with the minimum fields required to make a request.
-newScriptProjectsCreate ::
+-- | Creates a value of 'ScriptProjectsUpdateContent' with the minimum fields required to make a request.
+newScriptProjectsUpdateContent ::
   -- |  Multipart request metadata. See 'payload'.
-  CreateProjectRequest ->
-  ScriptProjectsCreate
-newScriptProjectsCreate payload =
-  ScriptProjectsCreate
+  Content ->
+  -- |  The script project\'s Drive ID. See 'scriptId'.
+  Core.Text ->
+  ScriptProjectsUpdateContent
+newScriptProjectsUpdateContent payload scriptId =
+  ScriptProjectsUpdateContent
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
+      scriptId = scriptId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest ScriptProjectsCreate where
-  type Rs ScriptProjectsCreate = Project
+instance
+  Core.GoogleRequest
+    ScriptProjectsUpdateContent
+  where
+  type Rs ScriptProjectsUpdateContent = Content
   type
-    Scopes ScriptProjectsCreate =
+    Scopes ScriptProjectsUpdateContent =
       '["https://www.googleapis.com/auth/script.projects"]
-  requestClient ScriptProjectsCreate {..} =
+  requestClient ScriptProjectsUpdateContent {..} =
     go
+      scriptId
       xgafv
       accessToken
       callback
@@ -109,6 +120,6 @@ instance Core.GoogleRequest ScriptProjectsCreate where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ScriptProjectsCreateResource
+              Core.Proxy ScriptProjectsUpdateContentResource
           )
           Core.mempty

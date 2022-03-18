@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.GetContent
+-- Module      : Gogol.Script.Projects.GetContent
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the content of the script project, including the code source and metadata for each script file.
 --
 -- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.getContent@.
-module Network.Google.Script.Projects.GetContent
+module Gogol.Script.Projects.GetContent
   ( -- * Resource
     ScriptProjectsGetContentResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Script.Projects.GetContent
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
 -- | A resource alias for @script.projects.getContent@ method which the
 -- 'ScriptProjectsGetContent' request conforms to.

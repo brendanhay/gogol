@@ -19,65 +19,54 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.GetMetrics
+-- Module      : Gogol.Script.Projects.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get metrics data for scripts, such as number of executions and active users.
+-- Gets a script project\'s metadata.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.getMetrics@.
-module Network.Google.Script.Projects.GetMetrics
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.get@.
+module Gogol.Script.Projects.Get
   ( -- * Resource
-    ScriptProjectsGetMetricsResource,
+    ScriptProjectsGetResource,
 
     -- ** Constructing a Request
-    newScriptProjectsGetMetrics,
-    ScriptProjectsGetMetrics,
+    newScriptProjectsGet,
+    ScriptProjectsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.getMetrics@ method which the
--- 'ScriptProjectsGetMetrics' request conforms to.
-type ScriptProjectsGetMetricsResource =
+-- | A resource alias for @script.projects.get@ method which the
+-- 'ScriptProjectsGet' request conforms to.
+type ScriptProjectsGetResource =
   "v1"
     Core.:> "projects"
     Core.:> Core.Capture "scriptId" Core.Text
-    Core.:> "metrics"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "metricsFilter.deploymentId"
-              Core.Text
-    Core.:> Core.QueryParam
-              "metricsGranularity"
-              ProjectsGetMetricsMetricsGranularity
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Metrics
+    Core.:> Core.Get '[Core.JSON] Project
 
--- | Get metrics data for scripts, such as number of executions and active users.
+-- | Gets a script project\'s metadata.
 --
--- /See:/ 'newScriptProjectsGetMetrics' smart constructor.
-data ScriptProjectsGetMetrics = ScriptProjectsGetMetrics
+-- /See:/ 'newScriptProjectsGet' smart constructor.
+data ScriptProjectsGet = ScriptProjectsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional field indicating a specific deployment to retrieve metrics from.
-    metricsFilterDeploymentId :: (Core.Maybe Core.Text),
-    -- | Required field indicating what granularity of metrics are returned.
-    metricsGranularity :: (Core.Maybe ProjectsGetMetricsMetricsGranularity),
-    -- | Required field indicating the script to get metrics for.
+    -- | The script project\'s Drive ID.
     scriptId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,36 +75,34 @@ data ScriptProjectsGetMetrics = ScriptProjectsGetMetrics
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsGetMetrics' with the minimum fields required to make a request.
-newScriptProjectsGetMetrics ::
-  -- |  Required field indicating the script to get metrics for. See 'scriptId'.
+-- | Creates a value of 'ScriptProjectsGet' with the minimum fields required to make a request.
+newScriptProjectsGet ::
+  -- |  The script project\'s Drive ID. See 'scriptId'.
   Core.Text ->
-  ScriptProjectsGetMetrics
-newScriptProjectsGetMetrics scriptId =
-  ScriptProjectsGetMetrics
+  ScriptProjectsGet
+newScriptProjectsGet scriptId =
+  ScriptProjectsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      metricsFilterDeploymentId = Core.Nothing,
-      metricsGranularity = Core.Nothing,
       scriptId = scriptId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest ScriptProjectsGetMetrics where
-  type Rs ScriptProjectsGetMetrics = Metrics
+instance Core.GoogleRequest ScriptProjectsGet where
+  type Rs ScriptProjectsGet = Project
   type
-    Scopes ScriptProjectsGetMetrics =
-      '["https://www.googleapis.com/auth/script.metrics"]
-  requestClient ScriptProjectsGetMetrics {..} =
+    Scopes ScriptProjectsGet =
+      '[ "https://www.googleapis.com/auth/script.projects",
+         "https://www.googleapis.com/auth/script.projects.readonly"
+       ]
+  requestClient ScriptProjectsGet {..} =
     go
       scriptId
       xgafv
       accessToken
       callback
-      metricsFilterDeploymentId
-      metricsGranularity
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -123,7 +110,5 @@ instance Core.GoogleRequest ScriptProjectsGetMetrics where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ScriptProjectsGetMetricsResource
-          )
+          (Core.Proxy :: Core.Proxy ScriptProjectsGetResource)
           Core.mempty

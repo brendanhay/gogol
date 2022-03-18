@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.Deployments.Delete
+-- Module      : Gogol.Script.Projects.Deployments.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a deployment of an Apps Script project.
+-- Gets a deployment of an Apps Script project.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.deployments.delete@.
-module Network.Google.Script.Projects.Deployments.Delete
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.deployments.get@.
+module Gogol.Script.Projects.Deployments.Get
   ( -- * Resource
-    ScriptProjectsDeploymentsDeleteResource,
+    ScriptProjectsDeploymentsGetResource,
 
     -- ** Constructing a Request
-    newScriptProjectsDeploymentsDelete,
-    ScriptProjectsDeploymentsDelete,
+    newScriptProjectsDeploymentsGet,
+    ScriptProjectsDeploymentsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.deployments.delete@ method which the
--- 'ScriptProjectsDeploymentsDelete' request conforms to.
-type ScriptProjectsDeploymentsDeleteResource =
+-- | A resource alias for @script.projects.deployments.get@ method which the
+-- 'ScriptProjectsDeploymentsGet' request conforms to.
+type ScriptProjectsDeploymentsGetResource =
   "v1"
     Core.:> "projects"
     Core.:> Core.Capture "scriptId" Core.Text
@@ -56,19 +56,19 @@ type ScriptProjectsDeploymentsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] Deployment
 
--- | Deletes a deployment of an Apps Script project.
+-- | Gets a deployment of an Apps Script project.
 --
--- /See:/ 'newScriptProjectsDeploymentsDelete' smart constructor.
-data ScriptProjectsDeploymentsDelete = ScriptProjectsDeploymentsDelete
+-- /See:/ 'newScriptProjectsDeploymentsGet' smart constructor.
+data ScriptProjectsDeploymentsGet = ScriptProjectsDeploymentsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The deployment ID to be undeployed.
+    -- | The deployment ID.
     deploymentId :: Core.Text,
     -- | The script project\'s Drive ID.
     scriptId :: Core.Text,
@@ -79,15 +79,15 @@ data ScriptProjectsDeploymentsDelete = ScriptProjectsDeploymentsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsDeploymentsDelete' with the minimum fields required to make a request.
-newScriptProjectsDeploymentsDelete ::
-  -- |  The deployment ID to be undeployed. See 'deploymentId'.
+-- | Creates a value of 'ScriptProjectsDeploymentsGet' with the minimum fields required to make a request.
+newScriptProjectsDeploymentsGet ::
+  -- |  The deployment ID. See 'deploymentId'.
   Core.Text ->
   -- |  The script project\'s Drive ID. See 'scriptId'.
   Core.Text ->
-  ScriptProjectsDeploymentsDelete
-newScriptProjectsDeploymentsDelete deploymentId scriptId =
-  ScriptProjectsDeploymentsDelete
+  ScriptProjectsDeploymentsGet
+newScriptProjectsDeploymentsGet deploymentId scriptId =
+  ScriptProjectsDeploymentsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -99,13 +99,15 @@ newScriptProjectsDeploymentsDelete deploymentId scriptId =
 
 instance
   Core.GoogleRequest
-    ScriptProjectsDeploymentsDelete
+    ScriptProjectsDeploymentsGet
   where
-  type Rs ScriptProjectsDeploymentsDelete = Empty
+  type Rs ScriptProjectsDeploymentsGet = Deployment
   type
-    Scopes ScriptProjectsDeploymentsDelete =
-      '["https://www.googleapis.com/auth/script.deployments"]
-  requestClient ScriptProjectsDeploymentsDelete {..} =
+    Scopes ScriptProjectsDeploymentsGet =
+      '[ "https://www.googleapis.com/auth/script.deployments",
+         "https://www.googleapis.com/auth/script.deployments.readonly"
+       ]
+  requestClient ScriptProjectsDeploymentsGet {..} =
     go
       scriptId
       deploymentId
@@ -120,6 +122,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ScriptProjectsDeploymentsDeleteResource
+              Core.Proxy ScriptProjectsDeploymentsGetResource
           )
           Core.mempty

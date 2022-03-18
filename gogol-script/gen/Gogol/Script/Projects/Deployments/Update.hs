@@ -19,57 +19,60 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Projects.Versions.Create
+-- Module      : Gogol.Script.Projects.Deployments.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new immutable version using the current code, with a unique version number.
+-- Updates a deployment of an Apps Script project.
 --
--- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.versions.create@.
-module Network.Google.Script.Projects.Versions.Create
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.projects.deployments.update@.
+module Gogol.Script.Projects.Deployments.Update
   ( -- * Resource
-    ScriptProjectsVersionsCreateResource,
+    ScriptProjectsDeploymentsUpdateResource,
 
     -- ** Constructing a Request
-    newScriptProjectsVersionsCreate,
-    ScriptProjectsVersionsCreate,
+    newScriptProjectsDeploymentsUpdate,
+    ScriptProjectsDeploymentsUpdate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Script.Types
 
--- | A resource alias for @script.projects.versions.create@ method which the
--- 'ScriptProjectsVersionsCreate' request conforms to.
-type ScriptProjectsVersionsCreateResource =
+-- | A resource alias for @script.projects.deployments.update@ method which the
+-- 'ScriptProjectsDeploymentsUpdate' request conforms to.
+type ScriptProjectsDeploymentsUpdateResource =
   "v1"
     Core.:> "projects"
     Core.:> Core.Capture "scriptId" Core.Text
-    Core.:> "versions"
+    Core.:> "deployments"
+    Core.:> Core.Capture "deploymentId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Version
-    Core.:> Core.Post '[Core.JSON] Version
+    Core.:> Core.ReqBody '[Core.JSON] UpdateDeploymentRequest
+    Core.:> Core.Put '[Core.JSON] Deployment
 
--- | Creates a new immutable version using the current code, with a unique version number.
+-- | Updates a deployment of an Apps Script project.
 --
--- /See:/ 'newScriptProjectsVersionsCreate' smart constructor.
-data ScriptProjectsVersionsCreate = ScriptProjectsVersionsCreate
+-- /See:/ 'newScriptProjectsDeploymentsUpdate' smart constructor.
+data ScriptProjectsDeploymentsUpdate = ScriptProjectsDeploymentsUpdate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | The deployment ID for this deployment.
+    deploymentId :: Core.Text,
     -- | Multipart request metadata.
-    payload :: Version,
+    payload :: UpdateDeploymentRequest,
     -- | The script project\'s Drive ID.
     scriptId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -79,18 +82,21 @@ data ScriptProjectsVersionsCreate = ScriptProjectsVersionsCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ScriptProjectsVersionsCreate' with the minimum fields required to make a request.
-newScriptProjectsVersionsCreate ::
+-- | Creates a value of 'ScriptProjectsDeploymentsUpdate' with the minimum fields required to make a request.
+newScriptProjectsDeploymentsUpdate ::
+  -- |  The deployment ID for this deployment. See 'deploymentId'.
+  Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  Version ->
+  UpdateDeploymentRequest ->
   -- |  The script project\'s Drive ID. See 'scriptId'.
   Core.Text ->
-  ScriptProjectsVersionsCreate
-newScriptProjectsVersionsCreate payload scriptId =
-  ScriptProjectsVersionsCreate
+  ScriptProjectsDeploymentsUpdate
+newScriptProjectsDeploymentsUpdate deploymentId payload scriptId =
+  ScriptProjectsDeploymentsUpdate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      deploymentId = deploymentId,
       payload = payload,
       scriptId = scriptId,
       uploadType = Core.Nothing,
@@ -99,15 +105,16 @@ newScriptProjectsVersionsCreate payload scriptId =
 
 instance
   Core.GoogleRequest
-    ScriptProjectsVersionsCreate
+    ScriptProjectsDeploymentsUpdate
   where
-  type Rs ScriptProjectsVersionsCreate = Version
+  type Rs ScriptProjectsDeploymentsUpdate = Deployment
   type
-    Scopes ScriptProjectsVersionsCreate =
-      '["https://www.googleapis.com/auth/script.projects"]
-  requestClient ScriptProjectsVersionsCreate {..} =
+    Scopes ScriptProjectsDeploymentsUpdate =
+      '["https://www.googleapis.com/auth/script.deployments"]
+  requestClient ScriptProjectsDeploymentsUpdate {..} =
     go
       scriptId
+      deploymentId
       xgafv
       accessToken
       callback
@@ -120,6 +127,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ScriptProjectsVersionsCreateResource
+              Core.Proxy ScriptProjectsDeploymentsUpdateResource
           )
           Core.mempty

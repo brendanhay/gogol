@@ -19,13 +19,17 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Script.Types
+-- Module      : Gogol.Script
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Script.Types
+--
+-- Manages and executes Google Apps Script projects.
+--
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference>
+module Gogol.Script
   ( -- * Configuration
     scriptService,
 
@@ -48,6 +52,88 @@ module Network.Google.Script.Types
     scriptProjectsReadOnlyScope,
     spreadsheetsScope,
     userinfoEmailScope,
+
+    -- * Resources
+
+    -- ** script.processes.list
+    ScriptProcessesListResource,
+    newScriptProcessesList,
+    ScriptProcessesList,
+
+    -- ** script.processes.listScriptProcesses
+    ScriptProcessesListScriptProcessesResource,
+    newScriptProcessesListScriptProcesses,
+    ScriptProcessesListScriptProcesses,
+
+    -- ** script.projects.create
+    ScriptProjectsCreateResource,
+    newScriptProjectsCreate,
+    ScriptProjectsCreate,
+
+    -- ** script.projects.deployments.create
+    ScriptProjectsDeploymentsCreateResource,
+    newScriptProjectsDeploymentsCreate,
+    ScriptProjectsDeploymentsCreate,
+
+    -- ** script.projects.deployments.delete
+    ScriptProjectsDeploymentsDeleteResource,
+    newScriptProjectsDeploymentsDelete,
+    ScriptProjectsDeploymentsDelete,
+
+    -- ** script.projects.deployments.get
+    ScriptProjectsDeploymentsGetResource,
+    newScriptProjectsDeploymentsGet,
+    ScriptProjectsDeploymentsGet,
+
+    -- ** script.projects.deployments.list
+    ScriptProjectsDeploymentsListResource,
+    newScriptProjectsDeploymentsList,
+    ScriptProjectsDeploymentsList,
+
+    -- ** script.projects.deployments.update
+    ScriptProjectsDeploymentsUpdateResource,
+    newScriptProjectsDeploymentsUpdate,
+    ScriptProjectsDeploymentsUpdate,
+
+    -- ** script.projects.get
+    ScriptProjectsGetResource,
+    newScriptProjectsGet,
+    ScriptProjectsGet,
+
+    -- ** script.projects.getContent
+    ScriptProjectsGetContentResource,
+    newScriptProjectsGetContent,
+    ScriptProjectsGetContent,
+
+    -- ** script.projects.getMetrics
+    ScriptProjectsGetMetricsResource,
+    newScriptProjectsGetMetrics,
+    ScriptProjectsGetMetrics,
+
+    -- ** script.projects.updateContent
+    ScriptProjectsUpdateContentResource,
+    newScriptProjectsUpdateContent,
+    ScriptProjectsUpdateContent,
+
+    -- ** script.projects.versions.create
+    ScriptProjectsVersionsCreateResource,
+    newScriptProjectsVersionsCreate,
+    ScriptProjectsVersionsCreate,
+
+    -- ** script.projects.versions.get
+    ScriptProjectsVersionsGetResource,
+    newScriptProjectsVersionsGet,
+    ScriptProjectsVersionsGet,
+
+    -- ** script.projects.versions.list
+    ScriptProjectsVersionsListResource,
+    newScriptProjectsVersionsList,
+    ScriptProjectsVersionsList,
+
+    -- ** script.scripts.run
+    ScriptScriptsRunResource,
+    newScriptScriptsRun,
+    ScriptScriptsRun,
 
     -- * Types
 
@@ -267,85 +353,20 @@ module Network.Google.Script.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Script.Internal.Product
-import Network.Google.Script.Internal.Sum
-
--- | Default request referring to version @v1@ of the Apps Script API. This contains the host and root path used as a starting point for constructing service requests.
-scriptService :: Core.ServiceConfig
-scriptService =
-  Core.defaultService
-    (Core.ServiceId "script:v1")
-    "script.googleapis.com"
-
--- | Read, compose, send, and permanently delete all your email from Gmail
-mailGoogleComScope :: Core.Proxy '["https://mail.google.com/"]
-mailGoogleComScope = Core.Proxy
-
--- | See, edit, share, and permanently delete all the calendars you can access using Google Calendar
-calendarFeedsScope :: Core.Proxy '["https://www.google.com/calendar/feeds"]
-calendarFeedsScope = Core.Proxy
-
--- | See, edit, download, and permanently delete your contacts
-m8FeedsScope :: Core.Proxy '["https://www.google.com/m8/feeds"]
-m8FeedsScope = Core.Proxy
-
--- | View and manage the provisioning of groups on your domain
-adminDirectoryGroupScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
-adminDirectoryGroupScope = Core.Proxy
-
--- | View and manage the provisioning of users on your domain
-adminDirectoryUserScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
-adminDirectoryUserScope = Core.Proxy
-
--- | See, edit, create, and delete all your Google Docs documents
-documentsScope :: Core.Proxy '["https://www.googleapis.com/auth/documents"]
-documentsScope = Core.Proxy
-
--- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Core.Proxy
-
--- | View and manage your forms in Google Drive
-formsScope :: Core.Proxy '["https://www.googleapis.com/auth/forms"]
-formsScope = Core.Proxy
-
--- | View and manage forms that this application has been installed in
-formsCurrentOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/forms.currentonly"]
-formsCurrentOnlyScope = Core.Proxy
-
--- | View and manage your Google Groups
-groupsScope :: Core.Proxy '["https://www.googleapis.com/auth/groups"]
-groupsScope = Core.Proxy
-
--- | Create and update Google Apps Script deployments
-scriptDeploymentsScope :: Core.Proxy '["https://www.googleapis.com/auth/script.deployments"]
-scriptDeploymentsScope = Core.Proxy
-
--- | View Google Apps Script deployments
-scriptDeploymentsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/script.deployments.readonly"]
-scriptDeploymentsReadOnlyScope = Core.Proxy
-
--- | View Google Apps Script project\'s metrics
-scriptMetricsScope :: Core.Proxy '["https://www.googleapis.com/auth/script.metrics"]
-scriptMetricsScope = Core.Proxy
-
--- | View Google Apps Script processes
-scriptProcessesScope :: Core.Proxy '["https://www.googleapis.com/auth/script.processes"]
-scriptProcessesScope = Core.Proxy
-
--- | Create and update Google Apps Script projects
-scriptProjectsScope :: Core.Proxy '["https://www.googleapis.com/auth/script.projects"]
-scriptProjectsScope = Core.Proxy
-
--- | View Google Apps Script projects
-scriptProjectsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/script.projects.readonly"]
-scriptProjectsReadOnlyScope = Core.Proxy
-
--- | See, edit, create, and delete all your Google Sheets spreadsheets
-spreadsheetsScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets"]
-spreadsheetsScope = Core.Proxy
-
--- | See your primary Google Account email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+import Gogol.Script.Processes.List
+import Gogol.Script.Processes.ListScriptProcesses
+import Gogol.Script.Projects.Create
+import Gogol.Script.Projects.Deployments.Create
+import Gogol.Script.Projects.Deployments.Delete
+import Gogol.Script.Projects.Deployments.Get
+import Gogol.Script.Projects.Deployments.List
+import Gogol.Script.Projects.Deployments.Update
+import Gogol.Script.Projects.Get
+import Gogol.Script.Projects.GetContent
+import Gogol.Script.Projects.GetMetrics
+import Gogol.Script.Projects.UpdateContent
+import Gogol.Script.Projects.Versions.Create
+import Gogol.Script.Projects.Versions.Get
+import Gogol.Script.Projects.Versions.List
+import Gogol.Script.Scripts.Run
+import Gogol.Script.Types
