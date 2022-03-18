@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.Attestors.List
+-- Module      : Gogol.BinaryAuthorization.Projects.Attestors.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists attestors. Returns INVALID_ARGUMENT if the project does not exist.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.list@.
-module Network.Google.BinaryAuthorization.Projects.Attestors.List
+module Gogol.BinaryAuthorization.Projects.Attestors.List
   ( -- * Resource
     BinaryAuthorizationProjectsAttestorsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.BinaryAuthorization.Projects.Attestors.List
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.list@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsList' request conforms to.

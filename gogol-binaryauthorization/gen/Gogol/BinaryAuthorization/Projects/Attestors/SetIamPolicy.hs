@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.Policy.SetIamPolicy
+-- Module      : Gogol.BinaryAuthorization.Projects.Attestors.SetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -28,23 +28,23 @@
 --
 -- Sets the access control policy on the specified resource. Replaces any existing policy. Can return @NOT_FOUND@, @INVALID_ARGUMENT@, and @PERMISSION_DENIED@ errors.
 --
--- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.policy.setIamPolicy@.
-module Network.Google.BinaryAuthorization.Projects.Policy.SetIamPolicy
+-- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.setIamPolicy@.
+module Gogol.BinaryAuthorization.Projects.Attestors.SetIamPolicy
   ( -- * Resource
-    BinaryAuthorizationProjectsPolicySetIamPolicyResource,
+    BinaryAuthorizationProjectsAttestorsSetIamPolicyResource,
 
     -- ** Constructing a Request
-    newBinaryAuthorizationProjectsPolicySetIamPolicy,
-    BinaryAuthorizationProjectsPolicySetIamPolicy,
+    newBinaryAuthorizationProjectsAttestorsSetIamPolicy,
+    BinaryAuthorizationProjectsAttestorsSetIamPolicy,
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @binaryauthorization.projects.policy.setIamPolicy@ method which the
--- 'BinaryAuthorizationProjectsPolicySetIamPolicy' request conforms to.
-type BinaryAuthorizationProjectsPolicySetIamPolicyResource =
+-- | A resource alias for @binaryauthorization.projects.attestors.setIamPolicy@ method which the
+-- 'BinaryAuthorizationProjectsAttestorsSetIamPolicy' request conforms to.
+type BinaryAuthorizationProjectsAttestorsSetIamPolicyResource =
   "v1"
     Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -58,8 +58,8 @@ type BinaryAuthorizationProjectsPolicySetIamPolicyResource =
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy. Can return @NOT_FOUND@, @INVALID_ARGUMENT@, and @PERMISSION_DENIED@ errors.
 --
--- /See:/ 'newBinaryAuthorizationProjectsPolicySetIamPolicy' smart constructor.
-data BinaryAuthorizationProjectsPolicySetIamPolicy = BinaryAuthorizationProjectsPolicySetIamPolicy
+-- /See:/ 'newBinaryAuthorizationProjectsAttestorsSetIamPolicy' smart constructor.
+data BinaryAuthorizationProjectsAttestorsSetIamPolicy = BinaryAuthorizationProjectsAttestorsSetIamPolicy
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -77,15 +77,15 @@ data BinaryAuthorizationProjectsPolicySetIamPolicy = BinaryAuthorizationProjects
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'BinaryAuthorizationProjectsPolicySetIamPolicy' with the minimum fields required to make a request.
-newBinaryAuthorizationProjectsPolicySetIamPolicy ::
+-- | Creates a value of 'BinaryAuthorizationProjectsAttestorsSetIamPolicy' with the minimum fields required to make a request.
+newBinaryAuthorizationProjectsAttestorsSetIamPolicy ::
   -- |  Multipart request metadata. See 'payload'.
   SetIamPolicyRequest ->
   -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
   Core.Text ->
-  BinaryAuthorizationProjectsPolicySetIamPolicy
-newBinaryAuthorizationProjectsPolicySetIamPolicy payload resource =
-  BinaryAuthorizationProjectsPolicySetIamPolicy
+  BinaryAuthorizationProjectsAttestorsSetIamPolicy
+newBinaryAuthorizationProjectsAttestorsSetIamPolicy payload resource =
+  BinaryAuthorizationProjectsAttestorsSetIamPolicy
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -97,17 +97,18 @@ newBinaryAuthorizationProjectsPolicySetIamPolicy payload resource =
 
 instance
   Core.GoogleRequest
-    BinaryAuthorizationProjectsPolicySetIamPolicy
+    BinaryAuthorizationProjectsAttestorsSetIamPolicy
   where
   type
-    Rs BinaryAuthorizationProjectsPolicySetIamPolicy =
+    Rs
+      BinaryAuthorizationProjectsAttestorsSetIamPolicy =
       IamPolicy
   type
     Scopes
-      BinaryAuthorizationProjectsPolicySetIamPolicy =
+      BinaryAuthorizationProjectsAttestorsSetIamPolicy =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    BinaryAuthorizationProjectsPolicySetIamPolicy {..} =
+    BinaryAuthorizationProjectsAttestorsSetIamPolicy {..} =
       go
         resource
         xgafv
@@ -123,6 +124,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  BinaryAuthorizationProjectsPolicySetIamPolicyResource
+                  BinaryAuthorizationProjectsAttestorsSetIamPolicyResource
             )
             Core.mempty

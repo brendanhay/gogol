@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Systempolicy.GetPolicy
+-- Module      : Gogol.BinaryAuthorization.Projects.Attestors.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the current system policy in the specified location.
+-- Gets an attestor. Returns NOT_FOUND if the attestor does not exist.
 --
--- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.systempolicy.getPolicy@.
-module Network.Google.BinaryAuthorization.Systempolicy.GetPolicy
+-- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.get@.
+module Gogol.BinaryAuthorization.Projects.Attestors.Get
   ( -- * Resource
-    BinaryAuthorizationSystempolicyGetPolicyResource,
+    BinaryAuthorizationProjectsAttestorsGetResource,
 
     -- ** Constructing a Request
-    newBinaryAuthorizationSystempolicyGetPolicy,
-    BinaryAuthorizationSystempolicyGetPolicy,
+    newBinaryAuthorizationProjectsAttestorsGet,
+    BinaryAuthorizationProjectsAttestorsGet,
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @binaryauthorization.systempolicy.getPolicy@ method which the
--- 'BinaryAuthorizationSystempolicyGetPolicy' request conforms to.
-type BinaryAuthorizationSystempolicyGetPolicyResource =
+-- | A resource alias for @binaryauthorization.projects.attestors.get@ method which the
+-- 'BinaryAuthorizationProjectsAttestorsGet' request conforms to.
+type BinaryAuthorizationProjectsAttestorsGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type BinaryAuthorizationSystempolicyGetPolicyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Policy
+    Core.:> Core.Get '[Core.JSON] Attestor
 
--- | Gets the current system policy in the specified location.
+-- | Gets an attestor. Returns NOT_FOUND if the attestor does not exist.
 --
--- /See:/ 'newBinaryAuthorizationSystempolicyGetPolicy' smart constructor.
-data BinaryAuthorizationSystempolicyGetPolicy = BinaryAuthorizationSystempolicyGetPolicy
+-- /See:/ 'newBinaryAuthorizationProjectsAttestorsGet' smart constructor.
+data BinaryAuthorizationProjectsAttestorsGet = BinaryAuthorizationProjectsAttestorsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name, in the format @locations\/*\/policy@. Note that the system policy is not associated with a project.
+    -- | Required. The name of the attestor to retrieve, in the format @projects\/*\/attestors\/*@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data BinaryAuthorizationSystempolicyGetPolicy = BinaryAuthorizationSystempolicyG
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'BinaryAuthorizationSystempolicyGetPolicy' with the minimum fields required to make a request.
-newBinaryAuthorizationSystempolicyGetPolicy ::
-  -- |  Required. The resource name, in the format @locations\/*\/policy@. Note that the system policy is not associated with a project. See 'name'.
+-- | Creates a value of 'BinaryAuthorizationProjectsAttestorsGet' with the minimum fields required to make a request.
+newBinaryAuthorizationProjectsAttestorsGet ::
+  -- |  Required. The name of the attestor to retrieve, in the format @projects\/*\/attestors\/*@. See 'name'.
   Core.Text ->
-  BinaryAuthorizationSystempolicyGetPolicy
-newBinaryAuthorizationSystempolicyGetPolicy name =
-  BinaryAuthorizationSystempolicyGetPolicy
+  BinaryAuthorizationProjectsAttestorsGet
+newBinaryAuthorizationProjectsAttestorsGet name =
+  BinaryAuthorizationProjectsAttestorsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,16 +91,16 @@ newBinaryAuthorizationSystempolicyGetPolicy name =
 
 instance
   Core.GoogleRequest
-    BinaryAuthorizationSystempolicyGetPolicy
+    BinaryAuthorizationProjectsAttestorsGet
   where
   type
-    Rs BinaryAuthorizationSystempolicyGetPolicy =
-      Policy
+    Rs BinaryAuthorizationProjectsAttestorsGet =
+      Attestor
   type
-    Scopes BinaryAuthorizationSystempolicyGetPolicy =
+    Scopes BinaryAuthorizationProjectsAttestorsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    BinaryAuthorizationSystempolicyGetPolicy {..} =
+    BinaryAuthorizationProjectsAttestorsGet {..} =
       go
         name
         xgafv
@@ -115,6 +115,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  BinaryAuthorizationSystempolicyGetPolicyResource
+                  BinaryAuthorizationProjectsAttestorsGetResource
             )
             Core.mempty

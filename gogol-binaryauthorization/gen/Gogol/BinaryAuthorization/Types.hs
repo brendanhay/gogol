@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Types
+-- Module      : Gogol.BinaryAuthorization.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.BinaryAuthorization.Types
+module Gogol.BinaryAuthorization.Types
   ( -- * Configuration
     binaryAuthorizationService,
 
@@ -150,9 +150,9 @@ module Network.Google.BinaryAuthorization.Types
   )
 where
 
-import Network.Google.BinaryAuthorization.Internal.Product
-import Network.Google.BinaryAuthorization.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Internal.Product
+import Gogol.BinaryAuthorization.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Binary Authorization API. This contains the host and root path used as a starting point for constructing service requests.
 binaryAuthorizationService :: Core.ServiceConfig

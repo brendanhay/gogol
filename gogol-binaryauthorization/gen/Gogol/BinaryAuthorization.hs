@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization
+-- Module      : Gogol.BinaryAuthorization
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The management interface for Binary Authorization, a service that provides policy-based deployment validation and control for images deployed to Google Kubernetes Engine (GKE), Anthos Service Mesh, Anthos Clusters, and Cloud Run.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference>
-module Network.Google.BinaryAuthorization
+module Gogol.BinaryAuthorization
   ( -- * Configuration
     binaryAuthorizationService,
 
@@ -231,19 +231,19 @@ module Network.Google.BinaryAuthorization
   )
 where
 
-import Network.Google.BinaryAuthorization.Projects.Attestors.Create
-import Network.Google.BinaryAuthorization.Projects.Attestors.Delete
-import Network.Google.BinaryAuthorization.Projects.Attestors.Get
-import Network.Google.BinaryAuthorization.Projects.Attestors.GetIamPolicy
-import Network.Google.BinaryAuthorization.Projects.Attestors.List
-import Network.Google.BinaryAuthorization.Projects.Attestors.SetIamPolicy
-import Network.Google.BinaryAuthorization.Projects.Attestors.TestIamPermissions
-import Network.Google.BinaryAuthorization.Projects.Attestors.Update
-import Network.Google.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
-import Network.Google.BinaryAuthorization.Projects.GetPolicy
-import Network.Google.BinaryAuthorization.Projects.Policy.GetIamPolicy
-import Network.Google.BinaryAuthorization.Projects.Policy.SetIamPolicy
-import Network.Google.BinaryAuthorization.Projects.Policy.TestIamPermissions
-import Network.Google.BinaryAuthorization.Projects.UpdatePolicy
-import Network.Google.BinaryAuthorization.Systempolicy.GetPolicy
-import Network.Google.BinaryAuthorization.Types
+import Gogol.BinaryAuthorization.Projects.Attestors.Create
+import Gogol.BinaryAuthorization.Projects.Attestors.Delete
+import Gogol.BinaryAuthorization.Projects.Attestors.Get
+import Gogol.BinaryAuthorization.Projects.Attestors.GetIamPolicy
+import Gogol.BinaryAuthorization.Projects.Attestors.List
+import Gogol.BinaryAuthorization.Projects.Attestors.SetIamPolicy
+import Gogol.BinaryAuthorization.Projects.Attestors.TestIamPermissions
+import Gogol.BinaryAuthorization.Projects.Attestors.Update
+import Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
+import Gogol.BinaryAuthorization.Projects.GetPolicy
+import Gogol.BinaryAuthorization.Projects.Policy.GetIamPolicy
+import Gogol.BinaryAuthorization.Projects.Policy.SetIamPolicy
+import Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions
+import Gogol.BinaryAuthorization.Projects.UpdatePolicy
+import Gogol.BinaryAuthorization.Systempolicy.GetPolicy
+import Gogol.BinaryAuthorization.Types

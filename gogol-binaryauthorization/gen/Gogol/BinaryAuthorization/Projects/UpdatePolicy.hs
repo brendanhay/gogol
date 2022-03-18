@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.BinaryAuthorization.Projects.UpdatePolicy
+-- Module      : Gogol.BinaryAuthorization.Projects.UpdatePolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates or updates a project\'s policy, and returns a copy of the new policy. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns NOT/FOUND if the project does not exist, INVALID/ARGUMENT if the request is malformed.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.updatePolicy@.
-module Network.Google.BinaryAuthorization.Projects.UpdatePolicy
+module Gogol.BinaryAuthorization.Projects.UpdatePolicy
   ( -- * Resource
     BinaryAuthorizationProjectsUpdatePolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.BinaryAuthorization.Projects.UpdatePolicy
   )
 where
 
-import Network.Google.BinaryAuthorization.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.BinaryAuthorization.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @binaryauthorization.projects.updatePolicy@ method which the
 -- 'BinaryAuthorizationProjectsUpdatePolicy' request conforms to.
