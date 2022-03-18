@@ -1,1377 +1,1365 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Logging
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Writes log entries and manages your Cloud Logging configuration. The
--- table entries below are presented in alphabetical order, not in order of
--- common use. For explanations of the concepts found in the table entries,
--- read the documentation at https:\/\/cloud.google.com\/logging\/docs.
+-- Writes log entries and manages your Cloud Logging configuration.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference>
 module Network.Google.Logging
-    (
-    -- * Service Configuration
-      loggingService
+  ( -- * Configuration
+    loggingService,
 
     -- * OAuth Scopes
-    , loggingAdminScope
-    , loggingReadScope
-    , loggingWriteScope
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , LoggingAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    loggingAdminScope,
+    loggingReadScope,
+    loggingWriteScope,
 
     -- * Resources
 
     -- ** logging.billingAccounts.buckets.get
-    , module Network.Google.Resource.Logging.BillingAccounts.Buckets.Get
+    LoggingBillingAccountsBucketsGetResource,
+    newLoggingBillingAccountsBucketsGet,
+    LoggingBillingAccountsBucketsGet,
 
     -- ** logging.billingAccounts.buckets.views.get
-    , module Network.Google.Resource.Logging.BillingAccounts.Buckets.Views.Get
+    LoggingBillingAccountsBucketsViewsGetResource,
+    newLoggingBillingAccountsBucketsViewsGet,
+    LoggingBillingAccountsBucketsViewsGet,
 
     -- ** logging.billingAccounts.exclusions.create
-    , module Network.Google.Resource.Logging.BillingAccounts.Exclusions.Create
+    LoggingBillingAccountsExclusionsCreateResource,
+    newLoggingBillingAccountsExclusionsCreate,
+    LoggingBillingAccountsExclusionsCreate,
 
     -- ** logging.billingAccounts.exclusions.delete
-    , module Network.Google.Resource.Logging.BillingAccounts.Exclusions.Delete
+    LoggingBillingAccountsExclusionsDeleteResource,
+    newLoggingBillingAccountsExclusionsDelete,
+    LoggingBillingAccountsExclusionsDelete,
 
     -- ** logging.billingAccounts.exclusions.get
-    , module Network.Google.Resource.Logging.BillingAccounts.Exclusions.Get
+    LoggingBillingAccountsExclusionsGetResource,
+    newLoggingBillingAccountsExclusionsGet,
+    LoggingBillingAccountsExclusionsGet,
 
     -- ** logging.billingAccounts.exclusions.list
-    , module Network.Google.Resource.Logging.BillingAccounts.Exclusions.List
+    LoggingBillingAccountsExclusionsListResource,
+    newLoggingBillingAccountsExclusionsList,
+    LoggingBillingAccountsExclusionsList,
 
     -- ** logging.billingAccounts.exclusions.patch
-    , module Network.Google.Resource.Logging.BillingAccounts.Exclusions.Patch
+    LoggingBillingAccountsExclusionsPatchResource,
+    newLoggingBillingAccountsExclusionsPatch,
+    LoggingBillingAccountsExclusionsPatch,
+
+    -- ** logging.billingAccounts.getCmekSettings
+    LoggingBillingAccountsGetCmekSettingsResource,
+    newLoggingBillingAccountsGetCmekSettings,
+    LoggingBillingAccountsGetCmekSettings,
+
+    -- ** logging.billingAccounts.getSettings
+    LoggingBillingAccountsGetSettingsResource,
+    newLoggingBillingAccountsGetSettings,
+    LoggingBillingAccountsGetSettings,
 
     -- ** logging.billingAccounts.locations.buckets.create
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Create
+    LoggingBillingAccountsLocationsBucketsCreateResource,
+    newLoggingBillingAccountsLocationsBucketsCreate,
+    LoggingBillingAccountsLocationsBucketsCreate,
 
     -- ** logging.billingAccounts.locations.buckets.delete
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Delete
+    LoggingBillingAccountsLocationsBucketsDeleteResource,
+    newLoggingBillingAccountsLocationsBucketsDelete,
+    LoggingBillingAccountsLocationsBucketsDelete,
 
     -- ** logging.billingAccounts.locations.buckets.list
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.List
+    LoggingBillingAccountsLocationsBucketsListResource,
+    newLoggingBillingAccountsLocationsBucketsList,
+    LoggingBillingAccountsLocationsBucketsList,
 
     -- ** logging.billingAccounts.locations.buckets.patch
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Patch
+    LoggingBillingAccountsLocationsBucketsPatchResource,
+    newLoggingBillingAccountsLocationsBucketsPatch,
+    LoggingBillingAccountsLocationsBucketsPatch,
 
     -- ** logging.billingAccounts.locations.buckets.undelete
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Undelete
+    LoggingBillingAccountsLocationsBucketsUndeleteResource,
+    newLoggingBillingAccountsLocationsBucketsUndelete,
+    LoggingBillingAccountsLocationsBucketsUndelete,
 
     -- ** logging.billingAccounts.locations.buckets.views.create
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.Create
+    LoggingBillingAccountsLocationsBucketsViewsCreateResource,
+    newLoggingBillingAccountsLocationsBucketsViewsCreate,
+    LoggingBillingAccountsLocationsBucketsViewsCreate,
 
     -- ** logging.billingAccounts.locations.buckets.views.delete
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.Delete
+    LoggingBillingAccountsLocationsBucketsViewsDeleteResource,
+    newLoggingBillingAccountsLocationsBucketsViewsDelete,
+    LoggingBillingAccountsLocationsBucketsViewsDelete,
 
     -- ** logging.billingAccounts.locations.buckets.views.list
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.List
+    LoggingBillingAccountsLocationsBucketsViewsListResource,
+    newLoggingBillingAccountsLocationsBucketsViewsList,
+    LoggingBillingAccountsLocationsBucketsViewsList,
 
     -- ** logging.billingAccounts.locations.buckets.views.patch
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.Patch
+    LoggingBillingAccountsLocationsBucketsViewsPatchResource,
+    newLoggingBillingAccountsLocationsBucketsViewsPatch,
+    LoggingBillingAccountsLocationsBucketsViewsPatch,
 
     -- ** logging.billingAccounts.locations.get
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Get
+    LoggingBillingAccountsLocationsGetResource,
+    newLoggingBillingAccountsLocationsGet,
+    LoggingBillingAccountsLocationsGet,
 
     -- ** logging.billingAccounts.locations.list
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.List
+    LoggingBillingAccountsLocationsListResource,
+    newLoggingBillingAccountsLocationsList,
+    LoggingBillingAccountsLocationsList,
 
     -- ** logging.billingAccounts.locations.operations.cancel
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Operations.Cancel
+    LoggingBillingAccountsLocationsOperationsCancelResource,
+    newLoggingBillingAccountsLocationsOperationsCancel,
+    LoggingBillingAccountsLocationsOperationsCancel,
 
     -- ** logging.billingAccounts.locations.operations.list
-    , module Network.Google.Resource.Logging.BillingAccounts.Locations.Operations.List
+    LoggingBillingAccountsLocationsOperationsListResource,
+    newLoggingBillingAccountsLocationsOperationsList,
+    LoggingBillingAccountsLocationsOperationsList,
 
     -- ** logging.billingAccounts.logs.delete
-    , module Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
+    LoggingBillingAccountsLogsDeleteResource,
+    newLoggingBillingAccountsLogsDelete,
+    LoggingBillingAccountsLogsDelete,
 
     -- ** logging.billingAccounts.logs.list
-    , module Network.Google.Resource.Logging.BillingAccounts.Logs.List
+    LoggingBillingAccountsLogsListResource,
+    newLoggingBillingAccountsLogsList,
+    LoggingBillingAccountsLogsList,
 
     -- ** logging.billingAccounts.operations.get
-    , module Network.Google.Resource.Logging.BillingAccounts.Operations.Get
+    LoggingBillingAccountsOperationsGetResource,
+    newLoggingBillingAccountsOperationsGet,
+    LoggingBillingAccountsOperationsGet,
 
     -- ** logging.billingAccounts.sinks.create
-    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Create
+    LoggingBillingAccountsSinksCreateResource,
+    newLoggingBillingAccountsSinksCreate,
+    LoggingBillingAccountsSinksCreate,
 
     -- ** logging.billingAccounts.sinks.delete
-    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
+    LoggingBillingAccountsSinksDeleteResource,
+    newLoggingBillingAccountsSinksDelete,
+    LoggingBillingAccountsSinksDelete,
 
     -- ** logging.billingAccounts.sinks.get
-    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
+    LoggingBillingAccountsSinksGetResource,
+    newLoggingBillingAccountsSinksGet,
+    LoggingBillingAccountsSinksGet,
 
     -- ** logging.billingAccounts.sinks.list
-    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.List
+    LoggingBillingAccountsSinksListResource,
+    newLoggingBillingAccountsSinksList,
+    LoggingBillingAccountsSinksList,
 
     -- ** logging.billingAccounts.sinks.patch
-    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Patch
+    LoggingBillingAccountsSinksPatchResource,
+    newLoggingBillingAccountsSinksPatch,
+    LoggingBillingAccountsSinksPatch,
 
     -- ** logging.billingAccounts.sinks.update
-    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Update
+    LoggingBillingAccountsSinksUpdateResource,
+    newLoggingBillingAccountsSinksUpdate,
+    LoggingBillingAccountsSinksUpdate,
 
     -- ** logging.entries.copy
-    , module Network.Google.Resource.Logging.Entries.Copy
+    LoggingEntriesCopyResource,
+    newLoggingEntriesCopy,
+    LoggingEntriesCopy,
 
     -- ** logging.entries.list
-    , module Network.Google.Resource.Logging.Entries.List
+    LoggingEntriesListResource,
+    newLoggingEntriesList,
+    LoggingEntriesList,
 
     -- ** logging.entries.tail
-    , module Network.Google.Resource.Logging.Entries.Tail
+    LoggingEntriesTailResource,
+    newLoggingEntriesTail,
+    LoggingEntriesTail,
 
     -- ** logging.entries.write
-    , module Network.Google.Resource.Logging.Entries.Write
+    LoggingEntriesWriteResource,
+    newLoggingEntriesWrite,
+    LoggingEntriesWrite,
 
     -- ** logging.exclusions.create
-    , module Network.Google.Resource.Logging.Exclusions.Create
+    LoggingExclusionsCreateResource,
+    newLoggingExclusionsCreate,
+    LoggingExclusionsCreate,
 
     -- ** logging.exclusions.delete
-    , module Network.Google.Resource.Logging.Exclusions.Delete
+    LoggingExclusionsDeleteResource,
+    newLoggingExclusionsDelete,
+    LoggingExclusionsDelete,
 
     -- ** logging.exclusions.get
-    , module Network.Google.Resource.Logging.Exclusions.Get
+    LoggingExclusionsGetResource,
+    newLoggingExclusionsGet,
+    LoggingExclusionsGet,
 
     -- ** logging.exclusions.list
-    , module Network.Google.Resource.Logging.Exclusions.List
+    LoggingExclusionsListResource,
+    newLoggingExclusionsList,
+    LoggingExclusionsList,
 
     -- ** logging.exclusions.patch
-    , module Network.Google.Resource.Logging.Exclusions.Patch
+    LoggingExclusionsPatchResource,
+    newLoggingExclusionsPatch,
+    LoggingExclusionsPatch,
 
     -- ** logging.folders.exclusions.create
-    , module Network.Google.Resource.Logging.Folders.Exclusions.Create
+    LoggingFoldersExclusionsCreateResource,
+    newLoggingFoldersExclusionsCreate,
+    LoggingFoldersExclusionsCreate,
 
     -- ** logging.folders.exclusions.delete
-    , module Network.Google.Resource.Logging.Folders.Exclusions.Delete
+    LoggingFoldersExclusionsDeleteResource,
+    newLoggingFoldersExclusionsDelete,
+    LoggingFoldersExclusionsDelete,
 
     -- ** logging.folders.exclusions.get
-    , module Network.Google.Resource.Logging.Folders.Exclusions.Get
+    LoggingFoldersExclusionsGetResource,
+    newLoggingFoldersExclusionsGet,
+    LoggingFoldersExclusionsGet,
 
     -- ** logging.folders.exclusions.list
-    , module Network.Google.Resource.Logging.Folders.Exclusions.List
+    LoggingFoldersExclusionsListResource,
+    newLoggingFoldersExclusionsList,
+    LoggingFoldersExclusionsList,
 
     -- ** logging.folders.exclusions.patch
-    , module Network.Google.Resource.Logging.Folders.Exclusions.Patch
+    LoggingFoldersExclusionsPatchResource,
+    newLoggingFoldersExclusionsPatch,
+    LoggingFoldersExclusionsPatch,
+
+    -- ** logging.folders.getCmekSettings
+    LoggingFoldersGetCmekSettingsResource,
+    newLoggingFoldersGetCmekSettings,
+    LoggingFoldersGetCmekSettings,
+
+    -- ** logging.folders.getSettings
+    LoggingFoldersGetSettingsResource,
+    newLoggingFoldersGetSettings,
+    LoggingFoldersGetSettings,
 
     -- ** logging.folders.locations.buckets.create
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Create
+    LoggingFoldersLocationsBucketsCreateResource,
+    newLoggingFoldersLocationsBucketsCreate,
+    LoggingFoldersLocationsBucketsCreate,
 
     -- ** logging.folders.locations.buckets.delete
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Delete
+    LoggingFoldersLocationsBucketsDeleteResource,
+    newLoggingFoldersLocationsBucketsDelete,
+    LoggingFoldersLocationsBucketsDelete,
 
     -- ** logging.folders.locations.buckets.get
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Get
+    LoggingFoldersLocationsBucketsGetResource,
+    newLoggingFoldersLocationsBucketsGet,
+    LoggingFoldersLocationsBucketsGet,
 
     -- ** logging.folders.locations.buckets.list
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.List
+    LoggingFoldersLocationsBucketsListResource,
+    newLoggingFoldersLocationsBucketsList,
+    LoggingFoldersLocationsBucketsList,
 
     -- ** logging.folders.locations.buckets.patch
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Patch
+    LoggingFoldersLocationsBucketsPatchResource,
+    newLoggingFoldersLocationsBucketsPatch,
+    LoggingFoldersLocationsBucketsPatch,
 
     -- ** logging.folders.locations.buckets.undelete
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Undelete
+    LoggingFoldersLocationsBucketsUndeleteResource,
+    newLoggingFoldersLocationsBucketsUndelete,
+    LoggingFoldersLocationsBucketsUndelete,
 
     -- ** logging.folders.locations.buckets.views.create
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Create
+    LoggingFoldersLocationsBucketsViewsCreateResource,
+    newLoggingFoldersLocationsBucketsViewsCreate,
+    LoggingFoldersLocationsBucketsViewsCreate,
 
     -- ** logging.folders.locations.buckets.views.delete
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Delete
+    LoggingFoldersLocationsBucketsViewsDeleteResource,
+    newLoggingFoldersLocationsBucketsViewsDelete,
+    LoggingFoldersLocationsBucketsViewsDelete,
 
     -- ** logging.folders.locations.buckets.views.get
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Get
+    LoggingFoldersLocationsBucketsViewsGetResource,
+    newLoggingFoldersLocationsBucketsViewsGet,
+    LoggingFoldersLocationsBucketsViewsGet,
 
     -- ** logging.folders.locations.buckets.views.list
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.List
+    LoggingFoldersLocationsBucketsViewsListResource,
+    newLoggingFoldersLocationsBucketsViewsList,
+    LoggingFoldersLocationsBucketsViewsList,
 
     -- ** logging.folders.locations.buckets.views.patch
-    , module Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Patch
+    LoggingFoldersLocationsBucketsViewsPatchResource,
+    newLoggingFoldersLocationsBucketsViewsPatch,
+    LoggingFoldersLocationsBucketsViewsPatch,
 
     -- ** logging.folders.locations.get
-    , module Network.Google.Resource.Logging.Folders.Locations.Get
+    LoggingFoldersLocationsGetResource,
+    newLoggingFoldersLocationsGet,
+    LoggingFoldersLocationsGet,
 
     -- ** logging.folders.locations.list
-    , module Network.Google.Resource.Logging.Folders.Locations.List
+    LoggingFoldersLocationsListResource,
+    newLoggingFoldersLocationsList,
+    LoggingFoldersLocationsList,
 
     -- ** logging.folders.locations.operations.cancel
-    , module Network.Google.Resource.Logging.Folders.Locations.Operations.Cancel
+    LoggingFoldersLocationsOperationsCancelResource,
+    newLoggingFoldersLocationsOperationsCancel,
+    LoggingFoldersLocationsOperationsCancel,
 
     -- ** logging.folders.locations.operations.get
-    , module Network.Google.Resource.Logging.Folders.Locations.Operations.Get
+    LoggingFoldersLocationsOperationsGetResource,
+    newLoggingFoldersLocationsOperationsGet,
+    LoggingFoldersLocationsOperationsGet,
 
     -- ** logging.folders.locations.operations.list
-    , module Network.Google.Resource.Logging.Folders.Locations.Operations.List
+    LoggingFoldersLocationsOperationsListResource,
+    newLoggingFoldersLocationsOperationsList,
+    LoggingFoldersLocationsOperationsList,
 
     -- ** logging.folders.logs.delete
-    , module Network.Google.Resource.Logging.Folders.Logs.Delete
+    LoggingFoldersLogsDeleteResource,
+    newLoggingFoldersLogsDelete,
+    LoggingFoldersLogsDelete,
 
     -- ** logging.folders.logs.list
-    , module Network.Google.Resource.Logging.Folders.Logs.List
+    LoggingFoldersLogsListResource,
+    newLoggingFoldersLogsList,
+    LoggingFoldersLogsList,
 
     -- ** logging.folders.sinks.create
-    , module Network.Google.Resource.Logging.Folders.Sinks.Create
+    LoggingFoldersSinksCreateResource,
+    newLoggingFoldersSinksCreate,
+    LoggingFoldersSinksCreate,
 
     -- ** logging.folders.sinks.delete
-    , module Network.Google.Resource.Logging.Folders.Sinks.Delete
+    LoggingFoldersSinksDeleteResource,
+    newLoggingFoldersSinksDelete,
+    LoggingFoldersSinksDelete,
 
     -- ** logging.folders.sinks.get
-    , module Network.Google.Resource.Logging.Folders.Sinks.Get
+    LoggingFoldersSinksGetResource,
+    newLoggingFoldersSinksGet,
+    LoggingFoldersSinksGet,
 
     -- ** logging.folders.sinks.list
-    , module Network.Google.Resource.Logging.Folders.Sinks.List
+    LoggingFoldersSinksListResource,
+    newLoggingFoldersSinksList,
+    LoggingFoldersSinksList,
 
     -- ** logging.folders.sinks.patch
-    , module Network.Google.Resource.Logging.Folders.Sinks.Patch
+    LoggingFoldersSinksPatchResource,
+    newLoggingFoldersSinksPatch,
+    LoggingFoldersSinksPatch,
 
     -- ** logging.folders.sinks.update
-    , module Network.Google.Resource.Logging.Folders.Sinks.Update
+    LoggingFoldersSinksUpdateResource,
+    newLoggingFoldersSinksUpdate,
+    LoggingFoldersSinksUpdate,
+
+    -- ** logging.folders.updateSettings
+    LoggingFoldersUpdateSettingsResource,
+    newLoggingFoldersUpdateSettings,
+    LoggingFoldersUpdateSettings,
 
     -- ** logging.getCmekSettings
-    , module Network.Google.Resource.Logging.GetCmekSettings
+    LoggingGetCmekSettingsResource,
+    newLoggingGetCmekSettings,
+    LoggingGetCmekSettings,
+
+    -- ** logging.getSettings
+    LoggingGetSettingsResource,
+    newLoggingGetSettings,
+    LoggingGetSettings,
 
     -- ** logging.locations.buckets.create
-    , module Network.Google.Resource.Logging.Locations.Buckets.Create
+    LoggingLocationsBucketsCreateResource,
+    newLoggingLocationsBucketsCreate,
+    LoggingLocationsBucketsCreate,
 
     -- ** logging.locations.buckets.delete
-    , module Network.Google.Resource.Logging.Locations.Buckets.Delete
+    LoggingLocationsBucketsDeleteResource,
+    newLoggingLocationsBucketsDelete,
+    LoggingLocationsBucketsDelete,
 
     -- ** logging.locations.buckets.get
-    , module Network.Google.Resource.Logging.Locations.Buckets.Get
+    LoggingLocationsBucketsGetResource,
+    newLoggingLocationsBucketsGet,
+    LoggingLocationsBucketsGet,
 
     -- ** logging.locations.buckets.list
-    , module Network.Google.Resource.Logging.Locations.Buckets.List
+    LoggingLocationsBucketsListResource,
+    newLoggingLocationsBucketsList,
+    LoggingLocationsBucketsList,
 
     -- ** logging.locations.buckets.patch
-    , module Network.Google.Resource.Logging.Locations.Buckets.Patch
+    LoggingLocationsBucketsPatchResource,
+    newLoggingLocationsBucketsPatch,
+    LoggingLocationsBucketsPatch,
 
     -- ** logging.locations.buckets.undelete
-    , module Network.Google.Resource.Logging.Locations.Buckets.Undelete
+    LoggingLocationsBucketsUndeleteResource,
+    newLoggingLocationsBucketsUndelete,
+    LoggingLocationsBucketsUndelete,
 
     -- ** logging.locations.buckets.views.create
-    , module Network.Google.Resource.Logging.Locations.Buckets.Views.Create
+    LoggingLocationsBucketsViewsCreateResource,
+    newLoggingLocationsBucketsViewsCreate,
+    LoggingLocationsBucketsViewsCreate,
 
     -- ** logging.locations.buckets.views.delete
-    , module Network.Google.Resource.Logging.Locations.Buckets.Views.Delete
+    LoggingLocationsBucketsViewsDeleteResource,
+    newLoggingLocationsBucketsViewsDelete,
+    LoggingLocationsBucketsViewsDelete,
 
     -- ** logging.locations.buckets.views.get
-    , module Network.Google.Resource.Logging.Locations.Buckets.Views.Get
+    LoggingLocationsBucketsViewsGetResource,
+    newLoggingLocationsBucketsViewsGet,
+    LoggingLocationsBucketsViewsGet,
 
     -- ** logging.locations.buckets.views.list
-    , module Network.Google.Resource.Logging.Locations.Buckets.Views.List
+    LoggingLocationsBucketsViewsListResource,
+    newLoggingLocationsBucketsViewsList,
+    LoggingLocationsBucketsViewsList,
 
     -- ** logging.locations.buckets.views.patch
-    , module Network.Google.Resource.Logging.Locations.Buckets.Views.Patch
+    LoggingLocationsBucketsViewsPatchResource,
+    newLoggingLocationsBucketsViewsPatch,
+    LoggingLocationsBucketsViewsPatch,
 
     -- ** logging.locations.get
-    , module Network.Google.Resource.Logging.Locations.Get
+    LoggingLocationsGetResource,
+    newLoggingLocationsGet,
+    LoggingLocationsGet,
 
     -- ** logging.locations.list
-    , module Network.Google.Resource.Logging.Locations.List
+    LoggingLocationsListResource,
+    newLoggingLocationsList,
+    LoggingLocationsList,
 
     -- ** logging.locations.operations.cancel
-    , module Network.Google.Resource.Logging.Locations.Operations.Cancel
+    LoggingLocationsOperationsCancelResource,
+    newLoggingLocationsOperationsCancel,
+    LoggingLocationsOperationsCancel,
 
     -- ** logging.locations.operations.get
-    , module Network.Google.Resource.Logging.Locations.Operations.Get
+    LoggingLocationsOperationsGetResource,
+    newLoggingLocationsOperationsGet,
+    LoggingLocationsOperationsGet,
 
     -- ** logging.locations.operations.list
-    , module Network.Google.Resource.Logging.Locations.Operations.List
+    LoggingLocationsOperationsListResource,
+    newLoggingLocationsOperationsList,
+    LoggingLocationsOperationsList,
 
     -- ** logging.logs.delete
-    , module Network.Google.Resource.Logging.Logs.Delete
+    LoggingLogsDeleteResource,
+    newLoggingLogsDelete,
+    LoggingLogsDelete,
 
     -- ** logging.logs.list
-    , module Network.Google.Resource.Logging.Logs.List
+    LoggingLogsListResource,
+    newLoggingLogsList,
+    LoggingLogsList,
 
     -- ** logging.monitoredResourceDescriptors.list
-    , module Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
+    LoggingMonitoredResourceDescriptorsListResource,
+    newLoggingMonitoredResourceDescriptorsList,
+    LoggingMonitoredResourceDescriptorsList,
 
     -- ** logging.organizations.exclusions.create
-    , module Network.Google.Resource.Logging.Organizations.Exclusions.Create
+    LoggingOrganizationsExclusionsCreateResource,
+    newLoggingOrganizationsExclusionsCreate,
+    LoggingOrganizationsExclusionsCreate,
 
     -- ** logging.organizations.exclusions.delete
-    , module Network.Google.Resource.Logging.Organizations.Exclusions.Delete
+    LoggingOrganizationsExclusionsDeleteResource,
+    newLoggingOrganizationsExclusionsDelete,
+    LoggingOrganizationsExclusionsDelete,
 
     -- ** logging.organizations.exclusions.get
-    , module Network.Google.Resource.Logging.Organizations.Exclusions.Get
+    LoggingOrganizationsExclusionsGetResource,
+    newLoggingOrganizationsExclusionsGet,
+    LoggingOrganizationsExclusionsGet,
 
     -- ** logging.organizations.exclusions.list
-    , module Network.Google.Resource.Logging.Organizations.Exclusions.List
+    LoggingOrganizationsExclusionsListResource,
+    newLoggingOrganizationsExclusionsList,
+    LoggingOrganizationsExclusionsList,
 
     -- ** logging.organizations.exclusions.patch
-    , module Network.Google.Resource.Logging.Organizations.Exclusions.Patch
+    LoggingOrganizationsExclusionsPatchResource,
+    newLoggingOrganizationsExclusionsPatch,
+    LoggingOrganizationsExclusionsPatch,
 
     -- ** logging.organizations.getCmekSettings
-    , module Network.Google.Resource.Logging.Organizations.GetCmekSettings
+    LoggingOrganizationsGetCmekSettingsResource,
+    newLoggingOrganizationsGetCmekSettings,
+    LoggingOrganizationsGetCmekSettings,
+
+    -- ** logging.organizations.getSettings
+    LoggingOrganizationsGetSettingsResource,
+    newLoggingOrganizationsGetSettings,
+    LoggingOrganizationsGetSettings,
 
     -- ** logging.organizations.locations.buckets.create
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Create
+    LoggingOrganizationsLocationsBucketsCreateResource,
+    newLoggingOrganizationsLocationsBucketsCreate,
+    LoggingOrganizationsLocationsBucketsCreate,
 
     -- ** logging.organizations.locations.buckets.delete
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Delete
+    LoggingOrganizationsLocationsBucketsDeleteResource,
+    newLoggingOrganizationsLocationsBucketsDelete,
+    LoggingOrganizationsLocationsBucketsDelete,
 
     -- ** logging.organizations.locations.buckets.get
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Get
+    LoggingOrganizationsLocationsBucketsGetResource,
+    newLoggingOrganizationsLocationsBucketsGet,
+    LoggingOrganizationsLocationsBucketsGet,
 
     -- ** logging.organizations.locations.buckets.list
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.List
+    LoggingOrganizationsLocationsBucketsListResource,
+    newLoggingOrganizationsLocationsBucketsList,
+    LoggingOrganizationsLocationsBucketsList,
 
     -- ** logging.organizations.locations.buckets.patch
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Patch
+    LoggingOrganizationsLocationsBucketsPatchResource,
+    newLoggingOrganizationsLocationsBucketsPatch,
+    LoggingOrganizationsLocationsBucketsPatch,
 
     -- ** logging.organizations.locations.buckets.undelete
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Undelete
+    LoggingOrganizationsLocationsBucketsUndeleteResource,
+    newLoggingOrganizationsLocationsBucketsUndelete,
+    LoggingOrganizationsLocationsBucketsUndelete,
 
     -- ** logging.organizations.locations.buckets.views.create
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Create
+    LoggingOrganizationsLocationsBucketsViewsCreateResource,
+    newLoggingOrganizationsLocationsBucketsViewsCreate,
+    LoggingOrganizationsLocationsBucketsViewsCreate,
 
     -- ** logging.organizations.locations.buckets.views.delete
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Delete
+    LoggingOrganizationsLocationsBucketsViewsDeleteResource,
+    newLoggingOrganizationsLocationsBucketsViewsDelete,
+    LoggingOrganizationsLocationsBucketsViewsDelete,
 
     -- ** logging.organizations.locations.buckets.views.get
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Get
+    LoggingOrganizationsLocationsBucketsViewsGetResource,
+    newLoggingOrganizationsLocationsBucketsViewsGet,
+    LoggingOrganizationsLocationsBucketsViewsGet,
 
     -- ** logging.organizations.locations.buckets.views.list
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.List
+    LoggingOrganizationsLocationsBucketsViewsListResource,
+    newLoggingOrganizationsLocationsBucketsViewsList,
+    LoggingOrganizationsLocationsBucketsViewsList,
 
     -- ** logging.organizations.locations.buckets.views.patch
-    , module Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Patch
+    LoggingOrganizationsLocationsBucketsViewsPatchResource,
+    newLoggingOrganizationsLocationsBucketsViewsPatch,
+    LoggingOrganizationsLocationsBucketsViewsPatch,
 
     -- ** logging.organizations.locations.get
-    , module Network.Google.Resource.Logging.Organizations.Locations.Get
+    LoggingOrganizationsLocationsGetResource,
+    newLoggingOrganizationsLocationsGet,
+    LoggingOrganizationsLocationsGet,
 
     -- ** logging.organizations.locations.list
-    , module Network.Google.Resource.Logging.Organizations.Locations.List
+    LoggingOrganizationsLocationsListResource,
+    newLoggingOrganizationsLocationsList,
+    LoggingOrganizationsLocationsList,
 
     -- ** logging.organizations.locations.operations.cancel
-    , module Network.Google.Resource.Logging.Organizations.Locations.Operations.Cancel
+    LoggingOrganizationsLocationsOperationsCancelResource,
+    newLoggingOrganizationsLocationsOperationsCancel,
+    LoggingOrganizationsLocationsOperationsCancel,
 
     -- ** logging.organizations.locations.operations.get
-    , module Network.Google.Resource.Logging.Organizations.Locations.Operations.Get
+    LoggingOrganizationsLocationsOperationsGetResource,
+    newLoggingOrganizationsLocationsOperationsGet,
+    LoggingOrganizationsLocationsOperationsGet,
 
     -- ** logging.organizations.locations.operations.list
-    , module Network.Google.Resource.Logging.Organizations.Locations.Operations.List
+    LoggingOrganizationsLocationsOperationsListResource,
+    newLoggingOrganizationsLocationsOperationsList,
+    LoggingOrganizationsLocationsOperationsList,
 
     -- ** logging.organizations.logs.delete
-    , module Network.Google.Resource.Logging.Organizations.Logs.Delete
+    LoggingOrganizationsLogsDeleteResource,
+    newLoggingOrganizationsLogsDelete,
+    LoggingOrganizationsLogsDelete,
 
     -- ** logging.organizations.logs.list
-    , module Network.Google.Resource.Logging.Organizations.Logs.List
+    LoggingOrganizationsLogsListResource,
+    newLoggingOrganizationsLogsList,
+    LoggingOrganizationsLogsList,
 
     -- ** logging.organizations.sinks.create
-    , module Network.Google.Resource.Logging.Organizations.Sinks.Create
+    LoggingOrganizationsSinksCreateResource,
+    newLoggingOrganizationsSinksCreate,
+    LoggingOrganizationsSinksCreate,
 
     -- ** logging.organizations.sinks.delete
-    , module Network.Google.Resource.Logging.Organizations.Sinks.Delete
+    LoggingOrganizationsSinksDeleteResource,
+    newLoggingOrganizationsSinksDelete,
+    LoggingOrganizationsSinksDelete,
 
     -- ** logging.organizations.sinks.get
-    , module Network.Google.Resource.Logging.Organizations.Sinks.Get
+    LoggingOrganizationsSinksGetResource,
+    newLoggingOrganizationsSinksGet,
+    LoggingOrganizationsSinksGet,
 
     -- ** logging.organizations.sinks.list
-    , module Network.Google.Resource.Logging.Organizations.Sinks.List
+    LoggingOrganizationsSinksListResource,
+    newLoggingOrganizationsSinksList,
+    LoggingOrganizationsSinksList,
 
     -- ** logging.organizations.sinks.patch
-    , module Network.Google.Resource.Logging.Organizations.Sinks.Patch
+    LoggingOrganizationsSinksPatchResource,
+    newLoggingOrganizationsSinksPatch,
+    LoggingOrganizationsSinksPatch,
 
     -- ** logging.organizations.sinks.update
-    , module Network.Google.Resource.Logging.Organizations.Sinks.Update
+    LoggingOrganizationsSinksUpdateResource,
+    newLoggingOrganizationsSinksUpdate,
+    LoggingOrganizationsSinksUpdate,
 
     -- ** logging.organizations.updateCmekSettings
-    , module Network.Google.Resource.Logging.Organizations.UpdateCmekSettings
+    LoggingOrganizationsUpdateCmekSettingsResource,
+    newLoggingOrganizationsUpdateCmekSettings,
+    LoggingOrganizationsUpdateCmekSettings,
+
+    -- ** logging.organizations.updateSettings
+    LoggingOrganizationsUpdateSettingsResource,
+    newLoggingOrganizationsUpdateSettings,
+    LoggingOrganizationsUpdateSettings,
 
     -- ** logging.projects.exclusions.create
-    , module Network.Google.Resource.Logging.Projects.Exclusions.Create
+    LoggingProjectsExclusionsCreateResource,
+    newLoggingProjectsExclusionsCreate,
+    LoggingProjectsExclusionsCreate,
 
     -- ** logging.projects.exclusions.delete
-    , module Network.Google.Resource.Logging.Projects.Exclusions.Delete
+    LoggingProjectsExclusionsDeleteResource,
+    newLoggingProjectsExclusionsDelete,
+    LoggingProjectsExclusionsDelete,
 
     -- ** logging.projects.exclusions.get
-    , module Network.Google.Resource.Logging.Projects.Exclusions.Get
+    LoggingProjectsExclusionsGetResource,
+    newLoggingProjectsExclusionsGet,
+    LoggingProjectsExclusionsGet,
 
     -- ** logging.projects.exclusions.list
-    , module Network.Google.Resource.Logging.Projects.Exclusions.List
+    LoggingProjectsExclusionsListResource,
+    newLoggingProjectsExclusionsList,
+    LoggingProjectsExclusionsList,
 
     -- ** logging.projects.exclusions.patch
-    , module Network.Google.Resource.Logging.Projects.Exclusions.Patch
+    LoggingProjectsExclusionsPatchResource,
+    newLoggingProjectsExclusionsPatch,
+    LoggingProjectsExclusionsPatch,
+
+    -- ** logging.projects.getCmekSettings
+    LoggingProjectsGetCmekSettingsResource,
+    newLoggingProjectsGetCmekSettings,
+    LoggingProjectsGetCmekSettings,
+
+    -- ** logging.projects.getSettings
+    LoggingProjectsGetSettingsResource,
+    newLoggingProjectsGetSettings,
+    LoggingProjectsGetSettings,
 
     -- ** logging.projects.locations.buckets.create
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Create
+    LoggingProjectsLocationsBucketsCreateResource,
+    newLoggingProjectsLocationsBucketsCreate,
+    LoggingProjectsLocationsBucketsCreate,
 
     -- ** logging.projects.locations.buckets.delete
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Delete
+    LoggingProjectsLocationsBucketsDeleteResource,
+    newLoggingProjectsLocationsBucketsDelete,
+    LoggingProjectsLocationsBucketsDelete,
 
     -- ** logging.projects.locations.buckets.get
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Get
+    LoggingProjectsLocationsBucketsGetResource,
+    newLoggingProjectsLocationsBucketsGet,
+    LoggingProjectsLocationsBucketsGet,
 
     -- ** logging.projects.locations.buckets.list
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.List
+    LoggingProjectsLocationsBucketsListResource,
+    newLoggingProjectsLocationsBucketsList,
+    LoggingProjectsLocationsBucketsList,
 
     -- ** logging.projects.locations.buckets.patch
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Patch
+    LoggingProjectsLocationsBucketsPatchResource,
+    newLoggingProjectsLocationsBucketsPatch,
+    LoggingProjectsLocationsBucketsPatch,
 
     -- ** logging.projects.locations.buckets.undelete
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Undelete
+    LoggingProjectsLocationsBucketsUndeleteResource,
+    newLoggingProjectsLocationsBucketsUndelete,
+    LoggingProjectsLocationsBucketsUndelete,
 
     -- ** logging.projects.locations.buckets.views.create
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Create
+    LoggingProjectsLocationsBucketsViewsCreateResource,
+    newLoggingProjectsLocationsBucketsViewsCreate,
+    LoggingProjectsLocationsBucketsViewsCreate,
 
     -- ** logging.projects.locations.buckets.views.delete
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Delete
+    LoggingProjectsLocationsBucketsViewsDeleteResource,
+    newLoggingProjectsLocationsBucketsViewsDelete,
+    LoggingProjectsLocationsBucketsViewsDelete,
 
     -- ** logging.projects.locations.buckets.views.get
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Get
+    LoggingProjectsLocationsBucketsViewsGetResource,
+    newLoggingProjectsLocationsBucketsViewsGet,
+    LoggingProjectsLocationsBucketsViewsGet,
 
     -- ** logging.projects.locations.buckets.views.list
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.List
+    LoggingProjectsLocationsBucketsViewsListResource,
+    newLoggingProjectsLocationsBucketsViewsList,
+    LoggingProjectsLocationsBucketsViewsList,
 
     -- ** logging.projects.locations.buckets.views.patch
-    , module Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Patch
+    LoggingProjectsLocationsBucketsViewsPatchResource,
+    newLoggingProjectsLocationsBucketsViewsPatch,
+    LoggingProjectsLocationsBucketsViewsPatch,
 
     -- ** logging.projects.locations.get
-    , module Network.Google.Resource.Logging.Projects.Locations.Get
+    LoggingProjectsLocationsGetResource,
+    newLoggingProjectsLocationsGet,
+    LoggingProjectsLocationsGet,
 
     -- ** logging.projects.locations.list
-    , module Network.Google.Resource.Logging.Projects.Locations.List
+    LoggingProjectsLocationsListResource,
+    newLoggingProjectsLocationsList,
+    LoggingProjectsLocationsList,
 
     -- ** logging.projects.locations.operations.cancel
-    , module Network.Google.Resource.Logging.Projects.Locations.Operations.Cancel
+    LoggingProjectsLocationsOperationsCancelResource,
+    newLoggingProjectsLocationsOperationsCancel,
+    LoggingProjectsLocationsOperationsCancel,
 
     -- ** logging.projects.locations.operations.get
-    , module Network.Google.Resource.Logging.Projects.Locations.Operations.Get
+    LoggingProjectsLocationsOperationsGetResource,
+    newLoggingProjectsLocationsOperationsGet,
+    LoggingProjectsLocationsOperationsGet,
 
     -- ** logging.projects.locations.operations.list
-    , module Network.Google.Resource.Logging.Projects.Locations.Operations.List
+    LoggingProjectsLocationsOperationsListResource,
+    newLoggingProjectsLocationsOperationsList,
+    LoggingProjectsLocationsOperationsList,
 
     -- ** logging.projects.logs.delete
-    , module Network.Google.Resource.Logging.Projects.Logs.Delete
+    LoggingProjectsLogsDeleteResource,
+    newLoggingProjectsLogsDelete,
+    LoggingProjectsLogsDelete,
 
     -- ** logging.projects.logs.list
-    , module Network.Google.Resource.Logging.Projects.Logs.List
+    LoggingProjectsLogsListResource,
+    newLoggingProjectsLogsList,
+    LoggingProjectsLogsList,
 
     -- ** logging.projects.metrics.create
-    , module Network.Google.Resource.Logging.Projects.Metrics.Create
+    LoggingProjectsMetricsCreateResource,
+    newLoggingProjectsMetricsCreate,
+    LoggingProjectsMetricsCreate,
 
     -- ** logging.projects.metrics.delete
-    , module Network.Google.Resource.Logging.Projects.Metrics.Delete
+    LoggingProjectsMetricsDeleteResource,
+    newLoggingProjectsMetricsDelete,
+    LoggingProjectsMetricsDelete,
 
     -- ** logging.projects.metrics.get
-    , module Network.Google.Resource.Logging.Projects.Metrics.Get
+    LoggingProjectsMetricsGetResource,
+    newLoggingProjectsMetricsGet,
+    LoggingProjectsMetricsGet,
 
     -- ** logging.projects.metrics.list
-    , module Network.Google.Resource.Logging.Projects.Metrics.List
+    LoggingProjectsMetricsListResource,
+    newLoggingProjectsMetricsList,
+    LoggingProjectsMetricsList,
 
     -- ** logging.projects.metrics.update
-    , module Network.Google.Resource.Logging.Projects.Metrics.Update
+    LoggingProjectsMetricsUpdateResource,
+    newLoggingProjectsMetricsUpdate,
+    LoggingProjectsMetricsUpdate,
 
     -- ** logging.projects.sinks.create
-    , module Network.Google.Resource.Logging.Projects.Sinks.Create
+    LoggingProjectsSinksCreateResource,
+    newLoggingProjectsSinksCreate,
+    LoggingProjectsSinksCreate,
 
     -- ** logging.projects.sinks.delete
-    , module Network.Google.Resource.Logging.Projects.Sinks.Delete
+    LoggingProjectsSinksDeleteResource,
+    newLoggingProjectsSinksDelete,
+    LoggingProjectsSinksDelete,
 
     -- ** logging.projects.sinks.get
-    , module Network.Google.Resource.Logging.Projects.Sinks.Get
+    LoggingProjectsSinksGetResource,
+    newLoggingProjectsSinksGet,
+    LoggingProjectsSinksGet,
 
     -- ** logging.projects.sinks.list
-    , module Network.Google.Resource.Logging.Projects.Sinks.List
+    LoggingProjectsSinksListResource,
+    newLoggingProjectsSinksList,
+    LoggingProjectsSinksList,
 
     -- ** logging.projects.sinks.patch
-    , module Network.Google.Resource.Logging.Projects.Sinks.Patch
+    LoggingProjectsSinksPatchResource,
+    newLoggingProjectsSinksPatch,
+    LoggingProjectsSinksPatch,
 
     -- ** logging.projects.sinks.update
-    , module Network.Google.Resource.Logging.Projects.Sinks.Update
+    LoggingProjectsSinksUpdateResource,
+    newLoggingProjectsSinksUpdate,
+    LoggingProjectsSinksUpdate,
 
     -- ** logging.sinks.create
-    , module Network.Google.Resource.Logging.Sinks.Create
+    LoggingSinksCreateResource,
+    newLoggingSinksCreate,
+    LoggingSinksCreate,
 
     -- ** logging.sinks.delete
-    , module Network.Google.Resource.Logging.Sinks.Delete
+    LoggingSinksDeleteResource,
+    newLoggingSinksDelete,
+    LoggingSinksDelete,
 
     -- ** logging.sinks.get
-    , module Network.Google.Resource.Logging.Sinks.Get
+    LoggingSinksGetResource,
+    newLoggingSinksGet,
+    LoggingSinksGet,
 
     -- ** logging.sinks.list
-    , module Network.Google.Resource.Logging.Sinks.List
+    LoggingSinksListResource,
+    newLoggingSinksList,
+    LoggingSinksList,
 
     -- ** logging.sinks.update
-    , module Network.Google.Resource.Logging.Sinks.Update
+    LoggingSinksUpdateResource,
+    newLoggingSinksUpdate,
+    LoggingSinksUpdate,
 
     -- ** logging.updateCmekSettings
-    , module Network.Google.Resource.Logging.UpdateCmekSettings
+    LoggingUpdateCmekSettingsResource,
+    newLoggingUpdateCmekSettings,
+    LoggingUpdateCmekSettings,
+
+    -- ** logging.updateSettings
+    LoggingUpdateSettingsResource,
+    newLoggingUpdateSettings,
+    LoggingUpdateSettings,
 
     -- * Types
 
-    -- ** MetricDescriptorValueType
-    , MetricDescriptorValueType (..)
-
-    -- ** MonitoredResourceDescriptor
-    , MonitoredResourceDescriptor
-    , monitoredResourceDescriptor
-    , mrdName
-    , mrdDisplayName
-    , mrdLabels
-    , mrdType
-    , mrdDescription
-    , mrdLaunchStage
-
-    -- ** ListBucketsResponse
-    , ListBucketsResponse
-    , listBucketsResponse
-    , lbrNextPageToken
-    , lbrBuckets
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** ListLogEntriesResponse
-    , ListLogEntriesResponse
-    , listLogEntriesResponse
-    , llerNextPageToken
-    , llerEntries
-
-    -- ** MetricDescriptor
-    , MetricDescriptor
-    , metricDescriptor
-    , mdMonitoredResourceTypes
-    , mdMetricKind
-    , mdName
-    , mdMetadata
-    , mdDisplayName
-    , mdLabels
-    , mdType
-    , mdValueType
-    , mdDescription
-    , mdUnit
-    , mdLaunchStage
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** TailLogEntriesRequest
-    , TailLogEntriesRequest
-    , tailLogEntriesRequest
-    , tlerBufferWindow
-    , tlerFilter
-    , tlerResourceNames
-
-    -- ** MonitoredResourceLabels
-    , MonitoredResourceLabels
-    , monitoredResourceLabels
-    , mrlAddtional
-
-    -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** LogMetricVersion
-    , LogMetricVersion (..)
-
-    -- ** MonitoredResourceMetadata
-    , MonitoredResourceMetadata
-    , monitoredResourceMetadata
-    , mrmUserLabels
-    , mrmSystemLabels
-
-    -- ** ListLogMetricsResponse
-    , ListLogMetricsResponse
-    , listLogMetricsResponse
-    , llmrMetrics
-    , llmrNextPageToken
-
-    -- ** WriteLogEntriesRequest
-    , WriteLogEntriesRequest
-    , writeLogEntriesRequest
-    , wlerEntries
-    , wlerPartialSuccess
-    , wlerResource
-    , wlerLabels
-    , wlerLogName
-    , wlerDryRun
-
-    -- ** CopyLogEntriesRequest
-    , CopyLogEntriesRequest
-    , copyLogEntriesRequest
-    , clerDestination
-    , clerName
-    , clerFilter
-
-    -- ** UndeleteBucketRequest
-    , UndeleteBucketRequest
-    , undeleteBucketRequest
-
-    -- ** CmekSettings
-    , CmekSettings
-    , cmekSettings
-    , csServiceAccountId
-    , csName
-    , csKmsKeyName
-
-    -- ** LogMetricLabelExtractors
-    , LogMetricLabelExtractors
-    , logMetricLabelExtractors
-    , lmleAddtional
-
-    -- ** Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** LogSinkOutputVersionFormat
-    , LogSinkOutputVersionFormat (..)
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** LogEntryLabels
-    , LogEntryLabels
-    , logEntryLabels
-    , lelAddtional
-
-    -- ** ListSinksResponse
-    , ListSinksResponse
-    , listSinksResponse
-    , lsrSinks
-    , lsrNextPageToken
-
-    -- ** RequestLog
-    , RequestLog
-    , requestLog
-    , rlTraceId
-    , rlInstanceId
-    , rlStatus
-    , rlRequestId
-    , rlInstanceIndex
-    , rlModuleId
-    , rlVersionId
-    , rlHTTPVersion
-    , rlTaskName
-    , rlPendingTime
-    , rlWasLoadingRequest
-    , rlFirst
-    , rlStartTime
-    , rlLatency
-    , rlURLMapEntry
-    , rlCost
-    , rlReferrer
-    , rlLine
-    , rlIP
-    , rlAppId
-    , rlMethod
-    , rlResource
-    , rlEndTime
-    , rlFinished
-    , rlMegaCycles
-    , rlUserAgent
-    , rlNickname
-    , rlHost
-    , rlTraceSampled
-    , rlTaskQueueName
-    , rlResponseSize
-    , rlSourceReference
-    , rlAppEngineRelease
-
-    -- ** LogEntryProtoPayload
-    , LogEntryProtoPayload
-    , logEntryProtoPayload
-    , leppAddtional
-
-    -- ** LogEntrySourceLocation
-    , LogEntrySourceLocation
-    , logEntrySourceLocation
-    , leslFunction
-    , leslLine
-    , leslFile
-
-    -- ** LogExclusion
-    , LogExclusion
-    , logExclusion
-    , leDisabled
-    , leUpdateTime
-    , leName
-    , leFilter
-    , leDescription
-    , leCreateTime
-
-    -- ** WriteLogEntriesResponse
-    , WriteLogEntriesResponse
-    , writeLogEntriesResponse
-
-    -- ** CopyLogEntriesResponse
-    , CopyLogEntriesResponse
-    , copyLogEntriesResponse
-    , clerLogEntriesCopiedCount
-
-    -- ** MetricDescriptorMetadataLaunchStage
-    , MetricDescriptorMetadataLaunchStage (..)
-
-    -- ** LogSink
-    , LogSink
-    , logSink
-    , lsDestination
-    , lsIncludeChildren
-    , lsDisabled
-    , lsOutputVersionFormat
-    , lsBigQueryOptions
-    , lsWriterIdentity
-    , lsUpdateTime
-    , lsName
-    , lsExclusions
-    , lsFilter
-    , lsDescription
-    , lsCreateTime
-
-    -- ** LogBucketLifecycleState
-    , LogBucketLifecycleState (..)
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** SuppressionInfoReason
-    , SuppressionInfoReason (..)
-
-    -- ** MonitoredResourceMetadataUserLabels
-    , MonitoredResourceMetadataUserLabels
-    , monitoredResourceMetadataUserLabels
-    , mrmulAddtional
-
-    -- ** ListExclusionsResponse
-    , ListExclusionsResponse
-    , listExclusionsResponse
-    , lerNextPageToken
-    , lerExclusions
-
-    -- ** ListLogsResponse
-    , ListLogsResponse
-    , listLogsResponse
-    , lNextPageToken
-    , lLogNames
-
-    -- ** CopyLogEntriesMetadata
-    , CopyLogEntriesMetadata
-    , copyLogEntriesMetadata
-    , clemState
-    , clemCancellationRequested
-    , clemProgress
-    , clemStartTime
-    , clemWriterIdentity
-    , clemEndTime
-    , clemRequest
-
-    -- ** ListMonitoredResourceDescriptorsResponse
-    , ListMonitoredResourceDescriptorsResponse
-    , listMonitoredResourceDescriptorsResponse
-    , lmrdrNextPageToken
-    , lmrdrResourceDescriptors
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** BigQueryOptions
-    , BigQueryOptions
-    , bigQueryOptions
-    , bqoUsePartitionedTables
-    , bqoUsesTimestampColumnPartitioning
-
-    -- ** LabelDescriptorValueType
-    , LabelDescriptorValueType (..)
-
-    -- ** Explicit
-    , Explicit
-    , explicit
-    , eBounds
-
-    -- ** HTTPRequest
-    , HTTPRequest
-    , hTTPRequest
-    , httprStatus
-    , httprRequestURL
-    , httprCacheFillBytes
-    , httprRemoteIP
-    , httprLatency
-    , httprProtocol
-    , httprServerIP
-    , httprRequestSize
-    , httprCacheValidatedWithOriginServer
-    , httprUserAgent
-    , httprCacheLookup
-    , httprResponseSize
-    , httprRequestMethod
-    , httprCacheHit
-    , httprReferer
-
-    -- ** Exponential
-    , Exponential
-    , exponential
-    , eGrowthFactor
-    , eScale
-    , eNumFiniteBuckets
-
-    -- ** WriteLogEntriesRequestLabels
-    , WriteLogEntriesRequestLabels
-    , writeLogEntriesRequestLabels
-    , wlerlAddtional
-
-    -- ** SuppressionInfo
-    , SuppressionInfo
-    , suppressionInfo
-    , siReason
-    , siSuppressedCount
-
-    -- ** ListViewsResponse
-    , ListViewsResponse
-    , listViewsResponse
-    , lvrNextPageToken
-    , lvrViews
-
-    -- ** MonitoredResource
-    , MonitoredResource
-    , monitoredResource
-    , mrLabels
-    , mrType
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** LogBucket
-    , LogBucket
-    , logBucket
-    , lbRestrictedFields
-    , lbLocked
-    , lbRetentionDays
-    , lbUpdateTime
-    , lbName
-    , lbDescription
-    , lbLifecycleState
-    , lbCreateTime
-
-    -- ** LogLine
-    , LogLine
-    , logLine
-    , llTime
-    , llSeverity
-    , llLogMessage
-    , llSourceLocation
-
-    -- ** MetricDescriptorMetadata
-    , MetricDescriptorMetadata
-    , metricDescriptorMetadata
-    , mdmSamplePeriod
-    , mdmIngestDelay
-    , mdmLaunchStage
-
-    -- ** MonitoredResourceMetadataSystemLabels
-    , MonitoredResourceMetadataSystemLabels
-    , monitoredResourceMetadataSystemLabels
-    , mrmslAddtional
-
-    -- ** LabelDescriptor
-    , LabelDescriptor
-    , labelDescriptor
-    , ldKey
-    , ldValueType
-    , ldDescription
-
-    -- ** Linear
-    , Linear
-    , linear
-    , lOffSet
-    , lWidth
-    , lNumFiniteBuckets
-
-    -- ** ListLogEntriesRequest
-    , ListLogEntriesRequest
-    , listLogEntriesRequest
-    , llerOrderBy
-    , llerProjectIds
-    , llerFilter
-    , llerPageToken
-    , llerPageSize
-    , llerResourceNames
-
-    -- ** MonitoredResourceDescriptorLaunchStage
-    , MonitoredResourceDescriptorLaunchStage (..)
-
-    -- ** TailLogEntriesResponse
-    , TailLogEntriesResponse
-    , tailLogEntriesResponse
-    , tlerEntries
-    , tlerSuppressionInfo
-
-    -- ** LogEntryOperation
-    , LogEntryOperation
-    , logEntryOperation
-    , leoFirst
-    , leoProducer
-    , leoLast
-    , leoId
-
-    -- ** LogMetric
-    , LogMetric
-    , logMetric
-    , lmMetricDescriptor
-    , lmDisabled
-    , lmUpdateTime
-    , lmName
-    , lmVersion
-    , lmLabelExtractors
-    , lmFilter
-    , lmValueExtractor
-    , lmBucketOptions
-    , lmDescription
-    , lmCreateTime
-
-    -- ** LogEntry
-    , LogEntry
-    , logEntry
-    , leOperation
-    , leSeverity
-    , leTextPayload
-    , leJSONPayload
-    , leHTTPRequest
-    , leResource
-    , leInsertId
-    , leMetadata
-    , leReceiveTimestamp
-    , leLabels
-    , leProtoPayload
-    , leSourceLocation
-    , leTraceSampled
-    , leLogName
-    , leTimestamp
-    , leTrace
-    , leSpanId
-
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- ** SourceLocation
-    , SourceLocation
-    , sourceLocation
-    , slLine
-    , slFunctionName
-    , slFile
-
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** MetricDescriptorMetricKind
-    , MetricDescriptorMetricKind (..)
-
-    -- ** LogEntrySeverity
-    , LogEntrySeverity (..)
+    BigQueryOptions (..),
+    newBigQueryOptions,
 
     -- ** BucketOptions
-    , BucketOptions
-    , bucketOptions
-    , boExponentialBuckets
-    , boLinearBuckets
-    , boExplicitBuckets
+    BucketOptions (..),
+    newBucketOptions,
 
-    -- ** SourceReference
-    , SourceReference
-    , sourceReference
-    , srRepository
-    , srRevisionId
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- ** LogEntryJSONPayload
-    , LogEntryJSONPayload
-    , logEntryJSONPayload
-    , lejpAddtional
+    -- ** CmekSettings
+    CmekSettings (..),
+    newCmekSettings,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** CopyLogEntriesMetadata
+    CopyLogEntriesMetadata (..),
+    newCopyLogEntriesMetadata,
 
-    -- ** MetricDescriptorLaunchStage
-    , MetricDescriptorLaunchStage (..)
+    -- ** CopyLogEntriesMetadata_State
+    CopyLogEntriesMetadata_State (..),
+
+    -- ** CopyLogEntriesRequest
+    CopyLogEntriesRequest (..),
+    newCopyLogEntriesRequest,
+
+    -- ** CopyLogEntriesResponse
+    CopyLogEntriesResponse (..),
+    newCopyLogEntriesResponse,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Explicit
+    Explicit (..),
+    newExplicit,
+
+    -- ** Exponential
+    Exponential (..),
+    newExponential,
+
+    -- ** HttpRequest
+    HttpRequest (..),
+    newHttpRequest,
+
+    -- ** LabelDescriptor
+    LabelDescriptor (..),
+    newLabelDescriptor,
+
+    -- ** LabelDescriptor_ValueType
+    LabelDescriptor_ValueType (..),
+
+    -- ** Linear
+    Linear (..),
+    newLinear,
+
+    -- ** ListBucketsResponse
+    ListBucketsResponse (..),
+    newListBucketsResponse,
+
+    -- ** ListExclusionsResponse
+    ListExclusionsResponse (..),
+    newListExclusionsResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** ListLogEntriesRequest
+    ListLogEntriesRequest (..),
+    newListLogEntriesRequest,
+
+    -- ** ListLogEntriesResponse
+    ListLogEntriesResponse (..),
+    newListLogEntriesResponse,
+
+    -- ** ListLogMetricsResponse
+    ListLogMetricsResponse (..),
+    newListLogMetricsResponse,
+
+    -- ** ListLogsResponse
+    ListLogsResponse (..),
+    newListLogsResponse,
+
+    -- ** ListMonitoredResourceDescriptorsResponse
+    ListMonitoredResourceDescriptorsResponse (..),
+    newListMonitoredResourceDescriptorsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListSinksResponse
+    ListSinksResponse (..),
+    newListSinksResponse,
+
+    -- ** ListViewsResponse
+    ListViewsResponse (..),
+    newListViewsResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** LogBucket
+    LogBucket (..),
+    newLogBucket,
+
+    -- ** LogBucket_LifecycleState
+    LogBucket_LifecycleState (..),
+
+    -- ** LogEntry
+    LogEntry (..),
+    newLogEntry,
+
+    -- ** LogEntry_JsonPayload
+    LogEntry_JsonPayload (..),
+    newLogEntry_JsonPayload,
+
+    -- ** LogEntry_Labels
+    LogEntry_Labels (..),
+    newLogEntry_Labels,
+
+    -- ** LogEntry_ProtoPayload
+    LogEntry_ProtoPayload (..),
+    newLogEntry_ProtoPayload,
+
+    -- ** LogEntry_Severity
+    LogEntry_Severity (..),
+
+    -- ** LogEntryOperation
+    LogEntryOperation (..),
+    newLogEntryOperation,
+
+    -- ** LogEntrySourceLocation
+    LogEntrySourceLocation (..),
+    newLogEntrySourceLocation,
+
+    -- ** LogExclusion
+    LogExclusion (..),
+    newLogExclusion,
+
+    -- ** LogLine
+    LogLine (..),
+    newLogLine,
+
+    -- ** LogLine_Severity
+    LogLine_Severity (..),
+
+    -- ** LogMetric
+    LogMetric (..),
+    newLogMetric,
+
+    -- ** LogMetric_LabelExtractors
+    LogMetric_LabelExtractors (..),
+    newLogMetric_LabelExtractors,
+
+    -- ** LogMetric_Version
+    LogMetric_Version (..),
+
+    -- ** LogSink
+    LogSink (..),
+    newLogSink,
+
+    -- ** LogSink_OutputVersionFormat
+    LogSink_OutputVersionFormat (..),
+
+    -- ** LogSplit
+    LogSplit (..),
+    newLogSplit,
 
     -- ** LogView
-    , LogView
-    , logView
-    , lvUpdateTime
-    , lvName
-    , lvFilter
-    , lvDescription
-    , lvCreateTime
+    LogView (..),
+    newLogView,
 
-    -- ** LogLineSeverity
-    , LogLineSeverity (..)
+    -- ** MetricDescriptor
+    MetricDescriptor (..),
+    newMetricDescriptor,
 
-    -- ** CopyLogEntriesMetadataState
-    , CopyLogEntriesMetadataState (..)
-    ) where
+    -- ** MetricDescriptor_LaunchStage
+    MetricDescriptor_LaunchStage (..),
 
-import Network.Google.Prelude
+    -- ** MetricDescriptor_MetricKind
+    MetricDescriptor_MetricKind (..),
+
+    -- ** MetricDescriptor_ValueType
+    MetricDescriptor_ValueType (..),
+
+    -- ** MetricDescriptorMetadata
+    MetricDescriptorMetadata (..),
+    newMetricDescriptorMetadata,
+
+    -- ** MetricDescriptorMetadata_LaunchStage
+    MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MonitoredResource
+    MonitoredResource (..),
+    newMonitoredResource,
+
+    -- ** MonitoredResource_Labels
+    MonitoredResource_Labels (..),
+    newMonitoredResource_Labels,
+
+    -- ** MonitoredResourceDescriptor
+    MonitoredResourceDescriptor (..),
+    newMonitoredResourceDescriptor,
+
+    -- ** MonitoredResourceDescriptor_LaunchStage
+    MonitoredResourceDescriptor_LaunchStage (..),
+
+    -- ** MonitoredResourceMetadata
+    MonitoredResourceMetadata (..),
+    newMonitoredResourceMetadata,
+
+    -- ** MonitoredResourceMetadata_SystemLabels
+    MonitoredResourceMetadata_SystemLabels (..),
+    newMonitoredResourceMetadata_SystemLabels,
+
+    -- ** MonitoredResourceMetadata_UserLabels
+    MonitoredResourceMetadata_UserLabels (..),
+    newMonitoredResourceMetadata_UserLabels,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** RequestLog
+    RequestLog (..),
+    newRequestLog,
+
+    -- ** Settings
+    Settings (..),
+    newSettings,
+
+    -- ** SourceLocation
+    SourceLocation (..),
+    newSourceLocation,
+
+    -- ** SourceReference
+    SourceReference (..),
+    newSourceReference,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** SuppressionInfo
+    SuppressionInfo (..),
+    newSuppressionInfo,
+
+    -- ** SuppressionInfo_Reason
+    SuppressionInfo_Reason (..),
+
+    -- ** TailLogEntriesRequest
+    TailLogEntriesRequest (..),
+    newTailLogEntriesRequest,
+
+    -- ** TailLogEntriesResponse
+    TailLogEntriesResponse (..),
+    newTailLogEntriesResponse,
+
+    -- ** UndeleteBucketRequest
+    UndeleteBucketRequest (..),
+    newUndeleteBucketRequest,
+
+    -- ** WriteLogEntriesRequest
+    WriteLogEntriesRequest (..),
+    newWriteLogEntriesRequest,
+
+    -- ** WriteLogEntriesRequest_Labels
+    WriteLogEntriesRequest_Labels (..),
+    newWriteLogEntriesRequest_Labels,
+
+    -- ** WriteLogEntriesResponse
+    WriteLogEntriesResponse (..),
+    newWriteLogEntriesResponse,
+  )
+where
+
+import Network.Google.Logging.BillingAccounts.Buckets.Get
+import Network.Google.Logging.BillingAccounts.Buckets.Views.Get
+import Network.Google.Logging.BillingAccounts.Exclusions.Create
+import Network.Google.Logging.BillingAccounts.Exclusions.Delete
+import Network.Google.Logging.BillingAccounts.Exclusions.Get
+import Network.Google.Logging.BillingAccounts.Exclusions.List
+import Network.Google.Logging.BillingAccounts.Exclusions.Patch
+import Network.Google.Logging.BillingAccounts.GetCmekSettings
+import Network.Google.Logging.BillingAccounts.GetSettings
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Create
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Delete
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.List
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Patch
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Undelete
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Views.Create
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Views.Delete
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Views.List
+import Network.Google.Logging.BillingAccounts.Locations.Buckets.Views.Patch
+import Network.Google.Logging.BillingAccounts.Locations.Get
+import Network.Google.Logging.BillingAccounts.Locations.List
+import Network.Google.Logging.BillingAccounts.Locations.Operations.Cancel
+import Network.Google.Logging.BillingAccounts.Locations.Operations.List
+import Network.Google.Logging.BillingAccounts.Logs.Delete
+import Network.Google.Logging.BillingAccounts.Logs.List
+import Network.Google.Logging.BillingAccounts.Operations.Get
+import Network.Google.Logging.BillingAccounts.Sinks.Create
+import Network.Google.Logging.BillingAccounts.Sinks.Delete
+import Network.Google.Logging.BillingAccounts.Sinks.Get
+import Network.Google.Logging.BillingAccounts.Sinks.List
+import Network.Google.Logging.BillingAccounts.Sinks.Patch
+import Network.Google.Logging.BillingAccounts.Sinks.Update
+import Network.Google.Logging.Entries.Copy
+import Network.Google.Logging.Entries.List
+import Network.Google.Logging.Entries.Tail
+import Network.Google.Logging.Entries.Write
+import Network.Google.Logging.Exclusions.Create
+import Network.Google.Logging.Exclusions.Delete
+import Network.Google.Logging.Exclusions.Get
+import Network.Google.Logging.Exclusions.List
+import Network.Google.Logging.Exclusions.Patch
+import Network.Google.Logging.Folders.Exclusions.Create
+import Network.Google.Logging.Folders.Exclusions.Delete
+import Network.Google.Logging.Folders.Exclusions.Get
+import Network.Google.Logging.Folders.Exclusions.List
+import Network.Google.Logging.Folders.Exclusions.Patch
+import Network.Google.Logging.Folders.GetCmekSettings
+import Network.Google.Logging.Folders.GetSettings
+import Network.Google.Logging.Folders.Locations.Buckets.Create
+import Network.Google.Logging.Folders.Locations.Buckets.Delete
+import Network.Google.Logging.Folders.Locations.Buckets.Get
+import Network.Google.Logging.Folders.Locations.Buckets.List
+import Network.Google.Logging.Folders.Locations.Buckets.Patch
+import Network.Google.Logging.Folders.Locations.Buckets.Undelete
+import Network.Google.Logging.Folders.Locations.Buckets.Views.Create
+import Network.Google.Logging.Folders.Locations.Buckets.Views.Delete
+import Network.Google.Logging.Folders.Locations.Buckets.Views.Get
+import Network.Google.Logging.Folders.Locations.Buckets.Views.List
+import Network.Google.Logging.Folders.Locations.Buckets.Views.Patch
+import Network.Google.Logging.Folders.Locations.Get
+import Network.Google.Logging.Folders.Locations.List
+import Network.Google.Logging.Folders.Locations.Operations.Cancel
+import Network.Google.Logging.Folders.Locations.Operations.Get
+import Network.Google.Logging.Folders.Locations.Operations.List
+import Network.Google.Logging.Folders.Logs.Delete
+import Network.Google.Logging.Folders.Logs.List
+import Network.Google.Logging.Folders.Sinks.Create
+import Network.Google.Logging.Folders.Sinks.Delete
+import Network.Google.Logging.Folders.Sinks.Get
+import Network.Google.Logging.Folders.Sinks.List
+import Network.Google.Logging.Folders.Sinks.Patch
+import Network.Google.Logging.Folders.Sinks.Update
+import Network.Google.Logging.Folders.UpdateSettings
+import Network.Google.Logging.GetCmekSettings
+import Network.Google.Logging.GetSettings
+import Network.Google.Logging.Locations.Buckets.Create
+import Network.Google.Logging.Locations.Buckets.Delete
+import Network.Google.Logging.Locations.Buckets.Get
+import Network.Google.Logging.Locations.Buckets.List
+import Network.Google.Logging.Locations.Buckets.Patch
+import Network.Google.Logging.Locations.Buckets.Undelete
+import Network.Google.Logging.Locations.Buckets.Views.Create
+import Network.Google.Logging.Locations.Buckets.Views.Delete
+import Network.Google.Logging.Locations.Buckets.Views.Get
+import Network.Google.Logging.Locations.Buckets.Views.List
+import Network.Google.Logging.Locations.Buckets.Views.Patch
+import Network.Google.Logging.Locations.Get
+import Network.Google.Logging.Locations.List
+import Network.Google.Logging.Locations.Operations.Cancel
+import Network.Google.Logging.Locations.Operations.Get
+import Network.Google.Logging.Locations.Operations.List
+import Network.Google.Logging.Logs.Delete
+import Network.Google.Logging.Logs.List
+import Network.Google.Logging.MonitoredResourceDescriptors.List
+import Network.Google.Logging.Organizations.Exclusions.Create
+import Network.Google.Logging.Organizations.Exclusions.Delete
+import Network.Google.Logging.Organizations.Exclusions.Get
+import Network.Google.Logging.Organizations.Exclusions.List
+import Network.Google.Logging.Organizations.Exclusions.Patch
+import Network.Google.Logging.Organizations.GetCmekSettings
+import Network.Google.Logging.Organizations.GetSettings
+import Network.Google.Logging.Organizations.Locations.Buckets.Create
+import Network.Google.Logging.Organizations.Locations.Buckets.Delete
+import Network.Google.Logging.Organizations.Locations.Buckets.Get
+import Network.Google.Logging.Organizations.Locations.Buckets.List
+import Network.Google.Logging.Organizations.Locations.Buckets.Patch
+import Network.Google.Logging.Organizations.Locations.Buckets.Undelete
+import Network.Google.Logging.Organizations.Locations.Buckets.Views.Create
+import Network.Google.Logging.Organizations.Locations.Buckets.Views.Delete
+import Network.Google.Logging.Organizations.Locations.Buckets.Views.Get
+import Network.Google.Logging.Organizations.Locations.Buckets.Views.List
+import Network.Google.Logging.Organizations.Locations.Buckets.Views.Patch
+import Network.Google.Logging.Organizations.Locations.Get
+import Network.Google.Logging.Organizations.Locations.List
+import Network.Google.Logging.Organizations.Locations.Operations.Cancel
+import Network.Google.Logging.Organizations.Locations.Operations.Get
+import Network.Google.Logging.Organizations.Locations.Operations.List
+import Network.Google.Logging.Organizations.Logs.Delete
+import Network.Google.Logging.Organizations.Logs.List
+import Network.Google.Logging.Organizations.Sinks.Create
+import Network.Google.Logging.Organizations.Sinks.Delete
+import Network.Google.Logging.Organizations.Sinks.Get
+import Network.Google.Logging.Organizations.Sinks.List
+import Network.Google.Logging.Organizations.Sinks.Patch
+import Network.Google.Logging.Organizations.Sinks.Update
+import Network.Google.Logging.Organizations.UpdateCmekSettings
+import Network.Google.Logging.Organizations.UpdateSettings
+import Network.Google.Logging.Projects.Exclusions.Create
+import Network.Google.Logging.Projects.Exclusions.Delete
+import Network.Google.Logging.Projects.Exclusions.Get
+import Network.Google.Logging.Projects.Exclusions.List
+import Network.Google.Logging.Projects.Exclusions.Patch
+import Network.Google.Logging.Projects.GetCmekSettings
+import Network.Google.Logging.Projects.GetSettings
+import Network.Google.Logging.Projects.Locations.Buckets.Create
+import Network.Google.Logging.Projects.Locations.Buckets.Delete
+import Network.Google.Logging.Projects.Locations.Buckets.Get
+import Network.Google.Logging.Projects.Locations.Buckets.List
+import Network.Google.Logging.Projects.Locations.Buckets.Patch
+import Network.Google.Logging.Projects.Locations.Buckets.Undelete
+import Network.Google.Logging.Projects.Locations.Buckets.Views.Create
+import Network.Google.Logging.Projects.Locations.Buckets.Views.Delete
+import Network.Google.Logging.Projects.Locations.Buckets.Views.Get
+import Network.Google.Logging.Projects.Locations.Buckets.Views.List
+import Network.Google.Logging.Projects.Locations.Buckets.Views.Patch
+import Network.Google.Logging.Projects.Locations.Get
+import Network.Google.Logging.Projects.Locations.List
+import Network.Google.Logging.Projects.Locations.Operations.Cancel
+import Network.Google.Logging.Projects.Locations.Operations.Get
+import Network.Google.Logging.Projects.Locations.Operations.List
+import Network.Google.Logging.Projects.Logs.Delete
+import Network.Google.Logging.Projects.Logs.List
+import Network.Google.Logging.Projects.Metrics.Create
+import Network.Google.Logging.Projects.Metrics.Delete
+import Network.Google.Logging.Projects.Metrics.Get
+import Network.Google.Logging.Projects.Metrics.List
+import Network.Google.Logging.Projects.Metrics.Update
+import Network.Google.Logging.Projects.Sinks.Create
+import Network.Google.Logging.Projects.Sinks.Delete
+import Network.Google.Logging.Projects.Sinks.Get
+import Network.Google.Logging.Projects.Sinks.List
+import Network.Google.Logging.Projects.Sinks.Patch
+import Network.Google.Logging.Projects.Sinks.Update
+import Network.Google.Logging.Sinks.Create
+import Network.Google.Logging.Sinks.Delete
+import Network.Google.Logging.Sinks.Get
+import Network.Google.Logging.Sinks.List
+import Network.Google.Logging.Sinks.Update
 import Network.Google.Logging.Types
-import Network.Google.Resource.Logging.BillingAccounts.Buckets.Get
-import Network.Google.Resource.Logging.BillingAccounts.Buckets.Views.Get
-import Network.Google.Resource.Logging.BillingAccounts.Exclusions.Create
-import Network.Google.Resource.Logging.BillingAccounts.Exclusions.Delete
-import Network.Google.Resource.Logging.BillingAccounts.Exclusions.Get
-import Network.Google.Resource.Logging.BillingAccounts.Exclusions.List
-import Network.Google.Resource.Logging.BillingAccounts.Exclusions.Patch
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Create
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Delete
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.List
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Patch
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Undelete
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.Create
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.Delete
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.List
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Buckets.Views.Patch
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Get
-import Network.Google.Resource.Logging.BillingAccounts.Locations.List
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Operations.Cancel
-import Network.Google.Resource.Logging.BillingAccounts.Locations.Operations.List
-import Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
-import Network.Google.Resource.Logging.BillingAccounts.Logs.List
-import Network.Google.Resource.Logging.BillingAccounts.Operations.Get
-import Network.Google.Resource.Logging.BillingAccounts.Sinks.Create
-import Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
-import Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
-import Network.Google.Resource.Logging.BillingAccounts.Sinks.List
-import Network.Google.Resource.Logging.BillingAccounts.Sinks.Patch
-import Network.Google.Resource.Logging.BillingAccounts.Sinks.Update
-import Network.Google.Resource.Logging.Entries.Copy
-import Network.Google.Resource.Logging.Entries.List
-import Network.Google.Resource.Logging.Entries.Tail
-import Network.Google.Resource.Logging.Entries.Write
-import Network.Google.Resource.Logging.Exclusions.Create
-import Network.Google.Resource.Logging.Exclusions.Delete
-import Network.Google.Resource.Logging.Exclusions.Get
-import Network.Google.Resource.Logging.Exclusions.List
-import Network.Google.Resource.Logging.Exclusions.Patch
-import Network.Google.Resource.Logging.Folders.Exclusions.Create
-import Network.Google.Resource.Logging.Folders.Exclusions.Delete
-import Network.Google.Resource.Logging.Folders.Exclusions.Get
-import Network.Google.Resource.Logging.Folders.Exclusions.List
-import Network.Google.Resource.Logging.Folders.Exclusions.Patch
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Create
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Delete
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Get
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.List
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Patch
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Undelete
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Create
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Delete
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Get
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.List
-import Network.Google.Resource.Logging.Folders.Locations.Buckets.Views.Patch
-import Network.Google.Resource.Logging.Folders.Locations.Get
-import Network.Google.Resource.Logging.Folders.Locations.List
-import Network.Google.Resource.Logging.Folders.Locations.Operations.Cancel
-import Network.Google.Resource.Logging.Folders.Locations.Operations.Get
-import Network.Google.Resource.Logging.Folders.Locations.Operations.List
-import Network.Google.Resource.Logging.Folders.Logs.Delete
-import Network.Google.Resource.Logging.Folders.Logs.List
-import Network.Google.Resource.Logging.Folders.Sinks.Create
-import Network.Google.Resource.Logging.Folders.Sinks.Delete
-import Network.Google.Resource.Logging.Folders.Sinks.Get
-import Network.Google.Resource.Logging.Folders.Sinks.List
-import Network.Google.Resource.Logging.Folders.Sinks.Patch
-import Network.Google.Resource.Logging.Folders.Sinks.Update
-import Network.Google.Resource.Logging.GetCmekSettings
-import Network.Google.Resource.Logging.Locations.Buckets.Create
-import Network.Google.Resource.Logging.Locations.Buckets.Delete
-import Network.Google.Resource.Logging.Locations.Buckets.Get
-import Network.Google.Resource.Logging.Locations.Buckets.List
-import Network.Google.Resource.Logging.Locations.Buckets.Patch
-import Network.Google.Resource.Logging.Locations.Buckets.Undelete
-import Network.Google.Resource.Logging.Locations.Buckets.Views.Create
-import Network.Google.Resource.Logging.Locations.Buckets.Views.Delete
-import Network.Google.Resource.Logging.Locations.Buckets.Views.Get
-import Network.Google.Resource.Logging.Locations.Buckets.Views.List
-import Network.Google.Resource.Logging.Locations.Buckets.Views.Patch
-import Network.Google.Resource.Logging.Locations.Get
-import Network.Google.Resource.Logging.Locations.List
-import Network.Google.Resource.Logging.Locations.Operations.Cancel
-import Network.Google.Resource.Logging.Locations.Operations.Get
-import Network.Google.Resource.Logging.Locations.Operations.List
-import Network.Google.Resource.Logging.Logs.Delete
-import Network.Google.Resource.Logging.Logs.List
-import Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
-import Network.Google.Resource.Logging.Organizations.Exclusions.Create
-import Network.Google.Resource.Logging.Organizations.Exclusions.Delete
-import Network.Google.Resource.Logging.Organizations.Exclusions.Get
-import Network.Google.Resource.Logging.Organizations.Exclusions.List
-import Network.Google.Resource.Logging.Organizations.Exclusions.Patch
-import Network.Google.Resource.Logging.Organizations.GetCmekSettings
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Create
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Delete
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Get
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.List
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Patch
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Undelete
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Create
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Delete
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Get
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.List
-import Network.Google.Resource.Logging.Organizations.Locations.Buckets.Views.Patch
-import Network.Google.Resource.Logging.Organizations.Locations.Get
-import Network.Google.Resource.Logging.Organizations.Locations.List
-import Network.Google.Resource.Logging.Organizations.Locations.Operations.Cancel
-import Network.Google.Resource.Logging.Organizations.Locations.Operations.Get
-import Network.Google.Resource.Logging.Organizations.Locations.Operations.List
-import Network.Google.Resource.Logging.Organizations.Logs.Delete
-import Network.Google.Resource.Logging.Organizations.Logs.List
-import Network.Google.Resource.Logging.Organizations.Sinks.Create
-import Network.Google.Resource.Logging.Organizations.Sinks.Delete
-import Network.Google.Resource.Logging.Organizations.Sinks.Get
-import Network.Google.Resource.Logging.Organizations.Sinks.List
-import Network.Google.Resource.Logging.Organizations.Sinks.Patch
-import Network.Google.Resource.Logging.Organizations.Sinks.Update
-import Network.Google.Resource.Logging.Organizations.UpdateCmekSettings
-import Network.Google.Resource.Logging.Projects.Exclusions.Create
-import Network.Google.Resource.Logging.Projects.Exclusions.Delete
-import Network.Google.Resource.Logging.Projects.Exclusions.Get
-import Network.Google.Resource.Logging.Projects.Exclusions.List
-import Network.Google.Resource.Logging.Projects.Exclusions.Patch
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Create
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Delete
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Get
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.List
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Patch
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Undelete
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Create
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Delete
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Get
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.List
-import Network.Google.Resource.Logging.Projects.Locations.Buckets.Views.Patch
-import Network.Google.Resource.Logging.Projects.Locations.Get
-import Network.Google.Resource.Logging.Projects.Locations.List
-import Network.Google.Resource.Logging.Projects.Locations.Operations.Cancel
-import Network.Google.Resource.Logging.Projects.Locations.Operations.Get
-import Network.Google.Resource.Logging.Projects.Locations.Operations.List
-import Network.Google.Resource.Logging.Projects.Logs.Delete
-import Network.Google.Resource.Logging.Projects.Logs.List
-import Network.Google.Resource.Logging.Projects.Metrics.Create
-import Network.Google.Resource.Logging.Projects.Metrics.Delete
-import Network.Google.Resource.Logging.Projects.Metrics.Get
-import Network.Google.Resource.Logging.Projects.Metrics.List
-import Network.Google.Resource.Logging.Projects.Metrics.Update
-import Network.Google.Resource.Logging.Projects.Sinks.Create
-import Network.Google.Resource.Logging.Projects.Sinks.Delete
-import Network.Google.Resource.Logging.Projects.Sinks.Get
-import Network.Google.Resource.Logging.Projects.Sinks.List
-import Network.Google.Resource.Logging.Projects.Sinks.Patch
-import Network.Google.Resource.Logging.Projects.Sinks.Update
-import Network.Google.Resource.Logging.Sinks.Create
-import Network.Google.Resource.Logging.Sinks.Delete
-import Network.Google.Resource.Logging.Sinks.Get
-import Network.Google.Resource.Logging.Sinks.List
-import Network.Google.Resource.Logging.Sinks.Update
-import Network.Google.Resource.Logging.UpdateCmekSettings
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Logging API service.
-type LoggingAPI =
-     SinksListResource :<|> SinksGetResource :<|>
-       SinksCreateResource
-       :<|> SinksDeleteResource
-       :<|> SinksUpdateResource
-       :<|> EntriesListResource
-       :<|> EntriesWriteResource
-       :<|> EntriesCopyResource
-       :<|> EntriesTailResource
-       :<|> FoldersSinksListResource
-       :<|> FoldersSinksPatchResource
-       :<|> FoldersSinksGetResource
-       :<|> FoldersSinksCreateResource
-       :<|> FoldersSinksDeleteResource
-       :<|> FoldersSinksUpdateResource
-       :<|> FoldersExclusionsListResource
-       :<|> FoldersExclusionsPatchResource
-       :<|> FoldersExclusionsGetResource
-       :<|> FoldersExclusionsCreateResource
-       :<|> FoldersExclusionsDeleteResource
-       :<|> FoldersLogsListResource
-       :<|> FoldersLogsDeleteResource
-       :<|> FoldersLocationsBucketsViewsListResource
-       :<|> FoldersLocationsBucketsViewsPatchResource
-       :<|> FoldersLocationsBucketsViewsGetResource
-       :<|> FoldersLocationsBucketsViewsCreateResource
-       :<|> FoldersLocationsBucketsViewsDeleteResource
-       :<|> FoldersLocationsBucketsListResource
-       :<|> FoldersLocationsBucketsUndeleteResource
-       :<|> FoldersLocationsBucketsPatchResource
-       :<|> FoldersLocationsBucketsGetResource
-       :<|> FoldersLocationsBucketsCreateResource
-       :<|> FoldersLocationsBucketsDeleteResource
-       :<|> FoldersLocationsOperationsListResource
-       :<|> FoldersLocationsOperationsGetResource
-       :<|> FoldersLocationsOperationsCancelResource
-       :<|> FoldersLocationsListResource
-       :<|> FoldersLocationsGetResource
-       :<|> UpdateCmekSettingsResource
-       :<|> GetCmekSettingsResource
-       :<|> MonitoredResourceDescriptorsListResource
-       :<|> ExclusionsListResource
-       :<|> ExclusionsPatchResource
-       :<|> ExclusionsGetResource
-       :<|> ExclusionsCreateResource
-       :<|> ExclusionsDeleteResource
-       :<|> LogsListResource
-       :<|> LogsDeleteResource
-       :<|> OrganizationsSinksListResource
-       :<|> OrganizationsSinksPatchResource
-       :<|> OrganizationsSinksGetResource
-       :<|> OrganizationsSinksCreateResource
-       :<|> OrganizationsSinksDeleteResource
-       :<|> OrganizationsSinksUpdateResource
-       :<|> OrganizationsExclusionsListResource
-       :<|> OrganizationsExclusionsPatchResource
-       :<|> OrganizationsExclusionsGetResource
-       :<|> OrganizationsExclusionsCreateResource
-       :<|> OrganizationsExclusionsDeleteResource
-       :<|> OrganizationsLogsListResource
-       :<|> OrganizationsLogsDeleteResource
-       :<|> OrganizationsLocationsBucketsViewsListResource
-       :<|> OrganizationsLocationsBucketsViewsPatchResource
-       :<|> OrganizationsLocationsBucketsViewsGetResource
-       :<|> OrganizationsLocationsBucketsViewsCreateResource
-       :<|> OrganizationsLocationsBucketsViewsDeleteResource
-       :<|> OrganizationsLocationsBucketsListResource
-       :<|> OrganizationsLocationsBucketsUndeleteResource
-       :<|> OrganizationsLocationsBucketsPatchResource
-       :<|> OrganizationsLocationsBucketsGetResource
-       :<|> OrganizationsLocationsBucketsCreateResource
-       :<|> OrganizationsLocationsBucketsDeleteResource
-       :<|> OrganizationsLocationsOperationsListResource
-       :<|> OrganizationsLocationsOperationsGetResource
-       :<|> OrganizationsLocationsOperationsCancelResource
-       :<|> OrganizationsLocationsListResource
-       :<|> OrganizationsLocationsGetResource
-       :<|> OrganizationsUpdateCmekSettingsResource
-       :<|> OrganizationsGetCmekSettingsResource
-       :<|> ProjectsSinksListResource
-       :<|> ProjectsSinksPatchResource
-       :<|> ProjectsSinksGetResource
-       :<|> ProjectsSinksCreateResource
-       :<|> ProjectsSinksDeleteResource
-       :<|> ProjectsSinksUpdateResource
-       :<|> ProjectsMetricsListResource
-       :<|> ProjectsMetricsGetResource
-       :<|> ProjectsMetricsCreateResource
-       :<|> ProjectsMetricsDeleteResource
-       :<|> ProjectsMetricsUpdateResource
-       :<|> ProjectsExclusionsListResource
-       :<|> ProjectsExclusionsPatchResource
-       :<|> ProjectsExclusionsGetResource
-       :<|> ProjectsExclusionsCreateResource
-       :<|> ProjectsExclusionsDeleteResource
-       :<|> ProjectsLogsListResource
-       :<|> ProjectsLogsDeleteResource
-       :<|> ProjectsLocationsBucketsViewsListResource
-       :<|> ProjectsLocationsBucketsViewsPatchResource
-       :<|> ProjectsLocationsBucketsViewsGetResource
-       :<|> ProjectsLocationsBucketsViewsCreateResource
-       :<|> ProjectsLocationsBucketsViewsDeleteResource
-       :<|> ProjectsLocationsBucketsListResource
-       :<|> ProjectsLocationsBucketsUndeleteResource
-       :<|> ProjectsLocationsBucketsPatchResource
-       :<|> ProjectsLocationsBucketsGetResource
-       :<|> ProjectsLocationsBucketsCreateResource
-       :<|> ProjectsLocationsBucketsDeleteResource
-       :<|> ProjectsLocationsOperationsListResource
-       :<|> ProjectsLocationsOperationsGetResource
-       :<|> ProjectsLocationsOperationsCancelResource
-       :<|> ProjectsLocationsListResource
-       :<|> ProjectsLocationsGetResource
-       :<|> LocationsBucketsViewsListResource
-       :<|> LocationsBucketsViewsPatchResource
-       :<|> LocationsBucketsViewsGetResource
-       :<|> LocationsBucketsViewsCreateResource
-       :<|> LocationsBucketsViewsDeleteResource
-       :<|> LocationsBucketsListResource
-       :<|> LocationsBucketsUndeleteResource
-       :<|> LocationsBucketsPatchResource
-       :<|> LocationsBucketsGetResource
-       :<|> LocationsBucketsCreateResource
-       :<|> LocationsBucketsDeleteResource
-       :<|> LocationsOperationsListResource
-       :<|> LocationsOperationsGetResource
-       :<|> LocationsOperationsCancelResource
-       :<|> LocationsListResource
-       :<|> LocationsGetResource
-       :<|> BillingAccountsSinksListResource
-       :<|> BillingAccountsSinksPatchResource
-       :<|> BillingAccountsSinksGetResource
-       :<|> BillingAccountsSinksCreateResource
-       :<|> BillingAccountsSinksDeleteResource
-       :<|> BillingAccountsSinksUpdateResource
-       :<|> BillingAccountsBucketsViewsGetResource
-       :<|> BillingAccountsBucketsGetResource
-       :<|> BillingAccountsExclusionsListResource
-       :<|> BillingAccountsExclusionsPatchResource
-       :<|> BillingAccountsExclusionsGetResource
-       :<|> BillingAccountsExclusionsCreateResource
-       :<|> BillingAccountsExclusionsDeleteResource
-       :<|> BillingAccountsLogsListResource
-       :<|> BillingAccountsLogsDeleteResource
-       :<|> BillingAccountsOperationsGetResource
-       :<|> BillingAccountsLocationsBucketsViewsListResource
-       :<|>
-       BillingAccountsLocationsBucketsViewsPatchResource
-       :<|>
-       BillingAccountsLocationsBucketsViewsCreateResource
-       :<|>
-       BillingAccountsLocationsBucketsViewsDeleteResource
-       :<|> BillingAccountsLocationsBucketsListResource
-       :<|> BillingAccountsLocationsBucketsUndeleteResource
-       :<|> BillingAccountsLocationsBucketsPatchResource
-       :<|> BillingAccountsLocationsBucketsCreateResource
-       :<|> BillingAccountsLocationsBucketsDeleteResource
-       :<|> BillingAccountsLocationsOperationsListResource
-       :<|> BillingAccountsLocationsOperationsCancelResource
-       :<|> BillingAccountsLocationsListResource
-       :<|> BillingAccountsLocationsGetResource
+import Network.Google.Logging.UpdateCmekSettings
+import Network.Google.Logging.UpdateSettings

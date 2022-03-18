@@ -1,593 +1,374 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Logging.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Logging.Types
-    (
-    -- * Service Configuration
-      loggingService
+  ( -- * Configuration
+    loggingService,
 
     -- * OAuth Scopes
-    , loggingAdminScope
-    , loggingReadScope
-    , loggingWriteScope
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-
-    -- * MetricDescriptorValueType
-    , MetricDescriptorValueType (..)
-
-    -- * MonitoredResourceDescriptor
-    , MonitoredResourceDescriptor
-    , monitoredResourceDescriptor
-    , mrdName
-    , mrdDisplayName
-    , mrdLabels
-    , mrdType
-    , mrdDescription
-    , mrdLaunchStage
-
-    -- * ListBucketsResponse
-    , ListBucketsResponse
-    , listBucketsResponse
-    , lbrNextPageToken
-    , lbrBuckets
-
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- * ListLogEntriesResponse
-    , ListLogEntriesResponse
-    , listLogEntriesResponse
-    , llerNextPageToken
-    , llerEntries
-
-    -- * MetricDescriptor
-    , MetricDescriptor
-    , metricDescriptor
-    , mdMonitoredResourceTypes
-    , mdMetricKind
-    , mdName
-    , mdMetadata
-    , mdDisplayName
-    , mdLabels
-    , mdType
-    , mdValueType
-    , mdDescription
-    , mdUnit
-    , mdLaunchStage
-
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- * TailLogEntriesRequest
-    , TailLogEntriesRequest
-    , tailLogEntriesRequest
-    , tlerBufferWindow
-    , tlerFilter
-    , tlerResourceNames
-
-    -- * MonitoredResourceLabels
-    , MonitoredResourceLabels
-    , monitoredResourceLabels
-    , mrlAddtional
-
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- * LogMetricVersion
-    , LogMetricVersion (..)
-
-    -- * MonitoredResourceMetadata
-    , MonitoredResourceMetadata
-    , monitoredResourceMetadata
-    , mrmUserLabels
-    , mrmSystemLabels
-
-    -- * ListLogMetricsResponse
-    , ListLogMetricsResponse
-    , listLogMetricsResponse
-    , llmrMetrics
-    , llmrNextPageToken
-
-    -- * WriteLogEntriesRequest
-    , WriteLogEntriesRequest
-    , writeLogEntriesRequest
-    , wlerEntries
-    , wlerPartialSuccess
-    , wlerResource
-    , wlerLabels
-    , wlerLogName
-    , wlerDryRun
-
-    -- * CopyLogEntriesRequest
-    , CopyLogEntriesRequest
-    , copyLogEntriesRequest
-    , clerDestination
-    , clerName
-    , clerFilter
-
-    -- * UndeleteBucketRequest
-    , UndeleteBucketRequest
-    , undeleteBucketRequest
-
-    -- * CmekSettings
-    , CmekSettings
-    , cmekSettings
-    , csServiceAccountId
-    , csName
-    , csKmsKeyName
-
-    -- * LogMetricLabelExtractors
-    , LogMetricLabelExtractors
-    , logMetricLabelExtractors
-    , lmleAddtional
-
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- * LogSinkOutputVersionFormat
-    , LogSinkOutputVersionFormat (..)
-
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * LogEntryLabels
-    , LogEntryLabels
-    , logEntryLabels
-    , lelAddtional
-
-    -- * ListSinksResponse
-    , ListSinksResponse
-    , listSinksResponse
-    , lsrSinks
-    , lsrNextPageToken
-
-    -- * RequestLog
-    , RequestLog
-    , requestLog
-    , rlTraceId
-    , rlInstanceId
-    , rlStatus
-    , rlRequestId
-    , rlInstanceIndex
-    , rlModuleId
-    , rlVersionId
-    , rlHTTPVersion
-    , rlTaskName
-    , rlPendingTime
-    , rlWasLoadingRequest
-    , rlFirst
-    , rlStartTime
-    , rlLatency
-    , rlURLMapEntry
-    , rlCost
-    , rlReferrer
-    , rlLine
-    , rlIP
-    , rlAppId
-    , rlMethod
-    , rlResource
-    , rlEndTime
-    , rlFinished
-    , rlMegaCycles
-    , rlUserAgent
-    , rlNickname
-    , rlHost
-    , rlTraceSampled
-    , rlTaskQueueName
-    , rlResponseSize
-    , rlSourceReference
-    , rlAppEngineRelease
-
-    -- * LogEntryProtoPayload
-    , LogEntryProtoPayload
-    , logEntryProtoPayload
-    , leppAddtional
-
-    -- * LogEntrySourceLocation
-    , LogEntrySourceLocation
-    , logEntrySourceLocation
-    , leslFunction
-    , leslLine
-    , leslFile
-
-    -- * LogExclusion
-    , LogExclusion
-    , logExclusion
-    , leDisabled
-    , leUpdateTime
-    , leName
-    , leFilter
-    , leDescription
-    , leCreateTime
-
-    -- * WriteLogEntriesResponse
-    , WriteLogEntriesResponse
-    , writeLogEntriesResponse
-
-    -- * CopyLogEntriesResponse
-    , CopyLogEntriesResponse
-    , copyLogEntriesResponse
-    , clerLogEntriesCopiedCount
-
-    -- * MetricDescriptorMetadataLaunchStage
-    , MetricDescriptorMetadataLaunchStage (..)
-
-    -- * LogSink
-    , LogSink
-    , logSink
-    , lsDestination
-    , lsIncludeChildren
-    , lsDisabled
-    , lsOutputVersionFormat
-    , lsBigQueryOptions
-    , lsWriterIdentity
-    , lsUpdateTime
-    , lsName
-    , lsExclusions
-    , lsFilter
-    , lsDescription
-    , lsCreateTime
-
-    -- * LogBucketLifecycleState
-    , LogBucketLifecycleState (..)
-
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- * SuppressionInfoReason
-    , SuppressionInfoReason (..)
-
-    -- * MonitoredResourceMetadataUserLabels
-    , MonitoredResourceMetadataUserLabels
-    , monitoredResourceMetadataUserLabels
-    , mrmulAddtional
-
-    -- * ListExclusionsResponse
-    , ListExclusionsResponse
-    , listExclusionsResponse
-    , lerNextPageToken
-    , lerExclusions
-
-    -- * ListLogsResponse
-    , ListLogsResponse
-    , listLogsResponse
-    , lNextPageToken
-    , lLogNames
-
-    -- * CopyLogEntriesMetadata
-    , CopyLogEntriesMetadata
-    , copyLogEntriesMetadata
-    , clemState
-    , clemCancellationRequested
-    , clemProgress
-    , clemStartTime
-    , clemWriterIdentity
-    , clemEndTime
-    , clemRequest
-
-    -- * ListMonitoredResourceDescriptorsResponse
-    , ListMonitoredResourceDescriptorsResponse
-    , listMonitoredResourceDescriptorsResponse
-    , lmrdrNextPageToken
-    , lmrdrResourceDescriptors
-
-    -- * BigQueryOptions
-    , BigQueryOptions
-    , bigQueryOptions
-    , bqoUsePartitionedTables
-    , bqoUsesTimestampColumnPartitioning
-
-    -- * LabelDescriptorValueType
-    , LabelDescriptorValueType (..)
-
-    -- * Explicit
-    , Explicit
-    , explicit
-    , eBounds
-
-    -- * HTTPRequest
-    , HTTPRequest
-    , hTTPRequest
-    , httprStatus
-    , httprRequestURL
-    , httprCacheFillBytes
-    , httprRemoteIP
-    , httprLatency
-    , httprProtocol
-    , httprServerIP
-    , httprRequestSize
-    , httprCacheValidatedWithOriginServer
-    , httprUserAgent
-    , httprCacheLookup
-    , httprResponseSize
-    , httprRequestMethod
-    , httprCacheHit
-    , httprReferer
-
-    -- * Exponential
-    , Exponential
-    , exponential
-    , eGrowthFactor
-    , eScale
-    , eNumFiniteBuckets
-
-    -- * WriteLogEntriesRequestLabels
-    , WriteLogEntriesRequestLabels
-    , writeLogEntriesRequestLabels
-    , wlerlAddtional
-
-    -- * SuppressionInfo
-    , SuppressionInfo
-    , suppressionInfo
-    , siReason
-    , siSuppressedCount
-
-    -- * ListViewsResponse
-    , ListViewsResponse
-    , listViewsResponse
-    , lvrNextPageToken
-    , lvrViews
-
-    -- * MonitoredResource
-    , MonitoredResource
-    , monitoredResource
-    , mrLabels
-    , mrType
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * LogBucket
-    , LogBucket
-    , logBucket
-    , lbRestrictedFields
-    , lbLocked
-    , lbRetentionDays
-    , lbUpdateTime
-    , lbName
-    , lbDescription
-    , lbLifecycleState
-    , lbCreateTime
-
-    -- * LogLine
-    , LogLine
-    , logLine
-    , llTime
-    , llSeverity
-    , llLogMessage
-    , llSourceLocation
-
-    -- * MetricDescriptorMetadata
-    , MetricDescriptorMetadata
-    , metricDescriptorMetadata
-    , mdmSamplePeriod
-    , mdmIngestDelay
-    , mdmLaunchStage
-
-    -- * MonitoredResourceMetadataSystemLabels
-    , MonitoredResourceMetadataSystemLabels
-    , monitoredResourceMetadataSystemLabels
-    , mrmslAddtional
-
-    -- * LabelDescriptor
-    , LabelDescriptor
-    , labelDescriptor
-    , ldKey
-    , ldValueType
-    , ldDescription
-
-    -- * Linear
-    , Linear
-    , linear
-    , lOffSet
-    , lWidth
-    , lNumFiniteBuckets
-
-    -- * ListLogEntriesRequest
-    , ListLogEntriesRequest
-    , listLogEntriesRequest
-    , llerOrderBy
-    , llerProjectIds
-    , llerFilter
-    , llerPageToken
-    , llerPageSize
-    , llerResourceNames
-
-    -- * MonitoredResourceDescriptorLaunchStage
-    , MonitoredResourceDescriptorLaunchStage (..)
-
-    -- * TailLogEntriesResponse
-    , TailLogEntriesResponse
-    , tailLogEntriesResponse
-    , tlerEntries
-    , tlerSuppressionInfo
-
-    -- * LogEntryOperation
-    , LogEntryOperation
-    , logEntryOperation
-    , leoFirst
-    , leoProducer
-    , leoLast
-    , leoId
-
-    -- * LogMetric
-    , LogMetric
-    , logMetric
-    , lmMetricDescriptor
-    , lmDisabled
-    , lmUpdateTime
-    , lmName
-    , lmVersion
-    , lmLabelExtractors
-    , lmFilter
-    , lmValueExtractor
-    , lmBucketOptions
-    , lmDescription
-    , lmCreateTime
-
-    -- * LogEntry
-    , LogEntry
-    , logEntry
-    , leOperation
-    , leSeverity
-    , leTextPayload
-    , leJSONPayload
-    , leHTTPRequest
-    , leResource
-    , leInsertId
-    , leMetadata
-    , leReceiveTimestamp
-    , leLabels
-    , leProtoPayload
-    , leSourceLocation
-    , leTraceSampled
-    , leLogName
-    , leTimestamp
-    , leTrace
-    , leSpanId
-
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- * SourceLocation
-    , SourceLocation
-    , sourceLocation
-    , slLine
-    , slFunctionName
-    , slFile
-
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
-
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- * MetricDescriptorMetricKind
-    , MetricDescriptorMetricKind (..)
-
-    -- * LogEntrySeverity
-    , LogEntrySeverity (..)
-
-    -- * BucketOptions
-    , BucketOptions
-    , bucketOptions
-    , boExponentialBuckets
-    , boLinearBuckets
-    , boExplicitBuckets
-
-    -- * SourceReference
-    , SourceReference
-    , sourceReference
-    , srRepository
-    , srRevisionId
-
-    -- * LogEntryJSONPayload
-    , LogEntryJSONPayload
-    , logEntryJSONPayload
-    , lejpAddtional
-
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- * MetricDescriptorLaunchStage
-    , MetricDescriptorLaunchStage (..)
-
-    -- * LogView
-    , LogView
-    , logView
-    , lvUpdateTime
-    , lvName
-    , lvFilter
-    , lvDescription
-    , lvCreateTime
-
-    -- * LogLineSeverity
-    , LogLineSeverity (..)
-
-    -- * CopyLogEntriesMetadataState
-    , CopyLogEntriesMetadataState (..)
-    ) where
-
-import Network.Google.Logging.Types.Product
-import Network.Google.Logging.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v2' of the Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
-loggingService :: ServiceConfig
-loggingService
-  = defaultService (ServiceId "logging:v2")
-      "logging.googleapis.com"
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    loggingAdminScope,
+    loggingReadScope,
+    loggingWriteScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** BigQueryOptions
+    BigQueryOptions (..),
+    newBigQueryOptions,
+
+    -- ** BucketOptions
+    BucketOptions (..),
+    newBucketOptions,
+
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** CmekSettings
+    CmekSettings (..),
+    newCmekSettings,
+
+    -- ** CopyLogEntriesMetadata
+    CopyLogEntriesMetadata (..),
+    newCopyLogEntriesMetadata,
+
+    -- ** CopyLogEntriesMetadata_State
+    CopyLogEntriesMetadata_State (..),
+
+    -- ** CopyLogEntriesRequest
+    CopyLogEntriesRequest (..),
+    newCopyLogEntriesRequest,
+
+    -- ** CopyLogEntriesResponse
+    CopyLogEntriesResponse (..),
+    newCopyLogEntriesResponse,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Explicit
+    Explicit (..),
+    newExplicit,
+
+    -- ** Exponential
+    Exponential (..),
+    newExponential,
+
+    -- ** HttpRequest
+    HttpRequest (..),
+    newHttpRequest,
+
+    -- ** LabelDescriptor
+    LabelDescriptor (..),
+    newLabelDescriptor,
+
+    -- ** LabelDescriptor_ValueType
+    LabelDescriptor_ValueType (..),
+
+    -- ** Linear
+    Linear (..),
+    newLinear,
+
+    -- ** ListBucketsResponse
+    ListBucketsResponse (..),
+    newListBucketsResponse,
+
+    -- ** ListExclusionsResponse
+    ListExclusionsResponse (..),
+    newListExclusionsResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** ListLogEntriesRequest
+    ListLogEntriesRequest (..),
+    newListLogEntriesRequest,
+
+    -- ** ListLogEntriesResponse
+    ListLogEntriesResponse (..),
+    newListLogEntriesResponse,
+
+    -- ** ListLogMetricsResponse
+    ListLogMetricsResponse (..),
+    newListLogMetricsResponse,
+
+    -- ** ListLogsResponse
+    ListLogsResponse (..),
+    newListLogsResponse,
+
+    -- ** ListMonitoredResourceDescriptorsResponse
+    ListMonitoredResourceDescriptorsResponse (..),
+    newListMonitoredResourceDescriptorsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListSinksResponse
+    ListSinksResponse (..),
+    newListSinksResponse,
+
+    -- ** ListViewsResponse
+    ListViewsResponse (..),
+    newListViewsResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** LogBucket
+    LogBucket (..),
+    newLogBucket,
+
+    -- ** LogBucket_LifecycleState
+    LogBucket_LifecycleState (..),
+
+    -- ** LogEntry
+    LogEntry (..),
+    newLogEntry,
+
+    -- ** LogEntry_JsonPayload
+    LogEntry_JsonPayload (..),
+    newLogEntry_JsonPayload,
+
+    -- ** LogEntry_Labels
+    LogEntry_Labels (..),
+    newLogEntry_Labels,
+
+    -- ** LogEntry_ProtoPayload
+    LogEntry_ProtoPayload (..),
+    newLogEntry_ProtoPayload,
+
+    -- ** LogEntry_Severity
+    LogEntry_Severity (..),
+
+    -- ** LogEntryOperation
+    LogEntryOperation (..),
+    newLogEntryOperation,
+
+    -- ** LogEntrySourceLocation
+    LogEntrySourceLocation (..),
+    newLogEntrySourceLocation,
+
+    -- ** LogExclusion
+    LogExclusion (..),
+    newLogExclusion,
+
+    -- ** LogLine
+    LogLine (..),
+    newLogLine,
+
+    -- ** LogLine_Severity
+    LogLine_Severity (..),
+
+    -- ** LogMetric
+    LogMetric (..),
+    newLogMetric,
+
+    -- ** LogMetric_LabelExtractors
+    LogMetric_LabelExtractors (..),
+    newLogMetric_LabelExtractors,
+
+    -- ** LogMetric_Version
+    LogMetric_Version (..),
+
+    -- ** LogSink
+    LogSink (..),
+    newLogSink,
+
+    -- ** LogSink_OutputVersionFormat
+    LogSink_OutputVersionFormat (..),
+
+    -- ** LogSplit
+    LogSplit (..),
+    newLogSplit,
+
+    -- ** LogView
+    LogView (..),
+    newLogView,
+
+    -- ** MetricDescriptor
+    MetricDescriptor (..),
+    newMetricDescriptor,
+
+    -- ** MetricDescriptor_LaunchStage
+    MetricDescriptor_LaunchStage (..),
+
+    -- ** MetricDescriptor_MetricKind
+    MetricDescriptor_MetricKind (..),
+
+    -- ** MetricDescriptor_ValueType
+    MetricDescriptor_ValueType (..),
+
+    -- ** MetricDescriptorMetadata
+    MetricDescriptorMetadata (..),
+    newMetricDescriptorMetadata,
+
+    -- ** MetricDescriptorMetadata_LaunchStage
+    MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MonitoredResource
+    MonitoredResource (..),
+    newMonitoredResource,
+
+    -- ** MonitoredResource_Labels
+    MonitoredResource_Labels (..),
+    newMonitoredResource_Labels,
+
+    -- ** MonitoredResourceDescriptor
+    MonitoredResourceDescriptor (..),
+    newMonitoredResourceDescriptor,
+
+    -- ** MonitoredResourceDescriptor_LaunchStage
+    MonitoredResourceDescriptor_LaunchStage (..),
+
+    -- ** MonitoredResourceMetadata
+    MonitoredResourceMetadata (..),
+    newMonitoredResourceMetadata,
+
+    -- ** MonitoredResourceMetadata_SystemLabels
+    MonitoredResourceMetadata_SystemLabels (..),
+    newMonitoredResourceMetadata_SystemLabels,
+
+    -- ** MonitoredResourceMetadata_UserLabels
+    MonitoredResourceMetadata_UserLabels (..),
+    newMonitoredResourceMetadata_UserLabels,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** RequestLog
+    RequestLog (..),
+    newRequestLog,
+
+    -- ** Settings
+    Settings (..),
+    newSettings,
+
+    -- ** SourceLocation
+    SourceLocation (..),
+    newSourceLocation,
+
+    -- ** SourceReference
+    SourceReference (..),
+    newSourceReference,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** SuppressionInfo
+    SuppressionInfo (..),
+    newSuppressionInfo,
+
+    -- ** SuppressionInfo_Reason
+    SuppressionInfo_Reason (..),
+
+    -- ** TailLogEntriesRequest
+    TailLogEntriesRequest (..),
+    newTailLogEntriesRequest,
+
+    -- ** TailLogEntriesResponse
+    TailLogEntriesResponse (..),
+    newTailLogEntriesResponse,
+
+    -- ** UndeleteBucketRequest
+    UndeleteBucketRequest (..),
+    newUndeleteBucketRequest,
+
+    -- ** WriteLogEntriesRequest
+    WriteLogEntriesRequest (..),
+    newWriteLogEntriesRequest,
+
+    -- ** WriteLogEntriesRequest_Labels
+    WriteLogEntriesRequest_Labels (..),
+    newWriteLogEntriesRequest_Labels,
+
+    -- ** WriteLogEntriesResponse
+    WriteLogEntriesResponse (..),
+    newWriteLogEntriesResponse,
+  )
+where
+
+import Network.Google.Logging.Internal.Product
+import Network.Google.Logging.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
+loggingService :: Core.ServiceConfig
+loggingService =
+  Core.defaultService
+    (Core.ServiceId "logging:v2")
+    "logging.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View your data across Google Cloud services and see the email address of your Google Account
+cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Core.Proxy
 
 -- | Administrate log data for your projects
-loggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
-loggingAdminScope = Proxy
+loggingAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/logging.admin"]
+loggingAdminScope = Core.Proxy
 
 -- | View log data for your projects
-loggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
-loggingReadScope = Proxy
+loggingReadScope :: Core.Proxy '["https://www.googleapis.com/auth/logging.read"]
+loggingReadScope = Core.Proxy
 
 -- | Submit log data for your projects
-loggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
-loggingWriteScope = Proxy
-
--- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+loggingWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/logging.write"]
+loggingWriteScope = Core.Proxy
