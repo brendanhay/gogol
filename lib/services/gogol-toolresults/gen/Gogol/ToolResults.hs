@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,139 +36,139 @@
 --
 -- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Tool Results API Reference>
 module Gogol.ToolResults
-  ( -- * Configuration
-    toolResultsService,
+    (
+    -- * Configuration
+      toolResultsService
 
     -- * Resources
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** ANR
-    ANR (..),
-    newANR,
+    , ANR (..)
+    , newANR
 
     -- ** AvailableDeepLinks
-    AvailableDeepLinks (..),
-    newAvailableDeepLinks,
+    , AvailableDeepLinks (..)
+    , newAvailableDeepLinks
 
     -- ** BlankScreen
-    BlankScreen (..),
-    newBlankScreen,
+    , BlankScreen (..)
+    , newBlankScreen
 
     -- ** CrashDialogError
-    CrashDialogError (..),
-    newCrashDialogError,
+    , CrashDialogError (..)
+    , newCrashDialogError
 
     -- ** EncounteredLoginScreen
-    EncounteredLoginScreen (..),
-    newEncounteredLoginScreen,
+    , EncounteredLoginScreen (..)
+    , newEncounteredLoginScreen
 
     -- ** EncounteredNonAndroidUiWidgetScreen
-    EncounteredNonAndroidUiWidgetScreen (..),
-    newEncounteredNonAndroidUiWidgetScreen,
+    , EncounteredNonAndroidUiWidgetScreen (..)
+    , newEncounteredNonAndroidUiWidgetScreen
 
     -- ** FailedToInstall
-    FailedToInstall (..),
-    newFailedToInstall,
+    , FailedToInstall (..)
+    , newFailedToInstall
 
     -- ** FatalException
-    FatalException (..),
-    newFatalException,
+    , FatalException (..)
+    , newFatalException
 
     -- ** InAppPurchasesFound
-    InAppPurchasesFound (..),
-    newInAppPurchasesFound,
+    , InAppPurchasesFound (..)
+    , newInAppPurchasesFound
 
     -- ** InsufficientCoverage
-    InsufficientCoverage (..),
-    newInsufficientCoverage,
+    , InsufficientCoverage (..)
+    , newInsufficientCoverage
 
     -- ** IosAppCrashed
-    IosAppCrashed (..),
-    newIosAppCrashed,
+    , IosAppCrashed (..)
+    , newIosAppCrashed
 
     -- ** LauncherActivityNotFound
-    LauncherActivityNotFound (..),
-    newLauncherActivityNotFound,
+    , LauncherActivityNotFound (..)
+    , newLauncherActivityNotFound
 
     -- ** NativeCrash
-    NativeCrash (..),
-    newNativeCrash,
+    , NativeCrash (..)
+    , newNativeCrash
 
     -- ** NonSdkApi
-    NonSdkApi (..),
-    newNonSdkApi,
+    , NonSdkApi (..)
+    , newNonSdkApi
 
     -- ** NonSdkApi_List
-    NonSdkApi_List (..),
+    , NonSdkApi_List (..)
 
     -- ** NonSdkApiInsight
-    NonSdkApiInsight (..),
-    newNonSdkApiInsight,
+    , NonSdkApiInsight (..)
+    , newNonSdkApiInsight
 
     -- ** NonSdkApiUsageViolation
-    NonSdkApiUsageViolation (..),
-    newNonSdkApiUsageViolation,
+    , NonSdkApiUsageViolation (..)
+    , newNonSdkApiUsageViolation
 
     -- ** NonSdkApiUsageViolationReport
-    NonSdkApiUsageViolationReport (..),
-    newNonSdkApiUsageViolationReport,
+    , NonSdkApiUsageViolationReport (..)
+    , newNonSdkApiUsageViolationReport
 
     -- ** OverlappingUIElements
-    OverlappingUIElements (..),
-    newOverlappingUIElements,
+    , OverlappingUIElements (..)
+    , newOverlappingUIElements
 
     -- ** PendingGoogleUpdateInsight
-    PendingGoogleUpdateInsight (..),
-    newPendingGoogleUpdateInsight,
+    , PendingGoogleUpdateInsight (..)
+    , newPendingGoogleUpdateInsight
 
     -- ** PerformedGoogleLogin
-    PerformedGoogleLogin (..),
-    newPerformedGoogleLogin,
+    , PerformedGoogleLogin (..)
+    , newPerformedGoogleLogin
 
     -- ** PerformedMonkeyActions
-    PerformedMonkeyActions (..),
-    newPerformedMonkeyActions,
+    , PerformedMonkeyActions (..)
+    , newPerformedMonkeyActions
 
     -- ** RoboScriptExecution
-    RoboScriptExecution (..),
-    newRoboScriptExecution,
+    , RoboScriptExecution (..)
+    , newRoboScriptExecution
 
     -- ** StackTrace
-    StackTrace (..),
-    newStackTrace,
+    , StackTrace (..)
+    , newStackTrace
 
     -- ** StartActivityNotFound
-    StartActivityNotFound (..),
-    newStartActivityNotFound,
+    , StartActivityNotFound (..)
+    , newStartActivityNotFound
 
     -- ** UIElementTooDeep
-    UIElementTooDeep (..),
-    newUIElementTooDeep,
+    , UIElementTooDeep (..)
+    , newUIElementTooDeep
 
     -- ** UnspecifiedWarning
-    UnspecifiedWarning (..),
-    newUnspecifiedWarning,
+    , UnspecifiedWarning (..)
+    , newUnspecifiedWarning
 
     -- ** UnusedRoboDirective
-    UnusedRoboDirective (..),
-    newUnusedRoboDirective,
+    , UnusedRoboDirective (..)
+    , newUnusedRoboDirective
 
     -- ** UpgradeInsight
-    UpgradeInsight (..),
-    newUpgradeInsight,
+    , UpgradeInsight (..)
+    , newUpgradeInsight
 
     -- ** UsedRoboDirective
-    UsedRoboDirective (..),
-    newUsedRoboDirective,
+    , UsedRoboDirective (..)
+    , newUsedRoboDirective
 
     -- ** UsedRoboIgnoreDirective
-    UsedRoboIgnoreDirective (..),
-    newUsedRoboIgnoreDirective,
-  )
-where
+    , UsedRoboIgnoreDirective (..)
+    , newUsedRoboIgnoreDirective
+    ) where
 
 import Gogol.ToolResults.Types

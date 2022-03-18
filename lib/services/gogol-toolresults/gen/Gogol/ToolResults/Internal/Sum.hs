@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ToolResults.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * NonSdkApi_List
     NonSdkApi_List
-      ( NonSdkApi_List_None,
+      (
+        NonSdkApi_List_None,
         NonSdkApi_List_White,
         NonSdkApi_List_Black,
         NonSdkApi_List_Grey,
@@ -44,23 +55,22 @@ module Gogol.ToolResults.Internal.Sum
         NonSdkApi_List_GREYMAXQ,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -73,47 +83,46 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Which list this API appears on
-newtype NonSdkApi_List = NonSdkApi_List {fromNonSdkApi_List :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NonSdkApi_List = NonSdkApi_List { fromNonSdkApi_List :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern NonSdkApi_List_None :: NonSdkApi_List
 pattern NonSdkApi_List_None = NonSdkApi_List "NONE"
 
--- |
+-- | 
 pattern NonSdkApi_List_White :: NonSdkApi_List
 pattern NonSdkApi_List_White = NonSdkApi_List "WHITE"
 
--- |
+-- | 
 pattern NonSdkApi_List_Black :: NonSdkApi_List
 pattern NonSdkApi_List_Black = NonSdkApi_List "BLACK"
 
--- |
+-- | 
 pattern NonSdkApi_List_Grey :: NonSdkApi_List
 pattern NonSdkApi_List_Grey = NonSdkApi_List "GREY"
 
--- |
+-- | 
 pattern NonSdkApi_List_GREYMAXO :: NonSdkApi_List
 pattern NonSdkApi_List_GREYMAXO = NonSdkApi_List "GREY_MAX_O"
 
--- |
+-- | 
 pattern NonSdkApi_List_GREYMAXP :: NonSdkApi_List
 pattern NonSdkApi_List_GREYMAXP = NonSdkApi_List "GREY_MAX_P"
 
--- |
+-- | 
 pattern NonSdkApi_List_GREYMAXQ :: NonSdkApi_List
 pattern NonSdkApi_List_GREYMAXQ = NonSdkApi_List "GREY_MAX_Q"
 
@@ -125,5 +134,4 @@ pattern NonSdkApi_List_GREYMAXQ = NonSdkApi_List "GREY_MAX_Q"
   NonSdkApi_List_GREYMAXO,
   NonSdkApi_List_GREYMAXP,
   NonSdkApi_List_GREYMAXQ,
-  NonSdkApi_List
-  #-}
+  NonSdkApi_List #-}
