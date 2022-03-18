@@ -39,22 +39,23 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AppState
-    Network.Google.AppState.States.Clear
-    Network.Google.AppState.States.Delete
-    Network.Google.AppState.States.Get
-    Network.Google.AppState.States.List
-    Network.Google.AppState.States.Update
-    Network.Google.AppState.Types
+    Gogol.AppState
+    Gogol.AppState.States.Clear
+    Gogol.AppState.States.Delete
+    Gogol.AppState.States.Get
+    Gogol.AppState.States.List
+    Gogol.AppState.States.Update
+    Gogol.AppState.Types
 
   other-modules:
-    Network.Google.AppState.Internal.Product
-    Network.Google.AppState.Internal.Sum
+    Gogol.AppState.Internal.Product
+    Gogol.AppState.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

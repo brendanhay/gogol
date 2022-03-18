@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState.Internal.Product
+-- Module      : Gogol.AppState.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppState.Internal.Product
+module Gogol.AppState.Internal.Product
   ( -- * GetResponse
     GetResponse (..),
     newGetResponse,
@@ -44,8 +44,8 @@ module Network.Google.AppState.Internal.Product
   )
 where
 
-import Network.Google.AppState.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AppState.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | This is a JSON template for an app state resource.
 --

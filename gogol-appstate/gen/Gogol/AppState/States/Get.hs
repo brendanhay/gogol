@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState.States.Get
+-- Module      : Gogol.AppState.States.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves the data corresponding to the passed key. If the key does not exist on the server, an HTTP 404 will be returned.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.get@.
-module Network.Google.AppState.States.Get
+module Gogol.AppState.States.Get
   ( -- * Resource
     AppStateStatesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppState.States.Get
   )
 where
 
-import Network.Google.AppState.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppState.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appstate.states.get@ method which the
 -- 'AppStateStatesGet' request conforms to.

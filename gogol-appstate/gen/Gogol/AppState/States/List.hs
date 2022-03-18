@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState.States.List
+-- Module      : Gogol.AppState.States.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists all the states keys, and optionally the state data.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.list@.
-module Network.Google.AppState.States.List
+module Gogol.AppState.States.List
   ( -- * Resource
     AppStateStatesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppState.States.List
   )
 where
 
-import Network.Google.AppState.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppState.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appstate.states.list@ method which the
 -- 'AppStateStatesList' request conforms to.

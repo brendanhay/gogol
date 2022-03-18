@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState.States.Update
+-- Module      : Gogol.AppState.States.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Update the data associated with the input key if and only if the passed version matches the currently stored version. This method is safe in the face of concurrent writes. Maximum per-key size is 128KB.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.update@.
-module Network.Google.AppState.States.Update
+module Gogol.AppState.States.Update
   ( -- * Resource
     AppStateStatesUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppState.States.Update
   )
 where
 
-import Network.Google.AppState.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppState.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appstate.states.update@ method which the
 -- 'AppStateStatesUpdate' request conforms to.
