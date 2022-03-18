@@ -19,65 +19,19 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger
+-- Module      : Gogol.Debugger.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Examines the call stack and variables of a running application without stopping or slowing it down.
---
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference>
-module Network.Google.Debugger
+module Gogol.Debugger.Types
   ( -- * Configuration
     debuggerService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
     cloud_debuggerScope,
-
-    -- * Resources
-
-    -- ** clouddebugger.controller.debuggees.breakpoints.list
-    ClouddebuggerControllerDebuggeesBreakpointsListResource,
-    newClouddebuggerControllerDebuggeesBreakpointsList,
-    ClouddebuggerControllerDebuggeesBreakpointsList,
-
-    -- ** clouddebugger.controller.debuggees.breakpoints.update
-    ClouddebuggerControllerDebuggeesBreakpointsUpdateResource,
-    newClouddebuggerControllerDebuggeesBreakpointsUpdate,
-    ClouddebuggerControllerDebuggeesBreakpointsUpdate,
-
-    -- ** clouddebugger.controller.debuggees.register
-    ClouddebuggerControllerDebuggeesRegisterResource,
-    newClouddebuggerControllerDebuggeesRegister,
-    ClouddebuggerControllerDebuggeesRegister,
-
-    -- ** clouddebugger.debugger.debuggees.breakpoints.delete
-    ClouddebuggerDebuggerDebuggeesBreakpointsDeleteResource,
-    newClouddebuggerDebuggerDebuggeesBreakpointsDelete,
-    ClouddebuggerDebuggerDebuggeesBreakpointsDelete,
-
-    -- ** clouddebugger.debugger.debuggees.breakpoints.get
-    ClouddebuggerDebuggerDebuggeesBreakpointsGetResource,
-    newClouddebuggerDebuggerDebuggeesBreakpointsGet,
-    ClouddebuggerDebuggerDebuggeesBreakpointsGet,
-
-    -- ** clouddebugger.debugger.debuggees.breakpoints.list
-    ClouddebuggerDebuggerDebuggeesBreakpointsListResource,
-    newClouddebuggerDebuggerDebuggeesBreakpointsList,
-    ClouddebuggerDebuggerDebuggeesBreakpointsList,
-
-    -- ** clouddebugger.debugger.debuggees.breakpoints.set
-    ClouddebuggerDebuggerDebuggeesBreakpointsSetResource,
-    newClouddebuggerDebuggerDebuggeesBreakpointsSet,
-    ClouddebuggerDebuggerDebuggeesBreakpointsSet,
-
-    -- ** clouddebugger.debugger.debuggees.list
-    ClouddebuggerDebuggerDebuggeesListResource,
-    newClouddebuggerDebuggerDebuggeesList,
-    ClouddebuggerDebuggerDebuggeesList,
 
     -- * Types
 
@@ -230,12 +184,21 @@ module Network.Google.Debugger
   )
 where
 
-import Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
-import Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
-import Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Register
-import Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
-import Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
-import Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
-import Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
-import Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.List
-import Network.Google.Debugger.Types
+import Gogol.Debugger.Internal.Product
+import Gogol.Debugger.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
+debuggerService :: Core.ServiceConfig
+debuggerService =
+  Core.defaultService
+    (Core.ServiceId "clouddebugger:v2")
+    "clouddebugger.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | Use Stackdriver Debugger
+cloud_debuggerScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
+cloud_debuggerScope = Core.Proxy

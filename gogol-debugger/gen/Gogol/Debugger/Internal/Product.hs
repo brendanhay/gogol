@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Internal.Product
+-- Module      : Gogol.Debugger.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Debugger.Internal.Product
+module Gogol.Debugger.Internal.Product
   ( -- * AliasContext
     AliasContext (..),
     newAliasContext,
@@ -148,8 +148,8 @@ module Network.Google.Debugger.Internal.Product
   )
 where
 
-import Network.Google.Debugger.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | An alias to a repo revision.
 --

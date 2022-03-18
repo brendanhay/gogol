@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.List
+-- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists all the debuggees that the user has access to.
 --
 -- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.list@.
-module Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.List
+module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.List
   ( -- * Resource
     ClouddebuggerDebuggerDebuggeesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.List
   )
 where
 
-import Network.Google.Debugger.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.list@ method which the
 -- 'ClouddebuggerDebuggerDebuggeesList' request conforms to.

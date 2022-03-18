@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
+-- Module      : Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns the list of all active breakpoints for the debuggee. The breakpoint specification (@location@, @condition@, and @expressions@ fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn\'t change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again.
 --
 -- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
-module Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
+module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
   ( -- * Resource
     ClouddebuggerControllerDebuggeesBreakpointsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Li
   )
 where
 
-import Network.Google.Debugger.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.list@ method which the
 -- 'ClouddebuggerControllerDebuggeesBreakpointsList' request conforms to.

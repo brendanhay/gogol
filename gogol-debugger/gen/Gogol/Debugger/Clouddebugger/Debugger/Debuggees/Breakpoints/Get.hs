@@ -19,69 +19,63 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
+-- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the breakpoint to the debuggee.
+-- Gets breakpoint information.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
-module Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
+module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
   ( -- * Resource
-    ClouddebuggerDebuggerDebuggeesBreakpointsSetResource,
+    ClouddebuggerDebuggerDebuggeesBreakpointsGetResource,
 
     -- ** Constructing a Request
-    newClouddebuggerDebuggerDebuggeesBreakpointsSet,
-    ClouddebuggerDebuggerDebuggeesBreakpointsSet,
+    newClouddebuggerDebuggerDebuggeesBreakpointsGet,
+    ClouddebuggerDebuggerDebuggeesBreakpointsGet,
   )
 where
 
-import Network.Google.Debugger.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.set@ method which the
--- 'ClouddebuggerDebuggerDebuggeesBreakpointsSet' request conforms to.
-type ClouddebuggerDebuggerDebuggeesBreakpointsSetResource =
+-- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.get@ method which the
+-- 'ClouddebuggerDebuggerDebuggeesBreakpointsGet' request conforms to.
+type ClouddebuggerDebuggerDebuggeesBreakpointsGetResource =
   "v2"
     Core.:> "debugger"
     Core.:> "debuggees"
     Core.:> Core.Capture "debuggeeId" Core.Text
     Core.:> "breakpoints"
-    Core.:> "set"
+    Core.:> Core.Capture "breakpointId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "canaryOption"
-              DebuggerDebuggeesBreakpointsSetCanaryOption
     Core.:> Core.QueryParam "clientVersion" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Breakpoint
-    Core.:> Core.Post '[Core.JSON] SetBreakpointResponse
+    Core.:> Core.Get '[Core.JSON] GetBreakpointResponse
 
--- | Sets the breakpoint to the debuggee.
+-- | Gets breakpoint information.
 --
--- /See:/ 'newClouddebuggerDebuggerDebuggeesBreakpointsSet' smart constructor.
-data ClouddebuggerDebuggerDebuggeesBreakpointsSet = ClouddebuggerDebuggerDebuggeesBreakpointsSet
+-- /See:/ 'newClouddebuggerDebuggerDebuggeesBreakpointsGet' smart constructor.
+data ClouddebuggerDebuggerDebuggeesBreakpointsGet = ClouddebuggerDebuggerDebuggeesBreakpointsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | Required. ID of the breakpoint to get.
+    breakpointId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The canary option set by the user upon setting breakpoint.
-    canaryOption :: (Core.Maybe DebuggerDebuggeesBreakpointsSetCanaryOption),
     -- | Required. The client version making the call. Schema: @domain\/type\/version@ (e.g., @google.com\/intellij\/v1@).
     clientVersion :: (Core.Maybe Core.Text),
-    -- | Required. ID of the debuggee where the breakpoint is to be set.
+    -- | Required. ID of the debuggee whose breakpoint to get.
     debuggeeId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Breakpoint,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -89,58 +83,56 @@ data ClouddebuggerDebuggerDebuggeesBreakpointsSet = ClouddebuggerDebuggerDebugge
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ClouddebuggerDebuggerDebuggeesBreakpointsSet' with the minimum fields required to make a request.
-newClouddebuggerDebuggerDebuggeesBreakpointsSet ::
-  -- |  Required. ID of the debuggee where the breakpoint is to be set. See 'debuggeeId'.
+-- | Creates a value of 'ClouddebuggerDebuggerDebuggeesBreakpointsGet' with the minimum fields required to make a request.
+newClouddebuggerDebuggerDebuggeesBreakpointsGet ::
+  -- |  Required. ID of the breakpoint to get. See 'breakpointId'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Breakpoint ->
-  ClouddebuggerDebuggerDebuggeesBreakpointsSet
-newClouddebuggerDebuggerDebuggeesBreakpointsSet debuggeeId payload =
-  ClouddebuggerDebuggerDebuggeesBreakpointsSet
+  -- |  Required. ID of the debuggee whose breakpoint to get. See 'debuggeeId'.
+  Core.Text ->
+  ClouddebuggerDebuggerDebuggeesBreakpointsGet
+newClouddebuggerDebuggerDebuggeesBreakpointsGet breakpointId debuggeeId =
+  ClouddebuggerDebuggerDebuggeesBreakpointsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
+      breakpointId = breakpointId,
       callback = Core.Nothing,
-      canaryOption = Core.Nothing,
       clientVersion = Core.Nothing,
       debuggeeId = debuggeeId,
-      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    ClouddebuggerDebuggerDebuggeesBreakpointsSet
+    ClouddebuggerDebuggerDebuggeesBreakpointsGet
   where
   type
-    Rs ClouddebuggerDebuggerDebuggeesBreakpointsSet =
-      SetBreakpointResponse
+    Rs ClouddebuggerDebuggerDebuggeesBreakpointsGet =
+      GetBreakpointResponse
   type
     Scopes
-      ClouddebuggerDebuggerDebuggeesBreakpointsSet =
+      ClouddebuggerDebuggerDebuggeesBreakpointsGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud_debugger"
        ]
   requestClient
-    ClouddebuggerDebuggerDebuggeesBreakpointsSet {..} =
+    ClouddebuggerDebuggerDebuggeesBreakpointsGet {..} =
       go
         debuggeeId
+        breakpointId
         xgafv
         accessToken
         callback
-        canaryOption
         clientVersion
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         debuggerService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  ClouddebuggerDebuggerDebuggeesBreakpointsSetResource
+                  ClouddebuggerDebuggerDebuggeesBreakpointsGetResource
             )
             Core.mempty
