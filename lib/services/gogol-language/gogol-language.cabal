@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-language
-version:            0.5.0
-synopsis:           Google Cloud Natural Language SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-language
+version:               0.5.0
+synopsis:              Google Cloud Natural Language SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.
+    Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,33 +28,36 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Language
-    Gogol.Language.Documents.AnalyzeEntities
-    Gogol.Language.Documents.AnalyzeEntitySentiment
-    Gogol.Language.Documents.AnalyzeSentiment
-    Gogol.Language.Documents.AnalyzeSyntax
-    Gogol.Language.Documents.AnnotateText
-    Gogol.Language.Documents.ClassifyText
-    Gogol.Language.Types
+      Gogol.Language
+    , Gogol.Language.Documents.AnalyzeEntities
+    , Gogol.Language.Documents.AnalyzeEntitySentiment
+    , Gogol.Language.Documents.AnalyzeSentiment
+    , Gogol.Language.Documents.AnalyzeSyntax
+    , Gogol.Language.Documents.AnnotateText
+    , Gogol.Language.Documents.ClassifyText
+    , Gogol.Language.Types
 
   other-modules:
-    Gogol.Language.Internal.Product
-    Gogol.Language.Internal.Sum
+      Gogol.Language.Internal.Product
+    , Gogol.Language.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
