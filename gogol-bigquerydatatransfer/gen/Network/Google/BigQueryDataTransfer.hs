@@ -1,456 +1,397 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.BigQueryDataTransfer
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Schedule queries or transfer external data from SaaS applications to
--- Google BigQuery on a regular basis.
+-- Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis.
 --
 -- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference>
 module Network.Google.BigQueryDataTransfer
-    (
-    -- * Service Configuration
-      bigQueryDataTransferService
+  ( -- * Configuration
+    bigQueryDataTransferService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , bigQueryScope
-
-    -- * API Declaration
-    , BigQueryDataTransferAPI
+    bigqueryScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
     -- * Resources
 
     -- ** bigquerydatatransfer.projects.dataSources.checkValidCreds
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
+    BigQueryDataTransferProjectsDataSourcesCheckValidCredsResource,
+    newBigQueryDataTransferProjectsDataSourcesCheckValidCreds,
+    BigQueryDataTransferProjectsDataSourcesCheckValidCreds,
 
     -- ** bigquerydatatransfer.projects.dataSources.get
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.Get
+    BigQueryDataTransferProjectsDataSourcesGetResource,
+    newBigQueryDataTransferProjectsDataSourcesGet,
+    BigQueryDataTransferProjectsDataSourcesGet,
 
     -- ** bigquerydatatransfer.projects.dataSources.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.List
+    BigQueryDataTransferProjectsDataSourcesListResource,
+    newBigQueryDataTransferProjectsDataSourcesList,
+    BigQueryDataTransferProjectsDataSourcesList,
+
+    -- ** bigquerydatatransfer.projects.enrollDataSources
+    BigQueryDataTransferProjectsEnrollDataSourcesResource,
+    newBigQueryDataTransferProjectsEnrollDataSources,
+    BigQueryDataTransferProjectsEnrollDataSources,
 
     -- ** bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.CheckValidCreds
+    BigQueryDataTransferProjectsLocationsDataSourcesCheckValidCredsResource,
+    newBigQueryDataTransferProjectsLocationsDataSourcesCheckValidCreds,
+    BigQueryDataTransferProjectsLocationsDataSourcesCheckValidCreds,
 
     -- ** bigquerydatatransfer.projects.locations.dataSources.get
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.Get
+    BigQueryDataTransferProjectsLocationsDataSourcesGetResource,
+    newBigQueryDataTransferProjectsLocationsDataSourcesGet,
+    BigQueryDataTransferProjectsLocationsDataSourcesGet,
 
     -- ** bigquerydatatransfer.projects.locations.dataSources.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.List
+    BigQueryDataTransferProjectsLocationsDataSourcesListResource,
+    newBigQueryDataTransferProjectsLocationsDataSourcesList,
+    BigQueryDataTransferProjectsLocationsDataSourcesList,
+
+    -- ** bigquerydatatransfer.projects.locations.enrollDataSources
+    BigQueryDataTransferProjectsLocationsEnrollDataSourcesResource,
+    newBigQueryDataTransferProjectsLocationsEnrollDataSources,
+    BigQueryDataTransferProjectsLocationsEnrollDataSources,
 
     -- ** bigquerydatatransfer.projects.locations.get
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.Get
+    BigQueryDataTransferProjectsLocationsGetResource,
+    newBigQueryDataTransferProjectsLocationsGet,
+    BigQueryDataTransferProjectsLocationsGet,
 
     -- ** bigquerydatatransfer.projects.locations.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.List
+    BigQueryDataTransferProjectsLocationsListResource,
+    newBigQueryDataTransferProjectsLocationsList,
+    BigQueryDataTransferProjectsLocationsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.create
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Create
+    BigQueryDataTransferProjectsLocationsTransferConfigsCreateResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsCreate,
+    BigQueryDataTransferProjectsLocationsTransferConfigsCreate,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.delete
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Delete
+    BigQueryDataTransferProjectsLocationsTransferConfigsDeleteResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsDelete,
+    BigQueryDataTransferProjectsLocationsTransferConfigsDelete,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.get
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Get
+    BigQueryDataTransferProjectsLocationsTransferConfigsGetResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsGet,
+    BigQueryDataTransferProjectsLocationsTransferConfigsGet,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.List
+    BigQueryDataTransferProjectsLocationsTransferConfigsListResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsList,
+    BigQueryDataTransferProjectsLocationsTransferConfigsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.patch
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
+    BigQueryDataTransferProjectsLocationsTransferConfigsPatchResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsPatch,
+    BigQueryDataTransferProjectsLocationsTransferConfigsPatch,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.delete
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsDeleteResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.get
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Get
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsGetResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsGet,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsGet,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsListResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsList,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsListResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsList,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
+    BigQueryDataTransferProjectsLocationsTransferConfigsScheduleRunsResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsScheduleRuns,
+    BigQueryDataTransferProjectsLocationsTransferConfigsScheduleRuns,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
+    BigQueryDataTransferProjectsLocationsTransferConfigsStartManualRunsResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns,
+    BigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.create
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Create
+    BigQueryDataTransferProjectsTransferConfigsCreateResource,
+    newBigQueryDataTransferProjectsTransferConfigsCreate,
+    BigQueryDataTransferProjectsTransferConfigsCreate,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.delete
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Delete
+    BigQueryDataTransferProjectsTransferConfigsDeleteResource,
+    newBigQueryDataTransferProjectsTransferConfigsDelete,
+    BigQueryDataTransferProjectsTransferConfigsDelete,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.get
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Get
+    BigQueryDataTransferProjectsTransferConfigsGetResource,
+    newBigQueryDataTransferProjectsTransferConfigsGet,
+    BigQueryDataTransferProjectsTransferConfigsGet,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.List
+    BigQueryDataTransferProjectsTransferConfigsListResource,
+    newBigQueryDataTransferProjectsTransferConfigsList,
+    BigQueryDataTransferProjectsTransferConfigsList,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.patch
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Patch
+    BigQueryDataTransferProjectsTransferConfigsPatchResource,
+    newBigQueryDataTransferProjectsTransferConfigsPatch,
+    BigQueryDataTransferProjectsTransferConfigsPatch,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.delete
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Delete
+    BigQueryDataTransferProjectsTransferConfigsRunsDeleteResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsDelete,
+    BigQueryDataTransferProjectsTransferConfigsRunsDelete,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.get
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Get
+    BigQueryDataTransferProjectsTransferConfigsRunsGetResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsGet,
+    BigQueryDataTransferProjectsTransferConfigsRunsGet,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
+    BigQueryDataTransferProjectsTransferConfigsRunsListResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsList,
+    BigQueryDataTransferProjectsTransferConfigsRunsList,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
+    BigQueryDataTransferProjectsTransferConfigsRunsTransferLogsListResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsTransferLogsList,
+    BigQueryDataTransferProjectsTransferConfigsRunsTransferLogsList,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.scheduleRuns
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
+    BigQueryDataTransferProjectsTransferConfigsScheduleRunsResource,
+    newBigQueryDataTransferProjectsTransferConfigsScheduleRuns,
+    BigQueryDataTransferProjectsTransferConfigsScheduleRuns,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.startManualRuns
-    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
+    BigQueryDataTransferProjectsTransferConfigsStartManualRunsResource,
+    newBigQueryDataTransferProjectsTransferConfigsStartManualRuns,
+    BigQueryDataTransferProjectsTransferConfigsStartManualRuns,
 
     -- * Types
 
-    -- ** DataSourceParameterType
-    , DataSourceParameterType (..)
-
-    -- ** EmailPreferences
-    , EmailPreferences
-    , emailPreferences
-    , epEnableFailureEmail
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- ** TimeRange
-    , TimeRange
-    , timeRange
-    , trStartTime
-    , trEndTime
-
-    -- ** TransferRun
-    , TransferRun
-    , transferRun
-    , tRunTime
-    , tEmailPreferences
-    , tErrorStatus
-    , tNotificationPubsubTopic
-    , tState
-    , tSchedule
-    , tStartTime
-    , tScheduleTime
-    , tDataSourceId
-    , tParams
-    , tUserId
-    , tUpdateTime
-    , tName
-    , tEndTime
-    , tDestinationDataSetId
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** CheckValidCredsRequest
-    , CheckValidCredsRequest
-    , checkValidCredsRequest
-
-    -- ** TransferConfigParams
-    , TransferConfigParams
-    , transferConfigParams
-    , tcpAddtional
-
-    -- ** ScheduleTransferRunsRequest
-    , ScheduleTransferRunsRequest
-    , scheduleTransferRunsRequest
-    , strrStartTime
-    , strrEndTime
-
-    -- ** Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** ScheduleOptions
-    , ScheduleOptions
-    , scheduleOptions
-    , soStartTime
-    , soDisableAutoScheduling
-    , soEndTime
-
-    -- ** TransferRunState
-    , TransferRunState (..)
-
-    -- ** ListTransferLogsResponse
-    , ListTransferLogsResponse
-    , listTransferLogsResponse
-    , ltlrNextPageToken
-    , ltlrTransferMessages
+    CheckValidCredsRequest (..),
+    newCheckValidCredsRequest,
 
     -- ** CheckValidCredsResponse
-    , CheckValidCredsResponse
-    , checkValidCredsResponse
-    , cvcrHasValidCreds
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** DataSourceTransferType
-    , DataSourceTransferType (..)
-
-    -- ** ProjectsLocationsTransferConfigsRunsListStates
-    , ProjectsLocationsTransferConfigsRunsListStates (..)
-
-    -- ** ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..)
-
-    -- ** DataSourceAuthorizationType
-    , DataSourceAuthorizationType (..)
-
-    -- ** TransferRunParams
-    , TransferRunParams
-    , transferRunParams
-    , trpAddtional
-
-    -- ** ProjectsLocationsTransferConfigsRunsListRunAttempt
-    , ProjectsLocationsTransferConfigsRunsListRunAttempt (..)
-
-    -- ** DataSourceParameter
-    , DataSourceParameter
-    , dataSourceParameter
-    , dspMaxValue
-    , dspParamId
-    , dspImmutable
-    , dspRecurse
-    , dspValidationDescription
-    , dspRequired
-    , dspDisplayName
-    , dspType
-    , dspAllowedValues
-    , dspRepeated
-    , dspDescription
-    , dspValidationRegex
-    , dspMinValue
-    , dspValidationHelpURL
-    , dspFields
-    , dspDeprecated
-
-    -- ** ScheduleTransferRunsResponse
-    , ScheduleTransferRunsResponse
-    , scheduleTransferRunsResponse
-    , strrRuns
-
-    -- ** ListDataSourcesResponse
-    , ListDataSourcesResponse
-    , listDataSourcesResponse
-    , ldsrNextPageToken
-    , ldsrDataSources
-
-    -- ** StartManualTransferRunsRequest
-    , StartManualTransferRunsRequest
-    , startManualTransferRunsRequest
-    , smtrrRequestedRunTime
-    , smtrrRequestedTimeRange
-
-    -- ** Xgafv
-    , Xgafv (..)
+    CheckValidCredsResponse (..),
+    newCheckValidCredsResponse,
 
     -- ** DataSource
-    , DataSource
-    , dataSource
-    , dsClientId
-    , dsMinimumScheduleInterval
-    , dsSupportsCustomSchedule
-    , dsUpdateDeadlineSeconds
-    , dsManualRunsDisabled
-    , dsDataSourceId
-    , dsTransferType
-    , dsScopes
-    , dsSupportsMultipleTransfers
-    , dsName
-    , dsParameters
-    , dsHelpURL
-    , dsDefaultDataRefreshWindowDays
-    , dsDisplayName
-    , dsDataRefreshType
-    , dsAuthorizationType
-    , dsDefaultSchedule
-    , dsDescription
+    DataSource (..),
+    newDataSource,
 
-    -- ** DataSourceDataRefreshType
-    , DataSourceDataRefreshType (..)
+    -- ** DataSource_AuthorizationType
+    DataSource_AuthorizationType (..),
 
-    -- ** ListTransferRunsResponse
-    , ListTransferRunsResponse
-    , listTransferRunsResponse
-    , ltrrNextPageToken
-    , ltrrTransferRuns
+    -- ** DataSource_DataRefreshType
+    DataSource_DataRefreshType (..),
 
-    -- ** TransferMessage
-    , TransferMessage
-    , transferMessage
-    , tmSeverity
-    , tmMessageTime
-    , tmMessageText
+    -- ** DataSource_TransferType
+    DataSource_TransferType (..),
 
-    -- ** ProjectsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..)
+    -- ** DataSourceParameter
+    DataSourceParameter (..),
+    newDataSourceParameter,
 
-    -- ** ProjectsTransferConfigsRunsListStates
-    , ProjectsTransferConfigsRunsListStates (..)
+    -- ** DataSourceParameter_Type
+    DataSourceParameter_Type (..),
 
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** EmailPreferences
+    EmailPreferences (..),
+    newEmailPreferences,
 
-    -- ** StartManualTransferRunsResponse
-    , StartManualTransferRunsResponse
-    , startManualTransferRunsResponse
-    , smtrrRuns
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- ** ProjectsTransferConfigsRunsListRunAttempt
-    , ProjectsTransferConfigsRunsListRunAttempt (..)
+    -- ** EnrollDataSourcesRequest
+    EnrollDataSourcesRequest (..),
+    newEnrollDataSourcesRequest,
 
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** ListDataSourcesResponse
+    ListDataSourcesResponse (..),
+    newListDataSourcesResponse,
 
-    -- ** TransferMessageSeverity
-    , TransferMessageSeverity (..)
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListTransferConfigsResponse
-    , ListTransferConfigsResponse
-    , listTransferConfigsResponse
-    , ltcrNextPageToken
-    , ltcrTransferConfigs
+    ListTransferConfigsResponse (..),
+    newListTransferConfigsResponse,
 
-    -- ** TransferConfigState
-    , TransferConfigState (..)
+    -- ** ListTransferLogsResponse
+    ListTransferLogsResponse (..),
+    newListTransferLogsResponse,
+
+    -- ** ListTransferRunsResponse
+    ListTransferRunsResponse (..),
+    newListTransferRunsResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** ScheduleOptions
+    ScheduleOptions (..),
+    newScheduleOptions,
+
+    -- ** ScheduleTransferRunsRequest
+    ScheduleTransferRunsRequest (..),
+    newScheduleTransferRunsRequest,
+
+    -- ** ScheduleTransferRunsResponse
+    ScheduleTransferRunsResponse (..),
+    newScheduleTransferRunsResponse,
+
+    -- ** StartManualTransferRunsRequest
+    StartManualTransferRunsRequest (..),
+    newStartManualTransferRunsRequest,
+
+    -- ** StartManualTransferRunsResponse
+    StartManualTransferRunsResponse (..),
+    newStartManualTransferRunsResponse,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TimeRange
+    TimeRange (..),
+    newTimeRange,
 
     -- ** TransferConfig
-    , TransferConfig
-    , transferConfig
-    , tcEmailPreferences
-    , tcNotificationPubsubTopic
-    , tcState
-    , tcSchedule
-    , tcScheduleOptions
-    , tcDisabled
-    , tcDataSourceId
-    , tcParams
-    , tcUserId
-    , tcUpdateTime
-    , tcName
-    , tcDataSetRegion
-    , tcDisplayName
-    , tcNextRunTime
-    , tcDestinationDataSetId
-    , tcDataRefreshWindowDays
-    ) where
+    TransferConfig (..),
+    newTransferConfig,
 
-import Network.Google.Prelude
+    -- ** TransferConfig_Params
+    TransferConfig_Params (..),
+    newTransferConfig_Params,
+
+    -- ** TransferConfig_State
+    TransferConfig_State (..),
+
+    -- ** TransferMessage
+    TransferMessage (..),
+    newTransferMessage,
+
+    -- ** TransferMessage_Severity
+    TransferMessage_Severity (..),
+
+    -- ** TransferRun
+    TransferRun (..),
+    newTransferRun,
+
+    -- ** TransferRun_Params
+    TransferRun_Params (..),
+    newTransferRun_Params,
+
+    -- ** TransferRun_State
+    TransferRun_State (..),
+
+    -- ** UserInfo
+    UserInfo (..),
+    newUserInfo,
+
+    -- ** ProjectsLocationsTransferConfigsRunsListRunAttempt
+    ProjectsLocationsTransferConfigsRunsListRunAttempt (..),
+
+    -- ** ProjectsLocationsTransferConfigsRunsListStates
+    ProjectsLocationsTransferConfigsRunsListStates (..),
+
+    -- ** ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
+    ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..),
+
+    -- ** ProjectsTransferConfigsRunsListRunAttempt
+    ProjectsTransferConfigsRunsListRunAttempt (..),
+
+    -- ** ProjectsTransferConfigsRunsListStates
+    ProjectsTransferConfigsRunsListStates (..),
+
+    -- ** ProjectsTransferConfigsRunsTransferLogsListMessageTypes
+    ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..),
+  )
+where
+
+import Network.Google.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
+import Network.Google.BigQueryDataTransfer.Projects.DataSources.Get
+import Network.Google.BigQueryDataTransfer.Projects.DataSources.List
+import Network.Google.BigQueryDataTransfer.Projects.EnrollDataSources
+import Network.Google.BigQueryDataTransfer.Projects.Locations.DataSources.CheckValidCreds
+import Network.Google.BigQueryDataTransfer.Projects.Locations.DataSources.Get
+import Network.Google.BigQueryDataTransfer.Projects.Locations.DataSources.List
+import Network.Google.BigQueryDataTransfer.Projects.Locations.EnrollDataSources
+import Network.Google.BigQueryDataTransfer.Projects.Locations.Get
+import Network.Google.BigQueryDataTransfer.Projects.Locations.List
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Create
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Delete
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Get
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.List
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Get
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
+import Network.Google.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Create
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Delete
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Get
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.List
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Patch
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Delete
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Get
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
+import Network.Google.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
 import Network.Google.BigQueryDataTransfer.Types
-import Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
-import Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.Get
-import Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.CheckValidCreds
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.Get
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.Get
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Create
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Delete
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Get
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Get
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
-import Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Create
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Delete
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Get
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Patch
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Delete
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Get
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
-import Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the BigQuery Data Transfer API service.
-type BigQueryDataTransferAPI =
-     ProjectsDataSourcesListResource :<|>
-       ProjectsDataSourcesCheckValidCredsResource
-       :<|> ProjectsDataSourcesGetResource
-       :<|>
-       ProjectsTransferConfigsRunsTransferLogsListResource
-       :<|> ProjectsTransferConfigsRunsListResource
-       :<|> ProjectsTransferConfigsRunsGetResource
-       :<|> ProjectsTransferConfigsRunsDeleteResource
-       :<|> ProjectsTransferConfigsScheduleRunsResource
-       :<|> ProjectsTransferConfigsListResource
-       :<|> ProjectsTransferConfigsStartManualRunsResource
-       :<|> ProjectsTransferConfigsPatchResource
-       :<|> ProjectsTransferConfigsGetResource
-       :<|> ProjectsTransferConfigsCreateResource
-       :<|> ProjectsTransferConfigsDeleteResource
-       :<|> ProjectsLocationsDataSourcesListResource
-       :<|>
-       ProjectsLocationsDataSourcesCheckValidCredsResource
-       :<|> ProjectsLocationsDataSourcesGetResource
-       :<|>
-       ProjectsLocationsTransferConfigsRunsTransferLogsListResource
-       :<|> ProjectsLocationsTransferConfigsRunsListResource
-       :<|> ProjectsLocationsTransferConfigsRunsGetResource
-       :<|>
-       ProjectsLocationsTransferConfigsRunsDeleteResource
-       :<|>
-       ProjectsLocationsTransferConfigsScheduleRunsResource
-       :<|> ProjectsLocationsTransferConfigsListResource
-       :<|>
-       ProjectsLocationsTransferConfigsStartManualRunsResource
-       :<|> ProjectsLocationsTransferConfigsPatchResource
-       :<|> ProjectsLocationsTransferConfigsGetResource
-       :<|> ProjectsLocationsTransferConfigsCreateResource
-       :<|> ProjectsLocationsTransferConfigsDeleteResource
-       :<|> ProjectsLocationsListResource
-       :<|> ProjectsLocationsGetResource
