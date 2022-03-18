@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,54 +30,56 @@
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.get@.
 module Gogol.AppState.States.Get
-    (
-    -- * Resource
-      AppStateStatesGetResource
+  ( -- * Resource
+    AppStateStatesGetResource,
 
     -- ** Constructing a Request
-    , newAppStateStatesGet
-    , AppStateStatesGet
-    ) where
+    newAppStateStatesGet,
+    AppStateStatesGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AppState.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appstate.states.get@ method which the
 -- 'AppStateStatesGet' request conforms to.
 type AppStateStatesGetResource =
-     "appstate" Core.:>
-       "v1" Core.:>
-         "states" Core.:>
-           Core.Capture "stateKey" Core.Int32 Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.Get '[Core.JSON] GetResponse
+  "appstate"
+    Core.:> "v1"
+    Core.:> "states"
+    Core.:> Core.Capture "stateKey" Core.Int32
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] GetResponse
 
 -- | Retrieves the data corresponding to the passed key. If the key does not exist on the server, an HTTP 404 will be returned.
 --
 -- /See:/ 'newAppStateStatesGet' smart constructor.
 newtype AppStateStatesGet = AppStateStatesGet
-    {
-      -- | The key for the data to be retrieved.
-      stateKey :: Core.Int32
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | The key for the data to be retrieved.
+    stateKey :: Core.Int32
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AppStateStatesGet' with the minimum fields required to make a request.
-newAppStateStatesGet 
-    ::  Core.Int32
-       -- ^  The key for the data to be retrieved. See 'stateKey'.
-    -> AppStateStatesGet
+newAppStateStatesGet ::
+  -- |  The key for the data to be retrieved. See 'stateKey'.
+  Core.Int32 ->
+  AppStateStatesGet
 newAppStateStatesGet stateKey = AppStateStatesGet {stateKey = stateKey}
 
 instance Core.GoogleRequest AppStateStatesGet where
-        type Rs AppStateStatesGet = GetResponse
-        type Scopes AppStateStatesGet =
-             '["https://www.googleapis.com/auth/appstate"]
-        requestClient AppStateStatesGet{..}
-          = go stateKey (Core.Just Core.AltJSON)
-              appStateService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy AppStateStatesGetResource)
-                      Core.mempty
-
+  type Rs AppStateStatesGet = GetResponse
+  type
+    Scopes AppStateStatesGet =
+      '["https://www.googleapis.com/auth/appstate"]
+  requestClient AppStateStatesGet {..} =
+    go
+      stateKey
+      (Core.Just Core.AltJSON)
+      appStateService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy AppStateStatesGetResource)
+          Core.mempty
