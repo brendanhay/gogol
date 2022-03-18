@@ -1,575 +1,519 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.PubSub
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides reliable, many-to-many, asynchronous messaging between
--- applications.
+-- Provides reliable, many-to-many, asynchronous messaging between applications.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference>
 module Network.Google.PubSub
-    (
-    -- * Service Configuration
-      pubSubService
+  ( -- * Configuration
+    pubSubService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , pubSubScope
-
-    -- * API Declaration
-    , PubSubAPI
+    cloudPlatformScope,
+    pubSubScope,
 
     -- * Resources
 
     -- ** pubsub.projects.schemas.create
-    , module Network.Google.Resource.PubSub.Projects.Schemas.Create
+    PubSubProjectsSchemasCreateResource,
+    newPubSubProjectsSchemasCreate,
+    PubSubProjectsSchemasCreate,
 
     -- ** pubsub.projects.schemas.delete
-    , module Network.Google.Resource.PubSub.Projects.Schemas.Delete
+    PubSubProjectsSchemasDeleteResource,
+    newPubSubProjectsSchemasDelete,
+    PubSubProjectsSchemasDelete,
 
     -- ** pubsub.projects.schemas.get
-    , module Network.Google.Resource.PubSub.Projects.Schemas.Get
+    PubSubProjectsSchemasGetResource,
+    newPubSubProjectsSchemasGet,
+    PubSubProjectsSchemasGet,
 
     -- ** pubsub.projects.schemas.getIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Schemas.GetIAMPolicy
+    PubSubProjectsSchemasGetIamPolicyResource,
+    newPubSubProjectsSchemasGetIamPolicy,
+    PubSubProjectsSchemasGetIamPolicy,
 
     -- ** pubsub.projects.schemas.list
-    , module Network.Google.Resource.PubSub.Projects.Schemas.List
+    PubSubProjectsSchemasListResource,
+    newPubSubProjectsSchemasList,
+    PubSubProjectsSchemasList,
 
     -- ** pubsub.projects.schemas.setIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Schemas.SetIAMPolicy
+    PubSubProjectsSchemasSetIamPolicyResource,
+    newPubSubProjectsSchemasSetIamPolicy,
+    PubSubProjectsSchemasSetIamPolicy,
 
     -- ** pubsub.projects.schemas.testIamPermissions
-    , module Network.Google.Resource.PubSub.Projects.Schemas.TestIAMPermissions
+    PubSubProjectsSchemasTestIamPermissionsResource,
+    newPubSubProjectsSchemasTestIamPermissions,
+    PubSubProjectsSchemasTestIamPermissions,
 
     -- ** pubsub.projects.schemas.validate
-    , module Network.Google.Resource.PubSub.Projects.Schemas.Validate
+    PubSubProjectsSchemasValidateResource,
+    newPubSubProjectsSchemasValidate,
+    PubSubProjectsSchemasValidate,
 
     -- ** pubsub.projects.schemas.validateMessage
-    , module Network.Google.Resource.PubSub.Projects.Schemas.ValidateMessage
+    PubSubProjectsSchemasValidateMessageResource,
+    newPubSubProjectsSchemasValidateMessage,
+    PubSubProjectsSchemasValidateMessage,
 
     -- ** pubsub.projects.snapshots.create
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.Create
+    PubSubProjectsSnapshotsCreateResource,
+    newPubSubProjectsSnapshotsCreate,
+    PubSubProjectsSnapshotsCreate,
 
     -- ** pubsub.projects.snapshots.delete
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.Delete
+    PubSubProjectsSnapshotsDeleteResource,
+    newPubSubProjectsSnapshotsDelete,
+    PubSubProjectsSnapshotsDelete,
 
     -- ** pubsub.projects.snapshots.get
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.Get
+    PubSubProjectsSnapshotsGetResource,
+    newPubSubProjectsSnapshotsGet,
+    PubSubProjectsSnapshotsGet,
 
     -- ** pubsub.projects.snapshots.getIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
+    PubSubProjectsSnapshotsGetIamPolicyResource,
+    newPubSubProjectsSnapshotsGetIamPolicy,
+    PubSubProjectsSnapshotsGetIamPolicy,
 
     -- ** pubsub.projects.snapshots.list
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.List
+    PubSubProjectsSnapshotsListResource,
+    newPubSubProjectsSnapshotsList,
+    PubSubProjectsSnapshotsList,
 
     -- ** pubsub.projects.snapshots.patch
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.Patch
+    PubSubProjectsSnapshotsPatchResource,
+    newPubSubProjectsSnapshotsPatch,
+    PubSubProjectsSnapshotsPatch,
 
     -- ** pubsub.projects.snapshots.setIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
+    PubSubProjectsSnapshotsSetIamPolicyResource,
+    newPubSubProjectsSnapshotsSetIamPolicy,
+    PubSubProjectsSnapshotsSetIamPolicy,
 
     -- ** pubsub.projects.snapshots.testIamPermissions
-    , module Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
+    PubSubProjectsSnapshotsTestIamPermissionsResource,
+    newPubSubProjectsSnapshotsTestIamPermissions,
+    PubSubProjectsSnapshotsTestIamPermissions,
 
     -- ** pubsub.projects.subscriptions.acknowledge
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
+    PubSubProjectsSubscriptionsAcknowledgeResource,
+    newPubSubProjectsSubscriptionsAcknowledge,
+    PubSubProjectsSubscriptionsAcknowledge,
 
     -- ** pubsub.projects.subscriptions.create
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
+    PubSubProjectsSubscriptionsCreateResource,
+    newPubSubProjectsSubscriptionsCreate,
+    PubSubProjectsSubscriptionsCreate,
 
     -- ** pubsub.projects.subscriptions.delete
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
+    PubSubProjectsSubscriptionsDeleteResource,
+    newPubSubProjectsSubscriptionsDelete,
+    PubSubProjectsSubscriptionsDelete,
 
     -- ** pubsub.projects.subscriptions.detach
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Detach
+    PubSubProjectsSubscriptionsDetachResource,
+    newPubSubProjectsSubscriptionsDetach,
+    PubSubProjectsSubscriptionsDetach,
 
     -- ** pubsub.projects.subscriptions.get
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
+    PubSubProjectsSubscriptionsGetResource,
+    newPubSubProjectsSubscriptionsGet,
+    PubSubProjectsSubscriptionsGet,
 
     -- ** pubsub.projects.subscriptions.getIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
+    PubSubProjectsSubscriptionsGetIamPolicyResource,
+    newPubSubProjectsSubscriptionsGetIamPolicy,
+    PubSubProjectsSubscriptionsGetIamPolicy,
 
     -- ** pubsub.projects.subscriptions.list
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.List
+    PubSubProjectsSubscriptionsListResource,
+    newPubSubProjectsSubscriptionsList,
+    PubSubProjectsSubscriptionsList,
 
     -- ** pubsub.projects.subscriptions.modifyAckDeadline
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
+    PubSubProjectsSubscriptionsModifyAckDeadlineResource,
+    newPubSubProjectsSubscriptionsModifyAckDeadline,
+    PubSubProjectsSubscriptionsModifyAckDeadline,
 
     -- ** pubsub.projects.subscriptions.modifyPushConfig
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
+    PubSubProjectsSubscriptionsModifyPushConfigResource,
+    newPubSubProjectsSubscriptionsModifyPushConfig,
+    PubSubProjectsSubscriptionsModifyPushConfig,
 
     -- ** pubsub.projects.subscriptions.patch
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Patch
+    PubSubProjectsSubscriptionsPatchResource,
+    newPubSubProjectsSubscriptionsPatch,
+    PubSubProjectsSubscriptionsPatch,
 
     -- ** pubsub.projects.subscriptions.pull
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
+    PubSubProjectsSubscriptionsPullResource,
+    newPubSubProjectsSubscriptionsPull,
+    PubSubProjectsSubscriptionsPull,
 
     -- ** pubsub.projects.subscriptions.seek
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
+    PubSubProjectsSubscriptionsSeekResource,
+    newPubSubProjectsSubscriptionsSeek,
+    PubSubProjectsSubscriptionsSeek,
 
     -- ** pubsub.projects.subscriptions.setIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
+    PubSubProjectsSubscriptionsSetIamPolicyResource,
+    newPubSubProjectsSubscriptionsSetIamPolicy,
+    PubSubProjectsSubscriptionsSetIamPolicy,
 
     -- ** pubsub.projects.subscriptions.testIamPermissions
-    , module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
+    PubSubProjectsSubscriptionsTestIamPermissionsResource,
+    newPubSubProjectsSubscriptionsTestIamPermissions,
+    PubSubProjectsSubscriptionsTestIamPermissions,
 
     -- ** pubsub.projects.topics.create
-    , module Network.Google.Resource.PubSub.Projects.Topics.Create
+    PubSubProjectsTopicsCreateResource,
+    newPubSubProjectsTopicsCreate,
+    PubSubProjectsTopicsCreate,
 
     -- ** pubsub.projects.topics.delete
-    , module Network.Google.Resource.PubSub.Projects.Topics.Delete
+    PubSubProjectsTopicsDeleteResource,
+    newPubSubProjectsTopicsDelete,
+    PubSubProjectsTopicsDelete,
 
     -- ** pubsub.projects.topics.get
-    , module Network.Google.Resource.PubSub.Projects.Topics.Get
+    PubSubProjectsTopicsGetResource,
+    newPubSubProjectsTopicsGet,
+    PubSubProjectsTopicsGet,
 
     -- ** pubsub.projects.topics.getIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
+    PubSubProjectsTopicsGetIamPolicyResource,
+    newPubSubProjectsTopicsGetIamPolicy,
+    PubSubProjectsTopicsGetIamPolicy,
 
     -- ** pubsub.projects.topics.list
-    , module Network.Google.Resource.PubSub.Projects.Topics.List
+    PubSubProjectsTopicsListResource,
+    newPubSubProjectsTopicsList,
+    PubSubProjectsTopicsList,
 
     -- ** pubsub.projects.topics.patch
-    , module Network.Google.Resource.PubSub.Projects.Topics.Patch
+    PubSubProjectsTopicsPatchResource,
+    newPubSubProjectsTopicsPatch,
+    PubSubProjectsTopicsPatch,
 
     -- ** pubsub.projects.topics.publish
-    , module Network.Google.Resource.PubSub.Projects.Topics.Publish
+    PubSubProjectsTopicsPublishResource,
+    newPubSubProjectsTopicsPublish,
+    PubSubProjectsTopicsPublish,
 
     -- ** pubsub.projects.topics.setIamPolicy
-    , module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
+    PubSubProjectsTopicsSetIamPolicyResource,
+    newPubSubProjectsTopicsSetIamPolicy,
+    PubSubProjectsTopicsSetIamPolicy,
 
     -- ** pubsub.projects.topics.snapshots.list
-    , module Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
+    PubSubProjectsTopicsSnapshotsListResource,
+    newPubSubProjectsTopicsSnapshotsList,
+    PubSubProjectsTopicsSnapshotsList,
 
     -- ** pubsub.projects.topics.subscriptions.list
-    , module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
+    PubSubProjectsTopicsSubscriptionsListResource,
+    newPubSubProjectsTopicsSubscriptionsList,
+    PubSubProjectsTopicsSubscriptionsList,
 
     -- ** pubsub.projects.topics.testIamPermissions
-    , module Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
+    PubSubProjectsTopicsTestIamPermissionsResource,
+    newPubSubProjectsTopicsTestIamPermissions,
+    PubSubProjectsTopicsTestIamPermissions,
 
     -- * Types
 
-    -- ** PushConfig
-    , PushConfig
-    , pushConfig
-    , pcOidcToken
-    , pcAttributes
-    , pcPushEndpoint
-
-    -- ** ValidateSchemaResponse
-    , ValidateSchemaResponse
-    , validateSchemaResponse
-
-    -- ** SchemaSettings
-    , SchemaSettings
-    , schemaSettings
-    , ssSchema
-    , ssEncoding
-
-    -- ** ReceivedMessage
-    , ReceivedMessage
-    , receivedMessage
-    , rmAckId
-    , rmMessage
-    , rmDeliveryAttempt
-
-    -- ** Snapshot
-    , Snapshot
-    , snapshot
-    , sTopic
-    , sName
-    , sLabels
-    , sExpireTime
-
-    -- ** ProjectsSchemasGetView
-    , ProjectsSchemasGetView (..)
-
-    -- ** ListTopicSnapshotsResponse
-    , ListTopicSnapshotsResponse
-    , listTopicSnapshotsResponse
-    , ltsrNextPageToken
-    , ltsrSnapshots
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ValidateMessageRequestEncoding
-    , ValidateMessageRequestEncoding (..)
-
-    -- ** OidcToken
-    , OidcToken
-    , oidcToken
-    , otAudience
-    , otServiceAccountEmail
-
-    -- ** ModifyAckDeadlineRequest
-    , ModifyAckDeadlineRequest
-    , modifyAckDeadlineRequest
-    , madrAckIds
-    , madrAckDeadlineSeconds
-
-    -- ** ModifyPushConfigRequest
-    , ModifyPushConfigRequest
-    , modifyPushConfigRequest
-    , mpcrPushConfig
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** PubsubMessage
-    , PubsubMessage
-    , pubsubMessage
-    , pmData
-    , pmPublishTime
-    , pmAttributes
-    , pmMessageId
-    , pmOrderingKey
-
-    -- ** ListTopicSubscriptionsResponse
-    , ListTopicSubscriptionsResponse
-    , listTopicSubscriptionsResponse
-    , lNextPageToken
-    , lSubscriptions
-
-    -- ** ListTopicsResponse
-    , ListTopicsResponse
-    , listTopicsResponse
-    , ltrNextPageToken
-    , ltrTopics
-
-    -- ** ListSchemasResponse
-    , ListSchemasResponse
-    , listSchemasResponse
-    , lsrNextPageToken
-    , lsrSchemas
-
-    -- ** PullResponse
-    , PullResponse
-    , pullResponse
-    , prReceivedMessages
-
-    -- ** ValidateMessageResponse
-    , ValidateMessageResponse
-    , validateMessageResponse
-
-    -- ** ListSnapshotsResponse
-    , ListSnapshotsResponse
-    , listSnapshotsResponse
-    , lisNextPageToken
-    , lisSnapshots
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
-
-    -- ** CreateSnapshotRequest
-    , CreateSnapshotRequest
-    , createSnapshotRequest
-    , csrLabels
-    , csrSubscription
-
-    -- ** SeekRequest
-    , SeekRequest
-    , seekRequest
-    , srSnapshot
-    , srTime
-
-    -- ** Schema
-    , Schema
-    , schema
-    , schDefinition
-    , schName
-    , schType
-
-    -- ** Topic
-    , Topic
-    , topic
-    , tSchemaSettings
-    , tSatisfiesPzs
-    , tName
-    , tMessageStoragePolicy
-    , tLabels
-    , tKmsKeyName
-
-    -- ** TopicLabels
-    , TopicLabels
-    , topicLabels
-    , tlAddtional
-
-    -- ** CreateSnapshotRequestLabels
-    , CreateSnapshotRequestLabels
-    , createSnapshotRequestLabels
-    , csrlAddtional
-
-    -- ** UpdateSnapshotRequest
-    , UpdateSnapshotRequest
-    , updateSnapshotRequest
-    , usrSnapshot
-    , usrUpdateMask
-
-    -- ** ValidateMessageRequest
-    , ValidateMessageRequest
-    , validateMessageRequest
-    , vmrSchema
-    , vmrName
-    , vmrMessage
-    , vmrEncoding
-
-    -- ** PullRequest
-    , PullRequest
-    , pullRequest
-    , prMaxMessages
-    , prReturnImmediately
-
-    -- ** SchemaSettingsEncoding
-    , SchemaSettingsEncoding (..)
-
-    -- ** DetachSubscriptionResponse
-    , DetachSubscriptionResponse
-    , detachSubscriptionResponse
-
-    -- ** PubsubMessageAttributes
-    , PubsubMessageAttributes
-    , pubsubMessageAttributes
-    , pmaAddtional
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** DeadLetterPolicy
-    , DeadLetterPolicy
-    , deadLetterPolicy
-    , dlpDeadLetterTopic
-    , dlpMaxDeliveryAttempts
-
-    -- ** MessageStoragePolicy
-    , MessageStoragePolicy
-    , messageStoragePolicy
-    , mspAllowedPersistenceRegions
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** PublishResponse
-    , PublishResponse
-    , publishResponse
-    , prMessageIds
-
-    -- ** RetryPolicy
-    , RetryPolicy
-    , retryPolicy
-    , rpMinimumBackoff
-    , rpMaximumBackoff
-
-    -- ** PublishRequest
-    , PublishRequest
-    , publishRequest
-    , prMessages
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** SeekResponse
-    , SeekResponse
-    , seekResponse
-
-    -- ** ExpirationPolicy
-    , ExpirationPolicy
-    , expirationPolicy
-    , epTtl
-
-    -- ** PushConfigAttributes
-    , PushConfigAttributes
-    , pushConfigAttributes
-    , pcaAddtional
-
-    -- ** Subscription
-    , Subscription
-    , subscription
-    , subPushConfig
-    , subEnableMessageOrdering
-    , subDetached
-    , subMessageRetentionDuration
-    , subTopic
-    , subName
-    , subDeadLetterPolicy
-    , subLabels
-    , subRetainAckedMessages
-    , subFilter
-    , subAckDeadlineSeconds
-    , subRetryPolicy
-    , subExpirationPolicy
-
-    -- ** ProjectsSchemasListView
-    , ProjectsSchemasListView (..)
-
-    -- ** UpdateSubscriptionRequest
-    , UpdateSubscriptionRequest
-    , updateSubscriptionRequest
-    , uUpdateMask
-    , uSubscription
-
-    -- ** SubscriptionLabels
-    , SubscriptionLabels
-    , subscriptionLabels
-    , slAddtional
-
-    -- ** ValidateSchemaRequest
-    , ValidateSchemaRequest
-    , validateSchemaRequest
-    , vsrSchema
-
-    -- ** SnapshotLabels
-    , SnapshotLabels
-    , snapshotLabels
-    , sAddtional
-
-    -- ** ListSubscriptionsResponse
-    , ListSubscriptionsResponse
-    , listSubscriptionsResponse
-    , lsrsNextPageToken
-    , lsrsSubscriptions
-
-    -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-
-    -- ** UpdateTopicRequest
-    , UpdateTopicRequest
-    , updateTopicRequest
-    , utrUpdateMask
-    , utrTopic
-
-    -- ** SchemaType
-    , SchemaType (..)
+    Xgafv (..),
 
     -- ** AcknowledgeRequest
-    , AcknowledgeRequest
-    , acknowledgeRequest
-    , arAckIds
-    ) where
+    AcknowledgeRequest (..),
+    newAcknowledgeRequest,
 
-import Network.Google.Prelude
+    -- ** Binding
+    Binding (..),
+    newBinding,
+
+    -- ** CreateSnapshotRequest
+    CreateSnapshotRequest (..),
+    newCreateSnapshotRequest,
+
+    -- ** CreateSnapshotRequest_Labels
+    CreateSnapshotRequest_Labels (..),
+    newCreateSnapshotRequest_Labels,
+
+    -- ** DeadLetterPolicy
+    DeadLetterPolicy (..),
+    newDeadLetterPolicy,
+
+    -- ** DetachSubscriptionResponse
+    DetachSubscriptionResponse (..),
+    newDetachSubscriptionResponse,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** ExpirationPolicy
+    ExpirationPolicy (..),
+    newExpirationPolicy,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** ListSchemasResponse
+    ListSchemasResponse (..),
+    newListSchemasResponse,
+
+    -- ** ListSnapshotsResponse
+    ListSnapshotsResponse (..),
+    newListSnapshotsResponse,
+
+    -- ** ListSubscriptionsResponse
+    ListSubscriptionsResponse (..),
+    newListSubscriptionsResponse,
+
+    -- ** ListTopicSnapshotsResponse
+    ListTopicSnapshotsResponse (..),
+    newListTopicSnapshotsResponse,
+
+    -- ** ListTopicSubscriptionsResponse
+    ListTopicSubscriptionsResponse (..),
+    newListTopicSubscriptionsResponse,
+
+    -- ** ListTopicsResponse
+    ListTopicsResponse (..),
+    newListTopicsResponse,
+
+    -- ** MessageStoragePolicy
+    MessageStoragePolicy (..),
+    newMessageStoragePolicy,
+
+    -- ** ModifyAckDeadlineRequest
+    ModifyAckDeadlineRequest (..),
+    newModifyAckDeadlineRequest,
+
+    -- ** ModifyPushConfigRequest
+    ModifyPushConfigRequest (..),
+    newModifyPushConfigRequest,
+
+    -- ** OidcToken
+    OidcToken (..),
+    newOidcToken,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PublishRequest
+    PublishRequest (..),
+    newPublishRequest,
+
+    -- ** PublishResponse
+    PublishResponse (..),
+    newPublishResponse,
+
+    -- ** PubsubMessage
+    PubsubMessage (..),
+    newPubsubMessage,
+
+    -- ** PubsubMessage_Attributes
+    PubsubMessage_Attributes (..),
+    newPubsubMessage_Attributes,
+
+    -- ** PullRequest
+    PullRequest (..),
+    newPullRequest,
+
+    -- ** PullResponse
+    PullResponse (..),
+    newPullResponse,
+
+    -- ** PushConfig
+    PushConfig (..),
+    newPushConfig,
+
+    -- ** PushConfig_Attributes
+    PushConfig_Attributes (..),
+    newPushConfig_Attributes,
+
+    -- ** ReceivedMessage
+    ReceivedMessage (..),
+    newReceivedMessage,
+
+    -- ** RetryPolicy
+    RetryPolicy (..),
+    newRetryPolicy,
+
+    -- ** Schema
+    Schema (..),
+    newSchema,
+
+    -- ** Schema_Type
+    Schema_Type (..),
+
+    -- ** SchemaSettings
+    SchemaSettings (..),
+    newSchemaSettings,
+
+    -- ** SchemaSettings_Encoding
+    SchemaSettings_Encoding (..),
+
+    -- ** SeekRequest
+    SeekRequest (..),
+    newSeekRequest,
+
+    -- ** SeekResponse
+    SeekResponse (..),
+    newSeekResponse,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Snapshot
+    Snapshot (..),
+    newSnapshot,
+
+    -- ** Snapshot_Labels
+    Snapshot_Labels (..),
+    newSnapshot_Labels,
+
+    -- ** Subscription
+    Subscription (..),
+    newSubscription,
+
+    -- ** Subscription_Labels
+    Subscription_Labels (..),
+    newSubscription_Labels,
+
+    -- ** Subscription_State
+    Subscription_State (..),
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** Topic
+    Topic (..),
+    newTopic,
+
+    -- ** Topic_Labels
+    Topic_Labels (..),
+    newTopic_Labels,
+
+    -- ** UpdateSnapshotRequest
+    UpdateSnapshotRequest (..),
+    newUpdateSnapshotRequest,
+
+    -- ** UpdateSubscriptionRequest
+    UpdateSubscriptionRequest (..),
+    newUpdateSubscriptionRequest,
+
+    -- ** UpdateTopicRequest
+    UpdateTopicRequest (..),
+    newUpdateTopicRequest,
+
+    -- ** ValidateMessageRequest
+    ValidateMessageRequest (..),
+    newValidateMessageRequest,
+
+    -- ** ValidateMessageRequest_Encoding
+    ValidateMessageRequest_Encoding (..),
+
+    -- ** ValidateMessageResponse
+    ValidateMessageResponse (..),
+    newValidateMessageResponse,
+
+    -- ** ValidateSchemaRequest
+    ValidateSchemaRequest (..),
+    newValidateSchemaRequest,
+
+    -- ** ValidateSchemaResponse
+    ValidateSchemaResponse (..),
+    newValidateSchemaResponse,
+
+    -- ** ProjectsSchemasGetView
+    ProjectsSchemasGetView (..),
+
+    -- ** ProjectsSchemasListView
+    ProjectsSchemasListView (..),
+  )
+where
+
+import Network.Google.PubSub.Projects.Schemas.Create
+import Network.Google.PubSub.Projects.Schemas.Delete
+import Network.Google.PubSub.Projects.Schemas.Get
+import Network.Google.PubSub.Projects.Schemas.GetIamPolicy
+import Network.Google.PubSub.Projects.Schemas.List
+import Network.Google.PubSub.Projects.Schemas.SetIamPolicy
+import Network.Google.PubSub.Projects.Schemas.TestIamPermissions
+import Network.Google.PubSub.Projects.Schemas.Validate
+import Network.Google.PubSub.Projects.Schemas.ValidateMessage
+import Network.Google.PubSub.Projects.Snapshots.Create
+import Network.Google.PubSub.Projects.Snapshots.Delete
+import Network.Google.PubSub.Projects.Snapshots.Get
+import Network.Google.PubSub.Projects.Snapshots.GetIamPolicy
+import Network.Google.PubSub.Projects.Snapshots.List
+import Network.Google.PubSub.Projects.Snapshots.Patch
+import Network.Google.PubSub.Projects.Snapshots.SetIamPolicy
+import Network.Google.PubSub.Projects.Snapshots.TestIamPermissions
+import Network.Google.PubSub.Projects.Subscriptions.Acknowledge
+import Network.Google.PubSub.Projects.Subscriptions.Create
+import Network.Google.PubSub.Projects.Subscriptions.Delete
+import Network.Google.PubSub.Projects.Subscriptions.Detach
+import Network.Google.PubSub.Projects.Subscriptions.Get
+import Network.Google.PubSub.Projects.Subscriptions.GetIamPolicy
+import Network.Google.PubSub.Projects.Subscriptions.List
+import Network.Google.PubSub.Projects.Subscriptions.ModifyAckDeadline
+import Network.Google.PubSub.Projects.Subscriptions.ModifyPushConfig
+import Network.Google.PubSub.Projects.Subscriptions.Patch
+import Network.Google.PubSub.Projects.Subscriptions.Pull
+import Network.Google.PubSub.Projects.Subscriptions.Seek
+import Network.Google.PubSub.Projects.Subscriptions.SetIamPolicy
+import Network.Google.PubSub.Projects.Subscriptions.TestIamPermissions
+import Network.Google.PubSub.Projects.Topics.Create
+import Network.Google.PubSub.Projects.Topics.Delete
+import Network.Google.PubSub.Projects.Topics.Get
+import Network.Google.PubSub.Projects.Topics.GetIamPolicy
+import Network.Google.PubSub.Projects.Topics.List
+import Network.Google.PubSub.Projects.Topics.Patch
+import Network.Google.PubSub.Projects.Topics.Publish
+import Network.Google.PubSub.Projects.Topics.SetIamPolicy
+import Network.Google.PubSub.Projects.Topics.Snapshots.List
+import Network.Google.PubSub.Projects.Topics.Subscriptions.List
+import Network.Google.PubSub.Projects.Topics.TestIamPermissions
 import Network.Google.PubSub.Types
-import Network.Google.Resource.PubSub.Projects.Schemas.Create
-import Network.Google.Resource.PubSub.Projects.Schemas.Delete
-import Network.Google.Resource.PubSub.Projects.Schemas.Get
-import Network.Google.Resource.PubSub.Projects.Schemas.GetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Schemas.List
-import Network.Google.Resource.PubSub.Projects.Schemas.SetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Schemas.TestIAMPermissions
-import Network.Google.Resource.PubSub.Projects.Schemas.Validate
-import Network.Google.Resource.PubSub.Projects.Schemas.ValidateMessage
-import Network.Google.Resource.PubSub.Projects.Snapshots.Create
-import Network.Google.Resource.PubSub.Projects.Snapshots.Delete
-import Network.Google.Resource.PubSub.Projects.Snapshots.Get
-import Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Snapshots.List
-import Network.Google.Resource.PubSub.Projects.Snapshots.Patch
-import Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Create
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Detach
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Get
-import Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Subscriptions.List
-import Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
-import Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Patch
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
-import Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
-import Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
-import Network.Google.Resource.PubSub.Projects.Topics.Create
-import Network.Google.Resource.PubSub.Projects.Topics.Delete
-import Network.Google.Resource.PubSub.Projects.Topics.Get
-import Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Topics.List
-import Network.Google.Resource.PubSub.Projects.Topics.Patch
-import Network.Google.Resource.PubSub.Projects.Topics.Publish
-import Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
-import Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
-import Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
-import Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Pub/Sub API service.
-type PubSubAPI =
-     ProjectsTopicsSnapshotsListResource :<|>
-       ProjectsTopicsSubscriptionsListResource
-       :<|> ProjectsTopicsListResource
-       :<|> ProjectsTopicsGetIAMPolicyResource
-       :<|> ProjectsTopicsPatchResource
-       :<|> ProjectsTopicsGetResource
-       :<|> ProjectsTopicsCreateResource
-       :<|> ProjectsTopicsSetIAMPolicyResource
-       :<|> ProjectsTopicsTestIAMPermissionsResource
-       :<|> ProjectsTopicsDeleteResource
-       :<|> ProjectsTopicsPublishResource
-       :<|> ProjectsSchemasListResource
-       :<|> ProjectsSchemasGetIAMPolicyResource
-       :<|> ProjectsSchemasGetResource
-       :<|> ProjectsSchemasCreateResource
-       :<|> ProjectsSchemasSetIAMPolicyResource
-       :<|> ProjectsSchemasValidateMessageResource
-       :<|> ProjectsSchemasTestIAMPermissionsResource
-       :<|> ProjectsSchemasValidateResource
-       :<|> ProjectsSchemasDeleteResource
-       :<|> ProjectsSnapshotsListResource
-       :<|> ProjectsSnapshotsGetIAMPolicyResource
-       :<|> ProjectsSnapshotsPatchResource
-       :<|> ProjectsSnapshotsGetResource
-       :<|> ProjectsSnapshotsCreateResource
-       :<|> ProjectsSnapshotsSetIAMPolicyResource
-       :<|> ProjectsSnapshotsTestIAMPermissionsResource
-       :<|> ProjectsSnapshotsDeleteResource
-       :<|> ProjectsSubscriptionsDetachResource
-       :<|> ProjectsSubscriptionsListResource
-       :<|> ProjectsSubscriptionsAcknowledgeResource
-       :<|> ProjectsSubscriptionsGetIAMPolicyResource
-       :<|> ProjectsSubscriptionsModifyAckDeadlineResource
-       :<|> ProjectsSubscriptionsPatchResource
-       :<|> ProjectsSubscriptionsGetResource
-       :<|> ProjectsSubscriptionsModifyPushConfigResource
-       :<|> ProjectsSubscriptionsCreateResource
-       :<|> ProjectsSubscriptionsSetIAMPolicyResource
-       :<|> ProjectsSubscriptionsPullResource
-       :<|> ProjectsSubscriptionsSeekResource
-       :<|> ProjectsSubscriptionsTestIAMPermissionsResource
-       :<|> ProjectsSubscriptionsDeleteResource
