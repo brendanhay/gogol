@@ -90,7 +90,6 @@ library
     , mtl
     , pandoc
     , parsec
-    , semigroups
     , system-fileio
     , system-filepath
     , text
