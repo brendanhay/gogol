@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CivicInfo.Types
+-- Module      : Gogol.CivicInfo.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CivicInfo.Types
+module Gogol.CivicInfo.Types
   ( -- * Configuration
     civicInfoService,
 
@@ -166,9 +166,9 @@ module Network.Google.CivicInfo.Types
   )
 where
 
-import Network.Google.CivicInfo.Internal.Product
-import Network.Google.CivicInfo.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CivicInfo.Internal.Product
+import Gogol.CivicInfo.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Google Civic Information API. This contains the host and root path used as a starting point for constructing service requests.
 civicInfoService :: Core.ServiceConfig

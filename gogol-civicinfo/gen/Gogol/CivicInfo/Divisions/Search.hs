@@ -19,53 +19,56 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CivicInfo.Elections.ElectionQuery
+-- Module      : Gogol.CivicInfo.Divisions.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List of available elections to query.
+-- Searches for political divisions by their natural name or OCD ID.
 --
--- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.elections.electionQuery@.
-module Network.Google.CivicInfo.Elections.ElectionQuery
+-- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.divisions.search@.
+module Gogol.CivicInfo.Divisions.Search
   ( -- * Resource
-    CivicInfoElectionsElectionQueryResource,
+    CivicInfoDivisionsSearchResource,
 
     -- ** Constructing a Request
-    newCivicInfoElectionsElectionQuery,
-    CivicInfoElectionsElectionQuery,
+    newCivicInfoDivisionsSearch,
+    CivicInfoDivisionsSearch,
   )
 where
 
-import Network.Google.CivicInfo.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CivicInfo.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @civicinfo.elections.electionQuery@ method which the
--- 'CivicInfoElectionsElectionQuery' request conforms to.
-type CivicInfoElectionsElectionQueryResource =
+-- | A resource alias for @civicinfo.divisions.search@ method which the
+-- 'CivicInfoDivisionsSearch' request conforms to.
+type CivicInfoDivisionsSearchResource =
   "civicinfo"
     Core.:> "v2"
-    Core.:> "elections"
+    Core.:> "divisions"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "query" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ElectionsQueryResponse
+    Core.:> Core.Get '[Core.JSON] DivisionSearchResponse
 
--- | List of available elections to query.
+-- | Searches for political divisions by their natural name or OCD ID.
 --
--- /See:/ 'newCivicInfoElectionsElectionQuery' smart constructor.
-data CivicInfoElectionsElectionQuery = CivicInfoElectionsElectionQuery
+-- /See:/ 'newCivicInfoDivisionsSearch' smart constructor.
+data CivicInfoDivisionsSearch = CivicInfoDivisionsSearch
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http:\/\/lucene.apache.org\/core\/2/9/4\/queryparsersyntax.html
+    query :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -73,31 +76,30 @@ data CivicInfoElectionsElectionQuery = CivicInfoElectionsElectionQuery
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CivicInfoElectionsElectionQuery' with the minimum fields required to make a request.
-newCivicInfoElectionsElectionQuery ::
-  CivicInfoElectionsElectionQuery
-newCivicInfoElectionsElectionQuery =
-  CivicInfoElectionsElectionQuery
+-- | Creates a value of 'CivicInfoDivisionsSearch' with the minimum fields required to make a request.
+newCivicInfoDivisionsSearch ::
+  CivicInfoDivisionsSearch
+newCivicInfoDivisionsSearch =
+  CivicInfoDivisionsSearch
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      query = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CivicInfoElectionsElectionQuery
-  where
+instance Core.GoogleRequest CivicInfoDivisionsSearch where
   type
-    Rs CivicInfoElectionsElectionQuery =
-      ElectionsQueryResponse
-  type Scopes CivicInfoElectionsElectionQuery = '[]
-  requestClient CivicInfoElectionsElectionQuery {..} =
+    Rs CivicInfoDivisionsSearch =
+      DivisionSearchResponse
+  type Scopes CivicInfoDivisionsSearch = '[]
+  requestClient CivicInfoDivisionsSearch {..} =
     go
       xgafv
       accessToken
       callback
+      query
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -106,6 +108,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy CivicInfoElectionsElectionQueryResource
+              Core.Proxy CivicInfoDivisionsSearchResource
           )
           Core.mempty

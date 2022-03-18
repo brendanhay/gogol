@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CivicInfo.Internal.Product
+-- Module      : Gogol.CivicInfo.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CivicInfo.Internal.Product
+module Gogol.CivicInfo.Internal.Product
   ( -- * AdministrationRegion
     AdministrationRegion (..),
     newAdministrationRegion,
@@ -128,8 +128,8 @@ module Network.Google.CivicInfo.Internal.Product
   )
 where
 
-import Network.Google.CivicInfo.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CivicInfo.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Describes information about a regional election administrative area.
 --

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CivicInfo.Elections.VoterInfoQuery
+-- Module      : Gogol.CivicInfo.Elections.VoterInfoQuery
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Looks up information relevant to a voter based on the voter\'s registered address.
 --
 -- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.elections.voterInfoQuery@.
-module Network.Google.CivicInfo.Elections.VoterInfoQuery
+module Gogol.CivicInfo.Elections.VoterInfoQuery
   ( -- * Resource
     CivicInfoElectionsVoterInfoQueryResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CivicInfo.Elections.VoterInfoQuery
   )
 where
 
-import Network.Google.CivicInfo.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CivicInfo.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @civicinfo.elections.voterInfoQuery@ method which the
 -- 'CivicInfoElectionsVoterInfoQuery' request conforms to.

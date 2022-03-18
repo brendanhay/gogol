@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CivicInfo
+-- Module      : Gogol.CivicInfo
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Provides polling places, early vote locations, contest data, election officials, and government representatives for U.S. residential addresses.
 --
 -- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference>
-module Network.Google.CivicInfo
+module Gogol.CivicInfo
   ( -- * Configuration
     civicInfoService,
 
@@ -197,9 +197,9 @@ module Network.Google.CivicInfo
   )
 where
 
-import Network.Google.CivicInfo.Divisions.Search
-import Network.Google.CivicInfo.Elections.ElectionQuery
-import Network.Google.CivicInfo.Elections.VoterInfoQuery
-import Network.Google.CivicInfo.Representatives.RepresentativeInfoByAddress
-import Network.Google.CivicInfo.Representatives.RepresentativeInfoByDivision
-import Network.Google.CivicInfo.Types
+import Gogol.CivicInfo.Divisions.Search
+import Gogol.CivicInfo.Elections.ElectionQuery
+import Gogol.CivicInfo.Elections.VoterInfoQuery
+import Gogol.CivicInfo.Representatives.RepresentativeInfoByAddress
+import Gogol.CivicInfo.Representatives.RepresentativeInfoByDivision
+import Gogol.CivicInfo.Types

@@ -19,69 +19,69 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CivicInfo.Representatives.RepresentativeInfoByAddress
+-- Module      : Gogol.CivicInfo.Representatives.RepresentativeInfoByDivision
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up political geography and representative information for a single address.
+-- Looks up representative information for a single geographic division.
 --
--- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByAddress@.
-module Network.Google.CivicInfo.Representatives.RepresentativeInfoByAddress
+-- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByDivision@.
+module Gogol.CivicInfo.Representatives.RepresentativeInfoByDivision
   ( -- * Resource
-    CivicInfoRepresentativesRepresentativeInfoByAddressResource,
+    CivicInfoRepresentativesRepresentativeInfoByDivisionResource,
 
     -- ** Constructing a Request
-    newCivicInfoRepresentativesRepresentativeInfoByAddress,
-    CivicInfoRepresentativesRepresentativeInfoByAddress,
+    newCivicInfoRepresentativesRepresentativeInfoByDivision,
+    CivicInfoRepresentativesRepresentativeInfoByDivision,
   )
 where
 
-import Network.Google.CivicInfo.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CivicInfo.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @civicinfo.representatives.representativeInfoByAddress@ method which the
--- 'CivicInfoRepresentativesRepresentativeInfoByAddress' request conforms to.
-type CivicInfoRepresentativesRepresentativeInfoByAddressResource =
+-- | A resource alias for @civicinfo.representatives.representativeInfoByDivision@ method which the
+-- 'CivicInfoRepresentativesRepresentativeInfoByDivision' request conforms to.
+type CivicInfoRepresentativesRepresentativeInfoByDivisionResource =
   "civicinfo"
     Core.:> "v2"
     Core.:> "representatives"
+    Core.:> Core.Capture "ocdId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "address" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "includeOffices" Core.Bool
     Core.:> Core.QueryParams
               "levels"
-              RepresentativesRepresentativeInfoByAddressLevels
+              RepresentativesRepresentativeInfoByDivisionLevels
+    Core.:> Core.QueryParam "recursive" Core.Bool
     Core.:> Core.QueryParams
               "roles"
-              RepresentativesRepresentativeInfoByAddressRoles
+              RepresentativesRepresentativeInfoByDivisionRoles
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] RepresentativeInfoResponse
+    Core.:> Core.Get '[Core.JSON] RepresentativeInfoData
 
--- | Looks up political geography and representative information for a single address.
+-- | Looks up representative information for a single geographic division.
 --
--- /See:/ 'newCivicInfoRepresentativesRepresentativeInfoByAddress' smart constructor.
-data CivicInfoRepresentativesRepresentativeInfoByAddress = CivicInfoRepresentativesRepresentativeInfoByAddress
+-- /See:/ 'newCivicInfoRepresentativesRepresentativeInfoByDivision' smart constructor.
+data CivicInfoRepresentativesRepresentativeInfoByDivision = CivicInfoRepresentativesRepresentativeInfoByDivision
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | The address to look up. May only be specified if the field ocdId is not given in the URL
-    address :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Whether to return information about offices and officials. If false, only the top-level district information will be returned.
-    includeOffices :: Core.Bool,
     -- | A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don\'t contain a matching office will not be returned.
-    levels :: (Core.Maybe [RepresentativesRepresentativeInfoByAddressLevels]),
+    levels :: (Core.Maybe [RepresentativesRepresentativeInfoByDivisionLevels]),
+    -- | The Open Civic Data division identifier of the division to look up.
+    ocdId :: Core.Text,
+    -- | If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division\/country:us\/district:dc, this would also return all DC\'s wards and ANCs.
+    recursive :: (Core.Maybe Core.Bool),
     -- | A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don\'t contain a matching office will not be returned.
-    roles :: (Core.Maybe [RepresentativesRepresentativeInfoByAddressRoles]),
+    roles :: (Core.Maybe [RepresentativesRepresentativeInfoByDivisionRoles]),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -89,17 +89,19 @@ data CivicInfoRepresentativesRepresentativeInfoByAddress = CivicInfoRepresentati
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CivicInfoRepresentativesRepresentativeInfoByAddress' with the minimum fields required to make a request.
-newCivicInfoRepresentativesRepresentativeInfoByAddress ::
-  CivicInfoRepresentativesRepresentativeInfoByAddress
-newCivicInfoRepresentativesRepresentativeInfoByAddress =
-  CivicInfoRepresentativesRepresentativeInfoByAddress
+-- | Creates a value of 'CivicInfoRepresentativesRepresentativeInfoByDivision' with the minimum fields required to make a request.
+newCivicInfoRepresentativesRepresentativeInfoByDivision ::
+  -- |  The Open Civic Data division identifier of the division to look up. See 'ocdId'.
+  Core.Text ->
+  CivicInfoRepresentativesRepresentativeInfoByDivision
+newCivicInfoRepresentativesRepresentativeInfoByDivision ocdId =
+  CivicInfoRepresentativesRepresentativeInfoByDivision
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
-      address = Core.Nothing,
       callback = Core.Nothing,
-      includeOffices = Core.True,
       levels = Core.Nothing,
+      ocdId = ocdId,
+      recursive = Core.Nothing,
       roles = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -107,25 +109,25 @@ newCivicInfoRepresentativesRepresentativeInfoByAddress =
 
 instance
   Core.GoogleRequest
-    CivicInfoRepresentativesRepresentativeInfoByAddress
+    CivicInfoRepresentativesRepresentativeInfoByDivision
   where
   type
     Rs
-      CivicInfoRepresentativesRepresentativeInfoByAddress =
-      RepresentativeInfoResponse
+      CivicInfoRepresentativesRepresentativeInfoByDivision =
+      RepresentativeInfoData
   type
     Scopes
-      CivicInfoRepresentativesRepresentativeInfoByAddress =
+      CivicInfoRepresentativesRepresentativeInfoByDivision =
       '[]
   requestClient
-    CivicInfoRepresentativesRepresentativeInfoByAddress {..} =
+    CivicInfoRepresentativesRepresentativeInfoByDivision {..} =
       go
+        ocdId
         xgafv
         accessToken
-        address
         callback
-        (Core.Just includeOffices)
         (levels Core.^. Core._Default)
+        recursive
         (roles Core.^. Core._Default)
         uploadType
         uploadProtocol
@@ -136,6 +138,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CivicInfoRepresentativesRepresentativeInfoByAddressResource
+                  CivicInfoRepresentativesRepresentativeInfoByDivisionResource
             )
             Core.mempty
