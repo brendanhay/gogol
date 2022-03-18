@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,453 +25,452 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ServiceUsage.Types
-    (
-    -- * Configuration
-      serviceUsageService
+  ( -- * Configuration
+    serviceUsageService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
-    , serviceManagementScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    serviceManagementScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AdminQuotaPolicy
-    , AdminQuotaPolicy (..)
-    , newAdminQuotaPolicy
+    AdminQuotaPolicy (..),
+    newAdminQuotaPolicy,
 
     -- ** AdminQuotaPolicy_Dimensions
-    , AdminQuotaPolicy_Dimensions (..)
-    , newAdminQuotaPolicy_Dimensions
+    AdminQuotaPolicy_Dimensions (..),
+    newAdminQuotaPolicy_Dimensions,
 
     -- ** Api
-    , Api (..)
-    , newApi
+    Api (..),
+    newApi,
 
     -- ** Api_Syntax
-    , Api_Syntax (..)
+    Api_Syntax (..),
 
     -- ** AuthProvider
-    , AuthProvider (..)
-    , newAuthProvider
+    AuthProvider (..),
+    newAuthProvider,
 
     -- ** AuthRequirement
-    , AuthRequirement (..)
-    , newAuthRequirement
+    AuthRequirement (..),
+    newAuthRequirement,
 
     -- ** Authentication
-    , Authentication (..)
-    , newAuthentication
+    Authentication (..),
+    newAuthentication,
 
     -- ** AuthenticationRule
-    , AuthenticationRule (..)
-    , newAuthenticationRule
+    AuthenticationRule (..),
+    newAuthenticationRule,
 
     -- ** Backend
-    , Backend (..)
-    , newBackend
+    Backend (..),
+    newBackend,
 
     -- ** BackendRule
-    , BackendRule (..)
-    , newBackendRule
+    BackendRule (..),
+    newBackendRule,
 
     -- ** BackendRule_PathTranslation
-    , BackendRule_PathTranslation (..)
+    BackendRule_PathTranslation (..),
 
     -- ** BatchCreateAdminOverridesResponse
-    , BatchCreateAdminOverridesResponse (..)
-    , newBatchCreateAdminOverridesResponse
+    BatchCreateAdminOverridesResponse (..),
+    newBatchCreateAdminOverridesResponse,
 
     -- ** BatchCreateConsumerOverridesResponse
-    , BatchCreateConsumerOverridesResponse (..)
-    , newBatchCreateConsumerOverridesResponse
+    BatchCreateConsumerOverridesResponse (..),
+    newBatchCreateConsumerOverridesResponse,
 
     -- ** BatchEnableServicesRequest
-    , BatchEnableServicesRequest (..)
-    , newBatchEnableServicesRequest
+    BatchEnableServicesRequest (..),
+    newBatchEnableServicesRequest,
 
     -- ** BatchEnableServicesResponse
-    , BatchEnableServicesResponse (..)
-    , newBatchEnableServicesResponse
+    BatchEnableServicesResponse (..),
+    newBatchEnableServicesResponse,
 
     -- ** BatchGetServicesResponse
-    , BatchGetServicesResponse (..)
-    , newBatchGetServicesResponse
+    BatchGetServicesResponse (..),
+    newBatchGetServicesResponse,
 
     -- ** Billing
-    , Billing (..)
-    , newBilling
+    Billing (..),
+    newBilling,
 
     -- ** BillingDestination
-    , BillingDestination (..)
-    , newBillingDestination
+    BillingDestination (..),
+    newBillingDestination,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Context
-    , Context (..)
-    , newContext
+    Context (..),
+    newContext,
 
     -- ** ContextRule
-    , ContextRule (..)
-    , newContextRule
+    ContextRule (..),
+    newContextRule,
 
     -- ** Control
-    , Control (..)
-    , newControl
+    Control (..),
+    newControl,
 
     -- ** CreateAdminQuotaPolicyMetadata
-    , CreateAdminQuotaPolicyMetadata (..)
-    , newCreateAdminQuotaPolicyMetadata
+    CreateAdminQuotaPolicyMetadata (..),
+    newCreateAdminQuotaPolicyMetadata,
 
     -- ** CustomError
-    , CustomError (..)
-    , newCustomError
+    CustomError (..),
+    newCustomError,
 
     -- ** CustomErrorRule
-    , CustomErrorRule (..)
-    , newCustomErrorRule
+    CustomErrorRule (..),
+    newCustomErrorRule,
 
     -- ** CustomHttpPattern
-    , CustomHttpPattern (..)
-    , newCustomHttpPattern
+    CustomHttpPattern (..),
+    newCustomHttpPattern,
 
     -- ** DeleteAdminQuotaPolicyMetadata
-    , DeleteAdminQuotaPolicyMetadata (..)
-    , newDeleteAdminQuotaPolicyMetadata
+    DeleteAdminQuotaPolicyMetadata (..),
+    newDeleteAdminQuotaPolicyMetadata,
 
     -- ** DisableServiceRequest
-    , DisableServiceRequest (..)
-    , newDisableServiceRequest
+    DisableServiceRequest (..),
+    newDisableServiceRequest,
 
     -- ** DisableServiceRequest_CheckIfServiceHasUsage
-    , DisableServiceRequest_CheckIfServiceHasUsage (..)
+    DisableServiceRequest_CheckIfServiceHasUsage (..),
 
     -- ** DisableServiceResponse
-    , DisableServiceResponse (..)
-    , newDisableServiceResponse
+    DisableServiceResponse (..),
+    newDisableServiceResponse,
 
     -- ** Documentation
-    , Documentation (..)
-    , newDocumentation
+    Documentation (..),
+    newDocumentation,
 
     -- ** DocumentationRule
-    , DocumentationRule (..)
-    , newDocumentationRule
+    DocumentationRule (..),
+    newDocumentationRule,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EnableFailure
-    , EnableFailure (..)
-    , newEnableFailure
+    EnableFailure (..),
+    newEnableFailure,
 
     -- ** EnableServiceRequest
-    , EnableServiceRequest (..)
-    , newEnableServiceRequest
+    EnableServiceRequest (..),
+    newEnableServiceRequest,
 
     -- ** EnableServiceResponse
-    , EnableServiceResponse (..)
-    , newEnableServiceResponse
+    EnableServiceResponse (..),
+    newEnableServiceResponse,
 
     -- ** Endpoint
-    , Endpoint (..)
-    , newEndpoint
+    Endpoint (..),
+    newEndpoint,
 
     -- ** Enum'
-    , Enum' (..)
-    , newEnum
+    Enum' (..),
+    newEnum,
 
     -- ** Enum_Syntax
-    , Enum_Syntax (..)
+    Enum_Syntax (..),
 
     -- ** EnumValue
-    , EnumValue (..)
-    , newEnumValue
+    EnumValue (..),
+    newEnumValue,
 
     -- ** Field
-    , Field (..)
-    , newField
+    Field (..),
+    newField,
 
     -- ** Field_Cardinality
-    , Field_Cardinality (..)
+    Field_Cardinality (..),
 
     -- ** Field_Kind
-    , Field_Kind (..)
+    Field_Kind (..),
 
     -- ** GetServiceIdentityMetadata
-    , GetServiceIdentityMetadata (..)
-    , newGetServiceIdentityMetadata
+    GetServiceIdentityMetadata (..),
+    newGetServiceIdentityMetadata,
 
     -- ** GetServiceIdentityResponse
-    , GetServiceIdentityResponse (..)
-    , newGetServiceIdentityResponse
+    GetServiceIdentityResponse (..),
+    newGetServiceIdentityResponse,
 
     -- ** GetServiceIdentityResponse_State
-    , GetServiceIdentityResponse_State (..)
+    GetServiceIdentityResponse_State (..),
 
     -- ** GoogleApiService
-    , GoogleApiService (..)
-    , newGoogleApiService
+    GoogleApiService (..),
+    newGoogleApiService,
 
     -- ** GoogleApiServiceusageV1OperationMetadata
-    , GoogleApiServiceusageV1OperationMetadata (..)
-    , newGoogleApiServiceusageV1OperationMetadata
+    GoogleApiServiceusageV1OperationMetadata (..),
+    newGoogleApiServiceusageV1OperationMetadata,
 
     -- ** GoogleApiServiceusageV1Service
-    , GoogleApiServiceusageV1Service (..)
-    , newGoogleApiServiceusageV1Service
+    GoogleApiServiceusageV1Service (..),
+    newGoogleApiServiceusageV1Service,
 
     -- ** GoogleApiServiceusageV1Service_State
-    , GoogleApiServiceusageV1Service_State (..)
+    GoogleApiServiceusageV1Service_State (..),
 
     -- ** GoogleApiServiceusageV1ServiceConfig
-    , GoogleApiServiceusageV1ServiceConfig (..)
-    , newGoogleApiServiceusageV1ServiceConfig
+    GoogleApiServiceusageV1ServiceConfig (..),
+    newGoogleApiServiceusageV1ServiceConfig,
 
     -- ** GoogleApiServiceusageV1beta1GetServiceIdentityResponse
-    , GoogleApiServiceusageV1beta1GetServiceIdentityResponse (..)
-    , newGoogleApiServiceusageV1beta1GetServiceIdentityResponse
+    GoogleApiServiceusageV1beta1GetServiceIdentityResponse (..),
+    newGoogleApiServiceusageV1beta1GetServiceIdentityResponse,
 
     -- ** GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State
-    , GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State (..)
+    GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State (..),
 
     -- ** GoogleApiServiceusageV1beta1ServiceIdentity
-    , GoogleApiServiceusageV1beta1ServiceIdentity (..)
-    , newGoogleApiServiceusageV1beta1ServiceIdentity
+    GoogleApiServiceusageV1beta1ServiceIdentity (..),
+    newGoogleApiServiceusageV1beta1ServiceIdentity,
 
     -- ** Http
-    , Http (..)
-    , newHttp
+    Http (..),
+    newHttp,
 
     -- ** HttpRule
-    , HttpRule (..)
-    , newHttpRule
+    HttpRule (..),
+    newHttpRule,
 
     -- ** ImportAdminOverridesMetadata
-    , ImportAdminOverridesMetadata (..)
-    , newImportAdminOverridesMetadata
+    ImportAdminOverridesMetadata (..),
+    newImportAdminOverridesMetadata,
 
     -- ** ImportAdminOverridesResponse
-    , ImportAdminOverridesResponse (..)
-    , newImportAdminOverridesResponse
+    ImportAdminOverridesResponse (..),
+    newImportAdminOverridesResponse,
 
     -- ** ImportAdminQuotaPoliciesMetadata
-    , ImportAdminQuotaPoliciesMetadata (..)
-    , newImportAdminQuotaPoliciesMetadata
+    ImportAdminQuotaPoliciesMetadata (..),
+    newImportAdminQuotaPoliciesMetadata,
 
     -- ** ImportAdminQuotaPoliciesResponse
-    , ImportAdminQuotaPoliciesResponse (..)
-    , newImportAdminQuotaPoliciesResponse
+    ImportAdminQuotaPoliciesResponse (..),
+    newImportAdminQuotaPoliciesResponse,
 
     -- ** ImportConsumerOverridesMetadata
-    , ImportConsumerOverridesMetadata (..)
-    , newImportConsumerOverridesMetadata
+    ImportConsumerOverridesMetadata (..),
+    newImportConsumerOverridesMetadata,
 
     -- ** ImportConsumerOverridesResponse
-    , ImportConsumerOverridesResponse (..)
-    , newImportConsumerOverridesResponse
+    ImportConsumerOverridesResponse (..),
+    newImportConsumerOverridesResponse,
 
     -- ** JwtLocation
-    , JwtLocation (..)
-    , newJwtLocation
+    JwtLocation (..),
+    newJwtLocation,
 
     -- ** LabelDescriptor
-    , LabelDescriptor (..)
-    , newLabelDescriptor
+    LabelDescriptor (..),
+    newLabelDescriptor,
 
     -- ** LabelDescriptor_ValueType
-    , LabelDescriptor_ValueType (..)
+    LabelDescriptor_ValueType (..),
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListServicesResponse
-    , ListServicesResponse (..)
-    , newListServicesResponse
+    ListServicesResponse (..),
+    newListServicesResponse,
 
     -- ** LogDescriptor
-    , LogDescriptor (..)
-    , newLogDescriptor
+    LogDescriptor (..),
+    newLogDescriptor,
 
     -- ** Logging
-    , Logging (..)
-    , newLogging
+    Logging (..),
+    newLogging,
 
     -- ** LoggingDestination
-    , LoggingDestination (..)
-    , newLoggingDestination
+    LoggingDestination (..),
+    newLoggingDestination,
 
     -- ** Method
-    , Method (..)
-    , newMethod
+    Method (..),
+    newMethod,
 
     -- ** Method_Syntax
-    , Method_Syntax (..)
+    Method_Syntax (..),
 
     -- ** MetricDescriptor
-    , MetricDescriptor (..)
-    , newMetricDescriptor
+    MetricDescriptor (..),
+    newMetricDescriptor,
 
     -- ** MetricDescriptor_LaunchStage
-    , MetricDescriptor_LaunchStage (..)
+    MetricDescriptor_LaunchStage (..),
 
     -- ** MetricDescriptor_MetricKind
-    , MetricDescriptor_MetricKind (..)
+    MetricDescriptor_MetricKind (..),
 
     -- ** MetricDescriptor_ValueType
-    , MetricDescriptor_ValueType (..)
+    MetricDescriptor_ValueType (..),
 
     -- ** MetricDescriptorMetadata
-    , MetricDescriptorMetadata (..)
-    , newMetricDescriptorMetadata
+    MetricDescriptorMetadata (..),
+    newMetricDescriptorMetadata,
 
     -- ** MetricDescriptorMetadata_LaunchStage
-    , MetricDescriptorMetadata_LaunchStage (..)
+    MetricDescriptorMetadata_LaunchStage (..),
 
     -- ** MetricRule
-    , MetricRule (..)
-    , newMetricRule
+    MetricRule (..),
+    newMetricRule,
 
     -- ** MetricRule_MetricCosts
-    , MetricRule_MetricCosts (..)
-    , newMetricRule_MetricCosts
+    MetricRule_MetricCosts (..),
+    newMetricRule_MetricCosts,
 
     -- ** Mixin
-    , Mixin (..)
-    , newMixin
+    Mixin (..),
+    newMixin,
 
     -- ** MonitoredResourceDescriptor
-    , MonitoredResourceDescriptor (..)
-    , newMonitoredResourceDescriptor
+    MonitoredResourceDescriptor (..),
+    newMonitoredResourceDescriptor,
 
     -- ** MonitoredResourceDescriptor_LaunchStage
-    , MonitoredResourceDescriptor_LaunchStage (..)
+    MonitoredResourceDescriptor_LaunchStage (..),
 
     -- ** Monitoring
-    , Monitoring (..)
-    , newMonitoring
+    Monitoring (..),
+    newMonitoring,
 
     -- ** MonitoringDestination
-    , MonitoringDestination (..)
-    , newMonitoringDestination
+    MonitoringDestination (..),
+    newMonitoringDestination,
 
     -- ** OAuthRequirements
-    , OAuthRequirements (..)
-    , newOAuthRequirements
+    OAuthRequirements (..),
+    newOAuthRequirements,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** Option
-    , Option (..)
-    , newOption
+    Option (..),
+    newOption,
 
     -- ** Option_Value
-    , Option_Value (..)
-    , newOption_Value
+    Option_Value (..),
+    newOption_Value,
 
     -- ** Page
-    , Page (..)
-    , newPage
+    Page (..),
+    newPage,
 
     -- ** Quota
-    , Quota (..)
-    , newQuota
+    Quota (..),
+    newQuota,
 
     -- ** QuotaLimit
-    , QuotaLimit (..)
-    , newQuotaLimit
+    QuotaLimit (..),
+    newQuotaLimit,
 
     -- ** QuotaLimit_Values
-    , QuotaLimit_Values (..)
-    , newQuotaLimit_Values
+    QuotaLimit_Values (..),
+    newQuotaLimit_Values,
 
     -- ** QuotaOverride
-    , QuotaOverride (..)
-    , newQuotaOverride
+    QuotaOverride (..),
+    newQuotaOverride,
 
     -- ** QuotaOverride_Dimensions
-    , QuotaOverride_Dimensions (..)
-    , newQuotaOverride_Dimensions
+    QuotaOverride_Dimensions (..),
+    newQuotaOverride_Dimensions,
 
     -- ** ServiceIdentity
-    , ServiceIdentity (..)
-    , newServiceIdentity
+    ServiceIdentity (..),
+    newServiceIdentity,
 
     -- ** SourceContext
-    , SourceContext (..)
-    , newSourceContext
+    SourceContext (..),
+    newSourceContext,
 
     -- ** SourceInfo
-    , SourceInfo (..)
-    , newSourceInfo
+    SourceInfo (..),
+    newSourceInfo,
 
     -- ** SourceInfo_SourceFilesItem
-    , SourceInfo_SourceFilesItem (..)
-    , newSourceInfo_SourceFilesItem
+    SourceInfo_SourceFilesItem (..),
+    newSourceInfo_SourceFilesItem,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** SystemParameter
-    , SystemParameter (..)
-    , newSystemParameter
+    SystemParameter (..),
+    newSystemParameter,
 
     -- ** SystemParameterRule
-    , SystemParameterRule (..)
-    , newSystemParameterRule
+    SystemParameterRule (..),
+    newSystemParameterRule,
 
     -- ** SystemParameters
-    , SystemParameters (..)
-    , newSystemParameters
+    SystemParameters (..),
+    newSystemParameters,
 
     -- ** Type
-    , Type (..)
-    , newType
+    Type (..),
+    newType,
 
     -- ** Type_Syntax
-    , Type_Syntax (..)
+    Type_Syntax (..),
 
     -- ** UpdateAdminQuotaPolicyMetadata
-    , UpdateAdminQuotaPolicyMetadata (..)
-    , newUpdateAdminQuotaPolicyMetadata
+    UpdateAdminQuotaPolicyMetadata (..),
+    newUpdateAdminQuotaPolicyMetadata,
 
     -- ** Usage
-    , Usage (..)
-    , newUsage
+    Usage (..),
+    newUsage,
 
     -- ** UsageRule
-    , UsageRule (..)
-    , newUsageRule
-    ) where
+    UsageRule (..),
+    newUsageRule,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ServiceUsage.Internal.Product
@@ -485,10 +478,10 @@ import Gogol.ServiceUsage.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Service Usage API. This contains the host and root path used as a starting point for constructing service requests.
 serviceUsageService :: Core.ServiceConfig
-serviceUsageService
-  = Core.defaultService
-      (Core.ServiceId "serviceusage:v1")
-      "serviceusage.googleapis.com"
+serviceUsageService =
+  Core.defaultService
+    (Core.ServiceId "serviceusage:v1")
+    "serviceusage.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
