@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-dlp
-version:               0.5.0
-synopsis:              Google Cloud Data Loss Prevention (DLP) SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-dlp
+version:            0.5.0
+synopsis:           Google Cloud Data Loss Prevention (DLP) SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Provides methods for detection, risk analysis, and de-identification of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
+  Provides methods for detection, risk analysis, and de-identification of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,131 +31,128 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.DLP
-    , Gogol.DLP.InfoTypes.List
-    , Gogol.DLP.Locations.InfoTypes.List
-    , Gogol.DLP.Organizations.DeidentifyTemplates.Create
-    , Gogol.DLP.Organizations.DeidentifyTemplates.Delete
-    , Gogol.DLP.Organizations.DeidentifyTemplates.Get
-    , Gogol.DLP.Organizations.DeidentifyTemplates.List
-    , Gogol.DLP.Organizations.DeidentifyTemplates.Patch
-    , Gogol.DLP.Organizations.InspectTemplates.Create
-    , Gogol.DLP.Organizations.InspectTemplates.Delete
-    , Gogol.DLP.Organizations.InspectTemplates.Get
-    , Gogol.DLP.Organizations.InspectTemplates.List
-    , Gogol.DLP.Organizations.InspectTemplates.Patch
-    , Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Create
-    , Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Delete
-    , Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Get
-    , Gogol.DLP.Organizations.Locations.DeidentifyTemplates.List
-    , Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Patch
-    , Gogol.DLP.Organizations.Locations.DlpJobs.List
-    , Gogol.DLP.Organizations.Locations.InspectTemplates.Create
-    , Gogol.DLP.Organizations.Locations.InspectTemplates.Delete
-    , Gogol.DLP.Organizations.Locations.InspectTemplates.Get
-    , Gogol.DLP.Organizations.Locations.InspectTemplates.List
-    , Gogol.DLP.Organizations.Locations.InspectTemplates.Patch
-    , Gogol.DLP.Organizations.Locations.JobTriggers.Create
-    , Gogol.DLP.Organizations.Locations.JobTriggers.Delete
-    , Gogol.DLP.Organizations.Locations.JobTriggers.Get
-    , Gogol.DLP.Organizations.Locations.JobTriggers.List
-    , Gogol.DLP.Organizations.Locations.JobTriggers.Patch
-    , Gogol.DLP.Organizations.Locations.StoredInfoTypes.Create
-    , Gogol.DLP.Organizations.Locations.StoredInfoTypes.Delete
-    , Gogol.DLP.Organizations.Locations.StoredInfoTypes.Get
-    , Gogol.DLP.Organizations.Locations.StoredInfoTypes.List
-    , Gogol.DLP.Organizations.Locations.StoredInfoTypes.Patch
-    , Gogol.DLP.Organizations.StoredInfoTypes.Create
-    , Gogol.DLP.Organizations.StoredInfoTypes.Delete
-    , Gogol.DLP.Organizations.StoredInfoTypes.Get
-    , Gogol.DLP.Organizations.StoredInfoTypes.List
-    , Gogol.DLP.Organizations.StoredInfoTypes.Patch
-    , Gogol.DLP.Projects.Content.Deidentify
-    , Gogol.DLP.Projects.Content.Inspect
-    , Gogol.DLP.Projects.Content.Reidentify
-    , Gogol.DLP.Projects.DeidentifyTemplates.Create
-    , Gogol.DLP.Projects.DeidentifyTemplates.Delete
-    , Gogol.DLP.Projects.DeidentifyTemplates.Get
-    , Gogol.DLP.Projects.DeidentifyTemplates.List
-    , Gogol.DLP.Projects.DeidentifyTemplates.Patch
-    , Gogol.DLP.Projects.DlpJobs.Cancel
-    , Gogol.DLP.Projects.DlpJobs.Create
-    , Gogol.DLP.Projects.DlpJobs.Delete
-    , Gogol.DLP.Projects.DlpJobs.Get
-    , Gogol.DLP.Projects.DlpJobs.List
-    , Gogol.DLP.Projects.Image.Redact
-    , Gogol.DLP.Projects.InspectTemplates.Create
-    , Gogol.DLP.Projects.InspectTemplates.Delete
-    , Gogol.DLP.Projects.InspectTemplates.Get
-    , Gogol.DLP.Projects.InspectTemplates.List
-    , Gogol.DLP.Projects.InspectTemplates.Patch
-    , Gogol.DLP.Projects.JobTriggers.Activate
-    , Gogol.DLP.Projects.JobTriggers.Create
-    , Gogol.DLP.Projects.JobTriggers.Delete
-    , Gogol.DLP.Projects.JobTriggers.Get
-    , Gogol.DLP.Projects.JobTriggers.List
-    , Gogol.DLP.Projects.JobTriggers.Patch
-    , Gogol.DLP.Projects.Locations.Content.Deidentify
-    , Gogol.DLP.Projects.Locations.Content.Inspect
-    , Gogol.DLP.Projects.Locations.Content.Reidentify
-    , Gogol.DLP.Projects.Locations.DeidentifyTemplates.Create
-    , Gogol.DLP.Projects.Locations.DeidentifyTemplates.Delete
-    , Gogol.DLP.Projects.Locations.DeidentifyTemplates.Get
-    , Gogol.DLP.Projects.Locations.DeidentifyTemplates.List
-    , Gogol.DLP.Projects.Locations.DeidentifyTemplates.Patch
-    , Gogol.DLP.Projects.Locations.DlpJobs.Cancel
-    , Gogol.DLP.Projects.Locations.DlpJobs.Create
-    , Gogol.DLP.Projects.Locations.DlpJobs.Delete
-    , Gogol.DLP.Projects.Locations.DlpJobs.Finish
-    , Gogol.DLP.Projects.Locations.DlpJobs.Get
-    , Gogol.DLP.Projects.Locations.DlpJobs.HybridInspect
-    , Gogol.DLP.Projects.Locations.DlpJobs.List
-    , Gogol.DLP.Projects.Locations.Image.Redact
-    , Gogol.DLP.Projects.Locations.InspectTemplates.Create
-    , Gogol.DLP.Projects.Locations.InspectTemplates.Delete
-    , Gogol.DLP.Projects.Locations.InspectTemplates.Get
-    , Gogol.DLP.Projects.Locations.InspectTemplates.List
-    , Gogol.DLP.Projects.Locations.InspectTemplates.Patch
-    , Gogol.DLP.Projects.Locations.JobTriggers.Activate
-    , Gogol.DLP.Projects.Locations.JobTriggers.Create
-    , Gogol.DLP.Projects.Locations.JobTriggers.Delete
-    , Gogol.DLP.Projects.Locations.JobTriggers.Get
-    , Gogol.DLP.Projects.Locations.JobTriggers.HybridInspect
-    , Gogol.DLP.Projects.Locations.JobTriggers.List
-    , Gogol.DLP.Projects.Locations.JobTriggers.Patch
-    , Gogol.DLP.Projects.Locations.StoredInfoTypes.Create
-    , Gogol.DLP.Projects.Locations.StoredInfoTypes.Delete
-    , Gogol.DLP.Projects.Locations.StoredInfoTypes.Get
-    , Gogol.DLP.Projects.Locations.StoredInfoTypes.List
-    , Gogol.DLP.Projects.Locations.StoredInfoTypes.Patch
-    , Gogol.DLP.Projects.StoredInfoTypes.Create
-    , Gogol.DLP.Projects.StoredInfoTypes.Delete
-    , Gogol.DLP.Projects.StoredInfoTypes.Get
-    , Gogol.DLP.Projects.StoredInfoTypes.List
-    , Gogol.DLP.Projects.StoredInfoTypes.Patch
-    , Gogol.DLP.Types
+    Gogol.DLP
+    Gogol.DLP.InfoTypes.List
+    Gogol.DLP.Locations.InfoTypes.List
+    Gogol.DLP.Organizations.DeidentifyTemplates.Create
+    Gogol.DLP.Organizations.DeidentifyTemplates.Delete
+    Gogol.DLP.Organizations.DeidentifyTemplates.Get
+    Gogol.DLP.Organizations.DeidentifyTemplates.List
+    Gogol.DLP.Organizations.DeidentifyTemplates.Patch
+    Gogol.DLP.Organizations.InspectTemplates.Create
+    Gogol.DLP.Organizations.InspectTemplates.Delete
+    Gogol.DLP.Organizations.InspectTemplates.Get
+    Gogol.DLP.Organizations.InspectTemplates.List
+    Gogol.DLP.Organizations.InspectTemplates.Patch
+    Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Create
+    Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Delete
+    Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Get
+    Gogol.DLP.Organizations.Locations.DeidentifyTemplates.List
+    Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Patch
+    Gogol.DLP.Organizations.Locations.DlpJobs.List
+    Gogol.DLP.Organizations.Locations.InspectTemplates.Create
+    Gogol.DLP.Organizations.Locations.InspectTemplates.Delete
+    Gogol.DLP.Organizations.Locations.InspectTemplates.Get
+    Gogol.DLP.Organizations.Locations.InspectTemplates.List
+    Gogol.DLP.Organizations.Locations.InspectTemplates.Patch
+    Gogol.DLP.Organizations.Locations.JobTriggers.Create
+    Gogol.DLP.Organizations.Locations.JobTriggers.Delete
+    Gogol.DLP.Organizations.Locations.JobTriggers.Get
+    Gogol.DLP.Organizations.Locations.JobTriggers.List
+    Gogol.DLP.Organizations.Locations.JobTriggers.Patch
+    Gogol.DLP.Organizations.Locations.StoredInfoTypes.Create
+    Gogol.DLP.Organizations.Locations.StoredInfoTypes.Delete
+    Gogol.DLP.Organizations.Locations.StoredInfoTypes.Get
+    Gogol.DLP.Organizations.Locations.StoredInfoTypes.List
+    Gogol.DLP.Organizations.Locations.StoredInfoTypes.Patch
+    Gogol.DLP.Organizations.StoredInfoTypes.Create
+    Gogol.DLP.Organizations.StoredInfoTypes.Delete
+    Gogol.DLP.Organizations.StoredInfoTypes.Get
+    Gogol.DLP.Organizations.StoredInfoTypes.List
+    Gogol.DLP.Organizations.StoredInfoTypes.Patch
+    Gogol.DLP.Projects.Content.Deidentify
+    Gogol.DLP.Projects.Content.Inspect
+    Gogol.DLP.Projects.Content.Reidentify
+    Gogol.DLP.Projects.DeidentifyTemplates.Create
+    Gogol.DLP.Projects.DeidentifyTemplates.Delete
+    Gogol.DLP.Projects.DeidentifyTemplates.Get
+    Gogol.DLP.Projects.DeidentifyTemplates.List
+    Gogol.DLP.Projects.DeidentifyTemplates.Patch
+    Gogol.DLP.Projects.DlpJobs.Cancel
+    Gogol.DLP.Projects.DlpJobs.Create
+    Gogol.DLP.Projects.DlpJobs.Delete
+    Gogol.DLP.Projects.DlpJobs.Get
+    Gogol.DLP.Projects.DlpJobs.List
+    Gogol.DLP.Projects.Image.Redact
+    Gogol.DLP.Projects.InspectTemplates.Create
+    Gogol.DLP.Projects.InspectTemplates.Delete
+    Gogol.DLP.Projects.InspectTemplates.Get
+    Gogol.DLP.Projects.InspectTemplates.List
+    Gogol.DLP.Projects.InspectTemplates.Patch
+    Gogol.DLP.Projects.JobTriggers.Activate
+    Gogol.DLP.Projects.JobTriggers.Create
+    Gogol.DLP.Projects.JobTriggers.Delete
+    Gogol.DLP.Projects.JobTriggers.Get
+    Gogol.DLP.Projects.JobTriggers.List
+    Gogol.DLP.Projects.JobTriggers.Patch
+    Gogol.DLP.Projects.Locations.Content.Deidentify
+    Gogol.DLP.Projects.Locations.Content.Inspect
+    Gogol.DLP.Projects.Locations.Content.Reidentify
+    Gogol.DLP.Projects.Locations.DeidentifyTemplates.Create
+    Gogol.DLP.Projects.Locations.DeidentifyTemplates.Delete
+    Gogol.DLP.Projects.Locations.DeidentifyTemplates.Get
+    Gogol.DLP.Projects.Locations.DeidentifyTemplates.List
+    Gogol.DLP.Projects.Locations.DeidentifyTemplates.Patch
+    Gogol.DLP.Projects.Locations.DlpJobs.Cancel
+    Gogol.DLP.Projects.Locations.DlpJobs.Create
+    Gogol.DLP.Projects.Locations.DlpJobs.Delete
+    Gogol.DLP.Projects.Locations.DlpJobs.Finish
+    Gogol.DLP.Projects.Locations.DlpJobs.Get
+    Gogol.DLP.Projects.Locations.DlpJobs.HybridInspect
+    Gogol.DLP.Projects.Locations.DlpJobs.List
+    Gogol.DLP.Projects.Locations.Image.Redact
+    Gogol.DLP.Projects.Locations.InspectTemplates.Create
+    Gogol.DLP.Projects.Locations.InspectTemplates.Delete
+    Gogol.DLP.Projects.Locations.InspectTemplates.Get
+    Gogol.DLP.Projects.Locations.InspectTemplates.List
+    Gogol.DLP.Projects.Locations.InspectTemplates.Patch
+    Gogol.DLP.Projects.Locations.JobTriggers.Activate
+    Gogol.DLP.Projects.Locations.JobTriggers.Create
+    Gogol.DLP.Projects.Locations.JobTriggers.Delete
+    Gogol.DLP.Projects.Locations.JobTriggers.Get
+    Gogol.DLP.Projects.Locations.JobTriggers.HybridInspect
+    Gogol.DLP.Projects.Locations.JobTriggers.List
+    Gogol.DLP.Projects.Locations.JobTriggers.Patch
+    Gogol.DLP.Projects.Locations.StoredInfoTypes.Create
+    Gogol.DLP.Projects.Locations.StoredInfoTypes.Delete
+    Gogol.DLP.Projects.Locations.StoredInfoTypes.Get
+    Gogol.DLP.Projects.Locations.StoredInfoTypes.List
+    Gogol.DLP.Projects.Locations.StoredInfoTypes.Patch
+    Gogol.DLP.Projects.StoredInfoTypes.Create
+    Gogol.DLP.Projects.StoredInfoTypes.Delete
+    Gogol.DLP.Projects.StoredInfoTypes.Get
+    Gogol.DLP.Projects.StoredInfoTypes.List
+    Gogol.DLP.Projects.StoredInfoTypes.Patch
+    Gogol.DLP.Types
 
   other-modules:
-      Gogol.DLP.Internal.Product
-    , Gogol.DLP.Internal.Sum
+    Gogol.DLP.Internal.Product
+    Gogol.DLP.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
