@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.WebSecurityScanner.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Finding_Severity
     Finding_Severity
-      ( Finding_Severity_SEVERITYUNSPECIFIED,
+      (
+        Finding_Severity_SEVERITYUNSPECIFIED,
         Finding_Severity_Critical,
         Finding_Severity_High,
         Finding_Severity_Medium,
@@ -45,7 +56,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanConfig_ExportToSecurityCommandCenter
     ScanConfig_ExportToSecurityCommandCenter
-      ( ScanConfig_ExportToSecurityCommandCenter_EXPORTTOSECURITYCOMMANDCENTERUNSPECIFIED,
+      (
+        ScanConfig_ExportToSecurityCommandCenter_EXPORTTOSECURITYCOMMANDCENTERUNSPECIFIED,
         ScanConfig_ExportToSecurityCommandCenter_Enabled,
         ScanConfig_ExportToSecurityCommandCenter_Disabled,
         ..
@@ -53,7 +65,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanConfig_RiskLevel
     ScanConfig_RiskLevel
-      ( ScanConfig_RiskLevel_RISKLEVELUNSPECIFIED,
+      (
+        ScanConfig_RiskLevel_RISKLEVELUNSPECIFIED,
         ScanConfig_RiskLevel_Normal,
         ScanConfig_RiskLevel_Low,
         ..
@@ -61,7 +74,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanConfig_UserAgent
     ScanConfig_UserAgent
-      ( ScanConfig_UserAgent_USERAGENTUNSPECIFIED,
+      (
+        ScanConfig_UserAgent_USERAGENTUNSPECIFIED,
         ScanConfig_UserAgent_CHROMELINUX,
         ScanConfig_UserAgent_CHROMEANDROID,
         ScanConfig_UserAgent_SAFARIIPHONE,
@@ -70,7 +84,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanConfigError_Code
     ScanConfigError_Code
-      ( ScanConfigError_Code_CODEUNSPECIFIED,
+      (
+        ScanConfigError_Code_CODEUNSPECIFIED,
         ScanConfigError_Code_OK,
         ScanConfigError_Code_INTERNALERROR,
         ScanConfigError_Code_APPENGINEAPIBACKENDERROR,
@@ -117,7 +132,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanRun_ExecutionState
     ScanRun_ExecutionState
-      ( ScanRun_ExecutionState_EXECUTIONSTATEUNSPECIFIED,
+      (
+        ScanRun_ExecutionState_EXECUTIONSTATEUNSPECIFIED,
         ScanRun_ExecutionState_Queued,
         ScanRun_ExecutionState_Scanning,
         ScanRun_ExecutionState_Finished,
@@ -126,7 +142,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanRun_ResultState
     ScanRun_ResultState
-      ( ScanRun_ResultState_RESULTSTATEUNSPECIFIED,
+      (
+        ScanRun_ResultState_RESULTSTATEUNSPECIFIED,
         ScanRun_ResultState_Success,
         ScanRun_ResultState_Error',
         ScanRun_ResultState_Killed,
@@ -135,7 +152,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanRunErrorTrace_Code
     ScanRunErrorTrace_Code
-      ( ScanRunErrorTrace_Code_CODEUNSPECIFIED,
+      (
+        ScanRunErrorTrace_Code_CODEUNSPECIFIED,
         ScanRunErrorTrace_Code_INTERNALERROR,
         ScanRunErrorTrace_Code_SCANCONFIGISSUE,
         ScanRunErrorTrace_Code_AUTHENTICATIONCONFIGISSUE,
@@ -147,7 +165,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * ScanRunWarningTrace_Code
     ScanRunWarningTrace_Code
-      ( ScanRunWarningTrace_Code_CODEUNSPECIFIED,
+      (
+        ScanRunWarningTrace_Code_CODEUNSPECIFIED,
         ScanRunWarningTrace_Code_INSUFFICIENTCRAWLRESULTS,
         ScanRunWarningTrace_Code_TOOMANYCRAWLRESULTS,
         ScanRunWarningTrace_Code_TOOMANYFUZZTASKS,
@@ -158,7 +177,8 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * Xss_AttackVector
     Xss_AttackVector
-      ( Xss_AttackVector_ATTACKVECTORUNSPECIFIED,
+      (
+        Xss_AttackVector_ATTACKVECTORUNSPECIFIED,
         Xss_AttackVector_LOCALSTORAGE,
         Xss_AttackVector_SESSIONSTORAGE,
         Xss_AttackVector_WINDOWNAME,
@@ -179,27 +199,27 @@ module Gogol.WebSecurityScanner.Internal.Sum
 
     -- * Xxe_PayloadLocation
     Xxe_PayloadLocation
-      ( Xxe_PayloadLocation_LOCATIONUNSPECIFIED,
+      (
+        Xxe_PayloadLocation_LOCATIONUNSPECIFIED,
         Xxe_PayloadLocation_COMPLETEREQUESTBODY,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -212,21 +232,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Output only. The severity level of the reported vulnerability.
-newtype Finding_Severity = Finding_Severity {fromFinding_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Finding_Severity = Finding_Severity { fromFinding_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No severity specified. The default value.
 pattern Finding_Severity_SEVERITYUNSPECIFIED :: Finding_Severity
@@ -254,21 +273,20 @@ pattern Finding_Severity_Low = Finding_Severity "LOW"
   Finding_Severity_High,
   Finding_Severity_Medium,
   Finding_Severity_Low,
-  Finding_Severity
-  #-}
+  Finding_Severity #-}
 
 -- | Controls export of scan configurations and results to Security Command Center.
-newtype ScanConfig_ExportToSecurityCommandCenter = ScanConfig_ExportToSecurityCommandCenter {fromScanConfig_ExportToSecurityCommandCenter :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanConfig_ExportToSecurityCommandCenter = ScanConfig_ExportToSecurityCommandCenter { fromScanConfig_ExportToSecurityCommandCenter :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Use default, which is ENABLED.
 pattern ScanConfig_ExportToSecurityCommandCenter_EXPORTTOSECURITYCOMMANDCENTERUNSPECIFIED :: ScanConfig_ExportToSecurityCommandCenter
@@ -286,21 +304,20 @@ pattern ScanConfig_ExportToSecurityCommandCenter_Disabled = ScanConfig_ExportToS
   ScanConfig_ExportToSecurityCommandCenter_EXPORTTOSECURITYCOMMANDCENTERUNSPECIFIED,
   ScanConfig_ExportToSecurityCommandCenter_Enabled,
   ScanConfig_ExportToSecurityCommandCenter_Disabled,
-  ScanConfig_ExportToSecurityCommandCenter
-  #-}
+  ScanConfig_ExportToSecurityCommandCenter #-}
 
 -- | The risk level selected for the scan
-newtype ScanConfig_RiskLevel = ScanConfig_RiskLevel {fromScanConfig_RiskLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanConfig_RiskLevel = ScanConfig_RiskLevel { fromScanConfig_RiskLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Use default, which is NORMAL.
 pattern ScanConfig_RiskLevel_RISKLEVELUNSPECIFIED :: ScanConfig_RiskLevel
@@ -318,21 +335,20 @@ pattern ScanConfig_RiskLevel_Low = ScanConfig_RiskLevel "LOW"
   ScanConfig_RiskLevel_RISKLEVELUNSPECIFIED,
   ScanConfig_RiskLevel_Normal,
   ScanConfig_RiskLevel_Low,
-  ScanConfig_RiskLevel
-  #-}
+  ScanConfig_RiskLevel #-}
 
 -- | The user agent used during scanning.
-newtype ScanConfig_UserAgent = ScanConfig_UserAgent {fromScanConfig_UserAgent :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanConfig_UserAgent = ScanConfig_UserAgent { fromScanConfig_UserAgent :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The user agent is unknown. Service will default to CHROME_LINUX.
 pattern ScanConfig_UserAgent_USERAGENTUNSPECIFIED :: ScanConfig_UserAgent
@@ -355,21 +371,20 @@ pattern ScanConfig_UserAgent_SAFARIIPHONE = ScanConfig_UserAgent "SAFARI_IPHONE"
   ScanConfig_UserAgent_CHROMELINUX,
   ScanConfig_UserAgent_CHROMEANDROID,
   ScanConfig_UserAgent_SAFARIIPHONE,
-  ScanConfig_UserAgent
-  #-}
+  ScanConfig_UserAgent #-}
 
 -- | Output only. Indicates the reason code for a configuration failure.
-newtype ScanConfigError_Code = ScanConfigError_Code {fromScanConfigError_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanConfigError_Code = ScanConfigError_Code { fromScanConfigError_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | There is no error.
 pattern ScanConfigError_Code_CODEUNSPECIFIED :: ScanConfigError_Code
@@ -582,21 +597,20 @@ pattern ScanConfigError_Code_UNSUPPORTEDURLSCHEME = ScanConfigError_Code "UNSUPP
   ScanConfigError_Code_UNSUPPORTEDFILTER,
   ScanConfigError_Code_UNSUPPORTEDFINDINGTYPE,
   ScanConfigError_Code_UNSUPPORTEDURLSCHEME,
-  ScanConfigError_Code
-  #-}
+  ScanConfigError_Code #-}
 
 -- | Output only. The execution state of the ScanRun.
-newtype ScanRun_ExecutionState = ScanRun_ExecutionState {fromScanRun_ExecutionState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanRun_ExecutionState = ScanRun_ExecutionState { fromScanRun_ExecutionState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Represents an invalid state caused by internal server error. This value should never be returned.
 pattern ScanRun_ExecutionState_EXECUTIONSTATEUNSPECIFIED :: ScanRun_ExecutionState
@@ -619,21 +633,20 @@ pattern ScanRun_ExecutionState_Finished = ScanRun_ExecutionState "FINISHED"
   ScanRun_ExecutionState_Queued,
   ScanRun_ExecutionState_Scanning,
   ScanRun_ExecutionState_Finished,
-  ScanRun_ExecutionState
-  #-}
+  ScanRun_ExecutionState #-}
 
 -- | Output only. The result state of the ScanRun. This field is only available after the execution state reaches \"FINISHED\".
-newtype ScanRun_ResultState = ScanRun_ResultState {fromScanRun_ResultState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanRun_ResultState = ScanRun_ResultState { fromScanRun_ResultState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value is returned when the ScanRun is not yet finished.
 pattern ScanRun_ResultState_RESULTSTATEUNSPECIFIED :: ScanRun_ResultState
@@ -656,21 +669,20 @@ pattern ScanRun_ResultState_Killed = ScanRun_ResultState "KILLED"
   ScanRun_ResultState_Success,
   ScanRun_ResultState_Error',
   ScanRun_ResultState_Killed,
-  ScanRun_ResultState
-  #-}
+  ScanRun_ResultState #-}
 
 -- | Output only. Indicates the error reason code.
-newtype ScanRunErrorTrace_Code = ScanRunErrorTrace_Code {fromScanRunErrorTrace_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanRunErrorTrace_Code = ScanRunErrorTrace_Code { fromScanRunErrorTrace_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value is never used.
 pattern ScanRunErrorTrace_Code_CODEUNSPECIFIED :: ScanRunErrorTrace_Code
@@ -708,21 +720,20 @@ pattern ScanRunErrorTrace_Code_TOOMANYHTTPERRORS = ScanRunErrorTrace_Code "TOO_M
   ScanRunErrorTrace_Code_TIMEDOUTWHILESCANNING,
   ScanRunErrorTrace_Code_TOOMANYREDIRECTS,
   ScanRunErrorTrace_Code_TOOMANYHTTPERRORS,
-  ScanRunErrorTrace_Code
-  #-}
+  ScanRunErrorTrace_Code #-}
 
 -- | Output only. Indicates the warning code.
-newtype ScanRunWarningTrace_Code = ScanRunWarningTrace_Code {fromScanRunWarningTrace_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScanRunWarningTrace_Code = ScanRunWarningTrace_Code { fromScanRunWarningTrace_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value is never used.
 pattern ScanRunWarningTrace_Code_CODEUNSPECIFIED :: ScanRunWarningTrace_Code
@@ -755,21 +766,20 @@ pattern ScanRunWarningTrace_Code_NOSTARTINGURLFOUNDFORMANAGEDSCAN = ScanRunWarni
   ScanRunWarningTrace_Code_TOOMANYFUZZTASKS,
   ScanRunWarningTrace_Code_BLOCKEDBYIAP,
   ScanRunWarningTrace_Code_NOSTARTINGURLFOUNDFORMANAGEDSCAN,
-  ScanRunWarningTrace_Code
-  #-}
+  ScanRunWarningTrace_Code #-}
 
 -- | The attack vector of the payload triggering this XSS.
-newtype Xss_AttackVector = Xss_AttackVector {fromXss_AttackVector :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xss_AttackVector = Xss_AttackVector { fromXss_AttackVector :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown attack vector.
 pattern Xss_AttackVector_ATTACKVECTORUNSPECIFIED :: Xss_AttackVector
@@ -852,21 +862,20 @@ pattern Xss_AttackVector_USERCONTROLLABLEURL = Xss_AttackVector "USER_CONTROLLAB
   Xss_AttackVector_STOREDXSS,
   Xss_AttackVector_SAMEORIGIN,
   Xss_AttackVector_USERCONTROLLABLEURL,
-  Xss_AttackVector
-  #-}
+  Xss_AttackVector #-}
 
 -- | Location within the request where the payload was placed.
-newtype Xxe_PayloadLocation = Xxe_PayloadLocation {fromXxe_PayloadLocation :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xxe_PayloadLocation = Xxe_PayloadLocation { fromXxe_PayloadLocation :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown Location.
 pattern Xxe_PayloadLocation_LOCATIONUNSPECIFIED :: Xxe_PayloadLocation
@@ -879,5 +888,4 @@ pattern Xxe_PayloadLocation_COMPLETEREQUESTBODY = Xxe_PayloadLocation "COMPLETE_
 {-# COMPLETE
   Xxe_PayloadLocation_LOCATIONUNSPECIFIED,
   Xxe_PayloadLocation_COMPLETEREQUESTBODY,
-  Xxe_PayloadLocation
-  #-}
+  Xxe_PayloadLocation #-}
