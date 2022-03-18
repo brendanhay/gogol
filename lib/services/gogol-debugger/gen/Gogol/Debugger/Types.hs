@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,176 +25,175 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Debugger.Types
-    (
-    -- * Configuration
-      debuggerService
+  ( -- * Configuration
+    debuggerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloud_debuggerScope
+    cloudPlatformScope,
+    cloud_debuggerScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AliasContext
-    , AliasContext (..)
-    , newAliasContext
+    AliasContext (..),
+    newAliasContext,
 
     -- ** AliasContext_Kind
-    , AliasContext_Kind (..)
+    AliasContext_Kind (..),
 
     -- ** Breakpoint
-    , Breakpoint (..)
-    , newBreakpoint
+    Breakpoint (..),
+    newBreakpoint,
 
     -- ** Breakpoint_Action
-    , Breakpoint_Action (..)
+    Breakpoint_Action (..),
 
     -- ** Breakpoint_Labels
-    , Breakpoint_Labels (..)
-    , newBreakpoint_Labels
+    Breakpoint_Labels (..),
+    newBreakpoint_Labels,
 
     -- ** Breakpoint_LogLevel
-    , Breakpoint_LogLevel (..)
+    Breakpoint_LogLevel (..),
 
     -- ** Breakpoint_State
-    , Breakpoint_State (..)
+    Breakpoint_State (..),
 
     -- ** CloudRepoSourceContext
-    , CloudRepoSourceContext (..)
-    , newCloudRepoSourceContext
+    CloudRepoSourceContext (..),
+    newCloudRepoSourceContext,
 
     -- ** CloudWorkspaceId
-    , CloudWorkspaceId (..)
-    , newCloudWorkspaceId
+    CloudWorkspaceId (..),
+    newCloudWorkspaceId,
 
     -- ** CloudWorkspaceSourceContext
-    , CloudWorkspaceSourceContext (..)
-    , newCloudWorkspaceSourceContext
+    CloudWorkspaceSourceContext (..),
+    newCloudWorkspaceSourceContext,
 
     -- ** Debuggee
-    , Debuggee (..)
-    , newDebuggee
+    Debuggee (..),
+    newDebuggee,
 
     -- ** Debuggee_CanaryMode
-    , Debuggee_CanaryMode (..)
+    Debuggee_CanaryMode (..),
 
     -- ** Debuggee_Labels
-    , Debuggee_Labels (..)
-    , newDebuggee_Labels
+    Debuggee_Labels (..),
+    newDebuggee_Labels,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** ExtendedSourceContext
-    , ExtendedSourceContext (..)
-    , newExtendedSourceContext
+    ExtendedSourceContext (..),
+    newExtendedSourceContext,
 
     -- ** ExtendedSourceContext_Labels
-    , ExtendedSourceContext_Labels (..)
-    , newExtendedSourceContext_Labels
+    ExtendedSourceContext_Labels (..),
+    newExtendedSourceContext_Labels,
 
     -- ** FormatMessage
-    , FormatMessage (..)
-    , newFormatMessage
+    FormatMessage (..),
+    newFormatMessage,
 
     -- ** GerritSourceContext
-    , GerritSourceContext (..)
-    , newGerritSourceContext
+    GerritSourceContext (..),
+    newGerritSourceContext,
 
     -- ** GetBreakpointResponse
-    , GetBreakpointResponse (..)
-    , newGetBreakpointResponse
+    GetBreakpointResponse (..),
+    newGetBreakpointResponse,
 
     -- ** GitSourceContext
-    , GitSourceContext (..)
-    , newGitSourceContext
+    GitSourceContext (..),
+    newGitSourceContext,
 
     -- ** ListActiveBreakpointsResponse
-    , ListActiveBreakpointsResponse (..)
-    , newListActiveBreakpointsResponse
+    ListActiveBreakpointsResponse (..),
+    newListActiveBreakpointsResponse,
 
     -- ** ListBreakpointsResponse
-    , ListBreakpointsResponse (..)
-    , newListBreakpointsResponse
+    ListBreakpointsResponse (..),
+    newListBreakpointsResponse,
 
     -- ** ListDebuggeesResponse
-    , ListDebuggeesResponse (..)
-    , newListDebuggeesResponse
+    ListDebuggeesResponse (..),
+    newListDebuggeesResponse,
 
     -- ** ProjectRepoId
-    , ProjectRepoId (..)
-    , newProjectRepoId
+    ProjectRepoId (..),
+    newProjectRepoId,
 
     -- ** RegisterDebuggeeRequest
-    , RegisterDebuggeeRequest (..)
-    , newRegisterDebuggeeRequest
+    RegisterDebuggeeRequest (..),
+    newRegisterDebuggeeRequest,
 
     -- ** RegisterDebuggeeResponse
-    , RegisterDebuggeeResponse (..)
-    , newRegisterDebuggeeResponse
+    RegisterDebuggeeResponse (..),
+    newRegisterDebuggeeResponse,
 
     -- ** RepoId
-    , RepoId (..)
-    , newRepoId
+    RepoId (..),
+    newRepoId,
 
     -- ** SetBreakpointResponse
-    , SetBreakpointResponse (..)
-    , newSetBreakpointResponse
+    SetBreakpointResponse (..),
+    newSetBreakpointResponse,
 
     -- ** SourceContext
-    , SourceContext (..)
-    , newSourceContext
+    SourceContext (..),
+    newSourceContext,
 
     -- ** SourceLocation
-    , SourceLocation (..)
-    , newSourceLocation
+    SourceLocation (..),
+    newSourceLocation,
 
     -- ** StackFrame
-    , StackFrame (..)
-    , newStackFrame
+    StackFrame (..),
+    newStackFrame,
 
     -- ** StatusMessage
-    , StatusMessage (..)
-    , newStatusMessage
+    StatusMessage (..),
+    newStatusMessage,
 
     -- ** StatusMessage_RefersTo
-    , StatusMessage_RefersTo (..)
+    StatusMessage_RefersTo (..),
 
     -- ** UpdateActiveBreakpointRequest
-    , UpdateActiveBreakpointRequest (..)
-    , newUpdateActiveBreakpointRequest
+    UpdateActiveBreakpointRequest (..),
+    newUpdateActiveBreakpointRequest,
 
     -- ** UpdateActiveBreakpointResponse
-    , UpdateActiveBreakpointResponse (..)
-    , newUpdateActiveBreakpointResponse
+    UpdateActiveBreakpointResponse (..),
+    newUpdateActiveBreakpointResponse,
 
     -- ** Variable
-    , Variable (..)
-    , newVariable
+    Variable (..),
+    newVariable,
 
     -- ** DebuggerDebuggeesBreakpointsListActionValue
-    , DebuggerDebuggeesBreakpointsListActionValue (..)
+    DebuggerDebuggeesBreakpointsListActionValue (..),
 
     -- ** DebuggerDebuggeesBreakpointsSetCanaryOption
-    , DebuggerDebuggeesBreakpointsSetCanaryOption (..)
-    ) where
+    DebuggerDebuggeesBreakpointsSetCanaryOption (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Debugger.Internal.Product
 import Gogol.Debugger.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
 debuggerService :: Core.ServiceConfig
-debuggerService
-  = Core.defaultService
-      (Core.ServiceId "clouddebugger:v2")
-      "clouddebugger.googleapis.com"
+debuggerService =
+  Core.defaultService
+    (Core.ServiceId "clouddebugger:v2")
+    "clouddebugger.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]

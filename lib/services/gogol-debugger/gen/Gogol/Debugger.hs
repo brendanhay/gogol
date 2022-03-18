@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,205 +30,205 @@
 --
 -- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference>
 module Gogol.Debugger
-    (
-    -- * Configuration
-      debuggerService
+  ( -- * Configuration
+    debuggerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloud_debuggerScope
+    cloudPlatformScope,
+    cloud_debuggerScope,
 
     -- * Resources
 
     -- ** clouddebugger.controller.debuggees.breakpoints.list
-    , ClouddebuggerControllerDebuggeesBreakpointsListResource
-    , newClouddebuggerControllerDebuggeesBreakpointsList
-    , ClouddebuggerControllerDebuggeesBreakpointsList
+    ClouddebuggerControllerDebuggeesBreakpointsListResource,
+    newClouddebuggerControllerDebuggeesBreakpointsList,
+    ClouddebuggerControllerDebuggeesBreakpointsList,
 
     -- ** clouddebugger.controller.debuggees.breakpoints.update
-    , ClouddebuggerControllerDebuggeesBreakpointsUpdateResource
-    , newClouddebuggerControllerDebuggeesBreakpointsUpdate
-    , ClouddebuggerControllerDebuggeesBreakpointsUpdate
+    ClouddebuggerControllerDebuggeesBreakpointsUpdateResource,
+    newClouddebuggerControllerDebuggeesBreakpointsUpdate,
+    ClouddebuggerControllerDebuggeesBreakpointsUpdate,
 
     -- ** clouddebugger.controller.debuggees.register
-    , ClouddebuggerControllerDebuggeesRegisterResource
-    , newClouddebuggerControllerDebuggeesRegister
-    , ClouddebuggerControllerDebuggeesRegister
+    ClouddebuggerControllerDebuggeesRegisterResource,
+    newClouddebuggerControllerDebuggeesRegister,
+    ClouddebuggerControllerDebuggeesRegister,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.delete
-    , ClouddebuggerDebuggerDebuggeesBreakpointsDeleteResource
-    , newClouddebuggerDebuggerDebuggeesBreakpointsDelete
-    , ClouddebuggerDebuggerDebuggeesBreakpointsDelete
+    ClouddebuggerDebuggerDebuggeesBreakpointsDeleteResource,
+    newClouddebuggerDebuggerDebuggeesBreakpointsDelete,
+    ClouddebuggerDebuggerDebuggeesBreakpointsDelete,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.get
-    , ClouddebuggerDebuggerDebuggeesBreakpointsGetResource
-    , newClouddebuggerDebuggerDebuggeesBreakpointsGet
-    , ClouddebuggerDebuggerDebuggeesBreakpointsGet
+    ClouddebuggerDebuggerDebuggeesBreakpointsGetResource,
+    newClouddebuggerDebuggerDebuggeesBreakpointsGet,
+    ClouddebuggerDebuggerDebuggeesBreakpointsGet,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.list
-    , ClouddebuggerDebuggerDebuggeesBreakpointsListResource
-    , newClouddebuggerDebuggerDebuggeesBreakpointsList
-    , ClouddebuggerDebuggerDebuggeesBreakpointsList
+    ClouddebuggerDebuggerDebuggeesBreakpointsListResource,
+    newClouddebuggerDebuggerDebuggeesBreakpointsList,
+    ClouddebuggerDebuggerDebuggeesBreakpointsList,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.set
-    , ClouddebuggerDebuggerDebuggeesBreakpointsSetResource
-    , newClouddebuggerDebuggerDebuggeesBreakpointsSet
-    , ClouddebuggerDebuggerDebuggeesBreakpointsSet
+    ClouddebuggerDebuggerDebuggeesBreakpointsSetResource,
+    newClouddebuggerDebuggerDebuggeesBreakpointsSet,
+    ClouddebuggerDebuggerDebuggeesBreakpointsSet,
 
     -- ** clouddebugger.debugger.debuggees.list
-    , ClouddebuggerDebuggerDebuggeesListResource
-    , newClouddebuggerDebuggerDebuggeesList
-    , ClouddebuggerDebuggerDebuggeesList
+    ClouddebuggerDebuggerDebuggeesListResource,
+    newClouddebuggerDebuggerDebuggeesList,
+    ClouddebuggerDebuggerDebuggeesList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AliasContext
-    , AliasContext (..)
-    , newAliasContext
+    AliasContext (..),
+    newAliasContext,
 
     -- ** AliasContext_Kind
-    , AliasContext_Kind (..)
+    AliasContext_Kind (..),
 
     -- ** Breakpoint
-    , Breakpoint (..)
-    , newBreakpoint
+    Breakpoint (..),
+    newBreakpoint,
 
     -- ** Breakpoint_Action
-    , Breakpoint_Action (..)
+    Breakpoint_Action (..),
 
     -- ** Breakpoint_Labels
-    , Breakpoint_Labels (..)
-    , newBreakpoint_Labels
+    Breakpoint_Labels (..),
+    newBreakpoint_Labels,
 
     -- ** Breakpoint_LogLevel
-    , Breakpoint_LogLevel (..)
+    Breakpoint_LogLevel (..),
 
     -- ** Breakpoint_State
-    , Breakpoint_State (..)
+    Breakpoint_State (..),
 
     -- ** CloudRepoSourceContext
-    , CloudRepoSourceContext (..)
-    , newCloudRepoSourceContext
+    CloudRepoSourceContext (..),
+    newCloudRepoSourceContext,
 
     -- ** CloudWorkspaceId
-    , CloudWorkspaceId (..)
-    , newCloudWorkspaceId
+    CloudWorkspaceId (..),
+    newCloudWorkspaceId,
 
     -- ** CloudWorkspaceSourceContext
-    , CloudWorkspaceSourceContext (..)
-    , newCloudWorkspaceSourceContext
+    CloudWorkspaceSourceContext (..),
+    newCloudWorkspaceSourceContext,
 
     -- ** Debuggee
-    , Debuggee (..)
-    , newDebuggee
+    Debuggee (..),
+    newDebuggee,
 
     -- ** Debuggee_CanaryMode
-    , Debuggee_CanaryMode (..)
+    Debuggee_CanaryMode (..),
 
     -- ** Debuggee_Labels
-    , Debuggee_Labels (..)
-    , newDebuggee_Labels
+    Debuggee_Labels (..),
+    newDebuggee_Labels,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** ExtendedSourceContext
-    , ExtendedSourceContext (..)
-    , newExtendedSourceContext
+    ExtendedSourceContext (..),
+    newExtendedSourceContext,
 
     -- ** ExtendedSourceContext_Labels
-    , ExtendedSourceContext_Labels (..)
-    , newExtendedSourceContext_Labels
+    ExtendedSourceContext_Labels (..),
+    newExtendedSourceContext_Labels,
 
     -- ** FormatMessage
-    , FormatMessage (..)
-    , newFormatMessage
+    FormatMessage (..),
+    newFormatMessage,
 
     -- ** GerritSourceContext
-    , GerritSourceContext (..)
-    , newGerritSourceContext
+    GerritSourceContext (..),
+    newGerritSourceContext,
 
     -- ** GetBreakpointResponse
-    , GetBreakpointResponse (..)
-    , newGetBreakpointResponse
+    GetBreakpointResponse (..),
+    newGetBreakpointResponse,
 
     -- ** GitSourceContext
-    , GitSourceContext (..)
-    , newGitSourceContext
+    GitSourceContext (..),
+    newGitSourceContext,
 
     -- ** ListActiveBreakpointsResponse
-    , ListActiveBreakpointsResponse (..)
-    , newListActiveBreakpointsResponse
+    ListActiveBreakpointsResponse (..),
+    newListActiveBreakpointsResponse,
 
     -- ** ListBreakpointsResponse
-    , ListBreakpointsResponse (..)
-    , newListBreakpointsResponse
+    ListBreakpointsResponse (..),
+    newListBreakpointsResponse,
 
     -- ** ListDebuggeesResponse
-    , ListDebuggeesResponse (..)
-    , newListDebuggeesResponse
+    ListDebuggeesResponse (..),
+    newListDebuggeesResponse,
 
     -- ** ProjectRepoId
-    , ProjectRepoId (..)
-    , newProjectRepoId
+    ProjectRepoId (..),
+    newProjectRepoId,
 
     -- ** RegisterDebuggeeRequest
-    , RegisterDebuggeeRequest (..)
-    , newRegisterDebuggeeRequest
+    RegisterDebuggeeRequest (..),
+    newRegisterDebuggeeRequest,
 
     -- ** RegisterDebuggeeResponse
-    , RegisterDebuggeeResponse (..)
-    , newRegisterDebuggeeResponse
+    RegisterDebuggeeResponse (..),
+    newRegisterDebuggeeResponse,
 
     -- ** RepoId
-    , RepoId (..)
-    , newRepoId
+    RepoId (..),
+    newRepoId,
 
     -- ** SetBreakpointResponse
-    , SetBreakpointResponse (..)
-    , newSetBreakpointResponse
+    SetBreakpointResponse (..),
+    newSetBreakpointResponse,
 
     -- ** SourceContext
-    , SourceContext (..)
-    , newSourceContext
+    SourceContext (..),
+    newSourceContext,
 
     -- ** SourceLocation
-    , SourceLocation (..)
-    , newSourceLocation
+    SourceLocation (..),
+    newSourceLocation,
 
     -- ** StackFrame
-    , StackFrame (..)
-    , newStackFrame
+    StackFrame (..),
+    newStackFrame,
 
     -- ** StatusMessage
-    , StatusMessage (..)
-    , newStatusMessage
+    StatusMessage (..),
+    newStatusMessage,
 
     -- ** StatusMessage_RefersTo
-    , StatusMessage_RefersTo (..)
+    StatusMessage_RefersTo (..),
 
     -- ** UpdateActiveBreakpointRequest
-    , UpdateActiveBreakpointRequest (..)
-    , newUpdateActiveBreakpointRequest
+    UpdateActiveBreakpointRequest (..),
+    newUpdateActiveBreakpointRequest,
 
     -- ** UpdateActiveBreakpointResponse
-    , UpdateActiveBreakpointResponse (..)
-    , newUpdateActiveBreakpointResponse
+    UpdateActiveBreakpointResponse (..),
+    newUpdateActiveBreakpointResponse,
 
     -- ** Variable
-    , Variable (..)
-    , newVariable
+    Variable (..),
+    newVariable,
 
     -- ** DebuggerDebuggeesBreakpointsListActionValue
-    , DebuggerDebuggeesBreakpointsListActionValue (..)
+    DebuggerDebuggeesBreakpointsListActionValue (..),
 
     -- ** DebuggerDebuggeesBreakpointsSetCanaryOption
-    , DebuggerDebuggeesBreakpointsSetCanaryOption (..)
-    ) where
+    DebuggerDebuggeesBreakpointsSetCanaryOption (..),
+  )
+where
 
 import Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
 import Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
