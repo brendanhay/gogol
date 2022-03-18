@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-cloudiot
-version:               0.5.0
-synopsis:              Google Cloud IoT SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudiot
+version:            0.5.0
+synopsis:           Google Cloud IoT SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.
+  Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,53 +31,50 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.CloudIOT
-    , Gogol.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
-    , Gogol.CloudIOT.Projects.Locations.Registries.Create
-    , Gogol.CloudIOT.Projects.Locations.Registries.Delete
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.Create
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.Delete
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.Get
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.List
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.Patch
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
-    , Gogol.CloudIOT.Projects.Locations.Registries.Devices.States.List
-    , Gogol.CloudIOT.Projects.Locations.Registries.Get
-    , Gogol.CloudIOT.Projects.Locations.Registries.GetIamPolicy
-    , Gogol.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
-    , Gogol.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
-    , Gogol.CloudIOT.Projects.Locations.Registries.Groups.SetIamPolicy
-    , Gogol.CloudIOT.Projects.Locations.Registries.Groups.TestIamPermissions
-    , Gogol.CloudIOT.Projects.Locations.Registries.List
-    , Gogol.CloudIOT.Projects.Locations.Registries.Patch
-    , Gogol.CloudIOT.Projects.Locations.Registries.SetIamPolicy
-    , Gogol.CloudIOT.Projects.Locations.Registries.TestIamPermissions
-    , Gogol.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
-    , Gogol.CloudIOT.Types
+    Gogol.CloudIOT
+    Gogol.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
+    Gogol.CloudIOT.Projects.Locations.Registries.Create
+    Gogol.CloudIOT.Projects.Locations.Registries.Delete
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Create
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Delete
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Get
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Patch
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.States.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Get
+    Gogol.CloudIOT.Projects.Locations.Registries.GetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.SetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.TestIamPermissions
+    Gogol.CloudIOT.Projects.Locations.Registries.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Patch
+    Gogol.CloudIOT.Projects.Locations.Registries.SetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.TestIamPermissions
+    Gogol.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
+    Gogol.CloudIOT.Types
 
   other-modules:
-      Gogol.CloudIOT.Internal.Product
-    , Gogol.CloudIOT.Internal.Sum
+    Gogol.CloudIOT.Internal.Product
+    Gogol.CloudIOT.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

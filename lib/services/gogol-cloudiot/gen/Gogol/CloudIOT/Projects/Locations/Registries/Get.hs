@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,84 +30,93 @@
 --
 -- /See:/ <https://cloud.google.com/iot Cloud IoT API Reference> for @cloudiot.projects.locations.registries.get@.
 module Gogol.CloudIOT.Projects.Locations.Registries.Get
-    (
-    -- * Resource
-      CloudIOTProjectsLocationsRegistriesGetResource
+  ( -- * Resource
+    CloudIOTProjectsLocationsRegistriesGetResource,
 
     -- ** Constructing a Request
-    , newCloudIOTProjectsLocationsRegistriesGet
-    , CloudIOTProjectsLocationsRegistriesGet
-    ) where
+    newCloudIOTProjectsLocationsRegistriesGet,
+    CloudIOTProjectsLocationsRegistriesGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudIOT.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudiot.projects.locations.registries.get@ method which the
 -- 'CloudIOTProjectsLocationsRegistriesGet' request conforms to.
 type CloudIOTProjectsLocationsRegistriesGetResource =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Get '[Core.JSON] DeviceRegistry
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] DeviceRegistry
 
 -- | Gets a device registry configuration.
 --
 -- /See:/ 'newCloudIOTProjectsLocationsRegistriesGet' smart constructor.
 data CloudIOTProjectsLocationsRegistriesGet = CloudIOTProjectsLocationsRegistriesGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The name of the device registry. For example, @projects\/example-project\/locations\/us-central1\/registries\/my-registry@.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The name of the device registry. For example, @projects\/example-project\/locations\/us-central1\/registries\/my-registry@.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudIOTProjectsLocationsRegistriesGet' with the minimum fields required to make a request.
-newCloudIOTProjectsLocationsRegistriesGet 
-    ::  Core.Text
-       -- ^  Required. The name of the device registry. For example, @projects\/example-project\/locations\/us-central1\/registries\/my-registry@. See 'name'.
-    -> CloudIOTProjectsLocationsRegistriesGet
+newCloudIOTProjectsLocationsRegistriesGet ::
+  -- |  Required. The name of the device registry. For example, @projects\/example-project\/locations\/us-central1\/registries\/my-registry@. See 'name'.
+  Core.Text ->
+  CloudIOTProjectsLocationsRegistriesGet
 newCloudIOTProjectsLocationsRegistriesGet name =
   CloudIOTProjectsLocationsRegistriesGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           CloudIOTProjectsLocationsRegistriesGet
-         where
-        type Rs CloudIOTProjectsLocationsRegistriesGet =
-             DeviceRegistry
-        type Scopes CloudIOTProjectsLocationsRegistriesGet =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloudiot"]
-        requestClient
-          CloudIOTProjectsLocationsRegistriesGet{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              cloudIOTService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           CloudIOTProjectsLocationsRegistriesGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    CloudIOTProjectsLocationsRegistriesGet
+  where
+  type
+    Rs CloudIOTProjectsLocationsRegistriesGet =
+      DeviceRegistry
+  type
+    Scopes CloudIOTProjectsLocationsRegistriesGet =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/cloudiot"
+       ]
+  requestClient
+    CloudIOTProjectsLocationsRegistriesGet {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        cloudIOTService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  CloudIOTProjectsLocationsRegistriesGetResource
+            )
+            Core.mempty
