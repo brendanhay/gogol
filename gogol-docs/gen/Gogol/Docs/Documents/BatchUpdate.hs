@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Docs.Documents.BatchUpdate
+-- Module      : Gogol.Docs.Documents.BatchUpdate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Applies one or more updates to the document. Each request is validated before being applied. If any request is not valid, then the entire request will fail and nothing will be applied. Some requests have replies to give you some information about how they are applied. Other requests do not need to return information; these each return an empty reply. The order of replies matches that of the requests. For example, suppose you call batchUpdate with four updates, and only the third one returns information. The response would have two empty replies, the reply to the third request, and another empty reply, in that order. Because other users may be editing the document, the document might not exactly reflect your changes: your changes may be altered with respect to collaborator changes. If there are no collaborators, the document should reflect your changes. In any case, the updates in your request are guaranteed to be applied together atomically.
 --
 -- /See:/ <https://developers.google.com/docs/ Google Docs API Reference> for @docs.documents.batchUpdate@.
-module Network.Google.Docs.Documents.BatchUpdate
+module Gogol.Docs.Documents.BatchUpdate
   ( -- * Resource
     DocsDocumentsBatchUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Docs.Documents.BatchUpdate
   )
 where
 
-import Network.Google.Docs.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Docs.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @docs.documents.batchUpdate@ method which the
 -- 'DocsDocumentsBatchUpdate' request conforms to.

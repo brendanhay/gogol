@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Docs.Internal.Product
+-- Module      : Gogol.Docs.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Docs.Internal.Product
+module Gogol.Docs.Internal.Product
   ( -- * AutoText
     AutoText (..),
     newAutoText,
@@ -732,8 +732,8 @@ module Network.Google.Docs.Internal.Product
   )
 where
 
-import Network.Google.Docs.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Docs.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | A ParagraphElement representing a spot in the text that is dynamically replaced with content that can change over time, like a page number.
 --
