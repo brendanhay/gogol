@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.GoogleServiceAccounts.Get
+-- Module      : Gogol.StorageTransfer.GoogleServiceAccounts.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns the Google service account that is used by Storage Transfer Service to access buckets in the project where transfers run or in other projects. Each Google service account is associated with one Google Cloud project. Users should add this service account to the Google Cloud Storage bucket ACLs to grant access to Storage Transfer Service. This service account is created and owned by Storage Transfer Service and can only be used by Storage Transfer Service.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.googleServiceAccounts.get@.
-module Network.Google.StorageTransfer.GoogleServiceAccounts.Get
+module Gogol.StorageTransfer.GoogleServiceAccounts.Get
   ( -- * Resource
     StorageTransferGoogleServiceAccountsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StorageTransfer.GoogleServiceAccounts.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.googleServiceAccounts.get@ method which the
 -- 'StorageTransferGoogleServiceAccountsGet' request conforms to.

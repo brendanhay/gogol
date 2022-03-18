@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferOperations.Get
+-- Module      : Gogol.StorageTransfer.TransferOperations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.get@.
-module Network.Google.StorageTransfer.TransferOperations.Get
+module Gogol.StorageTransfer.TransferOperations.Get
   ( -- * Resource
     StorageTransferTransferOperationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StorageTransfer.TransferOperations.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.get@ method which the
 -- 'StorageTransferTransferOperationsGet' request conforms to.

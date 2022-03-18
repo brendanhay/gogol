@@ -19,59 +19,54 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.TransferOperations.Pause
+-- Module      : Gogol.StorageTransfer.Projects.AgentPools.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Pauses a transfer operation.
+-- Deletes an agent pool.
 --
--- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
-module Network.Google.StorageTransfer.TransferOperations.Pause
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.projects.agentPools.delete@.
+module Gogol.StorageTransfer.Projects.AgentPools.Delete
   ( -- * Resource
-    StorageTransferTransferOperationsPauseResource,
+    StorageTransferProjectsAgentPoolsDeleteResource,
 
     -- ** Constructing a Request
-    newStorageTransferTransferOperationsPause,
-    StorageTransferTransferOperationsPause,
+    newStorageTransferProjectsAgentPoolsDelete,
+    StorageTransferProjectsAgentPoolsDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
--- | A resource alias for @storagetransfer.transferOperations.pause@ method which the
--- 'StorageTransferTransferOperationsPause' request conforms to.
-type StorageTransferTransferOperationsPauseResource =
+-- | A resource alias for @storagetransfer.projects.agentPools.delete@ method which the
+-- 'StorageTransferProjectsAgentPoolsDelete' request conforms to.
+type StorageTransferProjectsAgentPoolsDeleteResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "pause" Core.Text
+    Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              PauseTransferOperationRequest
-    Core.:> Core.Post '[Core.JSON] Empty
+    Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Pauses a transfer operation.
+-- | Deletes an agent pool.
 --
--- /See:/ 'newStorageTransferTransferOperationsPause' smart constructor.
-data StorageTransferTransferOperationsPause = StorageTransferTransferOperationsPause
+-- /See:/ 'newStorageTransferProjectsAgentPoolsDelete' smart constructor.
+data StorageTransferProjectsAgentPoolsDelete = StorageTransferProjectsAgentPoolsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the transfer operation.
+    -- | Required. The name of the agent pool to delete.
     name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: PauseTransferOperationRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,36 +74,33 @@ data StorageTransferTransferOperationsPause = StorageTransferTransferOperationsP
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageTransferTransferOperationsPause' with the minimum fields required to make a request.
-newStorageTransferTransferOperationsPause ::
-  -- |  Required. The name of the transfer operation. See 'name'.
+-- | Creates a value of 'StorageTransferProjectsAgentPoolsDelete' with the minimum fields required to make a request.
+newStorageTransferProjectsAgentPoolsDelete ::
+  -- |  Required. The name of the agent pool to delete. See 'name'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  PauseTransferOperationRequest ->
-  StorageTransferTransferOperationsPause
-newStorageTransferTransferOperationsPause name payload =
-  StorageTransferTransferOperationsPause
+  StorageTransferProjectsAgentPoolsDelete
+newStorageTransferProjectsAgentPoolsDelete name =
+  StorageTransferProjectsAgentPoolsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
-      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    StorageTransferTransferOperationsPause
+    StorageTransferProjectsAgentPoolsDelete
   where
   type
-    Rs StorageTransferTransferOperationsPause =
+    Rs StorageTransferProjectsAgentPoolsDelete =
       Empty
   type
-    Scopes StorageTransferTransferOperationsPause =
+    Scopes StorageTransferProjectsAgentPoolsDelete =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    StorageTransferTransferOperationsPause {..} =
+    StorageTransferProjectsAgentPoolsDelete {..} =
       go
         name
         xgafv
@@ -117,13 +109,12 @@ instance
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         storageTransferService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  StorageTransferTransferOperationsPauseResource
+                  StorageTransferProjectsAgentPoolsDeleteResource
             )
             Core.mempty

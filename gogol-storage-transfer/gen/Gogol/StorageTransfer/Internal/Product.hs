@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.Internal.Product
+-- Module      : Gogol.StorageTransfer.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.StorageTransfer.Internal.Product
+module Gogol.StorageTransfer.Internal.Product
   ( -- * AgentPool
     AgentPool (..),
     newAgentPool,
@@ -184,8 +184,8 @@ module Network.Google.StorageTransfer.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Internal.Sum
 
 -- | Represents an On-Premises Agent pool.
 --

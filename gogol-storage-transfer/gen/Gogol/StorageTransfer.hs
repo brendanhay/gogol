@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer
+-- Module      : Gogol.StorageTransfer
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Transfers data from external data sources to a Google Cloud Storage bucket or between Google Cloud Storage buckets.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference>
-module Network.Google.StorageTransfer
+module Gogol.StorageTransfer
   ( -- * Configuration
     storageTransferService,
 
@@ -332,20 +332,20 @@ module Network.Google.StorageTransfer
   )
 where
 
-import Network.Google.StorageTransfer.GoogleServiceAccounts.Get
-import Network.Google.StorageTransfer.Projects.AgentPools.Create
-import Network.Google.StorageTransfer.Projects.AgentPools.Delete
-import Network.Google.StorageTransfer.Projects.AgentPools.Get
-import Network.Google.StorageTransfer.Projects.AgentPools.List
-import Network.Google.StorageTransfer.Projects.AgentPools.Patch
-import Network.Google.StorageTransfer.TransferJobs.Create
-import Network.Google.StorageTransfer.TransferJobs.Get
-import Network.Google.StorageTransfer.TransferJobs.List
-import Network.Google.StorageTransfer.TransferJobs.Patch
-import Network.Google.StorageTransfer.TransferJobs.Run
-import Network.Google.StorageTransfer.TransferOperations.Cancel
-import Network.Google.StorageTransfer.TransferOperations.Get
-import Network.Google.StorageTransfer.TransferOperations.List
-import Network.Google.StorageTransfer.TransferOperations.Pause
-import Network.Google.StorageTransfer.TransferOperations.Resume
-import Network.Google.StorageTransfer.Types
+import Gogol.StorageTransfer.GoogleServiceAccounts.Get
+import Gogol.StorageTransfer.Projects.AgentPools.Create
+import Gogol.StorageTransfer.Projects.AgentPools.Delete
+import Gogol.StorageTransfer.Projects.AgentPools.Get
+import Gogol.StorageTransfer.Projects.AgentPools.List
+import Gogol.StorageTransfer.Projects.AgentPools.Patch
+import Gogol.StorageTransfer.TransferJobs.Create
+import Gogol.StorageTransfer.TransferJobs.Get
+import Gogol.StorageTransfer.TransferJobs.List
+import Gogol.StorageTransfer.TransferJobs.Patch
+import Gogol.StorageTransfer.TransferJobs.Run
+import Gogol.StorageTransfer.TransferOperations.Cancel
+import Gogol.StorageTransfer.TransferOperations.Get
+import Gogol.StorageTransfer.TransferOperations.List
+import Gogol.StorageTransfer.TransferOperations.Pause
+import Gogol.StorageTransfer.TransferOperations.Resume
+import Gogol.StorageTransfer.Types

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.StorageTransfer.Projects.AgentPools.Create
+-- Module      : Gogol.StorageTransfer.Projects.AgentPools.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates an agent pool resource.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.projects.agentPools.create@.
-module Network.Google.StorageTransfer.Projects.AgentPools.Create
+module Gogol.StorageTransfer.Projects.AgentPools.Create
   ( -- * Resource
     StorageTransferProjectsAgentPoolsCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.StorageTransfer.Projects.AgentPools.Create
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.StorageTransfer.Types
+import qualified Gogol.Prelude as Core
+import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.projects.agentPools.create@ method which the
 -- 'StorageTransferProjectsAgentPoolsCreate' request conforms to.
