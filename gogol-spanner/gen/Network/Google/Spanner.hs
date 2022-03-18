@@ -1,1252 +1,965 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Spanner
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cloud Spanner is a managed, mission-critical, globally consistent and
--- scalable relational database service.
+-- Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference>
 module Network.Google.Spanner
-    (
-    -- * Service Configuration
-      spannerService
+  ( -- * Configuration
+    spannerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , spannerDataScope
-    , spannerAdminScope
-
-    -- * API Declaration
-    , SpannerAPI
+    cloudPlatformScope,
+    spannerAdminScope,
+    spannerDataScope,
 
     -- * Resources
 
     -- ** spanner.projects.instanceConfigs.get
-    , module Network.Google.Resource.Spanner.Projects.InstanceConfigs.Get
+    SpannerProjectsInstanceConfigsGetResource,
+    newSpannerProjectsInstanceConfigsGet,
+    SpannerProjectsInstanceConfigsGet,
 
     -- ** spanner.projects.instanceConfigs.list
-    , module Network.Google.Resource.Spanner.Projects.InstanceConfigs.List
+    SpannerProjectsInstanceConfigsListResource,
+    newSpannerProjectsInstanceConfigsList,
+    SpannerProjectsInstanceConfigsList,
 
     -- ** spanner.projects.instances.backupOperations.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.BackupOperations.List
+    SpannerProjectsInstancesBackupOperationsListResource,
+    newSpannerProjectsInstancesBackupOperationsList,
+    SpannerProjectsInstancesBackupOperationsList,
 
     -- ** spanner.projects.instances.backups.create
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Create
+    SpannerProjectsInstancesBackupsCreateResource,
+    newSpannerProjectsInstancesBackupsCreate,
+    SpannerProjectsInstancesBackupsCreate,
 
     -- ** spanner.projects.instances.backups.delete
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Delete
+    SpannerProjectsInstancesBackupsDeleteResource,
+    newSpannerProjectsInstancesBackupsDelete,
+    SpannerProjectsInstancesBackupsDelete,
 
     -- ** spanner.projects.instances.backups.get
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Get
+    SpannerProjectsInstancesBackupsGetResource,
+    newSpannerProjectsInstancesBackupsGet,
+    SpannerProjectsInstancesBackupsGet,
 
     -- ** spanner.projects.instances.backups.getIamPolicy
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.GetIAMPolicy
+    SpannerProjectsInstancesBackupsGetIamPolicyResource,
+    newSpannerProjectsInstancesBackupsGetIamPolicy,
+    SpannerProjectsInstancesBackupsGetIamPolicy,
 
     -- ** spanner.projects.instances.backups.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.List
+    SpannerProjectsInstancesBackupsListResource,
+    newSpannerProjectsInstancesBackupsList,
+    SpannerProjectsInstancesBackupsList,
 
     -- ** spanner.projects.instances.backups.operations.cancel
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Cancel
+    SpannerProjectsInstancesBackupsOperationsCancelResource,
+    newSpannerProjectsInstancesBackupsOperationsCancel,
+    SpannerProjectsInstancesBackupsOperationsCancel,
 
     -- ** spanner.projects.instances.backups.operations.delete
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Delete
+    SpannerProjectsInstancesBackupsOperationsDeleteResource,
+    newSpannerProjectsInstancesBackupsOperationsDelete,
+    SpannerProjectsInstancesBackupsOperationsDelete,
 
     -- ** spanner.projects.instances.backups.operations.get
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Get
+    SpannerProjectsInstancesBackupsOperationsGetResource,
+    newSpannerProjectsInstancesBackupsOperationsGet,
+    SpannerProjectsInstancesBackupsOperationsGet,
 
     -- ** spanner.projects.instances.backups.operations.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.List
+    SpannerProjectsInstancesBackupsOperationsListResource,
+    newSpannerProjectsInstancesBackupsOperationsList,
+    SpannerProjectsInstancesBackupsOperationsList,
 
     -- ** spanner.projects.instances.backups.patch
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.Patch
+    SpannerProjectsInstancesBackupsPatchResource,
+    newSpannerProjectsInstancesBackupsPatch,
+    SpannerProjectsInstancesBackupsPatch,
 
     -- ** spanner.projects.instances.backups.setIamPolicy
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.SetIAMPolicy
+    SpannerProjectsInstancesBackupsSetIamPolicyResource,
+    newSpannerProjectsInstancesBackupsSetIamPolicy,
+    SpannerProjectsInstancesBackupsSetIamPolicy,
 
     -- ** spanner.projects.instances.backups.testIamPermissions
-    , module Network.Google.Resource.Spanner.Projects.Instances.Backups.TestIAMPermissions
+    SpannerProjectsInstancesBackupsTestIamPermissionsResource,
+    newSpannerProjectsInstancesBackupsTestIamPermissions,
+    SpannerProjectsInstancesBackupsTestIamPermissions,
 
     -- ** spanner.projects.instances.create
-    , module Network.Google.Resource.Spanner.Projects.Instances.Create
+    SpannerProjectsInstancesCreateResource,
+    newSpannerProjectsInstancesCreate,
+    SpannerProjectsInstancesCreate,
 
     -- ** spanner.projects.instances.databaseOperations.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.DatabaseOperations.List
+    SpannerProjectsInstancesDatabaseOperationsListResource,
+    newSpannerProjectsInstancesDatabaseOperationsList,
+    SpannerProjectsInstancesDatabaseOperationsList,
 
     -- ** spanner.projects.instances.databases.create
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Create
+    SpannerProjectsInstancesDatabasesCreateResource,
+    newSpannerProjectsInstancesDatabasesCreate,
+    SpannerProjectsInstancesDatabasesCreate,
 
     -- ** spanner.projects.instances.databases.dropDatabase
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.DropDatabase
+    SpannerProjectsInstancesDatabasesDropDatabaseResource,
+    newSpannerProjectsInstancesDatabasesDropDatabase,
+    SpannerProjectsInstancesDatabasesDropDatabase,
 
     -- ** spanner.projects.instances.databases.get
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Get
+    SpannerProjectsInstancesDatabasesGetResource,
+    newSpannerProjectsInstancesDatabasesGet,
+    SpannerProjectsInstancesDatabasesGet,
 
     -- ** spanner.projects.instances.databases.getDdl
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.GetDdl
+    SpannerProjectsInstancesDatabasesGetDdlResource,
+    newSpannerProjectsInstancesDatabasesGetDdl,
+    SpannerProjectsInstancesDatabasesGetDdl,
 
     -- ** spanner.projects.instances.databases.getIamPolicy
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.GetIAMPolicy
+    SpannerProjectsInstancesDatabasesGetIamPolicyResource,
+    newSpannerProjectsInstancesDatabasesGetIamPolicy,
+    SpannerProjectsInstancesDatabasesGetIamPolicy,
 
     -- ** spanner.projects.instances.databases.getScans
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.GetScans
+    SpannerProjectsInstancesDatabasesGetScansResource,
+    newSpannerProjectsInstancesDatabasesGetScans,
+    SpannerProjectsInstancesDatabasesGetScans,
 
     -- ** spanner.projects.instances.databases.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.List
+    SpannerProjectsInstancesDatabasesListResource,
+    newSpannerProjectsInstancesDatabasesList,
+    SpannerProjectsInstancesDatabasesList,
 
     -- ** spanner.projects.instances.databases.operations.cancel
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Cancel
+    SpannerProjectsInstancesDatabasesOperationsCancelResource,
+    newSpannerProjectsInstancesDatabasesOperationsCancel,
+    SpannerProjectsInstancesDatabasesOperationsCancel,
 
     -- ** spanner.projects.instances.databases.operations.delete
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Delete
+    SpannerProjectsInstancesDatabasesOperationsDeleteResource,
+    newSpannerProjectsInstancesDatabasesOperationsDelete,
+    SpannerProjectsInstancesDatabasesOperationsDelete,
 
     -- ** spanner.projects.instances.databases.operations.get
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Get
+    SpannerProjectsInstancesDatabasesOperationsGetResource,
+    newSpannerProjectsInstancesDatabasesOperationsGet,
+    SpannerProjectsInstancesDatabasesOperationsGet,
 
     -- ** spanner.projects.instances.databases.operations.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.List
+    SpannerProjectsInstancesDatabasesOperationsListResource,
+    newSpannerProjectsInstancesDatabasesOperationsList,
+    SpannerProjectsInstancesDatabasesOperationsList,
 
     -- ** spanner.projects.instances.databases.restore
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Restore
+    SpannerProjectsInstancesDatabasesRestoreResource,
+    newSpannerProjectsInstancesDatabasesRestore,
+    SpannerProjectsInstancesDatabasesRestore,
 
     -- ** spanner.projects.instances.databases.sessions.batchCreate
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
+    SpannerProjectsInstancesDatabasesSessionsBatchCreateResource,
+    newSpannerProjectsInstancesDatabasesSessionsBatchCreate,
+    SpannerProjectsInstancesDatabasesSessionsBatchCreate,
 
     -- ** spanner.projects.instances.databases.sessions.beginTransaction
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
+    SpannerProjectsInstancesDatabasesSessionsBeginTransactionResource,
+    newSpannerProjectsInstancesDatabasesSessionsBeginTransaction,
+    SpannerProjectsInstancesDatabasesSessionsBeginTransaction,
 
     -- ** spanner.projects.instances.databases.sessions.commit
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Commit
+    SpannerProjectsInstancesDatabasesSessionsCommitResource,
+    newSpannerProjectsInstancesDatabasesSessionsCommit,
+    SpannerProjectsInstancesDatabasesSessionsCommit,
 
     -- ** spanner.projects.instances.databases.sessions.create
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Create
+    SpannerProjectsInstancesDatabasesSessionsCreateResource,
+    newSpannerProjectsInstancesDatabasesSessionsCreate,
+    SpannerProjectsInstancesDatabasesSessionsCreate,
 
     -- ** spanner.projects.instances.databases.sessions.delete
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Delete
+    SpannerProjectsInstancesDatabasesSessionsDeleteResource,
+    newSpannerProjectsInstancesDatabasesSessionsDelete,
+    SpannerProjectsInstancesDatabasesSessionsDelete,
 
     -- ** spanner.projects.instances.databases.sessions.executeBatchDml
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
+    SpannerProjectsInstancesDatabasesSessionsExecuteBatchDmlResource,
+    newSpannerProjectsInstancesDatabasesSessionsExecuteBatchDml,
+    SpannerProjectsInstancesDatabasesSessionsExecuteBatchDml,
 
     -- ** spanner.projects.instances.databases.sessions.executeSql
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteSQL
+    SpannerProjectsInstancesDatabasesSessionsExecuteSqlResource,
+    newSpannerProjectsInstancesDatabasesSessionsExecuteSql,
+    SpannerProjectsInstancesDatabasesSessionsExecuteSql,
 
     -- ** spanner.projects.instances.databases.sessions.executeStreamingSql
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSQL
+    SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSqlResource,
+    newSpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql,
+    SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql,
 
     -- ** spanner.projects.instances.databases.sessions.get
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Get
+    SpannerProjectsInstancesDatabasesSessionsGetResource,
+    newSpannerProjectsInstancesDatabasesSessionsGet,
+    SpannerProjectsInstancesDatabasesSessionsGet,
 
     -- ** spanner.projects.instances.databases.sessions.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.List
+    SpannerProjectsInstancesDatabasesSessionsListResource,
+    newSpannerProjectsInstancesDatabasesSessionsList,
+    SpannerProjectsInstancesDatabasesSessionsList,
 
     -- ** spanner.projects.instances.databases.sessions.partitionQuery
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.PartitionQuery
+    SpannerProjectsInstancesDatabasesSessionsPartitionQueryResource,
+    newSpannerProjectsInstancesDatabasesSessionsPartitionQuery,
+    SpannerProjectsInstancesDatabasesSessionsPartitionQuery,
 
     -- ** spanner.projects.instances.databases.sessions.partitionRead
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.PartitionRead
+    SpannerProjectsInstancesDatabasesSessionsPartitionReadResource,
+    newSpannerProjectsInstancesDatabasesSessionsPartitionRead,
+    SpannerProjectsInstancesDatabasesSessionsPartitionRead,
 
     -- ** spanner.projects.instances.databases.sessions.read
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Read
+    SpannerProjectsInstancesDatabasesSessionsReadResource,
+    newSpannerProjectsInstancesDatabasesSessionsRead,
+    SpannerProjectsInstancesDatabasesSessionsRead,
 
     -- ** spanner.projects.instances.databases.sessions.rollback
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Rollback
+    SpannerProjectsInstancesDatabasesSessionsRollbackResource,
+    newSpannerProjectsInstancesDatabasesSessionsRollback,
+    SpannerProjectsInstancesDatabasesSessionsRollback,
 
     -- ** spanner.projects.instances.databases.sessions.streamingRead
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.StreamingRead
+    SpannerProjectsInstancesDatabasesSessionsStreamingReadResource,
+    newSpannerProjectsInstancesDatabasesSessionsStreamingRead,
+    SpannerProjectsInstancesDatabasesSessionsStreamingRead,
 
     -- ** spanner.projects.instances.databases.setIamPolicy
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.SetIAMPolicy
+    SpannerProjectsInstancesDatabasesSetIamPolicyResource,
+    newSpannerProjectsInstancesDatabasesSetIamPolicy,
+    SpannerProjectsInstancesDatabasesSetIamPolicy,
 
     -- ** spanner.projects.instances.databases.testIamPermissions
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.TestIAMPermissions
+    SpannerProjectsInstancesDatabasesTestIamPermissionsResource,
+    newSpannerProjectsInstancesDatabasesTestIamPermissions,
+    SpannerProjectsInstancesDatabasesTestIamPermissions,
 
     -- ** spanner.projects.instances.databases.updateDdl
-    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.UpdateDdl
+    SpannerProjectsInstancesDatabasesUpdateDdlResource,
+    newSpannerProjectsInstancesDatabasesUpdateDdl,
+    SpannerProjectsInstancesDatabasesUpdateDdl,
 
     -- ** spanner.projects.instances.delete
-    , module Network.Google.Resource.Spanner.Projects.Instances.Delete
+    SpannerProjectsInstancesDeleteResource,
+    newSpannerProjectsInstancesDelete,
+    SpannerProjectsInstancesDelete,
 
     -- ** spanner.projects.instances.get
-    , module Network.Google.Resource.Spanner.Projects.Instances.Get
+    SpannerProjectsInstancesGetResource,
+    newSpannerProjectsInstancesGet,
+    SpannerProjectsInstancesGet,
 
     -- ** spanner.projects.instances.getIamPolicy
-    , module Network.Google.Resource.Spanner.Projects.Instances.GetIAMPolicy
+    SpannerProjectsInstancesGetIamPolicyResource,
+    newSpannerProjectsInstancesGetIamPolicy,
+    SpannerProjectsInstancesGetIamPolicy,
 
     -- ** spanner.projects.instances.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.List
+    SpannerProjectsInstancesListResource,
+    newSpannerProjectsInstancesList,
+    SpannerProjectsInstancesList,
 
     -- ** spanner.projects.instances.operations.cancel
-    , module Network.Google.Resource.Spanner.Projects.Instances.Operations.Cancel
+    SpannerProjectsInstancesOperationsCancelResource,
+    newSpannerProjectsInstancesOperationsCancel,
+    SpannerProjectsInstancesOperationsCancel,
 
     -- ** spanner.projects.instances.operations.delete
-    , module Network.Google.Resource.Spanner.Projects.Instances.Operations.Delete
+    SpannerProjectsInstancesOperationsDeleteResource,
+    newSpannerProjectsInstancesOperationsDelete,
+    SpannerProjectsInstancesOperationsDelete,
 
     -- ** spanner.projects.instances.operations.get
-    , module Network.Google.Resource.Spanner.Projects.Instances.Operations.Get
+    SpannerProjectsInstancesOperationsGetResource,
+    newSpannerProjectsInstancesOperationsGet,
+    SpannerProjectsInstancesOperationsGet,
 
     -- ** spanner.projects.instances.operations.list
-    , module Network.Google.Resource.Spanner.Projects.Instances.Operations.List
+    SpannerProjectsInstancesOperationsListResource,
+    newSpannerProjectsInstancesOperationsList,
+    SpannerProjectsInstancesOperationsList,
 
     -- ** spanner.projects.instances.patch
-    , module Network.Google.Resource.Spanner.Projects.Instances.Patch
+    SpannerProjectsInstancesPatchResource,
+    newSpannerProjectsInstancesPatch,
+    SpannerProjectsInstancesPatch,
 
     -- ** spanner.projects.instances.setIamPolicy
-    , module Network.Google.Resource.Spanner.Projects.Instances.SetIAMPolicy
+    SpannerProjectsInstancesSetIamPolicyResource,
+    newSpannerProjectsInstancesSetIamPolicy,
+    SpannerProjectsInstancesSetIamPolicy,
 
     -- ** spanner.projects.instances.testIamPermissions
-    , module Network.Google.Resource.Spanner.Projects.Instances.TestIAMPermissions
+    SpannerProjectsInstancesTestIamPermissionsResource,
+    newSpannerProjectsInstancesTestIamPermissions,
+    SpannerProjectsInstancesTestIamPermissions,
 
     -- ** spanner.scans.list
-    , module Network.Google.Resource.Spanner.Scans.List
+    SpannerScansListResource,
+    newSpannerScansList,
+    SpannerScansList,
 
     -- * Types
 
-    -- ** ExecuteSQLRequestParams
-    , ExecuteSQLRequestParams
-    , executeSQLRequestParams
-    , esqlrpAddtional
-
-    -- ** RestoreDatabaseRequest
-    , RestoreDatabaseRequest
-    , restoreDatabaseRequest
-    , rdrBackup
-    , rdrEncryptionConfig
-    , rdrDatabaseId
-
-    -- ** MetricIndexedHotKeys
-    , MetricIndexedHotKeys
-    , metricIndexedHotKeys
-    , mihkAddtional
-
-    -- ** InstanceLabels
-    , InstanceLabels
-    , instanceLabels
-    , ilAddtional
-
-    -- ** CreateDatabaseMetadata
-    , CreateDatabaseMetadata
-    , createDatabaseMetadata
-    , cdmDatabase
-
-    -- ** TransactionOptions
-    , TransactionOptions
-    , transactionOptions
-    , toReadWrite
-    , toPartitionedDml
-    , toReadOnly
-
-    -- ** ListBackupsResponse
-    , ListBackupsResponse
-    , listBackupsResponse
-    , lbrNextPageToken
-    , lbrBackups
-
-    -- ** GetDatabaseDdlResponse
-    , GetDatabaseDdlResponse
-    , getDatabaseDdlResponse
-    , gddrStatements
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** CreateInstanceRequest
-    , CreateInstanceRequest
-    , createInstanceRequest
-    , cirInstanceId
-    , cirInstance
-
-    -- ** BatchCreateSessionsRequest
-    , BatchCreateSessionsRequest
-    , batchCreateSessionsRequest
-    , bcsrSessionCount
-    , bcsrSessionTemplate
-
-    -- ** ReadWrite
-    , ReadWrite
-    , readWrite
-
-    -- ** RollbackRequest
-    , RollbackRequest
-    , rollbackRequest
-    , rrTransactionId
-
-    -- ** IndexedKeyRangeInfosKeyRangeInfos
-    , IndexedKeyRangeInfosKeyRangeInfos
-    , indexedKeyRangeInfosKeyRangeInfos
-    , ikrikriAddtional
-
-    -- ** ListDatabasesResponse
-    , ListDatabasesResponse
-    , listDatabasesResponse
-    , ldrNextPageToken
-    , ldrDatabases
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** ChildLink
-    , ChildLink
-    , childLink
-    , clChildIndex
-    , clVariable
-    , clType
-
-    -- ** IndexedKeyRangeInfos
-    , IndexedKeyRangeInfos
-    , indexedKeyRangeInfos
-    , ikriKeyRangeInfos
-
-    -- ** BeginTransactionRequest
-    , BeginTransactionRequest
-    , beginTransactionRequest
-    , btrOptions
-    , btrRequestOptions
-
-    -- ** IndexedHotKeySparseHotKeys
-    , IndexedHotKeySparseHotKeys
-    , indexedHotKeySparseHotKeys
-    , ihkshkAddtional
-
-    -- ** ListDatabaseOperationsResponse
-    , ListDatabaseOperationsResponse
-    , listDatabaseOperationsResponse
-    , ldorNextPageToken
-    , ldorOperations
-
-    -- ** PartitionOptions
-    , PartitionOptions
-    , partitionOptions
-    , poMaxPartitions
-    , poPartitionSizeBytes
-
-    -- ** ResultSetStats
-    , ResultSetStats
-    , resultSetStats
-    , rssRowCountExact
-    , rssRowCountLowerBound
-    , rssQueryStats
-    , rssQueryPlan
-
-    -- ** Field
-    , Field
-    , field
-    , fName
-    , fType
-
-    -- ** QueryOptions
-    , QueryOptions
-    , queryOptions
-    , qoOptimizerStatisticsPackage
-    , qoOptimizerVersion
-
-    -- ** TypeCode
-    , TypeCode (..)
-
-    -- ** Write
-    , Write
-    , write
-    , wValues
-    , wColumns
-    , wTable
-
-    -- ** KeySet
-    , KeySet
-    , keySet
-    , ksAll
-    , ksRanges
-    , ksKeys
-
-    -- ** Statement
-    , Statement
-    , statement
-    , sParamTypes
-    , sParams
-    , sSQL
-
-    -- ** PartitionQueryRequestParams
-    , PartitionQueryRequestParams
-    , partitionQueryRequestParams
-    , pqrpAddtional
-
-    -- ** ExecuteBatchDmlResponse
-    , ExecuteBatchDmlResponse
-    , executeBatchDmlResponse
-    , ebdrStatus
-    , ebdrResultSets
-
-    -- ** ProjectsInstancesDatabasesGetScansView
-    , ProjectsInstancesDatabasesGetScansView (..)
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** UpdateDatabaseDdlMetadata
-    , UpdateDatabaseDdlMetadata
-    , updateDatabaseDdlMetadata
-    , uddmCommitTimestamps
-    , uddmThrottled
-    , uddmProgress
-    , uddmDatabase
-    , uddmStatements
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** KeyRangeInfos
-    , KeyRangeInfos
-    , keyRangeInfos
-    , kriTotalSize
-    , kriInfos
-
-    -- ** Database
-    , Database
-    , database
-    , dState
-    , dDefaultLeader
-    , dEarliestVersionTime
-    , dName
-    , dEncryptionConfig
-    , dVersionRetentionPeriod
-    , dRestoreInfo
-    , dEncryptionInfo
-    , dCreateTime
-
-    -- ** PrefixNode
-    , PrefixNode
-    , prefixNode
-    , pnEndIndex
-    , pnDepth
-    , pnDataSourceNode
-    , pnStartIndex
-    , pnWord
-
-    -- ** CommitStats
-    , CommitStats
-    , commitStats
-    , csMutationCount
-
-    -- ** OperationProgress
-    , OperationProgress
-    , operationProgress
-    , opStartTime
-    , opProgressPercent
-    , opEndTime
-
-    -- ** MetricAggregation
-    , MetricAggregation (..)
-
-    -- ** RestoreInfoSourceType
-    , RestoreInfoSourceType (..)
-
-    -- ** PlanNode
-    , PlanNode
-    , planNode
-    , pnKind
-    , pnShortRepresentation
-    , pnMetadata
-    , pnDisplayName
-    , pnExecutionStats
-    , pnIndex
-    , pnChildLinks
-
-    -- ** PlanNodeKind
-    , PlanNodeKind (..)
-
-    -- ** CreateSessionRequest
-    , CreateSessionRequest
-    , createSessionRequest
-    , csrSession
-
-    -- ** VisualizationDataKeyUnit
-    , VisualizationDataKeyUnit (..)
-
-    -- ** ScansListView
-    , ScansListView (..)
-
-    -- ** ShortRepresentation
-    , ShortRepresentation
-    , shortRepresentation
-    , srSubqueries
-    , srDescription
-
-    -- ** ShortRepresentationSubqueries
-    , ShortRepresentationSubqueries
-    , shortRepresentationSubqueries
-    , srsAddtional
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** PlanNodeMetadata
-    , PlanNodeMetadata
-    , planNodeMetadata
-    , pnmAddtional
-
-    -- ** EncryptionInfoEncryptionType
-    , EncryptionInfoEncryptionType (..)
-
-    -- ** MetricIndexedKeyRangeInfos
-    , MetricIndexedKeyRangeInfos
-    , metricIndexedKeyRangeInfos
-    , mikriAddtional
-
-    -- ** ReplicaInfoType
-    , ReplicaInfoType (..)
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** KeyRangeInfo
-    , KeyRangeInfo
-    , keyRangeInfo
-    , kriContextValues
-    , kriTimeOffSet
-    , kriValue
-    , kriEndKeyIndex
-    , kriStartKeyIndex
-    , kriMetric
-    , kriKeysCount
-    , kriUnit
-    , kriInfo
-
-    -- ** PartitionedDml
-    , PartitionedDml
-    , partitionedDml
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Backup
-    , Backup
-    , backup
-    , bSizeBytes
-    , bState
-    , bDatabase
-    , bName
-    , bVersionTime
-    , bReferencingDatabases
-    , bExpireTime
-    , bEncryptionInfo
-    , bCreateTime
+    Backup (..),
+    newBackup,
 
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
+    -- ** Backup_DatabaseDialect
+    Backup_DatabaseDialect (..),
 
-    -- ** StatementParamTypes
-    , StatementParamTypes
-    , statementParamTypes
-    , sptAddtional
-
-    -- ** UpdateDatabaseDdlRequest
-    , UpdateDatabaseDdlRequest
-    , updateDatabaseDdlRequest
-    , uddrOperationId
-    , uddrStatements
-
-    -- ** Mutation
-    , Mutation
-    , mutation
-    , mReplace
-    , mInsert
-    , mInsertOrUpdate
-    , mDelete
-    , mUpdate
-
-    -- ** DerivedMetric
-    , DerivedMetric
-    , derivedMetric
-    , dmDenominator
-    , dmNumerator
-
-    -- ** PartitionReadRequest
-    , PartitionReadRequest
-    , partitionReadRequest
-    , prrPartitionOptions
-    , prrKeySet
-    , prrTransaction
-    , prrColumns
-    , prrIndex
-    , prrTable
-
-    -- ** ExecuteSQLRequestQueryMode
-    , ExecuteSQLRequestQueryMode (..)
-
-    -- ** ExecuteSQLRequestParamTypes
-    , ExecuteSQLRequestParamTypes
-    , executeSQLRequestParamTypes
-    , esqlrptAddtional
-
-    -- ** Transaction
-    , Transaction
-    , transaction
-    , tReadTimestamp
-    , tId
-
-    -- ** DiagnosticMessage
-    , DiagnosticMessage
-    , diagnosticMessage
-    , dmSeverity
-    , dmShortMessage
-    , dmMetricSpecific
-    , dmMetric
-    , dmInfo
-
-    -- ** ContextValue
-    , ContextValue
-    , contextValue
-    , cvValue
-    , cvSeverity
-    , cvUnit
-    , cvLabel
-
-    -- ** ListSessionsResponse
-    , ListSessionsResponse
-    , listSessionsResponse
-    , lsrNextPageToken
-    , lsrSessions
-
-    -- ** Metric
-    , Metric
-    , metric
-    , mDisplayLabel
-    , mHasNonzeroData
-    , mIndexedKeyRangeInfos
-    , mCategory
-    , mMatrix
-    , mVisible
-    , mAggregation
-    , mDerived
-    , mHotValue
-    , mIndexedHotKeys
-    , mUnit
-    , mInfo
-
-    -- ** ScanData
-    , ScanData
-    , scanData
-    , sdStartTime
-    , sdData
-    , sdEndTime
-
-    -- ** MetricMatrix
-    , MetricMatrix
-    , metricMatrix
-    , mmRows
-
-    -- ** Scan
-    , Scan
-    , scan
-    , scaStartTime
-    , scaName
-    , scaScanData
-    , scaEndTime
-    , scaDetails
-
-    -- ** DiagnosticMessageSeverity
-    , DiagnosticMessageSeverity (..)
-
-    -- ** ExecuteBatchDmlRequest
-    , ExecuteBatchDmlRequest
-    , executeBatchDmlRequest
-    , ebdrSeqno
-    , ebdrTransaction
-    , ebdrStatements
-    , ebdrRequestOptions
-
-    -- ** ContextValueSeverity
-    , ContextValueSeverity (..)
-
-    -- ** RestoreDatabaseEncryptionConfigEncryptionType
-    , RestoreDatabaseEncryptionConfigEncryptionType (..)
-
-    -- ** StructType
-    , StructType
-    , structType
-    , stFields
-
-    -- ** CreateBackupMetadata
-    , CreateBackupMetadata
-    , createBackupMetadata
-    , cbmProgress
-    , cbmDatabase
-    , cbmCancelTime
-    , cbmName
-
-    -- ** ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
-    , ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType (..)
-
-    -- ** VisualizationData
-    , VisualizationData
-    , visualizationData
-    , vdDiagnosticMessages
-    , vdMetrics
-    , vdHasPii
-    , vdKeySeparator
-    , vdDataSourceSeparatorToken
-    , vdIndexedKeys
-    , vdEndKeyStrings
-    , vdPrefixNodes
-    , vdKeyUnit
-    , vdDataSourceEndToken
-
-    -- ** DatabaseState
-    , DatabaseState (..)
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** CommitResponse
-    , CommitResponse
-    , commitResponse
-    , crCommitTimestamp
-    , crCommitStats
-
-    -- ** Partition
-    , Partition
-    , partition
-    , pPartitionToken
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** LocalizedString
-    , LocalizedString
-    , localizedString
-    , lsArgs
-    , lsToken
-    , lsMessage
-
-    -- ** OptimizeRestoredDatabaseMetadata
-    , OptimizeRestoredDatabaseMetadata
-    , optimizeRestoredDatabaseMetadata
-    , ordmProgress
-    , ordmName
-
-    -- ** ListScansResponse
-    , ListScansResponse
-    , listScansResponse
-    , lNextPageToken
-    , lScans
-
-    -- ** ScanDetails
-    , ScanDetails
-    , scanDetails
-    , sdAddtional
-
-    -- ** MetricMatrixRow
-    , MetricMatrixRow
-    , metricMatrixRow
-    , mmrCols
-
-    -- ** PartitionQueryRequestParamTypes
-    , PartitionQueryRequestParamTypes
-    , partitionQueryRequestParamTypes
-    , pqrptAddtional
-
-    -- ** RestoreDatabaseMetadataSourceType
-    , RestoreDatabaseMetadataSourceType (..)
-
-    -- ** EncryptionConfig
-    , EncryptionConfig
-    , encryptionConfig
-    , ecKmsKeyName
-
-    -- ** LocalizedStringArgs
-    , LocalizedStringArgs
-    , localizedStringArgs
-    , lsaAddtional
-
-    -- ** UpdateInstanceMetadata
-    , UpdateInstanceMetadata
-    , updateInstanceMetadata
-    , uimStartTime
-    , uimCancelTime
-    , uimEndTime
-    , uimInstance
-
-    -- ** PlanNodeExecutionStats
-    , PlanNodeExecutionStats
-    , planNodeExecutionStats
-    , pnesAddtional
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** RestoreDatabaseMetadata
-    , RestoreDatabaseMetadata
-    , restoreDatabaseMetadata
-    , rdmSourceType
-    , rdmProgress
-    , rdmCancelTime
-    , rdmName
-    , rdmBackupInfo
-    , rdmOptimizeDatabaseOperationName
-
-    -- ** PartialResultSet
-    , PartialResultSet
-    , partialResultSet
-    , prsResumeToken
-    , prsValues
-    , prsStats
-    , prsMetadata
-    , prsChunkedValue
-
-    -- ** RestoreDatabaseEncryptionConfig
-    , RestoreDatabaseEncryptionConfig
-    , restoreDatabaseEncryptionConfig
-    , rdecEncryptionType
-    , rdecKmsKeyName
+    -- ** Backup_State
+    Backup_State (..),
 
     -- ** BackupInfo
-    , BackupInfo
-    , backupInfo
-    , biBackup
-    , biVersionTime
-    , biSourceDatabase
-    , biCreateTime
+    BackupInfo (..),
+    newBackupInfo,
 
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** CreateDatabaseRequest
-    , CreateDatabaseRequest
-    , createDatabaseRequest
-    , cdrExtraStatements
-    , cdrEncryptionConfig
-    , cdrCreateStatement
-
-    -- ** ExecuteSQLRequest
-    , ExecuteSQLRequest
-    , executeSQLRequest
-    , esqlrParamTypes
-    , esqlrQueryOptions
-    , esqlrResumeToken
-    , esqlrSeqno
-    , esqlrParams
-    , esqlrTransaction
-    , esqlrSQL
-    , esqlrPartitionToken
-    , esqlrQueryMode
-    , esqlrRequestOptions
-
-    -- ** CommitRequest
-    , CommitRequest
-    , commitRequest
-    , crReturnCommitStats
-    , crMutations
-    , crTransactionId
-    , crSingleUseTransaction
-    , crRequestOptions
-
-    -- ** Type
-    , Type
-    , type'
-    , tArrayElementType
-    , tStructType
-    , tCode
-
-    -- ** CreateInstanceMetadata
-    , CreateInstanceMetadata
-    , createInstanceMetadata
-    , cimStartTime
-    , cimCancelTime
-    , cimEndTime
-    , cimInstance
-
-    -- ** KeyRange
-    , KeyRange
-    , keyRange
-    , krStartClosed
-    , krEndOpen
-    , krStartOpen
-    , krEndClosed
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** InstanceConfig
-    , InstanceConfig
-    , instanceConfig
-    , icLeaderOptions
-    , icName
-    , icDisplayName
-    , icReplicas
-
-    -- ** ResultSet
-    , ResultSet
-    , resultSet
-    , rsStats
-    , rsRows
-    , rsMetadata
-
-    -- ** SessionLabels
-    , SessionLabels
-    , sessionLabels
-    , slAddtional
-
-    -- ** ListInstancesResponse
-    , ListInstancesResponse
-    , listInstancesResponse
-    , lirNextPageToken
-    , lirUnreachable
-    , lirInstances
-
-    -- ** ReadRequest
-    , ReadRequest
-    , readRequest
-    , rrResumeToken
-    , rrKeySet
-    , rrTransaction
-    , rrColumns
-    , rrLimit
-    , rrIndex
-    , rrTable
-    , rrPartitionToken
-    , rrRequestOptions
-
-    -- ** IndexedHotKey
-    , IndexedHotKey
-    , indexedHotKey
-    , ihkSparseHotKeys
-
-    -- ** RequestOptionsPriority
-    , RequestOptionsPriority (..)
-
-    -- ** ReplicaInfo
-    , ReplicaInfo
-    , replicaInfo
-    , riDefaultLeaderLocation
-    , riLocation
-    , riType
-
-    -- ** InstanceState
-    , InstanceState (..)
-
-    -- ** Session
-    , Session
-    , session
-    , sApproximateLastUseTime
-    , sName
-    , sLabels
-    , sCreateTime
+    -- ** BatchCreateSessionsRequest
+    BatchCreateSessionsRequest (..),
+    newBatchCreateSessionsRequest,
 
     -- ** BatchCreateSessionsResponse
-    , BatchCreateSessionsResponse
-    , batchCreateSessionsResponse
-    , bcsrSession
+    BatchCreateSessionsResponse (..),
+    newBatchCreateSessionsResponse,
 
-    -- ** RestoreInfo
-    , RestoreInfo
-    , restoreInfo
-    , riSourceType
-    , riBackupInfo
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** ReadOnly
-    , ReadOnly
-    , readOnly
-    , roReadTimestamp
-    , roExactStaleness
-    , roMaxStaleness
-    , roStrong
-    , roMinReadTimestamp
-    , roReturnReadTimestamp
-
-    -- ** ResultSetMetadata
-    , ResultSetMetadata
-    , resultSetMetadata
-    , rsmRowType
-    , rsmTransaction
-
-    -- ** Delete'
-    , Delete'
-    , delete'
-    , dKeySet
-    , dTable
-
-    -- ** UpdateInstanceRequest
-    , UpdateInstanceRequest
-    , updateInstanceRequest
-    , uirFieldMask
-    , uirInstance
-
-    -- ** ListBackupOperationsResponse
-    , ListBackupOperationsResponse
-    , listBackupOperationsResponse
-    , lborNextPageToken
-    , lborOperations
-
-    -- ** BackupState
-    , BackupState (..)
-
-    -- ** ResultSetStatsQueryStats
-    , ResultSetStatsQueryStats
-    , resultSetStatsQueryStats
-    , rssqsAddtional
-
-    -- ** StatementParams
-    , StatementParams
-    , statementParams
-    , spAddtional
-
-    -- ** TransactionSelector
-    , TransactionSelector
-    , transactionSelector
-    , tsBegin
-    , tsId
-    , tsSingleUse
-
-    -- ** ListInstanceConfigsResponse
-    , ListInstanceConfigsResponse
-    , listInstanceConfigsResponse
-    , licrNextPageToken
-    , licrInstanceConfigs
-
-    -- ** RequestOptions
-    , RequestOptions
-    , requestOptions
-    , roPriority
-    , roRequestTag
-    , roTransactionTag
-
-    -- ** EncryptionInfo
-    , EncryptionInfo
-    , encryptionInfo
-    , eiEncryptionType
-    , eiKmsKeyVersion
-    , eiEncryptionStatus
+    -- ** BeginTransactionRequest
+    BeginTransactionRequest (..),
+    newBeginTransactionRequest,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
 
-    -- ** PartitionResponse
-    , PartitionResponse
-    , partitionResponse
-    , prPartitions
-    , prTransaction
+    -- ** ChildLink
+    ChildLink (..),
+    newChildLink,
 
-    -- ** PartitionQueryRequest
-    , PartitionQueryRequest
-    , partitionQueryRequest
-    , pqrParamTypes
-    , pqrPartitionOptions
-    , pqrParams
-    , pqrTransaction
-    , pqrSQL
+    -- ** CommitRequest
+    CommitRequest (..),
+    newCommitRequest,
 
-    -- ** QueryPlan
-    , QueryPlan
-    , queryPlan
-    , qpPlanNodes
+    -- ** CommitResponse
+    CommitResponse (..),
+    newCommitResponse,
+
+    -- ** CommitStats
+    CommitStats (..),
+    newCommitStats,
+
+    -- ** ContextValue
+    ContextValue (..),
+    newContextValue,
+
+    -- ** ContextValue_Severity
+    ContextValue_Severity (..),
+
+    -- ** CreateBackupMetadata
+    CreateBackupMetadata (..),
+    newCreateBackupMetadata,
+
+    -- ** CreateDatabaseMetadata
+    CreateDatabaseMetadata (..),
+    newCreateDatabaseMetadata,
+
+    -- ** CreateDatabaseRequest
+    CreateDatabaseRequest (..),
+    newCreateDatabaseRequest,
+
+    -- ** CreateDatabaseRequest_DatabaseDialect
+    CreateDatabaseRequest_DatabaseDialect (..),
+
+    -- ** CreateInstanceMetadata
+    CreateInstanceMetadata (..),
+    newCreateInstanceMetadata,
+
+    -- ** CreateInstanceRequest
+    CreateInstanceRequest (..),
+    newCreateInstanceRequest,
+
+    -- ** CreateSessionRequest
+    CreateSessionRequest (..),
+    newCreateSessionRequest,
+
+    -- ** Database
+    Database (..),
+    newDatabase,
+
+    -- ** Database_DatabaseDialect
+    Database_DatabaseDialect (..),
+
+    -- ** Database_State
+    Database_State (..),
+
+    -- ** Delete'
+    Delete' (..),
+    newDelete,
+
+    -- ** DerivedMetric
+    DerivedMetric (..),
+    newDerivedMetric,
+
+    -- ** DiagnosticMessage
+    DiagnosticMessage (..),
+    newDiagnosticMessage,
+
+    -- ** DiagnosticMessage_Severity
+    DiagnosticMessage_Severity (..),
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
+
+    -- ** EncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
+
+    -- ** EncryptionInfo_EncryptionType
+    EncryptionInfo_EncryptionType (..),
+
+    -- ** ExecuteBatchDmlRequest
+    ExecuteBatchDmlRequest (..),
+    newExecuteBatchDmlRequest,
+
+    -- ** ExecuteBatchDmlResponse
+    ExecuteBatchDmlResponse (..),
+    newExecuteBatchDmlResponse,
+
+    -- ** ExecuteSqlRequest
+    ExecuteSqlRequest (..),
+    newExecuteSqlRequest,
+
+    -- ** ExecuteSqlRequest_ParamTypes
+    ExecuteSqlRequest_ParamTypes (..),
+    newExecuteSqlRequest_ParamTypes,
+
+    -- ** ExecuteSqlRequest_Params
+    ExecuteSqlRequest_Params (..),
+    newExecuteSqlRequest_Params,
+
+    -- ** ExecuteSqlRequest_QueryMode
+    ExecuteSqlRequest_QueryMode (..),
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** Field
+    Field (..),
+    newField,
+
+    -- ** GetDatabaseDdlResponse
+    GetDatabaseDdlResponse (..),
+    newGetDatabaseDdlResponse,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
+
+    -- ** IndexedHotKey
+    IndexedHotKey (..),
+    newIndexedHotKey,
+
+    -- ** IndexedHotKey_SparseHotKeys
+    IndexedHotKey_SparseHotKeys (..),
+    newIndexedHotKey_SparseHotKeys,
+
+    -- ** IndexedKeyRangeInfos
+    IndexedKeyRangeInfos (..),
+    newIndexedKeyRangeInfos,
+
+    -- ** IndexedKeyRangeInfos_KeyRangeInfos
+    IndexedKeyRangeInfos_KeyRangeInfos (..),
+    newIndexedKeyRangeInfos_KeyRangeInfos,
 
     -- ** Instance
-    , Instance
-    , instance'
-    , iState
-    , iConfig
-    , iNodeCount
-    , iProcessingUnits
-    , iEndpointURIs
-    , iName
-    , iDisplayName
-    , iLabels
-    ) where
+    Instance (..),
+    newInstance,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Spanner.Projects.InstanceConfigs.Get
-import Network.Google.Resource.Spanner.Projects.InstanceConfigs.List
-import Network.Google.Resource.Spanner.Projects.Instances.BackupOperations.List
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Create
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Delete
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Get
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.GetIAMPolicy
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.List
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Cancel
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Delete
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Get
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.List
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.Patch
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.SetIAMPolicy
-import Network.Google.Resource.Spanner.Projects.Instances.Backups.TestIAMPermissions
-import Network.Google.Resource.Spanner.Projects.Instances.Create
-import Network.Google.Resource.Spanner.Projects.Instances.DatabaseOperations.List
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Create
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.DropDatabase
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Get
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.GetDdl
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.GetIAMPolicy
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.GetScans
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.List
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Cancel
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Delete
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Get
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.List
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Restore
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Commit
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Create
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Delete
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteSQL
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSQL
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Get
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.List
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.PartitionQuery
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.PartitionRead
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Read
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Rollback
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.StreamingRead
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.SetIAMPolicy
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.TestIAMPermissions
-import Network.Google.Resource.Spanner.Projects.Instances.Databases.UpdateDdl
-import Network.Google.Resource.Spanner.Projects.Instances.Delete
-import Network.Google.Resource.Spanner.Projects.Instances.Get
-import Network.Google.Resource.Spanner.Projects.Instances.GetIAMPolicy
-import Network.Google.Resource.Spanner.Projects.Instances.List
-import Network.Google.Resource.Spanner.Projects.Instances.Operations.Cancel
-import Network.Google.Resource.Spanner.Projects.Instances.Operations.Delete
-import Network.Google.Resource.Spanner.Projects.Instances.Operations.Get
-import Network.Google.Resource.Spanner.Projects.Instances.Operations.List
-import Network.Google.Resource.Spanner.Projects.Instances.Patch
-import Network.Google.Resource.Spanner.Projects.Instances.SetIAMPolicy
-import Network.Google.Resource.Spanner.Projects.Instances.TestIAMPermissions
-import Network.Google.Resource.Spanner.Scans.List
+    -- ** Instance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
+
+    -- ** Instance_State
+    Instance_State (..),
+
+    -- ** InstanceConfig
+    InstanceConfig (..),
+    newInstanceConfig,
+
+    -- ** KeyRange
+    KeyRange (..),
+    newKeyRange,
+
+    -- ** KeyRangeInfo
+    KeyRangeInfo (..),
+    newKeyRangeInfo,
+
+    -- ** KeyRangeInfos
+    KeyRangeInfos (..),
+    newKeyRangeInfos,
+
+    -- ** KeySet
+    KeySet (..),
+    newKeySet,
+
+    -- ** ListBackupOperationsResponse
+    ListBackupOperationsResponse (..),
+    newListBackupOperationsResponse,
+
+    -- ** ListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
+
+    -- ** ListDatabaseOperationsResponse
+    ListDatabaseOperationsResponse (..),
+    newListDatabaseOperationsResponse,
+
+    -- ** ListDatabasesResponse
+    ListDatabasesResponse (..),
+    newListDatabasesResponse,
+
+    -- ** ListInstanceConfigsResponse
+    ListInstanceConfigsResponse (..),
+    newListInstanceConfigsResponse,
+
+    -- ** ListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListScansResponse
+    ListScansResponse (..),
+    newListScansResponse,
+
+    -- ** ListSessionsResponse
+    ListSessionsResponse (..),
+    newListSessionsResponse,
+
+    -- ** LocalizedString
+    LocalizedString (..),
+    newLocalizedString,
+
+    -- ** LocalizedString_Args
+    LocalizedString_Args (..),
+    newLocalizedString_Args,
+
+    -- ** Metric
+    Metric (..),
+    newMetric,
+
+    -- ** Metric_Aggregation
+    Metric_Aggregation (..),
+
+    -- ** Metric_IndexedHotKeys
+    Metric_IndexedHotKeys (..),
+    newMetric_IndexedHotKeys,
+
+    -- ** Metric_IndexedKeyRangeInfos
+    Metric_IndexedKeyRangeInfos (..),
+    newMetric_IndexedKeyRangeInfos,
+
+    -- ** MetricMatrix
+    MetricMatrix (..),
+    newMetricMatrix,
+
+    -- ** MetricMatrixRow
+    MetricMatrixRow (..),
+    newMetricMatrixRow,
+
+    -- ** Mutation
+    Mutation (..),
+    newMutation,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationProgress
+    OperationProgress (..),
+    newOperationProgress,
+
+    -- ** OptimizeRestoredDatabaseMetadata
+    OptimizeRestoredDatabaseMetadata (..),
+    newOptimizeRestoredDatabaseMetadata,
+
+    -- ** PartialResultSet
+    PartialResultSet (..),
+    newPartialResultSet,
+
+    -- ** Partition
+    Partition (..),
+    newPartition,
+
+    -- ** PartitionOptions
+    PartitionOptions (..),
+    newPartitionOptions,
+
+    -- ** PartitionQueryRequest
+    PartitionQueryRequest (..),
+    newPartitionQueryRequest,
+
+    -- ** PartitionQueryRequest_ParamTypes
+    PartitionQueryRequest_ParamTypes (..),
+    newPartitionQueryRequest_ParamTypes,
+
+    -- ** PartitionQueryRequest_Params
+    PartitionQueryRequest_Params (..),
+    newPartitionQueryRequest_Params,
+
+    -- ** PartitionReadRequest
+    PartitionReadRequest (..),
+    newPartitionReadRequest,
+
+    -- ** PartitionResponse
+    PartitionResponse (..),
+    newPartitionResponse,
+
+    -- ** PartitionedDml
+    PartitionedDml (..),
+    newPartitionedDml,
+
+    -- ** PlanNode
+    PlanNode (..),
+    newPlanNode,
+
+    -- ** PlanNode_ExecutionStats
+    PlanNode_ExecutionStats (..),
+    newPlanNode_ExecutionStats,
+
+    -- ** PlanNode_Kind
+    PlanNode_Kind (..),
+
+    -- ** PlanNode_Metadata
+    PlanNode_Metadata (..),
+    newPlanNode_Metadata,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PrefixNode
+    PrefixNode (..),
+    newPrefixNode,
+
+    -- ** QueryOptions
+    QueryOptions (..),
+    newQueryOptions,
+
+    -- ** QueryPlan
+    QueryPlan (..),
+    newQueryPlan,
+
+    -- ** ReadOnly
+    ReadOnly (..),
+    newReadOnly,
+
+    -- ** ReadRequest
+    ReadRequest (..),
+    newReadRequest,
+
+    -- ** ReadWrite
+    ReadWrite (..),
+    newReadWrite,
+
+    -- ** ReplicaInfo
+    ReplicaInfo (..),
+    newReplicaInfo,
+
+    -- ** ReplicaInfo_Type
+    ReplicaInfo_Type (..),
+
+    -- ** RequestOptions
+    RequestOptions (..),
+    newRequestOptions,
+
+    -- ** RequestOptions_Priority
+    RequestOptions_Priority (..),
+
+    -- ** RestoreDatabaseEncryptionConfig
+    RestoreDatabaseEncryptionConfig (..),
+    newRestoreDatabaseEncryptionConfig,
+
+    -- ** RestoreDatabaseEncryptionConfig_EncryptionType
+    RestoreDatabaseEncryptionConfig_EncryptionType (..),
+
+    -- ** RestoreDatabaseMetadata
+    RestoreDatabaseMetadata (..),
+    newRestoreDatabaseMetadata,
+
+    -- ** RestoreDatabaseMetadata_SourceType
+    RestoreDatabaseMetadata_SourceType (..),
+
+    -- ** RestoreDatabaseRequest
+    RestoreDatabaseRequest (..),
+    newRestoreDatabaseRequest,
+
+    -- ** RestoreInfo
+    RestoreInfo (..),
+    newRestoreInfo,
+
+    -- ** RestoreInfo_SourceType
+    RestoreInfo_SourceType (..),
+
+    -- ** ResultSet
+    ResultSet (..),
+    newResultSet,
+
+    -- ** ResultSetMetadata
+    ResultSetMetadata (..),
+    newResultSetMetadata,
+
+    -- ** ResultSetStats
+    ResultSetStats (..),
+    newResultSetStats,
+
+    -- ** ResultSetStats_QueryStats
+    ResultSetStats_QueryStats (..),
+    newResultSetStats_QueryStats,
+
+    -- ** RollbackRequest
+    RollbackRequest (..),
+    newRollbackRequest,
+
+    -- ** Scan
+    Scan (..),
+    newScan,
+
+    -- ** Scan_Details
+    Scan_Details (..),
+    newScan_Details,
+
+    -- ** ScanData
+    ScanData (..),
+    newScanData,
+
+    -- ** Session
+    Session (..),
+    newSession,
+
+    -- ** Session_Labels
+    Session_Labels (..),
+    newSession_Labels,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** ShortRepresentation
+    ShortRepresentation (..),
+    newShortRepresentation,
+
+    -- ** ShortRepresentation_Subqueries
+    ShortRepresentation_Subqueries (..),
+    newShortRepresentation_Subqueries,
+
+    -- ** Statement
+    Statement (..),
+    newStatement,
+
+    -- ** Statement_ParamTypes
+    Statement_ParamTypes (..),
+    newStatement_ParamTypes,
+
+    -- ** Statement_Params
+    Statement_Params (..),
+    newStatement_Params,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StructType
+    StructType (..),
+    newStructType,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** Transaction
+    Transaction (..),
+    newTransaction,
+
+    -- ** TransactionOptions
+    TransactionOptions (..),
+    newTransactionOptions,
+
+    -- ** TransactionSelector
+    TransactionSelector (..),
+    newTransactionSelector,
+
+    -- ** Type
+    Type (..),
+    newType,
+
+    -- ** Type_Code
+    Type_Code (..),
+
+    -- ** Type_TypeAnnotation
+    Type_TypeAnnotation (..),
+
+    -- ** UpdateDatabaseDdlMetadata
+    UpdateDatabaseDdlMetadata (..),
+    newUpdateDatabaseDdlMetadata,
+
+    -- ** UpdateDatabaseDdlRequest
+    UpdateDatabaseDdlRequest (..),
+    newUpdateDatabaseDdlRequest,
+
+    -- ** UpdateInstanceMetadata
+    UpdateInstanceMetadata (..),
+    newUpdateInstanceMetadata,
+
+    -- ** UpdateInstanceRequest
+    UpdateInstanceRequest (..),
+    newUpdateInstanceRequest,
+
+    -- ** VisualizationData
+    VisualizationData (..),
+    newVisualizationData,
+
+    -- ** VisualizationData_KeyUnit
+    VisualizationData_KeyUnit (..),
+
+    -- ** Write
+    Write (..),
+    newWrite,
+
+    -- ** ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
+    ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType (..),
+
+    -- ** ProjectsInstancesDatabasesGetScansView
+    ProjectsInstancesDatabasesGetScansView (..),
+
+    -- ** ScansListView
+    ScansListView (..),
+  )
+where
+
+import Network.Google.Spanner.Projects.InstanceConfigs.Get
+import Network.Google.Spanner.Projects.InstanceConfigs.List
+import Network.Google.Spanner.Projects.Instances.BackupOperations.List
+import Network.Google.Spanner.Projects.Instances.Backups.Create
+import Network.Google.Spanner.Projects.Instances.Backups.Delete
+import Network.Google.Spanner.Projects.Instances.Backups.Get
+import Network.Google.Spanner.Projects.Instances.Backups.GetIamPolicy
+import Network.Google.Spanner.Projects.Instances.Backups.List
+import Network.Google.Spanner.Projects.Instances.Backups.Operations.Cancel
+import Network.Google.Spanner.Projects.Instances.Backups.Operations.Delete
+import Network.Google.Spanner.Projects.Instances.Backups.Operations.Get
+import Network.Google.Spanner.Projects.Instances.Backups.Operations.List
+import Network.Google.Spanner.Projects.Instances.Backups.Patch
+import Network.Google.Spanner.Projects.Instances.Backups.SetIamPolicy
+import Network.Google.Spanner.Projects.Instances.Backups.TestIamPermissions
+import Network.Google.Spanner.Projects.Instances.Create
+import Network.Google.Spanner.Projects.Instances.DatabaseOperations.List
+import Network.Google.Spanner.Projects.Instances.Databases.Create
+import Network.Google.Spanner.Projects.Instances.Databases.DropDatabase
+import Network.Google.Spanner.Projects.Instances.Databases.Get
+import Network.Google.Spanner.Projects.Instances.Databases.GetDdl
+import Network.Google.Spanner.Projects.Instances.Databases.GetIamPolicy
+import Network.Google.Spanner.Projects.Instances.Databases.GetScans
+import Network.Google.Spanner.Projects.Instances.Databases.List
+import Network.Google.Spanner.Projects.Instances.Databases.Operations.Cancel
+import Network.Google.Spanner.Projects.Instances.Databases.Operations.Delete
+import Network.Google.Spanner.Projects.Instances.Databases.Operations.Get
+import Network.Google.Spanner.Projects.Instances.Databases.Operations.List
+import Network.Google.Spanner.Projects.Instances.Databases.Restore
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.Commit
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.Create
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.Delete
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.ExecuteSql
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSql
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.Get
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.List
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.PartitionQuery
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.PartitionRead
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.Read
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.Rollback
+import Network.Google.Spanner.Projects.Instances.Databases.Sessions.StreamingRead
+import Network.Google.Spanner.Projects.Instances.Databases.SetIamPolicy
+import Network.Google.Spanner.Projects.Instances.Databases.TestIamPermissions
+import Network.Google.Spanner.Projects.Instances.Databases.UpdateDdl
+import Network.Google.Spanner.Projects.Instances.Delete
+import Network.Google.Spanner.Projects.Instances.Get
+import Network.Google.Spanner.Projects.Instances.GetIamPolicy
+import Network.Google.Spanner.Projects.Instances.List
+import Network.Google.Spanner.Projects.Instances.Operations.Cancel
+import Network.Google.Spanner.Projects.Instances.Operations.Delete
+import Network.Google.Spanner.Projects.Instances.Operations.Get
+import Network.Google.Spanner.Projects.Instances.Operations.List
+import Network.Google.Spanner.Projects.Instances.Patch
+import Network.Google.Spanner.Projects.Instances.SetIamPolicy
+import Network.Google.Spanner.Projects.Instances.TestIamPermissions
+import Network.Google.Spanner.Scans.List
 import Network.Google.Spanner.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Spanner API service.
-type SpannerAPI =
-     ScansListResource :<|>
-       ProjectsInstancesBackupsOperationsListResource
-       :<|> ProjectsInstancesBackupsOperationsGetResource
-       :<|> ProjectsInstancesBackupsOperationsCancelResource
-       :<|> ProjectsInstancesBackupsOperationsDeleteResource
-       :<|> ProjectsInstancesBackupsListResource
-       :<|> ProjectsInstancesBackupsGetIAMPolicyResource
-       :<|> ProjectsInstancesBackupsPatchResource
-       :<|> ProjectsInstancesBackupsGetResource
-       :<|> ProjectsInstancesBackupsCreateResource
-       :<|> ProjectsInstancesBackupsSetIAMPolicyResource
-       :<|>
-       ProjectsInstancesBackupsTestIAMPermissionsResource
-       :<|> ProjectsInstancesBackupsDeleteResource
-       :<|> ProjectsInstancesDatabaseOperationsListResource
-       :<|> ProjectsInstancesBackupOperationsListResource
-       :<|> ProjectsInstancesOperationsListResource
-       :<|> ProjectsInstancesOperationsGetResource
-       :<|> ProjectsInstancesOperationsCancelResource
-       :<|> ProjectsInstancesOperationsDeleteResource
-       :<|> ProjectsInstancesDatabasesSessionsListResource
-       :<|> ProjectsInstancesDatabasesSessionsReadResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsExecuteStreamingSQLResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsPartitionQueryResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsBeginTransactionResource
-       :<|> ProjectsInstancesDatabasesSessionsGetResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsRollbackResource
-       :<|> ProjectsInstancesDatabasesSessionsCreateResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsBatchCreateResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsPartitionReadResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsExecuteBatchDmlResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsStreamingReadResource
-       :<|> ProjectsInstancesDatabasesSessionsDeleteResource
-       :<|>
-       ProjectsInstancesDatabasesSessionsExecuteSQLResource
-       :<|> ProjectsInstancesDatabasesSessionsCommitResource
-       :<|> ProjectsInstancesDatabasesOperationsListResource
-       :<|> ProjectsInstancesDatabasesOperationsGetResource
-       :<|>
-       ProjectsInstancesDatabasesOperationsCancelResource
-       :<|>
-       ProjectsInstancesDatabasesOperationsDeleteResource
-       :<|> ProjectsInstancesDatabasesDropDatabaseResource
-       :<|> ProjectsInstancesDatabasesGetScansResource
-       :<|> ProjectsInstancesDatabasesListResource
-       :<|> ProjectsInstancesDatabasesUpdateDdlResource
-       :<|> ProjectsInstancesDatabasesRestoreResource
-       :<|> ProjectsInstancesDatabasesGetIAMPolicyResource
-       :<|> ProjectsInstancesDatabasesGetResource
-       :<|> ProjectsInstancesDatabasesCreateResource
-       :<|> ProjectsInstancesDatabasesSetIAMPolicyResource
-       :<|> ProjectsInstancesDatabasesGetDdlResource
-       :<|>
-       ProjectsInstancesDatabasesTestIAMPermissionsResource
-       :<|> ProjectsInstancesListResource
-       :<|> ProjectsInstancesGetIAMPolicyResource
-       :<|> ProjectsInstancesPatchResource
-       :<|> ProjectsInstancesGetResource
-       :<|> ProjectsInstancesCreateResource
-       :<|> ProjectsInstancesSetIAMPolicyResource
-       :<|> ProjectsInstancesTestIAMPermissionsResource
-       :<|> ProjectsInstancesDeleteResource
-       :<|> ProjectsInstanceConfigsListResource
-       :<|> ProjectsInstanceConfigsGetResource
