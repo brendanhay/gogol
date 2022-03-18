@@ -39,25 +39,26 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Debugger
-    Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
-    Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
-    Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Register
-    Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
-    Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
-    Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
-    Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
-    Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.List
-    Network.Google.Debugger.Types
+    Gogol.Debugger
+    Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
+    Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
+    Gogol.Debugger.Clouddebugger.Controller.Debuggees.Register
+    Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
+    Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
+    Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
+    Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
+    Gogol.Debugger.Clouddebugger.Debugger.Debuggees.List
+    Gogol.Debugger.Types
 
   other-modules:
-    Network.Google.Debugger.Internal.Product
-    Network.Google.Debugger.Internal.Sum
+    Gogol.Debugger.Internal.Product
+    Gogol.Debugger.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

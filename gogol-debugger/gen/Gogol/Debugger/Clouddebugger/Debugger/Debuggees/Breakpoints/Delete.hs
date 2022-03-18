@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
+-- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes the breakpoint from the debuggee.
 --
 -- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
-module Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
+module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
   ( -- * Resource
     ClouddebuggerDebuggerDebuggeesBreakpointsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Dele
   )
 where
 
-import Network.Google.Debugger.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.delete@ method which the
 -- 'ClouddebuggerDebuggerDebuggeesBreakpointsDelete' request conforms to.

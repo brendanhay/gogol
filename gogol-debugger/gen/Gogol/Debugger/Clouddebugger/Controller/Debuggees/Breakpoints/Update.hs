@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
+-- Module      : Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates the breakpoint state or mutable fields. The entire Breakpoint message must be sent back to the controller service. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the @location@, @condition@ and @expressions@ fields should not alter the breakpoint semantics. These may only make changes such as canonicalizing a value or snapping the location to the correct line of code.
 --
 -- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
-module Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
+module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
   ( -- * Resource
     ClouddebuggerControllerDebuggeesBreakpointsUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Up
   )
 where
 
-import Network.Google.Debugger.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.update@ method which the
 -- 'ClouddebuggerControllerDebuggeesBreakpointsUpdate' request conforms to.

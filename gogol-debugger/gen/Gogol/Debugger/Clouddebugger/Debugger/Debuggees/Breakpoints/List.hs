@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
+-- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists all breakpoints for the debuggee.
 --
 -- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
-module Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
+module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
   ( -- * Resource
     ClouddebuggerDebuggerDebuggeesBreakpointsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
   )
 where
 
-import Network.Google.Debugger.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.list@ method which the
 -- 'ClouddebuggerDebuggerDebuggeesBreakpointsList' request conforms to.

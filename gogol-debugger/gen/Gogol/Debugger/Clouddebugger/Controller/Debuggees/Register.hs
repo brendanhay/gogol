@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Register
+-- Module      : Gogol.Debugger.Clouddebugger.Controller.Debuggees.Register
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Registers the debuggee with the controller service. All agents attached to the same application must call this method with exactly the same request content to get back the same stable @debuggee_id@. Agents should call this method again whenever @google.rpc.Code.NOT_FOUND@ is returned from any controller method. This protocol allows the controller service to disable debuggees, recover from data loss, or change the @debuggee_id@ format. Agents must handle @debuggee_id@ value changing upon re-registration.
 --
 -- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
-module Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Register
+module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Register
   ( -- * Resource
     ClouddebuggerControllerDebuggeesRegisterResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Debugger.Clouddebugger.Controller.Debuggees.Register
   )
 where
 
-import Network.Google.Debugger.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Debugger.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouddebugger.controller.debuggees.register@ method which the
 -- 'ClouddebuggerControllerDebuggeesRegister' request conforms to.
