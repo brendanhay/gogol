@@ -39,54 +39,55 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AppsCalendar
-    Network.Google.AppsCalendar.Calendar.Acl.Delete
-    Network.Google.AppsCalendar.Calendar.Acl.Get
-    Network.Google.AppsCalendar.Calendar.Acl.Insert
-    Network.Google.AppsCalendar.Calendar.Acl.List
-    Network.Google.AppsCalendar.Calendar.Acl.Patch
-    Network.Google.AppsCalendar.Calendar.Acl.Update
-    Network.Google.AppsCalendar.Calendar.Acl.Watch
-    Network.Google.AppsCalendar.Calendar.CalendarList.Delete
-    Network.Google.AppsCalendar.Calendar.CalendarList.Get
-    Network.Google.AppsCalendar.Calendar.CalendarList.Insert
-    Network.Google.AppsCalendar.Calendar.CalendarList.List
-    Network.Google.AppsCalendar.Calendar.CalendarList.Patch
-    Network.Google.AppsCalendar.Calendar.CalendarList.Update
-    Network.Google.AppsCalendar.Calendar.CalendarList.Watch
-    Network.Google.AppsCalendar.Calendar.Calendars.Clear
-    Network.Google.AppsCalendar.Calendar.Calendars.Delete
-    Network.Google.AppsCalendar.Calendar.Calendars.Get
-    Network.Google.AppsCalendar.Calendar.Calendars.Insert
-    Network.Google.AppsCalendar.Calendar.Calendars.Patch
-    Network.Google.AppsCalendar.Calendar.Calendars.Update
-    Network.Google.AppsCalendar.Calendar.Channels.Stop
-    Network.Google.AppsCalendar.Calendar.Colors.Get
-    Network.Google.AppsCalendar.Calendar.Events.Delete
-    Network.Google.AppsCalendar.Calendar.Events.Get
-    Network.Google.AppsCalendar.Calendar.Events.Import
-    Network.Google.AppsCalendar.Calendar.Events.Insert
-    Network.Google.AppsCalendar.Calendar.Events.Instances
-    Network.Google.AppsCalendar.Calendar.Events.List
-    Network.Google.AppsCalendar.Calendar.Events.Move
-    Network.Google.AppsCalendar.Calendar.Events.Patch
-    Network.Google.AppsCalendar.Calendar.Events.QuickAdd
-    Network.Google.AppsCalendar.Calendar.Events.Update
-    Network.Google.AppsCalendar.Calendar.Events.Watch
-    Network.Google.AppsCalendar.Calendar.Freebusy.Query
-    Network.Google.AppsCalendar.Calendar.Settings.Get
-    Network.Google.AppsCalendar.Calendar.Settings.List
-    Network.Google.AppsCalendar.Calendar.Settings.Watch
-    Network.Google.AppsCalendar.Types
+    Gogol.AppsCalendar
+    Gogol.AppsCalendar.Calendar.Acl.Delete
+    Gogol.AppsCalendar.Calendar.Acl.Get
+    Gogol.AppsCalendar.Calendar.Acl.Insert
+    Gogol.AppsCalendar.Calendar.Acl.List
+    Gogol.AppsCalendar.Calendar.Acl.Patch
+    Gogol.AppsCalendar.Calendar.Acl.Update
+    Gogol.AppsCalendar.Calendar.Acl.Watch
+    Gogol.AppsCalendar.Calendar.CalendarList.Delete
+    Gogol.AppsCalendar.Calendar.CalendarList.Get
+    Gogol.AppsCalendar.Calendar.CalendarList.Insert
+    Gogol.AppsCalendar.Calendar.CalendarList.List
+    Gogol.AppsCalendar.Calendar.CalendarList.Patch
+    Gogol.AppsCalendar.Calendar.CalendarList.Update
+    Gogol.AppsCalendar.Calendar.CalendarList.Watch
+    Gogol.AppsCalendar.Calendar.Calendars.Clear
+    Gogol.AppsCalendar.Calendar.Calendars.Delete
+    Gogol.AppsCalendar.Calendar.Calendars.Get
+    Gogol.AppsCalendar.Calendar.Calendars.Insert
+    Gogol.AppsCalendar.Calendar.Calendars.Patch
+    Gogol.AppsCalendar.Calendar.Calendars.Update
+    Gogol.AppsCalendar.Calendar.Channels.Stop
+    Gogol.AppsCalendar.Calendar.Colors.Get
+    Gogol.AppsCalendar.Calendar.Events.Delete
+    Gogol.AppsCalendar.Calendar.Events.Get
+    Gogol.AppsCalendar.Calendar.Events.Import
+    Gogol.AppsCalendar.Calendar.Events.Insert
+    Gogol.AppsCalendar.Calendar.Events.Instances
+    Gogol.AppsCalendar.Calendar.Events.List
+    Gogol.AppsCalendar.Calendar.Events.Move
+    Gogol.AppsCalendar.Calendar.Events.Patch
+    Gogol.AppsCalendar.Calendar.Events.QuickAdd
+    Gogol.AppsCalendar.Calendar.Events.Update
+    Gogol.AppsCalendar.Calendar.Events.Watch
+    Gogol.AppsCalendar.Calendar.Freebusy.Query
+    Gogol.AppsCalendar.Calendar.Settings.Get
+    Gogol.AppsCalendar.Calendar.Settings.List
+    Gogol.AppsCalendar.Calendar.Settings.Watch
+    Gogol.AppsCalendar.Types
 
   other-modules:
-    Network.Google.AppsCalendar.Internal.Product
-    Network.Google.AppsCalendar.Internal.Sum
+    Gogol.AppsCalendar.Internal.Product
+    Gogol.AppsCalendar.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
