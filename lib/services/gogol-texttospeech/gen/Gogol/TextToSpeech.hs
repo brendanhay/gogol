@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,67 +30,67 @@
 --
 -- /See:/ <https://cloud.google.com/text-to-speech/ Cloud Text-to-Speech API Reference>
 module Gogol.TextToSpeech
-    (
-    -- * Configuration
-      textToSpeechService
+  ( -- * Configuration
+    textToSpeechService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** texttospeech.text.synthesize
-    , TextToSpeechTextSynthesizeResource
-    , newTextToSpeechTextSynthesize
-    , TextToSpeechTextSynthesize
+    TextToSpeechTextSynthesizeResource,
+    newTextToSpeechTextSynthesize,
+    TextToSpeechTextSynthesize,
 
     -- ** texttospeech.voices.list
-    , TextToSpeechVoicesListResource
-    , newTextToSpeechVoicesList
-    , TextToSpeechVoicesList
+    TextToSpeechVoicesListResource,
+    newTextToSpeechVoicesList,
+    TextToSpeechVoicesList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AudioConfig
-    , AudioConfig (..)
-    , newAudioConfig
+    AudioConfig (..),
+    newAudioConfig,
 
     -- ** AudioConfig_AudioEncoding
-    , AudioConfig_AudioEncoding (..)
+    AudioConfig_AudioEncoding (..),
 
     -- ** ListVoicesResponse
-    , ListVoicesResponse (..)
-    , newListVoicesResponse
+    ListVoicesResponse (..),
+    newListVoicesResponse,
 
     -- ** SynthesisInput
-    , SynthesisInput (..)
-    , newSynthesisInput
+    SynthesisInput (..),
+    newSynthesisInput,
 
     -- ** SynthesizeSpeechRequest
-    , SynthesizeSpeechRequest (..)
-    , newSynthesizeSpeechRequest
+    SynthesizeSpeechRequest (..),
+    newSynthesizeSpeechRequest,
 
     -- ** SynthesizeSpeechResponse
-    , SynthesizeSpeechResponse (..)
-    , newSynthesizeSpeechResponse
+    SynthesizeSpeechResponse (..),
+    newSynthesizeSpeechResponse,
 
     -- ** Voice
-    , Voice (..)
-    , newVoice
+    Voice (..),
+    newVoice,
 
     -- ** Voice_SsmlGender
-    , Voice_SsmlGender (..)
+    Voice_SsmlGender (..),
 
     -- ** VoiceSelectionParams
-    , VoiceSelectionParams (..)
-    , newVoiceSelectionParams
+    VoiceSelectionParams (..),
+    newVoiceSelectionParams,
 
     -- ** VoiceSelectionParams_SsmlGender
-    , VoiceSelectionParams_SsmlGender (..)
-    ) where
+    VoiceSelectionParams_SsmlGender (..),
+  )
+where
 
 import Gogol.TextToSpeech.Text.Synthesize
 import Gogol.TextToSpeech.Types
