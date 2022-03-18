@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-billing
-version:               0.5.0
-synopsis:              Google Cloud Billing SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-billing
+version:            0.5.0
+synopsis:           Google Cloud Billing SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Allows developers to manage billing for their Google Cloud Platform projects programmatically.
+  Allows developers to manage billing for their Google Cloud Platform projects programmatically.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,42 +31,39 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Billing
-    , Gogol.Billing.Cloudbilling.BillingAccounts.Create
-    , Gogol.Billing.Cloudbilling.BillingAccounts.Get
-    , Gogol.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
-    , Gogol.Billing.Cloudbilling.BillingAccounts.List
-    , Gogol.Billing.Cloudbilling.BillingAccounts.Patch
-    , Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
-    , Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
-    , Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
-    , Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
-    , Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
-    , Gogol.Billing.Cloudbilling.Services.List
-    , Gogol.Billing.Cloudbilling.Services.Skus.List
-    , Gogol.Billing.Types
+    Gogol.Billing
+    Gogol.Billing.Cloudbilling.BillingAccounts.Create
+    Gogol.Billing.Cloudbilling.BillingAccounts.Get
+    Gogol.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
+    Gogol.Billing.Cloudbilling.BillingAccounts.List
+    Gogol.Billing.Cloudbilling.BillingAccounts.Patch
+    Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
+    Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
+    Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
+    Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
+    Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
+    Gogol.Billing.Cloudbilling.Services.List
+    Gogol.Billing.Cloudbilling.Services.Skus.List
+    Gogol.Billing.Types
 
   other-modules:
-      Gogol.Billing.Internal.Product
-    , Gogol.Billing.Internal.Sum
+    Gogol.Billing.Internal.Product
+    Gogol.Billing.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
