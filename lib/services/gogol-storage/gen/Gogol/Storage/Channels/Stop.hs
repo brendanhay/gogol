@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,14 +30,14 @@
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.channels.stop@.
 module Gogol.Storage.Channels.Stop
-    (
-    -- * Resource
-      StorageChannelsStopResource
+  ( -- * Resource
+    StorageChannelsStopResource,
 
     -- ** Constructing a Request
-    , newStorageChannelsStop
-    , StorageChannelsStop
-    ) where
+    newStorageChannelsStop,
+    StorageChannelsStop,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
@@ -51,49 +45,54 @@ import Gogol.Storage.Types
 -- | A resource alias for @storage.channels.stop@ method which the
 -- 'StorageChannelsStop' request conforms to.
 type StorageChannelsStopResource =
-     "storage" Core.:>
-       "v1" Core.:>
-         "channels" Core.:>
-           "stop" Core.:>
-             Core.QueryParam "uploadType" Core.Text Core.:>
-               Core.QueryParam "alt" Core.AltJSON Core.:>
-                 Core.ReqBody '[Core.JSON] Channel Core.:>
-                   Core.Post '[Core.JSON] ()
+  "storage"
+    Core.:> "v1"
+    Core.:> "channels"
+    Core.:> "stop"
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Channel
+    Core.:> Core.Post '[Core.JSON] ()
 
 -- | Stop watching resources through this channel
 --
 -- /See:/ 'newStorageChannelsStop' smart constructor.
 data StorageChannelsStop = StorageChannelsStop
-    {
-      -- | Multipart request metadata.
-      payload :: Channel
-      -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    , uploadType :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: Channel,
+    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
+    uploadType :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'StorageChannelsStop' with the minimum fields required to make a request.
-newStorageChannelsStop 
-    ::  Channel
-       -- ^  Multipart request metadata. See 'payload'.
-    -> StorageChannelsStop
+newStorageChannelsStop ::
+  -- |  Multipart request metadata. See 'payload'.
+  Channel ->
+  StorageChannelsStop
 newStorageChannelsStop payload =
   StorageChannelsStop {payload = payload, uploadType = Core.Nothing}
 
 instance Core.GoogleRequest StorageChannelsStop where
-        type Rs StorageChannelsStop = ()
-        type Scopes StorageChannelsStop =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloud-platform.read-only",
-               "https://www.googleapis.com/auth/devstorage.full_control",
-               "https://www.googleapis.com/auth/devstorage.read_only",
-               "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient StorageChannelsStop{..}
-          = go uploadType (Core.Just Core.AltJSON) payload
-              storageService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy StorageChannelsStopResource)
-                      Core.mempty
-
+  type Rs StorageChannelsStop = ()
+  type
+    Scopes StorageChannelsStop =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/cloud-platform.read-only",
+         "https://www.googleapis.com/auth/devstorage.full_control",
+         "https://www.googleapis.com/auth/devstorage.read_only",
+         "https://www.googleapis.com/auth/devstorage.read_write"
+       ]
+  requestClient StorageChannelsStop {..} =
+    go
+      uploadType
+      (Core.Just Core.AltJSON)
+      payload
+      storageService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy StorageChannelsStopResource
+          )
+          Core.mempty

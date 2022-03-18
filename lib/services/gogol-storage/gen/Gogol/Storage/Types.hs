@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,288 +25,287 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Storage.Types
-    (
-    -- * Configuration
-      storageService
+  ( -- * Configuration
+    storageService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
-    , storageFull_controlScope
-    , storageRead_OnlyScope
-    , storageRead_writeScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    storageFull_controlScope,
+    storageRead_OnlyScope,
+    storageRead_writeScope,
 
     -- * Types
 
     -- ** Bucket
-    , Bucket (..)
-    , newBucket
+    Bucket (..),
+    newBucket,
 
     -- ** Bucket_Autoclass
-    , Bucket_Autoclass (..)
-    , newBucket_Autoclass
+    Bucket_Autoclass (..),
+    newBucket_Autoclass,
 
     -- ** Bucket_Billing
-    , Bucket_Billing (..)
-    , newBucket_Billing
+    Bucket_Billing (..),
+    newBucket_Billing,
 
     -- ** Bucket_CorsItem
-    , Bucket_CorsItem (..)
-    , newBucket_CorsItem
+    Bucket_CorsItem (..),
+    newBucket_CorsItem,
 
     -- ** Bucket_CustomPlacementConfig
-    , Bucket_CustomPlacementConfig (..)
-    , newBucket_CustomPlacementConfig
+    Bucket_CustomPlacementConfig (..),
+    newBucket_CustomPlacementConfig,
 
     -- ** Bucket_Encryption
-    , Bucket_Encryption (..)
-    , newBucket_Encryption
+    Bucket_Encryption (..),
+    newBucket_Encryption,
 
     -- ** Bucket_IamConfiguration
-    , Bucket_IamConfiguration (..)
-    , newBucket_IamConfiguration
+    Bucket_IamConfiguration (..),
+    newBucket_IamConfiguration,
 
     -- ** Bucket_IamConfiguration_BucketPolicyOnly
-    , Bucket_IamConfiguration_BucketPolicyOnly (..)
-    , newBucket_IamConfiguration_BucketPolicyOnly
+    Bucket_IamConfiguration_BucketPolicyOnly (..),
+    newBucket_IamConfiguration_BucketPolicyOnly,
 
     -- ** Bucket_IamConfiguration_UniformBucketLevelAccess
-    , Bucket_IamConfiguration_UniformBucketLevelAccess (..)
-    , newBucket_IamConfiguration_UniformBucketLevelAccess
+    Bucket_IamConfiguration_UniformBucketLevelAccess (..),
+    newBucket_IamConfiguration_UniformBucketLevelAccess,
 
     -- ** Bucket_Labels
-    , Bucket_Labels (..)
-    , newBucket_Labels
+    Bucket_Labels (..),
+    newBucket_Labels,
 
     -- ** Bucket_Lifecycle
-    , Bucket_Lifecycle (..)
-    , newBucket_Lifecycle
+    Bucket_Lifecycle (..),
+    newBucket_Lifecycle,
 
     -- ** Bucket_Lifecycle_RuleItem
-    , Bucket_Lifecycle_RuleItem (..)
-    , newBucket_Lifecycle_RuleItem
+    Bucket_Lifecycle_RuleItem (..),
+    newBucket_Lifecycle_RuleItem,
 
     -- ** Bucket_Lifecycle_RuleItem_Action
-    , Bucket_Lifecycle_RuleItem_Action (..)
-    , newBucket_Lifecycle_RuleItem_Action
+    Bucket_Lifecycle_RuleItem_Action (..),
+    newBucket_Lifecycle_RuleItem_Action,
 
     -- ** Bucket_Lifecycle_RuleItem_Condition
-    , Bucket_Lifecycle_RuleItem_Condition (..)
-    , newBucket_Lifecycle_RuleItem_Condition
+    Bucket_Lifecycle_RuleItem_Condition (..),
+    newBucket_Lifecycle_RuleItem_Condition,
 
     -- ** Bucket_Logging
-    , Bucket_Logging (..)
-    , newBucket_Logging
+    Bucket_Logging (..),
+    newBucket_Logging,
 
     -- ** Bucket_Owner
-    , Bucket_Owner (..)
-    , newBucket_Owner
+    Bucket_Owner (..),
+    newBucket_Owner,
 
     -- ** Bucket_RetentionPolicy
-    , Bucket_RetentionPolicy (..)
-    , newBucket_RetentionPolicy
+    Bucket_RetentionPolicy (..),
+    newBucket_RetentionPolicy,
 
     -- ** Bucket_Versioning
-    , Bucket_Versioning (..)
-    , newBucket_Versioning
+    Bucket_Versioning (..),
+    newBucket_Versioning,
 
     -- ** Bucket_Website
-    , Bucket_Website (..)
-    , newBucket_Website
+    Bucket_Website (..),
+    newBucket_Website,
 
     -- ** BucketAccessControl
-    , BucketAccessControl (..)
-    , newBucketAccessControl
+    BucketAccessControl (..),
+    newBucketAccessControl,
 
     -- ** BucketAccessControl_ProjectTeam
-    , BucketAccessControl_ProjectTeam (..)
-    , newBucketAccessControl_ProjectTeam
+    BucketAccessControl_ProjectTeam (..),
+    newBucketAccessControl_ProjectTeam,
 
     -- ** BucketAccessControls
-    , BucketAccessControls (..)
-    , newBucketAccessControls
+    BucketAccessControls (..),
+    newBucketAccessControls,
 
     -- ** Buckets
-    , Buckets (..)
-    , newBuckets
+    Buckets (..),
+    newBuckets,
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Channel_Params
-    , Channel_Params (..)
-    , newChannel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
     -- ** ComposeRequest
-    , ComposeRequest (..)
-    , newComposeRequest
+    ComposeRequest (..),
+    newComposeRequest,
 
     -- ** ComposeRequest_SourceObjectsItem
-    , ComposeRequest_SourceObjectsItem (..)
-    , newComposeRequest_SourceObjectsItem
+    ComposeRequest_SourceObjectsItem (..),
+    newComposeRequest_SourceObjectsItem,
 
     -- ** ComposeRequest_SourceObjectsItem_ObjectPreconditions
-    , ComposeRequest_SourceObjectsItem_ObjectPreconditions (..)
-    , newComposeRequest_SourceObjectsItem_ObjectPreconditions
+    ComposeRequest_SourceObjectsItem_ObjectPreconditions (..),
+    newComposeRequest_SourceObjectsItem_ObjectPreconditions,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** HmacKey
-    , HmacKey (..)
-    , newHmacKey
+    HmacKey (..),
+    newHmacKey,
 
     -- ** HmacKeyMetadata
-    , HmacKeyMetadata (..)
-    , newHmacKeyMetadata
+    HmacKeyMetadata (..),
+    newHmacKeyMetadata,
 
     -- ** HmacKeysMetadata
-    , HmacKeysMetadata (..)
-    , newHmacKeysMetadata
+    HmacKeysMetadata (..),
+    newHmacKeysMetadata,
 
     -- ** Notification
-    , Notification (..)
-    , newNotification
+    Notification (..),
+    newNotification,
 
     -- ** Notification_Custom_attributes
-    , Notification_Custom_attributes (..)
-    , newNotification_Custom_attributes
+    Notification_Custom_attributes (..),
+    newNotification_Custom_attributes,
 
     -- ** Notifications
-    , Notifications (..)
-    , newNotifications
+    Notifications (..),
+    newNotifications,
 
     -- ** Object
-    , Object (..)
-    , newObject
+    Object (..),
+    newObject,
 
     -- ** Object_CustomerEncryption
-    , Object_CustomerEncryption (..)
-    , newObject_CustomerEncryption
+    Object_CustomerEncryption (..),
+    newObject_CustomerEncryption,
 
     -- ** Object_Metadata
-    , Object_Metadata (..)
-    , newObject_Metadata
+    Object_Metadata (..),
+    newObject_Metadata,
 
     -- ** Object_Owner
-    , Object_Owner (..)
-    , newObject_Owner
+    Object_Owner (..),
+    newObject_Owner,
 
     -- ** ObjectAccessControl
-    , ObjectAccessControl (..)
-    , newObjectAccessControl
+    ObjectAccessControl (..),
+    newObjectAccessControl,
 
     -- ** ObjectAccessControl_ProjectTeam
-    , ObjectAccessControl_ProjectTeam (..)
-    , newObjectAccessControl_ProjectTeam
+    ObjectAccessControl_ProjectTeam (..),
+    newObjectAccessControl_ProjectTeam,
 
     -- ** ObjectAccessControls
-    , ObjectAccessControls (..)
-    , newObjectAccessControls
+    ObjectAccessControls (..),
+    newObjectAccessControls,
 
     -- ** Objects
-    , Objects (..)
-    , newObjects
+    Objects (..),
+    newObjects,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** Policy_BindingsItem
-    , Policy_BindingsItem (..)
-    , newPolicy_BindingsItem
+    Policy_BindingsItem (..),
+    newPolicy_BindingsItem,
 
     -- ** RewriteResponse
-    , RewriteResponse (..)
-    , newRewriteResponse
+    RewriteResponse (..),
+    newRewriteResponse,
 
     -- ** ServiceAccount
-    , ServiceAccount (..)
-    , newServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** BucketsGetProjection
-    , BucketsGetProjection (..)
+    BucketsGetProjection (..),
 
     -- ** BucketsInsertPredefinedAcl
-    , BucketsInsertPredefinedAcl (..)
+    BucketsInsertPredefinedAcl (..),
 
     -- ** BucketsInsertPredefinedDefaultObjectAcl
-    , BucketsInsertPredefinedDefaultObjectAcl (..)
+    BucketsInsertPredefinedDefaultObjectAcl (..),
 
     -- ** BucketsInsertProjection
-    , BucketsInsertProjection (..)
+    BucketsInsertProjection (..),
 
     -- ** BucketsListProjection
-    , BucketsListProjection (..)
+    BucketsListProjection (..),
 
     -- ** BucketsPatchPredefinedAcl
-    , BucketsPatchPredefinedAcl (..)
+    BucketsPatchPredefinedAcl (..),
 
     -- ** BucketsPatchPredefinedDefaultObjectAcl
-    , BucketsPatchPredefinedDefaultObjectAcl (..)
+    BucketsPatchPredefinedDefaultObjectAcl (..),
 
     -- ** BucketsPatchProjection
-    , BucketsPatchProjection (..)
+    BucketsPatchProjection (..),
 
     -- ** BucketsUpdatePredefinedAcl
-    , BucketsUpdatePredefinedAcl (..)
+    BucketsUpdatePredefinedAcl (..),
 
     -- ** BucketsUpdatePredefinedDefaultObjectAcl
-    , BucketsUpdatePredefinedDefaultObjectAcl (..)
+    BucketsUpdatePredefinedDefaultObjectAcl (..),
 
     -- ** BucketsUpdateProjection
-    , BucketsUpdateProjection (..)
+    BucketsUpdateProjection (..),
 
     -- ** ObjectsComposeDestinationPredefinedAcl
-    , ObjectsComposeDestinationPredefinedAcl (..)
+    ObjectsComposeDestinationPredefinedAcl (..),
 
     -- ** ObjectsCopyDestinationPredefinedAcl
-    , ObjectsCopyDestinationPredefinedAcl (..)
+    ObjectsCopyDestinationPredefinedAcl (..),
 
     -- ** ObjectsCopyProjection
-    , ObjectsCopyProjection (..)
+    ObjectsCopyProjection (..),
 
     -- ** ObjectsGetProjection
-    , ObjectsGetProjection (..)
+    ObjectsGetProjection (..),
 
     -- ** ObjectsInsertPredefinedAcl
-    , ObjectsInsertPredefinedAcl (..)
+    ObjectsInsertPredefinedAcl (..),
 
     -- ** ObjectsInsertProjection
-    , ObjectsInsertProjection (..)
+    ObjectsInsertProjection (..),
 
     -- ** ObjectsListProjection
-    , ObjectsListProjection (..)
+    ObjectsListProjection (..),
 
     -- ** ObjectsPatchPredefinedAcl
-    , ObjectsPatchPredefinedAcl (..)
+    ObjectsPatchPredefinedAcl (..),
 
     -- ** ObjectsPatchProjection
-    , ObjectsPatchProjection (..)
+    ObjectsPatchProjection (..),
 
     -- ** ObjectsRewriteDestinationPredefinedAcl
-    , ObjectsRewriteDestinationPredefinedAcl (..)
+    ObjectsRewriteDestinationPredefinedAcl (..),
 
     -- ** ObjectsRewriteProjection
-    , ObjectsRewriteProjection (..)
+    ObjectsRewriteProjection (..),
 
     -- ** ObjectsUpdatePredefinedAcl
-    , ObjectsUpdatePredefinedAcl (..)
+    ObjectsUpdatePredefinedAcl (..),
 
     -- ** ObjectsUpdateProjection
-    , ObjectsUpdateProjection (..)
+    ObjectsUpdateProjection (..),
 
     -- ** ObjectsWatchAllProjection
-    , ObjectsWatchAllProjection (..)
-    ) where
+    ObjectsWatchAllProjection (..),
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Internal.Product
@@ -320,9 +313,10 @@ import Gogol.Storage.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
 storageService :: Core.ServiceConfig
-storageService
-  = Core.defaultService (Core.ServiceId "storage:v1")
-      "storage.googleapis.com"
+storageService =
+  Core.defaultService
+    (Core.ServiceId "storage:v1")
+    "storage.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
