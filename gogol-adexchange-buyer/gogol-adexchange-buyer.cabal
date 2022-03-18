@@ -39,55 +39,56 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AdExchangeBuyer
-    Network.Google.AdExchangeBuyer.Accounts.Get
-    Network.Google.AdExchangeBuyer.Accounts.List
-    Network.Google.AdExchangeBuyer.Accounts.Patch
-    Network.Google.AdExchangeBuyer.Accounts.Update
-    Network.Google.AdExchangeBuyer.BillingInfo.Get
-    Network.Google.AdExchangeBuyer.BillingInfo.List
-    Network.Google.AdExchangeBuyer.Budget.Get
-    Network.Google.AdExchangeBuyer.Budget.Patch
-    Network.Google.AdExchangeBuyer.Budget.Update
-    Network.Google.AdExchangeBuyer.Creatives.AddDeal
-    Network.Google.AdExchangeBuyer.Creatives.Get
-    Network.Google.AdExchangeBuyer.Creatives.Insert
-    Network.Google.AdExchangeBuyer.Creatives.List
-    Network.Google.AdExchangeBuyer.Creatives.ListDeals
-    Network.Google.AdExchangeBuyer.Creatives.RemoveDeal
-    Network.Google.AdExchangeBuyer.Marketplacedeals.Delete
-    Network.Google.AdExchangeBuyer.Marketplacedeals.Insert
-    Network.Google.AdExchangeBuyer.Marketplacedeals.List
-    Network.Google.AdExchangeBuyer.Marketplacedeals.Update
-    Network.Google.AdExchangeBuyer.Marketplacenotes.Insert
-    Network.Google.AdExchangeBuyer.Marketplacenotes.List
-    Network.Google.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
-    Network.Google.AdExchangeBuyer.PerformanceReport.List
-    Network.Google.AdExchangeBuyer.PretargetingConfig.Delete
-    Network.Google.AdExchangeBuyer.PretargetingConfig.Get
-    Network.Google.AdExchangeBuyer.PretargetingConfig.Insert
-    Network.Google.AdExchangeBuyer.PretargetingConfig.List
-    Network.Google.AdExchangeBuyer.PretargetingConfig.Patch
-    Network.Google.AdExchangeBuyer.PretargetingConfig.Update
-    Network.Google.AdExchangeBuyer.Products.Get
-    Network.Google.AdExchangeBuyer.Products.Search
-    Network.Google.AdExchangeBuyer.Proposals.Get
-    Network.Google.AdExchangeBuyer.Proposals.Insert
-    Network.Google.AdExchangeBuyer.Proposals.Patch
-    Network.Google.AdExchangeBuyer.Proposals.Search
-    Network.Google.AdExchangeBuyer.Proposals.Setupcomplete
-    Network.Google.AdExchangeBuyer.Proposals.Update
-    Network.Google.AdExchangeBuyer.Pubprofiles.List
-    Network.Google.AdExchangeBuyer.Types
+    Gogol.AdExchangeBuyer
+    Gogol.AdExchangeBuyer.Accounts.Get
+    Gogol.AdExchangeBuyer.Accounts.List
+    Gogol.AdExchangeBuyer.Accounts.Patch
+    Gogol.AdExchangeBuyer.Accounts.Update
+    Gogol.AdExchangeBuyer.BillingInfo.Get
+    Gogol.AdExchangeBuyer.BillingInfo.List
+    Gogol.AdExchangeBuyer.Budget.Get
+    Gogol.AdExchangeBuyer.Budget.Patch
+    Gogol.AdExchangeBuyer.Budget.Update
+    Gogol.AdExchangeBuyer.Creatives.AddDeal
+    Gogol.AdExchangeBuyer.Creatives.Get
+    Gogol.AdExchangeBuyer.Creatives.Insert
+    Gogol.AdExchangeBuyer.Creatives.List
+    Gogol.AdExchangeBuyer.Creatives.ListDeals
+    Gogol.AdExchangeBuyer.Creatives.RemoveDeal
+    Gogol.AdExchangeBuyer.Marketplacedeals.Delete
+    Gogol.AdExchangeBuyer.Marketplacedeals.Insert
+    Gogol.AdExchangeBuyer.Marketplacedeals.List
+    Gogol.AdExchangeBuyer.Marketplacedeals.Update
+    Gogol.AdExchangeBuyer.Marketplacenotes.Insert
+    Gogol.AdExchangeBuyer.Marketplacenotes.List
+    Gogol.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
+    Gogol.AdExchangeBuyer.PerformanceReport.List
+    Gogol.AdExchangeBuyer.PretargetingConfig.Delete
+    Gogol.AdExchangeBuyer.PretargetingConfig.Get
+    Gogol.AdExchangeBuyer.PretargetingConfig.Insert
+    Gogol.AdExchangeBuyer.PretargetingConfig.List
+    Gogol.AdExchangeBuyer.PretargetingConfig.Patch
+    Gogol.AdExchangeBuyer.PretargetingConfig.Update
+    Gogol.AdExchangeBuyer.Products.Get
+    Gogol.AdExchangeBuyer.Products.Search
+    Gogol.AdExchangeBuyer.Proposals.Get
+    Gogol.AdExchangeBuyer.Proposals.Insert
+    Gogol.AdExchangeBuyer.Proposals.Patch
+    Gogol.AdExchangeBuyer.Proposals.Search
+    Gogol.AdExchangeBuyer.Proposals.Setupcomplete
+    Gogol.AdExchangeBuyer.Proposals.Update
+    Gogol.AdExchangeBuyer.Pubprofiles.List
+    Gogol.AdExchangeBuyer.Types
 
   other-modules:
-    Network.Google.AdExchangeBuyer.Internal.Product
-    Network.Google.AdExchangeBuyer.Internal.Sum
+    Gogol.AdExchangeBuyer.Internal.Product
+    Gogol.AdExchangeBuyer.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
