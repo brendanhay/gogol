@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.GroupsSettings
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,107 +30,38 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Network.Google.GroupsSettings
-    (
-    -- * Service Configuration
-      groupsSettingsService
+  ( -- * Configuration
+    groupsSettingsService,
 
     -- * OAuth Scopes
-    , appsGroupsSettingsScope
-
-    -- * API Declaration
-    , GroupsSettingsAPI
+    appsGroupsSettingsScope,
 
     -- * Resources
 
     -- ** groupsSettings.groups.get
-    , module Network.Google.Resource.GroupsSettings.Groups.Get
+    GroupsSettingsGroupsGetResource,
+    newGroupsSettingsGroupsGet,
+    GroupsSettingsGroupsGet,
 
     -- ** groupsSettings.groups.patch
-    , module Network.Google.Resource.GroupsSettings.Groups.Patch
+    GroupsSettingsGroupsPatchResource,
+    newGroupsSettingsGroupsPatch,
+    GroupsSettingsGroupsPatch,
 
     -- ** groupsSettings.groups.update
-    , module Network.Google.Resource.GroupsSettings.Groups.Update
+    GroupsSettingsGroupsUpdateResource,
+    newGroupsSettingsGroupsUpdate,
+    GroupsSettingsGroupsUpdate,
 
     -- * Types
 
     -- ** Groups
-    , Groups
-    , groups
-    , gWhoCanHideAbuse
-    , gEmail
-    , gSendMessageDenyNotification
-    , gWhoCanEnterFreeFormTags
-    , gWhoCanAssignTopics
-    , gWhoCanPostMessage
-    , gWhoCanDeleteTopics
-    , gDefaultSender
-    , gAllowExternalMembers
-    , gWhoCanModifyMembers
-    , gWhoCanAssistContent
-    , gShowInGroupDirectory
-    , gWhoCanUnmarkFavoriteReplyOnAnyTopic
-    , gWhoCanTakeTopics
-    , gWhoCanLockTopics
-    , gSpamModerationLevel
-    , gKind
-    , gWhoCanDiscoverGroup
-    , gWhoCanViewMembership
-    , gMembersCanPostAsTheGroup
-    , gWhoCanMakeTopicsSticky
-    , gWhoCanPostAnnouncements
-    , gWhoCanViewGroup
-    , gWhoCanJoin
-    , gWhoCanModerateMembers
-    , gArchiveOnly
-    , gMaxMessageBytes
-    , gReplyTo
-    , gMessageModerationLevel
-    , gWhoCanMarkFavoriteReplyOnAnyTopic
-    , gIncludeInGlobalAddressList
-    , gIsArchived
-    , gWhoCanModerateContent
-    , gCustomRolesEnabledForSettingsToBeMerged
-    , gName
-    , gWhoCanUnassignTopic
-    , gMessageDisplayFont
-    , gIncludeCustomFooter
-    , gFavoriteRepliesOnTop
-    , gCustomReplyTo
-    , gWhoCanAddReferences
-    , gWhoCanContactOwner
-    , gWhoCanAdd
-    , gWhoCanInvite
-    , gWhoCanLeaveGroup
-    , gWhoCanApproveMembers
-    , gWhoCanModifyTagsAndCategories
-    , gAllowGoogleCommunication
-    , gWhoCanMoveTopicsIn
-    , gWhoCanMarkNoResponseNeeded
-    , gCustomFooterText
-    , gWhoCanDeleteAnyPost
-    , gWhoCanBanUsers
-    , gWhoCanApproveMessages
-    , gWhoCanMarkDuplicate
-    , gEnableCollaborativeInbox
-    , gPrimaryLanguage
-    , gDescription
-    , gDefaultMessageDenyNotificationText
-    , gWhoCanMarkFavoriteReplyOnOwnTopic
-    , gAllowWebPosting
-    , gWhoCanMoveTopicsOut
-    ) where
+    Groups (..),
+    newGroups,
+  )
+where
 
-import Network.Google.Prelude
+import Network.Google.GroupsSettings.Groups.Get
+import Network.Google.GroupsSettings.Groups.Patch
+import Network.Google.GroupsSettings.Groups.Update
 import Network.Google.GroupsSettings.Types
-import Network.Google.Resource.GroupsSettings.Groups.Get
-import Network.Google.Resource.GroupsSettings.Groups.Patch
-import Network.Google.Resource.GroupsSettings.Groups.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Groups Settings API service.
-type GroupsSettingsAPI =
-     GroupsPatchResource :<|> GroupsGetResource :<|>
-       GroupsUpdateResource
