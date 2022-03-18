@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SQLAdmin
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,1027 +30,766 @@
 --
 -- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference>
 module Network.Google.SQLAdmin
-    (
-    -- * Service Configuration
-      sQLAdminService
+  ( -- * Configuration
+    sQLAdminService,
 
     -- * OAuth Scopes
-    , sqlServiceAdminScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , SQLAdminAPI
+    cloudPlatformScope,
+    sqlserviceAdminScope,
 
     -- * Resources
 
     -- ** sql.backupRuns.delete
-    , module Network.Google.Resource.SQL.BackupRuns.Delete
+    SqlBackupRunsDeleteResource,
+    newSqlBackupRunsDelete,
+    SqlBackupRunsDelete,
 
     -- ** sql.backupRuns.get
-    , module Network.Google.Resource.SQL.BackupRuns.Get
+    SqlBackupRunsGetResource,
+    newSqlBackupRunsGet,
+    SqlBackupRunsGet,
 
     -- ** sql.backupRuns.insert
-    , module Network.Google.Resource.SQL.BackupRuns.Insert
+    SqlBackupRunsInsertResource,
+    newSqlBackupRunsInsert,
+    SqlBackupRunsInsert,
 
     -- ** sql.backupRuns.list
-    , module Network.Google.Resource.SQL.BackupRuns.List
+    SqlBackupRunsListResource,
+    newSqlBackupRunsList,
+    SqlBackupRunsList,
 
     -- ** sql.connect.generateEphemeral
-    , module Network.Google.Resource.SQL.Connect.GenerateEphemeral
+    SqlConnectGenerateEphemeralResource,
+    newSqlConnectGenerateEphemeral,
+    SqlConnectGenerateEphemeral,
 
     -- ** sql.connect.get
-    , module Network.Google.Resource.SQL.Connect.Get
+    SqlConnectGetResource,
+    newSqlConnectGet,
+    SqlConnectGet,
 
     -- ** sql.databases.delete
-    , module Network.Google.Resource.SQL.Databases.Delete
+    SqlDatabasesDeleteResource,
+    newSqlDatabasesDelete,
+    SqlDatabasesDelete,
 
     -- ** sql.databases.get
-    , module Network.Google.Resource.SQL.Databases.Get
+    SqlDatabasesGetResource,
+    newSqlDatabasesGet,
+    SqlDatabasesGet,
 
     -- ** sql.databases.insert
-    , module Network.Google.Resource.SQL.Databases.Insert
+    SqlDatabasesInsertResource,
+    newSqlDatabasesInsert,
+    SqlDatabasesInsert,
 
     -- ** sql.databases.list
-    , module Network.Google.Resource.SQL.Databases.List
+    SqlDatabasesListResource,
+    newSqlDatabasesList,
+    SqlDatabasesList,
 
     -- ** sql.databases.patch
-    , module Network.Google.Resource.SQL.Databases.Patch
+    SqlDatabasesPatchResource,
+    newSqlDatabasesPatch,
+    SqlDatabasesPatch,
 
     -- ** sql.databases.update
-    , module Network.Google.Resource.SQL.Databases.Update
+    SqlDatabasesUpdateResource,
+    newSqlDatabasesUpdate,
+    SqlDatabasesUpdate,
 
     -- ** sql.flags.list
-    , module Network.Google.Resource.SQL.Flags.List
+    SqlFlagsListResource,
+    newSqlFlagsList,
+    SqlFlagsList,
 
     -- ** sql.instances.addServerCa
-    , module Network.Google.Resource.SQL.Instances.AddServerCa
+    SqlInstancesAddServerCaResource,
+    newSqlInstancesAddServerCa,
+    SqlInstancesAddServerCa,
 
     -- ** sql.instances.clone
-    , module Network.Google.Resource.SQL.Instances.Clone
+    SqlInstancesCloneResource,
+    newSqlInstancesClone,
+    SqlInstancesClone,
 
     -- ** sql.instances.delete
-    , module Network.Google.Resource.SQL.Instances.Delete
+    SqlInstancesDeleteResource,
+    newSqlInstancesDelete,
+    SqlInstancesDelete,
 
     -- ** sql.instances.demoteMaster
-    , module Network.Google.Resource.SQL.Instances.DemoteMaster
+    SqlInstancesDemoteMasterResource,
+    newSqlInstancesDemoteMaster,
+    SqlInstancesDemoteMaster,
 
     -- ** sql.instances.export
-    , module Network.Google.Resource.SQL.Instances.Export
+    SqlInstancesExportResource,
+    newSqlInstancesExport,
+    SqlInstancesExport,
 
     -- ** sql.instances.failover
-    , module Network.Google.Resource.SQL.Instances.Failover
+    SqlInstancesFailoverResource,
+    newSqlInstancesFailover,
+    SqlInstancesFailover,
 
     -- ** sql.instances.get
-    , module Network.Google.Resource.SQL.Instances.Get
+    SqlInstancesGetResource,
+    newSqlInstancesGet,
+    SqlInstancesGet,
 
     -- ** sql.instances.import
-    , module Network.Google.Resource.SQL.Instances.Import
+    SqlInstancesImportResource,
+    newSqlInstancesImport,
+    SqlInstancesImport,
 
     -- ** sql.instances.insert
-    , module Network.Google.Resource.SQL.Instances.Insert
+    SqlInstancesInsertResource,
+    newSqlInstancesInsert,
+    SqlInstancesInsert,
 
     -- ** sql.instances.list
-    , module Network.Google.Resource.SQL.Instances.List
+    SqlInstancesListResource,
+    newSqlInstancesList,
+    SqlInstancesList,
 
     -- ** sql.instances.listServerCas
-    , module Network.Google.Resource.SQL.Instances.ListServerCas
+    SqlInstancesListServerCasResource,
+    newSqlInstancesListServerCas,
+    SqlInstancesListServerCas,
 
     -- ** sql.instances.patch
-    , module Network.Google.Resource.SQL.Instances.Patch
+    SqlInstancesPatchResource,
+    newSqlInstancesPatch,
+    SqlInstancesPatch,
 
     -- ** sql.instances.promoteReplica
-    , module Network.Google.Resource.SQL.Instances.PromoteReplica
+    SqlInstancesPromoteReplicaResource,
+    newSqlInstancesPromoteReplica,
+    SqlInstancesPromoteReplica,
 
     -- ** sql.instances.resetSslConfig
-    , module Network.Google.Resource.SQL.Instances.ResetSSLConfig
+    SqlInstancesResetSslConfigResource,
+    newSqlInstancesResetSslConfig,
+    SqlInstancesResetSslConfig,
 
     -- ** sql.instances.restart
-    , module Network.Google.Resource.SQL.Instances.Restart
+    SqlInstancesRestartResource,
+    newSqlInstancesRestart,
+    SqlInstancesRestart,
 
     -- ** sql.instances.restoreBackup
-    , module Network.Google.Resource.SQL.Instances.RestoreBackup
+    SqlInstancesRestoreBackupResource,
+    newSqlInstancesRestoreBackup,
+    SqlInstancesRestoreBackup,
 
     -- ** sql.instances.rotateServerCa
-    , module Network.Google.Resource.SQL.Instances.RotateServerCa
+    SqlInstancesRotateServerCaResource,
+    newSqlInstancesRotateServerCa,
+    SqlInstancesRotateServerCa,
 
     -- ** sql.instances.startReplica
-    , module Network.Google.Resource.SQL.Instances.StartReplica
+    SqlInstancesStartReplicaResource,
+    newSqlInstancesStartReplica,
+    SqlInstancesStartReplica,
 
     -- ** sql.instances.stopReplica
-    , module Network.Google.Resource.SQL.Instances.StopReplica
+    SqlInstancesStopReplicaResource,
+    newSqlInstancesStopReplica,
+    SqlInstancesStopReplica,
 
     -- ** sql.instances.truncateLog
-    , module Network.Google.Resource.SQL.Instances.TruncateLog
+    SqlInstancesTruncateLogResource,
+    newSqlInstancesTruncateLog,
+    SqlInstancesTruncateLog,
 
     -- ** sql.instances.update
-    , module Network.Google.Resource.SQL.Instances.Update
+    SqlInstancesUpdateResource,
+    newSqlInstancesUpdate,
+    SqlInstancesUpdate,
 
     -- ** sql.operations.get
-    , module Network.Google.Resource.SQL.Operations.Get
+    SqlOperationsGetResource,
+    newSqlOperationsGet,
+    SqlOperationsGet,
 
     -- ** sql.operations.list
-    , module Network.Google.Resource.SQL.Operations.List
+    SqlOperationsListResource,
+    newSqlOperationsList,
+    SqlOperationsList,
 
     -- ** sql.projects.instances.rescheduleMaintenance
-    , module Network.Google.Resource.SQL.Projects.Instances.RescheduleMaintenance
+    SqlProjectsInstancesRescheduleMaintenanceResource,
+    newSqlProjectsInstancesRescheduleMaintenance,
+    SqlProjectsInstancesRescheduleMaintenance,
 
     -- ** sql.projects.instances.startExternalSync
-    , module Network.Google.Resource.SQL.Projects.Instances.StartExternalSync
+    SqlProjectsInstancesStartExternalSyncResource,
+    newSqlProjectsInstancesStartExternalSync,
+    SqlProjectsInstancesStartExternalSync,
 
     -- ** sql.projects.instances.verifyExternalSyncSettings
-    , module Network.Google.Resource.SQL.Projects.Instances.VerifyExternalSyncSettings
+    SqlProjectsInstancesVerifyExternalSyncSettingsResource,
+    newSqlProjectsInstancesVerifyExternalSyncSettings,
+    SqlProjectsInstancesVerifyExternalSyncSettings,
 
     -- ** sql.sslCerts.createEphemeral
-    , module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
+    SqlSslCertsCreateEphemeralResource,
+    newSqlSslCertsCreateEphemeral,
+    SqlSslCertsCreateEphemeral,
 
     -- ** sql.sslCerts.delete
-    , module Network.Google.Resource.SQL.SSLCerts.Delete
+    SqlSslCertsDeleteResource,
+    newSqlSslCertsDelete,
+    SqlSslCertsDelete,
 
     -- ** sql.sslCerts.get
-    , module Network.Google.Resource.SQL.SSLCerts.Get
+    SqlSslCertsGetResource,
+    newSqlSslCertsGet,
+    SqlSslCertsGet,
 
     -- ** sql.sslCerts.insert
-    , module Network.Google.Resource.SQL.SSLCerts.Insert
+    SqlSslCertsInsertResource,
+    newSqlSslCertsInsert,
+    SqlSslCertsInsert,
 
     -- ** sql.sslCerts.list
-    , module Network.Google.Resource.SQL.SSLCerts.List
+    SqlSslCertsListResource,
+    newSqlSslCertsList,
+    SqlSslCertsList,
 
     -- ** sql.tiers.list
-    , module Network.Google.Resource.SQL.Tiers.List
+    SqlTiersListResource,
+    newSqlTiersList,
+    SqlTiersList,
 
     -- ** sql.users.delete
-    , module Network.Google.Resource.SQL.Users.Delete
+    SqlUsersDeleteResource,
+    newSqlUsersDelete,
+    SqlUsersDelete,
 
     -- ** sql.users.insert
-    , module Network.Google.Resource.SQL.Users.Insert
+    SqlUsersInsertResource,
+    newSqlUsersInsert,
+    SqlUsersInsert,
 
     -- ** sql.users.list
-    , module Network.Google.Resource.SQL.Users.List
+    SqlUsersListResource,
+    newSqlUsersList,
+    SqlUsersList,
 
     -- ** sql.users.update
-    , module Network.Google.Resource.SQL.Users.Update
+    SqlUsersUpdateResource,
+    newSqlUsersUpdate,
+    SqlUsersUpdate,
 
     -- * Types
 
-    -- ** SQLServerDatabaseDetails
-    , SQLServerDatabaseDetails
-    , sQLServerDatabaseDetails
-    , sqlsddRecoveryModel
-    , sqlsddCompatibilityLevel
-
-    -- ** DemoteMasterMySQLReplicaConfiguration
-    , DemoteMasterMySQLReplicaConfiguration
-    , demoteMasterMySQLReplicaConfiguration
-    , dmmsqlrcKind
-    , dmmsqlrcClientKey
-    , dmmsqlrcUsername
-    , dmmsqlrcClientCertificate
-    , dmmsqlrcCaCertificate
-    , dmmsqlrcPassword
-
-    -- ** SSLCert
-    , SSLCert
-    , sslCert
-    , scCommonName
-    , scKind
-    , scCertSerialNumber
-    , scSelfLink
-    , scCert
-    , scSha1Fingerprint
-    , scExpirationTime
-    , scCreateTime
-    , scInstance
-
-    -- ** ConnectSettingsDatabaseVersion
-    , ConnectSettingsDatabaseVersion (..)
-
-    -- ** FlagType
-    , FlagType (..)
-
-    -- ** DatabasesListResponse
-    , DatabasesListResponse
-    , databasesListResponse
-    , dlrKind
-    , dlrItems
-
-    -- ** InstancesExportRequest
-    , InstancesExportRequest
-    , instancesExportRequest
-    , ierExportContext
-
-    -- ** SQLInstancesVerifyExternalSyncSettingsResponse
-    , SQLInstancesVerifyExternalSyncSettingsResponse
-    , sQLInstancesVerifyExternalSyncSettingsResponse
-    , sqlivessrKind
-    , sqlivessrWarnings
-    , sqlivessrErrors
-
-    -- ** BackupRunType
-    , BackupRunType (..)
-
-    -- ** ConnectSettingsBackendType
-    , ConnectSettingsBackendType (..)
-
-    -- ** InstancesListServerCasResponse
-    , InstancesListServerCasResponse
-    , instancesListServerCasResponse
-    , ilscrKind
-    , ilscrCerts
-    , ilscrActiveVersion
-
-    -- ** ExportContextSQLExportOptionsMysqlExportOptions
-    , ExportContextSQLExportOptionsMysqlExportOptions
-    , exportContextSQLExportOptionsMysqlExportOptions
-    , ecsqleomeoMasterData
-
-    -- ** OnPremisesConfiguration
-    , OnPremisesConfiguration
-    , onPremisesConfiguration
-    , opcKind
-    , opcClientKey
-    , opcUsername
-    , opcHostPort
-    , opcClientCertificate
-    , opcCaCertificate
-    , opcDumpFilePath
-    , opcPassword
-
-    -- ** InsightsConfig
-    , InsightsConfig
-    , insightsConfig
-    , icQueryInsightsEnabled
-    , icQueryPlansPerMinute
-    , icRecordApplicationTags
-    , icRecordClientAddress
-    , icQueryStringLength
-
-    -- ** OperationsListResponse
-    , OperationsListResponse
-    , operationsListResponse
-    , olrNextPageToken
-    , olrKind
-    , olrItems
-
-    -- ** APIWarning
-    , APIWarning
-    , apiWarning
-    , awCode
-    , awRegion
-    , awMessage
-
-    -- ** DiskEncryptionConfiguration
-    , DiskEncryptionConfiguration
-    , diskEncryptionConfiguration
-    , decKind
-    , decKmsKeyName
-
-    -- ** SQLExternalSyncSettingError
-    , SQLExternalSyncSettingError
-    , sQLExternalSyncSettingError
-    , sqlesseKind
-    , sqlesseType
-    , sqlesseDetail
-
-    -- ** Reschedule
-    , Reschedule
-    , reschedule
-    , rScheduleTime
-    , rRescheduleType
-
-    -- ** ImportContext
-    , ImportContext
-    , importContext
-    , icDatabase
-    , icKind
-    , icCSVImportOptions
-    , icURI
-    , icFileType
-    , icImportUser
-    , icBakImportOptions
-
-    -- ** GenerateEphemeralCertRequest
-    , GenerateEphemeralCertRequest
-    , generateEphemeralCertRequest
-    , gecrReadTime
-    , gecrAccessToken
-    , gecrPublicKey
-
-    -- ** BackupRetentionSettingsRetentionUnit
-    , BackupRetentionSettingsRetentionUnit (..)
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oTargetId
-    , oTargetProject
-    , oStatus
-    , oInsertTime
-    , oImportContext
-    , oStartTime
-    , oKind
-    , oError
-    , oExportContext
-    , oUser
-    , oSelfLink
-    , oName
-    , oEndTime
-    , oOperationType
-    , oTargetLink
-    , oBackupContext
-
-    -- ** Settings
-    , Settings
-    , settings
-    , sStorageAutoResize
-    , sReplicationType
-    , sActivationPolicy
-    , sSettingsVersion
-    , sInsightsConfig
-    , sActiveDirectoryConfig
-    , sDataDiskSizeGb
-    , sAuthorizedGaeApplications
-    , sKind
-    , sPricingPlan
-    , sIPConfiguration
-    , sCollation
-    , sMaintenanceWindow
-    , sDatabaseReplicationEnabled
-    , sUserLabels
-    , sTier
-    , sDatabaseFlags
-    , sDataDiskType
-    , sDenyMaintenancePeriods
-    , sCrashSafeReplicationEnabled
-    , sLocationPreference
-    , sBackupConfiguration
-    , sAvailabilityType
-    , sStorageAutoResizeLimit
-
-    -- ** InstancesRotateServerCaRequest
-    , InstancesRotateServerCaRequest
-    , instancesRotateServerCaRequest
-    , irscrRotateServerCaContext
-
-    -- ** IPMApping
-    , IPMApping
-    , ipMApping
-    , imaIPAddress
-    , imaTimeToRetire
-    , imaType
-
-    -- ** Database
-    , Database
-    , database
-    , dSQLserverDatabaseDetails
-    , dEtag
-    , dProject
-    , dKind
-    , dCollation
-    , dSelfLink
-    , dName
-    , dCharSet
-    , dInstance
-
-    -- ** SSLCertsCreateEphemeralRequest
-    , SSLCertsCreateEphemeralRequest
-    , sslCertsCreateEphemeralRequest
-    , sccerAccessToken
-    , sccerPublicKey
-
-    -- ** BinLogCoordinates
-    , BinLogCoordinates
-    , binLogCoordinates
-    , blcBinLogPosition
-    , blcKind
-    , blcBinLogFileName
-
-    -- ** FlagAppliesToItem
-    , FlagAppliesToItem (..)
-
-    -- ** DatabaseInstanceFailoverReplica
-    , DatabaseInstanceFailoverReplica
-    , databaseInstanceFailoverReplica
-    , difrName
-    , difrAvailable
-
-    -- ** SQLServerUserDetails
-    , SQLServerUserDetails
-    , sQLServerUserDetails
-    , sqlsudServerRoles
-    , sqlsudDisabled
-
-    -- ** TiersListResponse
-    , TiersListResponse
-    , tiersListResponse
-    , tlrKind
-    , tlrItems
-
-    -- ** OperationOperationType
-    , OperationOperationType (..)
-
-    -- ** UsersListResponse
-    , UsersListResponse
-    , usersListResponse
-    , ulrNextPageToken
-    , ulrKind
-    , ulrItems
-
-    -- ** ExportContext
-    , ExportContext
-    , exportContext
-    , ecCSVExportOptions
-    , ecKind
-    , ecURI
-    , ecFileType
-    , ecOffLoad
-    , ecSQLExportOptions
-    , ecDatabases
-
-    -- ** OperationErrors
-    , OperationErrors
-    , operationErrors
-    , oeKind
-    , oeErrors
-
-    -- ** SSLCertsListResponse
-    , SSLCertsListResponse
-    , sslCertsListResponse
-    , sclrKind
-    , sclrItems
-
-    -- ** SettingsPricingPlan
-    , SettingsPricingPlan (..)
-
-    -- ** DiskEncryptionStatus
-    , DiskEncryptionStatus
-    , diskEncryptionStatus
-    , desKmsKeyVersionName
-    , desKind
-
-    -- ** BackupRunBackupKind
-    , BackupRunBackupKind (..)
-
-    -- ** OperationStatus
-    , OperationStatus (..)
-
-    -- ** SQLActiveDirectoryConfig
-    , SQLActiveDirectoryConfig
-    , sQLActiveDirectoryConfig
-    , sqladcKind
-    , sqladcDomain
-
-    -- ** SSLCertsInsertRequest
-    , SSLCertsInsertRequest
-    , sslCertsInsertRequest
-    , scirCommonName
-
-    -- ** IPConfiguration
-    , IPConfiguration
-    , ipConfiguration
-    , icAuthorizedNetworks
-    , icPrivateNetwork
-    , icRequireSSL
-    , icIPv4Enabled
-
-    -- ** MaintenanceWindow
-    , MaintenanceWindow
-    , maintenanceWindow
-    , mwKind
-    , mwDay
-    , mwHour
-    , mwUpdateTrack
-
-    -- ** ImportContextCSVImportOptions
-    , ImportContextCSVImportOptions
-    , importContextCSVImportOptions
-    , iccioColumns
-    , iccioTable
-
-    -- ** RotateServerCaContext
-    , RotateServerCaContext
-    , rotateServerCaContext
-    , rsccNextVersion
-    , rsccKind
-
-    -- ** ExportContextCSVExportOptions
-    , ExportContextCSVExportOptions
-    , exportContextCSVExportOptions
-    , ecceoSelectQuery
-
-    -- ** SettingsActivationPolicy
-    , SettingsActivationPolicy (..)
-
-    -- ** User
-    , User
-    , user
-    , uEtag
-    , uProject
-    , uKind
-    , uSQLserverUserDetails
-    , uName
-    , uPassword
-    , uHost
-    , uType
-    , uInstance
-
-    -- ** DatabaseInstance
-    , DatabaseInstance
-    , databaseInstance
-    , datBackendType
-    , datSatisfiesPzs
-    , datMaxDiskSize
-    , datOnPremisesConfiguration
-    , datGceZone
-    , datEtag
-    , datState
-    , datIPv6Address
-    , datServerCaCert
-    , datDatabaseVersion
-    , datDiskEncryptionConfiguration
-    , datProject
-    , datSettings
-    , datSecondaryGceZone
-    , datKind
-    , datDiskEncryptionStatus
-    , datConnectionName
-    , datCurrentDiskSize
-    , datInstanceType
-    , datRootPassword
-    , datOutOfDiskReport
-    , datReplicaNames
-    , datSelfLink
-    , datFailoverReplica
-    , datScheduledMaintenance
-    , datName
-    , datMasterInstanceName
-    , datReplicaConfiguration
-    , datRegion
-    , datServiceAccountEmailAddress
-    , datIPAddresses
-    , datSuspensionReason
-
-    -- ** CloneContext
-    , CloneContext
-    , cloneContext
-    , ccPitrTimestampMs
-    , ccDestinationInstanceName
-    , ccBinLogCoordinates
-    , ccKind
-    , ccPointInTime
-
-    -- ** ImportContextFileType
-    , ImportContextFileType (..)
-
-    -- ** Flag
-    , Flag
-    , flag
-    , fMaxValue
-    , fInBeta
-    , fKind
-    , fAllowedIntValues
-    , fAppliesTo
-    , fName
-    , fAllowedStringValues
-    , fType
-    , fMinValue
-    , fRequiresRestart
-
-    -- ** SettingsAvailabilityType
-    , SettingsAvailabilityType (..)
-
-    -- ** BackupRetentionSettings
-    , BackupRetentionSettings
-    , backupRetentionSettings
-    , brsRetentionUnit
-    , brsRetainedBackups
-
-    -- ** MaintenanceWindowUpdateTrack
-    , MaintenanceWindowUpdateTrack (..)
-
-    -- ** InstancesFailoverRequest
-    , InstancesFailoverRequest
-    , instancesFailoverRequest
-    , ifrFailoverContext
-
-    -- ** APIWarningCode
-    , APIWarningCode (..)
-
-    -- ** GenerateEphemeralCertResponse
-    , GenerateEphemeralCertResponse
-    , generateEphemeralCertResponse
-    , gecrEphemeralCert
-
-    -- ** BackupRun
-    , BackupRun
-    , backupRun
-    , brStatus
-    , brDiskEncryptionConfiguration
-    , brLocation
-    , brStartTime
-    , brKind
-    , brError
-    , brDiskEncryptionStatus
-    , brBackupKind
-    , brWindowStartTime
-    , brSelfLink
-    , brEndTime
-    , brId
-    , brType
-    , brEnQueuedTime
-    , brDescription
-    , brInstance
-
-    -- ** ImportContextBakImportOptions
-    , ImportContextBakImportOptions
-    , importContextBakImportOptions
-    , icbioEncryptionOptions
-
-    -- ** ProjectsInstancesStartExternalSyncSyncMode
-    , ProjectsInstancesStartExternalSyncSyncMode (..)
-
-    -- ** ACLEntry
-    , ACLEntry
-    , aclEntry
-    , aeKind
-    , aeValue
-    , aeName
-    , aeExpirationTime
-
-    -- ** SQLInstancesRescheduleMaintenanceRequestBody
-    , SQLInstancesRescheduleMaintenanceRequestBody
-    , sQLInstancesRescheduleMaintenanceRequestBody
-    , sqlirmrbReschedule
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
-    -- ** DatabaseFlags
-    , DatabaseFlags
-    , databaseFlags
-    , dfValue
-    , dfName
+    -- ** AclEntry
+    AclEntry (..),
+    newAclEntry,
 
-    -- ** SQLExternalSyncSettingErrorType
-    , SQLExternalSyncSettingErrorType (..)
+    -- ** ApiWarning
+    ApiWarning (..),
+    newApiWarning,
 
-    -- ** Tier
-    , Tier
-    , tier
-    , tKind
-    , tTier
-    , tRegion
-    , tDiskQuota
-    , tRAM
-
-    -- ** MySQLReplicaConfiguration
-    , MySQLReplicaConfiguration
-    , mySQLReplicaConfiguration
-    , msqlrcVerifyServerCertificate
-    , msqlrcKind
-    , msqlrcClientKey
-    , msqlrcUsername
-    , msqlrcSSLCipher
-    , msqlrcMasterHeartbeatPeriod
-    , msqlrcConnectRetryInterval
-    , msqlrcClientCertificate
-    , msqlrcCaCertificate
-    , msqlrcDumpFilePath
-    , msqlrcPassword
-
-    -- ** SQLOutOfDiskReport
-    , SQLOutOfDiskReport
-    , sQLOutOfDiskReport
-    , sqloodrSQLOutOfDiskState
-    , sqloodrSQLMinRecommendedIncreaseSizeGb
-
-    -- ** SQLScheduledMaintenance
-    , SQLScheduledMaintenance
-    , sQLScheduledMaintenance
-    , sqlsmStartTime
-    , sqlsmCanReschedule
-    , sqlsmCanDefer
-    , sqlsmScheduleDeadlineTime
-
-    -- ** SSLCertDetail
-    , SSLCertDetail
-    , sslCertDetail
-    , scdCertInfo
-    , scdCertPrivateKey
-
-    -- ** DatabaseInstanceInstanceType
-    , DatabaseInstanceInstanceType (..)
-
-    -- ** InstancesRestoreBackupRequest
-    , InstancesRestoreBackupRequest
-    , instancesRestoreBackupRequest
-    , irbrRestoreBackupContext
-
-    -- ** InstancesDemoteMasterRequest
-    , InstancesDemoteMasterRequest
-    , instancesDemoteMasterRequest
-    , idmrDemoteMasterContext
-
-    -- ** BackupRunsListResponse
-    , BackupRunsListResponse
-    , backupRunsListResponse
-    , brlrNextPageToken
-    , brlrKind
-    , brlrItems
-
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , opeKind
-    , opeCode
-    , opeMessage
-
-    -- ** IPMAppingType
-    , IPMAppingType (..)
-
-    -- ** TruncateLogContext
-    , TruncateLogContext
-    , truncateLogContext
-    , tlcKind
-    , tlcLogType
-
-    -- ** ExportContextFileType
-    , ExportContextFileType (..)
-
-    -- ** InstancesCloneRequest
-    , InstancesCloneRequest
-    , instancesCloneRequest
-    , icrCloneContext
-
-    -- ** RescheduleRescheduleType
-    , RescheduleRescheduleType (..)
-
-    -- ** ImportContextBakImportOptionsEncryptionOptions
-    , ImportContextBakImportOptionsEncryptionOptions
-    , importContextBakImportOptionsEncryptionOptions
-    , icbioeoPvkPath
-    , icbioeoPvkPassword
-    , icbioeoCertPath
-
-    -- ** ProjectsInstancesVerifyExternalSyncSettingsSyncMode
-    , ProjectsInstancesVerifyExternalSyncSettingsSyncMode (..)
-
-    -- ** UsersListBodyType
-    , UsersListBodyType (..)
-
-    -- ** SettingsDataDiskType
-    , SettingsDataDiskType (..)
-
-    -- ** ReplicaConfiguration
-    , ReplicaConfiguration
-    , replicaConfiguration
-    , rcFailoverTarget
-    , rcKind
-    , rcMysqlReplicaConfiguration
-
-    -- ** DatabaseInstanceBackendType
-    , DatabaseInstanceBackendType (..)
-
-    -- ** DatabaseInstanceSuspensionReasonItem
-    , DatabaseInstanceSuspensionReasonItem (..)
-
-    -- ** FailoverContext
-    , FailoverContext
-    , failoverContext
-    , fcSettingsVersion
-    , fcKind
-
-    -- ** BackupRunStatus
-    , BackupRunStatus (..)
-
-    -- ** DatabaseInstanceState
-    , DatabaseInstanceState (..)
-
-    -- ** SSLCertsInsertResponse
-    , SSLCertsInsertResponse
-    , sslCertsInsertResponse
-    , scirServerCaCert
-    , scirOperation
-    , scirKind
-    , scirClientCert
-
-    -- ** ConnectSettings
-    , ConnectSettings
-    , connectSettings
-    , csBackendType
-    , csServerCaCert
-    , csDatabaseVersion
-    , csKind
-    , csIPAddresses
-
-    -- ** DatabaseInstanceDatabaseVersion
-    , DatabaseInstanceDatabaseVersion (..)
-
-    -- ** InstancesListResponse
-    , InstancesListResponse
-    , instancesListResponse
-    , ilrNextPageToken
-    , ilrKind
-    , ilrItems
-    , ilrWarnings
-
-    -- ** DemoteMasterConfiguration
-    , DemoteMasterConfiguration
-    , demoteMasterConfiguration
-    , dmcKind
-    , dmcMysqlReplicaConfiguration
+    -- ** ApiWarning_Code
+    ApiWarning_Code (..),
 
     -- ** BackupConfiguration
-    , BackupConfiguration
-    , backupConfiguration
-    , bcReplicationLogArchivingEnabled
-    , bcLocation
-    , bcEnabled
-    , bcStartTime
-    , bcKind
-    , bcBinaryLogEnabled
-    , bcBackupRetentionSettings
-    , bcPointInTimeRecoveryEnabled
-    , bcTransactionLogRetentionDays
-
-    -- ** DenyMaintenancePeriod
-    , DenyMaintenancePeriod
-    , denyMaintenancePeriod
-    , dmpTime
-    , dmpEndDate
-    , dmpStartDate
-
-    -- ** InstancesImportRequest
-    , InstancesImportRequest
-    , instancesImportRequest
-    , iirImportContext
-
-    -- ** LocationPreference
-    , LocationPreference
-    , locationPreference
-    , lpKind
-    , lpFollowGaeApplication
-    , lpZone
-    , lpSecondaryZone
-
-    -- ** FlagsListResponse
-    , FlagsListResponse
-    , flagsListResponse
-    , flrKind
-    , flrItems
-
-    -- ** InstancesTruncateLogRequest
-    , InstancesTruncateLogRequest
-    , instancesTruncateLogRequest
-    , itlrTruncateLogContext
-
-    -- ** UserType
-    , UserType (..)
-
-    -- ** ExportContextSQLExportOptions
-    , ExportContextSQLExportOptions
-    , exportContextSQLExportOptions
-    , ecsqleoSchemaOnly
-    , ecsqleoMysqlExportOptions
-    , ecsqleoTables
+    BackupConfiguration (..),
+    newBackupConfiguration,
 
     -- ** BackupContext
-    , BackupContext
-    , backupContext
-    , bKind
-    , bBackupId
+    BackupContext (..),
+    newBackupContext,
 
-    -- ** SettingsReplicationType
-    , SettingsReplicationType (..)
+    -- ** BackupRetentionSettings
+    BackupRetentionSettings (..),
+    newBackupRetentionSettings,
 
-    -- ** RestoreBackupContext
-    , RestoreBackupContext
-    , restoreBackupContext
-    , rbcInstanceId
-    , rbcBackupRunId
-    , rbcProject
-    , rbcKind
+    -- ** BackupRetentionSettings_RetentionUnit
+    BackupRetentionSettings_RetentionUnit (..),
 
-    -- ** SQLOutOfDiskReportSQLOutOfDiskState
-    , SQLOutOfDiskReportSQLOutOfDiskState (..)
+    -- ** BackupRun
+    BackupRun (..),
+    newBackupRun,
+
+    -- ** BackupRun_BackupKind
+    BackupRun_BackupKind (..),
+
+    -- ** BackupRun_Status
+    BackupRun_Status (..),
+
+    -- ** BackupRun_Type
+    BackupRun_Type (..),
+
+    -- ** BackupRunsListResponse
+    BackupRunsListResponse (..),
+    newBackupRunsListResponse,
+
+    -- ** BinLogCoordinates
+    BinLogCoordinates (..),
+    newBinLogCoordinates,
+
+    -- ** CloneContext
+    CloneContext (..),
+    newCloneContext,
+
+    -- ** ConnectSettings
+    ConnectSettings (..),
+    newConnectSettings,
+
+    -- ** ConnectSettings_BackendType
+    ConnectSettings_BackendType (..),
+
+    -- ** ConnectSettings_DatabaseVersion
+    ConnectSettings_DatabaseVersion (..),
+
+    -- ** Database
+    Database (..),
+    newDatabase,
+
+    -- ** DatabaseFlags
+    DatabaseFlags (..),
+    newDatabaseFlags,
+
+    -- ** DatabaseInstance
+    DatabaseInstance (..),
+    newDatabaseInstance,
+
+    -- ** DatabaseInstance_BackendType
+    DatabaseInstance_BackendType (..),
+
+    -- ** DatabaseInstance_DatabaseVersion
+    DatabaseInstance_DatabaseVersion (..),
+
+    -- ** DatabaseInstance_FailoverReplica
+    DatabaseInstance_FailoverReplica (..),
+    newDatabaseInstance_FailoverReplica,
+
+    -- ** DatabaseInstance_InstanceType
+    DatabaseInstance_InstanceType (..),
+
+    -- ** DatabaseInstance_State
+    DatabaseInstance_State (..),
+
+    -- ** DatabaseInstance_SuspensionReasonItem
+    DatabaseInstance_SuspensionReasonItem (..),
+
+    -- ** DatabasesListResponse
+    DatabasesListResponse (..),
+    newDatabasesListResponse,
+
+    -- ** DemoteMasterConfiguration
+    DemoteMasterConfiguration (..),
+    newDemoteMasterConfiguration,
 
     -- ** DemoteMasterContext
-    , DemoteMasterContext
-    , demoteMasterContext
-    , demVerifyGtidConsistency
-    , demKind
-    , demMasterInstanceName
-    , demReplicaConfiguration
+    DemoteMasterContext (..),
+    newDemoteMasterContext,
 
-    -- ** SettingsUserLabels
-    , SettingsUserLabels
-    , settingsUserLabels
-    , sulAddtional
-    ) where
+    -- ** DemoteMasterMySqlReplicaConfiguration
+    DemoteMasterMySqlReplicaConfiguration (..),
+    newDemoteMasterMySqlReplicaConfiguration,
 
-import Network.Google.Prelude
-import Network.Google.Resource.SQL.BackupRuns.Delete
-import Network.Google.Resource.SQL.BackupRuns.Get
-import Network.Google.Resource.SQL.BackupRuns.Insert
-import Network.Google.Resource.SQL.BackupRuns.List
-import Network.Google.Resource.SQL.Connect.GenerateEphemeral
-import Network.Google.Resource.SQL.Connect.Get
-import Network.Google.Resource.SQL.Databases.Delete
-import Network.Google.Resource.SQL.Databases.Get
-import Network.Google.Resource.SQL.Databases.Insert
-import Network.Google.Resource.SQL.Databases.List
-import Network.Google.Resource.SQL.Databases.Patch
-import Network.Google.Resource.SQL.Databases.Update
-import Network.Google.Resource.SQL.Flags.List
-import Network.Google.Resource.SQL.Instances.AddServerCa
-import Network.Google.Resource.SQL.Instances.Clone
-import Network.Google.Resource.SQL.Instances.Delete
-import Network.Google.Resource.SQL.Instances.DemoteMaster
-import Network.Google.Resource.SQL.Instances.Export
-import Network.Google.Resource.SQL.Instances.Failover
-import Network.Google.Resource.SQL.Instances.Get
-import Network.Google.Resource.SQL.Instances.Import
-import Network.Google.Resource.SQL.Instances.Insert
-import Network.Google.Resource.SQL.Instances.List
-import Network.Google.Resource.SQL.Instances.ListServerCas
-import Network.Google.Resource.SQL.Instances.Patch
-import Network.Google.Resource.SQL.Instances.PromoteReplica
-import Network.Google.Resource.SQL.Instances.ResetSSLConfig
-import Network.Google.Resource.SQL.Instances.Restart
-import Network.Google.Resource.SQL.Instances.RestoreBackup
-import Network.Google.Resource.SQL.Instances.RotateServerCa
-import Network.Google.Resource.SQL.Instances.StartReplica
-import Network.Google.Resource.SQL.Instances.StopReplica
-import Network.Google.Resource.SQL.Instances.TruncateLog
-import Network.Google.Resource.SQL.Instances.Update
-import Network.Google.Resource.SQL.Operations.Get
-import Network.Google.Resource.SQL.Operations.List
-import Network.Google.Resource.SQL.Projects.Instances.RescheduleMaintenance
-import Network.Google.Resource.SQL.Projects.Instances.StartExternalSync
-import Network.Google.Resource.SQL.Projects.Instances.VerifyExternalSyncSettings
-import Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
-import Network.Google.Resource.SQL.SSLCerts.Delete
-import Network.Google.Resource.SQL.SSLCerts.Get
-import Network.Google.Resource.SQL.SSLCerts.Insert
-import Network.Google.Resource.SQL.SSLCerts.List
-import Network.Google.Resource.SQL.Tiers.List
-import Network.Google.Resource.SQL.Users.Delete
-import Network.Google.Resource.SQL.Users.Insert
-import Network.Google.Resource.SQL.Users.List
-import Network.Google.Resource.SQL.Users.Update
+    -- ** DenyMaintenancePeriod
+    DenyMaintenancePeriod (..),
+    newDenyMaintenancePeriod,
+
+    -- ** DiskEncryptionConfiguration
+    DiskEncryptionConfiguration (..),
+    newDiskEncryptionConfiguration,
+
+    -- ** DiskEncryptionStatus
+    DiskEncryptionStatus (..),
+    newDiskEncryptionStatus,
+
+    -- ** ExportContext
+    ExportContext (..),
+    newExportContext,
+
+    -- ** ExportContext_CsvExportOptions
+    ExportContext_CsvExportOptions (..),
+    newExportContext_CsvExportOptions,
+
+    -- ** ExportContext_FileType
+    ExportContext_FileType (..),
+
+    -- ** ExportContext_SqlExportOptions
+    ExportContext_SqlExportOptions (..),
+    newExportContext_SqlExportOptions,
+
+    -- ** ExportContext_SqlExportOptions_MysqlExportOptions
+    ExportContext_SqlExportOptions_MysqlExportOptions (..),
+    newExportContext_SqlExportOptions_MysqlExportOptions,
+
+    -- ** FailoverContext
+    FailoverContext (..),
+    newFailoverContext,
+
+    -- ** Flag
+    Flag (..),
+    newFlag,
+
+    -- ** Flag_AppliesToItem
+    Flag_AppliesToItem (..),
+
+    -- ** Flag_Type
+    Flag_Type (..),
+
+    -- ** FlagsListResponse
+    FlagsListResponse (..),
+    newFlagsListResponse,
+
+    -- ** GenerateEphemeralCertRequest
+    GenerateEphemeralCertRequest (..),
+    newGenerateEphemeralCertRequest,
+
+    -- ** GenerateEphemeralCertResponse
+    GenerateEphemeralCertResponse (..),
+    newGenerateEphemeralCertResponse,
+
+    -- ** ImportContext
+    ImportContext (..),
+    newImportContext,
+
+    -- ** ImportContext_BakImportOptions
+    ImportContext_BakImportOptions (..),
+    newImportContext_BakImportOptions,
+
+    -- ** ImportContext_BakImportOptions_EncryptionOptions
+    ImportContext_BakImportOptions_EncryptionOptions (..),
+    newImportContext_BakImportOptions_EncryptionOptions,
+
+    -- ** ImportContext_CsvImportOptions
+    ImportContext_CsvImportOptions (..),
+    newImportContext_CsvImportOptions,
+
+    -- ** ImportContext_FileType
+    ImportContext_FileType (..),
+
+    -- ** InsightsConfig
+    InsightsConfig (..),
+    newInsightsConfig,
+
+    -- ** InstanceReference
+    InstanceReference (..),
+    newInstanceReference,
+
+    -- ** InstancesCloneRequest
+    InstancesCloneRequest (..),
+    newInstancesCloneRequest,
+
+    -- ** InstancesDemoteMasterRequest
+    InstancesDemoteMasterRequest (..),
+    newInstancesDemoteMasterRequest,
+
+    -- ** InstancesExportRequest
+    InstancesExportRequest (..),
+    newInstancesExportRequest,
+
+    -- ** InstancesFailoverRequest
+    InstancesFailoverRequest (..),
+    newInstancesFailoverRequest,
+
+    -- ** InstancesImportRequest
+    InstancesImportRequest (..),
+    newInstancesImportRequest,
+
+    -- ** InstancesListResponse
+    InstancesListResponse (..),
+    newInstancesListResponse,
+
+    -- ** InstancesListServerCasResponse
+    InstancesListServerCasResponse (..),
+    newInstancesListServerCasResponse,
+
+    -- ** InstancesRestoreBackupRequest
+    InstancesRestoreBackupRequest (..),
+    newInstancesRestoreBackupRequest,
+
+    -- ** InstancesRotateServerCaRequest
+    InstancesRotateServerCaRequest (..),
+    newInstancesRotateServerCaRequest,
+
+    -- ** InstancesTruncateLogRequest
+    InstancesTruncateLogRequest (..),
+    newInstancesTruncateLogRequest,
+
+    -- ** IpConfiguration
+    IpConfiguration (..),
+    newIpConfiguration,
+
+    -- ** IpMapping
+    IpMapping (..),
+    newIpMapping,
+
+    -- ** IpMapping_Type
+    IpMapping_Type (..),
+
+    -- ** LocationPreference
+    LocationPreference (..),
+    newLocationPreference,
+
+    -- ** MaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
+
+    -- ** MaintenanceWindow_UpdateTrack
+    MaintenanceWindow_UpdateTrack (..),
+
+    -- ** MySqlReplicaConfiguration
+    MySqlReplicaConfiguration (..),
+    newMySqlReplicaConfiguration,
+
+    -- ** MySqlSyncConfig
+    MySqlSyncConfig (..),
+    newMySqlSyncConfig,
+
+    -- ** OnPremisesConfiguration
+    OnPremisesConfiguration (..),
+    newOnPremisesConfiguration,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_OperationType
+    Operation_OperationType (..),
+
+    -- ** Operation_Status
+    Operation_Status (..),
+
+    -- ** OperationError
+    OperationError (..),
+    newOperationError,
+
+    -- ** OperationErrors
+    OperationErrors (..),
+    newOperationErrors,
+
+    -- ** OperationsListResponse
+    OperationsListResponse (..),
+    newOperationsListResponse,
+
+    -- ** PasswordStatus
+    PasswordStatus (..),
+    newPasswordStatus,
+
+    -- ** PasswordValidationPolicy
+    PasswordValidationPolicy (..),
+    newPasswordValidationPolicy,
+
+    -- ** PasswordValidationPolicy_Complexity
+    PasswordValidationPolicy_Complexity (..),
+
+    -- ** ReplicaConfiguration
+    ReplicaConfiguration (..),
+    newReplicaConfiguration,
+
+    -- ** Reschedule
+    Reschedule (..),
+    newReschedule,
+
+    -- ** Reschedule_RescheduleType
+    Reschedule_RescheduleType (..),
+
+    -- ** RestoreBackupContext
+    RestoreBackupContext (..),
+    newRestoreBackupContext,
+
+    -- ** RotateServerCaContext
+    RotateServerCaContext (..),
+    newRotateServerCaContext,
+
+    -- ** Settings
+    Settings (..),
+    newSettings,
+
+    -- ** Settings_ActivationPolicy
+    Settings_ActivationPolicy (..),
+
+    -- ** Settings_AvailabilityType
+    Settings_AvailabilityType (..),
+
+    -- ** Settings_DataDiskType
+    Settings_DataDiskType (..),
+
+    -- ** Settings_PricingPlan
+    Settings_PricingPlan (..),
+
+    -- ** Settings_ReplicationType
+    Settings_ReplicationType (..),
+
+    -- ** Settings_UserLabels
+    Settings_UserLabels (..),
+    newSettings_UserLabels,
+
+    -- ** SqlActiveDirectoryConfig
+    SqlActiveDirectoryConfig (..),
+    newSqlActiveDirectoryConfig,
+
+    -- ** SqlExternalSyncSettingError
+    SqlExternalSyncSettingError (..),
+    newSqlExternalSyncSettingError,
+
+    -- ** SqlExternalSyncSettingError_Type
+    SqlExternalSyncSettingError_Type (..),
+
+    -- ** SqlInstancesRescheduleMaintenanceRequestBody
+    SqlInstancesRescheduleMaintenanceRequestBody (..),
+    newSqlInstancesRescheduleMaintenanceRequestBody,
+
+    -- ** SqlInstancesStartExternalSyncRequest
+    SqlInstancesStartExternalSyncRequest (..),
+    newSqlInstancesStartExternalSyncRequest,
+
+    -- ** SqlInstancesStartExternalSyncRequest_SyncMode
+    SqlInstancesStartExternalSyncRequest_SyncMode (..),
+
+    -- ** SqlInstancesVerifyExternalSyncSettingsRequest
+    SqlInstancesVerifyExternalSyncSettingsRequest (..),
+    newSqlInstancesVerifyExternalSyncSettingsRequest,
+
+    -- ** SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
+    SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode (..),
+
+    -- ** SqlInstancesVerifyExternalSyncSettingsResponse
+    SqlInstancesVerifyExternalSyncSettingsResponse (..),
+    newSqlInstancesVerifyExternalSyncSettingsResponse,
+
+    -- ** SqlOutOfDiskReport
+    SqlOutOfDiskReport (..),
+    newSqlOutOfDiskReport,
+
+    -- ** SqlOutOfDiskReport_SqlOutOfDiskState
+    SqlOutOfDiskReport_SqlOutOfDiskState (..),
+
+    -- ** SqlScheduledMaintenance
+    SqlScheduledMaintenance (..),
+    newSqlScheduledMaintenance,
+
+    -- ** SqlServerAuditConfig
+    SqlServerAuditConfig (..),
+    newSqlServerAuditConfig,
+
+    -- ** SqlServerDatabaseDetails
+    SqlServerDatabaseDetails (..),
+    newSqlServerDatabaseDetails,
+
+    -- ** SqlServerUserDetails
+    SqlServerUserDetails (..),
+    newSqlServerUserDetails,
+
+    -- ** SslCert
+    SslCert (..),
+    newSslCert,
+
+    -- ** SslCertDetail
+    SslCertDetail (..),
+    newSslCertDetail,
+
+    -- ** SslCertsCreateEphemeralRequest
+    SslCertsCreateEphemeralRequest (..),
+    newSslCertsCreateEphemeralRequest,
+
+    -- ** SslCertsInsertRequest
+    SslCertsInsertRequest (..),
+    newSslCertsInsertRequest,
+
+    -- ** SslCertsInsertResponse
+    SslCertsInsertResponse (..),
+    newSslCertsInsertResponse,
+
+    -- ** SslCertsListResponse
+    SslCertsListResponse (..),
+    newSslCertsListResponse,
+
+    -- ** SyncFlags
+    SyncFlags (..),
+    newSyncFlags,
+
+    -- ** Tier
+    Tier (..),
+    newTier,
+
+    -- ** TiersListResponse
+    TiersListResponse (..),
+    newTiersListResponse,
+
+    -- ** TruncateLogContext
+    TruncateLogContext (..),
+    newTruncateLogContext,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_Type
+    User_Type (..),
+
+    -- ** UserPasswordValidationPolicy
+    UserPasswordValidationPolicy (..),
+    newUserPasswordValidationPolicy,
+
+    -- ** UsersListResponse
+    UsersListResponse (..),
+    newUsersListResponse,
+  )
+where
+
+import Network.Google.SQLAdmin.Sql.BackupRuns.Delete
+import Network.Google.SQLAdmin.Sql.BackupRuns.Get
+import Network.Google.SQLAdmin.Sql.BackupRuns.Insert
+import Network.Google.SQLAdmin.Sql.BackupRuns.List
+import Network.Google.SQLAdmin.Sql.Connect.GenerateEphemeral
+import Network.Google.SQLAdmin.Sql.Connect.Get
+import Network.Google.SQLAdmin.Sql.Databases.Delete
+import Network.Google.SQLAdmin.Sql.Databases.Get
+import Network.Google.SQLAdmin.Sql.Databases.Insert
+import Network.Google.SQLAdmin.Sql.Databases.List
+import Network.Google.SQLAdmin.Sql.Databases.Patch
+import Network.Google.SQLAdmin.Sql.Databases.Update
+import Network.Google.SQLAdmin.Sql.Flags.List
+import Network.Google.SQLAdmin.Sql.Instances.AddServerCa
+import Network.Google.SQLAdmin.Sql.Instances.Clone
+import Network.Google.SQLAdmin.Sql.Instances.Delete
+import Network.Google.SQLAdmin.Sql.Instances.DemoteMaster
+import Network.Google.SQLAdmin.Sql.Instances.Export
+import Network.Google.SQLAdmin.Sql.Instances.Failover
+import Network.Google.SQLAdmin.Sql.Instances.Get
+import Network.Google.SQLAdmin.Sql.Instances.Import
+import Network.Google.SQLAdmin.Sql.Instances.Insert
+import Network.Google.SQLAdmin.Sql.Instances.List
+import Network.Google.SQLAdmin.Sql.Instances.ListServerCas
+import Network.Google.SQLAdmin.Sql.Instances.Patch
+import Network.Google.SQLAdmin.Sql.Instances.PromoteReplica
+import Network.Google.SQLAdmin.Sql.Instances.ResetSslConfig
+import Network.Google.SQLAdmin.Sql.Instances.Restart
+import Network.Google.SQLAdmin.Sql.Instances.RestoreBackup
+import Network.Google.SQLAdmin.Sql.Instances.RotateServerCa
+import Network.Google.SQLAdmin.Sql.Instances.StartReplica
+import Network.Google.SQLAdmin.Sql.Instances.StopReplica
+import Network.Google.SQLAdmin.Sql.Instances.TruncateLog
+import Network.Google.SQLAdmin.Sql.Instances.Update
+import Network.Google.SQLAdmin.Sql.Operations.Get
+import Network.Google.SQLAdmin.Sql.Operations.List
+import Network.Google.SQLAdmin.Sql.Projects.Instances.RescheduleMaintenance
+import Network.Google.SQLAdmin.Sql.Projects.Instances.StartExternalSync
+import Network.Google.SQLAdmin.Sql.Projects.Instances.VerifyExternalSyncSettings
+import Network.Google.SQLAdmin.Sql.SslCerts.CreateEphemeral
+import Network.Google.SQLAdmin.Sql.SslCerts.Delete
+import Network.Google.SQLAdmin.Sql.SslCerts.Get
+import Network.Google.SQLAdmin.Sql.SslCerts.Insert
+import Network.Google.SQLAdmin.Sql.SslCerts.List
+import Network.Google.SQLAdmin.Sql.Tiers.List
+import Network.Google.SQLAdmin.Sql.Users.Delete
+import Network.Google.SQLAdmin.Sql.Users.Insert
+import Network.Google.SQLAdmin.Sql.Users.List
+import Network.Google.SQLAdmin.Sql.Users.Update
 import Network.Google.SQLAdmin.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud SQL Admin API service.
-type SQLAdminAPI =
-     FlagsListResource :<|> UsersInsertResource :<|>
-       UsersListResource
-       :<|> UsersDeleteResource
-       :<|> UsersUpdateResource
-       :<|> ConnectGetResource
-       :<|> ConnectGenerateEphemeralResource
-       :<|> TiersListResource
-       :<|> BackupRunsInsertResource
-       :<|> BackupRunsListResource
-       :<|> BackupRunsGetResource
-       :<|> BackupRunsDeleteResource
-       :<|> SSLCertsInsertResource
-       :<|> SSLCertsListResource
-       :<|> SSLCertsGetResource
-       :<|> SSLCertsCreateEphemeralResource
-       :<|> SSLCertsDeleteResource
-       :<|> InstancesExportResource
-       :<|> InstancesInsertResource
-       :<|> InstancesListResource
-       :<|> InstancesStartReplicaResource
-       :<|> InstancesCloneResource
-       :<|> InstancesPatchResource
-       :<|> InstancesDemoteMasterResource
-       :<|> InstancesGetResource
-       :<|> InstancesListServerCasResource
-       :<|> InstancesRestoreBackupResource
-       :<|> InstancesAddServerCaResource
-       :<|> InstancesFailoverResource
-       :<|> InstancesRestartResource
-       :<|> InstancesTruncateLogResource
-       :<|> InstancesImportResource
-       :<|> InstancesStopReplicaResource
-       :<|> InstancesResetSSLConfigResource
-       :<|> InstancesPromoteReplicaResource
-       :<|> InstancesRotateServerCaResource
-       :<|> InstancesDeleteResource
-       :<|> InstancesUpdateResource
-       :<|> OperationsListResource
-       :<|> OperationsGetResource
-       :<|> ProjectsInstancesRescheduleMaintenanceResource
-       :<|> ProjectsInstancesStartExternalSyncResource
-       :<|>
-       ProjectsInstancesVerifyExternalSyncSettingsResource
-       :<|> DatabasesInsertResource
-       :<|> DatabasesListResource
-       :<|> DatabasesPatchResource
-       :<|> DatabasesGetResource
-       :<|> DatabasesDeleteResource
-       :<|> DatabasesUpdateResource
