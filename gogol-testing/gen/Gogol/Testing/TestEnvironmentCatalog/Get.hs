@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Testing.TestEnvironmentCatalog.Get
+-- Module      : Gogol.Testing.TestEnvironmentCatalog.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the catalog of supported test environments. May return any of the following canonical error codes: - INVALID/ARGUMENT - if the request is malformed - NOT/FOUND - if the environment type does not exist - INTERNAL - if an internal error occurred
 --
 -- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.testEnvironmentCatalog.get@.
-module Network.Google.Testing.TestEnvironmentCatalog.Get
+module Gogol.Testing.TestEnvironmentCatalog.Get
   ( -- * Resource
     TestingTestEnvironmentCatalogGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Testing.TestEnvironmentCatalog.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Testing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Testing.Types
 
 -- | A resource alias for @testing.testEnvironmentCatalog.get@ method which the
 -- 'TestingTestEnvironmentCatalogGet' request conforms to.

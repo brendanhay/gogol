@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Testing.Projects.TestMatrices.Get
+-- Module      : Gogol.Testing.Projects.TestMatrices.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Checks the status of a test matrix. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to read project - INVALID/ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist
 --
 -- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.get@.
-module Network.Google.Testing.Projects.TestMatrices.Get
+module Gogol.Testing.Projects.TestMatrices.Get
   ( -- * Resource
     TestingProjectsTestMatricesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Testing.Projects.TestMatrices.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Testing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.get@ method which the
 -- 'TestingProjectsTestMatricesGet' request conforms to.

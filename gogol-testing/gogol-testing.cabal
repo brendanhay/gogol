@@ -39,22 +39,23 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Testing
-    Network.Google.Testing.ApplicationDetailService.GetApkDetails
-    Network.Google.Testing.Projects.TestMatrices.Cancel
-    Network.Google.Testing.Projects.TestMatrices.Create
-    Network.Google.Testing.Projects.TestMatrices.Get
-    Network.Google.Testing.TestEnvironmentCatalog.Get
-    Network.Google.Testing.Types
+    Gogol.Testing
+    Gogol.Testing.ApplicationDetailService.GetApkDetails
+    Gogol.Testing.Projects.TestMatrices.Cancel
+    Gogol.Testing.Projects.TestMatrices.Create
+    Gogol.Testing.Projects.TestMatrices.Get
+    Gogol.Testing.TestEnvironmentCatalog.Get
+    Gogol.Testing.Types
 
   other-modules:
-    Network.Google.Testing.Internal.Product
-    Network.Google.Testing.Internal.Sum
+    Gogol.Testing.Internal.Product
+    Gogol.Testing.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

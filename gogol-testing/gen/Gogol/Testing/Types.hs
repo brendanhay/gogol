@@ -19,50 +19,19 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Testing
+-- Module      : Gogol.Testing.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Allows developers to run automated tests for their mobile applications on Google infrastructure.
---
--- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference>
-module Network.Google.Testing
+module Gogol.Testing.Types
   ( -- * Configuration
     testingService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
     cloudPlatformReadOnlyScope,
-
-    -- * Resources
-
-    -- ** testing.applicationDetailService.getApkDetails
-    TestingApplicationDetailServiceGetApkDetailsResource,
-    newTestingApplicationDetailServiceGetApkDetails,
-    TestingApplicationDetailServiceGetApkDetails,
-
-    -- ** testing.projects.testMatrices.cancel
-    TestingProjectsTestMatricesCancelResource,
-    newTestingProjectsTestMatricesCancel,
-    TestingProjectsTestMatricesCancel,
-
-    -- ** testing.projects.testMatrices.create
-    TestingProjectsTestMatricesCreateResource,
-    newTestingProjectsTestMatricesCreate,
-    TestingProjectsTestMatricesCreate,
-
-    -- ** testing.projects.testMatrices.get
-    TestingProjectsTestMatricesGetResource,
-    newTestingProjectsTestMatricesGet,
-    TestingProjectsTestMatricesGet,
-
-    -- ** testing.testEnvironmentCatalog.get
-    TestingTestEnvironmentCatalogGetResource,
-    newTestingTestEnvironmentCatalogGet,
-    TestingTestEnvironmentCatalogGet,
 
     -- * Types
 
@@ -390,9 +359,21 @@ module Network.Google.Testing
   )
 where
 
-import Network.Google.Testing.ApplicationDetailService.GetApkDetails
-import Network.Google.Testing.Projects.TestMatrices.Cancel
-import Network.Google.Testing.Projects.TestMatrices.Create
-import Network.Google.Testing.Projects.TestMatrices.Get
-import Network.Google.Testing.TestEnvironmentCatalog.Get
-import Network.Google.Testing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Testing.Internal.Product
+import Gogol.Testing.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Cloud Testing API. This contains the host and root path used as a starting point for constructing service requests.
+testingService :: Core.ServiceConfig
+testingService =
+  Core.defaultService
+    (Core.ServiceId "testing:v1")
+    "testing.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View your data across Google Cloud services and see the email address of your Google Account
+cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Core.Proxy

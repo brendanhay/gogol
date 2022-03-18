@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Testing.Projects.TestMatrices.Create
+-- Module      : Gogol.Testing.Projects.TestMatrices.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. A test matrix is limited to use at most 2000 devices in parallel. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to write to project - INVALID/ARGUMENT - if the request is malformed or if the matrix tries to use too many simultaneous devices.
 --
 -- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.create@.
-module Network.Google.Testing.Projects.TestMatrices.Create
+module Gogol.Testing.Projects.TestMatrices.Create
   ( -- * Resource
     TestingProjectsTestMatricesCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Testing.Projects.TestMatrices.Create
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Testing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.create@ method which the
 -- 'TestingProjectsTestMatricesCreate' request conforms to.
