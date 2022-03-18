@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -26,98 +32,98 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
---
+-- 
 --
 -- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference>
 module Gogol.FactCheckTools
-  ( -- * Configuration
-    factCheckToolsService,
+    (
+    -- * Configuration
+      factCheckToolsService
 
     -- * OAuth Scopes
-    userinfoEmailScope,
+    , userinfoEmailScope
 
     -- * Resources
 
     -- ** factchecktools.claims.search
-    FactCheckToolsClaimsSearchResource,
-    newFactCheckToolsClaimsSearch,
-    FactCheckToolsClaimsSearch,
+    , FactCheckToolsClaimsSearchResource
+    , newFactCheckToolsClaimsSearch
+    , FactCheckToolsClaimsSearch
 
     -- ** factchecktools.pages.create
-    FactCheckToolsPagesCreateResource,
-    newFactCheckToolsPagesCreate,
-    FactCheckToolsPagesCreate,
+    , FactCheckToolsPagesCreateResource
+    , newFactCheckToolsPagesCreate
+    , FactCheckToolsPagesCreate
 
     -- ** factchecktools.pages.delete
-    FactCheckToolsPagesDeleteResource,
-    newFactCheckToolsPagesDelete,
-    FactCheckToolsPagesDelete,
+    , FactCheckToolsPagesDeleteResource
+    , newFactCheckToolsPagesDelete
+    , FactCheckToolsPagesDelete
 
     -- ** factchecktools.pages.get
-    FactCheckToolsPagesGetResource,
-    newFactCheckToolsPagesGet,
-    FactCheckToolsPagesGet,
+    , FactCheckToolsPagesGetResource
+    , newFactCheckToolsPagesGet
+    , FactCheckToolsPagesGet
 
     -- ** factchecktools.pages.list
-    FactCheckToolsPagesListResource,
-    newFactCheckToolsPagesList,
-    FactCheckToolsPagesList,
+    , FactCheckToolsPagesListResource
+    , newFactCheckToolsPagesList
+    , FactCheckToolsPagesList
 
     -- ** factchecktools.pages.update
-    FactCheckToolsPagesUpdateResource,
-    newFactCheckToolsPagesUpdate,
-    FactCheckToolsPagesUpdate,
+    , FactCheckToolsPagesUpdateResource
+    , newFactCheckToolsPagesUpdate
+    , FactCheckToolsPagesUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1Claim
-    GoogleFactcheckingFactchecktoolsV1alpha1Claim (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1Claim,
+    , GoogleFactcheckingFactchecktoolsV1alpha1Claim (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1Claim
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor,
+    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimRating,
+    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReview,
+    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor,
+    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup,
+    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage,
+    , GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
-    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse,
+    , GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
-    GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse,
+    , GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
 
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1Publisher
-    GoogleFactcheckingFactchecktoolsV1alpha1Publisher (..),
-    newGoogleFactcheckingFactchecktoolsV1alpha1Publisher,
+    , GoogleFactcheckingFactchecktoolsV1alpha1Publisher (..)
+    , newGoogleFactcheckingFactchecktoolsV1alpha1Publisher
 
     -- ** GoogleProtobufEmpty
-    GoogleProtobufEmpty (..),
-    newGoogleProtobufEmpty,
-  )
-where
+    , GoogleProtobufEmpty (..)
+    , newGoogleProtobufEmpty
+    ) where
 
 import Gogol.FactCheckTools.Claims.Search
 import Gogol.FactCheckTools.Pages.Create
