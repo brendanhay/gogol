@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Get
+-- Module      : Gogol.Redis.Projects.Locations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets information about a location.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.get@.
-module Network.Google.Redis.Projects.Locations.Get
+module Gogol.Redis.Projects.Locations.Get
   ( -- * Resource
     RedisProjectsLocationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Redis.Projects.Locations.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.get@ method which the
 -- 'RedisProjectsLocationsGet' request conforms to.

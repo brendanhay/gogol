@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Operations.Delete
+-- Module      : Gogol.Redis.Projects.Locations.Operations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.operations.delete@.
-module Network.Google.Redis.Projects.Locations.Operations.Delete
+module Gogol.Redis.Projects.Locations.Operations.Delete
   ( -- * Resource
     RedisProjectsLocationsOperationsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Redis.Projects.Locations.Operations.Delete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.operations.delete@ method which the
 -- 'RedisProjectsLocationsOperationsDelete' request conforms to.

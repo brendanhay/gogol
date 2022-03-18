@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Operations.Get
+-- Module      : Gogol.Redis.Projects.Locations.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.operations.get@.
-module Network.Google.Redis.Projects.Locations.Operations.Get
+module Gogol.Redis.Projects.Locations.Operations.Get
   ( -- * Resource
     RedisProjectsLocationsOperationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Redis.Projects.Locations.Operations.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.operations.get@ method which the
 -- 'RedisProjectsLocationsOperationsGet' request conforms to.

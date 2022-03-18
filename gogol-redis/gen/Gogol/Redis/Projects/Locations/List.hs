@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.List
+-- Module      : Gogol.Redis.Projects.Locations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists information about the supported locations for this service.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.list@.
-module Network.Google.Redis.Projects.Locations.List
+module Gogol.Redis.Projects.Locations.List
   ( -- * Resource
     RedisProjectsLocationsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Redis.Projects.Locations.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.list@ method which the
 -- 'RedisProjectsLocationsList' request conforms to.

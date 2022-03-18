@@ -39,34 +39,35 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Redis
-    Network.Google.Redis.Projects.Locations.Get
-    Network.Google.Redis.Projects.Locations.Instances.Create
-    Network.Google.Redis.Projects.Locations.Instances.Delete
-    Network.Google.Redis.Projects.Locations.Instances.Export
-    Network.Google.Redis.Projects.Locations.Instances.Failover
-    Network.Google.Redis.Projects.Locations.Instances.Get
-    Network.Google.Redis.Projects.Locations.Instances.GetAuthString
-    Network.Google.Redis.Projects.Locations.Instances.Import
-    Network.Google.Redis.Projects.Locations.Instances.List
-    Network.Google.Redis.Projects.Locations.Instances.Patch
-    Network.Google.Redis.Projects.Locations.Instances.RescheduleMaintenance
-    Network.Google.Redis.Projects.Locations.Instances.Upgrade
-    Network.Google.Redis.Projects.Locations.List
-    Network.Google.Redis.Projects.Locations.Operations.Cancel
-    Network.Google.Redis.Projects.Locations.Operations.Delete
-    Network.Google.Redis.Projects.Locations.Operations.Get
-    Network.Google.Redis.Projects.Locations.Operations.List
-    Network.Google.Redis.Types
+    Gogol.Redis
+    Gogol.Redis.Projects.Locations.Get
+    Gogol.Redis.Projects.Locations.Instances.Create
+    Gogol.Redis.Projects.Locations.Instances.Delete
+    Gogol.Redis.Projects.Locations.Instances.Export
+    Gogol.Redis.Projects.Locations.Instances.Failover
+    Gogol.Redis.Projects.Locations.Instances.Get
+    Gogol.Redis.Projects.Locations.Instances.GetAuthString
+    Gogol.Redis.Projects.Locations.Instances.Import
+    Gogol.Redis.Projects.Locations.Instances.List
+    Gogol.Redis.Projects.Locations.Instances.Patch
+    Gogol.Redis.Projects.Locations.Instances.RescheduleMaintenance
+    Gogol.Redis.Projects.Locations.Instances.Upgrade
+    Gogol.Redis.Projects.Locations.List
+    Gogol.Redis.Projects.Locations.Operations.Cancel
+    Gogol.Redis.Projects.Locations.Operations.Delete
+    Gogol.Redis.Projects.Locations.Operations.Get
+    Gogol.Redis.Projects.Locations.Operations.List
+    Gogol.Redis.Types
 
   other-modules:
-    Network.Google.Redis.Internal.Product
-    Network.Google.Redis.Internal.Sum
+    Gogol.Redis.Internal.Product
+    Gogol.Redis.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
