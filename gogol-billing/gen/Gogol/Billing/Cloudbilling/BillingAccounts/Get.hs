@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Cloudbilling.BillingAccounts.Get
+-- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets information about a billing account. The current authenticated user must be a <https://cloud.google.com/billing/docs/how-to/billing-access viewer of the billing account>.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.get@.
-module Network.Google.Billing.Cloudbilling.BillingAccounts.Get
+module Gogol.Billing.Cloudbilling.BillingAccounts.Get
   ( -- * Resource
     CloudbillingBillingAccountsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Billing.Cloudbilling.BillingAccounts.Get
   )
 where
 
-import Network.Google.Billing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.get@ method which the
 -- 'CloudbillingBillingAccountsGet' request conforms to.

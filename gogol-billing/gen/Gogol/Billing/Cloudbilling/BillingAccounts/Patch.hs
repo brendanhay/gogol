@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Cloudbilling.BillingAccounts.Patch
+-- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates a billing account\'s fields. Currently the only field that can be edited is @display_name@. The current authenticated user must have the @billing.accounts.update@ IAM permission, which is typically given to the <https://cloud.google.com/billing/docs/how-to/billing-access administrator> of the billing account.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.patch@.
-module Network.Google.Billing.Cloudbilling.BillingAccounts.Patch
+module Gogol.Billing.Cloudbilling.BillingAccounts.Patch
   ( -- * Resource
     CloudbillingBillingAccountsPatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Billing.Cloudbilling.BillingAccounts.Patch
   )
 where
 
-import Network.Google.Billing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.patch@ method which the
 -- 'CloudbillingBillingAccountsPatch' request conforms to.

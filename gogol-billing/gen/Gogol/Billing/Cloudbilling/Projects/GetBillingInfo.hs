@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Cloudbilling.Projects.GetBillingInfo
+-- Module      : Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the billing information for a project. The current authenticated user must have the @resourcemanager.projects.get@ permission for the project, which can be granted by assigning the <https://cloud.google.com/iam/docs/understanding-roles#predefined_roles Project Viewer> role.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.projects.getBillingInfo@.
-module Network.Google.Billing.Cloudbilling.Projects.GetBillingInfo
+module Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
   ( -- * Resource
     CloudbillingProjectsGetBillingInfoResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Billing.Cloudbilling.Projects.GetBillingInfo
   )
 where
 
-import Network.Google.Billing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudbilling.projects.getBillingInfo@ method which the
 -- 'CloudbillingProjectsGetBillingInfo' request conforms to.

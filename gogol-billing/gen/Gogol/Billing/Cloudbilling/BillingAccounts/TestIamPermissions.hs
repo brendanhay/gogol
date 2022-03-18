@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
+-- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Tests the access control policy for a billing account. This method takes the resource and a set of permissions as input and returns the subset of the input permissions that the caller is allowed for that resource.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.testIamPermissions@.
-module Network.Google.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
+module Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
   ( -- * Resource
     CloudbillingBillingAccountsTestIamPermissionsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
   )
 where
 
-import Network.Google.Billing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.testIamPermissions@ method which the
 -- 'CloudbillingBillingAccountsTestIamPermissions' request conforms to.

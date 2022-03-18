@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Billing.Cloudbilling.BillingAccounts.Projects.List
+-- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the projects associated with a billing account. The current authenticated user must have the @billing.resourceAssociations.list@ IAM permission, which is often given to billing account <https://cloud.google.com/billing/docs/how-to/billing-access viewers>.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.projects.list@.
-module Network.Google.Billing.Cloudbilling.BillingAccounts.Projects.List
+module Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
   ( -- * Resource
     CloudbillingBillingAccountsProjectsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Billing.Cloudbilling.BillingAccounts.Projects.List
   )
 where
 
-import Network.Google.Billing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Billing.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.projects.list@ method which the
 -- 'CloudbillingBillingAccountsProjectsList' request conforms to.
