@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebSecurityScanner.Types
+-- Module      : Gogol.WebSecurityScanner.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.WebSecurityScanner.Types
+module Gogol.WebSecurityScanner.Types
   ( -- * Configuration
     webSecurityScannerService,
 
@@ -192,9 +192,9 @@ module Network.Google.WebSecurityScanner.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebSecurityScanner.Internal.Product
-import Network.Google.WebSecurityScanner.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.WebSecurityScanner.Internal.Product
+import Gogol.WebSecurityScanner.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
 webSecurityScannerService :: Core.ServiceConfig

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebSecurityScanner
+-- Module      : Gogol.WebSecurityScanner
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Scans your Compute and App Engine apps for common web vulnerabilities.
 --
 -- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference>
-module Network.Google.WebSecurityScanner
+module Gogol.WebSecurityScanner
   ( -- * Configuration
     webSecurityScannerService,
 
@@ -263,17 +263,17 @@ module Network.Google.WebSecurityScanner
   )
 where
 
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.Create
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.Delete
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.Get
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.List
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.Patch
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.CrawledUrls.List
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.FindingTypeStats.List
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.Get
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.List
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.List
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
-import Network.Google.WebSecurityScanner.Projects.ScanConfigs.Start
-import Network.Google.WebSecurityScanner.Types
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.Create
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.Delete
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.Get
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.List
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.Patch
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.CrawledUrls.List
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.FindingTypeStats.List
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.Get
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.List
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.List
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
+import Gogol.WebSecurityScanner.Projects.ScanConfigs.Start
+import Gogol.WebSecurityScanner.Types

@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebSecurityScanner.Projects.ScanConfigs.Delete
+-- Module      : Gogol.WebSecurityScanner.Projects.ScanConfigs.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an existing ScanConfig and its child resources.
+-- Gets a ScanConfig.
 --
--- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.delete@.
-module Network.Google.WebSecurityScanner.Projects.ScanConfigs.Delete
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.get@.
+module Gogol.WebSecurityScanner.Projects.ScanConfigs.Get
   ( -- * Resource
-    WebSecurityScannerProjectsScanConfigsDeleteResource,
+    WebSecurityScannerProjectsScanConfigsGetResource,
 
     -- ** Constructing a Request
-    newWebSecurityScannerProjectsScanConfigsDelete,
-    WebSecurityScannerProjectsScanConfigsDelete,
+    newWebSecurityScannerProjectsScanConfigsGet,
+    WebSecurityScannerProjectsScanConfigsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebSecurityScanner.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebSecurityScanner.Types
 
--- | A resource alias for @websecurityscanner.projects.scanConfigs.delete@ method which the
--- 'WebSecurityScannerProjectsScanConfigsDelete' request conforms to.
-type WebSecurityScannerProjectsScanConfigsDeleteResource =
+-- | A resource alias for @websecurityscanner.projects.scanConfigs.get@ method which the
+-- 'WebSecurityScannerProjectsScanConfigsGet' request conforms to.
+type WebSecurityScannerProjectsScanConfigsGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type WebSecurityScannerProjectsScanConfigsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] ScanConfig
 
--- | Deletes an existing ScanConfig and its child resources.
+-- | Gets a ScanConfig.
 --
--- /See:/ 'newWebSecurityScannerProjectsScanConfigsDelete' smart constructor.
-data WebSecurityScannerProjectsScanConfigsDelete = WebSecurityScannerProjectsScanConfigsDelete
+-- /See:/ 'newWebSecurityScannerProjectsScanConfigsGet' smart constructor.
+data WebSecurityScannerProjectsScanConfigsGet = WebSecurityScannerProjectsScanConfigsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the ScanConfig to be deleted. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'.
+    -- | Required. The resource name of the ScanConfig to be returned. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data WebSecurityScannerProjectsScanConfigsDelete = WebSecurityScannerProjectsSca
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebSecurityScannerProjectsScanConfigsDelete' with the minimum fields required to make a request.
-newWebSecurityScannerProjectsScanConfigsDelete ::
-  -- |  Required. The resource name of the ScanConfig to be deleted. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'. See 'name'.
+-- | Creates a value of 'WebSecurityScannerProjectsScanConfigsGet' with the minimum fields required to make a request.
+newWebSecurityScannerProjectsScanConfigsGet ::
+  -- |  Required. The resource name of the ScanConfig to be returned. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'. See 'name'.
   Core.Text ->
-  WebSecurityScannerProjectsScanConfigsDelete
-newWebSecurityScannerProjectsScanConfigsDelete name =
-  WebSecurityScannerProjectsScanConfigsDelete
+  WebSecurityScannerProjectsScanConfigsGet
+newWebSecurityScannerProjectsScanConfigsGet name =
+  WebSecurityScannerProjectsScanConfigsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,17 +91,16 @@ newWebSecurityScannerProjectsScanConfigsDelete name =
 
 instance
   Core.GoogleRequest
-    WebSecurityScannerProjectsScanConfigsDelete
+    WebSecurityScannerProjectsScanConfigsGet
   where
   type
-    Rs WebSecurityScannerProjectsScanConfigsDelete =
-      Empty
+    Rs WebSecurityScannerProjectsScanConfigsGet =
+      ScanConfig
   type
-    Scopes
-      WebSecurityScannerProjectsScanConfigsDelete =
+    Scopes WebSecurityScannerProjectsScanConfigsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    WebSecurityScannerProjectsScanConfigsDelete {..} =
+    WebSecurityScannerProjectsScanConfigsGet {..} =
       go
         name
         xgafv
@@ -116,6 +115,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  WebSecurityScannerProjectsScanConfigsDeleteResource
+                  WebSecurityScannerProjectsScanConfigsGetResource
             )
             Core.mempty

@@ -39,30 +39,31 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.WebSecurityScanner
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.Create
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.Delete
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.Get
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.List
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.Patch
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.CrawledUrls.List
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.Get
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.List
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.FindingTypeStats.List
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.List
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
-    Network.Google.WebSecurityScanner.Projects.ScanConfigs.Start
-    Network.Google.WebSecurityScanner.Types
+    Gogol.WebSecurityScanner
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.Create
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.Delete
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.Get
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.List
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.Patch
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.CrawledUrls.List
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.Get
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.List
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.FindingTypeStats.List
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Get
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.List
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
+    Gogol.WebSecurityScanner.Projects.ScanConfigs.Start
+    Gogol.WebSecurityScanner.Types
 
   other-modules:
-    Network.Google.WebSecurityScanner.Internal.Product
-    Network.Google.WebSecurityScanner.Internal.Sum
+    Gogol.WebSecurityScanner.Internal.Product
+    Gogol.WebSecurityScanner.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
