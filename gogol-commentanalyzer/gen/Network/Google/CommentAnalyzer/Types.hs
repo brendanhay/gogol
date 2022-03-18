@@ -1,148 +1,120 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CommentAnalyzer.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CommentAnalyzer.Types
-    (
-    -- * Service Configuration
-      commentAnalyzerService
+  ( -- * Configuration
+    commentAnalyzerService,
 
     -- * OAuth Scopes
-    , userInfoEmailScope
+    userinfoEmailScope,
 
-    -- * SpanScore
-    , SpanScore
-    , spanScore
-    , ssBegin
-    , ssScore
-    , ssEnd
+    -- * Types
 
-    -- * AnalyzeCommentResponse
-    , AnalyzeCommentResponse
-    , analyzeCommentResponse
-    , acrDetectedLanguages
-    , acrClientToken
-    , acrLanguages
-    , acrAttributeScores
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * SuggestCommentScoreResponse
-    , SuggestCommentScoreResponse
-    , suggestCommentScoreResponse
-    , scsrDetectedLanguages
-    , scsrClientToken
-    , scsrRequestedLanguages
+    -- ** AnalyzeCommentRequest
+    AnalyzeCommentRequest (..),
+    newAnalyzeCommentRequest,
 
-    -- * Context
-    , Context
-    , context
-    , cEntries
-    , cArticleAndParentComment
+    -- ** AnalyzeCommentRequest_RequestedAttributes
+    AnalyzeCommentRequest_RequestedAttributes (..),
+    newAnalyzeCommentRequest_RequestedAttributes,
 
-    -- * Score
-    , Score
-    , score
-    , sValue
-    , sType
+    -- ** AnalyzeCommentResponse
+    AnalyzeCommentResponse (..),
+    newAnalyzeCommentResponse,
 
-    -- * ArticleAndParentComment
-    , ArticleAndParentComment
-    , articleAndParentComment
-    , aapcArticle
-    , aapcParentComment
+    -- ** AnalyzeCommentResponse_AttributeScores
+    AnalyzeCommentResponse_AttributeScores (..),
+    newAnalyzeCommentResponse_AttributeScores,
 
-    -- * AttributeParameters
-    , AttributeParameters
-    , attributeParameters
-    , apScoreThreshold
-    , apScoreType
+    -- ** ArticleAndParentComment
+    ArticleAndParentComment (..),
+    newArticleAndParentComment,
 
-    -- * TextEntry
-    , TextEntry
-    , textEntry
-    , teText
-    , teType
+    -- ** AttributeParameters
+    AttributeParameters (..),
+    newAttributeParameters,
 
-    -- * AttributeScores
-    , AttributeScores
-    , attributeScores
-    , asSummaryScore
-    , asSpanScores
+    -- ** AttributeParameters_ScoreType
+    AttributeParameters_ScoreType (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** AttributeScores
+    AttributeScores (..),
+    newAttributeScores,
 
-    -- * ScoreType
-    , ScoreType (..)
+    -- ** Context
+    Context (..),
+    newContext,
 
-    -- * AnalyzeCommentResponseAttributeScores
-    , AnalyzeCommentResponseAttributeScores
-    , analyzeCommentResponseAttributeScores
-    , acrasAddtional
+    -- ** Score
+    Score (..),
+    newScore,
 
-    -- * SuggestCommentScoreRequest
-    , SuggestCommentScoreRequest
-    , suggestCommentScoreRequest
-    , sContext
-    , sClientToken
-    , sLanguages
-    , sAttributeScores
-    , sSessionId
-    , sComment
-    , sCommUnityId
+    -- ** Score_Type
+    Score_Type (..),
 
-    -- * AttributeParametersScoreType
-    , AttributeParametersScoreType (..)
+    -- ** SpanScore
+    SpanScore (..),
+    newSpanScore,
 
-    -- * AnalyzeCommentRequest
-    , AnalyzeCommentRequest
-    , analyzeCommentRequest
-    , aContext
-    , aClientToken
-    , aSpanAnnotations
-    , aDoNotStore
-    , aLanguages
-    , aRequestedAttributes
-    , aSessionId
-    , aComment
-    , aCommUnityId
+    -- ** SuggestCommentScoreRequest
+    SuggestCommentScoreRequest (..),
+    newSuggestCommentScoreRequest,
 
-    -- * SuggestCommentScoreRequestAttributeScores
-    , SuggestCommentScoreRequestAttributeScores
-    , suggestCommentScoreRequestAttributeScores
-    , scsrasAddtional
+    -- ** SuggestCommentScoreRequest_AttributeScores
+    SuggestCommentScoreRequest_AttributeScores (..),
+    newSuggestCommentScoreRequest_AttributeScores,
 
-    -- * AnalyzeCommentRequestRequestedAttributes
-    , AnalyzeCommentRequestRequestedAttributes
-    , analyzeCommentRequestRequestedAttributes
-    , acrraAddtional
+    -- ** SuggestCommentScoreResponse
+    SuggestCommentScoreResponse (..),
+    newSuggestCommentScoreResponse,
 
-    -- * TextEntryType
-    , TextEntryType (..)
-    ) where
+    -- ** TextEntry
+    TextEntry (..),
+    newTextEntry,
 
-import Network.Google.CommentAnalyzer.Types.Product
-import Network.Google.CommentAnalyzer.Types.Sum
-import Network.Google.Prelude
+    -- ** TextEntry_Type
+    TextEntry_Type (..),
+  )
+where
 
--- | Default request referring to version 'v1alpha1' of the Perspective Comment Analyzer API. This contains the host and root path used as a starting point for constructing service requests.
-commentAnalyzerService :: ServiceConfig
-commentAnalyzerService
-  = defaultService
-      (ServiceId "commentanalyzer:v1alpha1")
-      "commentanalyzer.googleapis.com"
+import Network.Google.CommentAnalyzer.Internal.Product
+import Network.Google.CommentAnalyzer.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1alpha1@ of the Perspective Comment Analyzer API. This contains the host and root path used as a starting point for constructing service requests.
+commentAnalyzerService :: Core.ServiceConfig
+commentAnalyzerService =
+  Core.defaultService
+    (Core.ServiceId "commentanalyzer:v1alpha1")
+    "commentanalyzer.googleapis.com"
 
 -- | View your email address
-userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy
+userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userinfoEmailScope = Core.Proxy
