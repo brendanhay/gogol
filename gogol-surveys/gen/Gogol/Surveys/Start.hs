@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Surveys.Start
+-- Module      : Gogol.Surveys.Start
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Begins running a survey.
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.start@.
-module Network.Google.Surveys.Start
+module Gogol.Surveys.Start
   ( -- * Resource
     SurveysSurveysStartResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Surveys.Start
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Surveys.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.start@ method which the
 -- 'SurveysSurveysStart' request conforms to.

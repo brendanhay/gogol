@@ -39,25 +39,26 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Surveys
-    Network.Google.Surveys.Delete
-    Network.Google.Surveys.Get
-    Network.Google.Surveys.Insert
-    Network.Google.Surveys.List
-    Network.Google.Surveys.Results.Get
-    Network.Google.Surveys.Start
-    Network.Google.Surveys.Stop
-    Network.Google.Surveys.Types
-    Network.Google.Surveys.Update
+    Gogol.Surveys
+    Gogol.Surveys.Delete
+    Gogol.Surveys.Get
+    Gogol.Surveys.Insert
+    Gogol.Surveys.List
+    Gogol.Surveys.Results.Get
+    Gogol.Surveys.Start
+    Gogol.Surveys.Stop
+    Gogol.Surveys.Types
+    Gogol.Surveys.Update
 
   other-modules:
-    Network.Google.Surveys.Internal.Product
-    Network.Google.Surveys.Internal.Sum
+    Gogol.Surveys.Internal.Product
+    Gogol.Surveys.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

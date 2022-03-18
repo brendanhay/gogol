@@ -19,70 +19,78 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Surveys.Get
+-- Module      : Gogol.Surveys.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves information about the specified survey.
+-- Updates a survey. Currently the only property that can be updated is the owners property.
 --
--- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.get@.
-module Network.Google.Surveys.Get
+-- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.update@.
+module Gogol.Surveys.Update
   ( -- * Resource
-    SurveysSurveysGetResource,
+    SurveysSurveysUpdateResource,
 
     -- ** Constructing a Request
-    newSurveysSurveysGet,
-    SurveysSurveysGet,
+    newSurveysSurveysUpdate,
+    SurveysSurveysUpdate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Surveys.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Surveys.Types
 
--- | A resource alias for @surveys.surveys.get@ method which the
--- 'SurveysSurveysGet' request conforms to.
-type SurveysSurveysGetResource =
+-- | A resource alias for @surveys.surveys.update@ method which the
+-- 'SurveysSurveysUpdate' request conforms to.
+type SurveysSurveysUpdateResource =
   "surveys"
     Core.:> "v2"
     Core.:> "surveys"
     Core.:> Core.Capture "surveyUrlId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Survey
+    Core.:> Core.ReqBody '[Core.JSON] Survey
+    Core.:> Core.Put '[Core.JSON] Survey
 
--- | Retrieves information about the specified survey.
+-- | Updates a survey. Currently the only property that can be updated is the owners property.
 --
--- /See:/ 'newSurveysSurveysGet' smart constructor.
-newtype SurveysSurveysGet = SurveysSurveysGet
-  { -- | External URL ID for the survey.
+-- /See:/ 'newSurveysSurveysUpdate' smart constructor.
+data SurveysSurveysUpdate = SurveysSurveysUpdate
+  { -- | Multipart request metadata.
+    payload :: Survey,
+    -- | External URL ID for the survey.
     surveyUrlId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SurveysSurveysGet' with the minimum fields required to make a request.
-newSurveysSurveysGet ::
+-- | Creates a value of 'SurveysSurveysUpdate' with the minimum fields required to make a request.
+newSurveysSurveysUpdate ::
+  -- |  Multipart request metadata. See 'payload'.
+  Survey ->
   -- |  External URL ID for the survey. See 'surveyUrlId'.
   Core.Text ->
-  SurveysSurveysGet
-newSurveysSurveysGet surveyUrlId = SurveysSurveysGet {surveyUrlId = surveyUrlId}
+  SurveysSurveysUpdate
+newSurveysSurveysUpdate payload surveyUrlId =
+  SurveysSurveysUpdate {payload = payload, surveyUrlId = surveyUrlId}
 
-instance Core.GoogleRequest SurveysSurveysGet where
-  type Rs SurveysSurveysGet = Survey
+instance Core.GoogleRequest SurveysSurveysUpdate where
+  type Rs SurveysSurveysUpdate = Survey
   type
-    Scopes SurveysSurveysGet =
+    Scopes SurveysSurveysUpdate =
       '[ "https://www.googleapis.com/auth/surveys",
-         "https://www.googleapis.com/auth/surveys.readonly",
          "https://www.googleapis.com/auth/userinfo.email"
        ]
-  requestClient SurveysSurveysGet {..} =
+  requestClient SurveysSurveysUpdate {..} =
     go
       surveyUrlId
       (Core.Just Core.AltJSON)
+      payload
       surveysService
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy SurveysSurveysGetResource)
+          ( Core.Proxy ::
+              Core.Proxy SurveysSurveysUpdateResource
+          )
           Core.mempty

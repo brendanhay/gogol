@@ -19,78 +19,72 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Surveys.Update
+-- Module      : Gogol.Surveys.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a survey. Currently the only property that can be updated is the owners property.
+-- Removes a survey from view in all user GET requests.
 --
--- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.update@.
-module Network.Google.Surveys.Update
+-- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.delete@.
+module Gogol.Surveys.Delete
   ( -- * Resource
-    SurveysSurveysUpdateResource,
+    SurveysSurveysDeleteResource,
 
     -- ** Constructing a Request
-    newSurveysSurveysUpdate,
-    SurveysSurveysUpdate,
+    newSurveysSurveysDelete,
+    SurveysSurveysDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Surveys.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Surveys.Types
 
--- | A resource alias for @surveys.surveys.update@ method which the
--- 'SurveysSurveysUpdate' request conforms to.
-type SurveysSurveysUpdateResource =
+-- | A resource alias for @surveys.surveys.delete@ method which the
+-- 'SurveysSurveysDelete' request conforms to.
+type SurveysSurveysDeleteResource =
   "surveys"
     Core.:> "v2"
     Core.:> "surveys"
     Core.:> Core.Capture "surveyUrlId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Survey
-    Core.:> Core.Put '[Core.JSON] Survey
+    Core.:> Core.Delete '[Core.JSON] SurveysDeleteResponse
 
--- | Updates a survey. Currently the only property that can be updated is the owners property.
+-- | Removes a survey from view in all user GET requests.
 --
--- /See:/ 'newSurveysSurveysUpdate' smart constructor.
-data SurveysSurveysUpdate = SurveysSurveysUpdate
-  { -- | Multipart request metadata.
-    payload :: Survey,
-    -- | External URL ID for the survey.
+-- /See:/ 'newSurveysSurveysDelete' smart constructor.
+newtype SurveysSurveysDelete = SurveysSurveysDelete
+  { -- | External URL ID for the survey.
     surveyUrlId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SurveysSurveysUpdate' with the minimum fields required to make a request.
-newSurveysSurveysUpdate ::
-  -- |  Multipart request metadata. See 'payload'.
-  Survey ->
+-- | Creates a value of 'SurveysSurveysDelete' with the minimum fields required to make a request.
+newSurveysSurveysDelete ::
   -- |  External URL ID for the survey. See 'surveyUrlId'.
   Core.Text ->
-  SurveysSurveysUpdate
-newSurveysSurveysUpdate payload surveyUrlId =
-  SurveysSurveysUpdate {payload = payload, surveyUrlId = surveyUrlId}
+  SurveysSurveysDelete
+newSurveysSurveysDelete surveyUrlId =
+  SurveysSurveysDelete {surveyUrlId = surveyUrlId}
 
-instance Core.GoogleRequest SurveysSurveysUpdate where
-  type Rs SurveysSurveysUpdate = Survey
+instance Core.GoogleRequest SurveysSurveysDelete where
+  type Rs SurveysSurveysDelete = SurveysDeleteResponse
   type
-    Scopes SurveysSurveysUpdate =
+    Scopes SurveysSurveysDelete =
       '[ "https://www.googleapis.com/auth/surveys",
          "https://www.googleapis.com/auth/userinfo.email"
        ]
-  requestClient SurveysSurveysUpdate {..} =
+  requestClient SurveysSurveysDelete {..} =
     go
       surveyUrlId
       (Core.Just Core.AltJSON)
-      payload
       surveysService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SurveysSurveysUpdateResource
+              Core.Proxy SurveysSurveysDeleteResource
           )
           Core.mempty

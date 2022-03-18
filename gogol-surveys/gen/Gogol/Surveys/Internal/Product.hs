@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Surveys.Internal.Product
+-- Module      : Gogol.Surveys.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Surveys.Internal.Product
+module Gogol.Surveys.Internal.Product
   ( -- * FieldMask
     FieldMask (..),
     newFieldMask,
@@ -96,8 +96,8 @@ module Network.Google.Surveys.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Surveys.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Surveys.Internal.Sum
 
 --
 -- /See:/ 'newFieldMask' smart constructor.

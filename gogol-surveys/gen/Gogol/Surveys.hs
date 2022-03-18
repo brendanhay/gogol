@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Surveys
+-- Module      : Gogol.Surveys
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates and conducts surveys, lists the surveys that an authenticated user owns, and retrieves survey results and information about specified surveys.
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference>
-module Network.Google.Surveys
+module Gogol.Surveys
   ( -- * Configuration
     surveysService,
 
@@ -152,12 +152,12 @@ module Network.Google.Surveys
   )
 where
 
-import Network.Google.Surveys.Delete
-import Network.Google.Surveys.Get
-import Network.Google.Surveys.Insert
-import Network.Google.Surveys.List
-import Network.Google.Surveys.Results.Get
-import Network.Google.Surveys.Start
-import Network.Google.Surveys.Stop
-import Network.Google.Surveys.Types
-import Network.Google.Surveys.Update
+import Gogol.Surveys.Delete
+import Gogol.Surveys.Get
+import Gogol.Surveys.Insert
+import Gogol.Surveys.List
+import Gogol.Surveys.Results.Get
+import Gogol.Surveys.Start
+import Gogol.Surveys.Stop
+import Gogol.Surveys.Types
+import Gogol.Surveys.Update
