@@ -1,201 +1,155 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ProximityBeacon.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.ProximityBeacon.Types
-    (
-    -- * Service Configuration
-      proximityBeaconService
+  ( -- * Configuration
+    proximityBeaconService,
 
     -- * OAuth Scopes
-    , userlocationBeaconRegistryScope
+    userlocationBeaconRegistryScope,
 
-    -- * LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
+    -- * Types
 
-    -- * AttachmentInfo
-    , AttachmentInfo
-    , attachmentInfo
-    , aiMaxDistanceMeters
-    , aiData
-    , aiNamespacedType
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * BeaconExpectedStability
-    , BeaconExpectedStability (..)
+    -- ** AdvertisedId
+    AdvertisedId (..),
+    newAdvertisedId,
 
-    -- * NamespaceServingVisibility
-    , NamespaceServingVisibility (..)
+    -- ** AdvertisedId_Type
+    AdvertisedId_Type (..),
 
-    -- * BeaconProperties
-    , BeaconProperties
-    , beaconProperties
-    , bpAddtional
+    -- ** AttachmentInfo
+    AttachmentInfo (..),
+    newAttachmentInfo,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Beacon
+    Beacon (..),
+    newBeacon,
 
-    -- * DeleteAttachmentsResponse
-    , DeleteAttachmentsResponse
-    , deleteAttachmentsResponse
-    , darNumDeleted
+    -- ** Beacon_ExpectedStability
+    Beacon_ExpectedStability (..),
 
-    -- * GetInfoForObservedBeaconsRequest
-    , GetInfoForObservedBeaconsRequest
-    , getInfoForObservedBeaconsRequest
-    , gifobrObservations
-    , gifobrNamespacedTypes
+    -- ** Beacon_Properties
+    Beacon_Properties (..),
+    newBeacon_Properties,
 
-    -- * Namespace
-    , Namespace
-    , namespace
-    , nServingVisibility
-    , nNamespaceName
+    -- ** Beacon_Status
+    Beacon_Status (..),
 
-    -- * EphemeralIdRegistration
-    , EphemeralIdRegistration
-    , ephemeralIdRegistration
-    , eirRotationPeriodExponent
-    , eirInitialClockValue
-    , eirBeaconIdentityKey
-    , eirBeaconEcdhPublicKey
-    , eirInitialEid
-    , eirServiceEcdhPublicKey
+    -- ** BeaconAttachment
+    BeaconAttachment (..),
+    newBeaconAttachment,
 
-    -- * AdvertisedIdType
-    , AdvertisedIdType (..)
+    -- ** BeaconInfo
+    BeaconInfo (..),
+    newBeaconInfo,
 
-    -- * ListNamespacesResponse
-    , ListNamespacesResponse
-    , listNamespacesResponse
-    , lnrNamespaces
+    -- ** Date
+    Date (..),
+    newDate,
 
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
+    -- ** DeleteAttachmentsResponse
+    DeleteAttachmentsResponse (..),
+    newDeleteAttachmentsResponse,
 
-    -- * Beacon
-    , Beacon
-    , beacon
-    , beaLatLng
-    , beaStatus
-    , beaBeaconName
-    , beaEphemeralIdRegistration
-    , beaIndoorLevel
-    , beaExpectedStability
-    , beaProvisioningKey
-    , beaDescription
-    , beaPlaceId
-    , beaAdvertisedId
-    , beaProperties
+    -- ** Diagnostics
+    Diagnostics (..),
+    newDiagnostics,
 
-    -- * Diagnostics
-    , Diagnostics
-    , diagnostics
-    , dAlerts
-    , dBeaconName
-    , dEstimatedLowBatteryDate
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * ListBeaconAttachmentsResponse
-    , ListBeaconAttachmentsResponse
-    , listBeaconAttachmentsResponse
-    , lbarAttachments
+    -- ** EphemeralIdRegistration
+    EphemeralIdRegistration (..),
+    newEphemeralIdRegistration,
 
-    -- * IndoorLevel
-    , IndoorLevel
-    , indoorLevel
-    , ilName
+    -- ** EphemeralIdRegistrationParams
+    EphemeralIdRegistrationParams (..),
+    newEphemeralIdRegistrationParams,
 
-    -- * EphemeralIdRegistrationParams
-    , EphemeralIdRegistrationParams
-    , ephemeralIdRegistrationParams
-    , eirpMinRotationPeriodExponent
-    , eirpMaxRotationPeriodExponent
-    , eirpServiceEcdhPublicKey
+    -- ** GetInfoForObservedBeaconsRequest
+    GetInfoForObservedBeaconsRequest (..),
+    newGetInfoForObservedBeaconsRequest,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** GetInfoForObservedBeaconsResponse
+    GetInfoForObservedBeaconsResponse (..),
+    newGetInfoForObservedBeaconsResponse,
 
-    -- * BeaconInfo
-    , BeaconInfo
-    , beaconInfo
-    , biAttachments
-    , biBeaconName
-    , biAdvertisedId
+    -- ** IndoorLevel
+    IndoorLevel (..),
+    newIndoorLevel,
 
-    -- * Observation
-    , Observation
-    , observation
-    , oTelemetry
-    , oTimestampMs
-    , oAdvertisedId
+    -- ** LatLng
+    LatLng (..),
+    newLatLng,
 
-    -- * BeaconAttachment
-    , BeaconAttachment
-    , beaconAttachment
-    , baMaxDistanceMeters
-    , baCreationTimeMs
-    , baData
-    , baAttachmentName
-    , baNamespacedType
+    -- ** ListBeaconAttachmentsResponse
+    ListBeaconAttachmentsResponse (..),
+    newListBeaconAttachmentsResponse,
 
-    -- * ListDiagnosticsResponse
-    , ListDiagnosticsResponse
-    , listDiagnosticsResponse
-    , ldrNextPageToken
-    , ldrDiagnostics
+    -- ** ListBeaconsResponse
+    ListBeaconsResponse (..),
+    newListBeaconsResponse,
 
-    -- * BeaconStatus
-    , BeaconStatus (..)
+    -- ** ListDiagnosticsResponse
+    ListDiagnosticsResponse (..),
+    newListDiagnosticsResponse,
 
-    -- * AdvertisedId
-    , AdvertisedId
-    , advertisedId
-    , aiId
-    , aiType
+    -- ** ListNamespacesResponse
+    ListNamespacesResponse (..),
+    newListNamespacesResponse,
 
-    -- * ListBeaconsResponse
-    , ListBeaconsResponse
-    , listBeaconsResponse
-    , lbrNextPageToken
-    , lbrBeacons
-    , lbrTotalCount
+    -- ** Namespace
+    Namespace (..),
+    newNamespace,
 
-    -- * GetInfoForObservedBeaconsResponse
-    , GetInfoForObservedBeaconsResponse
-    , getInfoForObservedBeaconsResponse
-    , gifobrBeacons
-    ) where
+    -- ** Namespace_ServingVisibility
+    Namespace_ServingVisibility (..),
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types.Product
-import Network.Google.ProximityBeacon.Types.Sum
+    -- ** Observation
+    Observation (..),
+    newObservation,
+  )
+where
 
--- | Default request referring to version 'v1beta1' of the Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
-proximityBeaconService :: ServiceConfig
-proximityBeaconService
-  = defaultService
-      (ServiceId "proximitybeacon:v1beta1")
-      "proximitybeacon.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.ProximityBeacon.Internal.Product
+import Network.Google.ProximityBeacon.Internal.Sum
+
+-- | Default request referring to version @v1beta1@ of the Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
+proximityBeaconService :: Core.ServiceConfig
+proximityBeaconService =
+  Core.defaultService
+    (Core.ServiceId "proximitybeacon:v1beta1")
+    "proximitybeacon.googleapis.com"
 
 -- | View and modify your beacons
-userlocationBeaconRegistryScope :: Proxy '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
-userlocationBeaconRegistryScope = Proxy
+userlocationBeaconRegistryScope :: Core.Proxy '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+userlocationBeaconRegistryScope = Core.Proxy
