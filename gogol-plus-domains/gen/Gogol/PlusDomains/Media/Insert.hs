@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlusDomains.Media.Insert
+-- Module      : Gogol.PlusDomains.Media.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.media.insert@.
-module Network.Google.PlusDomains.Media.Insert
+module Gogol.PlusDomains.Media.Insert
   ( -- * Resource
     PlusDomainsMediaInsertResource,
 
@@ -39,8 +39,8 @@ module Network.Google.PlusDomains.Media.Insert
   )
 where
 
-import Network.Google.PlusDomains.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlusDomains.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @plusDomains.media.insert@ method which the
 -- 'PlusDomainsMediaInsert' request conforms to.

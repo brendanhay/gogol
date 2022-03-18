@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlusDomains.Comments.Get
+-- Module      : Gogol.PlusDomains.Activities.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -28,63 +28,64 @@
 --
 -- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.comments.get@.
-module Network.Google.PlusDomains.Comments.Get
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.activities.get@.
+module Gogol.PlusDomains.Activities.Get
   ( -- * Resource
-    PlusDomainsCommentsGetResource,
+    PlusDomainsActivitiesGetResource,
 
     -- ** Constructing a Request
-    newPlusDomainsCommentsGet,
-    PlusDomainsCommentsGet,
+    newPlusDomainsActivitiesGet,
+    PlusDomainsActivitiesGet,
   )
 where
 
-import Network.Google.PlusDomains.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlusDomains.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @plusDomains.comments.get@ method which the
--- 'PlusDomainsCommentsGet' request conforms to.
-type PlusDomainsCommentsGetResource =
+-- | A resource alias for @plusDomains.activities.get@ method which the
+-- 'PlusDomainsActivitiesGet' request conforms to.
+type PlusDomainsActivitiesGetResource =
   "plusDomains"
     Core.:> "v1"
-    Core.:> "comments"
-    Core.:> Core.Capture "commentId" Core.Text
+    Core.:> "activities"
+    Core.:> Core.Capture "activityId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Comment
+    Core.:> Core.Get '[Core.JSON] Activity
 
 -- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
--- /See:/ 'newPlusDomainsCommentsGet' smart constructor.
-newtype PlusDomainsCommentsGet = PlusDomainsCommentsGet
-  { -- | The ID of the comment to get.
-    commentId :: Core.Text
+-- /See:/ 'newPlusDomainsActivitiesGet' smart constructor.
+newtype PlusDomainsActivitiesGet = PlusDomainsActivitiesGet
+  { -- | The ID of the activity to get.
+    activityId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PlusDomainsCommentsGet' with the minimum fields required to make a request.
-newPlusDomainsCommentsGet ::
-  -- |  The ID of the comment to get. See 'commentId'.
+-- | Creates a value of 'PlusDomainsActivitiesGet' with the minimum fields required to make a request.
+newPlusDomainsActivitiesGet ::
+  -- |  The ID of the activity to get. See 'activityId'.
   Core.Text ->
-  PlusDomainsCommentsGet
-newPlusDomainsCommentsGet commentId =
-  PlusDomainsCommentsGet {commentId = commentId}
+  PlusDomainsActivitiesGet
+newPlusDomainsActivitiesGet activityId =
+  PlusDomainsActivitiesGet {activityId = activityId}
 
-instance Core.GoogleRequest PlusDomainsCommentsGet where
-  type Rs PlusDomainsCommentsGet = Comment
+instance Core.GoogleRequest PlusDomainsActivitiesGet where
+  type Rs PlusDomainsActivitiesGet = Activity
   type
-    Scopes PlusDomainsCommentsGet =
+    Scopes PlusDomainsActivitiesGet =
       '[ "https://www.googleapis.com/auth/plus.login",
+         "https://www.googleapis.com/auth/plus.me",
          "https://www.googleapis.com/auth/plus.stream.read"
        ]
-  requestClient PlusDomainsCommentsGet {..} =
+  requestClient PlusDomainsActivitiesGet {..} =
     go
-      commentId
+      activityId
       (Core.Just Core.AltJSON)
       plusDomainsService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy PlusDomainsCommentsGetResource
+              Core.Proxy PlusDomainsActivitiesGetResource
           )
           Core.mempty

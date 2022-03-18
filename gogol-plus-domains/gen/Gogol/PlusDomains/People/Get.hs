@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlusDomains.People.Get
+-- Module      : Gogol.PlusDomains.People.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get a person\'s profile.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.people.get@.
-module Network.Google.PlusDomains.People.Get
+module Gogol.PlusDomains.People.Get
   ( -- * Resource
     PlusDomainsPeopleGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.PlusDomains.People.Get
   )
 where
 
-import Network.Google.PlusDomains.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PlusDomains.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @plusDomains.people.get@ method which the
 -- 'PlusDomainsPeopleGet' request conforms to.

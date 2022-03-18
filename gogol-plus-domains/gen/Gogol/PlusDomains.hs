@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlusDomains
+-- Module      : Gogol.PlusDomains
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Builds on top of the Google+ platform for Google Apps Domains.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference>
-module Network.Google.PlusDomains
+module Gogol.PlusDomains
   ( -- * Configuration
     plusDomainsService,
 
@@ -365,14 +365,14 @@ module Network.Google.PlusDomains
   )
 where
 
-import Network.Google.PlusDomains.Activities.Get
-import Network.Google.PlusDomains.Activities.List
-import Network.Google.PlusDomains.Audiences.List
-import Network.Google.PlusDomains.Circles.List
-import Network.Google.PlusDomains.Comments.Get
-import Network.Google.PlusDomains.Comments.List
-import Network.Google.PlusDomains.Media.Insert
-import Network.Google.PlusDomains.People.Get
-import Network.Google.PlusDomains.People.List
-import Network.Google.PlusDomains.People.ListByActivity
-import Network.Google.PlusDomains.Types
+import Gogol.PlusDomains.Activities.Get
+import Gogol.PlusDomains.Activities.List
+import Gogol.PlusDomains.Audiences.List
+import Gogol.PlusDomains.Circles.List
+import Gogol.PlusDomains.Comments.Get
+import Gogol.PlusDomains.Comments.List
+import Gogol.PlusDomains.Media.Insert
+import Gogol.PlusDomains.People.Get
+import Gogol.PlusDomains.People.List
+import Gogol.PlusDomains.People.ListByActivity
+import Gogol.PlusDomains.Types
