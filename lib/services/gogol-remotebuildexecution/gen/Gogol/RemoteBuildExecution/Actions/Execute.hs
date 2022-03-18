@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -39,14 +33,14 @@
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actions.execute@.
 module Gogol.RemoteBuildExecution.Actions.Execute
-    (
-    -- * Resource
-      RemoteBuildExecutionActionsExecuteResource
+  ( -- * Resource
+    RemoteBuildExecutionActionsExecuteResource,
 
     -- ** Constructing a Request
-    , newRemoteBuildExecutionActionsExecute
-    , RemoteBuildExecutionActionsExecute
-    ) where
+    newRemoteBuildExecutionActionsExecute,
+    RemoteBuildExecutionActionsExecute,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.RemoteBuildExecution.Types
@@ -54,19 +48,19 @@ import Gogol.RemoteBuildExecution.Types
 -- | A resource alias for @remotebuildexecution.actions.execute@ method which the
 -- 'RemoteBuildExecutionActionsExecute' request conforms to.
 type RemoteBuildExecutionActionsExecuteResource =
-     "v2" Core.:>
-       Core.Capture "instanceName" Core.Text Core.:>
-         "actions:execute" Core.:>
-           Core.QueryParam "$.xgafv" Xgafv Core.:>
-             Core.QueryParam "access_token" Core.Text Core.:>
-               Core.QueryParam "callback" Core.Text Core.:>
-                 Core.QueryParam "uploadType" Core.Text Core.:>
-                   Core.QueryParam "upload_protocol" Core.Text Core.:>
-                     Core.QueryParam "alt" Core.AltJSON Core.:>
-                       Core.ReqBody '[Core.JSON]
-                         BuildBazelRemoteExecutionV2ExecuteRequest
-                         Core.:>
-                         Core.Post '[Core.JSON] GoogleLongrunningOperation
+  "v2"
+    Core.:> Core.Capture "instanceName" Core.Text
+    Core.:> "actions:execute"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              BuildBazelRemoteExecutionV2ExecuteRequest
+    Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
 
 -- | Execute an action remotely. In order to execute an action, the client must first upload all of the inputs, the Command to run, and the Action into the ContentAddressableStorage. It then calls @Execute@ with an @action_digest@ referring to them. The server will run the action and eventually return the result. The input @Action@\'s fields MUST meet the various canonicalization requirements specified in the documentation for their types so that it has the same digest as other logically equivalent @Action@s. The server MAY enforce the requirements and return errors if a non-canonical input is received. It MAY also proceed without verifying some or all of the requirements, such as for performance reasons. If the server does not verify the requirement, then it will treat the @Action@ as distinct from another logically equivalent action if they hash differently. Returns a stream of google.longrunning.Operation messages describing the resulting execution, with eventual @response@ ExecuteResponse. The @metadata@ on
 -- the operation is of type ExecuteOperationMetadata. If the client remains connected after the first response is returned after the server, then updates are streamed as if the client had called WaitExecution until the execution completes or the request reaches an error. The operation can also be queried using Operations API. The server NEED NOT implement other methods or functionality of the Operations API. Errors discovered during creation of the @Operation@ will be reported as gRPC Status errors, while errors that occurred while running the action will be reported in the @status@ field of the @ExecuteResponse@. The server MUST NOT set the @error@ field of the @Operation@ proto. The possible errors include: * @INVALID_ARGUMENT@: One or more arguments are invalid. * @FAILED_PRECONDITION@: One or more errors occurred in setting up the action requested, such as a missing input or command or no worker being available. The client may be able to fix the errors and retry. * @RESOURCE_EXHAUSTED@: There is insufficient
@@ -75,60 +69,67 @@ type RemoteBuildExecutionActionsExecuteResource =
 --
 -- /See:/ 'newRemoteBuildExecutionActionsExecute' smart constructor.
 data RemoteBuildExecutionActionsExecute = RemoteBuildExecutionActionsExecute
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted.
-    , instanceName :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: BuildBazelRemoteExecutionV2ExecuteRequest
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted.
+    instanceName :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: BuildBazelRemoteExecutionV2ExecuteRequest,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'RemoteBuildExecutionActionsExecute' with the minimum fields required to make a request.
-newRemoteBuildExecutionActionsExecute 
-    ::  Core.Text
-       -- ^  The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted. See 'instanceName'.
-    -> BuildBazelRemoteExecutionV2ExecuteRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> RemoteBuildExecutionActionsExecute
+newRemoteBuildExecutionActionsExecute ::
+  -- |  The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted. See 'instanceName'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  BuildBazelRemoteExecutionV2ExecuteRequest ->
+  RemoteBuildExecutionActionsExecute
 newRemoteBuildExecutionActionsExecute instanceName payload =
   RemoteBuildExecutionActionsExecute
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , instanceName = instanceName
-    , payload = payload
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      instanceName = instanceName,
+      payload = payload,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           RemoteBuildExecutionActionsExecute
-         where
-        type Rs RemoteBuildExecutionActionsExecute =
-             GoogleLongrunningOperation
-        type Scopes RemoteBuildExecutionActionsExecute =
-             '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient RemoteBuildExecutionActionsExecute{..}
-          = go instanceName xgafv accessToken callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              remoteBuildExecutionService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           RemoteBuildExecutionActionsExecuteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    RemoteBuildExecutionActionsExecute
+  where
+  type
+    Rs RemoteBuildExecutionActionsExecute =
+      GoogleLongrunningOperation
+  type
+    Scopes RemoteBuildExecutionActionsExecute =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient RemoteBuildExecutionActionsExecute {..} =
+    go
+      instanceName
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      remoteBuildExecutionService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                RemoteBuildExecutionActionsExecuteResource
+          )
+          Core.mempty
