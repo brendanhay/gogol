@@ -1,257 +1,175 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.YouTubeReporting
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Schedules reporting jobs containing your YouTube Analytics data and
--- downloads the resulting bulk data reports in the form of CSV files.
+-- Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference>
 module Network.Google.YouTubeReporting
-    (
-    -- * Service Configuration
-      youTubeReportingService
+  ( -- * Configuration
+    youTubeReportingService,
 
     -- * OAuth Scopes
-    , youTubeAnalyticsReadOnlyScope
-    , youTubeAnalyticsMonetaryReadOnlyScope
-
-    -- * API Declaration
-    , YouTubeReportingAPI
+    youtubeAnalyticsMonetaryReadOnlyScope,
+    youtubeAnalyticsReadOnlyScope,
 
     -- * Resources
 
     -- ** youtubereporting.jobs.create
-    , module Network.Google.Resource.YouTubeReporting.Jobs.Create
+    YouTubeReportingJobsCreateResource,
+    newYouTubeReportingJobsCreate,
+    YouTubeReportingJobsCreate,
 
     -- ** youtubereporting.jobs.delete
-    , module Network.Google.Resource.YouTubeReporting.Jobs.Delete
+    YouTubeReportingJobsDeleteResource,
+    newYouTubeReportingJobsDelete,
+    YouTubeReportingJobsDelete,
 
     -- ** youtubereporting.jobs.get
-    , module Network.Google.Resource.YouTubeReporting.Jobs.Get
+    YouTubeReportingJobsGetResource,
+    newYouTubeReportingJobsGet,
+    YouTubeReportingJobsGet,
 
     -- ** youtubereporting.jobs.list
-    , module Network.Google.Resource.YouTubeReporting.Jobs.List
+    YouTubeReportingJobsListResource,
+    newYouTubeReportingJobsList,
+    YouTubeReportingJobsList,
 
     -- ** youtubereporting.jobs.reports.get
-    , module Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
+    YouTubeReportingJobsReportsGetResource,
+    newYouTubeReportingJobsReportsGet,
+    YouTubeReportingJobsReportsGet,
 
     -- ** youtubereporting.jobs.reports.list
-    , module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
+    YouTubeReportingJobsReportsListResource,
+    newYouTubeReportingJobsReportsList,
+    YouTubeReportingJobsReportsList,
 
     -- ** youtubereporting.media.download
-    , module Network.Google.Resource.YouTubeReporting.Media.Download
+    YouTubeReportingMediaDownloadResource,
+    newYouTubeReportingMediaDownload,
+    YouTubeReportingMediaDownload,
 
     -- ** youtubereporting.reportTypes.list
-    , module Network.Google.Resource.YouTubeReporting.ReportTypes.List
+    YouTubeReportingReportTypesListResource,
+    newYouTubeReportingReportTypesList,
+    YouTubeReportingReportTypesList,
 
     -- * Types
 
-    -- ** ListReportsResponse
-    , ListReportsResponse
-    , listReportsResponse
-    , lrrNextPageToken
-    , lrrReports
-
-    -- ** GDataDiffChecksumsResponse
-    , GDataDiffChecksumsResponse
-    , gDataDiffChecksumsResponse
-    , gddcrChecksumsLocation
-    , gddcrObjectSizeBytes
-    , gddcrChunkSizeBytes
-    , gddcrObjectVersion
-    , gddcrObjectLocation
-
-    -- ** GDataObjectId
-    , GDataObjectId
-    , gDataObjectId
-    , gdoiObjectName
-    , gdoiBucketName
-    , gdoiGeneration
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Empty
-    , Empty
-    , empty
+    Empty (..),
+    newEmpty,
 
-    -- ** GDataCompositeMediaReferenceType
-    , GDataCompositeMediaReferenceType (..)
+    -- ** GdataBlobstore2Info
+    GdataBlobstore2Info (..),
+    newGdataBlobstore2Info,
 
-    -- ** GDataMediaReferenceType
-    , GDataMediaReferenceType (..)
+    -- ** GdataCompositeMedia
+    GdataCompositeMedia (..),
+    newGdataCompositeMedia,
 
-    -- ** GDataContentTypeInfo
-    , GDataContentTypeInfo
-    , gDataContentTypeInfo
-    , gdctiFromBytes
-    , gdctiFromFileName
-    , gdctiFromHeader
-    , gdctiBestGuess
-    , gdctiFromURLPath
+    -- ** GdataCompositeMedia_ReferenceType
+    GdataCompositeMedia_ReferenceType (..),
 
-    -- ** GDataMedia
-    , GDataMedia
-    , gDataMedia
-    , gdmLength
-    , gdmDiffVersionResponse
-    , gdmDiffUploadRequest
-    , gdmBigstoreObjectRef
-    , gdmHash
-    , gdmIsPotentialRetry
-    , gdmCrc32cHash
-    , gdmBlobRef
-    , gdmPath
-    , gdmObjectId
-    , gdmToken
-    , gdmInline
-    , gdmMediaId
-    , gdmSha1Hash
-    , gdmHashVerified
-    , gdmContentTypeInfo
-    , gdmAlgorithm
-    , gdmDiffDownloadResponse
-    , gdmDiffUploadResponse
-    , gdmDiffChecksumsResponse
-    , gdmBlobstore2Info
-    , gdmReferenceType
-    , gdmTimestamp
-    , gdmMD5Hash
-    , gdmDownloadParameters
-    , gdmCosmoBinaryReference
-    , gdmFilename
-    , gdmSha256Hash
-    , gdmContentType
-    , gdmCompositeMedia
+    -- ** GdataContentTypeInfo
+    GdataContentTypeInfo (..),
+    newGdataContentTypeInfo,
 
-    -- ** Report
-    , Report
-    , report
-    , rJobId
-    , rStartTime
-    , rDownloadURL
-    , rEndTime
-    , rId
-    , rCreateTime
-    , rJobExpireTime
+    -- ** GdataDiffChecksumsResponse
+    GdataDiffChecksumsResponse (..),
+    newGdataDiffChecksumsResponse,
 
-    -- ** GDataCompositeMedia
-    , GDataCompositeMedia
-    , gDataCompositeMedia
-    , gdcmLength
-    , gdcmCrc32cHash
-    , gdcmBlobRef
-    , gdcmPath
-    , gdcmObjectId
-    , gdcmInline
-    , gdcmSha1Hash
-    , gdcmBlobstore2Info
-    , gdcmReferenceType
-    , gdcmMD5Hash
-    , gdcmCosmoBinaryReference
+    -- ** GdataDiffDownloadResponse
+    GdataDiffDownloadResponse (..),
+    newGdataDiffDownloadResponse,
 
-    -- ** GDataDownloadParameters
-    , GDataDownloadParameters
-    , gDataDownloadParameters
-    , gddpIgnoreRange
-    , gddpAllowGzipCompression
+    -- ** GdataDiffUploadRequest
+    GdataDiffUploadRequest (..),
+    newGdataDiffUploadRequest,
 
-    -- ** ListReportTypesResponse
-    , ListReportTypesResponse
-    , listReportTypesResponse
-    , lrtrNextPageToken
-    , lrtrReportTypes
+    -- ** GdataDiffUploadResponse
+    GdataDiffUploadResponse (..),
+    newGdataDiffUploadResponse,
 
-    -- ** GDataBlobstore2Info
-    , GDataBlobstore2Info
-    , gDataBlobstore2Info
-    , gdbiBlobGeneration
-    , gdbiBlobId
-    , gdbiReadToken
-    , gdbiDownloadReadHandle
-    , gdbiUploadMetadataContainer
+    -- ** GdataDiffVersionResponse
+    GdataDiffVersionResponse (..),
+    newGdataDiffVersionResponse,
+
+    -- ** GdataDownloadParameters
+    GdataDownloadParameters (..),
+    newGdataDownloadParameters,
+
+    -- ** GdataMedia
+    GdataMedia (..),
+    newGdataMedia,
+
+    -- ** GdataMedia_ReferenceType
+    GdataMedia_ReferenceType (..),
+
+    -- ** GdataObjectId
+    GdataObjectId (..),
+    newGdataObjectId,
 
     -- ** Job
-    , Job
-    , job
-    , jName
-    , jId
-    , jSystemManaged
-    , jReportTypeId
-    , jExpireTime
-    , jCreateTime
-
-    -- ** GDataDiffUploadResponse
-    , GDataDiffUploadResponse
-    , gDataDiffUploadResponse
-    , gddurOriginalObject
-    , gddurObjectVersion
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** GDataDiffDownloadResponse
-    , GDataDiffDownloadResponse
-    , gDataDiffDownloadResponse
-    , gdddrObjectLocation
+    Job (..),
+    newJob,
 
     -- ** ListJobsResponse
-    , ListJobsResponse
-    , listJobsResponse
-    , ljrNextPageToken
-    , ljrJobs
+    ListJobsResponse (..),
+    newListJobsResponse,
 
-    -- ** GDataDiffUploadRequest
-    , GDataDiffUploadRequest
-    , gDataDiffUploadRequest
-    , gChecksumsInfo
-    , gObjectVersion
-    , gObjectInfo
+    -- ** ListReportTypesResponse
+    ListReportTypesResponse (..),
+    newListReportTypesResponse,
 
-    -- ** GDataDiffVersionResponse
-    , GDataDiffVersionResponse
-    , gDataDiffVersionResponse
-    , gddvrObjectSizeBytes
-    , gddvrObjectVersion
+    -- ** ListReportsResponse
+    ListReportsResponse (..),
+    newListReportsResponse,
+
+    -- ** Report
+    Report (..),
+    newReport,
 
     -- ** ReportType
-    , ReportType
-    , reportType
-    , rtName
-    , rtId
-    , rtDeprecateTime
-    , rtSystemManaged
-    ) where
+    ReportType (..),
+    newReportType,
+  )
+where
 
-import Network.Google.Prelude
-import Network.Google.Resource.YouTubeReporting.Jobs.Create
-import Network.Google.Resource.YouTubeReporting.Jobs.Delete
-import Network.Google.Resource.YouTubeReporting.Jobs.Get
-import Network.Google.Resource.YouTubeReporting.Jobs.List
-import Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
-import Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
-import Network.Google.Resource.YouTubeReporting.Media.Download
-import Network.Google.Resource.YouTubeReporting.ReportTypes.List
+import Network.Google.YouTubeReporting.Jobs.Create
+import Network.Google.YouTubeReporting.Jobs.Delete
+import Network.Google.YouTubeReporting.Jobs.Get
+import Network.Google.YouTubeReporting.Jobs.List
+import Network.Google.YouTubeReporting.Jobs.Reports.Get
+import Network.Google.YouTubeReporting.Jobs.Reports.List
+import Network.Google.YouTubeReporting.Media.Download
+import Network.Google.YouTubeReporting.ReportTypes.List
 import Network.Google.YouTubeReporting.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the YouTube Reporting API service.
-type YouTubeReportingAPI =
-     JobsReportsListResource :<|> JobsReportsGetResource
-       :<|> JobsListResource
-       :<|> JobsGetResource
-       :<|> JobsCreateResource
-       :<|> JobsDeleteResource
-       :<|> MediaDownloadResource
-       :<|> ReportTypesListResource

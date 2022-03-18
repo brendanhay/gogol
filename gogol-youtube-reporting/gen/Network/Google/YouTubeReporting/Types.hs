@@ -1,217 +1,138 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.YouTubeReporting.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.YouTubeReporting.Types
-    (
-    -- * Service Configuration
-      youTubeReportingService
+  ( -- * Configuration
+    youTubeReportingService,
 
     -- * OAuth Scopes
-    , youTubeAnalyticsReadOnlyScope
-    , youTubeAnalyticsMonetaryReadOnlyScope
+    youtubeAnalyticsMonetaryReadOnlyScope,
+    youtubeAnalyticsReadOnlyScope,
 
-    -- * ListReportsResponse
-    , ListReportsResponse
-    , listReportsResponse
-    , lrrNextPageToken
-    , lrrReports
+    -- * Types
 
-    -- * GDataDiffChecksumsResponse
-    , GDataDiffChecksumsResponse
-    , gDataDiffChecksumsResponse
-    , gddcrChecksumsLocation
-    , gddcrObjectSizeBytes
-    , gddcrChunkSizeBytes
-    , gddcrObjectVersion
-    , gddcrObjectLocation
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * GDataObjectId
-    , GDataObjectId
-    , gDataObjectId
-    , gdoiObjectName
-    , gdoiBucketName
-    , gdoiGeneration
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** GdataBlobstore2Info
+    GdataBlobstore2Info (..),
+    newGdataBlobstore2Info,
 
-    -- * GDataCompositeMediaReferenceType
-    , GDataCompositeMediaReferenceType (..)
+    -- ** GdataCompositeMedia
+    GdataCompositeMedia (..),
+    newGdataCompositeMedia,
 
-    -- * GDataMediaReferenceType
-    , GDataMediaReferenceType (..)
+    -- ** GdataCompositeMedia_ReferenceType
+    GdataCompositeMedia_ReferenceType (..),
 
-    -- * GDataContentTypeInfo
-    , GDataContentTypeInfo
-    , gDataContentTypeInfo
-    , gdctiFromBytes
-    , gdctiFromFileName
-    , gdctiFromHeader
-    , gdctiBestGuess
-    , gdctiFromURLPath
+    -- ** GdataContentTypeInfo
+    GdataContentTypeInfo (..),
+    newGdataContentTypeInfo,
 
-    -- * GDataMedia
-    , GDataMedia
-    , gDataMedia
-    , gdmLength
-    , gdmDiffVersionResponse
-    , gdmDiffUploadRequest
-    , gdmBigstoreObjectRef
-    , gdmHash
-    , gdmIsPotentialRetry
-    , gdmCrc32cHash
-    , gdmBlobRef
-    , gdmPath
-    , gdmObjectId
-    , gdmToken
-    , gdmInline
-    , gdmMediaId
-    , gdmSha1Hash
-    , gdmHashVerified
-    , gdmContentTypeInfo
-    , gdmAlgorithm
-    , gdmDiffDownloadResponse
-    , gdmDiffUploadResponse
-    , gdmDiffChecksumsResponse
-    , gdmBlobstore2Info
-    , gdmReferenceType
-    , gdmTimestamp
-    , gdmMD5Hash
-    , gdmDownloadParameters
-    , gdmCosmoBinaryReference
-    , gdmFilename
-    , gdmSha256Hash
-    , gdmContentType
-    , gdmCompositeMedia
+    -- ** GdataDiffChecksumsResponse
+    GdataDiffChecksumsResponse (..),
+    newGdataDiffChecksumsResponse,
 
-    -- * Report
-    , Report
-    , report
-    , rJobId
-    , rStartTime
-    , rDownloadURL
-    , rEndTime
-    , rId
-    , rCreateTime
-    , rJobExpireTime
+    -- ** GdataDiffDownloadResponse
+    GdataDiffDownloadResponse (..),
+    newGdataDiffDownloadResponse,
 
-    -- * GDataCompositeMedia
-    , GDataCompositeMedia
-    , gDataCompositeMedia
-    , gdcmLength
-    , gdcmCrc32cHash
-    , gdcmBlobRef
-    , gdcmPath
-    , gdcmObjectId
-    , gdcmInline
-    , gdcmSha1Hash
-    , gdcmBlobstore2Info
-    , gdcmReferenceType
-    , gdcmMD5Hash
-    , gdcmCosmoBinaryReference
+    -- ** GdataDiffUploadRequest
+    GdataDiffUploadRequest (..),
+    newGdataDiffUploadRequest,
 
-    -- * GDataDownloadParameters
-    , GDataDownloadParameters
-    , gDataDownloadParameters
-    , gddpIgnoreRange
-    , gddpAllowGzipCompression
+    -- ** GdataDiffUploadResponse
+    GdataDiffUploadResponse (..),
+    newGdataDiffUploadResponse,
 
-    -- * ListReportTypesResponse
-    , ListReportTypesResponse
-    , listReportTypesResponse
-    , lrtrNextPageToken
-    , lrtrReportTypes
+    -- ** GdataDiffVersionResponse
+    GdataDiffVersionResponse (..),
+    newGdataDiffVersionResponse,
 
-    -- * GDataBlobstore2Info
-    , GDataBlobstore2Info
-    , gDataBlobstore2Info
-    , gdbiBlobGeneration
-    , gdbiBlobId
-    , gdbiReadToken
-    , gdbiDownloadReadHandle
-    , gdbiUploadMetadataContainer
+    -- ** GdataDownloadParameters
+    GdataDownloadParameters (..),
+    newGdataDownloadParameters,
 
-    -- * Job
-    , Job
-    , job
-    , jName
-    , jId
-    , jSystemManaged
-    , jReportTypeId
-    , jExpireTime
-    , jCreateTime
+    -- ** GdataMedia
+    GdataMedia (..),
+    newGdataMedia,
 
-    -- * GDataDiffUploadResponse
-    , GDataDiffUploadResponse
-    , gDataDiffUploadResponse
-    , gddurOriginalObject
-    , gddurObjectVersion
+    -- ** GdataMedia_ReferenceType
+    GdataMedia_ReferenceType (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** GdataObjectId
+    GdataObjectId (..),
+    newGdataObjectId,
 
-    -- * GDataDiffDownloadResponse
-    , GDataDiffDownloadResponse
-    , gDataDiffDownloadResponse
-    , gdddrObjectLocation
+    -- ** Job
+    Job (..),
+    newJob,
 
-    -- * ListJobsResponse
-    , ListJobsResponse
-    , listJobsResponse
-    , ljrNextPageToken
-    , ljrJobs
+    -- ** ListJobsResponse
+    ListJobsResponse (..),
+    newListJobsResponse,
 
-    -- * GDataDiffUploadRequest
-    , GDataDiffUploadRequest
-    , gDataDiffUploadRequest
-    , gChecksumsInfo
-    , gObjectVersion
-    , gObjectInfo
+    -- ** ListReportTypesResponse
+    ListReportTypesResponse (..),
+    newListReportTypesResponse,
 
-    -- * GDataDiffVersionResponse
-    , GDataDiffVersionResponse
-    , gDataDiffVersionResponse
-    , gddvrObjectSizeBytes
-    , gddvrObjectVersion
+    -- ** ListReportsResponse
+    ListReportsResponse (..),
+    newListReportsResponse,
 
-    -- * ReportType
-    , ReportType
-    , reportType
-    , rtName
-    , rtId
-    , rtDeprecateTime
-    , rtSystemManaged
-    ) where
+    -- ** Report
+    Report (..),
+    newReport,
 
-import Network.Google.Prelude
-import Network.Google.YouTubeReporting.Types.Product
-import Network.Google.YouTubeReporting.Types.Sum
+    -- ** ReportType
+    ReportType (..),
+    newReportType,
+  )
+where
 
--- | Default request referring to version 'v1' of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeReportingService :: ServiceConfig
-youTubeReportingService
-  = defaultService (ServiceId "youtubereporting:v1")
-      "youtubereporting.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.YouTubeReporting.Internal.Product
+import Network.Google.YouTubeReporting.Internal.Sum
+
+-- | Default request referring to version @v1@ of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
+youTubeReportingService :: Core.ServiceConfig
+youTubeReportingService =
+  Core.defaultService
+    (Core.ServiceId "youtubereporting:v1")
+    "youtubereporting.googleapis.com"
+
+-- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
+youtubeAnalyticsMonetaryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
+youtubeAnalyticsMonetaryReadOnlyScope = Core.Proxy
 
 -- | View YouTube Analytics reports for your YouTube content
-youTubeAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-youTubeAnalyticsReadOnlyScope = Proxy
-
--- | View monetary and non-monetary YouTube Analytics reports for your
--- YouTube content
-youTubeAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-youTubeAnalyticsMonetaryReadOnlyScope = Proxy
+youtubeAnalyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
+youtubeAnalyticsReadOnlyScope = Core.Proxy
