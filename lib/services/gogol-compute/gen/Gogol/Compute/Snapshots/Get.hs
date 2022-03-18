@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,98 +36,91 @@
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.snapshots.get@.
 module Gogol.Compute.Snapshots.Get
-  ( -- * Resource
-    ComputeSnapshotsGetResource,
+    (
+    -- * Resource
+      ComputeSnapshotsGetResource
 
     -- ** Constructing a Request
-    newComputeSnapshotsGet,
-    ComputeSnapshotsGet,
-  )
-where
+    , newComputeSnapshotsGet
+    , ComputeSnapshotsGet
+    ) where
 
-import Gogol.Compute.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Compute.Types
 
 -- | A resource alias for @compute.snapshots.get@ method which the
 -- 'ComputeSnapshotsGet' request conforms to.
 type ComputeSnapshotsGetResource =
-  "compute"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "project" Core.Text
-    Core.:> "global"
-    Core.:> "snapshots"
-    Core.:> Core.Capture "snapshot" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Snapshot
+     "compute" Core.:>
+       "v1" Core.:>
+         "projects" Core.:>
+           Core.Capture "project" Core.Text Core.:>
+             "global" Core.:>
+               "snapshots" Core.:>
+                 Core.Capture "snapshot" Core.Text Core.:>
+                   Core.QueryParam "$.xgafv" Xgafv Core.:>
+                     Core.QueryParam "access_token" Core.Text Core.:>
+                       Core.QueryParam "callback" Core.Text Core.:>
+                         Core.QueryParam "uploadType" Core.Text Core.:>
+                           Core.QueryParam "upload_protocol" Core.Text Core.:>
+                             Core.QueryParam "alt" Core.AltJSON Core.:>
+                               Core.Get '[Core.JSON] Snapshot
 
 -- | Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.
 --
 -- /See:/ 'newComputeSnapshotsGet' smart constructor.
 data ComputeSnapshotsGet = ComputeSnapshotsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Project ID for this request.
-    project :: Core.Text,
-    -- | Name of the Snapshot resource to return.
-    snapshot :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Project ID for this request.
+    , project :: Core.Text
+      -- | Name of the Snapshot resource to return.
+    , snapshot :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComputeSnapshotsGet' with the minimum fields required to make a request.
-newComputeSnapshotsGet ::
-  -- |  Project ID for this request. See 'project'.
-  Core.Text ->
-  -- |  Name of the Snapshot resource to return. See 'snapshot'.
-  Core.Text ->
-  ComputeSnapshotsGet
+newComputeSnapshotsGet 
+    ::  Core.Text
+       -- ^  Project ID for this request. See 'project'.
+    -> Core.Text
+       -- ^  Name of the Snapshot resource to return. See 'snapshot'.
+    -> ComputeSnapshotsGet
 newComputeSnapshotsGet project snapshot =
   ComputeSnapshotsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      project = project,
-      snapshot = snapshot,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , project = project
+    , snapshot = snapshot
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest ComputeSnapshotsGet where
-  type Rs ComputeSnapshotsGet = Snapshot
-  type
-    Scopes ComputeSnapshotsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
-       ]
-  requestClient ComputeSnapshotsGet {..} =
-    go
-      project
-      snapshot
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      computeService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeSnapshotsGetResource
-          )
-          Core.mempty
+        type Rs ComputeSnapshotsGet = Snapshot
+        type Scopes ComputeSnapshotsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ComputeSnapshotsGet{..}
+          = go project snapshot xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              computeService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy ComputeSnapshotsGetResource)
+                      Core.mempty
+
