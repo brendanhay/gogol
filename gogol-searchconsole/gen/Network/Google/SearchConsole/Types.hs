@@ -1,207 +1,269 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SearchConsole.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.SearchConsole.Types
-    (
-    -- * Service Configuration
-      searchConsoleService
+  ( -- * Configuration
+    searchConsoleService,
 
     -- * OAuth Scopes
-    , webmastersScope
-    , webmastersReadOnlyScope
+    webmastersScope,
+    webmastersReadOnlyScope,
 
-    -- * WmxSitePermissionLevel
-    , WmxSitePermissionLevel (..)
+    -- * Types
 
-    -- * SearchAnalyticsQueryRequestDataState
-    , SearchAnalyticsQueryRequestDataState (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * WmxSitemapContent
-    , WmxSitemapContent
-    , wmxSitemapContent
-    , wscIndexed
-    , wscType
-    , wscSubmitted
+    -- ** AmpInspectionResult
+    AmpInspectionResult (..),
+    newAmpInspectionResult,
 
-    -- * APIdimensionFilterGroup
-    , APIdimensionFilterGroup
-    , apidimensionFilterGroup
-    , afgFilters
-    , afgGroupType
+    -- ** AmpInspectionResult_AmpIndexStatusVerdict
+    AmpInspectionResult_AmpIndexStatusVerdict (..),
 
-    -- * RunMobileFriendlyTestResponseMobileFriendliness
-    , RunMobileFriendlyTestResponseMobileFriendliness (..)
+    -- ** AmpInspectionResult_IndexingState
+    AmpInspectionResult_IndexingState (..),
 
-    -- * SearchAnalyticsQueryRequestAggregationType
-    , SearchAnalyticsQueryRequestAggregationType (..)
+    -- ** AmpInspectionResult_PageFetchState
+    AmpInspectionResult_PageFetchState (..),
 
-    -- * Image
-    , Image
-    , image
-    , iData
-    , iMimeType
+    -- ** AmpInspectionResult_RobotsTxtState
+    AmpInspectionResult_RobotsTxtState (..),
 
-    -- * BlockedResource
-    , BlockedResource
-    , blockedResource
-    , brURL
+    -- ** AmpInspectionResult_Verdict
+    AmpInspectionResult_Verdict (..),
 
-    -- * APIDataRow
-    , APIDataRow
-    , apiDataRow
-    , adrImpressions
-    , adrKeys
-    , adrCtr
-    , adrClicks
-    , adrPosition
+    -- ** AmpIssue
+    AmpIssue (..),
+    newAmpIssue,
 
-    -- * SearchAnalyticsQueryRequestSearchType
-    , SearchAnalyticsQueryRequestSearchType (..)
+    -- ** AmpIssue_Severity
+    AmpIssue_Severity (..),
 
-    -- * WmxSitemapType
-    , WmxSitemapType (..)
+    -- ** ApiDataRow
+    ApiDataRow (..),
+    newApiDataRow,
 
-    -- * APIdimensionFilterGroupGroupType
-    , APIdimensionFilterGroupGroupType (..)
+    -- ** ApiDimensionFilter
+    ApiDimensionFilter (..),
+    newApiDimensionFilter,
 
-    -- * APIdimensionFilter
-    , APIdimensionFilter
-    , apidimensionFilter
-    , afOperator
-    , afDimension
-    , afExpression
+    -- ** ApiDimensionFilter_Dimension
+    ApiDimensionFilter_Dimension (..),
 
-    -- * APIdimensionFilterDimension
-    , APIdimensionFilterDimension (..)
+    -- ** ApiDimensionFilter_Operator
+    ApiDimensionFilter_Operator (..),
 
-    -- * APIdimensionFilterOperator
-    , APIdimensionFilterOperator (..)
+    -- ** ApiDimensionFilterGroup
+    ApiDimensionFilterGroup (..),
+    newApiDimensionFilterGroup,
 
-    -- * ResourceIssue
-    , ResourceIssue
-    , resourceIssue
-    , riBlockedResource
+    -- ** ApiDimensionFilterGroup_GroupType
+    ApiDimensionFilterGroup_GroupType (..),
 
-    -- * TestStatusStatus
-    , TestStatusStatus (..)
+    -- ** BlockedResource
+    BlockedResource (..),
+    newBlockedResource,
 
-    -- * SearchAnalyticsQueryResponse
-    , SearchAnalyticsQueryResponse
-    , searchAnalyticsQueryResponse
-    , saqrRows
-    , saqrResponseAggregationType
+    -- ** DetectedItems
+    DetectedItems (..),
+    newDetectedItems,
 
-    -- * RunMobileFriendlyTestRequest
-    , RunMobileFriendlyTestRequest
-    , runMobileFriendlyTestRequest
-    , rmftrURL
-    , rmftrRequestScreenshot
+    -- ** Image
+    Image (..),
+    newImage,
 
-    -- * WmxSitemapContentType
-    , WmxSitemapContentType (..)
+    -- ** IndexStatusInspectionResult
+    IndexStatusInspectionResult (..),
+    newIndexStatusInspectionResult,
 
-    -- * TestStatus
-    , TestStatus
-    , testStatus
-    , tsStatus
-    , tsDetails
+    -- ** IndexStatusInspectionResult_CrawledAs
+    IndexStatusInspectionResult_CrawledAs (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** IndexStatusInspectionResult_IndexingState
+    IndexStatusInspectionResult_IndexingState (..),
 
-    -- * WmxSitemap
-    , WmxSitemap
-    , wmxSitemap
-    , wsContents
-    , wsPath
-    , wsIsSitemapsIndex
-    , wsLastSubmitted
-    , wsWarnings
-    , wsLastDownloaded
-    , wsIsPending
-    , wsType
-    , wsErrors
+    -- ** IndexStatusInspectionResult_PageFetchState
+    IndexStatusInspectionResult_PageFetchState (..),
 
-    -- * SitemapsListResponse
-    , SitemapsListResponse
-    , sitemapsListResponse
-    , slrSitemap
+    -- ** IndexStatusInspectionResult_RobotsTxtState
+    IndexStatusInspectionResult_RobotsTxtState (..),
 
-    -- * SearchAnalyticsQueryRequestDimensionsItem
-    , SearchAnalyticsQueryRequestDimensionsItem (..)
+    -- ** IndexStatusInspectionResult_Verdict
+    IndexStatusInspectionResult_Verdict (..),
 
-    -- * MobileFriendlyIssueRule
-    , MobileFriendlyIssueRule (..)
+    -- ** InspectUrlIndexRequest
+    InspectUrlIndexRequest (..),
+    newInspectUrlIndexRequest,
 
-    -- * SearchAnalyticsQueryRequest
-    , SearchAnalyticsQueryRequest
-    , searchAnalyticsQueryRequest
-    , saqrAggregationType
-    , saqrDataState
-    , saqrRowLimit
-    , saqrEndDate
-    , saqrSearchType
-    , saqrDimensionFilterGroups
-    , saqrStartDate
-    , saqrStartRow
-    , saqrDimensions
+    -- ** InspectUrlIndexResponse
+    InspectUrlIndexResponse (..),
+    newInspectUrlIndexResponse,
 
-    -- * RunMobileFriendlyTestResponse
-    , RunMobileFriendlyTestResponse
-    , runMobileFriendlyTestResponse
-    , rmftrScreenshot
-    , rmftrResourceIssues
-    , rmftrMobileFriendliness
-    , rmftrTestStatus
-    , rmftrMobileFriendlyIssues
+    -- ** Item
+    Item (..),
+    newItem,
 
-    -- * SearchAnalyticsQueryResponseResponseAggregationType
-    , SearchAnalyticsQueryResponseResponseAggregationType (..)
+    -- ** MobileFriendlyIssue
+    MobileFriendlyIssue (..),
+    newMobileFriendlyIssue,
 
-    -- * MobileFriendlyIssue
-    , MobileFriendlyIssue
-    , mobileFriendlyIssue
-    , mfiRule
+    -- ** MobileFriendlyIssue_Rule
+    MobileFriendlyIssue_Rule (..),
 
-    -- * SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , slrSiteEntry
+    -- ** MobileUsabilityInspectionResult
+    MobileUsabilityInspectionResult (..),
+    newMobileUsabilityInspectionResult,
 
-    -- * WmxSite
-    , WmxSite
-    , wmxSite
-    , wsPermissionLevel
-    , wsSiteURL
-    ) where
+    -- ** MobileUsabilityInspectionResult_Verdict
+    MobileUsabilityInspectionResult_Verdict (..),
 
-import Network.Google.Prelude
-import Network.Google.SearchConsole.Types.Product
-import Network.Google.SearchConsole.Types.Sum
+    -- ** MobileUsabilityIssue
+    MobileUsabilityIssue (..),
+    newMobileUsabilityIssue,
 
--- | Default request referring to version 'v1' of the Google Search Console API. This contains the host and root path used as a starting point for constructing service requests.
-searchConsoleService :: ServiceConfig
-searchConsoleService
-  = defaultService (ServiceId "searchconsole:v1")
-      "searchconsole.googleapis.com"
+    -- ** MobileUsabilityIssue_IssueType
+    MobileUsabilityIssue_IssueType (..),
+
+    -- ** MobileUsabilityIssue_Severity
+    MobileUsabilityIssue_Severity (..),
+
+    -- ** ResourceIssue
+    ResourceIssue (..),
+    newResourceIssue,
+
+    -- ** RichResultsInspectionResult
+    RichResultsInspectionResult (..),
+    newRichResultsInspectionResult,
+
+    -- ** RichResultsInspectionResult_Verdict
+    RichResultsInspectionResult_Verdict (..),
+
+    -- ** RichResultsIssue
+    RichResultsIssue (..),
+    newRichResultsIssue,
+
+    -- ** RichResultsIssue_Severity
+    RichResultsIssue_Severity (..),
+
+    -- ** RunMobileFriendlyTestRequest
+    RunMobileFriendlyTestRequest (..),
+    newRunMobileFriendlyTestRequest,
+
+    -- ** RunMobileFriendlyTestResponse
+    RunMobileFriendlyTestResponse (..),
+    newRunMobileFriendlyTestResponse,
+
+    -- ** RunMobileFriendlyTestResponse_MobileFriendliness
+    RunMobileFriendlyTestResponse_MobileFriendliness (..),
+
+    -- ** SearchAnalyticsQueryRequest
+    SearchAnalyticsQueryRequest (..),
+    newSearchAnalyticsQueryRequest,
+
+    -- ** SearchAnalyticsQueryRequest_AggregationType
+    SearchAnalyticsQueryRequest_AggregationType (..),
+
+    -- ** SearchAnalyticsQueryRequest_DataState
+    SearchAnalyticsQueryRequest_DataState (..),
+
+    -- ** SearchAnalyticsQueryRequest_DimensionsItem
+    SearchAnalyticsQueryRequest_DimensionsItem (..),
+
+    -- ** SearchAnalyticsQueryRequest_SearchType
+    SearchAnalyticsQueryRequest_SearchType (..),
+
+    -- ** SearchAnalyticsQueryRequest_Type
+    SearchAnalyticsQueryRequest_Type (..),
+
+    -- ** SearchAnalyticsQueryResponse
+    SearchAnalyticsQueryResponse (..),
+    newSearchAnalyticsQueryResponse,
+
+    -- ** SearchAnalyticsQueryResponse_ResponseAggregationType
+    SearchAnalyticsQueryResponse_ResponseAggregationType (..),
+
+    -- ** SitemapsListResponse
+    SitemapsListResponse (..),
+    newSitemapsListResponse,
+
+    -- ** SitesListResponse
+    SitesListResponse (..),
+    newSitesListResponse,
+
+    -- ** TestStatus
+    TestStatus (..),
+    newTestStatus,
+
+    -- ** TestStatus_Status
+    TestStatus_Status (..),
+
+    -- ** UrlInspectionResult
+    UrlInspectionResult (..),
+    newUrlInspectionResult,
+
+    -- ** WmxSite
+    WmxSite (..),
+    newWmxSite,
+
+    -- ** WmxSite_PermissionLevel
+    WmxSite_PermissionLevel (..),
+
+    -- ** WmxSitemap
+    WmxSitemap (..),
+    newWmxSitemap,
+
+    -- ** WmxSitemap_Type
+    WmxSitemap_Type (..),
+
+    -- ** WmxSitemapContent
+    WmxSitemapContent (..),
+    newWmxSitemapContent,
+
+    -- ** WmxSitemapContent_Type
+    WmxSitemapContent_Type (..),
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.SearchConsole.Internal.Product
+import Network.Google.SearchConsole.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Google Search Console API. This contains the host and root path used as a starting point for constructing service requests.
+searchConsoleService :: Core.ServiceConfig
+searchConsoleService =
+  Core.defaultService
+    (Core.ServiceId "searchconsole:v1")
+    "searchconsole.googleapis.com"
 
 -- | View and manage Search Console data for your verified sites
-webmastersScope :: Proxy '["https://www.googleapis.com/auth/webmasters"]
-webmastersScope = Proxy
+webmastersScope :: Core.Proxy '["https://www.googleapis.com/auth/webmasters"]
+webmastersScope = Core.Proxy
 
 -- | View Search Console data for your verified sites
-webmastersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/webmasters.readonly"]
-webmastersReadOnlyScope = Proxy
+webmastersReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/webmasters.readonly"]
+webmastersReadOnlyScope = Core.Proxy

@@ -1,258 +1,324 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SearchConsole
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Search Console API provides access to both Search Console data
--- (verified users only) and to public information on an URL basis (anyone)
+-- The Search Console API provides access to both Search Console data (verified users only) and to public information on an URL basis (anyone)
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference>
 module Network.Google.SearchConsole
-    (
-    -- * Service Configuration
-      searchConsoleService
+  ( -- * Configuration
+    searchConsoleService,
 
     -- * OAuth Scopes
-    , webmastersScope
-    , webmastersReadOnlyScope
-
-    -- * API Declaration
-    , SearchConsoleAPI
+    webmastersScope,
+    webmastersReadOnlyScope,
 
     -- * Resources
 
+    -- ** searchconsole.urlInspection.index.inspect
+    SearchConsoleUrlInspectionIndexInspectResource,
+    newSearchConsoleUrlInspectionIndexInspect,
+    SearchConsoleUrlInspectionIndexInspect,
+
     -- ** searchconsole.urlTestingTools.mobileFriendlyTest.run
-    , module Network.Google.Resource.SearchConsole.URLTestingTools.MobileFriendlyTest.Run
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource,
+    newSearchConsoleUrlTestingToolsMobileFriendlyTestRun,
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRun,
 
     -- ** webmasters.searchanalytics.query
-    , module Network.Google.Resource.Webmasters.Searchanalytics.Query
+    WebmastersSearchanalyticsQueryResource,
+    newWebmastersSearchanalyticsQuery,
+    WebmastersSearchanalyticsQuery,
 
     -- ** webmasters.sitemaps.delete
-    , module Network.Google.Resource.Webmasters.Sitemaps.Delete
+    WebmastersSitemapsDeleteResource,
+    newWebmastersSitemapsDelete,
+    WebmastersSitemapsDelete,
 
     -- ** webmasters.sitemaps.get
-    , module Network.Google.Resource.Webmasters.Sitemaps.Get
+    WebmastersSitemapsGetResource,
+    newWebmastersSitemapsGet,
+    WebmastersSitemapsGet,
 
     -- ** webmasters.sitemaps.list
-    , module Network.Google.Resource.Webmasters.Sitemaps.List
+    WebmastersSitemapsListResource,
+    newWebmastersSitemapsList,
+    WebmastersSitemapsList,
 
     -- ** webmasters.sitemaps.submit
-    , module Network.Google.Resource.Webmasters.Sitemaps.Submit
+    WebmastersSitemapsSubmitResource,
+    newWebmastersSitemapsSubmit,
+    WebmastersSitemapsSubmit,
 
     -- ** webmasters.sites.add
-    , module Network.Google.Resource.Webmasters.Sites.Add
+    WebmastersSitesAddResource,
+    newWebmastersSitesAdd,
+    WebmastersSitesAdd,
 
     -- ** webmasters.sites.delete
-    , module Network.Google.Resource.Webmasters.Sites.Delete
+    WebmastersSitesDeleteResource,
+    newWebmastersSitesDelete,
+    WebmastersSitesDelete,
 
     -- ** webmasters.sites.get
-    , module Network.Google.Resource.Webmasters.Sites.Get
+    WebmastersSitesGetResource,
+    newWebmastersSitesGet,
+    WebmastersSitesGet,
 
     -- ** webmasters.sites.list
-    , module Network.Google.Resource.Webmasters.Sites.List
+    WebmastersSitesListResource,
+    newWebmastersSitesList,
+    WebmastersSitesList,
 
     -- * Types
 
-    -- ** WmxSitePermissionLevel
-    , WmxSitePermissionLevel (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- ** SearchAnalyticsQueryRequestDataState
-    , SearchAnalyticsQueryRequestDataState (..)
+    -- ** AmpInspectionResult
+    AmpInspectionResult (..),
+    newAmpInspectionResult,
 
-    -- ** WmxSitemapContent
-    , WmxSitemapContent
-    , wmxSitemapContent
-    , wscIndexed
-    , wscType
-    , wscSubmitted
+    -- ** AmpInspectionResult_AmpIndexStatusVerdict
+    AmpInspectionResult_AmpIndexStatusVerdict (..),
 
-    -- ** APIdimensionFilterGroup
-    , APIdimensionFilterGroup
-    , apidimensionFilterGroup
-    , afgFilters
-    , afgGroupType
+    -- ** AmpInspectionResult_IndexingState
+    AmpInspectionResult_IndexingState (..),
 
-    -- ** RunMobileFriendlyTestResponseMobileFriendliness
-    , RunMobileFriendlyTestResponseMobileFriendliness (..)
+    -- ** AmpInspectionResult_PageFetchState
+    AmpInspectionResult_PageFetchState (..),
 
-    -- ** SearchAnalyticsQueryRequestAggregationType
-    , SearchAnalyticsQueryRequestAggregationType (..)
+    -- ** AmpInspectionResult_RobotsTxtState
+    AmpInspectionResult_RobotsTxtState (..),
 
-    -- ** Image
-    , Image
-    , image
-    , iData
-    , iMimeType
+    -- ** AmpInspectionResult_Verdict
+    AmpInspectionResult_Verdict (..),
+
+    -- ** AmpIssue
+    AmpIssue (..),
+    newAmpIssue,
+
+    -- ** AmpIssue_Severity
+    AmpIssue_Severity (..),
+
+    -- ** ApiDataRow
+    ApiDataRow (..),
+    newApiDataRow,
+
+    -- ** ApiDimensionFilter
+    ApiDimensionFilter (..),
+    newApiDimensionFilter,
+
+    -- ** ApiDimensionFilter_Dimension
+    ApiDimensionFilter_Dimension (..),
+
+    -- ** ApiDimensionFilter_Operator
+    ApiDimensionFilter_Operator (..),
+
+    -- ** ApiDimensionFilterGroup
+    ApiDimensionFilterGroup (..),
+    newApiDimensionFilterGroup,
+
+    -- ** ApiDimensionFilterGroup_GroupType
+    ApiDimensionFilterGroup_GroupType (..),
 
     -- ** BlockedResource
-    , BlockedResource
-    , blockedResource
-    , brURL
+    BlockedResource (..),
+    newBlockedResource,
 
-    -- ** APIDataRow
-    , APIDataRow
-    , apiDataRow
-    , adrImpressions
-    , adrKeys
-    , adrCtr
-    , adrClicks
-    , adrPosition
+    -- ** DetectedItems
+    DetectedItems (..),
+    newDetectedItems,
 
-    -- ** SearchAnalyticsQueryRequestSearchType
-    , SearchAnalyticsQueryRequestSearchType (..)
+    -- ** Image
+    Image (..),
+    newImage,
 
-    -- ** WmxSitemapType
-    , WmxSitemapType (..)
+    -- ** IndexStatusInspectionResult
+    IndexStatusInspectionResult (..),
+    newIndexStatusInspectionResult,
 
-    -- ** APIdimensionFilterGroupGroupType
-    , APIdimensionFilterGroupGroupType (..)
+    -- ** IndexStatusInspectionResult_CrawledAs
+    IndexStatusInspectionResult_CrawledAs (..),
 
-    -- ** APIdimensionFilter
-    , APIdimensionFilter
-    , apidimensionFilter
-    , afOperator
-    , afDimension
-    , afExpression
+    -- ** IndexStatusInspectionResult_IndexingState
+    IndexStatusInspectionResult_IndexingState (..),
 
-    -- ** APIdimensionFilterDimension
-    , APIdimensionFilterDimension (..)
+    -- ** IndexStatusInspectionResult_PageFetchState
+    IndexStatusInspectionResult_PageFetchState (..),
 
-    -- ** APIdimensionFilterOperator
-    , APIdimensionFilterOperator (..)
+    -- ** IndexStatusInspectionResult_RobotsTxtState
+    IndexStatusInspectionResult_RobotsTxtState (..),
 
-    -- ** ResourceIssue
-    , ResourceIssue
-    , resourceIssue
-    , riBlockedResource
+    -- ** IndexStatusInspectionResult_Verdict
+    IndexStatusInspectionResult_Verdict (..),
 
-    -- ** TestStatusStatus
-    , TestStatusStatus (..)
+    -- ** InspectUrlIndexRequest
+    InspectUrlIndexRequest (..),
+    newInspectUrlIndexRequest,
 
-    -- ** SearchAnalyticsQueryResponse
-    , SearchAnalyticsQueryResponse
-    , searchAnalyticsQueryResponse
-    , saqrRows
-    , saqrResponseAggregationType
+    -- ** InspectUrlIndexResponse
+    InspectUrlIndexResponse (..),
+    newInspectUrlIndexResponse,
 
-    -- ** RunMobileFriendlyTestRequest
-    , RunMobileFriendlyTestRequest
-    , runMobileFriendlyTestRequest
-    , rmftrURL
-    , rmftrRequestScreenshot
-
-    -- ** WmxSitemapContentType
-    , WmxSitemapContentType (..)
-
-    -- ** TestStatus
-    , TestStatus
-    , testStatus
-    , tsStatus
-    , tsDetails
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** WmxSitemap
-    , WmxSitemap
-    , wmxSitemap
-    , wsContents
-    , wsPath
-    , wsIsSitemapsIndex
-    , wsLastSubmitted
-    , wsWarnings
-    , wsLastDownloaded
-    , wsIsPending
-    , wsType
-    , wsErrors
-
-    -- ** SitemapsListResponse
-    , SitemapsListResponse
-    , sitemapsListResponse
-    , slrSitemap
-
-    -- ** SearchAnalyticsQueryRequestDimensionsItem
-    , SearchAnalyticsQueryRequestDimensionsItem (..)
-
-    -- ** MobileFriendlyIssueRule
-    , MobileFriendlyIssueRule (..)
-
-    -- ** SearchAnalyticsQueryRequest
-    , SearchAnalyticsQueryRequest
-    , searchAnalyticsQueryRequest
-    , saqrAggregationType
-    , saqrDataState
-    , saqrRowLimit
-    , saqrEndDate
-    , saqrSearchType
-    , saqrDimensionFilterGroups
-    , saqrStartDate
-    , saqrStartRow
-    , saqrDimensions
-
-    -- ** RunMobileFriendlyTestResponse
-    , RunMobileFriendlyTestResponse
-    , runMobileFriendlyTestResponse
-    , rmftrScreenshot
-    , rmftrResourceIssues
-    , rmftrMobileFriendliness
-    , rmftrTestStatus
-    , rmftrMobileFriendlyIssues
-
-    -- ** SearchAnalyticsQueryResponseResponseAggregationType
-    , SearchAnalyticsQueryResponseResponseAggregationType (..)
+    -- ** Item
+    Item (..),
+    newItem,
 
     -- ** MobileFriendlyIssue
-    , MobileFriendlyIssue
-    , mobileFriendlyIssue
-    , mfiRule
+    MobileFriendlyIssue (..),
+    newMobileFriendlyIssue,
+
+    -- ** MobileFriendlyIssue_Rule
+    MobileFriendlyIssue_Rule (..),
+
+    -- ** MobileUsabilityInspectionResult
+    MobileUsabilityInspectionResult (..),
+    newMobileUsabilityInspectionResult,
+
+    -- ** MobileUsabilityInspectionResult_Verdict
+    MobileUsabilityInspectionResult_Verdict (..),
+
+    -- ** MobileUsabilityIssue
+    MobileUsabilityIssue (..),
+    newMobileUsabilityIssue,
+
+    -- ** MobileUsabilityIssue_IssueType
+    MobileUsabilityIssue_IssueType (..),
+
+    -- ** MobileUsabilityIssue_Severity
+    MobileUsabilityIssue_Severity (..),
+
+    -- ** ResourceIssue
+    ResourceIssue (..),
+    newResourceIssue,
+
+    -- ** RichResultsInspectionResult
+    RichResultsInspectionResult (..),
+    newRichResultsInspectionResult,
+
+    -- ** RichResultsInspectionResult_Verdict
+    RichResultsInspectionResult_Verdict (..),
+
+    -- ** RichResultsIssue
+    RichResultsIssue (..),
+    newRichResultsIssue,
+
+    -- ** RichResultsIssue_Severity
+    RichResultsIssue_Severity (..),
+
+    -- ** RunMobileFriendlyTestRequest
+    RunMobileFriendlyTestRequest (..),
+    newRunMobileFriendlyTestRequest,
+
+    -- ** RunMobileFriendlyTestResponse
+    RunMobileFriendlyTestResponse (..),
+    newRunMobileFriendlyTestResponse,
+
+    -- ** RunMobileFriendlyTestResponse_MobileFriendliness
+    RunMobileFriendlyTestResponse_MobileFriendliness (..),
+
+    -- ** SearchAnalyticsQueryRequest
+    SearchAnalyticsQueryRequest (..),
+    newSearchAnalyticsQueryRequest,
+
+    -- ** SearchAnalyticsQueryRequest_AggregationType
+    SearchAnalyticsQueryRequest_AggregationType (..),
+
+    -- ** SearchAnalyticsQueryRequest_DataState
+    SearchAnalyticsQueryRequest_DataState (..),
+
+    -- ** SearchAnalyticsQueryRequest_DimensionsItem
+    SearchAnalyticsQueryRequest_DimensionsItem (..),
+
+    -- ** SearchAnalyticsQueryRequest_SearchType
+    SearchAnalyticsQueryRequest_SearchType (..),
+
+    -- ** SearchAnalyticsQueryRequest_Type
+    SearchAnalyticsQueryRequest_Type (..),
+
+    -- ** SearchAnalyticsQueryResponse
+    SearchAnalyticsQueryResponse (..),
+    newSearchAnalyticsQueryResponse,
+
+    -- ** SearchAnalyticsQueryResponse_ResponseAggregationType
+    SearchAnalyticsQueryResponse_ResponseAggregationType (..),
+
+    -- ** SitemapsListResponse
+    SitemapsListResponse (..),
+    newSitemapsListResponse,
 
     -- ** SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , slrSiteEntry
+    SitesListResponse (..),
+    newSitesListResponse,
+
+    -- ** TestStatus
+    TestStatus (..),
+    newTestStatus,
+
+    -- ** TestStatus_Status
+    TestStatus_Status (..),
+
+    -- ** UrlInspectionResult
+    UrlInspectionResult (..),
+    newUrlInspectionResult,
 
     -- ** WmxSite
-    , WmxSite
-    , wmxSite
-    , wsPermissionLevel
-    , wsSiteURL
-    ) where
+    WmxSite (..),
+    newWmxSite,
 
-import Network.Google.Prelude
-import Network.Google.Resource.SearchConsole.URLTestingTools.MobileFriendlyTest.Run
-import Network.Google.Resource.Webmasters.Searchanalytics.Query
-import Network.Google.Resource.Webmasters.Sitemaps.Delete
-import Network.Google.Resource.Webmasters.Sitemaps.Get
-import Network.Google.Resource.Webmasters.Sitemaps.List
-import Network.Google.Resource.Webmasters.Sitemaps.Submit
-import Network.Google.Resource.Webmasters.Sites.Add
-import Network.Google.Resource.Webmasters.Sites.Delete
-import Network.Google.Resource.Webmasters.Sites.Get
-import Network.Google.Resource.Webmasters.Sites.List
+    -- ** WmxSite_PermissionLevel
+    WmxSite_PermissionLevel (..),
+
+    -- ** WmxSitemap
+    WmxSitemap (..),
+    newWmxSitemap,
+
+    -- ** WmxSitemap_Type
+    WmxSitemap_Type (..),
+
+    -- ** WmxSitemapContent
+    WmxSitemapContent (..),
+    newWmxSitemapContent,
+
+    -- ** WmxSitemapContent_Type
+    WmxSitemapContent_Type (..),
+  )
+where
+
 import Network.Google.SearchConsole.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Search Console API service.
-type SearchConsoleAPI =
-     SitemapsListResource :<|> SitemapsGetResource :<|>
-       SitemapsSubmitResource
-       :<|> SitemapsDeleteResource
-       :<|> SearchanalyticsQueryResource
-       :<|> SitesListResource
-       :<|> SitesGetResource
-       :<|> SitesAddResource
-       :<|> SitesDeleteResource
-       :<|> URLTestingToolsMobileFriendlyTestRunResource
+import Network.Google.SearchConsole.UrlInspection.Index.Inspect
+import Network.Google.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
+import Network.Google.SearchConsole.Webmasters.Searchanalytics.Query
+import Network.Google.SearchConsole.Webmasters.Sitemaps.Delete
+import Network.Google.SearchConsole.Webmasters.Sitemaps.Get
+import Network.Google.SearchConsole.Webmasters.Sitemaps.List
+import Network.Google.SearchConsole.Webmasters.Sitemaps.Submit
+import Network.Google.SearchConsole.Webmasters.Sites.Add
+import Network.Google.SearchConsole.Webmasters.Sites.Delete
+import Network.Google.SearchConsole.Webmasters.Sites.Get
+import Network.Google.SearchConsole.Webmasters.Sites.List
