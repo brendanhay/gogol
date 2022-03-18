@@ -39,43 +39,44 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AndroidDeviceProvisioning
-    Network.Google.AndroidDeviceProvisioning.Customers.Configurations.Create
-    Network.Google.AndroidDeviceProvisioning.Customers.Configurations.Delete
-    Network.Google.AndroidDeviceProvisioning.Customers.Configurations.Get
-    Network.Google.AndroidDeviceProvisioning.Customers.Configurations.List
-    Network.Google.AndroidDeviceProvisioning.Customers.Configurations.Patch
-    Network.Google.AndroidDeviceProvisioning.Customers.Devices.ApplyConfiguration
-    Network.Google.AndroidDeviceProvisioning.Customers.Devices.Get
-    Network.Google.AndroidDeviceProvisioning.Customers.Devices.List
-    Network.Google.AndroidDeviceProvisioning.Customers.Devices.RemoveConfiguration
-    Network.Google.AndroidDeviceProvisioning.Customers.Devices.Unclaim
-    Network.Google.AndroidDeviceProvisioning.Customers.Dpcs.List
-    Network.Google.AndroidDeviceProvisioning.Customers.List
-    Network.Google.AndroidDeviceProvisioning.Operations.Get
-    Network.Google.AndroidDeviceProvisioning.Partners.Customers.Create
-    Network.Google.AndroidDeviceProvisioning.Partners.Customers.List
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.Claim
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.FindByIdentifier
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.FindByOwner
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.Get
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.Metadata
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.Unclaim
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.UnclaimAsync
-    Network.Google.AndroidDeviceProvisioning.Partners.Devices.UpdateMetadataAsync
-    Network.Google.AndroidDeviceProvisioning.Partners.Vendors.Customers.List
-    Network.Google.AndroidDeviceProvisioning.Partners.Vendors.List
-    Network.Google.AndroidDeviceProvisioning.Types
+    Gogol.AndroidDeviceProvisioning
+    Gogol.AndroidDeviceProvisioning.Customers.Configurations.Create
+    Gogol.AndroidDeviceProvisioning.Customers.Configurations.Delete
+    Gogol.AndroidDeviceProvisioning.Customers.Configurations.Get
+    Gogol.AndroidDeviceProvisioning.Customers.Configurations.List
+    Gogol.AndroidDeviceProvisioning.Customers.Configurations.Patch
+    Gogol.AndroidDeviceProvisioning.Customers.Devices.ApplyConfiguration
+    Gogol.AndroidDeviceProvisioning.Customers.Devices.Get
+    Gogol.AndroidDeviceProvisioning.Customers.Devices.List
+    Gogol.AndroidDeviceProvisioning.Customers.Devices.RemoveConfiguration
+    Gogol.AndroidDeviceProvisioning.Customers.Devices.Unclaim
+    Gogol.AndroidDeviceProvisioning.Customers.Dpcs.List
+    Gogol.AndroidDeviceProvisioning.Customers.List
+    Gogol.AndroidDeviceProvisioning.Operations.Get
+    Gogol.AndroidDeviceProvisioning.Partners.Customers.Create
+    Gogol.AndroidDeviceProvisioning.Partners.Customers.List
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.Claim
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.FindByIdentifier
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.FindByOwner
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.Get
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.Metadata
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.Unclaim
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.UnclaimAsync
+    Gogol.AndroidDeviceProvisioning.Partners.Devices.UpdateMetadataAsync
+    Gogol.AndroidDeviceProvisioning.Partners.Vendors.Customers.List
+    Gogol.AndroidDeviceProvisioning.Partners.Vendors.List
+    Gogol.AndroidDeviceProvisioning.Types
 
   other-modules:
-    Network.Google.AndroidDeviceProvisioning.Internal.Product
-    Network.Google.AndroidDeviceProvisioning.Internal.Sum
+    Gogol.AndroidDeviceProvisioning.Internal.Product
+    Gogol.AndroidDeviceProvisioning.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
