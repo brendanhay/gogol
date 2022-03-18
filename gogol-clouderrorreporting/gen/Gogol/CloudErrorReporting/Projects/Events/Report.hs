@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudErrorReporting.Projects.Events.Report
+-- Module      : Gogol.CloudErrorReporting.Projects.Events.Report
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Report an individual error event and record the event to a log. This endpoint accepts __either__ an OAuth token, __or__ an <https://support.google.com/cloud/answer/6158862 API key> for authentication. To use an API key, append it to the URL as the value of a @key@ parameter. For example: @POST https:\/\/clouderrorreporting.googleapis.com\/v1beta1\/{projectName}\/events:report?key=123ABC456@ __Note:__ [Error Reporting] (https:\/\/cloud.google.com\/error-reporting) is a global service built on Cloud Logging and doesn\'t analyze logs stored in regional log buckets or logs routed to other Google Cloud projects. For more information, see [Using Error Reporting with regionalized logs] (https:\/\/cloud.google.com\/error-reporting\/docs\/regionalization).
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.events.report@.
-module Network.Google.CloudErrorReporting.Projects.Events.Report
+module Gogol.CloudErrorReporting.Projects.Events.Report
   ( -- * Resource
     CloudErrorReportingProjectsEventsReportResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudErrorReporting.Projects.Events.Report
   )
 where
 
-import Network.Google.CloudErrorReporting.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudErrorReporting.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @clouderrorreporting.projects.events.report@ method which the
 -- 'CloudErrorReportingProjectsEventsReport' request conforms to.

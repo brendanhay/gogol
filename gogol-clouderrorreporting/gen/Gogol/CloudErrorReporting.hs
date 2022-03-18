@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudErrorReporting
+-- Module      : Gogol.CloudErrorReporting
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Groups and counts similar errors from cloud services and applications, reports new errors, and provides access to error groups and their associated errors.
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference>
-module Network.Google.CloudErrorReporting
+module Gogol.CloudErrorReporting
   ( -- * Configuration
     cloudErrorReportingService,
 
@@ -150,10 +150,10 @@ module Network.Google.CloudErrorReporting
   )
 where
 
-import Network.Google.CloudErrorReporting.Projects.DeleteEvents
-import Network.Google.CloudErrorReporting.Projects.Events.List
-import Network.Google.CloudErrorReporting.Projects.Events.Report
-import Network.Google.CloudErrorReporting.Projects.GroupStats.List
-import Network.Google.CloudErrorReporting.Projects.Groups.Get
-import Network.Google.CloudErrorReporting.Projects.Groups.Update
-import Network.Google.CloudErrorReporting.Types
+import Gogol.CloudErrorReporting.Projects.DeleteEvents
+import Gogol.CloudErrorReporting.Projects.Events.List
+import Gogol.CloudErrorReporting.Projects.Events.Report
+import Gogol.CloudErrorReporting.Projects.GroupStats.List
+import Gogol.CloudErrorReporting.Projects.Groups.Get
+import Gogol.CloudErrorReporting.Projects.Groups.Update
+import Gogol.CloudErrorReporting.Types

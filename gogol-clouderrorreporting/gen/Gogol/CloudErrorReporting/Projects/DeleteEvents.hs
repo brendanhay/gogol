@@ -19,57 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudErrorReporting.Projects.Groups.Update
+-- Module      : Gogol.CloudErrorReporting.Projects.DeleteEvents
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Replace the data for the specified group. Fails if the group does not exist.
+-- Deletes all error events of a given project.
 --
--- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.groups.update@.
-module Network.Google.CloudErrorReporting.Projects.Groups.Update
+-- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.deleteEvents@.
+module Gogol.CloudErrorReporting.Projects.DeleteEvents
   ( -- * Resource
-    CloudErrorReportingProjectsGroupsUpdateResource,
+    CloudErrorReportingProjectsDeleteEventsResource,
 
     -- ** Constructing a Request
-    newCloudErrorReportingProjectsGroupsUpdate,
-    CloudErrorReportingProjectsGroupsUpdate,
+    newCloudErrorReportingProjectsDeleteEvents,
+    CloudErrorReportingProjectsDeleteEvents,
   )
 where
 
-import Network.Google.CloudErrorReporting.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudErrorReporting.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @clouderrorreporting.projects.groups.update@ method which the
--- 'CloudErrorReportingProjectsGroupsUpdate' request conforms to.
-type CloudErrorReportingProjectsGroupsUpdateResource =
+-- | A resource alias for @clouderrorreporting.projects.deleteEvents@ method which the
+-- 'CloudErrorReportingProjectsDeleteEvents' request conforms to.
+type CloudErrorReportingProjectsDeleteEventsResource =
   "v1beta1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.Capture "projectName" Core.Text
+    Core.:> "events"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ErrorGroup
-    Core.:> Core.Put '[Core.JSON] ErrorGroup
+    Core.:> Core.Delete '[Core.JSON] DeleteEventsResponse
 
--- | Replace the data for the specified group. Fails if the group does not exist.
+-- | Deletes all error events of a given project.
 --
--- /See:/ 'newCloudErrorReportingProjectsGroupsUpdate' smart constructor.
-data CloudErrorReportingProjectsGroupsUpdate = CloudErrorReportingProjectsGroupsUpdate
+-- /See:/ 'newCloudErrorReportingProjectsDeleteEvents' smart constructor.
+data CloudErrorReportingProjectsDeleteEvents = CloudErrorReportingProjectsDeleteEvents
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The group resource name. Example: projects\/my-project-123\/groups\/CNSgkpnppqKCUw
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: ErrorGroup,
+    -- | Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@, where @{projectID}@ is the <https://support.google.com/cloud/answer/6158840 Google Cloud Platform project ID>. Example: @projects\/my-project-123@.
+    projectName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,51 +75,47 @@ data CloudErrorReportingProjectsGroupsUpdate = CloudErrorReportingProjectsGroups
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudErrorReportingProjectsGroupsUpdate' with the minimum fields required to make a request.
-newCloudErrorReportingProjectsGroupsUpdate ::
-  -- |  The group resource name. Example: projects\/my-project-123\/groups\/CNSgkpnppqKCUw See 'name'.
+-- | Creates a value of 'CloudErrorReportingProjectsDeleteEvents' with the minimum fields required to make a request.
+newCloudErrorReportingProjectsDeleteEvents ::
+  -- |  Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@, where @{projectID}@ is the <https://support.google.com/cloud/answer/6158840 Google Cloud Platform project ID>. Example: @projects\/my-project-123@. See 'projectName'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  ErrorGroup ->
-  CloudErrorReportingProjectsGroupsUpdate
-newCloudErrorReportingProjectsGroupsUpdate name payload =
-  CloudErrorReportingProjectsGroupsUpdate
+  CloudErrorReportingProjectsDeleteEvents
+newCloudErrorReportingProjectsDeleteEvents projectName =
+  CloudErrorReportingProjectsDeleteEvents
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
-      payload = payload,
+      projectName = projectName,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    CloudErrorReportingProjectsGroupsUpdate
+    CloudErrorReportingProjectsDeleteEvents
   where
   type
-    Rs CloudErrorReportingProjectsGroupsUpdate =
-      ErrorGroup
+    Rs CloudErrorReportingProjectsDeleteEvents =
+      DeleteEventsResponse
   type
-    Scopes CloudErrorReportingProjectsGroupsUpdate =
+    Scopes CloudErrorReportingProjectsDeleteEvents =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudErrorReportingProjectsGroupsUpdate {..} =
+    CloudErrorReportingProjectsDeleteEvents {..} =
       go
-        name
+        projectName
         xgafv
         accessToken
         callback
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         cloudErrorReportingService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudErrorReportingProjectsGroupsUpdateResource
+                  CloudErrorReportingProjectsDeleteEventsResource
             )
             Core.mempty
