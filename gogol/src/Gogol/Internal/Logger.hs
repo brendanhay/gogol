@@ -4,7 +4,7 @@
 {-# LANGUAGE RecordWildCards #-}
 
 -- |
--- Module      : Network.Google.Internal.Logger
+-- Module      : Gogol.Internal.Logger
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -12,7 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Types and functions for constructing loggers and emitting log messages.
-module Network.Google.Internal.Logger
+module Gogol.Internal.Logger
   ( -- * Constructing a Logger
     Logger,
     newLogger,
@@ -46,7 +46,7 @@ import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Encoding as LText
 import Data.Word (Word16)
-import Network.Google.Prelude hiding (Request)
+import Gogol.Prelude hiding (Request)
 import Network.HTTP.Conduit
 import Network.HTTP.Types
 import Numeric (showFFloat)

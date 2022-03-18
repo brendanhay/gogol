@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- |
--- Module      : Network.Google.Auth.InstalledApplication
+-- Module      : Gogol.Auth.InstalledApplication
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -18,7 +18,7 @@
 -- application, or when the application is running in the background.
 --
 -- /See:/ <https://developers.google.com/identity/protocols/OAuth2InstalledApp Installed Application Documentation>.
-module Network.Google.Auth.InstalledApplication
+module Gogol.Auth.InstalledApplication
   ( installedApplication,
 
     -- * Forming the URL
@@ -40,13 +40,13 @@ import Control.Monad.IO.Class (MonadIO)
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
 import GHC.TypeLits (Symbol)
-import Network.Google.Auth.Scope
+import Gogol.Auth.Scope
   ( AllowScopes (..),
     queryEncodeScopes,
   )
-import Network.Google.Internal.Auth
-import Network.Google.Internal.Logger (Logger)
-import Network.Google.Prelude
+import Gogol.Internal.Auth
+import Gogol.Internal.Logger (Logger)
+import Gogol.Prelude
 import Network.HTTP.Conduit (Manager)
 import qualified Network.HTTP.Conduit as Client
 

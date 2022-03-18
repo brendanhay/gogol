@@ -12,18 +12,18 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google
+-- Module      : Gogol
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
--- This module provides a 'Google' monad and common set of operations which
--- can be performed against the remote Google Service APIs. Typically you will
--- import this module along with modules from various @gogol-*@ libraries
--- for the services you wish to communicate with.
-module Network.Google
+-- This module provides a common set of operations which can be performed against
+-- the remote Google Service APIs. Typically you will import this module qualified
+-- along with modules from the various @gogol-*@ libraries for services you wish
+-- to communicate with.
+module Gogol
   ( -- * Usage
     -- $usage
 
@@ -95,7 +95,7 @@ module Network.Google
     -- $metadata
 
     -- * Re-exported Types
-    module Network.Google.Types,
+    module Gogol.Types,
   )
 where
 
@@ -103,13 +103,13 @@ import Control.Exception.Lens
 import Control.Monad
 import Control.Monad.IO.Class (MonadIO (..))
 import Control.Monad.Trans.Resource
-import Network.Google.Auth
-import Network.Google.Env
-import Network.Google.Internal.Body
-import Network.Google.Internal.HTTP
-import Network.Google.Internal.Logger
-import Network.Google.Prelude
-import Network.Google.Types
+import Gogol.Auth
+import Gogol.Env
+import Gogol.Internal.Body
+import Gogol.Internal.HTTP
+import Gogol.Internal.Logger
+import Gogol.Prelude
+import Gogol.Types
 import Network.HTTP.Conduit (newManager, tlsManagerSettings)
 
 -- | Send a request, returning the associated response if successful.
@@ -199,8 +199,8 @@ hoistError = either (liftIO . throwingM _Error) pure
 --
 -- > import Control.Lens           ((&), (.~), (<&>), (?~))
 -- > import Data.Text              (Text)
--- > import Network.Google
--- > import Network.Google.Storage
+-- > import Gogol
+-- > import Gogol.Storage
 -- > import System.IO              (stdout)
 -- >
 -- > import qualified Data.Text as Text
@@ -267,14 +267,14 @@ hoistError = either (liftIO . throwingM _Error) pure
 -- compile error.
 --
 -- You can use 'allow' or the 'envScopes' lens to specify the 'Env's set of scopes.
--- The various @gogol-*@ libraries export their individual scopes from @Network.Google.*"
+-- The various @gogol-*@ libraries export their individual scopes from @Gogol.*"
 -- and you can use the '(!)' combinator to combine these into a larger set.
 --
 -- For example:
 --
 -- > import Control.Lens ((<&>), (.~))
--- > import Network.Google
--- > import Network.Google.Monitoring
+-- > import Gogol
+-- > import Gogol.Monitoring
 -- >
 -- > main :: IO ()
 -- > main = do
@@ -296,8 +296,8 @@ hoistError = either (liftIO . throwingM _Error) pure
 --
 -- > import Control.Lens ((&), (.~))
 -- > import Control.Monad.Reader (local)
--- > import Network.Google
--- > import Network.Google.Compute
+-- > import Gogol
+-- > import Gogol.Compute
 -- >
 -- > local (override (computeService & serviceHost .~ "localhost")) $ do
 -- >    _ <- send $ instancesGet "project" "zone" "instance-id"
@@ -309,11 +309,11 @@ hoistError = either (liftIO . throwingM _Error) pure
 -- If you wish to manually specify 'Credentials' via 'newEnvWith', you can use one
 -- of the following supported credential mechanisms:
 --
--- * "Network.Google.Auth.InstalledApplication" - Applications installed on devices.
--- * "Network.Google.Auth.ServiceAccount" - Applications deployed to custom environments.
--- * "Network.Google.Auth.ApplicationDefault" - Applications deployed to App Engine (GAE) or Compute Engine (GCE).
+-- * "Gogol.Auth.InstalledApplication" - Applications installed on devices.
+-- * "Gogol.Auth.ServiceAccount" - Applications deployed to custom environments.
+-- * "Gogol.Auth.ApplicationDefault" - Applications deployed to App Engine (GAE) or Compute Engine (GCE).
 --
--- See "Network.Google.Auth" for more information.
+-- See "Gogol.Auth" for more information.
 
 -- $async
 -- Requests can be sent asynchronously, but due to guarantees about resource closure
@@ -322,7 +322,7 @@ hoistError = either (liftIO . throwingM _Error) pure
 -- $metadata
 --
 -- Google Compute metadata can be retrieve when running on GCE instances.
--- See the documentation in "Network.Google.Compute.Metadata" for the available
+-- See the documentation in "Gogol.Compute.Metadata" for the available
 -- functions.
 
 -- $logging

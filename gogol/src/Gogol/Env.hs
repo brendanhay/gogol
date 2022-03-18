@@ -6,15 +6,15 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
--- Module      : Network.Google.Env
+-- Module      : Gogol.Env
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
--- Environment and Google specific configuration for the "Network.Google" monad.
-module Network.Google.Env where
+-- Environment and Google specific configuration for the "Gogol" monad.
+module Gogol.Env where
 
 import Control.Lens (Lens', lens, (<>~), (?~))
 import Control.Monad.Catch (MonadCatch)
@@ -24,9 +24,9 @@ import Data.Function (on)
 import Data.Monoid (Dual (..), Endo (..))
 import Data.Proxy (Proxy (..))
 import GHC.TypeLits (Symbol)
-import Network.Google.Auth
-import Network.Google.Internal.Logger (Logger)
-import Network.Google.Types
+import Gogol.Auth
+import Gogol.Internal.Logger (Logger)
+import Gogol.Types
 import Network.HTTP.Conduit (Manager, newManager, tlsManagerSettings)
 
 -- | The environment containing the parameters required to make Google requests.
@@ -87,7 +87,7 @@ configure f = envOverride <>~ Dual (Endo f)
 --
 -- > override (gmailService & serviceHost .~ "localhost") env
 --
--- Or when using "Network.Google" with "Control.Monad.Reader" or "Control.Lens.Zoom"
+-- Or when using "Gogol" with "Control.Monad.Reader" or "Control.Lens.Zoom"
 -- and the 'ServiceConfig' lenses:
 --
 -- > local (override (computeService & serviceHost .~ "localhost")) $ do
@@ -123,7 +123,7 @@ timeout s = local (configure (serviceTimeout ?~ s))
 -- The 'Allow'ed 'OAuthScope's are used to authorize any @service_account@ that is
 -- found with the appropriate scopes. See the top-level module of each individual
 -- @gogol-*@ library for a list of available scopes, such as
--- @Network.Google.Compute.authComputeScope@.
+-- @Gogol.Compute.authComputeScope@.
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith', 'getApplicationDefault'.

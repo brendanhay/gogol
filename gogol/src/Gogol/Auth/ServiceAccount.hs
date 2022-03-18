@@ -2,7 +2,7 @@
 {-# LANGUAGE PolyKinds #-}
 
 -- |
--- Module      : Network.Google.Auth.ServiceAccount
+-- Module      : Gogol.Auth.ServiceAccount
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -16,7 +16,7 @@
 -- Google services to work with its own data rather than a specific user's data.
 --
 -- /See:/ <https://developers.google.com/identity/protocols/OAuth2ServiceAccount Service Account Documentation>.
-module Network.Google.Auth.ServiceAccount
+module Gogol.Auth.ServiceAccount
   ( ServiceAccount (..),
     AuthorizedUser (..),
     maxTokenLifetime,
@@ -37,14 +37,14 @@ import qualified Data.ByteString.Char8 as BS8
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
 import Data.Time.Clock.POSIX
-import Network.Google.Auth.Scope
+import Gogol.Auth.Scope
   ( AllowScopes (..),
     concatScopes,
   )
-import Network.Google.Compute.Metadata
-import Network.Google.Internal.Auth
-import Network.Google.Internal.Logger
-import Network.Google.Prelude hiding (buildText)
+import Gogol.Compute.Metadata
+import Gogol.Internal.Auth
+import Gogol.Internal.Logger
+import Gogol.Prelude hiding (buildText)
 import Network.HTTP.Conduit hiding (Request)
 import qualified Network.HTTP.Conduit as Client
 

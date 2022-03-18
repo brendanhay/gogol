@@ -1,19 +1,19 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- |
--- Module      : Network.Google.Internal.Body
+-- Module      : Gogol.Internal.Body
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Internal.Body where
+module Gogol.Internal.Body where
 
 import Control.Monad.IO.Class (MonadIO (..))
 import Data.Conduit.Binary (sourceFile)
 import Data.Maybe (fromMaybe)
 import qualified Data.Text as Text
-import Network.Google.Types (GBody (..))
+import Gogol.Types (GBody (..))
 import Network.HTTP.Conduit (requestBodySource)
 import Network.HTTP.Media (MediaType, parseAccept, (//))
 import qualified Network.Mime as MIME

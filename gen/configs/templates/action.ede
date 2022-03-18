@@ -15,7 +15,7 @@ module {{ action.ns }}
     , {{ action.type.name }}
     ) where
 
-import qualified Network.Google.Prelude as Core
+import qualified Gogol.Prelude as Core
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}

@@ -2,13 +2,13 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 -- |
--- Module      : Network.Google.Data.Base64
+-- Module      : Gogol.Data.Base64
 -- Copyright   : (c) 2013-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Data.Base64
+module Gogol.Data.Base64
   ( Base64 (..),
     _Base64,
   )
@@ -21,7 +21,7 @@ import qualified Data.ByteString.Base64 as Base64
 import Data.Hashable
 import qualified Data.Text.Encoding as Text
 import GHC.Generics (Generic)
-import Network.Google.Data.JSON (parseJSONText, toJSONText)
+import Gogol.Data.JSON (parseJSONText, toJSONText)
 import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
 
 -- | Raw bytes that will be transparently base64 encoded\/decoded

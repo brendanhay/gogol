@@ -6,13 +6,13 @@
 {-# LANGUAGE TypeFamilies #-}
 
 -- |
--- Module      : Network.Google.Internal.HTTP
+-- Module      : Gogol.Internal.HTTP
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Internal.HTTP where
+module Gogol.Internal.HTTP where
 
 import Control.Exception (Handler (..), catches, throwIO, toException)
 import Control.Lens ((%~), (&))
@@ -23,11 +23,11 @@ import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Builder as Build
 import GHC.Exts (toList)
-import Network.Google.Auth (AllowScopes, authorize)
-import Network.Google.Env (Env (..))
-import Network.Google.Internal.Logger (logDebug)
-import Network.Google.Internal.Multipart
-import Network.Google.Types
+import Gogol.Auth (AllowScopes, authorize)
+import Gogol.Env (Env (..))
+import Gogol.Internal.Logger (logDebug)
+import Gogol.Internal.Multipart
+import Gogol.Types
 import qualified Network.HTTP.Client.Conduit as Client
 import Network.HTTP.Conduit
 import Network.HTTP.Media (RenderHeader (..))

@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- |
--- Module      : Network.Google.Compute.Metadata
+-- Module      : Gogol.Compute.Metadata
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -13,8 +13,8 @@
 --
 -- This module contains functions for retrieving various Compute metadata from an
 -- instance\'s local metadata endpoint using 'MonadIO', prior to initialisation
--- of the environment used by the "Network.Google" monad.
-module Network.Google.Compute.Metadata
+-- of the environment used by the "Gogol" monad.
+module Gogol.Compute.Metadata
   ( -- * Google Compute Instance Check
     checkGCEVar,
     isGCE,
@@ -50,7 +50,7 @@ import Data.Char (toLower)
 import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Encoding as LText
-import Network.Google.Prelude (Text, (<>))
+import Gogol.Prelude (Text, (<>))
 import Network.HTTP.Client
   ( HttpException (..),
     HttpExceptionContent (..),

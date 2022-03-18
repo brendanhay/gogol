@@ -4,7 +4,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
--- Module      : Network.Google.Auth
+-- Module      : Gogol.Auth
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -13,7 +13,7 @@
 --
 -- Explicitly specify your Google credentials, or retrieve them
 -- from the underlying OS.
-module Network.Google.Auth
+module Gogol.Auth
   ( -- * Credentials
     Credentials (..),
 
@@ -70,7 +70,7 @@ module Network.Google.Auth
     ClientId (..),
 
     -- * Re-exported Modules
-    module Network.Google.Auth.Scope,
+    module Gogol.Auth.Scope,
   )
 where
 
@@ -79,15 +79,15 @@ import Control.Monad.Catch (MonadCatch)
 import Control.Monad.IO.Class (MonadIO (..))
 import Data.Time (getCurrentTime)
 import GHC.TypeLits (Symbol)
-import Network.Google.Auth.ApplicationDefault
-import Network.Google.Auth.InstalledApplication
-import Network.Google.Auth.Scope
-import Network.Google.Auth.ServiceAccount
-import Network.Google.Auth.TokenFile
-import Network.Google.Compute.Metadata (checkGCEVar)
-import Network.Google.Internal.Auth
-import Network.Google.Internal.Logger (Logger)
-import Network.Google.Prelude
+import Gogol.Auth.ApplicationDefault
+import Gogol.Auth.InstalledApplication
+import Gogol.Auth.Scope
+import Gogol.Auth.ServiceAccount
+import Gogol.Auth.TokenFile
+import Gogol.Compute.Metadata (checkGCEVar)
+import Gogol.Internal.Auth
+import Gogol.Internal.Logger (Logger)
+import Gogol.Prelude
 import Network.HTTP.Conduit (Manager)
 import qualified Network.HTTP.Conduit as Client
 import Network.HTTP.Types (hAuthorization)

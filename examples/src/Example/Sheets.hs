@@ -7,9 +7,9 @@ module Example.Sheets where
 import Control.Lens ((.~), (<&>))
 import Data.Aeson.Types
 import Data.Text (Text)
-import Network.Google
-import Network.Google.Resource.Sheets.Spreadsheets.Get
-import Network.Google.Sheets
+import Gogol
+import Gogol.Resource.Sheets.Spreadsheets.Get
+import Gogol.Sheets
 import System.IO (stdout)
 
 ---------------------------------------------------------------------------------

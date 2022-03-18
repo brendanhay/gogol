@@ -1,21 +1,21 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- |
--- Module      : Network.Google.Auth.TokenFile
+-- Module      : Gogol.Auth.TokenFile
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Auth.TokenFile where
+module Gogol.Auth.TokenFile where
 
 import Control.Monad.IO.Class (MonadIO (liftIO))
 import qualified Data.ByteString as ByteString
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text.Encoding
 import qualified Data.Time as Time
-import Network.Google.Internal.Auth
-import Network.Google.Types (AccessToken (..))
+import Gogol.Internal.Auth
+import Gogol.Types (AccessToken (..))
 
 serviceAccountTokenFile :: FilePath
 serviceAccountTokenFile = "/var/run/secrets/kubernetes.io/serviceaccount/token"
