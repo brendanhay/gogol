@@ -63,5 +63,5 @@ library
   {% endfor %}
 
   build-depends:
-      gogol-core == {{ coreVersion }}.*
+      gogol-core == {{ libraryVersion }}.*
     , base       >= 4.12 && < 5

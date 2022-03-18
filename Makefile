@@ -9,9 +9,7 @@ define version =
 $(shell sed -n 's/^version: *\([0-9]*\.[0-9]*\.[0-9]\).*$$/\1/p' $(1))
 endef
 
-VERSION        = $(shell sed -n 's/^version: *\(.*\)$$/\1/p' $(TOP)/gen/gogol-gen.cabal)
-CORE_VERSION   = $(call version,$(TOP)/core/gogol-core.cabal)
-CLIENT_VERSION = $(call version,$(TOP)/gen/gogol-gen.cabal)
+VERSION = $(call version,$(TOP)/lib/gogol-core/gogol-core.cabal)
 
 MODELS ?= $(shell find $(MODEL_DIR) -type f -name '*.json' | sort)
 
@@ -20,9 +18,7 @@ MODELS ?= $(shell find $(MODEL_DIR) -type f -name '*.json' | sort)
 gen: $(BIN)/gogol-gen $(MODEL_DIR)
 	$(BIN)/gogol-gen \
  --out=$(OUT_DIR) \
- --library-version=$(VERSION) \
- --client-version=$(CLIENT_VERSION) \
- --core-version=$(CORE_VERSION) \
+ --version=$(VERSION) \
  --services=configs/services \
  --templates=configs/templates \
  --assets=configs/assets \

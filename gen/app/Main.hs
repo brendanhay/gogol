@@ -25,7 +25,7 @@ data Opt = Opt
     _optServices :: Path,
     _optTemplates :: Path,
     _optAssets :: Path,
-    _optVersions :: Versions
+    _optVersion :: Version
   }
   deriving (Show)
 
@@ -66,31 +66,16 @@ parser =
           <> metavar "DIR"
           <> help "Directory containing static files to copy to generated libraries."
       )
-    <*> ( Versions
-            <$> option
-              version
-              ( long "library-version"
+    <*> option version
+              ( long "version"
                   <> metavar "VER"
                   <> help "Version of the library to generate."
               )
-            <*> option
-              version
-              ( long "client-version"
-                  <> metavar "VER"
-                  <> help "Client library version dependecy for examples."
-              )
-            <*> option
-              version
-              ( long "core-version"
-                  <> metavar "VER"
-                  <> help "Core library version dependency."
-              )
-        )
 
 isPath :: ReadM Path
 isPath = eitherReader (Right . fromText . Text.dropWhileEnd (== '/') . fromString)
 
-version :: ReadM (Version v)
+version :: ReadM Version
 version = eitherReader (Right . Version . Text.pack)
 
 options :: ParserInfo Opt
@@ -162,7 +147,7 @@ main = do
 
           say ("Successfully parsed '" % stext % "' API definition.") modelName
 
-          library <- hoistEither (runAST _optVersions definition)
+          library <- hoistEither (runAST _optVersion definition)
 
           say ("Creating " % stext % " package.") (library ^. dTitle)
 
@@ -173,7 +158,7 @@ main = do
           say
             ("Successfully rendered " % stext % "-" % fver % " package")
             (library ^. dName)
-            (library ^. libraryVersion)
+            (library ^. lVersion)
 
           copyDir _optAssets (Tree.root tree)
 

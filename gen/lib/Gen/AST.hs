@@ -7,10 +7,11 @@ import Gen.AST.Render (render)
 import Gen.AST.Solve (solve)
 import Gen.Types
 
-runAST :: Versions -> Service (Fix Schema) -> Either Error Library
+runAST :: Version -> Service (Fix Schema) -> Either Error Library
 runAST v s = evalState (runExceptT go) (initial s)
   where
     go = do
       gs <- flatten s
       (api, ds) <- render =<< solve gs
+
       pure $! Library v gs api ds
