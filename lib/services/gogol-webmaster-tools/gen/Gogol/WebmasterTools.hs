@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,103 +36,103 @@
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference>
 module Gogol.WebmasterTools
-  ( -- * Configuration
-    webmasterToolsService,
+    (
+    -- * Configuration
+      webmasterToolsService
 
     -- * OAuth Scopes
-    webmastersScope,
-    webmastersReadOnlyScope,
+    , webmastersScope
+    , webmastersReadOnlyScope
 
     -- * Resources
 
     -- ** webmasters.searchanalytics.query
-    WebmastersSearchanalyticsQueryResource,
-    newWebmastersSearchanalyticsQuery,
-    WebmastersSearchanalyticsQuery,
+    , WebmastersSearchanalyticsQueryResource
+    , newWebmastersSearchanalyticsQuery
+    , WebmastersSearchanalyticsQuery
 
     -- ** webmasters.sitemaps.delete
-    WebmastersSitemapsDeleteResource,
-    newWebmastersSitemapsDelete,
-    WebmastersSitemapsDelete,
+    , WebmastersSitemapsDeleteResource
+    , newWebmastersSitemapsDelete
+    , WebmastersSitemapsDelete
 
     -- ** webmasters.sitemaps.get
-    WebmastersSitemapsGetResource,
-    newWebmastersSitemapsGet,
-    WebmastersSitemapsGet,
+    , WebmastersSitemapsGetResource
+    , newWebmastersSitemapsGet
+    , WebmastersSitemapsGet
 
     -- ** webmasters.sitemaps.list
-    WebmastersSitemapsListResource,
-    newWebmastersSitemapsList,
-    WebmastersSitemapsList,
+    , WebmastersSitemapsListResource
+    , newWebmastersSitemapsList
+    , WebmastersSitemapsList
 
     -- ** webmasters.sitemaps.submit
-    WebmastersSitemapsSubmitResource,
-    newWebmastersSitemapsSubmit,
-    WebmastersSitemapsSubmit,
+    , WebmastersSitemapsSubmitResource
+    , newWebmastersSitemapsSubmit
+    , WebmastersSitemapsSubmit
 
     -- ** webmasters.sites.add
-    WebmastersSitesAddResource,
-    newWebmastersSitesAdd,
-    WebmastersSitesAdd,
+    , WebmastersSitesAddResource
+    , newWebmastersSitesAdd
+    , WebmastersSitesAdd
 
     -- ** webmasters.sites.delete
-    WebmastersSitesDeleteResource,
-    newWebmastersSitesDelete,
-    WebmastersSitesDelete,
+    , WebmastersSitesDeleteResource
+    , newWebmastersSitesDelete
+    , WebmastersSitesDelete
 
     -- ** webmasters.sites.get
-    WebmastersSitesGetResource,
-    newWebmastersSitesGet,
-    WebmastersSitesGet,
+    , WebmastersSitesGetResource
+    , newWebmastersSitesGet
+    , WebmastersSitesGet
 
     -- ** webmasters.sites.list
-    WebmastersSitesListResource,
-    newWebmastersSitesList,
-    WebmastersSitesList,
+    , WebmastersSitesListResource
+    , newWebmastersSitesList
+    , WebmastersSitesList
 
     -- * Types
 
     -- ** ApiDataRow
-    ApiDataRow (..),
-    newApiDataRow,
+    , ApiDataRow (..)
+    , newApiDataRow
 
     -- ** ApiDimensionFilter
-    ApiDimensionFilter (..),
-    newApiDimensionFilter,
+    , ApiDimensionFilter (..)
+    , newApiDimensionFilter
 
     -- ** ApiDimensionFilterGroup
-    ApiDimensionFilterGroup (..),
-    newApiDimensionFilterGroup,
+    , ApiDimensionFilterGroup (..)
+    , newApiDimensionFilterGroup
 
     -- ** SearchAnalyticsQueryRequest
-    SearchAnalyticsQueryRequest (..),
-    newSearchAnalyticsQueryRequest,
+    , SearchAnalyticsQueryRequest (..)
+    , newSearchAnalyticsQueryRequest
 
     -- ** SearchAnalyticsQueryResponse
-    SearchAnalyticsQueryResponse (..),
-    newSearchAnalyticsQueryResponse,
+    , SearchAnalyticsQueryResponse (..)
+    , newSearchAnalyticsQueryResponse
 
     -- ** SitemapsListResponse
-    SitemapsListResponse (..),
-    newSitemapsListResponse,
+    , SitemapsListResponse (..)
+    , newSitemapsListResponse
 
     -- ** SitesListResponse
-    SitesListResponse (..),
-    newSitesListResponse,
+    , SitesListResponse (..)
+    , newSitesListResponse
 
     -- ** WmxSite
-    WmxSite (..),
-    newWmxSite,
+    , WmxSite (..)
+    , newWmxSite
 
     -- ** WmxSitemap
-    WmxSitemap (..),
-    newWmxSitemap,
+    , WmxSitemap (..)
+    , newWmxSitemap
 
     -- ** WmxSitemapContent
-    WmxSitemapContent (..),
-    newWmxSitemapContent,
-  )
-where
+    , WmxSitemapContent (..)
+    , newWmxSitemapContent
+    ) where
 
 import Gogol.WebmasterTools.Types
 import Gogol.WebmasterTools.Webmasters.Searchanalytics.Query
