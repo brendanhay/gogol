@@ -19,19 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.Reports.Types
+-- Module      : Gogol.Admin.Reports
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Admin.Reports.Types
+--
+-- Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
+--
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference>
+module Gogol.Admin.Reports
   ( -- * Configuration
     adminReportsService,
 
     -- * OAuth Scopes
     adminReportsAuditReadOnlyScope,
     adminReportsUsageReadOnlyScope,
+
+    -- * Resources
+
+    -- ** admin.channels.stop
+    AdminChannelsStopResource,
+    newAdminChannelsStop,
+    AdminChannelsStop,
+
+    -- ** reports.activities.list
+    ReportsActivitiesListResource,
+    newReportsActivitiesList,
+    ReportsActivitiesList,
+
+    -- ** reports.activities.watch
+    ReportsActivitiesWatchResource,
+    newReportsActivitiesWatch,
+    ReportsActivitiesWatch,
+
+    -- ** reports.customerUsageReports.get
+    ReportsCustomerUsageReportsGetResource,
+    newReportsCustomerUsageReportsGet,
+    ReportsCustomerUsageReportsGet,
+
+    -- ** reports.entityUsageReports.get
+    ReportsEntityUsageReportsGetResource,
+    newReportsEntityUsageReportsGet,
+    ReportsEntityUsageReportsGet,
+
+    -- ** reports.userUsageReport.get
+    ReportsUserUsageReportGetResource,
+    newReportsUserUsageReportGet,
+    ReportsUserUsageReportGet,
 
     -- * Types
 
@@ -121,21 +157,10 @@ module Network.Google.Admin.Reports.Types
   )
 where
 
-import Network.Google.Admin.Reports.Internal.Product
-import Network.Google.Admin.Reports.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @reports_v1@ of the Admin SDK API. This contains the host and root path used as a starting point for constructing service requests.
-adminReportsService :: Core.ServiceConfig
-adminReportsService =
-  Core.defaultService
-    (Core.ServiceId "admin:reports_v1")
-    "admin.googleapis.com"
-
--- | View audit reports for your G Suite domain
-adminReportsAuditReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
-adminReportsAuditReadOnlyScope = Core.Proxy
-
--- | View usage reports for your G Suite domain
-adminReportsUsageReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
-adminReportsUsageReadOnlyScope = Core.Proxy
+import Gogol.Admin.Reports.Activities.List
+import Gogol.Admin.Reports.Activities.Watch
+import Gogol.Admin.Reports.Admin.Channels.Stop
+import Gogol.Admin.Reports.CustomerUsageReports.Get
+import Gogol.Admin.Reports.EntityUsageReports.Get
+import Gogol.Admin.Reports.Types
+import Gogol.Admin.Reports.UserUsageReport.Get

@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.Reports.Internal.Product
+-- Module      : Gogol.Admin.Reports.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Admin.Reports.Internal.Product
+module Gogol.Admin.Reports.Internal.Product
   ( -- * Activities
     Activities (..),
     newActivities,
@@ -100,8 +100,8 @@ module Network.Google.Admin.Reports.Internal.Product
   )
 where
 
-import Network.Google.Admin.Reports.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.Reports.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | JSON template for a collection of activities.
 --

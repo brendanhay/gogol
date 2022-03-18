@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.Reports.Activities.Watch
+-- Module      : Gogol.Admin.Reports.Activities.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Start receiving notifications for account activities. For more information, see Receiving Push Notifications.
+-- Retrieves a list of activities for a specific customer\'s account and application such as the Admin console application or the Google Drive application. For more information, see the guides for administrator and Google Drive activity reports. For more information about the activity report\'s parameters, see the activity parameters reference guides.
 --
--- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @reports.activities.watch@.
-module Network.Google.Admin.Reports.Activities.Watch
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @reports.activities.list@.
+module Gogol.Admin.Reports.Activities.List
   ( -- * Resource
-    ReportsActivitiesWatchResource,
+    ReportsActivitiesListResource,
 
     -- ** Constructing a Request
-    newReportsActivitiesWatch,
-    ReportsActivitiesWatch,
+    newReportsActivitiesList,
+    ReportsActivitiesList,
   )
 where
 
-import Network.Google.Admin.Reports.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.Reports.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @reports.activities.watch@ method which the
--- 'ReportsActivitiesWatch' request conforms to.
-type ReportsActivitiesWatchResource =
+-- | A resource alias for @reports.activities.list@ method which the
+-- 'ReportsActivitiesList' request conforms to.
+type ReportsActivitiesListResource =
   "admin"
     Core.:> "reports"
     Core.:> "v1"
@@ -54,8 +54,7 @@ type ReportsActivitiesWatchResource =
     Core.:> "applications"
     Core.:> Core.Capture
               "applicationName"
-              ActivitiesWatchApplicationName
-    Core.:> "watch"
+              ActivitiesListApplicationName
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "actorIpAddress" Core.Text
@@ -67,9 +66,7 @@ type ReportsActivitiesWatchResource =
     Core.:> Core.QueryParam "groupIdFilter" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "orgUnitID" Core.Text
-    Core.:> Core.QueryParam
-              "pageToken"
-              Core.Text
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam
               "startTime"
               Core.Text
@@ -82,17 +79,14 @@ type ReportsActivitiesWatchResource =
     Core.:> Core.QueryParam
               "alt"
               Core.AltJSON
-    Core.:> Core.ReqBody
+    Core.:> Core.Get
               '[Core.JSON]
-              Channel
-    Core.:> Core.Post
-              '[Core.JSON]
-              Channel
+              Activities
 
--- | Start receiving notifications for account activities. For more information, see Receiving Push Notifications.
+-- | Retrieves a list of activities for a specific customer\'s account and application such as the Admin console application or the Google Drive application. For more information, see the guides for administrator and Google Drive activity reports. For more information about the activity report\'s parameters, see the activity parameters reference guides.
 --
--- /See:/ 'newReportsActivitiesWatch' smart constructor.
-data ReportsActivitiesWatch = ReportsActivitiesWatch
+-- /See:/ 'newReportsActivitiesList' smart constructor.
+data ReportsActivitiesList = ReportsActivitiesList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -100,7 +94,7 @@ data ReportsActivitiesWatch = ReportsActivitiesWatch
     -- | The Internet Protocol (IP) Address of host where the event was performed. This is an additional way to filter a report\'s summary using the IP address of the user whose activity is being reported. This IP address may or may not reflect the user\'s physical location. For example, the IP address can be the user\'s proxy server\'s address or a virtual private network (VPN) address. This parameter supports both IPv4 and IPv6 address versions.
     actorIpAddress :: (Core.Maybe Core.Text),
     -- | Application name for which the events are to be retrieved.
-    applicationName :: ActivitiesWatchApplicationName,
+    applicationName :: ActivitiesListApplicationName,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | The unique ID of the customer to retrieve data for.
@@ -121,8 +115,6 @@ data ReportsActivitiesWatch = ReportsActivitiesWatch
     orgUnitID :: Core.Text,
     -- | The token to specify next page. A report with multiple pages has a @nextPageToken@ property in the response. In your follow-on request getting the next page of the report, enter the @nextPageToken@ value in the @pageToken@ query string.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Channel,
     -- | Sets the beginning of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The report returns all activities from @startTime@ until @endTime@. The @startTime@ must be before the @endTime@ (if specified) and the current time when the request is made, or the API returns an error.
     startTime :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -134,17 +126,15 @@ data ReportsActivitiesWatch = ReportsActivitiesWatch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ReportsActivitiesWatch' with the minimum fields required to make a request.
-newReportsActivitiesWatch ::
+-- | Creates a value of 'ReportsActivitiesList' with the minimum fields required to make a request.
+newReportsActivitiesList ::
   -- |  Application name for which the events are to be retrieved. See 'applicationName'.
-  ActivitiesWatchApplicationName ->
-  -- |  Multipart request metadata. See 'payload'.
-  Channel ->
+  ActivitiesListApplicationName ->
   -- |  Represents the profile ID or the user email for which the data should be filtered. Can be @all@ for all information, or @userKey@ for a user\'s unique Google Workspace profile ID or their primary email address. Must not be a deleted user. For a deleted user, call @users.list@ in Directory API with @showDeleted=true@, then use the returned @ID@ as the @userKey@. See 'userKey'.
   Core.Text ->
-  ReportsActivitiesWatch
-newReportsActivitiesWatch applicationName payload userKey =
-  ReportsActivitiesWatch
+  ReportsActivitiesList
+newReportsActivitiesList applicationName userKey =
+  ReportsActivitiesList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       actorIpAddress = Core.Nothing,
@@ -158,19 +148,18 @@ newReportsActivitiesWatch applicationName payload userKey =
       maxResults = 1000,
       orgUnitID = "",
       pageToken = Core.Nothing,
-      payload = payload,
       startTime = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
       userKey = userKey
     }
 
-instance Core.GoogleRequest ReportsActivitiesWatch where
-  type Rs ReportsActivitiesWatch = Channel
+instance Core.GoogleRequest ReportsActivitiesList where
+  type Rs ReportsActivitiesList = Activities
   type
-    Scopes ReportsActivitiesWatch =
+    Scopes ReportsActivitiesList =
       '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
-  requestClient ReportsActivitiesWatch {..} =
+  requestClient ReportsActivitiesList {..} =
     go
       userKey
       applicationName
@@ -190,12 +179,11 @@ instance Core.GoogleRequest ReportsActivitiesWatch where
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       adminReportsService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ReportsActivitiesWatchResource
+              Core.Proxy ReportsActivitiesListResource
           )
           Core.mempty

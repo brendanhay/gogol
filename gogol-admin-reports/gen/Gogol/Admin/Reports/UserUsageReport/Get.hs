@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.Reports.UserUsageReport.Get
+-- Module      : Gogol.Admin.Reports.UserUsageReport.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves a report which is a collection of properties and statistics for a set of users with the account. For more information, see the User Usage Report guide. For more information about the user report\'s parameters, see the Users Usage parameters reference guides.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @reports.userUsageReport.get@.
-module Network.Google.Admin.Reports.UserUsageReport.Get
+module Gogol.Admin.Reports.UserUsageReport.Get
   ( -- * Resource
     ReportsUserUsageReportGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Admin.Reports.UserUsageReport.Get
   )
 where
 
-import Network.Google.Admin.Reports.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.Reports.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reports.userUsageReport.get@ method which the
 -- 'ReportsUserUsageReportGet' request conforms to.

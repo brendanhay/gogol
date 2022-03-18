@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Admin.Reports
-    Network.Google.Admin.Reports.Activities.List
-    Network.Google.Admin.Reports.Activities.Watch
-    Network.Google.Admin.Reports.Admin.Channels.Stop
-    Network.Google.Admin.Reports.CustomerUsageReports.Get
-    Network.Google.Admin.Reports.EntityUsageReports.Get
-    Network.Google.Admin.Reports.Types
-    Network.Google.Admin.Reports.UserUsageReport.Get
+    Gogol.Admin.Reports
+    Gogol.Admin.Reports.Activities.List
+    Gogol.Admin.Reports.Activities.Watch
+    Gogol.Admin.Reports.Admin.Channels.Stop
+    Gogol.Admin.Reports.CustomerUsageReports.Get
+    Gogol.Admin.Reports.EntityUsageReports.Get
+    Gogol.Admin.Reports.Types
+    Gogol.Admin.Reports.UserUsageReport.Get
 
   other-modules:
-    Network.Google.Admin.Reports.Internal.Product
-    Network.Google.Admin.Reports.Internal.Sum
+    Gogol.Admin.Reports.Internal.Product
+    Gogol.Admin.Reports.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.Reports.Admin.Channels.Stop
+-- Module      : Gogol.Admin.Reports.Admin.Channels.Stop
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Stop watching resources through this channel.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @admin.channels.stop@.
-module Network.Google.Admin.Reports.Admin.Channels.Stop
+module Gogol.Admin.Reports.Admin.Channels.Stop
   ( -- * Resource
     AdminChannelsStopResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Admin.Reports.Admin.Channels.Stop
   )
 where
 
-import Network.Google.Admin.Reports.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.Reports.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @admin.channels.stop@ method which the
 -- 'AdminChannelsStop' request conforms to.
