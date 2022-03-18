@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-accesscontextmanager
-version:            0.5.0
-synopsis:           Google Access Context Manager SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-accesscontextmanager
+version:               0.5.0
+synopsis:              Google Access Context Manager SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  An API for setting attribute based access control to requests to GCP services.
+    An API for setting attribute based access control to requests to GCP services.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,59 +28,62 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.AccessContextManager
-    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Create
-    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Delete
-    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Get
-    Gogol.AccessContextManager.AccessPolicies.AccessLevels.List
-    Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
-    Gogol.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
-    Gogol.AccessContextManager.AccessPolicies.AccessLevels.TestIamPermissions
-    Gogol.AccessContextManager.AccessPolicies.Create
-    Gogol.AccessContextManager.AccessPolicies.Delete
-    Gogol.AccessContextManager.AccessPolicies.Get
-    Gogol.AccessContextManager.AccessPolicies.GetIamPolicy
-    Gogol.AccessContextManager.AccessPolicies.List
-    Gogol.AccessContextManager.AccessPolicies.Patch
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Create
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Get
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.List
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
-    Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.TestIamPermissions
-    Gogol.AccessContextManager.AccessPolicies.SetIamPolicy
-    Gogol.AccessContextManager.AccessPolicies.TestIamPermissions
-    Gogol.AccessContextManager.Operations.Cancel
-    Gogol.AccessContextManager.Operations.Delete
-    Gogol.AccessContextManager.Operations.Get
-    Gogol.AccessContextManager.Operations.List
-    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Create
-    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
-    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Get
-    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.List
-    Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
-    Gogol.AccessContextManager.Types
+      Gogol.AccessContextManager
+    , Gogol.AccessContextManager.AccessPolicies.AccessLevels.Create
+    , Gogol.AccessContextManager.AccessPolicies.AccessLevels.Delete
+    , Gogol.AccessContextManager.AccessPolicies.AccessLevels.Get
+    , Gogol.AccessContextManager.AccessPolicies.AccessLevels.List
+    , Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
+    , Gogol.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
+    , Gogol.AccessContextManager.AccessPolicies.AccessLevels.TestIamPermissions
+    , Gogol.AccessContextManager.AccessPolicies.Create
+    , Gogol.AccessContextManager.AccessPolicies.Delete
+    , Gogol.AccessContextManager.AccessPolicies.Get
+    , Gogol.AccessContextManager.AccessPolicies.GetIamPolicy
+    , Gogol.AccessContextManager.AccessPolicies.List
+    , Gogol.AccessContextManager.AccessPolicies.Patch
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Create
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Get
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.List
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
+    , Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.TestIamPermissions
+    , Gogol.AccessContextManager.AccessPolicies.SetIamPolicy
+    , Gogol.AccessContextManager.AccessPolicies.TestIamPermissions
+    , Gogol.AccessContextManager.Operations.Cancel
+    , Gogol.AccessContextManager.Operations.Delete
+    , Gogol.AccessContextManager.Operations.Get
+    , Gogol.AccessContextManager.Operations.List
+    , Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Create
+    , Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
+    , Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Get
+    , Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.List
+    , Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
+    , Gogol.AccessContextManager.Types
 
   other-modules:
-    Gogol.AccessContextManager.Internal.Product
-    Gogol.AccessContextManager.Internal.Sum
+      Gogol.AccessContextManager.Internal.Product
+    , Gogol.AccessContextManager.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
