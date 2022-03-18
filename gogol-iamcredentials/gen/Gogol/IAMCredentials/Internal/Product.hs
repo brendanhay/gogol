@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAMCredentials.Internal.Product
+-- Module      : Gogol.IAMCredentials.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.IAMCredentials.Internal.Product
+module Gogol.IAMCredentials.Internal.Product
   ( -- * GenerateAccessTokenRequest
     GenerateAccessTokenRequest (..),
     newGenerateAccessTokenRequest,
@@ -60,8 +60,8 @@ module Network.Google.IAMCredentials.Internal.Product
   )
 where
 
-import Network.Google.IAMCredentials.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.IAMCredentials.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 --
 -- /See:/ 'newGenerateAccessTokenRequest' smart constructor.

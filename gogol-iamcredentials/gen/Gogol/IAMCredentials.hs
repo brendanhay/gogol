@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAMCredentials
+-- Module      : Gogol.IAMCredentials
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates short-lived credentials for impersonating IAM service accounts. To enable this API, you must enable the IAM API (iam.googleapis.com).
 --
 -- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference>
-module Network.Google.IAMCredentials
+module Gogol.IAMCredentials
   ( -- * Configuration
     iAMCredentialsService,
 
@@ -97,8 +97,8 @@ module Network.Google.IAMCredentials
   )
 where
 
-import Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
-import Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
-import Network.Google.IAMCredentials.Projects.ServiceAccounts.SignBlob
-import Network.Google.IAMCredentials.Projects.ServiceAccounts.SignJwt
-import Network.Google.IAMCredentials.Types
+import Gogol.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
+import Gogol.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
+import Gogol.IAMCredentials.Projects.ServiceAccounts.SignBlob
+import Gogol.IAMCredentials.Projects.ServiceAccounts.SignJwt
+import Gogol.IAMCredentials.Types

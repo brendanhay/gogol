@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
+-- Module      : Gogol.IAMCredentials.Projects.ServiceAccounts.SignBlob
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates an OpenID Connect ID token for a service account.
+-- Signs a blob using a service account\'s system-managed private key.
 --
--- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference> for @iamcredentials.projects.serviceAccounts.generateIdToken@.
-module Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
+-- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference> for @iamcredentials.projects.serviceAccounts.signBlob@.
+module Gogol.IAMCredentials.Projects.ServiceAccounts.SignBlob
   ( -- * Resource
-    IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource,
+    IAMCredentialsProjectsServiceAccountsSignBlobResource,
 
     -- ** Constructing a Request
-    newIAMCredentialsProjectsServiceAccountsGenerateIdToken,
-    IAMCredentialsProjectsServiceAccountsGenerateIdToken,
+    newIAMCredentialsProjectsServiceAccountsSignBlob,
+    IAMCredentialsProjectsServiceAccountsSignBlob,
   )
 where
 
-import Network.Google.IAMCredentials.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAMCredentials.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @iamcredentials.projects.serviceAccounts.generateIdToken@ method which the
--- 'IAMCredentialsProjectsServiceAccountsGenerateIdToken' request conforms to.
-type IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource =
+-- | A resource alias for @iamcredentials.projects.serviceAccounts.signBlob@ method which the
+-- 'IAMCredentialsProjectsServiceAccountsSignBlob' request conforms to.
+type IAMCredentialsProjectsServiceAccountsSignBlobResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "generateIdToken" Core.Text
+    Core.:> Core.CaptureMode "name" "signBlob" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] GenerateIdTokenRequest
-    Core.:> Core.Post '[Core.JSON] GenerateIdTokenResponse
+    Core.:> Core.ReqBody '[Core.JSON] SignBlobRequest
+    Core.:> Core.Post '[Core.JSON] SignBlobResponse
 
--- | Generates an OpenID Connect ID token for a service account.
+-- | Signs a blob using a service account\'s system-managed private key.
 --
--- /See:/ 'newIAMCredentialsProjectsServiceAccountsGenerateIdToken' smart constructor.
-data IAMCredentialsProjectsServiceAccountsGenerateIdToken = IAMCredentialsProjectsServiceAccountsGenerateIdToken
+-- /See:/ 'newIAMCredentialsProjectsServiceAccountsSignBlob' smart constructor.
+data IAMCredentialsProjectsServiceAccountsSignBlob = IAMCredentialsProjectsServiceAccountsSignBlob
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -69,7 +69,7 @@ data IAMCredentialsProjectsServiceAccountsGenerateIdToken = IAMCredentialsProjec
     -- | Required. The resource name of the service account for which the credentials are requested, in the following format: @projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}@. The @-@ wildcard character is required; replacing it with a project ID is invalid.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: GenerateIdTokenRequest,
+    payload :: SignBlobRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,15 +77,15 @@ data IAMCredentialsProjectsServiceAccountsGenerateIdToken = IAMCredentialsProjec
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'IAMCredentialsProjectsServiceAccountsGenerateIdToken' with the minimum fields required to make a request.
-newIAMCredentialsProjectsServiceAccountsGenerateIdToken ::
+-- | Creates a value of 'IAMCredentialsProjectsServiceAccountsSignBlob' with the minimum fields required to make a request.
+newIAMCredentialsProjectsServiceAccountsSignBlob ::
   -- |  Required. The resource name of the service account for which the credentials are requested, in the following format: @projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}@. The @-@ wildcard character is required; replacing it with a project ID is invalid. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  GenerateIdTokenRequest ->
-  IAMCredentialsProjectsServiceAccountsGenerateIdToken
-newIAMCredentialsProjectsServiceAccountsGenerateIdToken name payload =
-  IAMCredentialsProjectsServiceAccountsGenerateIdToken
+  SignBlobRequest ->
+  IAMCredentialsProjectsServiceAccountsSignBlob
+newIAMCredentialsProjectsServiceAccountsSignBlob name payload =
+  IAMCredentialsProjectsServiceAccountsSignBlob
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -97,18 +97,17 @@ newIAMCredentialsProjectsServiceAccountsGenerateIdToken name payload =
 
 instance
   Core.GoogleRequest
-    IAMCredentialsProjectsServiceAccountsGenerateIdToken
+    IAMCredentialsProjectsServiceAccountsSignBlob
   where
   type
-    Rs
-      IAMCredentialsProjectsServiceAccountsGenerateIdToken =
-      GenerateIdTokenResponse
+    Rs IAMCredentialsProjectsServiceAccountsSignBlob =
+      SignBlobResponse
   type
     Scopes
-      IAMCredentialsProjectsServiceAccountsGenerateIdToken =
+      IAMCredentialsProjectsServiceAccountsSignBlob =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    IAMCredentialsProjectsServiceAccountsGenerateIdToken {..} =
+    IAMCredentialsProjectsServiceAccountsSignBlob {..} =
       go
         name
         xgafv
@@ -124,6 +123,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource
+                  IAMCredentialsProjectsServiceAccountsSignBlobResource
             )
             Core.mempty
