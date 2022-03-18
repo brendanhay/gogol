@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,14 +30,14 @@
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.liens.get@.
 module Gogol.ResourceManager.Cloudresourcemanager.Liens.Get
-    (
-    -- * Resource
-      CloudresourcemanagerLiensGetResource
+  ( -- * Resource
+    CloudresourcemanagerLiensGetResource,
 
     -- ** Constructing a Request
-    , newCloudresourcemanagerLiensGet
-    , CloudresourcemanagerLiensGet
-    ) where
+    newCloudresourcemanagerLiensGet,
+    CloudresourcemanagerLiensGet,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ResourceManager.Types
@@ -51,66 +45,74 @@ import Gogol.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.liens.get@ method which the
 -- 'CloudresourcemanagerLiensGet' request conforms to.
 type CloudresourcemanagerLiensGetResource =
-     "v3" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Get '[Core.JSON] Lien
+  "v3"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Lien
 
 -- | Retrieve a Lien by @name@. Callers of this method will require permission on the @parent@ resource. For example, a Lien with a @parent@ of @projects\/1234@ requires permission @resourcemanager.projects.get@
 --
 -- /See:/ 'newCloudresourcemanagerLiensGet' smart constructor.
 data CloudresourcemanagerLiensGet = CloudresourcemanagerLiensGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The name\/identifier of the Lien.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The name\/identifier of the Lien.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudresourcemanagerLiensGet' with the minimum fields required to make a request.
-newCloudresourcemanagerLiensGet 
-    ::  Core.Text
-       -- ^  Required. The name\/identifier of the Lien. See 'name'.
-    -> CloudresourcemanagerLiensGet
+newCloudresourcemanagerLiensGet ::
+  -- |  Required. The name\/identifier of the Lien. See 'name'.
+  Core.Text ->
+  CloudresourcemanagerLiensGet
 newCloudresourcemanagerLiensGet name =
   CloudresourcemanagerLiensGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           CloudresourcemanagerLiensGet
-         where
-        type Rs CloudresourcemanagerLiensGet = Lien
-        type Scopes CloudresourcemanagerLiensGet =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient CloudresourcemanagerLiensGet{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              resourceManagerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy CloudresourcemanagerLiensGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    CloudresourcemanagerLiensGet
+  where
+  type Rs CloudresourcemanagerLiensGet = Lien
+  type
+    Scopes CloudresourcemanagerLiensGet =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/cloud-platform.read-only"
+       ]
+  requestClient CloudresourcemanagerLiensGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      resourceManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudresourcemanagerLiensGetResource
+          )
+          Core.mempty

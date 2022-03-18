@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ResourceManager.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -55,8 +44,7 @@ module Gogol.ResourceManager.Internal.Sum
 
     -- * CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType
     CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType
-      (
-        CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
+      ( CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
         CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_Create,
         CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_Move,
         ..
@@ -64,8 +52,7 @@ module Gogol.ResourceManager.Internal.Sum
 
     -- * CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType
     CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType
-      (
-        CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
+      ( CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
         CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_Create,
         CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_Move,
         ..
@@ -73,8 +60,7 @@ module Gogol.ResourceManager.Internal.Sum
 
     -- * Folder_State
     Folder_State
-      (
-        Folder_State_STATEUNSPECIFIED,
+      ( Folder_State_STATEUNSPECIFIED,
         Folder_State_Active,
         Folder_State_DELETEREQUESTED,
         ..
@@ -82,8 +68,7 @@ module Gogol.ResourceManager.Internal.Sum
 
     -- * FolderOperation_OperationType
     FolderOperation_OperationType
-      (
-        FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
+      ( FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
         FolderOperation_OperationType_Create,
         FolderOperation_OperationType_Move,
         ..
@@ -91,8 +76,7 @@ module Gogol.ResourceManager.Internal.Sum
 
     -- * FolderOperationError_ErrorMessageId
     FolderOperationError_ErrorMessageId
-      (
-        FolderOperationError_ErrorMessageId_ERRORTYPEUNSPECIFIED,
+      ( FolderOperationError_ErrorMessageId_ERRORTYPEUNSPECIFIED,
         FolderOperationError_ErrorMessageId_ACTIVEFOLDERHEIGHTVIOLATION,
         FolderOperationError_ErrorMessageId_MAXCHILDFOLDERSVIOLATION,
         FolderOperationError_ErrorMessageId_FOLDERNAMEUNIQUENESSVIOLATION,
@@ -107,8 +91,7 @@ module Gogol.ResourceManager.Internal.Sum
 
     -- * Organization_State
     Organization_State
-      (
-        Organization_State_STATEUNSPECIFIED,
+      ( Organization_State_STATEUNSPECIFIED,
         Organization_State_Active,
         Organization_State_DELETEREQUESTED,
         ..
@@ -116,28 +99,28 @@ module Gogol.ResourceManager.Internal.Sum
 
     -- * Project_State
     Project_State
-      (
-        Project_State_STATEUNSPECIFIED,
+      ( Project_State_STATEUNSPECIFIED,
         Project_State_Active,
         Project_State_DELETEREQUESTED,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -150,20 +133,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -186,20 +170,21 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | The type of this operation.
-newtype CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType = CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType { fromCloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType = CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType {fromCloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Operation type not specified.
 pattern CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED :: CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType
@@ -217,20 +202,21 @@ pattern CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_Op
   CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
   CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_Create,
   CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType_Move,
-  CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType #-}
+  CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType
+  #-}
 
 -- | The type of this operation.
-newtype CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType = CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType { fromCloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType = CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType {fromCloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Operation type not specified.
 pattern CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED :: CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType
@@ -248,20 +234,21 @@ pattern CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_Ope
   CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
   CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_Create,
   CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType_Move,
-  CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType #-}
+  CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType
+  #-}
 
 -- | Output only. The lifecycle state of the folder. Updates to the state must be performed using DeleteFolder and UndeleteFolder.
-newtype Folder_State = Folder_State { fromFolder_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Folder_State = Folder_State {fromFolder_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified state.
 pattern Folder_State_STATEUNSPECIFIED :: Folder_State
@@ -279,20 +266,21 @@ pattern Folder_State_DELETEREQUESTED = Folder_State "DELETE_REQUESTED"
   Folder_State_STATEUNSPECIFIED,
   Folder_State_Active,
   Folder_State_DELETEREQUESTED,
-  Folder_State #-}
+  Folder_State
+  #-}
 
 -- | The type of this operation.
-newtype FolderOperation_OperationType = FolderOperation_OperationType { fromFolderOperation_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FolderOperation_OperationType = FolderOperation_OperationType {fromFolderOperation_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Operation type not specified.
 pattern FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED :: FolderOperation_OperationType
@@ -310,20 +298,21 @@ pattern FolderOperation_OperationType_Move = FolderOperation_OperationType "MOVE
   FolderOperation_OperationType_OPERATIONTYPEUNSPECIFIED,
   FolderOperation_OperationType_Create,
   FolderOperation_OperationType_Move,
-  FolderOperation_OperationType #-}
+  FolderOperation_OperationType
+  #-}
 
 -- | The type of operation error experienced.
-newtype FolderOperationError_ErrorMessageId = FolderOperationError_ErrorMessageId { fromFolderOperationError_ErrorMessageId :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FolderOperationError_ErrorMessageId = FolderOperationError_ErrorMessageId {fromFolderOperationError_ErrorMessageId :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The error type was unrecognized or unspecified.
 pattern FolderOperationError_ErrorMessageId_ERRORTYPEUNSPECIFIED :: FolderOperationError_ErrorMessageId
@@ -376,20 +365,21 @@ pattern FolderOperationError_ErrorMessageId_DELETEDFOLDERHEIGHTVIOLATION = Folde
   FolderOperationError_ErrorMessageId_FOLDERBEINGMOVEDVIOLATION,
   FolderOperationError_ErrorMessageId_FOLDERTODELETENONEMPTYVIOLATION,
   FolderOperationError_ErrorMessageId_DELETEDFOLDERHEIGHTVIOLATION,
-  FolderOperationError_ErrorMessageId #-}
+  FolderOperationError_ErrorMessageId
+  #-}
 
 -- | Output only. The organization\'s current lifecycle state.
-newtype Organization_State = Organization_State { fromOrganization_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Organization_State = Organization_State {fromOrganization_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified state. This is only useful for distinguishing unset values.
 pattern Organization_State_STATEUNSPECIFIED :: Organization_State
@@ -407,20 +397,21 @@ pattern Organization_State_DELETEREQUESTED = Organization_State "DELETE_REQUESTE
   Organization_State_STATEUNSPECIFIED,
   Organization_State_Active,
   Organization_State_DELETEREQUESTED,
-  Organization_State #-}
+  Organization_State
+  #-}
 
 -- | Output only. The project lifecycle state.
-newtype Project_State = Project_State { fromProject_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Project_State = Project_State {fromProject_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified state. This is only used\/useful for distinguishing unset values.
 pattern Project_State_STATEUNSPECIFIED :: Project_State
@@ -438,4 +429,5 @@ pattern Project_State_DELETEREQUESTED = Project_State "DELETE_REQUESTED"
   Project_State_STATEUNSPECIFIED,
   Project_State_Active,
   Project_State_DELETEREQUESTED,
-  Project_State #-}
+  Project_State
+  #-}
