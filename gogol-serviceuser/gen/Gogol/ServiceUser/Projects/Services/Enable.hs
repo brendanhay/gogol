@@ -19,65 +19,63 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUser.Projects.Services.Disable
+-- Module      : Gogol.ServiceUser.Projects.Services.Enable
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disable a service so it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks.
+-- Enable a service so it can be used with a project. See <https://cloud.google.com/docs/authentication Cloud Auth Guide> for more information.
 --
 -- Operation\<response: google.protobuf.Empty>
 --
--- /See:/ <https://cloud.google.com/service-management/ Service User API Reference> for @serviceuser.projects.services.disable@.
-module Network.Google.ServiceUser.Projects.Services.Disable
+-- /See:/ <https://cloud.google.com/service-management/ Service User API Reference> for @serviceuser.projects.services.enable@.
+module Gogol.ServiceUser.Projects.Services.Enable
   ( -- * Resource
-    ServiceUserProjectsServicesDisableResource,
+    ServiceUserProjectsServicesEnableResource,
 
     -- ** Constructing a Request
-    newServiceUserProjectsServicesDisable,
-    ServiceUserProjectsServicesDisable,
+    newServiceUserProjectsServicesEnable,
+    ServiceUserProjectsServicesEnable,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUser.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUser.Types
 
--- | A resource alias for @serviceuser.projects.services.disable@ method which the
--- 'ServiceUserProjectsServicesDisable' request conforms to.
-type ServiceUserProjectsServicesDisableResource =
+-- | A resource alias for @serviceuser.projects.services.enable@ method which the
+-- 'ServiceUserProjectsServicesEnable' request conforms to.
+type ServiceUserProjectsServicesEnableResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "disable" Core.Text
+    Core.:> Core.CaptureMode "name" "enable" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] DisableServiceRequest
+    Core.:> Core.ReqBody '[Core.JSON] EnableServiceRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Disable a service so it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks.
+-- | Enable a service so it can be used with a project. See <https://cloud.google.com/docs/authentication Cloud Auth Guide> for more information.
 --
 -- Operation\<response: google.protobuf.Empty>
 --
--- /See:/ 'newServiceUserProjectsServicesDisable' smart constructor.
-data ServiceUserProjectsServicesDisable = ServiceUserProjectsServicesDisable
+-- /See:/ 'newServiceUserProjectsServicesEnable' smart constructor.
+data ServiceUserProjectsServicesEnable = ServiceUserProjectsServicesEnable
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the consumer and the service to disable for that consumer.
-    --
-    -- The Service User implementation accepts the following forms for consumer: - \"project:\<project_id>\"
+    -- | Name of the consumer and the service to enable for that consumer.
     --
     -- A valid path would be: - projects\/my-project\/services\/servicemanagement.googleapis.com
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: DisableServiceRequest,
+    payload :: EnableServiceRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -85,19 +83,17 @@ data ServiceUserProjectsServicesDisable = ServiceUserProjectsServicesDisable
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ServiceUserProjectsServicesDisable' with the minimum fields required to make a request.
-newServiceUserProjectsServicesDisable ::
-  -- |  Name of the consumer and the service to disable for that consumer.
-  --
-  -- The Service User implementation accepts the following forms for consumer: - \"project:\<project_id>\"
+-- | Creates a value of 'ServiceUserProjectsServicesEnable' with the minimum fields required to make a request.
+newServiceUserProjectsServicesEnable ::
+  -- |  Name of the consumer and the service to enable for that consumer.
   --
   -- A valid path would be: - projects\/my-project\/services\/servicemanagement.googleapis.com See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  DisableServiceRequest ->
-  ServiceUserProjectsServicesDisable
-newServiceUserProjectsServicesDisable name payload =
-  ServiceUserProjectsServicesDisable
+  EnableServiceRequest ->
+  ServiceUserProjectsServicesEnable
+newServiceUserProjectsServicesEnable name payload =
+  ServiceUserProjectsServicesEnable
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -109,17 +105,15 @@ newServiceUserProjectsServicesDisable name payload =
 
 instance
   Core.GoogleRequest
-    ServiceUserProjectsServicesDisable
+    ServiceUserProjectsServicesEnable
   where
+  type Rs ServiceUserProjectsServicesEnable = Operation
   type
-    Rs ServiceUserProjectsServicesDisable =
-      Operation
-  type
-    Scopes ServiceUserProjectsServicesDisable =
+    Scopes ServiceUserProjectsServicesEnable =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/service.management"
        ]
-  requestClient ServiceUserProjectsServicesDisable {..} =
+  requestClient ServiceUserProjectsServicesEnable {..} =
     go
       name
       xgafv
@@ -134,7 +128,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ServiceUserProjectsServicesDisableResource
+              Core.Proxy ServiceUserProjectsServicesEnableResource
           )
           Core.mempty

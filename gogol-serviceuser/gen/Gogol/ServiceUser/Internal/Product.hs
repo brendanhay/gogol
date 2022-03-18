@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUser.Internal.Product
+-- Module      : Gogol.ServiceUser.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ServiceUser.Internal.Product
+module Gogol.ServiceUser.Internal.Product
   ( -- * Api
     Api (..),
     newApi,
@@ -296,8 +296,8 @@ module Network.Google.ServiceUser.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUser.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUser.Internal.Sum
 
 -- | Api is a light-weight descriptor for an API Interface.
 --
