@@ -1,247 +1,153 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.FusionTables.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.FusionTables.Types
-    (
-    -- * Service Configuration
-      fusionTablesService
+  ( -- * Configuration
+    fusionTablesService,
 
     -- * OAuth Scopes
-    , fusionTablesReadOnlyScope
-    , fusionTablesScope
+    fusionTablesScope,
+    fusionTablesReadOnlyScope,
 
-    -- * ColumnList
-    , ColumnList
-    , columnList
-    , clTotalItems
-    , clNextPageToken
-    , clKind
-    , clItems
+    -- * Types
 
-    -- * TableList
-    , TableList
-    , tableList
-    , tlNextPageToken
-    , tlKind
-    , tlItems
+    -- ** Bucket
+    Bucket (..),
+    newBucket,
 
-    -- * StyleFunction
-    , StyleFunction
-    , styleFunction
-    , sfBuckets
-    , sfKind
-    , sfGradient
-    , sfColumnName
+    -- ** Column
+    Column (..),
+    newColumn,
 
-    -- * ColumnBaseColumn
-    , ColumnBaseColumn
-    , columnBaseColumn
-    , cbcTableIndex
-    , cbcColumnId
+    -- ** Column_BaseColumn
+    Column_BaseColumn (..),
+    newColumn_BaseColumn,
 
-    -- * SQLresponse
-    , SQLresponse
-    , sQLresponse
-    , sqlKind
-    , sqlRows
-    , sqlColumns
+    -- ** ColumnList
+    ColumnList (..),
+    newColumnList,
 
-    -- * StyleFunctionGradientColorsItem
-    , StyleFunctionGradientColorsItem
-    , styleFunctionGradientColorsItem
-    , sfgciColor
-    , sfgciOpacity
+    -- ** Geometry
+    Geometry (..),
+    newGeometry,
 
-    -- * StyleSettingList
-    , StyleSettingList
-    , styleSettingList
-    , sslTotalItems
-    , sslNextPageToken
-    , sslKind
-    , sslItems
+    -- ** Import
+    Import (..),
+    newImport,
 
-    -- * Bucket
-    , Bucket
-    , bucket
-    , bMax
-    , bColor
-    , bWeight
-    , bIcon
-    , bOpacity
-    , bMin
+    -- ** Line
+    Line (..),
+    newLine,
 
-    -- * Line
-    , Line
-    , line
-    , lCoordinates
-    , lType
+    -- ** LineStyle
+    LineStyle (..),
+    newLineStyle,
 
-    -- * StyleSetting
-    , StyleSetting
-    , styleSetting
-    , ssPolylineOptions
-    , ssPolygonOptions
-    , ssMarkerOptions
-    , ssKind
-    , ssName
-    , ssStyleId
-    , ssTableId
+    -- ** Point
+    Point (..),
+    newPoint,
 
-    -- * Point
-    , Point
-    , point
-    , pCoordinates
-    , pType
+    -- ** PointStyle
+    PointStyle (..),
+    newPointStyle,
 
-    -- * Polygon
-    , Polygon
-    , polygon
-    , polCoordinates
-    , polType
+    -- ** Polygon
+    Polygon (..),
+    newPolygon,
 
-    -- * TaskList
-    , TaskList
-    , taskList
-    , tTotalItems
-    , tNextPageToken
-    , tKind
-    , tItems
+    -- ** PolygonStyle
+    PolygonStyle (..),
+    newPolygonStyle,
 
-    -- * Geometry
-    , Geometry
-    , geometry
-    , gGeometries
-    , gGeometry
-    , gType
+    -- ** Sqlresponse
+    Sqlresponse (..),
+    newSqlresponse,
 
-    -- * TemplateList
-    , TemplateList
-    , templateList
-    , temTotalItems
-    , temNextPageToken
-    , temKind
-    , temItems
+    -- ** StyleFunction
+    StyleFunction (..),
+    newStyleFunction,
 
-    -- * Import
-    , Import
-    , import'
-    , iKind
-    , iNumRowsReceived
+    -- ** StyleFunction_Gradient
+    StyleFunction_Gradient (..),
+    newStyleFunction_Gradient,
 
-    -- * Task
-    , Task
-    , task
-    , tasProgress
-    , tasTaskId
-    , tasKind
-    , tasType
-    , tasStarted
+    -- ** StyleFunction_Gradient_ColorsItem
+    StyleFunction_Gradient_ColorsItem (..),
+    newStyleFunction_Gradient_ColorsItem,
 
-    -- * Template
-    , Template
-    , template
-    , ttAutomaticColumnNames
-    , ttTemplateId
-    , ttKind
-    , ttBody
-    , ttName
-    , ttTableId
+    -- ** StyleSetting
+    StyleSetting (..),
+    newStyleSetting,
 
-    -- * PointStyle
-    , PointStyle
-    , pointStyle
-    , psIconName
-    , psIconStyler
+    -- ** StyleSettingList
+    StyleSettingList (..),
+    newStyleSettingList,
 
-    -- * PolygonStyle
-    , PolygonStyle
-    , polygonStyle
-    , psFillColorStyler
-    , psFillColor
-    , psStrokeColorStyler
-    , psStrokeWeight
-    , psStrokeOpacity
-    , psFillOpacity
-    , psStrokeWeightStyler
-    , psStrokeColor
+    -- ** Table
+    Table (..),
+    newTable,
 
-    -- * StyleFunctionGradient
-    , StyleFunctionGradient
-    , styleFunctionGradient
-    , sfgMax
-    , sfgMin
-    , sfgColors
+    -- ** TableList
+    TableList (..),
+    newTableList,
 
-    -- * Column
-    , Column
-    , column
-    , cColumnJSONSchema
-    , cGraphPredicate
-    , cKind
-    , cBaseColumn
-    , cColumnPropertiesJSON
-    , cName
-    , cType
-    , cFormatPattern
-    , cColumnId
-    , cValidValues
-    , cValidateData
-    , cDescription
+    -- ** Task
+    Task (..),
+    newTask,
 
-    -- * Table
-    , Table
-    , table
-    , tabaIsExportable
-    , tabaKind
-    , tabaColumnPropertiesJSONSchema
-    , tabaTablePropertiesJSONSchema
-    , tabaName
-    , tabaTablePropertiesJSON
-    , tabaColumns
-    , tabaBaseTableIds
-    , tabaTableId
-    , tabaSQL
-    , tabaDescription
-    , tabaAttribution
-    , tabaAttributionLink
+    -- ** TaskList
+    TaskList (..),
+    newTaskList,
 
-    -- * LineStyle
-    , LineStyle
-    , lineStyle
-    , lsStrokeColorStyler
-    , lsStrokeWeight
-    , lsStrokeOpacity
-    , lsStrokeWeightStyler
-    , lsStrokeColor
-    ) where
+    -- ** Template
+    Template (..),
+    newTemplate,
 
-import Network.Google.FusionTables.Types.Product
-import Network.Google.FusionTables.Types.Sum
-import Network.Google.Prelude
+    -- ** TemplateList
+    TemplateList (..),
+    newTemplateList,
+  )
+where
 
--- | Default request referring to version 'v2' of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
-fusionTablesService :: ServiceConfig
-fusionTablesService
-  = defaultService (ServiceId "fusiontables:v2")
-      "www.googleapis.com"
+import Network.Google.FusionTables.Internal.Product
+import Network.Google.FusionTables.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View your Fusion Tables
-fusionTablesReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
-fusionTablesReadOnlyScope = Proxy
+-- | Default request referring to version @v2@ of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
+fusionTablesService :: Core.ServiceConfig
+fusionTablesService =
+  Core.defaultService
+    (Core.ServiceId "fusiontables:v2")
+    "www.googleapis.com"
 
 -- | Manage your Fusion Tables
-fusionTablesScope :: Proxy '["https://www.googleapis.com/auth/fusiontables"]
-fusionTablesScope = Proxy
+fusionTablesScope :: Core.Proxy '["https://www.googleapis.com/auth/fusiontables"]
+fusionTablesScope = Core.Proxy
+
+-- | View your Fusion Tables
+fusionTablesReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
+fusionTablesReadOnlyScope = Core.Proxy

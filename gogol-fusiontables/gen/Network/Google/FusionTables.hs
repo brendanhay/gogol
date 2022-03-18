@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.FusionTables
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,401 +30,317 @@
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference>
 module Network.Google.FusionTables
-    (
-    -- * Service Configuration
-      fusionTablesService
+  ( -- * Configuration
+    fusionTablesService,
 
     -- * OAuth Scopes
-    , fusionTablesReadOnlyScope
-    , fusionTablesScope
-
-    -- * API Declaration
-    , FusionTablesAPI
+    fusionTablesScope,
+    fusionTablesReadOnlyScope,
 
     -- * Resources
 
     -- ** fusiontables.column.delete
-    , module Network.Google.Resource.FusionTables.Column.Delete
+    FusionTablesColumnDeleteResource,
+    newFusionTablesColumnDelete,
+    FusionTablesColumnDelete,
 
     -- ** fusiontables.column.get
-    , module Network.Google.Resource.FusionTables.Column.Get
+    FusionTablesColumnGetResource,
+    newFusionTablesColumnGet,
+    FusionTablesColumnGet,
 
     -- ** fusiontables.column.insert
-    , module Network.Google.Resource.FusionTables.Column.Insert
+    FusionTablesColumnInsertResource,
+    newFusionTablesColumnInsert,
+    FusionTablesColumnInsert,
 
     -- ** fusiontables.column.list
-    , module Network.Google.Resource.FusionTables.Column.List
+    FusionTablesColumnListResource,
+    newFusionTablesColumnList,
+    FusionTablesColumnList,
 
     -- ** fusiontables.column.patch
-    , module Network.Google.Resource.FusionTables.Column.Patch
+    FusionTablesColumnPatchResource,
+    newFusionTablesColumnPatch,
+    FusionTablesColumnPatch,
 
     -- ** fusiontables.column.update
-    , module Network.Google.Resource.FusionTables.Column.Update
+    FusionTablesColumnUpdateResource,
+    newFusionTablesColumnUpdate,
+    FusionTablesColumnUpdate,
 
     -- ** fusiontables.query.sql
-    , module Network.Google.Resource.FusionTables.Query.SQL
+    FusionTablesQuerySqlResource,
+    newFusionTablesQuerySql,
+    FusionTablesQuerySql,
 
     -- ** fusiontables.query.sqlGet
-    , module Network.Google.Resource.FusionTables.Query.SQLGet
+    FusionTablesQuerySqlGetResource,
+    newFusionTablesQuerySqlGet,
+    FusionTablesQuerySqlGet,
 
     -- ** fusiontables.style.delete
-    , module Network.Google.Resource.FusionTables.Style.Delete
+    FusionTablesStyleDeleteResource,
+    newFusionTablesStyleDelete,
+    FusionTablesStyleDelete,
 
     -- ** fusiontables.style.get
-    , module Network.Google.Resource.FusionTables.Style.Get
+    FusionTablesStyleGetResource,
+    newFusionTablesStyleGet,
+    FusionTablesStyleGet,
 
     -- ** fusiontables.style.insert
-    , module Network.Google.Resource.FusionTables.Style.Insert
+    FusionTablesStyleInsertResource,
+    newFusionTablesStyleInsert,
+    FusionTablesStyleInsert,
 
     -- ** fusiontables.style.list
-    , module Network.Google.Resource.FusionTables.Style.List
+    FusionTablesStyleListResource,
+    newFusionTablesStyleList,
+    FusionTablesStyleList,
 
     -- ** fusiontables.style.patch
-    , module Network.Google.Resource.FusionTables.Style.Patch
+    FusionTablesStylePatchResource,
+    newFusionTablesStylePatch,
+    FusionTablesStylePatch,
 
     -- ** fusiontables.style.update
-    , module Network.Google.Resource.FusionTables.Style.Update
+    FusionTablesStyleUpdateResource,
+    newFusionTablesStyleUpdate,
+    FusionTablesStyleUpdate,
 
     -- ** fusiontables.table.copy
-    , module Network.Google.Resource.FusionTables.Table.Copy
+    FusionTablesTableCopyResource,
+    newFusionTablesTableCopy,
+    FusionTablesTableCopy,
 
     -- ** fusiontables.table.delete
-    , module Network.Google.Resource.FusionTables.Table.Delete
+    FusionTablesTableDeleteResource,
+    newFusionTablesTableDelete,
+    FusionTablesTableDelete,
 
     -- ** fusiontables.table.get
-    , module Network.Google.Resource.FusionTables.Table.Get
+    FusionTablesTableGetResource,
+    newFusionTablesTableGet,
+    FusionTablesTableGet,
 
     -- ** fusiontables.table.importRows
-    , module Network.Google.Resource.FusionTables.Table.ImportRows
+    FusionTablesTableImportRowsResource,
+    newFusionTablesTableImportRows,
+    FusionTablesTableImportRows,
 
     -- ** fusiontables.table.importTable
-    , module Network.Google.Resource.FusionTables.Table.ImportTable
+    FusionTablesTableImportTableResource,
+    newFusionTablesTableImportTable,
+    FusionTablesTableImportTable,
 
     -- ** fusiontables.table.insert
-    , module Network.Google.Resource.FusionTables.Table.Insert
+    FusionTablesTableInsertResource,
+    newFusionTablesTableInsert,
+    FusionTablesTableInsert,
 
     -- ** fusiontables.table.list
-    , module Network.Google.Resource.FusionTables.Table.List
+    FusionTablesTableListResource,
+    newFusionTablesTableList,
+    FusionTablesTableList,
 
     -- ** fusiontables.table.patch
-    , module Network.Google.Resource.FusionTables.Table.Patch
+    FusionTablesTablePatchResource,
+    newFusionTablesTablePatch,
+    FusionTablesTablePatch,
 
     -- ** fusiontables.table.refetchSheet
-    , module Network.Google.Resource.FusionTables.Table.RefetchSheet
+    FusionTablesTableRefetchSheetResource,
+    newFusionTablesTableRefetchSheet,
+    FusionTablesTableRefetchSheet,
 
     -- ** fusiontables.table.replaceRows
-    , module Network.Google.Resource.FusionTables.Table.ReplaceRows
+    FusionTablesTableReplaceRowsResource,
+    newFusionTablesTableReplaceRows,
+    FusionTablesTableReplaceRows,
 
     -- ** fusiontables.table.update
-    , module Network.Google.Resource.FusionTables.Table.Update
+    FusionTablesTableUpdateResource,
+    newFusionTablesTableUpdate,
+    FusionTablesTableUpdate,
 
     -- ** fusiontables.task.delete
-    , module Network.Google.Resource.FusionTables.Task.Delete
+    FusionTablesTaskDeleteResource,
+    newFusionTablesTaskDelete,
+    FusionTablesTaskDelete,
 
     -- ** fusiontables.task.get
-    , module Network.Google.Resource.FusionTables.Task.Get
+    FusionTablesTaskGetResource,
+    newFusionTablesTaskGet,
+    FusionTablesTaskGet,
 
     -- ** fusiontables.task.list
-    , module Network.Google.Resource.FusionTables.Task.List
+    FusionTablesTaskListResource,
+    newFusionTablesTaskList,
+    FusionTablesTaskList,
 
     -- ** fusiontables.template.delete
-    , module Network.Google.Resource.FusionTables.Template.Delete
+    FusionTablesTemplateDeleteResource,
+    newFusionTablesTemplateDelete,
+    FusionTablesTemplateDelete,
 
     -- ** fusiontables.template.get
-    , module Network.Google.Resource.FusionTables.Template.Get
+    FusionTablesTemplateGetResource,
+    newFusionTablesTemplateGet,
+    FusionTablesTemplateGet,
 
     -- ** fusiontables.template.insert
-    , module Network.Google.Resource.FusionTables.Template.Insert
+    FusionTablesTemplateInsertResource,
+    newFusionTablesTemplateInsert,
+    FusionTablesTemplateInsert,
 
     -- ** fusiontables.template.list
-    , module Network.Google.Resource.FusionTables.Template.List
+    FusionTablesTemplateListResource,
+    newFusionTablesTemplateList,
+    FusionTablesTemplateList,
 
     -- ** fusiontables.template.patch
-    , module Network.Google.Resource.FusionTables.Template.Patch
+    FusionTablesTemplatePatchResource,
+    newFusionTablesTemplatePatch,
+    FusionTablesTemplatePatch,
 
     -- ** fusiontables.template.update
-    , module Network.Google.Resource.FusionTables.Template.Update
+    FusionTablesTemplateUpdateResource,
+    newFusionTablesTemplateUpdate,
+    FusionTablesTemplateUpdate,
 
     -- * Types
 
-    -- ** ColumnList
-    , ColumnList
-    , columnList
-    , clTotalItems
-    , clNextPageToken
-    , clKind
-    , clItems
-
-    -- ** TableList
-    , TableList
-    , tableList
-    , tlNextPageToken
-    , tlKind
-    , tlItems
-
-    -- ** StyleFunction
-    , StyleFunction
-    , styleFunction
-    , sfBuckets
-    , sfKind
-    , sfGradient
-    , sfColumnName
-
-    -- ** ColumnBaseColumn
-    , ColumnBaseColumn
-    , columnBaseColumn
-    , cbcTableIndex
-    , cbcColumnId
-
-    -- ** SQLresponse
-    , SQLresponse
-    , sQLresponse
-    , sqlKind
-    , sqlRows
-    , sqlColumns
-
-    -- ** StyleFunctionGradientColorsItem
-    , StyleFunctionGradientColorsItem
-    , styleFunctionGradientColorsItem
-    , sfgciColor
-    , sfgciOpacity
-
-    -- ** StyleSettingList
-    , StyleSettingList
-    , styleSettingList
-    , sslTotalItems
-    , sslNextPageToken
-    , sslKind
-    , sslItems
-
     -- ** Bucket
-    , Bucket
-    , bucket
-    , bMax
-    , bColor
-    , bWeight
-    , bIcon
-    , bOpacity
-    , bMin
-
-    -- ** Line
-    , Line
-    , line
-    , lCoordinates
-    , lType
-
-    -- ** StyleSetting
-    , StyleSetting
-    , styleSetting
-    , ssPolylineOptions
-    , ssPolygonOptions
-    , ssMarkerOptions
-    , ssKind
-    , ssName
-    , ssStyleId
-    , ssTableId
-
-    -- ** Point
-    , Point
-    , point
-    , pCoordinates
-    , pType
-
-    -- ** Polygon
-    , Polygon
-    , polygon
-    , polCoordinates
-    , polType
-
-    -- ** TaskList
-    , TaskList
-    , taskList
-    , tTotalItems
-    , tNextPageToken
-    , tKind
-    , tItems
-
-    -- ** Geometry
-    , Geometry
-    , geometry
-    , gGeometries
-    , gGeometry
-    , gType
-
-    -- ** TemplateList
-    , TemplateList
-    , templateList
-    , temTotalItems
-    , temNextPageToken
-    , temKind
-    , temItems
-
-    -- ** Import
-    , Import
-    , import'
-    , iKind
-    , iNumRowsReceived
-
-    -- ** Task
-    , Task
-    , task
-    , tasProgress
-    , tasTaskId
-    , tasKind
-    , tasType
-    , tasStarted
-
-    -- ** Template
-    , Template
-    , template
-    , ttAutomaticColumnNames
-    , ttTemplateId
-    , ttKind
-    , ttBody
-    , ttName
-    , ttTableId
-
-    -- ** PointStyle
-    , PointStyle
-    , pointStyle
-    , psIconName
-    , psIconStyler
-
-    -- ** PolygonStyle
-    , PolygonStyle
-    , polygonStyle
-    , psFillColorStyler
-    , psFillColor
-    , psStrokeColorStyler
-    , psStrokeWeight
-    , psStrokeOpacity
-    , psFillOpacity
-    , psStrokeWeightStyler
-    , psStrokeColor
-
-    -- ** StyleFunctionGradient
-    , StyleFunctionGradient
-    , styleFunctionGradient
-    , sfgMax
-    , sfgMin
-    , sfgColors
+    Bucket (..),
+    newBucket,
 
     -- ** Column
-    , Column
-    , column
-    , cColumnJSONSchema
-    , cGraphPredicate
-    , cKind
-    , cBaseColumn
-    , cColumnPropertiesJSON
-    , cName
-    , cType
-    , cFormatPattern
-    , cColumnId
-    , cValidValues
-    , cValidateData
-    , cDescription
+    Column (..),
+    newColumn,
 
-    -- ** Table
-    , Table
-    , table
-    , tabaIsExportable
-    , tabaKind
-    , tabaColumnPropertiesJSONSchema
-    , tabaTablePropertiesJSONSchema
-    , tabaName
-    , tabaTablePropertiesJSON
-    , tabaColumns
-    , tabaBaseTableIds
-    , tabaTableId
-    , tabaSQL
-    , tabaDescription
-    , tabaAttribution
-    , tabaAttributionLink
+    -- ** Column_BaseColumn
+    Column_BaseColumn (..),
+    newColumn_BaseColumn,
+
+    -- ** ColumnList
+    ColumnList (..),
+    newColumnList,
+
+    -- ** Geometry
+    Geometry (..),
+    newGeometry,
+
+    -- ** Import
+    Import (..),
+    newImport,
+
+    -- ** Line
+    Line (..),
+    newLine,
 
     -- ** LineStyle
-    , LineStyle
-    , lineStyle
-    , lsStrokeColorStyler
-    , lsStrokeWeight
-    , lsStrokeOpacity
-    , lsStrokeWeightStyler
-    , lsStrokeColor
-    ) where
+    LineStyle (..),
+    newLineStyle,
 
-import Network.Google.Prelude
+    -- ** Point
+    Point (..),
+    newPoint,
+
+    -- ** PointStyle
+    PointStyle (..),
+    newPointStyle,
+
+    -- ** Polygon
+    Polygon (..),
+    newPolygon,
+
+    -- ** PolygonStyle
+    PolygonStyle (..),
+    newPolygonStyle,
+
+    -- ** Sqlresponse
+    Sqlresponse (..),
+    newSqlresponse,
+
+    -- ** StyleFunction
+    StyleFunction (..),
+    newStyleFunction,
+
+    -- ** StyleFunction_Gradient
+    StyleFunction_Gradient (..),
+    newStyleFunction_Gradient,
+
+    -- ** StyleFunction_Gradient_ColorsItem
+    StyleFunction_Gradient_ColorsItem (..),
+    newStyleFunction_Gradient_ColorsItem,
+
+    -- ** StyleSetting
+    StyleSetting (..),
+    newStyleSetting,
+
+    -- ** StyleSettingList
+    StyleSettingList (..),
+    newStyleSettingList,
+
+    -- ** Table
+    Table (..),
+    newTable,
+
+    -- ** TableList
+    TableList (..),
+    newTableList,
+
+    -- ** Task
+    Task (..),
+    newTask,
+
+    -- ** TaskList
+    TaskList (..),
+    newTaskList,
+
+    -- ** Template
+    Template (..),
+    newTemplate,
+
+    -- ** TemplateList
+    TemplateList (..),
+    newTemplateList,
+  )
+where
+
+import Network.Google.FusionTables.Column.Delete
+import Network.Google.FusionTables.Column.Get
+import Network.Google.FusionTables.Column.Insert
+import Network.Google.FusionTables.Column.List
+import Network.Google.FusionTables.Column.Patch
+import Network.Google.FusionTables.Column.Update
+import Network.Google.FusionTables.Query.Sql
+import Network.Google.FusionTables.Query.SqlGet
+import Network.Google.FusionTables.Style.Delete
+import Network.Google.FusionTables.Style.Get
+import Network.Google.FusionTables.Style.Insert
+import Network.Google.FusionTables.Style.List
+import Network.Google.FusionTables.Style.Patch
+import Network.Google.FusionTables.Style.Update
+import Network.Google.FusionTables.Table.Copy
+import Network.Google.FusionTables.Table.Delete
+import Network.Google.FusionTables.Table.Get
+import Network.Google.FusionTables.Table.ImportRows
+import Network.Google.FusionTables.Table.ImportTable
+import Network.Google.FusionTables.Table.Insert
+import Network.Google.FusionTables.Table.List
+import Network.Google.FusionTables.Table.Patch
+import Network.Google.FusionTables.Table.RefetchSheet
+import Network.Google.FusionTables.Table.ReplaceRows
+import Network.Google.FusionTables.Table.Update
+import Network.Google.FusionTables.Task.Delete
+import Network.Google.FusionTables.Task.Get
+import Network.Google.FusionTables.Task.List
+import Network.Google.FusionTables.Template.Delete
+import Network.Google.FusionTables.Template.Get
+import Network.Google.FusionTables.Template.Insert
+import Network.Google.FusionTables.Template.List
+import Network.Google.FusionTables.Template.Patch
+import Network.Google.FusionTables.Template.Update
 import Network.Google.FusionTables.Types
-import Network.Google.Resource.FusionTables.Column.Delete
-import Network.Google.Resource.FusionTables.Column.Get
-import Network.Google.Resource.FusionTables.Column.Insert
-import Network.Google.Resource.FusionTables.Column.List
-import Network.Google.Resource.FusionTables.Column.Patch
-import Network.Google.Resource.FusionTables.Column.Update
-import Network.Google.Resource.FusionTables.Query.SQL
-import Network.Google.Resource.FusionTables.Query.SQLGet
-import Network.Google.Resource.FusionTables.Style.Delete
-import Network.Google.Resource.FusionTables.Style.Get
-import Network.Google.Resource.FusionTables.Style.Insert
-import Network.Google.Resource.FusionTables.Style.List
-import Network.Google.Resource.FusionTables.Style.Patch
-import Network.Google.Resource.FusionTables.Style.Update
-import Network.Google.Resource.FusionTables.Table.Copy
-import Network.Google.Resource.FusionTables.Table.Delete
-import Network.Google.Resource.FusionTables.Table.Get
-import Network.Google.Resource.FusionTables.Table.ImportRows
-import Network.Google.Resource.FusionTables.Table.ImportTable
-import Network.Google.Resource.FusionTables.Table.Insert
-import Network.Google.Resource.FusionTables.Table.List
-import Network.Google.Resource.FusionTables.Table.Patch
-import Network.Google.Resource.FusionTables.Table.RefetchSheet
-import Network.Google.Resource.FusionTables.Table.ReplaceRows
-import Network.Google.Resource.FusionTables.Table.Update
-import Network.Google.Resource.FusionTables.Task.Delete
-import Network.Google.Resource.FusionTables.Task.Get
-import Network.Google.Resource.FusionTables.Task.List
-import Network.Google.Resource.FusionTables.Template.Delete
-import Network.Google.Resource.FusionTables.Template.Get
-import Network.Google.Resource.FusionTables.Template.Insert
-import Network.Google.Resource.FusionTables.Template.List
-import Network.Google.Resource.FusionTables.Template.Patch
-import Network.Google.Resource.FusionTables.Template.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Fusion Tables API service.
-type FusionTablesAPI =
-     StyleInsertResource :<|> StyleListResource :<|>
-       StylePatchResource
-       :<|> StyleGetResource
-       :<|> StyleDeleteResource
-       :<|> StyleUpdateResource
-       :<|> QuerySQLGetResource
-       :<|> QuerySQLResource
-       :<|> TaskListResource
-       :<|> TaskGetResource
-       :<|> TaskDeleteResource
-       :<|> TemplateInsertResource
-       :<|> TemplateListResource
-       :<|> TemplatePatchResource
-       :<|> TemplateGetResource
-       :<|> TemplateDeleteResource
-       :<|> TemplateUpdateResource
-       :<|> ColumnInsertResource
-       :<|> ColumnListResource
-       :<|> ColumnPatchResource
-       :<|> ColumnGetResource
-       :<|> ColumnDeleteResource
-       :<|> ColumnUpdateResource
-       :<|> TableRefetchSheetResource
-       :<|> TableInsertResource
-       :<|> TableListResource
-       :<|> TableCopyResource
-       :<|> TableReplaceRowsResource
-       :<|> TableImportTableResource
-       :<|> TablePatchResource
-       :<|> TableGetResource
-       :<|> TableImportRowsResource
-       :<|> TableDeleteResource
-       :<|> TableUpdateResource
