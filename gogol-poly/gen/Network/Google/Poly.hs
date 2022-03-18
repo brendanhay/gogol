@@ -1,205 +1,153 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Poly
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Poly API provides read access to assets hosted on poly.google.com to
--- all, and upload access to poly.google.com for whitelisted accounts.
+-- The Poly API provides read access to assets hosted on poly.google.com to all, and upload access to poly.google.com for whitelisted accounts.
 --
 -- /See:/ <https://developers.google.com/poly/ Poly API Reference>
 module Network.Google.Poly
-    (
-    -- * Service Configuration
-      polyService
-
-    -- * API Declaration
-    , PolyAPI
+  ( -- * Configuration
+    polyService,
 
     -- * Resources
 
     -- ** poly.assets.get
-    , module Network.Google.Resource.Poly.Assets.Get
+    PolyAssetsGetResource,
+    newPolyAssetsGet,
+    PolyAssetsGet,
 
     -- ** poly.assets.list
-    , module Network.Google.Resource.Poly.Assets.List
+    PolyAssetsListResource,
+    newPolyAssetsList,
+    PolyAssetsList,
 
     -- ** poly.users.assets.list
-    , module Network.Google.Resource.Poly.Users.Assets.List
+    PolyUsersAssetsListResource,
+    newPolyUsersAssetsList,
+    PolyUsersAssetsList,
 
     -- ** poly.users.likedassets.list
-    , module Network.Google.Resource.Poly.Users.Likedassets.List
+    PolyUsersLikedassetsListResource,
+    newPolyUsersLikedassetsList,
+    PolyUsersLikedassetsList,
 
     -- * Types
 
-    -- ** ImageErrorCode
-    , ImageErrorCode (..)
-
-    -- ** ObjParseError
-    , ObjParseError
-    , objParseError
-    , opeLineNumber
-    , opeFilePath
-    , opeLine
-    , opeEndIndex
-    , opeCode
-    , opeStartIndex
-
-    -- ** PresentationParams
-    , PresentationParams
-    , presentationParams
-    , ppBackgRoundColor
-    , ppOrientingRotation
-    , ppColorSpace
-
-    -- ** ListLikedAssetsResponse
-    , ListLikedAssetsResponse
-    , listLikedAssetsResponse
-    , llarNextPageToken
-    , llarTotalSize
-    , llarAssets
-
-    -- ** UsersAssetsListVisibility
-    , UsersAssetsListVisibility (..)
-
-    -- ** RemixInfo
-    , RemixInfo
-    , remixInfo
-    , riSourceAsset
-
-    -- ** Quaternion
-    , Quaternion
-    , quaternion
-    , qW
-    , qZ
-    , qX
-    , qY
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Asset
-    , Asset
-    , asset
-    , aThumbnail
-    , aPresentationParams
-    , aIsCurated
-    , aAuthorName
-    , aRemixInfo
-    , aFormats
-    , aVisibility
-    , aUpdateTime
-    , aName
-    , aMetadata
-    , aDisplayName
-    , aLicense
-    , aDescription
-    , aCreateTime
+    Asset (..),
+    newAsset,
 
-    -- ** Format
-    , Format
-    , format
-    , fRoot
-    , fResources
-    , fFormatComplexity
-    , fFormatType
+    -- ** Asset_License
+    Asset_License (..),
 
-    -- ** AssetImportMessageCode
-    , AssetImportMessageCode (..)
+    -- ** Asset_Visibility
+    Asset_Visibility (..),
 
     -- ** AssetImportMessage
-    , AssetImportMessage
-    , assetImportMessage
-    , aimObjParseError
-    , aimFilePath
-    , aimImageError
-    , aimCode
+    AssetImportMessage (..),
+    newAssetImportMessage,
 
-    -- ** StartAssetImportResponse
-    , StartAssetImportResponse
-    , startAssetImportResponse
-    , sairPublishURL
-    , sairAssetImportMessages
-    , sairAssetImportId
-    , sairAssetId
-
-    -- ** AssetVisibility
-    , AssetVisibility (..)
-
-    -- ** ImageError
-    , ImageError
-    , imageError
-    , ieFilePath
-    , ieCode
-
-    -- ** FormatComplexity
-    , FormatComplexity
-    , formatComplexity
-    , fcTriangleCount
-    , fcLodHint
-
-    -- ** ObjParseErrorCode
-    , ObjParseErrorCode (..)
-
-    -- ** ListAssetsResponse
-    , ListAssetsResponse
-    , listAssetsResponse
-    , larNextPageToken
-    , larTotalSize
-    , larAssets
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ListUserAssetsResponse
-    , ListUserAssetsResponse
-    , listUserAssetsResponse
-    , luarNextPageToken
-    , luarTotalSize
-    , luarUserAssets
-
-    -- ** AssetLicense
-    , AssetLicense (..)
-
-    -- ** PresentationParamsColorSpace
-    , PresentationParamsColorSpace (..)
+    -- ** AssetImportMessage_Code
+    AssetImportMessage_Code (..),
 
     -- ** File
-    , File
-    , file
-    , fURL
-    , fRelativePath
-    , fContentType
+    File (..),
+    newFile,
 
-    -- ** AssetsListMaxComplexity
-    , AssetsListMaxComplexity (..)
+    -- ** Format
+    Format (..),
+    newFormat,
+
+    -- ** FormatComplexity
+    FormatComplexity (..),
+    newFormatComplexity,
+
+    -- ** ImageError
+    ImageError (..),
+    newImageError,
+
+    -- ** ImageError_Code
+    ImageError_Code (..),
+
+    -- ** ListAssetsResponse
+    ListAssetsResponse (..),
+    newListAssetsResponse,
+
+    -- ** ListLikedAssetsResponse
+    ListLikedAssetsResponse (..),
+    newListLikedAssetsResponse,
+
+    -- ** ListUserAssetsResponse
+    ListUserAssetsResponse (..),
+    newListUserAssetsResponse,
+
+    -- ** ObjParseError
+    ObjParseError (..),
+    newObjParseError,
+
+    -- ** ObjParseError_Code
+    ObjParseError_Code (..),
+
+    -- ** PresentationParams
+    PresentationParams (..),
+    newPresentationParams,
+
+    -- ** PresentationParams_ColorSpace
+    PresentationParams_ColorSpace (..),
+
+    -- ** Quaternion
+    Quaternion (..),
+    newQuaternion,
+
+    -- ** RemixInfo
+    RemixInfo (..),
+    newRemixInfo,
+
+    -- ** StartAssetImportResponse
+    StartAssetImportResponse (..),
+    newStartAssetImportResponse,
 
     -- ** UserAsset
-    , UserAsset
-    , userAsset
-    , uaAsset
-    ) where
+    UserAsset (..),
+    newUserAsset,
 
-import Network.Google.Prelude
+    -- ** AssetsListMaxComplexity
+    AssetsListMaxComplexity (..),
+
+    -- ** UsersAssetsListVisibility
+    UsersAssetsListVisibility (..),
+  )
+where
+
+import Network.Google.Poly.Assets.Get
+import Network.Google.Poly.Assets.List
 import Network.Google.Poly.Types
-import Network.Google.Resource.Poly.Assets.Get
-import Network.Google.Resource.Poly.Assets.List
-import Network.Google.Resource.Poly.Users.Assets.List
-import Network.Google.Resource.Poly.Users.Likedassets.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Poly API service.
-type PolyAPI =
-     UsersLikedassetsListResource :<|>
-       UsersAssetsListResource
-       :<|> AssetsListResource
-       :<|> AssetsGetResource
+import Network.Google.Poly.Users.Assets.List
+import Network.Google.Poly.Users.Likedassets.List
