@@ -1,174 +1,122 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsReseller.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AppsReseller.Types
-    (
-    -- * Service Configuration
-      appsResellerService
+  ( -- * Configuration
+    appsResellerService,
 
     -- * OAuth Scopes
-    , appsOrderReadOnlyScope
-    , appsOrderScope
+    appsOrderScope,
+    appsOrderReadOnlyScope,
 
-    -- * SubscriptionTrialSettings
-    , SubscriptionTrialSettings
-    , subscriptionTrialSettings
-    , stsIsInTrial
-    , stsTrialEndTime
+    -- * Types
 
-    -- * ResellernotifyResource
-    , ResellernotifyResource
-    , resellernotifyResource
-    , rrTopicName
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ResellernotifyGetwatchdetailsResponse
-    , ResellernotifyGetwatchdetailsResponse
-    , resellernotifyGetwatchdetailsResponse
-    , rgrTopicName
-    , rgrServiceAccountEmailAddresses
+    -- ** Address
+    Address (..),
+    newAddress,
 
-    -- * Address
-    , Address
-    , address
-    , aOrganizationName
-    , aKind
-    , aPostalCode
-    , aAddressLine1
-    , aLocality
-    , aContactName
-    , aAddressLine2
-    , aCountryCode
-    , aRegion
-    , aAddressLine3
+    -- ** ChangePlanRequest
+    ChangePlanRequest (..),
+    newChangePlanRequest,
 
-    -- * Customer
-    , Customer
-    , customer
-    , cCustomerType
-    , cCustomerDomainVerified
-    , cResourceUiURL
-    , cKind
-    , cCustomerId
-    , cAlternateEmail
-    , cCustomerDomain
-    , cPhoneNumber
-    , cPostalAddress
-    , cPrimaryAdmin
+    -- ** Customer
+    Customer (..),
+    newCustomer,
 
-    -- * ChangePlanRequest
-    , ChangePlanRequest
-    , changePlanRequest
-    , cprKind
-    , cprDealCode
-    , cprPlanName
-    , cprPurchaseOrderId
-    , cprSeats
+    -- ** Customer_CustomerType
+    Customer_CustomerType (..),
 
-    -- * SubscriptionPlanCommitmentInterval
-    , SubscriptionPlanCommitmentInterval
-    , subscriptionPlanCommitmentInterval
-    , spciStartTime
-    , spciEndTime
+    -- ** PrimaryAdmin
+    PrimaryAdmin (..),
+    newPrimaryAdmin,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** RenewalSettings
+    RenewalSettings (..),
+    newRenewalSettings,
 
-    -- * SubscriptionsDeleteDeletionType
-    , SubscriptionsDeleteDeletionType (..)
+    -- ** ResellernotifyGetwatchdetailsResponse
+    ResellernotifyGetwatchdetailsResponse (..),
+    newResellernotifyGetwatchdetailsResponse,
 
-    -- * SubscriptionPlan
-    , SubscriptionPlan
-    , subscriptionPlan
-    , spCommitmentInterval
-    , spIsCommitmentPlan
-    , spPlanName
+    -- ** ResellernotifyResource
+    ResellernotifyResource (..),
+    newResellernotifyResource,
 
-    -- * CustomerCustomerType
-    , CustomerCustomerType (..)
+    -- ** Seats
+    Seats (..),
+    newSeats,
 
-    -- * Subscriptions
-    , Subscriptions
-    , subscriptions
-    , sNextPageToken
-    , sKind
-    , sSubscriptions
+    -- ** Subscription
+    Subscription (..),
+    newSubscription,
 
-    -- * Seats
-    , Seats
-    , seats
-    , seaNumberOfSeats
-    , seaMaximumNumberOfSeats
-    , seaLicensedNumberOfSeats
-    , seaKind
+    -- ** Subscription_Plan
+    Subscription_Plan (..),
+    newSubscription_Plan,
 
-    -- * PrimaryAdmin
-    , PrimaryAdmin
-    , primaryAdmin
-    , paPrimaryEmail
+    -- ** Subscription_Plan_CommitmentInterval
+    Subscription_Plan_CommitmentInterval (..),
+    newSubscription_Plan_CommitmentInterval,
 
-    -- * RenewalSettings
-    , RenewalSettings
-    , renewalSettings
-    , rsKind
-    , rsRenewalType
+    -- ** Subscription_TransferInfo
+    Subscription_TransferInfo (..),
+    newSubscription_TransferInfo,
 
-    -- * Subscription
-    , Subscription
-    , subscription
-    , subCreationTime
-    , subBillingMethod
-    , subStatus
-    , subTrialSettings
-    , subSKUName
-    , subResourceUiURL
-    , subKind
-    , subSKUId
-    , subPlan
-    , subDealCode
-    , subCustomerId
-    , subCustomerDomain
-    , subSuspensionReasons
-    , subTransferInfo
-    , subPurchaseOrderId
-    , subSeats
-    , subRenewalSettings
-    , subSubscriptionId
+    -- ** Subscription_TrialSettings
+    Subscription_TrialSettings (..),
+    newSubscription_TrialSettings,
 
-    -- * SubscriptionTransferInfo
-    , SubscriptionTransferInfo
-    , subscriptionTransferInfo
-    , stiCurrentLegacySKUId
-    , stiTransferabilityExpirationTime
-    , stiMinimumTransferableSeats
-    ) where
+    -- ** Subscriptions
+    Subscriptions (..),
+    newSubscriptions,
 
-import Network.Google.AppsReseller.Types.Product
-import Network.Google.AppsReseller.Types.Sum
-import Network.Google.Prelude
+    -- ** SubscriptionsDeleteDeletionType
+    SubscriptionsDeleteDeletionType (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Google Workspace Reseller API. This contains the host and root path used as a starting point for constructing service requests.
-appsResellerService :: ServiceConfig
-appsResellerService
-  = defaultService (ServiceId "reseller:v1")
-      "reseller.googleapis.com"
+import Network.Google.AppsReseller.Internal.Product
+import Network.Google.AppsReseller.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Google Workspace Reseller API. This contains the host and root path used as a starting point for constructing service requests.
+appsResellerService :: Core.ServiceConfig
+appsResellerService =
+  Core.defaultService
+    (Core.ServiceId "reseller:v1")
+    "reseller.googleapis.com"
 
 -- | Manage users on your domain
-appsOrderReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
-appsOrderReadOnlyScope = Proxy
+appsOrderScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.order"]
+appsOrderScope = Core.Proxy
 
 -- | Manage users on your domain
-appsOrderScope :: Proxy '["https://www.googleapis.com/auth/apps.order"]
-appsOrderScope = Proxy
+appsOrderReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
+appsOrderReadOnlyScope = Core.Proxy
