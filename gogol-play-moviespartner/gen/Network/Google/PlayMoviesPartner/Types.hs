@@ -1,179 +1,103 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.PlayMoviesPartner.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.PlayMoviesPartner.Types
-    (
-    -- * Service Configuration
-      playMoviesPartnerService
+  ( -- * Configuration
+    playMoviesPartnerService,
 
     -- * OAuth Scopes
-    , playmoviesPartnerReadOnlyScope
+    playmovies_partnerReadOnlyScope,
 
-    -- * AvailWorkType
-    , AvailWorkType (..)
+    -- * Types
 
-    -- * OrderStatus
-    , OrderStatus (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * AvailFormatProFile
-    , AvailFormatProFile (..)
+    -- ** Avail
+    Avail (..),
+    newAvail,
 
-    -- * Avail
-    , Avail
-    , avail
-    , aAltId
-    , aPphNames
-    , aCaptionExemption
-    , aRatingSystem
-    , aSuppressionLiftDate
-    , aEpisodeNumber
-    , aPriceType
-    , aStoreLanguage
-    , aEpisodeAltId
-    , aStart
-    , aTerritory
-    , aEpisodeTitleInternalAlias
-    , aLicenseType
-    , aAvailId
-    , aSeasonNumber
-    , aWorkType
-    , aRatingValue
-    , aSeasonTitleInternalAlias
-    , aContentId
-    , aVideoId
-    , aSeriesAltId
-    , aEnd
-    , aSeriesTitleInternalAlias
-    , aDisplayName
-    , aReleaseDate
-    , aFormatProFile
-    , aRatingReason
-    , aEncodeId
-    , aPriceValue
-    , aCaptionIncluded
-    , aProductId
-    , aSeasonAltId
-    , aTitleInternalAlias
+    -- ** Avail_FormatProfile
+    Avail_FormatProfile (..),
 
-    -- * OrderType
-    , OrderType (..)
+    -- ** Avail_LicenseType
+    Avail_LicenseType (..),
 
-    -- * ListAvailsResponse
-    , ListAvailsResponse
-    , listAvailsResponse
-    , larNextPageToken
-    , larAvails
-    , larTotalSize
+    -- ** Avail_WorkType
+    Avail_WorkType (..),
 
-    -- * StoreInfoType
-    , StoreInfoType (..)
+    -- ** ListAvailsResponse
+    ListAvailsResponse (..),
+    newListAvailsResponse,
 
-    -- * ListOrdersResponse
-    , ListOrdersResponse
-    , listOrdersResponse
-    , lorNextPageToken
-    , lorTotalSize
-    , lorOrders
+    -- ** ListOrdersResponse
+    ListOrdersResponse (..),
+    newListOrdersResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ListStoreInfosResponse
+    ListStoreInfosResponse (..),
+    newListStoreInfosResponse,
 
-    -- * OrderNormalizedPriority
-    , OrderNormalizedPriority (..)
+    -- ** Order
+    Order (..),
+    newOrder,
 
-    -- * AvailLicenseType
-    , AvailLicenseType (..)
+    -- ** Order_NormalizedPriority
+    Order_NormalizedPriority (..),
 
-    -- * OrderStatusDetail
-    , OrderStatusDetail (..)
+    -- ** Order_Status
+    Order_Status (..),
 
-    -- * ListStoreInfosResponse
-    , ListStoreInfosResponse
-    , listStoreInfosResponse
-    , lsirNextPageToken
-    , lsirTotalSize
-    , lsirStoreInfos
+    -- ** Order_StatusDetail
+    Order_StatusDetail (..),
 
-    -- * Order
-    , Order
-    , order
-    , oStatus
-    , oShowName
-    , oPphName
-    , oEarliestAvailStartTime
-    , oStudioName
-    , oReceivedTime
-    , oPriority
-    , oChannelId
-    , oCustomId
-    , oApprovedTime
-    , oCountries
-    , oChannelName
-    , oVideoId
-    , oLegacyPriority
-    , oName
-    , oRejectionNote
-    , oOrderedTime
-    , oSeasonName
-    , oStatusDetail
-    , oType
-    , oNormalizedPriority
-    , oOrderId
-    , oEpisodeName
+    -- ** Order_Type
+    Order_Type (..),
 
-    -- * StoreInfo
-    , StoreInfo
-    , storeInfo
-    , siTitleLevelEidr
-    , siPphNames
-    , siShowName
-    , siSubtitles
-    , siStudioName
-    , siAudioTracks
-    , siEpisodeNumber
-    , siCountry
-    , siTrailerId
-    , siHasInfoCards
-    , siLiveTime
-    , siSeasonNumber
-    , siHasHdOffer
-    , siVideoId
-    , siName
-    , siHasVodOffer
-    , siSeasonName
-    , siHasSdOffer
-    , siMid
-    , siEditLevelEidr
-    , siType
-    , siHasEstOffer
-    , siHasAudio51
-    , siSeasonId
-    , siShowId
-    ) where
+    -- ** StoreInfo
+    StoreInfo (..),
+    newStoreInfo,
 
-import Network.Google.PlayMoviesPartner.Types.Product
-import Network.Google.PlayMoviesPartner.Types.Sum
-import Network.Google.Prelude
+    -- ** StoreInfo_Type
+    StoreInfo_Type (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Google Play Movies Partner API. This contains the host and root path used as a starting point for constructing service requests.
-playMoviesPartnerService :: ServiceConfig
-playMoviesPartnerService
-  = defaultService (ServiceId "playmoviespartner:v1")
-      "playmoviespartner.googleapis.com"
+import Network.Google.PlayMoviesPartner.Internal.Product
+import Network.Google.PlayMoviesPartner.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Google Play Movies Partner API. This contains the host and root path used as a starting point for constructing service requests.
+playMoviesPartnerService :: Core.ServiceConfig
+playMoviesPartnerService =
+  Core.defaultService
+    (Core.ServiceId "playmoviespartner:v1")
+    "playmoviespartner.googleapis.com"
 
 -- | View the digital assets you publish on Google Play Movies and TV
-playmoviesPartnerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-playmoviesPartnerReadOnlyScope = Proxy
+playmovies_partnerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+playmovies_partnerReadOnlyScope = Core.Proxy
