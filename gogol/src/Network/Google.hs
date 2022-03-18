@@ -117,7 +117,6 @@ import qualified Control.Monad.State.Lazy as LS
 import qualified Control.Monad.State.Strict as S
 import Control.Monad.Trans.Except (ExceptT)
 import Control.Monad.Trans.Identity (IdentityT)
-import Control.Monad.Trans.List (ListT)
 import Control.Monad.Trans.Maybe (MaybeT)
 import Control.Monad.Trans.Resource
 import qualified Control.Monad.Writer.Lazy as LW
