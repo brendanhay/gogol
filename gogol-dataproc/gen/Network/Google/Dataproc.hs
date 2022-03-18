@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Dataproc
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,1282 +30,1071 @@
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference>
 module Network.Google.Dataproc
-    (
-    -- * Service Configuration
-      dataprocService
+  ( -- * Configuration
+    dataprocService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , DataprocAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** dataproc.projects.locations.autoscalingPolicies.create
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Create
+    DataprocProjectsLocationsAutoscalingPoliciesCreateResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesCreate,
+    DataprocProjectsLocationsAutoscalingPoliciesCreate,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.delete
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
+    DataprocProjectsLocationsAutoscalingPoliciesDeleteResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesDelete,
+    DataprocProjectsLocationsAutoscalingPoliciesDelete,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.get
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Get
+    DataprocProjectsLocationsAutoscalingPoliciesGetResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesGet,
+    DataprocProjectsLocationsAutoscalingPoliciesGet,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.getIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.GetIAMPolicy
+    DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicyResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy,
+    DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.list
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.List
+    DataprocProjectsLocationsAutoscalingPoliciesListResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesList,
+    DataprocProjectsLocationsAutoscalingPoliciesList,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.setIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.SetIAMPolicy
+    DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicyResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy,
+    DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.testIamPermissions
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.TestIAMPermissions
+    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissionsResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
+    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.update
-    , module Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Update
+    DataprocProjectsLocationsAutoscalingPoliciesUpdateResource,
+    newDataprocProjectsLocationsAutoscalingPoliciesUpdate,
+    DataprocProjectsLocationsAutoscalingPoliciesUpdate,
+
+    -- ** dataproc.projects.locations.batches.create
+    DataprocProjectsLocationsBatchesCreateResource,
+    newDataprocProjectsLocationsBatchesCreate,
+    DataprocProjectsLocationsBatchesCreate,
+
+    -- ** dataproc.projects.locations.batches.delete
+    DataprocProjectsLocationsBatchesDeleteResource,
+    newDataprocProjectsLocationsBatchesDelete,
+    DataprocProjectsLocationsBatchesDelete,
+
+    -- ** dataproc.projects.locations.batches.get
+    DataprocProjectsLocationsBatchesGetResource,
+    newDataprocProjectsLocationsBatchesGet,
+    DataprocProjectsLocationsBatchesGet,
+
+    -- ** dataproc.projects.locations.batches.list
+    DataprocProjectsLocationsBatchesListResource,
+    newDataprocProjectsLocationsBatchesList,
+    DataprocProjectsLocationsBatchesList,
 
     -- ** dataproc.projects.locations.workflowTemplates.create
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Create
+    DataprocProjectsLocationsWorkflowTemplatesCreateResource,
+    newDataprocProjectsLocationsWorkflowTemplatesCreate,
+    DataprocProjectsLocationsWorkflowTemplatesCreate,
 
     -- ** dataproc.projects.locations.workflowTemplates.delete
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Delete
+    DataprocProjectsLocationsWorkflowTemplatesDeleteResource,
+    newDataprocProjectsLocationsWorkflowTemplatesDelete,
+    DataprocProjectsLocationsWorkflowTemplatesDelete,
 
     -- ** dataproc.projects.locations.workflowTemplates.get
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Get
+    DataprocProjectsLocationsWorkflowTemplatesGetResource,
+    newDataprocProjectsLocationsWorkflowTemplatesGet,
+    DataprocProjectsLocationsWorkflowTemplatesGet,
 
     -- ** dataproc.projects.locations.workflowTemplates.getIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.GetIAMPolicy
+    DataprocProjectsLocationsWorkflowTemplatesGetIamPolicyResource,
+    newDataprocProjectsLocationsWorkflowTemplatesGetIamPolicy,
+    DataprocProjectsLocationsWorkflowTemplatesGetIamPolicy,
 
     -- ** dataproc.projects.locations.workflowTemplates.instantiate
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
+    DataprocProjectsLocationsWorkflowTemplatesInstantiateResource,
+    newDataprocProjectsLocationsWorkflowTemplatesInstantiate,
+    DataprocProjectsLocationsWorkflowTemplatesInstantiate,
 
     -- ** dataproc.projects.locations.workflowTemplates.instantiateInline
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.InstantiateInline
+    DataprocProjectsLocationsWorkflowTemplatesInstantiateInlineResource,
+    newDataprocProjectsLocationsWorkflowTemplatesInstantiateInline,
+    DataprocProjectsLocationsWorkflowTemplatesInstantiateInline,
 
     -- ** dataproc.projects.locations.workflowTemplates.list
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.List
+    DataprocProjectsLocationsWorkflowTemplatesListResource,
+    newDataprocProjectsLocationsWorkflowTemplatesList,
+    DataprocProjectsLocationsWorkflowTemplatesList,
 
     -- ** dataproc.projects.locations.workflowTemplates.setIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.SetIAMPolicy
+    DataprocProjectsLocationsWorkflowTemplatesSetIamPolicyResource,
+    newDataprocProjectsLocationsWorkflowTemplatesSetIamPolicy,
+    DataprocProjectsLocationsWorkflowTemplatesSetIamPolicy,
 
     -- ** dataproc.projects.locations.workflowTemplates.testIamPermissions
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.TestIAMPermissions
+    DataprocProjectsLocationsWorkflowTemplatesTestIamPermissionsResource,
+    newDataprocProjectsLocationsWorkflowTemplatesTestIamPermissions,
+    DataprocProjectsLocationsWorkflowTemplatesTestIamPermissions,
 
     -- ** dataproc.projects.locations.workflowTemplates.update
-    , module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Update
+    DataprocProjectsLocationsWorkflowTemplatesUpdateResource,
+    newDataprocProjectsLocationsWorkflowTemplatesUpdate,
+    DataprocProjectsLocationsWorkflowTemplatesUpdate,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.create
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Create
+    DataprocProjectsRegionsAutoscalingPoliciesCreateResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesCreate,
+    DataprocProjectsRegionsAutoscalingPoliciesCreate,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.delete
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
+    DataprocProjectsRegionsAutoscalingPoliciesDeleteResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesDelete,
+    DataprocProjectsRegionsAutoscalingPoliciesDelete,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.get
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Get
+    DataprocProjectsRegionsAutoscalingPoliciesGetResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesGet,
+    DataprocProjectsRegionsAutoscalingPoliciesGet,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.getIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.GetIAMPolicy
+    DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicyResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy,
+    DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.list
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.List
+    DataprocProjectsRegionsAutoscalingPoliciesListResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesList,
+    DataprocProjectsRegionsAutoscalingPoliciesList,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.setIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.SetIAMPolicy
+    DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicyResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy,
+    DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.testIamPermissions
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.TestIAMPermissions
+    DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissionsResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions,
+    DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.update
-    , module Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Update
+    DataprocProjectsRegionsAutoscalingPoliciesUpdateResource,
+    newDataprocProjectsRegionsAutoscalingPoliciesUpdate,
+    DataprocProjectsRegionsAutoscalingPoliciesUpdate,
 
     -- ** dataproc.projects.regions.clusters.create
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
+    DataprocProjectsRegionsClustersCreateResource,
+    newDataprocProjectsRegionsClustersCreate,
+    DataprocProjectsRegionsClustersCreate,
 
     -- ** dataproc.projects.regions.clusters.delete
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
+    DataprocProjectsRegionsClustersDeleteResource,
+    newDataprocProjectsRegionsClustersDelete,
+    DataprocProjectsRegionsClustersDelete,
 
     -- ** dataproc.projects.regions.clusters.diagnose
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
+    DataprocProjectsRegionsClustersDiagnoseResource,
+    newDataprocProjectsRegionsClustersDiagnose,
+    DataprocProjectsRegionsClustersDiagnose,
 
     -- ** dataproc.projects.regions.clusters.get
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Get
+    DataprocProjectsRegionsClustersGetResource,
+    newDataprocProjectsRegionsClustersGet,
+    DataprocProjectsRegionsClustersGet,
 
     -- ** dataproc.projects.regions.clusters.getIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.GetIAMPolicy
+    DataprocProjectsRegionsClustersGetIamPolicyResource,
+    newDataprocProjectsRegionsClustersGetIamPolicy,
+    DataprocProjectsRegionsClustersGetIamPolicy,
 
     -- ** dataproc.projects.regions.clusters.injectCredentials
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.InjectCredentials
+    DataprocProjectsRegionsClustersInjectCredentialsResource,
+    newDataprocProjectsRegionsClustersInjectCredentials,
+    DataprocProjectsRegionsClustersInjectCredentials,
 
     -- ** dataproc.projects.regions.clusters.list
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
+    DataprocProjectsRegionsClustersListResource,
+    newDataprocProjectsRegionsClustersList,
+    DataprocProjectsRegionsClustersList,
 
     -- ** dataproc.projects.regions.clusters.patch
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Patch
+    DataprocProjectsRegionsClustersPatchResource,
+    newDataprocProjectsRegionsClustersPatch,
+    DataprocProjectsRegionsClustersPatch,
 
     -- ** dataproc.projects.regions.clusters.repair
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Repair
+    DataprocProjectsRegionsClustersRepairResource,
+    newDataprocProjectsRegionsClustersRepair,
+    DataprocProjectsRegionsClustersRepair,
 
     -- ** dataproc.projects.regions.clusters.setIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.SetIAMPolicy
+    DataprocProjectsRegionsClustersSetIamPolicyResource,
+    newDataprocProjectsRegionsClustersSetIamPolicy,
+    DataprocProjectsRegionsClustersSetIamPolicy,
 
     -- ** dataproc.projects.regions.clusters.start
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Start
+    DataprocProjectsRegionsClustersStartResource,
+    newDataprocProjectsRegionsClustersStart,
+    DataprocProjectsRegionsClustersStart,
 
     -- ** dataproc.projects.regions.clusters.stop
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Stop
+    DataprocProjectsRegionsClustersStopResource,
+    newDataprocProjectsRegionsClustersStop,
+    DataprocProjectsRegionsClustersStop,
 
     -- ** dataproc.projects.regions.clusters.testIamPermissions
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.TestIAMPermissions
+    DataprocProjectsRegionsClustersTestIamPermissionsResource,
+    newDataprocProjectsRegionsClustersTestIamPermissions,
+    DataprocProjectsRegionsClustersTestIamPermissions,
 
     -- ** dataproc.projects.regions.jobs.cancel
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
+    DataprocProjectsRegionsJobsCancelResource,
+    newDataprocProjectsRegionsJobsCancel,
+    DataprocProjectsRegionsJobsCancel,
 
     -- ** dataproc.projects.regions.jobs.delete
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Delete
+    DataprocProjectsRegionsJobsDeleteResource,
+    newDataprocProjectsRegionsJobsDelete,
+    DataprocProjectsRegionsJobsDelete,
 
     -- ** dataproc.projects.regions.jobs.get
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Get
+    DataprocProjectsRegionsJobsGetResource,
+    newDataprocProjectsRegionsJobsGet,
+    DataprocProjectsRegionsJobsGet,
 
     -- ** dataproc.projects.regions.jobs.getIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.GetIAMPolicy
+    DataprocProjectsRegionsJobsGetIamPolicyResource,
+    newDataprocProjectsRegionsJobsGetIamPolicy,
+    DataprocProjectsRegionsJobsGetIamPolicy,
 
     -- ** dataproc.projects.regions.jobs.list
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.List
+    DataprocProjectsRegionsJobsListResource,
+    newDataprocProjectsRegionsJobsList,
+    DataprocProjectsRegionsJobsList,
 
     -- ** dataproc.projects.regions.jobs.patch
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Patch
+    DataprocProjectsRegionsJobsPatchResource,
+    newDataprocProjectsRegionsJobsPatch,
+    DataprocProjectsRegionsJobsPatch,
 
     -- ** dataproc.projects.regions.jobs.setIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SetIAMPolicy
+    DataprocProjectsRegionsJobsSetIamPolicyResource,
+    newDataprocProjectsRegionsJobsSetIamPolicy,
+    DataprocProjectsRegionsJobsSetIamPolicy,
 
     -- ** dataproc.projects.regions.jobs.submit
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Submit
+    DataprocProjectsRegionsJobsSubmitResource,
+    newDataprocProjectsRegionsJobsSubmit,
+    DataprocProjectsRegionsJobsSubmit,
 
     -- ** dataproc.projects.regions.jobs.submitAsOperation
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SubmitAsOperation
+    DataprocProjectsRegionsJobsSubmitAsOperationResource,
+    newDataprocProjectsRegionsJobsSubmitAsOperation,
+    DataprocProjectsRegionsJobsSubmitAsOperation,
 
     -- ** dataproc.projects.regions.jobs.testIamPermissions
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.TestIAMPermissions
+    DataprocProjectsRegionsJobsTestIamPermissionsResource,
+    newDataprocProjectsRegionsJobsTestIamPermissions,
+    DataprocProjectsRegionsJobsTestIamPermissions,
 
     -- ** dataproc.projects.regions.operations.cancel
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Cancel
+    DataprocProjectsRegionsOperationsCancelResource,
+    newDataprocProjectsRegionsOperationsCancel,
+    DataprocProjectsRegionsOperationsCancel,
 
     -- ** dataproc.projects.regions.operations.delete
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete
+    DataprocProjectsRegionsOperationsDeleteResource,
+    newDataprocProjectsRegionsOperationsDelete,
+    DataprocProjectsRegionsOperationsDelete,
 
     -- ** dataproc.projects.regions.operations.get
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Get
+    DataprocProjectsRegionsOperationsGetResource,
+    newDataprocProjectsRegionsOperationsGet,
+    DataprocProjectsRegionsOperationsGet,
 
     -- ** dataproc.projects.regions.operations.getIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Operations.GetIAMPolicy
+    DataprocProjectsRegionsOperationsGetIamPolicyResource,
+    newDataprocProjectsRegionsOperationsGetIamPolicy,
+    DataprocProjectsRegionsOperationsGetIamPolicy,
 
     -- ** dataproc.projects.regions.operations.list
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Operations.List
+    DataprocProjectsRegionsOperationsListResource,
+    newDataprocProjectsRegionsOperationsList,
+    DataprocProjectsRegionsOperationsList,
 
     -- ** dataproc.projects.regions.operations.setIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Operations.SetIAMPolicy
+    DataprocProjectsRegionsOperationsSetIamPolicyResource,
+    newDataprocProjectsRegionsOperationsSetIamPolicy,
+    DataprocProjectsRegionsOperationsSetIamPolicy,
 
     -- ** dataproc.projects.regions.operations.testIamPermissions
-    , module Network.Google.Resource.Dataproc.Projects.Regions.Operations.TestIAMPermissions
+    DataprocProjectsRegionsOperationsTestIamPermissionsResource,
+    newDataprocProjectsRegionsOperationsTestIamPermissions,
+    DataprocProjectsRegionsOperationsTestIamPermissions,
 
     -- ** dataproc.projects.regions.workflowTemplates.create
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Create
+    DataprocProjectsRegionsWorkflowTemplatesCreateResource,
+    newDataprocProjectsRegionsWorkflowTemplatesCreate,
+    DataprocProjectsRegionsWorkflowTemplatesCreate,
 
     -- ** dataproc.projects.regions.workflowTemplates.delete
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Delete
+    DataprocProjectsRegionsWorkflowTemplatesDeleteResource,
+    newDataprocProjectsRegionsWorkflowTemplatesDelete,
+    DataprocProjectsRegionsWorkflowTemplatesDelete,
 
     -- ** dataproc.projects.regions.workflowTemplates.get
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Get
+    DataprocProjectsRegionsWorkflowTemplatesGetResource,
+    newDataprocProjectsRegionsWorkflowTemplatesGet,
+    DataprocProjectsRegionsWorkflowTemplatesGet,
 
     -- ** dataproc.projects.regions.workflowTemplates.getIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.GetIAMPolicy
+    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicyResource,
+    newDataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
+    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
 
     -- ** dataproc.projects.regions.workflowTemplates.instantiate
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
+    DataprocProjectsRegionsWorkflowTemplatesInstantiateResource,
+    newDataprocProjectsRegionsWorkflowTemplatesInstantiate,
+    DataprocProjectsRegionsWorkflowTemplatesInstantiate,
 
     -- ** dataproc.projects.regions.workflowTemplates.instantiateInline
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
+    DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineResource,
+    newDataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
+    DataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
 
     -- ** dataproc.projects.regions.workflowTemplates.list
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.List
+    DataprocProjectsRegionsWorkflowTemplatesListResource,
+    newDataprocProjectsRegionsWorkflowTemplatesList,
+    DataprocProjectsRegionsWorkflowTemplatesList,
 
     -- ** dataproc.projects.regions.workflowTemplates.setIamPolicy
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.SetIAMPolicy
+    DataprocProjectsRegionsWorkflowTemplatesSetIamPolicyResource,
+    newDataprocProjectsRegionsWorkflowTemplatesSetIamPolicy,
+    DataprocProjectsRegionsWorkflowTemplatesSetIamPolicy,
 
     -- ** dataproc.projects.regions.workflowTemplates.testIamPermissions
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.TestIAMPermissions
+    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissionsResource,
+    newDataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
+    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
 
     -- ** dataproc.projects.regions.workflowTemplates.update
-    , module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Update
+    DataprocProjectsRegionsWorkflowTemplatesUpdateResource,
+    newDataprocProjectsRegionsWorkflowTemplatesUpdate,
+    DataprocProjectsRegionsWorkflowTemplatesUpdate,
 
     -- * Types
 
-    -- ** SecurityConfig
-    , SecurityConfig
-    , securityConfig
-    , scIdentityConfig
-    , scKerberosConfig
-
-    -- ** JobReference
-    , JobReference
-    , jobReference
-    , jrJobId
-    , jrProjectId
-
-    -- ** JobStatusState
-    , JobStatusState (..)
-
-    -- ** WorkflowNodeState
-    , WorkflowNodeState (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** PySparkJobProperties
-    , PySparkJobProperties
-    , pySparkJobProperties
-    , psjpAddtional
-
-    -- ** DiagnoseClusterResults
-    , DiagnoseClusterResults
-    , diagnoseClusterResults
-    , dcrOutputURI
-
-    -- ** InstanceGroupConfig
-    , InstanceGroupConfig
-    , instanceGroupConfig
-    , igcNumInstances
-    , igcDiskConfig
-    , igcIsPreemptible
-    , igcPreemptibility
-    , igcImageURI
-    , igcAccelerators
-    , igcInstanceNames
-    , igcManagedGroupConfig
-    , igcMachineTypeURI
-    , igcMinCPUPlatform
-    , igcInstanceReferences
-
-    -- ** IdentityConfig
-    , IdentityConfig
-    , identityConfig
-    , icUserServiceAccountMApping
-
-    -- ** SparkJob
-    , SparkJob
-    , sparkJob
-    , sjArgs
-    , sjMainJarFileURI
-    , sjJarFileURIs
-    , sjFileURIs
-    , sjArchiveURIs
-    , sjMainClass
-    , sjLoggingConfig
-    , sjProperties
-
-    -- ** SoftwareConfigProperties
-    , SoftwareConfigProperties
-    , softwareConfigProperties
-    , scpAddtional
-
-    -- ** WorkflowGraph
-    , WorkflowGraph
-    , workflowGraph
-    , wgNodes
-
-    -- ** ClusterOperation
-    , ClusterOperation
-    , clusterOperation
-    , coDone
-    , coError
-    , coOperationId
-
-    -- ** ProjectsRegionsJobsListJobStateMatcher
-    , ProjectsRegionsJobsListJobStateMatcher (..)
-
-    -- ** LoggingConfigDriverLogLevelsAdditional
-    , LoggingConfigDriverLogLevelsAdditional (..)
-
-    -- ** ClusterSelector
-    , ClusterSelector
-    , clusterSelector
-    , csZone
-    , csClusterLabels
-
-    -- ** KerberosConfig
-    , KerberosConfig
-    , kerberosConfig
-    , kcEnableKerberos
-    , kcCrossRealmTrustAdminServer
-    , kcCrossRealmTrustRealm
-    , kcKeyPasswordURI
-    , kcKeystorePasswordURI
-    , kcKmsKeyURI
-    , kcRealm
-    , kcTgtLifetimeHours
-    , kcTruststorePasswordURI
-    , kcTruststoreURI
-    , kcCrossRealmTrustSharedPasswordURI
-    , kcRootPrincipalPasswordURI
-    , kcKdcDBKeyURI
-    , kcKeystoreURI
-    , kcCrossRealmTrustKdc
-
-    -- ** JobScheduling
-    , JobScheduling
-    , jobScheduling
-    , jsMaxFailuresTotal
-    , jsMaxFailuresPerHour
-
-    -- ** DiskConfig
-    , DiskConfig
-    , diskConfig
-    , dcNumLocalSsds
-    , dcBootDiskType
-    , dcBootDiskSizeGb
-
-    -- ** ClusterOperationMetadataLabels
-    , ClusterOperationMetadataLabels
-    , clusterOperationMetadataLabels
-    , comlAddtional
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** HiveJobScriptVariables
-    , HiveJobScriptVariables
-    , hiveJobScriptVariables
-    , hjsvAddtional
-
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
-    , giprOptions
-
-    -- ** WorkflowTemplatePlacement
-    , WorkflowTemplatePlacement
-    , workflowTemplatePlacement
-    , wtpClusterSelector
-    , wtpManagedCluster
-
-    -- ** Cluster
-    , Cluster
-    , cluster
-    , cStatus
-    , cMetrics
-    , cClusterUuid
-    , cConfig
-    , cClusterName
-    , cLabels
-    , cProjectId
-    , cStatusHistory
-
-    -- ** ManagedClusterLabels
-    , ManagedClusterLabels
-    , managedClusterLabels
-    , mclAddtional
-
-    -- ** ParameterValidation
-    , ParameterValidation
-    , parameterValidation
-    , pvRegex
-    , pvValues
-
-    -- ** InstanceReference
-    , InstanceReference
-    , instanceReference
-    , irInstanceId
-    , irPublicEciesKey
-    , irPublicKey
-    , irInstanceName
-
-    -- ** SoftwareConfigOptionalComponentsItem
-    , SoftwareConfigOptionalComponentsItem (..)
-
-    -- ** JobLabels
-    , JobLabels
-    , jobLabels
-    , jlAddtional
-
-    -- ** SubmitJobRequest
-    , SubmitJobRequest
-    , submitJobRequest
-    , sjrRequestId
-    , sjrJob
-
-    -- ** ReservationAffinity
-    , ReservationAffinity
-    , reservationAffinity
-    , raConsumeReservationType
-    , raValues
-    , raKey
-
-    -- ** JobMetadata
-    , JobMetadata
-    , jobMetadata
-    , jmStatus
-    , jmJobId
-    , jmStartTime
-    , jmOperationType
-
-    -- ** ClusterStatusSubState
-    , ClusterStatusSubState (..)
-
-    -- ** ClusterMetrics
-    , ClusterMetrics
-    , clusterMetrics
-    , cmYarnMetrics
-    , cmHdfsMetrics
-
-    -- ** InstanceGroupConfigPreemptibility
-    , InstanceGroupConfigPreemptibility (..)
-
-    -- ** NodeGroupAffinity
-    , NodeGroupAffinity
-    , nodeGroupAffinity
-    , ngaNodeGroupURI
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** HiveJob
-    , HiveJob
-    , hiveJob
-    , hjQueryFileURI
-    , hjJarFileURIs
-    , hjScriptVariables
-    , hjQueryList
-    , hjContinueOnFailure
-    , hjProperties
-
-    -- ** ListAutoscalingPoliciesResponse
-    , ListAutoscalingPoliciesResponse
-    , listAutoscalingPoliciesResponse
-    , laprNextPageToken
-    , laprPolicies
-
-    -- ** OrderedJobLabels
-    , OrderedJobLabels
-    , orderedJobLabels
-    , ojlAddtional
-
-    -- ** AutoscalingConfig
-    , AutoscalingConfig
-    , autoscalingConfig
-    , acPolicyURI
-
-    -- ** ClusterSelectorClusterLabels
-    , ClusterSelectorClusterLabels
-    , clusterSelectorClusterLabels
-    , csclAddtional
-
-    -- ** SparkSQLJobScriptVariables
-    , SparkSQLJobScriptVariables
-    , sparkSQLJobScriptVariables
-    , ssqljsvAddtional
-
-    -- ** PigJobProperties
-    , PigJobProperties
-    , pigJobProperties
-    , pjpAddtional
-
-    -- ** PrestoJob
-    , PrestoJob
-    , prestoJob
-    , pjQueryFileURI
-    , pjClientTags
-    , pjOutputFormat
-    , pjQueryList
-    , pjContinueOnFailure
-    , pjLoggingConfig
-    , pjProperties
-
-    -- ** ClusterConfig
-    , ClusterConfig
-    , clusterConfig
-    , ccSecurityConfig
-    , ccWorkerConfig
-    , ccTempBucket
-    , ccInitializationActions
-    , ccAutoscalingConfig
-    , ccMasterConfig
-    , ccGceClusterConfig
-    , ccLifecycleConfig
-    , ccConfigBucket
-    , ccEncryptionConfig
-    , ccSoftwareConfig
-    , ccMetastoreConfig
-    , ccSecondaryWorkerConfig
-    , ccGkeClusterConfig
-    , ccEndpointConfig
-
-    -- ** GceClusterConfigPrivateIPv6GoogleAccess
-    , GceClusterConfigPrivateIPv6GoogleAccess (..)
-
-    -- ** InstantiateWorkflowTemplateRequest
-    , InstantiateWorkflowTemplateRequest
-    , instantiateWorkflowTemplateRequest
-    , iwtrRequestId
-    , iwtrVersion
-    , iwtrParameters
-
-    -- ** HadoopJobProperties
-    , HadoopJobProperties
-    , hadoopJobProperties
-    , hjpAddtional
-
-    -- ** StopClusterRequest
-    , StopClusterRequest
-    , stopClusterRequest
-    , scrRequestId
-    , scrClusterUuid
-
-    -- ** EndpointConfigHTTPPorts
-    , EndpointConfigHTTPPorts
-    , endpointConfigHTTPPorts
-    , echttppAddtional
-
-    -- ** WorkflowTemplate
-    , WorkflowTemplate
-    , workflowTemplate
-    , wtJobs
-    , wtUpdateTime
-    , wtName
-    , wtVersion
-    , wtParameters
-    , wtId
-    , wtLabels
-    , wtCreateTime
-    , wtDagTimeout
-    , wtPlacement
-
-    -- ** ClusterOperationStatus
-    , ClusterOperationStatus
-    , clusterOperationStatus
-    , cosState
-    , cosInnerState
-    , cosStateStartTime
-    , cosDetails
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** SparkSQLJobProperties
-    , SparkSQLJobProperties
-    , sparkSQLJobProperties
-    , ssqljpAddtional
-
-    -- ** WorkflowTemplateLabels
-    , WorkflowTemplateLabels
-    , workflowTemplateLabels
-    , wtlAddtional
-
-    -- ** NodeInitializationAction
-    , NodeInitializationAction
-    , nodeInitializationAction
-    , niaExecutionTimeout
-    , niaExecutableFile
-
-    -- ** ClusterMetricsYarnMetrics
-    , ClusterMetricsYarnMetrics
-    , clusterMetricsYarnMetrics
-    , cmymAddtional
-
-    -- ** GetPolicyOptions
-    , GetPolicyOptions
-    , getPolicyOptions
-    , gpoRequestedPolicyVersion
-
-    -- ** RegexValidation
-    , RegexValidation
-    , regexValidation
-    , rvRegexes
-
-    -- ** JobPlacement
-    , JobPlacement
-    , jobPlacement
-    , jpClusterUuid
-    , jpClusterLabels
-    , jpClusterName
-
-    -- ** NamespacedGkeDeploymentTarget
-    , NamespacedGkeDeploymentTarget
-    , namespacedGkeDeploymentTarget
-    , ngdtTargetGkeCluster
-    , ngdtClusterNamespace
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
-
-    -- ** InstanceGroupAutoscalingPolicyConfig
-    , InstanceGroupAutoscalingPolicyConfig
-    , instanceGroupAutoscalingPolicyConfig
-    , igapcWeight
-    , igapcMinInstances
-    , igapcMaxInstances
-
-    -- ** ConfidentialInstanceConfig
-    , ConfidentialInstanceConfig
-    , confidentialInstanceConfig
-    , cicEnableConfidentialCompute
-
-    -- ** BatchOperationMetadataOperationType
-    , BatchOperationMetadataOperationType (..)
-
-    -- ** TemplateParameter
-    , TemplateParameter
-    , templateParameter
-    , tpName
-    , tpValidation
-    , tpDescription
-    , tpFields
-
-    -- ** GceClusterConfig
-    , GceClusterConfig
-    , gceClusterConfig
-    , gccSubnetworkURI
-    , gccReservationAffinity
-    , gccInternalIPOnly
-    , gccNodeGroupAffinity
-    , gccNetworkURI
-    , gccZoneURI
-    , gccConfidentialInstanceConfig
-    , gccServiceAccount
-    , gccMetadata
-    , gccServiceAccountScopes
-    , gccShieldedInstanceConfig
-    , gccTags
-    , gccPrivateIPv6GoogleAccess
-
-    -- ** WorkflowMetadataState
-    , WorkflowMetadataState (..)
-
-    -- ** JobPlacementClusterLabels
-    , JobPlacementClusterLabels
-    , jobPlacementClusterLabels
-    , jpclAddtional
-
-    -- ** YarnApplicationState
-    , YarnApplicationState (..)
-
-    -- ** BatchOperationMetadataLabels
-    , BatchOperationMetadataLabels
-    , batchOperationMetadataLabels
-    , bomlAddtional
-
-    -- ** ClusterStatusState
-    , ClusterStatusState (..)
-
-    -- ** ListWorkflowTemplatesResponse
-    , ListWorkflowTemplatesResponse
-    , listWorkflowTemplatesResponse
-    , lwtrNextPageToken
-    , lwtrTemplates
-
-    -- ** GceClusterConfigMetadata
-    , GceClusterConfigMetadata
-    , gceClusterConfigMetadata
-    , gccmAddtional
-
-    -- ** ClusterOperationStatusState
-    , ClusterOperationStatusState (..)
-
-    -- ** HiveJobProperties
-    , HiveJobProperties
-    , hiveJobProperties
-    , hAddtional
-
-    -- ** BatchOperationMetadata
-    , BatchOperationMetadata
-    , batchOperationMetadata
-    , bomBatch
-    , bomDoneTime
-    , bomWarnings
-    , bomBatchUuid
-    , bomLabels
-    , bomOperationType
-    , bomDescription
-    , bomCreateTime
-
-    -- ** WorkflowMetadataParameters
-    , WorkflowMetadataParameters
-    , workflowMetadataParameters
-    , wmpAddtional
-
-    -- ** LifecycleConfig
-    , LifecycleConfig
-    , lifecycleConfig
-    , lcIdleStartTime
-    , lcIdleDeleteTtl
-    , lcAutoDeleteTtl
-    , lcAutoDeleteTime
-
-    -- ** ManagedCluster
-    , ManagedCluster
-    , managedCluster
-    , mcConfig
-    , mcClusterName
-    , mcLabels
-
-    -- ** BasicAutoscalingAlgorithm
-    , BasicAutoscalingAlgorithm
-    , basicAutoscalingAlgorithm
-    , baaCooldownPeriod
-    , baaYarnConfig
-
-    -- ** ClusterLabels
-    , ClusterLabels
-    , clusterLabels
-    , clAddtional
-
-    -- ** Job
-    , Job
-    , job
-    , jSparkJob
-    , jStatus
-    , jDriverControlFilesURI
-    , jHiveJob
-    , jDone
-    , jPrestoJob
-    , jReference
-    , jSparkSQLJob
-    , jHadoopJob
-    , jJobUuid
-    , jYarnApplications
-    , jLabels
-    , jPysparkJob
-    , jDriverOutputResourceURI
-    , jScheduling
-    , jSparkRJob
-    , jStatusHistory
-    , jPlacement
-    , jPigJob
-
-    -- ** DiagnoseClusterRequest
-    , DiagnoseClusterRequest
-    , diagnoseClusterRequest
-
-    -- ** SparkRJobProperties
-    , SparkRJobProperties
-    , sparkRJobProperties
-    , srjpAddtional
-
-    -- ** HadoopJob
-    , HadoopJob
-    , hadoopJob
-    , hArgs
-    , hMainJarFileURI
-    , hJarFileURIs
-    , hFileURIs
-    , hArchiveURIs
-    , hMainClass
-    , hLoggingConfig
-    , hProperties
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** InstantiateWorkflowTemplateRequestParameters
-    , InstantiateWorkflowTemplateRequestParameters
-    , instantiateWorkflowTemplateRequestParameters
-    , iwtrpAddtional
-
-    -- ** ClusterOperationMetadata
-    , ClusterOperationMetadata
-    , clusterOperationMetadata
-    , comStatus
-    , comClusterUuid
-    , comWarnings
-    , comClusterName
-    , comLabels
-    , comOperationType
-    , comStatusHistory
-    , comDescription
-
-    -- ** AutoscalingPolicy
-    , AutoscalingPolicy
-    , autoscalingPolicy
-    , apWorkerConfig
-    , apName
-    , apBasicAlgorithm
-    , apId
-    , apSecondaryWorkerConfig
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** SparkSQLJob
-    , SparkSQLJob
-    , sparkSQLJob
-    , ssqljQueryFileURI
-    , ssqljJarFileURIs
-    , ssqljScriptVariables
-    , ssqljQueryList
-    , ssqljLoggingConfig
-    , ssqljProperties
-
-    -- ** SoftwareConfig
-    , SoftwareConfig
-    , softwareConfig
-    , scOptionalComponents
-    , scImageVersion
-    , scProperties
-
-    -- ** ListJobsResponse
-    , ListJobsResponse
-    , listJobsResponse
-    , ljrNextPageToken
-    , ljrJobs
-
-    -- ** IdentityConfigUserServiceAccountMApping
-    , IdentityConfigUserServiceAccountMApping
-    , identityConfigUserServiceAccountMApping
-    , icusamaAddtional
-
-    -- ** ShieldedInstanceConfig
-    , ShieldedInstanceConfig
-    , shieldedInstanceConfig
-    , sicEnableVtpm
-    , sicEnableIntegrityMonitoring
-    , sicEnableSecureBoot
+    Xgafv (..),
 
     -- ** AcceleratorConfig
-    , AcceleratorConfig
-    , acceleratorConfig
-    , acAcceleratorCount
-    , acAcceleratorTypeURI
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
 
-    -- ** SparkJobProperties
-    , SparkJobProperties
-    , sparkJobProperties
-    , sjpAddtional
+    -- ** AutoscalingConfig
+    AutoscalingConfig (..),
+    newAutoscalingConfig,
 
-    -- ** EncryptionConfig
-    , EncryptionConfig
-    , encryptionConfig
-    , ecGcePdKmsKeyName
+    -- ** AutoscalingPolicy
+    AutoscalingPolicy (..),
+    newAutoscalingPolicy,
 
-    -- ** PySparkJob
-    , PySparkJob
-    , pySparkJob
-    , psjPythonFileURIs
-    , psjMainPythonFileURI
-    , psjArgs
-    , psjJarFileURIs
-    , psjFileURIs
-    , psjArchiveURIs
-    , psjLoggingConfig
-    , psjProperties
+    -- ** AutoscalingPolicy_Labels
+    AutoscalingPolicy_Labels (..),
+    newAutoscalingPolicy_Labels,
 
-    -- ** MetastoreConfig
-    , MetastoreConfig
-    , metastoreConfig
-    , mcDataprocMetastoreService
-
-    -- ** ManagedGroupConfig
-    , ManagedGroupConfig
-    , managedGroupConfig
-    , mgcInstanceTemplateName
-    , mgcInstanceGroupManagerName
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** ListClustersResponse
-    , ListClustersResponse
-    , listClustersResponse
-    , lcrNextPageToken
-    , lcrClusters
-
-    -- ** ValueValidation
-    , ValueValidation
-    , valueValidation
-    , vvValues
-
-    -- ** JobStatusSubState
-    , JobStatusSubState (..)
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** OrderedJob
-    , OrderedJob
-    , orderedJob
-    , ojSparkJob
-    , ojStepId
-    , ojPrerequisiteStepIds
-    , ojHiveJob
-    , ojPrestoJob
-    , ojSparkSQLJob
-    , ojHadoopJob
-    , ojLabels
-    , ojPysparkJob
-    , ojScheduling
-    , ojSparkRJob
-    , ojPigJob
-
-    -- ** CancelJobRequest
-    , CancelJobRequest
-    , cancelJobRequest
-
-    -- ** QueryList
-    , QueryList
-    , queryList
-    , qlQueries
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** JobStatus
-    , JobStatus
-    , jobStatus
-    , jsState
-    , jsSubState
-    , jsStateStartTime
-    , jsDetails
-
-    -- ** StartClusterRequest
-    , StartClusterRequest
-    , startClusterRequest
-    , sRequestId
-    , sClusterUuid
-
-    -- ** PigJobScriptVariables
-    , PigJobScriptVariables
-    , pigJobScriptVariables
-    , pjsvAddtional
-
-    -- ** ClusterMetricsHdfsMetrics
-    , ClusterMetricsHdfsMetrics
-    , clusterMetricsHdfsMetrics
-    , cmhmAddtional
-
-    -- ** WorkflowNode
-    , WorkflowNode
-    , workflowNode
-    , wnState
-    , wnStepId
-    , wnJobId
-    , wnPrerequisiteStepIds
-    , wnError
-
-    -- ** RepairClusterRequest
-    , RepairClusterRequest
-    , repairClusterRequest
-    , rcrRequestId
-    , rcrClusterUuid
-
-    -- ** WorkflowMetadata
-    , WorkflowMetadata
-    , workflowMetadata
-    , wmGraph
-    , wmState
-    , wmDagStartTime
-    , wmClusterUuid
-    , wmStartTime
-    , wmDeleteCluster
-    , wmCreateCluster
-    , wmVersion
-    , wmEndTime
-    , wmParameters
-    , wmClusterName
-    , wmDagEndTime
-    , wmTemplate
-    , wmDagTimeout
-
-    -- ** InjectCredentialsRequest
-    , InjectCredentialsRequest
-    , injectCredentialsRequest
-    , icrClusterUuid
-    , icrCredentialsCiphertext
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** LoggingConfigDriverLogLevels
-    , LoggingConfigDriverLogLevels
-    , loggingConfigDriverLogLevels
-    , lcdllAddtional
+    -- ** BasicAutoscalingAlgorithm
+    BasicAutoscalingAlgorithm (..),
+    newBasicAutoscalingAlgorithm,
 
     -- ** BasicYarnAutoscalingConfig
-    , BasicYarnAutoscalingConfig
-    , basicYarnAutoscalingConfig
-    , byacScaleDownFactor
-    , byacScaleUpFactor
-    , byacScaleUpMinWorkerFraction
-    , byacScaleDownMinWorkerFraction
-    , byacGracefulDecommissionTimeout
+    BasicYarnAutoscalingConfig (..),
+    newBasicYarnAutoscalingConfig,
 
-    -- ** ClusterStatus
-    , ClusterStatus
-    , clusterStatus
-    , csState
-    , csSubState
-    , csStateStartTime
-    , csDetail
+    -- ** Batch
+    Batch (..),
+    newBatch,
 
-    -- ** YarnApplication
-    , YarnApplication
-    , yarnApplication
-    , yaTrackingURL
-    , yaState
-    , yaProgress
-    , yaName
+    -- ** Batch_Labels
+    Batch_Labels (..),
+    newBatch_Labels,
 
-    -- ** SparkRJob
-    , SparkRJob
-    , sparkRJob
-    , srjArgs
-    , srjFileURIs
-    , srjMainRFileURI
-    , srjArchiveURIs
-    , srjLoggingConfig
-    , srjProperties
+    -- ** Batch_State
+    Batch_State (..),
 
-    -- ** ReservationAffinityConsumeReservationType
-    , ReservationAffinityConsumeReservationType (..)
+    -- ** BatchOperationMetadata
+    BatchOperationMetadata (..),
+    newBatchOperationMetadata,
 
-    -- ** EndpointConfig
-    , EndpointConfig
-    , endpointConfig
-    , ecEnableHTTPPortAccess
-    , ecHTTPPorts
+    -- ** BatchOperationMetadata_Labels
+    BatchOperationMetadata_Labels (..),
+    newBatchOperationMetadata_Labels,
 
-    -- ** PigJob
-    , PigJob
-    , pigJob
-    , pQueryFileURI
-    , pJarFileURIs
-    , pScriptVariables
-    , pQueryList
-    , pContinueOnFailure
-    , pLoggingConfig
-    , pProperties
-
-    -- ** PrestoJobProperties
-    , PrestoJobProperties
-    , prestoJobProperties
-    , pAddtional
-
-    -- ** LoggingConfig
-    , LoggingConfig
-    , loggingConfig
-    , lcDriverLogLevels
+    -- ** BatchOperationMetadata_OperationType
+    BatchOperationMetadata_OperationType (..),
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** CancelJobRequest
+    CancelJobRequest (..),
+    newCancelJobRequest,
+
+    -- ** Cluster
+    Cluster (..),
+    newCluster,
+
+    -- ** Cluster_Labels
+    Cluster_Labels (..),
+    newCluster_Labels,
+
+    -- ** ClusterConfig
+    ClusterConfig (..),
+    newClusterConfig,
+
+    -- ** ClusterMetrics
+    ClusterMetrics (..),
+    newClusterMetrics,
+
+    -- ** ClusterMetrics_HdfsMetrics
+    ClusterMetrics_HdfsMetrics (..),
+    newClusterMetrics_HdfsMetrics,
+
+    -- ** ClusterMetrics_YarnMetrics
+    ClusterMetrics_YarnMetrics (..),
+    newClusterMetrics_YarnMetrics,
+
+    -- ** ClusterOperation
+    ClusterOperation (..),
+    newClusterOperation,
+
+    -- ** ClusterOperationMetadata
+    ClusterOperationMetadata (..),
+    newClusterOperationMetadata,
+
+    -- ** ClusterOperationMetadata_Labels
+    ClusterOperationMetadata_Labels (..),
+    newClusterOperationMetadata_Labels,
+
+    -- ** ClusterOperationStatus
+    ClusterOperationStatus (..),
+    newClusterOperationStatus,
+
+    -- ** ClusterOperationStatus_State
+    ClusterOperationStatus_State (..),
+
+    -- ** ClusterSelector
+    ClusterSelector (..),
+    newClusterSelector,
+
+    -- ** ClusterSelector_ClusterLabels
+    ClusterSelector_ClusterLabels (..),
+    newClusterSelector_ClusterLabels,
+
+    -- ** ClusterStatus
+    ClusterStatus (..),
+    newClusterStatus,
+
+    -- ** ClusterStatus_State
+    ClusterStatus_State (..),
+
+    -- ** ClusterStatus_Substate
+    ClusterStatus_Substate (..),
+
+    -- ** ConfidentialInstanceConfig
+    ConfidentialInstanceConfig (..),
+    newConfidentialInstanceConfig,
+
+    -- ** DataprocMetricConfig
+    DataprocMetricConfig (..),
+    newDataprocMetricConfig,
+
+    -- ** DiagnoseClusterRequest
+    DiagnoseClusterRequest (..),
+    newDiagnoseClusterRequest,
+
+    -- ** DiagnoseClusterResults
+    DiagnoseClusterResults (..),
+    newDiagnoseClusterResults,
+
+    -- ** DiskConfig
+    DiskConfig (..),
+    newDiskConfig,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
+
+    -- ** EndpointConfig
+    EndpointConfig (..),
+    newEndpointConfig,
+
+    -- ** EndpointConfig_HttpPorts
+    EndpointConfig_HttpPorts (..),
+    newEndpointConfig_HttpPorts,
+
+    -- ** EnvironmentConfig
+    EnvironmentConfig (..),
+    newEnvironmentConfig,
+
+    -- ** ExecutionConfig
+    ExecutionConfig (..),
+    newExecutionConfig,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** GceClusterConfig
+    GceClusterConfig (..),
+    newGceClusterConfig,
+
+    -- ** GceClusterConfig_Metadata
+    GceClusterConfig_Metadata (..),
+    newGceClusterConfig_Metadata,
+
+    -- ** GceClusterConfig_PrivateIpv6GoogleAccess
+    GceClusterConfig_PrivateIpv6GoogleAccess (..),
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** GkeClusterConfig
-    , GkeClusterConfig
-    , gkeClusterConfig
-    , gccNamespacedGkeDeploymentTarget
-    ) where
+    GkeClusterConfig (..),
+    newGkeClusterConfig,
 
-import Network.Google.Prelude
+    -- ** HadoopJob
+    HadoopJob (..),
+    newHadoopJob,
+
+    -- ** HadoopJob_Properties
+    HadoopJob_Properties (..),
+    newHadoopJob_Properties,
+
+    -- ** HiveJob
+    HiveJob (..),
+    newHiveJob,
+
+    -- ** HiveJob_Properties
+    HiveJob_Properties (..),
+    newHiveJob_Properties,
+
+    -- ** HiveJob_ScriptVariables
+    HiveJob_ScriptVariables (..),
+    newHiveJob_ScriptVariables,
+
+    -- ** IdentityConfig
+    IdentityConfig (..),
+    newIdentityConfig,
+
+    -- ** IdentityConfig_UserServiceAccountMapping
+    IdentityConfig_UserServiceAccountMapping (..),
+    newIdentityConfig_UserServiceAccountMapping,
+
+    -- ** InjectCredentialsRequest
+    InjectCredentialsRequest (..),
+    newInjectCredentialsRequest,
+
+    -- ** InstanceGroupAutoscalingPolicyConfig
+    InstanceGroupAutoscalingPolicyConfig (..),
+    newInstanceGroupAutoscalingPolicyConfig,
+
+    -- ** InstanceGroupConfig
+    InstanceGroupConfig (..),
+    newInstanceGroupConfig,
+
+    -- ** InstanceGroupConfig_Preemptibility
+    InstanceGroupConfig_Preemptibility (..),
+
+    -- ** InstanceReference
+    InstanceReference (..),
+    newInstanceReference,
+
+    -- ** InstantiateWorkflowTemplateRequest
+    InstantiateWorkflowTemplateRequest (..),
+    newInstantiateWorkflowTemplateRequest,
+
+    -- ** InstantiateWorkflowTemplateRequest_Parameters
+    InstantiateWorkflowTemplateRequest_Parameters (..),
+    newInstantiateWorkflowTemplateRequest_Parameters,
+
+    -- ** Job
+    Job (..),
+    newJob,
+
+    -- ** Job_Labels
+    Job_Labels (..),
+    newJob_Labels,
+
+    -- ** JobMetadata
+    JobMetadata (..),
+    newJobMetadata,
+
+    -- ** JobPlacement
+    JobPlacement (..),
+    newJobPlacement,
+
+    -- ** JobPlacement_ClusterLabels
+    JobPlacement_ClusterLabels (..),
+    newJobPlacement_ClusterLabels,
+
+    -- ** JobReference
+    JobReference (..),
+    newJobReference,
+
+    -- ** JobScheduling
+    JobScheduling (..),
+    newJobScheduling,
+
+    -- ** JobStatus
+    JobStatus (..),
+    newJobStatus,
+
+    -- ** JobStatus_State
+    JobStatus_State (..),
+
+    -- ** JobStatus_Substate
+    JobStatus_Substate (..),
+
+    -- ** KerberosConfig
+    KerberosConfig (..),
+    newKerberosConfig,
+
+    -- ** LifecycleConfig
+    LifecycleConfig (..),
+    newLifecycleConfig,
+
+    -- ** ListAutoscalingPoliciesResponse
+    ListAutoscalingPoliciesResponse (..),
+    newListAutoscalingPoliciesResponse,
+
+    -- ** ListBatchesResponse
+    ListBatchesResponse (..),
+    newListBatchesResponse,
+
+    -- ** ListClustersResponse
+    ListClustersResponse (..),
+    newListClustersResponse,
+
+    -- ** ListJobsResponse
+    ListJobsResponse (..),
+    newListJobsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListWorkflowTemplatesResponse
+    ListWorkflowTemplatesResponse (..),
+    newListWorkflowTemplatesResponse,
+
+    -- ** LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
+
+    -- ** LoggingConfig_DriverLogLevels
+    LoggingConfig_DriverLogLevels (..),
+    newLoggingConfig_DriverLogLevels,
+
+    -- ** LoggingConfig_DriverLogLevelsAdditional
+    LoggingConfig_DriverLogLevelsAdditional (..),
+
+    -- ** ManagedCluster
+    ManagedCluster (..),
+    newManagedCluster,
+
+    -- ** ManagedCluster_Labels
+    ManagedCluster_Labels (..),
+    newManagedCluster_Labels,
+
+    -- ** ManagedGroupConfig
+    ManagedGroupConfig (..),
+    newManagedGroupConfig,
+
+    -- ** MetastoreConfig
+    MetastoreConfig (..),
+    newMetastoreConfig,
+
+    -- ** Metric
+    Metric (..),
+    newMetric,
+
+    -- ** Metric_MetricSource
+    Metric_MetricSource (..),
+
+    -- ** NamespacedGkeDeploymentTarget
+    NamespacedGkeDeploymentTarget (..),
+    newNamespacedGkeDeploymentTarget,
+
+    -- ** NodeGroupAffinity
+    NodeGroupAffinity (..),
+    newNodeGroupAffinity,
+
+    -- ** NodeInitializationAction
+    NodeInitializationAction (..),
+    newNodeInitializationAction,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OrderedJob
+    OrderedJob (..),
+    newOrderedJob,
+
+    -- ** OrderedJob_Labels
+    OrderedJob_Labels (..),
+    newOrderedJob_Labels,
+
+    -- ** ParameterValidation
+    ParameterValidation (..),
+    newParameterValidation,
+
+    -- ** PeripheralsConfig
+    PeripheralsConfig (..),
+    newPeripheralsConfig,
+
+    -- ** PigJob
+    PigJob (..),
+    newPigJob,
+
+    -- ** PigJob_Properties
+    PigJob_Properties (..),
+    newPigJob_Properties,
+
+    -- ** PigJob_ScriptVariables
+    PigJob_ScriptVariables (..),
+    newPigJob_ScriptVariables,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PrestoJob
+    PrestoJob (..),
+    newPrestoJob,
+
+    -- ** PrestoJob_Properties
+    PrestoJob_Properties (..),
+    newPrestoJob_Properties,
+
+    -- ** PySparkBatch
+    PySparkBatch (..),
+    newPySparkBatch,
+
+    -- ** PySparkJob
+    PySparkJob (..),
+    newPySparkJob,
+
+    -- ** PySparkJob_Properties
+    PySparkJob_Properties (..),
+    newPySparkJob_Properties,
+
+    -- ** QueryList
+    QueryList (..),
+    newQueryList,
+
+    -- ** RegexValidation
+    RegexValidation (..),
+    newRegexValidation,
+
+    -- ** RepairClusterRequest
+    RepairClusterRequest (..),
+    newRepairClusterRequest,
+
+    -- ** ReservationAffinity
+    ReservationAffinity (..),
+    newReservationAffinity,
+
+    -- ** ReservationAffinity_ConsumeReservationType
+    ReservationAffinity_ConsumeReservationType (..),
+
+    -- ** RuntimeConfig
+    RuntimeConfig (..),
+    newRuntimeConfig,
+
+    -- ** RuntimeConfig_Properties
+    RuntimeConfig_Properties (..),
+    newRuntimeConfig_Properties,
+
+    -- ** RuntimeInfo
+    RuntimeInfo (..),
+    newRuntimeInfo,
+
+    -- ** RuntimeInfo_Endpoints
+    RuntimeInfo_Endpoints (..),
+    newRuntimeInfo_Endpoints,
+
+    -- ** SecurityConfig
+    SecurityConfig (..),
+    newSecurityConfig,
+
+    -- ** SessionOperationMetadata
+    SessionOperationMetadata (..),
+    newSessionOperationMetadata,
+
+    -- ** SessionOperationMetadata_Labels
+    SessionOperationMetadata_Labels (..),
+    newSessionOperationMetadata_Labels,
+
+    -- ** SessionOperationMetadata_OperationType
+    SessionOperationMetadata_OperationType (..),
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** ShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
+
+    -- ** SoftwareConfig
+    SoftwareConfig (..),
+    newSoftwareConfig,
+
+    -- ** SoftwareConfig_OptionalComponentsItem
+    SoftwareConfig_OptionalComponentsItem (..),
+
+    -- ** SoftwareConfig_Properties
+    SoftwareConfig_Properties (..),
+    newSoftwareConfig_Properties,
+
+    -- ** SparkBatch
+    SparkBatch (..),
+    newSparkBatch,
+
+    -- ** SparkHistoryServerConfig
+    SparkHistoryServerConfig (..),
+    newSparkHistoryServerConfig,
+
+    -- ** SparkJob
+    SparkJob (..),
+    newSparkJob,
+
+    -- ** SparkJob_Properties
+    SparkJob_Properties (..),
+    newSparkJob_Properties,
+
+    -- ** SparkRBatch
+    SparkRBatch (..),
+    newSparkRBatch,
+
+    -- ** SparkRJob
+    SparkRJob (..),
+    newSparkRJob,
+
+    -- ** SparkRJob_Properties
+    SparkRJob_Properties (..),
+    newSparkRJob_Properties,
+
+    -- ** SparkSqlBatch
+    SparkSqlBatch (..),
+    newSparkSqlBatch,
+
+    -- ** SparkSqlBatch_QueryVariables
+    SparkSqlBatch_QueryVariables (..),
+    newSparkSqlBatch_QueryVariables,
+
+    -- ** SparkSqlJob
+    SparkSqlJob (..),
+    newSparkSqlJob,
+
+    -- ** SparkSqlJob_Properties
+    SparkSqlJob_Properties (..),
+    newSparkSqlJob_Properties,
+
+    -- ** SparkSqlJob_ScriptVariables
+    SparkSqlJob_ScriptVariables (..),
+    newSparkSqlJob_ScriptVariables,
+
+    -- ** SparkStandaloneAutoscalingConfig
+    SparkStandaloneAutoscalingConfig (..),
+    newSparkStandaloneAutoscalingConfig,
+
+    -- ** StartClusterRequest
+    StartClusterRequest (..),
+    newStartClusterRequest,
+
+    -- ** StateHistory
+    StateHistory (..),
+    newStateHistory,
+
+    -- ** StateHistory_State
+    StateHistory_State (..),
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StopClusterRequest
+    StopClusterRequest (..),
+    newStopClusterRequest,
+
+    -- ** SubmitJobRequest
+    SubmitJobRequest (..),
+    newSubmitJobRequest,
+
+    -- ** TemplateParameter
+    TemplateParameter (..),
+    newTemplateParameter,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** ValueValidation
+    ValueValidation (..),
+    newValueValidation,
+
+    -- ** WorkflowGraph
+    WorkflowGraph (..),
+    newWorkflowGraph,
+
+    -- ** WorkflowMetadata
+    WorkflowMetadata (..),
+    newWorkflowMetadata,
+
+    -- ** WorkflowMetadata_Parameters
+    WorkflowMetadata_Parameters (..),
+    newWorkflowMetadata_Parameters,
+
+    -- ** WorkflowMetadata_State
+    WorkflowMetadata_State (..),
+
+    -- ** WorkflowNode
+    WorkflowNode (..),
+    newWorkflowNode,
+
+    -- ** WorkflowNode_State
+    WorkflowNode_State (..),
+
+    -- ** WorkflowTemplate
+    WorkflowTemplate (..),
+    newWorkflowTemplate,
+
+    -- ** WorkflowTemplate_Labels
+    WorkflowTemplate_Labels (..),
+    newWorkflowTemplate_Labels,
+
+    -- ** WorkflowTemplatePlacement
+    WorkflowTemplatePlacement (..),
+    newWorkflowTemplatePlacement,
+
+    -- ** YarnApplication
+    YarnApplication (..),
+    newYarnApplication,
+
+    -- ** YarnApplication_State
+    YarnApplication_State (..),
+
+    -- ** ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
+    ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers (..),
+
+    -- ** ProjectsRegionsJobsListJobStateMatcher
+    ProjectsRegionsJobsListJobStateMatcher (..),
+  )
+where
+
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.Create
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.Get
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.GetIamPolicy
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.List
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.SetIamPolicy
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.TestIamPermissions
+import Network.Google.Dataproc.Projects.Locations.AutoscalingPolicies.Update
+import Network.Google.Dataproc.Projects.Locations.Batches.Create
+import Network.Google.Dataproc.Projects.Locations.Batches.Delete
+import Network.Google.Dataproc.Projects.Locations.Batches.Get
+import Network.Google.Dataproc.Projects.Locations.Batches.List
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.Create
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.Delete
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.Get
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.GetIamPolicy
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.InstantiateInline
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.List
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.SetIamPolicy
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.TestIamPermissions
+import Network.Google.Dataproc.Projects.Locations.WorkflowTemplates.Update
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.Create
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.Get
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.GetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.List
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.SetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.TestIamPermissions
+import Network.Google.Dataproc.Projects.Regions.AutoscalingPolicies.Update
+import Network.Google.Dataproc.Projects.Regions.Clusters.Create
+import Network.Google.Dataproc.Projects.Regions.Clusters.Delete
+import Network.Google.Dataproc.Projects.Regions.Clusters.Diagnose
+import Network.Google.Dataproc.Projects.Regions.Clusters.Get
+import Network.Google.Dataproc.Projects.Regions.Clusters.GetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.Clusters.InjectCredentials
+import Network.Google.Dataproc.Projects.Regions.Clusters.List
+import Network.Google.Dataproc.Projects.Regions.Clusters.Patch
+import Network.Google.Dataproc.Projects.Regions.Clusters.Repair
+import Network.Google.Dataproc.Projects.Regions.Clusters.SetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.Clusters.Start
+import Network.Google.Dataproc.Projects.Regions.Clusters.Stop
+import Network.Google.Dataproc.Projects.Regions.Clusters.TestIamPermissions
+import Network.Google.Dataproc.Projects.Regions.Jobs.Cancel
+import Network.Google.Dataproc.Projects.Regions.Jobs.Delete
+import Network.Google.Dataproc.Projects.Regions.Jobs.Get
+import Network.Google.Dataproc.Projects.Regions.Jobs.GetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.Jobs.List
+import Network.Google.Dataproc.Projects.Regions.Jobs.Patch
+import Network.Google.Dataproc.Projects.Regions.Jobs.SetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.Jobs.Submit
+import Network.Google.Dataproc.Projects.Regions.Jobs.SubmitAsOperation
+import Network.Google.Dataproc.Projects.Regions.Jobs.TestIamPermissions
+import Network.Google.Dataproc.Projects.Regions.Operations.Cancel
+import Network.Google.Dataproc.Projects.Regions.Operations.Delete
+import Network.Google.Dataproc.Projects.Regions.Operations.Get
+import Network.Google.Dataproc.Projects.Regions.Operations.GetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.Operations.List
+import Network.Google.Dataproc.Projects.Regions.Operations.SetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.Operations.TestIamPermissions
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.Create
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.Delete
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.Get
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.GetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.List
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.SetIamPolicy
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.TestIamPermissions
+import Network.Google.Dataproc.Projects.Regions.WorkflowTemplates.Update
 import Network.Google.Dataproc.Types
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Create
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Get
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.GetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.List
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.SetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.TestIAMPermissions
-import Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Update
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Create
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Delete
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Get
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.GetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.InstantiateInline
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.List
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.SetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.TestIAMPermissions
-import Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Update
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Create
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Get
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.GetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.List
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.SetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.TestIAMPermissions
-import Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Update
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Get
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.GetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.InjectCredentials
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Patch
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Repair
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.SetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Start
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Stop
-import Network.Google.Resource.Dataproc.Projects.Regions.Clusters.TestIAMPermissions
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Delete
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Get
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.GetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.List
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Patch
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Submit
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SubmitAsOperation
-import Network.Google.Resource.Dataproc.Projects.Regions.Jobs.TestIAMPermissions
-import Network.Google.Resource.Dataproc.Projects.Regions.Operations.Cancel
-import Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete
-import Network.Google.Resource.Dataproc.Projects.Regions.Operations.Get
-import Network.Google.Resource.Dataproc.Projects.Regions.Operations.GetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.Operations.List
-import Network.Google.Resource.Dataproc.Projects.Regions.Operations.SetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.Operations.TestIAMPermissions
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Create
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Delete
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Get
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.GetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.List
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.SetIAMPolicy
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.TestIAMPermissions
-import Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Dataproc API service.
-type DataprocAPI =
-     ProjectsRegionsAutoscalingPoliciesListResource :<|>
-       ProjectsRegionsAutoscalingPoliciesGetIAMPolicyResource
-       :<|> ProjectsRegionsAutoscalingPoliciesGetResource
-       :<|> ProjectsRegionsAutoscalingPoliciesCreateResource
-       :<|>
-       ProjectsRegionsAutoscalingPoliciesSetIAMPolicyResource
-       :<|>
-       ProjectsRegionsAutoscalingPoliciesTestIAMPermissionsResource
-       :<|> ProjectsRegionsAutoscalingPoliciesDeleteResource
-       :<|> ProjectsRegionsAutoscalingPoliciesUpdateResource
-       :<|> ProjectsRegionsWorkflowTemplatesListResource
-       :<|>
-       ProjectsRegionsWorkflowTemplatesInstantiateResource
-       :<|>
-       ProjectsRegionsWorkflowTemplatesInstantiateInlineResource
-       :<|>
-       ProjectsRegionsWorkflowTemplatesGetIAMPolicyResource
-       :<|> ProjectsRegionsWorkflowTemplatesGetResource
-       :<|> ProjectsRegionsWorkflowTemplatesCreateResource
-       :<|>
-       ProjectsRegionsWorkflowTemplatesSetIAMPolicyResource
-       :<|>
-       ProjectsRegionsWorkflowTemplatesTestIAMPermissionsResource
-       :<|> ProjectsRegionsWorkflowTemplatesDeleteResource
-       :<|> ProjectsRegionsWorkflowTemplatesUpdateResource
-       :<|> ProjectsRegionsJobsListResource
-       :<|> ProjectsRegionsJobsGetIAMPolicyResource
-       :<|> ProjectsRegionsJobsPatchResource
-       :<|> ProjectsRegionsJobsGetResource
-       :<|> ProjectsRegionsJobsSubmitResource
-       :<|> ProjectsRegionsJobsSetIAMPolicyResource
-       :<|> ProjectsRegionsJobsSubmitAsOperationResource
-       :<|> ProjectsRegionsJobsTestIAMPermissionsResource
-       :<|> ProjectsRegionsJobsCancelResource
-       :<|> ProjectsRegionsJobsDeleteResource
-       :<|> ProjectsRegionsOperationsListResource
-       :<|> ProjectsRegionsOperationsGetIAMPolicyResource
-       :<|> ProjectsRegionsOperationsGetResource
-       :<|> ProjectsRegionsOperationsSetIAMPolicyResource
-       :<|>
-       ProjectsRegionsOperationsTestIAMPermissionsResource
-       :<|> ProjectsRegionsOperationsCancelResource
-       :<|> ProjectsRegionsOperationsDeleteResource
-       :<|> ProjectsRegionsClustersDiagnoseResource
-       :<|> ProjectsRegionsClustersInjectCredentialsResource
-       :<|> ProjectsRegionsClustersListResource
-       :<|> ProjectsRegionsClustersStartResource
-       :<|> ProjectsRegionsClustersGetIAMPolicyResource
-       :<|> ProjectsRegionsClustersPatchResource
-       :<|> ProjectsRegionsClustersGetResource
-       :<|> ProjectsRegionsClustersCreateResource
-       :<|> ProjectsRegionsClustersSetIAMPolicyResource
-       :<|> ProjectsRegionsClustersRepairResource
-       :<|> ProjectsRegionsClustersStopResource
-       :<|>
-       ProjectsRegionsClustersTestIAMPermissionsResource
-       :<|> ProjectsRegionsClustersDeleteResource
-       :<|> ProjectsLocationsAutoscalingPoliciesListResource
-       :<|>
-       ProjectsLocationsAutoscalingPoliciesGetIAMPolicyResource
-       :<|> ProjectsLocationsAutoscalingPoliciesGetResource
-       :<|>
-       ProjectsLocationsAutoscalingPoliciesCreateResource
-       :<|>
-       ProjectsLocationsAutoscalingPoliciesSetIAMPolicyResource
-       :<|>
-       ProjectsLocationsAutoscalingPoliciesTestIAMPermissionsResource
-       :<|>
-       ProjectsLocationsAutoscalingPoliciesDeleteResource
-       :<|>
-       ProjectsLocationsAutoscalingPoliciesUpdateResource
-       :<|> ProjectsLocationsWorkflowTemplatesListResource
-       :<|>
-       ProjectsLocationsWorkflowTemplatesInstantiateResource
-       :<|>
-       ProjectsLocationsWorkflowTemplatesInstantiateInlineResource
-       :<|>
-       ProjectsLocationsWorkflowTemplatesGetIAMPolicyResource
-       :<|> ProjectsLocationsWorkflowTemplatesGetResource
-       :<|> ProjectsLocationsWorkflowTemplatesCreateResource
-       :<|>
-       ProjectsLocationsWorkflowTemplatesSetIAMPolicyResource
-       :<|>
-       ProjectsLocationsWorkflowTemplatesTestIAMPermissionsResource
-       :<|> ProjectsLocationsWorkflowTemplatesDeleteResource
-       :<|> ProjectsLocationsWorkflowTemplatesUpdateResource
