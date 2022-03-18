@@ -19,61 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
+-- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs a stored query to generate a report.
+-- Deletes a stored query as well as the associated stored reports.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.runquery@.
-module Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.deletequery@.
+module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
   ( -- * Resource
-    DoubleclickbidmanagerQueriesRunqueryResource,
+    DoubleclickbidmanagerQueriesDeletequeryResource,
 
     -- ** Constructing a Request
-    newDoubleclickbidmanagerQueriesRunquery,
-    DoubleclickbidmanagerQueriesRunquery,
+    newDoubleclickbidmanagerQueriesDeletequery,
+    DoubleclickbidmanagerQueriesDeletequery,
   )
 where
 
-import Network.Google.DoubleClickBids.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickBids.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclickbidmanager.queries.runquery@ method which the
--- 'DoubleclickbidmanagerQueriesRunquery' request conforms to.
-type DoubleclickbidmanagerQueriesRunqueryResource =
+-- | A resource alias for @doubleclickbidmanager.queries.deletequery@ method which the
+-- 'DoubleclickbidmanagerQueriesDeletequery' request conforms to.
+type DoubleclickbidmanagerQueriesDeletequeryResource =
   "doubleclickbidmanager"
     Core.:> "v1.1"
     Core.:> "query"
     Core.:> Core.Capture "queryId" Core.Int64
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "asynchronous" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] RunQueryRequest
-    Core.:> Core.Post '[Core.JSON] ()
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Runs a stored query to generate a report.
+-- | Deletes a stored query as well as the associated stored reports.
 --
--- /See:/ 'newDoubleclickbidmanagerQueriesRunquery' smart constructor.
-data DoubleclickbidmanagerQueriesRunquery = DoubleclickbidmanagerQueriesRunquery
+-- /See:/ 'newDoubleclickbidmanagerQueriesDeletequery' smart constructor.
+data DoubleclickbidmanagerQueriesDeletequery = DoubleclickbidmanagerQueriesDeletequery
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | If true, tries to run the query asynchronously.
-    asynchronous :: Core.Bool,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: RunQueryRequest,
-    -- | Query ID to run.
+    -- | Query ID to delete.
     queryId :: Core.Int64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,20 +76,16 @@ data DoubleclickbidmanagerQueriesRunquery = DoubleclickbidmanagerQueriesRunquery
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleclickbidmanagerQueriesRunquery' with the minimum fields required to make a request.
-newDoubleclickbidmanagerQueriesRunquery ::
-  -- |  Multipart request metadata. See 'payload'.
-  RunQueryRequest ->
-  -- |  Query ID to run. See 'queryId'.
+-- | Creates a value of 'DoubleclickbidmanagerQueriesDeletequery' with the minimum fields required to make a request.
+newDoubleclickbidmanagerQueriesDeletequery ::
+  -- |  Query ID to delete. See 'queryId'.
   Core.Int64 ->
-  DoubleclickbidmanagerQueriesRunquery
-newDoubleclickbidmanagerQueriesRunquery payload queryId =
-  DoubleclickbidmanagerQueriesRunquery
+  DoubleclickbidmanagerQueriesDeletequery
+newDoubleclickbidmanagerQueriesDeletequery queryId =
+  DoubleclickbidmanagerQueriesDeletequery
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
-      asynchronous = Core.False,
       callback = Core.Nothing,
-      payload = payload,
       queryId = queryId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -103,30 +93,28 @@ newDoubleclickbidmanagerQueriesRunquery payload queryId =
 
 instance
   Core.GoogleRequest
-    DoubleclickbidmanagerQueriesRunquery
+    DoubleclickbidmanagerQueriesDeletequery
   where
-  type Rs DoubleclickbidmanagerQueriesRunquery = ()
+  type Rs DoubleclickbidmanagerQueriesDeletequery = ()
   type
-    Scopes DoubleclickbidmanagerQueriesRunquery =
+    Scopes DoubleclickbidmanagerQueriesDeletequery =
       '["https://www.googleapis.com/auth/doubleclickbidmanager"]
   requestClient
-    DoubleclickbidmanagerQueriesRunquery {..} =
+    DoubleclickbidmanagerQueriesDeletequery {..} =
       go
         queryId
         xgafv
         accessToken
-        (Core.Just asynchronous)
         callback
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         doubleClickBidsService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  DoubleclickbidmanagerQueriesRunqueryResource
+                  DoubleclickbidmanagerQueriesDeletequeryResource
             )
             Core.mempty

@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.DoubleClickBids
-    Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
-    Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
-    Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
-    Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
-    Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
-    Network.Google.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
-    Network.Google.DoubleClickBids.Types
+    Gogol.DoubleClickBids
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
+    Gogol.DoubleClickBids.Types
 
   other-modules:
-    Network.Google.DoubleClickBids.Internal.Product
-    Network.Google.DoubleClickBids.Internal.Sum
+    Gogol.DoubleClickBids.Internal.Product
+    Gogol.DoubleClickBids.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

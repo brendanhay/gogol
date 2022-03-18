@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickBids.Types
+-- Module      : Gogol.DoubleClickBids.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.DoubleClickBids.Types
+module Gogol.DoubleClickBids.Types
   ( -- * Configuration
     doubleClickBidsService,
 
@@ -165,9 +165,9 @@ module Network.Google.DoubleClickBids.Types
   )
 where
 
-import Network.Google.DoubleClickBids.Internal.Product
-import Network.Google.DoubleClickBids.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickBids.Internal.Product
+import Gogol.DoubleClickBids.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1.1@ of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickBidsService :: Core.ServiceConfig
