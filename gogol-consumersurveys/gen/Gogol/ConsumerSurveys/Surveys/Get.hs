@@ -19,69 +19,65 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Surveys.Delete
+-- Module      : Gogol.ConsumerSurveys.Surveys.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a survey from view in all user GET requests.
+-- Retrieves information about the specified survey.
 --
--- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.delete@.
-module Network.Google.ConsumerSurveys.Surveys.Delete
+-- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.get@.
+module Gogol.ConsumerSurveys.Surveys.Get
   ( -- * Resource
-    ConsumerSurveysSurveysDeleteResource,
+    ConsumerSurveysSurveysGetResource,
 
     -- ** Constructing a Request
-    newConsumerSurveysSurveysDelete,
-    ConsumerSurveysSurveysDelete,
+    newConsumerSurveysSurveysGet,
+    ConsumerSurveysSurveysGet,
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @consumersurveys.surveys.delete@ method which the
--- 'ConsumerSurveysSurveysDelete' request conforms to.
-type ConsumerSurveysSurveysDeleteResource =
+-- | A resource alias for @consumersurveys.surveys.get@ method which the
+-- 'ConsumerSurveysSurveysGet' request conforms to.
+type ConsumerSurveysSurveysGetResource =
   "consumersurveys"
     Core.:> "v2"
     Core.:> "surveys"
     Core.:> Core.Capture "surveyUrlId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] SurveysDeleteResponse
+    Core.:> Core.Get '[Core.JSON] Survey
 
--- | Removes a survey from view in all user GET requests.
+-- | Retrieves information about the specified survey.
 --
--- /See:/ 'newConsumerSurveysSurveysDelete' smart constructor.
-newtype ConsumerSurveysSurveysDelete = ConsumerSurveysSurveysDelete
+-- /See:/ 'newConsumerSurveysSurveysGet' smart constructor.
+newtype ConsumerSurveysSurveysGet = ConsumerSurveysSurveysGet
   { -- | External URL ID for the survey.
     surveyUrlId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ConsumerSurveysSurveysDelete' with the minimum fields required to make a request.
-newConsumerSurveysSurveysDelete ::
+-- | Creates a value of 'ConsumerSurveysSurveysGet' with the minimum fields required to make a request.
+newConsumerSurveysSurveysGet ::
   -- |  External URL ID for the survey. See 'surveyUrlId'.
   Core.Text ->
-  ConsumerSurveysSurveysDelete
-newConsumerSurveysSurveysDelete surveyUrlId =
-  ConsumerSurveysSurveysDelete {surveyUrlId = surveyUrlId}
+  ConsumerSurveysSurveysGet
+newConsumerSurveysSurveysGet surveyUrlId =
+  ConsumerSurveysSurveysGet {surveyUrlId = surveyUrlId}
 
-instance
-  Core.GoogleRequest
-    ConsumerSurveysSurveysDelete
-  where
+instance Core.GoogleRequest ConsumerSurveysSurveysGet where
+  type Rs ConsumerSurveysSurveysGet = Survey
   type
-    Rs ConsumerSurveysSurveysDelete =
-      SurveysDeleteResponse
-  type
-    Scopes ConsumerSurveysSurveysDelete =
+    Scopes ConsumerSurveysSurveysGet =
       '[ "https://www.googleapis.com/auth/consumersurveys",
+         "https://www.googleapis.com/auth/consumersurveys.readonly",
          "https://www.googleapis.com/auth/userinfo.email"
        ]
-  requestClient ConsumerSurveysSurveysDelete {..} =
+  requestClient ConsumerSurveysSurveysGet {..} =
     go
       surveyUrlId
       (Core.Just Core.AltJSON)
@@ -90,6 +86,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysDeleteResource
+              Core.Proxy ConsumerSurveysSurveysGetResource
           )
           Core.mempty

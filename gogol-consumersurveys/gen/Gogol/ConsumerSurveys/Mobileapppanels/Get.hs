@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Mobileapppanels.Get
+-- Module      : Gogol.ConsumerSurveys.Mobileapppanels.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves a MobileAppPanel that is available to the authenticated user.
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.mobileapppanels.get@.
-module Network.Google.ConsumerSurveys.Mobileapppanels.Get
+module Gogol.ConsumerSurveys.Mobileapppanels.Get
   ( -- * Resource
     ConsumerSurveysMobileapppanelsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ConsumerSurveys.Mobileapppanels.Get
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @consumersurveys.mobileapppanels.get@ method which the
 -- 'ConsumerSurveysMobileapppanelsGet' request conforms to.

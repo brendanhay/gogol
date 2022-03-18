@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys
+-- Module      : Gogol.ConsumerSurveys
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates and conducts surveys, lists the surveys that an authenticated user owns, and retrieves survey results and information about specified surveys.
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference>
-module Network.Google.ConsumerSurveys
+module Gogol.ConsumerSurveys
   ( -- * Configuration
     consumerSurveysService,
 
@@ -175,15 +175,15 @@ module Network.Google.ConsumerSurveys
   )
 where
 
-import Network.Google.ConsumerSurveys.Mobileapppanels.Get
-import Network.Google.ConsumerSurveys.Mobileapppanels.List
-import Network.Google.ConsumerSurveys.Mobileapppanels.Update
-import Network.Google.ConsumerSurveys.Results.Get
-import Network.Google.ConsumerSurveys.Surveys.Delete
-import Network.Google.ConsumerSurveys.Surveys.Get
-import Network.Google.ConsumerSurveys.Surveys.Insert
-import Network.Google.ConsumerSurveys.Surveys.List
-import Network.Google.ConsumerSurveys.Surveys.Start
-import Network.Google.ConsumerSurveys.Surveys.Stop
-import Network.Google.ConsumerSurveys.Surveys.Update
-import Network.Google.ConsumerSurveys.Types
+import Gogol.ConsumerSurveys.Mobileapppanels.Get
+import Gogol.ConsumerSurveys.Mobileapppanels.List
+import Gogol.ConsumerSurveys.Mobileapppanels.Update
+import Gogol.ConsumerSurveys.Results.Get
+import Gogol.ConsumerSurveys.Surveys.Delete
+import Gogol.ConsumerSurveys.Surveys.Get
+import Gogol.ConsumerSurveys.Surveys.Insert
+import Gogol.ConsumerSurveys.Surveys.List
+import Gogol.ConsumerSurveys.Surveys.Start
+import Gogol.ConsumerSurveys.Surveys.Stop
+import Gogol.ConsumerSurveys.Surveys.Update
+import Gogol.ConsumerSurveys.Types

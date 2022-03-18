@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Internal.Product
+-- Module      : Gogol.ConsumerSurveys.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ConsumerSurveys.Internal.Product
+module Gogol.ConsumerSurveys.Internal.Product
   ( -- * FieldMask
     FieldMask (..),
     newFieldMask,
@@ -104,8 +104,8 @@ module Network.Google.ConsumerSurveys.Internal.Product
   )
 where
 
-import Network.Google.ConsumerSurveys.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 --
 -- /See:/ 'newFieldMask' smart constructor.

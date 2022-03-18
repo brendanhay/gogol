@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ConsumerSurveys.Surveys.List
+-- Module      : Gogol.ConsumerSurveys.Surveys.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the surveys owned by the authenticated user.
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.list@.
-module Network.Google.ConsumerSurveys.Surveys.List
+module Gogol.ConsumerSurveys.Surveys.List
   ( -- * Resource
     ConsumerSurveysSurveysListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ConsumerSurveys.Surveys.List
   )
 where
 
-import Network.Google.ConsumerSurveys.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @consumersurveys.surveys.list@ method which the
 -- 'ConsumerSurveysSurveysList' request conforms to.
