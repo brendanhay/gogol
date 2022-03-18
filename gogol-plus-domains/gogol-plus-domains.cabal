@@ -1,55 +1,66 @@
-name:                  gogol-plus-domains
-version:               0.5.0
-synopsis:              Google + Domains SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-plus-domains
+version:            0.5.0
+synopsis:           Google + Domains SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Builds on top of the Google+ platform for Google Apps Domains.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Builds on top of the Google+ platform for Google Apps Domains.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-plus-domains
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.PlusDomains
-        , Network.Google.PlusDomains.Types
-        , Network.Google.Resource.PlusDomains.Activities.Get
-        , Network.Google.Resource.PlusDomains.Activities.List
-        , Network.Google.Resource.PlusDomains.Audiences.List
-        , Network.Google.Resource.PlusDomains.Circles.List
-        , Network.Google.Resource.PlusDomains.Comments.Get
-        , Network.Google.Resource.PlusDomains.Comments.List
-        , Network.Google.Resource.PlusDomains.Media.Insert
-        , Network.Google.Resource.PlusDomains.People.Get
-        , Network.Google.Resource.PlusDomains.People.List
-        , Network.Google.Resource.PlusDomains.People.ListByActivity
+  exposed-modules:
+    Network.Google.PlusDomains
+    Network.Google.PlusDomains.Activities.Get
+    Network.Google.PlusDomains.Activities.List
+    Network.Google.PlusDomains.Audiences.List
+    Network.Google.PlusDomains.Circles.List
+    Network.Google.PlusDomains.Comments.Get
+    Network.Google.PlusDomains.Comments.List
+    Network.Google.PlusDomains.Media.Insert
+    Network.Google.PlusDomains.People.Get
+    Network.Google.PlusDomains.People.List
+    Network.Google.PlusDomains.People.ListByActivity
+    Network.Google.PlusDomains.Types
 
-    other-modules:
-          Network.Google.PlusDomains.Types.Product
-        , Network.Google.PlusDomains.Types.Sum
+  other-modules:
+    Network.Google.PlusDomains.Internal.Product
+    Network.Google.PlusDomains.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
