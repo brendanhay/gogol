@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,58 +30,62 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.creatives.insert@.
 module Gogol.AdExchangeBuyer.Creatives.Insert
-    (
-    -- * Resource
-      AdExchangeBuyerCreativesInsertResource
+  ( -- * Resource
+    AdExchangeBuyerCreativesInsertResource,
 
     -- ** Constructing a Request
-    , newAdExchangeBuyerCreativesInsert
-    , AdExchangeBuyerCreativesInsert
-    ) where
+    newAdExchangeBuyerCreativesInsert,
+    AdExchangeBuyerCreativesInsert,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AdExchangeBuyer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @adexchangebuyer.creatives.insert@ method which the
 -- 'AdExchangeBuyerCreativesInsert' request conforms to.
 type AdExchangeBuyerCreativesInsertResource =
-     "adexchangebuyer" Core.:>
-       "v1.4" Core.:>
-         "creatives" Core.:>
-           Core.QueryParam "alt" Core.AltJSON Core.:>
-             Core.ReqBody '[Core.JSON] Creative Core.:>
-               Core.Post '[Core.JSON] Creative
+  "adexchangebuyer"
+    Core.:> "v1.4"
+    Core.:> "creatives"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Creative
+    Core.:> Core.Post '[Core.JSON] Creative
 
 -- | Submit a new creative.
 --
 -- /See:/ 'newAdExchangeBuyerCreativesInsert' smart constructor.
 newtype AdExchangeBuyerCreativesInsert = AdExchangeBuyerCreativesInsert
-    {
-      -- | Multipart request metadata.
-      payload :: Creative
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: Creative
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeBuyerCreativesInsert' with the minimum fields required to make a request.
-newAdExchangeBuyerCreativesInsert 
-    ::  Creative
-       -- ^  Multipart request metadata. See 'payload'.
-    -> AdExchangeBuyerCreativesInsert
+newAdExchangeBuyerCreativesInsert ::
+  -- |  Multipart request metadata. See 'payload'.
+  Creative ->
+  AdExchangeBuyerCreativesInsert
 newAdExchangeBuyerCreativesInsert payload =
   AdExchangeBuyerCreativesInsert {payload = payload}
 
-instance Core.GoogleRequest
-           AdExchangeBuyerCreativesInsert
-         where
-        type Rs AdExchangeBuyerCreativesInsert = Creative
-        type Scopes AdExchangeBuyerCreativesInsert =
-             '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient AdExchangeBuyerCreativesInsert{..}
-          = go (Core.Just Core.AltJSON) payload
-              adExchangeBuyerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy AdExchangeBuyerCreativesInsertResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AdExchangeBuyerCreativesInsert
+  where
+  type Rs AdExchangeBuyerCreativesInsert = Creative
+  type
+    Scopes AdExchangeBuyerCreativesInsert =
+      '["https://www.googleapis.com/auth/adexchange.buyer"]
+  requestClient AdExchangeBuyerCreativesInsert {..} =
+    go
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyerCreativesInsertResource
+          )
+          Core.mempty

@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,67 +30,73 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pretargetingConfig.delete@.
 module Gogol.AdExchangeBuyer.PretargetingConfig.Delete
-    (
-    -- * Resource
-      AdExchangeBuyerPretargetingConfigDeleteResource
+  ( -- * Resource
+    AdExchangeBuyerPretargetingConfigDeleteResource,
 
     -- ** Constructing a Request
-    , newAdExchangeBuyerPretargetingConfigDelete
-    , AdExchangeBuyerPretargetingConfigDelete
-    ) where
+    newAdExchangeBuyerPretargetingConfigDelete,
+    AdExchangeBuyerPretargetingConfigDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AdExchangeBuyer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.delete@ method which the
 -- 'AdExchangeBuyerPretargetingConfigDelete' request conforms to.
-type AdExchangeBuyerPretargetingConfigDeleteResource
-     =
-     "adexchangebuyer" Core.:>
-       "v1.4" Core.:>
-         "pretargetingconfigs" Core.:>
-           Core.Capture "accountId" Core.Int64 Core.:>
-             Core.Capture "configId" Core.Int64 Core.:>
-               Core.QueryParam "alt" Core.AltJSON Core.:>
-                 Core.Delete '[Core.JSON] ()
+type AdExchangeBuyerPretargetingConfigDeleteResource =
+  "adexchangebuyer"
+    Core.:> "v1.4"
+    Core.:> "pretargetingconfigs"
+    Core.:> Core.Capture "accountId" Core.Int64
+    Core.:> Core.Capture "configId" Core.Int64
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Deletes an existing pretargeting config.
 --
 -- /See:/ 'newAdExchangeBuyerPretargetingConfigDelete' smart constructor.
 data AdExchangeBuyerPretargetingConfigDelete = AdExchangeBuyerPretargetingConfigDelete
-    {
-      -- | The account id to delete the pretargeting config for.
-      accountId :: Core.Int64
-      -- | The specific id of the configuration to delete.
-    , configId :: Core.Int64
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | The account id to delete the pretargeting config for.
+    accountId :: Core.Int64,
+    -- | The specific id of the configuration to delete.
+    configId :: Core.Int64
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeBuyerPretargetingConfigDelete' with the minimum fields required to make a request.
-newAdExchangeBuyerPretargetingConfigDelete 
-    ::  Core.Int64
-       -- ^  The account id to delete the pretargeting config for. See 'accountId'.
-    -> Core.Int64
-       -- ^  The specific id of the configuration to delete. See 'configId'.
-    -> AdExchangeBuyerPretargetingConfigDelete
+newAdExchangeBuyerPretargetingConfigDelete ::
+  -- |  The account id to delete the pretargeting config for. See 'accountId'.
+  Core.Int64 ->
+  -- |  The specific id of the configuration to delete. See 'configId'.
+  Core.Int64 ->
+  AdExchangeBuyerPretargetingConfigDelete
 newAdExchangeBuyerPretargetingConfigDelete accountId configId =
   AdExchangeBuyerPretargetingConfigDelete
-    {accountId = accountId, configId = configId}
+    { accountId = accountId,
+      configId = configId
+    }
 
-instance Core.GoogleRequest
-           AdExchangeBuyerPretargetingConfigDelete
-         where
-        type Rs AdExchangeBuyerPretargetingConfigDelete = ()
-        type Scopes AdExchangeBuyerPretargetingConfigDelete =
-             '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient
-          AdExchangeBuyerPretargetingConfigDelete{..}
-          = go accountId configId (Core.Just Core.AltJSON)
-              adExchangeBuyerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           AdExchangeBuyerPretargetingConfigDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AdExchangeBuyerPretargetingConfigDelete
+  where
+  type Rs AdExchangeBuyerPretargetingConfigDelete = ()
+  type
+    Scopes AdExchangeBuyerPretargetingConfigDelete =
+      '["https://www.googleapis.com/auth/adexchange.buyer"]
+  requestClient
+    AdExchangeBuyerPretargetingConfigDelete {..} =
+      go
+        accountId
+        configId
+        (Core.Just Core.AltJSON)
+        adExchangeBuyerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  AdExchangeBuyerPretargetingConfigDeleteResource
+            )
+            Core.mempty
