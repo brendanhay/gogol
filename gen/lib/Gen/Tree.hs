@@ -1,18 +1,4 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GADTs #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE ViewPatterns #-}
-
--- Module      : Gen.Tree
--- Copyright   : (c) 2015-2022 Brendan Hay
--- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
--- Stability   : provisional
--- Portability : non-portable (GHC extensions)
+{-# OPTIONS_GHC -fno-warn-incomplete-uni-patterns #-}
 
 module Gen.Tree
   ( root,
