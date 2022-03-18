@@ -19,34 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.LibraryAgent.Shelves.List
+-- Module      : Gogol.LibraryAgent.Shelves.Books.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists shelves. The order is unspecified but deterministic. Newly created shelves will not necessarily be added to the end of this list.
+-- Lists books in a shelf. The order is unspecified but deterministic. Newly created books will not necessarily be added to the end of this list. Returns NOT_FOUND if the shelf does not exist.
 --
--- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference> for @libraryagent.shelves.list@.
-module Network.Google.LibraryAgent.Shelves.List
+-- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference> for @libraryagent.shelves.books.list@.
+module Gogol.LibraryAgent.Shelves.Books.List
   ( -- * Resource
-    LibraryAgentShelvesListResource,
+    LibraryAgentShelvesBooksListResource,
 
     -- ** Constructing a Request
-    newLibraryAgentShelvesList,
-    LibraryAgentShelvesList,
+    newLibraryAgentShelvesBooksList,
+    LibraryAgentShelvesBooksList,
   )
 where
 
-import Network.Google.LibraryAgent.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.LibraryAgent.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @libraryagent.shelves.list@ method which the
--- 'LibraryAgentShelvesList' request conforms to.
-type LibraryAgentShelvesListResource =
+-- | A resource alias for @libraryagent.shelves.books.list@ method which the
+-- 'LibraryAgentShelvesBooksList' request conforms to.
+type LibraryAgentShelvesBooksListResource =
   "v1"
-    Core.:> "shelves"
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "books"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -57,22 +58,24 @@ type LibraryAgentShelvesListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
-              GoogleExampleLibraryagentV1ListShelvesResponse
+              GoogleExampleLibraryagentV1ListBooksResponse
 
--- | Lists shelves. The order is unspecified but deterministic. Newly created shelves will not necessarily be added to the end of this list.
+-- | Lists books in a shelf. The order is unspecified but deterministic. Newly created books will not necessarily be added to the end of this list. Returns NOT_FOUND if the shelf does not exist.
 --
--- /See:/ 'newLibraryAgentShelvesList' smart constructor.
-data LibraryAgentShelvesList = LibraryAgentShelvesList
+-- /See:/ 'newLibraryAgentShelvesBooksList' smart constructor.
+data LibraryAgentShelvesBooksList = LibraryAgentShelvesBooksList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Requested page size. Server may return fewer shelves than requested. If unspecified, server will pick an appropriate default.
+    -- | Requested page size. Server may return fewer books than requested. If unspecified, server will pick an appropriate default.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A token identifying a page of results the server should return. Typically, this is the value of ListShelvesResponse.next/page/token returned from the previous call to @ListShelves@ method.
+    -- | A token identifying a page of results the server should return. Typically, this is the value of ListBooksResponse.next/page/token. returned from the previous call to @ListBooks@ method.
     pageToken :: (Core.Maybe Core.Text),
+    -- | Required. The name of the shelf whose books we\'d like to list.
+    parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,29 +83,36 @@ data LibraryAgentShelvesList = LibraryAgentShelvesList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'LibraryAgentShelvesList' with the minimum fields required to make a request.
-newLibraryAgentShelvesList ::
-  LibraryAgentShelvesList
-newLibraryAgentShelvesList =
-  LibraryAgentShelvesList
+-- | Creates a value of 'LibraryAgentShelvesBooksList' with the minimum fields required to make a request.
+newLibraryAgentShelvesBooksList ::
+  -- |  Required. The name of the shelf whose books we\'d like to list. See 'parent'.
+  Core.Text ->
+  LibraryAgentShelvesBooksList
+newLibraryAgentShelvesBooksList parent =
+  LibraryAgentShelvesBooksList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
+      parent = parent,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest LibraryAgentShelvesList where
+instance
+  Core.GoogleRequest
+    LibraryAgentShelvesBooksList
+  where
   type
-    Rs LibraryAgentShelvesList =
-      GoogleExampleLibraryagentV1ListShelvesResponse
+    Rs LibraryAgentShelvesBooksList =
+      GoogleExampleLibraryagentV1ListBooksResponse
   type
-    Scopes LibraryAgentShelvesList =
+    Scopes LibraryAgentShelvesBooksList =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient LibraryAgentShelvesList {..} =
+  requestClient LibraryAgentShelvesBooksList {..} =
     go
+      parent
       xgafv
       accessToken
       callback
@@ -116,6 +126,6 @@ instance Core.GoogleRequest LibraryAgentShelvesList where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy LibraryAgentShelvesListResource
+              Core.Proxy LibraryAgentShelvesBooksListResource
           )
           Core.mempty

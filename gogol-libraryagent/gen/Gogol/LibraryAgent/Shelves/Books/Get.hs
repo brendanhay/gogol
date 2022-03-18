@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.LibraryAgent.Shelves.Books.Get
+-- Module      : Gogol.LibraryAgent.Shelves.Books.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets a book. Returns NOT_FOUND if the book does not exist.
 --
 -- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference> for @libraryagent.shelves.books.get@.
-module Network.Google.LibraryAgent.Shelves.Books.Get
+module Gogol.LibraryAgent.Shelves.Books.Get
   ( -- * Resource
     LibraryAgentShelvesBooksGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.LibraryAgent.Shelves.Books.Get
   )
 where
 
-import Network.Google.LibraryAgent.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.LibraryAgent.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @libraryagent.shelves.books.get@ method which the
 -- 'LibraryAgentShelvesBooksGet' request conforms to.

@@ -19,55 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.LibraryAgent.Shelves.Get
+-- Module      : Gogol.LibraryAgent.Shelves.Books.Borrow
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a shelf. Returns NOT_FOUND if the shelf does not exist.
+-- Borrow a book from the library. Returns the book if it is borrowed successfully. Returns NOT_FOUND if the book does not exist in the library. Returns quota exceeded error if the amount of books borrowed exceeds allocation quota in any dimensions.
 --
--- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference> for @libraryagent.shelves.get@.
-module Network.Google.LibraryAgent.Shelves.Get
+-- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference> for @libraryagent.shelves.books.borrow@.
+module Gogol.LibraryAgent.Shelves.Books.Borrow
   ( -- * Resource
-    LibraryAgentShelvesGetResource,
+    LibraryAgentShelvesBooksBorrowResource,
 
     -- ** Constructing a Request
-    newLibraryAgentShelvesGet,
-    LibraryAgentShelvesGet,
+    newLibraryAgentShelvesBooksBorrow,
+    LibraryAgentShelvesBooksBorrow,
   )
 where
 
-import Network.Google.LibraryAgent.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.LibraryAgent.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @libraryagent.shelves.get@ method which the
--- 'LibraryAgentShelvesGet' request conforms to.
-type LibraryAgentShelvesGetResource =
+-- | A resource alias for @libraryagent.shelves.books.borrow@ method which the
+-- 'LibraryAgentShelvesBooksBorrow' request conforms to.
+type LibraryAgentShelvesBooksBorrowResource =
   "v1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.CaptureMode "name" "borrow" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
+    Core.:> Core.Post
               '[Core.JSON]
-              GoogleExampleLibraryagentV1Shelf
+              GoogleExampleLibraryagentV1Book
 
--- | Gets a shelf. Returns NOT_FOUND if the shelf does not exist.
+-- | Borrow a book from the library. Returns the book if it is borrowed successfully. Returns NOT_FOUND if the book does not exist in the library. Returns quota exceeded error if the amount of books borrowed exceeds allocation quota in any dimensions.
 --
--- /See:/ 'newLibraryAgentShelvesGet' smart constructor.
-data LibraryAgentShelvesGet = LibraryAgentShelvesGet
+-- /See:/ 'newLibraryAgentShelvesBooksBorrow' smart constructor.
+data LibraryAgentShelvesBooksBorrow = LibraryAgentShelvesBooksBorrow
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the shelf to retrieve.
+    -- | Required. The name of the book to borrow.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,13 +76,13 @@ data LibraryAgentShelvesGet = LibraryAgentShelvesGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'LibraryAgentShelvesGet' with the minimum fields required to make a request.
-newLibraryAgentShelvesGet ::
-  -- |  Required. The name of the shelf to retrieve. See 'name'.
+-- | Creates a value of 'LibraryAgentShelvesBooksBorrow' with the minimum fields required to make a request.
+newLibraryAgentShelvesBooksBorrow ::
+  -- |  Required. The name of the book to borrow. See 'name'.
   Core.Text ->
-  LibraryAgentShelvesGet
-newLibraryAgentShelvesGet name =
-  LibraryAgentShelvesGet
+  LibraryAgentShelvesBooksBorrow
+newLibraryAgentShelvesBooksBorrow name =
+  LibraryAgentShelvesBooksBorrow
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,14 +91,17 @@ newLibraryAgentShelvesGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest LibraryAgentShelvesGet where
+instance
+  Core.GoogleRequest
+    LibraryAgentShelvesBooksBorrow
+  where
   type
-    Rs LibraryAgentShelvesGet =
-      GoogleExampleLibraryagentV1Shelf
+    Rs LibraryAgentShelvesBooksBorrow =
+      GoogleExampleLibraryagentV1Book
   type
-    Scopes LibraryAgentShelvesGet =
+    Scopes LibraryAgentShelvesBooksBorrow =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient LibraryAgentShelvesGet {..} =
+  requestClient LibraryAgentShelvesBooksBorrow {..} =
     go
       name
       xgafv
@@ -112,6 +115,6 @@ instance Core.GoogleRequest LibraryAgentShelvesGet where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy LibraryAgentShelvesGetResource
+              Core.Proxy LibraryAgentShelvesBooksBorrowResource
           )
           Core.mempty

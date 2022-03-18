@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.LibraryAgent
-    Network.Google.LibraryAgent.Shelves.Books.Borrow
-    Network.Google.LibraryAgent.Shelves.Books.Get
-    Network.Google.LibraryAgent.Shelves.Books.List
-    Network.Google.LibraryAgent.Shelves.Books.Return
-    Network.Google.LibraryAgent.Shelves.Get
-    Network.Google.LibraryAgent.Shelves.List
-    Network.Google.LibraryAgent.Types
+    Gogol.LibraryAgent
+    Gogol.LibraryAgent.Shelves.Books.Borrow
+    Gogol.LibraryAgent.Shelves.Books.Get
+    Gogol.LibraryAgent.Shelves.Books.List
+    Gogol.LibraryAgent.Shelves.Books.Return
+    Gogol.LibraryAgent.Shelves.Get
+    Gogol.LibraryAgent.Shelves.List
+    Gogol.LibraryAgent.Types
 
   other-modules:
-    Network.Google.LibraryAgent.Internal.Product
-    Network.Google.LibraryAgent.Internal.Sum
+    Gogol.LibraryAgent.Internal.Product
+    Gogol.LibraryAgent.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
