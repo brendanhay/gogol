@@ -1,58 +1,69 @@
-name:                  gogol-fitness
-version:               0.5.0
-synopsis:              Google Fitness SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-fitness
+version:            0.5.0
+synopsis:           Google Fitness SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    The Fitness API for managing users\' fitness tracking data.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  The Fitness API for managing users\' fitness tracking data.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-fitness
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Fitness
-        , Network.Google.Fitness.Types
-        , Network.Google.Resource.Fitness.Users.DataSet.Aggregate
-        , Network.Google.Resource.Fitness.Users.DataSources.Create
-        , Network.Google.Resource.Fitness.Users.DataSources.DataPointChanges.List
-        , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
-        , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
-        , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
-        , Network.Google.Resource.Fitness.Users.DataSources.Delete
-        , Network.Google.Resource.Fitness.Users.DataSources.Get
-        , Network.Google.Resource.Fitness.Users.DataSources.List
-        , Network.Google.Resource.Fitness.Users.DataSources.Update
-        , Network.Google.Resource.Fitness.Users.Sessions.Delete
-        , Network.Google.Resource.Fitness.Users.Sessions.List
-        , Network.Google.Resource.Fitness.Users.Sessions.Update
+  exposed-modules:
+    Network.Google.Fitness
+    Network.Google.Fitness.Types
+    Network.Google.Fitness.Users.Dataset.Aggregate
+    Network.Google.Fitness.Users.DataSources.Create
+    Network.Google.Fitness.Users.DataSources.DataPointChanges.List
+    Network.Google.Fitness.Users.DataSources.Datasets.Delete
+    Network.Google.Fitness.Users.DataSources.Datasets.Get
+    Network.Google.Fitness.Users.DataSources.Datasets.Patch
+    Network.Google.Fitness.Users.DataSources.Delete
+    Network.Google.Fitness.Users.DataSources.Get
+    Network.Google.Fitness.Users.DataSources.List
+    Network.Google.Fitness.Users.DataSources.Update
+    Network.Google.Fitness.Users.Sessions.Delete
+    Network.Google.Fitness.Users.Sessions.List
+    Network.Google.Fitness.Users.Sessions.Update
 
-    other-modules:
-          Network.Google.Fitness.Types.Product
-        , Network.Google.Fitness.Types.Sum
+  other-modules:
+    Network.Google.Fitness.Internal.Product
+    Network.Google.Fitness.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

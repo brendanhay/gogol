@@ -1,354 +1,269 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Fitness.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Fitness.Types
-    (
-    -- * Service Configuration
-      fitnessService
+  ( -- * Configuration
+    fitnessService,
 
     -- * OAuth Scopes
-    , fitnessBodyTemperatureReadScope
-    , fitnessBodyReadScope
-    , fitnessHeartRateWriteScope
-    , fitnessSleepWriteScope
-    , fitnessNutritionReadScope
-    , fitnessReProductiveHealthReadScope
-    , fitnessActivityReadScope
-    , fitnessReProductiveHealthWriteScope
-    , fitnessActivityWriteScope
-    , fitnessBloodPressureWriteScope
-    , fitnessSleepReadScope
-    , fitnessHeartRateReadScope
-    , fitnessBodyTemperatureWriteScope
-    , fitnessOxygenSaturationReadScope
-    , fitnessBloodGlucoseWriteScope
-    , fitnessBloodPressureReadScope
-    , fitnessLocationReadScope
-    , fitnessLocationWriteScope
-    , fitnessNutritionWriteScope
-    , fitnessBodyWriteScope
-    , fitnessBloodGlucoseReadScope
-    , fitnessOxygenSaturationWriteScope
+    fitnessActivityReadScope,
+    fitnessActivityWriteScope,
+    fitnessBlood_glucoseReadScope,
+    fitnessBlood_glucoseWriteScope,
+    fitnessBlood_pressureReadScope,
+    fitnessBlood_pressureWriteScope,
+    fitnessBodyReadScope,
+    fitnessBodyWriteScope,
+    fitnessBody_temperatureReadScope,
+    fitnessBody_temperatureWriteScope,
+    fitnessHeart_rateReadScope,
+    fitnessHeart_rateWriteScope,
+    fitnessLocationReadScope,
+    fitnessLocationWriteScope,
+    fitnessNutritionReadScope,
+    fitnessNutritionWriteScope,
+    fitnessOxygen_saturationReadScope,
+    fitnessOxygen_saturationWriteScope,
+    fitnessReproductive_healthReadScope,
+    fitnessReproductive_healthWriteScope,
+    fitnessSleepReadScope,
+    fitnessSleepWriteScope,
 
-    -- * AggregateBucketType
-    , AggregateBucketType (..)
+    -- * Types
 
-    -- * DataSet
-    , DataSet
-    , dataSet
-    , dsNextPageToken
-    , dsDataSourceId
-    , dsPoint
-    , dsMinStartTimeNs
-    , dsMaxEndTimeNs
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Application
-    , Application
-    , application
-    , aPackageName
-    , aName
-    , aVersion
-    , aDetailsURL
+    -- ** AggregateBucket
+    AggregateBucket (..),
+    newAggregateBucket,
 
-    -- * AggregateResponse
-    , AggregateResponse
-    , aggregateResponse
-    , arBucket
+    -- ** AggregateBucket_Type
+    AggregateBucket_Type (..),
 
-    -- * AggregateBy
-    , AggregateBy
-    , aggregateBy
-    , abDataTypeName
-    , abDataSourceId
+    -- ** AggregateBy
+    AggregateBy (..),
+    newAggregateBy,
 
-    -- * DataSourceType
-    , DataSourceType (..)
+    -- ** AggregateRequest
+    AggregateRequest (..),
+    newAggregateRequest,
 
-    -- * BucketByTimePeriodType
-    , BucketByTimePeriodType (..)
+    -- ** AggregateRequest_FilteredDataQualityStandardItem
+    AggregateRequest_FilteredDataQualityStandardItem (..),
 
-    -- * BucketByActivity
-    , BucketByActivity
-    , bucketByActivity
-    , bbaMinDurationMillis
-    , bbaActivityDataSourceId
+    -- ** AggregateResponse
+    AggregateResponse (..),
+    newAggregateResponse,
 
-    -- * AggregateRequest
-    , AggregateRequest
-    , aggregateRequest
-    , arEndTimeMillis
-    , arFilteredDataQualityStandard
-    , arAggregateBy
-    , arBucketBySession
-    , arBucketByActivityType
-    , arBucketByTime
-    , arStartTimeMillis
-    , arBucketByActivitySegment
+    -- ** Application
+    Application (..),
+    newApplication,
 
-    -- * Device
-    , Device
-    , device
-    , dManufacturer
-    , dUid
-    , dModel
-    , dVersion
-    , dType
+    -- ** BucketByActivity
+    BucketByActivity (..),
+    newBucketByActivity,
 
-    -- * Value
-    , Value
-    , value
-    , vMapVal
-    , vFpVal
-    , vIntVal
-    , vStringVal
+    -- ** BucketBySession
+    BucketBySession (..),
+    newBucketBySession,
 
-    -- * BucketBySession
-    , BucketBySession
-    , bucketBySession
-    , bbsMinDurationMillis
+    -- ** BucketByTime
+    BucketByTime (..),
+    newBucketByTime,
 
-    -- * DataPoint
-    , DataPoint
-    , dataPoint
-    , dpOriginDataSourceId
-    , dpRawTimestampNanos
-    , dpDataTypeName
-    , dpValue
-    , dpComputationTimeMillis
-    , dpEndTimeNanos
-    , dpModifiedTimeMillis
-    , dpStartTimeNanos
+    -- ** BucketByTimePeriod
+    BucketByTimePeriod (..),
+    newBucketByTimePeriod,
 
-    -- * ListSessionsResponse
-    , ListSessionsResponse
-    , listSessionsResponse
-    , lsrNextPageToken
-    , lsrDeletedSession
-    , lsrHasMoreData
-    , lsrSession
+    -- ** BucketByTimePeriod_Type
+    BucketByTimePeriod_Type (..),
 
-    -- * AggregateBucket
-    , AggregateBucket
-    , aggregateBucket
-    , abEndTimeMillis
-    , abDataSet
-    , abActivity
-    , abType
-    , abStartTimeMillis
-    , abSession
+    -- ** DataPoint
+    DataPoint (..),
+    newDataPoint,
 
-    -- * MapValue
-    , MapValue
-    , mapValue
-    , mvFpVal
+    -- ** DataSource
+    DataSource (..),
+    newDataSource,
 
-    -- * ListDataSourcesResponse
-    , ListDataSourcesResponse
-    , listDataSourcesResponse
-    , ldsrDataSource
+    -- ** DataSource_DataQualityStandardItem
+    DataSource_DataQualityStandardItem (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** DataSource_Type
+    DataSource_Type (..),
 
-    -- * DataTypeField
-    , DataTypeField
-    , dataTypeField
-    , dtfFormat
-    , dtfName
-    , dtfOptional
+    -- ** DataType
+    DataType (..),
+    newDataType,
 
-    -- * AggregateRequestFilteredDataQualityStandardItem
-    , AggregateRequestFilteredDataQualityStandardItem (..)
+    -- ** DataTypeField
+    DataTypeField (..),
+    newDataTypeField,
 
-    -- * DataSource
-    , DataSource
-    , dataSource
-    , dsApplication
-    , dsDevice
-    , dsDataQualityStandard
-    , dsName
-    , dsDataType
-    , dsType
-    , dsDataStreamName
-    , dsDataStreamId
+    -- ** DataTypeField_Format
+    DataTypeField_Format (..),
 
-    -- * BucketByTimePeriod
-    , BucketByTimePeriod
-    , bucketByTimePeriod
-    , bbtpValue
-    , bbtpType
-    , bbtpTimeZoneId
+    -- ** Dataset
+    Dataset (..),
+    newDataset,
 
-    -- * DeviceType
-    , DeviceType (..)
+    -- ** Device
+    Device (..),
+    newDevice,
 
-    -- * ValueMapValEntry
-    , ValueMapValEntry
-    , valueMapValEntry
-    , vmveValue
-    , vmveKey
+    -- ** Device_Type
+    Device_Type (..),
 
-    -- * BucketByTime
-    , BucketByTime
-    , bucketByTime
-    , bbtPeriod
-    , bbtDurationMillis
+    -- ** ListDataPointChangesResponse
+    ListDataPointChangesResponse (..),
+    newListDataPointChangesResponse,
 
-    -- * DataType
-    , DataType
-    , dataType
-    , dtField
-    , dtName
+    -- ** ListDataSourcesResponse
+    ListDataSourcesResponse (..),
+    newListDataSourcesResponse,
 
-    -- * ListDataPointChangesResponse
-    , ListDataPointChangesResponse
-    , listDataPointChangesResponse
-    , ldpcrNextPageToken
-    , ldpcrInsertedDataPoint
-    , ldpcrDataSourceId
-    , ldpcrDeletedDataPoint
+    -- ** ListSessionsResponse
+    ListSessionsResponse (..),
+    newListSessionsResponse,
 
-    -- * Session
-    , Session
-    , session
-    , sEndTimeMillis
-    , sActiveTimeMillis
-    , sApplication
-    , sActivityType
-    , sName
-    , sModifiedTimeMillis
-    , sId
-    , sStartTimeMillis
-    , sDescription
+    -- ** MapValue
+    MapValue (..),
+    newMapValue,
 
-    -- * DataSourceDataQualityStandardItem
-    , DataSourceDataQualityStandardItem (..)
+    -- ** Session
+    Session (..),
+    newSession,
 
-    -- * DataTypeFieldFormat
-    , DataTypeFieldFormat (..)
-    ) where
+    -- ** Value
+    Value (..),
+    newValue,
 
-import Network.Google.Fitness.Types.Product
-import Network.Google.Fitness.Types.Sum
-import Network.Google.Prelude
+    -- ** ValueMapValEntry
+    ValueMapValEntry (..),
+    newValueMapValEntry,
+  )
+where
 
--- | Default request referring to version 'v1' of the Fitness API. This contains the host and root path used as a starting point for constructing service requests.
-fitnessService :: ServiceConfig
-fitnessService
-  = defaultService (ServiceId "fitness:v1")
-      "fitness.googleapis.com"
+import Network.Google.Fitness.Internal.Product
+import Network.Google.Fitness.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See info about your body temperature in Google Fit. I consent to Google
--- sharing my body temperature information with this app.
-fitnessBodyTemperatureReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.read"]
-fitnessBodyTemperatureReadScope = Proxy
-
--- | See info about your body measurements and heart rate in Google Fit
-fitnessBodyReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
-fitnessBodyReadScope = Proxy
-
--- | Add to your heart rate data in Google Fit. I consent to Google using my
--- heart rate information with this app.
-fitnessHeartRateWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.write"]
-fitnessHeartRateWriteScope = Proxy
-
--- | Add to your sleep data in Google Fit. I consent to Google using my sleep
--- information with this app.
-fitnessSleepWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.sleep.write"]
-fitnessSleepWriteScope = Proxy
-
--- | See info about your nutrition in Google Fit
-fitnessNutritionReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.read"]
-fitnessNutritionReadScope = Proxy
-
--- | See info about your reproductive health in Google Fit. I consent to
--- Google sharing my reproductive health information with this app.
-fitnessReProductiveHealthReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.read"]
-fitnessReProductiveHealthReadScope = Proxy
+-- | Default request referring to version @v1@ of the Fitness API. This contains the host and root path used as a starting point for constructing service requests.
+fitnessService :: Core.ServiceConfig
+fitnessService =
+  Core.defaultService
+    (Core.ServiceId "fitness:v1")
+    "fitness.googleapis.com"
 
 -- | Use Google Fit to see and store your physical activity data
-fitnessActivityReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
-fitnessActivityReadScope = Proxy
-
--- | Add info about your reproductive health in Google Fit. I consent to
--- Google using my reproductive health information with this app.
-fitnessReProductiveHealthWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.write"]
-fitnessReProductiveHealthWriteScope = Proxy
+fitnessActivityReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
+fitnessActivityReadScope = Core.Proxy
 
 -- | Add to your Google Fit physical activity data
-fitnessActivityWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.write"]
-fitnessActivityWriteScope = Proxy
+fitnessActivityWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.activity.write"]
+fitnessActivityWriteScope = Core.Proxy
 
--- | Add info about your blood pressure in Google Fit. I consent to Google
--- using my blood pressure information with this app.
-fitnessBloodPressureWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.write"]
-fitnessBloodPressureWriteScope = Proxy
+-- | See info about your blood glucose in Google Fit. I consent to Google sharing my blood glucose information with this app.
+fitnessBlood_glucoseReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.read"]
+fitnessBlood_glucoseReadScope = Core.Proxy
 
--- | See your sleep data in Google Fit. I consent to Google sharing my sleep
--- information with this app.
-fitnessSleepReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.sleep.read"]
-fitnessSleepReadScope = Proxy
+-- | Add info about your blood glucose to Google Fit. I consent to Google using my blood glucose information with this app.
+fitnessBlood_glucoseWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.write"]
+fitnessBlood_glucoseWriteScope = Core.Proxy
 
--- | See your heart rate data in Google Fit. I consent to Google sharing my
--- heart rate information with this app.
-fitnessHeartRateReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.read"]
-fitnessHeartRateReadScope = Proxy
+-- | See info about your blood pressure in Google Fit. I consent to Google sharing my blood pressure information with this app.
+fitnessBlood_pressureReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.read"]
+fitnessBlood_pressureReadScope = Core.Proxy
 
--- | Add to info about your body temperature in Google Fit. I consent to
--- Google using my body temperature information with this app.
-fitnessBodyTemperatureWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.write"]
-fitnessBodyTemperatureWriteScope = Proxy
+-- | Add info about your blood pressure in Google Fit. I consent to Google using my blood pressure information with this app.
+fitnessBlood_pressureWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.write"]
+fitnessBlood_pressureWriteScope = Core.Proxy
 
--- | See info about your oxygen saturation in Google Fit. I consent to Google
--- sharing my oxygen saturation information with this app.
-fitnessOxygenSaturationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.read"]
-fitnessOxygenSaturationReadScope = Proxy
+-- | See info about your body measurements in Google Fit
+fitnessBodyReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
+fitnessBodyReadScope = Core.Proxy
 
--- | Add info about your blood glucose to Google Fit. I consent to Google
--- using my blood glucose information with this app.
-fitnessBloodGlucoseWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.write"]
-fitnessBloodGlucoseWriteScope = Proxy
+-- | Add info about your body measurements to Google Fit
+fitnessBodyWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body.write"]
+fitnessBodyWriteScope = Core.Proxy
 
--- | See info about your blood pressure in Google Fit. I consent to Google
--- sharing my blood pressure information with this app.
-fitnessBloodPressureReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.read"]
-fitnessBloodPressureReadScope = Proxy
+-- | See info about your body temperature in Google Fit. I consent to Google sharing my body temperature information with this app.
+fitnessBody_temperatureReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.read"]
+fitnessBody_temperatureReadScope = Core.Proxy
+
+-- | Add to info about your body temperature in Google Fit. I consent to Google using my body temperature information with this app.
+fitnessBody_temperatureWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.write"]
+fitnessBody_temperatureWriteScope = Core.Proxy
+
+-- | See your heart rate data in Google Fit. I consent to Google sharing my heart rate information with this app.
+fitnessHeart_rateReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.read"]
+fitnessHeart_rateReadScope = Core.Proxy
+
+-- | Add to your heart rate data in Google Fit. I consent to Google using my heart rate information with this app.
+fitnessHeart_rateWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.write"]
+fitnessHeart_rateWriteScope = Core.Proxy
 
 -- | See your Google Fit speed and distance data
-fitnessLocationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.read"]
-fitnessLocationReadScope = Proxy
+fitnessLocationReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.location.read"]
+fitnessLocationReadScope = Core.Proxy
 
 -- | Add to your Google Fit location data
-fitnessLocationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
-fitnessLocationWriteScope = Proxy
+fitnessLocationWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
+fitnessLocationWriteScope = Core.Proxy
+
+-- | See info about your nutrition in Google Fit
+fitnessNutritionReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.nutrition.read"]
+fitnessNutritionReadScope = Core.Proxy
 
 -- | Add to info about your nutrition in Google Fit
-fitnessNutritionWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.write"]
-fitnessNutritionWriteScope = Proxy
+fitnessNutritionWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.nutrition.write"]
+fitnessNutritionWriteScope = Core.Proxy
 
--- | Add info about your body measurements and heart rate to Google Fit
-fitnessBodyWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.write"]
-fitnessBodyWriteScope = Proxy
+-- | See info about your oxygen saturation in Google Fit. I consent to Google sharing my oxygen saturation information with this app.
+fitnessOxygen_saturationReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.read"]
+fitnessOxygen_saturationReadScope = Core.Proxy
 
--- | See info about your blood glucose in Google Fit. I consent to Google
--- sharing my blood glucose information with this app.
-fitnessBloodGlucoseReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.read"]
-fitnessBloodGlucoseReadScope = Proxy
+-- | Add info about your oxygen saturation in Google Fit. I consent to Google using my oxygen saturation information with this app.
+fitnessOxygen_saturationWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.write"]
+fitnessOxygen_saturationWriteScope = Core.Proxy
 
--- | Add info about your oxygen saturation in Google Fit. I consent to Google
--- using my oxygen saturation information with this app.
-fitnessOxygenSaturationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.write"]
-fitnessOxygenSaturationWriteScope = Proxy
+-- | See info about your reproductive health in Google Fit. I consent to Google sharing my reproductive health information with this app.
+fitnessReproductive_healthReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.read"]
+fitnessReproductive_healthReadScope = Core.Proxy
+
+-- | Add info about your reproductive health in Google Fit. I consent to Google using my reproductive health information with this app.
+fitnessReproductive_healthWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.write"]
+fitnessReproductive_healthWriteScope = Core.Proxy
+
+-- | See your sleep data in Google Fit. I consent to Google sharing my sleep information with this app.
+fitnessSleepReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.sleep.read"]
+fitnessSleepReadScope = Core.Proxy
+
+-- | Add to your sleep data in Google Fit. I consent to Google using my sleep information with this app.
+fitnessSleepWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.sleep.write"]
+fitnessSleepWriteScope = Core.Proxy
