@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CustomSearch.Types
+-- Module      : Gogol.CustomSearch.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CustomSearch.Types
+module Gogol.CustomSearch.Types
   ( -- * Configuration
     customSearchService,
 
@@ -142,9 +142,9 @@ module Network.Google.CustomSearch.Types
   )
 where
 
-import Network.Google.CustomSearch.Internal.Product
-import Network.Google.CustomSearch.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CustomSearch.Internal.Product
+import Gogol.CustomSearch.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Custom Search API. This contains the host and root path used as a starting point for constructing service requests.
 customSearchService :: Core.ServiceConfig

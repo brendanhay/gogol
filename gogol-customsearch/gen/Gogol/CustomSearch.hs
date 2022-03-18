@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CustomSearch
+-- Module      : Gogol.CustomSearch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Searches over a website or collection of websites
 --
 -- /See:/ <https://developers.google.com/custom-search/v1/introduction Custom Search API Reference>
-module Network.Google.CustomSearch
+module Gogol.CustomSearch
   ( -- * Configuration
     customSearchService,
 
@@ -158,6 +158,6 @@ module Network.Google.CustomSearch
   )
 where
 
-import Network.Google.CustomSearch.Search.Cse.List
-import Network.Google.CustomSearch.Search.Cse.Siterestrict.List
-import Network.Google.CustomSearch.Types
+import Gogol.CustomSearch.Search.Cse.List
+import Gogol.CustomSearch.Search.Cse.Siterestrict.List
+import Gogol.CustomSearch.Types
