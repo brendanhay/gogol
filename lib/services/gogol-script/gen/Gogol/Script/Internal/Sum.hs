@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Script.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * EntryPoint_EntryPointType
     EntryPoint_EntryPointType
-      ( EntryPoint_EntryPointType_ENTRYPOINTTYPEUNSPECIFIED,
+      (
+        EntryPoint_EntryPointType_ENTRYPOINTTYPEUNSPECIFIED,
         EntryPoint_EntryPointType_WEBAPP,
         EntryPoint_EntryPointType_EXECUTIONAPI,
         EntryPoint_EntryPointType_ADDON,
@@ -44,7 +55,8 @@ module Gogol.Script.Internal.Sum
 
     -- * File_Type
     File_Type
-      ( File_Type_ENUMTYPEUNSPECIFIED,
+      (
+        File_Type_ENUMTYPEUNSPECIFIED,
         File_Type_SERVERJS,
         File_Type_Html,
         File_Type_Json,
@@ -53,7 +65,8 @@ module Gogol.Script.Internal.Sum
 
     -- * GoogleAppsScriptTypeAddOnEntryPoint_AddOnType
     GoogleAppsScriptTypeAddOnEntryPoint_AddOnType
-      ( GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_UNKNOWNADDONTYPE,
+      (
+        GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_UNKNOWNADDONTYPE,
         GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_Gmail,
         GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_DATASTUDIO,
         ..
@@ -61,7 +74,8 @@ module Gogol.Script.Internal.Sum
 
     -- * GoogleAppsScriptTypeExecutionApiConfig_Access
     GoogleAppsScriptTypeExecutionApiConfig_Access
-      ( GoogleAppsScriptTypeExecutionApiConfig_Access_UNKNOWNACCESS,
+      (
+        GoogleAppsScriptTypeExecutionApiConfig_Access_UNKNOWNACCESS,
         GoogleAppsScriptTypeExecutionApiConfig_Access_Myself,
         GoogleAppsScriptTypeExecutionApiConfig_Access_Domain,
         GoogleAppsScriptTypeExecutionApiConfig_Access_Anyone,
@@ -71,7 +85,8 @@ module Gogol.Script.Internal.Sum
 
     -- * GoogleAppsScriptTypeProcess_ProcessStatus
     GoogleAppsScriptTypeProcess_ProcessStatus
-      ( GoogleAppsScriptTypeProcess_ProcessStatus_PROCESSSTATUSUNSPECIFIED,
+      (
+        GoogleAppsScriptTypeProcess_ProcessStatus_PROCESSSTATUSUNSPECIFIED,
         GoogleAppsScriptTypeProcess_ProcessStatus_Running,
         GoogleAppsScriptTypeProcess_ProcessStatus_Paused,
         GoogleAppsScriptTypeProcess_ProcessStatus_Completed,
@@ -85,7 +100,8 @@ module Gogol.Script.Internal.Sum
 
     -- * GoogleAppsScriptTypeProcess_ProcessType
     GoogleAppsScriptTypeProcess_ProcessType
-      ( GoogleAppsScriptTypeProcess_ProcessType_PROCESSTYPEUNSPECIFIED,
+      (
+        GoogleAppsScriptTypeProcess_ProcessType_PROCESSTYPEUNSPECIFIED,
         GoogleAppsScriptTypeProcess_ProcessType_ADDON,
         GoogleAppsScriptTypeProcess_ProcessType_EXECUTIONAPI,
         GoogleAppsScriptTypeProcess_ProcessType_TIMEDRIVEN,
@@ -100,7 +116,8 @@ module Gogol.Script.Internal.Sum
 
     -- * GoogleAppsScriptTypeProcess_UserAccessLevel
     GoogleAppsScriptTypeProcess_UserAccessLevel
-      ( GoogleAppsScriptTypeProcess_UserAccessLevel_USERACCESSLEVELUNSPECIFIED,
+      (
+        GoogleAppsScriptTypeProcess_UserAccessLevel_USERACCESSLEVELUNSPECIFIED,
         GoogleAppsScriptTypeProcess_UserAccessLevel_None,
         GoogleAppsScriptTypeProcess_UserAccessLevel_Read',
         GoogleAppsScriptTypeProcess_UserAccessLevel_Write,
@@ -110,7 +127,8 @@ module Gogol.Script.Internal.Sum
 
     -- * GoogleAppsScriptTypeWebAppConfig_Access
     GoogleAppsScriptTypeWebAppConfig_Access
-      ( GoogleAppsScriptTypeWebAppConfig_Access_UNKNOWNACCESS,
+      (
+        GoogleAppsScriptTypeWebAppConfig_Access_UNKNOWNACCESS,
         GoogleAppsScriptTypeWebAppConfig_Access_Myself,
         GoogleAppsScriptTypeWebAppConfig_Access_Domain,
         GoogleAppsScriptTypeWebAppConfig_Access_Anyone,
@@ -120,7 +138,8 @@ module Gogol.Script.Internal.Sum
 
     -- * GoogleAppsScriptTypeWebAppConfig_ExecuteAs
     GoogleAppsScriptTypeWebAppConfig_ExecuteAs
-      ( GoogleAppsScriptTypeWebAppConfig_ExecuteAs_UNKNOWNEXECUTEAS,
+      (
+        GoogleAppsScriptTypeWebAppConfig_ExecuteAs_UNKNOWNEXECUTEAS,
         GoogleAppsScriptTypeWebAppConfig_ExecuteAs_USERACCESSING,
         GoogleAppsScriptTypeWebAppConfig_ExecuteAs_USERDEPLOYING,
         ..
@@ -128,13 +147,15 @@ module Gogol.Script.Internal.Sum
 
     -- * Value_NullValue
     Value_NullValue
-      ( Value_NullValue_NULLVALUE,
+      (
+        Value_NullValue_NULLVALUE,
         ..
       ),
 
     -- * ProcessesListUserProcessFilterStatuses
     ProcessesListUserProcessFilterStatuses
-      ( ProcessesListUserProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED,
+      (
+        ProcessesListUserProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED,
         ProcessesListUserProcessFilterStatuses_Running,
         ProcessesListUserProcessFilterStatuses_Paused,
         ProcessesListUserProcessFilterStatuses_Completed,
@@ -148,7 +169,8 @@ module Gogol.Script.Internal.Sum
 
     -- * ProcessesListUserProcessFilterTypes
     ProcessesListUserProcessFilterTypes
-      ( ProcessesListUserProcessFilterTypes_PROCESSTYPEUNSPECIFIED,
+      (
+        ProcessesListUserProcessFilterTypes_PROCESSTYPEUNSPECIFIED,
         ProcessesListUserProcessFilterTypes_ADDON,
         ProcessesListUserProcessFilterTypes_EXECUTIONAPI,
         ProcessesListUserProcessFilterTypes_TIMEDRIVEN,
@@ -163,7 +185,8 @@ module Gogol.Script.Internal.Sum
 
     -- * ProcessesListUserProcessFilterUserAccessLevels
     ProcessesListUserProcessFilterUserAccessLevels
-      ( ProcessesListUserProcessFilterUserAccessLevels_USERACCESSLEVELUNSPECIFIED,
+      (
+        ProcessesListUserProcessFilterUserAccessLevels_USERACCESSLEVELUNSPECIFIED,
         ProcessesListUserProcessFilterUserAccessLevels_None,
         ProcessesListUserProcessFilterUserAccessLevels_Read',
         ProcessesListUserProcessFilterUserAccessLevels_Write,
@@ -173,7 +196,8 @@ module Gogol.Script.Internal.Sum
 
     -- * ProcessesListScriptProcessesScriptProcessFilterStatuses
     ProcessesListScriptProcessesScriptProcessFilterStatuses
-      ( ProcessesListScriptProcessesScriptProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED,
+      (
+        ProcessesListScriptProcessesScriptProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED,
         ProcessesListScriptProcessesScriptProcessFilterStatuses_Running,
         ProcessesListScriptProcessesScriptProcessFilterStatuses_Paused,
         ProcessesListScriptProcessesScriptProcessFilterStatuses_Completed,
@@ -187,7 +211,8 @@ module Gogol.Script.Internal.Sum
 
     -- * ProcessesListScriptProcessesScriptProcessFilterTypes
     ProcessesListScriptProcessesScriptProcessFilterTypes
-      ( ProcessesListScriptProcessesScriptProcessFilterTypes_PROCESSTYPEUNSPECIFIED,
+      (
+        ProcessesListScriptProcessesScriptProcessFilterTypes_PROCESSTYPEUNSPECIFIED,
         ProcessesListScriptProcessesScriptProcessFilterTypes_ADDON,
         ProcessesListScriptProcessesScriptProcessFilterTypes_EXECUTIONAPI,
         ProcessesListScriptProcessesScriptProcessFilterTypes_TIMEDRIVEN,
@@ -202,7 +227,8 @@ module Gogol.Script.Internal.Sum
 
     -- * ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
     ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
-      ( ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_USERACCESSLEVELUNSPECIFIED,
+      (
+        ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_USERACCESSLEVELUNSPECIFIED,
         ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_None,
         ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_Read',
         ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_Write,
@@ -212,28 +238,28 @@ module Gogol.Script.Internal.Sum
 
     -- * ProjectsGetMetricsMetricsGranularity
     ProjectsGetMetricsMetricsGranularity
-      ( ProjectsGetMetricsMetricsGranularity_UNSPECIFIEDGRANULARITY,
+      (
+        ProjectsGetMetricsMetricsGranularity_UNSPECIFIEDGRANULARITY,
         ProjectsGetMetricsMetricsGranularity_Weekly,
         ProjectsGetMetricsMetricsGranularity_Daily,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -246,21 +272,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The type of the entry point.
-newtype EntryPoint_EntryPointType = EntryPoint_EntryPointType {fromEntryPoint_EntryPointType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EntryPoint_EntryPointType = EntryPoint_EntryPointType { fromEntryPoint_EntryPointType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An unspecified entry point.
 pattern EntryPoint_EntryPointType_ENTRYPOINTTYPEUNSPECIFIED :: EntryPoint_EntryPointType
@@ -283,21 +308,20 @@ pattern EntryPoint_EntryPointType_ADDON = EntryPoint_EntryPointType "ADD_ON"
   EntryPoint_EntryPointType_WEBAPP,
   EntryPoint_EntryPointType_EXECUTIONAPI,
   EntryPoint_EntryPointType_ADDON,
-  EntryPoint_EntryPointType
-  #-}
+  EntryPoint_EntryPointType #-}
 
 -- | The type of the file.
-newtype File_Type = File_Type {fromFile_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype File_Type = File_Type { fromFile_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Undetermined file type; never actually used.
 pattern File_Type_ENUMTYPEUNSPECIFIED :: File_Type
@@ -320,21 +344,20 @@ pattern File_Type_Json = File_Type "JSON"
   File_Type_SERVERJS,
   File_Type_Html,
   File_Type_Json,
-  File_Type
-  #-}
+  File_Type #-}
 
 -- | The add-on\'s required list of supported container types.
-newtype GoogleAppsScriptTypeAddOnEntryPoint_AddOnType = GoogleAppsScriptTypeAddOnEntryPoint_AddOnType {fromGoogleAppsScriptTypeAddOnEntryPoint_AddOnType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsScriptTypeAddOnEntryPoint_AddOnType = GoogleAppsScriptTypeAddOnEntryPoint_AddOnType { fromGoogleAppsScriptTypeAddOnEntryPoint_AddOnType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, unknown add-on type.
 pattern GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_UNKNOWNADDONTYPE :: GoogleAppsScriptTypeAddOnEntryPoint_AddOnType
@@ -352,21 +375,20 @@ pattern GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_DATASTUDIO = GoogleAppsScr
   GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_UNKNOWNADDONTYPE,
   GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_Gmail,
   GoogleAppsScriptTypeAddOnEntryPoint_AddOnType_DATASTUDIO,
-  GoogleAppsScriptTypeAddOnEntryPoint_AddOnType
-  #-}
+  GoogleAppsScriptTypeAddOnEntryPoint_AddOnType #-}
 
 -- | Who has permission to run the API executable.
-newtype GoogleAppsScriptTypeExecutionApiConfig_Access = GoogleAppsScriptTypeExecutionApiConfig_Access {fromGoogleAppsScriptTypeExecutionApiConfig_Access :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsScriptTypeExecutionApiConfig_Access = GoogleAppsScriptTypeExecutionApiConfig_Access { fromGoogleAppsScriptTypeExecutionApiConfig_Access :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, should not be used.
 pattern GoogleAppsScriptTypeExecutionApiConfig_Access_UNKNOWNACCESS :: GoogleAppsScriptTypeExecutionApiConfig_Access
@@ -394,21 +416,20 @@ pattern GoogleAppsScriptTypeExecutionApiConfig_Access_ANYONEANONYMOUS = GoogleAp
   GoogleAppsScriptTypeExecutionApiConfig_Access_Domain,
   GoogleAppsScriptTypeExecutionApiConfig_Access_Anyone,
   GoogleAppsScriptTypeExecutionApiConfig_Access_ANYONEANONYMOUS,
-  GoogleAppsScriptTypeExecutionApiConfig_Access
-  #-}
+  GoogleAppsScriptTypeExecutionApiConfig_Access #-}
 
 -- | The executions status.
-newtype GoogleAppsScriptTypeProcess_ProcessStatus = GoogleAppsScriptTypeProcess_ProcessStatus {fromGoogleAppsScriptTypeProcess_ProcessStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsScriptTypeProcess_ProcessStatus = GoogleAppsScriptTypeProcess_ProcessStatus { fromGoogleAppsScriptTypeProcess_ProcessStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified status.
 pattern GoogleAppsScriptTypeProcess_ProcessStatus_PROCESSSTATUSUNSPECIFIED :: GoogleAppsScriptTypeProcess_ProcessStatus
@@ -456,21 +477,20 @@ pattern GoogleAppsScriptTypeProcess_ProcessStatus_Delayed = GoogleAppsScriptType
   GoogleAppsScriptTypeProcess_ProcessStatus_TIMEDOUT,
   GoogleAppsScriptTypeProcess_ProcessStatus_Unknown,
   GoogleAppsScriptTypeProcess_ProcessStatus_Delayed,
-  GoogleAppsScriptTypeProcess_ProcessStatus
-  #-}
+  GoogleAppsScriptTypeProcess_ProcessStatus #-}
 
 -- | The executions type.
-newtype GoogleAppsScriptTypeProcess_ProcessType = GoogleAppsScriptTypeProcess_ProcessType {fromGoogleAppsScriptTypeProcess_ProcessType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsScriptTypeProcess_ProcessType = GoogleAppsScriptTypeProcess_ProcessType { fromGoogleAppsScriptTypeProcess_ProcessType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified type.
 pattern GoogleAppsScriptTypeProcess_ProcessType_PROCESSTYPEUNSPECIFIED :: GoogleAppsScriptTypeProcess_ProcessType
@@ -523,21 +543,20 @@ pattern GoogleAppsScriptTypeProcess_ProcessType_BATCHTASK = GoogleAppsScriptType
   GoogleAppsScriptTypeProcess_ProcessType_SIMPLETRIGGER,
   GoogleAppsScriptTypeProcess_ProcessType_Menu,
   GoogleAppsScriptTypeProcess_ProcessType_BATCHTASK,
-  GoogleAppsScriptTypeProcess_ProcessType
-  #-}
+  GoogleAppsScriptTypeProcess_ProcessType #-}
 
 -- | The executing users access level to the script.
-newtype GoogleAppsScriptTypeProcess_UserAccessLevel = GoogleAppsScriptTypeProcess_UserAccessLevel {fromGoogleAppsScriptTypeProcess_UserAccessLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsScriptTypeProcess_UserAccessLevel = GoogleAppsScriptTypeProcess_UserAccessLevel { fromGoogleAppsScriptTypeProcess_UserAccessLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | User access level unspecified
 pattern GoogleAppsScriptTypeProcess_UserAccessLevel_USERACCESSLEVELUNSPECIFIED :: GoogleAppsScriptTypeProcess_UserAccessLevel
@@ -565,21 +584,20 @@ pattern GoogleAppsScriptTypeProcess_UserAccessLevel_Owner = GoogleAppsScriptType
   GoogleAppsScriptTypeProcess_UserAccessLevel_Read',
   GoogleAppsScriptTypeProcess_UserAccessLevel_Write,
   GoogleAppsScriptTypeProcess_UserAccessLevel_Owner,
-  GoogleAppsScriptTypeProcess_UserAccessLevel
-  #-}
+  GoogleAppsScriptTypeProcess_UserAccessLevel #-}
 
 -- | Who has permission to run the web app.
-newtype GoogleAppsScriptTypeWebAppConfig_Access = GoogleAppsScriptTypeWebAppConfig_Access {fromGoogleAppsScriptTypeWebAppConfig_Access :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsScriptTypeWebAppConfig_Access = GoogleAppsScriptTypeWebAppConfig_Access { fromGoogleAppsScriptTypeWebAppConfig_Access :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, should not be used.
 pattern GoogleAppsScriptTypeWebAppConfig_Access_UNKNOWNACCESS :: GoogleAppsScriptTypeWebAppConfig_Access
@@ -607,21 +625,20 @@ pattern GoogleAppsScriptTypeWebAppConfig_Access_ANYONEANONYMOUS = GoogleAppsScri
   GoogleAppsScriptTypeWebAppConfig_Access_Domain,
   GoogleAppsScriptTypeWebAppConfig_Access_Anyone,
   GoogleAppsScriptTypeWebAppConfig_Access_ANYONEANONYMOUS,
-  GoogleAppsScriptTypeWebAppConfig_Access
-  #-}
+  GoogleAppsScriptTypeWebAppConfig_Access #-}
 
 -- | Who to execute the web app as.
-newtype GoogleAppsScriptTypeWebAppConfig_ExecuteAs = GoogleAppsScriptTypeWebAppConfig_ExecuteAs {fromGoogleAppsScriptTypeWebAppConfig_ExecuteAs :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsScriptTypeWebAppConfig_ExecuteAs = GoogleAppsScriptTypeWebAppConfig_ExecuteAs { fromGoogleAppsScriptTypeWebAppConfig_ExecuteAs :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, should not be used.
 pattern GoogleAppsScriptTypeWebAppConfig_ExecuteAs_UNKNOWNEXECUTEAS :: GoogleAppsScriptTypeWebAppConfig_ExecuteAs
@@ -639,21 +656,20 @@ pattern GoogleAppsScriptTypeWebAppConfig_ExecuteAs_USERDEPLOYING = GoogleAppsScr
   GoogleAppsScriptTypeWebAppConfig_ExecuteAs_UNKNOWNEXECUTEAS,
   GoogleAppsScriptTypeWebAppConfig_ExecuteAs_USERACCESSING,
   GoogleAppsScriptTypeWebAppConfig_ExecuteAs_USERDEPLOYING,
-  GoogleAppsScriptTypeWebAppConfig_ExecuteAs
-  #-}
+  GoogleAppsScriptTypeWebAppConfig_ExecuteAs #-}
 
 -- | Represents a null value.
-newtype Value_NullValue = Value_NullValue {fromValue_NullValue :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Value_NullValue = Value_NullValue { fromValue_NullValue :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Null value.
 pattern Value_NullValue_NULLVALUE :: Value_NullValue
@@ -661,21 +677,20 @@ pattern Value_NullValue_NULLVALUE = Value_NullValue "NULL_VALUE"
 
 {-# COMPLETE
   Value_NullValue_NULLVALUE,
-  Value_NullValue
-  #-}
+  Value_NullValue #-}
 
 -- | Optional field used to limit returned processes to those having one of the specified process statuses.
-newtype ProcessesListUserProcessFilterStatuses = ProcessesListUserProcessFilterStatuses {fromProcessesListUserProcessFilterStatuses :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProcessesListUserProcessFilterStatuses = ProcessesListUserProcessFilterStatuses { fromProcessesListUserProcessFilterStatuses :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified status.
 pattern ProcessesListUserProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED :: ProcessesListUserProcessFilterStatuses
@@ -723,21 +738,20 @@ pattern ProcessesListUserProcessFilterStatuses_Delayed = ProcessesListUserProces
   ProcessesListUserProcessFilterStatuses_TIMEDOUT,
   ProcessesListUserProcessFilterStatuses_Unknown,
   ProcessesListUserProcessFilterStatuses_Delayed,
-  ProcessesListUserProcessFilterStatuses
-  #-}
+  ProcessesListUserProcessFilterStatuses #-}
 
 -- | Optional field used to limit returned processes to those having one of the specified process types.
-newtype ProcessesListUserProcessFilterTypes = ProcessesListUserProcessFilterTypes {fromProcessesListUserProcessFilterTypes :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProcessesListUserProcessFilterTypes = ProcessesListUserProcessFilterTypes { fromProcessesListUserProcessFilterTypes :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified type.
 pattern ProcessesListUserProcessFilterTypes_PROCESSTYPEUNSPECIFIED :: ProcessesListUserProcessFilterTypes
@@ -790,21 +804,20 @@ pattern ProcessesListUserProcessFilterTypes_BATCHTASK = ProcessesListUserProcess
   ProcessesListUserProcessFilterTypes_SIMPLETRIGGER,
   ProcessesListUserProcessFilterTypes_Menu,
   ProcessesListUserProcessFilterTypes_BATCHTASK,
-  ProcessesListUserProcessFilterTypes
-  #-}
+  ProcessesListUserProcessFilterTypes #-}
 
 -- | Optional field used to limit returned processes to those having one of the specified user access levels.
-newtype ProcessesListUserProcessFilterUserAccessLevels = ProcessesListUserProcessFilterUserAccessLevels {fromProcessesListUserProcessFilterUserAccessLevels :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProcessesListUserProcessFilterUserAccessLevels = ProcessesListUserProcessFilterUserAccessLevels { fromProcessesListUserProcessFilterUserAccessLevels :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | User access level unspecified
 pattern ProcessesListUserProcessFilterUserAccessLevels_USERACCESSLEVELUNSPECIFIED :: ProcessesListUserProcessFilterUserAccessLevels
@@ -832,21 +845,20 @@ pattern ProcessesListUserProcessFilterUserAccessLevels_Owner = ProcessesListUser
   ProcessesListUserProcessFilterUserAccessLevels_Read',
   ProcessesListUserProcessFilterUserAccessLevels_Write,
   ProcessesListUserProcessFilterUserAccessLevels_Owner,
-  ProcessesListUserProcessFilterUserAccessLevels
-  #-}
+  ProcessesListUserProcessFilterUserAccessLevels #-}
 
 -- | Optional field used to limit returned processes to those having one of the specified process statuses.
-newtype ProcessesListScriptProcessesScriptProcessFilterStatuses = ProcessesListScriptProcessesScriptProcessFilterStatuses {fromProcessesListScriptProcessesScriptProcessFilterStatuses :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProcessesListScriptProcessesScriptProcessFilterStatuses = ProcessesListScriptProcessesScriptProcessFilterStatuses { fromProcessesListScriptProcessesScriptProcessFilterStatuses :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified status.
 pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED :: ProcessesListScriptProcessesScriptProcessFilterStatuses
@@ -894,21 +906,20 @@ pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_Delayed = Proces
   ProcessesListScriptProcessesScriptProcessFilterStatuses_TIMEDOUT,
   ProcessesListScriptProcessesScriptProcessFilterStatuses_Unknown,
   ProcessesListScriptProcessesScriptProcessFilterStatuses_Delayed,
-  ProcessesListScriptProcessesScriptProcessFilterStatuses
-  #-}
+  ProcessesListScriptProcessesScriptProcessFilterStatuses #-}
 
 -- | Optional field used to limit returned processes to those having one of the specified process types.
-newtype ProcessesListScriptProcessesScriptProcessFilterTypes = ProcessesListScriptProcessesScriptProcessFilterTypes {fromProcessesListScriptProcessesScriptProcessFilterTypes :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProcessesListScriptProcessesScriptProcessFilterTypes = ProcessesListScriptProcessesScriptProcessFilterTypes { fromProcessesListScriptProcessesScriptProcessFilterTypes :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified type.
 pattern ProcessesListScriptProcessesScriptProcessFilterTypes_PROCESSTYPEUNSPECIFIED :: ProcessesListScriptProcessesScriptProcessFilterTypes
@@ -961,21 +972,20 @@ pattern ProcessesListScriptProcessesScriptProcessFilterTypes_BATCHTASK = Process
   ProcessesListScriptProcessesScriptProcessFilterTypes_SIMPLETRIGGER,
   ProcessesListScriptProcessesScriptProcessFilterTypes_Menu,
   ProcessesListScriptProcessesScriptProcessFilterTypes_BATCHTASK,
-  ProcessesListScriptProcessesScriptProcessFilterTypes
-  #-}
+  ProcessesListScriptProcessesScriptProcessFilterTypes #-}
 
 -- | Optional field used to limit returned processes to those having one of the specified user access levels.
-newtype ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels = ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels {fromProcessesListScriptProcessesScriptProcessFilterUserAccessLevels :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels = ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels { fromProcessesListScriptProcessesScriptProcessFilterUserAccessLevels :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | User access level unspecified
 pattern ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_USERACCESSLEVELUNSPECIFIED :: ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
@@ -1003,21 +1013,20 @@ pattern ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_Owner = 
   ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_Read',
   ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_Write,
   ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels_Owner,
-  ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
-  #-}
+  ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels #-}
 
 -- | Required field indicating what granularity of metrics are returned.
-newtype ProjectsGetMetricsMetricsGranularity = ProjectsGetMetricsMetricsGranularity {fromProjectsGetMetricsMetricsGranularity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsGetMetricsMetricsGranularity = ProjectsGetMetricsMetricsGranularity { fromProjectsGetMetricsMetricsGranularity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default metric granularity used to query no metrics.
 pattern ProjectsGetMetricsMetricsGranularity_UNSPECIFIEDGRANULARITY :: ProjectsGetMetricsMetricsGranularity
@@ -1035,5 +1044,4 @@ pattern ProjectsGetMetricsMetricsGranularity_Daily = ProjectsGetMetricsMetricsGr
   ProjectsGetMetricsMetricsGranularity_UNSPECIFIEDGRANULARITY,
   ProjectsGetMetricsMetricsGranularity_Weekly,
   ProjectsGetMetricsMetricsGranularity_Daily,
-  ProjectsGetMetricsMetricsGranularity
-  #-}
+  ProjectsGetMetricsMetricsGranularity #-}
