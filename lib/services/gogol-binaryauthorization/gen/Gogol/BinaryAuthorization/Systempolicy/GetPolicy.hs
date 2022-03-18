@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,91 +36,84 @@
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.systempolicy.getPolicy@.
 module Gogol.BinaryAuthorization.Systempolicy.GetPolicy
-  ( -- * Resource
-    BinaryAuthorizationSystempolicyGetPolicyResource,
+    (
+    -- * Resource
+      BinaryAuthorizationSystempolicyGetPolicyResource
 
     -- ** Constructing a Request
-    newBinaryAuthorizationSystempolicyGetPolicy,
-    BinaryAuthorizationSystempolicyGetPolicy,
-  )
-where
+    , newBinaryAuthorizationSystempolicyGetPolicy
+    , BinaryAuthorizationSystempolicyGetPolicy
+    ) where
 
-import Gogol.BinaryAuthorization.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BinaryAuthorization.Types
 
 -- | A resource alias for @binaryauthorization.systempolicy.getPolicy@ method which the
 -- 'BinaryAuthorizationSystempolicyGetPolicy' request conforms to.
-type BinaryAuthorizationSystempolicyGetPolicyResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Policy
+type BinaryAuthorizationSystempolicyGetPolicyResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] Policy
 
 -- | Gets the current system policy in the specified location.
 --
 -- /See:/ 'newBinaryAuthorizationSystempolicyGetPolicy' smart constructor.
 data BinaryAuthorizationSystempolicyGetPolicy = BinaryAuthorizationSystempolicyGetPolicy
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name, in the format @locations\/*\/policy@. Note that the system policy is not associated with a project.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The resource name, in the format @locations\/*\/policy@. Note that the system policy is not associated with a project.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BinaryAuthorizationSystempolicyGetPolicy' with the minimum fields required to make a request.
-newBinaryAuthorizationSystempolicyGetPolicy ::
-  -- |  Required. The resource name, in the format @locations\/*\/policy@. Note that the system policy is not associated with a project. See 'name'.
-  Core.Text ->
-  BinaryAuthorizationSystempolicyGetPolicy
+newBinaryAuthorizationSystempolicyGetPolicy 
+    ::  Core.Text
+       -- ^  Required. The resource name, in the format @locations\/*\/policy@. Note that the system policy is not associated with a project. See 'name'.
+    -> BinaryAuthorizationSystempolicyGetPolicy
 newBinaryAuthorizationSystempolicyGetPolicy name =
   BinaryAuthorizationSystempolicyGetPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BinaryAuthorizationSystempolicyGetPolicy
-  where
-  type
-    Rs BinaryAuthorizationSystempolicyGetPolicy =
-      Policy
-  type
-    Scopes BinaryAuthorizationSystempolicyGetPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    BinaryAuthorizationSystempolicyGetPolicy {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        binaryAuthorizationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BinaryAuthorizationSystempolicyGetPolicyResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           BinaryAuthorizationSystempolicyGetPolicy
+         where
+        type Rs BinaryAuthorizationSystempolicyGetPolicy =
+             Policy
+        type Scopes BinaryAuthorizationSystempolicyGetPolicy
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          BinaryAuthorizationSystempolicyGetPolicy{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              binaryAuthorizationService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           BinaryAuthorizationSystempolicyGetPolicyResource)
+                      Core.mempty
+

@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,141 +31,142 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.BinaryAuthorization.Types
-  ( -- * Configuration
-    binaryAuthorizationService,
+    (
+    -- * Configuration
+      binaryAuthorizationService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AdmissionRule
-    AdmissionRule (..),
-    newAdmissionRule,
+    , AdmissionRule (..)
+    , newAdmissionRule
 
     -- ** AdmissionRule_EnforcementMode
-    AdmissionRule_EnforcementMode (..),
+    , AdmissionRule_EnforcementMode (..)
 
     -- ** AdmissionRule_EvaluationMode
-    AdmissionRule_EvaluationMode (..),
+    , AdmissionRule_EvaluationMode (..)
 
     -- ** AdmissionWhitelistPattern
-    AdmissionWhitelistPattern (..),
-    newAdmissionWhitelistPattern,
+    , AdmissionWhitelistPattern (..)
+    , newAdmissionWhitelistPattern
 
     -- ** AttestationOccurrence
-    AttestationOccurrence (..),
-    newAttestationOccurrence,
+    , AttestationOccurrence (..)
+    , newAttestationOccurrence
 
     -- ** Attestor
-    Attestor (..),
-    newAttestor,
+    , Attestor (..)
+    , newAttestor
 
     -- ** AttestorPublicKey
-    AttestorPublicKey (..),
-    newAttestorPublicKey,
+    , AttestorPublicKey (..)
+    , newAttestorPublicKey
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** IamPolicy
-    IamPolicy (..),
-    newIamPolicy,
+    , IamPolicy (..)
+    , newIamPolicy
 
     -- ** Jwt
-    Jwt (..),
-    newJwt,
+    , Jwt (..)
+    , newJwt
 
     -- ** ListAttestorsResponse
-    ListAttestorsResponse (..),
-    newListAttestorsResponse,
+    , ListAttestorsResponse (..)
+    , newListAttestorsResponse
 
     -- ** PkixPublicKey
-    PkixPublicKey (..),
-    newPkixPublicKey,
+    , PkixPublicKey (..)
+    , newPkixPublicKey
 
     -- ** PkixPublicKey_SignatureAlgorithm
-    PkixPublicKey_SignatureAlgorithm (..),
+    , PkixPublicKey_SignatureAlgorithm (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Policy_ClusterAdmissionRules
-    Policy_ClusterAdmissionRules (..),
-    newPolicy_ClusterAdmissionRules,
+    , Policy_ClusterAdmissionRules (..)
+    , newPolicy_ClusterAdmissionRules
 
     -- ** Policy_GlobalPolicyEvaluationMode
-    Policy_GlobalPolicyEvaluationMode (..),
+    , Policy_GlobalPolicyEvaluationMode (..)
 
     -- ** Policy_IstioServiceIdentityAdmissionRules
-    Policy_IstioServiceIdentityAdmissionRules (..),
-    newPolicy_IstioServiceIdentityAdmissionRules,
+    , Policy_IstioServiceIdentityAdmissionRules (..)
+    , newPolicy_IstioServiceIdentityAdmissionRules
 
     -- ** Policy_KubernetesNamespaceAdmissionRules
-    Policy_KubernetesNamespaceAdmissionRules (..),
-    newPolicy_KubernetesNamespaceAdmissionRules,
+    , Policy_KubernetesNamespaceAdmissionRules (..)
+    , newPolicy_KubernetesNamespaceAdmissionRules
 
     -- ** Policy_KubernetesServiceAccountAdmissionRules
-    Policy_KubernetesServiceAccountAdmissionRules (..),
-    newPolicy_KubernetesServiceAccountAdmissionRules,
+    , Policy_KubernetesServiceAccountAdmissionRules (..)
+    , newPolicy_KubernetesServiceAccountAdmissionRules
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Signature
-    Signature (..),
-    newSignature,
+    , Signature (..)
+    , newSignature
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UserOwnedGrafeasNote
-    UserOwnedGrafeasNote (..),
-    newUserOwnedGrafeasNote,
+    , UserOwnedGrafeasNote (..)
+    , newUserOwnedGrafeasNote
 
     -- ** ValidateAttestationOccurrenceRequest
-    ValidateAttestationOccurrenceRequest (..),
-    newValidateAttestationOccurrenceRequest,
+    , ValidateAttestationOccurrenceRequest (..)
+    , newValidateAttestationOccurrenceRequest
 
     -- ** ValidateAttestationOccurrenceResponse
-    ValidateAttestationOccurrenceResponse (..),
-    newValidateAttestationOccurrenceResponse,
+    , ValidateAttestationOccurrenceResponse (..)
+    , newValidateAttestationOccurrenceResponse
 
     -- ** ValidateAttestationOccurrenceResponse_Result
-    ValidateAttestationOccurrenceResponse_Result (..),
-  )
-where
+    , ValidateAttestationOccurrenceResponse_Result (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.BinaryAuthorization.Internal.Product
 import Gogol.BinaryAuthorization.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Binary Authorization API. This contains the host and root path used as a starting point for constructing service requests.
 binaryAuthorizationService :: Core.ServiceConfig
-binaryAuthorizationService =
-  Core.defaultService
-    (Core.ServiceId "binaryauthorization:v1")
-    "binaryauthorization.googleapis.com"
+binaryAuthorizationService
+  = Core.defaultService
+      (Core.ServiceId "binaryauthorization:v1")
+      "binaryauthorization.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
