@@ -1,204 +1,159 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Tracing.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Tracing.Types
-    (
-    -- * Service Configuration
-      tracingService
+  ( -- * Configuration
+    tracingService,
 
     -- * OAuth Scopes
-    , traceAppendScope
-    , traceReadOnlyScope
-    , cloudPlatformScope
+    cloudPlatformScope,
+    traceAppendScope,
+    traceReadOnlyScope,
 
-    -- * Span
-    , Span
-    , span
-    , sStatus
-    , sStartTime
-    , sName
-    , sStackTrace
-    , sAttributes
-    , sEndTime
-    , sTimeEvents
-    , sDisplayName
-    , sParentSpanId
-    , sLinks
-    , sSpanId
+    -- * Types
 
-    -- * TruncatableString
-    , TruncatableString
-    , truncatableString
-    , tsTruncatedCharacterCount
-    , tsValue
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Annotation
+    Annotation (..),
+    newAnnotation,
 
-    -- * AttributesAttributeMap
-    , AttributesAttributeMap
-    , attributesAttributeMap
-    , aamAddtional
+    -- ** AttributeValue
+    AttributeValue (..),
+    newAttributeValue,
 
-    -- * Annotation
-    , Annotation
-    , annotation
-    , aAttributes
-    , aDescription
+    -- ** Attributes
+    Attributes (..),
+    newAttributes,
 
-    -- * AttributeValue
-    , AttributeValue
-    , attributeValue
-    , avBoolValue
-    , avIntValue
-    , avStringValue
+    -- ** Attributes_AttributeMap
+    Attributes_AttributeMap (..),
+    newAttributes_AttributeMap,
 
-    -- * NetworkEventType
-    , NetworkEventType (..)
+    -- ** BatchWriteSpansRequest
+    BatchWriteSpansRequest (..),
+    newBatchWriteSpansRequest,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Link
-    , Link
-    , link
-    , lTraceId
-    , lType
-    , lSpanId
+    -- ** Link
+    Link (..),
+    newLink,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Link_Type
+    Link_Type (..),
 
-    -- * ListSpansResponse
-    , ListSpansResponse
-    , listSpansResponse
-    , lsrNextPageToken
-    , lsrSpans
+    -- ** Links
+    Links (..),
+    newLinks,
 
-    -- * StackTrace
-    , StackTrace
-    , stackTrace
-    , stStackTraceHashId
-    , stStackFrames
+    -- ** ListSpansResponse
+    ListSpansResponse (..),
+    newListSpansResponse,
 
-    -- * BatchWriteSpansRequest
-    , BatchWriteSpansRequest
-    , batchWriteSpansRequest
-    , bwsrSpans
+    -- ** ListTracesResponse
+    ListTracesResponse (..),
+    newListTracesResponse,
 
-    -- * Attributes
-    , Attributes
-    , attributes
-    , aDroppedAttributesCount
-    , aAttributeMap
+    -- ** Module
+    Module (..),
+    newModule,
 
-    -- * NetworkEvent
-    , NetworkEvent
-    , networkEvent
-    , neTime
-    , neMessageSize
-    , neType
-    , neMessageId
+    -- ** NetworkEvent
+    NetworkEvent (..),
+    newNetworkEvent,
 
-    -- * Module
-    , Module
-    , module'
-    , mBuildId
-    , mModule
+    -- ** NetworkEvent_Type
+    NetworkEvent_Type (..),
 
-    -- * TimeEvents
-    , TimeEvents
-    , timeEvents
-    , teDroppedAnnotationsCount
-    , teDroppedNetworkEventsCount
-    , teTimeEvent
+    -- ** Span
+    Span (..),
+    newSpan,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** StackFrame
+    StackFrame (..),
+    newStackFrame,
 
-    -- * StackFrames
-    , StackFrames
-    , stackFrames
-    , sfDroppedFramesCount
-    , sfFrame
+    -- ** StackFrames
+    StackFrames (..),
+    newStackFrames,
 
-    -- * LinkType
-    , LinkType (..)
+    -- ** StackTrace
+    StackTrace (..),
+    newStackTrace,
 
-    -- * StackFrame
-    , StackFrame
-    , stackFrame
-    , sfLoadModule
-    , sfOriginalFunctionName
-    , sfLineNumber
-    , sfSourceVersion
-    , sfFunctionName
-    , sfColumnNumber
-    , sfFileName
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * Links
-    , Links
-    , links
-    , lDroppedLinksCount
-    , lLink
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * ListTracesResponse
-    , ListTracesResponse
-    , listTracesResponse
-    , ltrNextPageToken
-    , ltrTraces
+    -- ** TimeEvent
+    TimeEvent (..),
+    newTimeEvent,
 
-    -- * TimeEvent
-    , TimeEvent
-    , timeEvent
-    , teAnnotation
-    , teTime
-    , teNetworkEvent
+    -- ** TimeEvents
+    TimeEvents (..),
+    newTimeEvents,
 
-    -- * Trace
-    , Trace
-    , trace
-    , tName
-    ) where
+    -- ** Trace
+    Trace (..),
+    newTrace,
 
-import Network.Google.Prelude
-import Network.Google.Tracing.Types.Product
-import Network.Google.Tracing.Types.Sum
+    -- ** TruncatableString
+    TruncatableString (..),
+    newTruncatableString,
+  )
+where
 
--- | Default request referring to version 'v2' of the Google Tracing API. This contains the host and root path used as a starting point for constructing service requests.
-tracingService :: ServiceConfig
-tracingService
-  = defaultService (ServiceId "tracing:v2")
-      "tracing.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.Tracing.Internal.Product
+import Network.Google.Tracing.Internal.Sum
 
--- | Write Trace data for a project or application
-traceAppendScope :: Proxy '["https://www.googleapis.com/auth/trace.append"]
-traceAppendScope = Proxy
-
--- | Read Trace data for a project or application
-traceReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/trace.readonly"]
-traceReadOnlyScope = Proxy
+-- | Default request referring to version @v2@ of the Google Tracing API. This contains the host and root path used as a starting point for constructing service requests.
+tracingService :: Core.ServiceConfig
+tracingService =
+  Core.defaultService
+    (Core.ServiceId "tracing:v2")
+    "tracing.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | Write Trace data for a project or application
+traceAppendScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.append"]
+traceAppendScope = Core.Proxy
+
+-- | Read Trace data for a project or application
+traceReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.readonly"]
+traceReadOnlyScope = Core.Proxy
