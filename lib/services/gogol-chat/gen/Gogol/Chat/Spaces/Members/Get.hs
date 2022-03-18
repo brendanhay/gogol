@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,82 +36,78 @@
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.members.get@.
 module Gogol.Chat.Spaces.Members.Get
-  ( -- * Resource
-    ChatSpacesMembersGetResource,
+    (
+    -- * Resource
+      ChatSpacesMembersGetResource
 
     -- ** Constructing a Request
-    newChatSpacesMembersGet,
-    ChatSpacesMembersGet,
-  )
-where
+    , newChatSpacesMembersGet
+    , ChatSpacesMembersGet
+    ) where
 
-import Gogol.Chat.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Chat.Types
 
 -- | A resource alias for @chat.spaces.members.get@ method which the
 -- 'ChatSpacesMembersGet' request conforms to.
 type ChatSpacesMembersGetResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Membership
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] Membership
 
 -- | Returns a membership.
 --
 -- /See:/ 'newChatSpacesMembersGet' smart constructor.
 data ChatSpacesMembersGet = ChatSpacesMembersGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the membership to be retrieved, in the form \"spaces\//\/members\//\". Example: spaces\/AAAAAAAAAAAA\/members\/111111111111111111111
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Resource name of the membership to be retrieved, in the form \"spaces\//\/members\//\". Example: spaces\/AAAAAAAAAAAA\/members\/111111111111111111111
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ChatSpacesMembersGet' with the minimum fields required to make a request.
-newChatSpacesMembersGet ::
-  -- |  Required. Resource name of the membership to be retrieved, in the form \"spaces\//\/members\//\". Example: spaces\/AAAAAAAAAAAA\/members\/111111111111111111111 See 'name'.
-  Core.Text ->
-  ChatSpacesMembersGet
+newChatSpacesMembersGet 
+    ::  Core.Text
+       -- ^  Required. Resource name of the membership to be retrieved, in the form \"spaces\//\/members\//\". Example: spaces\/AAAAAAAAAAAA\/members\/111111111111111111111 See 'name'.
+    -> ChatSpacesMembersGet
 newChatSpacesMembersGet name =
   ChatSpacesMembersGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest ChatSpacesMembersGet where
-  type Rs ChatSpacesMembersGet = Membership
-  type Scopes ChatSpacesMembersGet = '[]
-  requestClient ChatSpacesMembersGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      chatService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ChatSpacesMembersGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest ChatSpacesMembersGet
+         where
+        type Rs ChatSpacesMembersGet = Membership
+        type Scopes ChatSpacesMembersGet = '[]
+        requestClient ChatSpacesMembersGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              chatService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy ChatSpacesMembersGetResource)
+                      Core.mempty
+
