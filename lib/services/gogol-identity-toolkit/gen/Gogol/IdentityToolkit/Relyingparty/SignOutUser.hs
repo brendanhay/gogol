@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,65 +30,71 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.signOutUser@.
 module Gogol.IdentityToolkit.Relyingparty.SignOutUser
-    (
-    -- * Resource
-      IdentityToolkitRelyingpartySignOutUserResource
+  ( -- * Resource
+    IdentityToolkitRelyingpartySignOutUserResource,
 
     -- ** Constructing a Request
-    , newIdentityToolkitRelyingpartySignOutUser
-    , IdentityToolkitRelyingpartySignOutUser
-    ) where
+    newIdentityToolkitRelyingpartySignOutUser,
+    IdentityToolkitRelyingpartySignOutUser,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.signOutUser@ method which the
 -- 'IdentityToolkitRelyingpartySignOutUser' request conforms to.
 type IdentityToolkitRelyingpartySignOutUserResource =
-     "identitytoolkit" Core.:>
-       "v3" Core.:>
-         "relyingparty" Core.:>
-           "signOutUser" Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON]
-                 IdentitytoolkitRelyingpartySignOutUserRequest
-                 Core.:>
-                 Core.Post '[Core.JSON]
-                   IdentitytoolkitRelyingpartySignOutUserResponse
+  "identitytoolkit"
+    Core.:> "v3"
+    Core.:> "relyingparty"
+    Core.:> "signOutUser"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              IdentitytoolkitRelyingpartySignOutUserRequest
+    Core.:> Core.Post
+              '[Core.JSON]
+              IdentitytoolkitRelyingpartySignOutUserResponse
 
 -- | Sign out user.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartySignOutUser' smart constructor.
 newtype IdentityToolkitRelyingpartySignOutUser = IdentityToolkitRelyingpartySignOutUser
-    {
-      -- | Multipart request metadata.
-      payload :: IdentitytoolkitRelyingpartySignOutUserRequest
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: IdentitytoolkitRelyingpartySignOutUserRequest
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartySignOutUser' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartySignOutUser 
-    ::  IdentitytoolkitRelyingpartySignOutUserRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> IdentityToolkitRelyingpartySignOutUser
+newIdentityToolkitRelyingpartySignOutUser ::
+  -- |  Multipart request metadata. See 'payload'.
+  IdentitytoolkitRelyingpartySignOutUserRequest ->
+  IdentityToolkitRelyingpartySignOutUser
 newIdentityToolkitRelyingpartySignOutUser payload =
   IdentityToolkitRelyingpartySignOutUser {payload = payload}
 
-instance Core.GoogleRequest
-           IdentityToolkitRelyingpartySignOutUser
-         where
-        type Rs IdentityToolkitRelyingpartySignOutUser =
-             IdentitytoolkitRelyingpartySignOutUserResponse
-        type Scopes IdentityToolkitRelyingpartySignOutUser =
-             '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient
-          IdentityToolkitRelyingpartySignOutUser{..}
-          = go (Core.Just Core.AltJSON) payload
-              identityToolkitService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           IdentityToolkitRelyingpartySignOutUserResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    IdentityToolkitRelyingpartySignOutUser
+  where
+  type
+    Rs IdentityToolkitRelyingpartySignOutUser =
+      IdentitytoolkitRelyingpartySignOutUserResponse
+  type
+    Scopes IdentityToolkitRelyingpartySignOutUser =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient
+    IdentityToolkitRelyingpartySignOutUser {..} =
+      go
+        (Core.Just Core.AltJSON)
+        payload
+        identityToolkitService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  IdentityToolkitRelyingpartySignOutUserResource
+            )
+            Core.mempty

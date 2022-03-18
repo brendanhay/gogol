@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,66 +30,70 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.verifyCustomToken@.
 module Gogol.IdentityToolkit.Relyingparty.VerifyCustomToken
-    (
-    -- * Resource
-      IdentityToolkitRelyingpartyVerifyCustomTokenResource
+  ( -- * Resource
+    IdentityToolkitRelyingpartyVerifyCustomTokenResource,
 
     -- ** Constructing a Request
-    , newIdentityToolkitRelyingpartyVerifyCustomToken
-    , IdentityToolkitRelyingpartyVerifyCustomToken
-    ) where
+    newIdentityToolkitRelyingpartyVerifyCustomToken,
+    IdentityToolkitRelyingpartyVerifyCustomToken,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.verifyCustomToken@ method which the
 -- 'IdentityToolkitRelyingpartyVerifyCustomToken' request conforms to.
-type IdentityToolkitRelyingpartyVerifyCustomTokenResource
-     =
-     "identitytoolkit" Core.:>
-       "v3" Core.:>
-         "relyingparty" Core.:>
-           "verifyCustomToken" Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON]
-                 IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
-                 Core.:>
-                 Core.Post '[Core.JSON] VerifyCustomTokenResponse
+type IdentityToolkitRelyingpartyVerifyCustomTokenResource =
+  "identitytoolkit"
+    Core.:> "v3"
+    Core.:> "relyingparty"
+    Core.:> "verifyCustomToken"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
+    Core.:> Core.Post '[Core.JSON] VerifyCustomTokenResponse
 
 -- | Verifies the developer asserted ID token.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartyVerifyCustomToken' smart constructor.
 newtype IdentityToolkitRelyingpartyVerifyCustomToken = IdentityToolkitRelyingpartyVerifyCustomToken
-    {
-      -- | Multipart request metadata.
-      payload :: IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartyVerifyCustomToken' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartyVerifyCustomToken 
-    ::  IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> IdentityToolkitRelyingpartyVerifyCustomToken
+newIdentityToolkitRelyingpartyVerifyCustomToken ::
+  -- |  Multipart request metadata. See 'payload'.
+  IdentitytoolkitRelyingpartyVerifyCustomTokenRequest ->
+  IdentityToolkitRelyingpartyVerifyCustomToken
 newIdentityToolkitRelyingpartyVerifyCustomToken payload =
   IdentityToolkitRelyingpartyVerifyCustomToken {payload = payload}
 
-instance Core.GoogleRequest
-           IdentityToolkitRelyingpartyVerifyCustomToken
-         where
-        type Rs IdentityToolkitRelyingpartyVerifyCustomToken
-             = VerifyCustomTokenResponse
-        type Scopes
-               IdentityToolkitRelyingpartyVerifyCustomToken
-             = '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient
-          IdentityToolkitRelyingpartyVerifyCustomToken{..}
-          = go (Core.Just Core.AltJSON) payload
-              identityToolkitService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           IdentityToolkitRelyingpartyVerifyCustomTokenResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    IdentityToolkitRelyingpartyVerifyCustomToken
+  where
+  type
+    Rs IdentityToolkitRelyingpartyVerifyCustomToken =
+      VerifyCustomTokenResponse
+  type
+    Scopes
+      IdentityToolkitRelyingpartyVerifyCustomToken =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient
+    IdentityToolkitRelyingpartyVerifyCustomToken {..} =
+      go
+        (Core.Just Core.AltJSON)
+        payload
+        identityToolkitService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  IdentityToolkitRelyingpartyVerifyCustomTokenResource
+            )
+            Core.mempty

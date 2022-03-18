@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,64 +30,69 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.resetPassword@.
 module Gogol.IdentityToolkit.Relyingparty.ResetPassword
-    (
-    -- * Resource
-      IdentityToolkitRelyingpartyResetPasswordResource
+  ( -- * Resource
+    IdentityToolkitRelyingpartyResetPasswordResource,
 
     -- ** Constructing a Request
-    , newIdentityToolkitRelyingpartyResetPassword
-    , IdentityToolkitRelyingpartyResetPassword
-    ) where
+    newIdentityToolkitRelyingpartyResetPassword,
+    IdentityToolkitRelyingpartyResetPassword,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.resetPassword@ method which the
 -- 'IdentityToolkitRelyingpartyResetPassword' request conforms to.
-type IdentityToolkitRelyingpartyResetPasswordResource
-     =
-     "identitytoolkit" Core.:>
-       "v3" Core.:>
-         "relyingparty" Core.:>
-           "resetPassword" Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON]
-                 IdentitytoolkitRelyingpartyResetPasswordRequest
-                 Core.:> Core.Post '[Core.JSON] ResetPasswordResponse
+type IdentityToolkitRelyingpartyResetPasswordResource =
+  "identitytoolkit"
+    Core.:> "v3"
+    Core.:> "relyingparty"
+    Core.:> "resetPassword"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              IdentitytoolkitRelyingpartyResetPasswordRequest
+    Core.:> Core.Post '[Core.JSON] ResetPasswordResponse
 
 -- | Reset password for a user.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartyResetPassword' smart constructor.
 newtype IdentityToolkitRelyingpartyResetPassword = IdentityToolkitRelyingpartyResetPassword
-    {
-      -- | Multipart request metadata.
-      payload :: IdentitytoolkitRelyingpartyResetPasswordRequest
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: IdentitytoolkitRelyingpartyResetPasswordRequest
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartyResetPassword' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartyResetPassword 
-    ::  IdentitytoolkitRelyingpartyResetPasswordRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> IdentityToolkitRelyingpartyResetPassword
+newIdentityToolkitRelyingpartyResetPassword ::
+  -- |  Multipart request metadata. See 'payload'.
+  IdentitytoolkitRelyingpartyResetPasswordRequest ->
+  IdentityToolkitRelyingpartyResetPassword
 newIdentityToolkitRelyingpartyResetPassword payload =
   IdentityToolkitRelyingpartyResetPassword {payload = payload}
 
-instance Core.GoogleRequest
-           IdentityToolkitRelyingpartyResetPassword
-         where
-        type Rs IdentityToolkitRelyingpartyResetPassword =
-             ResetPasswordResponse
-        type Scopes IdentityToolkitRelyingpartyResetPassword
-             = '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient
-          IdentityToolkitRelyingpartyResetPassword{..}
-          = go (Core.Just Core.AltJSON) payload
-              identityToolkitService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           IdentityToolkitRelyingpartyResetPasswordResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    IdentityToolkitRelyingpartyResetPassword
+  where
+  type
+    Rs IdentityToolkitRelyingpartyResetPassword =
+      ResetPasswordResponse
+  type
+    Scopes IdentityToolkitRelyingpartyResetPassword =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient
+    IdentityToolkitRelyingpartyResetPassword {..} =
+      go
+        (Core.Just Core.AltJSON)
+        payload
+        identityToolkitService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  IdentityToolkitRelyingpartyResetPasswordResource
+            )
+            Core.mempty

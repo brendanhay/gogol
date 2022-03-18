@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,64 +30,69 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.createAuthUri@.
 module Gogol.IdentityToolkit.Relyingparty.CreateAuthUri
-    (
-    -- * Resource
-      IdentityToolkitRelyingpartyCreateAuthUriResource
+  ( -- * Resource
+    IdentityToolkitRelyingpartyCreateAuthUriResource,
 
     -- ** Constructing a Request
-    , newIdentityToolkitRelyingpartyCreateAuthUri
-    , IdentityToolkitRelyingpartyCreateAuthUri
-    ) where
+    newIdentityToolkitRelyingpartyCreateAuthUri,
+    IdentityToolkitRelyingpartyCreateAuthUri,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.createAuthUri@ method which the
 -- 'IdentityToolkitRelyingpartyCreateAuthUri' request conforms to.
-type IdentityToolkitRelyingpartyCreateAuthUriResource
-     =
-     "identitytoolkit" Core.:>
-       "v3" Core.:>
-         "relyingparty" Core.:>
-           "createAuthUri" Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON]
-                 IdentitytoolkitRelyingpartyCreateAuthUriRequest
-                 Core.:> Core.Post '[Core.JSON] CreateAuthUriResponse
+type IdentityToolkitRelyingpartyCreateAuthUriResource =
+  "identitytoolkit"
+    Core.:> "v3"
+    Core.:> "relyingparty"
+    Core.:> "createAuthUri"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              IdentitytoolkitRelyingpartyCreateAuthUriRequest
+    Core.:> Core.Post '[Core.JSON] CreateAuthUriResponse
 
 -- | Creates the URI used by the IdP to authenticate the user.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartyCreateAuthUri' smart constructor.
 newtype IdentityToolkitRelyingpartyCreateAuthUri = IdentityToolkitRelyingpartyCreateAuthUri
-    {
-      -- | Multipart request metadata.
-      payload :: IdentitytoolkitRelyingpartyCreateAuthUriRequest
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: IdentitytoolkitRelyingpartyCreateAuthUriRequest
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartyCreateAuthUri' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartyCreateAuthUri 
-    ::  IdentitytoolkitRelyingpartyCreateAuthUriRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> IdentityToolkitRelyingpartyCreateAuthUri
+newIdentityToolkitRelyingpartyCreateAuthUri ::
+  -- |  Multipart request metadata. See 'payload'.
+  IdentitytoolkitRelyingpartyCreateAuthUriRequest ->
+  IdentityToolkitRelyingpartyCreateAuthUri
 newIdentityToolkitRelyingpartyCreateAuthUri payload =
   IdentityToolkitRelyingpartyCreateAuthUri {payload = payload}
 
-instance Core.GoogleRequest
-           IdentityToolkitRelyingpartyCreateAuthUri
-         where
-        type Rs IdentityToolkitRelyingpartyCreateAuthUri =
-             CreateAuthUriResponse
-        type Scopes IdentityToolkitRelyingpartyCreateAuthUri
-             = '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient
-          IdentityToolkitRelyingpartyCreateAuthUri{..}
-          = go (Core.Just Core.AltJSON) payload
-              identityToolkitService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           IdentityToolkitRelyingpartyCreateAuthUriResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    IdentityToolkitRelyingpartyCreateAuthUri
+  where
+  type
+    Rs IdentityToolkitRelyingpartyCreateAuthUri =
+      CreateAuthUriResponse
+  type
+    Scopes IdentityToolkitRelyingpartyCreateAuthUri =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient
+    IdentityToolkitRelyingpartyCreateAuthUri {..} =
+      go
+        (Core.Just Core.AltJSON)
+        payload
+        identityToolkitService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  IdentityToolkitRelyingpartyCreateAuthUriResource
+            )
+            Core.mempty

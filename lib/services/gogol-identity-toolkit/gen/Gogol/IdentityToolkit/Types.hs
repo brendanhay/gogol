@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,205 +25,204 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.IdentityToolkit.Types
-    (
-    -- * Configuration
-      identityToolkitService
+  ( -- * Configuration
+    identityToolkitService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , firebaseScope
+    cloudPlatformScope,
+    firebaseScope,
 
     -- * Types
 
     -- ** CreateAuthUriResponse
-    , CreateAuthUriResponse (..)
-    , newCreateAuthUriResponse
+    CreateAuthUriResponse (..),
+    newCreateAuthUriResponse,
 
     -- ** DeleteAccountResponse
-    , DeleteAccountResponse (..)
-    , newDeleteAccountResponse
+    DeleteAccountResponse (..),
+    newDeleteAccountResponse,
 
     -- ** DownloadAccountResponse
-    , DownloadAccountResponse (..)
-    , newDownloadAccountResponse
+    DownloadAccountResponse (..),
+    newDownloadAccountResponse,
 
     -- ** EmailLinkSigninResponse
-    , EmailLinkSigninResponse (..)
-    , newEmailLinkSigninResponse
+    EmailLinkSigninResponse (..),
+    newEmailLinkSigninResponse,
 
     -- ** EmailTemplate
-    , EmailTemplate (..)
-    , newEmailTemplate
+    EmailTemplate (..),
+    newEmailTemplate,
 
     -- ** GetAccountInfoResponse
-    , GetAccountInfoResponse (..)
-    , newGetAccountInfoResponse
+    GetAccountInfoResponse (..),
+    newGetAccountInfoResponse,
 
     -- ** GetOobConfirmationCodeResponse
-    , GetOobConfirmationCodeResponse (..)
-    , newGetOobConfirmationCodeResponse
+    GetOobConfirmationCodeResponse (..),
+    newGetOobConfirmationCodeResponse,
 
     -- ** GetRecaptchaParamResponse
-    , GetRecaptchaParamResponse (..)
-    , newGetRecaptchaParamResponse
+    GetRecaptchaParamResponse (..),
+    newGetRecaptchaParamResponse,
 
     -- ** IdentitytoolkitRelyingpartyCreateAuthUriRequest
-    , IdentitytoolkitRelyingpartyCreateAuthUriRequest (..)
-    , newIdentitytoolkitRelyingpartyCreateAuthUriRequest
+    IdentitytoolkitRelyingpartyCreateAuthUriRequest (..),
+    newIdentitytoolkitRelyingpartyCreateAuthUriRequest,
 
     -- ** IdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter
-    , IdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter (..)
-    , newIdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter
+    IdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter (..),
+    newIdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter,
 
     -- ** IdentitytoolkitRelyingpartyDeleteAccountRequest
-    , IdentitytoolkitRelyingpartyDeleteAccountRequest (..)
-    , newIdentitytoolkitRelyingpartyDeleteAccountRequest
+    IdentitytoolkitRelyingpartyDeleteAccountRequest (..),
+    newIdentitytoolkitRelyingpartyDeleteAccountRequest,
 
     -- ** IdentitytoolkitRelyingpartyDownloadAccountRequest
-    , IdentitytoolkitRelyingpartyDownloadAccountRequest (..)
-    , newIdentitytoolkitRelyingpartyDownloadAccountRequest
+    IdentitytoolkitRelyingpartyDownloadAccountRequest (..),
+    newIdentitytoolkitRelyingpartyDownloadAccountRequest,
 
     -- ** IdentitytoolkitRelyingpartyEmailLinkSigninRequest
-    , IdentitytoolkitRelyingpartyEmailLinkSigninRequest (..)
-    , newIdentitytoolkitRelyingpartyEmailLinkSigninRequest
+    IdentitytoolkitRelyingpartyEmailLinkSigninRequest (..),
+    newIdentitytoolkitRelyingpartyEmailLinkSigninRequest,
 
     -- ** IdentitytoolkitRelyingpartyGetAccountInfoRequest
-    , IdentitytoolkitRelyingpartyGetAccountInfoRequest (..)
-    , newIdentitytoolkitRelyingpartyGetAccountInfoRequest
+    IdentitytoolkitRelyingpartyGetAccountInfoRequest (..),
+    newIdentitytoolkitRelyingpartyGetAccountInfoRequest,
 
     -- ** IdentitytoolkitRelyingpartyGetProjectConfigResponse
-    , IdentitytoolkitRelyingpartyGetProjectConfigResponse (..)
-    , newIdentitytoolkitRelyingpartyGetProjectConfigResponse
+    IdentitytoolkitRelyingpartyGetProjectConfigResponse (..),
+    newIdentitytoolkitRelyingpartyGetProjectConfigResponse,
 
     -- ** IdentitytoolkitRelyingpartyGetPublicKeysResponse
-    , IdentitytoolkitRelyingpartyGetPublicKeysResponse (..)
-    , newIdentitytoolkitRelyingpartyGetPublicKeysResponse
+    IdentitytoolkitRelyingpartyGetPublicKeysResponse (..),
+    newIdentitytoolkitRelyingpartyGetPublicKeysResponse,
 
     -- ** IdentitytoolkitRelyingpartyResetPasswordRequest
-    , IdentitytoolkitRelyingpartyResetPasswordRequest (..)
-    , newIdentitytoolkitRelyingpartyResetPasswordRequest
+    IdentitytoolkitRelyingpartyResetPasswordRequest (..),
+    newIdentitytoolkitRelyingpartyResetPasswordRequest,
 
     -- ** IdentitytoolkitRelyingpartySendVerificationCodeRequest
-    , IdentitytoolkitRelyingpartySendVerificationCodeRequest (..)
-    , newIdentitytoolkitRelyingpartySendVerificationCodeRequest
+    IdentitytoolkitRelyingpartySendVerificationCodeRequest (..),
+    newIdentitytoolkitRelyingpartySendVerificationCodeRequest,
 
     -- ** IdentitytoolkitRelyingpartySendVerificationCodeResponse
-    , IdentitytoolkitRelyingpartySendVerificationCodeResponse (..)
-    , newIdentitytoolkitRelyingpartySendVerificationCodeResponse
+    IdentitytoolkitRelyingpartySendVerificationCodeResponse (..),
+    newIdentitytoolkitRelyingpartySendVerificationCodeResponse,
 
     -- ** IdentitytoolkitRelyingpartySetAccountInfoRequest
-    , IdentitytoolkitRelyingpartySetAccountInfoRequest (..)
-    , newIdentitytoolkitRelyingpartySetAccountInfoRequest
+    IdentitytoolkitRelyingpartySetAccountInfoRequest (..),
+    newIdentitytoolkitRelyingpartySetAccountInfoRequest,
 
     -- ** IdentitytoolkitRelyingpartySetProjectConfigRequest
-    , IdentitytoolkitRelyingpartySetProjectConfigRequest (..)
-    , newIdentitytoolkitRelyingpartySetProjectConfigRequest
+    IdentitytoolkitRelyingpartySetProjectConfigRequest (..),
+    newIdentitytoolkitRelyingpartySetProjectConfigRequest,
 
     -- ** IdentitytoolkitRelyingpartySetProjectConfigResponse
-    , IdentitytoolkitRelyingpartySetProjectConfigResponse (..)
-    , newIdentitytoolkitRelyingpartySetProjectConfigResponse
+    IdentitytoolkitRelyingpartySetProjectConfigResponse (..),
+    newIdentitytoolkitRelyingpartySetProjectConfigResponse,
 
     -- ** IdentitytoolkitRelyingpartySignOutUserRequest
-    , IdentitytoolkitRelyingpartySignOutUserRequest (..)
-    , newIdentitytoolkitRelyingpartySignOutUserRequest
+    IdentitytoolkitRelyingpartySignOutUserRequest (..),
+    newIdentitytoolkitRelyingpartySignOutUserRequest,
 
     -- ** IdentitytoolkitRelyingpartySignOutUserResponse
-    , IdentitytoolkitRelyingpartySignOutUserResponse (..)
-    , newIdentitytoolkitRelyingpartySignOutUserResponse
+    IdentitytoolkitRelyingpartySignOutUserResponse (..),
+    newIdentitytoolkitRelyingpartySignOutUserResponse,
 
     -- ** IdentitytoolkitRelyingpartySignupNewUserRequest
-    , IdentitytoolkitRelyingpartySignupNewUserRequest (..)
-    , newIdentitytoolkitRelyingpartySignupNewUserRequest
+    IdentitytoolkitRelyingpartySignupNewUserRequest (..),
+    newIdentitytoolkitRelyingpartySignupNewUserRequest,
 
     -- ** IdentitytoolkitRelyingpartyUploadAccountRequest
-    , IdentitytoolkitRelyingpartyUploadAccountRequest (..)
-    , newIdentitytoolkitRelyingpartyUploadAccountRequest
+    IdentitytoolkitRelyingpartyUploadAccountRequest (..),
+    newIdentitytoolkitRelyingpartyUploadAccountRequest,
 
     -- ** IdentitytoolkitRelyingpartyVerifyAssertionRequest
-    , IdentitytoolkitRelyingpartyVerifyAssertionRequest (..)
-    , newIdentitytoolkitRelyingpartyVerifyAssertionRequest
+    IdentitytoolkitRelyingpartyVerifyAssertionRequest (..),
+    newIdentitytoolkitRelyingpartyVerifyAssertionRequest,
 
     -- ** IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
-    , IdentitytoolkitRelyingpartyVerifyCustomTokenRequest (..)
-    , newIdentitytoolkitRelyingpartyVerifyCustomTokenRequest
+    IdentitytoolkitRelyingpartyVerifyCustomTokenRequest (..),
+    newIdentitytoolkitRelyingpartyVerifyCustomTokenRequest,
 
     -- ** IdentitytoolkitRelyingpartyVerifyPasswordRequest
-    , IdentitytoolkitRelyingpartyVerifyPasswordRequest (..)
-    , newIdentitytoolkitRelyingpartyVerifyPasswordRequest
+    IdentitytoolkitRelyingpartyVerifyPasswordRequest (..),
+    newIdentitytoolkitRelyingpartyVerifyPasswordRequest,
 
     -- ** IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
-    , IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest (..)
-    , newIdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
+    IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest (..),
+    newIdentitytoolkitRelyingpartyVerifyPhoneNumberRequest,
 
     -- ** IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
-    , IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse (..)
-    , newIdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
+    IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse (..),
+    newIdentitytoolkitRelyingpartyVerifyPhoneNumberResponse,
 
     -- ** IdpConfig
-    , IdpConfig (..)
-    , newIdpConfig
+    IdpConfig (..),
+    newIdpConfig,
 
     -- ** Relyingparty
-    , Relyingparty (..)
-    , newRelyingparty
+    Relyingparty (..),
+    newRelyingparty,
 
     -- ** ResetPasswordResponse
-    , ResetPasswordResponse (..)
-    , newResetPasswordResponse
+    ResetPasswordResponse (..),
+    newResetPasswordResponse,
 
     -- ** SetAccountInfoResponse
-    , SetAccountInfoResponse (..)
-    , newSetAccountInfoResponse
+    SetAccountInfoResponse (..),
+    newSetAccountInfoResponse,
 
     -- ** SetAccountInfoResponse_ProviderUserInfoItem
-    , SetAccountInfoResponse_ProviderUserInfoItem (..)
-    , newSetAccountInfoResponse_ProviderUserInfoItem
+    SetAccountInfoResponse_ProviderUserInfoItem (..),
+    newSetAccountInfoResponse_ProviderUserInfoItem,
 
     -- ** SignupNewUserResponse
-    , SignupNewUserResponse (..)
-    , newSignupNewUserResponse
+    SignupNewUserResponse (..),
+    newSignupNewUserResponse,
 
     -- ** UploadAccountResponse
-    , UploadAccountResponse (..)
-    , newUploadAccountResponse
+    UploadAccountResponse (..),
+    newUploadAccountResponse,
 
     -- ** UploadAccountResponse_ErrorItem
-    , UploadAccountResponse_ErrorItem (..)
-    , newUploadAccountResponse_ErrorItem
+    UploadAccountResponse_ErrorItem (..),
+    newUploadAccountResponse_ErrorItem,
 
     -- ** UserInfo
-    , UserInfo (..)
-    , newUserInfo
+    UserInfo (..),
+    newUserInfo,
 
     -- ** UserInfo_ProviderUserInfoItem
-    , UserInfo_ProviderUserInfoItem (..)
-    , newUserInfo_ProviderUserInfoItem
+    UserInfo_ProviderUserInfoItem (..),
+    newUserInfo_ProviderUserInfoItem,
 
     -- ** VerifyAssertionResponse
-    , VerifyAssertionResponse (..)
-    , newVerifyAssertionResponse
+    VerifyAssertionResponse (..),
+    newVerifyAssertionResponse,
 
     -- ** VerifyCustomTokenResponse
-    , VerifyCustomTokenResponse (..)
-    , newVerifyCustomTokenResponse
+    VerifyCustomTokenResponse (..),
+    newVerifyCustomTokenResponse,
 
     -- ** VerifyPasswordResponse
-    , VerifyPasswordResponse (..)
-    , newVerifyPasswordResponse
-    ) where
+    VerifyPasswordResponse (..),
+    newVerifyPasswordResponse,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IdentityToolkit.Internal.Product
 import Gogol.IdentityToolkit.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v3@ of the Google Identity Toolkit API. This contains the host and root path used as a starting point for constructing service requests.
 identityToolkitService :: Core.ServiceConfig
-identityToolkitService
-  = Core.defaultService
-      (Core.ServiceId "identitytoolkit:v3")
-      "www.googleapis.com"
+identityToolkitService =
+  Core.defaultService
+    (Core.ServiceId "identitytoolkit:v3")
+    "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
