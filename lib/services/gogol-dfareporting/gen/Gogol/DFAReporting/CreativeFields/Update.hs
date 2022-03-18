@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,91 +30,99 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creativeFields.update@.
 module Gogol.DFAReporting.CreativeFields.Update
-    (
-    -- * Resource
-      DFAReportingCreativeFieldsUpdateResource
+  ( -- * Resource
+    DFAReportingCreativeFieldsUpdateResource,
 
     -- ** Constructing a Request
-    , newDFAReportingCreativeFieldsUpdate
-    , DFAReportingCreativeFieldsUpdate
-    ) where
+    newDFAReportingCreativeFieldsUpdate,
+    DFAReportingCreativeFieldsUpdate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DFAReporting.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @dfareporting.creativeFields.update@ method which the
 -- 'DFAReportingCreativeFieldsUpdate' request conforms to.
 type DFAReportingCreativeFieldsUpdateResource =
-     "dfareporting" Core.:>
-       "v3.5" Core.:>
-         "userprofiles" Core.:>
-           Core.Capture "profileId" Core.Int64 Core.:>
-             "creativeFields" Core.:>
-               Core.QueryParam "$.xgafv" Xgafv Core.:>
-                 Core.QueryParam "access_token" Core.Text Core.:>
-                   Core.QueryParam "callback" Core.Text Core.:>
-                     Core.QueryParam "uploadType" Core.Text Core.:>
-                       Core.QueryParam "upload_protocol" Core.Text Core.:>
-                         Core.QueryParam "alt" Core.AltJSON Core.:>
-                           Core.ReqBody '[Core.JSON] CreativeField Core.:>
-                             Core.Put '[Core.JSON] CreativeField
+  "dfareporting"
+    Core.:> "v3.5"
+    Core.:> "userprofiles"
+    Core.:> Core.Capture "profileId" Core.Int64
+    Core.:> "creativeFields"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] CreativeField
+    Core.:> Core.Put '[Core.JSON] CreativeField
 
 -- | Updates an existing creative field.
 --
 -- /See:/ 'newDFAReportingCreativeFieldsUpdate' smart constructor.
 data DFAReportingCreativeFieldsUpdate = DFAReportingCreativeFieldsUpdate
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: CreativeField
-      -- | User profile ID associated with this request.
-    , profileId :: Core.Int64
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: CreativeField,
+    -- | User profile ID associated with this request.
+    profileId :: Core.Int64,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingCreativeFieldsUpdate' with the minimum fields required to make a request.
-newDFAReportingCreativeFieldsUpdate 
-    ::  CreativeField
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Int64
-       -- ^  User profile ID associated with this request. See 'profileId'.
-    -> DFAReportingCreativeFieldsUpdate
+newDFAReportingCreativeFieldsUpdate ::
+  -- |  Multipart request metadata. See 'payload'.
+  CreativeField ->
+  -- |  User profile ID associated with this request. See 'profileId'.
+  Core.Int64 ->
+  DFAReportingCreativeFieldsUpdate
 newDFAReportingCreativeFieldsUpdate payload profileId =
   DFAReportingCreativeFieldsUpdate
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , profileId = profileId
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      profileId = profileId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           DFAReportingCreativeFieldsUpdate
-         where
-        type Rs DFAReportingCreativeFieldsUpdate =
-             CreativeField
-        type Scopes DFAReportingCreativeFieldsUpdate =
-             '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient DFAReportingCreativeFieldsUpdate{..}
-          = go profileId xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              dFAReportingService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy DFAReportingCreativeFieldsUpdateResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    DFAReportingCreativeFieldsUpdate
+  where
+  type
+    Rs DFAReportingCreativeFieldsUpdate =
+      CreativeField
+  type
+    Scopes DFAReportingCreativeFieldsUpdate =
+      '["https://www.googleapis.com/auth/dfatrafficking"]
+  requestClient DFAReportingCreativeFieldsUpdate {..} =
+    go
+      profileId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingCreativeFieldsUpdateResource
+          )
+          Core.mempty

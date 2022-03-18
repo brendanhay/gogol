@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,1607 +25,1606 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.DFAReporting.Types
-    (
-    -- * Configuration
-      dFAReportingService
+  ( -- * Configuration
+    dFAReportingService,
 
     -- * OAuth Scopes
-    , ddmconversionsScope
-    , dFAReportingScope
-    , dfatraffickingScope
+    ddmconversionsScope,
+    dFAReportingScope,
+    dfatraffickingScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Account_AccountProfile
-    , Account_AccountProfile (..)
+    Account_AccountProfile (..),
 
     -- ** Account_ActiveAdsLimitTier
-    , Account_ActiveAdsLimitTier (..)
+    Account_ActiveAdsLimitTier (..),
 
     -- ** AccountActiveAdSummary
-    , AccountActiveAdSummary (..)
-    , newAccountActiveAdSummary
+    AccountActiveAdSummary (..),
+    newAccountActiveAdSummary,
 
     -- ** AccountActiveAdSummary_ActiveAdsLimitTier
-    , AccountActiveAdSummary_ActiveAdsLimitTier (..)
+    AccountActiveAdSummary_ActiveAdsLimitTier (..),
 
     -- ** AccountPermission
-    , AccountPermission (..)
-    , newAccountPermission
+    AccountPermission (..),
+    newAccountPermission,
 
     -- ** AccountPermission_AccountProfilesItem
-    , AccountPermission_AccountProfilesItem (..)
+    AccountPermission_AccountProfilesItem (..),
 
     -- ** AccountPermission_Level
-    , AccountPermission_Level (..)
+    AccountPermission_Level (..),
 
     -- ** AccountPermissionGroup
-    , AccountPermissionGroup (..)
-    , newAccountPermissionGroup
+    AccountPermissionGroup (..),
+    newAccountPermissionGroup,
 
     -- ** AccountPermissionGroupsListResponse
-    , AccountPermissionGroupsListResponse (..)
-    , newAccountPermissionGroupsListResponse
+    AccountPermissionGroupsListResponse (..),
+    newAccountPermissionGroupsListResponse,
 
     -- ** AccountPermissionsListResponse
-    , AccountPermissionsListResponse (..)
-    , newAccountPermissionsListResponse
+    AccountPermissionsListResponse (..),
+    newAccountPermissionsListResponse,
 
     -- ** AccountUserProfile
-    , AccountUserProfile (..)
-    , newAccountUserProfile
+    AccountUserProfile (..),
+    newAccountUserProfile,
 
     -- ** AccountUserProfile_TraffickerType
-    , AccountUserProfile_TraffickerType (..)
+    AccountUserProfile_TraffickerType (..),
 
     -- ** AccountUserProfile_UserAccessType
-    , AccountUserProfile_UserAccessType (..)
+    AccountUserProfile_UserAccessType (..),
 
     -- ** AccountUserProfilesListResponse
-    , AccountUserProfilesListResponse (..)
-    , newAccountUserProfilesListResponse
+    AccountUserProfilesListResponse (..),
+    newAccountUserProfilesListResponse,
 
     -- ** AccountsListResponse
-    , AccountsListResponse (..)
-    , newAccountsListResponse
+    AccountsListResponse (..),
+    newAccountsListResponse,
 
     -- ** Activities
-    , Activities (..)
-    , newActivities
+    Activities (..),
+    newActivities,
 
     -- ** Ad
-    , Ad (..)
-    , newAd
+    Ad (..),
+    newAd,
 
     -- ** Ad_Compatibility
-    , Ad_Compatibility (..)
+    Ad_Compatibility (..),
 
     -- ** Ad_Type
-    , Ad_Type (..)
+    Ad_Type (..),
 
     -- ** AdBlockingConfiguration
-    , AdBlockingConfiguration (..)
-    , newAdBlockingConfiguration
+    AdBlockingConfiguration (..),
+    newAdBlockingConfiguration,
 
     -- ** AdSlot
-    , AdSlot (..)
-    , newAdSlot
+    AdSlot (..),
+    newAdSlot,
 
     -- ** AdSlot_Compatibility
-    , AdSlot_Compatibility (..)
+    AdSlot_Compatibility (..),
 
     -- ** AdSlot_PaymentSourceType
-    , AdSlot_PaymentSourceType (..)
+    AdSlot_PaymentSourceType (..),
 
     -- ** AdsListResponse
-    , AdsListResponse (..)
-    , newAdsListResponse
+    AdsListResponse (..),
+    newAdsListResponse,
 
     -- ** Advertiser
-    , Advertiser (..)
-    , newAdvertiser
+    Advertiser (..),
+    newAdvertiser,
 
     -- ** Advertiser_Status
-    , Advertiser_Status (..)
+    Advertiser_Status (..),
 
     -- ** AdvertiserGroup
-    , AdvertiserGroup (..)
-    , newAdvertiserGroup
+    AdvertiserGroup (..),
+    newAdvertiserGroup,
 
     -- ** AdvertiserGroupsListResponse
-    , AdvertiserGroupsListResponse (..)
-    , newAdvertiserGroupsListResponse
+    AdvertiserGroupsListResponse (..),
+    newAdvertiserGroupsListResponse,
 
     -- ** AdvertiserLandingPagesListResponse
-    , AdvertiserLandingPagesListResponse (..)
-    , newAdvertiserLandingPagesListResponse
+    AdvertiserLandingPagesListResponse (..),
+    newAdvertiserLandingPagesListResponse,
 
     -- ** AdvertisersListResponse
-    , AdvertisersListResponse (..)
-    , newAdvertisersListResponse
+    AdvertisersListResponse (..),
+    newAdvertisersListResponse,
 
     -- ** AudienceSegment
-    , AudienceSegment (..)
-    , newAudienceSegment
+    AudienceSegment (..),
+    newAudienceSegment,
 
     -- ** AudienceSegmentGroup
-    , AudienceSegmentGroup (..)
-    , newAudienceSegmentGroup
+    AudienceSegmentGroup (..),
+    newAudienceSegmentGroup,
 
     -- ** Browser
-    , Browser (..)
-    , newBrowser
+    Browser (..),
+    newBrowser,
 
     -- ** BrowsersListResponse
-    , BrowsersListResponse (..)
-    , newBrowsersListResponse
+    BrowsersListResponse (..),
+    newBrowsersListResponse,
 
     -- ** Campaign
-    , Campaign (..)
-    , newCampaign
+    Campaign (..),
+    newCampaign,
 
     -- ** CampaignCreativeAssociation
-    , CampaignCreativeAssociation (..)
-    , newCampaignCreativeAssociation
+    CampaignCreativeAssociation (..),
+    newCampaignCreativeAssociation,
 
     -- ** CampaignCreativeAssociationsListResponse
-    , CampaignCreativeAssociationsListResponse (..)
-    , newCampaignCreativeAssociationsListResponse
+    CampaignCreativeAssociationsListResponse (..),
+    newCampaignCreativeAssociationsListResponse,
 
     -- ** CampaignsListResponse
-    , CampaignsListResponse (..)
-    , newCampaignsListResponse
+    CampaignsListResponse (..),
+    newCampaignsListResponse,
 
     -- ** ChangeLog
-    , ChangeLog (..)
-    , newChangeLog
+    ChangeLog (..),
+    newChangeLog,
 
     -- ** ChangeLogsListResponse
-    , ChangeLogsListResponse (..)
-    , newChangeLogsListResponse
+    ChangeLogsListResponse (..),
+    newChangeLogsListResponse,
 
     -- ** ChannelGrouping
-    , ChannelGrouping (..)
-    , newChannelGrouping
+    ChannelGrouping (..),
+    newChannelGrouping,
 
     -- ** ChannelGroupingRule
-    , ChannelGroupingRule (..)
-    , newChannelGroupingRule
+    ChannelGroupingRule (..),
+    newChannelGroupingRule,
 
     -- ** CitiesListResponse
-    , CitiesListResponse (..)
-    , newCitiesListResponse
+    CitiesListResponse (..),
+    newCitiesListResponse,
 
     -- ** City
-    , City (..)
-    , newCity
+    City (..),
+    newCity,
 
     -- ** ClickTag
-    , ClickTag (..)
-    , newClickTag
+    ClickTag (..),
+    newClickTag,
 
     -- ** ClickThroughUrl
-    , ClickThroughUrl (..)
-    , newClickThroughUrl
+    ClickThroughUrl (..),
+    newClickThroughUrl,
 
     -- ** ClickThroughUrlSuffixProperties
-    , ClickThroughUrlSuffixProperties (..)
-    , newClickThroughUrlSuffixProperties
+    ClickThroughUrlSuffixProperties (..),
+    newClickThroughUrlSuffixProperties,
 
     -- ** CompanionClickThroughOverride
-    , CompanionClickThroughOverride (..)
-    , newCompanionClickThroughOverride
+    CompanionClickThroughOverride (..),
+    newCompanionClickThroughOverride,
 
     -- ** CompanionSetting
-    , CompanionSetting (..)
-    , newCompanionSetting
+    CompanionSetting (..),
+    newCompanionSetting,
 
     -- ** CompatibleFields
-    , CompatibleFields (..)
-    , newCompatibleFields
+    CompatibleFields (..),
+    newCompatibleFields,
 
     -- ** ConnectionType
-    , ConnectionType (..)
-    , newConnectionType
+    ConnectionType (..),
+    newConnectionType,
 
     -- ** ConnectionTypesListResponse
-    , ConnectionTypesListResponse (..)
-    , newConnectionTypesListResponse
+    ConnectionTypesListResponse (..),
+    newConnectionTypesListResponse,
 
     -- ** ContentCategoriesListResponse
-    , ContentCategoriesListResponse (..)
-    , newContentCategoriesListResponse
+    ContentCategoriesListResponse (..),
+    newContentCategoriesListResponse,
 
     -- ** ContentCategory
-    , ContentCategory (..)
-    , newContentCategory
+    ContentCategory (..),
+    newContentCategory,
 
     -- ** Conversion
-    , Conversion (..)
-    , newConversion
+    Conversion (..),
+    newConversion,
 
     -- ** ConversionError
-    , ConversionError (..)
-    , newConversionError
+    ConversionError (..),
+    newConversionError,
 
     -- ** ConversionError_Code
-    , ConversionError_Code (..)
+    ConversionError_Code (..),
 
     -- ** ConversionStatus
-    , ConversionStatus (..)
-    , newConversionStatus
+    ConversionStatus (..),
+    newConversionStatus,
 
     -- ** ConversionsBatchInsertRequest
-    , ConversionsBatchInsertRequest (..)
-    , newConversionsBatchInsertRequest
+    ConversionsBatchInsertRequest (..),
+    newConversionsBatchInsertRequest,
 
     -- ** ConversionsBatchInsertResponse
-    , ConversionsBatchInsertResponse (..)
-    , newConversionsBatchInsertResponse
+    ConversionsBatchInsertResponse (..),
+    newConversionsBatchInsertResponse,
 
     -- ** ConversionsBatchUpdateRequest
-    , ConversionsBatchUpdateRequest (..)
-    , newConversionsBatchUpdateRequest
+    ConversionsBatchUpdateRequest (..),
+    newConversionsBatchUpdateRequest,
 
     -- ** ConversionsBatchUpdateResponse
-    , ConversionsBatchUpdateResponse (..)
-    , newConversionsBatchUpdateResponse
+    ConversionsBatchUpdateResponse (..),
+    newConversionsBatchUpdateResponse,
 
     -- ** CountriesListResponse
-    , CountriesListResponse (..)
-    , newCountriesListResponse
+    CountriesListResponse (..),
+    newCountriesListResponse,
 
     -- ** Country
-    , Country (..)
-    , newCountry
+    Country (..),
+    newCountry,
 
     -- ** Creative
-    , Creative (..)
-    , newCreative
+    Creative (..),
+    newCreative,
 
     -- ** Creative_ArtworkType
-    , Creative_ArtworkType (..)
+    Creative_ArtworkType (..),
 
     -- ** Creative_AuthoringSource
-    , Creative_AuthoringSource (..)
+    Creative_AuthoringSource (..),
 
     -- ** Creative_AuthoringTool
-    , Creative_AuthoringTool (..)
+    Creative_AuthoringTool (..),
 
     -- ** Creative_BackupImageFeaturesItem
-    , Creative_BackupImageFeaturesItem (..)
+    Creative_BackupImageFeaturesItem (..),
 
     -- ** Creative_CompatibilityItem
-    , Creative_CompatibilityItem (..)
+    Creative_CompatibilityItem (..),
 
     -- ** Creative_Type
-    , Creative_Type (..)
+    Creative_Type (..),
 
     -- ** CreativeAsset
-    , CreativeAsset (..)
-    , newCreativeAsset
+    CreativeAsset (..),
+    newCreativeAsset,
 
     -- ** CreativeAsset_Alignment
-    , CreativeAsset_Alignment (..)
+    CreativeAsset_Alignment (..),
 
     -- ** CreativeAsset_ArtworkType
-    , CreativeAsset_ArtworkType (..)
+    CreativeAsset_ArtworkType (..),
 
     -- ** CreativeAsset_ChildAssetType
-    , CreativeAsset_ChildAssetType (..)
+    CreativeAsset_ChildAssetType (..),
 
     -- ** CreativeAsset_DetectedFeaturesItem
-    , CreativeAsset_DetectedFeaturesItem (..)
+    CreativeAsset_DetectedFeaturesItem (..),
 
     -- ** CreativeAsset_DisplayType
-    , CreativeAsset_DisplayType (..)
+    CreativeAsset_DisplayType (..),
 
     -- ** CreativeAsset_DurationType
-    , CreativeAsset_DurationType (..)
+    CreativeAsset_DurationType (..),
 
     -- ** CreativeAsset_Orientation
-    , CreativeAsset_Orientation (..)
+    CreativeAsset_Orientation (..),
 
     -- ** CreativeAsset_PositionLeftUnit
-    , CreativeAsset_PositionLeftUnit (..)
+    CreativeAsset_PositionLeftUnit (..),
 
     -- ** CreativeAsset_PositionTopUnit
-    , CreativeAsset_PositionTopUnit (..)
+    CreativeAsset_PositionTopUnit (..),
 
     -- ** CreativeAsset_Role
-    , CreativeAsset_Role (..)
+    CreativeAsset_Role (..),
 
     -- ** CreativeAsset_StartTimeType
-    , CreativeAsset_StartTimeType (..)
+    CreativeAsset_StartTimeType (..),
 
     -- ** CreativeAsset_WindowMode
-    , CreativeAsset_WindowMode (..)
+    CreativeAsset_WindowMode (..),
 
     -- ** CreativeAssetId
-    , CreativeAssetId (..)
-    , newCreativeAssetId
+    CreativeAssetId (..),
+    newCreativeAssetId,
 
     -- ** CreativeAssetId_Type
-    , CreativeAssetId_Type (..)
+    CreativeAssetId_Type (..),
 
     -- ** CreativeAssetMetadata
-    , CreativeAssetMetadata (..)
-    , newCreativeAssetMetadata
+    CreativeAssetMetadata (..),
+    newCreativeAssetMetadata,
 
     -- ** CreativeAssetMetadata_DetectedFeaturesItem
-    , CreativeAssetMetadata_DetectedFeaturesItem (..)
+    CreativeAssetMetadata_DetectedFeaturesItem (..),
 
     -- ** CreativeAssetMetadata_WarnedValidationRulesItem
-    , CreativeAssetMetadata_WarnedValidationRulesItem (..)
+    CreativeAssetMetadata_WarnedValidationRulesItem (..),
 
     -- ** CreativeAssetSelection
-    , CreativeAssetSelection (..)
-    , newCreativeAssetSelection
+    CreativeAssetSelection (..),
+    newCreativeAssetSelection,
 
     -- ** CreativeAssignment
-    , CreativeAssignment (..)
-    , newCreativeAssignment
+    CreativeAssignment (..),
+    newCreativeAssignment,
 
     -- ** CreativeClickThroughUrl
-    , CreativeClickThroughUrl (..)
-    , newCreativeClickThroughUrl
+    CreativeClickThroughUrl (..),
+    newCreativeClickThroughUrl,
 
     -- ** CreativeCustomEvent
-    , CreativeCustomEvent (..)
-    , newCreativeCustomEvent
+    CreativeCustomEvent (..),
+    newCreativeCustomEvent,
 
     -- ** CreativeCustomEvent_AdvertiserCustomEventType
-    , CreativeCustomEvent_AdvertiserCustomEventType (..)
+    CreativeCustomEvent_AdvertiserCustomEventType (..),
 
     -- ** CreativeCustomEvent_ArtworkType
-    , CreativeCustomEvent_ArtworkType (..)
+    CreativeCustomEvent_ArtworkType (..),
 
     -- ** CreativeCustomEvent_TargetType
-    , CreativeCustomEvent_TargetType (..)
+    CreativeCustomEvent_TargetType (..),
 
     -- ** CreativeField
-    , CreativeField (..)
-    , newCreativeField
+    CreativeField (..),
+    newCreativeField,
 
     -- ** CreativeFieldAssignment
-    , CreativeFieldAssignment (..)
-    , newCreativeFieldAssignment
+    CreativeFieldAssignment (..),
+    newCreativeFieldAssignment,
 
     -- ** CreativeFieldValue
-    , CreativeFieldValue (..)
-    , newCreativeFieldValue
+    CreativeFieldValue (..),
+    newCreativeFieldValue,
 
     -- ** CreativeFieldValuesListResponse
-    , CreativeFieldValuesListResponse (..)
-    , newCreativeFieldValuesListResponse
+    CreativeFieldValuesListResponse (..),
+    newCreativeFieldValuesListResponse,
 
     -- ** CreativeFieldsListResponse
-    , CreativeFieldsListResponse (..)
-    , newCreativeFieldsListResponse
+    CreativeFieldsListResponse (..),
+    newCreativeFieldsListResponse,
 
     -- ** CreativeGroup
-    , CreativeGroup (..)
-    , newCreativeGroup
+    CreativeGroup (..),
+    newCreativeGroup,
 
     -- ** CreativeGroupAssignment
-    , CreativeGroupAssignment (..)
-    , newCreativeGroupAssignment
+    CreativeGroupAssignment (..),
+    newCreativeGroupAssignment,
 
     -- ** CreativeGroupAssignment_CreativeGroupNumber
-    , CreativeGroupAssignment_CreativeGroupNumber (..)
+    CreativeGroupAssignment_CreativeGroupNumber (..),
 
     -- ** CreativeGroupsListResponse
-    , CreativeGroupsListResponse (..)
-    , newCreativeGroupsListResponse
+    CreativeGroupsListResponse (..),
+    newCreativeGroupsListResponse,
 
     -- ** CreativeOptimizationConfiguration
-    , CreativeOptimizationConfiguration (..)
-    , newCreativeOptimizationConfiguration
+    CreativeOptimizationConfiguration (..),
+    newCreativeOptimizationConfiguration,
 
     -- ** CreativeOptimizationConfiguration_OptimizationModel
-    , CreativeOptimizationConfiguration_OptimizationModel (..)
+    CreativeOptimizationConfiguration_OptimizationModel (..),
 
     -- ** CreativeRotation
-    , CreativeRotation (..)
-    , newCreativeRotation
+    CreativeRotation (..),
+    newCreativeRotation,
 
     -- ** CreativeRotation_Type
-    , CreativeRotation_Type (..)
+    CreativeRotation_Type (..),
 
     -- ** CreativeRotation_WeightCalculationStrategy
-    , CreativeRotation_WeightCalculationStrategy (..)
+    CreativeRotation_WeightCalculationStrategy (..),
 
     -- ** CreativesListResponse
-    , CreativesListResponse (..)
-    , newCreativesListResponse
+    CreativesListResponse (..),
+    newCreativesListResponse,
 
     -- ** CrossDimensionReachReportCompatibleFields
-    , CrossDimensionReachReportCompatibleFields (..)
-    , newCrossDimensionReachReportCompatibleFields
+    CrossDimensionReachReportCompatibleFields (..),
+    newCrossDimensionReachReportCompatibleFields,
 
     -- ** CustomFloodlightVariable
-    , CustomFloodlightVariable (..)
-    , newCustomFloodlightVariable
+    CustomFloodlightVariable (..),
+    newCustomFloodlightVariable,
 
     -- ** CustomFloodlightVariable_Type
-    , CustomFloodlightVariable_Type (..)
+    CustomFloodlightVariable_Type (..),
 
     -- ** CustomRichMediaEvents
-    , CustomRichMediaEvents (..)
-    , newCustomRichMediaEvents
+    CustomRichMediaEvents (..),
+    newCustomRichMediaEvents,
 
     -- ** CustomViewabilityMetric
-    , CustomViewabilityMetric (..)
-    , newCustomViewabilityMetric
+    CustomViewabilityMetric (..),
+    newCustomViewabilityMetric,
 
     -- ** CustomViewabilityMetricConfiguration
-    , CustomViewabilityMetricConfiguration (..)
-    , newCustomViewabilityMetricConfiguration
+    CustomViewabilityMetricConfiguration (..),
+    newCustomViewabilityMetricConfiguration,
 
     -- ** DateRange
-    , DateRange (..)
-    , newDateRange
+    DateRange (..),
+    newDateRange,
 
     -- ** DateRange_RelativeDateRange
-    , DateRange_RelativeDateRange (..)
+    DateRange_RelativeDateRange (..),
 
     -- ** DayPartTargeting
-    , DayPartTargeting (..)
-    , newDayPartTargeting
+    DayPartTargeting (..),
+    newDayPartTargeting,
 
     -- ** DayPartTargeting_DaysOfWeekItem
-    , DayPartTargeting_DaysOfWeekItem (..)
+    DayPartTargeting_DaysOfWeekItem (..),
 
     -- ** DeepLink
-    , DeepLink (..)
-    , newDeepLink
+    DeepLink (..),
+    newDeepLink,
 
     -- ** DefaultClickThroughEventTagProperties
-    , DefaultClickThroughEventTagProperties (..)
-    , newDefaultClickThroughEventTagProperties
+    DefaultClickThroughEventTagProperties (..),
+    newDefaultClickThroughEventTagProperties,
 
     -- ** DeliverySchedule
-    , DeliverySchedule (..)
-    , newDeliverySchedule
+    DeliverySchedule (..),
+    newDeliverySchedule,
 
     -- ** DeliverySchedule_Priority
-    , DeliverySchedule_Priority (..)
+    DeliverySchedule_Priority (..),
 
     -- ** DfpSettings
-    , DfpSettings (..)
-    , newDfpSettings
+    DfpSettings (..),
+    newDfpSettings,
 
     -- ** Dimension
-    , Dimension (..)
-    , newDimension
+    Dimension (..),
+    newDimension,
 
     -- ** DimensionFilter
-    , DimensionFilter (..)
-    , newDimensionFilter
+    DimensionFilter (..),
+    newDimensionFilter,
 
     -- ** DimensionValue
-    , DimensionValue (..)
-    , newDimensionValue
+    DimensionValue (..),
+    newDimensionValue,
 
     -- ** DimensionValue_MatchType
-    , DimensionValue_MatchType (..)
+    DimensionValue_MatchType (..),
 
     -- ** DimensionValueList
-    , DimensionValueList (..)
-    , newDimensionValueList
+    DimensionValueList (..),
+    newDimensionValueList,
 
     -- ** DimensionValueRequest
-    , DimensionValueRequest (..)
-    , newDimensionValueRequest
+    DimensionValueRequest (..),
+    newDimensionValueRequest,
 
     -- ** DirectorySite
-    , DirectorySite (..)
-    , newDirectorySite
+    DirectorySite (..),
+    newDirectorySite,
 
     -- ** DirectorySite_InpageTagFormatsItem
-    , DirectorySite_InpageTagFormatsItem (..)
+    DirectorySite_InpageTagFormatsItem (..),
 
     -- ** DirectorySite_InterstitialTagFormatsItem
-    , DirectorySite_InterstitialTagFormatsItem (..)
+    DirectorySite_InterstitialTagFormatsItem (..),
 
     -- ** DirectorySiteSettings
-    , DirectorySiteSettings (..)
-    , newDirectorySiteSettings
+    DirectorySiteSettings (..),
+    newDirectorySiteSettings,
 
     -- ** DirectorySitesListResponse
-    , DirectorySitesListResponse (..)
-    , newDirectorySitesListResponse
+    DirectorySitesListResponse (..),
+    newDirectorySitesListResponse,
 
     -- ** DisjunctiveMatchStatement
-    , DisjunctiveMatchStatement (..)
-    , newDisjunctiveMatchStatement
+    DisjunctiveMatchStatement (..),
+    newDisjunctiveMatchStatement,
 
     -- ** DynamicTargetingKey
-    , DynamicTargetingKey (..)
-    , newDynamicTargetingKey
+    DynamicTargetingKey (..),
+    newDynamicTargetingKey,
 
     -- ** DynamicTargetingKey_ObjectType
-    , DynamicTargetingKey_ObjectType (..)
+    DynamicTargetingKey_ObjectType (..),
 
     -- ** DynamicTargetingKeysListResponse
-    , DynamicTargetingKeysListResponse (..)
-    , newDynamicTargetingKeysListResponse
+    DynamicTargetingKeysListResponse (..),
+    newDynamicTargetingKeysListResponse,
 
     -- ** EncryptionInfo
-    , EncryptionInfo (..)
-    , newEncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
 
     -- ** EncryptionInfo_EncryptionEntityType
-    , EncryptionInfo_EncryptionEntityType (..)
+    EncryptionInfo_EncryptionEntityType (..),
 
     -- ** EncryptionInfo_EncryptionSource
-    , EncryptionInfo_EncryptionSource (..)
+    EncryptionInfo_EncryptionSource (..),
 
     -- ** EventFilter
-    , EventFilter (..)
-    , newEventFilter
+    EventFilter (..),
+    newEventFilter,
 
     -- ** EventTag
-    , EventTag (..)
-    , newEventTag
+    EventTag (..),
+    newEventTag,
 
     -- ** EventTag_SiteFilterType
-    , EventTag_SiteFilterType (..)
+    EventTag_SiteFilterType (..),
 
     -- ** EventTag_Status
-    , EventTag_Status (..)
+    EventTag_Status (..),
 
     -- ** EventTag_Type
-    , EventTag_Type (..)
+    EventTag_Type (..),
 
     -- ** EventTagOverride
-    , EventTagOverride (..)
-    , newEventTagOverride
+    EventTagOverride (..),
+    newEventTagOverride,
 
     -- ** EventTagsListResponse
-    , EventTagsListResponse (..)
-    , newEventTagsListResponse
+    EventTagsListResponse (..),
+    newEventTagsListResponse,
 
     -- ** File
-    , File (..)
-    , newFile
+    File (..),
+    newFile,
 
     -- ** File_Format
-    , File_Format (..)
+    File_Format (..),
 
     -- ** File_Status
-    , File_Status (..)
+    File_Status (..),
 
     -- ** File_Urls
-    , File_Urls (..)
-    , newFile_Urls
+    File_Urls (..),
+    newFile_Urls,
 
     -- ** FileList
-    , FileList (..)
-    , newFileList
+    FileList (..),
+    newFileList,
 
     -- ** Flight
-    , Flight (..)
-    , newFlight
+    Flight (..),
+    newFlight,
 
     -- ** FloodlightActivitiesGenerateTagResponse
-    , FloodlightActivitiesGenerateTagResponse (..)
-    , newFloodlightActivitiesGenerateTagResponse
+    FloodlightActivitiesGenerateTagResponse (..),
+    newFloodlightActivitiesGenerateTagResponse,
 
     -- ** FloodlightActivitiesListResponse
-    , FloodlightActivitiesListResponse (..)
-    , newFloodlightActivitiesListResponse
+    FloodlightActivitiesListResponse (..),
+    newFloodlightActivitiesListResponse,
 
     -- ** FloodlightActivity
-    , FloodlightActivity (..)
-    , newFloodlightActivity
+    FloodlightActivity (..),
+    newFloodlightActivity,
 
     -- ** FloodlightActivity_CacheBustingType
-    , FloodlightActivity_CacheBustingType (..)
+    FloodlightActivity_CacheBustingType (..),
 
     -- ** FloodlightActivity_CountingMethod
-    , FloodlightActivity_CountingMethod (..)
+    FloodlightActivity_CountingMethod (..),
 
     -- ** FloodlightActivity_FloodlightActivityGroupType
-    , FloodlightActivity_FloodlightActivityGroupType (..)
+    FloodlightActivity_FloodlightActivityGroupType (..),
 
     -- ** FloodlightActivity_FloodlightTagType
-    , FloodlightActivity_FloodlightTagType (..)
+    FloodlightActivity_FloodlightTagType (..),
 
     -- ** FloodlightActivity_Status
-    , FloodlightActivity_Status (..)
+    FloodlightActivity_Status (..),
 
     -- ** FloodlightActivity_TagFormat
-    , FloodlightActivity_TagFormat (..)
+    FloodlightActivity_TagFormat (..),
 
     -- ** FloodlightActivity_UserDefinedVariableTypesItem
-    , FloodlightActivity_UserDefinedVariableTypesItem (..)
+    FloodlightActivity_UserDefinedVariableTypesItem (..),
 
     -- ** FloodlightActivityDynamicTag
-    , FloodlightActivityDynamicTag (..)
-    , newFloodlightActivityDynamicTag
+    FloodlightActivityDynamicTag (..),
+    newFloodlightActivityDynamicTag,
 
     -- ** FloodlightActivityGroup
-    , FloodlightActivityGroup (..)
-    , newFloodlightActivityGroup
+    FloodlightActivityGroup (..),
+    newFloodlightActivityGroup,
 
     -- ** FloodlightActivityGroup_Type
-    , FloodlightActivityGroup_Type (..)
+    FloodlightActivityGroup_Type (..),
 
     -- ** FloodlightActivityGroupsListResponse
-    , FloodlightActivityGroupsListResponse (..)
-    , newFloodlightActivityGroupsListResponse
+    FloodlightActivityGroupsListResponse (..),
+    newFloodlightActivityGroupsListResponse,
 
     -- ** FloodlightActivityPublisherDynamicTag
-    , FloodlightActivityPublisherDynamicTag (..)
-    , newFloodlightActivityPublisherDynamicTag
+    FloodlightActivityPublisherDynamicTag (..),
+    newFloodlightActivityPublisherDynamicTag,
 
     -- ** FloodlightConfiguration
-    , FloodlightConfiguration (..)
-    , newFloodlightConfiguration
+    FloodlightConfiguration (..),
+    newFloodlightConfiguration,
 
     -- ** FloodlightConfiguration_FirstDayOfWeek
-    , FloodlightConfiguration_FirstDayOfWeek (..)
+    FloodlightConfiguration_FirstDayOfWeek (..),
 
     -- ** FloodlightConfiguration_NaturalSearchConversionAttributionOption
-    , FloodlightConfiguration_NaturalSearchConversionAttributionOption (..)
+    FloodlightConfiguration_NaturalSearchConversionAttributionOption (..),
 
     -- ** FloodlightConfigurationsListResponse
-    , FloodlightConfigurationsListResponse (..)
-    , newFloodlightConfigurationsListResponse
+    FloodlightConfigurationsListResponse (..),
+    newFloodlightConfigurationsListResponse,
 
     -- ** FloodlightReportCompatibleFields
-    , FloodlightReportCompatibleFields (..)
-    , newFloodlightReportCompatibleFields
+    FloodlightReportCompatibleFields (..),
+    newFloodlightReportCompatibleFields,
 
     -- ** FrequencyCap
-    , FrequencyCap (..)
-    , newFrequencyCap
+    FrequencyCap (..),
+    newFrequencyCap,
 
     -- ** FsCommand
-    , FsCommand (..)
-    , newFsCommand
+    FsCommand (..),
+    newFsCommand,
 
     -- ** FsCommand_PositionOption
-    , FsCommand_PositionOption (..)
+    FsCommand_PositionOption (..),
 
     -- ** GeoTargeting
-    , GeoTargeting (..)
-    , newGeoTargeting
+    GeoTargeting (..),
+    newGeoTargeting,
 
     -- ** InventoryItem
-    , InventoryItem (..)
-    , newInventoryItem
+    InventoryItem (..),
+    newInventoryItem,
 
     -- ** InventoryItem_Type
-    , InventoryItem_Type (..)
+    InventoryItem_Type (..),
 
     -- ** InventoryItemsListResponse
-    , InventoryItemsListResponse (..)
-    , newInventoryItemsListResponse
+    InventoryItemsListResponse (..),
+    newInventoryItemsListResponse,
 
     -- ** KeyValueTargetingExpression
-    , KeyValueTargetingExpression (..)
-    , newKeyValueTargetingExpression
+    KeyValueTargetingExpression (..),
+    newKeyValueTargetingExpression,
 
     -- ** LandingPage
-    , LandingPage (..)
-    , newLandingPage
+    LandingPage (..),
+    newLandingPage,
 
     -- ** Language
-    , Language (..)
-    , newLanguage
+    Language (..),
+    newLanguage,
 
     -- ** LanguageTargeting
-    , LanguageTargeting (..)
-    , newLanguageTargeting
+    LanguageTargeting (..),
+    newLanguageTargeting,
 
     -- ** LanguagesListResponse
-    , LanguagesListResponse (..)
-    , newLanguagesListResponse
+    LanguagesListResponse (..),
+    newLanguagesListResponse,
 
     -- ** LastModifiedInfo
-    , LastModifiedInfo (..)
-    , newLastModifiedInfo
+    LastModifiedInfo (..),
+    newLastModifiedInfo,
 
     -- ** ListPopulationClause
-    , ListPopulationClause (..)
-    , newListPopulationClause
+    ListPopulationClause (..),
+    newListPopulationClause,
 
     -- ** ListPopulationRule
-    , ListPopulationRule (..)
-    , newListPopulationRule
+    ListPopulationRule (..),
+    newListPopulationRule,
 
     -- ** ListPopulationTerm
-    , ListPopulationTerm (..)
-    , newListPopulationTerm
+    ListPopulationTerm (..),
+    newListPopulationTerm,
 
     -- ** ListPopulationTerm_Operator
-    , ListPopulationTerm_Operator (..)
+    ListPopulationTerm_Operator (..),
 
     -- ** ListPopulationTerm_Type
-    , ListPopulationTerm_Type (..)
+    ListPopulationTerm_Type (..),
 
     -- ** ListTargetingExpression
-    , ListTargetingExpression (..)
-    , newListTargetingExpression
+    ListTargetingExpression (..),
+    newListTargetingExpression,
 
     -- ** LookbackConfiguration
-    , LookbackConfiguration (..)
-    , newLookbackConfiguration
+    LookbackConfiguration (..),
+    newLookbackConfiguration,
 
     -- ** MeasurementPartnerAdvertiserLink
-    , MeasurementPartnerAdvertiserLink (..)
-    , newMeasurementPartnerAdvertiserLink
+    MeasurementPartnerAdvertiserLink (..),
+    newMeasurementPartnerAdvertiserLink,
 
     -- ** MeasurementPartnerAdvertiserLink_LinkStatus
-    , MeasurementPartnerAdvertiserLink_LinkStatus (..)
+    MeasurementPartnerAdvertiserLink_LinkStatus (..),
 
     -- ** MeasurementPartnerAdvertiserLink_MeasurementPartner
-    , MeasurementPartnerAdvertiserLink_MeasurementPartner (..)
+    MeasurementPartnerAdvertiserLink_MeasurementPartner (..),
 
     -- ** MeasurementPartnerCampaignLink
-    , MeasurementPartnerCampaignLink (..)
-    , newMeasurementPartnerCampaignLink
+    MeasurementPartnerCampaignLink (..),
+    newMeasurementPartnerCampaignLink,
 
     -- ** MeasurementPartnerCampaignLink_LinkStatus
-    , MeasurementPartnerCampaignLink_LinkStatus (..)
+    MeasurementPartnerCampaignLink_LinkStatus (..),
 
     -- ** MeasurementPartnerCampaignLink_MeasurementPartner
-    , MeasurementPartnerCampaignLink_MeasurementPartner (..)
+    MeasurementPartnerCampaignLink_MeasurementPartner (..),
 
     -- ** MeasurementPartnerWrappingData
-    , MeasurementPartnerWrappingData (..)
-    , newMeasurementPartnerWrappingData
+    MeasurementPartnerWrappingData (..),
+    newMeasurementPartnerWrappingData,
 
     -- ** MeasurementPartnerWrappingData_LinkStatus
-    , MeasurementPartnerWrappingData_LinkStatus (..)
+    MeasurementPartnerWrappingData_LinkStatus (..),
 
     -- ** MeasurementPartnerWrappingData_MeasurementPartner
-    , MeasurementPartnerWrappingData_MeasurementPartner (..)
+    MeasurementPartnerWrappingData_MeasurementPartner (..),
 
     -- ** MeasurementPartnerWrappingData_TagWrappingMode
-    , MeasurementPartnerWrappingData_TagWrappingMode (..)
+    MeasurementPartnerWrappingData_TagWrappingMode (..),
 
     -- ** Metric
-    , Metric (..)
-    , newMetric
+    Metric (..),
+    newMetric,
 
     -- ** Metro
-    , Metro (..)
-    , newMetro
+    Metro (..),
+    newMetro,
 
     -- ** MetrosListResponse
-    , MetrosListResponse (..)
-    , newMetrosListResponse
+    MetrosListResponse (..),
+    newMetrosListResponse,
 
     -- ** MobileApp
-    , MobileApp (..)
-    , newMobileApp
+    MobileApp (..),
+    newMobileApp,
 
     -- ** MobileApp_Directory
-    , MobileApp_Directory (..)
+    MobileApp_Directory (..),
 
     -- ** MobileAppsListResponse
-    , MobileAppsListResponse (..)
-    , newMobileAppsListResponse
+    MobileAppsListResponse (..),
+    newMobileAppsListResponse,
 
     -- ** MobileCarrier
-    , MobileCarrier (..)
-    , newMobileCarrier
+    MobileCarrier (..),
+    newMobileCarrier,
 
     -- ** MobileCarriersListResponse
-    , MobileCarriersListResponse (..)
-    , newMobileCarriersListResponse
+    MobileCarriersListResponse (..),
+    newMobileCarriersListResponse,
 
     -- ** ObaIcon
-    , ObaIcon (..)
-    , newObaIcon
+    ObaIcon (..),
+    newObaIcon,
 
     -- ** ObjectFilter
-    , ObjectFilter (..)
-    , newObjectFilter
+    ObjectFilter (..),
+    newObjectFilter,
 
     -- ** ObjectFilter_Status
-    , ObjectFilter_Status (..)
+    ObjectFilter_Status (..),
 
     -- ** OffsetPosition
-    , OffsetPosition (..)
-    , newOffsetPosition
+    OffsetPosition (..),
+    newOffsetPosition,
 
     -- ** OmnitureSettings
-    , OmnitureSettings (..)
-    , newOmnitureSettings
+    OmnitureSettings (..),
+    newOmnitureSettings,
 
     -- ** OperatingSystem
-    , OperatingSystem (..)
-    , newOperatingSystem
+    OperatingSystem (..),
+    newOperatingSystem,
 
     -- ** OperatingSystemVersion
-    , OperatingSystemVersion (..)
-    , newOperatingSystemVersion
+    OperatingSystemVersion (..),
+    newOperatingSystemVersion,
 
     -- ** OperatingSystemVersionsListResponse
-    , OperatingSystemVersionsListResponse (..)
-    , newOperatingSystemVersionsListResponse
+    OperatingSystemVersionsListResponse (..),
+    newOperatingSystemVersionsListResponse,
 
     -- ** OperatingSystemsListResponse
-    , OperatingSystemsListResponse (..)
-    , newOperatingSystemsListResponse
+    OperatingSystemsListResponse (..),
+    newOperatingSystemsListResponse,
 
     -- ** OptimizationActivity
-    , OptimizationActivity (..)
-    , newOptimizationActivity
+    OptimizationActivity (..),
+    newOptimizationActivity,
 
     -- ** Order
-    , Order (..)
-    , newOrder
+    Order (..),
+    newOrder,
 
     -- ** OrderContact
-    , OrderContact (..)
-    , newOrderContact
+    OrderContact (..),
+    newOrderContact,
 
     -- ** OrderContact_ContactType
-    , OrderContact_ContactType (..)
+    OrderContact_ContactType (..),
 
     -- ** OrderDocument
-    , OrderDocument (..)
-    , newOrderDocument
+    OrderDocument (..),
+    newOrderDocument,
 
     -- ** OrderDocument_Type
-    , OrderDocument_Type (..)
+    OrderDocument_Type (..),
 
     -- ** OrderDocumentsListResponse
-    , OrderDocumentsListResponse (..)
-    , newOrderDocumentsListResponse
+    OrderDocumentsListResponse (..),
+    newOrderDocumentsListResponse,
 
     -- ** OrdersListResponse
-    , OrdersListResponse (..)
-    , newOrdersListResponse
+    OrdersListResponse (..),
+    newOrdersListResponse,
 
     -- ** PathFilter
-    , PathFilter (..)
-    , newPathFilter
+    PathFilter (..),
+    newPathFilter,
 
     -- ** PathFilter_PathMatchPosition
-    , PathFilter_PathMatchPosition (..)
+    PathFilter_PathMatchPosition (..),
 
     -- ** PathReportCompatibleFields
-    , PathReportCompatibleFields (..)
-    , newPathReportCompatibleFields
+    PathReportCompatibleFields (..),
+    newPathReportCompatibleFields,
 
     -- ** PathReportDimensionValue
-    , PathReportDimensionValue (..)
-    , newPathReportDimensionValue
+    PathReportDimensionValue (..),
+    newPathReportDimensionValue,
 
     -- ** PathReportDimensionValue_MatchType
-    , PathReportDimensionValue_MatchType (..)
+    PathReportDimensionValue_MatchType (..),
 
     -- ** PathToConversionReportCompatibleFields
-    , PathToConversionReportCompatibleFields (..)
-    , newPathToConversionReportCompatibleFields
+    PathToConversionReportCompatibleFields (..),
+    newPathToConversionReportCompatibleFields,
 
     -- ** Placement
-    , Placement (..)
-    , newPlacement
+    Placement (..),
+    newPlacement,
 
     -- ** Placement_Compatibility
-    , Placement_Compatibility (..)
+    Placement_Compatibility (..),
 
     -- ** Placement_PaymentSource
-    , Placement_PaymentSource (..)
+    Placement_PaymentSource (..),
 
     -- ** Placement_Status
-    , Placement_Status (..)
+    Placement_Status (..),
 
     -- ** Placement_TagFormatsItem
-    , Placement_TagFormatsItem (..)
+    Placement_TagFormatsItem (..),
 
     -- ** Placement_VpaidAdapterChoice
-    , Placement_VpaidAdapterChoice (..)
+    Placement_VpaidAdapterChoice (..),
 
     -- ** PlacementAssignment
-    , PlacementAssignment (..)
-    , newPlacementAssignment
+    PlacementAssignment (..),
+    newPlacementAssignment,
 
     -- ** PlacementGroup
-    , PlacementGroup (..)
-    , newPlacementGroup
+    PlacementGroup (..),
+    newPlacementGroup,
 
     -- ** PlacementGroup_PlacementGroupType
-    , PlacementGroup_PlacementGroupType (..)
+    PlacementGroup_PlacementGroupType (..),
 
     -- ** PlacementGroupsListResponse
-    , PlacementGroupsListResponse (..)
-    , newPlacementGroupsListResponse
+    PlacementGroupsListResponse (..),
+    newPlacementGroupsListResponse,
 
     -- ** PlacementStrategiesListResponse
-    , PlacementStrategiesListResponse (..)
-    , newPlacementStrategiesListResponse
+    PlacementStrategiesListResponse (..),
+    newPlacementStrategiesListResponse,
 
     -- ** PlacementStrategy
-    , PlacementStrategy (..)
-    , newPlacementStrategy
+    PlacementStrategy (..),
+    newPlacementStrategy,
 
     -- ** PlacementTag
-    , PlacementTag (..)
-    , newPlacementTag
+    PlacementTag (..),
+    newPlacementTag,
 
     -- ** PlacementsGenerateTagsResponse
-    , PlacementsGenerateTagsResponse (..)
-    , newPlacementsGenerateTagsResponse
+    PlacementsGenerateTagsResponse (..),
+    newPlacementsGenerateTagsResponse,
 
     -- ** PlacementsListResponse
-    , PlacementsListResponse (..)
-    , newPlacementsListResponse
+    PlacementsListResponse (..),
+    newPlacementsListResponse,
 
     -- ** PlatformType
-    , PlatformType (..)
-    , newPlatformType
+    PlatformType (..),
+    newPlatformType,
 
     -- ** PlatformTypesListResponse
-    , PlatformTypesListResponse (..)
-    , newPlatformTypesListResponse
+    PlatformTypesListResponse (..),
+    newPlatformTypesListResponse,
 
     -- ** PopupWindowProperties
-    , PopupWindowProperties (..)
-    , newPopupWindowProperties
+    PopupWindowProperties (..),
+    newPopupWindowProperties,
 
     -- ** PopupWindowProperties_PositionType
-    , PopupWindowProperties_PositionType (..)
+    PopupWindowProperties_PositionType (..),
 
     -- ** PostalCode
-    , PostalCode (..)
-    , newPostalCode
+    PostalCode (..),
+    newPostalCode,
 
     -- ** PostalCodesListResponse
-    , PostalCodesListResponse (..)
-    , newPostalCodesListResponse
+    PostalCodesListResponse (..),
+    newPostalCodesListResponse,
 
     -- ** Pricing
-    , Pricing (..)
-    , newPricing
+    Pricing (..),
+    newPricing,
 
     -- ** Pricing_CapCostType
-    , Pricing_CapCostType (..)
+    Pricing_CapCostType (..),
 
     -- ** Pricing_GroupType
-    , Pricing_GroupType (..)
+    Pricing_GroupType (..),
 
     -- ** Pricing_PricingType
-    , Pricing_PricingType (..)
+    Pricing_PricingType (..),
 
     -- ** PricingSchedule
-    , PricingSchedule (..)
-    , newPricingSchedule
+    PricingSchedule (..),
+    newPricingSchedule,
 
     -- ** PricingSchedule_CapCostOption
-    , PricingSchedule_CapCostOption (..)
+    PricingSchedule_CapCostOption (..),
 
     -- ** PricingSchedule_PricingType
-    , PricingSchedule_PricingType (..)
+    PricingSchedule_PricingType (..),
 
     -- ** PricingSchedulePricingPeriod
-    , PricingSchedulePricingPeriod (..)
-    , newPricingSchedulePricingPeriod
+    PricingSchedulePricingPeriod (..),
+    newPricingSchedulePricingPeriod,
 
     -- ** Project
-    , Project (..)
-    , newProject
+    Project (..),
+    newProject,
 
     -- ** Project_AudienceAgeGroup
-    , Project_AudienceAgeGroup (..)
+    Project_AudienceAgeGroup (..),
 
     -- ** Project_AudienceGender
-    , Project_AudienceGender (..)
+    Project_AudienceGender (..),
 
     -- ** ProjectsListResponse
-    , ProjectsListResponse (..)
-    , newProjectsListResponse
+    ProjectsListResponse (..),
+    newProjectsListResponse,
 
     -- ** ReachReportCompatibleFields
-    , ReachReportCompatibleFields (..)
-    , newReachReportCompatibleFields
+    ReachReportCompatibleFields (..),
+    newReachReportCompatibleFields,
 
     -- ** Recipient
-    , Recipient (..)
-    , newRecipient
+    Recipient (..),
+    newRecipient,
 
     -- ** Recipient_DeliveryType
-    , Recipient_DeliveryType (..)
+    Recipient_DeliveryType (..),
 
     -- ** Region
-    , Region (..)
-    , newRegion
+    Region (..),
+    newRegion,
 
     -- ** RegionsListResponse
-    , RegionsListResponse (..)
-    , newRegionsListResponse
+    RegionsListResponse (..),
+    newRegionsListResponse,
 
     -- ** RemarketingList
-    , RemarketingList (..)
-    , newRemarketingList
+    RemarketingList (..),
+    newRemarketingList,
 
     -- ** RemarketingList_ListSource
-    , RemarketingList_ListSource (..)
+    RemarketingList_ListSource (..),
 
     -- ** RemarketingListShare
-    , RemarketingListShare (..)
-    , newRemarketingListShare
+    RemarketingListShare (..),
+    newRemarketingListShare,
 
     -- ** RemarketingListsListResponse
-    , RemarketingListsListResponse (..)
-    , newRemarketingListsListResponse
+    RemarketingListsListResponse (..),
+    newRemarketingListsListResponse,
 
     -- ** Report
-    , Report (..)
-    , newReport
+    Report (..),
+    newReport,
 
     -- ** Report_Criteria
-    , Report_Criteria (..)
-    , newReport_Criteria
+    Report_Criteria (..),
+    newReport_Criteria,
 
     -- ** Report_CrossDimensionReachCriteria
-    , Report_CrossDimensionReachCriteria (..)
-    , newReport_CrossDimensionReachCriteria
+    Report_CrossDimensionReachCriteria (..),
+    newReport_CrossDimensionReachCriteria,
 
     -- ** Report_CrossDimensionReachCriteria_Dimension
-    , Report_CrossDimensionReachCriteria_Dimension (..)
+    Report_CrossDimensionReachCriteria_Dimension (..),
 
     -- ** Report_Delivery
-    , Report_Delivery (..)
-    , newReport_Delivery
+    Report_Delivery (..),
+    newReport_Delivery,
 
     -- ** Report_Delivery_EmailOwnerDeliveryType
-    , Report_Delivery_EmailOwnerDeliveryType (..)
+    Report_Delivery_EmailOwnerDeliveryType (..),
 
     -- ** Report_FloodlightCriteria
-    , Report_FloodlightCriteria (..)
-    , newReport_FloodlightCriteria
+    Report_FloodlightCriteria (..),
+    newReport_FloodlightCriteria,
 
     -- ** Report_FloodlightCriteria_ReportProperties
-    , Report_FloodlightCriteria_ReportProperties (..)
-    , newReport_FloodlightCriteria_ReportProperties
+    Report_FloodlightCriteria_ReportProperties (..),
+    newReport_FloodlightCriteria_ReportProperties,
 
     -- ** Report_Format
-    , Report_Format (..)
+    Report_Format (..),
 
     -- ** Report_PathAttributionCriteria
-    , Report_PathAttributionCriteria (..)
-    , newReport_PathAttributionCriteria
+    Report_PathAttributionCriteria (..),
+    newReport_PathAttributionCriteria,
 
     -- ** Report_PathCriteria
-    , Report_PathCriteria (..)
-    , newReport_PathCriteria
+    Report_PathCriteria (..),
+    newReport_PathCriteria,
 
     -- ** Report_PathToConversionCriteria
-    , Report_PathToConversionCriteria (..)
-    , newReport_PathToConversionCriteria
+    Report_PathToConversionCriteria (..),
+    newReport_PathToConversionCriteria,
 
     -- ** Report_PathToConversionCriteria_ReportProperties
-    , Report_PathToConversionCriteria_ReportProperties (..)
-    , newReport_PathToConversionCriteria_ReportProperties
+    Report_PathToConversionCriteria_ReportProperties (..),
+    newReport_PathToConversionCriteria_ReportProperties,
 
     -- ** Report_ReachCriteria
-    , Report_ReachCriteria (..)
-    , newReport_ReachCriteria
+    Report_ReachCriteria (..),
+    newReport_ReachCriteria,
 
     -- ** Report_Schedule
-    , Report_Schedule (..)
-    , newReport_Schedule
+    Report_Schedule (..),
+    newReport_Schedule,
 
     -- ** Report_Schedule_RepeatsOnWeekDaysItem
-    , Report_Schedule_RepeatsOnWeekDaysItem (..)
+    Report_Schedule_RepeatsOnWeekDaysItem (..),
 
     -- ** Report_Schedule_RunsOnDayOfMonth
-    , Report_Schedule_RunsOnDayOfMonth (..)
+    Report_Schedule_RunsOnDayOfMonth (..),
 
     -- ** Report_Type
-    , Report_Type (..)
+    Report_Type (..),
 
     -- ** ReportCompatibleFields
-    , ReportCompatibleFields (..)
-    , newReportCompatibleFields
+    ReportCompatibleFields (..),
+    newReportCompatibleFields,
 
     -- ** ReportList
-    , ReportList (..)
-    , newReportList
+    ReportList (..),
+    newReportList,
 
     -- ** ReportsConfiguration
-    , ReportsConfiguration (..)
-    , newReportsConfiguration
+    ReportsConfiguration (..),
+    newReportsConfiguration,
 
     -- ** RichMediaExitOverride
-    , RichMediaExitOverride (..)
-    , newRichMediaExitOverride
+    RichMediaExitOverride (..),
+    newRichMediaExitOverride,
 
     -- ** Rule
-    , Rule (..)
-    , newRule
+    Rule (..),
+    newRule,
 
     -- ** Site
-    , Site (..)
-    , newSite
+    Site (..),
+    newSite,
 
     -- ** SiteCompanionSetting
-    , SiteCompanionSetting (..)
-    , newSiteCompanionSetting
+    SiteCompanionSetting (..),
+    newSiteCompanionSetting,
 
     -- ** SiteContact
-    , SiteContact (..)
-    , newSiteContact
+    SiteContact (..),
+    newSiteContact,
 
     -- ** SiteContact_ContactType
-    , SiteContact_ContactType (..)
+    SiteContact_ContactType (..),
 
     -- ** SiteSettings
-    , SiteSettings (..)
-    , newSiteSettings
+    SiteSettings (..),
+    newSiteSettings,
 
     -- ** SiteSettings_VpaidAdapterChoiceTemplate
-    , SiteSettings_VpaidAdapterChoiceTemplate (..)
+    SiteSettings_VpaidAdapterChoiceTemplate (..),
 
     -- ** SiteSkippableSetting
-    , SiteSkippableSetting (..)
-    , newSiteSkippableSetting
+    SiteSkippableSetting (..),
+    newSiteSkippableSetting,
 
     -- ** SiteTranscodeSetting
-    , SiteTranscodeSetting (..)
-    , newSiteTranscodeSetting
+    SiteTranscodeSetting (..),
+    newSiteTranscodeSetting,
 
     -- ** SiteVideoSettings
-    , SiteVideoSettings (..)
-    , newSiteVideoSettings
+    SiteVideoSettings (..),
+    newSiteVideoSettings,
 
     -- ** SiteVideoSettings_Orientation
-    , SiteVideoSettings_Orientation (..)
+    SiteVideoSettings_Orientation (..),
 
     -- ** SitesListResponse
-    , SitesListResponse (..)
-    , newSitesListResponse
+    SitesListResponse (..),
+    newSitesListResponse,
 
     -- ** Size
-    , Size (..)
-    , newSize
+    Size (..),
+    newSize,
 
     -- ** SizesListResponse
-    , SizesListResponse (..)
-    , newSizesListResponse
+    SizesListResponse (..),
+    newSizesListResponse,
 
     -- ** SkippableSetting
-    , SkippableSetting (..)
-    , newSkippableSetting
+    SkippableSetting (..),
+    newSkippableSetting,
 
     -- ** SortedDimension
-    , SortedDimension (..)
-    , newSortedDimension
+    SortedDimension (..),
+    newSortedDimension,
 
     -- ** SortedDimension_SortOrder
-    , SortedDimension_SortOrder (..)
+    SortedDimension_SortOrder (..),
 
     -- ** Subaccount
-    , Subaccount (..)
-    , newSubaccount
+    Subaccount (..),
+    newSubaccount,
 
     -- ** SubaccountsListResponse
-    , SubaccountsListResponse (..)
-    , newSubaccountsListResponse
+    SubaccountsListResponse (..),
+    newSubaccountsListResponse,
 
     -- ** TagData
-    , TagData (..)
-    , newTagData
+    TagData (..),
+    newTagData,
 
     -- ** TagData_Format
-    , TagData_Format (..)
+    TagData_Format (..),
 
     -- ** TagSetting
-    , TagSetting (..)
-    , newTagSetting
+    TagSetting (..),
+    newTagSetting,
 
     -- ** TagSetting_KeywordOption
-    , TagSetting_KeywordOption (..)
+    TagSetting_KeywordOption (..),
 
     -- ** TagSettings
-    , TagSettings (..)
-    , newTagSettings
+    TagSettings (..),
+    newTagSettings,
 
     -- ** TargetWindow
-    , TargetWindow (..)
-    , newTargetWindow
+    TargetWindow (..),
+    newTargetWindow,
 
     -- ** TargetWindow_TargetWindowOption
-    , TargetWindow_TargetWindowOption (..)
+    TargetWindow_TargetWindowOption (..),
 
     -- ** TargetableRemarketingList
-    , TargetableRemarketingList (..)
-    , newTargetableRemarketingList
+    TargetableRemarketingList (..),
+    newTargetableRemarketingList,
 
     -- ** TargetableRemarketingList_ListSource
-    , TargetableRemarketingList_ListSource (..)
+    TargetableRemarketingList_ListSource (..),
 
     -- ** TargetableRemarketingListsListResponse
-    , TargetableRemarketingListsListResponse (..)
-    , newTargetableRemarketingListsListResponse
+    TargetableRemarketingListsListResponse (..),
+    newTargetableRemarketingListsListResponse,
 
     -- ** TargetingTemplate
-    , TargetingTemplate (..)
-    , newTargetingTemplate
+    TargetingTemplate (..),
+    newTargetingTemplate,
 
     -- ** TargetingTemplatesListResponse
-    , TargetingTemplatesListResponse (..)
-    , newTargetingTemplatesListResponse
+    TargetingTemplatesListResponse (..),
+    newTargetingTemplatesListResponse,
 
     -- ** TechnologyTargeting
-    , TechnologyTargeting (..)
-    , newTechnologyTargeting
+    TechnologyTargeting (..),
+    newTechnologyTargeting,
 
     -- ** ThirdPartyAuthenticationToken
-    , ThirdPartyAuthenticationToken (..)
-    , newThirdPartyAuthenticationToken
+    ThirdPartyAuthenticationToken (..),
+    newThirdPartyAuthenticationToken,
 
     -- ** ThirdPartyTrackingUrl
-    , ThirdPartyTrackingUrl (..)
-    , newThirdPartyTrackingUrl
+    ThirdPartyTrackingUrl (..),
+    newThirdPartyTrackingUrl,
 
     -- ** ThirdPartyTrackingUrl_ThirdPartyUrlType
-    , ThirdPartyTrackingUrl_ThirdPartyUrlType (..)
+    ThirdPartyTrackingUrl_ThirdPartyUrlType (..),
 
     -- ** TranscodeSetting
-    , TranscodeSetting (..)
-    , newTranscodeSetting
+    TranscodeSetting (..),
+    newTranscodeSetting,
 
     -- ** UniversalAdId
-    , UniversalAdId (..)
-    , newUniversalAdId
+    UniversalAdId (..),
+    newUniversalAdId,
 
     -- ** UniversalAdId_Registry
-    , UniversalAdId_Registry (..)
+    UniversalAdId_Registry (..),
 
     -- ** UserDefinedVariableConfiguration
-    , UserDefinedVariableConfiguration (..)
-    , newUserDefinedVariableConfiguration
+    UserDefinedVariableConfiguration (..),
+    newUserDefinedVariableConfiguration,
 
     -- ** UserDefinedVariableConfiguration_DataType
-    , UserDefinedVariableConfiguration_DataType (..)
+    UserDefinedVariableConfiguration_DataType (..),
 
     -- ** UserDefinedVariableConfiguration_VariableType
-    , UserDefinedVariableConfiguration_VariableType (..)
+    UserDefinedVariableConfiguration_VariableType (..),
 
     -- ** UserProfile
-    , UserProfile (..)
-    , newUserProfile
+    UserProfile (..),
+    newUserProfile,
 
     -- ** UserProfileList
-    , UserProfileList (..)
-    , newUserProfileList
+    UserProfileList (..),
+    newUserProfileList,
 
     -- ** UserRole
-    , UserRole (..)
-    , newUserRole
+    UserRole (..),
+    newUserRole,
 
     -- ** UserRolePermission
-    , UserRolePermission (..)
-    , newUserRolePermission
+    UserRolePermission (..),
+    newUserRolePermission,
 
     -- ** UserRolePermission_Availability
-    , UserRolePermission_Availability (..)
+    UserRolePermission_Availability (..),
 
     -- ** UserRolePermissionGroup
-    , UserRolePermissionGroup (..)
-    , newUserRolePermissionGroup
+    UserRolePermissionGroup (..),
+    newUserRolePermissionGroup,
 
     -- ** UserRolePermissionGroupsListResponse
-    , UserRolePermissionGroupsListResponse (..)
-    , newUserRolePermissionGroupsListResponse
+    UserRolePermissionGroupsListResponse (..),
+    newUserRolePermissionGroupsListResponse,
 
     -- ** UserRolePermissionsListResponse
-    , UserRolePermissionsListResponse (..)
-    , newUserRolePermissionsListResponse
+    UserRolePermissionsListResponse (..),
+    newUserRolePermissionsListResponse,
 
     -- ** UserRolesListResponse
-    , UserRolesListResponse (..)
-    , newUserRolesListResponse
+    UserRolesListResponse (..),
+    newUserRolesListResponse,
 
     -- ** VideoFormat
-    , VideoFormat (..)
-    , newVideoFormat
+    VideoFormat (..),
+    newVideoFormat,
 
     -- ** VideoFormat_FileType
-    , VideoFormat_FileType (..)
+    VideoFormat_FileType (..),
 
     -- ** VideoFormatsListResponse
-    , VideoFormatsListResponse (..)
-    , newVideoFormatsListResponse
+    VideoFormatsListResponse (..),
+    newVideoFormatsListResponse,
 
     -- ** VideoOffset
-    , VideoOffset (..)
-    , newVideoOffset
+    VideoOffset (..),
+    newVideoOffset,
 
     -- ** VideoSettings
-    , VideoSettings (..)
-    , newVideoSettings
+    VideoSettings (..),
+    newVideoSettings,
 
     -- ** VideoSettings_Orientation
-    , VideoSettings_Orientation (..)
+    VideoSettings_Orientation (..),
 
     -- ** AccountUserProfilesListSortField
-    , AccountUserProfilesListSortField (..)
+    AccountUserProfilesListSortField (..),
 
     -- ** AccountUserProfilesListSortOrder
-    , AccountUserProfilesListSortOrder (..)
+    AccountUserProfilesListSortOrder (..),
 
     -- ** AccountsListSortField
-    , AccountsListSortField (..)
+    AccountsListSortField (..),
 
     -- ** AccountsListSortOrder
-    , AccountsListSortOrder (..)
+    AccountsListSortOrder (..),
 
     -- ** AdsListCompatibility
-    , AdsListCompatibility (..)
+    AdsListCompatibility (..),
 
     -- ** AdsListSortField
-    , AdsListSortField (..)
+    AdsListSortField (..),
 
     -- ** AdsListSortOrder
-    , AdsListSortOrder (..)
+    AdsListSortOrder (..),
 
     -- ** AdsListType
-    , AdsListType (..)
+    AdsListType (..),
 
     -- ** AdvertiserGroupsListSortField
-    , AdvertiserGroupsListSortField (..)
+    AdvertiserGroupsListSortField (..),
 
     -- ** AdvertiserGroupsListSortOrder
-    , AdvertiserGroupsListSortOrder (..)
+    AdvertiserGroupsListSortOrder (..),
 
     -- ** AdvertiserLandingPagesListSortField
-    , AdvertiserLandingPagesListSortField (..)
+    AdvertiserLandingPagesListSortField (..),
 
     -- ** AdvertiserLandingPagesListSortOrder
-    , AdvertiserLandingPagesListSortOrder (..)
+    AdvertiserLandingPagesListSortOrder (..),
 
     -- ** AdvertisersListSortField
-    , AdvertisersListSortField (..)
+    AdvertisersListSortField (..),
 
     -- ** AdvertisersListSortOrder
-    , AdvertisersListSortOrder (..)
+    AdvertisersListSortOrder (..),
 
     -- ** AdvertisersListStatus
-    , AdvertisersListStatus (..)
+    AdvertisersListStatus (..),
 
     -- ** CampaignCreativeAssociationsListSortOrder
-    , CampaignCreativeAssociationsListSortOrder (..)
+    CampaignCreativeAssociationsListSortOrder (..),
 
     -- ** CampaignsListSortField
-    , CampaignsListSortField (..)
+    CampaignsListSortField (..),
 
     -- ** CampaignsListSortOrder
-    , CampaignsListSortOrder (..)
+    CampaignsListSortOrder (..),
 
     -- ** ChangeLogsListAction
-    , ChangeLogsListAction (..)
+    ChangeLogsListAction (..),
 
     -- ** ChangeLogsListObjectType
-    , ChangeLogsListObjectType (..)
+    ChangeLogsListObjectType (..),
 
     -- ** ContentCategoriesListSortField
-    , ContentCategoriesListSortField (..)
+    ContentCategoriesListSortField (..),
 
     -- ** ContentCategoriesListSortOrder
-    , ContentCategoriesListSortOrder (..)
+    ContentCategoriesListSortOrder (..),
 
     -- ** CreativeFieldValuesListSortField
-    , CreativeFieldValuesListSortField (..)
+    CreativeFieldValuesListSortField (..),
 
     -- ** CreativeFieldValuesListSortOrder
-    , CreativeFieldValuesListSortOrder (..)
+    CreativeFieldValuesListSortOrder (..),
 
     -- ** CreativeFieldsListSortField
-    , CreativeFieldsListSortField (..)
+    CreativeFieldsListSortField (..),
 
     -- ** CreativeFieldsListSortOrder
-    , CreativeFieldsListSortOrder (..)
+    CreativeFieldsListSortOrder (..),
 
     -- ** CreativeGroupsListSortField
-    , CreativeGroupsListSortField (..)
+    CreativeGroupsListSortField (..),
 
     -- ** CreativeGroupsListSortOrder
-    , CreativeGroupsListSortOrder (..)
+    CreativeGroupsListSortOrder (..),
 
     -- ** CreativesListSortField
-    , CreativesListSortField (..)
+    CreativesListSortField (..),
 
     -- ** CreativesListSortOrder
-    , CreativesListSortOrder (..)
+    CreativesListSortOrder (..),
 
     -- ** CreativesListTypes
-    , CreativesListTypes (..)
+    CreativesListTypes (..),
 
     -- ** DirectorySitesListSortField
-    , DirectorySitesListSortField (..)
+    DirectorySitesListSortField (..),
 
     -- ** DirectorySitesListSortOrder
-    , DirectorySitesListSortOrder (..)
+    DirectorySitesListSortOrder (..),
 
     -- ** DynamicTargetingKeysDeleteObjectType
-    , DynamicTargetingKeysDeleteObjectType (..)
+    DynamicTargetingKeysDeleteObjectType (..),
 
     -- ** DynamicTargetingKeysListObjectType
-    , DynamicTargetingKeysListObjectType (..)
+    DynamicTargetingKeysListObjectType (..),
 
     -- ** EventTagsListEventTagTypes
-    , EventTagsListEventTagTypes (..)
+    EventTagsListEventTagTypes (..),
 
     -- ** EventTagsListSortField
-    , EventTagsListSortField (..)
+    EventTagsListSortField (..),
 
     -- ** EventTagsListSortOrder
-    , EventTagsListSortOrder (..)
+    EventTagsListSortOrder (..),
 
     -- ** FilesListScope
-    , FilesListScope (..)
+    FilesListScope (..),
 
     -- ** FilesListSortField
-    , FilesListSortField (..)
+    FilesListSortField (..),
 
     -- ** FilesListSortOrder
-    , FilesListSortOrder (..)
+    FilesListSortOrder (..),
 
     -- ** FloodlightActivitiesListFloodlightActivityGroupType
-    , FloodlightActivitiesListFloodlightActivityGroupType (..)
+    FloodlightActivitiesListFloodlightActivityGroupType (..),
 
     -- ** FloodlightActivitiesListSortField
-    , FloodlightActivitiesListSortField (..)
+    FloodlightActivitiesListSortField (..),
 
     -- ** FloodlightActivitiesListSortOrder
-    , FloodlightActivitiesListSortOrder (..)
+    FloodlightActivitiesListSortOrder (..),
 
     -- ** FloodlightActivityGroupsListSortField
-    , FloodlightActivityGroupsListSortField (..)
+    FloodlightActivityGroupsListSortField (..),
 
     -- ** FloodlightActivityGroupsListSortOrder
-    , FloodlightActivityGroupsListSortOrder (..)
+    FloodlightActivityGroupsListSortOrder (..),
 
     -- ** FloodlightActivityGroupsListType
-    , FloodlightActivityGroupsListType (..)
+    FloodlightActivityGroupsListType (..),
 
     -- ** InventoryItemsListSortField
-    , InventoryItemsListSortField (..)
+    InventoryItemsListSortField (..),
 
     -- ** InventoryItemsListSortOrder
-    , InventoryItemsListSortOrder (..)
+    InventoryItemsListSortOrder (..),
 
     -- ** InventoryItemsListType
-    , InventoryItemsListType (..)
+    InventoryItemsListType (..),
 
     -- ** MobileAppsListDirectories
-    , MobileAppsListDirectories (..)
+    MobileAppsListDirectories (..),
 
     -- ** OrderDocumentsListSortField
-    , OrderDocumentsListSortField (..)
+    OrderDocumentsListSortField (..),
 
     -- ** OrderDocumentsListSortOrder
-    , OrderDocumentsListSortOrder (..)
+    OrderDocumentsListSortOrder (..),
 
     -- ** OrdersListSortField
-    , OrdersListSortField (..)
+    OrdersListSortField (..),
 
     -- ** OrdersListSortOrder
-    , OrdersListSortOrder (..)
+    OrdersListSortOrder (..),
 
     -- ** PlacementGroupsListPlacementGroupType
-    , PlacementGroupsListPlacementGroupType (..)
+    PlacementGroupsListPlacementGroupType (..),
 
     -- ** PlacementGroupsListPricingTypes
-    , PlacementGroupsListPricingTypes (..)
+    PlacementGroupsListPricingTypes (..),
 
     -- ** PlacementGroupsListSortField
-    , PlacementGroupsListSortField (..)
+    PlacementGroupsListSortField (..),
 
     -- ** PlacementGroupsListSortOrder
-    , PlacementGroupsListSortOrder (..)
+    PlacementGroupsListSortOrder (..),
 
     -- ** PlacementStrategiesListSortField
-    , PlacementStrategiesListSortField (..)
+    PlacementStrategiesListSortField (..),
 
     -- ** PlacementStrategiesListSortOrder
-    , PlacementStrategiesListSortOrder (..)
+    PlacementStrategiesListSortOrder (..),
 
     -- ** PlacementsGeneratetagsTagFormats
-    , PlacementsGeneratetagsTagFormats (..)
+    PlacementsGeneratetagsTagFormats (..),
 
     -- ** PlacementsListCompatibilities
-    , PlacementsListCompatibilities (..)
+    PlacementsListCompatibilities (..),
 
     -- ** PlacementsListPaymentSource
-    , PlacementsListPaymentSource (..)
+    PlacementsListPaymentSource (..),
 
     -- ** PlacementsListPricingTypes
-    , PlacementsListPricingTypes (..)
+    PlacementsListPricingTypes (..),
 
     -- ** PlacementsListSortField
-    , PlacementsListSortField (..)
+    PlacementsListSortField (..),
 
     -- ** PlacementsListSortOrder
-    , PlacementsListSortOrder (..)
+    PlacementsListSortOrder (..),
 
     -- ** ProjectsListSortField
-    , ProjectsListSortField (..)
+    ProjectsListSortField (..),
 
     -- ** ProjectsListSortOrder
-    , ProjectsListSortOrder (..)
+    ProjectsListSortOrder (..),
 
     -- ** RemarketingListsListSortField
-    , RemarketingListsListSortField (..)
+    RemarketingListsListSortField (..),
 
     -- ** RemarketingListsListSortOrder
-    , RemarketingListsListSortOrder (..)
+    RemarketingListsListSortOrder (..),
 
     -- ** ReportsFilesListSortField
-    , ReportsFilesListSortField (..)
+    ReportsFilesListSortField (..),
 
     -- ** ReportsFilesListSortOrder
-    , ReportsFilesListSortOrder (..)
+    ReportsFilesListSortOrder (..),
 
     -- ** ReportsListScope
-    , ReportsListScope (..)
+    ReportsListScope (..),
 
     -- ** ReportsListSortField
-    , ReportsListSortField (..)
+    ReportsListSortField (..),
 
     -- ** ReportsListSortOrder
-    , ReportsListSortOrder (..)
+    ReportsListSortOrder (..),
 
     -- ** SitesListSortField
-    , SitesListSortField (..)
+    SitesListSortField (..),
 
     -- ** SitesListSortOrder
-    , SitesListSortOrder (..)
+    SitesListSortOrder (..),
 
     -- ** SubaccountsListSortField
-    , SubaccountsListSortField (..)
+    SubaccountsListSortField (..),
 
     -- ** SubaccountsListSortOrder
-    , SubaccountsListSortOrder (..)
+    SubaccountsListSortOrder (..),
 
     -- ** TargetableRemarketingListsListSortField
-    , TargetableRemarketingListsListSortField (..)
+    TargetableRemarketingListsListSortField (..),
 
     -- ** TargetableRemarketingListsListSortOrder
-    , TargetableRemarketingListsListSortOrder (..)
+    TargetableRemarketingListsListSortOrder (..),
 
     -- ** TargetingTemplatesListSortField
-    , TargetingTemplatesListSortField (..)
+    TargetingTemplatesListSortField (..),
 
     -- ** TargetingTemplatesListSortOrder
-    , TargetingTemplatesListSortOrder (..)
+    TargetingTemplatesListSortOrder (..),
 
     -- ** UserRolesListSortField
-    , UserRolesListSortField (..)
+    UserRolesListSortField (..),
 
     -- ** UserRolesListSortOrder
-    , UserRolesListSortOrder (..)
-    ) where
+    UserRolesListSortOrder (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DFAReporting.Internal.Product
 import Gogol.DFAReporting.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v3.5@ of the Campaign Manager 360 API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: Core.ServiceConfig
-dFAReportingService
-  = Core.defaultService
-      (Core.ServiceId "dfareporting:v3.5")
-      "dfareporting.googleapis.com"
+dFAReportingService =
+  Core.defaultService
+    (Core.ServiceId "dfareporting:v3.5")
+    "dfareporting.googleapis.com"
 
 -- | Manage DoubleClick Digital Marketing conversions
 ddmconversionsScope :: Core.Proxy '["https://www.googleapis.com/auth/ddmconversions"]

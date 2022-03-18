@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,2616 +30,2616 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference>
 module Gogol.DFAReporting
-    (
-    -- * Configuration
-      dFAReportingService
+  ( -- * Configuration
+    dFAReportingService,
 
     -- * OAuth Scopes
-    , ddmconversionsScope
-    , dFAReportingScope
-    , dfatraffickingScope
+    ddmconversionsScope,
+    dFAReportingScope,
+    dfatraffickingScope,
 
     -- * Resources
 
     -- ** dfareporting.accountActiveAdSummaries.get
-    , DFAReportingAccountActiveAdSummariesGetResource
-    , newDFAReportingAccountActiveAdSummariesGet
-    , DFAReportingAccountActiveAdSummariesGet
+    DFAReportingAccountActiveAdSummariesGetResource,
+    newDFAReportingAccountActiveAdSummariesGet,
+    DFAReportingAccountActiveAdSummariesGet,
 
     -- ** dfareporting.accountPermissionGroups.get
-    , DFAReportingAccountPermissionGroupsGetResource
-    , newDFAReportingAccountPermissionGroupsGet
-    , DFAReportingAccountPermissionGroupsGet
+    DFAReportingAccountPermissionGroupsGetResource,
+    newDFAReportingAccountPermissionGroupsGet,
+    DFAReportingAccountPermissionGroupsGet,
 
     -- ** dfareporting.accountPermissionGroups.list
-    , DFAReportingAccountPermissionGroupsListResource
-    , newDFAReportingAccountPermissionGroupsList
-    , DFAReportingAccountPermissionGroupsList
+    DFAReportingAccountPermissionGroupsListResource,
+    newDFAReportingAccountPermissionGroupsList,
+    DFAReportingAccountPermissionGroupsList,
 
     -- ** dfareporting.accountPermissions.get
-    , DFAReportingAccountPermissionsGetResource
-    , newDFAReportingAccountPermissionsGet
-    , DFAReportingAccountPermissionsGet
+    DFAReportingAccountPermissionsGetResource,
+    newDFAReportingAccountPermissionsGet,
+    DFAReportingAccountPermissionsGet,
 
     -- ** dfareporting.accountPermissions.list
-    , DFAReportingAccountPermissionsListResource
-    , newDFAReportingAccountPermissionsList
-    , DFAReportingAccountPermissionsList
+    DFAReportingAccountPermissionsListResource,
+    newDFAReportingAccountPermissionsList,
+    DFAReportingAccountPermissionsList,
 
     -- ** dfareporting.accountUserProfiles.get
-    , DFAReportingAccountUserProfilesGetResource
-    , newDFAReportingAccountUserProfilesGet
-    , DFAReportingAccountUserProfilesGet
+    DFAReportingAccountUserProfilesGetResource,
+    newDFAReportingAccountUserProfilesGet,
+    DFAReportingAccountUserProfilesGet,
 
     -- ** dfareporting.accountUserProfiles.insert
-    , DFAReportingAccountUserProfilesInsertResource
-    , newDFAReportingAccountUserProfilesInsert
-    , DFAReportingAccountUserProfilesInsert
+    DFAReportingAccountUserProfilesInsertResource,
+    newDFAReportingAccountUserProfilesInsert,
+    DFAReportingAccountUserProfilesInsert,
 
     -- ** dfareporting.accountUserProfiles.list
-    , DFAReportingAccountUserProfilesListResource
-    , newDFAReportingAccountUserProfilesList
-    , DFAReportingAccountUserProfilesList
+    DFAReportingAccountUserProfilesListResource,
+    newDFAReportingAccountUserProfilesList,
+    DFAReportingAccountUserProfilesList,
 
     -- ** dfareporting.accountUserProfiles.patch
-    , DFAReportingAccountUserProfilesPatchResource
-    , newDFAReportingAccountUserProfilesPatch
-    , DFAReportingAccountUserProfilesPatch
+    DFAReportingAccountUserProfilesPatchResource,
+    newDFAReportingAccountUserProfilesPatch,
+    DFAReportingAccountUserProfilesPatch,
 
     -- ** dfareporting.accountUserProfiles.update
-    , DFAReportingAccountUserProfilesUpdateResource
-    , newDFAReportingAccountUserProfilesUpdate
-    , DFAReportingAccountUserProfilesUpdate
+    DFAReportingAccountUserProfilesUpdateResource,
+    newDFAReportingAccountUserProfilesUpdate,
+    DFAReportingAccountUserProfilesUpdate,
 
     -- ** dfareporting.accounts.get
-    , DFAReportingAccountsGetResource
-    , newDFAReportingAccountsGet
-    , DFAReportingAccountsGet
+    DFAReportingAccountsGetResource,
+    newDFAReportingAccountsGet,
+    DFAReportingAccountsGet,
 
     -- ** dfareporting.accounts.list
-    , DFAReportingAccountsListResource
-    , newDFAReportingAccountsList
-    , DFAReportingAccountsList
+    DFAReportingAccountsListResource,
+    newDFAReportingAccountsList,
+    DFAReportingAccountsList,
 
     -- ** dfareporting.accounts.patch
-    , DFAReportingAccountsPatchResource
-    , newDFAReportingAccountsPatch
-    , DFAReportingAccountsPatch
+    DFAReportingAccountsPatchResource,
+    newDFAReportingAccountsPatch,
+    DFAReportingAccountsPatch,
 
     -- ** dfareporting.accounts.update
-    , DFAReportingAccountsUpdateResource
-    , newDFAReportingAccountsUpdate
-    , DFAReportingAccountsUpdate
+    DFAReportingAccountsUpdateResource,
+    newDFAReportingAccountsUpdate,
+    DFAReportingAccountsUpdate,
 
     -- ** dfareporting.ads.get
-    , DFAReportingAdsGetResource
-    , newDFAReportingAdsGet
-    , DFAReportingAdsGet
+    DFAReportingAdsGetResource,
+    newDFAReportingAdsGet,
+    DFAReportingAdsGet,
 
     -- ** dfareporting.ads.insert
-    , DFAReportingAdsInsertResource
-    , newDFAReportingAdsInsert
-    , DFAReportingAdsInsert
+    DFAReportingAdsInsertResource,
+    newDFAReportingAdsInsert,
+    DFAReportingAdsInsert,
 
     -- ** dfareporting.ads.list
-    , DFAReportingAdsListResource
-    , newDFAReportingAdsList
-    , DFAReportingAdsList
+    DFAReportingAdsListResource,
+    newDFAReportingAdsList,
+    DFAReportingAdsList,
 
     -- ** dfareporting.ads.patch
-    , DFAReportingAdsPatchResource
-    , newDFAReportingAdsPatch
-    , DFAReportingAdsPatch
+    DFAReportingAdsPatchResource,
+    newDFAReportingAdsPatch,
+    DFAReportingAdsPatch,
 
     -- ** dfareporting.ads.update
-    , DFAReportingAdsUpdateResource
-    , newDFAReportingAdsUpdate
-    , DFAReportingAdsUpdate
+    DFAReportingAdsUpdateResource,
+    newDFAReportingAdsUpdate,
+    DFAReportingAdsUpdate,
 
     -- ** dfareporting.advertiserGroups.delete
-    , DFAReportingAdvertiserGroupsDeleteResource
-    , newDFAReportingAdvertiserGroupsDelete
-    , DFAReportingAdvertiserGroupsDelete
+    DFAReportingAdvertiserGroupsDeleteResource,
+    newDFAReportingAdvertiserGroupsDelete,
+    DFAReportingAdvertiserGroupsDelete,
 
     -- ** dfareporting.advertiserGroups.get
-    , DFAReportingAdvertiserGroupsGetResource
-    , newDFAReportingAdvertiserGroupsGet
-    , DFAReportingAdvertiserGroupsGet
+    DFAReportingAdvertiserGroupsGetResource,
+    newDFAReportingAdvertiserGroupsGet,
+    DFAReportingAdvertiserGroupsGet,
 
     -- ** dfareporting.advertiserGroups.insert
-    , DFAReportingAdvertiserGroupsInsertResource
-    , newDFAReportingAdvertiserGroupsInsert
-    , DFAReportingAdvertiserGroupsInsert
+    DFAReportingAdvertiserGroupsInsertResource,
+    newDFAReportingAdvertiserGroupsInsert,
+    DFAReportingAdvertiserGroupsInsert,
 
     -- ** dfareporting.advertiserGroups.list
-    , DFAReportingAdvertiserGroupsListResource
-    , newDFAReportingAdvertiserGroupsList
-    , DFAReportingAdvertiserGroupsList
+    DFAReportingAdvertiserGroupsListResource,
+    newDFAReportingAdvertiserGroupsList,
+    DFAReportingAdvertiserGroupsList,
 
     -- ** dfareporting.advertiserGroups.patch
-    , DFAReportingAdvertiserGroupsPatchResource
-    , newDFAReportingAdvertiserGroupsPatch
-    , DFAReportingAdvertiserGroupsPatch
+    DFAReportingAdvertiserGroupsPatchResource,
+    newDFAReportingAdvertiserGroupsPatch,
+    DFAReportingAdvertiserGroupsPatch,
 
     -- ** dfareporting.advertiserGroups.update
-    , DFAReportingAdvertiserGroupsUpdateResource
-    , newDFAReportingAdvertiserGroupsUpdate
-    , DFAReportingAdvertiserGroupsUpdate
+    DFAReportingAdvertiserGroupsUpdateResource,
+    newDFAReportingAdvertiserGroupsUpdate,
+    DFAReportingAdvertiserGroupsUpdate,
 
     -- ** dfareporting.advertiserLandingPages.get
-    , DFAReportingAdvertiserLandingPagesGetResource
-    , newDFAReportingAdvertiserLandingPagesGet
-    , DFAReportingAdvertiserLandingPagesGet
+    DFAReportingAdvertiserLandingPagesGetResource,
+    newDFAReportingAdvertiserLandingPagesGet,
+    DFAReportingAdvertiserLandingPagesGet,
 
     -- ** dfareporting.advertiserLandingPages.insert
-    , DFAReportingAdvertiserLandingPagesInsertResource
-    , newDFAReportingAdvertiserLandingPagesInsert
-    , DFAReportingAdvertiserLandingPagesInsert
+    DFAReportingAdvertiserLandingPagesInsertResource,
+    newDFAReportingAdvertiserLandingPagesInsert,
+    DFAReportingAdvertiserLandingPagesInsert,
 
     -- ** dfareporting.advertiserLandingPages.list
-    , DFAReportingAdvertiserLandingPagesListResource
-    , newDFAReportingAdvertiserLandingPagesList
-    , DFAReportingAdvertiserLandingPagesList
+    DFAReportingAdvertiserLandingPagesListResource,
+    newDFAReportingAdvertiserLandingPagesList,
+    DFAReportingAdvertiserLandingPagesList,
 
     -- ** dfareporting.advertiserLandingPages.patch
-    , DFAReportingAdvertiserLandingPagesPatchResource
-    , newDFAReportingAdvertiserLandingPagesPatch
-    , DFAReportingAdvertiserLandingPagesPatch
+    DFAReportingAdvertiserLandingPagesPatchResource,
+    newDFAReportingAdvertiserLandingPagesPatch,
+    DFAReportingAdvertiserLandingPagesPatch,
 
     -- ** dfareporting.advertiserLandingPages.update
-    , DFAReportingAdvertiserLandingPagesUpdateResource
-    , newDFAReportingAdvertiserLandingPagesUpdate
-    , DFAReportingAdvertiserLandingPagesUpdate
+    DFAReportingAdvertiserLandingPagesUpdateResource,
+    newDFAReportingAdvertiserLandingPagesUpdate,
+    DFAReportingAdvertiserLandingPagesUpdate,
 
     -- ** dfareporting.advertisers.get
-    , DFAReportingAdvertisersGetResource
-    , newDFAReportingAdvertisersGet
-    , DFAReportingAdvertisersGet
+    DFAReportingAdvertisersGetResource,
+    newDFAReportingAdvertisersGet,
+    DFAReportingAdvertisersGet,
 
     -- ** dfareporting.advertisers.insert
-    , DFAReportingAdvertisersInsertResource
-    , newDFAReportingAdvertisersInsert
-    , DFAReportingAdvertisersInsert
+    DFAReportingAdvertisersInsertResource,
+    newDFAReportingAdvertisersInsert,
+    DFAReportingAdvertisersInsert,
 
     -- ** dfareporting.advertisers.list
-    , DFAReportingAdvertisersListResource
-    , newDFAReportingAdvertisersList
-    , DFAReportingAdvertisersList
+    DFAReportingAdvertisersListResource,
+    newDFAReportingAdvertisersList,
+    DFAReportingAdvertisersList,
 
     -- ** dfareporting.advertisers.patch
-    , DFAReportingAdvertisersPatchResource
-    , newDFAReportingAdvertisersPatch
-    , DFAReportingAdvertisersPatch
+    DFAReportingAdvertisersPatchResource,
+    newDFAReportingAdvertisersPatch,
+    DFAReportingAdvertisersPatch,
 
     -- ** dfareporting.advertisers.update
-    , DFAReportingAdvertisersUpdateResource
-    , newDFAReportingAdvertisersUpdate
-    , DFAReportingAdvertisersUpdate
+    DFAReportingAdvertisersUpdateResource,
+    newDFAReportingAdvertisersUpdate,
+    DFAReportingAdvertisersUpdate,
 
     -- ** dfareporting.browsers.list
-    , DFAReportingBrowsersListResource
-    , newDFAReportingBrowsersList
-    , DFAReportingBrowsersList
+    DFAReportingBrowsersListResource,
+    newDFAReportingBrowsersList,
+    DFAReportingBrowsersList,
 
     -- ** dfareporting.campaignCreativeAssociations.insert
-    , DFAReportingCampaignCreativeAssociationsInsertResource
-    , newDFAReportingCampaignCreativeAssociationsInsert
-    , DFAReportingCampaignCreativeAssociationsInsert
+    DFAReportingCampaignCreativeAssociationsInsertResource,
+    newDFAReportingCampaignCreativeAssociationsInsert,
+    DFAReportingCampaignCreativeAssociationsInsert,
 
     -- ** dfareporting.campaignCreativeAssociations.list
-    , DFAReportingCampaignCreativeAssociationsListResource
-    , newDFAReportingCampaignCreativeAssociationsList
-    , DFAReportingCampaignCreativeAssociationsList
+    DFAReportingCampaignCreativeAssociationsListResource,
+    newDFAReportingCampaignCreativeAssociationsList,
+    DFAReportingCampaignCreativeAssociationsList,
 
     -- ** dfareporting.campaigns.get
-    , DFAReportingCampaignsGetResource
-    , newDFAReportingCampaignsGet
-    , DFAReportingCampaignsGet
+    DFAReportingCampaignsGetResource,
+    newDFAReportingCampaignsGet,
+    DFAReportingCampaignsGet,
 
     -- ** dfareporting.campaigns.insert
-    , DFAReportingCampaignsInsertResource
-    , newDFAReportingCampaignsInsert
-    , DFAReportingCampaignsInsert
+    DFAReportingCampaignsInsertResource,
+    newDFAReportingCampaignsInsert,
+    DFAReportingCampaignsInsert,
 
     -- ** dfareporting.campaigns.list
-    , DFAReportingCampaignsListResource
-    , newDFAReportingCampaignsList
-    , DFAReportingCampaignsList
+    DFAReportingCampaignsListResource,
+    newDFAReportingCampaignsList,
+    DFAReportingCampaignsList,
 
     -- ** dfareporting.campaigns.patch
-    , DFAReportingCampaignsPatchResource
-    , newDFAReportingCampaignsPatch
-    , DFAReportingCampaignsPatch
+    DFAReportingCampaignsPatchResource,
+    newDFAReportingCampaignsPatch,
+    DFAReportingCampaignsPatch,
 
     -- ** dfareporting.campaigns.update
-    , DFAReportingCampaignsUpdateResource
-    , newDFAReportingCampaignsUpdate
-    , DFAReportingCampaignsUpdate
+    DFAReportingCampaignsUpdateResource,
+    newDFAReportingCampaignsUpdate,
+    DFAReportingCampaignsUpdate,
 
     -- ** dfareporting.changeLogs.get
-    , DFAReportingChangeLogsGetResource
-    , newDFAReportingChangeLogsGet
-    , DFAReportingChangeLogsGet
+    DFAReportingChangeLogsGetResource,
+    newDFAReportingChangeLogsGet,
+    DFAReportingChangeLogsGet,
 
     -- ** dfareporting.changeLogs.list
-    , DFAReportingChangeLogsListResource
-    , newDFAReportingChangeLogsList
-    , DFAReportingChangeLogsList
+    DFAReportingChangeLogsListResource,
+    newDFAReportingChangeLogsList,
+    DFAReportingChangeLogsList,
 
     -- ** dfareporting.cities.list
-    , DFAReportingCitiesListResource
-    , newDFAReportingCitiesList
-    , DFAReportingCitiesList
+    DFAReportingCitiesListResource,
+    newDFAReportingCitiesList,
+    DFAReportingCitiesList,
 
     -- ** dfareporting.connectionTypes.get
-    , DFAReportingConnectionTypesGetResource
-    , newDFAReportingConnectionTypesGet
-    , DFAReportingConnectionTypesGet
+    DFAReportingConnectionTypesGetResource,
+    newDFAReportingConnectionTypesGet,
+    DFAReportingConnectionTypesGet,
 
     -- ** dfareporting.connectionTypes.list
-    , DFAReportingConnectionTypesListResource
-    , newDFAReportingConnectionTypesList
-    , DFAReportingConnectionTypesList
+    DFAReportingConnectionTypesListResource,
+    newDFAReportingConnectionTypesList,
+    DFAReportingConnectionTypesList,
 
     -- ** dfareporting.contentCategories.delete
-    , DFAReportingContentCategoriesDeleteResource
-    , newDFAReportingContentCategoriesDelete
-    , DFAReportingContentCategoriesDelete
+    DFAReportingContentCategoriesDeleteResource,
+    newDFAReportingContentCategoriesDelete,
+    DFAReportingContentCategoriesDelete,
 
     -- ** dfareporting.contentCategories.get
-    , DFAReportingContentCategoriesGetResource
-    , newDFAReportingContentCategoriesGet
-    , DFAReportingContentCategoriesGet
+    DFAReportingContentCategoriesGetResource,
+    newDFAReportingContentCategoriesGet,
+    DFAReportingContentCategoriesGet,
 
     -- ** dfareporting.contentCategories.insert
-    , DFAReportingContentCategoriesInsertResource
-    , newDFAReportingContentCategoriesInsert
-    , DFAReportingContentCategoriesInsert
+    DFAReportingContentCategoriesInsertResource,
+    newDFAReportingContentCategoriesInsert,
+    DFAReportingContentCategoriesInsert,
 
     -- ** dfareporting.contentCategories.list
-    , DFAReportingContentCategoriesListResource
-    , newDFAReportingContentCategoriesList
-    , DFAReportingContentCategoriesList
+    DFAReportingContentCategoriesListResource,
+    newDFAReportingContentCategoriesList,
+    DFAReportingContentCategoriesList,
 
     -- ** dfareporting.contentCategories.patch
-    , DFAReportingContentCategoriesPatchResource
-    , newDFAReportingContentCategoriesPatch
-    , DFAReportingContentCategoriesPatch
+    DFAReportingContentCategoriesPatchResource,
+    newDFAReportingContentCategoriesPatch,
+    DFAReportingContentCategoriesPatch,
 
     -- ** dfareporting.contentCategories.update
-    , DFAReportingContentCategoriesUpdateResource
-    , newDFAReportingContentCategoriesUpdate
-    , DFAReportingContentCategoriesUpdate
+    DFAReportingContentCategoriesUpdateResource,
+    newDFAReportingContentCategoriesUpdate,
+    DFAReportingContentCategoriesUpdate,
 
     -- ** dfareporting.conversions.batchinsert
-    , DFAReportingConversionsBatchinsertResource
-    , newDFAReportingConversionsBatchinsert
-    , DFAReportingConversionsBatchinsert
+    DFAReportingConversionsBatchinsertResource,
+    newDFAReportingConversionsBatchinsert,
+    DFAReportingConversionsBatchinsert,
 
     -- ** dfareporting.conversions.batchupdate
-    , DFAReportingConversionsBatchupdateResource
-    , newDFAReportingConversionsBatchupdate
-    , DFAReportingConversionsBatchupdate
+    DFAReportingConversionsBatchupdateResource,
+    newDFAReportingConversionsBatchupdate,
+    DFAReportingConversionsBatchupdate,
 
     -- ** dfareporting.countries.get
-    , DFAReportingCountriesGetResource
-    , newDFAReportingCountriesGet
-    , DFAReportingCountriesGet
+    DFAReportingCountriesGetResource,
+    newDFAReportingCountriesGet,
+    DFAReportingCountriesGet,
 
     -- ** dfareporting.countries.list
-    , DFAReportingCountriesListResource
-    , newDFAReportingCountriesList
-    , DFAReportingCountriesList
+    DFAReportingCountriesListResource,
+    newDFAReportingCountriesList,
+    DFAReportingCountriesList,
 
     -- ** dfareporting.creativeAssets.insert
-    , DFAReportingCreativeAssetsInsertResource
-    , newDFAReportingCreativeAssetsInsert
-    , DFAReportingCreativeAssetsInsert
+    DFAReportingCreativeAssetsInsertResource,
+    newDFAReportingCreativeAssetsInsert,
+    DFAReportingCreativeAssetsInsert,
 
     -- ** dfareporting.creativeFieldValues.delete
-    , DFAReportingCreativeFieldValuesDeleteResource
-    , newDFAReportingCreativeFieldValuesDelete
-    , DFAReportingCreativeFieldValuesDelete
+    DFAReportingCreativeFieldValuesDeleteResource,
+    newDFAReportingCreativeFieldValuesDelete,
+    DFAReportingCreativeFieldValuesDelete,
 
     -- ** dfareporting.creativeFieldValues.get
-    , DFAReportingCreativeFieldValuesGetResource
-    , newDFAReportingCreativeFieldValuesGet
-    , DFAReportingCreativeFieldValuesGet
+    DFAReportingCreativeFieldValuesGetResource,
+    newDFAReportingCreativeFieldValuesGet,
+    DFAReportingCreativeFieldValuesGet,
 
     -- ** dfareporting.creativeFieldValues.insert
-    , DFAReportingCreativeFieldValuesInsertResource
-    , newDFAReportingCreativeFieldValuesInsert
-    , DFAReportingCreativeFieldValuesInsert
+    DFAReportingCreativeFieldValuesInsertResource,
+    newDFAReportingCreativeFieldValuesInsert,
+    DFAReportingCreativeFieldValuesInsert,
 
     -- ** dfareporting.creativeFieldValues.list
-    , DFAReportingCreativeFieldValuesListResource
-    , newDFAReportingCreativeFieldValuesList
-    , DFAReportingCreativeFieldValuesList
+    DFAReportingCreativeFieldValuesListResource,
+    newDFAReportingCreativeFieldValuesList,
+    DFAReportingCreativeFieldValuesList,
 
     -- ** dfareporting.creativeFieldValues.patch
-    , DFAReportingCreativeFieldValuesPatchResource
-    , newDFAReportingCreativeFieldValuesPatch
-    , DFAReportingCreativeFieldValuesPatch
+    DFAReportingCreativeFieldValuesPatchResource,
+    newDFAReportingCreativeFieldValuesPatch,
+    DFAReportingCreativeFieldValuesPatch,
 
     -- ** dfareporting.creativeFieldValues.update
-    , DFAReportingCreativeFieldValuesUpdateResource
-    , newDFAReportingCreativeFieldValuesUpdate
-    , DFAReportingCreativeFieldValuesUpdate
+    DFAReportingCreativeFieldValuesUpdateResource,
+    newDFAReportingCreativeFieldValuesUpdate,
+    DFAReportingCreativeFieldValuesUpdate,
 
     -- ** dfareporting.creativeFields.delete
-    , DFAReportingCreativeFieldsDeleteResource
-    , newDFAReportingCreativeFieldsDelete
-    , DFAReportingCreativeFieldsDelete
+    DFAReportingCreativeFieldsDeleteResource,
+    newDFAReportingCreativeFieldsDelete,
+    DFAReportingCreativeFieldsDelete,
 
     -- ** dfareporting.creativeFields.get
-    , DFAReportingCreativeFieldsGetResource
-    , newDFAReportingCreativeFieldsGet
-    , DFAReportingCreativeFieldsGet
+    DFAReportingCreativeFieldsGetResource,
+    newDFAReportingCreativeFieldsGet,
+    DFAReportingCreativeFieldsGet,
 
     -- ** dfareporting.creativeFields.insert
-    , DFAReportingCreativeFieldsInsertResource
-    , newDFAReportingCreativeFieldsInsert
-    , DFAReportingCreativeFieldsInsert
+    DFAReportingCreativeFieldsInsertResource,
+    newDFAReportingCreativeFieldsInsert,
+    DFAReportingCreativeFieldsInsert,
 
     -- ** dfareporting.creativeFields.list
-    , DFAReportingCreativeFieldsListResource
-    , newDFAReportingCreativeFieldsList
-    , DFAReportingCreativeFieldsList
+    DFAReportingCreativeFieldsListResource,
+    newDFAReportingCreativeFieldsList,
+    DFAReportingCreativeFieldsList,
 
     -- ** dfareporting.creativeFields.patch
-    , DFAReportingCreativeFieldsPatchResource
-    , newDFAReportingCreativeFieldsPatch
-    , DFAReportingCreativeFieldsPatch
+    DFAReportingCreativeFieldsPatchResource,
+    newDFAReportingCreativeFieldsPatch,
+    DFAReportingCreativeFieldsPatch,
 
     -- ** dfareporting.creativeFields.update
-    , DFAReportingCreativeFieldsUpdateResource
-    , newDFAReportingCreativeFieldsUpdate
-    , DFAReportingCreativeFieldsUpdate
+    DFAReportingCreativeFieldsUpdateResource,
+    newDFAReportingCreativeFieldsUpdate,
+    DFAReportingCreativeFieldsUpdate,
 
     -- ** dfareporting.creativeGroups.get
-    , DFAReportingCreativeGroupsGetResource
-    , newDFAReportingCreativeGroupsGet
-    , DFAReportingCreativeGroupsGet
+    DFAReportingCreativeGroupsGetResource,
+    newDFAReportingCreativeGroupsGet,
+    DFAReportingCreativeGroupsGet,
 
     -- ** dfareporting.creativeGroups.insert
-    , DFAReportingCreativeGroupsInsertResource
-    , newDFAReportingCreativeGroupsInsert
-    , DFAReportingCreativeGroupsInsert
+    DFAReportingCreativeGroupsInsertResource,
+    newDFAReportingCreativeGroupsInsert,
+    DFAReportingCreativeGroupsInsert,
 
     -- ** dfareporting.creativeGroups.list
-    , DFAReportingCreativeGroupsListResource
-    , newDFAReportingCreativeGroupsList
-    , DFAReportingCreativeGroupsList
+    DFAReportingCreativeGroupsListResource,
+    newDFAReportingCreativeGroupsList,
+    DFAReportingCreativeGroupsList,
 
     -- ** dfareporting.creativeGroups.patch
-    , DFAReportingCreativeGroupsPatchResource
-    , newDFAReportingCreativeGroupsPatch
-    , DFAReportingCreativeGroupsPatch
+    DFAReportingCreativeGroupsPatchResource,
+    newDFAReportingCreativeGroupsPatch,
+    DFAReportingCreativeGroupsPatch,
 
     -- ** dfareporting.creativeGroups.update
-    , DFAReportingCreativeGroupsUpdateResource
-    , newDFAReportingCreativeGroupsUpdate
-    , DFAReportingCreativeGroupsUpdate
+    DFAReportingCreativeGroupsUpdateResource,
+    newDFAReportingCreativeGroupsUpdate,
+    DFAReportingCreativeGroupsUpdate,
 
     -- ** dfareporting.creatives.get
-    , DFAReportingCreativesGetResource
-    , newDFAReportingCreativesGet
-    , DFAReportingCreativesGet
+    DFAReportingCreativesGetResource,
+    newDFAReportingCreativesGet,
+    DFAReportingCreativesGet,
 
     -- ** dfareporting.creatives.insert
-    , DFAReportingCreativesInsertResource
-    , newDFAReportingCreativesInsert
-    , DFAReportingCreativesInsert
+    DFAReportingCreativesInsertResource,
+    newDFAReportingCreativesInsert,
+    DFAReportingCreativesInsert,
 
     -- ** dfareporting.creatives.list
-    , DFAReportingCreativesListResource
-    , newDFAReportingCreativesList
-    , DFAReportingCreativesList
+    DFAReportingCreativesListResource,
+    newDFAReportingCreativesList,
+    DFAReportingCreativesList,
 
     -- ** dfareporting.creatives.patch
-    , DFAReportingCreativesPatchResource
-    , newDFAReportingCreativesPatch
-    , DFAReportingCreativesPatch
+    DFAReportingCreativesPatchResource,
+    newDFAReportingCreativesPatch,
+    DFAReportingCreativesPatch,
 
     -- ** dfareporting.creatives.update
-    , DFAReportingCreativesUpdateResource
-    , newDFAReportingCreativesUpdate
-    , DFAReportingCreativesUpdate
+    DFAReportingCreativesUpdateResource,
+    newDFAReportingCreativesUpdate,
+    DFAReportingCreativesUpdate,
 
     -- ** dfareporting.dimensionValues.query
-    , DFAReportingDimensionValuesQueryResource
-    , newDFAReportingDimensionValuesQuery
-    , DFAReportingDimensionValuesQuery
+    DFAReportingDimensionValuesQueryResource,
+    newDFAReportingDimensionValuesQuery,
+    DFAReportingDimensionValuesQuery,
 
     -- ** dfareporting.directorySites.get
-    , DFAReportingDirectorySitesGetResource
-    , newDFAReportingDirectorySitesGet
-    , DFAReportingDirectorySitesGet
+    DFAReportingDirectorySitesGetResource,
+    newDFAReportingDirectorySitesGet,
+    DFAReportingDirectorySitesGet,
 
     -- ** dfareporting.directorySites.insert
-    , DFAReportingDirectorySitesInsertResource
-    , newDFAReportingDirectorySitesInsert
-    , DFAReportingDirectorySitesInsert
+    DFAReportingDirectorySitesInsertResource,
+    newDFAReportingDirectorySitesInsert,
+    DFAReportingDirectorySitesInsert,
 
     -- ** dfareporting.directorySites.list
-    , DFAReportingDirectorySitesListResource
-    , newDFAReportingDirectorySitesList
-    , DFAReportingDirectorySitesList
+    DFAReportingDirectorySitesListResource,
+    newDFAReportingDirectorySitesList,
+    DFAReportingDirectorySitesList,
 
     -- ** dfareporting.dynamicTargetingKeys.delete
-    , DFAReportingDynamicTargetingKeysDeleteResource
-    , newDFAReportingDynamicTargetingKeysDelete
-    , DFAReportingDynamicTargetingKeysDelete
+    DFAReportingDynamicTargetingKeysDeleteResource,
+    newDFAReportingDynamicTargetingKeysDelete,
+    DFAReportingDynamicTargetingKeysDelete,
 
     -- ** dfareporting.dynamicTargetingKeys.insert
-    , DFAReportingDynamicTargetingKeysInsertResource
-    , newDFAReportingDynamicTargetingKeysInsert
-    , DFAReportingDynamicTargetingKeysInsert
+    DFAReportingDynamicTargetingKeysInsertResource,
+    newDFAReportingDynamicTargetingKeysInsert,
+    DFAReportingDynamicTargetingKeysInsert,
 
     -- ** dfareporting.dynamicTargetingKeys.list
-    , DFAReportingDynamicTargetingKeysListResource
-    , newDFAReportingDynamicTargetingKeysList
-    , DFAReportingDynamicTargetingKeysList
+    DFAReportingDynamicTargetingKeysListResource,
+    newDFAReportingDynamicTargetingKeysList,
+    DFAReportingDynamicTargetingKeysList,
 
     -- ** dfareporting.eventTags.delete
-    , DFAReportingEventTagsDeleteResource
-    , newDFAReportingEventTagsDelete
-    , DFAReportingEventTagsDelete
+    DFAReportingEventTagsDeleteResource,
+    newDFAReportingEventTagsDelete,
+    DFAReportingEventTagsDelete,
 
     -- ** dfareporting.eventTags.get
-    , DFAReportingEventTagsGetResource
-    , newDFAReportingEventTagsGet
-    , DFAReportingEventTagsGet
+    DFAReportingEventTagsGetResource,
+    newDFAReportingEventTagsGet,
+    DFAReportingEventTagsGet,
 
     -- ** dfareporting.eventTags.insert
-    , DFAReportingEventTagsInsertResource
-    , newDFAReportingEventTagsInsert
-    , DFAReportingEventTagsInsert
+    DFAReportingEventTagsInsertResource,
+    newDFAReportingEventTagsInsert,
+    DFAReportingEventTagsInsert,
 
     -- ** dfareporting.eventTags.list
-    , DFAReportingEventTagsListResource
-    , newDFAReportingEventTagsList
-    , DFAReportingEventTagsList
+    DFAReportingEventTagsListResource,
+    newDFAReportingEventTagsList,
+    DFAReportingEventTagsList,
 
     -- ** dfareporting.eventTags.patch
-    , DFAReportingEventTagsPatchResource
-    , newDFAReportingEventTagsPatch
-    , DFAReportingEventTagsPatch
+    DFAReportingEventTagsPatchResource,
+    newDFAReportingEventTagsPatch,
+    DFAReportingEventTagsPatch,
 
     -- ** dfareporting.eventTags.update
-    , DFAReportingEventTagsUpdateResource
-    , newDFAReportingEventTagsUpdate
-    , DFAReportingEventTagsUpdate
+    DFAReportingEventTagsUpdateResource,
+    newDFAReportingEventTagsUpdate,
+    DFAReportingEventTagsUpdate,
 
     -- ** dfareporting.files.get
-    , DFAReportingFilesGetResource
-    , newDFAReportingFilesGet
-    , DFAReportingFilesGet
+    DFAReportingFilesGetResource,
+    newDFAReportingFilesGet,
+    DFAReportingFilesGet,
 
     -- ** dfareporting.files.list
-    , DFAReportingFilesListResource
-    , newDFAReportingFilesList
-    , DFAReportingFilesList
+    DFAReportingFilesListResource,
+    newDFAReportingFilesList,
+    DFAReportingFilesList,
 
     -- ** dfareporting.floodlightActivities.delete
-    , DFAReportingFloodlightActivitiesDeleteResource
-    , newDFAReportingFloodlightActivitiesDelete
-    , DFAReportingFloodlightActivitiesDelete
+    DFAReportingFloodlightActivitiesDeleteResource,
+    newDFAReportingFloodlightActivitiesDelete,
+    DFAReportingFloodlightActivitiesDelete,
 
     -- ** dfareporting.floodlightActivities.generatetag
-    , DFAReportingFloodlightActivitiesGeneratetagResource
-    , newDFAReportingFloodlightActivitiesGeneratetag
-    , DFAReportingFloodlightActivitiesGeneratetag
+    DFAReportingFloodlightActivitiesGeneratetagResource,
+    newDFAReportingFloodlightActivitiesGeneratetag,
+    DFAReportingFloodlightActivitiesGeneratetag,
 
     -- ** dfareporting.floodlightActivities.get
-    , DFAReportingFloodlightActivitiesGetResource
-    , newDFAReportingFloodlightActivitiesGet
-    , DFAReportingFloodlightActivitiesGet
+    DFAReportingFloodlightActivitiesGetResource,
+    newDFAReportingFloodlightActivitiesGet,
+    DFAReportingFloodlightActivitiesGet,
 
     -- ** dfareporting.floodlightActivities.insert
-    , DFAReportingFloodlightActivitiesInsertResource
-    , newDFAReportingFloodlightActivitiesInsert
-    , DFAReportingFloodlightActivitiesInsert
+    DFAReportingFloodlightActivitiesInsertResource,
+    newDFAReportingFloodlightActivitiesInsert,
+    DFAReportingFloodlightActivitiesInsert,
 
     -- ** dfareporting.floodlightActivities.list
-    , DFAReportingFloodlightActivitiesListResource
-    , newDFAReportingFloodlightActivitiesList
-    , DFAReportingFloodlightActivitiesList
+    DFAReportingFloodlightActivitiesListResource,
+    newDFAReportingFloodlightActivitiesList,
+    DFAReportingFloodlightActivitiesList,
 
     -- ** dfareporting.floodlightActivities.patch
-    , DFAReportingFloodlightActivitiesPatchResource
-    , newDFAReportingFloodlightActivitiesPatch
-    , DFAReportingFloodlightActivitiesPatch
+    DFAReportingFloodlightActivitiesPatchResource,
+    newDFAReportingFloodlightActivitiesPatch,
+    DFAReportingFloodlightActivitiesPatch,
 
     -- ** dfareporting.floodlightActivities.update
-    , DFAReportingFloodlightActivitiesUpdateResource
-    , newDFAReportingFloodlightActivitiesUpdate
-    , DFAReportingFloodlightActivitiesUpdate
+    DFAReportingFloodlightActivitiesUpdateResource,
+    newDFAReportingFloodlightActivitiesUpdate,
+    DFAReportingFloodlightActivitiesUpdate,
 
     -- ** dfareporting.floodlightActivityGroups.get
-    , DFAReportingFloodlightActivityGroupsGetResource
-    , newDFAReportingFloodlightActivityGroupsGet
-    , DFAReportingFloodlightActivityGroupsGet
+    DFAReportingFloodlightActivityGroupsGetResource,
+    newDFAReportingFloodlightActivityGroupsGet,
+    DFAReportingFloodlightActivityGroupsGet,
 
     -- ** dfareporting.floodlightActivityGroups.insert
-    , DFAReportingFloodlightActivityGroupsInsertResource
-    , newDFAReportingFloodlightActivityGroupsInsert
-    , DFAReportingFloodlightActivityGroupsInsert
+    DFAReportingFloodlightActivityGroupsInsertResource,
+    newDFAReportingFloodlightActivityGroupsInsert,
+    DFAReportingFloodlightActivityGroupsInsert,
 
     -- ** dfareporting.floodlightActivityGroups.list
-    , DFAReportingFloodlightActivityGroupsListResource
-    , newDFAReportingFloodlightActivityGroupsList
-    , DFAReportingFloodlightActivityGroupsList
+    DFAReportingFloodlightActivityGroupsListResource,
+    newDFAReportingFloodlightActivityGroupsList,
+    DFAReportingFloodlightActivityGroupsList,
 
     -- ** dfareporting.floodlightActivityGroups.patch
-    , DFAReportingFloodlightActivityGroupsPatchResource
-    , newDFAReportingFloodlightActivityGroupsPatch
-    , DFAReportingFloodlightActivityGroupsPatch
+    DFAReportingFloodlightActivityGroupsPatchResource,
+    newDFAReportingFloodlightActivityGroupsPatch,
+    DFAReportingFloodlightActivityGroupsPatch,
 
     -- ** dfareporting.floodlightActivityGroups.update
-    , DFAReportingFloodlightActivityGroupsUpdateResource
-    , newDFAReportingFloodlightActivityGroupsUpdate
-    , DFAReportingFloodlightActivityGroupsUpdate
+    DFAReportingFloodlightActivityGroupsUpdateResource,
+    newDFAReportingFloodlightActivityGroupsUpdate,
+    DFAReportingFloodlightActivityGroupsUpdate,
 
     -- ** dfareporting.floodlightConfigurations.get
-    , DFAReportingFloodlightConfigurationsGetResource
-    , newDFAReportingFloodlightConfigurationsGet
-    , DFAReportingFloodlightConfigurationsGet
+    DFAReportingFloodlightConfigurationsGetResource,
+    newDFAReportingFloodlightConfigurationsGet,
+    DFAReportingFloodlightConfigurationsGet,
 
     -- ** dfareporting.floodlightConfigurations.list
-    , DFAReportingFloodlightConfigurationsListResource
-    , newDFAReportingFloodlightConfigurationsList
-    , DFAReportingFloodlightConfigurationsList
+    DFAReportingFloodlightConfigurationsListResource,
+    newDFAReportingFloodlightConfigurationsList,
+    DFAReportingFloodlightConfigurationsList,
 
     -- ** dfareporting.floodlightConfigurations.patch
-    , DFAReportingFloodlightConfigurationsPatchResource
-    , newDFAReportingFloodlightConfigurationsPatch
-    , DFAReportingFloodlightConfigurationsPatch
+    DFAReportingFloodlightConfigurationsPatchResource,
+    newDFAReportingFloodlightConfigurationsPatch,
+    DFAReportingFloodlightConfigurationsPatch,
 
     -- ** dfareporting.floodlightConfigurations.update
-    , DFAReportingFloodlightConfigurationsUpdateResource
-    , newDFAReportingFloodlightConfigurationsUpdate
-    , DFAReportingFloodlightConfigurationsUpdate
+    DFAReportingFloodlightConfigurationsUpdateResource,
+    newDFAReportingFloodlightConfigurationsUpdate,
+    DFAReportingFloodlightConfigurationsUpdate,
 
     -- ** dfareporting.inventoryItems.get
-    , DFAReportingInventoryItemsGetResource
-    , newDFAReportingInventoryItemsGet
-    , DFAReportingInventoryItemsGet
+    DFAReportingInventoryItemsGetResource,
+    newDFAReportingInventoryItemsGet,
+    DFAReportingInventoryItemsGet,
 
     -- ** dfareporting.inventoryItems.list
-    , DFAReportingInventoryItemsListResource
-    , newDFAReportingInventoryItemsList
-    , DFAReportingInventoryItemsList
+    DFAReportingInventoryItemsListResource,
+    newDFAReportingInventoryItemsList,
+    DFAReportingInventoryItemsList,
 
     -- ** dfareporting.languages.list
-    , DFAReportingLanguagesListResource
-    , newDFAReportingLanguagesList
-    , DFAReportingLanguagesList
+    DFAReportingLanguagesListResource,
+    newDFAReportingLanguagesList,
+    DFAReportingLanguagesList,
 
     -- ** dfareporting.metros.list
-    , DFAReportingMetrosListResource
-    , newDFAReportingMetrosList
-    , DFAReportingMetrosList
+    DFAReportingMetrosListResource,
+    newDFAReportingMetrosList,
+    DFAReportingMetrosList,
 
     -- ** dfareporting.mobileApps.get
-    , DFAReportingMobileAppsGetResource
-    , newDFAReportingMobileAppsGet
-    , DFAReportingMobileAppsGet
+    DFAReportingMobileAppsGetResource,
+    newDFAReportingMobileAppsGet,
+    DFAReportingMobileAppsGet,
 
     -- ** dfareporting.mobileApps.list
-    , DFAReportingMobileAppsListResource
-    , newDFAReportingMobileAppsList
-    , DFAReportingMobileAppsList
+    DFAReportingMobileAppsListResource,
+    newDFAReportingMobileAppsList,
+    DFAReportingMobileAppsList,
 
     -- ** dfareporting.mobileCarriers.get
-    , DFAReportingMobileCarriersGetResource
-    , newDFAReportingMobileCarriersGet
-    , DFAReportingMobileCarriersGet
+    DFAReportingMobileCarriersGetResource,
+    newDFAReportingMobileCarriersGet,
+    DFAReportingMobileCarriersGet,
 
     -- ** dfareporting.mobileCarriers.list
-    , DFAReportingMobileCarriersListResource
-    , newDFAReportingMobileCarriersList
-    , DFAReportingMobileCarriersList
+    DFAReportingMobileCarriersListResource,
+    newDFAReportingMobileCarriersList,
+    DFAReportingMobileCarriersList,
 
     -- ** dfareporting.operatingSystemVersions.get
-    , DFAReportingOperatingSystemVersionsGetResource
-    , newDFAReportingOperatingSystemVersionsGet
-    , DFAReportingOperatingSystemVersionsGet
+    DFAReportingOperatingSystemVersionsGetResource,
+    newDFAReportingOperatingSystemVersionsGet,
+    DFAReportingOperatingSystemVersionsGet,
 
     -- ** dfareporting.operatingSystemVersions.list
-    , DFAReportingOperatingSystemVersionsListResource
-    , newDFAReportingOperatingSystemVersionsList
-    , DFAReportingOperatingSystemVersionsList
+    DFAReportingOperatingSystemVersionsListResource,
+    newDFAReportingOperatingSystemVersionsList,
+    DFAReportingOperatingSystemVersionsList,
 
     -- ** dfareporting.operatingSystems.get
-    , DFAReportingOperatingSystemsGetResource
-    , newDFAReportingOperatingSystemsGet
-    , DFAReportingOperatingSystemsGet
+    DFAReportingOperatingSystemsGetResource,
+    newDFAReportingOperatingSystemsGet,
+    DFAReportingOperatingSystemsGet,
 
     -- ** dfareporting.operatingSystems.list
-    , DFAReportingOperatingSystemsListResource
-    , newDFAReportingOperatingSystemsList
-    , DFAReportingOperatingSystemsList
+    DFAReportingOperatingSystemsListResource,
+    newDFAReportingOperatingSystemsList,
+    DFAReportingOperatingSystemsList,
 
     -- ** dfareporting.orderDocuments.get
-    , DFAReportingOrderDocumentsGetResource
-    , newDFAReportingOrderDocumentsGet
-    , DFAReportingOrderDocumentsGet
+    DFAReportingOrderDocumentsGetResource,
+    newDFAReportingOrderDocumentsGet,
+    DFAReportingOrderDocumentsGet,
 
     -- ** dfareporting.orderDocuments.list
-    , DFAReportingOrderDocumentsListResource
-    , newDFAReportingOrderDocumentsList
-    , DFAReportingOrderDocumentsList
+    DFAReportingOrderDocumentsListResource,
+    newDFAReportingOrderDocumentsList,
+    DFAReportingOrderDocumentsList,
 
     -- ** dfareporting.orders.get
-    , DFAReportingOrdersGetResource
-    , newDFAReportingOrdersGet
-    , DFAReportingOrdersGet
+    DFAReportingOrdersGetResource,
+    newDFAReportingOrdersGet,
+    DFAReportingOrdersGet,
 
     -- ** dfareporting.orders.list
-    , DFAReportingOrdersListResource
-    , newDFAReportingOrdersList
-    , DFAReportingOrdersList
+    DFAReportingOrdersListResource,
+    newDFAReportingOrdersList,
+    DFAReportingOrdersList,
 
     -- ** dfareporting.placementGroups.get
-    , DFAReportingPlacementGroupsGetResource
-    , newDFAReportingPlacementGroupsGet
-    , DFAReportingPlacementGroupsGet
+    DFAReportingPlacementGroupsGetResource,
+    newDFAReportingPlacementGroupsGet,
+    DFAReportingPlacementGroupsGet,
 
     -- ** dfareporting.placementGroups.insert
-    , DFAReportingPlacementGroupsInsertResource
-    , newDFAReportingPlacementGroupsInsert
-    , DFAReportingPlacementGroupsInsert
+    DFAReportingPlacementGroupsInsertResource,
+    newDFAReportingPlacementGroupsInsert,
+    DFAReportingPlacementGroupsInsert,
 
     -- ** dfareporting.placementGroups.list
-    , DFAReportingPlacementGroupsListResource
-    , newDFAReportingPlacementGroupsList
-    , DFAReportingPlacementGroupsList
+    DFAReportingPlacementGroupsListResource,
+    newDFAReportingPlacementGroupsList,
+    DFAReportingPlacementGroupsList,
 
     -- ** dfareporting.placementGroups.patch
-    , DFAReportingPlacementGroupsPatchResource
-    , newDFAReportingPlacementGroupsPatch
-    , DFAReportingPlacementGroupsPatch
+    DFAReportingPlacementGroupsPatchResource,
+    newDFAReportingPlacementGroupsPatch,
+    DFAReportingPlacementGroupsPatch,
 
     -- ** dfareporting.placementGroups.update
-    , DFAReportingPlacementGroupsUpdateResource
-    , newDFAReportingPlacementGroupsUpdate
-    , DFAReportingPlacementGroupsUpdate
+    DFAReportingPlacementGroupsUpdateResource,
+    newDFAReportingPlacementGroupsUpdate,
+    DFAReportingPlacementGroupsUpdate,
 
     -- ** dfareporting.placementStrategies.delete
-    , DFAReportingPlacementStrategiesDeleteResource
-    , newDFAReportingPlacementStrategiesDelete
-    , DFAReportingPlacementStrategiesDelete
+    DFAReportingPlacementStrategiesDeleteResource,
+    newDFAReportingPlacementStrategiesDelete,
+    DFAReportingPlacementStrategiesDelete,
 
     -- ** dfareporting.placementStrategies.get
-    , DFAReportingPlacementStrategiesGetResource
-    , newDFAReportingPlacementStrategiesGet
-    , DFAReportingPlacementStrategiesGet
+    DFAReportingPlacementStrategiesGetResource,
+    newDFAReportingPlacementStrategiesGet,
+    DFAReportingPlacementStrategiesGet,
 
     -- ** dfareporting.placementStrategies.insert
-    , DFAReportingPlacementStrategiesInsertResource
-    , newDFAReportingPlacementStrategiesInsert
-    , DFAReportingPlacementStrategiesInsert
+    DFAReportingPlacementStrategiesInsertResource,
+    newDFAReportingPlacementStrategiesInsert,
+    DFAReportingPlacementStrategiesInsert,
 
     -- ** dfareporting.placementStrategies.list
-    , DFAReportingPlacementStrategiesListResource
-    , newDFAReportingPlacementStrategiesList
-    , DFAReportingPlacementStrategiesList
+    DFAReportingPlacementStrategiesListResource,
+    newDFAReportingPlacementStrategiesList,
+    DFAReportingPlacementStrategiesList,
 
     -- ** dfareporting.placementStrategies.patch
-    , DFAReportingPlacementStrategiesPatchResource
-    , newDFAReportingPlacementStrategiesPatch
-    , DFAReportingPlacementStrategiesPatch
+    DFAReportingPlacementStrategiesPatchResource,
+    newDFAReportingPlacementStrategiesPatch,
+    DFAReportingPlacementStrategiesPatch,
 
     -- ** dfareporting.placementStrategies.update
-    , DFAReportingPlacementStrategiesUpdateResource
-    , newDFAReportingPlacementStrategiesUpdate
-    , DFAReportingPlacementStrategiesUpdate
+    DFAReportingPlacementStrategiesUpdateResource,
+    newDFAReportingPlacementStrategiesUpdate,
+    DFAReportingPlacementStrategiesUpdate,
 
     -- ** dfareporting.placements.generatetags
-    , DFAReportingPlacementsGeneratetagsResource
-    , newDFAReportingPlacementsGeneratetags
-    , DFAReportingPlacementsGeneratetags
+    DFAReportingPlacementsGeneratetagsResource,
+    newDFAReportingPlacementsGeneratetags,
+    DFAReportingPlacementsGeneratetags,
 
     -- ** dfareporting.placements.get
-    , DFAReportingPlacementsGetResource
-    , newDFAReportingPlacementsGet
-    , DFAReportingPlacementsGet
+    DFAReportingPlacementsGetResource,
+    newDFAReportingPlacementsGet,
+    DFAReportingPlacementsGet,
 
     -- ** dfareporting.placements.insert
-    , DFAReportingPlacementsInsertResource
-    , newDFAReportingPlacementsInsert
-    , DFAReportingPlacementsInsert
+    DFAReportingPlacementsInsertResource,
+    newDFAReportingPlacementsInsert,
+    DFAReportingPlacementsInsert,
 
     -- ** dfareporting.placements.list
-    , DFAReportingPlacementsListResource
-    , newDFAReportingPlacementsList
-    , DFAReportingPlacementsList
+    DFAReportingPlacementsListResource,
+    newDFAReportingPlacementsList,
+    DFAReportingPlacementsList,
 
     -- ** dfareporting.placements.patch
-    , DFAReportingPlacementsPatchResource
-    , newDFAReportingPlacementsPatch
-    , DFAReportingPlacementsPatch
+    DFAReportingPlacementsPatchResource,
+    newDFAReportingPlacementsPatch,
+    DFAReportingPlacementsPatch,
 
     -- ** dfareporting.placements.update
-    , DFAReportingPlacementsUpdateResource
-    , newDFAReportingPlacementsUpdate
-    , DFAReportingPlacementsUpdate
+    DFAReportingPlacementsUpdateResource,
+    newDFAReportingPlacementsUpdate,
+    DFAReportingPlacementsUpdate,
 
     -- ** dfareporting.platformTypes.get
-    , DFAReportingPlatformTypesGetResource
-    , newDFAReportingPlatformTypesGet
-    , DFAReportingPlatformTypesGet
+    DFAReportingPlatformTypesGetResource,
+    newDFAReportingPlatformTypesGet,
+    DFAReportingPlatformTypesGet,
 
     -- ** dfareporting.platformTypes.list
-    , DFAReportingPlatformTypesListResource
-    , newDFAReportingPlatformTypesList
-    , DFAReportingPlatformTypesList
+    DFAReportingPlatformTypesListResource,
+    newDFAReportingPlatformTypesList,
+    DFAReportingPlatformTypesList,
 
     -- ** dfareporting.postalCodes.get
-    , DFAReportingPostalCodesGetResource
-    , newDFAReportingPostalCodesGet
-    , DFAReportingPostalCodesGet
+    DFAReportingPostalCodesGetResource,
+    newDFAReportingPostalCodesGet,
+    DFAReportingPostalCodesGet,
 
     -- ** dfareporting.postalCodes.list
-    , DFAReportingPostalCodesListResource
-    , newDFAReportingPostalCodesList
-    , DFAReportingPostalCodesList
+    DFAReportingPostalCodesListResource,
+    newDFAReportingPostalCodesList,
+    DFAReportingPostalCodesList,
 
     -- ** dfareporting.projects.get
-    , DFAReportingProjectsGetResource
-    , newDFAReportingProjectsGet
-    , DFAReportingProjectsGet
+    DFAReportingProjectsGetResource,
+    newDFAReportingProjectsGet,
+    DFAReportingProjectsGet,
 
     -- ** dfareporting.projects.list
-    , DFAReportingProjectsListResource
-    , newDFAReportingProjectsList
-    , DFAReportingProjectsList
+    DFAReportingProjectsListResource,
+    newDFAReportingProjectsList,
+    DFAReportingProjectsList,
 
     -- ** dfareporting.regions.list
-    , DFAReportingRegionsListResource
-    , newDFAReportingRegionsList
-    , DFAReportingRegionsList
+    DFAReportingRegionsListResource,
+    newDFAReportingRegionsList,
+    DFAReportingRegionsList,
 
     -- ** dfareporting.remarketingListShares.get
-    , DFAReportingRemarketingListSharesGetResource
-    , newDFAReportingRemarketingListSharesGet
-    , DFAReportingRemarketingListSharesGet
+    DFAReportingRemarketingListSharesGetResource,
+    newDFAReportingRemarketingListSharesGet,
+    DFAReportingRemarketingListSharesGet,
 
     -- ** dfareporting.remarketingListShares.patch
-    , DFAReportingRemarketingListSharesPatchResource
-    , newDFAReportingRemarketingListSharesPatch
-    , DFAReportingRemarketingListSharesPatch
+    DFAReportingRemarketingListSharesPatchResource,
+    newDFAReportingRemarketingListSharesPatch,
+    DFAReportingRemarketingListSharesPatch,
 
     -- ** dfareporting.remarketingListShares.update
-    , DFAReportingRemarketingListSharesUpdateResource
-    , newDFAReportingRemarketingListSharesUpdate
-    , DFAReportingRemarketingListSharesUpdate
+    DFAReportingRemarketingListSharesUpdateResource,
+    newDFAReportingRemarketingListSharesUpdate,
+    DFAReportingRemarketingListSharesUpdate,
 
     -- ** dfareporting.remarketingLists.get
-    , DFAReportingRemarketingListsGetResource
-    , newDFAReportingRemarketingListsGet
-    , DFAReportingRemarketingListsGet
+    DFAReportingRemarketingListsGetResource,
+    newDFAReportingRemarketingListsGet,
+    DFAReportingRemarketingListsGet,
 
     -- ** dfareporting.remarketingLists.insert
-    , DFAReportingRemarketingListsInsertResource
-    , newDFAReportingRemarketingListsInsert
-    , DFAReportingRemarketingListsInsert
+    DFAReportingRemarketingListsInsertResource,
+    newDFAReportingRemarketingListsInsert,
+    DFAReportingRemarketingListsInsert,
 
     -- ** dfareporting.remarketingLists.list
-    , DFAReportingRemarketingListsListResource
-    , newDFAReportingRemarketingListsList
-    , DFAReportingRemarketingListsList
+    DFAReportingRemarketingListsListResource,
+    newDFAReportingRemarketingListsList,
+    DFAReportingRemarketingListsList,
 
     -- ** dfareporting.remarketingLists.patch
-    , DFAReportingRemarketingListsPatchResource
-    , newDFAReportingRemarketingListsPatch
-    , DFAReportingRemarketingListsPatch
+    DFAReportingRemarketingListsPatchResource,
+    newDFAReportingRemarketingListsPatch,
+    DFAReportingRemarketingListsPatch,
 
     -- ** dfareporting.remarketingLists.update
-    , DFAReportingRemarketingListsUpdateResource
-    , newDFAReportingRemarketingListsUpdate
-    , DFAReportingRemarketingListsUpdate
+    DFAReportingRemarketingListsUpdateResource,
+    newDFAReportingRemarketingListsUpdate,
+    DFAReportingRemarketingListsUpdate,
 
     -- ** dfareporting.reports.compatibleFields.query
-    , DFAReportingReportsCompatibleFieldsQueryResource
-    , newDFAReportingReportsCompatibleFieldsQuery
-    , DFAReportingReportsCompatibleFieldsQuery
+    DFAReportingReportsCompatibleFieldsQueryResource,
+    newDFAReportingReportsCompatibleFieldsQuery,
+    DFAReportingReportsCompatibleFieldsQuery,
 
     -- ** dfareporting.reports.delete
-    , DFAReportingReportsDeleteResource
-    , newDFAReportingReportsDelete
-    , DFAReportingReportsDelete
+    DFAReportingReportsDeleteResource,
+    newDFAReportingReportsDelete,
+    DFAReportingReportsDelete,
 
     -- ** dfareporting.reports.files.get
-    , DFAReportingReportsFilesGetResource
-    , newDFAReportingReportsFilesGet
-    , DFAReportingReportsFilesGet
+    DFAReportingReportsFilesGetResource,
+    newDFAReportingReportsFilesGet,
+    DFAReportingReportsFilesGet,
 
     -- ** dfareporting.reports.files.list
-    , DFAReportingReportsFilesListResource
-    , newDFAReportingReportsFilesList
-    , DFAReportingReportsFilesList
+    DFAReportingReportsFilesListResource,
+    newDFAReportingReportsFilesList,
+    DFAReportingReportsFilesList,
 
     -- ** dfareporting.reports.get
-    , DFAReportingReportsGetResource
-    , newDFAReportingReportsGet
-    , DFAReportingReportsGet
+    DFAReportingReportsGetResource,
+    newDFAReportingReportsGet,
+    DFAReportingReportsGet,
 
     -- ** dfareporting.reports.insert
-    , DFAReportingReportsInsertResource
-    , newDFAReportingReportsInsert
-    , DFAReportingReportsInsert
+    DFAReportingReportsInsertResource,
+    newDFAReportingReportsInsert,
+    DFAReportingReportsInsert,
 
     -- ** dfareporting.reports.list
-    , DFAReportingReportsListResource
-    , newDFAReportingReportsList
-    , DFAReportingReportsList
+    DFAReportingReportsListResource,
+    newDFAReportingReportsList,
+    DFAReportingReportsList,
 
     -- ** dfareporting.reports.patch
-    , DFAReportingReportsPatchResource
-    , newDFAReportingReportsPatch
-    , DFAReportingReportsPatch
+    DFAReportingReportsPatchResource,
+    newDFAReportingReportsPatch,
+    DFAReportingReportsPatch,
 
     -- ** dfareporting.reports.run
-    , DFAReportingReportsRunResource
-    , newDFAReportingReportsRun
-    , DFAReportingReportsRun
+    DFAReportingReportsRunResource,
+    newDFAReportingReportsRun,
+    DFAReportingReportsRun,
 
     -- ** dfareporting.reports.update
-    , DFAReportingReportsUpdateResource
-    , newDFAReportingReportsUpdate
-    , DFAReportingReportsUpdate
+    DFAReportingReportsUpdateResource,
+    newDFAReportingReportsUpdate,
+    DFAReportingReportsUpdate,
 
     -- ** dfareporting.sites.get
-    , DFAReportingSitesGetResource
-    , newDFAReportingSitesGet
-    , DFAReportingSitesGet
+    DFAReportingSitesGetResource,
+    newDFAReportingSitesGet,
+    DFAReportingSitesGet,
 
     -- ** dfareporting.sites.insert
-    , DFAReportingSitesInsertResource
-    , newDFAReportingSitesInsert
-    , DFAReportingSitesInsert
+    DFAReportingSitesInsertResource,
+    newDFAReportingSitesInsert,
+    DFAReportingSitesInsert,
 
     -- ** dfareporting.sites.list
-    , DFAReportingSitesListResource
-    , newDFAReportingSitesList
-    , DFAReportingSitesList
+    DFAReportingSitesListResource,
+    newDFAReportingSitesList,
+    DFAReportingSitesList,
 
     -- ** dfareporting.sites.patch
-    , DFAReportingSitesPatchResource
-    , newDFAReportingSitesPatch
-    , DFAReportingSitesPatch
+    DFAReportingSitesPatchResource,
+    newDFAReportingSitesPatch,
+    DFAReportingSitesPatch,
 
     -- ** dfareporting.sites.update
-    , DFAReportingSitesUpdateResource
-    , newDFAReportingSitesUpdate
-    , DFAReportingSitesUpdate
+    DFAReportingSitesUpdateResource,
+    newDFAReportingSitesUpdate,
+    DFAReportingSitesUpdate,
 
     -- ** dfareporting.sizes.get
-    , DFAReportingSizesGetResource
-    , newDFAReportingSizesGet
-    , DFAReportingSizesGet
+    DFAReportingSizesGetResource,
+    newDFAReportingSizesGet,
+    DFAReportingSizesGet,
 
     -- ** dfareporting.sizes.insert
-    , DFAReportingSizesInsertResource
-    , newDFAReportingSizesInsert
-    , DFAReportingSizesInsert
+    DFAReportingSizesInsertResource,
+    newDFAReportingSizesInsert,
+    DFAReportingSizesInsert,
 
     -- ** dfareporting.sizes.list
-    , DFAReportingSizesListResource
-    , newDFAReportingSizesList
-    , DFAReportingSizesList
+    DFAReportingSizesListResource,
+    newDFAReportingSizesList,
+    DFAReportingSizesList,
 
     -- ** dfareporting.subaccounts.get
-    , DFAReportingSubaccountsGetResource
-    , newDFAReportingSubaccountsGet
-    , DFAReportingSubaccountsGet
+    DFAReportingSubaccountsGetResource,
+    newDFAReportingSubaccountsGet,
+    DFAReportingSubaccountsGet,
 
     -- ** dfareporting.subaccounts.insert
-    , DFAReportingSubaccountsInsertResource
-    , newDFAReportingSubaccountsInsert
-    , DFAReportingSubaccountsInsert
+    DFAReportingSubaccountsInsertResource,
+    newDFAReportingSubaccountsInsert,
+    DFAReportingSubaccountsInsert,
 
     -- ** dfareporting.subaccounts.list
-    , DFAReportingSubaccountsListResource
-    , newDFAReportingSubaccountsList
-    , DFAReportingSubaccountsList
+    DFAReportingSubaccountsListResource,
+    newDFAReportingSubaccountsList,
+    DFAReportingSubaccountsList,
 
     -- ** dfareporting.subaccounts.patch
-    , DFAReportingSubaccountsPatchResource
-    , newDFAReportingSubaccountsPatch
-    , DFAReportingSubaccountsPatch
+    DFAReportingSubaccountsPatchResource,
+    newDFAReportingSubaccountsPatch,
+    DFAReportingSubaccountsPatch,
 
     -- ** dfareporting.subaccounts.update
-    , DFAReportingSubaccountsUpdateResource
-    , newDFAReportingSubaccountsUpdate
-    , DFAReportingSubaccountsUpdate
+    DFAReportingSubaccountsUpdateResource,
+    newDFAReportingSubaccountsUpdate,
+    DFAReportingSubaccountsUpdate,
 
     -- ** dfareporting.targetableRemarketingLists.get
-    , DFAReportingTargetableRemarketingListsGetResource
-    , newDFAReportingTargetableRemarketingListsGet
-    , DFAReportingTargetableRemarketingListsGet
+    DFAReportingTargetableRemarketingListsGetResource,
+    newDFAReportingTargetableRemarketingListsGet,
+    DFAReportingTargetableRemarketingListsGet,
 
     -- ** dfareporting.targetableRemarketingLists.list
-    , DFAReportingTargetableRemarketingListsListResource
-    , newDFAReportingTargetableRemarketingListsList
-    , DFAReportingTargetableRemarketingListsList
+    DFAReportingTargetableRemarketingListsListResource,
+    newDFAReportingTargetableRemarketingListsList,
+    DFAReportingTargetableRemarketingListsList,
 
     -- ** dfareporting.targetingTemplates.get
-    , DFAReportingTargetingTemplatesGetResource
-    , newDFAReportingTargetingTemplatesGet
-    , DFAReportingTargetingTemplatesGet
+    DFAReportingTargetingTemplatesGetResource,
+    newDFAReportingTargetingTemplatesGet,
+    DFAReportingTargetingTemplatesGet,
 
     -- ** dfareporting.targetingTemplates.insert
-    , DFAReportingTargetingTemplatesInsertResource
-    , newDFAReportingTargetingTemplatesInsert
-    , DFAReportingTargetingTemplatesInsert
+    DFAReportingTargetingTemplatesInsertResource,
+    newDFAReportingTargetingTemplatesInsert,
+    DFAReportingTargetingTemplatesInsert,
 
     -- ** dfareporting.targetingTemplates.list
-    , DFAReportingTargetingTemplatesListResource
-    , newDFAReportingTargetingTemplatesList
-    , DFAReportingTargetingTemplatesList
+    DFAReportingTargetingTemplatesListResource,
+    newDFAReportingTargetingTemplatesList,
+    DFAReportingTargetingTemplatesList,
 
     -- ** dfareporting.targetingTemplates.patch
-    , DFAReportingTargetingTemplatesPatchResource
-    , newDFAReportingTargetingTemplatesPatch
-    , DFAReportingTargetingTemplatesPatch
+    DFAReportingTargetingTemplatesPatchResource,
+    newDFAReportingTargetingTemplatesPatch,
+    DFAReportingTargetingTemplatesPatch,
 
     -- ** dfareporting.targetingTemplates.update
-    , DFAReportingTargetingTemplatesUpdateResource
-    , newDFAReportingTargetingTemplatesUpdate
-    , DFAReportingTargetingTemplatesUpdate
+    DFAReportingTargetingTemplatesUpdateResource,
+    newDFAReportingTargetingTemplatesUpdate,
+    DFAReportingTargetingTemplatesUpdate,
 
     -- ** dfareporting.userProfiles.get
-    , DFAReportingUserProfilesGetResource
-    , newDFAReportingUserProfilesGet
-    , DFAReportingUserProfilesGet
+    DFAReportingUserProfilesGetResource,
+    newDFAReportingUserProfilesGet,
+    DFAReportingUserProfilesGet,
 
     -- ** dfareporting.userProfiles.list
-    , DFAReportingUserProfilesListResource
-    , newDFAReportingUserProfilesList
-    , DFAReportingUserProfilesList
+    DFAReportingUserProfilesListResource,
+    newDFAReportingUserProfilesList,
+    DFAReportingUserProfilesList,
 
     -- ** dfareporting.userRolePermissionGroups.get
-    , DFAReportingUserRolePermissionGroupsGetResource
-    , newDFAReportingUserRolePermissionGroupsGet
-    , DFAReportingUserRolePermissionGroupsGet
+    DFAReportingUserRolePermissionGroupsGetResource,
+    newDFAReportingUserRolePermissionGroupsGet,
+    DFAReportingUserRolePermissionGroupsGet,
 
     -- ** dfareporting.userRolePermissionGroups.list
-    , DFAReportingUserRolePermissionGroupsListResource
-    , newDFAReportingUserRolePermissionGroupsList
-    , DFAReportingUserRolePermissionGroupsList
+    DFAReportingUserRolePermissionGroupsListResource,
+    newDFAReportingUserRolePermissionGroupsList,
+    DFAReportingUserRolePermissionGroupsList,
 
     -- ** dfareporting.userRolePermissions.get
-    , DFAReportingUserRolePermissionsGetResource
-    , newDFAReportingUserRolePermissionsGet
-    , DFAReportingUserRolePermissionsGet
+    DFAReportingUserRolePermissionsGetResource,
+    newDFAReportingUserRolePermissionsGet,
+    DFAReportingUserRolePermissionsGet,
 
     -- ** dfareporting.userRolePermissions.list
-    , DFAReportingUserRolePermissionsListResource
-    , newDFAReportingUserRolePermissionsList
-    , DFAReportingUserRolePermissionsList
+    DFAReportingUserRolePermissionsListResource,
+    newDFAReportingUserRolePermissionsList,
+    DFAReportingUserRolePermissionsList,
 
     -- ** dfareporting.userRoles.delete
-    , DFAReportingUserRolesDeleteResource
-    , newDFAReportingUserRolesDelete
-    , DFAReportingUserRolesDelete
+    DFAReportingUserRolesDeleteResource,
+    newDFAReportingUserRolesDelete,
+    DFAReportingUserRolesDelete,
 
     -- ** dfareporting.userRoles.get
-    , DFAReportingUserRolesGetResource
-    , newDFAReportingUserRolesGet
-    , DFAReportingUserRolesGet
+    DFAReportingUserRolesGetResource,
+    newDFAReportingUserRolesGet,
+    DFAReportingUserRolesGet,
 
     -- ** dfareporting.userRoles.insert
-    , DFAReportingUserRolesInsertResource
-    , newDFAReportingUserRolesInsert
-    , DFAReportingUserRolesInsert
+    DFAReportingUserRolesInsertResource,
+    newDFAReportingUserRolesInsert,
+    DFAReportingUserRolesInsert,
 
     -- ** dfareporting.userRoles.list
-    , DFAReportingUserRolesListResource
-    , newDFAReportingUserRolesList
-    , DFAReportingUserRolesList
+    DFAReportingUserRolesListResource,
+    newDFAReportingUserRolesList,
+    DFAReportingUserRolesList,
 
     -- ** dfareporting.userRoles.patch
-    , DFAReportingUserRolesPatchResource
-    , newDFAReportingUserRolesPatch
-    , DFAReportingUserRolesPatch
+    DFAReportingUserRolesPatchResource,
+    newDFAReportingUserRolesPatch,
+    DFAReportingUserRolesPatch,
 
     -- ** dfareporting.userRoles.update
-    , DFAReportingUserRolesUpdateResource
-    , newDFAReportingUserRolesUpdate
-    , DFAReportingUserRolesUpdate
+    DFAReportingUserRolesUpdateResource,
+    newDFAReportingUserRolesUpdate,
+    DFAReportingUserRolesUpdate,
 
     -- ** dfareporting.videoFormats.get
-    , DFAReportingVideoFormatsGetResource
-    , newDFAReportingVideoFormatsGet
-    , DFAReportingVideoFormatsGet
+    DFAReportingVideoFormatsGetResource,
+    newDFAReportingVideoFormatsGet,
+    DFAReportingVideoFormatsGet,
 
     -- ** dfareporting.videoFormats.list
-    , DFAReportingVideoFormatsListResource
-    , newDFAReportingVideoFormatsList
-    , DFAReportingVideoFormatsList
+    DFAReportingVideoFormatsListResource,
+    newDFAReportingVideoFormatsList,
+    DFAReportingVideoFormatsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Account_AccountProfile
-    , Account_AccountProfile (..)
+    Account_AccountProfile (..),
 
     -- ** Account_ActiveAdsLimitTier
-    , Account_ActiveAdsLimitTier (..)
+    Account_ActiveAdsLimitTier (..),
 
     -- ** AccountActiveAdSummary
-    , AccountActiveAdSummary (..)
-    , newAccountActiveAdSummary
+    AccountActiveAdSummary (..),
+    newAccountActiveAdSummary,
 
     -- ** AccountActiveAdSummary_ActiveAdsLimitTier
-    , AccountActiveAdSummary_ActiveAdsLimitTier (..)
+    AccountActiveAdSummary_ActiveAdsLimitTier (..),
 
     -- ** AccountPermission
-    , AccountPermission (..)
-    , newAccountPermission
+    AccountPermission (..),
+    newAccountPermission,
 
     -- ** AccountPermission_AccountProfilesItem
-    , AccountPermission_AccountProfilesItem (..)
+    AccountPermission_AccountProfilesItem (..),
 
     -- ** AccountPermission_Level
-    , AccountPermission_Level (..)
+    AccountPermission_Level (..),
 
     -- ** AccountPermissionGroup
-    , AccountPermissionGroup (..)
-    , newAccountPermissionGroup
+    AccountPermissionGroup (..),
+    newAccountPermissionGroup,
 
     -- ** AccountPermissionGroupsListResponse
-    , AccountPermissionGroupsListResponse (..)
-    , newAccountPermissionGroupsListResponse
+    AccountPermissionGroupsListResponse (..),
+    newAccountPermissionGroupsListResponse,
 
     -- ** AccountPermissionsListResponse
-    , AccountPermissionsListResponse (..)
-    , newAccountPermissionsListResponse
+    AccountPermissionsListResponse (..),
+    newAccountPermissionsListResponse,
 
     -- ** AccountUserProfile
-    , AccountUserProfile (..)
-    , newAccountUserProfile
+    AccountUserProfile (..),
+    newAccountUserProfile,
 
     -- ** AccountUserProfile_TraffickerType
-    , AccountUserProfile_TraffickerType (..)
+    AccountUserProfile_TraffickerType (..),
 
     -- ** AccountUserProfile_UserAccessType
-    , AccountUserProfile_UserAccessType (..)
+    AccountUserProfile_UserAccessType (..),
 
     -- ** AccountUserProfilesListResponse
-    , AccountUserProfilesListResponse (..)
-    , newAccountUserProfilesListResponse
+    AccountUserProfilesListResponse (..),
+    newAccountUserProfilesListResponse,
 
     -- ** AccountsListResponse
-    , AccountsListResponse (..)
-    , newAccountsListResponse
+    AccountsListResponse (..),
+    newAccountsListResponse,
 
     -- ** Activities
-    , Activities (..)
-    , newActivities
+    Activities (..),
+    newActivities,
 
     -- ** Ad
-    , Ad (..)
-    , newAd
+    Ad (..),
+    newAd,
 
     -- ** Ad_Compatibility
-    , Ad_Compatibility (..)
+    Ad_Compatibility (..),
 
     -- ** Ad_Type
-    , Ad_Type (..)
+    Ad_Type (..),
 
     -- ** AdBlockingConfiguration
-    , AdBlockingConfiguration (..)
-    , newAdBlockingConfiguration
+    AdBlockingConfiguration (..),
+    newAdBlockingConfiguration,
 
     -- ** AdSlot
-    , AdSlot (..)
-    , newAdSlot
+    AdSlot (..),
+    newAdSlot,
 
     -- ** AdSlot_Compatibility
-    , AdSlot_Compatibility (..)
+    AdSlot_Compatibility (..),
 
     -- ** AdSlot_PaymentSourceType
-    , AdSlot_PaymentSourceType (..)
+    AdSlot_PaymentSourceType (..),
 
     -- ** AdsListResponse
-    , AdsListResponse (..)
-    , newAdsListResponse
+    AdsListResponse (..),
+    newAdsListResponse,
 
     -- ** Advertiser
-    , Advertiser (..)
-    , newAdvertiser
+    Advertiser (..),
+    newAdvertiser,
 
     -- ** Advertiser_Status
-    , Advertiser_Status (..)
+    Advertiser_Status (..),
 
     -- ** AdvertiserGroup
-    , AdvertiserGroup (..)
-    , newAdvertiserGroup
+    AdvertiserGroup (..),
+    newAdvertiserGroup,
 
     -- ** AdvertiserGroupsListResponse
-    , AdvertiserGroupsListResponse (..)
-    , newAdvertiserGroupsListResponse
+    AdvertiserGroupsListResponse (..),
+    newAdvertiserGroupsListResponse,
 
     -- ** AdvertiserLandingPagesListResponse
-    , AdvertiserLandingPagesListResponse (..)
-    , newAdvertiserLandingPagesListResponse
+    AdvertiserLandingPagesListResponse (..),
+    newAdvertiserLandingPagesListResponse,
 
     -- ** AdvertisersListResponse
-    , AdvertisersListResponse (..)
-    , newAdvertisersListResponse
+    AdvertisersListResponse (..),
+    newAdvertisersListResponse,
 
     -- ** AudienceSegment
-    , AudienceSegment (..)
-    , newAudienceSegment
+    AudienceSegment (..),
+    newAudienceSegment,
 
     -- ** AudienceSegmentGroup
-    , AudienceSegmentGroup (..)
-    , newAudienceSegmentGroup
+    AudienceSegmentGroup (..),
+    newAudienceSegmentGroup,
 
     -- ** Browser
-    , Browser (..)
-    , newBrowser
+    Browser (..),
+    newBrowser,
 
     -- ** BrowsersListResponse
-    , BrowsersListResponse (..)
-    , newBrowsersListResponse
+    BrowsersListResponse (..),
+    newBrowsersListResponse,
 
     -- ** Campaign
-    , Campaign (..)
-    , newCampaign
+    Campaign (..),
+    newCampaign,
 
     -- ** CampaignCreativeAssociation
-    , CampaignCreativeAssociation (..)
-    , newCampaignCreativeAssociation
+    CampaignCreativeAssociation (..),
+    newCampaignCreativeAssociation,
 
     -- ** CampaignCreativeAssociationsListResponse
-    , CampaignCreativeAssociationsListResponse (..)
-    , newCampaignCreativeAssociationsListResponse
+    CampaignCreativeAssociationsListResponse (..),
+    newCampaignCreativeAssociationsListResponse,
 
     -- ** CampaignsListResponse
-    , CampaignsListResponse (..)
-    , newCampaignsListResponse
+    CampaignsListResponse (..),
+    newCampaignsListResponse,
 
     -- ** ChangeLog
-    , ChangeLog (..)
-    , newChangeLog
+    ChangeLog (..),
+    newChangeLog,
 
     -- ** ChangeLogsListResponse
-    , ChangeLogsListResponse (..)
-    , newChangeLogsListResponse
+    ChangeLogsListResponse (..),
+    newChangeLogsListResponse,
 
     -- ** ChannelGrouping
-    , ChannelGrouping (..)
-    , newChannelGrouping
+    ChannelGrouping (..),
+    newChannelGrouping,
 
     -- ** ChannelGroupingRule
-    , ChannelGroupingRule (..)
-    , newChannelGroupingRule
+    ChannelGroupingRule (..),
+    newChannelGroupingRule,
 
     -- ** CitiesListResponse
-    , CitiesListResponse (..)
-    , newCitiesListResponse
+    CitiesListResponse (..),
+    newCitiesListResponse,
 
     -- ** City
-    , City (..)
-    , newCity
+    City (..),
+    newCity,
 
     -- ** ClickTag
-    , ClickTag (..)
-    , newClickTag
+    ClickTag (..),
+    newClickTag,
 
     -- ** ClickThroughUrl
-    , ClickThroughUrl (..)
-    , newClickThroughUrl
+    ClickThroughUrl (..),
+    newClickThroughUrl,
 
     -- ** ClickThroughUrlSuffixProperties
-    , ClickThroughUrlSuffixProperties (..)
-    , newClickThroughUrlSuffixProperties
+    ClickThroughUrlSuffixProperties (..),
+    newClickThroughUrlSuffixProperties,
 
     -- ** CompanionClickThroughOverride
-    , CompanionClickThroughOverride (..)
-    , newCompanionClickThroughOverride
+    CompanionClickThroughOverride (..),
+    newCompanionClickThroughOverride,
 
     -- ** CompanionSetting
-    , CompanionSetting (..)
-    , newCompanionSetting
+    CompanionSetting (..),
+    newCompanionSetting,
 
     -- ** CompatibleFields
-    , CompatibleFields (..)
-    , newCompatibleFields
+    CompatibleFields (..),
+    newCompatibleFields,
 
     -- ** ConnectionType
-    , ConnectionType (..)
-    , newConnectionType
+    ConnectionType (..),
+    newConnectionType,
 
     -- ** ConnectionTypesListResponse
-    , ConnectionTypesListResponse (..)
-    , newConnectionTypesListResponse
+    ConnectionTypesListResponse (..),
+    newConnectionTypesListResponse,
 
     -- ** ContentCategoriesListResponse
-    , ContentCategoriesListResponse (..)
-    , newContentCategoriesListResponse
+    ContentCategoriesListResponse (..),
+    newContentCategoriesListResponse,
 
     -- ** ContentCategory
-    , ContentCategory (..)
-    , newContentCategory
+    ContentCategory (..),
+    newContentCategory,
 
     -- ** Conversion
-    , Conversion (..)
-    , newConversion
+    Conversion (..),
+    newConversion,
 
     -- ** ConversionError
-    , ConversionError (..)
-    , newConversionError
+    ConversionError (..),
+    newConversionError,
 
     -- ** ConversionError_Code
-    , ConversionError_Code (..)
+    ConversionError_Code (..),
 
     -- ** ConversionStatus
-    , ConversionStatus (..)
-    , newConversionStatus
+    ConversionStatus (..),
+    newConversionStatus,
 
     -- ** ConversionsBatchInsertRequest
-    , ConversionsBatchInsertRequest (..)
-    , newConversionsBatchInsertRequest
+    ConversionsBatchInsertRequest (..),
+    newConversionsBatchInsertRequest,
 
     -- ** ConversionsBatchInsertResponse
-    , ConversionsBatchInsertResponse (..)
-    , newConversionsBatchInsertResponse
+    ConversionsBatchInsertResponse (..),
+    newConversionsBatchInsertResponse,
 
     -- ** ConversionsBatchUpdateRequest
-    , ConversionsBatchUpdateRequest (..)
-    , newConversionsBatchUpdateRequest
+    ConversionsBatchUpdateRequest (..),
+    newConversionsBatchUpdateRequest,
 
     -- ** ConversionsBatchUpdateResponse
-    , ConversionsBatchUpdateResponse (..)
-    , newConversionsBatchUpdateResponse
+    ConversionsBatchUpdateResponse (..),
+    newConversionsBatchUpdateResponse,
 
     -- ** CountriesListResponse
-    , CountriesListResponse (..)
-    , newCountriesListResponse
+    CountriesListResponse (..),
+    newCountriesListResponse,
 
     -- ** Country
-    , Country (..)
-    , newCountry
+    Country (..),
+    newCountry,
 
     -- ** Creative
-    , Creative (..)
-    , newCreative
+    Creative (..),
+    newCreative,
 
     -- ** Creative_ArtworkType
-    , Creative_ArtworkType (..)
+    Creative_ArtworkType (..),
 
     -- ** Creative_AuthoringSource
-    , Creative_AuthoringSource (..)
+    Creative_AuthoringSource (..),
 
     -- ** Creative_AuthoringTool
-    , Creative_AuthoringTool (..)
+    Creative_AuthoringTool (..),
 
     -- ** Creative_BackupImageFeaturesItem
-    , Creative_BackupImageFeaturesItem (..)
+    Creative_BackupImageFeaturesItem (..),
 
     -- ** Creative_CompatibilityItem
-    , Creative_CompatibilityItem (..)
+    Creative_CompatibilityItem (..),
 
     -- ** Creative_Type
-    , Creative_Type (..)
+    Creative_Type (..),
 
     -- ** CreativeAsset
-    , CreativeAsset (..)
-    , newCreativeAsset
+    CreativeAsset (..),
+    newCreativeAsset,
 
     -- ** CreativeAsset_Alignment
-    , CreativeAsset_Alignment (..)
+    CreativeAsset_Alignment (..),
 
     -- ** CreativeAsset_ArtworkType
-    , CreativeAsset_ArtworkType (..)
+    CreativeAsset_ArtworkType (..),
 
     -- ** CreativeAsset_ChildAssetType
-    , CreativeAsset_ChildAssetType (..)
+    CreativeAsset_ChildAssetType (..),
 
     -- ** CreativeAsset_DetectedFeaturesItem
-    , CreativeAsset_DetectedFeaturesItem (..)
+    CreativeAsset_DetectedFeaturesItem (..),
 
     -- ** CreativeAsset_DisplayType
-    , CreativeAsset_DisplayType (..)
+    CreativeAsset_DisplayType (..),
 
     -- ** CreativeAsset_DurationType
-    , CreativeAsset_DurationType (..)
+    CreativeAsset_DurationType (..),
 
     -- ** CreativeAsset_Orientation
-    , CreativeAsset_Orientation (..)
+    CreativeAsset_Orientation (..),
 
     -- ** CreativeAsset_PositionLeftUnit
-    , CreativeAsset_PositionLeftUnit (..)
+    CreativeAsset_PositionLeftUnit (..),
 
     -- ** CreativeAsset_PositionTopUnit
-    , CreativeAsset_PositionTopUnit (..)
+    CreativeAsset_PositionTopUnit (..),
 
     -- ** CreativeAsset_Role
-    , CreativeAsset_Role (..)
+    CreativeAsset_Role (..),
 
     -- ** CreativeAsset_StartTimeType
-    , CreativeAsset_StartTimeType (..)
+    CreativeAsset_StartTimeType (..),
 
     -- ** CreativeAsset_WindowMode
-    , CreativeAsset_WindowMode (..)
+    CreativeAsset_WindowMode (..),
 
     -- ** CreativeAssetId
-    , CreativeAssetId (..)
-    , newCreativeAssetId
+    CreativeAssetId (..),
+    newCreativeAssetId,
 
     -- ** CreativeAssetId_Type
-    , CreativeAssetId_Type (..)
+    CreativeAssetId_Type (..),
 
     -- ** CreativeAssetMetadata
-    , CreativeAssetMetadata (..)
-    , newCreativeAssetMetadata
+    CreativeAssetMetadata (..),
+    newCreativeAssetMetadata,
 
     -- ** CreativeAssetMetadata_DetectedFeaturesItem
-    , CreativeAssetMetadata_DetectedFeaturesItem (..)
+    CreativeAssetMetadata_DetectedFeaturesItem (..),
 
     -- ** CreativeAssetMetadata_WarnedValidationRulesItem
-    , CreativeAssetMetadata_WarnedValidationRulesItem (..)
+    CreativeAssetMetadata_WarnedValidationRulesItem (..),
 
     -- ** CreativeAssetSelection
-    , CreativeAssetSelection (..)
-    , newCreativeAssetSelection
+    CreativeAssetSelection (..),
+    newCreativeAssetSelection,
 
     -- ** CreativeAssignment
-    , CreativeAssignment (..)
-    , newCreativeAssignment
+    CreativeAssignment (..),
+    newCreativeAssignment,
 
     -- ** CreativeClickThroughUrl
-    , CreativeClickThroughUrl (..)
-    , newCreativeClickThroughUrl
+    CreativeClickThroughUrl (..),
+    newCreativeClickThroughUrl,
 
     -- ** CreativeCustomEvent
-    , CreativeCustomEvent (..)
-    , newCreativeCustomEvent
+    CreativeCustomEvent (..),
+    newCreativeCustomEvent,
 
     -- ** CreativeCustomEvent_AdvertiserCustomEventType
-    , CreativeCustomEvent_AdvertiserCustomEventType (..)
+    CreativeCustomEvent_AdvertiserCustomEventType (..),
 
     -- ** CreativeCustomEvent_ArtworkType
-    , CreativeCustomEvent_ArtworkType (..)
+    CreativeCustomEvent_ArtworkType (..),
 
     -- ** CreativeCustomEvent_TargetType
-    , CreativeCustomEvent_TargetType (..)
+    CreativeCustomEvent_TargetType (..),
 
     -- ** CreativeField
-    , CreativeField (..)
-    , newCreativeField
+    CreativeField (..),
+    newCreativeField,
 
     -- ** CreativeFieldAssignment
-    , CreativeFieldAssignment (..)
-    , newCreativeFieldAssignment
+    CreativeFieldAssignment (..),
+    newCreativeFieldAssignment,
 
     -- ** CreativeFieldValue
-    , CreativeFieldValue (..)
-    , newCreativeFieldValue
+    CreativeFieldValue (..),
+    newCreativeFieldValue,
 
     -- ** CreativeFieldValuesListResponse
-    , CreativeFieldValuesListResponse (..)
-    , newCreativeFieldValuesListResponse
+    CreativeFieldValuesListResponse (..),
+    newCreativeFieldValuesListResponse,
 
     -- ** CreativeFieldsListResponse
-    , CreativeFieldsListResponse (..)
-    , newCreativeFieldsListResponse
+    CreativeFieldsListResponse (..),
+    newCreativeFieldsListResponse,
 
     -- ** CreativeGroup
-    , CreativeGroup (..)
-    , newCreativeGroup
+    CreativeGroup (..),
+    newCreativeGroup,
 
     -- ** CreativeGroupAssignment
-    , CreativeGroupAssignment (..)
-    , newCreativeGroupAssignment
+    CreativeGroupAssignment (..),
+    newCreativeGroupAssignment,
 
     -- ** CreativeGroupAssignment_CreativeGroupNumber
-    , CreativeGroupAssignment_CreativeGroupNumber (..)
+    CreativeGroupAssignment_CreativeGroupNumber (..),
 
     -- ** CreativeGroupsListResponse
-    , CreativeGroupsListResponse (..)
-    , newCreativeGroupsListResponse
+    CreativeGroupsListResponse (..),
+    newCreativeGroupsListResponse,
 
     -- ** CreativeOptimizationConfiguration
-    , CreativeOptimizationConfiguration (..)
-    , newCreativeOptimizationConfiguration
+    CreativeOptimizationConfiguration (..),
+    newCreativeOptimizationConfiguration,
 
     -- ** CreativeOptimizationConfiguration_OptimizationModel
-    , CreativeOptimizationConfiguration_OptimizationModel (..)
+    CreativeOptimizationConfiguration_OptimizationModel (..),
 
     -- ** CreativeRotation
-    , CreativeRotation (..)
-    , newCreativeRotation
+    CreativeRotation (..),
+    newCreativeRotation,
 
     -- ** CreativeRotation_Type
-    , CreativeRotation_Type (..)
+    CreativeRotation_Type (..),
 
     -- ** CreativeRotation_WeightCalculationStrategy
-    , CreativeRotation_WeightCalculationStrategy (..)
+    CreativeRotation_WeightCalculationStrategy (..),
 
     -- ** CreativesListResponse
-    , CreativesListResponse (..)
-    , newCreativesListResponse
+    CreativesListResponse (..),
+    newCreativesListResponse,
 
     -- ** CrossDimensionReachReportCompatibleFields
-    , CrossDimensionReachReportCompatibleFields (..)
-    , newCrossDimensionReachReportCompatibleFields
+    CrossDimensionReachReportCompatibleFields (..),
+    newCrossDimensionReachReportCompatibleFields,
 
     -- ** CustomFloodlightVariable
-    , CustomFloodlightVariable (..)
-    , newCustomFloodlightVariable
+    CustomFloodlightVariable (..),
+    newCustomFloodlightVariable,
 
     -- ** CustomFloodlightVariable_Type
-    , CustomFloodlightVariable_Type (..)
+    CustomFloodlightVariable_Type (..),
 
     -- ** CustomRichMediaEvents
-    , CustomRichMediaEvents (..)
-    , newCustomRichMediaEvents
+    CustomRichMediaEvents (..),
+    newCustomRichMediaEvents,
 
     -- ** CustomViewabilityMetric
-    , CustomViewabilityMetric (..)
-    , newCustomViewabilityMetric
+    CustomViewabilityMetric (..),
+    newCustomViewabilityMetric,
 
     -- ** CustomViewabilityMetricConfiguration
-    , CustomViewabilityMetricConfiguration (..)
-    , newCustomViewabilityMetricConfiguration
+    CustomViewabilityMetricConfiguration (..),
+    newCustomViewabilityMetricConfiguration,
 
     -- ** DateRange
-    , DateRange (..)
-    , newDateRange
+    DateRange (..),
+    newDateRange,
 
     -- ** DateRange_RelativeDateRange
-    , DateRange_RelativeDateRange (..)
+    DateRange_RelativeDateRange (..),
 
     -- ** DayPartTargeting
-    , DayPartTargeting (..)
-    , newDayPartTargeting
+    DayPartTargeting (..),
+    newDayPartTargeting,
 
     -- ** DayPartTargeting_DaysOfWeekItem
-    , DayPartTargeting_DaysOfWeekItem (..)
+    DayPartTargeting_DaysOfWeekItem (..),
 
     -- ** DeepLink
-    , DeepLink (..)
-    , newDeepLink
+    DeepLink (..),
+    newDeepLink,
 
     -- ** DefaultClickThroughEventTagProperties
-    , DefaultClickThroughEventTagProperties (..)
-    , newDefaultClickThroughEventTagProperties
+    DefaultClickThroughEventTagProperties (..),
+    newDefaultClickThroughEventTagProperties,
 
     -- ** DeliverySchedule
-    , DeliverySchedule (..)
-    , newDeliverySchedule
+    DeliverySchedule (..),
+    newDeliverySchedule,
 
     -- ** DeliverySchedule_Priority
-    , DeliverySchedule_Priority (..)
+    DeliverySchedule_Priority (..),
 
     -- ** DfpSettings
-    , DfpSettings (..)
-    , newDfpSettings
+    DfpSettings (..),
+    newDfpSettings,
 
     -- ** Dimension
-    , Dimension (..)
-    , newDimension
+    Dimension (..),
+    newDimension,
 
     -- ** DimensionFilter
-    , DimensionFilter (..)
-    , newDimensionFilter
+    DimensionFilter (..),
+    newDimensionFilter,
 
     -- ** DimensionValue
-    , DimensionValue (..)
-    , newDimensionValue
+    DimensionValue (..),
+    newDimensionValue,
 
     -- ** DimensionValue_MatchType
-    , DimensionValue_MatchType (..)
+    DimensionValue_MatchType (..),
 
     -- ** DimensionValueList
-    , DimensionValueList (..)
-    , newDimensionValueList
+    DimensionValueList (..),
+    newDimensionValueList,
 
     -- ** DimensionValueRequest
-    , DimensionValueRequest (..)
-    , newDimensionValueRequest
+    DimensionValueRequest (..),
+    newDimensionValueRequest,
 
     -- ** DirectorySite
-    , DirectorySite (..)
-    , newDirectorySite
+    DirectorySite (..),
+    newDirectorySite,
 
     -- ** DirectorySite_InpageTagFormatsItem
-    , DirectorySite_InpageTagFormatsItem (..)
+    DirectorySite_InpageTagFormatsItem (..),
 
     -- ** DirectorySite_InterstitialTagFormatsItem
-    , DirectorySite_InterstitialTagFormatsItem (..)
+    DirectorySite_InterstitialTagFormatsItem (..),
 
     -- ** DirectorySiteSettings
-    , DirectorySiteSettings (..)
-    , newDirectorySiteSettings
+    DirectorySiteSettings (..),
+    newDirectorySiteSettings,
 
     -- ** DirectorySitesListResponse
-    , DirectorySitesListResponse (..)
-    , newDirectorySitesListResponse
+    DirectorySitesListResponse (..),
+    newDirectorySitesListResponse,
 
     -- ** DisjunctiveMatchStatement
-    , DisjunctiveMatchStatement (..)
-    , newDisjunctiveMatchStatement
+    DisjunctiveMatchStatement (..),
+    newDisjunctiveMatchStatement,
 
     -- ** DynamicTargetingKey
-    , DynamicTargetingKey (..)
-    , newDynamicTargetingKey
+    DynamicTargetingKey (..),
+    newDynamicTargetingKey,
 
     -- ** DynamicTargetingKey_ObjectType
-    , DynamicTargetingKey_ObjectType (..)
+    DynamicTargetingKey_ObjectType (..),
 
     -- ** DynamicTargetingKeysListResponse
-    , DynamicTargetingKeysListResponse (..)
-    , newDynamicTargetingKeysListResponse
+    DynamicTargetingKeysListResponse (..),
+    newDynamicTargetingKeysListResponse,
 
     -- ** EncryptionInfo
-    , EncryptionInfo (..)
-    , newEncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
 
     -- ** EncryptionInfo_EncryptionEntityType
-    , EncryptionInfo_EncryptionEntityType (..)
+    EncryptionInfo_EncryptionEntityType (..),
 
     -- ** EncryptionInfo_EncryptionSource
-    , EncryptionInfo_EncryptionSource (..)
+    EncryptionInfo_EncryptionSource (..),
 
     -- ** EventFilter
-    , EventFilter (..)
-    , newEventFilter
+    EventFilter (..),
+    newEventFilter,
 
     -- ** EventTag
-    , EventTag (..)
-    , newEventTag
+    EventTag (..),
+    newEventTag,
 
     -- ** EventTag_SiteFilterType
-    , EventTag_SiteFilterType (..)
+    EventTag_SiteFilterType (..),
 
     -- ** EventTag_Status
-    , EventTag_Status (..)
+    EventTag_Status (..),
 
     -- ** EventTag_Type
-    , EventTag_Type (..)
+    EventTag_Type (..),
 
     -- ** EventTagOverride
-    , EventTagOverride (..)
-    , newEventTagOverride
+    EventTagOverride (..),
+    newEventTagOverride,
 
     -- ** EventTagsListResponse
-    , EventTagsListResponse (..)
-    , newEventTagsListResponse
+    EventTagsListResponse (..),
+    newEventTagsListResponse,
 
     -- ** File
-    , File (..)
-    , newFile
+    File (..),
+    newFile,
 
     -- ** File_Format
-    , File_Format (..)
+    File_Format (..),
 
     -- ** File_Status
-    , File_Status (..)
+    File_Status (..),
 
     -- ** File_Urls
-    , File_Urls (..)
-    , newFile_Urls
+    File_Urls (..),
+    newFile_Urls,
 
     -- ** FileList
-    , FileList (..)
-    , newFileList
+    FileList (..),
+    newFileList,
 
     -- ** Flight
-    , Flight (..)
-    , newFlight
+    Flight (..),
+    newFlight,
 
     -- ** FloodlightActivitiesGenerateTagResponse
-    , FloodlightActivitiesGenerateTagResponse (..)
-    , newFloodlightActivitiesGenerateTagResponse
+    FloodlightActivitiesGenerateTagResponse (..),
+    newFloodlightActivitiesGenerateTagResponse,
 
     -- ** FloodlightActivitiesListResponse
-    , FloodlightActivitiesListResponse (..)
-    , newFloodlightActivitiesListResponse
+    FloodlightActivitiesListResponse (..),
+    newFloodlightActivitiesListResponse,
 
     -- ** FloodlightActivity
-    , FloodlightActivity (..)
-    , newFloodlightActivity
+    FloodlightActivity (..),
+    newFloodlightActivity,
 
     -- ** FloodlightActivity_CacheBustingType
-    , FloodlightActivity_CacheBustingType (..)
+    FloodlightActivity_CacheBustingType (..),
 
     -- ** FloodlightActivity_CountingMethod
-    , FloodlightActivity_CountingMethod (..)
+    FloodlightActivity_CountingMethod (..),
 
     -- ** FloodlightActivity_FloodlightActivityGroupType
-    , FloodlightActivity_FloodlightActivityGroupType (..)
+    FloodlightActivity_FloodlightActivityGroupType (..),
 
     -- ** FloodlightActivity_FloodlightTagType
-    , FloodlightActivity_FloodlightTagType (..)
+    FloodlightActivity_FloodlightTagType (..),
 
     -- ** FloodlightActivity_Status
-    , FloodlightActivity_Status (..)
+    FloodlightActivity_Status (..),
 
     -- ** FloodlightActivity_TagFormat
-    , FloodlightActivity_TagFormat (..)
+    FloodlightActivity_TagFormat (..),
 
     -- ** FloodlightActivity_UserDefinedVariableTypesItem
-    , FloodlightActivity_UserDefinedVariableTypesItem (..)
+    FloodlightActivity_UserDefinedVariableTypesItem (..),
 
     -- ** FloodlightActivityDynamicTag
-    , FloodlightActivityDynamicTag (..)
-    , newFloodlightActivityDynamicTag
+    FloodlightActivityDynamicTag (..),
+    newFloodlightActivityDynamicTag,
 
     -- ** FloodlightActivityGroup
-    , FloodlightActivityGroup (..)
-    , newFloodlightActivityGroup
+    FloodlightActivityGroup (..),
+    newFloodlightActivityGroup,
 
     -- ** FloodlightActivityGroup_Type
-    , FloodlightActivityGroup_Type (..)
+    FloodlightActivityGroup_Type (..),
 
     -- ** FloodlightActivityGroupsListResponse
-    , FloodlightActivityGroupsListResponse (..)
-    , newFloodlightActivityGroupsListResponse
+    FloodlightActivityGroupsListResponse (..),
+    newFloodlightActivityGroupsListResponse,
 
     -- ** FloodlightActivityPublisherDynamicTag
-    , FloodlightActivityPublisherDynamicTag (..)
-    , newFloodlightActivityPublisherDynamicTag
+    FloodlightActivityPublisherDynamicTag (..),
+    newFloodlightActivityPublisherDynamicTag,
 
     -- ** FloodlightConfiguration
-    , FloodlightConfiguration (..)
-    , newFloodlightConfiguration
+    FloodlightConfiguration (..),
+    newFloodlightConfiguration,
 
     -- ** FloodlightConfiguration_FirstDayOfWeek
-    , FloodlightConfiguration_FirstDayOfWeek (..)
+    FloodlightConfiguration_FirstDayOfWeek (..),
 
     -- ** FloodlightConfiguration_NaturalSearchConversionAttributionOption
-    , FloodlightConfiguration_NaturalSearchConversionAttributionOption (..)
+    FloodlightConfiguration_NaturalSearchConversionAttributionOption (..),
 
     -- ** FloodlightConfigurationsListResponse
-    , FloodlightConfigurationsListResponse (..)
-    , newFloodlightConfigurationsListResponse
+    FloodlightConfigurationsListResponse (..),
+    newFloodlightConfigurationsListResponse,
 
     -- ** FloodlightReportCompatibleFields
-    , FloodlightReportCompatibleFields (..)
-    , newFloodlightReportCompatibleFields
+    FloodlightReportCompatibleFields (..),
+    newFloodlightReportCompatibleFields,
 
     -- ** FrequencyCap
-    , FrequencyCap (..)
-    , newFrequencyCap
+    FrequencyCap (..),
+    newFrequencyCap,
 
     -- ** FsCommand
-    , FsCommand (..)
-    , newFsCommand
+    FsCommand (..),
+    newFsCommand,
 
     -- ** FsCommand_PositionOption
-    , FsCommand_PositionOption (..)
+    FsCommand_PositionOption (..),
 
     -- ** GeoTargeting
-    , GeoTargeting (..)
-    , newGeoTargeting
+    GeoTargeting (..),
+    newGeoTargeting,
 
     -- ** InventoryItem
-    , InventoryItem (..)
-    , newInventoryItem
+    InventoryItem (..),
+    newInventoryItem,
 
     -- ** InventoryItem_Type
-    , InventoryItem_Type (..)
+    InventoryItem_Type (..),
 
     -- ** InventoryItemsListResponse
-    , InventoryItemsListResponse (..)
-    , newInventoryItemsListResponse
+    InventoryItemsListResponse (..),
+    newInventoryItemsListResponse,
 
     -- ** KeyValueTargetingExpression
-    , KeyValueTargetingExpression (..)
-    , newKeyValueTargetingExpression
+    KeyValueTargetingExpression (..),
+    newKeyValueTargetingExpression,
 
     -- ** LandingPage
-    , LandingPage (..)
-    , newLandingPage
+    LandingPage (..),
+    newLandingPage,
 
     -- ** Language
-    , Language (..)
-    , newLanguage
+    Language (..),
+    newLanguage,
 
     -- ** LanguageTargeting
-    , LanguageTargeting (..)
-    , newLanguageTargeting
+    LanguageTargeting (..),
+    newLanguageTargeting,
 
     -- ** LanguagesListResponse
-    , LanguagesListResponse (..)
-    , newLanguagesListResponse
+    LanguagesListResponse (..),
+    newLanguagesListResponse,
 
     -- ** LastModifiedInfo
-    , LastModifiedInfo (..)
-    , newLastModifiedInfo
+    LastModifiedInfo (..),
+    newLastModifiedInfo,
 
     -- ** ListPopulationClause
-    , ListPopulationClause (..)
-    , newListPopulationClause
+    ListPopulationClause (..),
+    newListPopulationClause,
 
     -- ** ListPopulationRule
-    , ListPopulationRule (..)
-    , newListPopulationRule
+    ListPopulationRule (..),
+    newListPopulationRule,
 
     -- ** ListPopulationTerm
-    , ListPopulationTerm (..)
-    , newListPopulationTerm
+    ListPopulationTerm (..),
+    newListPopulationTerm,
 
     -- ** ListPopulationTerm_Operator
-    , ListPopulationTerm_Operator (..)
+    ListPopulationTerm_Operator (..),
 
     -- ** ListPopulationTerm_Type
-    , ListPopulationTerm_Type (..)
+    ListPopulationTerm_Type (..),
 
     -- ** ListTargetingExpression
-    , ListTargetingExpression (..)
-    , newListTargetingExpression
+    ListTargetingExpression (..),
+    newListTargetingExpression,
 
     -- ** LookbackConfiguration
-    , LookbackConfiguration (..)
-    , newLookbackConfiguration
+    LookbackConfiguration (..),
+    newLookbackConfiguration,
 
     -- ** MeasurementPartnerAdvertiserLink
-    , MeasurementPartnerAdvertiserLink (..)
-    , newMeasurementPartnerAdvertiserLink
+    MeasurementPartnerAdvertiserLink (..),
+    newMeasurementPartnerAdvertiserLink,
 
     -- ** MeasurementPartnerAdvertiserLink_LinkStatus
-    , MeasurementPartnerAdvertiserLink_LinkStatus (..)
+    MeasurementPartnerAdvertiserLink_LinkStatus (..),
 
     -- ** MeasurementPartnerAdvertiserLink_MeasurementPartner
-    , MeasurementPartnerAdvertiserLink_MeasurementPartner (..)
+    MeasurementPartnerAdvertiserLink_MeasurementPartner (..),
 
     -- ** MeasurementPartnerCampaignLink
-    , MeasurementPartnerCampaignLink (..)
-    , newMeasurementPartnerCampaignLink
+    MeasurementPartnerCampaignLink (..),
+    newMeasurementPartnerCampaignLink,
 
     -- ** MeasurementPartnerCampaignLink_LinkStatus
-    , MeasurementPartnerCampaignLink_LinkStatus (..)
+    MeasurementPartnerCampaignLink_LinkStatus (..),
 
     -- ** MeasurementPartnerCampaignLink_MeasurementPartner
-    , MeasurementPartnerCampaignLink_MeasurementPartner (..)
+    MeasurementPartnerCampaignLink_MeasurementPartner (..),
 
     -- ** MeasurementPartnerWrappingData
-    , MeasurementPartnerWrappingData (..)
-    , newMeasurementPartnerWrappingData
+    MeasurementPartnerWrappingData (..),
+    newMeasurementPartnerWrappingData,
 
     -- ** MeasurementPartnerWrappingData_LinkStatus
-    , MeasurementPartnerWrappingData_LinkStatus (..)
+    MeasurementPartnerWrappingData_LinkStatus (..),
 
     -- ** MeasurementPartnerWrappingData_MeasurementPartner
-    , MeasurementPartnerWrappingData_MeasurementPartner (..)
+    MeasurementPartnerWrappingData_MeasurementPartner (..),
 
     -- ** MeasurementPartnerWrappingData_TagWrappingMode
-    , MeasurementPartnerWrappingData_TagWrappingMode (..)
+    MeasurementPartnerWrappingData_TagWrappingMode (..),
 
     -- ** Metric
-    , Metric (..)
-    , newMetric
+    Metric (..),
+    newMetric,
 
     -- ** Metro
-    , Metro (..)
-    , newMetro
+    Metro (..),
+    newMetro,
 
     -- ** MetrosListResponse
-    , MetrosListResponse (..)
-    , newMetrosListResponse
+    MetrosListResponse (..),
+    newMetrosListResponse,
 
     -- ** MobileApp
-    , MobileApp (..)
-    , newMobileApp
+    MobileApp (..),
+    newMobileApp,
 
     -- ** MobileApp_Directory
-    , MobileApp_Directory (..)
+    MobileApp_Directory (..),
 
     -- ** MobileAppsListResponse
-    , MobileAppsListResponse (..)
-    , newMobileAppsListResponse
+    MobileAppsListResponse (..),
+    newMobileAppsListResponse,
 
     -- ** MobileCarrier
-    , MobileCarrier (..)
-    , newMobileCarrier
+    MobileCarrier (..),
+    newMobileCarrier,
 
     -- ** MobileCarriersListResponse
-    , MobileCarriersListResponse (..)
-    , newMobileCarriersListResponse
+    MobileCarriersListResponse (..),
+    newMobileCarriersListResponse,
 
     -- ** ObaIcon
-    , ObaIcon (..)
-    , newObaIcon
+    ObaIcon (..),
+    newObaIcon,
 
     -- ** ObjectFilter
-    , ObjectFilter (..)
-    , newObjectFilter
+    ObjectFilter (..),
+    newObjectFilter,
 
     -- ** ObjectFilter_Status
-    , ObjectFilter_Status (..)
+    ObjectFilter_Status (..),
 
     -- ** OffsetPosition
-    , OffsetPosition (..)
-    , newOffsetPosition
+    OffsetPosition (..),
+    newOffsetPosition,
 
     -- ** OmnitureSettings
-    , OmnitureSettings (..)
-    , newOmnitureSettings
+    OmnitureSettings (..),
+    newOmnitureSettings,
 
     -- ** OperatingSystem
-    , OperatingSystem (..)
-    , newOperatingSystem
+    OperatingSystem (..),
+    newOperatingSystem,
 
     -- ** OperatingSystemVersion
-    , OperatingSystemVersion (..)
-    , newOperatingSystemVersion
+    OperatingSystemVersion (..),
+    newOperatingSystemVersion,
 
     -- ** OperatingSystemVersionsListResponse
-    , OperatingSystemVersionsListResponse (..)
-    , newOperatingSystemVersionsListResponse
+    OperatingSystemVersionsListResponse (..),
+    newOperatingSystemVersionsListResponse,
 
     -- ** OperatingSystemsListResponse
-    , OperatingSystemsListResponse (..)
-    , newOperatingSystemsListResponse
+    OperatingSystemsListResponse (..),
+    newOperatingSystemsListResponse,
 
     -- ** OptimizationActivity
-    , OptimizationActivity (..)
-    , newOptimizationActivity
+    OptimizationActivity (..),
+    newOptimizationActivity,
 
     -- ** Order
-    , Order (..)
-    , newOrder
+    Order (..),
+    newOrder,
 
     -- ** OrderContact
-    , OrderContact (..)
-    , newOrderContact
+    OrderContact (..),
+    newOrderContact,
 
     -- ** OrderContact_ContactType
-    , OrderContact_ContactType (..)
+    OrderContact_ContactType (..),
 
     -- ** OrderDocument
-    , OrderDocument (..)
-    , newOrderDocument
+    OrderDocument (..),
+    newOrderDocument,
 
     -- ** OrderDocument_Type
-    , OrderDocument_Type (..)
+    OrderDocument_Type (..),
 
     -- ** OrderDocumentsListResponse
-    , OrderDocumentsListResponse (..)
-    , newOrderDocumentsListResponse
+    OrderDocumentsListResponse (..),
+    newOrderDocumentsListResponse,
 
     -- ** OrdersListResponse
-    , OrdersListResponse (..)
-    , newOrdersListResponse
+    OrdersListResponse (..),
+    newOrdersListResponse,
 
     -- ** PathFilter
-    , PathFilter (..)
-    , newPathFilter
+    PathFilter (..),
+    newPathFilter,
 
     -- ** PathFilter_PathMatchPosition
-    , PathFilter_PathMatchPosition (..)
+    PathFilter_PathMatchPosition (..),
 
     -- ** PathReportCompatibleFields
-    , PathReportCompatibleFields (..)
-    , newPathReportCompatibleFields
+    PathReportCompatibleFields (..),
+    newPathReportCompatibleFields,
 
     -- ** PathReportDimensionValue
-    , PathReportDimensionValue (..)
-    , newPathReportDimensionValue
+    PathReportDimensionValue (..),
+    newPathReportDimensionValue,
 
     -- ** PathReportDimensionValue_MatchType
-    , PathReportDimensionValue_MatchType (..)
+    PathReportDimensionValue_MatchType (..),
 
     -- ** PathToConversionReportCompatibleFields
-    , PathToConversionReportCompatibleFields (..)
-    , newPathToConversionReportCompatibleFields
+    PathToConversionReportCompatibleFields (..),
+    newPathToConversionReportCompatibleFields,
 
     -- ** Placement
-    , Placement (..)
-    , newPlacement
+    Placement (..),
+    newPlacement,
 
     -- ** Placement_Compatibility
-    , Placement_Compatibility (..)
+    Placement_Compatibility (..),
 
     -- ** Placement_PaymentSource
-    , Placement_PaymentSource (..)
+    Placement_PaymentSource (..),
 
     -- ** Placement_Status
-    , Placement_Status (..)
+    Placement_Status (..),
 
     -- ** Placement_TagFormatsItem
-    , Placement_TagFormatsItem (..)
+    Placement_TagFormatsItem (..),
 
     -- ** Placement_VpaidAdapterChoice
-    , Placement_VpaidAdapterChoice (..)
+    Placement_VpaidAdapterChoice (..),
 
     -- ** PlacementAssignment
-    , PlacementAssignment (..)
-    , newPlacementAssignment
+    PlacementAssignment (..),
+    newPlacementAssignment,
 
     -- ** PlacementGroup
-    , PlacementGroup (..)
-    , newPlacementGroup
+    PlacementGroup (..),
+    newPlacementGroup,
 
     -- ** PlacementGroup_PlacementGroupType
-    , PlacementGroup_PlacementGroupType (..)
+    PlacementGroup_PlacementGroupType (..),
 
     -- ** PlacementGroupsListResponse
-    , PlacementGroupsListResponse (..)
-    , newPlacementGroupsListResponse
+    PlacementGroupsListResponse (..),
+    newPlacementGroupsListResponse,
 
     -- ** PlacementStrategiesListResponse
-    , PlacementStrategiesListResponse (..)
-    , newPlacementStrategiesListResponse
+    PlacementStrategiesListResponse (..),
+    newPlacementStrategiesListResponse,
 
     -- ** PlacementStrategy
-    , PlacementStrategy (..)
-    , newPlacementStrategy
+    PlacementStrategy (..),
+    newPlacementStrategy,
 
     -- ** PlacementTag
-    , PlacementTag (..)
-    , newPlacementTag
+    PlacementTag (..),
+    newPlacementTag,
 
     -- ** PlacementsGenerateTagsResponse
-    , PlacementsGenerateTagsResponse (..)
-    , newPlacementsGenerateTagsResponse
+    PlacementsGenerateTagsResponse (..),
+    newPlacementsGenerateTagsResponse,
 
     -- ** PlacementsListResponse
-    , PlacementsListResponse (..)
-    , newPlacementsListResponse
+    PlacementsListResponse (..),
+    newPlacementsListResponse,
 
     -- ** PlatformType
-    , PlatformType (..)
-    , newPlatformType
+    PlatformType (..),
+    newPlatformType,
 
     -- ** PlatformTypesListResponse
-    , PlatformTypesListResponse (..)
-    , newPlatformTypesListResponse
+    PlatformTypesListResponse (..),
+    newPlatformTypesListResponse,
 
     -- ** PopupWindowProperties
-    , PopupWindowProperties (..)
-    , newPopupWindowProperties
+    PopupWindowProperties (..),
+    newPopupWindowProperties,
 
     -- ** PopupWindowProperties_PositionType
-    , PopupWindowProperties_PositionType (..)
+    PopupWindowProperties_PositionType (..),
 
     -- ** PostalCode
-    , PostalCode (..)
-    , newPostalCode
+    PostalCode (..),
+    newPostalCode,
 
     -- ** PostalCodesListResponse
-    , PostalCodesListResponse (..)
-    , newPostalCodesListResponse
+    PostalCodesListResponse (..),
+    newPostalCodesListResponse,
 
     -- ** Pricing
-    , Pricing (..)
-    , newPricing
+    Pricing (..),
+    newPricing,
 
     -- ** Pricing_CapCostType
-    , Pricing_CapCostType (..)
+    Pricing_CapCostType (..),
 
     -- ** Pricing_GroupType
-    , Pricing_GroupType (..)
+    Pricing_GroupType (..),
 
     -- ** Pricing_PricingType
-    , Pricing_PricingType (..)
+    Pricing_PricingType (..),
 
     -- ** PricingSchedule
-    , PricingSchedule (..)
-    , newPricingSchedule
+    PricingSchedule (..),
+    newPricingSchedule,
 
     -- ** PricingSchedule_CapCostOption
-    , PricingSchedule_CapCostOption (..)
+    PricingSchedule_CapCostOption (..),
 
     -- ** PricingSchedule_PricingType
-    , PricingSchedule_PricingType (..)
+    PricingSchedule_PricingType (..),
 
     -- ** PricingSchedulePricingPeriod
-    , PricingSchedulePricingPeriod (..)
-    , newPricingSchedulePricingPeriod
+    PricingSchedulePricingPeriod (..),
+    newPricingSchedulePricingPeriod,
 
     -- ** Project
-    , Project (..)
-    , newProject
+    Project (..),
+    newProject,
 
     -- ** Project_AudienceAgeGroup
-    , Project_AudienceAgeGroup (..)
+    Project_AudienceAgeGroup (..),
 
     -- ** Project_AudienceGender
-    , Project_AudienceGender (..)
+    Project_AudienceGender (..),
 
     -- ** ProjectsListResponse
-    , ProjectsListResponse (..)
-    , newProjectsListResponse
+    ProjectsListResponse (..),
+    newProjectsListResponse,
 
     -- ** ReachReportCompatibleFields
-    , ReachReportCompatibleFields (..)
-    , newReachReportCompatibleFields
+    ReachReportCompatibleFields (..),
+    newReachReportCompatibleFields,
 
     -- ** Recipient
-    , Recipient (..)
-    , newRecipient
+    Recipient (..),
+    newRecipient,
 
     -- ** Recipient_DeliveryType
-    , Recipient_DeliveryType (..)
+    Recipient_DeliveryType (..),
 
     -- ** Region
-    , Region (..)
-    , newRegion
+    Region (..),
+    newRegion,
 
     -- ** RegionsListResponse
-    , RegionsListResponse (..)
-    , newRegionsListResponse
+    RegionsListResponse (..),
+    newRegionsListResponse,
 
     -- ** RemarketingList
-    , RemarketingList (..)
-    , newRemarketingList
+    RemarketingList (..),
+    newRemarketingList,
 
     -- ** RemarketingList_ListSource
-    , RemarketingList_ListSource (..)
+    RemarketingList_ListSource (..),
 
     -- ** RemarketingListShare
-    , RemarketingListShare (..)
-    , newRemarketingListShare
+    RemarketingListShare (..),
+    newRemarketingListShare,
 
     -- ** RemarketingListsListResponse
-    , RemarketingListsListResponse (..)
-    , newRemarketingListsListResponse
+    RemarketingListsListResponse (..),
+    newRemarketingListsListResponse,
 
     -- ** Report
-    , Report (..)
-    , newReport
+    Report (..),
+    newReport,
 
     -- ** Report_Criteria
-    , Report_Criteria (..)
-    , newReport_Criteria
+    Report_Criteria (..),
+    newReport_Criteria,
 
     -- ** Report_CrossDimensionReachCriteria
-    , Report_CrossDimensionReachCriteria (..)
-    , newReport_CrossDimensionReachCriteria
+    Report_CrossDimensionReachCriteria (..),
+    newReport_CrossDimensionReachCriteria,
 
     -- ** Report_CrossDimensionReachCriteria_Dimension
-    , Report_CrossDimensionReachCriteria_Dimension (..)
+    Report_CrossDimensionReachCriteria_Dimension (..),
 
     -- ** Report_Delivery
-    , Report_Delivery (..)
-    , newReport_Delivery
+    Report_Delivery (..),
+    newReport_Delivery,
 
     -- ** Report_Delivery_EmailOwnerDeliveryType
-    , Report_Delivery_EmailOwnerDeliveryType (..)
+    Report_Delivery_EmailOwnerDeliveryType (..),
 
     -- ** Report_FloodlightCriteria
-    , Report_FloodlightCriteria (..)
-    , newReport_FloodlightCriteria
+    Report_FloodlightCriteria (..),
+    newReport_FloodlightCriteria,
 
     -- ** Report_FloodlightCriteria_ReportProperties
-    , Report_FloodlightCriteria_ReportProperties (..)
-    , newReport_FloodlightCriteria_ReportProperties
+    Report_FloodlightCriteria_ReportProperties (..),
+    newReport_FloodlightCriteria_ReportProperties,
 
     -- ** Report_Format
-    , Report_Format (..)
+    Report_Format (..),
 
     -- ** Report_PathAttributionCriteria
-    , Report_PathAttributionCriteria (..)
-    , newReport_PathAttributionCriteria
+    Report_PathAttributionCriteria (..),
+    newReport_PathAttributionCriteria,
 
     -- ** Report_PathCriteria
-    , Report_PathCriteria (..)
-    , newReport_PathCriteria
+    Report_PathCriteria (..),
+    newReport_PathCriteria,
 
     -- ** Report_PathToConversionCriteria
-    , Report_PathToConversionCriteria (..)
-    , newReport_PathToConversionCriteria
+    Report_PathToConversionCriteria (..),
+    newReport_PathToConversionCriteria,
 
     -- ** Report_PathToConversionCriteria_ReportProperties
-    , Report_PathToConversionCriteria_ReportProperties (..)
-    , newReport_PathToConversionCriteria_ReportProperties
+    Report_PathToConversionCriteria_ReportProperties (..),
+    newReport_PathToConversionCriteria_ReportProperties,
 
     -- ** Report_ReachCriteria
-    , Report_ReachCriteria (..)
-    , newReport_ReachCriteria
+    Report_ReachCriteria (..),
+    newReport_ReachCriteria,
 
     -- ** Report_Schedule
-    , Report_Schedule (..)
-    , newReport_Schedule
+    Report_Schedule (..),
+    newReport_Schedule,
 
     -- ** Report_Schedule_RepeatsOnWeekDaysItem
-    , Report_Schedule_RepeatsOnWeekDaysItem (..)
+    Report_Schedule_RepeatsOnWeekDaysItem (..),
 
     -- ** Report_Schedule_RunsOnDayOfMonth
-    , Report_Schedule_RunsOnDayOfMonth (..)
+    Report_Schedule_RunsOnDayOfMonth (..),
 
     -- ** Report_Type
-    , Report_Type (..)
+    Report_Type (..),
 
     -- ** ReportCompatibleFields
-    , ReportCompatibleFields (..)
-    , newReportCompatibleFields
+    ReportCompatibleFields (..),
+    newReportCompatibleFields,
 
     -- ** ReportList
-    , ReportList (..)
-    , newReportList
+    ReportList (..),
+    newReportList,
 
     -- ** ReportsConfiguration
-    , ReportsConfiguration (..)
-    , newReportsConfiguration
+    ReportsConfiguration (..),
+    newReportsConfiguration,
 
     -- ** RichMediaExitOverride
-    , RichMediaExitOverride (..)
-    , newRichMediaExitOverride
+    RichMediaExitOverride (..),
+    newRichMediaExitOverride,
 
     -- ** Rule
-    , Rule (..)
-    , newRule
+    Rule (..),
+    newRule,
 
     -- ** Site
-    , Site (..)
-    , newSite
+    Site (..),
+    newSite,
 
     -- ** SiteCompanionSetting
-    , SiteCompanionSetting (..)
-    , newSiteCompanionSetting
+    SiteCompanionSetting (..),
+    newSiteCompanionSetting,
 
     -- ** SiteContact
-    , SiteContact (..)
-    , newSiteContact
+    SiteContact (..),
+    newSiteContact,
 
     -- ** SiteContact_ContactType
-    , SiteContact_ContactType (..)
+    SiteContact_ContactType (..),
 
     -- ** SiteSettings
-    , SiteSettings (..)
-    , newSiteSettings
+    SiteSettings (..),
+    newSiteSettings,
 
     -- ** SiteSettings_VpaidAdapterChoiceTemplate
-    , SiteSettings_VpaidAdapterChoiceTemplate (..)
+    SiteSettings_VpaidAdapterChoiceTemplate (..),
 
     -- ** SiteSkippableSetting
-    , SiteSkippableSetting (..)
-    , newSiteSkippableSetting
+    SiteSkippableSetting (..),
+    newSiteSkippableSetting,
 
     -- ** SiteTranscodeSetting
-    , SiteTranscodeSetting (..)
-    , newSiteTranscodeSetting
+    SiteTranscodeSetting (..),
+    newSiteTranscodeSetting,
 
     -- ** SiteVideoSettings
-    , SiteVideoSettings (..)
-    , newSiteVideoSettings
+    SiteVideoSettings (..),
+    newSiteVideoSettings,
 
     -- ** SiteVideoSettings_Orientation
-    , SiteVideoSettings_Orientation (..)
+    SiteVideoSettings_Orientation (..),
 
     -- ** SitesListResponse
-    , SitesListResponse (..)
-    , newSitesListResponse
+    SitesListResponse (..),
+    newSitesListResponse,
 
     -- ** Size
-    , Size (..)
-    , newSize
+    Size (..),
+    newSize,
 
     -- ** SizesListResponse
-    , SizesListResponse (..)
-    , newSizesListResponse
+    SizesListResponse (..),
+    newSizesListResponse,
 
     -- ** SkippableSetting
-    , SkippableSetting (..)
-    , newSkippableSetting
+    SkippableSetting (..),
+    newSkippableSetting,
 
     -- ** SortedDimension
-    , SortedDimension (..)
-    , newSortedDimension
+    SortedDimension (..),
+    newSortedDimension,
 
     -- ** SortedDimension_SortOrder
-    , SortedDimension_SortOrder (..)
+    SortedDimension_SortOrder (..),
 
     -- ** Subaccount
-    , Subaccount (..)
-    , newSubaccount
+    Subaccount (..),
+    newSubaccount,
 
     -- ** SubaccountsListResponse
-    , SubaccountsListResponse (..)
-    , newSubaccountsListResponse
+    SubaccountsListResponse (..),
+    newSubaccountsListResponse,
 
     -- ** TagData
-    , TagData (..)
-    , newTagData
+    TagData (..),
+    newTagData,
 
     -- ** TagData_Format
-    , TagData_Format (..)
+    TagData_Format (..),
 
     -- ** TagSetting
-    , TagSetting (..)
-    , newTagSetting
+    TagSetting (..),
+    newTagSetting,
 
     -- ** TagSetting_KeywordOption
-    , TagSetting_KeywordOption (..)
+    TagSetting_KeywordOption (..),
 
     -- ** TagSettings
-    , TagSettings (..)
-    , newTagSettings
+    TagSettings (..),
+    newTagSettings,
 
     -- ** TargetWindow
-    , TargetWindow (..)
-    , newTargetWindow
+    TargetWindow (..),
+    newTargetWindow,
 
     -- ** TargetWindow_TargetWindowOption
-    , TargetWindow_TargetWindowOption (..)
+    TargetWindow_TargetWindowOption (..),
 
     -- ** TargetableRemarketingList
-    , TargetableRemarketingList (..)
-    , newTargetableRemarketingList
+    TargetableRemarketingList (..),
+    newTargetableRemarketingList,
 
     -- ** TargetableRemarketingList_ListSource
-    , TargetableRemarketingList_ListSource (..)
+    TargetableRemarketingList_ListSource (..),
 
     -- ** TargetableRemarketingListsListResponse
-    , TargetableRemarketingListsListResponse (..)
-    , newTargetableRemarketingListsListResponse
+    TargetableRemarketingListsListResponse (..),
+    newTargetableRemarketingListsListResponse,
 
     -- ** TargetingTemplate
-    , TargetingTemplate (..)
-    , newTargetingTemplate
+    TargetingTemplate (..),
+    newTargetingTemplate,
 
     -- ** TargetingTemplatesListResponse
-    , TargetingTemplatesListResponse (..)
-    , newTargetingTemplatesListResponse
+    TargetingTemplatesListResponse (..),
+    newTargetingTemplatesListResponse,
 
     -- ** TechnologyTargeting
-    , TechnologyTargeting (..)
-    , newTechnologyTargeting
+    TechnologyTargeting (..),
+    newTechnologyTargeting,
 
     -- ** ThirdPartyAuthenticationToken
-    , ThirdPartyAuthenticationToken (..)
-    , newThirdPartyAuthenticationToken
+    ThirdPartyAuthenticationToken (..),
+    newThirdPartyAuthenticationToken,
 
     -- ** ThirdPartyTrackingUrl
-    , ThirdPartyTrackingUrl (..)
-    , newThirdPartyTrackingUrl
+    ThirdPartyTrackingUrl (..),
+    newThirdPartyTrackingUrl,
 
     -- ** ThirdPartyTrackingUrl_ThirdPartyUrlType
-    , ThirdPartyTrackingUrl_ThirdPartyUrlType (..)
+    ThirdPartyTrackingUrl_ThirdPartyUrlType (..),
 
     -- ** TranscodeSetting
-    , TranscodeSetting (..)
-    , newTranscodeSetting
+    TranscodeSetting (..),
+    newTranscodeSetting,
 
     -- ** UniversalAdId
-    , UniversalAdId (..)
-    , newUniversalAdId
+    UniversalAdId (..),
+    newUniversalAdId,
 
     -- ** UniversalAdId_Registry
-    , UniversalAdId_Registry (..)
+    UniversalAdId_Registry (..),
 
     -- ** UserDefinedVariableConfiguration
-    , UserDefinedVariableConfiguration (..)
-    , newUserDefinedVariableConfiguration
+    UserDefinedVariableConfiguration (..),
+    newUserDefinedVariableConfiguration,
 
     -- ** UserDefinedVariableConfiguration_DataType
-    , UserDefinedVariableConfiguration_DataType (..)
+    UserDefinedVariableConfiguration_DataType (..),
 
     -- ** UserDefinedVariableConfiguration_VariableType
-    , UserDefinedVariableConfiguration_VariableType (..)
+    UserDefinedVariableConfiguration_VariableType (..),
 
     -- ** UserProfile
-    , UserProfile (..)
-    , newUserProfile
+    UserProfile (..),
+    newUserProfile,
 
     -- ** UserProfileList
-    , UserProfileList (..)
-    , newUserProfileList
+    UserProfileList (..),
+    newUserProfileList,
 
     -- ** UserRole
-    , UserRole (..)
-    , newUserRole
+    UserRole (..),
+    newUserRole,
 
     -- ** UserRolePermission
-    , UserRolePermission (..)
-    , newUserRolePermission
+    UserRolePermission (..),
+    newUserRolePermission,
 
     -- ** UserRolePermission_Availability
-    , UserRolePermission_Availability (..)
+    UserRolePermission_Availability (..),
 
     -- ** UserRolePermissionGroup
-    , UserRolePermissionGroup (..)
-    , newUserRolePermissionGroup
+    UserRolePermissionGroup (..),
+    newUserRolePermissionGroup,
 
     -- ** UserRolePermissionGroupsListResponse
-    , UserRolePermissionGroupsListResponse (..)
-    , newUserRolePermissionGroupsListResponse
+    UserRolePermissionGroupsListResponse (..),
+    newUserRolePermissionGroupsListResponse,
 
     -- ** UserRolePermissionsListResponse
-    , UserRolePermissionsListResponse (..)
-    , newUserRolePermissionsListResponse
+    UserRolePermissionsListResponse (..),
+    newUserRolePermissionsListResponse,
 
     -- ** UserRolesListResponse
-    , UserRolesListResponse (..)
-    , newUserRolesListResponse
+    UserRolesListResponse (..),
+    newUserRolesListResponse,
 
     -- ** VideoFormat
-    , VideoFormat (..)
-    , newVideoFormat
+    VideoFormat (..),
+    newVideoFormat,
 
     -- ** VideoFormat_FileType
-    , VideoFormat_FileType (..)
+    VideoFormat_FileType (..),
 
     -- ** VideoFormatsListResponse
-    , VideoFormatsListResponse (..)
-    , newVideoFormatsListResponse
+    VideoFormatsListResponse (..),
+    newVideoFormatsListResponse,
 
     -- ** VideoOffset
-    , VideoOffset (..)
-    , newVideoOffset
+    VideoOffset (..),
+    newVideoOffset,
 
     -- ** VideoSettings
-    , VideoSettings (..)
-    , newVideoSettings
+    VideoSettings (..),
+    newVideoSettings,
 
     -- ** VideoSettings_Orientation
-    , VideoSettings_Orientation (..)
+    VideoSettings_Orientation (..),
 
     -- ** AccountUserProfilesListSortField
-    , AccountUserProfilesListSortField (..)
+    AccountUserProfilesListSortField (..),
 
     -- ** AccountUserProfilesListSortOrder
-    , AccountUserProfilesListSortOrder (..)
+    AccountUserProfilesListSortOrder (..),
 
     -- ** AccountsListSortField
-    , AccountsListSortField (..)
+    AccountsListSortField (..),
 
     -- ** AccountsListSortOrder
-    , AccountsListSortOrder (..)
+    AccountsListSortOrder (..),
 
     -- ** AdsListCompatibility
-    , AdsListCompatibility (..)
+    AdsListCompatibility (..),
 
     -- ** AdsListSortField
-    , AdsListSortField (..)
+    AdsListSortField (..),
 
     -- ** AdsListSortOrder
-    , AdsListSortOrder (..)
+    AdsListSortOrder (..),
 
     -- ** AdsListType
-    , AdsListType (..)
+    AdsListType (..),
 
     -- ** AdvertiserGroupsListSortField
-    , AdvertiserGroupsListSortField (..)
+    AdvertiserGroupsListSortField (..),
 
     -- ** AdvertiserGroupsListSortOrder
-    , AdvertiserGroupsListSortOrder (..)
+    AdvertiserGroupsListSortOrder (..),
 
     -- ** AdvertiserLandingPagesListSortField
-    , AdvertiserLandingPagesListSortField (..)
+    AdvertiserLandingPagesListSortField (..),
 
     -- ** AdvertiserLandingPagesListSortOrder
-    , AdvertiserLandingPagesListSortOrder (..)
+    AdvertiserLandingPagesListSortOrder (..),
 
     -- ** AdvertisersListSortField
-    , AdvertisersListSortField (..)
+    AdvertisersListSortField (..),
 
     -- ** AdvertisersListSortOrder
-    , AdvertisersListSortOrder (..)
+    AdvertisersListSortOrder (..),
 
     -- ** AdvertisersListStatus
-    , AdvertisersListStatus (..)
+    AdvertisersListStatus (..),
 
     -- ** CampaignCreativeAssociationsListSortOrder
-    , CampaignCreativeAssociationsListSortOrder (..)
+    CampaignCreativeAssociationsListSortOrder (..),
 
     -- ** CampaignsListSortField
-    , CampaignsListSortField (..)
+    CampaignsListSortField (..),
 
     -- ** CampaignsListSortOrder
-    , CampaignsListSortOrder (..)
+    CampaignsListSortOrder (..),
 
     -- ** ChangeLogsListAction
-    , ChangeLogsListAction (..)
+    ChangeLogsListAction (..),
 
     -- ** ChangeLogsListObjectType
-    , ChangeLogsListObjectType (..)
+    ChangeLogsListObjectType (..),
 
     -- ** ContentCategoriesListSortField
-    , ContentCategoriesListSortField (..)
+    ContentCategoriesListSortField (..),
 
     -- ** ContentCategoriesListSortOrder
-    , ContentCategoriesListSortOrder (..)
+    ContentCategoriesListSortOrder (..),
 
     -- ** CreativeFieldValuesListSortField
-    , CreativeFieldValuesListSortField (..)
+    CreativeFieldValuesListSortField (..),
 
     -- ** CreativeFieldValuesListSortOrder
-    , CreativeFieldValuesListSortOrder (..)
+    CreativeFieldValuesListSortOrder (..),
 
     -- ** CreativeFieldsListSortField
-    , CreativeFieldsListSortField (..)
+    CreativeFieldsListSortField (..),
 
     -- ** CreativeFieldsListSortOrder
-    , CreativeFieldsListSortOrder (..)
+    CreativeFieldsListSortOrder (..),
 
     -- ** CreativeGroupsListSortField
-    , CreativeGroupsListSortField (..)
+    CreativeGroupsListSortField (..),
 
     -- ** CreativeGroupsListSortOrder
-    , CreativeGroupsListSortOrder (..)
+    CreativeGroupsListSortOrder (..),
 
     -- ** CreativesListSortField
-    , CreativesListSortField (..)
+    CreativesListSortField (..),
 
     -- ** CreativesListSortOrder
-    , CreativesListSortOrder (..)
+    CreativesListSortOrder (..),
 
     -- ** CreativesListTypes
-    , CreativesListTypes (..)
+    CreativesListTypes (..),
 
     -- ** DirectorySitesListSortField
-    , DirectorySitesListSortField (..)
+    DirectorySitesListSortField (..),
 
     -- ** DirectorySitesListSortOrder
-    , DirectorySitesListSortOrder (..)
+    DirectorySitesListSortOrder (..),
 
     -- ** DynamicTargetingKeysDeleteObjectType
-    , DynamicTargetingKeysDeleteObjectType (..)
+    DynamicTargetingKeysDeleteObjectType (..),
 
     -- ** DynamicTargetingKeysListObjectType
-    , DynamicTargetingKeysListObjectType (..)
+    DynamicTargetingKeysListObjectType (..),
 
     -- ** EventTagsListEventTagTypes
-    , EventTagsListEventTagTypes (..)
+    EventTagsListEventTagTypes (..),
 
     -- ** EventTagsListSortField
-    , EventTagsListSortField (..)
+    EventTagsListSortField (..),
 
     -- ** EventTagsListSortOrder
-    , EventTagsListSortOrder (..)
+    EventTagsListSortOrder (..),
 
     -- ** FilesListScope
-    , FilesListScope (..)
+    FilesListScope (..),
 
     -- ** FilesListSortField
-    , FilesListSortField (..)
+    FilesListSortField (..),
 
     -- ** FilesListSortOrder
-    , FilesListSortOrder (..)
+    FilesListSortOrder (..),
 
     -- ** FloodlightActivitiesListFloodlightActivityGroupType
-    , FloodlightActivitiesListFloodlightActivityGroupType (..)
+    FloodlightActivitiesListFloodlightActivityGroupType (..),
 
     -- ** FloodlightActivitiesListSortField
-    , FloodlightActivitiesListSortField (..)
+    FloodlightActivitiesListSortField (..),
 
     -- ** FloodlightActivitiesListSortOrder
-    , FloodlightActivitiesListSortOrder (..)
+    FloodlightActivitiesListSortOrder (..),
 
     -- ** FloodlightActivityGroupsListSortField
-    , FloodlightActivityGroupsListSortField (..)
+    FloodlightActivityGroupsListSortField (..),
 
     -- ** FloodlightActivityGroupsListSortOrder
-    , FloodlightActivityGroupsListSortOrder (..)
+    FloodlightActivityGroupsListSortOrder (..),
 
     -- ** FloodlightActivityGroupsListType
-    , FloodlightActivityGroupsListType (..)
+    FloodlightActivityGroupsListType (..),
 
     -- ** InventoryItemsListSortField
-    , InventoryItemsListSortField (..)
+    InventoryItemsListSortField (..),
 
     -- ** InventoryItemsListSortOrder
-    , InventoryItemsListSortOrder (..)
+    InventoryItemsListSortOrder (..),
 
     -- ** InventoryItemsListType
-    , InventoryItemsListType (..)
+    InventoryItemsListType (..),
 
     -- ** MobileAppsListDirectories
-    , MobileAppsListDirectories (..)
+    MobileAppsListDirectories (..),
 
     -- ** OrderDocumentsListSortField
-    , OrderDocumentsListSortField (..)
+    OrderDocumentsListSortField (..),
 
     -- ** OrderDocumentsListSortOrder
-    , OrderDocumentsListSortOrder (..)
+    OrderDocumentsListSortOrder (..),
 
     -- ** OrdersListSortField
-    , OrdersListSortField (..)
+    OrdersListSortField (..),
 
     -- ** OrdersListSortOrder
-    , OrdersListSortOrder (..)
+    OrdersListSortOrder (..),
 
     -- ** PlacementGroupsListPlacementGroupType
-    , PlacementGroupsListPlacementGroupType (..)
+    PlacementGroupsListPlacementGroupType (..),
 
     -- ** PlacementGroupsListPricingTypes
-    , PlacementGroupsListPricingTypes (..)
+    PlacementGroupsListPricingTypes (..),
 
     -- ** PlacementGroupsListSortField
-    , PlacementGroupsListSortField (..)
+    PlacementGroupsListSortField (..),
 
     -- ** PlacementGroupsListSortOrder
-    , PlacementGroupsListSortOrder (..)
+    PlacementGroupsListSortOrder (..),
 
     -- ** PlacementStrategiesListSortField
-    , PlacementStrategiesListSortField (..)
+    PlacementStrategiesListSortField (..),
 
     -- ** PlacementStrategiesListSortOrder
-    , PlacementStrategiesListSortOrder (..)
+    PlacementStrategiesListSortOrder (..),
 
     -- ** PlacementsGeneratetagsTagFormats
-    , PlacementsGeneratetagsTagFormats (..)
+    PlacementsGeneratetagsTagFormats (..),
 
     -- ** PlacementsListCompatibilities
-    , PlacementsListCompatibilities (..)
+    PlacementsListCompatibilities (..),
 
     -- ** PlacementsListPaymentSource
-    , PlacementsListPaymentSource (..)
+    PlacementsListPaymentSource (..),
 
     -- ** PlacementsListPricingTypes
-    , PlacementsListPricingTypes (..)
+    PlacementsListPricingTypes (..),
 
     -- ** PlacementsListSortField
-    , PlacementsListSortField (..)
+    PlacementsListSortField (..),
 
     -- ** PlacementsListSortOrder
-    , PlacementsListSortOrder (..)
+    PlacementsListSortOrder (..),
 
     -- ** ProjectsListSortField
-    , ProjectsListSortField (..)
+    ProjectsListSortField (..),
 
     -- ** ProjectsListSortOrder
-    , ProjectsListSortOrder (..)
+    ProjectsListSortOrder (..),
 
     -- ** RemarketingListsListSortField
-    , RemarketingListsListSortField (..)
+    RemarketingListsListSortField (..),
 
     -- ** RemarketingListsListSortOrder
-    , RemarketingListsListSortOrder (..)
+    RemarketingListsListSortOrder (..),
 
     -- ** ReportsFilesListSortField
-    , ReportsFilesListSortField (..)
+    ReportsFilesListSortField (..),
 
     -- ** ReportsFilesListSortOrder
-    , ReportsFilesListSortOrder (..)
+    ReportsFilesListSortOrder (..),
 
     -- ** ReportsListScope
-    , ReportsListScope (..)
+    ReportsListScope (..),
 
     -- ** ReportsListSortField
-    , ReportsListSortField (..)
+    ReportsListSortField (..),
 
     -- ** ReportsListSortOrder
-    , ReportsListSortOrder (..)
+    ReportsListSortOrder (..),
 
     -- ** SitesListSortField
-    , SitesListSortField (..)
+    SitesListSortField (..),
 
     -- ** SitesListSortOrder
-    , SitesListSortOrder (..)
+    SitesListSortOrder (..),
 
     -- ** SubaccountsListSortField
-    , SubaccountsListSortField (..)
+    SubaccountsListSortField (..),
 
     -- ** SubaccountsListSortOrder
-    , SubaccountsListSortOrder (..)
+    SubaccountsListSortOrder (..),
 
     -- ** TargetableRemarketingListsListSortField
-    , TargetableRemarketingListsListSortField (..)
+    TargetableRemarketingListsListSortField (..),
 
     -- ** TargetableRemarketingListsListSortOrder
-    , TargetableRemarketingListsListSortOrder (..)
+    TargetableRemarketingListsListSortOrder (..),
 
     -- ** TargetingTemplatesListSortField
-    , TargetingTemplatesListSortField (..)
+    TargetingTemplatesListSortField (..),
 
     -- ** TargetingTemplatesListSortOrder
-    , TargetingTemplatesListSortOrder (..)
+    TargetingTemplatesListSortOrder (..),
 
     -- ** UserRolesListSortField
-    , UserRolesListSortField (..)
+    UserRolesListSortField (..),
 
     -- ** UserRolesListSortOrder
-    , UserRolesListSortOrder (..)
-    ) where
+    UserRolesListSortOrder (..),
+  )
+where
 
 import Gogol.DFAReporting.AccountActiveAdSummaries.Get
 import Gogol.DFAReporting.AccountPermissionGroups.Get

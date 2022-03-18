@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,91 +30,98 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.contentCategories.delete@.
 module Gogol.DFAReporting.ContentCategories.Delete
-    (
-    -- * Resource
-      DFAReportingContentCategoriesDeleteResource
+  ( -- * Resource
+    DFAReportingContentCategoriesDeleteResource,
 
     -- ** Constructing a Request
-    , newDFAReportingContentCategoriesDelete
-    , DFAReportingContentCategoriesDelete
-    ) where
+    newDFAReportingContentCategoriesDelete,
+    DFAReportingContentCategoriesDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DFAReporting.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @dfareporting.contentCategories.delete@ method which the
 -- 'DFAReportingContentCategoriesDelete' request conforms to.
 type DFAReportingContentCategoriesDeleteResource =
-     "dfareporting" Core.:>
-       "v3.5" Core.:>
-         "userprofiles" Core.:>
-           Core.Capture "profileId" Core.Int64 Core.:>
-             "contentCategories" Core.:>
-               Core.Capture "id" Core.Int64 Core.:>
-                 Core.QueryParam "$.xgafv" Xgafv Core.:>
-                   Core.QueryParam "access_token" Core.Text Core.:>
-                     Core.QueryParam "callback" Core.Text Core.:>
-                       Core.QueryParam "uploadType" Core.Text Core.:>
-                         Core.QueryParam "upload_protocol" Core.Text Core.:>
-                           Core.QueryParam "alt" Core.AltJSON Core.:>
-                             Core.Delete '[Core.JSON] ()
+  "dfareporting"
+    Core.:> "v3.5"
+    Core.:> "userprofiles"
+    Core.:> Core.Capture "profileId" Core.Int64
+    Core.:> "contentCategories"
+    Core.:> Core.Capture "id" Core.Int64
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Deletes an existing content category.
 --
 -- /See:/ 'newDFAReportingContentCategoriesDelete' smart constructor.
 data DFAReportingContentCategoriesDelete = DFAReportingContentCategoriesDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Content category ID.
-    , id :: Core.Int64
-      -- | User profile ID associated with this request.
-    , profileId :: Core.Int64
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Content category ID.
+    id :: Core.Int64,
+    -- | User profile ID associated with this request.
+    profileId :: Core.Int64,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingContentCategoriesDelete' with the minimum fields required to make a request.
-newDFAReportingContentCategoriesDelete 
-    ::  Core.Int64
-       -- ^  Content category ID. See 'id'.
-    -> Core.Int64
-       -- ^  User profile ID associated with this request. See 'profileId'.
-    -> DFAReportingContentCategoriesDelete
+newDFAReportingContentCategoriesDelete ::
+  -- |  Content category ID. See 'id'.
+  Core.Int64 ->
+  -- |  User profile ID associated with this request. See 'profileId'.
+  Core.Int64 ->
+  DFAReportingContentCategoriesDelete
 newDFAReportingContentCategoriesDelete id profileId =
   DFAReportingContentCategoriesDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , id = id
-    , profileId = profileId
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      id = id,
+      profileId = profileId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           DFAReportingContentCategoriesDelete
-         where
-        type Rs DFAReportingContentCategoriesDelete = ()
-        type Scopes DFAReportingContentCategoriesDelete =
-             '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient DFAReportingContentCategoriesDelete{..}
-          = go profileId id xgafv accessToken callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              dFAReportingService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           DFAReportingContentCategoriesDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    DFAReportingContentCategoriesDelete
+  where
+  type Rs DFAReportingContentCategoriesDelete = ()
+  type
+    Scopes DFAReportingContentCategoriesDelete =
+      '["https://www.googleapis.com/auth/dfatrafficking"]
+  requestClient DFAReportingContentCategoriesDelete {..} =
+    go
+      profileId
+      id
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                DFAReportingContentCategoriesDeleteResource
+          )
+          Core.mempty
