@@ -1,772 +1,698 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Gmail
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Gmail API lets you view and manage Gmail mailbox data like threads,
--- messages, and labels.
+-- The Gmail API lets you view and manage Gmail mailbox data like threads, messages, and labels.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference>
 module Network.Google.Gmail
-    (
-    -- * Service Configuration
-      gmailService
+  ( -- * Configuration
+    gmailService,
 
     -- * OAuth Scopes
-    , gmailSettingsBasicScope
-    , gmailAddonsCurrentMessageActionScope
-    , gmailAddonsCurrentMessageMetadataScope
-    , mailGoogleComScope
-    , gmailModifyScope
-    , gmailMetadataScope
-    , gmailLabelsScope
-    , gmailSettingsSharingScope
-    , gmailSendScope
-    , gmailAddonsCurrentMessageReadOnlyScope
-    , gmailAddonsCurrentActionComposeScope
-    , gmailInsertScope
-    , gmailComposeScope
-    , gmailReadOnlyScope
-
-    -- * API Declaration
-    , GmailAPI
+    mailGoogleComScope,
+    gmailAddonsCurrentActionComposeScope,
+    gmailAddonsCurrentMessageActionScope,
+    gmailAddonsCurrentMessageMetadataScope,
+    gmailAddonsCurrentMessageReadOnlyScope,
+    gmailComposeScope,
+    gmailInsertScope,
+    gmailLabelsScope,
+    gmailMetadataScope,
+    gmailModifyScope,
+    gmailReadOnlyScope,
+    gmailSendScope,
+    gmailSettingsBasicScope,
+    gmailSettingsSharingScope,
 
     -- * Resources
 
     -- ** gmail.users.drafts.create
-    , module Network.Google.Resource.Gmail.Users.Drafts.Create
+    GmailUsersDraftsCreateResource,
+    newGmailUsersDraftsCreate,
+    GmailUsersDraftsCreate,
 
     -- ** gmail.users.drafts.delete
-    , module Network.Google.Resource.Gmail.Users.Drafts.Delete
+    GmailUsersDraftsDeleteResource,
+    newGmailUsersDraftsDelete,
+    GmailUsersDraftsDelete,
 
     -- ** gmail.users.drafts.get
-    , module Network.Google.Resource.Gmail.Users.Drafts.Get
+    GmailUsersDraftsGetResource,
+    newGmailUsersDraftsGet,
+    GmailUsersDraftsGet,
 
     -- ** gmail.users.drafts.list
-    , module Network.Google.Resource.Gmail.Users.Drafts.List
+    GmailUsersDraftsListResource,
+    newGmailUsersDraftsList,
+    GmailUsersDraftsList,
 
     -- ** gmail.users.drafts.send
-    , module Network.Google.Resource.Gmail.Users.Drafts.Send
+    GmailUsersDraftsSendResource,
+    newGmailUsersDraftsSend,
+    GmailUsersDraftsSend,
 
     -- ** gmail.users.drafts.update
-    , module Network.Google.Resource.Gmail.Users.Drafts.Update
+    GmailUsersDraftsUpdateResource,
+    newGmailUsersDraftsUpdate,
+    GmailUsersDraftsUpdate,
 
     -- ** gmail.users.getProfile
-    , module Network.Google.Resource.Gmail.Users.GetProFile
+    GmailUsersGetProfileResource,
+    newGmailUsersGetProfile,
+    GmailUsersGetProfile,
 
     -- ** gmail.users.history.list
-    , module Network.Google.Resource.Gmail.Users.History.List
+    GmailUsersHistoryListResource,
+    newGmailUsersHistoryList,
+    GmailUsersHistoryList,
 
     -- ** gmail.users.labels.create
-    , module Network.Google.Resource.Gmail.Users.Labels.Create
+    GmailUsersLabelsCreateResource,
+    newGmailUsersLabelsCreate,
+    GmailUsersLabelsCreate,
 
     -- ** gmail.users.labels.delete
-    , module Network.Google.Resource.Gmail.Users.Labels.Delete
+    GmailUsersLabelsDeleteResource,
+    newGmailUsersLabelsDelete,
+    GmailUsersLabelsDelete,
 
     -- ** gmail.users.labels.get
-    , module Network.Google.Resource.Gmail.Users.Labels.Get
+    GmailUsersLabelsGetResource,
+    newGmailUsersLabelsGet,
+    GmailUsersLabelsGet,
 
     -- ** gmail.users.labels.list
-    , module Network.Google.Resource.Gmail.Users.Labels.List
+    GmailUsersLabelsListResource,
+    newGmailUsersLabelsList,
+    GmailUsersLabelsList,
 
     -- ** gmail.users.labels.patch
-    , module Network.Google.Resource.Gmail.Users.Labels.Patch
+    GmailUsersLabelsPatchResource,
+    newGmailUsersLabelsPatch,
+    GmailUsersLabelsPatch,
 
     -- ** gmail.users.labels.update
-    , module Network.Google.Resource.Gmail.Users.Labels.Update
+    GmailUsersLabelsUpdateResource,
+    newGmailUsersLabelsUpdate,
+    GmailUsersLabelsUpdate,
 
     -- ** gmail.users.messages.attachments.get
-    , module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
+    GmailUsersMessagesAttachmentsGetResource,
+    newGmailUsersMessagesAttachmentsGet,
+    GmailUsersMessagesAttachmentsGet,
 
     -- ** gmail.users.messages.batchDelete
-    , module Network.Google.Resource.Gmail.Users.Messages.BatchDelete
+    GmailUsersMessagesBatchDeleteResource,
+    newGmailUsersMessagesBatchDelete,
+    GmailUsersMessagesBatchDelete,
 
     -- ** gmail.users.messages.batchModify
-    , module Network.Google.Resource.Gmail.Users.Messages.BatchModify
+    GmailUsersMessagesBatchModifyResource,
+    newGmailUsersMessagesBatchModify,
+    GmailUsersMessagesBatchModify,
 
     -- ** gmail.users.messages.delete
-    , module Network.Google.Resource.Gmail.Users.Messages.Delete
+    GmailUsersMessagesDeleteResource,
+    newGmailUsersMessagesDelete,
+    GmailUsersMessagesDelete,
 
     -- ** gmail.users.messages.get
-    , module Network.Google.Resource.Gmail.Users.Messages.Get
+    GmailUsersMessagesGetResource,
+    newGmailUsersMessagesGet,
+    GmailUsersMessagesGet,
 
     -- ** gmail.users.messages.import
-    , module Network.Google.Resource.Gmail.Users.Messages.Import
+    GmailUsersMessagesImportResource,
+    newGmailUsersMessagesImport,
+    GmailUsersMessagesImport,
 
     -- ** gmail.users.messages.insert
-    , module Network.Google.Resource.Gmail.Users.Messages.Insert
+    GmailUsersMessagesInsertResource,
+    newGmailUsersMessagesInsert,
+    GmailUsersMessagesInsert,
 
     -- ** gmail.users.messages.list
-    , module Network.Google.Resource.Gmail.Users.Messages.List
+    GmailUsersMessagesListResource,
+    newGmailUsersMessagesList,
+    GmailUsersMessagesList,
 
     -- ** gmail.users.messages.modify
-    , module Network.Google.Resource.Gmail.Users.Messages.Modify
+    GmailUsersMessagesModifyResource,
+    newGmailUsersMessagesModify,
+    GmailUsersMessagesModify,
 
     -- ** gmail.users.messages.send
-    , module Network.Google.Resource.Gmail.Users.Messages.Send
+    GmailUsersMessagesSendResource,
+    newGmailUsersMessagesSend,
+    GmailUsersMessagesSend,
 
     -- ** gmail.users.messages.trash
-    , module Network.Google.Resource.Gmail.Users.Messages.Trash
+    GmailUsersMessagesTrashResource,
+    newGmailUsersMessagesTrash,
+    GmailUsersMessagesTrash,
 
     -- ** gmail.users.messages.untrash
-    , module Network.Google.Resource.Gmail.Users.Messages.Untrash
+    GmailUsersMessagesUntrashResource,
+    newGmailUsersMessagesUntrash,
+    GmailUsersMessagesUntrash,
 
     -- ** gmail.users.settings.delegates.create
-    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.Create
+    GmailUsersSettingsDelegatesCreateResource,
+    newGmailUsersSettingsDelegatesCreate,
+    GmailUsersSettingsDelegatesCreate,
 
     -- ** gmail.users.settings.delegates.delete
-    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.Delete
+    GmailUsersSettingsDelegatesDeleteResource,
+    newGmailUsersSettingsDelegatesDelete,
+    GmailUsersSettingsDelegatesDelete,
 
     -- ** gmail.users.settings.delegates.get
-    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.Get
+    GmailUsersSettingsDelegatesGetResource,
+    newGmailUsersSettingsDelegatesGet,
+    GmailUsersSettingsDelegatesGet,
 
     -- ** gmail.users.settings.delegates.list
-    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.List
+    GmailUsersSettingsDelegatesListResource,
+    newGmailUsersSettingsDelegatesList,
+    GmailUsersSettingsDelegatesList,
 
     -- ** gmail.users.settings.filters.create
-    , module Network.Google.Resource.Gmail.Users.Settings.Filters.Create
+    GmailUsersSettingsFiltersCreateResource,
+    newGmailUsersSettingsFiltersCreate,
+    GmailUsersSettingsFiltersCreate,
 
     -- ** gmail.users.settings.filters.delete
-    , module Network.Google.Resource.Gmail.Users.Settings.Filters.Delete
+    GmailUsersSettingsFiltersDeleteResource,
+    newGmailUsersSettingsFiltersDelete,
+    GmailUsersSettingsFiltersDelete,
 
     -- ** gmail.users.settings.filters.get
-    , module Network.Google.Resource.Gmail.Users.Settings.Filters.Get
+    GmailUsersSettingsFiltersGetResource,
+    newGmailUsersSettingsFiltersGet,
+    GmailUsersSettingsFiltersGet,
 
     -- ** gmail.users.settings.filters.list
-    , module Network.Google.Resource.Gmail.Users.Settings.Filters.List
+    GmailUsersSettingsFiltersListResource,
+    newGmailUsersSettingsFiltersList,
+    GmailUsersSettingsFiltersList,
 
     -- ** gmail.users.settings.forwardingAddresses.create
-    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Create
+    GmailUsersSettingsForwardingAddressesCreateResource,
+    newGmailUsersSettingsForwardingAddressesCreate,
+    GmailUsersSettingsForwardingAddressesCreate,
 
     -- ** gmail.users.settings.forwardingAddresses.delete
-    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Delete
+    GmailUsersSettingsForwardingAddressesDeleteResource,
+    newGmailUsersSettingsForwardingAddressesDelete,
+    GmailUsersSettingsForwardingAddressesDelete,
 
     -- ** gmail.users.settings.forwardingAddresses.get
-    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Get
+    GmailUsersSettingsForwardingAddressesGetResource,
+    newGmailUsersSettingsForwardingAddressesGet,
+    GmailUsersSettingsForwardingAddressesGet,
 
     -- ** gmail.users.settings.forwardingAddresses.list
-    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.List
+    GmailUsersSettingsForwardingAddressesListResource,
+    newGmailUsersSettingsForwardingAddressesList,
+    GmailUsersSettingsForwardingAddressesList,
 
     -- ** gmail.users.settings.getAutoForwarding
-    , module Network.Google.Resource.Gmail.Users.Settings.GetAutoForwarding
+    GmailUsersSettingsGetAutoForwardingResource,
+    newGmailUsersSettingsGetAutoForwarding,
+    GmailUsersSettingsGetAutoForwarding,
 
     -- ** gmail.users.settings.getImap
-    , module Network.Google.Resource.Gmail.Users.Settings.GetImap
+    GmailUsersSettingsGetImapResource,
+    newGmailUsersSettingsGetImap,
+    GmailUsersSettingsGetImap,
 
     -- ** gmail.users.settings.getLanguage
-    , module Network.Google.Resource.Gmail.Users.Settings.GetLanguage
+    GmailUsersSettingsGetLanguageResource,
+    newGmailUsersSettingsGetLanguage,
+    GmailUsersSettingsGetLanguage,
 
     -- ** gmail.users.settings.getPop
-    , module Network.Google.Resource.Gmail.Users.Settings.GetPop
+    GmailUsersSettingsGetPopResource,
+    newGmailUsersSettingsGetPop,
+    GmailUsersSettingsGetPop,
 
     -- ** gmail.users.settings.getVacation
-    , module Network.Google.Resource.Gmail.Users.Settings.GetVacation
+    GmailUsersSettingsGetVacationResource,
+    newGmailUsersSettingsGetVacation,
+    GmailUsersSettingsGetVacation,
 
     -- ** gmail.users.settings.sendAs.create
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Create
+    GmailUsersSettingsSendAsCreateResource,
+    newGmailUsersSettingsSendAsCreate,
+    GmailUsersSettingsSendAsCreate,
 
     -- ** gmail.users.settings.sendAs.delete
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
+    GmailUsersSettingsSendAsDeleteResource,
+    newGmailUsersSettingsSendAsDelete,
+    GmailUsersSettingsSendAsDelete,
 
     -- ** gmail.users.settings.sendAs.get
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
+    GmailUsersSettingsSendAsGetResource,
+    newGmailUsersSettingsSendAsGet,
+    GmailUsersSettingsSendAsGet,
 
     -- ** gmail.users.settings.sendAs.list
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.List
+    GmailUsersSettingsSendAsListResource,
+    newGmailUsersSettingsSendAsList,
+    GmailUsersSettingsSendAsList,
 
     -- ** gmail.users.settings.sendAs.patch
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
+    GmailUsersSettingsSendAsPatchResource,
+    newGmailUsersSettingsSendAsPatch,
+    GmailUsersSettingsSendAsPatch,
 
     -- ** gmail.users.settings.sendAs.smimeInfo.delete
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
+    GmailUsersSettingsSendAsSmimeInfoDeleteResource,
+    newGmailUsersSettingsSendAsSmimeInfoDelete,
+    GmailUsersSettingsSendAsSmimeInfoDelete,
 
     -- ** gmail.users.settings.sendAs.smimeInfo.get
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Get
+    GmailUsersSettingsSendAsSmimeInfoGetResource,
+    newGmailUsersSettingsSendAsSmimeInfoGet,
+    GmailUsersSettingsSendAsSmimeInfoGet,
 
     -- ** gmail.users.settings.sendAs.smimeInfo.insert
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
+    GmailUsersSettingsSendAsSmimeInfoInsertResource,
+    newGmailUsersSettingsSendAsSmimeInfoInsert,
+    GmailUsersSettingsSendAsSmimeInfoInsert,
 
     -- ** gmail.users.settings.sendAs.smimeInfo.list
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.List
+    GmailUsersSettingsSendAsSmimeInfoListResource,
+    newGmailUsersSettingsSendAsSmimeInfoList,
+    GmailUsersSettingsSendAsSmimeInfoList,
 
     -- ** gmail.users.settings.sendAs.smimeInfo.setDefault
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
+    GmailUsersSettingsSendAsSmimeInfoSetDefaultResource,
+    newGmailUsersSettingsSendAsSmimeInfoSetDefault,
+    GmailUsersSettingsSendAsSmimeInfoSetDefault,
 
     -- ** gmail.users.settings.sendAs.update
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
+    GmailUsersSettingsSendAsUpdateResource,
+    newGmailUsersSettingsSendAsUpdate,
+    GmailUsersSettingsSendAsUpdate,
 
     -- ** gmail.users.settings.sendAs.verify
-    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
+    GmailUsersSettingsSendAsVerifyResource,
+    newGmailUsersSettingsSendAsVerify,
+    GmailUsersSettingsSendAsVerify,
 
     -- ** gmail.users.settings.updateAutoForwarding
-    , module Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
+    GmailUsersSettingsUpdateAutoForwardingResource,
+    newGmailUsersSettingsUpdateAutoForwarding,
+    GmailUsersSettingsUpdateAutoForwarding,
 
     -- ** gmail.users.settings.updateImap
-    , module Network.Google.Resource.Gmail.Users.Settings.UpdateImap
+    GmailUsersSettingsUpdateImapResource,
+    newGmailUsersSettingsUpdateImap,
+    GmailUsersSettingsUpdateImap,
 
     -- ** gmail.users.settings.updateLanguage
-    , module Network.Google.Resource.Gmail.Users.Settings.UpdateLanguage
+    GmailUsersSettingsUpdateLanguageResource,
+    newGmailUsersSettingsUpdateLanguage,
+    GmailUsersSettingsUpdateLanguage,
 
     -- ** gmail.users.settings.updatePop
-    , module Network.Google.Resource.Gmail.Users.Settings.UpdatePop
+    GmailUsersSettingsUpdatePopResource,
+    newGmailUsersSettingsUpdatePop,
+    GmailUsersSettingsUpdatePop,
 
     -- ** gmail.users.settings.updateVacation
-    , module Network.Google.Resource.Gmail.Users.Settings.UpdateVacation
+    GmailUsersSettingsUpdateVacationResource,
+    newGmailUsersSettingsUpdateVacation,
+    GmailUsersSettingsUpdateVacation,
 
     -- ** gmail.users.stop
-    , module Network.Google.Resource.Gmail.Users.Stop
+    GmailUsersStopResource,
+    newGmailUsersStop,
+    GmailUsersStop,
 
     -- ** gmail.users.threads.delete
-    , module Network.Google.Resource.Gmail.Users.Threads.Delete
+    GmailUsersThreadsDeleteResource,
+    newGmailUsersThreadsDelete,
+    GmailUsersThreadsDelete,
 
     -- ** gmail.users.threads.get
-    , module Network.Google.Resource.Gmail.Users.Threads.Get
+    GmailUsersThreadsGetResource,
+    newGmailUsersThreadsGet,
+    GmailUsersThreadsGet,
 
     -- ** gmail.users.threads.list
-    , module Network.Google.Resource.Gmail.Users.Threads.List
+    GmailUsersThreadsListResource,
+    newGmailUsersThreadsList,
+    GmailUsersThreadsList,
 
     -- ** gmail.users.threads.modify
-    , module Network.Google.Resource.Gmail.Users.Threads.Modify
+    GmailUsersThreadsModifyResource,
+    newGmailUsersThreadsModify,
+    GmailUsersThreadsModify,
 
     -- ** gmail.users.threads.trash
-    , module Network.Google.Resource.Gmail.Users.Threads.Trash
+    GmailUsersThreadsTrashResource,
+    newGmailUsersThreadsTrash,
+    GmailUsersThreadsTrash,
 
     -- ** gmail.users.threads.untrash
-    , module Network.Google.Resource.Gmail.Users.Threads.Untrash
+    GmailUsersThreadsUntrashResource,
+    newGmailUsersThreadsUntrash,
+    GmailUsersThreadsUntrash,
 
     -- ** gmail.users.watch
-    , module Network.Google.Resource.Gmail.Users.Watch
+    GmailUsersWatchResource,
+    newGmailUsersWatch,
+    GmailUsersWatch,
 
     -- * Types
 
-    -- ** BatchDeleteMessagesRequest
-    , BatchDeleteMessagesRequest
-    , batchDeleteMessagesRequest
-    , bdmrIds
-
-    -- ** FilterCriteriaSizeComparison
-    , FilterCriteriaSizeComparison (..)
-
-    -- ** Delegate
-    , Delegate
-    , delegate
-    , dVerificationStatus
-    , dDelegateEmail
-
-    -- ** UsersMessagesGetFormat
-    , UsersMessagesGetFormat (..)
-
-    -- ** ModifyThreadRequest
-    , ModifyThreadRequest
-    , modifyThreadRequest
-    , mtrRemoveLabelIds
-    , mtrAddLabelIds
-
-    -- ** ListFiltersResponse
-    , ListFiltersResponse
-    , listFiltersResponse
-    , lfrFilter
-
-    -- ** ModifyMessageRequest
-    , ModifyMessageRequest
-    , modifyMessageRequest
-    , mmrRemoveLabelIds
-    , mmrAddLabelIds
-
-    -- ** ListForwardingAddressesResponse
-    , ListForwardingAddressesResponse
-    , listForwardingAddressesResponse
-    , lfarForwardingAddresses
-
-    -- ** PopSettings
-    , PopSettings
-    , popSettings
-    , psAccessWindow
-    , psDisPosition
-
-    -- ** PopSettingsAccessWindow
-    , PopSettingsAccessWindow (..)
-
-    -- ** History
-    , History
-    , history
-    , hLabelsRemoved
-    , hMessagesDeleted
-    , hMessagesAdded
-    , hLabelsAdded
-    , hId
-    , hMessages
-
-    -- ** ListDelegatesResponse
-    , ListDelegatesResponse
-    , listDelegatesResponse
-    , ldrDelegates
-
-    -- ** ForwardingAddressVerificationStatus
-    , ForwardingAddressVerificationStatus (..)
-
-    -- ** LabelColor
-    , LabelColor
-    , labelColor
-    , lcBackgRoundColor
-    , lcTextColor
-
-    -- ** FilterCriteria
-    , FilterCriteria
-    , filterCriteria
-    , fcSizeComparison
-    , fcSubject
-    , fcSize
-    , fcExcludeChats
-    , fcTo
-    , fcFrom
-    , fcQuery
-    , fcNegatedQuery
-    , fcHasAttachment
-
-    -- ** ProFile
-    , ProFile
-    , proFile
-    , pfMessagesTotal
-    , pfThreadsTotal
-    , pfHistoryId
-    , pfEmailAddress
-
-    -- ** AutoForwardingDisPosition
-    , AutoForwardingDisPosition (..)
-
-    -- ** MessagePartHeader
-    , MessagePartHeader
-    , messagePartHeader
-    , mphValue
-    , mphName
-
-    -- ** UsersHistoryListHistoryTypes
-    , UsersHistoryListHistoryTypes (..)
-
-    -- ** SendAsVerificationStatus
-    , SendAsVerificationStatus (..)
-
-    -- ** ListHistoryResponse
-    , ListHistoryResponse
-    , listHistoryResponse
-    , lhrNextPageToken
-    , lhrHistory
-    , lhrHistoryId
-
-    -- ** SendAs
-    , SendAs
-    , sendAs
-    , saSignature
-    , saReplyToAddress
-    , saTreatAsAlias
-    , saSendAsEmail
-    , saDisplayName
-    , saVerificationStatus
-    , saSmtpMsa
-    , saIsPrimary
-    , saIsDefault
-
-    -- ** LabelType
-    , LabelType (..)
-
-    -- ** UsersDraftsGetFormat
-    , UsersDraftsGetFormat (..)
-
-    -- ** UsersMessagesImportInternalDateSource
-    , UsersMessagesImportInternalDateSource (..)
-
-    -- ** LabelMessageListVisibility
-    , LabelMessageListVisibility (..)
-
-    -- ** ListThreadsResponse
-    , ListThreadsResponse
-    , listThreadsResponse
-    , ltrNextPageToken
-    , ltrResultSizeEstimate
-    , ltrThreads
-
-    -- ** MessagePart
-    , MessagePart
-    , messagePart
-    , mpParts
-    , mpBody
-    , mpMimeType
-    , mpHeaders
-    , mpPartId
-    , mpFilename
-
-    -- ** HistoryLabelAdded
-    , HistoryLabelAdded
-    , historyLabelAdded
-    , hlaLabelIds
-    , hlaMessage
-
-    -- ** ListLabelsResponse
-    , ListLabelsResponse
-    , listLabelsResponse
-    , llrLabels
-
-    -- ** VacationSettings
-    , VacationSettings
-    , vacationSettings
-    , vsEnableAutoReply
-    , vsResponseBodyPlainText
-    , vsRestrictToDomain
-    , vsStartTime
-    , vsResponseBodyHTML
-    , vsRestrictToContacts
-    , vsResponseSubject
-    , vsEndTime
-
-    -- ** LabelLabelListVisibility
-    , LabelLabelListVisibility (..)
-
-    -- ** HistoryMessageDeleted
-    , HistoryMessageDeleted
-    , historyMessageDeleted
-    , hmdMessage
-
-    -- ** MessagePartBody
-    , MessagePartBody
-    , messagePartBody
-    , mpbSize
-    , mpbData
-    , mpbAttachmentId
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AutoForwarding
-    , AutoForwarding
-    , autoForwarding
-    , afEnabled
-    , afDisPosition
-    , afEmailAddress
+    AutoForwarding (..),
+    newAutoForwarding,
 
-    -- ** ListDraftsResponse
-    , ListDraftsResponse
-    , listDraftsResponse
-    , ldrNextPageToken
-    , ldrResultSizeEstimate
-    , ldrDrafts
+    -- ** AutoForwarding_Disposition
+    AutoForwarding_Disposition (..),
 
-    -- ** ListSendAsResponse
-    , ListSendAsResponse
-    , listSendAsResponse
-    , lsarSendAs
-
-    -- ** LanguageSettings
-    , LanguageSettings
-    , languageSettings
-    , lsDisplayLanguage
-
-    -- ** WatchResponse
-    , WatchResponse
-    , watchResponse
-    , wrExpiration
-    , wrHistoryId
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** DelegateVerificationStatus
-    , DelegateVerificationStatus (..)
-
-    -- ** UsersThreadsGetFormat
-    , UsersThreadsGetFormat (..)
+    -- ** BatchDeleteMessagesRequest
+    BatchDeleteMessagesRequest (..),
+    newBatchDeleteMessagesRequest,
 
     -- ** BatchModifyMessagesRequest
-    , BatchModifyMessagesRequest
-    , batchModifyMessagesRequest
-    , bmmrIds
-    , bmmrRemoveLabelIds
-    , bmmrAddLabelIds
+    BatchModifyMessagesRequest (..),
+    newBatchModifyMessagesRequest,
+
+    -- ** Delegate
+    Delegate (..),
+    newDelegate,
+
+    -- ** Delegate_VerificationStatus
+    Delegate_VerificationStatus (..),
 
     -- ** Draft
-    , Draft
-    , draft
-    , dId
-    , dMessage
-
-    -- ** SmtpMsa
-    , SmtpMsa
-    , smtpMsa
-    , smSecurityMode
-    , smUsername
-    , smPassword
-    , smHost
-    , smPort
-
-    -- ** ForwardingAddress
-    , ForwardingAddress
-    , forwardingAddress
-    , faForwardingEmail
-    , faVerificationStatus
-
-    -- ** PopSettingsDisPosition
-    , PopSettingsDisPosition (..)
+    Draft (..),
+    newDraft,
 
     -- ** Filter
-    , Filter
-    , filter'
-    , fAction
-    , fId
-    , fCriteria
-
-    -- ** WatchRequest
-    , WatchRequest
-    , watchRequest
-    , wrLabelFilterAction
-    , wrTopicName
-    , wrLabelIds
-
-    -- ** WatchRequestLabelFilterAction
-    , WatchRequestLabelFilterAction (..)
-
-    -- ** ImapSettings
-    , ImapSettings
-    , imapSettings
-    , isEnabled
-    , isExpungeBehavior
-    , isAutoExpunge
-    , isMaxFolderSize
-
-    -- ** ImapSettingsExpungeBehavior
-    , ImapSettingsExpungeBehavior (..)
-
-    -- ** ListSmimeInfoResponse
-    , ListSmimeInfoResponse
-    , listSmimeInfoResponse
-    , lsirSmimeInfo
-
-    -- ** SmtpMsaSecurityMode
-    , SmtpMsaSecurityMode (..)
-
-    -- ** Message
-    , Message
-    , message
-    , mRaw
-    , mSnippet
-    , mSizeEstimate
-    , mPayload
-    , mHistoryId
-    , mId
-    , mLabelIds
-    , mThreadId
-    , mInternalDate
-
-    -- ** UsersMessagesInsertInternalDateSource
-    , UsersMessagesInsertInternalDateSource (..)
-
-    -- ** HistoryLabelRemoved
-    , HistoryLabelRemoved
-    , historyLabelRemoved
-    , hlrLabelIds
-    , hlrMessage
-
-    -- ** Thread
-    , Thread
-    , thread
-    , tSnippet
-    , tHistoryId
-    , tId
-    , tMessages
+    Filter (..),
+    newFilter,
 
     -- ** FilterAction
-    , FilterAction
-    , filterAction
-    , faForward
-    , faRemoveLabelIds
-    , faAddLabelIds
+    FilterAction (..),
+    newFilterAction,
 
-    -- ** Label
-    , Label
-    , label
-    , lThreadsUnread
-    , lMessageListVisibility
-    , lMessagesTotal
-    , lColor
-    , lMessagesUnread
-    , lName
-    , lThreadsTotal
-    , lLabelListVisibility
-    , lId
-    , lType
+    -- ** FilterCriteria
+    FilterCriteria (..),
+    newFilterCriteria,
 
-    -- ** SmimeInfo
-    , SmimeInfo
-    , smimeInfo
-    , siPem
-    , siExpiration
-    , siEncryptedKeyPassword
-    , siId
-    , siPkcs12
-    , siIssuerCn
-    , siIsDefault
+    -- ** FilterCriteria_SizeComparison
+    FilterCriteria_SizeComparison (..),
 
-    -- ** ListMessagesResponse
-    , ListMessagesResponse
-    , listMessagesResponse
-    , lmrNextPageToken
-    , lmrResultSizeEstimate
-    , lmrMessages
+    -- ** ForwardingAddress
+    ForwardingAddress (..),
+    newForwardingAddress,
+
+    -- ** ForwardingAddress_VerificationStatus
+    ForwardingAddress_VerificationStatus (..),
+
+    -- ** History
+    History (..),
+    newHistory,
+
+    -- ** HistoryLabelAdded
+    HistoryLabelAdded (..),
+    newHistoryLabelAdded,
+
+    -- ** HistoryLabelRemoved
+    HistoryLabelRemoved (..),
+    newHistoryLabelRemoved,
 
     -- ** HistoryMessageAdded
-    , HistoryMessageAdded
-    , historyMessageAdded
-    , hmaMessage
-    ) where
+    HistoryMessageAdded (..),
+    newHistoryMessageAdded,
 
-import Network.Google.Prelude
+    -- ** HistoryMessageDeleted
+    HistoryMessageDeleted (..),
+    newHistoryMessageDeleted,
+
+    -- ** ImapSettings
+    ImapSettings (..),
+    newImapSettings,
+
+    -- ** ImapSettings_ExpungeBehavior
+    ImapSettings_ExpungeBehavior (..),
+
+    -- ** Label
+    Label (..),
+    newLabel,
+
+    -- ** Label_LabelListVisibility
+    Label_LabelListVisibility (..),
+
+    -- ** Label_MessageListVisibility
+    Label_MessageListVisibility (..),
+
+    -- ** Label_Type
+    Label_Type (..),
+
+    -- ** LabelColor
+    LabelColor (..),
+    newLabelColor,
+
+    -- ** LanguageSettings
+    LanguageSettings (..),
+    newLanguageSettings,
+
+    -- ** ListDelegatesResponse
+    ListDelegatesResponse (..),
+    newListDelegatesResponse,
+
+    -- ** ListDraftsResponse
+    ListDraftsResponse (..),
+    newListDraftsResponse,
+
+    -- ** ListFiltersResponse
+    ListFiltersResponse (..),
+    newListFiltersResponse,
+
+    -- ** ListForwardingAddressesResponse
+    ListForwardingAddressesResponse (..),
+    newListForwardingAddressesResponse,
+
+    -- ** ListHistoryResponse
+    ListHistoryResponse (..),
+    newListHistoryResponse,
+
+    -- ** ListLabelsResponse
+    ListLabelsResponse (..),
+    newListLabelsResponse,
+
+    -- ** ListMessagesResponse
+    ListMessagesResponse (..),
+    newListMessagesResponse,
+
+    -- ** ListSendAsResponse
+    ListSendAsResponse (..),
+    newListSendAsResponse,
+
+    -- ** ListSmimeInfoResponse
+    ListSmimeInfoResponse (..),
+    newListSmimeInfoResponse,
+
+    -- ** ListThreadsResponse
+    ListThreadsResponse (..),
+    newListThreadsResponse,
+
+    -- ** Message
+    Message (..),
+    newMessage,
+
+    -- ** MessagePart
+    MessagePart (..),
+    newMessagePart,
+
+    -- ** MessagePartBody
+    MessagePartBody (..),
+    newMessagePartBody,
+
+    -- ** MessagePartHeader
+    MessagePartHeader (..),
+    newMessagePartHeader,
+
+    -- ** ModifyMessageRequest
+    ModifyMessageRequest (..),
+    newModifyMessageRequest,
+
+    -- ** ModifyThreadRequest
+    ModifyThreadRequest (..),
+    newModifyThreadRequest,
+
+    -- ** PopSettings
+    PopSettings (..),
+    newPopSettings,
+
+    -- ** PopSettings_AccessWindow
+    PopSettings_AccessWindow (..),
+
+    -- ** PopSettings_Disposition
+    PopSettings_Disposition (..),
+
+    -- ** Profile
+    Profile (..),
+    newProfile,
+
+    -- ** SendAs
+    SendAs (..),
+    newSendAs,
+
+    -- ** SendAs_VerificationStatus
+    SendAs_VerificationStatus (..),
+
+    -- ** SmimeInfo
+    SmimeInfo (..),
+    newSmimeInfo,
+
+    -- ** SmtpMsa
+    SmtpMsa (..),
+    newSmtpMsa,
+
+    -- ** SmtpMsa_SecurityMode
+    SmtpMsa_SecurityMode (..),
+
+    -- ** Thread
+    Thread (..),
+    newThread,
+
+    -- ** VacationSettings
+    VacationSettings (..),
+    newVacationSettings,
+
+    -- ** WatchRequest
+    WatchRequest (..),
+    newWatchRequest,
+
+    -- ** WatchRequest_LabelFilterAction
+    WatchRequest_LabelFilterAction (..),
+
+    -- ** WatchResponse
+    WatchResponse (..),
+    newWatchResponse,
+
+    -- ** UsersDraftsGetFormat
+    UsersDraftsGetFormat (..),
+
+    -- ** UsersHistoryListHistoryTypes
+    UsersHistoryListHistoryTypes (..),
+
+    -- ** UsersMessagesGetFormat
+    UsersMessagesGetFormat (..),
+
+    -- ** UsersMessagesImportInternalDateSource
+    UsersMessagesImportInternalDateSource (..),
+
+    -- ** UsersMessagesInsertInternalDateSource
+    UsersMessagesInsertInternalDateSource (..),
+
+    -- ** UsersThreadsGetFormat
+    UsersThreadsGetFormat (..),
+  )
+where
+
 import Network.Google.Gmail.Types
-import Network.Google.Resource.Gmail.Users.Drafts.Create
-import Network.Google.Resource.Gmail.Users.Drafts.Delete
-import Network.Google.Resource.Gmail.Users.Drafts.Get
-import Network.Google.Resource.Gmail.Users.Drafts.List
-import Network.Google.Resource.Gmail.Users.Drafts.Send
-import Network.Google.Resource.Gmail.Users.Drafts.Update
-import Network.Google.Resource.Gmail.Users.GetProFile
-import Network.Google.Resource.Gmail.Users.History.List
-import Network.Google.Resource.Gmail.Users.Labels.Create
-import Network.Google.Resource.Gmail.Users.Labels.Delete
-import Network.Google.Resource.Gmail.Users.Labels.Get
-import Network.Google.Resource.Gmail.Users.Labels.List
-import Network.Google.Resource.Gmail.Users.Labels.Patch
-import Network.Google.Resource.Gmail.Users.Labels.Update
-import Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
-import Network.Google.Resource.Gmail.Users.Messages.BatchDelete
-import Network.Google.Resource.Gmail.Users.Messages.BatchModify
-import Network.Google.Resource.Gmail.Users.Messages.Delete
-import Network.Google.Resource.Gmail.Users.Messages.Get
-import Network.Google.Resource.Gmail.Users.Messages.Import
-import Network.Google.Resource.Gmail.Users.Messages.Insert
-import Network.Google.Resource.Gmail.Users.Messages.List
-import Network.Google.Resource.Gmail.Users.Messages.Modify
-import Network.Google.Resource.Gmail.Users.Messages.Send
-import Network.Google.Resource.Gmail.Users.Messages.Trash
-import Network.Google.Resource.Gmail.Users.Messages.Untrash
-import Network.Google.Resource.Gmail.Users.Settings.Delegates.Create
-import Network.Google.Resource.Gmail.Users.Settings.Delegates.Delete
-import Network.Google.Resource.Gmail.Users.Settings.Delegates.Get
-import Network.Google.Resource.Gmail.Users.Settings.Delegates.List
-import Network.Google.Resource.Gmail.Users.Settings.Filters.Create
-import Network.Google.Resource.Gmail.Users.Settings.Filters.Delete
-import Network.Google.Resource.Gmail.Users.Settings.Filters.Get
-import Network.Google.Resource.Gmail.Users.Settings.Filters.List
-import Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Create
-import Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Delete
-import Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Get
-import Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.List
-import Network.Google.Resource.Gmail.Users.Settings.GetAutoForwarding
-import Network.Google.Resource.Gmail.Users.Settings.GetImap
-import Network.Google.Resource.Gmail.Users.Settings.GetLanguage
-import Network.Google.Resource.Gmail.Users.Settings.GetPop
-import Network.Google.Resource.Gmail.Users.Settings.GetVacation
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.Create
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.List
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Get
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.List
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
-import Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
-import Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
-import Network.Google.Resource.Gmail.Users.Settings.UpdateImap
-import Network.Google.Resource.Gmail.Users.Settings.UpdateLanguage
-import Network.Google.Resource.Gmail.Users.Settings.UpdatePop
-import Network.Google.Resource.Gmail.Users.Settings.UpdateVacation
-import Network.Google.Resource.Gmail.Users.Stop
-import Network.Google.Resource.Gmail.Users.Threads.Delete
-import Network.Google.Resource.Gmail.Users.Threads.Get
-import Network.Google.Resource.Gmail.Users.Threads.List
-import Network.Google.Resource.Gmail.Users.Threads.Modify
-import Network.Google.Resource.Gmail.Users.Threads.Trash
-import Network.Google.Resource.Gmail.Users.Threads.Untrash
-import Network.Google.Resource.Gmail.Users.Watch
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Gmail API service.
-type GmailAPI =
-     UsersHistoryListResource :<|>
-       UsersSettingsDelegatesListResource
-       :<|> UsersSettingsDelegatesGetResource
-       :<|> UsersSettingsDelegatesCreateResource
-       :<|> UsersSettingsDelegatesDeleteResource
-       :<|> UsersSettingsForwardingAddressesListResource
-       :<|> UsersSettingsForwardingAddressesGetResource
-       :<|> UsersSettingsForwardingAddressesCreateResource
-       :<|> UsersSettingsForwardingAddressesDeleteResource
-       :<|> UsersSettingsFiltersListResource
-       :<|> UsersSettingsFiltersGetResource
-       :<|> UsersSettingsFiltersCreateResource
-       :<|> UsersSettingsFiltersDeleteResource
-       :<|> UsersSettingsSendAsSmimeInfoInsertResource
-       :<|> UsersSettingsSendAsSmimeInfoListResource
-       :<|> UsersSettingsSendAsSmimeInfoGetResource
-       :<|> UsersSettingsSendAsSmimeInfoSetDefaultResource
-       :<|> UsersSettingsSendAsSmimeInfoDeleteResource
-       :<|> UsersSettingsSendAsVerifyResource
-       :<|> UsersSettingsSendAsListResource
-       :<|> UsersSettingsSendAsPatchResource
-       :<|> UsersSettingsSendAsGetResource
-       :<|> UsersSettingsSendAsCreateResource
-       :<|> UsersSettingsSendAsDeleteResource
-       :<|> UsersSettingsSendAsUpdateResource
-       :<|> UsersSettingsUpdateImapResource
-       :<|> UsersSettingsGetLanguageResource
-       :<|> UsersSettingsGetVacationResource
-       :<|> UsersSettingsGetAutoForwardingResource
-       :<|> UsersSettingsUpdateAutoForwardingResource
-       :<|> UsersSettingsUpdateVacationResource
-       :<|> UsersSettingsUpdateLanguageResource
-       :<|> UsersSettingsGetImapResource
-       :<|> UsersSettingsUpdatePopResource
-       :<|> UsersSettingsGetPopResource
-       :<|> UsersDraftsListResource
-       :<|> UsersDraftsGetResource
-       :<|> UsersDraftsCreateResource
-       :<|> UsersDraftsSendResource
-       :<|> UsersDraftsDeleteResource
-       :<|> UsersDraftsUpdateResource
-       :<|> UsersLabelsListResource
-       :<|> UsersLabelsPatchResource
-       :<|> UsersLabelsGetResource
-       :<|> UsersLabelsCreateResource
-       :<|> UsersLabelsDeleteResource
-       :<|> UsersLabelsUpdateResource
-       :<|> UsersThreadsListResource
-       :<|> UsersThreadsGetResource
-       :<|> UsersThreadsTrashResource
-       :<|> UsersThreadsUntrashResource
-       :<|> UsersThreadsModifyResource
-       :<|> UsersThreadsDeleteResource
-       :<|> UsersMessagesAttachmentsGetResource
-       :<|> UsersMessagesInsertResource
-       :<|> UsersMessagesListResource
-       :<|> UsersMessagesGetResource
-       :<|> UsersMessagesTrashResource
-       :<|> UsersMessagesSendResource
-       :<|> UsersMessagesBatchModifyResource
-       :<|> UsersMessagesUntrashResource
-       :<|> UsersMessagesImportResource
-       :<|> UsersMessagesBatchDeleteResource
-       :<|> UsersMessagesModifyResource
-       :<|> UsersMessagesDeleteResource
-       :<|> UsersGetProFileResource
-       :<|> UsersStopResource
-       :<|> UsersWatchResource
+import Network.Google.Gmail.Users.Drafts.Create
+import Network.Google.Gmail.Users.Drafts.Delete
+import Network.Google.Gmail.Users.Drafts.Get
+import Network.Google.Gmail.Users.Drafts.List
+import Network.Google.Gmail.Users.Drafts.Send
+import Network.Google.Gmail.Users.Drafts.Update
+import Network.Google.Gmail.Users.GetProfile
+import Network.Google.Gmail.Users.History.List
+import Network.Google.Gmail.Users.Labels.Create
+import Network.Google.Gmail.Users.Labels.Delete
+import Network.Google.Gmail.Users.Labels.Get
+import Network.Google.Gmail.Users.Labels.List
+import Network.Google.Gmail.Users.Labels.Patch
+import Network.Google.Gmail.Users.Labels.Update
+import Network.Google.Gmail.Users.Messages.Attachments.Get
+import Network.Google.Gmail.Users.Messages.BatchDelete
+import Network.Google.Gmail.Users.Messages.BatchModify
+import Network.Google.Gmail.Users.Messages.Delete
+import Network.Google.Gmail.Users.Messages.Get
+import Network.Google.Gmail.Users.Messages.Import
+import Network.Google.Gmail.Users.Messages.Insert
+import Network.Google.Gmail.Users.Messages.List
+import Network.Google.Gmail.Users.Messages.Modify
+import Network.Google.Gmail.Users.Messages.Send
+import Network.Google.Gmail.Users.Messages.Trash
+import Network.Google.Gmail.Users.Messages.Untrash
+import Network.Google.Gmail.Users.Settings.Delegates.Create
+import Network.Google.Gmail.Users.Settings.Delegates.Delete
+import Network.Google.Gmail.Users.Settings.Delegates.Get
+import Network.Google.Gmail.Users.Settings.Delegates.List
+import Network.Google.Gmail.Users.Settings.Filters.Create
+import Network.Google.Gmail.Users.Settings.Filters.Delete
+import Network.Google.Gmail.Users.Settings.Filters.Get
+import Network.Google.Gmail.Users.Settings.Filters.List
+import Network.Google.Gmail.Users.Settings.ForwardingAddresses.Create
+import Network.Google.Gmail.Users.Settings.ForwardingAddresses.Delete
+import Network.Google.Gmail.Users.Settings.ForwardingAddresses.Get
+import Network.Google.Gmail.Users.Settings.ForwardingAddresses.List
+import Network.Google.Gmail.Users.Settings.GetAutoForwarding
+import Network.Google.Gmail.Users.Settings.GetImap
+import Network.Google.Gmail.Users.Settings.GetLanguage
+import Network.Google.Gmail.Users.Settings.GetPop
+import Network.Google.Gmail.Users.Settings.GetVacation
+import Network.Google.Gmail.Users.Settings.SendAs.Create
+import Network.Google.Gmail.Users.Settings.SendAs.Delete
+import Network.Google.Gmail.Users.Settings.SendAs.Get
+import Network.Google.Gmail.Users.Settings.SendAs.List
+import Network.Google.Gmail.Users.Settings.SendAs.Patch
+import Network.Google.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
+import Network.Google.Gmail.Users.Settings.SendAs.SmimeInfo.Get
+import Network.Google.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
+import Network.Google.Gmail.Users.Settings.SendAs.SmimeInfo.List
+import Network.Google.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
+import Network.Google.Gmail.Users.Settings.SendAs.Update
+import Network.Google.Gmail.Users.Settings.SendAs.Verify
+import Network.Google.Gmail.Users.Settings.UpdateAutoForwarding
+import Network.Google.Gmail.Users.Settings.UpdateImap
+import Network.Google.Gmail.Users.Settings.UpdateLanguage
+import Network.Google.Gmail.Users.Settings.UpdatePop
+import Network.Google.Gmail.Users.Settings.UpdateVacation
+import Network.Google.Gmail.Users.Stop
+import Network.Google.Gmail.Users.Threads.Delete
+import Network.Google.Gmail.Users.Threads.Get
+import Network.Google.Gmail.Users.Threads.List
+import Network.Google.Gmail.Users.Threads.Modify
+import Network.Google.Gmail.Users.Threads.Trash
+import Network.Google.Gmail.Users.Threads.Untrash
+import Network.Google.Gmail.Users.Watch
