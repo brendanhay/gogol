@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,56 +31,57 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.TextToSpeech.Types
-  ( -- * Configuration
-    textToSpeechService,
+    (
+    -- * Configuration
+      textToSpeechService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AudioConfig
-    AudioConfig (..),
-    newAudioConfig,
+    , AudioConfig (..)
+    , newAudioConfig
 
     -- ** AudioConfig_AudioEncoding
-    AudioConfig_AudioEncoding (..),
+    , AudioConfig_AudioEncoding (..)
 
     -- ** ListVoicesResponse
-    ListVoicesResponse (..),
-    newListVoicesResponse,
+    , ListVoicesResponse (..)
+    , newListVoicesResponse
 
     -- ** SynthesisInput
-    SynthesisInput (..),
-    newSynthesisInput,
+    , SynthesisInput (..)
+    , newSynthesisInput
 
     -- ** SynthesizeSpeechRequest
-    SynthesizeSpeechRequest (..),
-    newSynthesizeSpeechRequest,
+    , SynthesizeSpeechRequest (..)
+    , newSynthesizeSpeechRequest
 
     -- ** SynthesizeSpeechResponse
-    SynthesizeSpeechResponse (..),
-    newSynthesizeSpeechResponse,
+    , SynthesizeSpeechResponse (..)
+    , newSynthesizeSpeechResponse
 
     -- ** Voice
-    Voice (..),
-    newVoice,
+    , Voice (..)
+    , newVoice
 
     -- ** Voice_SsmlGender
-    Voice_SsmlGender (..),
+    , Voice_SsmlGender (..)
 
     -- ** VoiceSelectionParams
-    VoiceSelectionParams (..),
-    newVoiceSelectionParams,
+    , VoiceSelectionParams (..)
+    , newVoiceSelectionParams
 
     -- ** VoiceSelectionParams_SsmlGender
-    VoiceSelectionParams_SsmlGender (..),
-  )
-where
+    , VoiceSelectionParams_SsmlGender (..)
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TextToSpeech.Internal.Product
@@ -82,10 +89,10 @@ import Gogol.TextToSpeech.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Text-to-Speech API. This contains the host and root path used as a starting point for constructing service requests.
 textToSpeechService :: Core.ServiceConfig
-textToSpeechService =
-  Core.defaultService
-    (Core.ServiceId "texttospeech:v1")
-    "texttospeech.googleapis.com"
+textToSpeechService
+  = Core.defaultService
+      (Core.ServiceId "texttospeech:v1")
+      "texttospeech.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
