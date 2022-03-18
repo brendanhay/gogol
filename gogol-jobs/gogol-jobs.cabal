@@ -39,40 +39,41 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Jobs
-    Network.Google.Jobs.Projects.Operations.Get
-    Network.Google.Jobs.Projects.Tenants.ClientEvents.Create
-    Network.Google.Jobs.Projects.Tenants.Companies.Create
-    Network.Google.Jobs.Projects.Tenants.Companies.Delete
-    Network.Google.Jobs.Projects.Tenants.Companies.Get
-    Network.Google.Jobs.Projects.Tenants.Companies.List
-    Network.Google.Jobs.Projects.Tenants.Companies.Patch
-    Network.Google.Jobs.Projects.Tenants.CompleteQuery
-    Network.Google.Jobs.Projects.Tenants.Create
-    Network.Google.Jobs.Projects.Tenants.Delete
-    Network.Google.Jobs.Projects.Tenants.Get
-    Network.Google.Jobs.Projects.Tenants.Jobs.BatchCreate
-    Network.Google.Jobs.Projects.Tenants.Jobs.BatchDelete
-    Network.Google.Jobs.Projects.Tenants.Jobs.BatchUpdate
-    Network.Google.Jobs.Projects.Tenants.Jobs.Create
-    Network.Google.Jobs.Projects.Tenants.Jobs.Delete
-    Network.Google.Jobs.Projects.Tenants.Jobs.Get
-    Network.Google.Jobs.Projects.Tenants.Jobs.List
-    Network.Google.Jobs.Projects.Tenants.Jobs.Patch
-    Network.Google.Jobs.Projects.Tenants.Jobs.Search
-    Network.Google.Jobs.Projects.Tenants.Jobs.SearchForAlert
-    Network.Google.Jobs.Projects.Tenants.List
-    Network.Google.Jobs.Projects.Tenants.Patch
-    Network.Google.Jobs.Types
+    Gogol.Jobs
+    Gogol.Jobs.Projects.Operations.Get
+    Gogol.Jobs.Projects.Tenants.ClientEvents.Create
+    Gogol.Jobs.Projects.Tenants.Companies.Create
+    Gogol.Jobs.Projects.Tenants.Companies.Delete
+    Gogol.Jobs.Projects.Tenants.Companies.Get
+    Gogol.Jobs.Projects.Tenants.Companies.List
+    Gogol.Jobs.Projects.Tenants.Companies.Patch
+    Gogol.Jobs.Projects.Tenants.CompleteQuery
+    Gogol.Jobs.Projects.Tenants.Create
+    Gogol.Jobs.Projects.Tenants.Delete
+    Gogol.Jobs.Projects.Tenants.Get
+    Gogol.Jobs.Projects.Tenants.Jobs.BatchCreate
+    Gogol.Jobs.Projects.Tenants.Jobs.BatchDelete
+    Gogol.Jobs.Projects.Tenants.Jobs.BatchUpdate
+    Gogol.Jobs.Projects.Tenants.Jobs.Create
+    Gogol.Jobs.Projects.Tenants.Jobs.Delete
+    Gogol.Jobs.Projects.Tenants.Jobs.Get
+    Gogol.Jobs.Projects.Tenants.Jobs.List
+    Gogol.Jobs.Projects.Tenants.Jobs.Patch
+    Gogol.Jobs.Projects.Tenants.Jobs.Search
+    Gogol.Jobs.Projects.Tenants.Jobs.SearchForAlert
+    Gogol.Jobs.Projects.Tenants.List
+    Gogol.Jobs.Projects.Tenants.Patch
+    Gogol.Jobs.Types
 
   other-modules:
-    Network.Google.Jobs.Internal.Product
-    Network.Google.Jobs.Internal.Sum
+    Gogol.Jobs.Internal.Product
+    Gogol.Jobs.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
