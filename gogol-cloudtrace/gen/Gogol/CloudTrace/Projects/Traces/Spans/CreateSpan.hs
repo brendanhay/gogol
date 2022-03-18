@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTrace.Projects.Traces.Spans.CreateSpan
+-- Module      : Gogol.CloudTrace.Projects.Traces.Spans.CreateSpan
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a new span.
 --
 -- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference> for @cloudtrace.projects.traces.spans.createSpan@.
-module Network.Google.CloudTrace.Projects.Traces.Spans.CreateSpan
+module Gogol.CloudTrace.Projects.Traces.Spans.CreateSpan
   ( -- * Resource
     CloudTraceProjectsTracesSpansCreateSpanResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudTrace.Projects.Traces.Spans.CreateSpan
   )
 where
 
-import Network.Google.CloudTrace.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTrace.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudtrace.projects.traces.spans.createSpan@ method which the
 -- 'CloudTraceProjectsTracesSpansCreateSpan' request conforms to.

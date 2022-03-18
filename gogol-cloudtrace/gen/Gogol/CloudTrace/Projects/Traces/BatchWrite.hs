@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudTrace.Projects.Traces.BatchWrite
+-- Module      : Gogol.CloudTrace.Projects.Traces.BatchWrite
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Batch writes new spans to new or existing traces. You cannot update existing spans.
 --
 -- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference> for @cloudtrace.projects.traces.batchWrite@.
-module Network.Google.CloudTrace.Projects.Traces.BatchWrite
+module Gogol.CloudTrace.Projects.Traces.BatchWrite
   ( -- * Resource
     CloudTraceProjectsTracesBatchWriteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudTrace.Projects.Traces.BatchWrite
   )
 where
 
-import Network.Google.CloudTrace.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudTrace.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudtrace.projects.traces.batchWrite@ method which the
 -- 'CloudTraceProjectsTracesBatchWrite' request conforms to.
