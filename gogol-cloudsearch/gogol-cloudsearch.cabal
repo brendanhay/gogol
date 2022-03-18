@@ -1,91 +1,102 @@
-name:                  gogol-cloudsearch
-version:               0.5.0
-synopsis:              Google Cloud Search SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudsearch
+version:            0.5.0
+synopsis:           Google Cloud Search SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Cloud Search provides cloud-based search capabilities over Google
-    Workspace data. The Cloud Search API allows indexing of non-Google
-    Workspace data into Cloud Search.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Cloud Search provides cloud-based search capabilities over Google Workspace data. The Cloud Search API allows indexing of non-Google Workspace data into Cloud Search.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-cloudsearch
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.CloudSearch
-        , Network.Google.CloudSearch.Types
-        , Network.Google.Resource.CloudSearch.Debug.Datasources.Items.CheckAccess
-        , Network.Google.Resource.CloudSearch.Debug.Datasources.Items.SearchByViewURL
-        , Network.Google.Resource.CloudSearch.Debug.Datasources.Items.UnmAppedids.List
-        , Network.Google.Resource.CloudSearch.Debug.Identitysources.Items.ListForunmAppedidentity
-        , Network.Google.Resource.CloudSearch.Debug.Identitysources.UnmAppedids.List
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.DeleteSchema
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.GetSchema
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Delete
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Get
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Index
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.List
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Poll
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Push
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Unreserve
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Upload
-        , Network.Google.Resource.CloudSearch.Indexing.Datasources.UpdateSchema
-        , Network.Google.Resource.CloudSearch.Media.Upload
-        , Network.Google.Resource.CloudSearch.Operations.Get
-        , Network.Google.Resource.CloudSearch.Operations.Lro.List
-        , Network.Google.Resource.CloudSearch.Query.Search
-        , Network.Google.Resource.CloudSearch.Query.Sources.List
-        , Network.Google.Resource.CloudSearch.Query.Suggest
-        , Network.Google.Resource.CloudSearch.Settings.Datasources.Create
-        , Network.Google.Resource.CloudSearch.Settings.Datasources.Delete
-        , Network.Google.Resource.CloudSearch.Settings.Datasources.Get
-        , Network.Google.Resource.CloudSearch.Settings.Datasources.List
-        , Network.Google.Resource.CloudSearch.Settings.Datasources.Update
-        , Network.Google.Resource.CloudSearch.Settings.GetCustomer
-        , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Create
-        , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Delete
-        , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Get
-        , Network.Google.Resource.CloudSearch.Settings.SearchApplications.List
-        , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Reset
-        , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Update
-        , Network.Google.Resource.CloudSearch.Settings.UpdateCustomer
-        , Network.Google.Resource.CloudSearch.Stats.GetIndex
-        , Network.Google.Resource.CloudSearch.Stats.GetQuery
-        , Network.Google.Resource.CloudSearch.Stats.GetSession
-        , Network.Google.Resource.CloudSearch.Stats.GetUser
-        , Network.Google.Resource.CloudSearch.Stats.Index.Datasources.Get
-        , Network.Google.Resource.CloudSearch.Stats.Query.SearchApplications.Get
-        , Network.Google.Resource.CloudSearch.Stats.Session.SearchApplications.Get
-        , Network.Google.Resource.CloudSearch.Stats.User.SearchApplications.Get
+  exposed-modules:
+    Network.Google.CloudSearch
+    Network.Google.CloudSearch.Debug.Datasources.Items.CheckAccess
+    Network.Google.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
+    Network.Google.CloudSearch.Debug.Datasources.Items.Unmappedids.List
+    Network.Google.CloudSearch.Debug.Identitysources.Items.ListForunmappedidentity
+    Network.Google.CloudSearch.Debug.Identitysources.Unmappedids.List
+    Network.Google.CloudSearch.Indexing.Datasources.DeleteSchema
+    Network.Google.CloudSearch.Indexing.Datasources.GetSchema
+    Network.Google.CloudSearch.Indexing.Datasources.Items.Delete
+    Network.Google.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
+    Network.Google.CloudSearch.Indexing.Datasources.Items.Get
+    Network.Google.CloudSearch.Indexing.Datasources.Items.Index
+    Network.Google.CloudSearch.Indexing.Datasources.Items.List
+    Network.Google.CloudSearch.Indexing.Datasources.Items.Poll
+    Network.Google.CloudSearch.Indexing.Datasources.Items.Push
+    Network.Google.CloudSearch.Indexing.Datasources.Items.Unreserve
+    Network.Google.CloudSearch.Indexing.Datasources.Items.Upload
+    Network.Google.CloudSearch.Indexing.Datasources.UpdateSchema
+    Network.Google.CloudSearch.InitializeCustomer
+    Network.Google.CloudSearch.Media.Upload
+    Network.Google.CloudSearch.Operations.Get
+    Network.Google.CloudSearch.Operations.Lro.List
+    Network.Google.CloudSearch.Query.Search
+    Network.Google.CloudSearch.Query.Sources.List
+    Network.Google.CloudSearch.Query.Suggest
+    Network.Google.CloudSearch.Settings.Datasources.Create
+    Network.Google.CloudSearch.Settings.Datasources.Delete
+    Network.Google.CloudSearch.Settings.Datasources.Get
+    Network.Google.CloudSearch.Settings.Datasources.List
+    Network.Google.CloudSearch.Settings.Datasources.Update
+    Network.Google.CloudSearch.Settings.GetCustomer
+    Network.Google.CloudSearch.Settings.Searchapplications.Create
+    Network.Google.CloudSearch.Settings.Searchapplications.Delete
+    Network.Google.CloudSearch.Settings.Searchapplications.Get
+    Network.Google.CloudSearch.Settings.Searchapplications.List
+    Network.Google.CloudSearch.Settings.Searchapplications.Reset
+    Network.Google.CloudSearch.Settings.Searchapplications.Update
+    Network.Google.CloudSearch.Settings.UpdateCustomer
+    Network.Google.CloudSearch.Stats.GetIndex
+    Network.Google.CloudSearch.Stats.GetQuery
+    Network.Google.CloudSearch.Stats.GetSearchapplication
+    Network.Google.CloudSearch.Stats.GetSession
+    Network.Google.CloudSearch.Stats.GetUser
+    Network.Google.CloudSearch.Stats.Index.Datasources.Get
+    Network.Google.CloudSearch.Stats.Query.Searchapplications.Get
+    Network.Google.CloudSearch.Stats.Session.Searchapplications.Get
+    Network.Google.CloudSearch.Stats.User.Searchapplications.Get
+    Network.Google.CloudSearch.Types
 
-    other-modules:
-          Network.Google.CloudSearch.Types.Product
-        , Network.Google.CloudSearch.Types.Sum
+  other-modules:
+    Network.Google.CloudSearch.Internal.Product
+    Network.Google.CloudSearch.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
