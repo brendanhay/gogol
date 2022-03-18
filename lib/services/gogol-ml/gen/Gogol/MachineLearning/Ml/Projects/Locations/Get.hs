@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,81 +30,88 @@
 --
 -- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.locations.get@.
 module Gogol.MachineLearning.Ml.Projects.Locations.Get
-    (
-    -- * Resource
-      MlProjectsLocationsGetResource
+  ( -- * Resource
+    MlProjectsLocationsGetResource,
 
     -- ** Constructing a Request
-    , newMlProjectsLocationsGet
-    , MlProjectsLocationsGet
-    ) where
+    newMlProjectsLocationsGet,
+    MlProjectsLocationsGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.MachineLearning.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @ml.projects.locations.get@ method which the
 -- 'MlProjectsLocationsGet' request conforms to.
 type MlProjectsLocationsGetResource =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Get '[Core.JSON] GoogleCloudMlV1__Location
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] GoogleCloudMlV1__Location
 
 -- | Get the complete list of CMLE capabilities in a location, along with their location-specific properties.
 --
 -- /See:/ 'newMlProjectsLocationsGet' smart constructor.
 data MlProjectsLocationsGet = MlProjectsLocationsGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The name of the location.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The name of the location.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MlProjectsLocationsGet' with the minimum fields required to make a request.
-newMlProjectsLocationsGet 
-    ::  Core.Text
-       -- ^  Required. The name of the location. See 'name'.
-    -> MlProjectsLocationsGet
+newMlProjectsLocationsGet ::
+  -- |  Required. The name of the location. See 'name'.
+  Core.Text ->
+  MlProjectsLocationsGet
 newMlProjectsLocationsGet name =
   MlProjectsLocationsGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest MlProjectsLocationsGet
-         where
-        type Rs MlProjectsLocationsGet =
-             GoogleCloudMlV1__Location
-        type Scopes MlProjectsLocationsGet =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient MlProjectsLocationsGet{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              machineLearningService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy MlProjectsLocationsGetResource)
-                      Core.mempty
-
+instance Core.GoogleRequest MlProjectsLocationsGet where
+  type
+    Rs MlProjectsLocationsGet =
+      GoogleCloudMlV1__Location
+  type
+    Scopes MlProjectsLocationsGet =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/cloud-platform.read-only"
+       ]
+  requestClient MlProjectsLocationsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      machineLearningService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MlProjectsLocationsGetResource
+          )
+          Core.mempty

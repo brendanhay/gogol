@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-ml
-version:               0.5.0
-synopsis:              Google AI Platform Training & Prediction SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-ml
+version:            0.5.0
+synopsis:           Google AI Platform Training & Prediction SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    An API to enable creating and using machine learning models.
+  An API to enable creating and using machine learning models.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,76 +31,73 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.MachineLearning
-    , Gogol.MachineLearning.Ml.Projects.Explain
-    , Gogol.MachineLearning.Ml.Projects.GetConfig
-    , Gogol.MachineLearning.Ml.Projects.Jobs.Cancel
-    , Gogol.MachineLearning.Ml.Projects.Jobs.Create
-    , Gogol.MachineLearning.Ml.Projects.Jobs.Get
-    , Gogol.MachineLearning.Ml.Projects.Jobs.GetIamPolicy
-    , Gogol.MachineLearning.Ml.Projects.Jobs.List
-    , Gogol.MachineLearning.Ml.Projects.Jobs.Patch
-    , Gogol.MachineLearning.Ml.Projects.Jobs.SetIamPolicy
-    , Gogol.MachineLearning.Ml.Projects.Jobs.TestIamPermissions
-    , Gogol.MachineLearning.Ml.Projects.Locations.Get
-    , Gogol.MachineLearning.Ml.Projects.Locations.List
-    , Gogol.MachineLearning.Ml.Projects.Locations.Operations.Cancel
-    , Gogol.MachineLearning.Ml.Projects.Locations.Operations.Get
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Create
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Delete
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Get
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.List
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.AddMeasurement
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.CheckEarlyStoppingState
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Complete
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Create
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Delete
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Get
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.List
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.ListOptimalTrials
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Stop
-    , Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Suggest
-    , Gogol.MachineLearning.Ml.Projects.Models.Create
-    , Gogol.MachineLearning.Ml.Projects.Models.Delete
-    , Gogol.MachineLearning.Ml.Projects.Models.Get
-    , Gogol.MachineLearning.Ml.Projects.Models.GetIamPolicy
-    , Gogol.MachineLearning.Ml.Projects.Models.List
-    , Gogol.MachineLearning.Ml.Projects.Models.Patch
-    , Gogol.MachineLearning.Ml.Projects.Models.SetIamPolicy
-    , Gogol.MachineLearning.Ml.Projects.Models.TestIamPermissions
-    , Gogol.MachineLearning.Ml.Projects.Models.Versions.Create
-    , Gogol.MachineLearning.Ml.Projects.Models.Versions.Delete
-    , Gogol.MachineLearning.Ml.Projects.Models.Versions.Get
-    , Gogol.MachineLearning.Ml.Projects.Models.Versions.List
-    , Gogol.MachineLearning.Ml.Projects.Models.Versions.Patch
-    , Gogol.MachineLearning.Ml.Projects.Models.Versions.SetDefault
-    , Gogol.MachineLearning.Ml.Projects.Operations.Cancel
-    , Gogol.MachineLearning.Ml.Projects.Operations.Get
-    , Gogol.MachineLearning.Ml.Projects.Operations.List
-    , Gogol.MachineLearning.Ml.Projects.Predict
-    , Gogol.MachineLearning.Types
+    Gogol.MachineLearning
+    Gogol.MachineLearning.Ml.Projects.Explain
+    Gogol.MachineLearning.Ml.Projects.GetConfig
+    Gogol.MachineLearning.Ml.Projects.Jobs.Cancel
+    Gogol.MachineLearning.Ml.Projects.Jobs.Create
+    Gogol.MachineLearning.Ml.Projects.Jobs.Get
+    Gogol.MachineLearning.Ml.Projects.Jobs.GetIamPolicy
+    Gogol.MachineLearning.Ml.Projects.Jobs.List
+    Gogol.MachineLearning.Ml.Projects.Jobs.Patch
+    Gogol.MachineLearning.Ml.Projects.Jobs.SetIamPolicy
+    Gogol.MachineLearning.Ml.Projects.Jobs.TestIamPermissions
+    Gogol.MachineLearning.Ml.Projects.Locations.Get
+    Gogol.MachineLearning.Ml.Projects.Locations.List
+    Gogol.MachineLearning.Ml.Projects.Locations.Operations.Cancel
+    Gogol.MachineLearning.Ml.Projects.Locations.Operations.Get
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Create
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Delete
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Get
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.List
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.AddMeasurement
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.CheckEarlyStoppingState
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Complete
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Create
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Delete
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Get
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.List
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.ListOptimalTrials
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Stop
+    Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Suggest
+    Gogol.MachineLearning.Ml.Projects.Models.Create
+    Gogol.MachineLearning.Ml.Projects.Models.Delete
+    Gogol.MachineLearning.Ml.Projects.Models.Get
+    Gogol.MachineLearning.Ml.Projects.Models.GetIamPolicy
+    Gogol.MachineLearning.Ml.Projects.Models.List
+    Gogol.MachineLearning.Ml.Projects.Models.Patch
+    Gogol.MachineLearning.Ml.Projects.Models.SetIamPolicy
+    Gogol.MachineLearning.Ml.Projects.Models.TestIamPermissions
+    Gogol.MachineLearning.Ml.Projects.Models.Versions.Create
+    Gogol.MachineLearning.Ml.Projects.Models.Versions.Delete
+    Gogol.MachineLearning.Ml.Projects.Models.Versions.Get
+    Gogol.MachineLearning.Ml.Projects.Models.Versions.List
+    Gogol.MachineLearning.Ml.Projects.Models.Versions.Patch
+    Gogol.MachineLearning.Ml.Projects.Models.Versions.SetDefault
+    Gogol.MachineLearning.Ml.Projects.Operations.Cancel
+    Gogol.MachineLearning.Ml.Projects.Operations.Get
+    Gogol.MachineLearning.Ml.Projects.Operations.List
+    Gogol.MachineLearning.Ml.Projects.Predict
+    Gogol.MachineLearning.Types
 
   other-modules:
-      Gogol.MachineLearning.Internal.Product
-    , Gogol.MachineLearning.Internal.Sum
+    Gogol.MachineLearning.Internal.Product
+    Gogol.MachineLearning.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
