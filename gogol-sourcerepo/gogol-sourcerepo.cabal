@@ -39,28 +39,29 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.SourceRepo
-    Network.Google.SourceRepo.Projects.GetConfig
-    Network.Google.SourceRepo.Projects.Repos.Create
-    Network.Google.SourceRepo.Projects.Repos.Delete
-    Network.Google.SourceRepo.Projects.Repos.Get
-    Network.Google.SourceRepo.Projects.Repos.GetIamPolicy
-    Network.Google.SourceRepo.Projects.Repos.List
-    Network.Google.SourceRepo.Projects.Repos.Patch
-    Network.Google.SourceRepo.Projects.Repos.SetIamPolicy
-    Network.Google.SourceRepo.Projects.Repos.Sync
-    Network.Google.SourceRepo.Projects.Repos.TestIamPermissions
-    Network.Google.SourceRepo.Projects.UpdateConfig
-    Network.Google.SourceRepo.Types
+    Gogol.SourceRepo
+    Gogol.SourceRepo.Projects.GetConfig
+    Gogol.SourceRepo.Projects.Repos.Create
+    Gogol.SourceRepo.Projects.Repos.Delete
+    Gogol.SourceRepo.Projects.Repos.Get
+    Gogol.SourceRepo.Projects.Repos.GetIamPolicy
+    Gogol.SourceRepo.Projects.Repos.List
+    Gogol.SourceRepo.Projects.Repos.Patch
+    Gogol.SourceRepo.Projects.Repos.SetIamPolicy
+    Gogol.SourceRepo.Projects.Repos.Sync
+    Gogol.SourceRepo.Projects.Repos.TestIamPermissions
+    Gogol.SourceRepo.Projects.UpdateConfig
+    Gogol.SourceRepo.Types
 
   other-modules:
-    Network.Google.SourceRepo.Internal.Product
-    Network.Google.SourceRepo.Internal.Sum
+    Gogol.SourceRepo.Internal.Product
+    Gogol.SourceRepo.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

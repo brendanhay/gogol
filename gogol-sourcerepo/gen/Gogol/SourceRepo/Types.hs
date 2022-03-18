@@ -19,17 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo
+-- Module      : Gogol.SourceRepo.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Accesses source code repositories hosted by Google.
---
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference>
-module Network.Google.SourceRepo
+module Gogol.SourceRepo.Types
   ( -- * Configuration
     sourceRepoService,
 
@@ -38,63 +34,6 @@ module Network.Google.SourceRepo
     sourceFull_controlScope,
     sourceRead_OnlyScope,
     sourceRead_writeScope,
-
-    -- * Resources
-
-    -- ** sourcerepo.projects.getConfig
-    SourceRepoProjectsGetConfigResource,
-    newSourceRepoProjectsGetConfig,
-    SourceRepoProjectsGetConfig,
-
-    -- ** sourcerepo.projects.repos.create
-    SourceRepoProjectsReposCreateResource,
-    newSourceRepoProjectsReposCreate,
-    SourceRepoProjectsReposCreate,
-
-    -- ** sourcerepo.projects.repos.delete
-    SourceRepoProjectsReposDeleteResource,
-    newSourceRepoProjectsReposDelete,
-    SourceRepoProjectsReposDelete,
-
-    -- ** sourcerepo.projects.repos.get
-    SourceRepoProjectsReposGetResource,
-    newSourceRepoProjectsReposGet,
-    SourceRepoProjectsReposGet,
-
-    -- ** sourcerepo.projects.repos.getIamPolicy
-    SourceRepoProjectsReposGetIamPolicyResource,
-    newSourceRepoProjectsReposGetIamPolicy,
-    SourceRepoProjectsReposGetIamPolicy,
-
-    -- ** sourcerepo.projects.repos.list
-    SourceRepoProjectsReposListResource,
-    newSourceRepoProjectsReposList,
-    SourceRepoProjectsReposList,
-
-    -- ** sourcerepo.projects.repos.patch
-    SourceRepoProjectsReposPatchResource,
-    newSourceRepoProjectsReposPatch,
-    SourceRepoProjectsReposPatch,
-
-    -- ** sourcerepo.projects.repos.setIamPolicy
-    SourceRepoProjectsReposSetIamPolicyResource,
-    newSourceRepoProjectsReposSetIamPolicy,
-    SourceRepoProjectsReposSetIamPolicy,
-
-    -- ** sourcerepo.projects.repos.sync
-    SourceRepoProjectsReposSyncResource,
-    newSourceRepoProjectsReposSync,
-    SourceRepoProjectsReposSync,
-
-    -- ** sourcerepo.projects.repos.testIamPermissions
-    SourceRepoProjectsReposTestIamPermissionsResource,
-    newSourceRepoProjectsReposTestIamPermissions,
-    SourceRepoProjectsReposTestIamPermissions,
-
-    -- ** sourcerepo.projects.updateConfig
-    SourceRepoProjectsUpdateConfigResource,
-    newSourceRepoProjectsUpdateConfig,
-    SourceRepoProjectsUpdateConfig,
 
     -- * Types
 
@@ -209,15 +148,29 @@ module Network.Google.SourceRepo
   )
 where
 
-import Network.Google.SourceRepo.Projects.GetConfig
-import Network.Google.SourceRepo.Projects.Repos.Create
-import Network.Google.SourceRepo.Projects.Repos.Delete
-import Network.Google.SourceRepo.Projects.Repos.Get
-import Network.Google.SourceRepo.Projects.Repos.GetIamPolicy
-import Network.Google.SourceRepo.Projects.Repos.List
-import Network.Google.SourceRepo.Projects.Repos.Patch
-import Network.Google.SourceRepo.Projects.Repos.SetIamPolicy
-import Network.Google.SourceRepo.Projects.Repos.Sync
-import Network.Google.SourceRepo.Projects.Repos.TestIamPermissions
-import Network.Google.SourceRepo.Projects.UpdateConfig
-import Network.Google.SourceRepo.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SourceRepo.Internal.Product
+import Gogol.SourceRepo.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Cloud Source Repositories API. This contains the host and root path used as a starting point for constructing service requests.
+sourceRepoService :: Core.ServiceConfig
+sourceRepoService =
+  Core.defaultService
+    (Core.ServiceId "sourcerepo:v1")
+    "sourcerepo.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | Manage your source code repositories
+sourceFull_controlScope :: Core.Proxy '["https://www.googleapis.com/auth/source.full_control"]
+sourceFull_controlScope = Core.Proxy
+
+-- | View the contents of your source code repositories
+sourceRead_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_only"]
+sourceRead_OnlyScope = Core.Proxy
+
+-- | Manage the contents of your source code repositories
+sourceRead_writeScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_write"]
+sourceRead_writeScope = Core.Proxy

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo.Projects.Repos.GetIamPolicy
+-- Module      : Gogol.SourceRepo.Projects.Repos.GetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.getIamPolicy@.
-module Network.Google.SourceRepo.Projects.Repos.GetIamPolicy
+module Gogol.SourceRepo.Projects.Repos.GetIamPolicy
   ( -- * Resource
     SourceRepoProjectsReposGetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.SourceRepo.Projects.Repos.GetIamPolicy
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SourceRepo.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.getIamPolicy@ method which the
 -- 'SourceRepoProjectsReposGetIamPolicy' request conforms to.

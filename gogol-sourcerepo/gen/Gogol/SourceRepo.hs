@@ -19,13 +19,17 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo.Types
+-- Module      : Gogol.SourceRepo
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.SourceRepo.Types
+--
+-- Accesses source code repositories hosted by Google.
+--
+-- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference>
+module Gogol.SourceRepo
   ( -- * Configuration
     sourceRepoService,
 
@@ -34,6 +38,63 @@ module Network.Google.SourceRepo.Types
     sourceFull_controlScope,
     sourceRead_OnlyScope,
     sourceRead_writeScope,
+
+    -- * Resources
+
+    -- ** sourcerepo.projects.getConfig
+    SourceRepoProjectsGetConfigResource,
+    newSourceRepoProjectsGetConfig,
+    SourceRepoProjectsGetConfig,
+
+    -- ** sourcerepo.projects.repos.create
+    SourceRepoProjectsReposCreateResource,
+    newSourceRepoProjectsReposCreate,
+    SourceRepoProjectsReposCreate,
+
+    -- ** sourcerepo.projects.repos.delete
+    SourceRepoProjectsReposDeleteResource,
+    newSourceRepoProjectsReposDelete,
+    SourceRepoProjectsReposDelete,
+
+    -- ** sourcerepo.projects.repos.get
+    SourceRepoProjectsReposGetResource,
+    newSourceRepoProjectsReposGet,
+    SourceRepoProjectsReposGet,
+
+    -- ** sourcerepo.projects.repos.getIamPolicy
+    SourceRepoProjectsReposGetIamPolicyResource,
+    newSourceRepoProjectsReposGetIamPolicy,
+    SourceRepoProjectsReposGetIamPolicy,
+
+    -- ** sourcerepo.projects.repos.list
+    SourceRepoProjectsReposListResource,
+    newSourceRepoProjectsReposList,
+    SourceRepoProjectsReposList,
+
+    -- ** sourcerepo.projects.repos.patch
+    SourceRepoProjectsReposPatchResource,
+    newSourceRepoProjectsReposPatch,
+    SourceRepoProjectsReposPatch,
+
+    -- ** sourcerepo.projects.repos.setIamPolicy
+    SourceRepoProjectsReposSetIamPolicyResource,
+    newSourceRepoProjectsReposSetIamPolicy,
+    SourceRepoProjectsReposSetIamPolicy,
+
+    -- ** sourcerepo.projects.repos.sync
+    SourceRepoProjectsReposSyncResource,
+    newSourceRepoProjectsReposSync,
+    SourceRepoProjectsReposSync,
+
+    -- ** sourcerepo.projects.repos.testIamPermissions
+    SourceRepoProjectsReposTestIamPermissionsResource,
+    newSourceRepoProjectsReposTestIamPermissions,
+    SourceRepoProjectsReposTestIamPermissions,
+
+    -- ** sourcerepo.projects.updateConfig
+    SourceRepoProjectsUpdateConfigResource,
+    newSourceRepoProjectsUpdateConfig,
+    SourceRepoProjectsUpdateConfig,
 
     -- * Types
 
@@ -148,29 +209,15 @@ module Network.Google.SourceRepo.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SourceRepo.Internal.Product
-import Network.Google.SourceRepo.Internal.Sum
-
--- | Default request referring to version @v1@ of the Cloud Source Repositories API. This contains the host and root path used as a starting point for constructing service requests.
-sourceRepoService :: Core.ServiceConfig
-sourceRepoService =
-  Core.defaultService
-    (Core.ServiceId "sourcerepo:v1")
-    "sourcerepo.googleapis.com"
-
--- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
-
--- | Manage your source code repositories
-sourceFull_controlScope :: Core.Proxy '["https://www.googleapis.com/auth/source.full_control"]
-sourceFull_controlScope = Core.Proxy
-
--- | View the contents of your source code repositories
-sourceRead_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_only"]
-sourceRead_OnlyScope = Core.Proxy
-
--- | Manage the contents of your source code repositories
-sourceRead_writeScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_write"]
-sourceRead_writeScope = Core.Proxy
+import Gogol.SourceRepo.Projects.GetConfig
+import Gogol.SourceRepo.Projects.Repos.Create
+import Gogol.SourceRepo.Projects.Repos.Delete
+import Gogol.SourceRepo.Projects.Repos.Get
+import Gogol.SourceRepo.Projects.Repos.GetIamPolicy
+import Gogol.SourceRepo.Projects.Repos.List
+import Gogol.SourceRepo.Projects.Repos.Patch
+import Gogol.SourceRepo.Projects.Repos.SetIamPolicy
+import Gogol.SourceRepo.Projects.Repos.Sync
+import Gogol.SourceRepo.Projects.Repos.TestIamPermissions
+import Gogol.SourceRepo.Projects.UpdateConfig
+import Gogol.SourceRepo.Types

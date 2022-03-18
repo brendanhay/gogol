@@ -19,57 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SourceRepo.Projects.Repos.Sync
+-- Module      : Gogol.SourceRepo.Projects.Repos.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Synchronize a connected repo. The response contains SyncRepoMetadata in the metadata field.
+-- Updates information about a repo.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.sync@.
-module Network.Google.SourceRepo.Projects.Repos.Sync
+-- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.patch@.
+module Gogol.SourceRepo.Projects.Repos.Patch
   ( -- * Resource
-    SourceRepoProjectsReposSyncResource,
+    SourceRepoProjectsReposPatchResource,
 
     -- ** Constructing a Request
-    newSourceRepoProjectsReposSync,
-    SourceRepoProjectsReposSync,
+    newSourceRepoProjectsReposPatch,
+    SourceRepoProjectsReposPatch,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SourceRepo.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SourceRepo.Types
 
--- | A resource alias for @sourcerepo.projects.repos.sync@ method which the
--- 'SourceRepoProjectsReposSync' request conforms to.
-type SourceRepoProjectsReposSyncResource =
+-- | A resource alias for @sourcerepo.projects.repos.patch@ method which the
+-- 'SourceRepoProjectsReposPatch' request conforms to.
+type SourceRepoProjectsReposPatchResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "sync" Core.Text
+    Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] SyncRepoRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+    Core.:> Core.ReqBody '[Core.JSON] UpdateRepoRequest
+    Core.:> Core.Patch '[Core.JSON] Repo
 
--- | Synchronize a connected repo. The response contains SyncRepoMetadata in the metadata field.
+-- | Updates information about a repo.
 --
--- /See:/ 'newSourceRepoProjectsReposSync' smart constructor.
-data SourceRepoProjectsReposSync = SourceRepoProjectsReposSync
+-- /See:/ 'newSourceRepoProjectsReposPatch' smart constructor.
+data SourceRepoProjectsReposPatch = SourceRepoProjectsReposPatch
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the repo to synchronize. Values are of the form @projects\/\/repos\/@.
+    -- | The name of the requested repository. Values are of the form @projects\/\/repos\/@.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: SyncRepoRequest,
+    payload :: UpdateRepoRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,15 +77,15 @@ data SourceRepoProjectsReposSync = SourceRepoProjectsReposSync
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SourceRepoProjectsReposSync' with the minimum fields required to make a request.
-newSourceRepoProjectsReposSync ::
-  -- |  The name of the repo to synchronize. Values are of the form @projects\/\/repos\/@. See 'name'.
+-- | Creates a value of 'SourceRepoProjectsReposPatch' with the minimum fields required to make a request.
+newSourceRepoProjectsReposPatch ::
+  -- |  The name of the requested repository. Values are of the form @projects\/\/repos\/@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  SyncRepoRequest ->
-  SourceRepoProjectsReposSync
-newSourceRepoProjectsReposSync name payload =
-  SourceRepoProjectsReposSync
+  UpdateRepoRequest ->
+  SourceRepoProjectsReposPatch
+newSourceRepoProjectsReposPatch name payload =
+  SourceRepoProjectsReposPatch
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -97,13 +97,13 @@ newSourceRepoProjectsReposSync name payload =
 
 instance
   Core.GoogleRequest
-    SourceRepoProjectsReposSync
+    SourceRepoProjectsReposPatch
   where
-  type Rs SourceRepoProjectsReposSync = Operation
+  type Rs SourceRepoProjectsReposPatch = Repo
   type
-    Scopes SourceRepoProjectsReposSync =
+    Scopes SourceRepoProjectsReposPatch =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient SourceRepoProjectsReposSync {..} =
+  requestClient SourceRepoProjectsReposPatch {..} =
     go
       name
       xgafv
@@ -118,6 +118,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SourceRepoProjectsReposSyncResource
+              Core.Proxy SourceRepoProjectsReposPatchResource
           )
           Core.mempty
