@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Slides.Presentations.Pages.GetThumbnail
+-- Module      : Gogol.Slides.Presentations.Pages.GetThumbnail
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Generates a thumbnail of the latest version of the specified page in the presentation and returns a URL to the thumbnail image. This request counts as an </slides/limits expensive read request> for quota purposes.
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference> for @slides.presentations.pages.getThumbnail@.
-module Network.Google.Slides.Presentations.Pages.GetThumbnail
+module Gogol.Slides.Presentations.Pages.GetThumbnail
   ( -- * Resource
     SlidesPresentationsPagesGetThumbnailResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Slides.Presentations.Pages.GetThumbnail
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Slides.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Slides.Types
 
 -- | A resource alias for @slides.presentations.pages.getThumbnail@ method which the
 -- 'SlidesPresentationsPagesGetThumbnail' request conforms to.

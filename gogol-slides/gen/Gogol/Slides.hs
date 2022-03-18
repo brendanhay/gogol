@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Slides
+-- Module      : Gogol.Slides
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Reads and writes Google Slides presentations.
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference>
-module Network.Google.Slides
+module Gogol.Slides
   ( -- * Configuration
     slidesService,
 
@@ -774,9 +774,9 @@ module Network.Google.Slides
   )
 where
 
-import Network.Google.Slides.Presentations.BatchUpdate
-import Network.Google.Slides.Presentations.Create
-import Network.Google.Slides.Presentations.Get
-import Network.Google.Slides.Presentations.Pages.Get
-import Network.Google.Slides.Presentations.Pages.GetThumbnail
-import Network.Google.Slides.Types
+import Gogol.Slides.Presentations.BatchUpdate
+import Gogol.Slides.Presentations.Create
+import Gogol.Slides.Presentations.Get
+import Gogol.Slides.Presentations.Pages.Get
+import Gogol.Slides.Presentations.Pages.GetThumbnail
+import Gogol.Slides.Types

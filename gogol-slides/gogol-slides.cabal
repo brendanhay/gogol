@@ -39,22 +39,23 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Slides
-    Network.Google.Slides.Presentations.BatchUpdate
-    Network.Google.Slides.Presentations.Create
-    Network.Google.Slides.Presentations.Get
-    Network.Google.Slides.Presentations.Pages.Get
-    Network.Google.Slides.Presentations.Pages.GetThumbnail
-    Network.Google.Slides.Types
+    Gogol.Slides
+    Gogol.Slides.Presentations.BatchUpdate
+    Gogol.Slides.Presentations.Create
+    Gogol.Slides.Presentations.Get
+    Gogol.Slides.Presentations.Pages.Get
+    Gogol.Slides.Presentations.Pages.GetThumbnail
+    Gogol.Slides.Types
 
   other-modules:
-    Network.Google.Slides.Internal.Product
-    Network.Google.Slides.Internal.Sum
+    Gogol.Slides.Internal.Product
+    Gogol.Slides.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

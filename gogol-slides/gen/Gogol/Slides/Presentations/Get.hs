@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Slides.Presentations.Get
+-- Module      : Gogol.Slides.Presentations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the latest version of the specified presentation.
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference> for @slides.presentations.get@.
-module Network.Google.Slides.Presentations.Get
+module Gogol.Slides.Presentations.Get
   ( -- * Resource
     SlidesPresentationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Slides.Presentations.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Slides.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Slides.Types
 
 -- | A resource alias for @slides.presentations.get@ method which the
 -- 'SlidesPresentationsGet' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Slides.Presentations.BatchUpdate
+-- Module      : Gogol.Slides.Presentations.BatchUpdate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Applies one or more updates to the presentation. Each request is validated before being applied. If any request is not valid, then the entire request will fail and nothing will be applied. Some requests have replies to give you some information about how they are applied. Other requests do not need to return information; these each return an empty reply. The order of replies matches that of the requests. For example, suppose you call batchUpdate with four updates, and only the third one returns information. The response would have two empty replies: the reply to the third request, and another empty reply, in that order. Because other users may be editing the presentation, the presentation might not exactly reflect your changes: your changes may be altered with respect to collaborator changes. If there are no collaborators, the presentation should reflect your changes. In any case, the updates in your request are guaranteed to be applied together atomically.
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference> for @slides.presentations.batchUpdate@.
-module Network.Google.Slides.Presentations.BatchUpdate
+module Gogol.Slides.Presentations.BatchUpdate
   ( -- * Resource
     SlidesPresentationsBatchUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Slides.Presentations.BatchUpdate
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Slides.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Slides.Types
 
 -- | A resource alias for @slides.presentations.batchUpdate@ method which the
 -- 'SlidesPresentationsBatchUpdate' request conforms to.
