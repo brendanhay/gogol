@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,160 +31,160 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Fitness.Types
-  ( -- * Configuration
-    fitnessService,
+    (
+    -- * Configuration
+      fitnessService
 
     -- * OAuth Scopes
-    fitnessActivityReadScope,
-    fitnessActivityWriteScope,
-    fitnessBlood_glucoseReadScope,
-    fitnessBlood_glucoseWriteScope,
-    fitnessBlood_pressureReadScope,
-    fitnessBlood_pressureWriteScope,
-    fitnessBodyReadScope,
-    fitnessBodyWriteScope,
-    fitnessBody_temperatureReadScope,
-    fitnessBody_temperatureWriteScope,
-    fitnessHeart_rateReadScope,
-    fitnessHeart_rateWriteScope,
-    fitnessLocationReadScope,
-    fitnessLocationWriteScope,
-    fitnessNutritionReadScope,
-    fitnessNutritionWriteScope,
-    fitnessOxygen_saturationReadScope,
-    fitnessOxygen_saturationWriteScope,
-    fitnessReproductive_healthReadScope,
-    fitnessReproductive_healthWriteScope,
-    fitnessSleepReadScope,
-    fitnessSleepWriteScope,
+    , fitnessActivityReadScope
+    , fitnessActivityWriteScope
+    , fitnessBlood_glucoseReadScope
+    , fitnessBlood_glucoseWriteScope
+    , fitnessBlood_pressureReadScope
+    , fitnessBlood_pressureWriteScope
+    , fitnessBodyReadScope
+    , fitnessBodyWriteScope
+    , fitnessBody_temperatureReadScope
+    , fitnessBody_temperatureWriteScope
+    , fitnessHeart_rateReadScope
+    , fitnessHeart_rateWriteScope
+    , fitnessLocationReadScope
+    , fitnessLocationWriteScope
+    , fitnessNutritionReadScope
+    , fitnessNutritionWriteScope
+    , fitnessOxygen_saturationReadScope
+    , fitnessOxygen_saturationWriteScope
+    , fitnessReproductive_healthReadScope
+    , fitnessReproductive_healthWriteScope
+    , fitnessSleepReadScope
+    , fitnessSleepWriteScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AggregateBucket
-    AggregateBucket (..),
-    newAggregateBucket,
+    , AggregateBucket (..)
+    , newAggregateBucket
 
     -- ** AggregateBucket_Type
-    AggregateBucket_Type (..),
+    , AggregateBucket_Type (..)
 
     -- ** AggregateBy
-    AggregateBy (..),
-    newAggregateBy,
+    , AggregateBy (..)
+    , newAggregateBy
 
     -- ** AggregateRequest
-    AggregateRequest (..),
-    newAggregateRequest,
+    , AggregateRequest (..)
+    , newAggregateRequest
 
     -- ** AggregateRequest_FilteredDataQualityStandardItem
-    AggregateRequest_FilteredDataQualityStandardItem (..),
+    , AggregateRequest_FilteredDataQualityStandardItem (..)
 
     -- ** AggregateResponse
-    AggregateResponse (..),
-    newAggregateResponse,
+    , AggregateResponse (..)
+    , newAggregateResponse
 
     -- ** Application
-    Application (..),
-    newApplication,
+    , Application (..)
+    , newApplication
 
     -- ** BucketByActivity
-    BucketByActivity (..),
-    newBucketByActivity,
+    , BucketByActivity (..)
+    , newBucketByActivity
 
     -- ** BucketBySession
-    BucketBySession (..),
-    newBucketBySession,
+    , BucketBySession (..)
+    , newBucketBySession
 
     -- ** BucketByTime
-    BucketByTime (..),
-    newBucketByTime,
+    , BucketByTime (..)
+    , newBucketByTime
 
     -- ** BucketByTimePeriod
-    BucketByTimePeriod (..),
-    newBucketByTimePeriod,
+    , BucketByTimePeriod (..)
+    , newBucketByTimePeriod
 
     -- ** BucketByTimePeriod_Type
-    BucketByTimePeriod_Type (..),
+    , BucketByTimePeriod_Type (..)
 
     -- ** DataPoint
-    DataPoint (..),
-    newDataPoint,
+    , DataPoint (..)
+    , newDataPoint
 
     -- ** DataSource
-    DataSource (..),
-    newDataSource,
+    , DataSource (..)
+    , newDataSource
 
     -- ** DataSource_DataQualityStandardItem
-    DataSource_DataQualityStandardItem (..),
+    , DataSource_DataQualityStandardItem (..)
 
     -- ** DataSource_Type
-    DataSource_Type (..),
+    , DataSource_Type (..)
 
     -- ** DataType
-    DataType (..),
-    newDataType,
+    , DataType (..)
+    , newDataType
 
     -- ** DataTypeField
-    DataTypeField (..),
-    newDataTypeField,
+    , DataTypeField (..)
+    , newDataTypeField
 
     -- ** DataTypeField_Format
-    DataTypeField_Format (..),
+    , DataTypeField_Format (..)
 
     -- ** Dataset
-    Dataset (..),
-    newDataset,
+    , Dataset (..)
+    , newDataset
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** Device_Type
-    Device_Type (..),
+    , Device_Type (..)
 
     -- ** ListDataPointChangesResponse
-    ListDataPointChangesResponse (..),
-    newListDataPointChangesResponse,
+    , ListDataPointChangesResponse (..)
+    , newListDataPointChangesResponse
 
     -- ** ListDataSourcesResponse
-    ListDataSourcesResponse (..),
-    newListDataSourcesResponse,
+    , ListDataSourcesResponse (..)
+    , newListDataSourcesResponse
 
     -- ** ListSessionsResponse
-    ListSessionsResponse (..),
-    newListSessionsResponse,
+    , ListSessionsResponse (..)
+    , newListSessionsResponse
 
     -- ** MapValue
-    MapValue (..),
-    newMapValue,
+    , MapValue (..)
+    , newMapValue
 
     -- ** Session
-    Session (..),
-    newSession,
+    , Session (..)
+    , newSession
 
     -- ** Value
-    Value (..),
-    newValue,
+    , Value (..)
+    , newValue
 
     -- ** ValueMapValEntry
-    ValueMapValEntry (..),
-    newValueMapValEntry,
-  )
-where
+    , ValueMapValEntry (..)
+    , newValueMapValEntry
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Fitness.Internal.Product
 import Gogol.Fitness.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Fitness API. This contains the host and root path used as a starting point for constructing service requests.
 fitnessService :: Core.ServiceConfig
-fitnessService =
-  Core.defaultService
-    (Core.ServiceId "fitness:v1")
-    "fitness.googleapis.com"
+fitnessService
+  = Core.defaultService (Core.ServiceId "fitness:v1")
+      "fitness.googleapis.com"
 
 -- | Use Google Fit to see and store your physical activity data
 fitnessActivityReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
