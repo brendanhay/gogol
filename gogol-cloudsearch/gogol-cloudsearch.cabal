@@ -39,63 +39,64 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudSearch
-    Network.Google.CloudSearch.Debug.Datasources.Items.CheckAccess
-    Network.Google.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
-    Network.Google.CloudSearch.Debug.Datasources.Items.Unmappedids.List
-    Network.Google.CloudSearch.Debug.Identitysources.Items.ListForunmappedidentity
-    Network.Google.CloudSearch.Debug.Identitysources.Unmappedids.List
-    Network.Google.CloudSearch.Indexing.Datasources.DeleteSchema
-    Network.Google.CloudSearch.Indexing.Datasources.GetSchema
-    Network.Google.CloudSearch.Indexing.Datasources.Items.Delete
-    Network.Google.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
-    Network.Google.CloudSearch.Indexing.Datasources.Items.Get
-    Network.Google.CloudSearch.Indexing.Datasources.Items.Index
-    Network.Google.CloudSearch.Indexing.Datasources.Items.List
-    Network.Google.CloudSearch.Indexing.Datasources.Items.Poll
-    Network.Google.CloudSearch.Indexing.Datasources.Items.Push
-    Network.Google.CloudSearch.Indexing.Datasources.Items.Unreserve
-    Network.Google.CloudSearch.Indexing.Datasources.Items.Upload
-    Network.Google.CloudSearch.Indexing.Datasources.UpdateSchema
-    Network.Google.CloudSearch.InitializeCustomer
-    Network.Google.CloudSearch.Media.Upload
-    Network.Google.CloudSearch.Operations.Get
-    Network.Google.CloudSearch.Operations.Lro.List
-    Network.Google.CloudSearch.Query.Search
-    Network.Google.CloudSearch.Query.Sources.List
-    Network.Google.CloudSearch.Query.Suggest
-    Network.Google.CloudSearch.Settings.Datasources.Create
-    Network.Google.CloudSearch.Settings.Datasources.Delete
-    Network.Google.CloudSearch.Settings.Datasources.Get
-    Network.Google.CloudSearch.Settings.Datasources.List
-    Network.Google.CloudSearch.Settings.Datasources.Update
-    Network.Google.CloudSearch.Settings.GetCustomer
-    Network.Google.CloudSearch.Settings.Searchapplications.Create
-    Network.Google.CloudSearch.Settings.Searchapplications.Delete
-    Network.Google.CloudSearch.Settings.Searchapplications.Get
-    Network.Google.CloudSearch.Settings.Searchapplications.List
-    Network.Google.CloudSearch.Settings.Searchapplications.Reset
-    Network.Google.CloudSearch.Settings.Searchapplications.Update
-    Network.Google.CloudSearch.Settings.UpdateCustomer
-    Network.Google.CloudSearch.Stats.GetIndex
-    Network.Google.CloudSearch.Stats.GetQuery
-    Network.Google.CloudSearch.Stats.GetSearchapplication
-    Network.Google.CloudSearch.Stats.GetSession
-    Network.Google.CloudSearch.Stats.GetUser
-    Network.Google.CloudSearch.Stats.Index.Datasources.Get
-    Network.Google.CloudSearch.Stats.Query.Searchapplications.Get
-    Network.Google.CloudSearch.Stats.Session.Searchapplications.Get
-    Network.Google.CloudSearch.Stats.User.Searchapplications.Get
-    Network.Google.CloudSearch.Types
+    Gogol.CloudSearch
+    Gogol.CloudSearch.Debug.Datasources.Items.CheckAccess
+    Gogol.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
+    Gogol.CloudSearch.Debug.Datasources.Items.Unmappedids.List
+    Gogol.CloudSearch.Debug.Identitysources.Items.ListForunmappedidentity
+    Gogol.CloudSearch.Debug.Identitysources.Unmappedids.List
+    Gogol.CloudSearch.Indexing.Datasources.DeleteSchema
+    Gogol.CloudSearch.Indexing.Datasources.GetSchema
+    Gogol.CloudSearch.Indexing.Datasources.Items.Delete
+    Gogol.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
+    Gogol.CloudSearch.Indexing.Datasources.Items.Get
+    Gogol.CloudSearch.Indexing.Datasources.Items.Index
+    Gogol.CloudSearch.Indexing.Datasources.Items.List
+    Gogol.CloudSearch.Indexing.Datasources.Items.Poll
+    Gogol.CloudSearch.Indexing.Datasources.Items.Push
+    Gogol.CloudSearch.Indexing.Datasources.Items.Unreserve
+    Gogol.CloudSearch.Indexing.Datasources.Items.Upload
+    Gogol.CloudSearch.Indexing.Datasources.UpdateSchema
+    Gogol.CloudSearch.InitializeCustomer
+    Gogol.CloudSearch.Media.Upload
+    Gogol.CloudSearch.Operations.Get
+    Gogol.CloudSearch.Operations.Lro.List
+    Gogol.CloudSearch.Query.Search
+    Gogol.CloudSearch.Query.Sources.List
+    Gogol.CloudSearch.Query.Suggest
+    Gogol.CloudSearch.Settings.Datasources.Create
+    Gogol.CloudSearch.Settings.Datasources.Delete
+    Gogol.CloudSearch.Settings.Datasources.Get
+    Gogol.CloudSearch.Settings.Datasources.List
+    Gogol.CloudSearch.Settings.Datasources.Update
+    Gogol.CloudSearch.Settings.GetCustomer
+    Gogol.CloudSearch.Settings.Searchapplications.Create
+    Gogol.CloudSearch.Settings.Searchapplications.Delete
+    Gogol.CloudSearch.Settings.Searchapplications.Get
+    Gogol.CloudSearch.Settings.Searchapplications.List
+    Gogol.CloudSearch.Settings.Searchapplications.Reset
+    Gogol.CloudSearch.Settings.Searchapplications.Update
+    Gogol.CloudSearch.Settings.UpdateCustomer
+    Gogol.CloudSearch.Stats.GetIndex
+    Gogol.CloudSearch.Stats.GetQuery
+    Gogol.CloudSearch.Stats.GetSearchapplication
+    Gogol.CloudSearch.Stats.GetSession
+    Gogol.CloudSearch.Stats.GetUser
+    Gogol.CloudSearch.Stats.Index.Datasources.Get
+    Gogol.CloudSearch.Stats.Query.Searchapplications.Get
+    Gogol.CloudSearch.Stats.Session.Searchapplications.Get
+    Gogol.CloudSearch.Stats.User.Searchapplications.Get
+    Gogol.CloudSearch.Types
 
   other-modules:
-    Network.Google.CloudSearch.Internal.Product
-    Network.Google.CloudSearch.Internal.Sum
+    Gogol.CloudSearch.Internal.Product
+    Gogol.CloudSearch.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
