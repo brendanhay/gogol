@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,75 +36,68 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pretargetingConfig.insert@.
 module Gogol.AdExchangeBuyer.PretargetingConfig.Insert
-  ( -- * Resource
-    AdExchangeBuyerPretargetingConfigInsertResource,
+    (
+    -- * Resource
+      AdExchangeBuyerPretargetingConfigInsertResource
 
     -- ** Constructing a Request
-    newAdExchangeBuyerPretargetingConfigInsert,
-    AdExchangeBuyerPretargetingConfigInsert,
-  )
-where
+    , newAdExchangeBuyerPretargetingConfigInsert
+    , AdExchangeBuyerPretargetingConfigInsert
+    ) where
 
-import Gogol.AdExchangeBuyer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdExchangeBuyer.Types
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.insert@ method which the
 -- 'AdExchangeBuyerPretargetingConfigInsert' request conforms to.
-type AdExchangeBuyerPretargetingConfigInsertResource =
-  "adexchangebuyer"
-    Core.:> "v1.4"
-    Core.:> "pretargetingconfigs"
-    Core.:> Core.Capture "accountId" Core.Int64
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] PretargetingConfig
-    Core.:> Core.Post '[Core.JSON] PretargetingConfig
+type AdExchangeBuyerPretargetingConfigInsertResource
+     =
+     "adexchangebuyer" Core.:>
+       "v1.4" Core.:>
+         "pretargetingconfigs" Core.:>
+           Core.Capture "accountId" Core.Int64 Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON] PretargetingConfig Core.:>
+                 Core.Post '[Core.JSON] PretargetingConfig
 
 -- | Inserts a new pretargeting configuration.
 --
 -- /See:/ 'newAdExchangeBuyerPretargetingConfigInsert' smart constructor.
 data AdExchangeBuyerPretargetingConfigInsert = AdExchangeBuyerPretargetingConfigInsert
-  { -- | The account id to insert the pretargeting config for.
-    accountId :: Core.Int64,
-    -- | Multipart request metadata.
-    payload :: PretargetingConfig
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The account id to insert the pretargeting config for.
+      accountId :: Core.Int64
+      -- | Multipart request metadata.
+    , payload :: PretargetingConfig
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeBuyerPretargetingConfigInsert' with the minimum fields required to make a request.
-newAdExchangeBuyerPretargetingConfigInsert ::
-  -- |  The account id to insert the pretargeting config for. See 'accountId'.
-  Core.Int64 ->
-  -- |  Multipart request metadata. See 'payload'.
-  PretargetingConfig ->
-  AdExchangeBuyerPretargetingConfigInsert
+newAdExchangeBuyerPretargetingConfigInsert 
+    ::  Core.Int64
+       -- ^  The account id to insert the pretargeting config for. See 'accountId'.
+    -> PretargetingConfig
+       -- ^  Multipart request metadata. See 'payload'.
+    -> AdExchangeBuyerPretargetingConfigInsert
 newAdExchangeBuyerPretargetingConfigInsert accountId payload =
   AdExchangeBuyerPretargetingConfigInsert
-    { accountId = accountId,
-      payload = payload
-    }
+    {accountId = accountId, payload = payload}
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerPretargetingConfigInsert
-  where
-  type
-    Rs AdExchangeBuyerPretargetingConfigInsert =
-      PretargetingConfig
-  type
-    Scopes AdExchangeBuyerPretargetingConfigInsert =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
-  requestClient
-    AdExchangeBuyerPretargetingConfigInsert {..} =
-      go
-        accountId
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyerPretargetingConfigInsertResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AdExchangeBuyerPretargetingConfigInsert
+         where
+        type Rs AdExchangeBuyerPretargetingConfigInsert =
+             PretargetingConfig
+        type Scopes AdExchangeBuyerPretargetingConfigInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient
+          AdExchangeBuyerPretargetingConfigInsert{..}
+          = go accountId (Core.Just Core.AltJSON) payload
+              adExchangeBuyerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AdExchangeBuyerPretargetingConfigInsertResource)
+                      Core.mempty
+
