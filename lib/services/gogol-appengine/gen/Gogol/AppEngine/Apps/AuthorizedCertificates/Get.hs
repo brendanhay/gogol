@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,104 +30,110 @@
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.authorizedCertificates.get@.
 module Gogol.AppEngine.Apps.AuthorizedCertificates.Get
-    (
-    -- * Resource
-      AppEngineAppsAuthorizedCertificatesGetResource
+  ( -- * Resource
+    AppEngineAppsAuthorizedCertificatesGetResource,
 
     -- ** Constructing a Request
-    , newAppEngineAppsAuthorizedCertificatesGet
-    , AppEngineAppsAuthorizedCertificatesGet
-    ) where
+    newAppEngineAppsAuthorizedCertificatesGet,
+    AppEngineAppsAuthorizedCertificatesGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AppEngine.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appengine.apps.authorizedCertificates.get@ method which the
 -- 'AppEngineAppsAuthorizedCertificatesGet' request conforms to.
 type AppEngineAppsAuthorizedCertificatesGetResource =
-     "v1" Core.:>
-       "apps" Core.:>
-         Core.Capture "appsId" Core.Text Core.:>
-           "authorizedCertificates" Core.:>
-             Core.Capture "authorizedCertificatesId" Core.Text
-               Core.:>
-               Core.QueryParam "$.xgafv" Xgafv Core.:>
-                 Core.QueryParam "access_token" Core.Text Core.:>
-                   Core.QueryParam "callback" Core.Text Core.:>
-                     Core.QueryParam "uploadType" Core.Text Core.:>
-                       Core.QueryParam "upload_protocol" Core.Text Core.:>
-                         Core.QueryParam "view"
-                           AppsAuthorizedCertificatesGetView
-                           Core.:>
-                           Core.QueryParam "alt" Core.AltJSON Core.:>
-                             Core.Get '[Core.JSON] AuthorizedCertificate
+  "v1"
+    Core.:> "apps"
+    Core.:> Core.Capture "appsId" Core.Text
+    Core.:> "authorizedCertificates"
+    Core.:> Core.Capture "authorizedCertificatesId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam
+              "view"
+              AppsAuthorizedCertificatesGetView
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] AuthorizedCertificate
 
 -- | Gets the specified SSL certificate.
 --
 -- /See:/ 'newAppEngineAppsAuthorizedCertificatesGet' smart constructor.
 data AppEngineAppsAuthorizedCertificatesGet = AppEngineAppsAuthorizedCertificatesGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | Part of @name@. Name of the resource requested. Example: apps\/myapp\/authorizedCertificates\/12345.
-    , appsId :: Core.Text
-      -- | Part of @name@. See documentation of @appsId@.
-    , authorizedCertificatesId :: Core.Text
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-      -- | Controls the set of fields returned in the GET response.
-    , view :: (Core.Maybe AppsAuthorizedCertificatesGetView)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | Part of @name@. Name of the resource requested. Example: apps\/myapp\/authorizedCertificates\/12345.
+    appsId :: Core.Text,
+    -- | Part of @name@. See documentation of @appsId@.
+    authorizedCertificatesId :: Core.Text,
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | Controls the set of fields returned in the GET response.
+    view :: (Core.Maybe AppsAuthorizedCertificatesGetView)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AppEngineAppsAuthorizedCertificatesGet' with the minimum fields required to make a request.
-newAppEngineAppsAuthorizedCertificatesGet 
-    ::  Core.Text
-       -- ^  Part of @name@. Name of the resource requested. Example: apps\/myapp\/authorizedCertificates\/12345. See 'appsId'.
-    -> Core.Text
-       -- ^  Part of @name@. See documentation of @appsId@. See 'authorizedCertificatesId'.
-    -> AppEngineAppsAuthorizedCertificatesGet
+newAppEngineAppsAuthorizedCertificatesGet ::
+  -- |  Part of @name@. Name of the resource requested. Example: apps\/myapp\/authorizedCertificates\/12345. See 'appsId'.
+  Core.Text ->
+  -- |  Part of @name@. See documentation of @appsId@. See 'authorizedCertificatesId'.
+  Core.Text ->
+  AppEngineAppsAuthorizedCertificatesGet
 newAppEngineAppsAuthorizedCertificatesGet appsId authorizedCertificatesId =
   AppEngineAppsAuthorizedCertificatesGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , appsId = appsId
-    , authorizedCertificatesId = authorizedCertificatesId
-    , callback = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
-    , view = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      appsId = appsId,
+      authorizedCertificatesId = authorizedCertificatesId,
+      callback = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing,
+      view = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           AppEngineAppsAuthorizedCertificatesGet
-         where
-        type Rs AppEngineAppsAuthorizedCertificatesGet =
-             AuthorizedCertificate
-        type Scopes AppEngineAppsAuthorizedCertificatesGet =
-             '["https://www.googleapis.com/auth/appengine.admin",
-               "https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient
-          AppEngineAppsAuthorizedCertificatesGet{..}
-          = go appsId authorizedCertificatesId xgafv
-              accessToken
-              callback
-              uploadType
-              uploadProtocol
-              view
-              (Core.Just Core.AltJSON)
-              appEngineService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           AppEngineAppsAuthorizedCertificatesGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    AppEngineAppsAuthorizedCertificatesGet
+  where
+  type
+    Rs AppEngineAppsAuthorizedCertificatesGet =
+      AuthorizedCertificate
+  type
+    Scopes AppEngineAppsAuthorizedCertificatesGet =
+      '[ "https://www.googleapis.com/auth/appengine.admin",
+         "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/cloud-platform.read-only"
+       ]
+  requestClient
+    AppEngineAppsAuthorizedCertificatesGet {..} =
+      go
+        appsId
+        authorizedCertificatesId
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        view
+        (Core.Just Core.AltJSON)
+        appEngineService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  AppEngineAppsAuthorizedCertificatesGetResource
+            )
+            Core.mempty
