@@ -1,755 +1,703 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.IAM
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages identity and access control for Google Cloud Platform resources,
--- including the creation of service accounts, which you can use to
--- authenticate to Google and make API calls.
+-- Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference>
 module Network.Google.IAM
-    (
-    -- * Service Configuration
-      iAMService
+  ( -- * Configuration
+    iAMService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , IAMAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** iam.iamPolicies.lintPolicy
-    , module Network.Google.Resource.IAM.IAMPolicies.LintPolicy
+    IAMIamPoliciesLintPolicyResource,
+    newIAMIamPoliciesLintPolicy,
+    IAMIamPoliciesLintPolicy,
 
     -- ** iam.iamPolicies.queryAuditableServices
-    , module Network.Google.Resource.IAM.IAMPolicies.QueryAuditableServices
+    IAMIamPoliciesQueryAuditableServicesResource,
+    newIAMIamPoliciesQueryAuditableServices,
+    IAMIamPoliciesQueryAuditableServices,
+
+    -- ** iam.locations.workforcePools.operations.get
+    IAMLocationsWorkforcePoolsOperationsGetResource,
+    newIAMLocationsWorkforcePoolsOperationsGet,
+    IAMLocationsWorkforcePoolsOperationsGet,
+
+    -- ** iam.locations.workforcePools.providers.keys.operations.get
+    IAMLocationsWorkforcePoolsProvidersKeysOperationsGetResource,
+    newIAMLocationsWorkforcePoolsProvidersKeysOperationsGet,
+    IAMLocationsWorkforcePoolsProvidersKeysOperationsGet,
+
+    -- ** iam.locations.workforcePools.providers.operations.get
+    IAMLocationsWorkforcePoolsProvidersOperationsGetResource,
+    newIAMLocationsWorkforcePoolsProvidersOperationsGet,
+    IAMLocationsWorkforcePoolsProvidersOperationsGet,
+
+    -- ** iam.locations.workforcePools.subjects.operations.get
+    IAMLocationsWorkforcePoolsSubjectsOperationsGetResource,
+    newIAMLocationsWorkforcePoolsSubjectsOperationsGet,
+    IAMLocationsWorkforcePoolsSubjectsOperationsGet,
 
     -- ** iam.organizations.roles.create
-    , module Network.Google.Resource.IAM.Organizations.Roles.Create
+    IAMOrganizationsRolesCreateResource,
+    newIAMOrganizationsRolesCreate,
+    IAMOrganizationsRolesCreate,
 
     -- ** iam.organizations.roles.delete
-    , module Network.Google.Resource.IAM.Organizations.Roles.Delete
+    IAMOrganizationsRolesDeleteResource,
+    newIAMOrganizationsRolesDelete,
+    IAMOrganizationsRolesDelete,
 
     -- ** iam.organizations.roles.get
-    , module Network.Google.Resource.IAM.Organizations.Roles.Get
+    IAMOrganizationsRolesGetResource,
+    newIAMOrganizationsRolesGet,
+    IAMOrganizationsRolesGet,
 
     -- ** iam.organizations.roles.list
-    , module Network.Google.Resource.IAM.Organizations.Roles.List
+    IAMOrganizationsRolesListResource,
+    newIAMOrganizationsRolesList,
+    IAMOrganizationsRolesList,
 
     -- ** iam.organizations.roles.patch
-    , module Network.Google.Resource.IAM.Organizations.Roles.Patch
+    IAMOrganizationsRolesPatchResource,
+    newIAMOrganizationsRolesPatch,
+    IAMOrganizationsRolesPatch,
 
     -- ** iam.organizations.roles.undelete
-    , module Network.Google.Resource.IAM.Organizations.Roles.Undelete
+    IAMOrganizationsRolesUndeleteResource,
+    newIAMOrganizationsRolesUndelete,
+    IAMOrganizationsRolesUndelete,
 
     -- ** iam.permissions.queryTestablePermissions
-    , module Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
+    IAMPermissionsQueryTestablePermissionsResource,
+    newIAMPermissionsQueryTestablePermissions,
+    IAMPermissionsQueryTestablePermissions,
 
     -- ** iam.projects.locations.workloadIdentityPools.create
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Create
+    IAMProjectsLocationsWorkloadIdentityPoolsCreateResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsCreate,
+    IAMProjectsLocationsWorkloadIdentityPoolsCreate,
 
     -- ** iam.projects.locations.workloadIdentityPools.delete
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Delete
+    IAMProjectsLocationsWorkloadIdentityPoolsDeleteResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsDelete,
+    IAMProjectsLocationsWorkloadIdentityPoolsDelete,
 
     -- ** iam.projects.locations.workloadIdentityPools.get
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Get
+    IAMProjectsLocationsWorkloadIdentityPoolsGetResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsGet,
+    IAMProjectsLocationsWorkloadIdentityPoolsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.list
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.List
+    IAMProjectsLocationsWorkloadIdentityPoolsListResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsList,
+    IAMProjectsLocationsWorkloadIdentityPoolsList,
 
     -- ** iam.projects.locations.workloadIdentityPools.operations.get
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Operations.Get
+    IAMProjectsLocationsWorkloadIdentityPoolsOperationsGetResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsOperationsGet,
+    IAMProjectsLocationsWorkloadIdentityPoolsOperationsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.patch
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Patch
+    IAMProjectsLocationsWorkloadIdentityPoolsPatchResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsPatch,
+    IAMProjectsLocationsWorkloadIdentityPoolsPatch,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.create
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Create
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreateResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.delete
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Delete
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDeleteResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.get
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Get
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersGetResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersGet,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersGet,
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.keys.operations.get
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGetResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.list
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.List
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersListResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersList,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersList,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.operations.get
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Operations.Get
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGetResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.patch
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Patch
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatchResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.undelete
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Undelete
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndeleteResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete,
 
     -- ** iam.projects.locations.workloadIdentityPools.undelete
-    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Undelete
+    IAMProjectsLocationsWorkloadIdentityPoolsUndeleteResource,
+    newIAMProjectsLocationsWorkloadIdentityPoolsUndelete,
+    IAMProjectsLocationsWorkloadIdentityPoolsUndelete,
 
     -- ** iam.projects.roles.create
-    , module Network.Google.Resource.IAM.Projects.Roles.Create
+    IAMProjectsRolesCreateResource,
+    newIAMProjectsRolesCreate,
+    IAMProjectsRolesCreate,
 
     -- ** iam.projects.roles.delete
-    , module Network.Google.Resource.IAM.Projects.Roles.Delete
+    IAMProjectsRolesDeleteResource,
+    newIAMProjectsRolesDelete,
+    IAMProjectsRolesDelete,
 
     -- ** iam.projects.roles.get
-    , module Network.Google.Resource.IAM.Projects.Roles.Get
+    IAMProjectsRolesGetResource,
+    newIAMProjectsRolesGet,
+    IAMProjectsRolesGet,
 
     -- ** iam.projects.roles.list
-    , module Network.Google.Resource.IAM.Projects.Roles.List
+    IAMProjectsRolesListResource,
+    newIAMProjectsRolesList,
+    IAMProjectsRolesList,
 
     -- ** iam.projects.roles.patch
-    , module Network.Google.Resource.IAM.Projects.Roles.Patch
+    IAMProjectsRolesPatchResource,
+    newIAMProjectsRolesPatch,
+    IAMProjectsRolesPatch,
 
     -- ** iam.projects.roles.undelete
-    , module Network.Google.Resource.IAM.Projects.Roles.Undelete
+    IAMProjectsRolesUndeleteResource,
+    newIAMProjectsRolesUndelete,
+    IAMProjectsRolesUndelete,
 
     -- ** iam.projects.serviceAccounts.create
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
+    IAMProjectsServiceAccountsCreateResource,
+    newIAMProjectsServiceAccountsCreate,
+    IAMProjectsServiceAccountsCreate,
 
     -- ** iam.projects.serviceAccounts.delete
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
+    IAMProjectsServiceAccountsDeleteResource,
+    newIAMProjectsServiceAccountsDelete,
+    IAMProjectsServiceAccountsDelete,
 
     -- ** iam.projects.serviceAccounts.disable
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
+    IAMProjectsServiceAccountsDisableResource,
+    newIAMProjectsServiceAccountsDisable,
+    IAMProjectsServiceAccountsDisable,
 
     -- ** iam.projects.serviceAccounts.enable
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
+    IAMProjectsServiceAccountsEnableResource,
+    newIAMProjectsServiceAccountsEnable,
+    IAMProjectsServiceAccountsEnable,
 
     -- ** iam.projects.serviceAccounts.get
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
+    IAMProjectsServiceAccountsGetResource,
+    newIAMProjectsServiceAccountsGet,
+    IAMProjectsServiceAccountsGet,
 
     -- ** iam.projects.serviceAccounts.getIamPolicy
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
+    IAMProjectsServiceAccountsGetIamPolicyResource,
+    newIAMProjectsServiceAccountsGetIamPolicy,
+    IAMProjectsServiceAccountsGetIamPolicy,
 
     -- ** iam.projects.serviceAccounts.keys.create
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
+    IAMProjectsServiceAccountsKeysCreateResource,
+    newIAMProjectsServiceAccountsKeysCreate,
+    IAMProjectsServiceAccountsKeysCreate,
 
     -- ** iam.projects.serviceAccounts.keys.delete
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
+    IAMProjectsServiceAccountsKeysDeleteResource,
+    newIAMProjectsServiceAccountsKeysDelete,
+    IAMProjectsServiceAccountsKeysDelete,
+
+    -- ** iam.projects.serviceAccounts.keys.disable
+    IAMProjectsServiceAccountsKeysDisableResource,
+    newIAMProjectsServiceAccountsKeysDisable,
+    IAMProjectsServiceAccountsKeysDisable,
+
+    -- ** iam.projects.serviceAccounts.keys.enable
+    IAMProjectsServiceAccountsKeysEnableResource,
+    newIAMProjectsServiceAccountsKeysEnable,
+    IAMProjectsServiceAccountsKeysEnable,
 
     -- ** iam.projects.serviceAccounts.keys.get
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
+    IAMProjectsServiceAccountsKeysGetResource,
+    newIAMProjectsServiceAccountsKeysGet,
+    IAMProjectsServiceAccountsKeysGet,
 
     -- ** iam.projects.serviceAccounts.keys.list
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
+    IAMProjectsServiceAccountsKeysListResource,
+    newIAMProjectsServiceAccountsKeysList,
+    IAMProjectsServiceAccountsKeysList,
 
     -- ** iam.projects.serviceAccounts.keys.upload
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Upload
+    IAMProjectsServiceAccountsKeysUploadResource,
+    newIAMProjectsServiceAccountsKeysUpload,
+    IAMProjectsServiceAccountsKeysUpload,
 
     -- ** iam.projects.serviceAccounts.list
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.List
+    IAMProjectsServiceAccountsListResource,
+    newIAMProjectsServiceAccountsList,
+    IAMProjectsServiceAccountsList,
 
     -- ** iam.projects.serviceAccounts.patch
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
+    IAMProjectsServiceAccountsPatchResource,
+    newIAMProjectsServiceAccountsPatch,
+    IAMProjectsServiceAccountsPatch,
 
     -- ** iam.projects.serviceAccounts.setIamPolicy
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
+    IAMProjectsServiceAccountsSetIamPolicyResource,
+    newIAMProjectsServiceAccountsSetIamPolicy,
+    IAMProjectsServiceAccountsSetIamPolicy,
 
     -- ** iam.projects.serviceAccounts.signBlob
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
+    IAMProjectsServiceAccountsSignBlobResource,
+    newIAMProjectsServiceAccountsSignBlob,
+    IAMProjectsServiceAccountsSignBlob,
 
     -- ** iam.projects.serviceAccounts.signJwt
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
+    IAMProjectsServiceAccountsSignJwtResource,
+    newIAMProjectsServiceAccountsSignJwt,
+    IAMProjectsServiceAccountsSignJwt,
 
     -- ** iam.projects.serviceAccounts.testIamPermissions
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
+    IAMProjectsServiceAccountsTestIamPermissionsResource,
+    newIAMProjectsServiceAccountsTestIamPermissions,
+    IAMProjectsServiceAccountsTestIamPermissions,
 
     -- ** iam.projects.serviceAccounts.undelete
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
+    IAMProjectsServiceAccountsUndeleteResource,
+    newIAMProjectsServiceAccountsUndelete,
+    IAMProjectsServiceAccountsUndelete,
 
     -- ** iam.projects.serviceAccounts.update
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+    IAMProjectsServiceAccountsUpdateResource,
+    newIAMProjectsServiceAccountsUpdate,
+    IAMProjectsServiceAccountsUpdate,
 
     -- ** iam.roles.get
-    , module Network.Google.Resource.IAM.Roles.Get
+    IAMRolesGetResource,
+    newIAMRolesGet,
+    IAMRolesGet,
 
     -- ** iam.roles.list
-    , module Network.Google.Resource.IAM.Roles.List
+    IAMRolesListResource,
+    newIAMRolesList,
+    IAMRolesList,
 
     -- ** iam.roles.queryGrantableRoles
-    , module Network.Google.Resource.IAM.Roles.QueryGrantableRoles
+    IAMRolesQueryGrantableRolesResource,
+    newIAMRolesQueryGrantableRoles,
+    IAMRolesQueryGrantableRoles,
 
     -- * Types
 
-    -- ** LintPolicyResponse
-    , LintPolicyResponse
-    , lintPolicyResponse
-    , lprLintResults
-
-    -- ** CreateServiceAccountKeyRequestPrivateKeyType
-    , CreateServiceAccountKeyRequestPrivateKeyType (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** WorkLoadIdentityPoolProvider
-    , WorkLoadIdentityPoolProvider
-    , workLoadIdentityPoolProvider
-    , wlippState
-    , wlippAws
-    , wlippDisabled
-    , wlippAttributeCondition
-    , wlippName
-    , wlippDisplayName
-    , wlippAttributeMApping
-    , wlippDescription
-    , wlippOidc
-
-    -- ** UndeleteRoleRequest
-    , UndeleteRoleRequest
-    , undeleteRoleRequest
-    , urrEtag
-
-    -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** PermissionStage
-    , PermissionStage (..)
-
-    -- ** UndeleteServiceAccountRequest
-    , UndeleteServiceAccountRequest
-    , undeleteServiceAccountRequest
-
-    -- ** AuditableService
-    , AuditableService
-    , auditableService
-    , asName
-
-    -- ** WorkLoadIdentityPoolState
-    , WorkLoadIdentityPoolState (..)
-
-    -- ** QueryAuditableServicesRequest
-    , QueryAuditableServicesRequest
-    , queryAuditableServicesRequest
-    , qasrFullResourceName
-
-    -- ** ProjectsServiceAccountsKeysGetPublicKeyType
-    , ProjectsServiceAccountsKeysGetPublicKeyType (..)
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** QueryGrantableRolesRequestView
-    , QueryGrantableRolesRequestView (..)
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** Aws
-    , Aws
-    , aws
-    , aAccountId
-
-    -- ** QueryTestablePermissionsResponse
-    , QueryTestablePermissionsResponse
-    , queryTestablePermissionsResponse
-    , qtprNextPageToken
-    , qtprPermissions
-
-    -- ** AuditData
-    , AuditData
-    , auditData
-    , adPolicyDelta
-
-    -- ** OrganizationsRolesListView
-    , OrganizationsRolesListView (..)
-
-    -- ** QueryAuditableServicesResponse
-    , QueryAuditableServicesResponse
-    , queryAuditableServicesResponse
-    , qasrServices
-
-    -- ** ServiceAccountKeyKeyOrigin
-    , ServiceAccountKeyKeyOrigin (..)
-
-    -- ** ServiceAccountKey
-    , ServiceAccountKey
-    , serviceAccountKey
-    , sakValidAfterTime
-    , sakKeyType
-    , sakPrivateKeyData
-    , sakPublicKeyData
-    , sakName
-    , sakPrivateKeyType
-    , sakValidBeforeTime
-    , sakKeyAlgorithm
-    , sakKeyOrigin
-
-    -- ** WorkLoadIdentityPoolProviderState
-    , WorkLoadIdentityPoolProviderState (..)
-
-    -- ** PermissionDelta
-    , PermissionDelta
-    , permissionDelta
-    , pdAddedPermissions
-    , pdRemovedPermissions
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** ProjectsRolesListView
-    , ProjectsRolesListView (..)
-
-    -- ** LintResult
-    , LintResult
-    , lintResult
-    , lrValidationUnitName
-    , lrDebugMessage
-    , lrLocationOffSet
-    , lrSeverity
-    , lrFieldName
-    , lrLevel
-
-    -- ** UndeleteWorkLoadIdentityPoolRequest
-    , UndeleteWorkLoadIdentityPoolRequest
-    , undeleteWorkLoadIdentityPoolRequest
-
-    -- ** ListWorkLoadIdentityPoolProvidersResponse
-    , ListWorkLoadIdentityPoolProvidersResponse
-    , listWorkLoadIdentityPoolProvidersResponse
-    , lwlipprNextPageToken
-    , lwlipprWorkLoadIdentityPoolProviders
-
-    -- ** CreateServiceAccountKeyRequest
-    , CreateServiceAccountKeyRequest
-    , createServiceAccountKeyRequest
-    , csakrPrivateKeyType
-    , csakrKeyAlgorithm
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** SignJwtResponse
-    , SignJwtResponse
-    , signJwtResponse
-    , sjrKeyId
-    , sjrSignedJwt
-
-    -- ** BindingDelta
-    , BindingDelta
-    , bindingDelta
-    , bdAction
-    , bdRole
-    , bdMember
-    , bdCondition
-
-    -- ** SignBlobRequest
-    , SignBlobRequest
-    , signBlobRequest
-    , sbrBytesToSign
-
-    -- ** ListServiceAccountKeysResponse
-    , ListServiceAccountKeysResponse
-    , listServiceAccountKeysResponse
-    , lsakrKeys
-
-    -- ** EnableServiceAccountRequest
-    , EnableServiceAccountRequest
-    , enableServiceAccountRequest
-
-    -- ** Role
-    , Role
-    , role'
-    , rStage
-    , rEtag
-    , rIncludedPermissions
-    , rName
-    , rDeleted
-    , rTitle
-    , rDescription
-
-    -- ** ServiceAccountKeyKeyType
-    , ServiceAccountKeyKeyType (..)
-
-    -- ** ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saEtag
-    , saDisabled
-    , saUniqueId
-    , saName
-    , saDisplayName
-    , saProjectId
-    , saDescription
-    , saOAuth2ClientId
-
-    -- ** WorkLoadIdentityPoolProviderAttributeMApping
-    , WorkLoadIdentityPoolProviderAttributeMApping
-    , workLoadIdentityPoolProviderAttributeMApping
-    , wlippamaAddtional
-
-    -- ** ListWorkLoadIdentityPoolsResponse
-    , ListWorkLoadIdentityPoolsResponse
-    , listWorkLoadIdentityPoolsResponse
-    , lwliprNextPageToken
-    , lwliprWorkLoadIdentityPools
-
-    -- ** QueryTestablePermissionsRequest
-    , QueryTestablePermissionsRequest
-    , queryTestablePermissionsRequest
-    , qtprFullResourceName
-    , qtprPageToken
-    , qtprPageSize
-
-    -- ** BindingDeltaAction
-    , BindingDeltaAction (..)
-
-    -- ** UndeleteWorkLoadIdentityPoolProviderRequest
-    , UndeleteWorkLoadIdentityPoolProviderRequest
-    , undeleteWorkLoadIdentityPoolProviderRequest
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** QueryGrantableRolesResponse
-    , QueryGrantableRolesResponse
-    , queryGrantableRolesResponse
-    , qgrrRoles
-    , qgrrNextPageToken
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    Xgafv (..),
 
     -- ** AdminAuditData
-    , AdminAuditData
-    , adminAuditData
-    , aadPermissionDelta
+    AdminAuditData (..),
+    newAdminAuditData,
 
-    -- ** LintResultSeverity
-    , LintResultSeverity (..)
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- ** UndeleteServiceAccountResponse
-    , UndeleteServiceAccountResponse
-    , undeleteServiceAccountResponse
-    , usarRestoredAccount
-
-    -- ** WorkLoadIdentityPool
-    , WorkLoadIdentityPool
-    , workLoadIdentityPool
-    , wlipState
-    , wlipDisabled
-    , wlipName
-    , wlipDisplayName
-    , wlipDescription
-
-    -- ** RolesListView
-    , RolesListView (..)
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** LintResultLevel
-    , LintResultLevel (..)
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** RoleStage
-    , RoleStage (..)
-
-    -- ** PolicyDelta
-    , PolicyDelta
-    , policyDelta
-    , pdBindingDeltas
-
-    -- ** QueryGrantableRolesRequest
-    , QueryGrantableRolesRequest
-    , queryGrantableRolesRequest
-    , qgrrFullResourceName
-    , qgrrView
-    , qgrrPageToken
-    , qgrrPageSize
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** SignJwtRequest
-    , SignJwtRequest
-    , signJwtRequest
-    , sjrPayload
-
-    -- ** PatchServiceAccountRequest
-    , PatchServiceAccountRequest
-    , patchServiceAccountRequest
-    , psarUpdateMask
-    , psarServiceAccount
-
-    -- ** ServiceAccountKeyKeyAlgorithm
-    , ServiceAccountKeyKeyAlgorithm (..)
+    -- ** AuditData
+    AuditData (..),
+    newAuditData,
 
     -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** ProjectsServiceAccountsKeysListKeyTypes
-    , ProjectsServiceAccountsKeysListKeyTypes (..)
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- ** Permission
-    , Permission
-    , permission
-    , perStage
-    , perPrimaryPermission
-    , perOnlyInPredefinedRoles
-    , perCustomRolesSupportLevel
-    , perName
-    , perTitle
-    , perAPIdisabled
-    , perDescription
+    -- ** AuditableService
+    AuditableService (..),
+    newAuditableService,
 
-    -- ** SignBlobResponse
-    , SignBlobResponse
-    , signBlobResponse
-    , sbrSignature
-    , sbrKeyId
-
-    -- ** ListServiceAccountsResponse
-    , ListServiceAccountsResponse
-    , listServiceAccountsResponse
-    , lsarNextPageToken
-    , lsarAccounts
-
-    -- ** LintPolicyRequest
-    , LintPolicyRequest
-    , lintPolicyRequest
-    , lprFullResourceName
-    , lprCondition
-
-    -- ** ListRolesResponse
-    , ListRolesResponse
-    , listRolesResponse
-    , lrrRoles
-    , lrrNextPageToken
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
-
-    -- ** CreateServiceAccountKeyRequestKeyAlgorithm
-    , CreateServiceAccountKeyRequestKeyAlgorithm (..)
-
-    -- ** PermissionCustomRolesSupportLevel
-    , PermissionCustomRolesSupportLevel (..)
-
-    -- ** CreateServiceAccountRequest
-    , CreateServiceAccountRequest
-    , createServiceAccountRequest
-    , csarServiceAccount
-    , csarAccountId
-
-    -- ** Oidc
-    , Oidc
-    , oidc
-    , oAllowedAudiences
-    , oIssuerURI
-
-    -- ** CreateRoleRequest
-    , CreateRoleRequest
-    , createRoleRequest
-    , crrRoleId
-    , crrRole
-
-    -- ** ServiceAccountKeyPrivateKeyType
-    , ServiceAccountKeyPrivateKeyType (..)
-
-    -- ** UploadServiceAccountKeyRequest
-    , UploadServiceAccountKeyRequest
-    , uploadServiceAccountKeyRequest
-    , usakrPublicKeyData
+    -- ** Aws
+    Aws (..),
+    newAws,
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
+    Binding (..),
+    newBinding,
+
+    -- ** BindingDelta
+    BindingDelta (..),
+    newBindingDelta,
+
+    -- ** BindingDelta_Action
+    BindingDelta_Action (..),
+
+    -- ** CreateRoleRequest
+    CreateRoleRequest (..),
+    newCreateRoleRequest,
+
+    -- ** CreateServiceAccountKeyRequest
+    CreateServiceAccountKeyRequest (..),
+    newCreateServiceAccountKeyRequest,
+
+    -- ** CreateServiceAccountKeyRequest_KeyAlgorithm
+    CreateServiceAccountKeyRequest_KeyAlgorithm (..),
+
+    -- ** CreateServiceAccountKeyRequest_PrivateKeyType
+    CreateServiceAccountKeyRequest_PrivateKeyType (..),
+
+    -- ** CreateServiceAccountRequest
+    CreateServiceAccountRequest (..),
+    newCreateServiceAccountRequest,
+
+    -- ** DisableServiceAccountKeyRequest
+    DisableServiceAccountKeyRequest (..),
+    newDisableServiceAccountKeyRequest,
 
     -- ** DisableServiceAccountRequest
-    , DisableServiceAccountRequest
-    , disableServiceAccountRequest
-    ) where
+    DisableServiceAccountRequest (..),
+    newDisableServiceAccountRequest,
 
-import Network.Google.Prelude
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EnableServiceAccountKeyRequest
+    EnableServiceAccountKeyRequest (..),
+    newEnableServiceAccountKeyRequest,
+
+    -- ** EnableServiceAccountRequest
+    EnableServiceAccountRequest (..),
+    newEnableServiceAccountRequest,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** LintPolicyRequest
+    LintPolicyRequest (..),
+    newLintPolicyRequest,
+
+    -- ** LintPolicyResponse
+    LintPolicyResponse (..),
+    newLintPolicyResponse,
+
+    -- ** LintResult
+    LintResult (..),
+    newLintResult,
+
+    -- ** LintResult_Level
+    LintResult_Level (..),
+
+    -- ** LintResult_Severity
+    LintResult_Severity (..),
+
+    -- ** ListRolesResponse
+    ListRolesResponse (..),
+    newListRolesResponse,
+
+    -- ** ListServiceAccountKeysResponse
+    ListServiceAccountKeysResponse (..),
+    newListServiceAccountKeysResponse,
+
+    -- ** ListServiceAccountsResponse
+    ListServiceAccountsResponse (..),
+    newListServiceAccountsResponse,
+
+    -- ** ListWorkloadIdentityPoolProvidersResponse
+    ListWorkloadIdentityPoolProvidersResponse (..),
+    newListWorkloadIdentityPoolProvidersResponse,
+
+    -- ** ListWorkloadIdentityPoolsResponse
+    ListWorkloadIdentityPoolsResponse (..),
+    newListWorkloadIdentityPoolsResponse,
+
+    -- ** Oidc
+    Oidc (..),
+    newOidc,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** PatchServiceAccountRequest
+    PatchServiceAccountRequest (..),
+    newPatchServiceAccountRequest,
+
+    -- ** Permission
+    Permission (..),
+    newPermission,
+
+    -- ** Permission_CustomRolesSupportLevel
+    Permission_CustomRolesSupportLevel (..),
+
+    -- ** Permission_Stage
+    Permission_Stage (..),
+
+    -- ** PermissionDelta
+    PermissionDelta (..),
+    newPermissionDelta,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PolicyDelta
+    PolicyDelta (..),
+    newPolicyDelta,
+
+    -- ** QueryAuditableServicesRequest
+    QueryAuditableServicesRequest (..),
+    newQueryAuditableServicesRequest,
+
+    -- ** QueryAuditableServicesResponse
+    QueryAuditableServicesResponse (..),
+    newQueryAuditableServicesResponse,
+
+    -- ** QueryGrantableRolesRequest
+    QueryGrantableRolesRequest (..),
+    newQueryGrantableRolesRequest,
+
+    -- ** QueryGrantableRolesRequest_View
+    QueryGrantableRolesRequest_View (..),
+
+    -- ** QueryGrantableRolesResponse
+    QueryGrantableRolesResponse (..),
+    newQueryGrantableRolesResponse,
+
+    -- ** QueryTestablePermissionsRequest
+    QueryTestablePermissionsRequest (..),
+    newQueryTestablePermissionsRequest,
+
+    -- ** QueryTestablePermissionsResponse
+    QueryTestablePermissionsResponse (..),
+    newQueryTestablePermissionsResponse,
+
+    -- ** Role
+    Role (..),
+    newRole,
+
+    -- ** Role_Stage
+    Role_Stage (..),
+
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
+
+    -- ** ServiceAccountKey
+    ServiceAccountKey (..),
+    newServiceAccountKey,
+
+    -- ** ServiceAccountKey_KeyAlgorithm
+    ServiceAccountKey_KeyAlgorithm (..),
+
+    -- ** ServiceAccountKey_KeyOrigin
+    ServiceAccountKey_KeyOrigin (..),
+
+    -- ** ServiceAccountKey_KeyType
+    ServiceAccountKey_KeyType (..),
+
+    -- ** ServiceAccountKey_PrivateKeyType
+    ServiceAccountKey_PrivateKeyType (..),
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** SignBlobRequest
+    SignBlobRequest (..),
+    newSignBlobRequest,
+
+    -- ** SignBlobResponse
+    SignBlobResponse (..),
+    newSignBlobResponse,
+
+    -- ** SignJwtRequest
+    SignJwtRequest (..),
+    newSignJwtRequest,
+
+    -- ** SignJwtResponse
+    SignJwtResponse (..),
+    newSignJwtResponse,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** UndeleteRoleRequest
+    UndeleteRoleRequest (..),
+    newUndeleteRoleRequest,
+
+    -- ** UndeleteServiceAccountRequest
+    UndeleteServiceAccountRequest (..),
+    newUndeleteServiceAccountRequest,
+
+    -- ** UndeleteServiceAccountResponse
+    UndeleteServiceAccountResponse (..),
+    newUndeleteServiceAccountResponse,
+
+    -- ** UndeleteWorkloadIdentityPoolProviderRequest
+    UndeleteWorkloadIdentityPoolProviderRequest (..),
+    newUndeleteWorkloadIdentityPoolProviderRequest,
+
+    -- ** UndeleteWorkloadIdentityPoolRequest
+    UndeleteWorkloadIdentityPoolRequest (..),
+    newUndeleteWorkloadIdentityPoolRequest,
+
+    -- ** UploadServiceAccountKeyRequest
+    UploadServiceAccountKeyRequest (..),
+    newUploadServiceAccountKeyRequest,
+
+    -- ** WorkloadIdentityPool
+    WorkloadIdentityPool (..),
+    newWorkloadIdentityPool,
+
+    -- ** WorkloadIdentityPool_State
+    WorkloadIdentityPool_State (..),
+
+    -- ** WorkloadIdentityPoolProvider
+    WorkloadIdentityPoolProvider (..),
+    newWorkloadIdentityPoolProvider,
+
+    -- ** WorkloadIdentityPoolProvider_AttributeMapping
+    WorkloadIdentityPoolProvider_AttributeMapping (..),
+    newWorkloadIdentityPoolProvider_AttributeMapping,
+
+    -- ** WorkloadIdentityPoolProvider_State
+    WorkloadIdentityPoolProvider_State (..),
+
+    -- ** OrganizationsRolesListView
+    OrganizationsRolesListView (..),
+
+    -- ** ProjectsRolesListView
+    ProjectsRolesListView (..),
+
+    -- ** ProjectsServiceAccountsKeysGetPublicKeyType
+    ProjectsServiceAccountsKeysGetPublicKeyType (..),
+
+    -- ** ProjectsServiceAccountsKeysListKeyTypes
+    ProjectsServiceAccountsKeysListKeyTypes (..),
+
+    -- ** RolesListView
+    RolesListView (..),
+  )
+where
+
+import Network.Google.IAM.IamPolicies.LintPolicy
+import Network.Google.IAM.IamPolicies.QueryAuditableServices
+import Network.Google.IAM.Locations.WorkforcePools.Operations.Get
+import Network.Google.IAM.Locations.WorkforcePools.Providers.Keys.Operations.Get
+import Network.Google.IAM.Locations.WorkforcePools.Providers.Operations.Get
+import Network.Google.IAM.Locations.WorkforcePools.Subjects.Operations.Get
+import Network.Google.IAM.Organizations.Roles.Create
+import Network.Google.IAM.Organizations.Roles.Delete
+import Network.Google.IAM.Organizations.Roles.Get
+import Network.Google.IAM.Organizations.Roles.List
+import Network.Google.IAM.Organizations.Roles.Patch
+import Network.Google.IAM.Organizations.Roles.Undelete
+import Network.Google.IAM.Permissions.QueryTestablePermissions
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Create
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Delete
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Get
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.List
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Operations.Get
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Patch
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Create
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Delete
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Get
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Keys.Operations.Get
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.List
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Operations.Get
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Patch
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Undelete
+import Network.Google.IAM.Projects.Locations.WorkloadIdentityPools.Undelete
+import Network.Google.IAM.Projects.Roles.Create
+import Network.Google.IAM.Projects.Roles.Delete
+import Network.Google.IAM.Projects.Roles.Get
+import Network.Google.IAM.Projects.Roles.List
+import Network.Google.IAM.Projects.Roles.Patch
+import Network.Google.IAM.Projects.Roles.Undelete
+import Network.Google.IAM.Projects.ServiceAccounts.Create
+import Network.Google.IAM.Projects.ServiceAccounts.Delete
+import Network.Google.IAM.Projects.ServiceAccounts.Disable
+import Network.Google.IAM.Projects.ServiceAccounts.Enable
+import Network.Google.IAM.Projects.ServiceAccounts.Get
+import Network.Google.IAM.Projects.ServiceAccounts.GetIamPolicy
+import Network.Google.IAM.Projects.ServiceAccounts.Keys.Create
+import Network.Google.IAM.Projects.ServiceAccounts.Keys.Delete
+import Network.Google.IAM.Projects.ServiceAccounts.Keys.Disable
+import Network.Google.IAM.Projects.ServiceAccounts.Keys.Enable
+import Network.Google.IAM.Projects.ServiceAccounts.Keys.Get
+import Network.Google.IAM.Projects.ServiceAccounts.Keys.List
+import Network.Google.IAM.Projects.ServiceAccounts.Keys.Upload
+import Network.Google.IAM.Projects.ServiceAccounts.List
+import Network.Google.IAM.Projects.ServiceAccounts.Patch
+import Network.Google.IAM.Projects.ServiceAccounts.SetIamPolicy
+import Network.Google.IAM.Projects.ServiceAccounts.SignBlob
+import Network.Google.IAM.Projects.ServiceAccounts.SignJwt
+import Network.Google.IAM.Projects.ServiceAccounts.TestIamPermissions
+import Network.Google.IAM.Projects.ServiceAccounts.Undelete
+import Network.Google.IAM.Projects.ServiceAccounts.Update
+import Network.Google.IAM.Roles.Get
+import Network.Google.IAM.Roles.List
+import Network.Google.IAM.Roles.QueryGrantableRoles
 import Network.Google.IAM.Types
-import Network.Google.Resource.IAM.IAMPolicies.LintPolicy
-import Network.Google.Resource.IAM.IAMPolicies.QueryAuditableServices
-import Network.Google.Resource.IAM.Organizations.Roles.Create
-import Network.Google.Resource.IAM.Organizations.Roles.Delete
-import Network.Google.Resource.IAM.Organizations.Roles.Get
-import Network.Google.Resource.IAM.Organizations.Roles.List
-import Network.Google.Resource.IAM.Organizations.Roles.Patch
-import Network.Google.Resource.IAM.Organizations.Roles.Undelete
-import Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Create
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Delete
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Get
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.List
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Operations.Get
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Patch
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Create
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Delete
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Get
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.List
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Operations.Get
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Patch
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Undelete
-import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Undelete
-import Network.Google.Resource.IAM.Projects.Roles.Create
-import Network.Google.Resource.IAM.Projects.Roles.Delete
-import Network.Google.Resource.IAM.Projects.Roles.Get
-import Network.Google.Resource.IAM.Projects.Roles.List
-import Network.Google.Resource.IAM.Projects.Roles.Patch
-import Network.Google.Resource.IAM.Projects.Roles.Undelete
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Upload
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.List
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
-import Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
-import Network.Google.Resource.IAM.Roles.Get
-import Network.Google.Resource.IAM.Roles.List
-import Network.Google.Resource.IAM.Roles.QueryGrantableRoles
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Identity and Access Management (IAM) API service.
-type IAMAPI =
-     RolesListResource :<|> RolesGetResource :<|>
-       RolesQueryGrantableRolesResource
-       :<|> IAMPoliciesLintPolicyResource
-       :<|> IAMPoliciesQueryAuditableServicesResource
-       :<|> PermissionsQueryTestablePermissionsResource
-       :<|> OrganizationsRolesListResource
-       :<|> OrganizationsRolesUndeleteResource
-       :<|> OrganizationsRolesPatchResource
-       :<|> OrganizationsRolesGetResource
-       :<|> OrganizationsRolesCreateResource
-       :<|> OrganizationsRolesDeleteResource
-       :<|> ProjectsRolesListResource
-       :<|> ProjectsRolesUndeleteResource
-       :<|> ProjectsRolesPatchResource
-       :<|> ProjectsRolesGetResource
-       :<|> ProjectsRolesCreateResource
-       :<|> ProjectsRolesDeleteResource
-       :<|> ProjectsServiceAccountsKeysListResource
-       :<|> ProjectsServiceAccountsKeysGetResource
-       :<|> ProjectsServiceAccountsKeysCreateResource
-       :<|> ProjectsServiceAccountsKeysUploadResource
-       :<|> ProjectsServiceAccountsKeysDeleteResource
-       :<|> ProjectsServiceAccountsListResource
-       :<|> ProjectsServiceAccountsSignJwtResource
-       :<|> ProjectsServiceAccountsUndeleteResource
-       :<|> ProjectsServiceAccountsGetIAMPolicyResource
-       :<|> ProjectsServiceAccountsPatchResource
-       :<|> ProjectsServiceAccountsGetResource
-       :<|> ProjectsServiceAccountsEnableResource
-       :<|> ProjectsServiceAccountsCreateResource
-       :<|> ProjectsServiceAccountsDisableResource
-       :<|> ProjectsServiceAccountsSetIAMPolicyResource
-       :<|> ProjectsServiceAccountsSignBlobResource
-       :<|>
-       ProjectsServiceAccountsTestIAMPermissionsResource
-       :<|> ProjectsServiceAccountsDeleteResource
-       :<|> ProjectsServiceAccountsUpdateResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsProvidersOperationsGetResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsProvidersListResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsProvidersUndeleteResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsProvidersPatchResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsProvidersGetResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsProvidersCreateResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsProvidersDeleteResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsOperationsGetResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsListResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsUndeleteResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsPatchResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsGetResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsCreateResource
-       :<|>
-       ProjectsLocationsWorkLoadIdentityPoolsDeleteResource
