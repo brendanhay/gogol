@@ -1,303 +1,220 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.BigQueryDataTransfer.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.BigQueryDataTransfer.Types
-    (
-    -- * Service Configuration
-      bigQueryDataTransferService
+  ( -- * Configuration
+    bigQueryDataTransferService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , bigQueryScope
+    bigqueryScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
-    -- * DataSourceParameterType
-    , DataSourceParameterType (..)
+    -- * Types
 
-    -- * EmailPreferences
-    , EmailPreferences
-    , emailPreferences
-    , epEnableFailureEmail
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** CheckValidCredsRequest
+    CheckValidCredsRequest (..),
+    newCheckValidCredsRequest,
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** CheckValidCredsResponse
+    CheckValidCredsResponse (..),
+    newCheckValidCredsResponse,
 
-    -- * TimeRange
-    , TimeRange
-    , timeRange
-    , trStartTime
-    , trEndTime
+    -- ** DataSource
+    DataSource (..),
+    newDataSource,
 
-    -- * TransferRun
-    , TransferRun
-    , transferRun
-    , tRunTime
-    , tEmailPreferences
-    , tErrorStatus
-    , tNotificationPubsubTopic
-    , tState
-    , tSchedule
-    , tStartTime
-    , tScheduleTime
-    , tDataSourceId
-    , tParams
-    , tUserId
-    , tUpdateTime
-    , tName
-    , tEndTime
-    , tDestinationDataSetId
+    -- ** DataSource_AuthorizationType
+    DataSource_AuthorizationType (..),
 
-    -- * CheckValidCredsRequest
-    , CheckValidCredsRequest
-    , checkValidCredsRequest
+    -- ** DataSource_DataRefreshType
+    DataSource_DataRefreshType (..),
 
-    -- * TransferConfigParams
-    , TransferConfigParams
-    , transferConfigParams
-    , tcpAddtional
+    -- ** DataSource_TransferType
+    DataSource_TransferType (..),
 
-    -- * ScheduleTransferRunsRequest
-    , ScheduleTransferRunsRequest
-    , scheduleTransferRunsRequest
-    , strrStartTime
-    , strrEndTime
+    -- ** DataSourceParameter
+    DataSourceParameter (..),
+    newDataSourceParameter,
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** DataSourceParameter_Type
+    DataSourceParameter_Type (..),
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** EmailPreferences
+    EmailPreferences (..),
+    newEmailPreferences,
 
-    -- * ScheduleOptions
-    , ScheduleOptions
-    , scheduleOptions
-    , soStartTime
-    , soDisableAutoScheduling
-    , soEndTime
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * TransferRunState
-    , TransferRunState (..)
+    -- ** EnrollDataSourcesRequest
+    EnrollDataSourcesRequest (..),
+    newEnrollDataSourcesRequest,
 
-    -- * ListTransferLogsResponse
-    , ListTransferLogsResponse
-    , listTransferLogsResponse
-    , ltlrNextPageToken
-    , ltlrTransferMessages
+    -- ** ListDataSourcesResponse
+    ListDataSourcesResponse (..),
+    newListDataSourcesResponse,
 
-    -- * CheckValidCredsResponse
-    , CheckValidCredsResponse
-    , checkValidCredsResponse
-    , cvcrHasValidCreds
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** ListTransferConfigsResponse
+    ListTransferConfigsResponse (..),
+    newListTransferConfigsResponse,
 
-    -- * DataSourceTransferType
-    , DataSourceTransferType (..)
+    -- ** ListTransferLogsResponse
+    ListTransferLogsResponse (..),
+    newListTransferLogsResponse,
 
-    -- * ProjectsLocationsTransferConfigsRunsListStates
-    , ProjectsLocationsTransferConfigsRunsListStates (..)
+    -- ** ListTransferRunsResponse
+    ListTransferRunsResponse (..),
+    newListTransferRunsResponse,
 
-    -- * ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..)
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * DataSourceAuthorizationType
-    , DataSourceAuthorizationType (..)
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * TransferRunParams
-    , TransferRunParams
-    , transferRunParams
-    , trpAddtional
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * ProjectsLocationsTransferConfigsRunsListRunAttempt
-    , ProjectsLocationsTransferConfigsRunsListRunAttempt (..)
+    -- ** ScheduleOptions
+    ScheduleOptions (..),
+    newScheduleOptions,
 
-    -- * DataSourceParameter
-    , DataSourceParameter
-    , dataSourceParameter
-    , dspMaxValue
-    , dspParamId
-    , dspImmutable
-    , dspRecurse
-    , dspValidationDescription
-    , dspRequired
-    , dspDisplayName
-    , dspType
-    , dspAllowedValues
-    , dspRepeated
-    , dspDescription
-    , dspValidationRegex
-    , dspMinValue
-    , dspValidationHelpURL
-    , dspFields
-    , dspDeprecated
+    -- ** ScheduleTransferRunsRequest
+    ScheduleTransferRunsRequest (..),
+    newScheduleTransferRunsRequest,
 
-    -- * ScheduleTransferRunsResponse
-    , ScheduleTransferRunsResponse
-    , scheduleTransferRunsResponse
-    , strrRuns
+    -- ** ScheduleTransferRunsResponse
+    ScheduleTransferRunsResponse (..),
+    newScheduleTransferRunsResponse,
 
-    -- * ListDataSourcesResponse
-    , ListDataSourcesResponse
-    , listDataSourcesResponse
-    , ldsrNextPageToken
-    , ldsrDataSources
+    -- ** StartManualTransferRunsRequest
+    StartManualTransferRunsRequest (..),
+    newStartManualTransferRunsRequest,
 
-    -- * StartManualTransferRunsRequest
-    , StartManualTransferRunsRequest
-    , startManualTransferRunsRequest
-    , smtrrRequestedRunTime
-    , smtrrRequestedTimeRange
+    -- ** StartManualTransferRunsResponse
+    StartManualTransferRunsResponse (..),
+    newStartManualTransferRunsResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * DataSource
-    , DataSource
-    , dataSource
-    , dsClientId
-    , dsMinimumScheduleInterval
-    , dsSupportsCustomSchedule
-    , dsUpdateDeadlineSeconds
-    , dsManualRunsDisabled
-    , dsDataSourceId
-    , dsTransferType
-    , dsScopes
-    , dsSupportsMultipleTransfers
-    , dsName
-    , dsParameters
-    , dsHelpURL
-    , dsDefaultDataRefreshWindowDays
-    , dsDisplayName
-    , dsDataRefreshType
-    , dsAuthorizationType
-    , dsDefaultSchedule
-    , dsDescription
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * DataSourceDataRefreshType
-    , DataSourceDataRefreshType (..)
+    -- ** TimeRange
+    TimeRange (..),
+    newTimeRange,
 
-    -- * ListTransferRunsResponse
-    , ListTransferRunsResponse
-    , listTransferRunsResponse
-    , ltrrNextPageToken
-    , ltrrTransferRuns
+    -- ** TransferConfig
+    TransferConfig (..),
+    newTransferConfig,
 
-    -- * TransferMessage
-    , TransferMessage
-    , transferMessage
-    , tmSeverity
-    , tmMessageTime
-    , tmMessageText
+    -- ** TransferConfig_Params
+    TransferConfig_Params (..),
+    newTransferConfig_Params,
 
-    -- * ProjectsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..)
+    -- ** TransferConfig_State
+    TransferConfig_State (..),
 
-    -- * ProjectsTransferConfigsRunsListStates
-    , ProjectsTransferConfigsRunsListStates (..)
+    -- ** TransferMessage
+    TransferMessage (..),
+    newTransferMessage,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** TransferMessage_Severity
+    TransferMessage_Severity (..),
 
-    -- * StartManualTransferRunsResponse
-    , StartManualTransferRunsResponse
-    , startManualTransferRunsResponse
-    , smtrrRuns
+    -- ** TransferRun
+    TransferRun (..),
+    newTransferRun,
 
-    -- * ProjectsTransferConfigsRunsListRunAttempt
-    , ProjectsTransferConfigsRunsListRunAttempt (..)
+    -- ** TransferRun_Params
+    TransferRun_Params (..),
+    newTransferRun_Params,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** TransferRun_State
+    TransferRun_State (..),
 
-    -- * TransferMessageSeverity
-    , TransferMessageSeverity (..)
+    -- ** UserInfo
+    UserInfo (..),
+    newUserInfo,
 
-    -- * ListTransferConfigsResponse
-    , ListTransferConfigsResponse
-    , listTransferConfigsResponse
-    , ltcrNextPageToken
-    , ltcrTransferConfigs
+    -- ** ProjectsLocationsTransferConfigsRunsListRunAttempt
+    ProjectsLocationsTransferConfigsRunsListRunAttempt (..),
 
-    -- * TransferConfigState
-    , TransferConfigState (..)
+    -- ** ProjectsLocationsTransferConfigsRunsListStates
+    ProjectsLocationsTransferConfigsRunsListStates (..),
 
-    -- * TransferConfig
-    , TransferConfig
-    , transferConfig
-    , tcEmailPreferences
-    , tcNotificationPubsubTopic
-    , tcState
-    , tcSchedule
-    , tcScheduleOptions
-    , tcDisabled
-    , tcDataSourceId
-    , tcParams
-    , tcUserId
-    , tcUpdateTime
-    , tcName
-    , tcDataSetRegion
-    , tcDisplayName
-    , tcNextRunTime
-    , tcDestinationDataSetId
-    , tcDataRefreshWindowDays
-    ) where
+    -- ** ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
+    ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..),
 
-import Network.Google.BigQueryDataTransfer.Types.Product
-import Network.Google.BigQueryDataTransfer.Types.Sum
-import Network.Google.Prelude
+    -- ** ProjectsTransferConfigsRunsListRunAttempt
+    ProjectsTransferConfigsRunsListRunAttempt (..),
 
--- | Default request referring to version 'v1' of the BigQuery Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-bigQueryDataTransferService :: ServiceConfig
-bigQueryDataTransferService
-  = defaultService
-      (ServiceId "bigquerydatatransfer:v1")
-      "bigquerydatatransfer.googleapis.com"
+    -- ** ProjectsTransferConfigsRunsListStates
+    ProjectsTransferConfigsRunsListStates (..),
 
--- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy
+    -- ** ProjectsTransferConfigsRunsTransferLogsListMessageTypes
+    ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..),
+  )
+where
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+import Network.Google.BigQueryDataTransfer.Internal.Product
+import Network.Google.BigQueryDataTransfer.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View and manage your data in Google BigQuery
-bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
-bigQueryScope = Proxy
+-- | Default request referring to version @v1@ of the BigQuery Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
+bigQueryDataTransferService :: Core.ServiceConfig
+bigQueryDataTransferService =
+  Core.defaultService
+    (Core.ServiceId "bigquerydatatransfer:v1")
+    "bigquerydatatransfer.googleapis.com"
+
+-- | View and manage your data in Google BigQuery and see the email address for your Google Account
+bigqueryScope :: Core.Proxy '["https://www.googleapis.com/auth/bigquery"]
+bigqueryScope = Core.Proxy
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View your data across Google Cloud services and see the email address of your Google Account
+cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Core.Proxy
