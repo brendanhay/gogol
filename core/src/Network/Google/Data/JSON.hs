@@ -1,5 +1,5 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
@@ -35,6 +35,7 @@ import Data.Aeson
 import Data.Aeson.Types
 import qualified Data.Text as Text
 import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
+
 #if MIN_VERSION_aeson(2,0,0)
 import Data.Aeson.KeyMap (KeyMap)
 #else
