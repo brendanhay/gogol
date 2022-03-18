@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Projects.Brands.Create
+-- Module      : Gogol.IAP.Projects.Brands.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Constructs a new OAuth brand for the project if one does not exist. The created brand is \"internal only\", meaning that OAuth clients created under it only accept requests from users who belong to the same Google Workspace organization as the project. The brand is created in an un-reviewed status. NOTE: The \"internal only\" status can be manually changed in the Google Cloud Console. Requires that a brand does not already exist for the project, and that the specified support email is owned by the caller.
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.create@.
-module Network.Google.IAP.Projects.Brands.Create
+module Gogol.IAP.Projects.Brands.Create
   ( -- * Resource
     IAPProjectsBrandsCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IAP.Projects.Brands.Create
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iap.projects.brands.create@ method which the
 -- 'IAPProjectsBrandsCreate' request conforms to.

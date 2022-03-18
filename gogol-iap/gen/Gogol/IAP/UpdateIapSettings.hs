@@ -19,54 +19,60 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.GetIapSettings
+-- Module      : Gogol.IAP.UpdateIapSettings
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the IAP settings on a particular IAP protected resource.
+-- Updates the IAP settings on a particular IAP protected resource. It replaces all fields unless the @update_mask@ is set.
 --
--- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.getIapSettings@.
-module Network.Google.IAP.GetIapSettings
+-- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.updateIapSettings@.
+module Gogol.IAP.UpdateIapSettings
   ( -- * Resource
-    IAPGetIapSettingsResource,
+    IAPUpdateIapSettingsResource,
 
     -- ** Constructing a Request
-    newIAPGetIapSettings,
-    IAPGetIapSettings,
+    newIAPUpdateIapSettings,
+    IAPUpdateIapSettings,
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @iap.getIapSettings@ method which the
--- 'IAPGetIapSettings' request conforms to.
-type IAPGetIapSettingsResource =
+-- | A resource alias for @iap.updateIapSettings@ method which the
+-- 'IAPUpdateIapSettings' request conforms to.
+type IAPUpdateIapSettingsResource =
   "v1"
     Core.:> Core.CaptureMode "name" "iapSettings" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] IapSettings
+    Core.:> Core.ReqBody '[Core.JSON] IapSettings
+    Core.:> Core.Patch '[Core.JSON] IapSettings
 
--- | Gets the IAP settings on a particular IAP protected resource.
+-- | Updates the IAP settings on a particular IAP protected resource. It replaces all fields unless the @update_mask@ is set.
 --
--- /See:/ 'newIAPGetIapSettings' smart constructor.
-data IAPGetIapSettings = IAPGetIapSettings
+-- /See:/ 'newIAPUpdateIapSettings' smart constructor.
+data IAPUpdateIapSettings = IAPUpdateIapSettings
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name for which to retrieve the settings. Authorization: Requires the @getSettings@ permission for the associated resource.
+    -- | Required. The resource name of the IAP protected resource.
     name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: IapSettings,
+    -- | The field mask specifying which IAP settings should be updated. If omitted, the all of the settings are updated. See https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
+    updateMask :: (Core.Maybe Core.GFieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,38 +80,46 @@ data IAPGetIapSettings = IAPGetIapSettings
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'IAPGetIapSettings' with the minimum fields required to make a request.
-newIAPGetIapSettings ::
-  -- |  Required. The resource name for which to retrieve the settings. Authorization: Requires the @getSettings@ permission for the associated resource. See 'name'.
+-- | Creates a value of 'IAPUpdateIapSettings' with the minimum fields required to make a request.
+newIAPUpdateIapSettings ::
+  -- |  Required. The resource name of the IAP protected resource. See 'name'.
   Core.Text ->
-  IAPGetIapSettings
-newIAPGetIapSettings name =
-  IAPGetIapSettings
+  -- |  Multipart request metadata. See 'payload'.
+  IapSettings ->
+  IAPUpdateIapSettings
+newIAPUpdateIapSettings name payload =
+  IAPUpdateIapSettings
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      payload = payload,
+      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest IAPGetIapSettings where
-  type Rs IAPGetIapSettings = IapSettings
+instance Core.GoogleRequest IAPUpdateIapSettings where
+  type Rs IAPUpdateIapSettings = IapSettings
   type
-    Scopes IAPGetIapSettings =
+    Scopes IAPUpdateIapSettings =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient IAPGetIapSettings {..} =
+  requestClient IAPUpdateIapSettings {..} =
     go
       name
       xgafv
       accessToken
       callback
+      updateMask
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       iAPService
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy IAPGetIapSettingsResource)
+          ( Core.Proxy ::
+              Core.Proxy IAPUpdateIapSettingsResource
+          )
           Core.mempty

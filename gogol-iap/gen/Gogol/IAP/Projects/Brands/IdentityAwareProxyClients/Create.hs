@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Create
+-- Module      : Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned by IAP. Requires that the brand for the project exists and that it is set for internal-only use.
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.identityAwareProxyClients.create@.
-module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Create
+module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Create
   ( -- * Resource
     IAPProjectsBrandsIdentityAwareProxyClientsCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Create
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iap.projects.brands.identityAwareProxyClients.create@ method which the
 -- 'IAPProjectsBrandsIdentityAwareProxyClientsCreate' request conforms to.

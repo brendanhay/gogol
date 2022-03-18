@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Types
+-- Module      : Gogol.IAP.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.IAP.Types
+module Gogol.IAP.Types
   ( -- * Configuration
     iAPService,
 
@@ -153,9 +153,9 @@ module Network.Google.IAP.Types
   )
 where
 
-import Network.Google.IAP.Internal.Product
-import Network.Google.IAP.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Internal.Product
+import Gogol.IAP.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Identity-Aware Proxy API. This contains the host and root path used as a starting point for constructing service requests.
 iAPService :: Core.ServiceConfig

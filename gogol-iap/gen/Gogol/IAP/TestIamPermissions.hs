@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.TestIamPermissions
+-- Module      : Gogol.IAP.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns permissions that a caller has on the Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing/access/via/the/api
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.testIamPermissions@.
-module Network.Google.IAP.TestIamPermissions
+module Gogol.IAP.TestIamPermissions
   ( -- * Resource
     IAPTestIamPermissionsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IAP.TestIamPermissions
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iap.testIamPermissions@ method which the
 -- 'IAPTestIamPermissions' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
+-- Module      : Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes an Identity Aware Proxy (IAP) OAuth client. Useful for removing obsolete clients, managing the number of clients in a given project, and cleaning up after tests. Requires that the client is owned by IAP.
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.identityAwareProxyClients.delete@.
-module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
+module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
   ( -- * Resource
     IAPProjectsBrandsIdentityAwareProxyClientsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iap.projects.brands.identityAwareProxyClients.delete@ method which the
 -- 'IAPProjectsBrandsIdentityAwareProxyClientsDelete' request conforms to.

@@ -39,30 +39,31 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.IAP
-    Network.Google.IAP.GetIamPolicy
-    Network.Google.IAP.GetIapSettings
-    Network.Google.IAP.Projects.Brands.Create
-    Network.Google.IAP.Projects.Brands.Get
-    Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Create
-    Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
-    Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.Get
-    Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.List
-    Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
-    Network.Google.IAP.Projects.Brands.List
-    Network.Google.IAP.SetIamPolicy
-    Network.Google.IAP.TestIamPermissions
-    Network.Google.IAP.Types
-    Network.Google.IAP.UpdateIapSettings
+    Gogol.IAP
+    Gogol.IAP.GetIamPolicy
+    Gogol.IAP.GetIapSettings
+    Gogol.IAP.Projects.Brands.Create
+    Gogol.IAP.Projects.Brands.Get
+    Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Create
+    Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
+    Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Get
+    Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
+    Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
+    Gogol.IAP.Projects.Brands.List
+    Gogol.IAP.SetIamPolicy
+    Gogol.IAP.TestIamPermissions
+    Gogol.IAP.Types
+    Gogol.IAP.UpdateIapSettings
 
   other-modules:
-    Network.Google.IAP.Internal.Product
-    Network.Google.IAP.Internal.Sum
+    Gogol.IAP.Internal.Product
+    Gogol.IAP.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

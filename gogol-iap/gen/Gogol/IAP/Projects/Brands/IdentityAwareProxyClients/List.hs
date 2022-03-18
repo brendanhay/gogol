@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.List
+-- Module      : Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the existing clients for the brand.
 --
 -- /See:/ <https://cloud.google.com/iap Cloud Identity-Aware Proxy API Reference> for @iap.projects.brands.identityAwareProxyClients.list@.
-module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.List
+module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
   ( -- * Resource
     IAPProjectsBrandsIdentityAwareProxyClientsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IAP.Projects.Brands.IdentityAwareProxyClients.List
   )
 where
 
-import Network.Google.IAP.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAP.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iap.projects.brands.identityAwareProxyClients.list@ method which the
 -- 'IAPProjectsBrandsIdentityAwareProxyClientsList' request conforms to.
