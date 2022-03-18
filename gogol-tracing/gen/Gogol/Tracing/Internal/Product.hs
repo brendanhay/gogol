@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Tracing.Internal.Product
+-- Module      : Gogol.Tracing.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Tracing.Internal.Product
+module Gogol.Tracing.Internal.Product
   ( -- * Annotation
     Annotation (..),
     newAnnotation,
@@ -116,8 +116,8 @@ module Network.Google.Tracing.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Tracing.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Tracing.Internal.Sum
 
 -- | Text annotation with a set of attributes. A maximum of 32 annotations are allowed per Span.
 --

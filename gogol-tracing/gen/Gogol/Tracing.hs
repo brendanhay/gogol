@@ -19,13 +19,17 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Tracing.Types
+-- Module      : Gogol.Tracing
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Tracing.Types
+--
+-- Send and retrieve trace data from Google Stackdriver Trace.
+--
+-- /See:/ <https://cloud.google.com/trace Google Tracing API Reference>
+module Gogol.Tracing
   ( -- * Configuration
     tracingService,
 
@@ -33,6 +37,28 @@ module Network.Google.Tracing.Types
     cloudPlatformScope,
     traceAppendScope,
     traceReadOnlyScope,
+
+    -- * Resources
+
+    -- ** tracing.projects.traces.batchWrite
+    TracingProjectsTracesBatchWriteResource,
+    newTracingProjectsTracesBatchWrite,
+    TracingProjectsTracesBatchWrite,
+
+    -- ** tracing.projects.traces.list
+    TracingProjectsTracesListResource,
+    newTracingProjectsTracesList,
+    TracingProjectsTracesList,
+
+    -- ** tracing.projects.traces.listSpans
+    TracingProjectsTracesListSpansResource,
+    newTracingProjectsTracesListSpans,
+    TracingProjectsTracesListSpans,
+
+    -- ** tracing.projects.traces.spans.create
+    TracingProjectsTracesSpansCreateResource,
+    newTracingProjectsTracesSpansCreate,
+    TracingProjectsTracesSpansCreate,
 
     -- * Types
 
@@ -135,25 +161,8 @@ module Network.Google.Tracing.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Tracing.Internal.Product
-import Network.Google.Tracing.Internal.Sum
-
--- | Default request referring to version @v2@ of the Google Tracing API. This contains the host and root path used as a starting point for constructing service requests.
-tracingService :: Core.ServiceConfig
-tracingService =
-  Core.defaultService
-    (Core.ServiceId "tracing:v2")
-    "tracing.googleapis.com"
-
--- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
-
--- | Write Trace data for a project or application
-traceAppendScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.append"]
-traceAppendScope = Core.Proxy
-
--- | Read Trace data for a project or application
-traceReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.readonly"]
-traceReadOnlyScope = Core.Proxy
+import Gogol.Tracing.Projects.Traces.BatchWrite
+import Gogol.Tracing.Projects.Traces.List
+import Gogol.Tracing.Projects.Traces.ListSpans
+import Gogol.Tracing.Projects.Traces.Spans.Create
+import Gogol.Tracing.Types
