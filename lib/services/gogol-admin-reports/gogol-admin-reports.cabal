@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-admin-reports
-version:               0.5.0
-synopsis:              Google Admin SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-admin-reports
+version:            0.5.0
+synopsis:           Google Admin SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
+  Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,36 +31,33 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Admin.Reports
-    , Gogol.Admin.Reports.Activities.List
-    , Gogol.Admin.Reports.Activities.Watch
-    , Gogol.Admin.Reports.Admin.Channels.Stop
-    , Gogol.Admin.Reports.CustomerUsageReports.Get
-    , Gogol.Admin.Reports.EntityUsageReports.Get
-    , Gogol.Admin.Reports.Types
-    , Gogol.Admin.Reports.UserUsageReport.Get
+    Gogol.Admin.Reports
+    Gogol.Admin.Reports.Activities.List
+    Gogol.Admin.Reports.Activities.Watch
+    Gogol.Admin.Reports.Admin.Channels.Stop
+    Gogol.Admin.Reports.CustomerUsageReports.Get
+    Gogol.Admin.Reports.EntityUsageReports.Get
+    Gogol.Admin.Reports.Types
+    Gogol.Admin.Reports.UserUsageReport.Get
 
   other-modules:
-      Gogol.Admin.Reports.Internal.Product
-    , Gogol.Admin.Reports.Internal.Sum
+    Gogol.Admin.Reports.Internal.Product
+    Gogol.Admin.Reports.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
