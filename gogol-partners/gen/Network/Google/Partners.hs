@@ -1,648 +1,421 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Partners
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches certified companies and creates contact leads with them, and
--- also audits the usage of clients.
+-- Searches certified companies and creates contact leads with them, and also audits the usage of clients.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference>
 module Network.Google.Partners
-    (
-    -- * Service Configuration
-      partnersService
-
-    -- * API Declaration
-    , PartnersAPI
+  ( -- * Configuration
+    partnersService,
 
     -- * Resources
 
     -- ** partners.analytics.list
-    , module Network.Google.Resource.Partners.Analytics.List
+    PartnersAnalyticsListResource,
+    newPartnersAnalyticsList,
+    PartnersAnalyticsList,
 
     -- ** partners.clientMessages.log
-    , module Network.Google.Resource.Partners.ClientMessages.Log
+    PartnersClientMessagesLogResource,
+    newPartnersClientMessagesLog,
+    PartnersClientMessagesLog,
 
     -- ** partners.companies.get
-    , module Network.Google.Resource.Partners.Companies.Get
+    PartnersCompaniesGetResource,
+    newPartnersCompaniesGet,
+    PartnersCompaniesGet,
 
     -- ** partners.companies.leads.create
-    , module Network.Google.Resource.Partners.Companies.Leads.Create
+    PartnersCompaniesLeadsCreateResource,
+    newPartnersCompaniesLeadsCreate,
+    PartnersCompaniesLeadsCreate,
 
     -- ** partners.companies.list
-    , module Network.Google.Resource.Partners.Companies.List
+    PartnersCompaniesListResource,
+    newPartnersCompaniesList,
+    PartnersCompaniesList,
 
     -- ** partners.getPartnersstatus
-    , module Network.Google.Resource.Partners.GetPartnersstatus
+    PartnersGetPartnersstatusResource,
+    newPartnersGetPartnersstatus,
+    PartnersGetPartnersstatus,
 
     -- ** partners.leads.list
-    , module Network.Google.Resource.Partners.Leads.List
+    PartnersLeadsListResource,
+    newPartnersLeadsList,
+    PartnersLeadsList,
 
     -- ** partners.offers.history.list
-    , module Network.Google.Resource.Partners.Offers.History.List
+    PartnersOffersHistoryListResource,
+    newPartnersOffersHistoryList,
+    PartnersOffersHistoryList,
 
     -- ** partners.offers.list
-    , module Network.Google.Resource.Partners.Offers.List
+    PartnersOffersListResource,
+    newPartnersOffersList,
+    PartnersOffersList,
 
     -- ** partners.updateCompanies
-    , module Network.Google.Resource.Partners.UpdateCompanies
+    PartnersUpdateCompaniesResource,
+    newPartnersUpdateCompanies,
+    PartnersUpdateCompanies,
 
     -- ** partners.updateLeads
-    , module Network.Google.Resource.Partners.UpdateLeads
+    PartnersUpdateLeadsResource,
+    newPartnersUpdateLeads,
+    PartnersUpdateLeads,
 
     -- ** partners.userEvents.log
-    , module Network.Google.Resource.Partners.UserEvents.Log
+    PartnersUserEventsLogResource,
+    newPartnersUserEventsLog,
+    PartnersUserEventsLog,
 
     -- ** partners.userStates.list
-    , module Network.Google.Resource.Partners.UserStates.List
+    PartnersUserStatesListResource,
+    newPartnersUserStatesList,
+    PartnersUserStatesList,
 
     -- ** partners.users.createCompanyRelation
-    , module Network.Google.Resource.Partners.Users.CreateCompanyRelation
+    PartnersUsersCreateCompanyRelationResource,
+    newPartnersUsersCreateCompanyRelation,
+    PartnersUsersCreateCompanyRelation,
 
     -- ** partners.users.deleteCompanyRelation
-    , module Network.Google.Resource.Partners.Users.DeleteCompanyRelation
+    PartnersUsersDeleteCompanyRelationResource,
+    newPartnersUsersDeleteCompanyRelation,
+    PartnersUsersDeleteCompanyRelation,
 
     -- ** partners.users.get
-    , module Network.Google.Resource.Partners.Users.Get
+    PartnersUsersGetResource,
+    newPartnersUsersGet,
+    PartnersUsersGet,
 
     -- ** partners.users.updateProfile
-    , module Network.Google.Resource.Partners.Users.UpdateProFile
+    PartnersUsersUpdateProfileResource,
+    newPartnersUsersUpdateProfile,
+    PartnersUsersUpdateProfile,
 
     -- * Types
 
-    -- ** LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
-
-    -- ** ListUserStatesResponse
-    , ListUserStatesResponse
-    , listUserStatesResponse
-    , lusrUserStates
-    , lusrResponseMetadata
-
-    -- ** EventData
-    , EventData
-    , eventData
-    , edValues
-    , edKey
-
-    -- ** OfferCustomerOfferType
-    , OfferCustomerOfferType (..)
-
-    -- ** HistoricalOffer
-    , HistoricalOffer
-    , historicalOffer
-    , hoCreationTime
-    , hoClientId
-    , hoStatus
-    , hoClientEmail
-    , hoAdwordsURL
-    , hoLastModifiedTime
-    , hoSenderName
-    , hoOfferCode
-    , hoOfferCountryCode
-    , hoOfferType
-    , hoClientName
-    , hoExpirationTime
-
-    -- ** RequestMetadata
-    , RequestMetadata
-    , requestMetadata
-    , rmExperimentIds
-    , rmTrafficSource
-    , rmLocale
-    , rmUserOverrides
-    , rmPartnersSessionId
-
-    -- ** LeadType
-    , LeadType (..)
-
-    -- ** CertificationStatus
-    , CertificationStatus
-    , certificationStatus
-    , csUserCount
-    , csIsCertified
-    , csType
-    , csExamStatuses
-
-    -- ** DebugInfo
-    , DebugInfo
-    , debugInfo
-    , diServiceURL
-    , diServerTraceInfo
-    , diServerInfo
-
-    -- ** AvailableOfferOfferLevel
-    , AvailableOfferOfferLevel (..)
-
-    -- ** OptIns
-    , OptIns
-    , optIns
-    , oiPhoneContact
-    , oiPhysicalMail
-    , oiPerformanceSuggestions
-    , oiSpecialOffers
-    , oiMarketComm
-
-    -- ** LogUserEventRequestEventAction
-    , LogUserEventRequestEventAction (..)
-
-    -- ** AnalyticsDataPoint
-    , AnalyticsDataPoint
-    , analyticsDataPoint
-    , adpEventCount
-    , adpEventLocations
-
-    -- ** GetCompanyResponse
-    , GetCompanyResponse
-    , getCompanyResponse
-    , gcrResponseMetadata
-    , gcrCompany
-
-    -- ** PublicProFile
-    , PublicProFile
-    , publicProFile
-    , ppfURL
-    , ppfDisplayImageURL
-    , ppfProFileImage
-    , ppfDisplayName
-    , ppfId
-
-    -- ** ExamStatus
-    , ExamStatus
-    , examStatus
-    , esPassed
-    , esExpiration
-    , esWarning
-    , esLastPassed
-    , esTaken
-    , esExamType
-
-    -- ** CertificationExamStatus
-    , CertificationExamStatus
-    , certificationExamStatus
-    , cesNumberUsersPass
-    , cesType
-
-    -- ** Location
-    , Location
-    , location
-    , lLatLng
-    , lLanguageCode
-    , lSortingCode
-    , lRegionCode
-    , lAddressLine
-    , lDependentLocality
-    , lPostalCode
-    , lAddress
-    , lLocality
-    , lAdministrativeArea
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** TrafficSource
-    , TrafficSource
-    , trafficSource
-    , tsTrafficSubId
-    , tsTrafficSourceId
-
-    -- ** ListOffersHistoryResponse
-    , ListOffersHistoryResponse
-    , listOffersHistoryResponse
-    , lohrNextPageToken
-    , lohrShowingEntireCompany
-    , lohrResponseMetadata
-    , lohrCanShowEntireCompany
-    , lohrTotalResults
-    , lohrOffers
-
-    -- ** Money
-    , Money
-    , money
-    , mCurrencyCode
-    , mNanos
-    , mUnits
-
-    -- ** ListCompaniesResponse
-    , ListCompaniesResponse
-    , listCompaniesResponse
-    , lcrNextPageToken
-    , lcrResponseMetadata
-    , lcrCompanies
-
-    -- ** Certification
-    , Certification
-    , certification
-    , cLastAchieved
-    , cExpiration
-    , cWarning
-    , cCertificationType
-    , cAchieved
-
-    -- ** RecaptchaChallenge
-    , RecaptchaChallenge
-    , recaptchaChallenge
-    , rcResponse
-    , rcId
-
-    -- ** HistoricalOfferStatus
-    , HistoricalOfferStatus (..)
-
-    -- ** CompanyProFileStatus
-    , CompanyProFileStatus (..)
-
-    -- ** CompanyBadgeTier
-    , CompanyBadgeTier (..)
-
-    -- ** CreateLeadResponse
-    , CreateLeadResponse
-    , createLeadResponse
-    , clrRecaptchaStatus
-    , clrResponseMetadata
-    , clrLead
-
-    -- ** UserOverrides
-    , UserOverrides
-    , userOverrides
-    , uoIPAddress
-    , uoUserId
-
-    -- ** Analytics
-    , Analytics
-    , analytics
-    , aProFileViews
-    , aEventDate
-    , aSearchViews
-    , aContacts
-
-    -- ** CompanyRelationBadgeTier
-    , CompanyRelationBadgeTier (..)
-
-    -- ** ResponseMetadata
-    , ResponseMetadata
-    , responseMetadata
-    , rmDebugInfo
-
-    -- ** LogMessageRequest
-    , LogMessageRequest
-    , logMessageRequest
-    , lmrRequestMetadata
-    , lmrClientInfo
-    , lmrDetails
-    , lmrLevel
-
-    -- ** LocalizedCompanyInfo
-    , LocalizedCompanyInfo
-    , localizedCompanyInfo
-    , lciLanguageCode
-    , lciOverview
-    , lciCountryCodes
-    , lciDisplayName
-
-    -- ** CompanyRelationState
-    , CompanyRelationState (..)
-
-    -- ** CountryOfferInfoOfferType
-    , CountryOfferInfoOfferType (..)
-
-    -- ** RankType
-    , RankType (..)
-
-    -- ** SpecializationStatusBadgeSpecializationState
-    , SpecializationStatusBadgeSpecializationState (..)
-
-    -- ** AvailableOfferOfferType
-    , AvailableOfferOfferType (..)
-
-    -- ** AvailableOffer
-    , AvailableOffer
-    , availableOffer
-    , aoShowSpecialOfferCopy
-    , aoQualifiedCustomer
-    , aoTerms
-    , aoQualifiedCustomersComplete
-    , aoMaxAccountAge
-    , aoName
-    , aoCountryOfferInfos
-    , aoId
-    , aoOfferType
-    , aoOfferLevel
-    , aoDescription
-    , aoAvailable
-
-    -- ** SpecializationStatusBadgeSpecialization
-    , SpecializationStatusBadgeSpecialization (..)
-
-    -- ** LogMessageRequestClientInfo
-    , LogMessageRequestClientInfo
-    , logMessageRequestClientInfo
-    , lmrciAddtional
-
-    -- ** CompanyRelation
-    , CompanyRelation
-    , companyRelation
-    , crCreationTime
-    , crState
-    , crBadgeTier
-    , crCompanyId
-    , crPrimaryAddress
-    , crLogoURL
-    , crCompanyAdmin
-    , crWebsite
-    , crAddress
-    , crPrimaryCountryCode
-    , crName
-    , crPhoneNumber
-    , crManagerAccount
-    , crIsPending
-    , crInternalCompanyId
-    , crSpecializationStatus
-    , crSegment
-    , crPrimaryLanguageCode
-    , crResolvedTimestamp
-
-    -- ** User
-    , User
-    , user
-    , uCertificationStatus
-    , uPublicProFile
-    , uCompanyVerificationEmail
-    , uExamStatus
-    , uPrimaryEmails
-    , uProFile
-    , uAfaInfoShared
-    , uCompany
-    , uInternalId
-    , uId
-    , uAvailableAdwordsManagerAccounts
-    , uLastAccessTime
-
-    -- ** LogUserEventRequestEventCategory
-    , LogUserEventRequestEventCategory (..)
-
-    -- ** Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
-
-    -- ** Lead
-    , Lead
-    , lead
-    , leaGivenName
-    , leaEmail
-    , leaLanguageCode
-    , leaState
-    , leaMarketingOptIn
-    , leaAdwordsCustomerId
-    , leaFamilyName
-    , leaPhoneNumber
-    , leaMinMonthlyBudget
-    , leaId
-    , leaComments
-    , leaWebsiteURL
-    , leaType
-    , leaGpsMotivations
-    , leaCreateTime
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AdWordsManagerAccountInfo
-    , AdWordsManagerAccountInfo
-    , adWordsManagerAccountInfo
-    , awmaiCustomerName
-    , awmaiId
+    AdWordsManagerAccountInfo (..),
+    newAdWordsManagerAccountInfo,
 
-    -- ** LogMessageResponse
-    , LogMessageResponse
-    , logMessageResponse
-    , lmrResponseMetadata
+    -- ** Analytics
+    Analytics (..),
+    newAnalytics,
 
-    -- ** HistoricalOfferOfferType
-    , HistoricalOfferOfferType (..)
-
-    -- ** CertificationStatusType
-    , CertificationStatusType (..)
-
-    -- ** CreateLeadResponseRecaptchaStatus
-    , CreateLeadResponseRecaptchaStatus (..)
-
-    -- ** OfferCustomer
-    , OfferCustomer
-    , offerCustomer
-    , ocCreationTime
-    , ocAdwordsURL
-    , ocGetYAmount
-    , ocName
-    , ocCountryCode
-    , ocOfferType
-    , ocSpendXAmount
-    , ocExternalCid
-    , ocEligibilityDaysLeft
-
-    -- ** ExamStatusExamType
-    , ExamStatusExamType (..)
-
-    -- ** GetPartnersStatusResponse
-    , GetPartnersStatusResponse
-    , getPartnersStatusResponse
-    , gpsrResponseMetadata
-
-    -- ** ListAnalyticsResponse
-    , ListAnalyticsResponse
-    , listAnalyticsResponse
-    , larNextPageToken
-    , larAnalytics
-    , larResponseMetadata
-    , larAnalyticsSummary
-
-    -- ** Company
-    , Company
-    , company
-    , cCompanyTypes
-    , cAutoApprovalEmailDomains
-    , cProFileStatus
-    , cBadgeTier
-    , cPublicProFile
-    , cOriginalMinMonthlyBudget
-    , cAdditionalWebsites
-    , cIndustries
-    , cConvertedMinMonthlyBudget
-    , cName
-    , cLocalizedInfos
-    , cCertificationStatuses
-    , cRanks
-    , cId
-    , cWebsiteURL
-    , cSpecializationStatus
-    , cPrimaryAdwordsManagerAccountId
-    , cBadgeAuthorityInAwn
-    , cPrimaryLanguageCode
-    , cLocations
-    , cServices
-    , cPrimaryLocation
-
-    -- ** ListOffersResponseNoOfferReason
-    , ListOffersResponseNoOfferReason (..)
-
-    -- ** LogUserEventResponse
-    , LogUserEventResponse
-    , logUserEventResponse
-    , luerResponseMetadata
-
-    -- ** ListOffersResponse
-    , ListOffersResponse
-    , listOffersResponse
-    , lorAvailableOffers
-    , lorNoOfferReason
-    , lorResponseMetadata
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** UserProFile
-    , UserProFile
-    , userProFile
-    , upfGivenName
-    , upfMarkets
-    , upfChannels
-    , upfEmailOptIns
-    , upfJobFunctions
-    , upfAddress
-    , upfPrimaryCountryCode
-    , upfFamilyName
-    , upfLanguages
-    , upfIndustries
-    , upfMigrateToAfa
-    , upfPhoneNumber
-    , upfEmailAddress
-    , upfAdwordsManagerAccount
-    , upfProFilePublic
+    -- ** AnalyticsDataPoint
+    AnalyticsDataPoint (..),
+    newAnalyticsDataPoint,
 
     -- ** AnalyticsSummary
-    , AnalyticsSummary
-    , analyticsSummary
-    , asContactsCount
-    , asProFileViewsCount
-    , asSearchViewsCount
+    AnalyticsSummary (..),
+    newAnalyticsSummary,
 
-    -- ** CertificationExamStatusType
-    , CertificationExamStatusType (..)
+    -- ** AvailableOffer
+    AvailableOffer (..),
+    newAvailableOffer,
 
-    -- ** LogUserEventRequest
-    , LogUserEventRequest
-    , logUserEventRequest
-    , luerEventCategory
-    , luerRequestMetadata
-    , luerURL
-    , luerEventScope
-    , luerLead
-    , luerEventDatas
-    , luerEventAction
+    -- ** AvailableOffer_OfferLevel
+    AvailableOffer_OfferLevel (..),
 
-    -- ** LogMessageRequestLevel
-    , LogMessageRequestLevel (..)
+    -- ** AvailableOffer_OfferType
+    AvailableOffer_OfferType (..),
 
-    -- ** CertificationCertificationType
-    , CertificationCertificationType (..)
+    -- ** Certification
+    Certification (..),
+    newCertification,
 
-    -- ** EventDataKey
-    , EventDataKey (..)
+    -- ** Certification_CertificationType
+    Certification_CertificationType (..),
 
-    -- ** SpecializationStatus
-    , SpecializationStatus
-    , specializationStatus
-    , ssBadgeSpecialization
-    , ssBadgeSpecializationState
+    -- ** CertificationExamStatus
+    CertificationExamStatus (..),
+    newCertificationExamStatus,
 
-    -- ** LeadState
-    , LeadState (..)
+    -- ** CertificationExamStatus_Type
+    CertificationExamStatus_Type (..),
 
-    -- ** Rank
-    , Rank
-    , rank
-    , rValue
-    , rType
+    -- ** CertificationStatus
+    CertificationStatus (..),
+    newCertificationStatus,
 
-    -- ** LogUserEventRequestEventScope
-    , LogUserEventRequestEventScope (..)
+    -- ** CertificationStatus_Type
+    CertificationStatus_Type (..),
 
-    -- ** ListLeadsResponse
-    , ListLeadsResponse
-    , listLeadsResponse
-    , llrLeads
-    , llrNextPageToken
-    , llrResponseMetadata
-    , llrTotalSize
+    -- ** Company
+    Company (..),
+    newCompany,
+
+    -- ** Company_BadgeTier
+    Company_BadgeTier (..),
+
+    -- ** Company_ProfileStatus
+    Company_ProfileStatus (..),
+
+    -- ** CompanyRelation
+    CompanyRelation (..),
+    newCompanyRelation,
+
+    -- ** CompanyRelation_BadgeTier
+    CompanyRelation_BadgeTier (..),
+
+    -- ** CompanyRelation_State
+    CompanyRelation_State (..),
 
     -- ** CountryOfferInfo
-    , CountryOfferInfo
-    , countryOfferInfo
-    , coiGetYAmount
-    , coiOfferCountryCode
-    , coiOfferType
-    , coiSpendXAmount
+    CountryOfferInfo (..),
+    newCountryOfferInfo,
+
+    -- ** CountryOfferInfo_OfferType
+    CountryOfferInfo_OfferType (..),
 
     -- ** CreateLeadRequest
-    , CreateLeadRequest
-    , createLeadRequest
-    , cRequestMetadata
-    , cRecaptchaChallenge
-    , cLead
-    ) where
+    CreateLeadRequest (..),
+    newCreateLeadRequest,
 
-import Network.Google.Prelude
+    -- ** CreateLeadResponse
+    CreateLeadResponse (..),
+    newCreateLeadResponse,
+
+    -- ** CreateLeadResponse_RecaptchaStatus
+    CreateLeadResponse_RecaptchaStatus (..),
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DebugInfo
+    DebugInfo (..),
+    newDebugInfo,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EventData
+    EventData (..),
+    newEventData,
+
+    -- ** EventData_Key
+    EventData_Key (..),
+
+    -- ** ExamStatus
+    ExamStatus (..),
+    newExamStatus,
+
+    -- ** ExamStatus_ExamType
+    ExamStatus_ExamType (..),
+
+    -- ** GetCompanyResponse
+    GetCompanyResponse (..),
+    newGetCompanyResponse,
+
+    -- ** GetPartnersStatusResponse
+    GetPartnersStatusResponse (..),
+    newGetPartnersStatusResponse,
+
+    -- ** HistoricalOffer
+    HistoricalOffer (..),
+    newHistoricalOffer,
+
+    -- ** HistoricalOffer_OfferType
+    HistoricalOffer_OfferType (..),
+
+    -- ** HistoricalOffer_Status
+    HistoricalOffer_Status (..),
+
+    -- ** LatLng
+    LatLng (..),
+    newLatLng,
+
+    -- ** Lead
+    Lead (..),
+    newLead,
+
+    -- ** Lead_State
+    Lead_State (..),
+
+    -- ** Lead_Type
+    Lead_Type (..),
+
+    -- ** ListAnalyticsResponse
+    ListAnalyticsResponse (..),
+    newListAnalyticsResponse,
+
+    -- ** ListCompaniesResponse
+    ListCompaniesResponse (..),
+    newListCompaniesResponse,
+
+    -- ** ListLeadsResponse
+    ListLeadsResponse (..),
+    newListLeadsResponse,
+
+    -- ** ListOffersHistoryResponse
+    ListOffersHistoryResponse (..),
+    newListOffersHistoryResponse,
+
+    -- ** ListOffersResponse
+    ListOffersResponse (..),
+    newListOffersResponse,
+
+    -- ** ListOffersResponse_NoOfferReason
+    ListOffersResponse_NoOfferReason (..),
+
+    -- ** ListUserStatesResponse
+    ListUserStatesResponse (..),
+    newListUserStatesResponse,
+
+    -- ** LocalizedCompanyInfo
+    LocalizedCompanyInfo (..),
+    newLocalizedCompanyInfo,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** LogMessageRequest
+    LogMessageRequest (..),
+    newLogMessageRequest,
+
+    -- ** LogMessageRequest_ClientInfo
+    LogMessageRequest_ClientInfo (..),
+    newLogMessageRequest_ClientInfo,
+
+    -- ** LogMessageRequest_Level
+    LogMessageRequest_Level (..),
+
+    -- ** LogMessageResponse
+    LogMessageResponse (..),
+    newLogMessageResponse,
+
+    -- ** LogUserEventRequest
+    LogUserEventRequest (..),
+    newLogUserEventRequest,
+
+    -- ** LogUserEventRequest_EventAction
+    LogUserEventRequest_EventAction (..),
+
+    -- ** LogUserEventRequest_EventCategory
+    LogUserEventRequest_EventCategory (..),
+
+    -- ** LogUserEventRequest_EventScope
+    LogUserEventRequest_EventScope (..),
+
+    -- ** LogUserEventResponse
+    LogUserEventResponse (..),
+    newLogUserEventResponse,
+
+    -- ** Money
+    Money (..),
+    newMoney,
+
+    -- ** OfferCustomer
+    OfferCustomer (..),
+    newOfferCustomer,
+
+    -- ** OfferCustomer_OfferType
+    OfferCustomer_OfferType (..),
+
+    -- ** OptIns
+    OptIns (..),
+    newOptIns,
+
+    -- ** PublicProfile
+    PublicProfile (..),
+    newPublicProfile,
+
+    -- ** Rank
+    Rank (..),
+    newRank,
+
+    -- ** Rank_Type
+    Rank_Type (..),
+
+    -- ** RecaptchaChallenge
+    RecaptchaChallenge (..),
+    newRecaptchaChallenge,
+
+    -- ** RequestMetadata
+    RequestMetadata (..),
+    newRequestMetadata,
+
+    -- ** ResponseMetadata
+    ResponseMetadata (..),
+    newResponseMetadata,
+
+    -- ** SpecializationStatus
+    SpecializationStatus (..),
+    newSpecializationStatus,
+
+    -- ** SpecializationStatus_BadgeSpecialization
+    SpecializationStatus_BadgeSpecialization (..),
+
+    -- ** SpecializationStatus_BadgeSpecializationState
+    SpecializationStatus_BadgeSpecializationState (..),
+
+    -- ** TrafficSource
+    TrafficSource (..),
+    newTrafficSource,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** UserOverrides
+    UserOverrides (..),
+    newUserOverrides,
+
+    -- ** UserProfile
+    UserProfile (..),
+    newUserProfile,
+  )
+where
+
+import Network.Google.Partners.Analytics.List
+import Network.Google.Partners.ClientMessages.Log
+import Network.Google.Partners.Companies.Get
+import Network.Google.Partners.Companies.Leads.Create
+import Network.Google.Partners.Companies.List
+import Network.Google.Partners.GetPartnersstatus
+import Network.Google.Partners.Leads.List
+import Network.Google.Partners.Offers.History.List
+import Network.Google.Partners.Offers.List
 import Network.Google.Partners.Types
-import Network.Google.Resource.Partners.Analytics.List
-import Network.Google.Resource.Partners.ClientMessages.Log
-import Network.Google.Resource.Partners.Companies.Get
-import Network.Google.Resource.Partners.Companies.Leads.Create
-import Network.Google.Resource.Partners.Companies.List
-import Network.Google.Resource.Partners.GetPartnersstatus
-import Network.Google.Resource.Partners.Leads.List
-import Network.Google.Resource.Partners.Offers.History.List
-import Network.Google.Resource.Partners.Offers.List
-import Network.Google.Resource.Partners.UpdateCompanies
-import Network.Google.Resource.Partners.UpdateLeads
-import Network.Google.Resource.Partners.UserEvents.Log
-import Network.Google.Resource.Partners.UserStates.List
-import Network.Google.Resource.Partners.Users.CreateCompanyRelation
-import Network.Google.Resource.Partners.Users.DeleteCompanyRelation
-import Network.Google.Resource.Partners.Users.Get
-import Network.Google.Resource.Partners.Users.UpdateProFile
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Partners API service.
-type PartnersAPI =
-     LeadsListResource :<|> UsersUpdateProFileResource
-       :<|> UsersDeleteCompanyRelationResource
-       :<|> UsersGetResource
-       :<|> UsersCreateCompanyRelationResource
-       :<|> UserStatesListResource
-       :<|> AnalyticsListResource
-       :<|> UserEventsLogResource
-       :<|> CompaniesLeadsCreateResource
-       :<|> CompaniesListResource
-       :<|> CompaniesGetResource
-       :<|> ClientMessagesLogResource
-       :<|> UpdateCompaniesResource
-       :<|> GetPartnersstatusResource
-       :<|> UpdateLeadsResource
-       :<|> OffersHistoryListResource
-       :<|> OffersListResource
+import Network.Google.Partners.UpdateCompanies
+import Network.Google.Partners.UpdateLeads
+import Network.Google.Partners.UserEvents.Log
+import Network.Google.Partners.UserStates.List
+import Network.Google.Partners.Users.CreateCompanyRelation
+import Network.Google.Partners.Users.DeleteCompanyRelation
+import Network.Google.Partners.Users.Get
+import Network.Google.Partners.Users.UpdateProfile
