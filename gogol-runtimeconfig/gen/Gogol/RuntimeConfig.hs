@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RuntimeConfig
+-- Module      : Gogol.RuntimeConfig
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Runtime Configurator allows you to dynamically configure and expose variables through Google Cloud Platform. In addition, you can also set Watchers and Waiters that will watch for changes to your data and return based on certain conditions.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference>
-module Network.Google.RuntimeConfig
+module Gogol.RuntimeConfig
   ( -- * Configuration
     runtimeConfigService,
 
@@ -93,7 +93,7 @@ module Network.Google.RuntimeConfig
   )
 where
 
-import Network.Google.RuntimeConfig.Operations.Cancel
-import Network.Google.RuntimeConfig.Operations.Delete
-import Network.Google.RuntimeConfig.Operations.List
-import Network.Google.RuntimeConfig.Types
+import Gogol.RuntimeConfig.Operations.Cancel
+import Gogol.RuntimeConfig.Operations.Delete
+import Gogol.RuntimeConfig.Operations.List
+import Gogol.RuntimeConfig.Types

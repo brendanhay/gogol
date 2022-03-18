@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RuntimeConfig.Operations.Cancel
+-- Module      : Gogol.RuntimeConfig.Operations.Cancel
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference> for @runtimeconfig.operations.cancel@.
-module Network.Google.RuntimeConfig.Operations.Cancel
+module Gogol.RuntimeConfig.Operations.Cancel
   ( -- * Resource
     RuntimeConfigOperationsCancelResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RuntimeConfig.Operations.Cancel
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RuntimeConfig.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RuntimeConfig.Types
 
 -- | A resource alias for @runtimeconfig.operations.cancel@ method which the
 -- 'RuntimeConfigOperationsCancel' request conforms to.

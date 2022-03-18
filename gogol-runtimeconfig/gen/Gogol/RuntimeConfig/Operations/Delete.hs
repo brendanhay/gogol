@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RuntimeConfig.Operations.Delete
+-- Module      : Gogol.RuntimeConfig.Operations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference> for @runtimeconfig.operations.delete@.
-module Network.Google.RuntimeConfig.Operations.Delete
+module Gogol.RuntimeConfig.Operations.Delete
   ( -- * Resource
     RuntimeConfigOperationsDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RuntimeConfig.Operations.Delete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RuntimeConfig.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RuntimeConfig.Types
 
 -- | A resource alias for @runtimeconfig.operations.delete@ method which the
 -- 'RuntimeConfigOperationsDelete' request conforms to.
