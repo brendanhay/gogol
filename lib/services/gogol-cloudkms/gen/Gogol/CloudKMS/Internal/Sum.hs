@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudKMS.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AsymmetricDecryptResponse_ProtectionLevel
     AsymmetricDecryptResponse_ProtectionLevel
-      ( AsymmetricDecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        AsymmetricDecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         AsymmetricDecryptResponse_ProtectionLevel_Software,
         AsymmetricDecryptResponse_ProtectionLevel_Hsm,
         AsymmetricDecryptResponse_ProtectionLevel_External,
@@ -45,7 +56,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * AsymmetricSignResponse_ProtectionLevel
     AsymmetricSignResponse_ProtectionLevel
-      ( AsymmetricSignResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        AsymmetricSignResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         AsymmetricSignResponse_ProtectionLevel_Software,
         AsymmetricSignResponse_ProtectionLevel_Hsm,
         AsymmetricSignResponse_ProtectionLevel_External,
@@ -55,7 +67,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      (
+        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -64,7 +77,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * CryptoKey_Purpose
     CryptoKey_Purpose
-      ( CryptoKey_Purpose_CRYPTOKEYPURPOSEUNSPECIFIED,
+      (
+        CryptoKey_Purpose_CRYPTOKEYPURPOSEUNSPECIFIED,
         CryptoKey_Purpose_ENCRYPTDECRYPT,
         CryptoKey_Purpose_ASYMMETRICSIGN,
         CryptoKey_Purpose_ASYMMETRICDECRYPT,
@@ -74,7 +88,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * CryptoKeyVersion_Algorithm
     CryptoKeyVersion_Algorithm
-      ( CryptoKeyVersion_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
+      (
+        CryptoKeyVersion_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         CryptoKeyVersion_Algorithm_GOOGLESYMMETRICENCRYPTION,
         CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_3072_SHA256,
@@ -104,7 +119,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * CryptoKeyVersion_ProtectionLevel
     CryptoKeyVersion_ProtectionLevel
-      ( CryptoKeyVersion_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        CryptoKeyVersion_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         CryptoKeyVersion_ProtectionLevel_Software,
         CryptoKeyVersion_ProtectionLevel_Hsm,
         CryptoKeyVersion_ProtectionLevel_External,
@@ -114,7 +130,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * CryptoKeyVersion_State
     CryptoKeyVersion_State
-      ( CryptoKeyVersion_State_CRYPTOKEYVERSIONSTATEUNSPECIFIED,
+      (
+        CryptoKeyVersion_State_CRYPTOKEYVERSIONSTATEUNSPECIFIED,
         CryptoKeyVersion_State_PENDINGGENERATION,
         CryptoKeyVersion_State_Enabled,
         CryptoKeyVersion_State_Disabled,
@@ -127,7 +144,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * CryptoKeyVersionTemplate_Algorithm
     CryptoKeyVersionTemplate_Algorithm
-      ( CryptoKeyVersionTemplate_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
+      (
+        CryptoKeyVersionTemplate_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         CryptoKeyVersionTemplate_Algorithm_GOOGLESYMMETRICENCRYPTION,
         CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_3072_SHA256,
@@ -157,7 +175,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * CryptoKeyVersionTemplate_ProtectionLevel
     CryptoKeyVersionTemplate_ProtectionLevel
-      ( CryptoKeyVersionTemplate_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        CryptoKeyVersionTemplate_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         CryptoKeyVersionTemplate_ProtectionLevel_Software,
         CryptoKeyVersionTemplate_ProtectionLevel_Hsm,
         CryptoKeyVersionTemplate_ProtectionLevel_External,
@@ -167,7 +186,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * DecryptResponse_ProtectionLevel
     DecryptResponse_ProtectionLevel
-      ( DecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        DecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         DecryptResponse_ProtectionLevel_Software,
         DecryptResponse_ProtectionLevel_Hsm,
         DecryptResponse_ProtectionLevel_External,
@@ -177,7 +197,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * EncryptResponse_ProtectionLevel
     EncryptResponse_ProtectionLevel
-      ( EncryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        EncryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         EncryptResponse_ProtectionLevel_Software,
         EncryptResponse_ProtectionLevel_Hsm,
         EncryptResponse_ProtectionLevel_External,
@@ -187,7 +208,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * GenerateRandomBytesRequest_ProtectionLevel
     GenerateRandomBytesRequest_ProtectionLevel
-      ( GenerateRandomBytesRequest_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        GenerateRandomBytesRequest_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         GenerateRandomBytesRequest_ProtectionLevel_Software,
         GenerateRandomBytesRequest_ProtectionLevel_Hsm,
         GenerateRandomBytesRequest_ProtectionLevel_External,
@@ -197,7 +219,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * ImportCryptoKeyVersionRequest_Algorithm
     ImportCryptoKeyVersionRequest_Algorithm
-      ( ImportCryptoKeyVersionRequest_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
+      (
+        ImportCryptoKeyVersionRequest_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         ImportCryptoKeyVersionRequest_Algorithm_GOOGLESYMMETRICENCRYPTION,
         ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_3072_SHA256,
@@ -227,7 +250,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * ImportJob_ImportMethod
     ImportJob_ImportMethod
-      ( ImportJob_ImportMethod_IMPORTMETHODUNSPECIFIED,
+      (
+        ImportJob_ImportMethod_IMPORTMETHODUNSPECIFIED,
         ImportJob_ImportMethod_RSA_OAEP_3072_SHA1_AES_256,
         ImportJob_ImportMethod_RSA_OAEP_4096_SHA1_AES_256,
         ..
@@ -235,7 +259,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * ImportJob_ProtectionLevel
     ImportJob_ProtectionLevel
-      ( ImportJob_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        ImportJob_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         ImportJob_ProtectionLevel_Software,
         ImportJob_ProtectionLevel_Hsm,
         ImportJob_ProtectionLevel_External,
@@ -245,7 +270,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * ImportJob_State
     ImportJob_State
-      ( ImportJob_State_IMPORTJOBSTATEUNSPECIFIED,
+      (
+        ImportJob_State_IMPORTJOBSTATEUNSPECIFIED,
         ImportJob_State_PENDINGGENERATION,
         ImportJob_State_Active,
         ImportJob_State_Expired,
@@ -254,7 +280,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * KeyOperationAttestation_Format
     KeyOperationAttestation_Format
-      ( KeyOperationAttestation_Format_ATTESTATIONFORMATUNSPECIFIED,
+      (
+        KeyOperationAttestation_Format_ATTESTATIONFORMATUNSPECIFIED,
         KeyOperationAttestation_Format_CAVIUMV1COMPRESSED,
         KeyOperationAttestation_Format_CAVIUMV2COMPRESSED,
         ..
@@ -262,7 +289,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * MacSignResponse_ProtectionLevel
     MacSignResponse_ProtectionLevel
-      ( MacSignResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        MacSignResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         MacSignResponse_ProtectionLevel_Software,
         MacSignResponse_ProtectionLevel_Hsm,
         MacSignResponse_ProtectionLevel_External,
@@ -272,7 +300,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * MacVerifyResponse_ProtectionLevel
     MacVerifyResponse_ProtectionLevel
-      ( MacVerifyResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        MacVerifyResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         MacVerifyResponse_ProtectionLevel_Software,
         MacVerifyResponse_ProtectionLevel_Hsm,
         MacVerifyResponse_ProtectionLevel_External,
@@ -282,7 +311,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * PublicKey_Algorithm
     PublicKey_Algorithm
-      ( PublicKey_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
+      (
+        PublicKey_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         PublicKey_Algorithm_GOOGLESYMMETRICENCRYPTION,
         PublicKey_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         PublicKey_Algorithm_RSA_SIGN_PSS_3072_SHA256,
@@ -312,7 +342,8 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * PublicKey_ProtectionLevel
     PublicKey_ProtectionLevel
-      ( PublicKey_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+      (
+        PublicKey_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
         PublicKey_ProtectionLevel_Software,
         PublicKey_ProtectionLevel_Hsm,
         PublicKey_ProtectionLevel_External,
@@ -322,34 +353,35 @@ module Gogol.CloudKMS.Internal.Sum
 
     -- * ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
     ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
-      ( ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView_CRYPTOKEYVERSIONVIEWUNSPECIFIED,
+      (
+        ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView_CRYPTOKEYVERSIONVIEWUNSPECIFIED,
         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView_Full,
         ..
       ),
 
     -- * ProjectsLocationsKeyRingsCryptoKeysListVersionView
     ProjectsLocationsKeyRingsCryptoKeysListVersionView
-      ( ProjectsLocationsKeyRingsCryptoKeysListVersionView_CRYPTOKEYVERSIONVIEWUNSPECIFIED,
+      (
+        ProjectsLocationsKeyRingsCryptoKeysListVersionView_CRYPTOKEYVERSIONVIEWUNSPECIFIED,
         ProjectsLocationsKeyRingsCryptoKeysListVersionView_Full,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -362,21 +394,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used in decryption.
-newtype AsymmetricDecryptResponse_ProtectionLevel = AsymmetricDecryptResponse_ProtectionLevel {fromAsymmetricDecryptResponse_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AsymmetricDecryptResponse_ProtectionLevel = AsymmetricDecryptResponse_ProtectionLevel { fromAsymmetricDecryptResponse_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern AsymmetricDecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: AsymmetricDecryptResponse_ProtectionLevel
@@ -404,21 +435,20 @@ pattern AsymmetricDecryptResponse_ProtectionLevel_EXTERNALVPC = AsymmetricDecryp
   AsymmetricDecryptResponse_ProtectionLevel_Hsm,
   AsymmetricDecryptResponse_ProtectionLevel_External,
   AsymmetricDecryptResponse_ProtectionLevel_EXTERNALVPC,
-  AsymmetricDecryptResponse_ProtectionLevel
-  #-}
+  AsymmetricDecryptResponse_ProtectionLevel #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used for signing.
-newtype AsymmetricSignResponse_ProtectionLevel = AsymmetricSignResponse_ProtectionLevel {fromAsymmetricSignResponse_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AsymmetricSignResponse_ProtectionLevel = AsymmetricSignResponse_ProtectionLevel { fromAsymmetricSignResponse_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern AsymmetricSignResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: AsymmetricSignResponse_ProtectionLevel
@@ -446,21 +476,20 @@ pattern AsymmetricSignResponse_ProtectionLevel_EXTERNALVPC = AsymmetricSignRespo
   AsymmetricSignResponse_ProtectionLevel_Hsm,
   AsymmetricSignResponse_ProtectionLevel_External,
   AsymmetricSignResponse_ProtectionLevel_EXTERNALVPC,
-  AsymmetricSignResponse_ProtectionLevel
-  #-}
+  AsymmetricSignResponse_ProtectionLevel #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -483,21 +512,20 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType
-  #-}
+  AuditLogConfig_LogType #-}
 
 -- | Immutable. The immutable purpose of this CryptoKey.
-newtype CryptoKey_Purpose = CryptoKey_Purpose {fromCryptoKey_Purpose :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CryptoKey_Purpose = CryptoKey_Purpose { fromCryptoKey_Purpose :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern CryptoKey_Purpose_CRYPTOKEYPURPOSEUNSPECIFIED :: CryptoKey_Purpose
@@ -525,21 +553,20 @@ pattern CryptoKey_Purpose_Mac = CryptoKey_Purpose "MAC"
   CryptoKey_Purpose_ASYMMETRICSIGN,
   CryptoKey_Purpose_ASYMMETRICDECRYPT,
   CryptoKey_Purpose_Mac,
-  CryptoKey_Purpose
-  #-}
+  CryptoKey_Purpose #-}
 
 -- | Output only. The CryptoKeyVersionAlgorithm that this CryptoKeyVersion supports.
-newtype CryptoKeyVersion_Algorithm = CryptoKeyVersion_Algorithm {fromCryptoKeyVersion_Algorithm :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CryptoKeyVersion_Algorithm = CryptoKeyVersion_Algorithm { fromCryptoKeyVersion_Algorithm :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern CryptoKeyVersion_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED :: CryptoKeyVersion_Algorithm
@@ -667,21 +694,20 @@ pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersio
   CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256,
   CryptoKeyVersion_Algorithm_HMAC_SHA256,
   CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION,
-  CryptoKeyVersion_Algorithm
-  #-}
+  CryptoKeyVersion_Algorithm #-}
 
 -- | Output only. The ProtectionLevel describing how crypto operations are performed with this CryptoKeyVersion.
-newtype CryptoKeyVersion_ProtectionLevel = CryptoKeyVersion_ProtectionLevel {fromCryptoKeyVersion_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CryptoKeyVersion_ProtectionLevel = CryptoKeyVersion_ProtectionLevel { fromCryptoKeyVersion_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern CryptoKeyVersion_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: CryptoKeyVersion_ProtectionLevel
@@ -709,21 +735,20 @@ pattern CryptoKeyVersion_ProtectionLevel_EXTERNALVPC = CryptoKeyVersion_Protecti
   CryptoKeyVersion_ProtectionLevel_Hsm,
   CryptoKeyVersion_ProtectionLevel_External,
   CryptoKeyVersion_ProtectionLevel_EXTERNALVPC,
-  CryptoKeyVersion_ProtectionLevel
-  #-}
+  CryptoKeyVersion_ProtectionLevel #-}
 
 -- | The current state of the CryptoKeyVersion.
-newtype CryptoKeyVersion_State = CryptoKeyVersion_State {fromCryptoKeyVersion_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CryptoKeyVersion_State = CryptoKeyVersion_State { fromCryptoKeyVersion_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern CryptoKeyVersion_State_CRYPTOKEYVERSIONSTATEUNSPECIFIED :: CryptoKeyVersion_State
@@ -766,21 +791,20 @@ pattern CryptoKeyVersion_State_IMPORTFAILED = CryptoKeyVersion_State "IMPORT_FAI
   CryptoKeyVersion_State_DESTROYSCHEDULED,
   CryptoKeyVersion_State_PENDINGIMPORT,
   CryptoKeyVersion_State_IMPORTFAILED,
-  CryptoKeyVersion_State
-  #-}
+  CryptoKeyVersion_State #-}
 
 -- | Required. Algorithm to use when creating a CryptoKeyVersion based on this template. For backwards compatibility, GOOGLE/SYMMETRIC/ENCRYPTION is implied if both this field is omitted and CryptoKey.purpose is ENCRYPT_DECRYPT.
-newtype CryptoKeyVersionTemplate_Algorithm = CryptoKeyVersionTemplate_Algorithm {fromCryptoKeyVersionTemplate_Algorithm :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CryptoKeyVersionTemplate_Algorithm = CryptoKeyVersionTemplate_Algorithm { fromCryptoKeyVersionTemplate_Algorithm :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern CryptoKeyVersionTemplate_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED :: CryptoKeyVersionTemplate_Algorithm
@@ -908,21 +932,20 @@ pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoK
   CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256,
   CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION,
-  CryptoKeyVersionTemplate_Algorithm
-  #-}
+  CryptoKeyVersionTemplate_Algorithm #-}
 
 -- | ProtectionLevel to use when creating a CryptoKeyVersion based on this template. Immutable. Defaults to SOFTWARE.
-newtype CryptoKeyVersionTemplate_ProtectionLevel = CryptoKeyVersionTemplate_ProtectionLevel {fromCryptoKeyVersionTemplate_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CryptoKeyVersionTemplate_ProtectionLevel = CryptoKeyVersionTemplate_ProtectionLevel { fromCryptoKeyVersionTemplate_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern CryptoKeyVersionTemplate_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: CryptoKeyVersionTemplate_ProtectionLevel
@@ -950,21 +973,20 @@ pattern CryptoKeyVersionTemplate_ProtectionLevel_EXTERNALVPC = CryptoKeyVersionT
   CryptoKeyVersionTemplate_ProtectionLevel_Hsm,
   CryptoKeyVersionTemplate_ProtectionLevel_External,
   CryptoKeyVersionTemplate_ProtectionLevel_EXTERNALVPC,
-  CryptoKeyVersionTemplate_ProtectionLevel
-  #-}
+  CryptoKeyVersionTemplate_ProtectionLevel #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used in decryption.
-newtype DecryptResponse_ProtectionLevel = DecryptResponse_ProtectionLevel {fromDecryptResponse_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DecryptResponse_ProtectionLevel = DecryptResponse_ProtectionLevel { fromDecryptResponse_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern DecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: DecryptResponse_ProtectionLevel
@@ -992,21 +1014,20 @@ pattern DecryptResponse_ProtectionLevel_EXTERNALVPC = DecryptResponse_Protection
   DecryptResponse_ProtectionLevel_Hsm,
   DecryptResponse_ProtectionLevel_External,
   DecryptResponse_ProtectionLevel_EXTERNALVPC,
-  DecryptResponse_ProtectionLevel
-  #-}
+  DecryptResponse_ProtectionLevel #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used in encryption.
-newtype EncryptResponse_ProtectionLevel = EncryptResponse_ProtectionLevel {fromEncryptResponse_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EncryptResponse_ProtectionLevel = EncryptResponse_ProtectionLevel { fromEncryptResponse_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern EncryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: EncryptResponse_ProtectionLevel
@@ -1034,21 +1055,20 @@ pattern EncryptResponse_ProtectionLevel_EXTERNALVPC = EncryptResponse_Protection
   EncryptResponse_ProtectionLevel_Hsm,
   EncryptResponse_ProtectionLevel_External,
   EncryptResponse_ProtectionLevel_EXTERNALVPC,
-  EncryptResponse_ProtectionLevel
-  #-}
+  EncryptResponse_ProtectionLevel #-}
 
 -- | The ProtectionLevel to use when generating the random data. Currently, only HSM protection level is supported.
-newtype GenerateRandomBytesRequest_ProtectionLevel = GenerateRandomBytesRequest_ProtectionLevel {fromGenerateRandomBytesRequest_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GenerateRandomBytesRequest_ProtectionLevel = GenerateRandomBytesRequest_ProtectionLevel { fromGenerateRandomBytesRequest_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern GenerateRandomBytesRequest_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: GenerateRandomBytesRequest_ProtectionLevel
@@ -1076,21 +1096,20 @@ pattern GenerateRandomBytesRequest_ProtectionLevel_EXTERNALVPC = GenerateRandomB
   GenerateRandomBytesRequest_ProtectionLevel_Hsm,
   GenerateRandomBytesRequest_ProtectionLevel_External,
   GenerateRandomBytesRequest_ProtectionLevel_EXTERNALVPC,
-  GenerateRandomBytesRequest_ProtectionLevel
-  #-}
+  GenerateRandomBytesRequest_ProtectionLevel #-}
 
 -- | Required. The algorithm of the key being imported. This does not need to match the version_template of the CryptoKey this version imports into.
-newtype ImportCryptoKeyVersionRequest_Algorithm = ImportCryptoKeyVersionRequest_Algorithm {fromImportCryptoKeyVersionRequest_Algorithm :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ImportCryptoKeyVersionRequest_Algorithm = ImportCryptoKeyVersionRequest_Algorithm { fromImportCryptoKeyVersionRequest_Algorithm :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern ImportCryptoKeyVersionRequest_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED :: ImportCryptoKeyVersionRequest_Algorithm
@@ -1218,21 +1237,20 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION = Im
   ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256,
   ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION,
-  ImportCryptoKeyVersionRequest_Algorithm
-  #-}
+  ImportCryptoKeyVersionRequest_Algorithm #-}
 
 -- | Required. Immutable. The wrapping method to be used for incoming key material.
-newtype ImportJob_ImportMethod = ImportJob_ImportMethod {fromImportJob_ImportMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ImportJob_ImportMethod = ImportJob_ImportMethod { fromImportJob_ImportMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern ImportJob_ImportMethod_IMPORTMETHODUNSPECIFIED :: ImportJob_ImportMethod
@@ -1250,21 +1268,20 @@ pattern ImportJob_ImportMethod_RSA_OAEP_4096_SHA1_AES_256 = ImportJob_ImportMeth
   ImportJob_ImportMethod_IMPORTMETHODUNSPECIFIED,
   ImportJob_ImportMethod_RSA_OAEP_3072_SHA1_AES_256,
   ImportJob_ImportMethod_RSA_OAEP_4096_SHA1_AES_256,
-  ImportJob_ImportMethod
-  #-}
+  ImportJob_ImportMethod #-}
 
 -- | Required. Immutable. The protection level of the ImportJob. This must match the protection/level of the version/template on the CryptoKey you attempt to import into.
-newtype ImportJob_ProtectionLevel = ImportJob_ProtectionLevel {fromImportJob_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ImportJob_ProtectionLevel = ImportJob_ProtectionLevel { fromImportJob_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern ImportJob_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: ImportJob_ProtectionLevel
@@ -1292,21 +1309,20 @@ pattern ImportJob_ProtectionLevel_EXTERNALVPC = ImportJob_ProtectionLevel "EXTER
   ImportJob_ProtectionLevel_Hsm,
   ImportJob_ProtectionLevel_External,
   ImportJob_ProtectionLevel_EXTERNALVPC,
-  ImportJob_ProtectionLevel
-  #-}
+  ImportJob_ProtectionLevel #-}
 
 -- | Output only. The current state of the ImportJob, indicating if it can be used.
-newtype ImportJob_State = ImportJob_State {fromImportJob_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ImportJob_State = ImportJob_State { fromImportJob_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern ImportJob_State_IMPORTJOBSTATEUNSPECIFIED :: ImportJob_State
@@ -1329,21 +1345,20 @@ pattern ImportJob_State_Expired = ImportJob_State "EXPIRED"
   ImportJob_State_PENDINGGENERATION,
   ImportJob_State_Active,
   ImportJob_State_Expired,
-  ImportJob_State
-  #-}
+  ImportJob_State #-}
 
 -- | Output only. The format of the attestation data.
-newtype KeyOperationAttestation_Format = KeyOperationAttestation_Format {fromKeyOperationAttestation_Format :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype KeyOperationAttestation_Format = KeyOperationAttestation_Format { fromKeyOperationAttestation_Format :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern KeyOperationAttestation_Format_ATTESTATIONFORMATUNSPECIFIED :: KeyOperationAttestation_Format
@@ -1361,21 +1376,20 @@ pattern KeyOperationAttestation_Format_CAVIUMV2COMPRESSED = KeyOperationAttestat
   KeyOperationAttestation_Format_ATTESTATIONFORMATUNSPECIFIED,
   KeyOperationAttestation_Format_CAVIUMV1COMPRESSED,
   KeyOperationAttestation_Format_CAVIUMV2COMPRESSED,
-  KeyOperationAttestation_Format
-  #-}
+  KeyOperationAttestation_Format #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used for signing.
-newtype MacSignResponse_ProtectionLevel = MacSignResponse_ProtectionLevel {fromMacSignResponse_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MacSignResponse_ProtectionLevel = MacSignResponse_ProtectionLevel { fromMacSignResponse_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern MacSignResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: MacSignResponse_ProtectionLevel
@@ -1403,21 +1417,20 @@ pattern MacSignResponse_ProtectionLevel_EXTERNALVPC = MacSignResponse_Protection
   MacSignResponse_ProtectionLevel_Hsm,
   MacSignResponse_ProtectionLevel_External,
   MacSignResponse_ProtectionLevel_EXTERNALVPC,
-  MacSignResponse_ProtectionLevel
-  #-}
+  MacSignResponse_ProtectionLevel #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used for verification.
-newtype MacVerifyResponse_ProtectionLevel = MacVerifyResponse_ProtectionLevel {fromMacVerifyResponse_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MacVerifyResponse_ProtectionLevel = MacVerifyResponse_ProtectionLevel { fromMacVerifyResponse_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern MacVerifyResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: MacVerifyResponse_ProtectionLevel
@@ -1445,21 +1458,20 @@ pattern MacVerifyResponse_ProtectionLevel_EXTERNALVPC = MacVerifyResponse_Protec
   MacVerifyResponse_ProtectionLevel_Hsm,
   MacVerifyResponse_ProtectionLevel_External,
   MacVerifyResponse_ProtectionLevel_EXTERNALVPC,
-  MacVerifyResponse_ProtectionLevel
-  #-}
+  MacVerifyResponse_ProtectionLevel #-}
 
 -- | The Algorithm associated with this key.
-newtype PublicKey_Algorithm = PublicKey_Algorithm {fromPublicKey_Algorithm :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PublicKey_Algorithm = PublicKey_Algorithm { fromPublicKey_Algorithm :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern PublicKey_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED :: PublicKey_Algorithm
@@ -1587,21 +1599,20 @@ pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION = PublicKey_Algorithm "E
   PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256,
   PublicKey_Algorithm_HMAC_SHA256,
   PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION,
-  PublicKey_Algorithm
-  #-}
+  PublicKey_Algorithm #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion public key.
-newtype PublicKey_ProtectionLevel = PublicKey_ProtectionLevel {fromPublicKey_ProtectionLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PublicKey_ProtectionLevel = PublicKey_ProtectionLevel { fromPublicKey_ProtectionLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern PublicKey_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: PublicKey_ProtectionLevel
@@ -1629,21 +1640,20 @@ pattern PublicKey_ProtectionLevel_EXTERNALVPC = PublicKey_ProtectionLevel "EXTER
   PublicKey_ProtectionLevel_Hsm,
   PublicKey_ProtectionLevel_External,
   PublicKey_ProtectionLevel_EXTERNALVPC,
-  PublicKey_ProtectionLevel
-  #-}
+  PublicKey_ProtectionLevel #-}
 
 -- | The fields to include in the response.
-newtype ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView {fromProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView { fromProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default view for each CryptoKeyVersion. Does not include the attestation field.
 pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView_CRYPTOKEYVERSIONVIEWUNSPECIFIED :: ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
@@ -1656,21 +1666,20 @@ pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView_Full = Proj
 {-# COMPLETE
   ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView_CRYPTOKEYVERSIONVIEWUNSPECIFIED,
   ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView_Full,
-  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
-  #-}
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView #-}
 
 -- | The fields of the primary version to include in the response.
-newtype ProjectsLocationsKeyRingsCryptoKeysListVersionView = ProjectsLocationsKeyRingsCryptoKeysListVersionView {fromProjectsLocationsKeyRingsCryptoKeysListVersionView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsKeyRingsCryptoKeysListVersionView = ProjectsLocationsKeyRingsCryptoKeysListVersionView { fromProjectsLocationsKeyRingsCryptoKeysListVersionView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default view for each CryptoKeyVersion. Does not include the attestation field.
 pattern ProjectsLocationsKeyRingsCryptoKeysListVersionView_CRYPTOKEYVERSIONVIEWUNSPECIFIED :: ProjectsLocationsKeyRingsCryptoKeysListVersionView
@@ -1683,5 +1692,4 @@ pattern ProjectsLocationsKeyRingsCryptoKeysListVersionView_Full = ProjectsLocati
 {-# COMPLETE
   ProjectsLocationsKeyRingsCryptoKeysListVersionView_CRYPTOKEYVERSIONVIEWUNSPECIFIED,
   ProjectsLocationsKeyRingsCryptoKeysListVersionView_Full,
-  ProjectsLocationsKeyRingsCryptoKeysListVersionView
-  #-}
+  ProjectsLocationsKeyRingsCryptoKeysListVersionView #-}
