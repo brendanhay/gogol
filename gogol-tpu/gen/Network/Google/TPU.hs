@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.TPU
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,298 +30,296 @@
 --
 -- /See:/ <https://cloud.google.com/tpu/ Cloud TPU API Reference>
 module Network.Google.TPU
-    (
-    -- * Service Configuration
-      tPUService
+  ( -- * Configuration
+    tPUService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , TPUAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** tpu.projects.locations.acceleratorTypes.get
-    , module Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.Get
+    TPUProjectsLocationsAcceleratorTypesGetResource,
+    newTPUProjectsLocationsAcceleratorTypesGet,
+    TPUProjectsLocationsAcceleratorTypesGet,
 
     -- ** tpu.projects.locations.acceleratorTypes.list
-    , module Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.List
+    TPUProjectsLocationsAcceleratorTypesListResource,
+    newTPUProjectsLocationsAcceleratorTypesList,
+    TPUProjectsLocationsAcceleratorTypesList,
+
+    -- ** tpu.projects.locations.generateServiceIdentity
+    TPUProjectsLocationsGenerateServiceIdentityResource,
+    newTPUProjectsLocationsGenerateServiceIdentity,
+    TPUProjectsLocationsGenerateServiceIdentity,
 
     -- ** tpu.projects.locations.get
-    , module Network.Google.Resource.TPU.Projects.Locations.Get
+    TPUProjectsLocationsGetResource,
+    newTPUProjectsLocationsGet,
+    TPUProjectsLocationsGet,
 
     -- ** tpu.projects.locations.list
-    , module Network.Google.Resource.TPU.Projects.Locations.List
+    TPUProjectsLocationsListResource,
+    newTPUProjectsLocationsList,
+    TPUProjectsLocationsList,
 
     -- ** tpu.projects.locations.nodes.create
-    , module Network.Google.Resource.TPU.Projects.Locations.Nodes.Create
+    TPUProjectsLocationsNodesCreateResource,
+    newTPUProjectsLocationsNodesCreate,
+    TPUProjectsLocationsNodesCreate,
 
     -- ** tpu.projects.locations.nodes.delete
-    , module Network.Google.Resource.TPU.Projects.Locations.Nodes.Delete
+    TPUProjectsLocationsNodesDeleteResource,
+    newTPUProjectsLocationsNodesDelete,
+    TPUProjectsLocationsNodesDelete,
 
     -- ** tpu.projects.locations.nodes.get
-    , module Network.Google.Resource.TPU.Projects.Locations.Nodes.Get
+    TPUProjectsLocationsNodesGetResource,
+    newTPUProjectsLocationsNodesGet,
+    TPUProjectsLocationsNodesGet,
+
+    -- ** tpu.projects.locations.nodes.getGuestAttributes
+    TPUProjectsLocationsNodesGetGuestAttributesResource,
+    newTPUProjectsLocationsNodesGetGuestAttributes,
+    TPUProjectsLocationsNodesGetGuestAttributes,
 
     -- ** tpu.projects.locations.nodes.list
-    , module Network.Google.Resource.TPU.Projects.Locations.Nodes.List
+    TPUProjectsLocationsNodesListResource,
+    newTPUProjectsLocationsNodesList,
+    TPUProjectsLocationsNodesList,
 
-    -- ** tpu.projects.locations.nodes.reimage
-    , module Network.Google.Resource.TPU.Projects.Locations.Nodes.Reimage
+    -- ** tpu.projects.locations.nodes.patch
+    TPUProjectsLocationsNodesPatchResource,
+    newTPUProjectsLocationsNodesPatch,
+    TPUProjectsLocationsNodesPatch,
 
     -- ** tpu.projects.locations.nodes.start
-    , module Network.Google.Resource.TPU.Projects.Locations.Nodes.Start
+    TPUProjectsLocationsNodesStartResource,
+    newTPUProjectsLocationsNodesStart,
+    TPUProjectsLocationsNodesStart,
 
     -- ** tpu.projects.locations.nodes.stop
-    , module Network.Google.Resource.TPU.Projects.Locations.Nodes.Stop
+    TPUProjectsLocationsNodesStopResource,
+    newTPUProjectsLocationsNodesStop,
+    TPUProjectsLocationsNodesStop,
 
     -- ** tpu.projects.locations.operations.cancel
-    , module Network.Google.Resource.TPU.Projects.Locations.Operations.Cancel
+    TPUProjectsLocationsOperationsCancelResource,
+    newTPUProjectsLocationsOperationsCancel,
+    TPUProjectsLocationsOperationsCancel,
 
     -- ** tpu.projects.locations.operations.delete
-    , module Network.Google.Resource.TPU.Projects.Locations.Operations.Delete
+    TPUProjectsLocationsOperationsDeleteResource,
+    newTPUProjectsLocationsOperationsDelete,
+    TPUProjectsLocationsOperationsDelete,
 
     -- ** tpu.projects.locations.operations.get
-    , module Network.Google.Resource.TPU.Projects.Locations.Operations.Get
+    TPUProjectsLocationsOperationsGetResource,
+    newTPUProjectsLocationsOperationsGet,
+    TPUProjectsLocationsOperationsGet,
 
     -- ** tpu.projects.locations.operations.list
-    , module Network.Google.Resource.TPU.Projects.Locations.Operations.List
+    TPUProjectsLocationsOperationsListResource,
+    newTPUProjectsLocationsOperationsList,
+    TPUProjectsLocationsOperationsList,
 
-    -- ** tpu.projects.locations.tensorflowVersions.get
-    , module Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.Get
+    -- ** tpu.projects.locations.runtimeVersions.get
+    TPUProjectsLocationsRuntimeVersionsGetResource,
+    newTPUProjectsLocationsRuntimeVersionsGet,
+    TPUProjectsLocationsRuntimeVersionsGet,
 
-    -- ** tpu.projects.locations.tensorflowVersions.list
-    , module Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.List
+    -- ** tpu.projects.locations.runtimeVersions.list
+    TPUProjectsLocationsRuntimeVersionsListResource,
+    newTPUProjectsLocationsRuntimeVersionsList,
+    TPUProjectsLocationsRuntimeVersionsList,
 
     -- * Types
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AcceleratorType
-    , AcceleratorType
-    , acceleratorType
-    , atName
-    , atType
+    AcceleratorType (..),
+    newAcceleratorType,
 
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** AccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
-    -- ** NodeState
-    , NodeState (..)
+    -- ** AttachedDisk
+    AttachedDisk (..),
+    newAttachedDisk,
 
-    -- ** NodeAPIVersion
-    , NodeAPIVersion (..)
-
-    -- ** ListAcceleratorTypesResponse
-    , ListAcceleratorTypesResponse
-    , listAcceleratorTypesResponse
-    , latrAcceleratorTypes
-    , latrNextPageToken
-    , latrUnreachable
-
-    -- ** Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** NetworkEndpoint
-    , NetworkEndpoint
-    , networkEndpoint
-    , neIPAddress
-    , nePort
+    -- ** AttachedDisk_Mode
+    AttachedDisk_Mode (..),
 
     -- ** Empty
-    , Empty
-    , empty
+    Empty (..),
+    newEmpty,
 
-    -- ** Node
-    , Node
-    , node
-    , nAcceleratorType
-    , nIPAddress
-    , nState
-    , nSymptoms
-    , nAPIVersion
-    , nUseServiceNetworking
-    , nNetwork
-    , nHealth
-    , nServiceAccount
-    , nName
-    , nSchedulingConfig
-    , nHealthDescription
-    , nCIdRBlock
-    , nLabels
-    , nNetworkEndpoints
-    , nDescription
-    , nCreateTime
-    , nTensorflowVersion
-    , nPort
+    -- ** GenerateServiceIdentityRequest
+    GenerateServiceIdentityRequest (..),
+    newGenerateServiceIdentityRequest,
 
-    -- ** SymptomSymptomType
-    , SymptomSymptomType (..)
+    -- ** GenerateServiceIdentityResponse
+    GenerateServiceIdentityResponse (..),
+    newGenerateServiceIdentityResponse,
 
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** GetGuestAttributesRequest
+    GetGuestAttributesRequest (..),
+    newGetGuestAttributesRequest,
 
-    -- ** StopNodeRequest
-    , StopNodeRequest
-    , stopNodeRequest
+    -- ** GetGuestAttributesResponse
+    GetGuestAttributesResponse (..),
+    newGetGuestAttributesResponse,
 
-    -- ** Symptom
-    , Symptom
-    , symptom
-    , symDetails
-    , symWorkerId
-    , symCreateTime
-    , symSymptomType
+    -- ** GuestAttributes
+    GuestAttributes (..),
+    newGuestAttributes,
 
-    -- ** ReimageNodeRequest
-    , ReimageNodeRequest
-    , reimageNodeRequest
-    , rnrTensorflowVersion
+    -- ** GuestAttributesEntry
+    GuestAttributesEntry (..),
+    newGuestAttributesEntry,
 
-    -- ** NodeHealth
-    , NodeHealth (..)
+    -- ** GuestAttributesValue
+    GuestAttributesValue (..),
+    newGuestAttributesValue,
+
+    -- ** ListAcceleratorTypesResponse
+    ListAcceleratorTypesResponse (..),
+    newListAcceleratorTypesResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListNodesResponse
-    , ListNodesResponse
-    , listNodesResponse
-    , lnrNextPageToken
-    , lnrUnreachable
-    , lnrNodes
+    ListNodesResponse (..),
+    newListNodesResponse,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- ** SchedulingConfig
-    , SchedulingConfig
-    , schedulingConfig
-    , scReserved
-    , scPreemptible
+    -- ** ListRuntimeVersionsResponse
+    ListRuntimeVersionsResponse (..),
+    newListRuntimeVersionsResponse,
 
-    -- ** NodeLabels
-    , NodeLabels
-    , nodeLabels
-    , nlAddtional
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** NetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
+
+    -- ** NetworkEndpoint
+    NetworkEndpoint (..),
+    newNetworkEndpoint,
+
+    -- ** Node
+    Node (..),
+    newNode,
+
+    -- ** Node_ApiVersion
+    Node_ApiVersion (..),
+
+    -- ** Node_Health
+    Node_Health (..),
+
+    -- ** Node_Labels
+    Node_Labels (..),
+    newNode_Labels,
+
+    -- ** Node_Metadata
+    Node_Metadata (..),
+    newNode_Metadata,
+
+    -- ** Node_State
+    Node_State (..),
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAPIVersion
-    , omEndTime
-    , omStatusDetail
-    , omVerb
-    , omCancelRequested
-    , omTarget
-    , omCreateTime
+    OperationMetadata (..),
+    newOperationMetadata,
 
-    -- ** ListTensorFlowVersionsResponse
-    , ListTensorFlowVersionsResponse
-    , listTensorFlowVersionsResponse
-    , ltfvrNextPageToken
-    , ltfvrUnreachable
-    , ltfvrTensorflowVersions
+    -- ** RuntimeVersion
+    RuntimeVersion (..),
+    newRuntimeVersion,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** SchedulingConfig
+    SchedulingConfig (..),
+    newSchedulingConfig,
 
-    -- ** TensorFlowVersion
-    , TensorFlowVersion
-    , tensorFlowVersion
-    , tfvName
-    , tfvVersion
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
+
+    -- ** ServiceIdentity
+    ServiceIdentity (..),
+    newServiceIdentity,
 
     -- ** StartNodeRequest
-    , StartNodeRequest
-    , startNodeRequest
-    ) where
+    StartNodeRequest (..),
+    newStartNodeRequest,
 
-import Network.Google.Prelude
-import Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.Get
-import Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.List
-import Network.Google.Resource.TPU.Projects.Locations.Get
-import Network.Google.Resource.TPU.Projects.Locations.List
-import Network.Google.Resource.TPU.Projects.Locations.Nodes.Create
-import Network.Google.Resource.TPU.Projects.Locations.Nodes.Delete
-import Network.Google.Resource.TPU.Projects.Locations.Nodes.Get
-import Network.Google.Resource.TPU.Projects.Locations.Nodes.List
-import Network.Google.Resource.TPU.Projects.Locations.Nodes.Reimage
-import Network.Google.Resource.TPU.Projects.Locations.Nodes.Start
-import Network.Google.Resource.TPU.Projects.Locations.Nodes.Stop
-import Network.Google.Resource.TPU.Projects.Locations.Operations.Cancel
-import Network.Google.Resource.TPU.Projects.Locations.Operations.Delete
-import Network.Google.Resource.TPU.Projects.Locations.Operations.Get
-import Network.Google.Resource.TPU.Projects.Locations.Operations.List
-import Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.Get
-import Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.List
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StopNodeRequest
+    StopNodeRequest (..),
+    newStopNodeRequest,
+
+    -- ** Symptom
+    Symptom (..),
+    newSymptom,
+
+    -- ** Symptom_SymptomType
+    Symptom_SymptomType (..),
+  )
+where
+
+import Network.Google.TPU.Projects.Locations.AcceleratorTypes.Get
+import Network.Google.TPU.Projects.Locations.AcceleratorTypes.List
+import Network.Google.TPU.Projects.Locations.GenerateServiceIdentity
+import Network.Google.TPU.Projects.Locations.Get
+import Network.Google.TPU.Projects.Locations.List
+import Network.Google.TPU.Projects.Locations.Nodes.Create
+import Network.Google.TPU.Projects.Locations.Nodes.Delete
+import Network.Google.TPU.Projects.Locations.Nodes.Get
+import Network.Google.TPU.Projects.Locations.Nodes.GetGuestAttributes
+import Network.Google.TPU.Projects.Locations.Nodes.List
+import Network.Google.TPU.Projects.Locations.Nodes.Patch
+import Network.Google.TPU.Projects.Locations.Nodes.Start
+import Network.Google.TPU.Projects.Locations.Nodes.Stop
+import Network.Google.TPU.Projects.Locations.Operations.Cancel
+import Network.Google.TPU.Projects.Locations.Operations.Delete
+import Network.Google.TPU.Projects.Locations.Operations.Get
+import Network.Google.TPU.Projects.Locations.Operations.List
+import Network.Google.TPU.Projects.Locations.RuntimeVersions.Get
+import Network.Google.TPU.Projects.Locations.RuntimeVersions.List
 import Network.Google.TPU.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud TPU API service.
-type TPUAPI =
-     ProjectsLocationsAcceleratorTypesListResource :<|>
-       ProjectsLocationsAcceleratorTypesGetResource
-       :<|> ProjectsLocationsTensorflowVersionsListResource
-       :<|> ProjectsLocationsTensorflowVersionsGetResource
-       :<|> ProjectsLocationsNodesListResource
-       :<|> ProjectsLocationsNodesStartResource
-       :<|> ProjectsLocationsNodesGetResource
-       :<|> ProjectsLocationsNodesCreateResource
-       :<|> ProjectsLocationsNodesReimageResource
-       :<|> ProjectsLocationsNodesStopResource
-       :<|> ProjectsLocationsNodesDeleteResource
-       :<|> ProjectsLocationsOperationsListResource
-       :<|> ProjectsLocationsOperationsGetResource
-       :<|> ProjectsLocationsOperationsCancelResource
-       :<|> ProjectsLocationsOperationsDeleteResource
-       :<|> ProjectsLocationsListResource
-       :<|> ProjectsLocationsGetResource

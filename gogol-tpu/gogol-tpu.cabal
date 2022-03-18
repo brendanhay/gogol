@@ -1,62 +1,75 @@
-name:                  gogol-tpu
-version:               0.5.0
-synopsis:              Google Cloud TPU SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-tpu
+version:            0.5.0
+synopsis:           Google Cloud TPU SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    TPU API provides customers with access to Google TPU technology.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  TPU API provides customers with access to Google TPU technology.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v2alpha1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-tpu
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.Get
-        , Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.List
-        , Network.Google.Resource.TPU.Projects.Locations.Get
-        , Network.Google.Resource.TPU.Projects.Locations.List
-        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Create
-        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Delete
-        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Get
-        , Network.Google.Resource.TPU.Projects.Locations.Nodes.List
-        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Reimage
-        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Start
-        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Stop
-        , Network.Google.Resource.TPU.Projects.Locations.Operations.Cancel
-        , Network.Google.Resource.TPU.Projects.Locations.Operations.Delete
-        , Network.Google.Resource.TPU.Projects.Locations.Operations.Get
-        , Network.Google.Resource.TPU.Projects.Locations.Operations.List
-        , Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.Get
-        , Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.List
-        , Network.Google.TPU
-        , Network.Google.TPU.Types
+  exposed-modules:
+    Network.Google.TPU
+    Network.Google.TPU.Projects.Locations.AcceleratorTypes.Get
+    Network.Google.TPU.Projects.Locations.AcceleratorTypes.List
+    Network.Google.TPU.Projects.Locations.GenerateServiceIdentity
+    Network.Google.TPU.Projects.Locations.Get
+    Network.Google.TPU.Projects.Locations.List
+    Network.Google.TPU.Projects.Locations.Nodes.Create
+    Network.Google.TPU.Projects.Locations.Nodes.Delete
+    Network.Google.TPU.Projects.Locations.Nodes.Get
+    Network.Google.TPU.Projects.Locations.Nodes.GetGuestAttributes
+    Network.Google.TPU.Projects.Locations.Nodes.List
+    Network.Google.TPU.Projects.Locations.Nodes.Patch
+    Network.Google.TPU.Projects.Locations.Nodes.Start
+    Network.Google.TPU.Projects.Locations.Nodes.Stop
+    Network.Google.TPU.Projects.Locations.Operations.Cancel
+    Network.Google.TPU.Projects.Locations.Operations.Delete
+    Network.Google.TPU.Projects.Locations.Operations.Get
+    Network.Google.TPU.Projects.Locations.Operations.List
+    Network.Google.TPU.Projects.Locations.RuntimeVersions.Get
+    Network.Google.TPU.Projects.Locations.RuntimeVersions.List
+    Network.Google.TPU.Types
 
-    other-modules:
-          Network.Google.TPU.Types.Product
-        , Network.Google.TPU.Types.Sum
+  other-modules:
+    Network.Google.TPU.Internal.Product
+    Network.Google.TPU.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
