@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,97 +36,90 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.subaccounts.update@.
 module Gogol.DFAReporting.Subaccounts.Update
-  ( -- * Resource
-    DFAReportingSubaccountsUpdateResource,
+    (
+    -- * Resource
+      DFAReportingSubaccountsUpdateResource
 
     -- ** Constructing a Request
-    newDFAReportingSubaccountsUpdate,
-    DFAReportingSubaccountsUpdate,
-  )
-where
+    , newDFAReportingSubaccountsUpdate
+    , DFAReportingSubaccountsUpdate
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.subaccounts.update@ method which the
 -- 'DFAReportingSubaccountsUpdate' request conforms to.
 type DFAReportingSubaccountsUpdateResource =
-  "dfareporting"
-    Core.:> "v3.5"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "subaccounts"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Subaccount
-    Core.:> Core.Put '[Core.JSON] Subaccount
+     "dfareporting" Core.:>
+       "v3.5" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "subaccounts" Core.:>
+               Core.QueryParam "$.xgafv" Xgafv Core.:>
+                 Core.QueryParam "access_token" Core.Text Core.:>
+                   Core.QueryParam "callback" Core.Text Core.:>
+                     Core.QueryParam "uploadType" Core.Text Core.:>
+                       Core.QueryParam "upload_protocol" Core.Text Core.:>
+                         Core.QueryParam "alt" Core.AltJSON Core.:>
+                           Core.ReqBody '[Core.JSON] Subaccount Core.:>
+                             Core.Put '[Core.JSON] Subaccount
 
 -- | Updates an existing subaccount.
 --
 -- /See:/ 'newDFAReportingSubaccountsUpdate' smart constructor.
 data DFAReportingSubaccountsUpdate = DFAReportingSubaccountsUpdate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Subaccount,
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: Subaccount
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingSubaccountsUpdate' with the minimum fields required to make a request.
-newDFAReportingSubaccountsUpdate ::
-  -- |  Multipart request metadata. See 'payload'.
-  Subaccount ->
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingSubaccountsUpdate
+newDFAReportingSubaccountsUpdate 
+    ::  Subaccount
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingSubaccountsUpdate
 newDFAReportingSubaccountsUpdate payload profileId =
   DFAReportingSubaccountsUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingSubaccountsUpdate
-  where
-  type Rs DFAReportingSubaccountsUpdate = Subaccount
-  type
-    Scopes DFAReportingSubaccountsUpdate =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
-  requestClient DFAReportingSubaccountsUpdate {..} =
-    go
-      profileId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      dFAReportingService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingSubaccountsUpdateResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DFAReportingSubaccountsUpdate
+         where
+        type Rs DFAReportingSubaccountsUpdate = Subaccount
+        type Scopes DFAReportingSubaccountsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient DFAReportingSubaccountsUpdate{..}
+          = go profileId xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy DFAReportingSubaccountsUpdateResource)
+                      Core.mempty
+

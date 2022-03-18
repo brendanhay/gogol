@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,101 +36,93 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.accountPermissionGroups.get@.
 module Gogol.DFAReporting.AccountPermissionGroups.Get
-  ( -- * Resource
-    DFAReportingAccountPermissionGroupsGetResource,
+    (
+    -- * Resource
+      DFAReportingAccountPermissionGroupsGetResource
 
     -- ** Constructing a Request
-    newDFAReportingAccountPermissionGroupsGet,
-    DFAReportingAccountPermissionGroupsGet,
-  )
-where
+    , newDFAReportingAccountPermissionGroupsGet
+    , DFAReportingAccountPermissionGroupsGet
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.accountPermissionGroups.get@ method which the
 -- 'DFAReportingAccountPermissionGroupsGet' request conforms to.
 type DFAReportingAccountPermissionGroupsGetResource =
-  "dfareporting"
-    Core.:> "v3.5"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "accountPermissionGroups"
-    Core.:> Core.Capture "id" Core.Int64
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AccountPermissionGroup
+     "dfareporting" Core.:>
+       "v3.5" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "accountPermissionGroups" Core.:>
+               Core.Capture "id" Core.Int64 Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Get '[Core.JSON] AccountPermissionGroup
 
 -- | Gets one account permission group by ID.
 --
 -- /See:/ 'newDFAReportingAccountPermissionGroupsGet' smart constructor.
 data DFAReportingAccountPermissionGroupsGet = DFAReportingAccountPermissionGroupsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Account permission group ID.
-    id :: Core.Int64,
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Account permission group ID.
+    , id :: Core.Int64
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingAccountPermissionGroupsGet' with the minimum fields required to make a request.
-newDFAReportingAccountPermissionGroupsGet ::
-  -- |  Account permission group ID. See 'id'.
-  Core.Int64 ->
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingAccountPermissionGroupsGet
+newDFAReportingAccountPermissionGroupsGet 
+    ::  Core.Int64
+       -- ^  Account permission group ID. See 'id'.
+    -> Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingAccountPermissionGroupsGet
 newDFAReportingAccountPermissionGroupsGet id profileId =
   DFAReportingAccountPermissionGroupsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      id = id,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , id = id
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAccountPermissionGroupsGet
-  where
-  type
-    Rs DFAReportingAccountPermissionGroupsGet =
-      AccountPermissionGroup
-  type
-    Scopes DFAReportingAccountPermissionGroupsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
-  requestClient
-    DFAReportingAccountPermissionGroupsGet {..} =
-      go
-        profileId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingAccountPermissionGroupsGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DFAReportingAccountPermissionGroupsGet
+         where
+        type Rs DFAReportingAccountPermissionGroupsGet =
+             AccountPermissionGroup
+        type Scopes DFAReportingAccountPermissionGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient
+          DFAReportingAccountPermissionGroupsGet{..}
+          = go profileId id xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DFAReportingAccountPermissionGroupsGetResource)
+                      Core.mempty
+
