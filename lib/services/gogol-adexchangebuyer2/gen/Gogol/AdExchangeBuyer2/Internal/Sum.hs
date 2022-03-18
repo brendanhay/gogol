@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AdExchangeBuyer2.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AdSize_SizeType
     AdSize_SizeType
-      ( AdSize_SizeType_SIZETYPEUNSPECIFIED,
+      (
+        AdSize_SizeType_SIZETYPEUNSPECIFIED,
         AdSize_SizeType_Pixel,
         AdSize_SizeType_Interstitial,
         AdSize_SizeType_Native,
@@ -45,21 +56,24 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * AppContext_AppTypesItem
     AppContext_AppTypesItem
-      ( AppContext_AppTypesItem_Native,
+      (
+        AppContext_AppTypesItem_Native,
         AppContext_AppTypesItem_Web,
         ..
       ),
 
     -- * AuctionContext_AuctionTypesItem
     AuctionContext_AuctionTypesItem
-      ( AuctionContext_AuctionTypesItem_OPENAUCTION,
+      (
+        AuctionContext_AuctionTypesItem_OPENAUCTION,
         AuctionContext_AuctionTypesItem_DIRECTDEALS,
         ..
       ),
 
     -- * BidResponseWithoutBidsStatusRow_Status
     BidResponseWithoutBidsStatusRow_Status
-      ( BidResponseWithoutBidsStatusRow_Status_STATUSUNSPECIFIED,
+      (
+        BidResponseWithoutBidsStatusRow_Status_STATUSUNSPECIFIED,
         BidResponseWithoutBidsStatusRow_Status_RESPONSESWITHOUTBIDS,
         BidResponseWithoutBidsStatusRow_Status_RESPONSESWITHOUTBIDSFORACCOUNT,
         BidResponseWithoutBidsStatusRow_Status_RESPONSESWITHOUTBIDSFORDEAL,
@@ -68,7 +82,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Client_EntityType
     Client_EntityType
-      ( Client_EntityType_ENTITYTYPEUNSPECIFIED,
+      (
+        Client_EntityType_ENTITYTYPEUNSPECIFIED,
         Client_EntityType_Advertiser,
         Client_EntityType_Brand,
         Client_EntityType_Agency,
@@ -78,7 +93,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Client_Role
     Client_Role
-      ( Client_Role_CLIENTROLEUNSPECIFIED,
+      (
+        Client_Role_CLIENTROLEUNSPECIFIED,
         Client_Role_CLIENTDEALVIEWER,
         Client_Role_CLIENTDEALNEGOTIATOR,
         Client_Role_CLIENTDEALAPPROVER,
@@ -87,7 +103,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Client_Status
     Client_Status
-      ( Client_Status_CLIENTSTATUSUNSPECIFIED,
+      (
+        Client_Status_CLIENTSTATUSUNSPECIFIED,
         Client_Status_Disabled,
         Client_Status_Active,
         ..
@@ -95,7 +112,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * ClientUser_Status
     ClientUser_Status
-      ( ClientUser_Status_USERSTATUSUNSPECIFIED,
+      (
+        ClientUser_Status_USERSTATUSUNSPECIFIED,
         ClientUser_Status_Pending,
         ClientUser_Status_Active,
         ClientUser_Status_Disabled,
@@ -104,7 +122,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Correction_Type
     Correction_Type
-      ( Correction_Type_CORRECTIONTYPEUNSPECIFIED,
+      (
+        Correction_Type_CORRECTIONTYPEUNSPECIFIED,
         Correction_Type_VENDORIDSADDED,
         Correction_Type_SSLATTRIBUTEREMOVED,
         Correction_Type_FLASHFREEATTRIBUTEREMOVED,
@@ -121,7 +140,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Creative_AttributesItem
     Creative_AttributesItem
-      ( Creative_AttributesItem_ATTRIBUTEUNSPECIFIED,
+      (
+        Creative_AttributesItem_ATTRIBUTEUNSPECIFIED,
         Creative_AttributesItem_IMAGERICHMEDIA,
         Creative_AttributesItem_ADOBEFLASHFLV,
         Creative_AttributesItem_ISTAGGED,
@@ -164,7 +184,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Creative_DealsStatus
     Creative_DealsStatus
-      ( Creative_DealsStatus_STATUSUNSPECIFIED,
+      (
+        Creative_DealsStatus_STATUSUNSPECIFIED,
         Creative_DealsStatus_NOTCHECKED,
         Creative_DealsStatus_CONDITIONALLYAPPROVED,
         Creative_DealsStatus_Approved,
@@ -176,7 +197,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Creative_OpenAuctionStatus
     Creative_OpenAuctionStatus
-      ( Creative_OpenAuctionStatus_STATUSUNSPECIFIED,
+      (
+        Creative_OpenAuctionStatus_STATUSUNSPECIFIED,
         Creative_OpenAuctionStatus_NOTCHECKED,
         Creative_OpenAuctionStatus_CONDITIONALLYAPPROVED,
         Creative_OpenAuctionStatus_Approved,
@@ -188,14 +210,16 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Creative_RestrictedCategoriesItem
     Creative_RestrictedCategoriesItem
-      ( Creative_RestrictedCategoriesItem_NORESTRICTEDCATEGORIES,
+      (
+        Creative_RestrictedCategoriesItem_NORESTRICTEDCATEGORIES,
         Creative_RestrictedCategoriesItem_Alcohol,
         ..
       ),
 
     -- * CreativeRestrictions_CreativeFormat
     CreativeRestrictions_CreativeFormat
-      ( CreativeRestrictions_CreativeFormat_CREATIVEFORMATUNSPECIFIED,
+      (
+        CreativeRestrictions_CreativeFormat_CREATIVEFORMATUNSPECIFIED,
         CreativeRestrictions_CreativeFormat_Display,
         CreativeRestrictions_CreativeFormat_Video,
         ..
@@ -203,7 +227,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * CreativeRestrictions_SkippableAdType
     CreativeRestrictions_SkippableAdType
-      ( CreativeRestrictions_SkippableAdType_SKIPPABLEADTYPEUNSPECIFIED,
+      (
+        CreativeRestrictions_SkippableAdType_SKIPPABLEADTYPEUNSPECIFIED,
         CreativeRestrictions_SkippableAdType_Skippable,
         CreativeRestrictions_SkippableAdType_INSTREAMSELECT,
         CreativeRestrictions_SkippableAdType_NOTSKIPPABLE,
@@ -212,14 +237,16 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * CreativeSize_AllowedFormatsItem
     CreativeSize_AllowedFormatsItem
-      ( CreativeSize_AllowedFormatsItem_Unknown,
+      (
+        CreativeSize_AllowedFormatsItem_Unknown,
         CreativeSize_AllowedFormatsItem_Audio,
         ..
       ),
 
     -- * CreativeSize_CreativeSizeType
     CreativeSize_CreativeSizeType
-      ( CreativeSize_CreativeSizeType_CREATIVESIZETYPEUNSPECIFIED,
+      (
+        CreativeSize_CreativeSizeType_CREATIVESIZETYPEUNSPECIFIED,
         CreativeSize_CreativeSizeType_Regular,
         CreativeSize_CreativeSizeType_Interstitial,
         CreativeSize_CreativeSizeType_Video,
@@ -229,7 +256,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * CreativeSize_NativeTemplate
     CreativeSize_NativeTemplate
-      ( CreativeSize_NativeTemplate_UNKNOWNNATIVETEMPLATE,
+      (
+        CreativeSize_NativeTemplate_UNKNOWNNATIVETEMPLATE,
         CreativeSize_NativeTemplate_NATIVECONTENTAD,
         CreativeSize_NativeTemplate_NATIVEAPPINSTALLAD,
         CreativeSize_NativeTemplate_NATIVEVIDEOCONTENTAD,
@@ -239,7 +267,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * CreativeSize_SkippableAdType
     CreativeSize_SkippableAdType
-      ( CreativeSize_SkippableAdType_SKIPPABLEADTYPEUNSPECIFIED,
+      (
+        CreativeSize_SkippableAdType_SKIPPABLEADTYPEUNSPECIFIED,
         CreativeSize_SkippableAdType_Generic,
         CreativeSize_SkippableAdType_INSTREAMSELECT,
         CreativeSize_SkippableAdType_NOTSKIPPABLE,
@@ -248,7 +277,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * DayPart_DayOfWeek
     DayPart_DayOfWeek
-      ( DayPart_DayOfWeek_DAYOFWEEKUNSPECIFIED,
+      (
+        DayPart_DayOfWeek_DAYOFWEEKUNSPECIFIED,
         DayPart_DayOfWeek_Monday,
         DayPart_DayOfWeek_Tuesday,
         DayPart_DayOfWeek_Wednesday,
@@ -261,7 +291,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * DayPartTargeting_TimeZoneType
     DayPartTargeting_TimeZoneType
-      ( DayPartTargeting_TimeZoneType_TIMEZONESOURCEUNSPECIFIED,
+      (
+        DayPartTargeting_TimeZoneType_TIMEZONESOURCEUNSPECIFIED,
         DayPartTargeting_TimeZoneType_Publisher,
         DayPartTargeting_TimeZoneType_User,
         ..
@@ -269,7 +300,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Deal_CreativePreApprovalPolicy
     Deal_CreativePreApprovalPolicy
-      ( Deal_CreativePreApprovalPolicy_CREATIVEPREAPPROVALPOLICYUNSPECIFIED,
+      (
+        Deal_CreativePreApprovalPolicy_CREATIVEPREAPPROVALPOLICYUNSPECIFIED,
         Deal_CreativePreApprovalPolicy_SELLERPREAPPROVALREQUIRED,
         Deal_CreativePreApprovalPolicy_SELLERPREAPPROVALNOTREQUIRED,
         ..
@@ -277,7 +309,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Deal_CreativeSafeFrameCompatibility
     Deal_CreativeSafeFrameCompatibility
-      ( Deal_CreativeSafeFrameCompatibility_CREATIVESAFEFRAMECOMPATIBILITYUNSPECIFIED,
+      (
+        Deal_CreativeSafeFrameCompatibility_CREATIVESAFEFRAMECOMPATIBILITYUNSPECIFIED,
         Deal_CreativeSafeFrameCompatibility_Compatible,
         Deal_CreativeSafeFrameCompatibility_Incompatible,
         ..
@@ -285,7 +318,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Deal_ProgrammaticCreativeSource
     Deal_ProgrammaticCreativeSource
-      ( Deal_ProgrammaticCreativeSource_PROGRAMMATICCREATIVESOURCEUNSPECIFIED,
+      (
+        Deal_ProgrammaticCreativeSource_PROGRAMMATICCREATIVESOURCEUNSPECIFIED,
         Deal_ProgrammaticCreativeSource_Advertiser,
         Deal_ProgrammaticCreativeSource_Publisher,
         ..
@@ -293,7 +327,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Deal_SyndicationProduct
     Deal_SyndicationProduct
-      ( Deal_SyndicationProduct_SYNDICATIONPRODUCTUNSPECIFIED,
+      (
+        Deal_SyndicationProduct_SYNDICATIONPRODUCTUNSPECIFIED,
         Deal_SyndicationProduct_Content,
         Deal_SyndicationProduct_Mobile,
         Deal_SyndicationProduct_Video,
@@ -303,7 +338,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * DealPauseStatus_FirstPausedBy
     DealPauseStatus_FirstPausedBy
-      ( DealPauseStatus_FirstPausedBy_BUYERSELLERROLEUNSPECIFIED,
+      (
+        DealPauseStatus_FirstPausedBy_BUYERSELLERROLEUNSPECIFIED,
         DealPauseStatus_FirstPausedBy_Buyer,
         DealPauseStatus_FirstPausedBy_Seller,
         ..
@@ -311,7 +347,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * DealTerms_BrandingType
     DealTerms_BrandingType
-      ( DealTerms_BrandingType_BRANDINGTYPEUNSPECIFIED,
+      (
+        DealTerms_BrandingType_BRANDINGTYPEUNSPECIFIED,
         DealTerms_BrandingType_Branded,
         DealTerms_BrandingType_SEMITRANSPARENT,
         ..
@@ -319,7 +356,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * DeliveryControl_CreativeBlockingLevel
     DeliveryControl_CreativeBlockingLevel
-      ( DeliveryControl_CreativeBlockingLevel_CREATIVEBLOCKINGLEVELUNSPECIFIED,
+      (
+        DeliveryControl_CreativeBlockingLevel_CREATIVEBLOCKINGLEVELUNSPECIFIED,
         DeliveryControl_CreativeBlockingLevel_PUBLISHERBLOCKINGRULES,
         DeliveryControl_CreativeBlockingLevel_ADXPOLICYBLOCKINGONLY,
         ..
@@ -327,7 +365,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * DeliveryControl_DeliveryRateType
     DeliveryControl_DeliveryRateType
-      ( DeliveryControl_DeliveryRateType_DELIVERYRATETYPEUNSPECIFIED,
+      (
+        DeliveryControl_DeliveryRateType_DELIVERYRATETYPEUNSPECIFIED,
         DeliveryControl_DeliveryRateType_Evenly,
         DeliveryControl_DeliveryRateType_FRONTLOADED,
         DeliveryControl_DeliveryRateType_ASFASTASPOSSIBLE,
@@ -336,7 +375,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Disapproval_Reason
     Disapproval_Reason
-      ( Disapproval_Reason_LENGTHOFIMAGEANIMATION,
+      (
+        Disapproval_Reason_LENGTHOFIMAGEANIMATION,
         Disapproval_Reason_BROKENURL,
         Disapproval_Reason_MEDIANOTFUNCTIONAL,
         Disapproval_Reason_INVALIDFOURTHPARTYCALL,
@@ -443,14 +483,16 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * FilterSet_BreakdownDimensionsItem
     FilterSet_BreakdownDimensionsItem
-      ( FilterSet_BreakdownDimensionsItem_BREAKDOWNDIMENSIONUNSPECIFIED,
+      (
+        FilterSet_BreakdownDimensionsItem_BREAKDOWNDIMENSIONUNSPECIFIED,
         FilterSet_BreakdownDimensionsItem_PUBLISHERIDENTIFIER,
         ..
       ),
 
     -- * FilterSet_Environment
     FilterSet_Environment
-      ( FilterSet_Environment_ENVIRONMENTUNSPECIFIED,
+      (
+        FilterSet_Environment_ENVIRONMENTUNSPECIFIED,
         FilterSet_Environment_Web,
         FilterSet_Environment_App,
         ..
@@ -458,7 +500,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * FilterSet_Format
     FilterSet_Format
-      ( FilterSet_Format_FORMATUNSPECIFIED,
+      (
+        FilterSet_Format_FORMATUNSPECIFIED,
         FilterSet_Format_NATIVEDISPLAY,
         FilterSet_Format_NATIVEVIDEO,
         FilterSet_Format_NONNATIVEDISPLAY,
@@ -468,7 +511,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * FilterSet_FormatsItem
     FilterSet_FormatsItem
-      ( FilterSet_FormatsItem_FORMATUNSPECIFIED,
+      (
+        FilterSet_FormatsItem_FORMATUNSPECIFIED,
         FilterSet_FormatsItem_NATIVEDISPLAY,
         FilterSet_FormatsItem_NATIVEVIDEO,
         FilterSet_FormatsItem_NONNATIVEDISPLAY,
@@ -478,7 +522,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * FilterSet_PlatformsItem
     FilterSet_PlatformsItem
-      ( FilterSet_PlatformsItem_PLATFORMUNSPECIFIED,
+      (
+        FilterSet_PlatformsItem_PLATFORMUNSPECIFIED,
         FilterSet_PlatformsItem_Desktop,
         FilterSet_PlatformsItem_Tablet,
         FilterSet_PlatformsItem_Mobile,
@@ -487,7 +532,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * FilterSet_TimeSeriesGranularity
     FilterSet_TimeSeriesGranularity
-      ( FilterSet_TimeSeriesGranularity_TIMESERIESGRANULARITYUNSPECIFIED,
+      (
+        FilterSet_TimeSeriesGranularity_TIMESERIESGRANULARITYUNSPECIFIED,
         FilterSet_TimeSeriesGranularity_Hourly,
         FilterSet_TimeSeriesGranularity_Daily,
         ..
@@ -495,7 +541,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * FrequencyCap_TimeUnitType
     FrequencyCap_TimeUnitType
-      ( FrequencyCap_TimeUnitType_TIMEUNITTYPEUNSPECIFIED,
+      (
+        FrequencyCap_TimeUnitType_TIMEUNITTYPEUNSPECIFIED,
         FrequencyCap_TimeUnitType_Minute,
         FrequencyCap_TimeUnitType_Hour,
         FrequencyCap_TimeUnitType_Day,
@@ -509,7 +556,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * GuaranteedFixedPriceTerms_ReservationType
     GuaranteedFixedPriceTerms_ReservationType
-      ( GuaranteedFixedPriceTerms_ReservationType_RESERVATIONTYPEUNSPECIFIED,
+      (
+        GuaranteedFixedPriceTerms_ReservationType_RESERVATIONTYPEUNSPECIFIED,
         GuaranteedFixedPriceTerms_ReservationType_Standard,
         GuaranteedFixedPriceTerms_ReservationType_Sponsorship,
         ..
@@ -517,7 +565,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * ListCreativeStatusBreakdownByDetailResponse_DetailType
     ListCreativeStatusBreakdownByDetailResponse_DetailType
-      ( ListCreativeStatusBreakdownByDetailResponse_DetailType_DETAILTYPEUNSPECIFIED,
+      (
+        ListCreativeStatusBreakdownByDetailResponse_DetailType_DETAILTYPEUNSPECIFIED,
         ListCreativeStatusBreakdownByDetailResponse_DetailType_CREATIVEATTRIBUTE,
         ListCreativeStatusBreakdownByDetailResponse_DetailType_Vendor,
         ListCreativeStatusBreakdownByDetailResponse_DetailType_SENSITIVECATEGORY,
@@ -532,7 +581,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * NonBillableWinningBidStatusRow_Status
     NonBillableWinningBidStatusRow_Status
-      ( NonBillableWinningBidStatusRow_Status_STATUSUNSPECIFIED,
+      (
+        NonBillableWinningBidStatusRow_Status_STATUSUNSPECIFIED,
         NonBillableWinningBidStatusRow_Status_ADNOTRENDERED,
         NonBillableWinningBidStatusRow_Status_INVALIDIMPRESSION,
         NonBillableWinningBidStatusRow_Status_FATALVASTERROR,
@@ -542,7 +592,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Note_CreatorRole
     Note_CreatorRole
-      ( Note_CreatorRole_BUYERSELLERROLEUNSPECIFIED,
+      (
+        Note_CreatorRole_BUYERSELLERROLEUNSPECIFIED,
         Note_CreatorRole_Buyer,
         Note_CreatorRole_Seller,
         ..
@@ -550,7 +601,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * PlatformContext_PlatformsItem
     PlatformContext_PlatformsItem
-      ( PlatformContext_PlatformsItem_Desktop,
+      (
+        PlatformContext_PlatformsItem_Desktop,
         PlatformContext_PlatformsItem_Android,
         PlatformContext_PlatformsItem_Ios,
         ..
@@ -558,7 +610,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Price_PricingType
     Price_PricingType
-      ( Price_PricingType_PRICINGTYPEUNSPECIFIED,
+      (
+        Price_PricingType_PRICINGTYPEUNSPECIFIED,
         Price_PricingType_COSTPERMILLE,
         Price_PricingType_COSTPERDAY,
         ..
@@ -566,7 +619,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Product_SyndicationProduct
     Product_SyndicationProduct
-      ( Product_SyndicationProduct_SYNDICATIONPRODUCTUNSPECIFIED,
+      (
+        Product_SyndicationProduct_SYNDICATIONPRODUCTUNSPECIFIED,
         Product_SyndicationProduct_Content,
         Product_SyndicationProduct_Mobile,
         Product_SyndicationProduct_Video,
@@ -576,7 +630,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Proposal_LastUpdaterOrCommentorRole
     Proposal_LastUpdaterOrCommentorRole
-      ( Proposal_LastUpdaterOrCommentorRole_BUYERSELLERROLEUNSPECIFIED,
+      (
+        Proposal_LastUpdaterOrCommentorRole_BUYERSELLERROLEUNSPECIFIED,
         Proposal_LastUpdaterOrCommentorRole_Buyer,
         Proposal_LastUpdaterOrCommentorRole_Seller,
         ..
@@ -584,7 +639,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Proposal_OriginatorRole
     Proposal_OriginatorRole
-      ( Proposal_OriginatorRole_BUYERSELLERROLEUNSPECIFIED,
+      (
+        Proposal_OriginatorRole_BUYERSELLERROLEUNSPECIFIED,
         Proposal_OriginatorRole_Buyer,
         Proposal_OriginatorRole_Seller,
         ..
@@ -592,7 +648,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * Proposal_ProposalState
     Proposal_ProposalState
-      ( Proposal_ProposalState_PROPOSALSTATEUNSPECIFIED,
+      (
+        Proposal_ProposalState_PROPOSALSTATEUNSPECIFIED,
         Proposal_ProposalState_Proposed,
         Proposal_ProposalState_BUYERACCEPTED,
         Proposal_ProposalState_SELLERACCEPTED,
@@ -603,7 +660,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * PublisherProfileMobileApplication_AppStore
     PublisherProfileMobileApplication_AppStore
-      ( PublisherProfileMobileApplication_AppStore_APPSTORETYPEUNSPECIFIED,
+      (
+        PublisherProfileMobileApplication_AppStore_APPSTORETYPEUNSPECIFIED,
         PublisherProfileMobileApplication_AppStore_APPLEITUNES,
         PublisherProfileMobileApplication_AppStore_GOOGLEPLAY,
         PublisherProfileMobileApplication_AppStore_Roku,
@@ -621,20 +679,23 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * SecurityContext_SecuritiesItem
     SecurityContext_SecuritiesItem
-      ( SecurityContext_SecuritiesItem_Insecure,
+      (
+        SecurityContext_SecuritiesItem_Insecure,
         SecurityContext_SecuritiesItem_Ssl,
         ..
       ),
 
     -- * ServingContext_All
     ServingContext_All
-      ( ServingContext_All_SIMPLECONTEXT,
+      (
+        ServingContext_All_SIMPLECONTEXT,
         ..
       ),
 
     -- * ServingRestriction_Status
     ServingRestriction_Status
-      ( ServingRestriction_Status_STATUSUNSPECIFIED,
+      (
+        ServingRestriction_Status_STATUSUNSPECIFIED,
         ServingRestriction_Status_Disapproval,
         ServingRestriction_Status_PENDINGREVIEW,
         ..
@@ -642,7 +703,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * VideoTargeting_ExcludedPositionTypesItem
     VideoTargeting_ExcludedPositionTypesItem
-      ( VideoTargeting_ExcludedPositionTypesItem_POSITIONTYPEUNSPECIFIED,
+      (
+        VideoTargeting_ExcludedPositionTypesItem_POSITIONTYPEUNSPECIFIED,
         VideoTargeting_ExcludedPositionTypesItem_Preroll,
         VideoTargeting_ExcludedPositionTypesItem_Midroll,
         VideoTargeting_ExcludedPositionTypesItem_Postroll,
@@ -651,7 +713,8 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * VideoTargeting_TargetedPositionTypesItem
     VideoTargeting_TargetedPositionTypesItem
-      ( VideoTargeting_TargetedPositionTypesItem_POSITIONTYPEUNSPECIFIED,
+      (
+        VideoTargeting_TargetedPositionTypesItem_POSITIONTYPEUNSPECIFIED,
         VideoTargeting_TargetedPositionTypesItem_Preroll,
         VideoTargeting_TargetedPositionTypesItem_Midroll,
         VideoTargeting_TargetedPositionTypesItem_Postroll,
@@ -660,14 +723,16 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * AccountsCreativesCreateDuplicateIdMode
     AccountsCreativesCreateDuplicateIdMode
-      ( AccountsCreativesCreateDuplicateIdMode_NODUPLICATES,
+      (
+        AccountsCreativesCreateDuplicateIdMode_NODUPLICATES,
         AccountsCreativesCreateDuplicateIdMode_FORCEENABLEDUPLICATEIDS,
         ..
       ),
 
     -- * AccountsFinalizedProposalsListFilterSyntax
     AccountsFinalizedProposalsListFilterSyntax
-      ( AccountsFinalizedProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED,
+      (
+        AccountsFinalizedProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED,
         AccountsFinalizedProposalsListFilterSyntax_Pql,
         AccountsFinalizedProposalsListFilterSyntax_LISTFILTER,
         ..
@@ -675,28 +740,28 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
 
     -- * AccountsProposalsListFilterSyntax
     AccountsProposalsListFilterSyntax
-      ( AccountsProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED,
+      (
+        AccountsProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED,
         AccountsProposalsListFilterSyntax_Pql,
         AccountsProposalsListFilterSyntax_LISTFILTER,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -709,21 +774,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The size type of the ad slot.
-newtype AdSize_SizeType = AdSize_SizeType {fromAdSize_SizeType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AdSize_SizeType = AdSize_SizeType { fromAdSize_SizeType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined size type.
 pattern AdSize_SizeType_SIZETYPEUNSPECIFIED :: AdSize_SizeType
@@ -751,20 +815,19 @@ pattern AdSize_SizeType_Fluid = AdSize_SizeType "FLUID"
   AdSize_SizeType_Interstitial,
   AdSize_SizeType_Native,
   AdSize_SizeType_Fluid,
-  AdSize_SizeType
-  #-}
+  AdSize_SizeType #-}
 
-newtype AppContext_AppTypesItem = AppContext_AppTypesItem {fromAppContext_AppTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AppContext_AppTypesItem = AppContext_AppTypesItem { fromAppContext_AppTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Native app context.
 pattern AppContext_AppTypesItem_Native :: AppContext_AppTypesItem
@@ -777,20 +840,19 @@ pattern AppContext_AppTypesItem_Web = AppContext_AppTypesItem "WEB"
 {-# COMPLETE
   AppContext_AppTypesItem_Native,
   AppContext_AppTypesItem_Web,
-  AppContext_AppTypesItem
-  #-}
+  AppContext_AppTypesItem #-}
 
-newtype AuctionContext_AuctionTypesItem = AuctionContext_AuctionTypesItem {fromAuctionContext_AuctionTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AuctionContext_AuctionTypesItem = AuctionContext_AuctionTypesItem { fromAuctionContext_AuctionTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The restriction applies to open auction.
 pattern AuctionContext_AuctionTypesItem_OPENAUCTION :: AuctionContext_AuctionTypesItem
@@ -803,21 +865,20 @@ pattern AuctionContext_AuctionTypesItem_DIRECTDEALS = AuctionContext_AuctionType
 {-# COMPLETE
   AuctionContext_AuctionTypesItem_OPENAUCTION,
   AuctionContext_AuctionTypesItem_DIRECTDEALS,
-  AuctionContext_AuctionTypesItem
-  #-}
+  AuctionContext_AuctionTypesItem #-}
 
 -- | The status specifying why the bid responses were considered to have no applicable bids.
-newtype BidResponseWithoutBidsStatusRow_Status = BidResponseWithoutBidsStatusRow_Status {fromBidResponseWithoutBidsStatusRow_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BidResponseWithoutBidsStatusRow_Status = BidResponseWithoutBidsStatusRow_Status { fromBidResponseWithoutBidsStatusRow_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined status. This value will never be returned in responses.
 pattern BidResponseWithoutBidsStatusRow_Status_STATUSUNSPECIFIED :: BidResponseWithoutBidsStatusRow_Status
@@ -840,21 +901,20 @@ pattern BidResponseWithoutBidsStatusRow_Status_RESPONSESWITHOUTBIDSFORDEAL = Bid
   BidResponseWithoutBidsStatusRow_Status_RESPONSESWITHOUTBIDS,
   BidResponseWithoutBidsStatusRow_Status_RESPONSESWITHOUTBIDSFORACCOUNT,
   BidResponseWithoutBidsStatusRow_Status_RESPONSESWITHOUTBIDSFORDEAL,
-  BidResponseWithoutBidsStatusRow_Status
-  #-}
+  BidResponseWithoutBidsStatusRow_Status #-}
 
 -- | An optional field for specifying the type of the client entity: @ADVERTISER@, @BRAND@, or @AGENCY@.
-newtype Client_EntityType = Client_EntityType {fromClient_EntityType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Client_EntityType = Client_EntityType { fromClient_EntityType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined client entity type. Should not be used.
 pattern Client_EntityType_ENTITYTYPEUNSPECIFIED :: Client_EntityType
@@ -882,21 +942,20 @@ pattern Client_EntityType_ENTITYTYPEUNCLASSIFIED = Client_EntityType "ENTITY_TYP
   Client_EntityType_Brand,
   Client_EntityType_Agency,
   Client_EntityType_ENTITYTYPEUNCLASSIFIED,
-  Client_EntityType
-  #-}
+  Client_EntityType #-}
 
 -- | The role which is assigned to the client buyer. Each role implies a set of permissions granted to the client. Must be one of @CLIENT_DEAL_VIEWER@, @CLIENT_DEAL_NEGOTIATOR@ or @CLIENT_DEAL_APPROVER@.
-newtype Client_Role = Client_Role {fromClient_Role :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Client_Role = Client_Role { fromClient_Role :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined client role.
 pattern Client_Role_CLIENTROLEUNSPECIFIED :: Client_Role
@@ -919,21 +978,20 @@ pattern Client_Role_CLIENTDEALAPPROVER = Client_Role "CLIENT_DEAL_APPROVER"
   Client_Role_CLIENTDEALVIEWER,
   Client_Role_CLIENTDEALNEGOTIATOR,
   Client_Role_CLIENTDEALAPPROVER,
-  Client_Role
-  #-}
+  Client_Role #-}
 
 -- | The status of the client buyer.
-newtype Client_Status = Client_Status {fromClient_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Client_Status = Client_Status { fromClient_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined client status.
 pattern Client_Status_CLIENTSTATUSUNSPECIFIED :: Client_Status
@@ -951,21 +1009,20 @@ pattern Client_Status_Active = Client_Status "ACTIVE"
   Client_Status_CLIENTSTATUSUNSPECIFIED,
   Client_Status_Disabled,
   Client_Status_Active,
-  Client_Status
-  #-}
+  Client_Status #-}
 
 -- | The status of the client user.
-newtype ClientUser_Status = ClientUser_Status {fromClientUser_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ClientUser_Status = ClientUser_Status { fromClientUser_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined user status.
 pattern ClientUser_Status_USERSTATUSUNSPECIFIED :: ClientUser_Status
@@ -988,21 +1045,20 @@ pattern ClientUser_Status_Disabled = ClientUser_Status "DISABLED"
   ClientUser_Status_Pending,
   ClientUser_Status_Active,
   ClientUser_Status_Disabled,
-  ClientUser_Status
-  #-}
+  ClientUser_Status #-}
 
 -- | The type of correction that was applied to the creative.
-newtype Correction_Type = Correction_Type {fromCorrection_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Correction_Type = Correction_Type { fromCorrection_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The correction type is unknown. Refer to the details for more information.
 pattern Correction_Type_CORRECTIONTYPEUNSPECIFIED :: Correction_Type
@@ -1065,20 +1121,19 @@ pattern Correction_Type_VIDEOINSNIPPETATTRIBUTEADDED = Correction_Type "VIDEO_IN
   Correction_Type_MRAIDATTRIBUTEADDED,
   Correction_Type_FLASHATTRIBUTEREMOVED,
   Correction_Type_VIDEOINSNIPPETATTRIBUTEADDED,
-  Correction_Type
-  #-}
+  Correction_Type #-}
 
-newtype Creative_AttributesItem = Creative_AttributesItem {fromCreative_AttributesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Creative_AttributesItem = Creative_AttributesItem { fromCreative_AttributesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. This is a placeholder value only.
 pattern Creative_AttributesItem_ATTRIBUTEUNSPECIFIED :: Creative_AttributesItem
@@ -1271,21 +1326,20 @@ pattern Creative_AttributesItem_OMSDK_1_0 = Creative_AttributesItem "OMSDK_1_0"
   Creative_AttributesItem_INBANNERVIDEO,
   Creative_AttributesItem_RENDERINGSIZELESSADX,
   Creative_AttributesItem_OMSDK_1_0,
-  Creative_AttributesItem
-  #-}
+  Creative_AttributesItem #-}
 
 -- | Output only. The top-level deals status of this creative. If disapproved, an entry for \'auctionType=DIRECT/DEALS\' (or \'ALL\') in serving/restrictions will also exist. Note that this may be nuanced with other contextual restrictions, in which case, it may be preferable to read from serving_restrictions directly. Can be used to filter the response of the creatives.list method.
-newtype Creative_DealsStatus = Creative_DealsStatus {fromCreative_DealsStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Creative_DealsStatus = Creative_DealsStatus { fromCreative_DealsStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The status is unknown.
 pattern Creative_DealsStatus_STATUSUNSPECIFIED :: Creative_DealsStatus
@@ -1323,21 +1377,20 @@ pattern Creative_DealsStatus_STATUSTYPEUNSPECIFIED = Creative_DealsStatus "STATU
   Creative_DealsStatus_Disapproved,
   Creative_DealsStatus_PENDINGREVIEW,
   Creative_DealsStatus_STATUSTYPEUNSPECIFIED,
-  Creative_DealsStatus
-  #-}
+  Creative_DealsStatus #-}
 
 -- | Output only. The top-level open auction status of this creative. If disapproved, an entry for \'auctionType = OPEN/AUCTION\' (or \'ALL\') in serving/restrictions will also exist. Note that this may be nuanced with other contextual restrictions, in which case, it may be preferable to read from serving_restrictions directly. Can be used to filter the response of the creatives.list method.
-newtype Creative_OpenAuctionStatus = Creative_OpenAuctionStatus {fromCreative_OpenAuctionStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Creative_OpenAuctionStatus = Creative_OpenAuctionStatus { fromCreative_OpenAuctionStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The status is unknown.
 pattern Creative_OpenAuctionStatus_STATUSUNSPECIFIED :: Creative_OpenAuctionStatus
@@ -1375,20 +1428,19 @@ pattern Creative_OpenAuctionStatus_STATUSTYPEUNSPECIFIED = Creative_OpenAuctionS
   Creative_OpenAuctionStatus_Disapproved,
   Creative_OpenAuctionStatus_PENDINGREVIEW,
   Creative_OpenAuctionStatus_STATUSTYPEUNSPECIFIED,
-  Creative_OpenAuctionStatus
-  #-}
+  Creative_OpenAuctionStatus #-}
 
-newtype Creative_RestrictedCategoriesItem = Creative_RestrictedCategoriesItem {fromCreative_RestrictedCategoriesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Creative_RestrictedCategoriesItem = Creative_RestrictedCategoriesItem { fromCreative_RestrictedCategoriesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The ad has no restricted categories
 pattern Creative_RestrictedCategoriesItem_NORESTRICTEDCATEGORIES :: Creative_RestrictedCategoriesItem
@@ -1401,21 +1453,20 @@ pattern Creative_RestrictedCategoriesItem_Alcohol = Creative_RestrictedCategorie
 {-# COMPLETE
   Creative_RestrictedCategoriesItem_NORESTRICTEDCATEGORIES,
   Creative_RestrictedCategoriesItem_Alcohol,
-  Creative_RestrictedCategoriesItem
-  #-}
+  Creative_RestrictedCategoriesItem #-}
 
 -- | The format of the environment that the creatives will be displayed in.
-newtype CreativeRestrictions_CreativeFormat = CreativeRestrictions_CreativeFormat {fromCreativeRestrictions_CreativeFormat :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CreativeRestrictions_CreativeFormat = CreativeRestrictions_CreativeFormat { fromCreativeRestrictions_CreativeFormat :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined creative format.
 pattern CreativeRestrictions_CreativeFormat_CREATIVEFORMATUNSPECIFIED :: CreativeRestrictions_CreativeFormat
@@ -1433,21 +1484,20 @@ pattern CreativeRestrictions_CreativeFormat_Video = CreativeRestrictions_Creativ
   CreativeRestrictions_CreativeFormat_CREATIVEFORMATUNSPECIFIED,
   CreativeRestrictions_CreativeFormat_Display,
   CreativeRestrictions_CreativeFormat_Video,
-  CreativeRestrictions_CreativeFormat
-  #-}
+  CreativeRestrictions_CreativeFormat #-}
 
 -- | Skippable video ads allow viewers to skip ads after 5 seconds.
-newtype CreativeRestrictions_SkippableAdType = CreativeRestrictions_SkippableAdType {fromCreativeRestrictions_SkippableAdType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CreativeRestrictions_SkippableAdType = CreativeRestrictions_SkippableAdType { fromCreativeRestrictions_SkippableAdType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined skippable ad type.
 pattern CreativeRestrictions_SkippableAdType_SKIPPABLEADTYPEUNSPECIFIED :: CreativeRestrictions_SkippableAdType
@@ -1470,20 +1520,19 @@ pattern CreativeRestrictions_SkippableAdType_NOTSKIPPABLE = CreativeRestrictions
   CreativeRestrictions_SkippableAdType_Skippable,
   CreativeRestrictions_SkippableAdType_INSTREAMSELECT,
   CreativeRestrictions_SkippableAdType_NOTSKIPPABLE,
-  CreativeRestrictions_SkippableAdType
-  #-}
+  CreativeRestrictions_SkippableAdType #-}
 
-newtype CreativeSize_AllowedFormatsItem = CreativeSize_AllowedFormatsItem {fromCreativeSize_AllowedFormatsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CreativeSize_AllowedFormatsItem = CreativeSize_AllowedFormatsItem { fromCreativeSize_AllowedFormatsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined allowed format.
 pattern CreativeSize_AllowedFormatsItem_Unknown :: CreativeSize_AllowedFormatsItem
@@ -1496,21 +1545,20 @@ pattern CreativeSize_AllowedFormatsItem_Audio = CreativeSize_AllowedFormatsItem 
 {-# COMPLETE
   CreativeSize_AllowedFormatsItem_Unknown,
   CreativeSize_AllowedFormatsItem_Audio,
-  CreativeSize_AllowedFormatsItem
-  #-}
+  CreativeSize_AllowedFormatsItem #-}
 
 -- | The creative size type.
-newtype CreativeSize_CreativeSizeType = CreativeSize_CreativeSizeType {fromCreativeSize_CreativeSizeType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CreativeSize_CreativeSizeType = CreativeSize_CreativeSizeType { fromCreativeSize_CreativeSizeType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined creative size type.
 pattern CreativeSize_CreativeSizeType_CREATIVESIZETYPEUNSPECIFIED :: CreativeSize_CreativeSizeType
@@ -1538,21 +1586,20 @@ pattern CreativeSize_CreativeSizeType_Native = CreativeSize_CreativeSizeType "NA
   CreativeSize_CreativeSizeType_Interstitial,
   CreativeSize_CreativeSizeType_Video,
   CreativeSize_CreativeSizeType_Native,
-  CreativeSize_CreativeSizeType
-  #-}
+  CreativeSize_CreativeSizeType #-}
 
 -- | Output only. The native template for this creative. It will have a value only if creative/size/type = CreativeSizeType.NATIVE.
-newtype CreativeSize_NativeTemplate = CreativeSize_NativeTemplate {fromCreativeSize_NativeTemplate :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CreativeSize_NativeTemplate = CreativeSize_NativeTemplate { fromCreativeSize_NativeTemplate :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined native template.
 pattern CreativeSize_NativeTemplate_UNKNOWNNATIVETEMPLATE :: CreativeSize_NativeTemplate
@@ -1580,21 +1627,20 @@ pattern CreativeSize_NativeTemplate_NATIVEVIDEOAPPINSTALLAD = CreativeSize_Nativ
   CreativeSize_NativeTemplate_NATIVEAPPINSTALLAD,
   CreativeSize_NativeTemplate_NATIVEVIDEOCONTENTAD,
   CreativeSize_NativeTemplate_NATIVEVIDEOAPPINSTALLAD,
-  CreativeSize_NativeTemplate
-  #-}
+  CreativeSize_NativeTemplate #-}
 
 -- | The type of skippable ad for this creative. It will have a value only if creative/size/type = CreativeSizeType.VIDEO.
-newtype CreativeSize_SkippableAdType = CreativeSize_SkippableAdType {fromCreativeSize_SkippableAdType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CreativeSize_SkippableAdType = CreativeSize_SkippableAdType { fromCreativeSize_SkippableAdType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined skippable ad type.
 pattern CreativeSize_SkippableAdType_SKIPPABLEADTYPEUNSPECIFIED :: CreativeSize_SkippableAdType
@@ -1617,21 +1663,20 @@ pattern CreativeSize_SkippableAdType_NOTSKIPPABLE = CreativeSize_SkippableAdType
   CreativeSize_SkippableAdType_Generic,
   CreativeSize_SkippableAdType_INSTREAMSELECT,
   CreativeSize_SkippableAdType_NOTSKIPPABLE,
-  CreativeSize_SkippableAdType
-  #-}
+  CreativeSize_SkippableAdType #-}
 
 -- | The day of the week to target. If unspecified, applicable to all days.
-newtype DayPart_DayOfWeek = DayPart_DayOfWeek {fromDayPart_DayOfWeek :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DayPart_DayOfWeek = DayPart_DayOfWeek { fromDayPart_DayOfWeek :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for when the day of the week is not specified.
 pattern DayPart_DayOfWeek_DAYOFWEEKUNSPECIFIED :: DayPart_DayOfWeek
@@ -1674,21 +1719,20 @@ pattern DayPart_DayOfWeek_Sunday = DayPart_DayOfWeek "SUNDAY"
   DayPart_DayOfWeek_Friday,
   DayPart_DayOfWeek_Saturday,
   DayPart_DayOfWeek_Sunday,
-  DayPart_DayOfWeek
-  #-}
+  DayPart_DayOfWeek #-}
 
 -- | The timezone to use for interpreting the day part targeting.
-newtype DayPartTargeting_TimeZoneType = DayPartTargeting_TimeZoneType {fromDayPartTargeting_TimeZoneType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DayPartTargeting_TimeZoneType = DayPartTargeting_TimeZoneType { fromDayPartTargeting_TimeZoneType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined time zone source.
 pattern DayPartTargeting_TimeZoneType_TIMEZONESOURCEUNSPECIFIED :: DayPartTargeting_TimeZoneType
@@ -1706,21 +1750,20 @@ pattern DayPartTargeting_TimeZoneType_User = DayPartTargeting_TimeZoneType "USER
   DayPartTargeting_TimeZoneType_TIMEZONESOURCEUNSPECIFIED,
   DayPartTargeting_TimeZoneType_Publisher,
   DayPartTargeting_TimeZoneType_User,
-  DayPartTargeting_TimeZoneType
-  #-}
+  DayPartTargeting_TimeZoneType #-}
 
 -- | Output only. Specifies the creative pre-approval policy.
-newtype Deal_CreativePreApprovalPolicy = Deal_CreativePreApprovalPolicy {fromDeal_CreativePreApprovalPolicy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Deal_CreativePreApprovalPolicy = Deal_CreativePreApprovalPolicy { fromDeal_CreativePreApprovalPolicy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined creative pre-approval policy.
 pattern Deal_CreativePreApprovalPolicy_CREATIVEPREAPPROVALPOLICYUNSPECIFIED :: Deal_CreativePreApprovalPolicy
@@ -1738,21 +1781,20 @@ pattern Deal_CreativePreApprovalPolicy_SELLERPREAPPROVALNOTREQUIRED = Deal_Creat
   Deal_CreativePreApprovalPolicy_CREATIVEPREAPPROVALPOLICYUNSPECIFIED,
   Deal_CreativePreApprovalPolicy_SELLERPREAPPROVALREQUIRED,
   Deal_CreativePreApprovalPolicy_SELLERPREAPPROVALNOTREQUIRED,
-  Deal_CreativePreApprovalPolicy
-  #-}
+  Deal_CreativePreApprovalPolicy #-}
 
 -- | Output only. Specifies whether the creative is safeFrame compatible.
-newtype Deal_CreativeSafeFrameCompatibility = Deal_CreativeSafeFrameCompatibility {fromDeal_CreativeSafeFrameCompatibility :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Deal_CreativeSafeFrameCompatibility = Deal_CreativeSafeFrameCompatibility { fromDeal_CreativeSafeFrameCompatibility :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined creative safe-frame compatibility.
 pattern Deal_CreativeSafeFrameCompatibility_CREATIVESAFEFRAMECOMPATIBILITYUNSPECIFIED :: Deal_CreativeSafeFrameCompatibility
@@ -1770,21 +1812,20 @@ pattern Deal_CreativeSafeFrameCompatibility_Incompatible = Deal_CreativeSafeFram
   Deal_CreativeSafeFrameCompatibility_CREATIVESAFEFRAMECOMPATIBILITYUNSPECIFIED,
   Deal_CreativeSafeFrameCompatibility_Compatible,
   Deal_CreativeSafeFrameCompatibility_Incompatible,
-  Deal_CreativeSafeFrameCompatibility
-  #-}
+  Deal_CreativeSafeFrameCompatibility #-}
 
 -- | Output only. Specifies the creative source for programmatic deals. PUBLISHER means creative is provided by seller and ADVERTISER means creative is provided by buyer.
-newtype Deal_ProgrammaticCreativeSource = Deal_ProgrammaticCreativeSource {fromDeal_ProgrammaticCreativeSource :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Deal_ProgrammaticCreativeSource = Deal_ProgrammaticCreativeSource { fromDeal_ProgrammaticCreativeSource :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined programmatic creative source.
 pattern Deal_ProgrammaticCreativeSource_PROGRAMMATICCREATIVESOURCEUNSPECIFIED :: Deal_ProgrammaticCreativeSource
@@ -1802,21 +1843,20 @@ pattern Deal_ProgrammaticCreativeSource_Publisher = Deal_ProgrammaticCreativeSou
   Deal_ProgrammaticCreativeSource_PROGRAMMATICCREATIVESOURCEUNSPECIFIED,
   Deal_ProgrammaticCreativeSource_Advertiser,
   Deal_ProgrammaticCreativeSource_Publisher,
-  Deal_ProgrammaticCreativeSource
-  #-}
+  Deal_ProgrammaticCreativeSource #-}
 
 -- | The syndication product associated with the deal. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error.
-newtype Deal_SyndicationProduct = Deal_SyndicationProduct {fromDeal_SyndicationProduct :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Deal_SyndicationProduct = Deal_SyndicationProduct { fromDeal_SyndicationProduct :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined syndication product.
 pattern Deal_SyndicationProduct_SYNDICATIONPRODUCTUNSPECIFIED :: Deal_SyndicationProduct
@@ -1844,21 +1884,20 @@ pattern Deal_SyndicationProduct_Games = Deal_SyndicationProduct "GAMES"
   Deal_SyndicationProduct_Mobile,
   Deal_SyndicationProduct_Video,
   Deal_SyndicationProduct_Games,
-  Deal_SyndicationProduct
-  #-}
+  Deal_SyndicationProduct #-}
 
 -- | The role of the person who first paused this deal.
-newtype DealPauseStatus_FirstPausedBy = DealPauseStatus_FirstPausedBy {fromDealPauseStatus_FirstPausedBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DealPauseStatus_FirstPausedBy = DealPauseStatus_FirstPausedBy { fromDealPauseStatus_FirstPausedBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined buyer\/seller role.
 pattern DealPauseStatus_FirstPausedBy_BUYERSELLERROLEUNSPECIFIED :: DealPauseStatus_FirstPausedBy
@@ -1876,21 +1915,20 @@ pattern DealPauseStatus_FirstPausedBy_Seller = DealPauseStatus_FirstPausedBy "SE
   DealPauseStatus_FirstPausedBy_BUYERSELLERROLEUNSPECIFIED,
   DealPauseStatus_FirstPausedBy_Buyer,
   DealPauseStatus_FirstPausedBy_Seller,
-  DealPauseStatus_FirstPausedBy
-  #-}
+  DealPauseStatus_FirstPausedBy #-}
 
 -- | Visibility of the URL in bid requests. (default: BRANDED)
-newtype DealTerms_BrandingType = DealTerms_BrandingType {fromDealTerms_BrandingType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DealTerms_BrandingType = DealTerms_BrandingType { fromDealTerms_BrandingType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined branding type.
 pattern DealTerms_BrandingType_BRANDINGTYPEUNSPECIFIED :: DealTerms_BrandingType
@@ -1908,21 +1946,20 @@ pattern DealTerms_BrandingType_SEMITRANSPARENT = DealTerms_BrandingType "SEMI_TR
   DealTerms_BrandingType_BRANDINGTYPEUNSPECIFIED,
   DealTerms_BrandingType_Branded,
   DealTerms_BrandingType_SEMITRANSPARENT,
-  DealTerms_BrandingType
-  #-}
+  DealTerms_BrandingType #-}
 
 -- | Output only. Specified the creative blocking levels to be applied.
-newtype DeliveryControl_CreativeBlockingLevel = DeliveryControl_CreativeBlockingLevel {fromDeliveryControl_CreativeBlockingLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DeliveryControl_CreativeBlockingLevel = DeliveryControl_CreativeBlockingLevel { fromDeliveryControl_CreativeBlockingLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined creative blocking level.
 pattern DeliveryControl_CreativeBlockingLevel_CREATIVEBLOCKINGLEVELUNSPECIFIED :: DeliveryControl_CreativeBlockingLevel
@@ -1940,21 +1977,20 @@ pattern DeliveryControl_CreativeBlockingLevel_ADXPOLICYBLOCKINGONLY = DeliveryCo
   DeliveryControl_CreativeBlockingLevel_CREATIVEBLOCKINGLEVELUNSPECIFIED,
   DeliveryControl_CreativeBlockingLevel_PUBLISHERBLOCKINGRULES,
   DeliveryControl_CreativeBlockingLevel_ADXPOLICYBLOCKINGONLY,
-  DeliveryControl_CreativeBlockingLevel
-  #-}
+  DeliveryControl_CreativeBlockingLevel #-}
 
 -- | Output only. Specifies how the impression delivery will be paced.
-newtype DeliveryControl_DeliveryRateType = DeliveryControl_DeliveryRateType {fromDeliveryControl_DeliveryRateType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DeliveryControl_DeliveryRateType = DeliveryControl_DeliveryRateType { fromDeliveryControl_DeliveryRateType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined delivery rate type.
 pattern DeliveryControl_DeliveryRateType_DELIVERYRATETYPEUNSPECIFIED :: DeliveryControl_DeliveryRateType
@@ -1977,21 +2013,20 @@ pattern DeliveryControl_DeliveryRateType_ASFASTASPOSSIBLE = DeliveryControl_Deli
   DeliveryControl_DeliveryRateType_Evenly,
   DeliveryControl_DeliveryRateType_FRONTLOADED,
   DeliveryControl_DeliveryRateType_ASFASTASPOSSIBLE,
-  DeliveryControl_DeliveryRateType
-  #-}
+  DeliveryControl_DeliveryRateType #-}
 
 -- | The categorized reason for disapproval.
-newtype Disapproval_Reason = Disapproval_Reason {fromDisapproval_Reason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Disapproval_Reason = Disapproval_Reason { fromDisapproval_Reason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The length of the image animation is longer than allowed.
 pattern Disapproval_Reason_LENGTHOFIMAGEANIMATION :: Disapproval_Reason
@@ -2504,20 +2539,19 @@ pattern Disapproval_Reason_EXPERIMENTALMEDICALTREATMENT = Disapproval_Reason "EX
   Disapproval_Reason_TEMPORARYPAUSE,
   Disapproval_Reason_BAILBONDS,
   Disapproval_Reason_EXPERIMENTALMEDICALTREATMENT,
-  Disapproval_Reason
-  #-}
+  Disapproval_Reason #-}
 
-newtype FilterSet_BreakdownDimensionsItem = FilterSet_BreakdownDimensionsItem {fromFilterSet_BreakdownDimensionsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FilterSet_BreakdownDimensionsItem = FilterSet_BreakdownDimensionsItem { fromFilterSet_BreakdownDimensionsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an unspecified dimension; should not be used.
 pattern FilterSet_BreakdownDimensionsItem_BREAKDOWNDIMENSIONUNSPECIFIED :: FilterSet_BreakdownDimensionsItem
@@ -2530,21 +2564,20 @@ pattern FilterSet_BreakdownDimensionsItem_PUBLISHERIDENTIFIER = FilterSet_Breakd
 {-# COMPLETE
   FilterSet_BreakdownDimensionsItem_BREAKDOWNDIMENSIONUNSPECIFIED,
   FilterSet_BreakdownDimensionsItem_PUBLISHERIDENTIFIER,
-  FilterSet_BreakdownDimensionsItem
-  #-}
+  FilterSet_BreakdownDimensionsItem #-}
 
 -- | The environment on which to filter; optional.
-newtype FilterSet_Environment = FilterSet_Environment {fromFilterSet_Environment :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FilterSet_Environment = FilterSet_Environment { fromFilterSet_Environment :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined environment; indicates that no environment filter will be applied.
 pattern FilterSet_Environment_ENVIRONMENTUNSPECIFIED :: FilterSet_Environment
@@ -2562,21 +2595,20 @@ pattern FilterSet_Environment_App = FilterSet_Environment "APP"
   FilterSet_Environment_ENVIRONMENTUNSPECIFIED,
   FilterSet_Environment_Web,
   FilterSet_Environment_App,
-  FilterSet_Environment
-  #-}
+  FilterSet_Environment #-}
 
 -- | Creative format bidded on or allowed to bid on, can be empty.
-newtype FilterSet_Format = FilterSet_Format {fromFilterSet_Format :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FilterSet_Format = FilterSet_Format { fromFilterSet_Format :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined format; indicates that no format filter will be applied.
 pattern FilterSet_Format_FORMATUNSPECIFIED :: FilterSet_Format
@@ -2604,20 +2636,19 @@ pattern FilterSet_Format_NONNATIVEVIDEO = FilterSet_Format "NON_NATIVE_VIDEO"
   FilterSet_Format_NATIVEVIDEO,
   FilterSet_Format_NONNATIVEDISPLAY,
   FilterSet_Format_NONNATIVEVIDEO,
-  FilterSet_Format
-  #-}
+  FilterSet_Format #-}
 
-newtype FilterSet_FormatsItem = FilterSet_FormatsItem {fromFilterSet_FormatsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FilterSet_FormatsItem = FilterSet_FormatsItem { fromFilterSet_FormatsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined format; indicates that no format filter will be applied.
 pattern FilterSet_FormatsItem_FORMATUNSPECIFIED :: FilterSet_FormatsItem
@@ -2645,20 +2676,19 @@ pattern FilterSet_FormatsItem_NONNATIVEVIDEO = FilterSet_FormatsItem "NON_NATIVE
   FilterSet_FormatsItem_NATIVEVIDEO,
   FilterSet_FormatsItem_NONNATIVEDISPLAY,
   FilterSet_FormatsItem_NONNATIVEVIDEO,
-  FilterSet_FormatsItem
-  #-}
+  FilterSet_FormatsItem #-}
 
-newtype FilterSet_PlatformsItem = FilterSet_PlatformsItem {fromFilterSet_PlatformsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FilterSet_PlatformsItem = FilterSet_PlatformsItem { fromFilterSet_PlatformsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined platform; indicates that no platform filter will be applied.
 pattern FilterSet_PlatformsItem_PLATFORMUNSPECIFIED :: FilterSet_PlatformsItem
@@ -2681,21 +2711,20 @@ pattern FilterSet_PlatformsItem_Mobile = FilterSet_PlatformsItem "MOBILE"
   FilterSet_PlatformsItem_Desktop,
   FilterSet_PlatformsItem_Tablet,
   FilterSet_PlatformsItem_Mobile,
-  FilterSet_PlatformsItem
-  #-}
+  FilterSet_PlatformsItem #-}
 
 -- | The granularity of time intervals if a time series breakdown is desired; optional.
-newtype FilterSet_TimeSeriesGranularity = FilterSet_TimeSeriesGranularity {fromFilterSet_TimeSeriesGranularity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FilterSet_TimeSeriesGranularity = FilterSet_TimeSeriesGranularity { fromFilterSet_TimeSeriesGranularity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an unspecified interval; no time series is applied. All rows in response will contain data for the entire requested time range.
 pattern FilterSet_TimeSeriesGranularity_TIMESERIESGRANULARITYUNSPECIFIED :: FilterSet_TimeSeriesGranularity
@@ -2713,21 +2742,20 @@ pattern FilterSet_TimeSeriesGranularity_Daily = FilterSet_TimeSeriesGranularity 
   FilterSet_TimeSeriesGranularity_TIMESERIESGRANULARITYUNSPECIFIED,
   FilterSet_TimeSeriesGranularity_Hourly,
   FilterSet_TimeSeriesGranularity_Daily,
-  FilterSet_TimeSeriesGranularity
-  #-}
+  FilterSet_TimeSeriesGranularity #-}
 
 -- | The time unit. Along with num/time/units defines the amount of time over which impressions per user are counted and capped.
-newtype FrequencyCap_TimeUnitType = FrequencyCap_TimeUnitType {fromFrequencyCap_TimeUnitType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FrequencyCap_TimeUnitType = FrequencyCap_TimeUnitType { fromFrequencyCap_TimeUnitType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined time unit type. This just indicates the variable with this value hasn\'t been initialized.
 pattern FrequencyCap_TimeUnitType_TIMEUNITTYPEUNSPECIFIED :: FrequencyCap_TimeUnitType
@@ -2775,21 +2803,20 @@ pattern FrequencyCap_TimeUnitType_Stream = FrequencyCap_TimeUnitType "STREAM"
   FrequencyCap_TimeUnitType_Lifetime,
   FrequencyCap_TimeUnitType_Pod,
   FrequencyCap_TimeUnitType_Stream,
-  FrequencyCap_TimeUnitType
-  #-}
+  FrequencyCap_TimeUnitType #-}
 
 -- | The reservation type for a Programmatic Guaranteed deal. This indicates whether the number of impressions is fixed, or a percent of available impressions. If not specified, the default reservation type is STANDARD.
-newtype GuaranteedFixedPriceTerms_ReservationType = GuaranteedFixedPriceTerms_ReservationType {fromGuaranteedFixedPriceTerms_ReservationType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GuaranteedFixedPriceTerms_ReservationType = GuaranteedFixedPriceTerms_ReservationType { fromGuaranteedFixedPriceTerms_ReservationType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An unspecified reservation type.
 pattern GuaranteedFixedPriceTerms_ReservationType_RESERVATIONTYPEUNSPECIFIED :: GuaranteedFixedPriceTerms_ReservationType
@@ -2807,21 +2834,20 @@ pattern GuaranteedFixedPriceTerms_ReservationType_Sponsorship = GuaranteedFixedP
   GuaranteedFixedPriceTerms_ReservationType_RESERVATIONTYPEUNSPECIFIED,
   GuaranteedFixedPriceTerms_ReservationType_Standard,
   GuaranteedFixedPriceTerms_ReservationType_Sponsorship,
-  GuaranteedFixedPriceTerms_ReservationType
-  #-}
+  GuaranteedFixedPriceTerms_ReservationType #-}
 
 -- | The type of detail that the detail IDs represent.
-newtype ListCreativeStatusBreakdownByDetailResponse_DetailType = ListCreativeStatusBreakdownByDetailResponse_DetailType {fromListCreativeStatusBreakdownByDetailResponse_DetailType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ListCreativeStatusBreakdownByDetailResponse_DetailType = ListCreativeStatusBreakdownByDetailResponse_DetailType { fromListCreativeStatusBreakdownByDetailResponse_DetailType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined status. This value will never be returned in responses.
 pattern ListCreativeStatusBreakdownByDetailResponse_DetailType_DETAILTYPEUNSPECIFIED :: ListCreativeStatusBreakdownByDetailResponse_DetailType
@@ -2874,21 +2900,20 @@ pattern ListCreativeStatusBreakdownByDetailResponse_DetailType_GVLID = ListCreat
   ListCreativeStatusBreakdownByDetailResponse_DetailType_ATPVENDOR,
   ListCreativeStatusBreakdownByDetailResponse_DetailType_VENDORDOMAIN,
   ListCreativeStatusBreakdownByDetailResponse_DetailType_GVLID,
-  ListCreativeStatusBreakdownByDetailResponse_DetailType
-  #-}
+  ListCreativeStatusBreakdownByDetailResponse_DetailType #-}
 
 -- | The status specifying why the winning bids were not billed.
-newtype NonBillableWinningBidStatusRow_Status = NonBillableWinningBidStatusRow_Status {fromNonBillableWinningBidStatusRow_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NonBillableWinningBidStatusRow_Status = NonBillableWinningBidStatusRow_Status { fromNonBillableWinningBidStatusRow_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined status. This value will never be returned in responses.
 pattern NonBillableWinningBidStatusRow_Status_STATUSUNSPECIFIED :: NonBillableWinningBidStatusRow_Status
@@ -2916,21 +2941,20 @@ pattern NonBillableWinningBidStatusRow_Status_LOSTINMEDIATION = NonBillableWinni
   NonBillableWinningBidStatusRow_Status_INVALIDIMPRESSION,
   NonBillableWinningBidStatusRow_Status_FATALVASTERROR,
   NonBillableWinningBidStatusRow_Status_LOSTINMEDIATION,
-  NonBillableWinningBidStatusRow_Status
-  #-}
+  NonBillableWinningBidStatusRow_Status #-}
 
 -- | Output only. The role of the person (buyer\/seller) creating the note.
-newtype Note_CreatorRole = Note_CreatorRole {fromNote_CreatorRole :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Note_CreatorRole = Note_CreatorRole { fromNote_CreatorRole :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined buyer\/seller role.
 pattern Note_CreatorRole_BUYERSELLERROLEUNSPECIFIED :: Note_CreatorRole
@@ -2948,20 +2972,19 @@ pattern Note_CreatorRole_Seller = Note_CreatorRole "SELLER"
   Note_CreatorRole_BUYERSELLERROLEUNSPECIFIED,
   Note_CreatorRole_Buyer,
   Note_CreatorRole_Seller,
-  Note_CreatorRole
-  #-}
+  Note_CreatorRole #-}
 
-newtype PlatformContext_PlatformsItem = PlatformContext_PlatformsItem {fromPlatformContext_PlatformsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PlatformContext_PlatformsItem = PlatformContext_PlatformsItem { fromPlatformContext_PlatformsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Desktop platform.
 pattern PlatformContext_PlatformsItem_Desktop :: PlatformContext_PlatformsItem
@@ -2979,21 +3002,20 @@ pattern PlatformContext_PlatformsItem_Ios = PlatformContext_PlatformsItem "IOS"
   PlatformContext_PlatformsItem_Desktop,
   PlatformContext_PlatformsItem_Android,
   PlatformContext_PlatformsItem_Ios,
-  PlatformContext_PlatformsItem
-  #-}
+  PlatformContext_PlatformsItem #-}
 
 -- | The pricing type for the deal\/product. (default: CPM)
-newtype Price_PricingType = Price_PricingType {fromPrice_PricingType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Price_PricingType = Price_PricingType { fromPrice_PricingType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined pricing type. If the pricing type is unpsecified, @COST_PER_MILLE@ will be used instead.
 pattern Price_PricingType_PRICINGTYPEUNSPECIFIED :: Price_PricingType
@@ -3011,21 +3033,20 @@ pattern Price_PricingType_COSTPERDAY = Price_PricingType "COST_PER_DAY"
   Price_PricingType_PRICINGTYPEUNSPECIFIED,
   Price_PricingType_COSTPERMILLE,
   Price_PricingType_COSTPERDAY,
-  Price_PricingType
-  #-}
+  Price_PricingType #-}
 
 -- | The syndication product associated with the deal.
-newtype Product_SyndicationProduct = Product_SyndicationProduct {fromProduct_SyndicationProduct :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Product_SyndicationProduct = Product_SyndicationProduct { fromProduct_SyndicationProduct :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined syndication product.
 pattern Product_SyndicationProduct_SYNDICATIONPRODUCTUNSPECIFIED :: Product_SyndicationProduct
@@ -3053,21 +3074,20 @@ pattern Product_SyndicationProduct_Games = Product_SyndicationProduct "GAMES"
   Product_SyndicationProduct_Mobile,
   Product_SyndicationProduct_Video,
   Product_SyndicationProduct_Games,
-  Product_SyndicationProduct
-  #-}
+  Product_SyndicationProduct #-}
 
 -- | Output only. The role of the last user that either updated the proposal or left a comment.
-newtype Proposal_LastUpdaterOrCommentorRole = Proposal_LastUpdaterOrCommentorRole {fromProposal_LastUpdaterOrCommentorRole :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Proposal_LastUpdaterOrCommentorRole = Proposal_LastUpdaterOrCommentorRole { fromProposal_LastUpdaterOrCommentorRole :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined buyer\/seller role.
 pattern Proposal_LastUpdaterOrCommentorRole_BUYERSELLERROLEUNSPECIFIED :: Proposal_LastUpdaterOrCommentorRole
@@ -3085,21 +3105,20 @@ pattern Proposal_LastUpdaterOrCommentorRole_Seller = Proposal_LastUpdaterOrComme
   Proposal_LastUpdaterOrCommentorRole_BUYERSELLERROLEUNSPECIFIED,
   Proposal_LastUpdaterOrCommentorRole_Buyer,
   Proposal_LastUpdaterOrCommentorRole_Seller,
-  Proposal_LastUpdaterOrCommentorRole
-  #-}
+  Proposal_LastUpdaterOrCommentorRole #-}
 
 -- | Output only. Indicates whether the buyer\/seller created the proposal.
-newtype Proposal_OriginatorRole = Proposal_OriginatorRole {fromProposal_OriginatorRole :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Proposal_OriginatorRole = Proposal_OriginatorRole { fromProposal_OriginatorRole :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined buyer\/seller role.
 pattern Proposal_OriginatorRole_BUYERSELLERROLEUNSPECIFIED :: Proposal_OriginatorRole
@@ -3117,21 +3136,20 @@ pattern Proposal_OriginatorRole_Seller = Proposal_OriginatorRole "SELLER"
   Proposal_OriginatorRole_BUYERSELLERROLEUNSPECIFIED,
   Proposal_OriginatorRole_Buyer,
   Proposal_OriginatorRole_Seller,
-  Proposal_OriginatorRole
-  #-}
+  Proposal_OriginatorRole #-}
 
 -- | Output only. The current state of the proposal.
-newtype Proposal_ProposalState = Proposal_ProposalState {fromProposal_ProposalState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Proposal_ProposalState = Proposal_ProposalState { fromProposal_ProposalState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined proposal state.
 pattern Proposal_ProposalState_PROPOSALSTATEUNSPECIFIED :: Proposal_ProposalState
@@ -3164,21 +3182,20 @@ pattern Proposal_ProposalState_Finalized = Proposal_ProposalState "FINALIZED"
   Proposal_ProposalState_SELLERACCEPTED,
   Proposal_ProposalState_Canceled,
   Proposal_ProposalState_Finalized,
-  Proposal_ProposalState
-  #-}
+  Proposal_ProposalState #-}
 
 -- | The app store the app belongs to.
-newtype PublisherProfileMobileApplication_AppStore = PublisherProfileMobileApplication_AppStore {fromPublisherProfileMobileApplication_AppStore :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PublisherProfileMobileApplication_AppStore = PublisherProfileMobileApplication_AppStore { fromPublisherProfileMobileApplication_AppStore :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an unknown app store.
 pattern PublisherProfileMobileApplication_AppStore_APPSTORETYPEUNSPECIFIED :: PublisherProfileMobileApplication_AppStore
@@ -3246,20 +3263,19 @@ pattern PublisherProfileMobileApplication_AppStore_Xiaomi = PublisherProfileMobi
   PublisherProfileMobileApplication_AppStore_Samsung,
   PublisherProfileMobileApplication_AppStore_Vivo,
   PublisherProfileMobileApplication_AppStore_Xiaomi,
-  PublisherProfileMobileApplication_AppStore
-  #-}
+  PublisherProfileMobileApplication_AppStore #-}
 
-newtype SecurityContext_SecuritiesItem = SecurityContext_SecuritiesItem {fromSecurityContext_SecuritiesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SecurityContext_SecuritiesItem = SecurityContext_SecuritiesItem { fromSecurityContext_SecuritiesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Matches impressions that require insecure compatibility.
 pattern SecurityContext_SecuritiesItem_Insecure :: SecurityContext_SecuritiesItem
@@ -3272,21 +3288,20 @@ pattern SecurityContext_SecuritiesItem_Ssl = SecurityContext_SecuritiesItem "SSL
 {-# COMPLETE
   SecurityContext_SecuritiesItem_Insecure,
   SecurityContext_SecuritiesItem_Ssl,
-  SecurityContext_SecuritiesItem
-  #-}
+  SecurityContext_SecuritiesItem #-}
 
 -- | Matches all contexts.
-newtype ServingContext_All = ServingContext_All {fromServingContext_All :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ServingContext_All = ServingContext_All { fromServingContext_All :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A simple context.
 pattern ServingContext_All_SIMPLECONTEXT :: ServingContext_All
@@ -3294,21 +3309,20 @@ pattern ServingContext_All_SIMPLECONTEXT = ServingContext_All "SIMPLE_CONTEXT"
 
 {-# COMPLETE
   ServingContext_All_SIMPLECONTEXT,
-  ServingContext_All
-  #-}
+  ServingContext_All #-}
 
 -- | The status of the creative in this context (for example, it has been explicitly disapproved or is pending review).
-newtype ServingRestriction_Status = ServingRestriction_Status {fromServingRestriction_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ServingRestriction_Status = ServingRestriction_Status { fromServingRestriction_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The status is not known.
 pattern ServingRestriction_Status_STATUSUNSPECIFIED :: ServingRestriction_Status
@@ -3326,20 +3340,19 @@ pattern ServingRestriction_Status_PENDINGREVIEW = ServingRestriction_Status "PEN
   ServingRestriction_Status_STATUSUNSPECIFIED,
   ServingRestriction_Status_Disapproval,
   ServingRestriction_Status_PENDINGREVIEW,
-  ServingRestriction_Status
-  #-}
+  ServingRestriction_Status #-}
 
-newtype VideoTargeting_ExcludedPositionTypesItem = VideoTargeting_ExcludedPositionTypesItem {fromVideoTargeting_ExcludedPositionTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VideoTargeting_ExcludedPositionTypesItem = VideoTargeting_ExcludedPositionTypesItem { fromVideoTargeting_ExcludedPositionTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined video position.
 pattern VideoTargeting_ExcludedPositionTypesItem_POSITIONTYPEUNSPECIFIED :: VideoTargeting_ExcludedPositionTypesItem
@@ -3362,20 +3375,19 @@ pattern VideoTargeting_ExcludedPositionTypesItem_Postroll = VideoTargeting_Exclu
   VideoTargeting_ExcludedPositionTypesItem_Preroll,
   VideoTargeting_ExcludedPositionTypesItem_Midroll,
   VideoTargeting_ExcludedPositionTypesItem_Postroll,
-  VideoTargeting_ExcludedPositionTypesItem
-  #-}
+  VideoTargeting_ExcludedPositionTypesItem #-}
 
-newtype VideoTargeting_TargetedPositionTypesItem = VideoTargeting_TargetedPositionTypesItem {fromVideoTargeting_TargetedPositionTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VideoTargeting_TargetedPositionTypesItem = VideoTargeting_TargetedPositionTypesItem { fromVideoTargeting_TargetedPositionTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined video position.
 pattern VideoTargeting_TargetedPositionTypesItem_POSITIONTYPEUNSPECIFIED :: VideoTargeting_TargetedPositionTypesItem
@@ -3398,21 +3410,20 @@ pattern VideoTargeting_TargetedPositionTypesItem_Postroll = VideoTargeting_Targe
   VideoTargeting_TargetedPositionTypesItem_Preroll,
   VideoTargeting_TargetedPositionTypesItem_Midroll,
   VideoTargeting_TargetedPositionTypesItem_Postroll,
-  VideoTargeting_TargetedPositionTypesItem
-  #-}
+  VideoTargeting_TargetedPositionTypesItem #-}
 
 -- | Indicates if multiple creatives can share an ID or not. Default is NO_DUPLICATES (one ID per creative).
-newtype AccountsCreativesCreateDuplicateIdMode = AccountsCreativesCreateDuplicateIdMode {fromAccountsCreativesCreateDuplicateIdMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsCreativesCreateDuplicateIdMode = AccountsCreativesCreateDuplicateIdMode { fromAccountsCreativesCreateDuplicateIdMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Recommended. This means that an ID will be unique to a single creative. Multiple creatives will not share an ID.
 pattern AccountsCreativesCreateDuplicateIdMode_NODUPLICATES :: AccountsCreativesCreateDuplicateIdMode
@@ -3425,21 +3436,20 @@ pattern AccountsCreativesCreateDuplicateIdMode_FORCEENABLEDUPLICATEIDS = Account
 {-# COMPLETE
   AccountsCreativesCreateDuplicateIdMode_NODUPLICATES,
   AccountsCreativesCreateDuplicateIdMode_FORCEENABLEDUPLICATEIDS,
-  AccountsCreativesCreateDuplicateIdMode
-  #-}
+  AccountsCreativesCreateDuplicateIdMode #-}
 
 -- | Syntax the filter is written in. Current implementation defaults to PQL but in the future it will be LIST_FILTER.
-newtype AccountsFinalizedProposalsListFilterSyntax = AccountsFinalizedProposalsListFilterSyntax {fromAccountsFinalizedProposalsListFilterSyntax :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsFinalizedProposalsListFilterSyntax = AccountsFinalizedProposalsListFilterSyntax { fromAccountsFinalizedProposalsListFilterSyntax :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined filter syntax.
 pattern AccountsFinalizedProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED :: AccountsFinalizedProposalsListFilterSyntax
@@ -3457,21 +3467,20 @@ pattern AccountsFinalizedProposalsListFilterSyntax_LISTFILTER = AccountsFinalize
   AccountsFinalizedProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED,
   AccountsFinalizedProposalsListFilterSyntax_Pql,
   AccountsFinalizedProposalsListFilterSyntax_LISTFILTER,
-  AccountsFinalizedProposalsListFilterSyntax
-  #-}
+  AccountsFinalizedProposalsListFilterSyntax #-}
 
 -- | Syntax the filter is written in. Current implementation defaults to PQL but in the future it will be LIST_FILTER.
-newtype AccountsProposalsListFilterSyntax = AccountsProposalsListFilterSyntax {fromAccountsProposalsListFilterSyntax :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsProposalsListFilterSyntax = AccountsProposalsListFilterSyntax { fromAccountsProposalsListFilterSyntax :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A placeholder for an undefined filter syntax.
 pattern AccountsProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED :: AccountsProposalsListFilterSyntax
@@ -3489,5 +3498,4 @@ pattern AccountsProposalsListFilterSyntax_LISTFILTER = AccountsProposalsListFilt
   AccountsProposalsListFilterSyntax_FILTERSYNTAXUNSPECIFIED,
   AccountsProposalsListFilterSyntax_Pql,
   AccountsProposalsListFilterSyntax_LISTFILTER,
-  AccountsProposalsListFilterSyntax
-  #-}
+  AccountsProposalsListFilterSyntax #-}
