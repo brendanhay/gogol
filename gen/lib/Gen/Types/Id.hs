@@ -5,6 +5,7 @@ module Gen.Types.Id
 
     -- * Unique Identifiers
     Global,
+    newGlobal,
     Local,
     global,
     local,
@@ -27,7 +28,6 @@ module Gen.Types.Id
     cname,
     bname,
     fname,
-    fstr,
   )
 where
 
@@ -52,12 +52,12 @@ import Language.Haskell.Exts.Syntax (Exp, Name (..))
 aname :: Text -> Name ()
 aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
-mname :: Text -> Suffix -> Global -> (Name (), Global, [Text])
+mname :: Text -> Suffix -> Global -> (Global, [Text])
 mname canonical (Suffix suf) (Global method) =
-  (resourceType, dataType, namespace)
+  (dataType, namespace)
   where
-    resourceType = name (Text.unpack (mconcat namespace <> suf))
     dataType = Global namespace
+
     namespace = squeeze (unNS (mkNS canonical), map upperHead method)
 
     -- Replace possibly wonky casing of method.id components that are supplied
@@ -110,9 +110,6 @@ dstr =
     . Text.dropWhile separator
     . global
 
-fstr :: Local -> Exp ()
-fstr = strE . Text.unpack . local
-
 newtype Suffix = Suffix Text
   deriving (Show, IsString)
 
@@ -129,13 +126,13 @@ instance Semigroup Global where
   Global xs <> Global ys = Global (xs <> ys)
 
 instance IsString Global where
-  fromString = mkGlobal . fromString
+  fromString = newGlobal . fromString
 
 instance FromJSON Global where
-  parseJSON = withText "global" (pure . mkGlobal)
+  parseJSON = withText "global" (pure . newGlobal)
 
 instance FromJSONKey Global where
-  fromJSONKey = FromJSONKeyText mkGlobal
+  fromJSONKey = FromJSONKeyText newGlobal
 
 instance ToJSON Global where
   toJSON = toJSON . global
@@ -149,8 +146,8 @@ newtype Local = Local {local :: Text}
 lid :: Format a (Local -> a)
 lid = later (Build.fromText . local)
 
-mkGlobal :: Text -> Global
-mkGlobal = Global . Text.split (== '.') . renameSpecial
+newGlobal :: Text -> Global
+newGlobal = Global . Text.split (== '.') . renameSpecial
 
 global :: Global -> Text
 global (Global g) = foldMap upperHead g
@@ -187,16 +184,20 @@ extractPath x = either (error . err) id $ A.parseOnly path x
       fmap Left $
         optional (A.char '/') *> A.takeWhile1 (A.notInClass "/{+*}")
 
-    rep = fmap Right $ do
-      void $ A.string "{/"
-      (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
-        <* A.string "*}"
+    rep =
+      fmap Right $ do
+        void $ A.string "{/"
 
-    var' = fmap Right $ do
-      void $ optional (A.char '/') *> A.char '{' *> optional (A.char '+')
-      (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
-        <* A.char '}'
-        <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))
+        (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
+          <* A.string "*}"
+
+    var' =
+      fmap Right $ do
+        void $ optional (A.char '/') *> A.char '{' *> optional (A.char '+')
+
+        (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
+          <* A.char '}'
+          <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))
 
 orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
 orderParams f xs ys = orderBy f zs (del zs [] ++ reserve)

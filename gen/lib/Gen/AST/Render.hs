@@ -13,11 +13,14 @@ import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Maybe
 import Data.String
+import qualified Data.Text as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Encoding as LText
+import Data.Traversable (for)
 import Gen.AST.Solve (getSolved)
 import Gen.Formatting
 import Gen.Syntax
+import Gen.Syntax.Build
 import Gen.Types
 import qualified HIndent
 import qualified HIndent.Types as HIndent
@@ -61,16 +64,16 @@ renderSchema s = go (_schema s)
           ts = maybe b (flip (Map.insert "additional") b) ab
 
       Prod (dname k) (i ^. iDescription)
-        <$> pp None (objDecl k ts)
-        <*> pure (objFields ts)
-        <*> pp None (objDerive ds)
-        <*> traverse (pp Print) (jsonDecls k ts)
+        <$> pp None (recordDecl k ts)
+        <*> pure (recordFields ts)
+        <*> pp None (recordDerive ds)
+        <*> traverse (pp Print) (jsonInstances k ts)
         <*> ctor ts
       where
         ctor ts =
           Fun' (cname k) (Just help)
-            <$> (pp None (ctorSig k ts) <&> comments ts)
-            <*> pp Indent (ctorDecl k ts)
+            <$> (pp None (smartCtorSig k ts) <&> comments ts)
+            <*> pp Indent (smartCtorDecl k ts)
 
         help =
           rawHelpText $
@@ -85,20 +88,19 @@ renderAPI s = do
   rs <- traverse (renderResource s "Resource") (Map.elems (s ^. dResources)) <&> concat
   ms <- traverse (renderMethod s "Method") (s ^. dMethods)
 
-  d <- pp Print $ apiAlias alias (map _actAliasName (rs <> ms))
+  config <- renderConfig
+  aliases <- renderScopes (maybe mempty scopes (s ^. dAuth))
+  params <- renderParams
 
-  API alias d rs ms
-    <$> svc
-    <*> traverse scope (maybe mempty (Map.toList . scopes) (s ^. dAuth))
+  pure (API rs ms config aliases params)
   where
     alias = aname (_sCanonicalName s)
+    sname = name (serviceName s)
 
-    url = name (serviceName s)
-
-    svc =
-      Fun' url (Just (rawHelpText h))
-        <$> pp None (serviceSig url)
-        <*> pp Print (serviceDecl s url)
+    renderConfig =
+      Fun' sname (Just (rawHelpText h))
+        <$> pp None (serviceSig sname)
+        <*> pp Print (serviceDecl (_sDescription s) sname)
       where
         h =
           sformat
@@ -110,41 +112,61 @@ renderAPI s = do
             (s ^. dVersion)
             (s ^. dTitle)
 
-    scope (k, h) =
-      Fun' n (Just h)
-        <$> pp None (scopeSig n k)
-        <*> pp None (scopeDecl n)
-      where
-        n = name (scopeName s k)
+    renderScopes xs =
+      for (Map.toList xs) $ \(value, help) -> do
+        let key = name (scopeName value)
 
-renderMethod :: Service a -> Suffix -> Method Solved -> AST Action
+        alias <- pp None $ scopeDecl key value
+
+        pure
+          Scope
+            { _scopeName = key,
+              _scopeData = alias,
+              _scopeHelp = help
+            }
+
+    pname = serviceParamsName s
+
+    (pdecl, pfields) = paramsDecl (_sDescription s) pname
+
+    renderParams = do
+      pcsig <- pp None (smartCtorSig pname pfields)
+      pctor <- pp Print (smartCtorDecl pname pfields)
+
+      Prod (dname pname) Nothing
+        <$> pp None pdecl
+        <*> pure (recordFields pfields)
+        <*> pp None (recordDerive [DEq, DOrd, DShow, DGeneric])
+        <*> pure []
+        <*> pure (Fun' (cname pname) Nothing pcsig pctor)
+
+renderMethod :: Service Solved -> Suffix -> Method Solved -> AST Action
 renderMethod s suf m@Method {..} = do
   typ <- reserveType typ'
 
   x@Solved {..} <- getSolved typ
 
-  d <-
+  datatype <-
     renderSchema x >>= \case
       Nothing -> error "failed to render the schema"
       Just ok -> pure ok
 
-  i <- pp Print $ requestDecl _unique alias url (props _schema) m
-  dl <- pp Print $ downloadDecl _unique alias url (props _schema) m
-  ul <- pp Print $ uploadDecl _unique alias url (props _schema) m
+  upload <- pp Print $ uploadInstance s m x
+  download <- pp Print $ downloadInstance s m x
+  request <- pp Print $ requestInstance s m x
 
-  let inst = i : [dl | _mSupportsMediaDownload && not _mSupportsMediaUpload] ++ [ul | _mSupportsMediaUpload]
+  let instances =
+        request :
+        [download | _mSupportsMediaDownload && not _mSupportsMediaUpload]
+          ++ [upload | _mSupportsMediaUpload]
 
-  Action (commasep _mId) _unique root _mDescription alias
-    <$> pp Print (verbAlias s alias m)
-    <*> pure (insts inst d)
+  pure $! Action (commasep _mId) _unique root _mDescription (replaceInstances instances datatype)
   where
     root = collapseNS (tocNS s <> UnsafeNS namespace)
 
-    (alias, typ', namespace) = mname (_sCanonicalName s) suf _mId
+    (typ', namespace) = mname (_sCanonicalName s) suf _mId
 
-    url = name (serviceName s)
-
-    insts is = \case
+    replaceInstances is = \case
       Prod n h d fs ds _ c -> Prod n h d fs ds is c
       d -> d
 
@@ -152,7 +174,7 @@ renderMethod s suf m@Method {..} = do
       SObj _ (Obj _ ps) -> Map.keys ps
       _ -> mempty
 
-renderResource :: Service a -> Suffix -> Resource Solved -> AST [Action]
+renderResource :: Service Solved -> Suffix -> Resource Solved -> AST [Action]
 renderResource s suf Resource {..} =
   (<>)
     <$> (traverse (renderResource s suf) (Map.elems _rResources) <&> concat)

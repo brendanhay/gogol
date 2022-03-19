@@ -9,13 +9,16 @@ import Data.Aeson hiding (Array, Bool, Object, String)
 import qualified Data.Aeson as A
 import Data.Aeson.TH
 import Data.Aeson.Types (Parser)
+import qualified Data.Char as Char
 import Data.Function (on)
+import qualified Data.List as List
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Maybe
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Manipulate
+import GHC.Stack (HasCallStack)
 import Gen.TH
 import Gen.Text
 import Gen.Types.Help
@@ -156,6 +159,11 @@ checkType x o = do
     "Schema type mismatch, expected " <> x <> ", but got " <> y
       <> "\n"
       <> Text.pack (show o)
+
+hasProperties :: Schema a -> Bool
+hasProperties = \case
+  SObj _ (Obj _ props) -> not (Map.null props)
+  _other -> False
 
 data Any = Any
   deriving (Eq, Show)
@@ -456,38 +464,31 @@ instance HasDescription (Service a) a where
 serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
-scopeName :: Service a -> Text -> String
-scopeName s k = Text.unpack . lowerHead $
-  case breakParts k of
-    [] -> _sCanonicalName s <> "AllScope"
-    xs -> foldMap named xs <> "Scope"
+serviceParamsName :: Service a -> Global
+serviceParamsName = newGlobal . (<> "Params") . toCamel . _sCanonicalName
+
+scopeName :: HasCallStack => Text -> String
+scopeName full =
+  case Text.stripPrefix "https://www.googleapis.com/auth/" full of
+    Nothing -> error $ "(scopeName): unrecognised oauth2 scope format " ++ show full
+    Just suffix
+      | implicit suffix -> splitTop suffix <> "'FullControl"
+      | otherwise -> splitTop suffix
   where
-    breakParts =
-      concatMap (Text.split split)
-        . filter (not . ignore)
-        . Text.split (== '/')
+    -- FIXME: use a parser combinator here.
 
-    split x =
-      dot x
-        || separator x
+    implicit =
+      not
+        . Text.any (== '.')
 
-    ignore x =
-      Text.null x
-        || "auth" == x
-        || Text.isPrefixOf "http" x
-        || Text.isPrefixOf "www" x
+    splitTop =
+      Text.unpack
+        . mconcat
+        . List.intersperse "'"
+        . map splitSub
+        . Text.split (== '.')
 
-    named x
-      | x == lower = pascal
-      | otherwise = upperHead (replaceAll x special)
-
-    pascal = toPascal (_sCanonicalName s)
-    lower = Text.toLower (_sCanonicalName s)
-
-    special =
-      [ ("only", "Only"),
-        ("manage", "Manage"),
-        ("devstorage", "Storage"),
-        ("number", "Number"),
-        ("^yt$", "youtube")
-      ]
+    splitSub =
+      mconcat
+        . map upperHead
+        . Text.split (not . Char.isAlphaNum)

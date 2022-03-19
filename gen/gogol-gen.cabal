@@ -73,12 +73,10 @@ library
   build-depends:
     , aeson                 >=1
     , attoparsec
-    , bifunctors
     , bytestring
     , case-insensitive
     , containers
     , directory-tree
-    , doclayout
     , ede
     , errors                >=2.1.2
     , formatting
@@ -106,8 +104,13 @@ library
     Gen.Formatting
     Gen.IO
     Gen.JSON
-    Gen.Orphans
     Gen.Syntax
+    Gen.Syntax.Build
+    Gen.Syntax.JSON
+    Gen.Syntax.Record
+    Gen.Syntax.Request
+    Gen.Syntax.Service
+    Gen.Syntax.Type
     Gen.Text
     Gen.TH
     Gen.Tree

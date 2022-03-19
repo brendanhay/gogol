@@ -7,7 +7,6 @@ import Control.Applicative
 import Control.Error
 import Control.Lens hiding (lens)
 import Control.Monad.Except
-import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Maybe
 import qualified Data.Set as Set
@@ -22,11 +21,9 @@ flatten s = do
   let canonical = _sCanonicalName s
 
   ps <- kvTraverseMaybe globalParam (s ^. dParameters)
-  rs <- Map.traverseWithKey (resource canonical ps "Resource") (s ^. dResources)
-  ms <- traverse (method canonical ps "Method") (s ^. dMethods)
+  rs <- Map.traverseWithKey (resource canonical "Resource") (s ^. dResources)
+  ms <- traverse (method canonical "Method") (s ^. dMethods)
   _ <- Map.traverseWithKey globalSchema (s ^. dSchemas)
-
-  -- The horror.
   ss <- use schemas
 
   reserveBranches
@@ -103,15 +100,19 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
                 p
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Maybe (Param Global))
-globalParam l p = case l of
-  "key" -> pure Nothing
-  "oauth_token" -> pure Nothing
-  "prettyPrint" -> pure Nothing
-  "quotaUser" -> pure Nothing
-  "fields" -> pure Nothing
-  "userIp" -> pure Nothing
-  "alt" -> Just <$> overrideParam l (Alt alt) p
-  _ -> Just <$> localParam "" l p
+globalParam l p =
+  case l of
+    -- Deprecated in favor of quotaUser
+    "userIp" ->
+      pure Nothing
+    -- Default prettyPrint to False, since it's usually True.
+    "prettyPrint" ->
+      Just <$> localParam "" l (p & iDefault .~ Just "False")
+    -- Convert alt to a Haskell value.
+    "alt" ->
+      Just <$> overrideParam l (Alt alt) p
+    _other ->
+      Just <$> localParam "" l p
   where
     alt = alternate $ fromMaybe "JSON" (p ^. iDefault)
 
@@ -127,14 +128,14 @@ localParam g l p = do
 resource ::
   HasCallStack =>
   Text ->
-  Map Local (Param Global) ->
+  -- Map Local (Param Global) ->
   Suffix ->
   Global ->
   Resource (Fix Schema) ->
   AST (Resource Global)
-resource canonical qs suf g r@Resource {..} = do
-  rs <- Map.traverseWithKey (resource canonical qs suf . reference g) _rResources
-  ms <- traverse (method canonical qs suf) _rMethods
+resource canonical suf g r@Resource {..} = do
+  rs <- Map.traverseWithKey (resource canonical suf . reference g) _rResources
+  ms <- traverse (method canonical suf) _rMethods
   pure
     $! r
       { _rResources = rs,
@@ -144,20 +145,19 @@ resource canonical qs suf g r@Resource {..} = do
 method ::
   HasCallStack =>
   Text ->
-  Map Local (Param Global) ->
+  -- Map Local (Param Global) ->
   Suffix ->
   Method (Fix Schema) ->
   AST (Method Global)
-method canonical qs suf m@Method {..} = do
-  ps <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
+method canonical suf m@Method {..} = do
+  params <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
 
-  let (_, typ', _) = mname canonical suf _mId
+  let (typ', _) = mname canonical suf _mId
 
   typ <- reserveType typ'
   b <- body typ
 
-  let params = ps <> qs
-      fields' = Map.delete "alt" $ b (Map.map _pParam params)
+  let fields' = b (Map.map _pParam params)
 
   void $ insert typ (SObj schemaInfo (Obj Nothing fields'))
 

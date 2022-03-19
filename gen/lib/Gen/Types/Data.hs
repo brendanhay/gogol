@@ -6,7 +6,6 @@ import Data.Maybe
 import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.Lazy as LText
-import Data.Text.Manipulate
 import Gen.Types.Help
 import Gen.Types.Id
 import Gen.Types.NS
@@ -89,8 +88,6 @@ data Action = Action
     _actType :: Global,
     _actNamespace :: NS,
     _actHelp :: Maybe Help,
-    _actAliasName :: Name (),
-    _actAlias :: Rendered,
     _actData :: Data
   }
 
@@ -100,28 +97,37 @@ instance ToJSON Action where
       [ "id" .= _actId,
         "ns" .= _actNamespace,
         "help" .= _actHelp,
-        "aliasName" .= Syn _actAliasName,
-        "alias" .= _actAlias,
         "type" .= _actData
       ]
 
+data Scope = Scope
+  { _scopeName :: Name (),
+    _scopeData :: Rendered,
+    _scopeHelp :: Help
+  }
+
+instance ToJSON Scope where
+  toJSON Scope {..} =
+    object
+      [ "name" .= Syn _scopeName,
+        "decl" .= _scopeData,
+        "help" .= _scopeHelp
+      ]
+
 data API = API
-  { _apiAliasName :: Name (),
-    _apiAlias :: Rendered,
-    _apiResources :: [Action],
+  { _apiResources :: [Action],
     _apiMethods :: [Action],
-    _apiURL :: Fun,
-    _apuScopes :: [Fun]
+    _apiConfig :: Fun,
+    _apiScopes :: [Scope],
+    _apiParams :: Data
   }
 
 instance ToJSON API where
   toJSON API {..} =
     object
-      [ "aliasName" .= Syn _apiAliasName,
-        "aliasProxy" .= lowerHead (Text.pack (prettyPrint _apiAliasName)),
-        "alias" .= _apiAlias,
-        "resources" .= sortOn _actId _apiResources,
+      [ "resources" .= sortOn _actId _apiResources,
         "methods" .= sortOn _actId _apiMethods,
-        "url" .= _apiURL,
-        "scopes" .= _apuScopes
+        "config" .= _apiConfig,
+        "scopes" .= _apiScopes,
+        "params" .= _apiParams
       ]

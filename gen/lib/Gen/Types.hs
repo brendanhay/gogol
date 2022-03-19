@@ -38,7 +38,6 @@ import Data.Text.Manipulate
 import qualified Filesystem.Path.CurrentOS as Path
 import Formatting
 import GHC.Stack (HasCallStack)
-import Gen.Orphans ()
 import Gen.Text
 import Gen.Types.Data
 import Gen.Types.Help
@@ -249,6 +248,21 @@ data TType
   | TList TType
   | TMap TType TType
   deriving (Eq, Show)
+
+textual :: TType -> Bool
+textual = \case
+  TType {} -> False
+  TList {} -> False
+  TMap {} -> False
+  TMaybe x -> textual x
+  TLit (Natural p) -> p
+  TLit (Float p) -> p
+  TLit (Double p) -> p
+  TLit (UInt32 p) -> p
+  TLit (UInt64 p) -> p
+  TLit (Int32 p) -> p
+  TLit (Int64 p) -> p
+  TLit _other -> False
 
 data Derive
   = DEq
