@@ -2,28 +2,21 @@
 
 module Gen.Types.Schema where
 
-import Control.Applicative
-import Control.Lens hiding ((.=))
-import Control.Monad
-import Data.Aeson hiding (Array, Bool, Object, String)
-import qualified Data.Aeson as A
-import Data.Aeson.TH
-import Data.Aeson.Types (Parser)
+import Control.Lens (lens, makeClassy, makeLenses, view)
+import Data.Aeson ((.!=), (.:), (.:?))
+import qualified Data.Aeson as Aeson
+import Data.Aeson.TH (deriveJSON)
+import qualified Data.Aeson.Types as Aeson.Types
 import qualified Data.Char as Char
 import Data.Function (on)
 import qualified Data.List as List
-import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
-import Data.Maybe
-import Data.Text (Text)
 import qualified Data.Text as Text
-import Data.Text.Manipulate
-import GHC.Stack (HasCallStack)
-import Gen.TH
+import Gen.JSON
+import Gen.Prelude hiding (Enum)
 import Gen.Text
 import Gen.Types.Help
 import Gen.Types.Id
-import Prelude hiding (Enum)
 
 keyless :: Map Text a -> [a]
 keyless = Map.elems
@@ -35,7 +28,7 @@ data Location
   | Path
   deriving (Eq, Show)
 
-deriveJSON options ''Location
+deriveJSON jsonOptions ''Location
 
 newtype Ann = Ann {annRequired :: [Local]}
   deriving (Eq, Show, Monoid)
@@ -43,7 +36,7 @@ newtype Ann = Ann {annRequired :: [Local]}
 instance Semigroup Ann where
   a <> b = Ann (annRequired a <> annRequired b)
 
-deriveJSON options ''Ann
+deriveJSON jsonOptions ''Ann
 
 data Info = Info
   { _iId :: Maybe Global,
@@ -68,17 +61,18 @@ instance Eq Info where
       && on (==) _iRepeated a b
 
 instance FromJSON Info where
-  parseJSON = withObject "info" $ \o ->
-    Info
-      <$> o .:? "id"
-      <*> o .:? "description"
-      <*> o .:? "default"
-      <*> o .:? "required" .!= False
-      <*> o .:? "pattern"
-      <*> o .:? "minimum"
-      <*> o .:? "maximum"
-      <*> o .:? "repeated" .!= False
-      <*> o .:? "annotations" .!= mempty
+  parseJSON =
+    Aeson.withObject "info" $ \o ->
+      Info
+        <$> o .:? "id"
+        <*> o .:? "description"
+        <*> o .:? "default"
+        <*> o .:? "required" .!= False
+        <*> o .:? "pattern"
+        <*> o .:? "minimum"
+        <*> o .:? "maximum"
+        <*> o .:? "repeated" .!= False
+        <*> o .:? "annotations" .!= mempty
 
 defaulted, required, parameter :: HasInfo a => a -> Bool
 defaulted = isJust . view iDefault
@@ -119,14 +113,14 @@ data Schema a
 
 instance FromJSON (Fix Schema) where
   parseJSON o = do
-    i <- parseJSON o
+    i <- Aeson.parseJSON o
     s <-
-      SRef i <$> parseJSON o
-        <|> SEnm i <$> parseJSON o
-        <|> SArr i <$> parseJSON o
-        <|> SObj i <$> parseJSON o
-        <|> SLit i <$> parseJSON o
-        <|> SAny i <$> parseJSON o
+      SRef i <$> Aeson.parseJSON o
+        <|> SEnm i <$> Aeson.parseJSON o
+        <|> SArr i <$> Aeson.parseJSON o
+        <|> SObj i <$> Aeson.parseJSON o
+        <|> SLit i <$> Aeson.parseJSON o
+        <|> SAny i <$> Aeson.parseJSON o
     pure (Fix s)
 
 instance HasInfo (Schema a) where
@@ -151,7 +145,7 @@ instance HasInfo (Schema a) where
 instance HasInfo (Fix Schema) where
   info = lens (\(Fix f) -> f ^. info) (\(Fix f) a -> Fix (f & info .~ a))
 
-checkType :: Text -> A.Object -> Parser ()
+checkType :: Text -> Aeson.Object -> Aeson.Types.Parser ()
 checkType x o = do
   y <- o .: "type"
 
@@ -169,13 +163,13 @@ data Any = Any
   deriving (Eq, Show)
 
 instance FromJSON Any where
-  parseJSON = withObject "any" (\o -> Any <$ checkType "any" o)
+  parseJSON = Aeson.withObject "any" (\o -> Any <$ checkType "any" o)
 
 newtype Ref = Ref {ref :: Global}
   deriving (Eq, Show)
 
 instance FromJSON Ref where
-  parseJSON = withObject "ref" (\o -> fmap Ref (o .: "$ref"))
+  parseJSON = Aeson.withObject "ref" (\o -> fmap Ref (o .: "$ref"))
 
 data Lit
   = -- Literal types.
@@ -202,15 +196,16 @@ data Lit
   deriving (Eq, Show)
 
 instance FromJSON Lit where
-  parseJSON = withObject "literal" $ \o -> do
-    format :: Maybe Text <- o .:? "format"
+  parseJSON =
+    Aeson.withObject "literal" $ \o -> do
+      format :: Maybe Text <- o .:? "format"
 
-    (.:) @Text o "type" >>= \case
-      "integer" -> integer format
-      "number" -> number format
-      "string" -> string format
-      "boolean" -> pure Bool
-      type' -> fail $ "failure parsing Lit: " ++ show (type', format)
+      (.:) @Text o "type" >>= \case
+        "integer" -> integer format
+        "number" -> number format
+        "string" -> string format
+        "boolean" -> pure Bool
+        type' -> fail $ "failure parsing Lit: " ++ show (type', format)
     where
       integer = \case
         Just "uint32" -> pure (UInt32 False)
@@ -245,19 +240,21 @@ newtype Enm = Enm {_eValues :: [(Text, Help)]}
   deriving (Eq, Show)
 
 instance FromJSON Enm where
-  parseJSON = withObject "enum" $ \o -> do
-    checkType "string" o
-    vs <- o .: "enum"
-    ds <- o .: "enumDescriptions"
-    pure $! Enm (zip vs (ds ++ repeat mempty))
+  parseJSON =
+    Aeson.withObject "enum" $ \o -> do
+      checkType "string" o
+      vs <- o .: "enum"
+      ds <- o .: "enumDescriptions"
+      pure $! Enm (zip vs (ds ++ repeat mempty))
 
 newtype Arr a = Arr {_aItem :: a}
   deriving (Eq, Show)
 
 instance FromJSON a => FromJSON (Arr a) where
-  parseJSON = withObject "array" $ \o -> do
-    checkType "array" o
-    Arr <$> o .: "items"
+  parseJSON =
+    Aeson.withObject "array" $ \o -> do
+      checkType "array" o
+      Arr <$> o .: "items"
 
 data Obj a = Obj
   { _oAdditional :: Maybe a,
@@ -266,10 +263,11 @@ data Obj a = Obj
   deriving (Eq, Show)
 
 instance FromJSON a => FromJSON (Obj a) where
-  parseJSON = withObject "object" $ \o -> do
-    checkType "object" o
-    Obj <$> o .:? "additionalProperties"
-      <*> o .:? "properties" .!= mempty
+  parseJSON =
+    Aeson.withObject "object" $ \o -> do
+      checkType "object" o
+      Obj <$> o .:? "additionalProperties"
+        <*> o .:? "properties" .!= mempty
 
 data Param a = Param
   { _pLocation :: Location,
@@ -280,10 +278,11 @@ data Param a = Param
 makeLenses ''Param
 
 instance FromJSON a => FromJSON (Param a) where
-  parseJSON = withObject "param" $ \o ->
-    Param
-      <$> o .: "location"
-      <*> parseJSON (A.Object o)
+  parseJSON =
+    Aeson.withObject "param" $ \o ->
+      Param
+        <$> o .: "location"
+        <*> Aeson.parseJSON (Aeson.Object o)
 
 instance HasInfo a => HasInfo (Param a) where
   info = pParam . info
@@ -297,12 +296,13 @@ data MediaUpload = MediaUpload
   deriving (Eq, Show)
 
 instance FromJSON MediaUpload where
-  parseJSON = withObject "mediaUpload" $ \o ->
-    MediaUpload
-      <$> o .: "accept"
-      <*> o .:? "maxSize"
-      <*> (o .: "protocols" >>= (.:? "resumable") >>= maybe (pure Nothing) (.: "path"))
-      <*> (o .: "protocols" >>= (.: "simple") >>= (.: "path"))
+  parseJSON =
+    Aeson.withObject "mediaUpload" $ \o ->
+      MediaUpload
+        <$> o .: "accept"
+        <*> o .:? "maxSize"
+        <*> (o .: "protocols" >>= (.:? "resumable") >>= maybe (pure Nothing) (.: "path"))
+        <*> (o .: "protocols" >>= (.: "simple") >>= (.: "path"))
 
 data Method a = Method
   { _mId :: Global,
@@ -322,21 +322,22 @@ data Method a = Method
   deriving (Eq, Show, Functor, Foldable, Traversable)
 
 instance FromJSON a => FromJSON (Method a) where
-  parseJSON = withObject "method" $ \o ->
-    Method
-      <$> o .: "id"
-      <*> o .: "path"
-      <*> o .: "httpMethod"
-      <*> o .:? "description"
-      <*> o .:? "parameters" .!= mempty
-      <*> o .:? "parameterOrder" .!= mempty
-      <*> o .:? "request"
-      <*> o .:? "response"
-      <*> o .:? "scopes" .!= mempty
-      <*> o .:? "supportsMediaUpload" .!= False
-      <*> o .:? "supportsMediaDownload" .!= False
-      <*> o .:? "mediaUpload"
-      <*> o .:? "supportsSubscription" .!= False
+  parseJSON =
+    Aeson.withObject "method" $ \o ->
+      Method
+        <$> o .: "id"
+        <*> o .: "path"
+        <*> o .: "httpMethod"
+        <*> o .:? "description"
+        <*> o .:? "parameters" .!= mempty
+        <*> o .:? "parameterOrder" .!= mempty
+        <*> o .:? "request"
+        <*> o .:? "response"
+        <*> o .:? "scopes" .!= mempty
+        <*> o .:? "supportsMediaUpload" .!= False
+        <*> o .:? "supportsMediaDownload" .!= False
+        <*> o .:? "mediaUpload"
+        <*> o .:? "supportsSubscription" .!= False
 
 data Resource a = Resource
   { _rResources :: Map Local (Resource a),
@@ -345,19 +346,21 @@ data Resource a = Resource
   deriving (Eq, Show, Functor, Foldable, Traversable)
 
 instance FromJSON a => FromJSON (Resource a) where
-  parseJSON = withObject "resource" $ \o ->
-    Resource
-      <$> o .:? "resources" .!= mempty
-      <*> (o .:? "methods" .!= mempty <&> keyless)
+  parseJSON =
+    Aeson.withObject "resource" $ \o ->
+      Resource
+        <$> o .:? "resources" .!= mempty
+        <*> (o .:? "methods" .!= mempty <&> keyless)
 
 newtype OAuth2 = OAuth2 {scopes :: Map Text Help}
   deriving (Eq, Show, ToJSON)
 
 instance FromJSON OAuth2 where
-  parseJSON = withObject "oauth2" $ \x -> do
-    y <- x .: "oauth2"
-    z <- y .: "scopes"
-    OAuth2 <$> traverse (.: "description") z
+  parseJSON =
+    Aeson.withObject "oauth2" $ \x -> do
+      y <- x .: "oauth2"
+      z <- y .: "scopes"
+      OAuth2 <$> traverse (.: "description") z
 
 data Label
   = Deprecated
@@ -366,18 +369,16 @@ data Label
   deriving (Eq, Show)
 
 instance FromJSON Label where
-  parseJSON = withText "label" $ \t ->
-    case t of
+  parseJSON =
+    Aeson.withText "label" $ \case
       "deprecated" -> pure Deprecated
       "limited_availability" -> pure LimitedAvailability
       "labs" -> pure Labs
-      _ ->
-        fail $
-          Text.unpack ("Unable to parse Label from: " <> t)
+      other -> fail $ Text.unpack ("Unable to parse Label from: " <> other)
 
 instance ToJSON Label where
   toJSON =
-    toJSON . \case
+    Aeson.toJSON . \case
       Deprecated -> "Deprecated" :: Text
       LimitedAvailability -> "Limited Availability"
       Labs -> "Labs"
@@ -397,6 +398,7 @@ data Description a = Description
     _dProtocol :: Text,
     _dBaseUrl :: Text,
     _dRootUrl :: Text,
+    _dBasePath :: Text,
     _dServicePath :: Text,
     _dBatchPath :: Text,
     _dParameters :: Map Local (Param a),
@@ -411,30 +413,32 @@ data Description a = Description
 makeClassy ''Description
 
 instance FromJSON a => FromJSON (Description a) where
-  parseJSON = withObject "description" $ \o ->
-    Description
-      <$> o .: "kind"
-      <*> o .: "discoveryVersion"
-      <*> o .: "id"
-      <*> o .: "name"
-      <*> o .: "version"
-      <*> o .:? "revision"
-      <*> o .: "title"
-      <*> o .: "description"
-      <*> o .: "icons"
-      <*> o .: "documentationLink"
-      <*> o .:? "labels" .!= mempty
-      <*> o .: "protocol"
-      <*> o .: "baseUrl"
-      <*> o .: "rootUrl"
-      <*> o .: "servicePath"
-      <*> o .: "batchPath"
-      <*> o .:? "parameters" .!= mempty
-      <*> o .:? "auth"
-      <*> o .:? "features" .!= mempty
-      <*> o .:? "schemas" .!= mempty
-      <*> o .:? "resources" .!= mempty
-      <*> (o .:? "methods" .!= mempty <&> keyless)
+  parseJSON =
+    Aeson.withObject "description" $ \o ->
+      Description
+        <$> o .: "kind"
+        <*> o .: "discoveryVersion"
+        <*> o .: "id"
+        <*> o .: "name"
+        <*> o .: "version"
+        <*> o .:? "revision"
+        <*> o .: "title"
+        <*> o .: "description"
+        <*> o .: "icons"
+        <*> o .: "documentationLink"
+        <*> o .:? "labels" .!= mempty
+        <*> o .: "protocol"
+        <*> o .: "baseUrl"
+        <*> o .: "rootUrl"
+        <*> o .: "basePath"
+        <*> o .: "servicePath"
+        <*> o .: "batchPath"
+        <*> o .:? "parameters" .!= mempty
+        <*> o .:? "auth"
+        <*> o .:? "features" .!= mempty
+        <*> o .:? "schemas" .!= mempty
+        <*> o .:? "resources" .!= mempty
+        <*> (o .:? "methods" .!= mempty <&> keyless)
 
 data Service a = Service
   { _sLibrary :: Text,
@@ -449,23 +453,21 @@ data Service a = Service
 makeClassy ''Service
 
 instance FromJSON a => FromJSON (Service a) where
-  parseJSON = withObject "service" $ \o ->
-    Service
-      <$> (o .: "library" <&> renameLibrary)
-      <*> (o .: "canonicalName" <&> upperHead . renameAbbrev)
-      <*> o .: "ownerName"
-      <*> o .: "ownerDomain"
-      <*> o .:? "packagePath"
-      <*> parseJSON (A.Object o)
+  parseJSON =
+    Aeson.withObject "service" $ \o ->
+      Service
+        <$> (o .: "library" <&> renameLibrary)
+        <*> (o .: "canonicalName" <&> upperHead . renameAbbrev)
+        <*> o .: "ownerName"
+        <*> o .: "ownerDomain"
+        <*> o .:? "packagePath"
+        <*> Aeson.parseJSON (Aeson.Object o)
 
 instance HasDescription (Service a) a where
   description = sDescription
 
 serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
-
-serviceParamsName :: Service a -> Global
-serviceParamsName = newGlobal . (<> "Params") . toCamel . _sCanonicalName
 
 scopeName :: HasCallStack => Text -> String
 scopeName full =

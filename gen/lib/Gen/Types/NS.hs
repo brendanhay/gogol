@@ -7,12 +7,11 @@ module Gen.Types.NS
   )
 where
 
-import Data.Aeson
+import qualified Data.Aeson as Aeson
 import qualified Data.CaseInsensitive as CI
-import Data.String
-import Data.Text (Text)
 import qualified Data.Text as Text
-import Data.Text.Manipulate
+import Gen.Prelude
+import Gen.Text (upperHead)
 
 newtype NS = UnsafeNS {unNS :: [Text]}
   deriving (Eq, Ord, Show)
@@ -42,10 +41,10 @@ collapseNS (UnsafeNS xs) = UnsafeNS (map CI.original (squeeze (map CI.mk xs)))
       [] -> []
 
 instance FromJSON NS where
-  parseJSON = withText "namespace" (pure . mkNS)
+  parseJSON = Aeson.withText "NS" (pure . mkNS)
 
 instance ToJSON NS where
-  toJSON = toJSON . renderNS
+  toJSON = Aeson.toJSON . renderNS
 
 renderNS :: NS -> Text
 renderNS (UnsafeNS xs) = Text.intercalate "." xs

@@ -1,9 +1,8 @@
 module Gen.Types.Map where
 
-import Control.Lens
-import Data.Map.Strict (Map)
+import Control.Lens ()
 import qualified Data.Map.Strict as Map
-import Data.Maybe
+import Gen.Prelude
 
 vMapMaybe ::
   Ord k =>

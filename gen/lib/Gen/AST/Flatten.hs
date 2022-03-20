@@ -3,26 +3,21 @@ module Gen.AST.Flatten
   )
 where
 
-import Control.Applicative
-import Control.Error
-import Control.Lens hiding (lens)
-import Control.Monad.Except
+import Control.Lens (use, uses)
+import qualified Control.Monad.Except as Except
 import qualified Data.Map.Strict as Map
-import Data.Maybe
 import qualified Data.Set as Set
-import Data.Text (Text)
-import GHC.Stack (HasCallStack)
 import Gen.Formatting
+import Gen.Prelude
 import Gen.Types
-import Prelude hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
   let canonical = _sCanonicalName s
 
   ps <- kvTraverseMaybe globalParam (s ^. dParameters)
-  rs <- Map.traverseWithKey (resource canonical "Resource") (s ^. dResources)
-  ms <- traverse (method canonical "Method") (s ^. dMethods)
+  rs <- Map.traverseWithKey (resource canonical ps "Resource") (s ^. dResources)
+  ms <- traverse (method canonical ps "Method") (s ^. dMethods)
   _ <- Map.traverseWithKey globalSchema (s ^. dSchemas)
   ss <- use schemas
 
@@ -44,13 +39,6 @@ globalSchema g = schema g Nothing
 
 localSchema :: Global -> Local -> Fix Schema -> AST Global
 localSchema g l = schema g (Just l)
-
--- -- unsafe due to depth first adding of a single schema's properties.
--- let r = globalise l
--- p <- uses schemas (Map.member r)
--- if p
---     then schema g (Just l) s
---     else schema r Nothing  s
 
 schema :: HasCallStack => Global -> Maybe Local -> Fix Schema -> AST Global
 schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
@@ -84,16 +72,16 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
           (False, Nothing, _) -> pure p
           (_, _, z : zs) -> name i (reference g z) zs
           (_, Just x, []) ->
-            throwError $
-              format
+            Except.throwError $
+              sformat
                 ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
                 g
                 ml
                 p
                 x
           (True, _, []) ->
-            throwError $
-              format
+            Except.throwError $
+              sformat
                 ("Unable to generate name for reserved schema: " % gid % ", " % shown % ", " % gid)
                 g
                 ml
@@ -128,14 +116,14 @@ localParam g l p = do
 resource ::
   HasCallStack =>
   Text ->
-  -- Map Local (Param Global) ->
+  Map Local (Param Global) ->
   Suffix ->
   Global ->
   Resource (Fix Schema) ->
   AST (Resource Global)
-resource canonical suf g r@Resource {..} = do
-  rs <- Map.traverseWithKey (resource canonical suf . reference g) _rResources
-  ms <- traverse (method canonical suf) _rMethods
+resource canonical globalParams suf g r@Resource {..} = do
+  rs <- Map.traverseWithKey (resource canonical globalParams suf . reference g) _rResources
+  ms <- traverse (method canonical globalParams suf) _rMethods
   pure
     $! r
       { _rResources = rs,
@@ -145,14 +133,16 @@ resource canonical suf g r@Resource {..} = do
 method ::
   HasCallStack =>
   Text ->
-  -- Map Local (Param Global) ->
+  Map Local (Param Global) ->
   Suffix ->
   Method (Fix Schema) ->
   AST (Method Global)
-method canonical suf m@Method {..} = do
-  params <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
+method canonical globalParams suf m@Method {..} = do
+  params <-
+    (<> globalParams)
+      <$> Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
 
-  let (typ', _) = mname canonical suf _mId
+  let (typ', _) = mname canonical _mId
 
   typ <- reserveType typ'
   b <- body typ
@@ -182,7 +172,7 @@ insert g s = do
   n <- use sCanonicalName
 
   case ms of
-    Just s' | s /= s' -> throwError (exists n s')
+    Just s' | s /= s' -> Except.throwError (exists n s')
     _ -> pure ()
 
   schemas %= Map.insert g s
@@ -190,7 +180,7 @@ insert g s = do
   pure g
   where
     exists n s' =
-      format
+      sformat
         ( "Schema exists: " % stext % " - " % gid
             % "\n\n[Current]\n"
             % shown

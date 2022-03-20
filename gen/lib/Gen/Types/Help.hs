@@ -7,22 +7,18 @@ module Gen.Types.Help
   )
 where
 
-import Data.Aeson
+import qualified Data.Aeson as Aeson
 import qualified Data.Char as Char
-import Data.Int (Int64)
-import Data.String
-import Data.Text (Text)
 import qualified Data.Text.Lazy as Text.Lazy
+import Gen.Prelude
 import qualified System.IO.Unsafe as Unsafe
 import Text.Pandoc (Pandoc, PandocError)
 import qualified Text.Pandoc as Pandoc
 
-type TextLazy = Text.Lazy.Text
-
 data Help
-  = Help ![Help]
-  | Pan !Pandoc !Text
-  | Raw !Text
+  = Help [Help]
+  | Pan Pandoc Text
+  | Raw Text
   deriving (Eq)
 
 instance Semigroup Help where
@@ -49,23 +45,24 @@ rawHelpText :: Text -> Help
 rawHelpText = Raw
 
 instance FromJSON Help where
-  parseJSON = withText "help" $ \t ->
-    case readMarkdown t of
-      Left e -> fail (show e)
-      Right x -> pure $! Pan x t
+  parseJSON =
+    Aeson.withText "help" $ \t ->
+      case readMarkdown t of
+        Left e -> fail (show e)
+        Right x -> pure $! Pan x t
 
 instance ToJSON Help where
-  toJSON = toJSON . Nest 0
+  toJSON = Aeson.toJSON . Nest 0
 
 data Desc = Desc !Int64 Help
 
 instance ToJSON Desc where
-  toJSON (Desc n h) = toJSON (wrapHelp (Text.Lazy.replicate n " ") h)
+  toJSON (Desc n h) = Aeson.toJSON (wrapHelp (Text.Lazy.replicate n " ") h)
 
 data Nest = Nest !Int64 Help
 
 instance ToJSON Nest where
-  toJSON = toJSON . renderHelp
+  toJSON = Aeson.toJSON . renderHelp
 
 renderHelp :: Nest -> TextLazy
 renderHelp (Nest n h) =

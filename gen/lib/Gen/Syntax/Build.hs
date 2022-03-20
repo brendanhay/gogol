@@ -2,9 +2,8 @@
 
 module Gen.Syntax.Build where
 
-import Data.String (IsString (..))
-import Data.Text (Text)
 import qualified Data.Text as Text
+import Gen.Prelude
 import Gen.Types.Id
 import Gen.Types.Schema (Ref (..))
 import Language.Haskell.Exts

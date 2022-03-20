@@ -11,33 +11,22 @@ module Gen.Types
   )
 where
 
-import Control.Applicative
-import Control.Lens hiding ((.=))
-import Control.Monad.Except
-import Control.Monad.State.Strict
-import Data.Aeson hiding (Array, Bool, String)
-import qualified Data.Attoparsec.Text as A
-import Data.Bifunctor
-import Data.CaseInsensitive (CI)
+import Control.Applicative (optional)
+import Control.Lens (lens, makeLenses, use, uses, view)
+import Data.Aeson ((.=))
+import qualified Data.Aeson as Aeson
+import qualified Data.Attoparsec.Text as Atto
 import qualified Data.CaseInsensitive as CI
 import qualified Data.Char as Char
 import Data.Function (on)
-import Data.List (sort)
-import Data.Map.Strict (Map)
+import qualified Data.List as List
 import qualified Data.Map.Strict as Map
-import Data.Maybe
-import Data.Ord
-import Data.Set (Set)
+import Data.Ord (Down (..))
 import qualified Data.Set as Set
-import Data.String
-import Data.Text (Text)
 import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Builder as Build
-import Data.Text.Manipulate
-import qualified Filesystem.Path.CurrentOS as Path
-import Formatting
-import GHC.Stack (HasCallStack)
+import qualified Data.Text.Lazy.Builder as Text.Builder
+import Gen.Formatting
+import Gen.Prelude hiding (Enum)
 import Gen.Text
 import Gen.Types.Data
 import Gen.Types.Help
@@ -45,31 +34,27 @@ import Gen.Types.Id
 import Gen.Types.Map
 import Gen.Types.NS
 import Gen.Types.Schema
+import qualified System.FilePath as FilePath
 import Text.EDE (Template)
-import Prelude hiding (Enum)
-
-type Error = LText.Text
-
-type Path = Path.FilePath
 
 newtype Version = Version Text
-  deriving (Eq, Show)
+  deriving (Show, Eq)
 
 instance ToJSON Version where
-  toJSON (Version v) = toJSON v
+  toJSON (Version v) = Aeson.toJSON v
 
 fver :: Format a (Version -> a)
-fver = later (\(Version v) -> Build.fromText v)
+fver = later (\(Version v) -> Text.Builder.fromText v)
 
 data Release
   = Sandbox
   | Dev (Maybe Int) (Maybe Char)
   | Alpha (Maybe Int) (Maybe Char)
   | Beta (Maybe Int) (Maybe Char)
-  deriving (Eq, Ord, Show)
+  deriving stock (Eq, Ord, Show)
 
 data ModelVersion = ModelVersion Double (Maybe Release)
-  deriving (Eq, Show)
+  deriving stock (Show, Eq)
 
 instance Ord ModelVersion where
   compare (ModelVersion an ar) (ModelVersion bn br) =
@@ -82,7 +67,7 @@ instance Ord ModelVersion where
 parseVersion :: Text -> Either String ModelVersion
 parseVersion x =
   first (mappend (Text.unpack x) . mappend " -> ") $
-    A.parseOnly (preface *> (empty' <|> version) <* A.endOfInput) x
+    Atto.parseOnly (preface *> (empty' <|> version) <* Atto.endOfInput) x
   where
     empty' = ModelVersion 0 <$> (alpha <|> beta <|> exp')
 
@@ -92,44 +77,44 @@ parseVersion x =
         <*> (alpha <|> beta <|> sandbox <|> dev <|> suffix <|> pure Nothing)
 
     preface =
-      A.takeWhile (/= '_') *> void (A.char '_') <|> pure ()
+      Atto.takeWhile (/= '_') *> void (Atto.char '_') <|> pure ()
 
     protoVersionParser = do
-      n <- A.many1 A.digit
-      _ <- A.char 'p'
-      p <- A.many1 A.digit
+      n <- Atto.many1 Atto.digit
+      _ <- Atto.char 'p'
+      p <- Atto.many1 Atto.digit
       return (read (n ++ "." ++ p) :: Double)
 
     number =
-      A.takeWhile (/= 'v') *> A.char 'v' *> (protoVersionParser <|> A.double)
+      Atto.takeWhile (/= 'v') *> Atto.char 'v' *> (protoVersionParser <|> Atto.double)
 
     dev =
-      A.string "dev"
-        *> (Dev <$> optional A.decimal <*> optional A.letter)
+      Atto.string "dev"
+        *> (Dev <$> optional Atto.decimal <*> optional Atto.letter)
         <&> Just
 
     alpha =
-      A.string "alpha"
-        *> (Alpha <$> optional A.decimal <*> optional A.letter)
+      Atto.string "alpha"
+        *> (Alpha <$> optional Atto.decimal <*> optional Atto.letter)
         <&> Just
 
     beta =
-      (A.string "beta" <|> A.string "b")
-        *> (Beta <$> optional A.decimal <*> optional A.letter)
+      (Atto.string "beta" <|> Atto.string "b")
+        *> (Beta <$> optional Atto.decimal <*> optional Atto.letter)
         <&> Just
 
-    sandbox = Just Sandbox <$ A.string "sandbox"
+    sandbox = Just Sandbox <$ Atto.string "sandbox"
 
-    exp' = Just Sandbox <$ A.string "exp" <* A.decimal @Integer
+    exp' = Just Sandbox <$ Atto.string "exp" <* Atto.decimal @Integer
 
-    suffix = A.takeWhile Char.isAlpha *> pure Nothing <* A.endOfInput
+    suffix = Atto.takeWhile Char.isAlpha *> pure Nothing <* Atto.endOfInput
 
 data Model = Model
   { modelName :: Text,
     modelPrefix :: Text,
     modelVersion :: ModelVersion,
-    modelPath :: Path
-  }
+    modelPath :: FilePath
+  } deriving stock (Show)
 
 instance Eq Model where
   (==) = on (==) modelPrefix
@@ -139,18 +124,18 @@ instance Ord Model where
     on compare modelPrefix a b
       <> on compare (Down . modelVersion) a b
 
-modelFromPath :: HasCallStack => Path -> Model
+modelFromPath :: HasCallStack => FilePath -> Model
 modelFromPath x = Model n p v x
   where
     n =
-      Text.init
-        . Text.intercalate "/"
+      Text.intercalate "/"
         . drop 1
-        . dropWhile (/= "models")
-        $ Text.split (== '/') p
+        . List.dropWhile (/= "models")
+        . Text.split (== '/')
+        $ p
 
-    p = toTextIgnore (Path.parent (Path.parent x))
-    v = either error id $ parseVersion (toTextIgnore (Path.dirname x))
+    p = Text.pack $ FilePath.takeDirectory (FilePath.takeDirectory x)
+    v = either error id . parseVersion . Text.pack $ FilePath.takeDirectory x
 
 data Templates = Templates
   { cabalTemplate :: Template,
@@ -188,17 +173,14 @@ sumNS = (<> "Internal.Sum") . tocNS
 
 exposedModules :: Library -> [NS]
 exposedModules l =
-  sort $
+  List.sort $
     tocNS l :
     typesNS l :
     map _actNamespace (_apiResources (_lAPI l))
       ++ map _actNamespace (_apiMethods (_lAPI l))
 
 otherModules :: Library -> [NS]
-otherModules s = sort [prodNS s, sumNS s]
-
-toTextIgnore :: Path -> Text
-toTextIgnore = either id id . Path.toText
+otherModules s = List.sort [prodNS s, sumNS s]
 
 data Library = Library
   { _lVersion :: Version,
@@ -217,7 +199,7 @@ instance HasService Library Global where
 
 instance ToJSON Library where
   toJSON l =
-    object
+    Aeson.object
       -- Library
       [ "libraryName" .= (l ^. sLibrary),
         "libraryTitle" .= renameTitle (l ^. dTitle),
@@ -247,7 +229,7 @@ data TType
   | TMaybe TType
   | TList TType
   | TMap TType TType
-  deriving (Eq, Show)
+  deriving (Show, Eq)
 
 textual :: TType -> Bool
 textual = \case
@@ -276,7 +258,7 @@ data Derive
   | DMonoid
   | DIsString
   | DGeneric
-  deriving (Eq, Show)
+  deriving (Show, Eq)
 
 data Solved = Solved
   { _additional :: Bool,
@@ -339,7 +321,7 @@ makeLenses ''Memo
 instance HasService Memo (Fix Schema) where
   service = context
 
-type AST = ExceptT Error (State Memo)
+type AST = ExceptT Text (State Memo)
 
 reserveType :: Global -> AST Global
 reserveType g = do

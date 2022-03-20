@@ -1,15 +1,11 @@
 module Gen.Syntax.JSON where
 
 import Control.Lens (view, (^.))
-import qualified Control.Monad as Monad
-import Data.Either
 import qualified Data.Foldable as Foldable
 import qualified Data.List as List
-import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
-import Data.Maybe
-import Data.Text (Text)
 import qualified Data.Text as Text
+import Gen.Prelude
 import Gen.Syntax.Build
 import Gen.Syntax.Record
 import Gen.Types
@@ -39,7 +35,7 @@ jsonInstances g (Map.toList -> rs) = [decodeJSON, encodeJSON]
         [(k, v)]
           | _additional v ->
             encodeInst
-              [ iWildcard "toJSON" g head defaultObject [var "Core.toJSON" `app` var (fname k)]
+              [ iWildcard "toJSON" g List.head defaultObject [var "Core.toJSON" `app` var (fname k)]
               ]
         --
         _other ->

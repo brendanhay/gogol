@@ -3,30 +3,24 @@ module Gen.AST.Render
   )
 where
 
-import Control.Applicative
-import Control.Error
-import Control.Lens hiding (enum, lens)
-import qualified Data.ByteString.Builder as BB
-import qualified Data.ByteString.Char8 as C8
-import Data.Char (isSpace)
-import Data.Map.Strict (Map)
+import Control.Error ()
+import Control.Lens ()
+import qualified Control.Monad.Except as Except
+import qualified Data.ByteString.Builder as Builder
+import qualified Data.ByteString.Char8 as ByteString.Char8
+import qualified Data.Char as Char
 import qualified Data.Map.Strict as Map
-import Data.Maybe
-import Data.String
 import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Encoding as LText
-import Data.Traversable (for)
+import qualified Data.Text.Lazy as Text.Lazy
+import qualified Data.Text.Lazy.Encoding as Text.Lazy
 import Gen.AST.Solve (getSolved)
 import Gen.Formatting
+import Gen.Prelude
 import Gen.Syntax
 import Gen.Syntax.Build
 import Gen.Types
-import qualified HIndent
-import qualified HIndent.Types as HIndent
 import Language.Haskell.Exts.Build (name)
 import Language.Haskell.Exts.Pretty as PP
-import Prelude hiding (sum)
 
 render :: Service Solved -> AST (API, [Data])
 render s = do
@@ -73,7 +67,7 @@ renderSchema s = go (_schema s)
         ctor ts =
           Fun' (cname k) (Just help)
             <$> (pp None (smartCtorSig k ts) <&> comments ts)
-            <*> pp Indent (smartCtorDecl k ts)
+            <*> pp Print (smartCtorDecl k ts)
 
         help =
           rawHelpText $
@@ -90,9 +84,8 @@ renderAPI s = do
 
   config <- renderConfig
   aliases <- renderScopes (maybe mempty scopes (s ^. dAuth))
-  params <- renderParams
 
-  pure (API rs ms config aliases params)
+  pure (API rs ms config aliases)
   where
     alias = aname (_sCanonicalName s)
     sname = name (serviceName s)
@@ -104,10 +97,10 @@ renderAPI s = do
       where
         h =
           sformat
-            ( "Default request referring to version @" % stext
+            ( "Default configurat referring to version @" % stext
                 % "@ of the "
                 % stext
-                % ". This contains the host and root path used as a starting point for constructing service requests."
+                % ". This sets the host and port used as a starting point for constructing service requests."
             )
             (s ^. dVersion)
             (s ^. dTitle)
@@ -125,21 +118,6 @@ renderAPI s = do
               _scopeHelp = help
             }
 
-    pname = serviceParamsName s
-
-    (pdecl, pfields) = paramsDecl (_sDescription s) pname
-
-    renderParams = do
-      pcsig <- pp None (smartCtorSig pname pfields)
-      pctor <- pp Print (smartCtorDecl pname pfields)
-
-      Prod (dname pname) Nothing
-        <$> pp None pdecl
-        <*> pure (recordFields pfields)
-        <*> pp None (recordDerive [DEq, DOrd, DShow, DGeneric])
-        <*> pure []
-        <*> pure (Fun' (cname pname) Nothing pcsig pctor)
-
 renderMethod :: Service Solved -> Suffix -> Method Solved -> AST Action
 renderMethod s suf m@Method {..} = do
   typ <- reserveType typ'
@@ -151,20 +129,13 @@ renderMethod s suf m@Method {..} = do
       Nothing -> error "failed to render the schema"
       Just ok -> pure ok
 
-  upload <- pp Print $ uploadInstance s m x
-  download <- pp Print $ downloadInstance s m x
-  request <- pp Print $ requestInstance s m x
-
-  let instances =
-        request :
-        [download | _mSupportsMediaDownload && not _mSupportsMediaUpload]
-          ++ [upload | _mSupportsMediaUpload]
+  instances <- traverse (pp Print) (requestInstances s m x)
 
   pure $! Action (commasep _mId) _unique root _mDescription (replaceInstances instances datatype)
   where
     root = collapseNS (tocNS s <> UnsafeNS namespace)
 
-    (typ', namespace) = mname (_sCanonicalName s) suf _mId
+    (typ', namespace) = mname (_sCanonicalName s) _mId
 
     replaceInstances is = \case
       Prod n h d fs ds _ c -> Prod n h d fs ds is c
@@ -181,35 +152,27 @@ renderResource s suf Resource {..} =
     <*> traverse (renderMethod s suf) _rMethods
 
 data PP
-  = Indent
-  | Print
+  = Print
   | None
   deriving (Eq)
 
-pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
-pp i x
-  | i == Indent = result (HIndent.reformat HIndent.defaultConfig Nothing Nothing p)
-  | otherwise = pure (LText.pack (C8.unpack p))
+pp :: (Pretty a, Show a) => PP -> a -> AST TextLazy
+pp indent = pure . Text.Lazy.pack . ByteString.Char8.unpack . print'
   where
-    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . BB.toLazyByteString)
+    print' =
+      ByteString.Char8.dropWhile Char.isSpace
+        . ByteString.Char8.pack
+        . prettyPrintStyleMode style' mode'
 
-    e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
-
-    p =
-      C8.dropWhile isSpace
-        . C8.pack
-        $ prettyPrintStyleMode s m x
-
-    s =
+    style' =
       style
         { mode = PageMode,
           lineLength = 80,
           ribbonsPerLine = 1.5
         }
 
-    m
-      | i == Print = defaultMode
-      | i == Indent = defaultMode
+    mode'
+      | indent == Print = defaultMode
       | otherwise =
         defaultMode
           { layout = PPNoLayout,
@@ -217,13 +180,13 @@ pp i x
           }
 
 -- FIXME: dirty hack to render smart ctor parameter comments.
-comments :: Map Local Solved -> Rendered -> Rendered
+comments :: Map Local Solved -> TextLazy -> TextLazy
 comments (Map.toList -> rs) =
-  LText.replace "::" "\n    :: "
-    . LText.intercalate "\n    -> "
+  Text.Lazy.replace "::" "\n    :: "
+    . Text.Lazy.intercalate "\n    -> "
     . zipWith rel ps
-    . map LText.strip
-    . LText.splitOn "->"
+    . map Text.Lazy.strip
+    . Text.Lazy.splitOn "->"
   where
     ks = filter (parameter . _schema . snd) rs
     ps = map Just ks ++ repeat Nothing
@@ -231,7 +194,7 @@ comments (Map.toList -> rs) =
     rel Nothing t = t
     rel (Just (l, s)) t =
       t <> "\n       -- ^ "
-        <> maybe mempty (LText.drop 11 . renderHelp . Nest 7) (s ^. iDescription)
+        <> maybe mempty (Text.Lazy.drop 11 . renderHelp . Nest 7) (s ^. iDescription)
         <> " See '"
         <> fromString (PP.prettyPrint (fname l))
         <> "'."

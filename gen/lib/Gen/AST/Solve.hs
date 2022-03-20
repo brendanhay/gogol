@@ -4,17 +4,14 @@ module Gen.AST.Solve
   )
 where
 
-import Control.Applicative
-import Control.Lens hiding (enum)
-import Control.Monad.Except
-import Data.List (intersect)
-import Data.Map.Strict (Map)
+import Control.Lens (use, uses)
+import qualified Control.Monad.Except as Except
+import qualified Data.List as List
 import qualified Data.Map.Strict as Map
-import Data.Maybe
 import Gen.Formatting hiding (list)
+import Gen.Prelude
 import Gen.Text
 import Gen.Types
-import Prelude hiding (sum)
 
 solve :: Service Global -> AST (Service Solved)
 solve s = do
@@ -57,8 +54,8 @@ getSchema g = do
   case Map.lookup g ss of
     Just x -> pure x
     Nothing ->
-      throwError $
-        format
+      Except.throwError $
+        sformat
           ("Missing Schema: " % gid % "\n" % shown)
           g
           (map global (Map.keys ss))
@@ -77,8 +74,8 @@ getType g = loc "getType" g $ memo Gen.Types.typed g go
         | ref r /= g -> req <$> getType (ref r)
         --            | otherwise  -> res (TType (ref r))
         | otherwise ->
-          throwError $
-            format
+          Except.throwError $
+            sformat
               ("Ref cycle detected between: " % gid % " == " % shown)
               g
               s
@@ -106,7 +103,7 @@ getDerive g = loc "getDerive" g $ memo Gen.Types.derived g go
       SRef {} -> pure base
       SLit _ l -> pure (literal l)
       SEnm {} -> pure enum
-      SArr _ (Arr e) -> mappend list . intersect base <$> getDerive e
+      SArr _ (Arr e) -> mappend list . List.intersect base <$> getDerive e
       SObj _ (Obj _ ps) -> foldM props base (Map.elems ps)
 
     literal = \case
@@ -121,7 +118,7 @@ getDerive g = loc "getDerive" g $ memo Gen.Types.derived g go
       -- FIXME: Add numeric cases
       _ -> [DRead, DNum, DIntegral, DReal] <> enum
 
-    props ds x = intersect ds <$> getDerive x
+    props ds x = List.intersect ds <$> getDerive x
 
     list = [DMonoid]
     enum = [DOrd, DEnum] <> base

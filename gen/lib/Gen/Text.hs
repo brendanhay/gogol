@@ -1,18 +1,19 @@
-module Gen.Text where
+module Gen.Text
+  ( module Gen.Text,
+    upperHead,
+    lowerHead,
+    toCamel,
+    splitWords,
+  )
+where
 
-import Control.Error
-import Data.Char
-import qualified Data.Foldable as Fold
+import Control.Error ()
+import qualified Data.Char as Char
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
-import Data.Text (Text)
 import qualified Data.Text as Text
-import Data.Text.ICU (Regex)
-import Data.Text.ICU.Replace (Replace)
-import qualified Data.Text.ICU.Replace as RE
 import Data.Text.Manipulate
-import Text.Parsec.Language (haskellDef)
-import Text.Parsec.Token (reservedNames)
+import Gen.Prelude
 
 safeHead :: Text -> Maybe Text
 safeHead = fmap (Text.singleton . fst) . Text.uncons
@@ -51,13 +52,13 @@ renameBranch t
       | Text.length x <= 2 = Text.toUpper x
       | otherwise = cat $ split x
 
-    cat = Fold.foldMap (Text.intercalate "_" . map component . Text.split dot)
+    cat = foldMap (Text.intercalate "_" . map component . Text.split dot)
     split = Text.split separator
 
     component x
       | Text.length x <= 1 = x
-      | isDigit (Text.last x) = Text.toUpper x
-      | Text.all isUpper x = toPascal (Text.toLower x)
+      | Char.isDigit (Text.last x) = Text.toUpper x
+      | Text.all Char.isUpper x = toPascal (Text.toLower x)
       | otherwise = toPascal x
 
     operator x =
@@ -122,9 +123,36 @@ renameReserved x
           "Left",
           "Right",
           "Secure",
-          "TimeOfDay"
+          "TimeOfDay",
+          "let",
+          "in",
+          "case",
+          "of",
+          "if",
+          "then",
+          "else",
+          "data",
+          "type",
+          "class",
+          "default",
+          "deriving",
+          "do",
+          "import",
+          "infix",
+          "infixl",
+          "infixr",
+          "instance",
+          "module",
+          "newtype",
+          "where",
+          "primitive",
+          "as",
+          "qualified",
+          "hiding",
+          "foreign",
+          "import",
+          "primitive",
+          "_ccall_",
+          "_casm_",
+          "forall"
         ]
-          ++ map Text.pack (reservedNames haskellDef)
-
-replaceAll :: Text -> [(Regex, Replace)] -> Text
-replaceAll = Fold.foldl' (flip (uncurry RE.replaceAll))

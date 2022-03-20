@@ -1,16 +1,7 @@
 module Gen.Syntax.Type where
 
-import Control.Lens (view, (^.))
-import qualified Control.Monad as Monad
-import Data.Either
-import qualified Data.Foldable as Foldable
-import qualified Data.List as List
-import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
-import Data.Maybe
-import qualified Data.Set as Set
-import Data.Text (Text)
 import qualified Data.Text as Text
+import Gen.Prelude
 import Gen.Syntax.Build
 import Gen.Types
 import Language.Haskell.Exts hiding (Alt)

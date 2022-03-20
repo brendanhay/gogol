@@ -1,14 +1,15 @@
 module Gen.AST where
 
-import Control.Monad.Except
-import Control.Monad.State.Strict
+import qualified Control.Monad.Except as Except
+import qualified Control.Monad.State.Strict as State
 import Gen.AST.Flatten (flatten)
 import Gen.AST.Render (render)
 import Gen.AST.Solve (solve)
+import Gen.Prelude
 import Gen.Types
 
-runAST :: Version -> Service (Fix Schema) -> Either Error Library
-runAST v s = evalState (runExceptT go) (initial s)
+runAST :: Version -> Service (Fix Schema) -> Either Text Library
+runAST v s = State.evalState (Except.runExceptT go) (initial s)
   where
     go = do
       gs <- flatten s

@@ -1,11 +1,9 @@
 module Gen.Types.Data where
 
-import Data.Aeson hiding (Array, Bool, String)
-import Data.List (sortOn)
-import Data.Maybe
-import Data.Text (Text)
+import Data.Aeson as Aeson
+import Data.List as List
 import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
+import Gen.Prelude
 import Gen.Types.Help
 import Gen.Types.Id
 import Gen.Types.NS
@@ -15,14 +13,12 @@ import Prelude hiding (Enum)
 
 default (Text)
 
-type Rendered = LText.Text
-
 newtype Syn a = Syn {syntax :: a}
 
 instance Pretty a => ToJSON (Syn a) where
   toJSON = toJSON . prettyPrint . syntax
 
-data Fun = Fun' (Name ()) (Maybe Help) Rendered Rendered
+data Fun = Fun' (Name ()) (Maybe Help) TextLazy TextLazy
 
 instance ToJSON Fun where
   toJSON (Fun' n h s d) =
@@ -55,7 +51,7 @@ instance ToJSON Field where
 
 data Data
   = Sum (Name ()) (Maybe Help) [Branch]
-  | Prod (Name ()) (Maybe Help) Rendered [Field] Rendered [Rendered] Fun
+  | Prod (Name ()) (Maybe Help) TextLazy [Field] TextLazy [TextLazy] Fun
 
 instance ToJSON Data where
   toJSON = \case
@@ -102,7 +98,7 @@ instance ToJSON Action where
 
 data Scope = Scope
   { _scopeName :: Name (),
-    _scopeData :: Rendered,
+    _scopeData :: TextLazy,
     _scopeHelp :: Help
   }
 
@@ -118,8 +114,7 @@ data API = API
   { _apiResources :: [Action],
     _apiMethods :: [Action],
     _apiConfig :: Fun,
-    _apiScopes :: [Scope],
-    _apiParams :: Data
+    _apiScopes :: [Scope]
   }
 
 instance ToJSON API where
@@ -128,6 +123,5 @@ instance ToJSON API where
       [ "resources" .= sortOn _actId _apiResources,
         "methods" .= sortOn _actId _apiMethods,
         "config" .= _apiConfig,
-        "scopes" .= _apiScopes,
-        "params" .= _apiParams
+        "scopes" .= _apiScopes
       ]
