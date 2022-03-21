@@ -1,177 +1,155 @@
-{-# LANGUAGE TemplateHaskell #-}
-
 module Main where
 
-import Control.Error
-import Control.Lens hiding ((<.>))
-import Control.Monad.State
 import qualified Data.IORef as IORef
-import Data.List (nub, sort)
-import Data.String
+import qualified Data.List as List
 import qualified Data.Text as Text
-import qualified Filesystem as FS
-import Filesystem.Path.CurrentOS
 import Gen.AST
 import Gen.Formatting
 import Gen.IO
-import qualified Gen.JSON as JS
+import Gen.JSON
+import Gen.Prelude
 import qualified Gen.Tree as Tree
 import Gen.Types hiding (info)
-import Options.Applicative
+import qualified Options.Applicative as Options
+import qualified System.Directory as Directory
 
-data Opt = Opt
-  { _optOutput :: Path,
-    _optModels :: [Path],
-    _optServices :: Path,
-    _optTemplates :: Path,
-    _optAssets :: Path,
-    _optVersion :: Version
+data Options = Options
+  { optionOutput :: FilePath,
+    optionModels :: [FilePath],
+    optionServices :: FilePath,
+    optionTemplates :: FilePath,
+    optionAssets :: FilePath,
+    optionVersion :: Version
   }
-  deriving (Show)
+  deriving stock (Show)
 
-makeLenses ''Opt
-
-parser :: Parser Opt
+parser :: Options.Parser Options
 parser =
-  Opt
-    <$> option
-      isPath
-      ( long "out"
-          <> metavar "DIR"
-          <> help "Directory to place the generated library."
+  Options
+    <$> Options.strOption
+      ( Options.long "out"
+          <> Options.metavar "DIR"
+          <> Options.help "Directory to place the generated library."
       )
-    <*> some
-      ( option
-          isPath
-          ( long "model"
-              <> metavar "DIR"
-              <> help "Directory for service models."
+    <*> Options.some
+      ( Options.strOption
+          ( Options.long "model"
+              <> Options.metavar "DIR"
+              <> Options.help "Directory for service models."
           )
       )
-    <*> option
-      isPath
-      ( long "services"
-          <> metavar "DIR"
-          <> help "Directory containing model configurations."
+    <*> Options.strOption
+      ( Options.long "services"
+          <> Options.metavar "DIR"
+          <> Options.help "Directory containing model configurations."
       )
-    <*> option
-      isPath
-      ( long "templates"
-          <> metavar "DIR"
-          <> help "Directory containing ED-E templates."
+    <*> Options.strOption
+      ( Options.long "templates"
+          <> Options.metavar "DIR"
+          <> Options.help "Directory containing ED-E templates."
       )
-    <*> option
-      isPath
-      ( long "assets"
-          <> metavar "DIR"
-          <> help "Directory containing static files to copy to generated libraries."
+    <*> Options.strOption
+      ( Options.long "assets"
+          <> Options.metavar "DIR"
+          <> Options.help "Directory containing static files to copy to generated libraries."
       )
-    <*> option
+    <*> Options.option
       version
-      ( long "version"
-          <> metavar "VER"
-          <> help "Version of the library to generate."
+      ( Options.long "version"
+          <> Options.metavar "VER"
+          <> Options.help "Version of the library to generate."
       )
 
-isPath :: ReadM Path
-isPath = eitherReader (Right . fromText . Text.dropWhileEnd (== '/') . fromString)
+version :: Options.ReadM Version
+version = Options.eitherReader (Right . Version . Text.pack)
 
-version :: ReadM Version
-version = eitherReader (Right . Version . Text.pack)
+info :: Options.ParserInfo Options
+info = Options.info (Options.helper <*> parser) Options.fullDesc
 
-options :: ParserInfo Opt
-options = info (helper <*> parser) fullDesc
-
-validate :: MonadIO m => Opt -> m Opt
-validate o = flip execStateT o $ do
-  sequence_
-    [ check optOutput,
-      check optServices,
-      check optTemplates,
-      check optAssets
-    ]
-  mapM canon (o ^. optModels) >>= assign optModels
-  where
-    check :: (MonadIO m, MonadState s m) => Lens' s Path -> m ()
-    check l = gets (view l) >>= canon >>= assign l
-
-    canon :: MonadIO m => Path -> m Path
-    canon = liftIO . FS.canonicalizePath
+prefs :: Options.ParserPrefs
+prefs = Options.prefs Options.showHelpOnError
 
 main :: IO ()
 main = do
-  Opt {..} <- customExecParser (prefs showHelpOnError) options >>= validate
+  Options {..} <- Options.customExecParser prefs info
 
-  let ms = nub . sort $ map modelFromPath _optModels
-      i = length ms
+  let models = List.nub . List.sort . map modelFromPath $ optionModels
+
+      modelCount = length models
+      modelTotal = length optionModels
 
   skipped <- IORef.newIORef []
 
-  run $ do
-    title "Initialising..." <* done
-    title ("Loading templates from " % path) _optTemplates
+  title "Initialising..."
 
-    let load = readTemplate _optTemplates
-        skip = IORef.modifyIORef skipped . (:)
+  let load = readTemplate optionTemplates
+      skip = IORef.modifyIORef skipped . (:)
 
-    tmpl <-
-      Templates
-        <$> load "cabal.ede"
-        <*> load "toc.ede"
-        <*> load "readme.ede"
-        <*> load "types.ede"
-        <*> load "prod.ede"
-        <*> load "sum.ede"
-        <*> load "action.ede"
-        <* done
+  title ("Loading templates from " % string) optionTemplates
 
-    title "Selecting new service models..."
+  templates <-
+    Templates
+      <$> load "cabal.ede"
+      <*> load "toc.ede"
+      <*> load "readme.ede"
+      <*> load "types.ede"
+      <*> load "prod.ede"
+      <*> load "sum.ede"
+      <*> load "action.ede"
+      <* done
 
-    say ("Found " % int % " model specifications.") (length _optModels)
-    say ("Selected " % int % " newest models.") i
+  title "Selecting new service models..."
+
+  say ("Found " % int % " model specifications.") modelTotal
+  say ("Selected " % int % " newest models.") modelCount
+
+  done
+
+  for_ (zip [1 :: Int ..] models) $ \(n, Model {..}) -> do
+    let configPath = optionServices </> Text.unpack modelName <.> "json"
+
+    configured <- Directory.doesFileExist configPath
+
+    if not configured
+      then skip modelName
+      else do
+        title ("[" % int % "/" % int % "] model:" % stext) n modelCount modelName
+
+        definition <-
+          sequence [loadObject configPath, loadObject modelPath]
+            >>= parseObject . jsonMerge
+
+        say ("Successfully parsed '" % stext % "' API definition.") modelName
+
+        library <-
+          either (error . Text.unpack) pure $
+            runAST optionVersion definition
+
+        say ("Creating " % stext % " package.") (library ^. dTitle)
+
+        tree <-
+          either (error . Text.unpack) pure (Tree.populate optionOutput templates library)
+            >>= Tree.fold createDir writeOrTouch
+
+        say
+          ("Successfully rendered " % stext % "-" % fver % " package")
+          (library ^. dName)
+          (library ^. lVersion)
+
+        copyDir optionAssets (Tree.root tree)
 
     done
 
-    forM_ (zip [1 :: Int ..] ms) $ \(n, Model {..}) -> do
-      let configPath = _optServices </> fromText modelName <.> "json"
+  names <- IORef.readIORef skipped
 
-      configured <- isFile configPath
+  unless (null names) $ do
+    let count = length names
 
-      if not configured
-        then lift (skip modelName)
-        else do
-          title ("[" % int % "/" % int % "] model:" % stext) n i modelName
+    title
+      ("Skipped " % int % " models due to missing configuration(s):\n " % list stext)
+      count
+      names
 
-          definition <-
-            sequence [JS.load configPath, JS.load modelPath]
-              >>= hoistEither . JS.parse . JS.merge
+    done
 
-          say ("Successfully parsed '" % stext % "' API definition.") modelName
-
-          library <- hoistEither (runAST _optVersion definition)
-
-          say ("Creating " % stext % " package.") (library ^. dTitle)
-
-          tree <-
-            hoistEither (Tree.populate _optOutput tmpl library)
-              >>= Tree.fold createDir writeOrTouch
-
-          say
-            ("Successfully rendered " % stext % "-" % fver % " package")
-            (library ^. dName)
-            (library ^. lVersion)
-
-          copyDir _optAssets (Tree.root tree)
-
-      done
-
-    names <- lift (IORef.readIORef skipped)
-
-    unless (Prelude.null names) $ do
-      let count = length names
-
-      title ("Skipped " % int % " models due to missing configuration(s):\n " % list stext) count names
-
-      done
-
-    title ("Successfully processed " % int % " configured models.") i
+  title ("Successfully processed " % int % " configured models.") modelCount

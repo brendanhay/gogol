@@ -1,82 +1,83 @@
 module Gen.IO where
 
-import Control.Error
-import Control.Monad.Except
-import Data.Bifunctor (first)
-import Data.ByteString (ByteString)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import Data.Text.Lazy.Builder (toLazyText)
-import qualified Data.Text.Lazy.IO as LText
-import qualified Filesystem as FS
-import Filesystem.Path.CurrentOS
+import qualified Data.Aeson as Aeson
+import qualified Data.Aeson.Types as Aeson.Types
+import qualified Data.ByteString as ByteString
+import qualified Data.Text.Lazy.Builder as Text.Builder
+import qualified Data.Text.Lazy.IO as Text.Lazy.IO
 import Gen.Formatting
-import Gen.Types
-import System.IO
+import Gen.Prelude
+import qualified System.Directory as Directory
+import qualified System.FilePath as FilePath
+import qualified System.IO as IO
 import qualified Text.EDE as EDE
-import qualified UnexceptionalIO as UIO
 
-run :: ExceptT Error IO a -> IO a
-run = runScript . fmapLT (Text.pack . LText.unpack)
+title :: MonadIO m => Format (m ()) a -> a
+title m = runFormat m (liftIO . Text.Lazy.IO.putStrLn . Text.Builder.toLazyText)
 
-io :: MonadIO m => IO a -> ExceptT Error m a
-io = ExceptT . fmap (first (LText.pack . show)) . liftIO . UIO.run . UIO.fromIO
-
-title :: MonadIO m => Format (ExceptT Error m ()) a -> a
-title m = runFormat m (io . LText.putStrLn . toLazyText)
-
-say :: MonadIO m => Format (ExceptT Error m ()) a -> a
+say :: MonadIO m => Format (m ()) a -> a
 say = title . (" -> " %)
 
-done :: MonadIO m => ExceptT Error m ()
+done :: MonadIO m => m ()
 done = title ""
 
-isFile :: MonadIO m => Path -> ExceptT Error m Bool
-isFile = io . FS.isFile
+loadObject :: MonadIO m => FilePath -> m Aeson.Object
+loadObject = readByteString >=> either error pure . Aeson.eitherDecodeStrict'
 
-readBSFile :: MonadIO m => Path -> ExceptT Error m ByteString
-readBSFile f = do
-  p <- isFile f
-  if p
-    then say ("Reading " % path) f >> io (FS.readFile f)
-    else failure ("Missing " % path) f
+parseObject :: (MonadIO m, FromJSON a) => Aeson.Object -> m a
+parseObject = either error pure . Aeson.Types.parseEither Aeson.parseJSON . Aeson.toJSON
 
-writeLTFile :: MonadIO m => Path -> LText.Text -> ExceptT Error m ()
-writeLTFile f t = do
-  say ("Writing " % path) f
-  io . FS.withFile f FS.WriteMode $ \h -> do
-    hSetEncoding h utf8
-    LText.hPutStr h t
+readByteString :: MonadIO m => FilePath -> m ByteString
+readByteString f =
+  liftIO $ do
+    exists <- Directory.doesFileExist f
 
-touchFile :: MonadIO m => Path -> ExceptT Error m ()
-touchFile f = do
-  p <- isFile f
-  unless p $
-    writeLTFile f mempty
+    if exists
+      then say ("Reading " % string) f >> ByteString.readFile f
+      else error (formatToString ("Missing " % string) f)
 
-writeOrTouch :: MonadIO m => Path -> Maybe LText.Text -> ExceptT Error m ()
-writeOrTouch x = maybe (touchFile x) (writeLTFile x)
+writeByteString :: MonadIO m => FilePath -> ByteString -> m ()
+writeByteString f bs =
+  liftIO $ do
+    say ("Writing " % string) f
 
-createDir :: MonadIO m => Path -> ExceptT Error m ()
-createDir d = do
-  p <- io (FS.isDirectory d)
-  unless p $ do
-    say ("Creating " % path) d
-    io (FS.createTree d)
+    IO.withFile f IO.WriteMode $ \h -> do
+      IO.hSetEncoding h IO.utf8
+      ByteString.hPutStr h bs
 
-copyDir :: MonadIO m => Path -> Path -> ExceptT Error m ()
-copyDir src dst = io (FS.listDirectory src >>= mapM_ copy)
+touchFile :: MonadIO m => FilePath -> m ()
+touchFile f =
+  liftIO $ do
+    exists <- Directory.doesPathExist f
+
+    unless exists $
+      writeByteString f mempty
+
+writeOrTouch :: MonadIO m => FilePath -> Maybe ByteString -> m ()
+writeOrTouch x = maybe (touchFile x) (writeByteString x)
+
+createDir :: MonadIO m => FilePath -> m ()
+createDir d =
+  liftIO $ do
+    exists <- Directory.doesPathExist d
+
+    unless exists $ do
+      say ("Creating " % string) d
+      Directory.createDirectoryIfMissing True d
+
+copyDir :: MonadIO m => FilePath -> FilePath -> m ()
+copyDir src dst =
+  liftIO (Directory.listDirectory src >>= mapM_ copy)
   where
     copy f = do
-      let p = dst </> filename f
-      fprint (" -> Copying " % path % " to " % path % "\n") f (directory p)
-      FS.copyFile f p
+      let p = dst </> f
 
-readTemplate ::
-  MonadIO m =>
-  Path ->
-  Path ->
-  ExceptT Error m EDE.Template
-readTemplate d f =
-  liftIO (EDE.eitherParseFile (encodeString (d </> f)))
-    >>= either (throwError . LText.pack) return
+      fprint (" -> Copying " % string % " to " % string % "\n") f (FilePath.takeDirectory p)
+
+      Directory.copyFile f p
+
+readTemplate :: MonadIO m => FilePath -> FilePath -> m EDE.Template
+readTemplate dir file =
+  liftIO $
+    EDE.eitherParseFile (dir </> file)
+      >>= either (error . fromString) pure

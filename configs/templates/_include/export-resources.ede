@@ -1,0 +1,13 @@
+    -- * Resources
+  {% for action in api.methods %}
+
+    -- ** @{{ action.value.id }}@
+    {{ action.value.data.name }} (..),
+    {{ action.value.data.ctor.name }}
+  {% endfor %}
+  {% for action in api.resources %}
+
+    -- ** @{{ action.value.id }}@
+    {{ action.value.data.name }} (..),
+    {{ action.value.data.ctor.name }},
+  {% endfor %}

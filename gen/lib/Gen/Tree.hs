@@ -7,57 +7,53 @@ module Gen.Tree
   )
 where
 
-import Control.Error
-import Control.Lens ((^.))
-import Control.Monad
-import Control.Monad.Except
-import Data.Aeson hiding (json)
-import Data.Bifunctor
-import Data.Foldable (foldr')
-import Data.Monoid
-import Data.Set (Set)
-import Data.Text (Text)
+import qualified Control.Exception as Exception
+import Data.Aeson (Value (..), (.=))
+import qualified Data.Aeson as Aeson
+import qualified Data.List as List
+import qualified Data.Set as Set
 import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import Filesystem.Path.CurrentOS hiding (FilePath, root)
-import Gen.Formatting (failure, shown)
-import qualified Gen.JSON as JS
+import qualified Data.Text.Encoding as Text.Encoding
+import qualified Data.Text.Lazy as Text.Lazy
+import qualified Gen.JSON as JSON
+import Gen.Prelude
 import Gen.Types
-import System.Directory.Tree hiding (file)
-import Text.EDE hiding (failure, render)
-import Prelude hiding (mod)
+import System.Directory.Tree (AnchoredDirTree (..), DirTree (..))
+import Text.EDE (Template)
+import qualified Text.EDE as EDE
 
-root :: AnchoredDirTree a -> Path
-root (p :/ d) = decodeString p </> decodeString (name d)
+root :: AnchoredDirTree a -> FilePath
+root (p :/ d) = p </> name d
 
 fold ::
-  MonadError Error m =>
+  MonadIO m =>
   -- | Directories
-  (Path -> m ()) ->
+  (FilePath -> m ()) ->
   -- | Files
-  (Path -> a -> m b) ->
+  (FilePath -> a -> m b) ->
   AnchoredDirTree a ->
   m (AnchoredDirTree b)
-fold g f (p :/ t) = (p :/) <$> go (decodeString p) t
+fold g f (p :/ t) =
+  (p :/) <$> go p t
   where
     go x = \case
-      Failed n e -> failure shown e >> return (Failed n e)
-      File n a -> File n <$> f (x </> decodeString n) a
-      Dir n cs -> g d >> Dir n <$> mapM (go d) cs
+      Failed n e -> liftIO (Exception.throwIO e) >> pure (Failed n e)
+      File n a -> File n <$> f (x </> n) a
+      Dir n cs -> g d >> Dir n <$> traverse (go d) cs
         where
-          d = x </> decodeString n
+          d = x </> n
 
--- If Nothing, then touch the file, otherwise write the Just contents.
-type Touch = Maybe Rendered
+-- If Nothing, then touch the file, otherwise write the contents.
+type Touch = Maybe ByteString
 
 populate ::
-  Path ->
+  FilePath ->
   Templates ->
   Library ->
-  Either Error (AnchoredDirTree Touch)
-populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
+  Either Text (AnchoredDirTree Touch)
+populate d Templates {..} l = (d :/) . dir lib <$> layout
   where
-    layout :: Either Error [DirTree Touch]
+    layout :: Either Text [DirTree Touch]
     layout =
       traverse
         sequenceA
@@ -74,44 +70,45 @@ populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
               mod' (prodNS l) prodImports prodTemplate (pure env),
               mod' (sumNS l) sumImports sumTemplate (pure env)
             ]
-              ++ map resource (_apiResources (l ^. lAPI))
-              ++ map method (_apiMethods (l ^. lAPI))
+              ++ map resource (Set.toList (apiResources (l ^. lAPI)))
+              ++ map method (Set.toList (apiMethods (l ^. lAPI)))
         ]
       where
         -- FIXME: now redundant
         resource a =
-          mod' (_actNamespace a) actionImports actionTemplate (action a)
+          mod' (actionNs a) actionImports actionTemplate (action a)
 
         method a =
-          mod' (_actNamespace a) actionImports actionTemplate (action a)
+          mod' (actionNs a) actionImports actionTemplate (action a)
 
         action a =
-          let Object o = object ["action" .= a]
+          let Object o = Aeson.object ["action" .= a]
               Object e = env
            in pure $ Object (o <> e)
 
     Imports {..} = serviceImports l
 
-    lib = fromText (l ^. sLibrary)
+    lib = Text.unpack (l ^. sLibrary)
 
     mod' ns is t = write . module' ns is t
 
     file p t = write $ file' p t (pure env)
 
     env :: Value
-    env = toJSON l
+    env = Aeson.toJSON l
 
 module' ::
   ToJSON a =>
   NS ->
   Set NS ->
   Template ->
-  Either Error a ->
-  DirTree (Either Error Rendered)
+  Either Text a ->
+  DirTree (Either Text ByteString)
 module' ns is t f = namespaced ns t $ do
-  x <- f >>= JS.objectErr (show ns)
-  return $! x
-    <> fromPairs
+  x <- f >>= JSON.jsonObject (show ns)
+
+  pure $! x
+    <> EDE.fromPairs
       [ "moduleName" .= ns,
         "moduleImports" .= is
       ]
@@ -120,34 +117,35 @@ namespaced ::
   ToJSON a =>
   NS ->
   Template ->
-  Either Error a ->
-  DirTree (Either Error Rendered)
+  Either Text a ->
+  DirTree (Either Text ByteString)
 namespaced (unNS -> ns) t x =
-  case map fromText ns of
+  case map Text.unpack ns of
     [] -> error "Empty namespace."
     [p] -> f p
-    ps -> foldr' nest (f (last ps)) (init ps)
+    ps -> foldr nest (f (List.last ps)) (List.init ps)
   where
     f p = file' (p <.> "hs") t x
 
-    nest d c = Dir (encodeString d) [c]
+    nest d c = Dir d [c]
 
 file' ::
   ToJSON a =>
-  Path ->
+  FilePath ->
   Template ->
-  Either Error a ->
-  DirTree (Either Error Rendered)
-file' (encodeString -> p) t f =
+  Either Text a ->
+  DirTree (Either Text ByteString)
+file' p t f =
   File p $
-    f >>= JS.objectErr p
-      >>= fmapL LText.pack . eitherRender t
+    f >>= JSON.jsonObject p
+      >>= bimap Text.pack (Text.Encoding.encodeUtf8 . Text.Lazy.toStrict)
+        . EDE.eitherRender t
 
-dir :: Path -> [DirTree a] -> DirTree a
-dir p = Dir (encodeString p)
+dir :: FilePath -> [DirTree a] -> DirTree a
+dir = Dir
 
 write :: DirTree (Either e a) -> DirTree (Either e (Maybe a))
 write = fmap (second Just)
 
-touch :: Text -> DirTree (Either e (Maybe a))
-touch f = File (Text.unpack f) (Right Nothing)
+touch :: FilePath -> DirTree (Either e (Maybe a))
+touch f = File f (Right Nothing)

@@ -1,6 +1,3 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-
 -- |
 -- Module      : Gogol.Data.Base64
 -- Copyright   : (c) 2013-2022 Brendan Hay
@@ -10,27 +7,19 @@
 -- Portability : non-portable (GHC extensions)
 module Gogol.Data.Base64
   ( Base64 (..),
-    _Base64,
   )
 where
 
-import Control.Lens (Iso', iso)
-import Data.Aeson (FromJSON (..), ToJSON (..))
-import Data.ByteString (ByteString)
 import qualified Data.ByteString.Base64 as Base64
-import Data.Hashable
 import qualified Data.Text.Encoding as Text
-import GHC.Generics (Generic)
-import Gogol.Data.JSON (parseJSONText, toJSONText)
-import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
+import Gogol.Data.JSON
+import Gogol.Prelude
 
 -- | Raw bytes that will be transparently base64 encoded\/decoded
 -- on tramission to\/from a remote API.
 newtype Base64 = Base64 {fromBase64 :: ByteString}
-  deriving (Eq, Show, Read, Ord, Generic, Hashable)
-
-_Base64 :: Iso' Base64 ByteString
-_Base64 = iso fromBase64 Base64
+  deriving stock (Show, Read, Eq, Ord, Generic)
+  deriving newtype (Hashable, NFData)
 
 instance ToHttpApiData Base64 where
   toUrlPiece = Base64.encodeBase64 . fromBase64
@@ -47,3 +36,4 @@ instance FromJSON Base64 where
 
 instance ToJSON Base64 where
   toJSON = toJSONText
+  toEncoding = toEncodingText

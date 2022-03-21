@@ -1,127 +1,122 @@
+{-# LANGUAGE TemplateHaskell #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 module Gen.Types.Data where
 
-import Data.Aeson hiding (Array, Bool, String)
-import Data.List (sortOn)
-import Data.Maybe
-import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import Data.Text.Manipulate
+import Data.Aeson as Aeson
+import Data.Aeson.TH as TH
+import Gen.JSON (jsonOptions)
+import Gen.Prelude
 import Gen.Types.Help
-import Gen.Types.Id
+import Gen.Types.Id (Global)
 import Gen.Types.NS
-import Language.Haskell.Exts (Name, Type)
-import Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
-import Prelude hiding (Enum)
+import qualified Language.Haskell.Exts.Pretty as PP
+import Language.Haskell.Exts.Syntax
 
-default (Text)
+newtype PP a = PP a
 
-type Rendered = LText.Text
+instance PP.Pretty a => ToJSON (PP a) where
+  toJSON (PP x) = toJSON (PP.prettyPrintStyleMode style mode x)
+    where
+      style =
+        PP.style
+          { PP.mode = PP.PageMode,
+            PP.lineLength = 255,
+            PP.ribbonsPerLine = 2
+          }
 
-newtype Syn a = Syn {syntax :: a}
+      mode =
+        PP.defaultMode
+          { PP.layout = PP.PPOffsideRule,
+            PP.spacing = False
+          }
 
-instance Pretty a => ToJSON (Syn a) where
-  toJSON = toJSON . prettyPrint . syntax
+deriving via PP (Name ()) instance ToJSON (Name ())
 
-data Fun = Fun' (Name ()) (Maybe Help) Rendered Rendered
+deriving via PP (Type ()) instance ToJSON (Type ())
 
-instance ToJSON Fun where
-  toJSON (Fun' n h s d) =
-    object
-      [ "name" .= Syn n,
-        "help" .= h,
-        "sig" .= s,
-        "decl" .= d
-      ]
+deriving via PP (Deriving ()) instance ToJSON (Deriving ())
 
-data Branch = Branch (Name ()) Text Help
+deriving via PP (Decl ()) instance ToJSON (Decl ())
 
-instance ToJSON Branch where
-  toJSON (Branch n v h) =
-    object
-      [ "name" .= Syn n,
-        "value" .= v,
-        "help" .= h
-      ]
+data Fun = Fun
+  { funName :: Name (),
+    funHelp :: Maybe Help,
+    funSig :: Decl (),
+    funDecl :: Decl ()
+  }
+  deriving stock (Show, Eq, Ord)
 
-data Field = Field (Name ()) (Type ()) Help
+data Branch = Branch
+  { branchName :: Name (),
+    branchHelp :: Help,
+    branchValue :: Text
+  }
+  deriving stock (Show, Eq, Ord)
 
-instance ToJSON Field where
-  toJSON (Field name type' help) =
-    object
-      [ "name" .= Syn name,
-        "type" .= Syn type',
-        "help" .= Nest 6 help
-      ]
+data Field = Field
+  { fieldName :: Name (),
+    fieldType :: Type (),
+    fieldHelp :: Nest 6
+  }
+  deriving stock (Show, Eq, Ord)
 
 data Data
-  = Sum (Name ()) (Maybe Help) [Branch]
-  | Prod (Name ()) (Maybe Help) Rendered [Field] Rendered [Rendered] Fun
+  = Sum
+      { sumName :: Name (),
+        sumHelp :: Maybe Help,
+        sumBranches :: [Branch]
+      }
+  | Prod
+      { prodName :: Name (),
+        prodHelp :: Maybe Help,
+        prodDecl :: Decl (),
+        prodFields :: [Field],
+        prodCtor :: Fun,
+        prodDeriving :: Deriving (),
+        prodInstances :: [Decl ()]
+      }
+  deriving stock (Show, Eq, Ord)
 
-instance ToJSON Data where
-  toJSON = \case
-    Sum name help branches ->
-      object
-        [ "name" .= Syn name,
-          "type" .= Text.pack "sum",
-          "help" .= help,
-          "branches" .= branches
-        ]
-    Prod name help decl fields derive inst ctor ->
-      object
-        [ "name" .= Syn name,
-          "type" .= Text.pack "prod",
-          "help" .= help,
-          "decl" .= decl,
-          "fields" .= fields,
-          "deriving" .= derive,
-          "instances" .= inst,
-          "ctor" .= ctor
-        ]
+getDataName :: Data -> Name ()
+getDataName = \case
+  Sum {sumName} -> sumName
+  Prod {prodName} -> prodName
 
-dataName :: Data -> Name ()
-dataName = \case
-  Sum n _ _ -> n
-  Prod n _ _ _ _ _ _ -> n
+setDataInstances :: [Decl ()] -> Data -> Data
+setDataInstances xs = \case
+  Prod {..} -> Prod {prodInstances = xs, ..}
+  other -> other
 
 data Action = Action
-  { _actId :: Text,
-    _actType :: Global,
-    _actNamespace :: NS,
-    _actHelp :: Maybe Help,
-    _actAliasName :: Name (),
-    _actAlias :: Rendered,
-    _actData :: Data
+  { actionId :: Text,
+    actionUnique :: Global,
+    actionNs :: NS,
+    actionHelp :: Maybe Help,
+    actionData :: Data
   }
+  deriving stock (Show, Eq, Ord)
 
-instance ToJSON Action where
-  toJSON Action {..} =
-    object
-      [ "id" .= _actId,
-        "ns" .= _actNamespace,
-        "help" .= _actHelp,
-        "aliasName" .= Syn _actAliasName,
-        "alias" .= _actAlias,
-        "type" .= _actData
-      ]
+data Scope = Scope
+  { scopeName :: Name (),
+    scopeDecl :: Decl (),
+    scopeHelp :: Help
+  }
+  deriving stock (Show, Eq, Ord)
 
 data API = API
-  { _apiAliasName :: Name (),
-    _apiAlias :: Rendered,
-    _apiResources :: [Action],
-    _apiMethods :: [Action],
-    _apiURL :: Fun,
-    _apuScopes :: [Fun]
+  { apiResources :: Set Action,
+    apiMethods :: Set Action,
+    apiConfig :: Fun,
+    apiParams :: Data,
+    apiScopes :: Set Scope
   }
+  deriving stock (Show, Eq, Ord)
 
-instance ToJSON API where
-  toJSON API {..} =
-    object
-      [ "aliasName" .= Syn _apiAliasName,
-        "aliasProxy" .= lowerHead (Text.pack (prettyPrint _apiAliasName)),
-        "alias" .= _apiAlias,
-        "resources" .= sortOn _actId _apiResources,
-        "methods" .= sortOn _actId _apiMethods,
-        "url" .= _apiURL,
-        "scopes" .= _apuScopes
-      ]
+$(TH.deriveToJSON jsonOptions ''Fun)
+$(TH.deriveToJSON jsonOptions ''Branch)
+$(TH.deriveToJSON jsonOptions ''Field)
+$(TH.deriveToJSON jsonOptions ''Data)
+$(TH.deriveToJSON jsonOptions ''Action)
+$(TH.deriveToJSON jsonOptions ''Scope)
+$(TH.deriveToJSON jsonOptions ''API)

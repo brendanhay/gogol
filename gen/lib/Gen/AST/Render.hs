@@ -3,213 +3,205 @@ module Gen.AST.Render
   )
 where
 
-import Control.Applicative
-import Control.Error
-import Control.Lens hiding (enum, lens)
-import qualified Data.ByteString.Builder as BB
-import qualified Data.ByteString.Char8 as C8
-import Data.Char (isSpace)
-import Data.Map.Strict (Map)
+import qualified Control.Monad.Except as Except
+import qualified Data.ByteString.Builder as Builder
+import qualified Data.ByteString.Char8 as ByteString.Char8
+import qualified Data.ByteString.Lazy as ByteString.Lazy
+import qualified Data.Char as Char
 import qualified Data.Map.Strict as Map
-import Data.Maybe
-import Data.String
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Encoding as LText
+import qualified Data.Set as Set
+import qualified Data.Text as Text
+import qualified Data.Text.Lazy as Text.Lazy
+import qualified Data.Text.Lazy.Encoding as Text.Lazy.Encoding
 import Gen.AST.Solve (getSolved)
 import Gen.Formatting
-import Gen.Syntax
+import Gen.Prelude
+import qualified Gen.Syntax as Syntax
+-- import Gen.Syntax.Build
 import Gen.Types
-import qualified HIndent
-import qualified HIndent.Types as HIndent
-import Language.Haskell.Exts.Build (name)
-import Language.Haskell.Exts.Pretty as PP
-import Prelude hiding (sum)
+import qualified Language.Haskell.Exts.Build as Build
 
-render :: Service Solved -> AST (API, [Data])
-render s = do
-  a <- renderAPI s
+render :: Service Solved -> AST (API, Set Data)
+render service@Service {_sDescription} = do
+  api <- renderAPI service
 
-  let actions = map _actType (_apiResources a <> _apiMethods a)
-      valid = Map.keys . Map.filter (\v -> _unique v `notElem` actions)
+  let actions = Set.map actionUnique (apiResources api <> apiMethods api)
+      getValid = Map.keys . Map.filter (\v -> _unique v `Set.notMember` actions)
 
-  ss <- traverse getSolved $ valid (s ^. dSchemas)
-  ds <- traverse renderSchema ss <&> catMaybes
+  schemas <- traverse getSolved $ getValid (_dSchemas _sDescription)
+  datatypes <- traverse renderSchema schemas <&> catMaybes
 
-  pure (a, ds)
-
-renderSchema :: Solved -> AST (Maybe Data)
-renderSchema s = go (_schema s)
-  where
-    go = \case
-      SEnm i e -> pure (Just (enum i e))
-      SObj i o -> Just <$> object i o
-      _ -> pure Nothing
-
-    k = _unique s
-    p = _prefix s
-    ds = _deriving s
-
-    enum i (Enm vs) =
-      Sum (dname k) (i ^. iDescription) $
-        map (\(v, h) -> Branch (bname p v) v h) vs
-
-    object i (Obj aps ps) = do
-      a <- traverse getSolved (aps :: Maybe Global)
-      b <- traverse getSolved (ps :: Map Local Global)
-
-      let ab = setAdditional <$> a
-          ts = maybe b (flip (Map.insert "additional") b) ab
-
-      Prod (dname k) (i ^. iDescription)
-        <$> pp None (objDecl k ts)
-        <*> pure (objFields ts)
-        <*> pp None (objDerive ds)
-        <*> traverse (pp Print) (jsonDecls k ts)
-        <*> ctor ts
-      where
-        ctor ts =
-          Fun' (cname k) (Just help)
-            <$> (pp None (ctorSig k ts) <&> comments ts)
-            <*> pp Indent (ctorDecl k ts)
-
-        help =
-          rawHelpText $
-            sformat
-              ( "Creates a value of '" % gid
-                  % "' with the minimum fields required to make a request.\n"
-              )
-              k
+  pure (api, Set.fromList datatypes)
 
 renderAPI :: Service Solved -> AST API
-renderAPI s = do
-  rs <- traverse (renderResource s "Resource") (Map.elems (s ^. dResources)) <&> concat
-  ms <- traverse (renderMethod s "Method") (s ^. dMethods)
+renderAPI service@Service {_sDescription} = do
+  resources <- traverse (renderResource service) (Map.elems (_dResources _sDescription))
+  methods <- traverse (renderMethod service) (_dMethods _sDescription)
 
-  d <- pp Print $ apiAlias alias (map _actAliasName (rs <> ms))
+  pure
+    API
+      { apiResources = Set.fromList (concat resources),
+        apiMethods = Set.fromList methods,
+        apiConfig = renderServiceConfig service,
+        apiParams = renderServiceParams service,
+        apiScopes = renderScopes (fromMaybe mempty (_dAuth _sDescription))
+      }
 
-  API alias d rs ms
-    <$> svc
-    <*> traverse scope (maybe mempty (Map.toList . scopes) (s ^. dAuth))
+renderServiceConfig :: Service Solved -> Fun
+renderServiceConfig service =
+  Fun
+    { funName = name,
+      funHelp = Just (rawHelpText help),
+      funSig = Syntax.serviceSig name,
+      funDecl = Syntax.serviceDecl (_sDescription service) name
+    }
   where
-    alias = aname (_sCanonicalName s)
+    name = Build.name (getServiceName service)
+    help =
+      sformat
+        ( "Default configuration referring to version @" % stext
+            % "@ of the "
+            % stext
+            % ". This sets the host and port used as a starting point for constructing service requests."
+        )
+        (service ^. dVersion)
+        (service ^. dTitle)
 
-    url = name (serviceName s)
+renderServiceParams :: Service Solved -> Data
+renderServiceParams service =
+  Prod
+    { prodName = dname name,
+      prodHelp = Nothing,
+      prodDecl = decl,
+      prodFields = Syntax.recordFields fields,
+      prodDeriving = Syntax.recordDerive [DEq, DOrd, DShow, DGeneric],
+      prodCtor = constructor,
+      prodInstances = []
+    }
+  where
+    name = getServiceParamsName service
 
-    svc =
-      Fun' url (Just (rawHelpText h))
-        <$> pp None (serviceSig url)
-        <*> pp Print (serviceDecl s url)
-      where
-        h =
-          sformat
-            ( "Default request referring to version @" % stext
-                % "@ of the "
-                % stext
-                % ". This contains the host and root path used as a starting point for constructing service requests."
-            )
-            (s ^. dVersion)
-            (s ^. dTitle)
+    (decl, fields) =
+      Syntax.paramsDecl (_sDescription service) name
 
-    scope (k, h) =
-      Fun' n (Just h)
-        <$> pp None (scopeSig n k)
-        <*> pp None (scopeDecl n)
-      where
-        n = name (scopeName s k)
+    constructor =
+      Fun
+        { funName = cname name,
+          funHelp = Nothing,
+          funSig = Syntax.smartCtorSig name fields,
+          funDecl = Syntax.smartCtorDecl name fields
+        }
 
-renderMethod :: Service a -> Suffix -> Method Solved -> AST Action
-renderMethod s suf m@Method {..} = do
-  typ <- reserveType typ'
+renderScopes :: OAuth2 -> Set Scope
+renderScopes (OAuth2 xs) =
+  Set.fromList . flip map (Map.toList xs) $ \(value, help) ->
+    let key = Build.name (getScopeName value)
+     in Scope
+          { scopeName = key,
+            scopeDecl = Syntax.scopeDecl key value,
+            scopeHelp = help
+          }
 
-  x@Solved {..} <- getSolved typ
+renderResource :: Service Solved -> Resource Solved -> AST [Action]
+renderResource service Resource {..} =
+  mappend
+    <$> (traverse (renderResource service) (Map.elems _rResources) <&> concat)
+    <*> (traverse (renderMethod service) _rMethods)
 
-  d <-
-    renderSchema x >>= \case
+renderMethod :: Service Solved -> Method Solved -> AST Action
+renderMethod service method = do
+  let (typeName, namespace) = mname (_sCanonicalName service) (_mId method)
+
+  type' <- reserveType typeName
+
+  solved@Solved {_unique} <- getSolved type'
+
+  datatype <-
+    renderSchema solved >>= \case
       Nothing -> error "failed to render the schema"
       Just ok -> pure ok
 
-  i <- pp Print $ requestDecl _unique alias url (props _schema) m
-  dl <- pp Print $ downloadDecl _unique alias url (props _schema) m
-  ul <- pp Print $ uploadDecl _unique alias url (props _schema) m
+  let instances = Syntax.requestInstances service method solved
 
-  let inst = i : [dl | _mSupportsMediaDownload && not _mSupportsMediaUpload] ++ [ul | _mSupportsMediaUpload]
+  pure
+    Action
+      { actionId = commasep (_mId method),
+        actionUnique = _unique,
+        actionNs = collapseNS (tocNS service <> UnsafeNS namespace),
+        actionHelp = _mDescription method,
+        actionData = setDataInstances instances datatype
+      }
 
-  Action (commasep _mId) _unique root _mDescription alias
-    <$> pp Print (verbAlias s alias m)
-    <*> pure (insts inst d)
+renderSchema :: Solved -> AST (Maybe Data)
+renderSchema solved =
+  go (_schema solved)
   where
-    root = collapseNS (tocNS s <> UnsafeNS namespace)
+    unique = _unique solved
+    prefix = _prefix solved
 
-    (alias, typ', namespace) = mname (_sCanonicalName s) suf _mId
+    go = \case
+      SEnm info enm -> pure (Just (renderEnum info enm))
+      SObj info obj -> Just <$> renderObject info obj
+      _unknown -> pure Nothing
 
-    url = name (serviceName s)
-
-    insts is = \case
-      Prod n h d fs ds _ c -> Prod n h d fs ds is c
-      d -> d
-
-    props = \case
-      SObj _ (Obj _ ps) -> Map.keys ps
-      _ -> mempty
-
-renderResource :: Service a -> Suffix -> Resource Solved -> AST [Action]
-renderResource s suf Resource {..} =
-  (<>)
-    <$> (traverse (renderResource s suf) (Map.elems _rResources) <&> concat)
-    <*> traverse (renderMethod s suf) _rMethods
-
-data PP
-  = Indent
-  | Print
-  | None
-  deriving (Eq)
-
-pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
-pp i x
-  | i == Indent = result (HIndent.reformat HIndent.defaultConfig Nothing Nothing p)
-  | otherwise = pure (LText.pack (C8.unpack p))
-  where
-    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . BB.toLazyByteString)
-
-    e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
-
-    p =
-      C8.dropWhile isSpace
-        . C8.pack
-        $ prettyPrintStyleMode s m x
-
-    s =
-      style
-        { mode = PageMode,
-          lineLength = 80,
-          ribbonsPerLine = 1.5
+    renderEnum info (Enm branches) =
+      Sum
+        { sumName = dname unique,
+          sumHelp = info ^. iDescription,
+          sumBranches = map (\(v, h) -> Branch (bname prefix v) h v) branches
         }
 
-    m
-      | i == Print = defaultMode
-      | i == Indent = defaultMode
-      | otherwise =
-        defaultMode
-          { layout = PPNoLayout,
-            spacing = False
+    renderObject info (Obj aps ps) = do
+      additional <- traverse getSolved (aps :: Maybe Global)
+      properties <- traverse getSolved (ps :: Map Local Global)
+
+      let merged =
+            maybe properties (flip (Map.insert "additional") properties) $
+              setAdditional <$> additional
+
+          constructor =
+            Fun
+              { funName = cname unique,
+                funHelp =
+                  Just . rawHelpText $
+                    sformat
+                      ( "Creates a value of '" % gid
+                          % "' using only the required fields."
+                          % " Everything else is set to a default value or 'Nothing'.\n"
+                      )
+                      unique,
+                -- funSig = hackComments merged (Syntax.smartCtorSig unique merged),
+                funSig = Syntax.smartCtorSig unique merged,
+                funDecl = Syntax.smartCtorDecl unique merged
+              }
+
+      pure
+        Prod
+          { prodName = dname unique,
+            prodHelp = info ^. iDescription,
+            prodDecl = Syntax.recordDecl unique merged,
+            prodFields = Syntax.recordFields merged,
+            prodCtor = constructor,
+            prodDeriving = Syntax.recordDerive (_deriving solved),
+            prodInstances = Syntax.jsonInstances unique merged
           }
 
--- FIXME: dirty hack to render smart ctor parameter comments.
-comments :: Map Local Solved -> Rendered -> Rendered
-comments (Map.toList -> rs) =
-  LText.replace "::" "\n    :: "
-    . LText.intercalate "\n    -> "
-    . zipWith rel ps
-    . map LText.strip
-    . LText.splitOn "->"
-  where
-    ks = filter (parameter . _schema . snd) rs
-    ps = map Just ks ++ repeat Nothing
+-- -- FIXME: dirty hack to render smart ctor parameter comments.
+-- hackComments :: Map Local Solved -> TextLazy -> TextLazy
+-- hackComments (Map.toList -> rs) =
+--   Text.Lazy.replace "::" "\n    :: "
+--     . Text.Lazy.intercalate "\n    -> "
+--     . zipWith rel ps
+--     . map Text.Lazy.strip
+--     . Text.Lazy.splitOn "->"
+--   where
+--     ks = filter (parameter . _schema . snd) rs
+--     ps = map Just ks ++ repeat Nothing
 
-    rel Nothing t = t
-    rel (Just (l, s)) t =
-      t <> "\n       -- ^ "
-        <> maybe mempty (LText.drop 11 . renderHelp . Nest 7) (s ^. iDescription)
-        <> " See '"
-        <> fromString (PP.prettyPrint (fname l))
-        <> "'."
+--     rel Nothing t = t
+--     rel (Just (l, s)) t =
+--       t <> "\n       -- ^ "
+--         <> maybe mempty (Text.Lazy.drop 11 . renderHelp 7) (s ^. iDescription)
+--         <> " See '"
+--         <> fromString (PP.prettyPrint (fname l))
+--         <> "'."

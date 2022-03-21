@@ -7,23 +7,19 @@ module Gen.Types.Help
   )
 where
 
-import Data.Aeson
+import qualified Data.Aeson as Aeson
 import qualified Data.Char as Char
-import Data.Int (Int64)
-import Data.String
-import Data.Text (Text)
 import qualified Data.Text.Lazy as Text.Lazy
+import Gen.Prelude
 import qualified System.IO.Unsafe as Unsafe
 import Text.Pandoc (Pandoc, PandocError)
 import qualified Text.Pandoc as Pandoc
 
-type TextLazy = Text.Lazy.Text
-
 data Help
-  = Help ![Help]
-  | Pan !Pandoc !Text
-  | Raw !Text
-  deriving (Eq)
+  = Help [Help]
+  | Pan Pandoc Text
+  | Raw Text
+  deriving stock (Eq, Ord)
 
 instance Semigroup Help where
   (<>) x y =
@@ -38,9 +34,8 @@ instance Semigroup Help where
 instance Monoid Help where
   mempty = Help []
 
--- | Empty Show instance to avoid verbose debugging output.
 instance Show Help where
-  show = const mempty
+  showsPrec _ = shows . flattenHelp
 
 instance IsString Help where
   fromString = rawHelpText . fromString
@@ -49,32 +44,38 @@ rawHelpText :: Text -> Help
 rawHelpText = Raw
 
 instance FromJSON Help where
-  parseJSON = withText "help" $ \t ->
-    case readMarkdown t of
-      Left e -> fail (show e)
-      Right x -> pure $! Pan x t
+  parseJSON =
+    Aeson.withText "help" $ \t ->
+      case readMarkdown t of
+        Left e -> fail (show e)
+        Right x -> pure $! Pan x t
 
 instance ToJSON Help where
-  toJSON = toJSON . Nest 0
+  toJSON = Aeson.toJSON . renderHelp 0
 
-data Desc = Desc !Int64 Help
+newtype Desc (indent :: Nat) = Desc Help
+  deriving stock (Eq, Ord)
 
-instance ToJSON Desc where
-  toJSON (Desc n h) = toJSON (wrapHelp (Text.Lazy.replicate n " ") h)
+instance KnownNat indent => ToJSON (Desc indent) where
+  toJSON (Desc h) =
+    Aeson.toJSON $
+      wrapHelp (Text.Lazy.replicate (fromIntegral (natVal (Proxy @indent))) " ") h
 
-data Nest = Nest !Int64 Help
+newtype Nest (indent :: Nat) = Nest Help
+  deriving stock (Show, Eq, Ord)
 
-instance ToJSON Nest where
-  toJSON = toJSON . renderHelp
+instance KnownNat indent => ToJSON (Nest indent) where
+  toJSON (Nest h) =
+    Aeson.toJSON $
+      renderHelp (fromIntegral (natVal (Proxy @indent))) h
 
-renderHelp :: Nest -> TextLazy
-renderHelp (Nest n h) =
+renderHelp :: Natural -> Help -> TextLazy
+renderHelp indent =
   mappend (sep <> "| ")
     . Text.Lazy.drop (Text.Lazy.length sep)
     . wrapHelp sep
-    $ h
   where
-    sep = Text.Lazy.replicate n " " <> "-- "
+    sep = Text.Lazy.replicate (fromIntegral indent) " " <> "-- "
 
 wrapHelp :: TextLazy -> Help -> TextLazy
 wrapHelp sep =

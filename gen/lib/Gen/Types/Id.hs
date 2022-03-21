@@ -5,6 +5,7 @@ module Gen.Types.Id
 
     -- * Unique Identifiers
     Global,
+    newGlobal,
     Local,
     global,
     local,
@@ -27,23 +28,23 @@ module Gen.Types.Id
     cname,
     bname,
     fname,
-    fstr,
+
+    -- * Parameters
+    specialParamNames,
+    reservedParamNames,
   )
 where
 
-import Control.Applicative
-import Control.Monad
-import Data.Aeson hiding (Bool, String)
-import qualified Data.Attoparsec.Text as A
+import Control.Applicative (optional)
+import qualified Data.Aeson as Aeson
+import qualified Data.Attoparsec.Text as Atto
 import qualified Data.CaseInsensitive as CI
-import Data.List (elemIndex, intersperse, nub, sortOn)
-import Data.String
-import Data.Text (Text)
+import qualified Data.List as List
+import qualified Data.Set as Set
 import qualified Data.Text as Text
-import qualified Data.Text.Lazy.Builder as Build
-import Data.Text.Manipulate
+import qualified Data.Text.Lazy.Builder as Text.Builder
 import Formatting
-import GHC.Generics (Generic)
+import Gen.Prelude
 import Gen.Text
 import Gen.Types.NS
 import Language.Haskell.Exts.Build
@@ -52,12 +53,12 @@ import Language.Haskell.Exts.Syntax (Exp, Name (..))
 aname :: Text -> Name ()
 aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
-mname :: Text -> Suffix -> Global -> (Name (), Global, [Text])
-mname canonical (Suffix suf) (Global method) =
-  (resourceType, dataType, namespace)
+mname :: Text -> Global -> (Global, [Text])
+mname canonical (Global method) =
+  (dataType, namespace)
   where
-    resourceType = name (Text.unpack (mconcat namespace <> suf))
     dataType = Global namespace
+
     namespace = squeeze (unNS (mkNS canonical), map upperHead method)
 
     -- Replace possibly wonky casing of method.id components that are supplied
@@ -72,8 +73,7 @@ dname =
   name
     . Text.unpack
     . renameReserved
-    . upperHead
-    . Text.dropWhile separator
+    . joinPascalName
     . global
 
 cname :: Global -> Name ()
@@ -82,8 +82,7 @@ cname =
     . Text.unpack
     . renameReserved
     . mappend "new"
-    . upperHead
-    . Text.dropWhile separator
+    . joinPascalName
     . global
 
 bname :: Prefix -> Text -> Name ()
@@ -106,12 +105,14 @@ dstr =
   strE
     . Text.unpack
     . renameReserved
-    . upperHead
-    . Text.dropWhile separator
+    . joinPascalName
     . global
 
-fstr :: Local -> Exp ()
-fstr = strE . Text.unpack . local
+joinPascalName :: Text -> Text
+joinPascalName =
+  mconcat
+    . map upperHead
+    . Text.split (\c -> c == '_' || separator c)
 
 newtype Suffix = Suffix Text
   deriving (Show, IsString)
@@ -129,34 +130,34 @@ instance Semigroup Global where
   Global xs <> Global ys = Global (xs <> ys)
 
 instance IsString Global where
-  fromString = mkGlobal . fromString
+  fromString = newGlobal . fromString
 
 instance FromJSON Global where
-  parseJSON = withText "global" (pure . mkGlobal)
+  parseJSON = Aeson.withText "global" (pure . newGlobal)
 
 instance FromJSONKey Global where
-  fromJSONKey = FromJSONKeyText mkGlobal
+  fromJSONKey = Aeson.FromJSONKeyText newGlobal
 
 instance ToJSON Global where
-  toJSON = toJSON . global
+  toJSON = Aeson.toJSON . global
 
 gid :: Format a (Global -> a)
-gid = later (Build.fromText . global)
+gid = later (Text.Builder.fromText . global)
 
 newtype Local = Local {local :: Text}
   deriving (Eq, Ord, Show, Generic, FromJSON, ToJSON, FromJSONKey, ToJSONKey, IsString)
 
 lid :: Format a (Local -> a)
-lid = later (Build.fromText . local)
+lid = later (Text.Builder.fromText . local)
 
-mkGlobal :: Text -> Global
-mkGlobal = Global . Text.split (== '.') . renameSpecial
+newGlobal :: Text -> Global
+newGlobal = Global . Text.split (== '.') . renameSpecial
 
 global :: Global -> Text
 global (Global g) = foldMap upperHead g
 
 commasep :: Global -> Text
-commasep = mconcat . intersperse "." . unsafeGlobal
+commasep = mconcat . List.intersperse "." . unsafeGlobal
 
 reference :: Global -> Local -> Global
 reference (Global g) (Local l) =
@@ -177,45 +178,57 @@ globalise :: Local -> Global
 globalise = Global . (: []) . local
 
 extractPath :: Text -> [Either Text (Local, Maybe Text)]
-extractPath x = either (error . err) id $ A.parseOnly path x
+extractPath x =
+  case Atto.parseOnly path x of
+    Left err -> error ("Error parsing \"" <> Text.unpack x <> "\", " <> err)
+    Right xs -> xs
   where
-    err e = "Error parsing \"" <> Text.unpack x <> "\", " <> e
-
-    path = A.many1 (seg <|> rep <|> var') <* A.endOfInput
+    path = Atto.many1 (seg <|> rep <|> var') <* Atto.endOfInput
 
     seg =
       fmap Left $
-        optional (A.char '/') *> A.takeWhile1 (A.notInClass "/{+*}")
+        optional (Atto.char '/') *> Atto.takeWhile1 (Atto.notInClass "/{+*}")
 
-    rep = fmap Right $ do
-      void $ A.string "{/"
-      (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
-        <* A.string "*}"
+    rep =
+      fmap Right $ do
+        void $ Atto.string "{/"
 
-    var' = fmap Right $ do
-      void $ optional (A.char '/') *> A.char '{' *> optional (A.char '+')
-      (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
-        <* A.char '}'
-        <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))
+        (,Nothing) <$> fmap Local (Atto.takeWhile1 (/= '*'))
+          <* Atto.string "*}"
+
+    var' =
+      fmap Right $ do
+        void $ optional (Atto.char '/') *> Atto.char '{' *> optional (Atto.char '+')
+
+        (,) <$> fmap Local (Atto.takeWhile1 (Atto.notInClass "/{+*}:"))
+          <* Atto.char '}'
+          <*> optional (Atto.char ':' *> Atto.takeWhile1 (Atto.notInClass "/{+*}:"))
 
 orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
-orderParams f xs ys = orderBy f zs (del zs [] ++ reserve)
-  where
-    zs = orderBy f (sortOn f xs) (nub (ys ++ map f xs))
+orderParams f xs = orderBy f (List.sortOn f xs)
 
-    del _ [] = []
-    del [] rs = reverse rs
-    del (r : qs) rs
-      | f r `elem` reserve = del qs rs
-      | otherwise = del qs (f r : rs)
+specialParamNames :: Set Local
+specialParamNames =
+  Set.fromList
+    [ "alt",
+      "uploadType",
+      "upload_protocol"
+    ]
 
-    reserve =
-      [ "quotaUser",
-        "prettyPrint",
-        "userIp",
-        "fields",
-        "alt"
-      ]
+reservedParamNames :: Set Local
+reservedParamNames =
+  Set.fromList
+    [ "access_token",
+      "oauth_token",
+      "quotaUser",
+      "prettyPrint",
+      "userIp",
+      "fields",
+      "key",
+      "alt",
+      "uploadType",
+      "upload_protocol"
+    ]
 
 orderBy :: Eq b => (a -> b) -> [a] -> [b] -> [a]
-orderBy g xs ys = sortOn (flip elemIndex ys . g) xs
+orderBy g xs ys = List.sortOn (flip List.elemIndex ys . g) xs

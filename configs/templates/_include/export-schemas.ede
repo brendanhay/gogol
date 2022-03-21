@@ -1,0 +1,25 @@
+  {% for prod in schemas %}
+    {% if prod.first %}
+
+    -- * Product Types
+    {% endif %}
+    {% case prod.value.type %}
+    {% when "prod" %}
+
+    -- ** {{ prod.value.name }}
+    {{ prod.value.name }} (..),
+    {{ prod.value.ctor.name }},
+    {% endcase %}
+  {% endfor %}
+  {% for sum in schemas %}
+    {% if sum.first %}
+
+    -- * Enumeration Types
+    {% endif %}
+    {% case sum.value.type %}
+    {% when "sum" %}
+
+    -- ** {{ sum.value.name }}
+    {{ sum.value.name }} (..),
+    {% endcase %}
+  {% endfor %}

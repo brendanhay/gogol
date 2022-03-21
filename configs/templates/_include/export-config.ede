@@ -1,0 +1,13 @@
+    -- * Configuration
+    {{ api.config.name }},
+
+    -- ** Global Request Parameters
+    {{ api.params.name }} (..),
+    {{ api.params.ctor.name }},
+  {% for scope in api.scopes %}
+    {% if scope.first %}
+
+    -- ** OAuth Scopes
+    {% endif %}
+    {{ scope.value.name }},
+  {% endfor %}
