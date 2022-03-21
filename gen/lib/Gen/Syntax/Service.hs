@@ -16,27 +16,28 @@ import Language.Haskell.Exts
 scopeDecl :: Name () -> Text -> Decl ()
 scopeDecl n = typeDecl (DHead () n) . tySymbol
 
-serviceSig :: Name () -> Decl ()
-serviceSig n = typeSig [n] (TyCon () "Core.ServiceConfig")
+-- serviceConfig :: Service a ->  bbjs
 
--- FIXME: Should this be rootUrl or baseUrl?
+serviceSig :: Name () -> Decl ()
+serviceSig n = typeSig [n] (TyCon () "Core.Service")
+
 serviceDecl :: Description a -> Name () -> Decl ()
 serviceDecl Description {_dId, _dRootUrl} n =
   sfun n [] (unguardedRhs rhs) noBinds
   where
     rhs =
-      appFun (var "Core.defaultService") $
-        [ var "Core.ServiceId" `app` textE _dId
-          -- textE . stripSuffix "/" $ stripPrefix "https://" _dRootUrl
+      appFun (var "Core.newService") $
+        [ textE _dId,
+          textE (fromMaybe <*> Text.stripSuffix "/" $ _dRootUrl)
         ]
 
--- paramsDecl :: Description Solved -> Global -> (Decl (), Map Local Solved)
--- paramsDecl Description {_dParameters} n =
---   ( recordDecl n params,
---     params
---   )
---   where
---     params =
---       Map.map _pParam
---         . Map.filterWithKey (\k _v -> notElem k ["alt", "uploadType"])
---         $ _dParameters
+paramsDecl :: Description Solved -> Global -> (Decl (), Map Local Solved)
+paramsDecl Description {_dParameters} n =
+  ( recordDecl n params,
+    params
+  )
+  where
+    params =
+      Map.map _pParam
+        . flip Map.withoutKeys specialParamNames
+        $ _dParameters

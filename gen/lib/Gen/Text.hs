@@ -3,11 +3,11 @@ module Gen.Text
     upperHead,
     lowerHead,
     toCamel,
+    toPascal,
     splitWords,
   )
 where
 
-import Control.Error ()
 import qualified Data.Char as Char
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set

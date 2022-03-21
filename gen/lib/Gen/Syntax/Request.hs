@@ -4,7 +4,9 @@ import Control.Lens (view, (^.))
 import qualified Data.Foldable as Foldable
 import qualified Data.List as List
 import qualified Data.Map.Strict as Map
+import qualified Data.Set as Set
 import qualified Data.Text as Text
+import Debug.Trace
 import Gen.Prelude
 import Gen.Syntax.Build
 import Gen.Types
@@ -15,24 +17,30 @@ requestInstances :: Service Solved -> Method Solved -> Solved -> [Decl ()]
 requestInstances service method@Method {..} request =
   catMaybes
     [ Just (requestInstance service method request),
-      mediaInstance service method request,
+      downloadInstance service method request,
       multipartInstance service method request,
       resumableInstance service method request
     ]
 
 requestInstance :: Service Solved -> Method Solved -> Solved -> Decl ()
 requestInstance service@Service {_sDescription} method request@Solved {_unique, _schema} =
-  instDecl requestHead (Just requestDecls)
+  requestDecl Nothing instanceType instanceDecls
   where
-    requestHead = iRule (iCon "Core.GoogleRequest" `iApp` instanceType)
+    instanceHead = Nothing
     instanceType = tyCon requestName
+
     requestName = dname _unique
 
+    paramsName = dname (getServiceParamsName service)
     paramsEmpty = Map.null (_dParameters _sDescription)
+    paramsType
+      | paramsEmpty = tyCon "()"
+      | otherwise = tyCon paramsName
 
-    requestDecls =
-      [ iScopes method instanceType,
-        iResponse instanceType (tyResponse method),
+    instanceDecls =
+      [ iType (tyScopesF instanceType) (tyScopes method),
+        iType (tyParamsF instanceType) paramsType,
+        iType (tyResponseF instanceType) (tyResponse method),
         iDecl requestBind,
         iDecl responseBind
       ]
@@ -46,12 +54,14 @@ requestInstance service@Service {_sDescription} method request@Solved {_unique, 
         unguardedRhs (var "Core.parseJSONResponse")
 
     requestPats =
-      [ pRecord requestName (hasProperties _schema)
+      [ pRecord paramsName [pFieldWild | not paramsEmpty],
+        pRecord requestName [pFieldWild | hasProperties _schema]
       ]
 
     requestUpdate =
       recordUpdateE (var "Core.newRequest") $
-        [ fieldUpdate "requestMethod" (textE (_mHttpMethod method)),
+        [ fieldUpdate "requestService" (textE (_dId _sDescription)),
+          fieldUpdate "requestMethod" (textE (_mHttpMethod method)),
           fieldUpdate "requestPath" (requestPathE _sDescription method),
           fieldUpdate "requestQuery" (queryE _sDescription method),
           fieldUpdate "requestAlt" (altE _sDescription),
@@ -63,19 +73,19 @@ requestInstance service@Service {_sDescription} method request@Solved {_unique, 
         Nothing -> var "Core.mempty"
         Just {} -> var "Core.toRequestBodyJSON" `app` var (fname "payload")
 
-mediaInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
-mediaInstance service@Service {_sDescription} method request@Solved {_unique, _schema} = do
+downloadInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
+downloadInstance service@Service {_sDescription} method request@Solved {_unique, _schema} =
   guard (_mSupportsMediaDownload method && not (_mSupportsMediaUpload method))
-
-  pure $! instDecl instanceHead (Just instanceDecls)
+    $> requestDecl Nothing instanceType instanceDecls
   where
-    instanceHead = iRule (iCon "Core.GoogleRequest" `iApp` tyParen instanceType)
-    instanceType = tyCon "Core.MediaRequest" `tyApp` wrappedType
+    instanceType = tyParen (tyCon "Core.MediaRequest" `tyApp` wrappedType)
+
     wrappedType = tyCon (dname _unique)
 
     instanceDecls =
-      [ iResponse instanceType (tyCon "Core.BodyReader"),
-        iScopesDefer instanceType wrappedType,
+      [ iType (tyScopesF instanceType) (tyScopesF wrappedType),
+        iType (tyParamsF instanceType) (tyParamsF wrappedType),
+        iType (tyResponseF instanceType) (tyCon "Core.BodyReader"),
         iDecl requestBind,
         iDecl responseBind
       ]
@@ -85,84 +95,141 @@ mediaInstance service@Service {_sDescription} method request@Solved {_unique, _s
         unguardedRhs (var "toMediaRequest")
 
     responseBind =
-      funBind (name "parseRequest") [] $
+      funBind (name "parseResponse") [] $
         unguardedRhs (var "parseMediaResponse")
 
-multipartInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
-multipartInstance service@Service {_sDescription} method request@Solved {_unique, _schema} = do
-  guard (_mSupportsMediaUpload method)
+data Upload = Upload
+  { requestAccept :: Set Text,
+    requestName :: Name (),
+    requestFieldName :: Name (),
+    toRequestName :: Name (),
+    parseResponseName :: Name (),
+    responseBody :: Maybe (Type ())
+  }
 
-  path <- simplePathE <$> _mMediaUpload method
-
-  pure $! instDecl instanceHead (Just (instanceDecls path))
+uploadInstance :: Service Solved -> Method Solved -> Solved -> Upload -> Decl ()
+uploadInstance Service {_sDescription} method Solved {_unique, _schema} Upload {..} =
+  requestDecl instanceHead instanceType instanceDecls
   where
-    instanceHead = iRule (iCon "Core.GoogleRequest" `iApp` tyParen instanceType)
-    instanceType = tyCon "Core.SimpleRequest" `tyApp` wrappedType
-    wrappedType = tyCon (dname _unique)
+    instanceHead =
+      if Set.member "*/*" requestAccept
+        then Nothing
+        else do
+          let accepts = Set.toList (Set.delete "*/*" requestAccept)
 
-    instanceDecls path =
-      [ iResponse instanceType (tyResponse method),
-        iScopesDefer instanceType wrappedType,
-        iDecl (requestBind path),
+          pure . cxSingle $
+            tyCon "Core.Accepts"
+              `tyApp` tyVar "media"
+              `tyApp` tyList (map tySymbol accepts)
+
+    instanceType =
+      tyParen (tyCon requestName `tyApp` tyVar "media" `tyApp` wrappedType)
+
+    wrappedName = dname _unique
+    wrappedType = tyCon wrappedName
+
+    instanceDecls =
+      [ iType (tyScopesF instanceType) (tyScopesF wrappedType),
+        iType (tyParamsF instanceType) (tyParamsF wrappedType),
+        iType (tyResponseF instanceType) (tyResponse method),
+        iDecl requestBind,
         iDecl responseBind
       ]
 
-    requestBind path =
+    -- Note: stopped destructuring full path for /upload + /resumable/upload
+    -- prefixed paths as it forces two serializations of the path components.
+    --
+    -- The invariant that a path must be identical to the terminal
+    -- GoogleRequest instance with on an /upload or /resumable/upload
+    -- prefix is a partial/HasCallStack check instead.
+    --
+    -- infixApp (var toRequestName `app` var "params" `app` var "request")
+    --    "Core.$" requestPath
+    --
+    -- requestPats =
+    --   [ pAs (name "request") . pRecord requestName $
+    --       [ pField requestFieldName (pRecord wrappedName [pFieldWild])
+    --       ]
+    --   ]
+
+    requestBind =
       funBind (name "toRequest") [] $
-        unguardedRhs (var "Core.toMultipartRequest" `app` paren path)
+        unguardedRhs (var toRequestName `app` uploadE _sDescription)
 
     responseBind =
-      funBind (name "parseRequest") [] $
-        unguardedRhs (var "Core.parseMultipartResponse")
+      funBind (name "parseResponse") [] $
+        unguardedRhs (var parseResponseName)
+
+multipartInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
+multipartInstance service method request = do
+  guard (_mSupportsMediaUpload method && not (_mSupportsMediaDownload method))
+
+  MediaUpload {_muAccept, _muSimplePath} <- _mMediaUpload method
+
+  checkUpload service method "/upload/" _muSimplePath
+
+  pure $! uploadInstance service method request $
+    Upload
+      { requestAccept = Set.fromList _muAccept,
+        requestName = name "Core.MultipartRequest",
+        requestFieldName = name "Core.multipartRequest",
+        toRequestName = name "Core.toMultipartRequest",
+        parseResponseName = name "Core.parseMultipartResponse",
+        responseBody = Nothing
+      }
 
 resumableInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
-resumableInstance service@Service {_sDescription} method request@Solved {_unique, _schema} = do
-  guard (_mSupportsMediaDownload method && not (_mSupportsMediaUpload method))
+resumableInstance service method request = do
+  guard (_mSupportsMediaUpload method && not (_mSupportsMediaDownload method))
 
-  path <- resumablePathE =<< _mMediaUpload method
+  MediaUpload {_muAccept, _muResumablePath} <- _mMediaUpload method
 
-  pure $! instDecl instanceHead (Just (instanceDecls path))
-  where
-    instanceHead = iRule (iCon "Core.GoogleRequest" `iApp` tyParen instanceType)
-    instanceType = tyCon "Core.ResumableRequest" `tyApp` wrappedType
-    wrappedType = tyCon (dname _unique)
+  checkUpload service method "/resumable/upload/" =<< _muResumablePath
 
-    instanceDecls path =
-      [ iResponse instanceType (tyResponse method),
-        iScopesDefer instanceType wrappedType,
-        iDecl (requestBind path),
-        iDecl responseBind
-      ]
+  pure $! uploadInstance service method request $
+    Upload
+      { requestAccept = Set.fromList _muAccept,
+        requestName = name "Core.ResumableRequest",
+        requestFieldName = name "Core.resumableRequest",
+        toRequestName = name "Core.toResumableRequest",
+        parseResponseName = name "Core.parseResumableResponse",
+        responseBody = Just (tyCon "Core.Location")
+      }
 
-    requestBind path =
-      funBind (name "toRequest") [] $
-        unguardedRhs (var "Core.toResumableRequest" `app` paren path)
+checkUpload :: Service Solved -> Method Solved -> Text -> Text -> Maybe ()
+checkUpload Service {_sDescription} Method {_mPath} prefix actual = do
+  let expect =
+        prefix
+          <> (fromMaybe <*> Text.stripPrefix "/") (_dBasePath _sDescription)
+          <> _mPath
 
-    responseBind =
-      funBind (name "parseRequest") [] $
-        unguardedRhs (var "Core.parseResumableResponse")
+  unless (actual == expect) $
+    error $
+      "(checkUpload) missing prefix on method.path: "
+        ++ show prefix
+        ++ "\n  mediaUpload.path: "
+        ++ show actual
+        ++ "\n  method.path:      "
+        ++ show expect
 
-iResponse :: Type () -> Type () -> InstDecl ()
-iResponse itype = iType (tyCon "Response" `tyApp` itype)
+requestDecl :: Maybe (Context ()) -> Type () -> [InstDecl ()] -> Decl ()
+requestDecl ctx rhs decls =
+  instDecl (iRule ctx (iCon "Core.GoogleRequest" `iApp` rhs)) (Just decls)
+
+tyScopes :: Method a -> Type ()
+tyScopes Method {_mScopes} = tyList (map (tyCon . name . getScopeName) _mScopes)
 
 tyResponse :: Method a -> Type ()
 tyResponse Method {_mResponse} = maybe (unit_tycon ()) tyRef _mResponse
 
-iScopes :: Method a -> Type () -> InstDecl ()
-iScopes Method {_mScopes} itype =
-  iType (tyScopes itype) (tyList (map (tyCon . name . scopeName) _mScopes))
+tyScopesF :: Type () -> Type ()
+tyScopesF = tyApp (tyCon "Core.Scopes")
 
-iScopesDefer :: Type () -> Type () -> InstDecl ()
-iScopesDefer itype = iType (tyScopes itype)
+tyParamsF :: Type () -> Type ()
+tyParamsF = tyApp (tyCon "Core.Params")
 
-tyScopes :: Type () -> Type ()
-tyScopes = tyApp (tyCon "Scopes")
-
-simplePathE :: MediaUpload -> Exp ()
-simplePathE = pathE Nothing . _muSimplePath
-
-resumablePathE :: MediaUpload -> Maybe (Exp ())
-resumablePathE = fmap (pathE Nothing) . _muResumablePath
+tyResponseF :: Type () -> Type ()
+tyResponseF = tyApp (tyCon "Core.Response")
 
 requestPathE :: Description a -> Method b -> Exp ()
 requestPathE Description {_dBasePath} = pathE (Just _dBasePath) . _mPath
@@ -173,15 +240,22 @@ pathE mbase path =
   var "Core.toRequestPath" `app` listE components
   where
     components =
-      -- Assume the base path always has a trailing slash.
+      -- Fuse together adjacent text segments in the codegen.
       fuseE
-        . maybe id (\x xs -> textE x : xs) mbase
+        . (baseUrl :)
         . List.intersperse (strE "/")
-        . concatMap go
+        . concatMap encode
         . extractPath
         $ path
 
-    go = \case
+    baseUrl =
+      -- Assume the base path always has a trailing slash.
+      case mbase of
+        Nothing -> textE "/"
+        Just "" -> textE "/"
+        Just url -> textE url
+
+    encode = \case
       Left constant ->
         [textE constant]
       Right (capture, mmode) ->
@@ -200,9 +274,8 @@ queryE Description {_dParameters} Method {_mParameters, _mParameterOrder} =
     unorderedParams =
       Map.toList
         . Map.filter (\v -> _pLocation v /= Path)
-        . Map.delete "alt"
-        . Map.delete "uploadType"
-        $ _mParameters <> _dParameters
+        . flip Map.withoutKeys specialParamNames
+        $ mappend _mParameters _dParameters
 
     go (k, x) =
       case _pLocation x of
@@ -233,3 +306,12 @@ altE Description {_dParameters} =
   case Map.lookup "alt" _dParameters >>= view iDefault of
     Nothing -> var "Core.Nothing"
     Just ok -> var "Core.Just" `app` textE ok
+
+uploadE :: Description Solved -> Exp ()
+uploadE Description {_dParameters}
+  -- Upload protocol for media (e.g. "raw", "multipart").
+  | Map.member "upload_protocol" _dParameters = var "Core.UploadProtocol"
+  -- Legacy upload protocol for media (e.g. "media", "multipart").
+  | Map.member "uploadType" _dParameters = var "Core.UploadType"
+  -- Error, no upload protocol supported?
+  | otherwise = var "Core.UploadType"

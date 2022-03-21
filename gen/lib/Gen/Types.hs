@@ -4,10 +4,10 @@ module Gen.Types
   ( module Gen.Types,
     module Gen.Types.Help,
     module Gen.Types.Id,
+    module Gen.Types.Data,
     module Gen.Types.Map,
     module Gen.Types.NS,
     module Gen.Types.Schema,
-    module Gen.Types.Data,
   )
 where
 
@@ -114,7 +114,8 @@ data Model = Model
     modelPrefix :: Text,
     modelVersion :: ModelVersion,
     modelPath :: FilePath
-  } deriving stock (Show)
+  }
+  deriving stock (Show)
 
 instance Eq Model where
   (==) = on (==) modelPrefix
@@ -125,17 +126,28 @@ instance Ord Model where
       <> on compare (Down . modelVersion) a b
 
 modelFromPath :: HasCallStack => FilePath -> Model
-modelFromPath x = Model n p v x
+modelFromPath modelPath = Model {..}
   where
-    n =
+    modelName =
       Text.intercalate "/"
         . drop 1
         . List.dropWhile (/= "models")
         . Text.split (== '/')
-        $ p
+        $ modelPrefix
 
-    p = Text.pack $ FilePath.takeDirectory (FilePath.takeDirectory x)
-    v = either error id . parseVersion . Text.pack $ FilePath.takeDirectory x
+    modelPrefix =
+      Text.pack
+        . FilePath.takeDirectory
+        . FilePath.takeDirectory
+        $ modelPath
+
+    modelVersion =
+      either error id
+        . parseVersion
+        . Text.pack
+        . FilePath.takeBaseName
+        . FilePath.takeDirectory
+        $ modelPath
 
 data Templates = Templates
   { cabalTemplate :: Template,
@@ -173,11 +185,8 @@ sumNS = (<> "Internal.Sum") . tocNS
 
 exposedModules :: Library -> [NS]
 exposedModules l =
-  List.sort $
-    tocNS l :
-    typesNS l :
-    map _actNamespace (_apiResources (_lAPI l))
-      ++ map _actNamespace (_apiMethods (_lAPI l))
+  (tocNS l :) . (typesNS l :) . map actionNs . Set.toList $
+    apiResources (_lAPI l) <> apiMethods (_lAPI l)
 
 otherModules :: Library -> [NS]
 otherModules s = List.sort [prodNS s, sumNS s]
@@ -186,7 +195,7 @@ data Library = Library
   { _lVersion :: Version,
     _lService :: Service Global,
     _lAPI :: API,
-    _lSchemas :: [Data]
+    _lSchemas :: Set Data
   }
 
 makeLenses ''Library
@@ -203,7 +212,7 @@ instance ToJSON Library where
       -- Library
       [ "libraryName" .= (l ^. sLibrary),
         "libraryTitle" .= renameTitle (l ^. dTitle),
-        "libraryDescription" .= Desc 4 (l ^. dDescription),
+        "libraryDescription" .= Desc @4 (l ^. dDescription),
         "libraryVersion" .= (l ^. lVersion),
         "exposedModules" .= exposedModules l,
         "otherModules" .= otherModules l,
@@ -298,23 +307,6 @@ data Memo = Memo
     _branches :: Seen,
     _fields :: Seen
   }
-
-initial :: Service (Fix Schema) -> Memo
-initial s = Memo s mempty mempty res core mempty mempty mempty
-  where
-    -- Top-level schema definitions with ids.
-    res =
-      Set.fromList
-        . mapMaybe (view iId)
-        $ Map.elems (s ^. dSchemas)
-    -- Types available in Gogol.Prelude.
-    core =
-      Map.fromList
-        [ ("GBody", SLit requiredInfo RqBody),
-          ("Stream", SLit requiredInfo RsBody),
-          ("JsonValue", SLit requiredInfo JSONValue),
-          ("JSONValue", SLit requiredInfo JSONValue)
-        ]
 
 makeLenses ''Memo
 

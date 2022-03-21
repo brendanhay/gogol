@@ -26,12 +26,13 @@ newtype Fix f = Fix (f (Fix f))
 data Location
   = Query
   | Path
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 deriveJSON jsonOptions ''Location
 
 newtype Ann = Ann {annRequired :: [Local]}
-  deriving (Eq, Show, Monoid)
+  deriving stock (Eq, Show)
+  deriving newtype (Monoid)
 
 instance Semigroup Ann where
   a <> b = Ann (annRequired a <> annRequired b)
@@ -49,7 +50,7 @@ data Info = Info
     _iRepeated :: Bool,
     _iAnnotations :: Ann
   }
-  deriving (Show)
+  deriving stock (Show)
 
 makeClassy ''Info
 
@@ -109,7 +110,7 @@ data Schema a
   | SEnm Info Enm
   | SArr Info (Arr a)
   | SObj Info (Obj a)
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON (Fix Schema) where
   parseJSON o = do
@@ -160,13 +161,13 @@ hasProperties = \case
   _other -> False
 
 data Any = Any
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON Any where
   parseJSON = Aeson.withObject "any" (\o -> Any <$ checkType "any" o)
 
 newtype Ref = Ref {ref :: Global}
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON Ref where
   parseJSON = Aeson.withObject "ref" (\o -> fmap Ref (o .: "$ref"))
@@ -193,7 +194,7 @@ data Lit
   | RsBody
   | JSONValue
   | Alt Text
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON Lit where
   parseJSON =
@@ -237,7 +238,7 @@ instance FromJSON Lit where
         format -> fail $ "failure parsing Lit: " ++ show ("string" :: Text, format)
 
 newtype Enm = Enm {_eValues :: [(Text, Help)]}
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON Enm where
   parseJSON =
@@ -248,7 +249,7 @@ instance FromJSON Enm where
       pure $! Enm (zip vs (ds ++ repeat mempty))
 
 newtype Arr a = Arr {_aItem :: a}
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON a => FromJSON (Arr a) where
   parseJSON =
@@ -260,7 +261,7 @@ data Obj a = Obj
   { _oAdditional :: Maybe a,
     _oProperties :: Map Local a
   }
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON a => FromJSON (Obj a) where
   parseJSON =
@@ -273,7 +274,7 @@ data Param a = Param
   { _pLocation :: Location,
     _pParam :: a
   }
-  deriving (Eq, Show, Functor, Foldable, Traversable)
+  deriving stock (Eq, Show, Functor, Foldable, Traversable)
 
 makeLenses ''Param
 
@@ -293,7 +294,7 @@ data MediaUpload = MediaUpload
     _muResumablePath :: Maybe Text,
     _muSimplePath :: Text
   }
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON MediaUpload where
   parseJSON =
@@ -319,7 +320,7 @@ data Method a = Method
     _mMediaUpload :: Maybe MediaUpload,
     _mSupportsSubscription :: Bool
   }
-  deriving (Eq, Show, Functor, Foldable, Traversable)
+  deriving stock (Eq, Show, Functor, Foldable, Traversable)
 
 instance FromJSON a => FromJSON (Method a) where
   parseJSON =
@@ -343,7 +344,7 @@ data Resource a = Resource
   { _rResources :: Map Local (Resource a),
     _rMethods :: [Method a]
   }
-  deriving (Eq, Show, Functor, Foldable, Traversable)
+  deriving stock (Eq, Show, Functor, Foldable, Traversable)
 
 instance FromJSON a => FromJSON (Resource a) where
   parseJSON =
@@ -352,8 +353,9 @@ instance FromJSON a => FromJSON (Resource a) where
         <$> o .:? "resources" .!= mempty
         <*> (o .:? "methods" .!= mempty <&> keyless)
 
-newtype OAuth2 = OAuth2 {scopes :: Map Text Help}
-  deriving (Eq, Show, ToJSON)
+newtype OAuth2 = OAuth2 {fromOAuth2 :: Map Text Help}
+  deriving stock (Eq, Show)
+  deriving newtype (Semigroup, Monoid, ToJSON)
 
 instance FromJSON OAuth2 where
   parseJSON =
@@ -366,7 +368,7 @@ data Label
   = Deprecated
   | LimitedAvailability
   | Labs
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 instance FromJSON Label where
   parseJSON =
@@ -408,7 +410,7 @@ data Description a = Description
     _dResources :: Map Global (Resource a),
     _dMethods :: [Method a]
   }
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 makeClassy ''Description
 
@@ -448,7 +450,7 @@ data Service a = Service
     _sPackagePath :: Maybe Text,
     _sDescription :: Description a
   }
-  deriving (Eq, Show)
+  deriving stock (Eq, Show)
 
 makeClassy ''Service
 
@@ -466,24 +468,39 @@ instance FromJSON a => FromJSON (Service a) where
 instance HasDescription (Service a) a where
   description = sDescription
 
-serviceName :: Service a -> String
-serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
+getServiceName :: Service a -> String
+getServiceName = Text.unpack . (<> "Service") . toPascal . _sCanonicalName
 
-scopeName :: HasCallStack => Text -> String
-scopeName full =
-  case Text.stripPrefix "https://www.googleapis.com/auth/" full of
-    Nothing -> error $ "(scopeName): unrecognised oauth2 scope format " ++ show full
-    Just suffix
-      | implicit suffix -> splitTop suffix <> "'FullControl"
-      | otherwise -> splitTop suffix
+getServiceParamsName :: Service a -> Global
+getServiceParamsName = newGlobal . (<> "Params") . toPascal . _sCanonicalName
+
+getScopeName :: HasCallStack => Text -> String
+getScopeName = \case
+  -- gmail-api.json
+  "https://mail.google.com/" ->
+    "Gmail'FullControl"
+  -- script-api.json
+  "https://www.google.com/calendar/feeds" ->
+    "Calendar'Feeds'FullControl"
+  "https://www.google.com/m8/feeds" ->
+    "M8'Feeds'FullControl"
+  -- oauth2-api.json
+  "openid" ->
+    "OAuth2'OpenID"
+  --
+  scope
+    | Just x <- Text.stripPrefix "https://www.googleapis.com/auth/" scope -> rename x
+    | otherwise -> error $ "(scopeName): unrecognised oauth2 scope format " ++ show scope
   where
     -- FIXME: use a parser combinator here.
 
-    implicit =
-      not
-        . Text.any (== '.')
+    rename text
+      | isImplicit text = split text <> "'FullControl"
+      | otherwise = split text
 
-    splitTop =
+    isImplicit = not . Text.any (== '.')
+
+    split =
       Text.unpack
         . mconcat
         . List.intersperse "'"

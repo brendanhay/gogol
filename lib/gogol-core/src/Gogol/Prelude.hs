@@ -60,7 +60,7 @@ import qualified Data.Text.Lazy.Builder as Text.Lazy.Builder
 import Data.Time as Export (Day, DiffTime, NominalDiffTime, TimeOfDay, UTCTime)
 import Data.Void as Export (Void)
 import Data.Word as Export (Word16, Word32, Word64, Word8)
-import GHC.Exts as Export (IsList (..), Proxy#, proxy#)
+import GHC.Exts as Export (Constraint, IsList (..))
 import GHC.Generics as Export (Generic)
 import GHC.TypeLits as Export (KnownNat, KnownSymbol, Nat, Symbol)
 import Numeric.Natural as Export (Natural)

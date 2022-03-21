@@ -85,7 +85,7 @@ import Data.Word as Export (Word16, Word32, Word64, Word8)
 import GHC.Exts as Export (Constraint, IsList (fromList, toList))
 import GHC.Generics as Export (Generic)
 import GHC.Stack as Export (HasCallStack)
-import GHC.TypeLits as Export (KnownNat, KnownSymbol, Nat, Symbol)
+import GHC.TypeLits as Export (KnownNat, KnownSymbol, Nat, Symbol, natVal, natVal', symbolVal)
 import Numeric.Natural as Export (Natural)
 import System.FilePath as Export ((<.>), (</>))
 import Prelude as Export hiding

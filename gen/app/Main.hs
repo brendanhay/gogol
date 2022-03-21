@@ -78,8 +78,6 @@ main = do
       modelCount = length models
       modelTotal = length optionModels
 
-  print models
-
   skipped <- IORef.newIORef []
 
   title "Initialising..."
@@ -88,7 +86,7 @@ main = do
       skip = IORef.modifyIORef skipped . (:)
 
   title ("Loading templates from " % string) optionTemplates
- 
+
   templates <-
     Templates
       <$> load "cabal.ede"

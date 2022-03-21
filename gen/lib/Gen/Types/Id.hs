@@ -28,6 +28,10 @@ module Gen.Types.Id
     cname,
     bname,
     fname,
+
+    -- * Parameters
+    specialParamNames,
+    reservedParamNames,
   )
 where
 
@@ -69,8 +73,7 @@ dname =
   name
     . Text.unpack
     . renameReserved
-    . upperHead
-    . Text.dropWhile separator
+    . joinPascalName
     . global
 
 cname :: Global -> Name ()
@@ -79,8 +82,7 @@ cname =
     . Text.unpack
     . renameReserved
     . mappend "new"
-    . upperHead
-    . Text.dropWhile separator
+    . joinPascalName
     . global
 
 bname :: Prefix -> Text -> Name ()
@@ -103,9 +105,14 @@ dstr =
   strE
     . Text.unpack
     . renameReserved
-    . upperHead
-    . Text.dropWhile separator
+    . joinPascalName
     . global
+
+joinPascalName :: Text -> Text
+joinPascalName =
+  mconcat
+    . map upperHead
+    . Text.split (\c -> c == '_' || separator c)
 
 newtype Suffix = Suffix Text
   deriving (Show, IsString)
@@ -171,10 +178,11 @@ globalise :: Local -> Global
 globalise = Global . (: []) . local
 
 extractPath :: Text -> [Either Text (Local, Maybe Text)]
-extractPath x = either (error . err) id $ Atto.parseOnly path x
+extractPath x =
+  case Atto.parseOnly path x of
+    Left err -> error ("Error parsing \"" <> Text.unpack x <> "\", " <> err)
+    Right xs -> xs
   where
-    err e = "Error parsing \"" <> Text.unpack x <> "\", " <> e
-
     path = Atto.many1 (seg <|> rep <|> var') <* Atto.endOfInput
 
     seg =
@@ -197,23 +205,30 @@ extractPath x = either (error . err) id $ Atto.parseOnly path x
           <*> optional (Atto.char ':' *> Atto.takeWhile1 (Atto.notInClass "/{+*}:"))
 
 orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
-orderParams f xs ys = orderBy f zs (del zs [] ++ reserve)
-  where
-    zs = orderBy f (List.sortOn f xs) (Set.toList (Set.fromList (ys ++ map f xs)))
+orderParams f xs = orderBy f (List.sortOn f xs)
 
-    del _ [] = []
-    del [] rs = reverse rs
-    del (r : qs) rs
-      | f r `elem` reserve = del qs rs
-      | otherwise = del qs (f r : rs)
+specialParamNames :: Set Local
+specialParamNames =
+  Set.fromList
+    [ "alt",
+      "uploadType",
+      "upload_protocol"
+    ]
 
-    reserve =
-      [ "quotaUser",
-        "prettyPrint",
-        "userIp",
-        "fields",
-        "alt"
-      ]
+reservedParamNames :: Set Local
+reservedParamNames =
+  Set.fromList
+    [ "access_token",
+      "oauth_token",
+      "quotaUser",
+      "prettyPrint",
+      "userIp",
+      "fields",
+      "key",
+      "alt",
+      "uploadType",
+      "upload_protocol"
+    ]
 
 orderBy :: Eq b => (a -> b) -> [a] -> [b] -> [a]
 orderBy g xs ys = List.sortOn (flip List.elemIndex ys . g) xs

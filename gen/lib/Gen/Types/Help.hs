@@ -19,7 +19,7 @@ data Help
   = Help [Help]
   | Pan Pandoc Text
   | Raw Text
-  deriving (Eq)
+  deriving stock (Eq, Ord)
 
 instance Semigroup Help where
   (<>) x y =
@@ -34,9 +34,8 @@ instance Semigroup Help where
 instance Monoid Help where
   mempty = Help []
 
--- | Empty Show instance to avoid verbose debugging output.
 instance Show Help where
-  show = const mempty
+  showsPrec _ = shows . flattenHelp
 
 instance IsString Help where
   fromString = rawHelpText . fromString
@@ -52,26 +51,31 @@ instance FromJSON Help where
         Right x -> pure $! Pan x t
 
 instance ToJSON Help where
-  toJSON = Aeson.toJSON . Nest 0
+  toJSON = Aeson.toJSON . renderHelp 0
 
-data Desc = Desc !Int64 Help
+newtype Desc (indent :: Nat) = Desc Help
+  deriving stock (Eq, Ord)
 
-instance ToJSON Desc where
-  toJSON (Desc n h) = Aeson.toJSON (wrapHelp (Text.Lazy.replicate n " ") h)
+instance KnownNat indent => ToJSON (Desc indent) where
+  toJSON (Desc h) =
+    Aeson.toJSON $
+      wrapHelp (Text.Lazy.replicate (fromIntegral (natVal (Proxy @indent))) " ") h
 
-data Nest = Nest !Int64 Help
+newtype Nest (indent :: Nat) = Nest Help
+  deriving stock (Show, Eq, Ord)
 
-instance ToJSON Nest where
-  toJSON = Aeson.toJSON . renderHelp
+instance KnownNat indent => ToJSON (Nest indent) where
+  toJSON (Nest h) =
+    Aeson.toJSON $
+      renderHelp (fromIntegral (natVal (Proxy @indent))) h
 
-renderHelp :: Nest -> TextLazy
-renderHelp (Nest n h) =
+renderHelp :: Natural -> Help -> TextLazy
+renderHelp indent =
   mappend (sep <> "| ")
     . Text.Lazy.drop (Text.Lazy.length sep)
     . wrapHelp sep
-    $ h
   where
-    sep = Text.Lazy.replicate n " " <> "-- "
+    sep = Text.Lazy.replicate (fromIntegral indent) " " <> "-- "
 
 wrapHelp :: TextLazy -> Help -> TextLazy
 wrapHelp sep =

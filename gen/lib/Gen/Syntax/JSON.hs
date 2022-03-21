@@ -15,7 +15,7 @@ jsonInstances :: Global -> Map Local Solved -> [Decl ()]
 jsonInstances g (Map.toList -> rs) = [decodeJSON, encodeJSON]
   where
     decodeJSON =
-      instDecl (iRule (iCon "Core.FromJSON" `iApp` tyCon (dname g))) $
+      instDecl (iRule Nothing (iCon "Core.FromJSON" `iApp` tyCon (dname g))) $
         Just
           [ iDecl . patBind (pvar "parseJSON") $
               app (app (var "Core.withObject") (dstr g)) $
@@ -44,7 +44,7 @@ jsonInstances g (Map.toList -> rs) = [decodeJSON, encodeJSON]
             ]
 
     encodeInst =
-      instDecl (iRule (iCon "Core.ToJSON" `iApp` tyCon (dname g)))
+      instDecl (iRule Nothing (iCon "Core.ToJSON" `iApp` tyCon (dname g)))
         . Just
 
     omitNulls = app (var "Core.object") . app (var "Core.catMaybes") . listE
@@ -81,7 +81,7 @@ iWildcard ::
   InstDecl ()
 iWildcard f n encode def = \case
   [] -> iConst f def
-  xs -> iDecl (funBind (name f) [pRecord (dname n) True] (unguardedRhs (encode xs)))
+  xs -> iDecl (funBind (name f) [pRecord (dname n) [pFieldWild]] (unguardedRhs (encode xs)))
 
 iConst :: String -> Exp () -> InstDecl ()
 iConst f x = iDecl (sfun (name f) [] (unguardedRhs (var "Core.const" `app` x)) noBinds)

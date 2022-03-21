@@ -33,24 +33,26 @@ newtype Boundary = Boundary ByteString
 newBoundary :: MonadIO m => m Boundary
 newBoundary = Boundary <$> liftIO Multipart.webkitBoundary
 
+type Part = Multipart.PartM Identity
+
 -- | A (potentially)_ multipart request body containing the mime type of the contents,
 -- to inform any headers or multipart boundaries which should be set on the request.
 data Body
   = Metadata Media.MediaType Client.RequestBody
-  | Related (NonEmpty Multipart.Part)
+  | Related (NonEmpty Part)
 
-toJSONBody :: ToJSON a => a -> Body
-toJSONBody =
-  Metadata ("application" // "json")
-    . Client.RequestBodyLBS
-    . Aeson.encode
+-- toJSONBody :: ToJSON a => a -> Body
+-- toJSONBody =
+--   Metadata ("application" // "json")
+--     . Client.RequestBodyLBS
+--     . Aeson.encode
 
-toMultipartBody :: ToJSON a => a -> Multipart.Part -> Body
-toMultipartBody meta body =
-  Related (Multipart.partLBS "metadata" (Aeson.encode meta) :| [body])
+-- toMultipartBody :: ToJSON a => a -> Part -> Body
+-- toMultipartBody meta body =
+--   Related (Multipart.partLBS "metadata" (Aeson.encode meta) :| [body])
 
-toRequestBody :: IO Boundary -> Body -> IO (Media.MediaType, Client.RequestBody)
-toRequestBody getBoundary _ = undefined
+-- toRequestBody :: Boundary -> Body -> IO (Media.MediaType, Client.RequestBody)
+-- toRequestBody bdry _ = undefined
 
 -- Metadata media body ->
 --   pure (media, body)
@@ -64,14 +66,14 @@ toRequestBody getBoundary _ = undefined
 --     , body
 --     )
 
-renderParts :: Applicative f => Boundary -> [Multipart.PartM f] -> f Client.RequestBody
-renderParts bdry@(Boundary boundary) =
-  fmap (\xs -> mconcat (copy "--" : copy boundary : copy "--\r\n" : xs))
-    . traverse (renderPart bdry)
+renderParts :: Boundary -> [Part] -> Client.RequestBody
+renderParts bdry@(Boundary boundary) xs =
+  foldMap (renderPart bdry) xs
+    <> mconcat [copy "--", copy boundary, copy "--\r\n"]
 
-renderPart :: Functor f => Boundary -> Multipart.PartM f -> f Client.RequestBody
+renderPart :: Boundary -> Part -> Client.RequestBody
 renderPart (Boundary boundary) part =
-  render <$> Multipart.partGetBody part
+  runIdentity (render <$> Multipart.partGetBody part)
   where
     render body =
       mconcat

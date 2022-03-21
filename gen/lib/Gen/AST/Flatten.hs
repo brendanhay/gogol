@@ -61,7 +61,7 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
     object p (Obj aps ps) =
       Obj
         <$> traverse (localSchema p "additional") aps
-        <*> Map.traverseWithKey (localSchema (p <> "_")) ps
+        <*> Map.traverseWithKey (\k v -> localSchema (p <> "'") k v) ps
 
     name i p xs
       | Just x <- i ^. iId = pure x
@@ -138,9 +138,7 @@ method ::
   Method (Fix Schema) ->
   AST (Method Global)
 method canonical globalParams suf m@Method {..} = do
-  params <-
-    (<> globalParams)
-      <$> Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
+  params <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
 
   let (typ', _) = mname canonical _mId
 

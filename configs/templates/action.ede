@@ -7,12 +7,9 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference> for @{{ action.id }}@.
 module {{ action.ns }}
     (
-    -- * Resource
-      {{ action.aliasName }}
-
-    -- ** Constructing a Request
-    , {{ action.type.ctor.name }}
-    , {{ action.type.name }}
+    -- * Constructing a Request
+    {{ action.data.name }} (..),
+    {{ action.data.ctor.name }},
     ) where
 
 import qualified Gogol.Prelude as Core
@@ -20,8 +17,4 @@ import qualified Gogol.Prelude as Core
 import {{ import.value }}
 {% endfor %}
 
--- | A resource alias for @{{ action.id }}@ method which the
--- '{{ action.type.name }}' request conforms to.
-{{ action.alias }}
-
-{% include "_include/prod.ede" with type = action.type %}
+{% include "_include/prod.ede" with type = action.data %}

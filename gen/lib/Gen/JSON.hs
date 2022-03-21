@@ -1,6 +1,5 @@
 module Gen.JSON where
 
-import Control.Error ()
 import Data.Aeson (Object, Value (..))
 import qualified Data.Aeson as Aeson
 import qualified Data.Char as Char
@@ -31,7 +30,12 @@ jsonMerge = foldl' go mempty
 jsonOptions :: Aeson.Options
 jsonOptions =
   Aeson.defaultOptions
-    { Aeson.constructorTagModifier = map Char.toLower,
+    { Aeson.sumEncoding =
+        Aeson.TaggedObject
+          { Aeson.tagFieldName = "type",
+            Aeson.contentsFieldName = "contents"
+          },
+      Aeson.constructorTagModifier = map Char.toLower,
       Aeson.fieldLabelModifier = \s ->
         case List.dropWhile (not . Char.isUpper) s of
           [] -> s

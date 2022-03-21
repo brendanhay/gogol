@@ -11,6 +11,7 @@ import qualified Control.Exception as Exception
 import Data.Aeson (Value (..), (.=))
 import qualified Data.Aeson as Aeson
 import qualified Data.List as List
+import qualified Data.Set as Set
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text.Encoding
 import qualified Data.Text.Lazy as Text.Lazy
@@ -69,16 +70,16 @@ populate d Templates {..} l = (d :/) . dir lib <$> layout
               mod' (prodNS l) prodImports prodTemplate (pure env),
               mod' (sumNS l) sumImports sumTemplate (pure env)
             ]
-              ++ map resource (_apiResources (l ^. lAPI))
-              ++ map method (_apiMethods (l ^. lAPI))
+              ++ map resource (Set.toList (apiResources (l ^. lAPI)))
+              ++ map method (Set.toList (apiMethods (l ^. lAPI)))
         ]
       where
         -- FIXME: now redundant
         resource a =
-          mod' (_actNamespace a) actionImports actionTemplate (action a)
+          mod' (actionNs a) actionImports actionTemplate (action a)
 
         method a =
-          mod' (_actNamespace a) actionImports actionTemplate (action a)
+          mod' (actionNs a) actionImports actionTemplate (action a)
 
         action a =
           let Object o = Aeson.object ["action" .= a]

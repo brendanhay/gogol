@@ -24,13 +24,19 @@ recordDecl n rs =
     con = QualConDecl () Nothing Nothing (ConDecl () (dname n) [])
 
 recordDerive :: [Derive] -> Deriving ()
-recordDerive = deriving' . map (iRule . iCon . name . mappend "Core." . drop 1 . show)
+recordDerive =
+  iDeriving
+    . map (iRule Nothing . iCon . name . mappend "Core." . drop 1 . show)
 
 recordFields :: Map Local Solved -> [Field]
 recordFields = map (uncurry field) . Map.toList
   where
     field l v =
-      Field (fname l) (tyExternal (_type v)) (fromMaybe mempty (v ^. iDescription))
+      Field
+        { fieldName = fname l,
+          fieldType = tyExternal (_type v),
+          fieldHelp = Nest (fromMaybe mempty (v ^. iDescription))
+        }
 
 smartCtorSig :: Global -> Map Local Solved -> Decl ()
 smartCtorSig n =
@@ -42,13 +48,13 @@ smartCtorSig n =
 
 smartCtorDecl :: Global -> Map Local Solved -> Decl ()
 smartCtorDecl n rs =
-  sfun (cname n) fields (unguardedRhs rhs) noBinds
+  sfun (cname n) labels (unguardedRhs rhs) noBinds
   where
     rhs
       | Map.null rs = var (dname n)
       | otherwise = recordConstrE (dname n) (map (uncurry fieldE) (Map.toList rs))
 
-    fields = map fname . Map.keys $ Map.filter parameter rs
+    labels = map fname . Map.keys $ Map.filter parameter rs
 
 fieldE :: Local -> Solved -> FieldUpdate ()
 fieldE l s = fieldUpdate label rhs

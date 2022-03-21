@@ -27,8 +27,20 @@ localE = strE . Text.unpack . local
 
 -- Patterns
 
-pRecord :: Name () -> Bool -> Pat ()
-pRecord n wild = PRec () (UnQual () n) [PFieldWildcard () | wild]
+pRecord :: Name () -> [PatField ()] -> Pat ()
+pRecord n = PRec () (UnQual () n)
+
+pFieldWild :: PatField ()
+pFieldWild = PFieldWildcard ()
+
+pFieldPun :: Name () -> PatField ()
+pFieldPun n = PFieldPun () (UnQual () n)
+
+pField :: Name () -> Pat () -> PatField ()
+pField n = PFieldPat () (UnQual () n)
+
+pAs :: Name () -> Pat () -> Pat ()
+pAs = PAsPat ()
 
 -- Declarations
 
@@ -49,14 +61,17 @@ dataDecl = DataDecl ()
 
 -- Instances
 
+cxSingle :: Type () -> Context ()
+cxSingle = CxSingle () . TypeA ()
+
 iType :: Type () -> Type () -> InstDecl ()
 iType = InsType ()
 
 iDecl :: Decl () -> InstDecl ()
 iDecl = InsDecl ()
 
-iRule :: InstHead () -> InstRule ()
-iRule = IRule () Nothing Nothing
+iRule :: Maybe (Context ()) -> InstHead () -> InstRule ()
+iRule = IRule () Nothing
 
 iApp :: InstHead () -> Type () -> InstHead ()
 iApp = IHApp ()
@@ -64,7 +79,8 @@ iApp = IHApp ()
 iCon :: Name () -> InstHead ()
 iCon = IHCon () . UnQual ()
 
-deriving' = Deriving () Nothing
+iDeriving :: [InstRule ()] -> Deriving ()
+iDeriving = Deriving () Nothing
 
 -- Expressions
 
@@ -123,6 +139,9 @@ tyFun = TyFun ()
 
 tyCon :: Name () -> Type ()
 tyCon = TyCon () . UnQual ()
+
+tyVar :: Name () -> Type ()
+tyVar = TyVar ()
 
 tyList :: [Type ()] -> Type ()
 tyList = TyPromoted () . PromotedList () True

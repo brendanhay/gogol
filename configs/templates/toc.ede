@@ -5,46 +5,9 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}
     (
-    -- * Configuration
-      {{ api.url.name }}
-  {% for scope in api.scopes %}
-    {% if scope.first %}
-
-    -- * OAuth Scopes
-    {% endif %}
-    , {{ scope.value.name }}
-  {% endfor %}
-
-    -- * Resources
-  {% for action in api.methods %}
-
-    -- ** {{ action.value.id }}
-    , {{ action.value.aliasName }}
-    , {{ action.value.type.ctor.name }}
-    , {{ action.value.type.name }}
-  {% endfor %}
-  {% for action in api.resources %}
-
-    -- ** {{ action.value.id }}
-    , {{ action.value.aliasName }}
-    , {{ action.value.type.ctor.name }}
-    , {{ action.value.type.name }}
-  {% endfor %}
-
-    -- * Types
-  {% for schema in schemas %}
-    {% case schema.value.type %}
-    {% when "prod" %}
-
-    -- ** {{ schema.value.name }}
-    , {{ schema.value.name }} (..)
-    , {{ schema.value.ctor.name }}
-    {% when "sum" %}
-
-    -- ** {{ schema.value.name }}
-    , {{ schema.value.name }} (..)
-    {% endcase %}
-  {% endfor %}
+{% include "_include/export-config.ede" with api = api %}
+{% include "_include/export-resources.ede" with api = api %}
+{% include "_include/export-schemas.ede" with schemas = schemas %}
     ) where
 
 {% for import in moduleImports %}

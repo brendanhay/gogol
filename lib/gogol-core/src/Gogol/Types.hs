@@ -208,79 +208,108 @@ instance Exception Error
 --     ServiceError e -> Right e
 --     x -> Left x
 
-data Service = Service
-  { -- | A unique identifier for the service.
-    -- This must be unique across all service descriptions and gogol libraries.
-    serviceId :: ServiceId,
+
+-- Corresponds to a partial 'Client.Request', the global service related settings.
+data Service (version :: Symbol) a = Service
+  {
+    -- | Whether to use HTTPS/SSL.
+    --
+    -- Defaults to @True@.
+    serviceSecure :: Bool,
     -- | The remote host name, used for both the address to connect to and
     -- setting the host request header.
     serviceHost :: ByteString,
     -- | The remote port to connect to.
     --
     -- Defaults to @443@.
-    servicePath :: Maybe Text,
-    -- | A path prefix that is prepended to any sent HTTP request.
-    --
-    -- Defaults to @mempty@.
     servicePort :: Int,
-    -- | Whether to use HTTPS/SSL.
+
+    --  A function to rewrite paths, applied to any HTTP 'Request' sent
+    -- with this 'serviceId'.
     --
-    -- Defaults to @True@.
-    serviceSecure :: Bool,
+    -- Please note this is not the same as a statically configurable
+    -- OpenAPI (et al.) @baseUrl@, as the Google Discovery service
+    -- descriptions all have varying behaviour around whether
+    -- @baseUrl@ is set to anything meaningful, or if it is empty and
+    -- instead baked into individual method paths. The @gogol@
+    -- generator prepends the service description\'s @baseUrl@ (if present)
+    -- to all method paths for consistency and provides thishook to modify
+    -- the complete path prior to sending.
+    --
+    -- Defaults to @id@.
+
     -- | Number of seconds to wait for a response.
     --
     -- Defaults to 70 seconds.
-    serviceTimeout :: Maybe Micro
+    serviceTimeout :: Maybe Client.RequestTimeout,
   }
 
-newDefaultService :: ServiceId -> ByteString -> Service
-newDefaultService sid host =
+newService :: ServiceId -> ByteString -> Service
+newService serviceId serviceHost =
   Service
-    { serviceId = sid,
-      serviceHost = host,
-      servicePath = Nothing,
+    { serviceSecure = True,
       servicePort = 443,
-      serviceSecure = True,
-      serviceTimeout = Just 70
+      serviceTimeout = Just 70,
+      ..
     }
+
+-- | Invariants:
+--
+-- * queryString: "alt" or "upload{_protocol,Type}" have not been set.
+-- * headers: Content-Type has not been set.
+-- * body: has not been set.
+
+data Request a = Request
+  { request :: Client.Request,
+    requestAlt :: Maybe Text,
+    requestBody :: Body
+  }
 
 -- | An intermediary request builder.
 data Request a = Request
   { requestMethod :: HTTP.StdMethod,
+    requestSecure :: Bool,
+    requestHost :: ByteString,
+    requestPort :: Int,
     requestPath :: TextBuilder,
     requestQuery :: DList (Text, Maybe Text),
+    -- Alt is separate from the rest of the query string so it can be overriden.
     requestAlt :: Maybe Text,
-    requestUploadType :: Maybe Text,
     requestHeaders :: DList (HTTP.HeaderName, ByteString),
-    requestBody :: Body
+    requestBody :: Body,
+    requestTimeout  :: Maybe Client.RequestTimeout
   }
+
+type family Accepts (x :: Symbol) (xs :: [Symbol]) :: Constraint where
+  Accepts x (x ': xs) = ()
+  Accepts y (x ': xs) = Accepts y xs
 
 -- | Specify how an google services request can be de/serialised.
 class GoogleRequest a where
-  -- | A disjoint set of possible OAuth2 scopes - _one_ of which is required to
+  -- | A disjoint set of possible OAuth2 scopes, _one_ of which is required to
   -- perform this request.
   type Scopes a :: [Symbol]
 
-  -- | The successful, expected response associated with a request.
+  -- | Service specific global (query) parameters, for example an api @key@ or
+  -- @prettyPrint@.
+  type Service a :: Type
+
+  -- | The response returned by a successful request.
   type Response a :: Type
 
-  -- | Construct a request builder from @a@.
-  toRequest :: a -> Request a
+  -- | Construct a new request.
+  toRequest :: Service a -> a -> Client.Request
 
-  -- | Parse a 'Client.Response', potentially consuming the response body.
+  -- | Parse a @http-client@ 'Client.Response', consuming the response body.
+  --
+  -- /Note:/ It is up to the implementation whether the 'BodyReader' is only
+  -- partially or fully consumed. You should not rely on this behaviour and
+  -- assume the response body passed to this function is no longer available.
   parseResponse ::
     proxy a ->
     ServiceId ->
     Client.Response BodyReader ->
     IO (Either Error (Response a))
-
--- default parseResponse ::
---   FromJSON (Response a) =>
---   proxy a ->
---   ServiceId ->
---   Client.Response BodyReader ->
---   IO (Either Error (Response a))
--- parseResponse = parseJSONResponse
 
 parseJSONResponse ::
   FromJSON (Response a) =>
@@ -302,24 +331,50 @@ parseJSONResponse _proxy service response =
       Left err -> Except.throwE (SerializeError service (body <$ response) err)
       Right ok -> pure ok
 
-data SimpleRequest a = SimpleRequest
+-- | A location header.
+newtype Location = Location Text
+  deriving stock (Show, Read, Eq, Ord, Generic)
+  deriving newtype
+    ( Hashable,
+      NFData,
+      IsString,
+      ToHttpApiData,
+      FromHttpApiData,
+      ToJSON,
+      FromJSON,
+      ToJSONKey,
+      FromJSONKey
+    )
+
+data Protocol
+  = -- | Upload protocol for media (e.g. "raw", "multipart").
+    UploadProtocol
+  | -- | Legacy upload protocol for media (e.g. "media", "multipart").
+    UploadType
+  deriving stock (Show, Eq, Ord)
+
+data MultipartRequest media a = MultipartRequest
   { simpleRequest :: a,
     simpleMedia :: Multipart.Part
   }
 
-toSimpleRequest :: GoogleRequest a => SimpleRequest a -> Request a
-toSimpleRequest SimpleRequest {..} =
+toMultipartRequest ::
+  GoogleRequest a =>
+  Protocol ->
+  MultipartRequest media a ->
+  Request a
+toMultipartRequest proto MultipartRequest {..} =
   undefined
 
--- rq { requestBody = toJSONSimpleBody
+-- rq { requestBody = toJSONMultipartBody
 --    , requestUploadType = Just "simple"
 --    }
 -- where
 --   body = requestBody rq
 --   rq = toRequest simpleRequest
 
-parseSimpleResponse ::
-  ( SimpleRequest a ~ request,
+parseMultipartResponse ::
+  ( MultipartRequest media a ~ request,
     GoogleRequest request,
     FromJSON (Response request)
   ) =>
@@ -327,22 +382,27 @@ parseSimpleResponse ::
   ServiceId ->
   Client.Response BodyReader ->
   IO (Either Error (Response request))
-parseSimpleResponse =
+parseMultipartResponse =
   undefined
 
-data ResumableRequest a = ResumableRequest
+data ResumableRequest media a = ResumableRequest
   { resumableRequest :: a,
-    -- | X-Upload-Content-Type. Set to the media MIME type of the upload data to be
-    -- transferred in subsequent requests.
-    resumableType :: Media.MediaType,
+    -- -- X-Upload-Content-Type. Set to the media MIME type of the upload data to be
+    -- -- transferred in subsequent requests. -- FIXME: set by media symbol
+    -- resumableType :: Media.MediaType,
+
     -- | X-Upload-Content-Length. Set to the number of bytes of upload data to be
     -- transferred in subsequent requests. If the length is unknown at the time
     -- of this request, you can omit this header.
     resumableLength :: Maybe Int64
   }
 
-toResumableRequest :: GoogleRequest a => ResumableRequest a -> Request a
-toResumableRequest ResumableRequest {..} =
+toResumableRequest ::
+  GoogleRequest a =>
+  Protocol ->
+  ResumableRequest media a ->
+  Request a
+toResumableRequest proto ResumableRequest {..} =
   undefined
 
 --   rq { requestUploadType = "resumable",
@@ -354,7 +414,7 @@ toResumableRequest ResumableRequest {..} =
 --   rq = toRequest resumableRequest
 
 parseResumableResponse ::
-  ( ResumableRequest a ~ request,
+  ( ResumableRequest media a ~ request,
     GoogleRequest request,
     Response request ~ Location
   ) =>
@@ -374,10 +434,12 @@ newtype MediaRequest a = MediaRequest
   }
 
 toMediaRequest :: GoogleRequest a => MediaRequest a -> Request a
-toMediaRequest MediaRequest {downloadRequest} =
-  (toRequest downloadRequest)
-    { requestAlt = Just "media"
-    }
+toMediaRequest MediaRequest {} =
+  undefined
+
+-- (toRequest downloadRequest)
+--   { requestAlt = Just "media"
+--   }
 
 parseMediaResponse ::
   ( MediaRequest a ~ request,
