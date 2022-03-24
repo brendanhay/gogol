@@ -61,6 +61,21 @@ data Field = Field
   }
   deriving stock (Show, Eq, Ord)
 
+data Synonym = Synonym
+  { synonymName :: Name (),
+    synonymSig :: Decl (),
+    synonymDecl :: Decl (),
+    synonymHelp :: Maybe Help
+  }
+  deriving stock (Show, Eq, Ord)
+
+data Alias = Alias
+  { aliasName :: Name (),
+    aliasDecl :: Decl (),
+    aliasHelp :: Maybe Help
+  }
+  deriving stock (Show, Eq, Ord)
+
 data Data
   = Sum
       { sumName :: Name (),
@@ -70,11 +85,13 @@ data Data
   | Prod
       { prodName :: Name (),
         prodHelp :: Maybe Help,
+        prodAlias :: Maybe Alias,
+        prodSynonym :: Maybe Synonym,
         prodDecl :: Decl (),
         prodFields :: [Field],
-        prodCtor :: Fun,
-        prodDeriving :: Deriving (),
-        prodInstances :: [Decl ()]
+        prodCtor :: Maybe Fun,
+        prodDeriving :: Maybe (Deriving ()),
+        prodExtras :: [Decl ()]
       }
   deriving stock (Show, Eq, Ord)
 
@@ -83,9 +100,9 @@ getDataName = \case
   Sum {sumName} -> sumName
   Prod {prodName} -> prodName
 
-setDataInstances :: [Decl ()] -> Data -> Data
-setDataInstances xs = \case
-  Prod {..} -> Prod {prodInstances = xs, ..}
+addDataInstances :: [Decl ()] -> Data -> Data
+addDataInstances xs = \case
+  Prod {..} -> Prod {prodExtras = prodExtras ++ xs, ..}
   other -> other
 
 data Action = Action
@@ -97,26 +114,19 @@ data Action = Action
   }
   deriving stock (Show, Eq, Ord)
 
-data Scope = Scope
-  { scopeName :: Name (),
-    scopeDecl :: Decl (),
-    scopeHelp :: Help
-  }
-  deriving stock (Show, Eq, Ord)
-
 data API = API
   { apiResources :: Set Action,
     apiMethods :: Set Action,
-    apiConfig :: Fun,
-    apiParams :: Data,
-    apiScopes :: Set Scope
+    apiScopes :: Set Alias,
+    apiService :: Data
   }
   deriving stock (Show, Eq, Ord)
 
 $(TH.deriveToJSON jsonOptions ''Fun)
 $(TH.deriveToJSON jsonOptions ''Branch)
 $(TH.deriveToJSON jsonOptions ''Field)
+$(TH.deriveToJSON jsonOptions ''Synonym)
+$(TH.deriveToJSON jsonOptions ''Alias)
 $(TH.deriveToJSON jsonOptions ''Data)
 $(TH.deriveToJSON jsonOptions ''Action)
-$(TH.deriveToJSON jsonOptions ''Scope)
 $(TH.deriveToJSON jsonOptions ''API)

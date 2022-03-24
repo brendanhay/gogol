@@ -42,65 +42,9 @@ renderAPI service@Service {_sDescription} = do
     API
       { apiResources = Set.fromList (concat resources),
         apiMethods = Set.fromList methods,
-        apiConfig = renderServiceConfig service,
-        apiParams = renderServiceParams service,
-        apiScopes = renderScopes (fromMaybe mempty (_dAuth _sDescription))
+        apiScopes = Syntax.scopeAliases (fromMaybe mempty (_dAuth _sDescription)),
+        apiService = Syntax.serviceDecl service
       }
-
-renderServiceConfig :: Service Solved -> Fun
-renderServiceConfig service =
-  Fun
-    { funName = name,
-      funHelp = Just (rawHelpText help),
-      funSig = Syntax.serviceSig name,
-      funDecl = Syntax.serviceDecl (_sDescription service) name
-    }
-  where
-    name = Build.name (getServiceName service)
-    help =
-      sformat
-        ( "Default configuration referring to version @" % stext
-            % "@ of the "
-            % stext
-            % ". This sets the host and port used as a starting point for constructing service requests."
-        )
-        (service ^. dVersion)
-        (service ^. dTitle)
-
-renderServiceParams :: Service Solved -> Data
-renderServiceParams service =
-  Prod
-    { prodName = dname name,
-      prodHelp = Nothing,
-      prodDecl = decl,
-      prodFields = Syntax.recordFields fields,
-      prodDeriving = Syntax.recordDerive [DEq, DOrd, DShow, DGeneric],
-      prodCtor = constructor,
-      prodInstances = []
-    }
-  where
-    name = getServiceParamsName service
-
-    (decl, fields) =
-      Syntax.paramsDecl (_sDescription service) name
-
-    constructor =
-      Fun
-        { funName = cname name,
-          funHelp = Nothing,
-          funSig = Syntax.smartCtorSig name fields,
-          funDecl = Syntax.smartCtorDecl name fields
-        }
-
-renderScopes :: OAuth2 -> Set Scope
-renderScopes (OAuth2 xs) =
-  Set.fromList . flip map (Map.toList xs) $ \(value, help) ->
-    let key = Build.name (getScopeName value)
-     in Scope
-          { scopeName = key,
-            scopeDecl = Syntax.scopeDecl key value,
-            scopeHelp = help
-          }
 
 renderResource :: Service Solved -> Resource Solved -> AST [Action]
 renderResource service Resource {..} =
@@ -129,7 +73,7 @@ renderMethod service method = do
         actionUnique = _unique,
         actionNs = collapseNS (tocNS service <> UnsafeNS namespace),
         actionHelp = _mDescription method,
-        actionData = setDataInstances instances datatype
+        actionData = addDataInstances instances datatype
       }
 
 renderSchema :: Solved -> AST (Maybe Data)
@@ -159,32 +103,12 @@ renderSchema solved =
             maybe properties (flip (Map.insert "additional") properties) $
               setAdditional <$> additional
 
-          constructor =
-            Fun
-              { funName = cname unique,
-                funHelp =
-                  Just . rawHelpText $
-                    sformat
-                      ( "Creates a value of '" % gid
-                          % "' using only the required fields."
-                          % " Everything else is set to a default value or 'Nothing'.\n"
-                      )
-                      unique,
-                -- funSig = hackComments merged (Syntax.smartCtorSig unique merged),
-                funSig = Syntax.smartCtorSig unique merged,
-                funDecl = Syntax.smartCtorDecl unique merged
-              }
+          order = Map.keys merged
 
-      pure
-        Prod
-          { prodName = dname unique,
-            prodHelp = info ^. iDescription,
-            prodDecl = Syntax.recordDecl unique merged,
-            prodFields = Syntax.recordFields merged,
-            prodCtor = constructor,
-            prodDeriving = Syntax.recordDerive (_deriving solved),
-            prodInstances = Syntax.jsonInstances unique merged
-          }
+          name = dname unique
+
+      pure $
+        Syntax.productDecl unique (info ^. iDescription) order merged (_deriving solved)
 
 -- -- FIXME: dirty hack to render smart ctor parameter comments.
 -- hackComments :: Map Local Solved -> TextLazy -> TextLazy

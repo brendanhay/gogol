@@ -63,35 +63,41 @@ getSchema g = do
 getType :: Global -> AST TType
 getType g = loc "getType" g $ memo Gen.Types.typed g go
   where
-    go s = case s of
-      SAny {} -> res (TLit JSONValue)
-      --- FIXME: add natural/numeric manipulations
-      SLit _ l -> res (TLit l)
-      SEnm {} -> res (TType g)
-      SArr _ (Arr e) -> may <$> (TList <$> getType e)
-      SObj {} -> res (TType g)
-      SRef _ r
-        | ref r /= g -> req <$> getType (ref r)
-        --            | otherwise  -> res (TType (ref r))
-        | otherwise ->
-          Except.throwError $
-            sformat
-              ("Ref cycle detected between: " % gid % " == " % shown)
-              g
-              s
+    go s =
+      case s of
+        SAny {} ->
+          result (TLit JSONValue)
+        --
+        SLit _ l ->
+          result (TLit l)
+        --
+        SEnm {} ->
+          result (TType g)
+        --
+        SArr _ (Arr e) ->
+          optional . TList <$> getType e
+        --
+        SObj {} ->
+          result (TType g)
+        --
+        SRef _ r
+          | ref r /= g -> require <$> getType (ref r)
+          | otherwise ->
+            Except.throwError $
+              sformat ("Ref cycle detected between: " % gid % " == " % shown) g s
       where
-        res = pure . may . rep
+        result = pure . optional . repeated
 
-        may
+        optional
           | required s = id
           | defaulted s = id
           | otherwise = TMaybe
 
-        req (TMaybe x)
-          | required s = x
-        req x = x
+        require = \case
+          TMaybe x | required s -> x
+          x -> x
 
-        rep
+        repeated
           | s ^. iRepeated = TList
           | otherwise = id
 

@@ -5,16 +5,16 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-module Gogol.Data.Body
-  ( Boundary (..),
-    newBoundary,
-    Body (..),
-    toJSONBody,
-    toRequestBody,
-    renderParts,
-    renderPart,
-  )
-where
+module Gogol.Data.Body where
+
+-- ( Boundary (..),
+--   newBoundary,
+--   Body (..),
+--   toJSONBody,
+--   toRequestBody,
+--   renderParts,
+--   renderPart,
+-- )
 
 import Data.Aeson (ToJSON)
 import qualified Data.Aeson as Aeson

@@ -48,6 +48,7 @@ common base
     FlexibleInstances
     GADTs
     GeneralizedNewtypeDeriving
+    KindSignatures
     LambdaCase
     MagicHash
     NamedFieldPuns
@@ -65,7 +66,9 @@ common base
     TypeOperators
     ViewPatterns
 
-  build-depends:      base >=4.12 && <5
+  -- 4.12 is 8.6.1,
+  -- 4.14 is 8.10.1, due to SAKS
+  build-depends:      base >=4.14 && <5
 
 library
   import:          base

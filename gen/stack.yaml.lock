@@ -5,22 +5,15 @@
 
 packages:
 - completed:
-    hackage: ede-0.3.2.0@sha256:6ac62b2a9fccaf66a121f79e569d39286ad969fb9758eede46766f98c9919eda,3935
+    hackage: ede-0.3.3.0@sha256:25e4aed76d0ce689a30a4182587a2c6d3930311d452e6ee03a5b201b5a5763ec,3914
     pantry-tree:
-      size: 5398
-      sha256: 324c9550acea752ef7bd304031ba8a5db3d30771deb9f87b4102cf13c6e6d666
+      size: 5470
+      sha256: 3642a98f0c978cf9d7ce64edff0f310c79d8c3fbc9d92c8f5f75b0cf41341524
   original:
-    hackage: ede-0.3.2.0@sha256:6ac62b2a9fccaf66a121f79e569d39286ad969fb9758eede46766f98c9919eda,3935
-- completed:
-    hackage: hindent-5.3.2@sha256:070a3622d13e6f0c44d8d189df8f780f61d0b813435a902925ef6d9386b42260,3610
-    pantry-tree:
-      size: 1027
-      sha256: 36f9c65bbe71c49741c20839606494dacd70c04e0e70649f1da0978aeaf5f77a
-  original:
-    hackage: hindent-5.3.2@sha256:070a3622d13e6f0c44d8d189df8f780f61d0b813435a902925ef6d9386b42260,3610
+    hackage: ede-0.3.3.0
 snapshots:
 - completed:
-    size: 590102
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/27.yaml
-    sha256: 79a786674930a89301b0e908fad2822a48882f3d01486117693c377b8edffdbe
-  original: lts-18.27
+    size: 616897
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/0.yaml
+    sha256: bbf2be02f17940bac1f87cb462d4fb0c3355de6dcfc53d84f4f9ad3ee2164f65
+  original: lts-19.0

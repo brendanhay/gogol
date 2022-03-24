@@ -93,8 +93,8 @@ main = do
       <*> load "toc.ede"
       <*> load "readme.ede"
       <*> load "types.ede"
-      <*> load "prod.ede"
-      <*> load "sum.ede"
+      <*> load "products.ede"
+      <*> load "sums.ede"
       <*> load "action.ede"
       <* done
 

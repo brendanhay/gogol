@@ -471,8 +471,8 @@ instance HasDescription (Service a) a where
 getServiceName :: Service a -> String
 getServiceName = Text.unpack . (<> "Service") . toPascal . _sCanonicalName
 
-getServiceParamsName :: Service a -> Global
-getServiceParamsName = newGlobal . (<> "Params") . toPascal . _sCanonicalName
+getServiceParamsName :: Service a -> String
+getServiceParamsName = Text.unpack . (<> "Params") . toPascal . _sCanonicalName
 
 getScopeName :: HasCallStack => Text -> String
 getScopeName = \case
@@ -495,19 +495,20 @@ getScopeName = \case
     -- FIXME: use a parser combinator here.
 
     rename text
-      | isImplicit text = split text <> "'FullControl"
-      | otherwise = split text
+      | isImplicit text = splitService text <> "'FullControl"
+      | otherwise = splitService text
 
     isImplicit = not . Text.any (== '.')
 
-    split =
+    splitService =
       Text.unpack
         . mconcat
         . List.intersperse "'"
-        . map splitSub
+        . map splitControl
         . Text.split (== '.')
 
-    splitSub =
+    splitControl =
       mconcat
+        . List.intersperse "_"
         . map upperHead
         . Text.split (not . Char.isAlphaNum)

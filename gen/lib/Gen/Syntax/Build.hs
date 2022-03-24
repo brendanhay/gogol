@@ -42,6 +42,17 @@ pField n = PFieldPat () (UnQual () n)
 pAs :: Name () -> Pat () -> Pat ()
 pAs = PAsPat ()
 
+pLit :: Literal () -> Pat ()
+pLit = PLit () (Signless ())
+
+pText :: Text -> Pat ()
+pText (Text.unpack -> s) = pLit (String () s s)
+
+-- Pattern Synonyms
+
+patSyn :: Pat () -> Pat () -> _ -> Decl ()
+patSyn lhs rhs = PatSyn () lhs rhs
+
 -- Declarations
 
 funBind :: Name () -> [Pat ()] -> Rhs () -> Decl ()
@@ -79,8 +90,23 @@ iApp = IHApp ()
 iCon :: Name () -> InstHead ()
 iCon = IHCon () . UnQual ()
 
-iDeriving :: [InstRule ()] -> Deriving ()
-iDeriving = Deriving () Nothing
+deriveStock :: [InstRule ()] -> Deriving ()
+deriveStock = Deriving () (Just (DerivStock ()))
+
+deriveNewtype :: [InstRule ()] -> Deriving ()
+deriveNewtype = Deriving () (Just (DerivNewtype ()))
+
+deriveVia :: Type () -> [InstRule ()] -> Deriving ()
+deriveVia typ = Deriving () (Just (DerivVia () typ))
+
+-- deriveStockAlone :: InstRule () -> Decl ()
+-- deriveStockAlone = DerivDecl () (Just (DerivStock ())) Nothing
+
+-- deriveNewtypeAlone :: InstRule () -> Decl ()
+-- deriveNewtypeAlone = DerivDecl () (Just (DerivNewtype ())) Nothing
+
+-- deriveViaAlone :: Type () -> InstRule () -> Decl ()
+-- deriveViaAlone typ = DerivDecl () (Just (DerivVia () typ)) Nothing
 
 -- Expressions
 
@@ -98,6 +124,9 @@ fieldUpdate l e = FieldUpdate () (UnQual () l) e
 
 unguardedRhs :: Exp () -> Rhs ()
 unguardedRhs = UnGuardedRhs ()
+
+boolE :: Bool -> Exp ()
+boolE = Con () . UnQual () . name . mappend "Core." . show
 
 textE :: Text -> Exp ()
 textE = strE . Text.unpack
@@ -143,8 +172,11 @@ tyCon = TyCon () . UnQual ()
 tyVar :: Name () -> Type ()
 tyVar = TyVar ()
 
-tyList :: [Type ()] -> Type ()
-tyList = TyPromoted () . PromotedList () True
+tyList :: Type () -> Type ()
+tyList = TyList ()
+
+tyPromotedList :: [Type ()] -> Type ()
+tyPromotedList = TyPromoted () . PromotedList () True
 
 tySymbol :: Text -> Type ()
 tySymbol (Text.unpack -> s) = TyPromoted () (PromotedString () s s)

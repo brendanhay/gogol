@@ -167,30 +167,6 @@ data Imports = Imports
     actionImports :: Set NS
   }
 
-serviceImports :: HasService a b => a -> Imports
-serviceImports s =
-  Imports
-    { tocImports = Set.empty,
-      typeImports = Set.fromList [prodNS s, sumNS s],
-      prodImports = Set.fromList [sumNS s],
-      sumImports = Set.empty,
-      actionImports = Set.fromList [typesNS s]
-    }
-
-tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
-tocNS = mappend "Gogol" . mkNS . view sCanonicalName
-typesNS = (<> "Types") . tocNS
-prodNS = (<> "Internal.Product") . tocNS
-sumNS = (<> "Internal.Sum") . tocNS
-
-exposedModules :: Library -> [NS]
-exposedModules l =
-  (tocNS l :) . (typesNS l :) . map actionNs . Set.toList $
-    apiResources (_lAPI l) <> apiMethods (_lAPI l)
-
-otherModules :: Library -> [NS]
-otherModules s = List.sort [prodNS s, sumNS s]
-
 data Library = Library
   { _lVersion :: Version,
     _lService :: Service Global,
@@ -231,6 +207,30 @@ instance ToJSON Library where
         -- Schemas
         "schemas" .= (l ^. lSchemas)
       ]
+
+serviceImports :: HasService a b => a -> Imports
+serviceImports s =
+  Imports
+    { tocImports = Set.empty,
+      typeImports = Set.fromList [prodNS s, sumNS s],
+      prodImports = Set.fromList [sumNS s],
+      sumImports = Set.empty,
+      actionImports = Set.fromList [typesNS s]
+    }
+
+tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
+tocNS = mappend "Gogol" . mkNS . view sCanonicalName
+typesNS = (<> "Types") . tocNS
+prodNS = (<> "Internal.Product") . tocNS
+sumNS = (<> "Internal.Sum") . tocNS
+
+exposedModules :: Library -> [NS]
+exposedModules l =
+  (tocNS l :) . (typesNS l :) . map actionNs . Set.toList $
+    apiResources (_lAPI l) <> apiMethods (_lAPI l)
+
+otherModules :: Library -> [NS]
+otherModules s = List.sort [prodNS s, sumNS s]
 
 data TType
   = TType Global

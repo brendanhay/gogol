@@ -157,8 +157,11 @@ method canonical globalParams suf m@Method {..} = do
     body p = case _mRequest of
       Nothing -> pure id
       Just x -> do
-        let f = "payload" -- localise (ref x)
+        -- Multipart request metadata.
+        let f = "meta"
+
         g <- localSchema p f (Fix (SRef bodyInfo x))
+
         pure (Map.insert f g)
 
 insert :: Global -> Schema Global -> AST Global

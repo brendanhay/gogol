@@ -79,7 +79,7 @@ renderHelp indent =
 
 wrapHelp :: TextLazy -> Help -> TextLazy
 wrapHelp sep =
-  Text.Lazy.dropWhileEnd Char.isSpace
+  punctuate
     . Text.Lazy.unlines
     . map (mappend sep)
     . Text.Lazy.lines
@@ -90,6 +90,12 @@ flattenHelp = \case
   Help xs -> foldMap flattenHelp xs
   Raw t -> Text.Lazy.fromStrict t
   Pan d _t -> either (error . show) Text.Lazy.fromStrict (writeHaddock d)
+
+punctuate :: TextLazy -> TextLazy
+punctuate (Text.Lazy.dropWhileEnd Char.isSpace -> text)
+  | Text.Lazy.null text = text
+  | Text.Lazy.last text == '.' = text
+  | otherwise = text `Text.Lazy.snoc` '.'
 
 readMarkdown :: Text -> Either PandocError Pandoc
 readMarkdown =

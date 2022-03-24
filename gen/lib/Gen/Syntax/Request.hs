@@ -9,6 +9,7 @@ import qualified Data.Text as Text
 import Debug.Trace
 import Gen.Prelude
 import Gen.Syntax.Build
+import Gen.Syntax.Service (serviceType)
 import Gen.Types
 import Language.Haskell.Exts.Build
 import Language.Haskell.Exts.Syntax
@@ -17,184 +18,125 @@ requestInstances :: Service Solved -> Method Solved -> Solved -> [Decl ()]
 requestInstances service method@Method {..} request =
   catMaybes
     [ Just (requestInstance service method request),
-      downloadInstance service method request,
-      multipartInstance service method request,
-      resumableInstance service method request
+      downloadInstance service method request
     ]
+    ++ multipartInstance service method request
+    ++ resumableInstance service method request
 
 requestInstance :: Service Solved -> Method Solved -> Solved -> Decl ()
 requestInstance service@Service {_sDescription} method request@Solved {_unique, _schema} =
-  requestDecl Nothing instanceType instanceDecls
+  instDecl (iRule Nothing instanceClass) (Just instanceDecls)
   where
-    instanceHead = Nothing
+    instanceClass = iCon "Core.GoogleRequest" `iApp` instanceType
     instanceType = tyCon requestName
 
     requestName = dname _unique
 
-    paramsName = dname (getServiceParamsName service)
+    paramsName = name (getServiceParamsName service)
+    paramsType = tyCon paramsName
     paramsEmpty = Map.null (_dParameters _sDescription)
-    paramsType
-      | paramsEmpty = tyCon "()"
-      | otherwise = tyCon paramsName
+
+    configType = serviceType service
 
     instanceDecls =
       [ iType (tyScopesF instanceType) (tyScopes method),
-        iType (tyParamsF instanceType) paramsType,
+        iType (tyConfigF instanceType) configType,
         iType (tyResponseF instanceType) (tyResponse method),
-        iDecl requestBind,
-        iDecl responseBind
+        iDecl requestBind
       ]
 
     requestBind =
       funBind (name "toRequest") requestPats $
         unguardedRhs requestUpdate
 
-    responseBind =
-      funBind (name "parseResponse") [] $
-        unguardedRhs (var "Core.parseJSONResponse")
+    -- responseBind =
+    --   funBind (name "parseResponse") [] $
+    --     unguardedRhs (var "Core.parseJSONResponse")
 
     requestPats =
-      [ pRecord paramsName [pFieldWild | not paramsEmpty],
+      [ pRecord
+          "Core.Service"
+          [ pFieldPun (name "serviceRequest"),
+            pField (name "serviceParams") (pRecord paramsName [pFieldWild | not paramsEmpty])
+          ],
         pRecord requestName [pFieldWild | hasProperties _schema]
       ]
 
     requestUpdate =
-      recordUpdateE (var "Core.newRequest") $
-        [ fieldUpdate "requestService" (textE (_dId _sDescription)),
-          fieldUpdate "requestMethod" (textE (_mHttpMethod method)),
-          fieldUpdate "requestPath" (requestPathE _sDescription method),
-          fieldUpdate "requestQuery" (queryE _sDescription method),
-          fieldUpdate "requestAlt" (altE _sDescription),
-          fieldUpdate "requestBody" requestBody
+      recordUpdateE (var "serviceRequest") $
+        [ fieldUpdate "Core.method" (textE (_mHttpMethod method)),
+          fieldUpdate "Core.path" (requestPathE _sDescription method),
+          fieldUpdate "Core.queryString" (queryE _sDescription method)
         ]
+          ++ maybeToList (fieldUpdate "Core.requestBody" requestBody <$ _mRequest method)
 
     requestBody =
-      case _mRequest method of
-        Nothing -> var "Core.mempty"
-        Just {} -> var "Core.toRequestBodyJSON" `app` var (fname "payload")
+      var "Core.toRequestBodyJSON" `app` var (fname "payload")
 
 downloadInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
 downloadInstance service@Service {_sDescription} method request@Solved {_unique, _schema} =
   guard (_mSupportsMediaDownload method && not (_mSupportsMediaUpload method))
-    $> requestDecl Nothing instanceType instanceDecls
+    $> instDecl (iRule Nothing instanceClass) Nothing
   where
-    instanceType = tyParen (tyCon "Core.MediaRequest" `tyApp` wrappedType)
-
-    wrappedType = tyCon (dname _unique)
-
-    instanceDecls =
-      [ iType (tyScopesF instanceType) (tyScopesF wrappedType),
-        iType (tyParamsF instanceType) (tyParamsF wrappedType),
-        iType (tyResponseF instanceType) (tyCon "Core.BodyReader"),
-        iDecl requestBind,
-        iDecl responseBind
-      ]
-
-    requestBind =
-      funBind (name "toRequest") [] $
-        unguardedRhs (var "toMediaRequest")
-
-    responseBind =
-      funBind (name "parseResponse") [] $
-        unguardedRhs (var "parseMediaResponse")
+    instanceClass = iCon "Core.GoogleMediaRequest" `iApp` instanceType
+    instanceType = tyCon (dname _unique)
 
 data Upload = Upload
-  { requestAccept :: Set Text,
-    requestName :: Name (),
-    requestFieldName :: Name (),
-    toRequestName :: Name (),
-    parseResponseName :: Name (),
-    responseBody :: Maybe (Type ())
+  { requestName :: Name (),
+    requestType :: Type (),
+    requestAccepts :: Set Text
   }
 
-uploadInstance :: Service Solved -> Method Solved -> Solved -> Upload -> Decl ()
-uploadInstance Service {_sDescription} method Solved {_unique, _schema} Upload {..} =
-  requestDecl instanceHead instanceType instanceDecls
+uploadInstances :: Service Solved -> Method Solved -> Solved -> Upload -> [Decl ()]
+uploadInstances service@Service {_sDescription} method Solved {_unique, _schema} Upload {..}
+  | Set.member acceptAny requestAccepts = [canonicalDecl (tyVar "media")]
+  | otherwise = map (canonicalDecl . tySymbol) accepts
   where
-    instanceHead =
-      if Set.member "*/*" requestAccept
-        then Nothing
-        else do
-          let accepts = Set.toList (Set.delete "*/*" requestAccept)
+    acceptAny = "*/*"
+    accepts = Set.toList (Set.delete acceptAny requestAccepts)
 
-          pure . cxSingle $
-            tyCon "Core.Accepts"
-              `tyApp` tyVar "media"
-              `tyApp` tyList (map tySymbol accepts)
+    acceptDecl media =
+      canonicalDecl (tyCon media)
 
-    instanceType =
-      tyParen (tyCon requestName `tyApp` tyVar "media" `tyApp` wrappedType)
+    canonicalDecl media =
+      instDecl (iRule Nothing (canonicalType media)) Nothing
 
-    wrappedName = dname _unique
-    wrappedType = tyCon wrappedName
+    canonicalType media =
+      iCon requestName `iApp` (media `tyApp` requestType)
 
-    instanceDecls =
-      [ iType (tyScopesF instanceType) (tyScopesF wrappedType),
-        iType (tyParamsF instanceType) (tyParamsF wrappedType),
-        iType (tyResponseF instanceType) (tyResponse method),
-        iDecl requestBind,
-        iDecl responseBind
-      ]
+multipartInstance :: Service Solved -> Method Solved -> Solved -> [Decl ()]
+multipartInstance service method request =
+  fromMaybe [] $ do
+    guard (_mSupportsMediaUpload method && not (_mSupportsMediaDownload method))
 
-    -- Note: stopped destructuring full path for /upload + /resumable/upload
-    -- prefixed paths as it forces two serializations of the path components.
-    --
-    -- The invariant that a path must be identical to the terminal
-    -- GoogleRequest instance with on an /upload or /resumable/upload
-    -- prefix is a partial/HasCallStack check instead.
-    --
-    -- infixApp (var toRequestName `app` var "params" `app` var "request")
-    --    "Core.$" requestPath
-    --
-    -- requestPats =
-    --   [ pAs (name "request") . pRecord requestName $
-    --       [ pField requestFieldName (pRecord wrappedName [pFieldWild])
-    --       ]
-    --   ]
+    MediaUpload {_muAccept, _muSimplePath} <- _mMediaUpload method
 
-    requestBind =
-      funBind (name "toRequest") [] $
-        unguardedRhs (var toRequestName `app` uploadE _sDescription)
+    checkUpload service method "/upload/" _muSimplePath
 
-    responseBind =
-      funBind (name "parseResponse") [] $
-        unguardedRhs (var parseResponseName)
+    pure $
+      uploadInstances service method request $
+        Upload
+          { requestName = name "Core.GoogleMultipartRequest",
+            requestType = tyCon (dname (_unique request)),
+            requestAccepts = Set.fromList _muAccept
+          }
 
-multipartInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
-multipartInstance service method request = do
-  guard (_mSupportsMediaUpload method && not (_mSupportsMediaDownload method))
+resumableInstance :: Service Solved -> Method Solved -> Solved -> [Decl ()]
+resumableInstance service method request =
+  fromMaybe [] $ do
+    guard (_mSupportsMediaUpload method && not (_mSupportsMediaDownload method))
 
-  MediaUpload {_muAccept, _muSimplePath} <- _mMediaUpload method
+    MediaUpload {_muAccept, _muResumablePath} <- _mMediaUpload method
 
-  checkUpload service method "/upload/" _muSimplePath
+    checkUpload service method "/resumable/upload/" =<< _muResumablePath
 
-  pure $! uploadInstance service method request $
-    Upload
-      { requestAccept = Set.fromList _muAccept,
-        requestName = name "Core.MultipartRequest",
-        requestFieldName = name "Core.multipartRequest",
-        toRequestName = name "Core.toMultipartRequest",
-        parseResponseName = name "Core.parseMultipartResponse",
-        responseBody = Nothing
-      }
-
-resumableInstance :: Service Solved -> Method Solved -> Solved -> Maybe (Decl ())
-resumableInstance service method request = do
-  guard (_mSupportsMediaUpload method && not (_mSupportsMediaDownload method))
-
-  MediaUpload {_muAccept, _muResumablePath} <- _mMediaUpload method
-
-  checkUpload service method "/resumable/upload/" =<< _muResumablePath
-
-  pure $! uploadInstance service method request $
-    Upload
-      { requestAccept = Set.fromList _muAccept,
-        requestName = name "Core.ResumableRequest",
-        requestFieldName = name "Core.resumableRequest",
-        toRequestName = name "Core.toResumableRequest",
-        parseResponseName = name "Core.parseResumableResponse",
-        responseBody = Just (tyCon "Core.Location")
-      }
+    pure $
+      uploadInstances service method request $
+        Upload
+          { requestName = name "Core.GoogleResumableRequest",
+            requestType = tyCon (dname (_unique request)),
+            requestAccepts = Set.fromList _muAccept
+          }
 
 checkUpload :: Service Solved -> Method Solved -> Text -> Text -> Maybe ()
 checkUpload Service {_sDescription} Method {_mPath} prefix actual = do
@@ -212,12 +154,9 @@ checkUpload Service {_sDescription} Method {_mPath} prefix actual = do
         ++ "\n  method.path:      "
         ++ show expect
 
-requestDecl :: Maybe (Context ()) -> Type () -> [InstDecl ()] -> Decl ()
-requestDecl ctx rhs decls =
-  instDecl (iRule ctx (iCon "Core.GoogleRequest" `iApp` rhs)) (Just decls)
-
 tyScopes :: Method a -> Type ()
-tyScopes Method {_mScopes} = tyList (map (tyCon . name . getScopeName) _mScopes)
+tyScopes Method {_mScopes} =
+  tyPromotedList (map (tyCon . name . getScopeName) _mScopes)
 
 tyResponse :: Method a -> Type ()
 tyResponse Method {_mResponse} = maybe (unit_tycon ()) tyRef _mResponse
@@ -225,8 +164,8 @@ tyResponse Method {_mResponse} = maybe (unit_tycon ()) tyRef _mResponse
 tyScopesF :: Type () -> Type ()
 tyScopesF = tyApp (tyCon "Core.Scopes")
 
-tyParamsF :: Type () -> Type ()
-tyParamsF = tyApp (tyCon "Core.Params")
+tyConfigF :: Type () -> Type ()
+tyConfigF = tyApp (tyCon "Core.Config")
 
 tyResponseF :: Type () -> Type ()
 tyResponseF = tyApp (tyCon "Core.Response")
@@ -269,7 +208,10 @@ queryE Description {_dParameters} Method {_mParameters, _mParameterOrder} =
   infixApp (var "Core.toRequestQuery") "$" (var "Core.catMaybes" `app` listE params)
   where
     params =
-      mapMaybe go (orderParams fst unorderedParams _mParameterOrder)
+      catMaybes $
+        map go (orderParams fst unorderedParams _mParameterOrder)
+          ++ [ altE _dParameters
+             ]
 
     unorderedParams =
       Map.toList
@@ -280,9 +222,9 @@ queryE Description {_dParameters} Method {_mParameters, _mParameterOrder} =
     go (k, x) =
       case _pLocation x of
         Path -> Nothing
-        Query -> Just (if defaulted x then encode else encodeOptional)
+        Query -> Just (if defaulted x then encodeRequired else encodeOptional)
           where
-            encode =
+            encodeRequired =
               var "Core.Just" `app` tuple [localE k, var build `app` var (fname k)]
 
             encodeOptional =
@@ -293,25 +235,24 @@ queryE Description {_dParameters} Method {_mParameters, _mParameterOrder} =
 
             build =
               if x ^. iRepeated
-                then "Core.toQueryParamsBuilder"
-                else "Core.toQueryParamBuilder"
+                then "Core.toQueryParams"
+                else "Core.toQueryParam"
 
--- alt is the data format for the _response_.
+-- | @alt@ is the data format for the _response_.
 --
 -- It needs to be set to determine the response, we hardcode to
 -- json unless the request is a media download, which then needs
 -- the dynamic content type set.
-altE :: Description Solved -> Exp ()
-altE Description {_dParameters} =
-  case Map.lookup "alt" _dParameters >>= view iDefault of
-    Nothing -> var "Core.Nothing"
-    Just ok -> var "Core.Just" `app` textE ok
+altE :: Map Local (Param Solved) -> Maybe (Exp ())
+altE params = do
+  alt' <- Map.lookup "alt" params >>= view iDefault
+  pure (var "Core.Just" `app` tuple [textE "alt", textE alt'])
 
-uploadE :: Description Solved -> Exp ()
-uploadE Description {_dParameters}
+uploadE :: Map Local (Param Solved) -> Exp ()
+uploadE params
   -- Upload protocol for media (e.g. "raw", "multipart").
-  | Map.member "upload_protocol" _dParameters = var "Core.UploadProtocol"
+  | Map.member "upload_protocol" params = var "Core.UploadProtocol"
   -- Legacy upload protocol for media (e.g. "media", "multipart").
-  | Map.member "uploadType" _dParameters = var "Core.UploadType"
+  | Map.member "uploadType" params = var "Core.UploadType"
   -- Error, no upload protocol supported?
   | otherwise = var "Core.UploadType"

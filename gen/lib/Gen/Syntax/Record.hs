@@ -6,6 +6,7 @@ import qualified Data.List as List
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
 import qualified Data.Text as Text
+import Gen.Formatting
 import Gen.Prelude
 import Gen.Syntax.Build
 import Gen.Syntax.Type
@@ -13,57 +14,140 @@ import Gen.Text (stripPrefix, stripSuffix, upperHead)
 import Gen.Types
 import Language.Haskell.Exts
 
-recordDecl :: Global -> Map Local Solved -> Decl ()
-recordDecl n rs =
-  DataDecl () arity Nothing (DHead () (dname n)) [con] []
+productDecl ::
+  Global ->
+  Maybe Help ->
+  [Local] ->
+  Map Local Solved ->
+  [Derive] ->
+  Data
+productDecl n prodHelp fieldOrder fields derive =
+  Prod
+    { prodName,
+      prodHelp,
+      prodAlias = Nothing,
+      prodDecl,
+      prodFields = map (uncurry recordField) (Map.toList fields),
+      prodCtor = Just constrFun,
+      prodSynonym,
+      prodDeriving = Just (recordDerive derive),
+      prodExtras = []
+    }
   where
-    arity
-      | Map.size rs == 1 = NewType ()
+    -- FIXME: json instances.
+
+    prodName = dname n
+    prodDecl = recordDecl prodName fields
+
+    prodSynonym =
+      Just
+        Synonym
+          { synonymName,
+            synonymSig,
+            synonymDecl,
+            synonymHelp = Just (smartCtorHelp prodName)
+          }
+
+    constrName = cname n
+    constrFun = smartCtorFun constrName prodName fieldOrder fields
+
+    synonymName = dname ("Mk" <> n)
+
+    synonymSig =
+      PatSynSig () [synonymName] Nothing Nothing Nothing Nothing $
+        foldr tyFun (tyCon prodName) types
+
+    synonymDecl =
+      patSyn (pRecord synonymName labels) (constrP prodName fields) ImplicitBidirectional
+
+    (labels, types) =
+      unzip
+        . map (first pFieldPun)
+        . getParameters fieldOrder
+        $ fields
+
+recordDecl :: Name () -> Map Local Solved -> Decl ()
+recordDecl recName fields =
+  dataDecl dataOrNew Nothing (DHead () recName) [con] []
+  where
+    dataOrNew
+      | isNewtype = NewType ()
       | otherwise = DataType ()
 
-    con = QualConDecl () Nothing Nothing (ConDecl () (dname n) [])
+    isNewtype = Map.size fields == 1
+
+    con = QualConDecl () Nothing Nothing (ConDecl () recName [])
 
 recordDerive :: [Derive] -> Deriving ()
-recordDerive =
-  iDeriving
-    . map (iRule Nothing . iCon . name . mappend "Core." . drop 1 . show)
+recordDerive = deriveStock . map (iRule Nothing . iCon . tyDerive)
 
 recordFields :: Map Local Solved -> [Field]
-recordFields = map (uncurry field) . Map.toList
+recordFields = map (uncurry recordField) . Map.toList
+
+recordField :: Local -> Solved -> Field
+recordField l s =
+  Field
+    { fieldName = fname l,
+      fieldType = tyExternal (_type s),
+      fieldHelp = Nest (fromMaybe mempty (s ^. iDescription))
+    }
+
+smartCtorFun :: Name () -> Name () -> [Local] -> Map Local Solved -> Fun
+smartCtorFun funName recName order fields =
+  Fun
+    { funName,
+      funHelp = Just (smartCtorHelp recName),
+      funSig = typeSig [funName] (foldr tyFun (tyCon recName) types),
+      funDecl = sfun funName labels (unguardedRhs constr) noBinds
+    }
   where
-    field l v =
-      Field
-        { fieldName = fname l,
-          fieldType = tyExternal (_type v),
-          fieldHelp = Nest (fromMaybe mempty (v ^. iDescription))
-        }
+    constr = constrE recName fields
 
-smartCtorSig :: Global -> Map Local Solved -> Decl ()
-smartCtorSig n =
-  typeSig [cname n]
-    . foldr tyFun (tyCon (dname n))
-    . map (tyExternal . _type)
-    . filter parameter
-    . Map.elems
+    (labels, types) = unzip (getParameters order fields)
 
-smartCtorDecl :: Global -> Map Local Solved -> Decl ()
-smartCtorDecl n rs =
-  sfun (cname n) labels (unguardedRhs rhs) noBinds
+smartCtorHelp :: Name () -> Help
+smartCtorHelp =
+  rawHelpText . sformat fmt . \case
+    Ident () s -> s
+    Symbol () s -> s
   where
-    rhs
-      | Map.null rs = var (dname n)
-      | otherwise = recordConstrE (dname n) (map (uncurry fieldE) (Map.toList rs))
+    fmt =
+      "Create '"
+        % string
+        % "' using the required fields."
+        % " All other fields are set to 'Nothing' or a default value,"
+        % " as appropriate.\n"
 
-    labels = map fname . Map.keys $ Map.filter parameter rs
+getParameters :: [Local] -> Map Local Solved -> [(Name (), Type ())]
+getParameters order =
+  map (bimap fname (tyExternal . _type))
+    . flip (orderParams fst) order
+    . filter (parameter . snd)
+    . Map.toList
+
+constrE :: Name () -> Map Local Solved -> Exp ()
+constrE recName = recordConstrE recName . map (uncurry fieldE) . Map.toList
+
+constrP :: Name () -> Map Local Solved -> Pat ()
+constrP recName = pRecord recName . map (uncurry fieldP) . Map.toList
 
 fieldE :: Local -> Solved -> FieldUpdate ()
 fieldE l s = fieldUpdate label rhs
   where
     rhs
-      | Just x <- defaultE s, s ^. iRepeated = listE [x]
       | Just x <- defaultE s = x
       | parameter s = var label
       | otherwise = var (name "Core.Nothing")
+
+    label = fname l
+
+fieldP :: Local -> Solved -> PatField ()
+fieldP l s = pField label rhs
+  where
+    rhs
+      | Just x <- defaultP s = x
+      | parameter s = pvar label
+      | otherwise = pvar (name "Core.Nothing")
 
     label = fname l
 
@@ -74,9 +158,23 @@ defaultE s
   where
     go x p = \case
       SEnm {} -> var (bname p x)
-      SLit _ Bool -> lit ("Core." <> upperHead x)
+      SLit _ Bool -> lvar ("Core." <> upperHead x)
       SLit _ Text -> textE x
-      SLit {} -> lit x
+      SLit {} -> lvar x
       e -> error $ "Unsupported default value: " ++ show e
 
-    lit = var . name . Text.unpack
+    lvar = var . name . Text.unpack
+
+defaultP :: Solved -> Maybe (Pat ())
+defaultP s
+  | Just x <- s ^. iDefault = Just (go x (_prefix s) (_schema s))
+  | otherwise = Nothing
+  where
+    go x p = \case
+      SEnm {} -> pvar (bname p x)
+      SLit _ Bool -> lvar ("Core." <> upperHead x)
+      SLit _ Text -> pText x
+      SLit {} -> lvar x
+      e -> error $ "Unsupported default value: " ++ show e
+
+    lvar = pvar . name . Text.unpack

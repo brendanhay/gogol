@@ -81,7 +81,7 @@ cname =
   name
     . Text.unpack
     . renameReserved
-    . mappend "new"
+    . mappend "mk"
     . joinPascalName
     . global
 
