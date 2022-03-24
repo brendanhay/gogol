@@ -8,10 +8,10 @@ module Gen.Text
   )
 where
 
-import qualified Data.Char as Char
-import qualified Data.Map.Strict as Map
-import qualified Data.Set as Set
-import qualified Data.Text as Text
+import Data.Char qualified as Char
+import Data.Map.Strict qualified as Map
+import Data.Set qualified as Set
+import Data.Text qualified as Text
 import Data.Text.Manipulate
 import Gen.Prelude
 
@@ -39,22 +39,15 @@ renameField :: Text -> Text
 renameField = renameReserved . renameSpecial . lowerHead . toCamel
 
 renameBranch :: Text -> Text
-renameBranch t
-  | Just o <- operator t = o
-  | otherwise = renameReserved (go t)
+renameBranch text
+  | Just op <- operator text = op
+  | otherwise = renameReserved (cat (split text))
   where
-    go x
-      | Text.length x <= 2 = Text.toUpper x
-      | otherwise = cat $ split x
-
-    cat = foldMap (Text.intercalate "_" . map component . Text.split dot)
     split = Text.split separator
 
-    component x
-      | Text.length x <= 1 = x
-      | Char.isDigit (Text.last x) = Text.toUpper x
-      | Text.all Char.isUpper x = toPascal (Text.toLower x)
-      | otherwise = toPascal x
+    cat =
+      Text.intercalate "_"
+        . map (Text.intercalate "_" . map toPascal . Text.split dot)
 
     operator x =
       Map.lookup x $

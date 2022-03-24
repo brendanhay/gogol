@@ -1,0 +1,14 @@
+resolver: nightly-2022-03-24
+compiler: ghc-9.2.1
+
+nix:
+  enable: false
+  packages: [zlib, icu67]
+  add-gc-roots: true
+
+allow-newer: true
+
+extra-deps: []
+
+packages:
+  - lib/gogol-core

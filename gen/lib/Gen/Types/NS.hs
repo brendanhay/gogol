@@ -4,12 +4,13 @@ module Gen.Types.NS
     unNS,
     collapseNS,
     renderNS,
+    renderPathNS,
   )
 where
 
-import qualified Data.Aeson as Aeson
-import qualified Data.CaseInsensitive as CI
-import qualified Data.Text as Text
+import Data.Aeson qualified as Aeson
+import Data.CaseInsensitive qualified as CI
+import Data.Text qualified as Text
 import Gen.Prelude
 import Gen.Text (upperHead)
 
@@ -20,8 +21,9 @@ mkNS :: Text -> NS
 mkNS = UnsafeNS . map upperHead . Text.split (== '.')
 
 instance IsString NS where
-  fromString "" = mempty
-  fromString s = mkNS (fromString s)
+  fromString = \case
+    "" -> error "(IsString NS) cannot create a namespace from an empty string"
+    s -> mkNS (fromString s)
 
 instance Semigroup NS where
   UnsafeNS xs <> UnsafeNS ys
@@ -29,8 +31,8 @@ instance Semigroup NS where
     | null ys = UnsafeNS xs
     | otherwise = UnsafeNS (mappend xs ys)
 
-instance Monoid NS where
-  mempty = UnsafeNS []
+-- instance Monoid NS where
+--   mempty = UnsafeNS []
 
 collapseNS :: NS -> NS
 collapseNS (UnsafeNS xs) = UnsafeNS (map CI.original (squeeze (map CI.mk xs)))
@@ -48,3 +50,6 @@ instance ToJSON NS where
 
 renderNS :: NS -> Text
 renderNS (UnsafeNS xs) = Text.intercalate "." xs
+
+renderPathNS :: NS -> FilePath
+renderPathNS (UnsafeNS xs) = Text.unpack (Text.intercalate "/" xs)

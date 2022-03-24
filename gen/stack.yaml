@@ -1,12 +1,18 @@
-resolver: lts-19.0
+resolver: nightly-2022-03-24
+compiler: ghc-9.2.1
 
 nix:
   enable: false
   packages: [zlib, icu67]
   add-gc-roots: true
 
+allow-newer: true
+
 extra-deps:
-  - ede-0.3.3.0
+  - pandoc-2.17.1.1@sha256:fdca795a34c474ff8e5464256e01ebe988a97717dc219dfc217f6e650656309d,39053
+#   - hslua-2.1.0@sha256:134a14902ad0979ecbe76db9227077b66c4f670e5022d638ef64c59bddb80dce,4209
+#   - hslua-aeson-2.1.0@sha256:43a35e8ce034ce29931af804a15151fe9b7d9a4ee5e27dd47cc8086f65215fcb,3200
+#   - hslua-marshalling-2.1.0@sha256:4179d240a8ca8417a284e362f275e37f3cdf0ad0a0d1e682e036c8ae4a6d2471,3907
 
 packages:
-  - '.'
+    - '.'

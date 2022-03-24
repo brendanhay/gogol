@@ -50,9 +50,9 @@ import Data.Aeson as Export (FromJSON, FromJSONKey, ToJSON, ToJSONKey)
 import Data.Bifoldable as Export (Bifoldable (bifoldMap), bifor_, bitraverse_)
 import Data.Bifunctor as Export (Bifunctor (bimap, first, second))
 import Data.Bitraversable as Export (Bitraversable (bitraverse), bifor)
-import qualified Data.ByteString
-import qualified Data.ByteString.Builder
-import qualified Data.ByteString.Lazy
+import Data.ByteString qualified
+import Data.ByteString.Builder qualified
+import Data.ByteString.Lazy qualified
 import Data.ByteString.Short as Export (ShortByteString)
 import Data.CaseInsensitive as Export (CI)
 import Data.Coerce as Export (Coercible)
@@ -75,9 +75,9 @@ import Data.Maybe as Export
 import Data.Proxy as Export (Proxy (Proxy))
 import Data.Set as Export (Set)
 import Data.String as Export (IsString (fromString))
-import qualified Data.Text
-import qualified Data.Text.Lazy
-import qualified Data.Text.Lazy.Builder
+import Data.Text qualified
+import Data.Text.Lazy qualified
+import Data.Text.Lazy.Builder qualified
 import Data.Traversable as Export (for)
 import Data.Typeable as Export (Typeable)
 import Data.Void as Export (Void)

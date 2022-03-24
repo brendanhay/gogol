@@ -1,8 +1,18 @@
+{% if type.alias %}
+{% include "alias.ede" with alias = type.alias %}
+{% endif %}
 {% if type.help %}
+
 {{ type.help }}
 {% endif %}
+{% if type.synonym %}
 --
--- /See:/ '{{ type.ctor.name }}' smart constructor.
+-- Construct a default value using the '{{ type.synonym.name }}' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
+{% elif type.ctor %}
+--
+-- Construct a default value using the '{{ type.ctor.name }}' smart constructor.
+{% endif %}
 {{ type.decl }}
 {% for field in type.fields %}
 {% if field.first %}
@@ -18,14 +28,29 @@
 {% else %}
     }
 {% endif %}
+{% if type.deriving %}
     {{ type.deriving }}
+{% endif %}
+{% if type.synonym %}
+
+#ifdef NOFIELDSELECTORS
+{% if type.synonym.help %}
+{{ type.synonym.help }}
+{% endif %}
+{{ type.synonym.sig }}
+{{ type.synonym.decl }}
+
+{-# DEPRECATED {{ type.ctor.name }} "Please use {{ type.synonym.name }} instead" #-}
+#endif
+{% endif %}
+{% if type.ctor %}
 
 {% if type.ctor.help %}
 {{ type.ctor.help }}
 {% endif %}
 {{ type.ctor.sig }}
 {{ type.ctor.decl }}
-{% for class in type.instances %}
-{{ class.value }}
-
+{% endif %}
+{% for decl in type.extras %}
+{{ decl.value }}
 {% endfor %}

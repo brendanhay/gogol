@@ -8,8 +8,7 @@
 module {{ action.ns }}
     (
     -- * Constructing a Request
-    {{ action.data.name }} (..),
-    {{ action.data.ctor.name }},
+{% include "_include/export-prod.ede" with type = action.data %}
     ) where
 
 import qualified Gogol.Prelude as Core

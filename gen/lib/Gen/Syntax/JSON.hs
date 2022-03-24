@@ -1,10 +1,10 @@
 module Gen.Syntax.JSON where
 
 import Control.Lens (view, (^.))
-import qualified Data.Foldable as Foldable
-import qualified Data.List as List
-import qualified Data.Map.Strict as Map
-import qualified Data.Text as Text
+import Data.Foldable qualified as Foldable
+import Data.List qualified as List
+import Data.Map.Strict qualified as Map
+import Data.Text qualified as Text
 import Gen.Prelude
 import Gen.Syntax.Build
 import Gen.Syntax.Record

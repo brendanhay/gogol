@@ -3,23 +3,23 @@ module Gen.AST.Render
   )
 where
 
-import qualified Control.Monad.Except as Except
-import qualified Data.ByteString.Builder as Builder
-import qualified Data.ByteString.Char8 as ByteString.Char8
-import qualified Data.ByteString.Lazy as ByteString.Lazy
-import qualified Data.Char as Char
-import qualified Data.Map.Strict as Map
-import qualified Data.Set as Set
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as Text.Lazy
-import qualified Data.Text.Lazy.Encoding as Text.Lazy.Encoding
+import Control.Monad.Except qualified as Except
+import Data.ByteString.Builder qualified as Builder
+import Data.ByteString.Char8 qualified as ByteString.Char8
+import Data.ByteString.Lazy qualified as ByteString.Lazy
+import Data.Char qualified as Char
+import Data.Map.Strict qualified as Map
+import Data.Set qualified as Set
+import Data.Text qualified as Text
+import Data.Text.Lazy qualified as Text.Lazy
+import Data.Text.Lazy.Encoding qualified as Text.Lazy.Encoding
 import Gen.AST.Solve (getSolved)
 import Gen.Formatting
 import Gen.Prelude
-import qualified Gen.Syntax as Syntax
+import Gen.Syntax qualified as Syntax
 -- import Gen.Syntax.Build
 import Gen.Types
-import qualified Language.Haskell.Exts.Build as Build
+import Language.Haskell.Exts.Build qualified as Build
 
 render :: Service Solved -> AST (API, Set Data)
 render service@Service {_sDescription} = do

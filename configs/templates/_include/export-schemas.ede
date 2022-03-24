@@ -7,8 +7,7 @@
     {% when "prod" %}
 
     -- ** {{ prod.value.name }}
-    {{ prod.value.name }} (..),
-    {{ prod.value.ctor.name }},
+{% include "export-prod.ede" with type = prod.value %}
     {% endcase %}
   {% endfor %}
   {% for sum in schemas %}

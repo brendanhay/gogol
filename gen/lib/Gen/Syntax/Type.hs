@@ -1,6 +1,6 @@
 module Gen.Syntax.Type where
 
-import qualified Data.Text as Text
+import Data.Text qualified as Text
 import Gen.Prelude
 import Gen.Syntax.Build
 import Gen.Types

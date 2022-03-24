@@ -5,9 +5,9 @@ module Gen.AST.Solve
 where
 
 import Control.Lens (use, uses)
-import qualified Control.Monad.Except as Except
-import qualified Data.List as List
-import qualified Data.Map.Strict as Map
+import Control.Monad.Except qualified as Except
+import Data.List qualified as List
+import Data.Map.Strict qualified as Map
 import Gen.Formatting hiding (list)
 import Gen.Prelude
 import Gen.Text

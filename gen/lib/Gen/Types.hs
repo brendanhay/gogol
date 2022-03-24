@@ -14,17 +14,17 @@ where
 import Control.Applicative (optional)
 import Control.Lens (lens, makeLenses, use, uses, view)
 import Data.Aeson ((.=))
-import qualified Data.Aeson as Aeson
-import qualified Data.Attoparsec.Text as Atto
-import qualified Data.CaseInsensitive as CI
-import qualified Data.Char as Char
+import Data.Aeson qualified as Aeson
+import Data.Attoparsec.Text qualified as Atto
+import Data.CaseInsensitive qualified as CI
+import Data.Char qualified as Char
 import Data.Function (on)
-import qualified Data.List as List
-import qualified Data.Map.Strict as Map
+import Data.List qualified as List
+import Data.Map.Strict qualified as Map
 import Data.Ord (Down (..))
-import qualified Data.Set as Set
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy.Builder as Text.Builder
+import Data.Set qualified as Set
+import Data.Text qualified as Text
+import Data.Text.Lazy.Builder qualified as Text.Builder
 import Gen.Formatting
 import Gen.Prelude hiding (Enum)
 import Gen.Text
@@ -34,7 +34,7 @@ import Gen.Types.Id
 import Gen.Types.Map
 import Gen.Types.NS
 import Gen.Types.Schema
-import qualified System.FilePath as FilePath
+import System.FilePath qualified as FilePath
 import Text.EDE (Template)
 
 newtype Version = Version Text
@@ -154,17 +154,9 @@ data Templates = Templates
     tocTemplate :: Template,
     readmeTemplate :: Template,
     typesTemplate :: Template,
-    prodTemplate :: Template,
-    sumTemplate :: Template,
-    actionTemplate :: Template
-  }
-
-data Imports = Imports
-  { tocImports :: Set NS,
-    typeImports :: Set NS,
-    prodImports :: Set NS,
-    sumImports :: Set NS,
-    actionImports :: Set NS
+    actionTemplate :: Template,
+    productTemplate :: Template,
+    sumTemplate :: Template
   }
 
 data Library = Library
@@ -208,29 +200,38 @@ instance ToJSON Library where
         "schemas" .= (l ^. lSchemas)
       ]
 
+data Imports = Imports
+  { tocImports :: Set NS,
+    typesImports :: Set NS,
+    productImports :: Set NS,
+    sumImports :: Set NS,
+    actionImports :: Set NS
+  }
+
 serviceImports :: HasService a b => a -> Imports
 serviceImports s =
   Imports
     { tocImports = Set.empty,
-      typeImports = Set.fromList [prodNS s, sumNS s],
-      prodImports = Set.fromList [sumNS s],
+      typesImports = Set.fromList [],
+      productImports = Set.fromList [],
       sumImports = Set.empty,
       actionImports = Set.fromList [typesNS s]
     }
 
-tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
-tocNS = mappend "Gogol" . mkNS . view sCanonicalName
+tocNS, typesNS :: HasService a b => a -> NS
+tocNS = ("Gogol" <>) . mkNS . view sCanonicalName
 typesNS = (<> "Types") . tocNS
-prodNS = (<> "Internal.Product") . tocNS
-sumNS = (<> "Internal.Sum") . tocNS
 
 exposedModules :: Library -> [NS]
 exposedModules l =
-  (tocNS l :) . (typesNS l :) . map actionNs . Set.toList $
-    apiResources (_lAPI l) <> apiMethods (_lAPI l)
+  (tocNS l :)
+    . (typesNS l :)
+    . map actionNs
+    . Set.toList
+    $ apiResources (_lAPI l) <> apiMethods (_lAPI l)
 
 otherModules :: Library -> [NS]
-otherModules s = List.sort [prodNS s, sumNS s]
+otherModules s = [] -- List.sort [prodNS s, sumNS s]
 
 data TType
   = TType Global
@@ -301,11 +302,9 @@ data Memo = Memo
   { _context :: Service (Fix Schema),
     _typed :: Map Global TType,
     _derived :: Map Global [Derive],
-    _reserve :: Set Global,
+    _reserved :: Set Global,
     _schemas :: Map Global (Schema Global),
-    _prefixed :: Map Global Prefix,
-    _branches :: Seen,
-    _fields :: Seen
+    _prefixed :: Map Global Prefix
   }
 
 makeLenses ''Memo
@@ -317,29 +316,5 @@ type AST = ExceptT Text (State Memo)
 
 reserveType :: Global -> AST Global
 reserveType g = do
-  p <- uses reserve (Set.member g)
-
-  pure
-    $! if p
-      then reference g "'"
-      else g
-
-reserveBranches :: AST ()
-reserveBranches = do
-  ss <- use schemas
-
-  let bs = Set.fromList $ map (CI.mk . global) (Map.keys ss)
-
-  branches %= Map.insertWith (<>) mempty bs
-
-reserveFields :: AST ()
-reserveFields = do
-  ss <- use schemas
-
-  forM_ (Map.keys ss) $ \(global -> k) -> do
-    let (p, s) =
-          case splitWords k of
-            [] -> ("", "")
-            x : xs -> (x, mconcat xs)
-
-    fields %= Map.insertWith (<>) (CI.mk p) (Set.singleton (CI.mk s))
+  p <- uses reserved (Set.member g)
+  pure $ if p then reference g "'" else g

@@ -3,11 +3,15 @@
 
     -- ** @{{ action.value.id }}@
     {{ action.value.data.name }} (..),
+    {% if action.value.data.ctor %}
     {{ action.value.data.ctor.name }}
+    {% endif %}
   {% endfor %}
   {% for action in api.resources %}
 
     -- ** @{{ action.value.id }}@
     {{ action.value.data.name }} (..),
+    {% if action.value.data.ctor %}
     {{ action.value.data.ctor.name }},
+    {% endif %}
   {% endfor %}

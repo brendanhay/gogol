@@ -1,9 +1,11 @@
     -- * Configuration
-    {{ api.config.name }},
+    {% if api.service.alias %}
+    {{ api.service.alias.name }},
+    {% endif %}
+    {{ api.service.ctor.name }},
 
     -- ** Global Request Parameters
-    {{ api.params.name }} (..),
-    {{ api.params.ctor.name }},
+    {{ api.service.name }} (..),
   {% for scope in api.scopes %}
     {% if scope.first %}
 

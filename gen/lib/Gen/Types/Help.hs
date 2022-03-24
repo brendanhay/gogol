@@ -7,13 +7,13 @@ module Gen.Types.Help
   )
 where
 
-import qualified Data.Aeson as Aeson
-import qualified Data.Char as Char
-import qualified Data.Text.Lazy as Text.Lazy
+import Data.Aeson qualified as Aeson
+import Data.Char qualified as Char
+import Data.Text.Lazy qualified as Text.Lazy
 import Gen.Prelude
-import qualified System.IO.Unsafe as Unsafe
+import System.IO.Unsafe qualified as Unsafe
 import Text.Pandoc (Pandoc, PandocError)
-import qualified Text.Pandoc as Pandoc
+import Text.Pandoc qualified as Pandoc
 
 data Help
   = Help [Help]

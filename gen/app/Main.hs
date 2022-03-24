@@ -1,17 +1,26 @@
 module Main where
 
-import qualified Data.IORef as IORef
-import qualified Data.List as List
-import qualified Data.Text as Text
+import Control.Exception qualified as Exception
+import Data.Aeson (Value (..), (.=))
+import Data.Aeson qualified as Aeson
+import Data.Aeson.KeyMap qualified as KeyMap
+import Data.IORef qualified as IORef
+import Data.List qualified as List
+import Data.Set qualified as Set
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text.Encoding
+import Data.Text.Lazy qualified as Text.Lazy
 import Gen.AST
 import Gen.Formatting
 import Gen.IO
 import Gen.JSON
+import Gen.JSON qualified as JSON
 import Gen.Prelude
-import qualified Gen.Tree as Tree
 import Gen.Types hiding (info)
-import qualified Options.Applicative as Options
-import qualified System.Directory as Directory
+import Options.Applicative qualified as Options
+import System.Directory qualified as Directory
+import Text.EDE (Template)
+import Text.EDE qualified as EDE
 
 data Options = Options
   { optionOutput :: FilePath,
@@ -93,9 +102,9 @@ main = do
       <*> load "toc.ede"
       <*> load "readme.ede"
       <*> load "types.ede"
-      <*> load "products.ede"
-      <*> load "sums.ede"
       <*> load "action.ede"
+      <*> load "product.ede"
+      <*> load "sum.ede"
       <* done
 
   title "Selecting new service models..."
@@ -117,7 +126,7 @@ main = do
 
         definition <-
           sequence [loadObject configPath, loadObject modelPath]
-            >>= parseObject . jsonMerge
+            >>= parseObject . mergeObject
 
         say ("Successfully parsed '" % stext % "' API definition.") modelName
 
@@ -127,16 +136,12 @@ main = do
 
         say ("Creating " % stext % " package.") (library ^. dTitle)
 
-        tree <-
-          either (error . Text.unpack) pure (Tree.populate optionOutput templates library)
-            >>= Tree.fold createDir writeOrTouch
+        writePackage optionOutput optionAssets templates library
 
         say
           ("Successfully rendered " % stext % "-" % fver % " package")
           (library ^. dName)
           (library ^. lVersion)
-
-        copyDir optionAssets (Tree.root tree)
 
     done
 
@@ -153,3 +158,68 @@ main = do
     done
 
   title ("Successfully processed " % int % " configured models.") modelCount
+
+writePackage :: FilePath -> FilePath -> Templates -> Library -> IO ()
+writePackage output assets Templates {..} library = do
+  let API {..} = _lAPI library
+      Imports {..} = serviceImports library
+
+      lib = Text.unpack (library ^. sLibrary)
+      out = output </> lib
+
+  -- Serialise the library specification to JSON for use as template vars.
+  env <-
+    maybe (error "failed to serialize library to JSON EDE env") pure $
+      EDE.fromValue (Aeson.toJSON library)
+
+  -- Ensure empty src directories exists and are preserved by git.
+  touchFile (out </> "src/.gitkeep")
+
+  -- Gogol/Service/Resource.../Method.hs
+  for_ (apiResources <> apiMethods) $ \action ->
+    writeModule out (actionNs action) actionImports actionTemplate
+      =<< fmap (mappend env) (getKeyedEnv "action" action)
+
+  let typesNamespace = typesNS library
+
+  for_ (_lSchemas library) $ \schema -> do
+    let template = if isSum schema then sumTemplate else productTemplate
+
+    writeModule out (typesNamespace <> getDataModule schema) mempty template
+      =<< getKeyedEnv "type" schema
+
+  -- Gogol/Service/Types.hs
+  writeModule out typesNamespace typesImports typesTemplate env
+
+  -- Gogol/Service.hs
+  writeModule out (tocNS library) tocImports tocTemplate env
+
+  -- gogol-service.cabal
+  writeTemplate (out </> lib <.> "cabal") cabalTemplate env
+
+  -- README.md
+  writeTemplate (out </> "README.md") readmeTemplate env
+
+  -- Copy LICENSE etc.
+  copyDir assets out
+
+writeModule :: ToJSON a => FilePath -> NS -> Set NS -> Template -> a -> IO ()
+writeModule dir ns imports template env = do
+  vars <-
+    mappend
+      <$> getEnv env
+      <*> pure (EDE.fromPairs ["moduleName" .= ns, "moduleImports" .= imports])
+
+  writeTemplate (dir </> "gen" </> renderPathNS ns <.> "hs") template vars
+
+getKeyedEnv :: ToJSON a => Aeson.Key -> a -> IO (HashMap Text Aeson.Value)
+getKeyedEnv key val =
+  case Aeson.object [key .= val] of
+    Aeson.Object o -> pure (KeyMap.toHashMapText o)
+    _other -> error "(getKeyedEnv) failed to serialize EDE JSON env"
+
+getEnv :: ToJSON a => a -> IO (HashMap Text Aeson.Value)
+getEnv =
+  maybe (error "(getEnv) failed to serialize EDE JSON env") pure
+    . EDE.fromValue
+    . Aeson.toJSON

@@ -1,7 +1,7 @@
 module Gen.Types.Map where
 
 import Control.Lens ()
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Gen.Prelude
 
 vMapMaybe ::

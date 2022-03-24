@@ -4,7 +4,8 @@ module Gen.Types.Id
     Suffix (..),
 
     -- * Unique Identifiers
-    Global,
+    Global (Global),
+    fromGlobal,
     newGlobal,
     Local,
     global,
@@ -36,13 +37,13 @@ module Gen.Types.Id
 where
 
 import Control.Applicative (optional)
-import qualified Data.Aeson as Aeson
-import qualified Data.Attoparsec.Text as Atto
-import qualified Data.CaseInsensitive as CI
-import qualified Data.List as List
-import qualified Data.Set as Set
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy.Builder as Text.Builder
+import Data.Aeson qualified as Aeson
+import Data.Attoparsec.Text qualified as Atto
+import Data.CaseInsensitive qualified as CI
+import Data.List qualified as List
+import Data.Set qualified as Set
+import Data.Text qualified as Text
+import Data.Text.Lazy.Builder qualified as Text.Builder
 import Formatting
 import Gen.Prelude
 import Gen.Text
@@ -112,7 +113,7 @@ joinPascalName :: Text -> Text
 joinPascalName =
   mconcat
     . map upperHead
-    . Text.split (\c -> c == '_' || separator c)
+    . Text.split separator
 
 newtype Suffix = Suffix Text
   deriving (Show, IsString)
@@ -123,7 +124,7 @@ newtype Prefix = Prefix Text
 instance Semigroup Prefix where
   Prefix a <> Prefix b = Prefix (a <> b)
 
-newtype Global = Global {unsafeGlobal :: [Text]}
+newtype Global = Global {fromGlobal :: [Text]}
   deriving (Eq, Ord, Show, Generic)
 
 instance Semigroup Global where
@@ -157,7 +158,7 @@ global :: Global -> Text
 global (Global g) = foldMap upperHead g
 
 commasep :: Global -> Text
-commasep = mconcat . List.intersperse "." . unsafeGlobal
+commasep = mconcat . List.intersperse "." . fromGlobal
 
 reference :: Global -> Local -> Global
 reference (Global g) (Local l) =

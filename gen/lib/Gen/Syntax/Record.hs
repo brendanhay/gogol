@@ -1,11 +1,11 @@
 module Gen.Syntax.Record where
 
 import Control.Lens (view, (^.))
-import qualified Data.Foldable as Foldable
-import qualified Data.List as List
-import qualified Data.Map.Strict as Map
-import qualified Data.Set as Set
-import qualified Data.Text as Text
+import Data.Foldable qualified as Foldable
+import Data.List qualified as List
+import Data.Map.Strict qualified as Map
+import Data.Set qualified as Set
+import Data.Text qualified as Text
 import Gen.Formatting
 import Gen.Prelude
 import Gen.Syntax.Build
@@ -28,7 +28,7 @@ productDecl n prodHelp fieldOrder fields derive =
       prodAlias = Nothing,
       prodDecl,
       prodFields = map (uncurry recordField) (Map.toList fields),
-      prodCtor = Just constrFun,
+      prodCtor = constrFun,
       prodSynonym,
       prodDeriving = Just (recordDerive derive),
       prodExtras = []
@@ -40,8 +40,8 @@ productDecl n prodHelp fieldOrder fields derive =
     prodDecl = recordDecl prodName fields
 
     prodSynonym =
-      Just
-        Synonym
+      guard (not allRequired)
+        $> Synonym
           { synonymName,
             synonymSig,
             synonymDecl,
@@ -49,7 +49,9 @@ productDecl n prodHelp fieldOrder fields derive =
           }
 
     constrName = cname n
-    constrFun = smartCtorFun constrName prodName fieldOrder fields
+    constrFun =
+      guard (not allRequired)
+        $> smartCtorFun constrName prodName fieldOrder fields
 
     synonymName = dname ("Mk" <> n)
 
@@ -59,6 +61,9 @@ productDecl n prodHelp fieldOrder fields derive =
 
     synonymDecl =
       patSyn (pRecord synonymName labels) (constrP prodName fields) ImplicitBidirectional
+
+    allRequired =
+      length labels == Map.size fields
 
     (labels, types) =
       unzip

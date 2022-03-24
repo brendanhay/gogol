@@ -1,0 +1,12 @@
+    {% if type.alias %}
+    {{ type.alias.name }},
+    {% endif %}
+    {{ type.name }} (..),
+    {% if type.synonym %}
+#ifdef NOFIELDSELECTORS
+    {{ type.synonym.name }} (..),
+#endif
+    {% endif %}
+    {% if type.ctor %}
+    {{ type.ctor.name }},
+    {% endif %}

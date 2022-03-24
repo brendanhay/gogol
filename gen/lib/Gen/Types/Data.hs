@@ -10,7 +10,7 @@ import Gen.Prelude
 import Gen.Types.Help
 import Gen.Types.Id (Global)
 import Gen.Types.NS
-import qualified Language.Haskell.Exts.Pretty as PP
+import Language.Haskell.Exts.Pretty qualified as PP
 import Language.Haskell.Exts.Syntax
 
 newtype PP a = PP a
@@ -94,6 +94,17 @@ data Data
         prodExtras :: [Decl ()]
       }
   deriving stock (Show, Eq, Ord)
+
+isSum :: Data -> Bool
+isSum = \case
+  Sum {} -> True
+  Prod {} -> False
+
+getDataModule :: Data -> NS
+getDataModule x =
+  case getDataName x of
+    Symbol () s -> fromString s
+    Ident () s -> fromString s
 
 getDataName :: Data -> Name ()
 getDataName = \case

@@ -24,6 +24,7 @@ common base
     ConstraintKinds
     DataKinds
     DefaultSignatures
+    DeriveAnyClass
     DeriveFoldable
     DeriveFunctor
     DeriveGeneric
@@ -40,6 +41,7 @@ common base
     FunctionalDependencies
     GADTs
     GeneralizedNewtypeDeriving
+    ImportQualifiedPost
     InstanceSigs
     KindSignatures
     LambdaCase
@@ -57,6 +59,7 @@ common base
     RecordWildCards
     ScopedTypeVariables
     StandaloneDeriving
+    StandaloneKindSignatures
     StrictData
     TupleSections
     TypeApplications
@@ -64,6 +67,8 @@ common base
     TypeOperators
     TypeSynonymInstances
     ViewPatterns
+    NoFieldSelectors
+    OverloadedRecordDot
 
   build-depends:      base >=4.12
 
@@ -77,7 +82,6 @@ library
     , case-insensitive
     , containers
     , directory
-    , directory-tree
     , ede
     , filepath
     , formatting
@@ -86,6 +90,7 @@ library
     , lens
     , mtl
     , pandoc
+    , scientific
     , text
     , text-manipulate
     , unordered-containers
@@ -98,6 +103,7 @@ library
     Gen.Formatting
     Gen.IO
     Gen.JSON
+    Gen.JSONSchema.Draf3
     Gen.Prelude
     Gen.Syntax
     Gen.Syntax.Build
@@ -107,7 +113,6 @@ library
     Gen.Syntax.Service
     Gen.Syntax.Type
     Gen.Text
-    Gen.Tree
     Gen.Types
     Gen.Types.Data
     Gen.Types.Help
@@ -120,9 +125,12 @@ executable gogol-gen
   import:         base
   hs-source-dirs: app
   main-is:        Main.hs
-  ghc-options:    -rtsopts -threaded "-with-rtsopts=-qg -A128M -I0" -Wall
+  ghc-options:    -rtsopts -threaded "-with-rtsopts=-A256M -I0" -Wall
   build-depends:
+    , aeson
+    , containers
     , directory
+    , ede
     , gogol-gen
     , optparse-applicative
     , text

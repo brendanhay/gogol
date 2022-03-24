@@ -1,7 +1,7 @@
 {% if type.help %}
 {{ type.help }}
 {% endif %}
-newtype {{ type.name }} = {{ type.name }} { from{{ type.name }} :: Core.Text }
+newtype {{ type.name }} = {{ type.name }} Core.Text
     deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
     deriving newtype
       ( Core.Hashable

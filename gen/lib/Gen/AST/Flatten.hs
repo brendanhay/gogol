@@ -4,9 +4,11 @@ module Gen.AST.Flatten
 where
 
 import Control.Lens (use, uses)
-import qualified Control.Monad.Except as Except
-import qualified Data.Map.Strict as Map
-import qualified Data.Set as Set
+import Control.Monad.Except qualified as Except
+import Data.List qualified as List
+import Data.Map.Strict qualified as Map
+import Data.Set qualified as Set
+import Debug.Trace
 import Gen.Formatting
 import Gen.Prelude
 import Gen.Types
@@ -20,9 +22,6 @@ flatten s = do
   ms <- traverse (method canonical ps "Method") (s ^. dMethods)
   _ <- Map.traverseWithKey globalSchema (s ^. dSchemas)
   ss <- use schemas
-
-  reserveBranches
-  reserveFields
 
   let d =
         (s ^. sDescription)
@@ -47,12 +46,44 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
       SAny i a -> pure (reference p "Any", SAny i a)
       SRef i r -> pure (reference p "Ref", SRef i r)
       SLit i l -> pure (reference p "Lit", SLit i l)
-      SEnm i e -> (,SEnm i e) <$> name i p ["Type", "Option"]
+      --
+      SEnm i e -> do
+        -- insert a new type and return a ref here -
+        -- the problem with enums is the description (info) is specific to a field,
+        -- but is getting carried along with the enum and preventing it being
+        -- checked for equality when inserted into Memo
+
+        -- We care about a Name + Enm, ignore the info:
+        --   insert (newGlobal (List.last (fromGlobal p)) Enm
+
+        let sharedName = Global . reverse . take 1 . reverse $ fromGlobal p
+            extendName = Global . reverse . take 2 . reverse $ fromGlobal p
+            sharedInfo =
+              Info
+                { _iId = Nothing,
+                  _iDescription = Nothing,
+                  _iDefault = Nothing,
+                  _iRequired = False,
+                  _iPattern = Nothing,
+                  _iMinimum = Nothing,
+                  _iMaximum = Nothing,
+                  _iRepeated = False,
+                  _iAnnotations = mempty
+                }
+
+        g <-
+          insert sharedName (SEnm sharedInfo e)
+            <|> insert extendName (SEnm sharedInfo e)
+
+        pure (g, SEnm sharedInfo e) -- <$> insert sharedName (SEnm sharedInfo e)
+
+      --
       SArr i a -> do
-        u <- name i p ["List", "Array"]
+        u <- name i p []
         (u,) . SArr i <$> array u a
+      --
       SObj i o -> do
-        u <- name i p ["Schema", "Object"]
+        u <- name i p []
         (u,) . SObj i <$> object u o
 
     array p (Arr e) =
@@ -63,14 +94,26 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
         <$> traverse (localSchema p "additional") aps
         <*> Map.traverseWithKey (\k v -> localSchema (p <> "'") k v) ps
 
-    name i p xs
+    -- sumName i p expect
+    --   | Just x <- i ^. iId = pure x
+    --   | otherwise =
+    --       uses schemas (Map.lookup p) >>= \case
+    --         Nothing -> p
+    --         Just exists | expect == exists = p
+
+    name i p suffixes
       | Just x <- i ^. iId = pure x
       | otherwise = do
-        r <- uses reserve (Set.member p)
-        e <- uses schemas (Map.lookup p)
-        case (r, e, xs) of
-          (False, Nothing, _) -> pure p
-          (_, _, z : zs) -> name i (reference g z) zs
+        unique <- uses reserved (Set.member p)
+        exists <- uses schemas (Map.lookup p)
+
+        case (unique, exists, suffixes) of
+          (False, Nothing, _) ->
+            pure p
+          --
+          (_, _, suf : suffixes) ->
+            name i (reference g suf) suffixes
+          --
           (_, Just x, []) ->
             Except.throwError $
               sformat
@@ -79,6 +122,7 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
                 ml
                 p
                 x
+          --
           (True, _, []) ->
             Except.throwError $
               sformat

@@ -1,22 +1,14 @@
 module Gen.JSON where
 
 import Data.Aeson (Object, Value (..))
-import qualified Data.Aeson as Aeson
-import qualified Data.Aeson.KeyMap as KeyMap
-import qualified Data.Char as Char
-import qualified Data.List as List
-import Gen.Formatting
+import Data.Aeson qualified as Aeson
+import Data.Aeson.KeyMap qualified as KeyMap
+import Data.Char qualified as Char
+import Data.List qualified as List
 import Gen.Prelude
-import qualified Text.EDE as EDE
 
-jsonObject :: ToJSON a => String -> a -> Either Text (HashMap Text Value)
-jsonObject n =
-  note (sformat ("Failed to extract JSON object from value " % string) n)
-    . EDE.fromValue
-    . Aeson.toJSON
-
-jsonMerge :: [Object] -> Object
-jsonMerge = foldl' union mempty
+mergeObject :: [Object] -> Object
+mergeObject = foldl' union mempty
   where
     union :: Object -> Object -> Object
     union = KeyMap.unionWith value

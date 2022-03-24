@@ -4,14 +4,14 @@ module Gen.Types.Schema where
 
 import Control.Lens (lens, makeClassy, makeLenses, view)
 import Data.Aeson ((.!=), (.:), (.:?))
-import qualified Data.Aeson as Aeson
+import Data.Aeson qualified as Aeson
 import Data.Aeson.TH (deriveJSON)
-import qualified Data.Aeson.Types as Aeson.Types
-import qualified Data.Char as Char
+import Data.Aeson.Types qualified as Aeson.Types
+import Data.Char qualified as Char
 import Data.Function (on)
-import qualified Data.List as List
-import qualified Data.Map.Strict as Map
-import qualified Data.Text as Text
+import Data.List qualified as List
+import Data.Map.Strict qualified as Map
+import Data.Text qualified as Text
 import Gen.JSON
 import Gen.Prelude hiding (Enum)
 import Gen.Text
@@ -509,6 +509,6 @@ getScopeName = \case
 
     splitControl =
       mconcat
-        . List.intersperse "_"
+        --        . List.intersperse "_"
         . map upperHead
         . Text.split (not . Char.isAlphaNum)

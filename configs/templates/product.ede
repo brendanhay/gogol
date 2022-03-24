@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {% include "_include/license.ede" %}
 --
 module {{ moduleName }}
@@ -11,4 +12,4 @@ import qualified Gogol.Prelude as Core
 import {{ import.value }}
 {% endfor %}
 
-{% include "_include/sum.ede" %}
+{% include "_include/prod.ede" %}

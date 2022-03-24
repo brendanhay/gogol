@@ -1,10 +1,10 @@
 module Gen.AST where
 
 import Control.Lens (view)
-import qualified Control.Monad.Except as Except
-import qualified Control.Monad.State.Strict as State
-import qualified Data.Map.Strict as Map
-import qualified Data.Set as Set
+import Control.Monad.Except qualified as Except
+import Control.Monad.State.Strict qualified as State
+import Data.Map.Strict qualified as Map
+import Data.Set qualified as Set
 import Gen.AST.Flatten (flatten)
 import Gen.AST.Render (render)
 import Gen.AST.Solve (solve)
@@ -23,7 +23,7 @@ runAST version service =
 
 initial :: Service (Fix Schema) -> Memo
 initial service =
-  Memo service mempty mempty index core mempty mempty mempty
+  Memo service mempty mempty index core mempty
   where
     -- Top-level schema definitions with ids.
     index =

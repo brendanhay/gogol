@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {% include "_include/license.ede" %}
 --
 module {{ moduleName }}
@@ -10,16 +11,9 @@ import qualified Network.Google.Prelude as Core
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}
-
-{% if api.config.help %}
-{{ api.config.help }}
-{% endif %}
-{{ api.config.sig }}
-{{ api.config.decl }}
 {% for scope in api.scopes %}
 
-{{ scope.value.help }}
-{{ scope.value.decl }}
+{% include "_include/alias.ede" with alias = scope.value %}
 {% endfor %}
 
-{% include "_include/prod.ede" with type = api.params %}
+{% include "_include/prod.ede" with type = api.service %}

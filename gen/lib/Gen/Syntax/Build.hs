@@ -2,7 +2,7 @@
 
 module Gen.Syntax.Build where
 
-import qualified Data.Text as Text
+import Data.Text qualified as Text
 import Gen.Prelude
 import Gen.Types.Id
 import Gen.Types.Schema (Ref (..))
