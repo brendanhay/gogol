@@ -24,7 +24,6 @@ module Kuy.Driver.Store
   ) where
 
 import Data.GADT.Compare.TH qualified as TH
-import Data.GADT.Show.TH qualified as TH
 import Type.Reflection (TypeRep, typeRep)
 import System.FilePath qualified as FilePath
 import Data.Function qualified as Function
@@ -34,15 +33,12 @@ import UnliftIO.Directory qualified as Directory
 import UnliftIO.Temporary qualified as Temporary
 import UnliftIO qualified
 import Data.ByteString qualified as ByteString
-import Data.Coerce (coerce)
 import Distribution.Utils.Structured
 import GHC.Fingerprint qualified as GHC
 import Data.Aeson qualified as Aeson
-import Data.Text qualified as Text
 import Kuy.Prelude
 import Data.Map.Strict qualified as Map
 import GHC.Utils.Fingerprint qualified as GHC.Utils
-import Data.Some
 
 newtype Store = Store { path :: FilePath }
   deriving stock (Show)
@@ -188,7 +184,7 @@ readContent store reader = do
   exists <- Directory.doesPathExist path
 
   if not exists
-    then pure $ Left Content{hash = reader.hash}
+    then pure $ Left ContentWriter{hash = reader.hash}
     else do
       -- FIXME: verify the reaer's hash?
 

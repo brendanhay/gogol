@@ -1,18 +1,14 @@
 module Kuy.Driver.Rules where
 
-import Data.Map.Strict qualified as Map
 import UnliftIO.IORef qualified as IORef
 import Data.Atomics qualified as Atomics
 import Data.Aeson qualified as Aeson
-import Data.Persist qualified as Persist
-import Data.ByteString qualified as ByteString
 import Network.HTTP.Client qualified as Client
 import Data.Text qualified as Text
 import Kuy.Discovery
-import Kuy.Fingerprint
+import Kuy.Driver.Store
 import Kuy.Prelude
 import Kuy.Driver.Query
-import UnliftIO.Directory qualified as Directory
 import Rock
 
 rules ::
@@ -39,7 +35,7 @@ rules manager store hashesVar (Writer query) =
           artefact <$ guard (isKnownHash artefact hashes)
     --
     RemoteArtefact url name ->
-      nonInput $
+      input $
         downloadArtefact manager store url name
     --
     DiscoveryIndex ->

@@ -18,8 +18,8 @@ data Query a where
   -- or we returned the read bytes.
   ContentBytes ::
     Persist a =>
-    Content R a ->
-    Query (Either (Content W a) a)
+    ContentReader a ->
+    Query (Either (ContentWriter a) a)
     -- If you have an ArtefactKey it's proof the file must exist.
   ArtefactBytes ::
     Artefact ->
