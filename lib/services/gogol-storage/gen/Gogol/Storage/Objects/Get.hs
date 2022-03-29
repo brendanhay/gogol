@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Objects.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,172 +6,86 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves an object or its metadata.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.get@.
 module Gogol.Storage.Objects.Get
-  ( -- * Resource
-    StorageObjectsGetResource,
-
-    -- ** Constructing a Request
-    newStorageObjectsGet,
-    StorageObjectsGet,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageObjectsGet (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageObjectsGet (..),
+#endif
+    mkStorageObjectsGet,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.objects.get@ method which the
--- 'StorageObjectsGet' request conforms to.
-type StorageObjectsGetResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "o"
-    Core.:> Core.Capture "object" Core.Text
-    Core.:> Core.QueryParam "generation" Core.Int64
-    Core.:> Core.QueryParam "ifGenerationMatch" Core.Int64
-    Core.:> Core.QueryParam "ifGenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
-    Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam "projection" ObjectsGetProjection
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Object
-    Core.:<|> "storage"
-      Core.:> "v1"
-      Core.:> "b"
-      Core.:> Core.Capture "bucket" Core.Text
-      Core.:> "o"
-      Core.:> Core.Capture "object" Core.Text
-      Core.:> Core.QueryParam "generation" Core.Int64
-      Core.:> Core.QueryParam "ifGenerationMatch" Core.Int64
-      Core.:> Core.QueryParam "ifGenerationNotMatch" Core.Int64
-      Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
-      Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-      Core.:> Core.QueryParam "projection" ObjectsGetProjection
-      Core.:> Core.QueryParam
-                "provisionalUserProject"
-                Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "userProject" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Retrieves an object or its metadata.
 --
--- /See:/ 'newStorageObjectsGet' smart constructor.
+-- Construct a default value using the 'MkStorageObjectsGet' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageObjectsGet = StorageObjectsGet
-  { -- | Name of the bucket in which the object resides.
-    bucket :: Core.Text,
-    -- | If present, selects a specific revision of this object (as opposed to the latest version, the default).
-    generation :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
-    ifGenerationMatch :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.
-    ifGenerationNotMatch :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current metageneration matches the given value.
-    ifMetagenerationMatch :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current metageneration does not match the given value.
-    ifMetagenerationNotMatch :: (Core.Maybe Core.Int64),
-    -- | Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
-    object :: Core.Text,
-    -- | Set of properties to return. Defaults to noAcl.
-    projection :: (Core.Maybe ObjectsGetProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageObjectsGet' with the minimum fields required to make a request.
-newStorageObjectsGet ::
-  -- |  Name of the bucket in which the object resides. See 'bucket'.
-  Core.Text ->
-  -- |  Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts. See 'object'.
-  Core.Text ->
-  StorageObjectsGet
-newStorageObjectsGet bucket object =
-  StorageObjectsGet
-    { bucket = bucket,
-      generation = Core.Nothing,
-      ifGenerationMatch = Core.Nothing,
-      ifGenerationNotMatch = Core.Nothing,
-      ifMetagenerationMatch = Core.Nothing,
-      ifMetagenerationNotMatch = Core.Nothing,
-      object = object,
-      projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Name of the bucket in which the object resides.
+      bucket :: Core.Text
+      -- | If present, selects a specific revision of this object (as opposed to the latest version, the default).
+    , generation :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
+    , ifGenerationMatch :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.
+    , ifGenerationNotMatch :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current metageneration matches the given value.
+    , ifMetagenerationMatch :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current metageneration does not match the given value.
+    , ifMetagenerationNotMatch :: Core.Maybe Core.Int64
+      -- | Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    , object :: Core.Text
+      -- | 
+    , projection :: Core.Maybe GetProjection
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageObjectsGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageObjectsGet :: Core.Text -> Core.Text -> StorageObjectsGet
+pattern MkStorageObjectsGet{bucket, object} =
+        StorageObjectsGet{bucket = bucket, generation = Core.Nothing, ifGenerationMatch = Core.Nothing,
+                          ifGenerationNotMatch = Core.Nothing, ifMetagenerationMatch = Core.Nothing, ifMetagenerationNotMatch = Core.Nothing,
+                          object = object, projection = Core.Nothing, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageObjectsGet "Please use MkStorageObjectsGet instead" #-}
+#endif
+
+-- | Create 'StorageObjectsGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageObjectsGet :: Core.Text -> Core.Text -> StorageObjectsGet
+mkStorageObjectsGet bucket object
+  = StorageObjectsGet{bucket = bucket, generation = Core.Nothing, ifGenerationMatch = Core.Nothing,
+                      ifGenerationNotMatch = Core.Nothing, ifMetagenerationMatch = Core.Nothing, ifMetagenerationNotMatch = Core.Nothing,
+                      object = object, projection = Core.Nothing, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
 instance Core.GoogleRequest StorageObjectsGet where
-  type Rs StorageObjectsGet = Object
-  type
-    Scopes StorageObjectsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
-       ]
-  requestClient StorageObjectsGet {..} =
-    go
-      bucket
-      object
-      generation
-      ifGenerationMatch
-      ifGenerationNotMatch
-      ifMetagenerationMatch
-      ifMetagenerationNotMatch
-      projection
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      storageService
-    where
-      go Core.:<|> _ =
-        Core.buildClient
-          (Core.Proxy :: Core.Proxy StorageObjectsGetResource)
-          Core.mempty
-
-instance
-  Core.GoogleRequest
-    (Core.MediaDownload StorageObjectsGet)
-  where
-  type
-    Rs (Core.MediaDownload StorageObjectsGet) =
-      Core.Stream
-  type
-    Scopes (Core.MediaDownload StorageObjectsGet) =
-      Core.Scopes StorageObjectsGet
-  requestClient
-    (Core.MediaDownload StorageObjectsGet {..}) =
-      go
-        bucket
-        object
-        generation
-        ifGenerationMatch
-        ifGenerationNotMatch
-        ifMetagenerationMatch
-        ifMetagenerationNotMatch
-        projection
-        provisionalUserProject
-        uploadType
-        userProject
-        (Core.Just Core.AltMedia)
-        storageService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            (Core.Proxy :: Core.Proxy StorageObjectsGetResource)
-            Core.mempty
+        type Core.Scopes StorageObjectsGet =
+             '[CloudPlatform'FullControl, CloudPlatform'ReadOnly, Devstorage'FullControl, Devstorage'ReadOnly, Devstorage'ReadWrite]
+        type Core.Config StorageObjectsGet = StorageService
+        type Core.Response StorageObjectsGet = Object
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageObjectsGet{..}
+          = serviceRequest{Core.method = "GET",
+                           Core.path = Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/o/", Core.toPathBuilder object],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("generation",) Core.. Core.toQueryParam Core.<$> generation,
+                                  ("ifGenerationMatch",) Core.. Core.toQueryParam Core.<$> ifGenerationMatch,
+                                  ("ifGenerationNotMatch",) Core.. Core.toQueryParam Core.<$> ifGenerationNotMatch,
+                                  ("ifMetagenerationMatch",) Core.. Core.toQueryParam Core.<$> ifMetagenerationMatch,
+                                  ("ifMetagenerationNotMatch",) Core.. Core.toQueryParam Core.<$> ifMetagenerationNotMatch,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("projection",) Core.. Core.toQueryParam Core.<$> projection,
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")]}
+instance Core.GoogleMediaRequest StorageObjectsGet

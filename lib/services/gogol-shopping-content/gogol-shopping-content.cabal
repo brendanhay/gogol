@@ -21,7 +21,7 @@ description:
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
   .
-  This library is compatible with version @v2.1@
+  This library is compatible with version @v2@
   of the API.
 
 source-repository head
@@ -34,12 +34,28 @@ flag no-field-selectors
   default:     True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:   Haskell2010
+  hs-source-dirs:     src gen
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
+
+  default-extensions:
+    NoImplicitPrelude
+    DataKinds
+    DeriveGeneric
+    DerivingStrategies
+    DuplicateRecordFields
+    FlexibleInstances
+    GeneralizedNewtypeDeriving
+    LambdaCase
+    OverloadedStrings
+    PatternSynonyms
+    RecordWildCards
+    StrictData
+    TypeFamilies
+    TypeOperators
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
@@ -48,26 +64,13 @@ library
     Gogol.ShoppingContent
     Gogol.ShoppingContent.Content.Accounts.Authinfo
     Gogol.ShoppingContent.Content.Accounts.Claimwebsite
-    Gogol.ShoppingContent.Content.Accounts.Credentials.Create
     Gogol.ShoppingContent.Content.Accounts.Custombatch
     Gogol.ShoppingContent.Content.Accounts.Delete
     Gogol.ShoppingContent.Content.Accounts.Get
     Gogol.ShoppingContent.Content.Accounts.Insert
-    Gogol.ShoppingContent.Content.Accounts.Labels.Create
-    Gogol.ShoppingContent.Content.Accounts.Labels.Delete
-    Gogol.ShoppingContent.Content.Accounts.Labels.List
-    Gogol.ShoppingContent.Content.Accounts.Labels.Patch
     Gogol.ShoppingContent.Content.Accounts.Link
     Gogol.ShoppingContent.Content.Accounts.List
-    Gogol.ShoppingContent.Content.Accounts.Listlinks
-    Gogol.ShoppingContent.Content.Accounts.Requestphoneverification
-    Gogol.ShoppingContent.Content.Accounts.Returncarrier.Create
-    Gogol.ShoppingContent.Content.Accounts.Returncarrier.Delete
-    Gogol.ShoppingContent.Content.Accounts.Returncarrier.List
-    Gogol.ShoppingContent.Content.Accounts.Returncarrier.Patch
     Gogol.ShoppingContent.Content.Accounts.Update
-    Gogol.ShoppingContent.Content.Accounts.Updatelabels
-    Gogol.ShoppingContent.Content.Accounts.Verifyphonenumber
     Gogol.ShoppingContent.Content.Accountstatuses.Custombatch
     Gogol.ShoppingContent.Content.Accountstatuses.Get
     Gogol.ShoppingContent.Content.Accountstatuses.List
@@ -75,21 +78,6 @@ library
     Gogol.ShoppingContent.Content.Accounttax.Get
     Gogol.ShoppingContent.Content.Accounttax.List
     Gogol.ShoppingContent.Content.Accounttax.Update
-    Gogol.ShoppingContent.Content.Buyongoogleprograms.Activate
-    Gogol.ShoppingContent.Content.Buyongoogleprograms.Get
-    Gogol.ShoppingContent.Content.Buyongoogleprograms.Onboard
-    Gogol.ShoppingContent.Content.Buyongoogleprograms.Patch
-    Gogol.ShoppingContent.Content.Buyongoogleprograms.Pause
-    Gogol.ShoppingContent.Content.Buyongoogleprograms.Requestreview
-    Gogol.ShoppingContent.Content.Collections.Create
-    Gogol.ShoppingContent.Content.Collections.Delete
-    Gogol.ShoppingContent.Content.Collections.Get
-    Gogol.ShoppingContent.Content.Collections.List
-    Gogol.ShoppingContent.Content.Collectionstatuses.Get
-    Gogol.ShoppingContent.Content.Collectionstatuses.List
-    Gogol.ShoppingContent.Content.Csses.Get
-    Gogol.ShoppingContent.Content.Csses.List
-    Gogol.ShoppingContent.Content.Csses.Updatelabels
     Gogol.ShoppingContent.Content.Datafeeds.Custombatch
     Gogol.ShoppingContent.Content.Datafeeds.Delete
     Gogol.ShoppingContent.Content.Datafeeds.Fetchnow
@@ -100,8 +88,8 @@ library
     Gogol.ShoppingContent.Content.Datafeedstatuses.Custombatch
     Gogol.ShoppingContent.Content.Datafeedstatuses.Get
     Gogol.ShoppingContent.Content.Datafeedstatuses.List
-    Gogol.ShoppingContent.Content.Freelistingsprogram.Get
-    Gogol.ShoppingContent.Content.Freelistingsprogram.Requestreview
+    Gogol.ShoppingContent.Content.Inventory.Custombatch
+    Gogol.ShoppingContent.Content.Inventory.Set
     Gogol.ShoppingContent.Content.Liasettings.Custombatch
     Gogol.ShoppingContent.Content.Liasettings.Get
     Gogol.ShoppingContent.Content.Liasettings.Getaccessiblegmbaccounts
@@ -112,41 +100,34 @@ library
     Gogol.ShoppingContent.Content.Liasettings.Setinventoryverificationcontact
     Gogol.ShoppingContent.Content.Liasettings.Setposdataprovider
     Gogol.ShoppingContent.Content.Liasettings.Update
-    Gogol.ShoppingContent.Content.Localinventory.Custombatch
-    Gogol.ShoppingContent.Content.Localinventory.Insert
     Gogol.ShoppingContent.Content.Orderinvoices.Createchargeinvoice
     Gogol.ShoppingContent.Content.Orderinvoices.Createrefundinvoice
     Gogol.ShoppingContent.Content.Orderreports.Listdisbursements
     Gogol.ShoppingContent.Content.Orderreports.Listtransactions
-    Gogol.ShoppingContent.Content.Orderreturns.Acknowledge
-    Gogol.ShoppingContent.Content.Orderreturns.Createorderreturn
     Gogol.ShoppingContent.Content.Orderreturns.Get
-    Gogol.ShoppingContent.Content.Orderreturns.Labels.Create
     Gogol.ShoppingContent.Content.Orderreturns.List
-    Gogol.ShoppingContent.Content.Orderreturns.Process
     Gogol.ShoppingContent.Content.Orders.Acknowledge
     Gogol.ShoppingContent.Content.Orders.Advancetestorder
     Gogol.ShoppingContent.Content.Orders.Cancel
     Gogol.ShoppingContent.Content.Orders.Cancellineitem
     Gogol.ShoppingContent.Content.Orders.Canceltestorderbycustomer
-    Gogol.ShoppingContent.Content.Orders.CaptureOrder
     Gogol.ShoppingContent.Content.Orders.Createtestorder
     Gogol.ShoppingContent.Content.Orders.Createtestreturn
+    Gogol.ShoppingContent.Content.Orders.Custombatch
     Gogol.ShoppingContent.Content.Orders.Get
     Gogol.ShoppingContent.Content.Orders.Getbymerchantorderid
     Gogol.ShoppingContent.Content.Orders.Gettestordertemplate
     Gogol.ShoppingContent.Content.Orders.Instorerefundlineitem
     Gogol.ShoppingContent.Content.Orders.List
-    Gogol.ShoppingContent.Content.Orders.Refunditem
-    Gogol.ShoppingContent.Content.Orders.Refundorder
+    Gogol.ShoppingContent.Content.Orders.Refund
     Gogol.ShoppingContent.Content.Orders.Rejectreturnlineitem
+    Gogol.ShoppingContent.Content.Orders.Returnlineitem
     Gogol.ShoppingContent.Content.Orders.Returnrefundlineitem
     Gogol.ShoppingContent.Content.Orders.Setlineitemmetadata
     Gogol.ShoppingContent.Content.Orders.Shiplineitems
     Gogol.ShoppingContent.Content.Orders.Updatelineitemshippingdetails
     Gogol.ShoppingContent.Content.Orders.Updatemerchantorderid
     Gogol.ShoppingContent.Content.Orders.Updateshipment
-    Gogol.ShoppingContent.Content.Ordertrackingsignals.Create
     Gogol.ShoppingContent.Content.Pos.Custombatch
     Gogol.ShoppingContent.Content.Pos.Delete
     Gogol.ShoppingContent.Content.Pos.Get
@@ -159,47 +140,9 @@ library
     Gogol.ShoppingContent.Content.Products.Get
     Gogol.ShoppingContent.Content.Products.Insert
     Gogol.ShoppingContent.Content.Products.List
-    Gogol.ShoppingContent.Content.Products.Update
     Gogol.ShoppingContent.Content.Productstatuses.Custombatch
     Gogol.ShoppingContent.Content.Productstatuses.Get
     Gogol.ShoppingContent.Content.Productstatuses.List
-    Gogol.ShoppingContent.Content.Productstatuses.Repricingreports.List
-    Gogol.ShoppingContent.Content.Promotions.Create
-    Gogol.ShoppingContent.Content.Promotions.Get
-    Gogol.ShoppingContent.Content.Pubsubnotificationsettings.Get
-    Gogol.ShoppingContent.Content.Pubsubnotificationsettings.Update
-    Gogol.ShoppingContent.Content.Regionalinventory.Custombatch
-    Gogol.ShoppingContent.Content.Regionalinventory.Insert
-    Gogol.ShoppingContent.Content.Regions.Create
-    Gogol.ShoppingContent.Content.Regions.Delete
-    Gogol.ShoppingContent.Content.Regions.Get
-    Gogol.ShoppingContent.Content.Regions.List
-    Gogol.ShoppingContent.Content.Regions.Patch
-    Gogol.ShoppingContent.Content.Reports.Search
-    Gogol.ShoppingContent.Content.Repricingrules.Create
-    Gogol.ShoppingContent.Content.Repricingrules.Delete
-    Gogol.ShoppingContent.Content.Repricingrules.Get
-    Gogol.ShoppingContent.Content.Repricingrules.List
-    Gogol.ShoppingContent.Content.Repricingrules.Patch
-    Gogol.ShoppingContent.Content.Repricingrules.Repricingreports.List
-    Gogol.ShoppingContent.Content.Returnaddress.Custombatch
-    Gogol.ShoppingContent.Content.Returnaddress.Delete
-    Gogol.ShoppingContent.Content.Returnaddress.Get
-    Gogol.ShoppingContent.Content.Returnaddress.Insert
-    Gogol.ShoppingContent.Content.Returnaddress.List
-    Gogol.ShoppingContent.Content.Returnpolicy.Custombatch
-    Gogol.ShoppingContent.Content.Returnpolicy.Delete
-    Gogol.ShoppingContent.Content.Returnpolicy.Get
-    Gogol.ShoppingContent.Content.Returnpolicy.Insert
-    Gogol.ShoppingContent.Content.Returnpolicy.List
-    Gogol.ShoppingContent.Content.Returnpolicyonline.Create
-    Gogol.ShoppingContent.Content.Returnpolicyonline.Delete
-    Gogol.ShoppingContent.Content.Returnpolicyonline.Get
-    Gogol.ShoppingContent.Content.Returnpolicyonline.List
-    Gogol.ShoppingContent.Content.Returnpolicyonline.Patch
-    Gogol.ShoppingContent.Content.Settlementreports.Get
-    Gogol.ShoppingContent.Content.Settlementreports.List
-    Gogol.ShoppingContent.Content.Settlementtransactions.List
     Gogol.ShoppingContent.Content.Shippingsettings.Custombatch
     Gogol.ShoppingContent.Content.Shippingsettings.Get
     Gogol.ShoppingContent.Content.Shippingsettings.Getsupportedcarriers
@@ -207,8 +150,6 @@ library
     Gogol.ShoppingContent.Content.Shippingsettings.Getsupportedpickupservices
     Gogol.ShoppingContent.Content.Shippingsettings.List
     Gogol.ShoppingContent.Content.Shippingsettings.Update
-    Gogol.ShoppingContent.Content.Shoppingadsprogram.Get
-    Gogol.ShoppingContent.Content.Shoppingadsprogram.Requestreview
     Gogol.ShoppingContent.Types
 
   other-modules:

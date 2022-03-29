@@ -10,6 +10,8 @@ say() {
 
 format_haskell() {
   local -r dir="$1"
+  shift
+  local -r options=("$@")
 
   say "Formatting $dir"
 
@@ -17,7 +19,7 @@ format_haskell() {
     xargs -0 cabal-fmt --inplace --indent=2
 
   find "$dir" -type f -name '*.hs' -print0 |
-    xargs -0 ormolu --mode=inplace -o '-XPatternSynonyms' -o '-XTypeApplications' -o '-XMagicHash'
+    xargs -0 ormolu --unsafe --mode inplace -o '-XPatternSynonyms' -o '-XTypeApplications' -o '-XMagicHash' "${options[@]}"
 }
 
 # Export the functions for use in GNU parallel.
@@ -33,17 +35,6 @@ case "${1:-}" in
   ;;
 esac
 
-targets=(
-  lib/gogol
-  lib/gogol-core
-  gen
-  examples
-)
-
-if [ "$all" = "true" ]; then
-  targets+=(lib/services/gogol-*)
-fi
-
 say "Formatting shell"
 
 find scripts -type f -print0 |
@@ -54,8 +45,17 @@ say "Formatting nix"
 find . -type f -name '*.nix' -print0 |
   xargs -0 nixpkgs-fmt
 
-say "Formatting haskell"
+# Run gen formatter separately for ImportQualifedPost support.
+format_haskell gen -o '-XImportQualifiedPost' -o '-XOverloadedRecordDot'
 
-# Run the format and copy/replace steps in parallel.
-printf '%s\n' "${targets[@]}" |
-  parallel --halt-on-error 2 format_haskell
+# Run the core formatters prior to service libraries.
+format_haskell lib/gogol
+format_haskell lib/gogol-core
+
+# Run the formatters in parallel.
+if [ "$all" = "true" ]; then
+  targets=(lib/services/gogol-*)
+
+  printf '%s\n' "${targets[@]}" |
+    parallel --halt-on-error 2 format_haskell
+fi

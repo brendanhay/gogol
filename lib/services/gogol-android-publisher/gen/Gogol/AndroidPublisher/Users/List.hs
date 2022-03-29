@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher.Users.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,100 +6,62 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all users with access to a developer account.
---
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.users.list@.
 module Gogol.AndroidPublisher.Users.List
-  ( -- * Resource
-    AndroidPublisherUsersListResource,
+    (
+    -- * Constructing a Request
+    AndroidPublisherUsersList (..),
+#ifdef NOFIELDSELECTORS
+    MkAndroidPublisherUsersList (..),
+#endif
+    mkAndroidPublisherUsersList,
+    ) where
 
-    -- ** Constructing a Request
-    newAndroidPublisherUsersList,
-    AndroidPublisherUsersList,
-  )
-where
-
-import Gogol.AndroidPublisher.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidPublisher.Types
 
--- | A resource alias for @androidpublisher.users.list@ method which the
--- 'AndroidPublisherUsersList' request conforms to.
-type AndroidPublisherUsersListResource =
-  "androidpublisher"
-    Core.:> "v3"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "users"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "pageSize" Core.Int32
-    Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListUsersResponse
 
 -- | Lists all users with access to a developer account.
 --
--- /See:/ 'newAndroidPublisherUsersList' smart constructor.
+-- Construct a default value using the 'MkAndroidPublisherUsersList' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data AndroidPublisherUsersList = AndroidPublisherUsersList
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The maximum number of results to return. This must be set to -1 to disable pagination.
-    pageSize :: (Core.Maybe Core.Int32),
-    -- | A token received from a previous call to this method, in order to retrieve further results.
-    pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The developer account to fetch users from. Format: developers\/{developer}
-    parent :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AndroidPublisherUsersList' with the minimum fields required to make a request.
-newAndroidPublisherUsersList ::
-  -- |  Required. The developer account to fetch users from. Format: developers\/{developer} See 'parent'.
-  Core.Text ->
-  AndroidPublisherUsersList
-newAndroidPublisherUsersList parent =
-  AndroidPublisherUsersList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    {
+      -- | The maximum number of results to return. This must be set to -1 to disable pagination.
+      pageSize :: Core.Maybe Core.Int32
+      -- | A token received from a previous call to this method, in order to retrieve further results.
+    , pageToken :: Core.Maybe Core.Text
+      -- | Required. The developer account to fetch users from. Format: developers\/{developer}.
+    , parent :: Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
+#ifdef NOFIELDSELECTORS
+-- | Create 'AndroidPublisherUsersList' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkAndroidPublisherUsersList :: Core.Text -> AndroidPublisherUsersList
+pattern MkAndroidPublisherUsersList{parent} =
+        AndroidPublisherUsersList{pageSize = Core.Nothing, pageToken = Core.Nothing, parent = parent}
+
+{-# DEPRECATED mkAndroidPublisherUsersList "Please use MkAndroidPublisherUsersList instead" #-}
+#endif
+
+-- | Create 'AndroidPublisherUsersList' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkAndroidPublisherUsersList :: Core.Text -> AndroidPublisherUsersList
+mkAndroidPublisherUsersList parent
+  = AndroidPublisherUsersList{pageSize = Core.Nothing, pageToken = Core.Nothing, parent = parent}
 instance Core.GoogleRequest AndroidPublisherUsersList where
-  type Rs AndroidPublisherUsersList = ListUsersResponse
-  type
-    Scopes AndroidPublisherUsersList =
-      '["https://www.googleapis.com/auth/androidpublisher"]
-  requestClient AndroidPublisherUsersList {..} =
-    go
-      parent
-      xgafv
-      accessToken
-      callback
-      pageSize
-      pageToken
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      androidPublisherService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidPublisherUsersListResource
-          )
-          Core.mempty
+        type Core.Scopes AndroidPublisherUsersList = '[Androidpublisher'FullControl]
+        type Core.Config AndroidPublisherUsersList = AndroidPublisherService
+        type Core.Response AndroidPublisherUsersList = ListUsersResponse
+        toRequest Core.Service{serviceRequest, serviceParams = AndroidPublisherParams{..}} AndroidPublisherUsersList{..}
+          = serviceRequest{Core.method = "GET",
+                           Core.path = Core.toRequestPath ["/androidpublisher/v3/", Core.toPathBuilder parent, "/users"],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("$.xgafv",) Core.. Core.toQueryParam Core.<$> xgafv, ("access_token",) Core.. Core.toQueryParam Core.<$> accessToken,
+                                  ("callback",) Core.. Core.toQueryParam Core.<$> callback, ("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  ("pageSize",) Core.. Core.toQueryParam Core.<$> pageSize, ("pageToken",) Core.. Core.toQueryParam Core.<$> pageToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser,
+                                  Core.Just ("alt", "json")]}

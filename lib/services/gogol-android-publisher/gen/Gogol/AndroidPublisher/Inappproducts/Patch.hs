@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher.Inappproducts.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,116 +6,67 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches an in-app product (i.e. a managed product or a subscriptions).
---
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.inappproducts.patch@.
 module Gogol.AndroidPublisher.Inappproducts.Patch
-  ( -- * Resource
-    AndroidPublisherInappproductsPatchResource,
+    (
+    -- * Constructing a Request
+    AndroidPublisherInappproductsPatch (..),
+#ifdef NOFIELDSELECTORS
+    MkAndroidPublisherInappproductsPatch (..),
+#endif
+    mkAndroidPublisherInappproductsPatch,
+    ) where
 
-    -- ** Constructing a Request
-    newAndroidPublisherInappproductsPatch,
-    AndroidPublisherInappproductsPatch,
-  )
-where
-
-import Gogol.AndroidPublisher.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidPublisher.Types
 
--- | A resource alias for @androidpublisher.inappproducts.patch@ method which the
--- 'AndroidPublisherInappproductsPatch' request conforms to.
-type AndroidPublisherInappproductsPatchResource =
-  "androidpublisher"
-    Core.:> "v3"
-    Core.:> "applications"
-    Core.:> Core.Capture "packageName" Core.Text
-    Core.:> "inappproducts"
-    Core.:> Core.Capture "sku" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "autoConvertMissingPrices" Core.Bool
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] InAppProduct
-    Core.:> Core.Patch '[Core.JSON] InAppProduct
 
 -- | Patches an in-app product (i.e. a managed product or a subscriptions).
 --
--- /See:/ 'newAndroidPublisherInappproductsPatch' smart constructor.
+-- Construct a default value using the 'MkAndroidPublisherInappproductsPatch' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data AndroidPublisherInappproductsPatch = AndroidPublisherInappproductsPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | If true the prices for all regions targeted by the parent app that don\'t have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
-    autoConvertMissingPrices :: (Core.Maybe Core.Bool),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Package name of the app.
-    packageName :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: InAppProduct,
-    -- | Unique identifier for the in-app product.
-    sku :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AndroidPublisherInappproductsPatch' with the minimum fields required to make a request.
-newAndroidPublisherInappproductsPatch ::
-  -- |  Package name of the app. See 'packageName'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  InAppProduct ->
-  -- |  Unique identifier for the in-app product. See 'sku'.
-  Core.Text ->
-  AndroidPublisherInappproductsPatch
-newAndroidPublisherInappproductsPatch packageName payload sku =
-  AndroidPublisherInappproductsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      autoConvertMissingPrices = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      payload = payload,
-      sku = sku,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    {
+      -- | If true the prices for all regions targeted by the parent app that don\'t have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
+      autoConvertMissingPrices :: Core.Maybe Core.Bool
+      -- | Multipart request metadata.
+    , meta :: InAppProduct
+      -- | Package name of the app.
+    , packageName :: Core.Text
+      -- | Unique identifier for the in-app product.
+    , sku :: Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherInappproductsPatch
-  where
-  type
-    Rs AndroidPublisherInappproductsPatch =
-      InAppProduct
-  type
-    Scopes AndroidPublisherInappproductsPatch =
-      '["https://www.googleapis.com/auth/androidpublisher"]
-  requestClient AndroidPublisherInappproductsPatch {..} =
-    go
-      packageName
-      sku
-      xgafv
-      accessToken
-      autoConvertMissingPrices
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      androidPublisherService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                AndroidPublisherInappproductsPatchResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'AndroidPublisherInappproductsPatch' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkAndroidPublisherInappproductsPatch :: InAppProduct -> Core.Text -> Core.Text -> AndroidPublisherInappproductsPatch
+pattern MkAndroidPublisherInappproductsPatch{meta, packageName, sku} =
+        AndroidPublisherInappproductsPatch{autoConvertMissingPrices = Core.Nothing, meta = meta, packageName = packageName, sku = sku}
+
+{-# DEPRECATED mkAndroidPublisherInappproductsPatch "Please use MkAndroidPublisherInappproductsPatch instead" #-}
+#endif
+
+-- | Create 'AndroidPublisherInappproductsPatch' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkAndroidPublisherInappproductsPatch :: InAppProduct -> Core.Text -> Core.Text -> AndroidPublisherInappproductsPatch
+mkAndroidPublisherInappproductsPatch meta packageName sku
+  = AndroidPublisherInappproductsPatch{autoConvertMissingPrices = Core.Nothing, meta = meta, packageName = packageName, sku = sku}
+instance Core.GoogleRequest AndroidPublisherInappproductsPatch where
+        type Core.Scopes AndroidPublisherInappproductsPatch = '[Androidpublisher'FullControl]
+        type Core.Config AndroidPublisherInappproductsPatch = AndroidPublisherService
+        type Core.Response AndroidPublisherInappproductsPatch = InAppProduct
+        toRequest Core.Service{serviceRequest, serviceParams = AndroidPublisherParams{..}} AndroidPublisherInappproductsPatch{..}
+          = serviceRequest{Core.method = "PATCH",
+                           Core.path =
+                             Core.toRequestPath
+                               ["/androidpublisher/v3/applications/", Core.toPathBuilder packageName, "/inappproducts/", Core.toPathBuilder sku],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("$.xgafv",) Core.. Core.toQueryParam Core.<$> xgafv, ("access_token",) Core.. Core.toQueryParam Core.<$> accessToken,
+                                  ("autoConvertMissingPrices",) Core.. Core.toQueryParam Core.<$> autoConvertMissingPrices,
+                                  ("callback",) Core.. Core.toQueryParam Core.<$> callback, ("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

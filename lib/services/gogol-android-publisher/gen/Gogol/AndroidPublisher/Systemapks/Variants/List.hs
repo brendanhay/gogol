@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher.Systemapks.Variants.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,106 +6,41 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the list of previously created system APK variants.
---
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.systemapks.variants.list@.
 module Gogol.AndroidPublisher.Systemapks.Variants.List
-  ( -- * Resource
-    AndroidPublisherSystemapksVariantsListResource,
+    (
+    -- * Constructing a Request
+    AndroidPublisherSystemapksVariantsList (..),
+    ) where
 
-    -- ** Constructing a Request
-    newAndroidPublisherSystemapksVariantsList,
-    AndroidPublisherSystemapksVariantsList,
-  )
-where
-
-import Gogol.AndroidPublisher.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidPublisher.Types
 
--- | A resource alias for @androidpublisher.systemapks.variants.list@ method which the
--- 'AndroidPublisherSystemapksVariantsList' request conforms to.
-type AndroidPublisherSystemapksVariantsListResource =
-  "androidpublisher"
-    Core.:> "v3"
-    Core.:> "applications"
-    Core.:> Core.Capture "packageName" Core.Text
-    Core.:> "systemApks"
-    Core.:> Core.Capture "versionCode" Core.Int64
-    Core.:> "variants"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] SystemApksListResponse
 
 -- | Returns the list of previously created system APK variants.
---
--- /See:/ 'newAndroidPublisherSystemapksVariantsList' smart constructor.
 data AndroidPublisherSystemapksVariantsList = AndroidPublisherSystemapksVariantsList
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Package name of the app.
-    packageName :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text),
-    -- | The version code of the App Bundle.
-    versionCode :: Core.Int64
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AndroidPublisherSystemapksVariantsList' with the minimum fields required to make a request.
-newAndroidPublisherSystemapksVariantsList ::
-  -- |  Package name of the app. See 'packageName'.
-  Core.Text ->
-  -- |  The version code of the App Bundle. See 'versionCode'.
-  Core.Int64 ->
-  AndroidPublisherSystemapksVariantsList
-newAndroidPublisherSystemapksVariantsList packageName versionCode =
-  AndroidPublisherSystemapksVariantsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      versionCode = versionCode
+    {
+      -- | Package name of the app.
+      packageName :: Core.Text
+      -- | The version code of the App Bundle.
+    , versionCode :: Core.Int64
     }
-
-instance
-  Core.GoogleRequest
-    AndroidPublisherSystemapksVariantsList
-  where
-  type
-    Rs AndroidPublisherSystemapksVariantsList =
-      SystemApksListResponse
-  type
-    Scopes AndroidPublisherSystemapksVariantsList =
-      '["https://www.googleapis.com/auth/androidpublisher"]
-  requestClient
-    AndroidPublisherSystemapksVariantsList {..} =
-      go
-        packageName
-        versionCode
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherSystemapksVariantsListResource
-            )
-            Core.mempty
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
+instance Core.GoogleRequest AndroidPublisherSystemapksVariantsList where
+        type Core.Scopes AndroidPublisherSystemapksVariantsList = '[Androidpublisher'FullControl]
+        type Core.Config AndroidPublisherSystemapksVariantsList = AndroidPublisherService
+        type Core.Response AndroidPublisherSystemapksVariantsList = SystemApksListResponse
+        toRequest Core.Service{serviceRequest, serviceParams = AndroidPublisherParams{..}} AndroidPublisherSystemapksVariantsList{..}
+          = serviceRequest{Core.method = "GET",
+                           Core.path =
+                             Core.toRequestPath
+                               ["/androidpublisher/v3/applications/", Core.toPathBuilder packageName, "/systemApks/", Core.toPathBuilder versionCode,
+                                "/variants"],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("$.xgafv",) Core.. Core.toQueryParam Core.<$> xgafv, ("access_token",) Core.. Core.toQueryParam Core.<$> accessToken,
+                                  ("callback",) Core.. Core.toQueryParam Core.<$> callback, ("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser,
+                                  Core.Just ("alt", "json")]}

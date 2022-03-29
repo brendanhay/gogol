@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Notifications.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,94 +6,66 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently deletes a notification subscription.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.notifications.delete@.
 module Gogol.Storage.Notifications.Delete
-  ( -- * Resource
-    StorageNotificationsDeleteResource,
-
-    -- ** Constructing a Request
-    newStorageNotificationsDelete,
-    StorageNotificationsDelete,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageNotificationsDelete (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageNotificationsDelete (..),
+#endif
+    mkStorageNotificationsDelete,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.notifications.delete@ method which the
--- 'StorageNotificationsDelete' request conforms to.
-type StorageNotificationsDeleteResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "notificationConfigs"
-    Core.:> Core.Capture "notification" Core.Text
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Permanently deletes a notification subscription.
 --
--- /See:/ 'newStorageNotificationsDelete' smart constructor.
+-- Construct a default value using the 'MkStorageNotificationsDelete' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageNotificationsDelete = StorageNotificationsDelete
-  { -- | The parent bucket of the notification.
-    bucket :: Core.Text,
-    -- | ID of the notification to delete.
-    notification :: Core.Text,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageNotificationsDelete' with the minimum fields required to make a request.
-newStorageNotificationsDelete ::
-  -- |  The parent bucket of the notification. See 'bucket'.
-  Core.Text ->
-  -- |  ID of the notification to delete. See 'notification'.
-  Core.Text ->
-  StorageNotificationsDelete
-newStorageNotificationsDelete bucket notification =
-  StorageNotificationsDelete
-    { bucket = bucket,
-      notification = notification,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | The parent bucket of the notification.
+      bucket :: Core.Text
+      -- | ID of the notification to delete.
+    , notification :: Core.Text
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    StorageNotificationsDelete
-  where
-  type Rs StorageNotificationsDelete = ()
-  type
-    Scopes StorageNotificationsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
-       ]
-  requestClient StorageNotificationsDelete {..} =
-    go
-      bucket
-      notification
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageNotificationsDeleteResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageNotificationsDelete' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageNotificationsDelete :: Core.Text -> Core.Text -> StorageNotificationsDelete
+pattern MkStorageNotificationsDelete{bucket, notification} =
+        StorageNotificationsDelete{bucket = bucket, notification = notification, provisionalUserProject = Core.Nothing,
+                                   userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageNotificationsDelete "Please use MkStorageNotificationsDelete instead" #-}
+#endif
+
+-- | Create 'StorageNotificationsDelete' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageNotificationsDelete :: Core.Text -> Core.Text -> StorageNotificationsDelete
+mkStorageNotificationsDelete bucket notification
+  = StorageNotificationsDelete{bucket = bucket, notification = notification, provisionalUserProject = Core.Nothing,
+                               userProject = Core.Nothing}
+instance Core.GoogleRequest StorageNotificationsDelete where
+        type Core.Scopes StorageNotificationsDelete = '[CloudPlatform'FullControl, Devstorage'FullControl, Devstorage'ReadWrite]
+        type Core.Config StorageNotificationsDelete = StorageService
+        type Core.Response StorageNotificationsDelete = ()
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageNotificationsDelete{..}
+          = serviceRequest{Core.method = "DELETE",
+                           Core.path =
+                             Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/notificationConfigs/", Core.toPathBuilder notification],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")]}

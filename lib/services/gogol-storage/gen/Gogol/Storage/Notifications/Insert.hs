@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Notifications.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,94 +6,64 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a notification subscription for a given bucket.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.notifications.insert@.
 module Gogol.Storage.Notifications.Insert
-  ( -- * Resource
-    StorageNotificationsInsertResource,
-
-    -- ** Constructing a Request
-    newStorageNotificationsInsert,
-    StorageNotificationsInsert,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageNotificationsInsert (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageNotificationsInsert (..),
+#endif
+    mkStorageNotificationsInsert,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.notifications.insert@ method which the
--- 'StorageNotificationsInsert' request conforms to.
-type StorageNotificationsInsertResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "notificationConfigs"
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Notification
-    Core.:> Core.Post '[Core.JSON] Notification
 
 -- | Creates a notification subscription for a given bucket.
 --
--- /See:/ 'newStorageNotificationsInsert' smart constructor.
+-- Construct a default value using the 'MkStorageNotificationsInsert' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageNotificationsInsert = StorageNotificationsInsert
-  { -- | The parent bucket of the notification.
-    bucket :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Notification,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageNotificationsInsert' with the minimum fields required to make a request.
-newStorageNotificationsInsert ::
-  -- |  The parent bucket of the notification. See 'bucket'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Notification ->
-  StorageNotificationsInsert
-newStorageNotificationsInsert bucket payload =
-  StorageNotificationsInsert
-    { bucket = bucket,
-      payload = payload,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | The parent bucket of the notification.
+      bucket :: Core.Text
+      -- | Multipart request metadata.
+    , meta :: Notification
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    StorageNotificationsInsert
-  where
-  type Rs StorageNotificationsInsert = Notification
-  type
-    Scopes StorageNotificationsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
-       ]
-  requestClient StorageNotificationsInsert {..} =
-    go
-      bucket
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      payload
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageNotificationsInsertResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageNotificationsInsert' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageNotificationsInsert :: Core.Text -> Notification -> StorageNotificationsInsert
+pattern MkStorageNotificationsInsert{bucket, meta} =
+        StorageNotificationsInsert{bucket = bucket, meta = meta, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageNotificationsInsert "Please use MkStorageNotificationsInsert instead" #-}
+#endif
+
+-- | Create 'StorageNotificationsInsert' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageNotificationsInsert :: Core.Text -> Notification -> StorageNotificationsInsert
+mkStorageNotificationsInsert bucket meta
+  = StorageNotificationsInsert{bucket = bucket, meta = meta, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
+instance Core.GoogleRequest StorageNotificationsInsert where
+        type Core.Scopes StorageNotificationsInsert = '[CloudPlatform'FullControl, Devstorage'FullControl, Devstorage'ReadWrite]
+        type Core.Config StorageNotificationsInsert = StorageService
+        type Core.Response StorageNotificationsInsert = Notification
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageNotificationsInsert{..}
+          = serviceRequest{Core.method = "POST",
+                           Core.path = Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/notificationConfigs"],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

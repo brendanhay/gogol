@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher.Grants.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,104 +6,60 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates access for the user to the given package.
---
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.grants.patch@.
 module Gogol.AndroidPublisher.Grants.Patch
-  ( -- * Resource
-    AndroidPublisherGrantsPatchResource,
+    (
+    -- * Constructing a Request
+    AndroidPublisherGrantsPatch (..),
+#ifdef NOFIELDSELECTORS
+    MkAndroidPublisherGrantsPatch (..),
+#endif
+    mkAndroidPublisherGrantsPatch,
+    ) where
 
-    -- ** Constructing a Request
-    newAndroidPublisherGrantsPatch,
-    AndroidPublisherGrantsPatch,
-  )
-where
-
-import Gogol.AndroidPublisher.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidPublisher.Types
 
--- | A resource alias for @androidpublisher.grants.patch@ method which the
--- 'AndroidPublisherGrantsPatch' request conforms to.
-type AndroidPublisherGrantsPatchResource =
-  "androidpublisher"
-    Core.:> "v3"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Grant
-    Core.:> Core.Patch '[Core.JSON] Grant
 
 -- | Updates access for the user to the given package.
 --
--- /See:/ 'newAndroidPublisherGrantsPatch' smart constructor.
+-- Construct a default value using the 'MkAndroidPublisherGrantsPatch' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data AndroidPublisherGrantsPatch = AndroidPublisherGrantsPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\".
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Grant,
-    -- | Optional. The list of fields to be updated.
-    updateMask :: (Core.Maybe Core.GFieldMask),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AndroidPublisherGrantsPatch' with the minimum fields required to make a request.
-newAndroidPublisherGrantsPatch ::
-  -- |  Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\". See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Grant ->
-  AndroidPublisherGrantsPatch
-newAndroidPublisherGrantsPatch name payload =
-  AndroidPublisherGrantsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    {
+      -- | Multipart request metadata.
+      meta :: Grant
+      -- | Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\".
+    , name :: Core.Text
+      -- | Optional. The list of fields to be updated.
+    , updateMask :: Core.Maybe Core.FieldMask
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherGrantsPatch
-  where
-  type Rs AndroidPublisherGrantsPatch = Grant
-  type
-    Scopes AndroidPublisherGrantsPatch =
-      '["https://www.googleapis.com/auth/androidpublisher"]
-  requestClient AndroidPublisherGrantsPatch {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      updateMask
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      androidPublisherService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidPublisherGrantsPatchResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'AndroidPublisherGrantsPatch' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkAndroidPublisherGrantsPatch :: Grant -> Core.Text -> AndroidPublisherGrantsPatch
+pattern MkAndroidPublisherGrantsPatch{meta, name} =
+        AndroidPublisherGrantsPatch{meta = meta, name = name, updateMask = Core.Nothing}
+
+{-# DEPRECATED mkAndroidPublisherGrantsPatch "Please use MkAndroidPublisherGrantsPatch instead" #-}
+#endif
+
+-- | Create 'AndroidPublisherGrantsPatch' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkAndroidPublisherGrantsPatch :: Grant -> Core.Text -> AndroidPublisherGrantsPatch
+mkAndroidPublisherGrantsPatch meta name = AndroidPublisherGrantsPatch{meta = meta, name = name, updateMask = Core.Nothing}
+instance Core.GoogleRequest AndroidPublisherGrantsPatch where
+        type Core.Scopes AndroidPublisherGrantsPatch = '[Androidpublisher'FullControl]
+        type Core.Config AndroidPublisherGrantsPatch = AndroidPublisherService
+        type Core.Response AndroidPublisherGrantsPatch = Grant
+        toRequest Core.Service{serviceRequest, serviceParams = AndroidPublisherParams{..}} AndroidPublisherGrantsPatch{..}
+          = serviceRequest{Core.method = "PATCH", Core.path = Core.toRequestPath ["/androidpublisher/v3/", Core.toPathBuilder name],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("$.xgafv",) Core.. Core.toQueryParam Core.<$> xgafv, ("access_token",) Core.. Core.toQueryParam Core.<$> accessToken,
+                                  ("callback",) Core.. Core.toQueryParam Core.<$> callback, ("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser,
+                                  ("updateMask",) Core.. Core.toQueryParam Core.<$> updateMask, Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

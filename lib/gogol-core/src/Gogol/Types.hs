@@ -316,7 +316,7 @@ data Path
 --
 -- Using a minimal RequestBuilder or something, see if we can define semigroup/monoid
 -- and then use that as a starting point?
-data Request a = Request
+data Request (scopes :: [Symbol]) a b = Request
   { path :: Path,
     query :: DList (Text, Maybe Text)
     -- alt :: Alt,
@@ -362,7 +362,7 @@ data Request a = Request
 
 -- type ConnSpec = ConnSpec' Complete
 
-deriving stock instance Show ConnSpec
+-- deriving stock instance Show ConnSpec
 
 type GoogleRequest :: Type -> Constraint
 
@@ -378,8 +378,16 @@ class GoogleRequest a where
   -- | The response returned by a successful request.
   type Response a :: Type
 
-  -- | Construct a new fully-prepared @http-client@ 'Client.Request'.
-  toRequest :: Config a -> a -> Request a
+  -- | Construct a new 'Request'.
+  toRequest :: Config a -> a -> Request (Scopes a) a (Response a)
+
+-- toAuthRequest :: Allows scopes (Scopes a) => proxy scopes -> Config a -> a -> Request a
+-- toAuthRequest _env = undefined
+
+-- data Env scopes = Env
+
+-- toUnsafeRequest :: GoogleRequest a => Env scopes -> Config a -> a -> Request a
+-- toUnsafeRequest Env = toRequest Env
 
 -- -- | Parse a @http-client@ 'Client.Response', consuming the response body.
 -- --

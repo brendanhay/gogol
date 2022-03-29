@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Buckets.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,118 +6,82 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.update@.
 module Gogol.Storage.Buckets.Update
-  ( -- * Resource
-    StorageBucketsUpdateResource,
-
-    -- ** Constructing a Request
-    newStorageBucketsUpdate,
-    StorageBucketsUpdate,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageBucketsUpdate (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageBucketsUpdate (..),
+#endif
+    mkStorageBucketsUpdate,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.buckets.update@ method which the
--- 'StorageBucketsUpdate' request conforms to.
-type StorageBucketsUpdateResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
-    Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam
-              "predefinedAcl"
-              BucketsUpdatePredefinedAcl
-    Core.:> Core.QueryParam
-              "predefinedDefaultObjectAcl"
-              BucketsUpdatePredefinedDefaultObjectAcl
-    Core.:> Core.QueryParam "projection" BucketsUpdateProjection
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Bucket
-    Core.:> Core.Put '[Core.JSON] Bucket
 
 -- | Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.
 --
--- /See:/ 'newStorageBucketsUpdate' smart constructor.
+-- Construct a default value using the 'MkStorageBucketsUpdate' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageBucketsUpdate = StorageBucketsUpdate
-  { -- | Name of a bucket.
-    bucket :: Core.Text,
-    -- | Makes the return of the bucket metadata conditional on whether the bucket\'s current metageneration matches the given value.
-    ifMetagenerationMatch :: (Core.Maybe Core.Int64),
-    -- | Makes the return of the bucket metadata conditional on whether the bucket\'s current metageneration does not match the given value.
-    ifMetagenerationNotMatch :: (Core.Maybe Core.Int64),
-    -- | Multipart request metadata.
-    payload :: Bucket,
-    -- | Apply a predefined set of access controls to this bucket.
-    predefinedAcl :: (Core.Maybe BucketsUpdatePredefinedAcl),
-    -- | Apply a predefined set of default object access controls to this bucket.
-    predefinedDefaultObjectAcl :: (Core.Maybe BucketsUpdatePredefinedDefaultObjectAcl),
-    -- | Set of properties to return. Defaults to full.
-    projection :: (Core.Maybe BucketsUpdateProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageBucketsUpdate' with the minimum fields required to make a request.
-newStorageBucketsUpdate ::
-  -- |  Name of a bucket. See 'bucket'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Bucket ->
-  StorageBucketsUpdate
-newStorageBucketsUpdate bucket payload =
-  StorageBucketsUpdate
-    { bucket = bucket,
-      ifMetagenerationMatch = Core.Nothing,
-      ifMetagenerationNotMatch = Core.Nothing,
-      payload = payload,
-      predefinedAcl = Core.Nothing,
-      predefinedDefaultObjectAcl = Core.Nothing,
-      projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Name of a bucket.
+      bucket :: Core.Text
+      -- | Makes the return of the bucket metadata conditional on whether the bucket\'s current metageneration matches the given value.
+    , ifMetagenerationMatch :: Core.Maybe Core.Int64
+      -- | Makes the return of the bucket metadata conditional on whether the bucket\'s current metageneration does not match the given value.
+    , ifMetagenerationNotMatch :: Core.Maybe Core.Int64
+      -- | Multipart request metadata.
+    , meta :: Bucket
+      -- | 
+    , predefinedAcl :: Core.Maybe PredefinedAcl
+      -- | 
+    , predefinedDefaultObjectAcl :: Core.Maybe PredefinedDefaultObjectAcl
+      -- | 
+    , projection :: Core.Maybe Projection
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageBucketsUpdate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageBucketsUpdate :: Core.Text -> Bucket -> StorageBucketsUpdate
+pattern MkStorageBucketsUpdate{bucket, meta} =
+        StorageBucketsUpdate{bucket = bucket, ifMetagenerationMatch = Core.Nothing, ifMetagenerationNotMatch = Core.Nothing,
+                             meta = meta, predefinedAcl = Core.Nothing, predefinedDefaultObjectAcl = Core.Nothing, projection = Core.Nothing,
+                             provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageBucketsUpdate "Please use MkStorageBucketsUpdate instead" #-}
+#endif
+
+-- | Create 'StorageBucketsUpdate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageBucketsUpdate :: Core.Text -> Bucket -> StorageBucketsUpdate
+mkStorageBucketsUpdate bucket meta
+  = StorageBucketsUpdate{bucket = bucket, ifMetagenerationMatch = Core.Nothing, ifMetagenerationNotMatch = Core.Nothing,
+                         meta = meta, predefinedAcl = Core.Nothing, predefinedDefaultObjectAcl = Core.Nothing, projection = Core.Nothing,
+                         provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
 instance Core.GoogleRequest StorageBucketsUpdate where
-  type Rs StorageBucketsUpdate = Bucket
-  type
-    Scopes StorageBucketsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
-  requestClient StorageBucketsUpdate {..} =
-    go
-      bucket
-      ifMetagenerationMatch
-      ifMetagenerationNotMatch
-      predefinedAcl
-      predefinedDefaultObjectAcl
-      projection
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      payload
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageBucketsUpdateResource
-          )
-          Core.mempty
+        type Core.Scopes StorageBucketsUpdate = '[CloudPlatform'FullControl, Devstorage'FullControl]
+        type Core.Config StorageBucketsUpdate = StorageService
+        type Core.Response StorageBucketsUpdate = Bucket
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageBucketsUpdate{..}
+          = serviceRequest{Core.method = "PUT", Core.path = Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("ifMetagenerationMatch",) Core.. Core.toQueryParam Core.<$> ifMetagenerationMatch,
+                                  ("ifMetagenerationNotMatch",) Core.. Core.toQueryParam Core.<$> ifMetagenerationNotMatch,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  ("predefinedAcl",) Core.. Core.toQueryParam Core.<$> predefinedAcl,
+                                  ("predefinedDefaultObjectAcl",) Core.. Core.toQueryParam Core.<$> predefinedDefaultObjectAcl,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("projection",) Core.. Core.toQueryParam Core.<$> projection,
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

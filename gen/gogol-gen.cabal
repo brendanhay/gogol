@@ -12,125 +12,82 @@ build-type:    Simple
 description:   Code generator for Gogol related Google SDKs
 
 common base
-  default-language:   Haskell2010
+  default-language:   GHC2021
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
+    -Wall -fno-warn-name-shadowing -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
   default-extensions:
     NoImplicitPrelude
-    BinaryLiterals
-    ConstraintKinds
     DataKinds
-    DefaultSignatures
     DeriveAnyClass
-    DeriveFoldable
-    DeriveFunctor
-    DeriveGeneric
-    DeriveTraversable
     DerivingStrategies
-    DerivingVia
-    DoAndIfThenElse
     DuplicateRecordFields
-    EmptyDataDecls
-    ExistentialQuantification
-    ExplicitNamespaces
-    FlexibleContexts
-    FlexibleInstances
-    FunctionalDependencies
     GADTs
-    GeneralizedNewtypeDeriving
     ImportQualifiedPost
-    InstanceSigs
-    KindSignatures
     LambdaCase
-    MultiParamTypeClasses
-    MultiWayIf
-    NamedFieldPuns
-    NumericUnderscores
-    OverloadedLabels
     OverloadedStrings
-    PartialTypeSignatures
-    PatternGuards
-    PatternSynonyms
-    PolyKinds
-    RankNTypes
     RecordWildCards
-    ScopedTypeVariables
-    StandaloneDeriving
-    StandaloneKindSignatures
     StrictData
-    TupleSections
-    TypeApplications
-    TypeFamilies
-    TypeOperators
-    TypeSynonymInstances
     ViewPatterns
     NoFieldSelectors
     OverloadedRecordDot
 
-  build-depends:      base >=4.12
+  build-depends:      base >=4.16
 
 library
   import:          base
   hs-source-dirs:  lib
   build-depends:
-    , aeson                 ^>=2
-    , attoparsec
-    , bytestring
-    , case-insensitive
-    , containers
-    , directory
-    , ede
+    , aeson                   ^>=2
+    , atomic-primops          ^>=0.8
+    , burrito                 ^>=2
+    , bytestring              ^>=0.11
+    , Cabal
+    , containers              ^>=0.6
+    , dependent-sum-template  ^>=0.1
+    , dlist                   ^>=1
     , filepath
-    , formatting
-    , hashable
-    , haskell-src-exts      ^>=1.23.1
-    , lens
+    , ghc                     ^>=9.2.1
+    , ghc-source-gen          ^>=0.4
+    , hashable                ^>=1.4
+    , http-client             ^>=0.7
+    , http-client-tls         ^>=0.3
     , mtl
-    , pandoc
-    , scientific
-    , text
-    , text-manipulate
-    , unordered-containers
+    , pandoc                  ^>=2.17
+    , persist                 ^>=0.1.1
+    , psqueues                ^>=0.2
+    , rock                    ^>=0.3
+    , some                    ^>=1
+    , text                    ^>=1.2
+    , time                    ^>=1.11
+    , transformers            ^>=0.5
+    , unliftio                ^>=0.2
 
   exposed-modules:
-    Gen.AST
-    Gen.AST.Flatten
-    Gen.AST.Render
-    Gen.AST.Solve
-    Gen.Formatting
-    Gen.IO
-    Gen.JSON
-    Gen.JSONSchema.Draf3
-    Gen.Prelude
-    Gen.Syntax
-    Gen.Syntax.Build
-    Gen.Syntax.JSON
-    Gen.Syntax.Record
-    Gen.Syntax.Request
-    Gen.Syntax.Service
-    Gen.Syntax.Type
-    Gen.Text
-    Gen.Types
-    Gen.Types.Data
-    Gen.Types.Help
-    Gen.Types.Id
-    Gen.Types.Map
-    Gen.Types.NS
-    Gen.Types.Schema
+    Kuy.Command
+    Kuy.Discovery
+    Kuy.Discovery.Description
+    Kuy.Discovery.Directory
+    Kuy.Discovery.Label
+    Kuy.Discovery.Name
+    Kuy.Discovery.Schema
+    Kuy.Driver
+    Kuy.Driver.Query
+    Kuy.Driver.Rules
+    Kuy.Driver.Store
+    Kuy.GHC.DynFlags
+    Kuy.Markdown
+    Kuy.Orphans
+    Kuy.Prelude
+    Kuy.Template
 
-executable gogol-gen
+executable kuy
   import:         base
   hs-source-dirs: app
   main-is:        Main.hs
-  ghc-options:    -rtsopts -threaded "-with-rtsopts=-A256M -I0" -Wall
+  ghc-options:    -rtsopts -threaded "-with-rtsopts=-N -qg -A128M -I0"
   build-depends:
-    , aeson
-    , containers
-    , directory
-    , ede
     , gogol-gen
-    , optparse-applicative
-    , text
+    , optparse-applicative  ^>=0.17

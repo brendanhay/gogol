@@ -11,6 +11,27 @@ packages:
       sha256: deb89f06d14714b2f39e2469431cf5ca7094e2581eb7f28fcea2380d889d374a
   original:
     hackage: pandoc-2.17.1.1@sha256:fdca795a34c474ff8e5464256e01ebe988a97717dc219dfc217f6e650656309d,39053
+- completed:
+    hackage: rock-0.3.1.1@sha256:78ea97956e6db9a8913e420111c2b5bcc5e52122ab56bfd9958606f0857aa25c,3591
+    pantry-tree:
+      size: 536
+      sha256: 4fe1a254b430c7e7203314e4e83b78ec52eed406041f89ca9d3b81e2a91d2e72
+  original:
+    hackage: rock-0.3.1.1@sha256:78ea97956e6db9a8913e420111c2b5bcc5e52122ab56bfd9958606f0857aa25c,3591
+- completed:
+    hackage: dependent-hashmap-0.1.0.1@sha256:6d1c20bd79f32d8daebd3cc741f884cc3d093118e3b876eb957defd4c594a966,1892
+    pantry-tree:
+      size: 334
+      sha256: 817b36b81735d96696c5b165357c431e0b396dcf45afb8b4384fbfd4f4499cbb
+  original:
+    hackage: dependent-hashmap-0.1.0.1@sha256:6d1c20bd79f32d8daebd3cc741f884cc3d093118e3b876eb957defd4c594a966,1892
+- completed:
+    hackage: blake3-0.2@sha256:d1146b9a51ccfbb0532780778b6d016a614e3d44c05d8c1923dde9a8be869045,2448
+    pantry-tree:
+      size: 1433
+      sha256: 0264ef3e7919e7b0d668c4153f6ce0d88e6965626b52d9dfd2cafd70309501d3
+  original:
+    hackage: blake3-0.2@sha256:d1146b9a51ccfbb0532780778b6d016a614e3d44c05d8c1923dde9a8be869045,2448
 snapshots:
 - completed:
     size: 517915

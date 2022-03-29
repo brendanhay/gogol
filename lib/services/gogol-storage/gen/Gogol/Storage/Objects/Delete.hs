@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Objects.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,116 +6,82 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an object and its metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.delete@.
 module Gogol.Storage.Objects.Delete
-  ( -- * Resource
-    StorageObjectsDeleteResource,
-
-    -- ** Constructing a Request
-    newStorageObjectsDelete,
-    StorageObjectsDelete,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageObjectsDelete (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageObjectsDelete (..),
+#endif
+    mkStorageObjectsDelete,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.objects.delete@ method which the
--- 'StorageObjectsDelete' request conforms to.
-type StorageObjectsDeleteResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "o"
-    Core.:> Core.Capture "object" Core.Text
-    Core.:> Core.QueryParam "generation" Core.Int64
-    Core.:> Core.QueryParam "ifGenerationMatch" Core.Int64
-    Core.:> Core.QueryParam "ifGenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
-    Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Deletes an object and its metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.
 --
--- /See:/ 'newStorageObjectsDelete' smart constructor.
+-- Construct a default value using the 'MkStorageObjectsDelete' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageObjectsDelete = StorageObjectsDelete
-  { -- | Name of the bucket in which the object resides.
-    bucket :: Core.Text,
-    -- | If present, permanently deletes a specific revision of this object (as opposed to the latest version, the default).
-    generation :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
-    ifGenerationMatch :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.
-    ifGenerationNotMatch :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current metageneration matches the given value.
-    ifMetagenerationMatch :: (Core.Maybe Core.Int64),
-    -- | Makes the operation conditional on whether the object\'s current metageneration does not match the given value.
-    ifMetagenerationNotMatch :: (Core.Maybe Core.Int64),
-    -- | Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
-    object :: Core.Text,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageObjectsDelete' with the minimum fields required to make a request.
-newStorageObjectsDelete ::
-  -- |  Name of the bucket in which the object resides. See 'bucket'.
-  Core.Text ->
-  -- |  Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts. See 'object'.
-  Core.Text ->
-  StorageObjectsDelete
-newStorageObjectsDelete bucket object =
-  StorageObjectsDelete
-    { bucket = bucket,
-      generation = Core.Nothing,
-      ifGenerationMatch = Core.Nothing,
-      ifGenerationNotMatch = Core.Nothing,
-      ifMetagenerationMatch = Core.Nothing,
-      ifMetagenerationNotMatch = Core.Nothing,
-      object = object,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Name of the bucket in which the object resides.
+      bucket :: Core.Text
+      -- | If present, permanently deletes a specific revision of this object (as opposed to the latest version, the default).
+    , generation :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
+    , ifGenerationMatch :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.
+    , ifGenerationNotMatch :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current metageneration matches the given value.
+    , ifMetagenerationMatch :: Core.Maybe Core.Int64
+      -- | Makes the operation conditional on whether the object\'s current metageneration does not match the given value.
+    , ifMetagenerationNotMatch :: Core.Maybe Core.Int64
+      -- | Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    , object :: Core.Text
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageObjectsDelete' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageObjectsDelete :: Core.Text -> Core.Text -> StorageObjectsDelete
+pattern MkStorageObjectsDelete{bucket, object} =
+        StorageObjectsDelete{bucket = bucket, generation = Core.Nothing, ifGenerationMatch = Core.Nothing,
+                             ifGenerationNotMatch = Core.Nothing, ifMetagenerationMatch = Core.Nothing, ifMetagenerationNotMatch = Core.Nothing,
+                             object = object, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageObjectsDelete "Please use MkStorageObjectsDelete instead" #-}
+#endif
+
+-- | Create 'StorageObjectsDelete' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageObjectsDelete :: Core.Text -> Core.Text -> StorageObjectsDelete
+mkStorageObjectsDelete bucket object
+  = StorageObjectsDelete{bucket = bucket, generation = Core.Nothing, ifGenerationMatch = Core.Nothing,
+                         ifGenerationNotMatch = Core.Nothing, ifMetagenerationMatch = Core.Nothing, ifMetagenerationNotMatch = Core.Nothing,
+                         object = object, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
 instance Core.GoogleRequest StorageObjectsDelete where
-  type Rs StorageObjectsDelete = ()
-  type
-    Scopes StorageObjectsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
-       ]
-  requestClient StorageObjectsDelete {..} =
-    go
-      bucket
-      object
-      generation
-      ifGenerationMatch
-      ifGenerationNotMatch
-      ifMetagenerationMatch
-      ifMetagenerationNotMatch
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageObjectsDeleteResource
-          )
-          Core.mempty
+        type Core.Scopes StorageObjectsDelete = '[CloudPlatform'FullControl, Devstorage'FullControl, Devstorage'ReadWrite]
+        type Core.Config StorageObjectsDelete = StorageService
+        type Core.Response StorageObjectsDelete = ()
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageObjectsDelete{..}
+          = serviceRequest{Core.method = "DELETE",
+                           Core.path = Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/o/", Core.toPathBuilder object],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("generation",) Core.. Core.toQueryParam Core.<$> generation,
+                                  ("ifGenerationMatch",) Core.. Core.toQueryParam Core.<$> ifGenerationMatch,
+                                  ("ifGenerationNotMatch",) Core.. Core.toQueryParam Core.<$> ifGenerationNotMatch,
+                                  ("ifMetagenerationMatch",) Core.. Core.toQueryParam Core.<$> ifMetagenerationMatch,
+                                  ("ifMetagenerationNotMatch",) Core.. Core.toQueryParam Core.<$> ifMetagenerationNotMatch,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")]}

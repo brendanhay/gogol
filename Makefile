@@ -1,9 +1,9 @@
 SHELL     :=	 /usr/bin/env bash
 TOP       := .
-BIN       :=	./bin
-MODEL_DIR :=	./configs/models
-OUT_DIR   :=	./lib/services
-STACK_YAML :=	./gen/stack.yaml
+BIN       :=	bin
+MODEL_DIR :=	configs/models
+OUT_DIR   :=	lib/services
+STACK_YAML :=	gen/stack.yaml
 
 define version =
 $(shell sed -n 's/^version: *\([0-9]*\.[0-9]*\.[0-9]\).*$$/\1/p' $(1))

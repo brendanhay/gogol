@@ -1,23 +1,4 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
+{-# LANGUAGE CPP #-}
 -- |
 -- Module      : Gogol.Storage.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -25,315 +6,430 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Storage.Types
-  ( -- * Configuration
-    storageService,
+    (
+    -- * Configuration
+    StorageService,
+    mkStorageService,
 
-    -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    storageFull_controlScope,
-    storageRead_OnlyScope,
-    storageRead_writeScope,
+    -- ** Global Request Parameters
+    StorageParams (..),
 
-    -- * Types
+    -- ** OAuth Scopes
+    CloudPlatform'FullControl,
+      CloudPlatform'ReadOnly,
+      Devstorage'FullControl,
+      Devstorage'ReadOnly,
+      Devstorage'ReadWrite,
+  
+    -- * Product Types
 
     -- ** Bucket
     Bucket (..),
-    newBucket,
+#ifdef NOFIELDSELECTORS
+    MkBucket (..),
+#endif
+    mkBucket,
 
-    -- ** Bucket_Autoclass
-    Bucket_Autoclass (..),
-    newBucket_Autoclass,
+    -- ** Bucket'Autoclass
+    Bucket'Autoclass (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Autoclass (..),
+#endif
+    mkBucket'Autoclass,
 
-    -- ** Bucket_Billing
-    Bucket_Billing (..),
-    newBucket_Billing,
+    -- ** Bucket'Billing
+    Bucket'Billing (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Billing (..),
+#endif
+    mkBucket'Billing,
 
-    -- ** Bucket_CorsItem
-    Bucket_CorsItem (..),
-    newBucket_CorsItem,
+    -- ** Bucket'CorsItem
+    Bucket'CorsItem (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'CorsItem (..),
+#endif
+    mkBucket'CorsItem,
 
-    -- ** Bucket_CustomPlacementConfig
-    Bucket_CustomPlacementConfig (..),
-    newBucket_CustomPlacementConfig,
+    -- ** Bucket'CustomPlacementConfig
+    Bucket'CustomPlacementConfig (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'CustomPlacementConfig (..),
+#endif
+    mkBucket'CustomPlacementConfig,
 
-    -- ** Bucket_Encryption
-    Bucket_Encryption (..),
-    newBucket_Encryption,
+    -- ** Bucket'Encryption
+    Bucket'Encryption (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Encryption (..),
+#endif
+    mkBucket'Encryption,
 
-    -- ** Bucket_IamConfiguration
-    Bucket_IamConfiguration (..),
-    newBucket_IamConfiguration,
+    -- ** Bucket'IamConfiguration
+    Bucket'IamConfiguration (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'IamConfiguration (..),
+#endif
+    mkBucket'IamConfiguration,
 
-    -- ** Bucket_IamConfiguration_BucketPolicyOnly
-    Bucket_IamConfiguration_BucketPolicyOnly (..),
-    newBucket_IamConfiguration_BucketPolicyOnly,
+    -- ** Bucket'IamConfiguration'BucketPolicyOnly
+    Bucket'IamConfiguration'BucketPolicyOnly (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'IamConfiguration'BucketPolicyOnly (..),
+#endif
+    mkBucket'IamConfiguration'BucketPolicyOnly,
 
-    -- ** Bucket_IamConfiguration_UniformBucketLevelAccess
-    Bucket_IamConfiguration_UniformBucketLevelAccess (..),
-    newBucket_IamConfiguration_UniformBucketLevelAccess,
+    -- ** Bucket'IamConfiguration'UniformBucketLevelAccess
+    Bucket'IamConfiguration'UniformBucketLevelAccess (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'IamConfiguration'UniformBucketLevelAccess (..),
+#endif
+    mkBucket'IamConfiguration'UniformBucketLevelAccess,
 
-    -- ** Bucket_Labels
-    Bucket_Labels (..),
-    newBucket_Labels,
+    -- ** Bucket'Labels
+    Bucket'Labels (..),
 
-    -- ** Bucket_Lifecycle
-    Bucket_Lifecycle (..),
-    newBucket_Lifecycle,
+    -- ** Bucket'Lifecycle
+    Bucket'Lifecycle (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Lifecycle (..),
+#endif
+    mkBucket'Lifecycle,
 
-    -- ** Bucket_Lifecycle_RuleItem
-    Bucket_Lifecycle_RuleItem (..),
-    newBucket_Lifecycle_RuleItem,
+    -- ** Bucket'Lifecycle'RuleItem
+    Bucket'Lifecycle'RuleItem (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Lifecycle'RuleItem (..),
+#endif
+    mkBucket'Lifecycle'RuleItem,
 
-    -- ** Bucket_Lifecycle_RuleItem_Action
-    Bucket_Lifecycle_RuleItem_Action (..),
-    newBucket_Lifecycle_RuleItem_Action,
+    -- ** Bucket'Lifecycle'RuleItem'Action
+    Bucket'Lifecycle'RuleItem'Action (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Lifecycle'RuleItem'Action (..),
+#endif
+    mkBucket'Lifecycle'RuleItem'Action,
 
-    -- ** Bucket_Lifecycle_RuleItem_Condition
-    Bucket_Lifecycle_RuleItem_Condition (..),
-    newBucket_Lifecycle_RuleItem_Condition,
+    -- ** Bucket'Lifecycle'RuleItem'Condition
+    Bucket'Lifecycle'RuleItem'Condition (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Lifecycle'RuleItem'Condition (..),
+#endif
+    mkBucket'Lifecycle'RuleItem'Condition,
 
-    -- ** Bucket_Logging
-    Bucket_Logging (..),
-    newBucket_Logging,
+    -- ** Bucket'Logging
+    Bucket'Logging (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Logging (..),
+#endif
+    mkBucket'Logging,
 
-    -- ** Bucket_Owner
-    Bucket_Owner (..),
-    newBucket_Owner,
+    -- ** Bucket'Owner
+    Bucket'Owner (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Owner (..),
+#endif
+    mkBucket'Owner,
 
-    -- ** Bucket_RetentionPolicy
-    Bucket_RetentionPolicy (..),
-    newBucket_RetentionPolicy,
+    -- ** Bucket'RetentionPolicy
+    Bucket'RetentionPolicy (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'RetentionPolicy (..),
+#endif
+    mkBucket'RetentionPolicy,
 
-    -- ** Bucket_Versioning
-    Bucket_Versioning (..),
-    newBucket_Versioning,
+    -- ** Bucket'Versioning
+    Bucket'Versioning (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Versioning (..),
+#endif
+    mkBucket'Versioning,
 
-    -- ** Bucket_Website
-    Bucket_Website (..),
-    newBucket_Website,
+    -- ** Bucket'Website
+    Bucket'Website (..),
+#ifdef NOFIELDSELECTORS
+    MkBucket'Website (..),
+#endif
+    mkBucket'Website,
 
     -- ** BucketAccessControl
     BucketAccessControl (..),
-    newBucketAccessControl,
+#ifdef NOFIELDSELECTORS
+    MkBucketAccessControl (..),
+#endif
+    mkBucketAccessControl,
 
-    -- ** BucketAccessControl_ProjectTeam
-    BucketAccessControl_ProjectTeam (..),
-    newBucketAccessControl_ProjectTeam,
+    -- ** BucketAccessControl'ProjectTeam
+    BucketAccessControl'ProjectTeam (..),
+#ifdef NOFIELDSELECTORS
+    MkBucketAccessControl'ProjectTeam (..),
+#endif
+    mkBucketAccessControl'ProjectTeam,
 
     -- ** BucketAccessControls
     BucketAccessControls (..),
-    newBucketAccessControls,
+#ifdef NOFIELDSELECTORS
+    MkBucketAccessControls (..),
+#endif
+    mkBucketAccessControls,
 
     -- ** Buckets
     Buckets (..),
-    newBuckets,
+#ifdef NOFIELDSELECTORS
+    MkBuckets (..),
+#endif
+    mkBuckets,
 
     -- ** Channel
     Channel (..),
-    newChannel,
+#ifdef NOFIELDSELECTORS
+    MkChannel (..),
+#endif
+    mkChannel,
 
-    -- ** Channel_Params
-    Channel_Params (..),
-    newChannel_Params,
+    -- ** Channel'Params
+    Channel'Params (..),
 
     -- ** ComposeRequest
     ComposeRequest (..),
-    newComposeRequest,
+#ifdef NOFIELDSELECTORS
+    MkComposeRequest (..),
+#endif
+    mkComposeRequest,
 
-    -- ** ComposeRequest_SourceObjectsItem
-    ComposeRequest_SourceObjectsItem (..),
-    newComposeRequest_SourceObjectsItem,
+    -- ** ComposeRequest'SourceObjectsItem
+    ComposeRequest'SourceObjectsItem (..),
+#ifdef NOFIELDSELECTORS
+    MkComposeRequest'SourceObjectsItem (..),
+#endif
+    mkComposeRequest'SourceObjectsItem,
 
-    -- ** ComposeRequest_SourceObjectsItem_ObjectPreconditions
-    ComposeRequest_SourceObjectsItem_ObjectPreconditions (..),
-    newComposeRequest_SourceObjectsItem_ObjectPreconditions,
+    -- ** ComposeRequest'SourceObjectsItem'ObjectPreconditions
+    ComposeRequest'SourceObjectsItem'ObjectPreconditions (..),
+#ifdef NOFIELDSELECTORS
+    MkComposeRequest'SourceObjectsItem'ObjectPreconditions (..),
+#endif
+    mkComposeRequest'SourceObjectsItem'ObjectPreconditions,
 
     -- ** Expr
     Expr (..),
-    newExpr,
+#ifdef NOFIELDSELECTORS
+    MkExpr (..),
+#endif
+    mkExpr,
 
     -- ** HmacKey
     HmacKey (..),
-    newHmacKey,
+#ifdef NOFIELDSELECTORS
+    MkHmacKey (..),
+#endif
+    mkHmacKey,
 
     -- ** HmacKeyMetadata
     HmacKeyMetadata (..),
-    newHmacKeyMetadata,
+#ifdef NOFIELDSELECTORS
+    MkHmacKeyMetadata (..),
+#endif
+    mkHmacKeyMetadata,
 
     -- ** HmacKeysMetadata
     HmacKeysMetadata (..),
-    newHmacKeysMetadata,
+#ifdef NOFIELDSELECTORS
+    MkHmacKeysMetadata (..),
+#endif
+    mkHmacKeysMetadata,
 
     -- ** Notification
     Notification (..),
-    newNotification,
+#ifdef NOFIELDSELECTORS
+    MkNotification (..),
+#endif
+    mkNotification,
 
-    -- ** Notification_Custom_attributes
-    Notification_Custom_attributes (..),
-    newNotification_Custom_attributes,
+    -- ** Notification'Custom_attributes
+    Notification'Custom_attributes (..),
 
     -- ** Notifications
     Notifications (..),
-    newNotifications,
+#ifdef NOFIELDSELECTORS
+    MkNotifications (..),
+#endif
+    mkNotifications,
 
     -- ** Object
     Object (..),
-    newObject,
+#ifdef NOFIELDSELECTORS
+    MkObject (..),
+#endif
+    mkObject,
 
-    -- ** Object_CustomerEncryption
-    Object_CustomerEncryption (..),
-    newObject_CustomerEncryption,
+    -- ** Object'CustomerEncryption
+    Object'CustomerEncryption (..),
+#ifdef NOFIELDSELECTORS
+    MkObject'CustomerEncryption (..),
+#endif
+    mkObject'CustomerEncryption,
 
-    -- ** Object_Metadata
-    Object_Metadata (..),
-    newObject_Metadata,
+    -- ** Object'Metadata
+    Object'Metadata (..),
 
-    -- ** Object_Owner
-    Object_Owner (..),
-    newObject_Owner,
+    -- ** Object'Owner
+    Object'Owner (..),
+#ifdef NOFIELDSELECTORS
+    MkObject'Owner (..),
+#endif
+    mkObject'Owner,
 
     -- ** ObjectAccessControl
     ObjectAccessControl (..),
-    newObjectAccessControl,
+#ifdef NOFIELDSELECTORS
+    MkObjectAccessControl (..),
+#endif
+    mkObjectAccessControl,
 
-    -- ** ObjectAccessControl_ProjectTeam
-    ObjectAccessControl_ProjectTeam (..),
-    newObjectAccessControl_ProjectTeam,
+    -- ** ObjectAccessControl'ProjectTeam
+    ObjectAccessControl'ProjectTeam (..),
+#ifdef NOFIELDSELECTORS
+    MkObjectAccessControl'ProjectTeam (..),
+#endif
+    mkObjectAccessControl'ProjectTeam,
 
     -- ** ObjectAccessControls
     ObjectAccessControls (..),
-    newObjectAccessControls,
+#ifdef NOFIELDSELECTORS
+    MkObjectAccessControls (..),
+#endif
+    mkObjectAccessControls,
 
     -- ** Objects
     Objects (..),
-    newObjects,
+#ifdef NOFIELDSELECTORS
+    MkObjects (..),
+#endif
+    mkObjects,
 
     -- ** Policy
     Policy (..),
-    newPolicy,
+#ifdef NOFIELDSELECTORS
+    MkPolicy (..),
+#endif
+    mkPolicy,
 
-    -- ** Policy_BindingsItem
-    Policy_BindingsItem (..),
-    newPolicy_BindingsItem,
+    -- ** Policy'BindingsItem
+    Policy'BindingsItem (..),
+#ifdef NOFIELDSELECTORS
+    MkPolicy'BindingsItem (..),
+#endif
+    mkPolicy'BindingsItem,
 
     -- ** RewriteResponse
     RewriteResponse (..),
-    newRewriteResponse,
+#ifdef NOFIELDSELECTORS
+    MkRewriteResponse (..),
+#endif
+    mkRewriteResponse,
 
     -- ** ServiceAccount
     ServiceAccount (..),
-    newServiceAccount,
+#ifdef NOFIELDSELECTORS
+    MkServiceAccount (..),
+#endif
+    mkServiceAccount,
 
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+#ifdef NOFIELDSELECTORS
+    MkTestIamPermissionsResponse (..),
+#endif
+    mkTestIamPermissionsResponse,
 
-    -- ** BucketsGetProjection
-    BucketsGetProjection (..),
+    -- * Enumeration Types
 
-    -- ** BucketsInsertPredefinedAcl
-    BucketsInsertPredefinedAcl (..),
+    -- ** CopyProjection
+    CopyProjection (..),
+  
+    -- ** DestinationPredefinedAcl
+    DestinationPredefinedAcl (..),
+  
+    -- ** GetProjection
+    GetProjection (..),
+  
+    -- ** InsertPredefinedAcl
+    InsertPredefinedAcl (..),
+  
+    -- ** InsertProjection
+    InsertProjection (..),
+  
+    -- ** ListProjection
+    ListProjection (..),
+  
+    -- ** PatchPredefinedAcl
+    PatchPredefinedAcl (..),
+  
+    -- ** PatchProjection
+    PatchProjection (..),
+  
+    -- ** PredefinedAcl
+    PredefinedAcl (..),
+  
+    -- ** PredefinedDefaultObjectAcl
+    PredefinedDefaultObjectAcl (..),
+  
+    -- ** Projection
+    Projection (..),
+  
+    -- ** RewriteProjection
+    RewriteProjection (..),
+  
+    -- ** UpdatePredefinedAcl
+    UpdatePredefinedAcl (..),
+  
+    -- ** UpdateProjection
+    UpdateProjection (..),
+  
+    -- ** WatchAllProjection
+    WatchAllProjection (..),
+                                                                                                      ) where
 
-    -- ** BucketsInsertPredefinedDefaultObjectAcl
-    BucketsInsertPredefinedDefaultObjectAcl (..),
+import qualified Network.Google.Prelude as Core
 
-    -- ** BucketsInsertProjection
-    BucketsInsertProjection (..),
+-- | View and manage your data across Google Cloud Platform services.
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+-- | View your data across Google Cloud Platform services.
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+-- | Manage your data and permissions in Google Cloud Storage.
+type Devstorage'FullControl = "https://www.googleapis.com/auth/devstorage.full_control"
+-- | View your data in Google Cloud Storage.
+type Devstorage'ReadOnly = "https://www.googleapis.com/auth/devstorage.read_only"
+-- | Manage your data in Google Cloud Storage.
+type Devstorage'ReadWrite = "https://www.googleapis.com/auth/devstorage.read_write"
+-- | Default request configuration for version @v1@ of the Cloud Storage JSON API.
+type StorageService = Core.Service "storage:v1" StorageParams
+-- | Global query parameters for version @v1@ of the Cloud Storage JSON API. These parameters will be added to the query string for every request.
+--
+-- Construct a default value using the 'mkStorageService' smart constructor.
+data StorageParams = StorageParams
+    {
+      -- | Selector specifying which fields to include in a partial response.
+      fields :: Core.Maybe Core.Text
+      -- | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    , key :: Core.Maybe Core.Text
+      -- | OAuth 2.0 token for the current user.
+    , oauthToken :: Core.Maybe Core.Text
+      -- | Returns response with indentations and line breaks.
+    , prettyPrint :: Core.Bool
+      -- | An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+    , quotaUser :: Core.Maybe Core.Text
+    }
+    deriving stock (Core.Show, Core.Eq, Core.Ord, Core.Generic)
 
-    -- ** BucketsListProjection
-    BucketsListProjection (..),
-
-    -- ** BucketsPatchPredefinedAcl
-    BucketsPatchPredefinedAcl (..),
-
-    -- ** BucketsPatchPredefinedDefaultObjectAcl
-    BucketsPatchPredefinedDefaultObjectAcl (..),
-
-    -- ** BucketsPatchProjection
-    BucketsPatchProjection (..),
-
-    -- ** BucketsUpdatePredefinedAcl
-    BucketsUpdatePredefinedAcl (..),
-
-    -- ** BucketsUpdatePredefinedDefaultObjectAcl
-    BucketsUpdatePredefinedDefaultObjectAcl (..),
-
-    -- ** BucketsUpdateProjection
-    BucketsUpdateProjection (..),
-
-    -- ** ObjectsComposeDestinationPredefinedAcl
-    ObjectsComposeDestinationPredefinedAcl (..),
-
-    -- ** ObjectsCopyDestinationPredefinedAcl
-    ObjectsCopyDestinationPredefinedAcl (..),
-
-    -- ** ObjectsCopyProjection
-    ObjectsCopyProjection (..),
-
-    -- ** ObjectsGetProjection
-    ObjectsGetProjection (..),
-
-    -- ** ObjectsInsertPredefinedAcl
-    ObjectsInsertPredefinedAcl (..),
-
-    -- ** ObjectsInsertProjection
-    ObjectsInsertProjection (..),
-
-    -- ** ObjectsListProjection
-    ObjectsListProjection (..),
-
-    -- ** ObjectsPatchPredefinedAcl
-    ObjectsPatchPredefinedAcl (..),
-
-    -- ** ObjectsPatchProjection
-    ObjectsPatchProjection (..),
-
-    -- ** ObjectsRewriteDestinationPredefinedAcl
-    ObjectsRewriteDestinationPredefinedAcl (..),
-
-    -- ** ObjectsRewriteProjection
-    ObjectsRewriteProjection (..),
-
-    -- ** ObjectsUpdatePredefinedAcl
-    ObjectsUpdatePredefinedAcl (..),
-
-    -- ** ObjectsUpdateProjection
-    ObjectsUpdateProjection (..),
-
-    -- ** ObjectsWatchAllProjection
-    ObjectsWatchAllProjection (..),
-  )
-where
-
-import qualified Gogol.Prelude as Core
-import Gogol.Storage.Internal.Product
-import Gogol.Storage.Internal.Sum
-
--- | Default request referring to version @v1@ of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
-storageService :: Core.ServiceConfig
-storageService =
-  Core.defaultService
-    (Core.ServiceId "storage:v1")
-    "storage.googleapis.com"
-
--- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
-
--- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
-
--- | Manage your data and permissions in Google Cloud Storage
-storageFull_controlScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFull_controlScope = Core.Proxy
-
--- | View your data in Google Cloud Storage
-storageRead_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageRead_OnlyScope = Core.Proxy
-
--- | Manage your data in Google Cloud Storage
-storageRead_writeScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageRead_writeScope = Core.Proxy
+-- | Default configuration referring to version @v1@ of the Cloud Storage JSON API. This sets the host and port used as a starting point for constructing service requests.
+mkStorageService :: StorageService
+mkStorageService
+  = Core.Service{Core.serviceRequest =
+                   Core.defaultRequest{Core.secure = Core.True, Core.host = "https://storage.googleapis.com", Core.port = 443},
+                 Core.serviceParams =
+                   StorageParams{fields = Core.Nothing, key = Core.Nothing, oauthToken = Core.Nothing, prettyPrint = Core.False,
+                                 quotaUser = Core.Nothing}}

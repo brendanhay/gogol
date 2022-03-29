@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Projects.HmacKeys.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,97 +6,64 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the state of an HMAC key. See the HMAC Key resource descriptor for valid states.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.projects.hmacKeys.update@.
 module Gogol.Storage.Projects.HmacKeys.Update
-  ( -- * Resource
-    StorageProjectsHmacKeysUpdateResource,
-
-    -- ** Constructing a Request
-    newStorageProjectsHmacKeysUpdate,
-    StorageProjectsHmacKeysUpdate,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageProjectsHmacKeysUpdate (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageProjectsHmacKeysUpdate (..),
+#endif
+    mkStorageProjectsHmacKeysUpdate,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.projects.hmacKeys.update@ method which the
--- 'StorageProjectsHmacKeysUpdate' request conforms to.
-type StorageProjectsHmacKeysUpdateResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "projectId" Core.Text
-    Core.:> "hmacKeys"
-    Core.:> Core.Capture "accessId" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] HmacKeyMetadata
-    Core.:> Core.Put '[Core.JSON] HmacKeyMetadata
 
 -- | Updates the state of an HMAC key. See the HMAC Key resource descriptor for valid states.
 --
--- /See:/ 'newStorageProjectsHmacKeysUpdate' smart constructor.
+-- Construct a default value using the 'MkStorageProjectsHmacKeysUpdate' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageProjectsHmacKeysUpdate = StorageProjectsHmacKeysUpdate
-  { -- | Name of the HMAC key being updated.
-    accessId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: HmacKeyMetadata,
-    -- | Project ID owning the service account of the updated key.
-    projectId :: Core.Text,
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageProjectsHmacKeysUpdate' with the minimum fields required to make a request.
-newStorageProjectsHmacKeysUpdate ::
-  -- |  Name of the HMAC key being updated. See 'accessId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  HmacKeyMetadata ->
-  -- |  Project ID owning the service account of the updated key. See 'projectId'.
-  Core.Text ->
-  StorageProjectsHmacKeysUpdate
-newStorageProjectsHmacKeysUpdate accessId payload projectId =
-  StorageProjectsHmacKeysUpdate
-    { accessId = accessId,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Name of the HMAC key being updated.
+      accessId :: Core.Text
+      -- | Multipart request metadata.
+    , meta :: HmacKeyMetadata
+      -- | Project ID owning the service account of the updated key.
+    , projectId :: Core.Text
+      -- | The project to be billed for this request.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    StorageProjectsHmacKeysUpdate
-  where
-  type
-    Rs StorageProjectsHmacKeysUpdate =
-      HmacKeyMetadata
-  type
-    Scopes StorageProjectsHmacKeysUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
-  requestClient StorageProjectsHmacKeysUpdate {..} =
-    go
-      projectId
-      accessId
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      payload
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageProjectsHmacKeysUpdateResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageProjectsHmacKeysUpdate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageProjectsHmacKeysUpdate :: Core.Text -> HmacKeyMetadata -> Core.Text -> StorageProjectsHmacKeysUpdate
+pattern MkStorageProjectsHmacKeysUpdate{accessId, meta, projectId} =
+        StorageProjectsHmacKeysUpdate{accessId = accessId, meta = meta, projectId = projectId, userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageProjectsHmacKeysUpdate "Please use MkStorageProjectsHmacKeysUpdate instead" #-}
+#endif
+
+-- | Create 'StorageProjectsHmacKeysUpdate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageProjectsHmacKeysUpdate :: Core.Text -> HmacKeyMetadata -> Core.Text -> StorageProjectsHmacKeysUpdate
+mkStorageProjectsHmacKeysUpdate accessId meta projectId
+  = StorageProjectsHmacKeysUpdate{accessId = accessId, meta = meta, projectId = projectId, userProject = Core.Nothing}
+instance Core.GoogleRequest StorageProjectsHmacKeysUpdate where
+        type Core.Scopes StorageProjectsHmacKeysUpdate = '[CloudPlatform'FullControl, Devstorage'FullControl]
+        type Core.Config StorageProjectsHmacKeysUpdate = StorageService
+        type Core.Response StorageProjectsHmacKeysUpdate = HmacKeyMetadata
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageProjectsHmacKeysUpdate{..}
+          = serviceRequest{Core.method = "PUT",
+                           Core.path =
+                             Core.toRequestPath ["/storage/v1/projects/", Core.toPathBuilder projectId, "/hmacKeys/", Core.toPathBuilder accessId],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

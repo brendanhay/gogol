@@ -1,4 +1,4 @@
-resolver: lts-18.27
+resolver: lts-19.0
 
 local-bin-path: bin
 

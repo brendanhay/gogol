@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/haskell-updates";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -14,9 +14,13 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
+            # ormolu > 4.0 required due to gogol-gen using OverloadedRecordDot.
+            haskellPackages.ormolu
+
+            # cabal-fmt isn't in top-level nixpkgs and doesn't build with ghc921.
             haskellPackages.cabal-fmt
+
             nixpkgs-fmt
-            ormolu
             parallel
             shellcheck
             shfmt

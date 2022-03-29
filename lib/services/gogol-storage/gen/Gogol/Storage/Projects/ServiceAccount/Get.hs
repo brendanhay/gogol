@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Projects.ServiceAccount.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,91 +6,62 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get the email address of this project\'s Google Cloud Storage service account.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.projects.serviceAccount.get@.
 module Gogol.Storage.Projects.ServiceAccount.Get
-  ( -- * Resource
-    StorageProjectsServiceAccountGetResource,
-
-    -- ** Constructing a Request
-    newStorageProjectsServiceAccountGet,
-    StorageProjectsServiceAccountGet,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageProjectsServiceAccountGet (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageProjectsServiceAccountGet (..),
+#endif
+    mkStorageProjectsServiceAccountGet,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.projects.serviceAccount.get@ method which the
--- 'StorageProjectsServiceAccountGet' request conforms to.
-type StorageProjectsServiceAccountGetResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "projectId" Core.Text
-    Core.:> "serviceAccount"
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ServiceAccount
 
 -- | Get the email address of this project\'s Google Cloud Storage service account.
 --
--- /See:/ 'newStorageProjectsServiceAccountGet' smart constructor.
+-- Construct a default value using the 'MkStorageProjectsServiceAccountGet' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageProjectsServiceAccountGet = StorageProjectsServiceAccountGet
-  { -- | Project ID
-    projectId :: Core.Text,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageProjectsServiceAccountGet' with the minimum fields required to make a request.
-newStorageProjectsServiceAccountGet ::
-  -- |  Project ID See 'projectId'.
-  Core.Text ->
-  StorageProjectsServiceAccountGet
-newStorageProjectsServiceAccountGet projectId =
-  StorageProjectsServiceAccountGet
-    { projectId = projectId,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Project ID.
+      projectId :: Core.Text
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    StorageProjectsServiceAccountGet
-  where
-  type
-    Rs StorageProjectsServiceAccountGet =
-      ServiceAccount
-  type
-    Scopes StorageProjectsServiceAccountGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
-       ]
-  requestClient StorageProjectsServiceAccountGet {..} =
-    go
-      projectId
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageProjectsServiceAccountGetResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageProjectsServiceAccountGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageProjectsServiceAccountGet :: Core.Text -> StorageProjectsServiceAccountGet
+pattern MkStorageProjectsServiceAccountGet{projectId} =
+        StorageProjectsServiceAccountGet{projectId = projectId, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageProjectsServiceAccountGet "Please use MkStorageProjectsServiceAccountGet instead" #-}
+#endif
+
+-- | Create 'StorageProjectsServiceAccountGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageProjectsServiceAccountGet :: Core.Text -> StorageProjectsServiceAccountGet
+mkStorageProjectsServiceAccountGet projectId
+  = StorageProjectsServiceAccountGet{projectId = projectId, provisionalUserProject = Core.Nothing, userProject = Core.Nothing}
+instance Core.GoogleRequest StorageProjectsServiceAccountGet where
+        type Core.Scopes StorageProjectsServiceAccountGet =
+             '[CloudPlatform'FullControl, CloudPlatform'ReadOnly, Devstorage'FullControl, Devstorage'ReadOnly, Devstorage'ReadWrite]
+        type Core.Config StorageProjectsServiceAccountGet = StorageService
+        type Core.Response StorageProjectsServiceAccountGet = ServiceAccount
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageProjectsServiceAccountGet{..}
+          = serviceRequest{Core.method = "GET",
+                           Core.path = Core.toRequestPath ["/storage/v1/projects/", Core.toPathBuilder projectId, "/serviceAccount"],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")]}

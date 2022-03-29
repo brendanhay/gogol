@@ -3,16 +3,16 @@ compiler: ghc-9.2.1
 
 nix:
   enable: false
-  packages: [zlib, icu67]
+  packages: [zlib]
   add-gc-roots: true
 
 allow-newer: true
 
+packages:
+  - .
+
 extra-deps:
   - pandoc-2.17.1.1@sha256:fdca795a34c474ff8e5464256e01ebe988a97717dc219dfc217f6e650656309d,39053
-#   - hslua-2.1.0@sha256:134a14902ad0979ecbe76db9227077b66c4f670e5022d638ef64c59bddb80dce,4209
-#   - hslua-aeson-2.1.0@sha256:43a35e8ce034ce29931af804a15151fe9b7d9a4ee5e27dd47cc8086f65215fcb,3200
-#   - hslua-marshalling-2.1.0@sha256:4179d240a8ca8417a284e362f275e37f3cdf0ad0a0d1e682e036c8ae4a6d2471,3907
-
-packages:
-    - '.'
+  - rock-0.3.1.1@sha256:78ea97956e6db9a8913e420111c2b5bcc5e52122ab56bfd9958606f0857aa25c,3591
+  - dependent-hashmap-0.1.0.1@sha256:6d1c20bd79f32d8daebd3cc741f884cc3d093118e3b876eb957defd4c594a966,1892
+  - blake3-0.2@sha256:d1146b9a51ccfbb0532780778b6d016a614e3d44c05d8c1923dde9a8be869045,2448

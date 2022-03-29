@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -25,124 +5,23 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AndroidPublisher.Internal.Sum
-  ( -- * Xgafv
-    Xgafv
-      ( Xgafv_1,
-        Xgafv_2,
-        ..
-      ),
+  (
 
-    -- * DeobfuscationFile_SymbolType
-    DeobfuscationFile_SymbolType
-      ( DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified,
-        DeobfuscationFile_SymbolType_Proguard,
-        DeobfuscationFile_SymbolType_NativeCode,
-        ..
-      ),
-
-    -- * Grant_AppLevelPermissionsItem
-    Grant_AppLevelPermissionsItem
-      ( Grant_AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED,
-        Grant_AppLevelPermissionsItem_CANACCESSAPP,
-        Grant_AppLevelPermissionsItem_CANVIEWFINANCIALDATA,
-        Grant_AppLevelPermissionsItem_CANMANAGEPERMISSIONS,
-        Grant_AppLevelPermissionsItem_CANREPLYTOREVIEWS,
-        Grant_AppLevelPermissionsItem_CANMANAGEPUBLICAPKS,
-        Grant_AppLevelPermissionsItem_CANMANAGETRACKAPKS,
-        Grant_AppLevelPermissionsItem_CANMANAGETRACKUSERS,
-        Grant_AppLevelPermissionsItem_CANMANAGEPUBLICLISTING,
-        Grant_AppLevelPermissionsItem_CANMANAGEDRAFTAPPS,
-        Grant_AppLevelPermissionsItem_CANMANAGEORDERS,
-        ..
-      ),
-
-    -- * InAppProduct_PurchaseType
-    InAppProduct_PurchaseType
-      ( InAppProduct_PurchaseType_PurchaseTypeUnspecified,
-        InAppProduct_PurchaseType_ManagedUser,
-        InAppProduct_PurchaseType_Subscription,
-        ..
-      ),
-
-    -- * InAppProduct_Status
-    InAppProduct_Status
-      ( InAppProduct_Status_StatusUnspecified,
-        InAppProduct_Status_Active,
-        InAppProduct_Status_Inactive,
-        ..
-      ),
-
-    -- * ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-    ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-      ( ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
-        ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
-        ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
-        ..
-      ),
-
-    -- * RegionalTaxRateInfo_TaxTier
-    RegionalTaxRateInfo_TaxTier
-      ( RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED,
-        RegionalTaxRateInfo_TaxTier_TAX_TIER_BOOKS_1,
-        RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_1,
-        RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2,
-        RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1,
-        RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1,
-        ..
-      ),
-
-    -- * SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-    SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-      ( SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
-        SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
-        SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
-        ..
-      ),
-
-    -- * TrackRelease_Status
-    TrackRelease_Status
-      ( TrackRelease_Status_StatusUnspecified,
-        TrackRelease_Status_Draft,
-        TrackRelease_Status_InProgress,
-        TrackRelease_Status_Halted,
-        TrackRelease_Status_Completed,
-        ..
-      ),
-
-    -- * User_AccessState
-    User_AccessState
-      ( User_AccessState_ACCESSSTATEUNSPECIFIED,
-        User_AccessState_Invited,
-        User_AccessState_INVITATIONEXPIRED,
-        User_AccessState_ACCESSGRANTED,
-        User_AccessState_ACCESSEXPIRED,
-        ..
-      ),
-
-    -- * User_DeveloperAccountPermissionsItem
-    User_DeveloperAccountPermissionsItem
-      ( User_DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED,
-        User_DeveloperAccountPermissionsItem_CANSEEALLAPPS,
-        User_DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL,
-        User_DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL,
+    -- * DeobfuscationFile'SymbolType
+    DeobfuscationFile'SymbolType
+      (
+        DeobfuscationFile'SymbolType_DeobfuscationFileTypeUnspecified,
+        DeobfuscationFile'SymbolType_Proguard,
+        DeobfuscationFile'SymbolType_NativeCode,
         ..
       ),
 
     -- * EditsDeobfuscationfilesUploadDeobfuscationFileType
     EditsDeobfuscationfilesUploadDeobfuscationFileType
-      ( EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified,
+      (
+        EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified,
         EditsDeobfuscationfilesUploadDeobfuscationFileType_Proguard,
         EditsDeobfuscationfilesUploadDeobfuscationFileType_NativeCode,
         ..
@@ -150,7 +29,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesGetExpansionFileType
     EditsExpansionfilesGetExpansionFileType
-      ( EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified,
+      (
+        EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesGetExpansionFileType_Main,
         EditsExpansionfilesGetExpansionFileType_Patch',
         ..
@@ -158,7 +38,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesPatchExpansionFileType
     EditsExpansionfilesPatchExpansionFileType
-      ( EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified,
+      (
+        EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesPatchExpansionFileType_Main,
         EditsExpansionfilesPatchExpansionFileType_Patch',
         ..
@@ -166,7 +47,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesUpdateExpansionFileType
     EditsExpansionfilesUpdateExpansionFileType
-      ( EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified,
+      (
+        EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesUpdateExpansionFileType_Main,
         EditsExpansionfilesUpdateExpansionFileType_Patch',
         ..
@@ -174,7 +56,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesUploadExpansionFileType
     EditsExpansionfilesUploadExpansionFileType
-      ( EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified,
+      (
+        EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesUploadExpansionFileType_Main,
         EditsExpansionfilesUploadExpansionFileType_Patch',
         ..
@@ -182,7 +65,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesDeleteImageType
     EditsImagesDeleteImageType
-      ( EditsImagesDeleteImageType_AppImageTypeUnspecified,
+      (
+        EditsImagesDeleteImageType_AppImageTypeUnspecified,
         EditsImagesDeleteImageType_PhoneScreenshots,
         EditsImagesDeleteImageType_SevenInchScreenshots,
         EditsImagesDeleteImageType_TenInchScreenshots,
@@ -196,7 +80,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesDeleteallImageType
     EditsImagesDeleteallImageType
-      ( EditsImagesDeleteallImageType_AppImageTypeUnspecified,
+      (
+        EditsImagesDeleteallImageType_AppImageTypeUnspecified,
         EditsImagesDeleteallImageType_PhoneScreenshots,
         EditsImagesDeleteallImageType_SevenInchScreenshots,
         EditsImagesDeleteallImageType_TenInchScreenshots,
@@ -210,7 +95,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesListImageType
     EditsImagesListImageType
-      ( EditsImagesListImageType_AppImageTypeUnspecified,
+      (
+        EditsImagesListImageType_AppImageTypeUnspecified,
         EditsImagesListImageType_PhoneScreenshots,
         EditsImagesListImageType_SevenInchScreenshots,
         EditsImagesListImageType_TenInchScreenshots,
@@ -224,7 +110,8 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesUploadImageType
     EditsImagesUploadImageType
-      ( EditsImagesUploadImageType_AppImageTypeUnspecified,
+      (
+        EditsImagesUploadImageType_AppImageTypeUnspecified,
         EditsImagesUploadImageType_PhoneScreenshots,
         EditsImagesUploadImageType_SevenInchScreenshots,
         EditsImagesUploadImageType_TenInchScreenshots,
@@ -235,503 +122,169 @@ module Gogol.AndroidPublisher.Internal.Sum
         EditsImagesUploadImageType_TvBanner,
         ..
       ),
-  )
-where
+
+    -- * Grant'AppLevelPermissionsItem
+    Grant'AppLevelPermissionsItem
+      (
+        Grant'AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED,
+        Grant'AppLevelPermissionsItem_CANACCESSAPP,
+        Grant'AppLevelPermissionsItem_CANVIEWFINANCIALDATA,
+        Grant'AppLevelPermissionsItem_CANMANAGEPERMISSIONS,
+        Grant'AppLevelPermissionsItem_CANREPLYTOREVIEWS,
+        Grant'AppLevelPermissionsItem_CANMANAGEPUBLICAPKS,
+        Grant'AppLevelPermissionsItem_CANMANAGETRACKAPKS,
+        Grant'AppLevelPermissionsItem_CANMANAGETRACKUSERS,
+        Grant'AppLevelPermissionsItem_CANMANAGEPUBLICLISTING,
+        Grant'AppLevelPermissionsItem_CANMANAGEDRAFTAPPS,
+        Grant'AppLevelPermissionsItem_CANMANAGEORDERS,
+        ..
+      ),
+
+    -- * InAppProduct'PurchaseType
+    InAppProduct'PurchaseType
+      (
+        InAppProduct'PurchaseType_PurchaseTypeUnspecified,
+        InAppProduct'PurchaseType_ManagedUser,
+        InAppProduct'PurchaseType_Subscription,
+        ..
+      ),
+
+    -- * InAppProduct'Status
+    InAppProduct'Status
+      (
+        InAppProduct'Status_StatusUnspecified,
+        InAppProduct'Status_Active,
+        InAppProduct'Status_Inactive,
+        ..
+      ),
+
+    -- * ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType
+    ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType
+      (
+        ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
+        ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
+        ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
+        ..
+      ),
+
+    -- * RegionalTaxRateInfo'TaxTier
+    RegionalTaxRateInfo'TaxTier
+      (
+        RegionalTaxRateInfo'TaxTier_TAXTIERUNSPECIFIED,
+        RegionalTaxRateInfo'TaxTier_TAX_TIER_BOOKS_1,
+        RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_1,
+        RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_2,
+        RegionalTaxRateInfo'TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1,
+        RegionalTaxRateInfo'TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1,
+        ..
+      ),
+
+    -- * SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType
+    SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType
+      (
+        SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
+        SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
+        SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
+        ..
+      ),
+
+    -- * TrackRelease'Status
+    TrackRelease'Status
+      (
+        TrackRelease'Status_StatusUnspecified,
+        TrackRelease'Status_Draft,
+        TrackRelease'Status_InProgress,
+        TrackRelease'Status_Halted,
+        TrackRelease'Status_Completed,
+        ..
+      ),
+
+    -- * User'AccessState
+    User'AccessState
+      (
+        User'AccessState_ACCESSSTATEUNSPECIFIED,
+        User'AccessState_Invited,
+        User'AccessState_INVITATIONEXPIRED,
+        User'AccessState_ACCESSGRANTED,
+        User'AccessState_ACCESSEXPIRED,
+        ..
+      ),
+
+    -- * User'DeveloperAccountPermissionsItem
+    User'DeveloperAccountPermissionsItem
+      (
+        User'DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED,
+        User'DeveloperAccountPermissionsItem_CANSEEALLAPPS,
+        User'DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL,
+        User'DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL,
+        ..
+      ),
+
+    -- * Xgafv
+    Xgafv
+      (
+        Xgafv_1,
+        Xgafv_2,
+        ..
+      ),
+  ) where
 
 import qualified Gogol.Prelude as Core
 
--- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | v1 error format
-pattern Xgafv_1 :: Xgafv
-pattern Xgafv_1 = Xgafv "1"
-
--- | v2 error format
-pattern Xgafv_2 :: Xgafv
-pattern Xgafv_2 = Xgafv "2"
-
-{-# COMPLETE
-  Xgafv_1,
-  Xgafv_2,
-  Xgafv
-  #-}
-
 -- | The type of the deobfuscation file.
-newtype DeobfuscationFile_SymbolType = DeobfuscationFile_SymbolType {fromDeobfuscationFile_SymbolType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DeobfuscationFile'SymbolType = DeobfuscationFile'SymbolType { fromDeobfuscationFile'SymbolType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified deobfuscation file type.
-pattern DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified :: DeobfuscationFile_SymbolType
-pattern DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified = DeobfuscationFile_SymbolType "deobfuscationFileTypeUnspecified"
+pattern DeobfuscationFile'SymbolType_DeobfuscationFileTypeUnspecified :: DeobfuscationFile'SymbolType
+pattern DeobfuscationFile'SymbolType_DeobfuscationFileTypeUnspecified = DeobfuscationFile'SymbolType "deobfuscationFileTypeUnspecified"
 
 -- | Proguard deobfuscation file type.
-pattern DeobfuscationFile_SymbolType_Proguard :: DeobfuscationFile_SymbolType
-pattern DeobfuscationFile_SymbolType_Proguard = DeobfuscationFile_SymbolType "proguard"
+pattern DeobfuscationFile'SymbolType_Proguard :: DeobfuscationFile'SymbolType
+pattern DeobfuscationFile'SymbolType_Proguard = DeobfuscationFile'SymbolType "proguard"
 
 -- | Native debugging symbols file type.
-pattern DeobfuscationFile_SymbolType_NativeCode :: DeobfuscationFile_SymbolType
-pattern DeobfuscationFile_SymbolType_NativeCode = DeobfuscationFile_SymbolType "nativeCode"
+pattern DeobfuscationFile'SymbolType_NativeCode :: DeobfuscationFile'SymbolType
+pattern DeobfuscationFile'SymbolType_NativeCode = DeobfuscationFile'SymbolType "nativeCode"
 
 {-# COMPLETE
-  DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified,
-  DeobfuscationFile_SymbolType_Proguard,
-  DeobfuscationFile_SymbolType_NativeCode,
-  DeobfuscationFile_SymbolType
-  #-}
-
-newtype Grant_AppLevelPermissionsItem = Grant_AppLevelPermissionsItem {fromGrant_AppLevelPermissionsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unknown or unspecified permission.
-pattern Grant_AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED = Grant_AppLevelPermissionsItem "APP_LEVEL_PERMISSION_UNSPECIFIED"
-
--- | View app information (read-only).
-pattern Grant_AppLevelPermissionsItem_CANACCESSAPP :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANACCESSAPP = Grant_AppLevelPermissionsItem "CAN_ACCESS_APP"
-
--- | View financial data.
-pattern Grant_AppLevelPermissionsItem_CANVIEWFINANCIALDATA :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANVIEWFINANCIALDATA = Grant_AppLevelPermissionsItem "CAN_VIEW_FINANCIAL_DATA"
-
--- | Admin (all permissions).
-pattern Grant_AppLevelPermissionsItem_CANMANAGEPERMISSIONS :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANMANAGEPERMISSIONS = Grant_AppLevelPermissionsItem "CAN_MANAGE_PERMISSIONS"
-
--- | Reply to reviews.
-pattern Grant_AppLevelPermissionsItem_CANREPLYTOREVIEWS :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANREPLYTOREVIEWS = Grant_AppLevelPermissionsItem "CAN_REPLY_TO_REVIEWS"
-
--- | Release to production, exclude devices, and use app signing by Google Play.
-pattern Grant_AppLevelPermissionsItem_CANMANAGEPUBLICAPKS :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANMANAGEPUBLICAPKS = Grant_AppLevelPermissionsItem "CAN_MANAGE_PUBLIC_APKS"
-
--- | Release to testing tracks.
-pattern Grant_AppLevelPermissionsItem_CANMANAGETRACKAPKS :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANMANAGETRACKAPKS = Grant_AppLevelPermissionsItem "CAN_MANAGE_TRACK_APKS"
-
--- | Manage testing tracks and edit tester lists.
-pattern Grant_AppLevelPermissionsItem_CANMANAGETRACKUSERS :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANMANAGETRACKUSERS = Grant_AppLevelPermissionsItem "CAN_MANAGE_TRACK_USERS"
-
--- | Manage store presence.
-pattern Grant_AppLevelPermissionsItem_CANMANAGEPUBLICLISTING :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANMANAGEPUBLICLISTING = Grant_AppLevelPermissionsItem "CAN_MANAGE_PUBLIC_LISTING"
-
--- | Edit and delete draft apps.
-pattern Grant_AppLevelPermissionsItem_CANMANAGEDRAFTAPPS :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANMANAGEDRAFTAPPS = Grant_AppLevelPermissionsItem "CAN_MANAGE_DRAFT_APPS"
-
--- | Manage orders and subscriptions.
-pattern Grant_AppLevelPermissionsItem_CANMANAGEORDERS :: Grant_AppLevelPermissionsItem
-pattern Grant_AppLevelPermissionsItem_CANMANAGEORDERS = Grant_AppLevelPermissionsItem "CAN_MANAGE_ORDERS"
-
-{-# COMPLETE
-  Grant_AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED,
-  Grant_AppLevelPermissionsItem_CANACCESSAPP,
-  Grant_AppLevelPermissionsItem_CANVIEWFINANCIALDATA,
-  Grant_AppLevelPermissionsItem_CANMANAGEPERMISSIONS,
-  Grant_AppLevelPermissionsItem_CANREPLYTOREVIEWS,
-  Grant_AppLevelPermissionsItem_CANMANAGEPUBLICAPKS,
-  Grant_AppLevelPermissionsItem_CANMANAGETRACKAPKS,
-  Grant_AppLevelPermissionsItem_CANMANAGETRACKUSERS,
-  Grant_AppLevelPermissionsItem_CANMANAGEPUBLICLISTING,
-  Grant_AppLevelPermissionsItem_CANMANAGEDRAFTAPPS,
-  Grant_AppLevelPermissionsItem_CANMANAGEORDERS,
-  Grant_AppLevelPermissionsItem
-  #-}
-
--- | The type of the product, e.g. a recurring subscription.
-newtype InAppProduct_PurchaseType = InAppProduct_PurchaseType {fromInAppProduct_PurchaseType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unspecified purchase type.
-pattern InAppProduct_PurchaseType_PurchaseTypeUnspecified :: InAppProduct_PurchaseType
-pattern InAppProduct_PurchaseType_PurchaseTypeUnspecified = InAppProduct_PurchaseType "purchaseTypeUnspecified"
-
--- | The default product type - one time purchase.
-pattern InAppProduct_PurchaseType_ManagedUser :: InAppProduct_PurchaseType
-pattern InAppProduct_PurchaseType_ManagedUser = InAppProduct_PurchaseType "managedUser"
-
--- | In-app product with a recurring period.
-pattern InAppProduct_PurchaseType_Subscription :: InAppProduct_PurchaseType
-pattern InAppProduct_PurchaseType_Subscription = InAppProduct_PurchaseType "subscription"
-
-{-# COMPLETE
-  InAppProduct_PurchaseType_PurchaseTypeUnspecified,
-  InAppProduct_PurchaseType_ManagedUser,
-  InAppProduct_PurchaseType_Subscription,
-  InAppProduct_PurchaseType
-  #-}
-
--- | The status of the product, e.g. whether it\'s active.
-newtype InAppProduct_Status = InAppProduct_Status {fromInAppProduct_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unspecified status.
-pattern InAppProduct_Status_StatusUnspecified :: InAppProduct_Status
-pattern InAppProduct_Status_StatusUnspecified = InAppProduct_Status "statusUnspecified"
-
--- | The product is published and active in the store.
-pattern InAppProduct_Status_Active :: InAppProduct_Status
-pattern InAppProduct_Status_Active = InAppProduct_Status "active"
-
--- | The product is not published and therefore inactive in the store.
-pattern InAppProduct_Status_Inactive :: InAppProduct_Status
-pattern InAppProduct_Status_Inactive = InAppProduct_Status "inactive"
-
-{-# COMPLETE
-  InAppProduct_Status_StatusUnspecified,
-  InAppProduct_Status_Active,
-  InAppProduct_Status_Inactive,
-  InAppProduct_Status
-  #-}
-
--- | Digital content or service classification for products distributed to users in the European Economic Area (EEA). The withdrawal regime under EEA consumer laws depends on this classification. Refer to the <https://support.google.com/googleplay/android-developer/answer/10463498 Help Center article> for more information.
-newtype ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType {fromManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED :: ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED"
-
--- |
-pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT :: ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_DIGITAL_CONTENT"
-
--- |
-pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE :: ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_SERVICE"
-
-{-# COMPLETE
-  ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
-  ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
-  ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
-  ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-  #-}
-
--- | Tax tier to specify reduced tax rate. Developers who sell digital news, magazines, newspapers, books, or audiobooks in various regions may be eligible for reduced tax rates. <https://support.google.com/googleplay/android-developer/answer/10463498 Learn more>.
-newtype RegionalTaxRateInfo_TaxTier = RegionalTaxRateInfo_TaxTier {fromRegionalTaxRateInfo_TaxTier :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED :: RegionalTaxRateInfo_TaxTier
-pattern RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED = RegionalTaxRateInfo_TaxTier "TAX_TIER_UNSPECIFIED"
-
--- |
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_BOOKS_1 :: RegionalTaxRateInfo_TaxTier
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_BOOKS_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_BOOKS_1"
-
--- |
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_1 :: RegionalTaxRateInfo_TaxTier
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_NEWS_1"
-
--- |
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2 :: RegionalTaxRateInfo_TaxTier
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2 = RegionalTaxRateInfo_TaxTier "TAX_TIER_NEWS_2"
-
--- |
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1 :: RegionalTaxRateInfo_TaxTier
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_MUSIC_OR_AUDIO_1"
-
--- |
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 :: RegionalTaxRateInfo_TaxTier
-pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_LIVE_OR_BROADCAST_1"
-
-{-# COMPLETE
-  RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED,
-  RegionalTaxRateInfo_TaxTier_TAX_TIER_BOOKS_1,
-  RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_1,
-  RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2,
-  RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1,
-  RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1,
-  RegionalTaxRateInfo_TaxTier
-  #-}
-
--- | Digital content or service classification for products distributed to users in the European Economic Area (EEA). The withdrawal regime under EEA consumer laws depends on this classification. Refer to the <https://support.google.com/googleplay/android-developer/answer/10463498 Help Center article> for more information.
-newtype SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType {fromSubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED :: SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED"
-
--- |
-pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT :: SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_DIGITAL_CONTENT"
-
--- |
-pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE :: SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_SERVICE"
-
-{-# COMPLETE
-  SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
-  SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
-  SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
-  SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-  #-}
-
--- | The status of the release.
-newtype TrackRelease_Status = TrackRelease_Status {fromTrackRelease_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unspecified status.
-pattern TrackRelease_Status_StatusUnspecified :: TrackRelease_Status
-pattern TrackRelease_Status_StatusUnspecified = TrackRelease_Status "statusUnspecified"
-
--- | The release\'s APKs are not being served to users.
-pattern TrackRelease_Status_Draft :: TrackRelease_Status
-pattern TrackRelease_Status_Draft = TrackRelease_Status "draft"
-
--- | The release\'s APKs are being served to a fraction of users, determined by \'user_fraction\'.
-pattern TrackRelease_Status_InProgress :: TrackRelease_Status
-pattern TrackRelease_Status_InProgress = TrackRelease_Status "inProgress"
-
--- | The release\'s APKs will no longer be served to users. Users who already have these APKs are unaffected.
-pattern TrackRelease_Status_Halted :: TrackRelease_Status
-pattern TrackRelease_Status_Halted = TrackRelease_Status "halted"
-
--- | The release will have no further changes. Its APKs are being served to all users, unless they are eligible to APKs of a more recent release.
-pattern TrackRelease_Status_Completed :: TrackRelease_Status
-pattern TrackRelease_Status_Completed = TrackRelease_Status "completed"
-
-{-# COMPLETE
-  TrackRelease_Status_StatusUnspecified,
-  TrackRelease_Status_Draft,
-  TrackRelease_Status_InProgress,
-  TrackRelease_Status_Halted,
-  TrackRelease_Status_Completed,
-  TrackRelease_Status
-  #-}
-
--- | Output only. The state of the user\'s access to the Play Console.
-newtype User_AccessState = User_AccessState {fromUser_AccessState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unknown or unspecified access state.
-pattern User_AccessState_ACCESSSTATEUNSPECIFIED :: User_AccessState
-pattern User_AccessState_ACCESSSTATEUNSPECIFIED = User_AccessState "ACCESS_STATE_UNSPECIFIED"
-
--- | User is invited but has not yet accepted the invitation.
-pattern User_AccessState_Invited :: User_AccessState
-pattern User_AccessState_Invited = User_AccessState "INVITED"
-
--- | Invitation has expired.
-pattern User_AccessState_INVITATIONEXPIRED :: User_AccessState
-pattern User_AccessState_INVITATIONEXPIRED = User_AccessState "INVITATION_EXPIRED"
-
--- | User has accepted an invitation and has access to the Play Console.
-pattern User_AccessState_ACCESSGRANTED :: User_AccessState
-pattern User_AccessState_ACCESSGRANTED = User_AccessState "ACCESS_GRANTED"
-
--- | Account access has expired.
-pattern User_AccessState_ACCESSEXPIRED :: User_AccessState
-pattern User_AccessState_ACCESSEXPIRED = User_AccessState "ACCESS_EXPIRED"
-
-{-# COMPLETE
-  User_AccessState_ACCESSSTATEUNSPECIFIED,
-  User_AccessState_Invited,
-  User_AccessState_INVITATIONEXPIRED,
-  User_AccessState_ACCESSGRANTED,
-  User_AccessState_ACCESSEXPIRED,
-  User_AccessState
-  #-}
-
-newtype User_DeveloperAccountPermissionsItem = User_DeveloperAccountPermissionsItem {fromUser_DeveloperAccountPermissionsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unknown or unspecified permission.
-pattern User_DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED = User_DeveloperAccountPermissionsItem "DEVELOPER_LEVEL_PERMISSION_UNSPECIFIED"
-
--- | View app information and download bulk reports (read-only).
-pattern User_DeveloperAccountPermissionsItem_CANSEEALLAPPS :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANSEEALLAPPS = User_DeveloperAccountPermissionsItem "CAN_SEE_ALL_APPS"
-
--- | View financial data, orders, and cancellation survey responses.
-pattern User_DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL = User_DeveloperAccountPermissionsItem "CAN_VIEW_FINANCIAL_DATA_GLOBAL"
-
--- | Admin (all permissions).
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_MANAGE_PERMISSIONS_GLOBAL"
-
--- | Edit Play Games Services projects.
-pattern User_DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL = User_DeveloperAccountPermissionsItem "CAN_EDIT_GAMES_GLOBAL"
-
--- | Publish Play Games Services projects.
-pattern User_DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL = User_DeveloperAccountPermissionsItem "CAN_PUBLISH_GAMES_GLOBAL"
-
--- | Reply to reviews.
-pattern User_DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_REPLY_TO_REVIEWS_GLOBAL"
-
--- | Release to production, exclude devices, and use app signing by Google Play.
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_MANAGE_PUBLIC_APKS_GLOBAL"
-
--- | Release to testing tracks.
-pattern User_DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_MANAGE_TRACK_APKS_GLOBAL"
-
--- | Manage testing tracks and edit tester lists.
-pattern User_DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_MANAGE_TRACK_USERS_GLOBAL"
-
--- | Manage store presence.
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL = User_DeveloperAccountPermissionsItem "CAN_MANAGE_PUBLIC_LISTING_GLOBAL"
-
--- | Create, edit, and delete draft apps.
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_MANAGE_DRAFT_APPS_GLOBAL"
-
--- | Create and publish private apps to your organization.
-pattern User_DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_CREATE_MANAGED_PLAY_APPS_GLOBAL"
-
--- | Choose whether apps are public, or only available to your organization.
-pattern User_DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL = User_DeveloperAccountPermissionsItem "CAN_CHANGE_MANAGED_PLAY_SETTING_GLOBAL"
-
--- | Manage orders and subscriptions.
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL :: User_DeveloperAccountPermissionsItem
-pattern User_DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL = User_DeveloperAccountPermissionsItem "CAN_MANAGE_ORDERS_GLOBAL"
-
-{-# COMPLETE
-  User_DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED,
-  User_DeveloperAccountPermissionsItem_CANSEEALLAPPS,
-  User_DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL,
-  User_DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL,
-  User_DeveloperAccountPermissionsItem
-  #-}
+  DeobfuscationFile'SymbolType_DeobfuscationFileTypeUnspecified,
+  DeobfuscationFile'SymbolType_Proguard,
+  DeobfuscationFile'SymbolType_NativeCode,
+  DeobfuscationFile'SymbolType #-}
 
 -- | The type of the deobfuscation file.
-newtype EditsDeobfuscationfilesUploadDeobfuscationFileType = EditsDeobfuscationfilesUploadDeobfuscationFileType {fromEditsDeobfuscationfilesUploadDeobfuscationFileType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsDeobfuscationfilesUploadDeobfuscationFileType = EditsDeobfuscationfilesUploadDeobfuscationFileType { fromEditsDeobfuscationfilesUploadDeobfuscationFileType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified deobfuscation file type.
 pattern EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified :: EditsDeobfuscationfilesUploadDeobfuscationFileType
@@ -749,21 +302,20 @@ pattern EditsDeobfuscationfilesUploadDeobfuscationFileType_NativeCode = EditsDeo
   EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified,
   EditsDeobfuscationfilesUploadDeobfuscationFileType_Proguard,
   EditsDeobfuscationfilesUploadDeobfuscationFileType_NativeCode,
-  EditsDeobfuscationfilesUploadDeobfuscationFileType
-  #-}
+  EditsDeobfuscationfilesUploadDeobfuscationFileType #-}
 
 -- | The file type of the file configuration which is being read or modified.
-newtype EditsExpansionfilesGetExpansionFileType = EditsExpansionfilesGetExpansionFileType {fromEditsExpansionfilesGetExpansionFileType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsExpansionfilesGetExpansionFileType = EditsExpansionfilesGetExpansionFileType { fromEditsExpansionfilesGetExpansionFileType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesGetExpansionFileType
@@ -781,21 +333,20 @@ pattern EditsExpansionfilesGetExpansionFileType_Patch' = EditsExpansionfilesGetE
   EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesGetExpansionFileType_Main,
   EditsExpansionfilesGetExpansionFileType_Patch',
-  EditsExpansionfilesGetExpansionFileType
-  #-}
+  EditsExpansionfilesGetExpansionFileType #-}
 
 -- | The file type of the expansion file configuration which is being updated.
-newtype EditsExpansionfilesPatchExpansionFileType = EditsExpansionfilesPatchExpansionFileType {fromEditsExpansionfilesPatchExpansionFileType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsExpansionfilesPatchExpansionFileType = EditsExpansionfilesPatchExpansionFileType { fromEditsExpansionfilesPatchExpansionFileType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesPatchExpansionFileType
@@ -813,21 +364,20 @@ pattern EditsExpansionfilesPatchExpansionFileType_Patch' = EditsExpansionfilesPa
   EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesPatchExpansionFileType_Main,
   EditsExpansionfilesPatchExpansionFileType_Patch',
-  EditsExpansionfilesPatchExpansionFileType
-  #-}
+  EditsExpansionfilesPatchExpansionFileType #-}
 
 -- | The file type of the file configuration which is being read or modified.
-newtype EditsExpansionfilesUpdateExpansionFileType = EditsExpansionfilesUpdateExpansionFileType {fromEditsExpansionfilesUpdateExpansionFileType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsExpansionfilesUpdateExpansionFileType = EditsExpansionfilesUpdateExpansionFileType { fromEditsExpansionfilesUpdateExpansionFileType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesUpdateExpansionFileType
@@ -845,21 +395,20 @@ pattern EditsExpansionfilesUpdateExpansionFileType_Patch' = EditsExpansionfilesU
   EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesUpdateExpansionFileType_Main,
   EditsExpansionfilesUpdateExpansionFileType_Patch',
-  EditsExpansionfilesUpdateExpansionFileType
-  #-}
+  EditsExpansionfilesUpdateExpansionFileType #-}
 
 -- | The file type of the expansion file configuration which is being updated.
-newtype EditsExpansionfilesUploadExpansionFileType = EditsExpansionfilesUploadExpansionFileType {fromEditsExpansionfilesUploadExpansionFileType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsExpansionfilesUploadExpansionFileType = EditsExpansionfilesUploadExpansionFileType { fromEditsExpansionfilesUploadExpansionFileType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesUploadExpansionFileType
@@ -877,21 +426,20 @@ pattern EditsExpansionfilesUploadExpansionFileType_Patch' = EditsExpansionfilesU
   EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesUploadExpansionFileType_Main,
   EditsExpansionfilesUploadExpansionFileType_Patch',
-  EditsExpansionfilesUploadExpansionFileType
-  #-}
+  EditsExpansionfilesUploadExpansionFileType #-}
 
 -- | Type of the Image.
-newtype EditsImagesDeleteImageType = EditsImagesDeleteImageType {fromEditsImagesDeleteImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsImagesDeleteImageType = EditsImagesDeleteImageType { fromEditsImagesDeleteImageType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesDeleteImageType_AppImageTypeUnspecified :: EditsImagesDeleteImageType
@@ -939,21 +487,20 @@ pattern EditsImagesDeleteImageType_TvBanner = EditsImagesDeleteImageType "tvBann
   EditsImagesDeleteImageType_Icon,
   EditsImagesDeleteImageType_FeatureGraphic,
   EditsImagesDeleteImageType_TvBanner,
-  EditsImagesDeleteImageType
-  #-}
+  EditsImagesDeleteImageType #-}
 
 -- | Type of the Image. Providing an image type that refers to no images is a no-op.
-newtype EditsImagesDeleteallImageType = EditsImagesDeleteallImageType {fromEditsImagesDeleteallImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsImagesDeleteallImageType = EditsImagesDeleteallImageType { fromEditsImagesDeleteallImageType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesDeleteallImageType_AppImageTypeUnspecified :: EditsImagesDeleteallImageType
@@ -1001,21 +548,20 @@ pattern EditsImagesDeleteallImageType_TvBanner = EditsImagesDeleteallImageType "
   EditsImagesDeleteallImageType_Icon,
   EditsImagesDeleteallImageType_FeatureGraphic,
   EditsImagesDeleteallImageType_TvBanner,
-  EditsImagesDeleteallImageType
-  #-}
+  EditsImagesDeleteallImageType #-}
 
 -- | Type of the Image. Providing an image type that refers to no images will return an empty response.
-newtype EditsImagesListImageType = EditsImagesListImageType {fromEditsImagesListImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsImagesListImageType = EditsImagesListImageType { fromEditsImagesListImageType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesListImageType_AppImageTypeUnspecified :: EditsImagesListImageType
@@ -1063,21 +609,20 @@ pattern EditsImagesListImageType_TvBanner = EditsImagesListImageType "tvBanner"
   EditsImagesListImageType_Icon,
   EditsImagesListImageType_FeatureGraphic,
   EditsImagesListImageType_TvBanner,
-  EditsImagesListImageType
-  #-}
+  EditsImagesListImageType #-}
 
 -- | Type of the Image.
-newtype EditsImagesUploadImageType = EditsImagesUploadImageType {fromEditsImagesUploadImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EditsImagesUploadImageType = EditsImagesUploadImageType { fromEditsImagesUploadImageType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesUploadImageType_AppImageTypeUnspecified :: EditsImagesUploadImageType
@@ -1125,5 +670,442 @@ pattern EditsImagesUploadImageType_TvBanner = EditsImagesUploadImageType "tvBann
   EditsImagesUploadImageType_Icon,
   EditsImagesUploadImageType_FeatureGraphic,
   EditsImagesUploadImageType_TvBanner,
-  EditsImagesUploadImageType
-  #-}
+  EditsImagesUploadImageType #-}
+
+newtype Grant'AppLevelPermissionsItem = Grant'AppLevelPermissionsItem { fromGrant'AppLevelPermissionsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unknown or unspecified permission.
+pattern Grant'AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED = Grant'AppLevelPermissionsItem "APP_LEVEL_PERMISSION_UNSPECIFIED"
+
+-- | View app information (read-only).
+pattern Grant'AppLevelPermissionsItem_CANACCESSAPP :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANACCESSAPP = Grant'AppLevelPermissionsItem "CAN_ACCESS_APP"
+
+-- | View financial data.
+pattern Grant'AppLevelPermissionsItem_CANVIEWFINANCIALDATA :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANVIEWFINANCIALDATA = Grant'AppLevelPermissionsItem "CAN_VIEW_FINANCIAL_DATA"
+
+-- | Admin (all permissions).
+pattern Grant'AppLevelPermissionsItem_CANMANAGEPERMISSIONS :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANMANAGEPERMISSIONS = Grant'AppLevelPermissionsItem "CAN_MANAGE_PERMISSIONS"
+
+-- | Reply to reviews.
+pattern Grant'AppLevelPermissionsItem_CANREPLYTOREVIEWS :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANREPLYTOREVIEWS = Grant'AppLevelPermissionsItem "CAN_REPLY_TO_REVIEWS"
+
+-- | Release to production, exclude devices, and use app signing by Google Play.
+pattern Grant'AppLevelPermissionsItem_CANMANAGEPUBLICAPKS :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANMANAGEPUBLICAPKS = Grant'AppLevelPermissionsItem "CAN_MANAGE_PUBLIC_APKS"
+
+-- | Release to testing tracks.
+pattern Grant'AppLevelPermissionsItem_CANMANAGETRACKAPKS :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANMANAGETRACKAPKS = Grant'AppLevelPermissionsItem "CAN_MANAGE_TRACK_APKS"
+
+-- | Manage testing tracks and edit tester lists.
+pattern Grant'AppLevelPermissionsItem_CANMANAGETRACKUSERS :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANMANAGETRACKUSERS = Grant'AppLevelPermissionsItem "CAN_MANAGE_TRACK_USERS"
+
+-- | Manage store presence.
+pattern Grant'AppLevelPermissionsItem_CANMANAGEPUBLICLISTING :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANMANAGEPUBLICLISTING = Grant'AppLevelPermissionsItem "CAN_MANAGE_PUBLIC_LISTING"
+
+-- | Edit and delete draft apps.
+pattern Grant'AppLevelPermissionsItem_CANMANAGEDRAFTAPPS :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANMANAGEDRAFTAPPS = Grant'AppLevelPermissionsItem "CAN_MANAGE_DRAFT_APPS"
+
+-- | Manage orders and subscriptions.
+pattern Grant'AppLevelPermissionsItem_CANMANAGEORDERS :: Grant'AppLevelPermissionsItem
+pattern Grant'AppLevelPermissionsItem_CANMANAGEORDERS = Grant'AppLevelPermissionsItem "CAN_MANAGE_ORDERS"
+
+{-# COMPLETE
+  Grant'AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED,
+  Grant'AppLevelPermissionsItem_CANACCESSAPP,
+  Grant'AppLevelPermissionsItem_CANVIEWFINANCIALDATA,
+  Grant'AppLevelPermissionsItem_CANMANAGEPERMISSIONS,
+  Grant'AppLevelPermissionsItem_CANREPLYTOREVIEWS,
+  Grant'AppLevelPermissionsItem_CANMANAGEPUBLICAPKS,
+  Grant'AppLevelPermissionsItem_CANMANAGETRACKAPKS,
+  Grant'AppLevelPermissionsItem_CANMANAGETRACKUSERS,
+  Grant'AppLevelPermissionsItem_CANMANAGEPUBLICLISTING,
+  Grant'AppLevelPermissionsItem_CANMANAGEDRAFTAPPS,
+  Grant'AppLevelPermissionsItem_CANMANAGEORDERS,
+  Grant'AppLevelPermissionsItem #-}
+
+-- | The type of the product, e.g. a recurring subscription.
+newtype InAppProduct'PurchaseType = InAppProduct'PurchaseType { fromInAppProduct'PurchaseType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified purchase type.
+pattern InAppProduct'PurchaseType_PurchaseTypeUnspecified :: InAppProduct'PurchaseType
+pattern InAppProduct'PurchaseType_PurchaseTypeUnspecified = InAppProduct'PurchaseType "purchaseTypeUnspecified"
+
+-- | The default product type - one time purchase.
+pattern InAppProduct'PurchaseType_ManagedUser :: InAppProduct'PurchaseType
+pattern InAppProduct'PurchaseType_ManagedUser = InAppProduct'PurchaseType "managedUser"
+
+-- | In-app product with a recurring period.
+pattern InAppProduct'PurchaseType_Subscription :: InAppProduct'PurchaseType
+pattern InAppProduct'PurchaseType_Subscription = InAppProduct'PurchaseType "subscription"
+
+{-# COMPLETE
+  InAppProduct'PurchaseType_PurchaseTypeUnspecified,
+  InAppProduct'PurchaseType_ManagedUser,
+  InAppProduct'PurchaseType_Subscription,
+  InAppProduct'PurchaseType #-}
+
+-- | The status of the product, e.g. whether it\'s active.
+newtype InAppProduct'Status = InAppProduct'Status { fromInAppProduct'Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified status.
+pattern InAppProduct'Status_StatusUnspecified :: InAppProduct'Status
+pattern InAppProduct'Status_StatusUnspecified = InAppProduct'Status "statusUnspecified"
+
+-- | The product is published and active in the store.
+pattern InAppProduct'Status_Active :: InAppProduct'Status
+pattern InAppProduct'Status_Active = InAppProduct'Status "active"
+
+-- | The product is not published and therefore inactive in the store.
+pattern InAppProduct'Status_Inactive :: InAppProduct'Status
+pattern InAppProduct'Status_Inactive = InAppProduct'Status "inactive"
+
+{-# COMPLETE
+  InAppProduct'Status_StatusUnspecified,
+  InAppProduct'Status_Active,
+  InAppProduct'Status_Inactive,
+  InAppProduct'Status #-}
+
+-- | Digital content or service classification for products distributed to users in the European Economic Area (EEA). The withdrawal regime under EEA consumer laws depends on this classification. Refer to the <https://support.google.com/googleplay/android-developer/answer/10463498 Help Center article> for more information.
+newtype ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType = ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType { fromManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | 
+pattern ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED :: ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType
+pattern ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED = ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType "WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED"
+
+-- | 
+pattern ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT :: ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType
+pattern ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT = ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType "WITHDRAWAL_RIGHT_DIGITAL_CONTENT"
+
+-- | 
+pattern ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE :: ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType
+pattern ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE = ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType "WITHDRAWAL_RIGHT_SERVICE"
+
+{-# COMPLETE
+  ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
+  ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
+  ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
+  ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType #-}
+
+-- | Tax tier to specify reduced tax rate. Developers who sell digital news, magazines, newspapers, books, or audiobooks in various regions may be eligible for reduced tax rates. <https://support.google.com/googleplay/android-developer/answer/10463498 Learn more>.
+newtype RegionalTaxRateInfo'TaxTier = RegionalTaxRateInfo'TaxTier { fromRegionalTaxRateInfo'TaxTier :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | 
+pattern RegionalTaxRateInfo'TaxTier_TAXTIERUNSPECIFIED :: RegionalTaxRateInfo'TaxTier
+pattern RegionalTaxRateInfo'TaxTier_TAXTIERUNSPECIFIED = RegionalTaxRateInfo'TaxTier "TAX_TIER_UNSPECIFIED"
+
+-- | 
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_BOOKS_1 :: RegionalTaxRateInfo'TaxTier
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_BOOKS_1 = RegionalTaxRateInfo'TaxTier "TAX_TIER_BOOKS_1"
+
+-- | 
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_1 :: RegionalTaxRateInfo'TaxTier
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_1 = RegionalTaxRateInfo'TaxTier "TAX_TIER_NEWS_1"
+
+-- | 
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_2 :: RegionalTaxRateInfo'TaxTier
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_2 = RegionalTaxRateInfo'TaxTier "TAX_TIER_NEWS_2"
+
+-- | 
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1 :: RegionalTaxRateInfo'TaxTier
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1 = RegionalTaxRateInfo'TaxTier "TAX_TIER_MUSIC_OR_AUDIO_1"
+
+-- | 
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 :: RegionalTaxRateInfo'TaxTier
+pattern RegionalTaxRateInfo'TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 = RegionalTaxRateInfo'TaxTier "TAX_TIER_LIVE_OR_BROADCAST_1"
+
+{-# COMPLETE
+  RegionalTaxRateInfo'TaxTier_TAXTIERUNSPECIFIED,
+  RegionalTaxRateInfo'TaxTier_TAX_TIER_BOOKS_1,
+  RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_1,
+  RegionalTaxRateInfo'TaxTier_TAX_TIER_NEWS_2,
+  RegionalTaxRateInfo'TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1,
+  RegionalTaxRateInfo'TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1,
+  RegionalTaxRateInfo'TaxTier #-}
+
+-- | Digital content or service classification for products distributed to users in the European Economic Area (EEA). The withdrawal regime under EEA consumer laws depends on this classification. Refer to the <https://support.google.com/googleplay/android-developer/answer/10463498 Help Center article> for more information.
+newtype SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType = SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType { fromSubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | 
+pattern SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED :: SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType
+pattern SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED = SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType "WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED"
+
+-- | 
+pattern SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT :: SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType
+pattern SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT = SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType "WITHDRAWAL_RIGHT_DIGITAL_CONTENT"
+
+-- | 
+pattern SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE :: SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType
+pattern SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE = SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType "WITHDRAWAL_RIGHT_SERVICE"
+
+{-# COMPLETE
+  SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
+  SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
+  SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
+  SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType #-}
+
+-- | The status of the release.
+newtype TrackRelease'Status = TrackRelease'Status { fromTrackRelease'Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified status.
+pattern TrackRelease'Status_StatusUnspecified :: TrackRelease'Status
+pattern TrackRelease'Status_StatusUnspecified = TrackRelease'Status "statusUnspecified"
+
+-- | The release\'s APKs are not being served to users.
+pattern TrackRelease'Status_Draft :: TrackRelease'Status
+pattern TrackRelease'Status_Draft = TrackRelease'Status "draft"
+
+-- | The release\'s APKs are being served to a fraction of users, determined by \'user_fraction\'.
+pattern TrackRelease'Status_InProgress :: TrackRelease'Status
+pattern TrackRelease'Status_InProgress = TrackRelease'Status "inProgress"
+
+-- | The release\'s APKs will no longer be served to users. Users who already have these APKs are unaffected.
+pattern TrackRelease'Status_Halted :: TrackRelease'Status
+pattern TrackRelease'Status_Halted = TrackRelease'Status "halted"
+
+-- | The release will have no further changes. Its APKs are being served to all users, unless they are eligible to APKs of a more recent release.
+pattern TrackRelease'Status_Completed :: TrackRelease'Status
+pattern TrackRelease'Status_Completed = TrackRelease'Status "completed"
+
+{-# COMPLETE
+  TrackRelease'Status_StatusUnspecified,
+  TrackRelease'Status_Draft,
+  TrackRelease'Status_InProgress,
+  TrackRelease'Status_Halted,
+  TrackRelease'Status_Completed,
+  TrackRelease'Status #-}
+
+-- | Output only. The state of the user\'s access to the Play Console.
+newtype User'AccessState = User'AccessState { fromUser'AccessState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unknown or unspecified access state.
+pattern User'AccessState_ACCESSSTATEUNSPECIFIED :: User'AccessState
+pattern User'AccessState_ACCESSSTATEUNSPECIFIED = User'AccessState "ACCESS_STATE_UNSPECIFIED"
+
+-- | User is invited but has not yet accepted the invitation.
+pattern User'AccessState_Invited :: User'AccessState
+pattern User'AccessState_Invited = User'AccessState "INVITED"
+
+-- | Invitation has expired.
+pattern User'AccessState_INVITATIONEXPIRED :: User'AccessState
+pattern User'AccessState_INVITATIONEXPIRED = User'AccessState "INVITATION_EXPIRED"
+
+-- | User has accepted an invitation and has access to the Play Console.
+pattern User'AccessState_ACCESSGRANTED :: User'AccessState
+pattern User'AccessState_ACCESSGRANTED = User'AccessState "ACCESS_GRANTED"
+
+-- | Account access has expired.
+pattern User'AccessState_ACCESSEXPIRED :: User'AccessState
+pattern User'AccessState_ACCESSEXPIRED = User'AccessState "ACCESS_EXPIRED"
+
+{-# COMPLETE
+  User'AccessState_ACCESSSTATEUNSPECIFIED,
+  User'AccessState_Invited,
+  User'AccessState_INVITATIONEXPIRED,
+  User'AccessState_ACCESSGRANTED,
+  User'AccessState_ACCESSEXPIRED,
+  User'AccessState #-}
+
+newtype User'DeveloperAccountPermissionsItem = User'DeveloperAccountPermissionsItem { fromUser'DeveloperAccountPermissionsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unknown or unspecified permission.
+pattern User'DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED = User'DeveloperAccountPermissionsItem "DEVELOPER_LEVEL_PERMISSION_UNSPECIFIED"
+
+-- | View app information and download bulk reports (read-only).
+pattern User'DeveloperAccountPermissionsItem_CANSEEALLAPPS :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANSEEALLAPPS = User'DeveloperAccountPermissionsItem "CAN_SEE_ALL_APPS"
+
+-- | View financial data, orders, and cancellation survey responses.
+pattern User'DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL = User'DeveloperAccountPermissionsItem "CAN_VIEW_FINANCIAL_DATA_GLOBAL"
+
+-- | Admin (all permissions).
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_MANAGE_PERMISSIONS_GLOBAL"
+
+-- | Edit Play Games Services projects.
+pattern User'DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL = User'DeveloperAccountPermissionsItem "CAN_EDIT_GAMES_GLOBAL"
+
+-- | Publish Play Games Services projects.
+pattern User'DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL = User'DeveloperAccountPermissionsItem "CAN_PUBLISH_GAMES_GLOBAL"
+
+-- | Reply to reviews.
+pattern User'DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_REPLY_TO_REVIEWS_GLOBAL"
+
+-- | Release to production, exclude devices, and use app signing by Google Play.
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_MANAGE_PUBLIC_APKS_GLOBAL"
+
+-- | Release to testing tracks.
+pattern User'DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_MANAGE_TRACK_APKS_GLOBAL"
+
+-- | Manage testing tracks and edit tester lists.
+pattern User'DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_MANAGE_TRACK_USERS_GLOBAL"
+
+-- | Manage store presence.
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL = User'DeveloperAccountPermissionsItem "CAN_MANAGE_PUBLIC_LISTING_GLOBAL"
+
+-- | Create, edit, and delete draft apps.
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_MANAGE_DRAFT_APPS_GLOBAL"
+
+-- | Create and publish private apps to your organization.
+pattern User'DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_CREATE_MANAGED_PLAY_APPS_GLOBAL"
+
+-- | Choose whether apps are public, or only available to your organization.
+pattern User'DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL = User'DeveloperAccountPermissionsItem "CAN_CHANGE_MANAGED_PLAY_SETTING_GLOBAL"
+
+-- | Manage orders and subscriptions.
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL :: User'DeveloperAccountPermissionsItem
+pattern User'DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL = User'DeveloperAccountPermissionsItem "CAN_MANAGE_ORDERS_GLOBAL"
+
+{-# COMPLETE
+  User'DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED,
+  User'DeveloperAccountPermissionsItem_CANSEEALLAPPS,
+  User'DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANEDITGAMESGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANPUBLISHGAMESGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANREPLYTOREVIEWSGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICAPKSGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANMANAGETRACKAPKSGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANMANAGETRACKUSERSGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANMANAGEPUBLICLISTINGGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANMANAGEDRAFTAPPSGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL,
+  User'DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL,
+  User'DeveloperAccountPermissionsItem #-}
+
+-- | V1 error format.
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | v1 error format.
+pattern Xgafv_1 :: Xgafv
+pattern Xgafv_1 = Xgafv "1"
+
+-- | v2 error format.
+pattern Xgafv_2 :: Xgafv
+pattern Xgafv_2 = Xgafv "2"
+
+{-# COMPLETE
+  Xgafv_1,
+  Xgafv_2,
+  Xgafv #-}

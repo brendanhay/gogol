@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher.Reviews.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,106 +6,63 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a single review.
---
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.reviews.get@.
 module Gogol.AndroidPublisher.Reviews.Get
-  ( -- * Resource
-    AndroidPublisherReviewsGetResource,
+    (
+    -- * Constructing a Request
+    AndroidPublisherReviewsGet (..),
+#ifdef NOFIELDSELECTORS
+    MkAndroidPublisherReviewsGet (..),
+#endif
+    mkAndroidPublisherReviewsGet,
+    ) where
 
-    -- ** Constructing a Request
-    newAndroidPublisherReviewsGet,
-    AndroidPublisherReviewsGet,
-  )
-where
-
-import Gogol.AndroidPublisher.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidPublisher.Types
 
--- | A resource alias for @androidpublisher.reviews.get@ method which the
--- 'AndroidPublisherReviewsGet' request conforms to.
-type AndroidPublisherReviewsGetResource =
-  "androidpublisher"
-    Core.:> "v3"
-    Core.:> "applications"
-    Core.:> Core.Capture "packageName" Core.Text
-    Core.:> "reviews"
-    Core.:> Core.Capture "reviewId" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "translationLanguage" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Review
 
 -- | Gets a single review.
 --
--- /See:/ 'newAndroidPublisherReviewsGet' smart constructor.
+-- Construct a default value using the 'MkAndroidPublisherReviewsGet' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data AndroidPublisherReviewsGet = AndroidPublisherReviewsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Package name of the app.
-    packageName :: Core.Text,
-    -- | Unique identifier for a review.
-    reviewId :: Core.Text,
-    -- | Language localization code.
-    translationLanguage :: (Core.Maybe Core.Text),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AndroidPublisherReviewsGet' with the minimum fields required to make a request.
-newAndroidPublisherReviewsGet ::
-  -- |  Package name of the app. See 'packageName'.
-  Core.Text ->
-  -- |  Unique identifier for a review. See 'reviewId'.
-  Core.Text ->
-  AndroidPublisherReviewsGet
-newAndroidPublisherReviewsGet packageName reviewId =
-  AndroidPublisherReviewsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      reviewId = reviewId,
-      translationLanguage = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    {
+      -- | Package name of the app.
+      packageName :: Core.Text
+      -- | Unique identifier for a review.
+    , reviewId :: Core.Text
+      -- | Language localization code.
+    , translationLanguage :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherReviewsGet
-  where
-  type Rs AndroidPublisherReviewsGet = Review
-  type
-    Scopes AndroidPublisherReviewsGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
-  requestClient AndroidPublisherReviewsGet {..} =
-    go
-      packageName
-      reviewId
-      xgafv
-      accessToken
-      callback
-      translationLanguage
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      androidPublisherService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidPublisherReviewsGetResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'AndroidPublisherReviewsGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkAndroidPublisherReviewsGet :: Core.Text -> Core.Text -> AndroidPublisherReviewsGet
+pattern MkAndroidPublisherReviewsGet{packageName, reviewId} =
+        AndroidPublisherReviewsGet{packageName = packageName, reviewId = reviewId, translationLanguage = Core.Nothing}
+
+{-# DEPRECATED mkAndroidPublisherReviewsGet "Please use MkAndroidPublisherReviewsGet instead" #-}
+#endif
+
+-- | Create 'AndroidPublisherReviewsGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkAndroidPublisherReviewsGet :: Core.Text -> Core.Text -> AndroidPublisherReviewsGet
+mkAndroidPublisherReviewsGet packageName reviewId
+  = AndroidPublisherReviewsGet{packageName = packageName, reviewId = reviewId, translationLanguage = Core.Nothing}
+instance Core.GoogleRequest AndroidPublisherReviewsGet where
+        type Core.Scopes AndroidPublisherReviewsGet = '[Androidpublisher'FullControl]
+        type Core.Config AndroidPublisherReviewsGet = AndroidPublisherService
+        type Core.Response AndroidPublisherReviewsGet = Review
+        toRequest Core.Service{serviceRequest, serviceParams = AndroidPublisherParams{..}} AndroidPublisherReviewsGet{..}
+          = serviceRequest{Core.method = "GET",
+                           Core.path =
+                             Core.toRequestPath
+                               ["/androidpublisher/v3/applications/", Core.toPathBuilder packageName, "/reviews/", Core.toPathBuilder reviewId],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("$.xgafv",) Core.. Core.toQueryParam Core.<$> xgafv, ("access_token",) Core.. Core.toQueryParam Core.<$> accessToken,
+                                  ("callback",) Core.. Core.toQueryParam Core.<$> callback, ("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser,
+                                  ("translationLanguage",) Core.. Core.toQueryParam Core.<$> translationLanguage, Core.Just ("alt", "json")]}

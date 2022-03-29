@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Notifications.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,93 +6,67 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- View a notification configuration.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.notifications.get@.
 module Gogol.Storage.Notifications.Get
-  ( -- * Resource
-    StorageNotificationsGetResource,
-
-    -- ** Constructing a Request
-    newStorageNotificationsGet,
-    StorageNotificationsGet,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageNotificationsGet (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageNotificationsGet (..),
+#endif
+    mkStorageNotificationsGet,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.notifications.get@ method which the
--- 'StorageNotificationsGet' request conforms to.
-type StorageNotificationsGetResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "notificationConfigs"
-    Core.:> Core.Capture "notification" Core.Text
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Notification
 
 -- | View a notification configuration.
 --
--- /See:/ 'newStorageNotificationsGet' smart constructor.
+-- Construct a default value using the 'MkStorageNotificationsGet' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageNotificationsGet = StorageNotificationsGet
-  { -- | The parent bucket of the notification.
-    bucket :: Core.Text,
-    -- | Notification ID
-    notification :: Core.Text,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageNotificationsGet' with the minimum fields required to make a request.
-newStorageNotificationsGet ::
-  -- |  The parent bucket of the notification. See 'bucket'.
-  Core.Text ->
-  -- |  Notification ID See 'notification'.
-  Core.Text ->
-  StorageNotificationsGet
-newStorageNotificationsGet bucket notification =
-  StorageNotificationsGet
-    { bucket = bucket,
-      notification = notification,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | The parent bucket of the notification.
+      bucket :: Core.Text
+      -- | Notification ID.
+    , notification :: Core.Text
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageNotificationsGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageNotificationsGet :: Core.Text -> Core.Text -> StorageNotificationsGet
+pattern MkStorageNotificationsGet{bucket, notification} =
+        StorageNotificationsGet{bucket = bucket, notification = notification, provisionalUserProject = Core.Nothing,
+                                userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageNotificationsGet "Please use MkStorageNotificationsGet instead" #-}
+#endif
+
+-- | Create 'StorageNotificationsGet' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageNotificationsGet :: Core.Text -> Core.Text -> StorageNotificationsGet
+mkStorageNotificationsGet bucket notification
+  = StorageNotificationsGet{bucket = bucket, notification = notification, provisionalUserProject = Core.Nothing,
+                            userProject = Core.Nothing}
 instance Core.GoogleRequest StorageNotificationsGet where
-  type Rs StorageNotificationsGet = Notification
-  type
-    Scopes StorageNotificationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
-       ]
-  requestClient StorageNotificationsGet {..} =
-    go
-      bucket
-      notification
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageNotificationsGetResource
-          )
-          Core.mempty
+        type Core.Scopes StorageNotificationsGet =
+             '[CloudPlatform'FullControl, CloudPlatform'ReadOnly, Devstorage'FullControl, Devstorage'ReadOnly, Devstorage'ReadWrite]
+        type Core.Config StorageNotificationsGet = StorageService
+        type Core.Response StorageNotificationsGet = Notification
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageNotificationsGet{..}
+          = serviceRequest{Core.method = "GET",
+                           Core.path =
+                             Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/notificationConfigs/", Core.toPathBuilder notification],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")]}

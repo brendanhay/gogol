@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Tracks.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,116 +6,46 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches a track.
---
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.tracks.patch@.
 module Gogol.AndroidPublisher.Edits.Tracks.Patch
-  ( -- * Resource
-    AndroidPublisherEditsTracksPatchResource,
+    (
+    -- * Constructing a Request
+    AndroidPublisherEditsTracksPatch (..),
+    ) where
 
-    -- ** Constructing a Request
-    newAndroidPublisherEditsTracksPatch,
-    AndroidPublisherEditsTracksPatch,
-  )
-where
-
-import Gogol.AndroidPublisher.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidPublisher.Types
 
--- | A resource alias for @androidpublisher.edits.tracks.patch@ method which the
--- 'AndroidPublisherEditsTracksPatch' request conforms to.
-type AndroidPublisherEditsTracksPatchResource =
-  "androidpublisher"
-    Core.:> "v3"
-    Core.:> "applications"
-    Core.:> Core.Capture "packageName" Core.Text
-    Core.:> "edits"
-    Core.:> Core.Capture "editId" Core.Text
-    Core.:> "tracks"
-    Core.:> Core.Capture "track" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Track
-    Core.:> Core.Patch '[Core.JSON] Track
 
 -- | Patches a track.
---
--- /See:/ 'newAndroidPublisherEditsTracksPatch' smart constructor.
 data AndroidPublisherEditsTracksPatch = AndroidPublisherEditsTracksPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Identifier of the edit.
-    editId :: Core.Text,
-    -- | Package name of the app.
-    packageName :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Track,
-    -- | Identifier of the track.
-    track :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AndroidPublisherEditsTracksPatch' with the minimum fields required to make a request.
-newAndroidPublisherEditsTracksPatch ::
-  -- |  Identifier of the edit. See 'editId'.
-  Core.Text ->
-  -- |  Package name of the app. See 'packageName'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Track ->
-  -- |  Identifier of the track. See 'track'.
-  Core.Text ->
-  AndroidPublisherEditsTracksPatch
-newAndroidPublisherEditsTracksPatch editId packageName payload track =
-  AndroidPublisherEditsTracksPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      editId = editId,
-      packageName = packageName,
-      payload = payload,
-      track = track,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    {
+      -- | Identifier of the edit.
+      editId :: Core.Text
+      -- | Multipart request metadata.
+    , meta :: Track
+      -- | Package name of the app.
+    , packageName :: Core.Text
+      -- | Identifier of the track.
+    , track :: Core.Text
     }
-
-instance
-  Core.GoogleRequest
-    AndroidPublisherEditsTracksPatch
-  where
-  type Rs AndroidPublisherEditsTracksPatch = Track
-  type
-    Scopes AndroidPublisherEditsTracksPatch =
-      '["https://www.googleapis.com/auth/androidpublisher"]
-  requestClient AndroidPublisherEditsTracksPatch {..} =
-    go
-      packageName
-      editId
-      track
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      androidPublisherService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidPublisherEditsTracksPatchResource
-          )
-          Core.mempty
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
+instance Core.GoogleRequest AndroidPublisherEditsTracksPatch where
+        type Core.Scopes AndroidPublisherEditsTracksPatch = '[Androidpublisher'FullControl]
+        type Core.Config AndroidPublisherEditsTracksPatch = AndroidPublisherService
+        type Core.Response AndroidPublisherEditsTracksPatch = Track
+        toRequest Core.Service{serviceRequest, serviceParams = AndroidPublisherParams{..}} AndroidPublisherEditsTracksPatch{..}
+          = serviceRequest{Core.method = "PATCH",
+                           Core.path =
+                             Core.toRequestPath
+                               ["/androidpublisher/v3/applications/", Core.toPathBuilder packageName, "/edits/", Core.toPathBuilder editId, "/tracks/",
+                                Core.toPathBuilder track],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("$.xgafv",) Core.. Core.toQueryParam Core.<$> xgafv, ("access_token",) Core.. Core.toQueryParam Core.<$> accessToken,
+                                  ("callback",) Core.. Core.toQueryParam Core.<$> callback, ("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken,
+                                  Core.Just ("prettyPrint", Core.toQueryParam prettyPrint), ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

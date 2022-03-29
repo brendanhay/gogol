@@ -1,23 +1,4 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
+{-# LANGUAGE CPP #-}
 -- |
 -- Module      : Gogol.AndroidPublisher.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -25,420 +6,682 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AndroidPublisher.Types
-  ( -- * Configuration
-    androidPublisherService,
+    (
+    -- * Configuration
+    AndroidPublisherService,
+    mkAndroidPublisherService,
 
-    -- * OAuth Scopes
-    androidPublisherScope,
+    -- ** Global Request Parameters
+    AndroidPublisherParams (..),
 
-    -- * Types
-
-    -- ** Xgafv
-    Xgafv (..),
+    -- ** OAuth Scopes
+    Androidpublisher'FullControl,
+  
+    -- * Product Types
 
     -- ** Apk
     Apk (..),
-    newApk,
+#ifdef NOFIELDSELECTORS
+    MkApk (..),
+#endif
+    mkApk,
 
     -- ** ApkBinary
     ApkBinary (..),
-    newApkBinary,
+#ifdef NOFIELDSELECTORS
+    MkApkBinary (..),
+#endif
+    mkApkBinary,
 
     -- ** ApksAddExternallyHostedRequest
     ApksAddExternallyHostedRequest (..),
-    newApksAddExternallyHostedRequest,
+#ifdef NOFIELDSELECTORS
+    MkApksAddExternallyHostedRequest (..),
+#endif
+    mkApksAddExternallyHostedRequest,
 
     -- ** ApksAddExternallyHostedResponse
     ApksAddExternallyHostedResponse (..),
-    newApksAddExternallyHostedResponse,
+#ifdef NOFIELDSELECTORS
+    MkApksAddExternallyHostedResponse (..),
+#endif
+    mkApksAddExternallyHostedResponse,
 
     -- ** ApksListResponse
     ApksListResponse (..),
-    newApksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkApksListResponse (..),
+#endif
+    mkApksListResponse,
 
     -- ** AppDetails
     AppDetails (..),
-    newAppDetails,
+#ifdef NOFIELDSELECTORS
+    MkAppDetails (..),
+#endif
+    mkAppDetails,
 
     -- ** AppEdit
     AppEdit (..),
-    newAppEdit,
+#ifdef NOFIELDSELECTORS
+    MkAppEdit (..),
+#endif
+    mkAppEdit,
 
     -- ** Bundle
     Bundle (..),
-    newBundle,
+#ifdef NOFIELDSELECTORS
+    MkBundle (..),
+#endif
+    mkBundle,
 
     -- ** BundlesListResponse
     BundlesListResponse (..),
-    newBundlesListResponse,
+#ifdef NOFIELDSELECTORS
+    MkBundlesListResponse (..),
+#endif
+    mkBundlesListResponse,
 
     -- ** Comment
     Comment (..),
-    newComment,
+#ifdef NOFIELDSELECTORS
+    MkComment (..),
+#endif
+    mkComment,
 
     -- ** ConvertRegionPricesRequest
     ConvertRegionPricesRequest (..),
-    newConvertRegionPricesRequest,
+#ifdef NOFIELDSELECTORS
+    MkConvertRegionPricesRequest (..),
+#endif
+    mkConvertRegionPricesRequest,
 
     -- ** ConvertRegionPricesResponse
     ConvertRegionPricesResponse (..),
-    newConvertRegionPricesResponse,
+#ifdef NOFIELDSELECTORS
+    MkConvertRegionPricesResponse (..),
+#endif
+    mkConvertRegionPricesResponse,
 
-    -- ** ConvertRegionPricesResponse_ConvertedRegionPrices
-    ConvertRegionPricesResponse_ConvertedRegionPrices (..),
-    newConvertRegionPricesResponse_ConvertedRegionPrices,
+    -- ** ConvertRegionPricesResponse'ConvertedRegionPrices
+    ConvertRegionPricesResponse'ConvertedRegionPrices (..),
 
     -- ** ConvertedOtherRegionsPrice
     ConvertedOtherRegionsPrice (..),
-    newConvertedOtherRegionsPrice,
+#ifdef NOFIELDSELECTORS
+    MkConvertedOtherRegionsPrice (..),
+#endif
+    mkConvertedOtherRegionsPrice,
 
     -- ** ConvertedRegionPrice
     ConvertedRegionPrice (..),
-    newConvertedRegionPrice,
+#ifdef NOFIELDSELECTORS
+    MkConvertedRegionPrice (..),
+#endif
+    mkConvertedRegionPrice,
 
     -- ** CountryTargeting
     CountryTargeting (..),
-    newCountryTargeting,
+#ifdef NOFIELDSELECTORS
+    MkCountryTargeting (..),
+#endif
+    mkCountryTargeting,
 
     -- ** DeobfuscationFile
     DeobfuscationFile (..),
-    newDeobfuscationFile,
-
-    -- ** DeobfuscationFile_SymbolType
-    DeobfuscationFile_SymbolType (..),
+#ifdef NOFIELDSELECTORS
+    MkDeobfuscationFile (..),
+#endif
+    mkDeobfuscationFile,
 
     -- ** DeobfuscationFilesUploadResponse
     DeobfuscationFilesUploadResponse (..),
-    newDeobfuscationFilesUploadResponse,
+#ifdef NOFIELDSELECTORS
+    MkDeobfuscationFilesUploadResponse (..),
+#endif
+    mkDeobfuscationFilesUploadResponse,
 
     -- ** DeveloperComment
     DeveloperComment (..),
-    newDeveloperComment,
+#ifdef NOFIELDSELECTORS
+    MkDeveloperComment (..),
+#endif
+    mkDeveloperComment,
 
     -- ** DeviceMetadata
     DeviceMetadata (..),
-    newDeviceMetadata,
+#ifdef NOFIELDSELECTORS
+    MkDeviceMetadata (..),
+#endif
+    mkDeviceMetadata,
 
     -- ** DeviceSpec
     DeviceSpec (..),
-    newDeviceSpec,
+#ifdef NOFIELDSELECTORS
+    MkDeviceSpec (..),
+#endif
+    mkDeviceSpec,
 
     -- ** ExpansionFile
     ExpansionFile (..),
-    newExpansionFile,
+#ifdef NOFIELDSELECTORS
+    MkExpansionFile (..),
+#endif
+    mkExpansionFile,
 
     -- ** ExpansionFilesUploadResponse
     ExpansionFilesUploadResponse (..),
-    newExpansionFilesUploadResponse,
+#ifdef NOFIELDSELECTORS
+    MkExpansionFilesUploadResponse (..),
+#endif
+    mkExpansionFilesUploadResponse,
 
     -- ** ExternallyHostedApk
     ExternallyHostedApk (..),
-    newExternallyHostedApk,
+#ifdef NOFIELDSELECTORS
+    MkExternallyHostedApk (..),
+#endif
+    mkExternallyHostedApk,
 
     -- ** GeneratedApksListResponse
     GeneratedApksListResponse (..),
-    newGeneratedApksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedApksListResponse (..),
+#endif
+    mkGeneratedApksListResponse,
 
     -- ** GeneratedApksPerSigningKey
     GeneratedApksPerSigningKey (..),
-    newGeneratedApksPerSigningKey,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedApksPerSigningKey (..),
+#endif
+    mkGeneratedApksPerSigningKey,
 
     -- ** GeneratedAssetPackSlice
     GeneratedAssetPackSlice (..),
-    newGeneratedAssetPackSlice,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedAssetPackSlice (..),
+#endif
+    mkGeneratedAssetPackSlice,
 
     -- ** GeneratedSplitApk
     GeneratedSplitApk (..),
-    newGeneratedSplitApk,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedSplitApk (..),
+#endif
+    mkGeneratedSplitApk,
 
     -- ** GeneratedStandaloneApk
     GeneratedStandaloneApk (..),
-    newGeneratedStandaloneApk,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedStandaloneApk (..),
+#endif
+    mkGeneratedStandaloneApk,
 
     -- ** GeneratedUniversalApk
     GeneratedUniversalApk (..),
-    newGeneratedUniversalApk,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedUniversalApk (..),
+#endif
+    mkGeneratedUniversalApk,
 
     -- ** Grant
     Grant (..),
-    newGrant,
-
-    -- ** Grant_AppLevelPermissionsItem
-    Grant_AppLevelPermissionsItem (..),
+#ifdef NOFIELDSELECTORS
+    MkGrant (..),
+#endif
+    mkGrant,
 
     -- ** Image
     Image (..),
-    newImage,
+#ifdef NOFIELDSELECTORS
+    MkImage (..),
+#endif
+    mkImage,
 
     -- ** ImagesDeleteAllResponse
     ImagesDeleteAllResponse (..),
-    newImagesDeleteAllResponse,
+#ifdef NOFIELDSELECTORS
+    MkImagesDeleteAllResponse (..),
+#endif
+    mkImagesDeleteAllResponse,
 
     -- ** ImagesListResponse
     ImagesListResponse (..),
-    newImagesListResponse,
+#ifdef NOFIELDSELECTORS
+    MkImagesListResponse (..),
+#endif
+    mkImagesListResponse,
 
     -- ** ImagesUploadResponse
     ImagesUploadResponse (..),
-    newImagesUploadResponse,
+#ifdef NOFIELDSELECTORS
+    MkImagesUploadResponse (..),
+#endif
+    mkImagesUploadResponse,
 
     -- ** InAppProduct
     InAppProduct (..),
-    newInAppProduct,
+#ifdef NOFIELDSELECTORS
+    MkInAppProduct (..),
+#endif
+    mkInAppProduct,
 
-    -- ** InAppProduct_Listings
-    InAppProduct_Listings (..),
-    newInAppProduct_Listings,
+    -- ** InAppProduct'Listings
+    InAppProduct'Listings (..),
 
-    -- ** InAppProduct_Prices
-    InAppProduct_Prices (..),
-    newInAppProduct_Prices,
-
-    -- ** InAppProduct_PurchaseType
-    InAppProduct_PurchaseType (..),
-
-    -- ** InAppProduct_Status
-    InAppProduct_Status (..),
+    -- ** InAppProduct'Prices
+    InAppProduct'Prices (..),
 
     -- ** InAppProductListing
     InAppProductListing (..),
-    newInAppProductListing,
+#ifdef NOFIELDSELECTORS
+    MkInAppProductListing (..),
+#endif
+    mkInAppProductListing,
 
     -- ** InappproductsListResponse
     InappproductsListResponse (..),
-    newInappproductsListResponse,
+#ifdef NOFIELDSELECTORS
+    MkInappproductsListResponse (..),
+#endif
+    mkInappproductsListResponse,
 
     -- ** InternalAppSharingArtifact
     InternalAppSharingArtifact (..),
-    newInternalAppSharingArtifact,
+#ifdef NOFIELDSELECTORS
+    MkInternalAppSharingArtifact (..),
+#endif
+    mkInternalAppSharingArtifact,
 
     -- ** IntroductoryPriceInfo
     IntroductoryPriceInfo (..),
-    newIntroductoryPriceInfo,
+#ifdef NOFIELDSELECTORS
+    MkIntroductoryPriceInfo (..),
+#endif
+    mkIntroductoryPriceInfo,
 
     -- ** ListUsersResponse
     ListUsersResponse (..),
-    newListUsersResponse,
+#ifdef NOFIELDSELECTORS
+    MkListUsersResponse (..),
+#endif
+    mkListUsersResponse,
 
     -- ** Listing
     Listing (..),
-    newListing,
+#ifdef NOFIELDSELECTORS
+    MkListing (..),
+#endif
+    mkListing,
 
     -- ** ListingsListResponse
     ListingsListResponse (..),
-    newListingsListResponse,
+#ifdef NOFIELDSELECTORS
+    MkListingsListResponse (..),
+#endif
+    mkListingsListResponse,
 
     -- ** LocalizedText
     LocalizedText (..),
-    newLocalizedText,
+#ifdef NOFIELDSELECTORS
+    MkLocalizedText (..),
+#endif
+    mkLocalizedText,
 
     -- ** ManagedProductTaxAndComplianceSettings
     ManagedProductTaxAndComplianceSettings (..),
-    newManagedProductTaxAndComplianceSettings,
+#ifdef NOFIELDSELECTORS
+    MkManagedProductTaxAndComplianceSettings (..),
+#endif
+    mkManagedProductTaxAndComplianceSettings,
 
-    -- ** ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-    ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType (..),
-
-    -- ** ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode
-    ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
-    newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+    -- ** ManagedProductTaxAndComplianceSettings'TaxRateInfoByRegionCode
+    ManagedProductTaxAndComplianceSettings'TaxRateInfoByRegionCode (..),
 
     -- ** Money
     Money (..),
-    newMoney,
+#ifdef NOFIELDSELECTORS
+    MkMoney (..),
+#endif
+    mkMoney,
 
     -- ** PageInfo
     PageInfo (..),
-    newPageInfo,
+#ifdef NOFIELDSELECTORS
+    MkPageInfo (..),
+#endif
+    mkPageInfo,
 
     -- ** Price
     Price (..),
-    newPrice,
+#ifdef NOFIELDSELECTORS
+    MkPrice (..),
+#endif
+    mkPrice,
 
     -- ** ProductPurchase
     ProductPurchase (..),
-    newProductPurchase,
+#ifdef NOFIELDSELECTORS
+    MkProductPurchase (..),
+#endif
+    mkProductPurchase,
 
     -- ** ProductPurchasesAcknowledgeRequest
     ProductPurchasesAcknowledgeRequest (..),
-    newProductPurchasesAcknowledgeRequest,
+#ifdef NOFIELDSELECTORS
+    MkProductPurchasesAcknowledgeRequest (..),
+#endif
+    mkProductPurchasesAcknowledgeRequest,
 
     -- ** RegionalTaxRateInfo
     RegionalTaxRateInfo (..),
-    newRegionalTaxRateInfo,
-
-    -- ** RegionalTaxRateInfo_TaxTier
-    RegionalTaxRateInfo_TaxTier (..),
+#ifdef NOFIELDSELECTORS
+    MkRegionalTaxRateInfo (..),
+#endif
+    mkRegionalTaxRateInfo,
 
     -- ** Review
     Review (..),
-    newReview,
+#ifdef NOFIELDSELECTORS
+    MkReview (..),
+#endif
+    mkReview,
 
     -- ** ReviewReplyResult
     ReviewReplyResult (..),
-    newReviewReplyResult,
+#ifdef NOFIELDSELECTORS
+    MkReviewReplyResult (..),
+#endif
+    mkReviewReplyResult,
 
     -- ** ReviewsListResponse
     ReviewsListResponse (..),
-    newReviewsListResponse,
+#ifdef NOFIELDSELECTORS
+    MkReviewsListResponse (..),
+#endif
+    mkReviewsListResponse,
 
     -- ** ReviewsReplyRequest
     ReviewsReplyRequest (..),
-    newReviewsReplyRequest,
+#ifdef NOFIELDSELECTORS
+    MkReviewsReplyRequest (..),
+#endif
+    mkReviewsReplyRequest,
 
     -- ** ReviewsReplyResponse
     ReviewsReplyResponse (..),
-    newReviewsReplyResponse,
+#ifdef NOFIELDSELECTORS
+    MkReviewsReplyResponse (..),
+#endif
+    mkReviewsReplyResponse,
 
     -- ** SubscriptionCancelSurveyResult
     SubscriptionCancelSurveyResult (..),
-    newSubscriptionCancelSurveyResult,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionCancelSurveyResult (..),
+#endif
+    mkSubscriptionCancelSurveyResult,
 
     -- ** SubscriptionDeferralInfo
     SubscriptionDeferralInfo (..),
-    newSubscriptionDeferralInfo,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionDeferralInfo (..),
+#endif
+    mkSubscriptionDeferralInfo,
 
     -- ** SubscriptionPriceChange
     SubscriptionPriceChange (..),
-    newSubscriptionPriceChange,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPriceChange (..),
+#endif
+    mkSubscriptionPriceChange,
 
     -- ** SubscriptionPurchase
     SubscriptionPurchase (..),
-    newSubscriptionPurchase,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchase (..),
+#endif
+    mkSubscriptionPurchase,
 
     -- ** SubscriptionPurchasesAcknowledgeRequest
     SubscriptionPurchasesAcknowledgeRequest (..),
-    newSubscriptionPurchasesAcknowledgeRequest,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchasesAcknowledgeRequest (..),
+#endif
+    mkSubscriptionPurchasesAcknowledgeRequest,
 
     -- ** SubscriptionPurchasesDeferRequest
     SubscriptionPurchasesDeferRequest (..),
-    newSubscriptionPurchasesDeferRequest,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchasesDeferRequest (..),
+#endif
+    mkSubscriptionPurchasesDeferRequest,
 
     -- ** SubscriptionPurchasesDeferResponse
     SubscriptionPurchasesDeferResponse (..),
-    newSubscriptionPurchasesDeferResponse,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchasesDeferResponse (..),
+#endif
+    mkSubscriptionPurchasesDeferResponse,
 
     -- ** SubscriptionTaxAndComplianceSettings
     SubscriptionTaxAndComplianceSettings (..),
-    newSubscriptionTaxAndComplianceSettings,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionTaxAndComplianceSettings (..),
+#endif
+    mkSubscriptionTaxAndComplianceSettings,
 
-    -- ** SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-    SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType (..),
-
-    -- ** SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode
-    SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
-    newSubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+    -- ** SubscriptionTaxAndComplianceSettings'TaxRateInfoByRegionCode
+    SubscriptionTaxAndComplianceSettings'TaxRateInfoByRegionCode (..),
 
     -- ** SystemApksListResponse
     SystemApksListResponse (..),
-    newSystemApksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkSystemApksListResponse (..),
+#endif
+    mkSystemApksListResponse,
 
     -- ** Testers
     Testers (..),
-    newTesters,
+#ifdef NOFIELDSELECTORS
+    MkTesters (..),
+#endif
+    mkTesters,
 
     -- ** Timestamp
     Timestamp (..),
-    newTimestamp,
+#ifdef NOFIELDSELECTORS
+    MkTimestamp (..),
+#endif
+    mkTimestamp,
 
     -- ** TokenPagination
     TokenPagination (..),
-    newTokenPagination,
+#ifdef NOFIELDSELECTORS
+    MkTokenPagination (..),
+#endif
+    mkTokenPagination,
 
     -- ** Track
     Track (..),
-    newTrack,
+#ifdef NOFIELDSELECTORS
+    MkTrack (..),
+#endif
+    mkTrack,
 
     -- ** TrackCountryAvailability
     TrackCountryAvailability (..),
-    newTrackCountryAvailability,
+#ifdef NOFIELDSELECTORS
+    MkTrackCountryAvailability (..),
+#endif
+    mkTrackCountryAvailability,
 
     -- ** TrackRelease
     TrackRelease (..),
-    newTrackRelease,
-
-    -- ** TrackRelease_Status
-    TrackRelease_Status (..),
+#ifdef NOFIELDSELECTORS
+    MkTrackRelease (..),
+#endif
+    mkTrackRelease,
 
     -- ** TrackTargetedCountry
     TrackTargetedCountry (..),
-    newTrackTargetedCountry,
+#ifdef NOFIELDSELECTORS
+    MkTrackTargetedCountry (..),
+#endif
+    mkTrackTargetedCountry,
 
     -- ** TracksListResponse
     TracksListResponse (..),
-    newTracksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkTracksListResponse (..),
+#endif
+    mkTracksListResponse,
 
     -- ** User
     User (..),
-    newUser,
-
-    -- ** User_AccessState
-    User_AccessState (..),
-
-    -- ** User_DeveloperAccountPermissionsItem
-    User_DeveloperAccountPermissionsItem (..),
+#ifdef NOFIELDSELECTORS
+    MkUser (..),
+#endif
+    mkUser,
 
     -- ** UserComment
     UserComment (..),
-    newUserComment,
+#ifdef NOFIELDSELECTORS
+    MkUserComment (..),
+#endif
+    mkUserComment,
 
     -- ** UsesPermission
     UsesPermission (..),
-    newUsesPermission,
+#ifdef NOFIELDSELECTORS
+    MkUsesPermission (..),
+#endif
+    mkUsesPermission,
 
     -- ** Variant
     Variant (..),
-    newVariant,
+#ifdef NOFIELDSELECTORS
+    MkVariant (..),
+#endif
+    mkVariant,
 
     -- ** VoidedPurchase
     VoidedPurchase (..),
-    newVoidedPurchase,
+#ifdef NOFIELDSELECTORS
+    MkVoidedPurchase (..),
+#endif
+    mkVoidedPurchase,
 
     -- ** VoidedPurchasesListResponse
     VoidedPurchasesListResponse (..),
-    newVoidedPurchasesListResponse,
+#ifdef NOFIELDSELECTORS
+    MkVoidedPurchasesListResponse (..),
+#endif
+    mkVoidedPurchasesListResponse,
 
+    -- * Enumeration Types
+
+    -- ** DeobfuscationFile'SymbolType
+    DeobfuscationFile'SymbolType (..),
+  
     -- ** EditsDeobfuscationfilesUploadDeobfuscationFileType
     EditsDeobfuscationfilesUploadDeobfuscationFileType (..),
-
+  
     -- ** EditsExpansionfilesGetExpansionFileType
     EditsExpansionfilesGetExpansionFileType (..),
-
+  
     -- ** EditsExpansionfilesPatchExpansionFileType
     EditsExpansionfilesPatchExpansionFileType (..),
-
+  
     -- ** EditsExpansionfilesUpdateExpansionFileType
     EditsExpansionfilesUpdateExpansionFileType (..),
-
+  
     -- ** EditsExpansionfilesUploadExpansionFileType
     EditsExpansionfilesUploadExpansionFileType (..),
-
+  
     -- ** EditsImagesDeleteImageType
     EditsImagesDeleteImageType (..),
-
+  
     -- ** EditsImagesDeleteallImageType
     EditsImagesDeleteallImageType (..),
-
+  
     -- ** EditsImagesListImageType
     EditsImagesListImageType (..),
-
+  
     -- ** EditsImagesUploadImageType
     EditsImagesUploadImageType (..),
-  )
-where
+  
+    -- ** Grant'AppLevelPermissionsItem
+    Grant'AppLevelPermissionsItem (..),
+  
+    -- ** InAppProduct'PurchaseType
+    InAppProduct'PurchaseType (..),
+  
+    -- ** InAppProduct'Status
+    InAppProduct'Status (..),
+  
+    -- ** ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType
+    ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType (..),
+  
+    -- ** RegionalTaxRateInfo'TaxTier
+    RegionalTaxRateInfo'TaxTier (..),
+  
+    -- ** SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType
+    SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType (..),
+  
+    -- ** TrackRelease'Status
+    TrackRelease'Status (..),
+  
+    -- ** User'AccessState
+    User'AccessState (..),
+  
+    -- ** User'DeveloperAccountPermissionsItem
+    User'DeveloperAccountPermissionsItem (..),
+  
+    -- ** Xgafv
+    Xgafv (..),
+                                                                                                                                                                            ) where
 
+import qualified Network.Google.Prelude as Core
 import Gogol.AndroidPublisher.Internal.Product
 import Gogol.AndroidPublisher.Internal.Sum
-import qualified Gogol.Prelude as Core
 
--- | Default request referring to version @v3@ of the Google Play Android Developer API. This contains the host and root path used as a starting point for constructing service requests.
-androidPublisherService :: Core.ServiceConfig
-androidPublisherService =
-  Core.defaultService
-    (Core.ServiceId "androidpublisher:v3")
-    "androidpublisher.googleapis.com"
+-- | View and manage your Google Play Developer account.
+type Androidpublisher'FullControl = "https://www.googleapis.com/auth/androidpublisher"
+-- | Default request configuration for version @v3@ of the Google Play Android Developer API.
+type AndroidPublisherService = Core.Service "androidpublisher:v3" AndroidPublisherParams
+-- | Global query parameters for version @v3@ of the Google Play Android Developer API. These parameters will be added to the query string for every request.
+--
+-- Construct a default value using the 'mkAndroidPublisherService' smart constructor.
+data AndroidPublisherParams = AndroidPublisherParams
+    {
+      -- | V1 error format.
+      xgafv :: Core.Maybe Xgafv
+      -- | OAuth access token.
+    , accessToken :: Core.Maybe Core.Text
+      -- | JSONP.
+    , callback :: Core.Maybe Core.Text
+      -- | Selector specifying which fields to include in a partial response.
+    , fields :: Core.Maybe Core.Text
+      -- | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+    , key :: Core.Maybe Core.Text
+      -- | OAuth 2.0 token for the current user.
+    , oauthToken :: Core.Maybe Core.Text
+      -- | Returns response with indentations and line breaks.
+    , prettyPrint :: Core.Bool
+      -- | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+    , quotaUser :: Core.Maybe Core.Text
+    }
+    deriving stock (Core.Show, Core.Eq, Core.Ord, Core.Generic)
 
--- | View and manage your Google Play Developer account
-androidPublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidPublisherScope = Core.Proxy
+-- | Default configuration referring to version @v3@ of the Google Play Android Developer API. This sets the host and port used as a starting point for constructing service requests.
+mkAndroidPublisherService :: AndroidPublisherService
+mkAndroidPublisherService
+  = Core.Service{Core.serviceRequest =
+                   Core.defaultRequest{Core.secure = Core.True, Core.host = "https://androidpublisher.googleapis.com", Core.port = 443},
+                 Core.serviceParams =
+                   AndroidPublisherParams{xgafv = Core.Nothing, accessToken = Core.Nothing, callback = Core.Nothing, fields = Core.Nothing,
+                                          key = Core.Nothing, oauthToken = Core.Nothing, prettyPrint = Core.False, quotaUser = Core.Nothing}}

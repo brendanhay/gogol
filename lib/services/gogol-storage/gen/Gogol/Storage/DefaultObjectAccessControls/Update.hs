@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.DefaultObjectAccessControls.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,104 +6,70 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a default object ACL entry on the specified bucket.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.defaultObjectAccessControls.update@.
 module Gogol.Storage.DefaultObjectAccessControls.Update
-  ( -- * Resource
-    StorageDefaultObjectAccessControlsUpdateResource,
-
-    -- ** Constructing a Request
-    newStorageDefaultObjectAccessControlsUpdate,
-    StorageDefaultObjectAccessControlsUpdate,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageDefaultObjectAccessControlsUpdate (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageDefaultObjectAccessControlsUpdate (..),
+#endif
+    mkStorageDefaultObjectAccessControlsUpdate,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.defaultObjectAccessControls.update@ method which the
--- 'StorageDefaultObjectAccessControlsUpdate' request conforms to.
-type StorageDefaultObjectAccessControlsUpdateResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "defaultObjectAcl"
-    Core.:> Core.Capture "entity" Core.Text
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ObjectAccessControl
-    Core.:> Core.Put '[Core.JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket.
 --
--- /See:/ 'newStorageDefaultObjectAccessControlsUpdate' smart constructor.
+-- Construct a default value using the 'MkStorageDefaultObjectAccessControlsUpdate' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageDefaultObjectAccessControlsUpdate = StorageDefaultObjectAccessControlsUpdate
-  { -- | Name of a bucket.
-    bucket :: Core.Text,
-    -- | The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
-    entity :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: ObjectAccessControl,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageDefaultObjectAccessControlsUpdate' with the minimum fields required to make a request.
-newStorageDefaultObjectAccessControlsUpdate ::
-  -- |  Name of a bucket. See 'bucket'.
-  Core.Text ->
-  -- |  The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers. See 'entity'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  ObjectAccessControl ->
-  StorageDefaultObjectAccessControlsUpdate
-newStorageDefaultObjectAccessControlsUpdate bucket entity payload =
-  StorageDefaultObjectAccessControlsUpdate
-    { bucket = bucket,
-      entity = entity,
-      payload = payload,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Name of a bucket.
+      bucket :: Core.Text
+      -- | The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
+    , entity :: Core.Text
+      -- | Multipart request metadata.
+    , meta :: ObjectAccessControl
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    StorageDefaultObjectAccessControlsUpdate
-  where
-  type
-    Rs StorageDefaultObjectAccessControlsUpdate =
-      ObjectAccessControl
-  type
-    Scopes StorageDefaultObjectAccessControlsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
-  requestClient
-    StorageDefaultObjectAccessControlsUpdate {..} =
-      go
-        bucket
-        entity
-        provisionalUserProject
-        uploadType
-        userProject
-        (Core.Just Core.AltJSON)
-        payload
-        storageService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  StorageDefaultObjectAccessControlsUpdateResource
-            )
-            Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageDefaultObjectAccessControlsUpdate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageDefaultObjectAccessControlsUpdate ::
+        Core.Text -> Core.Text -> ObjectAccessControl -> StorageDefaultObjectAccessControlsUpdate
+pattern MkStorageDefaultObjectAccessControlsUpdate{bucket, entity, meta} =
+        StorageDefaultObjectAccessControlsUpdate{bucket = bucket, entity = entity, meta = meta, provisionalUserProject = Core.Nothing,
+                                                 userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageDefaultObjectAccessControlsUpdate "Please use MkStorageDefaultObjectAccessControlsUpdate instead" #-}
+#endif
+
+-- | Create 'StorageDefaultObjectAccessControlsUpdate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageDefaultObjectAccessControlsUpdate ::
+                                           Core.Text -> Core.Text -> ObjectAccessControl -> StorageDefaultObjectAccessControlsUpdate
+mkStorageDefaultObjectAccessControlsUpdate bucket entity meta
+  = StorageDefaultObjectAccessControlsUpdate{bucket = bucket, entity = entity, meta = meta, provisionalUserProject = Core.Nothing,
+                                             userProject = Core.Nothing}
+instance Core.GoogleRequest StorageDefaultObjectAccessControlsUpdate where
+        type Core.Scopes StorageDefaultObjectAccessControlsUpdate = '[CloudPlatform'FullControl, Devstorage'FullControl]
+        type Core.Config StorageDefaultObjectAccessControlsUpdate = StorageService
+        type Core.Response StorageDefaultObjectAccessControlsUpdate = ObjectAccessControl
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageDefaultObjectAccessControlsUpdate{..}
+          = serviceRequest{Core.method = "PUT",
+                           Core.path = Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/defaultObjectAcl/", Core.toPathBuilder entity],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

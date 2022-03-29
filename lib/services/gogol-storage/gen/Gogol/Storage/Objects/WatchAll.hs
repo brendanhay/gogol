@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Objects.WatchAll
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,143 +6,94 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Watch for changes on all objects in a bucket.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.watchAll@.
 module Gogol.Storage.Objects.WatchAll
-  ( -- * Resource
-    StorageObjectsWatchAllResource,
-
-    -- ** Constructing a Request
-    newStorageObjectsWatchAll,
-    StorageObjectsWatchAll,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageObjectsWatchAll (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageObjectsWatchAll (..),
+#endif
+    mkStorageObjectsWatchAll,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.objects.watchAll@ method which the
--- 'StorageObjectsWatchAll' request conforms to.
-type StorageObjectsWatchAllResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "o"
-    Core.:> "watch"
-    Core.:> Core.QueryParam "delimiter" Core.Text
-    Core.:> Core.QueryParam "endOffset" Core.Text
-    Core.:> Core.QueryParam "includeTrailingDelimiter" Core.Bool
-    Core.:> Core.QueryParam "maxResults" Core.Word32
-    Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "prefix" Core.Text
-    Core.:> Core.QueryParam
-              "projection"
-              ObjectsWatchAllProjection
-    Core.:> Core.QueryParam
-              "provisionalUserProject"
-              Core.Text
-    Core.:> Core.QueryParam "startOffset" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "versions" Core.Bool
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Channel
-    Core.:> Core.Post '[Core.JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.
 --
--- /See:/ 'newStorageObjectsWatchAll' smart constructor.
+-- Construct a default value using the 'MkStorageObjectsWatchAll' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageObjectsWatchAll = StorageObjectsWatchAll
-  { -- | Name of the bucket in which to look for objects.
-    bucket :: Core.Text,
-    -- | Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.
-    delimiter :: (Core.Maybe Core.Text),
-    -- | Filter results to objects whose names are lexicographically before endOffset. If startOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
-    endOffset :: (Core.Maybe Core.Text),
-    -- | If true, objects that end in exactly one instance of delimiter will have their metadata included in items in addition to prefixes.
-    includeTrailingDelimiter :: (Core.Maybe Core.Bool),
-    -- | Maximum number of items plus prefixes to return in a single page of responses. As duplicate prefixes are omitted, fewer total results may be returned than requested. The service will use this parameter or 1,000 items, whichever is smaller.
-    maxResults :: Core.Word32,
-    -- | A previously-returned page token representing part of the larger set of results to view.
-    pageToken :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Channel,
-    -- | Filter results to objects whose names begin with this prefix.
-    prefix :: (Core.Maybe Core.Text),
-    -- | Set of properties to return. Defaults to noAcl.
-    projection :: (Core.Maybe ObjectsWatchAllProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
-    startOffset :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text),
-    -- | If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.
-    versions :: (Core.Maybe Core.Bool)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageObjectsWatchAll' with the minimum fields required to make a request.
-newStorageObjectsWatchAll ::
-  -- |  Name of the bucket in which to look for objects. See 'bucket'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Channel ->
-  StorageObjectsWatchAll
-newStorageObjectsWatchAll bucket payload =
-  StorageObjectsWatchAll
-    { bucket = bucket,
-      delimiter = Core.Nothing,
-      endOffset = Core.Nothing,
-      includeTrailingDelimiter = Core.Nothing,
-      maxResults = 1000,
-      pageToken = Core.Nothing,
-      payload = payload,
-      prefix = Core.Nothing,
-      projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
-      startOffset = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing,
-      versions = Core.Nothing
+    {
+      -- | Name of the bucket in which to look for objects.
+      bucket :: Core.Text
+      -- | Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.
+    , delimiter :: Core.Maybe Core.Text
+      -- | Filter results to objects whose names are lexicographically before endOffset. If startOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
+    , endOffset :: Core.Maybe Core.Text
+      -- | If true, objects that end in exactly one instance of delimiter will have their metadata included in items in addition to prefixes.
+    , includeTrailingDelimiter :: Core.Maybe Core.Bool
+      -- | Maximum number of items plus prefixes to return in a single page of responses. As duplicate prefixes are omitted, fewer total results may be returned than requested. The service will use this parameter or 1,000 items, whichever is smaller.
+    , maxResults :: Core.Word32
+      -- | Multipart request metadata.
+    , meta :: Channel
+      -- | A previously-returned page token representing part of the larger set of results to view.
+    , pageToken :: Core.Maybe Core.Text
+      -- | Filter results to objects whose names begin with this prefix.
+    , prefix :: Core.Maybe Core.Text
+      -- | 
+    , projection :: Core.Maybe WatchAllProjection
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
+    , startOffset :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
+      -- | If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.
+    , versions :: Core.Maybe Core.Bool
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageObjectsWatchAll' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageObjectsWatchAll :: Core.Text -> Channel -> StorageObjectsWatchAll
+pattern MkStorageObjectsWatchAll{bucket, meta} =
+        StorageObjectsWatchAll{bucket = bucket, delimiter = Core.Nothing, endOffset = Core.Nothing,
+                               includeTrailingDelimiter = Core.Nothing, maxResults = 1000, meta = meta, pageToken = Core.Nothing, prefix = Core.Nothing,
+                               projection = Core.Nothing, provisionalUserProject = Core.Nothing, startOffset = Core.Nothing, userProject = Core.Nothing,
+                               versions = Core.Nothing}
+
+{-# DEPRECATED mkStorageObjectsWatchAll "Please use MkStorageObjectsWatchAll instead" #-}
+#endif
+
+-- | Create 'StorageObjectsWatchAll' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageObjectsWatchAll :: Core.Text -> Channel -> StorageObjectsWatchAll
+mkStorageObjectsWatchAll bucket meta
+  = StorageObjectsWatchAll{bucket = bucket, delimiter = Core.Nothing, endOffset = Core.Nothing,
+                           includeTrailingDelimiter = Core.Nothing, maxResults = 1000, meta = meta, pageToken = Core.Nothing, prefix = Core.Nothing,
+                           projection = Core.Nothing, provisionalUserProject = Core.Nothing, startOffset = Core.Nothing, userProject = Core.Nothing,
+                           versions = Core.Nothing}
 instance Core.GoogleRequest StorageObjectsWatchAll where
-  type Rs StorageObjectsWatchAll = Channel
-  type
-    Scopes StorageObjectsWatchAll =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
-       ]
-  requestClient StorageObjectsWatchAll {..} =
-    go
-      bucket
-      delimiter
-      endOffset
-      includeTrailingDelimiter
-      (Core.Just maxResults)
-      pageToken
-      prefix
-      projection
-      provisionalUserProject
-      startOffset
-      uploadType
-      userProject
-      versions
-      (Core.Just Core.AltJSON)
-      payload
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageObjectsWatchAllResource
-          )
-          Core.mempty
+        type Core.Scopes StorageObjectsWatchAll =
+             '[CloudPlatform'FullControl, CloudPlatform'ReadOnly, Devstorage'FullControl, Devstorage'ReadOnly, Devstorage'ReadWrite]
+        type Core.Config StorageObjectsWatchAll = StorageService
+        type Core.Response StorageObjectsWatchAll = Channel
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageObjectsWatchAll{..}
+          = serviceRequest{Core.method = "POST", Core.path = Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/o/watch"],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("delimiter",) Core.. Core.toQueryParam Core.<$> delimiter, ("endOffset",) Core.. Core.toQueryParam Core.<$> endOffset,
+                                  ("fields",) Core.. Core.toQueryParam Core.<$> fields,
+                                  ("includeTrailingDelimiter",) Core.. Core.toQueryParam Core.<$> includeTrailingDelimiter,
+                                  ("key",) Core.. Core.toQueryParam Core.<$> key, Core.Just ("maxResults", Core.toQueryParam maxResults),
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, ("pageToken",) Core.. Core.toQueryParam Core.<$> pageToken,
+                                  ("prefix",) Core.. Core.toQueryParam Core.<$> prefix, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("projection",) Core.. Core.toQueryParam Core.<$> projection,
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("startOffset",) Core.. Core.toQueryParam Core.<$> startOffset,
+                                  ("userProject",) Core.. Core.toQueryParam Core.<$> userProject, ("versions",) Core.. Core.toQueryParam Core.<$> versions,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}

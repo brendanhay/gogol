@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.Projects.HmacKeys.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,88 +6,60 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new HMAC key for the specified service account.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.projects.hmacKeys.create@.
 module Gogol.Storage.Projects.HmacKeys.Create
-  ( -- * Resource
-    StorageProjectsHmacKeysCreateResource,
-
-    -- ** Constructing a Request
-    newStorageProjectsHmacKeysCreate,
-    StorageProjectsHmacKeysCreate,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageProjectsHmacKeysCreate (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageProjectsHmacKeysCreate (..),
+#endif
+    mkStorageProjectsHmacKeysCreate,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.projects.hmacKeys.create@ method which the
--- 'StorageProjectsHmacKeysCreate' request conforms to.
-type StorageProjectsHmacKeysCreateResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "projectId" Core.Text
-    Core.:> "hmacKeys"
-    Core.:> Core.QueryParam "serviceAccountEmail" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post '[Core.JSON] HmacKey
 
 -- | Creates a new HMAC key for the specified service account.
 --
--- /See:/ 'newStorageProjectsHmacKeysCreate' smart constructor.
+-- Construct a default value using the 'MkStorageProjectsHmacKeysCreate' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageProjectsHmacKeysCreate = StorageProjectsHmacKeysCreate
-  { -- | Project ID owning the service account.
-    projectId :: Core.Text,
-    -- | Email address of the service account.
-    serviceAccountEmail :: Core.Text,
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageProjectsHmacKeysCreate' with the minimum fields required to make a request.
-newStorageProjectsHmacKeysCreate ::
-  -- |  Project ID owning the service account. See 'projectId'.
-  Core.Text ->
-  -- |  Email address of the service account. See 'serviceAccountEmail'.
-  Core.Text ->
-  StorageProjectsHmacKeysCreate
-newStorageProjectsHmacKeysCreate projectId serviceAccountEmail =
-  StorageProjectsHmacKeysCreate
-    { projectId = projectId,
-      serviceAccountEmail = serviceAccountEmail,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Project ID owning the service account.
+      projectId :: Core.Text
+      -- | Email address of the service account.
+    , serviceAccountEmail :: Core.Text
+      -- | The project to be billed for this request.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    StorageProjectsHmacKeysCreate
-  where
-  type Rs StorageProjectsHmacKeysCreate = HmacKey
-  type
-    Scopes StorageProjectsHmacKeysCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
-  requestClient StorageProjectsHmacKeysCreate {..} =
-    go
-      projectId
-      (Core.Just serviceAccountEmail)
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageProjectsHmacKeysCreateResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageProjectsHmacKeysCreate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageProjectsHmacKeysCreate :: Core.Text -> Core.Text -> StorageProjectsHmacKeysCreate
+pattern MkStorageProjectsHmacKeysCreate{projectId, serviceAccountEmail} =
+        StorageProjectsHmacKeysCreate{projectId = projectId, serviceAccountEmail = serviceAccountEmail, userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageProjectsHmacKeysCreate "Please use MkStorageProjectsHmacKeysCreate instead" #-}
+#endif
+
+-- | Create 'StorageProjectsHmacKeysCreate' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageProjectsHmacKeysCreate :: Core.Text -> Core.Text -> StorageProjectsHmacKeysCreate
+mkStorageProjectsHmacKeysCreate projectId serviceAccountEmail
+  = StorageProjectsHmacKeysCreate{projectId = projectId, serviceAccountEmail = serviceAccountEmail, userProject = Core.Nothing}
+instance Core.GoogleRequest StorageProjectsHmacKeysCreate where
+        type Core.Scopes StorageProjectsHmacKeysCreate = '[CloudPlatform'FullControl, Devstorage'FullControl]
+        type Core.Config StorageProjectsHmacKeysCreate = StorageService
+        type Core.Response StorageProjectsHmacKeysCreate = HmacKey
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageProjectsHmacKeysCreate{..}
+          = serviceRequest{Core.method = "POST",
+                           Core.path = Core.toRequestPath ["/storage/v1/projects/", Core.toPathBuilder projectId, "/hmacKeys"],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  ("serviceAccountEmail",) Core.. Core.toQueryParam Core.<$> serviceAccountEmail, Core.Just ("alt", "json")]}

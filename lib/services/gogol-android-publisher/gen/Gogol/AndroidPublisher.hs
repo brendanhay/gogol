@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.AndroidPublisher
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -31,734 +11,810 @@
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference>
 module Gogol.AndroidPublisher
   ( -- * Configuration
-    androidPublisherService,
+    AndroidPublisherService,
+    mkAndroidPublisherService,
 
-    -- * OAuth Scopes
-    androidPublisherScope,
+    -- ** Global Request Parameters
+    AndroidPublisherParams (..),
+
+    -- ** OAuth Scopes
+    Androidpublisher'FullControl,
 
     -- * Resources
 
-    -- ** androidpublisher.edits.apks.addexternallyhosted
-    AndroidPublisherEditsApksAddexternallyhostedResource,
-    newAndroidPublisherEditsApksAddexternallyhosted,
-    AndroidPublisherEditsApksAddexternallyhosted,
-
-    -- ** androidpublisher.edits.apks.list
-    AndroidPublisherEditsApksListResource,
-    newAndroidPublisherEditsApksList,
-    AndroidPublisherEditsApksList,
-
-    -- ** androidpublisher.edits.apks.upload
-    AndroidPublisherEditsApksUploadResource,
-    newAndroidPublisherEditsApksUpload,
-    AndroidPublisherEditsApksUpload,
-
-    -- ** androidpublisher.edits.bundles.list
-    AndroidPublisherEditsBundlesListResource,
-    newAndroidPublisherEditsBundlesList,
-    AndroidPublisherEditsBundlesList,
-
-    -- ** androidpublisher.edits.bundles.upload
-    AndroidPublisherEditsBundlesUploadResource,
-    newAndroidPublisherEditsBundlesUpload,
-    AndroidPublisherEditsBundlesUpload,
-
-    -- ** androidpublisher.edits.commit
-    AndroidPublisherEditsCommitResource,
-    newAndroidPublisherEditsCommit,
-    AndroidPublisherEditsCommit,
-
-    -- ** androidpublisher.edits.countryavailability.get
-    AndroidPublisherEditsCountryavailabilityGetResource,
-    newAndroidPublisherEditsCountryavailabilityGet,
-    AndroidPublisherEditsCountryavailabilityGet,
-
-    -- ** androidpublisher.edits.delete
-    AndroidPublisherEditsDeleteResource,
-    newAndroidPublisherEditsDelete,
-    AndroidPublisherEditsDelete,
-
-    -- ** androidpublisher.edits.deobfuscationfiles.upload
-    AndroidPublisherEditsDeobfuscationfilesUploadResource,
-    newAndroidPublisherEditsDeobfuscationfilesUpload,
-    AndroidPublisherEditsDeobfuscationfilesUpload,
-
-    -- ** androidpublisher.edits.details.get
-    AndroidPublisherEditsDetailsGetResource,
-    newAndroidPublisherEditsDetailsGet,
-    AndroidPublisherEditsDetailsGet,
-
-    -- ** androidpublisher.edits.details.patch
-    AndroidPublisherEditsDetailsPatchResource,
-    newAndroidPublisherEditsDetailsPatch,
-    AndroidPublisherEditsDetailsPatch,
-
-    -- ** androidpublisher.edits.details.update
-    AndroidPublisherEditsDetailsUpdateResource,
-    newAndroidPublisherEditsDetailsUpdate,
-    AndroidPublisherEditsDetailsUpdate,
-
-    -- ** androidpublisher.edits.expansionfiles.get
-    AndroidPublisherEditsExpansionfilesGetResource,
-    newAndroidPublisherEditsExpansionfilesGet,
-    AndroidPublisherEditsExpansionfilesGet,
-
-    -- ** androidpublisher.edits.expansionfiles.patch
-    AndroidPublisherEditsExpansionfilesPatchResource,
-    newAndroidPublisherEditsExpansionfilesPatch,
-    AndroidPublisherEditsExpansionfilesPatch,
-
-    -- ** androidpublisher.edits.expansionfiles.update
-    AndroidPublisherEditsExpansionfilesUpdateResource,
-    newAndroidPublisherEditsExpansionfilesUpdate,
-    AndroidPublisherEditsExpansionfilesUpdate,
-
-    -- ** androidpublisher.edits.expansionfiles.upload
-    AndroidPublisherEditsExpansionfilesUploadResource,
-    newAndroidPublisherEditsExpansionfilesUpload,
-    AndroidPublisherEditsExpansionfilesUpload,
-
-    -- ** androidpublisher.edits.get
-    AndroidPublisherEditsGetResource,
-    newAndroidPublisherEditsGet,
-    AndroidPublisherEditsGet,
-
-    -- ** androidpublisher.edits.images.delete
-    AndroidPublisherEditsImagesDeleteResource,
-    newAndroidPublisherEditsImagesDelete,
-    AndroidPublisherEditsImagesDelete,
-
-    -- ** androidpublisher.edits.images.deleteall
-    AndroidPublisherEditsImagesDeleteallResource,
-    newAndroidPublisherEditsImagesDeleteall,
-    AndroidPublisherEditsImagesDeleteall,
-
-    -- ** androidpublisher.edits.images.list
-    AndroidPublisherEditsImagesListResource,
-    newAndroidPublisherEditsImagesList,
-    AndroidPublisherEditsImagesList,
-
-    -- ** androidpublisher.edits.images.upload
-    AndroidPublisherEditsImagesUploadResource,
-    newAndroidPublisherEditsImagesUpload,
-    AndroidPublisherEditsImagesUpload,
-
-    -- ** androidpublisher.edits.insert
-    AndroidPublisherEditsInsertResource,
-    newAndroidPublisherEditsInsert,
-    AndroidPublisherEditsInsert,
-
-    -- ** androidpublisher.edits.listings.delete
-    AndroidPublisherEditsListingsDeleteResource,
-    newAndroidPublisherEditsListingsDelete,
-    AndroidPublisherEditsListingsDelete,
-
-    -- ** androidpublisher.edits.listings.deleteall
-    AndroidPublisherEditsListingsDeleteallResource,
-    newAndroidPublisherEditsListingsDeleteall,
-    AndroidPublisherEditsListingsDeleteall,
-
-    -- ** androidpublisher.edits.listings.get
-    AndroidPublisherEditsListingsGetResource,
-    newAndroidPublisherEditsListingsGet,
-    AndroidPublisherEditsListingsGet,
-
-    -- ** androidpublisher.edits.listings.list
-    AndroidPublisherEditsListingsListResource,
-    newAndroidPublisherEditsListingsList,
-    AndroidPublisherEditsListingsList,
-
-    -- ** androidpublisher.edits.listings.patch
-    AndroidPublisherEditsListingsPatchResource,
-    newAndroidPublisherEditsListingsPatch,
-    AndroidPublisherEditsListingsPatch,
-
-    -- ** androidpublisher.edits.listings.update
-    AndroidPublisherEditsListingsUpdateResource,
-    newAndroidPublisherEditsListingsUpdate,
-    AndroidPublisherEditsListingsUpdate,
-
-    -- ** androidpublisher.edits.testers.get
-    AndroidPublisherEditsTestersGetResource,
-    newAndroidPublisherEditsTestersGet,
-    AndroidPublisherEditsTestersGet,
-
-    -- ** androidpublisher.edits.testers.patch
-    AndroidPublisherEditsTestersPatchResource,
-    newAndroidPublisherEditsTestersPatch,
-    AndroidPublisherEditsTestersPatch,
-
-    -- ** androidpublisher.edits.testers.update
-    AndroidPublisherEditsTestersUpdateResource,
-    newAndroidPublisherEditsTestersUpdate,
-    AndroidPublisherEditsTestersUpdate,
-
-    -- ** androidpublisher.edits.tracks.get
-    AndroidPublisherEditsTracksGetResource,
-    newAndroidPublisherEditsTracksGet,
-    AndroidPublisherEditsTracksGet,
-
-    -- ** androidpublisher.edits.tracks.list
-    AndroidPublisherEditsTracksListResource,
-    newAndroidPublisherEditsTracksList,
-    AndroidPublisherEditsTracksList,
-
-    -- ** androidpublisher.edits.tracks.patch
-    AndroidPublisherEditsTracksPatchResource,
-    newAndroidPublisherEditsTracksPatch,
-    AndroidPublisherEditsTracksPatch,
-
-    -- ** androidpublisher.edits.tracks.update
-    AndroidPublisherEditsTracksUpdateResource,
-    newAndroidPublisherEditsTracksUpdate,
-    AndroidPublisherEditsTracksUpdate,
-
-    -- ** androidpublisher.edits.validate
-    AndroidPublisherEditsValidateResource,
-    newAndroidPublisherEditsValidate,
-    AndroidPublisherEditsValidate,
-
-    -- ** androidpublisher.generatedapks.download
-    AndroidPublisherGeneratedapksDownloadResource,
-    newAndroidPublisherGeneratedapksDownload,
-    AndroidPublisherGeneratedapksDownload,
-
-    -- ** androidpublisher.generatedapks.list
-    AndroidPublisherGeneratedapksListResource,
-    newAndroidPublisherGeneratedapksList,
-    AndroidPublisherGeneratedapksList,
-
-    -- ** androidpublisher.grants.create
-    AndroidPublisherGrantsCreateResource,
-    newAndroidPublisherGrantsCreate,
-    AndroidPublisherGrantsCreate,
-
-    -- ** androidpublisher.grants.delete
-    AndroidPublisherGrantsDeleteResource,
-    newAndroidPublisherGrantsDelete,
-    AndroidPublisherGrantsDelete,
-
-    -- ** androidpublisher.grants.patch
-    AndroidPublisherGrantsPatchResource,
-    newAndroidPublisherGrantsPatch,
-    AndroidPublisherGrantsPatch,
-
-    -- ** androidpublisher.inappproducts.delete
-    AndroidPublisherInappproductsDeleteResource,
-    newAndroidPublisherInappproductsDelete,
-    AndroidPublisherInappproductsDelete,
-
-    -- ** androidpublisher.inappproducts.get
-    AndroidPublisherInappproductsGetResource,
-    newAndroidPublisherInappproductsGet,
-    AndroidPublisherInappproductsGet,
-
-    -- ** androidpublisher.inappproducts.insert
-    AndroidPublisherInappproductsInsertResource,
-    newAndroidPublisherInappproductsInsert,
-    AndroidPublisherInappproductsInsert,
-
-    -- ** androidpublisher.inappproducts.list
-    AndroidPublisherInappproductsListResource,
-    newAndroidPublisherInappproductsList,
-    AndroidPublisherInappproductsList,
-
-    -- ** androidpublisher.inappproducts.patch
-    AndroidPublisherInappproductsPatchResource,
-    newAndroidPublisherInappproductsPatch,
-    AndroidPublisherInappproductsPatch,
-
-    -- ** androidpublisher.inappproducts.update
-    AndroidPublisherInappproductsUpdateResource,
-    newAndroidPublisherInappproductsUpdate,
-    AndroidPublisherInappproductsUpdate,
-
-    -- ** androidpublisher.internalappsharingartifacts.uploadapk
-    AndroidPublisherInternalappsharingartifactsUploadapkResource,
-    newAndroidPublisherInternalappsharingartifactsUploadapk,
-    AndroidPublisherInternalappsharingartifactsUploadapk,
-
-    -- ** androidpublisher.internalappsharingartifacts.uploadbundle
-    AndroidPublisherInternalappsharingartifactsUploadbundleResource,
-    newAndroidPublisherInternalappsharingartifactsUploadbundle,
-    AndroidPublisherInternalappsharingartifactsUploadbundle,
-
-    -- ** androidpublisher.monetization.convertRegionPrices
-    AndroidPublisherMonetizationConvertRegionPricesResource,
-    newAndroidPublisherMonetizationConvertRegionPrices,
-    AndroidPublisherMonetizationConvertRegionPrices,
-
-    -- ** androidpublisher.orders.refund
-    AndroidPublisherOrdersRefundResource,
-    newAndroidPublisherOrdersRefund,
-    AndroidPublisherOrdersRefund,
-
-    -- ** androidpublisher.purchases.products.acknowledge
-    AndroidPublisherPurchasesProductsAcknowledgeResource,
-    newAndroidPublisherPurchasesProductsAcknowledge,
-    AndroidPublisherPurchasesProductsAcknowledge,
-
-    -- ** androidpublisher.purchases.products.get
-    AndroidPublisherPurchasesProductsGetResource,
-    newAndroidPublisherPurchasesProductsGet,
-    AndroidPublisherPurchasesProductsGet,
-
-    -- ** androidpublisher.purchases.subscriptions.acknowledge
-    AndroidPublisherPurchasesSubscriptionsAcknowledgeResource,
-    newAndroidPublisherPurchasesSubscriptionsAcknowledge,
-    AndroidPublisherPurchasesSubscriptionsAcknowledge,
-
-    -- ** androidpublisher.purchases.subscriptions.cancel
-    AndroidPublisherPurchasesSubscriptionsCancelResource,
-    newAndroidPublisherPurchasesSubscriptionsCancel,
-    AndroidPublisherPurchasesSubscriptionsCancel,
-
-    -- ** androidpublisher.purchases.subscriptions.defer
-    AndroidPublisherPurchasesSubscriptionsDeferResource,
-    newAndroidPublisherPurchasesSubscriptionsDefer,
-    AndroidPublisherPurchasesSubscriptionsDefer,
-
-    -- ** androidpublisher.purchases.subscriptions.get
-    AndroidPublisherPurchasesSubscriptionsGetResource,
-    newAndroidPublisherPurchasesSubscriptionsGet,
-    AndroidPublisherPurchasesSubscriptionsGet,
-
-    -- ** androidpublisher.purchases.subscriptions.refund
-    AndroidPublisherPurchasesSubscriptionsRefundResource,
-    newAndroidPublisherPurchasesSubscriptionsRefund,
-    AndroidPublisherPurchasesSubscriptionsRefund,
-
-    -- ** androidpublisher.purchases.subscriptions.revoke
-    AndroidPublisherPurchasesSubscriptionsRevokeResource,
-    newAndroidPublisherPurchasesSubscriptionsRevoke,
-    AndroidPublisherPurchasesSubscriptionsRevoke,
-
-    -- ** androidpublisher.purchases.voidedpurchases.list
-    AndroidPublisherPurchasesVoidedpurchasesListResource,
-    newAndroidPublisherPurchasesVoidedpurchasesList,
-    AndroidPublisherPurchasesVoidedpurchasesList,
-
-    -- ** androidpublisher.reviews.get
-    AndroidPublisherReviewsGetResource,
-    newAndroidPublisherReviewsGet,
-    AndroidPublisherReviewsGet,
-
-    -- ** androidpublisher.reviews.list
-    AndroidPublisherReviewsListResource,
-    newAndroidPublisherReviewsList,
-    AndroidPublisherReviewsList,
-
-    -- ** androidpublisher.reviews.reply
-    AndroidPublisherReviewsReplyResource,
-    newAndroidPublisherReviewsReply,
-    AndroidPublisherReviewsReply,
-
-    -- ** androidpublisher.systemapks.variants.create
-    AndroidPublisherSystemapksVariantsCreateResource,
-    newAndroidPublisherSystemapksVariantsCreate,
-    AndroidPublisherSystemapksVariantsCreate,
-
-    -- ** androidpublisher.systemapks.variants.download
-    AndroidPublisherSystemapksVariantsDownloadResource,
-    newAndroidPublisherSystemapksVariantsDownload,
-    AndroidPublisherSystemapksVariantsDownload,
-
-    -- ** androidpublisher.systemapks.variants.get
-    AndroidPublisherSystemapksVariantsGetResource,
-    newAndroidPublisherSystemapksVariantsGet,
-    AndroidPublisherSystemapksVariantsGet,
-
-    -- ** androidpublisher.systemapks.variants.list
-    AndroidPublisherSystemapksVariantsListResource,
-    newAndroidPublisherSystemapksVariantsList,
-    AndroidPublisherSystemapksVariantsList,
-
-    -- ** androidpublisher.users.create
-    AndroidPublisherUsersCreateResource,
-    newAndroidPublisherUsersCreate,
-    AndroidPublisherUsersCreate,
-
-    -- ** androidpublisher.users.delete
-    AndroidPublisherUsersDeleteResource,
-    newAndroidPublisherUsersDelete,
-    AndroidPublisherUsersDelete,
-
-    -- ** androidpublisher.users.list
-    AndroidPublisherUsersListResource,
-    newAndroidPublisherUsersList,
-    AndroidPublisherUsersList,
-
-    -- ** androidpublisher.users.patch
-    AndroidPublisherUsersPatchResource,
-    newAndroidPublisherUsersPatch,
-    AndroidPublisherUsersPatch,
-
-    -- * Types
-
-    -- ** Xgafv
-    Xgafv (..),
+    -- ** @androidpublisher.edits.apks.addexternallyhosted@
+    AndroidPublisherEditsApksAddexternallyhosted (..),
+
+    -- ** @androidpublisher.edits.apks.list@
+    AndroidPublisherEditsApksList (..),
+
+    -- ** @androidpublisher.edits.apks.upload@
+    AndroidPublisherEditsApksUpload (..),
+
+    -- ** @androidpublisher.edits.bundles.list@
+    AndroidPublisherEditsBundlesList (..),
+
+    -- ** @androidpublisher.edits.bundles.upload@
+    AndroidPublisherEditsBundlesUpload (..),
+    mkAndroidPublisherEditsBundlesUpload,
+
+    -- ** @androidpublisher.edits.commit@
+    AndroidPublisherEditsCommit (..),
+    mkAndroidPublisherEditsCommit,
+
+    -- ** @androidpublisher.edits.countryavailability.get@
+    AndroidPublisherEditsCountryavailabilityGet (..),
+
+    -- ** @androidpublisher.edits.delete@
+    AndroidPublisherEditsDelete (..),
+
+    -- ** @androidpublisher.edits.deobfuscationfiles.upload@
+    AndroidPublisherEditsDeobfuscationfilesUpload (..),
+
+    -- ** @androidpublisher.edits.details.get@
+    AndroidPublisherEditsDetailsGet (..),
+
+    -- ** @androidpublisher.edits.details.patch@
+    AndroidPublisherEditsDetailsPatch (..),
+
+    -- ** @androidpublisher.edits.details.update@
+    AndroidPublisherEditsDetailsUpdate (..),
+
+    -- ** @androidpublisher.edits.expansionfiles.get@
+    AndroidPublisherEditsExpansionfilesGet (..),
+
+    -- ** @androidpublisher.edits.expansionfiles.patch@
+    AndroidPublisherEditsExpansionfilesPatch (..),
+
+    -- ** @androidpublisher.edits.expansionfiles.update@
+    AndroidPublisherEditsExpansionfilesUpdate (..),
+
+    -- ** @androidpublisher.edits.expansionfiles.upload@
+    AndroidPublisherEditsExpansionfilesUpload (..),
+
+    -- ** @androidpublisher.edits.get@
+    AndroidPublisherEditsGet (..),
+
+    -- ** @androidpublisher.edits.images.delete@
+    AndroidPublisherEditsImagesDelete (..),
+
+    -- ** @androidpublisher.edits.images.deleteall@
+    AndroidPublisherEditsImagesDeleteall (..),
+
+    -- ** @androidpublisher.edits.images.list@
+    AndroidPublisherEditsImagesList (..),
+
+    -- ** @androidpublisher.edits.images.upload@
+    AndroidPublisherEditsImagesUpload (..),
+
+    -- ** @androidpublisher.edits.insert@
+    AndroidPublisherEditsInsert (..),
+
+    -- ** @androidpublisher.edits.listings.delete@
+    AndroidPublisherEditsListingsDelete (..),
+
+    -- ** @androidpublisher.edits.listings.deleteall@
+    AndroidPublisherEditsListingsDeleteall (..),
+
+    -- ** @androidpublisher.edits.listings.get@
+    AndroidPublisherEditsListingsGet (..),
+
+    -- ** @androidpublisher.edits.listings.list@
+    AndroidPublisherEditsListingsList (..),
+
+    -- ** @androidpublisher.edits.listings.patch@
+    AndroidPublisherEditsListingsPatch (..),
+
+    -- ** @androidpublisher.edits.listings.update@
+    AndroidPublisherEditsListingsUpdate (..),
+
+    -- ** @androidpublisher.edits.testers.get@
+    AndroidPublisherEditsTestersGet (..),
+
+    -- ** @androidpublisher.edits.testers.patch@
+    AndroidPublisherEditsTestersPatch (..),
+
+    -- ** @androidpublisher.edits.testers.update@
+    AndroidPublisherEditsTestersUpdate (..),
+
+    -- ** @androidpublisher.edits.tracks.get@
+    AndroidPublisherEditsTracksGet (..),
+
+    -- ** @androidpublisher.edits.tracks.list@
+    AndroidPublisherEditsTracksList (..),
+
+    -- ** @androidpublisher.edits.tracks.patch@
+    AndroidPublisherEditsTracksPatch (..),
+
+    -- ** @androidpublisher.edits.tracks.update@
+    AndroidPublisherEditsTracksUpdate (..),
+
+    -- ** @androidpublisher.edits.validate@
+    AndroidPublisherEditsValidate (..),
+
+    -- ** @androidpublisher.generatedapks.download@
+    AndroidPublisherGeneratedapksDownload (..),
+
+    -- ** @androidpublisher.generatedapks.list@
+    AndroidPublisherGeneratedapksList (..),
+
+    -- ** @androidpublisher.grants.create@
+    AndroidPublisherGrantsCreate (..),
+
+    -- ** @androidpublisher.grants.delete@
+    AndroidPublisherGrantsDelete (..),
+
+    -- ** @androidpublisher.grants.patch@
+    AndroidPublisherGrantsPatch (..),
+    mkAndroidPublisherGrantsPatch,
+
+    -- ** @androidpublisher.inappproducts.delete@
+    AndroidPublisherInappproductsDelete (..),
+
+    -- ** @androidpublisher.inappproducts.get@
+    AndroidPublisherInappproductsGet (..),
+
+    -- ** @androidpublisher.inappproducts.insert@
+    AndroidPublisherInappproductsInsert (..),
+    mkAndroidPublisherInappproductsInsert,
+
+    -- ** @androidpublisher.inappproducts.list@
+    AndroidPublisherInappproductsList (..),
+    mkAndroidPublisherInappproductsList,
+
+    -- ** @androidpublisher.inappproducts.patch@
+    AndroidPublisherInappproductsPatch (..),
+    mkAndroidPublisherInappproductsPatch,
+
+    -- ** @androidpublisher.inappproducts.update@
+    AndroidPublisherInappproductsUpdate (..),
+    mkAndroidPublisherInappproductsUpdate,
+
+    -- ** @androidpublisher.internalappsharingartifacts.uploadapk@
+    AndroidPublisherInternalappsharingartifactsUploadapk (..),
+
+    -- ** @androidpublisher.internalappsharingartifacts.uploadbundle@
+    AndroidPublisherInternalappsharingartifactsUploadbundle (..),
+
+    -- ** @androidpublisher.monetization.convertRegionPrices@
+    AndroidPublisherMonetizationConvertRegionPrices (..),
+
+    -- ** @androidpublisher.orders.refund@
+    AndroidPublisherOrdersRefund (..),
+    mkAndroidPublisherOrdersRefund,
+
+    -- ** @androidpublisher.purchases.products.acknowledge@
+    AndroidPublisherPurchasesProductsAcknowledge (..),
+
+    -- ** @androidpublisher.purchases.products.get@
+    AndroidPublisherPurchasesProductsGet (..),
+
+    -- ** @androidpublisher.purchases.subscriptions.acknowledge@
+    AndroidPublisherPurchasesSubscriptionsAcknowledge (..),
+
+    -- ** @androidpublisher.purchases.subscriptions.cancel@
+    AndroidPublisherPurchasesSubscriptionsCancel (..),
+
+    -- ** @androidpublisher.purchases.subscriptions.defer@
+    AndroidPublisherPurchasesSubscriptionsDefer (..),
+
+    -- ** @androidpublisher.purchases.subscriptions.get@
+    AndroidPublisherPurchasesSubscriptionsGet (..),
+
+    -- ** @androidpublisher.purchases.subscriptions.refund@
+    AndroidPublisherPurchasesSubscriptionsRefund (..),
+
+    -- ** @androidpublisher.purchases.subscriptions.revoke@
+    AndroidPublisherPurchasesSubscriptionsRevoke (..),
+
+    -- ** @androidpublisher.purchases.voidedpurchases.list@
+    AndroidPublisherPurchasesVoidedpurchasesList (..),
+    mkAndroidPublisherPurchasesVoidedpurchasesList,
+
+    -- ** @androidpublisher.reviews.get@
+    AndroidPublisherReviewsGet (..),
+    mkAndroidPublisherReviewsGet,
+
+    -- ** @androidpublisher.reviews.list@
+    AndroidPublisherReviewsList (..),
+    mkAndroidPublisherReviewsList,
+
+    -- ** @androidpublisher.reviews.reply@
+    AndroidPublisherReviewsReply (..),
+
+    -- ** @androidpublisher.systemapks.variants.create@
+    AndroidPublisherSystemapksVariantsCreate (..),
+
+    -- ** @androidpublisher.systemapks.variants.download@
+    AndroidPublisherSystemapksVariantsDownload (..),
+
+    -- ** @androidpublisher.systemapks.variants.get@
+    AndroidPublisherSystemapksVariantsGet (..),
+
+    -- ** @androidpublisher.systemapks.variants.list@
+    AndroidPublisherSystemapksVariantsList (..),
+
+    -- ** @androidpublisher.users.create@
+    AndroidPublisherUsersCreate (..),
+
+    -- ** @androidpublisher.users.delete@
+    AndroidPublisherUsersDelete (..),
+
+    -- ** @androidpublisher.users.list@
+    AndroidPublisherUsersList (..),
+    mkAndroidPublisherUsersList,
+
+    -- ** @androidpublisher.users.patch@
+    AndroidPublisherUsersPatch (..),
+    mkAndroidPublisherUsersPatch,
+
+    -- * Product Types
 
     -- ** Apk
     Apk (..),
-    newApk,
+#ifdef NOFIELDSELECTORS
+    MkApk (..),
+#endif
+    mkApk,
 
     -- ** ApkBinary
     ApkBinary (..),
-    newApkBinary,
+#ifdef NOFIELDSELECTORS
+    MkApkBinary (..),
+#endif
+    mkApkBinary,
 
     -- ** ApksAddExternallyHostedRequest
     ApksAddExternallyHostedRequest (..),
-    newApksAddExternallyHostedRequest,
+#ifdef NOFIELDSELECTORS
+    MkApksAddExternallyHostedRequest (..),
+#endif
+    mkApksAddExternallyHostedRequest,
 
     -- ** ApksAddExternallyHostedResponse
     ApksAddExternallyHostedResponse (..),
-    newApksAddExternallyHostedResponse,
+#ifdef NOFIELDSELECTORS
+    MkApksAddExternallyHostedResponse (..),
+#endif
+    mkApksAddExternallyHostedResponse,
 
     -- ** ApksListResponse
     ApksListResponse (..),
-    newApksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkApksListResponse (..),
+#endif
+    mkApksListResponse,
 
     -- ** AppDetails
     AppDetails (..),
-    newAppDetails,
+#ifdef NOFIELDSELECTORS
+    MkAppDetails (..),
+#endif
+    mkAppDetails,
 
     -- ** AppEdit
     AppEdit (..),
-    newAppEdit,
+#ifdef NOFIELDSELECTORS
+    MkAppEdit (..),
+#endif
+    mkAppEdit,
 
     -- ** Bundle
     Bundle (..),
-    newBundle,
+#ifdef NOFIELDSELECTORS
+    MkBundle (..),
+#endif
+    mkBundle,
 
     -- ** BundlesListResponse
     BundlesListResponse (..),
-    newBundlesListResponse,
+#ifdef NOFIELDSELECTORS
+    MkBundlesListResponse (..),
+#endif
+    mkBundlesListResponse,
 
     -- ** Comment
     Comment (..),
-    newComment,
+#ifdef NOFIELDSELECTORS
+    MkComment (..),
+#endif
+    mkComment,
 
     -- ** ConvertRegionPricesRequest
     ConvertRegionPricesRequest (..),
-    newConvertRegionPricesRequest,
+#ifdef NOFIELDSELECTORS
+    MkConvertRegionPricesRequest (..),
+#endif
+    mkConvertRegionPricesRequest,
 
     -- ** ConvertRegionPricesResponse
     ConvertRegionPricesResponse (..),
-    newConvertRegionPricesResponse,
+#ifdef NOFIELDSELECTORS
+    MkConvertRegionPricesResponse (..),
+#endif
+    mkConvertRegionPricesResponse,
 
-    -- ** ConvertRegionPricesResponse_ConvertedRegionPrices
-    ConvertRegionPricesResponse_ConvertedRegionPrices (..),
-    newConvertRegionPricesResponse_ConvertedRegionPrices,
+    -- ** ConvertRegionPricesResponse'ConvertedRegionPrices
+    ConvertRegionPricesResponse'ConvertedRegionPrices (..),
 
     -- ** ConvertedOtherRegionsPrice
     ConvertedOtherRegionsPrice (..),
-    newConvertedOtherRegionsPrice,
+#ifdef NOFIELDSELECTORS
+    MkConvertedOtherRegionsPrice (..),
+#endif
+    mkConvertedOtherRegionsPrice,
 
     -- ** ConvertedRegionPrice
     ConvertedRegionPrice (..),
-    newConvertedRegionPrice,
+#ifdef NOFIELDSELECTORS
+    MkConvertedRegionPrice (..),
+#endif
+    mkConvertedRegionPrice,
 
     -- ** CountryTargeting
     CountryTargeting (..),
-    newCountryTargeting,
+#ifdef NOFIELDSELECTORS
+    MkCountryTargeting (..),
+#endif
+    mkCountryTargeting,
 
     -- ** DeobfuscationFile
     DeobfuscationFile (..),
-    newDeobfuscationFile,
-
-    -- ** DeobfuscationFile_SymbolType
-    DeobfuscationFile_SymbolType (..),
+#ifdef NOFIELDSELECTORS
+    MkDeobfuscationFile (..),
+#endif
+    mkDeobfuscationFile,
 
     -- ** DeobfuscationFilesUploadResponse
     DeobfuscationFilesUploadResponse (..),
-    newDeobfuscationFilesUploadResponse,
+#ifdef NOFIELDSELECTORS
+    MkDeobfuscationFilesUploadResponse (..),
+#endif
+    mkDeobfuscationFilesUploadResponse,
 
     -- ** DeveloperComment
     DeveloperComment (..),
-    newDeveloperComment,
+#ifdef NOFIELDSELECTORS
+    MkDeveloperComment (..),
+#endif
+    mkDeveloperComment,
 
     -- ** DeviceMetadata
     DeviceMetadata (..),
-    newDeviceMetadata,
+#ifdef NOFIELDSELECTORS
+    MkDeviceMetadata (..),
+#endif
+    mkDeviceMetadata,
 
     -- ** DeviceSpec
     DeviceSpec (..),
-    newDeviceSpec,
+#ifdef NOFIELDSELECTORS
+    MkDeviceSpec (..),
+#endif
+    mkDeviceSpec,
 
     -- ** ExpansionFile
     ExpansionFile (..),
-    newExpansionFile,
+#ifdef NOFIELDSELECTORS
+    MkExpansionFile (..),
+#endif
+    mkExpansionFile,
 
     -- ** ExpansionFilesUploadResponse
     ExpansionFilesUploadResponse (..),
-    newExpansionFilesUploadResponse,
+#ifdef NOFIELDSELECTORS
+    MkExpansionFilesUploadResponse (..),
+#endif
+    mkExpansionFilesUploadResponse,
 
     -- ** ExternallyHostedApk
     ExternallyHostedApk (..),
-    newExternallyHostedApk,
+#ifdef NOFIELDSELECTORS
+    MkExternallyHostedApk (..),
+#endif
+    mkExternallyHostedApk,
 
     -- ** GeneratedApksListResponse
     GeneratedApksListResponse (..),
-    newGeneratedApksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedApksListResponse (..),
+#endif
+    mkGeneratedApksListResponse,
 
     -- ** GeneratedApksPerSigningKey
     GeneratedApksPerSigningKey (..),
-    newGeneratedApksPerSigningKey,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedApksPerSigningKey (..),
+#endif
+    mkGeneratedApksPerSigningKey,
 
     -- ** GeneratedAssetPackSlice
     GeneratedAssetPackSlice (..),
-    newGeneratedAssetPackSlice,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedAssetPackSlice (..),
+#endif
+    mkGeneratedAssetPackSlice,
 
     -- ** GeneratedSplitApk
     GeneratedSplitApk (..),
-    newGeneratedSplitApk,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedSplitApk (..),
+#endif
+    mkGeneratedSplitApk,
 
     -- ** GeneratedStandaloneApk
     GeneratedStandaloneApk (..),
-    newGeneratedStandaloneApk,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedStandaloneApk (..),
+#endif
+    mkGeneratedStandaloneApk,
 
     -- ** GeneratedUniversalApk
     GeneratedUniversalApk (..),
-    newGeneratedUniversalApk,
+#ifdef NOFIELDSELECTORS
+    MkGeneratedUniversalApk (..),
+#endif
+    mkGeneratedUniversalApk,
 
     -- ** Grant
     Grant (..),
-    newGrant,
-
-    -- ** Grant_AppLevelPermissionsItem
-    Grant_AppLevelPermissionsItem (..),
+#ifdef NOFIELDSELECTORS
+    MkGrant (..),
+#endif
+    mkGrant,
 
     -- ** Image
     Image (..),
-    newImage,
+#ifdef NOFIELDSELECTORS
+    MkImage (..),
+#endif
+    mkImage,
 
     -- ** ImagesDeleteAllResponse
     ImagesDeleteAllResponse (..),
-    newImagesDeleteAllResponse,
+#ifdef NOFIELDSELECTORS
+    MkImagesDeleteAllResponse (..),
+#endif
+    mkImagesDeleteAllResponse,
 
     -- ** ImagesListResponse
     ImagesListResponse (..),
-    newImagesListResponse,
+#ifdef NOFIELDSELECTORS
+    MkImagesListResponse (..),
+#endif
+    mkImagesListResponse,
 
     -- ** ImagesUploadResponse
     ImagesUploadResponse (..),
-    newImagesUploadResponse,
+#ifdef NOFIELDSELECTORS
+    MkImagesUploadResponse (..),
+#endif
+    mkImagesUploadResponse,
 
     -- ** InAppProduct
     InAppProduct (..),
-    newInAppProduct,
+#ifdef NOFIELDSELECTORS
+    MkInAppProduct (..),
+#endif
+    mkInAppProduct,
 
-    -- ** InAppProduct_Listings
-    InAppProduct_Listings (..),
-    newInAppProduct_Listings,
+    -- ** InAppProduct'Listings
+    InAppProduct'Listings (..),
 
-    -- ** InAppProduct_Prices
-    InAppProduct_Prices (..),
-    newInAppProduct_Prices,
-
-    -- ** InAppProduct_PurchaseType
-    InAppProduct_PurchaseType (..),
-
-    -- ** InAppProduct_Status
-    InAppProduct_Status (..),
+    -- ** InAppProduct'Prices
+    InAppProduct'Prices (..),
 
     -- ** InAppProductListing
     InAppProductListing (..),
-    newInAppProductListing,
+#ifdef NOFIELDSELECTORS
+    MkInAppProductListing (..),
+#endif
+    mkInAppProductListing,
 
     -- ** InappproductsListResponse
     InappproductsListResponse (..),
-    newInappproductsListResponse,
+#ifdef NOFIELDSELECTORS
+    MkInappproductsListResponse (..),
+#endif
+    mkInappproductsListResponse,
 
     -- ** InternalAppSharingArtifact
     InternalAppSharingArtifact (..),
-    newInternalAppSharingArtifact,
+#ifdef NOFIELDSELECTORS
+    MkInternalAppSharingArtifact (..),
+#endif
+    mkInternalAppSharingArtifact,
 
     -- ** IntroductoryPriceInfo
     IntroductoryPriceInfo (..),
-    newIntroductoryPriceInfo,
+#ifdef NOFIELDSELECTORS
+    MkIntroductoryPriceInfo (..),
+#endif
+    mkIntroductoryPriceInfo,
 
     -- ** ListUsersResponse
     ListUsersResponse (..),
-    newListUsersResponse,
+#ifdef NOFIELDSELECTORS
+    MkListUsersResponse (..),
+#endif
+    mkListUsersResponse,
 
     -- ** Listing
     Listing (..),
-    newListing,
+#ifdef NOFIELDSELECTORS
+    MkListing (..),
+#endif
+    mkListing,
 
     -- ** ListingsListResponse
     ListingsListResponse (..),
-    newListingsListResponse,
+#ifdef NOFIELDSELECTORS
+    MkListingsListResponse (..),
+#endif
+    mkListingsListResponse,
 
     -- ** LocalizedText
     LocalizedText (..),
-    newLocalizedText,
+#ifdef NOFIELDSELECTORS
+    MkLocalizedText (..),
+#endif
+    mkLocalizedText,
 
     -- ** ManagedProductTaxAndComplianceSettings
     ManagedProductTaxAndComplianceSettings (..),
-    newManagedProductTaxAndComplianceSettings,
+#ifdef NOFIELDSELECTORS
+    MkManagedProductTaxAndComplianceSettings (..),
+#endif
+    mkManagedProductTaxAndComplianceSettings,
 
-    -- ** ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-    ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType (..),
-
-    -- ** ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode
-    ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
-    newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+    -- ** ManagedProductTaxAndComplianceSettings'TaxRateInfoByRegionCode
+    ManagedProductTaxAndComplianceSettings'TaxRateInfoByRegionCode (..),
 
     -- ** Money
     Money (..),
-    newMoney,
+#ifdef NOFIELDSELECTORS
+    MkMoney (..),
+#endif
+    mkMoney,
 
     -- ** PageInfo
     PageInfo (..),
-    newPageInfo,
+#ifdef NOFIELDSELECTORS
+    MkPageInfo (..),
+#endif
+    mkPageInfo,
 
     -- ** Price
     Price (..),
-    newPrice,
+#ifdef NOFIELDSELECTORS
+    MkPrice (..),
+#endif
+    mkPrice,
 
     -- ** ProductPurchase
     ProductPurchase (..),
-    newProductPurchase,
+#ifdef NOFIELDSELECTORS
+    MkProductPurchase (..),
+#endif
+    mkProductPurchase,
 
     -- ** ProductPurchasesAcknowledgeRequest
     ProductPurchasesAcknowledgeRequest (..),
-    newProductPurchasesAcknowledgeRequest,
+#ifdef NOFIELDSELECTORS
+    MkProductPurchasesAcknowledgeRequest (..),
+#endif
+    mkProductPurchasesAcknowledgeRequest,
 
     -- ** RegionalTaxRateInfo
     RegionalTaxRateInfo (..),
-    newRegionalTaxRateInfo,
-
-    -- ** RegionalTaxRateInfo_TaxTier
-    RegionalTaxRateInfo_TaxTier (..),
+#ifdef NOFIELDSELECTORS
+    MkRegionalTaxRateInfo (..),
+#endif
+    mkRegionalTaxRateInfo,
 
     -- ** Review
     Review (..),
-    newReview,
+#ifdef NOFIELDSELECTORS
+    MkReview (..),
+#endif
+    mkReview,
 
     -- ** ReviewReplyResult
     ReviewReplyResult (..),
-    newReviewReplyResult,
+#ifdef NOFIELDSELECTORS
+    MkReviewReplyResult (..),
+#endif
+    mkReviewReplyResult,
 
     -- ** ReviewsListResponse
     ReviewsListResponse (..),
-    newReviewsListResponse,
+#ifdef NOFIELDSELECTORS
+    MkReviewsListResponse (..),
+#endif
+    mkReviewsListResponse,
 
     -- ** ReviewsReplyRequest
     ReviewsReplyRequest (..),
-    newReviewsReplyRequest,
+#ifdef NOFIELDSELECTORS
+    MkReviewsReplyRequest (..),
+#endif
+    mkReviewsReplyRequest,
 
     -- ** ReviewsReplyResponse
     ReviewsReplyResponse (..),
-    newReviewsReplyResponse,
+#ifdef NOFIELDSELECTORS
+    MkReviewsReplyResponse (..),
+#endif
+    mkReviewsReplyResponse,
 
     -- ** SubscriptionCancelSurveyResult
     SubscriptionCancelSurveyResult (..),
-    newSubscriptionCancelSurveyResult,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionCancelSurveyResult (..),
+#endif
+    mkSubscriptionCancelSurveyResult,
 
     -- ** SubscriptionDeferralInfo
     SubscriptionDeferralInfo (..),
-    newSubscriptionDeferralInfo,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionDeferralInfo (..),
+#endif
+    mkSubscriptionDeferralInfo,
 
     -- ** SubscriptionPriceChange
     SubscriptionPriceChange (..),
-    newSubscriptionPriceChange,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPriceChange (..),
+#endif
+    mkSubscriptionPriceChange,
 
     -- ** SubscriptionPurchase
     SubscriptionPurchase (..),
-    newSubscriptionPurchase,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchase (..),
+#endif
+    mkSubscriptionPurchase,
 
     -- ** SubscriptionPurchasesAcknowledgeRequest
     SubscriptionPurchasesAcknowledgeRequest (..),
-    newSubscriptionPurchasesAcknowledgeRequest,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchasesAcknowledgeRequest (..),
+#endif
+    mkSubscriptionPurchasesAcknowledgeRequest,
 
     -- ** SubscriptionPurchasesDeferRequest
     SubscriptionPurchasesDeferRequest (..),
-    newSubscriptionPurchasesDeferRequest,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchasesDeferRequest (..),
+#endif
+    mkSubscriptionPurchasesDeferRequest,
 
     -- ** SubscriptionPurchasesDeferResponse
     SubscriptionPurchasesDeferResponse (..),
-    newSubscriptionPurchasesDeferResponse,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionPurchasesDeferResponse (..),
+#endif
+    mkSubscriptionPurchasesDeferResponse,
 
     -- ** SubscriptionTaxAndComplianceSettings
     SubscriptionTaxAndComplianceSettings (..),
-    newSubscriptionTaxAndComplianceSettings,
+#ifdef NOFIELDSELECTORS
+    MkSubscriptionTaxAndComplianceSettings (..),
+#endif
+    mkSubscriptionTaxAndComplianceSettings,
 
-    -- ** SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-    SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType (..),
-
-    -- ** SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode
-    SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
-    newSubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+    -- ** SubscriptionTaxAndComplianceSettings'TaxRateInfoByRegionCode
+    SubscriptionTaxAndComplianceSettings'TaxRateInfoByRegionCode (..),
 
     -- ** SystemApksListResponse
     SystemApksListResponse (..),
-    newSystemApksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkSystemApksListResponse (..),
+#endif
+    mkSystemApksListResponse,
 
     -- ** Testers
     Testers (..),
-    newTesters,
+#ifdef NOFIELDSELECTORS
+    MkTesters (..),
+#endif
+    mkTesters,
 
     -- ** Timestamp
     Timestamp (..),
-    newTimestamp,
+#ifdef NOFIELDSELECTORS
+    MkTimestamp (..),
+#endif
+    mkTimestamp,
 
     -- ** TokenPagination
     TokenPagination (..),
-    newTokenPagination,
+#ifdef NOFIELDSELECTORS
+    MkTokenPagination (..),
+#endif
+    mkTokenPagination,
 
     -- ** Track
     Track (..),
-    newTrack,
+#ifdef NOFIELDSELECTORS
+    MkTrack (..),
+#endif
+    mkTrack,
 
     -- ** TrackCountryAvailability
     TrackCountryAvailability (..),
-    newTrackCountryAvailability,
+#ifdef NOFIELDSELECTORS
+    MkTrackCountryAvailability (..),
+#endif
+    mkTrackCountryAvailability,
 
     -- ** TrackRelease
     TrackRelease (..),
-    newTrackRelease,
-
-    -- ** TrackRelease_Status
-    TrackRelease_Status (..),
+#ifdef NOFIELDSELECTORS
+    MkTrackRelease (..),
+#endif
+    mkTrackRelease,
 
     -- ** TrackTargetedCountry
     TrackTargetedCountry (..),
-    newTrackTargetedCountry,
+#ifdef NOFIELDSELECTORS
+    MkTrackTargetedCountry (..),
+#endif
+    mkTrackTargetedCountry,
 
     -- ** TracksListResponse
     TracksListResponse (..),
-    newTracksListResponse,
+#ifdef NOFIELDSELECTORS
+    MkTracksListResponse (..),
+#endif
+    mkTracksListResponse,
 
     -- ** User
     User (..),
-    newUser,
-
-    -- ** User_AccessState
-    User_AccessState (..),
-
-    -- ** User_DeveloperAccountPermissionsItem
-    User_DeveloperAccountPermissionsItem (..),
+#ifdef NOFIELDSELECTORS
+    MkUser (..),
+#endif
+    mkUser,
 
     -- ** UserComment
     UserComment (..),
-    newUserComment,
+#ifdef NOFIELDSELECTORS
+    MkUserComment (..),
+#endif
+    mkUserComment,
 
     -- ** UsesPermission
     UsesPermission (..),
-    newUsesPermission,
+#ifdef NOFIELDSELECTORS
+    MkUsesPermission (..),
+#endif
+    mkUsesPermission,
 
     -- ** Variant
     Variant (..),
-    newVariant,
+#ifdef NOFIELDSELECTORS
+    MkVariant (..),
+#endif
+    mkVariant,
 
     -- ** VoidedPurchase
     VoidedPurchase (..),
-    newVoidedPurchase,
+#ifdef NOFIELDSELECTORS
+    MkVoidedPurchase (..),
+#endif
+    mkVoidedPurchase,
 
     -- ** VoidedPurchasesListResponse
     VoidedPurchasesListResponse (..),
-    newVoidedPurchasesListResponse,
+#ifdef NOFIELDSELECTORS
+    MkVoidedPurchasesListResponse (..),
+#endif
+    mkVoidedPurchasesListResponse,
+
+    -- * Enumeration Types
+
+    -- ** DeobfuscationFile'SymbolType
+    DeobfuscationFile'SymbolType (..),
 
     -- ** EditsDeobfuscationfilesUploadDeobfuscationFileType
     EditsDeobfuscationfilesUploadDeobfuscationFileType (..),
@@ -786,6 +842,36 @@ module Gogol.AndroidPublisher
 
     -- ** EditsImagesUploadImageType
     EditsImagesUploadImageType (..),
+
+    -- ** Grant'AppLevelPermissionsItem
+    Grant'AppLevelPermissionsItem (..),
+
+    -- ** InAppProduct'PurchaseType
+    InAppProduct'PurchaseType (..),
+
+    -- ** InAppProduct'Status
+    InAppProduct'Status (..),
+
+    -- ** ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType
+    ManagedProductTaxAndComplianceSettings'EeaWithdrawalRightType (..),
+
+    -- ** RegionalTaxRateInfo'TaxTier
+    RegionalTaxRateInfo'TaxTier (..),
+
+    -- ** SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType
+    SubscriptionTaxAndComplianceSettings'EeaWithdrawalRightType (..),
+
+    -- ** TrackRelease'Status
+    TrackRelease'Status (..),
+
+    -- ** User'AccessState
+    User'AccessState (..),
+
+    -- ** User'DeveloperAccountPermissionsItem
+    User'DeveloperAccountPermissionsItem (..),
+
+    -- ** Xgafv
+    Xgafv (..),
   )
 where
 

@@ -1,23 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-unused-matches #-}
-
 -- |
 -- Module      : Gogol.Storage.BucketAccessControls.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -26,95 +6,65 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new ACL entry on the specified bucket.
---
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.insert@.
 module Gogol.Storage.BucketAccessControls.Insert
-  ( -- * Resource
-    StorageBucketAccessControlsInsertResource,
-
-    -- ** Constructing a Request
-    newStorageBucketAccessControlsInsert,
-    StorageBucketAccessControlsInsert,
-  )
-where
+    (
+    -- * Constructing a Request
+    StorageBucketAccessControlsInsert (..),
+#ifdef NOFIELDSELECTORS
+    MkStorageBucketAccessControlsInsert (..),
+#endif
+    mkStorageBucketAccessControlsInsert,
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
 
--- | A resource alias for @storage.bucketAccessControls.insert@ method which the
--- 'StorageBucketAccessControlsInsert' request conforms to.
-type StorageBucketAccessControlsInsertResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "acl"
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] BucketAccessControl
-    Core.:> Core.Post '[Core.JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.
 --
--- /See:/ 'newStorageBucketAccessControlsInsert' smart constructor.
+-- Construct a default value using the 'MkStorageBucketAccessControlsInsert' pattern synonym,
+-- if @NoFieldSelectors@ is enabled.
 data StorageBucketAccessControlsInsert = StorageBucketAccessControlsInsert
-  { -- | Name of a bucket.
-    bucket :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: BucketAccessControl,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'StorageBucketAccessControlsInsert' with the minimum fields required to make a request.
-newStorageBucketAccessControlsInsert ::
-  -- |  Name of a bucket. See 'bucket'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  BucketAccessControl ->
-  StorageBucketAccessControlsInsert
-newStorageBucketAccessControlsInsert bucket payload =
-  StorageBucketAccessControlsInsert
-    { bucket = bucket,
-      payload = payload,
-      provisionalUserProject = Core.Nothing,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
+    {
+      -- | Name of a bucket.
+      bucket :: Core.Text
+      -- | Multipart request metadata.
+    , meta :: BucketAccessControl
+      -- | The project to be billed for this request if the target bucket is requester-pays bucket.
+    , provisionalUserProject :: Core.Maybe Core.Text
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: Core.Maybe Core.Text
     }
+    deriving stock (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.GoogleRequest
-    StorageBucketAccessControlsInsert
-  where
-  type
-    Rs StorageBucketAccessControlsInsert =
-      BucketAccessControl
-  type
-    Scopes StorageBucketAccessControlsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
-  requestClient StorageBucketAccessControlsInsert {..} =
-    go
-      bucket
-      provisionalUserProject
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      payload
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageBucketAccessControlsInsertResource
-          )
-          Core.mempty
+#ifdef NOFIELDSELECTORS
+-- | Create 'StorageBucketAccessControlsInsert' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+pattern MkStorageBucketAccessControlsInsert :: Core.Text -> BucketAccessControl -> StorageBucketAccessControlsInsert
+pattern MkStorageBucketAccessControlsInsert{bucket, meta} =
+        StorageBucketAccessControlsInsert{bucket = bucket, meta = meta, provisionalUserProject = Core.Nothing,
+                                          userProject = Core.Nothing}
+
+{-# DEPRECATED mkStorageBucketAccessControlsInsert "Please use MkStorageBucketAccessControlsInsert instead" #-}
+#endif
+
+-- | Create 'StorageBucketAccessControlsInsert' using the required fields. All other fields are set to 'Nothing' or a default value, as appropriate.
+mkStorageBucketAccessControlsInsert :: Core.Text -> BucketAccessControl -> StorageBucketAccessControlsInsert
+mkStorageBucketAccessControlsInsert bucket meta
+  = StorageBucketAccessControlsInsert{bucket = bucket, meta = meta, provisionalUserProject = Core.Nothing,
+                                      userProject = Core.Nothing}
+instance Core.GoogleRequest StorageBucketAccessControlsInsert where
+        type Core.Scopes StorageBucketAccessControlsInsert = '[CloudPlatform'FullControl, Devstorage'FullControl]
+        type Core.Config StorageBucketAccessControlsInsert = StorageService
+        type Core.Response StorageBucketAccessControlsInsert = BucketAccessControl
+        toRequest Core.Service{serviceRequest, serviceParams = StorageParams{..}} StorageBucketAccessControlsInsert{..}
+          = serviceRequest{Core.method = "POST", Core.path = Core.toRequestPath ["/storage/v1/b/", Core.toPathBuilder bucket, "/acl"],
+                           Core.queryString =
+                             Core.toRequestQuery $
+                               Core.catMaybes
+                                 [("fields",) Core.. Core.toQueryParam Core.<$> fields, ("key",) Core.. Core.toQueryParam Core.<$> key,
+                                  ("oauth_token",) Core.. Core.toQueryParam Core.<$> oauthToken, Core.Just ("prettyPrint", Core.toQueryParam prettyPrint),
+                                  ("provisionalUserProject",) Core.. Core.toQueryParam Core.<$> provisionalUserProject,
+                                  ("quotaUser",) Core.. Core.toQueryParam Core.<$> quotaUser, ("userProject",) Core.. Core.toQueryParam Core.<$> userProject,
+                                  Core.Just ("alt", "json")],
+                           Core.requestBody = Core.toRequestBodyJSON payload}
