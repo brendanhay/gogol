@@ -46,10 +46,13 @@ module Gogol
 
     -- * Sending Requests
     send,
+    sendEither,
 
     -- ** Streaming Media
     download,
+    downloadEither,
     upload,
+    uploadEither,
     GBody (..),
     bodyContentType,
     sourceBody,
@@ -112,20 +115,46 @@ import Gogol.Prelude
 import Gogol.Types
 import Network.HTTP.Conduit (newManager, tlsManagerSettings)
 
+sendEither ::
+  ( MonadResource m,
+    AllowScopes scopes,
+    HasScope scopes a,
+    GoogleRequest a
+  ) =>
+  Env scopes ->
+  a ->
+  m (Either Error (Rs a))
+sendEither =
+  perform
+
 -- | Send a request, returning the associated response if successful.
 --
 -- Throws 'Gogol.Types.Error'.
 send ::
   ( MonadResource m,
-    AllowScopes s,
-    HasScope s a,
+    AllowScopes scopes,
+    HasScope scopes a,
     GoogleRequest a
   ) =>
-  Env s ->
+  Env scopes ->
   a ->
   m (Rs a)
 send env =
-  perform env >=> hoistError
+  sendEither env
+    >=> hoistEither
+
+downloadEither ::
+  ( MonadResource m,
+    AllowScopes scopes,
+    HasScope scopes (MediaDownload a),
+    GoogleRequest (MediaDownload a)
+  ) =>
+  Env scopes ->
+  a ->
+  m (Either Error (Rs (MediaDownload a)))
+downloadEither env =
+  sendEither env
+    . MediaDownload
 
 -- | Send a request returning the associated streaming media response if successful.
 --
@@ -142,15 +171,30 @@ send env =
 -- Throws 'Gogol.Types.Error'.
 download ::
   ( MonadResource m,
-    AllowScopes s,
-    HasScope s (MediaDownload a),
+    AllowScopes scopes,
+    HasScope scopes (MediaDownload a),
     GoogleRequest (MediaDownload a)
   ) =>
-  Env s ->
+  Env scopes ->
   a ->
   m (Rs (MediaDownload a))
 download env =
-  send env . MediaDownload
+  downloadEither env
+    >=> hoistEither
+
+uploadEither ::
+  ( MonadResource m,
+    AllowScopes scopes,
+    HasScope scopes (MediaUpload a),
+    GoogleRequest (MediaUpload a)
+  ) =>
+  Env scopes ->
+  a ->
+  GBody ->
+  m (Either Error (Rs (MediaUpload a)))
+uploadEither env x =
+  sendEither env
+    . MediaUpload x
 
 -- | Send a request with an attached <https://tools.ietf.org/html/rfc2387 multipart/related media> upload.
 --
@@ -163,18 +207,20 @@ download env =
 -- Throws 'Gogol.Types.Error'.
 upload ::
   ( MonadResource m,
-    AllowScopes s,
-    HasScope s (MediaUpload a),
+    AllowScopes scopes,
+    HasScope scopes (MediaUpload a),
     GoogleRequest (MediaUpload a)
   ) =>
-  Env s ->
+  Env scopes ->
   a ->
   GBody ->
   m (Rs (MediaUpload a))
-upload env x = send env . MediaUpload x
+upload env x =
+  uploadEither env x
+    >=> hoistEither
 
-hoistError :: MonadIO m => Either Error a -> m a
-hoistError = either (liftIO . throwingM _Error) pure
+hoistEither :: MonadIO m => Either Error a -> m a
+hoistEither = either (liftIO . throwingM _Error) pure
 
 -- $usage
 --
