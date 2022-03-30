@@ -18,8 +18,7 @@
 module Gogol.Auth.Scope
   ( -- * Type-level scopes
     type HasScope,
-    type AnyMember,
-    type IsMember,
+    type HasScopeFor,
 
     -- ** Modifying lists of scopes
     allow,
@@ -39,33 +38,52 @@ import Data.Coerce (coerce)
 import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
-import Data.Type.Bool (type (||))
+import Data.Type.Bool (type (||), type If)
 import Data.Typeable (Proxy (..))
 import GHC.Exts (Constraint)
-import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
+import GHC.TypeLits
 import Gogol.Internal.Auth (Credentials)
-import Gogol.Prelude (GoogleRequest (..), OAuthScope (..))
+import Gogol.Types (OAuthScope (..))
 import Network.HTTP.Types (urlEncode)
 
--- :l Gogol.Auth
--- :set -XDataKinds
-
--- :k! IsMember "foo" '["bar", "baz"]
--- :k! IsMember "foo" '["bar", "baz", "foo"]
-
--- :k! AnyMember '["baz", "bar"] '["foo", "qux"] ~ 'True
--- :k! AnyMember '["baz", "foo", "bar"] '["foo", "qux"] ~ 'True
--- :k! AnyMember '["baz", "foo", "bar"] '[] ~ 'True
-
--- | Annotate credentials with the specified scopes.
--- | Determine if _any_ of the scopes a request @a@ requires is listed in
--- the scopes the credentials contains, @have@.
+-- | This 'Constraint' can be used to prove the scope @name@ is available in the
+-- @scopes@ list, otherwise it produces compile-time error if @name@ is missing.
 --
--- For error message/presentation purposes, this wraps the result of
--- the 'AnyMembers' membership check to show both lists of scopes before
--- reduction.
-type family HasScope (have :: [Symbol]) a :: Constraint where
-  HasScope have a = AnyMember have (Scopes a) ~ 'True
+-- >>> HasScope "https://www.googleapis.com/auth/devstorage.read_write" scopes => Env scopes
+type family HasScope (name  :: Symbol) (scopes :: [Symbol]) :: Constraint where
+  HasScope name scopes =
+    If (Elem name scopes) (() :: Constraint) (TypeError (MissingScopeError name scopes))
+
+type MissingScopeError (name :: k) (scopes :: [k]) =
+          'Text "The following scope is required by HasScope:"
+    ':$$: 'Text "    " ':<>: 'ShowType name
+    ':$$: 'Text "But it doesn't exist in the list of provided scopes:"
+    ':$$: 'Text "    " ':<>: 'ShowType scopes
+
+-- This 'Constraint' is used to prove that the
+type family HasScopeFor (have :: [Symbol]) (need :: [Symbol]) :: Constraint where
+  HasScopeFor _ '[] = () -- Special case; no scopes are required.
+  HasScopeFor have need =
+    If (Intersect have need) (() :: Constraint) (TypeError (MissingScopesError have need))
+
+type MissingScopesError (have :: [k]) (need :: [k]) =
+          'Text "You provided the following list of scopes to HasScopeFor:"
+    ':$$: 'Text "    " ':<>: 'ShowType have
+    ':$$: 'Text "However, none of these scopes exist in the list of required scopes:"
+    ':$$: 'Text "    " ':<>: 'ShowType need
+
+-- Short-circuiting intersection - does at least _one_ element from
+-- @as@ also exist in @bs@?
+type family Intersect (as :: [k]) (bs :: [k]) :: Bool where
+  Intersect '[] _ = 'False
+  Intersect _ '[] = 'False
+  Intersect (a ': as) bs = Elem a bs || Intersect as bs
+
+-- Type-level 'Data.List.elem'.
+type family Elem (x :: k) (xs :: [k]) :: Bool where
+    Elem _ '[]       = 'False
+    Elem x (x ': xs) = 'True
+    Elem x (y ': xs) = Elem x xs
 
 -- This is all quadratic.
 
