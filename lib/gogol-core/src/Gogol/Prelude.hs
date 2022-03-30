@@ -29,7 +29,7 @@ import Gogol.Data.Time as Export
 import Gogol.Types as Export
 import Network.HTTP.Client as Export (RequestBody)
 import Numeric.Natural as Export (Natural)
-import Servant.API as Export hiding (FromHttpApiData, Header, Headers, Link, ResponseHeader, Stream, ToHttpApiData, Union, getResponse)
+import Servant.API as Export hiding (FromHttpApiData, Header, Headers, IsMember, Link, ResponseHeader, Stream, ToHttpApiData, Union, getResponse)
 import Servant.Links as Export hiding (Link)
 import Web.HttpApiData as Export (FromHttpApiData (..), ToHttpApiData (..))
 import Prelude as Export

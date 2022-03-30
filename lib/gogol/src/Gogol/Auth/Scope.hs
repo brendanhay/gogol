@@ -14,8 +14,24 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
--- Helpers for specifying and using 'Scope's with "Gogol".
-module Gogol.Auth.Scope where
+-- Helpers for specifying and using type-level OAuth scopes.
+module Gogol.Auth.Scope
+  ( -- * Type-level scopes
+    type HasScope,
+    type AnyMember,
+    type IsMember,
+
+    -- ** Modifying lists of scopes
+    allow,
+    forbid,
+    (!),
+
+    -- * Scope values
+    AllowScopes (..),
+    concatScopes,
+    queryEncodeScopes,
+  )
+where
 
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Char8 as BS8
@@ -24,18 +40,50 @@ import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
 import Data.Type.Bool (type (||))
-import Data.Type.Equality (type (==))
 import Data.Typeable (Proxy (..))
 import GHC.Exts (Constraint)
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 import Gogol.Internal.Auth (Credentials)
-import Gogol.Prelude
-  ( GoogleRequest (..),
-    OAuthScope (..),
-  )
+import Gogol.Prelude (GoogleRequest (..), OAuthScope (..))
 import Network.HTTP.Types (urlEncode)
 
+-- :l Gogol.Auth
+-- :set -XDataKinds
+
+-- :k! IsMember "foo" '["bar", "baz"]
+-- :k! IsMember "foo" '["bar", "baz", "foo"]
+
+-- :k! AnyMember '["baz", "bar"] '["foo", "qux"] ~ 'True
+-- :k! AnyMember '["baz", "foo", "bar"] '["foo", "qux"] ~ 'True
+-- :k! AnyMember '["baz", "foo", "bar"] '[] ~ 'True
+
 -- | Annotate credentials with the specified scopes.
+-- | Determine if _any_ of the scopes a request @a@ requires is listed in
+-- the scopes the credentials contains, @have@.
+--
+-- For error message/presentation purposes, this wraps the result of
+-- the 'AnyMembers' membership check to show both lists of scopes before
+-- reduction.
+type family HasScope (have :: [Symbol]) a :: Constraint where
+  HasScope have a = AnyMember have (Scopes a) ~ 'True
+
+-- This is all quadratic.
+
+-- | Check if any one of supplied scopes @have@ are members of the required set,
+-- @need@.
+--
+-- If the required set @need@ is empty, then succeed.
+type family AnyMember (have :: [Symbol]) (need :: [Symbol]) where
+  AnyMember have '[] = 'True -- Special case - no scopes are required.
+  AnyMember '[] need = 'False
+  AnyMember (x ': xs) need = IsMember x need || AnyMember xs need
+
+-- | Test if @scope@ is a member of @need@.
+type family IsMember (scope :: Symbol) (need :: [Symbol]) where
+  IsMember x '[] = 'False
+  IsMember x (x ': xs) = 'True
+  IsMember x (y ': ys) = IsMember x ys
+
 -- This exists to allow users to choose between using 'newEnv'
 -- with a 'Proxy' constructed by '!', or explicitly
 -- specifying scopes via a type annotation.
@@ -53,26 +101,6 @@ forbid = id
 -- /See:/ 'allow'.
 (!) :: proxy xs -> proxy ys -> Proxy (Nub (xs ++ ys))
 (!) _ _ = Proxy
-
--- | Determine if _any_ of the scopes a request requires is
--- listed in the scopes the credentials supports.
---
--- For error message/presentation purposes, this wraps the result of
--- the 'HasScope' membership check to show both lists of scopes before
--- reduction.
-type family HasScope (s :: [Symbol]) a :: Constraint where
-  HasScope s a = (s `HasScope'` Scopes a) ~ 'True
-
--- | Check if any of actual supplied scopes 's' exist in the required set 'a'.
--- If the required set 'a' is empty, then succeed.
-type family HasScope' s a where
-  HasScope' s '[] = 'True -- No scopes are required.
-  HasScope' (x ': xs) a = x ∈ a || HasScope' xs a
-
--- | Membership predicate.
-type family (∈) a b where
-  (∈) x '[] = 'False
-  (∈) x (y ': xs) = x == y || x ∈ xs
 
 -- | Append two lists.
 type family (++) xs ys where
@@ -93,6 +121,9 @@ type family Delete x xs where
 
 class AllowScopes a where
   -- | Obtain a list of supported 'OAuthScope' values from a proxy.
+  --
+  -- This is used to pass scope _values_ to functions that require them,
+  -- such as 'Gogol.Auth.ServiceAccount.serviceAccountToken'.
   allowScopes :: proxy a -> [OAuthScope]
 
 instance AllowScopes '[] where

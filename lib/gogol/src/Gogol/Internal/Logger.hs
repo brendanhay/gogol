@@ -32,7 +32,6 @@ where
 
 import Control.Monad (when)
 import Control.Monad.IO.Class (MonadIO (..))
-import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import Data.ByteString.Builder (Builder)
 import qualified Data.ByteString.Builder as Build

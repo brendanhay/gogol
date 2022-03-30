@@ -26,7 +26,6 @@ import Control.Monad.IO.Class (MonadIO (..))
 import Data.Aeson
 import Data.Aeson.Types (parseEither)
 import qualified Data.ByteString.Lazy as LBS
-import Data.Maybe (maybe)
 import qualified Data.Text as Text
 import Gogol.Compute.Metadata (isGCE)
 import Gogol.Internal.Auth

@@ -50,12 +50,8 @@ import Data.Char (toLower)
 import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Encoding as LText
-import Gogol.Prelude (Text, (<>))
-import Network.HTTP.Client
-  ( HttpException (..),
-    HttpExceptionContent (..),
-    Manager,
-  )
+import Gogol.Prelude (Text)
+import Network.HTTP.Client (HttpException (..), HttpExceptionContent (..), Manager)
 import qualified Network.HTTP.Client as Client
 import Network.HTTP.Types (HeaderName)
 import System.Environment (lookupEnv)

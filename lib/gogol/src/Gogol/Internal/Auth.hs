@@ -29,7 +29,6 @@ import Data.Aeson
 import Data.Aeson.Types (Pair)
 import Data.ByteArray (ByteArray)
 import Data.ByteArray.Encoding
-import Data.ByteString (ByteString)
 import Data.ByteString.Builder ()
 import qualified Data.ByteString.Lazy as LBS
 import Data.String (IsString)

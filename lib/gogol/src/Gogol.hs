@@ -41,8 +41,8 @@ module Gogol
     -- $authorization
     (!),
     allow,
-    AllowScopes,
     type HasScope,
+    AllowScopes (..),
 
     -- * Sending Requests
     send,
