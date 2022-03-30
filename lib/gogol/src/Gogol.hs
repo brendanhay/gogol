@@ -193,7 +193,6 @@ download env =
 
 -- | Send a request with an attached <https://tools.ietf.org/html/rfc2387 multipart/related media> upload.
 --
--- @
 -- Equivalent to:
 --
 -- @
