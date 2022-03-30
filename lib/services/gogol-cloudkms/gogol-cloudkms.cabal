@@ -1,6 +1,6 @@
 cabal-version:      2.2
 name:               gogol-cloudkms
-version:            0.5.0
+version:            1.0.0.0
 synopsis:           Google Cloud Key Management Service (KMS) SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues

@@ -1,6 +1,6 @@
 cabal-version:      2.2
 name:               gogol-identity-toolkit
-version:            0.5.0
+version:            1.0.0.0
 synopsis:           Google Identity Toolkit SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
