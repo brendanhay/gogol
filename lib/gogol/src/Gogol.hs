@@ -114,7 +114,7 @@ import Network.HTTP.Conduit (newManager, tlsManagerSettings)
 
 -- | Send a request, returning the associated response if successful.
 --
--- Throws 'Error'.
+-- Throws 'Gogol.Types.Error'.
 send ::
   ( MonadResource m,
     AllowScopes s,
@@ -139,7 +139,7 @@ send env =
 -- 'send' . 'MediaDownload'
 -- @
 --
--- Throws 'Error'.
+-- Throws 'Gogol.Types.Error'.
 download ::
   ( MonadResource m,
     AllowScopes s,
@@ -160,7 +160,7 @@ download env =
 -- 'send' . 'MediaUpload'
 -- @
 --
--- Throws 'Error'.
+-- Throws 'Gogol.Types.Error'.
 upload ::
   ( MonadResource m,
     AllowScopes s,
