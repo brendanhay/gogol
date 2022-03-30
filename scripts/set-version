@@ -18,12 +18,12 @@ specs=(
   lib/services/gogol-*/*.cabal
 )
 
-echo "Bumping version to $full and dependencies to == $short ..."
+echo "Bumping version to $full ..."
 
 for cabal in ${specs[@]}; do
-  sed -i"" "s/^\(version: *\).*$/\1$full/" $cabal
-  sed -i"" "s/^\(.*gogol-[a-z0-9]* *== *\)\([0-9\.]\+\*\)$/\1$short.*/" $cabal
-  sed -i"" "s/^\(.*gogol *== *\)\([0-9\.]\+\*\)$/\1$short.*/" $cabal
+  sed -i"" "s,^\(version: *\).*$,\1$full," $cabal
+  sed -i"" "s,^\(.*gogol-[a-z0-9]* \^>= \).*$,\1$short," $cabal
+  sed -i"" "s,^\(.*gogol \^>= \).*$,\1$short," $cabal
 done
 
 echo "Done."

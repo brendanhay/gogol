@@ -36,7 +36,6 @@ esac
 targets=(
   lib/gogol
   lib/gogol-core
-  gen
   examples
 )
 
