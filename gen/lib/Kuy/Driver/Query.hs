@@ -1,5 +1,4 @@
 {-# LANGUAGE TemplateHaskell #-}
-{-# OPTIONS_GHC -ddump-splices #-}
 
 module Kuy.Driver.Query where
 
@@ -12,36 +11,35 @@ import Kuy.Driver.Store
 import Kuy.Prelude
 
 type Query :: Type -> Type
-
 data Query a where
-  -- Content is either absent, in which case we return a unique slot to write to,
-  -- or we returned the read bytes.
-  ContentBytes ::
+  -- Cache content is either absent, in which case we return a unique slot
+  -- to write to, or we returned the read bytes.
+  CacheBytes ::
     Persist a =>
-    ContentReader a ->
-    Query (Either (ContentWriter a) a)
-    -- If you have an ArtefactKey it's proof the file must exist.
+    CacheReader a ->
+    Query (Either (CacheWriter a) a)
+  -- If you have an ArtefactKey it's proof the file must exist.
   ArtefactBytes ::
     Artefact ->
     Query ByteString
-    -- We can only attempt to read a local artefact as it might not exist.
+  -- We can only attempt to read a local artefact as it might not exist.
   LocalArtefact ::
     FilePath ->
     Query (Maybe Artefact)
-    -- We download a remote artefact using the supplied url, or die trying.
+  -- We download a remote artefact using the supplied url, or die trying.
   RemoteArtefact ::
     String ->
     FilePath ->
     Query Artefact
-    --
+  --
   DiscoveryIndex ::
     Query DirectoryIndex
-    --
+  --
   DiscoveryItem ::
     ServiceName ->
     Maybe ServiceVersion ->
     Query (Maybe DirectoryItem)
-    --
+  --
   DiscoveryDescription ::
     ServiceName ->
     Maybe ServiceVersion ->
@@ -57,7 +55,7 @@ TH.deriveGShow ''Query
 
 instance Hashable (Query a) where
   hashWithSalt salt = \case
-    ContentBytes a -> tag salt 1 a
+    CacheBytes a -> tag salt 1 a
     ArtefactBytes a -> tag salt 2 a
     LocalArtefact a -> tag salt 3 a
     RemoteArtefact a b -> tag salt 4 (a, b)

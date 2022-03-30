@@ -19,7 +19,12 @@ format_haskell() {
     xargs -0 cabal-fmt --inplace --indent=2
 
   find "$dir" -type f -name '*.hs' -print0 |
-    xargs -0 ormolu --unsafe --mode inplace -o '-XPatternSynonyms' -o '-XTypeApplications' -o '-XMagicHash' "${options[@]}"
+    xargs -0 ormolu --unsafe --mode inplace \
+      -o '-XPatternSynonyms' \
+      -o '-XTypeApplications' \
+      -o '-XBangPatterns' \
+      -o '-XMagicHash' \
+      "${options[@]}"
 }
 
 # Export the functions for use in GNU parallel.
@@ -46,7 +51,9 @@ find . -type f -name '*.nix' -print0 |
   xargs -0 nixpkgs-fmt
 
 # Run gen formatter separately for ImportQualifedPost support.
-format_haskell gen -o '-XImportQualifiedPost' -o '-XOverloadedRecordDot'
+format_haskell gen \
+  -o '-XImportQualifiedPost' \
+  -o '-XOverloadedRecordDot'
 
 # Run the core formatters prior to service libraries.
 format_haskell lib/gogol

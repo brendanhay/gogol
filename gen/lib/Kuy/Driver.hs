@@ -1,87 +1,103 @@
 module Kuy.Driver
-  ( execute
-  , withHashes
-  ) where
+  ( execute,
+    withHashes,
+  )
+where
 
-import UnliftIO.Directory qualified as Directory
+import System.FilePath qualified as FilePath
+import Data.Aeson qualified as Aeson
+import Kuy.Driver.Query
+import Kuy.Driver.Rules qualified as Rules
+import Kuy.Driver.Store
+import Kuy.Prelude
+import Network.HTTP.Client qualified as Client
+import Data.ByteString.Lazy qualified as ByteString.Lazy
+import Rock
+import Data.ByteString.Builder qualified as ByteBuilder
 import UnliftIO qualified
+import UnliftIO.Directory qualified as Directory
 import UnliftIO.IORef qualified as IORef
 import UnliftIO.MVar qualified as MVar
-import Kuy.Prelude
-import Rock
-import Kuy.Driver.Query
-import Kuy.Driver.Rules  qualified as Rules
-import Network.HTTP.Client qualified as Client
-import Data.Aeson qualified as Aeson
-import Kuy.Driver.Store
 
 execute :: Client.Manager -> Store -> Task Query a -> IO a
-execute manager store task = 
- withHashes store $ \hashes -> do
-  startedVar <- IORef.newIORef mempty
-  threadsVar <- IORef.newIORef mempty
-  consoleVar <- MVar.newMVar (0 :: Int)
+execute manager store task =
+  withHashes (store.path </> ".hashes.json") $ \hashesVar -> do
+    startedVar <- IORef.newIORef mempty
+    threadsVar <- IORef.newIORef mempty
+    consoleVar <- MVar.newMVar (0 :: Int)
 
-  let ignoreTaskKind ::
-        GenRules (Writer TaskKind f) f ->
-        Rules f
-      ignoreTaskKind rs key =
-        fst <$> rs (Writer key)
+    let ignoreTaskKind ::
+          GenRules (Writer TaskKind f) f ->
+          Rules f
+        ignoreTaskKind rs key =
+          fst <$> rs (Writer key)
 
-      traceFetch_ ::
-        GenRules (Writer TaskKind Query) Query ->
-        GenRules (Writer TaskKind Query) Query
-      traceFetch_ =
-        traceFetch
-          (\(Writer key) -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
-            putStrLn $ "Fetch " <> show key
-            pure $ n + 1)
-          (\(Writer _key) _ -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
-            -- putStrLn $ "Complete " <> show key
-            pure $ n - 1)
+        traceFetch_ ::
+          GenRules (Writer TaskKind Query) Query ->
+          GenRules (Writer TaskKind Query) Query
+        traceFetch_ =
+          traceFetch
+            ( \(Writer key) -> liftIO $
+                MVar.modifyMVar_ consoleVar $ \n -> do
+                  putStrLn $ "Fetch " <> show key
+                  pure $ n + 1
+            )
+            ( \(Writer _key) _ -> liftIO $
+                MVar.modifyMVar_ consoleVar $ \n -> do
+                  -- putStrLn $ "Complete " <> show key
+                  pure $ n - 1
+            )
 
-          -- (\(Writer key) -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
-          --   putStrLn $ fold (replicate n "| ") <> "fetching " <> show key
-          --   pure $ n + 1)
-          -- (\_ _ -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
-          --   putStrLn$ fold (replicate (n - 1) "| ") <> "*"
-          --   pure $ n - 1)
+        -- (\(Writer key) -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
+        --   putStrLn $ fold (replicate n "| ") <> "fetching " <> show key
+        --   pure $ n + 1)
+        -- (\_ _ -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
+        --   putStrLn$ fold (replicate (n - 1) "| ") <> "*"
+        --   pure $ n - 1)
 
-      rules :: Rules Query
-      rules =
-         memoiseWithCycleDetection startedVar threadsVar
-          $ ignoreTaskKind
-          $ traceFetch_
-          $ Rules.rules manager store hashes
+        rules :: Rules Query
+        rules =
+          memoiseWithCycleDetection startedVar threadsVar $
+            ignoreTaskKind $
+              traceFetch_ $
+                Rules.rules manager store hashesVar
 
-  runTask rules task
+    runTask rules task
 
-withHashes :: Store -> (IORef Hashes -> IO a) -> IO a
-withHashes store =
+withHashes :: FilePath -> (IORef Hashes -> IO a) -> IO a
+withHashes path =
   UnliftIO.bracket create commit
- where
-    path = store.path </> ".hashes.json"
-
+  where
     commit hashes = do
-      hashes <- IORef.readIORef hashes
-      Aeson.encodeFile path hashes
+      Directory.createDirectoryIfMissing True (FilePath.takeDirectory path)
+
+      IORef.readIORef hashes
+        >>= ByteString.Lazy.writeFile path
+          . ByteBuilder.toLazyByteString
+          . encodeHashes
 
     create = do
       exists <- Directory.doesPathExist path
       hashes <-
         if not exists
-          then mempty <$ Directory.createDirectoryIfMissing True store.path
-          else readHashes
+          then mempty
+          else do
+            h <- decodeHashes <$> readFile path
+
+            print h
+
+            pure h
 
       IORef.newIORef hashes
 
-    readHashes =
-       Aeson.eitherDecodeFileStrict' path >>= \case
-            Right ok -> pure ok
-            Left err ->
-                UnliftIO.throwString $
-                    "failed to deserialise hashes from "
-                    ++ path
-                    ++ " with "
-                    ++ err
-
+    -- readJSON =
+    --   Aeson.eitherDecodeFileStrict' path >>= \case
+    --     Right hashes ->
+    --       pure hashes
+    --     --
+    --     Left err ->
+    --       UnliftIO.throwString $
+    --         "(withHashes) failed to parse hashes from "
+    --           ++ path
+    --           ++ " with "
+    --           ++ err

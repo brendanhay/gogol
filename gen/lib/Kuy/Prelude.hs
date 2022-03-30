@@ -30,18 +30,11 @@ module Kuy.Prelude
   )
 where
 
--- import Data.HashMap.Strict as Export (HashMap)
--- import Data.HashSet as Export (HashSet)
-
-import Data.Kind as Export (Type)
-import Data.Hashable as Export (Hashable (hashWithSalt))
 import Control.Applicative as Export (Alternative ((<|>)))
-import Data.Time as Export (UTCTime, NominalDiffTime)
-import Control.Exception as Export (Exception, SomeException, IOException)
+import Control.Exception as Export (Exception, IOException, SomeException)
 import Control.Monad as Export
-import Control.Monad.Except as Export ( Except, ExceptT (ExceptT), MonadError,)
+import Control.Monad.Except as Export (Except, ExceptT (ExceptT), MonadError)
 import Control.Monad.IO.Class as Export (MonadIO (liftIO))
-import UnliftIO as Export (MonadUnliftIO)
 import Control.Monad.Reader as Export
   ( MonadReader,
     Reader,
@@ -49,16 +42,17 @@ import Control.Monad.Reader as Export
   )
 import Control.Monad.State.Strict as Export (MonadState, State, StateT (StateT))
 import Control.Monad.Trans as Export (MonadTrans (lift))
-import Data.Aeson as Export (FromJSON, FromJSONKey, ToJSON, ToJSONKey)
-import Data.Aeson as Export (parseJSON, (.!=), (.:), (.:?))
+import Control.Monad.Trans.Maybe as Export (MaybeT (MaybeT), runMaybeT)
+import Data.Aeson as Export
+  (FromJSON (..), FromJSONKey, ToJSON (..), ToJSONKey, parseJSON, (.!=), (.:), (.:?))
 import Data.Bifoldable as Export (Bifoldable (bifoldMap), bifor_, bitraverse_)
 import Data.Bifunctor as Export (Bifunctor (bimap, first, second))
 import Data.Bitraversable as Export (Bitraversable (bitraverse), bifor)
 import Data.ByteString qualified
 import Data.ByteString.Builder qualified
 import Data.ByteString.Lazy qualified
-import Data.Coerce as Export (Coercible)
-import Data.DList as Export (DList)
+import Data.Coerce as Export (Coercible, coerce)
+import Distribution.Compat.DList as Export (DList)
 import Data.Either as Export
 import Data.Foldable as Export (foldl', for_, traverse_)
 import Data.Function as Export ((&))
@@ -66,34 +60,37 @@ import Data.Functor as Export (($>), (<&>))
 import Data.Functor.Const as Export (Const (Const), getConst)
 import Data.Functor.Contravariant as Export (Contravariant (contramap))
 import Data.Functor.Identity as Export (Identity (Identity), runIdentity)
+import Data.Hashable as Export (Hashable (hashWithSalt))
 import Data.IORef as Export (IORef)
 import Data.Int as Export (Int16, Int32, Int64, Int8)
 import Data.IntSet as Export (IntSet)
+import Data.Kind as Export (Type)
 import Data.List.NonEmpty as Export (NonEmpty (..))
 import Data.Map.Strict as Export (Map)
 import Data.Maybe as Export
+import Data.Ord as Export (Down (Down), comparing)
+import Data.Persist as Export (Persist)
 import Data.Proxy as Export (Proxy (Proxy))
 import Data.Set as Export (Set)
 import Data.String as Export (IsString (fromString))
 import Data.Text qualified
 import Data.Text.Lazy qualified
 import Data.Text.Lazy.Builder qualified
+import Data.Time as Export (NominalDiffTime, UTCTime)
 import Data.Traversable as Export (for)
 import Data.Typeable as Export (Typeable)
 import Data.Void as Export (Void)
-import Data.Ord as Export (Down (Down), comparing)
 import Data.Word as Export (Word16, Word32, Word64, Word8)
-import GHC.Exts as Export (Constraint, IsList (toList, fromList))
+import Distribution.Utils.Structured as Export (Structured)
+import GHC.Exts as Export (Constraint, IsList (fromList, toList))
 import GHC.Generics as Export (Generic)
 import GHC.Stack as Export (HasCallStack)
 import GHC.TypeLits as Export (KnownNat, KnownSymbol, Nat, Symbol, natVal, natVal', symbolVal)
-import Numeric.Natural as Export (Natural)
-import System.FilePath as Export ((<.>), (</>), (-<.>))
-import Prelude as Export hiding (foldl, head, init, last, lines, tail, log)
-import Data.Persist as Export (Persist)
-import Control.Monad.Trans.Maybe as Export (MaybeT (MaybeT), runMaybeT)
 import Kuy.Orphans ()
-import Distribution.Utils.Structured as Export (Structured)
+import Numeric.Natural as Export (Natural)
+import System.FilePath as Export ((-<.>), (<.>), (</>))
+import UnliftIO as Export (MonadUnliftIO)
+import Prelude as Export hiding (foldl, head, init, last, lines, log, tail)
 
 type Text = Data.Text.Text
 

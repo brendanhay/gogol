@@ -1,11 +1,11 @@
 module Kuy.Discovery.Description where
 
-import Kuy.Prelude
+import Data.Aeson qualified as Aeson
 import Kuy.Discovery.Label
 import Kuy.Discovery.Name
-import Data.Aeson qualified as Aeson
 import Kuy.Discovery.Schema
 import Kuy.Markdown (Markdown)
+import Kuy.Prelude
 import Kuy.Template (Template)
 
 -- | The discovery document which describes a REST API.
@@ -63,7 +63,7 @@ data Description = Description
 
 instance FromJSON Description where
   parseJSON =
-   Aeson.withObject "Description" $ \o -> do
+    Aeson.withObject "Description" $ \o -> do
       kind <-
         o .: "kind"
       discoveryVersion <-
@@ -107,7 +107,7 @@ instance FromJSON Description where
       resources <-
         o .:? "resources" .!= mempty
 
-      pure Description{..}
+      pure Description {..}
 
 data Auth = Auth
   { oauth2 :: OAuth
@@ -115,7 +115,7 @@ data Auth = Auth
   deriving stock (Show, Eq, Ord, Generic)
   deriving anyclass (Structured, Persist, FromJSON)
 
-newtype OAuthScope = OAuthScope { text :: Text }
+newtype OAuthScope = OAuthScope {text :: Text}
   deriving stock (Show, Eq, Ord)
   deriving newtype (Structured, Persist, FromJSON, FromJSONKey)
 
@@ -149,7 +149,7 @@ instance FromJSON Resource where
       methods <- o .:? "methods" .!= mempty
       resources <- o .:? "resources" .!= mempty
 
-      pure Resource{..}
+      pure Resource {..}
 
 -- | An individual method description.
 data Method = Method
@@ -192,7 +192,7 @@ data Method = Method
 
 instance FromJSON Method where
   parseJSON =
-   Aeson.withObject "Method" $ \o -> do
+    Aeson.withObject "Method" $ \o -> do
       id <-
         o .: "id"
       description <-
@@ -219,7 +219,7 @@ instance FromJSON Method where
           Just o' -> o' .: "$ref"
       supportsMediaDownload <-
         o .:? "supportsMediaDownload" .!= False
-      supportsMediaUpload<-
+      supportsMediaUpload <-
         o .:? "supportsMediaUpload" .!= False
       supportsSubscription <-
         o .:? "supportsSubscription" .!= False

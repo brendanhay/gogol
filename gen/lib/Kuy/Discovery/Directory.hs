@@ -1,11 +1,11 @@
 module Kuy.Discovery.Directory where
 
-import Data.OrdPSQ qualified as OrdPSQ
-import Data.OrdPSQ (OrdPSQ)
-import Kuy.Prelude
 import Data.Map.Strict qualified as Map
-import Kuy.Discovery.Name
+import Data.OrdPSQ (OrdPSQ)
+import Data.OrdPSQ qualified as OrdPSQ
 import Kuy.Discovery.Label
+import Kuy.Discovery.Name
+import Kuy.Prelude
 
 -- | The list of all APIs supported by the Google APIs Discovery Service.
 --
@@ -58,10 +58,11 @@ data DirectoryItem = DirectoryItem
   deriving anyclass (Structured, Persist, FromJSON)
 
 data PriorityVersion = PriorityVersion
-  { preferred :: Down Bool
-  , version :: ServiceVersion
-  } deriving stock (Show, Eq, Ord, Generic)
-    deriving anyclass (Structured, Persist)
+  { preferred :: Down Bool,
+    version :: ServiceVersion
+  }
+  deriving stock (Show, Eq, Ord, Generic)
+  deriving anyclass (Structured, Persist)
 
 type ServiceVersions = OrdPSQ ServiceVersion PriorityVersion DirectoryItem
 
@@ -70,17 +71,17 @@ type DirectoryIndex = Map ServiceName ServiceVersions
 newDirectoryIndex :: [DirectoryItem] -> DirectoryIndex
 newDirectoryIndex =
   foldr (\item m -> Map.alter (update item) item.name m) Map.empty
- where
-   update item =
-     Just . \case
-      Nothing -> OrdPSQ.singleton item.version priority item
-      Just pq -> OrdPSQ.insert item.version priority item pq
-    where
-      priority =
-         PriorityVersion
-           { preferred = Down item.preferred,
-             version = item.version
-           }
+  where
+    update item =
+      Just . \case
+        Nothing -> OrdPSQ.singleton item.version priority item
+        Just pq -> OrdPSQ.insert item.version priority item pq
+      where
+        priority =
+          PriorityVersion
+            { preferred = Down item.preferred,
+              version = item.version
+            }
 
 preferredVersions :: DirectoryIndex -> [ServiceId]
 preferredVersions index =

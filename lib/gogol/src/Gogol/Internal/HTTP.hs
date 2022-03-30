@@ -106,15 +106,15 @@ perform Env {..} x =
     statusCheck rs
       | _cliCheck (responseStatus rs) = pure ()
       | otherwise = do
-        b <- sinkLBS (responseBody rs)
+          b <- sinkLBS (responseBody rs)
 
-        liftIO . throwIO . toException . ServiceError $
-          ServiceError'
-            { _serviceId = _svcId,
-              _serviceStatus = responseStatus rs,
-              _serviceHeaders = responseHeaders rs,
-              _serviceBody = Just b
-            }
+          liftIO . throwIO . toException . ServiceError $
+            ServiceError'
+              { _serviceId = _svcId,
+                _serviceStatus = responseStatus rs,
+                _serviceHeaders = responseHeaders rs,
+                _serviceBody = Just b
+              }
 
     timeout =
       maybe

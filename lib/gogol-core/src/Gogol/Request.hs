@@ -33,9 +33,9 @@ deleteQueryParams key query =
     -- Invariant: no leading query '?' is present.
     go bytes
       | ByteString.isPrefixOf prefix bytes =
-        dropPrefix bytes
+          dropPrefix bytes
       | ByteString.isInfixOf inline bytes =
-        let (a, b) = ByteString.breakSubstring inline bytes
-         in go (mconcat [a, dropInline b])
+          let (a, b) = ByteString.breakSubstring inline bytes
+           in go (mconcat [a, dropInline b])
       | otherwise =
-        bytes
+          bytes

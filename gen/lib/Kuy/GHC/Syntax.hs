@@ -1,5 +1,5 @@
 module Kuy.GHC.Syntax
-  ( module Export
+  ( module Export,
   )
 where
 

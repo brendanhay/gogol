@@ -15,7 +15,7 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             # ormolu > 4.0 required due to gogol-gen using OverloadedRecordDot.
-            haskellPackages.ormolu
+            # haskellPackages.ormolu
 
             # cabal-fmt isn't in top-level nixpkgs and doesn't build with ghc921.
             haskellPackages.cabal-fmt

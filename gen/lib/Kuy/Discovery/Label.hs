@@ -1,7 +1,7 @@
 module Kuy.Discovery.Label where
 
-import Kuy.Prelude
 import Data.Aeson qualified as Aeson
+import Kuy.Prelude
 
 -- | Labels for the status of an API.
 --

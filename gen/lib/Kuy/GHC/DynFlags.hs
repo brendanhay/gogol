@@ -11,7 +11,7 @@ import GHC.Platform qualified as GHC
 import GHC.Settings qualified as GHC
 import GHC.Settings.Config qualified as GHC
 import GHC.Utils.Fingerprint qualified as GHC
-import Kuy.Prelude 
+import Kuy.Prelude
 
 dynFlags :: GHC.DynFlags
 dynFlags =

@@ -2,10 +2,10 @@
 -- discovery document examples.
 module Kuy.Discovery.Schema where
 
-import Kuy.Prelude
-import Kuy.Discovery.Name
 import Data.Aeson qualified as Aeson
+import Kuy.Discovery.Name
 import Kuy.Markdown (Markdown)
+import Kuy.Prelude
 
 -- | Description of a single parameter.
 data Schema = Schema
@@ -59,44 +59,44 @@ instance FromJSON SchemaRef where
   parseJSON =
     Aeson.withObject "SchemaRef" $ \o ->
       fmap Follow (o .: "$ref") <|> fmap Inline (parseSchema o)
-   where
-     parseSchema o = do
-      id <-
-        o .:? "id"
-      format <-
-        parseJSON (Aeson.Object o)
-      description <-
-        o .:? "description"
-      default' <-
-        o .:? "default"
-      required <-
-        o .:? "required" .!= False
-      pattern' <-
-        o .:? "pattern"
-      minimum <-
-        o .:? "minimum"
-      maximum <-
-        o .:? "maximum"
-      enum <-
-        o .:? "enum"
-      enumDescriptions <-
-        o .:? "enumDescriptions"
-      repeated <-
-        o .:? "repeated" .!= False
-      location <-
-        o .:? "location"
-      properties <-
-        o .:? "properties" .!= mempty
-      additionalProperties <-
-        o .:? "additionalProperties"
-      items <-
-        o .:? "items"
-      annotations <-
-        o .:? "annotations" >>= \case
-          Nothing -> pure mempty
-          Just o' -> o' .: "required"
+    where
+      parseSchema o = do
+        id <-
+          o .:? "id"
+        format <-
+          parseJSON (Aeson.Object o)
+        description <-
+          o .:? "description"
+        default' <-
+          o .:? "default"
+        required <-
+          o .:? "required" .!= False
+        pattern' <-
+          o .:? "pattern"
+        minimum <-
+          o .:? "minimum"
+        maximum <-
+          o .:? "maximum"
+        enum <-
+          o .:? "enum"
+        enumDescriptions <-
+          o .:? "enumDescriptions"
+        repeated <-
+          o .:? "repeated" .!= False
+        location <-
+          o .:? "location"
+        properties <-
+          o .:? "properties" .!= mempty
+        additionalProperties <-
+          o .:? "additionalProperties"
+        items <-
+          o .:? "items"
+        annotations <-
+          o .:? "annotations" >>= \case
+            Nothing -> pure mempty
+            Just o' -> o' .: "required"
 
-      pure Schema {..}
+        pure Schema {..}
 
 -- | Whether a parameter goes in the query or the path for REST requests.
 data Location

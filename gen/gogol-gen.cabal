@@ -47,7 +47,6 @@ library
     , Cabal
     , containers              ^>=0.6
     , dependent-sum-template  ^>=0.1
-    , dlist                   ^>=1
     , filepath
     , ghc                     ^>=9.2.1
     , ghc-source-gen          ^>=0.4
@@ -64,7 +63,8 @@ library
     , time                    ^>=1.11
     , transformers            ^>=0.5
     , unliftio                ^>=0.2
-
+    , base16
+    
   exposed-modules:
     Kuy.Command
     Kuy.Discovery

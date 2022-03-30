@@ -6,10 +6,10 @@ where
 
 import Burrito qualified
 import Burrito.Internal.Type.Template qualified as Burrito
+import Burrito.Internal.Type.Token (Token (..))
 import Data.Aeson qualified as Aeson
 import Data.Text qualified as Text
 import Kuy.Prelude
-import Burrito.Internal.Type.Token (Token (..))
 
 -- | URI path of a REST method in RFC 6570 format without level 2 features ({+var}).
 newtype Template = Template {tokens :: [Token]}

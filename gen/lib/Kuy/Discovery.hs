@@ -5,11 +5,12 @@
 -- API-level properties such as an API description, resource schemas,
 -- authentication scopes, and methods.
 module Kuy.Discovery
-  ( module Export
-  ) where
+  ( module Export,
+  )
+where
 
+import Kuy.Discovery.Description as Export
 import Kuy.Discovery.Directory as Export
-import Kuy.Discovery.Description  as Export
+import Kuy.Discovery.Label as Export
 import Kuy.Discovery.Name as Export
 import Kuy.Discovery.Schema as Export
-import Kuy.Discovery.Label as Export

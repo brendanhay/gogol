@@ -1,8 +1,8 @@
 module Kuy.Discovery.Name where
 
-import Kuy.Prelude
 import Data.Aeson qualified as Aeson
 import Data.Text qualified as Text
+import Kuy.Prelude
 
 data ServiceId = ServiceId
   { name :: ServiceName,
@@ -24,23 +24,23 @@ instance FromJSON ServiceId where
                 version = ServiceVersion (Text.drop 1 version)
               }
 
-newtype ServiceName = ServiceName { text :: Text }
+newtype ServiceName = ServiceName {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString,Hashable,Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, Hashable, Structured, Persist, FromJSON, FromJSONKey)
 
-newtype ServiceVersion = ServiceVersion { text :: Text }
+newtype ServiceVersion = ServiceVersion {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString,Hashable,Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, Hashable, Structured, Persist, FromJSON, FromJSONKey)
 
 newtype MethodId = MethodId {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString,Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, Structured, Persist, FromJSON, FromJSONKey)
 
 -- | An absolute ID referring to a schema from the top-level schemas property of
 -- the service description.
 newtype SchemaId = SchemaId {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString,Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, Structured, Persist, FromJSON, FromJSONKey)
 
 -- | A constant type-level symbol parsed from a matching JSON string literal.
 data Literal (s :: Symbol) = Literal
