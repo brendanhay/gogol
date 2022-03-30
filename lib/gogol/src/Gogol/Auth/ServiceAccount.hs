@@ -153,7 +153,7 @@ encodeBearerJWT s p = liftIO $ do
         payload =
           base64Encode $
             [ "aud" .= tokenURL,
-              "scope" .= concatScopes (allowScopes p),
+              "scope" .= concatScopes (getScopes p),
               "iat" .= n,
               "exp" .= (n + seconds maxTokenLifetime),
               "iss" .= _serviceEmail s

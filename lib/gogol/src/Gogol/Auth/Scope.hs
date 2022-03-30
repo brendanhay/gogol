@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
@@ -18,7 +19,7 @@
 module Gogol.Auth.Scope
   ( -- * Type-level scopes
     type HasScope,
-    type HasScopeFor,
+    type HasAnyScope,
 
     -- ** Modifying lists of scopes
     allow,
@@ -43,37 +44,26 @@ import Data.Typeable (Proxy (..))
 import GHC.Exts (Constraint)
 import GHC.TypeLits
 import Gogol.Internal.Auth (Credentials)
-import Gogol.Types (OAuthScope (..))
+import Gogol.Types (OAuthScope (..), GoogleRequest (..))
 import Network.HTTP.Types (urlEncode)
 
--- | This 'Constraint' can be used to prove the scope @name@ is available in the
--- @scopes@ list, otherwise it produces compile-time error if @name@ is missing.
---
--- >>> HasScope "https://www.googleapis.com/auth/devstorage.read_write" scopes => Env scopes
-type family HasScope (name  :: Symbol) (scopes :: [Symbol]) :: Constraint where
-  HasScope name scopes =
-    If (Elem name scopes) (() :: Constraint) (TypeError (MissingScopeError name scopes))
+-- | 'Constraint' kind for proving @scopes@ contains _one_ required scope
+-- for the request, @a@.
+type HasScope scopes a = (AllowScopes scopes, HasAnyScope scopes (Scopes a))
 
-type MissingScopeError (name :: k) (scopes :: [k]) =
-          'Text "The following scope is required by HasScope:"
-    ':$$: 'Text "    " ':<>: 'ShowType name
-    ':$$: 'Text "But it doesn't exist in the list of provided scopes:"
+-- | Type family proving at least one scope from @scopes@ exists in @required@.
+type family HasAnyScope (scopes :: [Symbol]) (required :: [Symbol]) :: Constraint where
+  HasAnyScope _ '[] = () -- Special case; no scopes are required.
+  HasAnyScope scopes required =
+    If (Intersect scopes required) (() :: Constraint) (TypeError (MissingScopesError scopes required))
+
+type MissingScopesError (scopes :: [k]) (required :: [k]) =
+          'Text "You provided the following list of scopes:"
     ':$$: 'Text "    " ':<>: 'ShowType scopes
-
--- This 'Constraint' is used to prove that the
-type family HasScopeFor (have :: [Symbol]) (need :: [Symbol]) :: Constraint where
-  HasScopeFor _ '[] = () -- Special case; no scopes are required.
-  HasScopeFor have need =
-    If (Intersect have need) (() :: Constraint) (TypeError (MissingScopesError have need))
-
-type MissingScopesError (have :: [k]) (need :: [k]) =
-          'Text "You provided the following list of scopes to HasScopeFor:"
-    ':$$: 'Text "    " ':<>: 'ShowType have
     ':$$: 'Text "However, none of these scopes exist in the list of required scopes:"
-    ':$$: 'Text "    " ':<>: 'ShowType need
+    ':$$: 'Text "    " ':<>: 'ShowType required
 
--- Short-circuiting intersection - does at least _one_ element from
--- @as@ also exist in @bs@?
+-- Short-circuiting intersection - does at least one element exist in both lists?
 type family Intersect (as :: [k]) (bs :: [k]) :: Bool where
   Intersect '[] _ = 'False
   Intersect _ '[] = 'False
@@ -84,23 +74,6 @@ type family Elem (x :: k) (xs :: [k]) :: Bool where
     Elem _ '[]       = 'False
     Elem x (x ': xs) = 'True
     Elem x (y ': xs) = Elem x xs
-
--- This is all quadratic.
-
--- | Check if any one of supplied scopes @have@ are members of the required set,
--- @need@.
---
--- If the required set @need@ is empty, then succeed.
-type family AnyMember (have :: [Symbol]) (need :: [Symbol]) where
-  AnyMember have '[] = 'True -- Special case - no scopes are required.
-  AnyMember '[] need = 'False
-  AnyMember (x ': xs) need = IsMember x need || AnyMember xs need
-
--- | Test if @scope@ is a member of @need@.
-type family IsMember (scope :: Symbol) (need :: [Symbol]) where
-  IsMember x '[] = 'False
-  IsMember x (x ': xs) = 'True
-  IsMember x (y ': ys) = IsMember x ys
 
 -- This exists to allow users to choose between using 'newEnv'
 -- with a 'Proxy' constructed by '!', or explicitly
@@ -142,18 +115,18 @@ class AllowScopes a where
   --
   -- This is used to pass scope _values_ to functions that require them,
   -- such as 'Gogol.Auth.ServiceAccount.serviceAccountToken'.
-  allowScopes :: proxy a -> [OAuthScope]
+  getScopes :: proxy a -> [OAuthScope]
 
 instance AllowScopes '[] where
-  allowScopes _ = []
+  getScopes _ = []
 
 instance (KnownSymbol x, AllowScopes xs) => AllowScopes (x ': xs) where
-  allowScopes _ = scope (Proxy :: Proxy x) : allowScopes (Proxy :: Proxy xs)
+  getScopes _ = scope (Proxy :: Proxy x) : getScopes (Proxy :: Proxy xs)
     where
       scope = OAuthScope . Text.pack . symbolVal
 
 instance AllowScopes s => AllowScopes (Credentials s) where
-  allowScopes _ = allowScopes (Proxy :: Proxy s)
+  getScopes _ = getScopes (Proxy :: Proxy s)
 
 -- | Concatenate a list of scopes using spaces.
 concatScopes :: [OAuthScope] -> Text
