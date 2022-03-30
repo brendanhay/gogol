@@ -116,6 +116,7 @@ import Gogol.Prelude
 import Gogol.Types
 import Network.HTTP.Conduit (newManager, tlsManagerSettings)
 
+-- | Send a request, returning the associated response if successful.
 sendEither ::
   ( MonadResource m,
     GoogleRequest a,
@@ -142,6 +143,17 @@ send env =
   sendEither env
     >=> hoistEither
 
+-- | Send a request returning the associated streaming media response if successful.
+--
+-- Some request data types have two possible responses, the JSON metadata and
+-- a streaming media response. Use 'send' to retrieve the metadata and 'download'
+-- to retrieve the streaming media.
+--
+-- Equivalent to:
+--
+-- @
+-- 'sendEither' . 'MediaDownload'
+-- @
 downloadEither ::
   ( MonadResource m,
     GoogleRequest (MediaDownload a),
@@ -179,6 +191,33 @@ download env =
   downloadEither env
     >=> hoistEither
 
+-- | Send a request with an attached <https://tools.ietf.org/html/rfc2387 multipart/related media> upload.
+--
+-- @
+-- Equivalent to:
+--
+-- @
+-- 'sendEither' . 'MediaUpload'
+-- @
+--
+-- For example:
+--
+-- @
+-- uploadFile
+--   :: HasScope StorageObjectsInsert scopes
+--   => Env scopes
+--   -> Text
+--   -> Object
+--   -> MediaType
+--   -> FilePath
+--   -> IO (Either Error Object)
+-- uploadFile env bucket object media path = do
+--   let meta = newStorageObjectsInsert bucket (object { bucket = Just bucket })
+--
+--   body <- GBody media <$> Network.HTTP.Client.streamFile path
+--
+--   runResourceT (upload env meta body)
+-- @
 uploadEither ::
   ( MonadResource m,
     GoogleRequest (MediaUpload a),

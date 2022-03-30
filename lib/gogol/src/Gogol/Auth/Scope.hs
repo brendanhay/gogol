@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE ConstraintKinds #-}
+{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
@@ -39,12 +39,12 @@ import Data.Coerce (coerce)
 import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
-import Data.Type.Bool (type (||), type If)
+import Data.Type.Bool (type If, type (||))
 import Data.Typeable (Proxy (..))
 import GHC.Exts (Constraint)
 import GHC.TypeLits
 import Gogol.Internal.Auth (Credentials)
-import Gogol.Types (OAuthScope (..), GoogleRequest (..))
+import Gogol.Types (GoogleRequest (..), OAuthScope (..))
 import Network.HTTP.Types (urlEncode)
 
 -- | 'Constraint' kind for proving @scopes@ contains _one_ required scope
@@ -58,7 +58,7 @@ type family HasAnyScope (required :: [Symbol]) (scopes :: [Symbol]) :: Constrain
     If (Intersect required scopes) (() :: Constraint) (TypeError (MissingScopesError required scopes))
 
 type MissingScopesError (required :: [k]) (scopes :: [k]) =
-          'Text "One scope from the following list is required:"
+  'Text "One scope from the following list is required:"
     ':$$: 'Text "    " ':<>: 'ShowType required
     ':$$: 'Text "However, none of these scopes exist in the list of provided scopes:"
     ':$$: 'Text "    " ':<>: 'ShowType scopes
@@ -71,9 +71,9 @@ type family Intersect (as :: [k]) (bs :: [k]) :: Bool where
 
 -- Type-level 'Data.List.elem'.
 type family Elem (x :: k) (xs :: [k]) :: Bool where
-    Elem _ '[]       = 'False
-    Elem x (x ': xs) = 'True
-    Elem x (y ': xs) = Elem x xs
+  Elem _ '[] = 'False
+  Elem x (x ': xs) = 'True
+  Elem x (y ': xs) = Elem x xs
 
 -- This exists to allow users to choose between using 'newEnv'
 -- with a 'Proxy' constructed by '!', or explicitly
