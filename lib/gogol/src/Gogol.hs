@@ -118,8 +118,8 @@ import Network.HTTP.Conduit (newManager, tlsManagerSettings)
 
 sendEither ::
   ( MonadResource m,
-    HasScope scopes a,
-    GoogleRequest a
+    GoogleRequest a,
+    HasScope a scopes
   ) =>
   Env scopes ->
   a ->
@@ -132,8 +132,8 @@ sendEither =
 -- Throws 'Gogol.Types.Error'.
 send ::
   ( MonadResource m,
-    HasScope scopes a,
-    GoogleRequest a
+    GoogleRequest a,
+    HasScope a scopes
   ) =>
   Env scopes ->
   a ->
@@ -144,8 +144,8 @@ send env =
 
 downloadEither ::
   ( MonadResource m,
-    HasScope scopes (MediaDownload a),
-    GoogleRequest (MediaDownload a)
+    GoogleRequest (MediaDownload a),
+    HasScope (MediaDownload a) scopes
   ) =>
   Env scopes ->
   a ->
@@ -169,8 +169,8 @@ downloadEither env =
 -- Throws 'Gogol.Types.Error'.
 download ::
   ( MonadResource m,
-    HasScope scopes (MediaDownload a),
-    GoogleRequest (MediaDownload a)
+    GoogleRequest (MediaDownload a),
+    HasScope (MediaDownload a) scopes
   ) =>
   Env scopes ->
   a ->
@@ -181,8 +181,8 @@ download env =
 
 uploadEither ::
   ( MonadResource m,
-    HasScope scopes (MediaUpload a),
-    GoogleRequest (MediaUpload a)
+    GoogleRequest (MediaUpload a),
+    HasScope (MediaUpload a) scopes
   ) =>
   Env scopes ->
   a ->
@@ -203,8 +203,8 @@ uploadEither env x =
 -- Throws 'Gogol.Types.Error'.
 upload ::
   ( MonadResource m,
-    HasScope scopes (MediaUpload a),
-    GoogleRequest (MediaUpload a)
+    GoogleRequest (MediaUpload a),
+    HasScope (MediaUpload a) scopes
   ) =>
   Env scopes ->
   a ->

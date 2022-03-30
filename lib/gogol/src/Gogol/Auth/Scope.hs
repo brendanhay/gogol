@@ -49,19 +49,19 @@ import Network.HTTP.Types (urlEncode)
 
 -- | 'Constraint' kind for proving @scopes@ contains _one_ required scope
 -- for the request, @a@.
-type HasScope scopes a = (AllowScopes scopes, HasAnyScope scopes (Scopes a))
+type HasScope a scopes = (AllowScopes scopes, HasAnyScope scopes (Scopes a))
 
 -- | Type family proving at least one scope from @scopes@ exists in @required@.
-type family HasAnyScope (scopes :: [Symbol]) (required :: [Symbol]) :: Constraint where
-  HasAnyScope _ '[] = () -- Special case; no scopes are required.
-  HasAnyScope scopes required =
-    If (Intersect scopes required) (() :: Constraint) (TypeError (MissingScopesError scopes required))
+type family HasAnyScope (required :: [Symbol]) (scopes :: [Symbol]) :: Constraint where
+  HasAnyScope '[] _ = () -- Special case; no scopes are required.
+  HasAnyScope required scopes =
+    If (Intersect required scopes) (() :: Constraint) (TypeError (MissingScopesError required scopes))
 
-type MissingScopesError (scopes :: [k]) (required :: [k]) =
-          'Text "You provided the following list of scopes:"
-    ':$$: 'Text "    " ':<>: 'ShowType scopes
-    ':$$: 'Text "However, none of these scopes exist in the list of required scopes:"
+type MissingScopesError (required :: [k]) (scopes :: [k]) =
+          'Text "One scope from the following list is required:"
     ':$$: 'Text "    " ':<>: 'ShowType required
+    ':$$: 'Text "However, none of these scopes exist in the list of provided scopes:"
+    ':$$: 'Text "    " ':<>: 'ShowType scopes
 
 -- Short-circuiting intersection - does at least one element exist in both lists?
 type family Intersect (as :: [k]) (bs :: [k]) :: Bool where
