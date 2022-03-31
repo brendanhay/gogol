@@ -117,9 +117,7 @@ instance
       Policy
   type
     Scopes DeploymentManagerDeploymentsSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Cloudman]
   requestClient
     DeploymentManagerDeploymentsSetIamPolicy {..} =
       go

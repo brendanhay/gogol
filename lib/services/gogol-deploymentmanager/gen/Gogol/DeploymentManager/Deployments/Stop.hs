@@ -115,9 +115,7 @@ instance
   type Rs DeploymentManagerDeploymentsStop = Operation
   type
     Scopes DeploymentManagerDeploymentsStop =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Cloudman]
   requestClient DeploymentManagerDeploymentsStop {..} =
     go
       project

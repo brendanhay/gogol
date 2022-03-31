@@ -118,9 +118,7 @@ instance
       Operation
   type
     Scopes DeploymentManagerDeploymentsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Cloudman]
   requestClient DeploymentManagerDeploymentsInsert {..} =
     go
       project
