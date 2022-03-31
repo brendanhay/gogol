@@ -169,7 +169,7 @@ instance Core.GoogleRequest ReportsActivitiesWatch where
   type Rs ReportsActivitiesWatch = Channel
   type
     Scopes ReportsActivitiesWatch =
-      '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+      '[Admin'Reports'Audit'Readonly]
   requestClient ReportsActivitiesWatch {..} =
     go
       userKey

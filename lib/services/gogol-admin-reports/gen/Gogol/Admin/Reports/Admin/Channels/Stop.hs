@@ -96,7 +96,7 @@ instance Core.GoogleRequest AdminChannelsStop where
   type Rs AdminChannelsStop = ()
   type
     Scopes AdminChannelsStop =
-      '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+      '[Admin'Reports'Audit'Readonly]
   requestClient AdminChannelsStop {..} =
     go
       xgafv

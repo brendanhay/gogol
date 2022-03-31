@@ -112,7 +112,7 @@ instance
   type Rs ReportsCustomerUsageReportsGet = UsageReports
   type
     Scopes ReportsCustomerUsageReportsGet =
-      '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+      '[Admin'Reports'Usage'Readonly]
   requestClient ReportsCustomerUsageReportsGet {..} =
     go
       date

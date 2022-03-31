@@ -30,8 +30,8 @@ module Gogol.Admin.Reports.Types
     adminReportsService,
 
     -- * OAuth Scopes
-    adminReportsAuditReadOnlyScope,
-    adminReportsUsageReadOnlyScope,
+    Admin'Reports'Audit'Readonly,
+    Admin'Reports'Usage'Readonly,
 
     -- * Types
 
@@ -133,9 +133,7 @@ adminReportsService =
     "admin.googleapis.com"
 
 -- | View audit reports for your G Suite domain
-adminReportsAuditReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
-adminReportsAuditReadOnlyScope = Core.Proxy
+type Admin'Reports'Audit'Readonly = "https://www.googleapis.com/auth/admin.reports.audit.readonly"
 
 -- | View usage reports for your G Suite domain
-adminReportsUsageReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
-adminReportsUsageReadOnlyScope = Core.Proxy
+type Admin'Reports'Usage'Readonly = "https://www.googleapis.com/auth/admin.reports.usage.readonly"

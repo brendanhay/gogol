@@ -137,7 +137,7 @@ instance Core.GoogleRequest ReportsUserUsageReportGet where
   type Rs ReportsUserUsageReportGet = UsageReports
   type
     Scopes ReportsUserUsageReportGet =
-      '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+      '[Admin'Reports'Usage'Readonly]
   requestClient ReportsUserUsageReportGet {..} =
     go
       userKey
