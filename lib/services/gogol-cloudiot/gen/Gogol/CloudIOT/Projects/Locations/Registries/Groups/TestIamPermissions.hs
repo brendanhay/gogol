@@ -109,9 +109,7 @@ instance
   type
     Scopes
       CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudiot"
-       ]
+      '[CloudPlatform'FullControl, Cloudiot'FullControl]
   requestClient
     CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions {..} =
       go

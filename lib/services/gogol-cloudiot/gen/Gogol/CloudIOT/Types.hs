@@ -30,8 +30,8 @@ module Gogol.CloudIOT.Types
     cloudIOTService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudIOTScope,
+    CloudPlatform'FullControl,
+    Cloudiot'FullControl,
 
     -- * Types
 
@@ -230,9 +230,7 @@ cloudIOTService =
     "cloudiot.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Register and manage devices in the Google Cloud IoT service
-cloudIOTScope :: Core.Proxy '["https://www.googleapis.com/auth/cloudiot"]
-cloudIOTScope = Core.Proxy
+type Cloudiot'FullControl = "https://www.googleapis.com/auth/cloudiot"
