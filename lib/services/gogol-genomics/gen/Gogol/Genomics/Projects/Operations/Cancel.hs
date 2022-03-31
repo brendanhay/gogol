@@ -102,9 +102,7 @@ instance
   type Rs GenomicsProjectsOperationsCancel = Empty
   type
     Scopes GenomicsProjectsOperationsCancel =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/genomics"
-       ]
+      '[CloudPlatform'FullControl, Genomics'FullControl]
   requestClient GenomicsProjectsOperationsCancel {..} =
     go
       name

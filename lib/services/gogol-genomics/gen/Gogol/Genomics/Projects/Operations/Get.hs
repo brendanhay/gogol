@@ -96,9 +96,7 @@ instance
   type Rs GenomicsProjectsOperationsGet = Operation
   type
     Scopes GenomicsProjectsOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/genomics"
-       ]
+      '[CloudPlatform'FullControl, Genomics'FullControl]
   requestClient GenomicsProjectsOperationsGet {..} =
     go
       name

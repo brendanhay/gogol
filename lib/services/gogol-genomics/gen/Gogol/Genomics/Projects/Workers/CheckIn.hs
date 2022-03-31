@@ -104,9 +104,7 @@ instance
       CheckInResponse
   type
     Scopes GenomicsProjectsWorkersCheckIn =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/genomics"
-       ]
+      '[CloudPlatform'FullControl, Genomics'FullControl]
   requestClient GenomicsProjectsWorkersCheckIn {..} =
     go
       id
