@@ -96,8 +96,8 @@ instance
   type Rs RuntimeConfigOperationsDelete = Empty
   type
     Scopes RuntimeConfigOperationsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudruntimeconfig"
+      '[ CloudPlatform'FullControl,
+         Cloudruntimeconfig'FullControl
        ]
   requestClient RuntimeConfigOperationsDelete {..} =
     go

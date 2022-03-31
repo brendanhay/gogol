@@ -30,8 +30,8 @@ module Gogol.RuntimeConfig.Types
     runtimeConfigService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudruntimeconfigScope,
+    CloudPlatform'FullControl,
+    Cloudruntimeconfig'FullControl,
 
     -- * Types
 
@@ -84,9 +84,7 @@ runtimeConfigService =
     "runtimeconfig.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your Google Cloud Platform services\' runtime configuration
-cloudruntimeconfigScope :: Core.Proxy '["https://www.googleapis.com/auth/cloudruntimeconfig"]
-cloudruntimeconfigScope = Core.Proxy
+type Cloudruntimeconfig'FullControl = "https://www.googleapis.com/auth/cloudruntimeconfig"

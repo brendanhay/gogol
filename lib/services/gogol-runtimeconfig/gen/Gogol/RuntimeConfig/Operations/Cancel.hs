@@ -102,8 +102,8 @@ instance
   type Rs RuntimeConfigOperationsCancel = Empty
   type
     Scopes RuntimeConfigOperationsCancel =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudruntimeconfig"
+      '[ CloudPlatform'FullControl,
+         Cloudruntimeconfig'FullControl
        ]
   requestClient RuntimeConfigOperationsCancel {..} =
     go

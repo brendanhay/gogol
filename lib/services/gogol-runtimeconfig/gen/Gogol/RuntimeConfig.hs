@@ -34,8 +34,8 @@ module Gogol.RuntimeConfig
     runtimeConfigService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudruntimeconfigScope,
+    CloudPlatform'FullControl,
+    Cloudruntimeconfig'FullControl,
 
     -- * Resources
 

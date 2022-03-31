@@ -110,8 +110,8 @@ instance
       ListOperationsResponse
   type
     Scopes RuntimeConfigOperationsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudruntimeconfig"
+      '[ CloudPlatform'FullControl,
+         Cloudruntimeconfig'FullControl
        ]
   requestClient RuntimeConfigOperationsList {..} =
     go
