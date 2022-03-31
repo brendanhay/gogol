@@ -106,9 +106,7 @@ instance
   type Rs LoggingLocationsBucketsPatch = LogBucket
   type
     Scopes LoggingLocationsBucketsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingLocationsBucketsPatch {..} =
     go
       name

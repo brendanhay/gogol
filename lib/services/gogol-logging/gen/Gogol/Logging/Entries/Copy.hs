@@ -94,9 +94,7 @@ instance Core.GoogleRequest LoggingEntriesCopy where
   type Rs LoggingEntriesCopy = Operation
   type
     Scopes LoggingEntriesCopy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingEntriesCopy {..} =
     go
       xgafv

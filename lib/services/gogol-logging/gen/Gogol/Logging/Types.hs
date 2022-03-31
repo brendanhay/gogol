@@ -30,11 +30,11 @@ module Gogol.Logging.Types
     loggingService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    loggingAdminScope,
-    loggingReadScope,
-    loggingWriteScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Logging'Admin,
+    Logging'Read,
+    Logging'Write,
 
     -- * Types
 
@@ -354,21 +354,16 @@ loggingService =
     "logging.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Administrate log data for your projects
-loggingAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/logging.admin"]
-loggingAdminScope = Core.Proxy
+type Logging'Admin = "https://www.googleapis.com/auth/logging.admin"
 
 -- | View log data for your projects
-loggingReadScope :: Core.Proxy '["https://www.googleapis.com/auth/logging.read"]
-loggingReadScope = Core.Proxy
+type Logging'Read = "https://www.googleapis.com/auth/logging.read"
 
 -- | Submit log data for your projects
-loggingWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/logging.write"]
-loggingWriteScope = Core.Proxy
+type Logging'Write = "https://www.googleapis.com/auth/logging.write"

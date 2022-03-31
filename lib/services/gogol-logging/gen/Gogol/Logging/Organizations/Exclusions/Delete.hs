@@ -96,9 +96,7 @@ instance
   type Rs LoggingOrganizationsExclusionsDelete = Empty
   type
     Scopes LoggingOrganizationsExclusionsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient
     LoggingOrganizationsExclusionsDelete {..} =
       go

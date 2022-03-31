@@ -96,9 +96,7 @@ instance
   type Rs LoggingBillingAccountsSinksDelete = Empty
   type
     Scopes LoggingBillingAccountsSinksDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingBillingAccountsSinksDelete {..} =
     go
       sinkName

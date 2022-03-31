@@ -108,9 +108,7 @@ instance
       LogView
   type
     Scopes LoggingFoldersLocationsBucketsViewsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient
     LoggingFoldersLocationsBucketsViewsPatch {..} =
       go

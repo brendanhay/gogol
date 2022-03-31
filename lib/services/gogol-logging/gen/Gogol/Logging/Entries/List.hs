@@ -94,10 +94,10 @@ instance Core.GoogleRequest LoggingEntriesList where
   type Rs LoggingEntriesList = ListLogEntriesResponse
   type
     Scopes LoggingEntriesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/logging.admin",
-         "https://www.googleapis.com/auth/logging.read"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Logging'Admin,
+         Logging'Read
        ]
   requestClient LoggingEntriesList {..} =
     go

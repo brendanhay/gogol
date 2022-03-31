@@ -103,9 +103,7 @@ instance Core.GoogleRequest LoggingExclusionsPatch where
   type Rs LoggingExclusionsPatch = LogExclusion
   type
     Scopes LoggingExclusionsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingExclusionsPatch {..} =
     go
       name

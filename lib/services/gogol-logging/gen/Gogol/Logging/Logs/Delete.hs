@@ -93,9 +93,7 @@ instance Core.GoogleRequest LoggingLogsDelete where
   type Rs LoggingLogsDelete = Empty
   type
     Scopes LoggingLogsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingLogsDelete {..} =
     go
       logName

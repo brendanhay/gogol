@@ -104,9 +104,7 @@ instance Core.GoogleRequest LoggingUpdateSettings where
   type Rs LoggingUpdateSettings = Settings
   type
     Scopes LoggingUpdateSettings =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingUpdateSettings {..} =
     go
       name

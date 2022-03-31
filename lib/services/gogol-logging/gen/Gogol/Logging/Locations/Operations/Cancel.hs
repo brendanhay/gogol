@@ -102,9 +102,7 @@ instance
   type Rs LoggingLocationsOperationsCancel = Empty
   type
     Scopes LoggingLocationsOperationsCancel =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingLocationsOperationsCancel {..} =
     go
       name

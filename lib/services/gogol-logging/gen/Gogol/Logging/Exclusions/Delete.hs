@@ -93,9 +93,7 @@ instance Core.GoogleRequest LoggingExclusionsDelete where
   type Rs LoggingExclusionsDelete = Empty
   type
     Scopes LoggingExclusionsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingExclusionsDelete {..} =
     go
       name

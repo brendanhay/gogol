@@ -107,9 +107,7 @@ instance
   type Rs LoggingLocationsBucketsViewsCreate = LogView
   type
     Scopes LoggingLocationsBucketsViewsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingLocationsBucketsViewsCreate {..} =
     go
       parent

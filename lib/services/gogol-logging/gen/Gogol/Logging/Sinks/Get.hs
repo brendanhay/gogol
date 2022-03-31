@@ -93,10 +93,10 @@ instance Core.GoogleRequest LoggingSinksGet where
   type Rs LoggingSinksGet = LogSink
   type
     Scopes LoggingSinksGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/logging.admin",
-         "https://www.googleapis.com/auth/logging.read"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Logging'Admin,
+         Logging'Read
        ]
   requestClient LoggingSinksGet {..} =
     go
