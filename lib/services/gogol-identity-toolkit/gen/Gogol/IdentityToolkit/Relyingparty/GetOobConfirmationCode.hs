@@ -81,7 +81,7 @@ instance
   type
     Scopes
       IdentityToolkitRelyingpartyGetOobConfirmationCode =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyGetOobConfirmationCode {..} =
       go

@@ -81,7 +81,7 @@ instance
       DeleteAccountResponse
   type
     Scopes IdentityToolkitRelyingpartyDeleteAccount =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyDeleteAccount {..} =
       go

@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit
     identityToolkitService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    firebaseScope,
+    CloudPlatform'FullControl,
+    Firebase'FullControl,
 
     -- * Resources
 

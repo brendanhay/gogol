@@ -81,7 +81,7 @@ instance
       SetAccountInfoResponse
   type
     Scopes IdentityToolkitRelyingpartySetAccountInfo =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartySetAccountInfo {..} =
       go

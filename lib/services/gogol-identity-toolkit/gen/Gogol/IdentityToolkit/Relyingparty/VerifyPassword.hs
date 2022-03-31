@@ -81,7 +81,7 @@ instance
       VerifyPasswordResponse
   type
     Scopes IdentityToolkitRelyingpartyVerifyPassword =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyVerifyPassword {..} =
       go
