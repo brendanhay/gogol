@@ -34,7 +34,7 @@ module Gogol.RemoteBuildExecution
     remoteBuildExecutionService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

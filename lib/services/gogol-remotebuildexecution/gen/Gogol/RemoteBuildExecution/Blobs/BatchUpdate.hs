@@ -109,7 +109,7 @@ instance
       BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
   type
     Scopes RemoteBuildExecutionBlobsBatchUpdate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RemoteBuildExecutionBlobsBatchUpdate {..} =
       go

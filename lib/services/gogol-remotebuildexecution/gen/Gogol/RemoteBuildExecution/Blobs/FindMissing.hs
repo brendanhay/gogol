@@ -109,7 +109,7 @@ instance
       BuildBazelRemoteExecutionV2FindMissingBlobsResponse
   type
     Scopes RemoteBuildExecutionBlobsFindMissing =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RemoteBuildExecutionBlobsFindMissing {..} =
       go
