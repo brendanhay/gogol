@@ -98,9 +98,7 @@ instance
       CustomChannel
   type
     Scopes AdSenseAccountsAdclientsCustomchannelsGet =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient
     AdSenseAccountsAdclientsCustomchannelsGet {..} =
       go

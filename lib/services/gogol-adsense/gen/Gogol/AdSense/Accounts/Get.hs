@@ -93,9 +93,7 @@ instance Core.GoogleRequest AdSenseAccountsGet where
   type Rs AdSenseAccountsGet = Account
   type
     Scopes AdSenseAccountsGet =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsGet {..} =
     go
       name

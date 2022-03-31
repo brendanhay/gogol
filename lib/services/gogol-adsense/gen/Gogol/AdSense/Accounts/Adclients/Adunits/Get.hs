@@ -96,9 +96,7 @@ instance
   type Rs AdSenseAccountsAdclientsAdunitsGet = AdUnit
   type
     Scopes AdSenseAccountsAdclientsAdunitsGet =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsAdclientsAdunitsGet {..} =
     go
       name

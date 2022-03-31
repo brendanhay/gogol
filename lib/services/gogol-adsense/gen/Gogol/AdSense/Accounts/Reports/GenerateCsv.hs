@@ -179,9 +179,7 @@ instance
   type Rs AdSenseAccountsReportsGenerateCsv = HttpBody
   type
     Scopes AdSenseAccountsReportsGenerateCsv =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsReportsGenerateCsv {..} =
     go
       account

@@ -109,9 +109,7 @@ instance
       ListChildAccountsResponse
   type
     Scopes AdSenseAccountsListChildAccounts =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsListChildAccounts {..} =
     go
       parent
