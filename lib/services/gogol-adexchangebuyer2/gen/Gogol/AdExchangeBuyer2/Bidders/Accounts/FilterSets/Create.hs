@@ -111,7 +111,7 @@ instance
   type
     Scopes
       AdExchangeBuyer2BiddersAccountsFilterSetsCreate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2BiddersAccountsFilterSetsCreate {..} =
       go

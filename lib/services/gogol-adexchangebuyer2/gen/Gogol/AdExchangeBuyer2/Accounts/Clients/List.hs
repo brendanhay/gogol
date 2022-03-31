@@ -112,7 +112,7 @@ instance
       ListClientsResponse
   type
     Scopes AdExchangeBuyer2AccountsClientsList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyer2AccountsClientsList {..} =
     go
       accountId

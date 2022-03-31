@@ -112,7 +112,7 @@ instance
       Creative
   type
     Scopes AdExchangeBuyer2AccountsCreativesCreate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsCreativesCreate {..} =
       go

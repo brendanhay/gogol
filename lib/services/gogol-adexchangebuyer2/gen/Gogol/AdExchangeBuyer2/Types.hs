@@ -30,7 +30,7 @@ module Gogol.AdExchangeBuyer2.Types
     adExchangeBuyer2Service,
 
     -- * OAuth Scopes
-    adexchangeBuyerScope,
+    Adexchange'Buyer,
 
     -- * Types
 
@@ -651,5 +651,4 @@ adExchangeBuyer2Service =
     "adexchangebuyer.googleapis.com"
 
 -- | Manage your Ad Exchange buyer account configuration
-adexchangeBuyerScope :: Core.Proxy '["https://www.googleapis.com/auth/adexchange.buyer"]
-adexchangeBuyerScope = Core.Proxy
+type Adexchange'Buyer = "https://www.googleapis.com/auth/adexchange.buyer"

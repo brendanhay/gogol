@@ -117,7 +117,7 @@ instance
   type
     Scopes
       AdExchangeBuyer2AccountsProposalsCompleteSetup =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsProposalsCompleteSetup {..} =
       go

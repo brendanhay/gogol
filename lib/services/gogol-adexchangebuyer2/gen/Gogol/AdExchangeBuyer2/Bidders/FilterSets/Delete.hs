@@ -98,7 +98,7 @@ instance
       Empty
   type
     Scopes AdExchangeBuyer2BiddersFilterSetsDelete =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2BiddersFilterSetsDelete {..} =
       go

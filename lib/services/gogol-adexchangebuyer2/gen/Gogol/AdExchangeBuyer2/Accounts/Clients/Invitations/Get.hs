@@ -114,7 +114,7 @@ instance
   type
     Scopes
       AdExchangeBuyer2AccountsClientsInvitationsGet =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsClientsInvitationsGet {..} =
       go

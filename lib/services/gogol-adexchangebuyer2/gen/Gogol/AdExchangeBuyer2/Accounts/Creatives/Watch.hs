@@ -112,7 +112,7 @@ instance
       Empty
   type
     Scopes AdExchangeBuyer2AccountsCreativesWatch =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsCreativesWatch {..} =
       go
