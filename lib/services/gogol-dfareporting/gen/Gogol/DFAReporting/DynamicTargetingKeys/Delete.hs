@@ -119,7 +119,7 @@ instance
   type Rs DFAReportingDynamicTargetingKeysDelete = ()
   type
     Scopes DFAReportingDynamicTargetingKeysDelete =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingDynamicTargetingKeysDelete {..} =
       go

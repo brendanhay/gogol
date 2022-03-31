@@ -125,7 +125,7 @@ instance
   type
     Scopes
       DFAReportingCampaignCreativeAssociationsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingCampaignCreativeAssociationsList {..} =
       go

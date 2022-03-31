@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingUserRolesDelete = ()
   type
     Scopes DFAReportingUserRolesDelete =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingUserRolesDelete {..} =
     go
       profileId

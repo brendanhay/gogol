@@ -118,7 +118,7 @@ instance
       PlacementsGenerateTagsResponse
   type
     Scopes DFAReportingPlacementsGeneratetags =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingPlacementsGeneratetags {..} =
     go
       profileId

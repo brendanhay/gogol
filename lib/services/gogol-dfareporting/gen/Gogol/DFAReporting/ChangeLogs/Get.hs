@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingChangeLogsGet where
   type Rs DFAReportingChangeLogsGet = ChangeLog
   type
     Scopes DFAReportingChangeLogsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingChangeLogsGet {..} =
     go
       profileId

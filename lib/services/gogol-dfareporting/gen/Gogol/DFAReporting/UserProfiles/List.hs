@@ -94,9 +94,9 @@ instance
       UserProfileList
   type
     Scopes DFAReportingUserProfilesList =
-      '[ "https://www.googleapis.com/auth/ddmconversions",
-         "https://www.googleapis.com/auth/dfareporting",
-         "https://www.googleapis.com/auth/dfatrafficking"
+      '[ Ddmconversions'FullControl,
+         Dfareporting'FullControl,
+         Dfatrafficking'FullControl
        ]
   requestClient DFAReportingUserProfilesList {..} =
     go

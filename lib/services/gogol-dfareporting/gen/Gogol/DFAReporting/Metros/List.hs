@@ -96,7 +96,7 @@ instance Core.GoogleRequest DFAReportingMetrosList where
   type Rs DFAReportingMetrosList = MetrosListResponse
   type
     Scopes DFAReportingMetrosList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingMetrosList {..} =
     go
       profileId

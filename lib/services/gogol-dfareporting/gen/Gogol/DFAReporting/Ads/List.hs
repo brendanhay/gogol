@@ -228,7 +228,7 @@ instance Core.GoogleRequest DFAReportingAdsList where
   type Rs DFAReportingAdsList = AdsListResponse
   type
     Scopes DFAReportingAdsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdsList {..} =
     go
       profileId

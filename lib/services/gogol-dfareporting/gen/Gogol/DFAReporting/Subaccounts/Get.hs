@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingSubaccountsGet = Subaccount
   type
     Scopes DFAReportingSubaccountsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingSubaccountsGet {..} =
     go
       profileId

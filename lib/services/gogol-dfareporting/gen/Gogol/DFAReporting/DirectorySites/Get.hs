@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingDirectorySitesGet = DirectorySite
   type
     Scopes DFAReportingDirectorySitesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingDirectorySitesGet {..} =
     go
       profileId

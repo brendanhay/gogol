@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingCreativesInsert = Creative
   type
     Scopes DFAReportingCreativesInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCreativesInsert {..} =
     go
       profileId

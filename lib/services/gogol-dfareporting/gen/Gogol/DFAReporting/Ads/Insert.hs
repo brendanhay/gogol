@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingAdsInsert where
   type Rs DFAReportingAdsInsert = Ad
   type
     Scopes DFAReportingAdsInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdsInsert {..} =
     go
       profileId

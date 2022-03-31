@@ -127,7 +127,7 @@ instance
   type Rs DFAReportingReportsFilesGet = File
   type
     Scopes DFAReportingReportsFilesGet =
-      '["https://www.googleapis.com/auth/dfareporting"]
+      '[Dfareporting'FullControl]
   requestClient DFAReportingReportsFilesGet {..} =
     go
       profileId

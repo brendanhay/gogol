@@ -101,7 +101,7 @@ instance
       VideoFormatsListResponse
   type
     Scopes DFAReportingVideoFormatsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingVideoFormatsList {..} =
     go
       profileId

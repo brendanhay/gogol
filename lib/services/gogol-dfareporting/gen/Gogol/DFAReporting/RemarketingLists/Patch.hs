@@ -113,7 +113,7 @@ instance
       RemarketingList
   type
     Scopes DFAReportingRemarketingListsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingRemarketingListsPatch {..} =
     go
       profileId

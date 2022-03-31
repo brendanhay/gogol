@@ -34,9 +34,9 @@ module Gogol.DFAReporting
     dFAReportingService,
 
     -- * OAuth Scopes
-    ddmconversionsScope,
-    dFAReportingScope,
-    dfatraffickingScope,
+    Ddmconversions'FullControl,
+    Dfareporting'FullControl,
+    Dfatrafficking'FullControl,
 
     -- * Resources
 

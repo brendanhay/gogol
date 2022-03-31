@@ -125,7 +125,7 @@ instance
       MobileAppsListResponse
   type
     Scopes DFAReportingMobileAppsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingMobileAppsList {..} =
     go
       profileId

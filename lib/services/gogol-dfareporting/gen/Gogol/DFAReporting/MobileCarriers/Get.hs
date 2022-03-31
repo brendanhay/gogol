@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingMobileCarriersGet = MobileCarrier
   type
     Scopes DFAReportingMobileCarriersGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingMobileCarriersGet {..} =
     go
       profileId

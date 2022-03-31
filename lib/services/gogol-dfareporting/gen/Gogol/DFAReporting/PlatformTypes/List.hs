@@ -101,7 +101,7 @@ instance
       PlatformTypesListResponse
   type
     Scopes DFAReportingPlatformTypesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingPlatformTypesList {..} =
     go
       profileId

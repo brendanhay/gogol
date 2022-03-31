@@ -148,7 +148,7 @@ instance Core.GoogleRequest DFAReportingEventTagsList where
       EventTagsListResponse
   type
     Scopes DFAReportingEventTagsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingEventTagsList {..} =
     go
       profileId

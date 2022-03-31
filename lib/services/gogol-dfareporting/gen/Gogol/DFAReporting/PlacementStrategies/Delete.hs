@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingPlacementStrategiesDelete = ()
   type
     Scopes DFAReportingPlacementStrategiesDelete =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingPlacementStrategiesDelete {..} =
       go

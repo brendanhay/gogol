@@ -113,7 +113,7 @@ instance
       LandingPage
   type
     Scopes DFAReportingAdvertiserLandingPagesPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingAdvertiserLandingPagesPatch {..} =
       go

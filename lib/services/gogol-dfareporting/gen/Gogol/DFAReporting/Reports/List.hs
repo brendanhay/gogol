@@ -116,7 +116,7 @@ instance Core.GoogleRequest DFAReportingReportsList where
   type Rs DFAReportingReportsList = ReportList
   type
     Scopes DFAReportingReportsList =
-      '["https://www.googleapis.com/auth/dfareporting"]
+      '[Dfareporting'FullControl]
   requestClient DFAReportingReportsList {..} =
     go
       profileId

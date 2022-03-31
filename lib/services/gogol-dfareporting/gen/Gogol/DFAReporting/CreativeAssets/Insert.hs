@@ -135,7 +135,7 @@ instance
       CreativeAssetMetadata
   type
     Scopes DFAReportingCreativeAssetsInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCreativeAssetsInsert {..} =
     go
       profileId

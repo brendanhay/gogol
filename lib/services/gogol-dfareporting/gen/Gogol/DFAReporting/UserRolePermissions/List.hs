@@ -107,7 +107,7 @@ instance
       UserRolePermissionsListResponse
   type
     Scopes DFAReportingUserRolePermissionsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingUserRolePermissionsList {..} =
     go
       profileId

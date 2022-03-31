@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingEventTagsGet where
   type Rs DFAReportingEventTagsGet = EventTag
   type
     Scopes DFAReportingEventTagsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingEventTagsGet {..} =
     go
       profileId

@@ -98,7 +98,7 @@ instance Core.GoogleRequest DFAReportingLanguagesList where
       LanguagesListResponse
   type
     Scopes DFAReportingLanguagesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingLanguagesList {..} =
     go
       profileId

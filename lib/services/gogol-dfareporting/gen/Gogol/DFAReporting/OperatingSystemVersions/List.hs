@@ -103,7 +103,7 @@ instance
       OperatingSystemVersionsListResponse
   type
     Scopes DFAReportingOperatingSystemVersionsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingOperatingSystemVersionsList {..} =
       go

@@ -113,7 +113,7 @@ instance
       AdvertiserGroup
   type
     Scopes DFAReportingAdvertiserGroupsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdvertiserGroupsPatch {..} =
     go
       profileId

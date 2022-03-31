@@ -163,7 +163,7 @@ instance
       DirectorySitesListResponse
   type
     Scopes DFAReportingDirectorySitesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingDirectorySitesList {..} =
     go
       profileId

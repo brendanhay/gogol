@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingAdvertiserGroupsDelete = ()
   type
     Scopes DFAReportingAdvertiserGroupsDelete =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdvertiserGroupsDelete {..} =
     go
       profileId

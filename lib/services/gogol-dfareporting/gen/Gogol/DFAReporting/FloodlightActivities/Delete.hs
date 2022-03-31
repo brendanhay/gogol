@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingFloodlightActivitiesDelete = ()
   type
     Scopes DFAReportingFloodlightActivitiesDelete =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingFloodlightActivitiesDelete {..} =
       go

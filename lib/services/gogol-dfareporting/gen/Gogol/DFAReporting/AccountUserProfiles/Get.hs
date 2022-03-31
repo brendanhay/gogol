@@ -107,7 +107,7 @@ instance
       AccountUserProfile
   type
     Scopes DFAReportingAccountUserProfilesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAccountUserProfilesGet {..} =
     go
       profileId

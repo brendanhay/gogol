@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingSitesGet where
   type Rs DFAReportingSitesGet = Site
   type
     Scopes DFAReportingSitesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingSitesGet {..} =
     go
       profileId

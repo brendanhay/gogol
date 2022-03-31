@@ -113,7 +113,7 @@ instance
       FloodlightActivityGroup
   type
     Scopes DFAReportingFloodlightActivityGroupsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingFloodlightActivityGroupsPatch {..} =
       go

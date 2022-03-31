@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingPostalCodesGet = PostalCode
   type
     Scopes DFAReportingPostalCodesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingPostalCodesGet {..} =
     go
       profileId

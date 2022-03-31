@@ -113,7 +113,7 @@ instance
       CreativeField
   type
     Scopes DFAReportingCreativeFieldsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCreativeFieldsPatch {..} =
     go
       profileId

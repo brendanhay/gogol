@@ -120,7 +120,7 @@ instance
   type
     Scopes
       DFAReportingCampaignCreativeAssociationsInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingCampaignCreativeAssociationsInsert {..} =
       go

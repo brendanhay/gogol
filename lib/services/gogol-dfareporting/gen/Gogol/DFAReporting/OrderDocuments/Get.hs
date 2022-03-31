@@ -112,7 +112,7 @@ instance
   type Rs DFAReportingOrderDocumentsGet = OrderDocument
   type
     Scopes DFAReportingOrderDocumentsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingOrderDocumentsGet {..} =
     go
       profileId

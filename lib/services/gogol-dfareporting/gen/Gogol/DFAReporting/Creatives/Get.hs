@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingCreativesGet where
   type Rs DFAReportingCreativesGet = Creative
   type
     Scopes DFAReportingCreativesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCreativesGet {..} =
     go
       profileId
