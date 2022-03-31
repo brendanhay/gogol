@@ -104,7 +104,7 @@ instance
       Operation
   type
     Scopes CloudresourcemanagerFoldersUndelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerFoldersUndelete {..} =
     go
       name

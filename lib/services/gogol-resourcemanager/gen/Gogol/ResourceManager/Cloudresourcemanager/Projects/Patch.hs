@@ -106,7 +106,7 @@ instance
   type Rs CloudresourcemanagerProjectsPatch = Operation
   type
     Scopes CloudresourcemanagerProjectsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerProjectsPatch {..} =
     go
       name

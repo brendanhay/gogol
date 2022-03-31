@@ -103,7 +103,7 @@ instance
       Operation
   type
     Scopes CloudresourcemanagerTagBindingsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudresourcemanagerTagBindingsCreate {..} =
       go

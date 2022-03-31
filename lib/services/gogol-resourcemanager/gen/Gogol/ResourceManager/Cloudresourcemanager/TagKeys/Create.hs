@@ -101,7 +101,7 @@ instance
   type Rs CloudresourcemanagerTagKeysCreate = Operation
   type
     Scopes CloudresourcemanagerTagKeysCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerTagKeysCreate {..} =
     go
       xgafv

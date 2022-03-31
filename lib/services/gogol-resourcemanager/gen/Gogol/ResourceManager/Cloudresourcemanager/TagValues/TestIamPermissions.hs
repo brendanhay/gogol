@@ -109,7 +109,7 @@ instance
   type
     Scopes
       CloudresourcemanagerTagValuesTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudresourcemanagerTagValuesTestIamPermissions {..} =
       go

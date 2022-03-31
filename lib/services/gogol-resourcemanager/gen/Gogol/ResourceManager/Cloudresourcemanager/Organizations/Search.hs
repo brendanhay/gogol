@@ -105,9 +105,7 @@ instance
       SearchOrganizationsResponse
   type
     Scopes CloudresourcemanagerOrganizationsSearch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient
     CloudresourcemanagerOrganizationsSearch {..} =
       go

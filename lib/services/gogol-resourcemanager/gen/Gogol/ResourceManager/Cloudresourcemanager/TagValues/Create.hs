@@ -103,7 +103,7 @@ instance
       Operation
   type
     Scopes CloudresourcemanagerTagValuesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerTagValuesCreate {..} =
     go
       xgafv

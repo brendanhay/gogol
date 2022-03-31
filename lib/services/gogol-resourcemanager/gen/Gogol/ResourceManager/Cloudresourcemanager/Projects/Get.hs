@@ -96,9 +96,7 @@ instance
   type Rs CloudresourcemanagerProjectsGet = Project
   type
     Scopes CloudresourcemanagerProjectsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerProjectsGet {..} =
     go
       name

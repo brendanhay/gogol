@@ -96,9 +96,7 @@ instance
   type Rs CloudresourcemanagerLiensDelete = Empty
   type
     Scopes CloudresourcemanagerLiensDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerLiensDelete {..} =
     go
       name

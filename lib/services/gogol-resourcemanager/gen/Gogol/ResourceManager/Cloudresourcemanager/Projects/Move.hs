@@ -102,7 +102,7 @@ instance
   type Rs CloudresourcemanagerProjectsMove = Operation
   type
     Scopes CloudresourcemanagerProjectsMove =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerProjectsMove {..} =
     go
       name

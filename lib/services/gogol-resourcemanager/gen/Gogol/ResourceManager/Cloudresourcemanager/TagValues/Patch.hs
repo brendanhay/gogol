@@ -112,7 +112,7 @@ instance
       Operation
   type
     Scopes CloudresourcemanagerTagValuesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerTagValuesPatch {..} =
     go
       name

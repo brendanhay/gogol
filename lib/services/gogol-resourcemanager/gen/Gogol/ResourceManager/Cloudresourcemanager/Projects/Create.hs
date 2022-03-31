@@ -99,7 +99,7 @@ instance
       Operation
   type
     Scopes CloudresourcemanagerProjectsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerProjectsCreate {..} =
     go
       xgafv

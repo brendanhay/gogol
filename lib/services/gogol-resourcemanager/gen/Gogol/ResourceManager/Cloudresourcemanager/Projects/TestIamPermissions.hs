@@ -109,9 +109,7 @@ instance
   type
     Scopes
       CloudresourcemanagerProjectsTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient
     CloudresourcemanagerProjectsTestIamPermissions {..} =
       go

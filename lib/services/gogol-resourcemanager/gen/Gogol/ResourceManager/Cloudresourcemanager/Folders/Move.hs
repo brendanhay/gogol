@@ -102,7 +102,7 @@ instance
   type Rs CloudresourcemanagerFoldersMove = Operation
   type
     Scopes CloudresourcemanagerFoldersMove =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerFoldersMove {..} =
     go
       name
