@@ -108,7 +108,7 @@ instance
   type Rs DoubleclickbidmanagerQueriesRunquery = ()
   type
     Scopes DoubleclickbidmanagerQueriesRunquery =
-      '["https://www.googleapis.com/auth/doubleclickbidmanager"]
+      '[Doubleclickbidmanager'FullControl]
   requestClient
     DoubleclickbidmanagerQueriesRunquery {..} =
       go
