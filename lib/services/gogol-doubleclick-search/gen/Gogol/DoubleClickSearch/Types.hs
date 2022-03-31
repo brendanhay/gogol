@@ -30,7 +30,7 @@ module Gogol.DoubleClickSearch.Types
     doubleClickSearchService,
 
     -- * OAuth Scopes
-    doubleClickSearchScope,
+    Doubleclicksearch'FullControl,
 
     -- * Types
 
@@ -123,5 +123,4 @@ doubleClickSearchService =
     "doubleclicksearch.googleapis.com"
 
 -- | View and manage your advertising data in DoubleClick Search
-doubleClickSearchScope :: Core.Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
-doubleClickSearchScope = Core.Proxy
+type Doubleclicksearch'FullControl = "https://www.googleapis.com/auth/doubleclicksearch"

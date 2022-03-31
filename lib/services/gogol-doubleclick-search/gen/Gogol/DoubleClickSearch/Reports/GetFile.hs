@@ -118,7 +118,7 @@ instance
   type Rs DoubleClickSearchReportsGetFile = ()
   type
     Scopes DoubleClickSearchReportsGetFile =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient DoubleClickSearchReportsGetFile {..} =
     go
       reportId

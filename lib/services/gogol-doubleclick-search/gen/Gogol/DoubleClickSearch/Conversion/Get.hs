@@ -165,7 +165,7 @@ instance
       ConversionList
   type
     Scopes DoubleClickSearchConversionGet =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient DoubleClickSearchConversionGet {..} =
     go
       agencyId

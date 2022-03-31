@@ -99,7 +99,7 @@ instance
   type Rs DoubleClickSearchReportsGenerate = Report
   type
     Scopes DoubleClickSearchReportsGenerate =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient DoubleClickSearchReportsGenerate {..} =
     go
       xgafv

@@ -98,7 +98,7 @@ instance
   type Rs DoubleClickSearchReportsGet = Report
   type
     Scopes DoubleClickSearchReportsGet =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient DoubleClickSearchReportsGet {..} =
     go
       reportId

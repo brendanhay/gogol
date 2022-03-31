@@ -100,7 +100,7 @@ instance
       ConversionList
   type
     Scopes DoubleClickSearchConversionInsert =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient DoubleClickSearchConversionInsert {..} =
     go
       xgafv
