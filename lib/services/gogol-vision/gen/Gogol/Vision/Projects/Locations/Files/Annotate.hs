@@ -109,9 +109,7 @@ instance
       GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
   type
     Scopes VisionProjectsLocationsFilesAnnotate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-vision"
-       ]
+      '[CloudPlatform'FullControl, CloudVision'FullControl]
   requestClient
     VisionProjectsLocationsFilesAnnotate {..} =
       go

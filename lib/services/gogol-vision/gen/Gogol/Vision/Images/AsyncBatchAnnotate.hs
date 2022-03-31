@@ -99,9 +99,7 @@ instance
   type Rs VisionImagesAsyncBatchAnnotate = Operation
   type
     Scopes VisionImagesAsyncBatchAnnotate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-vision"
-       ]
+      '[CloudPlatform'FullControl, CloudVision'FullControl]
   requestClient VisionImagesAsyncBatchAnnotate {..} =
     go
       xgafv
