@@ -30,7 +30,7 @@ module Gogol.PlayCustomApp.Types
     playCustomAppService,
 
     -- * OAuth Scopes
-    androidpublisherScope,
+    Androidpublisher'FullControl,
 
     -- * Types
 
@@ -59,5 +59,4 @@ playCustomAppService =
     "playcustomapp.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-androidpublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidpublisherScope = Core.Proxy
+type Androidpublisher'FullControl = "https://www.googleapis.com/auth/androidpublisher"

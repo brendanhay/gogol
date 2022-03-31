@@ -122,7 +122,7 @@ instance
       CustomApp
   type
     Scopes PlayCustomAppAccountsCustomAppsCreate =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     PlayCustomAppAccountsCustomAppsCreate {..} =
       go
