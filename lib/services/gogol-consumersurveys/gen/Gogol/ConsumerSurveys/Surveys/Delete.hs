@@ -78,9 +78,7 @@ instance
       SurveysDeleteResponse
   type
     Scopes ConsumerSurveysSurveysDelete =
-      '[ "https://www.googleapis.com/auth/consumersurveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Consumersurveys'FullControl, Userinfo'Email]
   requestClient ConsumerSurveysSurveysDelete {..} =
     go
       surveyUrlId

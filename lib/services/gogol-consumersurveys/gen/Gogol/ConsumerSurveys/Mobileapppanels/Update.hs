@@ -83,9 +83,7 @@ instance
       MobileAppPanel
   type
     Scopes ConsumerSurveysMobileapppanelsUpdate =
-      '[ "https://www.googleapis.com/auth/consumersurveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Consumersurveys'FullControl, Userinfo'Email]
   requestClient
     ConsumerSurveysMobileapppanelsUpdate {..} =
       go
