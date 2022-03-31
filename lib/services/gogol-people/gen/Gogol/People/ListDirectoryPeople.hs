@@ -127,7 +127,7 @@ instance
       ListDirectoryPeopleResponse
   type
     Scopes PeoplePeopleListDirectoryPeople =
-      '["https://www.googleapis.com/auth/directory.readonly"]
+      '[Directory'Readonly]
   requestClient PeoplePeopleListDirectoryPeople {..} =
     go
       xgafv

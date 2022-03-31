@@ -97,7 +97,7 @@ instance Core.GoogleRequest PeopleContactGroupsDelete where
   type Rs PeopleContactGroupsDelete = Empty
   type
     Scopes PeopleContactGroupsDelete =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeopleContactGroupsDelete {..} =
     go
       resourceName

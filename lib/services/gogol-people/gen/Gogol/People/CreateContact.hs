@@ -102,7 +102,7 @@ instance Core.GoogleRequest PeoplePeopleCreateContact where
   type Rs PeoplePeopleCreateContact = Person
   type
     Scopes PeoplePeopleCreateContact =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeoplePeopleCreateContact {..} =
     go
       xgafv

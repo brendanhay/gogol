@@ -101,9 +101,7 @@ instance Core.GoogleRequest PeopleContactGroupsGet where
   type Rs PeopleContactGroupsGet = ContactGroup
   type
     Scopes PeopleContactGroupsGet =
-      '[ "https://www.googleapis.com/auth/contacts",
-         "https://www.googleapis.com/auth/contacts.readonly"
-       ]
+      '[Contacts'FullControl, Contacts'Readonly]
   requestClient PeopleContactGroupsGet {..} =
     go
       resourceName

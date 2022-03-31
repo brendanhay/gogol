@@ -109,9 +109,7 @@ instance
   type Rs PeoplePeopleSearchContacts = SearchResponse
   type
     Scopes PeoplePeopleSearchContacts =
-      '[ "https://www.googleapis.com/auth/contacts",
-         "https://www.googleapis.com/auth/contacts.readonly"
-       ]
+      '[Contacts'FullControl, Contacts'Readonly]
   requestClient PeoplePeopleSearchContacts {..} =
     go
       xgafv

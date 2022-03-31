@@ -139,9 +139,7 @@ instance
       ListConnectionsResponse
   type
     Scopes PeoplePeopleConnectionsList =
-      '[ "https://www.googleapis.com/auth/contacts",
-         "https://www.googleapis.com/auth/contacts.readonly"
-       ]
+      '[Contacts'FullControl, Contacts'Readonly]
   requestClient PeoplePeopleConnectionsList {..} =
     go
       resourceName

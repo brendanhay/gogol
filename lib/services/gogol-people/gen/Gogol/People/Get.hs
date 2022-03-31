@@ -107,17 +107,17 @@ instance Core.GoogleRequest PeoplePeopleGet where
   type Rs PeoplePeopleGet = Person
   type
     Scopes PeoplePeopleGet =
-      '[ "https://www.googleapis.com/auth/contacts",
-         "https://www.googleapis.com/auth/contacts.readonly",
-         "https://www.googleapis.com/auth/directory.readonly",
-         "https://www.googleapis.com/auth/user.addresses.read",
-         "https://www.googleapis.com/auth/user.birthday.read",
-         "https://www.googleapis.com/auth/user.emails.read",
-         "https://www.googleapis.com/auth/user.gender.read",
-         "https://www.googleapis.com/auth/user.organization.read",
-         "https://www.googleapis.com/auth/user.phonenumbers.read",
-         "https://www.googleapis.com/auth/userinfo.email",
-         "https://www.googleapis.com/auth/userinfo.profile"
+      '[ Contacts'FullControl,
+         Contacts'Readonly,
+         Directory'Readonly,
+         User'Addresses'Read,
+         User'Birthday'Read,
+         User'Emails'Read,
+         User'Gender'Read,
+         User'Organization'Read,
+         User'Phonenumbers'Read,
+         Userinfo'Email,
+         Userinfo'Profile
        ]
   requestClient PeoplePeopleGet {..} =
     go

@@ -99,7 +99,7 @@ instance
       BatchUpdateContactsResponse
   type
     Scopes PeoplePeopleBatchUpdateContacts =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeoplePeopleBatchUpdateContacts {..} =
     go
       xgafv

@@ -100,7 +100,7 @@ instance Core.GoogleRequest PeopleOtherContactsSearch where
   type Rs PeopleOtherContactsSearch = SearchResponse
   type
     Scopes PeopleOtherContactsSearch =
-      '["https://www.googleapis.com/auth/contacts.other.readonly"]
+      '[Contacts'Other'Readonly]
   requestClient PeopleOtherContactsSearch {..} =
     go
       xgafv

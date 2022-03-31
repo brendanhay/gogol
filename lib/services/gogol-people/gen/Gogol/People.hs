@@ -34,18 +34,18 @@ module Gogol.People
     peopleService,
 
     -- * OAuth Scopes
-    contactsScope,
-    contactsOtherReadOnlyScope,
-    contactsReadOnlyScope,
-    directoryReadOnlyScope,
-    userAddressesReadScope,
-    userBirthdayReadScope,
-    userEmailsReadScope,
-    userGenderReadScope,
-    userOrganizationReadScope,
-    userPhoneNumbersReadScope,
-    userinfoEmailScope,
-    userinfoProfileScope,
+    Contacts'FullControl,
+    Contacts'Other'Readonly,
+    Contacts'Readonly,
+    Directory'Readonly,
+    User'Addresses'Read,
+    User'Birthday'Read,
+    User'Emails'Read,
+    User'Gender'Read,
+    User'Organization'Read,
+    User'Phonenumbers'Read,
+    Userinfo'Email,
+    Userinfo'Profile,
 
     -- * Resources
 

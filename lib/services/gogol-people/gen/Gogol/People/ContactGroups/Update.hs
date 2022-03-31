@@ -99,7 +99,7 @@ instance Core.GoogleRequest PeopleContactGroupsUpdate where
   type Rs PeopleContactGroupsUpdate = ContactGroup
   type
     Scopes PeopleContactGroupsUpdate =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeopleContactGroupsUpdate {..} =
     go
       resourceName

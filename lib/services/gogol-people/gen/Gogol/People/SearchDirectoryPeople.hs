@@ -123,7 +123,7 @@ instance
       SearchDirectoryPeopleResponse
   type
     Scopes PeoplePeopleSearchDirectoryPeople =
-      '["https://www.googleapis.com/auth/directory.readonly"]
+      '[Directory'Readonly]
   requestClient PeoplePeopleSearchDirectoryPeople {..} =
     go
       xgafv

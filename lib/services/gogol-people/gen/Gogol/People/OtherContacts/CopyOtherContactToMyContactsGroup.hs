@@ -111,9 +111,7 @@ instance
   type
     Scopes
       PeopleOtherContactsCopyOtherContactToMyContactsGroup =
-      '[ "https://www.googleapis.com/auth/contacts",
-         "https://www.googleapis.com/auth/contacts.other.readonly"
-       ]
+      '[Contacts'FullControl, Contacts'Other'Readonly]
   requestClient
     PeopleOtherContactsCopyOtherContactToMyContactsGroup {..} =
       go

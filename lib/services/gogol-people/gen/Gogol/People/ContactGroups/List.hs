@@ -106,9 +106,7 @@ instance Core.GoogleRequest PeopleContactGroupsList where
       ListContactGroupsResponse
   type
     Scopes PeopleContactGroupsList =
-      '[ "https://www.googleapis.com/auth/contacts",
-         "https://www.googleapis.com/auth/contacts.readonly"
-       ]
+      '[Contacts'FullControl, Contacts'Readonly]
   requestClient PeopleContactGroupsList {..} =
     go
       xgafv

@@ -107,7 +107,7 @@ instance
       UpdateContactPhotoResponse
   type
     Scopes PeoplePeopleUpdateContactPhoto =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeoplePeopleUpdateContactPhoto {..} =
     go
       resourceName
