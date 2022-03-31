@@ -102,7 +102,7 @@ instance
   type Rs SourceRepoProjectsReposSync = Operation
   type
     Scopes SourceRepoProjectsReposSync =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient SourceRepoProjectsReposSync {..} =
     go
       name

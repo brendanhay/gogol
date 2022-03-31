@@ -30,10 +30,10 @@ module Gogol.SourceRepo.Types
     sourceRepoService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    sourceFull_controlScope,
-    sourceRead_OnlyScope,
-    sourceRead_writeScope,
+    CloudPlatform'FullControl,
+    Source'FullControl,
+    Source'ReadOnly,
+    Source'ReadWrite,
 
     -- * Types
 
@@ -160,17 +160,13 @@ sourceRepoService =
     "sourcerepo.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your source code repositories
-sourceFull_controlScope :: Core.Proxy '["https://www.googleapis.com/auth/source.full_control"]
-sourceFull_controlScope = Core.Proxy
+type Source'FullControl = "https://www.googleapis.com/auth/source.full_control"
 
 -- | View the contents of your source code repositories
-sourceRead_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_only"]
-sourceRead_OnlyScope = Core.Proxy
+type Source'ReadOnly = "https://www.googleapis.com/auth/source.read_only"
 
 -- | Manage the contents of your source code repositories
-sourceRead_writeScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_write"]
-sourceRead_writeScope = Core.Proxy
+type Source'ReadWrite = "https://www.googleapis.com/auth/source.read_write"

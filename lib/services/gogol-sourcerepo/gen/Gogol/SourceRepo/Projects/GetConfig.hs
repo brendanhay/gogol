@@ -97,7 +97,7 @@ instance
   type Rs SourceRepoProjectsGetConfig = ProjectConfig
   type
     Scopes SourceRepoProjectsGetConfig =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient SourceRepoProjectsGetConfig {..} =
     go
       name

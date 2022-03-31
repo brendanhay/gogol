@@ -102,7 +102,7 @@ instance
   type Rs SourceRepoProjectsReposPatch = Repo
   type
     Scopes SourceRepoProjectsReposPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient SourceRepoProjectsReposPatch {..} =
     go
       name
