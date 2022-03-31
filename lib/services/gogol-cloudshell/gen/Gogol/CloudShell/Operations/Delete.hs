@@ -96,7 +96,7 @@ instance
   type Rs CloudShellOperationsDelete = Empty
   type
     Scopes CloudShellOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudShellOperationsDelete {..} =
     go
       name

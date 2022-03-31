@@ -93,7 +93,7 @@ instance Core.GoogleRequest CloudShellOperationsGet where
   type Rs CloudShellOperationsGet = Operation
   type
     Scopes CloudShellOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudShellOperationsGet {..} =
     go
       name

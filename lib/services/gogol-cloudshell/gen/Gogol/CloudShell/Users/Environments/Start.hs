@@ -102,7 +102,7 @@ instance
   type Rs CloudShellUsersEnvironmentsStart = Operation
   type
     Scopes CloudShellUsersEnvironmentsStart =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudShellUsersEnvironmentsStart {..} =
     go
       name

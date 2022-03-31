@@ -107,7 +107,7 @@ instance Core.GoogleRequest CloudShellOperationsList where
       ListOperationsResponse
   type
     Scopes CloudShellOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudShellOperationsList {..} =
     go
       name

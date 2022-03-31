@@ -34,7 +34,7 @@ module Gogol.CloudShell
     cloudShellService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

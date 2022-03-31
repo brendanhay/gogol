@@ -102,7 +102,7 @@ instance
   type Rs CloudShellOperationsCancel = Empty
   type
     Scopes CloudShellOperationsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudShellOperationsCancel {..} =
     go
       name
