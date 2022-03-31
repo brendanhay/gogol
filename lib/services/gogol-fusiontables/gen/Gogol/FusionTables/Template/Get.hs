@@ -79,9 +79,7 @@ instance Core.GoogleRequest FusionTablesTemplateGet where
   type Rs FusionTablesTemplateGet = Template
   type
     Scopes FusionTablesTemplateGet =
-      '[ "https://www.googleapis.com/auth/fusiontables",
-         "https://www.googleapis.com/auth/fusiontables.readonly"
-       ]
+      '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesTemplateGet {..} =
     go
       tableId

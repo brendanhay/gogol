@@ -74,9 +74,7 @@ instance Core.GoogleRequest FusionTablesTableList where
   type Rs FusionTablesTableList = TableList
   type
     Scopes FusionTablesTableList =
-      '[ "https://www.googleapis.com/auth/fusiontables",
-         "https://www.googleapis.com/auth/fusiontables.readonly"
-       ]
+      '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesTableList {..} =
     go
       maxResults

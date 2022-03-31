@@ -77,9 +77,7 @@ instance Core.GoogleRequest FusionTablesTableCopy where
   type Rs FusionTablesTableCopy = Table
   type
     Scopes FusionTablesTableCopy =
-      '[ "https://www.googleapis.com/auth/fusiontables",
-         "https://www.googleapis.com/auth/fusiontables.readonly"
-       ]
+      '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesTableCopy {..} =
     go
       tableId

@@ -82,7 +82,7 @@ instance
   type Rs FusionTablesTemplateDelete = ()
   type
     Scopes FusionTablesTemplateDelete =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTemplateDelete {..} =
     go
       tableId

@@ -85,7 +85,7 @@ instance Core.GoogleRequest FusionTablesTableUpdate where
   type Rs FusionTablesTableUpdate = Table
   type
     Scopes FusionTablesTableUpdate =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTableUpdate {..} =
     go
       tableId

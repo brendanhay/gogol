@@ -30,8 +30,8 @@ module Gogol.FusionTables.Types
     fusionTablesService,
 
     -- * OAuth Scopes
-    fusionTablesScope,
-    fusionTablesReadOnlyScope,
+    Fusiontables'FullControl,
+    Fusiontables'Readonly,
 
     -- * Types
 
@@ -145,9 +145,7 @@ fusionTablesService =
     "www.googleapis.com"
 
 -- | Manage your Fusion Tables
-fusionTablesScope :: Core.Proxy '["https://www.googleapis.com/auth/fusiontables"]
-fusionTablesScope = Core.Proxy
+type Fusiontables'FullControl = "https://www.googleapis.com/auth/fusiontables"
 
 -- | View your Fusion Tables
-fusionTablesReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
-fusionTablesReadOnlyScope = Core.Proxy
+type Fusiontables'Readonly = "https://www.googleapis.com/auth/fusiontables.readonly"

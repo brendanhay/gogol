@@ -72,7 +72,7 @@ instance Core.GoogleRequest FusionTablesTableDelete where
   type Rs FusionTablesTableDelete = ()
   type
     Scopes FusionTablesTableDelete =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTableDelete {..} =
     go
       tableId
