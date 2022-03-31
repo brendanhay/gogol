@@ -34,7 +34,7 @@ module Gogol.CommentAnalyzer
     commentAnalyzerService,
 
     -- * OAuth Scopes
-    userinfoEmailScope,
+    Userinfo'Email,
 
     -- * Resources
 

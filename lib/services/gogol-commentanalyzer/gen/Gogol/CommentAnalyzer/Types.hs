@@ -30,7 +30,7 @@ module Gogol.CommentAnalyzer.Types
     commentAnalyzerService,
 
     -- * OAuth Scopes
-    userinfoEmailScope,
+    Userinfo'Email,
 
     -- * Types
 
@@ -116,5 +116,4 @@ commentAnalyzerService =
     "commentanalyzer.googleapis.com"
 
 -- | View your email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
