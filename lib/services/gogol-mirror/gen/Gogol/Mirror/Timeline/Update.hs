@@ -87,9 +87,7 @@ instance Core.GoogleRequest MirrorTimelineUpdate where
   type Rs MirrorTimelineUpdate = TimelineItem
   type
     Scopes MirrorTimelineUpdate =
-      '[ "https://www.googleapis.com/auth/glass.location",
-         "https://www.googleapis.com/auth/glass.timeline"
-       ]
+      '[Glass'Location, Glass'Timeline]
   requestClient MirrorTimelineUpdate {..} =
     go
       id

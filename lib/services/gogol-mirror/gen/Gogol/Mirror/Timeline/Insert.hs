@@ -80,9 +80,7 @@ instance Core.GoogleRequest MirrorTimelineInsert where
   type Rs MirrorTimelineInsert = TimelineItem
   type
     Scopes MirrorTimelineInsert =
-      '[ "https://www.googleapis.com/auth/glass.location",
-         "https://www.googleapis.com/auth/glass.timeline"
-       ]
+      '[Glass'Location, Glass'Timeline]
   requestClient MirrorTimelineInsert {..} =
     go (Core.Just Core.AltJSON) payload mirrorService
     where

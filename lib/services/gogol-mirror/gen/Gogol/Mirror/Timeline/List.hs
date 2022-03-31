@@ -97,9 +97,7 @@ instance Core.GoogleRequest MirrorTimelineList where
   type Rs MirrorTimelineList = TimelineListResponse
   type
     Scopes MirrorTimelineList =
-      '[ "https://www.googleapis.com/auth/glass.location",
-         "https://www.googleapis.com/auth/glass.timeline"
-       ]
+      '[Glass'Location, Glass'Timeline]
   requestClient MirrorTimelineList {..} =
     go
       bundleId

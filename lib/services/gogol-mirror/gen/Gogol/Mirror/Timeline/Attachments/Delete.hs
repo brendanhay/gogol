@@ -82,7 +82,7 @@ instance
   type Rs MirrorTimelineAttachmentsDelete = ()
   type
     Scopes MirrorTimelineAttachmentsDelete =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+      '[Glass'Timeline]
   requestClient MirrorTimelineAttachmentsDelete {..} =
     go
       itemId

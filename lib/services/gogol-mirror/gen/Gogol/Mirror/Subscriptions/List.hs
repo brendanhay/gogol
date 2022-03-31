@@ -68,7 +68,7 @@ instance Core.GoogleRequest MirrorSubscriptionsList where
       SubscriptionsListResponse
   type
     Scopes MirrorSubscriptionsList =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+      '[Glass'Timeline]
   requestClient MirrorSubscriptionsList {} =
     go (Core.Just Core.AltJSON) mirrorService
     where

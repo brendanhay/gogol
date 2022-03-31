@@ -72,9 +72,7 @@ instance Core.GoogleRequest MirrorLocationsGet where
   type Rs MirrorLocationsGet = Location
   type
     Scopes MirrorLocationsGet =
-      '[ "https://www.googleapis.com/auth/glass.location",
-         "https://www.googleapis.com/auth/glass.timeline"
-       ]
+      '[Glass'Location, Glass'Timeline]
   requestClient MirrorLocationsGet {..} =
     go id (Core.Just Core.AltJSON) mirrorService
     where

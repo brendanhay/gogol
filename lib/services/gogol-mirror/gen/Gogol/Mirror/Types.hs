@@ -30,8 +30,8 @@ module Gogol.Mirror.Types
     mirrorService,
 
     -- * OAuth Scopes
-    glassLocationScope,
-    glassTimelineScope,
+    Glass'Location,
+    Glass'Timeline,
 
     -- * Types
 
@@ -132,9 +132,7 @@ mirrorService =
     "www.googleapis.com"
 
 -- | View your location
-glassLocationScope :: Core.Proxy '["https://www.googleapis.com/auth/glass.location"]
-glassLocationScope = Core.Proxy
+type Glass'Location = "https://www.googleapis.com/auth/glass.location"
 
 -- | View and manage your Glass timeline
-glassTimelineScope :: Core.Proxy '["https://www.googleapis.com/auth/glass.timeline"]
-glassTimelineScope = Core.Proxy
+type Glass'Timeline = "https://www.googleapis.com/auth/glass.timeline"
