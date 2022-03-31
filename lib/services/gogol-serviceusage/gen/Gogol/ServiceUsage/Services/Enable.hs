@@ -102,9 +102,7 @@ instance
   type Rs ServiceUsageServicesEnable = Operation
   type
     Scopes ServiceUsageServicesEnable =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient ServiceUsageServicesEnable {..} =
     go
       name

@@ -103,9 +103,7 @@ instance
   type Rs ServiceUsageServicesBatchEnable = Operation
   type
     Scopes ServiceUsageServicesBatchEnable =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient ServiceUsageServicesBatchEnable {..} =
     go
       parent
