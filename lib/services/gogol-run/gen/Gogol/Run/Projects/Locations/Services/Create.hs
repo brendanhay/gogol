@@ -113,7 +113,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes RunProjectsLocationsServicesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RunProjectsLocationsServicesCreate {..} =
     go
       parent

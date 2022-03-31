@@ -34,7 +34,7 @@ module Gogol.Run
     runService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

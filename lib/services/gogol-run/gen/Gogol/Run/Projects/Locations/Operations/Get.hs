@@ -98,7 +98,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes RunProjectsLocationsOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RunProjectsLocationsOperationsGet {..} =
     go
       name
