@@ -98,7 +98,7 @@ instance
       Empty
   type
     Scopes DataprocProjectsLocationsBatchesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsLocationsBatchesDelete {..} =
       go

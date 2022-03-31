@@ -111,7 +111,7 @@ instance
   type Rs DataprocProjectsRegionsJobsDelete = Empty
   type
     Scopes DataprocProjectsRegionsJobsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DataprocProjectsRegionsJobsDelete {..} =
     go
       projectId

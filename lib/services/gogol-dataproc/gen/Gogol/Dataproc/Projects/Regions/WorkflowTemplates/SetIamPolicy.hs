@@ -106,7 +106,7 @@ instance
   type
     Scopes
       DataprocProjectsRegionsWorkflowTemplatesSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsRegionsWorkflowTemplatesSetIamPolicy {..} =
       go

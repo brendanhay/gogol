@@ -107,7 +107,7 @@ instance
   type
     Scopes
       DataprocProjectsLocationsAutoscalingPoliciesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsLocationsAutoscalingPoliciesCreate {..} =
       go

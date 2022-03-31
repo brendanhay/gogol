@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes DataprocProjectsRegionsOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsRegionsOperationsGet {..} =
       go

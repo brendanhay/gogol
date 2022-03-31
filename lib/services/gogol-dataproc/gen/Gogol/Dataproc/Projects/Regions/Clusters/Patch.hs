@@ -133,7 +133,7 @@ instance
       Operation
   type
     Scopes DataprocProjectsRegionsClustersPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsRegionsClustersPatch {..} =
       go

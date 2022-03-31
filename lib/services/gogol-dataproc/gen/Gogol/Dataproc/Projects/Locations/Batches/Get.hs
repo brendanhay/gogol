@@ -96,7 +96,7 @@ instance
   type Rs DataprocProjectsLocationsBatchesGet = Batch
   type
     Scopes DataprocProjectsLocationsBatchesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DataprocProjectsLocationsBatchesGet {..} =
     go
       name

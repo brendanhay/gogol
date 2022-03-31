@@ -111,7 +111,7 @@ instance
   type Rs DataprocProjectsRegionsClustersGet = Cluster
   type
     Scopes DataprocProjectsRegionsClustersGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DataprocProjectsRegionsClustersGet {..} =
     go
       projectId
