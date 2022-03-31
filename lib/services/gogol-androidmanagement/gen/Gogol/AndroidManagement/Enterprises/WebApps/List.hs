@@ -107,7 +107,7 @@ instance
       ListWebAppsResponse
   type
     Scopes AndroidManagementEnterprisesWebAppsList =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesWebAppsList {..} =
       go

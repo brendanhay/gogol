@@ -106,7 +106,7 @@ instance
   type
     Scopes
       AndroidManagementEnterprisesDevicesIssueCommand =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesDevicesIssueCommand {..} =
       go

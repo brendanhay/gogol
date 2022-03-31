@@ -34,7 +34,7 @@ module Gogol.AndroidManagement
     androidManagementService,
 
     -- * OAuth Scopes
-    androidManagementScope,
+    Androidmanagement'FullControl,
 
     -- * Resources
 

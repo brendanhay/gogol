@@ -99,7 +99,7 @@ instance
   type Rs AndroidManagementSignupUrlsCreate = SignupUrl
   type
     Scopes AndroidManagementSignupUrlsCreate =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient AndroidManagementSignupUrlsCreate {..} =
     go
       xgafv

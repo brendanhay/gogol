@@ -108,7 +108,7 @@ instance
       WebApp
   type
     Scopes AndroidManagementEnterprisesWebAppsPatch =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesWebAppsPatch {..} =
       go
