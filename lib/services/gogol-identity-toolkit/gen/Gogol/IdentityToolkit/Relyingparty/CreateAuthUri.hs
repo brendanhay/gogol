@@ -81,7 +81,7 @@ instance
       CreateAuthUriResponse
   type
     Scopes IdentityToolkitRelyingpartyCreateAuthUri =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyCreateAuthUri {..} =
       go

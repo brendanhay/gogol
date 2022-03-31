@@ -84,7 +84,7 @@ instance
   type
     Scopes
       IdentityToolkitRelyingpartyVerifyPhoneNumber =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyVerifyPhoneNumber {..} =
       go

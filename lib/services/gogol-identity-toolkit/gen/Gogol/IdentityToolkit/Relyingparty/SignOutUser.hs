@@ -83,7 +83,7 @@ instance
       IdentitytoolkitRelyingpartySignOutUserResponse
   type
     Scopes IdentityToolkitRelyingpartySignOutUser =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartySignOutUser {..} =
       go

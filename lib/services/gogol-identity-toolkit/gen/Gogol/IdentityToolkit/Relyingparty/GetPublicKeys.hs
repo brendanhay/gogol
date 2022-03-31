@@ -75,7 +75,7 @@ instance
       IdentitytoolkitRelyingpartyGetPublicKeysResponse
   type
     Scopes IdentityToolkitRelyingpartyGetPublicKeys =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyGetPublicKeys {} =
       go (Core.Just Core.AltJSON) identityToolkitService

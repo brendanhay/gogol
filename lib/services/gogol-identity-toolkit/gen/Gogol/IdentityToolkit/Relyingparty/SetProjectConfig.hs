@@ -84,7 +84,7 @@ instance
   type
     Scopes
       IdentityToolkitRelyingpartySetProjectConfig =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartySetProjectConfig {..} =
       go

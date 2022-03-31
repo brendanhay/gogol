@@ -81,9 +81,7 @@ instance
       UploadAccountResponse
   type
     Scopes IdentityToolkitRelyingpartyUploadAccount =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
-       ]
+      '[CloudPlatform'FullControl, Firebase'FullControl]
   requestClient
     IdentityToolkitRelyingpartyUploadAccount {..} =
       go

@@ -81,7 +81,7 @@ instance
       ResetPasswordResponse
   type
     Scopes IdentityToolkitRelyingpartyResetPassword =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyResetPassword {..} =
       go

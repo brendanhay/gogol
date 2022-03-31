@@ -74,7 +74,7 @@ instance
   type
     Scopes
       IdentityToolkitRelyingpartyGetRecaptchaParam =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IdentityToolkitRelyingpartyGetRecaptchaParam {} =
       go (Core.Just Core.AltJSON) identityToolkitService

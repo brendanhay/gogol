@@ -30,8 +30,8 @@ module Gogol.IdentityToolkit.Types
     identityToolkitService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    firebaseScope,
+    CloudPlatform'FullControl,
+    Firebase'FullControl,
 
     -- * Types
 
@@ -225,9 +225,7 @@ identityToolkitService =
     "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and administer all your Firebase data and settings
-firebaseScope :: Core.Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Core.Proxy
+type Firebase'FullControl = "https://www.googleapis.com/auth/firebase"

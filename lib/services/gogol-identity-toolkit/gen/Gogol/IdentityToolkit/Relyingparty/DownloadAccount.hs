@@ -82,9 +82,7 @@ instance
   type
     Scopes
       IdentityToolkitRelyingpartyDownloadAccount =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
-       ]
+      '[CloudPlatform'FullControl, Firebase'FullControl]
   requestClient
     IdentityToolkitRelyingpartyDownloadAccount {..} =
       go
