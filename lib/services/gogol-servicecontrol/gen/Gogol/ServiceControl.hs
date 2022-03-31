@@ -34,8 +34,8 @@ module Gogol.ServiceControl
     serviceControlService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    serviceControlScope,
+    CloudPlatform'FullControl,
+    Servicecontrol'FullControl,
 
     -- * Resources
 

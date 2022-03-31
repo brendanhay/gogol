@@ -103,8 +103,8 @@ instance
   type Rs ServiceControlServicesReport = ReportResponse
   type
     Scopes ServiceControlServicesReport =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/servicecontrol"
+      '[ CloudPlatform'FullControl,
+         Servicecontrol'FullControl
        ]
   requestClient ServiceControlServicesReport {..} =
     go
