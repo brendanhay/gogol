@@ -115,10 +115,10 @@ instance
   type
     Scopes
       DataflowProjectsLocationsJobsSnapshotsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly",
-         "https://www.googleapis.com/auth/userinfo.email"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly,
+         Userinfo'Email
        ]
   requestClient
     DataflowProjectsLocationsJobsSnapshotsList {..} =

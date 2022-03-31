@@ -30,10 +30,10 @@ module Gogol.Dataflow.Types
     dataflowService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    computeScope,
-    computeReadOnlyScope,
-    userinfoEmailScope,
+    CloudPlatform'FullControl,
+    Compute'FullControl,
+    Compute'Readonly,
+    Userinfo'Email,
 
     -- * Types
 
@@ -1031,17 +1031,13 @@ dataflowService =
     "dataflow.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage your Google Compute Engine resources
-computeScope :: Core.Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Core.Proxy
+type Compute'FullControl = "https://www.googleapis.com/auth/compute"
 
 -- | View your Google Compute Engine resources
-computeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Core.Proxy
+type Compute'Readonly = "https://www.googleapis.com/auth/compute.readonly"
 
 -- | See your primary Google Account email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
