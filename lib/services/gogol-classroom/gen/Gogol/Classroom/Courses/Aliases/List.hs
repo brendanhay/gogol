@@ -108,9 +108,7 @@ instance
       ListCourseAliasesResponse
   type
     Scopes ClassroomCoursesAliasesList =
-      '[ "https://www.googleapis.com/auth/classroom.courses",
-         "https://www.googleapis.com/auth/classroom.courses.readonly"
-       ]
+      '[Classroom'Courses, Classroom'Courses'Readonly]
   requestClient ClassroomCoursesAliasesList {..} =
     go
       courseId

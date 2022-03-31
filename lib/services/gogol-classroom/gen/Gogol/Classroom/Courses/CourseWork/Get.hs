@@ -104,10 +104,10 @@ instance
   type Rs ClassroomCoursesCourseWorkGet = CourseWork
   type
     Scopes ClassroomCoursesCourseWorkGet =
-      '[ "https://www.googleapis.com/auth/classroom.coursework.me",
-         "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
-         "https://www.googleapis.com/auth/classroom.coursework.students",
-         "https://www.googleapis.com/auth/classroom.coursework.students.readonly"
+      '[ Classroom'Coursework'Me,
+         Classroom'Coursework'Me'Readonly,
+         Classroom'Coursework'Students,
+         Classroom'Coursework'Students'Readonly
        ]
   requestClient ClassroomCoursesCourseWorkGet {..} =
     go

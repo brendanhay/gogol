@@ -114,9 +114,9 @@ instance
       ListGuardiansResponse
   type
     Scopes ClassroomUserProfilesGuardiansList =
-      '[ "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
-         "https://www.googleapis.com/auth/classroom.guardianlinks.students",
-         "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"
+      '[ Classroom'Guardianlinks'Me'Readonly,
+         Classroom'Guardianlinks'Students,
+         Classroom'Guardianlinks'Students'Readonly
        ]
   requestClient ClassroomUserProfilesGuardiansList {..} =
     go

@@ -106,8 +106,8 @@ instance
       Announcement
   type
     Scopes ClassroomCoursesAnnouncementsGet =
-      '[ "https://www.googleapis.com/auth/classroom.announcements",
-         "https://www.googleapis.com/auth/classroom.announcements.readonly"
+      '[ Classroom'Announcements,
+         Classroom'Announcements'Readonly
        ]
   requestClient ClassroomCoursesAnnouncementsGet {..} =
     go

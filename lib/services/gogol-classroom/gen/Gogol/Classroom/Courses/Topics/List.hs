@@ -108,9 +108,7 @@ instance
       ListTopicResponse
   type
     Scopes ClassroomCoursesTopicsList =
-      '[ "https://www.googleapis.com/auth/classroom.topics",
-         "https://www.googleapis.com/auth/classroom.topics.readonly"
-       ]
+      '[Classroom'Topics, Classroom'Topics'Readonly]
   requestClient ClassroomCoursesTopicsList {..} =
     go
       courseId

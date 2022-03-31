@@ -114,7 +114,7 @@ instance
   type Rs ClassroomCoursesTopicsPatch = Topic
   type
     Scopes ClassroomCoursesTopicsPatch =
-      '["https://www.googleapis.com/auth/classroom.topics"]
+      '[Classroom'Topics]
   requestClient ClassroomCoursesTopicsPatch {..} =
     go
       courseId

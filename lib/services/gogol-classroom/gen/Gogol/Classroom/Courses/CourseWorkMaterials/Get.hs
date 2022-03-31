@@ -106,8 +106,8 @@ instance
       CourseWorkMaterial
   type
     Scopes ClassroomCoursesCourseWorkMaterialsGet =
-      '[ "https://www.googleapis.com/auth/classroom.courseworkmaterials",
-         "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"
+      '[ Classroom'Courseworkmaterials,
+         Classroom'Courseworkmaterials'Readonly
        ]
   requestClient
     ClassroomCoursesCourseWorkMaterialsGet {..} =

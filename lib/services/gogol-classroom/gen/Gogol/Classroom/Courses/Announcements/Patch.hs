@@ -116,7 +116,7 @@ instance
       Announcement
   type
     Scopes ClassroomCoursesAnnouncementsPatch =
-      '["https://www.googleapis.com/auth/classroom.announcements"]
+      '[Classroom'Announcements]
   requestClient ClassroomCoursesAnnouncementsPatch {..} =
     go
       courseId

@@ -114,7 +114,7 @@ instance
       CourseWork
   type
     Scopes ClassroomCoursesCourseWorkModifyAssignees =
-      '["https://www.googleapis.com/auth/classroom.coursework.students"]
+      '[Classroom'Coursework'Students]
   requestClient
     ClassroomCoursesCourseWorkModifyAssignees {..} =
       go

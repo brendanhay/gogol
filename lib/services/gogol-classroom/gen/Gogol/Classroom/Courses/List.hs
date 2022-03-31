@@ -110,9 +110,7 @@ instance Core.GoogleRequest ClassroomCoursesList where
   type Rs ClassroomCoursesList = ListCoursesResponse
   type
     Scopes ClassroomCoursesList =
-      '[ "https://www.googleapis.com/auth/classroom.courses",
-         "https://www.googleapis.com/auth/classroom.courses.readonly"
-       ]
+      '[Classroom'Courses, Classroom'Courses'Readonly]
   requestClient ClassroomCoursesList {..} =
     go
       xgafv

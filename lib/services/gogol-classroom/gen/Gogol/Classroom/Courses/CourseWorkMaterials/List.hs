@@ -131,8 +131,8 @@ instance
       ListCourseWorkMaterialResponse
   type
     Scopes ClassroomCoursesCourseWorkMaterialsList =
-      '[ "https://www.googleapis.com/auth/classroom.courseworkmaterials",
-         "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"
+      '[ Classroom'Courseworkmaterials,
+         Classroom'Courseworkmaterials'Readonly
        ]
   requestClient
     ClassroomCoursesCourseWorkMaterialsList {..} =

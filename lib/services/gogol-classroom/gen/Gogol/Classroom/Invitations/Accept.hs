@@ -97,7 +97,7 @@ instance
   type Rs ClassroomInvitationsAccept = Empty
   type
     Scopes ClassroomInvitationsAccept =
-      '["https://www.googleapis.com/auth/classroom.rosters"]
+      '[Classroom'Rosters]
   requestClient ClassroomInvitationsAccept {..} =
     go
       id

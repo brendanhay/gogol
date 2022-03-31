@@ -101,9 +101,7 @@ instance Core.GoogleRequest ClassroomCoursesTopicsGet where
   type Rs ClassroomCoursesTopicsGet = Topic
   type
     Scopes ClassroomCoursesTopicsGet =
-      '[ "https://www.googleapis.com/auth/classroom.topics",
-         "https://www.googleapis.com/auth/classroom.topics.readonly"
-       ]
+      '[Classroom'Topics, Classroom'Topics'Readonly]
   requestClient ClassroomCoursesTopicsGet {..} =
     go
       courseId

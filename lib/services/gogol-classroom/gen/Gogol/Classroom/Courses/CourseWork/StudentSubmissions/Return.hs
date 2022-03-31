@@ -123,7 +123,7 @@ instance
   type
     Scopes
       ClassroomCoursesCourseWorkStudentSubmissionsReturn =
-      '["https://www.googleapis.com/auth/classroom.coursework.students"]
+      '[Classroom'Coursework'Students]
   requestClient
     ClassroomCoursesCourseWorkStudentSubmissionsReturn {..} =
       go

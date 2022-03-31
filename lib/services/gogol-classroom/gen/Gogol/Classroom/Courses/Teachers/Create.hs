@@ -104,9 +104,9 @@ instance
   type Rs ClassroomCoursesTeachersCreate = Teacher
   type
     Scopes ClassroomCoursesTeachersCreate =
-      '[ "https://www.googleapis.com/auth/classroom.profile.emails",
-         "https://www.googleapis.com/auth/classroom.profile.photos",
-         "https://www.googleapis.com/auth/classroom.rosters"
+      '[ Classroom'Profile'Emails,
+         Classroom'Profile'Photos,
+         Classroom'Rosters
        ]
   requestClient ClassroomCoursesTeachersCreate {..} =
     go

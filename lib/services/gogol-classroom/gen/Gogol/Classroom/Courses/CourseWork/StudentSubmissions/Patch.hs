@@ -125,8 +125,8 @@ instance
   type
     Scopes
       ClassroomCoursesCourseWorkStudentSubmissionsPatch =
-      '[ "https://www.googleapis.com/auth/classroom.coursework.me",
-         "https://www.googleapis.com/auth/classroom.coursework.students"
+      '[ Classroom'Coursework'Me,
+         Classroom'Coursework'Students
        ]
   requestClient
     ClassroomCoursesCourseWorkStudentSubmissionsPatch {..} =

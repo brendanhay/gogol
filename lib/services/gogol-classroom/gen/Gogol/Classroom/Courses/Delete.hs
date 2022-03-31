@@ -94,7 +94,7 @@ instance Core.GoogleRequest ClassroomCoursesDelete where
   type Rs ClassroomCoursesDelete = Empty
   type
     Scopes ClassroomCoursesDelete =
-      '["https://www.googleapis.com/auth/classroom.courses"]
+      '[Classroom'Courses]
   requestClient ClassroomCoursesDelete {..} =
     go
       id

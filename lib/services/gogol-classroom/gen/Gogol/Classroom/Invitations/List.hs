@@ -106,9 +106,7 @@ instance Core.GoogleRequest ClassroomInvitationsList where
       ListInvitationsResponse
   type
     Scopes ClassroomInvitationsList =
-      '[ "https://www.googleapis.com/auth/classroom.rosters",
-         "https://www.googleapis.com/auth/classroom.rosters.readonly"
-       ]
+      '[Classroom'Rosters, Classroom'Rosters'Readonly]
   requestClient ClassroomInvitationsList {..} =
     go
       xgafv

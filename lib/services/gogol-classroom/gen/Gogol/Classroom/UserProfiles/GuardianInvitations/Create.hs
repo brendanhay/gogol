@@ -110,7 +110,7 @@ instance
   type
     Scopes
       ClassroomUserProfilesGuardianInvitationsCreate =
-      '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
+      '[Classroom'Guardianlinks'Students]
   requestClient
     ClassroomUserProfilesGuardianInvitationsCreate {..} =
       go

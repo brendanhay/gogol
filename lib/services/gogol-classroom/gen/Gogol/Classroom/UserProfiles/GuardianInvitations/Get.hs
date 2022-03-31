@@ -107,8 +107,8 @@ instance
   type
     Scopes
       ClassroomUserProfilesGuardianInvitationsGet =
-      '[ "https://www.googleapis.com/auth/classroom.guardianlinks.students",
-         "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"
+      '[ Classroom'Guardianlinks'Students,
+         Classroom'Guardianlinks'Students'Readonly
        ]
   requestClient
     ClassroomUserProfilesGuardianInvitationsGet {..} =

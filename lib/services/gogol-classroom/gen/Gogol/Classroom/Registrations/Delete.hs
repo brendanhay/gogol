@@ -97,7 +97,7 @@ instance
   type Rs ClassroomRegistrationsDelete = Empty
   type
     Scopes ClassroomRegistrationsDelete =
-      '["https://www.googleapis.com/auth/classroom.push-notifications"]
+      '[Classroom'PushNotifications]
   requestClient ClassroomRegistrationsDelete {..} =
     go
       registrationId
