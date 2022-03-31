@@ -99,9 +99,7 @@ instance
       QueryDriveActivityResponse
   type
     Scopes DriveActivityActivityQuery =
-      '[ "https://www.googleapis.com/auth/drive.activity",
-         "https://www.googleapis.com/auth/drive.activity.readonly"
-       ]
+      '[Drive'Activity, Drive'Activity'Readonly]
   requestClient DriveActivityActivityQuery {..} =
     go
       xgafv
