@@ -130,7 +130,7 @@ instance
       PagespeedApiPagespeedResponseV5
   type
     Scopes PagespeedonlinePagespeedapiRunpagespeed =
-      '["openid"]
+      '[OAuth2'OpenID]
   requestClient
     PagespeedonlinePagespeedapiRunpagespeed {..} =
       go

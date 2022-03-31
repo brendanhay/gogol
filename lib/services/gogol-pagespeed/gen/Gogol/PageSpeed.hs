@@ -34,7 +34,7 @@ module Gogol.PageSpeed
     pageSpeedService,
 
     -- * OAuth Scopes
-    openidScope,
+    OAuth2'OpenID,
 
     -- * Resources
 

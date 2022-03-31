@@ -30,7 +30,7 @@ module Gogol.PageSpeed.Types
     pageSpeedService,
 
     -- * OAuth Scopes
-    openidScope,
+    OAuth2'OpenID,
 
     -- * Types
 
@@ -149,5 +149,4 @@ pageSpeedService =
     "pagespeedonline.googleapis.com"
 
 -- | Associate you with your personal info on Google
-openidScope :: Core.Proxy '["openid"]
-openidScope = Core.Proxy
+type OAuth2'OpenID = "openid"
