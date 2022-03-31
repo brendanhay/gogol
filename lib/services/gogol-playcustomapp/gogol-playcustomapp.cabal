@@ -1,6 +1,6 @@
 cabal-version:      2.2
 name:               gogol-playcustomapp
-version:            1.0.0
+version:            1.0.0.0
 synopsis:           Google Play Custom App Publishing SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues

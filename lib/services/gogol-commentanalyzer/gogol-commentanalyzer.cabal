@@ -1,6 +1,6 @@
 cabal-version:      2.2
 name:               gogol-commentanalyzer
-version:            1.0.0
+version:            1.0.0.0
 synopsis:           Google Perspective Comment Analyzer SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
