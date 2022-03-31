@@ -110,7 +110,7 @@ instance
       TestMatrix
   type
     Scopes TestingProjectsTestMatricesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TestingProjectsTestMatricesCreate {..} =
     go
       projectId

@@ -106,7 +106,7 @@ instance
       CancelTestMatrixResponse
   type
     Scopes TestingProjectsTestMatricesCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TestingProjectsTestMatricesCancel {..} =
     go
       projectId

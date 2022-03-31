@@ -34,8 +34,8 @@ module Gogol.Testing
     testingService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Resources
 

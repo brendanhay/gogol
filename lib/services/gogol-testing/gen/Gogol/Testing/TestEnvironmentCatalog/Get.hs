@@ -105,9 +105,7 @@ instance
       TestEnvironmentCatalog
   type
     Scopes TestingTestEnvironmentCatalogGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient TestingTestEnvironmentCatalogGet {..} =
     go
       environmentType
