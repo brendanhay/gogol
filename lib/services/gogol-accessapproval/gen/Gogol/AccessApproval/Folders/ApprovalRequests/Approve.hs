@@ -107,7 +107,7 @@ instance
   type
     Scopes
       AccessApprovalFoldersApprovalRequestsApprove =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessApprovalFoldersApprovalRequestsApprove {..} =
       go

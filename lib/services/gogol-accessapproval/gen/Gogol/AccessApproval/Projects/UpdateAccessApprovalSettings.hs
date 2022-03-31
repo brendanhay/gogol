@@ -110,7 +110,7 @@ instance
   type
     Scopes
       AccessApprovalProjectsUpdateAccessApprovalSettings =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessApprovalProjectsUpdateAccessApprovalSettings {..} =
       go

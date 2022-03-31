@@ -100,7 +100,7 @@ instance
   type
     Scopes
       AccessApprovalProjectsDeleteAccessApprovalSettings =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessApprovalProjectsDeleteAccessApprovalSettings {..} =
       go
