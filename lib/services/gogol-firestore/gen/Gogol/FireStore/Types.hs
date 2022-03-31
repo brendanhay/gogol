@@ -30,8 +30,8 @@ module Gogol.FireStore.Types
     fireStoreService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    datastoreScope,
+    CloudPlatform'FullControl,
+    Datastore'FullControl,
 
     -- * Types
 
@@ -461,9 +461,7 @@ fireStoreService =
     "firestore.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage your Google Cloud Datastore data
-datastoreScope :: Core.Proxy '["https://www.googleapis.com/auth/datastore"]
-datastoreScope = Core.Proxy
+type Datastore'FullControl = "https://www.googleapis.com/auth/datastore"

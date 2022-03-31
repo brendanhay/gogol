@@ -34,8 +34,8 @@ module Gogol.FireStore
     fireStoreService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    datastoreScope,
+    CloudPlatform'FullControl,
+    Datastore'FullControl,
 
     -- * Resources
 
