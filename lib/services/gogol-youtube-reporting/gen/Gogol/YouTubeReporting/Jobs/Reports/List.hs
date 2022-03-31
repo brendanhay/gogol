@@ -124,9 +124,7 @@ instance
       ListReportsResponse
   type
     Scopes YouTubeReportingJobsReportsList =
-      '[ "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
-         "https://www.googleapis.com/auth/yt-analytics.readonly"
-       ]
+      '[YtAnalyticsMonetary'Readonly, YtAnalytics'Readonly]
   requestClient YouTubeReportingJobsReportsList {..} =
     go
       jobId

@@ -107,9 +107,7 @@ instance
   type Rs YouTubeReportingMediaDownload = GdataMedia
   type
     Scopes YouTubeReportingMediaDownload =
-      '[ "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
-         "https://www.googleapis.com/auth/yt-analytics.readonly"
-       ]
+      '[YtAnalyticsMonetary'Readonly, YtAnalytics'Readonly]
   requestClient YouTubeReportingMediaDownload {..} =
     go
       resourceName

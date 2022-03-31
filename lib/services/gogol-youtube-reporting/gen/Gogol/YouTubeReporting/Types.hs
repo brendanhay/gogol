@@ -30,8 +30,8 @@ module Gogol.YouTubeReporting.Types
     youTubeReportingService,
 
     -- * OAuth Scopes
-    youtubeAnalyticsMonetaryReadOnlyScope,
-    youtubeAnalyticsReadOnlyScope,
+    YtAnalyticsMonetary'Readonly,
+    YtAnalytics'Readonly,
 
     -- * Types
 
@@ -130,9 +130,7 @@ youTubeReportingService =
     "youtubereporting.googleapis.com"
 
 -- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
-youtubeAnalyticsMonetaryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-youtubeAnalyticsMonetaryReadOnlyScope = Core.Proxy
+type YtAnalyticsMonetary'Readonly = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
 
 -- | View YouTube Analytics reports for your YouTube content
-youtubeAnalyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-youtubeAnalyticsReadOnlyScope = Core.Proxy
+type YtAnalytics'Readonly = "https://www.googleapis.com/auth/yt-analytics.readonly"

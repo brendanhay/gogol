@@ -104,9 +104,7 @@ instance Core.GoogleRequest YouTubeReportingJobsList where
   type Rs YouTubeReportingJobsList = ListJobsResponse
   type
     Scopes YouTubeReportingJobsList =
-      '[ "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
-         "https://www.googleapis.com/auth/yt-analytics.readonly"
-       ]
+      '[YtAnalyticsMonetary'Readonly, YtAnalytics'Readonly]
   requestClient YouTubeReportingJobsList {..} =
     go
       xgafv

@@ -101,9 +101,7 @@ instance
   type Rs YouTubeReportingJobsCreate = Job
   type
     Scopes YouTubeReportingJobsCreate =
-      '[ "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
-         "https://www.googleapis.com/auth/yt-analytics.readonly"
-       ]
+      '[YtAnalyticsMonetary'Readonly, YtAnalytics'Readonly]
   requestClient YouTubeReportingJobsCreate {..} =
     go
       xgafv
