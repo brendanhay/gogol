@@ -30,8 +30,8 @@ module Gogol.CloudTrace.Types
     cloudTraceService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    traceAppendScope,
+    CloudPlatform'FullControl,
+    Trace'Append,
 
     -- * Types
 
@@ -137,9 +137,7 @@ cloudTraceService =
     "cloudtrace.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Write Trace data for a project or application
-traceAppendScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.append"]
-traceAppendScope = Core.Proxy
+type Trace'Append = "https://www.googleapis.com/auth/trace.append"

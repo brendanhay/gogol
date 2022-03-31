@@ -34,8 +34,8 @@ module Gogol.CloudTrace
     cloudTraceService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    traceAppendScope,
+    CloudPlatform'FullControl,
+    Trace'Append,
 
     -- * Resources
 
