@@ -102,9 +102,7 @@ instance
       Experiment
   type
     Scopes AnalyticsManagementExperimentsInsert =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit"
-       ]
+      '[Analytics'FullControl, Analytics'Edit]
   requestClient
     AnalyticsManagementExperimentsInsert {..} =
       go

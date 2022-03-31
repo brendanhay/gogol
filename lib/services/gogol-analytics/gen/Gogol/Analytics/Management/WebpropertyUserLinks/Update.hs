@@ -102,7 +102,7 @@ instance
   type
     Scopes
       AnalyticsManagementWebpropertyUserLinksUpdate =
-      '["https://www.googleapis.com/auth/analytics.manage.users"]
+      '[Analytics'Manage'Users]
   requestClient
     AnalyticsManagementWebpropertyUserLinksUpdate {..} =
       go

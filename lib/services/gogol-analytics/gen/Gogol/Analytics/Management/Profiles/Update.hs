@@ -99,7 +99,7 @@ instance
   type Rs AnalyticsManagementProfilesUpdate = Profile
   type
     Scopes AnalyticsManagementProfilesUpdate =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient AnalyticsManagementProfilesUpdate {..} =
     go
       accountId

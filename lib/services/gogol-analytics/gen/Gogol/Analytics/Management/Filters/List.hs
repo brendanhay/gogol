@@ -88,9 +88,7 @@ instance
   type Rs AnalyticsManagementFiltersList = Filters
   type
     Scopes AnalyticsManagementFiltersList =
-      '[ "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'Edit, Analytics'Readonly]
   requestClient AnalyticsManagementFiltersList {..} =
     go
       accountId

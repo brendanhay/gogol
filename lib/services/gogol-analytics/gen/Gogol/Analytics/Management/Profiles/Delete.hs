@@ -93,7 +93,7 @@ instance
   type Rs AnalyticsManagementProfilesDelete = ()
   type
     Scopes AnalyticsManagementProfilesDelete =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient AnalyticsManagementProfilesDelete {..} =
     go
       accountId

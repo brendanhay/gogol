@@ -97,7 +97,7 @@ instance
   type
     Scopes
       AnalyticsManagementWebPropertyAdWordsLinksDelete =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementWebPropertyAdWordsLinksDelete {..} =
       go

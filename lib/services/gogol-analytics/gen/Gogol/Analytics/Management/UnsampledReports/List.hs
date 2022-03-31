@@ -104,9 +104,9 @@ instance
       UnsampledReports
   type
     Scopes AnalyticsManagementUnsampledReportsList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
+      '[ Analytics'FullControl,
+         Analytics'Edit,
+         Analytics'Readonly
        ]
   requestClient
     AnalyticsManagementUnsampledReportsList {..} =

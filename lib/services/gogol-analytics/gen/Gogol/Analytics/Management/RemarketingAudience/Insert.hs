@@ -96,7 +96,7 @@ instance
   type
     Scopes
       AnalyticsManagementRemarketingAudienceInsert =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementRemarketingAudienceInsert {..} =
       go

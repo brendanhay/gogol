@@ -102,9 +102,7 @@ instance
       UnsampledReport
   type
     Scopes AnalyticsManagementUnsampledReportsInsert =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit"
-       ]
+      '[Analytics'FullControl, Analytics'Edit]
   requestClient
     AnalyticsManagementUnsampledReportsInsert {..} =
       go

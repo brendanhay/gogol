@@ -98,9 +98,7 @@ instance Core.GoogleRequest AnalyticsDataRealtimeGet where
   type Rs AnalyticsDataRealtimeGet = RealtimeData
   type
     Scopes AnalyticsDataRealtimeGet =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'FullControl, Analytics'Readonly]
   requestClient AnalyticsDataRealtimeGet {..} =
     go
       (Core.Just ids)

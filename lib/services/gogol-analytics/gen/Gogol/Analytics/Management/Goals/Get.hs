@@ -100,9 +100,7 @@ instance
   type Rs AnalyticsManagementGoalsGet = Goal
   type
     Scopes AnalyticsManagementGoalsGet =
-      '[ "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'Edit, Analytics'Readonly]
   requestClient AnalyticsManagementGoalsGet {..} =
     go
       accountId

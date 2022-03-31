@@ -83,7 +83,7 @@ instance
   type Rs AnalyticsManagementFiltersDelete = Filter
   type
     Scopes AnalyticsManagementFiltersDelete =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient AnalyticsManagementFiltersDelete {..} =
     go
       accountId

@@ -98,8 +98,8 @@ instance
   type
     Scopes
       AnalyticsManagementWebpropertyUserLinksList =
-      '[ "https://www.googleapis.com/auth/analytics.manage.users",
-         "https://www.googleapis.com/auth/analytics.manage.users.readonly"
+      '[ Analytics'Manage'Users,
+         Analytics'Manage'Users'Readonly
        ]
   requestClient
     AnalyticsManagementWebpropertyUserLinksList {..} =

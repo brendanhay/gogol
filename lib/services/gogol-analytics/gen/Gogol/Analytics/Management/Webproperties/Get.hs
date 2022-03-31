@@ -88,9 +88,7 @@ instance
       Webproperty
   type
     Scopes AnalyticsManagementWebpropertiesGet =
-      '[ "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'Edit, Analytics'Readonly]
   requestClient AnalyticsManagementWebpropertiesGet {..} =
     go
       accountId

@@ -95,9 +95,7 @@ instance
       CustomDimension
   type
     Scopes AnalyticsManagementCustomDimensionsGet =
-      '[ "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'Edit, Analytics'Readonly]
   requestClient
     AnalyticsManagementCustomDimensionsGet {..} =
       go

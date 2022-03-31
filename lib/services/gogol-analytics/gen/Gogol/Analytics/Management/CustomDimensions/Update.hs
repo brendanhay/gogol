@@ -107,7 +107,7 @@ instance
       CustomDimension
   type
     Scopes AnalyticsManagementCustomDimensionsUpdate =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementCustomDimensionsUpdate {..} =
       go

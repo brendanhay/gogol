@@ -99,9 +99,7 @@ instance
   type
     Scopes
       AnalyticsManagementWebPropertyAdWordsLinksList =
-      '[ "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'Edit, Analytics'Readonly]
   requestClient
     AnalyticsManagementWebPropertyAdWordsLinksList {..} =
       go

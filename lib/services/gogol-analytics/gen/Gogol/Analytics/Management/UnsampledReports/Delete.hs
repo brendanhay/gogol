@@ -102,7 +102,7 @@ instance
       ()
   type
     Scopes AnalyticsManagementUnsampledReportsDelete =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementUnsampledReportsDelete {..} =
       go

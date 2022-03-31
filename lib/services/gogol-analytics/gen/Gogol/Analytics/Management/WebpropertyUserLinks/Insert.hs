@@ -96,7 +96,7 @@ instance
   type
     Scopes
       AnalyticsManagementWebpropertyUserLinksInsert =
-      '["https://www.googleapis.com/auth/analytics.manage.users"]
+      '[Analytics'Manage'Users]
   requestClient
     AnalyticsManagementWebpropertyUserLinksInsert {..} =
       go

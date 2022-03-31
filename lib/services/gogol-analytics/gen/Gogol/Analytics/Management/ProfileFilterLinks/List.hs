@@ -104,9 +104,7 @@ instance
       ProfileFilterLinks
   type
     Scopes AnalyticsManagementProfileFilterLinksList =
-      '[ "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'Edit, Analytics'Readonly]
   requestClient
     AnalyticsManagementProfileFilterLinksList {..} =
       go

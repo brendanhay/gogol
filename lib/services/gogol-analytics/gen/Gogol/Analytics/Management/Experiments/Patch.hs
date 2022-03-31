@@ -108,9 +108,7 @@ instance
       Experiment
   type
     Scopes AnalyticsManagementExperimentsPatch =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit"
-       ]
+      '[Analytics'FullControl, Analytics'Edit]
   requestClient AnalyticsManagementExperimentsPatch {..} =
     go
       accountId

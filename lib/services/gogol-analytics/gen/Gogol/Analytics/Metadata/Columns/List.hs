@@ -77,9 +77,9 @@ instance
   type Rs AnalyticsMetadataColumnsList = Columns
   type
     Scopes AnalyticsMetadataColumnsList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
+      '[ Analytics'FullControl,
+         Analytics'Edit,
+         Analytics'Readonly
        ]
   requestClient AnalyticsMetadataColumnsList {..} =
     go

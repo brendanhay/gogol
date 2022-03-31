@@ -132,9 +132,7 @@ instance Core.GoogleRequest AnalyticsDataGaGet where
   type Rs AnalyticsDataGaGet = GaData
   type
     Scopes AnalyticsDataGaGet =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'FullControl, Analytics'Readonly]
   requestClient AnalyticsDataGaGet {..} =
     go
       (Core.Just ids)

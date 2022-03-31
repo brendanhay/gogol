@@ -108,7 +108,7 @@ instance
       EntityUserLink
   type
     Scopes AnalyticsManagementProfileUserLinksUpdate =
-      '["https://www.googleapis.com/auth/analytics.manage.users"]
+      '[Analytics'Manage'Users]
   requestClient
     AnalyticsManagementProfileUserLinksUpdate {..} =
       go
