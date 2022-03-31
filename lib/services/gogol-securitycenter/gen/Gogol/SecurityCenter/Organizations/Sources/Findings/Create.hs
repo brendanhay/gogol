@@ -115,7 +115,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsSourcesFindingsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsSourcesFindingsCreate {..} =
       go

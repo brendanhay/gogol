@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes SecurityCenterOrganizationsOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsOperationsGet {..} =
       go

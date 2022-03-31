@@ -105,7 +105,7 @@ instance
       GroupAssetsResponse
   type
     Scopes SecurityCenterOrganizationsAssetsGroup =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsAssetsGroup {..} =
       go

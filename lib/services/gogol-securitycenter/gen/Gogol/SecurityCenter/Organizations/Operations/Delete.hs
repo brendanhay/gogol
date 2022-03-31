@@ -99,7 +99,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsOperationsDelete {..} =
       go

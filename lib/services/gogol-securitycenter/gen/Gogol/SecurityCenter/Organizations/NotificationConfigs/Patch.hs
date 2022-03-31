@@ -110,7 +110,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsNotificationConfigsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsNotificationConfigsPatch {..} =
       go

@@ -108,7 +108,7 @@ instance
       Source
   type
     Scopes SecurityCenterOrganizationsSourcesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsSourcesPatch {..} =
       go
