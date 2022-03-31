@@ -1,6 +1,6 @@
 cabal-version:      2.2
 name:               gogol-youtube-analytics
-version:            1.0.0
+version:            1.0.0.0
 synopsis:           Google YouTube Analytics SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
