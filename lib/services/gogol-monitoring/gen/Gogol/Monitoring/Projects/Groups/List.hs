@@ -119,9 +119,9 @@ instance
       ListGroupsResponse
   type
     Scopes MonitoringProjectsGroupsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring",
-         "https://www.googleapis.com/auth/monitoring.read"
+      '[ CloudPlatform'FullControl,
+         Monitoring'FullControl,
+         Monitoring'Read
        ]
   requestClient MonitoringProjectsGroupsList {..} =
     go

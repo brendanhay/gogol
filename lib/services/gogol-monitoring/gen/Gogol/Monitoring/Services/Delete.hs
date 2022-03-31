@@ -93,9 +93,7 @@ instance Core.GoogleRequest MonitoringServicesDelete where
   type Rs MonitoringServicesDelete = Empty
   type
     Scopes MonitoringServicesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient MonitoringServicesDelete {..} =
     go
       name

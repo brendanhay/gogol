@@ -34,10 +34,10 @@ module Gogol.Monitoring
     monitoringService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    monitoringScope,
-    monitoringReadScope,
-    monitoringWriteScope,
+    CloudPlatform'FullControl,
+    Monitoring'FullControl,
+    Monitoring'Read,
+    Monitoring'Write,
 
     -- * Resources
 

@@ -30,10 +30,10 @@ module Gogol.Monitoring.Types
     monitoringService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    monitoringScope,
-    monitoringReadScope,
-    monitoringWriteScope,
+    CloudPlatform'FullControl,
+    Monitoring'FullControl,
+    Monitoring'Read,
+    Monitoring'Write,
 
     -- * Types
 
@@ -676,17 +676,13 @@ monitoringService =
     "monitoring.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and write monitoring data for all of your Google and third-party Cloud and API projects
-monitoringScope :: Core.Proxy '["https://www.googleapis.com/auth/monitoring"]
-monitoringScope = Core.Proxy
+type Monitoring'FullControl = "https://www.googleapis.com/auth/monitoring"
 
 -- | View monitoring data for all of your Google Cloud and third-party projects
-monitoringReadScope :: Core.Proxy '["https://www.googleapis.com/auth/monitoring.read"]
-monitoringReadScope = Core.Proxy
+type Monitoring'Read = "https://www.googleapis.com/auth/monitoring.read"
 
 -- | Publish metric data to your Google Cloud projects
-monitoringWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/monitoring.write"]
-monitoringWriteScope = Core.Proxy
+type Monitoring'Write = "https://www.googleapis.com/auth/monitoring.write"
