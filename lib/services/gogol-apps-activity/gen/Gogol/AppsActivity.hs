@@ -34,7 +34,7 @@ module Gogol.AppsActivity
     appsActivityService,
 
     -- * OAuth Scopes
-    activityScope,
+    Activity'FullControl,
 
     -- * Resources
 

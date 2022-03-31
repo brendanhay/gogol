@@ -104,7 +104,7 @@ instance
       ListActivitiesResponse
   type
     Scopes AppsActivityActivitiesList =
-      '["https://www.googleapis.com/auth/activity"]
+      '[Activity'FullControl]
   requestClient AppsActivityActivitiesList {..} =
     go
       driveAncestorId
