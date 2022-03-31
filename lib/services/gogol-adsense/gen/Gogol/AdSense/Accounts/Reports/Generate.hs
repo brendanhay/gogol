@@ -179,9 +179,7 @@ instance
   type Rs AdSenseAccountsReportsGenerate = ReportResult
   type
     Scopes AdSenseAccountsReportsGenerate =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsReportsGenerate {..} =
     go
       account

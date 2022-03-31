@@ -30,8 +30,8 @@ module Gogol.AdSense.Types
     adSenseService,
 
     -- * OAuth Scopes
-    adSenseScope,
-    adSenseReadOnlyScope,
+    Adsense'FullControl,
+    Adsense'Readonly,
 
     -- * Types
 
@@ -231,9 +231,7 @@ adSenseService =
     "adsense.googleapis.com"
 
 -- | View and manage your AdSense data
-adSenseScope :: Core.Proxy '["https://www.googleapis.com/auth/adsense"]
-adSenseScope = Core.Proxy
+type Adsense'FullControl = "https://www.googleapis.com/auth/adsense"
 
 -- | View your AdSense data
-adSenseReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/adsense.readonly"]
-adSenseReadOnlyScope = Core.Proxy
+type Adsense'Readonly = "https://www.googleapis.com/auth/adsense.readonly"

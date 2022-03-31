@@ -111,9 +111,7 @@ instance
   type
     Scopes
       AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient
     AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits {..} =
       go

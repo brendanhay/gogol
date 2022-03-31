@@ -96,9 +96,7 @@ instance Core.GoogleRequest AdSenseAccountsList where
   type Rs AdSenseAccountsList = ListAccountsResponse
   type
     Scopes AdSenseAccountsList =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsList {..} =
     go
       xgafv

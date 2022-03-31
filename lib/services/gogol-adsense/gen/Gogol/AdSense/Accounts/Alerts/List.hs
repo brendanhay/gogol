@@ -100,9 +100,7 @@ instance Core.GoogleRequest AdSenseAccountsAlertsList where
       ListAlertsResponse
   type
     Scopes AdSenseAccountsAlertsList =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsAlertsList {..} =
     go
       parent

@@ -102,9 +102,7 @@ instance Core.GoogleRequest AdSenseAccountsSitesList where
   type Rs AdSenseAccountsSitesList = ListSitesResponse
   type
     Scopes AdSenseAccountsSitesList =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient AdSenseAccountsSitesList {..} =
     go
       parent

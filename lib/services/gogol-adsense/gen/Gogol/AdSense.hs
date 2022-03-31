@@ -34,8 +34,8 @@ module Gogol.AdSense
     adSenseService,
 
     -- * OAuth Scopes
-    adSenseScope,
-    adSenseReadOnlyScope,
+    Adsense'FullControl,
+    Adsense'Readonly,
 
     -- * Resources
 

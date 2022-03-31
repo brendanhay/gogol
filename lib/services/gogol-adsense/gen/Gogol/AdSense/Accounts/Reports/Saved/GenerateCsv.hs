@@ -145,9 +145,7 @@ instance
       HttpBody
   type
     Scopes AdSenseAccountsReportsSavedGenerateCsv =
-      '[ "https://www.googleapis.com/auth/adsense",
-         "https://www.googleapis.com/auth/adsense.readonly"
-       ]
+      '[Adsense'FullControl, Adsense'Readonly]
   requestClient
     AdSenseAccountsReportsSavedGenerateCsv {..} =
       go
