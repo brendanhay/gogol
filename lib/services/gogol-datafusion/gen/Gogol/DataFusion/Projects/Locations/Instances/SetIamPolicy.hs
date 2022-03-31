@@ -106,7 +106,7 @@ instance
   type
     Scopes
       DataFusionProjectsLocationsInstancesSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataFusionProjectsLocationsInstancesSetIamPolicy {..} =
       go

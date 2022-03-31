@@ -111,7 +111,7 @@ instance
       ListOperationsResponse
   type
     Scopes DataFusionProjectsLocationsOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataFusionProjectsLocationsOperationsList {..} =
       go

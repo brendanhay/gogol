@@ -105,7 +105,7 @@ instance
   type
     Scopes
       DataFusionProjectsLocationsOperationsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataFusionProjectsLocationsOperationsCancel {..} =
       go
