@@ -34,8 +34,8 @@ module Gogol.AppsTasks
     appsTasksService,
 
     -- * OAuth Scopes
-    tasksScope,
-    tasksReadOnlyScope,
+    Tasks'FullControl,
+    Tasks'Readonly,
 
     -- * Resources
 

@@ -109,9 +109,7 @@ newTasksTasksMove task tasklist =
 
 instance Core.GoogleRequest TasksTasksMove where
   type Rs TasksTasksMove = Task
-  type
-    Scopes TasksTasksMove =
-      '["https://www.googleapis.com/auth/tasks"]
+  type Scopes TasksTasksMove = '[Tasks'FullControl]
   requestClient TasksTasksMove {..} =
     go
       tasklist

@@ -97,9 +97,7 @@ instance Core.GoogleRequest TasksTasklistsGet where
   type Rs TasksTasklistsGet = TaskList
   type
     Scopes TasksTasklistsGet =
-      '[ "https://www.googleapis.com/auth/tasks",
-         "https://www.googleapis.com/auth/tasks.readonly"
-       ]
+      '[Tasks'FullControl, Tasks'Readonly]
   requestClient TasksTasklistsGet {..} =
     go
       tasklist
