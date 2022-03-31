@@ -101,7 +101,7 @@ instance Core.GoogleRequest CloudAssetExportAssets where
   type Rs CloudAssetExportAssets = Operation
   type
     Scopes CloudAssetExportAssets =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudAssetExportAssets {..} =
     go
       parent
