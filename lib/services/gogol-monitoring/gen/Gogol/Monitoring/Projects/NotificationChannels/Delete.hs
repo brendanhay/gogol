@@ -103,9 +103,7 @@ instance
   type
     Scopes
       MonitoringProjectsNotificationChannelsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient
     MonitoringProjectsNotificationChannelsDelete {..} =
       go

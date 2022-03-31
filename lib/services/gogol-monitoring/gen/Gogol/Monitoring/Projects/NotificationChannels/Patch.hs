@@ -109,9 +109,7 @@ instance
   type
     Scopes
       MonitoringProjectsNotificationChannelsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient
     MonitoringProjectsNotificationChannelsPatch {..} =
       go

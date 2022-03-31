@@ -106,9 +106,9 @@ instance Core.GoogleRequest MonitoringServicesList where
   type Rs MonitoringServicesList = ListServicesResponse
   type
     Scopes MonitoringServicesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring",
-         "https://www.googleapis.com/auth/monitoring.read"
+      '[ CloudPlatform'FullControl,
+         Monitoring'FullControl,
+         Monitoring'Read
        ]
   requestClient MonitoringServicesList {..} =
     go

@@ -106,9 +106,7 @@ instance
   type
     Scopes
       MonitoringProjectsUptimeCheckConfigsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient
     MonitoringProjectsUptimeCheckConfigsCreate {..} =
       go

@@ -106,9 +106,7 @@ instance
   type Rs MonitoringProjectsGroupsUpdate = Group
   type
     Scopes MonitoringProjectsGroupsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient MonitoringProjectsGroupsUpdate {..} =
     go
       name

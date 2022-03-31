@@ -105,9 +105,9 @@ instance
       QueryTimeSeriesResponse
   type
     Scopes MonitoringProjectsTimeSeriesQuery =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring",
-         "https://www.googleapis.com/auth/monitoring.read"
+      '[ CloudPlatform'FullControl,
+         Monitoring'FullControl,
+         Monitoring'Read
        ]
   requestClient MonitoringProjectsTimeSeriesQuery {..} =
     go

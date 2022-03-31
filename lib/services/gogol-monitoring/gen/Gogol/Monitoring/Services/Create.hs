@@ -104,9 +104,7 @@ instance Core.GoogleRequest MonitoringServicesCreate where
   type Rs MonitoringServicesCreate = Service
   type
     Scopes MonitoringServicesCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient MonitoringServicesCreate {..} =
     go
       parent

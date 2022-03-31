@@ -93,9 +93,9 @@ instance Core.GoogleRequest MonitoringServicesGet where
   type Rs MonitoringServicesGet = Service
   type
     Scopes MonitoringServicesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring",
-         "https://www.googleapis.com/auth/monitoring.read"
+      '[ CloudPlatform'FullControl,
+         Monitoring'FullControl,
+         Monitoring'Read
        ]
   requestClient MonitoringServicesGet {..} =
     go

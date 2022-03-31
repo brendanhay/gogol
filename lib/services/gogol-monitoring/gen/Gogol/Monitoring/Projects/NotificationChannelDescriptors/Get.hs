@@ -100,9 +100,9 @@ instance
   type
     Scopes
       MonitoringProjectsNotificationChannelDescriptorsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring",
-         "https://www.googleapis.com/auth/monitoring.read"
+      '[ CloudPlatform'FullControl,
+         Monitoring'FullControl,
+         Monitoring'Read
        ]
   requestClient
     MonitoringProjectsNotificationChannelDescriptorsGet {..} =

@@ -109,9 +109,7 @@ instance
       AlertPolicy
   type
     Scopes MonitoringProjectsAlertPoliciesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient
     MonitoringProjectsAlertPoliciesPatch {..} =
       go

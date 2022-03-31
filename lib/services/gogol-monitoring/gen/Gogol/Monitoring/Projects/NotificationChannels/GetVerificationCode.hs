@@ -115,9 +115,7 @@ instance
   type
     Scopes
       MonitoringProjectsNotificationChannelsGetVerificationCode =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient
     MonitoringProjectsNotificationChannelsGetVerificationCode {..} =
       go

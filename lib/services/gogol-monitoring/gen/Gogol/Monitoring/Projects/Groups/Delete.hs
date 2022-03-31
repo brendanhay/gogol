@@ -100,9 +100,7 @@ instance
   type Rs MonitoringProjectsGroupsDelete = Empty
   type
     Scopes MonitoringProjectsGroupsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring"
-       ]
+      '[CloudPlatform'FullControl, Monitoring'FullControl]
   requestClient MonitoringProjectsGroupsDelete {..} =
     go
       name
