@@ -87,9 +87,7 @@ instance Core.GoogleRequest BigQueryJobsCancel where
   type Rs BigQueryJobsCancel = JobCancelResponse
   type
     Scopes BigQueryJobsCancel =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryJobsCancel {..} =
     go
       projectId

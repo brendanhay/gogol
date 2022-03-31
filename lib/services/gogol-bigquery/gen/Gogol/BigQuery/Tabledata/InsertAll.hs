@@ -101,9 +101,9 @@ instance
       TableDataInsertAllResponse
   type
     Scopes BigQueryTabledataInsertAll =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/bigquery.insertdata",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ Bigquery'FullControl,
+         Bigquery'Insertdata,
+         CloudPlatform'FullControl
        ]
   requestClient BigQueryTabledataInsertAll {..} =
     go

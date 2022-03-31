@@ -89,9 +89,7 @@ instance Core.GoogleRequest BigQueryTablesDelete where
   type Rs BigQueryTablesDelete = ()
   type
     Scopes BigQueryTablesDelete =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryTablesDelete {..} =
     go
       projectId

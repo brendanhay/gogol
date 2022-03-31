@@ -80,9 +80,7 @@ instance
   type Rs BigQueryTablesSetIamPolicy = Policy
   type
     Scopes BigQueryTablesSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryTablesSetIamPolicy {..} =
     go
       resource

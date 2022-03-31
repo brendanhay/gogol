@@ -89,9 +89,7 @@ instance Core.GoogleRequest BigQueryRoutinesInsert where
   type Rs BigQueryRoutinesInsert = Routine
   type
     Scopes BigQueryRoutinesInsert =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryRoutinesInsert {..} =
     go
       projectId

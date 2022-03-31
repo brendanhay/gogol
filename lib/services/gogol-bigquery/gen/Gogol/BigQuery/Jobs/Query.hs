@@ -79,9 +79,9 @@ instance Core.GoogleRequest BigQueryJobsQuery where
   type Rs BigQueryJobsQuery = QueryResponse
   type
     Scopes BigQueryJobsQuery =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Bigquery'FullControl,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient BigQueryJobsQuery {..} =
     go

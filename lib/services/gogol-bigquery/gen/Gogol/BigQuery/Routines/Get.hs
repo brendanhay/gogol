@@ -93,9 +93,9 @@ instance Core.GoogleRequest BigQueryRoutinesGet where
   type Rs BigQueryRoutinesGet = Routine
   type
     Scopes BigQueryRoutinesGet =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Bigquery'FullControl,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient BigQueryRoutinesGet {..} =
     go

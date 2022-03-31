@@ -99,9 +99,7 @@ instance Core.GoogleRequest BigQueryTablesUpdate where
   type Rs BigQueryTablesUpdate = Table
   type
     Scopes BigQueryTablesUpdate =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryTablesUpdate {..} =
     go
       projectId

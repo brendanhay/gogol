@@ -89,11 +89,11 @@ instance Core.GoogleRequest BigQueryJobsInsert where
   type Rs BigQueryJobsInsert = Job
   type
     Scopes BigQueryJobsInsert =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ Bigquery'FullControl,
+         CloudPlatform'FullControl,
+         Devstorage'FullControl,
+         Devstorage'ReadOnly,
+         Devstorage'ReadWrite
        ]
   requestClient BigQueryJobsInsert {..} =
     go

@@ -92,9 +92,9 @@ instance Core.GoogleRequest BigQueryDatasetsList where
   type Rs BigQueryDatasetsList = DatasetList
   type
     Scopes BigQueryDatasetsList =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Bigquery'FullControl,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient BigQueryDatasetsList {..} =
     go
