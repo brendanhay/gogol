@@ -34,9 +34,9 @@ module Gogol.BigQueryDataTransfer
     bigQueryDataTransferService,
 
     -- * OAuth Scopes
-    bigqueryScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    Bigquery'FullControl,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Resources
 
