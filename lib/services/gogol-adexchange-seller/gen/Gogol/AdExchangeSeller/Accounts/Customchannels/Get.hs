@@ -94,9 +94,7 @@ instance
       CustomChannel
   type
     Scopes AdExchangeSellerAccountsCustomchannelsGet =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient
     AdExchangeSellerAccountsCustomchannelsGet {..} =
       go

@@ -87,9 +87,7 @@ instance
       PreferredDeal
   type
     Scopes AdExchangeSellerAccountsPreferreddealsGet =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient
     AdExchangeSellerAccountsPreferreddealsGet {..} =
       go

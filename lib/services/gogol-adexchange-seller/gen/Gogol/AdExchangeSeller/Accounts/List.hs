@@ -80,9 +80,7 @@ instance
   type Rs AdExchangeSellerAccountsList = Accounts
   type
     Scopes AdExchangeSellerAccountsList =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient AdExchangeSellerAccountsList {..} =
     go
       maxResults
