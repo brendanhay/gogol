@@ -103,7 +103,7 @@ instance
   type Rs ManufacturersAccountsProductsDelete = Empty
   type
     Scopes ManufacturersAccountsProductsDelete =
-      '["https://www.googleapis.com/auth/manufacturercenter"]
+      '[Manufacturercenter'FullControl]
   requestClient ManufacturersAccountsProductsDelete {..} =
     go
       parent

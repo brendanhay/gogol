@@ -34,7 +34,7 @@ module Gogol.Manufacturers
     manufacturersService,
 
     -- * OAuth Scopes
-    manufacturercenterScope,
+    Manufacturercenter'FullControl,
 
     -- * Resources
 

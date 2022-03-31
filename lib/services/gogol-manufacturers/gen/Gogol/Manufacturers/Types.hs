@@ -30,7 +30,7 @@ module Gogol.Manufacturers.Types
     manufacturersService,
 
     -- * OAuth Scopes
-    manufacturercenterScope,
+    Manufacturercenter'FullControl,
 
     -- * Types
 
@@ -120,5 +120,4 @@ manufacturersService =
     "manufacturers.googleapis.com"
 
 -- | Manage your product listings for Google Manufacturer Center
-manufacturercenterScope :: Core.Proxy '["https://www.googleapis.com/auth/manufacturercenter"]
-manufacturercenterScope = Core.Proxy
+type Manufacturercenter'FullControl = "https://www.googleapis.com/auth/manufacturercenter"
