@@ -99,8 +99,8 @@ instance
       AnnotateTextResponse
   type
     Scopes LanguageDocumentsAnnotateText =
-      '[ "https://www.googleapis.com/auth/cloud-language",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudLanguage'FullControl,
+         CloudPlatform'FullControl
        ]
   requestClient LanguageDocumentsAnnotateText {..} =
     go

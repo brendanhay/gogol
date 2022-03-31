@@ -101,8 +101,8 @@ instance
       AnalyzeEntitySentimentResponse
   type
     Scopes LanguageDocumentsAnalyzeEntitySentiment =
-      '[ "https://www.googleapis.com/auth/cloud-language",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudLanguage'FullControl,
+         CloudPlatform'FullControl
        ]
   requestClient
     LanguageDocumentsAnalyzeEntitySentiment {..} =
