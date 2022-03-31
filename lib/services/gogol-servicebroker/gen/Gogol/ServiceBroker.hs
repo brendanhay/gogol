@@ -34,7 +34,7 @@ module Gogol.ServiceBroker
     serviceBrokerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

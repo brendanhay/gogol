@@ -107,7 +107,7 @@ instance Core.GoogleRequest ServiceBrokerSetIamPolicy where
       GoogleIamV1__Policy
   type
     Scopes ServiceBrokerSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient ServiceBrokerSetIamPolicy {..} =
     go
       resource

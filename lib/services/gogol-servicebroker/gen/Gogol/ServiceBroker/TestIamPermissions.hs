@@ -115,7 +115,7 @@ instance
       GoogleIamV1__TestIamPermissionsResponse
   type
     Scopes ServiceBrokerTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient ServiceBrokerTestIamPermissions {..} =
     go
       resource
