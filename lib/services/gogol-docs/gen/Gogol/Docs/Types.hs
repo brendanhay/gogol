@@ -30,11 +30,11 @@ module Gogol.Docs.Types
     docsService,
 
     -- * OAuth Scopes
-    documentsScope,
-    documentsReadOnlyScope,
-    driveScope,
-    driveFileScope,
-    driveReadOnlyScope,
+    Documents'FullControl,
+    Documents'Readonly,
+    Drive'FullControl,
+    Drive'File,
+    Drive'Readonly,
 
     -- * Types
 
@@ -846,21 +846,16 @@ docsService =
     "docs.googleapis.com"
 
 -- | See, edit, create, and delete all your Google Docs documents
-documentsScope :: Core.Proxy '["https://www.googleapis.com/auth/documents"]
-documentsScope = Core.Proxy
+type Documents'FullControl = "https://www.googleapis.com/auth/documents"
 
 -- | See all your Google Docs documents
-documentsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/documents.readonly"]
-documentsReadOnlyScope = Core.Proxy
+type Documents'Readonly = "https://www.googleapis.com/auth/documents.readonly"
 
 -- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Core.Proxy
+type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 
 -- | See, edit, create, and delete only the specific Google Drive files you use with this app
-driveFileScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Core.Proxy
+type Drive'File = "https://www.googleapis.com/auth/drive.file"
 
 -- | See and download all your Google Drive files
-driveReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Core.Proxy
+type Drive'Readonly = "https://www.googleapis.com/auth/drive.readonly"

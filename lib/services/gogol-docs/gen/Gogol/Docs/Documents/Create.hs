@@ -94,9 +94,9 @@ instance Core.GoogleRequest DocsDocumentsCreate where
   type Rs DocsDocumentsCreate = Document
   type
     Scopes DocsDocumentsCreate =
-      '[ "https://www.googleapis.com/auth/documents",
-         "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file"
+      '[ Documents'FullControl,
+         Drive'FullControl,
+         Drive'File
        ]
   requestClient DocsDocumentsCreate {..} =
     go

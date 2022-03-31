@@ -100,11 +100,11 @@ instance Core.GoogleRequest DocsDocumentsGet where
   type Rs DocsDocumentsGet = Document
   type
     Scopes DocsDocumentsGet =
-      '[ "https://www.googleapis.com/auth/documents",
-         "https://www.googleapis.com/auth/documents.readonly",
-         "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly"
+      '[ Documents'FullControl,
+         Documents'Readonly,
+         Drive'FullControl,
+         Drive'File,
+         Drive'Readonly
        ]
   requestClient DocsDocumentsGet {..} =
     go
