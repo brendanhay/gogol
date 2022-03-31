@@ -70,7 +70,7 @@ instance Core.GoogleRequest AppStateStatesList where
   type Rs AppStateStatesList = ListResponse
   type
     Scopes AppStateStatesList =
-      '["https://www.googleapis.com/auth/appstate"]
+      '[Appstate'FullControl]
   requestClient AppStateStatesList {..} =
     go
       (Core.Just includeData)
