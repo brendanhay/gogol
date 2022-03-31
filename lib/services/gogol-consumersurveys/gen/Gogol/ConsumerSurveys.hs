@@ -34,9 +34,9 @@ module Gogol.ConsumerSurveys
     consumerSurveysService,
 
     -- * OAuth Scopes
-    consumerSurveysScope,
-    consumerSurveysReadOnlyScope,
-    userinfoEmailScope,
+    Consumersurveys'FullControl,
+    Consumersurveys'Readonly,
+    Userinfo'Email,
 
     -- * Resources
 

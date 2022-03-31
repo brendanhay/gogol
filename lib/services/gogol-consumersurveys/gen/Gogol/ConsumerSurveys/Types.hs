@@ -30,9 +30,9 @@ module Gogol.ConsumerSurveys.Types
     consumerSurveysService,
 
     -- * OAuth Scopes
-    consumerSurveysScope,
-    consumerSurveysReadOnlyScope,
-    userinfoEmailScope,
+    Consumersurveys'FullControl,
+    Consumersurveys'Readonly,
+    Userinfo'Email,
 
     -- * Types
 
@@ -126,13 +126,10 @@ consumerSurveysService =
     "www.googleapis.com"
 
 -- | View and edit your surveys and results
-consumerSurveysScope :: Core.Proxy '["https://www.googleapis.com/auth/consumersurveys"]
-consumerSurveysScope = Core.Proxy
+type Consumersurveys'FullControl = "https://www.googleapis.com/auth/consumersurveys"
 
 -- | View the results for your surveys
-consumerSurveysReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/consumersurveys.readonly"]
-consumerSurveysReadOnlyScope = Core.Proxy
+type Consumersurveys'Readonly = "https://www.googleapis.com/auth/consumersurveys.readonly"
 
 -- | View your email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"

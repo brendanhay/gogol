@@ -76,9 +76,7 @@ instance
   type Rs ConsumerSurveysSurveysInsert = Survey
   type
     Scopes ConsumerSurveysSurveysInsert =
-      '[ "https://www.googleapis.com/auth/consumersurveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Consumersurveys'FullControl, Userinfo'Email]
   requestClient ConsumerSurveysSurveysInsert {..} =
     go
       (Core.Just Core.AltJSON)

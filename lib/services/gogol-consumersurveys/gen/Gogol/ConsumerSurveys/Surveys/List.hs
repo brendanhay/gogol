@@ -86,9 +86,9 @@ instance
       SurveysListResponse
   type
     Scopes ConsumerSurveysSurveysList =
-      '[ "https://www.googleapis.com/auth/consumersurveys",
-         "https://www.googleapis.com/auth/consumersurveys.readonly",
-         "https://www.googleapis.com/auth/userinfo.email"
+      '[ Consumersurveys'FullControl,
+         Consumersurveys'Readonly,
+         Userinfo'Email
        ]
   requestClient ConsumerSurveysSurveysList {..} =
     go

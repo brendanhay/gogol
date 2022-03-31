@@ -81,9 +81,7 @@ instance
   type Rs ConsumerSurveysSurveysUpdate = Survey
   type
     Scopes ConsumerSurveysSurveysUpdate =
-      '[ "https://www.googleapis.com/auth/consumersurveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Consumersurveys'FullControl, Userinfo'Email]
   requestClient ConsumerSurveysSurveysUpdate {..} =
     go
       surveyUrlId
