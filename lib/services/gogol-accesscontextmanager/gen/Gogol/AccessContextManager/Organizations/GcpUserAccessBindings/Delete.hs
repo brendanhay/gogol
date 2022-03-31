@@ -100,7 +100,7 @@ instance
   type
     Scopes
       AccessContextManagerOrganizationsGcpUserAccessBindingsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerOrganizationsGcpUserAccessBindingsDelete {..} =
       go

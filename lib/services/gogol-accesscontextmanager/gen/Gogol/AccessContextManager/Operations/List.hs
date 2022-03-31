@@ -110,7 +110,7 @@ instance
       ListOperationsResponse
   type
     Scopes AccessContextManagerOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AccessContextManagerOperationsList {..} =
     go
       name

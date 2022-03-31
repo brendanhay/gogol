@@ -34,7 +34,7 @@ module Gogol.AccessContextManager
     accessContextManagerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

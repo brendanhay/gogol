@@ -99,7 +99,7 @@ instance
       Operation
   type
     Scopes AccessContextManagerAccessPoliciesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerAccessPoliciesCreate {..} =
       go

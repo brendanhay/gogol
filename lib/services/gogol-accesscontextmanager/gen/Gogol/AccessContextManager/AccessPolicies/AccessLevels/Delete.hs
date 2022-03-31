@@ -100,7 +100,7 @@ instance
   type
     Scopes
       AccessContextManagerAccessPoliciesAccessLevelsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerAccessPoliciesAccessLevelsDelete {..} =
       go

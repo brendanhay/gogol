@@ -107,7 +107,7 @@ instance
   type
     Scopes
       AccessContextManagerAccessPoliciesServicePerimetersCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerAccessPoliciesServicePerimetersCreate {..} =
       go

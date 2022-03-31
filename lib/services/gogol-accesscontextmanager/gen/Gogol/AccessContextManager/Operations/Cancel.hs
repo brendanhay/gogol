@@ -102,7 +102,7 @@ instance
   type Rs AccessContextManagerOperationsCancel = Empty
   type
     Scopes AccessContextManagerOperationsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerOperationsCancel {..} =
       go

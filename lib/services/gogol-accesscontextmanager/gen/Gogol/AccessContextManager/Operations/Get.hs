@@ -96,7 +96,7 @@ instance
   type Rs AccessContextManagerOperationsGet = Operation
   type
     Scopes AccessContextManagerOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AccessContextManagerOperationsGet {..} =
     go
       name
