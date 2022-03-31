@@ -101,7 +101,7 @@ instance
       GoogleLongrunning_Operation
   type
     Scopes VideoIntelligenceVideosAnnotate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient VideoIntelligenceVideosAnnotate {..} =
     go
       xgafv
