@@ -117,7 +117,7 @@ instance
   type
     Scopes
       ClassroomUserProfilesGuardianInvitationsPatch =
-      '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
+      '[Classroom'Guardianlinks'Students]
   requestClient
     ClassroomUserProfilesGuardianInvitationsPatch {..} =
       go

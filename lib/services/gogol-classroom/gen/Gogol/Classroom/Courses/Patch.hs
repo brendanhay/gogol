@@ -104,7 +104,7 @@ instance Core.GoogleRequest ClassroomCoursesPatch where
   type Rs ClassroomCoursesPatch = Course
   type
     Scopes ClassroomCoursesPatch =
-      '["https://www.googleapis.com/auth/classroom.courses"]
+      '[Classroom'Courses]
   requestClient ClassroomCoursesPatch {..} =
     go
       id

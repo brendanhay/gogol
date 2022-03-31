@@ -104,7 +104,7 @@ instance
   type Rs ClassroomUserProfilesGuardiansDelete = Empty
   type
     Scopes ClassroomUserProfilesGuardiansDelete =
-      '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
+      '[Classroom'Guardianlinks'Students]
   requestClient
     ClassroomUserProfilesGuardiansDelete {..} =
       go

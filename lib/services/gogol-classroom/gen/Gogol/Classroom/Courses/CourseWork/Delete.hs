@@ -104,7 +104,7 @@ instance
   type Rs ClassroomCoursesCourseWorkDelete = Empty
   type
     Scopes ClassroomCoursesCourseWorkDelete =
-      '["https://www.googleapis.com/auth/classroom.coursework.students"]
+      '[Classroom'Coursework'Students]
   requestClient ClassroomCoursesCourseWorkDelete {..} =
     go
       courseId

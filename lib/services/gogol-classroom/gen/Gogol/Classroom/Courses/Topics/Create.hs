@@ -104,7 +104,7 @@ instance
   type Rs ClassroomCoursesTopicsCreate = Topic
   type
     Scopes ClassroomCoursesTopicsCreate =
-      '["https://www.googleapis.com/auth/classroom.topics"]
+      '[Classroom'Topics]
   requestClient ClassroomCoursesTopicsCreate {..} =
     go
       courseId

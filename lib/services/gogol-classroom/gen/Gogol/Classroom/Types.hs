@@ -30,28 +30,28 @@ module Gogol.Classroom.Types
     classroomService,
 
     -- * OAuth Scopes
-    classroomAnnouncementsScope,
-    classroomAnnouncementsReadOnlyScope,
-    classroomCoursesScope,
-    classroomCoursesReadOnlyScope,
-    classroomCourseworkMeScope,
-    classroomCourseworkMeReadOnlyScope,
-    classroomCourseworkStudentsScope,
-    classroomCourseworkStudentsReadOnlyScope,
-    classroomCourseworkmaterialsScope,
-    classroomCourseworkmaterialsReadOnlyScope,
-    classroomGuardianlinksMeReadOnlyScope,
-    classroomGuardianlinksStudentsScope,
-    classroomGuardianlinksStudentsReadOnlyScope,
-    classroomProfileEmailsScope,
-    classroomProfilePhotosScope,
-    classroomPushNotificationsScope,
-    classroomRostersScope,
-    classroomRostersReadOnlyScope,
-    classroomStudentSubmissionsMeReadOnlyScope,
-    classroomStudentSubmissionsStudentsReadOnlyScope,
-    classroomTopicsScope,
-    classroomTopicsReadOnlyScope,
+    Classroom'Announcements,
+    Classroom'Announcements'Readonly,
+    Classroom'Courses,
+    Classroom'Courses'Readonly,
+    Classroom'Coursework'Me,
+    Classroom'Coursework'Me'Readonly,
+    Classroom'Coursework'Students,
+    Classroom'Coursework'Students'Readonly,
+    Classroom'Courseworkmaterials,
+    Classroom'Courseworkmaterials'Readonly,
+    Classroom'Guardianlinks'Me'Readonly,
+    Classroom'Guardianlinks'Students,
+    Classroom'Guardianlinks'Students'Readonly,
+    Classroom'Profile'Emails,
+    Classroom'Profile'Photos,
+    Classroom'PushNotifications,
+    Classroom'Rosters,
+    Classroom'Rosters'Readonly,
+    Classroom'StudentSubmissions'Me'Readonly,
+    Classroom'StudentSubmissions'Students'Readonly,
+    Classroom'Topics,
+    Classroom'Topics'Readonly,
 
     -- * Types
 
@@ -411,89 +411,67 @@ classroomService =
     "classroom.googleapis.com"
 
 -- | View and manage announcements in Google Classroom
-classroomAnnouncementsScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.announcements"]
-classroomAnnouncementsScope = Core.Proxy
+type Classroom'Announcements = "https://www.googleapis.com/auth/classroom.announcements"
 
 -- | View announcements in Google Classroom
-classroomAnnouncementsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.announcements.readonly"]
-classroomAnnouncementsReadOnlyScope = Core.Proxy
+type Classroom'Announcements'Readonly = "https://www.googleapis.com/auth/classroom.announcements.readonly"
 
 -- | See, edit, create, and permanently delete your Google Classroom classes
-classroomCoursesScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.courses"]
-classroomCoursesScope = Core.Proxy
+type Classroom'Courses = "https://www.googleapis.com/auth/classroom.courses"
 
 -- | View your Google Classroom classes
-classroomCoursesReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.courses.readonly"]
-classroomCoursesReadOnlyScope = Core.Proxy
+type Classroom'Courses'Readonly = "https://www.googleapis.com/auth/classroom.courses.readonly"
 
 -- | See, create and edit coursework items including assignments, questions, and grades
-classroomCourseworkMeScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.coursework.me"]
-classroomCourseworkMeScope = Core.Proxy
+type Classroom'Coursework'Me = "https://www.googleapis.com/auth/classroom.coursework.me"
 
 -- | View your course work and grades in Google Classroom
-classroomCourseworkMeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.coursework.me.readonly"]
-classroomCourseworkMeReadOnlyScope = Core.Proxy
+type Classroom'Coursework'Me'Readonly = "https://www.googleapis.com/auth/classroom.coursework.me.readonly"
 
 -- | Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
-classroomCourseworkStudentsScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.coursework.students"]
-classroomCourseworkStudentsScope = Core.Proxy
+type Classroom'Coursework'Students = "https://www.googleapis.com/auth/classroom.coursework.students"
 
 -- | View course work and grades for students in the Google Classroom classes you teach or administer
-classroomCourseworkStudentsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.coursework.students.readonly"]
-classroomCourseworkStudentsReadOnlyScope = Core.Proxy
+type Classroom'Coursework'Students'Readonly = "https://www.googleapis.com/auth/classroom.coursework.students.readonly"
 
 -- | See, edit, and create classwork materials in Google Classroom
-classroomCourseworkmaterialsScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.courseworkmaterials"]
-classroomCourseworkmaterialsScope = Core.Proxy
+type Classroom'Courseworkmaterials = "https://www.googleapis.com/auth/classroom.courseworkmaterials"
 
 -- | See all classwork materials for your Google Classroom classes
-classroomCourseworkmaterialsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"]
-classroomCourseworkmaterialsReadOnlyScope = Core.Proxy
+type Classroom'Courseworkmaterials'Readonly = "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"
 
 -- | View your Google Classroom guardians
-classroomGuardianlinksMeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"]
-classroomGuardianlinksMeReadOnlyScope = Core.Proxy
+type Classroom'Guardianlinks'Me'Readonly = "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"
 
 -- | View and manage guardians for students in your Google Classroom classes
-classroomGuardianlinksStudentsScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
-classroomGuardianlinksStudentsScope = Core.Proxy
+type Classroom'Guardianlinks'Students = "https://www.googleapis.com/auth/classroom.guardianlinks.students"
 
 -- | View guardians for students in your Google Classroom classes
-classroomGuardianlinksStudentsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"]
-classroomGuardianlinksStudentsReadOnlyScope = Core.Proxy
+type Classroom'Guardianlinks'Students'Readonly = "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"
 
 -- | View the email addresses of people in your classes
-classroomProfileEmailsScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.profile.emails"]
-classroomProfileEmailsScope = Core.Proxy
+type Classroom'Profile'Emails = "https://www.googleapis.com/auth/classroom.profile.emails"
 
 -- | View the profile photos of people in your classes
-classroomProfilePhotosScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.profile.photos"]
-classroomProfilePhotosScope = Core.Proxy
+type Classroom'Profile'Photos = "https://www.googleapis.com/auth/classroom.profile.photos"
 
 -- | Receive notifications about your Google Classroom data
-classroomPushNotificationsScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.push-notifications"]
-classroomPushNotificationsScope = Core.Proxy
+type Classroom'PushNotifications = "https://www.googleapis.com/auth/classroom.push-notifications"
 
 -- | Manage your Google Classroom class rosters
-classroomRostersScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.rosters"]
-classroomRostersScope = Core.Proxy
+type Classroom'Rosters = "https://www.googleapis.com/auth/classroom.rosters"
 
 -- | View your Google Classroom class rosters
-classroomRostersReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.rosters.readonly"]
-classroomRostersReadOnlyScope = Core.Proxy
+type Classroom'Rosters'Readonly = "https://www.googleapis.com/auth/classroom.rosters.readonly"
 
 -- | View your course work and grades in Google Classroom
-classroomStudentSubmissionsMeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"]
-classroomStudentSubmissionsMeReadOnlyScope = Core.Proxy
+type Classroom'StudentSubmissions'Me'Readonly = "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
 
 -- | View course work and grades for students in the Google Classroom classes you teach or administer
-classroomStudentSubmissionsStudentsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"]
-classroomStudentSubmissionsStudentsReadOnlyScope = Core.Proxy
+type Classroom'StudentSubmissions'Students'Readonly = "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"
 
 -- | See, create, and edit topics in Google Classroom
-classroomTopicsScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.topics"]
-classroomTopicsScope = Core.Proxy
+type Classroom'Topics = "https://www.googleapis.com/auth/classroom.topics"
 
 -- | View topics in Google Classroom
-classroomTopicsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/classroom.topics.readonly"]
-classroomTopicsReadOnlyScope = Core.Proxy
+type Classroom'Topics'Readonly = "https://www.googleapis.com/auth/classroom.topics.readonly"

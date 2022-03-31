@@ -106,7 +106,7 @@ instance
       Announcement
   type
     Scopes ClassroomCoursesAnnouncementsCreate =
-      '["https://www.googleapis.com/auth/classroom.announcements"]
+      '[Classroom'Announcements]
   requestClient ClassroomCoursesAnnouncementsCreate {..} =
     go
       courseId

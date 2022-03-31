@@ -104,7 +104,7 @@ instance
   type Rs ClassroomCoursesCourseWorkCreate = CourseWork
   type
     Scopes ClassroomCoursesCourseWorkCreate =
-      '["https://www.googleapis.com/auth/classroom.coursework.students"]
+      '[Classroom'Coursework'Students]
   requestClient ClassroomCoursesCourseWorkCreate {..} =
     go
       courseId

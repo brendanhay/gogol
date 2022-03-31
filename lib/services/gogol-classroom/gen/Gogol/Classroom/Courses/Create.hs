@@ -94,7 +94,7 @@ instance Core.GoogleRequest ClassroomCoursesCreate where
   type Rs ClassroomCoursesCreate = Course
   type
     Scopes ClassroomCoursesCreate =
-      '["https://www.googleapis.com/auth/classroom.courses"]
+      '[Classroom'Courses]
   requestClient ClassroomCoursesCreate {..} =
     go
       xgafv

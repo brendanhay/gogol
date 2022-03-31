@@ -106,7 +106,7 @@ instance
       CourseWorkMaterial
   type
     Scopes ClassroomCoursesCourseWorkMaterialsCreate =
-      '["https://www.googleapis.com/auth/classroom.courseworkmaterials"]
+      '[Classroom'Courseworkmaterials]
   requestClient
     ClassroomCoursesCourseWorkMaterialsCreate {..} =
       go

@@ -108,10 +108,10 @@ instance
       ListTeachersResponse
   type
     Scopes ClassroomCoursesTeachersList =
-      '[ "https://www.googleapis.com/auth/classroom.profile.emails",
-         "https://www.googleapis.com/auth/classroom.profile.photos",
-         "https://www.googleapis.com/auth/classroom.rosters",
-         "https://www.googleapis.com/auth/classroom.rosters.readonly"
+      '[ Classroom'Profile'Emails,
+         Classroom'Profile'Photos,
+         Classroom'Rosters,
+         Classroom'Rosters'Readonly
        ]
   requestClient ClassroomCoursesTeachersList {..} =
     go

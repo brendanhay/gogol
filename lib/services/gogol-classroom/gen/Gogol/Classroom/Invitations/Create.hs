@@ -97,7 +97,7 @@ instance
   type Rs ClassroomInvitationsCreate = Invitation
   type
     Scopes ClassroomInvitationsCreate =
-      '["https://www.googleapis.com/auth/classroom.rosters"]
+      '[Classroom'Rosters]
   requestClient ClassroomInvitationsCreate {..} =
     go
       xgafv

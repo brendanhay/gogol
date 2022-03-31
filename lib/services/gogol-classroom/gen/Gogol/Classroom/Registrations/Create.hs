@@ -99,7 +99,7 @@ instance
   type Rs ClassroomRegistrationsCreate = Registration
   type
     Scopes ClassroomRegistrationsCreate =
-      '["https://www.googleapis.com/auth/classroom.push-notifications"]
+      '[Classroom'PushNotifications]
   requestClient ClassroomRegistrationsCreate {..} =
     go
       xgafv

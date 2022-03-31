@@ -115,7 +115,7 @@ instance
   type
     Scopes
       ClassroomCoursesAnnouncementsModifyAssignees =
-      '["https://www.googleapis.com/auth/classroom.announcements"]
+      '[Classroom'Announcements]
   requestClient
     ClassroomCoursesAnnouncementsModifyAssignees {..} =
       go

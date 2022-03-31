@@ -104,7 +104,7 @@ instance
   type Rs ClassroomCoursesAliasesCreate = CourseAlias
   type
     Scopes ClassroomCoursesAliasesCreate =
-      '["https://www.googleapis.com/auth/classroom.courses"]
+      '[Classroom'Courses]
   requestClient ClassroomCoursesAliasesCreate {..} =
     go
       courseId

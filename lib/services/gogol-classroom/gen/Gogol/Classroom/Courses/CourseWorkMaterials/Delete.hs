@@ -106,7 +106,7 @@ instance
       Empty
   type
     Scopes ClassroomCoursesCourseWorkMaterialsDelete =
-      '["https://www.googleapis.com/auth/classroom.courseworkmaterials"]
+      '[Classroom'Courseworkmaterials]
   requestClient
     ClassroomCoursesCourseWorkMaterialsDelete {..} =
       go

@@ -123,8 +123,8 @@ instance
   type
     Scopes
       ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments =
-      '[ "https://www.googleapis.com/auth/classroom.coursework.me",
-         "https://www.googleapis.com/auth/classroom.coursework.students"
+      '[ Classroom'Coursework'Me,
+         Classroom'Coursework'Students
        ]
   requestClient
     ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments {..} =

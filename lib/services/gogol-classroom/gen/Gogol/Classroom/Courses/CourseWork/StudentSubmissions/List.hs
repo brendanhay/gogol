@@ -135,12 +135,12 @@ instance
   type
     Scopes
       ClassroomCoursesCourseWorkStudentSubmissionsList =
-      '[ "https://www.googleapis.com/auth/classroom.coursework.me",
-         "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
-         "https://www.googleapis.com/auth/classroom.coursework.students",
-         "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
-         "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly",
-         "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"
+      '[ Classroom'Coursework'Me,
+         Classroom'Coursework'Me'Readonly,
+         Classroom'Coursework'Students,
+         Classroom'Coursework'Students'Readonly,
+         Classroom'StudentSubmissions'Me'Readonly,
+         Classroom'StudentSubmissions'Students'Readonly
        ]
   requestClient
     ClassroomCoursesCourseWorkStudentSubmissionsList {..} =
