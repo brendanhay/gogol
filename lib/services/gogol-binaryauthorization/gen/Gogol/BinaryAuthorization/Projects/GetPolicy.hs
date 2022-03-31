@@ -96,7 +96,7 @@ instance
   type Rs BinaryAuthorizationProjectsGetPolicy = Policy
   type
     Scopes BinaryAuthorizationProjectsGetPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     BinaryAuthorizationProjectsGetPolicy {..} =
       go

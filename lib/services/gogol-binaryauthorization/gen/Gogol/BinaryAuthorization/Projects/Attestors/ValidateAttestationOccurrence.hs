@@ -113,7 +113,7 @@ instance
   type
     Scopes
       BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence {..} =
       go
