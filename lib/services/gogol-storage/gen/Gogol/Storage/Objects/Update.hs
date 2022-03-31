@@ -134,9 +134,7 @@ instance Core.GoogleRequest StorageObjectsUpdate where
   type Rs StorageObjectsUpdate = Object
   type
     Scopes StorageObjectsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
+      '[CloudPlatform'FullControl, Devstorage'FullControl]
   requestClient StorageObjectsUpdate {..} =
     go
       bucket

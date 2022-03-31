@@ -135,11 +135,11 @@ instance Core.GoogleRequest StorageObjectsWatchAll where
   type Rs StorageObjectsWatchAll = Channel
   type
     Scopes StorageObjectsWatchAll =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Devstorage'FullControl,
+         Devstorage'ReadOnly,
+         Devstorage'ReadWrite
        ]
   requestClient StorageObjectsWatchAll {..} =
     go

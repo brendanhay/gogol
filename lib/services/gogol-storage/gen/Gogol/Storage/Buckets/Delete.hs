@@ -95,9 +95,9 @@ instance Core.GoogleRequest StorageBucketsDelete where
   type Rs StorageBucketsDelete = ()
   type
     Scopes StorageBucketsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         Devstorage'FullControl,
+         Devstorage'ReadWrite
        ]
   requestClient StorageBucketsDelete {..} =
     go

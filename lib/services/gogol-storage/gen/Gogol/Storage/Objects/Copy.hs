@@ -195,9 +195,9 @@ instance Core.GoogleRequest StorageObjectsCopy where
   type Rs StorageObjectsCopy = Object
   type
     Scopes StorageObjectsCopy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         Devstorage'FullControl,
+         Devstorage'ReadWrite
        ]
   requestClient StorageObjectsCopy {..} =
     go

@@ -34,11 +34,11 @@ module Gogol.Storage
     storageService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    storageFull_controlScope,
-    storageRead_OnlyScope,
-    storageRead_writeScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Devstorage'FullControl,
+    Devstorage'ReadOnly,
+    Devstorage'ReadWrite,
 
     -- * Resources
 

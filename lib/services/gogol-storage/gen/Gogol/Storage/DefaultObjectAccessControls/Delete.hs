@@ -97,9 +97,7 @@ instance
   type Rs StorageDefaultObjectAccessControlsDelete = ()
   type
     Scopes StorageDefaultObjectAccessControlsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
+      '[CloudPlatform'FullControl, Devstorage'FullControl]
   requestClient
     StorageDefaultObjectAccessControlsDelete {..} =
       go
