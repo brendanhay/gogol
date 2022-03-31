@@ -34,8 +34,8 @@ module Gogol.CloudKMS
     cloudKMSService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudKMSScope,
+    CloudPlatform'FullControl,
+    Cloudkms'FullControl,
 
     -- * Resources
 

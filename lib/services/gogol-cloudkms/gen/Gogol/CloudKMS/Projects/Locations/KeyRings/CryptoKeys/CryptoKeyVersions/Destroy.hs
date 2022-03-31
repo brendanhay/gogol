@@ -108,9 +108,7 @@ instance
   type
     Scopes
       CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudkms"
-       ]
+      '[CloudPlatform'FullControl, Cloudkms'FullControl]
   requestClient
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy {..} =
       go

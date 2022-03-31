@@ -106,9 +106,7 @@ instance
   type
     Scopes
       CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudkms"
-       ]
+      '[CloudPlatform'FullControl, Cloudkms'FullControl]
   requestClient
     CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy {..} =
       go
