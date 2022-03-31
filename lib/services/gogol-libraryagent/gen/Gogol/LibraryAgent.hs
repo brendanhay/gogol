@@ -34,7 +34,7 @@ module Gogol.LibraryAgent
     libraryAgentService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

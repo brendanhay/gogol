@@ -97,7 +97,7 @@ instance Core.GoogleRequest LibraryAgentShelvesGet where
       GoogleExampleLibraryagentV1Shelf
   type
     Scopes LibraryAgentShelvesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient LibraryAgentShelvesGet {..} =
     go
       name

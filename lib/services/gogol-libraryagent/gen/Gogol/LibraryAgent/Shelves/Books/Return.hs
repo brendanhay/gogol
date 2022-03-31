@@ -100,7 +100,7 @@ instance
       GoogleExampleLibraryagentV1Book
   type
     Scopes LibraryAgentShelvesBooksReturn =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient LibraryAgentShelvesBooksReturn {..} =
     go
       name
