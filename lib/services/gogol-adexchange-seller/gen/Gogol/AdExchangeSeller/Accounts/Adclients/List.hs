@@ -89,9 +89,7 @@ instance
       AdClients
   type
     Scopes AdExchangeSellerAccountsAdclientsList =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient
     AdExchangeSellerAccountsAdclientsList {..} =
       go

@@ -82,9 +82,7 @@ instance
   type
     Scopes
       AdExchangeSellerAccountsMetadataDimensionsList =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient
     AdExchangeSellerAccountsMetadataDimensionsList {..} =
       go

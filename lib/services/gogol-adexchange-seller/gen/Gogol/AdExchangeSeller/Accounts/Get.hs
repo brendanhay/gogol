@@ -76,9 +76,7 @@ instance
   type Rs AdExchangeSellerAccountsGet = Account
   type
     Scopes AdExchangeSellerAccountsGet =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient AdExchangeSellerAccountsGet {..} =
     go
       accountId

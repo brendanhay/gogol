@@ -83,9 +83,7 @@ instance
   type Rs AdExchangeSellerAccountsAlertsList = Alerts
   type
     Scopes AdExchangeSellerAccountsAlertsList =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient AdExchangeSellerAccountsAlertsList {..} =
     go
       accountId

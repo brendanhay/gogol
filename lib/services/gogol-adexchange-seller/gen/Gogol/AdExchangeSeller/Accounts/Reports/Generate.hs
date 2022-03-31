@@ -137,9 +137,7 @@ instance
       Report
   type
     Scopes AdExchangeSellerAccountsReportsGenerate =
-      '[ "https://www.googleapis.com/auth/adexchange.seller",
-         "https://www.googleapis.com/auth/adexchange.seller.readonly"
-       ]
+      '[Adexchange'Seller, Adexchange'Seller'Readonly]
   requestClient
     AdExchangeSellerAccountsReportsGenerate {..} =
       go

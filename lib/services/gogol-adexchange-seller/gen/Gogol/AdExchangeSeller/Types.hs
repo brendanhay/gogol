@@ -30,8 +30,8 @@ module Gogol.AdExchangeSeller.Types
     adExchangeSellerService,
 
     -- * OAuth Scopes
-    adexchangeSellerScope,
-    adexchangeSellerReadOnlyScope,
+    Adexchange'Seller,
+    Adexchange'Seller'Readonly,
 
     -- * Types
 
@@ -125,9 +125,7 @@ adExchangeSellerService =
     "www.googleapis.com"
 
 -- | View and manage your Ad Exchange data
-adexchangeSellerScope :: Core.Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
-adexchangeSellerScope = Core.Proxy
+type Adexchange'Seller = "https://www.googleapis.com/auth/adexchange.seller"
 
 -- | View your Ad Exchange data
-adexchangeSellerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
-adexchangeSellerReadOnlyScope = Core.Proxy
+type Adexchange'Seller'Readonly = "https://www.googleapis.com/auth/adexchange.seller.readonly"

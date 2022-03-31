@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller
     adExchangeSellerService,
 
     -- * OAuth Scopes
-    adexchangeSellerScope,
-    adexchangeSellerReadOnlyScope,
+    Adexchange'Seller,
+    Adexchange'Seller'Readonly,
 
     -- * Resources
 
