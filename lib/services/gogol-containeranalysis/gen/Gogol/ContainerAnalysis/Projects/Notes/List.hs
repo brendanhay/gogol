@@ -111,7 +111,7 @@ instance
       ListNotesResponse
   type
     Scopes ContainerAnalysisProjectsNotesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient ContainerAnalysisProjectsNotesList {..} =
     go
       parent

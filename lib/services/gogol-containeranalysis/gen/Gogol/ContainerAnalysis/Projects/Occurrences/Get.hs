@@ -98,7 +98,7 @@ instance
       Occurrence
   type
     Scopes ContainerAnalysisProjectsOccurrencesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerAnalysisProjectsOccurrencesGet {..} =
       go

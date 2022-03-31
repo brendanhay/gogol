@@ -96,7 +96,7 @@ instance
   type Rs ContainerAnalysisProjectsNotesDelete = Empty
   type
     Scopes ContainerAnalysisProjectsNotesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerAnalysisProjectsNotesDelete {..} =
       go

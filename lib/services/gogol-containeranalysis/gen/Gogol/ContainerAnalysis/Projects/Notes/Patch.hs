@@ -106,7 +106,7 @@ instance
   type Rs ContainerAnalysisProjectsNotesPatch = Note
   type
     Scopes ContainerAnalysisProjectsNotesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient ContainerAnalysisProjectsNotesPatch {..} =
     go
       name
