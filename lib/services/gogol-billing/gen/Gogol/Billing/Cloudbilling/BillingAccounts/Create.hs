@@ -99,8 +99,8 @@ instance
       BillingAccount
   type
     Scopes CloudbillingBillingAccountsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-billing",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudBilling'FullControl,
+         CloudPlatform'FullControl
        ]
   requestClient CloudbillingBillingAccountsCreate {..} =
     go
