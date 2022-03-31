@@ -34,7 +34,7 @@ module Gogol.FactCheckTools
     factCheckToolsService,
 
     -- * OAuth Scopes
-    userinfoEmailScope,
+    Userinfo'Email,
 
     -- * Resources
 

@@ -100,7 +100,7 @@ instance Core.GoogleRequest FactCheckToolsPagesCreate where
       GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
   type
     Scopes FactCheckToolsPagesCreate =
-      '["https://www.googleapis.com/auth/userinfo.email"]
+      '[Userinfo'Email]
   requestClient FactCheckToolsPagesCreate {..} =
     go
       xgafv

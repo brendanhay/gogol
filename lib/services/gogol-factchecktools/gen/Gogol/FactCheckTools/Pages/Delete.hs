@@ -95,7 +95,7 @@ instance Core.GoogleRequest FactCheckToolsPagesDelete where
       GoogleProtobufEmpty
   type
     Scopes FactCheckToolsPagesDelete =
-      '["https://www.googleapis.com/auth/userinfo.email"]
+      '[Userinfo'Email]
   requestClient FactCheckToolsPagesDelete {..} =
     go
       name
