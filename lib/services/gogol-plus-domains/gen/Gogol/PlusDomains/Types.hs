@@ -30,14 +30,14 @@ module Gogol.PlusDomains.Types
     plusDomainsService,
 
     -- * OAuth Scopes
-    plusCirclesReadScope,
-    plusLoginScope,
-    plusMeScope,
-    plusMediaUploadScope,
-    plusProfilesReadScope,
-    plusStreamReadScope,
-    userinfoEmailScope,
-    userinfoProfileScope,
+    Plus'Circles'Read,
+    Plus'Login,
+    Plus'Me,
+    Plus'Media'Upload,
+    Plus'Profiles'Read,
+    Plus'Stream'Read,
+    Userinfo'Email,
+    Userinfo'Profile,
 
     -- * Types
 
@@ -321,33 +321,25 @@ plusDomainsService =
     "www.googleapis.com"
 
 -- | View your circles and the people and pages in them
-plusCirclesReadScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.circles.read"]
-plusCirclesReadScope = Core.Proxy
+type Plus'Circles'Read = "https://www.googleapis.com/auth/plus.circles.read"
 
 -- | View your basic profile info, including your age range and language
-plusLoginScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.login"]
-plusLoginScope = Core.Proxy
+type Plus'Login = "https://www.googleapis.com/auth/plus.login"
 
 -- | Associate you with your personal info on Google
-plusMeScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.me"]
-plusMeScope = Core.Proxy
+type Plus'Me = "https://www.googleapis.com/auth/plus.me"
 
 -- | Send your photos and videos to Google+
-plusMediaUploadScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.media.upload"]
-plusMediaUploadScope = Core.Proxy
+type Plus'Media'Upload = "https://www.googleapis.com/auth/plus.media.upload"
 
 -- | View your own Google+ profile and profiles visible to you
-plusProfilesReadScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.profiles.read"]
-plusProfilesReadScope = Core.Proxy
+type Plus'Profiles'Read = "https://www.googleapis.com/auth/plus.profiles.read"
 
 -- | View your Google+ posts, comments, and stream
-plusStreamReadScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.stream.read"]
-plusStreamReadScope = Core.Proxy
+type Plus'Stream'Read = "https://www.googleapis.com/auth/plus.stream.read"
 
 -- | View your email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
 
 -- | See your personal info, including any personal info you\'ve made publicly available
-userinfoProfileScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userinfoProfileScope = Core.Proxy
+type Userinfo'Profile = "https://www.googleapis.com/auth/userinfo.profile"

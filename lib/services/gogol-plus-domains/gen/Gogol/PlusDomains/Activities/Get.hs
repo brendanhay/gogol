@@ -73,10 +73,7 @@ instance Core.GoogleRequest PlusDomainsActivitiesGet where
   type Rs PlusDomainsActivitiesGet = Activity
   type
     Scopes PlusDomainsActivitiesGet =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me",
-         "https://www.googleapis.com/auth/plus.stream.read"
-       ]
+      '[Plus'Login, Plus'Me, Plus'Stream'Read]
   requestClient PlusDomainsActivitiesGet {..} =
     go
       activityId

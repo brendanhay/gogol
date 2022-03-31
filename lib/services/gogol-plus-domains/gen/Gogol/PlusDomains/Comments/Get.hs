@@ -73,9 +73,7 @@ instance Core.GoogleRequest PlusDomainsCommentsGet where
   type Rs PlusDomainsCommentsGet = Comment
   type
     Scopes PlusDomainsCommentsGet =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.stream.read"
-       ]
+      '[Plus'Login, Plus'Stream'Read]
   requestClient PlusDomainsCommentsGet {..} =
     go
       commentId

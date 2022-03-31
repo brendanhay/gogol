@@ -84,10 +84,7 @@ instance Core.GoogleRequest PlusDomainsAudiencesList where
   type Rs PlusDomainsAudiencesList = AudiencesFeed
   type
     Scopes PlusDomainsAudiencesList =
-      '[ "https://www.googleapis.com/auth/plus.circles.read",
-         "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+      '[Plus'Circles'Read, Plus'Login, Plus'Me]
   requestClient PlusDomainsAudiencesList {..} =
     go
       userId

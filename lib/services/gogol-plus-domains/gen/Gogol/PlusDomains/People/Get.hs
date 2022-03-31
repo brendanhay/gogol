@@ -72,11 +72,11 @@ instance Core.GoogleRequest PlusDomainsPeopleGet where
   type Rs PlusDomainsPeopleGet = Person
   type
     Scopes PlusDomainsPeopleGet =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me",
-         "https://www.googleapis.com/auth/plus.profiles.read",
-         "https://www.googleapis.com/auth/userinfo.email",
-         "https://www.googleapis.com/auth/userinfo.profile"
+      '[ Plus'Login,
+         Plus'Me,
+         Plus'Profiles'Read,
+         Userinfo'Email,
+         Userinfo'Profile
        ]
   requestClient PlusDomainsPeopleGet {..} =
     go
