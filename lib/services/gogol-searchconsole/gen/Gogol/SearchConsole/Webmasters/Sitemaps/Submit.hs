@@ -102,7 +102,7 @@ instance Core.GoogleRequest WebmastersSitemapsSubmit where
   type Rs WebmastersSitemapsSubmit = ()
   type
     Scopes WebmastersSitemapsSubmit =
-      '["https://www.googleapis.com/auth/webmasters"]
+      '[Webmasters'FullControl]
   requestClient WebmastersSitemapsSubmit {..} =
     go
       siteUrl
