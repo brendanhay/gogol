@@ -30,7 +30,7 @@ module Gogol.CloudPrivateCatalog.Types
     cloudPrivateCatalogService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Types
 
@@ -83,5 +83,4 @@ cloudPrivateCatalogService =
     "cloudprivatecatalog.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
