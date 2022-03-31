@@ -116,7 +116,7 @@ instance
       LicenseAssignmentList
   type
     Scopes LicensingLicenseAssignmentsListForProduct =
-      '["https://www.googleapis.com/auth/apps.licensing"]
+      '[Apps'Licensing]
   requestClient
     LicensingLicenseAssignmentsListForProduct {..} =
       go

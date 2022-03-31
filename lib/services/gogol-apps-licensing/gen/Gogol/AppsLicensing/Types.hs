@@ -30,7 +30,7 @@ module Gogol.AppsLicensing.Types
     appsLicensingService,
 
     -- * OAuth Scopes
-    appsLicensingScope,
+    Apps'Licensing,
 
     -- * Types
 
@@ -67,5 +67,4 @@ appsLicensingService =
     "licensing.googleapis.com"
 
 -- | View and manage G Suite licenses for your domain
-appsLicensingScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.licensing"]
-appsLicensingScope = Core.Proxy
+type Apps'Licensing = "https://www.googleapis.com/auth/apps.licensing"

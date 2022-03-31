@@ -34,7 +34,7 @@ module Gogol.AppsLicensing
     appsLicensingService,
 
     -- * OAuth Scopes
-    appsLicensingScope,
+    Apps'Licensing,
 
     -- * Resources
 
