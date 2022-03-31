@@ -99,7 +99,7 @@ instance
       SynthesizeSpeechResponse
   type
     Scopes TextToSpeechTextSynthesize =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TextToSpeechTextSynthesize {..} =
     go
       xgafv
