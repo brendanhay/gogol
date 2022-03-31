@@ -106,7 +106,7 @@ instance
   type Rs AndroidPublisherEditsDetailsGet = AppDetails
   type
     Scopes AndroidPublisherEditsDetailsGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsDetailsGet {..} =
     go
       packageName

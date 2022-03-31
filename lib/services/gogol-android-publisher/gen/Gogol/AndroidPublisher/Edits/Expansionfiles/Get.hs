@@ -123,7 +123,7 @@ instance
       ExpansionFile
   type
     Scopes AndroidPublisherEditsExpansionfilesGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherEditsExpansionfilesGet {..} =
       go

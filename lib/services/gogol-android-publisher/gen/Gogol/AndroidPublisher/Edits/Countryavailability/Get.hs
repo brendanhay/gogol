@@ -115,7 +115,7 @@ instance
   type
     Scopes
       AndroidPublisherEditsCountryavailabilityGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherEditsCountryavailabilityGet {..} =
       go

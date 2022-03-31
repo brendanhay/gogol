@@ -116,7 +116,7 @@ instance
   type
     Scopes
       AndroidPublisherPurchasesSubscriptionsRefund =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherPurchasesSubscriptionsRefund {..} =
       go

@@ -125,7 +125,7 @@ instance
   type
     Scopes
       AndroidPublisherPurchasesSubscriptionsAcknowledge =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherPurchasesSubscriptionsAcknowledge {..} =
       go

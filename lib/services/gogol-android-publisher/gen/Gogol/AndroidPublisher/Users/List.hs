@@ -103,7 +103,7 @@ instance Core.GoogleRequest AndroidPublisherUsersList where
   type Rs AndroidPublisherUsersList = ListUsersResponse
   type
     Scopes AndroidPublisherUsersList =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherUsersList {..} =
     go
       parent

@@ -126,7 +126,7 @@ instance
   type
     Scopes
       AndroidPublisherPurchasesSubscriptionsDefer =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherPurchasesSubscriptionsDefer {..} =
       go

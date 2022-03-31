@@ -115,7 +115,7 @@ instance
       ProductPurchase
   type
     Scopes AndroidPublisherPurchasesProductsGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherPurchasesProductsGet {..} =
       go

@@ -120,7 +120,7 @@ instance
   type
     Scopes
       AndroidPublisherEditsApksAddexternallyhosted =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherEditsApksAddexternallyhosted {..} =
       go

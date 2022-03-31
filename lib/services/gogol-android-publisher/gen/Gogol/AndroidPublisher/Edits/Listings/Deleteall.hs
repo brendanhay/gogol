@@ -106,7 +106,7 @@ instance
   type Rs AndroidPublisherEditsListingsDeleteall = ()
   type
     Scopes AndroidPublisherEditsListingsDeleteall =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherEditsListingsDeleteall {..} =
       go

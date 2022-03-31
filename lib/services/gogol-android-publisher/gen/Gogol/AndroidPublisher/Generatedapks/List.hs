@@ -107,7 +107,7 @@ instance
       GeneratedApksListResponse
   type
     Scopes AndroidPublisherGeneratedapksList =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherGeneratedapksList {..} =
     go
       packageName

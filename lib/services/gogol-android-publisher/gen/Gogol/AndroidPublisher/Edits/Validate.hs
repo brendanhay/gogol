@@ -105,7 +105,7 @@ instance
   type Rs AndroidPublisherEditsValidate = AppEdit
   type
     Scopes AndroidPublisherEditsValidate =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsValidate {..} =
     go
       packageName

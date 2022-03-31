@@ -118,7 +118,7 @@ instance
   type Rs AndroidPublisherEditsTestersPatch = Testers
   type
     Scopes AndroidPublisherEditsTestersPatch =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsTestersPatch {..} =
     go
       packageName

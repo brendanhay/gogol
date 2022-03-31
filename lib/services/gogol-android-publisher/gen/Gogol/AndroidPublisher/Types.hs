@@ -30,7 +30,7 @@ module Gogol.AndroidPublisher.Types
     androidPublisherService,
 
     -- * OAuth Scopes
-    androidPublisherScope,
+    Androidpublisher'FullControl,
 
     -- * Types
 
@@ -440,5 +440,4 @@ androidPublisherService =
     "androidpublisher.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-androidPublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidPublisherScope = Core.Proxy
+type Androidpublisher'FullControl = "https://www.googleapis.com/auth/androidpublisher"

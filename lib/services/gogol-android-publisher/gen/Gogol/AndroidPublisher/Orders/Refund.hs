@@ -109,7 +109,7 @@ instance
   type Rs AndroidPublisherOrdersRefund = ()
   type
     Scopes AndroidPublisherOrdersRefund =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherOrdersRefund {..} =
     go
       packageName

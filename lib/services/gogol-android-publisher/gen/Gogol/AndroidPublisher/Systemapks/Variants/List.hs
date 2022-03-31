@@ -108,7 +108,7 @@ instance
       SystemApksListResponse
   type
     Scopes AndroidPublisherSystemapksVariantsList =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherSystemapksVariantsList {..} =
       go

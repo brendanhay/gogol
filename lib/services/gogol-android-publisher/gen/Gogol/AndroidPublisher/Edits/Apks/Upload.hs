@@ -123,7 +123,7 @@ instance
   type Rs AndroidPublisherEditsApksUpload = Apk
   type
     Scopes AndroidPublisherEditsApksUpload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsApksUpload {..} =
     go
       packageName

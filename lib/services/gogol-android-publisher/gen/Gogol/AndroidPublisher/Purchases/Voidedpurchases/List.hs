@@ -129,7 +129,7 @@ instance
   type
     Scopes
       AndroidPublisherPurchasesVoidedpurchasesList =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherPurchasesVoidedpurchasesList {..} =
       go

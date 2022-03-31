@@ -124,7 +124,7 @@ instance
       ImagesDeleteAllResponse
   type
     Scopes AndroidPublisherEditsImagesDeleteall =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherEditsImagesDeleteall {..} =
       go

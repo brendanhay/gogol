@@ -104,7 +104,7 @@ instance
   type Rs AndroidPublisherUsersCreate = User
   type
     Scopes AndroidPublisherUsersCreate =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherUsersCreate {..} =
     go
       parent

@@ -109,7 +109,7 @@ instance
   type Rs AndroidPublisherEditsCommit = AppEdit
   type
     Scopes AndroidPublisherEditsCommit =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsCommit {..} =
     go
       packageName
