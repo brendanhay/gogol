@@ -34,7 +34,7 @@ module Gogol.PlayCustomApp
     playCustomAppService,
 
     -- * OAuth Scopes
-    androidpublisherScope,
+    Androidpublisher'FullControl,
 
     -- * Resources
 
