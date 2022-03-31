@@ -110,9 +110,9 @@ instance Core.GoogleRequest ComputeImagesGetIamPolicy where
   type Rs ComputeImagesGetIamPolicy = Policy
   type
     Scopes ComputeImagesGetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeImagesGetIamPolicy {..} =
     go

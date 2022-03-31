@@ -123,9 +123,7 @@ instance
   type Rs ComputeForwardingRulesSetTarget = Operation
   type
     Scopes ComputeForwardingRulesSetTarget =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeForwardingRulesSetTarget {..} =
     go
       project

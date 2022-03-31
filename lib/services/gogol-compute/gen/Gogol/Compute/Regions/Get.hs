@@ -102,9 +102,9 @@ instance Core.GoogleRequest ComputeRegionsGet where
   type Rs ComputeRegionsGet = Region
   type
     Scopes ComputeRegionsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeRegionsGet {..} =
     go

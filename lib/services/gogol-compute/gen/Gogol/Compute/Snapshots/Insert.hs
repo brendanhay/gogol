@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeSnapshotsInsert where
   type Rs ComputeSnapshotsInsert = Operation
   type
     Scopes ComputeSnapshotsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSnapshotsInsert {..} =
     go
       project

@@ -110,9 +110,7 @@ instance
   type Rs ComputeInterconnectsInsert = Operation
   type
     Scopes ComputeInterconnectsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInterconnectsInsert {..} =
     go
       project

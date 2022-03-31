@@ -109,9 +109,9 @@ instance Core.GoogleRequest ComputeReservationsGet where
   type Rs ComputeReservationsGet = Reservation
   type
     Scopes ComputeReservationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeReservationsGet {..} =
     go

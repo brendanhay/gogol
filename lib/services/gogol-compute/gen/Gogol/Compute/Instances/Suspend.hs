@@ -114,9 +114,7 @@ instance Core.GoogleRequest ComputeInstancesSuspend where
   type Rs ComputeInstancesSuspend = Operation
   type
     Scopes ComputeInstancesSuspend =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesSuspend {..} =
     go
       project

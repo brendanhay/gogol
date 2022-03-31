@@ -110,9 +110,7 @@ instance
   type Rs ComputeInstanceTemplatesDelete = Operation
   type
     Scopes ComputeInstanceTemplatesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstanceTemplatesDelete {..} =
     go
       project

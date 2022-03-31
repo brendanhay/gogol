@@ -111,9 +111,7 @@ instance
   type Rs ComputeNetworksSwitchToCustomMode = Operation
   type
     Scopes ComputeNetworksSwitchToCustomMode =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeNetworksSwitchToCustomMode {..} =
     go
       project

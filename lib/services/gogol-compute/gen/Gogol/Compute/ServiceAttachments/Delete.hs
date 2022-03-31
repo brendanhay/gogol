@@ -116,9 +116,7 @@ instance
   type Rs ComputeServiceAttachmentsDelete = Operation
   type
     Scopes ComputeServiceAttachmentsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeServiceAttachmentsDelete {..} =
     go
       project

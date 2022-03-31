@@ -126,9 +126,9 @@ instance Core.GoogleRequest ComputeNodeTemplatesList where
   type Rs ComputeNodeTemplatesList = NodeTemplateList
   type
     Scopes ComputeNodeTemplatesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeNodeTemplatesList {..} =
     go

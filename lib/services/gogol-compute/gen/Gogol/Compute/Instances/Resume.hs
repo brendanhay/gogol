@@ -114,9 +114,7 @@ instance Core.GoogleRequest ComputeInstancesResume where
   type Rs ComputeInstancesResume = Operation
   type
     Scopes ComputeInstancesResume =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesResume {..} =
     go
       project

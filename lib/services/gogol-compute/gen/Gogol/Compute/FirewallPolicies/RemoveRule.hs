@@ -109,9 +109,7 @@ instance
   type Rs ComputeFirewallPoliciesRemoveRule = Operation
   type
     Scopes ComputeFirewallPoliciesRemoveRule =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallPoliciesRemoveRule {..} =
     go
       firewallPolicy

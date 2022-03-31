@@ -110,9 +110,7 @@ instance
   type Rs ComputeTargetSslProxiesDelete = Operation
   type
     Scopes ComputeTargetSslProxiesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetSslProxiesDelete {..} =
     go
       project

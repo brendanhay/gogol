@@ -116,9 +116,7 @@ instance
   type Rs ComputeTargetHttpProxiesSetUrlMap = Operation
   type
     Scopes ComputeTargetHttpProxiesSetUrlMap =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetHttpProxiesSetUrlMap {..} =
     go
       project

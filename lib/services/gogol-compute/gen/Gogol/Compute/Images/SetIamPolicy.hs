@@ -112,9 +112,7 @@ instance Core.GoogleRequest ComputeImagesSetIamPolicy where
   type Rs ComputeImagesSetIamPolicy = Policy
   type
     Scopes ComputeImagesSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeImagesSetIamPolicy {..} =
     go
       project

@@ -122,9 +122,7 @@ instance Core.GoogleRequest ComputeReservationsResize where
   type Rs ComputeReservationsResize = Operation
   type
     Scopes ComputeReservationsResize =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeReservationsResize {..} =
     go
       project

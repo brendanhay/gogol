@@ -109,9 +109,9 @@ instance Core.GoogleRequest ComputeNodeGroupsGet where
   type Rs ComputeNodeGroupsGet = NodeGroup
   type
     Scopes ComputeNodeGroupsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeNodeGroupsGet {..} =
     go

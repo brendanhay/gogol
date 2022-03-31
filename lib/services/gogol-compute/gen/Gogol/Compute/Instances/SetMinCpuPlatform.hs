@@ -125,9 +125,7 @@ instance
   type Rs ComputeInstancesSetMinCpuPlatform = Operation
   type
     Scopes ComputeInstancesSetMinCpuPlatform =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesSetMinCpuPlatform {..} =
     go
       project

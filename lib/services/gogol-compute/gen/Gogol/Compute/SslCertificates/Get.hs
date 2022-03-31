@@ -103,9 +103,9 @@ instance Core.GoogleRequest ComputeSslCertificatesGet where
   type Rs ComputeSslCertificatesGet = SslCertificate
   type
     Scopes ComputeSslCertificatesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeSslCertificatesGet {..} =
     go

@@ -110,9 +110,7 @@ instance
   type Rs ComputeExternalVpnGatewaysDelete = Operation
   type
     Scopes ComputeExternalVpnGatewaysDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeExternalVpnGatewaysDelete {..} =
     go
       project

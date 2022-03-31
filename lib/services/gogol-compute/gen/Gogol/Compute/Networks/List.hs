@@ -118,9 +118,9 @@ instance Core.GoogleRequest ComputeNetworksList where
   type Rs ComputeNetworksList = NetworkList
   type
     Scopes ComputeNetworksList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeNetworksList {..} =
     go

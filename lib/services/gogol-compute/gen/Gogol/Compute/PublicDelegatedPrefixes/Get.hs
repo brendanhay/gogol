@@ -114,9 +114,9 @@ instance
       PublicDelegatedPrefix
   type
     Scopes ComputePublicDelegatedPrefixesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputePublicDelegatedPrefixesGet {..} =
     go

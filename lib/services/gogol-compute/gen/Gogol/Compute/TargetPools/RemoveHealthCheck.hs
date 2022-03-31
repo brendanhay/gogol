@@ -127,9 +127,7 @@ instance
       Operation
   type
     Scopes ComputeTargetPoolsRemoveHealthCheck =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetPoolsRemoveHealthCheck {..} =
     go
       project

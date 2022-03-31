@@ -30,12 +30,12 @@ module Gogol.Compute.Types
     computeService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    computeScope,
-    computeReadOnlyScope,
-    storageFull_controlScope,
-    storageRead_OnlyScope,
-    storageRead_writeScope,
+    CloudPlatform'FullControl,
+    Compute'FullControl,
+    Compute'Readonly,
+    Devstorage'FullControl,
+    Devstorage'ReadOnly,
+    Devstorage'ReadWrite,
 
     -- * Types
 
@@ -5037,25 +5037,19 @@ computeService =
     "compute.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage your Google Compute Engine resources
-computeScope :: Core.Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Core.Proxy
+type Compute'FullControl = "https://www.googleapis.com/auth/compute"
 
 -- | View your Google Compute Engine resources
-computeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Core.Proxy
+type Compute'Readonly = "https://www.googleapis.com/auth/compute.readonly"
 
 -- | Manage your data and permissions in Cloud Storage and see the email address for your Google Account
-storageFull_controlScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFull_controlScope = Core.Proxy
+type Devstorage'FullControl = "https://www.googleapis.com/auth/devstorage.full_control"
 
 -- | View your data in Google Cloud Storage
-storageRead_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageRead_OnlyScope = Core.Proxy
+type Devstorage'ReadOnly = "https://www.googleapis.com/auth/devstorage.read_only"
 
 -- | Manage your data in Cloud Storage and see the email address of your Google Account
-storageRead_writeScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageRead_writeScope = Core.Proxy
+type Devstorage'ReadWrite = "https://www.googleapis.com/auth/devstorage.read_write"

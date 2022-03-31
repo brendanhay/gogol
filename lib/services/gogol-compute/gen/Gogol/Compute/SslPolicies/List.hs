@@ -118,9 +118,9 @@ instance Core.GoogleRequest ComputeSslPoliciesList where
   type Rs ComputeSslPoliciesList = SslPoliciesList
   type
     Scopes ComputeSslPoliciesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeSslPoliciesList {..} =
     go

@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeHealthChecksUpdate where
   type Rs ComputeHealthChecksUpdate = Operation
   type
     Scopes ComputeHealthChecksUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeHealthChecksUpdate {..} =
     go
       project

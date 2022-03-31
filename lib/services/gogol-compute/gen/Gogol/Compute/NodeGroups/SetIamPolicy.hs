@@ -121,9 +121,7 @@ instance
   type Rs ComputeNodeGroupsSetIamPolicy = Policy
   type
     Scopes ComputeNodeGroupsSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeNodeGroupsSetIamPolicy {..} =
     go
       project

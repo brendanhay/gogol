@@ -121,9 +121,7 @@ instance
   type Rs ComputeSubnetworksSetIamPolicy = Policy
   type
     Scopes ComputeSubnetworksSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSubnetworksSetIamPolicy {..} =
     go
       project

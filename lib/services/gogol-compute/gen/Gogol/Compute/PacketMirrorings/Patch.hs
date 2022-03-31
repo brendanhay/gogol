@@ -122,9 +122,7 @@ instance
   type Rs ComputePacketMirroringsPatch = Operation
   type
     Scopes ComputePacketMirroringsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputePacketMirroringsPatch {..} =
     go
       project

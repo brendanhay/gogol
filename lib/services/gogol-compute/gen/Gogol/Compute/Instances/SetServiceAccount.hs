@@ -125,9 +125,7 @@ instance
   type Rs ComputeInstancesSetServiceAccount = Operation
   type
     Scopes ComputeInstancesSetServiceAccount =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesSetServiceAccount {..} =
     go
       project

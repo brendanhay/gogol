@@ -124,9 +124,7 @@ instance
       Operation
   type
     Scopes ComputeRegionBackendServicesUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionBackendServicesUpdate {..} =
     go
       project

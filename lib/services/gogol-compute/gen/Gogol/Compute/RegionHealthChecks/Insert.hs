@@ -116,9 +116,7 @@ instance
   type Rs ComputeRegionHealthChecksInsert = Operation
   type
     Scopes ComputeRegionHealthChecksInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionHealthChecksInsert {..} =
     go
       project

@@ -109,9 +109,9 @@ instance Core.GoogleRequest ComputeSubnetworksGet where
   type Rs ComputeSubnetworksGet = Subnetwork
   type
     Scopes ComputeSubnetworksGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeSubnetworksGet {..} =
     go

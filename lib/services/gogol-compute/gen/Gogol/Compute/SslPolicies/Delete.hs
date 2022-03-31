@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeSslPoliciesDelete where
   type Rs ComputeSslPoliciesDelete = Operation
   type
     Scopes ComputeSslPoliciesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSslPoliciesDelete {..} =
     go
       project

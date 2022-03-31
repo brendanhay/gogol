@@ -109,9 +109,9 @@ instance Core.GoogleRequest ComputeInstancesGet where
   type Rs ComputeInstancesGet = Instance
   type
     Scopes ComputeInstancesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeInstancesGet {..} =
     go

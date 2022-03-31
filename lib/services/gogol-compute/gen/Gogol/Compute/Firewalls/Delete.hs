@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeFirewallsDelete where
   type Rs ComputeFirewallsDelete = Operation
   type
     Scopes ComputeFirewallsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallsDelete {..} =
     go
       project

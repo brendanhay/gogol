@@ -110,9 +110,7 @@ instance
   type Rs ComputeExternalVpnGatewaysInsert = Operation
   type
     Scopes ComputeExternalVpnGatewaysInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeExternalVpnGatewaysInsert {..} =
     go
       project

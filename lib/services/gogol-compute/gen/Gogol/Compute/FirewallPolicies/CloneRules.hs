@@ -109,9 +109,7 @@ instance
   type Rs ComputeFirewallPoliciesCloneRules = Operation
   type
     Scopes ComputeFirewallPoliciesCloneRules =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallPoliciesCloneRules {..} =
     go
       firewallPolicy

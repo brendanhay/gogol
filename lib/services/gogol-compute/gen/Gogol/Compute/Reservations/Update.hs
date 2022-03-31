@@ -127,9 +127,7 @@ instance Core.GoogleRequest ComputeReservationsUpdate where
   type Rs ComputeReservationsUpdate = Operation
   type
     Scopes ComputeReservationsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeReservationsUpdate {..} =
     go
       project

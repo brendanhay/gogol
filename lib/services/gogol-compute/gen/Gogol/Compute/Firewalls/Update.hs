@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeFirewallsUpdate where
   type Rs ComputeFirewallsUpdate = Operation
   type
     Scopes ComputeFirewallsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallsUpdate {..} =
     go
       project

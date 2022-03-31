@@ -129,9 +129,7 @@ instance
   type Rs ComputeInstancesSetDiskAutoDelete = Operation
   type
     Scopes ComputeInstancesSetDiskAutoDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesSetDiskAutoDelete {..} =
     go
       project

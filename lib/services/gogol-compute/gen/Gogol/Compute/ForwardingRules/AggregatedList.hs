@@ -131,9 +131,9 @@ instance
       ForwardingRuleAggregatedList
   type
     Scopes ComputeForwardingRulesAggregatedList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient
     ComputeForwardingRulesAggregatedList {..} =

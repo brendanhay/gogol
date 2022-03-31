@@ -110,9 +110,7 @@ instance
   type Rs ComputeFirewallPoliciesPatch = Operation
   type
     Scopes ComputeFirewallPoliciesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallPoliciesPatch {..} =
     go
       firewallPolicy

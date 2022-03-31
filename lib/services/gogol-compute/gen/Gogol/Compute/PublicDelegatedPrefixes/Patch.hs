@@ -126,9 +126,7 @@ instance
       Operation
   type
     Scopes ComputePublicDelegatedPrefixesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputePublicDelegatedPrefixesPatch {..} =
     go
       project

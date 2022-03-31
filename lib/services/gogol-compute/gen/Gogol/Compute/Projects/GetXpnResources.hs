@@ -124,9 +124,7 @@ instance
       ProjectsGetXpnResources
   type
     Scopes ComputeProjectsGetXpnResources =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeProjectsGetXpnResources {..} =
     go
       project

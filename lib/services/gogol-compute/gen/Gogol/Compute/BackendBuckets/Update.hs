@@ -116,9 +116,7 @@ instance
   type Rs ComputeBackendBucketsUpdate = Operation
   type
     Scopes ComputeBackendBucketsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeBackendBucketsUpdate {..} =
     go
       project

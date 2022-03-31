@@ -34,12 +34,12 @@ module Gogol.Compute
     computeService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    computeScope,
-    computeReadOnlyScope,
-    storageFull_controlScope,
-    storageRead_OnlyScope,
-    storageRead_writeScope,
+    CloudPlatform'FullControl,
+    Compute'FullControl,
+    Compute'Readonly,
+    Devstorage'FullControl,
+    Devstorage'ReadOnly,
+    Devstorage'ReadWrite,
 
     -- * Resources
 

@@ -106,9 +106,7 @@ instance
   type Rs ComputeGlobalOperationsDelete = ()
   type
     Scopes ComputeGlobalOperationsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeGlobalOperationsDelete {..} =
     go
       project

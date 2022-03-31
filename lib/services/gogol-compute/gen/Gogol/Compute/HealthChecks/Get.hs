@@ -103,9 +103,9 @@ instance Core.GoogleRequest ComputeHealthChecksGet where
   type Rs ComputeHealthChecksGet = HealthCheck
   type
     Scopes ComputeHealthChecksGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeHealthChecksGet {..} =
     go

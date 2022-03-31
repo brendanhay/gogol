@@ -123,9 +123,7 @@ instance
   type Rs ComputeRegionDisksCreateSnapshot = Operation
   type
     Scopes ComputeRegionDisksCreateSnapshot =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionDisksCreateSnapshot {..} =
     go
       project

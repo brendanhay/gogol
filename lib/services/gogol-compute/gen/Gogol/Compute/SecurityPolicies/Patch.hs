@@ -116,9 +116,7 @@ instance
   type Rs ComputeSecurityPoliciesPatch = Operation
   type
     Scopes ComputeSecurityPoliciesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSecurityPoliciesPatch {..} =
     go
       project

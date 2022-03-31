@@ -116,9 +116,7 @@ instance
   type Rs ComputeTargetHttpsProxiesPatch = Operation
   type
     Scopes ComputeTargetHttpsProxiesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetHttpsProxiesPatch {..} =
     go
       project

@@ -122,9 +122,7 @@ instance
   type Rs ComputeRegionHealthChecksUpdate = Operation
   type
     Scopes ComputeRegionHealthChecksUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionHealthChecksUpdate {..} =
     go
       project

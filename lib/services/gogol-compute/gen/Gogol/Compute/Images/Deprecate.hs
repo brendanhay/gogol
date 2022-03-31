@@ -114,9 +114,7 @@ instance Core.GoogleRequest ComputeImagesDeprecate where
   type Rs ComputeImagesDeprecate = Operation
   type
     Scopes ComputeImagesDeprecate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeImagesDeprecate {..} =
     go
       project

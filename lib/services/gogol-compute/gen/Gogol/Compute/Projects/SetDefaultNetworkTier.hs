@@ -113,9 +113,7 @@ instance
       Operation
   type
     Scopes ComputeProjectsSetDefaultNetworkTier =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeProjectsSetDefaultNetworkTier {..} =
       go

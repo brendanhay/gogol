@@ -108,9 +108,9 @@ instance
       FirewallPolicy
   type
     Scopes ComputeNetworkFirewallPoliciesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeNetworkFirewallPoliciesGet {..} =
     go

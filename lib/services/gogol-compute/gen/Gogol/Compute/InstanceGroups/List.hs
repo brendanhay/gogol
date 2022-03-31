@@ -126,9 +126,9 @@ instance Core.GoogleRequest ComputeInstanceGroupsList where
   type Rs ComputeInstanceGroupsList = InstanceGroupList
   type
     Scopes ComputeInstanceGroupsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeInstanceGroupsList {..} =
     go

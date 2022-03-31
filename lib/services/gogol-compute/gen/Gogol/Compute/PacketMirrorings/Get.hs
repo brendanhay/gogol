@@ -112,9 +112,9 @@ instance
   type Rs ComputePacketMirroringsGet = PacketMirroring
   type
     Scopes ComputePacketMirroringsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputePacketMirroringsGet {..} =
     go

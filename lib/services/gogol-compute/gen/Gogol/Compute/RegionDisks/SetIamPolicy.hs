@@ -121,9 +121,7 @@ instance
   type Rs ComputeRegionDisksSetIamPolicy = Policy
   type
     Scopes ComputeRegionDisksSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionDisksSetIamPolicy {..} =
     go
       project

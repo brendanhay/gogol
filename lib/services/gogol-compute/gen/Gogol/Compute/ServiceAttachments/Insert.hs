@@ -116,9 +116,7 @@ instance
   type Rs ComputeServiceAttachmentsInsert = Operation
   type
     Scopes ComputeServiceAttachmentsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeServiceAttachmentsInsert {..} =
     go
       project

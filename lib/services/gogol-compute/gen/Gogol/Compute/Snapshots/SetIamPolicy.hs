@@ -115,9 +115,7 @@ instance
   type Rs ComputeSnapshotsSetIamPolicy = Policy
   type
     Scopes ComputeSnapshotsSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSnapshotsSetIamPolicy {..} =
     go
       project

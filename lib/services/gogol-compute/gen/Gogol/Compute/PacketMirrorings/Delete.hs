@@ -116,9 +116,7 @@ instance
   type Rs ComputePacketMirroringsDelete = Operation
   type
     Scopes ComputePacketMirroringsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputePacketMirroringsDelete {..} =
     go
       project

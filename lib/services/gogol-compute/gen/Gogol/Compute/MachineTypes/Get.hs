@@ -109,9 +109,9 @@ instance Core.GoogleRequest ComputeMachineTypesGet where
   type Rs ComputeMachineTypesGet = MachineType
   type
     Scopes ComputeMachineTypesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeMachineTypesGet {..} =
     go

@@ -96,9 +96,7 @@ instance Core.GoogleRequest ComputeProjectsGetXpnHost where
   type Rs ComputeProjectsGetXpnHost = Project
   type
     Scopes ComputeProjectsGetXpnHost =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeProjectsGetXpnHost {..} =
     go
       project

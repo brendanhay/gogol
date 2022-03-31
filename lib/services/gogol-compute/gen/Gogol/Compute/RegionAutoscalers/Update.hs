@@ -120,9 +120,7 @@ instance
   type Rs ComputeRegionAutoscalersUpdate = Operation
   type
     Scopes ComputeRegionAutoscalersUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionAutoscalersUpdate {..} =
     go
       project

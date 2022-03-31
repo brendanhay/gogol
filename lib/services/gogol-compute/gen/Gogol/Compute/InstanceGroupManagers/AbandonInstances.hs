@@ -128,9 +128,7 @@ instance
   type
     Scopes
       ComputeInstanceGroupManagersAbandonInstances =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeInstanceGroupManagersAbandonInstances {..} =
       go

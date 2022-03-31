@@ -128,9 +128,7 @@ instance
   type Rs ComputeProjectsListXpnHosts = XpnHostList
   type
     Scopes ComputeProjectsListXpnHosts =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeProjectsListXpnHosts {..} =
     go
       project

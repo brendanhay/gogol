@@ -103,9 +103,9 @@ instance Core.GoogleRequest ComputeBackendServicesGet where
   type Rs ComputeBackendServicesGet = BackendService
   type
     Scopes ComputeBackendServicesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeBackendServicesGet {..} =
     go

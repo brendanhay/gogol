@@ -110,9 +110,9 @@ instance Core.GoogleRequest ComputeZoneOperationsWait where
   type Rs ComputeZoneOperationsWait = Operation
   type
     Scopes ComputeZoneOperationsWait =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeZoneOperationsWait {..} =
     go

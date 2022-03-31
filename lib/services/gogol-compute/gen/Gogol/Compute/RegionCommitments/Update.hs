@@ -130,9 +130,7 @@ instance
   type Rs ComputeRegionCommitmentsUpdate = Operation
   type
     Scopes ComputeRegionCommitmentsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionCommitmentsUpdate {..} =
     go
       project

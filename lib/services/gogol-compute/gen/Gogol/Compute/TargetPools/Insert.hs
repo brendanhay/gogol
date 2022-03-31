@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeTargetPoolsInsert where
   type Rs ComputeTargetPoolsInsert = Operation
   type
     Scopes ComputeTargetPoolsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetPoolsInsert {..} =
     go
       project

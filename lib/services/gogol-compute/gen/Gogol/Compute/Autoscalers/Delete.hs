@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeAutoscalersDelete where
   type Rs ComputeAutoscalersDelete = Operation
   type
     Scopes ComputeAutoscalersDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeAutoscalersDelete {..} =
     go
       project

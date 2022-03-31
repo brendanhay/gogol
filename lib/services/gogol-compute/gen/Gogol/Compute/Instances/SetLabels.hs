@@ -122,9 +122,7 @@ instance Core.GoogleRequest ComputeInstancesSetLabels where
   type Rs ComputeInstancesSetLabels = Operation
   type
     Scopes ComputeInstancesSetLabels =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesSetLabels {..} =
     go
       project

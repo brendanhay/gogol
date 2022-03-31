@@ -111,9 +111,7 @@ instance
       Operation
   type
     Scopes ComputeProjectsSetCommonInstanceMetadata =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeProjectsSetCommonInstanceMetadata {..} =
       go

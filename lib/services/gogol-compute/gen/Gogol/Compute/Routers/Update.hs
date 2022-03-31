@@ -119,9 +119,7 @@ instance Core.GoogleRequest ComputeRoutersUpdate where
   type Rs ComputeRoutersUpdate = Operation
   type
     Scopes ComputeRoutersUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRoutersUpdate {..} =
     go
       project

@@ -106,9 +106,7 @@ instance Core.GoogleRequest ComputeProjectsMoveDisk where
   type Rs ComputeProjectsMoveDisk = Operation
   type
     Scopes ComputeProjectsMoveDisk =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeProjectsMoveDisk {..} =
     go
       project

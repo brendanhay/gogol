@@ -126,9 +126,9 @@ instance Core.GoogleRequest ComputeTargetPoolsList where
   type Rs ComputeTargetPoolsList = TargetPoolList
   type
     Scopes ComputeTargetPoolsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeTargetPoolsList {..} =
     go

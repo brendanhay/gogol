@@ -103,9 +103,9 @@ instance Core.GoogleRequest ComputeGlobalAddressesGet where
   type Rs ComputeGlobalAddressesGet = Address
   type
     Scopes ComputeGlobalAddressesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeGlobalAddressesGet {..} =
     go

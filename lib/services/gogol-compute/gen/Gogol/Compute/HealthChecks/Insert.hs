@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeHealthChecksInsert where
   type Rs ComputeHealthChecksInsert = Operation
   type
     Scopes ComputeHealthChecksInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeHealthChecksInsert {..} =
     go
       project
