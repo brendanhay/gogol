@@ -104,7 +104,7 @@ instance
       Queue
   type
     Scopes CloudTasksProjectsLocationsQueuesPause =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudTasksProjectsLocationsQueuesPause {..} =
       go

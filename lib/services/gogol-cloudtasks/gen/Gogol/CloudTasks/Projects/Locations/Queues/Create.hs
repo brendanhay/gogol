@@ -105,7 +105,7 @@ instance
       Queue
   type
     Scopes CloudTasksProjectsLocationsQueuesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudTasksProjectsLocationsQueuesCreate {..} =
       go

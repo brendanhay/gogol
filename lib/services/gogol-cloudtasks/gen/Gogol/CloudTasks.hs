@@ -34,7 +34,7 @@ module Gogol.CloudTasks
     cloudTasksService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
