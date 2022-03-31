@@ -34,8 +34,8 @@ module Gogol.CloudIOT
     cloudIOTService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudIOTScope,
+    CloudPlatform'FullControl,
+    Cloudiot'FullControl,
 
     -- * Resources
 
