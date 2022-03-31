@@ -87,7 +87,7 @@ instance
       SiteVerificationWebResourceResource
   type
     Scopes SiteVerificationWebResourcePatch =
-      '["https://www.googleapis.com/auth/siteverification"]
+      '[Siteverification'FullControl]
   requestClient SiteVerificationWebResourcePatch {..} =
     go
       id

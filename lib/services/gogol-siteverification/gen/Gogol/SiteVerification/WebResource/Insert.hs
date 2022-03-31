@@ -90,8 +90,8 @@ instance
       SiteVerificationWebResourceResource
   type
     Scopes SiteVerificationWebResourceInsert =
-      '[ "https://www.googleapis.com/auth/siteverification",
-         "https://www.googleapis.com/auth/siteverification.verify_only"
+      '[ Siteverification'FullControl,
+         Siteverification'VerifyOnly
        ]
   requestClient SiteVerificationWebResourceInsert {..} =
     go

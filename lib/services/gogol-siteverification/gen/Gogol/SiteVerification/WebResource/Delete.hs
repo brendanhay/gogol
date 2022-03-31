@@ -76,7 +76,7 @@ instance
   type Rs SiteVerificationWebResourceDelete = ()
   type
     Scopes SiteVerificationWebResourceDelete =
-      '["https://www.googleapis.com/auth/siteverification"]
+      '[Siteverification'FullControl]
   requestClient SiteVerificationWebResourceDelete {..} =
     go
       id

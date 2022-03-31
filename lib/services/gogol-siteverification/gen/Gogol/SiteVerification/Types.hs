@@ -30,8 +30,8 @@ module Gogol.SiteVerification.Types
     siteVerificationService,
 
     -- * OAuth Scopes
-    siteVerificationScope,
-    siteVerificationVerify_OnlyScope,
+    Siteverification'FullControl,
+    Siteverification'VerifyOnly,
 
     -- * Types
 
@@ -73,9 +73,7 @@ siteVerificationService =
     "www.googleapis.com"
 
 -- | Manage the list of sites and domains you control
-siteVerificationScope :: Core.Proxy '["https://www.googleapis.com/auth/siteverification"]
-siteVerificationScope = Core.Proxy
+type Siteverification'FullControl = "https://www.googleapis.com/auth/siteverification"
 
 -- | Manage your new site verifications with Google
-siteVerificationVerify_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
-siteVerificationVerify_OnlyScope = Core.Proxy
+type Siteverification'VerifyOnly = "https://www.googleapis.com/auth/siteverification.verify_only"
