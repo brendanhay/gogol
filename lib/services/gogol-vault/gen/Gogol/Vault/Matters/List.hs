@@ -104,9 +104,7 @@ instance Core.GoogleRequest VaultMattersList where
   type Rs VaultMattersList = ListMattersResponse
   type
     Scopes VaultMattersList =
-      '[ "https://www.googleapis.com/auth/ediscovery",
-         "https://www.googleapis.com/auth/ediscovery.readonly"
-       ]
+      '[Ediscovery'FullControl, Ediscovery'Readonly]
   requestClient VaultMattersList {..} =
     go
       xgafv

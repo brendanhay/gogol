@@ -104,9 +104,7 @@ instance
   type Rs VaultMattersSavedQueriesGet = SavedQuery
   type
     Scopes VaultMattersSavedQueriesGet =
-      '[ "https://www.googleapis.com/auth/ediscovery",
-         "https://www.googleapis.com/auth/ediscovery.readonly"
-       ]
+      '[Ediscovery'FullControl, Ediscovery'Readonly]
   requestClient VaultMattersSavedQueriesGet {..} =
     go
       matterId

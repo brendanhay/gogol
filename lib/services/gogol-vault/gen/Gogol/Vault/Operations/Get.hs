@@ -93,9 +93,7 @@ instance Core.GoogleRequest VaultOperationsGet where
   type Rs VaultOperationsGet = Operation
   type
     Scopes VaultOperationsGet =
-      '[ "https://www.googleapis.com/auth/ediscovery",
-         "https://www.googleapis.com/auth/ediscovery.readonly"
-       ]
+      '[Ediscovery'FullControl, Ediscovery'Readonly]
   requestClient VaultOperationsGet {..} =
     go
       name

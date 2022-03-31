@@ -104,7 +104,7 @@ instance
   type Rs VaultMattersSavedQueriesDelete = Empty
   type
     Scopes VaultMattersSavedQueriesDelete =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersSavedQueriesDelete {..} =
     go
       matterId

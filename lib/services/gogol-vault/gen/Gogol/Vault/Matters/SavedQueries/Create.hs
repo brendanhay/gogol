@@ -104,7 +104,7 @@ instance
   type Rs VaultMattersSavedQueriesCreate = SavedQuery
   type
     Scopes VaultMattersSavedQueriesCreate =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersSavedQueriesCreate {..} =
     go
       matterId

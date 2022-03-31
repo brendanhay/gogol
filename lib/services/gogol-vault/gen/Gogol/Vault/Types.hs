@@ -30,8 +30,8 @@ module Gogol.Vault.Types
     vaultService,
 
     -- * OAuth Scopes
-    ediscoveryScope,
-    ediscoveryReadOnlyScope,
+    Ediscovery'FullControl,
+    Ediscovery'Readonly,
 
     -- * Types
 
@@ -378,9 +378,7 @@ vaultService =
     "vault.googleapis.com"
 
 -- | Manage your eDiscovery data
-ediscoveryScope :: Core.Proxy '["https://www.googleapis.com/auth/ediscovery"]
-ediscoveryScope = Core.Proxy
+type Ediscovery'FullControl = "https://www.googleapis.com/auth/ediscovery"
 
 -- | View your eDiscovery data
-ediscoveryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/ediscovery.readonly"]
-ediscoveryReadOnlyScope = Core.Proxy
+type Ediscovery'Readonly = "https://www.googleapis.com/auth/ediscovery.readonly"

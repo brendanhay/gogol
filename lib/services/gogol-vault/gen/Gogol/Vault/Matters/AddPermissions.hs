@@ -106,7 +106,7 @@ instance
   type Rs VaultMattersAddPermissions = MatterPermission
   type
     Scopes VaultMattersAddPermissions =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersAddPermissions {..} =
     go
       matterId

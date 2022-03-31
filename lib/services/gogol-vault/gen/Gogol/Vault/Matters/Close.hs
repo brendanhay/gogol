@@ -100,7 +100,7 @@ instance Core.GoogleRequest VaultMattersClose where
   type Rs VaultMattersClose = CloseMatterResponse
   type
     Scopes VaultMattersClose =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersClose {..} =
     go
       matterId

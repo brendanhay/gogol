@@ -112,7 +112,7 @@ instance
       AddHeldAccountsResponse
   type
     Scopes VaultMattersHoldsAddHeldAccounts =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersHoldsAddHeldAccounts {..} =
     go
       matterId

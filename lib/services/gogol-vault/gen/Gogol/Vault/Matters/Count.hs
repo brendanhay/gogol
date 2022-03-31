@@ -100,7 +100,7 @@ instance Core.GoogleRequest VaultMattersCount where
   type Rs VaultMattersCount = Operation
   type
     Scopes VaultMattersCount =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersCount {..} =
     go
       matterId

@@ -34,8 +34,8 @@ module Gogol.Vault
     vaultService,
 
     -- * OAuth Scopes
-    ediscoveryScope,
-    ediscoveryReadOnlyScope,
+    Ediscovery'FullControl,
+    Ediscovery'Readonly,
 
     -- * Resources
 

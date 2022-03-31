@@ -101,7 +101,7 @@ instance Core.GoogleRequest VaultMattersExportsDelete where
   type Rs VaultMattersExportsDelete = Empty
   type
     Scopes VaultMattersExportsDelete =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersExportsDelete {..} =
     go
       matterId
