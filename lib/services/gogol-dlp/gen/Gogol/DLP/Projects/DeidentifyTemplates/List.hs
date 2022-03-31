@@ -117,7 +117,7 @@ instance
       GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
   type
     Scopes DLPProjectsDeidentifyTemplatesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsDeidentifyTemplatesList {..} =
     go
       parent

@@ -110,7 +110,7 @@ instance
   type
     Scopes
       DLPOrganizationsLocationsInspectTemplatesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPOrganizationsLocationsInspectTemplatesPatch {..} =
       go

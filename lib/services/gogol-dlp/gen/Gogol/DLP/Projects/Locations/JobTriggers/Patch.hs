@@ -106,7 +106,7 @@ instance
       GooglePrivacyDlpV2JobTrigger
   type
     Scopes DLPProjectsLocationsJobTriggersPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPProjectsLocationsJobTriggersPatch {..} =
       go

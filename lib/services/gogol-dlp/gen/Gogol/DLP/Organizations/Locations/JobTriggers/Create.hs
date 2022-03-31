@@ -108,7 +108,7 @@ instance
   type
     Scopes
       DLPOrganizationsLocationsJobTriggersCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPOrganizationsLocationsJobTriggersCreate {..} =
       go

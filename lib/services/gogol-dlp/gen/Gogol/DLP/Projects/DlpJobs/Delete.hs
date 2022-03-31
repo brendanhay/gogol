@@ -95,7 +95,7 @@ instance Core.GoogleRequest DLPProjectsDlpJobsDelete where
       GoogleProtobufEmpty
   type
     Scopes DLPProjectsDlpJobsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsDlpJobsDelete {..} =
     go
       name

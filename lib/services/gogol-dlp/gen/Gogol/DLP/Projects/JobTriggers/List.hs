@@ -125,7 +125,7 @@ instance
       GooglePrivacyDlpV2ListJobTriggersResponse
   type
     Scopes DLPProjectsJobTriggersList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsJobTriggersList {..} =
     go
       parent

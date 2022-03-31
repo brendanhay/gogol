@@ -117,7 +117,7 @@ instance
       GooglePrivacyDlpV2ListInspectTemplatesResponse
   type
     Scopes DLPProjectsLocationsInspectTemplatesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPProjectsLocationsInspectTemplatesList {..} =
       go

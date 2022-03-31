@@ -107,7 +107,7 @@ instance
       GooglePrivacyDlpV2DlpJob
   type
     Scopes DLPProjectsLocationsDlpJobsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsLocationsDlpJobsCreate {..} =
     go
       parent

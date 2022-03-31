@@ -109,7 +109,7 @@ instance
       GooglePrivacyDlpV2StoredInfoType
   type
     Scopes DLPOrganizationsStoredInfoTypesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPOrganizationsStoredInfoTypesCreate {..} =
       go

@@ -34,7 +34,7 @@ module Gogol.DLP
     dLPService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

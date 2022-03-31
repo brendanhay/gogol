@@ -106,7 +106,7 @@ instance Core.GoogleRequest DLPProjectsContentInspect where
       GooglePrivacyDlpV2InspectContentResponse
   type
     Scopes DLPProjectsContentInspect =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsContentInspect {..} =
     go
       parent

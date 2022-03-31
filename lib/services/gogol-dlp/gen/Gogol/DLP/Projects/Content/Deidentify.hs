@@ -109,7 +109,7 @@ instance
       GooglePrivacyDlpV2DeidentifyContentResponse
   type
     Scopes DLPProjectsContentDeidentify =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsContentDeidentify {..} =
     go
       parent

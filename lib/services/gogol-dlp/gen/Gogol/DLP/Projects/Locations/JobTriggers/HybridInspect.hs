@@ -109,7 +109,7 @@ instance
   type
     Scopes
       DLPProjectsLocationsJobTriggersHybridInspect =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPProjectsLocationsJobTriggersHybridInspect {..} =
       go

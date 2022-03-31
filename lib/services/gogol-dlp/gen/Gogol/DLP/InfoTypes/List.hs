@@ -108,7 +108,7 @@ instance Core.GoogleRequest DLPInfoTypesList where
       GooglePrivacyDlpV2ListInfoTypesResponse
   type
     Scopes DLPInfoTypesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPInfoTypesList {..} =
     go
       xgafv

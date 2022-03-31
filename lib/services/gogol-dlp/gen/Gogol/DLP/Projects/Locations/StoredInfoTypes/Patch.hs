@@ -108,7 +108,7 @@ instance
       GooglePrivacyDlpV2StoredInfoType
   type
     Scopes DLPProjectsLocationsStoredInfoTypesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPProjectsLocationsStoredInfoTypesPatch {..} =
       go
