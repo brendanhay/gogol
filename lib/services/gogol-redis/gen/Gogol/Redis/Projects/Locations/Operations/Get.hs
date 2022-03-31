@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes RedisProjectsLocationsOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RedisProjectsLocationsOperationsGet {..} =
     go
       name

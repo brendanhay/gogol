@@ -98,7 +98,7 @@ instance
       Empty
   type
     Scopes RedisProjectsLocationsOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RedisProjectsLocationsOperationsDelete {..} =
       go

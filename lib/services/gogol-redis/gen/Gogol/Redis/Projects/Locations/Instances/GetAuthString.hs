@@ -100,7 +100,7 @@ instance
   type
     Scopes
       RedisProjectsLocationsInstancesGetAuthString =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RedisProjectsLocationsInstancesGetAuthString {..} =
       go
