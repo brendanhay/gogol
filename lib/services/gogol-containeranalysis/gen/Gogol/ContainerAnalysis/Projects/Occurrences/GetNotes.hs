@@ -100,7 +100,7 @@ instance
   type
     Scopes
       ContainerAnalysisProjectsOccurrencesGetNotes =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerAnalysisProjectsOccurrencesGetNotes {..} =
       go

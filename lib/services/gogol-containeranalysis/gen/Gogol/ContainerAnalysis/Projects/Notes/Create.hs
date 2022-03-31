@@ -107,7 +107,7 @@ instance
   type Rs ContainerAnalysisProjectsNotesCreate = Note
   type
     Scopes ContainerAnalysisProjectsNotesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerAnalysisProjectsNotesCreate {..} =
       go
