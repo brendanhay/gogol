@@ -114,7 +114,7 @@ instance
   type Rs GroupsMigrationArchiveInsert = Groups
   type
     Scopes GroupsMigrationArchiveInsert =
-      '["https://www.googleapis.com/auth/apps.groups.migration"]
+      '[Apps'Groups'Migration]
   requestClient GroupsMigrationArchiveInsert {..} =
     go
       groupId

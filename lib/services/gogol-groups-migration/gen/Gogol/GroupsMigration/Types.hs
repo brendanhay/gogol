@@ -30,7 +30,7 @@ module Gogol.GroupsMigration.Types
     groupsMigrationService,
 
     -- * OAuth Scopes
-    appsGroupsMigrationScope,
+    Apps'Groups'Migration,
 
     -- * Types
 
@@ -55,5 +55,4 @@ groupsMigrationService =
     "groupsmigration.googleapis.com"
 
 -- | Upload messages to any Google group in your domain
-appsGroupsMigrationScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.groups.migration"]
-appsGroupsMigrationScope = Core.Proxy
+type Apps'Groups'Migration = "https://www.googleapis.com/auth/apps.groups.migration"
