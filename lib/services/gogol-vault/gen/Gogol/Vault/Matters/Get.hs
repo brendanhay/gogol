@@ -98,9 +98,7 @@ instance Core.GoogleRequest VaultMattersGet where
   type Rs VaultMattersGet = Matter
   type
     Scopes VaultMattersGet =
-      '[ "https://www.googleapis.com/auth/ediscovery",
-         "https://www.googleapis.com/auth/ediscovery.readonly"
-       ]
+      '[Ediscovery'FullControl, Ediscovery'Readonly]
   requestClient VaultMattersGet {..} =
     go
       matterId

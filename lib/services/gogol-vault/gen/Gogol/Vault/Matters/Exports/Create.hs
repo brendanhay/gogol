@@ -101,7 +101,7 @@ instance Core.GoogleRequest VaultMattersExportsCreate where
   type Rs VaultMattersExportsCreate = Export
   type
     Scopes VaultMattersExportsCreate =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersExportsCreate {..} =
     go
       matterId

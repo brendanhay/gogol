@@ -94,7 +94,7 @@ instance Core.GoogleRequest VaultMattersCreate where
   type Rs VaultMattersCreate = Matter
   type
     Scopes VaultMattersCreate =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersCreate {..} =
     go
       xgafv

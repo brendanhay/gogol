@@ -111,7 +111,7 @@ instance
   type Rs VaultMattersHoldsAccountsCreate = HeldAccount
   type
     Scopes VaultMattersHoldsAccountsCreate =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersHoldsAccountsCreate {..} =
     go
       matterId

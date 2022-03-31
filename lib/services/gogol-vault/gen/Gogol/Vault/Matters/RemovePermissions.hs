@@ -108,7 +108,7 @@ instance
   type Rs VaultMattersRemovePermissions = Empty
   type
     Scopes VaultMattersRemovePermissions =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersRemovePermissions {..} =
     go
       matterId

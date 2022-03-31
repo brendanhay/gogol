@@ -107,7 +107,7 @@ instance Core.GoogleRequest VaultMattersHoldsUpdate where
   type Rs VaultMattersHoldsUpdate = Hold
   type
     Scopes VaultMattersHoldsUpdate =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersHoldsUpdate {..} =
     go
       matterId

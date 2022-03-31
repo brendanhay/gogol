@@ -115,7 +115,7 @@ instance
       RemoveHeldAccountsResponse
   type
     Scopes VaultMattersHoldsRemoveHeldAccounts =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersHoldsRemoveHeldAccounts {..} =
     go
       matterId

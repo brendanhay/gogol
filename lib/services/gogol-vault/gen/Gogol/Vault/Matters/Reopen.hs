@@ -100,7 +100,7 @@ instance Core.GoogleRequest VaultMattersReopen where
   type Rs VaultMattersReopen = ReopenMatterResponse
   type
     Scopes VaultMattersReopen =
-      '["https://www.googleapis.com/auth/ediscovery"]
+      '[Ediscovery'FullControl]
   requestClient VaultMattersReopen {..} =
     go
       matterId
