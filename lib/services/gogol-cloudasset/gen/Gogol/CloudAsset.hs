@@ -34,7 +34,7 @@ module Gogol.CloudAsset
     cloudAssetService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

@@ -93,7 +93,7 @@ instance Core.GoogleRequest CloudAssetOperationsGet where
   type Rs CloudAssetOperationsGet = Operation
   type
     Scopes CloudAssetOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudAssetOperationsGet {..} =
     go
       name
