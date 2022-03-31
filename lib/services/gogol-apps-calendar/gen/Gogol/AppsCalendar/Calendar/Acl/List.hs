@@ -90,9 +90,7 @@ newCalendarAclList calendarId =
 
 instance Core.GoogleRequest CalendarAclList where
   type Rs CalendarAclList = Acl
-  type
-    Scopes CalendarAclList =
-      '["https://www.googleapis.com/auth/calendar"]
+  type Scopes CalendarAclList = '[Calendar'FullControl]
   requestClient CalendarAclList {..} =
     go
       calendarId

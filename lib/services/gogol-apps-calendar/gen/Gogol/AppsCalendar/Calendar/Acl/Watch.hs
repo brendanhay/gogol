@@ -99,7 +99,7 @@ instance Core.GoogleRequest CalendarAclWatch where
   type Rs CalendarAclWatch = Channel
   type
     Scopes CalendarAclWatch =
-      '["https://www.googleapis.com/auth/calendar"]
+      '[Calendar'FullControl]
   requestClient CalendarAclWatch {..} =
     go
       calendarId

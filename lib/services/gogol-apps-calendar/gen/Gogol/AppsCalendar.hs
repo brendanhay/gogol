@@ -34,11 +34,11 @@ module Gogol.AppsCalendar
     appsCalendarService,
 
     -- * OAuth Scopes
-    calendarScope,
-    calendarEventsScope,
-    calendarEventsReadOnlyScope,
-    calendarReadOnlyScope,
-    calendarSettingsReadOnlyScope,
+    Calendar'FullControl,
+    Calendar'Events,
+    Calendar'Events'Readonly,
+    Calendar'Readonly,
+    Calendar'Settings'Readonly,
 
     -- * Resources
 

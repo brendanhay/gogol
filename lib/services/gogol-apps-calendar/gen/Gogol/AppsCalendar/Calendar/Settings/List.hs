@@ -83,9 +83,9 @@ instance Core.GoogleRequest CalendarSettingsList where
   type Rs CalendarSettingsList = Settings
   type
     Scopes CalendarSettingsList =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.readonly",
-         "https://www.googleapis.com/auth/calendar.settings.readonly"
+      '[ Calendar'FullControl,
+         Calendar'Readonly,
+         Calendar'Settings'Readonly
        ]
   requestClient CalendarSettingsList {..} =
     go

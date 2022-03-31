@@ -92,7 +92,7 @@ instance
       CalendarListEntry
   type
     Scopes CalendarCalendarListUpdate =
-      '["https://www.googleapis.com/auth/calendar"]
+      '[Calendar'FullControl]
   requestClient CalendarCalendarListUpdate {..} =
     go
       calendarId

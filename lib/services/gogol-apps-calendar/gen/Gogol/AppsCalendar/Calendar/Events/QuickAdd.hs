@@ -95,9 +95,7 @@ instance Core.GoogleRequest CalendarEventsQuickAdd where
   type Rs CalendarEventsQuickAdd = Event
   type
     Scopes CalendarEventsQuickAdd =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.events"
-       ]
+      '[Calendar'FullControl, Calendar'Events]
   requestClient CalendarEventsQuickAdd {..} =
     go
       calendarId

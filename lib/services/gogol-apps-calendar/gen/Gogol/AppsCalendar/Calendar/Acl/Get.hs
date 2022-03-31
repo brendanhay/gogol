@@ -79,9 +79,7 @@ instance Core.GoogleRequest CalendarAclGet where
   type Rs CalendarAclGet = AclRule
   type
     Scopes CalendarAclGet =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.readonly"
-       ]
+      '[Calendar'FullControl, Calendar'Readonly]
   requestClient CalendarAclGet {..} =
     go
       calendarId

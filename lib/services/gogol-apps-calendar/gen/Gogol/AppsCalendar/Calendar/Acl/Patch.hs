@@ -92,7 +92,7 @@ instance Core.GoogleRequest CalendarAclPatch where
   type Rs CalendarAclPatch = AclRule
   type
     Scopes CalendarAclPatch =
-      '["https://www.googleapis.com/auth/calendar"]
+      '[Calendar'FullControl]
   requestClient CalendarAclPatch {..} =
     go
       calendarId

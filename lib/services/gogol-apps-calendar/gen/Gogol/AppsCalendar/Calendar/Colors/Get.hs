@@ -66,9 +66,7 @@ instance Core.GoogleRequest CalendarColorsGet where
   type Rs CalendarColorsGet = Colors
   type
     Scopes CalendarColorsGet =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.readonly"
-       ]
+      '[Calendar'FullControl, Calendar'Readonly]
   requestClient CalendarColorsGet {} =
     go (Core.Just Core.AltJSON) appsCalendarService
     where

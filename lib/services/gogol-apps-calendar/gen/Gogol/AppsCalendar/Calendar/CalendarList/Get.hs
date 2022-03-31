@@ -75,9 +75,7 @@ instance Core.GoogleRequest CalendarCalendarListGet where
   type Rs CalendarCalendarListGet = CalendarListEntry
   type
     Scopes CalendarCalendarListGet =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.readonly"
-       ]
+      '[Calendar'FullControl, Calendar'Readonly]
   requestClient CalendarCalendarListGet {..} =
     go
       calendarId

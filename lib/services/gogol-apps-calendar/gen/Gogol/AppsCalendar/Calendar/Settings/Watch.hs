@@ -90,9 +90,9 @@ instance Core.GoogleRequest CalendarSettingsWatch where
   type Rs CalendarSettingsWatch = Channel
   type
     Scopes CalendarSettingsWatch =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.readonly",
-         "https://www.googleapis.com/auth/calendar.settings.readonly"
+      '[ Calendar'FullControl,
+         Calendar'Readonly,
+         Calendar'Settings'Readonly
        ]
   requestClient CalendarSettingsWatch {..} =
     go

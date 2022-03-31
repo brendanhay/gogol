@@ -73,11 +73,11 @@ instance Core.GoogleRequest CalendarChannelsStop where
   type Rs CalendarChannelsStop = ()
   type
     Scopes CalendarChannelsStop =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.events",
-         "https://www.googleapis.com/auth/calendar.events.readonly",
-         "https://www.googleapis.com/auth/calendar.readonly",
-         "https://www.googleapis.com/auth/calendar.settings.readonly"
+      '[ Calendar'FullControl,
+         Calendar'Events,
+         Calendar'Events'Readonly,
+         Calendar'Readonly,
+         Calendar'Settings'Readonly
        ]
   requestClient CalendarChannelsStop {..} =
     go

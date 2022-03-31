@@ -104,9 +104,7 @@ instance Core.GoogleRequest CalendarCalendarListWatch where
   type Rs CalendarCalendarListWatch = Channel
   type
     Scopes CalendarCalendarListWatch =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.readonly"
-       ]
+      '[Calendar'FullControl, Calendar'Readonly]
   requestClient CalendarCalendarListWatch {..} =
     go
       maxResults
