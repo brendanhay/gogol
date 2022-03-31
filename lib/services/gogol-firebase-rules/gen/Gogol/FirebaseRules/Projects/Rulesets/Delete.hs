@@ -96,9 +96,7 @@ instance
   type Rs FirebaseRulesProjectsRulesetsDelete = Empty
   type
     Scopes FirebaseRulesProjectsRulesetsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
-       ]
+      '[CloudPlatform'FullControl, Firebase'FullControl]
   requestClient FirebaseRulesProjectsRulesetsDelete {..} =
     go
       name

@@ -30,9 +30,9 @@ module Gogol.FirebaseRules.Types
     firebaseRulesService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    firebaseScope,
-    firebaseReadOnlyScope,
+    CloudPlatform'FullControl,
+    Firebase'FullControl,
+    Firebase'Readonly,
 
     -- * Types
 
@@ -173,13 +173,10 @@ firebaseRulesService =
     "firebaserules.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and administer all your Firebase data and settings
-firebaseScope :: Core.Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Core.Proxy
+type Firebase'FullControl = "https://www.googleapis.com/auth/firebase"
 
 -- | View all your Firebase data and settings
-firebaseReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/firebase.readonly"]
-firebaseReadOnlyScope = Core.Proxy
+type Firebase'Readonly = "https://www.googleapis.com/auth/firebase.readonly"

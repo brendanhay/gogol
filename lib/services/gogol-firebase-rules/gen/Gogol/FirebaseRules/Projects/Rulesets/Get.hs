@@ -96,9 +96,9 @@ instance
   type Rs FirebaseRulesProjectsRulesetsGet = Ruleset
   type
     Scopes FirebaseRulesProjectsRulesetsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase",
-         "https://www.googleapis.com/auth/firebase.readonly"
+      '[ CloudPlatform'FullControl,
+         Firebase'FullControl,
+         Firebase'Readonly
        ]
   requestClient FirebaseRulesProjectsRulesetsGet {..} =
     go
