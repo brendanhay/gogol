@@ -108,7 +108,7 @@ instance
       Enterprise
   type
     Scopes AndroidManagementEnterprisesPatch =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient AndroidManagementEnterprisesPatch {..} =
     go
       name

@@ -105,7 +105,7 @@ instance
       WebApp
   type
     Scopes AndroidManagementEnterprisesWebAppsCreate =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesWebAppsCreate {..} =
       go

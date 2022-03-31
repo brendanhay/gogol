@@ -30,7 +30,7 @@ module Gogol.AndroidManagement.Types
     androidManagementService,
 
     -- * OAuth Scopes
-    androidManagementScope,
+    Androidmanagement'FullControl,
 
     -- * Types
 
@@ -614,5 +614,4 @@ androidManagementService =
     "androidmanagement.googleapis.com"
 
 -- | Manage Android devices and apps for your customers
-androidManagementScope :: Core.Proxy '["https://www.googleapis.com/auth/androidmanagement"]
-androidManagementScope = Core.Proxy
+type Androidmanagement'FullControl = "https://www.googleapis.com/auth/androidmanagement"

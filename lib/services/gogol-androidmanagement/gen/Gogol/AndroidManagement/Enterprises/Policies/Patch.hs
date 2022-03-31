@@ -108,7 +108,7 @@ instance
       Policy
   type
     Scopes AndroidManagementEnterprisesPoliciesPatch =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesPoliciesPatch {..} =
       go

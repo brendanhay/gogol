@@ -100,7 +100,7 @@ instance
   type
     Scopes
       AndroidManagementEnterprisesEnrollmentTokensDelete =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesEnrollmentTokensDelete {..} =
       go

@@ -98,7 +98,7 @@ instance
       Empty
   type
     Scopes AndroidManagementEnterprisesWebAppsDelete =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesWebAppsDelete {..} =
       go

@@ -106,7 +106,7 @@ instance
   type
     Scopes
       AndroidManagementEnterprisesWebTokensCreate =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesWebTokensCreate {..} =
       go

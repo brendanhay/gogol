@@ -109,7 +109,7 @@ instance
       ListEnterprisesResponse
   type
     Scopes AndroidManagementEnterprisesList =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient AndroidManagementEnterprisesList {..} =
     go
       xgafv

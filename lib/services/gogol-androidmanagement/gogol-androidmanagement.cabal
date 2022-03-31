@@ -1,6 +1,6 @@
 cabal-version:      2.2
 name:               gogol-androidmanagement
-version:            1.0.0.0
+version:            1.0.0
 synopsis:           Google Android Management SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
@@ -84,5 +84,5 @@ library
     Gogol.AndroidManagement.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12  && <5
+    , gogol-core  ^>=1.0.0

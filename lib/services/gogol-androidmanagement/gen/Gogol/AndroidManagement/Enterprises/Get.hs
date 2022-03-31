@@ -96,7 +96,7 @@ instance
   type Rs AndroidManagementEnterprisesGet = Enterprise
   type
     Scopes AndroidManagementEnterprisesGet =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient AndroidManagementEnterprisesGet {..} =
     go
       name

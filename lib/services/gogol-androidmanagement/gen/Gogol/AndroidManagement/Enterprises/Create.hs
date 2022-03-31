@@ -115,7 +115,7 @@ instance
       Enterprise
   type
     Scopes AndroidManagementEnterprisesCreate =
-      '["https://www.googleapis.com/auth/androidmanagement"]
+      '[Androidmanagement'FullControl]
   requestClient AndroidManagementEnterprisesCreate {..} =
     go
       xgafv
