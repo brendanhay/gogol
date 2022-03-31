@@ -96,7 +96,7 @@ instance
   type Rs HealthcareProjectsLocationsGet = Location
   type
     Scopes HealthcareProjectsLocationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient HealthcareProjectsLocationsGet {..} =
     go
       name

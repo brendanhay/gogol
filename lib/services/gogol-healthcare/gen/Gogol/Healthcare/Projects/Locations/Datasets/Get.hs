@@ -98,7 +98,7 @@ instance
       Dataset
   type
     Scopes HealthcareProjectsLocationsDatasetsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsGet {..} =
       go
