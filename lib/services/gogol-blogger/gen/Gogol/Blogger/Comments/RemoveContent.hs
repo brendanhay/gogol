@@ -112,7 +112,7 @@ instance
   type Rs BloggerCommentsRemoveContent = Comment
   type
     Scopes BloggerCommentsRemoveContent =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerCommentsRemoveContent {..} =
     go
       blogId

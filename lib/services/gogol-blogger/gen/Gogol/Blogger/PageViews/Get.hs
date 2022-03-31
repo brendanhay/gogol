@@ -99,7 +99,7 @@ instance Core.GoogleRequest BloggerPageViewsGet where
   type Rs BloggerPageViewsGet = Pageviews
   type
     Scopes BloggerPageViewsGet =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPageViewsGet {..} =
     go
       blogId

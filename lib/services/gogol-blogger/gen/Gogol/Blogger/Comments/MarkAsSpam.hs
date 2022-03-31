@@ -109,7 +109,7 @@ instance Core.GoogleRequest BloggerCommentsMarkAsSpam where
   type Rs BloggerCommentsMarkAsSpam = Comment
   type
     Scopes BloggerCommentsMarkAsSpam =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerCommentsMarkAsSpam {..} =
     go
       blogId

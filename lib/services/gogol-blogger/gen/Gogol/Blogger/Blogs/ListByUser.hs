@@ -111,9 +111,7 @@ instance Core.GoogleRequest BloggerBlogsListByUser where
   type Rs BloggerBlogsListByUser = BlogList
   type
     Scopes BloggerBlogsListByUser =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerBlogsListByUser {..} =
     go
       userId

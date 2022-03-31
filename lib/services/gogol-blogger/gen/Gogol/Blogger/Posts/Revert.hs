@@ -102,7 +102,7 @@ instance Core.GoogleRequest BloggerPostsRevert where
   type Rs BloggerPostsRevert = Post'
   type
     Scopes BloggerPostsRevert =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPostsRevert {..} =
     go
       blogId

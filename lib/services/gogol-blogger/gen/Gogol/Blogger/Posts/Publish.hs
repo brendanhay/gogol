@@ -106,7 +106,7 @@ instance Core.GoogleRequest BloggerPostsPublish where
   type Rs BloggerPostsPublish = Post'
   type
     Scopes BloggerPostsPublish =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPostsPublish {..} =
     go
       blogId

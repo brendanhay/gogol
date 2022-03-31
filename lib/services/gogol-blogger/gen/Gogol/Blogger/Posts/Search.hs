@@ -110,9 +110,7 @@ instance Core.GoogleRequest BloggerPostsSearch where
   type Rs BloggerPostsSearch = PostList
   type
     Scopes BloggerPostsSearch =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerPostsSearch {..} =
     go
       blogId

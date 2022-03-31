@@ -113,7 +113,7 @@ instance Core.GoogleRequest BloggerPostsInsert where
   type Rs BloggerPostsInsert = Post'
   type
     Scopes BloggerPostsInsert =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPostsInsert {..} =
     go
       blogId

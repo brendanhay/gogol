@@ -108,7 +108,7 @@ instance Core.GoogleRequest BloggerCommentsDelete where
   type Rs BloggerCommentsDelete = ()
   type
     Scopes BloggerCommentsDelete =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerCommentsDelete {..} =
     go
       blogId

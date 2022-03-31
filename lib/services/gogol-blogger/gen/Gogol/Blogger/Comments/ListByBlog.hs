@@ -119,9 +119,7 @@ instance Core.GoogleRequest BloggerCommentsListByBlog where
   type Rs BloggerCommentsListByBlog = CommentList
   type
     Scopes BloggerCommentsListByBlog =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerCommentsListByBlog {..} =
     go
       blogId

@@ -30,8 +30,8 @@ module Gogol.Blogger.Types
     bloggerService,
 
     -- * OAuth Scopes
-    bloggerScope,
-    bloggerReadOnlyScope,
+    Blogger'FullControl,
+    Blogger'Readonly,
 
     -- * Types
 
@@ -279,9 +279,7 @@ bloggerService =
     "blogger.googleapis.com"
 
 -- | Manage your Blogger account
-bloggerScope :: Core.Proxy '["https://www.googleapis.com/auth/blogger"]
-bloggerScope = Core.Proxy
+type Blogger'FullControl = "https://www.googleapis.com/auth/blogger"
 
 -- | View your Blogger account
-bloggerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
-bloggerReadOnlyScope = Core.Proxy
+type Blogger'Readonly = "https://www.googleapis.com/auth/blogger.readonly"

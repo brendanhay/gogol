@@ -112,9 +112,7 @@ instance Core.GoogleRequest BloggerCommentsGet where
   type Rs BloggerCommentsGet = Comment
   type
     Scopes BloggerCommentsGet =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerCommentsGet {..} =
     go
       blogId

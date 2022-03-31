@@ -34,8 +34,8 @@ module Gogol.Blogger
     bloggerService,
 
     -- * OAuth Scopes
-    bloggerScope,
-    bloggerReadOnlyScope,
+    Blogger'FullControl,
+    Blogger'Readonly,
 
     -- * Resources
 

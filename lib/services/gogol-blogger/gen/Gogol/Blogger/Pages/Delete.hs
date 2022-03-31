@@ -101,7 +101,7 @@ instance Core.GoogleRequest BloggerPagesDelete where
   type Rs BloggerPagesDelete = ()
   type
     Scopes BloggerPagesDelete =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPagesDelete {..} =
     go
       blogId
