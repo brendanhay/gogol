@@ -107,7 +107,7 @@ instance
       DynamicLinkStats
   type
     Scopes FirebaseDynamicLinksGetLinkStats =
-      '["https://www.googleapis.com/auth/firebase"]
+      '[Firebase'FullControl]
   requestClient FirebaseDynamicLinksGetLinkStats {..} =
     go
       dynamicLink

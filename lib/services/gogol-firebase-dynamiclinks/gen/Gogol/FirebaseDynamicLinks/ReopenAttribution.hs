@@ -103,7 +103,7 @@ instance
       GetIosReopenAttributionResponse
   type
     Scopes FirebaseDynamicLinksReopenAttribution =
-      '["https://www.googleapis.com/auth/firebase"]
+      '[Firebase'FullControl]
   requestClient
     FirebaseDynamicLinksReopenAttribution {..} =
       go

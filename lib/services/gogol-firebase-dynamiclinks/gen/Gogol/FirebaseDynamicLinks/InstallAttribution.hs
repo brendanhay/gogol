@@ -103,7 +103,7 @@ instance
       GetIosPostInstallAttributionResponse
   type
     Scopes FirebaseDynamicLinksInstallAttribution =
-      '["https://www.googleapis.com/auth/firebase"]
+      '[Firebase'FullControl]
   requestClient
     FirebaseDynamicLinksInstallAttribution {..} =
       go

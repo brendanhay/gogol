@@ -34,7 +34,7 @@ module Gogol.FirebaseDynamicLinks
     firebaseDynamicLinksService,
 
     -- * OAuth Scopes
-    firebaseScope,
+    Firebase'FullControl,
 
     -- * Resources
 
