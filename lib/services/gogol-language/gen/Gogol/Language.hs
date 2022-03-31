@@ -34,8 +34,8 @@ module Gogol.Language
     languageService,
 
     -- * OAuth Scopes
-    cloudLanguageScope,
-    cloudPlatformScope,
+    CloudLanguage'FullControl,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

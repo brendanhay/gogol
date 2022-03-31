@@ -99,8 +99,8 @@ instance
       AnalyzeEntitiesResponse
   type
     Scopes LanguageDocumentsAnalyzeEntities =
-      '[ "https://www.googleapis.com/auth/cloud-language",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudLanguage'FullControl,
+         CloudPlatform'FullControl
        ]
   requestClient LanguageDocumentsAnalyzeEntities {..} =
     go
