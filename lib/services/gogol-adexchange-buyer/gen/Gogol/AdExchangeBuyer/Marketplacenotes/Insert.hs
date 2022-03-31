@@ -88,7 +88,7 @@ instance
       AddOrderNotesResponse
   type
     Scopes AdExchangeBuyerMarketplacenotesInsert =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerMarketplacenotesInsert {..} =
       go

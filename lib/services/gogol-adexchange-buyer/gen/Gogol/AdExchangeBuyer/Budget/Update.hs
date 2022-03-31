@@ -90,7 +90,7 @@ instance
   type Rs AdExchangeBuyerBudgetUpdate = Budget
   type
     Scopes AdExchangeBuyerBudgetUpdate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerBudgetUpdate {..} =
     go
       accountId

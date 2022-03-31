@@ -76,7 +76,7 @@ instance
   type Rs AdExchangeBuyerBillingInfoGet = BillingInfo
   type
     Scopes AdExchangeBuyerBillingInfoGet =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerBillingInfoGet {..} =
     go
       accountId

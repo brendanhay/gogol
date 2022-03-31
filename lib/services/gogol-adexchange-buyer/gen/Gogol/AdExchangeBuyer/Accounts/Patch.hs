@@ -90,7 +90,7 @@ instance
   type Rs AdExchangeBuyerAccountsPatch = Account
   type
     Scopes AdExchangeBuyerAccountsPatch =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerAccountsPatch {..} =
     go
       id

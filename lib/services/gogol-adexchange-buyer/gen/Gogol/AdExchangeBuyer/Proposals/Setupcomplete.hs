@@ -77,7 +77,7 @@ instance
   type Rs AdExchangeBuyerProposalsSetupcomplete = ()
   type
     Scopes AdExchangeBuyerProposalsSetupcomplete =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerProposalsSetupcomplete {..} =
       go

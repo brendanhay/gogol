@@ -88,7 +88,7 @@ instance
       EditAllOrderDealsResponse
   type
     Scopes AdExchangeBuyerMarketplacedealsUpdate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerMarketplacedealsUpdate {..} =
       go

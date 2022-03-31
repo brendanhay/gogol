@@ -100,7 +100,7 @@ instance
   type Rs AdExchangeBuyerCreativesList = CreativesList
   type
     Scopes AdExchangeBuyerCreativesList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerCreativesList {..} =
     go
       (accountId Core.^. Core._Default)

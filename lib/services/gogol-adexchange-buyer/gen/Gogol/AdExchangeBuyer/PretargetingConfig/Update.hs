@@ -92,7 +92,7 @@ instance
       PretargetingConfig
   type
     Scopes AdExchangeBuyerPretargetingConfigUpdate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerPretargetingConfigUpdate {..} =
       go

@@ -71,7 +71,7 @@ instance
       BillingInfoList
   type
     Scopes AdExchangeBuyerBillingInfoList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerBillingInfoList {} =
     go (Core.Just Core.AltJSON) adExchangeBuyerService
     where

@@ -79,7 +79,7 @@ instance
       CreateOrdersResponse
   type
     Scopes AdExchangeBuyerProposalsInsert =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerProposalsInsert {..} =
     go
       (Core.Just Core.AltJSON)

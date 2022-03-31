@@ -91,7 +91,7 @@ instance
   type Rs AdExchangeBuyerCreativesAddDeal = ()
   type
     Scopes AdExchangeBuyerCreativesAddDeal =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerCreativesAddDeal {..} =
     go
       accountId

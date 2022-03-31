@@ -100,7 +100,7 @@ instance
       PerformanceReportList
   type
     Scopes AdExchangeBuyerPerformanceReportList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerPerformanceReportList {..} =
       go

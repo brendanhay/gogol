@@ -69,7 +69,7 @@ instance
   type Rs AdExchangeBuyerAccountsList = AccountsList
   type
     Scopes AdExchangeBuyerAccountsList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerAccountsList {} =
     go (Core.Just Core.AltJSON) adExchangeBuyerService
     where
