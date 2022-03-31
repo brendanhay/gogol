@@ -88,7 +88,7 @@ instance Core.GoogleRequest FusionTablesStylePatch where
   type Rs FusionTablesStylePatch = StyleSetting
   type
     Scopes FusionTablesStylePatch =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesStylePatch {..} =
     go
       tableId

@@ -84,9 +84,7 @@ instance Core.GoogleRequest FusionTablesStyleList where
   type Rs FusionTablesStyleList = StyleSettingList
   type
     Scopes FusionTablesStyleList =
-      '[ "https://www.googleapis.com/auth/fusiontables",
-         "https://www.googleapis.com/auth/fusiontables.readonly"
-       ]
+      '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesStyleList {..} =
     go
       tableId

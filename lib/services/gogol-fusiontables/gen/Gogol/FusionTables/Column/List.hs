@@ -84,9 +84,7 @@ instance Core.GoogleRequest FusionTablesColumnList where
   type Rs FusionTablesColumnList = ColumnList
   type
     Scopes FusionTablesColumnList =
-      '[ "https://www.googleapis.com/auth/fusiontables",
-         "https://www.googleapis.com/auth/fusiontables.readonly"
-       ]
+      '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesColumnList {..} =
     go
       tableId

@@ -87,9 +87,7 @@ instance Core.GoogleRequest FusionTablesQuerySql where
   type Rs FusionTablesQuerySql = Sqlresponse
   type
     Scopes FusionTablesQuerySql =
-      '[ "https://www.googleapis.com/auth/fusiontables",
-         "https://www.googleapis.com/auth/fusiontables.readonly"
-       ]
+      '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesQuerySql {..} =
     go
       (Core.Just sql)

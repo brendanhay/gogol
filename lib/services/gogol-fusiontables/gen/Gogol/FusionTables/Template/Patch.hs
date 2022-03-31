@@ -88,7 +88,7 @@ instance Core.GoogleRequest FusionTablesTemplatePatch where
   type Rs FusionTablesTemplatePatch = Template
   type
     Scopes FusionTablesTemplatePatch =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTemplatePatch {..} =
     go
       tableId

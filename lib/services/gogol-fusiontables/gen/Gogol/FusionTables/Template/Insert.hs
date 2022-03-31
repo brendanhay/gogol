@@ -82,7 +82,7 @@ instance
   type Rs FusionTablesTemplateInsert = Template
   type
     Scopes FusionTablesTemplateInsert =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTemplateInsert {..} =
     go
       tableId

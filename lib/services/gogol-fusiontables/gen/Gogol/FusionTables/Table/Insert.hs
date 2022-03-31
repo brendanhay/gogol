@@ -72,7 +72,7 @@ instance Core.GoogleRequest FusionTablesTableInsert where
   type Rs FusionTablesTableInsert = Table
   type
     Scopes FusionTablesTableInsert =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTableInsert {..} =
     go
       (Core.Just Core.AltJSON)

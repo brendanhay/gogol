@@ -79,7 +79,7 @@ instance Core.GoogleRequest FusionTablesColumnInsert where
   type Rs FusionTablesColumnInsert = Column
   type
     Scopes FusionTablesColumnInsert =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesColumnInsert {..} =
     go
       tableId

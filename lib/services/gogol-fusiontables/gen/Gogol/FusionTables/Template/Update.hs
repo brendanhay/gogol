@@ -91,7 +91,7 @@ instance
   type Rs FusionTablesTemplateUpdate = Template
   type
     Scopes FusionTablesTemplateUpdate =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTemplateUpdate {..} =
     go
       tableId

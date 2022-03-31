@@ -79,9 +79,7 @@ instance Core.GoogleRequest FusionTablesTaskGet where
   type Rs FusionTablesTaskGet = Task
   type
     Scopes FusionTablesTaskGet =
-      '[ "https://www.googleapis.com/auth/fusiontables",
-         "https://www.googleapis.com/auth/fusiontables.readonly"
-       ]
+      '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesTaskGet {..} =
     go
       tableId

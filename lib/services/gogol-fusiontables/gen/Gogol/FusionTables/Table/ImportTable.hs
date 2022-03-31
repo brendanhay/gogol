@@ -99,7 +99,7 @@ instance
   type Rs FusionTablesTableImportTable = Table
   type
     Scopes FusionTablesTableImportTable =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTableImportTable {..} =
     go
       (Core.Just name)

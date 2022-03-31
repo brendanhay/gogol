@@ -77,7 +77,7 @@ instance
   type Rs FusionTablesTableRefetchSheet = Task
   type
     Scopes FusionTablesTableRefetchSheet =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTableRefetchSheet {..} =
     go
       tableId

@@ -34,8 +34,8 @@ module Gogol.FusionTables
     fusionTablesService,
 
     -- * OAuth Scopes
-    fusionTablesScope,
-    fusionTablesReadOnlyScope,
+    Fusiontables'FullControl,
+    Fusiontables'Readonly,
 
     -- * Resources
 

@@ -114,7 +114,7 @@ instance
   type Rs FusionTablesTableImportRows = Import
   type
     Scopes FusionTablesTableImportRows =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTableImportRows {..} =
     go
       tableId

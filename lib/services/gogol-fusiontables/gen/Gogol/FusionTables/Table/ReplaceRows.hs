@@ -114,7 +114,7 @@ instance
   type Rs FusionTablesTableReplaceRows = Task
   type
     Scopes FusionTablesTableReplaceRows =
-      '["https://www.googleapis.com/auth/fusiontables"]
+      '[Fusiontables'FullControl]
   requestClient FusionTablesTableReplaceRows {..} =
     go
       tableId
