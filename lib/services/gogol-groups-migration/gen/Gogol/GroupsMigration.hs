@@ -34,7 +34,7 @@ module Gogol.GroupsMigration
     groupsMigrationService,
 
     -- * OAuth Scopes
-    appsGroupsMigrationScope,
+    Apps'Groups'Migration,
 
     -- * Resources
 
