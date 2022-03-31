@@ -109,7 +109,7 @@ instance
   type
     Scopes
       GamesConfigurationAchievementConfigurationsInsert =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     GamesConfigurationAchievementConfigurationsInsert {..} =
       go

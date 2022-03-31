@@ -102,7 +102,7 @@ instance
   type
     Scopes
       GamesConfigurationAchievementConfigurationsDelete =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     GamesConfigurationAchievementConfigurationsDelete {..} =
       go
