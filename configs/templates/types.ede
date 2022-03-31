@@ -43,6 +43,5 @@ import {{ import.value }}
 {% if scope.value.help %}
 {{ scope.value.help }}
 {% endif %}
-{{ scope.value.sig }}
 {{ scope.value.decl }}
 {% endfor %}

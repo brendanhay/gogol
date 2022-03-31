@@ -39,11 +39,13 @@ module Gogol
 
     -- ** Authorization
     -- $authorization
+    type HasScope,
+    type HasScopeFor,
+    type HasAnyScope,
+    KnownScopes (..),
     (!),
     allow,
-    type HasScope,
-    type HasAnyScope,
-    AllowScopes (..),
+    forbid,
 
     -- * Sending Requests
     send,
@@ -119,8 +121,7 @@ import Network.HTTP.Conduit (newManager, tlsManagerSettings)
 -- | Send a request, returning the associated response if successful.
 sendEither ::
   ( MonadResource m,
-    GoogleRequest a,
-    HasScope a scopes
+    HasScopeFor a scopes
   ) =>
   Env scopes ->
   a ->
@@ -133,8 +134,7 @@ sendEither =
 -- Throws 'Gogol.Types.Error'.
 send ::
   ( MonadResource m,
-    GoogleRequest a,
-    HasScope a scopes
+    HasScopeFor a scopes
   ) =>
   Env scopes ->
   a ->
@@ -156,8 +156,7 @@ send env =
 -- @
 downloadEither ::
   ( MonadResource m,
-    GoogleRequest (MediaDownload a),
-    HasScope (MediaDownload a) scopes
+    HasScopeFor (MediaDownload a) scopes
   ) =>
   Env scopes ->
   a ->
@@ -181,8 +180,7 @@ downloadEither env =
 -- Throws 'Gogol.Types.Error'.
 download ::
   ( MonadResource m,
-    GoogleRequest (MediaDownload a),
-    HasScope (MediaDownload a) scopes
+    HasScopeFor (MediaDownload a) scopes
   ) =>
   Env scopes ->
   a ->
@@ -219,8 +217,7 @@ download env =
 -- @
 uploadEither ::
   ( MonadResource m,
-    GoogleRequest (MediaUpload a),
-    HasScope (MediaUpload a) scopes
+    HasScopeFor (MediaUpload a) scopes
   ) =>
   Env scopes ->
   a ->
@@ -241,8 +238,7 @@ uploadEither env x =
 -- Throws 'Gogol.Types.Error'.
 upload ::
   ( MonadResource m,
-    GoogleRequest (MediaUpload a),
-    HasScope (MediaUpload a) scopes
+    HasScopeFor (MediaUpload a) scopes
   ) =>
   Env scopes ->
   a ->

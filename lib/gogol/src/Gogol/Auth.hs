@@ -96,7 +96,7 @@ import Network.HTTP.Types (hAuthorization)
 --  by returning 'Right' if there is a 'FromClient'-constructed
 --  Credentials and a refreshed token; otherwise, returning
 --  'Left' with error message.
-authToAuthorizedUser :: AllowScopes s => Auth s -> Either Text AuthorizedUser
+authToAuthorizedUser :: KnownScopes s => Auth s -> Either Text AuthorizedUser
 authToAuthorizedUser a =
   AuthorizedUser
     <$> (_clientId <$> getClient)
@@ -130,7 +130,7 @@ newtype Store (s :: [Symbol]) = Store (MVar (Auth s))
 -- | Construct storage containing the credentials which have not yet been
 -- exchanged or refreshed.
 initStore ::
-  (MonadIO m, MonadCatch m, AllowScopes s) =>
+  (MonadIO m, MonadCatch m, KnownScopes s) =>
   Credentials s ->
   Logger ->
   Manager ->
@@ -139,7 +139,7 @@ initStore c l m = exchange c l m >>= fmap Store . liftIO . newMVar
 
 -- | Retrieve auth from storage
 retrieveAuthFromStore ::
-  (MonadIO m, AllowScopes s) =>
+  (MonadIO m, KnownScopes s) =>
   Store s ->
   m (Auth s)
 retrieveAuthFromStore (Store s) =
@@ -148,7 +148,7 @@ retrieveAuthFromStore (Store s) =
 -- | Concurrently read the current token, and if expired, then
 -- safely perform a single serial refresh.
 retrieveTokenFromStore ::
-  (MonadIO m, MonadCatch m, AllowScopes s) =>
+  (MonadIO m, MonadCatch m, KnownScopes s) =>
   Store s ->
   Logger ->
   Manager ->
@@ -170,7 +170,7 @@ retrieveTokenFromStore (Store s) l m = do
 -- suitable for authorizing requests.
 exchange ::
   forall m s.
-  (MonadIO m, MonadCatch m, AllowScopes s) =>
+  (MonadIO m, MonadCatch m, KnownScopes s) =>
   Credentials s ->
   Logger ->
   Manager ->
@@ -187,7 +187,7 @@ exchange c l = fmap (Auth c) . action l
 -- | Refresh an existing 'OAuthToken'.
 refresh ::
   forall m s.
-  (MonadIO m, MonadCatch m, AllowScopes s) =>
+  (MonadIO m, MonadCatch m, KnownScopes s) =>
   Auth s ->
   Logger ->
   Manager ->
@@ -204,7 +204,7 @@ refresh (Auth c t) l = fmap (Auth c) . action l
 -- | Apply the (by way of possible token refresh) a bearer token to the
 -- authentication header of a request.
 authorize ::
-  (MonadIO m, MonadCatch m, AllowScopes s) =>
+  (MonadIO m, MonadCatch m, KnownScopes s) =>
   Client.Request ->
   Store s ->
   Logger ->
@@ -226,7 +226,7 @@ authorize rq s l m = bearer <$> retrieveTokenFromStore s l m
 -- https://developers.google.com/identity/protocols/OAuth2ServiceAccount
 serviceAccountUser ::
   forall s.
-  (AllowScopes s) =>
+  (KnownScopes s) =>
   Maybe Text ->
   Credentials s ->
   Credentials s

@@ -43,19 +43,9 @@ serviceDecl s n = sfun n [] (UnGuardedRhs () rhs) noBinds
           str . stripSuffix "/" $ stripPrefix "https://" (s ^. dRootUrl)
         ]
 
-scopeSig :: Name () -> Text -> Decl ()
-scopeSig n v =
-  TypeSig () [n] $
-    TyApp () (TyCon () "Core.Proxy") $
-      TyPromoted () $
-        PromotedList
-          ()
-          True
-          [ TyPromoted () $ PromotedString () (Text.unpack v) (Text.unpack v)
-          ]
-
-scopeDecl :: Name () -> Decl ()
-scopeDecl n = sfun n [] (UnGuardedRhs () (var "Core.Proxy")) noBinds
+scopeDecl :: Name () -> Text -> Decl ()
+scopeDecl n (Text.unpack -> v) =
+  TypeDecl () (DHead () n) (TyPromoted () (PromotedString () v v))
 
 apiAlias :: Name () -> [Name ()] -> Decl ()
 apiAlias n ls = TypeDecl () (DHead () n) alias
@@ -348,7 +338,7 @@ requestDecl n api url fs m =
       InsType () (TyApp () (TyCon () "Scopes") (tycon n)) $
         TyPromoted () $
           PromotedList () True $
-            map (\m' -> TyPromoted () (PromotedString () (Text.unpack m') "Scopes")) (_mScopes m)
+            map (TyCon () . unqual . scopeName) (_mScopes m)
 
     extras = catMaybes [alt, payload]
       where

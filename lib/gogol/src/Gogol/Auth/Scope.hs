@@ -17,17 +17,18 @@
 --
 -- Helpers for specifying and using type-level OAuth scopes.
 module Gogol.Auth.Scope
-  ( -- * Type-level scopes
+  ( -- * Scope constraints
     type HasScope,
+    type HasScopeFor,
     type HasAnyScope,
 
-    -- ** Modifying lists of scopes
+    -- ** Modifying type-level lists of scopes
     allow,
     forbid,
     (!),
 
-    -- * Scope values
-    AllowScopes (..),
+    -- * Manipulating scope values
+    KnownScopes (..),
     concatScopes,
     queryEncodeScopes,
   )
@@ -47,11 +48,59 @@ import Gogol.Internal.Auth (Credentials)
 import Gogol.Types (GoogleRequest (..), OAuthScope (..))
 import Network.HTTP.Types (urlEncode)
 
--- | 'Constraint' kind for proving @scopes@ contains _one_ required scope
--- for the request, @a@.
-type HasScope a scopes = (AllowScopes scopes, HasAnyScope scopes (Scopes a))
+-- | 'Constraint' kind for proving @scopes@ contains the specified scope, @name@.
+--
+-- This is convenient when composing multiple @gogol@ requests and you wish to
+-- explicitly annotate the most general satisfiable scope:
+--
+-- @
+-- uploadAndDownloadFile
+--   :: HasScopes "https://www.googleapis.com/auth/devstorage.read_write" scopes
+--   => Env scopes
+--   -> Text
+--   -> Object
+--   -> MediaType
+--   -> FilePath
+--   -> FilePath
+--   -> IO Object
+-- uploadAndDownloadFile env bucket object media src dst = do
+--   let put = newStorageObjectsInsert bucket (object { bucket = Just bucket })
+--       get = newStorageObjectsGet bucket object
+--
+--   body <- GBody media <$> HTTP.streamFile src
+--
+--   runResourceT $ do
+--     _object <- upload env meta body
+--     stream <- download env meta
+--
+--     Conduit.connect stream (Conduit.Combinators.sinkFileCautious dst)
+-- @
+--
+-- Alternatively, you could allow any satisfiable scope and leave it up to the
+-- caller to choose:
+--
+-- @
+-- uploadAndDownloadFile
+--   :: ( HasScopeFor StorageObjectsInsert
+--      , HasScopeFor StorageObjectsGet
+--      )
+--   => Env scopes
+--   -> ...
+-- @
+--
+-- /See:/ 'HasScopeFor'.
+type HasScope name scopes = (KnownScopes scopes, HasAnyScope '[name] scopes)
 
--- | Type family proving at least one scope from @scopes@ exists in @required@.
+-- | 'Constraint' kind for @scopes@ contains _one_ of the required scopes
+-- for the 'GoogleRequest', @a@.
+--
+-- /See:/ 'HasScope'.
+type HasScopeFor a scopes = (KnownScopes scopes, GoogleRequest a, HasAnyScope (Scopes a) scopes)
+
+-- | 'Constraint' proving at least _one_ scope from @required@ exists in @scopes@.
+--
+-- That is, the set of possible scopes a request requires are on the left, and
+-- the set of scopes credentials or an environment contain are on the right.
 type family HasAnyScope (required :: [Symbol]) (scopes :: [Symbol]) :: Constraint where
   HasAnyScope '[] _ = () -- Special case; no scopes are required.
   HasAnyScope required scopes =
@@ -60,7 +109,7 @@ type family HasAnyScope (required :: [Symbol]) (scopes :: [Symbol]) :: Constrain
 type MissingScopesError (required :: [k]) (scopes :: [k]) =
   'Text "One scope from the following list is required:"
     ':$$: 'Text "    " ':<>: 'ShowType required
-    ':$$: 'Text "However, none of these scopes exist in the list of provided scopes:"
+    ':$$: 'Text "However, none of these scopes are present in the list of scopes you provided:"
     ':$$: 'Text "    " ':<>: 'ShowType scopes
 
 -- Short-circuiting intersection - does at least one element exist in both lists?
@@ -110,23 +159,23 @@ type family Delete x xs where
   Delete x (x ': ys) = Delete x ys
   Delete x (y ': ys) = y ': Delete x ys
 
-class AllowScopes a where
+class KnownScopes a where
   -- | Obtain a list of supported 'OAuthScope' values from a proxy.
   --
   -- This is used to pass scope _values_ to functions that require them,
   -- such as 'Gogol.Auth.ServiceAccount.serviceAccountToken'.
-  getScopes :: proxy a -> [OAuthScope]
+  scopeVals :: proxy a -> [OAuthScope]
 
-instance AllowScopes '[] where
-  getScopes _ = []
+instance KnownScopes '[] where
+  scopeVals _ = []
 
-instance (KnownSymbol x, AllowScopes xs) => AllowScopes (x ': xs) where
-  getScopes _ = scope (Proxy :: Proxy x) : getScopes (Proxy :: Proxy xs)
+instance (KnownSymbol x, KnownScopes xs) => KnownScopes (x ': xs) where
+  scopeVals _ = scope (Proxy :: Proxy x) : scopeVals (Proxy :: Proxy xs)
     where
       scope = OAuthScope . Text.pack . symbolVal
 
-instance AllowScopes s => AllowScopes (Credentials s) where
-  getScopes _ = getScopes (Proxy :: Proxy s)
+instance KnownScopes s => KnownScopes (Credentials s) where
+  scopeVals _ = scopeVals (Proxy :: Proxy s)
 
 -- | Concatenate a list of scopes using spaces.
 concatScopes :: [OAuthScope] -> Text
