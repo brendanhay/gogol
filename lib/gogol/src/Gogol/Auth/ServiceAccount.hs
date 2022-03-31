@@ -36,10 +36,7 @@ import qualified Data.ByteString.Char8 as BS8
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
 import Data.Time.Clock.POSIX
-import Gogol.Auth.Scope
-  ( AllowScopes (..),
-    concatScopes,
-  )
+import Gogol.Auth.Scope (KnownScopes (..), concatScopes)
 import Gogol.Compute.Metadata
 import Gogol.Internal.Auth
 import Gogol.Internal.Logger
@@ -98,7 +95,7 @@ authorizedUserToken u r =
 -- | Obtain an 'OAuthToken' from @https://accounts.google.com/o/oauth2/v2/auth@
 -- by signing and sending a JSON Web Token (JWT) using the supplied 'ServiceAccount'.
 serviceAccountToken ::
-  (MonadIO m, MonadCatch m, AllowScopes s) =>
+  (MonadIO m, MonadCatch m, KnownScopes s) =>
   ServiceAccount ->
   proxy s ->
   Logger ->
@@ -119,7 +116,7 @@ serviceAccountToken s p l m = do
 -- | Encode the supplied 'ServiceAccount's key id, email, and scopes using the
 -- private key in the JSON Web Token (JWT) format.
 encodeBearerJWT ::
-  (MonadIO m, MonadThrow m, AllowScopes s) =>
+  (MonadIO m, MonadThrow m, KnownScopes s) =>
   ServiceAccount ->
   proxy s ->
   m ByteString
@@ -153,7 +150,7 @@ encodeBearerJWT s p = liftIO $ do
         payload =
           base64Encode $
             [ "aud" .= tokenURL,
-              "scope" .= concatScopes (getScopes p),
+              "scope" .= concatScopes (scopeVals p),
               "iat" .= n,
               "exp" .= (n + seconds maxTokenLifetime),
               "iss" .= _serviceEmail s

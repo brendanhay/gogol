@@ -2,6 +2,8 @@
 
 module Gen.Types.Schema where
 
+import qualified Data.List as List
+import qualified Data.Char as Char
 import Control.Applicative
 import Control.Lens hiding ((.=))
 import Control.Monad
@@ -456,38 +458,41 @@ instance HasDescription (Service a) a where
 serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
-scopeName :: Service a -> Text -> String
-scopeName s k = Text.unpack . lowerHead $
-  case breakParts k of
-    [] -> _sCanonicalName s <> "AllScope"
-    xs -> foldMap named xs <> "Scope"
+scopeName :: Text -> String
+scopeName = \case
+  -- gmail-api.json
+  "https://mail.google.com/" ->
+    "Gmail'FullControl"
+  -- script-api.json
+  "https://www.google.com/calendar/feeds" ->
+    "Calendar'Feeds'FullControl"
+  "https://www.google.com/m8/feeds" ->
+    "M8'Feeds'FullControl"
+  -- oauth2-api.json
+  "openid" ->
+    "OAuth2'OpenID"
+  --
+  scope
+    | Just x <- Text.stripPrefix "https://www.googleapis.com/auth/" scope -> rename x
+    | otherwise -> error $ "(scopeName): unrecognised oauth2 scope format " ++ show scope
   where
-    breakParts =
-      concatMap (Text.split split)
-        . filter (not . ignore)
-        . Text.split (== '/')
+    -- FIXME: use a parser combinator here.
 
-    split x =
-      dot x
-        || separator x
+    rename text
+      | isImplicit text = splitService text <> "'FullControl"
+      | otherwise = splitService text
 
-    ignore x =
-      Text.null x
-        || "auth" == x
-        || Text.isPrefixOf "http" x
-        || Text.isPrefixOf "www" x
+    isImplicit = not . Text.any (== '.')
 
-    named x
-      | x == lower = pascal
-      | otherwise = upperHead (replaceAll x special)
+    splitService =
+      Text.unpack
+        . mconcat
+        . List.intersperse "'"
+        . map splitControl
+        . Text.split (== '.')
 
-    pascal = toPascal (_sCanonicalName s)
-    lower = Text.toLower (_sCanonicalName s)
-
-    special =
-      [ ("only", "Only"),
-        ("manage", "Manage"),
-        ("devstorage", "Storage"),
-        ("number", "Number"),
-        ("^yt$", "youtube")
-      ]
+    splitControl =
+      mconcat
+        --        . List.intersperse "_"
+        . map upperHead
+        . Text.split (not . Char.isAlphaNum)

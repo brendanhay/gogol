@@ -111,7 +111,7 @@ data API = API
     _apiResources :: [Action],
     _apiMethods :: [Action],
     _apiURL :: Fun,
-    _apuScopes :: [Fun]
+    _apuScopes :: [Data]
   }
 
 instance ToJSON API where

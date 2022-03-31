@@ -41,7 +41,7 @@ import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
 import GHC.TypeLits (Symbol)
 import Gogol.Auth.Scope
-  ( AllowScopes (..),
+  ( KnownScopes (..),
     queryEncodeScopes,
   )
 import Gogol.Internal.Auth
@@ -68,7 +68,7 @@ import qualified Network.HTTP.Conduit as Client
 -- > import System.Info    (os)
 -- > import System.Process (rawSystem)
 --
--- > redirectPrompt :: AllowScopes (s :: [Symbol]) => OAuthClient -> proxy s -> IO (OAuthCode s)
+-- > redirectPrompt :: KnownScopes (s :: [Symbol]) => OAuthClient -> proxy s -> IO (OAuthCode s)
 -- > redirectPrompt c p = do
 -- >   let url = formURL c p
 -- >   T.putStrLn $ "Opening URL " `T.append` url
@@ -95,14 +95,14 @@ redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 -- construct a URL that can be used to obtain the 'OAuthCode'.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#formingtheurl Forming the URL>.
-formURL :: AllowScopes (s :: [Symbol]) => OAuthClient -> proxy s -> Text
-formURL c = formURLWith c . getScopes
+formURL :: KnownScopes (s :: [Symbol]) => OAuthClient -> proxy s -> Text
+formURL c = formURLWith c . scopeVals
 
 -- | 'formURL' for 'AccessType'
 --
 -- /See:/ 'formUrl'.
-formAccessTypeURL :: AllowScopes (s :: [Symbol]) => OAuthClient -> AccessType -> proxy s -> Text
-formAccessTypeURL c a = formAccessTypeURLWith c a . getScopes
+formAccessTypeURL :: KnownScopes (s :: [Symbol]) => OAuthClient -> AccessType -> proxy s -> Text
+formAccessTypeURL c a = formAccessTypeURLWith c a . scopeVals
 
 -- | Form a URL using 'OAuthScope' values.
 --

@@ -111,11 +111,14 @@ renderAPI s = do
             (s ^. dTitle)
 
     scope (k, h) =
-      Fun' n (Just h)
-        <$> pp None (scopeSig n k)
-        <*> pp None (scopeDecl n)
+      Prod n (Just h)
+        <$> pp None (scopeDecl n k)
+        <*> pure []
+        <*> pure mempty
+        <*> pure []
+        <*> pure (Fun' n Nothing mempty mempty)
       where
-        n = name (scopeName s k)
+        n = name (scopeName k)
 
 renderMethod :: Service a -> Suffix -> Method Solved -> AST Action
 renderMethod s suf m@Method {..} = do
