@@ -97,9 +97,7 @@ instance
   type Rs ServiceManagementServicesUndelete = Operation
   type
     Scopes ServiceManagementServicesUndelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient ServiceManagementServicesUndelete {..} =
     go
       serviceName
