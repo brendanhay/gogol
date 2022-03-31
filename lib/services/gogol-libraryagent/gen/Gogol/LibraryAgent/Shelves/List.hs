@@ -100,7 +100,7 @@ instance Core.GoogleRequest LibraryAgentShelvesList where
       GoogleExampleLibraryagentV1ListShelvesResponse
   type
     Scopes LibraryAgentShelvesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient LibraryAgentShelvesList {..} =
     go
       xgafv

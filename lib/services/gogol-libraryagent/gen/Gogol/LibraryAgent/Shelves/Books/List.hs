@@ -109,7 +109,7 @@ instance
       GoogleExampleLibraryagentV1ListBooksResponse
   type
     Scopes LibraryAgentShelvesBooksList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient LibraryAgentShelvesBooksList {..} =
     go
       parent
