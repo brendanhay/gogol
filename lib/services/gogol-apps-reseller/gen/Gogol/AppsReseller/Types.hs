@@ -30,8 +30,8 @@ module Gogol.AppsReseller.Types
     appsResellerService,
 
     -- * OAuth Scopes
-    appsOrderScope,
-    appsOrderReadOnlyScope,
+    Apps'Order,
+    Apps'Order'Readonly,
 
     -- * Types
 
@@ -114,9 +114,7 @@ appsResellerService =
     "reseller.googleapis.com"
 
 -- | Manage users on your domain
-appsOrderScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.order"]
-appsOrderScope = Core.Proxy
+type Apps'Order = "https://www.googleapis.com/auth/apps.order"
 
 -- | Manage users on your domain
-appsOrderReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
-appsOrderReadOnlyScope = Core.Proxy
+type Apps'Order'Readonly = "https://www.googleapis.com/auth/apps.order.readonly"

@@ -116,7 +116,7 @@ instance
   type
     Scopes
       ResellerSubscriptionsChangeRenewalSettings =
-      '["https://www.googleapis.com/auth/apps.order"]
+      '[Apps'Order]
   requestClient
     ResellerSubscriptionsChangeRenewalSettings {..} =
       go

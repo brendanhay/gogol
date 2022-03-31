@@ -102,7 +102,7 @@ instance
       ResellernotifyResource
   type
     Scopes ResellerResellernotifyRegister =
-      '["https://www.googleapis.com/auth/apps.order"]
+      '[Apps'Order]
   requestClient ResellerResellernotifyRegister {..} =
     go
       xgafv

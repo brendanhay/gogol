@@ -110,7 +110,7 @@ instance
   type Rs ResellerSubscriptionsInsert = Subscription
   type
     Scopes ResellerSubscriptionsInsert =
-      '["https://www.googleapis.com/auth/apps.order"]
+      '[Apps'Order]
   requestClient ResellerSubscriptionsInsert {..} =
     go
       customerId

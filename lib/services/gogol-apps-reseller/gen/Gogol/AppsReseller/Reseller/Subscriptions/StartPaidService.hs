@@ -109,7 +109,7 @@ instance
       Subscription
   type
     Scopes ResellerSubscriptionsStartPaidService =
-      '["https://www.googleapis.com/auth/apps.order"]
+      '[Apps'Order]
   requestClient
     ResellerSubscriptionsStartPaidService {..} =
       go

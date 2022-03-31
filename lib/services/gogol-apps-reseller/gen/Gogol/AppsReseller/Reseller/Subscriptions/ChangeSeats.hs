@@ -115,7 +115,7 @@ instance
       Subscription
   type
     Scopes ResellerSubscriptionsChangeSeats =
-      '["https://www.googleapis.com/auth/apps.order"]
+      '[Apps'Order]
   requestClient ResellerSubscriptionsChangeSeats {..} =
     go
       customerId

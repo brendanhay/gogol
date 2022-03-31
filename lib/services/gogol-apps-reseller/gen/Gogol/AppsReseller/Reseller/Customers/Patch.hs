@@ -100,9 +100,7 @@ newResellerCustomersPatch customerId payload =
 
 instance Core.GoogleRequest ResellerCustomersPatch where
   type Rs ResellerCustomersPatch = Customer
-  type
-    Scopes ResellerCustomersPatch =
-      '["https://www.googleapis.com/auth/apps.order"]
+  type Scopes ResellerCustomersPatch = '[Apps'Order]
   requestClient ResellerCustomersPatch {..} =
     go
       customerId

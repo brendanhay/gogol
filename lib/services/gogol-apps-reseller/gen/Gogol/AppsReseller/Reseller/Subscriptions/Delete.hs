@@ -114,7 +114,7 @@ instance
   type Rs ResellerSubscriptionsDelete = ()
   type
     Scopes ResellerSubscriptionsDelete =
-      '["https://www.googleapis.com/auth/apps.order"]
+      '[Apps'Order]
   requestClient ResellerSubscriptionsDelete {..} =
     go
       customerId

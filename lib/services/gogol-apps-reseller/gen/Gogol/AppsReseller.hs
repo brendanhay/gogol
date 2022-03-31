@@ -34,8 +34,8 @@ module Gogol.AppsReseller
     appsResellerService,
 
     -- * OAuth Scopes
-    appsOrderScope,
-    appsOrderReadOnlyScope,
+    Apps'Order,
+    Apps'Order'Readonly,
 
     -- * Resources
 

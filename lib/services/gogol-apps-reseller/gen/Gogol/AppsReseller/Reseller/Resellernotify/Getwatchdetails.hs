@@ -98,9 +98,7 @@ instance
       ResellernotifyGetwatchdetailsResponse
   type
     Scopes ResellerResellernotifyGetwatchdetails =
-      '[ "https://www.googleapis.com/auth/apps.order",
-         "https://www.googleapis.com/auth/apps.order.readonly"
-       ]
+      '[Apps'Order, Apps'Order'Readonly]
   requestClient
     ResellerResellernotifyGetwatchdetails {..} =
       go
