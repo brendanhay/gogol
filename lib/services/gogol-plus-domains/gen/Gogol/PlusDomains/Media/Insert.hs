@@ -99,10 +99,7 @@ instance Core.GoogleRequest PlusDomainsMediaInsert where
   type Rs PlusDomainsMediaInsert = Media
   type
     Scopes PlusDomainsMediaInsert =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me",
-         "https://www.googleapis.com/auth/plus.media.upload"
-       ]
+      '[Plus'Login, Plus'Me, Plus'Media'Upload]
   requestClient PlusDomainsMediaInsert {..} =
     go
       userId

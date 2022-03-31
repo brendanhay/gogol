@@ -34,14 +34,14 @@ module Gogol.PlusDomains
     plusDomainsService,
 
     -- * OAuth Scopes
-    plusCirclesReadScope,
-    plusLoginScope,
-    plusMeScope,
-    plusMediaUploadScope,
-    plusProfilesReadScope,
-    plusStreamReadScope,
-    userinfoEmailScope,
-    userinfoProfileScope,
+    Plus'Circles'Read,
+    Plus'Login,
+    Plus'Me,
+    Plus'Media'Upload,
+    Plus'Profiles'Read,
+    Plus'Stream'Read,
+    Userinfo'Email,
+    Userinfo'Profile,
 
     -- * Resources
 

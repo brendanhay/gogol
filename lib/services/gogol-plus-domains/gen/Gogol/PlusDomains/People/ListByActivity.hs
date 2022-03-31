@@ -95,9 +95,7 @@ instance
   type Rs PlusDomainsPeopleListByActivity = PeopleFeed
   type
     Scopes PlusDomainsPeopleListByActivity =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.stream.read"
-       ]
+      '[Plus'Login, Plus'Stream'Read]
   requestClient PlusDomainsPeopleListByActivity {..} =
     go
       activityId

@@ -84,10 +84,7 @@ instance Core.GoogleRequest PlusDomainsCirclesList where
   type Rs PlusDomainsCirclesList = CircleFeed
   type
     Scopes PlusDomainsCirclesList =
-      '[ "https://www.googleapis.com/auth/plus.circles.read",
-         "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+      '[Plus'Circles'Read, Plus'Login, Plus'Me]
   requestClient PlusDomainsCirclesList {..} =
     go
       userId
