@@ -107,7 +107,7 @@ instance
   type Rs ResellerSubscriptionsSuspend = Subscription
   type
     Scopes ResellerSubscriptionsSuspend =
-      '["https://www.googleapis.com/auth/apps.order"]
+      '[Apps'Order]
   requestClient ResellerSubscriptionsSuspend {..} =
     go
       customerId

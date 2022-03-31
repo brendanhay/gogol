@@ -96,9 +96,7 @@ instance Core.GoogleRequest ResellerCustomersGet where
   type Rs ResellerCustomersGet = Customer
   type
     Scopes ResellerCustomersGet =
-      '[ "https://www.googleapis.com/auth/apps.order",
-         "https://www.googleapis.com/auth/apps.order.readonly"
-       ]
+      '[Apps'Order, Apps'Order'Readonly]
   requestClient ResellerCustomersGet {..} =
     go
       customerId

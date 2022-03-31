@@ -100,9 +100,7 @@ newResellerCustomersUpdate customerId payload =
 
 instance Core.GoogleRequest ResellerCustomersUpdate where
   type Rs ResellerCustomersUpdate = Customer
-  type
-    Scopes ResellerCustomersUpdate =
-      '["https://www.googleapis.com/auth/apps.order"]
+  type Scopes ResellerCustomersUpdate = '[Apps'Order]
   requestClient ResellerCustomersUpdate {..} =
     go
       customerId

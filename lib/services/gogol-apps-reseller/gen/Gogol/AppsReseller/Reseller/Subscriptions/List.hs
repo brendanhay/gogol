@@ -110,9 +110,7 @@ instance Core.GoogleRequest ResellerSubscriptionsList where
   type Rs ResellerSubscriptionsList = Subscriptions
   type
     Scopes ResellerSubscriptionsList =
-      '[ "https://www.googleapis.com/auth/apps.order",
-         "https://www.googleapis.com/auth/apps.order.readonly"
-       ]
+      '[Apps'Order, Apps'Order'Readonly]
   requestClient ResellerSubscriptionsList {..} =
     go
       xgafv

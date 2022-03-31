@@ -100,9 +100,7 @@ newResellerCustomersInsert payload =
 
 instance Core.GoogleRequest ResellerCustomersInsert where
   type Rs ResellerCustomersInsert = Customer
-  type
-    Scopes ResellerCustomersInsert =
-      '["https://www.googleapis.com/auth/apps.order"]
+  type Scopes ResellerCustomersInsert = '[Apps'Order]
   requestClient ResellerCustomersInsert {..} =
     go
       xgafv
