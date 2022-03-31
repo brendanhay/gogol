@@ -111,9 +111,7 @@ instance
       ValidateResponse
   type
     Scopes DataflowProjectsLocationsSqlValidate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[CloudPlatform'FullControl, Userinfo'Email]
   requestClient
     DataflowProjectsLocationsSqlValidate {..} =
       go

@@ -34,10 +34,10 @@ module Gogol.Dataflow
     dataflowService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    computeScope,
-    computeReadOnlyScope,
-    userinfoEmailScope,
+    CloudPlatform'FullControl,
+    Compute'FullControl,
+    Compute'Readonly,
+    Userinfo'Email,
 
     -- * Resources
 

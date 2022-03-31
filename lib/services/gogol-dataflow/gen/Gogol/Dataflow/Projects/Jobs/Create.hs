@@ -116,10 +116,10 @@ instance
   type Rs DataflowProjectsJobsCreate = Job
   type
     Scopes DataflowProjectsJobsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly",
-         "https://www.googleapis.com/auth/userinfo.email"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly,
+         Userinfo'Email
        ]
   requestClient DataflowProjectsJobsCreate {..} =
     go
