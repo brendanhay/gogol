@@ -161,9 +161,9 @@ instance Core.GoogleRequest DirectoryUsersWatch where
   type Rs DirectoryUsersWatch = Channel
   type
     Scopes DirectoryUsersWatch =
-      '[ "https://www.googleapis.com/auth/admin.directory.user",
-         "https://www.googleapis.com/auth/admin.directory.user.readonly",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ Admin'Directory'User,
+         Admin'Directory'User'Readonly,
+         CloudPlatform'FullControl
        ]
   requestClient DirectoryUsersWatch {..} =
     go

@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryAspsGet where
   type Rs DirectoryAspsGet = Asp
   type
     Scopes DirectoryAspsGet =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryAspsGet {..} =
     go
       userKey

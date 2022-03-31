@@ -114,8 +114,8 @@ instance
   type Rs DirectoryMobiledevicesAction = ()
   type
     Scopes DirectoryMobiledevicesAction =
-      '[ "https://www.googleapis.com/auth/admin.directory.device.mobile",
-         "https://www.googleapis.com/auth/admin.directory.device.mobile.action"
+      '[ Admin'Directory'Device'Mobile,
+         Admin'Directory'Device'Mobile'Action
        ]
   requestClient DirectoryMobiledevicesAction {..} =
     go

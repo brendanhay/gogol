@@ -106,7 +106,7 @@ instance
   type Rs DirectoryDomainAliasesDelete = ()
   type
     Scopes DirectoryDomainAliasesDelete =
-      '["https://www.googleapis.com/auth/admin.directory.domain"]
+      '[Admin'Directory'Domain]
   requestClient DirectoryDomainAliasesDelete {..} =
     go
       customer

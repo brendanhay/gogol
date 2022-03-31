@@ -101,7 +101,7 @@ instance
   type Rs DirectoryUsersPhotosDelete = ()
   type
     Scopes DirectoryUsersPhotosDelete =
-      '["https://www.googleapis.com/auth/admin.directory.user"]
+      '[Admin'Directory'User]
   requestClient DirectoryUsersPhotosDelete {..} =
     go
       userKey

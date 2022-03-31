@@ -106,7 +106,7 @@ instance
   type Rs DirectoryRoleAssignmentsDelete = ()
   type
     Scopes DirectoryRoleAssignmentsDelete =
-      '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+      '[Admin'Directory'Rolemanagement]
   requestClient DirectoryRoleAssignmentsDelete {..} =
     go
       customer

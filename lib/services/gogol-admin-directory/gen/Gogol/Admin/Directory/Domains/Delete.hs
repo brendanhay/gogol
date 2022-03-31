@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryDomainsDelete where
   type Rs DirectoryDomainsDelete = ()
   type
     Scopes DirectoryDomainsDelete =
-      '["https://www.googleapis.com/auth/admin.directory.domain"]
+      '[Admin'Directory'Domain]
   requestClient DirectoryDomainsDelete {..} =
     go
       customer

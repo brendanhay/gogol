@@ -107,8 +107,8 @@ instance
   type Rs DirectoryResourcesBuildingsGet = Building
   type
     Scopes DirectoryResourcesBuildingsGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.resource.calendar",
-         "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"
+      '[ Admin'Directory'Resource'Calendar,
+         Admin'Directory'Resource'Calendar'Readonly
        ]
   requestClient DirectoryResourcesBuildingsGet {..} =
     go

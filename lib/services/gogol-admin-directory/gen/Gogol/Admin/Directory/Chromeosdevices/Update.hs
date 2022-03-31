@@ -121,7 +121,7 @@ instance
       ChromeOsDevice
   type
     Scopes DirectoryChromeosdevicesUpdate =
-      '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
+      '[Admin'Directory'Device'Chromeos]
   requestClient DirectoryChromeosdevicesUpdate {..} =
     go
       customerId

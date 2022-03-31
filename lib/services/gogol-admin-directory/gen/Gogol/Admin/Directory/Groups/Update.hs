@@ -102,7 +102,7 @@ instance Core.GoogleRequest DirectoryGroupsUpdate where
   type Rs DirectoryGroupsUpdate = Group
   type
     Scopes DirectoryGroupsUpdate =
-      '["https://www.googleapis.com/auth/admin.directory.group"]
+      '[Admin'Directory'Group]
   requestClient DirectoryGroupsUpdate {..} =
     go
       groupKey

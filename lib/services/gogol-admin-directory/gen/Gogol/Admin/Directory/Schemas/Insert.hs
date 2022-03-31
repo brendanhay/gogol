@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectorySchemasInsert where
   type Rs DirectorySchemasInsert = Schema
   type
     Scopes DirectorySchemasInsert =
-      '["https://www.googleapis.com/auth/admin.directory.userschema"]
+      '[Admin'Directory'Userschema]
   requestClient DirectorySchemasInsert {..} =
     go
       customerId

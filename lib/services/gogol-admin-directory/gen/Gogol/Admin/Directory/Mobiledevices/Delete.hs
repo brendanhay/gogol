@@ -107,7 +107,7 @@ instance
   type Rs DirectoryMobiledevicesDelete = ()
   type
     Scopes DirectoryMobiledevicesDelete =
-      '["https://www.googleapis.com/auth/admin.directory.device.mobile"]
+      '[Admin'Directory'Device'Mobile]
   requestClient DirectoryMobiledevicesDelete {..} =
     go
       customerId

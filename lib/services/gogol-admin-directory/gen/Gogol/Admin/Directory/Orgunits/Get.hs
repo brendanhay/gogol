@@ -103,8 +103,8 @@ instance Core.GoogleRequest DirectoryOrgunitsGet where
   type Rs DirectoryOrgunitsGet = OrgUnit
   type
     Scopes DirectoryOrgunitsGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.orgunit",
-         "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"
+      '[ Admin'Directory'Orgunit,
+         Admin'Directory'Orgunit'Readonly
        ]
   requestClient DirectoryOrgunitsGet {..} =
     go

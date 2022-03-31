@@ -148,9 +148,9 @@ instance Core.GoogleRequest DirectoryUsersList where
   type Rs DirectoryUsersList = Users
   type
     Scopes DirectoryUsersList =
-      '[ "https://www.googleapis.com/auth/admin.directory.user",
-         "https://www.googleapis.com/auth/admin.directory.user.readonly",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ Admin'Directory'User,
+         Admin'Directory'User'Readonly,
+         CloudPlatform'FullControl
        ]
   requestClient DirectoryUsersList {..} =
     go

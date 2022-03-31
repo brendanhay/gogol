@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectorySchemasDelete where
   type Rs DirectorySchemasDelete = ()
   type
     Scopes DirectorySchemasDelete =
-      '["https://www.googleapis.com/auth/admin.directory.userschema"]
+      '[Admin'Directory'Userschema]
   requestClient DirectorySchemasDelete {..} =
     go
       customerId

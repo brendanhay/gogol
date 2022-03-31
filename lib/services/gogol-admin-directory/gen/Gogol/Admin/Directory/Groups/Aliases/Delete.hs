@@ -106,7 +106,7 @@ instance
   type Rs DirectoryGroupsAliasesDelete = ()
   type
     Scopes DirectoryGroupsAliasesDelete =
-      '["https://www.googleapis.com/auth/admin.directory.group"]
+      '[Admin'Directory'Group]
   requestClient DirectoryGroupsAliasesDelete {..} =
     go
       groupKey

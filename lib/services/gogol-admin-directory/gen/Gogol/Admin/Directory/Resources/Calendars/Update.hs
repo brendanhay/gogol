@@ -115,7 +115,7 @@ instance
       CalendarResource
   type
     Scopes DirectoryResourcesCalendarsUpdate =
-      '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
+      '[Admin'Directory'Resource'Calendar]
   requestClient DirectoryResourcesCalendarsUpdate {..} =
     go
       customer

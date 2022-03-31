@@ -109,8 +109,8 @@ instance
       CalendarResource
   type
     Scopes DirectoryResourcesCalendarsGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.resource.calendar",
-         "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"
+      '[ Admin'Directory'Resource'Calendar,
+         Admin'Directory'Resource'Calendar'Readonly
        ]
   requestClient DirectoryResourcesCalendarsGet {..} =
     go

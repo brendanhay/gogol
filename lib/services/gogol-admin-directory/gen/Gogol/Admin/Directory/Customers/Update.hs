@@ -102,7 +102,7 @@ instance Core.GoogleRequest DirectoryCustomersUpdate where
   type Rs DirectoryCustomersUpdate = Customer
   type
     Scopes DirectoryCustomersUpdate =
-      '["https://www.googleapis.com/auth/admin.directory.customer"]
+      '[Admin'Directory'Customer]
   requestClient DirectoryCustomersUpdate {..} =
     go
       customerKey

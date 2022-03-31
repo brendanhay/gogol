@@ -96,7 +96,7 @@ instance Core.GoogleRequest DirectoryGroupsDelete where
   type Rs DirectoryGroupsDelete = ()
   type
     Scopes DirectoryGroupsDelete =
-      '["https://www.googleapis.com/auth/admin.directory.group"]
+      '[Admin'Directory'Group]
   requestClient DirectoryGroupsDelete {..} =
     go
       groupKey

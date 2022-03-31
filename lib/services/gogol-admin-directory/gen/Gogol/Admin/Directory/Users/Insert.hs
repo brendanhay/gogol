@@ -96,7 +96,7 @@ instance Core.GoogleRequest DirectoryUsersInsert where
   type Rs DirectoryUsersInsert = User
   type
     Scopes DirectoryUsersInsert =
-      '["https://www.googleapis.com/auth/admin.directory.user"]
+      '[Admin'Directory'User]
   requestClient DirectoryUsersInsert {..} =
     go
       xgafv

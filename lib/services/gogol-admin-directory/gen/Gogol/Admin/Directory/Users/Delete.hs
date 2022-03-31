@@ -96,7 +96,7 @@ instance Core.GoogleRequest DirectoryUsersDelete where
   type Rs DirectoryUsersDelete = ()
   type
     Scopes DirectoryUsersDelete =
-      '["https://www.googleapis.com/auth/admin.directory.user"]
+      '[Admin'Directory'User]
   requestClient DirectoryUsersDelete {..} =
     go
       userKey

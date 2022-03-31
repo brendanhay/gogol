@@ -116,7 +116,7 @@ instance
   type Rs DirectoryChromeosdevicesMoveDevicesToOu = ()
   type
     Scopes DirectoryChromeosdevicesMoveDevicesToOu =
-      '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
+      '[Admin'Directory'Device'Chromeos]
   requestClient
     DirectoryChromeosdevicesMoveDevicesToOu {..} =
       go

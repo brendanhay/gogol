@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryUsersMakeAdmin where
   type Rs DirectoryUsersMakeAdmin = ()
   type
     Scopes DirectoryUsersMakeAdmin =
-      '["https://www.googleapis.com/auth/admin.directory.user"]
+      '[Admin'Directory'User]
   requestClient DirectoryUsersMakeAdmin {..} =
     go
       userKey

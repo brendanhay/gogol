@@ -101,7 +101,7 @@ instance
   type Rs DirectoryVerificationCodesGenerate = ()
   type
     Scopes DirectoryVerificationCodesGenerate =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryVerificationCodesGenerate {..} =
     go
       userKey

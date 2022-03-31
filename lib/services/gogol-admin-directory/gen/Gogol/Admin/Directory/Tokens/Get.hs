@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryTokensGet where
   type Rs DirectoryTokensGet = Token
   type
     Scopes DirectoryTokensGet =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryTokensGet {..} =
     go
       userKey

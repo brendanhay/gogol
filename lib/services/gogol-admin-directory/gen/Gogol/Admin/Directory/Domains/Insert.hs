@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryDomainsInsert where
   type Rs DirectoryDomainsInsert = Domains
   type
     Scopes DirectoryDomainsInsert =
-      '["https://www.googleapis.com/auth/admin.directory.domain"]
+      '[Admin'Directory'Domain]
   requestClient DirectoryDomainsInsert {..} =
     go
       customer

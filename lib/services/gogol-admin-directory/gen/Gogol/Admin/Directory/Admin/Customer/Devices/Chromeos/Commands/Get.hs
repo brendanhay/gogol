@@ -118,8 +118,8 @@ instance
       DirectoryChromeosdevicesCommand
   type
     Scopes AdminCustomerDevicesChromeosCommandsGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.device.chromeos",
-         "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"
+      '[ Admin'Directory'Device'Chromeos,
+         Admin'Directory'Device'Chromeos'Readonly
        ]
   requestClient
     AdminCustomerDevicesChromeosCommandsGet {..} =

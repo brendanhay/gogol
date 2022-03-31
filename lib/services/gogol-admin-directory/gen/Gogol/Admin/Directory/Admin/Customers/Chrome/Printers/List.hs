@@ -124,8 +124,8 @@ instance
       ListPrintersResponse
   type
     Scopes AdminCustomersChromePrintersList =
-      '[ "https://www.googleapis.com/auth/admin.chrome.printers",
-         "https://www.googleapis.com/auth/admin.chrome.printers.readonly"
+      '[ Admin'Chrome'Printers,
+         Admin'Chrome'Printers'Readonly
        ]
   requestClient AdminCustomersChromePrintersList {..} =
     go

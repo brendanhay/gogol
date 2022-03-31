@@ -106,7 +106,7 @@ instance
   type Rs AdminCustomersChromePrintersCreate = Printer
   type
     Scopes AdminCustomersChromePrintersCreate =
-      '["https://www.googleapis.com/auth/admin.chrome.printers"]
+      '[Admin'Chrome'Printers]
   requestClient AdminCustomersChromePrintersCreate {..} =
     go
       parent

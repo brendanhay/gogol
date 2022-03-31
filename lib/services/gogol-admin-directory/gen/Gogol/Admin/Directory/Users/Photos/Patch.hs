@@ -104,7 +104,7 @@ instance Core.GoogleRequest DirectoryUsersPhotosPatch where
   type Rs DirectoryUsersPhotosPatch = UserPhoto
   type
     Scopes DirectoryUsersPhotosPatch =
-      '["https://www.googleapis.com/auth/admin.directory.user"]
+      '[Admin'Directory'User]
   requestClient DirectoryUsersPhotosPatch {..} =
     go
       userKey

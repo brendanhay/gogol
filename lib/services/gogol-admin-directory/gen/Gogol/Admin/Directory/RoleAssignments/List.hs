@@ -118,8 +118,8 @@ instance
       RoleAssignments
   type
     Scopes DirectoryRoleAssignmentsList =
-      '[ "https://www.googleapis.com/auth/admin.directory.rolemanagement",
-         "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"
+      '[ Admin'Directory'Rolemanagement,
+         Admin'Directory'Rolemanagement'Readonly
        ]
   requestClient DirectoryRoleAssignmentsList {..} =
     go

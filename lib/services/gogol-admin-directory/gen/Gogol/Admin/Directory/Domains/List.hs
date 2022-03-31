@@ -97,8 +97,8 @@ instance Core.GoogleRequest DirectoryDomainsList where
   type Rs DirectoryDomainsList = Domains2
   type
     Scopes DirectoryDomainsList =
-      '[ "https://www.googleapis.com/auth/admin.directory.domain",
-         "https://www.googleapis.com/auth/admin.directory.domain.readonly"
+      '[ Admin'Directory'Domain,
+         Admin'Directory'Domain'Readonly
        ]
   requestClient DirectoryDomainsList {..} =
     go

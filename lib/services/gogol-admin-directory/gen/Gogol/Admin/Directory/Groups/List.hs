@@ -122,8 +122,8 @@ instance Core.GoogleRequest DirectoryGroupsList where
   type Rs DirectoryGroupsList = Groups
   type
     Scopes DirectoryGroupsList =
-      '[ "https://www.googleapis.com/auth/admin.directory.group",
-         "https://www.googleapis.com/auth/admin.directory.group.readonly"
+      '[ Admin'Directory'Group,
+         Admin'Directory'Group'Readonly
        ]
   requestClient DirectoryGroupsList {..} =
     go
