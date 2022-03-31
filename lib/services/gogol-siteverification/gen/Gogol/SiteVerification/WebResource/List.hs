@@ -73,7 +73,7 @@ instance
       SiteVerificationWebResourceListResponse
   type
     Scopes SiteVerificationWebResourceList =
-      '["https://www.googleapis.com/auth/siteverification"]
+      '[Siteverification'FullControl]
   requestClient SiteVerificationWebResourceList {} =
     go (Core.Just Core.AltJSON) siteVerificationService
     where

@@ -82,8 +82,8 @@ instance
       SiteVerificationWebResourceGettokenResponse
   type
     Scopes SiteVerificationWebResourceGetToken =
-      '[ "https://www.googleapis.com/auth/siteverification",
-         "https://www.googleapis.com/auth/siteverification.verify_only"
+      '[ Siteverification'FullControl,
+         Siteverification'VerifyOnly
        ]
   requestClient SiteVerificationWebResourceGetToken {..} =
     go

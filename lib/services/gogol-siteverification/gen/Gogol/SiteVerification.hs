@@ -34,8 +34,8 @@ module Gogol.SiteVerification
     siteVerificationService,
 
     -- * OAuth Scopes
-    siteVerificationScope,
-    siteVerificationVerify_OnlyScope,
+    Siteverification'FullControl,
+    Siteverification'VerifyOnly,
 
     -- * Resources
 
