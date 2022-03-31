@@ -122,7 +122,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+      '[Tagmanager'Edit'Containers]
   requestClient
     TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder {..} =
       go

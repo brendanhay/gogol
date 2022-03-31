@@ -94,9 +94,9 @@ instance Core.GoogleRequest TagManagerAccountsGet where
   type Rs TagManagerAccountsGet = Account
   type
     Scopes TagManagerAccountsGet =
-      '[ "https://www.googleapis.com/auth/tagmanager.edit.containers",
-         "https://www.googleapis.com/auth/tagmanager.manage.accounts",
-         "https://www.googleapis.com/auth/tagmanager.readonly"
+      '[ Tagmanager'Edit'Containers,
+         Tagmanager'Manage'Accounts,
+         Tagmanager'Readonly
        ]
   requestClient TagManagerAccountsGet {..} =
     go

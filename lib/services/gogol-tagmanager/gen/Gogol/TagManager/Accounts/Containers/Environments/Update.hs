@@ -111,7 +111,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersEnvironmentsUpdate =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+      '[Tagmanager'Edit'Containers]
   requestClient
     TagManagerAccountsContainersEnvironmentsUpdate {..} =
       go

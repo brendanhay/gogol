@@ -109,7 +109,7 @@ instance
       Container
   type
     Scopes TagManagerAccountsContainersUpdate =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+      '[Tagmanager'Edit'Containers]
   requestClient TagManagerAccountsContainersUpdate {..} =
     go
       path

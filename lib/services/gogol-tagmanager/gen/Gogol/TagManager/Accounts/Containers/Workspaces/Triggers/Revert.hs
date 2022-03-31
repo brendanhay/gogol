@@ -105,7 +105,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersWorkspacesTriggersRevert =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+      '[Tagmanager'Edit'Containers]
   requestClient
     TagManagerAccountsContainersWorkspacesTriggersRevert {..} =
       go

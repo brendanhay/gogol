@@ -97,7 +97,7 @@ instance
   type Rs TagManagerAccountsContainersDelete = ()
   type
     Scopes TagManagerAccountsContainersDelete =
-      '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
+      '[Tagmanager'Delete'Containers]
   requestClient TagManagerAccountsContainersDelete {..} =
     go
       path

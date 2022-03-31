@@ -30,13 +30,13 @@ module Gogol.TagManager.Types
     tagManagerService,
 
     -- * OAuth Scopes
-    tagManagerDeleteContainersScope,
-    tagManagerEditContainersScope,
-    tagManagerEditContainerversionsScope,
-    tagManagerManageAccountsScope,
-    tagManagerManageUsersScope,
-    tagManagerPublishScope,
-    tagManagerReadOnlyScope,
+    Tagmanager'Delete'Containers,
+    Tagmanager'Edit'Containers,
+    Tagmanager'Edit'Containerversions,
+    Tagmanager'Manage'Accounts,
+    Tagmanager'Manage'Users,
+    Tagmanager'Publish,
+    Tagmanager'Readonly,
 
     -- * Types
 
@@ -342,29 +342,22 @@ tagManagerService =
     "tagmanager.googleapis.com"
 
 -- | Delete your Google Tag Manager containers
-tagManagerDeleteContainersScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
-tagManagerDeleteContainersScope = Core.Proxy
+type Tagmanager'Delete'Containers = "https://www.googleapis.com/auth/tagmanager.delete.containers"
 
 -- | Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing
-tagManagerEditContainersScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-tagManagerEditContainersScope = Core.Proxy
+type Tagmanager'Edit'Containers = "https://www.googleapis.com/auth/tagmanager.edit.containers"
 
 -- | Manage your Google Tag Manager container versions
-tagManagerEditContainerversionsScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-tagManagerEditContainerversionsScope = Core.Proxy
+type Tagmanager'Edit'Containerversions = "https://www.googleapis.com/auth/tagmanager.edit.containerversions"
 
 -- | View and manage your Google Tag Manager accounts
-tagManagerManageAccountsScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
-tagManagerManageAccountsScope = Core.Proxy
+type Tagmanager'Manage'Accounts = "https://www.googleapis.com/auth/tagmanager.manage.accounts"
 
 -- | Manage user permissions of your Google Tag Manager account and container
-tagManagerManageUsersScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-tagManagerManageUsersScope = Core.Proxy
+type Tagmanager'Manage'Users = "https://www.googleapis.com/auth/tagmanager.manage.users"
 
 -- | Publish your Google Tag Manager container versions
-tagManagerPublishScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
-tagManagerPublishScope = Core.Proxy
+type Tagmanager'Publish = "https://www.googleapis.com/auth/tagmanager.publish"
 
 -- | View your Google Tag Manager container and its subcomponents
-tagManagerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
-tagManagerReadOnlyScope = Core.Proxy
+type Tagmanager'Readonly = "https://www.googleapis.com/auth/tagmanager.readonly"
