@@ -115,7 +115,7 @@ instance
       GoogleLongrunningListOperationsResponse
   type
     Scopes CloudPrivateCatalogProducerOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerOperationsList {..} =
       go

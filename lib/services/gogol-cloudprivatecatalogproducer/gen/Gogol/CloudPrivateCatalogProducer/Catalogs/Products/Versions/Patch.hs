@@ -118,7 +118,7 @@ instance
   type
     Scopes
       CloudPrivateCatalogProducerCatalogsProductsVersionsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsProductsVersionsPatch {..} =
       go

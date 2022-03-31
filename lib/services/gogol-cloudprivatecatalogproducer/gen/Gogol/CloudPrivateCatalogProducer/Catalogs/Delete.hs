@@ -104,7 +104,7 @@ instance
       GoogleCloudPrivatecatalogproducerV1beta1Catalog
   type
     Scopes CloudPrivateCatalogProducerCatalogsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsDelete {..} =
       go
