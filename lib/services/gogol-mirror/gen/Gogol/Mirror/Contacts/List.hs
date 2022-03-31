@@ -64,9 +64,7 @@ newMirrorContactsList = MirrorContactsList
 
 instance Core.GoogleRequest MirrorContactsList where
   type Rs MirrorContactsList = ContactsListResponse
-  type
-    Scopes MirrorContactsList =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+  type Scopes MirrorContactsList = '[Glass'Timeline]
   requestClient MirrorContactsList {} =
     go (Core.Just Core.AltJSON) mirrorService
     where

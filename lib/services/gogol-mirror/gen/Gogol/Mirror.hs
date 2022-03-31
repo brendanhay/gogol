@@ -34,8 +34,8 @@ module Gogol.Mirror
     mirrorService,
 
     -- * OAuth Scopes
-    glassLocationScope,
-    glassTimelineScope,
+    Glass'Location,
+    Glass'Timeline,
 
     -- * Resources
 

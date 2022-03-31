@@ -79,7 +79,7 @@ instance
       AttachmentsListResponse
   type
     Scopes MirrorTimelineAttachmentsList =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+      '[Glass'Timeline]
   requestClient MirrorTimelineAttachmentsList {..} =
     go itemId (Core.Just Core.AltJSON) mirrorService
     where

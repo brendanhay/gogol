@@ -70,9 +70,7 @@ newMirrorContactsInsert payload = MirrorContactsInsert {payload = payload}
 
 instance Core.GoogleRequest MirrorContactsInsert where
   type Rs MirrorContactsInsert = Contact
-  type
-    Scopes MirrorContactsInsert =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+  type Scopes MirrorContactsInsert = '[Glass'Timeline]
   requestClient MirrorContactsInsert {..} =
     go (Core.Just Core.AltJSON) payload mirrorService
     where

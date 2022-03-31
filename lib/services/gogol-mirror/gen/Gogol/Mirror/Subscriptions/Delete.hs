@@ -72,7 +72,7 @@ instance Core.GoogleRequest MirrorSubscriptionsDelete where
   type Rs MirrorSubscriptionsDelete = ()
   type
     Scopes MirrorSubscriptionsDelete =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+      '[Glass'Timeline]
   requestClient MirrorSubscriptionsDelete {..} =
     go id (Core.Just Core.AltJSON) mirrorService
     where

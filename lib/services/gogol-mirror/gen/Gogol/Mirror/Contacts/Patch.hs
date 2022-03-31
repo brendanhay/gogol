@@ -76,9 +76,7 @@ newMirrorContactsPatch id payload =
 
 instance Core.GoogleRequest MirrorContactsPatch where
   type Rs MirrorContactsPatch = Contact
-  type
-    Scopes MirrorContactsPatch =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+  type Scopes MirrorContactsPatch = '[Glass'Timeline]
   requestClient MirrorContactsPatch {..} =
     go
       id

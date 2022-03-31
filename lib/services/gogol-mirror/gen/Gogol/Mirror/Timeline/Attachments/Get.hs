@@ -90,7 +90,7 @@ instance
   type Rs MirrorTimelineAttachmentsGet = Attachment
   type
     Scopes MirrorTimelineAttachmentsGet =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+      '[Glass'Timeline]
   requestClient MirrorTimelineAttachmentsGet {..} =
     go
       itemId

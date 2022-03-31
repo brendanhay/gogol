@@ -70,9 +70,7 @@ newMirrorSettingsGet id = MirrorSettingsGet {id = id}
 
 instance Core.GoogleRequest MirrorSettingsGet where
   type Rs MirrorSettingsGet = Setting
-  type
-    Scopes MirrorSettingsGet =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+  type Scopes MirrorSettingsGet = '[Glass'Timeline]
   requestClient MirrorSettingsGet {..} =
     go id (Core.Just Core.AltJSON) mirrorService
     where

@@ -70,9 +70,7 @@ newMirrorContactsDelete id = MirrorContactsDelete {id = id}
 
 instance Core.GoogleRequest MirrorContactsDelete where
   type Rs MirrorContactsDelete = ()
-  type
-    Scopes MirrorContactsDelete =
-      '["https://www.googleapis.com/auth/glass.timeline"]
+  type Scopes MirrorContactsDelete = '[Glass'Timeline]
   requestClient MirrorContactsDelete {..} =
     go id (Core.Just Core.AltJSON) mirrorService
     where
