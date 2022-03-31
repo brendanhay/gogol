@@ -112,7 +112,7 @@ instance Core.GoogleRequest FactCheckToolsPagesList where
       GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
   type
     Scopes FactCheckToolsPagesList =
-      '["https://www.googleapis.com/auth/userinfo.email"]
+      '[Userinfo'Email]
   requestClient FactCheckToolsPagesList {..} =
     go
       xgafv

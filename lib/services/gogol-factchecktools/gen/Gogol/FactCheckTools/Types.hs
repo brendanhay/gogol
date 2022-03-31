@@ -30,7 +30,7 @@ module Gogol.FactCheckTools.Types
     factCheckToolsService,
 
     -- * OAuth Scopes
-    userinfoEmailScope,
+    Userinfo'Email,
 
     -- * Types
 
@@ -95,5 +95,4 @@ factCheckToolsService =
     "factchecktools.googleapis.com"
 
 -- | See your primary Google Account email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"

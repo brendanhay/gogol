@@ -97,7 +97,7 @@ instance Core.GoogleRequest FactCheckToolsPagesGet where
       GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
   type
     Scopes FactCheckToolsPagesGet =
-      '["https://www.googleapis.com/auth/userinfo.email"]
+      '[Userinfo'Email]
   requestClient FactCheckToolsPagesGet {..} =
     go
       name
