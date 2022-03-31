@@ -107,7 +107,7 @@ instance
   type Rs StreetViewPublishPhotoUpdate = Photo
   type
     Scopes StreetViewPublishPhotoUpdate =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotoUpdate {..} =
     go
       id

@@ -34,7 +34,7 @@ module Gogol.StreetViewPublish
     streetViewPublishService,
 
     -- * OAuth Scopes
-    streetViewPublishScope,
+    Streetviewpublish'FullControl,
 
     -- * Resources
 

@@ -97,7 +97,7 @@ instance
   type Rs StreetViewPublishPhotoDelete = Empty
   type
     Scopes StreetViewPublishPhotoDelete =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotoDelete {..} =
     go
       photoId

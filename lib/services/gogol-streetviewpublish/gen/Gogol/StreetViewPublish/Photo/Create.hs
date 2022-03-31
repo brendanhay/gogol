@@ -97,7 +97,7 @@ instance
   type Rs StreetViewPublishPhotoCreate = Photo
   type
     Scopes StreetViewPublishPhotoCreate =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotoCreate {..} =
     go
       xgafv

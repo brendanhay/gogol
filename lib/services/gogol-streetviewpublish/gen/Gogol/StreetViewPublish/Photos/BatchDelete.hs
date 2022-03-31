@@ -99,7 +99,7 @@ instance
       BatchDeletePhotosResponse
   type
     Scopes StreetViewPublishPhotosBatchDelete =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotosBatchDelete {..} =
     go
       xgafv
