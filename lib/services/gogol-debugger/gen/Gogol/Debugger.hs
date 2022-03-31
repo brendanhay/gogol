@@ -34,8 +34,8 @@ module Gogol.Debugger
     debuggerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloud_debuggerScope,
+    CloudPlatform'FullControl,
+    CloudDebugger'FullControl,
 
     -- * Resources
 

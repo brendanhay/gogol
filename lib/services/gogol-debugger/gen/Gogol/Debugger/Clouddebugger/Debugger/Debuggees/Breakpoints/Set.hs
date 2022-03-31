@@ -119,8 +119,8 @@ instance
   type
     Scopes
       ClouddebuggerDebuggerDebuggeesBreakpointsSet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud_debugger"
+      '[ CloudPlatform'FullControl,
+         CloudDebugger'FullControl
        ]
   requestClient
     ClouddebuggerDebuggerDebuggeesBreakpointsSet {..} =

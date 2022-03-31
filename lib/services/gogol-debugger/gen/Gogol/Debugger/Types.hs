@@ -30,8 +30,8 @@ module Gogol.Debugger.Types
     debuggerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloud_debuggerScope,
+    CloudPlatform'FullControl,
+    CloudDebugger'FullControl,
 
     -- * Types
 
@@ -196,9 +196,7 @@ debuggerService =
     "clouddebugger.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Use Stackdriver Debugger
-cloud_debuggerScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
-cloud_debuggerScope = Core.Proxy
+type CloudDebugger'FullControl = "https://www.googleapis.com/auth/cloud_debugger"
