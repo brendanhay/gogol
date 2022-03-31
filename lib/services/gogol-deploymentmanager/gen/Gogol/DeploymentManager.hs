@@ -34,10 +34,10 @@ module Gogol.DeploymentManager
     deploymentManagerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    ndevCloudmanScope,
-    ndevCloudmanReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Ndev'Cloudman,
+    Ndev'Cloudman'Readonly,
 
     -- * Resources
 

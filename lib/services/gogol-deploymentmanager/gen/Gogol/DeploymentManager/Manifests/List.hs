@@ -128,10 +128,10 @@ instance
       ManifestsListResponse
   type
     Scopes DeploymentManagerManifestsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/ndev.cloudman",
-         "https://www.googleapis.com/auth/ndev.cloudman.readonly"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Ndev'Cloudman,
+         Ndev'Cloudman'Readonly
        ]
   requestClient DeploymentManagerManifestsList {..} =
     go

@@ -30,10 +30,10 @@ module Gogol.DeploymentManager.Types
     deploymentManagerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    ndevCloudmanScope,
-    ndevCloudmanReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Ndev'Cloudman,
+    Ndev'Cloudman'Readonly,
 
     -- * Types
 
@@ -245,17 +245,13 @@ deploymentManagerService =
     "deploymentmanager.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | View and manage your Google Cloud Platform management resources and deployment status information
-ndevCloudmanScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
-ndevCloudmanScope = Core.Proxy
+type Ndev'Cloudman = "https://www.googleapis.com/auth/ndev.cloudman"
 
 -- | View your Google Cloud Platform management resources and deployment status information
-ndevCloudmanReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-ndevCloudmanReadOnlyScope = Core.Proxy
+type Ndev'Cloudman'Readonly = "https://www.googleapis.com/auth/ndev.cloudman.readonly"
