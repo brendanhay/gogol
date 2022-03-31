@@ -34,7 +34,7 @@ module Gogol.CloudPrivateCatalog
     cloudPrivateCatalogService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

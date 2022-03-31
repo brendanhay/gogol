@@ -123,7 +123,7 @@ instance
       GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
   type
     Scopes CloudPrivateCatalogFoldersCatalogsSearch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogFoldersCatalogsSearch {..} =
       go
