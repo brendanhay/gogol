@@ -30,7 +30,7 @@ module Gogol.ProximityBeacon.Types
     proximityBeaconService,
 
     -- * OAuth Scopes
-    userlocationBeaconRegistryScope,
+    Userlocation'Beacon'Registry,
 
     -- * Types
 
@@ -151,5 +151,4 @@ proximityBeaconService =
     "proximitybeacon.googleapis.com"
 
 -- | View and modify your beacons
-userlocationBeaconRegistryScope :: Core.Proxy '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
-userlocationBeaconRegistryScope = Core.Proxy
+type Userlocation'Beacon'Registry = "https://www.googleapis.com/auth/userlocation.beacon.registry"

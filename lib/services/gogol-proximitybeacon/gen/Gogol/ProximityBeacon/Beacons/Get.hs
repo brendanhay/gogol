@@ -105,7 +105,7 @@ instance Core.GoogleRequest ProximityBeaconBeaconsGet where
   type Rs ProximityBeaconBeaconsGet = Beacon
   type
     Scopes ProximityBeaconBeaconsGet =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient ProximityBeaconBeaconsGet {..} =
     go
       beaconName

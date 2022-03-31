@@ -104,7 +104,7 @@ instance
   type Rs ProximityBeaconBeaconsDeactivate = Empty
   type
     Scopes ProximityBeaconBeaconsDeactivate =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient ProximityBeaconBeaconsDeactivate {..} =
     go
       beaconName

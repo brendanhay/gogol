@@ -129,7 +129,7 @@ instance
       ListBeaconsResponse
   type
     Scopes ProximityBeaconBeaconsList =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient ProximityBeaconBeaconsList {..} =
     go
       xgafv

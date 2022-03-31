@@ -114,7 +114,7 @@ instance
   type Rs ProximityBeaconBeaconsUpdate = Beacon
   type
     Scopes ProximityBeaconBeaconsUpdate =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient ProximityBeaconBeaconsUpdate {..} =
     go
       beaconName

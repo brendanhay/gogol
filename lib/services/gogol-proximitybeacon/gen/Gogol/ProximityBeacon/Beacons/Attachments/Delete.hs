@@ -106,7 +106,7 @@ instance
       Empty
   type
     Scopes ProximityBeaconBeaconsAttachmentsDelete =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient
     ProximityBeaconBeaconsAttachmentsDelete {..} =
       go

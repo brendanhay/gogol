@@ -93,7 +93,7 @@ instance
       EphemeralIdRegistrationParams
   type
     Scopes ProximityBeaconGetEidparams =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient ProximityBeaconGetEidparams {..} =
     go
       xgafv
