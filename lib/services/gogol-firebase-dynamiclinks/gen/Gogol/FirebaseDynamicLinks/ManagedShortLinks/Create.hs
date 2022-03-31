@@ -102,7 +102,7 @@ instance
   type
     Scopes
       FirebaseDynamicLinksManagedShortLinksCreate =
-      '["https://www.googleapis.com/auth/firebase"]
+      '[Firebase'FullControl]
   requestClient
     FirebaseDynamicLinksManagedShortLinksCreate {..} =
       go

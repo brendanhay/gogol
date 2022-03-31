@@ -30,7 +30,7 @@ module Gogol.FirebaseDynamicLinks.Types
     firebaseDynamicLinksService,
 
     -- * OAuth Scopes
-    firebaseScope,
+    Firebase'FullControl,
 
     -- * Types
 
@@ -173,5 +173,4 @@ firebaseDynamicLinksService =
     "firebasedynamiclinks.googleapis.com"
 
 -- | View and administer all your Firebase data and settings
-firebaseScope :: Core.Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Core.Proxy
+type Firebase'FullControl = "https://www.googleapis.com/auth/firebase"
