@@ -110,9 +110,7 @@ instance
   type Rs ComputeTargetGrpcProxiesInsert = Operation
   type
     Scopes ComputeTargetGrpcProxiesInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetGrpcProxiesInsert {..} =
     go
       project

@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeTargetPoolsDelete where
   type Rs ComputeTargetPoolsDelete = Operation
   type
     Scopes ComputeTargetPoolsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetPoolsDelete {..} =
     go
       project

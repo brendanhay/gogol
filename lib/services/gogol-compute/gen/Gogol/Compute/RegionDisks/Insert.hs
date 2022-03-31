@@ -117,9 +117,7 @@ instance Core.GoogleRequest ComputeRegionDisksInsert where
   type Rs ComputeRegionDisksInsert = Operation
   type
     Scopes ComputeRegionDisksInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionDisksInsert {..} =
     go
       project

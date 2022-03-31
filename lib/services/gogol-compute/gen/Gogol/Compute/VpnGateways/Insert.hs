@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeVpnGatewaysInsert where
   type Rs ComputeVpnGatewaysInsert = Operation
   type
     Scopes ComputeVpnGatewaysInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeVpnGatewaysInsert {..} =
     go
       project

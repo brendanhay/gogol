@@ -125,9 +125,7 @@ instance
       UrlMapsValidateResponse
   type
     Scopes ComputeRegionUrlMapsValidate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionUrlMapsValidate {..} =
     go
       project

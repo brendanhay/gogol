@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeVpnTunnelsDelete where
   type Rs ComputeVpnTunnelsDelete = Operation
   type
     Scopes ComputeVpnTunnelsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeVpnTunnelsDelete {..} =
     go
       project

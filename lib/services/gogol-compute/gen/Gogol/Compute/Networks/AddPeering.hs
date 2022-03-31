@@ -116,9 +116,7 @@ instance Core.GoogleRequest ComputeNetworksAddPeering where
   type Rs ComputeNetworksAddPeering = Operation
   type
     Scopes ComputeNetworksAddPeering =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeNetworksAddPeering {..} =
     go
       project

@@ -127,9 +127,7 @@ instance
       Operation
   type
     Scopes ComputeInstanceGroupsSetNamedPorts =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstanceGroupsSetNamedPorts {..} =
     go
       project

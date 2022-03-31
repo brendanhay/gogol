@@ -124,9 +124,7 @@ instance
       Operation
   type
     Scopes ComputeRegionNetworkFirewallPoliciesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeRegionNetworkFirewallPoliciesPatch {..} =
       go

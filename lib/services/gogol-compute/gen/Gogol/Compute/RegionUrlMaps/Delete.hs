@@ -116,9 +116,7 @@ instance
   type Rs ComputeRegionUrlMapsDelete = Operation
   type
     Scopes ComputeRegionUrlMapsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionUrlMapsDelete {..} =
     go
       project

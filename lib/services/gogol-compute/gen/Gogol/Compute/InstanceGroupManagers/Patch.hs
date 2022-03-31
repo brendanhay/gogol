@@ -124,9 +124,7 @@ instance
   type Rs ComputeInstanceGroupManagersPatch = Operation
   type
     Scopes ComputeInstanceGroupManagersPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstanceGroupManagersPatch {..} =
     go
       project

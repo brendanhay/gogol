@@ -123,9 +123,7 @@ instance
   type Rs ComputeInstancesSetMetadata = Operation
   type
     Scopes ComputeInstancesSetMetadata =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesSetMetadata {..} =
     go
       project

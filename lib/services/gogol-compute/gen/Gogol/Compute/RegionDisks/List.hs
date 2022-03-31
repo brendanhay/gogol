@@ -126,9 +126,9 @@ instance Core.GoogleRequest ComputeRegionDisksList where
   type Rs ComputeRegionDisksList = DiskList
   type
     Scopes ComputeRegionDisksList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeRegionDisksList {..} =
     go

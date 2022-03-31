@@ -109,9 +109,9 @@ instance Core.GoogleRequest ComputeVpnTunnelsGet where
   type Rs ComputeVpnTunnelsGet = VpnTunnel
   type
     Scopes ComputeVpnTunnelsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeVpnTunnelsGet {..} =
     go

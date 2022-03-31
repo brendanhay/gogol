@@ -125,9 +125,7 @@ instance
   type Rs ComputeNodeGroupsSetNodeTemplate = Operation
   type
     Scopes ComputeNodeGroupsSetNodeTemplate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeNodeGroupsSetNodeTemplate {..} =
     go
       project

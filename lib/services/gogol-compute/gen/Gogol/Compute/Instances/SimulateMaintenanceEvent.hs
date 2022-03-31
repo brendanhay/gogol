@@ -115,9 +115,7 @@ instance
       Operation
   type
     Scopes ComputeInstancesSimulateMaintenanceEvent =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeInstancesSimulateMaintenanceEvent {..} =
       go

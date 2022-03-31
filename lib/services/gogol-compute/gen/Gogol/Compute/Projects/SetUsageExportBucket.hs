@@ -111,11 +111,11 @@ instance
       Operation
   type
     Scopes ComputeProjectsSetUsageExportBucket =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Devstorage'FullControl,
+         Devstorage'ReadOnly,
+         Devstorage'ReadWrite
        ]
   requestClient ComputeProjectsSetUsageExportBucket {..} =
     go

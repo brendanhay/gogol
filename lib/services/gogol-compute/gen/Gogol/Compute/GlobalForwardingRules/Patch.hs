@@ -116,9 +116,7 @@ instance
   type Rs ComputeGlobalForwardingRulesPatch = Operation
   type
     Scopes ComputeGlobalForwardingRulesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeGlobalForwardingRulesPatch {..} =
     go
       project

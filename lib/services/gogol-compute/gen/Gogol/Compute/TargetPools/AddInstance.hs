@@ -125,9 +125,7 @@ instance
   type Rs ComputeTargetPoolsAddInstance = Operation
   type
     Scopes ComputeTargetPoolsAddInstance =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetPoolsAddInstance {..} =
     go
       project

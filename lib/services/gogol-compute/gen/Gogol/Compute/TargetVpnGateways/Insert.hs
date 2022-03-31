@@ -116,9 +116,7 @@ instance
   type Rs ComputeTargetVpnGatewaysInsert = Operation
   type
     Scopes ComputeTargetVpnGatewaysInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetVpnGatewaysInsert {..} =
     go
       project

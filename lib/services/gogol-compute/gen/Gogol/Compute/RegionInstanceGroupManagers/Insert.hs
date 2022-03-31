@@ -118,9 +118,7 @@ instance
       Operation
   type
     Scopes ComputeRegionInstanceGroupManagersInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeRegionInstanceGroupManagersInsert {..} =
       go

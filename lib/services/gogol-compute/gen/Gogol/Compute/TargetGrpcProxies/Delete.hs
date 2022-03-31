@@ -110,9 +110,7 @@ instance
   type Rs ComputeTargetGrpcProxiesDelete = Operation
   type
     Scopes ComputeTargetGrpcProxiesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetGrpcProxiesDelete {..} =
     go
       project

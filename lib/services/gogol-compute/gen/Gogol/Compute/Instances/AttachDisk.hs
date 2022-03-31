@@ -127,9 +127,7 @@ instance
   type Rs ComputeInstancesAttachDisk = Operation
   type
     Scopes ComputeInstancesAttachDisk =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesAttachDisk {..} =
     go
       project

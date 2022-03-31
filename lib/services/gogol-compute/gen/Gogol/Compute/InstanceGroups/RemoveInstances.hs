@@ -127,9 +127,7 @@ instance
       Operation
   type
     Scopes ComputeInstanceGroupsRemoveInstances =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeInstanceGroupsRemoveInstances {..} =
       go

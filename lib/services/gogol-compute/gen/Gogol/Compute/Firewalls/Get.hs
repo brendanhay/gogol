@@ -103,9 +103,9 @@ instance Core.GoogleRequest ComputeFirewallsGet where
   type Rs ComputeFirewallsGet = Firewall
   type
     Scopes ComputeFirewallsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeFirewallsGet {..} =
     go

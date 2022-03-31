@@ -109,9 +109,9 @@ instance Core.GoogleRequest ComputeDiskTypesGet where
   type Rs ComputeDiskTypesGet = DiskType
   type
     Scopes ComputeDiskTypesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeDiskTypesGet {..} =
     go

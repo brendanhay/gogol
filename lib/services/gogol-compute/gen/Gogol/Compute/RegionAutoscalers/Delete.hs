@@ -116,9 +116,7 @@ instance
   type Rs ComputeRegionAutoscalersDelete = Operation
   type
     Scopes ComputeRegionAutoscalersDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionAutoscalersDelete {..} =
     go
       project

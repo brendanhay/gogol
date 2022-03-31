@@ -114,9 +114,7 @@ instance Core.GoogleRequest ComputeInstancesStart where
   type Rs ComputeInstancesStart = Operation
   type
     Scopes ComputeInstancesStart =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesStart {..} =
     go
       project

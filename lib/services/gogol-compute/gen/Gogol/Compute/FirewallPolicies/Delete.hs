@@ -104,9 +104,7 @@ instance
   type Rs ComputeFirewallPoliciesDelete = Operation
   type
     Scopes ComputeFirewallPoliciesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallPoliciesDelete {..} =
     go
       firewallPolicy

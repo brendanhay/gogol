@@ -103,9 +103,7 @@ instance
   type Rs ComputeProjectsDisableXpnHost = Operation
   type
     Scopes ComputeProjectsDisableXpnHost =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeProjectsDisableXpnHost {..} =
     go
       project

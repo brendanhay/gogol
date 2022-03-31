@@ -119,9 +119,7 @@ instance
       Operation
   type
     Scopes ComputeTargetSslProxiesSetSslPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeTargetSslProxiesSetSslPolicy {..} =
     go
       project

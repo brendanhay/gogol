@@ -129,9 +129,7 @@ instance
   type
     Scopes
       ComputeInstanceGroupManagersSetInstanceTemplate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeInstanceGroupManagersSetInstanceTemplate {..} =
       go

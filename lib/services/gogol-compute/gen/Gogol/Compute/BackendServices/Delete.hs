@@ -110,9 +110,7 @@ instance
   type Rs ComputeBackendServicesDelete = Operation
   type
     Scopes ComputeBackendServicesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeBackendServicesDelete {..} =
     go
       project

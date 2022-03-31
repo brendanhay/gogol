@@ -113,9 +113,7 @@ instance
   type
     Scopes
       ComputeGlobalPublicDelegatedPrefixesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeGlobalPublicDelegatedPrefixesDelete {..} =
       go

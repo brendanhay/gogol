@@ -110,9 +110,7 @@ instance
   type Rs ComputeSslCertificatesDelete = Operation
   type
     Scopes ComputeSslCertificatesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSslCertificatesDelete {..} =
     go
       project

@@ -111,9 +111,7 @@ instance
   type Rs ComputeFirewallPoliciesAddRule = Operation
   type
     Scopes ComputeFirewallPoliciesAddRule =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallPoliciesAddRule {..} =
     go
       firewallPolicy

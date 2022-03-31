@@ -110,9 +110,7 @@ instance
   type Rs ComputeSecurityPoliciesInsert = Operation
   type
     Scopes ComputeSecurityPoliciesInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSecurityPoliciesInsert {..} =
     go
       project

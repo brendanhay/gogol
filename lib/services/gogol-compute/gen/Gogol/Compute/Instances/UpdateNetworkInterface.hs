@@ -133,9 +133,7 @@ instance
       Operation
   type
     Scopes ComputeInstancesUpdateNetworkInterface =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeInstancesUpdateNetworkInterface {..} =
       go

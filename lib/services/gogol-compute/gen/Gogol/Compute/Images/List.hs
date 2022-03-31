@@ -118,9 +118,9 @@ instance Core.GoogleRequest ComputeImagesList where
   type Rs ComputeImagesList = ImageList
   type
     Scopes ComputeImagesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeImagesList {..} =
     go

@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeNodeGroupsDelete where
   type Rs ComputeNodeGroupsDelete = Operation
   type
     Scopes ComputeNodeGroupsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeNodeGroupsDelete {..} =
     go
       project

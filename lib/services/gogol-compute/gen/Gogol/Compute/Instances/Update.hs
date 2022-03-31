@@ -131,9 +131,7 @@ instance Core.GoogleRequest ComputeInstancesUpdate where
   type Rs ComputeInstancesUpdate = Operation
   type
     Scopes ComputeInstancesUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesUpdate {..} =
     go
       project

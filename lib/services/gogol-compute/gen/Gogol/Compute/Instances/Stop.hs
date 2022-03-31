@@ -114,9 +114,7 @@ instance Core.GoogleRequest ComputeInstancesStop where
   type Rs ComputeInstancesStop = Operation
   type
     Scopes ComputeInstancesStop =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesStop {..} =
     go
       project

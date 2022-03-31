@@ -125,9 +125,9 @@ instance
       TestPermissionsResponse
   type
     Scopes ComputeNodeGroupsTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeNodeGroupsTestIamPermissions {..} =
     go

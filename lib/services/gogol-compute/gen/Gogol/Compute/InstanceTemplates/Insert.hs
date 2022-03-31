@@ -110,9 +110,7 @@ instance
   type Rs ComputeInstanceTemplatesInsert = Operation
   type
     Scopes ComputeInstanceTemplatesInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstanceTemplatesInsert {..} =
     go
       project

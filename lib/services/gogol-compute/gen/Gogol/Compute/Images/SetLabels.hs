@@ -112,9 +112,7 @@ instance Core.GoogleRequest ComputeImagesSetLabels where
   type Rs ComputeImagesSetLabels = Operation
   type
     Scopes ComputeImagesSetLabels =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeImagesSetLabels {..} =
     go
       project

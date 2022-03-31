@@ -109,9 +109,7 @@ instance
   type Rs ComputeFirewallPoliciesSetIamPolicy = Policy
   type
     Scopes ComputeFirewallPoliciesSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeFirewallPoliciesSetIamPolicy {..} =
     go
       resource

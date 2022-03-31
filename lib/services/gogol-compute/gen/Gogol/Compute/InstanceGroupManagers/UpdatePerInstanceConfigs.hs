@@ -129,9 +129,7 @@ instance
   type
     Scopes
       ComputeInstanceGroupManagersUpdatePerInstanceConfigs =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeInstanceGroupManagersUpdatePerInstanceConfigs {..} =
       go

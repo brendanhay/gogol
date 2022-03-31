@@ -112,9 +112,7 @@ instance
       Operation
   type
     Scopes ComputePublicAdvertisedPrefixesInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputePublicAdvertisedPrefixesInsert {..} =
       go

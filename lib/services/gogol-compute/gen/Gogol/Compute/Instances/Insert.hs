@@ -121,9 +121,7 @@ instance Core.GoogleRequest ComputeInstancesInsert where
   type Rs ComputeInstancesInsert = Operation
   type
     Scopes ComputeInstancesInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesInsert {..} =
     go
       project

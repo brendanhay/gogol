@@ -120,9 +120,9 @@ instance Core.GoogleRequest ComputeLicensesList where
   type Rs ComputeLicensesList = LicensesListResponse
   type
     Scopes ComputeLicensesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeLicensesList {..} =
     go

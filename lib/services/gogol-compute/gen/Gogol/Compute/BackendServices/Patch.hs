@@ -116,9 +116,7 @@ instance
   type Rs ComputeBackendServicesPatch = Operation
   type
     Scopes ComputeBackendServicesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeBackendServicesPatch {..} =
     go
       project

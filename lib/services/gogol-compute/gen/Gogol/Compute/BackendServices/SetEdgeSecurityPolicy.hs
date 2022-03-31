@@ -122,9 +122,7 @@ instance
   type
     Scopes
       ComputeBackendServicesSetEdgeSecurityPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeBackendServicesSetEdgeSecurityPolicy {..} =
       go

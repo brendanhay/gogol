@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeAutoscalersInsert where
   type Rs ComputeAutoscalersInsert = Operation
   type
     Scopes ComputeAutoscalersInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeAutoscalersInsert {..} =
     go
       project

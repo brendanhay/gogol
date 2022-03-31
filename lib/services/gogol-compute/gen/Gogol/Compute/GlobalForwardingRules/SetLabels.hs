@@ -117,9 +117,7 @@ instance
       Operation
   type
     Scopes ComputeGlobalForwardingRulesSetLabels =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeGlobalForwardingRulesSetLabels {..} =
       go

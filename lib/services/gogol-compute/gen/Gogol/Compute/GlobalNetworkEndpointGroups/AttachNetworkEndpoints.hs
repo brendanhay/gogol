@@ -123,9 +123,7 @@ instance
   type
     Scopes
       ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints {..} =
       go

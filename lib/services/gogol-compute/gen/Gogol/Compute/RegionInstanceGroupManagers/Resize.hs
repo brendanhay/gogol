@@ -125,9 +125,7 @@ instance
       Operation
   type
     Scopes ComputeRegionInstanceGroupManagersResize =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeRegionInstanceGroupManagersResize {..} =
       go

@@ -122,9 +122,7 @@ instance Core.GoogleRequest ComputeRegionDisksResize where
   type Rs ComputeRegionDisksResize = Operation
   type
     Scopes ComputeRegionDisksResize =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionDisksResize {..} =
     go
       project

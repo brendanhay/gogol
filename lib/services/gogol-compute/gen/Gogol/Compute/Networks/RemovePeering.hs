@@ -119,9 +119,7 @@ instance
   type Rs ComputeNetworksRemovePeering = Operation
   type
     Scopes ComputeNetworksRemovePeering =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeNetworksRemovePeering {..} =
     go
       project

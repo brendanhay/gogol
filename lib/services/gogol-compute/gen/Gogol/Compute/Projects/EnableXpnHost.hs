@@ -103,9 +103,7 @@ instance
   type Rs ComputeProjectsEnableXpnHost = Operation
   type
     Scopes ComputeProjectsEnableXpnHost =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeProjectsEnableXpnHost {..} =
     go
       project

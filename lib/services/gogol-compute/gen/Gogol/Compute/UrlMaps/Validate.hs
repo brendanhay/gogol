@@ -116,9 +116,7 @@ instance Core.GoogleRequest ComputeUrlMapsValidate where
       UrlMapsValidateResponse
   type
     Scopes ComputeUrlMapsValidate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeUrlMapsValidate {..} =
     go
       project

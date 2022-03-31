@@ -118,9 +118,9 @@ instance Core.GoogleRequest ComputeInterconnectsList where
   type Rs ComputeInterconnectsList = InterconnectList
   type
     Scopes ComputeInterconnectsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeInterconnectsList {..} =
     go

@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeHealthChecksDelete where
   type Rs ComputeHealthChecksDelete = Operation
   type
     Scopes ComputeHealthChecksDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeHealthChecksDelete {..} =
     go
       project

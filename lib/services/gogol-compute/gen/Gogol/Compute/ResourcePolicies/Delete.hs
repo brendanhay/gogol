@@ -116,9 +116,7 @@ instance
   type Rs ComputeResourcePoliciesDelete = Operation
   type
     Scopes ComputeResourcePoliciesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeResourcePoliciesDelete {..} =
     go
       project

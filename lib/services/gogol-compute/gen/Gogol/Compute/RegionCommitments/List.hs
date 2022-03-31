@@ -129,9 +129,9 @@ instance
   type Rs ComputeRegionCommitmentsList = CommitmentList
   type
     Scopes ComputeRegionCommitmentsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeRegionCommitmentsList {..} =
     go

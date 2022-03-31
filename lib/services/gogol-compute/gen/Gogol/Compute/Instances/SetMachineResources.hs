@@ -127,9 +127,7 @@ instance
       Operation
   type
     Scopes ComputeInstancesSetMachineResources =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesSetMachineResources {..} =
     go
       project

@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeSslPoliciesInsert where
   type Rs ComputeSslPoliciesInsert = Operation
   type
     Scopes ComputeSslPoliciesInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSslPoliciesInsert {..} =
     go
       project

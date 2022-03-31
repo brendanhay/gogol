@@ -103,9 +103,9 @@ instance Core.GoogleRequest ComputeUrlMapsGet where
   type Rs ComputeUrlMapsGet = UrlMap
   type
     Scopes ComputeUrlMapsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeUrlMapsGet {..} =
     go

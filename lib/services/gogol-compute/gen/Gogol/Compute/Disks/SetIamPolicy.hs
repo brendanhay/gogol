@@ -118,9 +118,7 @@ instance Core.GoogleRequest ComputeDisksSetIamPolicy where
   type Rs ComputeDisksSetIamPolicy = Policy
   type
     Scopes ComputeDisksSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeDisksSetIamPolicy {..} =
     go
       project

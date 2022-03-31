@@ -119,9 +119,7 @@ instance
   type Rs ComputeUrlMapsInvalidateCache = Operation
   type
     Scopes ComputeUrlMapsInvalidateCache =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeUrlMapsInvalidateCache {..} =
     go
       project

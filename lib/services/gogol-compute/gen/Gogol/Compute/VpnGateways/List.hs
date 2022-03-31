@@ -126,9 +126,9 @@ instance Core.GoogleRequest ComputeVpnGatewaysList where
   type Rs ComputeVpnGatewaysList = VpnGatewayList
   type
     Scopes ComputeVpnGatewaysList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient ComputeVpnGatewaysList {..} =
     go

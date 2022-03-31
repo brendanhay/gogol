@@ -122,9 +122,7 @@ instance Core.GoogleRequest ComputeNodeGroupsAddNodes where
   type Rs ComputeNodeGroupsAddNodes = Operation
   type
     Scopes ComputeNodeGroupsAddNodes =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeNodeGroupsAddNodes {..} =
     go
       project

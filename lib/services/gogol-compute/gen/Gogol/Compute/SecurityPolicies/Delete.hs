@@ -110,9 +110,7 @@ instance
   type Rs ComputeSecurityPoliciesDelete = Operation
   type
     Scopes ComputeSecurityPoliciesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSecurityPoliciesDelete {..} =
     go
       project

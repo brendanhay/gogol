@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeUrlMapsPatch where
   type Rs ComputeUrlMapsPatch = Operation
   type
     Scopes ComputeUrlMapsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeUrlMapsPatch {..} =
     go
       project

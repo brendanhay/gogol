@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeRoutesDelete where
   type Rs ComputeRoutesDelete = Operation
   type
     Scopes ComputeRoutesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRoutesDelete {..} =
     go
       project

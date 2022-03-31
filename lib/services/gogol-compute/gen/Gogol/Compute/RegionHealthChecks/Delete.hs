@@ -116,9 +116,7 @@ instance
   type Rs ComputeRegionHealthChecksDelete = Operation
   type
     Scopes ComputeRegionHealthChecksDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeRegionHealthChecksDelete {..} =
     go
       project

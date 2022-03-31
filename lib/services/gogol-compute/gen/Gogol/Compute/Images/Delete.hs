@@ -107,9 +107,7 @@ instance Core.GoogleRequest ComputeImagesDelete where
   type Rs ComputeImagesDelete = Operation
   type
     Scopes ComputeImagesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeImagesDelete {..} =
     go
       project

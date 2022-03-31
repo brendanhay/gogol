@@ -119,9 +119,7 @@ instance
   type Rs ComputeInstancesBulkInsert = Operation
   type
     Scopes ComputeInstancesBulkInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeInstancesBulkInsert {..} =
     go
       project

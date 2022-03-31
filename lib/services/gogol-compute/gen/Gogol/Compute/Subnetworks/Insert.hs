@@ -113,9 +113,7 @@ instance Core.GoogleRequest ComputeSubnetworksInsert where
   type Rs ComputeSubnetworksInsert = Operation
   type
     Scopes ComputeSubnetworksInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient ComputeSubnetworksInsert {..} =
     go
       project
