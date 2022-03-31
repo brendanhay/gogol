@@ -30,7 +30,7 @@ module Gogol.GroupsSettings.Types
     groupsSettingsService,
 
     -- * OAuth Scopes
-    appsGroupsSettingsScope,
+    Apps'Groups'Settings,
 
     -- * Types
 
@@ -52,5 +52,4 @@ groupsSettingsService =
     "www.googleapis.com"
 
 -- | View and manage the settings of a G Suite group
-appsGroupsSettingsScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
-appsGroupsSettingsScope = Core.Proxy
+type Apps'Groups'Settings = "https://www.googleapis.com/auth/apps.groups.settings"

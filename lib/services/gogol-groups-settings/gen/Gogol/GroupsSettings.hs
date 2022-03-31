@@ -34,7 +34,7 @@ module Gogol.GroupsSettings
     groupsSettingsService,
 
     -- * OAuth Scopes
-    appsGroupsSettingsScope,
+    Apps'Groups'Settings,
 
     -- * Resources
 

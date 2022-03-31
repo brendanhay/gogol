@@ -73,7 +73,7 @@ instance Core.GoogleRequest GroupsSettingsGroupsGet where
   type Rs GroupsSettingsGroupsGet = Groups
   type
     Scopes GroupsSettingsGroupsGet =
-      '["https://www.googleapis.com/auth/apps.groups.settings"]
+      '[Apps'Groups'Settings]
   requestClient GroupsSettingsGroupsGet {..} =
     go
       groupUniqueId
