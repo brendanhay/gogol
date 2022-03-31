@@ -100,9 +100,7 @@ instance
   type
     Scopes
       SpannerProjectsInstancesDatabasesOperationsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.admin"
-       ]
+      '[CloudPlatform'FullControl, Spanner'Admin]
   requestClient
     SpannerProjectsInstancesDatabasesOperationsDelete {..} =
       go

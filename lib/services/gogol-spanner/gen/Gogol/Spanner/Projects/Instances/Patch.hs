@@ -104,9 +104,7 @@ instance
   type Rs SpannerProjectsInstancesPatch = Operation
   type
     Scopes SpannerProjectsInstancesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.admin"
-       ]
+      '[CloudPlatform'FullControl, Spanner'Admin]
   requestClient SpannerProjectsInstancesPatch {..} =
     go
       name

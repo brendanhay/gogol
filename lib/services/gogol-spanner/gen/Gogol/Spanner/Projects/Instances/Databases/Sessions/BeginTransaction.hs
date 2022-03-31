@@ -109,9 +109,7 @@ instance
   type
     Scopes
       SpannerProjectsInstancesDatabasesSessionsBeginTransaction =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.data"
-       ]
+      '[CloudPlatform'FullControl, Spanner'Data]
   requestClient
     SpannerProjectsInstancesDatabasesSessionsBeginTransaction {..} =
       go

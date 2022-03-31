@@ -96,9 +96,7 @@ instance
   type Rs SpannerProjectsInstancesBackupsDelete = Empty
   type
     Scopes SpannerProjectsInstancesBackupsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.admin"
-       ]
+      '[CloudPlatform'FullControl, Spanner'Admin]
   requestClient
     SpannerProjectsInstancesBackupsDelete {..} =
       go

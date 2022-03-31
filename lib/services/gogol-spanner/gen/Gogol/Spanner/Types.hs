@@ -30,9 +30,9 @@ module Gogol.Spanner.Types
     spannerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    spannerAdminScope,
-    spannerDataScope,
+    CloudPlatform'FullControl,
+    Spanner'Admin,
+    Spanner'Data,
 
     -- * Types
 
@@ -614,13 +614,10 @@ spannerService =
     "spanner.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Administer your Spanner databases
-spannerAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/spanner.admin"]
-spannerAdminScope = Core.Proxy
+type Spanner'Admin = "https://www.googleapis.com/auth/spanner.admin"
 
 -- | View and manage the contents of your Spanner databases
-spannerDataScope :: Core.Proxy '["https://www.googleapis.com/auth/spanner.data"]
-spannerDataScope = Core.Proxy
+type Spanner'Data = "https://www.googleapis.com/auth/spanner.data"

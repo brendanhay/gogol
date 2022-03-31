@@ -34,9 +34,9 @@ module Gogol.Spanner
     spannerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    spannerAdminScope,
-    spannerDataScope,
+    CloudPlatform'FullControl,
+    Spanner'Admin,
+    Spanner'Data,
 
     -- * Resources
 
