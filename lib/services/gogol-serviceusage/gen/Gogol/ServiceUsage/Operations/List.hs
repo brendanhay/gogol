@@ -109,9 +109,7 @@ instance
       ListOperationsResponse
   type
     Scopes ServiceUsageOperationsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient ServiceUsageOperationsList {..} =
     go
       xgafv

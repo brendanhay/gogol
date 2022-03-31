@@ -95,9 +95,7 @@ instance Core.GoogleRequest ServiceUsageServicesGet where
       GoogleApiServiceusageV1Service
   type
     Scopes ServiceUsageServicesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient ServiceUsageServicesGet {..} =
     go
       name

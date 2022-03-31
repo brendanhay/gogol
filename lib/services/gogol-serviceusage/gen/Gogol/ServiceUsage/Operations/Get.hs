@@ -93,9 +93,7 @@ instance Core.GoogleRequest ServiceUsageOperationsGet where
   type Rs ServiceUsageOperationsGet = Operation
   type
     Scopes ServiceUsageOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient ServiceUsageOperationsGet {..} =
     go
       name

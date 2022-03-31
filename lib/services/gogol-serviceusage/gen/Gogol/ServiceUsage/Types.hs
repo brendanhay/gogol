@@ -30,9 +30,9 @@ module Gogol.ServiceUsage.Types
     serviceUsageService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    serviceManagementScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Service'Management,
 
     -- * Types
 
@@ -484,13 +484,10 @@ serviceUsageService =
     "serviceusage.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Manage your Google API service configuration
-serviceManagementScope :: Core.Proxy '["https://www.googleapis.com/auth/service.management"]
-serviceManagementScope = Core.Proxy
+type Service'Management = "https://www.googleapis.com/auth/service.management"
