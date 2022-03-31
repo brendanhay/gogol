@@ -116,7 +116,7 @@ instance
   type
     Scopes
       ProximityBeaconBeaconsAttachmentsBatchDelete =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient
     ProximityBeaconBeaconsAttachmentsBatchDelete {..} =
       go

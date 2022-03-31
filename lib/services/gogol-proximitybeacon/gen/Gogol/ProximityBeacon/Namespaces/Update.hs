@@ -106,7 +106,7 @@ instance
   type Rs ProximityBeaconNamespacesUpdate = Namespace
   type
     Scopes ProximityBeaconNamespacesUpdate =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient ProximityBeaconNamespacesUpdate {..} =
     go
       namespaceName

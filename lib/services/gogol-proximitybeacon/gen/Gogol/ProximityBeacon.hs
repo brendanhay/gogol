@@ -34,7 +34,7 @@ module Gogol.ProximityBeacon
     proximityBeaconService,
 
     -- * OAuth Scopes
-    userlocationBeaconRegistryScope,
+    Userlocation'Beacon'Registry,
 
     -- * Resources
 

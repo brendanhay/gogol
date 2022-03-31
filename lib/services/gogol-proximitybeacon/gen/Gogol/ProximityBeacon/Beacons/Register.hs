@@ -105,7 +105,7 @@ instance
   type Rs ProximityBeaconBeaconsRegister = Beacon
   type
     Scopes ProximityBeaconBeaconsRegister =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient ProximityBeaconBeaconsRegister {..} =
     go
       xgafv

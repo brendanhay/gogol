@@ -119,7 +119,7 @@ instance
       ListDiagnosticsResponse
   type
     Scopes ProximityBeaconBeaconsDiagnosticsList =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient
     ProximityBeaconBeaconsDiagnosticsList {..} =
       go

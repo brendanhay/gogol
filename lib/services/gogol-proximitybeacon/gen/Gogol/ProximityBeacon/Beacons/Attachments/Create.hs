@@ -117,7 +117,7 @@ instance
       BeaconAttachment
   type
     Scopes ProximityBeaconBeaconsAttachmentsCreate =
-      '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+      '[Userlocation'Beacon'Registry]
   requestClient
     ProximityBeaconBeaconsAttachmentsCreate {..} =
       go
