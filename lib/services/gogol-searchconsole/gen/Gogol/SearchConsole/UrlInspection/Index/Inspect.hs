@@ -100,9 +100,7 @@ instance
       InspectUrlIndexResponse
   type
     Scopes SearchConsoleUrlInspectionIndexInspect =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
+      '[Webmasters'FullControl, Webmasters'Readonly]
   requestClient
     SearchConsoleUrlInspectionIndexInspect {..} =
       go

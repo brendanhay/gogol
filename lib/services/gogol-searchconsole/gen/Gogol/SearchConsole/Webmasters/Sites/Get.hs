@@ -95,9 +95,7 @@ instance Core.GoogleRequest WebmastersSitesGet where
   type Rs WebmastersSitesGet = WmxSite
   type
     Scopes WebmastersSitesGet =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
+      '[Webmasters'FullControl, Webmasters'Readonly]
   requestClient WebmastersSitesGet {..} =
     go
       siteUrl

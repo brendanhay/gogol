@@ -95,7 +95,7 @@ instance Core.GoogleRequest WebmastersSitesDelete where
   type Rs WebmastersSitesDelete = ()
   type
     Scopes WebmastersSitesDelete =
-      '["https://www.googleapis.com/auth/webmasters"]
+      '[Webmasters'FullControl]
   requestClient WebmastersSitesDelete {..} =
     go
       siteUrl

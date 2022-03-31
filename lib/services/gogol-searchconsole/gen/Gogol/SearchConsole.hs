@@ -34,8 +34,8 @@ module Gogol.SearchConsole
     searchConsoleService,
 
     -- * OAuth Scopes
-    webmastersScope,
-    webmastersReadOnlyScope,
+    Webmasters'FullControl,
+    Webmasters'Readonly,
 
     -- * Resources
 

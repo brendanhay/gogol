@@ -100,9 +100,7 @@ instance Core.GoogleRequest WebmastersSitemapsList where
   type Rs WebmastersSitemapsList = SitemapsListResponse
   type
     Scopes WebmastersSitemapsList =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
+      '[Webmasters'FullControl, Webmasters'Readonly]
   requestClient WebmastersSitemapsList {..} =
     go
       siteUrl
