@@ -34,10 +34,10 @@ module Gogol.SourceRepo
     sourceRepoService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    sourceFull_controlScope,
-    sourceRead_OnlyScope,
-    sourceRead_writeScope,
+    CloudPlatform'FullControl,
+    Source'FullControl,
+    Source'ReadOnly,
+    Source'ReadWrite,
 
     -- * Resources
 

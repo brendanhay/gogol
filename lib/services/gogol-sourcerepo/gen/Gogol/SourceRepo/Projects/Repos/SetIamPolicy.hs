@@ -102,9 +102,7 @@ instance
   type Rs SourceRepoProjectsReposSetIamPolicy = Policy
   type
     Scopes SourceRepoProjectsReposSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/source.full_control"
-       ]
+      '[CloudPlatform'FullControl, Source'FullControl]
   requestClient SourceRepoProjectsReposSetIamPolicy {..} =
     go
       resource

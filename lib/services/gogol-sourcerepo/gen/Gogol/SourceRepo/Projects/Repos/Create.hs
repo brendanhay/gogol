@@ -103,9 +103,7 @@ instance
   type Rs SourceRepoProjectsReposCreate = Repo
   type
     Scopes SourceRepoProjectsReposCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/source.full_control"
-       ]
+      '[CloudPlatform'FullControl, Source'FullControl]
   requestClient SourceRepoProjectsReposCreate {..} =
     go
       parent

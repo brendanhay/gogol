@@ -105,7 +105,7 @@ instance
       ProjectConfig
   type
     Scopes SourceRepoProjectsUpdateConfig =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient SourceRepoProjectsUpdateConfig {..} =
     go
       name

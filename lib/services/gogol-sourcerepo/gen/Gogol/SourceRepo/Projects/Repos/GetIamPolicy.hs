@@ -102,10 +102,10 @@ instance
   type Rs SourceRepoProjectsReposGetIamPolicy = Policy
   type
     Scopes SourceRepoProjectsReposGetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/source.full_control",
-         "https://www.googleapis.com/auth/source.read_only",
-         "https://www.googleapis.com/auth/source.read_write"
+      '[ CloudPlatform'FullControl,
+         Source'FullControl,
+         Source'ReadOnly,
+         Source'ReadWrite
        ]
   requestClient SourceRepoProjectsReposGetIamPolicy {..} =
     go

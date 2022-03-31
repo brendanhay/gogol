@@ -107,10 +107,10 @@ instance
       TestIamPermissionsResponse
   type
     Scopes SourceRepoProjectsReposTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/source.full_control",
-         "https://www.googleapis.com/auth/source.read_only",
-         "https://www.googleapis.com/auth/source.read_write"
+      '[ CloudPlatform'FullControl,
+         Source'FullControl,
+         Source'ReadOnly,
+         Source'ReadWrite
        ]
   requestClient
     SourceRepoProjectsReposTestIamPermissions {..} =
