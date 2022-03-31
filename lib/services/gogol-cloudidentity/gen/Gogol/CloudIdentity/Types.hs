@@ -30,12 +30,12 @@ module Gogol.CloudIdentity.Types
     cloudIdentityService,
 
     -- * OAuth Scopes
-    cloudIdentityDevicesScope,
-    cloudIdentityDevicesLookupScope,
-    cloudIdentityDevicesReadOnlyScope,
-    cloudIdentityGroupsScope,
-    cloudIdentityGroupsReadOnlyScope,
-    cloudPlatformScope,
+    CloudIdentity'Devices,
+    CloudIdentity'Devices'Lookup,
+    CloudIdentity'Devices'Readonly,
+    CloudIdentity'Groups,
+    CloudIdentity'Groups'Readonly,
+    CloudPlatform'FullControl,
 
     -- * Types
 
@@ -443,25 +443,19 @@ cloudIdentityService =
     "cloudidentity.googleapis.com"
 
 -- | Private Service: https:\/\/www.googleapis.com\/auth\/cloud-identity.devices
-cloudIdentityDevicesScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-identity.devices"]
-cloudIdentityDevicesScope = Core.Proxy
+type CloudIdentity'Devices = "https://www.googleapis.com/auth/cloud-identity.devices"
 
 -- | See your device details
-cloudIdentityDevicesLookupScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-identity.devices.lookup"]
-cloudIdentityDevicesLookupScope = Core.Proxy
+type CloudIdentity'Devices'Lookup = "https://www.googleapis.com/auth/cloud-identity.devices.lookup"
 
 -- | Private Service: https:\/\/www.googleapis.com\/auth\/cloud-identity.devices.readonly
-cloudIdentityDevicesReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-identity.devices.readonly"]
-cloudIdentityDevicesReadOnlyScope = Core.Proxy
+type CloudIdentity'Devices'Readonly = "https://www.googleapis.com/auth/cloud-identity.devices.readonly"
 
 -- | See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
-cloudIdentityGroupsScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-identity.groups"]
-cloudIdentityGroupsScope = Core.Proxy
+type CloudIdentity'Groups = "https://www.googleapis.com/auth/cloud-identity.groups"
 
 -- | See any Cloud Identity Groups that you can access, including group members and their emails
-cloudIdentityGroupsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
-cloudIdentityGroupsReadOnlyScope = Core.Proxy
+type CloudIdentity'Groups'Readonly = "https://www.googleapis.com/auth/cloud-identity.groups.readonly"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

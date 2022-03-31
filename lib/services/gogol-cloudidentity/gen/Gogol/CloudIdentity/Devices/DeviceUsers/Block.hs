@@ -106,7 +106,7 @@ instance
       Operation
   type
     Scopes CloudIdentityDevicesDeviceUsersBlock =
-      '["https://www.googleapis.com/auth/cloud-identity.devices"]
+      '[CloudIdentity'Devices]
   requestClient
     CloudIdentityDevicesDeviceUsersBlock {..} =
       go

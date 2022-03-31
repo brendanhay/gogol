@@ -103,7 +103,7 @@ instance
   type Rs CloudIdentityDevicesCreate = Operation
   type
     Scopes CloudIdentityDevicesCreate =
-      '["https://www.googleapis.com/auth/cloud-identity.devices"]
+      '[CloudIdentity'Devices]
   requestClient CloudIdentityDevicesCreate {..} =
     go
       xgafv

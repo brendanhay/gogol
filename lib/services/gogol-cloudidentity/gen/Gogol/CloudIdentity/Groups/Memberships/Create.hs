@@ -105,9 +105,7 @@ instance
       Operation
   type
     Scopes CloudIdentityGroupsMembershipsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-identity.groups",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[CloudIdentity'Groups, CloudPlatform'FullControl]
   requestClient
     CloudIdentityGroupsMembershipsCreate {..} =
       go

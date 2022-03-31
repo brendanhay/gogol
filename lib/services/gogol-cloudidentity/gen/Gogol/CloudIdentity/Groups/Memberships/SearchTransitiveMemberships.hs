@@ -111,9 +111,9 @@ instance
   type
     Scopes
       CloudIdentityGroupsMembershipsSearchTransitiveMemberships =
-      '[ "https://www.googleapis.com/auth/cloud-identity.groups",
-         "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudIdentity'Groups,
+         CloudIdentity'Groups'Readonly,
+         CloudPlatform'FullControl
        ]
   requestClient
     CloudIdentityGroupsMembershipsSearchTransitiveMemberships {..} =

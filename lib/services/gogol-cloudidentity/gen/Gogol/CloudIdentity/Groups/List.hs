@@ -104,9 +104,9 @@ instance Core.GoogleRequest CloudIdentityGroupsList where
   type Rs CloudIdentityGroupsList = ListGroupsResponse
   type
     Scopes CloudIdentityGroupsList =
-      '[ "https://www.googleapis.com/auth/cloud-identity.groups",
-         "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudIdentity'Groups,
+         CloudIdentity'Groups'Readonly,
+         CloudPlatform'FullControl
        ]
   requestClient CloudIdentityGroupsList {..} =
     go

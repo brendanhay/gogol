@@ -116,7 +116,7 @@ instance
   type
     Scopes
       CloudIdentityDevicesDeviceUsersClientStatesPatch =
-      '["https://www.googleapis.com/auth/cloud-identity.devices"]
+      '[CloudIdentity'Devices]
   requestClient
     CloudIdentityDevicesDeviceUsersClientStatesPatch {..} =
       go

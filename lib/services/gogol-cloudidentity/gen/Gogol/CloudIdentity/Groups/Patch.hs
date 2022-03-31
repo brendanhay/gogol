@@ -103,9 +103,7 @@ instance Core.GoogleRequest CloudIdentityGroupsPatch where
   type Rs CloudIdentityGroupsPatch = Operation
   type
     Scopes CloudIdentityGroupsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-identity.groups",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[CloudIdentity'Groups, CloudPlatform'FullControl]
   requestClient CloudIdentityGroupsPatch {..} =
     go
       name
