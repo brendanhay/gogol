@@ -110,7 +110,7 @@ instance
       SearchTenancyUnitsResponse
   type
     Scopes ServiceConsumerManagementServicesSearch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ServiceConsumerManagementServicesSearch {..} =
       go

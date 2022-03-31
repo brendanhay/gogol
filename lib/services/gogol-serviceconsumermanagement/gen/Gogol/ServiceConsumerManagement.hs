@@ -34,7 +34,7 @@ module Gogol.ServiceConsumerManagement
     serviceConsumerManagementService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

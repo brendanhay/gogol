@@ -106,7 +106,7 @@ instance
   type
     Scopes
       ServiceConsumerManagementServicesTenancyUnitsDeleteProject =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ServiceConsumerManagementServicesTenancyUnitsDeleteProject {..} =
       go

@@ -106,7 +106,7 @@ instance
   type
     Scopes
       ServiceConsumerManagementServicesTenancyUnitsAttachProject =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ServiceConsumerManagementServicesTenancyUnitsAttachProject {..} =
       go

@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes ServiceConsumerManagementOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ServiceConsumerManagementOperationsGet {..} =
       go
