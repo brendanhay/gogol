@@ -103,7 +103,7 @@ instance Core.GoogleRequest MlProjectsJobsPatch where
   type Rs MlProjectsJobsPatch = GoogleCloudMlV1__Job
   type
     Scopes MlProjectsJobsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsJobsPatch {..} =
     go
       name

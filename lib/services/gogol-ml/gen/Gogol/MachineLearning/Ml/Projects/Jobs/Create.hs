@@ -100,7 +100,7 @@ instance Core.GoogleRequest MlProjectsJobsCreate where
   type Rs MlProjectsJobsCreate = GoogleCloudMlV1__Job
   type
     Scopes MlProjectsJobsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsJobsCreate {..} =
     go
       parent

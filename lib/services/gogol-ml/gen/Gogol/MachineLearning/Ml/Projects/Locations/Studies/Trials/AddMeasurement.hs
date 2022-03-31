@@ -108,7 +108,7 @@ instance
   type
     Scopes
       MlProjectsLocationsStudiesTrialsAddMeasurement =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     MlProjectsLocationsStudiesTrialsAddMeasurement {..} =
       go

@@ -101,7 +101,7 @@ instance Core.GoogleRequest MlProjectsExplain where
   type Rs MlProjectsExplain = GoogleApi__HttpBody
   type
     Scopes MlProjectsExplain =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsExplain {..} =
     go
       name

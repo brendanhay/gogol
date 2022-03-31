@@ -105,7 +105,7 @@ instance
       GoogleLongrunning__Operation
   type
     Scopes MlProjectsModelsVersionsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsModelsVersionsCreate {..} =
     go
       parent

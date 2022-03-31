@@ -113,9 +113,7 @@ instance
       GoogleCloudMlV1__ListVersionsResponse
   type
     Scopes MlProjectsModelsVersionsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient MlProjectsModelsVersionsList {..} =
     go
       parent

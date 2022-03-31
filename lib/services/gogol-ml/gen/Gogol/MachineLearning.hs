@@ -34,8 +34,8 @@ module Gogol.MachineLearning
     machineLearningService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Resources
 

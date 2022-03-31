@@ -106,7 +106,7 @@ instance
       GoogleCloudMlV1__Version
   type
     Scopes MlProjectsModelsVersionsSetDefault =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsModelsVersionsSetDefault {..} =
     go
       name

@@ -98,7 +98,7 @@ instance
       GoogleProtobuf__Empty
   type
     Scopes MlProjectsLocationsOperationsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsLocationsOperationsCancel {..} =
     go
       name

@@ -102,7 +102,7 @@ instance Core.GoogleRequest MlProjectsModelsCreate where
       GoogleCloudMlV1__Model
   type
     Scopes MlProjectsModelsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsModelsCreate {..} =
     go
       parent

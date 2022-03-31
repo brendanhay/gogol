@@ -111,7 +111,7 @@ instance
       GoogleIamV1__TestIamPermissionsResponse
   type
     Scopes MlProjectsJobsTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsJobsTestIamPermissions {..} =
     go
       resource

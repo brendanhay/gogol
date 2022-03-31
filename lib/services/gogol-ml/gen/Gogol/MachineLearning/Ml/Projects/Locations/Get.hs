@@ -95,9 +95,7 @@ instance Core.GoogleRequest MlProjectsLocationsGet where
       GoogleCloudMlV1__Location
   type
     Scopes MlProjectsLocationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient MlProjectsLocationsGet {..} =
     go
       name

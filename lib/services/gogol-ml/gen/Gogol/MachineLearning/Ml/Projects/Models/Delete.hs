@@ -95,7 +95,7 @@ instance Core.GoogleRequest MlProjectsModelsDelete where
       GoogleLongrunning__Operation
   type
     Scopes MlProjectsModelsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsModelsDelete {..} =
     go
       name

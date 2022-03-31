@@ -109,7 +109,7 @@ instance
       GoogleCloudMlV1__Study
   type
     Scopes MlProjectsLocationsStudiesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsLocationsStudiesCreate {..} =
     go
       parent

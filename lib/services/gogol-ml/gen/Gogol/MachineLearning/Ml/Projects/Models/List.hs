@@ -110,9 +110,7 @@ instance Core.GoogleRequest MlProjectsModelsList where
       GoogleCloudMlV1__ListModelsResponse
   type
     Scopes MlProjectsModelsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient MlProjectsModelsList {..} =
     go
       parent
