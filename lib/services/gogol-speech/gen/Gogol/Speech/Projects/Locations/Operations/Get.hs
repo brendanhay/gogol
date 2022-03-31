@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes SpeechProjectsLocationsOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SpeechProjectsLocationsOperationsGet {..} =
       go
