@@ -34,7 +34,7 @@ module Gogol.IAMCredentials
     iAMCredentialsService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
