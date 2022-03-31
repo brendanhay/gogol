@@ -34,7 +34,7 @@ module Gogol.IAP
     iAPService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

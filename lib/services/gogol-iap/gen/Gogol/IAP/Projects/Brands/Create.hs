@@ -100,7 +100,7 @@ instance Core.GoogleRequest IAPProjectsBrandsCreate where
   type Rs IAPProjectsBrandsCreate = Brand
   type
     Scopes IAPProjectsBrandsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAPProjectsBrandsCreate {..} =
     go
       parent

@@ -103,7 +103,7 @@ instance Core.GoogleRequest IAPUpdateIapSettings where
   type Rs IAPUpdateIapSettings = IapSettings
   type
     Scopes IAPUpdateIapSettings =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAPUpdateIapSettings {..} =
     go
       name

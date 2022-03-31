@@ -104,7 +104,7 @@ instance Core.GoogleRequest IAPTestIamPermissions where
       TestIamPermissionsResponse
   type
     Scopes IAPTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAPTestIamPermissions {..} =
     go
       resource

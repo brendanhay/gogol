@@ -93,7 +93,7 @@ instance Core.GoogleRequest IAPProjectsBrandsGet where
   type Rs IAPProjectsBrandsGet = Brand
   type
     Scopes IAPProjectsBrandsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAPProjectsBrandsGet {..} =
     go
       name
