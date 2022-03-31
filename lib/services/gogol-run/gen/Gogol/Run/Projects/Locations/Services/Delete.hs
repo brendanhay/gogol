@@ -106,7 +106,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes RunProjectsLocationsServicesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RunProjectsLocationsServicesDelete {..} =
     go
       name

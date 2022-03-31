@@ -98,7 +98,7 @@ instance
       GoogleProtobufEmpty
   type
     Scopes RunProjectsLocationsOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RunProjectsLocationsOperationsDelete {..} =
       go

@@ -116,7 +116,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes RunProjectsLocationsServicesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RunProjectsLocationsServicesPatch {..} =
     go
       name

@@ -113,7 +113,7 @@ instance
       GoogleCloudRunV2ListServicesResponse
   type
     Scopes RunProjectsLocationsServicesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RunProjectsLocationsServicesList {..} =
     go
       parent
