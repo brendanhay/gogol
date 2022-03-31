@@ -34,7 +34,7 @@ module Gogol.PlayMoviesPartner
     playMoviesPartnerService,
 
     -- * OAuth Scopes
-    playmovies_partnerReadOnlyScope,
+    PlaymoviesPartner'Readonly,
 
     -- * Resources
 

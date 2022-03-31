@@ -126,7 +126,7 @@ instance
   type
     Scopes
       PlayMoviesPartnerAccountsStoreInfosCountryGet =
-      '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+      '[PlaymoviesPartner'Readonly]
   requestClient
     PlayMoviesPartnerAccountsStoreInfosCountryGet {..} =
       go

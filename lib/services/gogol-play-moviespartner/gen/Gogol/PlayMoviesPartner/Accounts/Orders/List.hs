@@ -148,7 +148,7 @@ instance
       ListOrdersResponse
   type
     Scopes PlayMoviesPartnerAccountsOrdersList =
-      '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+      '[PlaymoviesPartner'Readonly]
   requestClient PlayMoviesPartnerAccountsOrdersList {..} =
     go
       accountId

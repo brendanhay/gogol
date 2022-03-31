@@ -152,7 +152,7 @@ instance
       ListAvailsResponse
   type
     Scopes PlayMoviesPartnerAccountsAvailsList =
-      '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+      '[PlaymoviesPartner'Readonly]
   requestClient PlayMoviesPartnerAccountsAvailsList {..} =
     go
       accountId
