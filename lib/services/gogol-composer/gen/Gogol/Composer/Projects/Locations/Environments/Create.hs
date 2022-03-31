@@ -106,7 +106,7 @@ instance
   type
     Scopes
       ComposerProjectsLocationsEnvironmentsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ComposerProjectsLocationsEnvironmentsCreate {..} =
       go

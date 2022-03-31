@@ -34,7 +34,7 @@ module Gogol.Composer
     composerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

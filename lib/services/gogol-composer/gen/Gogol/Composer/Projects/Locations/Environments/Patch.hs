@@ -114,7 +114,7 @@ instance
   type
     Scopes
       ComposerProjectsLocationsEnvironmentsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ComposerProjectsLocationsEnvironmentsPatch {..} =
       go

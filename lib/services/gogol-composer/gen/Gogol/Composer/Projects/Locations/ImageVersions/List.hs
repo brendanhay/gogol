@@ -112,7 +112,7 @@ instance
   type
     Scopes
       ComposerProjectsLocationsImageVersionsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ComposerProjectsLocationsImageVersionsList {..} =
       go

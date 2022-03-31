@@ -107,7 +107,7 @@ instance
       ListEnvironmentsResponse
   type
     Scopes ComposerProjectsLocationsEnvironmentsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ComposerProjectsLocationsEnvironmentsList {..} =
       go
