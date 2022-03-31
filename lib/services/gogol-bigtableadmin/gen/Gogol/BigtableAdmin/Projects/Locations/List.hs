@@ -111,13 +111,13 @@ instance
       ListLocationsResponse
   type
     Scopes BigtableAdminProjectsLocationsList =
-      '[ "https://www.googleapis.com/auth/bigtable.admin",
-         "https://www.googleapis.com/auth/bigtable.admin.cluster",
-         "https://www.googleapis.com/auth/bigtable.admin.instance",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Bigtable'Admin,
+         Bigtable'Admin'Cluster,
+         Bigtable'Admin'Instance,
+         CloudBigtable'Admin,
+         CloudBigtable'Admin'Cluster,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient BigtableAdminProjectsLocationsList {..} =
     go
