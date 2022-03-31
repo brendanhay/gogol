@@ -96,9 +96,7 @@ newAlertCenterAlertsGet alertId =
 
 instance Core.GoogleRequest AlertCenterAlertsGet where
   type Rs AlertCenterAlertsGet = Alert
-  type
-    Scopes AlertCenterAlertsGet =
-      '["https://www.googleapis.com/auth/apps.alerts"]
+  type Scopes AlertCenterAlertsGet = '[Apps'Alerts]
   requestClient AlertCenterAlertsGet {..} =
     go
       alertId

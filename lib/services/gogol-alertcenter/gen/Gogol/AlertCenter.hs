@@ -34,7 +34,7 @@ module Gogol.AlertCenter
     alertCenterService,
 
     -- * OAuth Scopes
-    appsAlertsScope,
+    Apps'Alerts,
 
     -- * Resources
 

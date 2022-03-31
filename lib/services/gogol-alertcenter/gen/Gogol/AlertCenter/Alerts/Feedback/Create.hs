@@ -110,7 +110,7 @@ instance
       AlertFeedback
   type
     Scopes AlertCenterAlertsFeedbackCreate =
-      '["https://www.googleapis.com/auth/apps.alerts"]
+      '[Apps'Alerts]
   requestClient AlertCenterAlertsFeedbackCreate {..} =
     go
       alertId
