@@ -34,7 +34,7 @@ module Gogol.GamesManagement
     gamesManagementService,
 
     -- * OAuth Scopes
-    gamesScope,
+    Games'FullControl,
 
     -- * Resources
 

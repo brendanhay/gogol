@@ -102,7 +102,7 @@ instance
       PlayerScoreResetResponse
   type
     Scopes GamesManagementScoresReset =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesManagementScoresReset {..} =
     go
       leaderboardId
