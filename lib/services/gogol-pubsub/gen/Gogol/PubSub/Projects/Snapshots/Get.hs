@@ -96,9 +96,7 @@ instance
   type Rs PubSubProjectsSnapshotsGet = Snapshot
   type
     Scopes PubSubProjectsSnapshotsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSnapshotsGet {..} =
     go
       snapshot

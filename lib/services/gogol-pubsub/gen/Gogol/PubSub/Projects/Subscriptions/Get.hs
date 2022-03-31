@@ -96,9 +96,7 @@ instance
   type Rs PubSubProjectsSubscriptionsGet = Subscription
   type
     Scopes PubSubProjectsSubscriptionsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSubscriptionsGet {..} =
     go
       subscription

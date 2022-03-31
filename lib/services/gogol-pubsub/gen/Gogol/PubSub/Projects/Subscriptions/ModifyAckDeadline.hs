@@ -108,9 +108,7 @@ instance
   type
     Scopes
       PubSubProjectsSubscriptionsModifyAckDeadline =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient
     PubSubProjectsSubscriptionsModifyAckDeadline {..} =
       go

@@ -102,9 +102,7 @@ instance
   type Rs PubSubProjectsSchemasSetIamPolicy = Policy
   type
     Scopes PubSubProjectsSchemasSetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSchemasSetIamPolicy {..} =
     go
       resource

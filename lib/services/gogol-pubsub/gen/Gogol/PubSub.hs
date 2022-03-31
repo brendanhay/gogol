@@ -34,8 +34,8 @@ module Gogol.PubSub
     pubSubService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    pubSubScope,
+    CloudPlatform'FullControl,
+    Pubsub'FullControl,
 
     -- * Resources
 

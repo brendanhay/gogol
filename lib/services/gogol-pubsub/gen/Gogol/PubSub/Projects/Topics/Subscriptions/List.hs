@@ -107,9 +107,7 @@ instance
       ListTopicSubscriptionsResponse
   type
     Scopes PubSubProjectsTopicsSubscriptionsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient
     PubSubProjectsTopicsSubscriptionsList {..} =
       go

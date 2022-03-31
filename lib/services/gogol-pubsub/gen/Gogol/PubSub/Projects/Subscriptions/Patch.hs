@@ -104,9 +104,7 @@ instance
       Subscription
   type
     Scopes PubSubProjectsSubscriptionsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSubscriptionsPatch {..} =
     go
       name

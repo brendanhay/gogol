@@ -93,9 +93,7 @@ instance Core.GoogleRequest PubSubProjectsTopicsGet where
   type Rs PubSubProjectsTopicsGet = Topic
   type
     Scopes PubSubProjectsTopicsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsTopicsGet {..} =
     go
       topic

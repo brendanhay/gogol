@@ -108,9 +108,7 @@ instance
   type
     Scopes
       PubSubProjectsSubscriptionsModifyPushConfig =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient
     PubSubProjectsSubscriptionsModifyPushConfig {..} =
       go

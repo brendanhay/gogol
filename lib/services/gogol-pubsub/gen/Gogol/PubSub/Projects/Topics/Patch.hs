@@ -99,9 +99,7 @@ instance Core.GoogleRequest PubSubProjectsTopicsPatch where
   type Rs PubSubProjectsTopicsPatch = Topic
   type
     Scopes PubSubProjectsTopicsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsTopicsPatch {..} =
     go
       name

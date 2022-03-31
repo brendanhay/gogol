@@ -97,9 +97,7 @@ instance Core.GoogleRequest PubSubProjectsSchemasGet where
   type Rs PubSubProjectsSchemasGet = Schema
   type
     Scopes PubSubProjectsSchemasGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSchemasGet {..} =
     go
       name

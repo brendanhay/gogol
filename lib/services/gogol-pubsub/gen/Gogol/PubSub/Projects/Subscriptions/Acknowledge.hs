@@ -107,9 +107,7 @@ instance
       Empty
   type
     Scopes PubSubProjectsSubscriptionsAcknowledge =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient
     PubSubProjectsSubscriptionsAcknowledge {..} =
       go

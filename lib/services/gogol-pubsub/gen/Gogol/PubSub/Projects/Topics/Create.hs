@@ -102,9 +102,7 @@ instance
   type Rs PubSubProjectsTopicsCreate = Topic
   type
     Scopes PubSubProjectsTopicsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsTopicsCreate {..} =
     go
       name

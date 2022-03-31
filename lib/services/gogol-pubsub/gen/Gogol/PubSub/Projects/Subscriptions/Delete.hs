@@ -96,9 +96,7 @@ instance
   type Rs PubSubProjectsSubscriptionsDelete = Empty
   type
     Scopes PubSubProjectsSubscriptionsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSubscriptionsDelete {..} =
     go
       subscription
