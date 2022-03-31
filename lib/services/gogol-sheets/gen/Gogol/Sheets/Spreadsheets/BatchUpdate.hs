@@ -110,9 +110,9 @@ instance
       BatchUpdateSpreadsheetResponse
   type
     Scopes SheetsSpreadsheetsBatchUpdate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/spreadsheets"
+      '[ Drive'FullControl,
+         Drive'File,
+         Spreadsheets'FullControl
        ]
   requestClient SheetsSpreadsheetsBatchUpdate {..} =
     go
