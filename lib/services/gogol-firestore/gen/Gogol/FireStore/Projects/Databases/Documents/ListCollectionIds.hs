@@ -109,9 +109,7 @@ instance
   type
     Scopes
       FireStoreProjectsDatabasesDocumentsListCollectionIds =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesDocumentsListCollectionIds {..} =
       go

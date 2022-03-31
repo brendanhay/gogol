@@ -108,9 +108,7 @@ instance
       Empty
   type
     Scopes FireStoreProjectsDatabasesDocumentsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesDocumentsDelete {..} =
       go

@@ -105,9 +105,7 @@ instance
       ListenResponse
   type
     Scopes FireStoreProjectsDatabasesDocumentsListen =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesDocumentsListen {..} =
       go

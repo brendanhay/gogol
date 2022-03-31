@@ -105,9 +105,7 @@ instance
       CommitResponse
   type
     Scopes FireStoreProjectsDatabasesDocumentsCommit =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesDocumentsCommit {..} =
       go
