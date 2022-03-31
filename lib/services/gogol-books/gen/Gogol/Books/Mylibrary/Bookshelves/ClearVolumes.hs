@@ -104,7 +104,7 @@ instance
   type Rs BooksMylibraryBookshelvesClearVolumes = Empty
   type
     Scopes BooksMylibraryBookshelvesClearVolumes =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient
     BooksMylibraryBookshelvesClearVolumes {..} =
       go

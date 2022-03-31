@@ -115,7 +115,7 @@ instance
       DownloadAccesses
   type
     Scopes BooksMyconfigReleaseDownloadAccess =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMyconfigReleaseDownloadAccess {..} =
     go
       (Core.Just cpksver)

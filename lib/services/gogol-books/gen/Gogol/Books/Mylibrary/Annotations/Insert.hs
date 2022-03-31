@@ -115,7 +115,7 @@ instance
   type Rs BooksMylibraryAnnotationsInsert = Annotation
   type
     Scopes BooksMylibraryAnnotationsInsert =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryAnnotationsInsert {..} =
     go
       xgafv

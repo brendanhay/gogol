@@ -102,7 +102,7 @@ instance Core.GoogleRequest BooksFamilysharingUnshare where
   type Rs BooksFamilysharingUnshare = Empty
   type
     Scopes BooksFamilysharingUnshare =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksFamilysharingUnshare {..} =
     go
       xgafv

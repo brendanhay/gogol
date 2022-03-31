@@ -161,9 +161,7 @@ newBooksVolumesList q =
 
 instance Core.GoogleRequest BooksVolumesList where
   type Rs BooksVolumesList = Volumes
-  type
-    Scopes BooksVolumesList =
-      '["https://www.googleapis.com/auth/books"]
+  type Scopes BooksVolumesList = '[Books'FullControl]
   requestClient BooksVolumesList {..} =
     go
       (Core.Just q)

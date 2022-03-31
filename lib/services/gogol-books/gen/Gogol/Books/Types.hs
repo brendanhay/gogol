@@ -30,7 +30,7 @@ module Gogol.Books.Types
     booksService,
 
     -- * OAuth Scopes
-    booksScope,
+    Books'FullControl,
 
     -- * Types
 
@@ -564,5 +564,4 @@ booksService =
     "books.googleapis.com"
 
 -- | Manage your books
-booksScope :: Core.Proxy '["https://www.googleapis.com/auth/books"]
-booksScope = Core.Proxy
+type Books'FullControl = "https://www.googleapis.com/auth/books"

@@ -108,7 +108,7 @@ instance
       AnnotationsSummary
   type
     Scopes BooksMylibraryAnnotationsSummary =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryAnnotationsSummary {..} =
     go
       layerIds

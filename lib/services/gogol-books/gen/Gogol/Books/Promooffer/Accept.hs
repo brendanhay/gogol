@@ -122,7 +122,7 @@ instance Core.GoogleRequest BooksPromoofferAccept where
   type Rs BooksPromoofferAccept = Empty
   type
     Scopes BooksPromoofferAccept =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksPromoofferAccept {..} =
     go
       xgafv

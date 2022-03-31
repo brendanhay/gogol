@@ -110,9 +110,7 @@ newBooksLayersList volumeId =
 
 instance Core.GoogleRequest BooksLayersList where
   type Rs BooksLayersList = Layersummaries
-  type
-    Scopes BooksLayersList =
-      '["https://www.googleapis.com/auth/books"]
+  type Scopes BooksLayersList = '[Books'FullControl]
   requestClient BooksLayersList {..} =
     go
       volumeId

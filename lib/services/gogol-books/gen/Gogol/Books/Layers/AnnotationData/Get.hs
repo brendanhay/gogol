@@ -148,7 +148,7 @@ instance
       DictionaryAnnotationdata
   type
     Scopes BooksLayersAnnotationDataGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksLayersAnnotationDataGet {..} =
     go
       volumeId

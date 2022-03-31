@@ -34,7 +34,7 @@ module Gogol.Books
     booksService,
 
     -- * OAuth Scopes
-    booksScope,
+    Books'FullControl,
 
     -- * Resources
 

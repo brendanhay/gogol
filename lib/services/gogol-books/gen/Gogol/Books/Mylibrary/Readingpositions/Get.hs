@@ -109,7 +109,7 @@ instance
       ReadingPosition
   type
     Scopes BooksMylibraryReadingpositionsGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryReadingpositionsGet {..} =
     go
       volumeId

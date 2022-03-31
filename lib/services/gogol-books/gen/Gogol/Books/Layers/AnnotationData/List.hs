@@ -164,7 +164,7 @@ instance
       Annotationsdata
   type
     Scopes BooksLayersAnnotationDataList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksLayersAnnotationDataList {..} =
     go
       volumeId

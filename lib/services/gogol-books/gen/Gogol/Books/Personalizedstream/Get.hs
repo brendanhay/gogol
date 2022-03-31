@@ -109,7 +109,7 @@ instance
       Discoveryclusters
   type
     Scopes BooksPersonalizedstreamGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksPersonalizedstreamGet {..} =
     go
       xgafv

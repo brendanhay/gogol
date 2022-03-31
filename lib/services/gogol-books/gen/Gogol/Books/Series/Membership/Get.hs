@@ -105,7 +105,7 @@ instance Core.GoogleRequest BooksSeriesMembershipGet where
   type Rs BooksSeriesMembershipGet = Seriesmembership
   type
     Scopes BooksSeriesMembershipGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksSeriesMembershipGet {..} =
     go
       (Core.Just seriesId)

@@ -119,9 +119,7 @@ newBooksVolumesGet volumeId =
 
 instance Core.GoogleRequest BooksVolumesGet where
   type Rs BooksVolumesGet = Volume
-  type
-    Scopes BooksVolumesGet =
-      '["https://www.googleapis.com/auth/books"]
+  type Scopes BooksVolumesGet = '[Books'FullControl]
   requestClient BooksVolumesGet {..} =
     go
       volumeId

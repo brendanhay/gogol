@@ -101,7 +101,7 @@ instance
       BooksCloudloadingResource
   type
     Scopes BooksCloudloadingUpdateBook =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksCloudloadingUpdateBook {..} =
     go
       xgafv

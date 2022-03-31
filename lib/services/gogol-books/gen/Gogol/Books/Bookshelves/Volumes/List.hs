@@ -122,7 +122,7 @@ instance
   type Rs BooksBookshelvesVolumesList = Volumes
   type
     Scopes BooksBookshelvesVolumesList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksBookshelvesVolumesList {..} =
     go
       userId

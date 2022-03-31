@@ -110,7 +110,7 @@ instance Core.GoogleRequest BooksCloudloadingAddBook where
       BooksCloudloadingResource
   type
     Scopes BooksCloudloadingAddBook =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksCloudloadingAddBook {..} =
     go
       xgafv

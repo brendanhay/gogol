@@ -122,7 +122,7 @@ instance
       Volumeannotation
   type
     Scopes BooksLayersVolumeAnnotationsGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksLayersVolumeAnnotationsGet {..} =
     go
       volumeId

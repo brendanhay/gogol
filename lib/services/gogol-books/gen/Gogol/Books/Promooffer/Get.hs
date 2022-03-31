@@ -112,9 +112,7 @@ newBooksPromoofferGet =
 
 instance Core.GoogleRequest BooksPromoofferGet where
   type Rs BooksPromoofferGet = Offers
-  type
-    Scopes BooksPromoofferGet =
-      '["https://www.googleapis.com/auth/books"]
+  type Scopes BooksPromoofferGet = '[Books'FullControl]
   requestClient BooksPromoofferGet {..} =
     go
       xgafv

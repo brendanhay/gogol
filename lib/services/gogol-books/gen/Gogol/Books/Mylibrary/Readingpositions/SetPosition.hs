@@ -132,7 +132,7 @@ instance
       Empty
   type
     Scopes BooksMylibraryReadingpositionsSetPosition =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient
     BooksMylibraryReadingpositionsSetPosition {..} =
       go

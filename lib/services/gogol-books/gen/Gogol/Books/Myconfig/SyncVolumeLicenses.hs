@@ -133,7 +133,7 @@ instance
   type Rs BooksMyconfigSyncVolumeLicenses = Volumes
   type
     Scopes BooksMyconfigSyncVolumeLicenses =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMyconfigSyncVolumeLicenses {..} =
     go
       (Core.Just cpksver)

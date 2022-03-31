@@ -118,7 +118,7 @@ instance Core.GoogleRequest BooksPromoofferDismiss where
   type Rs BooksPromoofferDismiss = Empty
   type
     Scopes BooksPromoofferDismiss =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksPromoofferDismiss {..} =
     go
       xgafv

@@ -134,7 +134,7 @@ instance
       Volumes
   type
     Scopes BooksMylibraryBookshelvesVolumesList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient
     BooksMylibraryBookshelvesVolumesList {..} =
       go

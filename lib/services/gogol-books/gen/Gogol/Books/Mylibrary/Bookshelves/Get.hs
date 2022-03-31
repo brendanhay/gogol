@@ -103,7 +103,7 @@ instance
   type Rs BooksMylibraryBookshelvesGet = Bookshelf
   type
     Scopes BooksMylibraryBookshelvesGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryBookshelvesGet {..} =
     go
       shelf

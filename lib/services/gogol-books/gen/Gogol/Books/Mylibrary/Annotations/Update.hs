@@ -109,7 +109,7 @@ instance
   type Rs BooksMylibraryAnnotationsUpdate = Annotation
   type
     Scopes BooksMylibraryAnnotationsUpdate =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryAnnotationsUpdate {..} =
     go
       annotationId

@@ -101,7 +101,7 @@ instance
       Usersettings
   type
     Scopes BooksMyconfigUpdateUserSettings =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMyconfigUpdateUserSettings {..} =
     go
       xgafv
