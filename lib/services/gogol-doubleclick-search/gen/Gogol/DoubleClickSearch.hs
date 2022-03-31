@@ -34,7 +34,7 @@ module Gogol.DoubleClickSearch
     doubleClickSearchService,
 
     -- * OAuth Scopes
-    doubleClickSearchScope,
+    Doubleclicksearch'FullControl,
 
     -- * Resources
 

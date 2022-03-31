@@ -102,7 +102,7 @@ instance
   type
     Scopes
       DoubleClickSearchConversionUpdateAvailability =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient
     DoubleClickSearchConversionUpdateAvailability {..} =
       go

@@ -98,7 +98,7 @@ instance
   type Rs DoubleClickSearchReportsRequest = Report
   type
     Scopes DoubleClickSearchReportsRequest =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient DoubleClickSearchReportsRequest {..} =
     go
       xgafv

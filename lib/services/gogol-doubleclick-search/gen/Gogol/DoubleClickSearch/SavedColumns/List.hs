@@ -108,7 +108,7 @@ instance
       SavedColumnList
   type
     Scopes DoubleClickSearchSavedColumnsList =
-      '["https://www.googleapis.com/auth/doubleclicksearch"]
+      '[Doubleclicksearch'FullControl]
   requestClient DoubleClickSearchSavedColumnsList {..} =
     go
       agencyId
