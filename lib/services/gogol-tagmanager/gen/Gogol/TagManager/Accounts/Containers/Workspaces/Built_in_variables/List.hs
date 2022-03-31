@@ -108,9 +108,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersWorkspacesBuilt_in_variablesList =
-      '[ "https://www.googleapis.com/auth/tagmanager.edit.containers",
-         "https://www.googleapis.com/auth/tagmanager.readonly"
-       ]
+      '[Tagmanager'Edit'Containers, Tagmanager'Readonly]
   requestClient
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesList {..} =
       go

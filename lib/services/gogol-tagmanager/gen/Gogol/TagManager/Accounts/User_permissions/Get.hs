@@ -99,7 +99,7 @@ instance
       UserPermission
   type
     Scopes TagManagerAccountsUser_permissionsGet =
-      '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+      '[Tagmanager'Manage'Users]
   requestClient
     TagManagerAccountsUser_permissionsGet {..} =
       go

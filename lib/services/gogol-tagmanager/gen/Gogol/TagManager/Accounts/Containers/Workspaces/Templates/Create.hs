@@ -108,7 +108,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersWorkspacesTemplatesCreate =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+      '[Tagmanager'Edit'Containers]
   requestClient
     TagManagerAccountsContainersWorkspacesTemplatesCreate {..} =
       go

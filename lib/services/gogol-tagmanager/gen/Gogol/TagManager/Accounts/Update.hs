@@ -104,7 +104,7 @@ instance Core.GoogleRequest TagManagerAccountsUpdate where
   type Rs TagManagerAccountsUpdate = Account
   type
     Scopes TagManagerAccountsUpdate =
-      '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
+      '[Tagmanager'Manage'Accounts]
   requestClient TagManagerAccountsUpdate {..} =
     go
       path

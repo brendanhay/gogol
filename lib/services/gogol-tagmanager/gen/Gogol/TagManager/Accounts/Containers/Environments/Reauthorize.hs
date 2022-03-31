@@ -107,7 +107,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersEnvironmentsReauthorize =
-      '["https://www.googleapis.com/auth/tagmanager.publish"]
+      '[Tagmanager'Publish]
   requestClient
     TagManagerAccountsContainersEnvironmentsReauthorize {..} =
       go

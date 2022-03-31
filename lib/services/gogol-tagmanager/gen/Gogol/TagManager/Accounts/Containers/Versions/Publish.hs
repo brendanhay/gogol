@@ -106,7 +106,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersVersionsPublish =
-      '["https://www.googleapis.com/auth/tagmanager.publish"]
+      '[Tagmanager'Publish]
   requestClient
     TagManagerAccountsContainersVersionsPublish {..} =
       go

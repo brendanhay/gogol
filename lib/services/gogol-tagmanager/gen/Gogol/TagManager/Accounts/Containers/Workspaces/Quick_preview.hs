@@ -101,7 +101,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersWorkspacesQuick_preview =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
+      '[Tagmanager'Edit'Containerversions]
   requestClient
     TagManagerAccountsContainersWorkspacesQuick_preview {..} =
       go

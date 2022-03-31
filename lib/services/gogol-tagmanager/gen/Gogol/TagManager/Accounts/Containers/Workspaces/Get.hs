@@ -99,9 +99,7 @@ instance
       Workspace
   type
     Scopes TagManagerAccountsContainersWorkspacesGet =
-      '[ "https://www.googleapis.com/auth/tagmanager.edit.containers",
-         "https://www.googleapis.com/auth/tagmanager.readonly"
-       ]
+      '[Tagmanager'Edit'Containers, Tagmanager'Readonly]
   requestClient
     TagManagerAccountsContainersWorkspacesGet {..} =
       go

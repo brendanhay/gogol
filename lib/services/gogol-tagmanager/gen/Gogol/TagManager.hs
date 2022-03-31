@@ -34,13 +34,13 @@ module Gogol.TagManager
     tagManagerService,
 
     -- * OAuth Scopes
-    tagManagerDeleteContainersScope,
-    tagManagerEditContainersScope,
-    tagManagerEditContainerversionsScope,
-    tagManagerManageAccountsScope,
-    tagManagerManageUsersScope,
-    tagManagerPublishScope,
-    tagManagerReadOnlyScope,
+    Tagmanager'Delete'Containers,
+    Tagmanager'Edit'Containers,
+    Tagmanager'Edit'Containerversions,
+    Tagmanager'Manage'Accounts,
+    Tagmanager'Manage'Users,
+    Tagmanager'Publish,
+    Tagmanager'Readonly,
 
     -- * Resources
 

@@ -97,7 +97,7 @@ instance
   type Rs TagManagerAccountsUser_permissionsDelete = ()
   type
     Scopes TagManagerAccountsUser_permissionsDelete =
-      '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+      '[Tagmanager'Manage'Users]
   requestClient
     TagManagerAccountsUser_permissionsDelete {..} =
       go

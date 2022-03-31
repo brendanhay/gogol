@@ -101,7 +101,7 @@ instance
   type
     Scopes
       TagManagerAccountsContainersEnvironmentsDelete =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+      '[Tagmanager'Edit'Containers]
   requestClient
     TagManagerAccountsContainersEnvironmentsDelete {..} =
       go

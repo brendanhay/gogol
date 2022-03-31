@@ -106,7 +106,7 @@ instance
       Container
   type
     Scopes TagManagerAccountsContainersCreate =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+      '[Tagmanager'Edit'Containers]
   requestClient TagManagerAccountsContainersCreate {..} =
     go
       parent

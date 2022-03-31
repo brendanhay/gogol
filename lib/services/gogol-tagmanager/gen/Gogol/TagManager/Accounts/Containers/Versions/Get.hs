@@ -103,9 +103,9 @@ instance
       ContainerVersion
   type
     Scopes TagManagerAccountsContainersVersionsGet =
-      '[ "https://www.googleapis.com/auth/tagmanager.edit.containers",
-         "https://www.googleapis.com/auth/tagmanager.edit.containerversions",
-         "https://www.googleapis.com/auth/tagmanager.readonly"
+      '[ Tagmanager'Edit'Containers,
+         Tagmanager'Edit'Containerversions,
+         Tagmanager'Readonly
        ]
   requestClient
     TagManagerAccountsContainersVersionsGet {..} =
