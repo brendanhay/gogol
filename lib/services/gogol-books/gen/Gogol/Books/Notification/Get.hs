@@ -104,7 +104,7 @@ instance Core.GoogleRequest BooksNotificationGet where
   type Rs BooksNotificationGet = Notification
   type
     Scopes BooksNotificationGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksNotificationGet {..} =
     go
       (Core.Just notificationId)

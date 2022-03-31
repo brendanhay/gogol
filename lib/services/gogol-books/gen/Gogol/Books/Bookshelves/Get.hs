@@ -106,7 +106,7 @@ instance Core.GoogleRequest BooksBookshelvesGet where
   type Rs BooksBookshelvesGet = Bookshelf
   type
     Scopes BooksBookshelvesGet =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksBookshelvesGet {..} =
     go
       userId

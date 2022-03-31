@@ -97,7 +97,7 @@ instance
   type Rs BooksFamilysharingGetFamilyInfo = FamilyInfo
   type
     Scopes BooksFamilysharingGetFamilyInfo =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksFamilysharingGetFamilyInfo {..} =
     go
       xgafv

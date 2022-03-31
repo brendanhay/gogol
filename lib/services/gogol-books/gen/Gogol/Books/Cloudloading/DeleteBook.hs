@@ -99,7 +99,7 @@ instance
   type Rs BooksCloudloadingDeleteBook = Empty
   type
     Scopes BooksCloudloadingDeleteBook =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksCloudloadingDeleteBook {..} =
     go
       (Core.Just volumeId)

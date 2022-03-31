@@ -119,7 +119,7 @@ instance
   type Rs BooksVolumesUseruploadedList = Volumes
   type
     Scopes BooksVolumesUseruploadedList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksVolumesUseruploadedList {..} =
     go
       xgafv

@@ -129,7 +129,7 @@ instance
       RequestAccessData
   type
     Scopes BooksMyconfigRequestAccess =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMyconfigRequestAccess {..} =
     go
       (Core.Just cpksver)

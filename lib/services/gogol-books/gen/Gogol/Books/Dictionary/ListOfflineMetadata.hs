@@ -99,7 +99,7 @@ instance
   type Rs BooksDictionaryListOfflineMetadata = Metadata
   type
     Scopes BooksDictionaryListOfflineMetadata =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksDictionaryListOfflineMetadata {..} =
     go
       (Core.Just cpksver)

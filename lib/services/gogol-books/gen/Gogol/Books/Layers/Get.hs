@@ -108,9 +108,7 @@ newBooksLayersGet summaryId volumeId =
 
 instance Core.GoogleRequest BooksLayersGet where
   type Rs BooksLayersGet = Layersummary
-  type
-    Scopes BooksLayersGet =
-      '["https://www.googleapis.com/auth/books"]
+  type Scopes BooksLayersGet = '[Books'FullControl]
   requestClient BooksLayersGet {..} =
     go
       volumeId

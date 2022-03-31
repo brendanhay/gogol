@@ -103,7 +103,7 @@ instance
   type Rs BooksMylibraryAnnotationsDelete = Empty
   type
     Scopes BooksMylibraryAnnotationsDelete =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryAnnotationsDelete {..} =
     go
       annotationId

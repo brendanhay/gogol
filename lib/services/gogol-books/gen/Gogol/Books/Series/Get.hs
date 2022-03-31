@@ -94,9 +94,7 @@ newBooksSeriesGet seriesId =
 
 instance Core.GoogleRequest BooksSeriesGet where
   type Rs BooksSeriesGet = Series
-  type
-    Scopes BooksSeriesGet =
-      '["https://www.googleapis.com/auth/books"]
+  type Scopes BooksSeriesGet = '[Books'FullControl]
   requestClient BooksSeriesGet {..} =
     go
       seriesId

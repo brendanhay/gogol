@@ -107,7 +107,7 @@ instance
   type Rs BooksVolumesRecommendedList = Volumes
   type
     Scopes BooksVolumesRecommendedList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksVolumesRecommendedList {..} =
     go
       xgafv

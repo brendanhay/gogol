@@ -135,7 +135,7 @@ instance
   type Rs BooksMylibraryAnnotationsList = Annotations
   type
     Scopes BooksMylibraryAnnotationsList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryAnnotationsList {..} =
     go
       xgafv

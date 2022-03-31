@@ -122,7 +122,7 @@ instance Core.GoogleRequest BooksVolumesMybooksList where
   type Rs BooksVolumesMybooksList = Volumes
   type
     Scopes BooksVolumesMybooksList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksVolumesMybooksList {..} =
     go
       xgafv

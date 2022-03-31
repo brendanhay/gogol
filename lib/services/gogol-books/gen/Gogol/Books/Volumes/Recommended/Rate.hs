@@ -118,7 +118,7 @@ instance
       BooksVolumesRecommendedRateResponse
   type
     Scopes BooksVolumesRecommendedRate =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksVolumesRecommendedRate {..} =
     go
       (Core.Just rating)

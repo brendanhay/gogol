@@ -97,7 +97,7 @@ instance
   type Rs BooksMylibraryBookshelvesList = Bookshelves
   type
     Scopes BooksMylibraryBookshelvesList =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksMylibraryBookshelvesList {..} =
     go
       xgafv

@@ -115,7 +115,7 @@ instance
   type Rs BooksOnboardingListCategoryVolumes = Volume2
   type
     Scopes BooksOnboardingListCategoryVolumes =
-      '["https://www.googleapis.com/auth/books"]
+      '[Books'FullControl]
   requestClient BooksOnboardingListCategoryVolumes {..} =
     go
       xgafv
