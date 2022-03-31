@@ -95,7 +95,7 @@ instance
       AchievementResetAllResponse
   type
     Scopes GamesManagementAchievementsResetAll =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesManagementAchievementsResetAll {..} =
     go
       xgafv

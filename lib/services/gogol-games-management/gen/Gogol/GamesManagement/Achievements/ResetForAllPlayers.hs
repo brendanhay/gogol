@@ -102,7 +102,7 @@ instance
   type
     Scopes
       GamesManagementAchievementsResetForAllPlayers =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient
     GamesManagementAchievementsResetForAllPlayers {..} =
       go

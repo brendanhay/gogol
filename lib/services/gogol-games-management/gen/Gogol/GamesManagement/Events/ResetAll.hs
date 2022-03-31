@@ -93,7 +93,7 @@ instance
   type Rs GamesManagementEventsResetAll = ()
   type
     Scopes GamesManagementEventsResetAll =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesManagementEventsResetAll {..} =
     go
       xgafv

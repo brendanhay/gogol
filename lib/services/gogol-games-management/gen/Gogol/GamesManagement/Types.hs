@@ -30,7 +30,7 @@ module Gogol.GamesManagement.Types
     gamesManagementService,
 
     -- * OAuth Scopes
-    gamesScope,
+    Games'FullControl,
 
     -- * Types
 
@@ -107,5 +107,4 @@ gamesManagementService =
     "gamesmanagement.googleapis.com"
 
 -- | Create, edit, and delete your Google Play Games activity
-gamesScope :: Core.Proxy '["https://www.googleapis.com/auth/games"]
-gamesScope = Core.Proxy
+type Games'FullControl = "https://www.googleapis.com/auth/games"

@@ -106,7 +106,7 @@ instance
   type Rs GamesManagementPlayersUnhide = ()
   type
     Scopes GamesManagementPlayersUnhide =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesManagementPlayersUnhide {..} =
     go
       applicationId

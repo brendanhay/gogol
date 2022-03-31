@@ -95,7 +95,7 @@ instance
       PlayerScoreResetAllResponse
   type
     Scopes GamesManagementScoresResetAll =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesManagementScoresResetAll {..} =
     go
       xgafv

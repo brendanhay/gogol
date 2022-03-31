@@ -100,7 +100,7 @@ instance
   type Rs GamesManagementScoresResetForAllPlayers = ()
   type
     Scopes GamesManagementScoresResetForAllPlayers =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient
     GamesManagementScoresResetForAllPlayers {..} =
       go

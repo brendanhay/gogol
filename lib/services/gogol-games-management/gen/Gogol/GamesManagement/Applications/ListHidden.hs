@@ -110,7 +110,7 @@ instance
       HiddenPlayerList
   type
     Scopes GamesManagementApplicationsListHidden =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient
     GamesManagementApplicationsListHidden {..} =
       go

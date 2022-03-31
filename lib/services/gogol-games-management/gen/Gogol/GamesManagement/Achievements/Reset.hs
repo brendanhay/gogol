@@ -101,7 +101,7 @@ instance
       AchievementResetResponse
   type
     Scopes GamesManagementAchievementsReset =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesManagementAchievementsReset {..} =
     go
       achievementId
