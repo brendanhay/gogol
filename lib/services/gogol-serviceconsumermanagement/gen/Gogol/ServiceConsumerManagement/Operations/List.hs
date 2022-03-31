@@ -110,7 +110,7 @@ instance
       ListOperationsResponse
   type
     Scopes ServiceConsumerManagementOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ServiceConsumerManagementOperationsList {..} =
       go

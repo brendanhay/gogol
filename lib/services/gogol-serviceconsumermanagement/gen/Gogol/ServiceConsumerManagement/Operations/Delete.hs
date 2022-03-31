@@ -98,7 +98,7 @@ instance
       Empty
   type
     Scopes ServiceConsumerManagementOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ServiceConsumerManagementOperationsDelete {..} =
       go
