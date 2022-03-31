@@ -96,7 +96,7 @@ instance Core.GoogleRequest GamesRevisionsCheck where
   type Rs GamesRevisionsCheck = RevisionCheckResponse
   type
     Scopes GamesRevisionsCheck =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesRevisionsCheck {..} =
     go
       (Core.Just clientRevision)

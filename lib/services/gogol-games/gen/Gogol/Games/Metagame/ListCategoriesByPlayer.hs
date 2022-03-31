@@ -121,7 +121,7 @@ instance
       CategoryListResponse
   type
     Scopes GamesMetagameListCategoriesByPlayer =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesMetagameListCategoriesByPlayer {..} =
     go
       playerId

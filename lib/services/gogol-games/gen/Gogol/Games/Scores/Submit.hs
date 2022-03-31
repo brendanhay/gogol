@@ -108,9 +108,7 @@ newGamesScoresSubmit leaderboardId score =
 
 instance Core.GoogleRequest GamesScoresSubmit where
   type Rs GamesScoresSubmit = PlayerScoreResponse
-  type
-    Scopes GamesScoresSubmit =
-      '["https://www.googleapis.com/auth/games"]
+  type Scopes GamesScoresSubmit = '[Games'FullControl]
   requestClient GamesScoresSubmit {..} =
     go
       leaderboardId

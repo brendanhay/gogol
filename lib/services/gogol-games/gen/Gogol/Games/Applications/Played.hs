@@ -90,7 +90,7 @@ instance Core.GoogleRequest GamesApplicationsPlayed where
   type Rs GamesApplicationsPlayed = ()
   type
     Scopes GamesApplicationsPlayed =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesApplicationsPlayed {..} =
     go
       xgafv

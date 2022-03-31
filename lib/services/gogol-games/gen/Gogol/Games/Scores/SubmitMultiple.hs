@@ -102,7 +102,7 @@ instance Core.GoogleRequest GamesScoresSubmitMultiple where
       PlayerScoreListResponse
   type
     Scopes GamesScoresSubmitMultiple =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesScoresSubmitMultiple {..} =
     go
       xgafv

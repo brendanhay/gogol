@@ -97,9 +97,7 @@ newGamesEventsRecord payload =
 
 instance Core.GoogleRequest GamesEventsRecord where
   type Rs GamesEventsRecord = EventUpdateResponse
-  type
-    Scopes GamesEventsRecord =
-      '["https://www.googleapis.com/auth/games"]
+  type Scopes GamesEventsRecord = '[Games'FullControl]
   requestClient GamesEventsRecord {..} =
     go
       xgafv

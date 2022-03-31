@@ -97,9 +97,7 @@ newGamesPlayersGet playerId =
 
 instance Core.GoogleRequest GamesPlayersGet where
   type Rs GamesPlayersGet = Player
-  type
-    Scopes GamesPlayersGet =
-      '["https://www.googleapis.com/auth/games"]
+  type Scopes GamesPlayersGet = '[Games'FullControl]
   requestClient GamesPlayersGet {..} =
     go
       playerId

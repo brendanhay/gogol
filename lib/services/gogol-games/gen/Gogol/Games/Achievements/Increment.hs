@@ -113,7 +113,7 @@ instance
       AchievementIncrementResponse
   type
     Scopes GamesAchievementsIncrement =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesAchievementsIncrement {..} =
     go
       achievementId

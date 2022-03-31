@@ -103,7 +103,7 @@ instance Core.GoogleRequest GamesEventsListByPlayer where
       PlayerEventListResponse
   type
     Scopes GamesEventsListByPlayer =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesEventsListByPlayer {..} =
     go
       xgafv

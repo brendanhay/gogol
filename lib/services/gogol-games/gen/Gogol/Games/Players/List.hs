@@ -107,9 +107,7 @@ newGamesPlayersList collection =
 
 instance Core.GoogleRequest GamesPlayersList where
   type Rs GamesPlayersList = PlayerListResponse
-  type
-    Scopes GamesPlayersList =
-      '["https://www.googleapis.com/auth/games"]
+  type Scopes GamesPlayersList = '[Games'FullControl]
   requestClient GamesPlayersList {..} =
     go
       collection

@@ -118,9 +118,7 @@ newGamesScoresList collection leaderboardId timeSpan =
 
 instance Core.GoogleRequest GamesScoresList where
   type Rs GamesScoresList = LeaderboardScores
-  type
-    Scopes GamesScoresList =
-      '["https://www.googleapis.com/auth/games"]
+  type Scopes GamesScoresList = '[Games'FullControl]
   requestClient GamesScoresList {..} =
     go
       leaderboardId

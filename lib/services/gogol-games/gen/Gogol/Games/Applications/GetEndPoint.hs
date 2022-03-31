@@ -103,7 +103,7 @@ instance
   type Rs GamesApplicationsGetEndPoint = EndPoint
   type
     Scopes GamesApplicationsGetEndPoint =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesApplicationsGetEndPoint {..} =
     go
       xgafv

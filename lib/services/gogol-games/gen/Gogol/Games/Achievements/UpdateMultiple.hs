@@ -105,7 +105,7 @@ instance
       AchievementUpdateMultipleResponse
   type
     Scopes GamesAchievementsUpdateMultiple =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesAchievementsUpdateMultiple {..} =
     go
       xgafv

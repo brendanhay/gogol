@@ -116,7 +116,7 @@ instance Core.GoogleRequest GamesAchievementsList where
       PlayerAchievementListResponse
   type
     Scopes GamesAchievementsList =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesAchievementsList {..} =
     go
       playerId

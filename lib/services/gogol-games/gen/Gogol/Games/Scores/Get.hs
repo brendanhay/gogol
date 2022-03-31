@@ -129,9 +129,7 @@ instance Core.GoogleRequest GamesScoresGet where
   type
     Rs GamesScoresGet =
       PlayerLeaderboardScoreListResponse
-  type
-    Scopes GamesScoresGet =
-      '["https://www.googleapis.com/auth/games"]
+  type Scopes GamesScoresGet = '[Games'FullControl]
   requestClient GamesScoresGet {..} =
     go
       playerId

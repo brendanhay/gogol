@@ -106,7 +106,7 @@ instance
       EventDefinitionListResponse
   type
     Scopes GamesEventsListDefinitions =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesEventsListDefinitions {..} =
     go
       xgafv
