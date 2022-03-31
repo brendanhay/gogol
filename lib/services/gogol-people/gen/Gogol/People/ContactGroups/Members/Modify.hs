@@ -109,7 +109,7 @@ instance
       ModifyContactGroupMembersResponse
   type
     Scopes PeopleContactGroupsMembersModify =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeopleContactGroupsMembersModify {..} =
     go
       resourceName

@@ -97,7 +97,7 @@ instance
   type Rs PeoplePeopleBatchDeleteContacts = Empty
   type
     Scopes PeoplePeopleBatchDeleteContacts =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeoplePeopleBatchDeleteContacts {..} =
     go
       xgafv

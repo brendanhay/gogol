@@ -94,7 +94,7 @@ instance Core.GoogleRequest PeopleContactGroupsCreate where
   type Rs PeopleContactGroupsCreate = ContactGroup
   type
     Scopes PeopleContactGroupsCreate =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeopleContactGroupsCreate {..} =
     go
       xgafv

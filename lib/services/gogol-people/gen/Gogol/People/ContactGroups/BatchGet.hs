@@ -105,9 +105,7 @@ instance
       BatchGetContactGroupsResponse
   type
     Scopes PeopleContactGroupsBatchGet =
-      '[ "https://www.googleapis.com/auth/contacts",
-         "https://www.googleapis.com/auth/contacts.readonly"
-       ]
+      '[Contacts'FullControl, Contacts'Readonly]
   requestClient PeopleContactGroupsBatchGet {..} =
     go
       xgafv

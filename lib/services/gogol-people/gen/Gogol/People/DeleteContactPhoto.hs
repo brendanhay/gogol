@@ -111,7 +111,7 @@ instance
       DeleteContactPhotoResponse
   type
     Scopes PeoplePeopleDeleteContactPhoto =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeoplePeopleDeleteContactPhoto {..} =
     go
       resourceName

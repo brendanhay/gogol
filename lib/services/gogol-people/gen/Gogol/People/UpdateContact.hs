@@ -116,7 +116,7 @@ instance Core.GoogleRequest PeoplePeopleUpdateContact where
   type Rs PeoplePeopleUpdateContact = Person
   type
     Scopes PeoplePeopleUpdateContact =
-      '["https://www.googleapis.com/auth/contacts"]
+      '[Contacts'FullControl]
   requestClient PeoplePeopleUpdateContact {..} =
     go
       resourceName

@@ -30,18 +30,18 @@ module Gogol.People.Types
     peopleService,
 
     -- * OAuth Scopes
-    contactsScope,
-    contactsOtherReadOnlyScope,
-    contactsReadOnlyScope,
-    directoryReadOnlyScope,
-    userAddressesReadScope,
-    userBirthdayReadScope,
-    userEmailsReadScope,
-    userGenderReadScope,
-    userOrganizationReadScope,
-    userPhoneNumbersReadScope,
-    userinfoEmailScope,
-    userinfoProfileScope,
+    Contacts'FullControl,
+    Contacts'Other'Readonly,
+    Contacts'Readonly,
+    Directory'Readonly,
+    User'Addresses'Read,
+    User'Birthday'Read,
+    User'Emails'Read,
+    User'Gender'Read,
+    User'Organization'Read,
+    User'Phonenumbers'Read,
+    Userinfo'Email,
+    Userinfo'Profile,
 
     -- * Types
 
@@ -443,49 +443,37 @@ peopleService =
     "people.googleapis.com"
 
 -- | See, edit, download, and permanently delete your contacts
-contactsScope :: Core.Proxy '["https://www.googleapis.com/auth/contacts"]
-contactsScope = Core.Proxy
+type Contacts'FullControl = "https://www.googleapis.com/auth/contacts"
 
 -- | See and download contact info automatically saved in your \"Other contacts\"
-contactsOtherReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/contacts.other.readonly"]
-contactsOtherReadOnlyScope = Core.Proxy
+type Contacts'Other'Readonly = "https://www.googleapis.com/auth/contacts.other.readonly"
 
 -- | See and download your contacts
-contactsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/contacts.readonly"]
-contactsReadOnlyScope = Core.Proxy
+type Contacts'Readonly = "https://www.googleapis.com/auth/contacts.readonly"
 
 -- | See and download your organization\'s GSuite directory
-directoryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/directory.readonly"]
-directoryReadOnlyScope = Core.Proxy
+type Directory'Readonly = "https://www.googleapis.com/auth/directory.readonly"
 
 -- | View your street addresses
-userAddressesReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.addresses.read"]
-userAddressesReadScope = Core.Proxy
+type User'Addresses'Read = "https://www.googleapis.com/auth/user.addresses.read"
 
 -- | See and download your exact date of birth
-userBirthdayReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.birthday.read"]
-userBirthdayReadScope = Core.Proxy
+type User'Birthday'Read = "https://www.googleapis.com/auth/user.birthday.read"
 
 -- | See and download all of your Google Account email addresses
-userEmailsReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.emails.read"]
-userEmailsReadScope = Core.Proxy
+type User'Emails'Read = "https://www.googleapis.com/auth/user.emails.read"
 
 -- | See your gender
-userGenderReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.gender.read"]
-userGenderReadScope = Core.Proxy
+type User'Gender'Read = "https://www.googleapis.com/auth/user.gender.read"
 
 -- | See your education, work history and org info
-userOrganizationReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.organization.read"]
-userOrganizationReadScope = Core.Proxy
+type User'Organization'Read = "https://www.googleapis.com/auth/user.organization.read"
 
 -- | See and download your personal phone numbers
-userPhoneNumbersReadScope :: Core.Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]
-userPhoneNumbersReadScope = Core.Proxy
+type User'Phonenumbers'Read = "https://www.googleapis.com/auth/user.phonenumbers.read"
 
 -- | See your primary Google Account email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
 
 -- | See your personal info, including any personal info you\'ve made publicly available
-userinfoProfileScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userinfoProfileScope = Core.Proxy
+type Userinfo'Profile = "https://www.googleapis.com/auth/userinfo.profile"
