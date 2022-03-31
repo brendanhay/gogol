@@ -116,8 +116,8 @@ instance Core.GoogleRequest CloudIdentityDevicesList where
       GoogleAppsCloudidentityDevicesV1ListDevicesResponse
   type
     Scopes CloudIdentityDevicesList =
-      '[ "https://www.googleapis.com/auth/cloud-identity.devices",
-         "https://www.googleapis.com/auth/cloud-identity.devices.readonly"
+      '[ CloudIdentity'Devices,
+         CloudIdentity'Devices'Readonly
        ]
   requestClient CloudIdentityDevicesList {..} =
     go

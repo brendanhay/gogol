@@ -120,7 +120,7 @@ instance
       GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
   type
     Scopes CloudIdentityDevicesDeviceUsersLookup =
-      '["https://www.googleapis.com/auth/cloud-identity.devices.lookup"]
+      '[CloudIdentity'Devices'Lookup]
   requestClient
     CloudIdentityDevicesDeviceUsersLookup {..} =
       go

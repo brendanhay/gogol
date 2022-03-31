@@ -106,7 +106,7 @@ instance
       Operation
   type
     Scopes CloudIdentityDevicesDeviceUsersCancelWipe =
-      '["https://www.googleapis.com/auth/cloud-identity.devices"]
+      '[CloudIdentity'Devices]
   requestClient
     CloudIdentityDevicesDeviceUsersCancelWipe {..} =
       go

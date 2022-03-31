@@ -93,9 +93,7 @@ instance Core.GoogleRequest CloudIdentityGroupsDelete where
   type Rs CloudIdentityGroupsDelete = Operation
   type
     Scopes CloudIdentityGroupsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-identity.groups",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[CloudIdentity'Groups, CloudPlatform'FullControl]
   requestClient CloudIdentityGroupsDelete {..} =
     go
       name

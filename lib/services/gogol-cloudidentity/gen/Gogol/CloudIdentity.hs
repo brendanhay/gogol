@@ -34,12 +34,12 @@ module Gogol.CloudIdentity
     cloudIdentityService,
 
     -- * OAuth Scopes
-    cloudIdentityDevicesScope,
-    cloudIdentityDevicesLookupScope,
-    cloudIdentityDevicesReadOnlyScope,
-    cloudIdentityGroupsScope,
-    cloudIdentityGroupsReadOnlyScope,
-    cloudPlatformScope,
+    CloudIdentity'Devices,
+    CloudIdentity'Devices'Lookup,
+    CloudIdentity'Devices'Readonly,
+    CloudIdentity'Groups,
+    CloudIdentity'Groups'Readonly,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

@@ -98,9 +98,9 @@ instance Core.GoogleRequest CloudIdentityGroupsLookup where
       LookupGroupNameResponse
   type
     Scopes CloudIdentityGroupsLookup =
-      '[ "https://www.googleapis.com/auth/cloud-identity.groups",
-         "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudIdentity'Groups,
+         CloudIdentity'Groups'Readonly,
+         CloudPlatform'FullControl
        ]
   requestClient CloudIdentityGroupsLookup {..} =
     go

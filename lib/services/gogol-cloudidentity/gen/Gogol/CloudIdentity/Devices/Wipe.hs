@@ -101,7 +101,7 @@ instance Core.GoogleRequest CloudIdentityDevicesWipe where
   type Rs CloudIdentityDevicesWipe = Operation
   type
     Scopes CloudIdentityDevicesWipe =
-      '["https://www.googleapis.com/auth/cloud-identity.devices"]
+      '[CloudIdentity'Devices]
   requestClient CloudIdentityDevicesWipe {..} =
     go
       name

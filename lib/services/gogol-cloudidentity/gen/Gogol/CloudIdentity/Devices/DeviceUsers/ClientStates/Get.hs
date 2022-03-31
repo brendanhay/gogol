@@ -106,8 +106,8 @@ instance
   type
     Scopes
       CloudIdentityDevicesDeviceUsersClientStatesGet =
-      '[ "https://www.googleapis.com/auth/cloud-identity.devices",
-         "https://www.googleapis.com/auth/cloud-identity.devices.readonly"
+      '[ CloudIdentity'Devices,
+         CloudIdentity'Devices'Readonly
        ]
   requestClient
     CloudIdentityDevicesDeviceUsersClientStatesGet {..} =

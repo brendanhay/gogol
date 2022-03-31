@@ -100,9 +100,7 @@ instance Core.GoogleRequest CloudIdentityGroupsCreate where
   type Rs CloudIdentityGroupsCreate = Operation
   type
     Scopes CloudIdentityGroupsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-identity.groups",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[CloudIdentity'Groups, CloudPlatform'FullControl]
   requestClient CloudIdentityGroupsCreate {..} =
     go
       xgafv
