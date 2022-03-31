@@ -30,9 +30,9 @@ module Gogol.Surveys.Types
     surveysService,
 
     -- * OAuth Scopes
-    surveysScope,
-    surveysReadOnlyScope,
-    userinfoEmailScope,
+    Surveys'FullControl,
+    Surveys'Readonly,
+    Userinfo'Email,
 
     -- * Types
 
@@ -118,13 +118,10 @@ surveysService =
     "www.googleapis.com"
 
 -- | View and manage your surveys and results
-surveysScope :: Core.Proxy '["https://www.googleapis.com/auth/surveys"]
-surveysScope = Core.Proxy
+type Surveys'FullControl = "https://www.googleapis.com/auth/surveys"
 
 -- | View your surveys and survey results
-surveysReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/surveys.readonly"]
-surveysReadOnlyScope = Core.Proxy
+type Surveys'Readonly = "https://www.googleapis.com/auth/surveys.readonly"
 
 -- | View your email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"

@@ -81,9 +81,9 @@ instance Core.GoogleRequest SurveysSurveysList where
   type Rs SurveysSurveysList = SurveysListResponse
   type
     Scopes SurveysSurveysList =
-      '[ "https://www.googleapis.com/auth/surveys",
-         "https://www.googleapis.com/auth/surveys.readonly",
-         "https://www.googleapis.com/auth/userinfo.email"
+      '[ Surveys'FullControl,
+         Surveys'Readonly,
+         Userinfo'Email
        ]
   requestClient SurveysSurveysList {..} =
     go
