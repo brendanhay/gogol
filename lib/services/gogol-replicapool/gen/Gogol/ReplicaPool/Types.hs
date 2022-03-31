@@ -30,12 +30,12 @@ module Gogol.ReplicaPool.Types
     replicaPoolService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    ndevCloudmanScope,
-    ndevCloudmanReadOnlyScope,
-    replicaPoolScope,
-    replicaPoolReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Ndev'Cloudman,
+    Ndev'Cloudman'Readonly,
+    Replicapool'FullControl,
+    Replicapool'Readonly,
 
     -- * Types
 
@@ -145,25 +145,19 @@ replicaPoolService =
     "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | View and manage your Google Cloud Platform management resources and deployment status information
-ndevCloudmanScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
-ndevCloudmanScope = Core.Proxy
+type Ndev'Cloudman = "https://www.googleapis.com/auth/ndev.cloudman"
 
 -- | View your Google Cloud Platform management resources and deployment status information
-ndevCloudmanReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-ndevCloudmanReadOnlyScope = Core.Proxy
+type Ndev'Cloudman'Readonly = "https://www.googleapis.com/auth/ndev.cloudman.readonly"
 
 -- | View and manage replica pools
-replicaPoolScope :: Core.Proxy '["https://www.googleapis.com/auth/replicapool"]
-replicaPoolScope = Core.Proxy
+type Replicapool'FullControl = "https://www.googleapis.com/auth/replicapool"
 
 -- | View replica pools
-replicaPoolReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
-replicaPoolReadOnlyScope = Core.Proxy
+type Replicapool'Readonly = "https://www.googleapis.com/auth/replicapool.readonly"

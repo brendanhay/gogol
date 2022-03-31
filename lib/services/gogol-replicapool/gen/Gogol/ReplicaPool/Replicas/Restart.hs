@@ -100,9 +100,9 @@ instance
   type Rs ReplicaPoolReplicasRestart = Replica
   type
     Scopes ReplicaPoolReplicasRestart =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman",
-         "https://www.googleapis.com/auth/replicapool"
+      '[ CloudPlatform'FullControl,
+         Ndev'Cloudman,
+         Replicapool'FullControl
        ]
   requestClient ReplicaPoolReplicasRestart {..} =
     go

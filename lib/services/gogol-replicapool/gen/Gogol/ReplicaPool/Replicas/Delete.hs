@@ -102,9 +102,9 @@ instance Core.GoogleRequest ReplicaPoolReplicasDelete where
   type Rs ReplicaPoolReplicasDelete = Replica
   type
     Scopes ReplicaPoolReplicasDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman",
-         "https://www.googleapis.com/auth/replicapool"
+      '[ CloudPlatform'FullControl,
+         Ndev'Cloudman,
+         Replicapool'FullControl
        ]
   requestClient ReplicaPoolReplicasDelete {..} =
     go

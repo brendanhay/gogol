@@ -34,12 +34,12 @@ module Gogol.ReplicaPool
     replicaPoolService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    ndevCloudmanScope,
-    ndevCloudmanReadOnlyScope,
-    replicaPoolScope,
-    replicaPoolReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Ndev'Cloudman,
+    Ndev'Cloudman'Readonly,
+    Replicapool'FullControl,
+    Replicapool'Readonly,
 
     -- * Resources
 

@@ -89,12 +89,12 @@ instance Core.GoogleRequest ReplicaPoolPoolsGet where
   type Rs ReplicaPoolPoolsGet = Pool
   type
     Scopes ReplicaPoolPoolsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/ndev.cloudman",
-         "https://www.googleapis.com/auth/ndev.cloudman.readonly",
-         "https://www.googleapis.com/auth/replicapool",
-         "https://www.googleapis.com/auth/replicapool.readonly"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Ndev'Cloudman,
+         Ndev'Cloudman'Readonly,
+         Replicapool'FullControl,
+         Replicapool'Readonly
        ]
   requestClient ReplicaPoolPoolsGet {..} =
     go

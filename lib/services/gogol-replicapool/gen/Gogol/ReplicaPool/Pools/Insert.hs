@@ -89,9 +89,9 @@ instance Core.GoogleRequest ReplicaPoolPoolsInsert where
   type Rs ReplicaPoolPoolsInsert = Pool
   type
     Scopes ReplicaPoolPoolsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman",
-         "https://www.googleapis.com/auth/replicapool"
+      '[ CloudPlatform'FullControl,
+         Ndev'Cloudman,
+         Replicapool'FullControl
        ]
   requestClient ReplicaPoolPoolsInsert {..} =
     go

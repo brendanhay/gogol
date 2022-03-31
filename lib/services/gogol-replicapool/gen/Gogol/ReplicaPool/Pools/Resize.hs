@@ -94,9 +94,9 @@ instance Core.GoogleRequest ReplicaPoolPoolsResize where
   type Rs ReplicaPoolPoolsResize = Pool
   type
     Scopes ReplicaPoolPoolsResize =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.cloudman",
-         "https://www.googleapis.com/auth/replicapool"
+      '[ CloudPlatform'FullControl,
+         Ndev'Cloudman,
+         Replicapool'FullControl
        ]
   requestClient ReplicaPoolPoolsResize {..} =
     go
