@@ -107,9 +107,7 @@ instance
   type Rs LoggingOrganizationsUpdateSettings = Settings
   type
     Scopes LoggingOrganizationsUpdateSettings =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingOrganizationsUpdateSettings {..} =
     go
       name

@@ -96,9 +96,7 @@ instance
   type Rs LoggingLocationsBucketsViewsDelete = Empty
   type
     Scopes LoggingLocationsBucketsViewsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingLocationsBucketsViewsDelete {..} =
     go
       name

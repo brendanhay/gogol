@@ -108,9 +108,7 @@ instance
       LogExclusion
   type
     Scopes LoggingOrganizationsExclusionsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingOrganizationsExclusionsPatch {..} =
     go
       name

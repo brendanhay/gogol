@@ -34,11 +34,11 @@ module Gogol.Logging
     loggingService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    loggingAdminScope,
-    loggingReadScope,
-    loggingWriteScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Logging'Admin,
+    Logging'Read,
+    Logging'Write,
 
     -- * Resources
 

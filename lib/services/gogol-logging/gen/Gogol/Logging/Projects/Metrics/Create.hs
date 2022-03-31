@@ -103,9 +103,9 @@ instance
   type Rs LoggingProjectsMetricsCreate = LogMetric
   type
     Scopes LoggingProjectsMetricsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin",
-         "https://www.googleapis.com/auth/logging.write"
+      '[ CloudPlatform'FullControl,
+         Logging'Admin,
+         Logging'Write
        ]
   requestClient LoggingProjectsMetricsCreate {..} =
     go

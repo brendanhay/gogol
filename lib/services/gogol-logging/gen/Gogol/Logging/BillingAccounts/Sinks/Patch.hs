@@ -110,9 +110,7 @@ instance
   type Rs LoggingBillingAccountsSinksPatch = LogSink
   type
     Scopes LoggingBillingAccountsSinksPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingBillingAccountsSinksPatch {..} =
     go
       sinkName

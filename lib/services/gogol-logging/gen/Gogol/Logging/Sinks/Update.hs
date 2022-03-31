@@ -107,9 +107,7 @@ instance Core.GoogleRequest LoggingSinksUpdate where
   type Rs LoggingSinksUpdate = LogSink
   type
     Scopes LoggingSinksUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingSinksUpdate {..} =
     go
       sinkName

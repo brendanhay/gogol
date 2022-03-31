@@ -109,9 +109,7 @@ instance
       LogView
   type
     Scopes LoggingFoldersLocationsBucketsViewsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient
     LoggingFoldersLocationsBucketsViewsCreate {..} =
       go

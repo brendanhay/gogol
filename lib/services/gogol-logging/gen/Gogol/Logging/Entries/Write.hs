@@ -94,9 +94,9 @@ instance Core.GoogleRequest LoggingEntriesWrite where
   type Rs LoggingEntriesWrite = WriteLogEntriesResponse
   type
     Scopes LoggingEntriesWrite =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin",
-         "https://www.googleapis.com/auth/logging.write"
+      '[ CloudPlatform'FullControl,
+         Logging'Admin,
+         Logging'Write
        ]
   requestClient LoggingEntriesWrite {..} =
     go

@@ -107,9 +107,7 @@ instance
   type Rs LoggingProjectsSinksCreate = LogSink
   type
     Scopes LoggingProjectsSinksCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingProjectsSinksCreate {..} =
     go
       parent

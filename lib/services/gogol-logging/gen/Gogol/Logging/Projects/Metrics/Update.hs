@@ -102,9 +102,9 @@ instance
   type Rs LoggingProjectsMetricsUpdate = LogMetric
   type
     Scopes LoggingProjectsMetricsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin",
-         "https://www.googleapis.com/auth/logging.write"
+      '[ CloudPlatform'FullControl,
+         Logging'Admin,
+         Logging'Write
        ]
   requestClient LoggingProjectsMetricsUpdate {..} =
     go

@@ -100,9 +100,7 @@ instance Core.GoogleRequest LoggingExclusionsCreate where
   type Rs LoggingExclusionsCreate = LogExclusion
   type
     Scopes LoggingExclusionsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/logging.admin"
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin]
   requestClient LoggingExclusionsCreate {..} =
     go
       parent
