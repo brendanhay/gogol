@@ -92,9 +92,7 @@ newScriptProjectsCreate payload =
 
 instance Core.GoogleRequest ScriptProjectsCreate where
   type Rs ScriptProjectsCreate = Project
-  type
-    Scopes ScriptProjectsCreate =
-      '["https://www.googleapis.com/auth/script.projects"]
+  type Scopes ScriptProjectsCreate = '[Script'Projects]
   requestClient ScriptProjectsCreate {..} =
     go
       xgafv

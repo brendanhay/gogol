@@ -100,18 +100,18 @@ instance Core.GoogleRequest ScriptScriptsRun where
   type Rs ScriptScriptsRun = Operation
   type
     Scopes ScriptScriptsRun =
-      '[ "https://mail.google.com/",
-         "https://www.google.com/calendar/feeds",
-         "https://www.google.com/m8/feeds",
-         "https://www.googleapis.com/auth/admin.directory.group",
-         "https://www.googleapis.com/auth/admin.directory.user",
-         "https://www.googleapis.com/auth/documents",
-         "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/forms",
-         "https://www.googleapis.com/auth/forms.currentonly",
-         "https://www.googleapis.com/auth/groups",
-         "https://www.googleapis.com/auth/spreadsheets",
-         "https://www.googleapis.com/auth/userinfo.email"
+      '[ Gmail'FullControl,
+         Calendar'Feeds'FullControl,
+         M8'Feeds'FullControl,
+         Admin'Directory'Group,
+         Admin'Directory'User,
+         Documents'FullControl,
+         Drive'FullControl,
+         Forms'FullControl,
+         Forms'Currentonly,
+         Groups'FullControl,
+         Spreadsheets'FullControl,
+         Userinfo'Email
        ]
   requestClient ScriptScriptsRun {..} =
     go

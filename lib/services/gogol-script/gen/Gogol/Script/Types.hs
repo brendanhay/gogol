@@ -30,24 +30,24 @@ module Gogol.Script.Types
     scriptService,
 
     -- * OAuth Scopes
-    mailGoogleComScope,
-    calendarFeedsScope,
-    m8FeedsScope,
-    adminDirectoryGroupScope,
-    adminDirectoryUserScope,
-    documentsScope,
-    driveScope,
-    formsScope,
-    formsCurrentOnlyScope,
-    groupsScope,
-    scriptDeploymentsScope,
-    scriptDeploymentsReadOnlyScope,
-    scriptMetricsScope,
-    scriptProcessesScope,
-    scriptProjectsScope,
-    scriptProjectsReadOnlyScope,
-    spreadsheetsScope,
-    userinfoEmailScope,
+    Gmail'FullControl,
+    Calendar'Feeds'FullControl,
+    M8'Feeds'FullControl,
+    Admin'Directory'Group,
+    Admin'Directory'User,
+    Documents'FullControl,
+    Drive'FullControl,
+    Forms'FullControl,
+    Forms'Currentonly,
+    Groups'FullControl,
+    Script'Deployments,
+    Script'Deployments'Readonly,
+    Script'Metrics,
+    Script'Processes,
+    Script'Projects,
+    Script'Projects'Readonly,
+    Spreadsheets'FullControl,
+    Userinfo'Email,
 
     -- * Types
 
@@ -279,73 +279,55 @@ scriptService =
     "script.googleapis.com"
 
 -- | Read, compose, send, and permanently delete all your email from Gmail
-mailGoogleComScope :: Core.Proxy '["https://mail.google.com/"]
-mailGoogleComScope = Core.Proxy
+type Gmail'FullControl = "https://mail.google.com/"
 
 -- | See, edit, share, and permanently delete all the calendars you can access using Google Calendar
-calendarFeedsScope :: Core.Proxy '["https://www.google.com/calendar/feeds"]
-calendarFeedsScope = Core.Proxy
+type Calendar'Feeds'FullControl = "https://www.google.com/calendar/feeds"
 
 -- | See, edit, download, and permanently delete your contacts
-m8FeedsScope :: Core.Proxy '["https://www.google.com/m8/feeds"]
-m8FeedsScope = Core.Proxy
+type M8'Feeds'FullControl = "https://www.google.com/m8/feeds"
 
 -- | View and manage the provisioning of groups on your domain
-adminDirectoryGroupScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
-adminDirectoryGroupScope = Core.Proxy
+type Admin'Directory'Group = "https://www.googleapis.com/auth/admin.directory.group"
 
 -- | View and manage the provisioning of users on your domain
-adminDirectoryUserScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
-adminDirectoryUserScope = Core.Proxy
+type Admin'Directory'User = "https://www.googleapis.com/auth/admin.directory.user"
 
 -- | See, edit, create, and delete all your Google Docs documents
-documentsScope :: Core.Proxy '["https://www.googleapis.com/auth/documents"]
-documentsScope = Core.Proxy
+type Documents'FullControl = "https://www.googleapis.com/auth/documents"
 
 -- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Core.Proxy
+type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 
 -- | View and manage your forms in Google Drive
-formsScope :: Core.Proxy '["https://www.googleapis.com/auth/forms"]
-formsScope = Core.Proxy
+type Forms'FullControl = "https://www.googleapis.com/auth/forms"
 
 -- | View and manage forms that this application has been installed in
-formsCurrentOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/forms.currentonly"]
-formsCurrentOnlyScope = Core.Proxy
+type Forms'Currentonly = "https://www.googleapis.com/auth/forms.currentonly"
 
 -- | View and manage your Google Groups
-groupsScope :: Core.Proxy '["https://www.googleapis.com/auth/groups"]
-groupsScope = Core.Proxy
+type Groups'FullControl = "https://www.googleapis.com/auth/groups"
 
 -- | Create and update Google Apps Script deployments
-scriptDeploymentsScope :: Core.Proxy '["https://www.googleapis.com/auth/script.deployments"]
-scriptDeploymentsScope = Core.Proxy
+type Script'Deployments = "https://www.googleapis.com/auth/script.deployments"
 
 -- | View Google Apps Script deployments
-scriptDeploymentsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/script.deployments.readonly"]
-scriptDeploymentsReadOnlyScope = Core.Proxy
+type Script'Deployments'Readonly = "https://www.googleapis.com/auth/script.deployments.readonly"
 
 -- | View Google Apps Script project\'s metrics
-scriptMetricsScope :: Core.Proxy '["https://www.googleapis.com/auth/script.metrics"]
-scriptMetricsScope = Core.Proxy
+type Script'Metrics = "https://www.googleapis.com/auth/script.metrics"
 
 -- | View Google Apps Script processes
-scriptProcessesScope :: Core.Proxy '["https://www.googleapis.com/auth/script.processes"]
-scriptProcessesScope = Core.Proxy
+type Script'Processes = "https://www.googleapis.com/auth/script.processes"
 
 -- | Create and update Google Apps Script projects
-scriptProjectsScope :: Core.Proxy '["https://www.googleapis.com/auth/script.projects"]
-scriptProjectsScope = Core.Proxy
+type Script'Projects = "https://www.googleapis.com/auth/script.projects"
 
 -- | View Google Apps Script projects
-scriptProjectsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/script.projects.readonly"]
-scriptProjectsReadOnlyScope = Core.Proxy
+type Script'Projects'Readonly = "https://www.googleapis.com/auth/script.projects.readonly"
 
 -- | See, edit, create, and delete all your Google Sheets spreadsheets
-spreadsheetsScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets"]
-spreadsheetsScope = Core.Proxy
+type Spreadsheets'FullControl = "https://www.googleapis.com/auth/spreadsheets"
 
 -- | See your primary Google Account email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"

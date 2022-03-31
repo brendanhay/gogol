@@ -108,9 +108,7 @@ instance
       ListDeploymentsResponse
   type
     Scopes ScriptProjectsDeploymentsList =
-      '[ "https://www.googleapis.com/auth/script.deployments",
-         "https://www.googleapis.com/auth/script.deployments.readonly"
-       ]
+      '[Script'Deployments, Script'Deployments'Readonly]
   requestClient ScriptProjectsDeploymentsList {..} =
     go
       scriptId
