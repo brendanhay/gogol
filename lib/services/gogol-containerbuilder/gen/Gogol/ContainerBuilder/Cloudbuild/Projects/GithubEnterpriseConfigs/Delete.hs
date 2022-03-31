@@ -108,7 +108,7 @@ instance
   type
     Scopes
       CloudbuildProjectsGithubEnterpriseConfigsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsGithubEnterpriseConfigsDelete {..} =
       go

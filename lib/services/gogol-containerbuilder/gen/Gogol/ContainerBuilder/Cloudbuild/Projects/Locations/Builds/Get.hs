@@ -104,7 +104,7 @@ instance
   type Rs CloudbuildProjectsLocationsBuildsGet = Build
   type
     Scopes CloudbuildProjectsLocationsBuildsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsBuildsGet {..} =
       go

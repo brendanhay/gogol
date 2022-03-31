@@ -108,7 +108,7 @@ instance
   type Rs CloudbuildProjectsTriggersDelete = Empty
   type
     Scopes CloudbuildProjectsTriggersDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudbuildProjectsTriggersDelete {..} =
     go
       projectId

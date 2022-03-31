@@ -108,7 +108,7 @@ instance
   type Rs CloudbuildProjectsBuildsCreate = Operation
   type
     Scopes CloudbuildProjectsBuildsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudbuildProjectsBuildsCreate {..} =
     go
       projectId

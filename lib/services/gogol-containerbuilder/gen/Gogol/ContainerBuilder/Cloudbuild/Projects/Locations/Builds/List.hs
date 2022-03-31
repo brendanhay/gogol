@@ -115,7 +115,7 @@ instance
       ListBuildsResponse
   type
     Scopes CloudbuildProjectsLocationsBuildsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsBuildsList {..} =
       go

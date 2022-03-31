@@ -113,7 +113,7 @@ instance
   type
     Scopes
       CloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepository =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepository {..} =
       go

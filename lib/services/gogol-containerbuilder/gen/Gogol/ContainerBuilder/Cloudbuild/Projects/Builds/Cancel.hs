@@ -110,7 +110,7 @@ instance
   type Rs CloudbuildProjectsBuildsCancel = Build
   type
     Scopes CloudbuildProjectsBuildsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudbuildProjectsBuildsCancel {..} =
     go
       projectId

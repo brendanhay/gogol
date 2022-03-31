@@ -102,7 +102,7 @@ instance
   type Rs CloudbuildProjectsBuildsApprove = Operation
   type
     Scopes CloudbuildProjectsBuildsApprove =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudbuildProjectsBuildsApprove {..} =
     go
       name

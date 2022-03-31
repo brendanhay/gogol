@@ -104,7 +104,7 @@ instance
       Operation
   type
     Scopes CloudbuildProjectsLocationsTriggersRun =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsTriggersRun {..} =
       go

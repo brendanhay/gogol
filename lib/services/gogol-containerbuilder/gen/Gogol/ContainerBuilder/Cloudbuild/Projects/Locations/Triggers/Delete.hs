@@ -106,7 +106,7 @@ instance
       Empty
   type
     Scopes CloudbuildProjectsLocationsTriggersDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsTriggersDelete {..} =
       go

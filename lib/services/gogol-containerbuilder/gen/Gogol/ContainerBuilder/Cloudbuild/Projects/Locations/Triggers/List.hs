@@ -111,7 +111,7 @@ instance
       ListBuildTriggersResponse
   type
     Scopes CloudbuildProjectsLocationsTriggersList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsTriggersList {..} =
       go

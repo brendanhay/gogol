@@ -114,7 +114,7 @@ instance
   type Rs CloudbuildProjectsTriggersRun = Operation
   type
     Scopes CloudbuildProjectsTriggersRun =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudbuildProjectsTriggersRun {..} =
     go
       projectId
