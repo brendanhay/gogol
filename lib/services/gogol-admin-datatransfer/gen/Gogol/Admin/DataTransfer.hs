@@ -34,8 +34,8 @@ module Gogol.Admin.DataTransfer
     adminDataTransferService,
 
     -- * OAuth Scopes
-    adminDatatransferScope,
-    adminDatatransferReadOnlyScope,
+    Admin'Datatransfer,
+    Admin'Datatransfer'Readonly,
 
     -- * Resources
 

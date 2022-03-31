@@ -118,9 +118,7 @@ instance Core.GoogleRequest DatatransferTransfersList where
       DataTransfersListResponse
   type
     Scopes DatatransferTransfersList =
-      '[ "https://www.googleapis.com/auth/admin.datatransfer",
-         "https://www.googleapis.com/auth/admin.datatransfer.readonly"
-       ]
+      '[Admin'Datatransfer, Admin'Datatransfer'Readonly]
   requestClient DatatransferTransfersList {..} =
     go
       xgafv
