@@ -34,10 +34,10 @@ module Gogol.ReplicaPoolUpdater
     replicaPoolUpdaterService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    replicapoolScope,
-    replicapoolReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Replicapool'FullControl,
+    Replicapool'Readonly,
 
     -- * Resources
 

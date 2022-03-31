@@ -95,9 +95,7 @@ instance
       Operation
   type
     Scopes ReplicaPoolUpdaterRollingUpdatesRollback =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/replicapool"
-       ]
+      '[CloudPlatform'FullControl, Replicapool'FullControl]
   requestClient
     ReplicaPoolUpdaterRollingUpdatesRollback {..} =
       go

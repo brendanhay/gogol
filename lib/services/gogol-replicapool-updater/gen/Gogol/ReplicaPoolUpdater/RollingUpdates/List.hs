@@ -100,10 +100,10 @@ instance
       RollingUpdateList
   type
     Scopes ReplicaPoolUpdaterRollingUpdatesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/replicapool",
-         "https://www.googleapis.com/auth/replicapool.readonly"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Replicapool'FullControl,
+         Replicapool'Readonly
        ]
   requestClient
     ReplicaPoolUpdaterRollingUpdatesList {..} =

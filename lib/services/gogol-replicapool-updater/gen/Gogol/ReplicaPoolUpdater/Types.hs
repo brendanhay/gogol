@@ -30,10 +30,10 @@ module Gogol.ReplicaPoolUpdater.Types
     replicaPoolUpdaterService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    replicapoolScope,
-    replicapoolReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Replicapool'FullControl,
+    Replicapool'Readonly,
 
     -- * Types
 
@@ -111,17 +111,13 @@ replicaPoolUpdaterService =
     "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | View and manage replica pools
-replicapoolScope :: Core.Proxy '["https://www.googleapis.com/auth/replicapool"]
-replicapoolScope = Core.Proxy
+type Replicapool'FullControl = "https://www.googleapis.com/auth/replicapool"
 
 -- | View replica pools
-replicapoolReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
-replicapoolReadOnlyScope = Core.Proxy
+type Replicapool'Readonly = "https://www.googleapis.com/auth/replicapool.readonly"
