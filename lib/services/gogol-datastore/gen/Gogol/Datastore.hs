@@ -34,8 +34,8 @@ module Gogol.Datastore
     datastoreService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    datastoreScope,
+    CloudPlatform'FullControl,
+    Datastore'FullControl,
 
     -- * Resources
 

@@ -100,9 +100,7 @@ instance Core.GoogleRequest DatastoreProjectsRollback where
   type Rs DatastoreProjectsRollback = RollbackResponse
   type
     Scopes DatastoreProjectsRollback =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsRollback {..} =
     go
       projectId

@@ -98,9 +98,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes DatastoreProjectsOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsOperationsGet {..} =
     go
       name

@@ -100,9 +100,7 @@ instance Core.GoogleRequest DatastoreProjectsLookup where
   type Rs DatastoreProjectsLookup = LookupResponse
   type
     Scopes DatastoreProjectsLookup =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsLookup {..} =
     go
       projectId

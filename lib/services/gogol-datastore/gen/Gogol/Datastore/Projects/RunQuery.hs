@@ -100,9 +100,7 @@ instance Core.GoogleRequest DatastoreProjectsRunQuery where
   type Rs DatastoreProjectsRunQuery = RunQueryResponse
   type
     Scopes DatastoreProjectsRunQuery =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsRunQuery {..} =
     go
       projectId
