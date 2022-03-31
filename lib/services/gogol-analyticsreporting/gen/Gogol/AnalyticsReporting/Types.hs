@@ -30,8 +30,8 @@ module Gogol.AnalyticsReporting.Types
     analyticsReportingService,
 
     -- * OAuth Scopes
-    analyticsScope,
-    analyticsReadOnlyScope,
+    Analytics'FullControl,
+    Analytics'Readonly,
 
     -- * Types
 
@@ -309,9 +309,7 @@ analyticsReportingService =
     "analyticsreporting.googleapis.com"
 
 -- | View and manage your Google Analytics data
-analyticsScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics"]
-analyticsScope = Core.Proxy
+type Analytics'FullControl = "https://www.googleapis.com/auth/analytics"
 
 -- | See and download your Google Analytics data
-analyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
-analyticsReadOnlyScope = Core.Proxy
+type Analytics'Readonly = "https://www.googleapis.com/auth/analytics.readonly"
