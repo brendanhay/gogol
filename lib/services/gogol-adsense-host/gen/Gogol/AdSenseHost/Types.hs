@@ -30,7 +30,7 @@ module Gogol.AdSenseHost.Types
     adSenseHostService,
 
     -- * OAuth Scopes
-    adSenseHostScope,
+    Adsensehost'FullControl,
 
     -- * Types
 
@@ -131,5 +131,4 @@ adSenseHostService =
     "www.googleapis.com"
 
 -- | View and manage your AdSense host data and associated accounts
-adSenseHostScope :: Core.Proxy '["https://www.googleapis.com/auth/adsensehost"]
-adSenseHostScope = Core.Proxy
+type Adsensehost'FullControl = "https://www.googleapis.com/auth/adsensehost"

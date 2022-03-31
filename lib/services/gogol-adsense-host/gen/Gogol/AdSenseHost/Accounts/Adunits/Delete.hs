@@ -92,7 +92,7 @@ instance
   type Rs AdSenseHostAccountsAdunitsDelete = AdUnit
   type
     Scopes AdSenseHostAccountsAdunitsDelete =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAccountsAdunitsDelete {..} =
     go
       accountId

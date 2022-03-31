@@ -74,7 +74,7 @@ instance Core.GoogleRequest AdSenseHostAdclientsList where
   type Rs AdSenseHostAdclientsList = AdClients
   type
     Scopes AdSenseHostAdclientsList =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAdclientsList {..} =
     go
       maxResults

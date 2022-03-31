@@ -93,7 +93,7 @@ instance
       CustomChannel
   type
     Scopes AdSenseHostCustomchannelsPatch =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostCustomchannelsPatch {..} =
     go
       adClientId

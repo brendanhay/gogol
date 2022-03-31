@@ -101,7 +101,7 @@ instance
       AssociationSession
   type
     Scopes AdSenseHostAssociationsessionsStart =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAssociationsessionsStart {..} =
     go
       productCode

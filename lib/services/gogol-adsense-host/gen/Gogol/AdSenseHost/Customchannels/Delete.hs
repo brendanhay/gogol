@@ -87,7 +87,7 @@ instance
       CustomChannel
   type
     Scopes AdSenseHostCustomchannelsDelete =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostCustomchannelsDelete {..} =
     go
       adClientId

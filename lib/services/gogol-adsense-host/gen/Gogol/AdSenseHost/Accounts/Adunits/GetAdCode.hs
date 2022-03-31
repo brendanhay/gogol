@@ -97,7 +97,7 @@ instance
   type Rs AdSenseHostAccountsAdunitsGetAdCode = AdCode
   type
     Scopes AdSenseHostAccountsAdunitsGetAdCode =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAccountsAdunitsGetAdCode {..} =
     go
       accountId

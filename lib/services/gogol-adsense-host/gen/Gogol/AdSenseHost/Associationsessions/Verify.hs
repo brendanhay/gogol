@@ -79,7 +79,7 @@ instance
       AssociationSession
   type
     Scopes AdSenseHostAssociationsessionsVerify =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient
     AdSenseHostAssociationsessionsVerify {..} =
       go
