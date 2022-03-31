@@ -100,9 +100,7 @@ instance
       OperationList
   type
     Scopes ReplicaPoolUpdaterZoneOperationsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/replicapool"
-       ]
+      '[CloudPlatform'FullControl, Replicapool'FullControl]
   requestClient
     ReplicaPoolUpdaterZoneOperationsList {..} =
       go

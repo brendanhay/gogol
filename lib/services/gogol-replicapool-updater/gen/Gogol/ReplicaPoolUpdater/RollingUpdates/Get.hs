@@ -94,10 +94,10 @@ instance
       RollingUpdate
   type
     Scopes ReplicaPoolUpdaterRollingUpdatesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/replicapool",
-         "https://www.googleapis.com/auth/replicapool.readonly"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Replicapool'FullControl,
+         Replicapool'Readonly
        ]
   requestClient ReplicaPoolUpdaterRollingUpdatesGet {..} =
     go
