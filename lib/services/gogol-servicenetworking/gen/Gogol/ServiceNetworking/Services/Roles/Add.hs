@@ -103,9 +103,7 @@ instance
   type Rs ServiceNetworkingServicesRolesAdd = Operation
   type
     Scopes ServiceNetworkingServicesRolesAdd =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient ServiceNetworkingServicesRolesAdd {..} =
     go
       parent

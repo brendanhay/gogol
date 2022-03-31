@@ -100,9 +100,7 @@ instance
   type
     Scopes
       ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient
     ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete {..} =
       go

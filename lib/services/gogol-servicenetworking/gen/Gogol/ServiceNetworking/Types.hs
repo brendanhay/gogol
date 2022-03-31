@@ -30,8 +30,8 @@ module Gogol.ServiceNetworking.Types
     serviceNetworkingService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    serviceManagementScope,
+    CloudPlatform'FullControl,
+    Service'Management,
 
     -- * Types
 
@@ -530,9 +530,7 @@ serviceNetworkingService =
     "servicenetworking.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your Google API service configuration
-serviceManagementScope :: Core.Proxy '["https://www.googleapis.com/auth/service.management"]
-serviceManagementScope = Core.Proxy
+type Service'Management = "https://www.googleapis.com/auth/service.management"

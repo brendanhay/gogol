@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking
     serviceNetworkingService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    serviceManagementScope,
+    CloudPlatform'FullControl,
+    Service'Management,
 
     -- * Resources
 
