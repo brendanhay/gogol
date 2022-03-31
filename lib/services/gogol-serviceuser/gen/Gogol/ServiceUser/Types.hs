@@ -30,9 +30,9 @@ module Gogol.ServiceUser.Types
     serviceUserService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    serviceManagementScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Service'Management,
 
     -- * Types
 
@@ -354,13 +354,10 @@ serviceUserService =
     "serviceuser.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Manage your Google API service configuration
-serviceManagementScope :: Core.Proxy '["https://www.googleapis.com/auth/service.management"]
-serviceManagementScope = Core.Proxy
+type Service'Management = "https://www.googleapis.com/auth/service.management"

@@ -34,9 +34,9 @@ module Gogol.ServiceUser
     serviceUserService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    serviceManagementScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Service'Management,
 
     -- * Resources
 
