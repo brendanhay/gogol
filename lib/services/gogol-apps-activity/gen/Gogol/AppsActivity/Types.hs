@@ -30,7 +30,7 @@ module Gogol.AppsActivity.Types
     appsActivityService,
 
     -- * OAuth Scopes
-    activityScope,
+    Activity'FullControl,
 
     -- * Types
 
@@ -107,5 +107,4 @@ appsActivityService =
     "www.googleapis.com"
 
 -- | View the activity history of your Google apps
-activityScope :: Core.Proxy '["https://www.googleapis.com/auth/activity"]
-activityScope = Core.Proxy
+type Activity'FullControl = "https://www.googleapis.com/auth/activity"
