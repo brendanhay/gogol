@@ -102,9 +102,9 @@ instance Core.GoogleRequest DocsDocumentsBatchUpdate where
       BatchUpdateDocumentResponse
   type
     Scopes DocsDocumentsBatchUpdate =
-      '[ "https://www.googleapis.com/auth/documents",
-         "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file"
+      '[ Documents'FullControl,
+         Drive'FullControl,
+         Drive'File
        ]
   requestClient DocsDocumentsBatchUpdate {..} =
     go

@@ -34,11 +34,11 @@ module Gogol.Docs
     docsService,
 
     -- * OAuth Scopes
-    documentsScope,
-    documentsReadOnlyScope,
-    driveScope,
-    driveFileScope,
-    driveReadOnlyScope,
+    Documents'FullControl,
+    Documents'Readonly,
+    Drive'FullControl,
+    Drive'File,
+    Drive'Readonly,
 
     -- * Resources
 
