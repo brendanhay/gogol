@@ -34,7 +34,7 @@ module Gogol.CloudErrorReporting
     cloudErrorReportingService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

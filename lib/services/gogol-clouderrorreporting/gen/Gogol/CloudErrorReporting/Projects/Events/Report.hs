@@ -105,7 +105,7 @@ instance
       ReportErrorEventResponse
   type
     Scopes CloudErrorReportingProjectsEventsReport =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudErrorReportingProjectsEventsReport {..} =
       go

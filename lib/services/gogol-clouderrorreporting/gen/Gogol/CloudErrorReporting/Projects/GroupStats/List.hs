@@ -157,7 +157,7 @@ instance
       ListGroupStatsResponse
   type
     Scopes CloudErrorReportingProjectsGroupStatsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudErrorReportingProjectsGroupStatsList {..} =
       go

@@ -99,7 +99,7 @@ instance
       DeleteEventsResponse
   type
     Scopes CloudErrorReportingProjectsDeleteEvents =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudErrorReportingProjectsDeleteEvents {..} =
       go
