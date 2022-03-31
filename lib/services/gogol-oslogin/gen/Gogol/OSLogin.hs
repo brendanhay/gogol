@@ -34,10 +34,10 @@ module Gogol.OSLogin
     oSLoginService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    computeScope,
-    computeReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Compute'FullControl,
+    Compute'Readonly,
 
     -- * Resources
 

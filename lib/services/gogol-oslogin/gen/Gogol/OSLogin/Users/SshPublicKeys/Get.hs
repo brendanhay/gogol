@@ -96,9 +96,7 @@ instance
   type Rs OSLoginUsersSshPublicKeysGet = SshPublicKey
   type
     Scopes OSLoginUsersSshPublicKeysGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient OSLoginUsersSshPublicKeysGet {..} =
     go
       name
