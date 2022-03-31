@@ -120,9 +120,7 @@ instance
       ListQuerySourcesResponse
   type
     Scopes CloudSearchQuerySourcesList =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.query"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Query]
   requestClient CloudSearchQuerySourcesList {..} =
     go
       xgafv

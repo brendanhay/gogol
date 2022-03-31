@@ -122,9 +122,7 @@ instance
       ListItemsResponse
   type
     Scopes CloudSearchIndexingDatasourcesItemsList =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.indexing"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Indexing]
   requestClient
     CloudSearchIndexingDatasourcesItemsList {..} =
       go

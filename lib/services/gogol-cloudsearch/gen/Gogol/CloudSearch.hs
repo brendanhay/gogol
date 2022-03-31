@@ -34,15 +34,15 @@ module Gogol.CloudSearch
     cloudSearchService,
 
     -- * OAuth Scopes
-    cloud_searchScope,
-    cloud_searchDebugScope,
-    cloud_searchIndexingScope,
-    cloud_searchQueryScope,
-    cloud_searchSettingsScope,
-    cloud_searchSettingsIndexingScope,
-    cloud_searchSettingsQueryScope,
-    cloud_searchStatsScope,
-    cloud_searchStatsIndexingScope,
+    CloudSearch'FullControl,
+    CloudSearch'Debug,
+    CloudSearch'Indexing,
+    CloudSearch'Query,
+    CloudSearch'Settings,
+    CloudSearch'Settings'Indexing,
+    CloudSearch'Settings'Query,
+    CloudSearch'Stats,
+    CloudSearch'Stats'Indexing,
 
     -- * Resources
 

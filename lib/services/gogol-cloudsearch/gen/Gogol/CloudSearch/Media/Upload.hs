@@ -113,9 +113,7 @@ instance Core.GoogleRequest CloudSearchMediaUpload where
   type Rs CloudSearchMediaUpload = Media
   type
     Scopes CloudSearchMediaUpload =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.indexing"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Indexing]
   requestClient CloudSearchMediaUpload {..} =
     go
       resourceName

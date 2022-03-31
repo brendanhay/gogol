@@ -108,9 +108,9 @@ instance
   type
     Scopes
       CloudSearchSettingsSearchapplicationsReset =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.settings",
-         "https://www.googleapis.com/auth/cloud_search.settings.query"
+      '[ CloudSearch'FullControl,
+         CloudSearch'Settings,
+         CloudSearch'Settings'Query
        ]
   requestClient
     CloudSearchSettingsSearchapplicationsReset {..} =

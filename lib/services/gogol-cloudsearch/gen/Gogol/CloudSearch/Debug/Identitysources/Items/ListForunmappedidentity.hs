@@ -126,9 +126,7 @@ instance
   type
     Scopes
       CloudSearchDebugIdentitysourcesItemsListForunmappedidentity =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.debug"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Debug]
   requestClient
     CloudSearchDebugIdentitysourcesItemsListForunmappedidentity {..} =
       go

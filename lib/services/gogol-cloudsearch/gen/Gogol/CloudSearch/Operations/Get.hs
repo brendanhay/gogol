@@ -93,12 +93,12 @@ instance Core.GoogleRequest CloudSearchOperationsGet where
   type Rs CloudSearchOperationsGet = Operation
   type
     Scopes CloudSearchOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.debug",
-         "https://www.googleapis.com/auth/cloud_search.indexing",
-         "https://www.googleapis.com/auth/cloud_search.settings",
-         "https://www.googleapis.com/auth/cloud_search.settings.indexing",
-         "https://www.googleapis.com/auth/cloud_search.settings.query"
+      '[ CloudSearch'FullControl,
+         CloudSearch'Debug,
+         CloudSearch'Indexing,
+         CloudSearch'Settings,
+         CloudSearch'Settings'Indexing,
+         CloudSearch'Settings'Query
        ]
   requestClient CloudSearchOperationsGet {..} =
     go

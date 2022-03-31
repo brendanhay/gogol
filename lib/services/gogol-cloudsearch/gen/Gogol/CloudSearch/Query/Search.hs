@@ -95,9 +95,7 @@ instance Core.GoogleRequest CloudSearchQuerySearch where
   type Rs CloudSearchQuerySearch = SearchResponse
   type
     Scopes CloudSearchQuerySearch =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.query"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Query]
   requestClient CloudSearchQuerySearch {..} =
     go
       xgafv

@@ -118,9 +118,7 @@ instance
   type
     Scopes
       CloudSearchDebugDatasourcesItemsUnmappedidsList =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.debug"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Debug]
   requestClient
     CloudSearchDebugDatasourcesItemsUnmappedidsList {..} =
       go

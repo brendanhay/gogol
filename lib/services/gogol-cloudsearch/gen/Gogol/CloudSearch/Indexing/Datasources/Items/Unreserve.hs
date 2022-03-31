@@ -107,9 +107,7 @@ instance
   type
     Scopes
       CloudSearchIndexingDatasourcesItemsUnreserve =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.indexing"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Indexing]
   requestClient
     CloudSearchIndexingDatasourcesItemsUnreserve {..} =
       go
