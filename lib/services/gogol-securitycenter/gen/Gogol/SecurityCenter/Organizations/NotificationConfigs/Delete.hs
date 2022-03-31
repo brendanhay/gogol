@@ -100,7 +100,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsNotificationConfigsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsNotificationConfigsDelete {..} =
       go

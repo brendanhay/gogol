@@ -34,7 +34,7 @@ module Gogol.SecurityCenter
     securityCenterService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

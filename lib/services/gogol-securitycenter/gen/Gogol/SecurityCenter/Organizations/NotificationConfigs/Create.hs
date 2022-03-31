@@ -111,7 +111,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsNotificationConfigsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsNotificationConfigsCreate {..} =
       go

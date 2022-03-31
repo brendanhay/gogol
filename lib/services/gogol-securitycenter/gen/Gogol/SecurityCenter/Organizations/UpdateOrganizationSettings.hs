@@ -110,7 +110,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsUpdateOrganizationSettings =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsUpdateOrganizationSettings {..} =
       go

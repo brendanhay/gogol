@@ -118,7 +118,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks {..} =
       go

@@ -106,7 +106,7 @@ instance
   type
     Scopes
       SecurityCenterOrganizationsAssetsRunDiscovery =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsAssetsRunDiscovery {..} =
       go
