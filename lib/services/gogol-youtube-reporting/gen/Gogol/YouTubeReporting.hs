@@ -34,8 +34,8 @@ module Gogol.YouTubeReporting
     youTubeReportingService,
 
     -- * OAuth Scopes
-    youtubeAnalyticsMonetaryReadOnlyScope,
-    youtubeAnalyticsReadOnlyScope,
+    YtAnalyticsMonetary'Readonly,
+    YtAnalytics'Readonly,
 
     -- * Resources
 
