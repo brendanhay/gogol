@@ -34,7 +34,7 @@ module Gogol.AndroidEnterprise
     androidEnterpriseService,
 
     -- * OAuth Scopes
-    androidEnterpriseScope,
+    Androidenterprise'FullControl,
 
     -- * Resources
 

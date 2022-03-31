@@ -124,7 +124,7 @@ instance
   type
     Scopes
       AndroidEnterpriseManagedconfigurationsforuserUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseManagedconfigurationsforuserUpdate {..} =
       go

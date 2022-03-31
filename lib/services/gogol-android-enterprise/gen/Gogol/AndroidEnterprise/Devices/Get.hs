@@ -112,7 +112,7 @@ instance
   type Rs AndroidEnterpriseDevicesGet = Device
   type
     Scopes AndroidEnterpriseDevicesGet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseDevicesGet {..} =
     go
       enterpriseId

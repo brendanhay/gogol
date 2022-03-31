@@ -114,7 +114,7 @@ instance
   type
     Scopes
       AndroidEnterpriseProductsGetAppRestrictionsSchema =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseProductsGetAppRestrictionsSchema {..} =
       go

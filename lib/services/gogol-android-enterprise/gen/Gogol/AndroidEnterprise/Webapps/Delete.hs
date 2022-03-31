@@ -105,7 +105,7 @@ instance
   type Rs AndroidEnterpriseWebappsDelete = ()
   type
     Scopes AndroidEnterpriseWebappsDelete =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseWebappsDelete {..} =
     go
       enterpriseId

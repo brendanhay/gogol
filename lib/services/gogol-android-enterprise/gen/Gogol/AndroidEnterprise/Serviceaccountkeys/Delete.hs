@@ -107,7 +107,7 @@ instance
       ()
   type
     Scopes AndroidEnterpriseServiceaccountkeysDelete =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseServiceaccountkeysDelete {..} =
       go

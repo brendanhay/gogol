@@ -106,7 +106,7 @@ instance
   type Rs AndroidEnterpriseStorelayoutpagesDelete = ()
   type
     Scopes AndroidEnterpriseStorelayoutpagesDelete =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutpagesDelete {..} =
       go

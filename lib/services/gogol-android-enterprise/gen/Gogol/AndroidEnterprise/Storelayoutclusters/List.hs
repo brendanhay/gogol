@@ -111,7 +111,7 @@ instance
       StoreLayoutClustersListResponse
   type
     Scopes AndroidEnterpriseStorelayoutclustersList =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutclustersList {..} =
       go

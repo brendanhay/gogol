@@ -115,7 +115,7 @@ instance
   type
     Scopes
       AndroidEnterpriseProductsGenerateApprovalUrl =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseProductsGenerateApprovalUrl {..} =
       go

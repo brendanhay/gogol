@@ -102,7 +102,7 @@ instance
   type Rs AndroidEnterprisePermissionsGet = Permission
   type
     Scopes AndroidEnterprisePermissionsGet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterprisePermissionsGet {..} =
     go
       permissionId

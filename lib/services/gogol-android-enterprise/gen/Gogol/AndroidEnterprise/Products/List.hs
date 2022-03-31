@@ -121,7 +121,7 @@ instance
       ProductsListResponse
   type
     Scopes AndroidEnterpriseProductsList =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseProductsList {..} =
     go
       enterpriseId

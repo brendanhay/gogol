@@ -115,7 +115,7 @@ instance
       InstallsListResponse
   type
     Scopes AndroidEnterpriseInstallsList =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseInstallsList {..} =
     go
       enterpriseId

@@ -106,7 +106,7 @@ instance
   type Rs AndroidEnterpriseUsersRevokeDeviceAccess = ()
   type
     Scopes AndroidEnterpriseUsersRevokeDeviceAccess =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseUsersRevokeDeviceAccess {..} =
       go

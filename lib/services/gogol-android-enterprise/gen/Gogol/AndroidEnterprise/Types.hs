@@ -30,7 +30,7 @@ module Gogol.AndroidEnterprise.Types
     androidEnterpriseService,
 
     -- * OAuth Scopes
-    androidEnterpriseScope,
+    Androidenterprise'FullControl,
 
     -- * Types
 
@@ -513,5 +513,4 @@ androidEnterpriseService =
     "androidenterprise.googleapis.com"
 
 -- | Manage corporate Android devices
-androidEnterpriseScope :: Core.Proxy '["https://www.googleapis.com/auth/androidenterprise"]
-androidEnterpriseScope = Core.Proxy
+type Androidenterprise'FullControl = "https://www.googleapis.com/auth/androidenterprise"

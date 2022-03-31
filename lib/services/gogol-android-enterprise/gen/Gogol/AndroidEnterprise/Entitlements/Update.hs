@@ -124,7 +124,7 @@ instance
       Entitlement
   type
     Scopes AndroidEnterpriseEntitlementsUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseEntitlementsUpdate {..} =
     go
       enterpriseId

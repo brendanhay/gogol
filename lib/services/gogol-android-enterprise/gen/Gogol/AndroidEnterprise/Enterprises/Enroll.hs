@@ -107,7 +107,7 @@ instance
       Enterprise
   type
     Scopes AndroidEnterpriseEnterprisesEnroll =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseEnterprisesEnroll {..} =
     go
       (Core.Just token)

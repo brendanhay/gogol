@@ -125,7 +125,7 @@ instance
   type Rs AndroidEnterpriseInstallsUpdate = Install
   type
     Scopes AndroidEnterpriseInstallsUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseInstallsUpdate {..} =
     go
       enterpriseId

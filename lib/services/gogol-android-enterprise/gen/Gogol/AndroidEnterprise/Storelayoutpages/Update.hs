@@ -114,7 +114,7 @@ instance
       StorePage
   type
     Scopes AndroidEnterpriseStorelayoutpagesUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutpagesUpdate {..} =
       go

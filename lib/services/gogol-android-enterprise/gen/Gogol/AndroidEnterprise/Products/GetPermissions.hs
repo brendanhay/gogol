@@ -108,7 +108,7 @@ instance
       ProductPermissions
   type
     Scopes AndroidEnterpriseProductsGetPermissions =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseProductsGetPermissions {..} =
       go

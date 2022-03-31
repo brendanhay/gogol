@@ -101,7 +101,7 @@ instance
       ServiceAccountKeysListResponse
   type
     Scopes AndroidEnterpriseServiceaccountkeysList =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseServiceaccountkeysList {..} =
       go

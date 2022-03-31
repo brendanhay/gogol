@@ -100,7 +100,7 @@ instance
       EnterprisesListResponse
   type
     Scopes AndroidEnterpriseEnterprisesList =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseEnterprisesList {..} =
     go
       (Core.Just domain)

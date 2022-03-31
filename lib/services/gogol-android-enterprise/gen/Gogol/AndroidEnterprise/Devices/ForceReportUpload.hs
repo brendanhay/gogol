@@ -115,7 +115,7 @@ instance
       ()
   type
     Scopes AndroidEnterpriseDevicesForceReportUpload =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseDevicesForceReportUpload {..} =
       go

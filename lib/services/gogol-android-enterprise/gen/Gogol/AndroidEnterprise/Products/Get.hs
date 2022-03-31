@@ -109,7 +109,7 @@ instance
   type Rs AndroidEnterpriseProductsGet = Product
   type
     Scopes AndroidEnterpriseProductsGet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseProductsGet {..} =
     go
       enterpriseId

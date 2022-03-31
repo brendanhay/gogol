@@ -116,7 +116,7 @@ instance
   type
     Scopes
       AndroidEnterpriseStorelayoutclustersDelete =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutclustersDelete {..} =
       go

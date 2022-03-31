@@ -108,7 +108,7 @@ instance
       EntitlementsListResponse
   type
     Scopes AndroidEnterpriseEntitlementsList =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseEntitlementsList {..} =
     go
       enterpriseId

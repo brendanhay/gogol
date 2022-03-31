@@ -99,7 +99,7 @@ instance
   type Rs AndroidEnterpriseEnterprisesUnenroll = ()
   type
     Scopes AndroidEnterpriseEnterprisesUnenroll =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesUnenroll {..} =
       go

@@ -115,7 +115,7 @@ instance
       DeviceState
   type
     Scopes AndroidEnterpriseDevicesGetState =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseDevicesGetState {..} =
     go
       enterpriseId

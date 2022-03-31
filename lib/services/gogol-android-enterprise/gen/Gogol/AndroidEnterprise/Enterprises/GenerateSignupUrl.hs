@@ -100,7 +100,7 @@ instance
   type
     Scopes
       AndroidEnterpriseEnterprisesGenerateSignupUrl =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesGenerateSignupUrl {..} =
       go

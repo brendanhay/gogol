@@ -108,7 +108,7 @@ instance
   type
     Scopes
       AndroidEnterpriseEnterprisesSetStoreLayout =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesSetStoreLayout {..} =
       go
