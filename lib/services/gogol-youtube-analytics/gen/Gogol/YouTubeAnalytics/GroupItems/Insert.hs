@@ -101,11 +101,11 @@ instance
   type Rs YouTubeAnalyticsGroupItemsInsert = GroupItem
   type
     Scopes YouTubeAnalyticsGroupItemsInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.readonly",
-         "https://www.googleapis.com/auth/youtubepartner",
-         "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
-         "https://www.googleapis.com/auth/yt-analytics.readonly"
+      '[ Youtube'FullControl,
+         Youtube'Readonly,
+         Youtubepartner'FullControl,
+         YtAnalyticsMonetary'Readonly,
+         YtAnalytics'Readonly
        ]
   requestClient YouTubeAnalyticsGroupItemsInsert {..} =
     go

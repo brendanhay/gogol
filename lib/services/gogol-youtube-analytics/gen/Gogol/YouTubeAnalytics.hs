@@ -34,11 +34,11 @@ module Gogol.YouTubeAnalytics
     youTubeAnalyticsService,
 
     -- * OAuth Scopes
-    youtubeScope,
-    youtubeReadOnlyScope,
-    youtubepartnerScope,
-    youtubeAnalyticsMonetaryReadOnlyScope,
-    youtubeAnalyticsReadOnlyScope,
+    Youtube'FullControl,
+    Youtube'Readonly,
+    Youtubepartner'FullControl,
+    YtAnalyticsMonetary'Readonly,
+    YtAnalytics'Readonly,
 
     -- * Resources
 
