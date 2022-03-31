@@ -89,9 +89,7 @@ instance
       SearchAnalyticsQueryResponse
   type
     Scopes WebmastersSearchanalyticsQuery =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
+      '[Webmasters'FullControl, Webmasters'Readonly]
   requestClient WebmastersSearchanalyticsQuery {..} =
     go
       siteUrl

@@ -30,8 +30,8 @@ module Gogol.WebmasterTools.Types
     webmasterToolsService,
 
     -- * OAuth Scopes
-    webmastersScope,
-    webmastersReadOnlyScope,
+    Webmasters'FullControl,
+    Webmasters'Readonly,
 
     -- * Types
 
@@ -89,9 +89,7 @@ webmasterToolsService =
     "www.googleapis.com"
 
 -- | View and manage Search Console data for your verified sites
-webmastersScope :: Core.Proxy '["https://www.googleapis.com/auth/webmasters"]
-webmastersScope = Core.Proxy
+type Webmasters'FullControl = "https://www.googleapis.com/auth/webmasters"
 
 -- | View Search Console data for your verified sites
-webmastersReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/webmasters.readonly"]
-webmastersReadOnlyScope = Core.Proxy
+type Webmasters'Readonly = "https://www.googleapis.com/auth/webmasters.readonly"

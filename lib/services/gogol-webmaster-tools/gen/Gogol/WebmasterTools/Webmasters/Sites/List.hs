@@ -66,9 +66,7 @@ instance Core.GoogleRequest WebmastersSitesList where
   type Rs WebmastersSitesList = SitesListResponse
   type
     Scopes WebmastersSitesList =
-      '[ "https://www.googleapis.com/auth/webmasters",
-         "https://www.googleapis.com/auth/webmasters.readonly"
-       ]
+      '[Webmasters'FullControl, Webmasters'Readonly]
   requestClient WebmastersSitesList {} =
     go (Core.Just Core.AltJSON) webmasterToolsService
     where
