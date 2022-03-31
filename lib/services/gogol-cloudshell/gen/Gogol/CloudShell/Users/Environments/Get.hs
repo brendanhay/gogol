@@ -96,7 +96,7 @@ instance
   type Rs CloudShellUsersEnvironmentsGet = Environment
   type
     Scopes CloudShellUsersEnvironmentsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudShellUsersEnvironmentsGet {..} =
     go
       name

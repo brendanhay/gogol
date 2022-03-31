@@ -107,7 +107,7 @@ instance
       Operation
   type
     Scopes CloudShellUsersEnvironmentsAddPublicKey =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudShellUsersEnvironmentsAddPublicKey {..} =
       go
