@@ -43,9 +43,6 @@ module Gogol
     type HasScopeFor,
     type HasScopeFrom,
     KnownScopes (..),
-    (!),
-    allow,
-    forbid,
 
     -- * Sending Requests
     send,
