@@ -102,7 +102,7 @@ instance
       Operation
   type
     Scopes FileProjectsLocationsInstancesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     FileProjectsLocationsInstancesDelete {..} =
       go

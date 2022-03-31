@@ -104,7 +104,7 @@ instance
       Operation
   type
     Scopes FileProjectsLocationsInstancesRestore =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     FileProjectsLocationsInstancesRestore {..} =
       go

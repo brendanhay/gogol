@@ -106,7 +106,7 @@ instance
   type Rs FileProjectsLocationsBackupsPatch = Operation
   type
     Scopes FileProjectsLocationsBackupsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient FileProjectsLocationsBackupsPatch {..} =
     go
       name

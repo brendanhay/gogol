@@ -102,7 +102,7 @@ instance
   type Rs FileProjectsLocationsOperationsCancel = Empty
   type
     Scopes FileProjectsLocationsOperationsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     FileProjectsLocationsOperationsCancel {..} =
       go

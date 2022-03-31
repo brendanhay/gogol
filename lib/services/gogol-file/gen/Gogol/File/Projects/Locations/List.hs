@@ -114,7 +114,7 @@ instance Core.GoogleRequest FileProjectsLocationsList where
       ListLocationsResponse
   type
     Scopes FileProjectsLocationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient FileProjectsLocationsList {..} =
     go
       name

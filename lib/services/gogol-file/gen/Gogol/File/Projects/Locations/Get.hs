@@ -93,7 +93,7 @@ instance Core.GoogleRequest FileProjectsLocationsGet where
   type Rs FileProjectsLocationsGet = Location
   type
     Scopes FileProjectsLocationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient FileProjectsLocationsGet {..} =
     go
       name

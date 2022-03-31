@@ -99,7 +99,7 @@ instance
   type
     Scopes
       FileProjectsLocationsInstancesSnapshotsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     FileProjectsLocationsInstancesSnapshotsDelete {..} =
       go

@@ -115,7 +115,7 @@ instance
       ListBackupsResponse
   type
     Scopes FileProjectsLocationsBackupsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient FileProjectsLocationsBackupsList {..} =
     go
       parent

@@ -34,7 +34,7 @@ module Gogol.File
     fileService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
