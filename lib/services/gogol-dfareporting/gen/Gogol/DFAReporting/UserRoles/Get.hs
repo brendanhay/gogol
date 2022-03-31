@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingUserRolesGet where
   type Rs DFAReportingUserRolesGet = UserRole
   type
     Scopes DFAReportingUserRolesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingUserRolesGet {..} =
     go
       profileId

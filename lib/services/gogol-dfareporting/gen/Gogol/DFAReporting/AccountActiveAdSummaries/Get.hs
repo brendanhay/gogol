@@ -107,7 +107,7 @@ instance
       AccountActiveAdSummary
   type
     Scopes DFAReportingAccountActiveAdSummariesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingAccountActiveAdSummariesGet {..} =
       go

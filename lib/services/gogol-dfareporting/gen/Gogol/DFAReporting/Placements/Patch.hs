@@ -111,7 +111,7 @@ instance
   type Rs DFAReportingPlacementsPatch = Placement
   type
     Scopes DFAReportingPlacementsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingPlacementsPatch {..} =
     go
       profileId

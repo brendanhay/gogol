@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingCreativeGroupsGet = CreativeGroup
   type
     Scopes DFAReportingCreativeGroupsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCreativeGroupsGet {..} =
     go
       profileId

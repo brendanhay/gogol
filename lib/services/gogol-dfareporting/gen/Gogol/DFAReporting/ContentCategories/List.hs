@@ -131,7 +131,7 @@ instance
       ContentCategoriesListResponse
   type
     Scopes DFAReportingContentCategoriesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingContentCategoriesList {..} =
     go
       profileId

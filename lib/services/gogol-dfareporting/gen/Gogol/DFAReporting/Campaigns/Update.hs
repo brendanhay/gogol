@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingCampaignsUpdate = Campaign
   type
     Scopes DFAReportingCampaignsUpdate =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCampaignsUpdate {..} =
     go
       profileId

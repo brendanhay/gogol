@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingEventTagsDelete = ()
   type
     Scopes DFAReportingEventTagsDelete =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingEventTagsDelete {..} =
     go
       profileId

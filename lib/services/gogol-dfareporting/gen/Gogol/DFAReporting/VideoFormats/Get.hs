@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingVideoFormatsGet = VideoFormat
   type
     Scopes DFAReportingVideoFormatsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingVideoFormatsGet {..} =
     go
       profileId

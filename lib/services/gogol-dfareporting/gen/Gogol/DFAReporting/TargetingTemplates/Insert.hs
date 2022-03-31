@@ -107,7 +107,7 @@ instance
       TargetingTemplate
   type
     Scopes DFAReportingTargetingTemplatesInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingTargetingTemplatesInsert {..} =
       go

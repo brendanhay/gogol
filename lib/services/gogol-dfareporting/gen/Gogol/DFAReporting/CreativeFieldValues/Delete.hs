@@ -112,7 +112,7 @@ instance
   type Rs DFAReportingCreativeFieldValuesDelete = ()
   type
     Scopes DFAReportingCreativeFieldValuesDelete =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingCreativeFieldValuesDelete {..} =
       go

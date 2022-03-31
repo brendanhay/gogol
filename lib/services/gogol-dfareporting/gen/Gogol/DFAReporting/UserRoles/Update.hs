@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingUserRolesUpdate = UserRole
   type
     Scopes DFAReportingUserRolesUpdate =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingUserRolesUpdate {..} =
     go
       profileId

@@ -113,7 +113,7 @@ instance
       AccountUserProfile
   type
     Scopes DFAReportingAccountUserProfilesPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingAccountUserProfilesPatch {..} =
       go

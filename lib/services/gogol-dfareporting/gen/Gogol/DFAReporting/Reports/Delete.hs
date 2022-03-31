@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingReportsDelete where
   type Rs DFAReportingReportsDelete = ()
   type
     Scopes DFAReportingReportsDelete =
-      '["https://www.googleapis.com/auth/dfareporting"]
+      '[Dfareporting'FullControl]
   requestClient DFAReportingReportsDelete {..} =
     go
       profileId

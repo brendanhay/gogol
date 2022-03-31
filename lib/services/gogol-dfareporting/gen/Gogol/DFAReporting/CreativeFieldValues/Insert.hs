@@ -114,7 +114,7 @@ instance
       CreativeFieldValue
   type
     Scopes DFAReportingCreativeFieldValuesInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingCreativeFieldValuesInsert {..} =
       go

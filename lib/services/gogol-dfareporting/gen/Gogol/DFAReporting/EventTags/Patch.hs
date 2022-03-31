@@ -111,7 +111,7 @@ instance
   type Rs DFAReportingEventTagsPatch = EventTag
   type
     Scopes DFAReportingEventTagsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingEventTagsPatch {..} =
     go
       profileId

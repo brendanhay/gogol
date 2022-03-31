@@ -158,7 +158,7 @@ instance
       InventoryItemsListResponse
   type
     Scopes DFAReportingInventoryItemsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingInventoryItemsList {..} =
     go
       profileId

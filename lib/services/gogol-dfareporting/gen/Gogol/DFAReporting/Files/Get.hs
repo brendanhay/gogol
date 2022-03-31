@@ -115,7 +115,7 @@ instance Core.GoogleRequest DFAReportingFilesGet where
   type Rs DFAReportingFilesGet = File
   type
     Scopes DFAReportingFilesGet =
-      '["https://www.googleapis.com/auth/dfareporting"]
+      '[Dfareporting'FullControl]
   requestClient DFAReportingFilesGet {..} =
     go
       reportId

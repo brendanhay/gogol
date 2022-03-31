@@ -109,7 +109,7 @@ instance
       CompatibleFields
   type
     Scopes DFAReportingReportsCompatibleFieldsQuery =
-      '["https://www.googleapis.com/auth/dfareporting"]
+      '[Dfareporting'FullControl]
   requestClient
     DFAReportingReportsCompatibleFieldsQuery {..} =
       go

@@ -116,7 +116,7 @@ instance
       DimensionValueList
   type
     Scopes DFAReportingDimensionValuesQuery =
-      '["https://www.googleapis.com/auth/dfareporting"]
+      '[Dfareporting'FullControl]
   requestClient DFAReportingDimensionValuesQuery {..} =
     go
       profileId

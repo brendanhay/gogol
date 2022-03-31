@@ -149,7 +149,7 @@ instance
       ChangeLogsListResponse
   type
     Scopes DFAReportingChangeLogsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingChangeLogsList {..} =
     go
       profileId

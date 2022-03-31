@@ -108,7 +108,7 @@ instance Core.GoogleRequest DFAReportingAccountsPatch where
   type Rs DFAReportingAccountsPatch = Account
   type
     Scopes DFAReportingAccountsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAccountsPatch {..} =
     go
       profileId

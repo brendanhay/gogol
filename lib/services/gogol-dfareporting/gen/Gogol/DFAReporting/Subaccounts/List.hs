@@ -131,7 +131,7 @@ instance
       SubaccountsListResponse
   type
     Scopes DFAReportingSubaccountsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingSubaccountsList {..} =
     go
       profileId

@@ -107,7 +107,7 @@ instance
       FloodlightActivity
   type
     Scopes DFAReportingFloodlightActivitiesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingFloodlightActivitiesGet {..} =
     go
       profileId

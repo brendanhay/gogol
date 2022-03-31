@@ -109,7 +109,7 @@ instance
   type
     Scopes
       DFAReportingFloodlightActivitiesGeneratetag =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingFloodlightActivitiesGeneratetag {..} =
       go

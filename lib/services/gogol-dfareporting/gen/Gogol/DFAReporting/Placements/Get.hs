@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingPlacementsGet where
   type Rs DFAReportingPlacementsGet = Placement
   type
     Scopes DFAReportingPlacementsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingPlacementsGet {..} =
     go
       profileId

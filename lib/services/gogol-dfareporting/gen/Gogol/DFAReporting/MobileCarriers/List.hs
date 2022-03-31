@@ -101,7 +101,7 @@ instance
       MobileCarriersListResponse
   type
     Scopes DFAReportingMobileCarriersList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingMobileCarriersList {..} =
     go
       profileId

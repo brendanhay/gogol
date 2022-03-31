@@ -113,7 +113,7 @@ instance
       ContentCategory
   type
     Scopes DFAReportingContentCategoriesPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingContentCategoriesPatch {..} =
     go
       profileId

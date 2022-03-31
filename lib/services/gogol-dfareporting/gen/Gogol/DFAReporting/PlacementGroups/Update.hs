@@ -107,7 +107,7 @@ instance
       PlacementGroup
   type
     Scopes DFAReportingPlacementGroupsUpdate =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingPlacementGroupsUpdate {..} =
     go
       profileId

@@ -107,7 +107,7 @@ instance
       UserRolePermissionGroup
   type
     Scopes DFAReportingUserRolePermissionGroupsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingUserRolePermissionGroupsGet {..} =
       go

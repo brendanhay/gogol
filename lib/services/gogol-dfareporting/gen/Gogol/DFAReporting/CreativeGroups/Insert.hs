@@ -107,7 +107,7 @@ instance
       CreativeGroup
   type
     Scopes DFAReportingCreativeGroupsInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCreativeGroupsInsert {..} =
     go
       profileId

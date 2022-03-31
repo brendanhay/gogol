@@ -107,7 +107,7 @@ instance
       AccountPermissionGroup
   type
     Scopes DFAReportingAccountPermissionGroupsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingAccountPermissionGroupsGet {..} =
       go

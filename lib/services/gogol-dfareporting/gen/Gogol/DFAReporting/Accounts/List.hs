@@ -130,7 +130,7 @@ instance Core.GoogleRequest DFAReportingAccountsList where
       AccountsListResponse
   type
     Scopes DFAReportingAccountsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAccountsList {..} =
     go
       profileId

@@ -101,7 +101,7 @@ instance
       OperatingSystemsListResponse
   type
     Scopes DFAReportingOperatingSystemsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingOperatingSystemsList {..} =
     go
       profileId

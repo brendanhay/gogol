@@ -107,7 +107,7 @@ instance
       DirectorySite
   type
     Scopes DFAReportingDirectorySitesInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingDirectorySitesInsert {..} =
     go
       profileId

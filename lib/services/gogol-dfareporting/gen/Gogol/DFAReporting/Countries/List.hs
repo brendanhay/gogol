@@ -98,7 +98,7 @@ instance Core.GoogleRequest DFAReportingCountriesList where
       CountriesListResponse
   type
     Scopes DFAReportingCountriesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCountriesList {..} =
     go
       profileId

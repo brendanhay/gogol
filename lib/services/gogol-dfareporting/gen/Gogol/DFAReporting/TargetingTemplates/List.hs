@@ -135,7 +135,7 @@ instance
       TargetingTemplatesListResponse
   type
     Scopes DFAReportingTargetingTemplatesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingTargetingTemplatesList {..} =
     go
       profileId

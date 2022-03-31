@@ -112,7 +112,7 @@ instance Core.GoogleRequest DFAReportingSizesList where
   type Rs DFAReportingSizesList = SizesListResponse
   type
     Scopes DFAReportingSizesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingSizesList {..} =
     go
       profileId

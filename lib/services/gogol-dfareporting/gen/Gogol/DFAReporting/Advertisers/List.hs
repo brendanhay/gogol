@@ -169,7 +169,7 @@ instance
       AdvertisersListResponse
   type
     Scopes DFAReportingAdvertisersList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdvertisersList {..} =
     go
       profileId

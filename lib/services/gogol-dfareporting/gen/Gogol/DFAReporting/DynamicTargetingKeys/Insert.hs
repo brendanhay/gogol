@@ -107,7 +107,7 @@ instance
       DynamicTargetingKey
   type
     Scopes DFAReportingDynamicTargetingKeysInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingDynamicTargetingKeysInsert {..} =
       go

@@ -30,9 +30,9 @@ module Gogol.DFAReporting.Types
     dFAReportingService,
 
     -- * OAuth Scopes
-    ddmconversionsScope,
-    dFAReportingScope,
-    dfatraffickingScope,
+    Ddmconversions'FullControl,
+    Dfareporting'FullControl,
+    Dfatrafficking'FullControl,
 
     -- * Types
 
@@ -1627,13 +1627,10 @@ dFAReportingService =
     "dfareporting.googleapis.com"
 
 -- | Manage DoubleClick Digital Marketing conversions
-ddmconversionsScope :: Core.Proxy '["https://www.googleapis.com/auth/ddmconversions"]
-ddmconversionsScope = Core.Proxy
+type Ddmconversions'FullControl = "https://www.googleapis.com/auth/ddmconversions"
 
 -- | View and manage DoubleClick for Advertisers reports
-dFAReportingScope :: Core.Proxy '["https://www.googleapis.com/auth/dfareporting"]
-dFAReportingScope = Core.Proxy
+type Dfareporting'FullControl = "https://www.googleapis.com/auth/dfareporting"
 
 -- | View and manage your DoubleClick Campaign Manager\'s (DCM) display ad campaigns
-dfatraffickingScope :: Core.Proxy '["https://www.googleapis.com/auth/dfatrafficking"]
-dfatraffickingScope = Core.Proxy
+type Dfatrafficking'FullControl = "https://www.googleapis.com/auth/dfatrafficking"

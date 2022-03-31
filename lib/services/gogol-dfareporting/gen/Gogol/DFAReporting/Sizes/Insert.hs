@@ -102,7 +102,7 @@ instance Core.GoogleRequest DFAReportingSizesInsert where
   type Rs DFAReportingSizesInsert = Size
   type
     Scopes DFAReportingSizesInsert =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingSizesInsert {..} =
     go
       profileId

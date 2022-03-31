@@ -107,7 +107,7 @@ instance
       FloodlightConfigurationsListResponse
   type
     Scopes DFAReportingFloodlightConfigurationsList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingFloodlightConfigurationsList {..} =
       go

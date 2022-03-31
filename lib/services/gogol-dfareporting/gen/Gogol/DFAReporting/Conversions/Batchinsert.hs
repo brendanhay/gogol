@@ -112,7 +112,7 @@ instance
       ConversionsBatchInsertResponse
   type
     Scopes DFAReportingConversionsBatchinsert =
-      '["https://www.googleapis.com/auth/ddmconversions"]
+      '[Ddmconversions'FullControl]
   requestClient DFAReportingConversionsBatchinsert {..} =
     go
       profileId

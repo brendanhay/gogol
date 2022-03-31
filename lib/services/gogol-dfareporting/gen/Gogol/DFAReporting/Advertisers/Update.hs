@@ -105,7 +105,7 @@ instance
   type Rs DFAReportingAdvertisersUpdate = Advertiser
   type
     Scopes DFAReportingAdvertisersUpdate =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdvertisersUpdate {..} =
     go
       profileId

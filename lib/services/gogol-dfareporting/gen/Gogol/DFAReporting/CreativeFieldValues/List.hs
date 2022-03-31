@@ -140,7 +140,7 @@ instance
       CreativeFieldValuesListResponse
   type
     Scopes DFAReportingCreativeFieldValuesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingCreativeFieldValuesList {..} =
     go
       profileId

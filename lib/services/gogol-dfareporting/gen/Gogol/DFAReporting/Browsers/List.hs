@@ -98,7 +98,7 @@ instance Core.GoogleRequest DFAReportingBrowsersList where
       BrowsersListResponse
   type
     Scopes DFAReportingBrowsersList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingBrowsersList {..} =
     go
       profileId

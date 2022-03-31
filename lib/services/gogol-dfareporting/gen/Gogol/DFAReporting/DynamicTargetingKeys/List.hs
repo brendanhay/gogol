@@ -121,7 +121,7 @@ instance
       DynamicTargetingKeysListResponse
   type
     Scopes DFAReportingDynamicTargetingKeysList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingDynamicTargetingKeysList {..} =
       go

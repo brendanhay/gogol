@@ -107,7 +107,7 @@ instance
       TargetableRemarketingList
   type
     Scopes DFAReportingTargetableRemarketingListsGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingTargetableRemarketingListsGet {..} =
       go

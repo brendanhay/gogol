@@ -107,7 +107,7 @@ instance
       PlacementStrategy
   type
     Scopes DFAReportingPlacementStrategiesUpdate =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingPlacementStrategiesUpdate {..} =
       go

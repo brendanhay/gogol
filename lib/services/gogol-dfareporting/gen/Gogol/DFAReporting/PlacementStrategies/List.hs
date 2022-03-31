@@ -131,7 +131,7 @@ instance
       PlacementStrategiesListResponse
   type
     Scopes DFAReportingPlacementStrategiesList =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingPlacementStrategiesList {..} =
     go
       profileId

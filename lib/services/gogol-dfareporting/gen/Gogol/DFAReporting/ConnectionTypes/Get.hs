@@ -107,7 +107,7 @@ instance
       ConnectionType
   type
     Scopes DFAReportingConnectionTypesGet =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient DFAReportingConnectionTypesGet {..} =
     go
       profileId

@@ -113,7 +113,7 @@ instance
       FloodlightConfiguration
   type
     Scopes DFAReportingFloodlightConfigurationsPatch =
-      '["https://www.googleapis.com/auth/dfatrafficking"]
+      '[Dfatrafficking'FullControl]
   requestClient
     DFAReportingFloodlightConfigurationsPatch {..} =
       go
