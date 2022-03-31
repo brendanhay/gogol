@@ -102,9 +102,7 @@ instance Core.GoogleRequest PubSubProjectsTopicsList where
   type Rs PubSubProjectsTopicsList = ListTopicsResponse
   type
     Scopes PubSubProjectsTopicsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsTopicsList {..} =
     go
       project

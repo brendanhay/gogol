@@ -104,9 +104,7 @@ instance
       PullResponse
   type
     Scopes PubSubProjectsSubscriptionsPull =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSubscriptionsPull {..} =
     go
       subscription

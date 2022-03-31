@@ -102,9 +102,7 @@ instance
   type Rs PubSubProjectsTopicsPublish = PublishResponse
   type
     Scopes PubSubProjectsTopicsPublish =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsTopicsPublish {..} =
     go
       topic

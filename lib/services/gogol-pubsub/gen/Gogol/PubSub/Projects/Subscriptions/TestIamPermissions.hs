@@ -108,9 +108,7 @@ instance
   type
     Scopes
       PubSubProjectsSubscriptionsTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient
     PubSubProjectsSubscriptionsTestIamPermissions {..} =
       go

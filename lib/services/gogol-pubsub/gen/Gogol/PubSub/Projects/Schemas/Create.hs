@@ -107,9 +107,7 @@ instance
   type Rs PubSubProjectsSchemasCreate = Schema
   type
     Scopes PubSubProjectsSchemasCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSchemasCreate {..} =
     go
       parent

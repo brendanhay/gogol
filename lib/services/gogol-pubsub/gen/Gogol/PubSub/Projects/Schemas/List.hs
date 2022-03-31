@@ -108,9 +108,7 @@ instance Core.GoogleRequest PubSubProjectsSchemasList where
       ListSchemasResponse
   type
     Scopes PubSubProjectsSchemasList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSchemasList {..} =
     go
       parent

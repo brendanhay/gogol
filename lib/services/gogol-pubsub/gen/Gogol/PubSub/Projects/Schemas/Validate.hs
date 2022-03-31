@@ -105,9 +105,7 @@ instance
       ValidateSchemaResponse
   type
     Scopes PubSubProjectsSchemasValidate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient PubSubProjectsSchemasValidate {..} =
     go
       parent

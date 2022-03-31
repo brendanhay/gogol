@@ -107,9 +107,7 @@ instance
       TestIamPermissionsResponse
   type
     Scopes PubSubProjectsSchemasTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/pubsub"
-       ]
+      '[CloudPlatform'FullControl, Pubsub'FullControl]
   requestClient
     PubSubProjectsSchemasTestIamPermissions {..} =
       go
