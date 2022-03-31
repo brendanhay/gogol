@@ -120,7 +120,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate {..} =
       go

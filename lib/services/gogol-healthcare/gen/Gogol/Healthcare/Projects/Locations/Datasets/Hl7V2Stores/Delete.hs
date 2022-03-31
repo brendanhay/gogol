@@ -100,7 +100,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsHl7V2StoresDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsHl7V2StoresDelete {..} =
       go

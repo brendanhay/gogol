@@ -107,7 +107,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveMetadata =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveMetadata {..} =
       go

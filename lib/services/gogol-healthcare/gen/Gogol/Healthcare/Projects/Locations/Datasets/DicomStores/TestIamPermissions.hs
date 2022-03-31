@@ -109,7 +109,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissions {..} =
       go

@@ -34,7 +34,7 @@ module Gogol.Healthcare
     healthcareService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
