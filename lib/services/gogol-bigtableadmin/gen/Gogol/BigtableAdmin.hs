@@ -34,15 +34,15 @@ module Gogol.BigtableAdmin
     bigtableAdminService,
 
     -- * OAuth Scopes
-    bigtableAdminScope,
-    bigtableAdminClusterScope,
-    bigtableAdminInstanceScope,
-    bigtableAdminTableScope,
-    cloudBigtableAdminScope,
-    cloudBigtableAdminClusterScope,
-    cloudBigtableAdminTableScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    Bigtable'Admin,
+    Bigtable'Admin'Cluster,
+    Bigtable'Admin'Instance,
+    Bigtable'Admin'Table,
+    CloudBigtable'Admin,
+    CloudBigtable'Admin'Cluster,
+    CloudBigtable'Admin'Table,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Resources
 

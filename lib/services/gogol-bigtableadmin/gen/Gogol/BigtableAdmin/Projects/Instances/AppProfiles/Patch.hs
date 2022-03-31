@@ -114,12 +114,12 @@ instance
   type
     Scopes
       BigtableAdminProjectsInstancesAppProfilesPatch =
-      '[ "https://www.googleapis.com/auth/bigtable.admin",
-         "https://www.googleapis.com/auth/bigtable.admin.cluster",
-         "https://www.googleapis.com/auth/bigtable.admin.instance",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ Bigtable'Admin,
+         Bigtable'Admin'Cluster,
+         Bigtable'Admin'Instance,
+         CloudBigtable'Admin,
+         CloudBigtable'Admin'Cluster,
+         CloudPlatform'FullControl
        ]
   requestClient
     BigtableAdminProjectsInstancesAppProfilesPatch {..} =

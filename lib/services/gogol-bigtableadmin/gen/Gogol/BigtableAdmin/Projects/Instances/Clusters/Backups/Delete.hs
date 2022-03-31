@@ -100,11 +100,11 @@ instance
   type
     Scopes
       BigtableAdminProjectsInstancesClustersBackupsDelete =
-      '[ "https://www.googleapis.com/auth/bigtable.admin",
-         "https://www.googleapis.com/auth/bigtable.admin.table",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin",
-         "https://www.googleapis.com/auth/cloud-bigtable.admin.table",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ Bigtable'Admin,
+         Bigtable'Admin'Table,
+         CloudBigtable'Admin,
+         CloudBigtable'Admin'Table,
+         CloudPlatform'FullControl
        ]
   requestClient
     BigtableAdminProjectsInstancesClustersBackupsDelete {..} =

@@ -30,15 +30,15 @@ module Gogol.BigtableAdmin.Types
     bigtableAdminService,
 
     -- * OAuth Scopes
-    bigtableAdminScope,
-    bigtableAdminClusterScope,
-    bigtableAdminInstanceScope,
-    bigtableAdminTableScope,
-    cloudBigtableAdminScope,
-    cloudBigtableAdminClusterScope,
-    cloudBigtableAdminTableScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    Bigtable'Admin,
+    Bigtable'Admin'Cluster,
+    Bigtable'Admin'Instance,
+    Bigtable'Admin'Table,
+    CloudBigtable'Admin,
+    CloudBigtable'Admin'Cluster,
+    CloudBigtable'Admin'Table,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Types
 
@@ -405,37 +405,28 @@ bigtableAdminService =
     "bigtableadmin.googleapis.com"
 
 -- | Administer your Cloud Bigtable tables and clusters
-bigtableAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin"]
-bigtableAdminScope = Core.Proxy
+type Bigtable'Admin = "https://www.googleapis.com/auth/bigtable.admin"
 
 -- | Administer your Cloud Bigtable clusters
-bigtableAdminClusterScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin.cluster"]
-bigtableAdminClusterScope = Core.Proxy
+type Bigtable'Admin'Cluster = "https://www.googleapis.com/auth/bigtable.admin.cluster"
 
 -- | Administer your Cloud Bigtable clusters
-bigtableAdminInstanceScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin.instance"]
-bigtableAdminInstanceScope = Core.Proxy
+type Bigtable'Admin'Instance = "https://www.googleapis.com/auth/bigtable.admin.instance"
 
 -- | Administer your Cloud Bigtable tables
-bigtableAdminTableScope :: Core.Proxy '["https://www.googleapis.com/auth/bigtable.admin.table"]
-bigtableAdminTableScope = Core.Proxy
+type Bigtable'Admin'Table = "https://www.googleapis.com/auth/bigtable.admin.table"
 
 -- | Administer your Cloud Bigtable tables and clusters
-cloudBigtableAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin"]
-cloudBigtableAdminScope = Core.Proxy
+type CloudBigtable'Admin = "https://www.googleapis.com/auth/cloud-bigtable.admin"
 
 -- | Administer your Cloud Bigtable clusters
-cloudBigtableAdminClusterScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.cluster"]
-cloudBigtableAdminClusterScope = Core.Proxy
+type CloudBigtable'Admin'Cluster = "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster"
 
 -- | Administer your Cloud Bigtable tables
-cloudBigtableAdminTableScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.table"]
-cloudBigtableAdminTableScope = Core.Proxy
+type CloudBigtable'Admin'Table = "https://www.googleapis.com/auth/cloud-bigtable.admin.table"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
