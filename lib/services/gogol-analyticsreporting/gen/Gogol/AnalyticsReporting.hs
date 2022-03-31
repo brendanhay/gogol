@@ -34,8 +34,8 @@ module Gogol.AnalyticsReporting
     analyticsReportingService,
 
     -- * OAuth Scopes
-    analyticsScope,
-    analyticsReadOnlyScope,
+    Analytics'FullControl,
+    Analytics'Readonly,
 
     -- * Resources
 

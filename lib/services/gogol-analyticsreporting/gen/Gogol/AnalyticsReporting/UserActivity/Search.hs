@@ -99,9 +99,7 @@ instance
       SearchUserActivityResponse
   type
     Scopes AnalyticsReportingUserActivitySearch =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'FullControl, Analytics'Readonly]
   requestClient
     AnalyticsReportingUserActivitySearch {..} =
       go
