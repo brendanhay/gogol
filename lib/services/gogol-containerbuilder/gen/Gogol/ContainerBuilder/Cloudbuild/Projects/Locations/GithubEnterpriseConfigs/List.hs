@@ -107,7 +107,7 @@ instance
   type
     Scopes
       CloudbuildProjectsLocationsGithubEnterpriseConfigsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsGithubEnterpriseConfigsList {..} =
       go

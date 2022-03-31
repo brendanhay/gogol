@@ -110,7 +110,7 @@ instance
   type
     Scopes
       CloudbuildProjectsGithubEnterpriseConfigsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsGithubEnterpriseConfigsPatch {..} =
       go

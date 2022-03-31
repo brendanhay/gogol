@@ -98,7 +98,7 @@ instance
       WorkerPool
   type
     Scopes CloudbuildProjectsLocationsWorkerPoolsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudbuildProjectsLocationsWorkerPoolsGet {..} =
       go

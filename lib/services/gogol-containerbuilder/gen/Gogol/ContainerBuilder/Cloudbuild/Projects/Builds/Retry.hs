@@ -112,7 +112,7 @@ instance
   type Rs CloudbuildProjectsBuildsRetry = Operation
   type
     Scopes CloudbuildProjectsBuildsRetry =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudbuildProjectsBuildsRetry {..} =
     go
       projectId
