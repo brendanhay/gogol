@@ -34,8 +34,8 @@ module Gogol.DriveActivity
     driveActivityService,
 
     -- * OAuth Scopes
-    driveActivityScope,
-    driveActivityReadOnlyScope,
+    Drive'Activity,
+    Drive'Activity'Readonly,
 
     -- * Resources
 

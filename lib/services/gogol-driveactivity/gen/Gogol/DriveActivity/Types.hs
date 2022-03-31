@@ -30,8 +30,8 @@ module Gogol.DriveActivity.Types
     driveActivityService,
 
     -- * OAuth Scopes
-    driveActivityScope,
-    driveActivityReadOnlyScope,
+    Drive'Activity,
+    Drive'Activity'Readonly,
 
     -- * Types
 
@@ -307,9 +307,7 @@ driveActivityService =
     "driveactivity.googleapis.com"
 
 -- | View and add to the activity record of files in your Google Drive
-driveActivityScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.activity"]
-driveActivityScope = Core.Proxy
+type Drive'Activity = "https://www.googleapis.com/auth/drive.activity"
 
 -- | View the activity record of files in your Google Drive
-driveActivityReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.activity.readonly"]
-driveActivityReadOnlyScope = Core.Proxy
+type Drive'Activity'Readonly = "https://www.googleapis.com/auth/drive.activity.readonly"
