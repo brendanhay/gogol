@@ -34,10 +34,10 @@ module Gogol.ServiceManagement
     serviceManagementService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    serviceManagementScope,
-    serviceManagementReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Service'Management,
+    Service'Management'Readonly,
 
     -- * Resources
 

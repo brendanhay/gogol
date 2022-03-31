@@ -96,9 +96,7 @@ instance
   type Rs ServiceManagementOperationsGet = Operation
   type
     Scopes ServiceManagementOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient ServiceManagementOperationsGet {..} =
     go
       name

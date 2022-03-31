@@ -97,10 +97,10 @@ instance
   type Rs ServiceManagementServicesGet = ManagedService
   type
     Scopes ServiceManagementServicesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/service.management",
-         "https://www.googleapis.com/auth/service.management.readonly"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Service'Management,
+         Service'Management'Readonly
        ]
   requestClient ServiceManagementServicesGet {..} =
     go
