@@ -109,7 +109,7 @@ instance
   type
     Scopes
       GamesConfigurationLeaderboardConfigurationsInsert =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     GamesConfigurationLeaderboardConfigurationsInsert {..} =
       go

@@ -128,7 +128,7 @@ instance
   type
     Scopes
       GamesConfigurationImageConfigurationsUpload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     GamesConfigurationImageConfigurationsUpload {..} =
       go

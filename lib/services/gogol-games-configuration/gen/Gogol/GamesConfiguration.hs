@@ -34,7 +34,7 @@ module Gogol.GamesConfiguration
     gamesConfigurationService,
 
     -- * OAuth Scopes
-    androidpublisherScope,
+    Androidpublisher'FullControl,
 
     -- * Resources
 
