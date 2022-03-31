@@ -121,9 +121,9 @@ instance
       ListVersionsResponse
   type
     Scopes AppEngineAppsServicesVersionsList =
-      '[ "https://www.googleapis.com/auth/appengine.admin",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Appengine'Admin,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient AppEngineAppsServicesVersionsList {..} =
     go

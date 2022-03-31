@@ -117,7 +117,7 @@ instance
       FirewallRule
   type
     Scopes AppEngineAppsFirewallIngressRulesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsFirewallIngressRulesPatch {..} =
       go

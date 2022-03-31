@@ -116,7 +116,7 @@ instance
       AuthorizedCertificate
   type
     Scopes AppEngineAppsAuthorizedCertificatesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsAuthorizedCertificatesPatch {..} =
       go

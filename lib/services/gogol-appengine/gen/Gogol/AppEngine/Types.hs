@@ -30,9 +30,9 @@ module Gogol.AppEngine.Types
     appEngineService,
 
     -- * OAuth Scopes
-    appEngineAdminScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    Appengine'Admin,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Types
 
@@ -466,13 +466,10 @@ appEngineService =
     "appengine.googleapis.com"
 
 -- | View and manage your applications deployed on Google App Engine
-appEngineAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/appengine.admin"]
-appEngineAdminScope = Core.Proxy
+type Appengine'Admin = "https://www.googleapis.com/auth/appengine.admin"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"

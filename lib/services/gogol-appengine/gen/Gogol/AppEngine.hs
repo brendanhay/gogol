@@ -34,9 +34,9 @@ module Gogol.AppEngine
     appEngineService,
 
     -- * OAuth Scopes
-    appEngineAdminScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    Appengine'Admin,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Resources
 

@@ -112,7 +112,7 @@ instance
   type
     Scopes
       AppEngineAppsFirewallIngressRulesBatchUpdate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsFirewallIngressRulesBatchUpdate {..} =
       go

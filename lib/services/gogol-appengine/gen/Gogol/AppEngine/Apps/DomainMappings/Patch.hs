@@ -114,7 +114,7 @@ instance
   type Rs AppEngineAppsDomainMappingsPatch = Operation
   type
     Scopes AppEngineAppsDomainMappingsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsDomainMappingsPatch {..} =
     go
       appsId

@@ -104,7 +104,7 @@ instance
   type Rs AppEngineAppsDomainMappingsDelete = Operation
   type
     Scopes AppEngineAppsDomainMappingsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsDomainMappingsDelete {..} =
     go
       appsId

@@ -129,7 +129,7 @@ instance
   type
     Scopes
       AppEngineAppsServicesVersionsInstancesDebug =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsServicesVersionsInstancesDebug {..} =
       go

@@ -118,7 +118,7 @@ instance
   type Rs AppEngineAppsServicesPatch = Operation
   type
     Scopes AppEngineAppsServicesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsServicesPatch {..} =
     go
       appsId

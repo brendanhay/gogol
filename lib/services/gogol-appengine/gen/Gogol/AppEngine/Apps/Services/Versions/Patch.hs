@@ -129,7 +129,7 @@ instance
       Operation
   type
     Scopes AppEngineAppsServicesVersionsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsServicesVersionsPatch {..} =
     go
       appsId
