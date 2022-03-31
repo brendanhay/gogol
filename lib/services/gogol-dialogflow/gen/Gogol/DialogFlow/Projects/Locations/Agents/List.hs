@@ -109,9 +109,7 @@ instance
       GoogleCloudDialogflowCxV3ListAgentsResponse
   type
     Scopes DialogFlowProjectsLocationsAgentsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/dialogflow"
-       ]
+      '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsList {..} =
       go

@@ -110,9 +110,7 @@ instance
   type
     Scopes
       DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/dialogflow"
-       ]
+      '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent {..} =
       go

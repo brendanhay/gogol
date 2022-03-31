@@ -30,8 +30,8 @@ module Gogol.DialogFlow.Types
     dialogFlowService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    dialogFlowScope,
+    CloudPlatform'FullControl,
+    Dialogflow'FullControl,
 
     -- * Types
 
@@ -2240,9 +2240,7 @@ dialogFlowService =
     "dialogflow.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View, manage and query your Dialogflow agents
-dialogFlowScope :: Core.Proxy '["https://www.googleapis.com/auth/dialogflow"]
-dialogFlowScope = Core.Proxy
+type Dialogflow'FullControl = "https://www.googleapis.com/auth/dialogflow"
