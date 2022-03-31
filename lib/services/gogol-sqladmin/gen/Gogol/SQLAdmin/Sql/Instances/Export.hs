@@ -108,7 +108,7 @@ instance Core.GoogleRequest SqlInstancesExport where
   type Rs SqlInstancesExport = Operation
   type
     Scopes SqlInstancesExport =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient SqlInstancesExport {..} =
     go
       project

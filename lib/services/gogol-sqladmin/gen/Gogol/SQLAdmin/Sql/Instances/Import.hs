@@ -108,7 +108,7 @@ instance Core.GoogleRequest SqlInstancesImport where
   type Rs SqlInstancesImport = Operation
   type
     Scopes SqlInstancesImport =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient SqlInstancesImport {..} =
     go
       project

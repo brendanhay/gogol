@@ -34,8 +34,8 @@ module Gogol.SQLAdmin
     sQLAdminService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    sqlserviceAdminScope,
+    CloudPlatform'FullControl,
+    Sqlservice'Admin,
 
     -- * Resources
 

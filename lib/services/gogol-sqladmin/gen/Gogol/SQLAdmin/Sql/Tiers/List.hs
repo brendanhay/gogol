@@ -95,9 +95,7 @@ instance Core.GoogleRequest SqlTiersList where
   type Rs SqlTiersList = TiersListResponse
   type
     Scopes SqlTiersList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlTiersList {..} =
     go
       project

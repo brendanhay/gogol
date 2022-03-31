@@ -107,9 +107,7 @@ instance Core.GoogleRequest SqlOperationsList where
   type Rs SqlOperationsList = OperationsListResponse
   type
     Scopes SqlOperationsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlOperationsList {..} =
     go
       project

@@ -108,9 +108,7 @@ instance Core.GoogleRequest SqlBackupRunsInsert where
   type Rs SqlBackupRunsInsert = Operation
   type
     Scopes SqlBackupRunsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlBackupRunsInsert {..} =
     go
       project

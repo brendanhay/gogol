@@ -101,9 +101,7 @@ instance Core.GoogleRequest SqlOperationsGet where
   type Rs SqlOperationsGet = Operation
   type
     Scopes SqlOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlOperationsGet {..} =
     go
       project

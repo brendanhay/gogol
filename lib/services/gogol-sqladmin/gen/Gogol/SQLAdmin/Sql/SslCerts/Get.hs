@@ -108,9 +108,7 @@ instance Core.GoogleRequest SqlSslCertsGet where
   type Rs SqlSslCertsGet = SslCert
   type
     Scopes SqlSslCertsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlSslCertsGet {..} =
     go
       project

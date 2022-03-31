@@ -108,9 +108,7 @@ instance Core.GoogleRequest SqlSslCertsDelete where
   type Rs SqlSslCertsDelete = Operation
   type
     Scopes SqlSslCertsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlSslCertsDelete {..} =
     go
       project

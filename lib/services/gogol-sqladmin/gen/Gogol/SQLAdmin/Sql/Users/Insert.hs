@@ -108,9 +108,7 @@ instance Core.GoogleRequest SqlUsersInsert where
   type Rs SqlUsersInsert = Operation
   type
     Scopes SqlUsersInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlUsersInsert {..} =
     go
       project

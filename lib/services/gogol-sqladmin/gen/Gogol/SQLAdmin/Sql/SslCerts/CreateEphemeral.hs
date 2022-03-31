@@ -113,9 +113,7 @@ instance
   type Rs SqlSslCertsCreateEphemeral = SslCert
   type
     Scopes SqlSslCertsCreateEphemeral =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlSslCertsCreateEphemeral {..} =
     go
       project

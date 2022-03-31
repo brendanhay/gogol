@@ -101,9 +101,7 @@ instance Core.GoogleRequest SqlInstancesGet where
   type Rs SqlInstancesGet = DatabaseInstance
   type
     Scopes SqlInstancesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesGet {..} =
     go
       project

@@ -102,9 +102,7 @@ instance Core.GoogleRequest SqlInstancesStopReplica where
   type Rs SqlInstancesStopReplica = Operation
   type
     Scopes SqlInstancesStopReplica =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesStopReplica {..} =
     go
       project

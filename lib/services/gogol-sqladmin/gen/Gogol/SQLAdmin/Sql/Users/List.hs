@@ -102,9 +102,7 @@ instance Core.GoogleRequest SqlUsersList where
   type Rs SqlUsersList = UsersListResponse
   type
     Scopes SqlUsersList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlUsersList {..} =
     go
       project
