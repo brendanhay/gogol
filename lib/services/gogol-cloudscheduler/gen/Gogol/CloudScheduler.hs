@@ -34,7 +34,7 @@ module Gogol.CloudScheduler
     cloudSchedulerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
