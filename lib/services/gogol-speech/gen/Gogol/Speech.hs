@@ -34,7 +34,7 @@ module Gogol.Speech
     speechService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
