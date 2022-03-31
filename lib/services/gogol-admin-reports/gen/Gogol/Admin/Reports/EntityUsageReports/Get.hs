@@ -137,7 +137,7 @@ instance
   type Rs ReportsEntityUsageReportsGet = UsageReports
   type
     Scopes ReportsEntityUsageReportsGet =
-      '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+      '[Admin'Reports'Usage'Readonly]
   requestClient ReportsEntityUsageReportsGet {..} =
     go
       entityType

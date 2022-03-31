@@ -34,8 +34,8 @@ module Gogol.Admin.Reports
     adminReportsService,
 
     -- * OAuth Scopes
-    adminReportsAuditReadOnlyScope,
-    adminReportsUsageReadOnlyScope,
+    Admin'Reports'Audit'Readonly,
+    Admin'Reports'Usage'Readonly,
 
     -- * Resources
 

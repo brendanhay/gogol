@@ -158,7 +158,7 @@ instance Core.GoogleRequest ReportsActivitiesList where
   type Rs ReportsActivitiesList = Activities
   type
     Scopes ReportsActivitiesList =
-      '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+      '[Admin'Reports'Audit'Readonly]
   requestClient ReportsActivitiesList {..} =
     go
       userKey
