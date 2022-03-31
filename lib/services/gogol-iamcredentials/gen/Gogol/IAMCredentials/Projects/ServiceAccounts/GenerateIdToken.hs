@@ -106,7 +106,7 @@ instance
   type
     Scopes
       IAMCredentialsProjectsServiceAccountsGenerateIdToken =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMCredentialsProjectsServiceAccountsGenerateIdToken {..} =
       go

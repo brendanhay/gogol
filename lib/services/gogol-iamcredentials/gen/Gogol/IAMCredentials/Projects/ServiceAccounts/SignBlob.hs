@@ -105,7 +105,7 @@ instance
   type
     Scopes
       IAMCredentialsProjectsServiceAccountsSignBlob =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMCredentialsProjectsServiceAccountsSignBlob {..} =
       go
