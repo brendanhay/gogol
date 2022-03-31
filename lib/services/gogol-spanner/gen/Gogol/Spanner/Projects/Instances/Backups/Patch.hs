@@ -106,9 +106,7 @@ instance
   type Rs SpannerProjectsInstancesBackupsPatch = Backup
   type
     Scopes SpannerProjectsInstancesBackupsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.admin"
-       ]
+      '[CloudPlatform'FullControl, Spanner'Admin]
   requestClient
     SpannerProjectsInstancesBackupsPatch {..} =
       go

@@ -100,9 +100,7 @@ instance
   type Rs SpannerProjectsInstancesGet = Instance
   type
     Scopes SpannerProjectsInstancesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.admin"
-       ]
+      '[CloudPlatform'FullControl, Spanner'Admin]
   requestClient SpannerProjectsInstancesGet {..} =
     go
       name

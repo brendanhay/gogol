@@ -112,9 +112,7 @@ instance
       ListBackupsResponse
   type
     Scopes SpannerProjectsInstancesBackupsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/spanner.admin"
-       ]
+      '[CloudPlatform'FullControl, Spanner'Admin]
   requestClient SpannerProjectsInstancesBackupsList {..} =
     go
       parent
