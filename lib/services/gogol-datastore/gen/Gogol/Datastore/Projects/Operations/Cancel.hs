@@ -96,9 +96,7 @@ instance
   type Rs DatastoreProjectsOperationsCancel = Empty
   type
     Scopes DatastoreProjectsOperationsCancel =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsOperationsCancel {..} =
     go
       name

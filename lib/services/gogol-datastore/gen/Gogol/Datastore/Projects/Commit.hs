@@ -100,9 +100,7 @@ instance Core.GoogleRequest DatastoreProjectsCommit where
   type Rs DatastoreProjectsCommit = CommitResponse
   type
     Scopes DatastoreProjectsCommit =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsCommit {..} =
     go
       projectId

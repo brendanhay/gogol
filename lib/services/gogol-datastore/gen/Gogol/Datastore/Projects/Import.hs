@@ -104,9 +104,7 @@ instance Core.GoogleRequest DatastoreProjectsImport where
       GoogleLongrunningOperation
   type
     Scopes DatastoreProjectsImport =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsImport {..} =
     go
       projectId

@@ -106,9 +106,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes DatastoreProjectsIndexesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/datastore"
-       ]
+      '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient DatastoreProjectsIndexesDelete {..} =
     go
       projectId
