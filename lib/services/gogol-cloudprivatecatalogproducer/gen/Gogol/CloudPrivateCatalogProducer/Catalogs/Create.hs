@@ -101,7 +101,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes CloudPrivateCatalogProducerCatalogsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsCreate {..} =
       go

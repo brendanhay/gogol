@@ -113,7 +113,7 @@ instance
   type
     Scopes
       CloudPrivateCatalogProducerCatalogsTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsTestIamPermissions {..} =
       go

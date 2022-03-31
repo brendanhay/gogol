@@ -107,7 +107,7 @@ instance
       GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
   type
     Scopes CloudPrivateCatalogProducerCatalogsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsList {..} =
       go

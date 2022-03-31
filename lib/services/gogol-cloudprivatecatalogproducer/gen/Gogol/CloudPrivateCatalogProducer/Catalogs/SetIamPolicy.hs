@@ -108,7 +108,7 @@ instance
   type
     Scopes
       CloudPrivateCatalogProducerCatalogsSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsSetIamPolicy {..} =
       go

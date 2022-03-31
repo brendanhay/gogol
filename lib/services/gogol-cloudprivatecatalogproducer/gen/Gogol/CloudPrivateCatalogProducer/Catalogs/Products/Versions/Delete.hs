@@ -100,7 +100,7 @@ instance
   type
     Scopes
       CloudPrivateCatalogProducerCatalogsProductsVersionsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsProductsVersionsDelete {..} =
       go

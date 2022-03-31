@@ -102,7 +102,7 @@ instance
   type
     Scopes
       CloudPrivateCatalogProducerCatalogsProductsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsProductsGet {..} =
       go
