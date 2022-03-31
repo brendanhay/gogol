@@ -104,7 +104,7 @@ instance
       Job
   type
     Scopes CloudSchedulerProjectsLocationsJobsPause =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudSchedulerProjectsLocationsJobsPause {..} =
       go
