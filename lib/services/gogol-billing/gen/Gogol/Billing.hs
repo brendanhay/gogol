@@ -34,9 +34,9 @@ module Gogol.Billing
     billingService,
 
     -- * OAuth Scopes
-    cloudBillingScope,
-    cloudBillingReadOnlyScope,
-    cloudPlatformScope,
+    CloudBilling'FullControl,
+    CloudBilling'Readonly,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

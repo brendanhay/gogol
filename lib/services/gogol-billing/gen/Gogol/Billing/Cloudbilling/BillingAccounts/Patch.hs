@@ -108,8 +108,8 @@ instance
       BillingAccount
   type
     Scopes CloudbillingBillingAccountsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-billing",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudBilling'FullControl,
+         CloudPlatform'FullControl
        ]
   requestClient CloudbillingBillingAccountsPatch {..} =
     go

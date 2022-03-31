@@ -104,9 +104,9 @@ instance
       Policy
   type
     Scopes CloudbillingBillingAccountsGetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-billing",
-         "https://www.googleapis.com/auth/cloud-billing.readonly",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ CloudBilling'FullControl,
+         CloudBilling'Readonly,
+         CloudPlatform'FullControl
        ]
   requestClient
     CloudbillingBillingAccountsGetIamPolicy {..} =

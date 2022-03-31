@@ -30,9 +30,9 @@ module Gogol.Billing.Types
     billingService,
 
     -- * OAuth Scopes
-    cloudBillingScope,
-    cloudBillingReadOnlyScope,
-    cloudPlatformScope,
+    CloudBilling'FullControl,
+    CloudBilling'Readonly,
+    CloudPlatform'FullControl,
 
     -- * Types
 
@@ -157,13 +157,10 @@ billingService =
     "cloudbilling.googleapis.com"
 
 -- | View and manage your Google Cloud Platform billing accounts
-cloudBillingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-billing"]
-cloudBillingScope = Core.Proxy
+type CloudBilling'FullControl = "https://www.googleapis.com/auth/cloud-billing"
 
 -- | View your Google Cloud Platform billing accounts
-cloudBillingReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-billing.readonly"]
-cloudBillingReadOnlyScope = Core.Proxy
+type CloudBilling'Readonly = "https://www.googleapis.com/auth/cloud-billing.readonly"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
