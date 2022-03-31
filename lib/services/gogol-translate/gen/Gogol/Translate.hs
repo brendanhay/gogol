@@ -34,8 +34,8 @@ module Gogol.Translate
     translateService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudTranslationScope,
+    CloudPlatform'FullControl,
+    CloudTranslation'FullControl,
 
     -- * Resources
 
