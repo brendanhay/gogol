@@ -81,7 +81,7 @@ instance
   type Rs GroupsSettingsGroupsUpdate = Groups
   type
     Scopes GroupsSettingsGroupsUpdate =
-      '["https://www.googleapis.com/auth/apps.groups.settings"]
+      '[Apps'Groups'Settings]
   requestClient GroupsSettingsGroupsUpdate {..} =
     go
       groupUniqueId
