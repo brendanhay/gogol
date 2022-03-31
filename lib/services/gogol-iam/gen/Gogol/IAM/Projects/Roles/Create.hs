@@ -102,7 +102,7 @@ instance Core.GoogleRequest IAMProjectsRolesCreate where
   type Rs IAMProjectsRolesCreate = Role
   type
     Scopes IAMProjectsRolesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsRolesCreate {..} =
     go
       parent

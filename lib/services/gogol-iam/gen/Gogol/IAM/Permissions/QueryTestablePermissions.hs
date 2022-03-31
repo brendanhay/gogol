@@ -103,7 +103,7 @@ instance
       QueryTestablePermissionsResponse
   type
     Scopes IAMPermissionsQueryTestablePermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMPermissionsQueryTestablePermissions {..} =
       go

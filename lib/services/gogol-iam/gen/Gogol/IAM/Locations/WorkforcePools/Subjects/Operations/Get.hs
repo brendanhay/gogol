@@ -100,7 +100,7 @@ instance
   type
     Scopes
       IAMLocationsWorkforcePoolsSubjectsOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMLocationsWorkforcePoolsSubjectsOperationsGet {..} =
       go

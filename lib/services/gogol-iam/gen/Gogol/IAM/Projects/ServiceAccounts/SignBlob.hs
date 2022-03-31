@@ -104,7 +104,7 @@ instance
       SignBlobResponse
   type
     Scopes IAMProjectsServiceAccountsSignBlob =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsServiceAccountsSignBlob {..} =
     go
       name

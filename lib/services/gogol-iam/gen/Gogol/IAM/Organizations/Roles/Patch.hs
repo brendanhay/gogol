@@ -108,7 +108,7 @@ instance
   type Rs IAMOrganizationsRolesPatch = Role
   type
     Scopes IAMOrganizationsRolesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMOrganizationsRolesPatch {..} =
     go
       name

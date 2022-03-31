@@ -112,7 +112,7 @@ instance
   type
     Scopes
       IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch {..} =
       go

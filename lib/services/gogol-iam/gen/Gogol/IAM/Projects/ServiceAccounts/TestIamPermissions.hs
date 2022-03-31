@@ -108,7 +108,7 @@ instance
   type
     Scopes
       IAMProjectsServiceAccountsTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMProjectsServiceAccountsTestIamPermissions {..} =
       go

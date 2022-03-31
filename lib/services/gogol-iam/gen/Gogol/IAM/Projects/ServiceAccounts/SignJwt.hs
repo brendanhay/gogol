@@ -104,7 +104,7 @@ instance
       SignJwtResponse
   type
     Scopes IAMProjectsServiceAccountsSignJwt =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsServiceAccountsSignJwt {..} =
     go
       name
