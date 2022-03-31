@@ -110,9 +110,7 @@ instance
   type
     Scopes
       DialogFlowProjectsLocationsAgentsFlowsValidate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/dialogflow"
-       ]
+      '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsFlowsValidate {..} =
       go

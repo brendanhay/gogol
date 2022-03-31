@@ -111,9 +111,7 @@ instance
   type
     Scopes
       DialogFlowProjectsLocationsSecuritySettingsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/dialogflow"
-       ]
+      '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsSecuritySettingsList {..} =
       go

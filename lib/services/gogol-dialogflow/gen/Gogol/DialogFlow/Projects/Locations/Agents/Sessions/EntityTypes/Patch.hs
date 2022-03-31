@@ -114,9 +114,7 @@ instance
   type
     Scopes
       DialogFlowProjectsLocationsAgentsSessionsEntityTypesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/dialogflow"
-       ]
+      '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsSessionsEntityTypesPatch {..} =
       go

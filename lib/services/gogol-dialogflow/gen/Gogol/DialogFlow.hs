@@ -34,8 +34,8 @@ module Gogol.DialogFlow
     dialogFlowService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    dialogFlowScope,
+    CloudPlatform'FullControl,
+    Dialogflow'FullControl,
 
     -- * Resources
 

@@ -98,9 +98,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes DialogFlowProjectsLocationsOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/dialogflow"
-       ]
+      '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsOperationsGet {..} =
       go
