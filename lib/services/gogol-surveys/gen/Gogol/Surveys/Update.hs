@@ -78,9 +78,7 @@ instance Core.GoogleRequest SurveysSurveysUpdate where
   type Rs SurveysSurveysUpdate = Survey
   type
     Scopes SurveysSurveysUpdate =
-      '[ "https://www.googleapis.com/auth/surveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Surveys'FullControl, Userinfo'Email]
   requestClient SurveysSurveysUpdate {..} =
     go
       surveyUrlId

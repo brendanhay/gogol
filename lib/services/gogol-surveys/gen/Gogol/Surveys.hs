@@ -34,9 +34,9 @@ module Gogol.Surveys
     surveysService,
 
     -- * OAuth Scopes
-    surveysScope,
-    surveysReadOnlyScope,
-    userinfoEmailScope,
+    Surveys'FullControl,
+    Surveys'Readonly,
+    Userinfo'Email,
 
     -- * Resources
 

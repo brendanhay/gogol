@@ -72,9 +72,7 @@ instance Core.GoogleRequest SurveysSurveysInsert where
   type Rs SurveysSurveysInsert = Survey
   type
     Scopes SurveysSurveysInsert =
-      '[ "https://www.googleapis.com/auth/surveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Surveys'FullControl, Userinfo'Email]
   requestClient SurveysSurveysInsert {..} =
     go (Core.Just Core.AltJSON) payload surveysService
     where

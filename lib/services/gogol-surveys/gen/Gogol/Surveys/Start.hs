@@ -79,9 +79,7 @@ instance Core.GoogleRequest SurveysSurveysStart where
   type Rs SurveysSurveysStart = SurveysStartResponse
   type
     Scopes SurveysSurveysStart =
-      '[ "https://www.googleapis.com/auth/surveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Surveys'FullControl, Userinfo'Email]
   requestClient SurveysSurveysStart {..} =
     go
       resourceId

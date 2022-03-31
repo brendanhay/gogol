@@ -73,9 +73,7 @@ instance Core.GoogleRequest SurveysSurveysDelete where
   type Rs SurveysSurveysDelete = SurveysDeleteResponse
   type
     Scopes SurveysSurveysDelete =
-      '[ "https://www.googleapis.com/auth/surveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
+      '[Surveys'FullControl, Userinfo'Email]
   requestClient SurveysSurveysDelete {..} =
     go
       surveyUrlId
