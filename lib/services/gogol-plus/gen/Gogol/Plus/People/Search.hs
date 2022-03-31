@@ -85,11 +85,7 @@ newPlusPeopleSearch query =
 
 instance Core.GoogleRequest PlusPeopleSearch where
   type Rs PlusPeopleSearch = PeopleFeed
-  type
-    Scopes PlusPeopleSearch =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+  type Scopes PlusPeopleSearch = '[Plus'Login, Plus'Me]
   requestClient PlusPeopleSearch {..} =
     go
       (Core.Just query)

@@ -70,11 +70,7 @@ newPlusCommentsGet commentId = PlusCommentsGet {commentId = commentId}
 
 instance Core.GoogleRequest PlusCommentsGet where
   type Rs PlusCommentsGet = Comment
-  type
-    Scopes PlusCommentsGet =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+  type Scopes PlusCommentsGet = '[Plus'Login, Plus'Me]
   requestClient PlusCommentsGet {..} =
     go commentId (Core.Just Core.AltJSON) plusService
     where

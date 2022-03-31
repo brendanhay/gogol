@@ -72,9 +72,7 @@ instance Core.GoogleRequest PlusActivitiesGet where
   type Rs PlusActivitiesGet = Activity
   type
     Scopes PlusActivitiesGet =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+      '[Plus'Login, Plus'Me]
   requestClient PlusActivitiesGet {..} =
     go activityId (Core.Just Core.AltJSON) plusService
     where

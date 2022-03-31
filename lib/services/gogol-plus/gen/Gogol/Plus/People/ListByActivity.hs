@@ -92,9 +92,7 @@ instance Core.GoogleRequest PlusPeopleListByActivity where
   type Rs PlusPeopleListByActivity = PeopleFeed
   type
     Scopes PlusPeopleListByActivity =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+      '[Plus'Login, Plus'Me]
   requestClient PlusPeopleListByActivity {..} =
     go
       activityId
