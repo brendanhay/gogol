@@ -108,7 +108,7 @@ instance
   type
     Scopes
       IAPProjectsBrandsIdentityAwareProxyClientsResetSecret =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAPProjectsBrandsIdentityAwareProxyClientsResetSecret {..} =
       go

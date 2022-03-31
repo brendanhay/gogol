@@ -99,7 +99,7 @@ instance Core.GoogleRequest IAPGetIamPolicy where
   type Rs IAPGetIamPolicy = Policy
   type
     Scopes IAPGetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAPGetIamPolicy {..} =
     go
       resource

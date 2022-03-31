@@ -100,7 +100,7 @@ instance
   type
     Scopes
       IAPProjectsBrandsIdentityAwareProxyClientsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAPProjectsBrandsIdentityAwareProxyClientsDelete {..} =
       go
