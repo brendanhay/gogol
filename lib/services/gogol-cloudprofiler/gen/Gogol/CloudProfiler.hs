@@ -34,9 +34,9 @@ module Gogol.CloudProfiler
     cloudProfilerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    monitoringScope,
-    monitoringWriteScope,
+    CloudPlatform'FullControl,
+    Monitoring'FullControl,
+    Monitoring'Write,
 
     -- * Resources
 

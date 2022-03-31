@@ -30,9 +30,9 @@ module Gogol.CloudProfiler.Types
     cloudProfilerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    monitoringScope,
-    monitoringWriteScope,
+    CloudPlatform'FullControl,
+    Monitoring'FullControl,
+    Monitoring'Write,
 
     -- * Types
 
@@ -79,13 +79,10 @@ cloudProfilerService =
     "cloudprofiler.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and write monitoring data for all of your Google and third-party Cloud and API projects
-monitoringScope :: Core.Proxy '["https://www.googleapis.com/auth/monitoring"]
-monitoringScope = Core.Proxy
+type Monitoring'FullControl = "https://www.googleapis.com/auth/monitoring"
 
 -- | Publish metric data to your Google Cloud projects
-monitoringWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/monitoring.write"]
-monitoringWriteScope = Core.Proxy
+type Monitoring'Write = "https://www.googleapis.com/auth/monitoring.write"

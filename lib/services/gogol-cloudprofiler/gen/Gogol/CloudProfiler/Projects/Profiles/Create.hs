@@ -103,9 +103,9 @@ instance
   type Rs CloudProfilerProjectsProfilesCreate = Profile
   type
     Scopes CloudProfilerProjectsProfilesCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring",
-         "https://www.googleapis.com/auth/monitoring.write"
+      '[ CloudPlatform'FullControl,
+         Monitoring'FullControl,
+         Monitoring'Write
        ]
   requestClient CloudProfilerProjectsProfilesCreate {..} =
     go

@@ -106,9 +106,9 @@ instance
   type Rs CloudProfilerProjectsProfilesPatch = Profile
   type
     Scopes CloudProfilerProjectsProfilesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/monitoring",
-         "https://www.googleapis.com/auth/monitoring.write"
+      '[ CloudPlatform'FullControl,
+         Monitoring'FullControl,
+         Monitoring'Write
        ]
   requestClient CloudProfilerProjectsProfilesPatch {..} =
     go
