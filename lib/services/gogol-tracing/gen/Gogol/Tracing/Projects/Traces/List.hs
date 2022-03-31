@@ -137,9 +137,7 @@ instance Core.GoogleRequest TracingProjectsTracesList where
       ListTracesResponse
   type
     Scopes TracingProjectsTracesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/trace.readonly"
-       ]
+      '[CloudPlatform'FullControl, Trace'Readonly]
   requestClient TracingProjectsTracesList {..} =
     go
       parent

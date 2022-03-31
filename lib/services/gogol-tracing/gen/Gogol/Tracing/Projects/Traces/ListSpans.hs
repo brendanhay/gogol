@@ -110,9 +110,7 @@ instance
       ListSpansResponse
   type
     Scopes TracingProjectsTracesListSpans =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/trace.readonly"
-       ]
+      '[CloudPlatform'FullControl, Trace'Readonly]
   requestClient TracingProjectsTracesListSpans {..} =
     go
       parent
