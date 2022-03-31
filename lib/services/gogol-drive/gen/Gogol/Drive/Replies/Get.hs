@@ -93,10 +93,7 @@ instance Core.GoogleRequest DriveRepliesGet where
   type Rs DriveRepliesGet = Reply
   type
     Scopes DriveRepliesGet =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly"
-       ]
+      '[Drive'FullControl, Drive'File, Drive'Readonly]
   requestClient DriveRepliesGet {..} =
     go
       fileId

@@ -71,9 +71,7 @@ newDriveDrivesHide driveId = DriveDrivesHide {driveId = driveId}
 
 instance Core.GoogleRequest DriveDrivesHide where
   type Rs DriveDrivesHide = Drive
-  type
-    Scopes DriveDrivesHide =
-      '["https://www.googleapis.com/auth/drive"]
+  type Scopes DriveDrivesHide = '[Drive'FullControl]
   requestClient DriveDrivesHide {..} =
     go driveId (Core.Just Core.AltJSON) driveService
     where

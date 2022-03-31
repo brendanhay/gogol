@@ -30,14 +30,14 @@ module Gogol.Drive.Types
     driveService,
 
     -- * OAuth Scopes
-    driveScope,
-    driveAppdataScope,
-    driveFileScope,
-    driveMetadataScope,
-    driveMetadataReadOnlyScope,
-    drivePhotosReadOnlyScope,
-    driveReadOnlyScope,
-    driveScriptsScope,
+    Drive'FullControl,
+    Drive'Appdata,
+    Drive'File,
+    Drive'Metadata,
+    Drive'Metadata'Readonly,
+    Drive'Photos'Readonly,
+    Drive'Readonly,
+    Drive'Scripts,
 
     -- * Types
 
@@ -258,33 +258,25 @@ driveService =
     "www.googleapis.com"
 
 -- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Core.Proxy
+type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 
 -- | See, create, and delete its own configuration data in your Google Drive
-driveAppdataScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.appdata"]
-driveAppdataScope = Core.Proxy
+type Drive'Appdata = "https://www.googleapis.com/auth/drive.appdata"
 
 -- | See, edit, create, and delete only the specific Google Drive files you use with this app
-driveFileScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Core.Proxy
+type Drive'File = "https://www.googleapis.com/auth/drive.file"
 
 -- | View and manage metadata of files in your Google Drive
-driveMetadataScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.metadata"]
-driveMetadataScope = Core.Proxy
+type Drive'Metadata = "https://www.googleapis.com/auth/drive.metadata"
 
 -- | See information about your Google Drive files
-driveMetadataReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
-driveMetadataReadOnlyScope = Core.Proxy
+type Drive'Metadata'Readonly = "https://www.googleapis.com/auth/drive.metadata.readonly"
 
 -- | View the photos, videos and albums in your Google Photos
-drivePhotosReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.photos.readonly"]
-drivePhotosReadOnlyScope = Core.Proxy
+type Drive'Photos'Readonly = "https://www.googleapis.com/auth/drive.photos.readonly"
 
 -- | See and download all your Google Drive files
-driveReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Core.Proxy
+type Drive'Readonly = "https://www.googleapis.com/auth/drive.readonly"
 
 -- | Modify your Google Apps Script scripts\' behavior
-driveScriptsScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.scripts"]
-driveScriptsScope = Core.Proxy
+type Drive'Scripts = "https://www.googleapis.com/auth/drive.scripts"

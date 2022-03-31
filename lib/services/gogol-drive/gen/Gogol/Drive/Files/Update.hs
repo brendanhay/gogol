@@ -139,11 +139,11 @@ instance Core.GoogleRequest DriveFilesUpdate where
   type Rs DriveFilesUpdate = File
   type
     Scopes DriveFilesUpdate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.metadata",
-         "https://www.googleapis.com/auth/drive.scripts"
+      '[ Drive'FullControl,
+         Drive'Appdata,
+         Drive'File,
+         Drive'Metadata,
+         Drive'Scripts
        ]
   requestClient DriveFilesUpdate {..} =
     go

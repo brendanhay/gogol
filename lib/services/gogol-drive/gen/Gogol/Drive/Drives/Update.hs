@@ -83,9 +83,7 @@ newDriveDrivesUpdate driveId payload =
 
 instance Core.GoogleRequest DriveDrivesUpdate where
   type Rs DriveDrivesUpdate = Drive
-  type
-    Scopes DriveDrivesUpdate =
-      '["https://www.googleapis.com/auth/drive"]
+  type Scopes DriveDrivesUpdate = '[Drive'FullControl]
   requestClient DriveDrivesUpdate {..} =
     go
       driveId

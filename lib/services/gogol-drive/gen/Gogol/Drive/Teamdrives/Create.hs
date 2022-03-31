@@ -78,7 +78,7 @@ instance Core.GoogleRequest DriveTeamdrivesCreate where
   type Rs DriveTeamdrivesCreate = TeamDrive
   type
     Scopes DriveTeamdrivesCreate =
-      '["https://www.googleapis.com/auth/drive"]
+      '[Drive'FullControl]
   requestClient DriveTeamdrivesCreate {..} =
     go
       (Core.Just requestId)

@@ -70,9 +70,7 @@ newDriveDrivesDelete driveId = DriveDrivesDelete {driveId = driveId}
 
 instance Core.GoogleRequest DriveDrivesDelete where
   type Rs DriveDrivesDelete = ()
-  type
-    Scopes DriveDrivesDelete =
-      '["https://www.googleapis.com/auth/drive"]
+  type Scopes DriveDrivesDelete = '[Drive'FullControl]
   requestClient DriveDrivesDelete {..} =
     go driveId (Core.Just Core.AltJSON) driveService
     where

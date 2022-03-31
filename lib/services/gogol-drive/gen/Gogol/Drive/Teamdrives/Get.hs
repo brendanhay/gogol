@@ -79,9 +79,7 @@ instance Core.GoogleRequest DriveTeamdrivesGet where
   type Rs DriveTeamdrivesGet = TeamDrive
   type
     Scopes DriveTeamdrivesGet =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.readonly"
-       ]
+      '[Drive'FullControl, Drive'Readonly]
   requestClient DriveTeamdrivesGet {..} =
     go
       teamDriveId

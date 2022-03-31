@@ -88,9 +88,7 @@ instance Core.GoogleRequest DriveCommentsUpdate where
   type Rs DriveCommentsUpdate = Comment
   type
     Scopes DriveCommentsUpdate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'File]
   requestClient DriveCommentsUpdate {..} =
     go
       fileId

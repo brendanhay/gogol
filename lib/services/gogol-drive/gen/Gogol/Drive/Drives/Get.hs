@@ -76,9 +76,7 @@ instance Core.GoogleRequest DriveDrivesGet where
   type Rs DriveDrivesGet = Drive
   type
     Scopes DriveDrivesGet =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.readonly"
-       ]
+      '[Drive'FullControl, Drive'Readonly]
   requestClient DriveDrivesGet {..} =
     go
       driveId

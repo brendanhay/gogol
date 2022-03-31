@@ -92,10 +92,7 @@ instance Core.GoogleRequest DriveCommentsList where
   type Rs DriveCommentsList = CommentList
   type
     Scopes DriveCommentsList =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly"
-       ]
+      '[Drive'FullControl, Drive'File, Drive'Readonly]
   requestClient DriveCommentsList {..} =
     go
       fileId

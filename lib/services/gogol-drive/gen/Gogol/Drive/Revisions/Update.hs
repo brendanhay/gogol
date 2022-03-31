@@ -88,10 +88,7 @@ instance Core.GoogleRequest DriveRevisionsUpdate where
   type Rs DriveRevisionsUpdate = Revision
   type
     Scopes DriveRevisionsUpdate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'Appdata, Drive'File]
   requestClient DriveRevisionsUpdate {..} =
     go
       fileId

@@ -78,10 +78,7 @@ instance Core.GoogleRequest DriveFilesGenerateIds where
   type Rs DriveFilesGenerateIds = GeneratedIds
   type
     Scopes DriveFilesGenerateIds =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'Appdata, Drive'File]
   requestClient DriveFilesGenerateIds {..} =
     go
       (Core.Just count)

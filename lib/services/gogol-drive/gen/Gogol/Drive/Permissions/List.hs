@@ -100,12 +100,12 @@ instance Core.GoogleRequest DrivePermissionsList where
   type Rs DrivePermissionsList = PermissionList
   type
     Scopes DrivePermissionsList =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.metadata",
-         "https://www.googleapis.com/auth/drive.metadata.readonly",
-         "https://www.googleapis.com/auth/drive.photos.readonly",
-         "https://www.googleapis.com/auth/drive.readonly"
+      '[ Drive'FullControl,
+         Drive'File,
+         Drive'Metadata,
+         Drive'Metadata'Readonly,
+         Drive'Photos'Readonly,
+         Drive'Readonly
        ]
   requestClient DrivePermissionsList {..} =
     go

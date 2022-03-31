@@ -85,9 +85,7 @@ instance Core.GoogleRequest DriveRepliesCreate where
   type Rs DriveRepliesCreate = Reply
   type
     Scopes DriveRepliesCreate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'File]
   requestClient DriveRepliesCreate {..} =
     go
       fileId

@@ -125,10 +125,7 @@ instance Core.GoogleRequest DriveFilesCreate where
   type Rs DriveFilesCreate = File
   type
     Scopes DriveFilesCreate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'Appdata, Drive'File]
   requestClient DriveFilesCreate {..} =
     go
       (Core.Just enforceSingleParent)

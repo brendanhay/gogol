@@ -72,7 +72,7 @@ instance Core.GoogleRequest DriveFilesEmptyTrash where
   type Rs DriveFilesEmptyTrash = ()
   type
     Scopes DriveFilesEmptyTrash =
-      '["https://www.googleapis.com/auth/drive"]
+      '[Drive'FullControl]
   requestClient DriveFilesEmptyTrash {..} =
     go
       (Core.Just enforceSingleParent)
