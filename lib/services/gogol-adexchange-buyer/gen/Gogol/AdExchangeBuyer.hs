@@ -34,7 +34,7 @@ module Gogol.AdExchangeBuyer
     adExchangeBuyerService,
 
     -- * OAuth Scopes
-    adexchangeBuyerScope,
+    Adexchange'Buyer,
 
     -- * Resources
 

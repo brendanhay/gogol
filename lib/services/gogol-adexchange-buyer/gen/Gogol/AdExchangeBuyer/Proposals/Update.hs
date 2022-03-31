@@ -98,7 +98,7 @@ instance
   type Rs AdExchangeBuyerProposalsUpdate = Proposal
   type
     Scopes AdExchangeBuyerProposalsUpdate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerProposalsUpdate {..} =
     go
       proposalId

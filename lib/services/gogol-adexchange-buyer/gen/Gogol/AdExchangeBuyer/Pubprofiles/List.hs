@@ -81,7 +81,7 @@ instance
       GetPublisherProfilesByAccountIdResponse
   type
     Scopes AdExchangeBuyerPubprofilesList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerPubprofilesList {..} =
     go
       accountId

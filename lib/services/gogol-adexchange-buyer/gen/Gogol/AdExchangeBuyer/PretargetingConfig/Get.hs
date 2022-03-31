@@ -86,7 +86,7 @@ instance
       PretargetingConfig
   type
     Scopes AdExchangeBuyerPretargetingConfigGet =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerPretargetingConfigGet {..} =
       go

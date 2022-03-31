@@ -78,7 +78,7 @@ instance Core.GoogleRequest AdExchangeBuyerBudgetGet where
   type Rs AdExchangeBuyerBudgetGet = Budget
   type
     Scopes AdExchangeBuyerBudgetGet =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerBudgetGet {..} =
     go
       accountId

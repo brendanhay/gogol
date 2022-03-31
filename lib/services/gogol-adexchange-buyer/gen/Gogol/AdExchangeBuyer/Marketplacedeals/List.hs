@@ -85,7 +85,7 @@ instance
       GetOrderDealsResponse
   type
     Scopes AdExchangeBuyerMarketplacedealsList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerMarketplacedealsList {..} =
     go
       proposalId

@@ -84,7 +84,7 @@ instance
   type Rs AdExchangeBuyerPretargetingConfigDelete = ()
   type
     Scopes AdExchangeBuyerPretargetingConfigDelete =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerPretargetingConfigDelete {..} =
       go

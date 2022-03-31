@@ -91,7 +91,7 @@ instance
   type
     Scopes
       AdExchangeBuyerMarketplaceprivateauctionUpdateproposal =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerMarketplaceprivateauctionUpdateproposal {..} =
       go

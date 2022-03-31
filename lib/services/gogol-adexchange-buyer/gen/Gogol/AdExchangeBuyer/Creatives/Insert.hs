@@ -76,7 +76,7 @@ instance
   type Rs AdExchangeBuyerCreativesInsert = Creative
   type
     Scopes AdExchangeBuyerCreativesInsert =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerCreativesInsert {..} =
     go
       (Core.Just Core.AltJSON)

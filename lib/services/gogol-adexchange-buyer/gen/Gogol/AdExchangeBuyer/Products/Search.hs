@@ -77,7 +77,7 @@ instance
       GetOffersResponse
   type
     Scopes AdExchangeBuyerProductsSearch =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyerProductsSearch {..} =
     go
       pqlQuery
