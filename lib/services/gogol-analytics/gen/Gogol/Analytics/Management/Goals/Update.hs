@@ -106,7 +106,7 @@ instance
   type Rs AnalyticsManagementGoalsUpdate = Goal
   type
     Scopes AnalyticsManagementGoalsUpdate =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient AnalyticsManagementGoalsUpdate {..} =
     go
       accountId

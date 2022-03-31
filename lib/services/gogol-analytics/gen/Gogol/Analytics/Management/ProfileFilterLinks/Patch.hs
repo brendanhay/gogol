@@ -109,7 +109,7 @@ instance
   type
     Scopes
       AnalyticsManagementProfileFilterLinksPatch =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementProfileFilterLinksPatch {..} =
       go

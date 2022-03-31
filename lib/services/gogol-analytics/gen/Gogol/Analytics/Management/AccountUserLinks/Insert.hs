@@ -88,7 +88,7 @@ instance
       EntityUserLink
   type
     Scopes AnalyticsManagementAccountUserLinksInsert =
-      '["https://www.googleapis.com/auth/analytics.manage.users"]
+      '[Analytics'Manage'Users]
   requestClient
     AnalyticsManagementAccountUserLinksInsert {..} =
       go

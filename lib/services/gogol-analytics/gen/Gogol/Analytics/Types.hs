@@ -30,13 +30,13 @@ module Gogol.Analytics.Types
     analyticsService,
 
     -- * OAuth Scopes
-    analyticsScope,
-    analyticsEditScope,
-    analyticsManageUsersScope,
-    analyticsManageUsersReadOnlyScope,
-    analyticsProvisionScope,
-    analyticsReadOnlyScope,
-    analyticsUserDeletionScope,
+    Analytics'FullControl,
+    Analytics'Edit,
+    Analytics'Manage'Users,
+    Analytics'Manage'Users'Readonly,
+    Analytics'Provision,
+    Analytics'Readonly,
+    Analytics'User'Deletion,
 
     -- * Types
 
@@ -507,29 +507,22 @@ analyticsService =
     "analytics.googleapis.com"
 
 -- | View and manage your Google Analytics data
-analyticsScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics"]
-analyticsScope = Core.Proxy
+type Analytics'FullControl = "https://www.googleapis.com/auth/analytics"
 
 -- | Edit Google Analytics management entities
-analyticsEditScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.edit"]
-analyticsEditScope = Core.Proxy
+type Analytics'Edit = "https://www.googleapis.com/auth/analytics.edit"
 
 -- | Manage Google Analytics Account users by email address
-analyticsManageUsersScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
-analyticsManageUsersScope = Core.Proxy
+type Analytics'Manage'Users = "https://www.googleapis.com/auth/analytics.manage.users"
 
 -- | View Google Analytics user permissions
-analyticsManageUsersReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
-analyticsManageUsersReadOnlyScope = Core.Proxy
+type Analytics'Manage'Users'Readonly = "https://www.googleapis.com/auth/analytics.manage.users.readonly"
 
 -- | Create a new Google Analytics account along with its default property and view
-analyticsProvisionScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.provision"]
-analyticsProvisionScope = Core.Proxy
+type Analytics'Provision = "https://www.googleapis.com/auth/analytics.provision"
 
 -- | View your Google Analytics data
-analyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
-analyticsReadOnlyScope = Core.Proxy
+type Analytics'Readonly = "https://www.googleapis.com/auth/analytics.readonly"
 
 -- | Manage Google Analytics user deletion requests
-analyticsUserDeletionScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.user.deletion"]
-analyticsUserDeletionScope = Core.Proxy
+type Analytics'User'Deletion = "https://www.googleapis.com/auth/analytics.user.deletion"

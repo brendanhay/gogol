@@ -102,9 +102,9 @@ instance
   type Rs AnalyticsManagementGoalsList = Goals
   type
     Scopes AnalyticsManagementGoalsList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
+      '[ Analytics'FullControl,
+         Analytics'Edit,
+         Analytics'Readonly
        ]
   requestClient AnalyticsManagementGoalsList {..} =
     go

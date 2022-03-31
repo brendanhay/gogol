@@ -88,7 +88,7 @@ instance
       Webproperty
   type
     Scopes AnalyticsManagementWebpropertiesInsert =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementWebpropertiesInsert {..} =
       go

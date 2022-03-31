@@ -34,13 +34,13 @@ module Gogol.Analytics
     analyticsService,
 
     -- * OAuth Scopes
-    analyticsScope,
-    analyticsEditScope,
-    analyticsManageUsersScope,
-    analyticsManageUsersReadOnlyScope,
-    analyticsProvisionScope,
-    analyticsReadOnlyScope,
-    analyticsUserDeletionScope,
+    Analytics'FullControl,
+    Analytics'Edit,
+    Analytics'Manage'Users,
+    Analytics'Manage'Users'Readonly,
+    Analytics'Provision,
+    Analytics'Readonly,
+    Analytics'User'Deletion,
 
     -- * Resources
 

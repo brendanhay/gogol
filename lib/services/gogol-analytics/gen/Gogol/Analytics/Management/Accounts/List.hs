@@ -81,9 +81,9 @@ instance
   type Rs AnalyticsManagementAccountsList = Accounts
   type
     Scopes AnalyticsManagementAccountsList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
+      '[ Analytics'FullControl,
+         Analytics'Edit,
+         Analytics'Readonly
        ]
   requestClient AnalyticsManagementAccountsList {..} =
     go

@@ -95,9 +95,9 @@ instance
   type Rs AnalyticsManagementProfilesList = Profiles
   type
     Scopes AnalyticsManagementProfilesList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
+      '[ Analytics'FullControl,
+         Analytics'Edit,
+         Analytics'Readonly
        ]
   requestClient AnalyticsManagementProfilesList {..} =
     go

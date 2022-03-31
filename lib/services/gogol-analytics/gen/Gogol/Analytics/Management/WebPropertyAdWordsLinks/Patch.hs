@@ -103,7 +103,7 @@ instance
   type
     Scopes
       AnalyticsManagementWebPropertyAdWordsLinksPatch =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementWebPropertyAdWordsLinksPatch {..} =
       go

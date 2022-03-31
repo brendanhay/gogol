@@ -79,7 +79,7 @@ instance
       AccountTreeResponse
   type
     Scopes AnalyticsProvisioningCreateAccountTree =
-      '["https://www.googleapis.com/auth/analytics.provision"]
+      '[Analytics'Provision]
   requestClient
     AnalyticsProvisioningCreateAccountTree {..} =
       go

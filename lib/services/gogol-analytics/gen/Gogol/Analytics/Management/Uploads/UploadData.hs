@@ -109,9 +109,7 @@ instance
   type Rs AnalyticsManagementUploadsUploadData = Upload
   type
     Scopes AnalyticsManagementUploadsUploadData =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit"
-       ]
+      '[Analytics'FullControl, Analytics'Edit]
   requestClient
     AnalyticsManagementUploadsUploadData {..} =
       go

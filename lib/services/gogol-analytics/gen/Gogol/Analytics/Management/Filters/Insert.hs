@@ -83,7 +83,7 @@ instance
   type Rs AnalyticsManagementFiltersInsert = Filter
   type
     Scopes AnalyticsManagementFiltersInsert =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient AnalyticsManagementFiltersInsert {..} =
     go
       accountId

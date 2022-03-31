@@ -105,9 +105,7 @@ instance
   type
     Scopes
       AnalyticsManagementUploadsDeleteUploadData =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit"
-       ]
+      '[Analytics'FullControl, Analytics'Edit]
   requestClient
     AnalyticsManagementUploadsDeleteUploadData {..} =
       go

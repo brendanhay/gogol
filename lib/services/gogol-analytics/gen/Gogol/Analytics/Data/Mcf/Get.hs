@@ -120,9 +120,7 @@ instance Core.GoogleRequest AnalyticsDataMcfGet where
   type Rs AnalyticsDataMcfGet = McfData
   type
     Scopes AnalyticsDataMcfGet =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'FullControl, Analytics'Readonly]
   requestClient AnalyticsDataMcfGet {..} =
     go
       (Core.Just ids)

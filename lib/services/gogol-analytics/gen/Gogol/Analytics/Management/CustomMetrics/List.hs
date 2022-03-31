@@ -97,9 +97,7 @@ instance
       CustomMetrics
   type
     Scopes AnalyticsManagementCustomMetricsList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'FullControl, Analytics'Readonly]
   requestClient
     AnalyticsManagementCustomMetricsList {..} =
       go

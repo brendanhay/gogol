@@ -79,9 +79,7 @@ instance
       HashClientIdResponse
   type
     Scopes AnalyticsManagementClientIdHashClientId =
-      '[ "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
+      '[Analytics'Edit, Analytics'Readonly]
   requestClient
     AnalyticsManagementClientIdHashClientId {..} =
       go

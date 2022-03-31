@@ -107,7 +107,7 @@ instance
       CustomMetric
   type
     Scopes AnalyticsManagementCustomMetricsUpdate =
-      '["https://www.googleapis.com/auth/analytics.edit"]
+      '[Analytics'Edit]
   requestClient
     AnalyticsManagementCustomMetricsUpdate {..} =
       go

@@ -81,7 +81,7 @@ instance
   type
     Scopes
       AnalyticsUserDeletionUserDeletionRequestUpsert =
-      '["https://www.googleapis.com/auth/analytics.user.deletion"]
+      '[Analytics'User'Deletion]
   requestClient
     AnalyticsUserDeletionUserDeletionRequestUpsert {..} =
       go

@@ -79,7 +79,7 @@ instance
       AccountTicket
   type
     Scopes AnalyticsProvisioningCreateAccountTicket =
-      '["https://www.googleapis.com/auth/analytics.provision"]
+      '[Analytics'Provision]
   requestClient
     AnalyticsProvisioningCreateAccountTicket {..} =
       go
