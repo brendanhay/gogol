@@ -104,7 +104,7 @@ instance
       Policy
   type
     Scopes IAMProjectsServiceAccountsSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMProjectsServiceAccountsSetIamPolicy {..} =
       go

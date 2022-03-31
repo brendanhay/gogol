@@ -105,7 +105,7 @@ instance Core.GoogleRequest IAMProjectsRolesPatch where
   type Rs IAMProjectsRolesPatch = Role
   type
     Scopes IAMProjectsRolesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsRolesPatch {..} =
     go
       name

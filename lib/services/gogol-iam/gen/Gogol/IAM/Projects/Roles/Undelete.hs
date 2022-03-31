@@ -101,7 +101,7 @@ instance Core.GoogleRequest IAMProjectsRolesUndelete where
   type Rs IAMProjectsRolesUndelete = Role
   type
     Scopes IAMProjectsRolesUndelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsRolesUndelete {..} =
     go
       name

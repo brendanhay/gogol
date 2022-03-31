@@ -107,7 +107,7 @@ instance
       ServiceAccountKey
   type
     Scopes IAMProjectsServiceAccountsKeysUpload =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMProjectsServiceAccountsKeysUpload {..} =
       go

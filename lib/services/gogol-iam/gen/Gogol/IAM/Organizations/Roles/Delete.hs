@@ -102,7 +102,7 @@ instance
   type Rs IAMOrganizationsRolesDelete = Role
   type
     Scopes IAMOrganizationsRolesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMOrganizationsRolesDelete {..} =
     go
       name

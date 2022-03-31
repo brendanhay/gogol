@@ -108,7 +108,7 @@ instance
   type
     Scopes
       IAMProjectsLocationsWorkloadIdentityPoolsUndelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMProjectsLocationsWorkloadIdentityPoolsUndelete {..} =
       go

@@ -104,7 +104,7 @@ instance
   type Rs IAMProjectsServiceAccountsKeysEnable = Empty
   type
     Scopes IAMProjectsServiceAccountsKeysEnable =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMProjectsServiceAccountsKeysEnable {..} =
       go

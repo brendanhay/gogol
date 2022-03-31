@@ -101,7 +101,7 @@ instance
       QueryAuditableServicesResponse
   type
     Scopes IAMIamPoliciesQueryAuditableServices =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMIamPoliciesQueryAuditableServices {..} =
       go

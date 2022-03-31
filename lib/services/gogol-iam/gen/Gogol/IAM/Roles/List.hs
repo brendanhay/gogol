@@ -109,7 +109,7 @@ instance Core.GoogleRequest IAMRolesList where
   type Rs IAMRolesList = ListRolesResponse
   type
     Scopes IAMRolesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMRolesList {..} =
     go
       xgafv

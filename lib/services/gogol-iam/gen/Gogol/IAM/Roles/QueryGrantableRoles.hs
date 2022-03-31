@@ -99,7 +99,7 @@ instance
       QueryGrantableRolesResponse
   type
     Scopes IAMRolesQueryGrantableRoles =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMRolesQueryGrantableRoles {..} =
     go
       xgafv

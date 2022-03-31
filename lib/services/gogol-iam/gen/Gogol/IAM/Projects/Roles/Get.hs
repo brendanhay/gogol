@@ -95,7 +95,7 @@ instance Core.GoogleRequest IAMProjectsRolesGet where
   type Rs IAMProjectsRolesGet = Role
   type
     Scopes IAMProjectsRolesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsRolesGet {..} =
     go
       name

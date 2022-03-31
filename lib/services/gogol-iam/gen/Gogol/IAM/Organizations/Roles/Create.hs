@@ -105,7 +105,7 @@ instance
   type Rs IAMOrganizationsRolesCreate = Role
   type
     Scopes IAMOrganizationsRolesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMOrganizationsRolesCreate {..} =
     go
       parent

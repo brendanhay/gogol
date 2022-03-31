@@ -96,7 +96,7 @@ instance
   type Rs IAMProjectsServiceAccountsKeysDelete = Empty
   type
     Scopes IAMProjectsServiceAccountsKeysDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     IAMProjectsServiceAccountsKeysDelete {..} =
       go

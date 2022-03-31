@@ -106,7 +106,7 @@ instance
       UndeleteServiceAccountResponse
   type
     Scopes IAMProjectsServiceAccountsUndelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsServiceAccountsUndelete {..} =
     go
       name

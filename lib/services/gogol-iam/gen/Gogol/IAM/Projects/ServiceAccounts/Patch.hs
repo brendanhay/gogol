@@ -104,7 +104,7 @@ instance
       ServiceAccount
   type
     Scopes IAMProjectsServiceAccountsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMProjectsServiceAccountsPatch {..} =
     go
       name

@@ -94,7 +94,7 @@ instance Core.GoogleRequest IAMIamPoliciesLintPolicy where
   type Rs IAMIamPoliciesLintPolicy = LintPolicyResponse
   type
     Scopes IAMIamPoliciesLintPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient IAMIamPoliciesLintPolicy {..} =
     go
       xgafv
