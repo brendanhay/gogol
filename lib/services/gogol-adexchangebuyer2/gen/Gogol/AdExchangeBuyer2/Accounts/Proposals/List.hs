@@ -118,7 +118,7 @@ instance
       ListProposalsResponse
   type
     Scopes AdExchangeBuyer2AccountsProposalsList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsProposalsList {..} =
       go

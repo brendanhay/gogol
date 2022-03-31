@@ -106,7 +106,7 @@ instance
       Client
   type
     Scopes AdExchangeBuyer2AccountsClientsCreate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsClientsCreate {..} =
       go

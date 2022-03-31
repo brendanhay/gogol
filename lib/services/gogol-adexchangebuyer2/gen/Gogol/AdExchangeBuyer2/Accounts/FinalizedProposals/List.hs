@@ -120,7 +120,7 @@ instance
   type
     Scopes
       AdExchangeBuyer2AccountsFinalizedProposalsList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsFinalizedProposalsList {..} =
       go

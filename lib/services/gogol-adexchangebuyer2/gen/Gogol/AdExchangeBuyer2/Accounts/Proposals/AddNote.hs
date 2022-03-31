@@ -112,7 +112,7 @@ instance
       Note
   type
     Scopes AdExchangeBuyer2AccountsProposalsAddNote =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsProposalsAddNote {..} =
       go

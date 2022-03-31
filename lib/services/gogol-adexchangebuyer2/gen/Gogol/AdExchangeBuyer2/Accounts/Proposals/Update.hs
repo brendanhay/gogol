@@ -112,7 +112,7 @@ instance
       Proposal
   type
     Scopes AdExchangeBuyer2AccountsProposalsUpdate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsProposalsUpdate {..} =
       go

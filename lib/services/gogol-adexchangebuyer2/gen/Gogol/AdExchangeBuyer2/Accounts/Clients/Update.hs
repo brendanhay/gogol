@@ -112,7 +112,7 @@ instance
       Client
   type
     Scopes AdExchangeBuyer2AccountsClientsUpdate =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsClientsUpdate {..} =
       go

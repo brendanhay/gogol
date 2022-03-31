@@ -104,7 +104,7 @@ instance
   type Rs AdExchangeBuyer2AccountsClientsGet = Client
   type
     Scopes AdExchangeBuyer2AccountsClientsGet =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
+      '[Adexchange'Buyer]
   requestClient AdExchangeBuyer2AccountsClientsGet {..} =
     go
       accountId
